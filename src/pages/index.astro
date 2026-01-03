@@ -24,22 +24,25 @@ const description = 'Free online calculators for everyday math problems. Calcula
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Freelance Rate Calculator -->
-      <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+      <a href="/calculators/freelance-day-rate-calculator" class="block bg-white rounded-lg shadow-md p-6 hover:shadow-lg hover:border-blue-300 border-2 border-transparent transition-all group">
         <div class="flex items-center mb-4">
-          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-200 transition-colors">
             <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900">Freelance Rate Calculator</h3>
+          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Freelance Rate Calculator</h3>
         </div>
         <p class="text-gray-600 mb-4">
           Calculate your ideal freelance day rate compared to a salaried position, including tax adjustments and benefits.
         </p>
-        <span class="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded text-sm font-medium">
-          Coming Soon
+        <span class="inline-flex items-center gap-1 text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
+          Try Calculator
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </span>
-      </div>
+      </a>
 
       <!-- Wedding Alcohol Calculator -->
       <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
