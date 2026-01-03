@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://boring-math-calculators.vercel.app', // Update this after Vercel deployment
+  site: 'https://project-0-eight.vercel.app/', // Update this after Vercel deployment
 
   vite: {
     plugins: [tailwindcss()]
