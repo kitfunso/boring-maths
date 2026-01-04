@@ -3,13 +3,24 @@
  *
  * This calculator helps freelancers determine their ideal day rate
  * by comparing to equivalent salaried positions with tax adjustments.
+ *
+ * Supports multiple currencies with region-specific defaults:
+ * - USD (United States)
+ * - GBP (United Kingdom)
+ * - EUR (European Union)
  */
+
+import type { Currency } from '../../../lib/regions';
+import { getRegionDefaults, getDefaultSalary } from '../../../lib/regions';
 
 /**
  * Input values for the Freelance Day Rate Calculator
  */
 export interface FreelanceDayRateInputs {
-  /** Target annual income in dollars */
+  /** Selected currency (USD, GBP, EUR) */
+  currency: Currency;
+
+  /** Target annual income in selected currency */
   annualSalary: number;
 
   /** Estimated tax rate as decimal (0.25 = 25%) */
@@ -29,6 +40,9 @@ export interface FreelanceDayRateInputs {
  * Calculated results from the Freelance Day Rate Calculator
  */
 export interface FreelanceDayRateResult {
+  /** Selected currency for formatting */
+  currency: Currency;
+
   /** Day rate before taxes */
   grossDayRate: number;
 
@@ -59,27 +73,43 @@ export interface FreelanceDayRateResult {
 }
 
 /**
- * Default input values for the calculator
+ * Get default input values for a given currency/region
  */
-export const DEFAULT_INPUTS: FreelanceDayRateInputs = {
-  annualSalary: 75000,
-  taxRate: 0.25,
-  vacationDays: 15,
-  holidays: 10,
-  benefitsValue: 0,
-};
+export function getDefaultInputs(currency: Currency = 'USD'): FreelanceDayRateInputs {
+  const regionDefaults = getRegionDefaults(currency);
+
+  return {
+    currency,
+    annualSalary: getDefaultSalary(currency),
+    taxRate: regionDefaults.typicalTaxRate,
+    vacationDays: regionDefaults.statutoryVacationDays,
+    holidays: regionDefaults.publicHolidays,
+    benefitsValue: 0,
+  };
+}
+
+/**
+ * Default input values (US)
+ * @deprecated Use getDefaultInputs(currency) instead for region-specific defaults
+ */
+export const DEFAULT_INPUTS: FreelanceDayRateInputs = getDefaultInputs('USD');
 
 /**
  * Input field configuration for UI generation
  */
 export interface InputFieldConfig {
-  id: keyof FreelanceDayRateInputs;
+  id: keyof Omit<FreelanceDayRateInputs, 'currency'>;
   label: string;
   type: 'currency' | 'percentage' | 'number';
   min: number;
   max: number;
   step: number;
   helpText: string;
+  helpTextByRegion?: {
+    US?: string;
+    UK?: string;
+    EU?: string;
+  };
   required: boolean;
 }
 
@@ -102,9 +132,14 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     label: 'Estimated Tax Rate',
     type: 'percentage',
     min: 0,
-    max: 50,
+    max: 60,
     step: 1,
-    helpText: 'Combined federal, state, and self-employment tax rate',
+    helpText: 'Combined income tax and social contributions',
+    helpTextByRegion: {
+      US: 'Federal + State + Self-Employment Tax (typically 25-35%)',
+      UK: 'Income Tax + National Insurance Class 2 & 4 (typically 25-30%)',
+      EU: 'Income Tax + Social Contributions (typically 30-40%)',
+    },
     required: true,
   },
   {
@@ -115,6 +150,11 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     max: 60,
     step: 1,
     helpText: 'Days you plan to take off (unpaid)',
+    helpTextByRegion: {
+      US: 'No statutory minimum, 10-20 days typical',
+      UK: 'Statutory minimum: 20 days (plus bank holidays)',
+      EU: 'Statutory minimum: 20-25 days (varies by country)',
+    },
     required: true,
   },
   {
@@ -125,6 +165,11 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     max: 30,
     step: 1,
     helpText: 'Days you won\'t work due to holidays',
+    helpTextByRegion: {
+      US: '11 federal holidays, freelancers may work some',
+      UK: '8 bank holidays in England/Wales',
+      EU: '9-13 depending on country',
+    },
     required: false,
   },
   {
@@ -134,7 +179,12 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     min: 0,
     max: 100000,
     step: 500,
-    helpText: 'Annual cost of benefits you\'ll self-fund (health insurance, retirement, etc.)',
+    helpText: 'Annual cost of benefits you\'ll self-fund',
+    helpTextByRegion: {
+      US: 'Health insurance, 401(k), etc. ($5,000-$25,000 typical)',
+      UK: 'Private insurance, pension top-up (£2,000-£10,000 typical)',
+      EU: 'Additional insurance, private pension (€3,000-€15,000 typical)',
+    },
     required: false,
   },
 ];

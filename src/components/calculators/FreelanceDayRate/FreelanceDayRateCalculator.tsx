@@ -3,6 +3,8 @@
  *
  * Interactive calculator that helps freelancers determine their ideal day rate
  * by comparing to equivalent salaried positions with tax adjustments.
+ *
+ * Supports multiple currencies (USD, GBP, EUR) with region-specific defaults.
  */
 
 import { useState, useMemo } from 'react';
@@ -11,17 +13,28 @@ import {
   formatCurrency,
 } from './calculations';
 import {
-  DEFAULT_INPUTS,
+  getDefaultInputs,
   type FreelanceDayRateInputs,
   type FreelanceDayRateResult,
+  INPUT_FIELD_CONFIG,
 } from './types';
+import {
+  type Currency,
+  CURRENCY_OPTIONS,
+  getCurrencySymbol,
+  getRegionFromCurrency,
+} from '../../../lib/regions';
 
 /**
  * Main calculator component
  */
 export default function FreelanceDayRateCalculator() {
-  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(DEFAULT_INPUTS);
+  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() => getDefaultInputs('USD'));
   const [error, setError] = useState<string | null>(null);
+
+  // Get current currency symbol
+  const currencySymbol = getCurrencySymbol(inputs.currency);
+  const region = getRegionFromCurrency(inputs.currency);
 
   // Calculate results whenever inputs change
   const result: FreelanceDayRateResult | null = useMemo(() => {
@@ -37,21 +50,61 @@ export default function FreelanceDayRateCalculator() {
   // Update a single input field
   const updateInput = (
     field: keyof FreelanceDayRateInputs,
-    value: number
+    value: number | Currency
   ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // Handle currency change - reset to region-appropriate defaults
+  const handleCurrencyChange = (newCurrency: Currency) => {
+    setInputs(getDefaultInputs(newCurrency));
+  };
+
+  // Get region-specific help text
+  const getHelpText = (fieldId: string): string => {
+    const field = INPUT_FIELD_CONFIG.find(f => f.id === fieldId);
+    if (!field) return '';
+    if (field.helpTextByRegion && field.helpTextByRegion[region]) {
+      return field.helpTextByRegion[region]!;
+    }
+    return field.helpText;
   };
 
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
-        <h2 className="text-xl font-semibold text-white">
-          Calculate Your Day Rate
-        </h2>
-        <p className="text-blue-100 text-sm mt-1">
-          Enter your target salary to find your equivalent freelance rate
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-semibold text-white">
+              Calculate Your Day Rate
+            </h2>
+            <p className="text-blue-100 text-sm mt-1">
+              Enter your target salary to find your equivalent freelance rate
+            </p>
+          </div>
+
+          {/* Currency Selector */}
+          <div className="flex items-center gap-2">
+            <label htmlFor="currency" className="text-blue-100 text-sm font-medium">
+              Currency:
+            </label>
+            <select
+              id="currency"
+              value={inputs.currency}
+              onChange={(e) => handleCurrencyChange(e.target.value as Currency)}
+              className="bg-white/10 text-white border border-white/30 rounded-lg px-3 py-2 text-sm
+                         focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer
+                         hover:bg-white/20 transition-colors"
+            >
+              {CURRENCY_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value} className="text-gray-900">
+                  {option.flag} {option.value}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
 
       <div className="p-6 md:p-8">
@@ -67,7 +120,7 @@ export default function FreelanceDayRateCalculator() {
             </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                $
+                {currencySymbol}
               </span>
               <input
                 id="annualSalary"
@@ -105,7 +158,7 @@ export default function FreelanceDayRateCalculator() {
                 type="number"
                 inputMode="decimal"
                 min="0"
-                max="50"
+                max="60"
                 step="1"
                 value={Math.round(inputs.taxRate * 100)}
                 onChange={(e) =>
@@ -121,7 +174,7 @@ export default function FreelanceDayRateCalculator() {
               </span>
             </div>
             <p id="taxRate-help" className="text-sm text-gray-500 mt-1.5">
-              Combined federal, state, and self-employment tax (typically 25-35%)
+              {getHelpText('taxRate')}
             </p>
           </div>
 
@@ -149,7 +202,7 @@ export default function FreelanceDayRateCalculator() {
                            focus:border-blue-500 focus:ring-4 focus:ring-blue-100
                            transition-all duration-200 tabular-nums"
               />
-              <p className="text-sm text-gray-500 mt-1.5">Days off per year</p>
+              <p className="text-sm text-gray-500 mt-1.5">{getHelpText('vacationDays')}</p>
             </div>
 
             {/* Holidays */}
@@ -174,7 +227,7 @@ export default function FreelanceDayRateCalculator() {
                            focus:border-blue-500 focus:ring-4 focus:ring-blue-100
                            transition-all duration-200 tabular-nums"
               />
-              <p className="text-sm text-gray-500 mt-1.5">Non-working holidays</p>
+              <p className="text-sm text-gray-500 mt-1.5">{getHelpText('holidays')}</p>
             </div>
           </div>
 
@@ -189,7 +242,7 @@ export default function FreelanceDayRateCalculator() {
             </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
-                $
+                {currencySymbol}
               </span>
               <input
                 id="benefitsValue"
@@ -209,8 +262,7 @@ export default function FreelanceDayRateCalculator() {
               />
             </div>
             <p id="benefitsValue-help" className="text-sm text-gray-500 mt-1.5">
-              Annual cost of benefits you'll need to self-fund (health insurance,
-              retirement, etc.)
+              {getHelpText('benefitsValue')}
             </p>
           </div>
         </div>
@@ -244,7 +296,7 @@ export default function FreelanceDayRateCalculator() {
                 Your Recommended Day Rate
               </p>
               <p className="text-5xl md:text-6xl font-bold text-blue-700 tabular-nums tracking-tight">
-                {formatCurrency(result.netDayRate)}
+                {formatCurrency(result.netDayRate, result.currency)}
               </p>
               <p className="text-blue-600 mt-2">
                 After {Math.round(inputs.taxRate * 100)}% tax
@@ -253,7 +305,7 @@ export default function FreelanceDayRateCalculator() {
                 <p className="text-sm text-blue-600">
                   Gross rate (before tax):{' '}
                   <span className="font-semibold tabular-nums">
-                    {formatCurrency(result.grossDayRate)}
+                    {formatCurrency(result.grossDayRate, result.currency)}
                   </span>
                 </p>
               </div>
@@ -263,17 +315,17 @@ export default function FreelanceDayRateCalculator() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <ResultCard
                 label="Hourly Rate"
-                value={formatCurrency(result.hourlyRate)}
+                value={formatCurrency(result.hourlyRate, result.currency)}
                 sublabel="8-hour day"
               />
               <ResultCard
                 label="Weekly Income"
-                value={formatCurrency(result.weeklyIncome)}
+                value={formatCurrency(result.weeklyIncome, result.currency)}
                 sublabel="5 days/week"
               />
               <ResultCard
                 label="Monthly Income"
-                value={formatCurrency(result.monthlyIncome)}
+                value={formatCurrency(result.monthlyIncome, result.currency)}
                 sublabel="~21.7 days"
               />
               <ResultCard
@@ -294,7 +346,7 @@ export default function FreelanceDayRateCalculator() {
                     As Employee
                   </p>
                   <p className="text-2xl font-bold text-gray-700 tabular-nums">
-                    {formatCurrency(result.annualComparison.asEmployee)}
+                    {formatCurrency(result.annualComparison.asEmployee, result.currency)}
                   </p>
                   <p className="text-xs text-gray-500">after tax</p>
                 </div>
@@ -320,7 +372,7 @@ export default function FreelanceDayRateCalculator() {
                     As Freelancer
                   </p>
                   <p className="text-2xl font-bold text-green-600 tabular-nums">
-                    {formatCurrency(result.annualComparison.asFreelancer)}
+                    {formatCurrency(result.annualComparison.asFreelancer, result.currency)}
                   </p>
                   <p className="text-xs text-gray-500">at this day rate</p>
                 </div>
@@ -333,7 +385,7 @@ export default function FreelanceDayRateCalculator() {
                       <>
                         At full utilization, you'd earn{' '}
                         <span className="font-semibold text-green-600">
-                          {formatCurrency(result.annualComparison.difference)} more
+                          {formatCurrency(result.annualComparison.difference, result.currency)} more
                         </span>{' '}
                         as a freelancer
                       </>
@@ -341,7 +393,7 @@ export default function FreelanceDayRateCalculator() {
                       <>
                         Note: This rate accounts for benefits worth{' '}
                         <span className="font-semibold">
-                          {formatCurrency(inputs.benefitsValue)}
+                          {formatCurrency(inputs.benefitsValue, inputs.currency)}
                         </span>{' '}
                         that you'll need to self-fund
                       </>

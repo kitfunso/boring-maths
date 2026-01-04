@@ -3,9 +3,16 @@
  *
  * Pure functions for calculating freelance day rates based on
  * salary comparison with tax and benefits adjustments.
+ *
+ * Supports multiple currencies (USD, GBP, EUR) with region-specific defaults.
  */
 
 import type { FreelanceDayRateInputs, FreelanceDayRateResult } from './types';
+import type { Currency } from '../../../lib/regions';
+import {
+  formatCurrency as formatCurrencyByRegion,
+  formatPercentage as formatPercentageByRegion,
+} from '../../../lib/regions';
 
 /**
  * Standard number of weekdays in a year (52 weeks × 5 days)
@@ -110,6 +117,7 @@ export function calculateFreelanceDayRate(
   validateInputs(inputs);
 
   const {
+    currency,
     annualSalary,
     taxRate,
     vacationDays,
@@ -146,6 +154,7 @@ export function calculateFreelanceDayRate(
   const employeeAnnualNet = annualSalary * (1 - taxRate);
 
   return {
+    currency,
     grossDayRate: round(grossDayRate),
     netDayRate: round(netDayRate),
     hourlyRate: round(hourlyRate),
@@ -161,23 +170,23 @@ export function calculateFreelanceDayRate(
 }
 
 /**
- * Format a number as currency (USD)
+ * Format a number as currency
  *
  * @param value - Number to format
- * @param decimals - Decimal places (default: 0 for whole dollars)
+ * @param currency - Currency code (USD, GBP, EUR)
+ * @param decimals - Decimal places (default: 0 for whole units)
  * @returns Formatted currency string
  *
  * @example
- * formatCurrency(1234.56) // "$1,235"
- * formatCurrency(1234.56, 2) // "$1,234.56"
+ * formatCurrency(1234.56, 'USD') // "$1,235"
+ * formatCurrency(1234.56, 'GBP', 2) // "£1,234.56"
  */
-export function formatCurrency(value: number, decimals: number = 0): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(value);
+export function formatCurrency(
+  value: number,
+  currency: Currency = 'USD',
+  decimals: number = 0
+): string {
+  return formatCurrencyByRegion(value, currency, decimals);
 }
 
 /**
@@ -192,26 +201,44 @@ export function formatCurrency(value: number, decimals: number = 0): string {
  * formatPercentage(0.333, 1) // "33.3%"
  */
 export function formatPercentage(value: number, decimals: number = 0): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'percent',
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  }).format(value);
+  return formatPercentageByRegion(value, decimals);
 }
 
 /**
  * Parse a currency string to number
  *
- * @param value - Currency string (e.g., "$1,234.56" or "1234.56")
+ * @param value - Currency string (e.g., "$1,234.56", "£1,234.56", "€1.234,56")
  * @returns Parsed number
  *
  * @example
  * parseCurrency("$1,234.56") // 1234.56
- * parseCurrency("1234") // 1234
+ * parseCurrency("£1,234") // 1234
+ * parseCurrency("€1.234,56") // 1234.56
  */
 export function parseCurrency(value: string): number {
-  // Remove currency symbol, commas, and whitespace
-  const cleaned = value.replace(/[$,\s]/g, '');
+  // Remove currency symbols, spaces, and handle different formats
+  let cleaned = value.replace(/[$£€\s]/g, '');
+
+  // Handle European format (1.234,56 -> 1234.56)
+  if (cleaned.includes(',') && cleaned.includes('.')) {
+    // If comma comes after dot, it's European format
+    if (cleaned.lastIndexOf(',') > cleaned.lastIndexOf('.')) {
+      cleaned = cleaned.replace(/\./g, '').replace(',', '.');
+    } else {
+      // Standard format with comma as thousands separator
+      cleaned = cleaned.replace(/,/g, '');
+    }
+  } else if (cleaned.includes(',') && !cleaned.includes('.')) {
+    // Could be European decimal or thousands separator
+    // If 3 digits after comma, treat as thousands
+    const parts = cleaned.split(',');
+    if (parts.length === 2 && parts[1].length === 3) {
+      cleaned = cleaned.replace(',', '');
+    } else {
+      cleaned = cleaned.replace(',', '.');
+    }
+  }
+
   const parsed = parseFloat(cleaned);
   return isNaN(parsed) ? 0 : parsed;
 }
