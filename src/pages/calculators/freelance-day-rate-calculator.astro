@@ -5,7 +5,11 @@
  * SEO-optimized page targeting: "freelance day rate calculator with tax adjustment"
  */
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import FreelanceDayRateCalculator from '../../components/calculators/FreelanceDayRate/FreelanceDayRateCalculator';
 
 // SEO Configuration
@@ -14,21 +18,31 @@ const description = 'Calculate your ideal freelance day rate compared to a salar
 const keywords = 'freelance day rate calculator, freelance rate calculator, day rate vs salary, freelance tax calculator, contractor day rate, consulting rate calculator';
 const canonicalURL = '/calculators/freelance-day-rate-calculator';
 
-// Schema.org SoftwareApplication markup
-const appSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Freelance Day Rate Calculator",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web Browser",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Freelance Day Rate' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert your hourly rate to an annual salary with tax adjustments.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
   },
-  "description": description,
-  "url": "https://project-0-eight.vercel.app/calculators/freelance-day-rate-calculator"
-};
+  {
+    title: 'Side Hustle Profitability Calculator',
+    description: 'Calculate if your side project is truly profitable with effective hourly rates.',
+    href: '/calculators/side-hustle-profitability-calculator',
+    icon: 'trending' as const,
+    color: 'red' as const,
+  },
+];
 
 // FAQ data for both display and schema
 const faqs = [
@@ -66,247 +80,92 @@ const faqs = [
   }
 ];
 
-// FAQPage schema for rich results
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.map(faq => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
-    }
-  }))
-};
-
-// BreadcrumbList schema
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://project-0-eight.vercel.app/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Calculators",
-      "item": "https://project-0-eight.vercel.app/calculators"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Freelance Day Rate Calculator",
-      "item": "https://project-0-eight.vercel.app/calculators/freelance-day-rate-calculator"
-    }
-  ]
-};
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Freelance Day Rate Calculator', url: canonicalURL },
+];
 ---
 
-<BaseLayout
+<CalculatorLayout
   title={title}
   description={description}
   keywords={keywords}
   canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
 >
-  <!-- Schema.org markup -->
-  <script type="application/ld+json" set:html={JSON.stringify(appSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Freelance Day Rate Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
 
-  <article class="max-w-4xl mx-auto">
-    <!-- Breadcrumb -->
-    <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <ol class="flex items-center space-x-2">
-        <li>
-          <a href="/" class="hover:text-blue-600 transition-colors">Home</a>
-        </li>
-        <li class="flex items-center">
-          <svg class="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-          <a href="/calculators" class="hover:text-blue-600 transition-colors">Calculators</a>
-        </li>
-        <li class="flex items-center">
-          <svg class="w-4 h-4 mx-2" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-          <span class="text-gray-700" aria-current="page">Freelance Day Rate</span>
-        </li>
-      </ol>
-    </nav>
+  <!-- Hero Section -->
+  <HeroSection
+    title="Freelance Day Rate Calculator"
+    description="Calculate your ideal freelance day rate compared to a salaried position. Includes tax adjustments, benefits analysis, and real take-home pay comparison."
+  />
 
-    <!-- Hero Section -->
-    <header class="text-center mb-10">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-        Freelance Day Rate Calculator
-      </h1>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Calculate your ideal freelance day rate compared to a salaried position.
-        Includes tax adjustments, benefits analysis, and real take-home pay comparison.
-      </p>
-    </header>
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <FreelanceDayRateCalculator client:load />
+  </section>
 
-    <!-- Calculator Component -->
-    <section class="mb-16" aria-label="Calculator">
-      <FreelanceDayRateCalculator client:load />
-    </section>
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>target annual salary</strong> - this is what you'd
+      want to earn as a full-time employee. Enter the salary before taxes, as the
+      calculator will handle tax adjustments for you.
+    </p>
+    <p>
+      Next, input your <strong>estimated tax rate</strong>. For most US freelancers, this
+      is between 25-35%, which includes federal income tax, state tax, and the 15.3%
+      self-employment tax. If you're unsure, 30% is a reasonable estimate for most people.
+    </p>
+    <p>
+      Adjust the <strong>vacation days and holidays</strong> based on how much time off
+      you plan to take. Remember, as a freelancer, time off is unpaid, so these days
+      reduce your billable working days.
+    </p>
+    <p>
+      Finally, if you currently receive employer benefits, add their annual value in the
+      <strong>Benefits Value</strong> field. Include health insurance premiums your employer
+      pays, 401(k) matching, and other benefits you'll need to self-fund as a freelancer.
+    </p>
+  </ContentSection>
 
-    <!-- How to Use Section -->
-    <section class="prose prose-lg max-w-none mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">
-        How to Use This Calculator
-      </h2>
-      <p>
-        Start by entering your <strong>target annual salary</strong> - this is what you'd
-        want to earn as a full-time employee. Enter the salary before taxes, as the
-        calculator will handle tax adjustments for you.
-      </p>
-      <p>
-        Next, input your <strong>estimated tax rate</strong>. For most US freelancers, this
-        is between 25-35%, which includes federal income tax, state tax, and the 15.3%
-        self-employment tax. If you're unsure, 30% is a reasonable estimate for most people.
-      </p>
-      <p>
-        Adjust the <strong>vacation days and holidays</strong> based on how much time off
-        you plan to take. Remember, as a freelancer, time off is unpaid, so these days
-        reduce your billable working days.
-      </p>
-      <p>
-        Finally, if you currently receive employer benefits, add their annual value in the
-        <strong>Benefits Value</strong> field. Include health insurance premiums your employer
-        pays, 401(k) matching, and other benefits you'll need to self-fund as a freelancer.
-      </p>
-    </section>
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Net Day Rate</strong> is your recommended minimum daily rate - this is
+      what you should charge to match your target salary after accounting for taxes. The
+      calculator shows both gross (before tax) and net (after tax) rates so you know
+      exactly what to invoice.
+    </p>
+    <p>
+      The <strong>Hourly Rate</strong> is calculated based on an 8-hour workday. Some
+      clients prefer hourly billing for smaller projects or ongoing support work. You can
+      use this as a starting point for hourly negotiations.
+    </p>
+    <p>
+      <strong>Monthly and Weekly Income</strong> figures assume full utilization - billing
+      every working day. In reality, most freelancers achieve 70-80% utilization due to
+      administrative tasks, business development, gaps between projects, and occasional
+      slow periods. Consider this when planning your budget.
+    </p>
+    <p>
+      The <strong>Annual Comparison</strong> shows what you'd earn as an employee versus
+      as a freelancer at your calculated rate. This helps you understand whether your
+      rate truly matches your target income.
+    </p>
+  </ContentSection>
 
-    <!-- Understanding Results Section -->
-    <section class="prose prose-lg max-w-none mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">
-        Understanding Your Results
-      </h2>
-      <p>
-        The <strong>Net Day Rate</strong> is your recommended minimum daily rate - this is
-        what you should charge to match your target salary after accounting for taxes. The
-        calculator shows both gross (before tax) and net (after tax) rates so you know
-        exactly what to invoice.
-      </p>
-      <p>
-        The <strong>Hourly Rate</strong> is calculated based on an 8-hour workday. Some
-        clients prefer hourly billing for smaller projects or ongoing support work. You can
-        use this as a starting point for hourly negotiations.
-      </p>
-      <p>
-        <strong>Monthly and Weekly Income</strong> figures assume full utilization - billing
-        every working day. In reality, most freelancers achieve 70-80% utilization due to
-        administrative tasks, business development, gaps between projects, and occasional
-        slow periods. Consider this when planning your budget.
-      </p>
-      <p>
-        The <strong>Annual Comparison</strong> shows what you'd earn as an employee versus
-        as a freelancer at your calculated rate. This helps you understand whether your
-        rate truly matches your target income.
-      </p>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Frequently Asked Questions
-      </h2>
-      <div class="space-y-4">
-        {faqs.map((faq) => (
-          <details class="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
-            <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-gray-100 transition-colors">
-              <h3 class="font-semibold text-gray-900 pr-4">
-                {faq.question}
-              </h3>
-              <span class="text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </summary>
-            <div class="px-6 pb-6">
-              <p class="text-gray-600 leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
-          </details>
-        ))}
-      </div>
-    </section>
-
-    <!-- Related Calculators -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-6">
-        Related Calculators
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <a
-          href="/calculators/hourly-to-salary-calculator"
-          class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
-        >
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-green-200 transition-colors">
-              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                Hourly to Salary Calculator
-              </h3>
-              <p class="text-gray-600 text-sm mt-1">
-                Convert your hourly rate to an annual salary with tax adjustments.
-              </p>
-            </div>
-          </div>
-        </a>
-
-        <a
-          href="/calculators/side-hustle-profitability-calculator"
-          class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
-        >
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-red-200 transition-colors">
-              <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                Side Hustle Profitability Calculator
-              </h3>
-              <p class="text-gray-600 text-sm mt-1">
-                Calculate if your side project is truly profitable with effective hourly rates.
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="text-center py-8 px-6 bg-blue-50 rounded-2xl">
-      <h2 class="text-xl font-semibold text-gray-900 mb-2">
-        Found this calculator helpful?
-      </h2>
-      <p class="text-gray-600 mb-4">
-        Check out our other free calculators for freelancers and small business owners.
-      </p>
-      <a
-        href="/calculators"
-        class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-      >
-        View All Calculators
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
-    </section>
-  </article>
-</BaseLayout>
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

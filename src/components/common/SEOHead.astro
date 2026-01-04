@@ -1,0 +1,93 @@
+---
+/**
+ * SEO Head Component
+ *
+ * Generates consistent Schema.org markup for calculator pages.
+ * Includes SoftwareApplication, FAQPage, and BreadcrumbList schemas.
+ */
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  /** Calculator name for SoftwareApplication schema */
+  name: string;
+  /** Calculator description */
+  description: string;
+  /** Full canonical URL */
+  url: string;
+  /** FAQ items for FAQPage schema */
+  faqs?: FAQ[];
+  /** Breadcrumb items (will be prepended with Home) */
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { name, description, url, faqs = [], breadcrumbs = [] } = Astro.props;
+
+const siteUrl = Astro.site?.origin || 'https://boring-math-calculators.vercel.app';
+
+// SoftwareApplication schema
+const appSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": name,
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": description,
+  "url": url
+};
+
+// FAQPage schema (only if FAQs provided)
+const faqSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+} : null;
+
+// BreadcrumbList schema
+const fullBreadcrumbs = [
+  { name: "Home", url: siteUrl },
+  ...breadcrumbs.map(b => ({ name: b.name, url: b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}` }))
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": fullBreadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": item.url
+  }))
+};
+---
+
+<!-- SoftwareApplication Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+
+<!-- FAQPage Schema (if FAQs provided) -->
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

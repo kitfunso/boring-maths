@@ -1,0 +1,179 @@
+---
+/**
+ * Calculator Layout
+ *
+ * Extends BaseLayout with calculator-specific features:
+ * - Breadcrumb navigation
+ * - Ad placement slots
+ * - Related calculators section
+ * - Schema.org markup slots
+ */
+
+import BaseLayout from './BaseLayout.astro';
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+export interface RelatedCalculator {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  color: 'blue' | 'green' | 'purple' | 'red' | 'yellow';
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonicalURL?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  relatedCalculators?: RelatedCalculator[];
+  showAds?: boolean;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  canonicalURL,
+  breadcrumbs = [],
+  relatedCalculators = [],
+  showAds = false,
+} = Astro.props;
+
+// Icon paths for related calculator cards
+const iconPaths: Record<string, string> = {
+  dollar: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  calculator: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+  chart: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />',
+  trending: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
+  cube: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+};
+
+// Color classes for related calculator cards
+const colorClasses: Record<string, { bg: string; bgHover: string; text: string }> = {
+  blue: { bg: 'bg-blue-100', bgHover: 'group-hover:bg-blue-200', text: 'text-blue-600' },
+  green: { bg: 'bg-green-100', bgHover: 'group-hover:bg-green-200', text: 'text-green-600' },
+  purple: { bg: 'bg-purple-100', bgHover: 'group-hover:bg-purple-200', text: 'text-purple-600' },
+  red: { bg: 'bg-red-100', bgHover: 'group-hover:bg-red-200', text: 'text-red-600' },
+  yellow: { bg: 'bg-yellow-100', bgHover: 'group-hover:bg-yellow-200', text: 'text-yellow-600' },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+>
+  <!-- Schema.org markup slot -->
+  <slot name="schema" />
+
+  <article class="max-w-4xl mx-auto">
+    <!-- Breadcrumb Navigation -->
+    {breadcrumbs.length > 0 && (
+      <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2 flex-wrap">
+          <li>
+            <a href="/" class="hover:text-blue-600 transition-colors">Home</a>
+          </li>
+          {breadcrumbs.map((crumb, index) => (
+            <li class="flex items-center">
+              <svg class="w-4 h-4 mx-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+              {crumb.href ? (
+                <a href={crumb.href} class="hover:text-blue-600 transition-colors">
+                  {crumb.label}
+                </a>
+              ) : (
+                <span class="text-gray-700" aria-current="page">{crumb.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
+    <!-- Ad Slot: Above Calculator -->
+    {showAds && (
+      <div class="mb-6 text-center">
+        <div class="bg-gray-100 border border-gray-200 rounded-lg p-4 text-gray-400 text-sm">
+          <!-- AdSense placeholder - Replace with actual ad code -->
+          Ad Space (728x90)
+        </div>
+      </div>
+    )}
+
+    <!-- Main Content Slot -->
+    <slot />
+
+    <!-- Ad Slot: Below Results -->
+    {showAds && (
+      <div class="my-8 text-center">
+        <div class="bg-gray-100 border border-gray-200 rounded-lg p-8 text-gray-400 text-sm">
+          <!-- AdSense placeholder - Replace with actual ad code -->
+          Ad Space (300x250)
+        </div>
+      </div>
+    )}
+
+    <!-- Related Calculators Section -->
+    {relatedCalculators.length > 0 && (
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Related Calculators
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {relatedCalculators.map((calc) => {
+            const colors = colorClasses[calc.color];
+            return (
+              <a
+                href={calc.href}
+                class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
+              >
+                <div class="flex items-start gap-4">
+                  <div class={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center flex-shrink-0 ${colors.bgHover} transition-colors`}>
+                    <svg class={`w-6 h-6 ${colors.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <Fragment set:html={iconPaths[calc.icon] || iconPaths.calculator} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      {calc.title}
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-1">
+                      {calc.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    )}
+
+    <!-- Call to Action -->
+    <section class="text-center py-8 px-6 bg-blue-50 rounded-2xl">
+      <h2 class="text-xl font-semibold text-gray-900 mb-2">
+        Found this calculator helpful?
+      </h2>
+      <p class="text-gray-600 mb-4">
+        Check out our other free calculators for freelancers and small business owners.
+      </p>
+      <a
+        href="/calculators"
+        class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+      >
+        View All Calculators
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </section>
+  </article>
+</BaseLayout>

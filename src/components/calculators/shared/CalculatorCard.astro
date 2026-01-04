@@ -1,0 +1,104 @@
+---
+/**
+ * Calculator Card Component
+ *
+ * Displays a preview card for calculators on the homepage and index pages.
+ * Supports live and coming-soon states.
+ */
+
+export interface Props {
+  /** Calculator title */
+  title: string;
+  /** Short description of the calculator */
+  description: string;
+  /** URL path to the calculator page */
+  href: string;
+  /** Icon name (dollar, calculator, chart, trending, cube) */
+  icon: 'dollar' | 'calculator' | 'chart' | 'trending' | 'cube';
+  /** Color theme for the icon */
+  color: 'blue' | 'green' | 'purple' | 'red' | 'yellow';
+  /** Whether the calculator is live or coming soon */
+  status?: 'live' | 'coming-soon';
+}
+
+const {
+  title,
+  description,
+  href,
+  icon,
+  color,
+  status = 'coming-soon',
+} = Astro.props;
+
+const isLive = status === 'live';
+
+// Icon SVG paths
+const iconPaths: Record<string, string> = {
+  dollar: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  calculator: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+  chart: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />',
+  trending: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
+  cube: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+};
+
+// Color classes
+const colorClasses: Record<string, { bg: string; bgHover: string; text: string }> = {
+  blue: { bg: 'bg-blue-100', bgHover: 'group-hover:bg-blue-200', text: 'text-blue-600' },
+  green: { bg: 'bg-green-100', bgHover: 'group-hover:bg-green-200', text: 'text-green-600' },
+  purple: { bg: 'bg-purple-100', bgHover: 'group-hover:bg-purple-200', text: 'text-purple-600' },
+  red: { bg: 'bg-red-100', bgHover: 'group-hover:bg-red-200', text: 'text-red-600' },
+  yellow: { bg: 'bg-yellow-100', bgHover: 'group-hover:bg-yellow-200', text: 'text-yellow-600' },
+};
+
+const colors = colorClasses[color];
+---
+
+<a
+  href={isLive ? href : undefined}
+  class:list={[
+    "group block bg-white rounded-xl border border-gray-200 p-6 transition-all",
+    isLive
+      ? "hover:border-blue-300 hover:shadow-lg cursor-pointer"
+      : "cursor-default opacity-80"
+  ]}
+>
+  <div class="flex items-start gap-4">
+    <div class:list={[
+      "w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors",
+      colors.bg,
+      isLive && colors.bgHover
+    ]}>
+      <svg class:list={["w-6 h-6", colors.text]} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <Fragment set:html={iconPaths[icon]} />
+      </svg>
+    </div>
+    <div class="flex-1">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class:list={[
+          "font-semibold text-gray-900 transition-colors",
+          isLive && "group-hover:text-blue-600"
+        ]}>
+          {title}
+        </h3>
+        {!isLive && (
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600">
+            Coming Soon
+          </span>
+        )}
+      </div>
+      <p class="text-gray-600 text-sm">
+        {description}
+      </p>
+    </div>
+  </div>
+  {isLive && (
+    <div class="mt-4 pt-4 border-t border-gray-100">
+      <span class="text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors inline-flex items-center gap-1">
+        Use Calculator
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </span>
+    </div>
+  )}
+</a>
