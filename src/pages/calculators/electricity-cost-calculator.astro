@@ -1,0 +1,153 @@
+---
+/**
+ * Electricity Cost Calculator Page
+ *
+ * SEO-optimized page targeting: "how much does it cost to run appliance calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ElectricityCostCalculator from '../../components/calculators/ElectricityCost/ElectricityCostCalculator';
+
+// SEO Configuration
+const title = 'Electricity Cost Calculator | Appliance Running Costs';
+const description = 'Calculate how much it costs to run any appliance. Enter wattage and usage hours to see daily, monthly, and yearly electricity costs. Pre-loaded with common appliances.';
+const keywords = 'electricity cost calculator, appliance energy calculator, power consumption calculator, kWh calculator, electric bill estimator, running cost calculator';
+const canonicalURL = '/calculators/electricity-cost-calculator';
+
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Electricity Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your home project.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings goals with compound interest.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How do I find my appliance's wattage?",
+    answer: "Check the label on the appliance (usually on the back or bottom), look in the user manual, or search online for '[appliance model] wattage'. The wattage is listed in watts (W). If only amps are listed, multiply amps × volts (usually 120V in US) to get watts."
+  },
+  {
+    question: "How much does it cost to run a space heater?",
+    answer: "A typical 1,500W space heater running 8 hours a day at $0.15/kWh costs about $1.80 per day, $54 per month, or $648 per year. Space heaters are one of the most expensive appliances to run - consider a programmable thermostat or zone heating instead."
+  },
+  {
+    question: "What uses the most electricity in a home?",
+    answer: "The biggest energy consumers are typically: heating/cooling (40-50% of bill), water heater (14-18%), washer/dryer (5-8%), lighting (5-10%), and refrigerator (4-5%). Exact percentages vary by climate, home size, and appliance efficiency."
+  },
+  {
+    question: "How can I reduce my electricity bill?",
+    answer: "Top tips: Switch to LED bulbs, use a programmable thermostat, unplug devices when not in use, run dishwasher/washer with full loads, use cold water for laundry, seal air leaks, and upgrade to Energy Star appliances when replacing old ones."
+  },
+  {
+    question: "What's a kilowatt-hour (kWh)?",
+    answer: "A kilowatt-hour is a unit of energy equal to using 1,000 watts for one hour. For example, a 100W light bulb running for 10 hours uses 1 kWh. Your electricity bill shows total kWh used and the rate you pay per kWh."
+  },
+  {
+    question: "How do I find my electricity rate?",
+    answer: "Check your electricity bill - it shows the rate per kWh (often listed as 'price to compare' or in the charges breakdown). Average US residential rates are about $0.15/kWh, but range from $0.10 in some states to $0.30+ in others."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Electricity Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Electricity Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Electricity Cost Calculator"
+    description="Calculate how much it costs to run any appliance. See daily, monthly, and yearly costs based on your electricity rate."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ElectricityCostCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Use the <strong>quick select buttons</strong> to choose a common appliance, which
+      will auto-fill the wattage and typical usage hours. Or enter values manually.
+    </p>
+    <p>
+      Enter the <strong>power consumption in watts</strong>. This is usually printed on
+      a label on the appliance or in the user manual. It might be listed as "W" or "Watts".
+    </p>
+    <p>
+      Set your <strong>electricity rate</strong> (cost per kWh). You can find this on
+      your electricity bill. The calculator starts with an average rate for your region.
+    </p>
+    <p>
+      Adjust the <strong>hours per day</strong> and <strong>days per month</strong>
+      sliders to match your actual usage patterns.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>monthly cost</strong> is what this appliance adds to your electric bill
+      at your current usage rate. The yearly cost helps you see the long-term impact.
+    </p>
+    <p>
+      <strong>kWh (kilowatt-hours)</strong> is how electricity is measured. Your bill
+      shows total kWh used. One kWh = 1,000 watts running for one hour.
+    </p>
+    <p>
+      The <strong>per-hour cost</strong> shows what you spend each hour the appliance
+      runs. Multiply this by hours of use for any custom calculation.
+    </p>
+    <p>
+      The <strong>CO2 estimate</strong> uses an average of 0.4 kg CO2 per kWh - actual
+      emissions vary by your region's power sources (coal, gas, nuclear, renewables).
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

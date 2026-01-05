@@ -1,0 +1,154 @@
+---
+/**
+ * Raise Calculator Page
+ *
+ * SEO-optimized page targeting: "how much is a raise worth calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RaiseCalculator from '../../components/calculators/RaiseCalculator/RaiseCalculator';
+
+// SEO Configuration
+const title = 'Raise Calculator | Lifetime Value of a Salary Increase';
+const description = 'Calculate the true lifetime value of a salary raise. See how a small percentage increase compounds over your career and what it could be worth invested.';
+const keywords = 'raise calculator, salary increase calculator, how much is a raise worth, pay raise calculator, salary negotiation calculator, lifetime value of raise';
+const canonicalURL = '/calculators/raise-calculator';
+
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Raise Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly rates to annual salary with tax adjustments.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your ideal freelance day rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much is a 5% raise worth over my career?",
+    answer: "A 5% raise on a $60,000 salary adds $3,000 per year. But with annual 3% salary growth, that raise is worth over $100,000 in cumulative income over 25 years. If you invest the difference at 7% returns, it could grow to $200,000+ by retirement."
+  },
+  {
+    question: "What's a good raise to ask for?",
+    answer: "3-5% is typical for annual merit raises. For promotions, 10-20% is common. When switching jobs, 15-25% increases are often achievable. The key is knowing your market value - research salaries for your role, experience, and location before negotiating."
+  },
+  {
+    question: "Should I negotiate every job offer?",
+    answer: "Yes, almost always. Studies show 85% of people who negotiate their salary are successful. Even a small increase in starting salary compounds significantly over your career. The only exceptions are jobs with truly fixed pay scales (some government positions)."
+  },
+  {
+    question: "When is the best time to ask for a raise?",
+    answer: "The best times are: after completing a major project or achievement, during annual reviews, when taking on new responsibilities, when you have a competing offer, or when the company is doing well financially. Avoid asking during layoffs, budget cuts, or company crises."
+  },
+  {
+    question: "How do I justify asking for a bigger raise?",
+    answer: "Document your achievements with specific metrics (revenue generated, costs saved, projects completed). Research market rates for your role. Highlight additional responsibilities you've taken on. Show how you've exceeded expectations. Make the business case for your value."
+  },
+  {
+    question: "What if my employer says no to a raise?",
+    answer: "Ask what you need to do to earn a raise and get it in writing. Request a timeline for the next review. Negotiate other benefits (extra PTO, remote work, professional development budget). Consider whether the job still meets your needs, and start exploring other opportunities if not."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Raise Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Raise Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Raise Calculator"
+    description="See the true lifetime value of a salary increase. Calculate how a raise compounds over your career and what it could be worth if invested."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RaiseCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>current annual salary</strong> before taxes. This is your
+      base salary, not including bonuses or benefits.
+    </p>
+    <p>
+      Use the slider or quick-select buttons to set the <strong>raise percentage</strong>
+      you're considering or negotiating for. Common merit raises are 3-5%.
+    </p>
+    <p>
+      Adjust the <strong>years until retirement</strong> to see the long-term impact.
+      Even if you plan to change jobs, raises typically carry forward to future salaries.
+    </p>
+    <p>
+      The advanced settings let you adjust <strong>investment returns</strong> (how your
+      extra income might grow if invested) and <strong>annual salary growth</strong>
+      (typical career progression).
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>lifetime value</strong> shows the total additional income you'll earn
+      from this raise over your remaining career, assuming normal salary progression.
+    </p>
+    <p>
+      The <strong>invested value</strong> shows what that extra income could grow to if
+      you invested it in the stock market. This illustrates the power of compound growth.
+    </p>
+    <p>
+      The <strong>value over time</strong> table shows how the raise accumulates year by
+      year. Early career raises are especially valuable because they compound longer.
+    </p>
+    <p>
+      The <strong>perspective section</strong> breaks down your raise into weekly, daily,
+      and per-paycheck amounts to help you visualize the impact.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

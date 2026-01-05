@@ -1,0 +1,158 @@
+---
+/**
+ * BBQ Calculator Page
+ *
+ * SEO-optimized page targeting: "how much meat to buy for BBQ calculator per person"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BBQCalculator from '../../components/calculators/BBQCalculator/BBQCalculator';
+
+// SEO Configuration
+const title = 'BBQ Calculator | How Much Meat Per Person';
+const description = 'Calculate how much meat, sides, and supplies you need for your BBQ or cookout. Enter guest count and get a complete shopping list with grilling times.';
+const keywords = 'BBQ calculator, how much meat per person, cookout calculator, BBQ planning, meat calculator, grilling calculator, barbecue portions';
+const canonicalURL = '/calculators/bbq-calculator';
+
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'BBQ Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Wedding Alcohol Calculator',
+    description: 'Calculate how much beer, wine, and liquor for your event.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills between friends.',
+    href: '/calculators/tip-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much meat per person for a BBQ?",
+    answer: "Plan for 1/3 to 3/4 pound of raw meat per person depending on appetite. Light eaters: 1/3 lb (5 oz). Average appetites: 1/2 lb (8 oz). Hearty eaters: 3/4 lb (12 oz). For kids under 12, plan for about half of adult portions."
+  },
+  {
+    question: "How much hamburger meat for 20 people?",
+    answer: "For 20 people with standard 1/4 lb burger patties, buy 6-7 pounds of ground beef. This allows for about 1.5 burgers per person plus some extra. Buy more if burgers are the only main dish or if you expect hearty appetites."
+  },
+  {
+    question: "How many hot dogs per person?",
+    answer: "Adults typically eat 1.5-2 hot dogs each, while children eat about 1. For a mixed crowd, plan for 1.5 hot dogs per person on average. Hot dogs are usually a secondary item alongside burgers, so you can reduce this if offering multiple proteins."
+  },
+  {
+    question: "How much charcoal do I need?",
+    answer: "For a typical cookout, use about 30 briquettes per pound of meat, or roughly 1 pound of charcoal per pound of meat. For a 3-4 hour cookout with 10 lbs of meat, you'll need about 10-15 lbs of charcoal. Add more for low-and-slow cooking."
+  },
+  {
+    question: "How far in advance should I buy meat for a BBQ?",
+    answer: "Fresh ground beef: 1-2 days ahead. Steaks and chops: 3-5 days ahead. Whole chickens: 1-2 days ahead. Ribs and larger cuts: 3-5 days ahead. For larger events, consider ordering from a butcher a week ahead to ensure you get enough."
+  },
+  {
+    question: "What sides go best with BBQ?",
+    answer: "Classic BBQ sides include: coleslaw, baked beans, potato salad, corn on the cob, mac and cheese, and green salad. Plan for 2-4 sides per person, with about 1/2 cup of each side dish. Having 3-4 different options gives variety without overwhelming."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'BBQ Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="BBQ Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="BBQ Calculator"
+    description="Calculate exactly how much meat, sides, and supplies you need for your cookout. Get a complete shopping list and grilling guide."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BBQCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>total guest count</strong> and how many are <strong>children</strong>
+      (under 12). Children typically eat about half of adult portions, so this helps
+      calculate accurate amounts.
+    </p>
+    <p>
+      Select the <strong>appetite level</strong> based on your crowd. Light is good for
+      events with lots of appetizers or a hot day. Hungry is for big eaters or active
+      outdoor events.
+    </p>
+    <p>
+      Choose your <strong>main meat type</strong> - this determines the specific cuts
+      in your shopping list. "Mixed" gives you a classic variety of burgers, chicken,
+      ribs, and hot dogs.
+    </p>
+    <p>
+      Adjust the <strong>number of side dishes</strong> and <strong>event duration</strong>
+      to fine-tune your planning.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>meat shopping list</strong> breaks down exactly how much of each cut
+      to buy, including an automatic 10% buffer for trimming and seconds.
+    </p>
+    <p>
+      <strong>Side dishes</strong> are calculated based on standard portions. Feel free
+      to adjust based on your specific recipes and what you know your guests like.
+    </p>
+    <p>
+      The <strong>supplies checklist</strong> covers paper goods and serving essentials.
+      Check off items as you shop. Consider buying 10-15% extra supplies for spills and
+      accidents.
+    </p>
+    <p>
+      <strong>Grilling info</strong> helps you plan fuel (charcoal or propane) and
+      estimate cooking time. Start earlier than you think - you can always keep food
+      warm, but you can't speed up the grill.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

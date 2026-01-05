@@ -1,0 +1,158 @@
+---
+/**
+ * Break-Even Calculator Page
+ *
+ * SEO-optimized page targeting: "break even point calculator for small business"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BreakEvenCalculator from '../../components/calculators/BreakEven/BreakEvenCalculator';
+
+// SEO Configuration
+const title = 'Break-Even Calculator | Find Your Break-Even Point';
+const description = 'Calculate your business break-even point. Enter fixed costs, variable costs, and price to see how many units you need to sell to cover costs and start profiting.';
+const keywords = 'break even calculator, break even point, business calculator, contribution margin, profit analysis, small business calculator, startup costs';
+const canonicalURL = '/calculators/break-even-calculator';
+
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Break-Even Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Side Hustle Calculator',
+    description: 'Calculate if your side project is truly profitable.',
+    href: '/calculators/side-hustle-profitability-calculator',
+    icon: 'calculator' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your ideal freelance day rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is a break-even point?",
+    answer: "The break-even point is when your total revenue equals your total costs - you're not making a profit, but you're not losing money either. It's expressed as a number of units sold or total revenue. Any sales beyond this point generate profit."
+  },
+  {
+    question: "What are fixed costs vs variable costs?",
+    answer: "Fixed costs stay the same regardless of how much you sell (rent, salaries, insurance, software subscriptions). Variable costs change with each unit sold (materials, shipping, transaction fees, packaging). Understanding this difference is key to break-even analysis."
+  },
+  {
+    question: "What is contribution margin?",
+    answer: "Contribution margin is the amount each unit sale contributes to covering fixed costs and generating profit. It's calculated as: Price - Variable Cost Per Unit. A higher contribution margin means you need fewer sales to break even."
+  },
+  {
+    question: "How can I lower my break-even point?",
+    answer: "Three ways to lower break-even: 1) Increase prices (if the market allows), 2) Reduce variable costs per unit (better supplier deals, more efficient production), 3) Cut fixed costs (renegotiate rent, reduce subscriptions, automate tasks)."
+  },
+  {
+    question: "Why is break-even analysis important?",
+    answer: "Break-even analysis helps you: set realistic sales targets, price products appropriately, evaluate business viability, plan for profitability, make informed decisions about costs and investments, and understand the impact of changes to your business model."
+  },
+  {
+    question: "What's a good contribution margin?",
+    answer: "It depends on your industry. Software and digital products often have 80-90%+ margins. Retail typically sees 30-50%. Restaurants average 60-70% on food. Compare your margin to industry benchmarks and aim to improve over time."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Break-Even Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Break-Even Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Break-Even Calculator"
+    description="Calculate how many units you need to sell to cover your costs and start making a profit. Essential for pricing decisions and business planning."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BreakEvenCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>monthly fixed costs</strong> - expenses that don't change based
+      on sales volume. This includes rent, salaries, insurance, software, and other
+      overhead costs.
+    </p>
+    <p>
+      Enter your <strong>selling price per unit</strong> - what customers pay for one
+      unit of your product or service. For services, this might be a project fee or
+      hourly rate.
+    </p>
+    <p>
+      Enter your <strong>variable cost per unit</strong> - expenses that occur with each
+      sale. This includes materials, shipping, transaction fees, commissions, and
+      packaging.
+    </p>
+    <p>
+      Optionally, enter a <strong>target monthly profit</strong> to see how many units
+      you need to sell beyond break-even to hit your income goal.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>break-even point</strong> shows the exact number of units (or revenue)
+      needed to cover all costs. Selling more than this generates profit; selling less
+      results in losses.
+    </p>
+    <p>
+      The <strong>contribution margin</strong> is what each sale contributes toward
+      fixed costs and profit. Higher margins mean fewer sales needed to break even.
+    </p>
+    <p>
+      The <strong>profit analysis table</strong> shows your profit at different sales
+      levels. Use this to set sales targets and understand the relationship between
+      volume and profitability.
+    </p>
+    <p>
+      The <strong>margin ratio</strong> shows contribution margin as a percentage of
+      price. This helps compare profitability across different products or services.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

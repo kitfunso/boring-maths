@@ -1,0 +1,153 @@
+---
+/**
+ * Paint Calculator Page
+ *
+ * SEO-optimized page targeting: "how much paint do I need calculator by room size"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PaintCalculator from '../../components/calculators/PaintCalculator/PaintCalculator';
+
+// SEO Configuration
+const title = 'Paint Calculator | How Much Paint Do I Need?';
+const description = 'Calculate exactly how much paint you need for your room. Enter dimensions, get gallons needed with cost estimates. Includes primer and trim paint calculations.';
+const keywords = 'paint calculator, how much paint do I need, paint coverage calculator, room paint calculator, wall paint estimator, gallons of paint calculator';
+const canonicalURL = '/calculators/paint-calculator';
+
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Paint Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Calculate how much it costs to run appliances in your home.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings for home improvement projects.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much paint do I need for a 12x12 room?",
+    answer: "A 12x12 room with 8-foot ceilings has about 384 square feet of wall space. After subtracting doors and windows, you typically need 1.5-2 gallons for two coats. One gallon covers approximately 350-400 square feet per coat."
+  },
+  {
+    question: "How many coats of paint do I need?",
+    answer: "Two coats is standard for most painting projects. Use one coat only for touch-ups or when using a paint-and-primer combo over a similar color. Use three coats when making dramatic color changes (especially light over dark), painting over repairs, or for high-traffic areas."
+  },
+  {
+    question: "Do I need primer before painting?",
+    answer: "Primer is recommended for: new drywall, stained or patched areas, color changes (especially dark to light), glossy surfaces, and wood surfaces. Many modern paints include primer, but a separate primer provides better coverage and adhesion for challenging surfaces."
+  },
+  {
+    question: "What's the difference between paint qualities?",
+    answer: "Economy paint is thinner, requires more coats, and fades faster. Standard paint offers good coverage and durability for most rooms. Premium paint has better coverage (often one-coat), superior durability, easier cleaning, and better fade resistance - worth it for high-traffic areas and exteriors."
+  },
+  {
+    question: "How long does it take to paint a room?",
+    answer: "A 12x12 room typically takes 4-6 hours for a DIY painter, including prep, two coats, and cleanup. Factors affecting time: ceiling height, number of doors/windows, wall condition, color changes, and experience level. Add 2-4 hours for primer if needed."
+  },
+  {
+    question: "Should I buy extra paint?",
+    answer: "Yes, buy 10-15% more than calculated for touch-ups, mistakes, and future repairs. Keep leftover paint for touch-ups - store it properly (sealed, room temperature) and it can last 10+ years. Most stores accept returns of unopened gallons."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Paint Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Paint Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Paint Calculator"
+    description="Calculate exactly how much paint you need for any room. Get accurate gallon counts, cost estimates, and a complete shopping list."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PaintCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>room dimensions</strong> in feet - length, width, and wall height.
+      Standard ceiling height is 8 feet; many newer homes have 9 or 10-foot ceilings.
+    </p>
+    <p>
+      Enter the <strong>number of doors and windows</strong> to subtract from the paintable
+      area. The calculator uses average sizes (21 sq ft for doors, 15 sq ft for windows).
+    </p>
+    <p>
+      Select <strong>number of coats</strong> - two is standard for most projects. Choose
+      your <strong>paint quality</strong> based on your budget and the room's use.
+    </p>
+    <p>
+      Check the options for <strong>primer</strong> (recommended for most projects) and
+      <strong>trim paint</strong> if you're painting baseboards and door frames too.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>gallons needed</strong> includes a 10% waste factor for drips, roller
+      absorption, and touch-ups. Always round up - you can return unopened gallons.
+    </p>
+    <p>
+      The <strong>shopping list</strong> shows everything you need with estimated prices.
+      Prices vary by brand and location - these are average home improvement store prices.
+    </p>
+    <p>
+      <strong>Time estimate</strong> includes prep work (taping, covering furniture),
+      painting, and cleanup. Actual time varies based on experience and wall condition.
+    </p>
+    <p>
+      The <strong>"Don't Forget" list</strong> shows supplies you'll need beyond paint.
+      Having everything ready before you start makes the job much smoother.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
