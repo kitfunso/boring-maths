@@ -113,7 +113,7 @@ export default function HourlyToSalaryCalculator() {
                   value={inputs.weeksPerYear}
                   onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">52 weeks minus vacation time</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">52 weeks minus vacation time</p>
               </div>
             </Grid>
 
@@ -129,7 +129,7 @@ export default function HourlyToSalaryCalculator() {
                 value={Math.round(inputs.taxRate * 100)}
                 onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--color-muted)] mt-1">
                 {region === 'US' && 'Federal + State income tax (typically 20-30%)'}
                 {region === 'UK' && 'Income Tax + National Insurance (typically 20-30%)'}
                 {region === 'EU' && 'Income Tax + Social Contributions (typically 25-40%)'}
@@ -145,7 +145,7 @@ export default function HourlyToSalaryCalculator() {
 
             {/* Overtime Fields */}
             {inputs.includeOvertime && (
-              <Grid responsive={{ sm: 1, md: 2 }} gap="lg" className="pl-8 border-l-4 border-green-100">
+              <Grid responsive={{ sm: 1, md: 2 }} gap="lg" className="pl-8 border-l-4 border-white/10">
                 <div>
                   <Label htmlFor="overtimeHours">Overtime Hours/Week</Label>
                   <Input

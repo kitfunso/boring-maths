@@ -110,7 +110,7 @@ export default function WeddingAlcoholCalculator() {
                   current: (v) => `${Math.round(v)}%`,
                 }}
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-[var(--color-muted)] mt-1">
                 {result.drinkingGuests} guests will drink alcohol
               </p>
             </div>
@@ -124,7 +124,7 @@ export default function WeddingAlcoholCalculator() {
                 onChange={(value) => updateInput('drinkingLevel', value as DrinkingLevel)}
                 columns={3}
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-[var(--color-muted)] mt-2">
                 {inputs.drinkingLevel === 'light' && '~0.75 drinks per hour per guest'}
                 {inputs.drinkingLevel === 'moderate' && '~1 drink per hour per guest'}
                 {inputs.drinkingLevel === 'heavy' && '~1.5 drinks per hour per guest'}
@@ -138,7 +138,7 @@ export default function WeddingAlcoholCalculator() {
               </Label>
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between text-sm mb-1 text-[var(--color-cream)]">
                     <span>Wine</span>
                     <span className="font-medium">{Math.round(inputs.winePercent)}%</span>
                   </div>
@@ -148,11 +148,11 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.winePercent}
                     onChange={(e) => updateInput('winePercent', Number(e.target.value))}
-                    className="w-full h-2 bg-red-100 rounded-lg appearance-none cursor-pointer accent-red-500"
+                    className="w-full h-2 bg-red-950/50 rounded-lg appearance-none cursor-pointer accent-red-500"
                   />
                 </div>
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between text-sm mb-1 text-[var(--color-cream)]">
                     <span>Beer</span>
                     <span className="font-medium">{Math.round(inputs.beerPercent)}%</span>
                   </div>
@@ -162,11 +162,11 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.beerPercent}
                     onChange={(e) => updateInput('beerPercent', Number(e.target.value))}
-                    className="w-full h-2 bg-amber-100 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    className="w-full h-2 bg-amber-950/50 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
                 </div>
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between text-sm mb-1 text-[var(--color-cream)]">
                     <span>Liquor/Cocktails</span>
                     <span className="font-medium">{Math.round(inputs.liquorPercent)}%</span>
                   </div>
@@ -176,12 +176,12 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.liquorPercent}
                     onChange={(e) => updateInput('liquorPercent', Number(e.target.value))}
-                    className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    className="w-full h-2 bg-blue-950/50 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                 </div>
               </div>
               {!isPercentageValid && (
-                <p className="text-sm text-amber-600 mt-2">
+                <p className="text-sm text-amber-400 mt-2">
                   Total: {Math.round(percentageTotal)}% (will be normalized to 100%)
                 </p>
               )}
@@ -194,57 +194,57 @@ export default function WeddingAlcoholCalculator() {
           <div className="space-y-6">
             {/* Primary Results - Bottles Needed (custom drink-specific colors) */}
             <Grid cols={3} gap="md">
-              <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-2xl p-6 text-center">
+              <div className="bg-gradient-to-br from-red-950/50 to-red-900/30 border-2 border-red-500/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl mb-2">🍷</div>
-                <p className="text-3xl font-bold text-red-700 tabular-nums">
+                <p className="text-3xl font-bold text-red-400 tabular-nums">
                   {formatNumber(result.wineBottles)}
                 </p>
-                <p className="text-red-600 text-sm font-medium mt-1">Wine Bottles</p>
-                <p className="text-red-500 text-xs mt-1">({result.breakdown.wineServings} glasses)</p>
+                <p className="text-red-400/80 text-sm font-medium mt-1">Wine Bottles</p>
+                <p className="text-red-400/60 text-xs mt-1">({result.breakdown.wineServings} glasses)</p>
               </div>
 
-              <div className="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 rounded-2xl p-6 text-center">
+              <div className="bg-gradient-to-br from-amber-950/50 to-amber-900/30 border-2 border-amber-500/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl mb-2">🍺</div>
-                <p className="text-3xl font-bold text-amber-700 tabular-nums">
+                <p className="text-3xl font-bold text-amber-400 tabular-nums">
                   {formatNumber(result.beerBottles)}
                 </p>
-                <p className="text-amber-600 text-sm font-medium mt-1">Beer Bottles</p>
-                <p className="text-amber-500 text-xs mt-1">({result.breakdown.beerServings} servings)</p>
+                <p className="text-amber-400/80 text-sm font-medium mt-1">Beer Bottles</p>
+                <p className="text-amber-400/60 text-xs mt-1">({result.breakdown.beerServings} servings)</p>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 text-center">
+              <div className="bg-gradient-to-br from-blue-950/50 to-blue-900/30 border-2 border-blue-500/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl mb-2">🥃</div>
-                <p className="text-3xl font-bold text-blue-700 tabular-nums">
+                <p className="text-3xl font-bold text-blue-400 tabular-nums">
                   {formatNumber(result.liquorBottles)}
                 </p>
-                <p className="text-blue-600 text-sm font-medium mt-1">Liquor Bottles</p>
-                <p className="text-blue-500 text-xs mt-1">({result.breakdown.liquorServings} cocktails)</p>
+                <p className="text-blue-400/80 text-sm font-medium mt-1">Liquor Bottles</p>
+                <p className="text-blue-400/60 text-xs mt-1">({result.breakdown.liquorServings} cocktails)</p>
               </div>
             </Grid>
 
             {/* Summary Stats */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Summary
               </h3>
               <Grid responsive={{ sm: 2, md: 3 }} gap="md" className="text-center">
                 <div>
-                  <p className="text-2xl font-bold text-gray-800 tabular-nums">
+                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {formatNumber(result.totalDrinks)}
                   </p>
-                  <p className="text-sm text-gray-600">Total Drinks</p>
+                  <p className="text-sm text-[var(--color-muted)]">Total Drinks</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-800 tabular-nums">
+                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {result.drinkingGuests}
                   </p>
-                  <p className="text-sm text-gray-600">Drinking Guests</p>
+                  <p className="text-sm text-[var(--color-muted)]">Drinking Guests</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-800 tabular-nums">
+                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {result.drinksPerGuest}
                   </p>
-                  <p className="text-sm text-gray-600">Drinks per Guest</p>
+                  <p className="text-sm text-[var(--color-muted)]">Drinks per Guest</p>
                 </div>
               </Grid>
             </div>

@@ -117,7 +117,7 @@ export default function FreelanceDayRateCalculator() {
                 onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
                 aria-describedby="annualSalary-help"
               />
-              <p id="annualSalary-help" className="text-sm text-gray-500 mt-1.5">
+              <p id="annualSalary-help" className="text-sm text-[var(--color-muted)] mt-1.5">
                 Your target annual income before taxes
               </p>
             </div>
@@ -137,7 +137,7 @@ export default function FreelanceDayRateCalculator() {
                 onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
                 aria-describedby="taxRate-help"
               />
-              <p id="taxRate-help" className="text-sm text-gray-500 mt-1.5">
+              <p id="taxRate-help" className="text-sm text-[var(--color-muted)] mt-1.5">
                 {getHelpText('taxRate')}
               </p>
             </div>
@@ -157,7 +157,7 @@ export default function FreelanceDayRateCalculator() {
                   value={inputs.vacationDays}
                   onChange={(e) => updateInput('vacationDays', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1.5">{getHelpText('vacationDays')}</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1.5">{getHelpText('vacationDays')}</p>
               </div>
 
               {/* Holidays */}
@@ -171,7 +171,7 @@ export default function FreelanceDayRateCalculator() {
                   value={inputs.holidays}
                   onChange={(e) => updateInput('holidays', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1.5">{getHelpText('holidays')}</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1.5">{getHelpText('holidays')}</p>
               </div>
             </Grid>
 
@@ -191,7 +191,7 @@ export default function FreelanceDayRateCalculator() {
                 onChange={(e) => updateInput('benefitsValue', Number(e.target.value))}
                 aria-describedby="benefitsValue-help"
               />
-              <p id="benefitsValue-help" className="text-sm text-gray-500 mt-1.5">
+              <p id="benefitsValue-help" className="text-sm text-[var(--color-muted)] mt-1.5">
                 {getHelpText('benefitsValue')}
               </p>
             </div>
@@ -201,7 +201,7 @@ export default function FreelanceDayRateCalculator() {
 
           {/* Results Section */}
           {error ? (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-6 text-center">
+            <div className="bg-red-950/30 border-2 border-red-500/30 rounded-xl p-6 text-center">
               <svg
                 className="w-12 h-12 text-red-400 mx-auto mb-3"
                 fill="none"
@@ -215,7 +215,7 @@ export default function FreelanceDayRateCalculator() {
                   d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                 />
               </svg>
-              <p className="text-red-700 font-medium">{error}</p>
+              <p className="text-red-400 font-medium">{error}</p>
             </div>
           ) : result ? (
             <div className="space-y-6">
@@ -259,24 +259,24 @@ export default function FreelanceDayRateCalculator() {
               </Grid>
 
               {/* Annual Comparison */}
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+              <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
+                <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Annual Income Comparison
                 </h3>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="text-center sm:text-left">
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">
+                    <p className="text-xs text-[var(--color-muted)] uppercase tracking-wide">
                       As Employee
                     </p>
-                    <p className="text-2xl font-bold text-gray-700 tabular-nums">
+                    <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                       {formatCurrency(result.annualComparison.asEmployee, result.currency)}
                     </p>
-                    <p className="text-xs text-gray-500">after tax</p>
+                    <p className="text-xs text-[var(--color-muted)]">after tax</p>
                   </div>
 
                   <div className="hidden sm:block">
                     <svg
-                      className="w-8 h-8 text-gray-300"
+                      className="w-8 h-8 text-white/20"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -291,23 +291,23 @@ export default function FreelanceDayRateCalculator() {
                   </div>
 
                   <div className="text-center sm:text-right">
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">
+                    <p className="text-xs text-[var(--color-muted)] uppercase tracking-wide">
                       As Freelancer
                     </p>
-                    <p className="text-2xl font-bold text-green-600 tabular-nums">
+                    <p className="text-2xl font-bold text-[var(--color-accent)] tabular-nums">
                       {formatCurrency(result.annualComparison.asFreelancer, result.currency)}
                     </p>
-                    <p className="text-xs text-gray-500">at this day rate</p>
+                    <p className="text-xs text-[var(--color-muted)]">at this day rate</p>
                   </div>
                 </div>
 
                 {result.annualComparison.difference !== 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-200 text-center">
-                    <p className="text-sm text-gray-600">
+                  <div className="mt-4 pt-4 border-t border-white/10 text-center">
+                    <p className="text-sm text-[var(--color-subtle)]">
                       {result.annualComparison.difference > 0 ? (
                         <>
                           At full utilization, you'd earn{' '}
-                          <span className="font-semibold text-green-600">
+                          <span className="font-semibold text-[var(--color-accent)]">
                             {formatCurrency(result.annualComparison.difference, result.currency)} more
                           </span>{' '}
                           as a freelancer
@@ -315,7 +315,7 @@ export default function FreelanceDayRateCalculator() {
                       ) : (
                         <>
                           Note: This rate accounts for benefits worth{' '}
-                          <span className="font-semibold">
+                          <span className="font-semibold text-[var(--color-cream)]">
                             {formatCurrency(inputs.benefitsValue, inputs.currency)}
                           </span>{' '}
                           that you'll need to self-fund

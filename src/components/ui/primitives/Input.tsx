@@ -22,18 +22,7 @@ const SIZE_CLASSES = {
 
 /**
  * Themed input component with support for currency and percentage variants.
- *
- * @example
- * ```tsx
- * // Currency input with $ prefix
- * <Input variant="currency" currencySymbol="$" value={75000} />
- *
- * // Percentage input with % suffix
- * <Input variant="percentage" value={30} min={0} max={100} />
- *
- * // Default number input
- * <Input type="number" value={40} />
- * ```
+ * Updated for dark theme.
  */
 export function Input({
   variant = 'default',
@@ -47,18 +36,20 @@ export function Input({
   const { tokens } = useTheme();
 
   const baseClasses = `
-    w-full border-2 rounded-xl transition-all duration-200 tabular-nums
+    w-full border rounded-xl transition-all duration-200 tabular-nums
+    bg-[var(--color-night)] text-[var(--color-cream)]
+    placeholder:text-[var(--color-muted)]
     ${SIZE_CLASSES[size]}
     ${error
-      ? 'border-red-300 focus:border-red-500 focus:ring-4 focus:ring-red-100'
-      : `border-gray-200 focus:${tokens.border500} focus:ring-4 ${tokens.ring100}`
+      ? 'border-rose-500/50 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20'
+      : `border-white/10 focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[var(--color-accent)]/20`
     }
   `.trim().replace(/\s+/g, ' ');
 
   if (variant === 'currency') {
     return (
       <div className="relative">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium">
           {currencySymbol}
         </span>
         <input
@@ -80,7 +71,7 @@ export function Input({
           className={`${baseClasses} pl-4 pr-10 ${className}`}
           {...props}
         />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">
+        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium">
           %
         </span>
       </div>

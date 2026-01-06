@@ -1,6 +1,6 @@
 ---
 /**
- * Hero Section Component
+ * Hero Section Component - Dark Theme
  *
  * Displays the title and description header for calculator pages.
  */
@@ -16,10 +16,10 @@ const { title, description } = Astro.props;
 ---
 
 <header class="text-center mb-10">
-  <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+  <h1 class="text-3xl md:text-4xl lg:text-5xl font-display text-[var(--color-cream)] mb-4">
     {title}
   </h1>
-  <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+  <p class="text-xl text-[var(--color-subtle)] max-w-2xl mx-auto">
     {description}
   </p>
 </header>

@@ -1,0 +1,128 @@
+---
+/**
+ * Mortgage Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import MortgageCalculator from '../../components/calculators/MortgageCalculator/MortgageCalculator';
+
+const title = 'Mortgage Calculator | Monthly Payment & Total Interest';
+const description = 'Free mortgage calculator to estimate your monthly payment, total interest, and loan costs. Includes property tax, insurance, and PMI calculations.';
+const keywords = 'mortgage calculator, home loan calculator, monthly payment calculator, mortgage payment, home buying';
+const canonicalURL = '/calculators/mortgage-calculator';
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Mortgage Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how investments grow over time with compound interest.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings to reach any financial goal.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How is monthly mortgage payment calculated?",
+    answer: "Monthly mortgage payment is calculated using the amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan amount, r is the monthly interest rate, and n is the number of payments. This gives you the principal and interest portion. Add property tax, insurance, and HOA for your total monthly payment."
+  },
+  {
+    question: "How much down payment do I need for a house?",
+    answer: "While 20% down payment is traditional to avoid PMI, you can put down as little as 3-5% for conventional loans or 0% for VA loans. A larger down payment means lower monthly payments and less interest paid over time."
+  },
+  {
+    question: "What is PMI and when is it required?",
+    answer: "Private Mortgage Insurance (PMI) is required when your down payment is less than 20% of the home price. PMI typically costs 0.5-1% of the loan amount annually and can be removed once you reach 20% equity."
+  },
+  {
+    question: "Should I choose a 15-year or 30-year mortgage?",
+    answer: "A 15-year mortgage has higher monthly payments but saves significantly on interest. A 30-year mortgage has lower payments but costs more over time. Choose based on your monthly budget and long-term financial goals."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Mortgage Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Mortgage Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Mortgage Calculator"
+    description="Calculate your monthly mortgage payment with principal, interest, taxes, and insurance included."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <MortgageCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>home price</strong> - the total purchase price of the property
+      you're considering. This is the amount before any down payment.
+    </p>
+    <p>
+      Specify your <strong>down payment</strong> amount. The calculator will show
+      the percentage automatically. A 20% down payment avoids PMI requirements.
+    </p>
+    <p>
+      Adjust the <strong>interest rate</strong> to match current market rates or
+      the rate your lender has quoted you. Even small rate differences significantly
+      impact total cost.
+    </p>
+    <p>
+      Include optional costs like <strong>property tax</strong>, <strong>insurance</strong>,
+      and <strong>HOA fees</strong> to see your true monthly housing cost.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Monthly payment</strong> shows your total housing cost including principal,
+      interest, taxes, insurance, and HOA fees. This is what you'll actually pay each month.
+    </p>
+    <p>
+      <strong>Total interest</strong> is the total amount you'll pay in interest over
+      the life of the loan. A shorter term or lower rate reduces this significantly.
+    </p>
+    <p>
+      <strong>Loan-to-value (LTV)</strong> ratio shows what percentage of the home
+      value you're borrowing. Lower LTV means more equity and potentially better rates.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

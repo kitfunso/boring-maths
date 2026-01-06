@@ -1,154 +1,718 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CalculatorCard from '../components/calculators/shared/CalculatorCard.astro';
 
 const title = 'Boring Math Calculators | Free Online Calculators';
 const description = 'Free online calculators for everyday math problems. Calculate freelance rates, wedding costs, savings goals, and more. Simple, accurate, and easy to use.';
 
-// Calculator data - centralized for easy management
+// All calculators with categories
 const calculators = [
   {
-    title: 'Freelance Day Rate Calculator',
-    description: 'Calculate your ideal freelance day rate compared to a salaried position, including tax adjustments and benefits.',
+    title: 'Freelance Day Rate',
+    description: 'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
     href: '/calculators/freelance-day-rate-calculator',
-    icon: 'dollar' as const,
-    color: 'blue' as const,
-    status: 'live' as const,
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Income',
+    mostUsed: true,
   },
   {
-    title: 'Wedding Alcohol Estimator',
-    description: "Estimate how much beer, wine, and liquor you'll need for your wedding based on guest count and event duration.",
+    title: 'Tip Calculator',
+    description: 'Calculate tips instantly and split bills between friends with ease.',
+    href: '/calculators/tip-calculator',
+    icon: 'percent',
+    color: 'green',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Wedding Alcohol',
+    description: 'Estimate beer, wine, and liquor for your celebration based on guest count.',
     href: '/calculators/wedding-alcohol-calculator',
-    icon: 'cube' as const,
-    color: 'purple' as const,
-    status: 'live' as const,
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
   },
   {
-    title: 'Hourly to Annual Salary',
-    description: 'Convert your hourly rate to an annual salary with tax adjustments and see your real take-home pay.',
+    title: 'Hourly to Salary',
+    description: 'Convert hourly rate to annual salary with tax adjustments and take-home pay.',
     href: '/calculators/hourly-to-salary-calculator',
-    icon: 'calculator' as const,
-    color: 'green' as const,
-    status: 'live' as const,
+    icon: 'calculator',
+    color: 'green',
+    category: 'Income',
+    mostUsed: false,
   },
   {
-    title: 'Savings Goal Calculator',
-    description: 'Calculate monthly contributions needed to reach your savings goal, adjusted for inflation and interest.',
+    title: 'Savings Goal',
+    description: 'Calculate monthly contributions to reach your savings goal with inflation.',
     href: '/calculators/savings-goal-calculator',
-    icon: 'chart' as const,
-    color: 'yellow' as const,
-    status: 'live' as const,
+    icon: 'chart',
+    color: 'accent',
+    category: 'Planning',
+    mostUsed: false,
   },
   {
-    title: 'Side Hustle Profitability',
-    description: 'Determine if your side hustle is truly profitable by calculating your effective hourly rate and net profit.',
+    title: 'Side Hustle Profit',
+    description: 'Determine if your side hustle is truly profitable with effective hourly rate.',
     href: '/calculators/side-hustle-profitability-calculator',
-    icon: 'trending' as const,
-    color: 'red' as const,
-    status: 'live' as const,
+    icon: 'trending',
+    color: 'coral',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Emergency Fund',
+    description: 'Calculate your ideal emergency fund size based on expenses and stability.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield',
+    color: 'violet',
+    category: 'Planning',
+    mostUsed: false,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate paint needed for any room with gallons and shopping list.',
+    href: '/calculators/paint-calculator',
+    icon: 'cube',
+    color: 'violet',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Electricity Cost',
+    description: 'Calculate appliance running costs - daily, monthly, and yearly.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of salary increases and career compounding.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending',
+    color: 'ocean',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Break-Even Point',
+    description: 'Calculate how many units you need to sell to cover business costs.',
+    href: '/calculators/break-even-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat, sides, and supplies for your cookout or BBQ party.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly payments, total interest, and loan costs for your home.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home',
+    color: 'green',
+    category: 'Planning',
+    mostUsed: false,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and see healthy weight ranges.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart',
+    color: 'violet',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Compound Interest',
+    description: 'See how investments grow over time with the power of compound interest.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart',
+    color: 'accent',
+    category: 'Planning',
+    mostUsed: false,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, temperature, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap',
+    color: 'blue',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age in years, months, days with zodiac signs.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar',
+    color: 'violet',
+    category: 'Everyday',
+    mostUsed: false,
   },
 ];
+
+// Get unique categories
+const categories = ['All', ...new Set(calculators.map(c => c.category))];
+
+// Color mapping for icons
+const iconColors: Record<string, string> = {
+  blue: 'from-blue-500 to-blue-600',
+  green: 'from-emerald-500 to-emerald-600',
+  accent: 'from-[#c4ff00] to-[#9acc00]',
+  violet: 'from-violet-500 to-purple-600',
+  coral: 'from-rose-500 to-red-500',
+  ocean: 'from-cyan-500 to-teal-500',
+  amber: 'from-amber-500 to-orange-500',
+};
+
+// Icon SVG paths
+const iconPaths: Record<string, string> = {
+  dollar: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  percent: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  chart: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  glass: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  trending: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  cube: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
+  bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
+  fire: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  swap: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+  calendar: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+};
+
+// Category colors
+const categoryColors: Record<string, string> = {
+  Income: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+  Planning: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+  Business: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+  Events: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  Home: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  Everyday: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  Health: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+};
 ---
 
 <BaseLayout title={title} description={description}>
   <!-- Hero Section -->
-  <section class="text-center py-12">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-      Boring Math, Made Easy
-    </h1>
-    <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-      Free online calculators for everyday math problems. No ads, no tracking, just simple calculations.
-    </p>
+  <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden px-6 py-16">
+    <!-- Floating geometric elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      <div class="absolute top-20 left-[10%] w-20 h-20 border border-white/10 rounded-2xl rotate-12 animate-float"></div>
+      <div class="absolute top-40 right-[15%] w-16 h-16 border border-[var(--color-accent)]/20 rounded-full animate-float" style="animation-delay: -2s;"></div>
+      <div class="absolute bottom-32 left-[20%] w-12 h-12 bg-[var(--color-accent)]/10 rounded-lg rotate-45 animate-float" style="animation-delay: -4s;"></div>
+      <div class="absolute bottom-48 right-[25%] w-24 h-24 border border-violet-500/20 rounded-3xl -rotate-12 animate-float" style="animation-delay: -1s;"></div>
+    </div>
+
+    <div class="relative max-w-6xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-slide-up">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+        <span class="text-sm text-[var(--color-subtle)]">17 Free Calculators</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-display mb-6 animate-slide-up delay-100" style="opacity: 0;">
+        <span class="text-[var(--color-cream)]">Boring</span>
+        <span class="relative inline-block mx-2">
+          <span class="gradient-text">Math</span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3 text-[var(--color-accent)]" viewBox="0 0 100 12" preserveAspectRatio="none">
+            <path d="M0,8 Q50,0 100,8" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <br class="md:hidden" />
+        <span class="text-[var(--color-cream)]">Made</span>
+        <span class="font-display italic text-[var(--color-accent)]"> Easy</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-10 animate-slide-up delay-200" style="opacity: 0;">
+        Free, beautiful calculators for freelancers, planners, and anyone who needs
+        <span class="text-[var(--color-cream)]">quick answers</span> to everyday math problems.
+        <span class="text-[var(--color-accent)]">No ads. No tracking.</span>
+      </p>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">17</div>
+          <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
+        </div>
+        <div class="text-center border-x border-white/10">
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-accent)]">0</div>
+          <div class="text-micro text-[var(--color-muted)] mt-1">Ads</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">100%</div>
+          <div class="text-micro text-[var(--color-muted)] mt-1">Free</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Calculators Preview Section -->
-  <section class="py-8">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">
-      Popular Calculators
-    </h2>
+  <!-- Calculators Section with Category Filter -->
+  <section class="relative px-6 py-16" id="calculators">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <span class="text-micro text-[var(--color-accent)] mb-4 block">Browse Tools</span>
+        <h2 class="text-headline text-[var(--color-cream)] mb-4">All Calculators</h2>
+        <p class="text-[var(--color-subtle)] max-w-xl mx-auto">
+          Find the tool you need and get instant answers.
+        </p>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {calculators.map((calc) => (
-        <CalculatorCard
-          title={calc.title}
-          description={calc.description}
-          href={calc.href}
-          icon={calc.icon}
-          color={calc.color}
-          status={calc.status}
-        />
-      ))}
-
-      <!-- More Coming Soon Placeholder -->
-      <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl border border-gray-200 p-6 flex items-center justify-center">
-        <div class="text-center">
-          <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      <!-- Search Bar -->
+      <div class="max-w-xl mx-auto mb-8">
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <h3 class="text-xl font-semibold text-gray-700 mb-2">More Calculators</h3>
-          <p class="text-gray-600">
-            We're adding new calculators regularly. Check back soon!
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search calculators..."
+            class="w-full pl-12 pr-4 py-4 bg-[var(--color-charcoal)] border border-white/10 rounded-2xl
+                   text-[var(--color-cream)] placeholder:text-[var(--color-muted)]
+                   focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20
+                   transition-all duration-300"
+          />
+          <button
+            id="clear-search"
+            class="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)] hover:text-[var(--color-cream)] hidden"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10" id="category-filter">
+        <!-- Favorites toggle -->
+        <button
+          class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border
+                 text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]
+                 flex items-center gap-2"
+          data-category="Favorites"
+          id="favorites-filter"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+          </svg>
+          Favorites
+        </button>
+        {categories.map((category, index) => (
+          <button
+            class:list={[
+              "category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border",
+              index === 0
+                ? "text-[var(--color-void)] bg-[var(--color-accent)] border-transparent"
+                : "text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]"
+            ]}
+            data-category={category}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      <!-- Calculators Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="calculators-grid">
+        {calculators.map((calc, index) => (
+          <div
+            class="calculator-card bento-card group relative glow"
+            data-category={calc.category}
+            data-title={calc.title.toLowerCase()}
+            data-description={calc.description.toLowerCase()}
+            data-href={calc.href}
+            style={`animation-delay: ${index * 50}ms;`}
+          >
+            <!-- Favorite Button -->
+            <button
+              class="favorite-btn absolute top-6 left-6 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center
+                     hover:bg-[var(--color-accent)]/20 transition-all duration-300 z-10"
+              data-calc-id={calc.href}
+              aria-label="Add to favorites"
+            >
+              <svg class="w-4 h-4 favorite-icon text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+              </svg>
+            </button>
+
+            <!-- Most Used Badge (top right) -->
+            {calc.mostUsed && (
+              <div class="absolute top-6 right-6 px-3 py-1 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
+                <span class="text-xs text-[var(--color-accent)] font-medium">Most Used</span>
+              </div>
+            )}
+
+            <!-- Category Badge (top right, only if not mostUsed) -->
+            {!calc.mostUsed && (
+              <div class={`absolute top-6 right-6 px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[calc.category]}`}>
+                {calc.category}
+              </div>
+            )}
+
+            <!-- Main card link -->
+            <a href={calc.href} class="block">
+              <!-- Icon -->
+              <div class:list={[
+                "card-icon",
+                `bg-gradient-to-br ${iconColors[calc.color]}`
+              ]}>
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[calc.icon]} />
+                </svg>
+              </div>
+
+              <!-- Content -->
+              <h3 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors pr-20">
+                {calc.title}
+              </h3>
+              <p class="text-sm text-[var(--color-subtle)] leading-relaxed mb-8">
+                {calc.description}
+              </p>
+
+              <!-- Category label (bottom left, only for mostUsed) -->
+              {calc.mostUsed && (
+                <div class={`absolute bottom-6 left-6 px-2 py-0.5 rounded text-xs font-medium ${categoryColors[calc.category]}`}>
+                  {calc.category}
+                </div>
+              )}
+
+              <!-- Arrow -->
+              <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-all duration-500">
+                <svg class="w-5 h-5 text-[var(--color-subtle)] group-hover:text-[var(--color-void)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State (hidden by default) -->
+      <div id="empty-state" class="hidden text-center py-16">
+        <div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <p class="text-[var(--color-subtle)]">No calculators found in this category.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="relative px-6 py-20">
+    <div class="max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <span class="text-micro text-[var(--color-accent)] mb-4 block">Why Boring Math?</span>
+        <h2 class="text-headline text-[var(--color-cream)] mb-4">Built Different</h2>
+        <p class="text-[var(--color-subtle)] max-w-xl mx-auto">
+          We believe calculators should be fast, beautiful, and respect your privacy.
+        </p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="glass rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-title text-[var(--color-cream)] mb-3">Instant Results</h3>
+          <p class="text-[var(--color-subtle)]">
+            Results update as you type. No submit buttons, no page reloads, no waiting.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="glass rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-title text-[var(--color-cream)] mb-3">100% Private</h3>
+          <p class="text-[var(--color-subtle)]">
+            All calculations happen in your browser. We never see, store, or sell your data.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="glass rounded-2xl p-8 text-center">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="text-title text-[var(--color-cream)] mb-3">Made with Care</h3>
+          <p class="text-[var(--color-subtle)]">
+            Every calculator is thoughtfully designed for real-world use cases and accuracy.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="py-16 mt-16 bg-white rounded-lg shadow-sm">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Use Boring Math?</h2>
-      <p class="text-gray-600 max-w-2xl mx-auto">
-        Simple, accurate calculators for real-world problems
-      </p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
-      <div class="text-center">
-        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">Fast & Simple</h3>
-        <p class="text-gray-600">
-          No sign-ups, no complexity. Just enter your numbers and get instant results.
-        </p>
-      </div>
-
-      <div class="text-center">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">Accurate Results</h3>
-        <p class="text-gray-600">
-          Reliable calculations you can trust for important financial decisions.
-        </p>
-      </div>
-
-      <div class="text-center">
-        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">Privacy First</h3>
-        <p class="text-gray-600">
-          Your data stays in your browser. We don't track, store, or sell your information.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
-  <section class="text-center py-16">
-    <h2 class="text-3xl font-bold text-gray-900 mb-4">
-      Ready to make boring math easy?
-    </h2>
-    <p class="text-xl text-gray-600 mb-8">
-      Choose a calculator above and start calculating.
-    </p>
+  <section class="relative px-6 py-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="relative card-elevated rounded-3xl p-12 md:p-16 text-center overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative">
+          <h2 class="text-headline text-[var(--color-cream)] mb-4">
+            Ready to make math <span class="text-[var(--color-accent)]">easy</span>?
+          </h2>
+          <p class="text-[var(--color-subtle)] text-lg mb-8 max-w-xl mx-auto">
+            Pick a calculator above and get your answer in seconds. It's free, it's fast, and it just works.
+          </p>
+          <a href="#calculators" class="btn-primary inline-flex">
+            <span>Browse Calculators</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Calculator filtering, search, and favorites functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.category-btn');
+    const calculatorCards = document.querySelectorAll('.calculator-card');
+    const emptyState = document.getElementById('empty-state');
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const clearSearch = document.getElementById('clear-search');
+    const favoritesFilter = document.getElementById('favorites-filter');
+
+    // Favorites management
+    const FAVORITES_KEY = 'boring-math-favorites';
+
+    function getFavorites(): string[] {
+      try {
+        return JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveFavorites(favorites: string[]) {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(calcId: string) {
+      const favorites = getFavorites();
+      const index = favorites.indexOf(calcId);
+      if (index === -1) {
+        favorites.push(calcId);
+      } else {
+        favorites.splice(index, 1);
+      }
+      saveFavorites(favorites);
+      updateFavoriteButtons();
+    }
+
+    function updateFavoriteButtons() {
+      const favorites = getFavorites();
+      document.querySelectorAll('.favorite-btn').forEach(btn => {
+        const calcId = btn.getAttribute('data-calc-id');
+        const icon = btn.querySelector('.favorite-icon');
+        if (calcId && favorites.includes(calcId)) {
+          icon?.classList.remove('text-[var(--color-muted)]');
+          icon?.classList.add('text-[var(--color-accent)]');
+          icon?.setAttribute('fill', 'currentColor');
+        } else {
+          icon?.classList.add('text-[var(--color-muted)]');
+          icon?.classList.remove('text-[var(--color-accent)]');
+          icon?.setAttribute('fill', 'none');
+        }
+      });
+    }
+
+    // Initialize favorite buttons
+    updateFavoriteButtons();
+
+    // Favorite button click handlers
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const calcId = btn.getAttribute('data-calc-id');
+        if (calcId) {
+          toggleFavorite(calcId);
+        }
+      });
+    });
+
+    // Current filter state
+    let currentCategory = 'All';
+    let currentSearch = '';
+    let showingFavorites = false;
+
+    function filterCards() {
+      const favorites = getFavorites();
+      let visibleCount = 0;
+
+      calculatorCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        const cardTitle = card.getAttribute('data-title') || '';
+        const cardDescription = card.getAttribute('data-description') || '';
+        const cardHref = card.getAttribute('data-href') || '';
+
+        // Check category filter
+        const matchesCategory = currentCategory === 'All' || cardCategory === currentCategory;
+
+        // Check search filter
+        const searchLower = currentSearch.toLowerCase();
+        const matchesSearch = !currentSearch ||
+          cardTitle.includes(searchLower) ||
+          cardDescription.includes(searchLower);
+
+        // Check favorites filter
+        const matchesFavorites = !showingFavorites || favorites.includes(cardHref);
+
+        if (matchesCategory && matchesSearch && matchesFavorites) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      // Show/hide empty state
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    // Category filter click handlers
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+
+        if (category === 'Favorites') {
+          showingFavorites = !showingFavorites;
+          if (showingFavorites) {
+            button.classList.remove('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+            button.classList.add('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+          } else {
+            button.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+            button.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+          }
+        } else {
+          currentCategory = category || 'All';
+          showingFavorites = false;
+
+          // Update button styles
+          filterButtons.forEach(btn => {
+            if (btn.getAttribute('data-category') !== 'Favorites') {
+              btn.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+              btn.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+            }
+          });
+          button.classList.remove('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+          button.classList.add('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+
+          // Reset favorites filter button
+          if (favoritesFilter) {
+            favoritesFilter.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+            favoritesFilter.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+          }
+        }
+
+        filterCards();
+      });
+    });
+
+    // Search functionality
+    searchInput?.addEventListener('input', () => {
+      currentSearch = searchInput.value;
+      filterCards();
+
+      // Show/hide clear button
+      if (clearSearch) {
+        clearSearch.classList.toggle('hidden', !currentSearch);
+      }
+    });
+
+    clearSearch?.addEventListener('click', () => {
+      if (searchInput) {
+        searchInput.value = '';
+        currentSearch = '';
+        filterCards();
+        clearSearch.classList.add('hidden');
+        searchInput.focus();
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Animation for initial load */
+  @keyframes hero-slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: hero-slide-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .calculator-card {
+    animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes card-appear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 ---
 /**
- * Content Section Component
+ * Content Section Component - Dark Theme
  *
  * Displays a prose content section with a heading.
  * Used for "How to Use" and "Understanding Results" sections.
@@ -14,9 +14,21 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<section class="prose prose-lg max-w-none mb-12">
-  <h2 class="text-2xl font-bold text-gray-900 mb-4">
+<section class="mb-12">
+  <h2 class="text-2xl font-display text-[var(--color-cream)] mb-4">
     {title}
   </h2>
-  <slot />
+  <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed prose-invert">
+    <slot />
+  </div>
 </section>
+
+<style>
+  div :global(p) {
+    color: var(--color-subtle);
+  }
+  div :global(strong) {
+    color: var(--color-cream);
+    font-weight: 600;
+  }
+</style>

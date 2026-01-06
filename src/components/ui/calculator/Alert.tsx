@@ -13,29 +13,29 @@ export interface AlertProps {
 
 const VARIANT_STYLES = {
   info: {
-    container: 'bg-blue-50 border-blue-200',
-    icon: 'text-blue-500',
-    text: 'text-blue-800',
+    container: 'bg-blue-950/30 border-blue-500/30',
+    icon: 'text-blue-400',
+    text: 'text-blue-200',
   },
   warning: {
-    container: 'bg-amber-50 border-amber-200',
-    icon: 'text-amber-500',
-    text: 'text-amber-800',
+    container: 'bg-amber-950/30 border-amber-500/30',
+    icon: 'text-amber-400',
+    text: 'text-amber-200',
   },
   error: {
-    container: 'bg-red-50 border-red-200',
-    icon: 'text-red-500',
-    text: 'text-red-800',
+    container: 'bg-rose-950/30 border-rose-500/30',
+    icon: 'text-rose-400',
+    text: 'text-rose-200',
   },
   success: {
-    container: 'bg-green-50 border-green-200',
-    icon: 'text-green-500',
-    text: 'text-green-800',
+    container: 'bg-emerald-950/30 border-emerald-500/30',
+    icon: 'text-emerald-400',
+    text: 'text-emerald-200',
   },
   tip: {
-    container: 'bg-amber-50 border-amber-200',
-    icon: 'text-amber-500',
-    text: 'text-amber-800',
+    container: 'bg-[var(--color-accent)]/10 border-[var(--color-accent)]/30',
+    icon: 'text-[var(--color-accent)]',
+    text: 'text-[var(--color-cream)]',
   },
 };
 
@@ -69,18 +69,7 @@ const VARIANT_ICONS = {
 
 /**
  * Alert component for displaying tips, warnings, and errors.
- *
- * @example
- * ```tsx
- * <Alert variant="tip" title="Pro tip:">
- *   Most freelancers only bill 70-80% of working days due to admin,
- *   marketing, and gaps between projects.
- * </Alert>
- *
- * <Alert variant="warning">
- *   Remember: Your goal will have reduced purchasing power due to inflation.
- * </Alert>
- * ```
+ * Updated for dark theme.
  */
 export function Alert({
   variant = 'info',

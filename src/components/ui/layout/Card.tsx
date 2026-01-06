@@ -12,9 +12,9 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const VARIANT_CLASSES = {
-  default: 'bg-white rounded-2xl',
-  elevated: 'bg-white rounded-2xl shadow-xl',
-  bordered: 'bg-white rounded-2xl border border-gray-200',
+  default: 'bg-[var(--color-charcoal)] rounded-2xl',
+  elevated: 'bg-gradient-to-b from-[var(--color-slate)] to-[var(--color-charcoal)] rounded-2xl shadow-xl border border-white/5',
+  bordered: 'bg-[var(--color-charcoal)] rounded-2xl border border-white/10',
 };
 
 const PADDING_CLASSES = {

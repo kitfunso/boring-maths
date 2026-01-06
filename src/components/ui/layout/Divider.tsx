@@ -15,20 +15,12 @@ const SPACING_CLASSES = {
 
 /**
  * Horizontal divider for separating content sections.
- *
- * @example
- * ```tsx
- * <div className="space-y-6">
- *   <InputSection />
- *   <Divider spacing="lg" />
- *   <ResultsSection />
- * </div>
- * ```
+ * Updated for dark theme.
  */
 export function Divider({ spacing = 'lg', className = '', ...props }: DividerProps) {
   return (
     <div
-      className={`border-t border-gray-200 ${SPACING_CLASSES[spacing]} ${className}`}
+      className={`border-t border-white/10 ${SPACING_CLASSES[spacing]} ${className}`}
       role="separator"
       {...props}
     />

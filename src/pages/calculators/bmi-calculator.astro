@@ -1,0 +1,124 @@
+---
+/**
+ * BMI Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BMICalculator from '../../components/calculators/BMICalculator/BMICalculator';
+
+const title = 'BMI Calculator | Body Mass Index & Health Assessment';
+const description = 'Free BMI calculator to check your body mass index. Supports metric and imperial units with health category classifications and healthy weight ranges.';
+const keywords = 'bmi calculator, body mass index, weight calculator, health calculator, healthy weight';
+const canonicalURL = '/calculators/bmi-calculator';
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'BMI Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between different units of measurement.',
+    href: '/calculators/unit-converter',
+    icon: 'clock' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is BMI and how is it calculated?",
+    answer: "Body Mass Index (BMI) is calculated by dividing your weight in kilograms by your height in meters squared (kg/m²). It's a simple screening tool to categorize weight status but doesn't directly measure body fat."
+  },
+  {
+    question: "What are the BMI categories?",
+    answer: "BMI categories are: Underweight (below 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), and Obese (30 and above). These ranges are the same for all adults regardless of age or gender."
+  },
+  {
+    question: "Is BMI accurate for everyone?",
+    answer: "BMI has limitations. It doesn't account for muscle mass, bone density, or body composition. Athletes may have a high BMI but low body fat, while older adults may have normal BMI but high body fat."
+  },
+  {
+    question: "What is a healthy BMI range?",
+    answer: "A healthy BMI is generally between 18.5 and 24.9. However, optimal weight depends on many factors including age, muscle mass, and overall health. Consult a healthcare provider for personalized guidance."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'BMI Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="BMI Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="BMI Calculator"
+    description="Calculate your Body Mass Index and see where you fall on the health scale."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <BMICalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your preferred <strong>unit system</strong> - metric (kilograms and
+      centimeters) or imperial (pounds and feet/inches).
+    </p>
+    <p>
+      Enter your <strong>height</strong> accurately. For imperial, enter feet and
+      inches separately. Stand straight against a wall for the most accurate measurement.
+    </p>
+    <p>
+      Enter your <strong>weight</strong>. For best results, weigh yourself in the
+      morning before eating, wearing minimal clothing.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Your <strong>BMI score</strong> is shown with its corresponding health category.
+      This gives you a general indication of whether your weight is appropriate for your height.
+    </p>
+    <p>
+      The <strong>healthy weight range</strong> shows the weight range that would
+      give you a normal BMI. This can help set realistic weight goals.
+    </p>
+    <p>
+      Remember that BMI is just one indicator of health. <strong>Body composition</strong>,
+      fitness level, and other factors are equally important. Consult a healthcare
+      provider for a complete health assessment.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

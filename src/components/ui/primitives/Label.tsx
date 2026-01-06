@@ -13,12 +13,7 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 /**
  * Form label component with optional required indicator and badge.
- *
- * @example
- * ```tsx
- * <Label htmlFor="salary" required>Annual Salary</Label>
- * <Label htmlFor="benefits" badge="Optional">Benefits Value</Label>
- * ```
+ * Updated for dark theme.
  */
 export function Label({
   children,
@@ -29,13 +24,13 @@ export function Label({
 }: LabelProps) {
   return (
     <label
-      className={`block text-sm font-medium text-gray-700 mb-2 ${className}`}
+      className={`block text-sm font-medium text-[var(--color-cream)] mb-2 ${className}`}
       {...props}
     >
       {children}
-      {required && <span className="text-red-500 ml-1">*</span>}
+      {required && <span className="text-[var(--color-accent)] ml-1">*</span>}
       {badge && (
-        <span className="text-gray-400 font-normal ml-2">({badge})</span>
+        <span className="text-[var(--color-muted)] font-normal ml-2">({badge})</span>
       )}
     </label>
   );

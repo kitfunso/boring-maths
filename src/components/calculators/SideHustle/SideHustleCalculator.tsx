@@ -98,16 +98,16 @@ export default function SideHustleCalculator() {
 
             {/* Expenses Section - Compact inputs */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Monthly Expenses
               </h3>
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <div>
-                  <label htmlFor="monthlyExpenses" className="block text-xs text-gray-600 mb-1">
+                  <label htmlFor="monthlyExpenses" className="block text-xs text-[var(--color-muted)] mb-1">
                     Materials/Supplies
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-sm">
                       {currencySymbol}
                     </span>
                     <input
@@ -117,18 +117,18 @@ export default function SideHustleCalculator() {
                       min="0"
                       value={inputs.monthlyExpenses}
                       onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
-                      className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg
-                                 focus:border-red-500 focus:ring-2 focus:ring-red-100 tabular-nums"
+                      className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
+                                 text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="marketingSpend" className="block text-xs text-gray-600 mb-1">
+                  <label htmlFor="marketingSpend" className="block text-xs text-[var(--color-muted)] mb-1">
                     Marketing/Ads
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-sm">
                       {currencySymbol}
                     </span>
                     <input
@@ -138,18 +138,18 @@ export default function SideHustleCalculator() {
                       min="0"
                       value={inputs.marketingSpend}
                       onChange={(e) => updateInput('marketingSpend', Number(e.target.value))}
-                      className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg
-                                 focus:border-red-500 focus:ring-2 focus:ring-red-100 tabular-nums"
+                      className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
+                                 text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="toolsCost" className="block text-xs text-gray-600 mb-1">
+                  <label htmlFor="toolsCost" className="block text-xs text-[var(--color-muted)] mb-1">
                     Software/Tools
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-sm">
                       {currencySymbol}
                     </span>
                     <input
@@ -159,18 +159,18 @@ export default function SideHustleCalculator() {
                       min="0"
                       value={inputs.toolsCost}
                       onChange={(e) => updateInput('toolsCost', Number(e.target.value))}
-                      className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg
-                                 focus:border-red-500 focus:ring-2 focus:ring-red-100 tabular-nums"
+                      className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
+                                 text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="otherCosts" className="block text-xs text-gray-600 mb-1">
+                  <label htmlFor="otherCosts" className="block text-xs text-[var(--color-muted)] mb-1">
                     Other Costs
                   </label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-sm">
                       {currencySymbol}
                     </span>
                     <input
@@ -180,13 +180,13 @@ export default function SideHustleCalculator() {
                       min="0"
                       value={inputs.otherCosts}
                       onChange={(e) => updateInput('otherCosts', Number(e.target.value))}
-                      className="w-full pl-7 pr-3 py-2 text-sm border border-gray-200 rounded-lg
-                                 focus:border-red-500 focus:ring-2 focus:ring-red-100 tabular-nums"
+                      className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
+                                 text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
                   </div>
                 </div>
               </Grid>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-[var(--color-muted)] mt-2">
                 Total expenses: {formatCurrency(result.totalExpenses, inputs.currency)}/month
               </p>
             </div>
@@ -204,7 +204,7 @@ export default function SideHustleCalculator() {
                   value={inputs.mainJobHourlyRate}
                   onChange={(e) => updateInput('mainJobHourlyRate', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">For opportunity cost comparison</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">For opportunity cost comparison</p>
               </div>
 
               <div>
@@ -218,7 +218,7 @@ export default function SideHustleCalculator() {
                   value={Math.round(inputs.taxRate * 100)}
                   onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-gray-500 mt-1">
+                <p className="text-sm text-[var(--color-muted)] mt-1">
                   {region === 'US' && 'Include self-employment tax (15.3%)'}
                   {region === 'UK' && 'Include National Insurance'}
                   {region === 'EU' && 'Include social contributions'}
@@ -234,20 +234,20 @@ export default function SideHustleCalculator() {
             {/* Verdict Banner */}
             <div className={`rounded-2xl p-6 text-center ${
               result.beatsMainJob
-                ? 'bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200'
+                ? 'bg-gradient-to-br from-green-950/50 to-green-900/30 border-2 border-green-500/30'
                 : result.isProfitable
-                ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200'
-                : 'bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200'
+                ? 'bg-gradient-to-br from-yellow-950/50 to-yellow-900/30 border-2 border-yellow-500/30'
+                : 'bg-gradient-to-br from-red-950/50 to-red-900/30 border-2 border-red-500/30'
             }`}>
               <div className="text-4xl mb-2">
                 {result.beatsMainJob ? '🎉' : result.isProfitable ? '🤔' : '⚠️'}
               </div>
               <p className={`text-lg font-semibold ${
                 result.beatsMainJob
-                  ? 'text-green-700'
+                  ? 'text-green-400'
                   : result.isProfitable
-                  ? 'text-yellow-700'
-                  : 'text-red-700'
+                  ? 'text-yellow-400'
+                  : 'text-red-400'
               }`}>
                 {result.beatsMainJob
                   ? 'Your side hustle beats your main job rate!'
@@ -286,36 +286,36 @@ export default function SideHustleCalculator() {
             </Grid>
 
             {/* Opportunity Cost Analysis */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Opportunity Cost Analysis
               </h3>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div className="text-center sm:text-left">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">
+                  <p className="text-xs text-[var(--color-muted)] uppercase tracking-wide">
                     If you worked these hours at main job
                   </p>
-                  <p className="text-2xl font-bold text-gray-700 tabular-nums">
+                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {formatCurrency(result.opportunityCost, result.currency)}
                   </p>
-                  <p className="text-xs text-gray-500">{result.hoursPerMonth} hours/month</p>
+                  <p className="text-xs text-[var(--color-muted)]">{result.hoursPerMonth} hours/month</p>
                 </div>
 
                 <div className="text-center">
-                  <p className={`text-xl font-bold ${result.netVsMainJob >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <p className={`text-xl font-bold ${result.netVsMainJob >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {result.netVsMainJob >= 0 ? '+' : ''}{formatCurrency(result.netVsMainJob, result.currency)}
                   </p>
-                  <p className="text-xs text-gray-500">vs main job</p>
+                  <p className="text-xs text-[var(--color-muted)]">vs main job</p>
                 </div>
 
                 <div className="text-center sm:text-right">
-                  <p className="text-xs text-gray-500 uppercase tracking-wide">
+                  <p className="text-xs text-[var(--color-muted)] uppercase tracking-wide">
                     Break-even revenue
                   </p>
-                  <p className="text-2xl font-bold text-gray-700 tabular-nums">
+                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {formatCurrency(result.breakEvenRevenue, result.currency)}
                   </p>
-                  <p className="text-xs text-gray-500">minimum needed</p>
+                  <p className="text-xs text-[var(--color-muted)]">minimum needed</p>
                 </div>
               </div>
             </div>

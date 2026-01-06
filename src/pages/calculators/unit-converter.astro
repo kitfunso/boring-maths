@@ -1,0 +1,136 @@
+---
+/**
+ * Unit Converter Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import UnitConverter from '../../components/calculators/UnitConverter/UnitConverter';
+
+const title = 'Unit Converter | Length, Weight, Temperature & More';
+const description = 'Free unit converter for length, weight, temperature, volume, area, and speed. Convert between metric and imperial units instantly.';
+const keywords = 'unit converter, metric converter, imperial converter, length converter, weight converter, temperature converter';
+const canonicalURL = '/calculators/unit-converter';
+const siteUrl = 'https://boring-math-calculators.vercel.app';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Unit Converter' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How do I convert Celsius to Fahrenheit?",
+    answer: "To convert Celsius to Fahrenheit, multiply by 9/5 (or 1.8) and add 32. The formula is: °F = (°C × 9/5) + 32. For example, 20°C = (20 × 1.8) + 32 = 68°F."
+  },
+  {
+    question: "How many feet are in a meter?",
+    answer: "One meter equals approximately 3.281 feet. To convert meters to feet, multiply by 3.281. To convert feet to meters, multiply by 0.3048."
+  },
+  {
+    question: "How do I convert pounds to kilograms?",
+    answer: "To convert pounds to kilograms, multiply by 0.4536. For example, 150 pounds = 150 × 0.4536 = 68 kg. To convert kg to pounds, multiply by 2.205."
+  },
+  {
+    question: "What's the difference between US and UK gallons?",
+    answer: "US gallons and UK (Imperial) gallons are different sizes. 1 US gallon = 3.785 liters, while 1 UK gallon = 4.546 liters. This converter uses US gallons."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Unit Converter', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Unit Converter"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Unit Converter"
+    description="Convert between different units of measurement instantly."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UnitConverter client:load />
+  </section>
+
+  <ContentSection title="How to Use This Converter">
+    <p>
+      Select a <strong>category</strong> - length, weight, temperature, volume,
+      area, or speed. Each category has different units available.
+    </p>
+    <p>
+      Enter the <strong>value</strong> you want to convert. The converter accepts
+      decimal numbers and will show results with appropriate precision.
+    </p>
+    <p>
+      Choose your <strong>from</strong> and <strong>to</strong> units. Use the
+      swap button to quickly reverse the conversion direction.
+    </p>
+    <p>
+      View <strong>all conversions</strong> at once to see how your value translates
+      across all available units in that category.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Supported Units">
+    <p>
+      <strong>Length:</strong> millimeters, centimeters, meters, kilometers,
+      inches, feet, yards, and miles.
+    </p>
+    <p>
+      <strong>Weight:</strong> milligrams, grams, kilograms, ounces, pounds, and stone.
+    </p>
+    <p>
+      <strong>Temperature:</strong> Celsius, Fahrenheit, and Kelvin.
+    </p>
+    <p>
+      <strong>Volume:</strong> milliliters, liters, gallons, quarts, pints,
+      cups, and fluid ounces.
+    </p>
+    <p>
+      <strong>Area:</strong> square meters, square kilometers, square feet,
+      square yards, acres, and hectares.
+    </p>
+    <p>
+      <strong>Speed:</strong> meters/second, kilometers/hour, miles/hour, and knots.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,10 +1,9 @@
 ---
 /**
- * Calculator Layout
+ * Calculator Layout - Dark Theme
  *
  * Extends BaseLayout with calculator-specific features:
  * - Breadcrumb navigation
- * - Ad placement slots
  * - Related calculators section
  * - Schema.org markup slots
  */
@@ -21,7 +20,7 @@ export interface RelatedCalculator {
   description: string;
   href: string;
   icon: string;
-  color: 'blue' | 'green' | 'purple' | 'red' | 'yellow';
+  color: 'blue' | 'green' | 'purple' | 'red' | 'yellow' | 'coral' | 'violet' | 'ocean' | 'amber';
 }
 
 export interface Props {
@@ -46,20 +45,29 @@ const {
 
 // Icon paths for related calculator cards
 const iconPaths: Record<string, string> = {
-  dollar: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
-  calculator: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
-  chart: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />',
-  trending: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />',
-  cube: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+  dollar: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />',
+  calculator: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+  chart: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />',
+  trending: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />',
+  cube: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />',
+  shield: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />',
+  bolt: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />',
+  fire: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />',
+  percent: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />',
+  glass: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />',
 };
 
-// Color classes for related calculator cards
-const colorClasses: Record<string, { bg: string; bgHover: string; text: string }> = {
-  blue: { bg: 'bg-blue-100', bgHover: 'group-hover:bg-blue-200', text: 'text-blue-600' },
-  green: { bg: 'bg-green-100', bgHover: 'group-hover:bg-green-200', text: 'text-green-600' },
-  purple: { bg: 'bg-purple-100', bgHover: 'group-hover:bg-purple-200', text: 'text-purple-600' },
-  red: { bg: 'bg-red-100', bgHover: 'group-hover:bg-red-200', text: 'text-red-600' },
-  yellow: { bg: 'bg-yellow-100', bgHover: 'group-hover:bg-yellow-200', text: 'text-yellow-600' },
+// Color classes for icons (dark theme)
+const colorClasses: Record<string, string> = {
+  blue: 'from-blue-500 to-blue-600',
+  green: 'from-emerald-500 to-emerald-600',
+  purple: 'from-violet-500 to-purple-600',
+  violet: 'from-violet-500 to-purple-600',
+  red: 'from-rose-500 to-red-500',
+  coral: 'from-rose-500 to-red-500',
+  yellow: 'from-amber-500 to-orange-500',
+  amber: 'from-amber-500 to-orange-500',
+  ocean: 'from-cyan-500 to-teal-500',
 };
 ---
 
@@ -72,25 +80,27 @@ const colorClasses: Record<string, { bg: string; bgHover: string; text: string }
   <!-- Schema.org markup slot -->
   <slot name="schema" />
 
-  <article class="max-w-4xl mx-auto">
+  <article class="max-w-4xl mx-auto px-6 py-8">
     <!-- Breadcrumb Navigation -->
     {breadcrumbs.length > 0 && (
-      <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <nav class="text-sm mb-8" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2 flex-wrap">
           <li>
-            <a href="/" class="hover:text-blue-600 transition-colors">Home</a>
+            <a href="/" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors">
+              Home
+            </a>
           </li>
           {breadcrumbs.map((crumb, index) => (
             <li class="flex items-center">
-              <svg class="w-4 h-4 mx-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 mx-2 text-[var(--color-muted)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
               </svg>
               {crumb.href ? (
-                <a href={crumb.href} class="hover:text-blue-600 transition-colors">
+                <a href={crumb.href} class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors">
                   {crumb.label}
                 </a>
               ) : (
-                <span class="text-gray-700" aria-current="page">{crumb.label}</span>
+                <span class="text-[var(--color-cream)]" aria-current="page">{crumb.label}</span>
               )}
             </li>
           ))}
@@ -98,58 +108,39 @@ const colorClasses: Record<string, { bg: string; bgHover: string; text: string }
       </nav>
     )}
 
-    <!-- Ad Slot: Above Calculator -->
-    {showAds && (
-      <div class="mb-6 text-center">
-        <div class="bg-gray-100 border border-gray-200 rounded-lg p-4 text-gray-400 text-sm">
-          <!-- AdSense placeholder - Replace with actual ad code -->
-          Ad Space (728x90)
-        </div>
-      </div>
-    )}
-
     <!-- Main Content Slot -->
     <slot />
 
-    <!-- Ad Slot: Below Results -->
-    {showAds && (
-      <div class="my-8 text-center">
-        <div class="bg-gray-100 border border-gray-200 rounded-lg p-8 text-gray-400 text-sm">
-          <!-- AdSense placeholder - Replace with actual ad code -->
-          Ad Space (300x250)
-        </div>
-      </div>
-    )}
-
     <!-- Related Calculators Section -->
     {relatedCalculators.length > 0 && (
-      <section class="mb-12">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+      <section class="mt-16 mb-12">
+        <h2 class="text-2xl font-display text-[var(--color-cream)] mb-6">
           Related Calculators
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {relatedCalculators.map((calc) => {
-            const colors = colorClasses[calc.color];
+            const gradientClass = colorClasses[calc.color] || colorClasses.blue;
             return (
               <a
                 href={calc.href}
-                class="group block bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-md transition-all"
+                class="group bento-card glow flex items-start gap-4"
               >
-                <div class="flex items-start gap-4">
-                  <div class={`w-12 h-12 ${colors.bg} rounded-lg flex items-center justify-center flex-shrink-0 ${colors.bgHover} transition-colors`}>
-                    <svg class={`w-6 h-6 ${colors.text}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <Fragment set:html={iconPaths[calc.icon] || iconPaths.calculator} />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
-                      {calc.title}
-                    </h3>
-                    <p class="text-gray-600 text-sm mt-1">
-                      {calc.description}
-                    </p>
-                  </div>
+                <div class={`w-12 h-12 bg-gradient-to-br ${gradientClass} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <Fragment set:html={iconPaths[calc.icon] || iconPaths.calculator} />
+                  </svg>
                 </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-display text-lg text-[var(--color-cream)] group-hover:text-[var(--color-accent)] transition-colors">
+                    {calc.title}
+                  </h3>
+                  <p class="text-[var(--color-subtle)] text-sm mt-1 line-clamp-2">
+                    {calc.description}
+                  </p>
+                </div>
+                <svg class="w-5 h-5 text-[var(--color-muted)] group-hover:text-[var(--color-accent)] group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
               </a>
             );
           })}
@@ -158,22 +149,30 @@ const colorClasses: Record<string, { bg: string; bgHover: string; text: string }
     )}
 
     <!-- Call to Action -->
-    <section class="text-center py-8 px-6 bg-blue-50 rounded-2xl">
-      <h2 class="text-xl font-semibold text-gray-900 mb-2">
-        Found this calculator helpful?
-      </h2>
-      <p class="text-gray-600 mb-4">
-        Check out our other free calculators for freelancers and small business owners.
-      </p>
-      <a
-        href="/calculators"
-        class="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-      >
-        View All Calculators
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+    <section class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden">
+      <!-- Background glow -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <div class="absolute -top-12 -right-12 w-32 h-32 bg-[var(--color-accent)]/10 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-violet-500/10 rounded-full blur-2xl"></div>
+      </div>
+
+      <div class="relative">
+        <h2 class="text-xl font-display text-[var(--color-cream)] mb-2">
+          Found this calculator helpful?
+        </h2>
+        <p class="text-[var(--color-subtle)] mb-6">
+          Check out our other free calculators for everyday math problems.
+        </p>
+        <a
+          href="/#calculators"
+          class="btn-primary inline-flex"
+        >
+          View All Calculators
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
     </section>
   </article>
 </BaseLayout>

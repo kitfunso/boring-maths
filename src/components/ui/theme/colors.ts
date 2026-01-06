@@ -1,5 +1,5 @@
 /**
- * Design System Color Tokens
+ * Design System Color Tokens - Dark Theme
  *
  * Maps theme colors to Tailwind CSS classes for consistent styling across components.
  */
@@ -7,7 +7,7 @@
 export type ThemeColor = 'blue' | 'green' | 'yellow' | 'red' | 'purple';
 
 export interface ColorTokens {
-  // Background colors
+  // Background colors (dark theme)
   bg50: string;
   bg100: string;
   bg600: string;
@@ -21,7 +21,7 @@ export interface ColorTokens {
   text700: string;
   // Focus ring
   ring100: string;
-  // Gradient classes
+  // Gradient classes (dark theme)
   gradientHeader: string;
   gradientResult: string;
   // Accent (slider, checkbox)
@@ -30,113 +30,113 @@ export interface ColorTokens {
 
 /**
  * Complete color token mappings for each theme color.
- * These map directly to Tailwind CSS classes.
+ * Updated for dark theme.
  */
 export const COLOR_TOKENS: Record<ThemeColor, ColorTokens> = {
   blue: {
-    bg50: 'bg-blue-50',
-    bg100: 'bg-blue-100',
+    bg50: 'bg-blue-950/30',
+    bg100: 'bg-blue-900/40',
     bg600: 'bg-blue-600',
     bg700: 'bg-blue-700',
-    border200: 'border-blue-200',
+    border200: 'border-blue-500/30',
     border500: 'border-blue-500',
-    text100: 'text-blue-100',
-    text600: 'text-blue-600',
-    text700: 'text-blue-700',
-    ring100: 'focus:ring-blue-100',
+    text100: 'text-blue-200',
+    text600: 'text-blue-400',
+    text700: 'text-blue-300',
+    ring100: 'focus:ring-blue-500/30',
     gradientHeader: 'bg-gradient-to-r from-blue-600 to-blue-700',
-    gradientResult: 'bg-gradient-to-br from-blue-50 to-blue-100',
+    gradientResult: 'bg-gradient-to-br from-blue-950/50 to-blue-900/30',
     accent: 'accent-blue-500',
   },
   green: {
-    bg50: 'bg-green-50',
-    bg100: 'bg-green-100',
-    bg600: 'bg-green-600',
-    bg700: 'bg-green-700',
-    border200: 'border-green-200',
-    border500: 'border-green-500',
-    text100: 'text-green-100',
-    text600: 'text-green-600',
-    text700: 'text-green-700',
-    ring100: 'focus:ring-green-100',
-    gradientHeader: 'bg-gradient-to-r from-green-600 to-green-700',
-    gradientResult: 'bg-gradient-to-br from-green-50 to-green-100',
-    accent: 'accent-green-500',
+    bg50: 'bg-emerald-950/30',
+    bg100: 'bg-emerald-900/40',
+    bg600: 'bg-emerald-600',
+    bg700: 'bg-emerald-700',
+    border200: 'border-emerald-500/30',
+    border500: 'border-emerald-500',
+    text100: 'text-emerald-200',
+    text600: 'text-emerald-400',
+    text700: 'text-emerald-300',
+    ring100: 'focus:ring-emerald-500/30',
+    gradientHeader: 'bg-gradient-to-r from-emerald-600 to-emerald-700',
+    gradientResult: 'bg-gradient-to-br from-emerald-950/50 to-emerald-900/30',
+    accent: 'accent-emerald-500',
   },
   yellow: {
-    bg50: 'bg-yellow-50',
-    bg100: 'bg-yellow-100',
-    bg600: 'bg-yellow-600',
-    bg700: 'bg-yellow-700',
-    border200: 'border-yellow-200',
-    border500: 'border-yellow-500',
-    text100: 'text-yellow-100',
-    text600: 'text-yellow-600',
-    text700: 'text-yellow-700',
-    ring100: 'focus:ring-yellow-100',
-    gradientHeader: 'bg-gradient-to-r from-yellow-500 to-yellow-600',
-    gradientResult: 'bg-gradient-to-br from-yellow-50 to-yellow-100',
-    accent: 'accent-yellow-500',
+    bg50: 'bg-amber-950/30',
+    bg100: 'bg-amber-900/40',
+    bg600: 'bg-amber-600',
+    bg700: 'bg-amber-700',
+    border200: 'border-amber-500/30',
+    border500: 'border-amber-500',
+    text100: 'text-amber-200',
+    text600: 'text-amber-400',
+    text700: 'text-amber-300',
+    ring100: 'focus:ring-amber-500/30',
+    gradientHeader: 'bg-gradient-to-r from-amber-500 to-amber-600',
+    gradientResult: 'bg-gradient-to-br from-amber-950/50 to-amber-900/30',
+    accent: 'accent-amber-500',
   },
   red: {
-    bg50: 'bg-red-50',
-    bg100: 'bg-red-100',
-    bg600: 'bg-red-600',
-    bg700: 'bg-red-700',
-    border200: 'border-red-200',
-    border500: 'border-red-500',
-    text100: 'text-red-100',
-    text600: 'text-red-600',
-    text700: 'text-red-700',
-    ring100: 'focus:ring-red-100',
-    gradientHeader: 'bg-gradient-to-r from-red-600 to-red-700',
-    gradientResult: 'bg-gradient-to-br from-red-50 to-red-100',
-    accent: 'accent-red-500',
+    bg50: 'bg-rose-950/30',
+    bg100: 'bg-rose-900/40',
+    bg600: 'bg-rose-600',
+    bg700: 'bg-rose-700',
+    border200: 'border-rose-500/30',
+    border500: 'border-rose-500',
+    text100: 'text-rose-200',
+    text600: 'text-rose-400',
+    text700: 'text-rose-300',
+    ring100: 'focus:ring-rose-500/30',
+    gradientHeader: 'bg-gradient-to-r from-rose-600 to-rose-700',
+    gradientResult: 'bg-gradient-to-br from-rose-950/50 to-rose-900/30',
+    accent: 'accent-rose-500',
   },
   purple: {
-    bg50: 'bg-purple-50',
-    bg100: 'bg-purple-100',
-    bg600: 'bg-purple-600',
-    bg700: 'bg-purple-700',
-    border200: 'border-purple-200',
-    border500: 'border-purple-500',
-    text100: 'text-purple-100',
-    text600: 'text-purple-600',
-    text700: 'text-purple-700',
-    ring100: 'focus:ring-purple-100',
-    gradientHeader: 'bg-gradient-to-r from-purple-600 to-purple-700',
-    gradientResult: 'bg-gradient-to-br from-purple-50 to-purple-100',
-    accent: 'accent-purple-500',
+    bg50: 'bg-violet-950/30',
+    bg100: 'bg-violet-900/40',
+    bg600: 'bg-violet-600',
+    bg700: 'bg-violet-700',
+    border200: 'border-violet-500/30',
+    border500: 'border-violet-500',
+    text100: 'text-violet-200',
+    text600: 'text-violet-400',
+    text700: 'text-violet-300',
+    ring100: 'focus:ring-violet-500/30',
+    gradientHeader: 'bg-gradient-to-r from-violet-600 to-violet-700',
+    gradientResult: 'bg-gradient-to-br from-violet-950/50 to-violet-900/30',
+    accent: 'accent-violet-500',
   },
 };
 
 /**
- * Semantic color mappings (not theme-dependent)
+ * Semantic color mappings (dark theme)
  */
 export const SEMANTIC_COLORS = {
   success: {
-    bg: 'bg-green-50',
-    border: 'border-green-200',
-    text: 'text-green-700',
-    icon: 'text-green-500',
+    bg: 'bg-emerald-950/30',
+    border: 'border-emerald-500/30',
+    text: 'text-emerald-300',
+    icon: 'text-emerald-400',
   },
   error: {
-    bg: 'bg-red-50',
-    border: 'border-red-200',
-    text: 'text-red-700',
-    icon: 'text-red-500',
+    bg: 'bg-rose-950/30',
+    border: 'border-rose-500/30',
+    text: 'text-rose-300',
+    icon: 'text-rose-400',
   },
   warning: {
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
-    text: 'text-amber-800',
-    icon: 'text-amber-500',
+    bg: 'bg-amber-950/30',
+    border: 'border-amber-500/30',
+    text: 'text-amber-300',
+    icon: 'text-amber-400',
   },
   info: {
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    text: 'text-blue-700',
-    icon: 'text-blue-500',
+    bg: 'bg-blue-950/30',
+    border: 'border-blue-500/30',
+    text: 'text-blue-300',
+    icon: 'text-blue-400',
   },
 };
 

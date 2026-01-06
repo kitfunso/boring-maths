@@ -1,0 +1,215 @@
+---
+/**
+ * About Page
+ *
+ * Information about Boring Math Calculators
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About | Boring Math Calculators';
+const description = 'Learn about Boring Math Calculators - free, privacy-focused calculators for everyday math problems. No ads, no tracking, just useful tools.';
+
+const features = [
+  {
+    icon: 'bolt',
+    title: 'Instant Results',
+    description: 'Results update as you type. No submit buttons, no page reloads, no waiting around.',
+  },
+  {
+    icon: 'shield',
+    title: '100% Private',
+    description: 'All calculations happen in your browser. We never see, store, or sell your data.',
+  },
+  {
+    icon: 'heart',
+    title: 'Made with Care',
+    description: 'Every calculator is thoughtfully designed for real-world use cases and accuracy.',
+  },
+  {
+    icon: 'code',
+    title: 'Open & Transparent',
+    description: 'Built with modern web technologies. Fast, accessible, and works on any device.',
+  },
+];
+
+const iconPaths: Record<string, string> = {
+  bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
+  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  code: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+};
+
+const stats = [
+  { value: '17', label: 'Calculators' },
+  { value: '0', label: 'Ads' },
+  { value: '0', label: 'Trackers' },
+  { value: '100%', label: 'Free' },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- Hero Section -->
+  <section class="relative px-6 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <span class="text-micro text-[var(--color-accent)] mb-4 block">About Us</span>
+      <h1 class="text-display text-[var(--color-cream)] mb-6">
+        Math doesn't have to be <span class="gradient-text">complicated</span>
+      </h1>
+      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto">
+        Boring Math Calculators was built with one simple goal: make everyday calculations
+        fast, accurate, and pleasant to use. No clutter, no distractions, just the answer you need.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="px-6 py-12">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map((stat) => (
+          <div class="glass rounded-2xl p-6 text-center">
+            <div class="text-4xl md:text-5xl font-display text-[var(--color-accent)] mb-2">
+              {stat.value}
+            </div>
+            <div class="text-sm text-[var(--color-muted)]">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass rounded-3xl p-8 md:p-12">
+        <h2 class="text-headline text-[var(--color-cream)] mb-6">Our Mission</h2>
+        <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed">
+          <p>
+            We believe that useful tools should be <strong class="text-[var(--color-cream)]">free and accessible</strong> to everyone.
+            That's why every calculator on this site is completely free to use, with no account required,
+            no email signup, and no hidden paywalls.
+          </p>
+          <p>
+            In a world where most websites track your every move and bombard you with ads,
+            we chose a different path. <strong class="text-[var(--color-cream)]">Your privacy matters</strong>.
+            All calculations happen right in your browser - we never see your data, and we never will.
+          </p>
+          <p>
+            Each calculator is designed with <strong class="text-[var(--color-cream)]">real-world use cases</strong> in mind.
+            Whether you're a freelancer figuring out your day rate, planning your wedding,
+            or just trying to split a dinner bill, we've got you covered.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="px-6 py-16">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-micro text-[var(--color-accent)] mb-4 block">What Makes Us Different</span>
+        <h2 class="text-headline text-[var(--color-cream)]">Built for You</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {features.map((feature) => (
+          <div class="glass rounded-2xl p-8 group hover:border-[var(--color-accent)]/30 transition-colors">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[feature.icon]} />
+              </svg>
+            </div>
+            <h3 class="text-title text-[var(--color-cream)] mb-3">{feature.title}</h3>
+            <p class="text-[var(--color-subtle)]">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass rounded-3xl p-8 md:p-12">
+        <h2 class="text-headline text-[var(--color-cream)] mb-6">How It's Built</h2>
+        <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed">
+          <p>
+            Boring Math Calculators is built with modern, performant technologies:
+          </p>
+          <ul class="space-y-2 ml-4">
+            <li class="flex items-start gap-3">
+              <span class="text-[var(--color-accent)]">•</span>
+              <span><strong class="text-[var(--color-cream)]">Astro</strong> - For blazing fast static site generation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[var(--color-accent)]">•</span>
+              <span><strong class="text-[var(--color-cream)]">React</strong> - For interactive calculator components</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[var(--color-accent)]">•</span>
+              <span><strong class="text-[var(--color-cream)]">Tailwind CSS</strong> - For beautiful, responsive styling</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-[var(--color-accent)]">•</span>
+              <span><strong class="text-[var(--color-cream)]">TypeScript</strong> - For type-safe, reliable code</span>
+            </li>
+          </ul>
+          <p>
+            The result? A site that loads instantly, works offline, and provides a smooth
+            experience on any device.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="card-elevated rounded-3xl p-12 text-center relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative">
+          <h2 class="text-headline text-[var(--color-cream)] mb-4">
+            Ready to calculate?
+          </h2>
+          <p class="text-[var(--color-subtle)] text-lg mb-8 max-w-xl mx-auto">
+            Pick a calculator and get your answer in seconds.
+          </p>
+          <a href="/#calculators" class="btn-primary inline-flex">
+            <span>Browse Calculators</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-title text-[var(--color-cream)] mb-4">Have a suggestion?</h2>
+      <p class="text-[var(--color-subtle)] mb-6">
+        We're always looking to add new calculators. If there's a tool you'd like to see,
+        or if you've found a bug, we'd love to hear from you.
+      </p>
+      <a
+        href="mailto:hello@boringmath.com"
+        class="inline-flex items-center gap-2 text-[var(--color-accent)] hover:underline"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span>Get in touch</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

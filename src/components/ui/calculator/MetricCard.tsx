@@ -14,23 +14,15 @@ export interface MetricCardProps {
 }
 
 const VALUE_COLOR_CLASSES = {
-  default: 'text-gray-800',
-  success: 'text-green-600',
-  error: 'text-red-600',
-  warning: 'text-amber-600',
+  default: 'text-[var(--color-cream)]',
+  success: 'text-emerald-400',
+  error: 'text-rose-400',
+  warning: 'text-amber-400',
 };
 
 /**
  * Secondary metric card for displaying individual values in grids.
- *
- * @example
- * ```tsx
- * <Grid responsive={{ sm: 2, md: 4 }} gap="md">
- *   <MetricCard label="Hourly Rate" value="$56.25" sublabel="8-hour day" />
- *   <MetricCard label="Weekly Rate" value="$2,250" />
- *   <MetricCard label="Total Saved" value="$45,000" valueColor="success" />
- * </Grid>
- * ```
+ * Updated for dark theme.
  */
 export function MetricCard({
   label,
@@ -48,19 +40,19 @@ export function MetricCard({
   return (
     <div
       className={`
-        bg-white border border-gray-200 rounded-xl p-4 text-center
-        hover:${tokens.border200} hover:shadow-sm transition-all
+        bg-[var(--color-night)] border border-white/10 rounded-xl p-4 text-center
+        hover:border-white/20 transition-all
         ${className}
       `}
     >
-      <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+      <p className="text-xs font-medium text-[var(--color-muted)] uppercase tracking-wider mb-1">
         {label}
       </p>
       <p className={`text-xl md:text-2xl font-bold tabular-nums ${valueColorClass}`}>
         {value}
       </p>
       {sublabel && (
-        <p className="text-xs text-gray-400 mt-1">{sublabel}</p>
+        <p className="text-xs text-[var(--color-muted)] mt-1">{sublabel}</p>
       )}
     </div>
   );

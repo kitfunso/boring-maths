@@ -132,7 +132,7 @@ export default function SavingsGoalCalculator() {
                   value={Math.round(inputs.annualReturn * 100 * 10) / 10}
                   onChange={(e) => updateInput('annualReturn', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-gray-500 mt-1">7% is typical for diversified investments</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">7% is typical for diversified investments</p>
               </div>
 
               <div>
@@ -146,7 +146,7 @@ export default function SavingsGoalCalculator() {
                   value={Math.round(inputs.inflationRate * 100 * 10) / 10}
                   onChange={(e) => updateInput('inflationRate', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-gray-500 mt-1">Historical average is 2-3%</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Historical average is 2-3%</p>
               </div>
             </Grid>
 

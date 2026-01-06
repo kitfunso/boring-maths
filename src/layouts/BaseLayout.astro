@@ -17,6 +17,7 @@ const {
 
 const siteURL = Astro.site || 'https://boring-math-calculators.vercel.app';
 const fullCanonicalURL = new URL(canonicalURL, siteURL).href;
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -27,6 +28,7 @@ const fullCanonicalURL = new URL(canonicalURL, siteURL).href;
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#07070a" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullCanonicalURL} />
@@ -46,81 +48,211 @@ const fullCanonicalURL = new URL(canonicalURL, siteURL).href;
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Google Analytics - Add your GA4 ID here when ready -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> -->
-
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-gray-50">
+  <body class="min-h-screen mesh-bg noise relative">
+    <!-- Ambient Glow Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
+      <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[100px] animate-blob"></div>
+      <div class="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[var(--color-violet)] opacity-[0.04] blur-[100px] animate-blob" style="animation-delay: -4s;"></div>
+      <div class="absolute top-[40%] right-[20%] w-[30vw] h-[30vw] rounded-full bg-[var(--color-ocean)] opacity-[0.03] blur-[80px] animate-pulse-glow"></div>
+    </div>
+
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-      <nav class="container mx-auto px-4 py-4">
+    <header class="fixed top-0 left-0 right-0 z-50 glass-subtle">
+      <nav class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
-          <a href="/" class="text-2xl font-bold text-gray-900">
-            Boring Math
+          <!-- Logo -->
+          <a href="/" class="group flex items-center gap-3" aria-label="Boring Math Home">
+            <div class="relative w-10 h-10 rounded-xl bg-[var(--color-accent)] flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-500">
+              <span class="font-display text-[var(--color-void)] text-xl font-normal">B</span>
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-display text-xl text-[var(--color-cream)] leading-none tracking-tight">Boring Math</span>
+              <span class="text-[10px] text-[var(--color-subtle)] uppercase tracking-[0.2em] mt-0.5">Calculators</span>
+            </div>
           </a>
-          <div class="hidden md:flex space-x-6">
-            <a href="/" class="text-gray-600 hover:text-gray-900">Home</a>
-            <a href="/calculators" class="text-gray-600 hover:text-gray-900">Calculators</a>
-            <a href="/about" class="text-gray-600 hover:text-gray-900">About</a>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center gap-1">
+            <a
+              href="/"
+              class:list={[
+                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                currentPath === "/" || currentPath === "/calculators"
+                  ? "text-[var(--color-void)] bg-[var(--color-accent)]"
+                  : "text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5"
+              ]}
+            >
+              Calculators
+            </a>
+            <a
+              href="/about"
+              class:list={[
+                "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                currentPath === "/about"
+                  ? "text-[var(--color-void)] bg-[var(--color-accent)]"
+                  : "text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5"
+              ]}
+            >
+              About
+            </a>
           </div>
-          <!-- Mobile menu button -->
-          <button class="md:hidden p-2">
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="md:hidden p-2 rounded-lg text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5 transition-colors"
+            aria-label="Toggle menu"
+            id="mobile-menu-btn"
+          >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden mt-4 pb-2" id="mobile-menu">
+          <div class="flex flex-col gap-1">
+            <a
+              href="/"
+              class:list={[
+                "px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300",
+                currentPath === "/" || currentPath === "/calculators"
+                  ? "text-[var(--color-void)] bg-[var(--color-accent)]"
+                  : "text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5"
+              ]}
+            >
+              Calculators
+            </a>
+            <a
+              href="/about"
+              class:list={[
+                "px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300",
+                currentPath === "/about"
+                  ? "text-[var(--color-void)] bg-[var(--color-accent)]"
+                  : "text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5"
+              ]}
+            >
+              About
+            </a>
+          </div>
         </div>
       </nav>
     </header>
 
+    <!-- Spacer for fixed header -->
+    <div class="h-[72px]"></div>
+
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="relative">
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-16">
-      <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <!-- About Section -->
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Boring Math</h3>
-            <p class="text-gray-400 text-sm">
-              Free online calculators for everyday math problems. Making boring math easy.
+    <footer class="relative mt-32 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <!-- Brand Column -->
+          <div class="md:col-span-5">
+            <a href="/" class="inline-flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-xl bg-[var(--color-accent)] flex items-center justify-center">
+                <span class="font-display text-[var(--color-void)] text-xl">B</span>
+              </div>
+              <span class="font-display text-2xl text-[var(--color-cream)]">Boring Math</span>
+            </a>
+            <p class="text-[var(--color-subtle)] max-w-sm leading-relaxed">
+              Free online calculators for everyday math problems. Making boring math surprisingly delightful since 2024.
             </p>
+            <div class="flex gap-4 mt-6">
+              <span class="px-3 py-1 text-xs rounded-full bg-white/5 text-[var(--color-subtle)] border border-white/10">
+                No Ads
+              </span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/5 text-[var(--color-subtle)] border border-white/10">
+                No Tracking
+              </span>
+              <span class="px-3 py-1 text-xs rounded-full bg-white/5 text-[var(--color-subtle)] border border-white/10">
+                100% Free
+              </span>
+            </div>
           </div>
 
           <!-- Quick Links -->
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul class="space-y-2 text-sm">
-              <li><a href="/" class="text-gray-400 hover:text-white">Home</a></li>
-              <li><a href="/calculators" class="text-gray-400 hover:text-white">All Calculators</a></li>
-              <li><a href="/about" class="text-gray-400 hover:text-white">About</a></li>
+          <div class="md:col-span-3">
+            <h3 class="text-micro text-[var(--color-muted)] mb-6">Quick Links</h3>
+            <ul class="space-y-4">
+              <li>
+                <a href="/" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="/calculators" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  All Calculators
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  About
+                </a>
+              </li>
             </ul>
           </div>
 
-          <!-- Legal -->
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Legal</h3>
-            <ul class="space-y-2 text-sm">
-              <li><a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-              <li><a href="/terms" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+          <!-- Popular Tools -->
+          <div class="md:col-span-4">
+            <h3 class="text-micro text-[var(--color-muted)] mb-6">Popular Calculators</h3>
+            <ul class="space-y-4">
+              <li>
+                <a href="/calculators/freelance-day-rate-calculator" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  Freelance Day Rate
+                </a>
+              </li>
+              <li>
+                <a href="/calculators/tip-calculator" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  Tip Calculator
+                </a>
+              </li>
+              <li>
+                <a href="/calculators/savings-goal-calculator" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  Savings Goal
+                </a>
+              </li>
+              <li>
+                <a href="/calculators/emergency-fund-calculator" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm">
+                  Emergency Fund
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Boring Math Calculators. All rights reserved.</p>
+        <!-- Bottom Bar -->
+        <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-[var(--color-muted)]">
+            &copy; {new Date().getFullYear()} Boring Math Calculators. All rights reserved.
+          </p>
+          <div class="flex gap-6 text-sm">
+            <a href="/privacy" class="text-[var(--color-muted)] hover:text-[var(--color-cream)] transition-colors">
+              Privacy
+            </a>
+            <a href="/terms" class="text-[var(--color-muted)] hover:text-[var(--color-cream)] transition-colors">
+              Terms
+            </a>
+          </div>
         </div>
       </div>
     </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.toggle('hidden');
+      });
+    </script>
   </body>
 </html>
