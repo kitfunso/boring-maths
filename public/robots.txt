@@ -1,0 +1,6 @@
+# Robots.txt for Boring Math Calculators
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://boring-maths.vercel.app/sitemap-index.xml
