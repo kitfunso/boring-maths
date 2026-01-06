@@ -207,7 +207,7 @@ const categoryColors: Record<string, string> = {
 
 <BaseLayout title={title} description={description}>
   <!-- Hero Section -->
-  <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden px-6 py-16">
+  <section class="relative flex items-center justify-center overflow-hidden px-6 py-8">
     <!-- Floating geometric elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div class="absolute top-20 left-[10%] w-20 h-20 border border-white/10 rounded-2xl rotate-12 animate-float"></div>
@@ -218,7 +218,7 @@ const categoryColors: Record<string, string> = {
 
     <div class="relative max-w-6xl mx-auto text-center">
       <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 animate-slide-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
         <span class="text-sm text-[var(--color-subtle)]">17 Free Calculators</span>
       </div>
@@ -238,7 +238,7 @@ const categoryColors: Record<string, string> = {
       </h1>
 
       <!-- Subheadline -->
-      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-10 animate-slide-up delay-200" style="opacity: 0;">
+      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-6 animate-slide-up delay-200" style="opacity: 0;">
         Free, beautiful calculators for freelancers, planners, and anyone who needs
         <span class="text-[var(--color-cream)]">quick answers</span> to everyday math problems.
         <span class="text-[var(--color-accent)]">No ads. No tracking.</span>
@@ -263,19 +263,10 @@ const categoryColors: Record<string, string> = {
   </section>
 
   <!-- Calculators Section with Category Filter -->
-  <section class="relative px-6 py-16" id="calculators">
+  <section class="relative px-6 py-6" id="calculators">
     <div class="max-w-7xl mx-auto">
-      <!-- Section Header -->
-      <div class="text-center mb-10">
-        <span class="text-micro text-[var(--color-accent)] mb-4 block">Browse Tools</span>
-        <h2 class="text-headline text-[var(--color-cream)] mb-4">All Calculators</h2>
-        <p class="text-[var(--color-subtle)] max-w-xl mx-auto">
-          Find the tool you need and get instant answers.
-        </p>
-      </div>
-
       <!-- Search Bar -->
-      <div class="max-w-xl mx-auto mb-8">
+      <div class="max-w-xl mx-auto mb-5">
         <div class="relative">
           <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -301,7 +292,7 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <!-- Category Filter -->
-      <div class="flex flex-wrap justify-center gap-2 mb-10" id="category-filter">
+      <div class="flex flex-wrap justify-center gap-2 mb-6" id="category-filter">
         <!-- Favorites toggle -->
         <button
           class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border
