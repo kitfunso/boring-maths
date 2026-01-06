@@ -1,0 +1,49 @@
+---
+/**
+ * Google Analytics 4 Component
+ *
+ * Only loads in production when GA_ID is configured.
+ * Respects user privacy preferences.
+ */
+
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const isProd = import.meta.env.PROD;
+---
+
+{isProd && gaId && (
+  <>
+    <!-- Google Analytics -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId, {
+        anonymize_ip: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+
+      // Custom event helper
+      window.trackEvent = function(eventName, params) {
+        gtag('event', eventName, params);
+      };
+
+      // Track calculator usage
+      window.trackCalculatorUse = function(calculatorName) {
+        gtag('event', 'calculator_used', {
+          calculator_name: calculatorName,
+          calculation_completed: true
+        });
+      };
+
+      // Track affiliate clicks
+      window.trackAffiliateClick = function(partner, calculator, position) {
+        gtag('event', 'affiliate_click', {
+          affiliate_partner: partner,
+          calculator_page: calculator,
+          link_position: position || 'default'
+        });
+      };
+    </script>
+  </>
+)}

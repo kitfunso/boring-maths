@@ -1,0 +1,148 @@
+---
+/**
+ * Privacy Policy Page
+ *
+ * Required for AdSense approval and GDPR compliance
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Privacy Policy | Boring Math Calculators';
+const description = 'Privacy policy for Boring Math Calculators. Learn how we handle your data and protect your privacy.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative px-6 py-12">
+    <div class="max-w-3xl mx-auto">
+      <span class="text-micro text-[var(--color-accent)] mb-4 block">Legal</span>
+      <h1 class="text-display text-[var(--color-cream)] mb-8">Privacy Policy</h1>
+
+      <div class="prose prose-invert max-w-none space-y-8">
+        <p class="text-lg text-[var(--color-subtle)]">
+          Last updated: January 2025
+        </p>
+
+        <div class="glass rounded-2xl p-6 md:p-8 space-y-6">
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Overview</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Boring Math Calculators ("we", "our", or "us") is committed to protecting your privacy.
+              This policy explains how we collect, use, and safeguard your information when you use our website.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Information We Collect</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              <strong class="text-[var(--color-cream)]">Calculator Inputs:</strong> All calculations are performed
+              entirely in your browser. We never see, store, or transmit the numbers you enter into our calculators.
+            </p>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              <strong class="text-[var(--color-cream)]">Analytics Data:</strong> We use Google Analytics to understand
+              how visitors use our site. This includes:
+            </p>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-1 ml-4">
+              <li>Pages visited and time spent</li>
+              <li>Device type and browser</li>
+              <li>Approximate geographic location (country/city level)</li>
+              <li>Referral sources</li>
+            </ul>
+            <p class="text-[var(--color-subtle)] leading-relaxed mt-4">
+              <strong class="text-[var(--color-cream)]">Local Storage:</strong> We store your preferences (like favorite
+              calculators) in your browser's local storage. This data never leaves your device.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Advertising</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              We use Google AdSense to display advertisements. Google, as a third-party vendor, uses cookies
+              to serve ads based on your prior visits to this and other websites. You may opt out of personalized
+              advertising by visiting
+              <a href="https://www.google.com/settings/ads" class="text-[var(--color-accent)] hover:underline" target="_blank" rel="noopener">
+                Google's Ads Settings
+              </a>.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Cookies</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              We use cookies for:
+            </p>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-1 ml-4">
+              <li><strong class="text-[var(--color-cream)]">Analytics:</strong> To understand site usage patterns</li>
+              <li><strong class="text-[var(--color-cream)]">Advertising:</strong> To serve relevant ads via Google AdSense</li>
+              <li><strong class="text-[var(--color-cream)]">Preferences:</strong> To remember your settings</li>
+            </ul>
+            <p class="text-[var(--color-subtle)] leading-relaxed mt-4">
+              You can control cookies through your browser settings. Disabling cookies may affect site functionality.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Third-Party Services</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              We use the following third-party services:
+            </p>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-1 ml-4">
+              <li><strong class="text-[var(--color-cream)]">Google Analytics:</strong> Website analytics</li>
+              <li><strong class="text-[var(--color-cream)]">Google AdSense:</strong> Advertising</li>
+              <li><strong class="text-[var(--color-cream)]">Vercel:</strong> Website hosting</li>
+            </ul>
+            <p class="text-[var(--color-subtle)] leading-relaxed mt-4">
+              Each service has its own privacy policy governing data use.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Your Rights</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              You have the right to:
+            </p>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-1 ml-4">
+              <li>Opt out of personalized advertising</li>
+              <li>Clear your browser cookies and local storage</li>
+              <li>Use browser extensions to block tracking</li>
+              <li>Contact us with privacy questions</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Data Security</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Since all calculations happen in your browser and we don't collect personal data,
+              there is minimal data to secure. Our website is served over HTTPS to protect data in transit.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Children's Privacy</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Our website is not directed at children under 13. We do not knowingly collect
+              personal information from children.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Changes to This Policy</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              We may update this privacy policy from time to time. We will notify you of any changes
+              by posting the new policy on this page and updating the "Last updated" date.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Contact Us</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              If you have questions about this privacy policy, please contact us at
+              <a href="mailto:hello@boringmath.com" class="text-[var(--color-accent)] hover:underline">
+                hello@boringmath.com
+              </a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

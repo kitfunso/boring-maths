@@ -1,0 +1,46 @@
+---
+/**
+ * Google AdSense Component
+ *
+ * Displays ads in production when AdSense is configured.
+ * Shows placeholder in development.
+ */
+
+export interface Props {
+  slot: string;
+  format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical';
+  responsive?: boolean;
+  className?: string;
+}
+
+const {
+  slot,
+  format = 'auto',
+  responsive = true,
+  className = ''
+} = Astro.props;
+
+const isProd = import.meta.env.PROD;
+const publisherId = import.meta.env.PUBLIC_ADSENSE_ID;
+---
+
+{isProd && publisherId ? (
+  <div class={`adsense-container ${className}`}>
+    <ins
+      class="adsbygoogle"
+      style="display:block"
+      data-ad-client={publisherId}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive={responsive}
+    />
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+) : (
+  <!-- Development placeholder -->
+  <div class={`border border-dashed border-white/20 rounded-xl p-4 text-center ${className}`}>
+    <span class="text-xs text-[var(--color-muted)]">Ad Placeholder ({format})</span>
+  </div>
+)}

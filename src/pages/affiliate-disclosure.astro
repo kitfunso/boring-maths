@@ -1,0 +1,103 @@
+---
+/**
+ * Affiliate Disclosure Page
+ *
+ * Required by FTC for affiliate marketing compliance
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Affiliate Disclosure | Boring Math Calculators';
+const description = 'Affiliate disclosure for Boring Math Calculators. Learn about our affiliate relationships and how we earn commissions.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative px-6 py-12">
+    <div class="max-w-3xl mx-auto">
+      <span class="text-micro text-[var(--color-accent)] mb-4 block">Legal</span>
+      <h1 class="text-display text-[var(--color-cream)] mb-8">Affiliate Disclosure</h1>
+
+      <div class="prose prose-invert max-w-none space-y-8">
+        <p class="text-lg text-[var(--color-subtle)]">
+          Last updated: January 2025
+        </p>
+
+        <div class="glass rounded-2xl p-6 md:p-8 space-y-6">
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">How We Earn Money</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Boring Math Calculators is a participant in affiliate advertising programs designed to
+              provide a means for websites to earn advertising fees by linking to products and services
+              we recommend.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">What This Means For You</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              Some links on our website are affiliate links. When you click on these links and make
+              a purchase or sign up for a service, we may receive a small commission at
+              <strong class="text-[var(--color-cream)]">no additional cost to you</strong>.
+            </p>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              The price you pay is the same whether you use our affiliate link or go directly to
+              the vendor's website.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Our Commitment to You</h2>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-2 ml-4">
+              <li>We only recommend products and services we believe will genuinely help you</li>
+              <li>Our recommendations are based on usefulness, not commission rates</li>
+              <li>Our calculators always work the same way, regardless of affiliate relationships</li>
+              <li>We clearly identify affiliate links and recommendations</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">How to Identify Affiliate Links</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Affiliate recommendations on our site are labeled as "Recommended Tools" and include
+              a disclosure note. Links may also contain tracking parameters in the URL.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Affiliate Partners</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed mb-4">
+              We may earn commissions from the following types of partners:
+            </p>
+            <ul class="list-disc list-inside text-[var(--color-subtle)] space-y-1 ml-4">
+              <li>Accounting and invoicing software (QuickBooks, FreshBooks)</li>
+              <li>Financial services and tools</li>
+              <li>Tax preparation services</li>
+              <li>Business tools and software</li>
+              <li>Other relevant products and services</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Why We Use Affiliate Links</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              Affiliate commissions help us keep Boring Math Calculators free for everyone.
+              This revenue allows us to maintain and improve our calculators, create new tools,
+              and keep the site running without charging users.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-3">Questions?</h2>
+            <p class="text-[var(--color-subtle)] leading-relaxed">
+              If you have questions about our affiliate relationships or recommendations,
+              please contact us at
+              <a href="mailto:hello@boringmath.com" class="text-[var(--color-accent)] hover:underline">
+                hello@boringmath.com
+              </a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
