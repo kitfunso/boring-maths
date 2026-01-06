@@ -341,64 +341,63 @@ const categoryColors: Record<string, string> = {
             data-href={calc.href}
             style={`animation-delay: ${index * 50}ms;`}
           >
-            <!-- Favorite Button -->
-            <button
-              class="favorite-btn absolute top-6 left-6 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center
-                     hover:bg-[var(--color-accent)]/20 transition-all duration-300 z-10"
-              data-calc-id={calc.href}
-              aria-label="Add to favorites"
-            >
-              <svg class="w-4 h-4 favorite-icon text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-              </svg>
-            </button>
-
-            <!-- Most Used Badge (top right) -->
-            {calc.mostUsed && (
-              <div class="absolute top-6 right-6 px-3 py-1 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
-                <span class="text-xs text-[var(--color-accent)] font-medium">Most Used</span>
-              </div>
-            )}
-
-            <!-- Category Badge (top right, only if not mostUsed) -->
-            {!calc.mostUsed && (
-              <div class={`absolute top-6 right-6 px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[calc.category]}`}>
-                {calc.category}
-              </div>
-            )}
+            <!-- Top row: Category/Badge + Star -->
+            <div class="absolute top-5 right-5 flex items-center gap-2 z-10">
+              {calc.mostUsed ? (
+                <div class="px-3 py-1 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
+                  <span class="text-xs text-[var(--color-accent)] font-medium">Most Used</span>
+                </div>
+              ) : (
+                <div class={`px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[calc.category]}`}>
+                  {calc.category}
+                </div>
+              )}
+              <button
+                class="favorite-btn w-7 h-7 rounded-full bg-white/5 flex items-center justify-center
+                       hover:bg-[var(--color-accent)]/20 transition-all duration-300"
+                data-calc-id={calc.href}
+                aria-label="Add to favorites"
+              >
+                <svg class="w-3.5 h-3.5 favorite-icon text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+              </button>
+            </div>
 
             <!-- Main card link -->
             <a href={calc.href} class="block">
               <!-- Icon -->
               <div class:list={[
-                "card-icon mt-8",
+                "card-icon",
                 `bg-gradient-to-br ${iconColors[calc.color]}`
               ]}>
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[calc.icon]} />
                 </svg>
               </div>
 
               <!-- Content -->
-              <h3 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors pr-20">
+              <h3 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                 {calc.title}
               </h3>
-              <p class="text-sm text-[var(--color-subtle)] leading-relaxed mb-8">
+              <p class="text-sm text-[var(--color-subtle)] leading-relaxed mb-4">
                 {calc.description}
               </p>
 
-              <!-- Category label (bottom left, only for mostUsed) -->
-              {calc.mostUsed && (
-                <div class={`absolute bottom-6 left-6 px-2 py-0.5 rounded text-xs font-medium ${categoryColors[calc.category]}`}>
-                  {calc.category}
+              <!-- Bottom: Category for mostUsed + Arrow -->
+              <div class="flex items-center justify-between mt-auto pt-2">
+                {calc.mostUsed ? (
+                  <div class={`px-2 py-0.5 rounded text-xs font-medium ${categoryColors[calc.category]}`}>
+                    {calc.category}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+                <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-all duration-500">
+                  <svg class="w-4 h-4 text-[var(--color-subtle)] group-hover:text-[var(--color-void)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
                 </div>
-              )}
-
-              <!-- Arrow -->
-              <div class="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-all duration-500">
-                <svg class="w-5 h-5 text-[var(--color-subtle)] group-hover:text-[var(--color-void)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
               </div>
             </a>
           </div>
