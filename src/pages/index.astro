@@ -332,17 +332,11 @@ const categoryColors: Record<string, string> = {
             data-href={calc.href}
             style={`animation-delay: ${index * 50}ms;`}
           >
-            <!-- Top row: Category/Badge + Star -->
+            <!-- Top row: Category + Star -->
             <div class="absolute top-5 right-5 flex items-center gap-2 z-10">
-              {calc.mostUsed ? (
-                <div class="px-3 py-1 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
-                  <span class="text-xs text-[var(--color-accent)] font-medium">Most Used</span>
-                </div>
-              ) : (
-                <div class={`px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[calc.category]}`}>
-                  {calc.category}
-                </div>
-              )}
+              <div class={`px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[calc.category]}`}>
+                {calc.category}
+              </div>
               <button
                 class="favorite-btn w-7 h-7 rounded-full bg-white/5 flex items-center justify-center
                        hover:bg-[var(--color-accent)]/20 transition-all duration-300"
@@ -375,11 +369,11 @@ const categoryColors: Record<string, string> = {
                 {calc.description}
               </p>
 
-              <!-- Bottom: Category for mostUsed + Arrow -->
+              <!-- Bottom: Most Used badge + Arrow -->
               <div class="flex items-center justify-between mt-auto pt-2">
                 {calc.mostUsed ? (
-                  <div class={`px-2 py-0.5 rounded text-xs font-medium ${categoryColors[calc.category]}`}>
-                    {calc.category}
+                  <div class="px-2 py-0.5 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20">
+                    <span class="text-xs text-[var(--color-accent)] font-medium">Most Used</span>
                   </div>
                 ) : (
                   <div></div>
