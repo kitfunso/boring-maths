@@ -50,13 +50,13 @@ const stats = [
 
 <BaseLayout title={title} description={description}>
   <!-- Hero Section -->
-  <section class="relative px-6 py-20">
+  <section class="relative px-6 py-12">
     <div class="max-w-4xl mx-auto text-center">
-      <span class="text-micro text-[var(--color-accent)] mb-4 block">About Us</span>
-      <h1 class="text-display text-[var(--color-cream)] mb-6">
+      <span class="text-micro text-[var(--color-accent)] mb-3 block">About Us</span>
+      <h1 class="text-3xl md:text-4xl font-display text-[var(--color-cream)] mb-4">
         Math doesn't have to be <span class="gradient-text">complicated</span>
       </h1>
-      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto">
+      <p class="text-[var(--color-subtle)] max-w-2xl mx-auto">
         Boring Math Calculators was built with one simple goal: make everyday calculations
         fast, accurate, and pleasant to use. No clutter, no distractions, just the answer you need.
       </p>
@@ -64,12 +64,12 @@ const stats = [
   </section>
 
   <!-- Stats Section -->
-  <section class="px-6 py-12">
+  <section class="px-6 py-8">
     <div class="max-w-4xl mx-auto">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {stats.map((stat) => (
-          <div class="glass rounded-2xl p-6 text-center">
-            <div class="text-4xl md:text-5xl font-display text-[var(--color-accent)] mb-2">
+          <div class="glass rounded-2xl p-4 text-center">
+            <div class="text-3xl md:text-4xl font-display text-[var(--color-accent)] mb-1">
               {stat.value}
             </div>
             <div class="text-sm text-[var(--color-muted)]">{stat.label}</div>
@@ -80,10 +80,10 @@ const stats = [
   </section>
 
   <!-- Mission Section -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-10">
     <div class="max-w-4xl mx-auto">
-      <div class="glass rounded-3xl p-8 md:p-12">
-        <h2 class="text-headline text-[var(--color-cream)] mb-6">Our Mission</h2>
+      <div class="glass rounded-3xl p-6 md:p-8">
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4">Our Mission</h2>
         <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed">
           <p>
             We believe that useful tools should be <strong class="text-[var(--color-cream)]">free and accessible</strong> to everyone.
@@ -106,23 +106,23 @@ const stats = [
   </section>
 
   <!-- Features Grid -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-10">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <span class="text-micro text-[var(--color-accent)] mb-4 block">What Makes Us Different</span>
-        <h2 class="text-headline text-[var(--color-cream)]">Built for You</h2>
+      <div class="text-center mb-8">
+        <span class="text-micro text-[var(--color-accent)] mb-2 block">What Makes Us Different</span>
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)]">Built for You</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         {features.map((feature) => (
-          <div class="glass rounded-2xl p-8 group hover:border-[var(--color-accent)]/30 transition-colors">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center mb-6">
-              <svg class="w-7 h-7 text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="glass rounded-2xl p-6 group hover:border-[var(--color-accent)]/30 transition-colors">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[feature.icon]} />
               </svg>
             </div>
-            <h3 class="text-title text-[var(--color-cream)] mb-3">{feature.title}</h3>
-            <p class="text-[var(--color-subtle)]">{feature.description}</p>
+            <h3 class="text-lg font-display text-[var(--color-cream)] mb-2">{feature.title}</h3>
+            <p class="text-sm text-[var(--color-subtle)]">{feature.description}</p>
           </div>
         ))}
       </div>
@@ -130,35 +130,34 @@ const stats = [
   </section>
 
   <!-- Tech Stack Section -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-10">
     <div class="max-w-4xl mx-auto">
-      <div class="glass rounded-3xl p-8 md:p-12">
-        <h2 class="text-headline text-[var(--color-cream)] mb-6">How It's Built</h2>
-        <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed">
+      <div class="glass rounded-3xl p-6 md:p-8">
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4">How It's Built</h2>
+        <div class="space-y-3 text-sm text-[var(--color-subtle)] leading-relaxed">
           <p>
             Boring Math Calculators is built with modern, performant technologies:
           </p>
-          <ul class="space-y-2 ml-4">
-            <li class="flex items-start gap-3">
+          <ul class="space-y-1.5 ml-4">
+            <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">Astro</strong> - For blazing fast static site generation</span>
+              <span><strong class="text-[var(--color-cream)]">Astro</strong> - Blazing fast static site generation</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">React</strong> - For interactive calculator components</span>
+              <span><strong class="text-[var(--color-cream)]">Preact</strong> - Lightweight interactive components</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">Tailwind CSS</strong> - For beautiful, responsive styling</span>
+              <span><strong class="text-[var(--color-cream)]">Tailwind CSS</strong> - Beautiful, responsive styling</span>
             </li>
-            <li class="flex items-start gap-3">
+            <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">TypeScript</strong> - For type-safe, reliable code</span>
+              <span><strong class="text-[var(--color-cream)]">TypeScript</strong> - Type-safe, reliable code</span>
             </li>
           </ul>
           <p>
-            The result? A site that loads instantly, works offline, and provides a smooth
-            experience on any device.
+            The result? A site that loads instantly and works smoothly on any device.
           </p>
         </div>
       </div>
@@ -166,20 +165,20 @@ const stats = [
   </section>
 
   <!-- CTA Section -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-10">
     <div class="max-w-4xl mx-auto">
-      <div class="card-elevated rounded-3xl p-12 text-center relative overflow-hidden">
+      <div class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden">
         <!-- Background decoration -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div class="absolute -top-24 -right-24 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
-          <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl"></div>
+          <div class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
+          <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl"></div>
         </div>
 
         <div class="relative">
-          <h2 class="text-headline text-[var(--color-cream)] mb-4">
+          <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-3">
             Ready to calculate?
           </h2>
-          <p class="text-[var(--color-subtle)] text-lg mb-8 max-w-xl mx-auto">
+          <p class="text-[var(--color-subtle)] mb-6 max-w-xl mx-auto">
             Pick a calculator and get your answer in seconds.
           </p>
           <a href="/#calculators" class="btn-primary inline-flex">
@@ -194,10 +193,10 @@ const stats = [
   </section>
 
   <!-- Contact Section -->
-  <section class="px-6 py-16">
+  <section class="px-6 py-10">
     <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-title text-[var(--color-cream)] mb-4">Have a suggestion?</h2>
-      <p class="text-[var(--color-subtle)] mb-6">
+      <h2 class="text-lg font-display text-[var(--color-cream)] mb-3">Have a suggestion?</h2>
+      <p class="text-sm text-[var(--color-subtle)] mb-4">
         We're always looking to add new calculators. If there's a tool you'd like to see,
         or if you've found a bug, we'd love to hear from you.
       </p>
