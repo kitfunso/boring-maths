@@ -8,7 +8,13 @@
       "Bash(git push:*)",
       "Bash(npm run build:*)",
       "Bash(cat:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "WebFetch(domain:boring-math-calculators.vercel.app)",
+      "WebFetch(domain:boring-maths.vercel.app)",
+      "Bash(find:*)",
+      "Bash(sort:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }

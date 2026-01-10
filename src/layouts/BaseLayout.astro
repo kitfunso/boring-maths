@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Analytics from '../components/common/Analytics.astro';
 import CookieConsent from '../components/common/CookieConsent.astro';
+import AdBlockDetector from '../components/common/AdBlockDetector.astro';
 
 export interface Props {
   title?: string;
@@ -292,5 +293,8 @@ const isProd = import.meta.env.PROD;
 
     <!-- Cookie Consent Banner -->
     <CookieConsent />
+
+    <!-- Ad Block Detector -->
+    <AdBlockDetector />
   </body>
 </html>
