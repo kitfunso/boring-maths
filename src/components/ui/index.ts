@@ -94,3 +94,9 @@ export type { MetricCardProps } from './calculator/MetricCard';
 
 export { Alert } from './calculator/Alert';
 export type { AlertProps } from './calculator/Alert';
+
+export { DataImportBanner } from './calculator/DataImportBanner';
+export type { DataImportBannerProps } from './calculator/DataImportBanner';
+
+export { DataExportIndicator } from './calculator/DataExportIndicator';
+export type { DataExportIndicatorProps } from './calculator/DataExportIndicator';

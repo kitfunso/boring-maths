@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateEmergencyFund, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -28,18 +28,47 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function EmergencyFundCalculator() {
   const [inputs, setInputs] = useState<EmergencyFundInputs>(() => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['emergency-fund'],
+    inputs,
+    setInputs,
+    importMapping: {
+      monthlyIncome: 'monthlySavingsCapacity',
+      monthlyExpenses: 'monthlyExpenses',
+      currentSavings: 'currentSavings',
+      currency: 'currency',
+    },
+    exportMapping: {
+      monthlyExpenses: 'monthlyExpenses',
+      currentSavings: 'currentSavings',
+      currency: 'currency',
+    },
+    getExportData: () => ({
+      emergencyFundTarget: result.targetAmount,
+    }),
+  });
+
   // Calculate results
   const result: EmergencyFundResult = useMemo(() => {
     return calculateEmergencyFund(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof EmergencyFundInputs>(
@@ -91,6 +120,21 @@ export default function EmergencyFundCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (typeof value === 'number') {
+                  return formatCurrency(value, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Monthly Expenses & Current Savings */}
@@ -278,11 +322,12 @@ export default function EmergencyFundCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`Emergency fund target: ${formatCurrency(result.targetAmount, result.currency)} (${result.recommendedMonths} months) - ${result.percentComplete}% complete`}
                 calculatorName="Emergency Fund Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import {
   calculateFreelanceDayRate,
   formatCurrency,
@@ -36,8 +36,11 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 /**
  * Main calculator component
@@ -50,6 +53,29 @@ export default function FreelanceDayRateCalculator() {
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['freelance-day-rate'],
+    inputs,
+    setInputs,
+    importMapping: {
+      annualIncome: 'annualSalary',
+      currency: 'currency',
+    },
+    exportMapping: {
+      annualSalary: 'annualIncome',
+      currency: 'currency',
+    },
+    getExportData: () => {
+      if (!result) return {};
+      return {
+        monthlyIncome: result.monthlyIncome,
+        hourlyRate: result.hourlyRate,
+        dayRate: result.netDayRate,
+      };
+    },
+  });
+
   // Calculate results whenever inputs change
   const result: FreelanceDayRateResult | null = useMemo(() => {
     try {
@@ -60,6 +86,13 @@ export default function FreelanceDayRateCalculator() {
       return null;
     }
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    if (result) {
+      sharedData.exportData();
+    }
+  }, [result]);
 
   // Update a single input field
   const updateInput = (
@@ -100,6 +133,21 @@ export default function FreelanceDayRateCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (key === 'annualIncome') {
+                  return formatCurrency(value as number, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Annual Salary */}
@@ -334,11 +382,12 @@ export default function FreelanceDayRateCalculator() {
               </Alert>
 
               {/* Share Results */}
-              <div className="flex justify-center pt-4">
+              <div className="flex justify-center items-center gap-4 pt-4">
                 <ShareResults
                   result={`My freelance day rate: ${formatCurrency(result.netDayRate, result.currency)} (${formatCurrency(result.hourlyRate, result.currency)}/hr) - after ${Math.round(inputs.taxRate * 100)}% tax`}
                   calculatorName="Freelance Day Rate Calculator"
                 />
+                <DataExportIndicator visible={sharedData.justExported} />
               </div>
             </div>
           ) : null}
