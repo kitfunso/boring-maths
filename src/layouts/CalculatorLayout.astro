@@ -3,19 +3,13 @@
  * Calculator Layout - Dark Theme
  *
  * Extends BaseLayout with calculator-specific features:
- * - Breadcrumb navigation
  * - Related calculators section
  * - Schema.org markup slots
- * - Ad placements (top and bottom)
+ * - Ad placements (top, bottom, sidebar)
  */
 
 import BaseLayout from './BaseLayout.astro';
 import AdUnit from '../components/common/AdUnit.astro';
-
-export interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
 
 export interface RelatedCalculator {
   title: string;
@@ -30,7 +24,6 @@ export interface Props {
   description: string;
   keywords?: string;
   canonicalURL?: string;
-  breadcrumbs?: BreadcrumbItem[];
   relatedCalculators?: RelatedCalculator[];
   showAds?: boolean;
 }
@@ -40,7 +33,6 @@ const {
   description,
   keywords,
   canonicalURL,
-  breadcrumbs = [],
   relatedCalculators = [],
   showAds = false,
 } = Astro.props;
@@ -83,33 +75,6 @@ const colorClasses: Record<string, string> = {
   <slot name="schema" />
 
   <div class="max-w-7xl mx-auto px-6 py-8">
-    <!-- Breadcrumb Navigation -->
-    {breadcrumbs.length > 0 && (
-      <nav class="text-sm mb-8" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-2 flex-wrap">
-          <li>
-            <a href="/" class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors">
-              Home
-            </a>
-          </li>
-          {breadcrumbs.map((crumb, index) => (
-            <li class="flex items-center">
-              <svg class="w-4 h-4 mx-2 text-[var(--color-muted)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-              </svg>
-              {crumb.href ? (
-                <a href={crumb.href} class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors">
-                  {crumb.label}
-                </a>
-              ) : (
-                <span class="text-[var(--color-cream)]" aria-current="page">{crumb.label}</span>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
-    )}
-
     <!-- Two Column Layout: Main Content + Sidebar -->
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Main Content -->
