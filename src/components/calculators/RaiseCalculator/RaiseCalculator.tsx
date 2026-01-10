@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateRaise, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -26,18 +26,45 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function RaiseCalculator() {
   const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['raise-calculator'],
+    inputs,
+    setInputs,
+    importMapping: {
+      annualIncome: 'currentSalary',
+      currency: 'currency',
+    },
+    exportMapping: {
+      currentSalary: 'annualIncome',
+      currency: 'currency',
+    },
+    getExportData: () => ({
+      annualIncome: result.newSalary,
+      monthlyIncome: result.newSalary / 12,
+    }),
+  });
+
   // Calculate results
   const result: RaiseCalculatorResult = useMemo(() => {
     return calculateRaise(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof RaiseCalculatorInputs>(
@@ -71,6 +98,21 @@ export default function RaiseCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (typeof value === 'number') {
+                  return formatCurrency(value, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Current Salary */}
@@ -270,11 +312,12 @@ export default function RaiseCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`My ${Math.round(inputs.raisePercentage * 100)}% raise: ${formatCurrency(result.raiseAmount, result.currency)}/year (${formatCurrency(result.monthlyRaise, result.currency)}/month) - Lifetime value: ${formatCurrency(result.lifetimeValue, result.currency)}`}
                 calculatorName="Raise Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

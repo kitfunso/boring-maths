@@ -117,6 +117,11 @@ export function useSharedData<TInputs extends object>(
 
   // Get available imports based on config and mapping
   const availableImports = useMemo<AvailableImport[]>(() => {
+    // Handle missing config gracefully
+    if (!config || !config.imports) {
+      return [];
+    }
+
     const imports = getFields(config.imports);
     const result: AvailableImport[] = [];
 
@@ -134,7 +139,7 @@ export function useSharedData<TInputs extends object>(
     }
 
     return result;
-  }, [config.imports, importMapping, context?.lastUpdated]);
+  }, [config?.imports, importMapping, context?.lastUpdated]);
 
   const showImportBanner = !bannerDismissed && availableImports.length > 0;
 
@@ -144,6 +149,8 @@ export function useSharedData<TInputs extends object>(
 
   const importFields = useCallback(
     (fields: (keyof SharedCalculatorData)[]) => {
+      if (!config || !config.imports) return;
+
       const imports = getFields(config.imports);
 
       setInputs((prev) => {
@@ -164,7 +171,7 @@ export function useSharedData<TInputs extends object>(
 
       setBannerDismissed(true);
     },
-    [config.imports, importMapping, setInputs]
+    [config?.imports, importMapping, setInputs]
   );
 
   const importAll = useCallback(() => {
@@ -173,6 +180,11 @@ export function useSharedData<TInputs extends object>(
   }, [availableImports, importFields]);
 
   const exportData = useCallback(() => {
+    // Handle missing config gracefully
+    if (!config || !config.exports) {
+      return false;
+    }
+
     const dataToExport: Partial<SharedCalculatorData> = {};
 
     // Export from inputs based on mapping

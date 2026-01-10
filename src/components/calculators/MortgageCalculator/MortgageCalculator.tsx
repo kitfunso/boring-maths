@@ -4,7 +4,7 @@
  * Calculate monthly mortgage payments with principal, interest, taxes, and insurance.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateMortgage, formatCurrency } from './calculations';
 import { getDefaultInputs, type MortgageInputs, type MortgageResult } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -21,8 +21,11 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function MortgageCalculator() {
   const [inputs, setInputs] = useState<MortgageInputs>(() => getDefaultInputs('USD'));
@@ -39,6 +42,26 @@ export default function MortgageCalculator() {
     }
     return null;
   }, [inputs.downPayment, inputs.homePrice]);
+
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['mortgage-calculator'],
+    inputs,
+    setInputs,
+    importMapping: {
+      homePrice: 'homePrice',
+      currency: 'currency',
+    },
+    exportMapping: {
+      homePrice: 'homePrice',
+      currency: 'currency',
+    },
+    getExportData: () => ({
+      mortgagePayment: result.monthlyTotal,
+      loanAmount: result.loanAmount,
+      monthlyExpenses: result.monthlyTotal,
+    }),
+  });
 
   const result: MortgageResult = useMemo(() => {
     // Return safe defaults if validation fails
@@ -59,6 +82,13 @@ export default function MortgageCalculator() {
     }
     return calculateMortgage(inputs);
   }, [inputs, validationError]);
+
+  // Export data when result changes
+  useEffect(() => {
+    if (!validationError) {
+      sharedData.exportData();
+    }
+  }, [result, validationError]);
 
   const updateInput = <K extends keyof MortgageInputs>(
     field: K,
@@ -96,6 +126,21 @@ export default function MortgageCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (typeof value === 'number') {
+                  return formatCurrency(value, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           <div className="space-y-6 mb-8">
             {/* Home Price & Down Payment */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
@@ -312,11 +357,12 @@ export default function MortgageCalculator() {
                 </Alert>
 
                 {/* Share Results */}
-                <div className="flex justify-center pt-4">
+                <div className="flex justify-center items-center gap-4 pt-4">
                   <ShareResults
                     result={`Monthly mortgage payment: ${formatCurrency(result.monthlyTotal, result.currency)} for a ${formatCurrency(inputs.homePrice, inputs.currency)} home (${inputs.loanTermYears} years at ${(inputs.interestRate * 100).toFixed(2)}%)`}
                     calculatorName="Mortgage Calculator"
                   />
+                  <DataExportIndicator visible={sharedData.justExported} />
                 </div>
               </>
             )}

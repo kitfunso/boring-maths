@@ -2,7 +2,7 @@
  * Calorie/TDEE Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateCalories, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -26,13 +26,43 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function CalorieCalculator() {
   const [inputs, setInputs] = useState<CalorieInputs>(() => getDefaultInputs());
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['calorie-calculator'],
+    inputs,
+    setInputs,
+    importMapping: {
+      heightCm: 'heightCm',
+      weightKg: 'weightKg',
+      age: 'age',
+      gender: 'gender',
+    },
+    exportMapping: {
+      heightCm: 'heightCm',
+      weightKg: 'weightKg',
+      age: 'age',
+      gender: 'gender',
+    },
+    getExportData: () => ({
+      tdee: result.tdee,
+    }),
+  });
+
   const result = useMemo(() => calculateCalories(inputs), [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   const updateInput = <K extends keyof CalorieInputs>(field: K, value: CalorieInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
@@ -85,6 +115,21 @@ export default function CalorieCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (key === 'heightCm') return `${value} cm`;
+                if (key === 'weightKg') return `${value} kg`;
+                if (key === 'age') return `${value} years`;
+                return String(value);
+              }}
+            />
+          )}
+
           <div className="space-y-6 mb-8">
             {/* Unit System */}
             <div>
@@ -292,11 +337,12 @@ export default function CalorieCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`My daily calorie needs: ${formatNumber(result.goalCalories)} calories (TDEE: ${formatNumber(result.tdee)})`}
                 calculatorName="Calorie Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

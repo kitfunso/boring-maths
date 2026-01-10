@@ -2,7 +2,7 @@
  * Loan Payment Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateLoan, formatCurrency, formatTermDisplay } from './calculations';
 import { getDefaultInputs, LOAN_TYPES, TERM_PRESETS, type LoanInputs, type LoanType } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -20,15 +20,43 @@ import {
   MetricCard,
   Alert,
   Slider,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function LoanCalculator() {
   const [inputs, setInputs] = useState<LoanInputs>(() => getDefaultInputs('USD'));
   const [showAmortization, setShowAmortization] = useState(false);
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['loan-calculator'],
+    inputs,
+    setInputs,
+    importMapping: {
+      loanAmount: 'loanAmount',
+      currency: 'currency',
+    },
+    exportMapping: {
+      loanAmount: 'loanAmount',
+      currency: 'currency',
+    },
+    getExportData: () => ({
+      monthlyExpenses: result.monthlyPayment,
+    }),
+  });
+
   const result = useMemo(() => calculateLoan(inputs), [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    if (result.monthlyPayment > 0) {
+      sharedData.exportData();
+    }
+  }, [result]);
 
   const updateInput = <K extends keyof LoanInputs>(field: K, value: LoanInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
@@ -57,6 +85,21 @@ export default function LoanCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (typeof value === 'number') {
+                  return formatCurrency(value, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           <div className="space-y-6 mb-8">
             {/* Loan Type */}
             <div>
@@ -259,11 +302,12 @@ export default function LoanCalculator() {
 
             {/* Share Results */}
             {result.monthlyPayment > 0 && (
-              <div className="flex justify-center pt-4">
+              <div className="flex justify-center items-center gap-4 pt-4">
                 <ShareResults
                   result={`My loan payment: ${formatCurrency(result.monthlyPayment, inputs.currency)}/month for ${formatTermDisplay(inputs.loanTerm)}. Total interest: ${formatCurrency(result.totalInterest, inputs.currency)}`}
                   calculatorName="Loan Payment Calculator"
                 />
+                <DataExportIndicator visible={sharedData.justExported} />
               </div>
             )}
           </div>

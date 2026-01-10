@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateWeddingAlcohol, formatNumber } from './calculations';
 import {
   DEFAULT_INPUTS,
@@ -24,16 +24,37 @@ import {
   Grid,
   Divider,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function WeddingAlcoholCalculator() {
   const [inputs, setInputs] = useState<WeddingAlcoholInputs>(DEFAULT_INPUTS);
+
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['wedding-alcohol'],
+    inputs,
+    setInputs,
+    importMapping: {
+      guestCount: 'guestCount',
+    },
+    exportMapping: {
+      guestCount: 'guestCount',
+    },
+  });
 
   // Calculate results whenever inputs change
   const result: WeddingAlcoholResult = useMemo(() => {
     return calculateWeddingAlcohol(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   // Update a single input field
   const updateInput = <K extends keyof WeddingAlcoholInputs>(
@@ -63,6 +84,19 @@ export default function WeddingAlcoholCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (key === 'guestCount') return `${value} guests`;
+                return String(value);
+              }}
+            />
+          )}
+
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Guest Count & Event Duration */}
@@ -257,11 +291,12 @@ export default function WeddingAlcoholCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`Wedding drinks for ${inputs.guestCount} guests: ${result.wineBottles} wine bottles, ${result.beerBottles} beers, ${result.liquorBottles} liquor bottles (${result.totalDrinks} total drinks)`}
                 calculatorName="Wedding Alcohol Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

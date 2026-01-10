@@ -4,7 +4,7 @@
  * Calculate investment growth with compound interest over time.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateCompoundInterest, formatCurrency } from './calculations';
 import { getDefaultInputs, type CompoundInterestInputs, type CompoundInterestResult, type CompoundFrequency } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -22,17 +22,44 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function CompoundInterestCalculator() {
   const [inputs, setInputs] = useState<CompoundInterestInputs>(() => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['compound-interest'],
+    inputs,
+    setInputs,
+    importMapping: {
+      currentSavings: 'principal',
+      monthlyContribution: 'monthlyContribution',
+      currency: 'currency',
+    },
+    exportMapping: {
+      principal: 'currentSavings',
+      currency: 'currency',
+    },
+    getExportData: () => ({
+      savingsGoal: result.finalBalance,
+    }),
+  });
+
   const result: CompoundInterestResult = useMemo(() => {
     return calculateCompoundInterest(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   const updateInput = <K extends keyof CompoundInterestInputs>(
     field: K,
@@ -73,6 +100,21 @@ export default function CompoundInterestCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (typeof value === 'number') {
+                  return formatCurrency(value, inputs.currency);
+                }
+                return String(value);
+              }}
+            />
+          )}
+
           <div className="space-y-6 mb-8">
             {/* Initial Investment & Monthly Contribution */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
@@ -258,11 +300,12 @@ export default function CompoundInterestCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.principal, inputs.currency)} invested at ${(inputs.interestRate * 100).toFixed(1)}% for ${inputs.years} years = ${formatCurrency(result.finalBalance, result.currency)} (+${formatCurrency(result.totalInterest, result.currency)} in interest!)`}
                 calculatorName="Compound Interest Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

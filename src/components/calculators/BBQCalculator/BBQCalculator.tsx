@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateBBQ, formatPounds } from './calculations';
 import {
   getDefaultInputs,
@@ -28,16 +28,37 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function BBQCalculator() {
   const [inputs, setInputs] = useState<BBQCalculatorInputs>(() => getDefaultInputs());
+
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['bbq'],
+    inputs,
+    setInputs,
+    importMapping: {
+      guestCount: 'guestCount',
+    },
+    exportMapping: {
+      guestCount: 'guestCount',
+    },
+  });
 
   // Calculate results
   const result: BBQCalculatorResult = useMemo(() => {
     return calculateBBQ(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof BBQCalculatorInputs>(
@@ -70,6 +91,19 @@ export default function BBQCalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (key === 'guestCount') return `${value} guests`;
+                return String(value);
+              }}
+            />
+          )}
+
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Guest Count */}
@@ -266,11 +300,12 @@ export default function BBQCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`BBQ for ${inputs.guestCount} guests: ${formatPounds(result.totalMeatPounds)} of meat needed (${result.meatBreakdown.map(m => `${m.type}: ${formatPounds(m.pounds)}`).join(', ')})`}
                 calculatorName="BBQ Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

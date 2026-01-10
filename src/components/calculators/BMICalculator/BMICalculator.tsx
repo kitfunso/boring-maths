@@ -4,7 +4,7 @@
  * Calculate Body Mass Index with health category classification.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useEffect } from 'preact/hooks';
 import { calculateBMI } from './calculations';
 import { getDefaultInputs, BMI_CATEGORIES, type BMIInputs, type BMIResult, type UnitSystem } from './types';
 import {
@@ -17,15 +17,41 @@ import {
   Grid,
   Divider,
   Alert,
+  DataImportBanner,
+  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function BMICalculator() {
   const [inputs, setInputs] = useState<BMIInputs>(() => getDefaultInputs());
 
+  // Shared data integration
+  const sharedData = useSharedData({
+    config: CALCULATOR_CONFIGS['bmi-calculator'],
+    inputs,
+    setInputs,
+    importMapping: {
+      heightCm: 'heightCm',
+      weightKg: 'weightKg',
+    },
+    exportMapping: {
+      heightCm: 'heightCm',
+      weightKg: 'weightKg',
+    },
+    getExportData: () => ({
+      bmi: Number(result.bmi),
+    }),
+  });
+
   const result: BMIResult = useMemo(() => {
     return calculateBMI(inputs);
   }, [inputs]);
+
+  // Export data when result changes
+  useEffect(() => {
+    sharedData.exportData();
+  }, [result]);
 
   const updateInput = <K extends keyof BMIInputs>(
     field: K,
@@ -91,6 +117,20 @@ export default function BMICalculator() {
         />
 
         <div className="p-6 md:p-8">
+          {/* Import Banner */}
+          {sharedData.showImportBanner && (
+            <DataImportBanner
+              availableImports={sharedData.availableImports}
+              onImportAll={sharedData.importAll}
+              onDismiss={sharedData.dismissImportBanner}
+              formatValue={(key, value) => {
+                if (key === 'heightCm') return `${value} cm`;
+                if (key === 'weightKg') return `${value} kg`;
+                return String(value);
+              }}
+            />
+          )}
+
           <div className="space-y-6 mb-8">
             {/* Unit System */}
             <div>
@@ -241,11 +281,12 @@ export default function BMICalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            <div className="flex justify-center items-center gap-4 pt-4">
               <ShareResults
                 result={`My BMI: ${result.bmi} (${result.category}) - Healthy range: ${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}`}
                 calculatorName="BMI Calculator"
               />
+              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>
