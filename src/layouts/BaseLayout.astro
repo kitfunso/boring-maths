@@ -57,14 +57,12 @@ const isProd = import.meta.env.PROD;
     <!-- Google Analytics -->
     <Analytics />
 
-    <!-- Google AdSense (production only) -->
-    {isProd && adsenseId && (
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-        crossorigin="anonymous"
-      />
-    )}
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8014911033000505"
+      crossorigin="anonymous"
+    />
 
     <title>{title}</title>
   </head>
