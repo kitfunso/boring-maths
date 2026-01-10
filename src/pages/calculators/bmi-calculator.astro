@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import BMICalculator from '../../components/calculators/BMICalculator/BMICalculator';
 
-const title = 'BMI Calculator | Body Mass Index & Health Assessment';
-const description = 'Free BMI calculator to check your body mass index. Supports metric and imperial units with health category classifications and healthy weight ranges.';
-const keywords = 'bmi calculator, body mass index, weight calculator, health calculator, healthy weight';
+const title = 'BMI Calculator | Check Your Body Mass Index for Adults';
+const description = 'Free BMI calculator for adults. Check if you\'re underweight, normal, overweight, or obese. Works with metric (kg/cm) and imperial (lbs/ft) units.';
+const keywords = 'bmi calculator, body mass index calculator, am I overweight, healthy weight calculator, bmi chart, bmi for adults, weight for height calculator';
 const canonicalURL = '/calculators/bmi-calculator';
 const siteUrl = 'https://boring-math-calculators.vercel.app';
 
@@ -54,6 +54,18 @@ const faqs = [
   {
     question: "What is a healthy BMI range?",
     answer: "A healthy BMI is generally between 18.5 and 24.9. However, optimal weight depends on many factors including age, muscle mass, and overall health. Consult a healthcare provider for personalized guidance."
+  },
+  {
+    question: "How do I calculate BMI in pounds and inches?",
+    answer: "The formula for imperial units is: BMI = (weight in pounds × 703) ÷ (height in inches)². For example, a person who is 5'10\" (70 inches) and weighs 160 lbs has a BMI of (160 × 703) ÷ (70 × 70) = 23.0, which is in the normal range."
+  },
+  {
+    question: "What should I weigh for my height?",
+    answer: "For a normal BMI (18.5-24.9), healthy weight ranges vary by height. At 5'4\" it's 108-145 lbs, at 5'8\" it's 125-163 lbs, at 6'0\" it's 137-183 lbs. Our calculator shows your specific healthy weight range based on your height."
+  },
+  {
+    question: "Is BMI different for men and women?",
+    answer: "The BMI formula and categories are the same for men and women. However, women typically have more body fat than men at the same BMI. For a more accurate picture, consider body fat percentage or waist circumference alongside BMI."
   },
 ];
 
