@@ -2,18 +2,37 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://boring-maths.vercel.app/', // Update this after Vercel deployment
+  site: 'https://boring-maths.vercel.app/',
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: {
+      // Improve chunk splitting for better caching
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'preact-vendor': ['preact', 'preact/hooks', 'preact/compat'],
+          },
+        },
+      },
+    },
   },
 
-  integrations: [react(), sitemap()],
+  integrations: [
+    preact({ compat: true }), // Enable React compatibility
+    sitemap(),
+  ],
 
-  output: 'static'
+  output: 'static',
+
+  // Prefetch links for faster navigation
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'viewport',
+  },
 });
