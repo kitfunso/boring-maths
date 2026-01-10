@@ -160,6 +160,24 @@ const calculators = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percent change, and more with instant results.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent',
+    color: 'violet',
+    category: 'Everyday',
+    mostUsed: true,
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    description: 'Compare snowball vs avalanche strategies to pay off debt faster.',
+    href: '/calculators/debt-payoff-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
 ];
 
 // Get unique categories
@@ -221,7 +239,7 @@ const categoryColors: Record<string, string> = {
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-        <span class="text-sm text-[var(--color-subtle)]">17 Free Calculators</span>
+        <span class="text-sm text-[var(--color-subtle)]">19 Free Calculators</span>
       </div>
 
       <!-- Main Headline -->
@@ -248,7 +266,7 @@ const categoryColors: Record<string, string> = {
       <!-- Quick Stats -->
       <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">17</div>
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">19</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
         </div>
         <div class="text-center border-x border-white/10">

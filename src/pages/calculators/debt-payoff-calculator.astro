@@ -1,0 +1,164 @@
+---
+/**
+ * Debt Payoff Calculator Page
+ *
+ * SEO-optimized page targeting: "debt payoff calculator snowball avalanche"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import DebtPayoffCalculator from '../../components/calculators/DebtPayoff/DebtPayoffCalculator';
+
+// SEO Configuration
+const title = 'Debt Payoff Calculator | Snowball vs Avalanche | Free Tool';
+const description = 'Free debt payoff calculator comparing snowball and avalanche methods. Enter your debts to see which strategy saves you the most money and gets you debt-free fastest.';
+const keywords = 'debt payoff calculator, debt snowball calculator, debt avalanche calculator, pay off debt calculator, debt free calculator, credit card payoff calculator, debt repayment calculator';
+const canonicalURL = '/calculators/debt-payoff-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Debt Payoff Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings goals with compound interest.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how your money grows over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Build your financial safety net.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is the debt avalanche method?",
+    answer: "The debt avalanche method prioritizes paying off debts with the highest interest rates first. After making minimum payments on all debts, you put extra money toward the highest-rate debt. This mathematically minimizes the total interest you pay over time."
+  },
+  {
+    question: "What is the debt snowball method?",
+    answer: "The debt snowball method prioritizes paying off the smallest balance debts first, regardless of interest rate. After making minimum payments, extra money goes to the smallest debt. When it's paid off, you 'snowball' that payment to the next smallest debt. This method provides quick wins that keep you motivated."
+  },
+  {
+    question: "Which debt payoff method is better?",
+    answer: "Mathematically, avalanche saves more money. But snowball's psychological wins keep many people on track. Choose avalanche if you're disciplined and want to minimize interest. Choose snowball if you need motivation from seeing debts disappear quickly. The best method is the one you'll stick with."
+  },
+  {
+    question: "How much extra should I pay toward debt each month?",
+    answer: "Pay as much extra as you can afford while maintaining a small emergency fund. Even an extra $50-100/month significantly reduces payoff time and interest. Look at your budget for expenses you can cut temporarily to accelerate debt payoff."
+  },
+  {
+    question: "Should I pay off debt or save for emergencies first?",
+    answer: "Build a small emergency fund first ($500-1000) to avoid going deeper into debt for unexpected expenses. Then focus on paying off high-interest debt. Once debt-free, build your emergency fund to 3-6 months of expenses."
+  },
+  {
+    question: "How do I calculate my debt-free date?",
+    answer: "This calculator does it for you! Enter each debt's balance, interest rate, and minimum payment, plus any extra you can pay monthly. The calculator simulates month-by-month payments to show exactly when you'll be debt-free with each method."
+  },
+  {
+    question: "What debts should I include in the payoff plan?",
+    answer: "Include all high-interest consumer debt: credit cards, personal loans, car loans, and medical debt. Generally exclude mortgages (low rate, tax benefits) and student loans (may have forgiveness options). Focus first on debt with rates above 6-7%."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Debt Payoff Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Debt Payoff Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Debt Payoff Calculator"
+    description="Compare snowball vs avalanche methods to find the fastest, cheapest way to become debt-free."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <DebtPayoffCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter each of your <strong>debts</strong> with the balance, interest rate, and minimum
+      monthly payment. Add as many debts as you have using the "Add Debt" button.
+    </p>
+    <p>
+      Set your <strong>extra monthly payment</strong> - this is money beyond the minimum
+      payments that you'll put toward accelerating your debt payoff.
+    </p>
+    <p>
+      Choose between <strong>Avalanche</strong> (highest interest first) or <strong>Snowball</strong>
+      (lowest balance first) to see how each strategy affects your payoff timeline.
+    </p>
+    <p>
+      Compare both strategies in the <strong>Strategy Comparison</strong> section to see
+      which saves you more money and time.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Debt-Free Date</strong> shows when you'll pay off your last debt using
+      your chosen strategy. This accounts for interest accumulation and payment allocation.
+    </p>
+    <p>
+      <strong>Total Interest</strong> is the combined interest you'll pay across all
+      debts until they're paid off. Lower is better - this is money that doesn't reduce your debt.
+    </p>
+    <p>
+      The <strong>Payoff Order</strong> shows which debts get paid off first based on
+      your selected strategy. Avalanche orders by interest rate, snowball by balance.
+    </p>
+    <p>
+      <strong>Strategy Comparison</strong> shows both methods side-by-side so you can
+      see exactly how much money and time each approach saves (or costs).
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

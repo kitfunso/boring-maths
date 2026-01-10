@@ -1,0 +1,173 @@
+---
+/**
+ * Percentage Calculator Page
+ *
+ * SEO-optimized page targeting: "what is X percent of Y calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PercentageCalculator from '../../components/calculators/PercentageCalculator/PercentageCalculator';
+
+// SEO Configuration
+const title = 'Percentage Calculator | What is X% of Y? | Free Online Tool';
+const description = 'Free percentage calculator: find what percent of a number is, calculate percentage change, increase or decrease values by a percentage. Fast and easy to use.';
+const keywords = 'percentage calculator, what is percent of, percent calculator, percentage change calculator, percent increase calculator, percent decrease calculator, how to calculate percentage';
+const canonicalURL = '/calculators/percentage-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Percentage Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills between friends.',
+    href: '/calculators/tip-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices and savings.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of a salary raise.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How do I calculate what percent one number is of another?",
+    answer: "Divide the part by the whole and multiply by 100. For example, to find what percent 30 is of 150: (30 ÷ 150) × 100 = 20%. So 30 is 20% of 150."
+  },
+  {
+    question: "How do I find X% of a number?",
+    answer: "Multiply the number by the percentage divided by 100. For example, 15% of 200: 200 × (15 ÷ 100) = 200 × 0.15 = 30. A quick trick: to find 10%, just move the decimal point one place left."
+  },
+  {
+    question: "How do I calculate percentage change?",
+    answer: "Use the formula: ((New Value - Old Value) ÷ Old Value) × 100. For example, if a price went from $100 to $125: ((125 - 100) ÷ 100) × 100 = 25% increase."
+  },
+  {
+    question: "How do I increase a number by a percentage?",
+    answer: "Multiply the number by (1 + percentage/100). For example, to increase 100 by 20%: 100 × 1.20 = 120. Or add the percentage of the number: 100 + (100 × 0.20) = 120."
+  },
+  {
+    question: "How do I decrease a number by a percentage?",
+    answer: "Multiply the number by (1 - percentage/100). For example, to decrease 100 by 20%: 100 × 0.80 = 80. Or subtract the percentage of the number: 100 - (100 × 0.20) = 80."
+  },
+  {
+    question: "Why doesn't a 20% increase then 20% decrease give me the original number?",
+    answer: "Because percentages are relative to the current value. If you start with 100, increase by 20% (to 120), then decrease by 20%, you get 120 × 0.80 = 96, not 100. The second percentage applies to the new value, not the original."
+  },
+  {
+    question: "How do I convert a decimal to a percentage?",
+    answer: "Multiply by 100. For example, 0.25 = 25%, 0.05 = 5%, 1.5 = 150%. To convert a percentage to a decimal, divide by 100: 25% = 0.25."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Percentage Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Percentage Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Percentage Calculator"
+    description="Calculate percentages quickly: find X% of Y, percentage change, increase or decrease values."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PercentageCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose your <strong>calculation type</strong> from the four options: find X% of Y,
+      find what percent one number is of another, calculate percentage change, or
+      increase/decrease a value by a percentage.
+    </p>
+    <p>
+      <strong>X% of Y</strong> answers questions like "What is 15% of 200?" - perfect
+      for calculating tips, discounts, or portions.
+    </p>
+    <p>
+      <strong>X is ?% of Y</strong> answers "30 is what percent of 150?" - useful
+      for understanding proportions and ratios.
+    </p>
+    <p>
+      <strong>% Change</strong> calculates the percentage difference between two values -
+      great for tracking price changes, growth rates, or performance differences.
+    </p>
+    <p>
+      <strong>X ± Y%</strong> calculates what you get when you increase or decrease
+      a value by a percentage - perfect for markups, discounts, or adjustments.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Quick Percentage Tricks">
+    <p>
+      <strong>Finding 10%:</strong> Move the decimal point one place left.
+      10% of 250 = 25. 10% of 1,500 = 150.
+    </p>
+    <p>
+      <strong>Finding 5%:</strong> Find 10% and divide by 2.
+      5% of 200 = 10% (20) ÷ 2 = 10.
+    </p>
+    <p>
+      <strong>Finding 15%:</strong> Find 10% and add half of it.
+      15% of 80 = 10% (8) + 5% (4) = 12.
+    </p>
+    <p>
+      <strong>Finding 20%:</strong> Find 10% and double it.
+      20% of 150 = 10% (15) × 2 = 30.
+    </p>
+    <p>
+      <strong>Finding 25%:</strong> Divide by 4.
+      25% of 120 = 120 ÷ 4 = 30.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

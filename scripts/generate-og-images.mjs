@@ -33,6 +33,8 @@ const calculators = [
   { id: 'bbq-calculator', name: 'BBQ Calculator', emoji: '🍖', color: '#ef4444', tagline: 'Plan meat for your cookout' },
   { id: 'paint-calculator', name: 'Paint Calculator', emoji: '🎨', color: '#a855f7', tagline: 'Calculate paint needed' },
   { id: 'electricity-cost-calculator', name: 'Electricity Cost', emoji: '⚡', color: '#eab308', tagline: 'Calculate appliance costs' },
+  { id: 'percentage-calculator', name: 'Percentage Calculator', emoji: '➗', color: '#a855f7', tagline: 'What is X% of Y?' },
+  { id: 'debt-payoff-calculator', name: 'Debt Payoff', emoji: '💳', color: '#3b82f6', tagline: 'Snowball vs Avalanche' },
 ];
 
 // Font loading - use local font files from @fontsource/inter
