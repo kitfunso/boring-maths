@@ -6,9 +6,11 @@
  * - Breadcrumb navigation
  * - Related calculators section
  * - Schema.org markup slots
+ * - Ad placements (top and bottom)
  */
 
 import BaseLayout from './BaseLayout.astro';
+import AdUnit from '../components/common/AdUnit.astro';
 
 export interface BreadcrumbItem {
   label: string;
@@ -108,6 +110,11 @@ const colorClasses: Record<string, string> = {
       </nav>
     )}
 
+    <!-- Top Ad Unit -->
+    <div class="mb-8">
+      <AdUnit slot="9991282844" className="rounded-xl overflow-hidden" />
+    </div>
+
     <!-- Main Content Slot -->
     <slot />
 
@@ -147,6 +154,11 @@ const colorClasses: Record<string, string> = {
         </div>
       </section>
     )}
+
+    <!-- Bottom Ad Unit -->
+    <div class="my-8">
+      <AdUnit slot="4738956161" className="rounded-xl overflow-hidden" />
+    </div>
 
     <!-- Call to Action -->
     <section class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden">
