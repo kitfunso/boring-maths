@@ -82,7 +82,7 @@ const colorClasses: Record<string, string> = {
   <!-- Schema.org markup slot -->
   <slot name="schema" />
 
-  <article class="max-w-4xl mx-auto px-6 py-8">
+  <div class="max-w-7xl mx-auto px-6 py-8">
     <!-- Breadcrumb Navigation -->
     {breadcrumbs.length > 0 && (
       <nav class="text-sm mb-8" aria-label="Breadcrumb">
@@ -110,15 +110,19 @@ const colorClasses: Record<string, string> = {
       </nav>
     )}
 
-    <!-- Top Ad Unit -->
-    <div class="mb-8">
-      <AdUnit slot="9991282844" className="rounded-xl overflow-hidden" />
-    </div>
+    <!-- Two Column Layout: Main Content + Sidebar -->
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Main Content -->
+      <article class="flex-1 min-w-0">
+        <!-- Top Ad Unit -->
+        <div class="mb-8">
+          <AdUnit slot="9991282844" className="rounded-xl overflow-hidden" />
+        </div>
 
-    <!-- Main Content Slot -->
-    <slot />
+        <!-- Main Content Slot -->
+        <slot />
 
-    <!-- Related Calculators Section -->
+        <!-- Related Calculators Section -->
     {relatedCalculators.length > 0 && (
       <section class="mt-16 mb-12">
         <h2 class="text-2xl font-display text-[var(--color-cream)] mb-6">
@@ -187,4 +191,37 @@ const colorClasses: Record<string, string> = {
       </div>
     </section>
   </article>
+
+      <!-- Sidebar with Sticky Ad -->
+      <aside class="hidden lg:block w-80 flex-shrink-0">
+        <div class="sticky top-24 space-y-6">
+          <!-- Sidebar Ad Unit -->
+          <AdUnit slot="1563990305" format="vertical" className="rounded-xl overflow-hidden" />
+
+          <!-- Quick Links Card -->
+          <div class="bento-card p-6">
+            <h3 class="text-sm font-medium text-[var(--color-cream)] mb-4">Quick Links</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="/" class="text-sm text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  All Calculators
+                </a>
+              </li>
+              <li>
+                <a href="/about" class="text-sm text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  About Us
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
 </BaseLayout>
