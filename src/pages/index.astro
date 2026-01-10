@@ -224,11 +224,11 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <!-- Main Headline -->
-      <h1 class="text-display mb-6 animate-slide-up delay-100" style="opacity: 0;">
+      <h1 class="text-headline mb-6 animate-slide-up delay-100" style="opacity: 0;">
         <span class="text-[var(--color-cream)]">Boring</span>
         <span class="relative inline-block mx-2">
           <span class="gradient-text">Math</span>
-          <svg class="absolute -bottom-2 left-0 w-full h-3 text-[var(--color-accent)]" viewBox="0 0 100 12" preserveAspectRatio="none">
+          <svg class="absolute -bottom-1 left-0 w-full h-2 text-[var(--color-accent)]" viewBox="0 0 100 12" preserveAspectRatio="none">
             <path d="M0,8 Q50,0 100,8" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
           </svg>
         </span>
@@ -322,7 +322,7 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <!-- Calculators Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="calculators-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="calculators-grid">
         {calculators.map((calc, index) => (
           <div
             class="calculator-card bento-card group relative glow"
