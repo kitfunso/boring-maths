@@ -4,7 +4,7 @@
  * Calculate investment growth with compound interest over time.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateCompoundInterest, formatCurrency } from './calculations';
 import { getDefaultInputs, type CompoundInterestInputs, type CompoundInterestResult, type CompoundFrequency } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -23,6 +23,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function CompoundInterestCalculator() {
   const [inputs, setInputs] = useState<CompoundInterestInputs>(() => getDefaultInputs('USD'));
@@ -255,6 +256,14 @@ export default function CompoundInterestCalculator() {
               At {(inputs.interestRate * 100).toFixed(1)}%, your money doubles in approximately{' '}
               {Math.round(72 / (inputs.interestRate * 100))} years.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`${formatCurrency(inputs.principal, inputs.currency)} invested at ${(inputs.interestRate * 100).toFixed(1)}% for ${inputs.years} years = ${formatCurrency(result.finalBalance, result.currency)} (+${formatCurrency(result.totalInterest, result.currency)} in interest!)`}
+                calculatorName="Compound Interest Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

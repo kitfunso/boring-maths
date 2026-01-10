@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculatePaint, formatCurrency, formatArea } from './calculations';
 import {
   getDefaultInputs,
@@ -29,6 +29,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function PaintCalculator() {
   const [inputs, setInputs] = useState<PaintCalculatorInputs>(() => getDefaultInputs('USD'));
@@ -286,6 +287,14 @@ export default function PaintCalculator() {
               Buy all your paint at once to ensure color consistency. Most stores offer free color matching
               and will shake your paint for you. Keep the receipt - many stores allow returns of unopened gallons.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Paint needed: ${result.gallonsNeeded} gallon${result.gallonsNeeded !== 1 ? 's' : ''} for ${formatArea(result.paintableArea)} (${inputs.coats} coat${inputs.coats !== 1 ? 's' : ''}) - Est. cost: ${formatCurrency(result.estimatedCost, result.currency)}`}
+                calculatorName="Paint Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

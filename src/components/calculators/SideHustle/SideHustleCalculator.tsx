@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateSideHustle, formatCurrency } from './calculations';
 import { getDefaultInputs, type SideHustleInputs, type SideHustleResult } from './types';
 import { type Currency, getCurrencySymbol, getRegionFromCurrency } from '../../../lib/regions';
@@ -21,6 +21,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function SideHustleCalculator() {
   const [inputs, setInputs] = useState<SideHustleInputs>(() => getDefaultInputs('USD'));
@@ -324,6 +325,14 @@ export default function SideHustleCalculator() {
             <Alert variant="warning" title="Remember:">
               Don't forget hidden costs like shipping supplies, transaction fees (2-3%), returns, and your time spent on admin tasks. Consider if this side hustle could scale or is trading time for money.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Side hustle: ${formatCurrency(result.effectiveHourlyRate, result.currency)}/hr effective rate (${formatCurrency(result.monthlyNetProfit, result.currency)}/month net profit) - ${result.beatsMainJob ? 'Beats my main job!' : 'Working on it!'}`}
+                calculatorName="Side Hustle Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

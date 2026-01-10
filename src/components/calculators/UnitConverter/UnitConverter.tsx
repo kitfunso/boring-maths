@@ -4,7 +4,7 @@
  * Convert between various units of measurement.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { convert, getAllConversions } from './calculations';
 import {
   getDefaultInputs,
@@ -24,6 +24,7 @@ import {
   Grid,
   Divider,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function UnitConverter() {
   const [inputs, setInputs] = useState<UnitConverterInputs>(() => getDefaultInputs());
@@ -184,6 +185,14 @@ export default function UnitConverter() {
                   </div>
                 ))}
               </Grid>
+            </div>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`${inputs.value} ${fromLabel} = ${result.formatted} ${toLabel}`}
+                calculatorName="Unit Converter"
+              />
             </div>
           </div>
         </div>

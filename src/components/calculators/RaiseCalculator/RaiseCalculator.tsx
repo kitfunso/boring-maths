@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateRaise, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -27,6 +27,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function RaiseCalculator() {
   const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() => getDefaultInputs('USD'));
@@ -267,6 +268,14 @@ export default function RaiseCalculator() {
               A seemingly small 3% raise on a $60,000 salary is worth over $45,000 over 20 years (more if invested).
               Always negotiate - the worst they can say is no, but the upside is life-changing.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`My ${Math.round(inputs.raisePercentage * 100)}% raise: ${formatCurrency(result.raiseAmount, result.currency)}/year (${formatCurrency(result.monthlyRaise, result.currency)}/month) - Lifetime value: ${formatCurrency(result.lifetimeValue, result.currency)}`}
+                calculatorName="Raise Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

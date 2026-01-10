@@ -4,7 +4,7 @@
  * Calculate Body Mass Index with health category classification.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateBMI } from './calculations';
 import { getDefaultInputs, BMI_CATEGORIES, type BMIInputs, type BMIResult, type UnitSystem } from './types';
 import {
@@ -18,6 +18,7 @@ import {
   Divider,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function BMICalculator() {
   const [inputs, setInputs] = useState<BMIInputs>(() => getDefaultInputs());
@@ -238,6 +239,14 @@ export default function BMICalculator() {
               or body composition. Athletes may have a high BMI but low body fat.
               Consult a healthcare provider for a complete assessment.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`My BMI: ${result.bmi} (${result.category}) - Healthy range: ${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}`}
+                calculatorName="BMI Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

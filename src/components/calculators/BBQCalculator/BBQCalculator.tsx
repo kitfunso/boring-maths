@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateBBQ, formatPounds } from './calculations';
 import {
   getDefaultInputs,
@@ -29,6 +29,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function BBQCalculator() {
   const [inputs, setInputs] = useState<BBQCalculatorInputs>(() => getDefaultInputs());
@@ -263,6 +264,14 @@ export default function BBQCalculator() {
               Start grilling larger cuts (ribs, whole chickens) first, as they take longer. Keep cooked meat
               warm in a 200°F oven or covered on the cool side of the grill.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`BBQ for ${inputs.guestCount} guests: ${formatPounds(result.totalMeatPounds)} of meat needed (${result.meatBreakdown.map(m => `${m.type}: ${formatPounds(m.pounds)}`).join(', ')})`}
+                calculatorName="BBQ Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

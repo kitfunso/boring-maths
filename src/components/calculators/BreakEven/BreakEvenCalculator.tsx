@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateBreakEven, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -26,6 +26,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function BreakEvenCalculator() {
   const [inputs, setInputs] = useState<BreakEvenInputs>(() => getDefaultInputs('USD'));
@@ -259,6 +260,14 @@ export default function BreakEvenCalculator() {
                 To lower your break-even point: increase prices, reduce variable costs per unit, or cut fixed costs.
                 Even small improvements in each area can significantly reduce the units needed to break even.
               </Alert>
+
+              {/* Share Results */}
+              <div className="flex justify-center pt-4">
+                <ShareResults
+                  result={`Break-even point: ${result.breakEvenUnits.toLocaleString()} units (${formatCurrency(result.breakEvenRevenue, result.currency)} revenue) - Contribution margin: ${formatCurrency(result.contributionMargin, result.currency, 2)}/unit`}
+                  calculatorName="Break-Even Calculator"
+                />
+              </div>
             </div>
           )}
         </div>

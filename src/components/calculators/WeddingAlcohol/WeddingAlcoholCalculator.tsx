@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateWeddingAlcohol, formatNumber } from './calculations';
 import {
   DEFAULT_INPUTS,
@@ -25,6 +25,7 @@ import {
   Divider,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function WeddingAlcoholCalculator() {
   const [inputs, setInputs] = useState<WeddingAlcoholInputs>(DEFAULT_INPUTS);
@@ -254,6 +255,14 @@ export default function WeddingAlcoholCalculator() {
               Buy 10-15% extra to account for spillage, heavy drinkers, and unexpected guests.
               Most stores allow returns of unopened bottles.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Wedding drinks for ${inputs.guestCount} guests: ${result.wineBottles} wine bottles, ${result.beerBottles} beers, ${result.liquorBottles} liquor bottles (${result.totalDrinks} total drinks)`}
+                calculatorName="Wedding Alcohol Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

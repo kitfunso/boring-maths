@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateElectricityCost, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -28,6 +28,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function ElectricityCostCalculator() {
   const [inputs, setInputs] = useState<ElectricityCostInputs>(() => getDefaultInputs('USD'));
@@ -270,6 +271,14 @@ export default function ElectricityCostCalculator() {
                 {inputs.watts >= 500 && inputs.watts < 1500 && 'Consider using a smart power strip to eliminate standby power draw when the appliance is not in use.'}
               </Alert>
             )}
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`${selectedPreset || 'Appliance'} (${inputs.watts}W): ${formatCurrency(result.costPerMonth, result.currency)}/month (${formatCurrency(result.costPerYear, result.currency, 0)}/year) - ${result.kwhPerMonth} kWh`}
+                calculatorName="Electricity Cost Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

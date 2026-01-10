@@ -4,7 +4,7 @@
  * Calculate monthly mortgage payments with principal, interest, taxes, and insurance.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateMortgage, formatCurrency } from './calculations';
 import { getDefaultInputs, type MortgageInputs, type MortgageResult } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -22,6 +22,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function MortgageCalculator() {
   const [inputs, setInputs] = useState<MortgageInputs>(() => getDefaultInputs('USD'));
@@ -309,6 +310,14 @@ export default function MortgageCalculator() {
                   Making one extra payment per year can reduce a 30-year mortgage by 4-5 years
                   and save tens of thousands in interest.
                 </Alert>
+
+                {/* Share Results */}
+                <div className="flex justify-center pt-4">
+                  <ShareResults
+                    result={`Monthly mortgage payment: ${formatCurrency(result.monthlyTotal, result.currency)} for a ${formatCurrency(inputs.homePrice, inputs.currency)} home (${inputs.loanTermYears} years at ${(inputs.interestRate * 100).toFixed(2)}%)`}
+                    calculatorName="Mortgage Calculator"
+                  />
+                </div>
               </>
             )}
           </div>

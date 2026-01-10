@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateEmergencyFund, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -29,6 +29,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function EmergencyFundCalculator() {
   const [inputs, setInputs] = useState<EmergencyFundInputs>(() => getDefaultInputs('USD'));
@@ -275,6 +276,14 @@ export default function EmergencyFundCalculator() {
               Keep your emergency fund in a high-yield savings account for easy access while earning interest.
               Don't invest it in stocks - you need this money accessible without risk of loss.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Emergency fund target: ${formatCurrency(result.targetAmount, result.currency)} (${result.recommendedMonths} months) - ${result.percentComplete}% complete`}
+                calculatorName="Emergency Fund Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

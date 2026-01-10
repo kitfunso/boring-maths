@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
 import { type Currency, getCurrencySymbol, getRegionFromCurrency } from '../../../lib/regions';
@@ -24,6 +24,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function HourlyToSalaryCalculator() {
   const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() => getDefaultInputs('USD'));
@@ -221,6 +222,14 @@ export default function HourlyToSalaryCalculator() {
                 {' '}({inputs.overtimeHours} hours/week at {inputs.overtimeMultiplier}x rate)
               </Alert>
             )}
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`${formatCurrency(inputs.hourlyRate, inputs.currency)}/hr = ${formatCurrency(result.netAnnual, result.currency)}/year (${formatCurrency(result.netMonthly, result.currency)}/month) after ${Math.round(inputs.taxRate * 100)}% tax`}
+                calculatorName="Hourly to Salary Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

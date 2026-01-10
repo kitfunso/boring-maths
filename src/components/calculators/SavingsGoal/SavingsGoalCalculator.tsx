@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateSavingsGoal, formatCurrency } from './calculations';
 import { getDefaultInputs, type SavingsGoalInputs, type SavingsGoalResult, type ContributionFrequency } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -24,6 +24,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function SavingsGoalCalculator() {
   const [inputs, setInputs] = useState<SavingsGoalInputs>(() => getDefaultInputs('USD'));
@@ -201,6 +202,14 @@ export default function SavingsGoalCalculator() {
               {formatCurrency(result.inflationAdjustedGoal, result.currency)} in today's dollars after{' '}
               {inputs.timelineYears} years at {(inputs.inflationRate * 100).toFixed(1)}% inflation.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Savings goal: ${formatCurrency(inputs.goalAmount, inputs.currency)} in ${inputs.timelineYears} years - Save ${formatCurrency(result.contributionAmount, result.currency)}/${result.contributionFrequency} to earn ${formatCurrency(result.totalInterest, result.currency)} in interest!`}
+                calculatorName="Savings Goal Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

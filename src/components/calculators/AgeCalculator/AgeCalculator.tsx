@@ -4,7 +4,7 @@
  * Calculate age from birthdate with detailed breakdown.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateAge } from './calculations';
 import { getDefaultInputs, type AgeCalculatorInputs, type AgeResult } from './types';
 import {
@@ -17,6 +17,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function AgeCalculator() {
   const [inputs, setInputs] = useState<AgeCalculatorInputs>(() => getDefaultInputs());
@@ -193,6 +194,14 @@ export default function AgeCalculator() {
               {result.dayOfWeekBorn === 'Sunday' && 'bonny, blithe, good, and gay'}
               {' '}according to the old nursery rhyme.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`I'm ${result.years} years, ${result.months} months, and ${result.days} days old! Born on a ${result.dayOfWeekBorn}, ${result.zodiacSign} ♈`}
+                calculatorName="Age Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>
