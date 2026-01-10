@@ -35,6 +35,10 @@ const calculators = [
   { id: 'electricity-cost-calculator', name: 'Electricity Cost', emoji: '⚡', color: '#eab308', tagline: 'Calculate appliance costs' },
   { id: 'percentage-calculator', name: 'Percentage Calculator', emoji: '➗', color: '#a855f7', tagline: 'What is X% of Y?' },
   { id: 'debt-payoff-calculator', name: 'Debt Payoff', emoji: '💳', color: '#3b82f6', tagline: 'Snowball vs Avalanche' },
+  { id: 'calorie-calculator', name: 'Calorie Calculator', emoji: '🔥', color: '#22c55e', tagline: 'TDEE & Daily Calories' },
+  { id: 'loan-calculator', name: 'Loan Calculator', emoji: '🏦', color: '#3b82f6', tagline: 'Monthly Payment & Interest' },
+  { id: 'discount-calculator', name: 'Discount Calculator', emoji: '🏷️', color: '#ef4444', tagline: 'Sale Price & Savings' },
+  { id: 'dog-age-calculator', name: 'Dog Age Calculator', emoji: '🐕', color: '#f59e0b', tagline: 'Dog Years to Human Years' },
 ];
 
 // Font loading - use local font files from @fontsource/inter

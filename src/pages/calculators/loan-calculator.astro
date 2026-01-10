@@ -1,0 +1,164 @@
+---
+/**
+ * Loan Payment Calculator Page
+ *
+ * SEO-optimized page targeting: "loan calculator", "car loan calculator", "loan payment calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import LoanCalculator from '../../components/calculators/LoanCalculator/LoanCalculator';
+
+// SEO Configuration
+const title = 'Loan Calculator | Car, Personal & Student Loan Payment Calculator';
+const description = 'Free loan calculator for auto, personal, and student loans. Calculate monthly payments, total interest, and see a full amortization schedule. Compare loan terms instantly.';
+const keywords = 'loan calculator, car loan calculator, auto loan calculator, personal loan calculator, student loan calculator, loan payment calculator, EMI calculator, amortization calculator';
+const canonicalURL = '/calculators/loan-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Loan Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate home loan payments and costs.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    description: 'Create a plan to pay off multiple debts.',
+    href: '/calculators/debt-payoff-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Compound Interest',
+    description: 'See how your savings grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How is the monthly loan payment calculated?",
+    answer: "Monthly payments are calculated using the standard amortization formula: M = P × [r(1+r)^n] / [(1+r)^n - 1], where P is the principal, r is the monthly interest rate, and n is the number of payments. This formula ensures equal monthly payments throughout the loan term."
+  },
+  {
+    question: "What's the difference between APR and interest rate?",
+    answer: "The interest rate is the cost of borrowing the principal. APR (Annual Percentage Rate) includes the interest rate plus other fees and charges, giving you the true cost of the loan. For this calculator, enter the APR for the most accurate payment calculation."
+  },
+  {
+    question: "How can I reduce the total interest I pay?",
+    answer: "You can reduce total interest by: 1) Choosing a shorter loan term, 2) Making extra payments toward principal, 3) Shopping for a lower interest rate, 4) Making bi-weekly payments instead of monthly (results in one extra payment per year)."
+  },
+  {
+    question: "What is an amortization schedule?",
+    answer: "An amortization schedule shows how each payment is split between principal and interest over the life of the loan. Early payments are mostly interest, while later payments are mostly principal. The schedule helps you understand how your loan balance decreases over time."
+  },
+  {
+    question: "What loan term should I choose?",
+    answer: "Shorter terms (36-48 months) mean higher monthly payments but less total interest. Longer terms (60-84 months) mean lower payments but more interest paid overall. Choose based on what fits your budget while minimizing total cost."
+  },
+  {
+    question: "How does loan type affect interest rates?",
+    answer: "Secured loans (auto, mortgage) typically have lower rates because the asset serves as collateral. Unsecured loans (personal loans) have higher rates due to increased lender risk. Student loans often have competitive rates due to government backing."
+  },
+  {
+    question: "Should I pay off my loan early?",
+    answer: "Paying off a loan early saves interest money. Check if your loan has prepayment penalties first. If not, extra payments toward principal can significantly reduce total interest and loan duration. Even small additional payments help."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Loan Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Loan Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Loan Payment Calculator"
+    description="Calculate your monthly payment, total interest, and view a complete amortization schedule for any loan."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <LoanCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>loan type</strong> to see typical interest rate ranges for that
+      category. This helps you understand if your offered rate is competitive.
+    </p>
+    <p>
+      Enter the <strong>loan amount</strong> - this is the total amount you're borrowing,
+      not including interest or fees.
+    </p>
+    <p>
+      Input the <strong>annual interest rate (APR)</strong> as a percentage. You can find
+      this on your loan offer or by contacting your lender.
+    </p>
+    <p>
+      Use the slider to select your <strong>loan term</strong>. Longer terms mean lower
+      monthly payments but more total interest paid.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Monthly Payment</strong> is the fixed amount you'll pay each month for the
+      duration of the loan. This includes both principal and interest.
+    </p>
+    <p>
+      <strong>Total Interest</strong> shows how much extra you'll pay on top of the
+      principal. This is the true cost of borrowing.
+    </p>
+    <p>
+      The <strong>Payment Breakdown</strong> bar visualizes what portion of your total
+      payments goes to principal versus interest.
+    </p>
+    <p>
+      The <strong>Amortization Schedule</strong> shows a month-by-month breakdown of how
+      each payment is applied and how your balance decreases over time.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

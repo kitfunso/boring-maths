@@ -178,6 +178,42 @@ const calculators = [
     category: 'Finance',
     mostUsed: false,
   },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs (TDEE) based on activity level and goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart',
+    color: 'green',
+    category: 'Health',
+    mostUsed: true,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate monthly payments and total interest for any loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices, percent off, and total savings on any purchase.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent',
+    color: 'coral',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Dog Age Calculator',
+    description: 'Convert dog years to human years using accurate, science-based formulas.',
+    href: '/calculators/dog-age-calculator',
+    icon: 'paw',
+    color: 'amber',
+    category: 'Everyday',
+    mostUsed: false,
+  },
 ];
 
 // Get unique categories
@@ -210,6 +246,7 @@ const iconPaths: Record<string, string> = {
   heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
   swap: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
   calendar: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  paw: 'M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
 };
 
 // Category colors
@@ -239,7 +276,7 @@ const categoryColors: Record<string, string> = {
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-        <span class="text-sm text-[var(--color-subtle)]">19 Free Calculators</span>
+        <span class="text-sm text-[var(--color-subtle)]">23 Free Calculators</span>
       </div>
 
       <!-- Main Headline -->
@@ -266,7 +303,7 @@ const categoryColors: Record<string, string> = {
       <!-- Quick Stats -->
       <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">19</div>
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">23</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
         </div>
         <div class="text-center border-x border-white/10">
