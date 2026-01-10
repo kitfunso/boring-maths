@@ -28,9 +28,36 @@ export default function MortgageCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
+  // Validation: ensure down payment doesn't exceed home price
+  const validationError = useMemo(() => {
+    if (inputs.downPayment > inputs.homePrice) {
+      return 'Down payment cannot exceed home price';
+    }
+    if (inputs.homePrice <= 0) {
+      return 'Please enter a valid home price';
+    }
+    return null;
+  }, [inputs.downPayment, inputs.homePrice]);
+
   const result: MortgageResult = useMemo(() => {
+    // Return safe defaults if validation fails
+    if (validationError) {
+      return {
+        currency: inputs.currency,
+        loanAmount: 0,
+        monthlyPI: 0,
+        monthlyTax: 0,
+        monthlyInsurance: 0,
+        monthlyHOA: 0,
+        monthlyTotal: 0,
+        totalPayments: 0,
+        totalInterest: 0,
+        downPaymentPercent: 0,
+        ltvRatio: 0,
+      };
+    }
     return calculateMortgage(inputs);
-  }, [inputs]);
+  }, [inputs, validationError]);
 
   const updateInput = <K extends keyof MortgageInputs>(
     field: K,
@@ -188,90 +215,102 @@ export default function MortgageCalculator() {
 
           {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
-            <ResultCard
-              label="Your Monthly Payment"
-              value={formatCurrency(result.monthlyTotal, result.currency)}
-              subtitle={`${inputs.loanTermYears}-year fixed at ${(inputs.interestRate * 100).toFixed(3)}%`}
-              footer={
-                <>
-                  Principal & Interest only:{' '}
-                  <span className="font-semibold tabular-nums">
-                    {formatCurrency(result.monthlyPI, result.currency)}
-                  </span>
-                </>
-              }
-            />
-
-            {/* Payment Breakdown */}
-            <Grid responsive={{ sm: 2, md: 4 }} gap="md">
-              <MetricCard
-                label="Principal & Interest"
-                value={formatCurrency(result.monthlyPI, result.currency)}
-                sublabel="per month"
-              />
-              <MetricCard
-                label="Property Tax"
-                value={formatCurrency(result.monthlyTax, result.currency)}
-                sublabel="per month"
-              />
-              <MetricCard
-                label="Insurance"
-                value={formatCurrency(result.monthlyInsurance, result.currency)}
-                sublabel="per month"
-              />
-              <MetricCard
-                label="HOA Fees"
-                value={formatCurrency(result.monthlyHOA, result.currency)}
-                sublabel="per month"
-              />
-            </Grid>
-
-            {/* Loan Summary */}
-            <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
-              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
-                Loan Summary
-              </h3>
-              <Grid responsive={{ sm: 2, md: 4 }} gap="md" className="text-center">
-                <div>
-                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
-                    {formatCurrency(result.loanAmount, result.currency)}
-                  </p>
-                  <p className="text-sm text-[var(--color-muted)]">Loan Amount</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
-                    {formatCurrency(result.totalPayments, result.currency)}
-                  </p>
-                  <p className="text-sm text-[var(--color-muted)]">Total Payments</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-red-400 tabular-nums">
-                    {formatCurrency(result.totalInterest, result.currency)}
-                  </p>
-                  <p className="text-sm text-[var(--color-muted)]">Total Interest</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
-                    {result.ltvRatio}%
-                  </p>
-                  <p className="text-sm text-[var(--color-muted)]">Loan-to-Value</p>
-                </div>
-              </Grid>
-            </div>
-
-            {/* PMI Warning */}
-            {result.downPaymentPercent < 20 && (
-              <Alert variant="warning" title="PMI Required">
-                With less than 20% down, you'll likely need Private Mortgage Insurance (PMI),
-                which adds 0.5-1% of the loan amount annually until you reach 20% equity.
+            {/* Validation Error */}
+            {validationError && (
+              <Alert variant="error" title="Invalid Input">
+                {validationError}
               </Alert>
             )}
 
-            <Alert variant="tip" title="Pro tip:">
-              Making one extra payment per year can reduce a 30-year mortgage by 4-5 years
-              and save tens of thousands in interest.
-            </Alert>
+            {/* Results - only show when inputs are valid */}
+            {!validationError && (
+              <>
+                {/* Primary Result */}
+                <ResultCard
+                  label="Your Monthly Payment"
+                  value={formatCurrency(result.monthlyTotal, result.currency)}
+                  subtitle={`${inputs.loanTermYears}-year fixed at ${(inputs.interestRate * 100).toFixed(3)}%`}
+                  footer={
+                    <>
+                      Principal & Interest only:{' '}
+                      <span className="font-semibold tabular-nums">
+                        {formatCurrency(result.monthlyPI, result.currency)}
+                      </span>
+                    </>
+                  }
+                />
+
+                {/* Payment Breakdown */}
+                <Grid responsive={{ sm: 2, md: 4 }} gap="md">
+                  <MetricCard
+                    label="Principal & Interest"
+                    value={formatCurrency(result.monthlyPI, result.currency)}
+                    sublabel="per month"
+                  />
+                  <MetricCard
+                    label="Property Tax"
+                    value={formatCurrency(result.monthlyTax, result.currency)}
+                    sublabel="per month"
+                  />
+                  <MetricCard
+                    label="Insurance"
+                    value={formatCurrency(result.monthlyInsurance, result.currency)}
+                    sublabel="per month"
+                  />
+                  <MetricCard
+                    label="HOA Fees"
+                    value={formatCurrency(result.monthlyHOA, result.currency)}
+                    sublabel="per month"
+                  />
+                </Grid>
+
+                {/* Loan Summary */}
+                <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
+                  <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
+                    Loan Summary
+                  </h3>
+                  <Grid responsive={{ sm: 2, md: 4 }} gap="md" className="text-center">
+                    <div>
+                      <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
+                        {formatCurrency(result.loanAmount, result.currency)}
+                      </p>
+                      <p className="text-sm text-[var(--color-muted)]">Loan Amount</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
+                        {formatCurrency(result.totalPayments, result.currency)}
+                      </p>
+                      <p className="text-sm text-[var(--color-muted)]">Total Payments</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-red-400 tabular-nums">
+                        {formatCurrency(result.totalInterest, result.currency)}
+                      </p>
+                      <p className="text-sm text-[var(--color-muted)]">Total Interest</p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
+                        {result.ltvRatio}%
+                      </p>
+                      <p className="text-sm text-[var(--color-muted)]">Loan-to-Value</p>
+                    </div>
+                  </Grid>
+                </div>
+
+                {/* PMI Warning */}
+                {result.downPaymentPercent < 20 && (
+                  <Alert variant="warning" title="PMI Required">
+                    With less than 20% down, you'll likely need Private Mortgage Insurance (PMI),
+                    which adds 0.5-1% of the loan amount annually until you reach 20% equity.
+                  </Alert>
+                )}
+
+                <Alert variant="tip" title="Pro tip:">
+                  Making one extra payment per year can reduce a 30-year mortgage by 4-5 years
+                  and save tens of thousands in interest.
+                </Alert>
+              </>
+            )}
           </div>
         </div>
       </Card>

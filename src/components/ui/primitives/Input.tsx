@@ -49,7 +49,10 @@ export function Input({
   if (variant === 'currency') {
     return (
       <div className="relative">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium">
+        <span
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium"
+          aria-hidden="true"
+        >
           {currencySymbol}
         </span>
         <input
@@ -71,7 +74,10 @@ export function Input({
           className={`${baseClasses} pl-4 pr-10 ${className}`}
           {...props}
         />
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium">
+        <span
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium"
+          aria-hidden="true"
+        >
           %
         </span>
       </div>
