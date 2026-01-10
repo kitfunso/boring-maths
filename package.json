@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "generate-og": "node scripts/generate-og-images.mjs",
+    "prebuild": "npm run generate-og",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -16,6 +18,9 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.6.0",
+    "@fontsource/inter": "^5.2.8",
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.18.3",
     "tailwindcss": "^4.1.18"
   }
 }

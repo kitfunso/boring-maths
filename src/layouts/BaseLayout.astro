@@ -9,6 +9,7 @@ export interface Props {
   description?: string;
   keywords?: string;
   canonicalURL?: string;
+  ogImage?: string;
 }
 
 const {
@@ -16,11 +17,17 @@ const {
   description = 'Free online calculators for everyday math problems. Calculate freelance rates, wedding costs, savings goals, and more.',
   keywords = 'calculator, online calculator, free calculator, math calculator',
   canonicalURL = Astro.url.pathname,
+  ogImage,
 } = Astro.props;
 
 const siteURL = Astro.site || 'https://boring-math-calculators.vercel.app';
 const fullCanonicalURL = new URL(canonicalURL, siteURL).href;
 const currentPath = Astro.url.pathname;
+
+// Determine OG image: use custom if provided, otherwise default
+const ogImageURL = ogImage
+  ? new URL(ogImage, siteURL).href
+  : new URL('/og/default.png', siteURL).href;
 
 // AdSense publisher ID (only in production)
 const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
@@ -63,11 +70,11 @@ const isProd = import.meta.env.PROD;
     <meta property="twitter:description" content={description} />
 
     <!-- Open Graph / Social Image -->
-    <meta property="og:image" content={`${siteURL}/og-image.svg`} />
+    <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Boring Math Calculators - Free online calculators" />
-    <meta name="twitter:image" content={`${siteURL}/og-image.svg`} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

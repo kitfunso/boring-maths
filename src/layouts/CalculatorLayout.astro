@@ -26,6 +26,7 @@ export interface Props {
   canonicalURL?: string;
   relatedCalculators?: RelatedCalculator[];
   showAds?: boolean;
+  ogImage?: string;
 }
 
 const {
@@ -35,7 +36,20 @@ const {
   canonicalURL,
   relatedCalculators = [],
   showAds = false,
+  ogImage,
 } = Astro.props;
+
+// Auto-generate OG image path from canonical URL if not provided
+const calculatorOgImage = ogImage || (() => {
+  if (canonicalURL) {
+    // Extract calculator slug from URL like "/calculators/tip-calculator"
+    const match = canonicalURL.match(/\/calculators\/([^\/]+)/);
+    if (match) {
+      return `/og/${match[1]}.png`;
+    }
+  }
+  return '/og/default.png';
+})();
 
 // Icon paths for related calculator cards
 const iconPaths: Record<string, string> = {
@@ -70,6 +84,7 @@ const colorClasses: Record<string, string> = {
   description={description}
   keywords={keywords}
   canonicalURL={canonicalURL}
+  ogImage={calculatorOgImage}
 >
   <!-- Schema.org markup slot -->
   <slot name="schema" />
