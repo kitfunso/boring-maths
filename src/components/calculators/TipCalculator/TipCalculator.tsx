@@ -5,7 +5,7 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateTip, formatCurrency } from './calculations';
 import { getDefaultInputs, type TipCalculatorInputs, type TipCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -23,6 +23,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function TipCalculator() {
   const [inputs, setInputs] = useState<TipCalculatorInputs>(() => getDefaultInputs('USD'));
@@ -246,6 +247,18 @@ export default function TipCalculator() {
               15-18% for adequate service, 20% for good service, 25%+ for exceptional service.
               In the US, servers rely on tips as a major part of their income.
             </Alert>
+
+            {/* Share Results */}
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={
+                  inputs.splitCount > 1
+                    ? `Tip: ${formatCurrency(result.tipAmount, result.currency)} (${Math.round(inputs.tipPercentage * 100)}%) - Each person pays ${formatCurrency(result.perPersonTotal, result.currency)}`
+                    : `Tip: ${formatCurrency(result.tipAmount, result.currency)} (${Math.round(inputs.tipPercentage * 100)}%) - Total: ${formatCurrency(result.totalAmount, result.currency)}`
+                }
+                calculatorName="Tip Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

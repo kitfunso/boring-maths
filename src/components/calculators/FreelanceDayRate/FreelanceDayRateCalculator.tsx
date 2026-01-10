@@ -8,7 +8,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from 'preact/hooks';
 import {
   calculateFreelanceDayRate,
   formatCurrency,
@@ -37,6 +37,7 @@ import {
   MetricCard,
   Alert,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 /**
  * Main calculator component
@@ -331,6 +332,14 @@ export default function FreelanceDayRateCalculator() {
                 Most freelancers only bill 70-80% of working days due to admin, marketing, and gaps between projects.
                 Consider adding a 20-30% buffer to your rate.
               </Alert>
+
+              {/* Share Results */}
+              <div className="flex justify-center pt-4">
+                <ShareResults
+                  result={`My freelance day rate: ${formatCurrency(result.netDayRate, result.currency)} (${formatCurrency(result.hourlyRate, result.currency)}/hr) - after ${Math.round(inputs.taxRate * 100)}% tax`}
+                  calculatorName="Freelance Day Rate Calculator"
+                />
+              </div>
             </div>
           ) : null}
         </div>
