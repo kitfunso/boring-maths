@@ -43,7 +43,7 @@ export function CurrencySelector({
       `}
     >
       {CURRENCY_OPTIONS.map((option) => (
-        <option key={option.value} value={option.value} className="text-gray-900">
+        <option key={option.value} value={option.value} className="text-[var(--color-cream)]">
           {option.flag} {option.label}
         </option>
       ))}

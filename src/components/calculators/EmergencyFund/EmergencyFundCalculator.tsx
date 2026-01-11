@@ -152,7 +152,7 @@ export default function EmergencyFundCalculator() {
                   value={inputs.monthlyExpenses}
                   onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Rent, utilities, food, insurance, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Rent, utilities, food, insurance, etc.</p>
               </div>
 
               <div>
@@ -178,7 +178,7 @@ export default function EmergencyFundCalculator() {
                 onChange={(value) => updateInput('jobStability', value as JobStability)}
                 columns={3}
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-[var(--color-muted)] mt-2">
                 {inputs.jobStability === 'stable' && 'Government, tenured, or essential industry jobs'}
                 {inputs.jobStability === 'moderate' && 'Most salaried positions with reasonable job security'}
                 {inputs.jobStability === 'unstable' && 'Freelance, contract, startup, or volatile industries'}
@@ -197,7 +197,7 @@ export default function EmergencyFundCalculator() {
                   value={inputs.dependents}
                   onChange={(e) => updateInput('dependents', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Children, elderly parents, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Children, elderly parents, etc.</p>
               </div>
 
               <div>
@@ -238,18 +238,18 @@ export default function EmergencyFundCalculator() {
             />
 
             {/* Progress Bar */}
-            <div className="bg-gray-50 rounded-xl p-6">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">Your Progress</span>
-                <span className="text-sm font-bold text-gray-900">{result.percentComplete}%</span>
+                <span className="text-sm font-medium text-[var(--color-cream)]">Your Progress</span>
+                <span className="text-sm font-bold text-[var(--color-cream)]">{result.percentComplete}%</span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+              <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${getProgressColor()}`}
                   style={{ width: `${Math.min(100, result.percentComplete)}%` }}
                 />
               </div>
-              <div className="flex justify-between mt-2 text-sm text-gray-500">
+              <div className="flex justify-between mt-2 text-sm text-[var(--color-muted)]">
                 <span>{formatCurrency(inputs.currentSavings, result.currency)} saved</span>
                 <span>{formatCurrency(result.targetAmount, result.currency)} goal</span>
               </div>
@@ -284,8 +284,8 @@ export default function EmergencyFundCalculator() {
             </Grid>
 
             {/* Fund Tiers */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Emergency Fund Tiers
               </h3>
               <div className="space-y-3">
@@ -298,10 +298,10 @@ export default function EmergencyFundCalculator() {
                   <div key={tier.label} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`w-3 h-3 rounded-full ${
-                        inputs.currentSavings >= tier.amount ? 'bg-green-500' : 'bg-gray-300'
+                        inputs.currentSavings >= tier.amount ? 'bg-green-500' : 'bg-white/20'
                       }`} />
                       <span className={`text-sm ${
-                        result.recommendedMonths === tier.months ? 'font-bold text-blue-600' : 'text-gray-600'
+                        result.recommendedMonths === tier.months ? 'font-bold text-blue-600' : 'text-[var(--color-subtle)]'
                       }`}>
                         {tier.label}
                         {result.recommendedMonths === tier.months && ' (Recommended)'}

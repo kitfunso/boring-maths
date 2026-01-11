@@ -1,0 +1,163 @@
+---
+/**
+ * Flooring Calculator Page
+ *
+ * SEO-optimized page targeting: "how much flooring do I need calculator with waste"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import FlooringCalculator from '../../components/calculators/FlooringCalculator/FlooringCalculator';
+
+// SEO Configuration
+const title = 'Flooring Calculator | How Much Flooring Do I Need?';
+const description = 'Calculate exactly how much flooring you need with waste factor. Enter room dimensions, choose your pattern, get boxes needed with cost estimates. Includes diagonal, herringbone, and chevron waste calculations.';
+const keywords = 'flooring calculator, how much flooring do I need, flooring waste calculator, laminate flooring calculator, hardwood flooring calculator, flooring square footage calculator, flooring cost estimator';
+const canonicalURL = '/calculators/flooring-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Flooring Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your room walls.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Estimate energy costs for your home appliances.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much flooring waste should I allow?",
+    answer: "Waste allowance depends on your installation pattern. Straight/parallel patterns need 10% extra, diagonal patterns need 15%, herringbone needs 20%, and chevron patterns need 25%. This accounts for cuts at walls, mistakes, and damaged pieces."
+  },
+  {
+    question: "How do I calculate square footage for flooring?",
+    answer: "Multiply the room's length by its width in feet. For example, a 15x12 foot room is 180 square feet. Add closets and other areas separately, then add your waste percentage based on the installation pattern."
+  },
+  {
+    question: "How many boxes of flooring do I need?",
+    answer: "Divide your total square footage (including waste) by the square feet per box (usually printed on the box, typically 20-25 sq ft). Always round up to the next whole box. For example, 200 sq ft ÷ 22 sq ft/box = 9.1, so buy 10 boxes."
+  },
+  {
+    question: "Why does diagonal flooring need more waste?",
+    answer: "Diagonal installation (45-degree angle) creates more angled cuts where the flooring meets walls. Each wall intersection requires a custom-cut piece, and more of each plank gets trimmed off compared to straight installation."
+  },
+  {
+    question: "Do I need underlayment for all flooring types?",
+    answer: "Underlayment is recommended for laminate, engineered hardwood, and luxury vinyl plank. It provides cushioning, sound absorption, and moisture protection. Tile uses a different substrate (backer board), and most carpet has attached padding."
+  },
+  {
+    question: "How many transition strips do I need?",
+    answer: "Count each doorway where flooring meets different flooring, carpet, or tile. You'll also need transitions where flooring meets exterior doors. Standard doorways are 3 feet wide and require one strip each."
+  },
+  {
+    question: "Should I buy extra boxes for repairs?",
+    answer: "Yes, buy 1-2 extra boxes and store them. Flooring can be damaged over time, and matching the exact color/dye lot later can be difficult or impossible. Many manufacturers discontinue patterns after a few years."
+  },
+  {
+    question: "How long should flooring acclimate before installation?",
+    answer: "Most manufacturers recommend 48-72 hours of acclimation in the room where it will be installed. This allows the flooring to adjust to the room's temperature and humidity, preventing expansion or contraction after installation."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Flooring Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Flooring Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Flooring Calculator"
+    description="Calculate exactly how much flooring you need for any room. Get accurate box counts with pattern-specific waste factors, cost estimates, and a complete shopping list."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <FlooringCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>room dimensions</strong> in feet - length and width.
+      Measure at the longest points, including any alcoves or bump-outs you plan to floor.
+    </p>
+    <p>
+      Select your <strong>flooring type</strong> (laminate, hardwood, vinyl, or tile) and
+      <strong>installation pattern</strong>. The pattern significantly affects waste - diagonal
+      and herringbone patterns require more material due to angled cuts.
+    </p>
+    <p>
+      Enter the <strong>square feet per box</strong> from your flooring's packaging (typically
+      20-25 sq ft) and the <strong>price per square foot</strong> for accurate cost estimates.
+    </p>
+    <p>
+      Add <strong>closets and stairs</strong> if you're flooring those areas too. Don't forget
+      to include underlayment and transition strips for doorways.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>boxes needed</strong> includes your pattern's waste factor, rounded up to
+      whole boxes. You can't buy partial boxes, so always buy the full amount shown.
+    </p>
+    <p>
+      <strong>Waste percentages</strong> vary by pattern: straight patterns are most efficient
+      at 10%, while chevron patterns need 25% extra due to the pre-angled cuts and complex
+      fitting at walls.
+    </p>
+    <p>
+      The <strong>shopping list</strong> includes flooring boxes, underlayment rolls (100 sq ft
+      each), and transition strips. Prices are estimates - check your local store for exact pricing.
+    </p>
+    <p>
+      The <strong>"Don't Forget" list</strong> shows essential tools and supplies. Having
+      everything ready before you start makes installation much smoother.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

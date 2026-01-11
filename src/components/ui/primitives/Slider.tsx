@@ -78,7 +78,7 @@ export function Slider({
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-[var(--color-cream)] mb-2">
           {label}
           {showValue && (
             <>
@@ -95,13 +95,13 @@ export function Slider({
         value={value}
         onChange={handleChange}
         className={`
-          w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer
+          w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer
           ${tokens.accent}
         `}
         {...props}
       />
       {(labels?.min || labels?.mid || labels?.max) && (
-        <div className="flex justify-between text-sm text-gray-500 mt-1">
+        <div className="flex justify-between text-sm text-[var(--color-muted)] mt-1">
           <span>{labels?.min || min}</span>
           {labels?.mid && <span>{labels.mid}</span>}
           <span>{labels?.max || max}</span>

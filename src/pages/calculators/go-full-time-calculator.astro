@@ -1,0 +1,215 @@
+---
+/**
+ * Go Full-Time Calculator Page
+ *
+ * SEO-optimized page targeting: "when can I quit my job calculator",
+ * "go full-time freelance calculator", "side hustle to full-time calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import GoFullTimeCalculator from '../../components/calculators/GoFullTimeCalculator/GoFullTimeCalculator';
+
+// SEO Configuration
+const title = 'Go Full-Time Calculator | When Can You Quit Your Job?';
+const description = 'Calculate when you can quit your job to freelance or pursue your side hustle full-time. Get personalized projections based on your income, savings, and growth rate.';
+const keywords = 'go full-time calculator, quit job calculator, freelance full-time, side hustle calculator, when to quit job, self-employment calculator, runway calculator, crossover point';
+const canonicalURL = '/calculators/go-full-time-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Go Full-Time Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your ideal freelance day rate based on your target income.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Calculate how much emergency fund you need before making the leap.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Side Hustle Profitability Calculator',
+    description: 'Make sure your side hustle is actually profitable before going all-in.',
+    href: '/calculators/side-hustle-profitability-calculator',
+    icon: 'calculator' as const,
+    color: 'red' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much should I save before quitting my job to freelance?",
+    answer: "The general recommendation is 3-12 months of living expenses, depending on your risk tolerance. Conservative planners save 12 months, moderate 6 months, and aggressive 3 months. However, savings alone isn't enough - you should also have consistent side income covering at least 50-100% of your expenses. The combination of runway (savings) and income velocity determines your true readiness."
+  },
+  {
+    question: "What is the 'crossover point' for going full-time?",
+    answer: "The crossover point is when your side hustle income exceeds your monthly living expenses. This is a major milestone because it means you're technically sustainable without your job. However, reaching the crossover point doesn't mean you should quit immediately - you should also have a savings buffer and consistent income history (usually 3-6 months) before making the leap."
+  },
+  {
+    question: "How do I calculate my true expenses when self-employed?",
+    answer: "Self-employment expenses are typically 20-40% higher than employment expenses. Add: health insurance premiums (often $400-800/month for individuals), self-employment tax (additional 7.65% in the US), retirement contributions you'll fund yourself, business expenses (software, equipment, coworking), and an emergency buffer. A good rule is to multiply your current expenses by 1.3 to estimate self-employed expenses."
+  },
+  {
+    question: "Should I factor in lost benefits when calculating my needed income?",
+    answer: "Absolutely. Benefits often represent 20-40% of total compensation. Key items to account for: employer health insurance contribution ($300-800/month), 401(k) or pension matching (typically 3-6% of salary), paid time off value (calculate your daily rate times PTO days), life/disability insurance, and any other perks. Add these to your target income to get a true replacement number."
+  },
+  {
+    question: "How long should my side income be consistent before I quit?",
+    answer: "Most financial advisors recommend 3-6 months of consistent income at your target level before quitting. This proves it's not a fluke and you have repeatable client acquisition skills. Ideally, you should have multiple clients (reducing single-client risk) and a mix of project types. If your income is highly variable month-to-month, extend this to 6-12 months to calculate a reliable average."
+  },
+  {
+    question: "What if my side income is irregular or variable?",
+    answer: "Variable income is common for freelancers. Strategies include: calculate your 'floor' income (worst 3 months average) rather than best months, save larger buffers (9-12 months instead of 3-6), diversify income streams (retainer clients, productized services, passive income), and build a 'feast or famine' fund during high-income months. The calculator uses your average - consider inputting your conservative estimate."
+  },
+  {
+    question: "How do taxes change when self-employed?",
+    answer: "Self-employment increases your effective tax rate by 7.65% (the employer portion of FICA you now pay). You'll also pay quarterly estimated taxes instead of payroll withholding. However, you gain deductions: home office, equipment, health insurance premiums, retirement contributions (SEP-IRA, Solo 401k), business travel, and more. Many freelancers find their effective rate is similar once they optimize deductions. Budget 25-35% of income for taxes as a safe estimate."
+  },
+  {
+    question: "What's a realistic growth rate for side income?",
+    answer: "Monthly growth rates vary widely: 5-10% is realistic for steady, sustainable growth through referrals and marketing. 10-20% is achievable with active marketing, networking, and service expansion. 20%+ is possible but usually unsustainable long-term or requires significant time investment. Be conservative in projections - most businesses plateau or grow in spurts, not linearly. The calculator compounds monthly, so even 5% = 80% annual growth."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Go Full-Time Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Go Full-Time Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Go Full-Time Calculator"
+    description="Ready to quit your job and pursue freelancing or your side hustle full-time? Calculate your runway, crossover point, and the optimal time to make the leap."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <GoFullTimeCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>current annual salary (after-tax)</strong> and
+      <strong>monthly benefits value</strong>. Benefits include health insurance premiums
+      your employer pays, 401(k) matching, and any other perks you'd lose by leaving.
+    </p>
+    <p>
+      Enter your <strong>monthly living expenses</strong> - this should be your essential
+      costs like rent/mortgage, utilities, food, insurance, and transportation. Be
+      realistic; underestimating expenses is a common mistake.
+    </p>
+    <p>
+      Input your <strong>current runway fund</strong> (savings dedicated to your transition)
+      and your <strong>current monthly side income</strong>. If your income varies, use
+      your conservative average from the last 3-6 months.
+    </p>
+    <p>
+      Set your expected <strong>monthly growth rate</strong>. A realistic rate is 5-15%
+      monthly; anything above 20% is optimistic. The calculator uses compound growth
+      to project when you'll reach key milestones.
+    </p>
+    <p>
+      Finally, select your <strong>risk tolerance</strong> and <strong>safety buffer</strong>
+      to get personalized recommendations for when you're ready to quit.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>crossover point</strong> is when your side income exceeds your monthly
+      expenses. This is the minimum viable point where you could technically survive
+      without your job, though it's not recommended without additional savings.
+    </p>
+    <p>
+      The <strong>recommended quit date</strong> factors in both your savings runway and
+      income level based on your selected risk tolerance. Conservative means waiting
+      until you have 12 months of runway and income matching expenses; aggressive means
+      3 months of runway and 50% income coverage.
+    </p>
+    <p>
+      The <strong>scenario comparison</strong> shows what you'd need at each risk level,
+      helping you decide how much safety margin you're comfortable with.
+    </p>
+    <p>
+      <strong>Full income replacement</strong> is when your side income matches your total
+      compensation (salary + benefits). This is the point where you're financially whole
+      - earning as much independently as you did employed.
+    </p>
+    <p>
+      The <strong>readiness percentage</strong> combines your savings progress and income
+      progress to give you an overall score. 100% means you meet all criteria at your
+      selected risk level.
+    </p>
+  </ContentSection>
+
+  <!-- Tips Section -->
+  <ContentSection title="Making the Transition Successfully">
+    <p>
+      <strong>Build consistency first:</strong> Three months of strong income followed
+      by a dry spell is worse than steady moderate income. Focus on retainer clients
+      and recurring revenue before quitting.
+    </p>
+    <p>
+      <strong>Consider a bridge period:</strong> Some people transition through part-time
+      employment, contract work, or a leave of absence. This reduces risk while you
+      build your client base.
+    </p>
+    <p>
+      <strong>Line up clients before you quit:</strong> Have at least 2-3 months of
+      committed work before your last day. The stress of zero income on day one makes
+      it harder to perform your best.
+    </p>
+    <p>
+      <strong>Prepare for the psychological shift:</strong> The freedom of self-employment
+      comes with the burden of uncertainty. Many people underestimate how uncomfortable
+      this feels, even with adequate savings.
+    </p>
+    <p>
+      <strong>Have a fallback plan:</strong> Know what you'd do if things don't work out
+      in 6-12 months. Having a Plan B (return to employment, pivot services, etc.)
+      reduces anxiety and ironically makes you more likely to succeed.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -86,7 +86,7 @@ export default function PaintCalculator() {
           <div className="space-y-6 mb-8">
             {/* Room Dimensions */}
             <div>
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Room Dimensions (feet)
               </h3>
               <Grid cols={3} gap="md">
@@ -139,7 +139,7 @@ export default function PaintCalculator() {
                   value={inputs.doorCount}
                   onChange={(e) => updateInput('doorCount', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">~21 sq ft each</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">~21 sq ft each</p>
               </div>
               <div>
                 <Label htmlFor="windowCount">Number of Windows</Label>
@@ -151,7 +151,7 @@ export default function PaintCalculator() {
                   value={inputs.windowCount}
                   onChange={(e) => updateInput('windowCount', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">~15 sq ft each</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">~15 sq ft each</p>
               </div>
             </Grid>
 
@@ -164,7 +164,7 @@ export default function PaintCalculator() {
                 onChange={(value) => updateInput('coats', Number(value))}
                 columns={3}
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-[var(--color-muted)] mt-2">
                 {inputs.coats === 1 && 'One coat may show brush strokes - recommended only for touch-ups'}
                 {inputs.coats === 2 && 'Two coats is standard for most painting projects'}
                 {inputs.coats === 3 && 'Three coats for dramatic color changes or covering dark colors'}
@@ -238,27 +238,27 @@ export default function PaintCalculator() {
             </Grid>
 
             {/* Shopping List */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Shopping List
               </h3>
               <div className="space-y-3">
                 {result.shoppingList.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
+                  <div key={index} className="flex items-center justify-between py-2 border-b border-white/10 last:border-0">
                     <div>
-                      <span className="font-medium text-gray-800">{item.item}</span>
-                      <span className="text-gray-500 ml-2">
+                      <span className="font-medium text-[var(--color-cream)]">{item.item}</span>
+                      <span className="text-[var(--color-muted)] ml-2">
                         {item.quantity} {item.unit}
                       </span>
                     </div>
-                    <span className="font-medium text-gray-700">
+                    <span className="font-medium text-[var(--color-cream)]">
                       ~{formatCurrency(item.estimatedPrice, result.currency)}
                     </span>
                   </div>
                 ))}
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-300 flex justify-between">
-                <span className="font-semibold text-gray-800">Total Estimated Cost</span>
+              <div className="mt-4 pt-4 border-t border-white/20 flex justify-between">
+                <span className="font-semibold text-[var(--color-cream)]">Total Estimated Cost</span>
                 <span className="font-bold text-purple-600">
                   {formatCurrency(result.estimatedCost, result.currency)}
                 </span>

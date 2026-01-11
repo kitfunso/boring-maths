@@ -15,7 +15,9 @@
       "Bash(sort:*)",
       "Bash(npm install:*)",
       "Bash(npm uninstall:*)",
-      "Bash(node scripts/generate-og-images.mjs:*)"
+      "Bash(node scripts/generate-og-images.mjs:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
     ]
   }
 }

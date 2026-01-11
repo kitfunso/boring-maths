@@ -113,7 +113,7 @@ export default function ElectricityCostCalculator() {
               <div className="mt-2 space-y-4">
                 {Object.entries(presetsByCategory).map(([category, presets]) => (
                   <div key={category}>
-                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">
+                    <p className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2">
                       {categoryLabels[category]}
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -124,7 +124,7 @@ export default function ElectricityCostCalculator() {
                           className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
                             selectedPreset === preset.name
                               ? 'bg-yellow-500 text-white font-medium'
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              : 'bg-[var(--color-night)] text-[var(--color-cream)] hover:bg-white/10'
                           }`}
                         >
                           {preset.name}
@@ -150,7 +150,7 @@ export default function ElectricityCostCalculator() {
                   value={inputs.watts}
                   onChange={(e) => updateInput('watts', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Check appliance label or manual</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Check appliance label or manual</p>
               </div>
 
               <div>
@@ -166,7 +166,7 @@ export default function ElectricityCostCalculator() {
                   value={inputs.ratePerKwh}
                   onChange={(e) => updateInput('ratePerKwh', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Check your electricity bill</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Check your electricity bill</p>
               </div>
             </Grid>
 
@@ -244,21 +244,21 @@ export default function ElectricityCostCalculator() {
             </Grid>
 
             {/* Energy Usage Context */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Energy Usage Comparison
               </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600">Power draw</span>
+                  <span className="text-[var(--color-subtle)]">Power draw</span>
                   <span className="font-medium">{inputs.watts}W ({(inputs.watts / 1000).toFixed(2)} kW)</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600">Equivalent LED bulbs</span>
+                  <span className="text-[var(--color-subtle)]">Equivalent LED bulbs</span>
                   <span className="font-medium">{Math.round(inputs.watts / 10)} bulbs (10W each)</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-gray-600">Annual CO2 emissions</span>
+                  <span className="text-[var(--color-subtle)]">Annual CO2 emissions</span>
                   <span className="font-medium">~{Math.round(result.kwhPerYear * 0.4)} kg</span>
                 </div>
               </div>

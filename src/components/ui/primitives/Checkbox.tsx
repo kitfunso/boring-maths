@@ -60,7 +60,7 @@ export function Checkbox({
         onChange={handleChange}
         className={`
           ${SIZE_CLASSES[size]}
-          rounded border-gray-300
+          rounded border-white/20
           ${tokens.text600}
           focus:ring-2 focus:${tokens.ring100}
           cursor-pointer
@@ -68,7 +68,7 @@ export function Checkbox({
         {...props}
       />
       {label && (
-        <span className={`font-medium text-gray-700 ${LABEL_SIZE_CLASSES[size]}`}>
+        <span className={`font-medium text-[var(--color-cream)] ${LABEL_SIZE_CLASSES[size]}`}>
           {label}
         </span>
       )}

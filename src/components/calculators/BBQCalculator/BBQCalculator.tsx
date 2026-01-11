@@ -132,7 +132,7 @@ export default function BBQCalculator() {
                   value={inputs.childrenCount}
                   onChange={(e) => updateInput('childrenCount', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Kids eat about half portions</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Kids eat about half portions</p>
               </div>
             </Grid>
 
@@ -145,7 +145,7 @@ export default function BBQCalculator() {
                 onChange={(value) => updateInput('appetiteLevel', value as AppetiteLevel)}
                 columns={3}
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-[var(--color-muted)] mt-2">
                 {inputs.appetiteLevel === 'light' && '~5 oz meat per adult (appetizer-style event)'}
                 {inputs.appetiteLevel === 'moderate' && '~8 oz meat per adult (typical cookout)'}
                 {inputs.appetiteLevel === 'hungry' && '~12 oz meat per adult (hearty eaters)'}
@@ -256,16 +256,16 @@ export default function BBQCalculator() {
             </div>
 
             {/* Supplies */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Supplies Checklist
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {result.supplies.map((item, index) => (
                   <div key={index} className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded border-2 border-gray-300 flex-shrink-0" />
+                    <div className="w-5 h-5 rounded border-2 border-white/20 flex-shrink-0" />
                     <div>
-                      <span className="text-gray-700">{item.item}:</span>
+                      <span className="text-[var(--color-cream)]">{item.item}:</span>
                       <span className="font-medium ml-1">{item.quantity}</span>
                     </div>
                   </div>

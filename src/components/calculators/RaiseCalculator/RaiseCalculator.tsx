@@ -155,7 +155,7 @@ export default function RaiseCalculator() {
                     className={`px-3 py-1.5 rounded-lg text-sm transition-all ${
                       Math.round(inputs.raisePercentage * 100) === pct
                         ? 'bg-green-600 text-white font-medium'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-[var(--color-night)] text-[var(--color-cream)] hover:bg-white/10'
                     }`}
                   >
                     {pct}%
@@ -193,7 +193,7 @@ export default function RaiseCalculator() {
                   value={Math.round(inputs.investmentReturn * 100)}
                   onChange={(e) => updateInput('investmentReturn', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-gray-500 mt-1">7% is typical for stock market</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">7% is typical for stock market</p>
               </div>
 
               <div>
@@ -207,7 +207,7 @@ export default function RaiseCalculator() {
                   value={Math.round(inputs.annualGrowthRate * 100)}
                   onChange={(e) => updateInput('annualGrowthRate', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-gray-500 mt-1">3% is typical for most careers</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">3% is typical for most careers</p>
               </div>
             </Grid>
           </div>
@@ -254,8 +254,8 @@ export default function RaiseCalculator() {
             </Grid>
 
             {/* Growth Over Time */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Value Over Time
               </h3>
               <div className="space-y-4">
@@ -264,16 +264,16 @@ export default function RaiseCalculator() {
                   if (!yearData) return null;
                   return (
                     <div key={year} className="flex items-center justify-between">
-                      <span className="text-gray-600">After {year} years</span>
+                      <span className="text-[var(--color-subtle)]">After {year} years</span>
                       <div className="text-right">
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-[var(--color-cream)]">
                           {formatCurrency(yearData.cumulativeIncome, result.currency)}
                         </span>
-                        <span className="text-gray-400 mx-2">→</span>
+                        <span className="text-[var(--color-muted)] mx-2">→</span>
                         <span className="font-medium text-green-600">
                           {formatCurrency(yearData.investedValue, result.currency)}
                         </span>
-                        <span className="text-xs text-gray-500 ml-1">invested</span>
+                        <span className="text-xs text-[var(--color-muted)] ml-1">invested</span>
                       </div>
                     </div>
                   );

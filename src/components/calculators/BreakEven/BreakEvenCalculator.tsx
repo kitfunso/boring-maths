@@ -86,7 +86,7 @@ export default function BreakEvenCalculator() {
                 value={inputs.fixedCosts}
                 onChange={(e) => updateInput('fixedCosts', Number(e.target.value))}
               />
-              <p className="text-sm text-gray-500 mt-1">Rent, salaries, insurance, subscriptions, etc.</p>
+              <p className="text-sm text-[var(--color-muted)] mt-1">Rent, salaries, insurance, subscriptions, etc.</p>
             </div>
 
             {/* Price and Variable Cost */}
@@ -119,7 +119,7 @@ export default function BreakEvenCalculator() {
                   value={inputs.variableCostPerUnit}
                   onChange={(e) => updateInput('variableCostPerUnit', Number(e.target.value))}
                 />
-                <p className="text-sm text-gray-500 mt-1">Materials, shipping, transaction fees, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">Materials, shipping, transaction fees, etc.</p>
               </div>
             </Grid>
 
@@ -137,7 +137,7 @@ export default function BreakEvenCalculator() {
                 value={inputs.targetProfit}
                 onChange={(e) => updateInput('targetProfit', Number(e.target.value))}
               />
-              <p className="text-sm text-gray-500 mt-1">See how many units to hit your profit goal</p>
+              <p className="text-sm text-[var(--color-muted)] mt-1">See how many units to hit your profit goal</p>
             </div>
 
             {/* Warning if invalid */}
@@ -192,14 +192,14 @@ export default function BreakEvenCalculator() {
               </Grid>
 
               {/* Profit Analysis Table */}
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+              <div className="bg-[var(--color-night)] rounded-xl p-6">
+                <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Profit at Different Sales Levels
                 </h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-gray-500 text-xs uppercase tracking-wider border-b border-gray-200">
+                      <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider border-b border-white/10">
                         <th className="text-left py-2 pr-4">Units</th>
                         <th className="text-right py-2 px-2">Revenue</th>
                         <th className="text-right py-2 px-2">Costs</th>
@@ -207,7 +207,7 @@ export default function BreakEvenCalculator() {
                         <th className="text-right py-2 pl-2">Margin</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-white/5">
                       {result.profitAnalysis.map((row, index) => (
                         <tr
                           key={index}

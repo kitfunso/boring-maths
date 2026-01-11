@@ -107,7 +107,7 @@ export default function TipCalculator() {
 
             {/* Quick Tip Buttons */}
             <div>
-              <p className="text-sm text-gray-600 mb-2">Quick select:</p>
+              <p className="text-sm text-[var(--color-subtle)] mb-2">Quick select:</p>
               <div className="flex flex-wrap gap-2">
                 {[15, 18, 20, 25].map((pct) => (
                   <button
@@ -116,7 +116,7 @@ export default function TipCalculator() {
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       Math.round(inputs.tipPercentage * 100) === pct
                         ? 'bg-green-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        : 'bg-[var(--color-night)] text-[var(--color-cream)] hover:bg-white/10'
                     }`}
                   >
                     {pct}%
@@ -131,18 +131,18 @@ export default function TipCalculator() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => updateInput('splitCount', Math.max(1, inputs.splitCount - 1))}
-                  className="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700 transition-all"
+                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all"
                   disabled={inputs.splitCount <= 1}
                 >
                   −
                 </button>
                 <div className="flex-1 text-center">
-                  <span className="text-3xl font-bold text-gray-800">{inputs.splitCount}</span>
-                  <span className="text-gray-500 ml-2">{inputs.splitCount === 1 ? 'person' : 'people'}</span>
+                  <span className="text-3xl font-bold text-[var(--color-cream)]">{inputs.splitCount}</span>
+                  <span className="text-[var(--color-muted)] ml-2">{inputs.splitCount === 1 ? 'person' : 'people'}</span>
                 </div>
                 <button
                   onClick={() => updateInput('splitCount', Math.min(20, inputs.splitCount + 1))}
-                  className="w-12 h-12 rounded-full bg-gray-100 hover:bg-gray-200 text-xl font-bold text-gray-700 transition-all"
+                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all"
                   disabled={inputs.splitCount >= 20}
                 >
                   +
@@ -198,28 +198,28 @@ export default function TipCalculator() {
             </Grid>
 
             {/* Tip Suggestions Table */}
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
+            <div className="bg-[var(--color-night)] rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Quick Reference
               </h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-gray-500 text-xs uppercase tracking-wider">
+                    <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">
                       <th className="text-left py-2">Tip %</th>
                       <th className="text-right py-2">Tip</th>
                       <th className="text-right py-2">Total</th>
                       {inputs.splitCount > 1 && <th className="text-right py-2">Per Person</th>}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200">
+                  <tbody className="divide-y divide-white/10">
                     {result.suggestions.map((suggestion) => (
                       <tr
                         key={suggestion.percentage}
                         className={`${
                           suggestion.percentage === inputs.tipPercentage
                             ? 'bg-green-50 font-medium'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-[var(--color-night)]'
                         } cursor-pointer transition-colors`}
                         onClick={() => selectTipPercentage(suggestion.percentage)}
                       >

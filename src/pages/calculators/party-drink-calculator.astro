@@ -1,0 +1,207 @@
+---
+/**
+ * Party Drink Calculator (Non-Alcoholic) Page
+ *
+ * SEO-optimized page targeting: "party drink calculator non-alcoholic"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PartyDrinkCalculator from '../../components/calculators/PartyDrinkCalculator/PartyDrinkCalculator';
+
+// SEO Configuration
+const title = 'Party Drink Calculator (Non-Alcoholic) | How Much Soda, Juice & Water';
+const description = 'Calculate how much non-alcoholic drinks you need for your party. Enter guest count, weather conditions, and event type to get quantities for sodas, juice, water, and ice.';
+const keywords = 'party drink calculator, non-alcoholic drinks calculator, how much soda for party, juice calculator, party water calculator, kids party drinks, event drink planning, ice needed for party';
+const canonicalURL = '/calculators/party-drink-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Party Drink Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate how much meat and supplies for your cookout.',
+    href: '/calculators/bbq-calculator',
+    icon: 'calculator' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Wedding Alcohol Calculator',
+    description: 'Estimate beer, wine, and liquor for weddings and events.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills between friends.',
+    href: '/calculators/tip-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much soda do I need for a party of 50 people?",
+    answer: "For a 4-hour party with 50 guests in warm weather, plan for about 100-120 servings of soda. This translates to roughly 12-15 two-liter bottles or 4-5 twelve-packs of cans. In hot weather, increase by 30-50%. Having a mix of regular and diet options is recommended."
+  },
+  {
+    question: "How do I calculate drinks for a kids' birthday party?",
+    answer: "Kids drink slightly less volume but more frequently. For a typical 2-3 hour kids' party, plan for 2-3 drinks per child. Focus on juice boxes (easy to handle, no spills), water bottles, and perhaps a special punch. Avoid too many caffeinated sodas. Our calculator automatically adjusts for the number of children."
+  },
+  {
+    question: "How much ice do I need for an outdoor party?",
+    answer: "A good rule is 1 pound of ice per person for keeping drinks cold, plus extra for serving in drinks. In hot weather (85F+), double this amount. For a party of 25 in warm weather, you'll need about 30-40 pounds of ice (3-4 bags). Buy ice last and store in coolers until needed."
+  },
+  {
+    question: "What's the best drink ratio for a family gathering?",
+    answer: "For mixed-age family gatherings, a balanced approach works best: 30% soft drinks (sodas), 25% juice, 25% water (still and sparkling), 15% punch/lemonade, and 5% hot beverages. Adjust based on weather - hot days need more water, cold days benefit from hot chocolate or cider."
+  },
+  {
+    question: "How does weather affect drink consumption at parties?",
+    answer: "Weather significantly impacts how much people drink. In cold weather (below 50F), expect 0.5 drinks per person per hour. Mild weather (50-70F) averages 0.75 drinks/hour. Warm weather (70-85F) increases to 1 drink/hour. Hot weather (85F+) can reach 1.5 drinks per person per hour. Our calculator automatically adjusts quantities based on your temperature selection."
+  },
+  {
+    question: "Should I buy bottles or cans for a party?",
+    answer: "Both have advantages. Two-liter bottles are more economical for large groups and work well for punch bowls or serving stations. Cans are more hygienic (no double-dipping), easier for guests to grab, and stay colder longer. For kids' parties, juice boxes and individual water bottles prevent waste and spills."
+  },
+  {
+    question: "How far in advance should I buy party drinks?",
+    answer: "Non-perishable drinks (sodas, bottled water) can be bought 1-2 weeks ahead. Fresh juice should be purchased 2-3 days before. Ice should be bought the day of or day before and kept frozen. Pro tip: Pre-chill bottled drinks in the refrigerator 24 hours before to reduce ice melting."
+  },
+  {
+    question: "What non-alcoholic drinks are best for a formal event?",
+    answer: "For formal events like graduations, showers, or business functions, focus on: sparkling water (40%), elegant punch or fruit-infused water (20%), quality juice (20%), coffee and tea service (15%), and limited sodas (5%). Consider garnishes like citrus slices or fresh mint to elevate presentation."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Party Drink Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Party Drink Calculator (Non-Alcoholic)"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Party Drink Calculator (Non-Alcoholic)"
+    description="Calculate exactly how much soda, juice, water, and ice you need for your party. Accounts for weather conditions, event type, and kid-friendly options."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PartyDrinkCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>total guest count</strong> and how many are <strong>children</strong>
+      (under 12). Kids drink slightly less per serving but may want drinks more frequently,
+      and the calculator adjusts drink types accordingly.
+    </p>
+    <p>
+      Set your <strong>event duration</strong> - longer events naturally need more drinks.
+      A 2-hour kids' party needs far less than an 8-hour family reunion.
+    </p>
+    <p>
+      Select the <strong>weather/temperature</strong> condition. This is crucial - hot weather
+      can nearly triple drink consumption compared to cold weather. If you're indoors with
+      air conditioning, choose "mild" regardless of outside temperature.
+    </p>
+    <p>
+      Choose your <strong>event type</strong> to optimize the drink mix. Kids' parties favor
+      juice, formal events lean toward sparkling water and punch, while casual adult gatherings
+      might focus more on sodas.
+    </p>
+    <p>
+      Finally, check which <strong>drink types</strong> you want to include. Uncheck any
+      categories you don't need, and the calculator will redistribute quantities appropriately.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>estimated total cost</strong> gives you a budget baseline using average retail
+      prices. Actual costs may vary based on your location, brands chosen, and whether you buy
+      in bulk at warehouse stores.
+    </p>
+    <p>
+      <strong>Total servings</strong> includes a 15% buffer over the calculated minimum. This
+      accounts for spillage, heavy drinkers, and guests who may return for seconds.
+    </p>
+    <p>
+      The <strong>drinks per person</strong> metric helps you verify the estimate is reasonable.
+      For a typical 4-hour event in warm weather, expect 3-5 drinks per guest.
+    </p>
+    <p>
+      <strong>Ice requirements</strong> are calculated based on weather and event duration.
+      Remember that ice melts faster in direct sunlight - if your party is outdoors on a hot
+      day, consider buying extra or having a backup supply ready.
+    </p>
+    <p>
+      The <strong>supplies checklist</strong> covers essentials like cups, napkins, and straws.
+      Quantities assume 2-3 cups per person (people often set down cups and get new ones).
+    </p>
+  </ContentSection>
+
+  <!-- Tips Section -->
+  <ContentSection title="Party Drink Planning Tips">
+    <p>
+      <strong>Variety matters:</strong> Even if guests have preferences, offering 3-4 drink
+      types means everyone finds something they like. Don't put all your budget into one category.
+    </p>
+    <p>
+      <strong>Temperature control:</strong> Pre-chill all drinks 24 hours before the party.
+      This reduces ice needs and keeps drinks cold longer. Use multiple coolers spread around
+      the venue rather than one central location.
+    </p>
+    <p>
+      <strong>Kid-friendly setup:</strong> For parties with children, set up a separate drink
+      station at kid height. Use cups with lids or go with juice boxes/pouches to minimize spills.
+    </p>
+    <p>
+      <strong>Sustainability option:</strong> Consider large dispensers for lemonade or punch
+      with reusable cups instead of individual bottles. This reduces waste and often costs less.
+    </p>
+    <p>
+      <strong>Emergency backup:</strong> Keep a few extra cases of water in reserve. Water is
+      universally accepted and essential for hydration, especially in hot weather or for
+      active events.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

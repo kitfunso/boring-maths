@@ -75,7 +75,7 @@ export function Select<T extends string>({
           <option
             key={String(option.value)}
             value={String(option.value)}
-            className="text-gray-900"
+            className="text-[var(--color-cream)]"
           >
             {option.icon ? `${option.icon} ${option.label}` : option.label}
           </option>
@@ -90,7 +90,7 @@ export function Select<T extends string>({
       value={value as string}
       onChange={handleChange}
       className={`
-        w-full px-4 border-2 border-gray-200 rounded-xl
+        w-full px-4 border-2 border-white/10 rounded-xl
         focus:${tokens.border500} focus:ring-4 ${tokens.ring100}
         transition-all duration-200 cursor-pointer
         ${SIZE_CLASSES[size]}
