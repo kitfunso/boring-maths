@@ -1,0 +1,67 @@
+---
+/**
+ * Health Calculators Hub Page
+ *
+ * SEO-optimized category page for health and fitness calculators.
+ * Targets: "health calculator", "BMI calculator", "calorie calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Health';
+const title = 'Health & Fitness Calculators | BMI, Calories & More';
+const description = 'Free health calculators for fitness and wellness. Calculate BMI, daily calories (TDEE), and track your health metrics with our easy-to-use tools.';
+const keywords = 'health calculator, BMI calculator, calorie calculator, TDEE calculator, fitness calculator, body mass index, weight calculator, nutrition calculator';
+const canonicalURL = '/calculators/health/';
+
+const calculators = [
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and see healthy weight ranges.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart',
+    color: 'violet',
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs (TDEE) based on activity level and goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart',
+    color: 'green',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="heart"
+  color="pink"
+  tagline="Track your health metrics with science-backed calculations"
+  calculators={calculators}
+>
+  <p>
+    Our health calculators provide quick insights into key wellness metrics. While these tools
+    are helpful for general awareness, they're not a substitute for professional medical advice.
+    Use them as starting points for discussions with your healthcare provider.
+  </p>
+  <p>
+    BMI and calorie calculations are based on established formulas used by health professionals
+    worldwide. Your individual results may vary based on factors like muscle mass, bone density,
+    and metabolic differences.
+  </p>
+  <h3>Understanding Health Metrics</h3>
+  <ul>
+    <li><strong>BMI Ranges:</strong> Underweight (&lt;18.5), Normal (18.5-24.9), Overweight (25-29.9), Obese (30+)</li>
+    <li><strong>TDEE:</strong> Total Daily Energy Expenditure - calories burned including exercise and daily activities</li>
+    <li><strong>BMR:</strong> Basal Metabolic Rate - calories burned at rest just to keep your body functioning</li>
+    <li><strong>Safe Weight Loss:</strong> 0.5-1 kg (1-2 lbs) per week is generally considered safe and sustainable</li>
+  </ul>
+  <p class="text-sm mt-4 text-[var(--color-muted)]">
+    <em>Disclaimer: These calculators are for informational purposes only and should not be used
+    as a substitute for professional medical advice, diagnosis, or treatment.</em>
+  </p>
+</CategoryLayout>

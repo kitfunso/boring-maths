@@ -1,0 +1,77 @@
+---
+/**
+ * Home & DIY Calculators Hub Page
+ *
+ * SEO-optimized category page for home improvement calculators.
+ * Targets: "home improvement calculator", "DIY calculator", "paint calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Home';
+const title = 'Home & DIY Calculators | Home Improvement Tools';
+const description = 'Free home improvement calculators for DIY projects. Calculate paint, flooring, mulch, and electricity costs. Get accurate material estimates and shopping lists.';
+const keywords = 'home improvement calculator, DIY calculator, paint calculator, flooring calculator, mulch calculator, electricity cost calculator, home project calculator, material calculator';
+const canonicalURL = '/calculators/home/';
+
+const calculators = [
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate paint needed for any room with gallons and shopping list.',
+    href: '/calculators/paint-calculator',
+    icon: 'cube',
+    color: 'violet',
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring needed with pattern-specific waste factors and box counts.',
+    href: '/calculators/flooring-calculator',
+    icon: 'layers',
+    color: 'amber',
+  },
+  {
+    title: 'Mulch Calculator',
+    description: 'Calculate how much mulch you need in cubic yards or bags for your garden beds.',
+    href: '/calculators/mulch-calculator',
+    icon: 'leaf',
+    color: 'green',
+  },
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Calculate appliance running costs - daily, monthly, and yearly.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt',
+    color: 'amber',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="home"
+  color="amber"
+  tagline="Plan your home projects with accurate material estimates"
+  calculators={calculators}
+>
+  <p>
+    Our home improvement calculators help DIYers and homeowners plan projects accurately.
+    Nothing's worse than running out of paint mid-wall or buying too many boxes of flooring.
+    Get your quantities right the first time.
+  </p>
+  <p>
+    These calculators account for real-world factors like waste percentages, coverage rates,
+    and installation patterns. Whether you're painting a room, laying flooring, or spreading
+    mulch, you'll know exactly what to buy.
+  </p>
+  <h3>DIY Pro Tips</h3>
+  <ul>
+    <li><strong>Paint Coverage:</strong> One gallon covers ~350-400 sq ft per coat on smooth walls, less on textured</li>
+    <li><strong>Flooring Waste:</strong> Add 10% for straight patterns, 15% for diagonal, 20-25% for herringbone</li>
+    <li><strong>Mulch Depth:</strong> 2-3 inches is ideal - too deep can suffocate plants and harbor pests</li>
+    <li><strong>Electricity Costs:</strong> Space heaters and AC units are often the biggest power draws in a home</li>
+  </ul>
+</CategoryLayout>

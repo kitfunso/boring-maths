@@ -1,0 +1,91 @@
+---
+/**
+ * Everyday Calculators Hub Page
+ *
+ * SEO-optimized category page for everyday utility calculators.
+ * Targets: "online calculator", "percentage calculator", "tip calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Everyday';
+const title = 'Everyday Calculators | Tips, Percentages & More';
+const description = 'Free everyday calculators for common math problems. Calculate tips, percentages, discounts, unit conversions, and more. Fast, simple, and always free.';
+const keywords = 'everyday calculator, tip calculator, percentage calculator, discount calculator, unit converter, age calculator, dog age calculator, online calculator';
+const canonicalURL = '/calculators/everyday/';
+
+const calculators = [
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percent change, and more with instant results.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent',
+    color: 'violet',
+  },
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips instantly and split bills between friends with ease.',
+    href: '/calculators/tip-calculator',
+    icon: 'percent',
+    color: 'green',
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, temperature, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap',
+    color: 'blue',
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age in years, months, days with zodiac signs.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar',
+    color: 'violet',
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices, percent off, and total savings on any purchase.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent',
+    color: 'coral',
+  },
+  {
+    title: 'Dog Age Calculator',
+    description: 'Convert dog years to human years using accurate, science-based formulas.',
+    href: '/calculators/dog-age-calculator',
+    icon: 'paw',
+    color: 'amber',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="calculator"
+  color="ocean"
+  tagline="Quick answers to everyday math questions"
+  calculators={calculators}
+>
+  <p>
+    Our everyday calculators solve the small math problems that pop up in daily life.
+    Whether you're splitting a dinner bill, figuring out a discount, or wondering how
+    old your dog is in human years, these tools give you instant answers.
+  </p>
+  <p>
+    No more mental math or pulling out your phone's calculator app. Just enter your numbers
+    and get results immediately. All calculations happen in your browser - fast, private,
+    and always free.
+  </p>
+  <h3>Quick Reference</h3>
+  <ul>
+    <li><strong>Standard Tipping:</strong> 15-20% for good service, 20-25% for exceptional service</li>
+    <li><strong>Percentage Shortcut:</strong> To find 15%, calculate 10% and add half of it</li>
+    <li><strong>Dog Years:</strong> The old "7 years" rule is a myth - small dogs age slower than large dogs</li>
+    <li><strong>Temperature Conversion:</strong> (°F - 32) × 5/9 = °C or (°C × 9/5) + 32 = °F</li>
+  </ul>
+</CategoryLayout>

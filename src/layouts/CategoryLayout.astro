@@ -1,0 +1,315 @@
+---
+/**
+ * Category Layout - Hub Pages for Calculator Categories
+ *
+ * Provides consistent layout for category pages like /calculators/finance/
+ * Includes enhanced SEO with CollectionPage schema.
+ */
+
+import BaseLayout from './BaseLayout.astro';
+
+export interface Calculator {
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  color: string;
+}
+
+export interface Props {
+  /** Category name (e.g., "Finance", "Home") */
+  category: string;
+  /** Page title for SEO */
+  title: string;
+  /** Meta description for SEO */
+  description: string;
+  /** Target keywords */
+  keywords: string;
+  /** Canonical URL path */
+  canonicalURL: string;
+  /** Category icon name */
+  icon: string;
+  /** Category theme color */
+  color: string;
+  /** Hero subtitle/tagline */
+  tagline: string;
+  /** Calculators in this category */
+  calculators: Calculator[];
+}
+
+const {
+  category,
+  title,
+  description,
+  keywords,
+  canonicalURL,
+  icon,
+  color,
+  tagline,
+  calculators,
+} = Astro.props;
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Color mapping for icons
+const iconColors: Record<string, string> = {
+  blue: 'from-blue-500 to-blue-600',
+  green: 'from-emerald-500 to-emerald-600',
+  accent: 'from-[#c4ff00] to-[#9acc00]',
+  violet: 'from-violet-500 to-purple-600',
+  coral: 'from-rose-500 to-red-500',
+  ocean: 'from-cyan-500 to-teal-500',
+  amber: 'from-amber-500 to-orange-500',
+  pink: 'from-pink-500 to-rose-500',
+};
+
+// Icon SVG paths
+const iconPaths: Record<string, string> = {
+  dollar: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  percent: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  chart: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  glass: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  trending: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  cube: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
+  bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
+  fire: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  swap: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+  calendar: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  paw: 'M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+  layers: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  leaf: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+  rocket: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
+  briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  users: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+};
+
+// CollectionPage Schema for SEO
+const collectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": title,
+  "description": description,
+  "url": `${siteUrl}${canonicalURL}`,
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": calculators.length,
+    "itemListElement": calculators.map((calc, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": calc.title,
+      "description": calc.description,
+      "url": `${siteUrl}${calc.href}`
+    }))
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Boring Math Calculators",
+    "url": siteUrl
+  }
+};
+
+// BreadcrumbList Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Calculators",
+      "item": `${siteUrl}/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${category} Calculators`,
+      "item": `${siteUrl}${canonicalURL}`
+    }
+  ]
+};
+
+// WebPage Schema for additional SEO signals
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": `${siteUrl}${canonicalURL}`,
+  "breadcrumb": breadcrumbSchema,
+  "mainContentOfPage": {
+    "@type": "WebPageElement",
+    "cssSelector": "#calculator-grid"
+  },
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero-title", ".hero-description"]
+  }
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+>
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+  <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} slot="head" />
+
+  <!-- Hero Section -->
+  <section class="relative px-6 py-12 md:py-16">
+    <div class="max-w-7xl mx-auto">
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
+        <a href="/" class="text-[var(--color-muted)] hover:text-[var(--color-cream)] transition-colors">
+          Home
+        </a>
+        <svg class="w-4 h-4 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="text-[var(--color-cream)]">{category} Calculators</span>
+      </nav>
+
+      <!-- Hero Content -->
+      <div class="text-center max-w-3xl mx-auto">
+        <!-- Category Icon -->
+        <div class={`inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br ${iconColors[color]} items-center justify-center mb-6`}>
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[icon]} />
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h1 class="hero-title text-4xl md:text-5xl font-display text-[var(--color-cream)] mb-4">
+          {category} <span class="gradient-text">Calculators</span>
+        </h1>
+
+        <!-- Tagline -->
+        <p class="hero-description text-lg text-[var(--color-subtle)] mb-6">
+          {tagline}
+        </p>
+
+        <!-- Stats -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
+          <span class="text-sm text-[var(--color-subtle)]">{calculators.length} Free Calculators</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculators Grid -->
+  <section class="px-6 py-8" id="calculator-grid">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {calculators.map((calc, index) => (
+          <a
+            href={calc.href}
+            class="bento-card group glow"
+            style={`animation-delay: ${index * 50}ms;`}
+          >
+            <!-- Icon -->
+            <div class={`card-icon bg-gradient-to-br ${iconColors[calc.color]}`}>
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[calc.icon]} />
+              </svg>
+            </div>
+
+            <!-- Content -->
+            <h2 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+              {calc.title}
+            </h2>
+            <p class="text-sm text-[var(--color-subtle)] leading-relaxed mb-4">
+              {calc.description}
+            </p>
+
+            <!-- Arrow -->
+            <div class="flex justify-end mt-auto pt-2">
+              <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] transition-all duration-500">
+                <svg class="w-4 h-4 text-[var(--color-subtle)] group-hover:text-[var(--color-void)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About This Category Section -->
+  <section class="px-6 py-16">
+    <div class="max-w-4xl mx-auto">
+      <div class="glass rounded-3xl p-8 md:p-12">
+        <h2 class="text-2xl font-display text-[var(--color-cream)] mb-4">
+          About {category} Calculators
+        </h2>
+        <div class="prose prose-invert max-w-none text-[var(--color-subtle)]">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse Other Categories -->
+  <section class="px-6 py-8 mb-16">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-xl font-display text-[var(--color-cream)] mb-6 text-center">
+        Explore Other Categories
+      </h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/calculators/finance/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-violet-500/50 hover:text-violet-400 transition-all">
+          Finance
+        </a>
+        <a href="/calculators/income/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-blue-500/50 hover:text-blue-400 transition-all">
+          Income
+        </a>
+        <a href="/calculators/business/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-emerald-500/50 hover:text-emerald-400 transition-all">
+          Business
+        </a>
+        <a href="/calculators/home/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-amber-500/50 hover:text-amber-400 transition-all">
+          Home & DIY
+        </a>
+        <a href="/calculators/health/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-pink-500/50 hover:text-pink-400 transition-all">
+          Health
+        </a>
+        <a href="/calculators/events/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-rose-500/50 hover:text-rose-400 transition-all">
+          Events
+        </a>
+        <a href="/calculators/everyday/" class="px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-[var(--color-subtle)] hover:border-cyan-500/50 hover:text-cyan-400 transition-all">
+          Everyday
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .bento-card {
+    animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes card-appear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -2,8 +2,8 @@
 /**
  * SEO Head Component
  *
- * Generates consistent Schema.org markup for calculator pages.
- * Includes SoftwareApplication, FAQPage, and BreadcrumbList schemas.
+ * Generates comprehensive Schema.org markup for calculator pages.
+ * Includes WebApplication, FAQPage, BreadcrumbList, HowTo, and Organization schemas.
  */
 
 export interface FAQ {
@@ -16,8 +16,13 @@ export interface BreadcrumbItem {
   url: string;
 }
 
+export interface HowToStep {
+  name: string;
+  text: string;
+}
+
 export interface Props {
-  /** Calculator name for SoftwareApplication schema */
+  /** Calculator name for WebApplication schema */
   name: string;
   /** Calculator description */
   description: string;
@@ -27,26 +32,93 @@ export interface Props {
   faqs?: FAQ[];
   /** Breadcrumb items (will be prepended with Home) */
   breadcrumbs?: BreadcrumbItem[];
+  /** Category for applicationSubCategory */
+  category?: string;
+  /** HowTo steps for DIY/instructional calculators */
+  howToSteps?: HowToStep[];
+  /** Estimated time to use the calculator */
+  estimatedTime?: string;
 }
 
-const { name, description, url, faqs = [], breadcrumbs = [] } = Astro.props;
+const {
+  name,
+  description,
+  url,
+  faqs = [],
+  breadcrumbs = [],
+  category = 'Calculator',
+  howToSteps = [],
+  estimatedTime = 'PT2M',
+} = Astro.props;
 
 const siteUrl = Astro.site?.origin || 'https://boring-maths.vercel.app';
 
-// SoftwareApplication schema
+// Organization schema (for brand recognition)
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  "name": "Boring Math Calculators",
+  "url": siteUrl,
+  "logo": {
+    "@type": "ImageObject",
+    "url": `${siteUrl}/favicon.svg`,
+    "width": 512,
+    "height": 512
+  },
+  "description": "Free online calculators for everyday math problems"
+};
+
+// WebApplication schema (better than just SoftwareApplication for web tools)
 const appSchema = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": "WebApplication",
   "name": name,
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web Browser",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": category,
+  "operatingSystem": "Any",
+  "browserRequirements": "Requires JavaScript",
   "offers": {
     "@type": "Offer",
     "price": "0",
-    "priceCurrency": "USD"
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
   },
   "description": description,
-  "url": url
+  "url": url,
+  "provider": {
+    "@id": `${siteUrl}/#organization`
+  },
+  "featureList": [
+    "Instant calculations",
+    "No login required",
+    "Mobile-friendly",
+    "Privacy-focused - all calculations in browser"
+  ],
+  "softwareVersion": "1.0",
+  "inLanguage": "en-US"
+};
+
+// WebPage schema for better page understanding
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": name,
+  "description": description,
+  "url": url,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Boring Math Calculators",
+    "url": siteUrl
+  },
+  "about": {
+    "@type": "Thing",
+    "name": category
+  },
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".calculator-header", ".result-card"]
+  }
 };
 
 // FAQPage schema (only if FAQs provided)
@@ -66,7 +138,10 @@ const faqSchema = faqs.length > 0 ? {
 // BreadcrumbList schema
 const fullBreadcrumbs = [
   { name: "Home", url: siteUrl },
-  ...breadcrumbs.map(b => ({ name: b.name, url: b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}` }))
+  ...breadcrumbs.map(b => ({
+    name: b.name,
+    url: b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}`
+  }))
 ];
 
 const breadcrumbSchema = {
@@ -79,15 +154,45 @@ const breadcrumbSchema = {
     "item": item.url
   }))
 };
+
+// HowTo schema (for DIY/instructional calculators)
+const howToSchema = howToSteps.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": `How to Use the ${name}`,
+  "description": description,
+  "totalTime": estimatedTime,
+  "tool": {
+    "@type": "HowToTool",
+    "name": "Web Browser"
+  },
+  "step": howToSteps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "name": step.name,
+    "text": step.text
+  }))
+} : null;
 ---
 
-<!-- SoftwareApplication Schema -->
+<!-- Organization Schema (site-wide identity) -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+<!-- WebApplication Schema (primary calculator schema) -->
 <script type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+
+<!-- WebPage Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+
+<!-- BreadcrumbList Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <!-- FAQPage Schema (if FAQs provided) -->
 {faqSchema && (
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 )}
 
-<!-- BreadcrumbList Schema -->
-<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<!-- HowTo Schema (if steps provided) -->
+{howToSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+)}

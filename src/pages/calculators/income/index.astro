@@ -1,0 +1,78 @@
+---
+/**
+ * Income Calculators Hub Page
+ *
+ * SEO-optimized category page for income and career calculators.
+ * Targets: "salary calculator", "income calculator", "freelance rate calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Income';
+const title = 'Income & Salary Calculators | Career Planning Tools';
+const description = 'Free income calculators for salary conversion, freelance rates, raises, and career planning. Calculate hourly to annual salary, day rates, and when to go full-time freelance.';
+const keywords = 'salary calculator, income calculator, freelance rate calculator, hourly to salary, day rate calculator, raise calculator, go full time calculator, career calculator';
+const canonicalURL = '/calculators/income/';
+
+const calculators = [
+  {
+    title: 'Go Full-Time Calculator',
+    description: 'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
+    href: '/calculators/go-full-time-calculator',
+    icon: 'rocket',
+    color: 'blue',
+  },
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'dollar',
+    color: 'blue',
+  },
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly rate to annual salary with tax adjustments and take-home pay.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator',
+    color: 'green',
+  },
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of salary increases and career compounding.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending',
+    color: 'ocean',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="trending"
+  color="blue"
+  tagline="Maximize your earning potential with smart career calculations"
+  calculators={calculators}
+>
+  <p>
+    Our income calculators help freelancers, employees, and career-changers make informed
+    decisions about their earning potential. Whether you're negotiating a raise, setting
+    freelance rates, or planning to go full-time with your side hustle, these tools provide
+    the clarity you need.
+  </p>
+  <p>
+    Understanding your true hourly rate, accounting for benefits and taxes, can be the
+    difference between a good career move and a great one. Use these calculators to
+    ensure you're being compensated fairly for your time and skills.
+  </p>
+  <h3>Key Income Insights</h3>
+  <ul>
+    <li><strong>Freelance Premium:</strong> Freelancers typically need to charge 1.5-2x their employee rate to account for benefits, taxes, and unbillable time</li>
+    <li><strong>Raise Compounding:</strong> A 5% raise compounds over your career - missing one early costs more than missing one later</li>
+    <li><strong>True Hourly Rate:</strong> Divide your salary by actual hours worked (including commute, overtime) for reality check</li>
+    <li><strong>Go Full-Time Threshold:</strong> Most experts recommend 3-6 months runway + side income covering 75%+ of expenses</li>
+  </ul>
+</CategoryLayout>
