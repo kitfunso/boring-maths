@@ -1,0 +1,231 @@
+---
+/**
+ * FIRE Calculator Page
+ *
+ * SEO-optimized page targeting: "FIRE calculator", "financial independence calculator",
+ * "how much do I need to retire early", "25x rule calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import FIRECalculator from '../../components/calculators/FIRECalculator/FIRECalculator';
+
+// SEO Configuration
+const title = 'FIRE Calculator | Financial Independence Retire Early Calculator';
+const description = 'Calculate your FIRE number and path to financial independence. Find out when you can retire early with our free calculator featuring Lean FIRE, Fat FIRE, and Coast FIRE projections.';
+const keywords = 'FIRE calculator, financial independence calculator, retire early calculator, FIRE number, 25x rule, 4% rule calculator, lean FIRE, fat FIRE, coast FIRE, early retirement calculator';
+const canonicalURL = '/calculators/fire-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'FIRE Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Calculate your emergency fund needs before pursuing FIRE.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how your investments grow over time with compound interest.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings strategy to reach your FIRE number.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is FIRE and how does it work?",
+    answer: "FIRE stands for Financial Independence, Retire Early. It's a movement focused on extreme savings and investment to achieve financial independence earlier than traditional retirement age. The core principle is accumulating enough invested assets that the returns (typically 4% annually) can cover your living expenses indefinitely. Once you reach your 'FIRE number' (usually 25x your annual expenses), you can stop working for money."
+  },
+  {
+    question: "How is the FIRE number calculated?",
+    answer: "The FIRE number is calculated using the 25x rule, which is based on the 4% safe withdrawal rate from the Trinity Study. To find your FIRE number, multiply your annual expenses by 25. For example, if you spend $40,000 per year, your FIRE number is $1,000,000. This amount, invested in a diversified portfolio, should theoretically last 30+ years with a 4% annual withdrawal rate, adjusting for inflation."
+  },
+  {
+    question: "What's the difference between Lean FIRE, Regular FIRE, and Fat FIRE?",
+    answer: "Lean FIRE means retiring on a minimal budget (70% or less of current expenses), often around $20-40K/year in the US. Regular FIRE means maintaining your current lifestyle in retirement. Fat FIRE means retiring with a comfortable/luxurious lifestyle (150%+ of current expenses), often $100K+/year. Each requires different savings targets: Lean FIRE might need $500K-$1M, while Fat FIRE could require $2.5M+."
+  },
+  {
+    question: "What is Coast FIRE?",
+    answer: "Coast FIRE is when you've saved enough that, even with no additional contributions, compound growth will get you to your FIRE number by traditional retirement age (65). Once you reach Coast FIRE, you only need to cover current expenses - you can work less, take lower-paying but more fulfilling jobs, or pursue passion projects without worrying about retirement savings. It's often called 'financial freedom light.'"
+  },
+  {
+    question: "Is the 4% rule still valid?",
+    answer: "The 4% rule was based on historical US market data and 30-year retirement periods. For early retirees (40+ year retirements), many experts recommend a more conservative 3-3.5% withdrawal rate. Additionally, the rule assumes a diversified US stock/bond portfolio. Some FIRE practitioners use dynamic withdrawal strategies - spending less in down markets and more in up markets - to improve success rates. Consider running your numbers with both 4% and 3.5% to see the difference."
+  },
+  {
+    question: "What should I invest in for FIRE?",
+    answer: "Most FIRE practitioners invest in low-cost index funds that track the broad market (like total US stock market, total international, and total bond market funds). A common allocation is 80-100% stocks for the accumulation phase, shifting toward more bonds as you approach FIRE. Key principles: minimize fees (expense ratios under 0.2%), diversify broadly, and avoid market timing. Tax-advantaged accounts (401k, IRA, Roth) should generally be maximized first."
+  },
+  {
+    question: "How do I increase my savings rate for FIRE?",
+    answer: "Savings rate = (Income - Expenses) / Income. You can increase it by: 1) Reducing expenses - housing (house hack, relocate to LCOL area), transportation (used cars, biking), and food are the big three. 2) Increasing income - negotiate raises, switch jobs, start side hustles, develop high-income skills. 3) Avoiding lifestyle inflation - when income rises, save the difference. The FIRE community targets 50%+ savings rates; every 10% increase in savings rate significantly accelerates your FIRE date."
+  },
+  {
+    question: "How do I handle healthcare in early retirement?",
+    answer: "Healthcare is one of the biggest challenges for early retirees in the US. Options include: ACA marketplace plans (often affordable with low income), health sharing ministries, COBRA (temporary, expensive), spouse's employer plan, part-time work with benefits, or relocating abroad (many countries have excellent, affordable healthcare). Budget $500-1500/month per person for US healthcare until Medicare at 65. Some FIRE planners work part-time specifically for health benefits."
+  },
+  {
+    question: "What if the market crashes right after I retire?",
+    answer: "Sequence of returns risk is the danger of market downturns early in retirement depleting your portfolio. Mitigation strategies include: 1) A cash buffer of 1-3 years of expenses to avoid selling during downturns. 2) A flexible withdrawal strategy - spend less in down years. 3) Some part-time income in early FIRE years. 4) A larger portfolio (use 3% instead of 4% rule). 5) A bond tent - temporarily higher bond allocation at retirement, gradually shifting back to stocks. The 4% rule accounts for this historically, but extra safety margin is wise."
+  },
+  {
+    question: "Should I pay off my mortgage before FIRE?",
+    answer: "It depends on your interest rate and personal preference. Mathematically, if your mortgage rate is below expected market returns (around 7% historically), investing wins. However, having no housing payment reduces your FIRE number and sequence of returns risk. Many FIRE practitioners compromise: pay off the mortgage when they FIRE (using taxable investments) or within a few years of FIREing. The psychological benefit of no debt often outweighs the mathematical optimization."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'FIRE Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="FIRE Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="FIRE Calculator"
+    description="Financial Independence, Retire Early - Calculate your FIRE number, track your progress, and see when you can achieve financial freedom with Lean FIRE, Fat FIRE, and Coast FIRE projections."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <FIRECalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>current financial situation</strong>: your age,
+      total invested savings (401k, IRA, brokerage accounts), annual income, and
+      annual expenses. Be honest with expenses - include everything from rent to
+      subscriptions to occasional splurges.
+    </p>
+    <p>
+      Enter your <strong>monthly investment amount</strong> - this is what you're
+      contributing to retirement accounts and taxable investments. The calculator
+      shows your current savings rate as a percentage of income. FIRE typically
+      requires 50%+ savings rates.
+    </p>
+    <p>
+      Set your <strong>desired retirement expenses</strong> - this might be the same
+      as current expenses, or different if you plan to relocate, pay off your mortgage,
+      or change lifestyle. This determines your target FIRE number.
+    </p>
+    <p>
+      Choose your <strong>risk profile</strong> to set expected investment returns.
+      Conservative (5%) assumes heavy bond allocation, moderate (7%) is typical for
+      balanced portfolios, and aggressive (9%) assumes mostly stocks. The calculator
+      adjusts for inflation automatically.
+    </p>
+    <p>
+      Explore the <strong>advanced settings</strong> to customize inflation assumptions
+      and safe withdrawal rate. The default 4% rule is standard, but consider 3.5%
+      for longer retirement periods.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Your <strong>FIRE Number</strong> is the total invested assets needed to
+      retire. It's calculated as your desired annual expenses divided by your safe
+      withdrawal rate (typically 4%, meaning 25x expenses).
+    </p>
+    <p>
+      <strong>Years to FIRE</strong> shows how long until you reach your target at
+      current savings rate and expected returns. This accounts for compound growth
+      on both existing savings and future contributions.
+    </p>
+    <p>
+      The <strong>FIRE variants</strong> help you understand different lifestyle
+      options. Lean FIRE (70% of expenses) gets you out faster but with a tighter
+      budget. Fat FIRE (150% of expenses) provides more cushion but takes longer.
+    </p>
+    <p>
+      <strong>Coast FIRE</strong> shows when you can stop saving for retirement
+      entirely and let compound growth do the work until age 65. Once you hit
+      Coast FIRE, you only need to cover current expenses - opening up lower-paying
+      but more fulfilling work options.
+    </p>
+    <p>
+      The <strong>savings analysis</strong> shows what savings rate you'd need to
+      hit your target retirement age. If there's a gap between your current rate
+      and required rate, consider ways to close it through income increases or
+      expense reduction.
+    </p>
+  </ContentSection>
+
+  <!-- Strategy Section -->
+  <ContentSection title="FIRE Strategies">
+    <p>
+      <strong>The math is simple:</strong> Spend less than you earn, invest the
+      difference in low-cost index funds, and wait. The hard part is the behavior -
+      consistently saving 50%+ of income for years or decades.
+    </p>
+    <p>
+      <strong>Focus on the big three expenses:</strong> Housing, transportation, and
+      food typically account for 60-70% of spending. House hacking (renting out rooms),
+      driving used cars, and cooking at home have outsized impact compared to cutting
+      small luxuries.
+    </p>
+    <p>
+      <strong>Increase income strategically:</strong> Career advancement, job hopping
+      (average 10-20% raises), developing high-income skills, and side hustles can
+      dramatically accelerate your timeline. A $20K raise saved entirely could shave
+      years off your FIRE date.
+    </p>
+    <p>
+      <strong>Consider geographic arbitrage:</strong> Living in a low cost of living
+      area while earning high-cost-of-living wages (remote work) or relocating abroad
+      in retirement can reduce your FIRE number by 50% or more.
+    </p>
+    <p>
+      <strong>Build multiple income streams:</strong> Rental properties, dividend
+      income, and part-time work can supplement portfolio withdrawals, reducing
+      sequence of returns risk and allowing a smaller portfolio.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
