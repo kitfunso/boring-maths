@@ -17,8 +17,8 @@
   --color-night: #0c0c12;
   --color-charcoal: #141420;
   --color-slate: #1e1e2e;
-  --color-muted: #4a4a5c;
-  --color-subtle: #8888a0;
+  --color-muted: #9898a8;
+  --color-subtle: #c8c8d4;
   --color-cream: #f5f2eb;
   --color-white: #ffffff;
 
@@ -130,6 +130,8 @@ body {
 
 .font-display {
   font-family: var(--font-display);
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 .font-body {
@@ -141,6 +143,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 /* Giant Display Text */
@@ -149,6 +153,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(3rem, 12vw, 10rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 .text-headline {
@@ -156,12 +162,16 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(2rem, 6vw, 4.5rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 .text-title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 1.2;
+  transform: scaleX(1.1);
+  transform-origin: left;
 }
 
 /* Body Text */
