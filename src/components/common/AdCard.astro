@@ -17,7 +17,7 @@ const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 ---
 
-<div class={`bento-card ad-card ${className}`} style="min-height: 200px;">
+<div class={`bento-card ad-card ${className}`} style="min-height: 200px; opacity: 1 !important; animation: card-appear 0.5s ease-out forwards;">
   {isProd ? (
     <>
       <ins
