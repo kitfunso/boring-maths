@@ -17,7 +17,7 @@ const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 ---
 
-<div class={`bento-card ad-card ${className}`} style="min-height: 200px; opacity: 1 !important; animation: card-appear 0.5s ease-out forwards;">
+<div class={`bento-card ad-card-visible ${className}`} style="min-height: 200px;">
   {isProd ? (
     <>
       <ins
@@ -48,12 +48,25 @@ const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 </div>
 
 <style>
-  .ad-card {
+  .ad-card-visible {
     position: relative;
     overflow: hidden;
+    opacity: 1 !important;
+    animation: ad-card-appear 0.5s ease-out forwards !important;
   }
 
-  .ad-card .adsbygoogle {
+  .ad-card-visible .adsbygoogle {
     background: transparent;
+  }
+
+  @keyframes ad-card-appear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

@@ -11,7 +11,7 @@ export interface NumberInputProps extends Omit<InputHTMLAttributes<HTMLInputElem
   max?: number;
   /** Step increment */
   step?: number;
-  /** Show +/- controls */
+  /** Show spin controls */
   showControls?: boolean;
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
@@ -26,8 +26,8 @@ const SIZE_CLASSES = {
 };
 
 /**
- * Modern number input with elegant +/- controls.
- * Hides default browser spin buttons and provides custom styled controls.
+ * Modern number input with elegant spin controls (up/down arrows).
+ * Features smooth hover animations and keyboard support.
  *
  * @example
  * ```tsx
@@ -88,8 +88,8 @@ export function NumberInput({
     }
   };
 
-  return (
-    <div className="number-input-wrapper">
+  if (!showControls) {
+    return (
       <input
         type="number"
         value={value}
@@ -106,20 +106,44 @@ export function NumberInput({
           transition-all duration-200
           disabled:opacity-50 disabled:cursor-not-allowed
           ${SIZE_CLASSES[size]}
-          ${showControls ? 'pr-10' : ''}
           ${className}
         `}
         {...props}
       />
-      {showControls && !disabled && (
-        <div className="number-input-controls">
+    );
+  }
+
+  return (
+    <div className="spin-input-wrapper w-full">
+      <input
+        type="number"
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        min={min}
+        max={max}
+        step={step}
+        disabled={disabled}
+        className={`
+          w-full px-4 pr-10 border-2 border-white/10 rounded-xl
+          bg-[var(--color-charcoal)] text-[var(--color-cream)]
+          focus:border-[var(--color-accent)]/50 focus:ring-4 focus:ring-[var(--color-accent)]/10
+          transition-all duration-200
+          disabled:opacity-50 disabled:cursor-not-allowed
+          ${SIZE_CLASSES[size]}
+          ${className}
+        `}
+        {...props}
+      />
+      {!disabled && (
+        <div className="spin-controls">
           <button
             type="button"
             onClick={increment}
             disabled={max !== undefined && numValue >= max}
             aria-label="Increase value"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
@@ -129,7 +153,7 @@ export function NumberInput({
             disabled={min !== undefined && numValue <= min}
             aria-label="Decrease value"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
