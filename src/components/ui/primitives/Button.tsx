@@ -83,7 +83,7 @@ export function Button({
     >
       {loading ? (
         <span className="flex items-center justify-center gap-2">
-          <Spinner size={size === 'lg' ? 'md' : 'sm'} variant="dots" />
+          <Spinner size={size === 'lg' ? 'md' : 'sm'} variant="ring" />
           <span className="text-current opacity-80">Loading...</span>
         </span>
       ) : (

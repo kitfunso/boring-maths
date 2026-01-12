@@ -320,6 +320,69 @@ select::-webkit-scrollbar-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Number Input - Modern Spin Buttons
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Hide default spin buttons */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Custom number input wrapper with modern controls */
+.number-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.number-input-wrapper input {
+  padding-right: 2.5rem;
+}
+
+.number-input-controls {
+  position: absolute;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.number-input-controls button {
+  width: 1.25rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.number-input-controls button:hover {
+  background: var(--color-accent);
+  color: var(--color-void);
+}
+
+.number-input-controls button:active {
+  transform: scale(0.9);
+}
+
+.number-input-controls svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Animations
    ═══════════════════════════════════════════════════════════════════════════ */
 
