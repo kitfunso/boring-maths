@@ -1,0 +1,149 @@
+---
+/**
+ * Pipe Flow Calculator Page
+ *
+ * SEO-optimized page for pipe sizing and flow calculations.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PipeFlowCalculator from '../../components/calculators/PipeFlowCalculator/PipeFlowCalculator';
+
+// SEO Configuration
+const title = 'Pipe Flow Calculator | Pipe Sizing & Velocity';
+const description = 'Calculate pipe diameter, flow velocity, or volumetric flow rate. Includes recommended velocity ranges for liquids, gases, and steam. Free online pipe sizing tool.';
+const keywords = 'pipe flow calculator, pipe sizing calculator, flow velocity calculator, pipe diameter calculator, volumetric flow rate, GPM to pipe size, chemical engineering';
+const canonicalURL = '/calculators/pipe-flow-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Pipe Flow Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Pressure Drop Calculator',
+    description: 'Calculate pressure loss using Darcy-Weisbach.',
+    href: '/calculators/pressure-drop-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Reynolds Number Calculator',
+    description: 'Determine if flow is laminar or turbulent.',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How do I size a pipe for a given flow rate?",
+    answer: "Use the continuity equation: Q = A × V. For a given flow rate and desired velocity, solve for diameter: D = √(4Q/πV). This calculator does this automatically and suggests standard pipe sizes."
+  },
+  {
+    question: "What is the recommended velocity for water in pipes?",
+    answer: "For water, typical velocities are 1-3 m/s (3-10 ft/s). Lower velocities may cause settling; higher velocities increase erosion, noise, and pressure drop. Economic velocity balances pipe cost vs pumping cost."
+  },
+  {
+    question: "What velocity should I use for gas piping?",
+    answer: "Gas velocities are typically 15-30 m/s for low pressure systems and 30-60 m/s for high pressure. Steam lines typically run 20-40 m/s for saturated steam and 30-60 m/s for superheated."
+  },
+  {
+    question: "Why does the calculator show 'high velocity' warning?",
+    answer: "High velocities can cause pipe erosion (especially with abrasive fluids), excessive noise, and high pressure drops requiring more pumping energy. Consider using a larger pipe size."
+  },
+  {
+    question: "What is the continuity equation?",
+    answer: "The continuity equation (Q = A × V) states that for incompressible flow, the volumetric flow rate equals the cross-sectional area times velocity. This is derived from conservation of mass."
+  },
+  {
+    question: "How do I convert between GPM and m³/h?",
+    answer: "1 GPM = 0.227 m³/h, or 1 m³/h = 4.403 GPM. This calculator handles unit conversions automatically when you switch between metric and imperial units."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Pipe Flow Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Pipe Flow Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Pipe Flow Calculator"
+    description="Size pipes, calculate flow velocity, or determine flow rate using the continuity equation. Get recommended velocities for different fluids."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PipeFlowCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose what to <strong>calculate</strong>: pipe diameter, flow velocity, or volumetric
+      flow rate. Enter the other two values along with the fluid type.
+    </p>
+    <p>
+      Select the <strong>fluid type</strong> (liquid, gas, or steam) to see appropriate
+      velocity recommendations. The calculator warns if velocity is outside the recommended range.
+    </p>
+    <p>
+      For pipe sizing, the calculator shows the calculated diameter and suggests the
+      nearest <strong>standard pipe size</strong> for easy specification.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Velocity Design Guidelines">
+    <p>
+      <strong>Liquids (Water)</strong> - Design for 1-3 m/s (3-10 ft/s). Higher velocities
+      for main headers, lower for branches. Avoid &lt; 0.5 m/s to prevent settling.
+    </p>
+    <p>
+      <strong>Viscous Liquids</strong> - Lower velocities (0.5-2 m/s) to reduce
+      pressure drop. Consider heating to reduce viscosity.
+    </p>
+    <p>
+      <strong>Gases</strong> - Higher velocities are acceptable: 15-60 m/s depending on
+      pressure. Higher pressure allows higher velocity.
+    </p>
+    <p>
+      <strong>Steam</strong> - Saturated steam: 20-40 m/s. Superheated steam: 30-60 m/s.
+      Avoid condensate accumulation in steam lines.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,151 @@
+---
+/**
+ * Pressure Drop Calculator Page
+ *
+ * SEO-optimized page for Darcy-Weisbach pressure drop calculations.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PressureDropCalculator from '../../components/calculators/PressureDropCalculator/PressureDropCalculator';
+
+// SEO Configuration
+const title = 'Pressure Drop Calculator | Darcy-Weisbach Equation';
+const description = 'Calculate pressure drop in pipes using Darcy-Weisbach equation. Automatic friction factor calculation with Colebrook-White. Supports multiple pipe materials and fluids.';
+const keywords = 'pressure drop calculator, Darcy Weisbach calculator, friction factor calculator, head loss calculator, pipe pressure loss, Colebrook White, chemical engineering, fluid mechanics';
+const canonicalURL = '/calculators/pressure-drop-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Pressure Drop Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Reynolds Number Calculator',
+    description: 'Determine flow regime for friction factor selection.',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Pipe Flow Calculator',
+    description: 'Size pipes based on velocity requirements.',
+    href: '/calculators/pipe-flow-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is the Darcy-Weisbach equation?",
+    answer: "The Darcy-Weisbach equation calculates pressure drop due to friction: ΔP = f × (L/D) × (ρv²/2), where f is the friction factor, L is pipe length, D is diameter, ρ is density, and v is velocity. It's the most accurate method for pressure drop calculation."
+  },
+  {
+    question: "How is the friction factor calculated?",
+    answer: "For laminar flow (Re < 2300), f = 64/Re. For turbulent flow, this calculator uses the Colebrook-White equation solved iteratively, which accounts for both pipe roughness and Reynolds number."
+  },
+  {
+    question: "What is pipe roughness and why does it matter?",
+    answer: "Pipe roughness (ε) is the average height of surface irregularities inside the pipe. Rougher pipes have higher friction factors and more pressure drop. New steel pipe has ε ≈ 0.045mm; corroded pipes can have ε > 1mm."
+  },
+  {
+    question: "How do I convert pressure drop to head loss?",
+    answer: "Head loss (h) = ΔP / (ρg), where ρ is fluid density and g is gravity (9.81 m/s²). Head loss is useful for pump sizing as pumps are typically rated in meters or feet of head."
+  },
+  {
+    question: "Why does the calculator show different friction factors for different materials?",
+    answer: "Different pipe materials have different surface roughness. Smooth materials like PVC (ε ≈ 0.0015mm) have lower friction than rough materials like concrete (ε ≈ 1mm). This significantly affects pressure drop, especially in turbulent flow."
+  },
+  {
+    question: "What pressure drop is acceptable for piping systems?",
+    answer: "Typical design limits: 0.5-2 kPa/100m for water, 0.1-0.5 kPa/100m for gases. Total pressure drop should allow pumps/compressors to operate efficiently. Balance capital cost (larger pipes) vs operating cost (pumping energy)."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Pressure Drop Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Pressure Drop Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Pressure Drop Calculator"
+    description="Calculate pipe friction losses using the Darcy-Weisbach equation with automatic friction factor calculation via Colebrook-White."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PressureDropCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select <strong>pipe material</strong> to automatically set the surface roughness,
+      or choose "Custom" to enter your own value. Different materials have significantly
+      different roughness values.
+    </p>
+    <p>
+      Enter <strong>pipe dimensions</strong> (inner diameter and length) and
+      <strong>flow conditions</strong> (velocity). Use the fluid presets for common
+      fluids or enter custom density and viscosity values.
+    </p>
+    <p>
+      Results show pressure drop (in kPa or psi), head loss (in m or ft), Reynolds number,
+      flow regime, and the calculated Darcy friction factor.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Pressure Drop">
+    <p>
+      <strong>Pressure Drop (ΔP)</strong> - The decrease in pressure as fluid flows
+      through the pipe due to friction. Measured in kPa or psi.
+    </p>
+    <p>
+      <strong>Head Loss (h_f)</strong> - Pressure drop expressed as height of fluid column.
+      Used for pump sizing. 1 bar ≈ 10.2 m of water head.
+    </p>
+    <p>
+      <strong>Friction Factor (f)</strong> - Dimensionless number representing friction
+      resistance. Depends on Reynolds number and relative roughness (ε/D).
+    </p>
+    <p>
+      <strong>Velocity Head</strong> - The kinetic energy term v²/2g. Multiple velocity
+      heads are lost through fittings (valves, elbows, tees).
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

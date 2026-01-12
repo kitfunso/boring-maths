@@ -287,6 +287,52 @@ const calculators = [
     category: 'Everyday',
     mostUsed: false,
   },
+  // Chemical Engineering Calculators
+  {
+    title: 'Reynolds Number',
+    description: 'Calculate Reynolds number to determine flow regime (laminar, transitional, turbulent).',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Ideal Gas Law (PV=nRT)',
+    description: 'Calculate pressure, volume, moles, or temperature using the ideal gas law.',
+    href: '/calculators/ideal-gas-law-calculator',
+    icon: 'cube',
+    color: 'green',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Pipe Flow Calculator',
+    description: 'Size pipes, calculate velocity, or flow rate with velocity recommendations.',
+    href: '/calculators/pipe-flow-calculator',
+    icon: 'layers',
+    color: 'violet',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'LMTD Calculator',
+    description: 'Calculate Log Mean Temperature Difference for heat exchanger design.',
+    href: '/calculators/lmtd-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Pressure Drop Calculator',
+    description: 'Calculate pipe pressure drop using Darcy-Weisbach equation with friction factors.',
+    href: '/calculators/pressure-drop-calculator',
+    icon: 'chart',
+    color: 'amber',
+    category: 'Engineering',
+    mostUsed: false,
+  },
 ];
 
 
@@ -335,6 +381,7 @@ const categoryColors: Record<string, string> = {
   Home: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
   Everyday: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   Health: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+  Engineering: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
 };
 ---
 
@@ -353,7 +400,7 @@ const categoryColors: Record<string, string> = {
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-4 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-        <span class="text-sm text-[var(--color-subtle)]">31 Free Calculators</span>
+        <span class="text-sm text-[var(--color-subtle)]">36 Free Calculators</span>
       </div>
 
       <!-- Main Headline -->

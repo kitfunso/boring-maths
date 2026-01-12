@@ -1,0 +1,146 @@
+---
+/**
+ * Reynolds Number Calculator Page
+ *
+ * SEO-optimized page for chemical engineers calculating Reynolds number.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ReynoldsNumberCalculator from '../../components/calculators/ReynoldsNumberCalculator/ReynoldsNumberCalculator';
+
+// SEO Configuration
+const title = 'Reynolds Number Calculator | Determine Flow Regime';
+const description = 'Calculate Reynolds number to determine if flow is laminar, transitional, or turbulent. Free online calculator for pipe flow with automatic friction factor estimation.';
+const keywords = 'reynolds number calculator, reynolds number, flow regime, laminar flow, turbulent flow, pipe flow calculator, fluid mechanics, chemical engineering calculator';
+const canonicalURL = '/calculators/reynolds-number-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Reynolds Number Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Pressure Drop Calculator',
+    description: 'Calculate pressure loss in pipes using Darcy-Weisbach equation.',
+    href: '/calculators/pressure-drop-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Pipe Flow Calculator',
+    description: 'Size pipes and calculate flow velocities.',
+    href: '/calculators/pipe-flow-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is Reynolds number?",
+    answer: "Reynolds number (Re) is a dimensionless quantity that predicts flow patterns in fluid flow situations. It is defined as the ratio of inertial forces to viscous forces and is used to determine whether flow is laminar (smooth) or turbulent (chaotic)."
+  },
+  {
+    question: "What Reynolds number indicates turbulent flow?",
+    answer: "For pipe flow, Re < 2,300 indicates laminar flow, 2,300 ≤ Re < 4,000 is transitional, and Re ≥ 4,000 indicates turbulent flow. Most industrial pipe flows are turbulent."
+  },
+  {
+    question: "How is Reynolds number calculated?",
+    answer: "Reynolds number is calculated as Re = (ρ × V × D) / μ or Re = (V × D) / ν, where ρ is fluid density, V is velocity, D is pipe diameter, μ is dynamic viscosity, and ν is kinematic viscosity."
+  },
+  {
+    question: "Why is Reynolds number important in engineering?",
+    answer: "Reynolds number determines which equations and correlations to use for pressure drop, heat transfer, and mass transfer calculations. It's fundamental for designing pipes, pumps, heat exchangers, and other process equipment."
+  },
+  {
+    question: "What affects Reynolds number?",
+    answer: "Reynolds number increases with higher velocity, larger pipe diameter, higher fluid density, or lower viscosity. Temperature affects viscosity significantly - heating a liquid reduces its viscosity and increases Re."
+  },
+  {
+    question: "What is the typical Reynolds number for water in pipes?",
+    answer: "For water flowing at 2 m/s in a 50mm pipe at 20°C, Re ≈ 100,000 (turbulent). Most water systems operate in the turbulent regime because water has low viscosity."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Reynolds Number Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Reynolds Number Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Reynolds Number Calculator"
+    description="Determine flow regime (laminar, transitional, or turbulent) for pipe flow systems. Essential for fluid mechanics calculations."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ReynoldsNumberCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>unit system</strong> (Metric or Imperial) and choose a
+      <strong>fluid type</strong>. For common fluids like water and air, viscosity
+      is automatically calculated based on temperature.
+    </p>
+    <p>
+      Enter the <strong>pipe diameter</strong> and <strong>flow velocity</strong>.
+      The calculator instantly computes the Reynolds number and displays the flow regime.
+    </p>
+    <p>
+      For custom fluids, select "Custom" and enter the kinematic viscosity directly.
+      The calculator also estimates the Darcy friction factor for pressure drop calculations.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Flow Regimes">
+    <p>
+      <strong>Laminar Flow (Re &lt; 2,300)</strong> - Fluid moves in smooth, parallel layers.
+      Occurs in viscous fluids or small pipes. Friction factor = 64/Re.
+    </p>
+    <p>
+      <strong>Transitional Flow (2,300 ≤ Re &lt; 4,000)</strong> - Unstable flow that can
+      switch between laminar and turbulent. Avoid designing in this regime.
+    </p>
+    <p>
+      <strong>Turbulent Flow (Re ≥ 4,000)</strong> - Chaotic flow with eddies and mixing.
+      Most industrial flows are turbulent. Better for heat and mass transfer.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
