@@ -1,0 +1,217 @@
+---
+/**
+ * Remote Work Savings Calculator Page
+ *
+ * SEO-optimized page targeting: "remote work savings calculator",
+ * "commute cost calculator", "work from home savings", "WFH calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RemoteWorkSavingsCalculator from '../../components/calculators/RemoteWorkSavingsCalculator/RemoteWorkSavingsCalculator';
+
+// SEO Configuration
+const title = 'Remote Work Savings Calculator | Work From Home Cost Calculator';
+const description = 'Calculate how much you save working remotely. Factor in gas, parking, food, clothes, and time to see your true annual savings from skipping the commute.';
+const keywords = 'remote work savings calculator, work from home calculator, commute cost calculator, WFH savings, telecommute savings, remote work benefits, commute time value, gas savings calculator';
+const canonicalURL = '/calculators/remote-work-savings-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Remote Work Savings Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Contractor vs Employee Calculator',
+    description: 'Compare contractor rates vs salary with all costs factored in.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'swap' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly wages to annual salary and back.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Calculate your path to financial independence and early retirement.',
+    href: '/calculators/fire-calculator',
+    icon: 'fire' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "How much does the average commuter save working from home?",
+    answer: "The average American commuter saves $4,000-$12,000 per year working remotely. This includes gas ($1,500-$3,000), parking ($1,200-$3,600), car maintenance ($500-$1,500), food ($1,200-$2,400), and work clothes ($600-$1,200). The exact amount depends on commute distance, local costs, and lifestyle. Use our calculator to get your personalized estimate based on your specific situation."
+  },
+  {
+    question: "How do you calculate the value of commute time saved?",
+    answer: "We multiply your commute hours by your hourly rate. If you commute 30 minutes each way and earn $35/hour, that's 1 hour/day × 240 work days × $35 = $8,400 in time value annually. This represents what that time is worth if you could bill it, or the opportunity cost of sitting in traffic instead of working, exercising, or spending time with family."
+  },
+  {
+    question: "What costs are typically forgotten when calculating commute expenses?",
+    answer: "People often forget: 1) Car depreciation and maintenance from extra miles, 2) Parking fees (can be $200-400/month in cities), 3) Tolls that add up over time, 4) Work clothes and dry cleaning (especially for office environments), 5) Coffee and snacks bought during commute, 6) Childcare extensions for commute time, 7) Pet care costs for longer days away from home."
+  },
+  {
+    question: "How much CO2 does remote work actually save?",
+    answer: "A typical commuter driving 30 miles round-trip saves about 3-4 tons of CO2 per year by working remotely. This is equivalent to planting 50-70 trees or taking a car off the road entirely. The calculation: 30 miles × 240 days = 7,200 miles × 0.9 lbs CO2/mile ≈ 6,480 lbs = 3.2 tons. Remote work is one of the most impactful individual climate actions."
+  },
+  {
+    question: "Should I factor in home office costs against my savings?",
+    answer: "Yes, but they're usually much lower than commute costs. Home office expenses include: electricity ($10-30/month extra), internet upgrade ($10-20/month), home office supplies ($200-500 one-time), and occasional coffee/snacks. Most remote workers spend $500-1,500/year on home office costs, still saving thousands compared to commuting. Plus, some home office expenses may be tax-deductible."
+  },
+  {
+    question: "How much does a hybrid work schedule save compared to full remote?",
+    answer: "Hybrid savings scale roughly linearly. Working from home 3 days per week saves about 60% of what full remote saves. So if full remote would save you $8,000/year, a 3-day hybrid schedule saves approximately $4,800. However, you may still need to maintain work clothes and keep up with parking costs on office days, reducing the percentage slightly."
+  },
+  {
+    question: "What's the IRS mileage rate and how does it relate to commute costs?",
+    answer: "The 2024 IRS standard mileage rate is 67 cents per mile, which accounts for gas, depreciation, insurance, maintenance, and other vehicle costs. However, regular commuting to a fixed workplace is NOT tax-deductible. The mileage rate is useful as a benchmark for true car costs - if you drive 15 miles each way, that's 30 miles × $0.67 = $20.10/day in vehicle costs alone, or about $4,800/year."
+  },
+  {
+    question: "How does remote work affect car insurance costs?",
+    answer: "Driving significantly fewer miles can lower your car insurance by 10-30%. Many insurers offer low-mileage discounts if you drive under 7,500-10,000 miles per year. Contact your insurer about pay-per-mile insurance or low-mileage discounts - you could save $200-500/year on top of your gas and maintenance savings. Some remote workers switch to one car for the household."
+  },
+  {
+    question: "What are the hidden benefits of remote work beyond money?",
+    answer: "Beyond financial savings: 1) Better health - less sitting in traffic, more time for exercise and cooking healthy meals, 2) Lower stress - commuting is one of the most stressful daily activities, 3) Better sleep - no early wake-ups for commute, 4) Family time - hours reclaimed for kids, spouse, or pets, 5) Flexibility - handle appointments, deliveries, and emergencies more easily, 6) Productivity - many workers are more productive without office interruptions."
+  },
+  {
+    question: "How should I use my commute savings?",
+    answer: "Smart uses for commute savings: 1) Max out retirement contributions - invest the difference for compound growth, 2) Build emergency fund - remote workers should have 3-6 months expenses saved, 3) Pay down high-interest debt, 4) Invest in skills or education to increase earning potential, 5) Improve home office setup for better productivity, 6) Save for major goals (house, travel, early retirement). Avoid lifestyle creep - your savings disappear if you increase spending elsewhere."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Remote Work Savings Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Remote Work Savings Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Remote Work Savings Calculator"
+    description="Discover how much money and time you save by working from home. Calculate gas, parking, food, clothing costs, and see the true value of ditching your commute."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RemoteWorkSavingsCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by selecting your <strong>commute type</strong> - whether you drive,
+      take public transit, or use a mix of both. Enter how many days per week
+      you currently go to the office and your one-way commute distance and time.
+    </p>
+    <p>
+      For drivers, enter your <strong>vehicle costs</strong>: current gas prices,
+      your car's fuel efficiency (MPG), daily parking costs, any tolls, and
+      maintenance cost per mile. The IRS estimates total vehicle costs at about
+      $0.67/mile, but our defaults are more conservative.
+    </p>
+    <p>
+      Expand the <strong>Lifestyle Costs</strong> section to fine-tune food and
+      clothing expenses. The difference between buying lunch at work versus
+      eating at home adds up quickly. Work clothes and dry cleaning costs also
+      decrease significantly when working remotely.
+    </p>
+    <p>
+      Enter your <strong>hourly rate</strong> to see the value of time saved.
+      This doesn't mean you'll earn this money back, but it represents what
+      your time is worth - time you could spend on side projects, family,
+      exercise, or simply reducing stress.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Annual Savings</strong> total represents hard dollar savings
+      you'll keep in your pocket by not commuting. This is money you would
+      have spent on gas, parking, transit fares, lunches out, and work clothes.
+    </p>
+    <p>
+      <strong>Hours Reclaimed</strong> shows how much of your life you get back.
+      A 30-minute each way commute equals 240 hours per year - that's 30 full
+      8-hour workdays spent sitting in traffic or on a train.
+    </p>
+    <p>
+      The <strong>Effective Hourly Raise</strong> spreads your savings across
+      work hours. If you save $6,000/year and work 1,920 hours, that's like
+      getting a $3.12/hour raise - without asking your boss.
+    </p>
+    <p>
+      The <strong>Environmental Impact</strong> section shows your personal
+      contribution to reducing emissions. Remote work is one of the most
+      impactful individual climate actions you can take.
+    </p>
+  </ContentSection>
+
+  <!-- Strategy Section -->
+  <ContentSection title="Maximizing Remote Work Benefits">
+    <p>
+      <strong>Negotiate for remote work using data.</strong> Show your employer
+      this calculator's output - reduced commute stress correlates with higher
+      productivity. Many studies show remote workers are 13-24% more productive.
+    </p>
+    <p>
+      <strong>Invest your savings, don't spend them.</strong> If you save $500/month
+      from not commuting, put it directly into retirement accounts or investments.
+      At 7% returns, that's over $86,000 after 10 years.
+    </p>
+    <p>
+      <strong>Use time savings intentionally.</strong> Don't let reclaimed commute
+      time disappear into doom scrolling. Schedule it for exercise, side projects,
+      skill development, or quality time with family.
+    </p>
+    <p>
+      <strong>Optimize your home office.</strong> Reinvest some savings into a
+      proper desk, chair, and monitor setup. Good ergonomics prevent health
+      issues that could cost far more than the equipment.
+    </p>
+    <p>
+      <strong>Review insurance and subscriptions.</strong> With lower mileage,
+      you may qualify for pay-per-mile car insurance. You might also cancel
+      transit passes, parking memberships, or work-related subscriptions.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

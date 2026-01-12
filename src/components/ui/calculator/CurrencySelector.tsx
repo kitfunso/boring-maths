@@ -11,7 +11,7 @@ export interface CurrencySelectorProps {
 
 /**
  * Currency dropdown for calculator headers.
- * Uses the header variant styling (white/transparent for gradient backgrounds).
+ * Dark themed styling for dark backgrounds.
  *
  * @example
  * ```tsx
@@ -36,14 +36,20 @@ export function CurrencySelector({
       value={value}
       onChange={(e) => onChange(e.target.value as Currency)}
       className={`
-        bg-white/10 text-white border border-white/30 rounded-lg px-3 py-2 text-sm
-        focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer
-        hover:bg-white/20 transition-colors
+        bg-[var(--color-charcoal)] text-[var(--color-cream)] border border-white/20
+        rounded-xl px-4 py-2 text-sm
+        focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50 focus:border-[var(--color-accent)]/50
+        cursor-pointer hover:bg-[var(--color-slate)] hover:border-white/30 transition-colors
         ${className}
       `}
+      style={{ colorScheme: 'dark' }}
     >
       {CURRENCY_OPTIONS.map((option) => (
-        <option key={option.value} value={option.value} className="text-[var(--color-cream)]">
+        <option
+          key={option.value}
+          value={option.value}
+          className="bg-[var(--color-charcoal)] text-[var(--color-cream)]"
+        >
           {option.flag} {option.label}
         </option>
       ))}

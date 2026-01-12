@@ -1,0 +1,232 @@
+---
+/**
+ * Contractor vs Employee Calculator Page
+ *
+ * SEO-optimized page targeting: "contractor vs employee calculator",
+ * "freelance rate calculator", "1099 vs W2 comparison", "contract rate to salary"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
+
+// SEO Configuration
+const title = 'Contractor vs Employee Calculator | 1099 vs W2 Comparison';
+const description = 'Compare contractor rates to employee salaries with our free calculator. Account for self-employment tax, benefits, health insurance, and hidden costs to make informed career decisions.';
+const keywords = 'contractor vs employee calculator, 1099 vs W2 calculator, freelance rate calculator, contract rate to salary, self-employment tax calculator, contractor hourly rate, freelance vs full-time, independent contractor calculator';
+const canonicalURL = '/calculators/contractor-vs-employee-calculator';
+
+const siteUrl = 'https://boring-maths.vercel.app';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Contractor vs Employee Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly wages to annual salary and back.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your optimal freelance daily rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Go Full-Time Calculator',
+    description: 'See if your side hustle income can replace your job.',
+    href: '/calculators/go-full-time-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What's the difference between 1099 and W2 employment?",
+    answer: "W2 employees work for a single employer who withholds taxes, provides benefits, and pays half of Social Security/Medicare taxes (7.65%). 1099 contractors are self-employed - they set their own rates and hours but must pay the full 15.3% self-employment tax, provide their own benefits, and handle their own taxes. Contractors typically need higher gross income to net the same as employees after accounting for these costs."
+  },
+  {
+    question: "How much higher should my contractor rate be than an equivalent salary?",
+    answer: "As a general rule, your contractor hourly rate should be 1.3x to 1.5x the equivalent W2 hourly rate to break even. For example, if a job pays $50/hour as an employee ($104K salary), you'd need $65-75/hour as a contractor. This covers the extra 7.65% self-employment tax, health insurance costs, lack of paid time off, retirement match, and business expenses. Our calculator provides exact numbers for your situation."
+  },
+  {
+    question: "What costs do contractors have that employees don't?",
+    answer: "Contractors face several hidden costs: 1) Self-employment tax - the extra 7.65% employer portion of FICA (Social Security + Medicare). 2) Health insurance - often $500-800/month for a family without employer subsidy. 3) Retirement contributions without matching - employees often get 3-6% free match. 4) No paid time off - vacation time is unpaid. 5) Business expenses - software, equipment, liability insurance, accounting fees. 6) Unpaid non-billable hours - admin, marketing, invoicing."
+  },
+  {
+    question: "What benefits do employees get that contractors don't?",
+    answer: "Employee benefits can add 20-40% to base salary in value: 1) Employer-paid health insurance ($6,000-15,000/year value). 2) 401(k) match (3-6% of salary). 3) Paid time off (2-4 weeks + holidays = $4,000-12,000 value). 4) Life and disability insurance. 5) Dental and vision coverage. 6) Education reimbursement. 7) Stock options or RSUs. 8) Gym memberships, commuter benefits, etc. The calculator accounts for all these factors."
+  },
+  {
+    question: "How do I calculate the value of my employee benefits?",
+    answer: "Check your benefits statement or HR portal for exact numbers. For health insurance, find the 'employer contribution' (often $500-1500/month). For 401k match, multiply your salary by the match percentage (e.g., $100K × 4% = $4,000). For PTO value, divide salary by 260 working days and multiply by PTO days. Add dental/vision (usually $50-100/month), life insurance, and any other perks. Most employees underestimate their total compensation by 20-30%."
+  },
+  {
+    question: "What is the self-employment tax and how does it work?",
+    answer: "Self-employment tax is 15.3% on net self-employment income - it covers Social Security (12.4%) and Medicare (2.9%). As an employee, you pay half (7.65%) and your employer pays half. As a contractor, you pay both halves. You can deduct half of SE tax from your taxable income, and it's calculated on 92.35% of net earnings. For high earners, the 12.4% Social Security portion caps at $160,200 (2023), but the 2.9% Medicare continues on all income."
+  },
+  {
+    question: "Should I form an LLC or S-Corp as a contractor?",
+    answer: "An LLC provides liability protection but doesn't change tax treatment - you still pay full self-employment tax. An S-Corp can reduce SE tax if you earn over $80-100K: you pay yourself a 'reasonable salary' (which has SE tax) and take remaining profit as distributions (no SE tax). The savings can be $5,000-15,000/year, but you'll have added complexity, payroll costs, and must pay yourself consistently. Consult a tax professional for your specific situation."
+  },
+  {
+    question: "How many billable hours should I plan for?",
+    answer: "Most contractors can bill 30-35 hours per week on average, not 40. The remaining time goes to: finding work, invoicing, admin tasks, professional development, and marketing. Plan for 1,500-1,800 billable hours per year (vs. 2,080 for a full-time employee). Also factor in unpaid time off - most contractors take 2-4 weeks vacation plus sick days. Our calculator uses weeks per year to account for this."
+  },
+  {
+    question: "What business expenses can contractors deduct?",
+    answer: "Common deductible business expenses include: home office (dedicated space), computer and equipment, software subscriptions, professional liability insurance, accounting and legal fees, business travel, professional development, health insurance premiums (special deduction), cell phone (business portion), internet (business portion), coworking space, and retirement contributions (SEP-IRA or Solo 401k). Keep detailed records and receipts for all deductions."
+  },
+  {
+    question: "When does contracting make financial sense?",
+    answer: "Contracting often makes sense when: 1) Your rate is 1.4x+ equivalent salary. 2) You have access to spouse's health insurance. 3) You value flexibility over stability. 4) You're in a high-demand field with steady work. 5) You're building toward your own business. It may not make sense when: 1) Rate difference is small. 2) Benefits are excellent (good insurance, high 401k match). 3) You value job security. 4) Work is inconsistent. 5) You dislike admin/business tasks."
+  }
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Contractor vs Employee Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Contractor vs Employee Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Contractor vs Employee Calculator"
+    description="Compare the true value of contractor rates versus employee salaries. Account for self-employment tax, health insurance, retirement, and all hidden costs to make informed career decisions."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ContractorVsEmployeeCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>contractor details</strong> on the left: your
+      hourly rate, expected billable hours per week, and weeks you'll work per year
+      (accounting for unpaid time off). The calculator shows your annual gross income
+      based on these inputs.
+    </p>
+    <p>
+      Add your <strong>contractor costs</strong>: monthly health insurance premiums,
+      retirement contribution percentage (for SEP-IRA or Solo 401k), and business
+      expenses like software, equipment, and coworking. Include annual costs for
+      accounting and professional liability insurance.
+    </p>
+    <p>
+      Enter the <strong>employee offer</strong> on the right: base salary and annual
+      bonus percentage. Add the benefits: 401(k) match percentage and limit, what the
+      employer pays for health insurance (check your benefits statement), and other
+      insurance coverage.
+    </p>
+    <p>
+      Don't forget <strong>paid time off</strong> - this has real value! Enter both
+      PTO days and paid holidays. Also add any other annual benefits like stock grants,
+      education reimbursement, or gym memberships.
+    </p>
+    <p>
+      Open <strong>Tax Settings</strong> to customize your marginal federal tax bracket,
+      state tax rate, and self-employment tax rate (15.3% in the US). The calculator
+      uses these to compute accurate net income for both scenarios.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>winner comparison</strong> shows which option gives you more net
+      annual income after all taxes and costs. The annual and monthly difference
+      helps you see the real impact on your finances.
+    </p>
+    <p>
+      <strong>Effective hourly rates</strong> tell the real story. For contractors,
+      it's net income divided by billable hours - often much lower than the headline
+      rate. For employees, it's net income divided by actual work hours (excluding PTO).
+    </p>
+    <p>
+      The <strong>break-even analysis</strong> is crucial for negotiations. It shows
+      the minimum contractor rate to match the employee total compensation, and the
+      salary an employee would need to match the contractor net income.
+    </p>
+    <p>
+      The <strong>detailed comparison table</strong> breaks down every component:
+      where your money comes from and where it goes. Green numbers are income/benefits,
+      red numbers are costs/taxes. This helps identify which factors matter most in
+      your specific comparison.
+    </p>
+    <p>
+      Review the <strong>key metrics</strong> at the bottom: hours worked comparison,
+      total benefits value you'd be giving up (or gaining), self-employment tax burden,
+      and contractor business costs. These often-overlooked factors can swing the
+      decision significantly.
+    </p>
+  </ContentSection>
+
+  <!-- Strategy Section -->
+  <ContentSection title="Making the Right Choice">
+    <p>
+      <strong>It's not just about money.</strong> Contracting offers flexibility,
+      variety, and potentially higher income - but comes with instability, admin
+      overhead, and isolation. Employment offers stability, benefits, and career
+      growth paths - but less control and potentially lower ceiling.
+    </p>
+    <p>
+      <strong>Negotiate from a position of knowledge.</strong> If contracting, know
+      your break-even rate and add a margin for risk and value. If taking an employee
+      role, understand the true value of benefits - many people underestimate them
+      by $20-40K.
+    </p>
+    <p>
+      <strong>Consider the transition costs.</strong> Switching from employee to
+      contractor means losing benefits immediately. You may need COBRA coverage
+      (expensive) for a few months. Build an emergency fund before making the leap.
+    </p>
+    <p>
+      <strong>Think about your career stage.</strong> Early career often benefits
+      from employee roles for mentorship, training, and resume building. Mid-career
+      professionals with established skills and networks often thrive as contractors.
+    </p>
+    <p>
+      <strong>Factor in tax optimization.</strong> Contractors have more tax
+      flexibility - retirement accounts (SEP-IRA, Solo 401k), business deductions,
+      and potentially S-Corp election can improve the math significantly. Consult
+      a tax professional.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
