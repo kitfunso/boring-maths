@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo, useEffect } from 'preact/hooks';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
 import { type Currency, getCurrencySymbol, getRegionFromCurrency } from '../../../lib/regions';
@@ -23,11 +23,8 @@ import {
   ResultCard,
   MetricCard,
   Alert,
-  DataImportBanner,
-  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function HourlyToSalaryCalculator() {
   const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() => getDefaultInputs('USD'));
@@ -35,34 +32,10 @@ export default function HourlyToSalaryCalculator() {
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
 
-  // Shared data integration
-  const sharedData = useSharedData({
-    config: CALCULATOR_CONFIGS['hourly-to-salary'],
-    inputs,
-    setInputs,
-    importMapping: {
-      hourlyRate: 'hourlyRate',
-      currency: 'currency',
-    },
-    exportMapping: {
-      hourlyRate: 'hourlyRate',
-      currency: 'currency',
-    },
-    getExportData: () => ({
-      annualIncome: result.grossAnnual,
-      monthlyIncome: result.grossMonthly,
-    }),
-  });
-
   // Calculate results
   const result: HourlyToSalaryResult = useMemo(() => {
     return calculateHourlyToSalary(inputs);
   }, [inputs]);
-
-  // Export data when result changes
-  useEffect(() => {
-    sharedData.exportData();
-  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof HourlyToSalaryInputs>(
@@ -99,21 +72,6 @@ export default function HourlyToSalaryCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Import Banner */}
-          {sharedData.showImportBanner && (
-            <DataImportBanner
-              availableImports={sharedData.availableImports}
-              onImportAll={sharedData.importAll}
-              onDismiss={sharedData.dismissImportBanner}
-              formatValue={(key, value) => {
-                if (typeof value === 'number') {
-                  return formatCurrency(value, inputs.currency);
-                }
-                return String(value);
-              }}
-            />
-          )}
-
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Hourly Rate */}
@@ -266,12 +224,11 @@ export default function HourlyToSalaryCalculator() {
             )}
 
             {/* Share Results */}
-            <div className="flex justify-center items-center gap-4 pt-4">
+            <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.hourlyRate, inputs.currency)}/hr = ${formatCurrency(result.netAnnual, result.currency)}/year (${formatCurrency(result.netMonthly, result.currency)}/month) after ${Math.round(inputs.taxRate * 100)}% tax`}
                 calculatorName="Hourly to Salary Calculator"
               />
-              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

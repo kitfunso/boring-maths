@@ -5,7 +5,7 @@
  * Accounts for weather, event type, and kid-friendly options.
  */
 
-import { useState, useMemo, useEffect } from 'preact/hooks';
+import { useState, useMemo } from 'preact/hooks';
 import { calculatePartyDrinks, formatCurrency, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -32,44 +32,16 @@ import {
   ResultCard,
   MetricCard,
   Alert,
-  DataImportBanner,
-  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function PartyDrinkCalculator() {
   const [inputs, setInputs] = useState<PartyDrinkInputs>(() => getDefaultInputs('USD'));
-
-  // Shared data integration
-  const sharedData = useSharedData({
-    config: CALCULATOR_CONFIGS['party-drink'] || {
-      id: 'party-drink',
-      name: 'Party Drink Calculator',
-      imports: ['guestCount', 'currency'],
-      exports: ['guestCount', 'currency'],
-    },
-    inputs,
-    setInputs,
-    importMapping: {
-      guestCount: 'guestCount',
-      currency: 'currency',
-    },
-    exportMapping: {
-      guestCount: 'guestCount',
-      currency: 'currency',
-    },
-  });
 
   // Calculate results
   const result: PartyDrinkResult = useMemo(() => {
     return calculatePartyDrinks(inputs);
   }, [inputs]);
-
-  // Export data when result changes
-  useEffect(() => {
-    sharedData.exportData();
-  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof PartyDrinkInputs>(
@@ -142,19 +114,6 @@ export default function PartyDrinkCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Import Banner */}
-          {sharedData.showImportBanner && (
-            <DataImportBanner
-              availableImports={sharedData.availableImports}
-              onImportAll={sharedData.importAll}
-              onDismiss={sharedData.dismissImportBanner}
-              formatValue={(key, value) => {
-                if (key === 'guestCount') return `${value} guests`;
-                return String(value);
-              }}
-            />
-          )}
-
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Guest Count */}
@@ -437,12 +396,11 @@ export default function PartyDrinkCalculator() {
             )}
 
             {/* Share Results */}
-            <div className="flex justify-center items-center gap-4 pt-4">
+            <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Party drinks for ${inputs.guestCount} guests: ${result.totalServings} servings needed. Ice: ${result.ice.bagsNeeded} bags. Estimated cost: ${formatCurrency(result.totalCost, result.currency)} (${formatCurrency(result.costPerPerson, result.currency)}/person)`}
                 calculatorName="Party Drink Calculator"
               />
-              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>

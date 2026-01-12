@@ -219,9 +219,9 @@ export const CURRENCY_OPTIONS: Array<{
   label: string;
   flag: string;
 }> = [
-  { value: 'USD', label: 'USD ($) - United States', flag: '🇺🇸' },
-  { value: 'GBP', label: 'GBP (£) - United Kingdom', flag: '🇬🇧' },
-  { value: 'EUR', label: 'EUR (€) - European Union', flag: '🇪🇺' },
+  { value: 'USD', label: 'USD ($)', flag: '🇺🇸' },
+  { value: 'GBP', label: 'GBP (£)', flag: '🇬🇧' },
+  { value: 'EUR', label: 'EUR (€)', flag: '🇪🇺' },
 ];
 
 /**

@@ -1,7 +1,7 @@
 import { createContext } from 'preact';
 import { useContext, useState, useEffect } from 'preact/hooks';
 import type { ComponentChildren } from 'preact';
-import { type Currency, CURRENCY_CONFIGS } from '../../../lib/regions';
+import { type Currency, CURRENCIES } from '../../../lib/regions';
 
 const STORAGE_KEY = 'boring-math-currency';
 const DEFAULT_CURRENCY: Currency = 'USD';
@@ -43,7 +43,7 @@ export function CurrencyProvider({ children }: { children: ComponentChildren }) 
     }));
   };
 
-  const config = CURRENCY_CONFIGS[currency];
+  const config = CURRENCIES[currency];
 
   const value: CurrencyContextValue = {
     currency,

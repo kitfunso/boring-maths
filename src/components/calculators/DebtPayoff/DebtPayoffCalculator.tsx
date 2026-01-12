@@ -4,7 +4,7 @@
  * Compare snowball vs avalanche debt repayment strategies.
  */
 
-import { useState, useMemo, useEffect } from 'preact/hooks';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateDebtPayoff, formatCurrency, formatDuration } from './calculations';
 import {
   getDefaultInputs,
@@ -27,41 +27,14 @@ import {
   ResultCard,
   MetricCard,
   Alert,
-  DataImportBanner,
-  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function DebtPayoffCalculator() {
   const [inputs, setInputs] = useState<DebtPayoffInputs>(() => getDefaultInputs('USD'));
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Shared data integration
-  const sharedData = useSharedData({
-    config: CALCULATOR_CONFIGS['debt-payoff'],
-    inputs,
-    setInputs,
-    importMapping: {
-      currency: 'currency',
-    },
-    exportMapping: {
-      extraPayment: 'monthlyExpenses',
-      currency: 'currency',
-    },
-    getExportData: () => ({
-      monthlyExpenses: result.monthlyPayment,
-    }),
-  });
-
   const result = useMemo(() => calculateDebtPayoff(inputs), [inputs]);
-
-  // Export data when result changes
-  useEffect(() => {
-    if (result.totalDebt > 0) {
-      sharedData.exportData();
-    }
-  }, [result]);
 
   const updateInput = <K extends keyof DebtPayoffInputs>(
     field: K,
@@ -115,21 +88,6 @@ export default function DebtPayoffCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Import Banner */}
-          {sharedData.showImportBanner && (
-            <DataImportBanner
-              availableImports={sharedData.availableImports}
-              onImportAll={sharedData.importAll}
-              onDismiss={sharedData.dismissImportBanner}
-              formatValue={(key, value) => {
-                if (typeof value === 'number') {
-                  return formatCurrency(value, inputs.currency);
-                }
-                return String(value);
-              }}
-            />
-          )}
-
           {/* Strategy Selection */}
           <div className="mb-8">
             <Label>Payoff Strategy</Label>
@@ -384,12 +342,11 @@ export default function DebtPayoffCalculator() {
 
             {/* Share Results */}
             {result.totalDebt > 0 && (
-              <div className="flex justify-center items-center gap-4 pt-4">
+              <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Debt-free in ${formatDuration(selectedResult.months)} using ${inputs.strategy} method. Total interest: ${formatCurrency(selectedResult.totalInterest, inputs.currency)}`}
                   calculatorName="Debt Payoff Calculator"
                 />
-                <DataExportIndicator visible={sharedData.justExported} />
               </div>
             )}
           </div>

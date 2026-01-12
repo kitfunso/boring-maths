@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'react';
 import { useTheme } from '../theme/ThemeContext';
+import { useRef } from 'preact/hooks';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Input variant determines prefix/suffix styling */
@@ -21,8 +22,74 @@ const SIZE_CLASSES = {
 };
 
 /**
+ * Custom spin controls component for number inputs
+ */
+function SpinControls({
+  inputRef,
+  disabled,
+  min,
+  max,
+  step = 1,
+}: {
+  inputRef: React.RefObject<HTMLInputElement>;
+  disabled?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+}) {
+  const stepNum = typeof step === 'string' ? parseFloat(step) : step;
+
+  const increment = () => {
+    if (!inputRef.current || disabled) return;
+    const currentValue = parseFloat(inputRef.current.value) || 0;
+    const newValue = currentValue + stepNum;
+    if (max === undefined || newValue <= max) {
+      inputRef.current.value = String(newValue);
+      inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  };
+
+  const decrement = () => {
+    if (!inputRef.current || disabled) return;
+    const currentValue = parseFloat(inputRef.current.value) || 0;
+    const newValue = currentValue - stepNum;
+    if (min === undefined || newValue >= min) {
+      inputRef.current.value = String(newValue);
+      inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  };
+
+  if (disabled) return null;
+
+  return (
+    <div className="spin-controls">
+      <button
+        type="button"
+        onClick={increment}
+        tabIndex={-1}
+        aria-label="Increase value"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        onClick={decrement}
+        tabIndex={-1}
+        aria-label="Decrease value"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+/**
  * Themed input component with support for currency and percentage variants.
- * Updated for dark theme.
+ * Updated for dark theme with custom spin controls.
  */
 export function Input({
   variant = 'default',
@@ -31,9 +98,15 @@ export function Input({
   error = false,
   className = '',
   type = 'number',
+  disabled,
+  min,
+  max,
+  step,
   ...props
 }: InputProps) {
   const { tokens } = useTheme();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const isNumber = type === 'number';
 
   const baseClasses = `
     w-full border rounded-xl transition-all duration-200 tabular-nums
@@ -48,48 +121,92 @@ export function Input({
 
   if (variant === 'currency') {
     return (
-      <div className="relative">
+      <div className="spin-input-wrapper w-full">
         <span
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium"
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium z-10"
           aria-hidden="true"
         >
           {currencySymbol}
         </span>
         <input
+          ref={inputRef}
           type={type}
           inputMode="numeric"
-          className={`${baseClasses} pl-8 pr-4 ${className}`}
+          disabled={disabled}
+          min={min}
+          max={max}
+          step={step}
+          className={`${baseClasses} pl-8 pr-10 ${className}`}
           {...props}
         />
+        {isNumber && (
+          <SpinControls
+            inputRef={inputRef}
+            disabled={disabled}
+            min={typeof min === 'number' ? min : undefined}
+            max={typeof max === 'number' ? max : undefined}
+            step={typeof step === 'number' ? step : 1}
+          />
+        )}
       </div>
     );
   }
 
   if (variant === 'percentage') {
     return (
-      <div className="relative">
+      <div className="spin-input-wrapper w-full">
         <input
+          ref={inputRef}
           type={type}
           inputMode="decimal"
-          className={`${baseClasses} pl-4 pr-10 ${className}`}
+          disabled={disabled}
+          min={min}
+          max={max}
+          step={step}
+          className={`${baseClasses} pl-4 pr-16 ${className}`}
           {...props}
         />
         <span
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium"
+          className="absolute right-10 top-1/2 -translate-y-1/2 text-[var(--color-subtle)] font-medium pointer-events-none"
           aria-hidden="true"
         >
           %
         </span>
+        {isNumber && (
+          <SpinControls
+            inputRef={inputRef}
+            disabled={disabled}
+            min={typeof min === 'number' ? min : undefined}
+            max={typeof max === 'number' ? max : undefined}
+            step={typeof step === 'number' ? step : 1}
+          />
+        )}
       </div>
     );
   }
 
   // Default variant
   return (
-    <input
-      type={type}
-      className={`${baseClasses} px-4 ${className}`}
-      {...props}
-    />
+    <div className="spin-input-wrapper w-full">
+      <input
+        ref={inputRef}
+        type={type}
+        disabled={disabled}
+        min={min}
+        max={max}
+        step={step}
+        className={`${baseClasses} px-4 pr-10 ${className}`}
+        {...props}
+      />
+      {isNumber && (
+        <SpinControls
+          inputRef={inputRef}
+          disabled={disabled}
+          min={typeof min === 'number' ? min : undefined}
+          max={typeof max === 'number' ? max : undefined}
+          step={typeof step === 'number' ? step : 1}
+        />
+      )}
+    </div>
   );
 }

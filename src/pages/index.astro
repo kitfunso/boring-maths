@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AdCard from '../components/common/AdCard.astro';
+import HomepageCurrencySelector from '../components/common/HomepageCurrencySelector';
 
 const title = 'Boring Math Calculators | Free Online Calculators';
 const description = 'Free online calculators for everyday math problems. Calculate freelance rates, wedding costs, savings goals, and more. Simple, accurate, and easy to use.';
@@ -397,29 +398,33 @@ const categoryColors: Record<string, string> = {
   <!-- Calculators Section with Category Filter -->
   <section class="relative px-6 py-6" id="calculators">
     <div class="max-w-7xl mx-auto">
-      <!-- Search Bar -->
-      <div class="max-w-xl mx-auto mb-5">
-        <div class="relative">
-          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <input
-            type="text"
-            id="search-input"
-            placeholder="Search calculators..."
-            class="w-full pl-12 pr-4 py-4 bg-[var(--color-charcoal)] border border-white/10 rounded-2xl
-                   text-[var(--color-cream)] placeholder:text-[var(--color-muted)]
-                   focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20
-                   transition-all duration-300"
-          />
-          <button
-            id="clear-search"
-            class="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)] hover:text-[var(--color-cream)] hidden"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      <!-- Search Bar and Currency Selector -->
+      <div class="max-w-2xl mx-auto mb-5">
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
-          </button>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search calculators..."
+              class="w-full pl-12 pr-4 py-4 bg-[var(--color-charcoal)] border border-white/10 rounded-2xl
+                     text-[var(--color-cream)] placeholder:text-[var(--color-muted)]
+                     focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20
+                     transition-all duration-300"
+            />
+            <button
+              id="clear-search"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)] hover:text-[var(--color-cream)] hidden"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <!-- Global Currency Selector -->
+          <HomepageCurrencySelector client:load />
         </div>
       </div>
 

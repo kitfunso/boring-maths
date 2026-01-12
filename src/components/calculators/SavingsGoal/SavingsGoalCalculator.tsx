@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo, useEffect } from 'preact/hooks';
+import { useState, useMemo } from 'preact/hooks';
 import { calculateSavingsGoal, formatCurrency } from './calculations';
 import { getDefaultInputs, type SavingsGoalInputs, type SavingsGoalResult, type ContributionFrequency } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -23,47 +23,18 @@ import {
   ResultCard,
   MetricCard,
   Alert,
-  DataImportBanner,
-  DataExportIndicator,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useSharedData, CALCULATOR_CONFIGS } from '../../../lib/sharedData';
 
 export default function SavingsGoalCalculator() {
   const [inputs, setInputs] = useState<SavingsGoalInputs>(() => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Shared data integration
-  const sharedData = useSharedData({
-    config: CALCULATOR_CONFIGS['savings-goal'],
-    inputs,
-    setInputs,
-    importMapping: {
-      savingsGoal: 'goalAmount',
-      emergencyFundTarget: 'goalAmount',
-      currentSavings: 'currentSavings',
-      currency: 'currency',
-    },
-    exportMapping: {
-      goalAmount: 'savingsGoal',
-      currentSavings: 'currentSavings',
-      currency: 'currency',
-    },
-    getExportData: () => ({
-      monthlyContribution: result.contributionAmount,
-    }),
-  });
-
   // Calculate results
   const result: SavingsGoalResult = useMemo(() => {
     return calculateSavingsGoal(inputs);
   }, [inputs]);
-
-  // Export data when result changes
-  useEffect(() => {
-    sharedData.exportData();
-  }, [result]);
 
   // Update input
   const updateInput = <K extends keyof SavingsGoalInputs>(
@@ -100,21 +71,6 @@ export default function SavingsGoalCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Import Banner */}
-          {sharedData.showImportBanner && (
-            <DataImportBanner
-              availableImports={sharedData.availableImports}
-              onImportAll={sharedData.importAll}
-              onDismiss={sharedData.dismissImportBanner}
-              formatValue={(key, value) => {
-                if (typeof value === 'number') {
-                  return formatCurrency(value, inputs.currency);
-                }
-                return String(value);
-              }}
-            />
-          )}
-
           {/* Input Section */}
           <div className="space-y-6 mb-8">
             {/* Goal Amount & Current Savings */}
@@ -248,12 +204,11 @@ export default function SavingsGoalCalculator() {
             </Alert>
 
             {/* Share Results */}
-            <div className="flex justify-center items-center gap-4 pt-4">
+            <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Savings goal: ${formatCurrency(inputs.goalAmount, inputs.currency)} in ${inputs.timelineYears} years - Save ${formatCurrency(result.contributionAmount, result.currency)}/${result.contributionFrequency} to earn ${formatCurrency(result.totalInterest, result.currency)} in interest!`}
                 calculatorName="Savings Goal Calculator"
               />
-              <DataExportIndicator visible={sharedData.justExported} />
             </div>
           </div>
         </div>
