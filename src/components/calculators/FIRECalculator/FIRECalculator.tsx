@@ -6,6 +6,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
+import { useDebounce } from '../../../hooks/useDebounce';
 import {
   calculateFIRE,
   formatCurrency,
@@ -47,10 +48,13 @@ export default function FIRECalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Calculate results
+  // Debounce inputs to avoid recalculating on every keystroke
+  const debouncedInputs = useDebounce(inputs, 150);
+
+  // Calculate results with debounced inputs
   const result = useMemo(() => {
-    return calculateFIRE(inputs);
-  }, [inputs]);
+    return calculateFIRE(debouncedInputs);
+  }, [debouncedInputs]);
 
   // Update input
   const updateInput = <K extends keyof FIRECalculatorInputs>(

@@ -48,11 +48,24 @@ const isProd = import.meta.env.PROD;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Non-blocking load with reduced weights -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullCanonicalURL} />
@@ -82,13 +95,26 @@ const isProd = import.meta.env.PROD;
     <!-- Google Analytics -->
     <Analytics />
 
-    <!-- Google AdSense -->
+    <!-- Google AdSense - Deferred loading for better performance -->
     {adsenseId && (
-      <script
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-        crossorigin="anonymous"
-      />
+      <script is:inline define:vars={{ adsenseId }}>
+        (function() {
+          function loadAdsense() {
+            if (window.adsenseLoaded) return;
+            window.adsenseLoaded = true;
+            var s = document.createElement('script');
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adsenseId;
+            s.async = true;
+            s.crossOrigin = 'anonymous';
+            document.head.appendChild(s);
+          }
+          if (document.readyState === 'complete') {
+            setTimeout(loadAdsense, 1000);
+          } else {
+            window.addEventListener('load', function() { setTimeout(loadAdsense, 1000); });
+          }
+        })();
+      </script>
     )}
 
     <title>{title}</title>
