@@ -10,25 +10,25 @@
  */
 
 export interface Props {
-  slot: string;
+  adSlot: string;
   className?: string;
 }
 
-const { slot, className = '' } = Astro.props;
+const { adSlot, className = '' } = Astro.props;
 
 const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID;
 const hasAdsense = !!clientId;
 ---
 
-<div class={`ad-card bento-card ${className}`} data-ad-slot={slot}>
+<div class={`ad-card bento-card ${className}`} data-ad-slot={adSlot}>
   {isProd && hasAdsense ? (
     <>
       <ins
         class="adsbygoogle"
         style="display:block; min-height: 100px;"
         data-ad-client={clientId}
-        data-ad-slot={slot}
+        data-ad-slot={adSlot}
         data-ad-format="horizontal"
         data-full-width-responsive="true"
       />
@@ -44,7 +44,7 @@ const hasAdsense = !!clientId;
         </svg>
       </div>
       <p class="ad-placeholder-label">Sponsored</p>
-      {!isProd && <p class="ad-placeholder-slot">(Ad slot: {slot})</p>}
+      {!isProd && <p class="ad-placeholder-slot">(Ad slot: {adSlot})</p>}
       {isProd && !hasAdsense && <p class="ad-placeholder-slot">(AdSense not configured)</p>}
     </div>
   )}
@@ -52,10 +52,11 @@ const hasAdsense = !!clientId;
 
 <style>
   .ad-card {
-    min-height: 120px;
+    min-height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--gradient-card);
   }
 
   .ad-placeholder {

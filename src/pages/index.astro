@@ -427,7 +427,7 @@ const categoryColors: Record<string, string> = {
       <!-- Quick Stats -->
       <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">31</div>
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">36</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
         </div>
         <div class="text-center border-x border-white/10">
@@ -511,11 +511,15 @@ const categoryColors: Record<string, string> = {
           <>
             {/* Insert ad after 5th calculator */}
             {index === 5 && (
-              <AdCard slot="5724734776" />
+              <AdCard adSlot="5724734776" className="ad-in-grid" />
             )}
             {/* Insert ad after 12th calculator */}
             {index === 12 && (
-              <AdCard slot="5724734776" />
+              <AdCard adSlot="5724734776" className="ad-in-grid" />
+            )}
+            {/* Insert ad after 22nd calculator */}
+            {index === 22 && (
+              <AdCard adSlot="5724734776" className="ad-in-grid" />
             )}
             <div
               class="calculator-card bento-card group relative glow"
@@ -878,9 +882,14 @@ const categoryColors: Record<string, string> = {
     to { opacity: 1; }
   }
 
-  .calculator-card {
+  .calculator-card,
+  .ad-in-grid {
     animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     opacity: 0;
+  }
+
+  .ad-in-grid {
+    animation-delay: 250ms;
   }
 
   @keyframes card-appear {
