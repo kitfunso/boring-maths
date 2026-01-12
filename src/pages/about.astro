@@ -43,7 +43,7 @@ const iconPaths: Record<string, string> = {
 
 <BaseLayout title={title} description={description}>
   <!-- Hero Section -->
-  <section class="relative px-6 py-12">
+  <section class="relative px-6 py-8">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-micro text-[var(--color-accent)] mb-3 block">About Us</span>
       <h1 class="text-3xl md:text-4xl font-display text-[var(--color-cream)] mb-4">
@@ -57,7 +57,7 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Feedback Section - Prioritized -->
-  <section class="px-6 py-8">
+  <section class="px-6 py-4">
     <div class="max-w-4xl mx-auto">
       <div class="card-elevated rounded-2xl p-6 md:p-8 relative overflow-hidden">
         <!-- Background decoration -->
@@ -95,7 +95,7 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Mission Section -->
-  <section class="px-6 py-10">
+  <section class="px-6 py-4">
     <div class="max-w-4xl mx-auto">
       <div class="glass rounded-3xl p-6 md:p-8">
         <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4">Our Mission</h2>
@@ -122,11 +122,11 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Features Grid -->
-  <section class="px-6 py-10">
+  <section class="px-6 py-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-8">
+      <div class="text-center mb-6 flex flex-col items-center">
         <span class="text-micro text-[var(--color-accent)] mb-2 block">What Makes Us Different</span>
-        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)]">Built for You</h2>
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] text-center">Built for You</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -146,7 +146,7 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Tech Stack Section -->
-  <section class="px-6 py-10">
+  <section class="px-6 py-4">
     <div class="max-w-4xl mx-auto">
       <div class="glass rounded-3xl p-6 md:p-8">
         <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4">How It's Built</h2>
@@ -181,17 +181,17 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- CTA Section -->
-  <section class="px-6 py-10">
+  <section class="px-6 py-6">
     <div class="max-w-4xl mx-auto">
-      <div class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden">
+      <div class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden flex flex-col items-center">
         <!-- Background decoration -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
           <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div class="relative">
-          <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-3">
+        <div class="relative flex flex-col items-center">
+          <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-3 text-center">
             Ready to calculate?
           </h2>
           <p class="text-[var(--color-subtle)] mb-6 max-w-xl mx-auto">

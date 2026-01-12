@@ -131,7 +131,7 @@ body {
 .font-display {
   font-family: var(--font-display);
   transform: scaleX(1.1);
-  transform-origin: left;
+  transform-origin: center;
 }
 
 .font-body {
@@ -144,7 +144,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   transform: scaleX(1.1);
-  transform-origin: left;
+  transform-origin: center;
 }
 
 /* Giant Display Text */
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   letter-spacing: -0.02em;
   transform: scaleX(1.1);
-  transform-origin: left;
+  transform-origin: center;
 }
 
 .text-headline {
@@ -163,7 +163,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.15;
   letter-spacing: -0.01em;
   transform: scaleX(1.1);
-  transform-origin: left;
+  transform-origin: center;
 }
 
 .text-title {
@@ -171,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   line-height: 1.2;
   transform: scaleX(1.1);
-  transform-origin: left;
+  transform-origin: center;
 }
 
 /* Body Text */
@@ -283,6 +283,50 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(255, 255, 255, 0.05);
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Form Elements - Select Dropdowns
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Style all select elements */
+select {
+  border-radius: 0.75rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239898a8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* Firefox: Style the dropdown popup */
+@-moz-document url-prefix() {
+  select {
+    scrollbar-color: var(--color-muted) var(--color-charcoal);
+  }
+
+  select option {
+    background: var(--color-charcoal);
+    color: var(--color-cream);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
+
+/* WebKit: Style scrollbar in dropdowns */
+select::-webkit-scrollbar {
+  width: 8px;
+}
+
+select::-webkit-scrollbar-track {
+  background: var(--color-charcoal);
+  border-radius: 4px;
+}
+
+select::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 4px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
