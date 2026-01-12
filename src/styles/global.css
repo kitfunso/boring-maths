@@ -360,7 +360,7 @@ input[type="number"] {
   display: flex;
   flex-direction: column;
   width: 28px;
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 8px 8px 0; /* 10px input radius minus 2px inset */
   overflow: hidden;
 }
 

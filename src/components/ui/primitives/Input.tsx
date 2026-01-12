@@ -109,7 +109,7 @@ export function Input({
   const isNumber = type === 'number';
 
   const baseClasses = `
-    w-full border rounded-xl transition-all duration-200 tabular-nums
+    w-full border rounded-[10px] transition-all duration-200 tabular-nums
     bg-[var(--color-night)] text-[var(--color-cream)]
     placeholder:text-[var(--color-muted)]
     ${SIZE_CLASSES[size]}
