@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://boring-maths.vercel.app/',
+  site: 'https://boring-math.com/',
 
   vite: {
     plugins: [tailwindcss()],
