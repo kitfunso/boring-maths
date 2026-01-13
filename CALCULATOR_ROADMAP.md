@@ -4,7 +4,7 @@
 
 ## Executive Summary
 
-Based on market research and SEO analysis, this roadmap outlines **45 new calculator opportunities** organized into 6 phases over time. Each calculator targets specific long-tail keywords with moderate search volume (<500/month) and low competition - the sweet spot for passive SEO traffic.
+Based on market research and SEO analysis, this roadmap outlines **51 calculator opportunities (45 US + 6 UK)** organized into 6 phases over time. Each calculator targets specific long-tail keywords with moderate search volume (<500/month) and low competition - the sweet spot for passive SEO traffic.
 
 ---
 
@@ -501,6 +501,70 @@ Each new calculator should include:
 
 ---
 
+
+---
+
+## Phase 11: UK & International Expansion (7 Calculators)
+
+Targeting the UK market with region-specific financial tools. High search volume in UK with less competition than US equivalents.
+
+### 11.1 UK £100k Tax Trap Calculator ✅ COMPLETE
+**Target Keyword:** "uk 100k tax trap calculator"
+**Status:** Implemented
+**Inputs:** Gross salary, bonus, tax region (England/Scotland), student loan plan, pension %
+**Outputs:** Income tax, NI, take-home pay, marginal rate, Personal Allowance status
+**Unique Angle:** Scotland vs England comparison, 60% tax trap detection and pension escape strategies
+**Color Theme:** Rose
+**Difficulty:** Hard
+
+### 11.2 UK Stamp Duty Calculator
+**Target Keyword:** "stamp duty calculator uk 2024"
+**Inputs:** Property price, buyer type (first-time/home mover/additional), property location (England/Wales/Scotland/NI)
+**Outputs:** SDLT/LBTT/LTT amount, effective rate, band breakdown, first-time buyer savings
+**Unique Angle:** Compare all UK nations, additional property surcharge, non-resident surcharge
+**Color Theme:** Navy
+**Difficulty:** Medium
+
+### 11.3 UK Child Benefit Calculator
+**Target Keyword:** "high income child benefit charge calculator"
+**Inputs:** Annual income, number of children, partner's income
+**Outputs:** Child benefit amount, HICBC clawback, net benefit, break-even income
+**Unique Angle:** Show when it's worth claiming despite tax charge, pension sacrifice to avoid
+**Color Theme:** Pink
+**Difficulty:** Easy
+
+### 11.4 UK Student Loan Repayment Calculator
+**Target Keyword:** "student loan repayment calculator uk plan 2"
+**Inputs:** Loan balance, current salary, expected salary growth, loan plan type
+**Outputs:** Monthly repayment, years to payoff, total repaid, write-off date comparison
+**Unique Angle:** Plan 1 vs 2 vs 4 vs 5 comparison, show when loans get written off
+**Color Theme:** Blue
+**Difficulty:** Medium
+
+### 11.5 UK Salary Sacrifice Calculator
+**Target Keyword:** "salary sacrifice calculator uk"
+**Inputs:** Gross salary, sacrifice amount, sacrifice type (pension/cycle/childcare)
+**Outputs:** Tax saved, NI saved, net cost of benefit, employer NI savings
+**Unique Angle:** Compare pension vs cycle to work vs childcare vouchers, show true cost
+**Color Theme:** Teal
+**Difficulty:** Medium
+
+### 11.6 UK Pension Calculator
+**Target Keyword:** "uk pension calculator retirement"
+**Inputs:** Current age, retirement age, current pot, monthly contribution, employer match
+**Outputs:** Projected pot at retirement, annual income (4% rule), state pension integration
+**Unique Angle:** Include state pension forecast, lifetime allowance warning, auto-enrolment minimum
+**Color Theme:** Green
+**Difficulty:** Medium
+
+### 11.7 UK Dividend Tax Calculator
+**Target Keyword:** "dividend tax calculator uk"
+**Inputs:** Salary income, dividend income, tax year
+**Outputs:** Tax on dividends, effective rate, comparison to salary, £1,000 allowance usage
+**Unique Angle:** Salary vs dividend mix optimization for company directors
+**Color Theme:** Amber
+**Difficulty:** Medium
+
 ## Success Metrics
 
 ### Per Calculator
@@ -543,5 +607,5 @@ This roadmap was informed by:
 ---
 
 *Last Updated: January 2026*
-*Total Proposed Calculators: 45*
+*Total Proposed Calculators: 51*
 *Estimated Build Time per Calculator: 2-4 hours*
