@@ -1,0 +1,144 @@
+---
+/**
+ * GPA Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { GPACalculator } from '../../components/calculators/GPACalculator';
+
+const title = 'GPA Calculator | Calculate Your Grade Point Average';
+const description = 'Free GPA calculator for college and high school students. Calculate your semester GPA and cumulative GPA with support for 4.0 and 4.3 grade scales.';
+const keywords = 'GPA calculator, grade point average calculator, college GPA calculator, cumulative GPA calculator, semester GPA calculator, 4.0 scale calculator, grade calculator';
+const canonicalURL = '/calculators/gpa-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'GPA Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages quickly and easily.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age in years, months, and days.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How is GPA calculated?",
+    answer: "GPA is calculated by multiplying each course grade's point value by its credit hours, summing all grade points, then dividing by total credit hours. For example: A (4.0) in a 3-credit course = 12 grade points. If you have 39 grade points across 12 credits, your GPA is 3.25."
+  },
+  {
+    question: "What is the difference between 4.0 and 4.3 scale?",
+    answer: "The standard 4.0 scale caps at A = 4.0. The 4.3 scale gives A+ a value of 4.3, allowing students to exceed a 4.0 GPA. Many colleges use the 4.0 scale, but some high schools and universities use 4.3 to reward exceptional performance."
+  },
+  {
+    question: "What is a good GPA?",
+    answer: "It varies by context. Generally: 3.5-4.0 is excellent (often Dean's List), 3.0-3.5 is good, 2.5-3.0 is average, and below 2.0 may trigger academic probation. For graduate school, most programs expect 3.0+, while competitive programs want 3.5+."
+  },
+  {
+    question: "How do I calculate cumulative GPA?",
+    answer: "Multiply your current GPA by your completed credits to get previous grade points. Add new semester grade points, then divide total grade points by total credits. Example: 3.5 GPA × 60 credits = 210 points + 45 new points = 255 ÷ 75 credits = 3.4 cumulative GPA."
+  },
+  {
+    question: "Do all colleges use the same GPA scale?",
+    answer: "No, GPA scales vary. Most US colleges use a 4.0 scale, but some use 4.3 or 5.0 (for weighted honors/AP classes). International schools often use different systems entirely. Always check your institution's specific grading policy."
+  },
+  {
+    question: "What GPA do I need for Dean's List?",
+    answer: "Dean's List requirements vary by school, but typically require a 3.5 GPA or higher for the semester with a minimum course load (usually 12+ credits). Some schools have a 3.7 or 3.0 requirement. Check your school's academic policies."
+  },
+  {
+    question: "Can I raise my GPA significantly?",
+    answer: "It's harder to raise your GPA as you accumulate credits. Early in college, each semester has a big impact. After 60+ credits, each new grade has less effect on your cumulative GPA. Focus on consistent improvement and target courses where you can excel."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'GPA Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="GPA Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="GPA Calculator"
+    description="Calculate your semester and cumulative grade point average."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <GPACalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      First, select your <strong>grade scale</strong>. Most US colleges use a 4.0 scale where
+      A = 4.0. Some schools use a 4.3 scale where A+ = 4.3.
+    </p>
+    <p>
+      If you want to calculate your <strong>cumulative GPA</strong>, check the box and enter
+      your current GPA and total credits completed before this semester.
+    </p>
+    <p>
+      Add your courses by entering the <strong>course name</strong> (optional),
+      <strong>credit hours</strong>, and <strong>grade received</strong>. Click "Add Course"
+      for additional classes.
+    </p>
+    <p>
+      Your GPA updates automatically as you enter grades. The calculator shows both your
+      semester GPA and, if enabled, your new cumulative GPA.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Semester GPA</strong> shows your grade point average for just the courses
+      you entered. This is calculated fresh regardless of previous semesters.
+    </p>
+    <p>
+      <strong>Cumulative GPA</strong> combines your new grades with your previous academic
+      record to show your overall standing. This is what appears on transcripts.
+    </p>
+    <p>
+      <strong>Grade Points</strong> are calculated by multiplying each grade's point value
+      by the course credits. A 4-credit A earns more grade points than a 3-credit A.
+    </p>
+    <p>
+      The <strong>Letter Grade equivalent</strong> shows what your GPA would translate to
+      as a single letter grade, plus any academic standing (Dean's List, etc.).
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

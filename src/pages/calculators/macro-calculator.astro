@@ -1,0 +1,144 @@
+---
+/**
+ * Macro Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { MacroCalculator } from '../../components/calculators/MacroCalculator';
+
+const title = 'Macro Calculator | Calculate Your Daily Protein, Carbs & Fat';
+const description = 'Free macro calculator to find your optimal daily protein, carbs, and fat intake. Based on your body metrics, activity level, and fitness goals.';
+const keywords = 'macro calculator, macronutrient calculator, protein calculator, carb calculator, fat calculator, TDEE calculator, BMR calculator, calorie calculator, iifym calculator';
+const canonicalURL = '/calculators/macro-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Macro Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs.',
+    href: '/calculators/calorie-calculator',
+    icon: 'fire' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Check your body mass index.',
+    href: '/calculators/bmi-calculator',
+    icon: 'scale' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What are macros?",
+    answer: "Macros (macronutrients) are the three main nutrients your body needs in large amounts: protein, carbohydrates, and fat. Each provides calories and serves different functions. Protein builds muscle (4 cal/g), carbs fuel activity (4 cal/g), and fat supports hormones and absorption (9 cal/g)."
+  },
+  {
+    question: "What is BMR vs TDEE?",
+    answer: "BMR (Basal Metabolic Rate) is the calories you burn at complete rest - just to keep your body functioning. TDEE (Total Daily Energy Expenditure) is your BMR multiplied by an activity factor, representing total daily calories burned including exercise and daily activities."
+  },
+  {
+    question: "How much protein do I need?",
+    answer: "For general health, 0.5-0.7g per pound of bodyweight is sufficient. For muscle building or fat loss while preserving muscle, aim for 0.7-1.0g per pound. Athletes and bodybuilders may go up to 1.2g per pound during intense training phases."
+  },
+  {
+    question: "Should I track macros or just calories?",
+    answer: "Tracking calories alone works for weight loss, but tracking macros ensures you get enough protein to preserve muscle, adequate fat for hormones, and carbs for energy. This leads to better body composition results rather than just scale weight changes."
+  },
+  {
+    question: "How accurate are these calculations?",
+    answer: "These formulas are estimates based on population averages. Individual metabolism can vary by 10-15%. Use these as a starting point, then adjust based on real results. If you're not losing/gaining as expected after 2-3 weeks, adjust by 100-200 calories."
+  },
+  {
+    question: "What's the best macro ratio for fat loss?",
+    answer: "There's no single best ratio - what matters most is the calorie deficit and adequate protein. A common starting point is 30% protein, 35% carbs, 35% fat. High protein (0.8-1g/lb bodyweight) helps preserve muscle during a deficit."
+  },
+  {
+    question: "Can I eat whatever I want if it fits my macros (IIFYM)?",
+    answer: "Technically yes for body composition, but not for health. Meeting macros with whole foods provides fiber, vitamins, and minerals that junk food lacks. The 80/20 rule works well: 80% whole foods, 20% flexible foods that fit your macros."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Macro Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Macro Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Macro Calculator"
+    description="Calculate your optimal daily protein, carbs, and fat based on your goals."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <MacroCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>body metrics</strong> - gender, age, weight, and height.
+      These determine your Basal Metabolic Rate (BMR), the calories your body burns at rest.
+    </p>
+    <p>
+      Select your <strong>activity level</strong> honestly. Most people overestimate their
+      activity. A desk job with 3 gym sessions per week is typically "Lightly Active" to
+      "Moderately Active."
+    </p>
+    <p>
+      Choose your <strong>goal</strong>: lose weight (500 calorie deficit), maintain weight,
+      or build muscle (300 calorie surplus). Moderate deficits/surpluses are more sustainable.
+    </p>
+    <p>
+      Adjust the <strong>protein target</strong> based on your needs. Higher protein
+      (0.8-1g/lb) helps preserve muscle during fat loss and build muscle during bulking.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Daily Calorie Target</strong> is your adjusted TDEE based on your goal.
+      This is your most important number for weight management.
+    </p>
+    <p>
+      <strong>Protein</strong> is calculated from your body weight and protein ratio.
+      Hitting this target is crucial for body composition, especially during weight loss.
+    </p>
+    <p>
+      <strong>Fat</strong> is set at 25-30% of calories to support hormone function
+      and nutrient absorption. Don't go below 20% for extended periods.
+    </p>
+    <p>
+      <strong>Carbs</strong> fill the remaining calories. They fuel workouts and daily
+      activity. Adjust carbs up or down based on how you feel and perform.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
