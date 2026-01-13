@@ -29,9 +29,6 @@ const ogImageURL = ogImage
   ? new URL(ogImage, siteURL).href
   : new URL('/og/default.png', siteURL).href;
 
-// AdSense publisher ID (only in production)
-const adsenseId = import.meta.env.PUBLIC_ADSENSE_ID;
-const isProd = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -95,27 +92,12 @@ const isProd = import.meta.env.PROD;
     <!-- Google Analytics -->
     <Analytics />
 
-    <!-- Google AdSense - Deferred loading for better performance -->
-    {adsenseId && (
-      <script is:inline define:vars={{ adsenseId }}>
-        (function() {
-          function loadAdsense() {
-            if (window.adsenseLoaded) return;
-            window.adsenseLoaded = true;
-            var s = document.createElement('script');
-            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + adsenseId;
-            s.async = true;
-            s.crossOrigin = 'anonymous';
-            document.head.appendChild(s);
-          }
-          if (document.readyState === 'complete') {
-            setTimeout(loadAdsense, 1000);
-          } else {
-            window.addEventListener('load', function() { setTimeout(loadAdsense, 1000); });
-          }
-        })();
-      </script>
-    )}
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8014911033000505"
+      crossorigin="anonymous"
+    />
 
     <title>{title}</title>
   </head>
