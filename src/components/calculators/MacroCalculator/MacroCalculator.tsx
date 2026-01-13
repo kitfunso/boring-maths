@@ -5,6 +5,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMacros, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -25,11 +26,12 @@ import {
   Grid,
   Divider,
   Alert,
+  ShareResults,
+  PrintResults,
 } from '../../ui';
-import ShareResults from '../../ui/ShareResults';
 
 export default function MacroCalculator() {
-  const [inputs, setInputs] = useState<MacroCalculatorInputs>(() => getDefaultInputs());
+  const [inputs, setInputs] = useLocalStorage<MacroCalculatorInputs>('calc-macro-inputs', getDefaultInputs);
 
   const result = useMemo(() => calculateMacros(inputs), [inputs]);
 
@@ -339,11 +341,22 @@ export default function MacroCalculator() {
               calories by 100-200 if you're not seeing expected results.
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Daily targets: ${formatNumber(result.targetCalories)} cal | ${result.protein}g protein | ${result.carbs}g carbs | ${result.fat}g fat`}
                 calculatorName="Macro Calculator"
+              />
+              <PrintResults
+                title="Macro Calculator Results"
+                results={[
+                  { label: 'Daily Calories', value: `${formatNumber(result.targetCalories)} cal` },
+                  { label: 'Protein', value: `${result.protein}g (${result.proteinPercent}%)` },
+                  { label: 'Carbs', value: `${result.carbs}g (${result.carbsPercent}%)` },
+                  { label: 'Fat', value: `${result.fat}g (${result.fatPercent}%)` },
+                  { label: 'BMR', value: `${formatNumber(result.bmr)} cal` },
+                  { label: 'TDEE', value: `${formatNumber(result.tdee)} cal` },
+                ]}
               />
             </div>
           </div>

@@ -4,7 +4,8 @@
  * Calculate investment growth with compound interest over time.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateCompoundInterest, formatCurrency } from './calculations';
 import { getDefaultInputs, type CompoundInterestInputs, type CompoundInterestResult, type CompoundFrequency } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -24,9 +25,10 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import PrintResults from '../../ui/PrintResults';
 
 export default function CompoundInterestCalculator() {
-  const [inputs, setInputs] = useState<CompoundInterestInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useLocalStorage<CompoundInterestInputs>('calc-compound-inputs', () => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -257,11 +259,22 @@ export default function CompoundInterestCalculator() {
               {Math.round(72 / (inputs.interestRate * 100))} years.
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.principal, inputs.currency)} invested at ${(inputs.interestRate * 100).toFixed(1)}% for ${inputs.years} years = ${formatCurrency(result.finalBalance, result.currency)} (+${formatCurrency(result.totalInterest, result.currency)} in interest!)`}
                 calculatorName="Compound Interest Calculator"
+              />
+              <PrintResults
+                title="Compound Interest Calculator Results"
+                results={[
+                  { label: 'Principal', value: formatCurrency(inputs.principal, inputs.currency) },
+                  { label: 'Interest Rate', value: `${(inputs.interestRate * 100).toFixed(1)}%` },
+                  { label: 'Time Period', value: `${inputs.years} years` },
+                  { label: 'Final Balance', value: formatCurrency(result.finalBalance, result.currency) },
+                  { label: 'Total Interest Earned', value: formatCurrency(result.totalInterest, result.currency) },
+                  { label: 'Total Contributions', value: formatCurrency(result.totalContributions, result.currency) },
+                ]}
               />
             </div>
           </div>

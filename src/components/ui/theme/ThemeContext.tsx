@@ -63,8 +63,14 @@ export function ThemeProvider({ children, defaultColor = 'blue' }: ThemeProvider
  */
 export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+  if (!context || !context.tokens) {
+    // Return fallback values for SSR or when context is not properly initialized
+    return {
+      color: 'blue',
+      tokens: COLOR_TOKENS['blue'],
+      setColor: () => {},
+      getToken: (key) => COLOR_TOKENS['blue'][key],
+    };
   }
   return context;
 }

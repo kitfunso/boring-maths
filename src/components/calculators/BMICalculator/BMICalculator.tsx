@@ -4,7 +4,8 @@
  * Calculate Body Mass Index with health category classification.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateBMI } from './calculations';
 import { getDefaultInputs, BMI_CATEGORIES, type BMIInputs, type BMIResult, type UnitSystem } from './types';
 import {
@@ -19,9 +20,10 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import PrintResults from '../../ui/PrintResults';
 
 export default function BMICalculator() {
-  const [inputs, setInputs] = useState<BMIInputs>(() => getDefaultInputs());
+  const [inputs, setInputs] = useLocalStorage<BMIInputs>('calc-bmi-inputs', getDefaultInputs);
 
   const result: BMIResult = useMemo(() => {
     return calculateBMI(inputs);
@@ -240,11 +242,19 @@ export default function BMICalculator() {
               Consult a healthcare provider for a complete assessment.
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`My BMI: ${result.bmi} (${result.category}) - Healthy range: ${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}`}
                 calculatorName="BMI Calculator"
+              />
+              <PrintResults
+                title="BMI Calculator Results"
+                results={[
+                  { label: 'BMI', value: result.bmi.toString() },
+                  { label: 'Category', value: result.category },
+                  { label: 'Healthy Weight Range', value: `${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}` },
+                ]}
               />
             </div>
           </div>

@@ -4,7 +4,8 @@
  * Calculate retirement savings with employer matching and compound growth.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculate401k, formatCurrency } from './calculations';
 import { getDefaultInputs, type Calculator401kInputs } from './types';
 import {
@@ -16,11 +17,12 @@ import {
   Grid,
   Divider,
   Alert,
+  ShareResults,
+  PrintResults,
 } from '../../ui';
-import ShareResults from '../../ui/ShareResults';
 
 export default function Calculator401k() {
-  const [inputs, setInputs] = useState<Calculator401kInputs>(() => getDefaultInputs());
+  const [inputs, setInputs] = useLocalStorage<Calculator401kInputs>('calc-401k-inputs', getDefaultInputs);
 
   const result = useMemo(() => calculate401k(inputs), [inputs]);
 
@@ -259,11 +261,23 @@ export default function Calculator401k() {
               The 2024 contribution limit is $23,000 ($30,500 if you're 50+).
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`401k at age ${inputs.retirementAge}: ${formatCurrency(result.totalAtRetirement)} (${formatCurrency(result.monthlyIncomeAt4Percent)}/mo at 4% withdrawal)`}
                 calculatorName="401k Calculator"
+              />
+              <PrintResults
+                title="401k Calculator Results"
+                results={[
+                  { label: 'Retirement Age', value: String(inputs.retirementAge) },
+                  { label: 'Total at Retirement', value: formatCurrency(result.totalAtRetirement) },
+                  { label: 'Monthly Income (4% Rule)', value: formatCurrency(result.monthlyIncomeAt4Percent) },
+                  { label: 'Your Contributions', value: formatCurrency(result.totalContributions) },
+                  { label: 'Employer Match', value: formatCurrency(result.employerContributions) },
+                  { label: 'Investment Growth', value: formatCurrency(result.investmentGrowth) },
+                  { label: 'Years to Retire', value: String(inputs.retirementAge - inputs.currentAge) },
+                ]}
               />
             </div>
           </div>

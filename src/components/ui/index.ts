@@ -100,3 +100,7 @@ export type { DataImportBannerProps } from './calculator/DataImportBanner';
 
 export { DataExportIndicator } from './calculator/DataExportIndicator';
 export type { DataExportIndicatorProps } from './calculator/DataExportIndicator';
+
+// Actions
+export { default as ShareResults } from './ShareResults';
+export { default as PrintResults } from './PrintResults';

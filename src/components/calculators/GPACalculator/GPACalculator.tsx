@@ -4,7 +4,8 @@
  * Calculate semester and cumulative GPA with support for multiple grade scales.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateGPA, getGPADescription } from './calculations';
 import {
   getDefaultInputs,
@@ -23,11 +24,12 @@ import {
   Grid,
   Divider,
   Alert,
+  ShareResults,
+  PrintResults,
 } from '../../ui';
-import ShareResults from '../../ui/ShareResults';
 
 export default function GPACalculator() {
-  const [inputs, setInputs] = useState<GPACalculatorInputs>(() => getDefaultInputs());
+  const [inputs, setInputs] = useLocalStorage<GPACalculatorInputs>('calc-gpa-inputs', getDefaultInputs);
 
   const result = useMemo(() => calculateGPA(inputs), [inputs]);
   const gradeOptions = useMemo(() => getGradeOptions(inputs.gradeScale), [inputs.gradeScale]);
@@ -314,11 +316,24 @@ export default function GPACalculator() {
               Higher credit courses have more impact on your overall GPA.
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Semester GPA: ${result.semesterGPA.toFixed(2)} (${result.letterGrade}) | ${result.semesterCredits} credits`}
                 calculatorName="GPA Calculator"
+              />
+              <PrintResults
+                title="GPA Calculator Results"
+                results={[
+                  { label: 'Semester GPA', value: result.semesterGPA.toFixed(2) },
+                  { label: 'Letter Grade', value: result.letterGrade },
+                  { label: 'Total Credits', value: String(result.semesterCredits) },
+                  { label: 'Grade Points', value: result.semesterGradePoints.toFixed(1) },
+                  { label: 'Academic Standing', value: getGPADescription(result.semesterGPA) },
+                  ...(inputs.includeCurrentGPA && inputs.currentCredits > 0
+                    ? [{ label: 'Cumulative GPA', value: result.cumulativeGPA.toFixed(2) }]
+                    : []),
+                ]}
               />
             </div>
           </div>

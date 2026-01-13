@@ -5,7 +5,8 @@
  * Uses the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateTip, formatCurrency } from './calculations';
 import { getDefaultInputs, type TipCalculatorInputs, type TipCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -24,9 +25,10 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import PrintResults from '../../ui/PrintResults';
 
 export default function TipCalculator() {
-  const [inputs, setInputs] = useState<TipCalculatorInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -248,8 +250,8 @@ export default function TipCalculator() {
               In the US, servers rely on tips as a major part of their income.
             </Alert>
 
-            {/* Share Results */}
-            <div className="flex justify-center pt-4">
+            {/* Share & Print Results */}
+            <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={
                   inputs.splitCount > 1
@@ -257,6 +259,19 @@ export default function TipCalculator() {
                     : `Tip: ${formatCurrency(result.tipAmount, result.currency)} (${Math.round(inputs.tipPercentage * 100)}%) - Total: ${formatCurrency(result.totalAmount, result.currency)}`
                 }
                 calculatorName="Tip Calculator"
+              />
+              <PrintResults
+                title="Tip Calculator Results"
+                results={[
+                  { label: 'Bill Amount', value: formatCurrency(inputs.billAmount, result.currency) },
+                  { label: 'Tip Percentage', value: `${Math.round(inputs.tipPercentage * 100)}%` },
+                  { label: 'Tip Amount', value: formatCurrency(result.tipAmount, result.currency) },
+                  { label: 'Total', value: formatCurrency(result.totalAmount, result.currency) },
+                  ...(inputs.splitCount > 1 ? [
+                    { label: 'Split Between', value: `${inputs.splitCount} people` },
+                    { label: 'Per Person', value: formatCurrency(result.perPersonTotal, result.currency) },
+                  ] : []),
+                ]}
               />
             </div>
           </div>

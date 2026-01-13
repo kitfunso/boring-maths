@@ -4,7 +4,8 @@
  * Calculate monthly mortgage payments with principal, interest, taxes, and insurance.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
+import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMortgage, formatCurrency } from './calculations';
 import { getDefaultInputs, type MortgageInputs, type MortgageResult } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
@@ -23,9 +24,10 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
+import PrintResults from '../../ui/PrintResults';
 
 export default function MortgageCalculator() {
-  const [inputs, setInputs] = useState<MortgageInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () => getDefaultInputs('USD'));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -311,11 +313,23 @@ export default function MortgageCalculator() {
                   and save tens of thousands in interest.
                 </Alert>
 
-                {/* Share Results */}
-                <div className="flex justify-center pt-4">
+                {/* Share & Print Results */}
+                <div className="flex justify-center gap-3 pt-4">
                   <ShareResults
                     result={`Monthly mortgage payment: ${formatCurrency(result.monthlyTotal, result.currency)} for a ${formatCurrency(inputs.homePrice, inputs.currency)} home (${inputs.loanTermYears} years at ${(inputs.interestRate * 100).toFixed(2)}%)`}
                     calculatorName="Mortgage Calculator"
+                  />
+                  <PrintResults
+                    title="Mortgage Calculator Results"
+                    results={[
+                      { label: 'Home Price', value: formatCurrency(inputs.homePrice, inputs.currency) },
+                      { label: 'Down Payment', value: formatCurrency(inputs.downPayment, inputs.currency) },
+                      { label: 'Loan Amount', value: formatCurrency(result.loanAmount, result.currency) },
+                      { label: 'Interest Rate', value: `${(inputs.interestRate * 100).toFixed(2)}%` },
+                      { label: 'Loan Term', value: `${inputs.loanTermYears} years` },
+                      { label: 'Monthly Payment', value: formatCurrency(result.monthlyTotal, result.currency) },
+                      { label: 'Total Interest', value: formatCurrency(result.totalInterest, result.currency) },
+                    ]}
                   />
                 </div>
               </>

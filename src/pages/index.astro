@@ -503,6 +503,24 @@ const categoryColors: Record<string, string> = {
         </div>
       </div>
 
+      <!-- Recently Used Section (hidden by default, shown via JS) -->
+      <div id="recently-used-section" class="hidden mb-6">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-medium text-[var(--color-subtle)] uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Recently Used
+          </h2>
+          <button id="clear-recent" class="text-xs text-[var(--color-muted)] hover:text-[var(--color-cream)] transition-colors">
+            Clear
+          </button>
+        </div>
+        <div id="recently-used-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
       <!-- Category Filter -->
       <div class="flex flex-wrap justify-center gap-2 mb-6" id="category-filter">
         <!-- Favorites toggle -->
@@ -713,7 +731,7 @@ const categoryColors: Record<string, string> = {
 </BaseLayout>
 
 <script>
-  // Calculator filtering, search, and favorites functionality
+  // Calculator filtering, search, favorites, and recently used functionality
   document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.category-btn');
     const calculatorCards = document.querySelectorAll('.calculator-card');
@@ -721,9 +739,128 @@ const categoryColors: Record<string, string> = {
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
     const clearSearch = document.getElementById('clear-search');
     const favoritesFilter = document.getElementById('favorites-filter');
+    const recentlyUsedSection = document.getElementById('recently-used-section');
+    const recentlyUsedGrid = document.getElementById('recently-used-grid');
+    const clearRecentBtn = document.getElementById('clear-recent');
+
+    // Storage keys
+    const FAVORITES_KEY = 'boring-math-favorites';
+    const RECENT_KEY = 'boring-math-recent';
+    const MAX_RECENT = 4;
+
+    // Calculator data for recently used display
+    const calculatorData: Record<string, { title: string; icon: string; color: string }> = {};
+    calculatorCards.forEach(card => {
+      const href = card.getAttribute('data-href');
+      const title = card.querySelector('h3')?.textContent || '';
+      const iconEl = card.querySelector('.card-icon');
+      const iconPath = card.querySelector('.card-icon svg path')?.getAttribute('d') || '';
+      const colorClass = iconEl?.className.match(/from-(\w+)-/)?.[1] || 'blue';
+      if (href) {
+        calculatorData[href] = { title, icon: iconPath, color: colorClass };
+      }
+    });
+
+    // Recently used management
+    interface RecentItem {
+      href: string;
+      timestamp: number;
+    }
+
+    function getRecentlyUsed(): RecentItem[] {
+      try {
+        return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveRecentlyUsed(recent: RecentItem[]) {
+      localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+    }
+
+    function addToRecentlyUsed(href: string) {
+      let recent = getRecentlyUsed();
+      // Remove if already exists
+      recent = recent.filter(item => item.href !== href);
+      // Add to front
+      recent.unshift({ href, timestamp: Date.now() });
+      // Keep only MAX_RECENT items
+      recent = recent.slice(0, MAX_RECENT);
+      saveRecentlyUsed(recent);
+    }
+
+    function clearRecentlyUsed() {
+      localStorage.removeItem(RECENT_KEY);
+      renderRecentlyUsed();
+    }
+
+    const colorGradients: Record<string, string> = {
+      blue: 'from-blue-500 to-blue-600',
+      green: 'from-emerald-500 to-emerald-600',
+      emerald: 'from-emerald-500 to-emerald-600',
+      violet: 'from-violet-500 to-purple-600',
+      purple: 'from-violet-500 to-purple-600',
+      rose: 'from-rose-500 to-red-500',
+      red: 'from-rose-500 to-red-500',
+      coral: 'from-rose-500 to-red-500',
+      cyan: 'from-cyan-500 to-teal-500',
+      teal: 'from-cyan-500 to-teal-500',
+      ocean: 'from-cyan-500 to-teal-500',
+      amber: 'from-amber-500 to-orange-500',
+      orange: 'from-amber-500 to-orange-500',
+      pink: 'from-pink-500 to-rose-500',
+    };
+
+    function renderRecentlyUsed() {
+      const recent = getRecentlyUsed();
+
+      if (!recentlyUsedSection || !recentlyUsedGrid) return;
+
+      if (recent.length === 0) {
+        recentlyUsedSection.classList.add('hidden');
+        return;
+      }
+
+      recentlyUsedSection.classList.remove('hidden');
+
+      recentlyUsedGrid.innerHTML = recent.map(item => {
+        const data = calculatorData[item.href];
+        if (!data) return '';
+
+        const gradient = colorGradients[data.color] || colorGradients.blue;
+
+        return `
+          <a href="${item.href}" class="recent-card glass rounded-xl p-3 flex items-center gap-3 hover:bg-white/10 transition-all group">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="${data.icon}" />
+              </svg>
+            </div>
+            <span class="text-sm text-[var(--color-cream)] group-hover:text-[var(--color-accent)] transition-colors truncate">${data.title}</span>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Track calculator clicks
+    calculatorCards.forEach(card => {
+      const link = card.querySelector('a');
+      const href = card.getAttribute('data-href');
+      if (link && href) {
+        link.addEventListener('click', () => {
+          addToRecentlyUsed(href);
+        });
+      }
+    });
+
+    // Clear recently used button
+    clearRecentBtn?.addEventListener('click', clearRecentlyUsed);
+
+    // Initialize recently used on page load
+    renderRecentlyUsed();
 
     // Favorites management
-    const FAVORITES_KEY = 'boring-math-favorites';
 
     function getFavorites(): string[] {
       try {
