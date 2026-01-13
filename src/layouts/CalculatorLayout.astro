@@ -94,13 +94,18 @@ const colorClasses: Record<string, string> = {
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Main Content -->
       <article class="flex-1 min-w-0">
-        <!-- Top Ad Unit (horizontal banner) -->
-        <div class="mb-6">
+        <!-- Top Ad Unit (horizontal banner) - Hidden on mobile -->
+        <div class="hidden lg:block mb-6">
           <AdUnit slot="9991282844" format="horizontal" className="rounded-xl overflow-hidden" />
         </div>
 
         <!-- Main Content Slot -->
         <slot />
+
+        <!-- Mid-content Ad Unit (shows after calculator, before related) -->
+        <div class="my-8">
+          <AdUnit slot="8151016743" format="horizontal" className="rounded-xl overflow-hidden" />
+        </div>
 
         <!-- Related Calculators Section -->
     {relatedCalculators.length > 0 && (
