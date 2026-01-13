@@ -17,8 +17,8 @@ export interface Props {
 const { adSlot, className = '' } = Astro.props;
 
 const isProd = import.meta.env.PROD;
-const clientId = import.meta.env.PUBLIC_ADSENSE_ID;
-const hasAdsense = !!clientId;
+const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
+const hasAdsense = true;
 ---
 
 <div class={`ad-card bento-card ${className}`} data-ad-slot={adSlot}>
