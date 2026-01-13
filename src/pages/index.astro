@@ -771,11 +771,13 @@ const categoryColors: Record<string, string> = {
         // Check category filter
         const matchesCategory = currentCategory === 'All' || cardCategory === currentCategory;
 
-        // Check search filter
+        // Check search filter (matches title, description, or category)
         const searchLower = currentSearch.toLowerCase();
+        const categoryLower = (cardCategory || '').toLowerCase();
         const matchesSearch = !currentSearch ||
           cardTitle.includes(searchLower) ||
-          cardDescription.includes(searchLower);
+          cardDescription.includes(searchLower) ||
+          categoryLower.includes(searchLower);
 
         // Check favorites filter
         const matchesFavorites = !showingFavorites || favorites.includes(cardHref);
