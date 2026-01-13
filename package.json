@@ -1,7 +1,9 @@
 {
-  "name": "project-0",
+  "name": "boring-math",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Free online calculators for everyday math problems",
+  "homepage": "https://boring-math.com",
   "scripts": {
     "dev": "astro dev",
     "generate-og": "node scripts/generate-og-images.mjs",
