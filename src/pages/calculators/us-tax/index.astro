@@ -1,0 +1,88 @@
+---
+/**
+ * US Tax Calculators Hub Page
+ *
+ * SEO-optimized category page for US-specific tax calculators.
+ * Targets: "us tax calculator", "federal tax calculator", "irs tax calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'US Tax';
+const title = 'US Tax Calculators 2025 | Free Federal Tax Tools';
+const description = 'Free US tax calculators for 2025. Calculate federal income tax, self-employment tax, quarterly estimated payments, and capital gains tax. IRS-aligned calculations.';
+const keywords = 'us tax calculator, federal tax calculator, irs tax calculator, income tax calculator 2025, self employment tax calculator, 1099 tax calculator, quarterly tax calculator, capital gains tax calculator, tax bracket calculator';
+const canonicalURL = '/calculators/us-tax/';
+
+const calculators = [
+  {
+    title: 'US Tax Bracket Calculator',
+    description: 'Find your 2025 federal tax bracket, calculate tax owed, and see your effective vs marginal rate.',
+    href: '/calculators/us-tax-bracket-calculator',
+    icon: 'chart',
+    color: 'blue',
+  },
+  {
+    title: 'Self-Employment Tax Calculator',
+    description: 'Calculate 15.3% SE tax on 1099 income including Social Security, Medicare, and the 50% deduction.',
+    href: '/calculators/us-self-employment-tax-calculator',
+    icon: 'calculator',
+    color: 'green',
+  },
+  {
+    title: 'Quarterly Tax Calculator',
+    description: 'Calculate 1040-ES quarterly estimated payments with safe harbor rules to avoid underpayment penalties.',
+    href: '/calculators/us-quarterly-tax-calculator',
+    icon: 'calendar',
+    color: 'violet',
+  },
+  {
+    title: 'Capital Gains Tax Calculator',
+    description: 'Calculate tax on stocks, crypto, and investments. Compare short-term vs long-term rates with NIIT.',
+    href: '/calculators/us-capital-gains-tax-calculator',
+    icon: 'chart',
+    color: 'amber',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="dollar"
+  color="blue"
+  tagline="Free IRS-aligned tax calculators for the 2025 tax year"
+  calculators={calculators}
+>
+  <p>
+    Our US tax calculators help you understand your federal tax liability, plan quarterly
+    payments, and optimize your investment taxes. All calculations use the latest 2025
+    IRS tax rates and thresholds.
+  </p>
+  <p>
+    Whether you're a W-2 employee checking your tax bracket, a freelancer calculating
+    self-employment tax, or an investor figuring out capital gains, these tools give
+    you accurate numbers instantly.
+  </p>
+  <h3>2025 Federal Tax Brackets (Single)</h3>
+  <ul>
+    <li><strong>10%:</strong> $0 - $11,925</li>
+    <li><strong>12%:</strong> $11,926 - $48,475</li>
+    <li><strong>22%:</strong> $48,476 - $103,350</li>
+    <li><strong>24%:</strong> $103,351 - $197,300</li>
+    <li><strong>32%:</strong> $197,301 - $250,525</li>
+    <li><strong>35%:</strong> $250,526 - $626,350</li>
+    <li><strong>37%:</strong> Over $626,350</li>
+  </ul>
+  <h3>Key Tax Rates for 2025</h3>
+  <ul>
+    <li><strong>Standard Deduction:</strong> $15,000 (single), $30,000 (married filing jointly)</li>
+    <li><strong>Self-Employment Tax:</strong> 15.3% (12.4% Social Security + 2.9% Medicare)</li>
+    <li><strong>Long-Term Capital Gains:</strong> 0%, 15%, or 20% depending on income</li>
+    <li><strong>NIIT:</strong> Additional 3.8% on investment income for high earners</li>
+    <li><strong>Social Security Wage Base:</strong> $176,100</li>
+  </ul>
+</CategoryLayout>
