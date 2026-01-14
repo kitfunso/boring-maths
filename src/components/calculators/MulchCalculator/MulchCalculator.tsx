@@ -447,7 +447,7 @@ export default function MulchCalculator() {
                       key={type}
                       className={`text-center p-3 rounded-lg ${
                         isSelected
-                          ? 'bg-green-200 ring-2 ring-green-400'
+                          ? 'bg-green-900/50 ring-2 ring-green-400'
                           : 'bg-green-900/30'
                       }`}
                     >
@@ -460,14 +460,14 @@ export default function MulchCalculator() {
                       </div>
                       <div
                         className={`text-xs ${
-                          isSelected ? 'text-green-400' : 'text-green-600'
+                          isSelected ? 'text-green-300' : 'text-green-500'
                         }`}
                       >
                         {config.densityLbsPerCuFt} lbs/cu ft
                       </div>
                       <div
                         className={`text-xs mt-1 ${
-                          isSelected ? 'text-green-400' : 'text-green-600'
+                          isSelected ? 'text-green-300' : 'text-green-500'
                         }`}
                       >
                         {config.refreshMonths === 0

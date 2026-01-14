@@ -266,7 +266,7 @@ export default function PercentageCalculator() {
                     <button
                       key={item.percentage}
                       onClick={() => updateInput('percentOf_percentage', item.percentage)}
-                      className={`p-3 rounded-lg border transition-all text-left ${
+                      className={`p-3 rounded-lg border transition-all text-center ${
                         item.percentage === inputs.percentOf_percentage
                           ? 'bg-[var(--color-accent)]/20 border-[var(--color-accent)]/50'
                           : 'bg-[var(--color-void)] border-white/5 hover:border-white/20'

@@ -211,12 +211,12 @@ export default function BreakEvenCalculator() {
                       {result.profitAnalysis.map((row, index) => (
                         <tr
                           key={index}
-                          className={row.units === result.breakEvenUnits ? 'bg-blue-50 font-medium' : ''}
+                          className={row.units === result.breakEvenUnits ? 'bg-blue-900/40 font-medium text-blue-400' : ''}
                         >
                           <td className="py-2 pr-4">
                             {row.units.toLocaleString()}
                             {row.units === result.breakEvenUnits && (
-                              <span className="ml-2 text-xs text-blue-600">(Break-even)</span>
+                              <span className="ml-2 text-xs text-blue-400">(Break-even)</span>
                             )}
                           </td>
                           <td className="text-right py-2 px-2 tabular-nums">
@@ -241,11 +241,11 @@ export default function BreakEvenCalculator() {
               </div>
 
               {/* Formula Explanation */}
-              <div className="bg-blue-50 rounded-xl p-6">
-                <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider mb-3">
+              <div className="bg-blue-900/30 rounded-xl p-6">
+                <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-3">
                   How It Works
                 </h3>
-                <div className="space-y-2 text-sm text-blue-800">
+                <div className="space-y-2 text-sm text-blue-300">
                   <p>
                     <strong>Contribution Margin</strong> = Price ({formatCurrency(inputs.pricePerUnit, result.currency)}) - Variable Cost ({formatCurrency(inputs.variableCostPerUnit, result.currency)}) = <strong>{formatCurrency(result.contributionMargin, result.currency, 2)}</strong>
                   </p>

@@ -220,8 +220,8 @@ export default function TipCalculator() {
                         key={suggestion.percentage}
                         className={`${
                           suggestion.percentage === inputs.tipPercentage
-                            ? 'bg-green-50 font-medium'
-                            : 'hover:bg-[var(--color-night)]'
+                            ? 'bg-green-900/40 font-medium text-green-400'
+                            : 'hover:bg-white/5'
                         } cursor-pointer transition-colors`}
                         onClick={() => selectTipPercentage(suggestion.percentage)}
                       >
