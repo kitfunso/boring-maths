@@ -268,7 +268,7 @@ export default function FlooringCalculator() {
                 }
                 label="Include underlayment/padding (recommended for laminate, hardwood, vinyl)"
               />
-              <div className="flex items-start gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
                 <Checkbox
                   checked={inputs.includeTransitions}
                   onChange={(checked) =>
@@ -277,7 +277,7 @@ export default function FlooringCalculator() {
                   label="Include transition strips"
                 />
                 {inputs.includeTransitions && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 ml-6 sm:ml-0">
                     <Input
                       id="transitionCount"
                       type="number"
