@@ -565,6 +565,222 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Amber
 **Difficulty:** Medium
 
+## Phase 12: US Tax & Finance Expansion (20 Calculators)
+
+Targeting the US market with comprehensive tax and financial planning tools. High search volume with seasonal spikes during tax season (Jan-Apr).
+
+### 12.1 US Tax Bracket Calculator ✅ COMPLETE
+**Target Keyword:** "what tax bracket am I in calculator 2025"
+**Status:** Implemented
+**Inputs:** Filing status, gross income, deductions (standard/itemized), state
+**Outputs:** Federal tax owed, marginal bracket, effective rate, bracket visualization, state tax
+**Unique Angle:** 2024 vs 2025 bracket comparison, Scotland-style visual breakdown
+**Color Theme:** Gray
+**Difficulty:** Medium
+
+### 12.2 Self-Employment Tax Calculator (1099)
+**Target Keyword:** "self employment tax calculator", "1099 tax calculator"
+**Inputs:** Net self-employment income, other income, filing status, business expenses
+**Outputs:** SE tax (15.3%), federal income tax, quarterly payments, 50% SE tax deduction
+**Unique Angle:** Show Social Security wage base cap, additional Medicare tax (0.9%), quarterly schedule
+**Color Theme:** Blue
+**Difficulty:** Medium
+
+### 12.3 Quarterly Estimated Tax Calculator
+**Target Keyword:** "quarterly tax calculator", "estimated tax calculator 1040-ES"
+**Inputs:** Expected annual income, withholdings, filing status, prior year tax, SE income
+**Outputs:** Quarterly payment amounts, due dates, safe harbor calculation, penalty avoidance
+**Unique Angle:** Payment calendar, 90%/110% safe harbor rules, annualized income method
+**Color Theme:** Indigo
+**Difficulty:** Medium
+
+### 12.4 Capital Gains Tax Calculator
+**Target Keyword:** "capital gains tax calculator", "long term vs short term capital gains"
+**Inputs:** Purchase price, sale price, holding period, filing status, total income, state
+**Outputs:** Short vs long-term classification, tax owed, NIIT (3.8%), effective rate
+**Unique Angle:** Compare tax if sold today vs after 1 year, crypto support, tax-loss harvesting
+**Color Theme:** Green
+**Difficulty:** Medium
+
+### 12.5 HSA Calculator (Triple Tax Advantage)
+**Target Keyword:** "HSA calculator", "HSA contribution calculator"
+**Inputs:** Coverage type (individual/family), age, tax bracket, expected medical expenses
+**Outputs:** Maximum contribution, triple tax savings, FICA savings (7.65%), investment growth
+**Unique Angle:** Compare HSA as retirement vehicle vs 401(k), show 55+ catch-up
+**Color Theme:** Teal
+**Difficulty:** Easy-Medium
+
+### 12.6 Roth vs Traditional Calculator
+**Target Keyword:** "Roth vs traditional calculator", "Roth 401k vs traditional"
+**Inputs:** Current age, retirement age, current tax bracket, retirement tax bracket, contribution
+**Outputs:** Side-by-side balance comparison, after-tax retirement income, break-even analysis
+**Unique Angle:** Tax bracket visualization now vs retirement, backdoor Roth guidance
+**Color Theme:** Violet
+**Difficulty:** Medium
+
+### 12.7 Required Minimum Distribution (RMD) Calculator
+**Target Keyword:** "RMD calculator", "required minimum distribution calculator"
+**Inputs:** Account balance (Dec 31), age, spouse age if sole beneficiary
+**Outputs:** RMD amount, distribution period factor, penalty warning, tax impact
+**Unique Angle:** Multi-account aggregation, QCD optimization, Roth conversion planning
+**Color Theme:** Orange
+**Difficulty:** Medium
+
+### 12.8 Social Security Benefits Calculator
+**Target Keyword:** "social security calculator", "when to claim social security"
+**Inputs:** Birth year, highest 35 years of earnings, planned claiming age
+**Outputs:** Monthly benefit at 62/FRA/70, lifetime comparison, spousal benefit
+**Unique Angle:** Break-even age analysis, optimal couples strategy, survivor benefits
+**Color Theme:** Navy
+**Difficulty:** Hard
+
+### 12.9 Net Worth Percentile Calculator
+**Target Keyword:** "net worth percentile calculator", "net worth by age"
+**Inputs:** Age, total assets, total debts
+**Outputs:** Percentile overall, percentile by age group, median/average comparison
+**Unique Angle:** Income percentile comparison, wealth distribution visualization
+**Color Theme:** Gold
+**Difficulty:** Easy
+
+### 12.10 PSLF Calculator (Public Service Loan Forgiveness)
+**Target Keyword:** "PSLF calculator", "public service loan forgiveness calculator"
+**Inputs:** Loan balance, income, family size, qualifying payments made, employer type
+**Outputs:** Payments remaining, total paid, total forgiven, IDR plan comparison
+**Unique Angle:** Employer eligibility checker, maximize forgiveness strategy
+**Color Theme:** Rose
+**Difficulty:** Hard
+
+### 12.11 W-4 Tax Withholding Calculator
+**Target Keyword:** "W-4 calculator", "tax withholding calculator"
+**Inputs:** Pay frequency, gross pay, filing status, dependents, other income
+**Outputs:** Recommended W-4 settings, estimated refund/owed, per-paycheck breakdown
+**Unique Angle:** Generate fillable W-4 values, show paycheck impact of changes
+**Color Theme:** Slate
+**Difficulty:** Medium-Hard
+
+### 12.12 AMT Calculator (Alternative Minimum Tax)
+**Target Keyword:** "AMT calculator", "ISO AMT calculator"
+**Inputs:** Regular taxable income, ISO spread amount, tax preference items, filing status
+**Outputs:** AMT liability, regular vs AMT comparison, trigger point analysis
+**Unique Angle:** Stock option (ISO) exercise planning, optimal exercise amount
+**Color Theme:** Red
+**Difficulty:** Hard
+
+### 12.13 Estate & Gift Tax Calculator
+**Target Keyword:** "estate tax calculator", "gift tax calculator"
+**Inputs:** Estate value, prior taxable gifts, state of residence, marital status
+**Outputs:** Federal estate tax, state tax, exemption remaining, effective rate
+**Unique Angle:** Portability for couples, state-by-state comparison, gifting strategy
+**Color Theme:** Purple
+**Difficulty:** Medium-Hard
+
+### 12.14 FSA Calculator
+**Target Keyword:** "FSA calculator", "flexible spending account calculator"
+**Inputs:** Expected medical expenses, dependent care expenses, tax bracket
+**Outputs:** Recommended contribution, tax savings, use-it-or-lose-it reminder
+**Unique Angle:** Expense estimator checklist, rollover vs grace period, eligible expenses
+**Color Theme:** Pink
+**Difficulty:** Easy
+
+### 12.15 State Tax Comparison Calculator
+**Target Keyword:** "state tax comparison", "best state for taxes"
+**Inputs:** Income, property value, spending habits, filing status
+**Outputs:** Total tax burden by state, ranking, relocation savings
+**Unique Angle:** Comprehensive burden (income + sales + property), no-tax states highlight
+**Color Theme:** Emerald
+**Difficulty:** Hard
+
+### 12.16 Federal Student Loan Repayment Calculator
+**Target Keyword:** "student loan repayment calculator", "SAVE plan calculator"
+**Inputs:** Loan balance, interest rate, loan type, income, family size
+**Outputs:** Monthly payment by plan (Standard, IDR, SAVE), total interest, forgiveness timeline
+**Unique Angle:** Compare all plans side-by-side, SAVE plan integration
+**Color Theme:** Cyan
+**Difficulty:** Medium-Hard
+
+### 12.17 Mortgage Affordability Calculator (US DTI)
+**Target Keyword:** "how much house can I afford", "DTI calculator mortgage"
+**Inputs:** Gross monthly income, monthly debts, down payment, rate, taxes, insurance
+**Outputs:** Maximum home price, front-end DTI (28%), back-end DTI (36-43%), loan eligibility
+**Unique Angle:** DTI limits by loan type (Conventional/FHA/VA/USDA)
+**Color Theme:** Brown
+**Difficulty:** Medium
+
+### 12.18 HELOC Calculator
+**Target Keyword:** "HELOC calculator", "home equity calculator"
+**Inputs:** Home value, mortgage balance, credit score, desired amount
+**Outputs:** Available equity, maximum HELOC (80-85% LTV), CLTV, estimated payment
+**Unique Angle:** Compare HELOC vs home equity loan vs cash-out refi, tax deductibility
+**Color Theme:** Amber
+**Difficulty:** Easy-Medium
+
+### 12.19 Cost of Living Comparison Calculator
+**Target Keyword:** "cost of living calculator", "salary comparison by city"
+**Inputs:** Current city, target city, current salary
+**Outputs:** Required salary in new city, category breakdown, purchasing power
+**Unique Angle:** Remote work salary adjustment, quality of life metrics
+**Color Theme:** Sky
+**Difficulty:** Hard
+
+### 12.20 Property Tax Calculator (by State)
+**Target Keyword:** "property tax calculator", "property tax by state"
+**Inputs:** Property value, state, county, homestead exemption eligibility
+**Outputs:** Annual tax estimate, effective rate, state/national comparison
+**Unique Angle:** County-level precision, exemption calculator
+**Color Theme:** Olive
+**Difficulty:** Medium-Hard
+
+---
+
+## US Tax Data Reference (2025)
+
+### Federal Income Tax Brackets (2025)
+| Rate | Single | Married Filing Jointly |
+|------|--------|------------------------|
+| 10% | $0 - $11,925 | $0 - $23,850 |
+| 12% | $11,926 - $48,475 | $23,851 - $96,950 |
+| 22% | $48,476 - $103,350 | $96,951 - $206,700 |
+| 24% | $103,351 - $197,300 | $206,701 - $394,600 |
+| 32% | $197,301 - $250,525 | $394,601 - $501,050 |
+| 35% | $250,526 - $626,350 | $501,051 - $751,600 |
+| 37% | Over $626,350 | Over $751,600 |
+
+### Standard Deduction (2025)
+- Single: $15,000
+- Married Filing Jointly: $30,000
+- Head of Household: $22,500
+
+### Self-Employment Tax (2025)
+- Social Security: 12.4% on first $176,100
+- Medicare: 2.9% (no cap)
+- Additional Medicare: 0.9% over $200K single / $250K MFJ
+- Total SE Tax: 15.3% (on 92.35% of net earnings)
+
+### Capital Gains Tax (2025)
+| Rate | Single | Married Filing Jointly |
+|------|--------|------------------------|
+| 0% | $0 - $48,350 | $0 - $96,700 |
+| 15% | $48,351 - $533,400 | $96,701 - $600,050 |
+| 20% | Over $533,400 | Over $600,050 |
+- NIIT: Additional 3.8% for high earners
+
+### Retirement Contribution Limits (2025)
+- 401(k): $23,500 ($31,000 with 50+ catch-up)
+- IRA: $7,000 ($8,000 with 50+ catch-up)
+- HSA: $4,300 individual / $8,550 family (+$1,000 catch-up 55+)
+- FSA: $3,300 health / $5,000 dependent care
+
+### Estate & Gift Tax (2025)
+- Exemption: $13.99 million per person
+- Annual gift exclusion: $19,000
+- Tax rate: 40% on amounts over exemption
+
+### RMD Start Age
+- Age 73 (born 1951-1959)
+- Age 75 (born 1960+)
+
+---
+
 ## Success Metrics
 
 ### Per Calculator
@@ -607,5 +823,5 @@ This roadmap was informed by:
 ---
 
 *Last Updated: January 2026*
-*Total Proposed Calculators: 51*
+*Total Proposed Calculators: 71 (51 original + 20 US expansion)*
 *Estimated Build Time per Calculator: 2-4 hours*

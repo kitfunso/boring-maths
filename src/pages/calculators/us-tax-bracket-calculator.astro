@@ -1,0 +1,136 @@
+---
+/**
+ * US Tax Bracket Calculator Page
+ * Federal income tax calculator with bracket visualization
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { USTaxBracketCalculator } from '../../components/calculators/USTaxBracketCalculator';
+
+const title = 'US Tax Bracket Calculator 2025 | Federal Income Tax';
+const description = 'Free federal income tax calculator for 2025. Find your tax bracket, calculate your federal tax, and see your effective vs marginal tax rate with visual breakdown.';
+const keywords = 'tax bracket calculator, what tax bracket am I in, federal income tax calculator 2025, marginal tax rate calculator, effective tax rate, us tax calculator';
+const canonicalURL = '/calculators/us-tax-bracket-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'US Tax Bracket Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: '401k Calculator',
+    description: 'Project retirement savings with employer match.',
+    href: '/calculators/401k-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Hourly to Salary',
+    description: 'Convert hourly rate to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What tax bracket am I in for 2025?",
+    answer: "Your tax bracket depends on your filing status and taxable income. For 2025, single filers are in the 10% bracket up to $11,925, 12% up to $48,475, 22% up to $103,350, 24% up to $197,300, 32% up to $250,525, 35% up to $626,350, and 37% above that. Use our calculator to find your exact bracket."
+  },
+  {
+    question: "What's the difference between marginal and effective tax rate?",
+    answer: "Your marginal tax rate is the rate you pay on your last dollar of income (your tax bracket). Your effective tax rate is the actual percentage of your total income that goes to taxes. Because of how tax brackets work, your effective rate is always lower than your marginal rate."
+  },
+  {
+    question: "How do tax brackets actually work?",
+    answer: "Tax brackets are progressive, meaning different portions of your income are taxed at different rates. For example, if you're single with $60,000 taxable income, the first $11,925 is taxed at 10%, the next $36,550 at 12%, and the remaining $11,525 at 22%. You don't pay 22% on your entire income."
+  },
+  {
+    question: "Should I take the standard deduction or itemize?",
+    answer: "Take whichever is larger. For 2025, the standard deduction is $15,000 (single), $30,000 (married filing jointly), or $22,500 (head of household). Only itemize if your deductions (mortgage interest, state taxes up to $10k, charitable donations) exceed these amounts."
+  },
+  {
+    question: "What is the standard deduction for 2025?",
+    answer: "For 2025, the standard deduction is: $15,000 for single filers and married filing separately, $30,000 for married filing jointly, and $22,500 for head of household. These amounts are automatically deducted from your gross income before calculating tax."
+  },
+  {
+    question: "Does this calculator include state taxes?",
+    answer: "This calculator focuses on federal income tax only. State taxes vary widely—seven states have no income tax (Texas, Florida, Nevada, etc.), while others like California can add over 13% on top of federal taxes. Consider your state tax separately."
+  },
+  {
+    question: "How can I lower my tax bracket?",
+    answer: "You can reduce your taxable income by: contributing to a traditional 401(k) or IRA (up to $23,500 for 401k in 2025), contributing to an HSA if eligible, maximizing deductions, and timing income if self-employed. These strategies can push you into a lower bracket."
+  },
+  {
+    question: "What income counts toward my tax bracket?",
+    answer: "Your tax bracket is based on taxable income, which includes wages, salaries, tips, interest, dividends, capital gains, business income, and retirement distributions. It excludes tax-free income like municipal bond interest, Roth IRA withdrawals, and some Social Security benefits."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'US Tax Bracket Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="US Tax Bracket Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="US Tax Bracket Calculator"
+    description="Find your 2025 federal tax bracket and calculate exactly how much you owe. See the breakdown of how your income is taxed at each rate."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <USTaxBracketCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li><strong class="text-[var(--color-cream)]">Select your filing status</strong> – Single, Married Filing Jointly, Married Filing Separately, or Head of Household.</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your gross income</strong> – Your total income before any deductions (W-2 wages, 1099 income, etc.).</li>
+      <li><strong class="text-[var(--color-cream)]">Choose your deduction type</strong> – Standard (automatic) or itemized (if you have significant deductions).</li>
+      <li><strong class="text-[var(--color-cream)]">Review your results</strong> – See your tax bracket, federal tax owed, and visual breakdown by bracket.</li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-blue-400">federal income tax</strong> shown is what you owe the IRS based on 2025 tax brackets.
+        This is before any credits (like the Child Tax Credit) which can reduce your final tax bill.
+      </p>
+      <p>
+        Your <strong class="text-amber-400">marginal rate</strong> (tax bracket) is the rate on your last dollar of income.
+        The <strong class="text-emerald-400">effective rate</strong> is what you actually pay overall—always lower than your marginal rate.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">visual breakdown</strong> shows exactly how much of your income falls into each bracket
+        and how much tax you pay at each rate. This illustrates how progressive taxation works.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

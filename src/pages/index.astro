@@ -432,6 +432,46 @@ const calculators = [
     country: 'UK',
     mostUsed: false,
   },
+  {
+    title: 'US Tax Bracket Calculator',
+    description: 'Find your 2025 federal tax bracket with visual breakdown of how your income is taxed.',
+    href: '/calculators/us-tax-bracket-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Self-Employment Tax Calculator',
+    description: 'Calculate 15.3% SE tax, federal income tax, and quarterly payments for freelancers.',
+    href: '/calculators/us-self-employment-tax-calculator',
+    icon: 'dollar',
+    color: 'violet',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Quarterly Estimated Tax Calculator',
+    description: 'Calculate quarterly tax payments with safe harbor rules to avoid penalties.',
+    href: '/calculators/us-quarterly-tax-calculator',
+    icon: 'calendar',
+    color: 'violet',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Capital Gains Tax Calculator',
+    description: 'Calculate tax on stocks, crypto, and investments with NIIT and long-term rates.',
+    href: '/calculators/us-capital-gains-tax-calculator',
+    icon: 'trending',
+    color: 'green',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
 ];
 
 
@@ -1069,27 +1109,28 @@ const categoryColors: Record<string, string> = {
       const grid = document.getElementById('calculators-grid');
 
       if (grid && isFiltered) {
-        // Walk through grid children in DOM order to find visible position of each ad
+        // Walk through grid children in DOM order
+        // Hide ads if they would appear before 2 visible calculators
         const children = Array.from(grid.children);
-        let visiblePosition = 0;
+        let visibleCalcCount = 0;
 
         children.forEach(child => {
           const isAd = child.classList.contains('ad-in-grid');
           const isHiddenCalc = child.classList.contains('calculator-card') && child.classList.contains('hidden');
 
           if (!isHiddenCalc && !isAd) {
-            // This is a visible calculator card
-            visiblePosition++;
+            // This is a visible calculator card - count it
+            visibleCalcCount++;
           }
 
           if (isAd) {
-            // Hide ad if it would appear in positions 1 or 2
-            if (visiblePosition < 2) {
+            // Hide ad if fewer than 2 visible calculators have appeared before it
+            if (visibleCalcCount < 2) {
               child.classList.add('hidden');
             } else {
               child.classList.remove('hidden');
             }
-            visiblePosition++; // Count ad position only if visible
+            // Don't count ads toward position - we only care about calculator count
           }
         });
       } else {
