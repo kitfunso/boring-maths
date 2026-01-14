@@ -1,0 +1,139 @@
+---
+/**
+ * UK Child Benefit Calculator Page
+ * Including High Income Child Benefit Charge (HICBC)
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKChildBenefitCalculator } from '../../components/calculators/UKChildBenefitCalculator';
+
+const title = 'UK Child Benefit Calculator 2024/25 | HICBC Calculator';
+const description = 'Free UK child benefit calculator with High Income Child Benefit Charge (HICBC). Calculate your net benefit, tax charge, and discover pension sacrifice strategies to avoid HICBC.';
+const keywords = 'child benefit calculator, hicbc calculator, high income child benefit charge, child benefit 2024, child benefit clawback, child benefit tax charge, child benefit pension sacrifice';
+const canonicalURL = '/calculators/uk-child-benefit-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Child Benefit Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Escape the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Salary Sacrifice',
+    description: 'Maximize take-home with salary sacrifice.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is Child Benefit in the UK?",
+    answer: "Child Benefit is a tax-free payment from the government to help with the costs of raising children. For 2024/25, you receive £25.60 per week for your eldest child and £16.95 per week for each additional child. You can claim for each child under 16, or under 20 if they're in approved education or training."
+  },
+  {
+    question: "What is the High Income Child Benefit Charge (HICBC)?",
+    answer: "HICBC is a tax charge that claws back Child Benefit when you or your partner earns over £60,000 per year. You lose 1% of your Child Benefit for every £200 of income above £60,000. At £80,000, the entire benefit is clawed back. The charge applies to the higher earner in the household, regardless of who claims the benefit."
+  },
+  {
+    question: "Should I claim Child Benefit if I earn over £60,000?",
+    answer: "In most cases, yes. Even if your income means you'll pay HICBC, you should still claim Child Benefit. This is because: (1) The claim protects National Insurance credits for the non-working parent, which counts towards their State Pension. (2) You can opt out of receiving payments but keep the NI credit protection. (3) If your income drops, you'll automatically receive the payments again."
+  },
+  {
+    question: "How can I avoid the High Income Child Benefit Charge?",
+    answer: "The most effective strategy is salary sacrifice into your pension. By contributing enough to bring your adjusted net income below £60,000, you can keep your full Child Benefit while also gaining tax relief on pension contributions. For example, if you earn £70,000, sacrificing £10,000 into your pension avoids HICBC entirely and gives you substantial pension growth."
+  },
+  {
+    question: "What income counts towards HICBC?",
+    answer: "HICBC uses your 'adjusted net income' which includes: salary, bonuses, taxable benefits, rental income, dividend income, and other taxable income. You can reduce this by: pension contributions (including salary sacrifice), gift aid donations, and trading losses. Salary sacrifice is the most powerful tool as it reduces income before tax."
+  },
+  {
+    question: "When do I need to pay HICBC?",
+    answer: "If you're liable for HICBC, you must register for Self Assessment and pay the charge through your tax return. The charge is calculated on your income for the tax year. If you don't already file a Self Assessment return, you must register by 5 October following the tax year in which you first become liable."
+  },
+  {
+    question: "What are the 2024/25 Child Benefit rates?",
+    answer: "For the 2024/25 tax year: £25.60 per week for your eldest or only child (£1,331.20 per year), and £16.95 per week for each additional child (£881.40 per year). Child Benefit is paid every 4 weeks, though single parents can request weekly payments."
+  },
+  {
+    question: "Does my partner's income affect my Child Benefit?",
+    answer: "Yes, HICBC applies to the higher earner in the household. Even if you're the one claiming Child Benefit with a low income, if your partner earns over £60,000, they are liable for HICBC. The charge is always calculated on the higher earner's income, regardless of who claims."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Child Benefit Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Child Benefit Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Child Benefit Calculator"
+    description="Calculate your Child Benefit entitlement and High Income Child Benefit Charge. See your net benefit and discover strategies to avoid HICBC."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKChildBenefitCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li><strong class="text-[var(--color-cream)]">Enter your number of children</strong> – Use the +/- buttons to set how many qualifying children you have.</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your annual income</strong> – Your gross salary before tax. This determines if HICBC applies.</li>
+      <li><strong class="text-[var(--color-cream)]">Add partner's income (optional)</strong> – If your partner earns more than you, HICBC is based on their income instead.</li>
+      <li><strong class="text-[var(--color-cream)]">Review your results</strong> – See your gross benefit, any HICBC charge, and your net benefit after tax.</li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator shows your <strong class="text-[var(--color-cream)]">net annual benefit</strong> after
+        any HICBC tax charge. The color indicates your status: green means no charge, amber means partial
+        clawback, and red means full clawback.
+      </p>
+      <p>
+        If you're affected by HICBC, you'll see the <strong class="text-amber-400">tax charge rate</strong> and
+        the actual amount you'll need to pay back through Self Assessment. The breakdown shows exactly how
+        much benefit you'll keep.
+      </p>
+      <p>
+        Look for the <strong class="text-emerald-400">Pension Sacrifice Strategy</strong> box – this shows
+        how much you'd need to contribute to your pension to bring your income below £60,000 and avoid
+        HICBC entirely. This is often the most tax-efficient approach.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

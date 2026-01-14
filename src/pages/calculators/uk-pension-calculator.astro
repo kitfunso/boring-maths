@@ -1,0 +1,139 @@
+---
+/**
+ * UK Pension Calculator Page
+ * Retirement projection and income planning
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKPensionCalculator } from '../../components/calculators/UKPensionCalculator';
+
+const title = 'UK Pension Calculator 2024/25 | Retirement Pot Projector';
+const description = 'Free UK pension calculator. Project your retirement pot, estimate income using the 4% rule, and see how contributions and growth affect your future. Includes inflation adjustment.';
+const keywords = 'pension calculator uk, retirement calculator, pension pot calculator, pension projection, uk pension forecast, how much pension will i have, retirement income calculator';
+const canonicalURL = '/calculators/uk-pension-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Pension Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Salary Sacrifice',
+    description: 'Maximize pension contributions tax-efficiently.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Use pension to escape the 60% tax trap.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How much pension do I need to retire?",
+    answer: "A common rule of thumb is to aim for a pension pot of 25x your desired annual income. For example, if you want £30,000/year in retirement, target £750,000. The 4% rule suggests you can withdraw 4% of your pot annually without running out over a 30-year retirement. However, this depends on your lifestyle, State Pension entitlement, and other income sources."
+  },
+  {
+    question: "What is the 4% rule?",
+    answer: "The 4% rule suggests you can safely withdraw 4% of your retirement pot each year (adjusted for inflation) without running out of money over a typical 30-year retirement. So a £500,000 pot could provide £20,000/year. This rule is based on historical US stock market returns and is a useful guideline, but not a guarantee."
+  },
+  {
+    question: "How much should I contribute to my pension?",
+    answer: "A common guideline is to contribute half your age as a percentage of salary from when you start saving. Started at 30? Aim for 15% total (including employer). Auto-enrolment minimums (5% employee + 3% employer = 8% total) are a good starting point but may not be enough for a comfortable retirement."
+  },
+  {
+    question: "What is tax relief on pension contributions?",
+    answer: "The government adds tax relief to your pension contributions. Basic rate taxpayers get 20% added automatically (£80 becomes £100). Higher rate taxpayers can claim an extra 20% through Self Assessment. Additional rate taxpayers get 25% extra. This makes pension contributions very tax-efficient."
+  },
+  {
+    question: "When can I access my pension?",
+    answer: "Currently, you can access your private pension from age 55 (rising to 57 from 2028). You can take 25% as a tax-free lump sum, then the rest is taxed as income. The State Pension starts at age 66-67 depending on your birth year, rising to 68 for those born after 1978."
+  },
+  {
+    question: "What is the State Pension and how much will I get?",
+    answer: "The full new State Pension is currently £11,502/year (2024/25). You need 35 qualifying years of National Insurance contributions to get the full amount. You can check your NI record and forecast on the government website. The State Pension age is currently 66, rising to 67 by 2028."
+  },
+  {
+    question: "What is the annual pension allowance?",
+    answer: "You can contribute up to £60,000/year to pensions and receive tax relief (2024/25). This includes employee and employer contributions. For high earners (over £260,000), this tapers down to £10,000. You can also carry forward unused allowance from the previous 3 years."
+  },
+  {
+    question: "Should I use salary sacrifice for pension contributions?",
+    answer: "Usually yes. Salary sacrifice means both you and your employer save National Insurance. Your employer might pass on some of their NI saving to you. It also reduces your salary for student loan calculations and can help avoid the £100k tax trap. However, it does reduce your gross salary on paper, which might affect mortgage applications."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Pension Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Pension Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Pension Calculator"
+    description="Project your retirement pot and estimate your income. See how contributions, growth, and time affect your pension – with inflation adjustment."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKPensionCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li><strong class="text-[var(--color-cream)]">Enter your ages</strong> – Your current age and when you plan to retire.</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your current pot</strong> – The total value across all your pensions (check your statements or online portal).</li>
+      <li><strong class="text-[var(--color-cream)]">Set your contributions</strong> – Your monthly amount and your employer's contribution.</li>
+      <li><strong class="text-[var(--color-cream)]">Adjust growth assumptions</strong> – 5% is a reasonable long-term estimate after inflation; reduce if conservative.</li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-[var(--color-cream)]">projected pot</strong> shows your estimated pension
+        value at retirement. The "real value" adjusts for inflation – showing what your pot would be worth
+        in today's purchasing power.
+      </p>
+      <p>
+        <strong class="text-emerald-400">Retirement income</strong> is calculated using the 4% rule – a
+        guideline suggesting you can withdraw 4% per year sustainably. This gives you a rough monthly and
+        annual income estimate.
+      </p>
+      <p>
+        Remember to add <strong class="text-blue-400">State Pension</strong> to your private pension income.
+        The full State Pension is currently around £11,500/year, which can significantly boost your
+        retirement income.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

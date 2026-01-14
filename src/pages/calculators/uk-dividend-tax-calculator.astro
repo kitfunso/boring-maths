@@ -1,0 +1,138 @@
+---
+/**
+ * UK Dividend Tax Calculator Page
+ * Tax on dividends and salary vs dividend optimization
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKDividendTaxCalculator } from '../../components/calculators/UKDividendTaxCalculator';
+
+const title = 'UK Dividend Tax Calculator 2024/25 | Salary vs Dividend';
+const description = 'Free UK dividend tax calculator. Calculate tax on dividends, see your effective rate, and compare taking income as salary vs dividends. Essential for limited company directors.';
+const keywords = 'dividend tax calculator uk, dividend tax rates 2024, salary vs dividend, dividend allowance, limited company tax, dividend tax calculator ltd, uk dividend calculator';
+const canonicalURL = '/calculators/uk-dividend-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Dividend Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Navigate high income marginal rates.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Salary Sacrifice',
+    description: 'Optimize your salary structure.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What are the dividend tax rates for 2024/25?",
+    answer: "The dividend allowance is £500 (reduced from £1,000 in 2023/24). Above this: Basic rate taxpayers pay 8.75%, Higher rate taxpayers pay 33.75%, and Additional rate taxpayers pay 39.35%. These rates are significantly lower than equivalent salary rates."
+  },
+  {
+    question: "How is dividend tax calculated?",
+    answer: "Dividends are added to your other income to determine which tax band they fall into. The first £500 is tax-free (dividend allowance). Then you pay 8.75% on dividends in the basic rate band, 33.75% in the higher rate band, and 39.35% in the additional rate band."
+  },
+  {
+    question: "Why are dividends taxed less than salary?",
+    answer: "Dividends are paid from company profits that have already been taxed via Corporation Tax (19-25%). The lower dividend tax rates reflect that the money has already been taxed once. Additionally, dividends don't attract National Insurance, making them more tax-efficient overall."
+  },
+  {
+    question: "What is the optimal salary/dividend split for company directors?",
+    answer: "The most tax-efficient strategy is usually: Take salary up to the NI Primary Threshold (£12,570 for 2024/25) to qualify for State Pension, then take dividends up to your needs. This minimizes NI while maximizing the dividend allowance and lower dividend tax rates."
+  },
+  {
+    question: "Do I pay National Insurance on dividends?",
+    answer: "No. Unlike salary, dividends don't attract National Insurance contributions (employee or employer). This is one of the main reasons dividends can be more tax-efficient than salary, saving up to 8% in employee NI and 13.8% in employer NI."
+  },
+  {
+    question: "How does the dividend allowance work?",
+    answer: "The £500 dividend allowance lets you receive £500 of dividends tax-free each year, regardless of your other income. However, these dividends still count towards your total income for determining which tax band you're in. The allowance was £2,000 until 2022/23, then £1,000 in 2023/24, and is now £500."
+  },
+  {
+    question: "Can I take dividends from my limited company?",
+    answer: "Yes, but only from available profits (after Corporation Tax). You must have sufficient retained profits. Dividends must be properly declared and minuted. You can't take dividends that exceed your company's available profits – doing so is illegal and can create personal liability."
+  },
+  {
+    question: "What about dividends and the £100k tax trap?",
+    answer: "Dividends count towards the £100,000 threshold where personal allowance begins to taper. Taking large dividends can push you into the 60% effective marginal tax zone. Consider pension contributions to reduce adjusted net income and retain your personal allowance."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Dividend Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Dividend Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Dividend Tax Calculator"
+    description="Calculate tax on your dividends and see how they compare to taking the same amount as salary. Essential for limited company directors and shareholders."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKDividendTaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li><strong class="text-[var(--color-cream)]">Enter your salary income</strong> – Your total employment income before dividends (gross salary).</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your dividend income</strong> – The total dividends you expect to receive this tax year.</li>
+      <li><strong class="text-[var(--color-cream)]">Review the breakdown</strong> – See exactly how your dividends are taxed across different bands.</li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-[var(--color-cream)]">dividend tax</strong> shown is the additional tax you
+        pay specifically on dividends. Your <strong class="text-amber-400">effective rate</strong> shows what
+        percentage of your total dividends goes to tax.
+      </p>
+      <p>
+        The <strong class="text-emerald-400">dividend advantage</strong> shows how much you save by taking
+        income as dividends rather than salary. This saving comes from avoiding National Insurance (8% employee
+        + 13.8% employer on salary).
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">breakdown</strong> shows how your dividends are taxed
+        at each rate. Remember: the £500 allowance is always tax-free, then dividends are taxed based on
+        which band they fall into after your salary.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

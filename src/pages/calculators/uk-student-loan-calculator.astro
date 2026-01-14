@@ -1,0 +1,139 @@
+---
+/**
+ * UK Student Loan Calculator Page
+ * Plan 1, 2, 4, 5 and Postgraduate Loans
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKStudentLoanCalculator } from '../../components/calculators/UKStudentLoanCalculator';
+
+const title = 'UK Student Loan Calculator 2024/25 | Plan 1, 2, 4, 5 & Postgrad';
+const description = 'Free UK student loan repayment calculator. See your monthly payments, total repayments, write-off date, and project your loan over time for Plan 1, 2, 4, 5 and Postgraduate loans.';
+const keywords = 'student loan calculator uk, student loan repayment calculator, plan 2 student loan, student loan write off, student loan threshold 2024, postgraduate loan calculator';
+const canonicalURL = '/calculators/uk-student-loan-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Student Loan Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Salary Sacrifice',
+    description: 'Reduce taxable income with pension contributions.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Escape the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "Which student loan plan am I on?",
+    answer: "Plan 1: Started before September 2012 in England/Wales, or any time in Scotland/NI. Plan 2: Started September 2012 onwards in England/Wales. Plan 4: Scotland, started September 1998 onwards. Plan 5: Started September 2023 onwards in England. Postgraduate: Masters or Doctoral loans from 2016 onwards."
+  },
+  {
+    question: "What are the 2024/25 repayment thresholds?",
+    answer: "Plan 1: £24,990/year. Plan 2: £27,295/year. Plan 4: £31,395/year. Plan 5: £25,000/year. Postgraduate: £21,000/year. You only start repaying once your income exceeds these thresholds."
+  },
+  {
+    question: "How much will I repay each month?",
+    answer: "For Plan 1, 2, 4, and 5: You pay 9% of everything you earn above your threshold. For Postgraduate loans: You pay 6% above the threshold. For example, on Plan 2 earning £35,000: (£35,000 - £27,295) × 9% = £693.45/year or £57.79/month."
+  },
+  {
+    question: "When will my student loan be written off?",
+    answer: "Plan 1: 25 years after becoming due for repayment. Plan 2: 30 years after the April you were first due to repay. Plan 4: 30 years. Plan 5: 40 years. Postgraduate: 30 years. After this time, any remaining balance is cancelled."
+  },
+  {
+    question: "What interest rate do I pay on my student loan?",
+    answer: "Plan 1 & 4: The lower of RPI or Bank of England base rate + 1% (currently around 6.25%). Plan 2 & 5: RPI while studying, then RPI to RPI + 3% based on income (currently up to 7.8%). Postgraduate: RPI + 3% (currently around 7.8%)."
+  },
+  {
+    question: "Should I pay off my student loan early?",
+    answer: "For most people, no. Student loans are written off after 25-40 years, and many graduates won't repay in full. Only consider overpaying if: you're a high earner likely to repay in full anyway, you're close to clearing the balance, or you want to reduce psychological debt burden. The money is often better invested elsewhere."
+  },
+  {
+    question: "Can I have multiple student loan plans?",
+    answer: "Yes, if you took out loans at different times (e.g., undergraduate then postgraduate), you'll have multiple plans. Plan 2 and Postgraduate loans are repaid simultaneously when over both thresholds. Plan 1 is repaid before Plan 2 if you have both."
+  },
+  {
+    question: "Does salary sacrifice affect my student loan repayments?",
+    answer: "Yes, salary sacrifice (e.g., into pension) reduces your gross salary before student loan calculations. This means lower repayments. However, this also means your loan lasts longer and accrues more interest. For those unlikely to repay in full, this is often beneficial."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Student Loan Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Student Loan Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Student Loan Calculator"
+    description="Project your student loan repayments over time. See when you'll pay off (or write off) your loan, and understand how salary growth affects your total payments."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKStudentLoanCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li><strong class="text-[var(--color-cream)]">Select your loan plan</strong> – Choose Plan 1, 2, 4, 5, or Postgraduate based on when and where you studied.</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your loan balance</strong> – Your current outstanding balance (check your Student Loans Company account).</li>
+      <li><strong class="text-[var(--color-cream)]">Enter your annual salary</strong> – Your current gross salary before tax.</li>
+      <li><strong class="text-[var(--color-cream)]">Set expected salary growth</strong> – A realistic annual percentage (2-5% is typical for inflation matching).</li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator shows your <strong class="text-[var(--color-cream)]">monthly repayment</strong> based
+        on your current salary and the repayment threshold for your plan. This amount changes as your
+        salary grows.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">repayment projection table</strong> shows year-by-year
+        how your balance evolves as repayments and interest accumulate. Many graduates find that interest
+        outpaces repayments initially.
+      </p>
+      <p>
+        If you won't repay in full before write-off, the calculator shows how much will be
+        <strong class="text-amber-400">written off</strong>. This is common and not a problem – student
+        loans don't affect credit scores and are written off after 25-40 years depending on your plan.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
