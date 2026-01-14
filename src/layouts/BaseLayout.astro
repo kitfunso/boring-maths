@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 import Analytics from '../components/common/Analytics.astro';
 import CookieConsent from '../components/common/CookieConsent.astro';
@@ -100,6 +101,9 @@ const ogImageURL = ogImage
     />
 
     <title>{title}</title>
+
+    <!-- View Transitions for instant navigation -->
+    <ViewTransitions />
   </head>
   <body class="min-h-screen mesh-bg noise relative">
     <!-- Ambient Glow Background -->
