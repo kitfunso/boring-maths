@@ -89,7 +89,7 @@ const colorClasses: Record<string, string> = {
   <!-- Schema.org markup slot -->
   <slot name="schema" />
 
-  <div class="max-w-7xl mx-auto px-6 py-8">
+  <div class="max-w-6xl mx-auto px-6 py-8">
     <!-- Two Column Layout: Main Content + Sidebar -->
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Main Content -->
@@ -177,15 +177,12 @@ const colorClasses: Record<string, string> = {
     </section>
   </article>
 
-      <!-- Sidebar with Sticky Ad -->
-      <aside class="hidden lg:block w-80 flex-shrink-0">
+      <!-- Sidebar -->
+      <aside class="hidden lg:block w-72 flex-shrink-0">
         <div class="sticky top-24 space-y-6">
-          <!-- Sidebar Ad Unit -->
-          <AdUnit slot="1563990305" format="vertical" className="rounded-xl overflow-hidden" />
-
-          <!-- Quick Links Card - Related Calculators -->
+          <!-- Quick Links Card - Related Calculators (prioritized above ads) -->
           {relatedCalculators.length > 0 && (
-            <div class="bento-card p-6">
+            <div class="bento-card p-5">
               <h3 class="text-sm font-medium text-[var(--color-cream)] mb-4">Quick Links</h3>
               <ul class="space-y-3">
                 {relatedCalculators.slice(0, 3).map((calc) => {
@@ -193,7 +190,7 @@ const colorClasses: Record<string, string> = {
                   return (
                     <li>
                       <a href={calc.href} class="group flex items-center gap-3 text-sm text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors">
-                        <div class={}>
+                        <div class={`w-7 h-7 bg-gradient-to-br ${gradientClass} rounded-lg flex items-center justify-center flex-shrink-0`}>
                           <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <Fragment set:html={iconPaths[calc.icon] || iconPaths.calculator} />
                           </svg>
@@ -215,7 +212,8 @@ const colorClasses: Record<string, string> = {
             </div>
           )}
 
-          <!-- Sidebar Ad Unit (Below Quick Links) -->
+          <!-- Sidebar Ad Units -->
+          <AdUnit slot="1563990305" format="vertical" className="rounded-xl overflow-hidden" />
           <AdUnit slot="8459010640" format="vertical" className="rounded-xl overflow-hidden" />
         </div>
       </aside>
