@@ -1030,6 +1030,7 @@ const categoryColors: Record<string, string> = {
     function filterCards() {
       const favorites = getFavorites();
       let visibleCount = 0;
+      const isFiltered = currentCategory !== 'All' || currentSearch || showingFavorites || currentCountry !== 'all';
 
       calculatorCards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
@@ -1062,6 +1063,39 @@ const categoryColors: Record<string, string> = {
           card.classList.add('hidden');
         }
       });
+
+      // Handle ads - hide if they would be in first 2 positions when filtered
+      const adCards = document.querySelectorAll('.ad-in-grid');
+      const grid = document.getElementById('calculators-grid');
+
+      if (grid && isFiltered) {
+        // Walk through grid children in DOM order to find visible position of each ad
+        const children = Array.from(grid.children);
+        let visiblePosition = 0;
+
+        children.forEach(child => {
+          const isAd = child.classList.contains('ad-in-grid');
+          const isHiddenCalc = child.classList.contains('calculator-card') && child.classList.contains('hidden');
+
+          if (!isHiddenCalc && !isAd) {
+            // This is a visible calculator card
+            visiblePosition++;
+          }
+
+          if (isAd) {
+            // Hide ad if it would appear in positions 1 or 2
+            if (visiblePosition < 2) {
+              child.classList.add('hidden');
+            } else {
+              child.classList.remove('hidden');
+            }
+            visiblePosition++; // Count ad position only if visible
+          }
+        });
+      } else {
+        // No filter active - show all ads
+        adCards.forEach(ad => ad.classList.remove('hidden'));
+      }
 
       // Show/hide empty state
       if (emptyState) {
