@@ -16,6 +16,7 @@ const projectRoot = join(__dirname, '..');
 
 // Calculator definitions
 const calculators = [
+  // Original calculators
   { id: 'tip-calculator', name: 'Tip Calculator', emoji: '💵', color: '#22c55e', tagline: 'Split bills & calculate tips' },
   { id: 'freelance-day-rate-calculator', name: 'Freelance Day Rate', emoji: '💼', color: '#3b82f6', tagline: 'Calculate your ideal day rate' },
   { id: 'savings-goal-calculator', name: 'Savings Goal', emoji: '🎯', color: '#eab308', tagline: 'Plan your savings journey' },
@@ -39,6 +40,36 @@ const calculators = [
   { id: 'loan-calculator', name: 'Loan Calculator', emoji: '🏦', color: '#3b82f6', tagline: 'Monthly Payment & Interest' },
   { id: 'discount-calculator', name: 'Discount Calculator', emoji: '🏷️', color: '#ef4444', tagline: 'Sale Price & Savings' },
   { id: 'dog-age-calculator', name: 'Dog Age Calculator', emoji: '🐕', color: '#f59e0b', tagline: 'Dog Years to Human Years' },
+  // Additional calculators
+  { id: '401k-calculator', name: '401(k) Calculator', emoji: '💰', color: '#22c55e', tagline: 'Plan your retirement savings' },
+  { id: 'contractor-vs-employee-calculator', name: 'Contractor vs Employee', emoji: '🤝', color: '#3b82f6', tagline: 'Compare total compensation' },
+  { id: 'etsy-fee-calculator', name: 'Etsy Fee Calculator', emoji: '🛍️', color: '#f97316', tagline: 'Calculate seller fees' },
+  { id: 'fire-calculator', name: 'FIRE Calculator', emoji: '🔥', color: '#f59e0b', tagline: 'Financial independence' },
+  { id: 'flooring-calculator', name: 'Flooring Calculator', emoji: '🪵', color: '#92400e', tagline: 'Calculate flooring needed' },
+  { id: 'go-full-time-calculator', name: 'Go Full-Time', emoji: '🎯', color: '#22c55e', tagline: 'When to quit your job' },
+  { id: 'gpa-calculator', name: 'GPA Calculator', emoji: '🎓', color: '#3b82f6', tagline: 'Calculate your GPA' },
+  { id: 'ideal-gas-law-calculator', name: 'Ideal Gas Law', emoji: '⚗️', color: '#06b6d4', tagline: 'PV = nRT calculations' },
+  { id: 'lmtd-calculator', name: 'LMTD Calculator', emoji: '🌡️', color: '#ef4444', tagline: 'Heat exchanger design' },
+  { id: 'macro-calculator', name: 'Macro Calculator', emoji: '🥗', color: '#22c55e', tagline: 'Protein, carbs & fat' },
+  { id: 'mulch-calculator', name: 'Mulch Calculator', emoji: '🌿', color: '#84cc16', tagline: 'Calculate mulch needed' },
+  { id: 'party-drink-calculator', name: 'Party Drink', emoji: '🍹', color: '#ec4899', tagline: 'Plan drinks for your party' },
+  { id: 'pipe-flow-calculator', name: 'Pipe Flow', emoji: '🔧', color: '#64748b', tagline: 'Fluid dynamics' },
+  { id: 'pressure-drop-calculator', name: 'Pressure Drop', emoji: '📉', color: '#8b5cf6', tagline: 'Piping pressure loss' },
+  { id: 'remote-work-savings-calculator', name: 'Remote Work Savings', emoji: '🏠', color: '#06b6d4', tagline: 'Calculate WFH savings' },
+  { id: 'reynolds-number-calculator', name: 'Reynolds Number', emoji: '🌊', color: '#0ea5e9', tagline: 'Flow regime analysis' },
+  // UK Tax Calculators
+  { id: 'uk-100k-tax-trap-calculator', name: 'UK £100k Tax Trap', emoji: '🇬🇧', color: '#ef4444', tagline: '60% tax trap explained' },
+  { id: 'uk-child-benefit-calculator', name: 'UK Child Benefit', emoji: '👶', color: '#ec4899', tagline: 'HICBC calculator' },
+  { id: 'uk-dividend-tax-calculator', name: 'UK Dividend Tax', emoji: '💷', color: '#f59e0b', tagline: 'Calculate dividend tax' },
+  { id: 'uk-pension-calculator', name: 'UK Pension', emoji: '🏦', color: '#22c55e', tagline: 'Plan your retirement' },
+  { id: 'uk-salary-sacrifice-calculator', name: 'UK Salary Sacrifice', emoji: '💼', color: '#14b8a6', tagline: 'Tax-efficient benefits' },
+  { id: 'uk-stamp-duty-calculator', name: 'UK Stamp Duty', emoji: '🏡', color: '#1e3a8a', tagline: 'SDLT/LBTT/LTT calculator' },
+  { id: 'uk-student-loan-calculator', name: 'UK Student Loan', emoji: '🎓', color: '#8b5cf6', tagline: 'Plan 1, 2, 4, 5 repayments' },
+  // US Tax Calculators
+  { id: 'us-tax-bracket-calculator', name: 'US Tax Bracket', emoji: '🇺🇸', color: '#3b82f6', tagline: '2025 federal tax rates' },
+  { id: 'us-self-employment-tax-calculator', name: 'US Self-Employment Tax', emoji: '📋', color: '#22c55e', tagline: '1099 tax calculator' },
+  { id: 'us-quarterly-tax-calculator', name: 'US Quarterly Tax', emoji: '📅', color: '#8b5cf6', tagline: '1040-ES payments' },
+  { id: 'us-capital-gains-tax-calculator', name: 'US Capital Gains Tax', emoji: '📈', color: '#f59e0b', tagline: 'Stock & crypto taxes' },
 ];
 
 // Font loading - use local font files from @fontsource/inter
