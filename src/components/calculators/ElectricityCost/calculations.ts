@@ -4,7 +4,7 @@
  * Pure functions for calculating electricity costs.
  */
 
-import type { ElectricityCostInputs, ElectricityCostResult } from './types';
+import type { ElectricityCostInputs, ElectricityCostResult, SelectedAppliance } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
@@ -57,4 +57,69 @@ export function formatCurrency(
   decimals: number = 2
 ): string {
   return formatCurrencyByRegion(value, currency, decimals);
+}
+
+/**
+ * Calculate costs for a single appliance
+ */
+export function calculateApplianceCost(
+  appliance: SelectedAppliance,
+  daysPerMonth: number,
+  ratePerKwh: number,
+  currency: Currency
+): {
+  name: string;
+  watts: number;
+  hoursPerDay: number;
+  kwhPerMonth: number;
+  costPerMonth: number;
+  costPerYear: number;
+} {
+  const kilowatts = appliance.watts / 1000;
+  const kwhPerDay = kilowatts * appliance.hoursPerDay;
+  const kwhPerMonth = kwhPerDay * daysPerMonth;
+  const costPerMonth = kwhPerMonth * ratePerKwh;
+  const costPerYear = costPerMonth * 12;
+
+  return {
+    name: appliance.name,
+    watts: appliance.watts,
+    hoursPerDay: appliance.hoursPerDay,
+    kwhPerMonth: round(kwhPerMonth, 1),
+    costPerMonth: round(costPerMonth, 2),
+    costPerYear: round(costPerYear, 0),
+  };
+}
+
+/**
+ * Calculate total household electricity costs
+ */
+export function calculateHouseholdCost(
+  appliances: SelectedAppliance[],
+  daysPerMonth: number,
+  ratePerKwh: number,
+  currency: Currency
+): {
+  appliances: ReturnType<typeof calculateApplianceCost>[];
+  totalWatts: number;
+  totalKwhPerMonth: number;
+  totalCostPerMonth: number;
+  totalCostPerYear: number;
+} {
+  const calculatedAppliances = appliances.map((a) =>
+    calculateApplianceCost(a, daysPerMonth, ratePerKwh, currency)
+  );
+
+  const totalWatts = appliances.reduce((sum, a) => sum + a.watts, 0);
+  const totalKwhPerMonth = calculatedAppliances.reduce((sum, a) => sum + a.kwhPerMonth, 0);
+  const totalCostPerMonth = calculatedAppliances.reduce((sum, a) => sum + a.costPerMonth, 0);
+  const totalCostPerYear = calculatedAppliances.reduce((sum, a) => sum + a.costPerYear, 0);
+
+  return {
+    appliances: calculatedAppliances,
+    totalWatts,
+    totalKwhPerMonth: round(totalKwhPerMonth, 1),
+    totalCostPerMonth: round(totalCostPerMonth, 2),
+    totalCostPerYear: round(totalCostPerYear, 0),
+  };
 }

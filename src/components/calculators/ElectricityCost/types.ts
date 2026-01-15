@@ -17,6 +17,16 @@ export interface AppliancePreset {
 }
 
 /**
+ * Selected appliance with custom hours
+ */
+export interface SelectedAppliance {
+  name: string;
+  watts: number;
+  hoursPerDay: number;
+  category: string;
+}
+
+/**
  * Input values for the Electricity Cost Calculator
  */
 export interface ElectricityCostInputs {
