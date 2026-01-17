@@ -13,7 +13,7 @@ import {
   type Debt,
   type PayoffStrategy,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -31,7 +31,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function DebtPayoffCalculator() {
-  const [inputs, setInputs] = useState<DebtPayoffInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<DebtPayoffInputs>(() => getDefaultInputs(getInitialCurrency()));
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculateDebtPayoff(inputs), [inputs]);

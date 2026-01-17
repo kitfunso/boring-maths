@@ -13,7 +13,7 @@ import {
   type SelectedAppliance,
   APPLIANCE_PRESETS,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -31,7 +31,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function ElectricityCostCalculator() {
-  const [inputs, setInputs] = useState<ElectricityCostInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<ElectricityCostInputs>(() => getDefaultInputs(getInitialCurrency()));
   const [selectedAppliances, setSelectedAppliances] = useState<SelectedAppliance[]>([]);
 
   const currencySymbol = getCurrencySymbol(inputs.currency);

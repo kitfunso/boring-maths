@@ -9,7 +9,7 @@ import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateTip, formatCurrency } from './calculations';
 import { getDefaultInputs, type TipCalculatorInputs, type TipCalculatorResult } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -28,7 +28,7 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
 export default function TipCalculator() {
-  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

@@ -14,7 +14,7 @@ import {
   type JobStability,
   type RiskTolerance,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -32,7 +32,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function EmergencyFundCalculator() {
-  const [inputs, setInputs] = useState<EmergencyFundInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<EmergencyFundInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

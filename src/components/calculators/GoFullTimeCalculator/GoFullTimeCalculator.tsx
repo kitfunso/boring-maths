@@ -20,7 +20,7 @@ import {
   type GoFullTimeResult,
   type RiskTolerance,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -40,7 +40,7 @@ import ShareResults from '../../ui/ShareResults';
 
 export default function GoFullTimeCalculator() {
   // State
-  const [inputs, setInputs] = useState<GoFullTimeInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<GoFullTimeInputs>(() => getDefaultInputs(getInitialCurrency()));
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Memoized calculation

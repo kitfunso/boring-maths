@@ -8,7 +8,7 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
-import { type Currency, getCurrencySymbol, getRegionFromCurrency } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getRegionFromCurrency, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -27,7 +27,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function HourlyToSalaryCalculator() {
-  const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);

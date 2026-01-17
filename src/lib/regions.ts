@@ -240,3 +240,30 @@ export function getDefaultSalary(currency: Currency): number {
   const region = getRegionFromCurrency(currency);
   return SALARY_EXAMPLES[region].mid;
 }
+
+/**
+ * LocalStorage key for currency preference
+ */
+const CURRENCY_STORAGE_KEY = 'boring-math-currency';
+
+/**
+ * Get initial currency from localStorage (synchronous)
+ * Use this when initializing calculator state to avoid flash of wrong currency
+ *
+ * @param fallback - Currency to use if localStorage is empty or invalid (default: 'USD')
+ * @returns The stored currency or the fallback
+ */
+export function getInitialCurrency(fallback: Currency = 'USD'): Currency {
+  if (typeof window === 'undefined') {
+    return fallback;
+  }
+  try {
+    const stored = localStorage.getItem(CURRENCY_STORAGE_KEY);
+    if (stored && ['USD', 'GBP', 'EUR'].includes(stored)) {
+      return stored as Currency;
+    }
+  } catch {
+    // localStorage might be blocked or unavailable
+  }
+  return fallback;
+}

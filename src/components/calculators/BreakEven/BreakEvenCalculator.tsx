@@ -12,7 +12,7 @@ import {
   type BreakEvenInputs,
   type BreakEvenResult,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -29,7 +29,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function BreakEvenCalculator() {
-  const [inputs, setInputs] = useState<BreakEvenInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<BreakEvenInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

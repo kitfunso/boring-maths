@@ -11,7 +11,7 @@ import {
   type DiscountInputs,
   type CalculationMode,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -29,7 +29,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function DiscountCalculator() {
-  const [inputs, setInputs] = useState<DiscountInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<DiscountInputs>(() => getDefaultInputs(getInitialCurrency()));
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculateDiscount(inputs), [inputs]);

@@ -18,7 +18,7 @@ import {
   type RemoteWorkSavingsInputs,
   type CommuteType,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -38,7 +38,7 @@ import ShareResults from '../../ui/ShareResults';
 
 export default function RemoteWorkSavingsCalculator() {
   const [inputs, setInputs] = useState<RemoteWorkSavingsInputs>(() =>
-    getDefaultInputs('USD')
+    getDefaultInputs(getInitialCurrency())
   );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);

@@ -8,7 +8,7 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateSideHustle, formatCurrency } from './calculations';
 import { getDefaultInputs, type SideHustleInputs, type SideHustleResult } from './types';
-import { type Currency, getCurrencySymbol, getRegionFromCurrency } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getRegionFromCurrency, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -24,7 +24,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function SideHustleCalculator() {
-  const [inputs, setInputs] = useState<SideHustleInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<SideHustleInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);

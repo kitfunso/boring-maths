@@ -22,7 +22,7 @@ import {
   type FIRECalculatorInputs,
   type RiskProfile,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -42,7 +42,7 @@ import ShareResults from '../../ui/ShareResults';
 
 export default function FIRECalculator() {
   const [inputs, setInputs] = useState<FIRECalculatorInputs>(() =>
-    getDefaultInputs('USD')
+    getDefaultInputs(getInitialCurrency())
   );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);

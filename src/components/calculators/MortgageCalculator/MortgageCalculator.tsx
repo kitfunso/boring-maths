@@ -8,7 +8,7 @@ import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMortgage, formatCurrency } from './calculations';
 import { getDefaultInputs, type MortgageInputs, type MortgageResult } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -27,7 +27,7 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
 export default function MortgageCalculator() {
-  const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

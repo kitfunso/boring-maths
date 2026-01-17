@@ -15,7 +15,7 @@ import {
   type Platform,
   type EbayCategory,
 } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -138,7 +138,7 @@ function PlatformCard({
 }
 
 export default function EtsyFeeCalculator() {
-  const [inputs, setInputs] = useState<EtsyFeeInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<EtsyFeeInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

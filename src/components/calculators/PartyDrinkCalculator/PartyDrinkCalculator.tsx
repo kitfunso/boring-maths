@@ -16,7 +16,7 @@ import {
   WEATHER_DESCRIPTIONS,
   EVENT_TYPE_DESCRIPTIONS,
 } from './types';
-import { type Currency } from '../../../lib/regions';
+import { type Currency, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -36,7 +36,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function PartyDrinkCalculator() {
-  const [inputs, setInputs] = useState<PartyDrinkInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<PartyDrinkInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   // Calculate results
   const result: PartyDrinkResult = useMemo(() => {

@@ -8,7 +8,7 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateSavingsGoal, formatCurrency } from './calculations';
 import { getDefaultInputs, type SavingsGoalInputs, type SavingsGoalResult, type ContributionFrequency } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -27,7 +27,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function SavingsGoalCalculator() {
-  const [inputs, setInputs] = useState<SavingsGoalInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<SavingsGoalInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 

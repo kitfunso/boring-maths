@@ -23,6 +23,7 @@ import {
   type Currency,
   getCurrencySymbol,
   getRegionFromCurrency,
+  getInitialCurrency,
 } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -43,7 +44,7 @@ import ShareResults from '../../ui/ShareResults';
  * Main calculator component
  */
 export default function FreelanceDayRateCalculator() {
-  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() => getDefaultInputs(getInitialCurrency()));
   const [error, setError] = useState<string | null>(null);
 
   // Get current currency symbol

@@ -5,7 +5,7 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateLoan, formatCurrency, formatTermDisplay } from './calculations';
 import { getDefaultInputs, LOAN_TYPES, type LoanInputs, type LoanType } from './types';
-import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -24,7 +24,7 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function LoanCalculator() {
-  const [inputs, setInputs] = useState<LoanInputs>(() => getDefaultInputs('USD'));
+  const [inputs, setInputs] = useState<LoanInputs>(() => getDefaultInputs(getInitialCurrency()));
   const [showAmortization, setShowAmortization] = useState(false);
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
