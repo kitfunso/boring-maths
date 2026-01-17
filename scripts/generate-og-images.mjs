@@ -70,6 +70,11 @@ const calculators = [
   { id: 'us-self-employment-tax-calculator', name: 'US Self-Employment Tax', emoji: '📋', color: '#22c55e', tagline: '1099 tax calculator' },
   { id: 'us-quarterly-tax-calculator', name: 'US Quarterly Tax', emoji: '📅', color: '#8b5cf6', tagline: '1040-ES payments' },
   { id: 'us-capital-gains-tax-calculator', name: 'US Capital Gains Tax', emoji: '📈', color: '#f59e0b', tagline: 'Stock & crypto taxes' },
+  // HSA Calculator
+  { id: 'hsa-calculator', name: 'HSA Calculator', emoji: '🏥', color: '#22c55e', tagline: 'Triple tax advantage' },
+  // EU Calculators
+  { id: 'eu-vat-calculator', name: 'EU VAT Calculator', emoji: '🇪🇺', color: '#3b82f6', tagline: 'All 27 EU countries' },
+  { id: 'eu-salary-calculator', name: 'EU Salary Calculator', emoji: '💶', color: '#8b5cf6', tagline: 'Net pay across Europe' },
 ];
 
 // Font loading - use local font files from @fontsource/inter
