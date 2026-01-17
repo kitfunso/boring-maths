@@ -1,0 +1,143 @@
+---
+/**
+ * Glaze Recipe Calculator Page
+ * Scale and calculate pottery glaze recipes
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { GlazeCalculator } from '../../components/calculators/GlazeCalculator';
+
+const title = 'Glaze Recipe Calculator | Pottery Batch Calculator';
+const description = 'Free glaze calculator for potters. Scale glaze recipes to any batch size. Includes common materials and starter recipes for cone 6 and cone 10.';
+const keywords = 'glaze calculator, pottery glaze recipe, batch calculator, ceramic glaze, glaze materials, feldspar, silica, flux, cone 6, cone 10';
+const canonicalURL = '/calculators/glaze-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Glaze Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Clay Shrinkage',
+    description: 'Calculate pottery sizes.',
+    href: '/calculators/clay-shrinkage-calculator',
+    icon: 'cube' as const,
+    color: 'orange' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "Why must glaze recipes add up to 100%?",
+    answer: "Glaze recipes are expressed as percentages of dry materials. 100% means all the ingredients are included once. If your recipe doesn't add to 100%, it's either missing something or has a calculation error. Colorants and additives are often added 'on top' of 100%."
+  },
+  {
+    question: "What's the difference between a flux and a glass former?",
+    answer: "Glass formers (primarily silica) create the glassy surface but need very high temperatures to melt alone. Fluxes (feldspars, whiting, frits) lower the melting temperature. A glaze needs both: flux to melt at your cone, silica to form glass, and alumina (usually from kaolin) for durability."
+  },
+  {
+    question: "Why do I need to sieve my glaze?",
+    answer: "Sieving (usually 80 mesh) removes lumps, breaks up clumps, and ensures even distribution of materials. Unsieved glaze can have inconsistent color, texture, and application. Sieve at least twice for best results."
+  },
+  {
+    question: "How much water should I add?",
+    answer: "Start with 40-50% water by weight of dry materials. For dipping, aim for heavy cream consistency. For brushing, add more water. Too thick = drips and crawling. Too thin = runs and multiple coats needed. Test and adjust."
+  },
+  {
+    question: "What if a material is discontinued?",
+    answer: "Common substitutions: Gerstley Borate → Gillespie Borate or Frit 3134. G-200 Feldspar → Minspar 200 or Custer Feldspar. When substituting, test thoroughly as results may vary. Check supplier recommendations."
+  },
+  {
+    question: "Why did my glaze crawl/pinhole/craze?",
+    answer: "Crawling often means too thick application or dusty bisque. Pinholes can be from firing too fast or materials outgassing. Crazing means the glaze is under tension (too high expansion). Each defect has multiple possible causes - test methodically."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Glaze Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Glaze Recipe Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Glaze Recipe Calculator"
+    description="Scale pottery glaze recipes to any batch size. Enter percentages, choose your target weight, and get precise measurements for mixing."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <GlazeCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Glaze Chemistry">
+    <p>
+      Glazes are composed of three main components: glass formers (silica), fluxes
+      (materials that lower melting temperature), and stabilizers (alumina from clay
+      or kaolin). The ratio of these determines the glaze's properties.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Material Categories</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Feldspars:</strong> Primary flux, also provide silica and alumina</li>
+      <li><strong>Silica/Flint:</strong> Glass former, hardens the glaze</li>
+      <li><strong>Whiting:</strong> Calcium flux, promotes durability</li>
+      <li><strong>Kaolin/EPK:</strong> Suspends glaze, adds alumina</li>
+      <li><strong>Frits:</strong> Pre-melted glass, predictable flux</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Firing Temperature Guide">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-red-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-red-400 mb-2">Low Fire (Cone 06-1)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>1830-2109°F</li>
+          <li>Earthenware, terra cotta</li>
+          <li>Requires more flux</li>
+          <li>Often use frits</li>
+        </ul>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Mid Fire (Cone 4-7)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>2167-2295°F</li>
+          <li>Stoneware, most studios</li>
+          <li>Cone 6 most common</li>
+          <li>Wide glaze variety</li>
+        </ul>
+      </div>
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">High Fire (Cone 8-12)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>2305-2419°F</li>
+          <li>Porcelain, stoneware</li>
+          <li>Natural ash glazes</li>
+          <li>Most durable</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

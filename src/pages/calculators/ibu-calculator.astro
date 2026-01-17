@@ -1,0 +1,143 @@
+---
+/**
+ * IBU Calculator Page
+ * Calculate hop bitterness for homebrewing
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { IBUCalculator } from '../../components/calculators/IBUCalculator';
+
+const title = 'IBU Calculator | Hop Bitterness for Homebrew';
+const description = 'Free IBU calculator using Tinseth, Rager, and Garetz formulas. Calculate hop bitterness for beer with multiple hop additions. Includes 20+ hop varieties.';
+const keywords = 'ibu calculator, hop calculator, bitterness calculator, tinseth formula, homebrewing, beer brewing, hop utilization, alpha acid';
+const canonicalURL = '/calculators/ibu-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'IBU Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol content.',
+    href: '/calculators/abv-calculator',
+    icon: 'beaker' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What are IBUs and why do they matter?",
+    answer: "IBU (International Bitterness Units) measure hop bitterness in beer. One IBU equals 1 milligram of iso-alpha acid per liter. IBUs help you balance malt sweetness with hop bitterness - the BU:GU ratio shows this balance."
+  },
+  {
+    question: "Which IBU formula should I use?",
+    answer: "Tinseth is most widely used and works well for most brewing scenarios. Rager can be more accurate for high-gravity beers. Garetz accounts for additional factors but is more complex. For homebrewing, Tinseth is recommended."
+  },
+  {
+    question: "Why do pellet hops have better utilization?",
+    answer: "Pellet hops are processed and compressed, rupturing the lupulin glands that contain alpha acids. This allows better extraction during the boil. Pellets typically give 10% better utilization than whole leaf hops."
+  },
+  {
+    question: "Does boil time affect bitterness?",
+    answer: "Yes! Longer boil times extract more alpha acids. 60-minute additions maximize bitterness. 15-30 minute additions add some bitterness plus flavor. Late additions (0-10 min) contribute mostly aroma with minimal bitterness."
+  },
+  {
+    question: "Why does gravity affect hop utilization?",
+    answer: "Higher gravity worts (more sugar) reduce hop utilization because the alpha acids are less soluble in concentrated solutions. A 1.080 OG wort will get less bitterness from the same hops than a 1.040 OG wort."
+  },
+  {
+    question: "What's a good BU:GU ratio for different styles?",
+    answer: "BU:GU = IBU ÷ ((OG - 1) × 1000). Under 0.5 = malty (Scottish Ale, Bock). 0.5-0.8 = balanced (Pale Ale, Porter). Over 0.8 = hoppy (IPA, DIPA). Use this to balance your recipe to style."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'IBU Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="IBU Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="IBU Calculator"
+    description="Calculate hop bitterness for your homebrew using industry-standard formulas. Add multiple hop additions and see their individual contributions."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <IBUCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Hop Bitterness">
+    <p>
+      Hops provide bitterness, flavor, and aroma to beer. Alpha acids in hops are
+      isomerized during the boil, creating the bitter compounds we taste. The longer
+      and more vigorous the boil, the more bitterness extracted.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Hop Addition Timing</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>60 min (Bittering):</strong> Maximum bitterness, minimal flavor/aroma</li>
+      <li><strong>30 min (Flavor):</strong> Moderate bitterness, hop flavor</li>
+      <li><strong>15 min (Flavor):</strong> Light bitterness, more flavor</li>
+      <li><strong>5-0 min (Aroma):</strong> Minimal bitterness, maximum aroma</li>
+      <li><strong>Dry hop:</strong> Zero bitterness, aroma only</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="IBU by Beer Style">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">Light Styles</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>American Light Lager: 8-12</li>
+          <li>Wheat Beer: 8-15</li>
+          <li>Cream Ale: 15-20</li>
+          <li>Blonde Ale: 15-25</li>
+        </ul>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Medium Styles</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Pale Ale: 30-50</li>
+          <li>Pilsner: 25-45</li>
+          <li>Porter: 18-35</li>
+          <li>Stout: 25-45</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Hoppy Styles</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>IPA: 40-70</li>
+          <li>Double IPA: 60-120</li>
+          <li>Imperial Stout: 50-90</li>
+          <li>Barleywine: 50-100</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,137 @@
+---
+/**
+ * Tap Drill Calculator Page
+ * Calculate drill sizes for tapping threads
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { TapDrillCalculator } from '../../components/calculators/TapDrillCalculator';
+
+const title = 'Tap Drill Size Calculator | Thread Drill Chart';
+const description = 'Free tap drill calculator for imperial and metric threads. Find the correct drill size for any thread percentage. Includes UNC, UNF, and ISO metric thread charts.';
+const keywords = 'tap drill calculator, tap drill chart, thread drill size, UNC tap drill, metric tap drill, thread percentage, minor diameter';
+const canonicalURL = '/calculators/tap-drill-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Tap Drill Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Speeds & Feeds',
+    description: 'Calculate RPM and feed rates.',
+    href: '/calculators/speeds-feeds-calculator',
+    icon: 'gear' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is thread percentage and why does it matter?",
+    answer: "Thread percentage (or thread engagement) is how much of the theoretical thread form is cut into the hole. 75% is standard for most applications - it provides full strength with reasonable tapping torque. Going above 75% adds minimal strength but significantly increases tap breakage risk."
+  },
+  {
+    question: "What's the difference between UNC and UNF threads?",
+    answer: "UNC (Unified National Coarse) has fewer threads per inch and is the default for most applications - faster to assemble and more tolerant of damage. UNF (Unified National Fine) has more threads per inch, providing finer adjustment, higher tensile strength, and better resistance to vibration loosening."
+  },
+  {
+    question: "Why use a smaller drill for harder materials?",
+    answer: "For hard materials like stainless steel, using a larger drill (lower thread percentage like 65%) reduces tapping torque and tap breakage. The threads are still plenty strong. For soft materials like aluminum, you can use a smaller drill (higher thread percentage) since tapping is easier."
+  },
+  {
+    question: "What if I don't have the exact drill size?",
+    answer: "Use the closest standard drill size. Going slightly larger is generally safer (reduces thread percentage slightly but prevents tap breakage). Going smaller increases tap breakage risk. Letter and number drills often provide closer sizes than fractional drills."
+  },
+  {
+    question: "How do I convert between numbered/letter drills and decimal?",
+    answer: "Numbered drills (#1-#80) and letter drills (A-Z) are specified by their decimal inch size. Our calculator shows the exact decimal equivalent. #1 is 0.228\", #80 is 0.0135\". Letter A is 0.234\", Z is 0.413\"."
+  },
+  {
+    question: "What about pipe threads (NPT)?",
+    answer: "NPT (National Pipe Thread) uses tapered threads and requires specific tap drill sizes based on the pipe size. NPT tap drills are standardized and don't follow the same percentage calculations as straight threads."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Tap Drill Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Tap Drill Size Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Tap Drill Size Calculator"
+    description="Find the correct drill size for any thread. Supports imperial (UNC/UNF) and metric (ISO) threads with adjustable thread percentage."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <TapDrillCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Tap Drills">
+    <p>
+      A tap drill creates the hole that will be threaded. The drill size determines
+      how much material remains for the tap to cut, expressed as thread percentage.
+      Choosing the right size balances thread strength against tapping difficulty.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Thread Percentage Guidelines</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>50-60%:</strong> Easy tapping, soft materials, hand taps</li>
+      <li><strong>65-70%:</strong> Reduced torque, hard materials, CNC tapping</li>
+      <li><strong>75%:</strong> Standard - full strength with reasonable effort</li>
+      <li><strong>80-85%:</strong> Maximum strength, requires care</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Common Thread Sizes">
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-slate-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-slate-400 mb-2">Imperial (UNC)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>#6-32: #36 drill (0.1065")</li>
+          <li>#8-32: #29 drill (0.136")</li>
+          <li>#10-24: #25 drill (0.1495")</li>
+          <li>1/4-20: #7 drill (0.201")</li>
+          <li>5/16-18: F drill (0.257")</li>
+          <li>3/8-16: 5/16" drill (0.3125")</li>
+        </ul>
+      </div>
+      <div class="bg-slate-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-slate-400 mb-2">Metric (ISO)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>M3 × 0.5: 2.5mm drill</li>
+          <li>M4 × 0.7: 3.3mm drill</li>
+          <li>M5 × 0.8: 4.2mm drill</li>
+          <li>M6 × 1.0: 5.0mm drill</li>
+          <li>M8 × 1.25: 6.8mm drill</li>
+          <li>M10 × 1.5: 8.5mm drill</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

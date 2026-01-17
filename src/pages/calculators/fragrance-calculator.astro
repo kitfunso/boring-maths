@@ -1,0 +1,144 @@
+---
+/**
+ * Fragrance Load Calculator Page
+ * Calculate fragrance oil amounts for candle making
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { FragranceCalculator } from '../../components/calculators/FragranceCalculator';
+
+const title = 'Candle Fragrance Calculator | Fragrance Load Calculator';
+const description = 'Free fragrance load calculator for candle making. Calculate the right amount of fragrance oil for any wax type. Includes max load limits for soy, coconut, and paraffin.';
+const keywords = 'fragrance calculator, candle calculator, fragrance load, candle making, soy wax, fragrance oil, scent throw, candle wax';
+const canonicalURL = '/calculators/fragrance-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Fragrance Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Lye Calculator',
+    description: 'Calculate soap making lye.',
+    href: '/calculators/lye-calculator',
+    icon: 'beaker' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What fragrance load should I use?",
+    answer: "Most candle makers use 6-10% fragrance load. Start at 6-8% and increase if you want stronger scent throw. Never exceed your wax manufacturer's recommended maximum (usually 10-12% for soy, 6% for beeswax). More isn't always better - too much can cause safety issues."
+  },
+  {
+    question: "Why isn't my candle smelling strong enough?",
+    answer: "Weak scent throw can have many causes: insufficient fragrance load, adding fragrance at wrong temperature, not enough cure time (allow 1-2 weeks), poor quality fragrance, or wrong wick size. Test each variable systematically."
+  },
+  {
+    question: "What temperature should I add fragrance?",
+    answer: "For soy wax, add fragrance at 180-185°F. For paraffin, typically 175-180°F. Adding too hot burns off scent; too cool prevents proper binding. Check your specific wax manufacturer's recommendations."
+  },
+  {
+    question: "What's the difference between hot throw and cold throw?",
+    answer: "Cold throw is the scent from an unlit candle. Hot throw is the scent when burning. Some fragrances perform better cold than hot (and vice versa). Test burn every combination to evaluate hot throw."
+  },
+  {
+    question: "Can I mix fragrance oils together?",
+    answer: "Yes! Blending fragrances is common. Calculate total fragrance load (all oils combined should not exceed max load). Let blends sit 24+ hours before adding to wax to let notes marry. Keep detailed notes on ratios."
+  },
+  {
+    question: "Why is my candle sweating or has wet spots?",
+    answer: "Sweating (oil beads on surface) usually means too much fragrance or adding fragrance too hot. Wet spots (lighter patches on container side) are adhesion issues from cooling too fast or pouring too cool. Neither affects burn quality."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Fragrance Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Candle Fragrance Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Candle Fragrance Calculator"
+    description="Calculate the exact amount of fragrance oil for your candles. Includes wax-specific maximum loads and container size references."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <FragranceCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Fragrance Load">
+    <p>
+      Fragrance load is the percentage of fragrance oil relative to wax weight.
+      Each wax type has a maximum fragrance load it can hold without causing
+      issues like sweating, poor burn, or safety hazards.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Maximum Loads by Wax Type</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Soy Wax (464, 444):</strong> 10% maximum</li>
+      <li><strong>Coconut Wax:</strong> 10-12% maximum</li>
+      <li><strong>Paraffin:</strong> 10-12% maximum</li>
+      <li><strong>Parasoy Blends:</strong> 10-11% maximum</li>
+      <li><strong>Beeswax:</strong> 6% maximum (often less is better)</li>
+      <li><strong>Palm Wax:</strong> 6% maximum</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Scent Throw Guidelines">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">Light Throw (5-6%)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Subtle background scent</li>
+          <li>Good for bedrooms</li>
+          <li>Delicate fragrances</li>
+          <li>Lower cost per candle</li>
+        </ul>
+      </div>
+      <div class="bg-pink-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-pink-400 mb-2">Medium Throw (7-8%)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Most popular range</li>
+          <li>Noticeable but not overpowering</li>
+          <li>Good for living rooms</li>
+          <li>Balanced cost/performance</li>
+        </ul>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Strong Throw (9-10%)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Fills large rooms</li>
+          <li>Bold fragrances</li>
+          <li>Premium products</li>
+          <li>Watch for sweating</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

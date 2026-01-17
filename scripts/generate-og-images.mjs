@@ -85,6 +85,12 @@ const calculators = [
   { id: 'abv-calculator', name: 'ABV Calculator', emoji: '🍺', color: '#d97706', tagline: 'Homebrew alcohol content' },
   { id: 'clay-shrinkage-calculator', name: 'Clay Shrinkage', emoji: '🏺', color: '#c2410c', tagline: 'Pottery size calculator' },
   { id: 'lye-calculator', name: 'Lye Calculator', emoji: '🧼', color: '#a855f7', tagline: 'Soap making saponification' },
+  // Niche Calculators - Phase 2
+  { id: 'tap-drill-calculator', name: 'Tap Drill Calculator', emoji: '🔩', color: '#64748b', tagline: 'Thread drill sizes' },
+  { id: 'co2-calculator', name: 'Aquarium CO2', emoji: '💨', color: '#0ea5e9', tagline: 'pH KH CO2 calculator' },
+  { id: 'ibu-calculator', name: 'IBU Calculator', emoji: '🍻', color: '#d97706', tagline: 'Hop bitterness calculator' },
+  { id: 'glaze-calculator', name: 'Glaze Calculator', emoji: '🎨', color: '#c2410c', tagline: 'Pottery glaze recipes' },
+  { id: 'fragrance-calculator', name: 'Fragrance Calculator', emoji: '🕯️', color: '#a855f7', tagline: 'Candle fragrance load' },
 ];
 
 // Font loading - use local font files from @fontsource/inter
