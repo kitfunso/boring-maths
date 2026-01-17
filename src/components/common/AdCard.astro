@@ -59,6 +59,11 @@ const hasAdsense = true;
     background: var(--gradient-card);
   }
 
+  /* Ensure hidden class overrides display:flex */
+  .ad-card.hidden {
+    display: none !important;
+  }
+
   .ad-placeholder {
     display: flex;
     flex-direction: column;

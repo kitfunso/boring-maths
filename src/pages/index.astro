@@ -1105,37 +1105,43 @@ const categoryColors: Record<string, string> = {
       });
 
       // Handle ads - hide if they would be in first 2 positions when filtered
-      const adCards = document.querySelectorAll('.ad-in-grid');
       const grid = document.getElementById('calculators-grid');
 
       if (grid && isFiltered) {
         // Walk through grid children in DOM order
         // Hide ads if they would appear before 2 visible calculators
-        const children = Array.from(grid.children);
+        const children = Array.from(grid.children) as HTMLElement[];
         let visibleCalcCount = 0;
 
         children.forEach(child => {
           const isAd = child.classList.contains('ad-in-grid');
-          const isHiddenCalc = child.classList.contains('calculator-card') && child.classList.contains('hidden');
+          const isCalc = child.classList.contains('calculator-card');
+          const isHidden = child.classList.contains('hidden');
 
-          if (!isHiddenCalc && !isAd) {
-            // This is a visible calculator card - count it
+          // Count visible calculators (not hidden, is a calculator card)
+          if (isCalc && !isHidden) {
             visibleCalcCount++;
           }
 
           if (isAd) {
             // Hide ad if fewer than 2 visible calculators have appeared before it
+            // Use both class and inline style to ensure it works
             if (visibleCalcCount < 2) {
               child.classList.add('hidden');
+              child.style.display = 'none';
             } else {
               child.classList.remove('hidden');
+              child.style.display = '';
             }
-            // Don't count ads toward position - we only care about calculator count
           }
         });
       } else {
         // No filter active - show all ads
-        adCards.forEach(ad => ad.classList.remove('hidden'));
+        const adCards = document.querySelectorAll('.ad-in-grid') as NodeListOf<HTMLElement>;
+        adCards.forEach(ad => {
+          ad.classList.remove('hidden');
+          ad.style.display = '';
+        });
       }
 
       // Show/hide empty state
