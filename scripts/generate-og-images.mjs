@@ -75,6 +75,10 @@ const calculators = [
   // EU Calculators
   { id: 'eu-vat-calculator', name: 'EU VAT Calculator', emoji: '🇪🇺', color: '#3b82f6', tagline: 'All 27 EU countries' },
   { id: 'eu-salary-calculator', name: 'EU Salary Calculator', emoji: '💶', color: '#8b5cf6', tagline: 'Net pay across Europe' },
+  // New Calculators
+  { id: 'inflation-calculator', name: 'Inflation Calculator', emoji: '📊', color: '#f59e0b', tagline: 'Historic CPI 1920-2025' },
+  { id: 'net-worth-calculator', name: 'Net Worth Calculator', emoji: '💎', color: '#22c55e', tagline: 'Assets minus liabilities' },
+  { id: 'us-paycheck-calculator', name: 'US Paycheck Calculator', emoji: '💵', color: '#3b82f6', tagline: 'Take-home pay calculator' },
 ];
 
 // Font loading - use local font files from @fontsource/inter

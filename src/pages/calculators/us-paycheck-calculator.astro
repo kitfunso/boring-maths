@@ -1,0 +1,147 @@
+---
+/**
+ * US Paycheck Calculator Page
+ * Calculate take-home pay after taxes and deductions
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { USPaycheckCalculator } from '../../components/calculators/USPaycheckCalculator';
+
+const title = 'US Paycheck Calculator 2025 | Take-Home Pay After Taxes';
+const description = 'Free paycheck calculator with 2024 federal and state tax brackets. Calculate your take-home pay, see tax breakdown, and estimate deductions for all 50 states.';
+const keywords = 'paycheck calculator, take home pay calculator, salary after taxes, net pay calculator, federal tax calculator, state tax calculator, payroll calculator, income tax calculator';
+const canonicalURL = '/calculators/us-paycheck-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'US Paycheck Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'US Tax Calculator',
+    description: 'Calculate your full federal tax liability.',
+    href: '/calculators/us-tax-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Contractor vs Employee',
+    description: 'Compare W-2 and 1099 compensation.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'chart' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How is my take-home pay calculated?",
+    answer: "Take-home pay is your gross pay minus all deductions: federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions like 401(k) or HSA contributions. Our calculator uses 2024 tax brackets for accurate estimates."
+  },
+  {
+    question: "What is the difference between gross and net pay?",
+    answer: "Gross pay is your total earnings before any deductions. Net pay (take-home pay) is what you actually receive after taxes and deductions. For most workers, net pay is 65-80% of gross pay, depending on tax bracket and state."
+  },
+  {
+    question: "How do pre-tax deductions affect my paycheck?",
+    answer: "Pre-tax deductions (401k, HSA, FSA) reduce your taxable income, which lowers your tax bill. For example, a $500 401(k) contribution might only reduce your take-home pay by $350-400 because you save on taxes. This is essentially 'free money' savings."
+  },
+  {
+    question: "Why does my state tax vary so much?",
+    answer: "States set their own income tax rates. Nine states (TX, FL, WA, NV, WY, SD, TN, NH, AK) have no income tax. California and New York have rates over 9% for high earners. Moving to a no-tax state can significantly increase take-home pay."
+  },
+  {
+    question: "What is FICA and why is it on my paycheck?",
+    answer: "FICA (Federal Insurance Contributions Act) includes Social Security (6.2% up to $168,600 in 2024) and Medicare (1.45% on all wages, plus 0.9% additional Medicare tax on wages over $200,000). Your employer pays a matching amount."
+  },
+  {
+    question: "How accurate is this paycheck calculator?",
+    answer: "Our calculator uses 2024 federal tax brackets and current state rates for accurate estimates. However, actual pay may vary due to local taxes, specific deductions, or employer withholding differences. It's designed for planning, not exact payroll calculations."
+  },
+  {
+    question: "Should I adjust my W-4 withholding?",
+    answer: "If you consistently get large tax refunds (over $1,000), you're overwithholding - adjust your W-4 to increase take-home pay. If you owe taxes at filing, increase withholding to avoid penalties. Aim for roughly breaking even."
+  },
+  {
+    question: "How much should I contribute to my 401(k)?",
+    answer: "At minimum, contribute enough to get your full employer match (typically 3-6%). The 2024 limit is $23,000 ($30,500 if 50+). Many financial experts recommend saving 15-20% of income for retirement, including employer match."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'US Paycheck Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="US Paycheck Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="US Paycheck Calculator"
+    description="Calculate your take-home pay after federal taxes, state taxes, Social Security, and Medicare. Includes all 50 states with 2024 tax brackets."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <USPaycheckCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Your Paycheck">
+    <p>
+      Your paycheck goes through multiple deductions before reaching your bank account. Understanding these
+      deductions helps you plan your budget, optimize your tax situation, and make informed decisions about
+      retirement contributions.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Common Paycheck Deductions</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Federal Income Tax:</strong> Progressive tax based on your income bracket (10-37%)</li>
+      <li><strong>State Income Tax:</strong> Varies by state (0% to 13.3% in California)</li>
+      <li><strong>Social Security:</strong> 6.2% on wages up to $168,600 (2024)</li>
+      <li><strong>Medicare:</strong> 1.45% on all wages, plus 0.9% above $200,000</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Maximize Your Take-Home Pay">
+    <div class="space-y-4">
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Pre-Tax Strategies</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li><strong>401(k):</strong> Up to $23,000/year reduces taxable income</li>
+          <li><strong>HSA:</strong> $4,150 individual / $8,300 family (2024)</li>
+          <li><strong>FSA:</strong> $3,200 for healthcare, $5,000 for dependent care</li>
+          <li><strong>Commuter Benefits:</strong> $315/month for transit or parking</li>
+        </ul>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Tax-Efficient States</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li><strong>No Income Tax:</strong> TX, FL, WA, NV, WY, SD, TN, NH, AK</li>
+          <li><strong>Low Tax:</strong> ND (2.5%), AZ (2.5%), PA (3.07%)</li>
+          <li><strong>High Tax:</strong> CA (13.3%), NY (10.9%), NJ (10.75%)</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
