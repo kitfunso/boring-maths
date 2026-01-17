@@ -1,0 +1,150 @@
+---
+/**
+ * EU VAT Calculator Page
+ * Calculate VAT for all 27 EU member states
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { EUVATCalculator } from '../../components/calculators/EUVATCalculator';
+
+const title = 'EU VAT Calculator 2025 | Calculate VAT for All EU Countries';
+const description = 'Free EU VAT calculator for all 27 member states. Add or remove VAT, compare rates across Europe, and see reduced rates for Germany, France, Italy, Spain, and more.';
+const keywords = 'eu vat calculator, vat calculator europe, european vat rates, germany vat calculator, france tva calculator, italy iva calculator, spain iva calculator, eu vat rates 2025, add vat, remove vat, reverse vat';
+const canonicalURL = '/calculators/eu-vat-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'EU VAT Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages quickly.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices and savings.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is VAT and how does it work in the EU?",
+    answer: "VAT (Value Added Tax) is a consumption tax applied to goods and services in the European Union. It's charged at each stage of production and distribution, but businesses can reclaim VAT paid on purchases (input VAT) against VAT charged on sales (output VAT). The end consumer ultimately bears the tax."
+  },
+  {
+    question: "Which EU country has the highest VAT rate?",
+    answer: "Hungary has the highest standard VAT rate in the EU at 27%. Other high-VAT countries include Denmark, Sweden, and Croatia at 25%. The lowest standard rate is Luxembourg at 17%, followed by Malta at 18%."
+  },
+  {
+    question: "What are reduced VAT rates?",
+    answer: "Reduced VAT rates are lower rates that EU countries can apply to specific categories of goods and services, such as food, books, medicine, and public transport. Each country decides which products qualify. Some countries also have 'super-reduced' rates (below 5%) for essentials."
+  },
+  {
+    question: "How do I calculate VAT from a gross (VAT-inclusive) price?",
+    answer: "To extract VAT from a gross price, divide by (1 + VAT rate). For example, with 20% VAT: Net = Gross ÷ 1.20. So €120 gross = €100 net + €20 VAT. Use our 'Remove VAT' mode to calculate this automatically."
+  },
+  {
+    question: "What is reverse charge VAT?",
+    answer: "Reverse charge is a mechanism where the buyer, rather than the seller, accounts for VAT. It's commonly used for cross-border B2B services within the EU and for certain domestic supplies like construction services. The buyer self-assesses and reports the VAT."
+  },
+  {
+    question: "Do I need to charge VAT on exports outside the EU?",
+    answer: "Exports from the EU to non-EU countries (like the UK post-Brexit, USA, etc.) are generally zero-rated, meaning no VAT is charged. However, the goods must physically leave the EU and you need proof of export. The importer may owe import duties and VAT in their country."
+  },
+  {
+    question: "What is the VAT MOSS/OSS scheme?",
+    answer: "The One-Stop Shop (OSS) allows businesses selling digital services or goods to consumers across the EU to register in one country and file a single VAT return covering all EU sales. This simplifies compliance for e-commerce and digital businesses."
+  },
+  {
+    question: "How often do EU VAT rates change?",
+    answer: "EU VAT rates can change, but it's relatively infrequent. Countries must give notice before changes. Recent changes include Finland increasing to 25.5% in 2024 and Estonia to 22%. Always verify current rates for business transactions."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'EU VAT Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="EU VAT Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="EU VAT Calculator"
+    description="Calculate VAT for all 27 EU member states. Add VAT to net prices, remove VAT from gross prices, or compare rates across Europe."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <EUVATCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding EU VAT">
+    <p>
+      Value Added Tax (VAT) is the main consumption tax across the European Union. While the EU sets minimum
+      rates (15% standard, 5% reduced), each member state sets its own actual rates within these limits.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">EU VAT Rate Ranges (2025)</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Standard rates:</strong> 17% (Luxembourg) to 27% (Hungary)</li>
+      <li><strong>Reduced rates:</strong> 5% to 18% depending on country and product</li>
+      <li><strong>Super-reduced:</strong> Some countries offer rates as low as 2.1% (France) to 4.8% (Ireland)</li>
+      <li><strong>Zero rate:</strong> Applies to exports and some specific goods</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Common VAT Calculations">
+    <div class="space-y-4">
+      <div class="bg-white/5 rounded-lg p-4">
+        <h4 class="font-semibold mb-2">Adding VAT (Net → Gross)</h4>
+        <p class="text-[var(--color-subtle)]">
+          Gross = Net × (1 + VAT%)<br/>
+          Example: €100 + 19% VAT = €100 × 1.19 = €119
+        </p>
+      </div>
+      <div class="bg-white/5 rounded-lg p-4">
+        <h4 class="font-semibold mb-2">Removing VAT (Gross → Net)</h4>
+        <p class="text-[var(--color-subtle)]">
+          Net = Gross ÷ (1 + VAT%)<br/>
+          Example: €119 incl. 19% VAT = €119 ÷ 1.19 = €100
+        </p>
+      </div>
+      <div class="bg-white/5 rounded-lg p-4">
+        <h4 class="font-semibold mb-2">Finding VAT Amount</h4>
+        <p class="text-[var(--color-subtle)]">
+          VAT = Gross - Net, or VAT = Net × VAT%<br/>
+          Example: €119 gross - €100 net = €19 VAT
+        </p>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
