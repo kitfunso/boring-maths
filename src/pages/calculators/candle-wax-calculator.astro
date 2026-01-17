@@ -1,0 +1,173 @@
+---
+/**
+ * Candle Wax Calculator Page
+ * Calculate wax weight from container volume
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { CandleWaxCalculator } from '../../components/calculators/CandleWaxCalculator';
+
+const title = 'Candle Wax Calculator | Container Volume to Wax Weight';
+const description = 'Free candle wax calculator. Calculate how much wax you need for any container size. Includes wax density for soy, coconut, paraffin, and beeswax. Wick size recommendations.';
+const keywords = 'candle wax calculator, wax weight, candle making, container candle, soy wax, coconut wax, paraffin, wick size, candle supplies';
+const canonicalURL = '/calculators/candle-wax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Candle Wax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Fragrance Calculator',
+    description: 'Calculate fragrance oil amounts.',
+    href: '/calculators/fragrance-calculator',
+    icon: 'beaker' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Lye Calculator',
+    description: 'Calculate soap making lye.',
+    href: '/calculators/lye-calculator',
+    icon: 'scale' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How do I calculate wax weight from container volume?",
+    answer: "Multiply container volume (fluid ounces) by fill percentage (typically 85-90%) by wax density (0.86 for soy, 0.90 for paraffin). For example: 9oz container × 0.85 fill × 0.86 density = 6.6 oz wax. This calculator does this automatically."
+  },
+  {
+    question: "Why do I need less wax than container volume?",
+    answer: "Wax is less dense than water (which fluid ounces measure). Soy wax is about 86% as dense, so a 10oz container needs only about 8.6oz of wax by weight. You also leave room at the top for wick centering and aesthetics."
+  },
+  {
+    question: "How much extra wax should I prepare?",
+    answer: "Prepare 10-15% more wax than calculated. This accounts for: wax left in pour pot, topping off after cooling (sink holes), test candles, and spillage. For production runs, the overage percentage can decrease with experience."
+  },
+  {
+    question: "What fill level should I use?",
+    answer: "Standard is 85% fill, leaving room at top for second pour to fill sink holes. For single-pour waxes or if doing a top pour, you can fill to 90-95%. Leave at least 0.25\" below rim for safety and aesthetics."
+  },
+  {
+    question: "How do I measure container volume?",
+    answer: "Fill container with water to desired level, pour into measuring cup. Or calculate from dimensions: for cylinders, Volume = π × radius² × height. This calculator can compute volume from diameter and height."
+  },
+  {
+    question: "What wick size should I use?",
+    answer: "Wick size depends on container diameter: 2\" needs small wick (CD6-8), 3\" needs medium (CD10-12), 4\"+ often needs large or multiple wicks. Always test burn - this calculator provides starting recommendations only. Different waxes, fragrances, and dyes affect wick performance."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Candle Wax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Candle Wax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Candle Wax Calculator"
+    description="Calculate exactly how much wax you need for your containers. Works with any wax type and container size."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CandleWaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="Wax Density by Type">
+    <p>
+      Different waxes have different densities, meaning you need different weights
+      to fill the same container. Here's a comparison:
+    </p>
+    <div class="grid md:grid-cols-4 gap-4 mt-4">
+      <div class="bg-purple-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-purple-400 mb-2">Soy (464/444)</h4>
+        <div class="text-2xl font-bold text-purple-300">0.86</div>
+        <div class="text-xs text-[var(--color-subtle)]">oz wax per oz volume</div>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-blue-400 mb-2">Coconut</h4>
+        <div class="text-2xl font-bold text-blue-300">0.90</div>
+        <div class="text-xs text-[var(--color-subtle)]">oz wax per oz volume</div>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-green-400 mb-2">Paraffin</h4>
+        <div class="text-2xl font-bold text-green-300">0.90</div>
+        <div class="text-xs text-[var(--color-subtle)]">oz wax per oz volume</div>
+      </div>
+      <div class="bg-amber-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-amber-400 mb-2">Beeswax</h4>
+        <div class="text-2xl font-bold text-amber-300">0.96</div>
+        <div class="text-xs text-[var(--color-subtle)]">oz wax per oz volume</div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Common Container Sizes">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="space-y-2">
+        <h4 class="font-semibold text-[var(--color-text)]">Tins</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>4oz tin: ~3.4oz wax</li>
+          <li>6oz tin: ~5.1oz wax</li>
+          <li>8oz tin: ~6.8oz wax</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-[var(--color-text)]">Jars</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>9oz tumbler: ~7.7oz wax</li>
+          <li>12oz status: ~10oz wax</li>
+          <li>16oz mason: ~14oz wax</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-[var(--color-text)]">Multi-Wick</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>3-wick 14oz: ~12oz wax</li>
+          <li>3-wick 22oz: ~19oz wax</li>
+          <li>3-wick 36oz: ~31oz wax</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-[var(--color-subtle)]">
+      Based on 85% fill with soy wax (0.86 density). Adjust for your wax type.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Production Tips">
+    <ul class="list-disc list-inside space-y-2">
+      <li><strong>Weigh, don't measure:</strong> Always weigh wax for consistency - volume varies with temperature</li>
+      <li><strong>Account for shrinkage:</strong> Wax shrinks as it cools, often needing a second pour</li>
+      <li><strong>Batch your pours:</strong> Calculate total wax for all containers plus 10% overage</li>
+      <li><strong>Keep records:</strong> Note actual wax used vs. calculated for future accuracy</li>
+      <li><strong>Test everything:</strong> Different fragrances and dyes affect wax volume slightly</li>
+    </ul>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

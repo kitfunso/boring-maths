@@ -1,0 +1,1 @@
+export { CandleWaxCalculator } from './CandleWaxCalculator';

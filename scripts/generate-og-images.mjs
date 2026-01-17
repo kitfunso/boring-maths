@@ -91,6 +91,12 @@ const calculators = [
   { id: 'ibu-calculator', name: 'IBU Calculator', emoji: '🍻', color: '#d97706', tagline: 'Hop bitterness calculator' },
   { id: 'glaze-calculator', name: 'Glaze Calculator', emoji: '🎨', color: '#c2410c', tagline: 'Pottery glaze recipes' },
   { id: 'fragrance-calculator', name: 'Fragrance Calculator', emoji: '🕯️', color: '#a855f7', tagline: 'Candle fragrance load' },
+  // Niche Calculators - Phase 3
+  { id: 'cutting-time-calculator', name: 'Cutting Time Calculator', emoji: '⏱️', color: '#64748b', tagline: 'CNC machining time estimator' },
+  { id: 'ei-dosing-calculator', name: 'EI Dosing Calculator', emoji: '🌿', color: '#0ea5e9', tagline: 'Planted aquarium fertilizer' },
+  { id: 'mash-water-calculator', name: 'Mash Water Calculator', emoji: '🍺', color: '#d97706', tagline: 'All-grain brewing calculator' },
+  { id: 'kiln-cost-calculator', name: 'Kiln Cost Calculator', emoji: '🔥', color: '#c2410c', tagline: 'Pottery kiln electricity cost' },
+  { id: 'candle-wax-calculator', name: 'Candle Wax Calculator', emoji: '🕯️', color: '#a855f7', tagline: 'Container volume to wax weight' },
 ];
 
 // Font loading - use local font files from @fontsource/inter

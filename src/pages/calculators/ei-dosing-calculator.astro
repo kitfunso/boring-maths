@@ -1,0 +1,168 @@
+---
+/**
+ * EI Dosing Calculator Page
+ * Estimative Index fertilization for planted aquariums
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { EIDosingCalculator } from '../../components/calculators/EIDosingCalculator';
+
+const title = 'EI Dosing Calculator | Aquarium Fertilizer Calculator';
+const description = 'Free EI dosing calculator for planted aquariums. Calculate dry fertilizer amounts for Estimative Index method. Includes KNO3, KH2PO4, K2SO4, and trace element dosing.';
+const keywords = 'ei dosing calculator, estimative index, planted aquarium, aquarium fertilizer, kno3 dosing, planted tank, dry fertilizer, aquarium nutrients';
+const canonicalURL = '/calculators/ei-dosing-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'EI Dosing Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'CO2 Calculator',
+    description: 'Calculate CO2 from pH and KH.',
+    href: '/calculators/co2-calculator',
+    icon: 'beaker' as const,
+    color: 'cyan' as const,
+  },
+  {
+    title: 'Fish Stocking Calculator',
+    description: 'Calculate tank stocking levels.',
+    href: '/calculators/fish-stocking-calculator',
+    icon: 'scale' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is the Estimative Index (EI) method?",
+    answer: "EI is a fertilization method that provides excess nutrients to ensure plants never run out. You dose more than plants need during the week, then perform a large water change (50%) to reset nutrient levels. This eliminates deficiencies without precise testing."
+  },
+  {
+    question: "Do I need CO2 injection for EI dosing?",
+    answer: "Standard EI is designed for high-light, CO2-injected tanks where plants grow fast and need lots of nutrients. For low-light or non-CO2 tanks, use 'EI Low Light' which doses at half the standard rate. Too many nutrients without enough light/CO2 promotes algae."
+  },
+  {
+    question: "Why dose macros and micros on alternating days?",
+    answer: "Some believe phosphate can precipitate iron if dosed together, though this is debated. Alternating days is traditional EI practice. Many successful aquarists dose everything together without issues. The key is consistency and regular water changes."
+  },
+  {
+    question: "What's the difference between dry salts and liquid fertilizers?",
+    answer: "Dry salts (KNO3, KH2PO4, etc.) are much more economical - often 10-20x cheaper per dose than commercial liquids. They require a scale and mixing but last much longer. This calculator provides grams needed for dry salts."
+  },
+  {
+    question: "Why is my tank still getting algae with EI?",
+    answer: "Algae in EI tanks usually indicates a CO2 or light issue, not nutrients. Check CO2 levels (aim for 30ppm), ensure consistent CO2 during photoperiod, verify light isn't too intense, and maintain the 50% weekly water change. Also check for ammonia spikes."
+  },
+  {
+    question: "Can I use EI in a shrimp tank?",
+    answer: "Yes, but some shrimp are sensitive to copper in trace mixes. Use a shrimp-safe trace mix or dose at lower levels. The macros (NPK) are fine for shrimp. Many breeders successfully run planted shrimp tanks with modified EI dosing."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'EI Dosing Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="EI Dosing Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="EI Dosing Calculator"
+    description="Calculate Estimative Index fertilizer doses for your planted aquarium. Get exact amounts of dry salts for optimal plant growth."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <EIDosingCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding the EI Method">
+    <p>
+      The Estimative Index, developed by Tom Barr, takes a different approach
+      to planted tank fertilization: instead of testing and targeting specific
+      levels, you ensure plants always have more nutrients than they need.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">The EI Philosophy</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Overdose during the week:</strong> Nutrients never limit growth</li>
+      <li><strong>50% water change weekly:</strong> Resets levels, prevents accumulation</li>
+      <li><strong>No testing required:</strong> Levels stay in safe range by design</li>
+      <li><strong>Focus on CO2 and light:</strong> These become the limiting factors</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Standard EI Target Levels (ppm/week)">
+    <div class="grid md:grid-cols-4 gap-4">
+      <div class="bg-cyan-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-cyan-400 mb-2">NO₃ (Nitrate)</h4>
+        <div class="text-2xl font-bold text-cyan-300">20-30</div>
+        <div class="text-xs text-[var(--color-subtle)]">ppm per week</div>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-green-400 mb-2">PO₄ (Phosphate)</h4>
+        <div class="text-2xl font-bold text-green-300">2-3</div>
+        <div class="text-xs text-[var(--color-subtle)]">ppm per week</div>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-purple-400 mb-2">K (Potassium)</h4>
+        <div class="text-2xl font-bold text-purple-300">20-30</div>
+        <div class="text-xs text-[var(--color-subtle)]">ppm per week</div>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4 text-center">
+        <h4 class="font-semibold text-blue-400 mb-2">Fe (Iron)</h4>
+        <div class="text-2xl font-bold text-blue-300">0.5</div>
+        <div class="text-xs text-[var(--color-subtle)]">ppm per week</div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Dry Fertilizer Sources">
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="space-y-2">
+        <h4 class="font-semibold text-[var(--color-text)]">Macros</h4>
+        <ul class="list-disc list-inside space-y-1 text-[var(--color-subtle)]">
+          <li><strong>KNO₃:</strong> Nitrate and potassium</li>
+          <li><strong>KH₂PO₄:</strong> Phosphate and potassium</li>
+          <li><strong>K₂SO₄:</strong> Additional potassium if needed</li>
+          <li><strong>MgSO₄:</strong> Magnesium (Epsom salt)</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-[var(--color-text)]">Micros</h4>
+        <ul class="list-disc list-inside space-y-1 text-[var(--color-subtle)]">
+          <li><strong>CSM+B:</strong> Complete trace mix (Fe, Mn, Zn, B, Cu, Mo)</li>
+          <li><strong>DTPA Fe:</strong> Chelated iron for low pH tanks</li>
+          <li>Or commercial trace products</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-4 text-sm text-[var(--color-subtle)]">
+      Dry salts can be purchased from aquarium specialty vendors or hydroponics suppliers.
+      A few dollars worth of dry ferts can last a year for most tanks.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,174 @@
+---
+/**
+ * Mash Water Calculator Page
+ * Strike water and sparge calculations for all-grain brewing
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { MashWaterCalculator } from '../../components/calculators/MashWaterCalculator';
+
+const title = 'Mash Water Calculator | Strike Water Temperature Calculator';
+const description = 'Free mash water calculator for all-grain brewing. Calculate strike water temperature, sparge volumes, and total water needed. Supports batch and fly sparging.';
+const keywords = 'mash water calculator, strike water, sparge water, all grain brewing, homebrewing, mash temperature, brewing calculator, batch sparge';
+const canonicalURL = '/calculators/mash-water-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Mash Water Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol from gravity readings.',
+    href: '/calculators/abv-calculator',
+    icon: 'beaker' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'IBU Calculator',
+    description: 'Calculate hop bitterness.',
+    href: '/calculators/ibu-calculator',
+    icon: 'scale' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "Why is my mash temperature different than expected?",
+    answer: "Several factors affect final mash temp: grain temperature (cold grain from storage lowers temp more), mash tun pre-heating (or lack of), water temp measurement accuracy, and thermal mass of equipment. Always verify mash temp after mixing and adjust with hot/cold water if needed."
+  },
+  {
+    question: "What mash thickness should I use?",
+    answer: "Standard mash thickness is 1.25-1.5 qt/lb. Thinner mashes (1.5-2 qt/lb) improve enzyme activity and extraction but may need larger vessels. Thicker mashes (1-1.25 qt/lb) retain heat better and may improve body. BIAB typically uses 2+ qt/lb."
+  },
+  {
+    question: "Should I batch sparge or fly sparge?",
+    answer: "Batch sparging is simpler, faster, and nearly as efficient (85-90% vs 90-95% for fly). It requires less equipment and is more forgiving. Fly sparging extracts slightly more sugar but takes longer and requires careful flow rate control to prevent channeling and tannin extraction."
+  },
+  {
+    question: "What temperature should sparge water be?",
+    answer: "Heat sparge water to 168-170°F (75-77°C). This helps extract remaining sugars and improves flow. Avoid exceeding 175°F (80°C) which can extract harsh tannins from grain husks. The grain bed will cool the water as it flows through."
+  },
+  {
+    question: "How much water do grains absorb?",
+    answer: "Standard absorption is about 0.125 gallons (0.5L) per pound of grain. Fine crush absorbs less (~0.1 gal/lb), coarse crush absorbs more. BIAB with squeezing reduces absorption to 0.08-0.1 gal/lb. This calculator accounts for absorption in volume calculations."
+  },
+  {
+    question: "What's the strike water temperature formula?",
+    answer: "Strike Temp = (0.2/R) × (T2 - T1) + T2, where R is water:grain ratio (qt/lb), T1 is grain temp, T2 is target mash temp. The 0.2 represents the thermal mass ratio of grain to water. This calculator uses this formula."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Mash Water Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Mash Water Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Mash Water Calculator"
+    description="Calculate strike water temperature and sparge volumes for all-grain brewing. Hit your target mash temperature every time."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <MashWaterCalculator client:visible />
+  </section>
+
+  <ContentSection title="Mash Temperature Guide">
+    <p>
+      Mash temperature determines the fermentability of your wort. Lower temps
+      produce more fermentable sugars (drier beer), higher temps produce more
+      unfermentable sugars (fuller body, sweeter beer).
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Beta Amylase Rest</h4>
+        <div class="text-xl font-bold text-blue-300">145-150°F</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Produces fermentable sugars. Results in drier, more attenuated beer.
+          Good for session beers, lagers.
+        </div>
+      </div>
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">Balanced Range</h4>
+        <div class="text-xl font-bold text-amber-300">150-156°F</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Both enzymes active. Moderate body and fermentability.
+          Most common range for ales.
+        </div>
+      </div>
+      <div class="bg-red-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-red-400 mb-2">Alpha Amylase Rest</h4>
+        <div class="text-xl font-bold text-red-300">156-162°F</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Produces unfermentable dextrins. Fuller body, sweeter finish.
+          Good for stouts, Scotch ales.
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Sparging Methods">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="space-y-2">
+        <h4 class="font-semibold text-amber-400">Batch Sparge</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• Drain mash tun completely</li>
+          <li>• Add sparge water, stir</li>
+          <li>• Let settle 10 minutes</li>
+          <li>• Drain again</li>
+          <li>• Repeat if doing 2+ batches</li>
+          <li>• Simpler equipment</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-blue-400">Fly Sparge</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• Continuous water addition</li>
+          <li>• Match runoff with inflow</li>
+          <li>• Takes 60-90 minutes</li>
+          <li>• Slightly higher efficiency</li>
+          <li>• Requires sparge arm</li>
+          <li>• Traditional method</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-green-400">No Sparge (BIAB)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• All water in mash</li>
+          <li>• Lift and drain bag</li>
+          <li>• Squeeze optional</li>
+          <li>• Lower efficiency (~70%)</li>
+          <li>• Use more grain</li>
+          <li>• Simplest method</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
