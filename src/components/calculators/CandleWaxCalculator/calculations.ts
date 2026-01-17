@@ -17,10 +17,11 @@ function calculateContainerVolume(
   ovalWidth: number = 0
 ): number {
   switch (shape) {
-    case 'cylinder':
+    case 'cylinder': {
       // V = πr²h
       const radius = diameter / 2;
       return Math.PI * radius * radius * height;
+    }
     case 'square':
       // V = s²h (using diameter as side length)
       return diameter * diameter * height;
