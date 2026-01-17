@@ -1,0 +1,145 @@
+---
+/**
+ * ABV Calculator Page
+ * Calculate alcohol content from gravity readings
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { ABVCalculator } from '../../components/calculators/ABVCalculator';
+
+const title = 'ABV Calculator | Alcohol By Volume from Gravity';
+const description = 'Free ABV calculator for homebrewing beer, wine, mead, and cider. Calculate alcohol content from original and final gravity readings with attenuation.';
+const keywords = 'abv calculator, alcohol calculator, gravity calculator, homebrew calculator, beer abv, wine abv, mead calculator, original gravity, final gravity';
+const canonicalURL = '/calculators/abv-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'ABV Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate daily calorie needs.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How do I measure original gravity (OG)?",
+    answer: "Use a hydrometer or refractometer on cooled wort/must before adding yeast. For hydrometers, ensure the sample is at the calibration temperature (usually 60°F or 68°F). Take the reading at the bottom of the meniscus."
+  },
+  {
+    question: "When should I take final gravity (FG)?",
+    answer: "Take FG when fermentation is complete - typically when gravity readings are stable for 2-3 consecutive days. For beer, this is usually 1-2 weeks; wine and mead may take longer. Don't rush this step."
+  },
+  {
+    question: "What does attenuation mean?",
+    answer: "Attenuation is the percentage of sugars consumed by yeast. Higher attenuation (75-85%) means a drier, less sweet finish. Lower attenuation (65-75%) leaves residual sweetness. Different yeast strains have different attenuation ranges."
+  },
+  {
+    question: "How accurate is the ABV formula?",
+    answer: "The standard formula (OG-FG)×131.25 is accurate within 0.1-0.2% for typical beers. For very high gravity brews (above 1.080 OG), more complex formulas may be slightly more accurate. Our calculator is sufficient for all practical purposes."
+  },
+  {
+    question: "Why is temperature correction important?",
+    answer: "Hydrometers are calibrated at specific temperatures (usually 60°F or 68°F). Warmer samples read lower than actual; colder samples read higher. Temperature correction ensures accurate gravity readings if you can't cool your sample."
+  },
+  {
+    question: "What's the difference between ABV and ABW?",
+    answer: "ABV (Alcohol By Volume) measures alcohol as a percentage of total volume. ABW (Alcohol By Weight) measures by mass. ABV is about 1.25× higher than ABW because alcohol is lighter than water. Most countries use ABV."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'ABV Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="ABV Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="ABV Calculator"
+    description="Calculate alcohol content from original and final gravity readings. Perfect for homebrewing beer, wine, mead, and cider."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <ABVCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Gravity Readings">
+    <p>
+      Specific gravity measures the density of liquid compared to water (1.000).
+      Sugary wort/must has higher gravity; as yeast converts sugar to alcohol,
+      gravity drops. The difference tells us how much alcohol was produced.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Typical Gravity Ranges</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Light Beer:</strong> OG 1.035-1.045, FG 1.006-1.012</li>
+      <li><strong>Standard Beer:</strong> OG 1.045-1.060, FG 1.008-1.015</li>
+      <li><strong>Strong Beer:</strong> OG 1.060-1.090+, FG 1.010-1.020</li>
+      <li><strong>Dry Wine:</strong> OG 1.080-1.100, FG 0.990-1.000</li>
+      <li><strong>Mead:</strong> OG 1.090-1.140, FG varies by style</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="ABV by Style">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">Beer Styles</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Session/Light: 3-4.5%</li>
+          <li>Pale Ale/Lager: 4.5-5.5%</li>
+          <li>IPA: 5.5-7.5%</li>
+          <li>Stout: 4-8%</li>
+          <li>Belgian/Imperial: 7-12%+</li>
+        </ul>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">Wine & Mead</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Dry Wine: 11-14%</li>
+          <li>Sweet Wine: 8-12%</li>
+          <li>Port/Dessert: 15-20%</li>
+          <li>Dry Mead: 12-16%</li>
+          <li>Sweet Mead: 10-14%</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Cider & Seltzer</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Dry Cider: 5-7%</li>
+          <li>Sweet Cider: 4-6%</li>
+          <li>Hard Seltzer: 4-6%</li>
+          <li>Kombucha: 0.5-3%</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

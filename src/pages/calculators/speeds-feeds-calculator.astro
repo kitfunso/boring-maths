@@ -1,0 +1,139 @@
+---
+/**
+ * Speeds & Feeds Calculator Page
+ * Calculate optimal RPM and feed rate for CNC milling
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SpeedsFeedsCalculator } from '../../components/calculators/SpeedsFeedsCalculator';
+
+const title = 'Speeds & Feeds Calculator | CNC Milling RPM & Feed Rate';
+const description = 'Free speeds and feeds calculator for CNC milling. Calculate optimal RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
+const keywords = 'speeds and feeds calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, sfm calculator, milling calculator, machinist calculator';
+const canonicalURL = '/calculators/speeds-feeds-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Speeds & Feeds Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Reynolds Number',
+    description: 'Calculate flow regime for fluid dynamics.',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'bolt' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between measurement units.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is Surface Feet per Minute (SFM)?",
+    answer: "SFM is the speed at which the cutting edge of the tool moves across the workpiece surface. It's determined by the material being cut and the tool type. Aluminum can handle 800+ SFM, while stainless steel may need only 50-100 SFM."
+  },
+  {
+    question: "How do I calculate RPM from SFM?",
+    answer: "RPM = (SFM × 12) / (π × Tool Diameter). For example, cutting aluminum at 800 SFM with a 0.5\" endmill: RPM = (800 × 12) / (3.14159 × 0.5) = 6,112 RPM."
+  },
+  {
+    question: "What is chip load and why does it matter?",
+    answer: "Chip load is the thickness of material each flute removes per revolution. Too low causes rubbing and heat; too high risks tool breakage. Typical chip loads range from 0.001\" (hardened steel) to 0.010\" (softwood)."
+  },
+  {
+    question: "Should I use climb milling or conventional?",
+    answer: "Climb milling (cutter moves with feed direction) generally provides better surface finish and longer tool life. Conventional milling may be better for older machines with backlash or when roughing tough materials."
+  },
+  {
+    question: "How do I know if my feeds and speeds are wrong?",
+    answer: "Signs of incorrect parameters: excessive chatter/vibration, poor surface finish, discolored chips (too much heat), broken tools, or excessive tool wear. Blue chips indicate overheating - reduce speed or increase feed."
+  },
+  {
+    question: "What's the difference between roughing and finishing?",
+    answer: "Roughing uses higher chip loads and deeper cuts to remove material quickly. Finishing uses lower chip loads and shallower cuts for better surface finish. Our calculator adjusts SFM and chip load accordingly."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Speeds & Feeds Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Speeds & Feeds Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Speeds & Feeds Calculator"
+    description="Calculate optimal spindle speed (RPM) and feed rate for CNC milling. Supports metals, plastics, and wood."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SpeedsFeedsCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Speeds & Feeds">
+    <p>
+      Proper speeds and feeds are critical for tool life, surface finish, and productivity.
+      Running too slow wastes time; running too fast damages tools and workpieces.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Key Parameters</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>SFM:</strong> Surface speed determined by material and tool type</li>
+      <li><strong>RPM:</strong> Spindle revolutions - depends on SFM and tool diameter</li>
+      <li><strong>Feed Rate:</strong> Table movement speed (IPM or mm/min)</li>
+      <li><strong>Chip Load:</strong> Material thickness per tooth per revolution</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Material Guidelines">
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Metals</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li><strong>Aluminum:</strong> 600-1000 SFM, aggressive chip loads</li>
+          <li><strong>Mild Steel:</strong> 80-120 SFM, moderate chip loads</li>
+          <li><strong>Stainless:</strong> 40-80 SFM, maintain cutting pressure</li>
+          <li><strong>Titanium:</strong> 30-60 SFM, rigid setup required</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Non-Metals</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li><strong>Plastics:</strong> 500-800 SFM, sharp tools, high feeds</li>
+          <li><strong>Hardwood:</strong> 600-1000 SFM, chip evacuation critical</li>
+          <li><strong>Softwood:</strong> 800-1200 SFM, prevent burning</li>
+          <li><strong>Composites:</strong> 300-600 SFM, dust collection essential</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

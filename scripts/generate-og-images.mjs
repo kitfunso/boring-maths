@@ -79,6 +79,12 @@ const calculators = [
   { id: 'inflation-calculator', name: 'Inflation Calculator', emoji: '📊', color: '#f59e0b', tagline: 'Historic CPI 1920-2025' },
   { id: 'net-worth-calculator', name: 'Net Worth Calculator', emoji: '💎', color: '#22c55e', tagline: 'Assets minus liabilities' },
   { id: 'us-paycheck-calculator', name: 'US Paycheck Calculator', emoji: '💵', color: '#3b82f6', tagline: 'Take-home pay calculator' },
+  // Niche Calculators - Phase 1
+  { id: 'speeds-feeds-calculator', name: 'Speeds & Feeds', emoji: '⚙️', color: '#64748b', tagline: 'CNC machining calculations' },
+  { id: 'fish-stocking-calculator', name: 'Fish Stocking', emoji: '🐟', color: '#0ea5e9', tagline: 'Aquarium capacity guide' },
+  { id: 'abv-calculator', name: 'ABV Calculator', emoji: '🍺', color: '#d97706', tagline: 'Homebrew alcohol content' },
+  { id: 'clay-shrinkage-calculator', name: 'Clay Shrinkage', emoji: '🏺', color: '#c2410c', tagline: 'Pottery size calculator' },
+  { id: 'lye-calculator', name: 'Lye Calculator', emoji: '🧼', color: '#a855f7', tagline: 'Soap making saponification' },
 ];
 
 // Font loading - use local font files from @fontsource/inter

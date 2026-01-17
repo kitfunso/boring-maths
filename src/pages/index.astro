@@ -532,6 +532,52 @@ const calculators = [
     country: 'US',
     mostUsed: false,
   },
+  // Niche Calculators - Phase 1
+  {
+    title: 'Speeds & Feeds Calculator',
+    description: 'Calculate optimal RPM and feed rate for CNC milling with chip load and material data.',
+    href: '/calculators/speeds-feeds-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Machining',
+    mostUsed: false,
+  },
+  {
+    title: 'Fish Stocking Calculator',
+    description: 'Calculate how many fish your aquarium can hold based on tank size, filtration, and plants.',
+    href: '/calculators/fish-stocking-calculator',
+    icon: 'heart',
+    color: 'ocean',
+    category: 'Aquarium',
+    mostUsed: false,
+  },
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol content from original and final gravity for beer, wine, mead, and cider.',
+    href: '/calculators/abv-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Clay Shrinkage Calculator',
+    description: 'Calculate thrown vs fired pottery sizes for stoneware, porcelain, and earthenware clay bodies.',
+    href: '/calculators/clay-shrinkage-calculator',
+    icon: 'cube',
+    color: 'coral',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  {
+    title: 'Soap Lye Calculator',
+    description: 'Calculate NaOH or KOH amounts for cold process soap with superfat and water ratios.',
+    href: '/calculators/lye-calculator',
+    icon: 'layers',
+    color: 'violet',
+    category: 'Crafts',
+    mostUsed: false,
+  },
 ];
 
 
@@ -577,6 +623,10 @@ const categoryColors: Record<string, string> = {
   Finance: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
   Business: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
   Events: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  Machining: 'text-slate-400 bg-slate-500/10 border-slate-500/20',
+  Aquarium: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  Brewing: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  Crafts: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
   Home: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
   Everyday: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
   Health: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
@@ -599,7 +649,7 @@ const categoryColors: Record<string, string> = {
       <!-- Badge -->
       <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-2 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-        <span class="text-sm text-[var(--color-subtle)]">56 Free Calculators</span>
+        <span class="text-sm text-[var(--color-subtle)]">61 Free Calculators</span>
       </div>
 
       <!-- Main Headline -->
@@ -626,7 +676,7 @@ const categoryColors: Record<string, string> = {
       <!-- Quick Stats -->
       <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">56</div>
+          <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">61</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
         </div>
         <div class="text-center border-x border-white/10">

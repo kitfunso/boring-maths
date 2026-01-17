@@ -1,0 +1,144 @@
+---
+/**
+ * Lye Calculator Page
+ * Calculate lye and water for soap making
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { LyeCalculator } from '../../components/calculators/LyeCalculator';
+
+const title = 'Soap Lye Calculator | Cold Process Soap Making';
+const description = 'Free lye calculator for cold process soap making. Calculate NaOH or KOH amounts with superfat, water ratio, and multiple oils. SAP values included.';
+const keywords = 'lye calculator, soap calculator, saponification calculator, cold process soap, NaOH calculator, KOH calculator, superfat, soap recipe';
+const canonicalURL = '/calculators/lye-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Lye Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Unit Converter',
+    description: 'Convert between ounces and grams.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is superfat and why is it important?",
+    answer: "Superfat (or lye discount) is the percentage of oils left unsaponified in your soap. 5% superfat is standard for most soaps, providing moisturizing properties and a safety margin. Increase to 7-10% for facial soaps or shampoo bars."
+  },
+  {
+    question: "What's the difference between NaOH and KOH?",
+    answer: "Sodium Hydroxide (NaOH) makes solid bar soap. Potassium Hydroxide (KOH) makes liquid soap. KOH requires about 1.4× more lye than NaOH for the same amount of oils because of its molecular weight."
+  },
+  {
+    question: "What water to lye ratio should I use?",
+    answer: "Standard is 2:1 water to lye (33% lye solution). Less water speeds up trace and cure but runs hotter. More water slows trace but requires longer cure time. Beginners should stick with 2:1."
+  },
+  {
+    question: "How do I calculate lye for a custom oil?",
+    answer: "You need the SAP (saponification) value for that oil. Multiply oil weight by SAP value to get lye needed. Our calculator includes 25+ common oils with accurate SAP values. For exotic oils, check the supplier's data sheet."
+  },
+  {
+    question: "Why is my soap too soft or taking forever to cure?",
+    answer: "Soft soap usually means too many liquid oils (olive, sunflower) or not enough hard oils (coconut, palm, tallow). Aim for at least 30-40% hard oils. Cure time is typically 4-6 weeks; using less water can reduce this."
+  },
+  {
+    question: "Can I substitute oils in a recipe?",
+    answer: "You can, but you MUST recalculate the lye. Different oils have different SAP values. Never substitute oils without recalculating, or you'll end up with lye-heavy (caustic) or oil-heavy (soft, greasy) soap."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Lye Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Soap Lye Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Soap Lye Calculator"
+    description="Calculate precise lye and water amounts for cold process soap making. Supports NaOH (bar soap) and KOH (liquid soap)."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <LyeCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Saponification">
+    <p>
+      Saponification is the chemical reaction between lye (NaOH or KOH) and fats/oils
+      that produces soap. Each oil requires a specific amount of lye based on its
+      SAP (saponification) value.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Key Concepts</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>SAP Value:</strong> Grams of NaOH needed to saponify 1 gram of oil</li>
+      <li><strong>Superfat:</strong> Percentage of oils left unsaponified</li>
+      <li><strong>Lye Concentration:</strong> Lye ÷ (Lye + Water) × 100</li>
+      <li><strong>Trace:</strong> When soap batter thickens and emulsifies</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Popular Oil Combinations">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-violet-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-violet-400 mb-2">Basic Beginner</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Olive: 50%</li>
+          <li>Coconut: 25%</li>
+          <li>Palm: 25%</li>
+          <li>5% superfat</li>
+        </ul>
+      </div>
+      <div class="bg-pink-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-pink-400 mb-2">Luxury Bars</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Olive: 40%</li>
+          <li>Coconut: 20%</li>
+          <li>Shea Butter: 20%</li>
+          <li>Castor: 10%</li>
+          <li>Sweet Almond: 10%</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Vegan Alternative</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Olive: 40%</li>
+          <li>Coconut: 25%</li>
+          <li>Cocoa Butter: 15%</li>
+          <li>Rice Bran: 10%</li>
+          <li>Castor: 10%</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

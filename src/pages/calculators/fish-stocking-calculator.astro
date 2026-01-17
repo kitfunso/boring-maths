@@ -1,0 +1,142 @@
+---
+/**
+ * Fish Stocking Calculator Page
+ * Calculate optimal fish capacity for aquariums
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { FishStockingCalculator } from '../../components/calculators/FishStockingCalculator';
+
+const title = 'Fish Stocking Calculator | Aquarium Capacity Guide';
+const description = 'Free aquarium stocking calculator. Determine how many fish your tank can hold based on size, filtration, and plants. Better than the 1 inch per gallon rule.';
+const keywords = 'fish stocking calculator, aquarium calculator, fish tank calculator, how many fish, tank capacity, bioload calculator, aquarium stocking level';
+const canonicalURL = '/calculators/fish-stocking-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Fish Stocking Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Unit Converter',
+    description: 'Convert gallons, liters, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "Why is the '1 inch per gallon' rule outdated?",
+    answer: "The 1 inch per gallon rule doesn't account for fish body mass (a 10\" oscar has far more mass than ten 1\" tetras), activity level, waste production, or territorial behavior. We use 1 inch per 2 gallons as a safer baseline, adjusted for filtration and plants."
+  },
+  {
+    question: "How does filtration affect stocking capacity?",
+    answer: "Better filtration means more biological capacity to process fish waste. A canister filter or sump can handle 20-30% more bioload than a basic hang-on-back filter. Multiple filters or oversized filtration lets you stock more heavily."
+  },
+  {
+    question: "Do live plants increase stocking capacity?",
+    answer: "Yes! Plants absorb ammonia and nitrates, provide oxygen, and create beneficial bacteria surface area. A heavily planted tank can safely hold 10-20% more fish than an unplanted one with the same filtration."
+  },
+  {
+    question: "What fish should I count as 'adult size'?",
+    answer: "Always use adult size, not current size. A 1\" juvenile oscar will grow to 12-14\". Fish grow to their genetic potential if properly cared for - don't believe the myth that fish grow to their tank size."
+  },
+  {
+    question: "How many schooling fish should I keep together?",
+    answer: "Most schooling fish (tetras, rasboras, corydoras, barbs) need groups of at least 6 to feel secure and display natural behavior. Some species like rummy-nose tetras show better schooling in groups of 10+."
+  },
+  {
+    question: "What if I'm overstocked?",
+    answer: "If already overstocked: increase water change frequency (2-3x weekly), add more filtration, add live plants, and monitor water parameters closely with a test kit. Long-term, consider rehoming fish or upgrading tank size."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Fish Stocking Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Fish Stocking Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Fish Stocking Calculator"
+    description="Calculate how many fish your aquarium can safely hold. Uses modern stocking guidelines that account for filtration and plants."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <FishStockingCalculator client:visible />
+  </section>
+
+  <ContentSection title="Better Than 1 Inch Per Gallon">
+    <p>
+      The old "1 inch of fish per gallon" rule is dangerously oversimplified.
+      A 10-gallon tank can't hold a 10" oscar! Our calculator uses 1 inch per 2 gallons
+      as a baseline, then adjusts for your specific setup.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Factors That Affect Capacity</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Surface Area:</strong> Long, wide tanks support more fish than tall tanks</li>
+      <li><strong>Filtration:</strong> Good filtration increases biological capacity</li>
+      <li><strong>Plants:</strong> Live plants help process waste</li>
+      <li><strong>Fish Type:</strong> Messy fish (goldfish, plecos) need more space</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Stocking Guidelines by Tank Size">
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-cyan-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-cyan-400 mb-2">Small (10-20 gal)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Betta + small cleanup crew</li>
+          <li>School of nano fish (6-10)</li>
+          <li>Shrimp colony</li>
+          <li>Single dwarf gourami + corys</li>
+        </ul>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Medium (30-55 gal)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Community with multiple schools</li>
+          <li>Angelfish pair</li>
+          <li>Fancy goldfish (2-3)</li>
+          <li>Dwarf cichlid community</li>
+        </ul>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">Large (75+ gal)</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Oscar or other large cichlids</li>
+          <li>Discus group</li>
+          <li>Large community</li>
+          <li>Pond fish (koi need ponds)</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
