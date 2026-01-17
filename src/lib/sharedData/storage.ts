@@ -4,11 +4,7 @@
  * Handles localStorage persistence with graceful fallbacks.
  */
 
-import type {
-  StoredSharedData,
-  SharedCalculatorData,
-  SharedDataEntry,
-} from './types';
+import type { StoredSharedData, SharedCalculatorData, SharedDataEntry } from './types';
 
 const STORAGE_KEY = 'boring-math-shared-data';
 const CURRENT_VERSION = 1;
@@ -137,9 +133,7 @@ export function getField<K extends keyof SharedCalculatorData>(
   const stored = readStoredData();
   if (!stored) return undefined;
 
-  return stored.data[key] as
-    | SharedDataEntry<NonNullable<SharedCalculatorData[K]>>
-    | undefined;
+  return stored.data[key] as SharedDataEntry<NonNullable<SharedCalculatorData[K]>> | undefined;
 }
 
 /**

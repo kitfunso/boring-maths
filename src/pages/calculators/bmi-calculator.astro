@@ -11,15 +11,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import BMICalculator from '../../components/calculators/BMICalculator/BMICalculator';
 
 const title = 'BMI Calculator | Check Your Body Mass Index for Adults';
-const description = 'Free BMI calculator for adults. Check if you\'re underweight, normal, overweight, or obese. Works with metric (kg/cm) and imperial (lbs/ft) units.';
-const keywords = 'bmi calculator, body mass index calculator, am I overweight, healthy weight calculator, bmi chart, bmi for adults, weight for height calculator';
+const description =
+  "Free BMI calculator for adults. Check if you're underweight, normal, overweight, or obese. Works with metric (kg/cm) and imperial (lbs/ft) units.";
+const keywords =
+  'bmi calculator, body mass index calculator, am I overweight, healthy weight calculator, bmi chart, bmi for adults, weight for height calculator';
 const canonicalURL = '/calculators/bmi-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'BMI Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'BMI Calculator' }];
 
 const relatedCalculators = [
   {
@@ -40,32 +39,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is BMI and how is it calculated?",
-    answer: "Body Mass Index (BMI) is calculated by dividing your weight in kilograms by your height in meters squared (kg/m²). It's a simple screening tool to categorize weight status but doesn't directly measure body fat."
+    question: 'What is BMI and how is it calculated?',
+    answer:
+      "Body Mass Index (BMI) is calculated by dividing your weight in kilograms by your height in meters squared (kg/m²). It's a simple screening tool to categorize weight status but doesn't directly measure body fat.",
   },
   {
-    question: "What are the BMI categories?",
-    answer: "BMI categories are: Underweight (below 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), and Obese (30 and above). These ranges are the same for all adults regardless of age or gender."
+    question: 'What are the BMI categories?',
+    answer:
+      'BMI categories are: Underweight (below 18.5), Normal weight (18.5-24.9), Overweight (25-29.9), and Obese (30 and above). These ranges are the same for all adults regardless of age or gender.',
   },
   {
-    question: "Is BMI accurate for everyone?",
-    answer: "BMI has limitations. It doesn't account for muscle mass, bone density, or body composition. Athletes may have a high BMI but low body fat, while older adults may have normal BMI but high body fat."
+    question: 'Is BMI accurate for everyone?',
+    answer:
+      "BMI has limitations. It doesn't account for muscle mass, bone density, or body composition. Athletes may have a high BMI but low body fat, while older adults may have normal BMI but high body fat.",
   },
   {
-    question: "What is a healthy BMI range?",
-    answer: "A healthy BMI is generally between 18.5 and 24.9. However, optimal weight depends on many factors including age, muscle mass, and overall health. Consult a healthcare provider for personalized guidance."
+    question: 'What is a healthy BMI range?',
+    answer:
+      'A healthy BMI is generally between 18.5 and 24.9. However, optimal weight depends on many factors including age, muscle mass, and overall health. Consult a healthcare provider for personalized guidance.',
   },
   {
-    question: "How do I calculate BMI in pounds and inches?",
-    answer: "The formula for imperial units is: BMI = (weight in pounds × 703) ÷ (height in inches)². For example, a person who is 5'10\" (70 inches) and weighs 160 lbs has a BMI of (160 × 703) ÷ (70 × 70) = 23.0, which is in the normal range."
+    question: 'How do I calculate BMI in pounds and inches?',
+    answer:
+      'The formula for imperial units is: BMI = (weight in pounds × 703) ÷ (height in inches)². For example, a person who is 5\'10" (70 inches) and weighs 160 lbs has a BMI of (160 × 703) ÷ (70 × 70) = 23.0, which is in the normal range.',
   },
   {
-    question: "What should I weigh for my height?",
-    answer: "For a normal BMI (18.5-24.9), healthy weight ranges vary by height. At 5'4\" it's 108-145 lbs, at 5'8\" it's 125-163 lbs, at 6'0\" it's 137-183 lbs. Our calculator shows your specific healthy weight range based on your height."
+    question: 'What should I weigh for my height?',
+    answer:
+      "For a normal BMI (18.5-24.9), healthy weight ranges vary by height. At 5'4\" it's 108-145 lbs, at 5'8\" it's 125-163 lbs, at 6'0\" it's 137-183 lbs. Our calculator shows your specific healthy weight range based on your height.",
   },
   {
-    question: "Is BMI different for men and women?",
-    answer: "The BMI formula and categories are the same for men and women. However, women typically have more body fat than men at the same BMI. For a more accurate picture, consider body fat percentage or waist circumference alongside BMI."
+    question: 'Is BMI different for men and women?',
+    answer:
+      'The BMI formula and categories are the same for men and women. However, women typically have more body fat than men at the same BMI. For a more accurate picture, consider body fat percentage or waist circumference alongside BMI.',
   },
 ];
 
@@ -103,32 +109,32 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Select your preferred <strong>unit system</strong> - metric (kilograms and
-      centimeters) or imperial (pounds and feet/inches).
+      Select your preferred <strong>unit system</strong> - metric (kilograms and centimeters) or imperial
+      (pounds and feet/inches).
     </p>
     <p>
-      Enter your <strong>height</strong> accurately. For imperial, enter feet and
-      inches separately. Stand straight against a wall for the most accurate measurement.
+      Enter your <strong>height</strong> accurately. For imperial, enter feet and inches separately. Stand
+      straight against a wall for the most accurate measurement.
     </p>
     <p>
-      Enter your <strong>weight</strong>. For best results, weigh yourself in the
-      morning before eating, wearing minimal clothing.
+      Enter your <strong>weight</strong>. For best results, weigh yourself in the morning before
+      eating, wearing minimal clothing.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      Your <strong>BMI score</strong> is shown with its corresponding health category.
-      This gives you a general indication of whether your weight is appropriate for your height.
+      Your <strong>BMI score</strong> is shown with its corresponding health category. This gives you
+      a general indication of whether your weight is appropriate for your height.
     </p>
     <p>
-      The <strong>healthy weight range</strong> shows the weight range that would
-      give you a normal BMI. This can help set realistic weight goals.
+      The <strong>healthy weight range</strong> shows the weight range that would give you a normal BMI.
+      This can help set realistic weight goals.
     </p>
     <p>
-      Remember that BMI is just one indicator of health. <strong>Body composition</strong>,
-      fitness level, and other factors are equally important. Consult a healthcare
-      provider for a complete health assessment.
+      Remember that BMI is just one indicator of health. <strong>Body composition</strong>, fitness
+      level, and other factors are equally important. Consult a healthcare provider for a complete
+      health assessment.
     </p>
   </ContentSection>
 

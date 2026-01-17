@@ -37,7 +37,7 @@ export const OILS: { value: string; label: string; sapNaOH: number; category: st
   { value: 'coconut', label: 'Coconut Oil (76°)', sapNaOH: 0.178, category: 'Base Oils' },
   { value: 'palm', label: 'Palm Oil', sapNaOH: 0.141, category: 'Base Oils' },
   { value: 'lard', label: 'Lard', sapNaOH: 0.138, category: 'Base Oils' },
-  { value: 'tallow', label: 'Beef Tallow', sapNaOH: 0.140, category: 'Base Oils' },
+  { value: 'tallow', label: 'Beef Tallow', sapNaOH: 0.14, category: 'Base Oils' },
   { value: 'castor', label: 'Castor Oil', sapNaOH: 0.128, category: 'Base Oils' },
   // Liquid Oils
   { value: 'sunflower', label: 'Sunflower Oil', sapNaOH: 0.134, category: 'Liquid Oils' },

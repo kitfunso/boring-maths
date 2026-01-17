@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BORING MATH - Premium Dark Editorial Theme
@@ -35,7 +35,12 @@
   --color-rose: #fb7185;
 
   /* Gradients */
-  --gradient-hero: linear-gradient(135deg, var(--color-void) 0%, var(--color-charcoal) 50%, var(--color-night) 100%);
+  --gradient-hero: linear-gradient(
+    135deg,
+    var(--color-void) 0%,
+    var(--color-charcoal) 50%,
+    var(--color-night) 100%
+  );
   --gradient-card: linear-gradient(145deg, rgba(30, 30, 46, 0.8) 0%, rgba(20, 20, 32, 0.9) 100%);
   --gradient-glow: radial-gradient(ellipse at center, var(--color-accent-glow) 0%, transparent 70%);
   --gradient-mesh:
@@ -81,7 +86,9 @@
    Base Styles
    ═══════════════════════════════════════════════════════════════════════════ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -136,7 +143,12 @@ body {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 400;
   line-height: 1.1;
@@ -238,7 +250,7 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transform: translateX(-100%);
   transition: transform 0.6s var(--ease-out-expo);
 }
@@ -324,13 +336,13 @@ select::-webkit-scrollbar-thumb {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Hide native spin buttons - we'll use custom ones */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -341,13 +353,13 @@ input[type="number"] {
   align-items: stretch;
 }
 
-.spin-input-wrapper input[type="number"] {
+.spin-input-wrapper input[type='number'] {
   padding-right: 2.5rem;
   -moz-appearance: textfield;
 }
 
-.spin-input-wrapper input[type="number"]::-webkit-inner-spin-button,
-.spin-input-wrapper input[type="number"]::-webkit-outer-spin-button {
+.spin-input-wrapper input[type='number']::-webkit-inner-spin-button,
+.spin-input-wrapper input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   display: none;
 }
@@ -412,13 +424,25 @@ input[type="number"] {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
 }
 
 @keyframes slide-up {
@@ -444,8 +468,12 @@ input[type="number"] {
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scale-in {
@@ -460,20 +488,38 @@ input[type="number"] {
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes blob {
-  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
-  75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
 }
 
 /* Animation Utilities */
@@ -503,12 +549,18 @@ input[type="number"] {
 
 /* Spinner Animations */
 @keyframes spinner-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes spinner-bounce {
-  0%, 80%, 100% {
+  0%,
+  80%,
+  100% {
     transform: scale(0.6);
     opacity: 0.5;
   }
@@ -519,7 +571,8 @@ input[type="number"] {
 }
 
 @keyframes spinner-bars {
-  0%, 100% {
+  0%,
+  100% {
     height: 40%;
     opacity: 0.5;
   }
@@ -541,14 +594,30 @@ input[type="number"] {
 }
 
 /* Stagger delays */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-.delay-600 { animation-delay: 600ms; }
-.delay-700 { animation-delay: 700ms; }
-.delay-800 { animation-delay: 800ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
+.delay-600 {
+  animation-delay: 600ms;
+}
+.delay-700 {
+  animation-delay: 700ms;
+}
+.delay-800 {
+  animation-delay: 800ms;
+}
 
 /* Initial state for animated elements */
 .animate-on-scroll {
@@ -561,14 +630,24 @@ input[type="number"] {
 
 /* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-ocean) 50%, var(--color-violet) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-ocean) 50%,
+    var(--color-violet) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-warm {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-amber) 50%, var(--color-coral) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-amber) 50%,
+    var(--color-coral) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -594,7 +673,13 @@ input[type="number"] {
   content: '';
   position: absolute;
   inset: -2px;
-  background: linear-gradient(45deg, var(--color-accent), var(--color-ocean), var(--color-violet), var(--color-accent));
+  background: linear-gradient(
+    45deg,
+    var(--color-accent),
+    var(--color-ocean),
+    var(--color-violet),
+    var(--color-accent)
+  );
   background-size: 400% 400%;
   border-radius: inherit;
   z-index: -1;
@@ -634,7 +719,7 @@ input[type="number"] {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .bento-card:hover {
@@ -661,12 +746,24 @@ input[type="number"] {
 }
 
 /* Color variants for icons */
-.icon-blue { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); }
-.icon-green { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
-.icon-purple { background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); }
-.icon-yellow { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); }
-.icon-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
-.icon-accent { background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dim) 100%); }
+.icon-blue {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+.icon-green {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+.icon-purple {
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+}
+.icon-yellow {
+  background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+}
+.icon-red {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+.icon-accent {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dim) 100%);
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Responsive Utilities

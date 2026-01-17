@@ -3,7 +3,13 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateABV, formatABV, formatPercent, getABVCategory, getAttenuationRating } from './calculations';
+import {
+  calculateABV,
+  formatABV,
+  formatPercent,
+  getABVCategory,
+  getAttenuationRating,
+} from './calculations';
 import {
   getDefaultInputs,
   BEVERAGE_TYPES,
@@ -47,7 +53,7 @@ export default function ABVCalculator() {
   const abvCategory = getABVCategory(result.abv);
   const attenuationRating = getAttenuationRating(result.apparentAttenuation);
 
-  const stylesByType = COMMON_STYLES.filter(s => s.type === inputs.beverageType);
+  const stylesByType = COMMON_STYLES.filter((s) => s.type === inputs.beverageType);
 
   return (
     <ThemeProvider defaultColor="amber">
@@ -62,7 +68,7 @@ export default function ABVCalculator() {
           <div className="mb-6">
             <Label>Beverage Type</Label>
             <ButtonGroup
-              options={BEVERAGE_TYPES.map(b => ({ value: b.value, label: b.label }))}
+              options={BEVERAGE_TYPES.map((b) => ({ value: b.value, label: b.label }))}
               value={inputs.beverageType}
               onChange={(value) => updateInput('beverageType', value as BeverageType)}
               size="sm"
@@ -100,8 +106,8 @@ export default function ABVCalculator() {
                   type="number"
                   value={inputs.originalGravity}
                   onChange={(value) => updateInput('originalGravity', Number(value))}
-                  min={0.990}
-                  max={1.200}
+                  min={0.99}
+                  max={1.2}
                   step={0.001}
                 />
                 <div className="text-xs text-[var(--color-muted)] mt-1">
@@ -115,8 +121,8 @@ export default function ABVCalculator() {
                   type="number"
                   value={inputs.finalGravity}
                   onChange={(value) => updateInput('finalGravity', Number(value))}
-                  min={0.980}
-                  max={1.100}
+                  min={0.98}
+                  max={1.1}
                   step={0.001}
                 />
                 <div className="text-xs text-[var(--color-muted)] mt-1">
@@ -133,10 +139,14 @@ export default function ABVCalculator() {
                 type="checkbox"
                 id="tempCorrection"
                 checked={inputs.temperatureCorrection}
-                onChange={(e) => updateInput('temperatureCorrection', (e.target as HTMLInputElement).checked)}
+                onChange={(e) =>
+                  updateInput('temperatureCorrection', (e.target as HTMLInputElement).checked)
+                }
                 className="w-4 h-4 rounded"
               />
-              <Label htmlFor="tempCorrection" className="mb-0">Enable Temperature Correction</Label>
+              <Label htmlFor="tempCorrection" className="mb-0">
+                Enable Temperature Correction
+              </Label>
             </div>
 
             {inputs.temperatureCorrection && (
@@ -181,11 +191,7 @@ export default function ABVCalculator() {
 
             {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
-              <MetricCard
-                label="ABW"
-                value={formatPercent(result.abw)}
-                sublabel="by weight"
-              />
+              <MetricCard label="ABW" value={formatPercent(result.abw)} sublabel="by weight" />
               <MetricCard
                 label="Attenuation"
                 value={formatPercent(result.apparentAttenuation)}
@@ -233,7 +239,9 @@ export default function ABVCalculator() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Apparent Attenuation</span>
-                    <span className={attenuationRating.color}>{formatPercent(result.apparentAttenuation)}</span>
+                    <span className={attenuationRating.color}>
+                      {formatPercent(result.apparentAttenuation)}
+                    </span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                     <div
@@ -266,16 +274,16 @@ export default function ABVCalculator() {
                 ABV = (OG - FG) × 131.25
               </div>
               <div className="text-xs text-[var(--color-muted)] mt-2">
-                This is the standard homebrewing formula. For very high gravity brews,
-                more complex formulas may be slightly more accurate.
+                This is the standard homebrewing formula. For very high gravity brews, more complex
+                formulas may be slightly more accurate.
               </div>
             </div>
 
             {/* Tips */}
             <Alert variant="tip" title="Brewing Tips:">
-              Take OG reading after cooling wort to below 80°F. Wait until fermentation
-              is complete (stable FG for 2-3 days) before taking final reading.
-              Most hydrometers are calibrated at 60°F or 68°F - check yours.
+              Take OG reading after cooling wort to below 80°F. Wait until fermentation is complete
+              (stable FG for 2-3 days) before taking final reading. Most hydrometers are calibrated
+              at 60°F or 68°F - check yours.
             </Alert>
 
             {/* Share */}

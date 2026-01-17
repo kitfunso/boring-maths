@@ -25,47 +25,55 @@ const { title, products, calculatorName = 'unknown' } = Astro.props;
 ---
 
 <aside class="glass rounded-2xl p-6 my-8">
-  <p class="text-micro text-[var(--color-accent)] mb-3">
-    Recommended Tools
-  </p>
+  <p class="text-micro text-[var(--color-accent)] mb-3">Recommended Tools</p>
   <h3 class="text-lg font-display text-[var(--color-cream)] mb-4">{title}</h3>
 
   <div class="space-y-3">
-    {products.map((product) => (
-      <a
-        href={product.url}
-        target="_blank"
-        rel="nofollow sponsored noopener"
-        class="affiliate-link block bg-[var(--color-night)] rounded-xl p-4 border border-white/5
+    {
+      products.map((product) => (
+        <a
+          href={product.url}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          class="affiliate-link block bg-[var(--color-night)] rounded-xl p-4 border border-white/5
                hover:border-[var(--color-accent)]/30 hover:bg-[var(--color-charcoal)] transition-all duration-300"
-        data-partner={product.partner || product.name.toLowerCase().replace(/\s+/g, '-')}
-        data-calculator={calculatorName}
-      >
-        <div class="flex items-center justify-between gap-4">
-          <div class="flex-1 min-w-0">
-            <h4 class="font-medium text-[var(--color-cream)] truncate">{product.name}</h4>
-            <p class="text-sm text-[var(--color-subtle)] mt-1 line-clamp-2">{product.description}</p>
+          data-partner={product.partner || product.name.toLowerCase().replace(/\s+/g, '-')}
+          data-calculator={calculatorName}
+        >
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-medium text-[var(--color-cream)] truncate">{product.name}</h4>
+              <p class="text-sm text-[var(--color-subtle)] mt-1 line-clamp-2">
+                {product.description}
+              </p>
+            </div>
+            <span class="text-[var(--color-accent)] font-medium text-sm whitespace-nowrap flex items-center gap-1">
+              {product.cta || 'Learn More'}
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
           </div>
-          <span class="text-[var(--color-accent)] font-medium text-sm whitespace-nowrap flex items-center gap-1">
-            {product.cta || 'Learn More'}
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </span>
-        </div>
-      </a>
-    ))}
+        </a>
+      ))
+    }
   </div>
 
   <p class="text-xs text-[var(--color-muted)] mt-4">
     * We may earn a commission if you sign up through these links.
-    <a href="/affiliate-disclosure" class="text-[var(--color-accent)] hover:underline">Learn more</a>
+    <a href="/affiliate-disclosure" class="text-[var(--color-accent)] hover:underline">Learn more</a
+    >
   </p>
 </aside>
 
 <script>
   // Track affiliate link clicks
-  document.querySelectorAll('.affiliate-link').forEach(link => {
+  document.querySelectorAll('.affiliate-link').forEach((link) => {
     link.addEventListener('click', () => {
       const partner = link.getAttribute('data-partner');
       const calculator = link.getAttribute('data-calculator');

@@ -9,20 +9,20 @@ export function calculateLye(inputs: LyeCalculatorInputs): LyeCalculatorResult {
   const { lyeType, superfatPercent, waterRatio, unit, oils } = inputs;
 
   // Get lye multiplier (KOH needs more than NaOH)
-  const lyeMultiplier = LYE_TYPES.find(l => l.value === lyeType)?.multiplier || 1.0;
+  const lyeMultiplier = LYE_TYPES.find((l) => l.value === lyeType)?.multiplier || 1.0;
 
   // Convert to grams for calculation (then convert back if needed)
   const gramsPerOz = 28.3495;
-  const toGrams = (weight: number) => unit === 'oz' ? weight * gramsPerOz : weight;
-  const fromGrams = (weight: number) => unit === 'oz' ? weight / gramsPerOz : weight;
+  const toGrams = (weight: number) => (unit === 'oz' ? weight * gramsPerOz : weight);
+  const fromGrams = (weight: number) => (unit === 'oz' ? weight / gramsPerOz : weight);
 
   // Calculate total oil weight
   const totalOilWeight = oils.reduce((sum, o) => sum + o.weight, 0);
   const totalOilWeightGrams = toGrams(totalOilWeight);
 
   // Calculate lye needed for each oil
-  const oilBreakdown = oils.map(oilEntry => {
-    const oilData = OILS.find(o => o.value === oilEntry.oil);
+  const oilBreakdown = oils.map((oilEntry) => {
+    const oilData = OILS.find((o) => o.value === oilEntry.oil);
     const sapValue = oilData?.sapNaOH || 0.135;
     const weightGrams = toGrams(oilEntry.weight);
     const lyeNeededGrams = weightGrams * sapValue * lyeMultiplier;
@@ -40,7 +40,7 @@ export function calculateLye(inputs: LyeCalculatorInputs): LyeCalculatorResult {
   const totalLyeBeforeSF = oilBreakdown.reduce((sum, o) => sum + o.lyeNeeded, 0);
 
   // Apply superfat reduction
-  const superfatMultiplier = 1 - (superfatPercent / 100);
+  const superfatMultiplier = 1 - superfatPercent / 100;
   const lyeAmount = totalLyeBeforeSF * superfatMultiplier;
 
   // Calculate water
@@ -86,13 +86,13 @@ export function getRecipeWarnings(oils: { name: string; percent: number }[]): st
   const warnings: string[] = [];
 
   // Check coconut oil percentage
-  const coconut = oils.find(o => o.name.toLowerCase().includes('coconut'));
+  const coconut = oils.find((o) => o.name.toLowerCase().includes('coconut'));
   if (coconut && coconut.percent > 30) {
     warnings.push('Coconut oil over 30% may be drying. Consider using superfat of 15%+.');
   }
 
   // Check olive oil for Castile
-  const olive = oils.find(o => o.name.toLowerCase().includes('olive'));
+  const olive = oils.find((o) => o.name.toLowerCase().includes('olive'));
   if (olive && olive.percent === 100) {
     warnings.push('100% Olive oil (Castile) soap needs 6-12 months cure time.');
   }
@@ -100,7 +100,7 @@ export function getRecipeWarnings(oils: { name: string; percent: number }[]): st
   // Check for hard oil balance
   const hardOils = ['coconut', 'palm', 'tallow', 'lard', 'cocoa', 'babassu'];
   const hardOilPercent = oils.reduce((sum, o) => {
-    const isHard = hardOils.some(h => o.name.toLowerCase().includes(h));
+    const isHard = hardOils.some((h) => o.name.toLowerCase().includes(h));
     return sum + (isHard ? o.percent : 0);
   }, 0);
 

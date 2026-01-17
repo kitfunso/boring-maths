@@ -20,10 +20,7 @@ export interface DataExportIndicatorProps {
  * <DataExportIndicator visible={sharedData.justExported} />
  * ```
  */
-export function DataExportIndicator({
-  visible,
-  className = '',
-}: DataExportIndicatorProps) {
+export function DataExportIndicator({ visible, className = '' }: DataExportIndicatorProps) {
   if (!visible) return null;
 
   return (
@@ -32,18 +29,8 @@ export function DataExportIndicator({
       role="status"
       aria-live="polite"
     >
-      <svg
-        className="w-4 h-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 13l4 4L19 7"
-        />
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
       </svg>
       <span>Saved for other calculators</span>
     </div>

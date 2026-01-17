@@ -5,7 +5,13 @@
  * Updated for 2024/25 rates
  */
 
-import type { UKStampDutyInputs, UKStampDutyResult, TaxBand, PropertyLocation, BuyerType } from './types';
+import type {
+  UKStampDutyInputs,
+  UKStampDutyResult,
+  TaxBand,
+  PropertyLocation,
+  BuyerType,
+} from './types';
 
 // =============================================================================
 // ENGLAND & NORTHERN IRELAND - SDLT BANDS (from April 2025)
@@ -14,7 +20,7 @@ import type { UKStampDutyInputs, UKStampDutyResult, TaxBand, PropertyLocation, B
 const SDLT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 250000, rate: 0 },
   { from: 250001, to: 925000, rate: 0.05 },
-  { from: 925001, to: 1500000, rate: 0.10 },
+  { from: 925001, to: 1500000, rate: 0.1 },
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
@@ -34,7 +40,7 @@ const LBTT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 145000, rate: 0 },
   { from: 145001, to: 250000, rate: 0.02 },
   { from: 250001, to: 325000, rate: 0.05 },
-  { from: 325001, to: 750000, rate: 0.10 },
+  { from: 325001, to: 750000, rate: 0.1 },
   { from: 750001, to: Infinity, rate: 0.12 },
 ];
 
@@ -42,7 +48,7 @@ const LBTT_FIRST_TIME: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 175000, rate: 0 },
   { from: 175001, to: 250000, rate: 0.02 },
   { from: 250001, to: 325000, rate: 0.05 },
-  { from: 325001, to: 750000, rate: 0.10 },
+  { from: 325001, to: 750000, rate: 0.1 },
   { from: 750001, to: Infinity, rate: 0.12 },
 ];
 
@@ -54,7 +60,7 @@ const LTT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 225000, rate: 0 },
   { from: 225001, to: 400000, rate: 0.06 },
   { from: 400001, to: 750000, rate: 0.075 },
-  { from: 750001, to: 1500000, rate: 0.10 },
+  { from: 750001, to: 1500000, rate: 0.1 },
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
@@ -75,7 +81,11 @@ const NON_RESIDENT_SURCHARGE = 0.02; // 2%
 // CALCULATION FUNCTIONS
 // =============================================================================
 
-function getBands(location: PropertyLocation, buyerType: BuyerType, propertyPrice: number): Array<{ from: number; to: number; rate: number }> {
+function getBands(
+  location: PropertyLocation,
+  buyerType: BuyerType,
+  propertyPrice: number
+): Array<{ from: number; to: number; rate: number }> {
   if (location === 'england') {
     if (buyerType === 'first-time' && propertyPrice <= SDLT_FIRST_TIME_THRESHOLD) {
       return SDLT_FIRST_TIME;
@@ -120,9 +130,12 @@ function calculateBandTax(
 
 function getTaxName(location: PropertyLocation): string {
   switch (location) {
-    case 'england': return 'Stamp Duty (SDLT)';
-    case 'scotland': return 'LBTT';
-    case 'wales': return 'Land Transaction Tax (LTT)';
+    case 'england':
+      return 'Stamp Duty (SDLT)';
+    case 'scotland':
+      return 'LBTT';
+    case 'wales':
+      return 'Land Transaction Tax (LTT)';
   }
 }
 
@@ -161,9 +174,8 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
   const baseTaxBands = calculateBandTax(propertyPrice, bands, 0);
   const baseTax = baseTaxBands.reduce((sum, band) => sum + band.taxDue, 0);
 
-  const additionalPropertySurcharge = buyerType === 'additional'
-    ? Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE)
-    : 0;
+  const additionalPropertySurcharge =
+    buyerType === 'additional' ? Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE) : 0;
 
   const nonResidentSurcharge = isNonResident
     ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)
@@ -172,9 +184,12 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
   // Calculate first-time buyer saving
   let firstTimeBuyerSaving = 0;
   if (buyerType === 'first-time') {
-    const standardBands = location === 'england' ? SDLT_STANDARD
-      : location === 'scotland' ? LBTT_STANDARD
-      : LTT_STANDARD;
+    const standardBands =
+      location === 'england'
+        ? SDLT_STANDARD
+        : location === 'scotland'
+          ? LBTT_STANDARD
+          : LTT_STANDARD;
     const standardTaxBands = calculateBandTax(propertyPrice, standardBands, 0);
     const standardTax = standardTaxBands.reduce((sum, band) => sum + band.taxDue, 0);
     firstTimeBuyerSaving = Math.max(0, standardTax - baseTax);

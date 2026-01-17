@@ -78,7 +78,7 @@ export function calculateDiscountScenarios(
 ): { percent: number; savings: number; final: number }[] {
   return discounts.map((percent) => ({
     percent,
-    savings: Math.round((originalPrice * percent) / 100 * 100) / 100,
+    savings: Math.round(((originalPrice * percent) / 100) * 100) / 100,
     final: Math.round(originalPrice * (1 - percent / 100) * 100) / 100,
   }));
 }

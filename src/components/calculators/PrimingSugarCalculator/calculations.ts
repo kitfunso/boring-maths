@@ -31,7 +31,7 @@ function getResidualCO2(tempF: number): number {
  */
 function toFahrenheit(temp: number, unit: 'fahrenheit' | 'celsius'): number {
   if (unit === 'celsius') {
-    return (temp * 9 / 5) + 32;
+    return (temp * 9) / 5 + 32;
   }
   return temp;
 }
@@ -55,7 +55,7 @@ export function calculatePrimingSugar(inputs: PrimingSugarInputs): PrimingSugarR
   const addedCO2 = Math.max(0, inputs.targetCO2 - residualCO2);
 
   // Get sugar factor
-  const sugarType = SUGAR_TYPES.find(s => s.value === inputs.sugarType);
+  const sugarType = SUGAR_TYPES.find((s) => s.value === inputs.sugarType);
   const gramsPerGalVol = sugarType?.gramsPerGalVol || 4.0;
 
   // Calculate sugar needed (grams)
@@ -67,12 +67,11 @@ export function calculatePrimingSugar(inputs: PrimingSugarInputs): PrimingSugarR
   const gramsPerBottle = sugarGrams / bottlesPerBatch;
 
   // Calculate alternatives
-  const sugarAlternatives = SUGAR_TYPES
-    .filter(s => s.value !== inputs.sugarType)
+  const sugarAlternatives = SUGAR_TYPES.filter((s) => s.value !== inputs.sugarType)
     .slice(0, 4)
-    .map(s => ({
+    .map((s) => ({
       name: s.label,
-      amount: Math.round((volumeGallons * addedCO2 * s.gramsPerGalVol) * 10) / 10,
+      amount: Math.round(volumeGallons * addedCO2 * s.gramsPerGalVol * 10) / 10,
       unit: 'g',
     }));
 

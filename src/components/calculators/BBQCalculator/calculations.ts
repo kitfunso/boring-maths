@@ -4,11 +4,7 @@
  * Pure functions for calculating BBQ quantities.
  */
 
-import type {
-  BBQCalculatorInputs,
-  BBQCalculatorResult,
-  MeatPreference,
-} from './types';
+import type { BBQCalculatorInputs, BBQCalculatorResult, MeatPreference } from './types';
 import { MEAT_PER_PERSON, CHILD_MULTIPLIER } from './types';
 
 /**
@@ -67,7 +63,7 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
 
   // Calculate effective guest count (adults + half for children)
   const adultCount = guestCount - childrenCount;
-  const effectiveGuests = adultCount + (childrenCount * CHILD_MULTIPLIER);
+  const effectiveGuests = adultCount + childrenCount * CHILD_MULTIPLIER;
 
   // Calculate total meat needed
   const meatPerPerson = MEAT_PER_PERSON[appetiteLevel];
@@ -114,8 +110,8 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
 
   // Calculate supplies
   const supplies: BBQCalculatorResult['supplies'] = [
-    { item: 'Hamburger Buns', quantity: `${Math.ceil(guestCount * 1.5 / 8)} packs (8ct)` },
-    { item: 'Hot Dog Buns', quantity: `${Math.ceil(guestCount * 0.5 / 8)} packs (8ct)` },
+    { item: 'Hamburger Buns', quantity: `${Math.ceil((guestCount * 1.5) / 8)} packs (8ct)` },
+    { item: 'Hot Dog Buns', quantity: `${Math.ceil((guestCount * 0.5) / 8)} packs (8ct)` },
     { item: 'Plates', quantity: `${Math.ceil(guestCount * 1.5)} plates` },
     { item: 'Napkins', quantity: `${Math.ceil(guestCount * 3)} napkins` },
     { item: 'Cups', quantity: `${Math.ceil(guestCount * 2)} cups` },
@@ -135,7 +131,7 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
 
   // Estimate grill time
   let grillTime: string;
-  if (meatPreference === 'pork' && meatBreakdown.some(m => m.type.includes('Ribs'))) {
+  if (meatPreference === 'pork' && meatBreakdown.some((m) => m.type.includes('Ribs'))) {
     grillTime = '3-4 hours (low and slow for ribs)';
   } else if (totalMeatPounds > 20) {
     grillTime = '2-3 hours (batch cooking)';

@@ -32,7 +32,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function PaintCalculator() {
-  const [inputs, setInputs] = useState<PaintCalculatorInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<PaintCalculatorInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -73,12 +75,7 @@ export default function PaintCalculator() {
         <CalculatorHeader
           title="Calculate Your Paint Needs"
           subtitle="Find out how much paint to buy for your room"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -165,9 +162,11 @@ export default function PaintCalculator() {
                 columns={3}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
-                {inputs.coats === 1 && 'One coat may show brush strokes - recommended only for touch-ups'}
+                {inputs.coats === 1 &&
+                  'One coat may show brush strokes - recommended only for touch-ups'}
                 {inputs.coats === 2 && 'Two coats is standard for most painting projects'}
-                {inputs.coats === 3 && 'Three coats for dramatic color changes or covering dark colors'}
+                {inputs.coats === 3 &&
+                  'Three coats for dramatic color changes or covering dark colors'}
               </p>
             </div>
 
@@ -208,7 +207,10 @@ export default function PaintCalculator() {
               subtitle={`Covers ${formatArea(result.paintableArea)} with ${inputs.coats} coat${inputs.coats !== 1 ? 's' : ''}`}
               footer={
                 <>
-                  Estimated cost: <span className="font-semibold">{formatCurrency(result.estimatedCost, result.currency)}</span>
+                  Estimated cost:{' '}
+                  <span className="font-semibold">
+                    {formatCurrency(result.estimatedCost, result.currency)}
+                  </span>
                 </>
               }
             />
@@ -244,7 +246,10 @@ export default function PaintCalculator() {
               </h3>
               <div className="space-y-3">
                 {result.shoppingList.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between py-2 border-b border-white/10 last:border-0">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 border-b border-white/10 last:border-0"
+                  >
                     <div>
                       <span className="font-medium text-[var(--color-cream)]">{item.item}</span>
                       <span className="text-[var(--color-muted)] ml-2">
@@ -258,7 +263,9 @@ export default function PaintCalculator() {
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-white/20 flex justify-between">
-                <span className="font-semibold text-[var(--color-cream)]">Total Estimated Cost</span>
+                <span className="font-semibold text-[var(--color-cream)]">
+                  Total Estimated Cost
+                </span>
                 <span className="font-bold text-purple-600">
                   {formatCurrency(result.estimatedCost, result.currency)}
                 </span>
@@ -284,8 +291,9 @@ export default function PaintCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
-              Buy all your paint at once to ensure color consistency. Most stores offer free color matching
-              and will shake your paint for you. Keep the receipt - many stores allow returns of unopened gallons.
+              Buy all your paint at once to ensure color consistency. Most stores offer free color
+              matching and will shake your paint for you. Keep the receipt - many stores allow
+              returns of unopened gallons.
             </Alert>
 
             {/* Share Results */}

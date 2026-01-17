@@ -13,7 +13,8 @@ function calculateWeeklyBenefit(numberOfChildren: number): number {
   if (numberOfChildren <= 0) return 0;
 
   const firstChild = CHILD_BENEFIT_RATES.firstChild;
-  const additionalChildren = Math.max(0, numberOfChildren - 1) * CHILD_BENEFIT_RATES.additionalChild;
+  const additionalChildren =
+    Math.max(0, numberOfChildren - 1) * CHILD_BENEFIT_RATES.additionalChild;
 
   return firstChild + additionalChildren;
 }

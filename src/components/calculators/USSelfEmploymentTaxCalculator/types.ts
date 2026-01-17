@@ -4,7 +4,11 @@
  * Calculate SE tax (15.3%), federal income tax, and quarterly payments for freelancers.
  */
 
-export type FilingStatus = 'single' | 'married_jointly' | 'married_separately' | 'head_of_household';
+export type FilingStatus =
+  | 'single'
+  | 'married_jointly'
+  | 'married_separately'
+  | 'head_of_household';
 
 export interface USSelfEmploymentTaxInputs {
   filingStatus: FilingStatus;
@@ -34,8 +38,8 @@ export interface USSelfEmploymentTaxResult {
 // 2025 SE Tax Constants
 export const SE_TAX_RATES = {
   selfEmploymentRate: 0.9235, // 92.35% of net earnings subject to SE tax
-  socialSecurityRate: 0.124,  // 12.4%
-  medicareRate: 0.029,        // 2.9%
+  socialSecurityRate: 0.124, // 12.4%
+  medicareRate: 0.029, // 2.9%
   additionalMedicareRate: 0.009, // 0.9% additional Medicare
   socialSecurityWageBase: 176100, // 2025 SS wage base
   additionalMedicareSingleThreshold: 200000,

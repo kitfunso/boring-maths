@@ -15,40 +15,24 @@ import {
   type ReactNode,
 } from 'react';
 
-import type {
-  SharedCalculatorData,
-  SharedDataEntry,
-  CalculatorDataConfig,
-} from './types';
+import type { SharedCalculatorData, SharedDataEntry, CalculatorDataConfig } from './types';
 
-import {
-  readStoredData,
-  saveFields,
-  getFields,
-  isStorageAvailable,
-} from './storage';
+import { readStoredData, saveFields, getFields, isStorageAvailable } from './storage';
 
 interface SharedDataContextValue {
   /** Whether localStorage is available */
   isAvailable: boolean;
 
   /** Get available data entries for a calculator's imports */
-  getAvailableImports: (
-    config: CalculatorDataConfig
-  ) => Partial<{
-    [K in keyof SharedCalculatorData]: SharedDataEntry<
-      NonNullable<SharedCalculatorData[K]>
-    >;
+  getAvailableImports: (config: CalculatorDataConfig) => Partial<{
+    [K in keyof SharedCalculatorData]: SharedDataEntry<NonNullable<SharedCalculatorData[K]>>;
   }>;
 
   /** Check if any importable data exists for a calculator */
   hasImportableData: (config: CalculatorDataConfig) => boolean;
 
   /** Export data from a calculator */
-  exportData: (
-    config: CalculatorDataConfig,
-    data: Partial<SharedCalculatorData>
-  ) => boolean;
+  exportData: (config: CalculatorDataConfig, data: Partial<SharedCalculatorData>) => boolean;
 
   /** Timestamp of last data update (for reactivity) */
   lastUpdated: number;
@@ -153,21 +137,10 @@ export function SharedDataProvider({ children }: SharedDataProviderProps) {
       lastUpdated,
       refresh,
     }),
-    [
-      isAvailable,
-      getAvailableImports,
-      hasImportableData,
-      exportData,
-      lastUpdated,
-      refresh,
-    ]
+    [isAvailable, getAvailableImports, hasImportableData, exportData, lastUpdated, refresh]
   );
 
-  return (
-    <SharedDataContext.Provider value={value}>
-      {children}
-    </SharedDataContext.Provider>
-  );
+  return <SharedDataContext.Provider value={value}>{children}</SharedDataContext.Provider>;
 }
 
 /**
@@ -177,9 +150,7 @@ export function SharedDataProvider({ children }: SharedDataProviderProps) {
 export function useSharedDataContext(): SharedDataContextValue {
   const context = useContext(SharedDataContext);
   if (!context) {
-    throw new Error(
-      'useSharedDataContext must be used within a SharedDataProvider'
-    );
+    throw new Error('useSharedDataContext must be used within a SharedDataProvider');
   }
   return context;
 }

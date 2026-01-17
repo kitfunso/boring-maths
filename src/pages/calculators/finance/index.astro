@@ -10,14 +10,17 @@ import CategoryLayout from '../../../layouts/CategoryLayout.astro';
 
 const category = 'Finance';
 const title = 'Finance Calculators | Free Financial Planning Tools';
-const description = 'Free online finance calculators for budgeting, investing, debt payoff, and financial planning. Calculate compound interest, mortgage payments, FIRE numbers, and more.';
-const keywords = 'finance calculators, financial calculators, money calculators, investment calculator, mortgage calculator, compound interest calculator, FIRE calculator, debt payoff calculator, savings calculator';
+const description =
+  'Free online finance calculators for budgeting, investing, debt payoff, and financial planning. Calculate compound interest, mortgage payments, FIRE numbers, and more.';
+const keywords =
+  'finance calculators, financial calculators, money calculators, investment calculator, mortgage calculator, compound interest calculator, FIRE calculator, debt payoff calculator, savings calculator';
 const canonicalURL = '/calculators/finance/';
 
 const calculators = [
   {
     title: 'FIRE Calculator',
-    description: 'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
+    description:
+      'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
     href: '/calculators/fire-calculator',
     icon: 'fire',
     color: 'amber',
@@ -79,20 +82,24 @@ const calculators = [
   calculators={calculators}
 >
   <p>
-    Our finance calculators help you make smarter money decisions. Whether you're planning for
-    early retirement with FIRE, figuring out mortgage payments, or tracking compound interest
-    on your investments, these tools give you the numbers you need.
+    Our finance calculators help you make smarter money decisions. Whether you're planning for early
+    retirement with FIRE, figuring out mortgage payments, or tracking compound interest on your
+    investments, these tools give you the numbers you need.
   </p>
   <p>
-    All calculations happen instantly in your browser - your financial data is never sent to
-    any server. Use these calculators to build your emergency fund, pay off debt strategically,
-    or plan your path to financial independence.
+    All calculations happen instantly in your browser - your financial data is never sent to any
+    server. Use these calculators to build your emergency fund, pay off debt strategically, or plan
+    your path to financial independence.
   </p>
   <h3>Popular Finance Calculations</h3>
   <ul>
-    <li><strong>FIRE Number:</strong> Your annual expenses × 25 (based on the 4% safe withdrawal rate)</li>
+    <li>
+      <strong>FIRE Number:</strong> Your annual expenses × 25 (based on the 4% safe withdrawal rate)
+    </li>
     <li><strong>Emergency Fund:</strong> 3-6 months of essential expenses for most situations</li>
     <li><strong>Rule of 72:</strong> Divide 72 by your interest rate to estimate doubling time</li>
-    <li><strong>Debt Avalanche:</strong> Pay minimums on all debts, extra to highest interest rate</li>
+    <li>
+      <strong>Debt Avalanche:</strong> Pay minimums on all debts, extra to highest interest rate
+    </li>
   </ul>
 </CategoryLayout>

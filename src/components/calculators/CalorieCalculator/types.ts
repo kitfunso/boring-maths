@@ -29,12 +29,42 @@ export interface CalorieResult {
   fat: { min: number; max: number };
 }
 
-export const ACTIVITY_LEVELS: { value: ActivityLevel; label: string; description: string; multiplier: number }[] = [
-  { value: 'sedentary', label: 'Sedentary', description: 'Little to no exercise, desk job', multiplier: 1.2 },
-  { value: 'light', label: 'Lightly Active', description: 'Light exercise 1-3 days/week', multiplier: 1.375 },
-  { value: 'moderate', label: 'Moderately Active', description: 'Moderate exercise 3-5 days/week', multiplier: 1.55 },
-  { value: 'active', label: 'Very Active', description: 'Hard exercise 6-7 days/week', multiplier: 1.725 },
-  { value: 'veryActive', label: 'Extremely Active', description: 'Very hard exercise, physical job', multiplier: 1.9 },
+export const ACTIVITY_LEVELS: {
+  value: ActivityLevel;
+  label: string;
+  description: string;
+  multiplier: number;
+}[] = [
+  {
+    value: 'sedentary',
+    label: 'Sedentary',
+    description: 'Little to no exercise, desk job',
+    multiplier: 1.2,
+  },
+  {
+    value: 'light',
+    label: 'Lightly Active',
+    description: 'Light exercise 1-3 days/week',
+    multiplier: 1.375,
+  },
+  {
+    value: 'moderate',
+    label: 'Moderately Active',
+    description: 'Moderate exercise 3-5 days/week',
+    multiplier: 1.55,
+  },
+  {
+    value: 'active',
+    label: 'Very Active',
+    description: 'Hard exercise 6-7 days/week',
+    multiplier: 1.725,
+  },
+  {
+    value: 'veryActive',
+    label: 'Extremely Active',
+    description: 'Very hard exercise, physical job',
+    multiplier: 1.9,
+  },
 ];
 
 export const GOALS: { value: Goal; label: string; adjustment: number }[] = [

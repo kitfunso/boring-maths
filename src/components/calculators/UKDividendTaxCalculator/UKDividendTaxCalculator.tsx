@@ -2,14 +2,7 @@ import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateDividendTaxResult, formatCurrency } from './calculations';
 import { getDefaultInputs, DIVIDEND_RATES, type UKDividendTaxInputs } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 export default function UKDividendTaxCalculator() {
@@ -103,21 +96,35 @@ export default function UKDividendTaxCalculator() {
             </div>
 
             {/* Allowance Status */}
-            <div className={`rounded-xl p-4 border ${
-              result.allowanceRemaining > 0
-                ? 'bg-emerald-950/30 border-emerald-500/30'
-                : 'bg-amber-950/30 border-amber-500/30'
-            }`}>
+            <div
+              className={`rounded-xl p-4 border ${
+                result.allowanceRemaining > 0
+                  ? 'bg-emerald-950/30 border-emerald-500/30'
+                  : 'bg-amber-950/30 border-amber-500/30'
+              }`}
+            >
               <div className="flex items-start gap-3">
-                <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                  result.allowanceRemaining > 0 ? 'text-emerald-400' : 'text-amber-400'
-                }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                    result.allowanceRemaining > 0 ? 'text-emerald-400' : 'text-amber-400'
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <div>
-                  <p className={`font-medium ${
-                    result.allowanceRemaining > 0 ? 'text-emerald-400' : 'text-amber-400'
-                  }`}>
+                  <p
+                    className={`font-medium ${
+                      result.allowanceRemaining > 0 ? 'text-emerald-400' : 'text-amber-400'
+                    }`}
+                  >
                     Dividend Allowance (£{DIVIDEND_RATES.allowance})
                   </p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
@@ -132,17 +139,24 @@ export default function UKDividendTaxCalculator() {
             {/* Dividend Breakdown */}
             {result.dividendBreakdown.length > 0 && (
               <div className="bg-white/5 rounded-xl p-4">
-                <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">Dividend Tax Breakdown</h4>
+                <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
+                  Dividend Tax Breakdown
+                </h4>
                 <div className="space-y-3">
                   {result.dividendBreakdown.map((item, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-white/5 last:border-0">
+                    <div
+                      key={index}
+                      className="flex justify-between items-center py-2 border-b border-white/5 last:border-0"
+                    >
                       <div>
                         <p className="text-[var(--color-cream)]">{item.band}</p>
                         <p className="text-sm text-[var(--color-muted)]">
                           {formatCurrency(item.amount)}
                         </p>
                       </div>
-                      <p className={`font-semibold ${item.tax === 0 ? 'text-emerald-400' : 'text-amber-400'}`}>
+                      <p
+                        className={`font-semibold ${item.tax === 0 ? 'text-emerald-400' : 'text-amber-400'}`}
+                      >
                         {formatCurrency(item.tax)}
                       </p>
                     </div>
@@ -171,15 +185,29 @@ export default function UKDividendTaxCalculator() {
             {result.salaryVsDividendSaving > 0 && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-emerald-400 font-medium">Dividend Advantage</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      Taking {formatCurrency(inputs.dividendIncome)} as dividends instead of salary saves you{' '}
-                      <span className="text-emerald-400 font-semibold">{formatCurrency(result.salaryVsDividendSaving)}</span> per year.
-                      Dividends don't attract National Insurance, making them more tax-efficient.
+                      Taking {formatCurrency(inputs.dividendIncome)} as dividends instead of salary
+                      saves you{' '}
+                      <span className="text-emerald-400 font-semibold">
+                        {formatCurrency(result.salaryVsDividendSaving)}
+                      </span>{' '}
+                      per year. Dividends don't attract National Insurance, making them more
+                      tax-efficient.
                     </p>
                   </div>
                 </div>
@@ -192,7 +220,9 @@ export default function UKDividendTaxCalculator() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Total income</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(result.totalIncome)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(result.totalIncome)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Income tax (salary)</span>
@@ -217,7 +247,9 @@ export default function UKDividendTaxCalculator() {
 
             {/* Tax Rates Info */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">2024/25 Dividend Tax Rates</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                2024/25 Dividend Tax Rates
+              </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
                   <span>Tax-free allowance</span>

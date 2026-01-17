@@ -3,7 +3,13 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateVAT, formatCurrency, formatPercent, getAllRatesForCountry, getCountryByCode } from './calculations';
+import {
+  calculateVAT,
+  formatCurrency,
+  formatPercent,
+  getAllRatesForCountry,
+  getCountryByCode,
+} from './calculations';
 import { EU_COUNTRIES, getDefaultInputs, type VATInputs, type CalculationMode } from './types';
 import {
   ThemeProvider,
@@ -94,9 +100,11 @@ export default function EUVATCalculator() {
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="amount" required>
-                  {inputs.mode === 'add' ? 'Net Amount (excl. VAT)' :
-                   inputs.mode === 'remove' ? 'Gross Amount (incl. VAT)' :
-                   'VAT Amount'}
+                  {inputs.mode === 'add'
+                    ? 'Net Amount (excl. VAT)'
+                    : inputs.mode === 'remove'
+                      ? 'Gross Amount (incl. VAT)'
+                      : 'VAT Amount'}
                 </Label>
                 <Input
                   id="amount"
@@ -164,18 +172,24 @@ export default function EUVATCalculator() {
                 {selectedCountry.reducedRates.map((rate, i) => (
                   <div key={rate} className="text-center p-3 bg-white/5 rounded-lg">
                     <p className="text-xl font-bold text-[var(--color-cream)]">{rate}%</p>
-                    <p className="text-xs text-[var(--color-muted)]">Reduced {selectedCountry.reducedRates.length > 1 ? i + 1 : ''}</p>
+                    <p className="text-xs text-[var(--color-muted)]">
+                      Reduced {selectedCountry.reducedRates.length > 1 ? i + 1 : ''}
+                    </p>
                   </div>
                 ))}
                 {selectedCountry.superReducedRate && (
                   <div className="text-center p-3 bg-white/5 rounded-lg">
-                    <p className="text-xl font-bold text-[var(--color-cream)]">{selectedCountry.superReducedRate}%</p>
+                    <p className="text-xl font-bold text-[var(--color-cream)]">
+                      {selectedCountry.superReducedRate}%
+                    </p>
                     <p className="text-xs text-[var(--color-muted)]">Super Reduced</p>
                   </div>
                 )}
                 {selectedCountry.parkingRate && (
                   <div className="text-center p-3 bg-white/5 rounded-lg">
-                    <p className="text-xl font-bold text-[var(--color-cream)]">{selectedCountry.parkingRate}%</p>
+                    <p className="text-xl font-bold text-[var(--color-cream)]">
+                      {selectedCountry.parkingRate}%
+                    </p>
                     <p className="text-xs text-[var(--color-muted)]">Parking</p>
                   </div>
                 )}
@@ -197,32 +211,41 @@ export default function EUVATCalculator() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
-                    {EU_COUNTRIES.slice().sort((a, b) => b.standardRate - a.standardRate).slice(0, 10).map((country) => {
-                      const vatForCountry = inputs.amount * (country.standardRate / 100);
-                      const isSelected = country.code === inputs.countryCode;
-                      return (
-                        <tr key={country.code} className={isSelected ? 'bg-blue-900/30' : ''}>
-                          <td className="py-2">{country.name}</td>
-                          <td className="text-right py-2 font-medium">{country.standardRate}%</td>
-                          <td className="text-right py-2 tabular-nums text-blue-400">
-                            {formatCurrency(inputs.mode === 'add' ? inputs.amount + vatForCountry : inputs.amount / (1 + country.standardRate / 100))}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {EU_COUNTRIES.slice()
+                      .sort((a, b) => b.standardRate - a.standardRate)
+                      .slice(0, 10)
+                      .map((country) => {
+                        const vatForCountry = inputs.amount * (country.standardRate / 100);
+                        const isSelected = country.code === inputs.countryCode;
+                        return (
+                          <tr key={country.code} className={isSelected ? 'bg-blue-900/30' : ''}>
+                            <td className="py-2">{country.name}</td>
+                            <td className="text-right py-2 font-medium">{country.standardRate}%</td>
+                            <td className="text-right py-2 tabular-nums text-blue-400">
+                              {formatCurrency(
+                                inputs.mode === 'add'
+                                  ? inputs.amount + vatForCountry
+                                  : inputs.amount / (1 + country.standardRate / 100)
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-3">
-                Showing top 10 EU countries by VAT rate. Hungary has the highest (27%), Luxembourg the lowest (17%).
+                Showing top 10 EU countries by VAT rate. Hungary has the highest (27%), Luxembourg
+                the lowest (17%).
               </p>
             </div>
 
             {/* Tips */}
             <Alert variant="tip" title="EU VAT Info:">
-              VAT (Value Added Tax) applies to most goods and services in the EU. Reduced rates typically apply to
-              essentials like food, books, and medicine. Businesses can reclaim VAT on purchases (input VAT) against
-              VAT charged on sales (output VAT). Cross-border B2B services are often reverse-charged.
+              VAT (Value Added Tax) applies to most goods and services in the EU. Reduced rates
+              typically apply to essentials like food, books, and medicine. Businesses can reclaim
+              VAT on purchases (input VAT) against VAT charged on sales (output VAT). Cross-border
+              B2B services are often reverse-charged.
             </Alert>
 
             {/* Share */}

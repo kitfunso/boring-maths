@@ -34,21 +34,21 @@ function toSI(inputs: PressureDropInputs): {
 } {
   if (inputs.unitSystem === 'metric') {
     return {
-      D: inputs.diameter / 1000,     // mm to m
-      L: inputs.length,               // m
-      V: inputs.velocity,             // m/s
-      rho: inputs.density,            // kg/m³
-      mu: inputs.viscosity,           // Pa·s
+      D: inputs.diameter / 1000, // mm to m
+      L: inputs.length, // m
+      V: inputs.velocity, // m/s
+      rho: inputs.density, // kg/m³
+      mu: inputs.viscosity, // Pa·s
       epsilon: inputs.roughness / 1000, // mm to m
     };
   } else {
     return {
-      D: inputs.diameter * 0.0254,    // inches to m
-      L: inputs.length * 0.3048,      // ft to m
-      V: inputs.velocity * 0.3048,    // ft/s to m/s
-      rho: inputs.density * 16.0185,  // lb/ft³ to kg/m³
-      mu: inputs.viscosity * 1.488,   // lb/(ft·s) to Pa·s
-      epsilon: inputs.roughness * 0.0254 / 1000, // mils to m
+      D: inputs.diameter * 0.0254, // inches to m
+      L: inputs.length * 0.3048, // ft to m
+      V: inputs.velocity * 0.3048, // ft/s to m/s
+      rho: inputs.density * 16.0185, // lb/ft³ to kg/m³
+      mu: inputs.viscosity * 1.488, // lb/(ft·s) to Pa·s
+      epsilon: (inputs.roughness * 0.0254) / 1000, // mils to m
     };
   }
 }
@@ -133,10 +133,10 @@ export function calculatePressureDrop(inputs: PressureDropInputs): PressureDropR
   const relativeRoughness = epsilon / D;
 
   // Head loss (m)
-  const h_f = f * (L / D) * (V * V / (2 * g));
+  const h_f = f * (L / D) * ((V * V) / (2 * g));
 
   // Pressure drop (Pa)
-  const deltaP = f * (L / D) * (rho * V * V / 2);
+  const deltaP = f * (L / D) * ((rho * V * V) / 2);
 
   // Convert results based on unit system
   let pressureDrop: number;
@@ -150,7 +150,7 @@ export function calculatePressureDrop(inputs: PressureDropInputs): PressureDropR
   } else {
     pressureDrop = deltaP / 6894.76; // Pa to psi
     headLoss = h_f / 0.3048; // m to ft
-    pressureDropPer100 = (deltaP / 6894.76) * (100 / (inputs.length)); // psi per 100ft
+    pressureDropPer100 = (deltaP / 6894.76) * (100 / inputs.length); // psi per 100ft
   }
 
   return {

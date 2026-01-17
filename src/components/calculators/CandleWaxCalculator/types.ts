@@ -31,14 +31,62 @@ export interface CandleWaxResults {
 
 // Wax types with densities (oz wax per oz volume)
 export const WAX_TYPES = [
-  { value: 'soy-464', label: 'Soy 464', density: 0.86, burnRate: 0.12, description: 'Most popular container soy wax' },
-  { value: 'soy-444', label: 'Soy 444', density: 0.86, burnRate: 0.11, description: 'Single pour soy wax' },
-  { value: 'coconut', label: 'Coconut Wax', density: 0.90, burnRate: 0.13, description: 'Creamy texture, great throw' },
-  { value: 'paraffin', label: 'Paraffin', density: 0.90, burnRate: 0.15, description: 'Traditional, strong throw' },
-  { value: 'beeswax', label: 'Beeswax', density: 0.96, burnRate: 0.10, description: 'Natural, subtle honey scent' },
-  { value: 'palm', label: 'Palm Wax', density: 0.88, burnRate: 0.12, description: 'Crystal patterns' },
-  { value: 'blend', label: 'Soy/Paraffin Blend', density: 0.88, burnRate: 0.13, description: 'Best of both worlds' },
-  { value: 'coconut-soy', label: 'Coconut/Soy Blend', density: 0.87, burnRate: 0.12, description: 'Popular blend' },
+  {
+    value: 'soy-464',
+    label: 'Soy 464',
+    density: 0.86,
+    burnRate: 0.12,
+    description: 'Most popular container soy wax',
+  },
+  {
+    value: 'soy-444',
+    label: 'Soy 444',
+    density: 0.86,
+    burnRate: 0.11,
+    description: 'Single pour soy wax',
+  },
+  {
+    value: 'coconut',
+    label: 'Coconut Wax',
+    density: 0.9,
+    burnRate: 0.13,
+    description: 'Creamy texture, great throw',
+  },
+  {
+    value: 'paraffin',
+    label: 'Paraffin',
+    density: 0.9,
+    burnRate: 0.15,
+    description: 'Traditional, strong throw',
+  },
+  {
+    value: 'beeswax',
+    label: 'Beeswax',
+    density: 0.96,
+    burnRate: 0.1,
+    description: 'Natural, subtle honey scent',
+  },
+  {
+    value: 'palm',
+    label: 'Palm Wax',
+    density: 0.88,
+    burnRate: 0.12,
+    description: 'Crystal patterns',
+  },
+  {
+    value: 'blend',
+    label: 'Soy/Paraffin Blend',
+    density: 0.88,
+    burnRate: 0.13,
+    description: 'Best of both worlds',
+  },
+  {
+    value: 'coconut-soy',
+    label: 'Coconut/Soy Blend',
+    density: 0.87,
+    burnRate: 0.12,
+    description: 'Popular blend',
+  },
 ];
 
 // Common container sizes

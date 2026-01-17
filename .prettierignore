@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Package manager
+package-lock.json
+
+# Generated files
+public/og/
+
+# Files with HTML comments in expressions (Prettier Astro parser limitation)
+src/components/common/Analytics.astro
+src/layouts/CategoryLayout.astro
+src/pages/index.astro

@@ -34,10 +34,7 @@ export default function LMTDCalculator() {
     return calculateLMTD(inputs);
   }, [inputs]);
 
-  const updateInput = <K extends keyof LMTDInputs>(
-    field: K,
-    value: LMTDInputs[K]
-  ) => {
+  const updateInput = <K extends keyof LMTDInputs>(field: K, value: LMTDInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -104,9 +101,7 @@ export default function LMTDCalculator() {
                 onChange={(value) => updateInput('flowArrangement', value as FlowArrangement)}
                 columns={2}
               />
-              <p className="text-sm text-[var(--color-muted)] mt-2">
-                {flowInfo.description}
-              </p>
+              <p className="text-sm text-[var(--color-muted)] mt-2">{flowInfo.description}</p>
             </div>
 
             {/* Hot Fluid Temperatures */}
@@ -206,23 +201,29 @@ export default function LMTDCalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* Primary Result - LMTD */}
-            <div className={`rounded-2xl p-8 text-center border-2 ${
-              result.isValid
-                ? 'bg-red-950/50 border-red-500/30'
-                : 'bg-yellow-950/50 border-yellow-500/30'
-            }`}>
+            <div
+              className={`rounded-2xl p-8 text-center border-2 ${
+                result.isValid
+                  ? 'bg-red-950/50 border-red-500/30'
+                  : 'bg-yellow-950/50 border-yellow-500/30'
+              }`}
+            >
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
-                {inputs.flowArrangement === 'counterflow' || inputs.flowArrangement === 'parallelflow'
+                {inputs.flowArrangement === 'counterflow' ||
+                inputs.flowArrangement === 'parallelflow'
                   ? 'Log Mean Temperature Difference'
                   : 'Corrected LMTD'}
               </p>
-              <p className={`text-5xl md:text-6xl font-bold tabular-nums mb-2 ${
-                result.isValid ? 'text-red-400' : 'text-yellow-400'
-              }`}>
+              <p
+                className={`text-5xl md:text-6xl font-bold tabular-nums mb-2 ${
+                  result.isValid ? 'text-red-400' : 'text-yellow-400'
+                }`}
+              >
                 {result.isValid
-                  ? (inputs.flowArrangement === 'counterflow' || inputs.flowArrangement === 'parallelflow'
-                      ? result.lmtd.toFixed(1)
-                      : result.correctedLMTD.toFixed(1))
+                  ? inputs.flowArrangement === 'counterflow' ||
+                    inputs.flowArrangement === 'parallelflow'
+                    ? result.lmtd.toFixed(1)
+                    : result.correctedLMTD.toFixed(1)
                   : '---'}
               </p>
               <p className="text-xl text-[var(--color-cream)]">{tempUnit}</p>
@@ -239,23 +240,32 @@ export default function LMTDCalculator() {
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <div className="text-center p-3 rounded-lg bg-red-950/30 border border-red-500/20">
                   <p className="text-xs text-[var(--color-muted)] mb-1">ΔT₁</p>
-                  <p className="font-bold text-red-400 tabular-nums text-xl">{result.deltaT1.toFixed(1)}</p>
+                  <p className="font-bold text-red-400 tabular-nums text-xl">
+                    {result.deltaT1.toFixed(1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{tempUnit}</p>
                 </div>
                 <div className="text-center p-3 rounded-lg bg-blue-950/30 border border-blue-500/20">
                   <p className="text-xs text-[var(--color-muted)] mb-1">ΔT₂</p>
-                  <p className="font-bold text-blue-400 tabular-nums text-xl">{result.deltaT2.toFixed(1)}</p>
+                  <p className="font-bold text-blue-400 tabular-nums text-xl">
+                    {result.deltaT2.toFixed(1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{tempUnit}</p>
                 </div>
                 <div className="text-center p-3 rounded-lg">
                   <p className="text-xs text-[var(--color-muted)] mb-1">LMTD</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums text-xl">{result.lmtd.toFixed(1)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums text-xl">
+                    {result.lmtd.toFixed(1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{tempUnit}</p>
                 </div>
-                {(inputs.flowArrangement === 'crossflow' || inputs.flowArrangement === 'shellAndTube') && (
+                {(inputs.flowArrangement === 'crossflow' ||
+                  inputs.flowArrangement === 'shellAndTube') && (
                   <div className="text-center p-3 rounded-lg bg-green-950/30 border border-green-500/20">
                     <p className="text-xs text-[var(--color-muted)] mb-1">F Factor</p>
-                    <p className="font-bold text-green-400 tabular-nums text-xl">{result.correctionFactor.toFixed(3)}</p>
+                    <p className="font-bold text-green-400 tabular-nums text-xl">
+                      {result.correctionFactor.toFixed(3)}
+                    </p>
                     <p className="text-xs text-[var(--color-muted)]">correction</p>
                   </div>
                 )}
@@ -297,29 +307,43 @@ export default function LMTDCalculator() {
               </h3>
               <div className="flex items-center justify-between text-sm">
                 <div className="text-center">
-                  <div className="text-red-400 font-bold">{inputs.hotInlet}{tempUnit}</div>
+                  <div className="text-red-400 font-bold">
+                    {inputs.hotInlet}
+                    {tempUnit}
+                  </div>
                   <div className="text-xs text-[var(--color-muted)]">Hot In</div>
                 </div>
                 <div className="flex-1 mx-4 h-8 relative">
                   <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-red-500 to-red-300 rounded"></div>
                   <div className="absolute bottom-0 left-0 right-0 h-3 bg-gradient-to-r from-blue-300 to-blue-500 rounded"></div>
                   {inputs.flowArrangement === 'counterflow' && (
-                    <div className="absolute bottom-0 right-0 text-xs text-[var(--color-muted)]">←</div>
+                    <div className="absolute bottom-0 right-0 text-xs text-[var(--color-muted)]">
+                      ←
+                    </div>
                   )}
                 </div>
                 <div className="text-center">
-                  <div className="text-red-300 font-bold">{inputs.hotOutlet}{tempUnit}</div>
+                  <div className="text-red-300 font-bold">
+                    {inputs.hotOutlet}
+                    {tempUnit}
+                  </div>
                   <div className="text-xs text-[var(--color-muted)]">Hot Out</div>
                 </div>
               </div>
               <div className="flex items-center justify-between text-sm mt-2">
                 <div className="text-center">
-                  <div className="text-blue-400 font-bold">{inputs.coldInlet}{tempUnit}</div>
+                  <div className="text-blue-400 font-bold">
+                    {inputs.coldInlet}
+                    {tempUnit}
+                  </div>
                   <div className="text-xs text-[var(--color-muted)]">Cold In</div>
                 </div>
                 <div className="flex-1 mx-4"></div>
                 <div className="text-center">
-                  <div className="text-blue-300 font-bold">{inputs.coldOutlet}{tempUnit}</div>
+                  <div className="text-blue-300 font-bold">
+                    {inputs.coldOutlet}
+                    {tempUnit}
+                  </div>
                   <div className="text-xs text-[var(--color-muted)]">Cold Out</div>
                 </div>
               </div>
@@ -333,7 +357,8 @@ export default function LMTDCalculator() {
               <div className="text-center font-mono text-lg text-[var(--color-cream)] mb-2">
                 LMTD = (ΔT₁ - ΔT₂) / ln(ΔT₁/ΔT₂)
               </div>
-              {(inputs.flowArrangement === 'crossflow' || inputs.flowArrangement === 'shellAndTube') && (
+              {(inputs.flowArrangement === 'crossflow' ||
+                inputs.flowArrangement === 'shellAndTube') && (
                 <div className="text-center font-mono text-lg text-[var(--color-cream)]">
                   LMTD_corrected = F × LMTD
                 </div>
@@ -341,9 +366,9 @@ export default function LMTDCalculator() {
             </div>
 
             <Alert variant="tip" title="Heat exchanger sizing:">
-              Use LMTD with Q = U × A × LMTD to calculate required heat transfer area.
-              Typical overall heat transfer coefficients (U): Water-water: 850-1700 W/(m²·K),
-              Steam-water: 1000-6000 W/(m²·K), Gas-gas: 10-30 W/(m²·K).
+              Use LMTD with Q = U × A × LMTD to calculate required heat transfer area. Typical
+              overall heat transfer coefficients (U): Water-water: 850-1700 W/(m²·K), Steam-water:
+              1000-6000 W/(m²·K), Gas-gas: 10-30 W/(m²·K).
             </Alert>
 
             {/* Share Results */}

@@ -11,7 +11,12 @@ import { ACTIVITY_LEVELS, GOALS } from './types';
  * Calculate BMR using Mifflin-St Jeor equation
  * More accurate than Harris-Benedict for most people
  */
-function calculateBMR(weightKg: number, heightCm: number, age: number, gender: 'male' | 'female'): number {
+function calculateBMR(
+  weightKg: number,
+  heightCm: number,
+  age: number,
+  gender: 'male' | 'female'
+): number {
   // Mifflin-St Jeor: BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + s
   // s = +5 for males, −161 for females
   const s = gender === 'male' ? 5 : -161;
@@ -22,7 +27,18 @@ function calculateBMR(weightKg: number, heightCm: number, age: number, gender: '
  * Main calculation function
  */
 export function calculateCalories(inputs: CalorieInputs): CalorieResult {
-  const { unitSystem, gender, age, heightCm, heightFeet, heightInches, weightKg, weightLbs, activityLevel, goal } = inputs;
+  const {
+    unitSystem,
+    gender,
+    age,
+    heightCm,
+    heightFeet,
+    heightInches,
+    weightKg,
+    weightLbs,
+    activityLevel,
+    goal,
+  } = inputs;
 
   // Convert to metric if needed
   const height = unitSystem === 'metric' ? heightCm : (heightFeet * 12 + heightInches) * 2.54;
@@ -32,7 +48,8 @@ export function calculateCalories(inputs: CalorieInputs): CalorieResult {
   const bmr = Math.round(calculateBMR(weight, height, age, gender));
 
   // Calculate TDEE
-  const activityMultiplier = ACTIVITY_LEVELS.find((a) => a.value === activityLevel)?.multiplier || 1.55;
+  const activityMultiplier =
+    ACTIVITY_LEVELS.find((a) => a.value === activityLevel)?.multiplier || 1.55;
   const tdee = Math.round(bmr * activityMultiplier);
 
   // Apply goal adjustment

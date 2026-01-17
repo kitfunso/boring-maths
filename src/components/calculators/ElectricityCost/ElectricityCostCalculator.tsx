@@ -31,7 +31,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function ElectricityCostCalculator() {
-  const [inputs, setInputs] = useState<ElectricityCostInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<ElectricityCostInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
   const [selectedAppliances, setSelectedAppliances] = useState<SelectedAppliance[]>([]);
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
@@ -63,7 +65,7 @@ export default function ElectricityCostCalculator() {
   };
 
   // Toggle appliance selection
-  const toggleAppliance = (preset: typeof APPLIANCE_PRESETS[0]) => {
+  const toggleAppliance = (preset: (typeof APPLIANCE_PRESETS)[0]) => {
     setSelectedAppliances((prev) => {
       const existing = prev.find((a) => a.name === preset.name);
       if (existing) {
@@ -102,13 +104,16 @@ export default function ElectricityCostCalculator() {
   const isSelected = (name: string) => selectedAppliances.some((a) => a.name === name);
 
   // Group presets by category
-  const presetsByCategory = APPLIANCE_PRESETS.reduce((acc, preset) => {
-    if (!acc[preset.category]) {
-      acc[preset.category] = [];
-    }
-    acc[preset.category].push(preset);
-    return acc;
-  }, {} as Record<string, typeof APPLIANCE_PRESETS>);
+  const presetsByCategory = APPLIANCE_PRESETS.reduce(
+    (acc, preset) => {
+      if (!acc[preset.category]) {
+        acc[preset.category] = [];
+      }
+      acc[preset.category].push(preset);
+      return acc;
+    },
+    {} as Record<string, typeof APPLIANCE_PRESETS>
+  );
 
   const categoryLabels: Record<string, string> = {
     heating: 'Heating',
@@ -126,12 +131,7 @@ export default function ElectricityCostCalculator() {
         <CalculatorHeader
           title="Calculate Electricity Costs"
           subtitle="Select multiple appliances to calculate total household usage"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -152,7 +152,9 @@ export default function ElectricityCostCalculator() {
                   value={inputs.ratePerKwh}
                   onChange={(e) => updateInput('ratePerKwh', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Check your electricity bill</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Check your electricity bill
+                </p>
               </div>
 
               <div>
@@ -250,8 +252,18 @@ export default function ElectricityCostCalculator() {
                         className="p-1 text-[var(--color-muted)] hover:text-red-400 transition-colors"
                         aria-label={`Remove ${appliance.name}`}
                       >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <svg
+                          className="w-5 h-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -273,7 +285,12 @@ export default function ElectricityCostCalculator() {
                 subtitle={`${result.totalKwhPerMonth} kWh per month`}
                 footer={
                   <>
-                    That's <span className="font-semibold">{formatCurrency(result.totalCostPerYear, inputs.currency, 0)}/year</span> for {selectedAppliances.length} appliance{selectedAppliances.length !== 1 ? 's' : ''}
+                    That's{' '}
+                    <span className="font-semibold">
+                      {formatCurrency(result.totalCostPerYear, inputs.currency, 0)}/year
+                    </span>{' '}
+                    for {selectedAppliances.length} appliance
+                    {selectedAppliances.length !== 1 ? 's' : ''}
                   </>
                 }
               />
@@ -345,7 +362,9 @@ export default function ElectricityCostCalculator() {
                         <td className="py-2 pr-4">Total</td>
                         <td className="text-right py-2 px-2 tabular-nums">{result.totalWatts}W</td>
                         <td className="text-right py-2 px-2 tabular-nums">-</td>
-                        <td className="text-right py-2 px-2 tabular-nums">{result.totalKwhPerMonth}</td>
+                        <td className="text-right py-2 px-2 tabular-nums">
+                          {result.totalKwhPerMonth}
+                        </td>
                         <td className="text-right py-2 px-2 tabular-nums text-yellow-400">
                           {formatCurrency(result.totalCostPerMonth, inputs.currency)}
                         </td>
@@ -366,23 +385,30 @@ export default function ElectricityCostCalculator() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[var(--color-subtle)]">Combined power draw</span>
-                    <span className="font-medium">{result.totalWatts}W ({(result.totalWatts / 1000).toFixed(2)} kW)</span>
+                    <span className="font-medium">
+                      {result.totalWatts}W ({(result.totalWatts / 1000).toFixed(2)} kW)
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[var(--color-subtle)]">Equivalent LED bulbs</span>
-                    <span className="font-medium">{Math.round(result.totalWatts / 10)} bulbs (10W each)</span>
+                    <span className="font-medium">
+                      {Math.round(result.totalWatts / 10)} bulbs (10W each)
+                    </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-[var(--color-subtle)]">Annual CO2 emissions</span>
-                    <span className="font-medium">~{Math.round(result.totalKwhPerMonth * 12 * 0.4)} kg</span>
+                    <span className="font-medium">
+                      ~{Math.round(result.totalKwhPerMonth * 12 * 0.4)} kg
+                    </span>
                   </div>
                 </div>
               </div>
 
               {/* Tips */}
               <Alert variant="tip" title="Energy saving tip:">
-                The biggest energy consumers in most homes are heating/cooling, water heaters, and dryers.
-                Consider energy-efficient alternatives and smart power strips to reduce standby power.
+                The biggest energy consumers in most homes are heating/cooling, water heaters, and
+                dryers. Consider energy-efficient alternatives and smart power strips to reduce
+                standby power.
               </Alert>
 
               {/* Share Results */}
@@ -396,11 +422,23 @@ export default function ElectricityCostCalculator() {
           ) : (
             <div className="text-center py-12">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-900/30 flex items-center justify-center">
-                <svg className="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg
+                  className="w-8 h-8 text-yellow-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
-              <p className="text-[var(--color-muted)] mb-2">Select appliances above to calculate costs</p>
+              <p className="text-[var(--color-muted)] mb-2">
+                Select appliances above to calculate costs
+              </p>
               <p className="text-sm text-[var(--color-muted)]">
                 Click on appliances to add them to your household calculation
               </p>

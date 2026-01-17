@@ -22,9 +22,9 @@ import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
  * - Chevron: 25% - pre-angled pieces, most waste at edges
  */
 const WASTE_PERCENTAGES: Record<InstallPattern, number> = {
-  straight: 0.10,
+  straight: 0.1,
   diagonal: 0.15,
-  herringbone: 0.20,
+  herringbone: 0.2,
   chevron: 0.25,
 };
 
@@ -32,8 +32,8 @@ const WASTE_PERCENTAGES: Record<InstallPattern, number> = {
  * Underlayment price per sq ft by currency
  */
 const UNDERLAYMENT_PRICES: Record<Currency, number> = {
-  USD: 0.50,
-  GBP: 0.40,
+  USD: 0.5,
+  GBP: 0.4,
   EUR: 0.45,
 };
 
@@ -75,9 +75,7 @@ export const PATTERN_NAMES: Record<InstallPattern, string> = {
 /**
  * Calculate flooring requirements
  */
-export function calculateFlooring(
-  inputs: FlooringCalculatorInputs
-): FlooringCalculatorResult {
+export function calculateFlooring(inputs: FlooringCalculatorInputs): FlooringCalculatorResult {
   const {
     currency,
     roomLength,
@@ -123,16 +121,11 @@ export function calculateFlooring(
 
   // Underlayment (covers same area as flooring)
   // Not needed for carpet (usually has attached pad) or tile (uses different substrate)
-  const needsUnderlayment =
-    includeUnderlayment && !['carpet', 'tile'].includes(flooringType);
-  const underlaymentCost = needsUnderlayment
-    ? actualCoverage * UNDERLAYMENT_PRICES[currency]
-    : 0;
+  const needsUnderlayment = includeUnderlayment && !['carpet', 'tile'].includes(flooringType);
+  const underlaymentCost = needsUnderlayment ? actualCoverage * UNDERLAYMENT_PRICES[currency] : 0;
 
   // Transition strips
-  const transitionCost = includeTransitions
-    ? transitionCount * TRANSITION_PRICES[currency]
-    : 0;
+  const transitionCost = includeTransitions ? transitionCount * TRANSITION_PRICES[currency] : 0;
 
   // Total cost
   const totalCost = flooringCost + underlaymentCost + transitionCost;

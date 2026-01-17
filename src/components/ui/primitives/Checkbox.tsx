@@ -1,7 +1,10 @@
 import type { InputHTMLAttributes, ReactNode } from 'react';
 import { useTheme } from '../theme/ThemeContext';
 
-export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'checked'> {
+export interface CheckboxProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'onChange' | 'checked'
+> {
   /** Controlled checked state */
   checked: boolean;
   /** Change handler */

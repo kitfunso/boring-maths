@@ -4,7 +4,11 @@
  * Calculate short-term and long-term capital gains tax with NIIT.
  */
 
-export type FilingStatus = 'single' | 'married_jointly' | 'married_separately' | 'head_of_household';
+export type FilingStatus =
+  | 'single'
+  | 'married_jointly'
+  | 'married_separately'
+  | 'head_of_household';
 export type AssetType = 'stocks' | 'crypto' | 'real_estate' | 'other';
 
 export interface USCapitalGainsInputs {

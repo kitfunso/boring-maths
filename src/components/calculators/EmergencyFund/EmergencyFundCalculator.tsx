@@ -32,7 +32,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function EmergencyFundCalculator() {
-  const [inputs, setInputs] = useState<EmergencyFundInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<EmergencyFundInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -82,12 +84,7 @@ export default function EmergencyFundCalculator() {
         <CalculatorHeader
           title="Build Your Emergency Fund"
           subtitle="Calculate how much you need and track your progress"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -108,7 +105,9 @@ export default function EmergencyFundCalculator() {
                   value={inputs.monthlyExpenses}
                   onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Rent, utilities, food, insurance, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Rent, utilities, food, insurance, etc.
+                </p>
               </div>
 
               <div>
@@ -135,9 +134,12 @@ export default function EmergencyFundCalculator() {
                 columns={3}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
-                {inputs.jobStability === 'stable' && 'Government, tenured, or essential industry jobs'}
-                {inputs.jobStability === 'moderate' && 'Most salaried positions with reasonable job security'}
-                {inputs.jobStability === 'unstable' && 'Freelance, contract, startup, or volatile industries'}
+                {inputs.jobStability === 'stable' &&
+                  'Government, tenured, or essential industry jobs'}
+                {inputs.jobStability === 'moderate' &&
+                  'Most salaried positions with reasonable job security'}
+                {inputs.jobStability === 'unstable' &&
+                  'Freelance, contract, startup, or volatile industries'}
               </p>
             </div>
 
@@ -153,7 +155,9 @@ export default function EmergencyFundCalculator() {
                   value={inputs.dependents}
                   onChange={(e) => updateInput('dependents', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Children, elderly parents, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Children, elderly parents, etc.
+                </p>
               </div>
 
               <div>
@@ -197,7 +201,9 @@ export default function EmergencyFundCalculator() {
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-[var(--color-cream)]">Your Progress</span>
-                <span className="text-sm font-bold text-[var(--color-cream)]">{result.percentComplete}%</span>
+                <span className="text-sm font-bold text-[var(--color-cream)]">
+                  {result.percentComplete}%
+                </span>
               </div>
               <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                 <div
@@ -232,9 +238,11 @@ export default function EmergencyFundCalculator() {
               />
               <MetricCard
                 label="Months Covered"
-                value={inputs.monthlyExpenses > 0
-                  ? (inputs.currentSavings / inputs.monthlyExpenses).toFixed(1)
-                  : '0'}
+                value={
+                  inputs.monthlyExpenses > 0
+                    ? (inputs.currentSavings / inputs.monthlyExpenses).toFixed(1)
+                    : '0'
+                }
                 sublabel="with current savings"
               />
             </Grid>
@@ -247,18 +255,28 @@ export default function EmergencyFundCalculator() {
               <div className="space-y-3">
                 {[
                   { label: 'Minimum (3 months)', amount: result.breakdown.minimum, months: 3 },
-                  { label: 'Comfortable (6 months)', amount: result.breakdown.comfortable, months: 6 },
+                  {
+                    label: 'Comfortable (6 months)',
+                    amount: result.breakdown.comfortable,
+                    months: 6,
+                  },
                   { label: 'Secure (9 months)', amount: result.breakdown.secure, months: 9 },
                   { label: 'Fortress (12 months)', amount: result.breakdown.fortress, months: 12 },
                 ].map((tier) => (
                   <div key={tier.label} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`w-3 h-3 rounded-full ${
-                        inputs.currentSavings >= tier.amount ? 'bg-green-500' : 'bg-white/20'
-                      }`} />
-                      <span className={`text-sm ${
-                        result.recommendedMonths === tier.months ? 'font-bold text-blue-600' : 'text-[var(--color-subtle)]'
-                      }`}>
+                      <div
+                        className={`w-3 h-3 rounded-full ${
+                          inputs.currentSavings >= tier.amount ? 'bg-green-500' : 'bg-white/20'
+                        }`}
+                      />
+                      <span
+                        className={`text-sm ${
+                          result.recommendedMonths === tier.months
+                            ? 'font-bold text-blue-600'
+                            : 'text-[var(--color-subtle)]'
+                        }`}
+                      >
                         {tier.label}
                         {result.recommendedMonths === tier.months && ' (Recommended)'}
                       </span>
@@ -273,8 +291,9 @@ export default function EmergencyFundCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
-              Keep your emergency fund in a high-yield savings account for easy access while earning interest.
-              Don't invest it in stocks - you need this money accessible without risk of loss.
+              Keep your emergency fund in a high-yield savings account for easy access while earning
+              interest. Don't invest it in stocks - you need this money accessible without risk of
+              loss.
             </Alert>
 
             {/* Share Results */}

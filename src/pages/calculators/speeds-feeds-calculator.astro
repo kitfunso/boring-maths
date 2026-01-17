@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { SpeedsFeedsCalculator } from '../../components/calculators/SpeedsFeedsCalculator';
 
 const title = 'Speeds & Feeds Calculator | CNC Milling RPM & Feed Rate';
-const description = 'Free speeds and feeds calculator for CNC milling. Calculate optimal RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
-const keywords = 'speeds and feeds calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, sfm calculator, milling calculator, machinist calculator';
+const description =
+  'Free speeds and feeds calculator for CNC milling. Calculate optimal RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
+const keywords =
+  'speeds and feeds calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, sfm calculator, milling calculator, machinist calculator';
 const canonicalURL = '/calculators/speeds-feeds-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is Surface Feet per Minute (SFM)?",
-    answer: "SFM is the speed at which the cutting edge of the tool moves across the workpiece surface. It's determined by the material being cut and the tool type. Aluminum can handle 800+ SFM, while stainless steel may need only 50-100 SFM."
+    question: 'What is Surface Feet per Minute (SFM)?',
+    answer:
+      "SFM is the speed at which the cutting edge of the tool moves across the workpiece surface. It's determined by the material being cut and the tool type. Aluminum can handle 800+ SFM, while stainless steel may need only 50-100 SFM.",
   },
   {
-    question: "How do I calculate RPM from SFM?",
-    answer: "RPM = (SFM × 12) / (π × Tool Diameter). For example, cutting aluminum at 800 SFM with a 0.5\" endmill: RPM = (800 × 12) / (3.14159 × 0.5) = 6,112 RPM."
+    question: 'How do I calculate RPM from SFM?',
+    answer:
+      'RPM = (SFM × 12) / (π × Tool Diameter). For example, cutting aluminum at 800 SFM with a 0.5" endmill: RPM = (800 × 12) / (3.14159 × 0.5) = 6,112 RPM.',
   },
   {
-    question: "What is chip load and why does it matter?",
-    answer: "Chip load is the thickness of material each flute removes per revolution. Too low causes rubbing and heat; too high risks tool breakage. Typical chip loads range from 0.001\" (hardened steel) to 0.010\" (softwood)."
+    question: 'What is chip load and why does it matter?',
+    answer:
+      'Chip load is the thickness of material each flute removes per revolution. Too low causes rubbing and heat; too high risks tool breakage. Typical chip loads range from 0.001" (hardened steel) to 0.010" (softwood).',
   },
   {
-    question: "Should I use climb milling or conventional?",
-    answer: "Climb milling (cutter moves with feed direction) generally provides better surface finish and longer tool life. Conventional milling may be better for older machines with backlash or when roughing tough materials."
+    question: 'Should I use climb milling or conventional?',
+    answer:
+      'Climb milling (cutter moves with feed direction) generally provides better surface finish and longer tool life. Conventional milling may be better for older machines with backlash or when roughing tough materials.',
   },
   {
-    question: "How do I know if my feeds and speeds are wrong?",
-    answer: "Signs of incorrect parameters: excessive chatter/vibration, poor surface finish, discolored chips (too much heat), broken tools, or excessive tool wear. Blue chips indicate overheating - reduce speed or increase feed."
+    question: 'How do I know if my feeds and speeds are wrong?',
+    answer:
+      'Signs of incorrect parameters: excessive chatter/vibration, poor surface finish, discolored chips (too much heat), broken tools, or excessive tool wear. Blue chips indicate overheating - reduce speed or increase feed.',
   },
   {
     question: "What's the difference between roughing and finishing?",
-    answer: "Roughing uses higher chip loads and deeper cuts to remove material quickly. Finishing uses lower chip loads and shallower cuts for better surface finish. Our calculator adjusts SFM and chip load accordingly."
+    answer:
+      'Roughing uses higher chip loads and deeper cuts to remove material quickly. Finishing uses lower chip loads and shallower cuts for better surface finish. Our calculator adjusts SFM and chip load accordingly.',
   },
 ];
 
@@ -100,8 +108,8 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Speeds & Feeds">
     <p>
-      Proper speeds and feeds are critical for tool life, surface finish, and productivity.
-      Running too slow wastes time; running too fast damages tools and workpieces.
+      Proper speeds and feeds are critical for tool life, surface finish, and productivity. Running
+      too slow wastes time; running too fast damages tools and workpieces.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Key Parameters</h3>
     <ul class="list-disc list-inside space-y-1">

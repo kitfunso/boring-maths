@@ -9,13 +9,14 @@ export function calculateClayShrinkage(inputs: ClayShrinkageInputs): ClayShrinka
   const { calculationMode, knownSize, shrinkagePercent, clayType } = inputs;
 
   // Get clay shrinkage data
-  const clayData = CLAY_TYPES.find(c => c.value === clayType);
-  const totalShrinkage = clayType === 'custom' ? shrinkagePercent : (clayData?.totalShrinkage || shrinkagePercent);
+  const clayData = CLAY_TYPES.find((c) => c.value === clayType);
+  const totalShrinkage =
+    clayType === 'custom' ? shrinkagePercent : clayData?.totalShrinkage || shrinkagePercent;
   const dryShrinkage = clayData?.dryShrinkage || totalShrinkage * 0.5;
   const firingShrinkage = totalShrinkage - dryShrinkage;
 
   // Shrinkage factor (what remains after shrinking)
-  const shrinkageFactor = 1 - (totalShrinkage / 100);
+  const shrinkageFactor = 1 - totalShrinkage / 100;
 
   let resultSize: number;
   let sizeChange: number;
@@ -83,13 +84,14 @@ export function getShrinkageCategory(percent: number): { label: string; color: s
 }
 
 // Generate shrinkage table for common sizes
-export function generateShrinkageTable(shrinkagePercent: number, unit: string): { thrown: number; fired: number }[] {
-  const factor = 1 - (shrinkagePercent / 100);
-  const sizes = unit === 'cm'
-    ? [5, 10, 15, 20, 25, 30, 40, 50]
-    : [2, 3, 4, 5, 6, 8, 10, 12];
+export function generateShrinkageTable(
+  shrinkagePercent: number,
+  unit: string
+): { thrown: number; fired: number }[] {
+  const factor = 1 - shrinkagePercent / 100;
+  const sizes = unit === 'cm' ? [5, 10, 15, 20, 25, 30, 40, 50] : [2, 3, 4, 5, 6, 8, 10, 12];
 
-  return sizes.map(thrown => ({
+  return sizes.map((thrown) => ({
     thrown,
     fired: Math.round(thrown * factor * 100) / 100,
   }));

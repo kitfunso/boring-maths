@@ -26,7 +26,7 @@ export interface PipeFlowResult {
   diameter: number;
   velocity: number;
   flowRate: number;
-  crossSectionalArea: number;  // mm² or in²
+  crossSectionalArea: number; // mm² or in²
   hydraulicDiameter: number;
   recommendedVelocity: { min: number; max: number };
   velocityStatus: 'low' | 'optimal' | 'high';
@@ -42,8 +42,8 @@ export const VELOCITY_RECOMMENDATIONS = {
     slurry: { min: 1.5, max: 4.0, typical: 2.5 },
   },
   gas: {
-    lowPressure: { min: 15, max: 30, typical: 20 },    // < 1 bar gauge
-    highPressure: { min: 30, max: 60, typical: 40 },   // > 10 bar gauge
+    lowPressure: { min: 15, max: 30, typical: 20 }, // < 1 bar gauge
+    highPressure: { min: 30, max: 60, typical: 40 }, // > 10 bar gauge
   },
   steam: {
     saturated: { min: 20, max: 40, typical: 25 },
@@ -53,12 +53,12 @@ export const VELOCITY_RECOMMENDATIONS = {
 
 // Standard pipe sizes (nominal) in mm
 export const STANDARD_PIPE_SIZES_MM = [
-  15, 20, 25, 32, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500, 600
+  15, 20, 25, 32, 40, 50, 65, 80, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500, 600,
 ];
 
 // Standard pipe sizes (nominal) in inches
 export const STANDARD_PIPE_SIZES_IN = [
-  0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 24
+  0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 14, 16, 18, 20, 24,
 ];
 
 export function getDefaultInputs(): PipeFlowInputs {
@@ -66,9 +66,9 @@ export function getDefaultInputs(): PipeFlowInputs {
     unitSystem: 'metric',
     solveFor: 'diameter',
     fluidCategory: 'liquid',
-    diameter: 50,      // 50 mm
-    velocity: 2,       // 2 m/s
-    flowRate: 14.14,   // m³/h (approx for 50mm @ 2m/s)
+    diameter: 50, // 50 mm
+    velocity: 2, // 2 m/s
+    flowRate: 14.14, // m³/h (approx for 50mm @ 2m/s)
     pipeSchedule: '40',
   };
 }

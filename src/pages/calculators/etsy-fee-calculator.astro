@@ -14,8 +14,10 @@ import EtsyFeeCalculator from '../../components/calculators/EtsyFeeCalculator/Et
 
 // SEO Configuration
 const title = 'Etsy Fee Calculator & eBay Fee Calculator | Compare Marketplace Fees 2024';
-const description = 'Free Etsy fee calculator and eBay fee calculator. Compare marketplace fees side-by-side, calculate your net profit, and find the best platform for selling. Includes 2024 fee structures.';
-const keywords = 'etsy fee calculator, ebay fee calculator, etsy fees 2024, ebay fees 2024, etsy seller fees, ebay seller fees, marketplace fee comparison, etsy transaction fee, ebay final value fee, selling fees calculator';
+const description =
+  'Free Etsy fee calculator and eBay fee calculator. Compare marketplace fees side-by-side, calculate your net profit, and find the best platform for selling. Includes 2024 fee structures.';
+const keywords =
+  'etsy fee calculator, ebay fee calculator, etsy fees 2024, ebay fees 2024, etsy seller fees, ebay seller fees, marketplace fee comparison, etsy transaction fee, ebay final value fee, selling fees calculator';
 const canonicalURL = '/calculators/etsy-fee-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -48,36 +50,44 @@ const relatedCalculators = [
 const faqs = [
   {
     question: "What are Etsy's fees in 2024?",
-    answer: "Etsy charges four main fees: a $0.20 listing fee per item, a 6.5% transaction fee on the sale price plus shipping, a 3% + $0.25 payment processing fee, and an optional 15% offsite ads fee if your sale came from an Etsy ad. For a $40 item with $5 shipping, expect to pay approximately $4.40-$5.50 in total fees."
+    answer:
+      'Etsy charges four main fees: a $0.20 listing fee per item, a 6.5% transaction fee on the sale price plus shipping, a 3% + $0.25 payment processing fee, and an optional 15% offsite ads fee if your sale came from an Etsy ad. For a $40 item with $5 shipping, expect to pay approximately $4.40-$5.50 in total fees.',
   },
   {
     question: "What are eBay's fees in 2024?",
-    answer: "eBay's fee structure is simpler: a 13.25% final value fee on the total sale amount (including shipping) for most categories, plus a $0.30 per-order fee. Payment processing is included in the final value fee. You get 250 free listings per month. For a $40 item with $5 shipping, expect to pay approximately $6.26 in total fees."
+    answer:
+      "eBay's fee structure is simpler: a 13.25% final value fee on the total sale amount (including shipping) for most categories, plus a $0.30 per-order fee. Payment processing is included in the final value fee. You get 250 free listings per month. For a $40 item with $5 shipping, expect to pay approximately $6.26 in total fees.",
   },
   {
-    question: "Is Etsy or eBay cheaper for sellers?",
-    answer: "It depends on your sale price. For lower-priced items (under ~$15), eBay often has lower fees because Etsy's fixed fees ($0.20 listing + $0.25 payment processing) have a bigger impact. For higher-priced items, Etsy's lower percentage-based fees (9.5% combined vs eBay's 13.25%) often result in lower total fees."
+    question: 'Is Etsy or eBay cheaper for sellers?',
+    answer:
+      "It depends on your sale price. For lower-priced items (under ~$15), eBay often has lower fees because Etsy's fixed fees ($0.20 listing + $0.25 payment processing) have a bigger impact. For higher-priced items, Etsy's lower percentage-based fees (9.5% combined vs eBay's 13.25%) often result in lower total fees.",
   },
   {
     question: "What is Etsy's offsite ads fee?",
-    answer: "Etsy's offsite ads program advertises your listings on Google, Facebook, Instagram, and other platforms. If a buyer clicks an ad and purchases within 30 days, you pay a 15% fee on the sale. Shops earning over $10,000/year cannot opt out. This fee can significantly impact your margins, so factor it into your pricing."
+    answer:
+      "Etsy's offsite ads program advertises your listings on Google, Facebook, Instagram, and other platforms. If a buyer clicks an ad and purchases within 30 days, you pay a 15% fee on the sale. Shops earning over $10,000/year cannot opt out. This fee can significantly impact your margins, so factor it into your pricing.",
   },
   {
-    question: "Are eBay fees charged on shipping?",
-    answer: "Yes, eBay's final value fee (13.25% for most categories) is calculated on the total amount including shipping. This is why many eBay sellers offer free shipping and build the cost into their item price - the fee is the same either way, but free shipping can improve search visibility."
+    question: 'Are eBay fees charged on shipping?',
+    answer:
+      "Yes, eBay's final value fee (13.25% for most categories) is calculated on the total amount including shipping. This is why many eBay sellers offer free shipping and build the cost into their item price - the fee is the same either way, but free shipping can improve search visibility.",
   },
   {
-    question: "How do I reduce my Etsy fees?",
-    answer: "To minimize Etsy fees: 1) Offer free shipping (the fee is the same, but it can boost your search ranking), 2) Use Etsy's shipping labels for better rates, 3) Consider your pricing strategy since fixed fees impact lower-priced items more, 4) If eligible, consider opting out of offsite ads, 5) Bundle items to reduce per-item listing fees."
+    question: 'How do I reduce my Etsy fees?',
+    answer:
+      "To minimize Etsy fees: 1) Offer free shipping (the fee is the same, but it can boost your search ranking), 2) Use Etsy's shipping labels for better rates, 3) Consider your pricing strategy since fixed fees impact lower-priced items more, 4) If eligible, consider opting out of offsite ads, 5) Bundle items to reduce per-item listing fees.",
   },
   {
-    question: "How do I reduce my eBay fees?",
-    answer: "To minimize eBay fees: 1) Consider an eBay Store subscription if you sell high volume (lower final value fees), 2) Use eBay's promoted listings strategically, 3) Offer combined shipping to encourage larger orders, 4) List in the correct category (some have lower fees), 5) Maintain good seller metrics to avoid additional fees."
+    question: 'How do I reduce my eBay fees?',
+    answer:
+      "To minimize eBay fees: 1) Consider an eBay Store subscription if you sell high volume (lower final value fees), 2) Use eBay's promoted listings strategically, 3) Offer combined shipping to encourage larger orders, 4) List in the correct category (some have lower fees), 5) Maintain good seller metrics to avoid additional fees.",
   },
   {
-    question: "Do Etsy or eBay fees include payment processing?",
-    answer: "eBay includes payment processing in their final value fee - there's no separate charge. Etsy charges payment processing separately: 3% + $0.25 through Etsy Payments. This is why Etsy's fees might seem lower at first glance, but the payment processing adds up, especially on lower-priced items."
-  }
+    question: 'Do Etsy or eBay fees include payment processing?',
+    answer:
+      "eBay includes payment processing in their final value fee - there's no separate charge. Etsy charges payment processing separately: 3% + $0.25 through Etsy Payments. This is why Etsy's fees might seem lower at first glance, but the payment processing adds up, especially on lower-priced items.",
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -115,65 +125,60 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>sale price</strong> - the item price before shipping.
-      This is the base amount both platforms use to calculate most of their fees.
+      Enter your <strong>sale price</strong> - the item price before shipping. This is the base amount
+      both platforms use to calculate most of their fees.
     </p>
     <p>
-      Add your <strong>shipping charged</strong> - what the buyer pays for shipping.
-      Important: both Etsy and eBay charge fees on shipping amounts, so this affects
-      your total fees.
+      Add your <strong>shipping charged</strong> - what the buyer pays for shipping. Important: both Etsy
+      and eBay charge fees on shipping amounts, so this affects your total fees.
     </p>
     <p>
-      Include your <strong>actual costs</strong> - the real shipping expense and
-      your cost of goods sold (materials, supplies, packaging). This helps calculate
-      your true profit margin after all fees and costs.
+      Include your <strong>actual costs</strong> - the real shipping expense and your cost of goods sold
+      (materials, supplies, packaging). This helps calculate your true profit margin after all fees and
+      costs.
     </p>
     <p>
-      For eBay, select your <strong>item category</strong> as fee rates vary slightly.
-      For Etsy, check the offsite ads box if the sale came from an Etsy advertisement,
-      which adds a 15% fee.
+      For eBay, select your <strong>item category</strong> as fee rates vary slightly. For Etsy, check
+      the offsite ads box if the sale came from an Etsy advertisement, which adds a 15% fee.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Total fees</strong> shows exactly what each platform takes from your
-      sale. This includes all listing fees, transaction fees, payment processing,
-      and any advertising fees.
+      <strong>Total fees</strong> shows exactly what each platform takes from your sale. This includes
+      all listing fees, transaction fees, payment processing, and any advertising fees.
     </p>
     <p>
-      The <strong>effective fee percentage</strong> tells you what percentage of
-      your total sale (including shipping) goes to fees. This makes it easy to
-      compare platforms and factor fees into your pricing.
+      The <strong>effective fee percentage</strong> tells you what percentage of your total sale (including
+      shipping) goes to fees. This makes it easy to compare platforms and factor fees into your pricing.
     </p>
     <p>
-      <strong>Net profit</strong> is what you actually keep after all fees and
-      costs. This is the most important number for determining which platform
-      works better for your specific products.
+      <strong>Net profit</strong> is what you actually keep after all fees and costs. This is the most
+      important number for determining which platform works better for your specific products.
     </p>
     <p>
-      Use the <strong>side-by-side comparison</strong> to see which platform
-      offers better margins for your price point. The winner may change depending
-      on whether you're selling a $10 item or a $100 item.
+      Use the <strong>side-by-side comparison</strong> to see which platform offers better margins for
+      your price point. The winner may change depending on whether you're selling a $10 item or a $100
+      item.
     </p>
   </ContentSection>
 
   <ContentSection title="Etsy vs eBay: Which Platform is Better for Sellers?">
     <p>
       The best platform depends on your products, price point, and target market.
-      <strong>Etsy</strong> excels for handmade, vintage, and craft supplies with
-      a built-in audience seeking unique items. <strong>eBay</strong> offers broader
-      reach for all product types, especially electronics, collectibles, and brand-name goods.
+      <strong>Etsy</strong> excels for handmade, vintage, and craft supplies with a built-in audience
+      seeking unique items. <strong>eBay</strong> offers broader reach for all product types, especially
+      electronics, collectibles, and brand-name goods.
     </p>
     <p>
-      From a fees perspective: Etsy typically costs less for items priced above $20-25
-      due to lower percentage-based fees. eBay can be cheaper for lower-priced items
-      where Etsy's fixed fees ($0.20 + $0.25) have a larger impact.
+      From a fees perspective: Etsy typically costs less for items priced above $20-25 due to lower
+      percentage-based fees. eBay can be cheaper for lower-priced items where Etsy's fixed fees
+      ($0.20 + $0.25) have a larger impact.
     </p>
     <p>
-      Consider also: Etsy's search algorithm favors shops with free shipping, while
-      eBay offers store subscriptions with reduced fees for high-volume sellers.
-      Many successful sellers use both platforms to maximize their reach.
+      Consider also: Etsy's search algorithm favors shops with free shipping, while eBay offers
+      store subscriptions with reduced fees for high-volume sellers. Many successful sellers use
+      both platforms to maximize their reach.
     </p>
   </ContentSection>
 

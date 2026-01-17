@@ -58,7 +58,7 @@ export function ButtonGroup<T extends string>({
 }: ButtonGroupProps<T>) {
   const { tokens } = useTheme();
 
-  const cols = columns || (options.length <= 4 ? options.length : 3) as 2 | 3 | 4;
+  const cols = columns || ((options.length <= 4 ? options.length : 3) as 2 | 3 | 4);
 
   return (
     <div className={`grid ${GRID_COLS[cols]} gap-3 ${className}`}>
@@ -72,11 +72,14 @@ export function ButtonGroup<T extends string>({
             className={`
               ${SIZE_CLASSES[size]}
               rounded-xl border-2 font-medium transition-all
-              ${isActive
-                ? `${tokens.border500} ${tokens.bg50} ${tokens.text700}`
-                : `border-white/10 hover:${tokens.border200} text-[var(--color-cream)]`
+              ${
+                isActive
+                  ? `${tokens.border500} ${tokens.bg50} ${tokens.text700}`
+                  : `border-white/10 hover:${tokens.border200} text-[var(--color-cream)]`
               }
-            `.trim().replace(/\s+/g, ' ')}
+            `
+              .trim()
+              .replace(/\s+/g, ' ')}
           >
             {option.label}
           </button>

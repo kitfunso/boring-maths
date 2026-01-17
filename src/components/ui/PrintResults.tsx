@@ -103,17 +103,21 @@ export default function PrintResults({ title, results, className = '' }: PrintRe
               weekday: 'long',
               year: 'numeric',
               month: 'long',
-              day: 'numeric'
+              day: 'numeric',
             })}</div>
           </div>
 
           <div class="results">
-            ${results.map(r => `
+            ${results
+              .map(
+                (r) => `
               <div class="result-row">
                 <span class="result-label">${r.label}</span>
                 <span class="result-value">${r.value}</span>
               </div>
-            `).join('')}
+            `
+              )
+              .join('')}
           </div>
 
           <div class="footer">
@@ -145,7 +149,12 @@ export default function PrintResults({ title, results, className = '' }: PrintRe
       className={`flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[var(--color-subtle)] hover:text-[var(--color-cream)] transition-all text-sm ${className}`}
     >
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+        />
       </svg>
       <span>Print / PDF</span>
     </button>

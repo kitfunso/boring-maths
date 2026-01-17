@@ -53,9 +53,9 @@ export const FLOW_REGIMES: FlowRegime[] = [
 
 // Kinematic viscosity values at 20°C in m²/s
 export const FLUID_VISCOSITIES: Record<FluidType, number> = {
-  water: 1.004e-6,    // m²/s at 20°C
-  air: 1.516e-5,      // m²/s at 20°C
-  oil: 1.0e-4,        // typical hydraulic oil
+  water: 1.004e-6, // m²/s at 20°C
+  air: 1.516e-5, // m²/s at 20°C
+  oil: 1.0e-4, // typical hydraulic oil
   custom: 1.0e-6,
 };
 
@@ -63,8 +63,8 @@ export function getDefaultInputs(): ReynoldsInputs {
   return {
     unitSystem: 'metric',
     fluidType: 'water',
-    diameter: 50,        // 50 mm pipe
-    velocity: 2,         // 2 m/s
+    diameter: 50, // 50 mm pipe
+    velocity: 2, // 2 m/s
     kinematicViscosity: FLUID_VISCOSITIES.water,
     temperature: 20,
   };

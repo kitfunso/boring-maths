@@ -63,12 +63,12 @@ export function ResultCard({
       <p className={`text-sm font-semibold ${tokens.text600} uppercase tracking-wider mb-2`}>
         {label}
       </p>
-      <p className={`${SIZE_CLASSES[size].value} font-bold ${tokens.text700} tabular-nums tracking-tight`}>
+      <p
+        className={`${SIZE_CLASSES[size].value} font-bold ${tokens.text700} tabular-nums tracking-tight`}
+      >
         {value}
       </p>
-      {subtitle && (
-        <p className={`${tokens.text600} mt-2`}>{subtitle}</p>
-      )}
+      {subtitle && <p className={`${tokens.text600} mt-2`}>{subtitle}</p>}
       {footer && (
         <div className={`mt-4 pt-4 border-t ${tokens.border200}`}>
           <div className={`text-sm ${tokens.text600}`}>{footer}</div>

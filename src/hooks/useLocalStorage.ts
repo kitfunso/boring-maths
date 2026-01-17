@@ -14,9 +14,7 @@ export function useLocalStorage<T>(
   // Get initial value from localStorage or use provided initial value
   const getInitialValue = (): T => {
     if (typeof window === 'undefined') {
-      return typeof initialValue === 'function'
-        ? (initialValue as () => T)()
-        : initialValue;
+      return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
     }
 
     try {
@@ -28,9 +26,7 @@ export function useLocalStorage<T>(
       console.warn(`Error reading localStorage key "${key}":`, error);
     }
 
-    return typeof initialValue === 'function'
-      ? (initialValue as () => T)()
-      : initialValue;
+    return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
   };
 
   const [state, setState] = useState<T>(getInitialValue);
@@ -66,9 +62,7 @@ export function useLocalStorage<T>(
 
   // Clear function to reset to initial value
   const clear = useCallback(() => {
-    const initial = typeof initialValue === 'function'
-      ? (initialValue as () => T)()
-      : initialValue;
+    const initial = typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
     setState(initial);
     try {
       localStorage.removeItem(key);

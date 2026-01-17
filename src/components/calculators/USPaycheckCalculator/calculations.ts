@@ -27,7 +27,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
     additionalWithholding,
   } = inputs;
 
-  const payPeriods = PAY_FREQUENCIES.find(p => p.value === payFrequency)?.periods || 26;
+  const payPeriods = PAY_FREQUENCIES.find((p) => p.value === payFrequency)?.periods || 26;
   const grossPay = grossSalary / payPeriods;
 
   // Pre-tax deductions (per paycheck)
@@ -56,9 +56,10 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const socialSecurity = annualSS / payPeriods;
 
   // Medicare (1.45% + 0.9% additional above threshold)
-  const medicareThreshold = filingStatus === 'married'
-    ? MEDICARE_ADDITIONAL_THRESHOLD_MARRIED
-    : MEDICARE_ADDITIONAL_THRESHOLD_SINGLE;
+  const medicareThreshold =
+    filingStatus === 'married'
+      ? MEDICARE_ADDITIONAL_THRESHOLD_MARRIED
+      : MEDICARE_ADDITIONAL_THRESHOLD_SINGLE;
 
   let annualMedicare = grossSalary * MEDICARE_RATE;
   if (grossSalary > medicareThreshold) {
@@ -121,7 +122,7 @@ export function formatPercent(value: number): string {
 }
 
 export function getPayFrequencyLabel(frequency: string): string {
-  return PAY_FREQUENCIES.find(p => p.value === frequency)?.label || frequency;
+  return PAY_FREQUENCIES.find((p) => p.value === frequency)?.label || frequency;
 }
 
 export function getStateName(stateCode: string): string {

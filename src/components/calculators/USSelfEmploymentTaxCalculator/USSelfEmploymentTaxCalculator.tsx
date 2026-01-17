@@ -9,15 +9,7 @@ import {
   type USSelfEmploymentTaxInputs,
   type FilingStatus,
 } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  ButtonGroup,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
@@ -81,7 +73,9 @@ export default function USSelfEmploymentTaxCalculator() {
                   id="selfEmploymentIncome"
                   type="number"
                   value={inputs.selfEmploymentIncome}
-                  onChange={(e) => updateInput('selfEmploymentIncome', Number(e.currentTarget.value))}
+                  onChange={(e) =>
+                    updateInput('selfEmploymentIncome', Number(e.currentTarget.value))
+                  }
                   min={0}
                   step={1000}
                   className="pl-8"
@@ -94,9 +88,7 @@ export default function USSelfEmploymentTaxCalculator() {
 
             {/* Business Expenses */}
             <div>
-              <Label htmlFor="businessExpenses">
-                Business Expenses
-              </Label>
+              <Label htmlFor="businessExpenses">Business Expenses</Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
                   $
@@ -118,9 +110,7 @@ export default function USSelfEmploymentTaxCalculator() {
 
             {/* Other Income */}
             <div>
-              <Label htmlFor="otherIncome">
-                Other Income (W-2, etc.)
-              </Label>
+              <Label htmlFor="otherIncome">Other Income (W-2, etc.)</Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
                   $
@@ -167,7 +157,9 @@ export default function USSelfEmploymentTaxCalculator() {
                     id="itemizedDeductions"
                     type="number"
                     value={inputs.itemizedDeductions}
-                    onChange={(e) => updateInput('itemizedDeductions', Number(e.currentTarget.value))}
+                    onChange={(e) =>
+                      updateInput('itemizedDeductions', Number(e.currentTarget.value))
+                    }
                     min={0}
                     step={100}
                     className="pl-8"
@@ -194,11 +186,15 @@ export default function USSelfEmploymentTaxCalculator() {
 
             {/* SE Tax Breakdown */}
             <div className="bg-rose-950/30 rounded-xl p-4 border border-rose-500/30">
-              <h4 className="text-sm font-medium text-rose-400 mb-3">Self-Employment Tax (15.3%)</h4>
+              <h4 className="text-sm font-medium text-rose-400 mb-3">
+                Self-Employment Tax (15.3%)
+              </h4>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Net SE income (after expenses)</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(result.netSelfEmployment)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(result.netSelfEmployment)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Social Security (12.4%)</span>
@@ -211,12 +207,16 @@ export default function USSelfEmploymentTaxCalculator() {
                 {result.additionalMedicareTax > 0 && (
                   <div className="flex justify-between text-[var(--color-subtle)]">
                     <span>Additional Medicare (0.9%)</span>
-                    <span className="text-rose-400">{formatCurrency(result.additionalMedicareTax)}</span>
+                    <span className="text-rose-400">
+                      {formatCurrency(result.additionalMedicareTax)}
+                    </span>
                   </div>
                 )}
                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                   <span className="text-[var(--color-cream)] font-medium">Total SE Tax</span>
-                  <span className="text-rose-400 font-semibold">{formatCurrency(result.selfEmploymentTax)}</span>
+                  <span className="text-rose-400 font-semibold">
+                    {formatCurrency(result.selfEmploymentTax)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -227,15 +227,21 @@ export default function USSelfEmploymentTaxCalculator() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Half SE tax deduction</span>
-                  <span className="text-emerald-400">-{formatCurrency(result.halfSETaxDeduction)}</span>
+                  <span className="text-emerald-400">
+                    -{formatCurrency(result.halfSETaxDeduction)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Taxable income</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(result.taxableIncome)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(result.taxableIncome)}
+                  </span>
                 </div>
                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                   <span className="text-[var(--color-cream)] font-medium">Federal Tax</span>
-                  <span className="text-blue-400 font-semibold">{formatCurrency(result.federalIncomeTax)}</span>
+                  <span className="text-blue-400 font-semibold">
+                    {formatCurrency(result.federalIncomeTax)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -243,8 +249,18 @@ export default function USSelfEmploymentTaxCalculator() {
             {/* Quarterly Payments */}
             <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
               <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                <svg
+                  className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
                 <div className="flex-1">
                   <p className="text-amber-400 font-medium">Quarterly Estimated Payments</p>
@@ -306,7 +322,9 @@ export default function USSelfEmploymentTaxCalculator() {
 
             {/* SE Tax Info */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">2025 Self-Employment Tax Rates</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                2025 Self-Employment Tax Rates
+              </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
                   <span>Social Security rate</span>
@@ -322,7 +340,9 @@ export default function USSelfEmploymentTaxCalculator() {
                 </div>
                 <div className="flex justify-between">
                   <span>Social Security wage base</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(SE_TAX_RATES.socialSecurityWageBase)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(SE_TAX_RATES.socialSecurityWageBase)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Additional Medicare (over $200k single)</span>

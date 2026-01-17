@@ -114,12 +114,7 @@ export default function MulchCalculator() {
         <CalculatorHeader
           title="Calculate Your Mulch Needs"
           subtitle="Find out how much mulch to buy for your garden beds"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -140,9 +135,7 @@ export default function MulchCalculator() {
                     max={500}
                     step={0.5}
                     value={inputs.length}
-                    onChange={(e) =>
-                      updateInput('length', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('length', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -154,9 +147,7 @@ export default function MulchCalculator() {
                     max={500}
                     step={0.5}
                     value={inputs.width}
-                    onChange={(e) =>
-                      updateInput('width', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('width', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -205,9 +196,7 @@ export default function MulchCalculator() {
                     max={500}
                     step={1}
                     value={inputs.pricePerCubicYard}
-                    onChange={(e) =>
-                      updateInput('pricePerCubicYard', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('pricePerCubicYard', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -219,9 +208,7 @@ export default function MulchCalculator() {
                     max={50}
                     step={0.25}
                     value={inputs.pricePer2CuFtBag}
-                    onChange={(e) =>
-                      updateInput('pricePer2CuFtBag', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('pricePer2CuFtBag', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -233,9 +220,7 @@ export default function MulchCalculator() {
                     max={75}
                     step={0.25}
                     value={inputs.pricePer3CuFtBag}
-                    onChange={(e) =>
-                      updateInput('pricePer3CuFtBag', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('pricePer3CuFtBag', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -246,9 +231,7 @@ export default function MulchCalculator() {
               <div className="flex items-start gap-4">
                 <Checkbox
                   checked={inputs.includeDelivery}
-                  onChange={(checked) =>
-                    updateInput('includeDelivery', checked)
-                  }
+                  onChange={(checked) => updateInput('includeDelivery', checked)}
                   label="Include delivery fee for bulk orders"
                 />
                 {inputs.includeDelivery && (
@@ -260,9 +243,7 @@ export default function MulchCalculator() {
                       min={0}
                       max={500}
                       value={inputs.deliveryFee}
-                      onChange={(e) =>
-                        updateInput('deliveryFee', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('deliveryFee', Number(e.target.value))}
                       className="w-24"
                     />
                   </div>
@@ -284,7 +265,8 @@ export default function MulchCalculator() {
                 <>
                   Best value:{' '}
                   <span className="font-semibold">
-                    {bestValueLabel} - {formatCurrency(
+                    {bestValueLabel} -{' '}
+                    {formatCurrency(
                       result.bestValue === 'bulk'
                         ? result.bulkCost
                         : result.bestValue === '2cuft'
@@ -348,9 +330,7 @@ export default function MulchCalculator() {
                   <div className="text-right">
                     <span
                       className={`font-bold ${
-                        result.bestValue === 'bulk'
-                          ? 'text-green-400'
-                          : 'text-[var(--color-cream)]'
+                        result.bestValue === 'bulk' ? 'text-green-400' : 'text-[var(--color-cream)]'
                       }`}
                     >
                       {formatCurrency(result.bulkCost, result.currency, 2)}
@@ -372,11 +352,10 @@ export default function MulchCalculator() {
                   }`}
                 >
                   <div>
-                    <span className="font-medium text-[var(--color-cream)]">
-                      2 cu ft Bags
-                    </span>
+                    <span className="font-medium text-[var(--color-cream)]">2 cu ft Bags</span>
                     <span className="text-[var(--color-muted)] ml-2">
-                      {result.bags2CuFt} bags @ {formatCurrency(inputs.pricePer2CuFtBag, result.currency, 2)} each
+                      {result.bags2CuFt} bags @{' '}
+                      {formatCurrency(inputs.pricePer2CuFtBag, result.currency, 2)} each
                     </span>
                   </div>
                   <div className="text-right">
@@ -406,11 +385,10 @@ export default function MulchCalculator() {
                   }`}
                 >
                   <div>
-                    <span className="font-medium text-[var(--color-cream)]">
-                      3 cu ft Bags
-                    </span>
+                    <span className="font-medium text-[var(--color-cream)]">3 cu ft Bags</span>
                     <span className="text-[var(--color-muted)] ml-2">
-                      {result.bags3CuFt} bags @ {formatCurrency(inputs.pricePer3CuFtBag, result.currency, 2)} each
+                      {result.bags3CuFt} bags @{' '}
+                      {formatCurrency(inputs.pricePer3CuFtBag, result.currency, 2)} each
                     </span>
                   </div>
                   <div className="text-right">
@@ -446,9 +424,7 @@ export default function MulchCalculator() {
                     <div
                       key={type}
                       className={`text-center p-3 rounded-lg ${
-                        isSelected
-                          ? 'bg-green-900/50 ring-2 ring-green-400'
-                          : 'bg-green-900/30'
+                        isSelected ? 'bg-green-900/50 ring-2 ring-green-400' : 'bg-green-900/30'
                       }`}
                     >
                       <div
@@ -459,9 +435,7 @@ export default function MulchCalculator() {
                         {name}
                       </div>
                       <div
-                        className={`text-xs ${
-                          isSelected ? 'text-green-300' : 'text-green-500'
-                        }`}
+                        className={`text-xs ${isSelected ? 'text-green-300' : 'text-green-500'}`}
                       >
                         {config.densityLbsPerCuFt} lbs/cu ft
                       </div>

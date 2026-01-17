@@ -19,9 +19,7 @@ import { DRINKS_PER_HOUR, SERVINGS_PER_BOTTLE } from './types';
  * @param inputs - Calculator input values
  * @returns Calculated alcohol quantities
  */
-export function calculateWeddingAlcohol(
-  inputs: WeddingAlcoholInputs
-): WeddingAlcoholResult {
+export function calculateWeddingAlcohol(inputs: WeddingAlcoholInputs): WeddingAlcoholResult {
   const {
     guestCount,
     eventHours,

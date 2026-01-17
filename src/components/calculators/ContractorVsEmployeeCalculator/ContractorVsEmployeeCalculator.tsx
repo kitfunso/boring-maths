@@ -15,10 +15,7 @@ import {
   getTaxBrackets,
   SELF_EMPLOYMENT_TAX_INFO,
 } from './calculations';
-import {
-  getDefaultInputs,
-  type ContractorVsEmployeeInputs,
-} from './types';
+import { getDefaultInputs, type ContractorVsEmployeeInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -60,10 +57,7 @@ export default function ContractorVsEmployeeCalculator() {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  const winnerColors = getComparisonColor(
-    result.contractor.netIncome,
-    result.employee.netIncome
-  );
+  const winnerColors = getComparisonColor(result.contractor.netIncome, result.employee.netIncome);
 
   const isContractorBetter = result.comparison.winner === 'contractor';
 
@@ -74,12 +68,7 @@ export default function ContractorVsEmployeeCalculator() {
         <CalculatorHeader
           title="Contractor vs Employee Calculator"
           subtitle="Compare true total compensation to make informed career decisions"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -95,9 +84,7 @@ export default function ContractorVsEmployeeCalculator() {
                 </h3>
 
                 <div>
-                  <Label htmlFor="contractorHourlyRate">
-                    Hourly Rate ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="contractorHourlyRate">Hourly Rate ({currencySymbol})</Label>
                   <Input
                     id="contractorHourlyRate"
                     type="number"
@@ -105,9 +92,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={1000}
                     step={5}
                     value={inputs.contractorHourlyRate}
-                    onChange={(e) =>
-                      updateInput('contractorHourlyRate', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('contractorHourlyRate', Number(e.target.value))}
                   />
                 </div>
 
@@ -141,7 +126,8 @@ export default function ContractorVsEmployeeCalculator() {
                 </Grid>
 
                 <div className="text-sm text-[var(--color-muted)] bg-[var(--color-charcoal)] rounded-lg p-3">
-                  Annual gross: {formatCurrency(
+                  Annual gross:{' '}
+                  {formatCurrency(
                     inputs.contractorHourlyRate *
                       inputs.contractorBillableHoursPerWeek *
                       inputs.contractorWeeksPerYear,
@@ -167,9 +153,7 @@ export default function ContractorVsEmployeeCalculator() {
                 </div>
 
                 <div>
-                  <Label htmlFor="contractorRetirement">
-                    Retirement Contribution (%)
-                  </Label>
+                  <Label htmlFor="contractorRetirement">Retirement Contribution (%)</Label>
                   <Input
                     id="contractorRetirement"
                     type="number"
@@ -243,9 +227,7 @@ export default function ContractorVsEmployeeCalculator() {
                 </h3>
 
                 <div>
-                  <Label htmlFor="employeeSalary">
-                    Annual Salary ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="employeeSalary">Annual Salary ({currencySymbol})</Label>
                   <Input
                     id="employeeSalary"
                     type="number"
@@ -253,9 +235,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={1000000}
                     step={5000}
                     value={inputs.employeeSalary}
-                    onChange={(e) =>
-                      updateInput('employeeSalary', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('employeeSalary', Number(e.target.value))}
                   />
                 </div>
 
@@ -268,9 +248,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={100}
                     step={5}
                     value={inputs.employeeBonusPercent}
-                    onChange={(e) =>
-                      updateInput('employeeBonusPercent', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('employeeBonusPercent', Number(e.target.value))}
                   />
                 </div>
 
@@ -286,9 +264,7 @@ export default function ContractorVsEmployeeCalculator() {
                       max={10}
                       step={0.5}
                       value={inputs.employer401kMatch}
-                      onChange={(e) =>
-                        updateInput('employer401kMatch', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('employer401kMatch', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -369,9 +345,7 @@ export default function ContractorVsEmployeeCalculator() {
                       min={0}
                       max={50}
                       value={inputs.paidTimeOffDays}
-                      onChange={(e) =>
-                        updateInput('paidTimeOffDays', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('paidTimeOffDays', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -382,17 +356,13 @@ export default function ContractorVsEmployeeCalculator() {
                       min={0}
                       max={20}
                       value={inputs.paidHolidaysDays}
-                      onChange={(e) =>
-                        updateInput('paidHolidaysDays', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('paidHolidaysDays', Number(e.target.value))}
                     />
                   </div>
                 </Grid>
 
                 <div>
-                  <Label htmlFor="otherBenefits">
-                    Other Benefits ({currencySymbol}/year)
-                  </Label>
+                  <Label htmlFor="otherBenefits">Other Benefits ({currencySymbol}/year)</Label>
                   <Input
                     id="otherBenefits"
                     type="number"
@@ -400,9 +370,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={50000}
                     step={500}
                     value={inputs.otherBenefitsAnnual}
-                    onChange={(e) =>
-                      updateInput('otherBenefitsAnnual', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('otherBenefitsAnnual', Number(e.target.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">
                     Stock grants, gym, tuition, etc.
@@ -421,30 +389,45 @@ export default function ContractorVsEmployeeCalculator() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </summary>
               <Grid responsive={{ sm: 1, md: 3 }} gap="md" className="mt-3">
                 <div>
-                  <Label htmlFor="federalTax">{inputs.currency === 'GBP' ? 'Income Tax Band' : inputs.currency === 'EUR' ? 'Income Tax Rate' : 'Federal Tax Bracket'}</Label>
+                  <Label htmlFor="federalTax">
+                    {inputs.currency === 'GBP'
+                      ? 'Income Tax Band'
+                      : inputs.currency === 'EUR'
+                        ? 'Income Tax Rate'
+                        : 'Federal Tax Bracket'}
+                  </Label>
                   <select
                     id="federalTax"
                     className="w-full bg-[var(--color-charcoal)] border border-white/10 rounded-xl px-4 py-3 text-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50 focus:border-[var(--color-accent)]/50 cursor-pointer hover:bg-[var(--color-slate)] transition-colors"
                     style={{ colorScheme: 'dark' }}
                     value={inputs.federalTaxBracket}
-                    onChange={(e) =>
-                      updateInput('federalTaxBracket', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('federalTaxBracket', Number(e.target.value))}
                   >
                     {getTaxBrackets(inputs.currency).map((bracket) => (
-                      <option key={bracket.rate} value={bracket.rate} className="bg-[var(--color-charcoal)] text-[var(--color-cream)]">
+                      <option
+                        key={bracket.rate}
+                        value={bracket.rate}
+                        className="bg-[var(--color-charcoal)] text-[var(--color-cream)]"
+                      >
                         {bracket.label} ({bracket.range})
                       </option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <Label htmlFor="stateTax">{inputs.currency === 'USD' ? 'State Tax Rate (%)' : 'Local/Regional Tax (%)'}</Label>
+                  <Label htmlFor="stateTax">
+                    {inputs.currency === 'USD' ? 'State Tax Rate (%)' : 'Local/Regional Tax (%)'}
+                  </Label>
                   <Input
                     id="stateTax"
                     type="number"
@@ -452,9 +435,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={15}
                     step={0.5}
                     value={Math.round(inputs.stateTaxRate * 1000) / 10}
-                    onChange={(e) =>
-                      updateInput('stateTaxRate', Number(e.target.value) / 100)
-                    }
+                    onChange={(e) => updateInput('stateTaxRate', Number(e.target.value) / 100)}
                   />
                   {inputs.currency !== 'USD' && (
                     <p className="text-xs text-[var(--color-muted)] mt-1">
@@ -463,7 +444,11 @@ export default function ContractorVsEmployeeCalculator() {
                   )}
                 </div>
                 <div>
-                  <Label htmlFor="seTax">{inputs.currency === 'GBP' ? 'Self-Employed NICs (%)' : 'Self-Employment Tax (%)'}</Label>
+                  <Label htmlFor="seTax">
+                    {inputs.currency === 'GBP'
+                      ? 'Self-Employed NICs (%)'
+                      : 'Self-Employment Tax (%)'}
+                  </Label>
                   <Input
                     id="seTax"
                     type="number"
@@ -500,14 +485,17 @@ export default function ContractorVsEmployeeCalculator() {
                   <span className="font-semibold">
                     {formatCurrency(result.comparison.monthlyDifference, result.currency)}
                   </span>{' '}
-                  more per month ({formatPercent(result.comparison.percentageDifference)} difference)
+                  more per month ({formatPercent(result.comparison.percentageDifference)}{' '}
+                  difference)
                 </>
               }
             />
 
             {/* Side by Side Comparison */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className={`bg-[var(--color-night)] rounded-xl p-6 border-2 ${isContractorBetter ? 'border-green-500' : 'border-transparent'}`}>
+              <div
+                className={`bg-[var(--color-night)] rounded-xl p-6 border-2 ${isContractorBetter ? 'border-green-500' : 'border-transparent'}`}
+              >
                 <div className="text-sm uppercase tracking-wider text-green-400 mb-2 flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-400 rounded-full"></span>
                   Contractor
@@ -515,9 +503,7 @@ export default function ContractorVsEmployeeCalculator() {
                 <div className="text-3xl font-bold text-[var(--color-cream)] mb-1">
                   {formatCurrency(result.contractor.netIncome, result.currency)}
                 </div>
-                <div className="text-sm text-[var(--color-muted)]">
-                  Net annual income
-                </div>
+                <div className="text-sm text-[var(--color-muted)]">Net annual income</div>
                 <div className="mt-4 pt-4 border-t border-[var(--color-charcoal)]">
                   <div className="text-lg font-semibold text-[var(--color-cream)]">
                     {formatHourlyRate(result.contractor.effectiveHourlyRate, result.currency)}
@@ -528,7 +514,9 @@ export default function ContractorVsEmployeeCalculator() {
                 </div>
               </div>
 
-              <div className={`bg-[var(--color-night)] rounded-xl p-6 border-2 ${!isContractorBetter ? 'border-blue-500' : 'border-transparent'}`}>
+              <div
+                className={`bg-[var(--color-night)] rounded-xl p-6 border-2 ${!isContractorBetter ? 'border-blue-500' : 'border-transparent'}`}
+              >
                 <div className="text-sm uppercase tracking-wider text-blue-400 mb-2 flex items-center gap-2">
                   <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
                   Employee
@@ -536,9 +524,7 @@ export default function ContractorVsEmployeeCalculator() {
                 <div className="text-3xl font-bold text-[var(--color-cream)] mb-1">
                   {formatCurrency(result.employee.netIncome, result.currency)}
                 </div>
-                <div className="text-sm text-[var(--color-muted)]">
-                  Net annual income
-                </div>
+                <div className="text-sm text-[var(--color-muted)]">Net annual income</div>
                 <div className="mt-4 pt-4 border-t border-[var(--color-charcoal)]">
                   <div className="text-lg font-semibold text-[var(--color-cream)]">
                     {formatHourlyRate(result.employee.effectiveHourlyRate, result.currency)}
@@ -564,7 +550,8 @@ export default function ContractorVsEmployeeCalculator() {
                     {formatHourlyRate(result.comparison.recommendedContractRate, result.currency)}
                   </div>
                   <div className="text-sm text-[var(--color-muted)] mt-1">
-                    (Break-even: {formatHourlyRate(result.comparison.breakEvenContractRate, result.currency)})
+                    (Break-even:{' '}
+                    {formatHourlyRate(result.comparison.breakEvenContractRate, result.currency)})
                   </div>
                 </div>
                 <div>
@@ -600,13 +587,21 @@ export default function ContractorVsEmployeeCalculator() {
                       <td className="py-2 text-[var(--color-cream)]">
                         {item.label}
                         {item.note && (
-                          <span className="block text-xs text-[var(--color-muted)]">{item.note}</span>
+                          <span className="block text-xs text-[var(--color-muted)]">
+                            {item.note}
+                          </span>
                         )}
                       </td>
-                      <td className={`text-right py-2 ${item.contractor < 0 ? 'text-red-400' : item.contractor > 0 ? 'text-green-400' : 'text-[var(--color-muted)]'}`}>
-                        {item.contractor !== 0 ? formatCurrency(item.contractor, result.currency) : '-'}
+                      <td
+                        className={`text-right py-2 ${item.contractor < 0 ? 'text-red-400' : item.contractor > 0 ? 'text-green-400' : 'text-[var(--color-muted)]'}`}
+                      >
+                        {item.contractor !== 0
+                          ? formatCurrency(item.contractor, result.currency)
+                          : '-'}
                       </td>
-                      <td className={`text-right py-2 ${item.employee < 0 ? 'text-red-400' : item.employee > 0 ? 'text-blue-400' : 'text-[var(--color-muted)]'}`}>
+                      <td
+                        className={`text-right py-2 ${item.employee < 0 ? 'text-red-400' : item.employee > 0 ? 'text-blue-400' : 'text-[var(--color-muted)]'}`}
+                      >
                         {item.employee !== 0 ? formatCurrency(item.employee, result.currency) : '-'}
                       </td>
                     </tr>
@@ -654,11 +649,22 @@ export default function ContractorVsEmployeeCalculator() {
             {/* Tips */}
             <Alert variant="tip" title="Negotiation Tips">
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Contractor rates should be 1.3-1.5x the equivalent hourly salary to break even</li>
-                <li>Don't forget to account for non-billable hours (admin, marketing, invoicing)</li>
-                <li>Factor in the value of stability, paid leave, and career growth as an employee</li>
-                <li>As a contractor, you may deduct home office, equipment, and professional development</li>
-                <li>Consider forming an S-Corp at higher income levels to reduce self-employment tax</li>
+                <li>
+                  Contractor rates should be 1.3-1.5x the equivalent hourly salary to break even
+                </li>
+                <li>
+                  Don't forget to account for non-billable hours (admin, marketing, invoicing)
+                </li>
+                <li>
+                  Factor in the value of stability, paid leave, and career growth as an employee
+                </li>
+                <li>
+                  As a contractor, you may deduct home office, equipment, and professional
+                  development
+                </li>
+                <li>
+                  Consider forming an S-Corp at higher income levels to reduce self-employment tax
+                </li>
               </ul>
             </Alert>
 

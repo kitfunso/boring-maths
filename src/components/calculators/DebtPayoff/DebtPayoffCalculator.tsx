@@ -31,15 +31,14 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function DebtPayoffCalculator() {
-  const [inputs, setInputs] = useState<DebtPayoffInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<DebtPayoffInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculateDebtPayoff(inputs), [inputs]);
 
-  const updateInput = <K extends keyof DebtPayoffInputs>(
-    field: K,
-    value: DebtPayoffInputs[K]
-  ) => {
+  const updateInput = <K extends keyof DebtPayoffInputs>(field: K, value: DebtPayoffInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -50,9 +49,7 @@ export default function DebtPayoffCalculator() {
   const updateDebt = (id: string, field: keyof Debt, value: string | number) => {
     setInputs((prev) => ({
       ...prev,
-      debts: prev.debts.map((d) =>
-        d.id === id ? { ...d, [field]: value } : d
-      ),
+      debts: prev.debts.map((d) => (d.id === id ? { ...d, [field]: value } : d)),
     }));
   };
 
@@ -79,12 +76,7 @@ export default function DebtPayoffCalculator() {
         <CalculatorHeader
           title="Debt Payoff Calculator"
           subtitle="Compare snowball vs avalanche strategies"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -125,9 +117,7 @@ export default function DebtPayoffCalculator() {
                   className="bg-[var(--color-night)] rounded-xl p-4 border border-white/10"
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <span className="text-sm text-[var(--color-muted)]">
-                      Debt #{index + 1}
-                    </span>
+                    <span className="text-sm text-[var(--color-muted)]">Debt #{index + 1}</span>
                     {inputs.debts.length > 1 && (
                       <button
                         onClick={() => removeDebt(debt.id)}
@@ -171,7 +161,9 @@ export default function DebtPayoffCalculator() {
                         max={100}
                         step={0.01}
                         value={debt.interestRate}
-                        onChange={(e) => updateDebt(debt.id, 'interestRate', Number(e.target.value))}
+                        onChange={(e) =>
+                          updateDebt(debt.id, 'interestRate', Number(e.target.value))
+                        }
                       />
                     </div>
                     <div>
@@ -183,7 +175,9 @@ export default function DebtPayoffCalculator() {
                         type="number"
                         min={0}
                         value={debt.minimumPayment}
-                        onChange={(e) => updateDebt(debt.id, 'minimumPayment', Number(e.target.value))}
+                        onChange={(e) =>
+                          updateDebt(debt.id, 'minimumPayment', Number(e.target.value))
+                        }
                       />
                     </div>
                   </Grid>
@@ -194,9 +188,7 @@ export default function DebtPayoffCalculator() {
 
           {/* Extra Payment */}
           <div className="mb-8">
-            <Label htmlFor="extraPayment">
-              Extra Monthly Payment (beyond minimums)
-            </Label>
+            <Label htmlFor="extraPayment">Extra Monthly Payment (beyond minimums)</Label>
             <Input
               id="extraPayment"
               variant="currency"
@@ -301,8 +293,10 @@ export default function DebtPayoffCalculator() {
 
                   {result.interestSaved > 0 && (
                     <p className="text-sm text-emerald-400 mt-4 text-center">
-                      Avalanche saves {formatCurrency(result.interestSaved, inputs.currency)} in interest
-                      {result.timeDifference > 0 && ` and ${result.timeDifference} month${result.timeDifference !== 1 ? 's' : ''}`}
+                      Avalanche saves {formatCurrency(result.interestSaved, inputs.currency)} in
+                      interest
+                      {result.timeDifference > 0 &&
+                        ` and ${result.timeDifference} month${result.timeDifference !== 1 ? 's' : ''}`}
                     </p>
                   )}
                 </div>
@@ -330,7 +324,7 @@ export default function DebtPayoffCalculator() {
                   title={inputs.strategy === 'avalanche' ? 'About Avalanche:' : 'About Snowball:'}
                 >
                   {inputs.strategy === 'avalanche'
-                    ? 'The avalanche method minimizes total interest paid by targeting high-interest debt first. It\'s mathematically optimal but requires patience as it may take longer to see debts disappear.'
+                    ? "The avalanche method minimizes total interest paid by targeting high-interest debt first. It's mathematically optimal but requires patience as it may take longer to see debts disappear."
                     : 'The snowball method focuses on quick wins by paying off smallest balances first. This builds momentum and motivation, even though you may pay slightly more interest overall.'}
                 </Alert>
               </>

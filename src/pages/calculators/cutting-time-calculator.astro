@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { CuttingTimeCalculator } from '../../components/calculators/CuttingTimeCalculator';
 
 const title = 'Cutting Time Calculator | CNC Machining Time Estimator';
-const description = 'Free cutting time calculator for CNC machining. Estimate job time for milling, turning, and drilling operations. Calculate cycle time, cost estimates, and parts per hour.';
-const keywords = 'cutting time calculator, machining time, cnc calculator, cycle time, milling time, turning time, drilling time, job quoting, machine time estimator';
+const description =
+  'Free cutting time calculator for CNC machining. Estimate job time for milling, turning, and drilling operations. Calculate cycle time, cost estimates, and parts per hour.';
+const keywords =
+  'cutting time calculator, machining time, cnc calculator, cycle time, milling time, turning time, drilling time, job quoting, machine time estimator';
 const canonicalURL = '/calculators/cutting-time-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How do I estimate cutting time for a job quote?",
-    answer: "Calculate cutting time by dividing total tool path length by feed rate, then multiply by number of passes. Add rapid traverse time, tool change time (typically 15-30 seconds per change), and setup time. Add 10-20% buffer for real-world conditions. This calculator automates these calculations."
+    question: 'How do I estimate cutting time for a job quote?',
+    answer:
+      'Calculate cutting time by dividing total tool path length by feed rate, then multiply by number of passes. Add rapid traverse time, tool change time (typically 15-30 seconds per change), and setup time. Add 10-20% buffer for real-world conditions. This calculator automates these calculations.',
   },
   {
     question: "What's the difference between cycle time and machining time?",
-    answer: "Machining time (or cutting time) is the time the tool is actually cutting material. Cycle time includes machining time plus rapid moves, tool changes, and other non-cutting operations. Total job time adds setup time to cycle time multiplied by quantity."
+    answer:
+      'Machining time (or cutting time) is the time the tool is actually cutting material. Cycle time includes machining time plus rapid moves, tool changes, and other non-cutting operations. Total job time adds setup time to cycle time multiplied by quantity.',
   },
   {
-    question: "How accurate are cutting time estimates?",
-    answer: "Estimates are typically within 15-25% of actual times for simple operations. Complex geometries, material variations, and machine differences can affect accuracy. Always add buffer time for quoting and track actual times to improve future estimates."
+    question: 'How accurate are cutting time estimates?',
+    answer:
+      'Estimates are typically within 15-25% of actual times for simple operations. Complex geometries, material variations, and machine differences can affect accuracy. Always add buffer time for quoting and track actual times to improve future estimates.',
   },
   {
-    question: "What affects cutting time the most?",
-    answer: "Feed rate has the biggest impact on cutting time. Doubling feed rate roughly halves cutting time (if other factors allow). Tool path efficiency, number of passes (depth of cut), and machine rapid rates also significantly affect total job time."
+    question: 'What affects cutting time the most?',
+    answer:
+      'Feed rate has the biggest impact on cutting time. Doubling feed rate roughly halves cutting time (if other factors allow). Tool path efficiency, number of passes (depth of cut), and machine rapid rates also significantly affect total job time.',
   },
   {
-    question: "How do I reduce cycle time?",
-    answer: "Optimize feed rates for material/tool combination, reduce tool changes by using tooling that can perform multiple operations, minimize rapid distance with efficient tool paths, use high-speed machining strategies where appropriate, and consider tooling investments that allow higher speeds."
+    question: 'How do I reduce cycle time?',
+    answer:
+      'Optimize feed rates for material/tool combination, reduce tool changes by using tooling that can perform multiple operations, minimize rapid distance with efficient tool paths, use high-speed machining strategies where appropriate, and consider tooling investments that allow higher speeds.',
   },
   {
-    question: "Should I include setup time in job quotes?",
-    answer: "Yes, always include setup time. First-article setup takes longer than repeat jobs. For small quantities, setup time often exceeds machining time. Track your actual setup times to quote accurately. Consider offering price breaks for larger quantities where setup is amortized."
+    question: 'Should I include setup time in job quotes?',
+    answer:
+      'Yes, always include setup time. First-article setup takes longer than repeat jobs. For small quantities, setup time often exceeds machining time. Track your actual setup times to quote accurately. Consider offering price breaks for larger quantities where setup is amortized.',
   },
 ];
 
@@ -100,9 +108,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How Cutting Time is Calculated">
     <p>
-      Cutting time is the foundation of job quoting and production scheduling.
-      Different operations have different formulas, but all are based on the
-      fundamental relationship between distance, speed, and time.
+      Cutting time is the foundation of job quoting and production scheduling. Different operations
+      have different formulas, but all are based on the fundamental relationship between distance,
+      speed, and time.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Basic Formulas</h3>
     <div class="grid md:grid-cols-3 gap-4 mt-4">
@@ -143,8 +151,8 @@ const schemaBreadcrumbs = [
       </div>
     </div>
     <p class="mt-4 text-sm text-[var(--color-subtle)]">
-      Rates vary significantly by region, shop overhead, and machine age/capability.
-      These are general guidelines for North American job shops.
+      Rates vary significantly by region, shop overhead, and machine age/capability. These are
+      general guidelines for North American job shops.
     </p>
   </ContentSection>
 

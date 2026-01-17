@@ -20,15 +20,15 @@ import { VELOCITY_RECOMMENDATIONS, STANDARD_PIPE_SIZES_MM, STANDARD_PIPE_SIZES_I
 function toSI(inputs: PipeFlowInputs): { D: number; V: number; Q: number } {
   if (inputs.unitSystem === 'metric') {
     return {
-      D: inputs.diameter / 1000,      // mm to m
-      V: inputs.velocity,              // m/s
-      Q: inputs.flowRate / 3600,       // m³/h to m³/s
+      D: inputs.diameter / 1000, // mm to m
+      V: inputs.velocity, // m/s
+      Q: inputs.flowRate / 3600, // m³/h to m³/s
     };
   } else {
     return {
-      D: inputs.diameter * 0.0254,     // inches to m
-      V: inputs.velocity * 0.3048,     // ft/s to m/s
-      Q: inputs.flowRate * 0.0000631,  // GPM to m³/s
+      D: inputs.diameter * 0.0254, // inches to m
+      V: inputs.velocity * 0.3048, // ft/s to m/s
+      Q: inputs.flowRate * 0.0000631, // GPM to m³/s
     };
   }
 }
@@ -48,15 +48,15 @@ function fromSI(
       diameter: Math.round(diameterMM * 10) / 10,
       velocity: Math.round(V * 100) / 100,
       flowRate: Math.round(Q * 3600 * 100) / 100,
-      area: Math.round(Math.PI * Math.pow(diameterMM, 2) / 4 * 10) / 10,
+      area: Math.round(((Math.PI * Math.pow(diameterMM, 2)) / 4) * 10) / 10,
     };
   } else {
     const diameterIn = D / 0.0254;
     return {
       diameter: Math.round(diameterIn * 100) / 100,
-      velocity: Math.round(V / 0.3048 * 100) / 100,
-      flowRate: Math.round(Q / 0.0000631 * 10) / 10,
-      area: Math.round(Math.PI * Math.pow(diameterIn, 2) / 4 * 1000) / 1000,
+      velocity: Math.round((V / 0.3048) * 100) / 100,
+      flowRate: Math.round((Q / 0.0000631) * 10) / 10,
+      area: Math.round(((Math.PI * Math.pow(diameterIn, 2)) / 4) * 1000) / 1000,
     };
   }
 }
@@ -80,7 +80,7 @@ function findNearestStandardSize(diameter: number, unitSystem: 'metric' | 'imper
   }
 
   // For next size up (common practice)
-  const nextSizeUp = sizes.find(s => s >= diameter) || sizes[sizes.length - 1];
+  const nextSizeUp = sizes.find((s) => s >= diameter) || sizes[sizes.length - 1];
 
   return `${nearest}${unit} (or ${nextSizeUp}${unit} next size up)`;
 }
@@ -110,8 +110,8 @@ function getRecommendedVelocity(
 
   if (unitSystem === 'imperial') {
     return {
-      min: Math.round(rec.min / 0.3048 * 10) / 10,
-      max: Math.round(rec.max / 0.3048 * 10) / 10,
+      min: Math.round((rec.min / 0.3048) * 10) / 10,
+      max: Math.round((rec.max / 0.3048) * 10) / 10,
     };
   }
   return rec;
@@ -131,16 +131,18 @@ function evaluateVelocity(
   if (velocityMS < rec.min * (unitSystem === 'metric' ? 1 : 0.3048)) {
     return {
       status: 'low',
-      warning: category === 'liquid'
-        ? 'Low velocity may cause settling of solids or poor heat transfer'
-        : 'Low velocity may result in poor mixing or heat transfer',
+      warning:
+        category === 'liquid'
+          ? 'Low velocity may cause settling of solids or poor heat transfer'
+          : 'Low velocity may result in poor mixing or heat transfer',
     };
   } else if (velocityMS > rec.max * (unitSystem === 'metric' ? 1 : 0.3048)) {
     return {
       status: 'high',
-      warning: category === 'liquid'
-        ? 'High velocity may cause erosion, noise, and increased pressure drop'
-        : 'High velocity may cause excessive pressure drop and noise',
+      warning:
+        category === 'liquid'
+          ? 'High velocity may cause erosion, noise, and increased pressure drop'
+          : 'High velocity may cause excessive pressure drop and noise',
     };
   } else {
     return {
@@ -170,7 +172,7 @@ export function calculatePipeFlow(inputs: PipeFlowInputs): PipeFlowResult {
       break;
     case 'flowRate':
       // Q = A × V = (πD²/4) × V
-      Q = (Math.PI * Math.pow(D, 2) / 4) * V;
+      Q = ((Math.PI * Math.pow(D, 2)) / 4) * V;
       break;
   }
 

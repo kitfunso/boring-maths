@@ -18,10 +18,7 @@ export interface Props {
   faqs: FAQ[];
 }
 
-const {
-  title = "Frequently Asked Questions",
-  faqs,
-} = Astro.props;
+const { title = 'Frequently Asked Questions', faqs } = Astro.props;
 ---
 
 <section class="mb-16">
@@ -29,24 +26,27 @@ const {
     {title}
   </h2>
   <div class="space-y-4">
-    {faqs.map((faq) => (
-      <details class="group bg-[var(--color-night)] rounded-xl border border-white/10 overflow-hidden">
-        <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-white/5 transition-colors">
-          <h3 class="font-semibold text-[var(--color-cream)] pr-4">
-            {faq.question}
-          </h3>
-          <span class="text-[var(--color-muted)] group-open:rotate-180 transition-transform flex-shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </span>
-        </summary>
-        <div class="px-6 pb-6">
-          <p class="text-[var(--color-subtle)] leading-relaxed">
-            {faq.answer}
-          </p>
-        </div>
-      </details>
-    ))}
+    {
+      faqs.map((faq) => (
+        <details class="group bg-[var(--color-night)] rounded-xl border border-white/10 overflow-hidden">
+          <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-white/5 transition-colors">
+            <h3 class="font-semibold text-[var(--color-cream)] pr-4">{faq.question}</h3>
+            <span class="text-[var(--color-muted)] group-open:rotate-180 transition-transform flex-shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-[var(--color-subtle)] leading-relaxed">{faq.answer}</p>
+          </div>
+        </details>
+      ))
+    }
   </div>
 </section>

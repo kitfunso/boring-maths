@@ -4,7 +4,12 @@
  * Pure functions for calculating emergency fund recommendations.
  */
 
-import type { EmergencyFundInputs, EmergencyFundResult, JobStability, RiskTolerance } from './types';
+import type {
+  EmergencyFundInputs,
+  EmergencyFundResult,
+  JobStability,
+  RiskTolerance,
+} from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
@@ -55,14 +60,14 @@ export function calculateEmergencyFund(inputs: EmergencyFundInputs): EmergencyFu
   // Calculate target and progress
   const targetAmount = monthlyExpenses * recommendedMonths;
   const amountNeeded = Math.max(0, targetAmount - currentSavings);
-  const percentComplete = targetAmount > 0
-    ? Math.min(100, (currentSavings / targetAmount) * 100)
-    : 0;
+  const percentComplete =
+    targetAmount > 0 ? Math.min(100, (currentSavings / targetAmount) * 100) : 0;
 
   // Calculate time to goal
-  const monthsToGoal = monthlySavingsCapacity > 0 && amountNeeded > 0
-    ? Math.ceil(amountNeeded / monthlySavingsCapacity)
-    : 0;
+  const monthsToGoal =
+    monthlySavingsCapacity > 0 && amountNeeded > 0
+      ? Math.ceil(amountNeeded / monthlySavingsCapacity)
+      : 0;
 
   // Calculate breakdown tiers
   const breakdown = {

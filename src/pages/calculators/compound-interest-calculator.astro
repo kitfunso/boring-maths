@@ -11,8 +11,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CompoundInterestCalculator from '../../components/calculators/CompoundInterest/CompoundInterestCalculator';
 
 const title = 'Compound Interest Calculator | How Fast Will My Money Grow?';
-const description = 'Free compound interest calculator with monthly contributions. See how your savings grow over 5, 10, 20, or 30 years. Visualize the power of compound growth with charts.';
-const keywords = 'compound interest calculator, compound interest formula, how to calculate compound interest, investment growth calculator, savings growth calculator, money growth calculator, rule of 72 calculator';
+const description =
+  'Free compound interest calculator with monthly contributions. See how your savings grow over 5, 10, 20, or 30 years. Visualize the power of compound growth with charts.';
+const keywords =
+  'compound interest calculator, compound interest formula, how to calculate compound interest, investment growth calculator, savings growth calculator, money growth calculator, rule of 72 calculator';
 const canonicalURL = '/calculators/compound-interest-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -40,32 +42,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is compound interest?",
-    answer: "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. It's essentially 'interest on interest' and causes wealth to grow exponentially over time."
+    question: 'What is compound interest?',
+    answer:
+      "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. It's essentially 'interest on interest' and causes wealth to grow exponentially over time.",
   },
   {
-    question: "What is the compound interest formula?",
-    answer: "The formula is A = P(1 + r/n)^(nt), where A is the final amount, P is principal, r is annual interest rate, n is compounds per year, and t is time in years. With regular contributions, the formula becomes more complex."
+    question: 'What is the compound interest formula?',
+    answer:
+      'The formula is A = P(1 + r/n)^(nt), where A is the final amount, P is principal, r is annual interest rate, n is compounds per year, and t is time in years. With regular contributions, the formula becomes more complex.',
   },
   {
-    question: "What is the Rule of 72?",
-    answer: "The Rule of 72 is a quick way to estimate how long it takes to double your money. Divide 72 by your interest rate percentage. At 8% annual return, money doubles in approximately 9 years (72/8=9)."
+    question: 'What is the Rule of 72?',
+    answer:
+      'The Rule of 72 is a quick way to estimate how long it takes to double your money. Divide 72 by your interest rate percentage. At 8% annual return, money doubles in approximately 9 years (72/8=9).',
   },
   {
-    question: "How often should interest compound?",
-    answer: "More frequent compounding produces higher returns. Daily compounding beats monthly, which beats annually. However, the difference is usually small for typical savings rates. Focus on getting the best rate rather than compound frequency."
+    question: 'How often should interest compound?',
+    answer:
+      'More frequent compounding produces higher returns. Daily compounding beats monthly, which beats annually. However, the difference is usually small for typical savings rates. Focus on getting the best rate rather than compound frequency.',
   },
   {
-    question: "How much will $10,000 grow in 10 years?",
-    answer: "At 7% annual return compounded monthly, $10,000 grows to about $20,097 in 10 years - more than doubling. At 10%, it reaches $27,070. Add $200/month contributions and that same $10,000 at 7% becomes $54,440 after 10 years."
+    question: 'How much will $10,000 grow in 10 years?',
+    answer:
+      'At 7% annual return compounded monthly, $10,000 grows to about $20,097 in 10 years - more than doubling. At 10%, it reaches $27,070. Add $200/month contributions and that same $10,000 at 7% becomes $54,440 after 10 years.',
   },
   {
     question: "What's the difference between simple and compound interest?",
-    answer: "Simple interest is calculated only on the original principal. Compound interest is calculated on principal plus accumulated interest. Example: $1,000 at 10% simple interest earns $100/year forever. With compound interest, year 2 earns $110, year 3 earns $121, and so on."
+    answer:
+      'Simple interest is calculated only on the original principal. Compound interest is calculated on principal plus accumulated interest. Example: $1,000 at 10% simple interest earns $100/year forever. With compound interest, year 2 earns $110, year 3 earns $121, and so on.',
   },
   {
-    question: "How do I calculate compound interest in Excel?",
-    answer: "Use the FV (Future Value) function: =FV(rate/periods, periods*years, -payment, -principal). For example, =FV(0.07/12, 12*10, -200, -10000) calculates $10,000 initial + $200/month at 7% for 10 years. The result is $54,440."
+    question: 'How do I calculate compound interest in Excel?',
+    answer:
+      'Use the FV (Future Value) function: =FV(rate/periods, periods*years, -payment, -principal). For example, =FV(0.07/12, 12*10, -200, -10000) calculates $10,000 initial + $200/month at 7% for 10 years. The result is $54,440.',
   },
 ];
 
@@ -103,37 +112,36 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>initial investment</strong> - the lump sum you're starting with.
-      This could be savings, an inheritance, or any amount you want to invest.
+      Enter your <strong>initial investment</strong> - the lump sum you're starting with. This could be
+      savings, an inheritance, or any amount you want to invest.
     </p>
     <p>
-      Specify <strong>monthly contributions</strong> to see how regular investing
-      accelerates your growth. Even small amounts add up significantly over time.
+      Specify <strong>monthly contributions</strong> to see how regular investing accelerates your growth.
+      Even small amounts add up significantly over time.
     </p>
     <p>
-      Set the <strong>interest rate</strong> based on your expected returns.
-      The S&P 500 has historically returned about 10% annually, but past performance
-      doesn't guarantee future results.
+      Set the <strong>interest rate</strong> based on your expected returns. The S&P 500 has historically
+      returned about 10% annually, but past performance doesn't guarantee future results.
     </p>
     <p>
-      Choose your <strong>compound frequency</strong> - how often interest is calculated
-      and added to your principal. Monthly is typical for most investments.
+      Choose your <strong>compound frequency</strong> - how often interest is calculated and added to
+      your principal. Monthly is typical for most investments.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Future value</strong> shows what your investment will be worth at the
-      end of your investment period. This includes all contributions and earned interest.
+      <strong>Future value</strong> shows what your investment will be worth at the end of your investment
+      period. This includes all contributions and earned interest.
     </p>
     <p>
-      <strong>Total interest</strong> is the money you earned from compounding alone.
-      This is essentially "free money" generated by your investment.
+      <strong>Total interest</strong> is the money you earned from compounding alone. This is essentially
+      "free money" generated by your investment.
     </p>
     <p>
-      The <strong>growth chart</strong> shows how contributions (your money) and
-      interest (earned money) grow over time. Notice how interest becomes a larger
-      portion in later years - that's compound interest at work.
+      The <strong>growth chart</strong> shows how contributions (your money) and interest (earned money)
+      grow over time. Notice how interest becomes a larger portion in later years - that's compound interest
+      at work.
     </p>
   </ContentSection>
 

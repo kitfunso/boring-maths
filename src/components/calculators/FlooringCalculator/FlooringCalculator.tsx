@@ -64,8 +64,7 @@ export default function FlooringCalculator() {
     setInputs((prev) => ({
       ...prev,
       currency: newCurrency,
-      pricePerSqft:
-        newCurrency === 'USD' ? 3 : newCurrency === 'GBP' ? 2.5 : 2.75,
+      pricePerSqft: newCurrency === 'USD' ? 3 : newCurrency === 'GBP' ? 2.5 : 2.75,
     }));
   };
 
@@ -98,12 +97,7 @@ export default function FlooringCalculator() {
         <CalculatorHeader
           title="Calculate Your Flooring Needs"
           subtitle="Find out how much flooring to buy for your room"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -123,9 +117,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={200}
                     value={inputs.roomLength}
-                    onChange={(e) =>
-                      updateInput('roomLength', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('roomLength', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -136,9 +128,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={200}
                     value={inputs.roomWidth}
-                    onChange={(e) =>
-                      updateInput('roomWidth', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('roomWidth', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -150,9 +140,7 @@ export default function FlooringCalculator() {
               <ButtonGroup
                 options={flooringTypeOptions}
                 value={inputs.flooringType}
-                onChange={(value) =>
-                  updateInput('flooringType', value as FlooringType)
-                }
+                onChange={(value) => updateInput('flooringType', value as FlooringType)}
                 columns={4}
               />
             </div>
@@ -163,9 +151,7 @@ export default function FlooringCalculator() {
               <ButtonGroup
                 options={patternOptions}
                 value={inputs.pattern}
-                onChange={(value) =>
-                  updateInput('pattern', value as InstallPattern)
-                }
+                onChange={(value) => updateInput('pattern', value as InstallPattern)}
                 columns={4}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
@@ -184,18 +170,14 @@ export default function FlooringCalculator() {
                   max={100}
                   step={0.5}
                   value={inputs.sqftPerBox}
-                  onChange={(e) =>
-                    updateInput('sqftPerBox', Number(e.target.value))
-                  }
+                  onChange={(e) => updateInput('sqftPerBox', Number(e.target.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Check the box label (typically 20-25 sq ft)
                 </p>
               </div>
               <div>
-                <Label htmlFor="pricePerSqft">
-                  Price Per Sq Ft ({currencySymbol})
-                </Label>
+                <Label htmlFor="pricePerSqft">Price Per Sq Ft ({currencySymbol})</Label>
                 <Input
                   id="pricePerSqft"
                   type="number"
@@ -203,9 +185,7 @@ export default function FlooringCalculator() {
                   max={50}
                   step={0.25}
                   value={inputs.pricePerSqft}
-                  onChange={(e) =>
-                    updateInput('pricePerSqft', Number(e.target.value))
-                  }
+                  onChange={(e) => updateInput('pricePerSqft', Number(e.target.value))}
                 />
               </div>
             </Grid>
@@ -224,9 +204,7 @@ export default function FlooringCalculator() {
                     min={0}
                     max={10}
                     value={inputs.closetCount}
-                    onChange={(e) =>
-                      updateInput('closetCount', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('closetCount', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -237,9 +215,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={100}
                     value={inputs.closetSize}
-                    onChange={(e) =>
-                      updateInput('closetSize', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('closetSize', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -250,9 +226,7 @@ export default function FlooringCalculator() {
                     min={0}
                     max={50}
                     value={inputs.stairSteps}
-                    onChange={(e) =>
-                      updateInput('stairSteps', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('stairSteps', Number(e.target.value))}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">~3.5 sq ft each</p>
                 </div>
@@ -263,17 +237,13 @@ export default function FlooringCalculator() {
             <div className="space-y-3">
               <Checkbox
                 checked={inputs.includeUnderlayment}
-                onChange={(checked) =>
-                  updateInput('includeUnderlayment', checked)
-                }
+                onChange={(checked) => updateInput('includeUnderlayment', checked)}
                 label="Include underlayment/padding (recommended for laminate, hardwood, vinyl)"
               />
               <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
                 <Checkbox
                   checked={inputs.includeTransitions}
-                  onChange={(checked) =>
-                    updateInput('includeTransitions', checked)
-                  }
+                  onChange={(checked) => updateInput('includeTransitions', checked)}
                   label="Include transition strips"
                 />
                 {inputs.includeTransitions && (
@@ -284,9 +254,7 @@ export default function FlooringCalculator() {
                       min={1}
                       max={20}
                       value={inputs.transitionCount}
-                      onChange={(e) =>
-                        updateInput('transitionCount', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('transitionCount', Number(e.target.value))}
                       className="w-20"
                     />
                     <span className="text-sm text-[var(--color-muted)]">doorways</span>
@@ -355,9 +323,7 @@ export default function FlooringCalculator() {
                     className="flex items-center justify-between py-2 border-b border-white/10 last:border-0"
                   >
                     <div>
-                      <span className="font-medium text-[var(--color-cream)]">
-                        {item.item}
-                      </span>
+                      <span className="font-medium text-[var(--color-cream)]">{item.item}</span>
                       <span className="text-[var(--color-muted)] ml-2">
                         {item.quantity} {item.unit}
                       </span>
@@ -434,10 +400,9 @@ export default function FlooringCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
-              Let your flooring acclimate in the room for 48-72 hours before
-              installation. Buy 1-2 extra boxes for future repairs - matching
-              dye lots later can be difficult. Start from the longest wall and
-              work toward the door.
+              Let your flooring acclimate in the room for 48-72 hours before installation. Buy 1-2
+              extra boxes for future repairs - matching dye lots later can be difficult. Start from
+              the longest wall and work toward the door.
             </Alert>
 
             {/* Share Results */}

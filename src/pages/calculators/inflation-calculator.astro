@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { InflationCalculator } from '../../components/calculators/InflationCalculator';
 
 const title = 'Inflation Calculator 2025 | Purchasing Power & CPI Calculator';
-const description = 'Free inflation calculator using historical US CPI data from 1920-2025. Calculate purchasing power, see how much money was worth in the past, and understand inflation impact.';
-const keywords = 'inflation calculator, purchasing power calculator, cpi calculator, cost of living calculator, money value over time, inflation rate calculator, dollar value calculator, historical inflation';
+const description =
+  'Free inflation calculator using historical US CPI data from 1920-2025. Calculate purchasing power, see how much money was worth in the past, and understand inflation impact.';
+const keywords =
+  'inflation calculator, purchasing power calculator, cpi calculator, cost of living calculator, money value over time, inflation rate calculator, dollar value calculator, historical inflation';
 const canonicalURL = '/calculators/inflation-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is inflation and how does it affect purchasing power?",
-    answer: "Inflation is the rate at which prices for goods and services rise over time, reducing what your money can buy. If inflation is 3%, something that costs $100 today will cost $103 next year. This means your purchasing power decreases unless your income grows faster than inflation."
+    question: 'What is inflation and how does it affect purchasing power?',
+    answer:
+      'Inflation is the rate at which prices for goods and services rise over time, reducing what your money can buy. If inflation is 3%, something that costs $100 today will cost $103 next year. This means your purchasing power decreases unless your income grows faster than inflation.',
   },
   {
-    question: "How is inflation measured in the US?",
-    answer: "The US measures inflation primarily through the Consumer Price Index (CPI), calculated by the Bureau of Labor Statistics. CPI tracks the average price change of a basket of consumer goods and services including food, housing, transportation, medical care, and more."
+    question: 'How is inflation measured in the US?',
+    answer:
+      'The US measures inflation primarily through the Consumer Price Index (CPI), calculated by the Bureau of Labor Statistics. CPI tracks the average price change of a basket of consumer goods and services including food, housing, transportation, medical care, and more.',
   },
   {
-    question: "What is the historical average inflation rate?",
-    answer: "The average US inflation rate since 1920 is approximately 3.3% per year. However, this varies significantly by decade: the 1970s-80s saw double-digit inflation, while the 2010s averaged under 2%. The Federal Reserve currently targets 2% annual inflation."
+    question: 'What is the historical average inflation rate?',
+    answer:
+      'The average US inflation rate since 1920 is approximately 3.3% per year. However, this varies significantly by decade: the 1970s-80s saw double-digit inflation, while the 2010s averaged under 2%. The Federal Reserve currently targets 2% annual inflation.',
   },
   {
-    question: "How do I calculate future purchasing power?",
-    answer: "To estimate future purchasing power, divide your current amount by (1 + inflation rate)^years. For example, at 3% inflation, $100 today will have the purchasing power of about $74 in 10 years. Our calculator does this math automatically using historical or custom rates."
+    question: 'How do I calculate future purchasing power?',
+    answer:
+      'To estimate future purchasing power, divide your current amount by (1 + inflation rate)^years. For example, at 3% inflation, $100 today will have the purchasing power of about $74 in 10 years. Our calculator does this math automatically using historical or custom rates.',
   },
   {
-    question: "What was the highest inflation period in US history?",
-    answer: "The highest sustained inflation in modern US history occurred during the 'stagflation' era of the late 1970s and early 1980s. Inflation peaked at 13.5% in 1980. The COVID-19 pandemic also triggered high inflation, reaching 8% in 2022."
+    question: 'What was the highest inflation period in US history?',
+    answer:
+      "The highest sustained inflation in modern US history occurred during the 'stagflation' era of the late 1970s and early 1980s. Inflation peaked at 13.5% in 1980. The COVID-19 pandemic also triggered high inflation, reaching 8% in 2022.",
   },
   {
-    question: "Has the US ever experienced deflation?",
-    answer: "Yes, the US experienced significant deflation during the Great Depression (1929-1933), with prices falling nearly 25%. More recently, 2009 saw slight deflation (-0.4%) during the financial crisis. Deflation can be economically harmful as it discourages spending."
+    question: 'Has the US ever experienced deflation?',
+    answer:
+      'Yes, the US experienced significant deflation during the Great Depression (1929-1933), with prices falling nearly 25%. More recently, 2009 saw slight deflation (-0.4%) during the financial crisis. Deflation can be economically harmful as it discourages spending.',
   },
   {
-    question: "How can I protect my money from inflation?",
-    answer: "Common inflation hedges include: investing in stocks (historically outpace inflation), real estate, Treasury Inflation-Protected Securities (TIPS), I-Bonds, commodities, and keeping money in high-yield savings accounts. Holding cash long-term loses purchasing power."
+    question: 'How can I protect my money from inflation?',
+    answer:
+      'Common inflation hedges include: investing in stocks (historically outpace inflation), real estate, Treasury Inflation-Protected Securities (TIPS), I-Bonds, commodities, and keeping money in high-yield savings accounts. Holding cash long-term loses purchasing power.',
   },
   {
     question: "What's the difference between nominal and real returns?",
-    answer: "Nominal returns are the raw percentage gain on an investment. Real returns subtract inflation, showing actual purchasing power gained. If your investment returns 7% but inflation is 3%, your real return is approximately 4%."
+    answer:
+      'Nominal returns are the raw percentage gain on an investment. Real returns subtract inflation, showing actual purchasing power gained. If your investment returns 7% but inflation is 3%, your real return is approximately 4%.',
   },
 ];
 
@@ -108,14 +118,17 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Inflation">
     <p>
-      Inflation erodes the purchasing power of money over time. What cost $1 in 1920 would cost over $15 today.
-      Understanding inflation is crucial for retirement planning, salary negotiations, and investment decisions.
+      Inflation erodes the purchasing power of money over time. What cost $1 in 1920 would cost over
+      $15 today. Understanding inflation is crucial for retirement planning, salary negotiations,
+      and investment decisions.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Key Inflation Concepts</h3>
     <ul class="list-disc list-inside space-y-1">
       <li><strong>CPI (Consumer Price Index):</strong> The primary measure of US inflation</li>
       <li><strong>Core Inflation:</strong> CPI excluding volatile food and energy prices</li>
-      <li><strong>Real vs Nominal:</strong> Real values are adjusted for inflation; nominal are not</li>
+      <li>
+        <strong>Real vs Nominal:</strong> Real values are adjusted for inflation; nominal are not
+      </li>
       <li><strong>Fed Target:</strong> The Federal Reserve targets 2% annual inflation</li>
     </ul>
   </ContentSection>

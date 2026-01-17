@@ -111,11 +111,11 @@ export const STARTER_SIZES = [
 // Common gravity presets
 export const GRAVITY_PRESETS = [
   { label: 'Session (1.035)', og: 1.035 },
-  { label: 'Standard (1.050)', og: 1.050 },
+  { label: 'Standard (1.050)', og: 1.05 },
   { label: 'Strong (1.065)', og: 1.065 },
-  { label: 'High Gravity (1.080)', og: 1.080 },
+  { label: 'High Gravity (1.080)', og: 1.08 },
   { label: 'Very High (1.095)', og: 1.095 },
-  { label: 'Imperial (1.110)', og: 1.110 },
+  { label: 'Imperial (1.110)', og: 1.11 },
 ];
 
 // Batch size presets

@@ -77,9 +77,7 @@ export function calculatePaint(inputs: PaintCalculatorInputs): PaintCalculatorRe
   const gallonsNeeded = Math.ceil(rawGallons);
 
   // Primer (one coat, same coverage)
-  const rawPrimerGallons = includePrimer
-    ? (paintableArea / COVERAGE_PER_GALLON) * WASTE_FACTOR
-    : 0;
+  const rawPrimerGallons = includePrimer ? (paintableArea / COVERAGE_PER_GALLON) * WASTE_FACTOR : 0;
   const primerGallons = Math.ceil(rawPrimerGallons);
 
   // Trim paint (estimate based on room perimeter)

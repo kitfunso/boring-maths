@@ -63,22 +63,12 @@ function SpinControls({
 
   return (
     <div className="spin-controls">
-      <button
-        type="button"
-        onClick={increment}
-        tabIndex={-1}
-        aria-label="Increase value"
-      >
+      <button type="button" onClick={increment} tabIndex={-1} aria-label="Increase value">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <button
-        type="button"
-        onClick={decrement}
-        tabIndex={-1}
-        aria-label="Decrease value"
-      >
+      <button type="button" onClick={decrement} tabIndex={-1} aria-label="Decrease value">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -113,11 +103,14 @@ export function Input({
     bg-[var(--color-night)] text-[var(--color-cream)]
     placeholder:text-[var(--color-muted)]
     ${SIZE_CLASSES[size]}
-    ${error
-      ? 'border-rose-500/50 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20'
-      : `border-white/10 focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[var(--color-accent)]/20`
+    ${
+      error
+        ? 'border-rose-500/50 focus:border-rose-500 focus:ring-4 focus:ring-rose-500/20'
+        : `border-white/10 focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[var(--color-accent)]/20`
     }
-  `.trim().replace(/\s+/g, ' ');
+  `
+    .trim()
+    .replace(/\s+/g, ' ');
 
   if (variant === 'currency') {
     return (

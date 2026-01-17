@@ -21,49 +21,49 @@ import { DRINKS_PER_HOUR, CHILD_DRINK_MULTIPLIER } from './types';
  */
 const DRINK_PRICES: Record<Currency, Record<string, number>> = {
   USD: {
-    soda_2liter: 2.50,
-    soda_12pack: 6.00,
-    juice_gallon: 4.50,
-    juice_boxes_10pack: 5.00,
-    water_case_24: 5.00,
-    sparkling_water_12pack: 8.00,
-    coffee_ground_lb: 8.00,
-    tea_box: 4.00,
-    punch_mix: 3.50,
-    ice_bag: 3.00,
-    cups_50pack: 4.00,
-    napkins_200pack: 3.50,
-    straws_100pack: 3.00,
+    soda_2liter: 2.5,
+    soda_12pack: 6.0,
+    juice_gallon: 4.5,
+    juice_boxes_10pack: 5.0,
+    water_case_24: 5.0,
+    sparkling_water_12pack: 8.0,
+    coffee_ground_lb: 8.0,
+    tea_box: 4.0,
+    punch_mix: 3.5,
+    ice_bag: 3.0,
+    cups_50pack: 4.0,
+    napkins_200pack: 3.5,
+    straws_100pack: 3.0,
   },
   GBP: {
-    soda_2liter: 1.80,
-    soda_12pack: 5.00,
-    juice_gallon: 3.50,
-    juice_boxes_10pack: 4.00,
-    water_case_24: 4.00,
-    sparkling_water_12pack: 6.50,
-    coffee_ground_lb: 6.00,
-    tea_box: 3.00,
-    punch_mix: 2.80,
-    ice_bag: 2.50,
-    cups_50pack: 3.00,
-    napkins_200pack: 2.50,
-    straws_100pack: 2.50,
+    soda_2liter: 1.8,
+    soda_12pack: 5.0,
+    juice_gallon: 3.5,
+    juice_boxes_10pack: 4.0,
+    water_case_24: 4.0,
+    sparkling_water_12pack: 6.5,
+    coffee_ground_lb: 6.0,
+    tea_box: 3.0,
+    punch_mix: 2.8,
+    ice_bag: 2.5,
+    cups_50pack: 3.0,
+    napkins_200pack: 2.5,
+    straws_100pack: 2.5,
   },
   EUR: {
-    soda_2liter: 2.00,
-    soda_12pack: 5.50,
-    juice_gallon: 4.00,
-    juice_boxes_10pack: 4.50,
-    water_case_24: 4.50,
-    sparkling_water_12pack: 7.00,
-    coffee_ground_lb: 7.00,
-    tea_box: 3.50,
-    punch_mix: 3.00,
-    ice_bag: 2.80,
-    cups_50pack: 3.50,
-    napkins_200pack: 3.00,
-    straws_100pack: 2.80,
+    soda_2liter: 2.0,
+    soda_12pack: 5.5,
+    juice_gallon: 4.0,
+    juice_boxes_10pack: 4.5,
+    water_case_24: 4.5,
+    sparkling_water_12pack: 7.0,
+    coffee_ground_lb: 7.0,
+    tea_box: 3.5,
+    punch_mix: 3.0,
+    ice_bag: 2.8,
+    cups_50pack: 3.5,
+    napkins_200pack: 3.0,
+    straws_100pack: 2.8,
   },
 };
 
@@ -79,14 +79,14 @@ const EVENT_DRINK_RATIOS: Record<EventType, Record<string, number>> = {
     punch: 0.15,
   },
   family_gathering: {
-    soft_drinks: 0.30,
+    soft_drinks: 0.3,
     juice: 0.25,
     water: 0.25,
     hot: 0.05,
     punch: 0.15,
   },
   adult_casual: {
-    soft_drinks: 0.40,
+    soft_drinks: 0.4,
     juice: 0.15,
     water: 0.35,
     hot: 0.05,
@@ -94,9 +94,9 @@ const EVENT_DRINK_RATIOS: Record<EventType, Record<string, number>> = {
   },
   formal: {
     soft_drinks: 0.15,
-    juice: 0.20,
-    water: 0.40,
-    hot: 0.10,
+    juice: 0.2,
+    water: 0.4,
+    hot: 0.1,
     punch: 0.15,
   },
 };
@@ -368,10 +368,7 @@ function calculateWater(
 /**
  * Calculate hot beverage quantities
  */
-function calculateHotBeverages(
-  servingsNeeded: number,
-  currency: Currency
-): DrinkQuantity[] {
+function calculateHotBeverages(servingsNeeded: number, currency: Currency): DrinkQuantity[] {
   const prices = DRINK_PRICES[currency];
   const drinks: DrinkQuantity[] = [];
 
@@ -413,24 +410,23 @@ function calculateHotBeverages(
 /**
  * Calculate punch/lemonade quantities
  */
-function calculatePunch(
-  servingsNeeded: number,
-  currency: Currency
-): DrinkQuantity[] {
+function calculatePunch(servingsNeeded: number, currency: Currency): DrinkQuantity[] {
   const prices = DRINK_PRICES[currency];
 
   // One punch mix makes about 32 servings (2 gallons)
   const servingsPerMix = 32;
   const mixesNeeded = Math.ceil(servingsNeeded / servingsPerMix);
 
-  return [{
-    name: 'Punch/Lemonade Mix',
-    category: 'punch',
-    quantity: mixesNeeded,
-    unit: 'packages',
-    servings: mixesNeeded * servingsPerMix,
-    estimatedCost: mixesNeeded * prices.punch_mix,
-  }];
+  return [
+    {
+      name: 'Punch/Lemonade Mix',
+      category: 'punch',
+      quantity: mixesNeeded,
+      unit: 'packages',
+      servings: mixesNeeded * servingsPerMix,
+      estimatedCost: mixesNeeded * prices.punch_mix,
+    },
+  ];
 }
 
 /**
@@ -583,7 +579,9 @@ export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult
     summary: {
       adultGuests: guestCount - childrenCount,
       childGuests: childrenCount,
-      effectiveGuests: Math.round((guestCount - childrenCount) + (childrenCount * CHILD_DRINK_MULTIPLIER)),
+      effectiveGuests: Math.round(
+        guestCount - childrenCount + childrenCount * CHILD_DRINK_MULTIPLIER
+      ),
       weatherMultiplier: DRINKS_PER_HOUR[weather],
     },
   };

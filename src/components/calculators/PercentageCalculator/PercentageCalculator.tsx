@@ -180,7 +180,9 @@ export default function PercentageCalculator() {
                       type="number"
                       step="any"
                       value={inputs.increaseDecrease_value}
-                      onChange={(e) => updateInput('increaseDecrease_value', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('increaseDecrease_value', Number(e.target.value))
+                      }
                     />
                   </div>
                   <div>
@@ -194,7 +196,9 @@ export default function PercentageCalculator() {
                       min={0}
                       step={1}
                       value={inputs.increaseDecrease_percentage}
-                      onChange={(e) => updateInput('increaseDecrease_percentage', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('increaseDecrease_percentage', Number(e.target.value))
+                      }
                     />
                   </div>
                 </Grid>
@@ -206,7 +210,9 @@ export default function PercentageCalculator() {
                       { value: 'decrease', label: 'Decrease (-)' },
                     ]}
                     value={inputs.increaseDecrease_isIncrease ? 'increase' : 'decrease'}
-                    onChange={(value) => updateInput('increaseDecrease_isIncrease', value === 'increase')}
+                    onChange={(value) =>
+                      updateInput('increaseDecrease_isIncrease', value === 'increase')
+                    }
                   />
                 </div>
               </>
@@ -291,7 +297,7 @@ export default function PercentageCalculator() {
               {inputs.mode === 'percentChange' &&
                 'A positive result means an increase, negative means a decrease.'}
               {inputs.mode === 'increaseDecrease' &&
-                'Tip: To reverse a percentage change, you need a different percentage. A 20% decrease followed by 20% increase doesn\'t return to the original.'}
+                "Tip: To reverse a percentage change, you need a different percentage. A 20% decrease followed by 20% increase doesn't return to the original."}
             </Alert>
 
             {/* Share Results */}

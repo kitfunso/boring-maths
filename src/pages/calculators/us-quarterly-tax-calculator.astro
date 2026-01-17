@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { USQuarterlyTaxCalculator } from '../../components/calculators/USQuarterlyTaxCalculator';
 
 const title = 'Quarterly Estimated Tax Calculator 2025 | 1040-ES';
-const description = 'Free quarterly estimated tax calculator for 2025. Calculate your quarterly payments, understand safe harbor rules, and avoid underpayment penalties. Essential for self-employed taxpayers.';
-const keywords = 'quarterly tax calculator, estimated tax calculator, 1040-ES calculator, quarterly estimated tax payments, safe harbor tax, self employed quarterly taxes';
+const description =
+  'Free quarterly estimated tax calculator for 2025. Calculate your quarterly payments, understand safe harbor rules, and avoid underpayment penalties. Essential for self-employed taxpayers.';
+const keywords =
+  'quarterly tax calculator, estimated tax calculator, 1040-ES calculator, quarterly estimated tax payments, safe harbor tax, self employed quarterly taxes';
 const canonicalURL = '/calculators/us-quarterly-tax-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "When are quarterly estimated tax payments due?",
-    answer: "For 2025, quarterly payments are due: Q1 (Jan-Mar income) on April 15, 2025; Q2 (Apr-May income) on June 16, 2025; Q3 (Jun-Aug income) on September 15, 2025; Q4 (Sep-Dec income) on January 15, 2026. If a due date falls on a weekend or holiday, the deadline moves to the next business day."
+    question: 'When are quarterly estimated tax payments due?',
+    answer:
+      'For 2025, quarterly payments are due: Q1 (Jan-Mar income) on April 15, 2025; Q2 (Apr-May income) on June 16, 2025; Q3 (Jun-Aug income) on September 15, 2025; Q4 (Sep-Dec income) on January 15, 2026. If a due date falls on a weekend or holiday, the deadline moves to the next business day.',
   },
   {
-    question: "Do I need to pay quarterly estimated taxes?",
-    answer: "You should pay quarterly taxes if you expect to owe at least $1,000 when you file your return. This typically applies to self-employed individuals, freelancers, landlords, investors with significant gains, and anyone without adequate tax withholding from an employer."
+    question: 'Do I need to pay quarterly estimated taxes?',
+    answer:
+      'You should pay quarterly taxes if you expect to owe at least $1,000 when you file your return. This typically applies to self-employed individuals, freelancers, landlords, investors with significant gains, and anyone without adequate tax withholding from an employer.',
   },
   {
-    question: "What is the safe harbor rule for estimated taxes?",
-    answer: "Safe harbor protects you from underpayment penalties. You meet safe harbor if you pay either: (1) 90% of the current year's tax, OR (2) 100% of last year's tax (110% if your AGI exceeded $150,000). Meeting either threshold means no penalties, even if you still owe at filing."
+    question: 'What is the safe harbor rule for estimated taxes?',
+    answer:
+      "Safe harbor protects you from underpayment penalties. You meet safe harbor if you pay either: (1) 90% of the current year's tax, OR (2) 100% of last year's tax (110% if your AGI exceeded $150,000). Meeting either threshold means no penalties, even if you still owe at filing.",
   },
   {
-    question: "What happens if I miss a quarterly tax payment?",
-    answer: "Missing or underpaying quarterly taxes can result in an underpayment penalty, calculated based on the amount underpaid and how long it was underpaid. The penalty rate is the federal short-term rate plus 3%. However, if you meet safe harbor rules or owe less than $1,000, penalties are waived."
+    question: 'What happens if I miss a quarterly tax payment?',
+    answer:
+      'Missing or underpaying quarterly taxes can result in an underpayment penalty, calculated based on the amount underpaid and how long it was underpaid. The penalty rate is the federal short-term rate plus 3%. However, if you meet safe harbor rules or owe less than $1,000, penalties are waived.',
   },
   {
-    question: "How do I calculate my quarterly estimated tax?",
-    answer: "Add your expected income tax and self-employment tax, then subtract any withholding from W-2 jobs. Divide the remaining amount by 4 for equal quarterly payments. Use Form 1040-ES to submit payments to the IRS via mail, IRS Direct Pay, or EFTPS."
+    question: 'How do I calculate my quarterly estimated tax?',
+    answer:
+      'Add your expected income tax and self-employment tax, then subtract any withholding from W-2 jobs. Divide the remaining amount by 4 for equal quarterly payments. Use Form 1040-ES to submit payments to the IRS via mail, IRS Direct Pay, or EFTPS.',
   },
   {
-    question: "What is the annualized income installment method?",
-    answer: "If your income varies significantly throughout the year (like seasonal businesses), you can use the annualized income installment method (Form 2210 Schedule AI) to calculate payments based on income actually earned each quarter, rather than equal quarterly amounts. This can reduce early payments if income is back-loaded."
+    question: 'What is the annualized income installment method?',
+    answer:
+      'If your income varies significantly throughout the year (like seasonal businesses), you can use the annualized income installment method (Form 2210 Schedule AI) to calculate payments based on income actually earned each quarter, rather than equal quarterly amounts. This can reduce early payments if income is back-loaded.',
   },
   {
-    question: "Should I pay more than the required quarterly amount?",
-    answer: "If your income is higher than expected or you want to minimize your April tax bill, you can pay more than 1/4 of your estimated tax each quarter. There's no penalty for overpaying—you'll receive a refund or can apply the overpayment to next year's taxes."
+    question: 'Should I pay more than the required quarterly amount?',
+    answer:
+      "If your income is higher than expected or you want to minimize your April tax bill, you can pay more than 1/4 of your estimated tax each quarter. There's no penalty for overpaying—you'll receive a refund or can apply the overpayment to next year's taxes.",
   },
   {
-    question: "How do I pay my quarterly estimated taxes?",
-    answer: "You can pay quarterly taxes through: (1) IRS Direct Pay (free bank transfer at irs.gov), (2) EFTPS (Electronic Federal Tax Payment System), (3) Credit/debit card (processing fees apply), or (4) Mail a check with Form 1040-ES payment voucher. IRS Direct Pay is the fastest and free method."
+    question: 'How do I pay my quarterly estimated taxes?',
+    answer:
+      'You can pay quarterly taxes through: (1) IRS Direct Pay (free bank transfer at irs.gov), (2) EFTPS (Electronic Federal Tax Payment System), (3) Credit/debit card (processing fees apply), or (4) Mail a check with Form 1040-ES payment voucher. IRS Direct Pay is the fastest and free method.',
   },
 ];
 
@@ -108,23 +118,38 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
-      <li><strong class="text-[var(--color-cream)]">Enter your expected income</strong> – Your total anticipated income from all sources for 2025.</li>
-      <li><strong class="text-[var(--color-cream)]">Specify self-employment income</strong> – Net profit from 1099 work (after business expenses).</li>
-      <li><strong class="text-[var(--color-cream)]">Include W-2 withholdings</strong> – Tax already being withheld from any W-2 jobs.</li>
-      <li><strong class="text-[var(--color-cream)]">Add prior year tax info</strong> – Your 2024 total tax and AGI for safe harbor calculation.</li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your expected income</strong> – Your total anticipated
+        income from all sources for 2025.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Specify self-employment income</strong> – Net profit
+        from 1099 work (after business expenses).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Include W-2 withholdings</strong> – Tax already being
+        withheld from any W-2 jobs.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add prior year tax info</strong> – Your 2024 total tax
+        and AGI for safe harbor calculation.
+      </li>
     </ol>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        The <strong class="text-violet-400">quarterly payment</strong> shown is what you should pay each quarter to meet your tax obligation and avoid penalties.
+        The <strong class="text-violet-400">quarterly payment</strong> shown is what you should pay each
+        quarter to meet your tax obligation and avoid penalties.
       </p>
       <p>
-        The <strong class="text-emerald-400">safe harbor status</strong> indicates whether your planned payments protect you from underpayment penalties, even if you end up owing more at tax time.
+        The <strong class="text-emerald-400">safe harbor status</strong> indicates whether your planned
+        payments protect you from underpayment penalties, even if you end up owing more at tax time.
       </p>
       <p>
-        The <strong class="text-amber-400">payment schedule</strong> shows all four due dates and cumulative amounts to help you plan your cash flow throughout the year.
+        The <strong class="text-amber-400">payment schedule</strong> shows all four due dates and cumulative
+        amounts to help you plan your cash flow throughout the year.
       </p>
     </div>
   </ContentSection>

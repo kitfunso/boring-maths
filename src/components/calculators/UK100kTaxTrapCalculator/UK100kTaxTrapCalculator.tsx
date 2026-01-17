@@ -34,10 +34,7 @@ export default function UK100kTaxTrapCalculator() {
 
   const result = useMemo(() => calculateUK100kTax(inputs), [inputs]);
 
-  const updateInput = <K extends keyof UK100kInputs>(
-    field: K,
-    value: UK100kInputs[K]
-  ) => {
+  const updateInput = <K extends keyof UK100kInputs>(field: K, value: UK100kInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -66,7 +63,9 @@ export default function UK100kTaxTrapCalculator() {
           <div className="space-y-6 mb-8">
             {/* Gross Salary */}
             <div>
-              <Label htmlFor="grossSalary" required>Annual Gross Salary</Label>
+              <Label htmlFor="grossSalary" required>
+                Annual Gross Salary
+              </Label>
               <Input
                 id="grossSalary"
                 type="number"
@@ -125,7 +124,9 @@ export default function UK100kTaxTrapCalculator() {
               <select
                 id="studentLoan"
                 value={inputs.studentLoanPlan}
-                onChange={(e) => updateInput('studentLoanPlan', e.currentTarget.value as StudentLoanPlan)}
+                onChange={(e) =>
+                  updateInput('studentLoanPlan', e.currentTarget.value as StudentLoanPlan)
+                }
                 className="w-full bg-[var(--color-void)] border border-white/10 rounded-xl px-4 py-3 text-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50"
               >
                 {(Object.keys(STUDENT_LOAN_LABELS) as StudentLoanPlan[]).map((plan) => (
@@ -159,13 +160,15 @@ export default function UK100kTaxTrapCalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* Tax Trap Status */}
-            <div className={`rounded-2xl p-6 text-center border-2 ${
-              result.isInTaxTrap
-                ? 'bg-rose-950/50 border-rose-500/30'
-                : result.personalAllowanceLost > 0
-                  ? 'bg-amber-950/50 border-amber-500/30'
-                  : 'bg-emerald-950/50 border-emerald-500/30'
-            }`}>
+            <div
+              className={`rounded-2xl p-6 text-center border-2 ${
+                result.isInTaxTrap
+                  ? 'bg-rose-950/50 border-rose-500/30'
+                  : result.personalAllowanceLost > 0
+                    ? 'bg-amber-950/50 border-amber-500/30'
+                    : 'bg-emerald-950/50 border-emerald-500/30'
+              }`}
+            >
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Tax Trap Status
               </p>
@@ -174,7 +177,11 @@ export default function UK100kTaxTrapCalculator() {
               </p>
               {result.isInTaxTrap && (
                 <p className="text-[var(--color-cream)] mt-2">
-                  You're paying <span className="font-bold text-rose-400">{formatCurrency(result.taxTrapCost)}</span> extra in tax due to Personal Allowance loss
+                  You're paying{' '}
+                  <span className="font-bold text-rose-400">
+                    {formatCurrency(result.taxTrapCost)}
+                  </span>{' '}
+                  extra in tax due to Personal Allowance loss
                 </p>
               )}
             </div>
@@ -193,16 +200,22 @@ export default function UK100kTaxTrapCalculator() {
                 </div>
                 <div className="text-center p-3">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Personal Allowance</p>
-                  <p className={`font-bold text-xl tabular-nums ${result.personalAllowanceLost > 0 ? 'text-amber-400' : 'text-emerald-400'}`}>
+                  <p
+                    className={`font-bold text-xl tabular-nums ${result.personalAllowanceLost > 0 ? 'text-amber-400' : 'text-emerald-400'}`}
+                  >
                     {formatCurrency(result.personalAllowance)}
                   </p>
                   {result.personalAllowanceLost > 0 && (
-                    <p className="text-xs text-rose-400">-{formatCurrency(result.personalAllowanceLost)} lost</p>
+                    <p className="text-xs text-rose-400">
+                      -{formatCurrency(result.personalAllowanceLost)} lost
+                    </p>
                   )}
                 </div>
                 <div className="text-center p-3">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Marginal Rate</p>
-                  <p className={`font-bold text-xl tabular-nums ${result.marginalTaxRate > 0.5 ? 'text-rose-400' : 'text-[var(--color-cream)]'}`}>
+                  <p
+                    className={`font-bold text-xl tabular-nums ${result.marginalTaxRate > 0.5 ? 'text-rose-400' : 'text-[var(--color-cream)]'}`}
+                  >
                     {formatPercent(result.marginalTaxRate, 0)}
                   </p>
                 </div>
@@ -255,7 +268,12 @@ export default function UK100kTaxTrapCalculator() {
               <div className="bg-emerald-950/30 rounded-xl p-6 border border-emerald-500/30">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   Recommended Optimization
                 </h3>
@@ -265,7 +283,8 @@ export default function UK100kTaxTrapCalculator() {
                   <span className="font-bold text-emerald-400">
                     {formatCurrency(result.optimalPensionContribution)}
                   </span>{' '}
-                  ({result.optimalPensionPercent.toFixed(1)}% of salary) to restore your full Personal Allowance.
+                  ({result.optimalPensionPercent.toFixed(1)}% of salary) to restore your full
+                  Personal Allowance.
                 </p>
 
                 <Grid responsive={{ sm: 2, md: 3 }} gap="md">
@@ -278,7 +297,9 @@ export default function UK100kTaxTrapCalculator() {
                   <div className="text-center p-4 bg-emerald-950/30 rounded-lg">
                     <p className="text-xs text-emerald-300/70 mb-1">Extra to Pension</p>
                     <p className="text-2xl font-bold text-emerald-400 tabular-nums">
-                      {formatCurrency(result.optimalPensionContribution - result.currentPensionContribution)}
+                      {formatCurrency(
+                        result.optimalPensionContribution - result.currentPensionContribution
+                      )}
                     </p>
                   </div>
                   <div className="text-center p-4 bg-emerald-950/30 rounded-lg">
@@ -290,7 +311,8 @@ export default function UK100kTaxTrapCalculator() {
                 </Grid>
 
                 <p className="text-sm text-emerald-300/70 mt-4 text-center">
-                  For every £1 less take-home, you get £{result.pensionGainRatio.toFixed(2)} in your pension
+                  For every £1 less take-home, you get £{result.pensionGainRatio.toFixed(2)} in your
+                  pension
                 </p>
               </div>
             )}
@@ -314,12 +336,23 @@ export default function UK100kTaxTrapCalculator() {
                     {result.comparison.map((row) => (
                       <tr key={row.label} className="border-t border-white/5">
                         <td className="py-3 text-[var(--color-subtle)]">{row.label}</td>
-                        <td className="py-3 text-right tabular-nums">{formatCurrency(row.current)}</td>
-                        <td className="py-3 text-right tabular-nums">{formatCurrency(row.optimized)}</td>
-                        <td className={`py-3 text-right tabular-nums ${
-                          row.difference > 0 ? 'text-emerald-400' : row.difference < 0 ? 'text-rose-400' : ''
-                        }`}>
-                          {row.difference !== 0 && (row.difference > 0 ? '+' : '')}{formatCurrency(row.difference)}
+                        <td className="py-3 text-right tabular-nums">
+                          {formatCurrency(row.current)}
+                        </td>
+                        <td className="py-3 text-right tabular-nums">
+                          {formatCurrency(row.optimized)}
+                        </td>
+                        <td
+                          className={`py-3 text-right tabular-nums ${
+                            row.difference > 0
+                              ? 'text-emerald-400'
+                              : row.difference < 0
+                                ? 'text-rose-400'
+                                : ''
+                          }`}
+                        >
+                          {row.difference !== 0 && (row.difference > 0 ? '+' : '')}
+                          {formatCurrency(row.difference)}
                         </td>
                       </tr>
                     ))}
@@ -332,14 +365,17 @@ export default function UK100kTaxTrapCalculator() {
             {result.taxBreakdown.length > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
-                  Income Tax Breakdown ({inputs.taxRegion === 'scotland' ? 'Scotland' : 'England/Wales/NI'})
+                  Income Tax Breakdown (
+                  {inputs.taxRegion === 'scotland' ? 'Scotland' : 'England/Wales/NI'})
                 </h3>
                 <div className="space-y-2">
                   {result.taxBreakdown.map((band) => (
                     <div key={band.name} className="flex items-center justify-between text-sm">
                       <div className="flex items-center gap-2">
                         <span className="text-[var(--color-subtle)]">{band.name}</span>
-                        <span className="text-xs text-[var(--color-muted)]">({formatPercent(band.rate, 0)})</span>
+                        <span className="text-xs text-[var(--color-muted)]">
+                          ({formatPercent(band.rate, 0)})
+                        </span>
                       </div>
                       <div className="flex items-center gap-4">
                         <span className="text-[var(--color-muted)] text-xs">
@@ -357,9 +393,11 @@ export default function UK100kTaxTrapCalculator() {
 
             {/* Info Alert */}
             <Alert variant="info" title="Understanding the £100k Tax Trap">
-              When your income exceeds £100,000, you lose £1 of Personal Allowance for every £2 earned above this threshold.
-              This creates an effective marginal tax rate of up to 62% (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140.
-              Pension contributions via salary sacrifice reduce your taxable income and can restore your Personal Allowance.
+              When your income exceeds £100,000, you lose £1 of Personal Allowance for every £2
+              earned above this threshold. This creates an effective marginal tax rate of up to 62%
+              (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140.
+              Pension contributions via salary sacrifice reduce your taxable income and can restore
+              your Personal Allowance.
             </Alert>
 
             {/* Share & Print */}
@@ -378,11 +416,19 @@ export default function UK100kTaxTrapCalculator() {
                   { label: 'Take-Home Pay', value: formatCurrency(result.takeHomePay) },
                   { label: 'Effective Tax Rate', value: formatPercent(result.effectiveTaxRate) },
                   { label: 'Marginal Tax Rate', value: formatPercent(result.marginalTaxRate) },
-                  ...(result.isInTaxTrap ? [
-                    { label: 'Tax Trap Cost', value: formatCurrency(result.taxTrapCost) },
-                    { label: 'Optimal Pension', value: formatCurrency(result.optimalPensionContribution) },
-                    { label: 'Potential Tax Savings', value: formatCurrency(result.annualTaxSaved) },
-                  ] : []),
+                  ...(result.isInTaxTrap
+                    ? [
+                        { label: 'Tax Trap Cost', value: formatCurrency(result.taxTrapCost) },
+                        {
+                          label: 'Optimal Pension',
+                          value: formatCurrency(result.optimalPensionContribution),
+                        },
+                        {
+                          label: 'Potential Tax Savings',
+                          value: formatCurrency(result.annualTaxSaved),
+                        },
+                      ]
+                    : []),
                 ]}
               />
             </div>

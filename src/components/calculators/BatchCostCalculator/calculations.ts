@@ -58,7 +58,8 @@ export function calculateBatchCost(inputs: BatchCostInputs): BatchCostResults {
   // Break-even (fixed costs / contribution margin)
   // For simplicity, treating labor + overhead as semi-fixed
   const fixedCosts = totalLaborCost + totalOverhead;
-  const contributionMargin = suggestedRetailPrice - materialCostPerUnit - inputs.packagingCostPerUnit;
+  const contributionMargin =
+    suggestedRetailPrice - materialCostPerUnit - inputs.packagingCostPerUnit;
   const breakEvenUnits = contributionMargin > 0 ? Math.ceil(fixedCosts / contributionMargin) : 0;
 
   // Cost breakdown

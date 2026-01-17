@@ -40,7 +40,7 @@ export const TOOL_MATERIALS = [
 // Common flute configurations
 export const FLUTE_OPTIONS = [
   { value: 2, label: '2 Flute', factor: 0.85 },
-  { value: 3, label: '3 Flute', factor: 0.90 },
+  { value: 3, label: '3 Flute', factor: 0.9 },
   { value: 4, label: '4 Flute', factor: 1.0 },
   { value: 6, label: '6 Flute', factor: 1.05 },
 ];

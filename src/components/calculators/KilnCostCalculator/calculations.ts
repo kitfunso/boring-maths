@@ -15,7 +15,7 @@ function estimateFiringTime(
   schedule: string,
   kilnSize: number
 ): number {
-  const cone = CONE_TEMPS.find(c => c.cone === targetCone);
+  const cone = CONE_TEMPS.find((c) => c.cone === targetCone);
   const tempF = cone?.tempF || 2228;
 
   // Base time varies by temperature target
@@ -56,11 +56,7 @@ function estimateFiringTime(
  * Kilns don't run at full power continuously
  * They cycle and average around 50-70% duty cycle
  */
-function calculateElectricEnergy(
-  wattage: number,
-  hours: number,
-  loadDensity: string
-): number {
+function calculateElectricEnergy(wattage: number, hours: number, loadDensity: string): number {
   // Duty cycle varies by load and phase
   const dutyCycles = {
     light: 0.45,
@@ -104,7 +100,7 @@ function calculateGasEnergy(
  * Main kiln cost calculation
  */
 export function calculateKilnCost(inputs: KilnCostInputs): KilnCostResults {
-  const cone = CONE_TEMPS.find(c => c.cone === inputs.targetCone);
+  const cone = CONE_TEMPS.find((c) => c.cone === inputs.targetCone);
   const peakTemperature = cone?.tempF || 2228;
   const peakTempC = cone?.tempC || 1220;
 
@@ -126,11 +122,7 @@ export function calculateKilnCost(inputs: KilnCostInputs): KilnCostResults {
   let co2Emissions: number;
 
   if (inputs.kilnType === 'electric') {
-    energyUsed = calculateElectricEnergy(
-      inputs.kilnWattage,
-      estimatedTime,
-      inputs.loadDensity
-    );
+    energyUsed = calculateElectricEnergy(inputs.kilnWattage, estimatedTime, inputs.loadDensity);
     totalCost = energyUsed * inputs.electricityRate;
     // CO2 emissions: ~0.92 lbs CO2 per kWh (US average)
     co2Emissions = energyUsed * 0.92;
@@ -183,7 +175,7 @@ export function formatTime(hours: number): string {
  * Get cone options for dropdown
  */
 export function getConeOptions() {
-  return CONE_TEMPS.map(c => ({
+  return CONE_TEMPS.map((c) => ({
     value: c.cone,
     label: `Cone ${c.cone} (${c.tempF}°F / ${c.tempC}°C)`,
   }));

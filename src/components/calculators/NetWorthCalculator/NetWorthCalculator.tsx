@@ -47,9 +47,7 @@ export default function NetWorthCalculator() {
   const updateAsset = (id: string, field: keyof Asset, value: string | number) => {
     setInputs((prev) => ({
       ...prev,
-      assets: prev.assets.map((a) =>
-        a.id === id ? { ...a, [field]: value } : a
-      ),
+      assets: prev.assets.map((a) => (a.id === id ? { ...a, [field]: value } : a)),
     }));
   };
 
@@ -73,9 +71,7 @@ export default function NetWorthCalculator() {
   const updateLiability = (id: string, field: keyof Liability, value: string | number) => {
     setInputs((prev) => ({
       ...prev,
-      liabilities: prev.liabilities.map((l) =>
-        l.id === id ? { ...l, [field]: value } : l
-      ),
+      liabilities: prev.liabilities.map((l) => (l.id === id ? { ...l, [field]: value } : l)),
     }));
   };
 
@@ -126,29 +122,42 @@ export default function NetWorthCalculator() {
 
             <div className="space-y-3">
               {inputs.assets.map((asset) => (
-                <div key={asset.id} className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3">
+                <div
+                  key={asset.id}
+                  className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3"
+                >
                   <input
                     type="text"
                     placeholder="Asset name"
                     value={asset.name}
-                    onChange={(e) => updateAsset(asset.id, 'name', (e.target as HTMLInputElement).value)}
+                    onChange={(e) =>
+                      updateAsset(asset.id, 'name', (e.target as HTMLInputElement).value)
+                    }
                     className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm"
                   />
                   <select
                     value={asset.category}
-                    onChange={(e) => updateAsset(asset.id, 'category', (e.target as HTMLSelectElement).value)}
+                    onChange={(e) =>
+                      updateAsset(asset.id, 'category', (e.target as HTMLSelectElement).value)
+                    }
                     className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm"
                   >
                     {ASSET_CATEGORIES.map((cat) => (
-                      <option key={cat.value} value={cat.value}>{cat.label}</option>
+                      <option key={cat.value} value={cat.value}>
+                        {cat.label}
+                      </option>
                     ))}
                   </select>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
+                      $
+                    </span>
                     <input
                       type="number"
                       value={asset.value}
-                      onChange={(e) => updateAsset(asset.id, 'value', Number((e.target as HTMLInputElement).value))}
+                      onChange={(e) =>
+                        updateAsset(asset.id, 'value', Number((e.target as HTMLInputElement).value))
+                      }
                       className="w-32 pl-7 pr-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm text-right"
                     />
                   </div>
@@ -157,7 +166,12 @@ export default function NetWorthCalculator() {
                     className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-lg transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -183,29 +197,50 @@ export default function NetWorthCalculator() {
 
             <div className="space-y-3">
               {inputs.liabilities.map((liability) => (
-                <div key={liability.id} className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3">
+                <div
+                  key={liability.id}
+                  className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3"
+                >
                   <input
                     type="text"
                     placeholder="Liability name"
                     value={liability.name}
-                    onChange={(e) => updateLiability(liability.id, 'name', (e.target as HTMLInputElement).value)}
+                    onChange={(e) =>
+                      updateLiability(liability.id, 'name', (e.target as HTMLInputElement).value)
+                    }
                     className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm"
                   />
                   <select
                     value={liability.category}
-                    onChange={(e) => updateLiability(liability.id, 'category', (e.target as HTMLSelectElement).value)}
+                    onChange={(e) =>
+                      updateLiability(
+                        liability.id,
+                        'category',
+                        (e.target as HTMLSelectElement).value
+                      )
+                    }
                     className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm"
                   >
                     {LIABILITY_CATEGORIES.map((cat) => (
-                      <option key={cat.value} value={cat.value}>{cat.label}</option>
+                      <option key={cat.value} value={cat.value}>
+                        {cat.label}
+                      </option>
                     ))}
                   </select>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
+                      $
+                    </span>
                     <input
                       type="number"
                       value={liability.value}
-                      onChange={(e) => updateLiability(liability.id, 'value', Number((e.target as HTMLInputElement).value))}
+                      onChange={(e) =>
+                        updateLiability(
+                          liability.id,
+                          'value',
+                          Number((e.target as HTMLInputElement).value)
+                        )
+                      }
                       className="w-32 pl-7 pr-3 py-2 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)] text-sm text-right"
                     />
                   </div>
@@ -214,7 +249,12 @@ export default function NetWorthCalculator() {
                     className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-lg transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -233,7 +273,9 @@ export default function NetWorthCalculator() {
             <ResultCard
               label="Your Net Worth"
               value={formatCurrency(result.netWorth)}
-              subtitle={result.netWorth >= 0 ? 'Assets exceed liabilities' : 'Liabilities exceed assets'}
+              subtitle={
+                result.netWorth >= 0 ? 'Assets exceed liabilities' : 'Liabilities exceed assets'
+              }
               valueColor={result.netWorth >= 0 ? 'success' : 'error'}
             />
 
@@ -272,24 +314,28 @@ export default function NetWorthCalculator() {
                   Asset Breakdown
                 </h3>
                 <div className="space-y-3">
-                  {ASSET_CATEGORIES.filter((cat) => result.assetBreakdown[cat.value] > 0).map((cat) => {
-                    const amount = result.assetBreakdown[cat.value];
-                    const percent = (amount / result.totalAssets) * 100;
-                    return (
-                      <div key={cat.value}>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span>{cat.label}</span>
-                          <span>{formatCurrency(amount)} ({percent.toFixed(1)}%)</span>
+                  {ASSET_CATEGORIES.filter((cat) => result.assetBreakdown[cat.value] > 0).map(
+                    (cat) => {
+                      const amount = result.assetBreakdown[cat.value];
+                      const percent = (amount / result.totalAssets) * 100;
+                      return (
+                        <div key={cat.value}>
+                          <div className="flex justify-between text-sm mb-1">
+                            <span>{cat.label}</span>
+                            <span>
+                              {formatCurrency(amount)} ({percent.toFixed(1)}%)
+                            </span>
+                          </div>
+                          <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                            <div
+                              className={`h-full ${assetCategoryColors[cat.value]} rounded-full`}
+                              style={{ width: `${percent}%` }}
+                            />
+                          </div>
                         </div>
-                        <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
-                          <div
-                            className={`h-full ${assetCategoryColors[cat.value]} rounded-full`}
-                            style={{ width: `${percent}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
                 </div>
               </div>
             )}
@@ -301,14 +347,18 @@ export default function NetWorthCalculator() {
                   Liability Breakdown
                 </h3>
                 <div className="space-y-3">
-                  {LIABILITY_CATEGORIES.filter((cat) => result.liabilityBreakdown[cat.value] > 0).map((cat) => {
+                  {LIABILITY_CATEGORIES.filter(
+                    (cat) => result.liabilityBreakdown[cat.value] > 0
+                  ).map((cat) => {
                     const amount = result.liabilityBreakdown[cat.value];
                     const percent = (amount / result.totalLiabilities) * 100;
                     return (
                       <div key={cat.value}>
                         <div className="flex justify-between text-sm mb-1">
                           <span>{cat.label}</span>
-                          <span>{formatCurrency(amount)} ({percent.toFixed(1)}%)</span>
+                          <span>
+                            {formatCurrency(amount)} ({percent.toFixed(1)}%)
+                          </span>
                         </div>
                         <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                           <div
@@ -325,9 +375,9 @@ export default function NetWorthCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Building Net Worth:">
-              Focus on increasing assets (saving, investing) while decreasing liabilities (paying off debt).
-              The average American household has a net worth around $120,000, but median is much lower due to wealth inequality.
-              Track your net worth monthly to see progress.
+              Focus on increasing assets (saving, investing) while decreasing liabilities (paying
+              off debt). The average American household has a net worth around $120,000, but median
+              is much lower due to wealth inequality. Track your net worth monthly to see progress.
             </Alert>
 
             {/* Share */}

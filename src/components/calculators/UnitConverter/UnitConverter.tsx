@@ -71,8 +71,10 @@ export default function UnitConverter() {
     label: u.label,
   }));
 
-  const fromLabel = UNITS[inputs.category].find(u => u.value === inputs.fromUnit)?.label || inputs.fromUnit;
-  const toLabel = UNITS[inputs.category].find(u => u.value === inputs.toUnit)?.label || inputs.toUnit;
+  const fromLabel =
+    UNITS[inputs.category].find((u) => u.value === inputs.fromUnit)?.label || inputs.fromUnit;
+  const toLabel =
+    UNITS[inputs.category].find((u) => u.value === inputs.toUnit)?.label || inputs.toUnit;
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -127,8 +129,18 @@ export default function UnitConverter() {
                          hover:bg-white/10 transition-colors"
                 title="Swap units"
               >
-                <svg className="w-5 h-5 text-[var(--color-cream)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                <svg
+                  className="w-5 h-5 text-[var(--color-cream)]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                  />
                 </svg>
               </button>
 
@@ -149,17 +161,17 @@ export default function UnitConverter() {
           {/* Results */}
           <div className="space-y-6">
             {/* Primary Result */}
-            <div className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/10
-                          rounded-2xl p-8 text-center border border-[var(--color-accent)]/30">
+            <div
+              className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/10
+                          rounded-2xl p-8 text-center border border-[var(--color-accent)]/30"
+            >
               <div className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 {inputs.value} {fromLabel} =
               </div>
               <div className="text-4xl md:text-5xl font-bold text-[var(--color-cream)] tabular-nums mb-2">
                 {result.formatted}
               </div>
-              <div className="text-lg text-[var(--color-accent)]">
-                {toLabel}
-              </div>
+              <div className="text-lg text-[var(--color-accent)]">{toLabel}</div>
             </div>
 
             {/* All Conversions */}
@@ -172,9 +184,10 @@ export default function UnitConverter() {
                   <div
                     key={conv.unit}
                     className={`p-4 rounded-lg border transition-colors cursor-pointer
-                              ${conv.unit === inputs.toUnit
-                                ? 'bg-[var(--color-accent)]/20 border-[var(--color-accent)]/50'
-                                : 'bg-[var(--color-void)] border-white/5 hover:border-white/20'
+                              ${
+                                conv.unit === inputs.toUnit
+                                  ? 'bg-[var(--color-accent)]/20 border-[var(--color-accent)]/50'
+                                  : 'bg-[var(--color-void)] border-white/5 hover:border-white/20'
                               }`}
                     onClick={() => updateInput('toUnit', conv.unit)}
                   >

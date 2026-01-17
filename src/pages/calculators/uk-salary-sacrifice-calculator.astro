@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UKSalarySacrificeCalculator } from '../../components/calculators/UKSalarySacrificeCalculator';
 
 const title = 'UK Salary Sacrifice Calculator 2024/25 | Pension, Cycle & EV';
-const description = 'Free UK salary sacrifice calculator. See how much you save on tax and National Insurance with pension contributions, cycle-to-work, childcare vouchers, and electric vehicle schemes.';
-const keywords = 'salary sacrifice calculator, salary sacrifice pension, cycle to work scheme calculator, salary sacrifice car uk, salary sacrifice electric car, pension salary sacrifice calculator';
+const description =
+  'Free UK salary sacrifice calculator. See how much you save on tax and National Insurance with pension contributions, cycle-to-work, childcare vouchers, and electric vehicle schemes.';
+const keywords =
+  'salary sacrifice calculator, salary sacrifice pension, cycle to work scheme calculator, salary sacrifice car uk, salary sacrifice electric car, pension salary sacrifice calculator';
 const canonicalURL = '/calculators/uk-salary-sacrifice-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is salary sacrifice?",
-    answer: "Salary sacrifice is an arrangement where you give up part of your gross salary in exchange for a non-cash benefit from your employer. Because your salary is reduced before tax and National Insurance are calculated, you pay less in deductions. Common salary sacrifice benefits include pension contributions, cycle-to-work schemes, childcare vouchers, and electric vehicles."
+    question: 'What is salary sacrifice?',
+    answer:
+      'Salary sacrifice is an arrangement where you give up part of your gross salary in exchange for a non-cash benefit from your employer. Because your salary is reduced before tax and National Insurance are calculated, you pay less in deductions. Common salary sacrifice benefits include pension contributions, cycle-to-work schemes, childcare vouchers, and electric vehicles.',
   },
   {
-    question: "How much can I save with salary sacrifice?",
-    answer: "Your savings depend on your tax bracket. Basic rate taxpayers (20%) save around 32% (20% tax + 12% NI). Higher rate taxpayers (40%) save around 42% (40% tax + 2% NI). Scottish taxpayers have different rates. For a £5,000 sacrifice, a 40% taxpayer saves approximately £2,100 in tax and NI."
+    question: 'How much can I save with salary sacrifice?',
+    answer:
+      'Your savings depend on your tax bracket. Basic rate taxpayers (20%) save around 32% (20% tax + 12% NI). Higher rate taxpayers (40%) save around 42% (40% tax + 2% NI). Scottish taxpayers have different rates. For a £5,000 sacrifice, a 40% taxpayer saves approximately £2,100 in tax and NI.',
   },
   {
-    question: "What benefits can I get through salary sacrifice?",
-    answer: "Common salary sacrifice benefits include: Pension contributions (most popular), Cycle-to-work scheme (bikes up to £1,000+), Electric vehicle leasing (with low BIK tax), Childcare vouchers (legacy scheme for existing members), Technology schemes (laptops, phones), and Gym memberships. Not all employers offer all benefits."
+    question: 'What benefits can I get through salary sacrifice?',
+    answer:
+      'Common salary sacrifice benefits include: Pension contributions (most popular), Cycle-to-work scheme (bikes up to £1,000+), Electric vehicle leasing (with low BIK tax), Childcare vouchers (legacy scheme for existing members), Technology schemes (laptops, phones), and Gym memberships. Not all employers offer all benefits.',
   },
   {
-    question: "Does salary sacrifice affect my pension contributions?",
-    answer: "Salary sacrifice pension contributions are paid by your employer on your behalf, so they don't need to be grossed up for tax relief – you get full relief automatically. However, your reduced salary means lower employer NI contributions, which some employers pass on as increased pension contributions."
+    question: 'Does salary sacrifice affect my pension contributions?',
+    answer:
+      "Salary sacrifice pension contributions are paid by your employer on your behalf, so they don't need to be grossed up for tax relief – you get full relief automatically. However, your reduced salary means lower employer NI contributions, which some employers pass on as increased pension contributions.",
   },
   {
-    question: "Will salary sacrifice affect my mortgage application?",
-    answer: "It can. Mortgage lenders look at your gross salary, and salary sacrifice reduces this on paper. Some lenders will add back pension sacrifice when assessing affordability, but not all. If you're planning a mortgage application, consider timing your salary sacrifice carefully or discussing with your broker."
+    question: 'Will salary sacrifice affect my mortgage application?',
+    answer:
+      "It can. Mortgage lenders look at your gross salary, and salary sacrifice reduces this on paper. Some lenders will add back pension sacrifice when assessing affordability, but not all. If you're planning a mortgage application, consider timing your salary sacrifice carefully or discussing with your broker.",
   },
   {
-    question: "Does salary sacrifice affect my State Pension?",
-    answer: "Only if your reduced salary falls below the National Insurance Lower Earnings Limit (£6,396/year in 2024/25). Above this threshold, you continue to accrue State Pension entitlement. For most people, salary sacrifice won't affect State Pension, but check if making large sacrifices."
+    question: 'Does salary sacrifice affect my State Pension?',
+    answer:
+      "Only if your reduced salary falls below the National Insurance Lower Earnings Limit (£6,396/year in 2024/25). Above this threshold, you continue to accrue State Pension entitlement. For most people, salary sacrifice won't affect State Pension, but check if making large sacrifices.",
   },
   {
-    question: "What are the rules for cycle-to-work schemes?",
-    answer: "Cycle-to-work allows you to salary sacrifice the cost of a bike and equipment, typically over 12-18 months. At the end, you can usually purchase the bike for a small residual value (3-7% of original price). There's no legal limit, but most schemes cap at £1,000-£3,000. Electric bikes are included."
+    question: 'What are the rules for cycle-to-work schemes?',
+    answer:
+      "Cycle-to-work allows you to salary sacrifice the cost of a bike and equipment, typically over 12-18 months. At the end, you can usually purchase the bike for a small residual value (3-7% of original price). There's no legal limit, but most schemes cap at £1,000-£3,000. Electric bikes are included.",
   },
   {
-    question: "How does electric vehicle salary sacrifice work?",
-    answer: "EV salary sacrifice lets you lease an electric car through your employer at a reduced cost due to tax and NI savings. You pay Benefit in Kind (BIK) tax, but for EVs this is currently just 2% of the car's list price – making it very tax-efficient. You also get insurance, maintenance, and charging included in most schemes."
+    question: 'How does electric vehicle salary sacrifice work?',
+    answer:
+      "EV salary sacrifice lets you lease an electric car through your employer at a reduced cost due to tax and NI savings. You pay Benefit in Kind (BIK) tax, but for EVs this is currently just 2% of the car's list price – making it very tax-efficient. You also get insurance, maintenance, and charging included in most schemes.",
   },
 ];
 
@@ -108,24 +118,36 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
-      <li><strong class="text-[var(--color-cream)]">Select sacrifice type</strong> – Choose pension, cycle-to-work, childcare, or EV based on your benefit.</li>
-      <li><strong class="text-[var(--color-cream)]">Choose your tax region</strong> – Scotland has different income tax rates than England, Wales, and Northern Ireland.</li>
-      <li><strong class="text-[var(--color-cream)]">Enter your gross salary</strong> – Your annual salary before any deductions.</li>
-      <li><strong class="text-[var(--color-cream)]">Enter sacrifice amount</strong> – The annual amount you want to sacrifice from your salary.</li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select sacrifice type</strong> – Choose pension, cycle-to-work,
+        childcare, or EV based on your benefit.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose your tax region</strong> – Scotland has different
+        income tax rates than England, Wales, and Northern Ireland.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your gross salary</strong> – Your annual salary
+        before any deductions.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter sacrifice amount</strong> – The annual amount
+        you want to sacrifice from your salary.
+      </li>
     </ol>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        The <strong class="text-[var(--color-cream)]">effective discount</strong> shows your total tax and
-        NI savings as a percentage of the sacrifice amount. This is essentially how much "discount" you get
-        on the benefit.
+        The <strong class="text-[var(--color-cream)]">effective discount</strong> shows your total tax
+        and NI savings as a percentage of the sacrifice amount. This is essentially how much "discount"
+        you get on the benefit.
       </p>
       <p>
-        The <strong class="text-emerald-400">true cost</strong> is what you actually lose in take-home pay.
-        For example, a £5,000 pension contribution might only reduce your take-home pay by £3,000 – the
-        rest is tax and NI you would have paid anyway.
+        The <strong class="text-emerald-400">true cost</strong> is what you actually lose in take-home
+        pay. For example, a £5,000 pension contribution might only reduce your take-home pay by £3,000
+        – the rest is tax and NI you would have paid anyway.
       </p>
       <p>
         Your <strong class="text-blue-400">employer also saves</strong> on National Insurance contributions

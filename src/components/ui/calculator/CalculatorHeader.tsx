@@ -41,9 +41,7 @@ export function CalculatorHeader({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl font-semibold text-white">{title}</h2>
-          {subtitle && (
-            <p className={`${textClass} text-sm mt-1`}>{subtitle}</p>
-          )}
+          {subtitle && <p className={`${textClass} text-sm mt-1`}>{subtitle}</p>}
         </div>
         {actions && <div className="flex-shrink-0">{actions}</div>}
       </div>

@@ -142,7 +142,7 @@ export interface RemoteWorkSavingsResult {
 export function getDefaultInputs(currency: Currency): RemoteWorkSavingsInputs {
   const defaults = {
     USD: {
-      gasPricePerGallon: 3.50,
+      gasPricePerGallon: 3.5,
       parkingCostDaily: 15,
       transitCostDaily: 8,
       workLunchCostDaily: 15,
@@ -152,7 +152,7 @@ export function getDefaultInputs(currency: Currency): RemoteWorkSavingsInputs {
       hourlyRate: 35,
     },
     GBP: {
-      gasPricePerGallon: 6.50, // UK petrol is expensive
+      gasPricePerGallon: 6.5, // UK petrol is expensive
       parkingCostDaily: 12,
       transitCostDaily: 10,
       workLunchCostDaily: 10,
@@ -162,7 +162,7 @@ export function getDefaultInputs(currency: Currency): RemoteWorkSavingsInputs {
       hourlyRate: 25,
     },
     EUR: {
-      gasPricePerGallon: 5.50,
+      gasPricePerGallon: 5.5,
       parkingCostDaily: 10,
       transitCostDaily: 6,
       workLunchCostDaily: 12,

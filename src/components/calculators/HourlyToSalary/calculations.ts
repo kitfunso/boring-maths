@@ -28,9 +28,7 @@ function round(value: number, decimals: number = 2): number {
  * @param inputs - Calculator input values
  * @returns Calculated salary breakdown
  */
-export function calculateHourlyToSalary(
-  inputs: HourlyToSalaryInputs
-): HourlyToSalaryResult {
+export function calculateHourlyToSalary(inputs: HourlyToSalaryInputs): HourlyToSalaryResult {
   const {
     currency,
     hourlyRate,

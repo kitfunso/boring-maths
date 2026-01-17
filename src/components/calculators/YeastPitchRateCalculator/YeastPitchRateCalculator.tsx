@@ -77,9 +77,7 @@ export function YeastPitchRateCalculator() {
                     setInputs({
                       ...inputs,
                       batchVolume:
-                        inputs.volumeUnit === 'gallons'
-                          ? preset.gallons
-                          : preset.gallons * 3.78541,
+                        inputs.volumeUnit === 'gallons' ? preset.gallons : preset.gallons * 3.78541,
                     })
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-xs ring-1 ring-white/5 hover:ring-amber-500/30"
@@ -161,9 +159,7 @@ export function YeastPitchRateCalculator() {
                 label="Packages/Vials"
                 type="number"
                 value={inputs.packagesAvailable}
-                onChange={(v) =>
-                  setInputs({ ...inputs, packagesAvailable: parseInt(v) || 1 })
-                }
+                onChange={(v) => setInputs({ ...inputs, packagesAvailable: parseInt(v) || 1 })}
                 min={1}
                 max={10}
               />
@@ -171,9 +167,7 @@ export function YeastPitchRateCalculator() {
                 label="Cells per Package"
                 type="number"
                 value={inputs.cellsPerPackage}
-                onChange={(v) =>
-                  setInputs({ ...inputs, cellsPerPackage: parseFloat(v) || 100 })
-                }
+                onChange={(v) => setInputs({ ...inputs, cellsPerPackage: parseFloat(v) || 100 })}
                 min={50}
                 max={1000}
                 suffix="B"
@@ -305,11 +299,7 @@ export function YeastPitchRateCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Cells Needed"
-            value={formatCells(results.cellsNeeded)}
-            color="blue"
-          />
+          <ResultCard label="Cells Needed" value={formatCells(results.cellsNeeded)} color="blue" />
           <ResultCard
             label="Cells Available"
             value={formatCells(results.cellsAvailable)}
@@ -332,18 +322,14 @@ export function YeastPitchRateCalculator() {
 
         {inputs.useStarter && (
           <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-            <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
-              Starter Details
-            </h3>
+            <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Starter Details</h3>
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-[var(--color-subtle)]">Initial Cells</span>
                 <span className="font-medium text-[var(--color-text)]">
                   {formatCells(
                     Math.round(
-                      inputs.packagesAvailable *
-                        inputs.cellsPerPackage *
-                        (results.viability / 100)
+                      inputs.packagesAvailable * inputs.cellsPerPackage * (results.viability / 100)
                     )
                   )}
                 </span>
@@ -383,9 +369,7 @@ export function YeastPitchRateCalculator() {
 
         {results.recommendations.length > 0 && (
           <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-            <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
-              Recommendations
-            </h3>
+            <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Recommendations</h3>
             <ul className="space-y-2 text-sm text-[var(--color-subtle)]">
               {results.recommendations.map((rec, i) => (
                 <li key={i} className="flex items-start gap-2">

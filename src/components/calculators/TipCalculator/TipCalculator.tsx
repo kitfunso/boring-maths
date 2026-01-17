@@ -28,7 +28,9 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
 export default function TipCalculator() {
-  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -62,12 +64,7 @@ export default function TipCalculator() {
         <CalculatorHeader
           title="Calculate Your Tip"
           subtitle="Quick tip calculation with bill splitting"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -139,8 +136,12 @@ export default function TipCalculator() {
                   −
                 </button>
                 <div className="flex-1 text-center">
-                  <span className="text-3xl font-bold text-[var(--color-cream)]">{inputs.splitCount}</span>
-                  <span className="text-[var(--color-muted)] ml-2">{inputs.splitCount === 1 ? 'person' : 'people'}</span>
+                  <span className="text-3xl font-bold text-[var(--color-cream)]">
+                    {inputs.splitCount}
+                  </span>
+                  <span className="text-[var(--color-muted)] ml-2">
+                    {inputs.splitCount === 1 ? 'person' : 'people'}
+                  </span>
                 </div>
                 <button
                   onClick={() => updateInput('splitCount', Math.min(20, inputs.splitCount + 1))}
@@ -168,7 +169,10 @@ export default function TipCalculator() {
               footer={
                 inputs.splitCount > 1 ? (
                   <>
-                    Total bill: <span className="font-semibold">{formatCurrency(result.totalAmount, result.currency)}</span>
+                    Total bill:{' '}
+                    <span className="font-semibold">
+                      {formatCurrency(result.totalAmount, result.currency)}
+                    </span>
                   </>
                 ) : undefined
               }
@@ -178,13 +182,23 @@ export default function TipCalculator() {
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Bill Amount"
-                value={formatCurrency(inputs.splitCount > 1 ? result.perPersonBill : inputs.billAmount, result.currency)}
+                value={formatCurrency(
+                  inputs.splitCount > 1 ? result.perPersonBill : inputs.billAmount,
+                  result.currency
+                )}
                 sublabel={inputs.splitCount > 1 ? 'per person' : 'before tip'}
               />
               <MetricCard
                 label="Tip Amount"
-                value={formatCurrency(inputs.splitCount > 1 ? result.perPersonTip : result.tipAmount, result.currency)}
-                sublabel={inputs.splitCount > 1 ? 'per person' : `${Math.round(inputs.tipPercentage * 100)}%`}
+                value={formatCurrency(
+                  inputs.splitCount > 1 ? result.perPersonTip : result.tipAmount,
+                  result.currency
+                )}
+                sublabel={
+                  inputs.splitCount > 1
+                    ? 'per person'
+                    : `${Math.round(inputs.tipPercentage * 100)}%`
+                }
                 valueColor="success"
               />
               <MetricCard
@@ -246,8 +260,8 @@ export default function TipCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Tipping etiquette:">
-              15-18% for adequate service, 20% for good service, 25%+ for exceptional service.
-              In the US, servers rely on tips as a major part of their income.
+              15-18% for adequate service, 20% for good service, 25%+ for exceptional service. In
+              the US, servers rely on tips as a major part of their income.
             </Alert>
 
             {/* Share & Print Results */}
@@ -263,14 +277,22 @@ export default function TipCalculator() {
               <PrintResults
                 title="Tip Calculator Results"
                 results={[
-                  { label: 'Bill Amount', value: formatCurrency(inputs.billAmount, result.currency) },
+                  {
+                    label: 'Bill Amount',
+                    value: formatCurrency(inputs.billAmount, result.currency),
+                  },
                   { label: 'Tip Percentage', value: `${Math.round(inputs.tipPercentage * 100)}%` },
                   { label: 'Tip Amount', value: formatCurrency(result.tipAmount, result.currency) },
                   { label: 'Total', value: formatCurrency(result.totalAmount, result.currency) },
-                  ...(inputs.splitCount > 1 ? [
-                    { label: 'Split Between', value: `${inputs.splitCount} people` },
-                    { label: 'Per Person', value: formatCurrency(result.perPersonTotal, result.currency) },
-                  ] : []),
+                  ...(inputs.splitCount > 1
+                    ? [
+                        { label: 'Split Between', value: `${inputs.splitCount} people` },
+                        {
+                          label: 'Per Person',
+                          value: formatCurrency(result.perPersonTotal, result.currency),
+                        },
+                      ]
+                    : []),
                 ]}
               />
             </div>

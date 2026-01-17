@@ -23,10 +23,30 @@ export interface DogAgeResult {
 }
 
 export const DOG_SIZES: { value: DogSize; label: string; weight: string; examples: string }[] = [
-  { value: 'small', label: 'Small', weight: 'Under 20 lbs', examples: 'Chihuahua, Yorkie, Pomeranian' },
-  { value: 'medium', label: 'Medium', weight: '20-50 lbs', examples: 'Beagle, Bulldog, Cocker Spaniel' },
-  { value: 'large', label: 'Large', weight: '50-100 lbs', examples: 'Lab, Golden Retriever, German Shepherd' },
-  { value: 'giant', label: 'Giant', weight: 'Over 100 lbs', examples: 'Great Dane, Mastiff, Saint Bernard' },
+  {
+    value: 'small',
+    label: 'Small',
+    weight: 'Under 20 lbs',
+    examples: 'Chihuahua, Yorkie, Pomeranian',
+  },
+  {
+    value: 'medium',
+    label: 'Medium',
+    weight: '20-50 lbs',
+    examples: 'Beagle, Bulldog, Cocker Spaniel',
+  },
+  {
+    value: 'large',
+    label: 'Large',
+    weight: '50-100 lbs',
+    examples: 'Lab, Golden Retriever, German Shepherd',
+  },
+  {
+    value: 'giant',
+    label: 'Giant',
+    weight: 'Over 100 lbs',
+    examples: 'Great Dane, Mastiff, Saint Bernard',
+  },
 ];
 
 export const LIFE_STAGES = [

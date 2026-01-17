@@ -61,7 +61,7 @@ function calculatePercentChange(from: number, to: number): number {
  * Calculate: X increased/decreased by Y%
  */
 function calculateIncreaseDecrease(value: number, percentage: number, isIncrease: boolean): number {
-  const multiplier = isIncrease ? (1 + percentage / 100) : (1 - percentage / 100);
+  const multiplier = isIncrease ? 1 + percentage / 100 : 1 - percentage / 100;
   return value * multiplier;
 }
 
@@ -124,7 +124,8 @@ export function calculate(inputs: PercentageCalculatorInputs): PercentageCalcula
     }
 
     case 'increaseDecrease': {
-      const { increaseDecrease_value, increaseDecrease_percentage, increaseDecrease_isIncrease } = inputs;
+      const { increaseDecrease_value, increaseDecrease_percentage, increaseDecrease_isIncrease } =
+        inputs;
       const result = calculateIncreaseDecrease(
         increaseDecrease_value,
         increaseDecrease_percentage,

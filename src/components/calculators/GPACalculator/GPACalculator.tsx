@@ -29,7 +29,10 @@ import {
 } from '../../ui';
 
 export default function GPACalculator() {
-  const [inputs, setInputs] = useLocalStorage<GPACalculatorInputs>('calc-gpa-inputs', getDefaultInputs);
+  const [inputs, setInputs] = useLocalStorage<GPACalculatorInputs>(
+    'calc-gpa-inputs',
+    getDefaultInputs
+  );
 
   const result = useMemo(() => calculateGPA(inputs), [inputs]);
   const gradeOptions = useMemo(() => getGradeOptions(inputs.gradeScale), [inputs.gradeScale]);
@@ -196,9 +199,13 @@ export default function GPACalculator() {
                           step={0.5}
                           placeholder="Credits"
                           value={course.credits}
-                          onChange={(e) => updateCourse(course.id, 'credits', Number(e.target.value))}
+                          onChange={(e) =>
+                            updateCourse(course.id, 'credits', Number(e.target.value))
+                          }
                         />
-                        <span className="text-xs text-[var(--color-muted)] mt-1 block md:hidden">credits</span>
+                        <span className="text-xs text-[var(--color-muted)] mt-1 block md:hidden">
+                          credits
+                        </span>
                       </div>
                       <div className="w-full md:w-28">
                         <select
@@ -220,8 +227,18 @@ export default function GPACalculator() {
                           className="p-3 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-colors"
                           aria-label="Remove course"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                            />
                           </svg>
                         </button>
                       )}
@@ -241,7 +258,9 @@ export default function GPACalculator() {
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Semester GPA
               </p>
-              <p className={`text-5xl md:text-6xl font-bold tabular-nums ${getGPAColor(result.semesterGPA)} mb-2`}>
+              <p
+                className={`text-5xl md:text-6xl font-bold tabular-nums ${getGPAColor(result.semesterGPA)} mb-2`}
+              >
                 {result.semesterGPA.toFixed(2)}
               </p>
               <p className="text-lg text-[var(--color-cream)]">
@@ -255,7 +274,9 @@ export default function GPACalculator() {
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                   New Cumulative GPA
                 </p>
-                <p className={`text-4xl font-bold tabular-nums ${getGPAColor(result.cumulativeGPA)}`}>
+                <p
+                  className={`text-4xl font-bold tabular-nums ${getGPAColor(result.cumulativeGPA)}`}
+                >
                   {result.cumulativeGPA.toFixed(2)}
                 </p>
                 <p className="text-sm text-[var(--color-subtle)] mt-2">
@@ -301,10 +322,56 @@ export default function GPACalculator() {
                   <div key={grade} className="p-2 rounded-lg bg-white/5">
                     <span className="font-medium text-[var(--color-cream)]">{grade}</span>
                     <span className="text-[var(--color-subtle)] ml-1">
-                      = {inputs.gradeScale === '4.3'
-                        ? (grade === 'A+' ? '4.3' : grade === 'A' ? '4.0' : grade === 'A-' ? '3.7' : grade === 'B+' ? '3.3' : grade === 'B' ? '3.0' : grade === 'B-' ? '2.7' : grade === 'C+' ? '2.3' : grade === 'C' ? '2.0' : grade === 'C-' ? '1.7' : grade === 'D+' ? '1.3' : grade === 'D' ? '1.0' : grade === 'D-' ? '0.7' : '0.0')
-                        : (grade === 'A' ? '4.0' : grade === 'A-' ? '3.7' : grade === 'B+' ? '3.3' : grade === 'B' ? '3.0' : grade === 'B-' ? '2.7' : grade === 'C+' ? '2.3' : grade === 'C' ? '2.0' : grade === 'C-' ? '1.7' : grade === 'D+' ? '1.3' : grade === 'D' ? '1.0' : grade === 'D-' ? '0.7' : '0.0')
-                      }
+                      ={' '}
+                      {inputs.gradeScale === '4.3'
+                        ? grade === 'A+'
+                          ? '4.3'
+                          : grade === 'A'
+                            ? '4.0'
+                            : grade === 'A-'
+                              ? '3.7'
+                              : grade === 'B+'
+                                ? '3.3'
+                                : grade === 'B'
+                                  ? '3.0'
+                                  : grade === 'B-'
+                                    ? '2.7'
+                                    : grade === 'C+'
+                                      ? '2.3'
+                                      : grade === 'C'
+                                        ? '2.0'
+                                        : grade === 'C-'
+                                          ? '1.7'
+                                          : grade === 'D+'
+                                            ? '1.3'
+                                            : grade === 'D'
+                                              ? '1.0'
+                                              : grade === 'D-'
+                                                ? '0.7'
+                                                : '0.0'
+                        : grade === 'A'
+                          ? '4.0'
+                          : grade === 'A-'
+                            ? '3.7'
+                            : grade === 'B+'
+                              ? '3.3'
+                              : grade === 'B'
+                                ? '3.0'
+                                : grade === 'B-'
+                                  ? '2.7'
+                                  : grade === 'C+'
+                                    ? '2.3'
+                                    : grade === 'C'
+                                      ? '2.0'
+                                      : grade === 'C-'
+                                        ? '1.7'
+                                        : grade === 'D+'
+                                          ? '1.3'
+                                          : grade === 'D'
+                                            ? '1.0'
+                                            : grade === 'D-'
+                                              ? '0.7'
+                                              : '0.0'}
                     </span>
                   </div>
                 ))}
@@ -312,8 +379,8 @@ export default function GPACalculator() {
             </div>
 
             <Alert variant="tip" title="GPA tip:">
-              Your GPA is calculated as total grade points divided by total credits.
-              Higher credit courses have more impact on your overall GPA.
+              Your GPA is calculated as total grade points divided by total credits. Higher credit
+              courses have more impact on your overall GPA.
             </Alert>
 
             {/* Share & Print Results */}

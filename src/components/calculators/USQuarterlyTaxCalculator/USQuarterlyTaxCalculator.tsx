@@ -7,15 +7,7 @@ import {
   type USQuarterlyTaxInputs,
   type FilingStatus,
 } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  ButtonGroup,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
@@ -42,17 +34,23 @@ export default function USQuarterlyTaxCalculator() {
 
   const getPenaltyRiskColor = () => {
     switch (result.penaltyRisk) {
-      case 'none': return 'bg-emerald-950/30 border-emerald-500/30';
-      case 'low': return 'bg-amber-950/30 border-amber-500/30';
-      case 'high': return 'bg-rose-950/30 border-rose-500/30';
+      case 'none':
+        return 'bg-emerald-950/30 border-emerald-500/30';
+      case 'low':
+        return 'bg-amber-950/30 border-amber-500/30';
+      case 'high':
+        return 'bg-rose-950/30 border-rose-500/30';
     }
   };
 
   const getPenaltyRiskTextColor = () => {
     switch (result.penaltyRisk) {
-      case 'none': return 'text-emerald-400';
-      case 'low': return 'text-amber-400';
-      case 'high': return 'text-rose-400';
+      case 'none':
+        return 'text-emerald-400';
+      case 'low':
+        return 'text-amber-400';
+      case 'high':
+        return 'text-rose-400';
     }
   };
 
@@ -90,7 +88,9 @@ export default function USQuarterlyTaxCalculator() {
                   id="expectedAnnualIncome"
                   type="number"
                   value={inputs.expectedAnnualIncome}
-                  onChange={(e) => updateInput('expectedAnnualIncome', Number(e.currentTarget.value))}
+                  onChange={(e) =>
+                    updateInput('expectedAnnualIncome', Number(e.currentTarget.value))
+                  }
                   min={0}
                   step={1000}
                   className="pl-8"
@@ -103,9 +103,7 @@ export default function USQuarterlyTaxCalculator() {
 
             {/* Self-Employment Income */}
             <div>
-              <Label htmlFor="selfEmploymentIncome">
-                Self-Employment Income (1099)
-              </Label>
+              <Label htmlFor="selfEmploymentIncome">Self-Employment Income (1099)</Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
                   $
@@ -114,7 +112,9 @@ export default function USQuarterlyTaxCalculator() {
                   id="selfEmploymentIncome"
                   type="number"
                   value={inputs.selfEmploymentIncome}
-                  onChange={(e) => updateInput('selfEmploymentIncome', Number(e.currentTarget.value))}
+                  onChange={(e) =>
+                    updateInput('selfEmploymentIncome', Number(e.currentTarget.value))
+                  }
                   min={0}
                   step={1000}
                   className="pl-8"
@@ -127,9 +127,7 @@ export default function USQuarterlyTaxCalculator() {
 
             {/* W-2 Withholdings */}
             <div>
-              <Label htmlFor="withholdingsFromW2">
-                Expected W-2 Withholdings
-              </Label>
+              <Label htmlFor="withholdingsFromW2">Expected W-2 Withholdings</Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
                   $
@@ -216,13 +214,33 @@ export default function USQuarterlyTaxCalculator() {
             {/* Penalty Risk Status */}
             <div className={`rounded-xl p-4 border ${getPenaltyRiskColor()}`}>
               <div className="flex items-start gap-3">
-                <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${getPenaltyRiskTextColor()}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className={`w-5 h-5 mt-0.5 flex-shrink-0 ${getPenaltyRiskTextColor()}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   {result.penaltyRisk === 'none' ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   ) : result.penaltyRisk === 'low' ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
                   ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   )}
                 </svg>
                 <div>
@@ -232,9 +250,12 @@ export default function USQuarterlyTaxCalculator() {
                     {result.penaltyRisk === 'high' && 'High Penalty Risk'}
                   </p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
-                    {result.penaltyRisk === 'none' && 'Your payments meet safe harbor requirements.'}
-                    {result.penaltyRisk === 'low' && 'Consider increasing payments to meet safe harbor.'}
-                    {result.penaltyRisk === 'high' && 'Increase payments to avoid underpayment penalties.'}
+                    {result.penaltyRisk === 'none' &&
+                      'Your payments meet safe harbor requirements.'}
+                    {result.penaltyRisk === 'low' &&
+                      'Consider increasing payments to meet safe harbor.'}
+                    {result.penaltyRisk === 'high' &&
+                      'Increase payments to avoid underpayment penalties.'}
                   </p>
                 </div>
               </div>
@@ -242,10 +263,15 @@ export default function USQuarterlyTaxCalculator() {
 
             {/* Payment Schedule */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">2025 Payment Schedule</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
+                2025 Payment Schedule
+              </h4>
               <div className="space-y-3">
                 {result.quarterPayments.map((payment) => (
-                  <div key={payment.quarter} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                  <div
+                    key={payment.quarter}
+                    className="flex items-center justify-between py-2 border-b border-white/5 last:border-0"
+                  >
                     <div className="flex items-center gap-3">
                       <span className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-sm font-bold text-violet-400">
                         Q{payment.quarter}
@@ -289,15 +315,21 @@ export default function USQuarterlyTaxCalculator() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Estimated total tax</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(result.estimatedTotalTax)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(result.estimatedTotalTax)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Already withheld (W-2)</span>
-                  <span className="text-emerald-400">-{formatCurrency(result.alreadyWithheld)}</span>
+                  <span className="text-emerald-400">
+                    -{formatCurrency(result.alreadyWithheld)}
+                  </span>
                 </div>
                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                   <span className="text-[var(--color-cream)] font-medium">Remaining tax due</span>
-                  <span className="text-violet-400 font-semibold">{formatCurrency(result.remainingTaxDue)}</span>
+                  <span className="text-violet-400 font-semibold">
+                    {formatCurrency(result.remainingTaxDue)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -307,21 +339,33 @@ export default function USQuarterlyTaxCalculator() {
               <h4 className="text-sm font-medium text-amber-400 mb-3">Safe Harbor Rules</h4>
               <div className="space-y-3 text-sm text-[var(--color-subtle)]">
                 <div className="flex items-center gap-2">
-                  <span className={result.meetsCurrentYearSafeHarbor ? 'text-emerald-400' : 'text-rose-400'}>
+                  <span
+                    className={
+                      result.meetsCurrentYearSafeHarbor ? 'text-emerald-400' : 'text-rose-400'
+                    }
+                  >
                     {result.meetsCurrentYearSafeHarbor ? '✓' : '✗'}
                   </span>
-                  <span>Pay 90% of current year tax ({formatCurrency(result.estimatedTotalTax * 0.9)})</span>
+                  <span>
+                    Pay 90% of current year tax ({formatCurrency(result.estimatedTotalTax * 0.9)})
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={result.meetsPriorYearSafeHarbor ? 'text-emerald-400' : 'text-rose-400'}>
+                  <span
+                    className={
+                      result.meetsPriorYearSafeHarbor ? 'text-emerald-400' : 'text-rose-400'
+                    }
+                  >
                     {result.meetsPriorYearSafeHarbor ? '✓' : '✗'}
                   </span>
                   <span>
-                    Pay {inputs.priorYearAGI > HIGH_INCOME_THRESHOLD ? '110%' : '100%'} of prior year tax ({formatCurrency(result.safeHarborAmount)})
+                    Pay {inputs.priorYearAGI > HIGH_INCOME_THRESHOLD ? '110%' : '100%'} of prior
+                    year tax ({formatCurrency(result.safeHarborAmount)})
                   </span>
                 </div>
                 <p className="text-xs text-[var(--color-muted)] mt-2">
-                  Meeting either rule avoids underpayment penalties. If your prior year AGI exceeds $150,000, you must pay 110% of prior year tax.
+                  Meeting either rule avoids underpayment penalties. If your prior year AGI exceeds
+                  $150,000, you must pay 110% of prior year tax.
                 </p>
               </div>
             </div>
@@ -330,8 +374,18 @@ export default function USQuarterlyTaxCalculator() {
             {result.annualizedIncomeAdvice && (
               <div className="bg-blue-950/30 rounded-xl p-4 border border-blue-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-blue-400 font-medium">Variable Income Tip</p>

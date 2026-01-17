@@ -9,15 +9,7 @@ import {
   type FilingStatus,
   type AssetType,
 } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  ButtonGroup,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
@@ -200,12 +192,16 @@ export default function USCapitalGainsTaxCalculator() {
                   <div className="flex items-center justify-center gap-4 mt-3">
                     <div>
                       <p className="text-xs text-[var(--color-muted)]">Gain</p>
-                      <p className="text-lg font-semibold text-emerald-400">{formatCurrency(result.capitalGain)}</p>
+                      <p className="text-lg font-semibold text-emerald-400">
+                        {formatCurrency(result.capitalGain)}
+                      </p>
                     </div>
                     <div className="w-px h-8 bg-white/10"></div>
                     <div>
                       <p className="text-xs text-[var(--color-muted)]">Effective Rate</p>
-                      <p className="text-lg font-semibold text-emerald-300">{formatPercent(result.effectiveRate)}</p>
+                      <p className="text-lg font-semibold text-emerald-300">
+                        {formatPercent(result.effectiveRate)}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -214,21 +210,35 @@ export default function USCapitalGainsTaxCalculator() {
 
             {/* Holding Period Status */}
             {!isLoss && (
-              <div className={`rounded-xl p-4 border ${
-                result.isLongTerm
-                  ? 'bg-emerald-950/30 border-emerald-500/30'
-                  : 'bg-amber-950/30 border-amber-500/30'
-              }`}>
+              <div
+                className={`rounded-xl p-4 border ${
+                  result.isLongTerm
+                    ? 'bg-emerald-950/30 border-emerald-500/30'
+                    : 'bg-amber-950/30 border-amber-500/30'
+                }`}
+              >
                 <div className="flex items-start gap-3">
-                  <svg className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
-                    result.isLongTerm ? 'text-emerald-400' : 'text-amber-400'
-                  }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className={`w-5 h-5 mt-0.5 flex-shrink-0 ${
+                      result.isLongTerm ? 'text-emerald-400' : 'text-amber-400'
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
-                    <p className={`font-medium ${
-                      result.isLongTerm ? 'text-emerald-400' : 'text-amber-400'
-                    }`}>
+                    <p
+                      className={`font-medium ${
+                        result.isLongTerm ? 'text-emerald-400' : 'text-amber-400'
+                      }`}
+                    >
                       {result.holdingPeriodLabel}
                     </p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
@@ -245,15 +255,28 @@ export default function USCapitalGainsTaxCalculator() {
             {result.longTermComparison && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  <svg
+                    className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
                   </svg>
                   <div>
                     <p className="text-emerald-400 font-medium">Wait to Save on Taxes</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      If you hold for {result.longTermComparison.daysUntilLongTerm}+ more days, your tax would be{' '}
-                      <span className="text-emerald-400 font-semibold">{formatCurrency(result.longTermComparison.wouldBeLongTermTax)}</span>
-                      {' '}instead of {formatCurrency(result.totalTax)}.
+                      If you hold for {result.longTermComparison.daysUntilLongTerm}+ more days, your
+                      tax would be{' '}
+                      <span className="text-emerald-400 font-semibold">
+                        {formatCurrency(result.longTermComparison.wouldBeLongTermTax)}
+                      </span>{' '}
+                      instead of {formatCurrency(result.totalTax)}.
                     </p>
                     <p className="text-lg font-bold text-emerald-400 mt-2">
                       Potential savings: {formatCurrency(result.longTermComparison.savings)}
@@ -266,7 +289,9 @@ export default function USCapitalGainsTaxCalculator() {
             {/* Tax Breakdown */}
             {!isLoss && (
               <div className="bg-white/5 rounded-xl p-4">
-                <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">Tax Breakdown</h4>
+                <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                  Tax Breakdown
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-[var(--color-subtle)]">
                     <span>Capital gain</span>
@@ -274,7 +299,9 @@ export default function USCapitalGainsTaxCalculator() {
                   </div>
                   <div className="flex justify-between text-[var(--color-subtle)]">
                     <span>{result.isLongTerm ? 'Long-term' : 'Short-term'} rate</span>
-                    <span className="text-[var(--color-cream)]">{formatPercent(result.taxRate)}</span>
+                    <span className="text-[var(--color-cream)]">
+                      {formatPercent(result.taxRate)}
+                    </span>
                   </div>
                   <div className="flex justify-between text-[var(--color-subtle)]">
                     <span>Capital gains tax</span>
@@ -288,7 +315,9 @@ export default function USCapitalGainsTaxCalculator() {
                   )}
                   <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                     <span className="text-[var(--color-cream)] font-medium">Total tax</span>
-                    <span className="text-rose-400 font-semibold">{formatCurrency(result.totalTax)}</span>
+                    <span className="text-rose-400 font-semibold">
+                      {formatCurrency(result.totalTax)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -316,13 +345,24 @@ export default function USCapitalGainsTaxCalculator() {
             {result.niitApplies && (
               <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-amber-400 font-medium">Net Investment Income Tax (NIIT)</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      Your income exceeds {formatCurrency(NIIT_THRESHOLDS[inputs.filingStatus])}, triggering an additional 3.8% tax on investment income.
+                      Your income exceeds {formatCurrency(NIIT_THRESHOLDS[inputs.filingStatus])},
+                      triggering an additional 3.8% tax on investment income.
                     </p>
                   </div>
                 </div>
@@ -334,55 +374,106 @@ export default function USCapitalGainsTaxCalculator() {
               <div className="bg-blue-950/30 rounded-xl p-4 border border-blue-500/30">
                 <h4 className="text-sm font-medium text-blue-400 mb-3">Using Your Capital Loss</h4>
                 <div className="space-y-2 text-sm text-[var(--color-subtle)]">
-                  <p>• <strong>Offset gains:</strong> Use this loss to offset any capital gains from other sales</p>
-                  <p>• <strong>Deduct from income:</strong> Deduct up to $3,000 per year from ordinary income</p>
-                  <p>• <strong>Carry forward:</strong> Unused losses carry forward to future tax years indefinitely</p>
+                  <p>
+                    • <strong>Offset gains:</strong> Use this loss to offset any capital gains from
+                    other sales
+                  </p>
+                  <p>
+                    • <strong>Deduct from income:</strong> Deduct up to $3,000 per year from
+                    ordinary income
+                  </p>
+                  <p>
+                    • <strong>Carry forward:</strong> Unused losses carry forward to future tax
+                    years indefinitely
+                  </p>
                 </div>
               </div>
             )}
 
             {/* 2025 Rates Reference */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">2025 Long-Term Capital Gains Rates</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                2025 Long-Term Capital Gains Rates
+              </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 {inputs.filingStatus === 'single' && (
                   <>
-                    <div className="flex justify-between"><span>0%</span><span>Up to $48,350</span></div>
-                    <div className="flex justify-between"><span>15%</span><span>$48,351 - $533,400</span></div>
-                    <div className="flex justify-between"><span>20%</span><span>Over $533,400</span></div>
+                    <div className="flex justify-between">
+                      <span>0%</span>
+                      <span>Up to $48,350</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>15%</span>
+                      <span>$48,351 - $533,400</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>20%</span>
+                      <span>Over $533,400</span>
+                    </div>
                   </>
                 )}
                 {inputs.filingStatus === 'married_jointly' && (
                   <>
-                    <div className="flex justify-between"><span>0%</span><span>Up to $96,700</span></div>
-                    <div className="flex justify-between"><span>15%</span><span>$96,701 - $600,050</span></div>
-                    <div className="flex justify-between"><span>20%</span><span>Over $600,050</span></div>
+                    <div className="flex justify-between">
+                      <span>0%</span>
+                      <span>Up to $96,700</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>15%</span>
+                      <span>$96,701 - $600,050</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>20%</span>
+                      <span>Over $600,050</span>
+                    </div>
                   </>
                 )}
                 {inputs.filingStatus === 'married_separately' && (
                   <>
-                    <div className="flex justify-between"><span>0%</span><span>Up to $48,350</span></div>
-                    <div className="flex justify-between"><span>15%</span><span>$48,351 - $300,025</span></div>
-                    <div className="flex justify-between"><span>20%</span><span>Over $300,025</span></div>
+                    <div className="flex justify-between">
+                      <span>0%</span>
+                      <span>Up to $48,350</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>15%</span>
+                      <span>$48,351 - $300,025</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>20%</span>
+                      <span>Over $300,025</span>
+                    </div>
                   </>
                 )}
                 {inputs.filingStatus === 'head_of_household' && (
                   <>
-                    <div className="flex justify-between"><span>0%</span><span>Up to $64,750</span></div>
-                    <div className="flex justify-between"><span>15%</span><span>$64,751 - $566,700</span></div>
-                    <div className="flex justify-between"><span>20%</span><span>Over $566,700</span></div>
+                    <div className="flex justify-between">
+                      <span>0%</span>
+                      <span>Up to $64,750</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>15%</span>
+                      <span>$64,751 - $566,700</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>20%</span>
+                      <span>Over $566,700</span>
+                    </div>
                   </>
                 )}
                 <p className="text-xs text-[var(--color-muted)] mt-2">
-                  Short-term gains are taxed at ordinary income rates (10-37%).
-                  {' '}NIIT adds 3.8% for high earners.
+                  Short-term gains are taxed at ordinary income rates (10-37%). NIIT adds 3.8% for
+                  high earners.
                 </p>
               </div>
             </div>
 
             <div className="flex justify-center pt-4">
               <ShareResults
-                result={isLoss ? `Capital loss: ${formatCurrency(Math.abs(gain))}. Can offset gains or deduct up to $3,000/year from income.` : `Capital gains tax: ${formatCurrency(result.totalTax)} on ${formatCurrency(result.capitalGain)} gain (${result.isLongTerm ? 'long-term' : 'short-term'}). Effective rate: ${formatPercent(result.effectiveRate)}. Net proceeds: ${formatCurrency(result.netProceeds)}.`}
+                result={
+                  isLoss
+                    ? `Capital loss: ${formatCurrency(Math.abs(gain))}. Can offset gains or deduct up to $3,000/year from income.`
+                    : `Capital gains tax: ${formatCurrency(result.totalTax)} on ${formatCurrency(result.capitalGain)} gain (${result.isLongTerm ? 'long-term' : 'short-term'}). Effective rate: ${formatPercent(result.effectiveRate)}. Net proceeds: ${formatCurrency(result.netProceeds)}.`
+                }
                 calculatorName="Capital Gains Tax Calculator"
               />
             </div>

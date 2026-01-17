@@ -117,10 +117,7 @@ export function calculateNationalInsurance(grossIncome: number): number {
 /**
  * Calculate student loan repayment
  */
-export function calculateStudentLoan(
-  grossIncome: number,
-  plan: StudentLoanPlan
-): number {
+export function calculateStudentLoan(grossIncome: number, plan: StudentLoanPlan): number {
   const config = STUDENT_LOAN_PLANS[plan];
 
   if (grossIncome <= config.threshold) {
@@ -168,7 +165,7 @@ export function calculateMarginalRate(
   // Tax trap zone adds effective 20% (PA lost at 50%, taxed at 40%)
   let trapRate = 0;
   if (income > TAX_TRAP_START && income <= TAX_TRAP_END) {
-    trapRate = 0.20; // Effective rate from PA tapering
+    trapRate = 0.2; // Effective rate from PA tapering
   }
 
   return taxRate + niRate + slRate + trapRate;
@@ -181,10 +178,7 @@ export function calculateMarginalRate(
 /**
  * Calculate the additional tax paid due to Personal Allowance loss
  */
-export function calculateTaxTrapCost(
-  totalIncome: number,
-  region: TaxRegion
-): number {
+export function calculateTaxTrapCost(totalIncome: number, region: TaxRegion): number {
   if (totalIncome <= PA_TAPER_THRESHOLD) {
     return 0;
   }
@@ -194,7 +188,7 @@ export function calculateTaxTrapCost(
   // The lost PA would have been tax-free, now it's taxed at 40% (or 42% Scotland)
   // This is the "hidden" tax from the trap
   const bands = getTaxBands(region);
-  const higherRate = region === 'scotland' ? 0.42 : 0.40;
+  const higherRate = region === 'scotland' ? 0.42 : 0.4;
 
   return Math.round(paLost * higherRate);
 }
@@ -206,10 +200,7 @@ export function calculateTaxTrapCost(
 /**
  * Calculate the optimal pension contribution to escape the tax trap
  */
-export function calculateOptimalPension(
-  totalIncome: number,
-  currentPension: number
-): number {
+export function calculateOptimalPension(totalIncome: number, currentPension: number): number {
   // If already below the threshold, no optimization needed
   if (totalIncome - currentPension <= PA_TAPER_THRESHOLD) {
     return currentPension;
@@ -231,13 +222,7 @@ export function calculateOptimalPension(
  * Main calculation function - computes full tax position and optimization
  */
 export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
-  const {
-    grossSalary,
-    taxRegion,
-    studentLoanPlan,
-    currentPensionPercent,
-    bonusIncome,
-  } = inputs;
+  const { grossSalary, taxRegion, studentLoanPlan, currentPensionPercent, bonusIncome } = inputs;
 
   // Total income
   const totalIncome = grossSalary + bonusIncome;
@@ -284,16 +269,17 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
   // Tax trap analysis
   const inTaxTrap = isInTaxTrap(taxableIncome);
   const taxTrapCost = calculateTaxTrapCost(taxableIncome, taxRegion);
-  const incomeInTrapZone = inTaxTrap
-    ? Math.min(taxableIncome, TAX_TRAP_END) - TAX_TRAP_START
-    : 0;
+  const incomeInTrapZone = inTaxTrap ? Math.min(taxableIncome, TAX_TRAP_END) - TAX_TRAP_START : 0;
 
   // ==========================================================================
   // OPTIMIZATION CALCULATION
   // ==========================================================================
 
   // Calculate optimal pension to restore full PA
-  const optimalPensionContribution = calculateOptimalPension(totalIncome, currentPensionContribution);
+  const optimalPensionContribution = calculateOptimalPension(
+    totalIncome,
+    currentPensionContribution
+  );
   const optimalPensionPercent = (optimalPensionContribution / grossSalary) * 100;
 
   // Recalculate with optimal pension
@@ -309,7 +295,8 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
   const optimizedNI = calculateNationalInsurance(grossSalary - optimalPensionContribution);
   const optimizedStudentLoan = calculateStudentLoan(optimizedTaxableIncome, studentLoanPlan);
 
-  const optimizedTakeHomePay = optimizedTaxableIncome - optimizedIncomeTax - optimizedNI - optimizedStudentLoan;
+  const optimizedTakeHomePay =
+    optimizedTaxableIncome - optimizedIncomeTax - optimizedNI - optimizedStudentLoan;
 
   // Tax saved
   const currentTotalTax = incomeTax + nationalInsurance;
@@ -322,9 +309,7 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
 
   // Pension gain ratio: how much goes to pension vs take-home reduction
   const takeHomeReduction = takeHomePay - optimizedTakeHomePay;
-  const pensionGainRatio = takeHomeReduction > 0
-    ? extraPensionContribution / takeHomeReduction
-    : 0;
+  const pensionGainRatio = takeHomeReduction > 0 ? extraPensionContribution / takeHomeReduction : 0;
 
   // ==========================================================================
   // COMPARISON TABLE

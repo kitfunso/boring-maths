@@ -47,8 +47,8 @@ export function convert(inputs: UnitConverterInputs): UnitConverterResult {
   const { category, fromUnit, toUnit, value } = inputs;
 
   const units = UNITS[category];
-  const from = units.find(u => u.value === fromUnit);
-  const to = units.find(u => u.value === toUnit);
+  const from = units.find((u) => u.value === fromUnit);
+  const to = units.find((u) => u.value === toUnit);
 
   if (!from || !to) {
     return {
@@ -80,15 +80,15 @@ export function getAllConversions(
   category: UnitCategory
 ): Array<{ unit: string; label: string; value: string }> {
   const units = UNITS[category];
-  const from = units.find(u => u.value === fromUnit);
+  const from = units.find((u) => u.value === fromUnit);
 
   if (!from) return [];
 
   const baseValue = from.toBase(value);
 
   return units
-    .filter(u => u.value !== fromUnit)
-    .map(u => ({
+    .filter((u) => u.value !== fromUnit)
+    .map((u) => ({
       unit: u.value,
       label: u.label,
       value: formatValue(u.fromBase(baseValue)),

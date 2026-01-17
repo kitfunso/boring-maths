@@ -7,11 +7,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateBreakEven, formatCurrency } from './calculations';
-import {
-  getDefaultInputs,
-  type BreakEvenInputs,
-  type BreakEvenResult,
-} from './types';
+import { getDefaultInputs, type BreakEvenInputs, type BreakEvenResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -29,7 +25,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function BreakEvenCalculator() {
-  const [inputs, setInputs] = useState<BreakEvenInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<BreakEvenInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -39,10 +37,7 @@ export default function BreakEvenCalculator() {
   }, [inputs]);
 
   // Update input
-  const updateInput = <K extends keyof BreakEvenInputs>(
-    field: K,
-    value: BreakEvenInputs[K]
-  ) => {
+  const updateInput = <K extends keyof BreakEvenInputs>(field: K, value: BreakEvenInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -61,12 +56,7 @@ export default function BreakEvenCalculator() {
         <CalculatorHeader
           title="Calculate Your Break-Even Point"
           subtitle="Find out how many units you need to sell to cover costs"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -86,7 +76,9 @@ export default function BreakEvenCalculator() {
                 value={inputs.fixedCosts}
                 onChange={(e) => updateInput('fixedCosts', Number(e.target.value))}
               />
-              <p className="text-sm text-[var(--color-muted)] mt-1">Rent, salaries, insurance, subscriptions, etc.</p>
+              <p className="text-sm text-[var(--color-muted)] mt-1">
+                Rent, salaries, insurance, subscriptions, etc.
+              </p>
             </div>
 
             {/* Price and Variable Cost */}
@@ -119,7 +111,9 @@ export default function BreakEvenCalculator() {
                   value={inputs.variableCostPerUnit}
                   onChange={(e) => updateInput('variableCostPerUnit', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Materials, shipping, transaction fees, etc.</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Materials, shipping, transaction fees, etc.
+                </p>
               </div>
             </Grid>
 
@@ -137,7 +131,9 @@ export default function BreakEvenCalculator() {
                 value={inputs.targetProfit}
                 onChange={(e) => updateInput('targetProfit', Number(e.target.value))}
               />
-              <p className="text-sm text-[var(--color-muted)] mt-1">See how many units to hit your profit goal</p>
+              <p className="text-sm text-[var(--color-muted)] mt-1">
+                See how many units to hit your profit goal
+              </p>
             </div>
 
             {/* Warning if invalid */}
@@ -161,7 +157,10 @@ export default function BreakEvenCalculator() {
                 footer={
                   inputs.targetProfit > 0 ? (
                     <>
-                      For {formatCurrency(inputs.targetProfit, result.currency)} profit: <span className="font-semibold">{result.unitsForTargetProfit.toLocaleString()} units</span>
+                      For {formatCurrency(inputs.targetProfit, result.currency)} profit:{' '}
+                      <span className="font-semibold">
+                        {result.unitsForTargetProfit.toLocaleString()} units
+                      </span>
                     </>
                   ) : undefined
                 }
@@ -211,7 +210,11 @@ export default function BreakEvenCalculator() {
                       {result.profitAnalysis.map((row, index) => (
                         <tr
                           key={index}
-                          className={row.units === result.breakEvenUnits ? 'bg-blue-900/40 font-medium text-blue-400' : ''}
+                          className={
+                            row.units === result.breakEvenUnits
+                              ? 'bg-blue-900/40 font-medium text-blue-400'
+                              : ''
+                          }
                         >
                           <td className="py-2 pr-4">
                             {row.units.toLocaleString()}
@@ -225,14 +228,19 @@ export default function BreakEvenCalculator() {
                           <td className="text-right py-2 px-2 tabular-nums">
                             {formatCurrency(row.totalCosts, result.currency)}
                           </td>
-                          <td className={`text-right py-2 px-2 tabular-nums ${
-                            row.profit > 0 ? 'text-green-600' : row.profit < 0 ? 'text-red-600' : ''
-                          }`}>
-                            {row.profit >= 0 ? '+' : ''}{formatCurrency(row.profit, result.currency)}
+                          <td
+                            className={`text-right py-2 px-2 tabular-nums ${
+                              row.profit > 0
+                                ? 'text-green-600'
+                                : row.profit < 0
+                                  ? 'text-red-600'
+                                  : ''
+                            }`}
+                          >
+                            {row.profit >= 0 ? '+' : ''}
+                            {formatCurrency(row.profit, result.currency)}
                           </td>
-                          <td className="text-right py-2 pl-2 tabular-nums">
-                            {row.profitMargin}%
-                          </td>
+                          <td className="text-right py-2 pl-2 tabular-nums">{row.profitMargin}%</td>
                         </tr>
                       ))}
                     </tbody>
@@ -247,18 +255,25 @@ export default function BreakEvenCalculator() {
                 </h3>
                 <div className="space-y-2 text-sm text-blue-300">
                   <p>
-                    <strong>Contribution Margin</strong> = Price ({formatCurrency(inputs.pricePerUnit, result.currency)}) - Variable Cost ({formatCurrency(inputs.variableCostPerUnit, result.currency)}) = <strong>{formatCurrency(result.contributionMargin, result.currency, 2)}</strong>
+                    <strong>Contribution Margin</strong> = Price (
+                    {formatCurrency(inputs.pricePerUnit, result.currency)}) - Variable Cost (
+                    {formatCurrency(inputs.variableCostPerUnit, result.currency)}) ={' '}
+                    <strong>{formatCurrency(result.contributionMargin, result.currency, 2)}</strong>
                   </p>
                   <p>
-                    <strong>Break-Even Units</strong> = Fixed Costs ({formatCurrency(inputs.fixedCosts, result.currency)}) ÷ Contribution Margin ({formatCurrency(result.contributionMargin, result.currency, 2)}) = <strong>{result.breakEvenUnits} units</strong>
+                    <strong>Break-Even Units</strong> = Fixed Costs (
+                    {formatCurrency(inputs.fixedCosts, result.currency)}) ÷ Contribution Margin (
+                    {formatCurrency(result.contributionMargin, result.currency, 2)}) ={' '}
+                    <strong>{result.breakEvenUnits} units</strong>
                   </p>
                 </div>
               </div>
 
               {/* Tips */}
               <Alert variant="tip" title="Pro tip:">
-                To lower your break-even point: increase prices, reduce variable costs per unit, or cut fixed costs.
-                Even small improvements in each area can significantly reduce the units needed to break even.
+                To lower your break-even point: increase prices, reduce variable costs per unit, or
+                cut fixed costs. Even small improvements in each area can significantly reduce the
+                units needed to break even.
               </Alert>
 
               {/* Share Results */}

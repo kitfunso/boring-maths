@@ -45,11 +45,16 @@ export const MATERIALS: { value: string; label: string; sfm: number; chipLoad: n
   { value: 'plastic-nylon', label: 'Nylon', sfm: 400, chipLoad: 0.004 },
   { value: 'plastic-hdpe', label: 'HDPE', sfm: 600, chipLoad: 0.006 },
   { value: 'wood-hardwood', label: 'Hardwood', sfm: 800, chipLoad: 0.008 },
-  { value: 'wood-softwood', label: 'Softwood', sfm: 1000, chipLoad: 0.010 },
+  { value: 'wood-softwood', label: 'Softwood', sfm: 1000, chipLoad: 0.01 },
   { value: 'wood-plywood', label: 'Plywood/MDF', sfm: 600, chipLoad: 0.006 },
 ];
 
-export const OPERATION_TYPES: { value: OperationType; label: string; sfmMultiplier: number; chipLoadMultiplier: number }[] = [
+export const OPERATION_TYPES: {
+  value: OperationType;
+  label: string;
+  sfmMultiplier: number;
+  chipLoadMultiplier: number;
+}[] = [
   { value: 'roughing', label: 'Roughing', sfmMultiplier: 0.8, chipLoadMultiplier: 1.2 },
   { value: 'finishing', label: 'Finishing', sfmMultiplier: 1.0, chipLoadMultiplier: 0.6 },
   { value: 'slotting', label: 'Slotting', sfmMultiplier: 0.6, chipLoadMultiplier: 0.8 },

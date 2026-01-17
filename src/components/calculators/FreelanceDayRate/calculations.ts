@@ -110,20 +110,11 @@ function validateInputs(inputs: FreelanceDayRateInputs): void {
  * console.log(result.netDayRate); // ~255.32
  * ```
  */
-export function calculateFreelanceDayRate(
-  inputs: FreelanceDayRateInputs
-): FreelanceDayRateResult {
+export function calculateFreelanceDayRate(inputs: FreelanceDayRateInputs): FreelanceDayRateResult {
   // Validate inputs
   validateInputs(inputs);
 
-  const {
-    currency,
-    annualSalary,
-    taxRate,
-    vacationDays,
-    holidays,
-    benefitsValue,
-  } = inputs;
+  const { currency, annualSalary, taxRate, vacationDays, holidays, benefitsValue } = inputs;
 
   // Calculate working days
   const workingDays = WEEKDAYS_PER_YEAR - vacationDays - holidays;

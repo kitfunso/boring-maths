@@ -22,8 +22,18 @@ const ZODIAC_SIGNS = [
 ];
 
 const CHINESE_ZODIAC = [
-  'Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake',
-  'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig'
+  'Rat',
+  'Ox',
+  'Tiger',
+  'Rabbit',
+  'Dragon',
+  'Snake',
+  'Horse',
+  'Goat',
+  'Monkey',
+  'Rooster',
+  'Dog',
+  'Pig',
 ];
 
 /**
@@ -40,10 +50,7 @@ function getZodiacSign(month: number, day: number): string {
       if ((month === 12 && day >= startDay) || (month === 1 && day <= endDay)) {
         return zodiac.sign;
       }
-    } else if (
-      (month === startMonth && day >= startDay) ||
-      (month === endMonth && day <= endDay)
-    ) {
+    } else if ((month === startMonth && day >= startDay) || (month === endMonth && day <= endDay)) {
       return zodiac.sign;
     }
   }

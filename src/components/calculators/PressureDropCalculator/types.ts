@@ -5,7 +5,14 @@
  */
 
 export type UnitSystem = 'metric' | 'imperial';
-export type PipeMaterial = 'steel' | 'stainless' | 'copper' | 'pvc' | 'hdpe' | 'concrete' | 'custom';
+export type PipeMaterial =
+  | 'steel'
+  | 'stainless'
+  | 'copper'
+  | 'pvc'
+  | 'hdpe'
+  | 'concrete'
+  | 'custom';
 
 export interface PressureDropInputs {
   unitSystem: UnitSystem;
@@ -25,9 +32,9 @@ export interface PressureDropInputs {
 }
 
 export interface PressureDropResult {
-  pressureDrop: number;      // kPa or psi
-  headLoss: number;          // m or ft of fluid
-  frictionFactor: number;    // Darcy friction factor
+  pressureDrop: number; // kPa or psi
+  headLoss: number; // m or ft of fluid
+  frictionFactor: number; // Darcy friction factor
   reynoldsNumber: number;
   flowRegime: 'Laminar' | 'Transitional' | 'Turbulent';
   velocity: number;
@@ -37,12 +44,12 @@ export interface PressureDropResult {
 
 // Pipe roughness values in mm
 export const PIPE_ROUGHNESS: Record<PipeMaterial, number> = {
-  steel: 0.045,        // Commercial steel
-  stainless: 0.015,    // Stainless steel
-  copper: 0.0015,      // Drawn copper tubing
-  pvc: 0.0015,         // PVC pipe
-  hdpe: 0.007,         // HDPE pipe
-  concrete: 1.0,       // Concrete pipe
+  steel: 0.045, // Commercial steel
+  stainless: 0.015, // Stainless steel
+  copper: 0.0015, // Drawn copper tubing
+  pvc: 0.0015, // PVC pipe
+  hdpe: 0.007, // HDPE pipe
+  concrete: 1.0, // Concrete pipe
   custom: 0.045,
 };
 
@@ -59,11 +66,11 @@ export function getDefaultInputs(): PressureDropInputs {
   return {
     unitSystem: 'metric',
     pipeMaterial: 'steel',
-    diameter: 50,          // 50 mm
-    length: 100,           // 100 m
-    velocity: 2,           // 2 m/s
-    density: 998,          // Water
-    viscosity: 0.001002,   // Water at 20°C
+    diameter: 50, // 50 mm
+    length: 100, // 100 m
+    velocity: 2, // 2 m/s
+    density: 998, // Water
+    viscosity: 0.001002, // Water at 20°C
     roughness: PIPE_ROUGHNESS.steel,
   };
 }

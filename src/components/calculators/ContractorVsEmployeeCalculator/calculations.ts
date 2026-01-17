@@ -113,9 +113,7 @@ function calculateContractorCompensation(
 /**
  * Calculate employee compensation breakdown
  */
-function calculateEmployeeCompensation(
-  inputs: ContractorVsEmployeeInputs
-): CompensationBreakdown {
+function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): CompensationBreakdown {
   const {
     employeeSalary,
     employeeBonusPercent,
@@ -142,7 +140,8 @@ function calculateEmployeeCompensation(
 
   // 401k match value (assumes employee contributes enough to get full match)
   const maxMatchableContribution = employeeSalary * (employer401kMatchLimit / 100);
-  const retirementMatchValue = maxMatchableContribution * (employer401kMatch / employer401kMatchLimit);
+  const retirementMatchValue =
+    maxMatchableContribution * (employer401kMatch / employer401kMatchLimit);
 
   // PTO value (daily rate × days)
   const dailyRate = employeeSalary / 260; // ~260 working days per year
@@ -206,17 +205,22 @@ function calculateComparison(
   employee: CompensationBreakdown,
   inputs: ContractorVsEmployeeInputs
 ): ComparisonMetrics {
-  const { contractorHourlyRate, employeeSalary, contractorWeeksPerYear, contractorBillableHoursPerWeek } = inputs;
+  const {
+    contractorHourlyRate,
+    employeeSalary,
+    contractorWeeksPerYear,
+    contractorBillableHoursPerWeek,
+  } = inputs;
 
   // Determine winner based on total compensation value
-  const contractorValue = contractor.totalCompensation - contractor.totalCosts + contractor.totalBenefitsValue;
+  const contractorValue =
+    contractor.totalCompensation - contractor.totalCosts + contractor.totalBenefitsValue;
   const employeeValue = employee.totalCompensation - employee.totalCosts;
 
   const winner: EmploymentType = contractorValue > employeeValue ? 'contractor' : 'employee';
   const annualDifference = Math.abs(contractorValue - employeeValue);
   const monthlyDifference = annualDifference / 12;
-  const percentageDifference =
-    (annualDifference / Math.min(contractorValue, employeeValue)) * 100;
+  const percentageDifference = (annualDifference / Math.min(contractorValue, employeeValue)) * 100;
 
   // Break-even contractor rate to match employee
   // Contractor needs to cover: employee total comp + SE tax + health insurance + business costs
@@ -381,7 +385,10 @@ export function formatPercent(value: number): string {
 /**
  * Get color class based on value comparison
  */
-export function getComparisonColor(contractorValue: number, employeeValue: number): {
+export function getComparisonColor(
+  contractorValue: number,
+  employeeValue: number
+): {
   contractor: string;
   employee: string;
 } {
@@ -396,9 +403,12 @@ export function getComparisonColor(contractorValue: number, employeeValue: numbe
 /**
  * Tax brackets by region
  */
-export const TAX_BRACKETS_BY_REGION: Record<Currency, Array<{ rate: number; label: string; range: string }>> = {
+export const TAX_BRACKETS_BY_REGION: Record<
+  Currency,
+  Array<{ rate: number; label: string; range: string }>
+> = {
   USD: [
-    { rate: 0.10, label: '10%', range: '$0 - $11,000' },
+    { rate: 0.1, label: '10%', range: '$0 - $11,000' },
     { rate: 0.12, label: '12%', range: '$11,001 - $44,725' },
     { rate: 0.22, label: '22%', range: '$44,726 - $95,375' },
     { rate: 0.24, label: '24%', range: '$95,376 - $183,000' },
@@ -407,13 +417,13 @@ export const TAX_BRACKETS_BY_REGION: Record<Currency, Array<{ rate: number; labe
     { rate: 0.37, label: '37%', range: '$578,126+' },
   ],
   GBP: [
-    { rate: 0.00, label: '0%', range: '£0 - £12,570' },
-    { rate: 0.20, label: '20%', range: '£12,571 - £50,270' },
-    { rate: 0.40, label: '40%', range: '£50,271 - £125,140' },
+    { rate: 0.0, label: '0%', range: '£0 - £12,570' },
+    { rate: 0.2, label: '20%', range: '£12,571 - £50,270' },
+    { rate: 0.4, label: '40%', range: '£50,271 - £125,140' },
     { rate: 0.45, label: '45%', range: '£125,141+' },
   ],
   EUR: [
-    { rate: 0.00, label: '0%', range: '€0 - €10,000' },
+    { rate: 0.0, label: '0%', range: '€0 - €10,000' },
     { rate: 0.14, label: '14%', range: '€10,001 - €15,000' },
     { rate: 0.24, label: '24%', range: '€15,001 - €28,000' },
     { rate: 0.34, label: '34%', range: '€28,001 - €55,000' },

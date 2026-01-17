@@ -13,7 +13,8 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 const VARIANT_CLASSES = {
   default: 'bg-[var(--color-charcoal)] rounded-2xl',
-  elevated: 'bg-gradient-to-b from-[var(--color-slate)] to-[var(--color-charcoal)] rounded-2xl shadow-xl border border-white/5',
+  elevated:
+    'bg-gradient-to-b from-[var(--color-slate)] to-[var(--color-charcoal)] rounded-2xl shadow-xl border border-white/5',
   bordered: 'bg-[var(--color-charcoal)] rounded-2xl border border-white/10',
 };
 

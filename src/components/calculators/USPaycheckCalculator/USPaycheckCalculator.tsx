@@ -50,7 +50,7 @@ export default function USPaycheckCalculator() {
     { label: 'Social Security', value: result.socialSecurity, color: 'bg-amber-500' },
     { label: 'Medicare', value: result.medicare, color: 'bg-pink-500' },
     { label: 'Pre-tax (401k/HSA)', value: result.preTaxDeductions, color: 'bg-green-500' },
-  ].filter(d => d.value > 0);
+  ].filter((d) => d.value > 0);
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -82,7 +82,7 @@ export default function USPaycheckCalculator() {
               <div>
                 <Label>Pay Frequency</Label>
                 <ButtonGroup
-                  options={PAY_FREQUENCIES.map(p => ({ value: p.value, label: p.label }))}
+                  options={PAY_FREQUENCIES.map((p) => ({ value: p.value, label: p.label }))}
                   value={inputs.payFrequency}
                   onChange={(value) => updateInput('payFrequency', value as PayFrequency)}
                   size="sm"
@@ -100,7 +100,7 @@ export default function USPaycheckCalculator() {
               <div>
                 <Label>Filing Status</Label>
                 <ButtonGroup
-                  options={FILING_STATUSES.map(s => ({ value: s.value, label: s.label }))}
+                  options={FILING_STATUSES.map((s) => ({ value: s.value, label: s.label }))}
                   value={inputs.filingStatus}
                   onChange={(value) => updateInput('filingStatus', value as FilingStatus)}
                   size="sm"
@@ -236,7 +236,9 @@ export default function USPaycheckCalculator() {
                     <div key={item.label}>
                       <div className="flex justify-between text-sm mb-1">
                         <span>{item.label}</span>
-                        <span>{formatCurrency(item.value)} ({percent.toFixed(1)}%)</span>
+                        <span>
+                          {formatCurrency(item.value)} ({percent.toFixed(1)}%)
+                        </span>
                       </div>
                       <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                         <div
@@ -251,7 +253,9 @@ export default function USPaycheckCalculator() {
 
               <div className="mt-4 pt-4 border-t border-white/10 flex justify-between">
                 <span className="font-semibold">Total Deductions</span>
-                <span className="font-semibold text-red-400">{formatCurrency(result.totalDeductions)}</span>
+                <span className="font-semibold text-red-400">
+                  {formatCurrency(result.totalDeductions)}
+                </span>
               </div>
             </div>
 
@@ -297,16 +301,17 @@ export default function USPaycheckCalculator() {
             {/* Tips */}
             {inputs.preTax401k === 0 && inputs.preTaxHSA === 0 && (
               <Alert variant="tip" title="Maximize Your Paycheck:">
-                Consider contributing to a 401(k) or HSA. These pre-tax deductions reduce your taxable income,
-                meaning you pay less in taxes while saving for retirement or healthcare.
-                A $500/month 401(k) contribution could save you over $100/month in taxes.
+                Consider contributing to a 401(k) or HSA. These pre-tax deductions reduce your
+                taxable income, meaning you pay less in taxes while saving for retirement or
+                healthcare. A $500/month 401(k) contribution could save you over $100/month in
+                taxes.
               </Alert>
             )}
 
             {STATE_TAX_DATA[inputs.state]?.rate === 0 && (
               <Alert variant="info" title="No State Income Tax">
-                {getStateName(inputs.state)} is one of the states with no state income tax.
-                This means more of your paycheck stays in your pocket compared to high-tax states.
+                {getStateName(inputs.state)} is one of the states with no state income tax. This
+                means more of your paycheck stays in your pocket compared to high-tax states.
               </Alert>
             )}
 

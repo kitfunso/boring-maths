@@ -38,9 +38,8 @@ export default function LoanCalculator() {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  const interestPercentage = result.totalPayment > 0
-    ? Math.round((result.totalInterest / result.totalPayment) * 100)
-    : 0;
+  const interestPercentage =
+    result.totalPayment > 0 ? Math.round((result.totalInterest / result.totalPayment) * 100) : 0;
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -48,12 +47,7 @@ export default function LoanCalculator() {
         <CalculatorHeader
           title="Loan Payment Calculator"
           subtitle="Calculate monthly payments and total interest"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -71,7 +65,9 @@ export default function LoanCalculator() {
 
             {/* Loan Amount */}
             <div>
-              <Label htmlFor="loanAmount" required>Loan Amount</Label>
+              <Label htmlFor="loanAmount" required>
+                Loan Amount
+              </Label>
               <Input
                 id="loanAmount"
                 variant="currency"
@@ -251,8 +247,9 @@ export default function LoanCalculator() {
                 )}
 
                 <Alert variant="tip" title="Save on interest:">
-                  Making extra payments or choosing a shorter term can save you thousands in interest.
-                  Even {formatCurrency(50, inputs.currency)} extra per month can shorten your loan significantly.
+                  Making extra payments or choosing a shorter term can save you thousands in
+                  interest. Even {formatCurrency(50, inputs.currency)} extra per month can shorten
+                  your loan significantly.
                 </Alert>
               </>
             ) : (

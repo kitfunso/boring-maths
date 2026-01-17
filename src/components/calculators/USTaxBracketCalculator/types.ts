@@ -4,7 +4,11 @@
  * Calculate federal income tax, show tax brackets, and effective rates.
  */
 
-export type FilingStatus = 'single' | 'married_jointly' | 'married_separately' | 'head_of_household';
+export type FilingStatus =
+  | 'single'
+  | 'married_jointly'
+  | 'married_separately'
+  | 'head_of_household';
 
 export interface USTaxBracketInputs {
   filingStatus: FilingStatus;

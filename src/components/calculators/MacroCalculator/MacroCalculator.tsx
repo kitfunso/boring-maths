@@ -31,7 +31,10 @@ import {
 } from '../../ui';
 
 export default function MacroCalculator() {
-  const [inputs, setInputs] = useLocalStorage<MacroCalculatorInputs>('calc-macro-inputs', getDefaultInputs);
+  const [inputs, setInputs] = useLocalStorage<MacroCalculatorInputs>(
+    'calc-macro-inputs',
+    getDefaultInputs
+  );
 
   const result = useMemo(() => calculateMacros(inputs), [inputs]);
 
@@ -113,7 +116,9 @@ export default function MacroCalculator() {
             {/* Gender and Age */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
-                <Label htmlFor="gender" required>Gender</Label>
+                <Label htmlFor="gender" required>
+                  Gender
+                </Label>
                 <select
                   id="gender"
                   value={inputs.gender}
@@ -125,7 +130,9 @@ export default function MacroCalculator() {
                 </select>
               </div>
               <div>
-                <Label htmlFor="age" required>Age</Label>
+                <Label htmlFor="age" required>
+                  Age
+                </Label>
                 <Input
                   id="age"
                   type="number"
@@ -182,7 +189,9 @@ export default function MacroCalculator() {
                 </div>
               ) : (
                 <div>
-                  <Label htmlFor="heightCm" required>Height (cm)</Label>
+                  <Label htmlFor="heightCm" required>
+                    Height (cm)
+                  </Label>
                   <Input
                     id="heightCm"
                     type="number"
@@ -197,11 +206,15 @@ export default function MacroCalculator() {
 
             {/* Activity Level */}
             <div>
-              <Label htmlFor="activityLevel" required>Activity Level</Label>
+              <Label htmlFor="activityLevel" required>
+                Activity Level
+              </Label>
               <select
                 id="activityLevel"
                 value={inputs.activityLevel}
-                onChange={(e) => updateInput('activityLevel', e.currentTarget.value as ActivityLevel)}
+                onChange={(e) =>
+                  updateInput('activityLevel', e.currentTarget.value as ActivityLevel)
+                }
                 className="w-full bg-[var(--color-void)] border border-white/10 rounded-xl px-4 py-3 text-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50"
               >
                 {(Object.keys(activityLabels) as ActivityLevel[]).map((level) => (
@@ -214,7 +227,9 @@ export default function MacroCalculator() {
 
             {/* Goal */}
             <div>
-              <Label htmlFor="goal" required>Goal</Label>
+              <Label htmlFor="goal" required>
+                Goal
+              </Label>
               <select
                 id="goal"
                 value={inputs.goal}
@@ -232,7 +247,8 @@ export default function MacroCalculator() {
             {/* Protein Ratio */}
             <div>
               <Label htmlFor="proteinRatio">
-                Protein Target (g per {inputs.unitSystem === 'imperial' ? 'lb' : 'kg'} of bodyweight)
+                Protein Target (g per {inputs.unitSystem === 'imperial' ? 'lb' : 'kg'} of
+                bodyweight)
               </Label>
               <Input
                 id="proteinRatio"
@@ -263,9 +279,7 @@ export default function MacroCalculator() {
               <p className="text-5xl md:text-6xl font-bold tabular-nums text-orange-400 mb-2">
                 {formatNumber(result.targetCalories)}
               </p>
-              <p className="text-lg text-[var(--color-cream)]">
-                calories per day
-              </p>
+              <p className="text-lg text-[var(--color-cream)]">calories per day</p>
             </div>
 
             {/* Macro Breakdown */}
@@ -276,27 +290,21 @@ export default function MacroCalculator() {
               <Grid responsive={{ sm: 1, md: 3 }} gap="md">
                 <div className="text-center p-4 rounded-lg bg-blue-950/30 border border-blue-500/20">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Protein</p>
-                  <p className="font-bold text-blue-400 tabular-nums text-3xl">
-                    {result.protein}g
-                  </p>
+                  <p className="font-bold text-blue-400 tabular-nums text-3xl">{result.protein}g</p>
                   <p className="text-sm text-[var(--color-subtle)]">
                     {result.proteinCalories} cal ({result.proteinPercent}%)
                   </p>
                 </div>
                 <div className="text-center p-4 rounded-lg bg-green-950/30 border border-green-500/20">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Carbs</p>
-                  <p className="font-bold text-green-400 tabular-nums text-3xl">
-                    {result.carbs}g
-                  </p>
+                  <p className="font-bold text-green-400 tabular-nums text-3xl">{result.carbs}g</p>
                   <p className="text-sm text-[var(--color-subtle)]">
                     {result.carbsCalories} cal ({result.carbsPercent}%)
                   </p>
                 </div>
                 <div className="text-center p-4 rounded-lg bg-yellow-950/30 border border-yellow-500/20">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Fat</p>
-                  <p className="font-bold text-yellow-400 tabular-nums text-3xl">
-                    {result.fat}g
-                  </p>
+                  <p className="font-bold text-yellow-400 tabular-nums text-3xl">{result.fat}g</p>
                   <p className="text-sm text-[var(--color-subtle)]">
                     {result.fatCalories} cal ({result.fatPercent}%)
                   </p>
@@ -330,7 +338,11 @@ export default function MacroCalculator() {
                     {formatNumber(result.targetCalories)} cal
                   </p>
                   <p className="text-xs text-[var(--color-subtle)]">
-                    {inputs.goal === 'lose' ? '-500 deficit' : inputs.goal === 'gain' ? '+300 surplus' : 'Maintenance'}
+                    {inputs.goal === 'lose'
+                      ? '-500 deficit'
+                      : inputs.goal === 'gain'
+                        ? '+300 surplus'
+                        : 'Maintenance'}
                   </p>
                 </div>
               </Grid>

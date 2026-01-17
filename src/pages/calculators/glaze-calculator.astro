@@ -12,15 +12,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { GlazeCalculator } from '../../components/calculators/GlazeCalculator';
 
 const title = 'Glaze Recipe Calculator | Pottery Batch Calculator';
-const description = 'Free glaze calculator for potters. Scale glaze recipes to any batch size. Includes common materials and starter recipes for cone 6 and cone 10.';
-const keywords = 'glaze calculator, pottery glaze recipe, batch calculator, ceramic glaze, glaze materials, feldspar, silica, flux, cone 6, cone 10';
+const description =
+  'Free glaze calculator for potters. Scale glaze recipes to any batch size. Includes common materials and starter recipes for cone 6 and cone 10.';
+const keywords =
+  'glaze calculator, pottery glaze recipe, batch calculator, ceramic glaze, glaze materials, feldspar, silica, flux, cone 6, cone 10';
 const canonicalURL = '/calculators/glaze-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Glaze Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Glaze Calculator' }];
 
 const relatedCalculators = [
   {
@@ -34,28 +33,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "Why must glaze recipes add up to 100%?",
-    answer: "Glaze recipes are expressed as percentages of dry materials. 100% means all the ingredients are included once. If your recipe doesn't add to 100%, it's either missing something or has a calculation error. Colorants and additives are often added 'on top' of 100%."
+    question: 'Why must glaze recipes add up to 100%?',
+    answer:
+      "Glaze recipes are expressed as percentages of dry materials. 100% means all the ingredients are included once. If your recipe doesn't add to 100%, it's either missing something or has a calculation error. Colorants and additives are often added 'on top' of 100%.",
   },
   {
     question: "What's the difference between a flux and a glass former?",
-    answer: "Glass formers (primarily silica) create the glassy surface but need very high temperatures to melt alone. Fluxes (feldspars, whiting, frits) lower the melting temperature. A glaze needs both: flux to melt at your cone, silica to form glass, and alumina (usually from kaolin) for durability."
+    answer:
+      'Glass formers (primarily silica) create the glassy surface but need very high temperatures to melt alone. Fluxes (feldspars, whiting, frits) lower the melting temperature. A glaze needs both: flux to melt at your cone, silica to form glass, and alumina (usually from kaolin) for durability.',
   },
   {
-    question: "Why do I need to sieve my glaze?",
-    answer: "Sieving (usually 80 mesh) removes lumps, breaks up clumps, and ensures even distribution of materials. Unsieved glaze can have inconsistent color, texture, and application. Sieve at least twice for best results."
+    question: 'Why do I need to sieve my glaze?',
+    answer:
+      'Sieving (usually 80 mesh) removes lumps, breaks up clumps, and ensures even distribution of materials. Unsieved glaze can have inconsistent color, texture, and application. Sieve at least twice for best results.',
   },
   {
-    question: "How much water should I add?",
-    answer: "Start with 40-50% water by weight of dry materials. For dipping, aim for heavy cream consistency. For brushing, add more water. Too thick = drips and crawling. Too thin = runs and multiple coats needed. Test and adjust."
+    question: 'How much water should I add?',
+    answer:
+      'Start with 40-50% water by weight of dry materials. For dipping, aim for heavy cream consistency. For brushing, add more water. Too thick = drips and crawling. Too thin = runs and multiple coats needed. Test and adjust.',
   },
   {
-    question: "What if a material is discontinued?",
-    answer: "Common substitutions: Gerstley Borate → Gillespie Borate or Frit 3134. G-200 Feldspar → Minspar 200 or Custer Feldspar. When substituting, test thoroughly as results may vary. Check supplier recommendations."
+    question: 'What if a material is discontinued?',
+    answer:
+      'Common substitutions: Gerstley Borate → Gillespie Borate or Frit 3134. G-200 Feldspar → Minspar 200 or Custer Feldspar. When substituting, test thoroughly as results may vary. Check supplier recommendations.',
   },
   {
-    question: "Why did my glaze crawl/pinhole/craze?",
-    answer: "Crawling often means too thick application or dusty bisque. Pinholes can be from firing too fast or materials outgassing. Crazing means the glaze is under tension (too high expansion). Each defect has multiple possible causes - test methodically."
+    question: 'Why did my glaze crawl/pinhole/craze?',
+    answer:
+      'Crawling often means too thick application or dusty bisque. Pinholes can be from firing too fast or materials outgassing. Crazing means the glaze is under tension (too high expansion). Each defect has multiple possible causes - test methodically.',
   },
 ];
 
@@ -93,9 +98,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Glaze Chemistry">
     <p>
-      Glazes are composed of three main components: glass formers (silica), fluxes
-      (materials that lower melting temperature), and stabilizers (alumina from clay
-      or kaolin). The ratio of these determines the glaze's properties.
+      Glazes are composed of three main components: glass formers (silica), fluxes (materials that
+      lower melting temperature), and stabilizers (alumina from clay or kaolin). The ratio of these
+      determines the glaze's properties.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Material Categories</h3>
     <ul class="list-disc list-inside space-y-1">

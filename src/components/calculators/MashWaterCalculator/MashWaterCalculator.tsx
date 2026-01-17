@@ -111,7 +111,8 @@ export function MashWaterCalculator() {
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-xs ring-1 ring-white/5 hover:ring-amber-500/30"
                 >
-                  {preset.label} ({inputs.tempUnit === 'fahrenheit' ? `${preset.temp}°F` : `${preset.tempC}°C`})
+                  {preset.label} (
+                  {inputs.tempUnit === 'fahrenheit' ? `${preset.temp}°F` : `${preset.tempC}°C`})
                 </button>
               ))}
             </div>
@@ -123,7 +124,9 @@ export function MashWaterCalculator() {
               min={0.75}
               max={2.5}
               step={0.125}
-              formatValue={(v) => inputs.volumeUnit === 'gallons' ? `${v} qt/lb` : `${(v * 2.086).toFixed(1)} L/kg`}
+              formatValue={(v) =>
+                inputs.volumeUnit === 'gallons' ? `${v} qt/lb` : `${(v * 2.086).toFixed(1)} L/kg`
+              }
             />
 
             <div className="flex flex-wrap gap-2">
@@ -245,7 +248,8 @@ export function MashWaterCalculator() {
           <h2 className="mb-4 text-lg font-semibold text-amber-300">Strike Water</h2>
           <div className="text-center">
             <div className="text-5xl font-bold text-amber-400">
-              {results.strikeWaterTemp}{results.tempUnit}
+              {results.strikeWaterTemp}
+              {results.tempUnit}
             </div>
             <div className="mt-2 text-amber-300">heat water to this temperature</div>
           </div>
@@ -312,7 +316,8 @@ export function MashWaterCalculator() {
               )}
               <div className="mt-4 rounded-lg bg-amber-900/20 p-3 ring-1 ring-amber-500/20">
                 <p className="text-sm text-amber-200/80">
-                  Heat sparge water to 168-170°F (75-77°C) to help with lautering and prevent tannin extraction.
+                  Heat sparge water to 168-170°F (75-77°C) to help with lautering and prevent tannin
+                  extraction.
                 </p>
               </div>
             </div>
@@ -325,13 +330,15 @@ export function MashWaterCalculator() {
             <div className="flex items-center gap-2">
               <span className="w-6 text-center font-bold text-amber-400">1</span>
               <span className="text-[var(--color-subtle)]">
-                Heat {results.strikeWaterVolume} {results.volumeUnit} to {results.strikeWaterTemp}{results.tempUnit}
+                Heat {results.strikeWaterVolume} {results.volumeUnit} to {results.strikeWaterTemp}
+                {results.tempUnit}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-6 text-center font-bold text-amber-400">2</span>
               <span className="text-[var(--color-subtle)]">
-                Add grain, target mash temp: {inputs.targetMashTemp}{results.tempUnit}
+                Add grain, target mash temp: {inputs.targetMashTemp}
+                {results.tempUnit}
               </span>
             </div>
             <div className="flex items-center gap-2">

@@ -61,8 +61,8 @@ export const SACRIFICE_TYPES = {
 // 2024/25 England/NI Income Tax bands
 export const ENGLAND_TAX_BANDS = {
   personalAllowance: 12570,
-  basicRate: { threshold: 50270, rate: 0.20 },
-  higherRate: { threshold: 125140, rate: 0.40 },
+  basicRate: { threshold: 50270, rate: 0.2 },
+  higherRate: { threshold: 125140, rate: 0.4 },
   additionalRate: { rate: 0.45 },
 };
 
@@ -70,7 +70,7 @@ export const ENGLAND_TAX_BANDS = {
 export const SCOTLAND_TAX_BANDS = {
   personalAllowance: 12570,
   starterRate: { threshold: 14876, rate: 0.19 },
-  basicRate: { threshold: 26561, rate: 0.20 },
+  basicRate: { threshold: 26561, rate: 0.2 },
   intermediateRate: { threshold: 43662, rate: 0.21 },
   higherRate: { threshold: 75000, rate: 0.42 },
   advancedRate: { threshold: 125140, rate: 0.45 },

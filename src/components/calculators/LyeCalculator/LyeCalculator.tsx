@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateLye, formatWeight, getLyeConcentrationWarning, getRecipeWarnings } from './calculations';
+import {
+  calculateLye,
+  formatWeight,
+  getLyeConcentrationWarning,
+  getRecipeWarnings,
+} from './calculations';
 import {
   getDefaultInputs,
   generateId,
@@ -35,12 +40,15 @@ export default function LyeCalculator() {
 
   const result = useMemo(() => calculateLye(inputs), [inputs]);
 
-  const updateInput = <K extends keyof LyeCalculatorInputs>(field: K, value: LyeCalculatorInputs[K]) => {
+  const updateInput = <K extends keyof LyeCalculatorInputs>(
+    field: K,
+    value: LyeCalculatorInputs[K]
+  ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
   const addOil = (oilValue: string) => {
-    const oilData = OILS.find(o => o.value === oilValue);
+    const oilData = OILS.find((o) => o.value === oilValue);
     if (!oilData) return;
 
     const newOil: OilEntry = {
@@ -54,9 +62,7 @@ export default function LyeCalculator() {
   const updateOil = (id: string, weight: number) => {
     setInputs((prev) => ({
       ...prev,
-      oils: prev.oils.map((o) =>
-        o.id === id ? { ...o, weight } : o
-      ),
+      oils: prev.oils.map((o) => (o.id === id ? { ...o, weight } : o)),
     }));
   };
 
@@ -71,11 +77,14 @@ export default function LyeCalculator() {
   const recipeWarnings = getRecipeWarnings(result.oilBreakdown);
 
   // Group oils by category
-  const oilsByCategory = OILS.reduce((acc, oil) => {
-    if (!acc[oil.category]) acc[oil.category] = [];
-    acc[oil.category].push(oil);
-    return acc;
-  }, {} as Record<string, typeof OILS>);
+  const oilsByCategory = OILS.reduce(
+    (acc, oil) => {
+      if (!acc[oil.category]) acc[oil.category] = [];
+      acc[oil.category].push(oil);
+      return acc;
+    },
+    {} as Record<string, typeof OILS>
+  );
 
   return (
     <ThemeProvider defaultColor="violet">
@@ -90,7 +99,7 @@ export default function LyeCalculator() {
           <div className="mb-6">
             <Label>Lye Type</Label>
             <ButtonGroup
-              options={LYE_TYPES.map(l => ({ value: l.value, label: l.label }))}
+              options={LYE_TYPES.map((l) => ({ value: l.value, label: l.label }))}
               value={inputs.lyeType}
               onChange={(value) => updateInput('lyeType', value as LyeType)}
               size="sm"
@@ -103,7 +112,7 @@ export default function LyeCalculator() {
               <div>
                 <Label>Superfat %</Label>
                 <ButtonGroup
-                  options={SUPERFAT_OPTIONS.map(s => ({ value: String(s), label: `${s}%` }))}
+                  options={SUPERFAT_OPTIONS.map((s) => ({ value: String(s), label: `${s}%` }))}
                   value={String(inputs.superfatPercent)}
                   onChange={(value) => updateInput('superfatPercent', Number(value))}
                   size="sm"
@@ -113,11 +122,15 @@ export default function LyeCalculator() {
                 <Label>Water:Lye Ratio</Label>
                 <select
                   value={inputs.waterRatio}
-                  onChange={(e) => updateInput('waterRatio', Number((e.target as HTMLSelectElement).value))}
+                  onChange={(e) =>
+                    updateInput('waterRatio', Number((e.target as HTMLSelectElement).value))
+                  }
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)]"
                 >
                   {WATER_RATIOS.map((w) => (
-                    <option key={w.value} value={w.value}>{w.label}</option>
+                    <option key={w.value} value={w.value}>
+                      {w.label}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -146,10 +159,13 @@ export default function LyeCalculator() {
 
             <div className="space-y-2 mb-4">
               {inputs.oils.map((oilEntry) => {
-                const oilData = OILS.find(o => o.value === oilEntry.oil);
-                const breakdown = result.oilBreakdown.find(o => o.name === oilData?.label);
+                const oilData = OILS.find((o) => o.value === oilEntry.oil);
+                const breakdown = result.oilBreakdown.find((o) => o.name === oilData?.label);
                 return (
-                  <div key={oilEntry.id} className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3">
+                  <div
+                    key={oilEntry.id}
+                    className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3"
+                  >
                     <span className="flex-1 text-[var(--color-cream)]">{oilData?.label}</span>
                     <div className="flex items-center gap-2">
                       <Input
@@ -169,8 +185,18 @@ export default function LyeCalculator() {
                       onClick={() => removeOil(oilEntry.id)}
                       className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-lg transition-colors"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M6 18L18 6M6 6l12 12"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -212,7 +238,11 @@ export default function LyeCalculator() {
             {/* Primary Results */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <ResultCard
-                label={inputs.lyeType === 'naoh' ? 'Sodium Hydroxide (NaOH)' : 'Potassium Hydroxide (KOH)'}
+                label={
+                  inputs.lyeType === 'naoh'
+                    ? 'Sodium Hydroxide (NaOH)'
+                    : 'Potassium Hydroxide (KOH)'
+                }
                 value={formatWeight(result.lyeAmount, inputs.unit)}
                 subtitle="lye needed"
                 valueColor="error"
@@ -271,7 +301,9 @@ export default function LyeCalculator() {
                   <div key={oil.name}>
                     <div className="flex justify-between text-sm mb-1">
                       <span>{oil.name}</span>
-                      <span>{oil.weight} {inputs.unit} ({oil.percent}%)</span>
+                      <span>
+                        {oil.weight} {inputs.unit} ({oil.percent}%)
+                      </span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                       <div
@@ -286,14 +318,15 @@ export default function LyeCalculator() {
 
             {/* Safety */}
             <Alert variant="warning" title="Safety First!">
-              Always add lye to water, NEVER water to lye. Work in a well-ventilated area.
-              Wear safety goggles and gloves. Keep vinegar nearby (for skin contact only - not for neutralizing lye solution).
+              Always add lye to water, NEVER water to lye. Work in a well-ventilated area. Wear
+              safety goggles and gloves. Keep vinegar nearby (for skin contact only - not for
+              neutralizing lye solution).
             </Alert>
 
             {/* Tips */}
             <Alert variant="tip" title="Soap Making Tips:">
-              5% superfat is standard for most soaps. Increase to 7-10% for facial bars or shampoo bars.
-              Cold process soap needs 4-6 weeks cure time. Use distilled water only.
+              5% superfat is standard for most soaps. Increase to 7-10% for facial bars or shampoo
+              bars. Cold process soap needs 4-6 weeks cure time. Use distilled water only.
             </Alert>
 
             {/* Share */}

@@ -261,16 +261,8 @@ export function CuttingTimeCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Cutting Time"
-            value={formatTime(results.cuttingTime)}
-            color="blue"
-          />
-          <ResultCard
-            label="Rapid Time"
-            value={formatTime(results.rapidTime)}
-            color="green"
-          />
+          <ResultCard label="Cutting Time" value={formatTime(results.cuttingTime)} color="blue" />
+          <ResultCard label="Rapid Time" value={formatTime(results.rapidTime)} color="green" />
           <ResultCard
             label="Tool Change Time"
             value={formatTime(results.toolChangeTime)}
@@ -319,9 +311,7 @@ export function CuttingTimeCalculator() {
             }))}
           />
           <div className="mt-4 text-center">
-            <div className="text-3xl font-bold text-green-400">
-              ${adjustedCost.toFixed(2)}
-            </div>
+            <div className="text-3xl font-bold text-green-400">${adjustedCost.toFixed(2)}</div>
             <div className="text-sm text-[var(--color-subtle)]">
               ${(adjustedCost / inputs.quantity).toFixed(2)} per part
             </div>

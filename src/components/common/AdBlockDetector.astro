@@ -13,11 +13,20 @@
   <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
 
   <!-- Modal content -->
-  <div class="relative bento-card p-6 md:p-8 shadow-2xl border border-amber-500/30 max-w-md w-full text-center">
+  <div
+    class="relative bento-card p-6 md:p-8 shadow-2xl border border-amber-500/30 max-w-md w-full text-center"
+  >
     <!-- Icon -->
-    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto mb-4">
+    <div
+      class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto mb-4"
+    >
       <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+        ></path>
       </svg>
     </div>
 
@@ -26,8 +35,8 @@
 
     <!-- Description -->
     <p class="text-sm text-[var(--color-subtle)] mb-6">
-      We keep all our calculators <span class="text-[var(--color-cream)]">100% free</span> by showing non-intrusive ads.
-      Please consider whitelisting us in your ad blocker to support our work!
+      We keep all our calculators <span class="text-[var(--color-cream)]">100% free</span> by showing
+      non-intrusive ads. Please consider whitelisting us in your ad blocker to support our work!
     </p>
 
     <!-- Buttons -->
@@ -68,9 +77,10 @@
         document.body.appendChild(testAd);
 
         setTimeout(() => {
-          const isBlocked = testAd.offsetHeight === 0 ||
-                           testAd.offsetParent === null ||
-                           getComputedStyle(testAd).display === 'none';
+          const isBlocked =
+            testAd.offsetHeight === 0 ||
+            testAd.offsetParent === null ||
+            getComputedStyle(testAd).display === 'none';
 
           if (isBlocked) {
             const notice = document.getElementById('adblock-notice');

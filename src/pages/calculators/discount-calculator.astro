@@ -14,8 +14,10 @@ import DiscountCalculator from '../../components/calculators/DiscountCalculator/
 
 // SEO Configuration
 const title = 'Discount Calculator | Sale Price & Percent Off Calculator';
-const description = 'Free discount calculator to find sale prices, percent off, and total savings. Calculate any discount instantly. Perfect for shopping, comparing deals, and finding the best prices.';
-const keywords = 'discount calculator, percent off calculator, sale price calculator, savings calculator, markdown calculator, price reduction calculator, deal calculator, shopping calculator';
+const description =
+  'Free discount calculator to find sale prices, percent off, and total savings. Calculate any discount instantly. Perfect for shopping, comparing deals, and finding the best prices.';
+const keywords =
+  'discount calculator, percent off calculator, sale price calculator, savings calculator, markdown calculator, price reduction calculator, deal calculator, shopping calculator';
 const canonicalURL = '/calculators/discount-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -54,33 +56,40 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How do I calculate percent off?",
-    answer: "To calculate percent off: Multiply the original price by the discount percentage, then divide by 100. Subtract this from the original price. For example, 25% off $80: (80 × 25) ÷ 100 = $20 discount, so the sale price is $60."
+    question: 'How do I calculate percent off?',
+    answer:
+      'To calculate percent off: Multiply the original price by the discount percentage, then divide by 100. Subtract this from the original price. For example, 25% off $80: (80 × 25) ÷ 100 = $20 discount, so the sale price is $60.',
   },
   {
-    question: "How do I find the discount percentage?",
-    answer: "To find the discount percentage: Subtract the sale price from the original price to get the discount amount. Divide the discount by the original price and multiply by 100. For example: Original $100, Sale $75. Discount = $25. Percentage = (25 ÷ 100) × 100 = 25% off."
+    question: 'How do I find the discount percentage?',
+    answer:
+      'To find the discount percentage: Subtract the sale price from the original price to get the discount amount. Divide the discount by the original price and multiply by 100. For example: Original $100, Sale $75. Discount = $25. Percentage = (25 ÷ 100) × 100 = 25% off.',
   },
   {
     question: "What does 'percent off' mean?",
-    answer: "Percent off means the reduction from the original price expressed as a percentage. For example, '30% off' means you pay 70% of the original price. A $100 item at 30% off costs $70."
+    answer:
+      "Percent off means the reduction from the original price expressed as a percentage. For example, '30% off' means you pay 70% of the original price. A $100 item at 30% off costs $70.",
   },
   {
-    question: "How do I calculate 20% off a price?",
-    answer: "To calculate 20% off: Multiply the price by 0.20 (or divide by 5) to find the discount, then subtract from the original. Quick shortcut: 20% off means you pay 80%, so multiply the price by 0.80. Example: $50 × 0.80 = $40 final price."
+    question: 'How do I calculate 20% off a price?',
+    answer:
+      'To calculate 20% off: Multiply the price by 0.20 (or divide by 5) to find the discount, then subtract from the original. Quick shortcut: 20% off means you pay 80%, so multiply the price by 0.80. Example: $50 × 0.80 = $40 final price.',
   },
   {
-    question: "Is a bigger discount always better?",
-    answer: "Not always. Compare the final prices, not just the percentages. A 50% discount on an overpriced item might still cost more than a 20% discount on a competitively priced alternative. Always check the final price against other options."
+    question: 'Is a bigger discount always better?',
+    answer:
+      'Not always. Compare the final prices, not just the percentages. A 50% discount on an overpriced item might still cost more than a 20% discount on a competitively priced alternative. Always check the final price against other options.',
   },
   {
-    question: "How do stacking discounts work?",
-    answer: "When discounts stack, they're applied sequentially, not added. For example, 20% off then 10% off doesn't equal 30% off. Instead: Start with $100, apply 20% ($80), then apply 10% to $80 ($72). Total discount is actually 28%, not 30%."
+    question: 'How do stacking discounts work?',
+    answer:
+      "When discounts stack, they're applied sequentially, not added. For example, 20% off then 10% off doesn't equal 30% off. Instead: Start with $100, apply 20% ($80), then apply 10% to $80 ($72). Total discount is actually 28%, not 30%.",
   },
   {
     question: "What's the difference between 'percent off' and 'percent of'?",
-    answer: "Percent off is the reduction: 25% off $100 = $75 final price. Percent of is the result: 25% of $100 = $25. They're related: 25% off means you pay 75% of the original (100% - 25% = 75%)."
-  }
+    answer:
+      "Percent off is the reduction: 25% off $100 = $75 final price. Percent of is the result: 25% of $100 = $25. They're related: 25% off means you pay 75% of the original (100% - 25% = 75%).",
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -122,41 +131,40 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Choose your <strong>calculation mode</strong> based on what you know. "Percent Off" if you
-      know the discount percentage, "Find Discount %" if you know the sale price, or "Amount Saved"
-      if you know the dollar savings.
+      Choose your <strong>calculation mode</strong> based on what you know. "Percent Off" if you know
+      the discount percentage, "Find Discount %" if you know the sale price, or "Amount Saved" if you
+      know the dollar savings.
     </p>
     <p>
-      Enter the <strong>original price</strong> - this is the regular price before any discounts
-      are applied.
+      Enter the <strong>original price</strong> - this is the regular price before any discounts are applied.
     </p>
     <p>
-      Use the <strong>quick buttons</strong> to instantly see common discount amounts, or enter
-      your own percentage for precise calculations.
+      Use the <strong>quick buttons</strong> to instantly see common discount amounts, or enter your own
+      percentage for precise calculations.
     </p>
     <p>
-      The <strong>reference table</strong> shows all common discount percentages for the price
-      you entered, making it easy to compare deals.
+      The <strong>reference table</strong> shows all common discount percentages for the price you entered,
+      making it easy to compare deals.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Understanding Your Results">
     <p>
-      The <strong>Sale Price</strong> is what you'll actually pay after the discount is applied.
-      This is the most important number when comparing deals.
+      The <strong>Sale Price</strong> is what you'll actually pay after the discount is applied. This
+      is the most important number when comparing deals.
     </p>
     <p>
-      <strong>You Save</strong> shows the total dollar amount of your savings - the difference
-      between the original price and sale price.
+      <strong>You Save</strong> shows the total dollar amount of your savings - the difference between
+      the original price and sale price.
     </p>
     <p>
-      <strong>Discount Percent</strong> tells you what portion of the original price is being
-      removed. Higher percentages mean bigger savings (relative to the original price).
+      <strong>Discount Percent</strong> tells you what portion of the original price is being removed.
+      Higher percentages mean bigger savings (relative to the original price).
     </p>
     <p>
-      Use the <strong>Quick Reference</strong> table to see how different discount percentages
-      would affect the same item, helping you evaluate if a sale is really a good deal.
+      Use the <strong>Quick Reference</strong> table to see how different discount percentages would affect
+      the same item, helping you evaluate if a sale is really a good deal.
     </p>
   </ContentSection>
 

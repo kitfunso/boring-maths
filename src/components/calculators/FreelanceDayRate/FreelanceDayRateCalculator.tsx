@@ -9,10 +9,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import {
-  calculateFreelanceDayRate,
-  formatCurrency,
-} from './calculations';
+import { calculateFreelanceDayRate, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
   type FreelanceDayRateInputs,
@@ -44,7 +41,9 @@ import ShareResults from '../../ui/ShareResults';
  * Main calculator component
  */
 export default function FreelanceDayRateCalculator() {
-  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
   const [error, setError] = useState<string | null>(null);
 
   // Get current currency symbol
@@ -63,10 +62,7 @@ export default function FreelanceDayRateCalculator() {
   }, [inputs]);
 
   // Update a single input field
-  const updateInput = (
-    field: keyof FreelanceDayRateInputs,
-    value: number | Currency
-  ) => {
+  const updateInput = (field: keyof FreelanceDayRateInputs, value: number | Currency) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -77,7 +73,7 @@ export default function FreelanceDayRateCalculator() {
 
   // Get region-specific help text
   const getHelpText = (fieldId: string): string => {
-    const field = INPUT_FIELD_CONFIG.find(f => f.id === fieldId);
+    const field = INPUT_FIELD_CONFIG.find((f) => f.id === fieldId);
     if (!field) return '';
     if (field.helpTextByRegion && field.helpTextByRegion[region]) {
       return field.helpTextByRegion[region]!;
@@ -92,12 +88,7 @@ export default function FreelanceDayRateCalculator() {
         <CalculatorHeader
           title="Calculate Your Day Rate"
           subtitle="Enter your target salary to find your equivalent freelance rate"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -159,7 +150,9 @@ export default function FreelanceDayRateCalculator() {
                   value={inputs.vacationDays}
                   onChange={(e) => updateInput('vacationDays', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1.5">{getHelpText('vacationDays')}</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1.5">
+                  {getHelpText('vacationDays')}
+                </p>
               </div>
 
               {/* Holidays */}
@@ -173,7 +166,9 @@ export default function FreelanceDayRateCalculator() {
                   value={inputs.holidays}
                   onChange={(e) => updateInput('holidays', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1.5">{getHelpText('holidays')}</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1.5">
+                  {getHelpText('holidays')}
+                </p>
               </div>
             </Grid>
 
@@ -310,7 +305,8 @@ export default function FreelanceDayRateCalculator() {
                         <>
                           At full utilization, you'd earn{' '}
                           <span className="font-semibold text-[var(--color-accent)]">
-                            {formatCurrency(result.annualComparison.difference, result.currency)} more
+                            {formatCurrency(result.annualComparison.difference, result.currency)}{' '}
+                            more
                           </span>{' '}
                           as a freelancer
                         </>
@@ -330,8 +326,8 @@ export default function FreelanceDayRateCalculator() {
 
               {/* Info Note */}
               <Alert variant="tip" title="Pro tip:">
-                Most freelancers only bill 70-80% of working days due to admin, marketing, and gaps between projects.
-                Consider adding a 20-30% buffer to your rate.
+                Most freelancers only bill 70-80% of working days due to admin, marketing, and gaps
+                between projects. Consider adding a 20-30% buffer to your rate.
               </Alert>
 
               {/* Share Results */}

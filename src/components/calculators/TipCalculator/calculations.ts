@@ -9,7 +9,7 @@ import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
 /** Common tip percentages for suggestions */
-const COMMON_TIP_PERCENTAGES = [0.15, 0.18, 0.20, 0.25];
+const COMMON_TIP_PERCENTAGES = [0.15, 0.18, 0.2, 0.25];
 
 /**
  * Round to 2 decimal places

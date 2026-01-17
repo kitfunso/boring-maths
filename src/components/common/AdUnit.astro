@@ -21,35 +21,37 @@ const {
   layout,
   layoutKey,
   className = '',
-  style = 'display:block'
+  style = 'display:block',
 } = Astro.props;
 
 const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 ---
 
-{isProd && (
-  <div class={`ad-container ${className}`}>
-    <ins
-      class="adsbygoogle"
-      style={style}
-      data-ad-client={clientId}
-      data-ad-slot={slot}
-      data-ad-format={format}
-      data-full-width-responsive="true"
-      data-ad-layout={layout}
-      data-ad-layout-key={layoutKey}
-    />
-    <script is:inline>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-)}
-
-{!isProd && (
-  <div class={`ad-placeholder ${className}`}>
-    <div class="bg-[var(--color-charcoal)] border border-dashed border-white/20 rounded-xl py-3 px-4 text-center">
-      <p class="text-xs text-[var(--color-muted)]">Ad (slot: {slot})</p>
+{
+  isProd && (
+    <div class={`ad-container ${className}`}>
+      <ins
+        class="adsbygoogle"
+        style={style}
+        data-ad-client={clientId}
+        data-ad-slot={slot}
+        data-ad-format={format}
+        data-full-width-responsive="true"
+        data-ad-layout={layout}
+        data-ad-layout-key={layoutKey}
+      />
+      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-  </div>
-)}
+  )
+}
+
+{
+  !isProd && (
+    <div class={`ad-placeholder ${className}`}>
+      <div class="bg-[var(--color-charcoal)] border border-dashed border-white/20 rounded-xl py-3 px-4 text-center">
+        <p class="text-xs text-[var(--color-muted)]">Ad (slot: {slot})</p>
+      </div>
+    </div>
+  )
+}

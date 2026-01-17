@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { WaterChangeCalculator } from '../../components/calculators/WaterChangeCalculator';
 
 const title = 'Water Change Calculator | Aquarium Parameter Dilution';
-const description = 'Free aquarium water change calculator. Calculate how water changes affect nitrate, ammonia, and other parameters. Plan your maintenance schedule for healthy fish.';
-const keywords = 'water change calculator, aquarium calculator, nitrate dilution, fish tank maintenance, water parameters, aquarium care, freshwater, saltwater';
+const description =
+  'Free aquarium water change calculator. Calculate how water changes affect nitrate, ammonia, and other parameters. Plan your maintenance schedule for healthy fish.';
+const keywords =
+  'water change calculator, aquarium calculator, nitrate dilution, fish tank maintenance, water parameters, aquarium care, freshwater, saltwater';
 const canonicalURL = '/calculators/water-change-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How often should I change aquarium water?",
-    answer: "Most freshwater tanks benefit from weekly 20-30% water changes. Heavily stocked tanks or those with messy fish may need 50% weekly. Lightly stocked planted tanks might only need 10-20% biweekly. Monitor nitrates - keep them under 20-40ppm for most freshwater fish."
+    question: 'How often should I change aquarium water?',
+    answer:
+      'Most freshwater tanks benefit from weekly 20-30% water changes. Heavily stocked tanks or those with messy fish may need 50% weekly. Lightly stocked planted tanks might only need 10-20% biweekly. Monitor nitrates - keep them under 20-40ppm for most freshwater fish.',
   },
   {
     question: "Why doesn't a water change completely remove nitrates?",
-    answer: "Water changes work by dilution. A 50% change removes 50% of the nitrates. To reduce from 40ppm to 10ppm requires multiple changes or one very large change. This calculator shows exactly how many changes are needed to reach your target."
+    answer:
+      'Water changes work by dilution. A 50% change removes 50% of the nitrates. To reduce from 40ppm to 10ppm requires multiple changes or one very large change. This calculator shows exactly how many changes are needed to reach your target.',
   },
   {
-    question: "Can I do too large a water change?",
-    answer: "Large water changes (50%+) are safe if temperature and pH match closely. The main risks are temperature shock and pH swings. Sensitive fish and invertebrates prefer smaller, more frequent changes. In emergencies (ammonia spike), large changes are necessary and beneficial."
+    question: 'Can I do too large a water change?',
+    answer:
+      'Large water changes (50%+) are safe if temperature and pH match closely. The main risks are temperature shock and pH swings. Sensitive fish and invertebrates prefer smaller, more frequent changes. In emergencies (ammonia spike), large changes are necessary and beneficial.',
   },
   {
-    question: "Should I gravel vacuum during water changes?",
-    answer: "Yes, vacuuming removes fish waste and uneaten food before they decompose and add to nitrates. Vacuum about 1/3 of the substrate each change, rotating areas weekly. For planted tanks with root feeders, vacuum sparingly around plants."
+    question: 'Should I gravel vacuum during water changes?',
+    answer:
+      'Yes, vacuuming removes fish waste and uneaten food before they decompose and add to nitrates. Vacuum about 1/3 of the substrate each change, rotating areas weekly. For planted tanks with root feeders, vacuum sparingly around plants.',
   },
   {
-    question: "How do I match water temperature?",
-    answer: "Aim for within 2°F (1°C) of tank temperature. Use a thermometer on your tap water after running it for a minute. Most fish tolerate small temperature differences, but sensitive species and during breeding require closer matching."
+    question: 'How do I match water temperature?',
+    answer:
+      'Aim for within 2°F (1°C) of tank temperature. Use a thermometer on your tap water after running it for a minute. Most fish tolerate small temperature differences, but sensitive species and during breeding require closer matching.',
   },
   {
-    question: "Do water changes stress fish?",
-    answer: "Properly done water changes don't stress healthy fish. Fish evolved with water changes from rain and flowing water. Stress comes from large parameter swings (temp, pH) or going too long between changes, letting toxins build up. Consistent small changes are less stressful than infrequent large ones."
+    question: 'Do water changes stress fish?',
+    answer:
+      "Properly done water changes don't stress healthy fish. Fish evolved with water changes from rain and flowing water. Stress comes from large parameter swings (temp, pH) or going too long between changes, letting toxins build up. Consistent small changes are less stressful than infrequent large ones.",
   },
 ];
 
@@ -100,9 +108,8 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Water Parameter Guidelines">
     <p>
-      Regular water changes are essential for maintaining healthy water parameters.
-      Different fish have different tolerances, but these are general guidelines for
-      most freshwater aquariums.
+      Regular water changes are essential for maintaining healthy water parameters. Different fish
+      have different tolerances, but these are general guidelines for most freshwater aquariums.
     </p>
     <div class="grid md:grid-cols-4 gap-4 mt-4">
       <div class="bg-red-900/20 rounded-lg p-4">
@@ -144,9 +151,9 @@ const schemaBreadcrumbs = [
         </span>
       </div>
       <p class="text-sm text-[var(--color-subtle)]">
-        This formula shows how your parameter level changes after a water change.
-        If your new water has 0 ppm of the parameter (like nitrate-free tap water),
-        a 50% water change cuts the level in half each time.
+        This formula shows how your parameter level changes after a water change. If your new water
+        has 0 ppm of the parameter (like nitrate-free tap water), a 50% water change cuts the level
+        in half each time.
       </p>
       <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm">
         <div class="bg-[var(--color-background)] rounded p-3">

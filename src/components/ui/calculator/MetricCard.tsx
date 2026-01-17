@@ -33,9 +33,8 @@ export function MetricCard({
 }: MetricCardProps) {
   const { tokens } = useTheme();
 
-  const valueColorClass = valueColor === 'themed'
-    ? tokens.text700
-    : VALUE_COLOR_CLASSES[valueColor];
+  const valueColorClass =
+    valueColor === 'themed' ? tokens.text700 : VALUE_COLOR_CLASSES[valueColor];
 
   return (
     <div
@@ -48,12 +47,8 @@ export function MetricCard({
       <p className="text-xs font-medium text-[var(--color-muted)] uppercase tracking-wider mb-1">
         {label}
       </p>
-      <p className={`text-xl md:text-2xl font-bold tabular-nums ${valueColorClass}`}>
-        {value}
-      </p>
-      {sublabel && (
-        <p className="text-xs text-[var(--color-muted)] mt-1">{sublabel}</p>
-      )}
+      <p className={`text-xl md:text-2xl font-bold tabular-nums ${valueColorClass}`}>{value}</p>
+      {sublabel && <p className="text-xs text-[var(--color-muted)] mt-1">{sublabel}</p>}
     </div>
   );
 }

@@ -7,7 +7,13 @@
 import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateBMI } from './calculations';
-import { getDefaultInputs, BMI_CATEGORIES, type BMIInputs, type BMIResult, type UnitSystem } from './types';
+import {
+  getDefaultInputs,
+  BMI_CATEGORIES,
+  type BMIInputs,
+  type BMIResult,
+  type UnitSystem,
+} from './types';
 import {
   ThemeProvider,
   Card,
@@ -29,10 +35,7 @@ export default function BMICalculator() {
     return calculateBMI(inputs);
   }, [inputs]);
 
-  const updateInput = <K extends keyof BMIInputs>(
-    field: K,
-    value: BMIInputs[K]
-  ) => {
+  const updateInput = <K extends keyof BMIInputs>(field: K, value: BMIInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -87,10 +90,7 @@ export default function BMICalculator() {
   return (
     <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
-        <CalculatorHeader
-          title="Calculate Your BMI"
-          subtitle="Body Mass Index health assessment"
-        />
+        <CalculatorHeader title="Calculate Your BMI" subtitle="Body Mass Index health assessment" />
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
@@ -178,16 +178,12 @@ export default function BMICalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* BMI Score */}
-            <div className={`rounded-2xl p-8 text-center border-2 ${getCategoryStyles(result.categoryColor)}`}>
-              <p className="text-6xl font-bold tabular-nums mb-2">
-                {result.bmi}
-              </p>
-              <p className="text-2xl font-semibold mb-1">
-                {result.category}
-              </p>
-              <p className="text-sm opacity-75">
-                BMI Category
-              </p>
+            <div
+              className={`rounded-2xl p-8 text-center border-2 ${getCategoryStyles(result.categoryColor)}`}
+            >
+              <p className="text-6xl font-bold tabular-nums mb-2">{result.bmi}</p>
+              <p className="text-2xl font-semibold mb-1">{result.category}</p>
+              <p className="text-sm opacity-75">BMI Category</p>
             </div>
 
             {/* BMI Scale */}
@@ -227,9 +223,11 @@ export default function BMICalculator() {
                   <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
                     {result.category === 'Underweight' ? 'Weight to Gain' : 'Weight to Lose'}
                   </p>
-                  <p className={`text-xl font-bold tabular-nums ${
-                    result.category === 'Underweight' ? 'text-blue-400' : 'text-yellow-400'
-                  }`}>
+                  <p
+                    className={`text-xl font-bold tabular-nums ${
+                      result.category === 'Underweight' ? 'text-blue-400' : 'text-yellow-400'
+                    }`}
+                  >
                     {result.weightToHealthy} {weightUnit}
                   </p>
                 </div>
@@ -237,9 +235,9 @@ export default function BMICalculator() {
             </Grid>
 
             <Alert variant="info" title="Note:">
-              BMI is a general indicator and doesn't account for muscle mass, bone density,
-              or body composition. Athletes may have a high BMI but low body fat.
-              Consult a healthcare provider for a complete assessment.
+              BMI is a general indicator and doesn't account for muscle mass, bone density, or body
+              composition. Athletes may have a high BMI but low body fat. Consult a healthcare
+              provider for a complete assessment.
             </Alert>
 
             {/* Share & Print Results */}
@@ -253,7 +251,10 @@ export default function BMICalculator() {
                 results={[
                   { label: 'BMI', value: result.bmi.toString() },
                   { label: 'Category', value: result.category },
-                  { label: 'Healthy Weight Range', value: `${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}` },
+                  {
+                    label: 'Healthy Weight Range',
+                    value: `${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}`,
+                  },
                 ]}
               />
             </div>

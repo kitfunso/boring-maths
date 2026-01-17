@@ -76,10 +76,7 @@ function calculateSavingsNeeded(
 /**
  * Calculate income needed for a specific risk level
  */
-function calculateIncomeNeeded(
-  monthlyExpenses: number,
-  riskLevel: RiskTolerance
-): number {
+function calculateIncomeNeeded(monthlyExpenses: number, riskLevel: RiskTolerance): number {
   const threshold = RISK_THRESHOLDS[riskLevel];
   return monthlyExpenses * threshold.incomePercentOfExpenses;
 }
@@ -122,11 +119,7 @@ function monthsUntilReady(
   const requiredIncome = monthlyExpenses * threshold.incomePercentOfExpenses;
 
   // Calculate months to reach income threshold
-  const monthsForIncome = monthsToReachIncome(
-    monthlySideIncome,
-    requiredIncome,
-    monthlyGrowthRate
-  );
+  const monthsForIncome = monthsToReachIncome(monthlySideIncome, requiredIncome, monthlyGrowthRate);
 
   // Calculate months to reach savings threshold
   // Assume we save the surplus (side income - portion needed for expenses while employed)
@@ -190,7 +183,7 @@ function getStatusMessage(
   }
 
   if (monthsToReady <= 3 && monthsToReady > 0) {
-    return "Almost there! Just a few more months of building your runway and income.";
+    return 'Almost there! Just a few more months of building your runway and income.';
   }
 
   if (monthsToReady <= 6 && monthsToReady > 0) {
@@ -198,18 +191,18 @@ function getStatusMessage(
   }
 
   if (monthsToReady <= 12 && monthsToReady > 0) {
-    return "Keep pushing! With consistent growth, you could make the transition within a year.";
+    return 'Keep pushing! With consistent growth, you could make the transition within a year.';
   }
 
   if (currentRunway < 3) {
-    return "Focus on building your savings runway first. Even a small emergency fund helps.";
+    return 'Focus on building your savings runway first. Even a small emergency fund helps.';
   }
 
   if (incomeGapPercent > 50) {
-    return "Your side income is growing. Keep building clients and diversifying revenue streams.";
+    return 'Your side income is growing. Keep building clients and diversifying revenue streams.';
   }
 
-  return "Stay focused on growing your side income. Every new client gets you closer to freedom.";
+  return 'Stay focused on growing your side income. Every new client gets you closer to freedom.';
 }
 
 /**
@@ -307,7 +300,11 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   const monthlySavingsCapacity = Math.max(0, monthlySideIncome * 0.8); // 80% of side income can be saved
 
   // Savings needed at selected risk level (uses user's desired buffer)
-  const savingsNeededForRisk = calculateSavingsNeeded(monthlyExpenses, riskTolerance, desiredSafetyBuffer);
+  const savingsNeededForRisk = calculateSavingsNeeded(
+    monthlyExpenses,
+    riskTolerance,
+    desiredSafetyBuffer
+  );
   const incomeNeededForRisk = calculateIncomeNeeded(monthlyExpenses, riskTolerance);
 
   // Is ready to quit?
@@ -331,12 +328,11 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   );
 
   // Recommended quit date
-  const recommendedQuitDate =
-    isReadyToQuit
-      ? now
-      : monthsToRecommendedQuit !== Infinity && monthsToRecommendedQuit > 0
-        ? addMonths(now, monthsToRecommendedQuit)
-        : null;
+  const recommendedQuitDate = isReadyToQuit
+    ? now
+    : monthsToRecommendedQuit !== Infinity && monthsToRecommendedQuit > 0
+      ? addMonths(now, monthsToRecommendedQuit)
+      : null;
 
   // Calculate readiness percentage
   const savingsProgress = Math.min(100, (currentSavings / savingsNeededForRisk) * 100);
@@ -369,9 +365,8 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   );
 
   // === Motivational ===
-  const incomeGapPercent = monthlyExpenses > 0
-    ? ((monthlyExpenses - monthlySideIncome) / monthlyExpenses) * 100
-    : 0;
+  const incomeGapPercent =
+    monthlyExpenses > 0 ? ((monthlyExpenses - monthlySideIncome) / monthlyExpenses) * 100 : 0;
 
   const statusMessage = getStatusMessage(
     isReadyToQuit,
@@ -391,20 +386,16 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     monthlySalary: Math.round(monthlySalary),
     monthlyTotalCompensation: Math.round(monthlyTotalCompensation),
     currentRunwayMonths:
-      currentRunwayMonths === Infinity
-        ? 999
-        : Math.round(currentRunwayMonths * 10) / 10,
+      currentRunwayMonths === Infinity ? 999 : Math.round(currentRunwayMonths * 10) / 10,
     breakEvenSideIncome: Math.round(breakEvenSideIncome),
     incomeGapToSalary: Math.round(incomeGapToSalary),
     incomeGapToExpenses: Math.round(incomeGapToExpenses),
     monthsToCrossover: monthsToCrossover === Infinity ? -1 : monthsToCrossover,
-    monthsToFullReplacement:
-      monthsToFullReplacement === Infinity ? -1 : monthsToFullReplacement,
+    monthsToFullReplacement: monthsToFullReplacement === Infinity ? -1 : monthsToFullReplacement,
     crossoverDate,
     fullReplacementDate,
     recommendedQuitDate,
-    monthsToRecommendedQuit:
-      monthsToRecommendedQuit === Infinity ? -1 : monthsToRecommendedQuit,
+    monthsToRecommendedQuit: monthsToRecommendedQuit === Infinity ? -1 : monthsToRecommendedQuit,
     savingsNeededForRisk: Math.round(savingsNeededForRisk),
     isReadyToQuit,
     readinessPercent,

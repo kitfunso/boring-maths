@@ -165,7 +165,7 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
   // Region-specific tax defaults
   const taxDefaults = {
     USD: { federalTaxBracket: 0.22, stateTaxRate: 0.05, selfEmploymentTaxRate: 0.153 },
-    GBP: { federalTaxBracket: 0.20, stateTaxRate: 0, selfEmploymentTaxRate: 0.09 },
+    GBP: { federalTaxBracket: 0.2, stateTaxRate: 0, selfEmploymentTaxRate: 0.09 },
     EUR: { federalTaxBracket: 0.24, stateTaxRate: 0, selfEmploymentTaxRate: 0.15 },
   };
 

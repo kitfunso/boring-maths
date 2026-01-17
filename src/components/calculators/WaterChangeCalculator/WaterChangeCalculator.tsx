@@ -24,7 +24,7 @@ export function WaterChangeCalculator() {
 
   const results = useMemo(() => calculateWaterChange(inputs), [inputs]);
 
-  const selectedPreset = PARAMETER_PRESETS.find(p => p.value === inputs.parameterType);
+  const selectedPreset = PARAMETER_PRESETS.find((p) => p.value === inputs.parameterType);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -64,9 +64,8 @@ export function WaterChangeCalculator() {
                   onClick={() =>
                     setInputs({
                       ...inputs,
-                      tankVolume: inputs.volumeUnit === 'gallons'
-                        ? preset.gallons
-                        : preset.gallons * 3.78541,
+                      tankVolume:
+                        inputs.volumeUnit === 'gallons' ? preset.gallons : preset.gallons * 3.78541,
                     })
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-xs ring-1 ring-white/5 hover:ring-cyan-500/30"
@@ -121,14 +120,16 @@ export function WaterChangeCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Parameter Tracking</h2>
+          <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">
+            Parameter Tracking
+          </h2>
 
           <div className="space-y-4">
             <Select
               label="Parameter Type"
               value={inputs.parameterType}
               onChange={(v) => {
-                const preset = PARAMETER_PRESETS.find(p => p.value === v);
+                const preset = PARAMETER_PRESETS.find((p) => p.value === v);
                 setInputs({
                   ...inputs,
                   parameterType: v as any,
@@ -177,15 +178,23 @@ export function WaterChangeCalculator() {
               <div className="rounded-lg bg-cyan-900/20 p-3 ring-1 ring-cyan-500/20">
                 <div className="grid grid-cols-3 gap-2 text-center text-xs">
                   <div>
-                    <div className="text-green-400">{"<"}{selectedPreset.safeMax}</div>
+                    <div className="text-green-400">
+                      {'<'}
+                      {selectedPreset.safeMax}
+                    </div>
                     <div className="text-green-300/70">Ideal</div>
                   </div>
                   <div>
-                    <div className="text-amber-400">{selectedPreset.safeMax}-{selectedPreset.warningMax}</div>
+                    <div className="text-amber-400">
+                      {selectedPreset.safeMax}-{selectedPreset.warningMax}
+                    </div>
                     <div className="text-amber-300/70">Elevated</div>
                   </div>
                   <div>
-                    <div className="text-red-400">{">"}{selectedPreset.dangerMax}</div>
+                    <div className="text-red-400">
+                      {'>'}
+                      {selectedPreset.dangerMax}
+                    </div>
                     <div className="text-red-300/70">Danger</div>
                   </div>
                 </div>
@@ -268,7 +277,8 @@ export function WaterChangeCalculator() {
           <div className="text-sm text-[var(--color-subtle)] space-y-2">
             <p>After each {inputs.changePercent}% water change:</p>
             <div className="rounded-lg bg-[var(--color-background)] p-3 font-mono text-xs">
-              New Level = Current × {results.dilutionFactor.toFixed(3)} + New Water × {(1 - results.dilutionFactor).toFixed(3)}
+              New Level = Current × {results.dilutionFactor.toFixed(3)} + New Water ×{' '}
+              {(1 - results.dilutionFactor).toFixed(3)}
             </div>
             <p className="mt-2">
               {results.dilutionFactor * 100}% of original water remains after each change.

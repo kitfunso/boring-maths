@@ -4,12 +4,7 @@
  * Pure functions for calculating marketplace fees.
  */
 
-import type {
-  EtsyFeeInputs,
-  EtsyFeeResult,
-  PlatformFeeBreakdown,
-  EbayCategory,
-} from './types';
+import type { EtsyFeeInputs, EtsyFeeResult, PlatformFeeBreakdown, EbayCategory } from './types';
 import { FEE_STRUCTURES, EBAY_CATEGORIES } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
@@ -42,9 +37,7 @@ function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
     FEE_STRUCTURES.etsy.paymentProcessingFixed;
 
   // Offsite ads fee: 15% of sale price if applicable
-  const offsiteAdsFee = etsyOffsiteAds
-    ? salePrice * FEE_STRUCTURES.etsy.offsiteAdsRate
-    : 0;
+  const offsiteAdsFee = etsyOffsiteAds ? salePrice * FEE_STRUCTURES.etsy.offsiteAdsRate : 0;
 
   const totalFees = listingFee + transactionFee + paymentProcessingFee + offsiteAdsFee;
   const effectiveFeeRate = totalRevenue > 0 ? (totalFees / totalRevenue) * 100 : 0;

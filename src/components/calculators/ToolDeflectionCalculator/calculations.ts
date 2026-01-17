@@ -12,7 +12,7 @@ import { TOOL_MATERIALS, FLUTE_OPTIONS, MATERIAL_FACTORS } from './types';
  * Adjusted for flute configuration (less material = less stiffness)
  */
 function calculateMomentOfInertia(diameter: number, fluteCount: number): number {
-  const fluteConfig = FLUTE_OPTIONS.find(f => f.value === fluteCount);
+  const fluteConfig = FLUTE_OPTIONS.find((f) => f.value === fluteCount);
   const fluteFactor = fluteConfig?.factor || 1.0;
 
   // Moment of inertia for solid cylinder
@@ -63,7 +63,7 @@ export function calculateToolDeflection(inputs: ToolDeflectionInputs): ToolDefle
   }
 
   // Get modulus of elasticity
-  const material = TOOL_MATERIALS.find(m => m.value === inputs.toolMaterial);
+  const material = TOOL_MATERIALS.find((m) => m.value === inputs.toolMaterial);
   const E = material?.modulus || 87000000; // psi
 
   // Calculate moment of inertia
@@ -77,12 +77,7 @@ export function calculateToolDeflection(inputs: ToolDeflectionInputs): ToolDefle
       force = force * 0.2248; // Convert N to lbs
     }
   } else {
-    force = estimateCuttingForce(
-      depthOfCut,
-      widthOfCut,
-      inputs.feedRate,
-      inputs.materialFactor
-    );
+    force = estimateCuttingForce(depthOfCut, widthOfCut, inputs.feedRate, inputs.materialFactor);
   }
 
   // Calculate deflection using cantilever beam formula
@@ -126,7 +121,9 @@ export function calculateToolDeflection(inputs: ToolDeflectionInputs): ToolDefle
   }
 
   if (stickout > diameter * 4) {
-    recommendations.push(`Stickout (${(stickout / diameter).toFixed(1)}x diameter) is high - consider shorter tool`);
+    recommendations.push(
+      `Stickout (${(stickout / diameter).toFixed(1)}x diameter) is high - consider shorter tool`
+    );
   }
 
   // Convert results to display units

@@ -91,9 +91,7 @@ export const MULCH_TYPE_NAMES: Record<MulchType, string> = {
 /**
  * Calculate mulch requirements
  */
-export function calculateMulch(
-  inputs: MulchCalculatorInputs
-): MulchCalculatorResult {
+export function calculateMulch(inputs: MulchCalculatorInputs): MulchCalculatorResult {
   const {
     currency,
     length,
@@ -131,9 +129,8 @@ export function calculateMulch(
 
   // Calculate costs
   const bulkCostBase = volumeCuYards * pricePerCubicYard;
-  const bulkCost = Math.round(
-    (includeDelivery ? bulkCostBase + deliveryFee : bulkCostBase) * 100
-  ) / 100;
+  const bulkCost =
+    Math.round((includeDelivery ? bulkCostBase + deliveryFee : bulkCostBase) * 100) / 100;
   const bags2CuFtCost = Math.round(bags2CuFt * pricePer2CuFtBag * 100) / 100;
   const bags3CuFtCost = Math.round(bags3CuFt * pricePer3CuFtBag * 100) / 100;
 

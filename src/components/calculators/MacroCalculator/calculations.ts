@@ -64,7 +64,7 @@ export function calculateMacros(inputs: MacroCalculatorInputs): MacroCalculatorR
   if (goal === 'lose') {
     fatPercent = 0.25; // Lower fat when cutting
   } else if (goal === 'gain') {
-    fatPercent = 0.30; // Moderate fat when bulking
+    fatPercent = 0.3; // Moderate fat when bulking
   } else {
     fatPercent = 0.28; // Balanced for maintenance
   }

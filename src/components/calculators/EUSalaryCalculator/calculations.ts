@@ -5,7 +5,7 @@
 import { EU_TAX_DATA, type SalaryInputs, type SalaryResult, type EUCountryTax } from './types';
 
 export function getCountryByCode(code: string): EUCountryTax | undefined {
-  return EU_TAX_DATA.find(c => c.code === code);
+  return EU_TAX_DATA.find((c) => c.code === code);
 }
 
 export function calculateSocialSecurity(gross: number, country: EUCountryTax): number {
@@ -27,10 +27,7 @@ export function calculateIncomeTax(gross: number, country: EUCountryTax): number
   for (const bracket of country.taxBrackets) {
     if (taxableIncome <= 0) break;
 
-    const taxableInBracket = Math.min(
-      taxableIncome,
-      bracket.threshold - previousThreshold
-    );
+    const taxableInBracket = Math.min(taxableIncome, bracket.threshold - previousThreshold);
 
     if (taxableInBracket > 0) {
       tax += taxableInBracket * (bracket.rate / 100);
@@ -66,16 +63,22 @@ export function calculateSalary(inputs: SalaryInputs): SalaryResult {
 }
 
 export function calculateAllCountries(grossSalary: number): SalaryResult[] {
-  return EU_TAX_DATA.map(country => {
+  return EU_TAX_DATA.map((country) => {
     return calculateSalary({ grossSalary, countryCode: country.code });
   }).sort((a, b) => b.netSalary - a.netSalary);
 }
 
 export function formatCurrency(value: number, currency: string = 'EUR'): string {
-  const locale = currency === 'EUR' ? 'de-DE' :
-                 currency === 'PLN' ? 'pl-PL' :
-                 currency === 'SEK' ? 'sv-SE' :
-                 currency === 'DKK' ? 'da-DK' : 'en-US';
+  const locale =
+    currency === 'EUR'
+      ? 'de-DE'
+      : currency === 'PLN'
+        ? 'pl-PL'
+        : currency === 'SEK'
+          ? 'sv-SE'
+          : currency === 'DKK'
+            ? 'da-DK'
+            : 'en-US';
 
   return new Intl.NumberFormat(locale, {
     style: 'currency',

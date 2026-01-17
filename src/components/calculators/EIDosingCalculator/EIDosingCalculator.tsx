@@ -26,7 +26,7 @@ export function EIDosingCalculator() {
 
   const results = useMemo(() => calculateEIDosing(inputs), [inputs]);
 
-  const selectedSchedule = DOSING_SCHEDULES.find(s => s.value === inputs.dosingSched);
+  const selectedSchedule = DOSING_SCHEDULES.find((s) => s.value === inputs.dosingSched);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -66,9 +66,8 @@ export function EIDosingCalculator() {
                   onClick={() =>
                     setInputs({
                       ...inputs,
-                      tankVolume: inputs.volumeUnit === 'gallons'
-                        ? preset.gallons
-                        : preset.gallons * 3.78541,
+                      tankVolume:
+                        inputs.volumeUnit === 'gallons' ? preset.gallons : preset.gallons * 3.78541,
                     })
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-sm ring-1 ring-white/5 hover:ring-cyan-500/30"
@@ -240,26 +239,10 @@ export function EIDosingCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Weekly NO₃"
-            value={`${results.nitrateAchieved} ppm`}
-            color="blue"
-          />
-          <ResultCard
-            label="Weekly PO₄"
-            value={`${results.phosphateAchieved} ppm`}
-            color="green"
-          />
-          <ResultCard
-            label="Weekly K"
-            value={`${results.potassiumAchieved} ppm`}
-            color="purple"
-          />
-          <ResultCard
-            label="Weekly Fe"
-            value={`${results.ironAchieved} ppm`}
-            color="blue"
-          />
+          <ResultCard label="Weekly NO₃" value={`${results.nitrateAchieved} ppm`} color="blue" />
+          <ResultCard label="Weekly PO₄" value={`${results.phosphateAchieved} ppm`} color="green" />
+          <ResultCard label="Weekly K" value={`${results.potassiumAchieved} ppm`} color="purple" />
+          <ResultCard label="Weekly Fe" value={`${results.ironAchieved} ppm`} color="blue" />
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
@@ -289,11 +272,15 @@ export function EIDosingCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">EI Dosing Schedule</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            EI Dosing Schedule
+          </h3>
           <div className="space-y-2 text-sm">
             <div className="flex items-center gap-2">
               <span className="w-20 font-medium text-green-400">Day 1</span>
-              <span className="text-[var(--color-subtle)]">Macros (KNO₃, KH₂PO₄, K₂SO₄, MgSO₄)</span>
+              <span className="text-[var(--color-subtle)]">
+                Macros (KNO₃, KH₂PO₄, K₂SO₄, MgSO₄)
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-20 font-medium text-cyan-400">Day 2</span>

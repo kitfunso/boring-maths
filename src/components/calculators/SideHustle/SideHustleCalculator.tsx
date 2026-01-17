@@ -8,7 +8,12 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateSideHustle, formatCurrency } from './calculations';
 import { getDefaultInputs, type SideHustleInputs, type SideHustleResult } from './types';
-import { type Currency, getCurrencySymbol, getRegionFromCurrency, getInitialCurrency } from '../../../lib/regions';
+import {
+  type Currency,
+  getCurrencySymbol,
+  getRegionFromCurrency,
+  getInitialCurrency,
+} from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -24,7 +29,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function SideHustleCalculator() {
-  const [inputs, setInputs] = useState<SideHustleInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<SideHustleInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
@@ -35,10 +42,7 @@ export default function SideHustleCalculator() {
   }, [inputs]);
 
   // Update input
-  const updateInput = <K extends keyof SideHustleInputs>(
-    field: K,
-    value: SideHustleInputs[K]
-  ) => {
+  const updateInput = <K extends keyof SideHustleInputs>(field: K, value: SideHustleInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -54,12 +58,7 @@ export default function SideHustleCalculator() {
         <CalculatorHeader
           title="Analyze Your Side Hustle"
           subtitle="Calculate if your side project is truly profitable"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -104,7 +103,10 @@ export default function SideHustleCalculator() {
               </h3>
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <div>
-                  <label htmlFor="monthlyExpenses" className="block text-xs text-[var(--color-muted)] mb-1">
+                  <label
+                    htmlFor="monthlyExpenses"
+                    className="block text-xs text-[var(--color-muted)] mb-1"
+                  >
                     Materials/Supplies
                   </label>
                   <div className="relative">
@@ -125,7 +127,10 @@ export default function SideHustleCalculator() {
                 </div>
 
                 <div>
-                  <label htmlFor="marketingSpend" className="block text-xs text-[var(--color-muted)] mb-1">
+                  <label
+                    htmlFor="marketingSpend"
+                    className="block text-xs text-[var(--color-muted)] mb-1"
+                  >
                     Marketing/Ads
                   </label>
                   <div className="relative">
@@ -146,7 +151,10 @@ export default function SideHustleCalculator() {
                 </div>
 
                 <div>
-                  <label htmlFor="toolsCost" className="block text-xs text-[var(--color-muted)] mb-1">
+                  <label
+                    htmlFor="toolsCost"
+                    className="block text-xs text-[var(--color-muted)] mb-1"
+                  >
                     Software/Tools
                   </label>
                   <div className="relative">
@@ -167,7 +175,10 @@ export default function SideHustleCalculator() {
                 </div>
 
                 <div>
-                  <label htmlFor="otherCosts" className="block text-xs text-[var(--color-muted)] mb-1">
+                  <label
+                    htmlFor="otherCosts"
+                    className="block text-xs text-[var(--color-muted)] mb-1"
+                  >
                     Other Costs
                   </label>
                   <div className="relative">
@@ -205,7 +216,9 @@ export default function SideHustleCalculator() {
                   value={inputs.mainJobHourlyRate}
                   onChange={(e) => updateInput('mainJobHourlyRate', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">For opportunity cost comparison</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  For opportunity cost comparison
+                </p>
               </div>
 
               <div>
@@ -233,28 +246,32 @@ export default function SideHustleCalculator() {
           {/* Results Section */}
           <div className="space-y-6">
             {/* Verdict Banner */}
-            <div className={`rounded-2xl p-6 text-center ${
-              result.beatsMainJob
-                ? 'bg-gradient-to-br from-green-950/50 to-green-900/30 border-2 border-green-500/30'
-                : result.isProfitable
-                ? 'bg-gradient-to-br from-yellow-950/50 to-yellow-900/30 border-2 border-yellow-500/30'
-                : 'bg-gradient-to-br from-red-950/50 to-red-900/30 border-2 border-red-500/30'
-            }`}>
+            <div
+              className={`rounded-2xl p-6 text-center ${
+                result.beatsMainJob
+                  ? 'bg-gradient-to-br from-green-950/50 to-green-900/30 border-2 border-green-500/30'
+                  : result.isProfitable
+                    ? 'bg-gradient-to-br from-yellow-950/50 to-yellow-900/30 border-2 border-yellow-500/30'
+                    : 'bg-gradient-to-br from-red-950/50 to-red-900/30 border-2 border-red-500/30'
+              }`}
+            >
               <div className="text-4xl mb-2">
                 {result.beatsMainJob ? '🎉' : result.isProfitable ? '🤔' : '⚠️'}
               </div>
-              <p className={`text-lg font-semibold ${
-                result.beatsMainJob
-                  ? 'text-green-400'
-                  : result.isProfitable
-                  ? 'text-yellow-400'
-                  : 'text-red-400'
-              }`}>
+              <p
+                className={`text-lg font-semibold ${
+                  result.beatsMainJob
+                    ? 'text-green-400'
+                    : result.isProfitable
+                      ? 'text-yellow-400'
+                      : 'text-red-400'
+                }`}
+              >
                 {result.beatsMainJob
                   ? 'Your side hustle beats your main job rate!'
                   : result.isProfitable
-                  ? 'Profitable, but lower than your main job rate'
-                  : 'Currently not profitable'}
+                    ? 'Profitable, but lower than your main job rate'
+                    : 'Currently not profitable'}
               </p>
             </div>
 
@@ -264,7 +281,9 @@ export default function SideHustleCalculator() {
                 label="Effective Hourly Rate"
                 value={formatCurrency(result.effectiveHourlyRate, result.currency)}
                 sublabel={`vs ${formatCurrency(inputs.mainJobHourlyRate, inputs.currency)} main job`}
-                valueColor={result.effectiveHourlyRate >= inputs.mainJobHourlyRate ? 'success' : 'default'}
+                valueColor={
+                  result.effectiveHourlyRate >= inputs.mainJobHourlyRate ? 'success' : 'default'
+                }
               />
               <MetricCard
                 label="Monthly Net Profit"
@@ -282,7 +301,13 @@ export default function SideHustleCalculator() {
                 label="Profit Margin"
                 value={`${result.profitMargin.toFixed(1)}%`}
                 sublabel="gross margin"
-                valueColor={result.profitMargin >= 20 ? 'success' : result.profitMargin >= 0 ? 'warning' : 'error'}
+                valueColor={
+                  result.profitMargin >= 20
+                    ? 'success'
+                    : result.profitMargin >= 0
+                      ? 'warning'
+                      : 'error'
+                }
               />
             </Grid>
 
@@ -299,12 +324,17 @@ export default function SideHustleCalculator() {
                   <p className="text-2xl font-bold text-[var(--color-cream)] tabular-nums">
                     {formatCurrency(result.opportunityCost, result.currency)}
                   </p>
-                  <p className="text-xs text-[var(--color-muted)]">{result.hoursPerMonth} hours/month</p>
+                  <p className="text-xs text-[var(--color-muted)]">
+                    {result.hoursPerMonth} hours/month
+                  </p>
                 </div>
 
                 <div className="text-center">
-                  <p className={`text-xl font-bold ${result.netVsMainJob >= 0 ? 'text-green-400' : 'text-red-400'}`}>
-                    {result.netVsMainJob >= 0 ? '+' : ''}{formatCurrency(result.netVsMainJob, result.currency)}
+                  <p
+                    className={`text-xl font-bold ${result.netVsMainJob >= 0 ? 'text-green-400' : 'text-red-400'}`}
+                  >
+                    {result.netVsMainJob >= 0 ? '+' : ''}
+                    {formatCurrency(result.netVsMainJob, result.currency)}
                   </p>
                   <p className="text-xs text-[var(--color-muted)]">vs main job</p>
                 </div>
@@ -323,7 +353,9 @@ export default function SideHustleCalculator() {
 
             {/* Tips */}
             <Alert variant="warning" title="Remember:">
-              Don't forget hidden costs like shipping supplies, transaction fees (2-3%), returns, and your time spent on admin tasks. Consider if this side hustle could scale or is trading time for money.
+              Don't forget hidden costs like shipping supplies, transaction fees (2-3%), returns,
+              and your time spent on admin tasks. Consider if this side hustle could scale or is
+              trading time for money.
             </Alert>
 
             {/* Share Results */}

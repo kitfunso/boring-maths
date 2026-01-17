@@ -11,15 +11,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import UnitConverter from '../../components/calculators/UnitConverter/UnitConverter';
 
 const title = 'Unit Converter | Metric to Imperial & More | Free Online Tool';
-const description = 'Free unit converter for length, weight, temperature, volume, area, and speed. Convert cm to inches, kg to lbs, Celsius to Fahrenheit, and more instantly.';
-const keywords = 'unit converter, cm to inches, kg to lbs, celsius to fahrenheit, metric to imperial, length converter, weight converter, temperature converter, mm to inches, feet to meters, liters to gallons';
+const description =
+  'Free unit converter for length, weight, temperature, volume, area, and speed. Convert cm to inches, kg to lbs, Celsius to Fahrenheit, and more instantly.';
+const keywords =
+  'unit converter, cm to inches, kg to lbs, celsius to fahrenheit, metric to imperial, length converter, weight converter, temperature converter, mm to inches, feet to meters, liters to gallons';
 const canonicalURL = '/calculators/unit-converter';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Unit Converter' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Unit Converter' }];
 
 const relatedCalculators = [
   {
@@ -40,32 +39,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How do I convert Celsius to Fahrenheit?",
-    answer: "To convert Celsius to Fahrenheit, multiply by 9/5 (or 1.8) and add 32. The formula is: °F = (°C × 9/5) + 32. For example, 20°C = (20 × 1.8) + 32 = 68°F."
+    question: 'How do I convert Celsius to Fahrenheit?',
+    answer:
+      'To convert Celsius to Fahrenheit, multiply by 9/5 (or 1.8) and add 32. The formula is: °F = (°C × 9/5) + 32. For example, 20°C = (20 × 1.8) + 32 = 68°F.',
   },
   {
-    question: "How many feet are in a meter?",
-    answer: "One meter equals approximately 3.281 feet. To convert meters to feet, multiply by 3.281. To convert feet to meters, multiply by 0.3048."
+    question: 'How many feet are in a meter?',
+    answer:
+      'One meter equals approximately 3.281 feet. To convert meters to feet, multiply by 3.281. To convert feet to meters, multiply by 0.3048.',
   },
   {
-    question: "How do I convert pounds to kilograms?",
-    answer: "To convert pounds to kilograms, multiply by 0.4536. For example, 150 pounds = 150 × 0.4536 = 68 kg. To convert kg to pounds, multiply by 2.205."
+    question: 'How do I convert pounds to kilograms?',
+    answer:
+      'To convert pounds to kilograms, multiply by 0.4536. For example, 150 pounds = 150 × 0.4536 = 68 kg. To convert kg to pounds, multiply by 2.205.',
   },
   {
     question: "What's the difference between US and UK gallons?",
-    answer: "US gallons and UK (Imperial) gallons are different sizes. 1 US gallon = 3.785 liters, while 1 UK gallon = 4.546 liters. This converter uses US gallons."
+    answer:
+      'US gallons and UK (Imperial) gallons are different sizes. 1 US gallon = 3.785 liters, while 1 UK gallon = 4.546 liters. This converter uses US gallons.',
   },
   {
-    question: "How many centimeters are in an inch?",
-    answer: "One inch equals exactly 2.54 centimeters. To convert inches to cm, multiply by 2.54. To convert cm to inches, divide by 2.54 (or multiply by 0.3937)."
+    question: 'How many centimeters are in an inch?',
+    answer:
+      'One inch equals exactly 2.54 centimeters. To convert inches to cm, multiply by 2.54. To convert cm to inches, divide by 2.54 (or multiply by 0.3937).',
   },
   {
-    question: "How do I convert miles to kilometers?",
-    answer: "Multiply miles by 1.609 to get kilometers. For example, 10 miles = 16.09 km. To convert km to miles, multiply by 0.621. A quick estimate: km is roughly 60% of miles."
+    question: 'How do I convert miles to kilometers?',
+    answer:
+      'Multiply miles by 1.609 to get kilometers. For example, 10 miles = 16.09 km. To convert km to miles, multiply by 0.621. A quick estimate: km is roughly 60% of miles.',
   },
   {
-    question: "What is absolute zero in Fahrenheit and Celsius?",
-    answer: "Absolute zero is the coldest possible temperature where all molecular motion stops. It equals -273.15°C or -459.67°F (0 Kelvin). Nothing can be colder than absolute zero."
+    question: 'What is absolute zero in Fahrenheit and Celsius?',
+    answer:
+      'Absolute zero is the coldest possible temperature where all molecular motion stops. It equals -273.15°C or -459.67°F (0 Kelvin). Nothing can be colder than absolute zero.',
   },
 ];
 
@@ -103,27 +109,27 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Converter">
     <p>
-      Select a <strong>category</strong> - length, weight, temperature, volume,
-      area, or speed. Each category has different units available.
+      Select a <strong>category</strong> - length, weight, temperature, volume, area, or speed. Each category
+      has different units available.
     </p>
     <p>
-      Enter the <strong>value</strong> you want to convert. The converter accepts
-      decimal numbers and will show results with appropriate precision.
+      Enter the <strong>value</strong> you want to convert. The converter accepts decimal numbers and
+      will show results with appropriate precision.
     </p>
     <p>
-      Choose your <strong>from</strong> and <strong>to</strong> units. Use the
-      swap button to quickly reverse the conversion direction.
+      Choose your <strong>from</strong> and <strong>to</strong> units. Use the swap button to quickly
+      reverse the conversion direction.
     </p>
     <p>
-      View <strong>all conversions</strong> at once to see how your value translates
-      across all available units in that category.
+      View <strong>all conversions</strong> at once to see how your value translates across all available
+      units in that category.
     </p>
   </ContentSection>
 
   <ContentSection title="Supported Units">
     <p>
-      <strong>Length:</strong> millimeters, centimeters, meters, kilometers,
-      inches, feet, yards, and miles.
+      <strong>Length:</strong> millimeters, centimeters, meters, kilometers, inches, feet, yards, and
+      miles.
     </p>
     <p>
       <strong>Weight:</strong> milligrams, grams, kilograms, ounces, pounds, and stone.
@@ -132,12 +138,10 @@ const schemaBreadcrumbs = [
       <strong>Temperature:</strong> Celsius, Fahrenheit, and Kelvin.
     </p>
     <p>
-      <strong>Volume:</strong> milliliters, liters, gallons, quarts, pints,
-      cups, and fluid ounces.
+      <strong>Volume:</strong> milliliters, liters, gallons, quarts, pints, cups, and fluid ounces.
     </p>
     <p>
-      <strong>Area:</strong> square meters, square kilometers, square feet,
-      square yards, acres, and hectares.
+      <strong>Area:</strong> square meters, square kilometers, square feet, square yards, acres, and hectares.
     </p>
     <p>
       <strong>Speed:</strong> meters/second, kilometers/hour, miles/hour, and knots.

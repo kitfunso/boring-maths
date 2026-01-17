@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { MashWaterCalculator } from '../../components/calculators/MashWaterCalculator';
 
 const title = 'Mash Water Calculator | Strike Water Temperature Calculator';
-const description = 'Free mash water calculator for all-grain brewing. Calculate strike water temperature, sparge volumes, and total water needed. Supports batch and fly sparging.';
-const keywords = 'mash water calculator, strike water, sparge water, all grain brewing, homebrewing, mash temperature, brewing calculator, batch sparge';
+const description =
+  'Free mash water calculator for all-grain brewing. Calculate strike water temperature, sparge volumes, and total water needed. Supports batch and fly sparging.';
+const keywords =
+  'mash water calculator, strike water, sparge water, all grain brewing, homebrewing, mash temperature, brewing calculator, batch sparge';
 const canonicalURL = '/calculators/mash-water-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "Why is my mash temperature different than expected?",
-    answer: "Several factors affect final mash temp: grain temperature (cold grain from storage lowers temp more), mash tun pre-heating (or lack of), water temp measurement accuracy, and thermal mass of equipment. Always verify mash temp after mixing and adjust with hot/cold water if needed."
+    question: 'Why is my mash temperature different than expected?',
+    answer:
+      'Several factors affect final mash temp: grain temperature (cold grain from storage lowers temp more), mash tun pre-heating (or lack of), water temp measurement accuracy, and thermal mass of equipment. Always verify mash temp after mixing and adjust with hot/cold water if needed.',
   },
   {
-    question: "What mash thickness should I use?",
-    answer: "Standard mash thickness is 1.25-1.5 qt/lb. Thinner mashes (1.5-2 qt/lb) improve enzyme activity and extraction but may need larger vessels. Thicker mashes (1-1.25 qt/lb) retain heat better and may improve body. BIAB typically uses 2+ qt/lb."
+    question: 'What mash thickness should I use?',
+    answer:
+      'Standard mash thickness is 1.25-1.5 qt/lb. Thinner mashes (1.5-2 qt/lb) improve enzyme activity and extraction but may need larger vessels. Thicker mashes (1-1.25 qt/lb) retain heat better and may improve body. BIAB typically uses 2+ qt/lb.',
   },
   {
-    question: "Should I batch sparge or fly sparge?",
-    answer: "Batch sparging is simpler, faster, and nearly as efficient (85-90% vs 90-95% for fly). It requires less equipment and is more forgiving. Fly sparging extracts slightly more sugar but takes longer and requires careful flow rate control to prevent channeling and tannin extraction."
+    question: 'Should I batch sparge or fly sparge?',
+    answer:
+      'Batch sparging is simpler, faster, and nearly as efficient (85-90% vs 90-95% for fly). It requires less equipment and is more forgiving. Fly sparging extracts slightly more sugar but takes longer and requires careful flow rate control to prevent channeling and tannin extraction.',
   },
   {
-    question: "What temperature should sparge water be?",
-    answer: "Heat sparge water to 168-170°F (75-77°C). This helps extract remaining sugars and improves flow. Avoid exceeding 175°F (80°C) which can extract harsh tannins from grain husks. The grain bed will cool the water as it flows through."
+    question: 'What temperature should sparge water be?',
+    answer:
+      'Heat sparge water to 168-170°F (75-77°C). This helps extract remaining sugars and improves flow. Avoid exceeding 175°F (80°C) which can extract harsh tannins from grain husks. The grain bed will cool the water as it flows through.',
   },
   {
-    question: "How much water do grains absorb?",
-    answer: "Standard absorption is about 0.125 gallons (0.5L) per pound of grain. Fine crush absorbs less (~0.1 gal/lb), coarse crush absorbs more. BIAB with squeezing reduces absorption to 0.08-0.1 gal/lb. This calculator accounts for absorption in volume calculations."
+    question: 'How much water do grains absorb?',
+    answer:
+      'Standard absorption is about 0.125 gallons (0.5L) per pound of grain. Fine crush absorbs less (~0.1 gal/lb), coarse crush absorbs more. BIAB with squeezing reduces absorption to 0.08-0.1 gal/lb. This calculator accounts for absorption in volume calculations.',
   },
   {
     question: "What's the strike water temperature formula?",
-    answer: "Strike Temp = (0.2/R) × (T2 - T1) + T2, where R is water:grain ratio (qt/lb), T1 is grain temp, T2 is target mash temp. The 0.2 represents the thermal mass ratio of grain to water. This calculator uses this formula."
+    answer:
+      'Strike Temp = (0.2/R) × (T2 - T1) + T2, where R is water:grain ratio (qt/lb), T1 is grain temp, T2 is target mash temp. The 0.2 represents the thermal mass ratio of grain to water. This calculator uses this formula.',
   },
 ];
 
@@ -100,33 +108,32 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Mash Temperature Guide">
     <p>
-      Mash temperature determines the fermentability of your wort. Lower temps
-      produce more fermentable sugars (drier beer), higher temps produce more
-      unfermentable sugars (fuller body, sweeter beer).
+      Mash temperature determines the fermentability of your wort. Lower temps produce more
+      fermentable sugars (drier beer), higher temps produce more unfermentable sugars (fuller body,
+      sweeter beer).
     </p>
     <div class="grid md:grid-cols-3 gap-4 mt-4">
       <div class="bg-blue-900/20 rounded-lg p-4">
         <h4 class="font-semibold text-blue-400 mb-2">Beta Amylase Rest</h4>
         <div class="text-xl font-bold text-blue-300">145-150°F</div>
         <div class="text-sm text-[var(--color-subtle)] mt-2">
-          Produces fermentable sugars. Results in drier, more attenuated beer.
-          Good for session beers, lagers.
+          Produces fermentable sugars. Results in drier, more attenuated beer. Good for session
+          beers, lagers.
         </div>
       </div>
       <div class="bg-amber-900/20 rounded-lg p-4">
         <h4 class="font-semibold text-amber-400 mb-2">Balanced Range</h4>
         <div class="text-xl font-bold text-amber-300">150-156°F</div>
         <div class="text-sm text-[var(--color-subtle)] mt-2">
-          Both enzymes active. Moderate body and fermentability.
-          Most common range for ales.
+          Both enzymes active. Moderate body and fermentability. Most common range for ales.
         </div>
       </div>
       <div class="bg-red-900/20 rounded-lg p-4">
         <h4 class="font-semibold text-red-400 mb-2">Alpha Amylase Rest</h4>
         <div class="text-xl font-bold text-red-300">156-162°F</div>
         <div class="text-sm text-[var(--color-subtle)] mt-2">
-          Produces unfermentable dextrins. Fuller body, sweeter finish.
-          Good for stouts, Scotch ales.
+          Produces unfermentable dextrins. Fuller body, sweeter finish. Good for stouts, Scotch
+          ales.
         </div>
       </div>
     </div>

@@ -37,7 +37,8 @@ export function calculate401k(inputs: Calculator401kInputs): Calculator401kResul
 
     // Employer matches up to the limit
     const matchablePercent = Math.min(contributionPercent, employerMatchLimit);
-    const employerAnnualContribution = currentSalary * (matchablePercent / 100) * (employerMatchPercent / 100);
+    const employerAnnualContribution =
+      currentSalary * (matchablePercent / 100) * (employerMatchPercent / 100);
 
     // Apply 401k annual limit (2024: $23,000, catch-up $7,500 for 50+)
     const annualLimit = age >= 50 ? 30500 : 23000;
@@ -62,10 +63,11 @@ export function calculate401k(inputs: Calculator401kInputs): Calculator401kResul
     });
 
     // Apply salary growth for next year
-    currentSalary *= (1 + salaryGrowth / 100);
+    currentSalary *= 1 + salaryGrowth / 100;
   }
 
-  const investmentGrowth = balance - currentBalance - totalYourContributions - totalEmployerContributions;
+  const investmentGrowth =
+    balance - currentBalance - totalYourContributions - totalEmployerContributions;
 
   // 4% safe withdrawal rate
   const monthlyIncomeAt4Percent = (balance * 0.04) / 12;

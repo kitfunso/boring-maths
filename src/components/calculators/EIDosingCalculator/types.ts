@@ -49,7 +49,7 @@ export const DOSING_SCHEDULES = [
     po4: 3,
     k: 30,
     fe: 0.5,
-    description: 'For high-light, CO2-injected tanks'
+    description: 'For high-light, CO2-injected tanks',
   },
   {
     value: 'ei-low-light',
@@ -58,7 +58,7 @@ export const DOSING_SCHEDULES = [
     po4: 1.5,
     k: 15,
     fe: 0.25,
-    description: 'For low-light or non-CO2 tanks'
+    description: 'For low-light or non-CO2 tanks',
   },
   {
     value: 'pps-pro',
@@ -67,7 +67,7 @@ export const DOSING_SCHEDULES = [
     po4: 1,
     k: 10,
     fe: 0.2,
-    description: 'Perpetual Preservation System - lean dosing'
+    description: 'Perpetual Preservation System - lean dosing',
   },
   {
     value: 'custom',
@@ -76,7 +76,7 @@ export const DOSING_SCHEDULES = [
     po4: 2,
     k: 20,
     fe: 0.3,
-    description: 'Set your own ppm targets'
+    description: 'Set your own ppm targets',
   },
 ];
 

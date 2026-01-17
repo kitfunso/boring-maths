@@ -98,7 +98,9 @@ export default function BBQCalculator() {
                   value={inputs.childrenCount}
                   onChange={(e) => updateInput('childrenCount', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Kids eat about half portions</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Kids eat about half portions
+                </p>
               </div>
             </Grid>
 
@@ -195,7 +197,10 @@ export default function BBQCalculator() {
               </h3>
               <div className="space-y-3">
                 {result.meatBreakdown.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between py-2 border-b border-red-200 last:border-0">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-2 border-b border-red-200 last:border-0"
+                  >
                     <span className="text-red-800">{item.type}</span>
                     <div className="text-right">
                       <span className="font-bold text-red-700">{formatPounds(item.pounds)}</span>
@@ -261,14 +266,14 @@ export default function BBQCalculator() {
             {/* Tips */}
             <Alert variant="tip" title="Grill master tip:">
               Buy 10% extra meat to account for trimming and hungry guests coming back for seconds.
-              Start grilling larger cuts (ribs, whole chickens) first, as they take longer. Keep cooked meat
-              warm in a 200°F oven or covered on the cool side of the grill.
+              Start grilling larger cuts (ribs, whole chickens) first, as they take longer. Keep
+              cooked meat warm in a 200°F oven or covered on the cool side of the grill.
             </Alert>
 
             {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
-                result={`BBQ for ${inputs.guestCount} guests: ${formatPounds(result.totalMeatPounds)} of meat needed (${result.meatBreakdown.map(m => `${m.type}: ${formatPounds(m.pounds)}`).join(', ')})`}
+                result={`BBQ for ${inputs.guestCount} guests: ${formatPounds(result.totalMeatPounds)} of meat needed (${result.meatBreakdown.map((m) => `${m.type}: ${formatPounds(m.pounds)}`).join(', ')})`}
                 calculatorName="BBQ Calculator"
               />
             </div>

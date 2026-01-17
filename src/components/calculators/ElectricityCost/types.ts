@@ -118,7 +118,7 @@ export const APPLIANCE_PRESETS: AppliancePreset[] = [
  */
 const AVERAGE_RATES: Record<Currency, number> = {
   USD: 0.15,
-  GBP: 0.30,
+  GBP: 0.3,
   EUR: 0.25,
 };
 

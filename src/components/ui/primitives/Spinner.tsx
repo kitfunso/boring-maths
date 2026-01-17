@@ -32,12 +32,7 @@ const SIZES = {
  * <Spinner variant="bars" />
  * ```
  */
-export function Spinner({
-  size = 'md',
-  variant = 'ring',
-  color,
-  className = '',
-}: SpinnerProps) {
+export function Spinner({ size = 'md', variant = 'ring', color, className = '' }: SpinnerProps) {
   const sizeConfig = SIZES[size];
   const colorStyle = color ? { color } : undefined;
 

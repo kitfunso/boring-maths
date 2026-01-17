@@ -3,7 +3,13 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateSalary, calculateAllCountries, formatCurrency, formatPercent, getCountryByCode } from './calculations';
+import {
+  calculateSalary,
+  calculateAllCountries,
+  formatCurrency,
+  formatPercent,
+  getCountryByCode,
+} from './calculations';
 import { EU_TAX_DATA, getDefaultInputs, type SalaryInputs } from './types';
 import {
   ThemeProvider,
@@ -23,7 +29,10 @@ export default function EUSalaryCalculator() {
   const [inputs, setInputs] = useState<SalaryInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateSalary(inputs), [inputs]);
-  const allCountries = useMemo(() => calculateAllCountries(inputs.grossSalary), [inputs.grossSalary]);
+  const allCountries = useMemo(
+    () => calculateAllCountries(inputs.grossSalary),
+    [inputs.grossSalary]
+  );
 
   const updateInput = <K extends keyof SalaryInputs>(field: K, value: SalaryInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
@@ -68,10 +77,17 @@ export default function EUSalaryCalculator() {
               <Input
                 id="grossSalary"
                 variant="currency"
-                currencySymbol={selectedCountry.currency === 'EUR' ? '€' :
-                              selectedCountry.currency === 'PLN' ? 'zł' :
-                              selectedCountry.currency === 'SEK' ? 'kr' :
-                              selectedCountry.currency === 'DKK' ? 'kr' : '€'}
+                currencySymbol={
+                  selectedCountry.currency === 'EUR'
+                    ? '€'
+                    : selectedCountry.currency === 'PLN'
+                      ? 'zł'
+                      : selectedCountry.currency === 'SEK'
+                        ? 'kr'
+                        : selectedCountry.currency === 'DKK'
+                          ? 'kr'
+                          : '€'
+                }
                 type="number"
                 min={0}
                 step={1000}
@@ -89,9 +105,7 @@ export default function EUSalaryCalculator() {
               label="Annual Net Salary"
               value={formatCurrency(result.netSalary, result.country.currency)}
               subtitle={`${formatPercent(result.effectiveTaxRate)} effective tax rate`}
-              footer={
-                <>Monthly: {formatCurrency(result.monthlyNet, result.country.currency)}</>
-              }
+              footer={<>Monthly: {formatCurrency(result.monthlyNet, result.country.currency)}</>}
             />
 
             {/* Breakdown */}
@@ -130,7 +144,9 @@ export default function EUSalaryCalculator() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Net Salary</span>
-                    <span className="text-green-400">{formatPercent(100 - result.effectiveTaxRate)}</span>
+                    <span className="text-green-400">
+                      {formatPercent(100 - result.effectiveTaxRate)}
+                    </span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                     <div
@@ -142,7 +158,9 @@ export default function EUSalaryCalculator() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Income Tax</span>
-                    <span className="text-red-400">{formatPercent((result.incomeTax / result.grossSalary) * 100)}</span>
+                    <span className="text-red-400">
+                      {formatPercent((result.incomeTax / result.grossSalary) * 100)}
+                    </span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                     <div
@@ -154,7 +172,9 @@ export default function EUSalaryCalculator() {
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Social Security</span>
-                    <span className="text-amber-400">{formatPercent((result.socialSecurity / result.grossSalary) * 100)}</span>
+                    <span className="text-amber-400">
+                      {formatPercent((result.socialSecurity / result.grossSalary) * 100)}
+                    </span>
                   </div>
                   <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                     <div
@@ -172,7 +192,8 @@ export default function EUSalaryCalculator() {
                 Compare Across EU Countries
               </h3>
               <p className="text-sm text-[var(--color-muted)] mb-4">
-                Same gross salary ({formatCurrency(inputs.grossSalary, 'EUR')}) in different countries (EUR equivalent shown):
+                Same gross salary ({formatCurrency(inputs.grossSalary, 'EUR')}) in different
+                countries (EUR equivalent shown):
               </p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -185,36 +206,40 @@ export default function EUSalaryCalculator() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5">
-                    {allCountries.filter(r => r.country.currency === 'EUR').map((r) => {
-                      const isSelected = r.country.code === inputs.countryCode;
-                      return (
-                        <tr key={r.country.code} className={isSelected ? 'bg-violet-900/30' : ''}>
-                          <td className="py-2 font-medium">{r.country.name}</td>
-                          <td className="text-right py-2 tabular-nums text-green-400">
-                            {formatCurrency(r.netSalary, r.country.currency)}
-                          </td>
-                          <td className="text-right py-2 tabular-nums text-red-400">
-                            {formatPercent(r.effectiveTaxRate)}
-                          </td>
-                          <td className="text-right py-2 tabular-nums">
-                            {formatCurrency(r.monthlyNet, r.country.currency)}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {allCountries
+                      .filter((r) => r.country.currency === 'EUR')
+                      .map((r) => {
+                        const isSelected = r.country.code === inputs.countryCode;
+                        return (
+                          <tr key={r.country.code} className={isSelected ? 'bg-violet-900/30' : ''}>
+                            <td className="py-2 font-medium">{r.country.name}</td>
+                            <td className="text-right py-2 tabular-nums text-green-400">
+                              {formatCurrency(r.netSalary, r.country.currency)}
+                            </td>
+                            <td className="text-right py-2 tabular-nums text-red-400">
+                              {formatPercent(r.effectiveTaxRate)}
+                            </td>
+                            <td className="text-right py-2 tabular-nums">
+                              {formatCurrency(r.monthlyNet, r.country.currency)}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-3">
-                * Showing Eurozone countries only. Calculations are simplified estimates and may not reflect all deductions.
+                * Showing Eurozone countries only. Calculations are simplified estimates and may not
+                reflect all deductions.
               </p>
             </div>
 
             {/* Tips */}
             <Alert variant="tip" title="Important Notes:">
-              These calculations are simplified estimates for comparison purposes. Actual take-home pay depends on
-              many factors including marital status, children, local taxes, specific deductions, and employer benefits.
-              Always consult a local tax advisor for accurate calculations.
+              These calculations are simplified estimates for comparison purposes. Actual take-home
+              pay depends on many factors including marital status, children, local taxes, specific
+              deductions, and employer benefits. Always consult a local tax advisor for accurate
+              calculations.
             </Alert>
 
             {/* Share */}

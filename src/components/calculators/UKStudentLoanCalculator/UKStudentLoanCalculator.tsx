@@ -2,15 +2,7 @@ import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateStudentLoan, formatCurrency } from './calculations';
 import { getDefaultInputs, LOAN_PLANS, type UKStudentLoanInputs, type LoanPlan } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  ButtonGroup,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 const loanPlanOptions = Object.entries(LOAN_PLANS).map(([key, plan]) => ({
@@ -56,9 +48,7 @@ export default function UKStudentLoanCalculator() {
                 value={inputs.loanPlan}
                 onChange={(value) => updateInput('loanPlan', value)}
               />
-              <p className="text-xs text-[var(--color-muted)] mt-2">
-                {currentPlan.description}
-              </p>
+              <p className="text-xs text-[var(--color-muted)] mt-2">{currentPlan.description}</p>
             </div>
 
             {/* Current Loan Balance */}
@@ -108,9 +98,7 @@ export default function UKStudentLoanCalculator() {
 
             {/* Salary Growth */}
             <div>
-              <Label htmlFor="salaryGrowth">
-                Expected Annual Salary Growth
-              </Label>
+              <Label htmlFor="salaryGrowth">Expected Annual Salary Growth</Label>
               <div className="relative">
                 <Input
                   id="salaryGrowth"
@@ -168,14 +156,25 @@ export default function UKStudentLoanCalculator() {
             {result.willRepayInFull ? (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-emerald-400 font-medium">You'll Repay in Full</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      Based on your salary trajectory, you'll clear your loan in {result.yearsToRepay} years,
-                      paying {formatCurrency(result.totalRepaid)} in total (including {formatCurrency(result.totalInterest)} interest).
+                      Based on your salary trajectory, you'll clear your loan in{' '}
+                      {result.yearsToRepay} years, paying {formatCurrency(result.totalRepaid)} in
+                      total (including {formatCurrency(result.totalInterest)} interest).
                     </p>
                   </div>
                 </div>
@@ -183,14 +182,25 @@ export default function UKStudentLoanCalculator() {
             ) : (
               <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <div>
                     <p className="text-amber-400 font-medium">Loan Will Be Written Off</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      Your remaining balance of {formatCurrency(result.amountWrittenOff)} will be written off
-                      in {result.writeOffDate}. You'll pay {formatCurrency(result.totalRepaid)} over {result.yearsToRepay} years.
+                      Your remaining balance of {formatCurrency(result.amountWrittenOff)} will be
+                      written off in {result.writeOffDate}. You'll pay{' '}
+                      {formatCurrency(result.totalRepaid)} over {result.yearsToRepay} years.
                     </p>
                   </div>
                 </div>
@@ -201,14 +211,25 @@ export default function UKStudentLoanCalculator() {
             {result.totalInterest > result.totalRepaid * 0.5 && (
               <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/30">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  <svg
+                    className="w-5 h-5 text-red-400 mt-0.5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
                   </svg>
                   <div>
                     <p className="text-red-400 font-medium">High Interest Warning</p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      Interest ({formatCurrency(result.totalInterest)}) makes up a significant portion of
-                      your total repayments. Consider whether voluntary overpayments might save you money.
+                      Interest ({formatCurrency(result.totalInterest)}) makes up a significant
+                      portion of your total repayments. Consider whether voluntary overpayments
+                      might save you money.
                     </p>
                   </div>
                 </div>
@@ -233,7 +254,10 @@ export default function UKStudentLoanCalculator() {
                   </thead>
                   <tbody>
                     {result.yearlyBreakdown.map((row) => (
-                      <tr key={row.year} className="border-b border-white/5 text-[var(--color-subtle)]">
+                      <tr
+                        key={row.year}
+                        className="border-b border-white/5 text-[var(--color-subtle)]"
+                      >
                         <td className="py-2 pr-4 text-[var(--color-cream)]">{row.year}</td>
                         <td className="text-right py-2 px-2">{formatCurrency(row.salary)}</td>
                         <td className="text-right py-2 px-2 text-emerald-400">
@@ -260,19 +284,27 @@ export default function UKStudentLoanCalculator() {
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
                   <span>Repayment threshold</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(currentPlan.threshold)}/year</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(currentPlan.threshold)}/year
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Repayment rate</span>
-                  <span className="text-[var(--color-cream)]">{currentPlan.rate * 100}% of income over threshold</span>
+                  <span className="text-[var(--color-cream)]">
+                    {currentPlan.rate * 100}% of income over threshold
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Interest rate</span>
-                  <span className="text-[var(--color-cream)]">{(currentPlan.interestRate * 100).toFixed(2)}%</span>
+                  <span className="text-[var(--color-cream)]">
+                    {(currentPlan.interestRate * 100).toFixed(2)}%
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Write-off period</span>
-                  <span className="text-[var(--color-cream)]">{currentPlan.writeOffYears} years</span>
+                  <span className="text-[var(--color-cream)]">
+                    {currentPlan.writeOffYears} years
+                  </span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,10 @@
 import type { InputHTMLAttributes } from 'react';
 import { useTheme } from '../theme/ThemeContext';
 
-export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange' | 'value'> {
+export interface SliderProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'onChange' | 'value'
+> {
   /** Current value */
   value: number;
   /** Change handler */

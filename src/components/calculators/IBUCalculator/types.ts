@@ -29,7 +29,12 @@ export interface IBUResults {
 }
 
 // Common hop varieties with typical alpha acid ranges
-export const HOP_VARIETIES: { name: string; alphaMin: number; alphaMax: number; profile: string }[] = [
+export const HOP_VARIETIES: {
+  name: string;
+  alphaMin: number;
+  alphaMax: number;
+  profile: string;
+}[] = [
   { name: 'Cascade', alphaMin: 4.5, alphaMax: 7, profile: 'Citrus, floral, grapefruit' },
   { name: 'Centennial', alphaMin: 9, alphaMax: 11.5, profile: 'Citrus, floral, balanced' },
   { name: 'Chinook', alphaMin: 12, alphaMax: 14, profile: 'Pine, spice, grapefruit' },

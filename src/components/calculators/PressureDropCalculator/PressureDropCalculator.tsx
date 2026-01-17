@@ -50,12 +50,12 @@ export default function PressureDropCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        diameter: Math.round(prev.diameter / 25.4 * 100) / 100,
-        length: Math.round(prev.length / 0.3048 * 10) / 10,
-        velocity: Math.round(prev.velocity / 0.3048 * 100) / 100,
-        density: Math.round(prev.density / 16.0185 * 100) / 100,
-        viscosity: Math.round(prev.viscosity / 1.488 * 100000) / 100000,
-        roughness: Math.round(prev.roughness / 0.0254 * 100) / 100, // mm to mils
+        diameter: Math.round((prev.diameter / 25.4) * 100) / 100,
+        length: Math.round((prev.length / 0.3048) * 10) / 10,
+        velocity: Math.round((prev.velocity / 0.3048) * 100) / 100,
+        density: Math.round((prev.density / 16.0185) * 100) / 100,
+        viscosity: Math.round((prev.viscosity / 1.488) * 100000) / 100000,
+        roughness: Math.round((prev.roughness / 0.0254) * 100) / 100, // mm to mils
       }));
     } else {
       setInputs((prev) => ({
@@ -73,9 +73,7 @@ export default function PressureDropCalculator() {
 
   const handleMaterialChange = (material: PipeMaterial) => {
     const roughness = getRoughness(material);
-    const displayRoughness = inputs.unitSystem === 'metric'
-      ? roughness
-      : roughness / 0.0254; // mm to mils
+    const displayRoughness = inputs.unitSystem === 'metric' ? roughness : roughness / 0.0254; // mm to mils
 
     setInputs((prev) => ({
       ...prev,
@@ -96,8 +94,8 @@ export default function PressureDropCalculator() {
       } else {
         setInputs((prev) => ({
           ...prev,
-          density: Math.round(fluid.density / 16.0185 * 100) / 100,
-          viscosity: Math.round(fluid.viscosity / 1.488 * 100000) / 100000,
+          density: Math.round((fluid.density / 16.0185) * 100) / 100,
+          viscosity: Math.round((fluid.viscosity / 1.488) * 100000) / 100000,
         }));
       }
     }
@@ -129,10 +127,14 @@ export default function PressureDropCalculator() {
 
   const getRegimeColor = (regime: string) => {
     switch (regime) {
-      case 'Laminar': return 'text-green-400';
-      case 'Transitional': return 'text-yellow-400';
-      case 'Turbulent': return 'text-red-400';
-      default: return 'text-[var(--color-cream)]';
+      case 'Laminar':
+        return 'text-green-400';
+      case 'Transitional':
+        return 'text-yellow-400';
+      case 'Turbulent':
+        return 'text-red-400';
+      default:
+        return 'text-[var(--color-cream)]';
     }
   };
 
@@ -205,9 +207,7 @@ export default function PressureDropCalculator() {
                 />
               </div>
               <div>
-                <Label htmlFor="roughness">
-                  Roughness ({roughnessUnit})
-                </Label>
+                <Label htmlFor="roughness">Roughness ({roughnessUnit})</Label>
                 <Input
                   id="roughness"
                   type="number"
@@ -312,7 +312,9 @@ export default function PressureDropCalculator() {
                 </div>
                 <div className="text-center p-3 rounded-lg">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Flow Regime</p>
-                  <p className={`font-bold tabular-nums text-lg ${getRegimeColor(result.flowRegime)}`}>
+                  <p
+                    className={`font-bold tabular-nums text-lg ${getRegimeColor(result.flowRegime)}`}
+                  >
                     {result.flowRegime}
                   </p>
                 </div>
@@ -365,9 +367,8 @@ export default function PressureDropCalculator() {
             </div>
 
             <Alert variant="tip" title="Friction factor method:">
-              Uses Colebrook-White equation (iterative) for turbulent flow (Re &gt; 4000)
-              and f = 64/Re for laminar flow (Re &lt; 2300). Transitional region uses
-              turbulent correlation.
+              Uses Colebrook-White equation (iterative) for turbulent flow (Re &gt; 4000) and f =
+              64/Re for laminar flow (Re &lt; 2300). Transitional region uses turbulent correlation.
             </Alert>
 
             {/* Share Results */}

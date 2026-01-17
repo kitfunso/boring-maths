@@ -32,11 +32,11 @@ export function calculateEIDosing(inputs: EIDosingInputs): EIDosingResults {
   }
 
   // Get target ppms from schedule or custom
-  const schedule = DOSING_SCHEDULES.find(s => s.value === inputs.dosingSched);
-  const no3Target = inputs.dosingSched === 'custom' ? inputs.nitrateTarget : (schedule?.no3 || 20);
-  const po4Target = inputs.dosingSched === 'custom' ? inputs.phosphateTarget : (schedule?.po4 || 2);
-  const kTarget = inputs.dosingSched === 'custom' ? inputs.potassiumTarget : (schedule?.k || 20);
-  const feTarget = inputs.dosingSched === 'custom' ? inputs.ironTarget : (schedule?.fe || 0.3);
+  const schedule = DOSING_SCHEDULES.find((s) => s.value === inputs.dosingSched);
+  const no3Target = inputs.dosingSched === 'custom' ? inputs.nitrateTarget : schedule?.no3 || 20;
+  const po4Target = inputs.dosingSched === 'custom' ? inputs.phosphateTarget : schedule?.po4 || 2;
+  const kTarget = inputs.dosingSched === 'custom' ? inputs.potassiumTarget : schedule?.k || 20;
+  const feTarget = inputs.dosingSched === 'custom' ? inputs.ironTarget : schedule?.fe || 0.3;
 
   // Calculate weekly amounts needed
   // KNO3 for nitrate (also contributes K)
@@ -71,7 +71,8 @@ export function calculateEIDosing(inputs: EIDosingInputs): EIDosingResults {
   // Calculate actual ppm achieved
   const nitrateAchieved = ppmFromGrams(kno3Weekly, liters, FERTILIZERS.kno3.no3Percent);
   const phosphateAchieved = ppmFromGrams(kh2po4Weekly, liters, FERTILIZERS.kh2po4.po4Percent);
-  const potassiumAchieved = kFromKno3 + kFromKh2po4 + ppmFromGrams(k2so4Weekly, liters, FERTILIZERS.k2so4.kPercent);
+  const potassiumAchieved =
+    kFromKno3 + kFromKh2po4 + ppmFromGrams(k2so4Weekly, liters, FERTILIZERS.k2so4.kPercent);
   const ironAchieved = ppmFromGrams(csmBWeekly, liters, FERTILIZERS.csmB.fePercent);
 
   // Determine display unit

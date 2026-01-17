@@ -35,10 +35,7 @@ export default function ReynoldsNumberCalculator() {
     return calculateReynolds(inputs);
   }, [inputs]);
 
-  const updateInput = <K extends keyof ReynoldsInputs>(
-    field: K,
-    value: ReynoldsInputs[K]
-  ) => {
+  const updateInput = <K extends keyof ReynoldsInputs>(field: K, value: ReynoldsInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -50,9 +47,9 @@ export default function ReynoldsNumberCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        diameter: Math.round(prev.diameter / 25.4 * 10) / 10, // mm to inches
-        velocity: Math.round(prev.velocity / 0.3048 * 10) / 10, // m/s to ft/s
-        temperature: Math.round(prev.temperature * 9 / 5 + 32), // °C to °F
+        diameter: Math.round((prev.diameter / 25.4) * 10) / 10, // mm to inches
+        velocity: Math.round((prev.velocity / 0.3048) * 10) / 10, // m/s to ft/s
+        temperature: Math.round((prev.temperature * 9) / 5 + 32), // °C to °F
       }));
     } else {
       // Convert from imperial to metric
@@ -61,7 +58,7 @@ export default function ReynoldsNumberCalculator() {
         unitSystem: 'metric',
         diameter: Math.round(prev.diameter * 25.4), // inches to mm
         velocity: Math.round(prev.velocity * 0.3048 * 10) / 10, // ft/s to m/s
-        temperature: Math.round((prev.temperature - 32) * 5 / 9), // °F to °C
+        temperature: Math.round(((prev.temperature - 32) * 5) / 9), // °F to °C
       }));
     }
   };
@@ -167,9 +164,7 @@ export default function ReynoldsNumberCalculator() {
 
             {/* Temperature */}
             <div>
-              <Label htmlFor="temperature">
-                Fluid Temperature ({tempUnit})
-              </Label>
+              <Label htmlFor="temperature">Fluid Temperature ({tempUnit})</Label>
               <Input
                 id="temperature"
                 type="number"
@@ -209,19 +204,17 @@ export default function ReynoldsNumberCalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* Reynolds Number */}
-            <div className={`rounded-2xl p-8 text-center border-2 ${getRegimeStyles(result.flowRegime.color)}`}>
+            <div
+              className={`rounded-2xl p-8 text-center border-2 ${getRegimeStyles(result.flowRegime.color)}`}
+            >
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Reynolds Number
               </p>
               <p className="text-5xl md:text-6xl font-bold tabular-nums mb-3">
                 {formatNumber(result.reynoldsNumber)}
               </p>
-              <p className="text-2xl font-semibold mb-1">
-                {result.flowRegime.name} Flow
-              </p>
-              <p className="text-sm opacity-75 max-w-md mx-auto">
-                {result.flowRegime.description}
-              </p>
+              <p className="text-2xl font-semibold mb-1">{result.flowRegime.name} Flow</p>
+              <p className="text-sm opacity-75 max-w-md mx-auto">{result.flowRegime.description}</p>
             </div>
 
             {/* Flow Regime Reference */}
@@ -297,9 +290,9 @@ export default function ReynoldsNumberCalculator() {
             </div>
 
             <Alert variant="tip" title="Engineering tip:">
-              Most industrial pipe flows are turbulent (Re &gt; 4,000). Laminar flow is
-              typically only seen in very viscous fluids or very small diameter tubes.
-              Design for turbulent flow when in doubt.
+              Most industrial pipe flows are turbulent (Re &gt; 4,000). Laminar flow is typically
+              only seen in very viscous fluids or very small diameter tubes. Design for turbulent
+              flow when in doubt.
             </Alert>
 
             {/* Share Results */}

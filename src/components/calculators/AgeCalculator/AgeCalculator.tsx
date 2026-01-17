@@ -64,9 +64,7 @@ export default function AgeCalculator() {
 
             {/* Target Date (for calculating age at a specific date) */}
             <div>
-              <Label htmlFor="targetDate">
-                Calculate Age On (defaults to today)
-              </Label>
+              <Label htmlFor="targetDate">Calculate Age On (defaults to today)</Label>
               <input
                 id="targetDate"
                 type="date"
@@ -84,8 +82,10 @@ export default function AgeCalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* Primary Age Display */}
-            <div className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/5
-                          rounded-2xl p-8 text-center border border-[var(--color-accent)]/30">
+            <div
+              className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/5
+                          rounded-2xl p-8 text-center border border-[var(--color-accent)]/30"
+            >
               <div className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-4">
                 Your Age
               </div>
@@ -120,9 +120,7 @@ export default function AgeCalculator() {
                 <p className="text-xl font-semibold text-[var(--color-cream)] mb-1">
                   {result.nextBirthday}
                 </p>
-                <p className="text-[var(--color-accent)]">
-                  {result.daysUntilBirthday} days to go!
-                </p>
+                <p className="text-[var(--color-accent)]">{result.daysUntilBirthday} days to go!</p>
               </div>
             )}
 
@@ -169,9 +167,7 @@ export default function AgeCalculator() {
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
                   Zodiac Sign
                 </p>
-                <p className="text-xl font-bold text-[var(--color-cream)]">
-                  {result.zodiacSign}
-                </p>
+                <p className="text-xl font-bold text-[var(--color-cream)]">{result.zodiacSign}</p>
               </div>
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -184,15 +180,15 @@ export default function AgeCalculator() {
             </Grid>
 
             <Alert variant="info" title="Fun fact:">
-              You were born on a {result.dayOfWeekBorn}! People born on {result.dayOfWeekBorn}s are said to be{' '}
-              {result.dayOfWeekBorn === 'Monday' && 'fair of face'}
+              You were born on a {result.dayOfWeekBorn}! People born on {result.dayOfWeekBorn}s are
+              said to be {result.dayOfWeekBorn === 'Monday' && 'fair of face'}
               {result.dayOfWeekBorn === 'Tuesday' && 'full of grace'}
               {result.dayOfWeekBorn === 'Wednesday' && 'full of woe'}
               {result.dayOfWeekBorn === 'Thursday' && 'far to go'}
               {result.dayOfWeekBorn === 'Friday' && 'loving and giving'}
               {result.dayOfWeekBorn === 'Saturday' && 'work hard for a living'}
-              {result.dayOfWeekBorn === 'Sunday' && 'bonny, blithe, good, and gay'}
-              {' '}according to the old nursery rhyme.
+              {result.dayOfWeekBorn === 'Sunday' && 'bonny, blithe, good, and gay'} according to the
+              old nursery rhyme.
             </Alert>
 
             {/* Share Results */}

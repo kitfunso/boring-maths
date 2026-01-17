@@ -65,10 +65,7 @@ export default function DogAgeCalculator() {
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        <CalculatorHeader
-          title="Dog Age Calculator"
-          subtitle="Convert dog years to human years"
-        />
+        <CalculatorHeader title="Dog Age Calculator" subtitle="Convert dog years to human years" />
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
@@ -99,7 +96,9 @@ export default function DogAgeCalculator() {
             {/* Dog Age */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
-                <Label htmlFor="dogYears" required>Years</Label>
+                <Label htmlFor="dogYears" required>
+                  Years
+                </Label>
                 <Input
                   id="dogYears"
                   type="number"
@@ -137,10 +136,9 @@ export default function DogAgeCalculator() {
                 footer={
                   <>
                     Life stage:{' '}
-                    <span className={`font-semibold ${getStageColor()}`}>
-                      {result.lifeStage}
-                    </span>
-                    {' - '}{result.stageDescription}
+                    <span className={`font-semibold ${getStageColor()}`}>{result.lifeStage}</span>
+                    {' - '}
+                    {result.stageDescription}
                   </>
                 }
               />
@@ -166,9 +164,15 @@ export default function DogAgeCalculator() {
               />
               <MetricCard
                 label="Est. Remaining"
-                value={result.remainingYears.max > 0 ? `${result.remainingYears.min}-${result.remainingYears.max}` : '—'}
+                value={
+                  result.remainingYears.max > 0
+                    ? `${result.remainingYears.min}-${result.remainingYears.max}`
+                    : '—'
+                }
                 sublabel="years"
-                valueColor={result.remainingYears.max > 0 ? 'text-green-400' : 'text-[var(--color-muted)]'}
+                valueColor={
+                  result.remainingYears.max > 0 ? 'text-green-400' : 'text-[var(--color-muted)]'
+                }
               />
             </Grid>
 
@@ -215,10 +219,10 @@ export default function DogAgeCalculator() {
             </div>
 
             <Alert variant="info" title="About this calculation:">
-              Dogs age faster in their early years and at different rates based on size.
-              This calculator uses research-based formulas, not the outdated "7 years" myth.
-              Giant breeds age faster than small breeds after maturity. Individual dogs vary
-              based on genetics, health, and care.
+              Dogs age faster in their early years and at different rates based on size. This
+              calculator uses research-based formulas, not the outdated "7 years" myth. Giant breeds
+              age faster than small breeds after maturity. Individual dogs vary based on genetics,
+              health, and care.
             </Alert>
 
             {/* Share Results */}

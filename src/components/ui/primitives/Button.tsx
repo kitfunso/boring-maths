@@ -77,7 +77,9 @@ export function Button({
 
   return (
     <button
-      className={`${baseClasses} ${variantClasses[variant]} ${className}`.trim().replace(/\s+/g, ' ')}
+      className={`${baseClasses} ${variantClasses[variant]} ${className}`
+        .trim()
+        .replace(/\s+/g, ' ')}
       disabled={disabled || loading}
       {...props}
     >

@@ -51,9 +51,7 @@ export function GlazeCalculator() {
   const updateIngredient = (id: string, field: keyof GlazeIngredient, value: any) => {
     setInputs({
       ...inputs,
-      ingredients: inputs.ingredients.map((i) =>
-        i.id === id ? { ...i, [field]: value } : i
-      ),
+      ingredients: inputs.ingredients.map((i) => (i.id === id ? { ...i, [field]: value } : i)),
     });
   };
 
@@ -163,9 +161,7 @@ export function GlazeCalculator() {
                     label=""
                     type="number"
                     value={ing.percentage}
-                    onChange={(v) =>
-                      updateIngredient(ing.id, 'percentage', parseFloat(v) || 0)
-                    }
+                    onChange={(v) => updateIngredient(ing.id, 'percentage', parseFloat(v) || 0)}
                     min={0}
                     max={100}
                     step={0.5}

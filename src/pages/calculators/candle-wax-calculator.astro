@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { CandleWaxCalculator } from '../../components/calculators/CandleWaxCalculator';
 
 const title = 'Candle Wax Calculator | Container Volume to Wax Weight';
-const description = 'Free candle wax calculator. Calculate how much wax you need for any container size. Includes wax density for soy, coconut, paraffin, and beeswax. Wick size recommendations.';
-const keywords = 'candle wax calculator, wax weight, candle making, container candle, soy wax, coconut wax, paraffin, wick size, candle supplies';
+const description =
+  'Free candle wax calculator. Calculate how much wax you need for any container size. Includes wax density for soy, coconut, paraffin, and beeswax. Wick size recommendations.';
+const keywords =
+  'candle wax calculator, wax weight, candle making, container candle, soy wax, coconut wax, paraffin, wick size, candle supplies';
 const canonicalURL = '/calculators/candle-wax-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How do I calculate wax weight from container volume?",
-    answer: "Multiply container volume (fluid ounces) by fill percentage (typically 85-90%) by wax density (0.86 for soy, 0.90 for paraffin). For example: 9oz container × 0.85 fill × 0.86 density = 6.6 oz wax. This calculator does this automatically."
+    question: 'How do I calculate wax weight from container volume?',
+    answer:
+      'Multiply container volume (fluid ounces) by fill percentage (typically 85-90%) by wax density (0.86 for soy, 0.90 for paraffin). For example: 9oz container × 0.85 fill × 0.86 density = 6.6 oz wax. This calculator does this automatically.',
   },
   {
-    question: "Why do I need less wax than container volume?",
-    answer: "Wax is less dense than water (which fluid ounces measure). Soy wax is about 86% as dense, so a 10oz container needs only about 8.6oz of wax by weight. You also leave room at the top for wick centering and aesthetics."
+    question: 'Why do I need less wax than container volume?',
+    answer:
+      'Wax is less dense than water (which fluid ounces measure). Soy wax is about 86% as dense, so a 10oz container needs only about 8.6oz of wax by weight. You also leave room at the top for wick centering and aesthetics.',
   },
   {
-    question: "How much extra wax should I prepare?",
-    answer: "Prepare 10-15% more wax than calculated. This accounts for: wax left in pour pot, topping off after cooling (sink holes), test candles, and spillage. For production runs, the overage percentage can decrease with experience."
+    question: 'How much extra wax should I prepare?',
+    answer:
+      'Prepare 10-15% more wax than calculated. This accounts for: wax left in pour pot, topping off after cooling (sink holes), test candles, and spillage. For production runs, the overage percentage can decrease with experience.',
   },
   {
-    question: "What fill level should I use?",
-    answer: "Standard is 85% fill, leaving room at top for second pour to fill sink holes. For single-pour waxes or if doing a top pour, you can fill to 90-95%. Leave at least 0.25\" below rim for safety and aesthetics."
+    question: 'What fill level should I use?',
+    answer:
+      'Standard is 85% fill, leaving room at top for second pour to fill sink holes. For single-pour waxes or if doing a top pour, you can fill to 90-95%. Leave at least 0.25" below rim for safety and aesthetics.',
   },
   {
-    question: "How do I measure container volume?",
-    answer: "Fill container with water to desired level, pour into measuring cup. Or calculate from dimensions: for cylinders, Volume = π × radius² × height. This calculator can compute volume from diameter and height."
+    question: 'How do I measure container volume?',
+    answer:
+      'Fill container with water to desired level, pour into measuring cup. Or calculate from dimensions: for cylinders, Volume = π × radius² × height. This calculator can compute volume from diameter and height.',
   },
   {
-    question: "What wick size should I use?",
-    answer: "Wick size depends on container diameter: 2\" needs small wick (CD6-8), 3\" needs medium (CD10-12), 4\"+ often needs large or multiple wicks. Always test burn - this calculator provides starting recommendations only. Different waxes, fragrances, and dyes affect wick performance."
+    question: 'What wick size should I use?',
+    answer:
+      'Wick size depends on container diameter: 2" needs small wick (CD6-8), 3" needs medium (CD10-12), 4"+ often needs large or multiple wicks. Always test burn - this calculator provides starting recommendations only. Different waxes, fragrances, and dyes affect wick performance.',
   },
 ];
 
@@ -100,8 +108,8 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Wax Density by Type">
     <p>
-      Different waxes have different densities, meaning you need different weights
-      to fill the same container. Here's a comparison:
+      Different waxes have different densities, meaning you need different weights to fill the same
+      container. Here's a comparison:
     </p>
     <div class="grid md:grid-cols-4 gap-4 mt-4">
       <div class="bg-purple-900/20 rounded-lg p-4 text-center">
@@ -161,11 +169,21 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Production Tips">
     <ul class="list-disc list-inside space-y-2">
-      <li><strong>Weigh, don't measure:</strong> Always weigh wax for consistency - volume varies with temperature</li>
-      <li><strong>Account for shrinkage:</strong> Wax shrinks as it cools, often needing a second pour</li>
-      <li><strong>Batch your pours:</strong> Calculate total wax for all containers plus 10% overage</li>
-      <li><strong>Keep records:</strong> Note actual wax used vs. calculated for future accuracy</li>
-      <li><strong>Test everything:</strong> Different fragrances and dyes affect wax volume slightly</li>
+      <li>
+        <strong>Weigh, don't measure:</strong> Always weigh wax for consistency - volume varies with temperature
+      </li>
+      <li>
+        <strong>Account for shrinkage:</strong> Wax shrinks as it cools, often needing a second pour
+      </li>
+      <li>
+        <strong>Batch your pours:</strong> Calculate total wax for all containers plus 10% overage
+      </li>
+      <li>
+        <strong>Keep records:</strong> Note actual wax used vs. calculated for future accuracy
+      </li>
+      <li>
+        <strong>Test everything:</strong> Different fragrances and dyes affect wax volume slightly
+      </li>
     </ul>
   </ContentSection>
 

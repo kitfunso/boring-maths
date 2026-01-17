@@ -22,7 +22,10 @@ import {
 } from '../../ui';
 
 export default function Calculator401k() {
-  const [inputs, setInputs] = useLocalStorage<Calculator401kInputs>('calc-401k-inputs', getDefaultInputs);
+  const [inputs, setInputs] = useLocalStorage<Calculator401kInputs>(
+    'calc-401k-inputs',
+    getDefaultInputs
+  );
 
   const result = useMemo(() => calculate401k(inputs), [inputs]);
 
@@ -46,7 +49,9 @@ export default function Calculator401k() {
             {/* Age Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
-                <Label htmlFor="currentAge" required>Current Age</Label>
+                <Label htmlFor="currentAge" required>
+                  Current Age
+                </Label>
                 <Input
                   id="currentAge"
                   type="number"
@@ -57,7 +62,9 @@ export default function Calculator401k() {
                 />
               </div>
               <div>
-                <Label htmlFor="retirementAge" required>Retirement Age</Label>
+                <Label htmlFor="retirementAge" required>
+                  Retirement Age
+                </Label>
                 <Input
                   id="retirementAge"
                   type="number"
@@ -83,7 +90,9 @@ export default function Calculator401k() {
                 />
               </div>
               <div>
-                <Label htmlFor="annualSalary" required>Annual Salary ($)</Label>
+                <Label htmlFor="annualSalary" required>
+                  Annual Salary ($)
+                </Label>
                 <Input
                   id="annualSalary"
                   type="number"
@@ -98,7 +107,9 @@ export default function Calculator401k() {
             {/* Contribution Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
-                <Label htmlFor="contributionPercent" required>Your Contribution (%)</Label>
+                <Label htmlFor="contributionPercent" required>
+                  Your Contribution (%)
+                </Label>
                 <Input
                   id="contributionPercent"
                   type="number"
@@ -242,15 +253,27 @@ export default function Calculator401k() {
                     </tr>
                   </thead>
                   <tbody className="text-[var(--color-cream)]">
-                    {result.yearlyBreakdown.filter((_, i) => i % Math.ceil(result.yearlyBreakdown.length / 10) === 0 || i === result.yearlyBreakdown.length - 1).map((year) => (
-                      <tr key={year.age} className="border-t border-white/5">
-                        <td className="py-2 pr-4">{year.age}</td>
-                        <td className="py-2 pr-4 tabular-nums">{formatCurrency(year.salary)}</td>
-                        <td className="py-2 pr-4 tabular-nums">{formatCurrency(year.yourContribution)}</td>
-                        <td className="py-2 pr-4 tabular-nums text-green-400">{formatCurrency(year.employerContribution)}</td>
-                        <td className="py-2 tabular-nums font-medium">{formatCurrency(year.yearEndBalance)}</td>
-                      </tr>
-                    ))}
+                    {result.yearlyBreakdown
+                      .filter(
+                        (_, i) =>
+                          i % Math.ceil(result.yearlyBreakdown.length / 10) === 0 ||
+                          i === result.yearlyBreakdown.length - 1
+                      )
+                      .map((year) => (
+                        <tr key={year.age} className="border-t border-white/5">
+                          <td className="py-2 pr-4">{year.age}</td>
+                          <td className="py-2 pr-4 tabular-nums">{formatCurrency(year.salary)}</td>
+                          <td className="py-2 pr-4 tabular-nums">
+                            {formatCurrency(year.yourContribution)}
+                          </td>
+                          <td className="py-2 pr-4 tabular-nums text-green-400">
+                            {formatCurrency(year.employerContribution)}
+                          </td>
+                          <td className="py-2 tabular-nums font-medium">
+                            {formatCurrency(year.yearEndBalance)}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>
@@ -272,11 +295,17 @@ export default function Calculator401k() {
                 results={[
                   { label: 'Retirement Age', value: String(inputs.retirementAge) },
                   { label: 'Total at Retirement', value: formatCurrency(result.totalAtRetirement) },
-                  { label: 'Monthly Income (4% Rule)', value: formatCurrency(result.monthlyIncomeAt4Percent) },
+                  {
+                    label: 'Monthly Income (4% Rule)',
+                    value: formatCurrency(result.monthlyIncomeAt4Percent),
+                  },
                   { label: 'Your Contributions', value: formatCurrency(result.totalContributions) },
                   { label: 'Employer Match', value: formatCurrency(result.employerContributions) },
                   { label: 'Investment Growth', value: formatCurrency(result.investmentGrowth) },
-                  { label: 'Years to Retire', value: String(inputs.retirementAge - inputs.currentAge) },
+                  {
+                    label: 'Years to Retire',
+                    value: String(inputs.retirementAge - inputs.currentAge),
+                  },
                 ]}
               />
             </div>

@@ -163,9 +163,7 @@ export function TapDrillCalculator() {
                 {results.pitch && (
                   <div className="flex justify-between">
                     <span className="text-[var(--color-subtle)]">Thread Pitch</span>
-                    <span className="font-medium text-[var(--color-text)]">
-                      {results.pitch}mm
-                    </span>
+                    <span className="font-medium text-[var(--color-text)]">{results.pitch}mm</span>
                   </div>
                 )}
               </div>

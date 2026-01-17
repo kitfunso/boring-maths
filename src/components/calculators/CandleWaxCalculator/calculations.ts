@@ -53,7 +53,7 @@ function flOzToMl(flOz: number): number {
  * Get wick recommendation based on diameter
  */
 function getWickRecommendation(diameter: number): string {
-  const recommendation = WICK_GUIDE.find(w => diameter <= w.maxDiameter);
+  const recommendation = WICK_GUIDE.find((w) => diameter <= w.maxDiameter);
   return recommendation?.wickSize || 'Multi-wick recommended';
 }
 
@@ -61,7 +61,7 @@ function getWickRecommendation(diameter: number): string {
  * Main wax calculation
  */
 export function calculateCandleWax(inputs: CandleWaxInputs): CandleWaxResults {
-  const wax = WAX_TYPES.find(w => w.value === inputs.waxType);
+  const wax = WAX_TYPES.find((w) => w.value === inputs.waxType);
   const waxDensity = wax?.density || 0.86;
   const burnRate = wax?.burnRate || 0.12; // oz per hour
 
@@ -87,7 +87,7 @@ export function calculateCandleWax(inputs: CandleWaxInputs): CandleWaxResults {
     }
     // Estimate diameter from volume (assume cylinder with height = diameter)
     // V = πr²h, if h = 2r, then V = 2πr³, so r = (V/(2π))^(1/3)
-    const estimatedRadius = Math.pow(containerVolumeOz / (2 * Math.PI * 0.554113), 1/3);
+    const estimatedRadius = Math.pow(containerVolumeOz / (2 * Math.PI * 0.554113), 1 / 3);
     diameter = estimatedRadius * 2;
   }
 
@@ -106,7 +106,7 @@ export function calculateCandleWax(inputs: CandleWaxInputs): CandleWaxResults {
   const wickedWeight = totalWaxWeight * 0.98;
 
   // Add 10% overpour for pour pot residue and testing
-  const waxWithOverpour = totalWaxWeight * 1.10;
+  const waxWithOverpour = totalWaxWeight * 1.1;
 
   // Convert to desired unit
   let displayWeight: number;
@@ -145,13 +145,29 @@ export function calculateCandleWax(inputs: CandleWaxInputs): CandleWaxResults {
 
   return {
     containerVolume: Math.round(displayVolume * 10) / 10,
-    usableVolume: Math.round((inputs.volumeUnit === 'ml' ? flOzToMl(usableVolumeOz) : usableVolumeOz) * 10) / 10,
+    usableVolume:
+      Math.round((inputs.volumeUnit === 'ml' ? flOzToMl(usableVolumeOz) : usableVolumeOz) * 10) /
+      10,
     waxWeight: Math.round(displayWeight * 10) / 10,
     waxWeightPerContainer: Math.round(weightPerContainer * 10) / 10,
-    wickedWeight: Math.round((inputs.weightUnit === 'grams' ? wickedWeight * 28.3495 : inputs.weightUnit === 'pounds' ? wickedWeight / 16 : wickedWeight) * 10) / 10,
+    wickedWeight:
+      Math.round(
+        (inputs.weightUnit === 'grams'
+          ? wickedWeight * 28.3495
+          : inputs.weightUnit === 'pounds'
+            ? wickedWeight / 16
+            : wickedWeight) * 10
+      ) / 10,
     suggestedWickSize,
     burnTime: Math.round(burnTime),
-    waxNeededWithOverpour: Math.round((inputs.weightUnit === 'grams' ? waxWithOverpour * 28.3495 : inputs.weightUnit === 'pounds' ? waxWithOverpour / 16 : waxWithOverpour) * 10) / 10,
+    waxNeededWithOverpour:
+      Math.round(
+        (inputs.weightUnit === 'grams'
+          ? waxWithOverpour * 28.3495
+          : inputs.weightUnit === 'pounds'
+            ? waxWithOverpour / 16
+            : waxWithOverpour) * 10
+      ) / 10,
     weightUnit,
   };
 }

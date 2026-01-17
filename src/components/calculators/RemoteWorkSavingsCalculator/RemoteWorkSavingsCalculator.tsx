@@ -13,11 +13,7 @@ import {
   formatHours,
   getSavingsColor,
 } from './calculations';
-import {
-  getDefaultInputs,
-  type RemoteWorkSavingsInputs,
-  type CommuteType,
-} from './types';
+import { getDefaultInputs, type RemoteWorkSavingsInputs, type CommuteType } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -74,12 +70,7 @@ export default function RemoteWorkSavingsCalculator() {
         <CalculatorHeader
           title="Remote Work Savings Calculator"
           subtitle="See how much you save by skipping the commute"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -129,9 +120,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={1}
                     max={100}
                     value={inputs.commuteDistanceMiles}
-                    onChange={(e) =>
-                      updateInput('commuteDistanceMiles', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('commuteDistanceMiles', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -142,9 +131,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={5}
                     max={180}
                     value={inputs.commuteTimeMinutes}
-                    onChange={(e) =>
-                      updateInput('commuteTimeMinutes', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('commuteTimeMinutes', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -155,9 +142,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={40}
                     max={52}
                     value={inputs.weeksPerYear}
-                    onChange={(e) =>
-                      updateInput('weeksPerYear', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -168,9 +153,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={10}
                     max={500}
                     value={inputs.hourlyRate}
-                    onChange={(e) =>
-                      updateInput('hourlyRate', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -192,9 +175,7 @@ export default function RemoteWorkSavingsCalculator() {
                       max={10}
                       step={0.1}
                       value={inputs.gasPricePerGallon}
-                      onChange={(e) =>
-                        updateInput('gasPricePerGallon', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('gasPricePerGallon', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -205,9 +186,7 @@ export default function RemoteWorkSavingsCalculator() {
                       min={10}
                       max={60}
                       value={inputs.vehicleMpg}
-                      onChange={(e) =>
-                        updateInput('vehicleMpg', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('vehicleMpg', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -218,9 +197,7 @@ export default function RemoteWorkSavingsCalculator() {
                       min={0}
                       max={100}
                       value={inputs.parkingCostDaily}
-                      onChange={(e) =>
-                        updateInput('parkingCostDaily', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('parkingCostDaily', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -231,9 +208,7 @@ export default function RemoteWorkSavingsCalculator() {
                       min={0}
                       max={50}
                       value={inputs.tollsDaily}
-                      onChange={(e) =>
-                        updateInput('tollsDaily', Number(e.target.value))
-                      }
+                      onChange={(e) => updateInput('tollsDaily', Number(e.target.value))}
                     />
                   </div>
                   <div>
@@ -269,9 +244,7 @@ export default function RemoteWorkSavingsCalculator() {
                     max={50}
                     step={0.5}
                     value={inputs.transitCostDaily}
-                    onChange={(e) =>
-                      updateInput('transitCostDaily', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('transitCostDaily', Number(e.target.value))}
                   />
                 </div>
               </div>
@@ -287,7 +260,12 @@ export default function RemoteWorkSavingsCalculator() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </summary>
               <Grid responsive={{ sm: 2, md: 3 }} gap="md" className="mt-3">
@@ -299,9 +277,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={50}
                     value={inputs.workLunchCostDaily}
-                    onChange={(e) =>
-                      updateInput('workLunchCostDaily', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('workLunchCostDaily', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -312,9 +288,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={30}
                     value={inputs.homeLunchCostDaily}
-                    onChange={(e) =>
-                      updateInput('homeLunchCostDaily', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('homeLunchCostDaily', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -325,9 +299,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={20}
                     value={inputs.coffeeAtWorkDaily}
-                    onChange={(e) =>
-                      updateInput('coffeeAtWorkDaily', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('coffeeAtWorkDaily', Number(e.target.value))}
                   />
                 </div>
                 <div>
@@ -351,9 +323,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={200}
                     value={inputs.dryCleaningMonthly}
-                    onChange={(e) =>
-                      updateInput('dryCleaningMonthly', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('dryCleaningMonthly', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -572,9 +542,14 @@ export default function RemoteWorkSavingsCalculator() {
             {/* Tips */}
             <Alert variant="tip" title="Maximize Your Savings">
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>Use the time saved for side projects, exercise, or family - it has real value</li>
+                <li>
+                  Use the time saved for side projects, exercise, or family - it has real value
+                </li>
                 <li>Invest your commute savings in a retirement account for compound growth</li>
-                <li>Consider a hybrid arrangement if full remote isn't possible - even 2-3 days saves significantly</li>
+                <li>
+                  Consider a hybrid arrangement if full remote isn't possible - even 2-3 days saves
+                  significantly
+                </li>
                 <li>Track actual expenses for a month to get more accurate numbers</li>
                 <li>Factor in reduced stress and better work-life balance (priceless!)</li>
               </ul>

@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { USSelfEmploymentTaxCalculator } from '../../components/calculators/USSelfEmploymentTaxCalculator';
 
 const title = 'Self-Employment Tax Calculator 2025 | 1099 Freelancer Tax';
-const description = 'Free self-employment tax calculator for freelancers and contractors. Calculate your 15.3% SE tax, federal income tax, and quarterly estimated payments for 2025.';
-const keywords = 'self employment tax calculator, 1099 tax calculator, freelance tax calculator, quarterly estimated tax, SE tax calculator, independent contractor tax';
+const description =
+  'Free self-employment tax calculator for freelancers and contractors. Calculate your 15.3% SE tax, federal income tax, and quarterly estimated payments for 2025.';
+const keywords =
+  'self employment tax calculator, 1099 tax calculator, freelance tax calculator, quarterly estimated tax, SE tax calculator, independent contractor tax';
 const canonicalURL = '/calculators/us-self-employment-tax-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is self-employment tax and why is it 15.3%?",
-    answer: "Self-employment tax covers Social Security (12.4%) and Medicare (2.9%), totaling 15.3%. As an employee, your employer pays half and you pay half. When self-employed, you pay both halves. However, you can deduct half of your SE tax when calculating income tax, which helps offset this burden."
+    question: 'What is self-employment tax and why is it 15.3%?',
+    answer:
+      'Self-employment tax covers Social Security (12.4%) and Medicare (2.9%), totaling 15.3%. As an employee, your employer pays half and you pay half. When self-employed, you pay both halves. However, you can deduct half of your SE tax when calculating income tax, which helps offset this burden.',
   },
   {
-    question: "How do I calculate my self-employment tax?",
-    answer: "SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base ($176,100 in 2025). Above that, only the 2.9% Medicare portion applies to additional income."
+    question: 'How do I calculate my self-employment tax?',
+    answer:
+      'SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base ($176,100 in 2025). Above that, only the 2.9% Medicare portion applies to additional income.',
   },
   {
-    question: "Do I need to pay quarterly estimated taxes?",
-    answer: "Yes, if you expect to owe $1,000 or more in taxes. The IRS requires quarterly payments to avoid underpayment penalties. Due dates are April 15, June 15, September 15, and January 15. Missing payments can result in penalties even if you pay the full amount when filing."
+    question: 'Do I need to pay quarterly estimated taxes?',
+    answer:
+      'Yes, if you expect to owe $1,000 or more in taxes. The IRS requires quarterly payments to avoid underpayment penalties. Due dates are April 15, June 15, September 15, and January 15. Missing payments can result in penalties even if you pay the full amount when filing.',
   },
   {
-    question: "What business expenses can I deduct?",
-    answer: "Common deductions include: home office expenses, equipment and software, internet and phone bills (business portion), professional services, marketing costs, travel expenses, health insurance premiums (if self-employed), and retirement contributions (SEP IRA, Solo 401k)."
+    question: 'What business expenses can I deduct?',
+    answer:
+      'Common deductions include: home office expenses, equipment and software, internet and phone bills (business portion), professional services, marketing costs, travel expenses, health insurance premiums (if self-employed), and retirement contributions (SEP IRA, Solo 401k).',
   },
   {
-    question: "How can I reduce my self-employment tax?",
-    answer: "Key strategies include: maximizing legitimate business deductions, contributing to a SEP IRA or Solo 401(k), considering S-Corp election if income exceeds ~$50k, and deducting health insurance premiums. An S-Corp can help split income between salary (subject to SE tax) and distributions (not subject to SE tax)."
+    question: 'How can I reduce my self-employment tax?',
+    answer:
+      'Key strategies include: maximizing legitimate business deductions, contributing to a SEP IRA or Solo 401(k), considering S-Corp election if income exceeds ~$50k, and deducting health insurance premiums. An S-Corp can help split income between salary (subject to SE tax) and distributions (not subject to SE tax).',
   },
   {
-    question: "What is the Social Security wage base for 2025?",
-    answer: "The Social Security wage base for 2025 is $176,100. This means you only pay the 12.4% Social Security portion of SE tax on the first $176,100 of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k)."
+    question: 'What is the Social Security wage base for 2025?',
+    answer:
+      'The Social Security wage base for 2025 is $176,100. This means you only pay the 12.4% Social Security portion of SE tax on the first $176,100 of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k).',
   },
   {
-    question: "What is the additional Medicare tax?",
-    answer: "An extra 0.9% Medicare tax applies to self-employment income exceeding $200,000 (single) or $250,000 (married filing jointly). This is on top of the regular 2.9% Medicare tax, bringing the Medicare portion to 3.8% on high incomes."
+    question: 'What is the additional Medicare tax?',
+    answer:
+      'An extra 0.9% Medicare tax applies to self-employment income exceeding $200,000 (single) or $250,000 (married filing jointly). This is on top of the regular 2.9% Medicare tax, bringing the Medicare portion to 3.8% on high incomes.',
   },
   {
-    question: "Can I deduct half of my self-employment tax?",
-    answer: "Yes, you can deduct the employer-equivalent portion (half) of your self-employment tax when calculating your adjusted gross income. This reduces your income tax but does not reduce the SE tax itself. This deduction is taken directly on Form 1040, not on Schedule C."
+    question: 'Can I deduct half of my self-employment tax?',
+    answer:
+      'Yes, you can deduct the employer-equivalent portion (half) of your self-employment tax when calculating your adjusted gross income. This reduces your income tax but does not reduce the SE tax itself. This deduction is taken directly on Form 1040, not on Schedule C.',
   },
 ];
 
@@ -108,22 +118,35 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
-      <li><strong class="text-[var(--color-cream)]">Enter your self-employment income</strong> – Total 1099 income, freelance earnings, or business revenue.</li>
-      <li><strong class="text-[var(--color-cream)]">Deduct business expenses</strong> – Equipment, software, home office, travel, and other legitimate expenses.</li>
-      <li><strong class="text-[var(--color-cream)]">Add any other income</strong> – W-2 wages or other income that affects your tax bracket.</li>
-      <li><strong class="text-[var(--color-cream)]">Review your quarterly payments</strong> – See how much to pay each quarter to avoid penalties.</li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your self-employment income</strong> – Total 1099
+        income, freelance earnings, or business revenue.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Deduct business expenses</strong> – Equipment, software,
+        home office, travel, and other legitimate expenses.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add any other income</strong> – W-2 wages or other income
+        that affects your tax bracket.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review your quarterly payments</strong> – See how much
+        to pay each quarter to avoid penalties.
+      </li>
     </ol>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        <strong class="text-rose-400">Self-employment tax (15.3%)</strong> is your contribution to Social Security and Medicare.
-        It's calculated on 92.35% of your net self-employment income, not the full amount.
+        <strong class="text-rose-400">Self-employment tax (15.3%)</strong> is your contribution to Social
+        Security and Medicare. It's calculated on 92.35% of your net self-employment income, not the full
+        amount.
       </p>
       <p>
-        <strong class="text-blue-400">Federal income tax</strong> is calculated after deducting half your SE tax.
-        This "adjustment" reduces your taxable income, lowering your overall tax burden.
+        <strong class="text-blue-400">Federal income tax</strong> is calculated after deducting half your
+        SE tax. This "adjustment" reduces your taxable income, lowering your overall tax burden.
       </p>
       <p>
         <strong class="text-amber-400">Quarterly payments</strong> help you avoid underpayment penalties.

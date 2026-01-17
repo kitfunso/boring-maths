@@ -2,14 +2,7 @@ import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculatePension, formatCurrency } from './calculations';
 import { getDefaultInputs, PENSION_CONSTANTS, type UKPensionInputs } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 export default function UKPensionCalculator() {
@@ -20,10 +13,7 @@ export default function UKPensionCalculator() {
 
   const result = useMemo(() => calculatePension(inputs), [inputs]);
 
-  const updateInput = <K extends keyof UKPensionInputs>(
-    field: K,
-    value: UKPensionInputs[K]
-  ) => {
+  const updateInput = <K extends keyof UKPensionInputs>(field: K, value: UKPensionInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -103,7 +93,9 @@ export default function UKPensionCalculator() {
                     id="monthlyContribution"
                     type="number"
                     value={inputs.monthlyContribution}
-                    onChange={(e) => updateInput('monthlyContribution', Number(e.currentTarget.value))}
+                    onChange={(e) =>
+                      updateInput('monthlyContribution', Number(e.currentTarget.value))
+                    }
                     min={0}
                     step={50}
                     className="pl-8"
@@ -111,9 +103,7 @@ export default function UKPensionCalculator() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="employerContribution">
-                  Employer Monthly Contribution
-                </Label>
+                <Label htmlFor="employerContribution">Employer Monthly Contribution</Label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
                     £
@@ -122,7 +112,9 @@ export default function UKPensionCalculator() {
                     id="employerContribution"
                     type="number"
                     value={inputs.employerContribution}
-                    onChange={(e) => updateInput('employerContribution', Number(e.currentTarget.value))}
+                    onChange={(e) =>
+                      updateInput('employerContribution', Number(e.currentTarget.value))
+                    }
                     min={0}
                     step={50}
                     className="pl-8"
@@ -134,9 +126,7 @@ export default function UKPensionCalculator() {
             {/* Growth Rates */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
-                <Label htmlFor="expectedGrowth">
-                  Expected Annual Growth
-                </Label>
+                <Label htmlFor="expectedGrowth">Expected Annual Growth</Label>
                 <div className="relative">
                   <Input
                     id="expectedGrowth"
@@ -154,9 +144,7 @@ export default function UKPensionCalculator() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="inflationRate">
-                  Assumed Inflation Rate
-                </Label>
+                <Label htmlFor="inflationRate">Assumed Inflation Rate</Label>
                 <div className="relative">
                   <Input
                     id="inflationRate"
@@ -181,7 +169,9 @@ export default function UKPensionCalculator() {
             {/* Main Result - Projected Pot */}
             <div className="rounded-2xl p-6 bg-emerald-950/50 border-2 border-emerald-500/30">
               <div className="text-center">
-                <p className="text-sm text-[var(--color-muted)] mb-1">Projected Pension Pot at {inputs.retirementAge}</p>
+                <p className="text-sm text-[var(--color-muted)] mb-1">
+                  Projected Pension Pot at {inputs.retirementAge}
+                </p>
                 <p className="text-4xl md:text-5xl font-display font-bold text-emerald-400">
                   {formatCurrency(result.projectedPot)}
                 </p>
@@ -221,8 +211,18 @@ export default function UKPensionCalculator() {
             {/* State Pension Note */}
             <div className="bg-blue-950/30 rounded-xl p-4 border border-blue-500/30">
               <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <div>
                   <p className="text-blue-400 font-medium">Plus State Pension</p>
@@ -276,9 +276,14 @@ export default function UKPensionCalculator() {
                   </thead>
                   <tbody>
                     {result.yearlyProjection.map((row) => (
-                      <tr key={row.age} className="border-b border-white/5 text-[var(--color-subtle)]">
+                      <tr
+                        key={row.age}
+                        className="border-b border-white/5 text-[var(--color-subtle)]"
+                      >
                         <td className="py-2 pr-4 text-[var(--color-cream)]">{row.age}</td>
-                        <td className="text-right py-2 px-2">{formatCurrency(row.contributions)}</td>
+                        <td className="text-right py-2 px-2">
+                          {formatCurrency(row.contributions)}
+                        </td>
                         <td className="text-right py-2 px-2 text-emerald-400">
                           {formatCurrency(row.growth)}
                         </td>

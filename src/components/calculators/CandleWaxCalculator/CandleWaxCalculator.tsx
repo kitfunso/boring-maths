@@ -27,7 +27,7 @@ export function CandleWaxCalculator() {
 
   const results = useMemo(() => calculateCandleWax(inputs), [inputs]);
 
-  const selectedWax = WAX_TYPES.find(w => w.value === inputs.waxType);
+  const selectedWax = WAX_TYPES.find((w) => w.value === inputs.waxType);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
@@ -92,7 +92,9 @@ export function CandleWaxCalculator() {
                     label={inputs.containerShape === 'square' ? 'Side Length' : 'Diameter'}
                     type="number"
                     value={inputs.containerDiameter}
-                    onChange={(v) => setInputs({ ...inputs, containerDiameter: parseFloat(v) || 0 })}
+                    onChange={(v) =>
+                      setInputs({ ...inputs, containerDiameter: parseFloat(v) || 0 })
+                    }
                     min={0.5}
                     step={0.1}
                     suffix="in"
@@ -150,7 +152,7 @@ export function CandleWaxCalculator() {
               label="Fill Percentage"
               value={inputs.fillPercentage.toString()}
               onChange={(v) => setInputs({ ...inputs, fillPercentage: parseInt(v) })}
-              options={FILL_OPTIONS.map(f => ({ value: f.value.toString(), label: f.label }))}
+              options={FILL_OPTIONS.map((f) => ({ value: f.value.toString(), label: f.label }))}
             />
           </div>
         </div>
@@ -163,7 +165,7 @@ export function CandleWaxCalculator() {
               label="Wax Type"
               value={inputs.waxType}
               onChange={(v) => setInputs({ ...inputs, waxType: v })}
-              options={WAX_TYPES.map(w => ({ value: w.value, label: w.label }))}
+              options={WAX_TYPES.map((w) => ({ value: w.value, label: w.label }))}
             />
 
             {selectedWax && (
@@ -250,7 +252,9 @@ export function CandleWaxCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Production Details</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Production Details
+          </h3>
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-[var(--color-subtle)]">Wax (with wick displacement)</span>
@@ -274,15 +278,17 @@ export function CandleWaxCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Wax Weight Formula</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Wax Weight Formula
+          </h3>
           <div className="space-y-2 text-sm text-[var(--color-subtle)]">
             <p>For container candles:</p>
             <div className="rounded-lg bg-[var(--color-background)] p-3 font-mono text-xs">
               Wax (oz) = Volume (fl oz) × Fill% × Wax Density
             </div>
             <p className="mt-2">
-              Density varies by wax type. Soy wax is typically 0.86 (86% the weight of water),
-              while paraffin and beeswax are denser at 0.90-0.96.
+              Density varies by wax type. Soy wax is typically 0.86 (86% the weight of water), while
+              paraffin and beeswax are denser at 0.90-0.96.
             </p>
           </div>
         </div>

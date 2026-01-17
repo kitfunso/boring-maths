@@ -27,14 +27,14 @@ function calculateDeltaTs(inputs: LMTDInputs): { deltaT1: number; deltaT2: numbe
   if (flowArrangement === 'parallelflow') {
     // Parallel flow: both fluids enter at same end
     return {
-      deltaT1: hotInlet - coldInlet,   // Hot end
+      deltaT1: hotInlet - coldInlet, // Hot end
       deltaT2: hotOutlet - coldOutlet, // Cold end
     };
   } else {
     // Counter-flow and others use counter-flow arrangement
     return {
-      deltaT1: hotInlet - coldOutlet,  // Hot fluid inlet
-      deltaT2: hotOutlet - coldInlet,  // Hot fluid outlet
+      deltaT1: hotInlet - coldOutlet, // Hot fluid inlet
+      deltaT2: hotOutlet - coldInlet, // Hot fluid outlet
     };
   }
 }
@@ -61,7 +61,8 @@ function calculateBasicLMTD(deltaT1: number, deltaT2: number): number {
  * Using the P-R method (Kern's method)
  */
 function calculateCorrectionFactor(inputs: LMTDInputs): number {
-  const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement, shellPasses, tubePasses } = inputs;
+  const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement, shellPasses, tubePasses } =
+    inputs;
 
   // Counter-flow and parallel-flow don't need correction
   if (flowArrangement === 'counterflow' || flowArrangement === 'parallelflow') {
@@ -85,9 +86,12 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
     if (R === 1) {
       return 1 - P / 3; // Simplified for R=1
     }
-    const F = Math.sqrt(R * R + 1) * Math.log((1 - P) / (1 - P * R)) /
-              ((R - 1) * Math.log((2 - P * (R + 1 - Math.sqrt(R * R + 1))) /
-                                   (2 - P * (R + 1 + Math.sqrt(R * R + 1)))));
+    const F =
+      (Math.sqrt(R * R + 1) * Math.log((1 - P) / (1 - P * R))) /
+      ((R - 1) *
+        Math.log(
+          (2 - P * (R + 1 - Math.sqrt(R * R + 1))) / (2 - P * (R + 1 + Math.sqrt(R * R + 1)))
+        ));
     return Math.min(Math.max(F, 0.5), 1.0);
   }
 
@@ -100,15 +104,19 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
 
       if (Math.abs(R - 1) < 0.001) {
         // Special case when R ≈ 1
-        return P * Math.sqrt(2) / ((1 - P) * Math.log((1 + P * Math.sqrt(2) / 2) / (1 - P * Math.sqrt(2) / 2)));
+        return (
+          (P * Math.sqrt(2)) /
+          ((1 - P) * Math.log((1 + (P * Math.sqrt(2)) / 2) / (1 - (P * Math.sqrt(2)) / 2)))
+        );
       }
 
       const term1 = (1 - P * R) / (1 - P);
       if (term1 <= 0) return 0.75;
 
       const W = Math.pow(term1, 1 / shellPasses);
-      const F = sqrt * Math.log((1 - P) / (1 - P * R)) /
-                ((R - 1) * Math.log((2 / P - 1 - R + sqrt) / (2 / P - 1 - R - sqrt)));
+      const F =
+        (sqrt * Math.log((1 - P) / (1 - P * R))) /
+        ((R - 1) * Math.log((2 / P - 1 - R + sqrt) / (2 / P - 1 - R - sqrt)));
 
       return Math.min(Math.max(isNaN(F) ? 0.85 : F, 0.5), 1.0);
     } else {
@@ -127,7 +135,7 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
 function calculateEffectiveness(inputs: LMTDInputs): number {
   const { hotInlet, hotOutlet, coldInlet, coldOutlet } = inputs;
 
-  const hotDuty = hotInlet - hotOutlet;  // Proportional to hot side duty
+  const hotDuty = hotInlet - hotOutlet; // Proportional to hot side duty
   const coldDuty = coldOutlet - coldInlet; // Proportional to cold side duty
 
   // Maximum possible heat transfer
@@ -192,14 +200,11 @@ export function calculateLMTD(inputs: LMTDInputs): LMTDResult {
 
   // Calculate heat capacity ratio (R)
   const { hotInlet, hotOutlet, coldInlet, coldOutlet } = inputs;
-  const heatCapacityRatio = (coldOutlet - coldInlet) !== 0
-    ? (hotInlet - hotOutlet) / (coldOutlet - coldInlet)
-    : 1;
+  const heatCapacityRatio =
+    coldOutlet - coldInlet !== 0 ? (hotInlet - hotOutlet) / (coldOutlet - coldInlet) : 1;
 
   // Calculate NTU (Number of Transfer Units) - approximate
-  const ntu = effectiveness > 0 && effectiveness < 1
-    ? -Math.log(1 - effectiveness)
-    : 0;
+  const ntu = effectiveness > 0 && effectiveness < 1 ? -Math.log(1 - effectiveness) : 0;
 
   return {
     lmtd: Math.round(lmtd * 100) / 100,
@@ -227,6 +232,6 @@ export function formatTemperature(value: number, unit: '°C' | '°F'): string {
  */
 export function convertTemperature(value: number, from: 'C' | 'F', to: 'C' | 'F'): number {
   if (from === to) return value;
-  if (from === 'C' && to === 'F') return value * 9 / 5 + 32;
-  return (value - 32) * 5 / 9;
+  if (from === 'C' && to === 'F') return (value * 9) / 5 + 32;
+  return ((value - 32) * 5) / 9;
 }

@@ -30,9 +30,12 @@ function calculateIncomeTax(salary: number, totalIncome: number): number {
   let tax = 0;
 
   // Basic rate (20%)
-  const basicRateBand = Math.min(taxableIncome, TAX_THRESHOLDS.basicRateLimit - TAX_THRESHOLDS.personalAllowance);
+  const basicRateBand = Math.min(
+    taxableIncome,
+    TAX_THRESHOLDS.basicRateLimit - TAX_THRESHOLDS.personalAllowance
+  );
   if (basicRateBand > 0) {
-    tax += basicRateBand * 0.20;
+    tax += basicRateBand * 0.2;
   }
 
   // Higher rate (40%)
@@ -41,11 +44,14 @@ function calculateIncomeTax(salary: number, totalIncome: number): number {
     TAX_THRESHOLDS.higherRateLimit - TAX_THRESHOLDS.basicRateLimit
   );
   if (higherRateBand > 0) {
-    tax += higherRateBand * 0.40;
+    tax += higherRateBand * 0.4;
   }
 
   // Additional rate (45%)
-  const additionalRateBand = Math.max(0, taxableIncome - (TAX_THRESHOLDS.higherRateLimit - TAX_THRESHOLDS.personalAllowance));
+  const additionalRateBand = Math.max(
+    0,
+    taxableIncome - (TAX_THRESHOLDS.higherRateLimit - TAX_THRESHOLDS.personalAllowance)
+  );
   if (additionalRateBand > 0) {
     tax += additionalRateBand * 0.45;
   }
@@ -144,7 +150,10 @@ function calculateDividendTax(
   }
 
   // Higher rate dividends (33.75%)
-  const higherRateRemaining = Math.max(0, higherRateBandSize - Math.max(0, salaryUsedInBands - basicRateBandSize));
+  const higherRateRemaining = Math.max(
+    0,
+    higherRateBandSize - Math.max(0, salaryUsedInBands - basicRateBandSize)
+  );
   if (remainingDividends > 0 && higherRateRemaining > 0) {
     const higherRateDividends = Math.min(remainingDividends, higherRateRemaining);
     const higherRateTax = higherRateDividends * higherRate;
@@ -202,9 +211,7 @@ export function calculateDividendTaxResult(inputs: UKDividendTaxInputs): UKDivid
   const allowanceRemaining = Math.max(0, DIVIDEND_RATES.allowance - dividendIncome);
 
   // Effective dividend tax rate
-  const effectiveDividendRate = dividendIncome > 0
-    ? (dividendTax / dividendIncome) * 100
-    : 0;
+  const effectiveDividendRate = dividendIncome > 0 ? (dividendTax / dividendIncome) * 100 : 0;
 
   // Total tax
   const totalTax = incomeTaxOnSalary + niOnSalary + dividendTax;

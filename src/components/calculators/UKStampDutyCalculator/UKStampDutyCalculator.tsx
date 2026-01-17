@@ -9,14 +9,7 @@ import {
   type PropertyLocation,
   type BuyerType,
 } from './types';
-import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  Grid,
-} from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 export default function UKStampDutyCalculator() {
@@ -123,7 +116,10 @@ export default function UKStampDutyCalculator() {
                   }`}
                 />
               </button>
-              <Label className="mb-0 cursor-pointer" onClick={() => updateInput('isNonResident', !inputs.isNonResident)}>
+              <Label
+                className="mb-0 cursor-pointer"
+                onClick={() => updateInput('isNonResident', !inputs.isNonResident)}
+              >
                 Non-UK Resident (+2% surcharge)
               </Label>
             </div>
@@ -132,16 +128,20 @@ export default function UKStampDutyCalculator() {
           {/* Results Section */}
           <div className="space-y-6">
             {/* Main Result */}
-            <div className={`rounded-2xl p-6 border-2 ${
-              result.totalTax === 0
-                ? 'bg-emerald-950/50 border-emerald-500/30'
-                : 'bg-blue-950/50 border-blue-500/30'
-            }`}>
+            <div
+              className={`rounded-2xl p-6 border-2 ${
+                result.totalTax === 0
+                  ? 'bg-emerald-950/50 border-emerald-500/30'
+                  : 'bg-blue-950/50 border-blue-500/30'
+              }`}
+            >
               <div className="text-center">
                 <p className="text-sm text-[var(--color-muted)] mb-1">{result.taxName} Due</p>
-                <p className={`text-4xl md:text-5xl font-display font-bold ${
-                  result.totalTax === 0 ? 'text-emerald-400' : 'text-blue-400'
-                }`}>
+                <p
+                  className={`text-4xl md:text-5xl font-display font-bold ${
+                    result.totalTax === 0 ? 'text-emerald-400' : 'text-blue-400'
+                  }`}
+                >
                   {formatCurrency(result.totalTax)}
                 </p>
                 <p className="text-sm text-[var(--color-muted)] mt-2">
@@ -154,8 +154,18 @@ export default function UKStampDutyCalculator() {
             {result.firstTimeBuyerSaving > 0 && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-emerald-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                   <span className="text-emerald-400 font-medium">
                     First-time buyer saving: {formatCurrency(result.firstTimeBuyerSaving)}
@@ -172,13 +182,17 @@ export default function UKStampDutyCalculator() {
                   {result.additionalPropertySurcharge > 0 && (
                     <div className="flex justify-between">
                       <span className="text-[var(--color-subtle)]">Additional property (5%)</span>
-                      <span className="text-amber-400">{formatCurrency(result.additionalPropertySurcharge)}</span>
+                      <span className="text-amber-400">
+                        {formatCurrency(result.additionalPropertySurcharge)}
+                      </span>
                     </div>
                   )}
                   {result.nonResidentSurcharge > 0 && (
                     <div className="flex justify-between">
                       <span className="text-[var(--color-subtle)]">Non-UK resident (2%)</span>
-                      <span className="text-amber-400">{formatCurrency(result.nonResidentSurcharge)}</span>
+                      <span className="text-amber-400">
+                        {formatCurrency(result.nonResidentSurcharge)}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -187,14 +201,22 @@ export default function UKStampDutyCalculator() {
 
             {/* Band Breakdown */}
             <div>
-              <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">Tax Band Breakdown</h3>
+              <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">
+                Tax Band Breakdown
+              </h3>
               <div className="bg-white/5 rounded-xl overflow-hidden">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-white/10">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">Band</th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">Rate</th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">Tax</th>
+                      <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                        Band
+                      </th>
+                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                        Rate
+                      </th>
+                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                        Tax
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -213,7 +235,10 @@ export default function UKStampDutyCalculator() {
                     ))}
                     {result.bands.length === 0 && (
                       <tr>
-                        <td colSpan={3} className="px-4 py-3 text-sm text-[var(--color-muted)] text-center">
+                        <td
+                          colSpan={3}
+                          className="px-4 py-3 text-sm text-[var(--color-muted)] text-center"
+                        >
                           No tax due - below threshold
                         </td>
                       </tr>
@@ -221,7 +246,9 @@ export default function UKStampDutyCalculator() {
                   </tbody>
                   <tfoot>
                     <tr className="bg-white/5">
-                      <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">Total</td>
+                      <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
+                        Total
+                      </td>
                       <td></td>
                       <td className="text-right px-4 py-3 text-sm font-bold text-blue-400">
                         {formatCurrency(result.totalTax)}
@@ -234,19 +261,27 @@ export default function UKStampDutyCalculator() {
 
             {/* Quick Reference */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">Quick Reference</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                Quick Reference
+              </h4>
               <Grid responsive={{ sm: 2, md: 3 }} gap="sm">
                 <div>
                   <p className="text-xs text-[var(--color-muted)]">Property Value</p>
-                  <p className="text-lg font-semibold text-[var(--color-cream)]">{formatCurrency(inputs.propertyPrice)}</p>
+                  <p className="text-lg font-semibold text-[var(--color-cream)]">
+                    {formatCurrency(inputs.propertyPrice)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-[var(--color-muted)]">Tax Amount</p>
-                  <p className="text-lg font-semibold text-blue-400">{formatCurrency(result.totalTax)}</p>
+                  <p className="text-lg font-semibold text-blue-400">
+                    {formatCurrency(result.totalTax)}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs text-[var(--color-muted)]">Total Cost</p>
-                  <p className="text-lg font-semibold text-[var(--color-cream)]">{formatCurrency(inputs.propertyPrice + result.totalTax)}</p>
+                  <p className="text-lg font-semibold text-[var(--color-cream)]">
+                    {formatCurrency(inputs.propertyPrice + result.totalTax)}
+                  </p>
                 </div>
               </Grid>
             </div>

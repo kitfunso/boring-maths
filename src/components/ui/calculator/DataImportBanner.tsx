@@ -89,10 +89,7 @@ export function DataImportBanner({
                 {availableImports[0].friendlyLabel}:{' '}
                 <span className="text-[var(--color-subtle)]">
                   {formatValue
-                    ? formatValue(
-                        availableImports[0].sharedKey,
-                        availableImports[0].entry.value
-                      )
+                    ? formatValue(availableImports[0].sharedKey, availableImports[0].entry.value)
                     : String(availableImports[0].entry.value)}
                 </span>{' '}
                 saved {timeAgo}
@@ -118,12 +115,7 @@ export function DataImportBanner({
             className="p-1.5 text-[var(--color-muted)] hover:text-[var(--color-cream)] transition-colors"
             aria-label="Dismiss"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

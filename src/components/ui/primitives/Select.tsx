@@ -7,7 +7,10 @@ export interface SelectOption<T = string> {
   icon?: string;
 }
 
-export interface SelectProps<T = string> extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onChange' | 'value'> {
+export interface SelectProps<T = string> extends Omit<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  'onChange' | 'value'
+> {
   /** Options to display */
   options: SelectOption<T>[];
   /** Controlled value */

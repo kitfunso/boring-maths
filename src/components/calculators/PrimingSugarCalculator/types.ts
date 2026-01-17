@@ -52,7 +52,7 @@ export const STYLE_PRESETS = [
 // Residual CO2 lookup table (volumes CO2 by temp in F)
 // Beer retains dissolved CO2 from fermentation
 export const RESIDUAL_CO2_TABLE: Record<number, number> = {
-  32: 1.70,
+  32: 1.7,
   34: 1.63,
   36: 1.56,
   38: 1.49,
@@ -74,7 +74,7 @@ export const RESIDUAL_CO2_TABLE: Record<number, number> = {
   70: 0.79,
   72: 0.76,
   74: 0.73,
-  76: 0.70,
+  76: 0.7,
   78: 0.68,
   80: 0.65,
 };

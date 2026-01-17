@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateDiscount, calculateDiscountScenarios, formatCurrency, formatPercent } from './calculations';
+import {
+  calculateDiscount,
+  calculateDiscountScenarios,
+  formatCurrency,
+  formatPercent,
+} from './calculations';
 import {
   getDefaultInputs,
   COMMON_DISCOUNTS,
@@ -29,7 +34,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function DiscountCalculator() {
-  const [inputs, setInputs] = useState<DiscountInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<DiscountInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculateDiscount(inputs), [inputs]);
@@ -60,12 +67,7 @@ export default function DiscountCalculator() {
         <CalculatorHeader
           title="Discount Calculator"
           subtitle="Calculate sale prices and savings"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -93,7 +95,9 @@ export default function DiscountCalculator() {
 
             {/* Original Price - always shown */}
             <div>
-              <Label htmlFor="originalPrice" required>Original Price</Label>
+              <Label htmlFor="originalPrice" required>
+                Original Price
+              </Label>
               <Input
                 id="originalPrice"
                 variant="currency"
@@ -109,7 +113,9 @@ export default function DiscountCalculator() {
             {/* Mode-specific inputs */}
             {inputs.mode === 'percentOff' && (
               <div>
-                <Label htmlFor="discountPercent" required>Discount Percentage</Label>
+                <Label htmlFor="discountPercent" required>
+                  Discount Percentage
+                </Label>
                 <Input
                   id="discountPercent"
                   variant="percentage"
@@ -141,7 +147,9 @@ export default function DiscountCalculator() {
 
             {inputs.mode === 'finalPrice' && (
               <div>
-                <Label htmlFor="finalPrice" required>Sale Price</Label>
+                <Label htmlFor="finalPrice" required>
+                  Sale Price
+                </Label>
                 <Input
                   id="finalPrice"
                   variant="currency"
@@ -157,7 +165,9 @@ export default function DiscountCalculator() {
 
             {inputs.mode === 'savedAmount' && (
               <div>
-                <Label htmlFor="savedAmount" required>Amount Saved</Label>
+                <Label htmlFor="savedAmount" required>
+                  Amount Saved
+                </Label>
                 <Input
                   id="savedAmount"
                   variant="currency"
@@ -262,8 +272,8 @@ export default function DiscountCalculator() {
                 </div>
 
                 <Alert variant="tip" title="Shopping tip:">
-                  Compare the per-unit price when shopping in bulk. A bigger package isn't always
-                  a better deal. Use this calculator to find the true savings on any sale.
+                  Compare the per-unit price when shopping in bulk. A bigger package isn't always a
+                  better deal. Use this calculator to find the true savings on any sale.
                 </Alert>
               </>
             ) : (

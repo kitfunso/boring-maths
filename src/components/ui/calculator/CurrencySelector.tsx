@@ -29,11 +29,7 @@ export interface CurrencySelectorProps {
  * />
  * ```
  */
-export function CurrencySelector({
-  value,
-  onChange,
-  className = '',
-}: CurrencySelectorProps) {
+export function CurrencySelector({ value, onChange, className = '' }: CurrencySelectorProps) {
   // Sync with global currency on mount and listen for changes
   useEffect(() => {
     // Load initial value from localStorage
@@ -58,9 +54,11 @@ export function CurrencySelector({
     localStorage.setItem(STORAGE_KEY, newCurrency);
 
     // Notify other calculators
-    window.dispatchEvent(new CustomEvent('currencyChange', {
-      detail: { currency: newCurrency }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('currencyChange', {
+        detail: { currency: newCurrency },
+      })
+    );
 
     // Update local state
     onChange(newCurrency);

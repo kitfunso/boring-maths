@@ -14,8 +14,10 @@ import IdealGasLawCalculator from '../../components/calculators/IdealGasLawCalcu
 
 // SEO Configuration
 const title = 'Ideal Gas Law Calculator | PV = nRT';
-const description = 'Calculate pressure, volume, moles, or temperature using the ideal gas law (PV=nRT). Free online calculator with common gas presets and density calculation.';
-const keywords = 'ideal gas law calculator, PV=nRT calculator, gas law calculator, molar volume calculator, gas density calculator, chemistry calculator, thermodynamics';
+const description =
+  'Calculate pressure, volume, moles, or temperature using the ideal gas law (PV=nRT). Free online calculator with common gas presets and density calculation.';
+const keywords =
+  'ideal gas law calculator, PV=nRT calculator, gas law calculator, molar volume calculator, gas density calculator, chemistry calculator, thermodynamics';
 const canonicalURL = '/calculators/ideal-gas-law-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -47,29 +49,35 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "What is the ideal gas law?",
-    answer: "The ideal gas law (PV = nRT) relates the pressure (P), volume (V), amount of substance (n), and temperature (T) of an ideal gas through the universal gas constant (R = 8.314 J/mol·K). It's fundamental for gas-phase calculations."
+    question: 'What is the ideal gas law?',
+    answer:
+      "The ideal gas law (PV = nRT) relates the pressure (P), volume (V), amount of substance (n), and temperature (T) of an ideal gas through the universal gas constant (R = 8.314 J/mol·K). It's fundamental for gas-phase calculations.",
   },
   {
-    question: "When is the ideal gas law accurate?",
-    answer: "The ideal gas law is most accurate at low pressures (< 5 atm) and moderate to high temperatures (well above the boiling point). At high pressures or near condensation, real gas equations like van der Waals should be used."
+    question: 'When is the ideal gas law accurate?',
+    answer:
+      'The ideal gas law is most accurate at low pressures (< 5 atm) and moderate to high temperatures (well above the boiling point). At high pressures or near condensation, real gas equations like van der Waals should be used.',
   },
   {
-    question: "What is the molar volume at STP?",
-    answer: "At Standard Temperature and Pressure (0°C, 1 atm), one mole of an ideal gas occupies 22.414 liters. This is a useful reference for gas volume calculations."
+    question: 'What is the molar volume at STP?',
+    answer:
+      'At Standard Temperature and Pressure (0°C, 1 atm), one mole of an ideal gas occupies 22.414 liters. This is a useful reference for gas volume calculations.',
   },
   {
-    question: "How do I calculate gas density from the ideal gas law?",
-    answer: "Gas density can be calculated as ρ = PM/(RT), where M is the molar mass. This calculator automatically computes density when you provide the molar mass of your gas."
+    question: 'How do I calculate gas density from the ideal gas law?',
+    answer:
+      'Gas density can be calculated as ρ = PM/(RT), where M is the molar mass. This calculator automatically computes density when you provide the molar mass of your gas.',
   },
   {
-    question: "What is the gas constant R?",
-    answer: "The universal gas constant R = 8.314 J/(mol·K) = 8.314 Pa·m³/(mol·K). In other units: R = 0.0821 L·atm/(mol·K) or R = 1.987 cal/(mol·K)."
+    question: 'What is the gas constant R?',
+    answer:
+      'The universal gas constant R = 8.314 J/(mol·K) = 8.314 Pa·m³/(mol·K). In other units: R = 0.0821 L·atm/(mol·K) or R = 1.987 cal/(mol·K).',
   },
   {
-    question: "Can I use this for real gases?",
-    answer: "This calculator uses the ideal gas law, which is an approximation. For real gases at high pressure or low temperature, the results may deviate. The calculator provides a warning when conditions suggest significant deviation."
-  }
+    question: 'Can I use this for real gases?',
+    answer:
+      'This calculator uses the ideal gas law, which is an approximation. For real gases at high pressure or low temperature, the results may deviate. The calculator provides a warning when conditions suggest significant deviation.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -111,12 +119,12 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Select which variable to <strong>solve for</strong> (Pressure, Volume, Moles, or Temperature).
-      The selected variable will be calculated from the other three values.
+      Select which variable to <strong>solve for</strong> (Pressure, Volume, Moles, or Temperature). The
+      selected variable will be calculated from the other three values.
     </p>
     <p>
-      Choose a <strong>common gas</strong> from the dropdown to automatically set the molar mass,
-      which is used for density calculations. Or enter a custom molar mass.
+      Choose a <strong>common gas</strong> from the dropdown to automatically set the molar mass, which
+      is used for density calculations. Or enter a custom molar mass.
     </p>
     <p>
       The calculator shows all state variables, gas density, and molar volume at your specified
@@ -127,20 +135,20 @@ const schemaBreadcrumbs = [
   <!-- Understanding Results Section -->
   <ContentSection title="Understanding the Ideal Gas Law">
     <p>
-      <strong>Pressure (P)</strong> - The force per unit area exerted by the gas molecules.
-      Higher temperatures or more moles in a fixed volume increase pressure.
+      <strong>Pressure (P)</strong> - The force per unit area exerted by the gas molecules. Higher temperatures
+      or more moles in a fixed volume increase pressure.
     </p>
     <p>
-      <strong>Volume (V)</strong> - The space occupied by the gas. Gases expand to fill
-      their container and compress under pressure.
+      <strong>Volume (V)</strong> - The space occupied by the gas. Gases expand to fill their container
+      and compress under pressure.
     </p>
     <p>
-      <strong>Amount (n)</strong> - The number of moles of gas. One mole contains
-      6.022 × 10²³ molecules (Avogadro's number).
+      <strong>Amount (n)</strong> - The number of moles of gas. One mole contains 6.022 × 10²³ molecules
+      (Avogadro's number).
     </p>
     <p>
-      <strong>Temperature (T)</strong> - Must be in absolute units (Kelvin) for calculations.
-      Temperature represents the average kinetic energy of gas molecules.
+      <strong>Temperature (T)</strong> - Must be in absolute units (Kelvin) for calculations. Temperature
+      represents the average kinetic energy of gas molecules.
     </p>
   </ContentSection>
 

@@ -14,17 +14,16 @@ import LMTDCalculator from '../../components/calculators/LMTDCalculator/LMTDCalc
 
 // SEO Configuration
 const title = 'LMTD Calculator | Log Mean Temperature Difference';
-const description = 'Calculate LMTD for heat exchanger design. Supports counter-flow, parallel-flow, cross-flow, and shell & tube configurations with F correction factor.';
-const keywords = 'LMTD calculator, log mean temperature difference, heat exchanger calculator, heat transfer calculator, F factor, counter flow, shell and tube, chemical engineering';
+const description =
+  'Calculate LMTD for heat exchanger design. Supports counter-flow, parallel-flow, cross-flow, and shell & tube configurations with F correction factor.';
+const keywords =
+  'LMTD calculator, log mean temperature difference, heat exchanger calculator, heat transfer calculator, F factor, counter flow, shell and tube, chemical engineering';
 const canonicalURL = '/calculators/lmtd-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'LMTD Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'LMTD Calculator' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,29 +46,35 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "What is LMTD?",
-    answer: "Log Mean Temperature Difference (LMTD) is the driving force for heat transfer in a heat exchanger. It accounts for the varying temperature difference along the length of the exchanger and is used with Q = U × A × LMTD to size heat exchangers."
+    question: 'What is LMTD?',
+    answer:
+      'Log Mean Temperature Difference (LMTD) is the driving force for heat transfer in a heat exchanger. It accounts for the varying temperature difference along the length of the exchanger and is used with Q = U × A × LMTD to size heat exchangers.',
   },
   {
-    question: "Why is counter-flow more efficient than parallel-flow?",
-    answer: "In counter-flow, the temperature difference is more uniform along the exchanger, giving a higher LMTD. Counter-flow can also achieve closer approach temperatures - the cold fluid can exit hotter than the hot fluid outlet temperature."
+    question: 'Why is counter-flow more efficient than parallel-flow?',
+    answer:
+      'In counter-flow, the temperature difference is more uniform along the exchanger, giving a higher LMTD. Counter-flow can also achieve closer approach temperatures - the cold fluid can exit hotter than the hot fluid outlet temperature.',
   },
   {
-    question: "What is the F correction factor?",
-    answer: "The F factor corrects LMTD for heat exchangers that deviate from pure counter-flow, such as shell & tube or cross-flow configurations. F ranges from 0 to 1, with values below 0.75 generally indicating poor design."
+    question: 'What is the F correction factor?',
+    answer:
+      'The F factor corrects LMTD for heat exchangers that deviate from pure counter-flow, such as shell & tube or cross-flow configurations. F ranges from 0 to 1, with values below 0.75 generally indicating poor design.',
   },
   {
-    question: "When do I need to use the corrected LMTD?",
-    answer: "Use corrected LMTD (F × LMTD) for multi-pass shell & tube exchangers, cross-flow exchangers, or any configuration that isn't pure counter-flow or parallel-flow. The correction accounts for reduced effectiveness."
+    question: 'When do I need to use the corrected LMTD?',
+    answer:
+      "Use corrected LMTD (F × LMTD) for multi-pass shell & tube exchangers, cross-flow exchangers, or any configuration that isn't pure counter-flow or parallel-flow. The correction accounts for reduced effectiveness.",
   },
   {
-    question: "What is a temperature cross?",
-    answer: "A temperature cross occurs when the cold outlet exceeds the hot outlet temperature. This is impossible in parallel-flow but achievable in counter-flow. The calculator validates temperatures and warns of invalid configurations."
+    question: 'What is a temperature cross?',
+    answer:
+      'A temperature cross occurs when the cold outlet exceeds the hot outlet temperature. This is impossible in parallel-flow but achievable in counter-flow. The calculator validates temperatures and warns of invalid configurations.',
   },
   {
-    question: "How do I use LMTD to size a heat exchanger?",
-    answer: "Use Q = U × A × LMTD, where Q is heat duty (W), U is overall heat transfer coefficient (W/m²·K), A is heat transfer area (m²), and LMTD is from this calculator. Typical U values: water-water 850-1700, steam-water 1000-6000, gas-gas 10-30 W/m²·K."
-  }
+    question: 'How do I use LMTD to size a heat exchanger?',
+    answer:
+      'Use Q = U × A × LMTD, where Q is heat duty (W), U is overall heat transfer coefficient (W/m²·K), A is heat transfer area (m²), and LMTD is from this calculator. Typical U values: water-water 850-1700, steam-water 1000-6000, gas-gas 10-30 W/m²·K.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -116,32 +121,32 @@ const schemaBreadcrumbs = [
     </p>
     <p>
       Enter the <strong>hot fluid temperatures</strong> (inlet and outlet) and
-      <strong>cold fluid temperatures</strong>. The calculator validates your inputs
-      to ensure a physically possible heat exchanger configuration.
+      <strong>cold fluid temperatures</strong>. The calculator validates your inputs to ensure a
+      physically possible heat exchanger configuration.
     </p>
     <p>
-      For shell & tube exchangers, specify the number of <strong>shell and tube passes</strong>.
-      The F factor is automatically calculated based on these parameters.
+      For shell & tube exchangers, specify the number of <strong>shell and tube passes</strong>. The
+      F factor is automatically calculated based on these parameters.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Flow Arrangements Explained">
     <p>
-      <strong>Counter-flow</strong> - Fluids flow in opposite directions. Highest LMTD,
-      F = 1.0. Preferred for maximum heat recovery.
+      <strong>Counter-flow</strong> - Fluids flow in opposite directions. Highest LMTD, F = 1.0. Preferred
+      for maximum heat recovery.
     </p>
     <p>
-      <strong>Parallel-flow</strong> - Fluids flow in same direction. Lower LMTD than
-      counter-flow. Cold outlet cannot exceed hot outlet.
+      <strong>Parallel-flow</strong> - Fluids flow in same direction. Lower LMTD than counter-flow. Cold
+      outlet cannot exceed hot outlet.
     </p>
     <p>
-      <strong>Cross-flow</strong> - Fluids flow perpendicular. Common in air-cooled
-      exchangers. F typically 0.85-0.95.
+      <strong>Cross-flow</strong> - Fluids flow perpendicular. Common in air-cooled exchangers. F typically
+      0.85-0.95.
     </p>
     <p>
-      <strong>Shell & Tube</strong> - Multiple tube passes inside a shell. Most common
-      industrial exchanger. F depends on pass configuration (typically 0.75-0.95).
+      <strong>Shell & Tube</strong> - Multiple tube passes inside a shell. Most common industrial exchanger.
+      F depends on pass configuration (typically 0.75-0.95).
     </p>
   </ContentSection>
 

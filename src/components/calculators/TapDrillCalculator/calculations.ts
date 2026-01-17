@@ -55,14 +55,14 @@ function calculateImperialTapDrill(
 ): { tapDrill: number; minor: number; pitch: number } {
   // Thread height constant for 60° thread (UN/ISO)
   const H = 0.866025 / tpi; // Height of sharp V thread
-  const basicPitch = majorDiameter - (0.6495 / tpi);
+  const basicPitch = majorDiameter - 0.6495 / tpi;
 
   // Minor diameter for 100% thread
-  const minorDiameter100 = majorDiameter - (1.0825 / tpi);
+  const minorDiameter100 = majorDiameter - 1.0825 / tpi;
 
   // Calculate tap drill for desired thread percentage
   // Tap drill = Major - (thread% × 1.0825 / (100 × TPI))
-  const tapDrill = majorDiameter - ((threadPercentage / 100) * 1.0825 / tpi);
+  const tapDrill = majorDiameter - ((threadPercentage / 100) * 1.0825) / tpi;
 
   return {
     tapDrill,
@@ -85,13 +85,13 @@ function calculateMetricTapDrill(
   const H = 0.866025 * pitch;
 
   // Minor diameter for 100% thread
-  const minorDiameter100 = majorDiameter - (1.0825 * pitch);
+  const minorDiameter100 = majorDiameter - 1.0825 * pitch;
 
   // Pitch diameter
-  const pitchDiameter = majorDiameter - (0.6495 * pitch);
+  const pitchDiameter = majorDiameter - 0.6495 * pitch;
 
   // Calculate tap drill for desired thread percentage
-  const tapDrill = majorDiameter - ((threadPercentage / 100) * 1.0825 * pitch);
+  const tapDrill = majorDiameter - (threadPercentage / 100) * 1.0825 * pitch;
 
   return {
     tapDrill,

@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateFishStocking, formatGallons, getStatusColor, getStatusLabel } from './calculations';
+import {
+  calculateFishStocking,
+  formatGallons,
+  getStatusColor,
+  getStatusLabel,
+} from './calculations';
 import {
   getDefaultInputs,
   generateId,
@@ -35,7 +40,10 @@ export default function FishStockingCalculator() {
 
   const result = useMemo(() => calculateFishStocking(inputs), [inputs]);
 
-  const updateInput = <K extends keyof FishStockingInputs>(field: K, value: FishStockingInputs[K]) => {
+  const updateInput = <K extends keyof FishStockingInputs>(
+    field: K,
+    value: FishStockingInputs[K]
+  ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -52,9 +60,7 @@ export default function FishStockingCalculator() {
   const updateFish = (id: string, field: keyof FishEntry, value: string | number) => {
     setInputs((prev) => ({
       ...prev,
-      fish: prev.fish.map((f) =>
-        f.id === id ? { ...f, [field]: value } : f
-      ),
+      fish: prev.fish.map((f) => (f.id === id ? { ...f, [field]: value } : f)),
     }));
   };
 
@@ -66,11 +72,14 @@ export default function FishStockingCalculator() {
   };
 
   // Group fish by category
-  const fishByCategory = COMMON_FISH.reduce((acc, fish) => {
-    if (!acc[fish.category]) acc[fish.category] = [];
-    acc[fish.category].push(fish);
-    return acc;
-  }, {} as Record<string, typeof COMMON_FISH>);
+  const fishByCategory = COMMON_FISH.reduce(
+    (acc, fish) => {
+      if (!acc[fish.category]) acc[fish.category] = [];
+      acc[fish.category].push(fish);
+      return acc;
+    },
+    {} as Record<string, typeof COMMON_FISH>
+  );
 
   const stockingBarWidth = Math.min(result.stockingLevel, 150);
 
@@ -140,7 +149,7 @@ export default function FishStockingCalculator() {
               <div>
                 <Label>Filtration</Label>
                 <ButtonGroup
-                  options={FILTER_TYPES.map(f => ({ value: f.value, label: f.label }))}
+                  options={FILTER_TYPES.map((f) => ({ value: f.value, label: f.label }))}
                   value={inputs.filterType}
                   onChange={(value) => updateInput('filterType', value as FilterType)}
                   size="sm"
@@ -149,7 +158,7 @@ export default function FishStockingCalculator() {
               <div>
                 <Label>Plants</Label>
                 <ButtonGroup
-                  options={PLANT_LEVELS.map(p => ({ value: p.value, label: p.label }))}
+                  options={PLANT_LEVELS.map((p) => ({ value: p.value, label: p.label }))}
                   value={inputs.plantLevel}
                   onChange={(value) => updateInput('plantLevel', value as PlantLevel)}
                   size="sm"
@@ -169,26 +178,42 @@ export default function FishStockingCalculator() {
             {/* Current Fish */}
             <div className="space-y-2 mb-4">
               {inputs.fish.map((fish) => (
-                <div key={fish.id} className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3">
+                <div
+                  key={fish.id}
+                  className="flex gap-3 items-center bg-[var(--color-night)] rounded-lg p-3"
+                >
                   <span className="flex-1 text-[var(--color-cream)]">{fish.species}</span>
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => updateFish(fish.id, 'quantity', Math.max(1, fish.quantity - 1))}
+                      onClick={() =>
+                        updateFish(fish.id, 'quantity', Math.max(1, fish.quantity - 1))
+                      }
                       className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                    >-</button>
+                    >
+                      -
+                    </button>
                     <span className="w-8 text-center">{fish.quantity}</span>
                     <button
                       onClick={() => updateFish(fish.id, 'quantity', fish.quantity + 1)}
                       className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
-                    >+</button>
+                    >
+                      +
+                    </button>
                   </div>
-                  <span className="text-sm text-[var(--color-muted)] w-16">({fish.size}" each)</span>
+                  <span className="text-sm text-[var(--color-muted)] w-16">
+                    ({fish.size}" each)
+                  </span>
                   <button
                     onClick={() => removeFish(fish.id)}
                     className="p-2 text-red-400 hover:text-red-300 hover:bg-red-900/30 rounded-lg transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -207,7 +232,7 @@ export default function FishStockingCalculator() {
                 onChange={(e) => {
                   const value = (e.target as HTMLSelectElement).value;
                   if (value) {
-                    const fish = COMMON_FISH.find(f => f.species === value);
+                    const fish = COMMON_FISH.find((f) => f.species === value);
                     if (fish) addFish(fish.species, fish.size);
                     (e.target as HTMLSelectElement).value = '';
                   }
@@ -235,7 +260,9 @@ export default function FishStockingCalculator() {
             {/* Stocking Level Bar */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm font-semibold text-[var(--color-cream)]">Stocking Level</span>
+                <span className="text-sm font-semibold text-[var(--color-cream)]">
+                  Stocking Level
+                </span>
                 <span className={`text-lg font-bold ${getStatusColor(result.stockingStatus)}`}>
                   {result.stockingLevel}%
                 </span>
@@ -243,11 +270,15 @@ export default function FishStockingCalculator() {
               <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden mb-2">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${
-                    result.stockingStatus === 'critical' ? 'bg-red-500' :
-                    result.stockingStatus === 'overstocked' ? 'bg-orange-500' :
-                    result.stockingStatus === 'moderate' ? 'bg-yellow-500' :
-                    result.stockingStatus === 'ideal' ? 'bg-green-500' :
-                    'bg-blue-500'
+                    result.stockingStatus === 'critical'
+                      ? 'bg-red-500'
+                      : result.stockingStatus === 'overstocked'
+                        ? 'bg-orange-500'
+                        : result.stockingStatus === 'moderate'
+                          ? 'bg-yellow-500'
+                          : result.stockingStatus === 'ideal'
+                            ? 'bg-green-500'
+                            : 'bg-blue-500'
                   }`}
                   style={{ width: `${stockingBarWidth}%` }}
                 />
@@ -290,8 +321,8 @@ export default function FishStockingCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Stocking Guidelines:">
-              The "1 inch per gallon" rule is outdated. We use 1" per 2 gallons for better fish health.
-              Consider fish behavior, territory needs, and adult size - not current size.
+              The "1 inch per gallon" rule is outdated. We use 1" per 2 gallons for better fish
+              health. Consider fish behavior, territory needs, and adult size - not current size.
               Schooling fish should be kept in groups of 6+.
             </Alert>
 

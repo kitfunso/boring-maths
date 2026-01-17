@@ -12,15 +12,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ABVCalculator } from '../../components/calculators/ABVCalculator';
 
 const title = 'ABV Calculator | Alcohol By Volume from Gravity';
-const description = 'Free ABV calculator for homebrewing beer, wine, mead, and cider. Calculate alcohol content from original and final gravity readings with attenuation.';
-const keywords = 'abv calculator, alcohol calculator, gravity calculator, homebrew calculator, beer abv, wine abv, mead calculator, original gravity, final gravity';
+const description =
+  'Free ABV calculator for homebrewing beer, wine, mead, and cider. Calculate alcohol content from original and final gravity readings with attenuation.';
+const keywords =
+  'abv calculator, alcohol calculator, gravity calculator, homebrew calculator, beer abv, wine abv, mead calculator, original gravity, final gravity';
 const canonicalURL = '/calculators/abv-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'ABV Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'ABV Calculator' }];
 
 const relatedCalculators = [
   {
@@ -34,28 +33,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How do I measure original gravity (OG)?",
-    answer: "Use a hydrometer or refractometer on cooled wort/must before adding yeast. For hydrometers, ensure the sample is at the calibration temperature (usually 60°F or 68°F). Take the reading at the bottom of the meniscus."
+    question: 'How do I measure original gravity (OG)?',
+    answer:
+      'Use a hydrometer or refractometer on cooled wort/must before adding yeast. For hydrometers, ensure the sample is at the calibration temperature (usually 60°F or 68°F). Take the reading at the bottom of the meniscus.',
   },
   {
-    question: "When should I take final gravity (FG)?",
-    answer: "Take FG when fermentation is complete - typically when gravity readings are stable for 2-3 consecutive days. For beer, this is usually 1-2 weeks; wine and mead may take longer. Don't rush this step."
+    question: 'When should I take final gravity (FG)?',
+    answer:
+      "Take FG when fermentation is complete - typically when gravity readings are stable for 2-3 consecutive days. For beer, this is usually 1-2 weeks; wine and mead may take longer. Don't rush this step.",
   },
   {
-    question: "What does attenuation mean?",
-    answer: "Attenuation is the percentage of sugars consumed by yeast. Higher attenuation (75-85%) means a drier, less sweet finish. Lower attenuation (65-75%) leaves residual sweetness. Different yeast strains have different attenuation ranges."
+    question: 'What does attenuation mean?',
+    answer:
+      'Attenuation is the percentage of sugars consumed by yeast. Higher attenuation (75-85%) means a drier, less sweet finish. Lower attenuation (65-75%) leaves residual sweetness. Different yeast strains have different attenuation ranges.',
   },
   {
-    question: "How accurate is the ABV formula?",
-    answer: "The standard formula (OG-FG)×131.25 is accurate within 0.1-0.2% for typical beers. For very high gravity brews (above 1.080 OG), more complex formulas may be slightly more accurate. Our calculator is sufficient for all practical purposes."
+    question: 'How accurate is the ABV formula?',
+    answer:
+      'The standard formula (OG-FG)×131.25 is accurate within 0.1-0.2% for typical beers. For very high gravity brews (above 1.080 OG), more complex formulas may be slightly more accurate. Our calculator is sufficient for all practical purposes.',
   },
   {
-    question: "Why is temperature correction important?",
-    answer: "Hydrometers are calibrated at specific temperatures (usually 60°F or 68°F). Warmer samples read lower than actual; colder samples read higher. Temperature correction ensures accurate gravity readings if you can't cool your sample."
+    question: 'Why is temperature correction important?',
+    answer:
+      "Hydrometers are calibrated at specific temperatures (usually 60°F or 68°F). Warmer samples read lower than actual; colder samples read higher. Temperature correction ensures accurate gravity readings if you can't cool your sample.",
   },
   {
     question: "What's the difference between ABV and ABW?",
-    answer: "ABV (Alcohol By Volume) measures alcohol as a percentage of total volume. ABW (Alcohol By Weight) measures by mass. ABV is about 1.25× higher than ABW because alcohol is lighter than water. Most countries use ABV."
+    answer:
+      'ABV (Alcohol By Volume) measures alcohol as a percentage of total volume. ABW (Alcohol By Weight) measures by mass. ABV is about 1.25× higher than ABW because alcohol is lighter than water. Most countries use ABV.',
   },
 ];
 
@@ -93,9 +98,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Gravity Readings">
     <p>
-      Specific gravity measures the density of liquid compared to water (1.000).
-      Sugary wort/must has higher gravity; as yeast converts sugar to alcohol,
-      gravity drops. The difference tells us how much alcohol was produced.
+      Specific gravity measures the density of liquid compared to water (1.000). Sugary wort/must
+      has higher gravity; as yeast converts sugar to alcohol, gravity drops. The difference tells us
+      how much alcohol was produced.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Typical Gravity Ranges</h3>
     <ul class="list-disc list-inside space-y-1">

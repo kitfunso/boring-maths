@@ -48,8 +48,8 @@ export function calculateMortgage(inputs: MortgageInputs): MortgageResult {
   if (monthlyRate === 0) {
     monthlyPI = loanAmount / numPayments;
   } else {
-    monthlyPI = loanAmount *
-      (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+    monthlyPI =
+      (loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments))) /
       (Math.pow(1 + monthlyRate, numPayments) - 1);
   }
 

@@ -5,7 +5,8 @@
 import type { ABVInputs, ABVResult } from './types';
 
 export function calculateABV(inputs: ABVInputs): ABVResult {
-  let { originalGravity, finalGravity, temperatureCorrection, measurementTemp, calibrationTemp } = inputs;
+  let { originalGravity, finalGravity, temperatureCorrection, measurementTemp, calibrationTemp } =
+    inputs;
 
   // Temperature correction if enabled
   if (temperatureCorrection) {
@@ -56,11 +57,15 @@ export function calculateABV(inputs: ABVInputs): ABVResult {
 // Temperature correction for hydrometer readings
 function correctGravity(sg: number, measuredTemp: number, calibrationTemp: number): number {
   // Formula for temperature correction
-  const correction = 0.00130346 - 0.000134722124 * measuredTemp +
+  const correction =
+    0.00130346 -
+    0.000134722124 * measuredTemp +
     0.00000204052596 * Math.pow(measuredTemp, 2) -
     0.00000000232820948 * Math.pow(measuredTemp, 3);
 
-  const calibrationCorrection = 0.00130346 - 0.000134722124 * calibrationTemp +
+  const calibrationCorrection =
+    0.00130346 -
+    0.000134722124 * calibrationTemp +
     0.00000204052596 * Math.pow(calibrationTemp, 2) -
     0.00000000232820948 * Math.pow(calibrationTemp, 3);
 
@@ -70,7 +75,7 @@ function correctGravity(sg: number, measuredTemp: number, calibrationTemp: numbe
 // Convert Specific Gravity to Plato
 function sgToPlato(sg: number): number {
   // More accurate conversion formula
-  return (-1 * 616.868) + (1111.14 * sg) - (630.272 * Math.pow(sg, 2)) + (135.997 * Math.pow(sg, 3));
+  return -1 * 616.868 + 1111.14 * sg - 630.272 * Math.pow(sg, 2) + 135.997 * Math.pow(sg, 3);
 }
 
 export function formatPercent(value: number): string {

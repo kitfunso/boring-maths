@@ -35,18 +35,17 @@ export interface ThemeProviderProps {
 export function ThemeProvider({ children, defaultColor = 'blue' }: ThemeProviderProps) {
   const [color, setColor] = useState<ThemeColor>(defaultColor);
 
-  const value = useMemo<ThemeContextValue>(() => ({
-    color,
-    tokens: COLOR_TOKENS[color],
-    setColor,
-    getToken: (key) => COLOR_TOKENS[color][key],
-  }), [color]);
-
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+  const value = useMemo<ThemeContextValue>(
+    () => ({
+      color,
+      tokens: COLOR_TOKENS[color],
+      setColor,
+      getToken: (key) => COLOR_TOKENS[color][key],
+    }),
+    [color]
   );
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 /**

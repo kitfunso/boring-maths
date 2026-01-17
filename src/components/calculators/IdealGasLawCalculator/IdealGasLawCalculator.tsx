@@ -35,10 +35,7 @@ export default function IdealGasLawCalculator() {
     return calculateIdealGas(inputs);
   }, [inputs]);
 
-  const updateInput = <K extends keyof IdealGasInputs>(
-    field: K,
-    value: IdealGasInputs[K]
-  ) => {
+  const updateInput = <K extends keyof IdealGasInputs>(field: K, value: IdealGasInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -51,16 +48,16 @@ export default function IdealGasLawCalculator() {
         ...prev,
         unitSystem: 'imperial',
         pressure: Math.round(prev.pressure * 0.145038 * 100) / 100, // kPa to psi
-        volume: Math.round(prev.volume * 0.0353147 * 1000) / 1000,  // L to ft³
-        temperature: Math.round(prev.temperature * 9 / 5 + 32),     // °C to °F
+        volume: Math.round(prev.volume * 0.0353147 * 1000) / 1000, // L to ft³
+        temperature: Math.round((prev.temperature * 9) / 5 + 32), // °C to °F
       }));
     } else {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
-        pressure: Math.round(prev.pressure * 6.89476 * 100) / 100,  // psi to kPa
-        volume: Math.round(prev.volume * 28.3168 * 100) / 100,      // ft³ to L
-        temperature: Math.round((prev.temperature - 32) * 5 / 9),   // °F to °C
+        pressure: Math.round(prev.pressure * 6.89476 * 100) / 100, // psi to kPa
+        volume: Math.round(prev.volume * 28.3168 * 100) / 100, // ft³ to L
+        temperature: Math.round(((prev.temperature - 32) * 5) / 9), // °F to °C
       }));
     }
   };
@@ -135,10 +132,7 @@ export default function IdealGasLawCalculator() {
               <Label htmlFor="gas">Common Gas (optional)</Label>
               <Select
                 id="gas"
-                options={[
-                  { value: '', label: 'Select a gas...' },
-                  ...gasOptions,
-                ]}
+                options={[{ value: '', label: 'Select a gas...' }, ...gasOptions]}
                 value=""
                 onChange={(value) => handleGasSelect(value)}
               />
@@ -149,8 +143,7 @@ export default function IdealGasLawCalculator() {
               {/* Pressure */}
               <div>
                 <Label htmlFor="pressure" required={inputs.solveFor !== 'pressure'}>
-                  Pressure ({pressureUnit})
-                  {inputs.solveFor === 'pressure' && ' [Calculated]'}
+                  Pressure ({pressureUnit}){inputs.solveFor === 'pressure' && ' [Calculated]'}
                 </Label>
                 <Input
                   id="pressure"
@@ -166,8 +159,7 @@ export default function IdealGasLawCalculator() {
               {/* Volume */}
               <div>
                 <Label htmlFor="volume" required={inputs.solveFor !== 'volume'}>
-                  Volume ({volumeUnit})
-                  {inputs.solveFor === 'volume' && ' [Calculated]'}
+                  Volume ({volumeUnit}){inputs.solveFor === 'volume' && ' [Calculated]'}
                 </Label>
                 <Input
                   id="volume"
@@ -200,14 +192,15 @@ export default function IdealGasLawCalculator() {
               {/* Temperature */}
               <div>
                 <Label htmlFor="temperature" required={inputs.solveFor !== 'temperature'}>
-                  Temperature ({tempUnit})
-                  {inputs.solveFor === 'temperature' && ' [Calculated]'}
+                  Temperature ({tempUnit}){inputs.solveFor === 'temperature' && ' [Calculated]'}
                 </Label>
                 <Input
                   id="temperature"
                   type="number"
                   step={1}
-                  value={inputs.solveFor === 'temperature' ? result.temperature : inputs.temperature}
+                  value={
+                    inputs.solveFor === 'temperature' ? result.temperature : inputs.temperature
+                  }
                   disabled={inputs.solveFor === 'temperature'}
                   onChange={(e) => updateInput('temperature', Number(e.target.value))}
                 />
@@ -216,9 +209,7 @@ export default function IdealGasLawCalculator() {
 
             {/* Molar Mass for density */}
             <div>
-              <Label htmlFor="molarMass">
-                Molar Mass (g/mol)
-              </Label>
+              <Label htmlFor="molarMass">Molar Mass (g/mol)</Label>
               <Input
                 id="molarMass"
                 type="number"
@@ -228,9 +219,7 @@ export default function IdealGasLawCalculator() {
                 value={inputs.molarMass}
                 onChange={(e) => updateInput('molarMass', Number(e.target.value))}
               />
-              <p className="text-sm text-[var(--color-muted)] mt-1">
-                Used for density calculation
-              </p>
+              <p className="text-sm text-[var(--color-muted)] mt-1">Used for density calculation</p>
             </div>
           </div>
 
@@ -256,7 +245,8 @@ export default function IdealGasLawCalculator() {
                 {inputs.solveFor === 'pressure' && pressureUnit}
                 {inputs.solveFor === 'volume' && volumeUnit}
                 {inputs.solveFor === 'moles' && 'mol'}
-                {inputs.solveFor === 'temperature' && `${tempUnit} (${formatNumber(result.temperatureK, 1)} K)`}
+                {inputs.solveFor === 'temperature' &&
+                  `${tempUnit} (${formatNumber(result.temperatureK, 1)} K)`}
               </p>
             </div>
 
@@ -266,24 +256,40 @@ export default function IdealGasLawCalculator() {
                 State Variables
               </h3>
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'pressure' ? 'bg-green-950/50 border border-green-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'pressure' ? 'bg-green-950/50 border border-green-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">P</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.pressure)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.pressure)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{pressureUnit}</p>
                 </div>
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'volume' ? 'bg-green-950/50 border border-green-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'volume' ? 'bg-green-950/50 border border-green-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">V</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.volume)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.volume)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{volumeUnit}</p>
                 </div>
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'moles' ? 'bg-green-950/50 border border-green-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'moles' ? 'bg-green-950/50 border border-green-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">n</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.moles, 4)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.moles, 4)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">mol</p>
                 </div>
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'temperature' ? 'bg-green-950/50 border border-green-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'temperature' ? 'bg-green-950/50 border border-green-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">T</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.temperatureK, 1)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.temperatureK, 1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">K</p>
                 </div>
               </Grid>
@@ -317,9 +323,7 @@ export default function IdealGasLawCalculator() {
               <div className="text-center font-mono text-2xl text-[var(--color-cream)] mb-2">
                 PV = nRT
               </div>
-              <p className="text-sm text-[var(--color-muted)] text-center">
-                R = 8.314 J/(mol·K)
-              </p>
+              <p className="text-sm text-[var(--color-muted)] text-center">R = 8.314 J/(mol·K)</p>
             </div>
 
             {/* Validity Note */}
@@ -327,9 +331,9 @@ export default function IdealGasLawCalculator() {
               variant={result.compressibilityNote.includes('reasonable') ? 'tip' : 'warning'}
               title="Accuracy Note:"
             >
-              {result.compressibilityNote}. The ideal gas law works best at low pressures
-              (&lt;5 atm) and high temperatures. For real gas behavior, consider using
-              van der Waals or other equations of state.
+              {result.compressibilityNote}. The ideal gas law works best at low pressures (&lt;5
+              atm) and high temperatures. For real gas behavior, consider using van der Waals or
+              other equations of state.
             </Alert>
 
             {/* Share Results */}

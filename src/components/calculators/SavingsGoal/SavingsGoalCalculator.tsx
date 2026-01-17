@@ -7,7 +7,12 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateSavingsGoal, formatCurrency } from './calculations';
-import { getDefaultInputs, type SavingsGoalInputs, type SavingsGoalResult, type ContributionFrequency } from './types';
+import {
+  getDefaultInputs,
+  type SavingsGoalInputs,
+  type SavingsGoalResult,
+  type ContributionFrequency,
+} from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -27,7 +32,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function SavingsGoalCalculator() {
-  const [inputs, setInputs] = useState<SavingsGoalInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<SavingsGoalInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -62,12 +69,7 @@ export default function SavingsGoalCalculator() {
         <CalculatorHeader
           title="Plan Your Savings Goal"
           subtitle="Calculate contributions needed to reach your target"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -133,7 +135,9 @@ export default function SavingsGoalCalculator() {
                   value={Math.round(inputs.annualReturn * 100 * 10) / 10}
                   onChange={(e) => updateInput('annualReturn', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">7% is typical for diversified investments</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  7% is typical for diversified investments
+                </p>
               </div>
 
               <div>
@@ -157,7 +161,9 @@ export default function SavingsGoalCalculator() {
               <ButtonGroup
                 options={frequencyOptions}
                 value={inputs.contributionFrequency}
-                onChange={(value) => updateInput('contributionFrequency', value as ContributionFrequency)}
+                onChange={(value) =>
+                  updateInput('contributionFrequency', value as ContributionFrequency)
+                }
                 columns={3}
               />
             </div>
@@ -198,9 +204,10 @@ export default function SavingsGoalCalculator() {
 
             {/* Inflation Note */}
             <Alert variant="warning" title="Inflation note:">
-              Your {formatCurrency(inputs.goalAmount, inputs.currency)} goal will have the purchasing power of{' '}
-              {formatCurrency(result.inflationAdjustedGoal, result.currency)} in today's dollars after{' '}
-              {inputs.timelineYears} years at {(inputs.inflationRate * 100).toFixed(1)}% inflation.
+              Your {formatCurrency(inputs.goalAmount, inputs.currency)} goal will have the
+              purchasing power of {formatCurrency(result.inflationAdjustedGoal, result.currency)} in
+              today's dollars after {inputs.timelineYears} years at{' '}
+              {(inputs.inflationRate * 100).toFixed(1)}% inflation.
             </Alert>
 
             {/* Share Results */}

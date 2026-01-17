@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateClayShrinkage, formatSize, getShrinkageCategory, generateShrinkageTable } from './calculations';
+import {
+  calculateClayShrinkage,
+  formatSize,
+  getShrinkageCategory,
+  generateShrinkageTable,
+} from './calculations';
 import {
   getDefaultInputs,
   CLAY_TYPES,
@@ -30,14 +35,20 @@ export default function ClayShrinkageCalculator() {
   const [inputs, setInputs] = useState<ClayShrinkageInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateClayShrinkage(inputs), [inputs]);
-  const shrinkageTable = useMemo(() => generateShrinkageTable(result.totalShrinkage, inputs.unit), [result.totalShrinkage, inputs.unit]);
+  const shrinkageTable = useMemo(
+    () => generateShrinkageTable(result.totalShrinkage, inputs.unit),
+    [result.totalShrinkage, inputs.unit]
+  );
 
-  const updateInput = <K extends keyof ClayShrinkageInputs>(field: K, value: ClayShrinkageInputs[K]) => {
+  const updateInput = <K extends keyof ClayShrinkageInputs>(
+    field: K,
+    value: ClayShrinkageInputs[K]
+  ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleClayTypeChange = (clayType: string) => {
-    const clay = CLAY_TYPES.find(c => c.value === clayType);
+    const clay = CLAY_TYPES.find((c) => c.value === clayType);
     setInputs((prev) => ({
       ...prev,
       clayType,
@@ -75,7 +86,9 @@ export default function ClayShrinkageCalculator() {
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="size">
-                  {inputs.calculationMode === 'thrown-to-fired' ? 'Thrown (Wet) Size' : 'Desired Fired Size'}
+                  {inputs.calculationMode === 'thrown-to-fired'
+                    ? 'Thrown (Wet) Size'
+                    : 'Desired Fired Size'}
                 </Label>
                 <div className="flex gap-2">
                   <Input
@@ -110,23 +123,37 @@ export default function ClayShrinkageCalculator() {
               className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-[var(--color-cream)]"
             >
               <optgroup label="Earthenware">
-                {CLAY_TYPES.filter(c => c.value.includes('earthenware') || c.value === 'terracotta').map((c) => (
-                  <option key={c.value} value={c.value}>{c.label} - {c.totalShrinkage}%</option>
+                {CLAY_TYPES.filter(
+                  (c) => c.value.includes('earthenware') || c.value === 'terracotta'
+                ).map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label} - {c.totalShrinkage}%
+                  </option>
                 ))}
               </optgroup>
               <optgroup label="Stoneware">
-                {CLAY_TYPES.filter(c => c.value.includes('stoneware') || c.value === 'speckled-buff').map((c) => (
-                  <option key={c.value} value={c.value}>{c.label} - {c.totalShrinkage}%</option>
+                {CLAY_TYPES.filter(
+                  (c) => c.value.includes('stoneware') || c.value === 'speckled-buff'
+                ).map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label} - {c.totalShrinkage}%
+                  </option>
                 ))}
               </optgroup>
               <optgroup label="Porcelain">
-                {CLAY_TYPES.filter(c => c.value.includes('porcelain')).map((c) => (
-                  <option key={c.value} value={c.value}>{c.label} - {c.totalShrinkage}%</option>
+                {CLAY_TYPES.filter((c) => c.value.includes('porcelain')).map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label} - {c.totalShrinkage}%
+                  </option>
                 ))}
               </optgroup>
               <optgroup label="Specialty">
-                {CLAY_TYPES.filter(c => ['raku', 'paper-clay', 'sculpture', 'custom'].includes(c.value)).map((c) => (
-                  <option key={c.value} value={c.value}>{c.label}</option>
+                {CLAY_TYPES.filter((c) =>
+                  ['raku', 'paper-clay', 'sculpture', 'custom'].includes(c.value)
+                ).map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
                 ))}
               </optgroup>
             </select>
@@ -157,9 +184,11 @@ export default function ClayShrinkageCalculator() {
             <ResultCard
               label={inputs.calculationMode === 'thrown-to-fired' ? 'Fired Size' : 'Throw At Size'}
               value={formatSize(result.resultSize, inputs.unit)}
-              subtitle={inputs.calculationMode === 'thrown-to-fired'
-                ? `${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} thrown → ${formatSize(result.resultSize, inputs.unit)} fired`
-                : `Throw at ${formatSize(result.resultSize, inputs.unit)} to get ${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} fired`}
+              subtitle={
+                inputs.calculationMode === 'thrown-to-fired'
+                  ? `${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} thrown → ${formatSize(result.resultSize, inputs.unit)} fired`
+                  : `Throw at ${formatSize(result.resultSize, inputs.unit)} to get ${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} fired`
+              }
               valueColor="success"
             />
 
@@ -203,8 +232,14 @@ export default function ClayShrinkageCalculator() {
                   <tbody>
                     {shrinkageTable.map((row) => (
                       <tr key={row.thrown} className="border-b border-white/5">
-                        <td className="py-2 pr-4">{row.thrown}{inputs.unit === 'in' ? '"' : 'cm'}</td>
-                        <td className="py-2 text-[var(--color-accent)]">{row.fired}{inputs.unit === 'in' ? '"' : 'cm'}</td>
+                        <td className="py-2 pr-4">
+                          {row.thrown}
+                          {inputs.unit === 'in' ? '"' : 'cm'}
+                        </td>
+                        <td className="py-2 text-[var(--color-accent)]">
+                          {row.fired}
+                          {inputs.unit === 'in' ? '"' : 'cm'}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -218,10 +253,14 @@ export default function ClayShrinkageCalculator() {
                 Cone Temperature Reference
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {CONE_TEMPS.filter(c => ['06', '04', '6', '10'].includes(c.cone)).map((cone) => (
+                {CONE_TEMPS.filter((c) => ['06', '04', '6', '10'].includes(c.cone)).map((cone) => (
                   <div key={cone.cone} className="bg-white/5 rounded-lg p-3 text-center">
-                    <div className="text-lg font-bold text-[var(--color-cream)]">Cone {cone.cone}</div>
-                    <div className="text-sm text-[var(--color-muted)]">{cone.tempF}°F / {cone.tempC}°C</div>
+                    <div className="text-lg font-bold text-[var(--color-cream)]">
+                      Cone {cone.cone}
+                    </div>
+                    <div className="text-sm text-[var(--color-muted)]">
+                      {cone.tempF}°F / {cone.tempC}°C
+                    </div>
                     <div className="text-xs text-[var(--color-accent)]">{cone.category}</div>
                   </div>
                 ))}
@@ -242,8 +281,8 @@ export default function ClayShrinkageCalculator() {
             {/* Tips */}
             <Alert variant="tip" title="Pottery Tips:">
               Always test your specific clay body - shrinkage varies between batches and brands.
-              Make test tiles and measure before and after firing.
-              For lids and matching pieces, throw from the same batch of clay on the same day.
+              Make test tiles and measure before and after firing. For lids and matching pieces,
+              throw from the same batch of clay on the same day.
             </Alert>
 
             {/* Share */}

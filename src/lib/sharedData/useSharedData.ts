@@ -7,11 +7,7 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { useSharedDataContextSafe } from './SharedDataContext';
-import type {
-  SharedCalculatorData,
-  CalculatorDataConfig,
-  SharedDataEntry,
-} from './types';
+import type { SharedCalculatorData, CalculatorDataConfig, SharedDataEntry } from './types';
 import { FIELD_LABELS } from './types';
 import { getFields, saveFields } from './storage';
 
@@ -106,8 +102,7 @@ export interface UseSharedDataReturn {
 export function useSharedData<TInputs extends object>(
   options: UseSharedDataOptions<TInputs>
 ): UseSharedDataReturn {
-  const { config, inputs, setInputs, importMapping, exportMapping, getExportData } =
-    options;
+  const { config, inputs, setInputs, importMapping, exportMapping, getExportData } = options;
 
   // Try to use context, fall back to direct storage if not available
   const context = useSharedDataContextSafe();
@@ -132,8 +127,7 @@ export function useSharedData<TInputs extends object>(
           sharedKey: sharedKey as keyof SharedCalculatorData,
           localKey: String(localKey),
           entry: entry as SharedDataEntry<unknown>,
-          friendlyLabel:
-            FIELD_LABELS[sharedKey as keyof SharedCalculatorData] || sharedKey,
+          friendlyLabel: FIELD_LABELS[sharedKey as keyof SharedCalculatorData] || sharedKey,
         });
       }
     }
@@ -161,8 +155,7 @@ export function useSharedData<TInputs extends object>(
           const localKey = importMapping[field];
 
           if (entry && localKey) {
-            (updates as Record<string, unknown>)[localKey as string] =
-              entry.value;
+            (updates as Record<string, unknown>)[localKey as string] = entry.value;
           }
         }
 

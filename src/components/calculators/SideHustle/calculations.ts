@@ -22,9 +22,7 @@ function round(value: number, decimals: number = 2): number {
  * @param inputs - Calculator input values
  * @returns Profitability analysis
  */
-export function calculateSideHustle(
-  inputs: SideHustleInputs
-): SideHustleResult {
+export function calculateSideHustle(inputs: SideHustleInputs): SideHustleResult {
   const {
     currency,
     monthlyRevenue,

@@ -158,9 +158,7 @@ export function FragranceCalculator() {
               {results.fragranceAmount}
               <span className="ml-2 text-2xl">{inputs.weightUnit}</span>
             </div>
-            <div className="mt-2 text-purple-300">
-              at {inputs.fragranceLoad}% fragrance load
-            </div>
+            <div className="mt-2 text-purple-300">at {inputs.fragranceLoad}% fragrance load</div>
           </div>
         </div>
 

@@ -28,8 +28,8 @@ export interface LMTDResult {
   lmtd: number;
   correctedLMTD: number;
   correctionFactor: number;
-  deltaT1: number;  // Temperature difference at one end
-  deltaT2: number;  // Temperature difference at other end
+  deltaT1: number; // Temperature difference at one end
+  deltaT2: number; // Temperature difference at other end
   effectiveness: number;
   heatCapacityRatio: number;
   ntu: number;
@@ -38,7 +38,10 @@ export interface LMTDResult {
 }
 
 // Typical F-factors for different configurations
-export const FLOW_ARRANGEMENT_INFO: Record<FlowArrangement, { name: string; description: string; typicalF: string }> = {
+export const FLOW_ARRANGEMENT_INFO: Record<
+  FlowArrangement,
+  { name: string; description: string; typicalF: string }
+> = {
   counterflow: {
     name: 'Counter-flow',
     description: 'Fluids flow in opposite directions. Most efficient arrangement.',
@@ -65,10 +68,10 @@ export function getDefaultInputs(): LMTDInputs {
   return {
     unitSystem: 'metric',
     flowArrangement: 'counterflow',
-    hotInlet: 150,     // °C
-    hotOutlet: 90,     // °C
-    coldInlet: 30,     // °C
-    coldOutlet: 70,    // °C
+    hotInlet: 150, // °C
+    hotOutlet: 90, // °C
+    coldInlet: 30, // °C
+    coldOutlet: 70, // °C
     shellPasses: 1,
     tubePasses: 2,
   };

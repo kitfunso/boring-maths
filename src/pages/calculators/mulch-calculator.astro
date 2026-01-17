@@ -14,17 +14,16 @@ import MulchCalculator from '../../components/calculators/MulchCalculator/MulchC
 
 // SEO Configuration
 const title = 'Mulch Calculator | How Much Mulch Do I Need?';
-const description = 'Calculate exactly how much mulch you need for your garden beds. Enter dimensions, choose mulch type (wood chips, bark, rubber, stone), get cubic yards and bags needed with cost estimates.';
-const keywords = 'mulch calculator, how much mulch do I need, cubic yards mulch calculator, mulch cost calculator, bark mulch calculator, wood chip calculator, garden bed mulch, landscaping calculator';
+const description =
+  'Calculate exactly how much mulch you need for your garden beds. Enter dimensions, choose mulch type (wood chips, bark, rubber, stone), get cubic yards and bags needed with cost estimates.';
+const keywords =
+  'mulch calculator, how much mulch do I need, cubic yards mulch calculator, mulch cost calculator, bark mulch calculator, wood chip calculator, garden bed mulch, landscaping calculator';
 const canonicalURL = '/calculators/mulch-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Mulch Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Mulch Calculator' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,37 +46,45 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How do I calculate how much mulch I need?",
-    answer: "Multiply your garden bed's length by width to get square footage, then multiply by your desired depth (in feet). For example, a 10x4 foot bed at 3 inches deep needs: 10 x 4 x 0.25 = 10 cubic feet. Divide by 27 to get cubic yards (0.37 cu yds). Always round up when buying."
+    question: 'How do I calculate how much mulch I need?',
+    answer:
+      "Multiply your garden bed's length by width to get square footage, then multiply by your desired depth (in feet). For example, a 10x4 foot bed at 3 inches deep needs: 10 x 4 x 0.25 = 10 cubic feet. Divide by 27 to get cubic yards (0.37 cu yds). Always round up when buying.",
   },
   {
-    question: "How many bags of mulch do I need for my garden?",
-    answer: "First calculate cubic feet needed (length x width x depth in feet). Then divide by the bag size. For a 10x4 foot bed at 3\" depth (10 cu ft): you need 5 bags of 2 cu ft mulch, or 4 bags of 3 cu ft mulch. Our calculator shows both options with cost comparison."
+    question: 'How many bags of mulch do I need for my garden?',
+    answer:
+      'First calculate cubic feet needed (length x width x depth in feet). Then divide by the bag size. For a 10x4 foot bed at 3" depth (10 cu ft): you need 5 bags of 2 cu ft mulch, or 4 bags of 3 cu ft mulch. Our calculator shows both options with cost comparison.',
   },
   {
-    question: "What is the ideal mulch depth for garden beds?",
-    answer: "Most garden beds do best with 2-3 inches of mulch. Use 2 inches around perennials and in flower beds, 3 inches for shrub beds and general landscaping, and up to 4 inches for maximum weed suppression in pathways or low-maintenance areas. More is not better - too much mulch can suffocate plant roots."
+    question: 'What is the ideal mulch depth for garden beds?',
+    answer:
+      'Most garden beds do best with 2-3 inches of mulch. Use 2 inches around perennials and in flower beds, 3 inches for shrub beds and general landscaping, and up to 4 inches for maximum weed suppression in pathways or low-maintenance areas. More is not better - too much mulch can suffocate plant roots.',
   },
   {
-    question: "Should I buy mulch in bags or bulk?",
-    answer: "Bulk mulch (by cubic yard) is usually cheaper for larger projects - typically 50-60% less per cubic foot than bags. However, bags are more convenient for small areas, easier to transport, and better if you cannot receive a bulk delivery. Our calculator compares both options to find your best value."
+    question: 'Should I buy mulch in bags or bulk?',
+    answer:
+      'Bulk mulch (by cubic yard) is usually cheaper for larger projects - typically 50-60% less per cubic foot than bags. However, bags are more convenient for small areas, easier to transport, and better if you cannot receive a bulk delivery. Our calculator compares both options to find your best value.',
   },
   {
-    question: "What type of mulch is best for garden beds?",
-    answer: "It depends on your needs: Wood chips are economical and enrich soil as they decompose (replace annually). Bark mulch lasts longer and looks attractive (18 months). Rubber mulch is permanent and great for playgrounds. Stone/gravel is permanent but does not add nutrients. Straw is best for vegetable gardens."
+    question: 'What type of mulch is best for garden beds?',
+    answer:
+      'It depends on your needs: Wood chips are economical and enrich soil as they decompose (replace annually). Bark mulch lasts longer and looks attractive (18 months). Rubber mulch is permanent and great for playgrounds. Stone/gravel is permanent but does not add nutrients. Straw is best for vegetable gardens.',
   },
   {
-    question: "How much does a cubic yard of mulch weigh?",
-    answer: "Weight varies by mulch type: Wood chips weigh about 400-500 lbs per cubic yard. Bark mulch is similar at 500-600 lbs. Rubber mulch is heavier at about 1,000 lbs. Stone and gravel are heaviest at 2,400-2,700 lbs per cubic yard. Consider weight when planning transport."
+    question: 'How much does a cubic yard of mulch weigh?',
+    answer:
+      'Weight varies by mulch type: Wood chips weigh about 400-500 lbs per cubic yard. Bark mulch is similar at 500-600 lbs. Rubber mulch is heavier at about 1,000 lbs. Stone and gravel are heaviest at 2,400-2,700 lbs per cubic yard. Consider weight when planning transport.',
   },
   {
-    question: "How often should I replace mulch?",
-    answer: "Replacement frequency depends on mulch type: Straw needs replacing every 6 months. Wood chips last about 1 year. Bark mulch lasts 18 months. Rubber mulch lasts 10+ years. Decorative stone is permanent. Organic mulches break down and add nutrients to soil, which is a benefit of replacement."
+    question: 'How often should I replace mulch?',
+    answer:
+      'Replacement frequency depends on mulch type: Straw needs replacing every 6 months. Wood chips last about 1 year. Bark mulch lasts 18 months. Rubber mulch lasts 10+ years. Decorative stone is permanent. Organic mulches break down and add nutrients to soil, which is a benefit of replacement.',
   },
   {
-    question: "Can I put new mulch over old mulch?",
-    answer: "Yes, but first rake the old mulch to break up any matted layers and check total depth. Remove excess if adding new mulch would exceed 3-4 inches total. Old decomposed mulch adds nutrients to soil. If old mulch has fungus or disease, remove it completely before adding new mulch."
-  }
+    question: 'Can I put new mulch over old mulch?',
+    answer:
+      'Yes, but first rake the old mulch to break up any matted layers and check total depth. Remove excess if adding new mulch would exceed 3-4 inches total. Old decomposed mulch adds nutrients to soil. If old mulch has fungus or disease, remove it completely before adding new mulch.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -119,47 +126,44 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>garden bed dimensions</strong> in feet - length and width.
-      For irregular shapes, break them into rectangles and add the totals, or measure
-      the longest and widest points for an estimate.
+      Enter your <strong>garden bed dimensions</strong> in feet - length and width. For irregular shapes,
+      break them into rectangles and add the totals, or measure the longest and widest points for an estimate.
     </p>
     <p>
-      Select your <strong>desired mulch depth</strong>. Most landscaping professionals
-      recommend 2-3 inches for optimal weed suppression and moisture retention.
-      Use 4 inches only for pathways or areas needing maximum coverage.
+      Select your <strong>desired mulch depth</strong>. Most landscaping professionals recommend 2-3
+      inches for optimal weed suppression and moisture retention. Use 4 inches only for pathways or
+      areas needing maximum coverage.
     </p>
     <p>
-      Choose your <strong>mulch type</strong> to see accurate weight estimates and
-      replacement schedules. Different materials have very different densities -
-      stone mulch weighs 5x more than wood chips per cubic foot.
+      Choose your <strong>mulch type</strong> to see accurate weight estimates and replacement schedules.
+      Different materials have very different densities - stone mulch weighs 5x more than wood chips per
+      cubic foot.
     </p>
     <p>
-      Enter your <strong>local pricing</strong> for bulk and bagged mulch. The calculator
-      will compare all options and highlight the best value for your project size.
+      Enter your <strong>local pricing</strong> for bulk and bagged mulch. The calculator will compare
+      all options and highlight the best value for your project size.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Cubic yards</strong> is the standard measurement for bulk mulch orders.
-      One cubic yard equals 27 cubic feet and covers about 100 square feet at 3 inches
-      deep. Most landscape suppliers deliver in cubic yard increments.
+      <strong>Cubic yards</strong> is the standard measurement for bulk mulch orders. One cubic yard equals
+      27 cubic feet and covers about 100 square feet at 3 inches deep. Most landscape suppliers deliver
+      in cubic yard increments.
     </p>
     <p>
-      <strong>Bag quantities</strong> are shown for both 2 cubic foot and 3 cubic foot
-      bags - the two most common retail sizes. The calculator rounds up since you
-      cannot buy partial bags.
+      <strong>Bag quantities</strong> are shown for both 2 cubic foot and 3 cubic foot bags - the two
+      most common retail sizes. The calculator rounds up since you cannot buy partial bags.
     </p>
     <p>
-      The <strong>cost comparison</strong> shows total price for each purchase option.
-      Bulk is usually cheapest for large areas, but bags may be better for small projects
-      or when you cannot receive a delivery.
+      The <strong>cost comparison</strong> shows total price for each purchase option. Bulk is usually
+      cheapest for large areas, but bags may be better for small projects or when you cannot receive a
+      delivery.
     </p>
     <p>
-      <strong>Weight estimates</strong> help you plan transportation. A pickup truck
-      typically holds 2-3 cubic yards of wood mulch safely, but only about 1 cubic yard
-      of stone due to weight limits.
+      <strong>Weight estimates</strong> help you plan transportation. A pickup truck typically holds 2-3
+      cubic yards of wood mulch safely, but only about 1 cubic yard of stone due to weight limits.
     </p>
   </ContentSection>
 

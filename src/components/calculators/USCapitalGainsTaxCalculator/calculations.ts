@@ -14,13 +14,7 @@ import {
 } from './types';
 
 export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapitalGainsResult {
-  const {
-    filingStatus,
-    purchasePrice,
-    salePrice,
-    holdingPeriodMonths,
-    otherIncome,
-  } = inputs;
+  const { filingStatus, purchasePrice, salePrice, holdingPeriodMonths, otherIncome } = inputs;
 
   // Calculate gain/loss
   const capitalGain = Math.max(0, salePrice - purchasePrice);
@@ -37,9 +31,10 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   } else {
     const years = Math.floor(holdingPeriodMonths / 12);
     const months = holdingPeriodMonths % 12;
-    holdingPeriodLabel = months > 0
-      ? `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} (Long-term)`
-      : `${years} year${years !== 1 ? 's' : ''} (Long-term)`;
+    holdingPeriodLabel =
+      months > 0
+        ? `${years} year${years !== 1 ? 's' : ''}, ${months} month${months !== 1 ? 's' : ''} (Long-term)`
+        : `${years} year${years !== 1 ? 's' : ''} (Long-term)`;
   }
 
   // Standard deduction

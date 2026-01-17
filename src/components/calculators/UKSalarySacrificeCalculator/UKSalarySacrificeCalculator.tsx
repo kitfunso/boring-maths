@@ -1,16 +1,14 @@
 import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSalarySacrifice, formatCurrency } from './calculations';
-import { getDefaultInputs, SACRIFICE_TYPES, type UKSalarySacrificeInputs, type SacrificeType, type TaxRegion } from './types';
 import {
-  ThemeProvider,
-  Card,
-  CalculatorHeader,
-  Label,
-  Input,
-  ButtonGroup,
-  Grid,
-} from '../../ui';
+  getDefaultInputs,
+  SACRIFICE_TYPES,
+  type UKSalarySacrificeInputs,
+  type SacrificeType,
+  type TaxRegion,
+} from './types';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
 const sacrificeTypeOptions = Object.entries(SACRIFICE_TYPES).map(([key, type]) => ({
@@ -61,9 +59,7 @@ export default function UKSalarySacrificeCalculator() {
                 value={inputs.sacrificeType}
                 onChange={(value) => updateInput('sacrificeType', value)}
               />
-              <p className="text-xs text-[var(--color-muted)] mt-2">
-                {currentType.description}
-              </p>
+              <p className="text-xs text-[var(--color-muted)] mt-2">{currentType.description}</p>
             </div>
 
             {/* Tax Region */}
@@ -142,15 +138,28 @@ export default function UKSalarySacrificeCalculator() {
             {/* True Cost */}
             <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
               <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <div>
                   <p className="text-emerald-400 font-medium">True Cost of Benefit</p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
-                    Your {formatCurrency(inputs.sacrificeAmount)} {currentType.name.toLowerCase()} only costs you{' '}
-                    <span className="text-emerald-400 font-semibold">{formatCurrency(result.trueCostOfBenefit)}</span> in
-                    reduced take-home pay.
+                    Your {formatCurrency(inputs.sacrificeAmount)} {currentType.name.toLowerCase()}{' '}
+                    only costs you{' '}
+                    <span className="text-emerald-400 font-semibold">
+                      {formatCurrency(result.trueCostOfBenefit)}
+                    </span>{' '}
+                    in reduced take-home pay.
                   </p>
                 </div>
               </div>
@@ -175,14 +184,25 @@ export default function UKSalarySacrificeCalculator() {
             {/* Employer NI Saving */}
             <div className="bg-white/5 rounded-xl p-4">
               <div className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg
+                  className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
                 <div>
                   <p className="text-blue-400 font-medium">Employer Also Saves</p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
-                    Your employer saves {formatCurrency(result.niSavedEmployer)} in National Insurance contributions.
-                    Some employers share this saving with employees or increase pension contributions.
+                    Your employer saves {formatCurrency(result.niSavedEmployer)} in National
+                    Insurance contributions. Some employers share this saving with employees or
+                    increase pension contributions.
                   </p>
                 </div>
               </div>
@@ -190,7 +210,9 @@ export default function UKSalarySacrificeCalculator() {
 
             {/* Net Pay Comparison */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">Net Pay Comparison</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
+                Net Pay Comparison
+              </h4>
               <div className="space-y-4">
                 {/* Before */}
                 <div className="flex items-center justify-between p-3 rounded-lg bg-white/5">
@@ -242,23 +264,33 @@ export default function UKSalarySacrificeCalculator() {
 
             {/* Monthly Breakdown */}
             <div className="bg-white/5 rounded-xl p-4">
-              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">Monthly Breakdown</h4>
+              <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
+                Monthly Breakdown
+              </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
                   <span>Monthly sacrifice</span>
-                  <span className="text-[var(--color-cream)]">{formatCurrency(inputs.sacrificeAmount / 12)}</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(inputs.sacrificeAmount / 12)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Monthly tax saved</span>
-                  <span className="text-emerald-400">{formatCurrency(result.incomeTaxSaved / 12)}</span>
+                  <span className="text-emerald-400">
+                    {formatCurrency(result.incomeTaxSaved / 12)}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span>Monthly NI saved</span>
-                  <span className="text-emerald-400">{formatCurrency(result.niSavedEmployee / 12)}</span>
+                  <span className="text-emerald-400">
+                    {formatCurrency(result.niSavedEmployee / 12)}
+                  </span>
                 </div>
                 <div className="flex justify-between border-t border-white/10 pt-2 mt-2">
                   <span>Monthly true cost</span>
-                  <span className="text-teal-400 font-medium">{formatCurrency(result.trueCostOfBenefit / 12)}</span>
+                  <span className="text-teal-400 font-medium">
+                    {formatCurrency(result.trueCostOfBenefit / 12)}
+                  </span>
                 </div>
               </div>
             </div>

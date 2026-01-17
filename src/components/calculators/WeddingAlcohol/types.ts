@@ -92,7 +92,7 @@ export const DRINKS_PER_HOUR: Record<DrinkingLevel, number> = {
  * Servings per bottle
  */
 export const SERVINGS_PER_BOTTLE = {
-  wine: 5,      // 750ml bottle = 5 glasses (150ml each)
-  beer: 1,      // 1 bottle/can = 1 serving
-  liquor: 16,   // 750ml bottle = ~16 cocktails (1.5oz each)
+  wine: 5, // 750ml bottle = 5 glasses (150ml each)
+  beer: 1, // 1 bottle/can = 1 serving
+  liquor: 16, // 750ml bottle = ~16 cocktails (1.5oz each)
 };

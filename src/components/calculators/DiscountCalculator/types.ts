@@ -26,8 +26,16 @@ export interface DiscountResult {
 export const COMMON_DISCOUNTS = [10, 15, 20, 25, 30, 40, 50, 60, 70, 75];
 
 export const CALCULATION_MODES: { value: CalculationMode; label: string; description: string }[] = [
-  { value: 'percentOff', label: 'Percent Off', description: 'Know the discount %, find final price' },
-  { value: 'finalPrice', label: 'Find Discount %', description: 'Know the sale price, find the discount' },
+  {
+    value: 'percentOff',
+    label: 'Percent Off',
+    description: 'Know the discount %, find final price',
+  },
+  {
+    value: 'finalPrice',
+    label: 'Find Discount %',
+    description: 'Know the sale price, find the discount',
+  },
   { value: 'savedAmount', label: 'Amount Saved', description: 'Know savings, find the discount %' },
 ];
 

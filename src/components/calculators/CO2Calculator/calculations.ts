@@ -69,9 +69,11 @@ export function calculateCO2(inputs: CO2Inputs): CO2Results {
   } else if (co2Level === 'optimal') {
     adjustmentNeeded = 'CO2 levels are optimal. Maintain current injection rate.';
   } else if (co2Level === 'high') {
-    adjustmentNeeded = 'CO2 is slightly high. Consider reducing bubble rate by 25% and monitor fish behavior.';
+    adjustmentNeeded =
+      'CO2 is slightly high. Consider reducing bubble rate by 25% and monitor fish behavior.';
   } else {
-    adjustmentNeeded = 'DANGER: CO2 is too high! Turn off CO2 immediately, increase surface agitation, and observe fish for distress.';
+    adjustmentNeeded =
+      'DANGER: CO2 is too high! Turn off CO2 immediately, increase surface agitation, and observe fish for distress.';
   }
 
   return {

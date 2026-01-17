@@ -24,12 +24,12 @@ function toSI(inputs: IdealGasInputs): { P: number; V: number; n: number; T: num
 
   if (inputs.unitSystem === 'metric') {
     P = inputs.pressure * 1000; // kPa to Pa
-    V = inputs.volume / 1000;   // L to m³
+    V = inputs.volume / 1000; // L to m³
     T = inputs.temperature + 273.15; // °C to K
   } else {
     P = inputs.pressure * 6894.76; // psi to Pa
     V = inputs.volume * 0.0283168; // ft³ to m³
-    T = (inputs.temperature + 459.67) * 5 / 9; // °F to K
+    T = ((inputs.temperature + 459.67) * 5) / 9; // °F to K
   }
 
   return { P, V, n: inputs.moles, T };
@@ -47,18 +47,18 @@ function fromSI(
 ): { pressure: number; volume: number; moles: number; temperature: number; temperatureK: number } {
   if (unitSystem === 'metric') {
     return {
-      pressure: P / 1000,           // Pa to kPa
-      volume: V * 1000,             // m³ to L
+      pressure: P / 1000, // Pa to kPa
+      volume: V * 1000, // m³ to L
       moles: n,
-      temperature: T - 273.15,      // K to °C
+      temperature: T - 273.15, // K to °C
       temperatureK: T,
     };
   } else {
     return {
-      pressure: P / 6894.76,        // Pa to psi
-      volume: V / 0.0283168,        // m³ to ft³
+      pressure: P / 6894.76, // Pa to psi
+      volume: V / 0.0283168, // m³ to ft³
       moles: n,
-      temperature: T * 9 / 5 - 459.67, // K to °F
+      temperature: (T * 9) / 5 - 459.67, // K to °F
       temperatureK: T,
     };
   }
@@ -92,7 +92,7 @@ export function calculateIdealGas(inputs: IdealGasInputs): IdealGasResult {
 
   // Calculate density (kg/m³)
   // ρ = PM/(RT) where M is molar mass in kg/mol
-  const density = (P * molarMass / 1000) / (R * T);
+  const density = (P * molarMass) / 1000 / (R * T);
 
   // Molar volume at given conditions
   const molarVolume = (V / n) * 1000; // L/mol
@@ -138,8 +138,8 @@ export function formatNumber(value: number, decimals: number = 2): string {
 export function getStandardConditions(unitSystem: 'metric' | 'imperial') {
   if (unitSystem === 'metric') {
     return {
-      pressure: 101.325,  // kPa
-      temperature: 0,     // °C (STP)
+      pressure: 101.325, // kPa
+      temperature: 0, // °C (STP)
       pressureUnit: 'kPa',
       tempUnit: '°C',
       volumeUnit: 'L',
@@ -147,8 +147,8 @@ export function getStandardConditions(unitSystem: 'metric' | 'imperial') {
     };
   } else {
     return {
-      pressure: 14.696,   // psi (1 atm)
-      temperature: 32,    // °F (STP)
+      pressure: 14.696, // psi (1 atm)
+      temperature: 32, // °F (STP)
       pressureUnit: 'psi',
       tempUnit: '°F',
       volumeUnit: 'ft³',

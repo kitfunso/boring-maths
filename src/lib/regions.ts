@@ -88,7 +88,7 @@ export const REGION_DEFAULTS: Record<Region, RegionDefaults> = {
     currency: 'USD',
     // Federal (22%) + State avg (5%) + Self-employment (15.3%) = ~30-35%
     // Using 30% as reasonable estimate for freelancers
-    typicalTaxRate: 0.30,
+    typicalTaxRate: 0.3,
     // No statutory minimum, but typical is 10-15 days
     statutoryVacationDays: 15,
     // Federal holidays (11) but freelancers often work some
@@ -176,10 +176,7 @@ export function formatCurrency(
  * @param currency - Currency code
  * @returns Formatted compact currency string
  */
-export function formatCompactCurrency(
-  value: number,
-  currency: Currency = 'USD'
-): string {
+export function formatCompactCurrency(value: number, currency: Currency = 'USD'): string {
   const config = CURRENCIES[currency];
   return new Intl.NumberFormat(config.locale, {
     style: 'currency',

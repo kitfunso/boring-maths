@@ -116,7 +116,9 @@ export default function CalorieCalculator() {
 
             {/* Age */}
             <div>
-              <Label htmlFor="age" required>Age</Label>
+              <Label htmlFor="age" required>
+                Age
+              </Label>
               <Input
                 id="age"
                 type="number"
@@ -130,7 +132,9 @@ export default function CalorieCalculator() {
             {/* Height */}
             {inputs.unitSystem === 'metric' ? (
               <div>
-                <Label htmlFor="heightCm" required>Height (cm)</Label>
+                <Label htmlFor="heightCm" required>
+                  Height (cm)
+                </Label>
                 <Input
                   id="heightCm"
                   type="number"
@@ -143,7 +147,9 @@ export default function CalorieCalculator() {
             ) : (
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                 <div>
-                  <Label htmlFor="heightFeet" required>Height (feet)</Label>
+                  <Label htmlFor="heightFeet" required>
+                    Height (feet)
+                  </Label>
                   <Input
                     id="heightFeet"
                     type="number"
@@ -154,7 +160,9 @@ export default function CalorieCalculator() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="heightInches" required>Height (inches)</Label>
+                  <Label htmlFor="heightInches" required>
+                    Height (inches)
+                  </Label>
                   <Input
                     id="heightInches"
                     type="number"
@@ -169,7 +177,9 @@ export default function CalorieCalculator() {
 
             {/* Weight */}
             <div>
-              <Label htmlFor="weight" required>Weight ({weightUnit})</Label>
+              <Label htmlFor="weight" required>
+                Weight ({weightUnit})
+              </Label>
               <Input
                 id="weight"
                 type="number"
@@ -240,11 +250,7 @@ export default function CalorieCalculator() {
 
             {/* Metrics */}
             <Grid responsive={{ sm: 2, md: 3 }} gap="md">
-              <MetricCard
-                label="BMR"
-                value={formatNumber(result.bmr)}
-                sublabel="base metabolism"
-              />
+              <MetricCard label="BMR" value={formatNumber(result.bmr)} sublabel="base metabolism" />
               <MetricCard
                 label="TDEE"
                 value={formatNumber(result.tdee)}
@@ -253,7 +259,13 @@ export default function CalorieCalculator() {
               <MetricCard
                 label="Goal"
                 value={formatNumber(result.goalCalories)}
-                sublabel={inputs.goal === 'lose' ? '-500 cal/day' : inputs.goal === 'gain' ? '+300 cal/day' : 'no change'}
+                sublabel={
+                  inputs.goal === 'lose'
+                    ? '-500 cal/day'
+                    : inputs.goal === 'gain'
+                      ? '+300 cal/day'
+                      : 'no change'
+                }
                 valueColor={getGoalColor()}
               />
             </Grid>
@@ -288,7 +300,8 @@ export default function CalorieCalculator() {
             <Alert variant="info" title="About TDEE:">
               TDEE (Total Daily Energy Expenditure) is the total calories you burn daily, including
               exercise. BMR (Basal Metabolic Rate) is calories burned at complete rest. These are
-              estimates - individual results vary based on metabolism, body composition, and genetics.
+              estimates - individual results vary based on metabolism, body composition, and
+              genetics.
             </Alert>
 
             {/* Share Results */}

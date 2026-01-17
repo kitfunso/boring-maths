@@ -7,7 +7,12 @@
 import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateCompoundInterest, formatCurrency } from './calculations';
-import { getDefaultInputs, type CompoundInterestInputs, type CompoundInterestResult, type CompoundFrequency } from './types';
+import {
+  getDefaultInputs,
+  type CompoundInterestInputs,
+  type CompoundInterestResult,
+  type CompoundFrequency,
+} from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -28,7 +33,9 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
 export default function CompoundInterestCalculator() {
-  const [inputs, setInputs] = useLocalStorage<CompoundInterestInputs>('calc-compound-inputs', () => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useLocalStorage<CompoundInterestInputs>('calc-compound-inputs', () =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -56,9 +63,10 @@ export default function CompoundInterestCalculator() {
   ];
 
   // Growth multiplier
-  const growthMultiplier = result.totalContributions > 0
-    ? (result.finalBalance / result.totalContributions).toFixed(2)
-    : '0';
+  const growthMultiplier =
+    result.totalContributions > 0
+      ? (result.finalBalance / result.totalContributions).toFixed(2)
+      : '0';
 
   return (
     <ThemeProvider defaultColor="yellow">
@@ -66,12 +74,7 @@ export default function CompoundInterestCalculator() {
         <CalculatorHeader
           title="Compound Interest Calculator"
           subtitle="See how your investments grow over time"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -94,9 +97,7 @@ export default function CompoundInterestCalculator() {
               </div>
 
               <div>
-                <Label htmlFor="monthlyContribution">
-                  Monthly Contribution
-                </Label>
+                <Label htmlFor="monthlyContribution">Monthly Contribution</Label>
                 <Input
                   id="monthlyContribution"
                   variant="currency"
@@ -130,9 +131,7 @@ export default function CompoundInterestCalculator() {
               </div>
 
               <div>
-                <Label htmlFor="compoundFrequency">
-                  Compound Frequency
-                </Label>
+                <Label htmlFor="compoundFrequency">Compound Frequency</Label>
                 <Select
                   id="compoundFrequency"
                   options={frequencyOptions}
@@ -210,10 +209,14 @@ export default function CompoundInterestCalculator() {
               </h3>
               <div className="space-y-3">
                 {result.yearlyBreakdown
-                  .filter((_, i) => i === 0 || i === Math.floor(result.yearlyBreakdown.length / 4) ||
-                                   i === Math.floor(result.yearlyBreakdown.length / 2) ||
-                                   i === Math.floor(result.yearlyBreakdown.length * 3 / 4) ||
-                                   i === result.yearlyBreakdown.length - 1)
+                  .filter(
+                    (_, i) =>
+                      i === 0 ||
+                      i === Math.floor(result.yearlyBreakdown.length / 4) ||
+                      i === Math.floor(result.yearlyBreakdown.length / 2) ||
+                      i === Math.floor((result.yearlyBreakdown.length * 3) / 4) ||
+                      i === result.yearlyBreakdown.length - 1
+                  )
                   .map((year) => {
                     const interestPercent = (year.interest / year.balance) * 100;
                     const contributionPercent = 100 - interestPercent;
@@ -271,9 +274,18 @@ export default function CompoundInterestCalculator() {
                   { label: 'Principal', value: formatCurrency(inputs.principal, inputs.currency) },
                   { label: 'Interest Rate', value: `${(inputs.interestRate * 100).toFixed(1)}%` },
                   { label: 'Time Period', value: `${inputs.years} years` },
-                  { label: 'Final Balance', value: formatCurrency(result.finalBalance, result.currency) },
-                  { label: 'Total Interest Earned', value: formatCurrency(result.totalInterest, result.currency) },
-                  { label: 'Total Contributions', value: formatCurrency(result.totalContributions, result.currency) },
+                  {
+                    label: 'Final Balance',
+                    value: formatCurrency(result.finalBalance, result.currency),
+                  },
+                  {
+                    label: 'Total Interest Earned',
+                    value: formatCurrency(result.totalInterest, result.currency),
+                  },
+                  {
+                    label: 'Total Contributions',
+                    value: formatCurrency(result.totalContributions, result.currency),
+                  },
                 ]}
               />
             </div>

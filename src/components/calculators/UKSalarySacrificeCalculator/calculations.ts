@@ -173,9 +173,7 @@ export function calculateSalarySacrifice(inputs: UKSalarySacrificeInputs): UKSal
   const trueCostOfBenefit = sacrificeAmount - totalSavings;
 
   // Effective discount percentage
-  const effectiveDiscount = sacrificeAmount > 0
-    ? (totalSavings / sacrificeAmount) * 100
-    : 0;
+  const effectiveDiscount = sacrificeAmount > 0 ? (totalSavings / sacrificeAmount) * 100 : 0;
 
   return {
     grossSalaryBefore,

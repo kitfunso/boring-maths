@@ -27,9 +27,8 @@ export function calculateBreakEven(inputs: BreakEvenInputs): BreakEvenResult {
   const breakEvenRevenue = breakEvenUnits * pricePerUnit;
 
   // Units for target profit = (Fixed Costs + Target Profit) / Contribution Margin
-  const unitsForTargetProfit = contributionMargin > 0
-    ? Math.ceil((fixedCosts + targetProfit) / contributionMargin)
-    : 0;
+  const unitsForTargetProfit =
+    contributionMargin > 0 ? Math.ceil((fixedCosts + targetProfit) / contributionMargin) : 0;
 
   // Revenue for target profit
   const revenueForTargetProfit = unitsForTargetProfit * pricePerUnit;
@@ -42,7 +41,7 @@ export function calculateBreakEven(inputs: BreakEvenInputs): BreakEvenResult {
 
   for (const units of analysisPoints) {
     const revenue = units * pricePerUnit;
-    const totalCosts = fixedCosts + (units * variableCostPerUnit);
+    const totalCosts = fixedCosts + units * variableCostPerUnit;
     const profit = revenue - totalCosts;
     const profitMargin = revenue > 0 ? (profit / revenue) * 100 : 0;
 

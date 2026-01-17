@@ -15,9 +15,9 @@ function calculateParameterAfterChange(
   changePercent: number,
   newWaterValue: number
 ): number {
-  const remaining = 1 - (changePercent / 100);
+  const remaining = 1 - changePercent / 100;
   const added = changePercent / 100;
-  return (current * remaining) + (newWaterValue * added);
+  return current * remaining + newWaterValue * added;
 }
 
 /**
@@ -78,9 +78,10 @@ export function calculateWaterChange(inputs: WaterChangeInputs): WaterChangeResu
   );
 
   // Calculate reduction percentage
-  const reductionPercent = inputs.currentParameter !== 0
-    ? ((inputs.currentParameter - parameterAfterChange) / inputs.currentParameter) * 100
-    : 0;
+  const reductionPercent =
+    inputs.currentParameter !== 0
+      ? ((inputs.currentParameter - parameterAfterChange) / inputs.currentParameter) * 100
+      : 0;
 
   // Calculate changes needed to reach target
   const changesNeeded = calculateChangesNeeded(
@@ -91,27 +92,31 @@ export function calculateWaterChange(inputs: WaterChangeInputs): WaterChangeResu
   );
 
   // Calculate weekly and monthly volumes based on frequency
-  const freqOption = FREQUENCY_OPTIONS.find(f => f.value === inputs.changeFrequency);
+  const freqOption = FREQUENCY_OPTIONS.find((f) => f.value === inputs.changeFrequency);
   const weeklyMultiplier = freqOption?.multiplier || 1;
   const weeklyVolume = waterToRemove * weeklyMultiplier;
   const monthlyVolume = weeklyVolume * 4.33;
 
   // Dilution factor (how much original water remains)
-  const dilutionFactor = 1 - (inputs.changePercent / 100);
+  const dilutionFactor = 1 - inputs.changePercent / 100;
 
   // Generate recommendations
   const recommendations: string[] = [];
-  const preset = PARAMETER_PRESETS.find(p => p.value === inputs.parameterType);
+  const preset = PARAMETER_PRESETS.find((p) => p.value === inputs.parameterType);
 
   if (preset && preset.value !== 'custom' && preset.value !== 'ph') {
     if (inputs.currentParameter > preset.dangerMax) {
-      recommendations.push(`⚠️ Current level is dangerously high - consider larger or more frequent changes`);
+      recommendations.push(
+        `⚠️ Current level is dangerously high - consider larger or more frequent changes`
+      );
     } else if (inputs.currentParameter > preset.warningMax) {
       recommendations.push(`Current level is elevated - monitor closely after water change`);
     }
 
     if (parameterAfterChange > preset.safeMax) {
-      recommendations.push(`Parameter will still be above ideal (${preset.safeMax} ${preset.unit}) after this change`);
+      recommendations.push(
+        `Parameter will still be above ideal (${preset.safeMax} ${preset.unit}) after this change`
+      );
     }
   }
 
@@ -120,17 +125,23 @@ export function calculateWaterChange(inputs: WaterChangeInputs): WaterChangeResu
   }
 
   if (inputs.changePercent < 10) {
-    recommendations.push('Small changes have minimal effect - consider larger percentage for problem correction');
+    recommendations.push(
+      'Small changes have minimal effect - consider larger percentage for problem correction'
+    );
   }
 
   if (changesNeeded > 1 && changesNeeded !== Infinity) {
-    recommendations.push(`${changesNeeded} water changes at ${inputs.changePercent}% will reach target`);
+    recommendations.push(
+      `${changesNeeded} water changes at ${inputs.changePercent}% will reach target`
+    );
   } else if (changesNeeded === Infinity) {
     recommendations.push('Cannot reach target with current new water parameters');
   }
 
   if (reductionPercent > 0) {
-    recommendations.push(`Each ${inputs.changePercent}% change reduces parameter by ~${reductionPercent.toFixed(1)}%`);
+    recommendations.push(
+      `Each ${inputs.changePercent}% change reduces parameter by ~${reductionPercent.toFixed(1)}%`
+    );
   }
 
   return {
@@ -150,7 +161,7 @@ export function calculateWaterChange(inputs: WaterChangeInputs): WaterChangeResu
  * Format parameter with unit
  */
 export function formatParameter(value: number, parameterType: string): string {
-  const preset = PARAMETER_PRESETS.find(p => p.value === parameterType);
+  const preset = PARAMETER_PRESETS.find((p) => p.value === parameterType);
   if (!preset || !preset.unit) return value.toString();
   return `${value} ${preset.unit}`;
 }

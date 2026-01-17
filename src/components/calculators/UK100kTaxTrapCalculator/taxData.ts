@@ -34,8 +34,8 @@ export interface TaxBand {
 
 export const ENGLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Personal Allowance', rate: 0, from: 0, to: 12570 },
-  { name: 'Basic Rate', rate: 0.20, from: 12571, to: 50270 },
-  { name: 'Higher Rate', rate: 0.40, from: 50271, to: 125140 },
+  { name: 'Basic Rate', rate: 0.2, from: 12571, to: 50270 },
+  { name: 'Higher Rate', rate: 0.4, from: 50271, to: 125140 },
   { name: 'Additional Rate', rate: 0.45, from: 125141, to: Infinity },
 ];
 
@@ -46,7 +46,7 @@ export const ENGLAND_TAX_BANDS: TaxBand[] = [
 export const SCOTLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Personal Allowance', rate: 0, from: 0, to: 12570 },
   { name: 'Starter Rate', rate: 0.19, from: 12571, to: 14876 },
-  { name: 'Basic Rate', rate: 0.20, from: 14877, to: 26561 },
+  { name: 'Basic Rate', rate: 0.2, from: 14877, to: 26561 },
   { name: 'Intermediate Rate', rate: 0.21, from: 26562, to: 43662 },
   { name: 'Higher Rate', rate: 0.42, from: 43663, to: 75000 },
   { name: 'Advanced Rate', rate: 0.45, from: 75001, to: 125140 },
@@ -115,7 +115,7 @@ export const STUDENT_LOAN_PLANS: Record<string, StudentLoanConfig> = {
     name: 'Postgraduate Loan',
     threshold: 21000,
     rate: 0.06,
-    description: 'Postgraduate Master\'s or Doctoral Loan',
+    description: "Postgraduate Master's or Doctoral Loan",
   },
 };
 

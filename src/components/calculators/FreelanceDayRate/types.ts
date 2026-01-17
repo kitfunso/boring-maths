@@ -164,7 +164,7 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     min: 0,
     max: 30,
     step: 1,
-    helpText: 'Days you won\'t work due to holidays',
+    helpText: "Days you won't work due to holidays",
     helpTextByRegion: {
       US: '11 federal holidays, freelancers may work some',
       UK: '8 bank holidays in England/Wales',
@@ -179,7 +179,7 @@ export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
     min: 0,
     max: 100000,
     step: 500,
-    helpText: 'Annual cost of benefits you\'ll self-fund',
+    helpText: "Annual cost of benefits you'll self-fund",
     helpTextByRegion: {
       US: 'Health insurance, 401(k), etc. ($5,000-$25,000 typical)',
       UK: 'Private insurance, pension top-up (£2,000-£10,000 typical)',

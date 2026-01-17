@@ -4,7 +4,11 @@
  * Calculate quarterly estimated tax payments with safe harbor rules.
  */
 
-export type FilingStatus = 'single' | 'married_jointly' | 'married_separately' | 'head_of_household';
+export type FilingStatus =
+  | 'single'
+  | 'married_jointly'
+  | 'married_separately'
+  | 'head_of_household';
 export type IncomeType = 'self_employed' | 'mixed' | 'investment';
 
 export interface USQuarterlyTaxInputs {

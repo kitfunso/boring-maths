@@ -140,7 +140,9 @@ export function calculateYeastPitchRate(inputs: YeastPitchRateInputs): YeastPitc
       warnings.push(`Underpitched by ${Math.round(underpitchPercent)}%`);
       recommendations.push('A starter is recommended to reach target pitch rate');
     } else {
-      recommendations.push(`Slightly under target (${Math.round(underpitchPercent)}%) - acceptable for most ales`);
+      recommendations.push(
+        `Slightly under target (${Math.round(underpitchPercent)}%) - acceptable for most ales`
+      );
     }
   }
 

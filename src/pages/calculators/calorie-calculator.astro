@@ -14,8 +14,10 @@ import CalorieCalculator from '../../components/calculators/CalorieCalculator/Ca
 
 // SEO Configuration
 const title = 'Calorie Calculator | TDEE & BMR | Free Daily Calorie Calculator';
-const description = 'Free calorie calculator using the Mifflin-St Jeor equation. Calculate your TDEE, BMR, and daily calories for weight loss, maintenance, or muscle gain with macro suggestions.';
-const keywords = 'calorie calculator, TDEE calculator, BMR calculator, daily calorie needs, calories to lose weight, maintenance calories, macro calculator, weight loss calculator';
+const description =
+  'Free calorie calculator using the Mifflin-St Jeor equation. Calculate your TDEE, BMR, and daily calories for weight loss, maintenance, or muscle gain with macro suggestions.';
+const keywords =
+  'calorie calculator, TDEE calculator, BMR calculator, daily calorie needs, calories to lose weight, maintenance calories, macro calculator, weight loss calculator';
 const canonicalURL = '/calculators/calorie-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -54,33 +56,40 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "What is TDEE and how is it calculated?",
-    answer: "TDEE (Total Daily Energy Expenditure) is the total number of calories you burn each day, including your base metabolism plus physical activity. It's calculated by multiplying your BMR by an activity factor. This calculator uses the Mifflin-St Jeor equation, which is considered the most accurate formula for modern populations."
+    question: 'What is TDEE and how is it calculated?',
+    answer:
+      "TDEE (Total Daily Energy Expenditure) is the total number of calories you burn each day, including your base metabolism plus physical activity. It's calculated by multiplying your BMR by an activity factor. This calculator uses the Mifflin-St Jeor equation, which is considered the most accurate formula for modern populations.",
   },
   {
     question: "What's the difference between BMR and TDEE?",
-    answer: "BMR (Basal Metabolic Rate) is the calories your body burns at complete rest - just to keep your organs functioning. TDEE adds your daily activity on top of BMR. For example, if your BMR is 1,500 and you're moderately active (multiplier of 1.55), your TDEE would be about 2,325 calories."
+    answer:
+      "BMR (Basal Metabolic Rate) is the calories your body burns at complete rest - just to keep your organs functioning. TDEE adds your daily activity on top of BMR. For example, if your BMR is 1,500 and you're moderately active (multiplier of 1.55), your TDEE would be about 2,325 calories.",
   },
   {
-    question: "How many calories should I eat to lose weight?",
-    answer: "To lose weight safely, eat 500 calories below your TDEE. This creates a deficit of 3,500 calories per week, which equals about 1 pound of fat loss. Never go below 1,200 calories (women) or 1,500 calories (men) without medical supervision, as this can slow your metabolism."
+    question: 'How many calories should I eat to lose weight?',
+    answer:
+      'To lose weight safely, eat 500 calories below your TDEE. This creates a deficit of 3,500 calories per week, which equals about 1 pound of fat loss. Never go below 1,200 calories (women) or 1,500 calories (men) without medical supervision, as this can slow your metabolism.',
   },
   {
-    question: "How accurate is this calorie calculator?",
-    answer: "The Mifflin-St Jeor equation is accurate within 10% for most people. However, individual factors like muscle mass, genetics, hormones, and actual activity levels can affect your true calorie needs. Use this as a starting point and adjust based on your results over 2-3 weeks."
+    question: 'How accurate is this calorie calculator?',
+    answer:
+      'The Mifflin-St Jeor equation is accurate within 10% for most people. However, individual factors like muscle mass, genetics, hormones, and actual activity levels can affect your true calorie needs. Use this as a starting point and adjust based on your results over 2-3 weeks.',
   },
   {
-    question: "What activity level should I choose?",
-    answer: "Be honest with your activity level - most people overestimate. Sedentary means desk job with no exercise. Light activity is 1-3 light workouts per week. Moderate is 3-5 sessions. Very active is daily intense exercise. Extremely active is for athletes or very physical jobs."
+    question: 'What activity level should I choose?',
+    answer:
+      'Be honest with your activity level - most people overestimate. Sedentary means desk job with no exercise. Light activity is 1-3 light workouts per week. Moderate is 3-5 sessions. Very active is daily intense exercise. Extremely active is for athletes or very physical jobs.',
   },
   {
-    question: "How much protein do I need per day?",
-    answer: "For active individuals, aim for 0.7-1g of protein per pound of body weight. If you're trying to lose weight while preserving muscle, stay at the higher end (1g/lb). For muscle gain, 0.8-1g/lb is sufficient when combined with strength training."
+    question: 'How much protein do I need per day?',
+    answer:
+      "For active individuals, aim for 0.7-1g of protein per pound of body weight. If you're trying to lose weight while preserving muscle, stay at the higher end (1g/lb). For muscle gain, 0.8-1g/lb is sufficient when combined with strength training.",
   },
   {
-    question: "Should I eat back calories burned from exercise?",
-    answer: "It depends on your goals. If losing weight, don't eat back all exercise calories as trackers often overestimate. If maintaining or gaining, you may need those extra calories. Start with eating back about 50% of exercise calories and adjust based on your progress."
-  }
+    question: 'Should I eat back calories burned from exercise?',
+    answer:
+      "It depends on your goals. If losing weight, don't eat back all exercise calories as trackers often overestimate. If maintaining or gaining, you may need those extra calories. Start with eating back about 50% of exercise calories and adjust based on your progress.",
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -122,40 +131,41 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>basic information</strong> including age, height, weight, and biological
-      sex. These factors significantly affect your base metabolism.
+      Enter your <strong>basic information</strong> including age, height, weight, and biological sex.
+      These factors significantly affect your base metabolism.
     </p>
     <p>
-      Select your <strong>activity level</strong> honestly. Most people overestimate their activity.
-      If you have a desk job and exercise 3 times per week, you're likely "Lightly Active" or "Moderately Active."
+      Select your <strong>activity level</strong> honestly. Most people overestimate their activity. If
+      you have a desk job and exercise 3 times per week, you're likely "Lightly Active" or "Moderately
+      Active."
     </p>
     <p>
-      Choose your <strong>goal</strong> - whether you want to lose weight (500 calorie deficit),
-      maintain your current weight, or gain muscle (300 calorie surplus).
+      Choose your <strong>goal</strong> - whether you want to lose weight (500 calorie deficit), maintain
+      your current weight, or gain muscle (300 calorie surplus).
     </p>
     <p>
-      The calculator provides <strong>macro suggestions</strong> for protein, carbs, and fat based
-      on your calorie target and body weight.
+      The calculator provides <strong>macro suggestions</strong> for protein, carbs, and fat based on
+      your calorie target and body weight.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>BMR (Basal Metabolic Rate)</strong> is the calories your body needs at complete rest.
-      This is your minimum calorie need to keep your organs functioning.
+      <strong>BMR (Basal Metabolic Rate)</strong> is the calories your body needs at complete rest. This
+      is your minimum calorie need to keep your organs functioning.
     </p>
     <p>
-      <strong>TDEE (Total Daily Energy Expenditure)</strong> is your BMR multiplied by your activity
-      factor. This is approximately how many calories you burn in a typical day.
+      <strong>TDEE (Total Daily Energy Expenditure)</strong> is your BMR multiplied by your activity factor.
+      This is approximately how many calories you burn in a typical day.
     </p>
     <p>
-      <strong>Goal Calories</strong> is your target based on your selected goal. For weight loss,
-      we subtract 500 calories (1 lb/week loss). For muscle gain, we add 300 calories.
+      <strong>Goal Calories</strong> is your target based on your selected goal. For weight loss, we subtract
+      500 calories (1 lb/week loss). For muscle gain, we add 300 calories.
     </p>
     <p>
-      <strong>Macros</strong> are suggested ranges for protein, carbohydrates, and fat. Protein is
-      based on your body weight, while carbs and fat are calculated as percentages of your calories.
+      <strong>Macros</strong> are suggested ranges for protein, carbohydrates, and fat. Protein is based
+      on your body weight, while carbs and fat are calculated as percentages of your calories.
     </p>
   </ContentSection>
 

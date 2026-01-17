@@ -8,13 +8,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'About | Boring Math Calculators';
-const description = 'Learn about Boring Math Calculators - free, easy-to-use calculators for everyday math problems. Fast results, no signup required.';
+const description =
+  'Learn about Boring Math Calculators - free, easy-to-use calculators for everyday math problems. Fast results, no signup required.';
 
 const features = [
   {
     icon: 'bolt',
     title: 'Instant Results',
-    description: 'Results update as you type. No submit buttons, no page reloads, no waiting around.',
+    description:
+      'Results update as you type. No submit buttons, no page reloads, no waiting around.',
   },
   {
     icon: 'shield',
@@ -35,8 +37,10 @@ const features = [
 
 const iconPaths: Record<string, string> = {
   bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
-  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  shield:
+    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  heart:
+    'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
   code: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
 };
 ---
@@ -50,8 +54,8 @@ const iconPaths: Record<string, string> = {
         Math doesn't have to be <span class="gradient-text">complicated</span>
       </h1>
       <p class="text-[var(--color-subtle)] max-w-2xl mx-auto">
-        Boring Math Calculators was built with one simple goal: make everyday calculations
-        fast, accurate, and pleasant to use. No clutter, no distractions, just the answer you need.
+        Boring Math Calculators was built with one simple goal: make everyday calculations fast,
+        accurate, and pleasant to use. No clutter, no distractions, just the answer you need.
       </p>
     </div>
   </section>
@@ -62,20 +66,37 @@ const iconPaths: Record<string, string> = {
       <div class="card-elevated rounded-2xl p-6 md:p-8 relative overflow-hidden">
         <!-- Background decoration -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
+          <div
+            class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"
+          >
+          </div>
         </div>
 
         <div class="relative flex flex-col md:flex-row items-center gap-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center flex-shrink-0">
-            <svg class="w-8 h-8 text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          <div
+            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center flex-shrink-0"
+          >
+            <svg
+              class="w-8 h-8 text-[var(--color-void)]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
             </svg>
           </div>
           <div class="text-center flex-1">
-            <h2 class="text-xl font-display text-[var(--color-cream)] mb-2 text-center">Have a suggestion?</h2>
+            <h2 class="text-xl font-display text-[var(--color-cream)] mb-2 text-center">
+              Have a suggestion?
+            </h2>
             <p class="text-sm text-[var(--color-subtle)] mb-4">
-              We're always looking to add new calculators. If there's a tool you'd like to see,
-              or if you've found a bug, we'd love to hear from you.
+              We're always looking to add new calculators. If there's a tool you'd like to see, or
+              if you've found a bug, we'd love to hear from you.
             </p>
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfzjPd1eUAs44PBYjHZD9YNNJtf8LbvapF_R7QRx1WCVDAeOQ/viewform"
@@ -84,7 +105,12 @@ const iconPaths: Record<string, string> = {
               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--color-accent)] text-[var(--color-void)] font-medium hover:opacity-90 transition-opacity"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                ></path>
               </svg>
               <span>Leave Feedback</span>
             </a>
@@ -98,23 +124,28 @@ const iconPaths: Record<string, string> = {
   <section class="px-6 py-4">
     <div class="max-w-4xl mx-auto">
       <div class="glass rounded-3xl p-6 md:p-8 flex flex-col items-center">
-        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4 text-center">Our Mission</h2>
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4 text-center">
+          Our Mission
+        </h2>
         <div class="space-y-4 text-[var(--color-subtle)] leading-relaxed">
           <p>
-            We believe that useful tools should be <strong class="text-[var(--color-cream)]">free and accessible</strong> to everyone.
-            That's why every calculator on this site is completely free to use, with no account required,
-            no email signup, and no hidden paywalls.
+            We believe that useful tools should be <strong class="text-[var(--color-cream)]"
+              >free and accessible</strong
+            > to everyone. That's why every calculator on this site is completely free to use, with no
+            account required, no email signup, and no hidden paywalls.
           </p>
           <p>
-            In a world where most websites track your every move and bombard you with ads,
-            we chose a different path. <strong class="text-[var(--color-cream)]">Your privacy matters</strong>.
-            All calculations happen right in your browser - we never see your data, and we never will.
+            In a world where most websites track your every move and bombard you with ads, we chose
+            a different path. <strong class="text-[var(--color-cream)]">Your privacy matters</strong
+            >. All calculations happen right in your browser - we never see your data, and we never
+            will.
           </p>
           <p>
-            Each calculator is designed with <strong class="text-[var(--color-cream)]">real-world use cases</strong> in mind.
-            Whether you're a freelancer figuring out your day rate, calculating your daily calories,
-            planning a loan, or just trying to split a dinner bill, we've got you covered with 23 calculators
-            across 7 categories.
+            Each calculator is designed with <strong class="text-[var(--color-cream)]"
+              >real-world use cases</strong
+            > in mind. Whether you're a freelancer figuring out your day rate, calculating your daily
+            calories, planning a loan, or just trying to split a dinner bill, we've got you covered with
+            23 calculators across 7 categories.
           </p>
         </div>
       </div>
@@ -125,22 +156,37 @@ const iconPaths: Record<string, string> = {
   <section class="px-6 py-4">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-6 flex flex-col items-center">
-        <span class="text-micro text-[var(--color-accent)] mb-2 block">What Makes Us Different</span>
-        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] text-center">Built for You</h2>
+        <span class="text-micro text-[var(--color-accent)] mb-2 block">What Makes Us Different</span
+        >
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] text-center">
+          Built for You
+        </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {features.map((feature) => (
-          <div class="glass rounded-2xl p-6 group hover:border-[var(--color-accent)]/30 transition-colors">
-            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[feature.icon]} />
-              </svg>
+        {
+          features.map((feature) => (
+            <div class="glass rounded-2xl p-6 group hover:border-[var(--color-accent)]/30 transition-colors">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[#9acc00] flex items-center justify-center mb-4">
+                <svg
+                  class="w-6 h-6 text-[var(--color-void)]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d={iconPaths[feature.icon]}
+                  />
+                </svg>
+              </div>
+              <h3 class="text-lg font-display text-[var(--color-cream)] mb-2">{feature.title}</h3>
+              <p class="text-sm text-[var(--color-subtle)]">{feature.description}</p>
             </div>
-            <h3 class="text-lg font-display text-[var(--color-cream)] mb-2">{feature.title}</h3>
-            <p class="text-sm text-[var(--color-subtle)]">{feature.description}</p>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
@@ -149,32 +195,39 @@ const iconPaths: Record<string, string> = {
   <section class="px-6 py-4">
     <div class="max-w-4xl mx-auto">
       <div class="glass rounded-3xl p-6 md:p-8 flex flex-col items-center">
-        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4 text-center">How It's Built</h2>
+        <h2 class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4 text-center">
+          How It's Built
+        </h2>
         <div class="space-y-3 text-sm text-[var(--color-subtle)] leading-relaxed">
-          <p>
-            Boring Math Calculators is built with modern, performant technologies:
-          </p>
+          <p>Boring Math Calculators is built with modern, performant technologies:</p>
           <ul class="space-y-1.5 ml-4">
             <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">Astro</strong> - Blazing fast static site generation</span>
+              <span
+                ><strong class="text-[var(--color-cream)]">Astro</strong> - Blazing fast static site generation</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">Preact</strong> - Lightweight interactive components</span>
+              <span
+                ><strong class="text-[var(--color-cream)]">Preact</strong> - Lightweight interactive components</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">Tailwind CSS</strong> - Beautiful, responsive styling</span>
+              <span
+                ><strong class="text-[var(--color-cream)]">Tailwind CSS</strong> - Beautiful, responsive
+                styling</span
+              >
             </li>
             <li class="flex items-start gap-2">
               <span class="text-[var(--color-accent)]">•</span>
-              <span><strong class="text-[var(--color-cream)]">TypeScript</strong> - Type-safe, reliable code</span>
+              <span
+                ><strong class="text-[var(--color-cream)]">TypeScript</strong> - Type-safe, reliable code</span
+              >
             </li>
           </ul>
-          <p>
-            The result? A site that loads instantly and works smoothly on any device.
-          </p>
+          <p>The result? A site that loads instantly and works smoothly on any device.</p>
         </div>
       </div>
     </div>
@@ -183,11 +236,19 @@ const iconPaths: Record<string, string> = {
   <!-- CTA Section -->
   <section class="px-6 py-6">
     <div class="max-w-4xl mx-auto">
-      <div class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden flex flex-col items-center">
+      <div
+        class="card-elevated rounded-2xl p-8 text-center relative overflow-hidden flex flex-col items-center"
+      >
         <!-- Background decoration -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"></div>
-          <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl"></div>
+          <div
+            class="absolute -top-16 -right-16 w-48 h-48 bg-[var(--color-accent)]/10 rounded-full blur-3xl"
+          >
+          </div>
+          <div
+            class="absolute -bottom-16 -left-16 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl"
+          >
+          </div>
         </div>
 
         <div class="relative flex flex-col items-center">
@@ -200,7 +261,11 @@ const iconPaths: Record<string, string> = {
           <a href="/#calculators" class="btn-primary inline-flex">
             <span>Browse Calculators</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>
         </div>

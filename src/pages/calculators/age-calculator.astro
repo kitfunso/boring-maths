@@ -11,15 +11,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import AgeCalculator from '../../components/calculators/AgeCalculator/AgeCalculator';
 
 const title = 'Age Calculator | How Old Am I in Years, Months & Days?';
-const description = 'Free age calculator: find your exact age in years, months, days, hours & minutes. Calculate age between two dates, see days until next birthday, and discover your zodiac sign.';
-const keywords = 'age calculator, how old am I, calculate age from birthday, age in days calculator, age difference calculator, birthday countdown, chronological age calculator, age between two dates';
+const description =
+  'Free age calculator: find your exact age in years, months, days, hours & minutes. Calculate age between two dates, see days until next birthday, and discover your zodiac sign.';
+const keywords =
+  'age calculator, how old am I, calculate age from birthday, age in days calculator, age difference calculator, birthday countdown, chronological age calculator, age between two dates';
 const canonicalURL = '/calculators/age-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Age Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Age Calculator' }];
 
 const relatedCalculators = [
   {
@@ -40,32 +39,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How is age calculated exactly?",
-    answer: "Age is calculated by finding the difference between your birth date and today's date. The calculator accounts for leap years and varying month lengths to give you precise years, months, and days."
+    question: 'How is age calculated exactly?',
+    answer:
+      "Age is calculated by finding the difference between your birth date and today's date. The calculator accounts for leap years and varying month lengths to give you precise years, months, and days.",
   },
   {
-    question: "How many days have I been alive?",
-    answer: "This calculator shows your total days lived. It multiplies years by 365, adds days for leap years, and accounts for the exact number of days in each month since your birth."
+    question: 'How many days have I been alive?',
+    answer:
+      'This calculator shows your total days lived. It multiplies years by 365, adds days for leap years, and accounts for the exact number of days in each month since your birth.',
   },
   {
-    question: "How can I calculate my age at a specific date?",
-    answer: "Use the 'Calculate Age On' field to enter any date instead of today. This lets you find out how old you were or will be on any particular date."
+    question: 'How can I calculate my age at a specific date?',
+    answer:
+      "Use the 'Calculate Age On' field to enter any date instead of today. This lets you find out how old you were or will be on any particular date.",
   },
   {
-    question: "Are zodiac signs accurate?",
-    answer: "The calculator shows both Western zodiac (based on birth month/day) and Chinese zodiac (based on birth year). These are traditional astrological systems and are provided for fun and cultural interest."
+    question: 'Are zodiac signs accurate?',
+    answer:
+      'The calculator shows both Western zodiac (based on birth month/day) and Chinese zodiac (based on birth year). These are traditional astrological systems and are provided for fun and cultural interest.',
   },
   {
-    question: "How do I calculate age between two dates?",
-    answer: "Enter any birth date and change the 'Calculate Age On' date to your target date. The calculator will show the exact age difference in years, months, and days between any two dates."
+    question: 'How do I calculate age between two dates?',
+    answer:
+      "Enter any birth date and change the 'Calculate Age On' date to your target date. The calculator will show the exact age difference in years, months, and days between any two dates.",
   },
   {
-    question: "How many weeks old am I?",
-    answer: "To find your age in weeks, divide your total days by 7. Our calculator shows total days lived, which you can convert. For example, 10,000 days = about 1,428 weeks or 27.4 years."
+    question: 'How many weeks old am I?',
+    answer:
+      'To find your age in weeks, divide your total days by 7. Our calculator shows total days lived, which you can convert. For example, 10,000 days = about 1,428 weeks or 27.4 years.',
   },
   {
-    question: "What is chronological age vs biological age?",
-    answer: "Chronological age is your actual age since birth (what this calculator shows). Biological age reflects your body's health compared to typical aging. You might be 50 chronologically but have the health of a 40-year-old (biological age 40)."
+    question: 'What is chronological age vs biological age?',
+    answer:
+      "Chronological age is your actual age since birth (what this calculator shows). Biological age reflects your body's health compared to typical aging. You might be 50 chronologically but have the health of a 40-year-old (biological age 40).",
   },
 ];
 
@@ -103,31 +109,31 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>date of birth</strong> using the date picker. Select
-      the year, month, and day you were born.
+      Enter your <strong>date of birth</strong> using the date picker. Select the year, month, and day
+      you were born.
     </p>
     <p>
-      The <strong>target date</strong> defaults to today, but you can change it
-      to calculate your age at any point in time - past or future.
+      The <strong>target date</strong> defaults to today, but you can change it to calculate your age
+      at any point in time - past or future.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      Your <strong>exact age</strong> is shown in years, months, and days. This
-      is calculated precisely accounting for varying month lengths and leap years.
+      Your <strong>exact age</strong> is shown in years, months, and days. This is calculated precisely
+      accounting for varying month lengths and leap years.
     </p>
     <p>
-      <strong>Life statistics</strong> show your age in different units - total
-      days, weeks, months, and hours you've been alive.
+      <strong>Life statistics</strong> show your age in different units - total days, weeks, months, and
+      hours you've been alive.
     </p>
     <p>
-      The <strong>next birthday</strong> countdown tells you how many days until
-      your next birthday and what day of the week it falls on.
+      The <strong>next birthday</strong> countdown tells you how many days until your next birthday and
+      what day of the week it falls on.
     </p>
     <p>
-      <strong>Zodiac signs</strong> show both your Western astrological sign
-      (based on birth date) and Chinese zodiac animal (based on birth year).
+      <strong>Zodiac signs</strong> show both your Western astrological sign (based on birth date) and
+      Chinese zodiac animal (based on birth year).
     </p>
   </ContentSection>
 

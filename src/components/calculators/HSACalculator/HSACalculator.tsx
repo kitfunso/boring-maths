@@ -34,10 +34,7 @@ export default function HSACalculator() {
 
   const result = useMemo(() => calculateHSA(inputs), [inputs]);
 
-  const updateInput = <K extends keyof HSAInputs>(
-    field: K,
-    value: HSAInputs[K]
-  ) => {
+  const updateInput = <K extends keyof HSAInputs>(field: K, value: HSAInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -70,7 +67,8 @@ export default function HSACalculator() {
                 onChange={(value) => updateInput('coverageType', value as CoverageType)}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
-                2025 contribution limits shown. Catch-up: +${HSA_LIMITS_2025.catchUp.toLocaleString()} if 55+
+                2025 contribution limits shown. Catch-up: +$
+                {HSA_LIMITS_2025.catchUp.toLocaleString()} if 55+
               </p>
             </div>
 
@@ -93,9 +91,7 @@ export default function HSACalculator() {
                 />
               </div>
               <div>
-                <Label htmlFor="employerContribution">
-                  Employer Contribution
-                </Label>
+                <Label htmlFor="employerContribution">Employer Contribution</Label>
                 <Input
                   id="employerContribution"
                   variant="currency"
@@ -126,7 +122,8 @@ export default function HSACalculator() {
                 />
                 {inputs.age >= 55 && (
                   <p className="text-sm text-green-400 mt-1">
-                    You qualify for ${HSA_LIMITS_2025.catchUp.toLocaleString()} catch-up contribution!
+                    You qualify for ${HSA_LIMITS_2025.catchUp.toLocaleString()} catch-up
+                    contribution!
                   </p>
                 )}
               </div>
@@ -229,8 +226,9 @@ export default function HSACalculator() {
             {/* Contribution Status */}
             {result.overContribution > 0 && (
               <Alert variant="error" title="Over Contribution Limit">
-                You're ${result.overContribution.toLocaleString()} over the {inputs.coverageType} limit of ${result.totalLimit.toLocaleString()}.
-                Excess contributions are subject to 6% penalty tax.
+                You're ${result.overContribution.toLocaleString()} over the {inputs.coverageType}{' '}
+                limit of ${result.totalLimit.toLocaleString()}. Excess contributions are subject to
+                6% penalty tax.
               </Alert>
             )}
 
@@ -241,7 +239,8 @@ export default function HSACalculator() {
               subtitle={`${formatPercent(result.effectiveDiscount)} effective discount on contributions`}
               footer={
                 <>
-                  Contributing {formatCurrency(inputs.annualContribution)} saves you {formatCurrency(result.totalAnnualTaxSavings)} in taxes
+                  Contributing {formatCurrency(inputs.annualContribution)} saves you{' '}
+                  {formatCurrency(result.totalAnnualTaxSavings)} in taxes
                 </>
               }
             />
@@ -254,28 +253,48 @@ export default function HSACalculator() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-2 border-b border-green-800/50">
                   <div>
-                    <span className="font-medium text-[var(--color-cream)]">1. Federal Tax Savings</span>
-                    <span className="text-[var(--color-muted)] ml-2">({inputs.federalTaxRate}% bracket)</span>
+                    <span className="font-medium text-[var(--color-cream)]">
+                      1. Federal Tax Savings
+                    </span>
+                    <span className="text-[var(--color-muted)] ml-2">
+                      ({inputs.federalTaxRate}% bracket)
+                    </span>
                   </div>
-                  <span className="font-bold text-green-400">{formatCurrency(result.federalTaxSavings)}</span>
+                  <span className="font-bold text-green-400">
+                    {formatCurrency(result.federalTaxSavings)}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-green-800/50">
                   <div>
-                    <span className="font-medium text-[var(--color-cream)]">2. State Tax Savings</span>
-                    <span className="text-[var(--color-muted)] ml-2">({inputs.stateTaxRate}% rate)</span>
+                    <span className="font-medium text-[var(--color-cream)]">
+                      2. State Tax Savings
+                    </span>
+                    <span className="text-[var(--color-muted)] ml-2">
+                      ({inputs.stateTaxRate}% rate)
+                    </span>
                   </div>
-                  <span className="font-bold text-green-400">{formatCurrency(result.stateTaxSavings)}</span>
+                  <span className="font-bold text-green-400">
+                    {formatCurrency(result.stateTaxSavings)}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-green-800/50">
                   <div>
-                    <span className="font-medium text-[var(--color-cream)]">3. FICA Tax Savings</span>
+                    <span className="font-medium text-[var(--color-cream)]">
+                      3. FICA Tax Savings
+                    </span>
                     <span className="text-[var(--color-muted)] ml-2">(7.65% SS + Medicare)</span>
                   </div>
-                  <span className="font-bold text-green-400">{formatCurrency(result.ficaTaxSavings)}</span>
+                  <span className="font-bold text-green-400">
+                    {formatCurrency(result.ficaTaxSavings)}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between py-2 bg-green-900/50 rounded-lg px-3 -mx-3">
-                  <span className="font-semibold text-[var(--color-cream)]">Total Annual Savings</span>
-                  <span className="font-bold text-green-300 text-lg">{formatCurrency(result.totalAnnualTaxSavings)}</span>
+                  <span className="font-semibold text-[var(--color-cream)]">
+                    Total Annual Savings
+                  </span>
+                  <span className="font-bold text-green-300 text-lg">
+                    {formatCurrency(result.totalAnnualTaxSavings)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -313,19 +332,27 @@ export default function HSACalculator() {
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-green-400">{formatCurrency(result.projectedBalance)}</p>
+                  <p className="text-2xl font-bold text-green-400">
+                    {formatCurrency(result.projectedBalance)}
+                  </p>
                   <p className="text-sm text-[var(--color-muted)]">Projected Balance</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-[var(--color-cream)]">{formatCurrency(result.totalContributions)}</p>
+                  <p className="text-2xl font-bold text-[var(--color-cream)]">
+                    {formatCurrency(result.totalContributions)}
+                  </p>
                   <p className="text-sm text-[var(--color-muted)]">Total Contributions</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-green-400">{formatCurrency(result.taxFreeGrowth)}</p>
+                  <p className="text-2xl font-bold text-green-400">
+                    {formatCurrency(result.taxFreeGrowth)}
+                  </p>
                   <p className="text-sm text-[var(--color-muted)]">Tax-Free Growth</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-[var(--color-cream)]">{inputs.yearsToRetirement}</p>
+                  <p className="text-2xl font-bold text-[var(--color-cream)]">
+                    {inputs.yearsToRetirement}
+                  </p>
                   <p className="text-sm text-[var(--color-muted)]">Years</p>
                 </div>
               </div>
@@ -343,16 +370,20 @@ export default function HSACalculator() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
-                      {result.projections.filter((_, i) => i % 5 === 0 || i === result.projections.length - 1).map((row) => (
-                        <tr key={row.year} className={row.age === 65 ? 'bg-green-900/30' : ''}>
-                          <td className="py-2">{row.year}</td>
-                          <td className="text-right py-2">{row.age}</td>
-                          <td className="text-right py-2 tabular-nums">{formatCurrency(row.contribution)}</td>
-                          <td className="text-right py-2 tabular-nums font-medium text-green-400">
-                            {formatCurrency(row.balance)}
-                          </td>
-                        </tr>
-                      ))}
+                      {result.projections
+                        .filter((_, i) => i % 5 === 0 || i === result.projections.length - 1)
+                        .map((row) => (
+                          <tr key={row.year} className={row.age === 65 ? 'bg-green-900/30' : ''}>
+                            <td className="py-2">{row.year}</td>
+                            <td className="text-right py-2">{row.age}</td>
+                            <td className="text-right py-2 tabular-nums">
+                              {formatCurrency(row.contribution)}
+                            </td>
+                            <td className="text-right py-2 tabular-nums font-medium text-green-400">
+                              {formatCurrency(row.balance)}
+                            </td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </div>
@@ -361,9 +392,10 @@ export default function HSACalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="HSA Tips:">
-              HSAs offer the only "triple tax advantage" in the US tax code: tax-free contributions, tax-free growth, and tax-free withdrawals for medical expenses.
-              After age 65, you can withdraw for any purpose (taxed as income, like a traditional IRA).
-              Consider investing your HSA and paying medical expenses out-of-pocket to maximize tax-free growth.
+              HSAs offer the only "triple tax advantage" in the US tax code: tax-free contributions,
+              tax-free growth, and tax-free withdrawals for medical expenses. After age 65, you can
+              withdraw for any purpose (taxed as income, like a traditional IRA). Consider investing
+              your HSA and paying medical expenses out-of-pocket to maximize tax-free growth.
             </Alert>
 
             {/* Share */}

@@ -65,9 +65,7 @@ export function IBUCalculator() {
   const updateHopAddition = (id: string, field: keyof HopAddition, value: any) => {
     setInputs({
       ...inputs,
-      hopAdditions: inputs.hopAdditions.map((h) =>
-        h.id === id ? { ...h, [field]: value } : h
-      ),
+      hopAdditions: inputs.hopAdditions.map((h) => (h.id === id ? { ...h, [field]: value } : h)),
     });
   };
 
@@ -118,7 +116,9 @@ export function IBUCalculator() {
             <Select
               label="IBU Formula"
               value={inputs.formula}
-              onChange={(v) => setInputs({ ...inputs, formula: v as 'tinseth' | 'rager' | 'garetz' })}
+              onChange={(v) =>
+                setInputs({ ...inputs, formula: v as 'tinseth' | 'rager' | 'garetz' })
+              }
               options={[
                 { value: 'tinseth', label: 'Tinseth (recommended)' },
                 { value: 'rager', label: 'Rager' },
@@ -141,10 +141,7 @@ export function IBUCalculator() {
 
           <div className="space-y-4">
             {inputs.hopAdditions.map((hop, index) => (
-              <div
-                key={hop.id}
-                className="rounded-lg bg-amber-900/20 p-4 ring-1 ring-amber-500/20"
-              >
+              <div key={hop.id} className="rounded-lg bg-amber-900/20 p-4 ring-1 ring-amber-500/20">
                 <div className="mb-3 flex items-center justify-between">
                   <span className="font-medium text-amber-400">Addition #{index + 1}</span>
                   {inputs.hopAdditions.length > 1 && (

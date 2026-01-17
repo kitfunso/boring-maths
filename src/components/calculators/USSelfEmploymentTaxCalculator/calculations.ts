@@ -12,7 +12,9 @@ import {
   QUARTERLY_DUE_DATES_2025,
 } from './types';
 
-export function calculateSelfEmploymentTax(inputs: USSelfEmploymentTaxInputs): USSelfEmploymentTaxResult {
+export function calculateSelfEmploymentTax(
+  inputs: USSelfEmploymentTaxInputs
+): USSelfEmploymentTaxResult {
   const {
     filingStatus,
     selfEmploymentIncome,
@@ -29,21 +31,26 @@ export function calculateSelfEmploymentTax(inputs: USSelfEmploymentTaxInputs): U
   const seTaxableIncome = netSelfEmployment * SE_TAX_RATES.selfEmploymentRate;
 
   // Social Security tax (12.4% up to wage base)
-  const socialSecurityTaxableIncome = Math.min(seTaxableIncome, SE_TAX_RATES.socialSecurityWageBase);
+  const socialSecurityTaxableIncome = Math.min(
+    seTaxableIncome,
+    SE_TAX_RATES.socialSecurityWageBase
+  );
   const socialSecurityTax = socialSecurityTaxableIncome * SE_TAX_RATES.socialSecurityRate;
 
   // Medicare tax (2.9% on all SE income)
   const medicareTax = seTaxableIncome * SE_TAX_RATES.medicareRate;
 
   // Additional Medicare tax (0.9% on income over threshold)
-  const additionalMedicareThreshold = filingStatus === 'married_jointly'
-    ? SE_TAX_RATES.additionalMedicareMFJThreshold
-    : SE_TAX_RATES.additionalMedicareSingleThreshold;
+  const additionalMedicareThreshold =
+    filingStatus === 'married_jointly'
+      ? SE_TAX_RATES.additionalMedicareMFJThreshold
+      : SE_TAX_RATES.additionalMedicareSingleThreshold;
 
   const totalEarnings = netSelfEmployment + otherIncome;
-  const additionalMedicareTax = totalEarnings > additionalMedicareThreshold
-    ? (totalEarnings - additionalMedicareThreshold) * SE_TAX_RATES.additionalMedicareRate
-    : 0;
+  const additionalMedicareTax =
+    totalEarnings > additionalMedicareThreshold
+      ? (totalEarnings - additionalMedicareThreshold) * SE_TAX_RATES.additionalMedicareRate
+      : 0;
 
   const selfEmploymentTax = socialSecurityTax + medicareTax + additionalMedicareTax;
 
@@ -52,9 +59,8 @@ export function calculateSelfEmploymentTax(inputs: USSelfEmploymentTaxInputs): U
 
   // Calculate federal income tax
   const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
-  const deductionUsed = deductionType === 'standard'
-    ? standardDeduction
-    : Math.max(itemizedDeductions, 0);
+  const deductionUsed =
+    deductionType === 'standard' ? standardDeduction : Math.max(itemizedDeductions, 0);
 
   // Adjusted Gross Income = Net SE + Other Income - Half SE Tax
   const agi = netSelfEmployment + otherIncome - halfSETaxDeduction;

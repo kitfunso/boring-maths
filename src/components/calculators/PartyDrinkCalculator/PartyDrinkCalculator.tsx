@@ -36,7 +36,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function PartyDrinkCalculator() {
-  const [inputs, setInputs] = useState<PartyDrinkInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<PartyDrinkInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   // Calculate results
   const result: PartyDrinkResult = useMemo(() => {
@@ -44,10 +46,7 @@ export default function PartyDrinkCalculator() {
   }, [inputs]);
 
   // Update input
-  const updateInput = <K extends keyof PartyDrinkInputs>(
-    field: K,
-    value: PartyDrinkInputs[K]
-  ) => {
+  const updateInput = <K extends keyof PartyDrinkInputs>(field: K, value: PartyDrinkInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -105,12 +104,7 @@ export default function PartyDrinkCalculator() {
         <CalculatorHeader
           title="Plan Your Party Drinks"
           subtitle="Calculate non-alcoholic drinks, ice, and supplies needed"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -142,7 +136,9 @@ export default function PartyDrinkCalculator() {
                   value={inputs.childrenCount}
                   onChange={(e) => updateInput('childrenCount', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Kids-friendly drinks will be prioritized</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Kids-friendly drinks will be prioritized
+                </p>
               </div>
             </Grid>
 
@@ -235,7 +231,11 @@ export default function PartyDrinkCalculator() {
               subtitle={`For ${inputs.guestCount} guests over ${inputs.eventDuration} hours`}
               footer={
                 <>
-                  About <span className="font-semibold">{formatCurrency(result.costPerPerson, result.currency)}</span> per person
+                  About{' '}
+                  <span className="font-semibold">
+                    {formatCurrency(result.costPerPerson, result.currency)}
+                  </span>{' '}
+                  per person
                 </>
               }
             />
@@ -267,7 +267,9 @@ export default function PartyDrinkCalculator() {
             {/* Drink Shopping List by Category */}
             {Object.entries(drinksByCategory).map(([category, drinks]) => (
               <div key={category} className={`bg-${categoryColors[category]}-50 rounded-xl p-6`}>
-                <h3 className={`text-sm font-semibold text-${categoryColors[category]}-700 uppercase tracking-wider mb-4`}>
+                <h3
+                  className={`text-sm font-semibold text-${categoryColors[category]}-700 uppercase tracking-wider mb-4`}
+                >
                   {categoryLabels[category]}
                 </h3>
                 <div className="space-y-3">
@@ -318,7 +320,8 @@ export default function PartyDrinkCalculator() {
                     {result.ice.bagsNeeded} bags
                   </span>
                   <span className="text-blue-500 text-sm block">
-                    ({result.ice.poundsNeeded} lbs) ~{formatCurrency(result.ice.estimatedCost, result.currency)}
+                    ({result.ice.poundsNeeded} lbs) ~
+                    {formatCurrency(result.ice.estimatedCost, result.currency)}
                   </span>
                 </div>
               </div>
@@ -362,7 +365,9 @@ export default function PartyDrinkCalculator() {
                 </div>
                 <div className="flex justify-between text-red-800">
                   <span>Ice</span>
-                  <span className="font-medium">{formatCurrency(result.ice.estimatedCost, result.currency)}</span>
+                  <span className="font-medium">
+                    {formatCurrency(result.ice.estimatedCost, result.currency)}
+                  </span>
                 </div>
                 <div className="flex justify-between text-red-800">
                   <span>Supplies</span>
@@ -383,8 +388,8 @@ export default function PartyDrinkCalculator() {
             {/* Tips */}
             <Alert variant="tip" title="Party planning tip:">
               Buy 15-20% extra drinks for unexpected guests and refills. In hot weather, have backup
-              ice ready in coolers. Keep drinks cold by pre-chilling before the event. Consider having
-              a dedicated drink station to keep guests from clustering around the main table.
+              ice ready in coolers. Keep drinks cold by pre-chilling before the event. Consider
+              having a dedicated drink station to keep guests from clustering around the main table.
             </Alert>
 
             {inputs.childrenCount > 0 && (

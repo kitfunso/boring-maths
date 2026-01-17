@@ -12,15 +12,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { HSACalculator } from '../../components/calculators/HSACalculator';
 
 const title = 'HSA Calculator 2025 | Triple Tax Advantage Savings';
-const description = 'Free HSA calculator for 2025. Calculate your triple tax advantage savings, contribution limits, and long-term growth. See how much you save with a Health Savings Account.';
-const keywords = 'hsa calculator, health savings account calculator, hsa contribution limits 2025, hsa tax savings, triple tax advantage, hsa investment calculator, hdhp hsa';
+const description =
+  'Free HSA calculator for 2025. Calculate your triple tax advantage savings, contribution limits, and long-term growth. See how much you save with a Health Savings Account.';
+const keywords =
+  'hsa calculator, health savings account calculator, hsa contribution limits 2025, hsa tax savings, triple tax advantage, hsa investment calculator, hdhp hsa';
 const canonicalURL = '/calculators/hsa-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'HSA Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'HSA Calculator' }];
 
 const relatedCalculators = [
   {
@@ -41,36 +40,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is the triple tax advantage of an HSA?",
-    answer: "HSAs offer three tax benefits: 1) Contributions are tax-deductible (or pre-tax via payroll), 2) Investment growth is tax-free, and 3) Withdrawals for qualified medical expenses are tax-free. No other account offers all three benefits. After age 65, you can withdraw for any purpose (taxed as income)."
+    question: 'What is the triple tax advantage of an HSA?',
+    answer:
+      'HSAs offer three tax benefits: 1) Contributions are tax-deductible (or pre-tax via payroll), 2) Investment growth is tax-free, and 3) Withdrawals for qualified medical expenses are tax-free. No other account offers all three benefits. After age 65, you can withdraw for any purpose (taxed as income).',
   },
   {
-    question: "What are the 2025 HSA contribution limits?",
-    answer: "For 2025, HSA contribution limits are $4,300 for individual HDHP coverage and $8,550 for family coverage. If you're 55 or older, you can contribute an additional $1,000 catch-up contribution. Employer contributions count toward these limits."
+    question: 'What are the 2025 HSA contribution limits?',
+    answer:
+      "For 2025, HSA contribution limits are $4,300 for individual HDHP coverage and $8,550 for family coverage. If you're 55 or older, you can contribute an additional $1,000 catch-up contribution. Employer contributions count toward these limits.",
   },
   {
-    question: "Do I need an HDHP to contribute to an HSA?",
-    answer: "Yes, you must be enrolled in a High Deductible Health Plan (HDHP) to contribute to an HSA. For 2025, an HDHP has a minimum deductible of $1,650 (individual) or $3,300 (family), and maximum out-of-pocket of $8,300 (individual) or $16,600 (family)."
+    question: 'Do I need an HDHP to contribute to an HSA?',
+    answer:
+      'Yes, you must be enrolled in a High Deductible Health Plan (HDHP) to contribute to an HSA. For 2025, an HDHP has a minimum deductible of $1,650 (individual) or $3,300 (family), and maximum out-of-pocket of $8,300 (individual) or $16,600 (family).',
   },
   {
-    question: "Should I invest my HSA or keep it in cash?",
-    answer: "If you can afford to pay medical expenses out-of-pocket, investing your HSA can be very powerful. The tax-free growth over decades can be substantial. Many people use their HSA as a 'stealth IRA' - paying medical bills with regular funds while letting the HSA grow tax-free."
+    question: 'Should I invest my HSA or keep it in cash?',
+    answer:
+      "If you can afford to pay medical expenses out-of-pocket, investing your HSA can be very powerful. The tax-free growth over decades can be substantial. Many people use their HSA as a 'stealth IRA' - paying medical bills with regular funds while letting the HSA grow tax-free.",
   },
   {
-    question: "What happens to my HSA when I turn 65?",
-    answer: "At 65, your HSA becomes even more flexible. Withdrawals for medical expenses remain tax-free. Withdrawals for non-medical expenses are taxed as ordinary income (like a traditional IRA) but no longer face the 20% penalty. You can still contribute if enrolled in an HDHP and not on Medicare."
+    question: 'What happens to my HSA when I turn 65?',
+    answer:
+      'At 65, your HSA becomes even more flexible. Withdrawals for medical expenses remain tax-free. Withdrawals for non-medical expenses are taxed as ordinary income (like a traditional IRA) but no longer face the 20% penalty. You can still contribute if enrolled in an HDHP and not on Medicare.',
   },
   {
-    question: "Can I use my HSA for my spouse or dependents?",
-    answer: "Yes, HSA funds can be used for qualified medical expenses for yourself, your spouse, and your dependents, even if they're not covered under your HDHP. This includes vision, dental, prescriptions, and many over-the-counter items."
+    question: 'Can I use my HSA for my spouse or dependents?',
+    answer:
+      "Yes, HSA funds can be used for qualified medical expenses for yourself, your spouse, and your dependents, even if they're not covered under your HDHP. This includes vision, dental, prescriptions, and many over-the-counter items.",
   },
   {
-    question: "Do all states recognize HSA tax benefits?",
-    answer: "Most states follow federal HSA tax treatment, but California and New Jersey do not recognize HSA contributions as tax-deductible at the state level. In these states, you'll still get federal tax benefits but will owe state income tax on contributions and earnings."
+    question: 'Do all states recognize HSA tax benefits?',
+    answer:
+      "Most states follow federal HSA tax treatment, but California and New Jersey do not recognize HSA contributions as tax-deductible at the state level. In these states, you'll still get federal tax benefits but will owe state income tax on contributions and earnings.",
   },
   {
     question: "What's the difference between an HSA and FSA?",
-    answer: "HSAs have higher contribution limits, roll over indefinitely, are portable (you keep it when changing jobs), and can be invested. FSAs have 'use it or lose it' rules (with limited rollover or grace period), lower limits, and are employer-owned. HSAs require an HDHP; FSAs don't."
+    answer:
+      "HSAs have higher contribution limits, roll over indefinitely, are portable (you keep it when changing jobs), and can be invested. FSAs have 'use it or lose it' rules (with limited rollover or grace period), lower limits, and are employer-owned. HSAs require an HDHP; FSAs don't.",
   },
 ];
 
@@ -112,13 +119,15 @@ const schemaBreadcrumbs = [
       a "triple tax advantage." This makes it one of the most powerful savings vehicles available.
     </p>
     <ol class="list-decimal list-inside space-y-2 mt-4">
-      <li><strong>Tax-deductible contributions:</strong> Reduce your taxable income when you contribute</li>
+      <li>
+        <strong>Tax-deductible contributions:</strong> Reduce your taxable income when you contribute
+      </li>
       <li><strong>Tax-free growth:</strong> Investments grow without being taxed</li>
       <li><strong>Tax-free withdrawals:</strong> Pay for medical expenses completely tax-free</li>
     </ol>
     <p class="mt-4">
-      Unlike a 401(k) (taxed on withdrawal) or Roth IRA (taxed on contribution), HSAs avoid taxes at all three stages
-      when used for qualified medical expenses.
+      Unlike a 401(k) (taxed on withdrawal) or Roth IRA (taxed on contribution), HSAs avoid taxes at
+      all three stages when used for qualified medical expenses.
     </p>
   </ContentSection>
 
@@ -150,7 +159,8 @@ const schemaBreadcrumbs = [
       </table>
     </div>
     <p class="mt-4 text-[var(--color-subtle)]">
-      Employer contributions count toward these limits. Over-contributions are subject to a 6% penalty tax.
+      Employer contributions count toward these limits. Over-contributions are subject to a 6%
+      penalty tax.
     </p>
   </ContentSection>
 

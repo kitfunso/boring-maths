@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UKStampDutyCalculator } from '../../components/calculators/UKStampDutyCalculator';
 
 const title = 'UK Stamp Duty Calculator 2024/25 | SDLT, LBTT & LTT';
-const description = 'Free UK stamp duty calculator for England, Scotland & Wales. Calculate SDLT, LBTT or LTT with first-time buyer relief, additional property surcharge, and non-resident rates.';
-const keywords = 'stamp duty calculator uk, sdlt calculator, stamp duty land tax, lbtt calculator scotland, ltt calculator wales, first time buyer stamp duty, additional property stamp duty, stamp duty 2024';
+const description =
+  'Free UK stamp duty calculator for England, Scotland & Wales. Calculate SDLT, LBTT or LTT with first-time buyer relief, additional property surcharge, and non-resident rates.';
+const keywords =
+  'stamp duty calculator uk, sdlt calculator, stamp duty land tax, lbtt calculator scotland, ltt calculator wales, first time buyer stamp duty, additional property stamp duty, stamp duty 2024';
 const canonicalURL = '/calculators/uk-stamp-duty-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is Stamp Duty Land Tax (SDLT)?",
-    answer: "Stamp Duty Land Tax is a tax you pay when buying property or land in England and Northern Ireland. The amount depends on the property price, whether you're a first-time buyer, and if it's an additional property. Different taxes apply in Scotland (LBTT) and Wales (LTT)."
+    question: 'What is Stamp Duty Land Tax (SDLT)?',
+    answer:
+      "Stamp Duty Land Tax is a tax you pay when buying property or land in England and Northern Ireland. The amount depends on the property price, whether you're a first-time buyer, and if it's an additional property. Different taxes apply in Scotland (LBTT) and Wales (LTT).",
   },
   {
-    question: "What are the current SDLT rates in England?",
-    answer: "From April 2025, SDLT rates are: 0% up to £250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £425,000 and 5% from £425,001-£625,000 (properties up to £625,000 only)."
+    question: 'What are the current SDLT rates in England?',
+    answer:
+      'From April 2025, SDLT rates are: 0% up to £250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £425,000 and 5% from £425,001-£625,000 (properties up to £625,000 only).',
   },
   {
-    question: "How does first-time buyer relief work?",
-    answer: "First-time buyers in England/NI pay no SDLT on properties up to £425,000, and 5% on the portion from £425,001-£625,000. The relief only applies to properties up to £625,000. In Scotland, first-time buyers get an increased nil-rate band of £175,000 instead of £145,000. Wales has no first-time buyer relief."
+    question: 'How does first-time buyer relief work?',
+    answer:
+      'First-time buyers in England/NI pay no SDLT on properties up to £425,000, and 5% on the portion from £425,001-£625,000. The relief only applies to properties up to £625,000. In Scotland, first-time buyers get an increased nil-rate band of £175,000 instead of £145,000. Wales has no first-time buyer relief.',
   },
   {
-    question: "What is the additional property surcharge?",
-    answer: "If you're buying a second home or buy-to-let property, you pay an extra 5% surcharge (increased from 3% in October 2024) on top of standard rates. This applies to the entire purchase price. The surcharge applies across all UK nations."
+    question: 'What is the additional property surcharge?',
+    answer:
+      "If you're buying a second home or buy-to-let property, you pay an extra 5% surcharge (increased from 3% in October 2024) on top of standard rates. This applies to the entire purchase price. The surcharge applies across all UK nations.",
   },
   {
-    question: "Do non-UK residents pay more stamp duty?",
-    answer: "Yes, non-UK residents pay an additional 2% surcharge on top of all other rates (including the additional property surcharge if applicable). This has been in place since April 2021."
+    question: 'Do non-UK residents pay more stamp duty?',
+    answer:
+      'Yes, non-UK residents pay an additional 2% surcharge on top of all other rates (including the additional property surcharge if applicable). This has been in place since April 2021.',
   },
   {
-    question: "What is LBTT in Scotland?",
-    answer: "Land and Buildings Transaction Tax (LBTT) replaced SDLT in Scotland from April 2015. The rates and thresholds differ from England. Current bands are: 0% up to £145,000 (£175,000 for first-time buyers), 2% from £145,001-£250,000, 5% from £250,001-£325,000, 10% from £325,001-£750,000, and 12% above £750,000."
+    question: 'What is LBTT in Scotland?',
+    answer:
+      'Land and Buildings Transaction Tax (LBTT) replaced SDLT in Scotland from April 2015. The rates and thresholds differ from England. Current bands are: 0% up to £145,000 (£175,000 for first-time buyers), 2% from £145,001-£250,000, 5% from £250,001-£325,000, 10% from £325,001-£750,000, and 12% above £750,000.',
   },
   {
-    question: "What is LTT in Wales?",
-    answer: "Land Transaction Tax (LTT) replaced SDLT in Wales from April 2018. Current bands are: 0% up to £225,000, 6% from £225,001-£400,000, 7.5% from £400,001-£750,000, 10% from £750,001-£1,500,000, and 12% above £1,500,000. Wales has no first-time buyer relief."
+    question: 'What is LTT in Wales?',
+    answer:
+      'Land Transaction Tax (LTT) replaced SDLT in Wales from April 2018. Current bands are: 0% up to £225,000, 6% from £225,001-£400,000, 7.5% from £400,001-£750,000, 10% from £750,001-£1,500,000, and 12% above £1,500,000. Wales has no first-time buyer relief.',
   },
   {
-    question: "When do I pay stamp duty?",
-    answer: "You must pay stamp duty within 14 days of completing your property purchase. Your solicitor or conveyancer usually handles this on your behalf. Late payment incurs interest and penalties."
+    question: 'When do I pay stamp duty?',
+    answer:
+      'You must pay stamp duty within 14 days of completing your property purchase. Your solicitor or conveyancer usually handles this on your behalf. Late payment incurs interest and penalties.',
   },
 ];
 
@@ -108,27 +118,41 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
-      <li><strong class="text-[var(--color-cream)]">Enter the property price</strong> – The full purchase price of the property you're buying.</li>
-      <li><strong class="text-[var(--color-cream)]">Select your location</strong> – Choose England & NI (SDLT), Scotland (LBTT), or Wales (LTT) as rates differ.</li>
-      <li><strong class="text-[var(--color-cream)]">Choose buyer type</strong> – First-time buyer, moving home, or purchasing an additional property.</li>
-      <li><strong class="text-[var(--color-cream)]">Non-resident status</strong> – Toggle if you're not a UK resident (adds 2% surcharge).</li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the property price</strong> – The full purchase
+        price of the property you're buying.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your location</strong> – Choose England & NI
+        (SDLT), Scotland (LBTT), or Wales (LTT) as rates differ.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose buyer type</strong> – First-time buyer, moving
+        home, or purchasing an additional property.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Non-resident status</strong> – Toggle if you're not
+        a UK resident (adds 2% surcharge).
+      </li>
     </ol>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        The calculator shows your <strong class="text-[var(--color-cream)]">total stamp duty</strong> due and
-        the <strong class="text-[var(--color-cream)]">effective rate</strong> as a percentage of the property price.
+        The calculator shows your <strong class="text-[var(--color-cream)]">total stamp duty</strong
+        > due and the <strong class="text-[var(--color-cream)]">effective rate</strong> as a percentage
+        of the property price.
       </p>
       <p>
-        The <strong class="text-[var(--color-cream)]">band breakdown</strong> shows exactly how much tax applies
-        at each rate tier. Stamp duty is calculated on a tiered basis – you only pay the higher rate on the
-        portion of the price within that band, not the entire property value.
+        The <strong class="text-[var(--color-cream)]">band breakdown</strong> shows exactly how much tax
+        applies at each rate tier. Stamp duty is calculated on a tiered basis – you only pay the higher
+        rate on the portion of the price within that band, not the entire property value.
       </p>
       <p>
-        If you're a first-time buyer, you'll see your <strong class="text-emerald-400">savings</strong> compared
-        to standard rates. Additional property buyers and non-residents will see their
+        If you're a first-time buyer, you'll see your <strong class="text-emerald-400"
+          >savings</strong
+        > compared to standard rates. Additional property buyers and non-residents will see their
         <strong class="text-amber-400">surcharges</strong> clearly itemized.
       </p>
     </div>

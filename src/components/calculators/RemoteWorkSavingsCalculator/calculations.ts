@@ -27,9 +27,7 @@ const LBS_PER_TON = 2000;
 /**
  * Calculate transportation savings
  */
-function calculateTransportSavings(
-  inputs: RemoteWorkSavingsInputs
-): {
+function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
   gas: number;
   maintenance: number;
   parking: number;
@@ -97,9 +95,7 @@ function calculateTransportSavings(
 /**
  * Calculate lifestyle savings (food, clothes, coffee)
  */
-function calculateLifestyleSavings(
-  inputs: RemoteWorkSavingsInputs
-): {
+function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
   food: number;
   clothing: number;
   dryCleaning: number;
@@ -138,15 +134,8 @@ function calculateLifestyleSavings(
 /**
  * Calculate time analysis
  */
-function calculateTimeAnalysis(
-  inputs: RemoteWorkSavingsInputs
-): TimeAnalysis {
-  const {
-    commuteTimeMinutes,
-    officeDaysPerWeek,
-    weeksPerYear,
-    hourlyRate,
-  } = inputs;
+function calculateTimeAnalysis(inputs: RemoteWorkSavingsInputs): TimeAnalysis {
+  const { commuteTimeMinutes, officeDaysPerWeek, weeksPerYear, hourlyRate } = inputs;
 
   const dailyCommuteMinutes = commuteTimeMinutes * 2; // Round trip
   const weeklyCommuteHours = (dailyCommuteMinutes * officeDaysPerWeek) / 60;

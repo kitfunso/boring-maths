@@ -12,15 +12,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { CO2Calculator } from '../../components/calculators/CO2Calculator';
 
 const title = 'Aquarium CO2 Calculator | pH KH CO2 Chart';
-const description = 'Free CO2 calculator for planted aquariums. Calculate CO2 levels from pH and KH readings. Includes drop checker color guide and bubble rate suggestions.';
-const keywords = 'co2 calculator, aquarium co2, planted tank co2, ph kh co2 chart, drop checker, bubble counter, co2 injection';
+const description =
+  'Free CO2 calculator for planted aquariums. Calculate CO2 levels from pH and KH readings. Includes drop checker color guide and bubble rate suggestions.';
+const keywords =
+  'co2 calculator, aquarium co2, planted tank co2, ph kh co2 chart, drop checker, bubble counter, co2 injection';
 const canonicalURL = '/calculators/co2-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'CO2 Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'CO2 Calculator' }];
 
 const relatedCalculators = [
   {
@@ -34,28 +33,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How does the pH/KH/CO2 relationship work?",
-    answer: "CO2 dissolves in water to form carbonic acid, which lowers pH. KH (carbonate hardness) buffers against pH changes. The relationship is: CO2 (ppm) = 3 × KH × 10^(7-pH). Lower pH with the same KH means more CO2."
+    question: 'How does the pH/KH/CO2 relationship work?',
+    answer:
+      'CO2 dissolves in water to form carbonic acid, which lowers pH. KH (carbonate hardness) buffers against pH changes. The relationship is: CO2 (ppm) = 3 × KH × 10^(7-pH). Lower pH with the same KH means more CO2.',
   },
   {
-    question: "What CO2 level should I target?",
-    answer: "For planted tanks, 25-35 ppm is optimal for most plants without stressing fish. Start at 20 ppm and increase gradually. High-tech planted tanks with demanding plants may target 30-35 ppm. Never exceed 40 ppm."
+    question: 'What CO2 level should I target?',
+    answer:
+      'For planted tanks, 25-35 ppm is optimal for most plants without stressing fish. Start at 20 ppm and increase gradually. High-tech planted tanks with demanding plants may target 30-35 ppm. Never exceed 40 ppm.',
   },
   {
-    question: "Why is my drop checker always blue/green/yellow?",
-    answer: "Blue = not enough CO2 (under 20 ppm). Green = optimal (20-30 ppm). Yellow = too much CO2 (over 30 ppm). Drop checkers lag about 1-2 hours behind actual CO2 levels, so make adjustments gradually."
+    question: 'Why is my drop checker always blue/green/yellow?',
+    answer:
+      'Blue = not enough CO2 (under 20 ppm). Green = optimal (20-30 ppm). Yellow = too much CO2 (over 30 ppm). Drop checkers lag about 1-2 hours behind actual CO2 levels, so make adjustments gradually.',
   },
   {
-    question: "How accurate is the pH/KH calculation?",
-    answer: "The formula assumes only CO2 affects your pH, which isn't always true. Other acids (tannins, organics) can lower pH without adding CO2. For most tanks the formula is accurate within 10-15%. Use a drop checker as verification."
+    question: 'How accurate is the pH/KH calculation?',
+    answer:
+      "The formula assumes only CO2 affects your pH, which isn't always true. Other acids (tannins, organics) can lower pH without adding CO2. For most tanks the formula is accurate within 10-15%. Use a drop checker as verification.",
   },
   {
-    question: "Should I run CO2 24/7 or only during lights-on?",
-    answer: "Only inject CO2 when lights are on. Plants only use CO2 during photosynthesis. At night, plants respire and produce CO2, so adding more can drop oxygen dangerously low. Use a timer or solenoid to automate this."
+    question: 'Should I run CO2 24/7 or only during lights-on?',
+    answer:
+      'Only inject CO2 when lights are on. Plants only use CO2 during photosynthesis. At night, plants respire and produce CO2, so adding more can drop oxygen dangerously low. Use a timer or solenoid to automate this.',
   },
   {
-    question: "My fish are gasping at the surface - is it CO2?",
-    answer: "Possibly! Fish gasping indicates low oxygen or high CO2. Turn off CO2 immediately, increase surface agitation, and do a water change if needed. CO2 above 40 ppm can stress fish; above 50 ppm is dangerous."
+    question: 'My fish are gasping at the surface - is it CO2?',
+    answer:
+      'Possibly! Fish gasping indicates low oxygen or high CO2. Turn off CO2 immediately, increase surface agitation, and do a water change if needed. CO2 above 40 ppm can stress fish; above 50 ppm is dangerous.',
   },
 ];
 
@@ -93,9 +98,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding CO2 in Planted Tanks">
     <p>
-      Carbon dioxide is essential for plant photosynthesis. In nature, CO2 comes from
-      fish respiration, decomposition, and atmospheric exchange. In planted tanks,
-      supplemental CO2 injection can dramatically improve plant growth and health.
+      Carbon dioxide is essential for plant photosynthesis. In nature, CO2 comes from fish
+      respiration, decomposition, and atmospheric exchange. In planted tanks, supplemental CO2
+      injection can dramatically improve plant growth and health.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">CO2 Level Guide</h3>
     <ul class="list-disc list-inside space-y-1">

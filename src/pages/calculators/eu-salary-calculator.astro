@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { EUSalaryCalculator } from '../../components/calculators/EUSalaryCalculator';
 
 const title = 'EU Salary Calculator 2025 | Net Pay Calculator Europe';
-const description = 'Free EU salary calculator comparing net pay across European countries. Calculate take-home salary after tax in Germany, France, Netherlands, Spain, Italy, and more.';
-const keywords = 'eu salary calculator, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
+const description =
+  'Free EU salary calculator comparing net pay across European countries. Calculate take-home salary after tax in Germany, France, Netherlands, Spain, Italy, and more.';
+const keywords =
+  'eu salary calculator, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
 const canonicalURL = '/calculators/eu-salary-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,36 +43,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "Which EU country has the lowest taxes?",
-    answer: "For employees, Bulgaria (10% flat tax) and Hungary (15% flat tax) have the lowest income tax rates. However, social security contributions vary. Ireland and Portugal offer favorable tax regimes for certain workers and digital nomads."
+    question: 'Which EU country has the lowest taxes?',
+    answer:
+      'For employees, Bulgaria (10% flat tax) and Hungary (15% flat tax) have the lowest income tax rates. However, social security contributions vary. Ireland and Portugal offer favorable tax regimes for certain workers and digital nomads.',
   },
   {
-    question: "How is salary taxed in Germany?",
-    answer: "Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 20% for employees. The tax-free allowance is €11,604 (2024). Married couples can benefit from income splitting (Ehegattensplitting)."
+    question: 'How is salary taxed in Germany?',
+    answer:
+      'Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 20% for employees. The tax-free allowance is €11,604 (2024). Married couples can benefit from income splitting (Ehegattensplitting).',
   },
   {
-    question: "What is the difference between gross and net salary?",
-    answer: "Gross salary is your total pay before any deductions. Net salary (take-home pay) is what you receive after income tax, social security contributions, and other mandatory deductions. In high-tax EU countries, net can be 50-60% of gross."
+    question: 'What is the difference between gross and net salary?',
+    answer:
+      'Gross salary is your total pay before any deductions. Net salary (take-home pay) is what you receive after income tax, social security contributions, and other mandatory deductions. In high-tax EU countries, net can be 50-60% of gross.',
   },
   {
-    question: "Do EU countries have social security agreements?",
-    answer: "Yes, EU regulations coordinate social security between member states. You generally pay contributions in the country where you work. Posted workers and cross-border workers have special rules. Periods of contribution in different countries count toward benefits."
+    question: 'Do EU countries have social security agreements?',
+    answer:
+      'Yes, EU regulations coordinate social security between member states. You generally pay contributions in the country where you work. Posted workers and cross-border workers have special rules. Periods of contribution in different countries count toward benefits.',
   },
   {
-    question: "How does the Netherlands salary system work?",
-    answer: "The Netherlands has a relatively high tax wedge with income tax up to 49.5% and significant social contributions. However, there's the 30% ruling for skilled migrants which can make a portion of salary tax-free for up to 5 years."
+    question: 'How does the Netherlands salary system work?',
+    answer:
+      "The Netherlands has a relatively high tax wedge with income tax up to 49.5% and significant social contributions. However, there's the 30% ruling for skilled migrants which can make a portion of salary tax-free for up to 5 years.",
   },
   {
-    question: "What is the 13th month salary in Europe?",
-    answer: "Some EU countries traditionally pay a 13th month salary (or 14th in some cases). This is common in Spain, Portugal, Italy, Austria, and Greece. It's usually part of annual compensation, paid in December or split between summer and winter. Our calculator uses annual figures."
+    question: 'What is the 13th month salary in Europe?',
+    answer:
+      "Some EU countries traditionally pay a 13th month salary (or 14th in some cases). This is common in Spain, Portugal, Italy, Austria, and Greece. It's usually part of annual compensation, paid in December or split between summer and winter. Our calculator uses annual figures.",
   },
   {
-    question: "How accurate are these calculations?",
-    answer: "These are simplified estimates for comparison purposes. Actual take-home pay depends on factors like marital status, children, local/municipal taxes, pension contributions, health insurance choices, and specific deductions. Consult a local tax advisor for precise calculations."
+    question: 'How accurate are these calculations?',
+    answer:
+      'These are simplified estimates for comparison purposes. Actual take-home pay depends on factors like marital status, children, local/municipal taxes, pension contributions, health insurance choices, and specific deductions. Consult a local tax advisor for precise calculations.',
   },
   {
-    question: "Can I compare salaries between EU and non-EU countries?",
-    answer: "This calculator focuses on EU countries. For US comparison, see our US Tax Bracket Calculator. Remember that direct salary comparison should also consider cost of living, healthcare costs, and benefits that may be included (or not) in different countries."
+    question: 'Can I compare salaries between EU and non-EU countries?',
+    answer:
+      'This calculator focuses on EU countries. For US comparison, see our US Tax Bracket Calculator. Remember that direct salary comparison should also consider cost of living, healthcare costs, and benefits that may be included (or not) in different countries.',
   },
 ];
 
@@ -108,13 +118,18 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding EU Salaries">
     <p>
-      Salary structures vary significantly across EU member states. While gross salaries might look similar,
-      net take-home pay can differ by 20-30% due to varying tax rates, social security systems, and deductions.
+      Salary structures vary significantly across EU member states. While gross salaries might look
+      similar, net take-home pay can differ by 20-30% due to varying tax rates, social security
+      systems, and deductions.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Key Factors Affecting Net Pay</h3>
     <ul class="list-disc list-inside space-y-1">
-      <li><strong>Income Tax:</strong> Progressive rates from 10% (Bulgaria) to 57% (Denmark top rate)</li>
-      <li><strong>Social Security:</strong> Employee contributions range from 4% (Ireland) to 27% (Netherlands)</li>
+      <li>
+        <strong>Income Tax:</strong> Progressive rates from 10% (Bulgaria) to 57% (Denmark top rate)
+      </li>
+      <li>
+        <strong>Social Security:</strong> Employee contributions range from 4% (Ireland) to 27% (Netherlands)
+      </li>
       <li><strong>Tax-Free Allowances:</strong> Vary from €0 to €30,000+ depending on country</li>
       <li><strong>Local Taxes:</strong> Some countries have municipal or regional income taxes</li>
     </ul>
@@ -144,7 +159,8 @@ const schemaBreadcrumbs = [
       </div>
     </div>
     <p class="mt-4 text-sm text-[var(--color-muted)]">
-      Note: Higher tax countries often provide more public services, healthcare, education, and social safety nets.
+      Note: Higher tax countries often provide more public services, healthcare, education, and
+      social safety nets.
     </p>
   </ContentSection>
 

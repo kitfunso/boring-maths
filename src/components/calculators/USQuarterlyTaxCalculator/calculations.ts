@@ -4,7 +4,12 @@
  * Calculates quarterly payments with safe harbor rules.
  */
 
-import type { USQuarterlyTaxInputs, USQuarterlyTaxResult, QuarterPayment, FilingStatus } from './types';
+import type {
+  USQuarterlyTaxInputs,
+  USQuarterlyTaxResult,
+  QuarterPayment,
+  FilingStatus,
+} from './types';
 import {
   TAX_BRACKETS_2025,
   STANDARD_DEDUCTIONS_2025,
@@ -61,7 +66,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   const safeHarborAmount = Math.min(currentYearSafeHarbor, priorYearSafeHarbor);
 
   // Check if meeting safe harbor
-  const totalPayments = withholdingsFromW2 + (quarterlyPayment * 4);
+  const totalPayments = withholdingsFromW2 + quarterlyPayment * 4;
   const meetsCurrentYearSafeHarbor = totalPayments >= currentYearSafeHarbor;
   const meetsPriorYearSafeHarbor = totalPayments >= priorYearSafeHarbor;
 
@@ -86,14 +91,16 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   }));
 
   // Safe harbor rule description
-  const safeHarborRule = priorYearAGI > HIGH_INCOME_THRESHOLD
-    ? '110% of prior year tax (high income)'
-    : '100% of prior year tax';
+  const safeHarborRule =
+    priorYearAGI > HIGH_INCOME_THRESHOLD
+      ? '110% of prior year tax (high income)'
+      : '100% of prior year tax';
 
   // Annualized income advice
   let annualizedIncomeAdvice = '';
   if (selfEmploymentIncome > expectedAnnualIncome * 0.5) {
-    annualizedIncomeAdvice = 'If your income varies significantly by quarter, consider the annualized income installment method (Form 2210 Schedule AI) to potentially reduce earlier payments.';
+    annualizedIncomeAdvice =
+      'If your income varies significantly by quarter, consider the annualized income installment method (Form 2210 Schedule AI) to potentially reduce earlier payments.';
   }
 
   return {

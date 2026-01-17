@@ -14,31 +14,29 @@ export function calculateFishStocking(inputs: FishStockingInputs): FishStockingR
   const heightIn = tankUnit === 'cm' ? tankHeight / 2.54 : tankHeight;
 
   // Calculate volume in gallons (231 cubic inches per gallon)
-  const tankVolume = Math.round((lengthIn * widthIn * heightIn) / 231 * 10) / 10;
+  const tankVolume = Math.round(((lengthIn * widthIn * heightIn) / 231) * 10) / 10;
 
   // Get multipliers
-  const filterMultiplier = FILTER_TYPES.find(f => f.value === filterType)?.multiplier || 1;
-  const plantMultiplier = PLANT_LEVELS.find(p => p.value === plantLevel)?.multiplier || 1;
+  const filterMultiplier = FILTER_TYPES.find((f) => f.value === filterType)?.multiplier || 1;
+  const plantMultiplier = PLANT_LEVELS.find((p) => p.value === plantLevel)?.multiplier || 1;
 
   // Effective volume considers filtration and plants
   const effectiveVolume = Math.round(tankVolume * filterMultiplier * plantMultiplier * 10) / 10;
 
   // Calculate total fish inches
-  const totalFishInches = fish.reduce((sum, f) => sum + (f.size * f.quantity), 0);
+  const totalFishInches = fish.reduce((sum, f) => sum + f.size * f.quantity, 0);
 
   // Better stocking rule: 1" of fish per 2 gallons of effective volume
   // This is more conservative than the old "1 inch per gallon" rule
-  const recommendedMaxInches = Math.round(effectiveVolume / 2 * 10) / 10;
+  const recommendedMaxInches = Math.round((effectiveVolume / 2) * 10) / 10;
 
   // Stocking level as percentage
-  const stockingLevel = recommendedMaxInches > 0
-    ? Math.round((totalFishInches / recommendedMaxInches) * 100)
-    : 0;
+  const stockingLevel =
+    recommendedMaxInches > 0 ? Math.round((totalFishInches / recommendedMaxInches) * 100) : 0;
 
   // Bioload percentage (similar to stocking but accounts for effective filtering)
-  const bioloadPercentage = tankVolume > 0
-    ? Math.round((totalFishInches / (tankVolume / 2)) * 100)
-    : 0;
+  const bioloadPercentage =
+    tankVolume > 0 ? Math.round((totalFishInches / (tankVolume / 2)) * 100) : 0;
 
   // Determine status
   let stockingStatus: FishStockingResult['stockingStatus'];
@@ -70,19 +68,20 @@ export function calculateFishStocking(inputs: FishStockingInputs): FishStockingR
   }
 
   // Check for large fish in small tanks
-  const largeFish = fish.filter(f => f.size >= 6);
+  const largeFish = fish.filter((f) => f.size >= 6);
   if (largeFish.length > 0 && tankVolume < 40) {
-    warnings.push(`Large fish (${largeFish.map(f => f.species).join(', ')}) need bigger tanks.`);
+    warnings.push(`Large fish (${largeFish.map((f) => f.species).join(', ')}) need bigger tanks.`);
   }
 
   // Check for schooling fish in small numbers
-  const schoolingFish = fish.filter(f =>
-    f.species.includes('Tetra') ||
-    f.species.includes('Rasbora') ||
-    f.species.includes('Cory') ||
-    f.species.includes('Barb')
+  const schoolingFish = fish.filter(
+    (f) =>
+      f.species.includes('Tetra') ||
+      f.species.includes('Rasbora') ||
+      f.species.includes('Cory') ||
+      f.species.includes('Barb')
   );
-  schoolingFish.forEach(f => {
+  schoolingFish.forEach((f) => {
     if (f.quantity < 6) {
       warnings.push(`${f.species} are schooling fish - keep at least 6 for best health.`);
     }
@@ -106,22 +105,34 @@ export function formatGallons(value: number): string {
 
 export function getStatusColor(status: FishStockingResult['stockingStatus']): string {
   switch (status) {
-    case 'understocked': return 'text-blue-400';
-    case 'ideal': return 'text-green-400';
-    case 'moderate': return 'text-yellow-400';
-    case 'overstocked': return 'text-orange-400';
-    case 'critical': return 'text-red-400';
-    default: return 'text-[var(--color-cream)]';
+    case 'understocked':
+      return 'text-blue-400';
+    case 'ideal':
+      return 'text-green-400';
+    case 'moderate':
+      return 'text-yellow-400';
+    case 'overstocked':
+      return 'text-orange-400';
+    case 'critical':
+      return 'text-red-400';
+    default:
+      return 'text-[var(--color-cream)]';
   }
 }
 
 export function getStatusLabel(status: FishStockingResult['stockingStatus']): string {
   switch (status) {
-    case 'understocked': return 'Understocked - Room for more fish';
-    case 'ideal': return 'Ideal Stocking Level';
-    case 'moderate': return 'Moderately Stocked';
-    case 'overstocked': return 'Overstocked - Extra maintenance needed';
-    case 'critical': return 'Critically Overstocked';
-    default: return status;
+    case 'understocked':
+      return 'Understocked - Room for more fish';
+    case 'ideal':
+      return 'Ideal Stocking Level';
+    case 'moderate':
+      return 'Moderately Stocked';
+    case 'overstocked':
+      return 'Overstocked - Extra maintenance needed';
+    case 'critical':
+      return 'Critically Overstocked';
+    default:
+      return status;
   }
 }

@@ -72,7 +72,7 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
 
   // Estimate tax relief gained (basic rate 20% on employee contributions)
   const employeeContributionsTotal = monthlyContribution * 12 * yearsToRetirement;
-  const taxReliefGained = employeeContributionsTotal * 0.20; // Basic rate relief
+  const taxReliefGained = employeeContributionsTotal * 0.2; // Basic rate relief
 
   return {
     projectedPot: Math.round(projectedPot),
@@ -85,8 +85,8 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
     monthlyIncomeReal: Math.round(monthlyIncomeReal),
     yearsToRetirement,
     taxReliefGained: Math.round(taxReliefGained),
-    yearlyProjection: yearlyProjection.filter((_, i) =>
-      i === 0 || i === yearlyProjection.length - 1 || i % 5 === 0
+    yearlyProjection: yearlyProjection.filter(
+      (_, i) => i === 0 || i === yearlyProjection.length - 1 || i % 5 === 0
     ), // Every 5 years plus start/end
   };
 }

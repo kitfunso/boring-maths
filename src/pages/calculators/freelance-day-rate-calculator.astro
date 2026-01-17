@@ -14,8 +14,10 @@ import FreelanceDayRateCalculator from '../../components/calculators/FreelanceDa
 
 // SEO Configuration
 const title = 'Freelance Day Rate Calculator | Compare to Salary + Tax';
-const description = 'Calculate your ideal freelance day rate compared to a salaried position. Includes tax adjustments, benefits analysis, and real take-home pay comparison. Free online calculator.';
-const keywords = 'freelance day rate calculator, freelance rate calculator, day rate vs salary, freelance tax calculator, contractor day rate, consulting rate calculator';
+const description =
+  'Calculate your ideal freelance day rate compared to a salaried position. Includes tax adjustments, benefits analysis, and real take-home pay comparison. Free online calculator.';
+const keywords =
+  'freelance day rate calculator, freelance rate calculator, day rate vs salary, freelance tax calculator, contractor day rate, consulting rate calculator';
 const canonicalURL = '/calculators/freelance-day-rate-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -47,37 +49,45 @@ const relatedCalculators = [
 // FAQ data for both display and schema
 const faqs = [
   {
-    question: "How do I calculate my freelance day rate?",
-    answer: "To calculate your freelance day rate, start with your target annual income. Add any benefits you'll need to self-fund (health insurance, retirement contributions). Divide this total by your number of billable working days (typically 220-235 after accounting for vacation, holidays, and unbillable time). Then adjust for your tax bracket to ensure you're comparing net-to-net with employment."
+    question: 'How do I calculate my freelance day rate?',
+    answer:
+      "To calculate your freelance day rate, start with your target annual income. Add any benefits you'll need to self-fund (health insurance, retirement contributions). Divide this total by your number of billable working days (typically 220-235 after accounting for vacation, holidays, and unbillable time). Then adjust for your tax bracket to ensure you're comparing net-to-net with employment.",
   },
   {
     question: "What's a good freelance day rate in 2024?",
-    answer: "A good freelance day rate depends heavily on your industry, experience, and location. As a general rule, freelance day rates should be 1.5-2x the equivalent employee daily rate. This accounts for self-employment taxes, benefits, unpaid time off, and the overhead of running your own business. For example, a $75,000 salary translates to roughly $300-400 per day as a freelancer."
+    answer:
+      'A good freelance day rate depends heavily on your industry, experience, and location. As a general rule, freelance day rates should be 1.5-2x the equivalent employee daily rate. This accounts for self-employment taxes, benefits, unpaid time off, and the overhead of running your own business. For example, a $75,000 salary translates to roughly $300-400 per day as a freelancer.',
   },
   {
-    question: "Should I charge hourly or daily as a freelancer?",
-    answer: "Day rates are often better for project work because they encourage efficiency, reduce time-tracking overhead, and provide more predictable income. Clients often prefer day rates as they're easier to budget. Hourly rates may be better for ongoing support contracts, when scope is highly variable, or when you're new and still estimating project durations."
+    question: 'Should I charge hourly or daily as a freelancer?',
+    answer:
+      "Day rates are often better for project work because they encourage efficiency, reduce time-tracking overhead, and provide more predictable income. Clients often prefer day rates as they're easier to budget. Hourly rates may be better for ongoing support contracts, when scope is highly variable, or when you're new and still estimating project durations.",
   },
   {
-    question: "How much tax do freelancers pay?",
-    answer: "In the US, freelancers pay self-employment tax of 15.3% (Social Security and Medicare) on top of regular income tax. Combined with federal and state income taxes, most freelancers should budget 25-40% of their gross income for taxes, depending on their tax bracket and state. This is why day rates need to be significantly higher than employee equivalent rates."
+    question: 'How much tax do freelancers pay?',
+    answer:
+      'In the US, freelancers pay self-employment tax of 15.3% (Social Security and Medicare) on top of regular income tax. Combined with federal and state income taxes, most freelancers should budget 25-40% of their gross income for taxes, depending on their tax bracket and state. This is why day rates need to be significantly higher than employee equivalent rates.',
   },
   {
     question: "What's the difference between gross and net day rate?",
-    answer: "Gross day rate is what you invoice the client before any taxes. Net day rate is what you actually keep after paying self-employment tax and income tax. When comparing freelance rates to a salary, always compare net-to-net for an accurate picture. A $500 gross day rate might only be $325-375 net after taxes."
+    answer:
+      'Gross day rate is what you invoice the client before any taxes. Net day rate is what you actually keep after paying self-employment tax and income tax. When comparing freelance rates to a salary, always compare net-to-net for an accurate picture. A $500 gross day rate might only be $325-375 net after taxes.',
   },
   {
-    question: "How many billable days should I plan for per year?",
-    answer: "Most freelancers realistically bill 200-230 days per year. Start with 260 weekdays, then subtract: vacation days (15-20), holidays (10-12), sick days (5-10), admin/marketing time (20-30 days), and gaps between projects (10-20 days). Planning for 220 billable days is a safe, realistic target."
+    question: 'How many billable days should I plan for per year?',
+    answer:
+      'Most freelancers realistically bill 200-230 days per year. Start with 260 weekdays, then subtract: vacation days (15-20), holidays (10-12), sick days (5-10), admin/marketing time (20-30 days), and gaps between projects (10-20 days). Planning for 220 billable days is a safe, realistic target.',
   },
   {
-    question: "Should my freelance rate include benefits?",
-    answer: "Absolutely. As a freelancer, you need to fund your own health insurance ($5,000-$20,000/year), retirement contributions, equipment, software, professional development, and liability insurance. Add 20-40% to your base rate calculation to cover these costs that an employer would normally provide."
+    question: 'Should my freelance rate include benefits?',
+    answer:
+      'Absolutely. As a freelancer, you need to fund your own health insurance ($5,000-$20,000/year), retirement contributions, equipment, software, professional development, and liability insurance. Add 20-40% to your base rate calculation to cover these costs that an employer would normally provide.',
   },
   {
-    question: "How do I raise my freelance rates?",
-    answer: "To raise your rates: 1) Communicate increases to existing clients with 30-60 days notice, 2) Apply new rates immediately to new clients, 3) Specialize in high-demand skills, 4) Document your results and ROI for clients, 5) Improve your positioning and personal brand. Most freelancers should review and adjust rates annually."
-  }
+    question: 'How do I raise my freelance rates?',
+    answer:
+      'To raise your rates: 1) Communicate increases to existing clients with 30-60 days notice, 2) Apply new rates immediately to new clients, 3) Specialize in high-demand skills, 4) Document your results and ROI for clients, 5) Improve your positioning and personal brand. Most freelancers should review and adjust rates annually.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -119,50 +129,47 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Start by entering your <strong>target annual salary</strong> - this is what you'd
-      want to earn as a full-time employee. Enter the salary before taxes, as the
-      calculator will handle tax adjustments for you.
+      Start by entering your <strong>target annual salary</strong> - this is what you'd want to earn as
+      a full-time employee. Enter the salary before taxes, as the calculator will handle tax adjustments
+      for you.
     </p>
     <p>
-      Next, input your <strong>estimated tax rate</strong>. For most US freelancers, this
-      is between 25-35%, which includes federal income tax, state tax, and the 15.3%
-      self-employment tax. If you're unsure, 30% is a reasonable estimate for most people.
+      Next, input your <strong>estimated tax rate</strong>. For most US freelancers, this is between
+      25-35%, which includes federal income tax, state tax, and the 15.3% self-employment tax. If
+      you're unsure, 30% is a reasonable estimate for most people.
     </p>
     <p>
-      Adjust the <strong>vacation days and holidays</strong> based on how much time off
-      you plan to take. Remember, as a freelancer, time off is unpaid, so these days
-      reduce your billable working days.
+      Adjust the <strong>vacation days and holidays</strong> based on how much time off you plan to take.
+      Remember, as a freelancer, time off is unpaid, so these days reduce your billable working days.
     </p>
     <p>
       Finally, if you currently receive employer benefits, add their annual value in the
-      <strong>Benefits Value</strong> field. Include health insurance premiums your employer
-      pays, 401(k) matching, and other benefits you'll need to self-fund as a freelancer.
+      <strong>Benefits Value</strong> field. Include health insurance premiums your employer pays, 401(k)
+      matching, and other benefits you'll need to self-fund as a freelancer.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Understanding Your Results">
     <p>
-      The <strong>Net Day Rate</strong> is your recommended minimum daily rate - this is
-      what you should charge to match your target salary after accounting for taxes. The
-      calculator shows both gross (before tax) and net (after tax) rates so you know
-      exactly what to invoice.
+      The <strong>Net Day Rate</strong> is your recommended minimum daily rate - this is what you should
+      charge to match your target salary after accounting for taxes. The calculator shows both gross (before
+      tax) and net (after tax) rates so you know exactly what to invoice.
     </p>
     <p>
-      The <strong>Hourly Rate</strong> is calculated based on an 8-hour workday. Some
-      clients prefer hourly billing for smaller projects or ongoing support work. You can
-      use this as a starting point for hourly negotiations.
+      The <strong>Hourly Rate</strong> is calculated based on an 8-hour workday. Some clients prefer hourly
+      billing for smaller projects or ongoing support work. You can use this as a starting point for hourly
+      negotiations.
     </p>
     <p>
-      <strong>Monthly and Weekly Income</strong> figures assume full utilization - billing
-      every working day. In reality, most freelancers achieve 70-80% utilization due to
-      administrative tasks, business development, gaps between projects, and occasional
-      slow periods. Consider this when planning your budget.
+      <strong>Monthly and Weekly Income</strong> figures assume full utilization - billing every working
+      day. In reality, most freelancers achieve 70-80% utilization due to administrative tasks, business
+      development, gaps between projects, and occasional slow periods. Consider this when planning your
+      budget.
     </p>
     <p>
-      The <strong>Annual Comparison</strong> shows what you'd earn as an employee versus
-      as a freelancer at your calculated rate. This helps you understand whether your
-      rate truly matches your target income.
+      The <strong>Annual Comparison</strong> shows what you'd earn as an employee versus as a freelancer
+      at your calculated rate. This helps you understand whether your rate truly matches your target income.
     </p>
   </ContentSection>
 

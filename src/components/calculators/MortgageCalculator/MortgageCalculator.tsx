@@ -27,7 +27,9 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
 export default function MortgageCalculator() {
-  const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -62,10 +64,7 @@ export default function MortgageCalculator() {
     return calculateMortgage(inputs);
   }, [inputs, validationError]);
 
-  const updateInput = <K extends keyof MortgageInputs>(
-    field: K,
-    value: MortgageInputs[K]
-  ) => {
+  const updateInput = <K extends keyof MortgageInputs>(field: K, value: MortgageInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -76,7 +75,7 @@ export default function MortgageCalculator() {
   // Auto-calculate down payment when home price changes
   const handleHomePriceChange = (newPrice: number) => {
     const currentPercent = inputs.downPayment / inputs.homePrice;
-    setInputs(prev => ({
+    setInputs((prev) => ({
       ...prev,
       homePrice: newPrice,
       downPayment: Math.round(newPrice * currentPercent),
@@ -89,12 +88,7 @@ export default function MortgageCalculator() {
         <CalculatorHeader
           title="Calculate Your Mortgage"
           subtitle="Estimate your monthly payment and total cost"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -309,8 +303,8 @@ export default function MortgageCalculator() {
                 )}
 
                 <Alert variant="tip" title="Pro tip:">
-                  Making one extra payment per year can reduce a 30-year mortgage by 4-5 years
-                  and save tens of thousands in interest.
+                  Making one extra payment per year can reduce a 30-year mortgage by 4-5 years and
+                  save tens of thousands in interest.
                 </Alert>
 
                 {/* Share & Print Results */}
@@ -322,13 +316,31 @@ export default function MortgageCalculator() {
                   <PrintResults
                     title="Mortgage Calculator Results"
                     results={[
-                      { label: 'Home Price', value: formatCurrency(inputs.homePrice, inputs.currency) },
-                      { label: 'Down Payment', value: formatCurrency(inputs.downPayment, inputs.currency) },
-                      { label: 'Loan Amount', value: formatCurrency(result.loanAmount, result.currency) },
-                      { label: 'Interest Rate', value: `${(inputs.interestRate * 100).toFixed(2)}%` },
+                      {
+                        label: 'Home Price',
+                        value: formatCurrency(inputs.homePrice, inputs.currency),
+                      },
+                      {
+                        label: 'Down Payment',
+                        value: formatCurrency(inputs.downPayment, inputs.currency),
+                      },
+                      {
+                        label: 'Loan Amount',
+                        value: formatCurrency(result.loanAmount, result.currency),
+                      },
+                      {
+                        label: 'Interest Rate',
+                        value: `${(inputs.interestRate * 100).toFixed(2)}%`,
+                      },
                       { label: 'Loan Term', value: `${inputs.loanTermYears} years` },
-                      { label: 'Monthly Payment', value: formatCurrency(result.monthlyTotal, result.currency) },
-                      { label: 'Total Interest', value: formatCurrency(result.totalInterest, result.currency) },
+                      {
+                        label: 'Monthly Payment',
+                        value: formatCurrency(result.monthlyTotal, result.currency),
+                      },
+                      {
+                        label: 'Total Interest',
+                        value: formatCurrency(result.totalInterest, result.currency),
+                      },
                     ]}
                   />
                 </div>

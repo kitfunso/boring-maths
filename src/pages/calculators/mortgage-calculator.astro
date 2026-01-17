@@ -11,8 +11,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import MortgageCalculator from '../../components/calculators/MortgageCalculator/MortgageCalculator';
 
 const title = 'Mortgage Calculator | How Much House Can I Afford?';
-const description = 'Free mortgage calculator with PMI, taxes, and insurance. Calculate monthly payments, see how much house you can afford, and compare 15 vs 30-year loans.';
-const keywords = 'mortgage calculator, how much house can I afford, home loan calculator, monthly mortgage payment calculator, mortgage payment with taxes and insurance, PMI calculator, first time home buyer calculator';
+const description =
+  'Free mortgage calculator with PMI, taxes, and insurance. Calculate monthly payments, see how much house you can afford, and compare 15 vs 30-year loans.';
+const keywords =
+  'mortgage calculator, how much house can I afford, home loan calculator, monthly mortgage payment calculator, mortgage payment with taxes and insurance, PMI calculator, first time home buyer calculator';
 const canonicalURL = '/calculators/mortgage-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -40,32 +42,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How is monthly mortgage payment calculated?",
-    answer: "Monthly mortgage payment is calculated using the amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan amount, r is the monthly interest rate, and n is the number of payments. This gives you the principal and interest portion. Add property tax, insurance, and HOA for your total monthly payment."
+    question: 'How is monthly mortgage payment calculated?',
+    answer:
+      'Monthly mortgage payment is calculated using the amortization formula: M = P[r(1+r)^n]/[(1+r)^n-1], where P is the loan amount, r is the monthly interest rate, and n is the number of payments. This gives you the principal and interest portion. Add property tax, insurance, and HOA for your total monthly payment.',
   },
   {
-    question: "How much down payment do I need for a house?",
-    answer: "While 20% down payment is traditional to avoid PMI, you can put down as little as 3-5% for conventional loans or 0% for VA loans. A larger down payment means lower monthly payments and less interest paid over time."
+    question: 'How much down payment do I need for a house?',
+    answer:
+      'While 20% down payment is traditional to avoid PMI, you can put down as little as 3-5% for conventional loans or 0% for VA loans. A larger down payment means lower monthly payments and less interest paid over time.',
   },
   {
-    question: "What is PMI and when is it required?",
-    answer: "Private Mortgage Insurance (PMI) is required when your down payment is less than 20% of the home price. PMI typically costs 0.5-1% of the loan amount annually and can be removed once you reach 20% equity."
+    question: 'What is PMI and when is it required?',
+    answer:
+      'Private Mortgage Insurance (PMI) is required when your down payment is less than 20% of the home price. PMI typically costs 0.5-1% of the loan amount annually and can be removed once you reach 20% equity.',
   },
   {
-    question: "Should I choose a 15-year or 30-year mortgage?",
-    answer: "A 15-year mortgage has higher monthly payments but saves significantly on interest. A 30-year mortgage has lower payments but costs more over time. Choose based on your monthly budget and long-term financial goals."
+    question: 'Should I choose a 15-year or 30-year mortgage?',
+    answer:
+      'A 15-year mortgage has higher monthly payments but saves significantly on interest. A 30-year mortgage has lower payments but costs more over time. Choose based on your monthly budget and long-term financial goals.',
   },
   {
-    question: "How much house can I afford on my salary?",
-    answer: "A common guideline is the 28/36 rule: spend no more than 28% of gross monthly income on housing costs, and no more than 36% on total debt. On a $75,000 salary, that's about $1,750/month for housing, which supports roughly a $300,000-$350,000 home depending on rates and down payment."
+    question: 'How much house can I afford on my salary?',
+    answer:
+      "A common guideline is the 28/36 rule: spend no more than 28% of gross monthly income on housing costs, and no more than 36% on total debt. On a $75,000 salary, that's about $1,750/month for housing, which supports roughly a $300,000-$350,000 home depending on rates and down payment.",
   },
   {
-    question: "What credit score do I need to buy a house?",
-    answer: "Minimum credit scores vary by loan type: FHA loans require 580+ (or 500 with 10% down), conventional loans typically need 620+, and the best rates go to borrowers with 740+. Higher scores mean lower interest rates and significant savings over the life of the loan."
+    question: 'What credit score do I need to buy a house?',
+    answer:
+      'Minimum credit scores vary by loan type: FHA loans require 580+ (or 500 with 10% down), conventional loans typically need 620+, and the best rates go to borrowers with 740+. Higher scores mean lower interest rates and significant savings over the life of the loan.',
   },
   {
-    question: "What are closing costs and how much should I expect?",
-    answer: "Closing costs are fees paid when finalizing your mortgage, typically 2-5% of the loan amount. They include appraisal fees, title insurance, attorney fees, and prepaid items like property taxes and insurance. On a $300,000 loan, expect $6,000-$15,000 in closing costs."
+    question: 'What are closing costs and how much should I expect?',
+    answer:
+      'Closing costs are fees paid when finalizing your mortgage, typically 2-5% of the loan amount. They include appraisal fees, title insurance, attorney fees, and prepaid items like property taxes and insurance. On a $300,000 loan, expect $6,000-$15,000 in closing costs.',
   },
 ];
 
@@ -103,36 +112,36 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter the <strong>home price</strong> - the total purchase price of the property
-      you're considering. This is the amount before any down payment.
+      Enter the <strong>home price</strong> - the total purchase price of the property you're considering.
+      This is the amount before any down payment.
     </p>
     <p>
-      Specify your <strong>down payment</strong> amount. The calculator will show
-      the percentage automatically. A 20% down payment avoids PMI requirements.
+      Specify your <strong>down payment</strong> amount. The calculator will show the percentage automatically.
+      A 20% down payment avoids PMI requirements.
     </p>
     <p>
-      Adjust the <strong>interest rate</strong> to match current market rates or
-      the rate your lender has quoted you. Even small rate differences significantly
-      impact total cost.
+      Adjust the <strong>interest rate</strong> to match current market rates or the rate your lender
+      has quoted you. Even small rate differences significantly impact total cost.
     </p>
     <p>
-      Include optional costs like <strong>property tax</strong>, <strong>insurance</strong>,
-      and <strong>HOA fees</strong> to see your true monthly housing cost.
+      Include optional costs like <strong>property tax</strong>, <strong>insurance</strong>, and <strong
+        >HOA fees</strong
+      > to see your true monthly housing cost.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Monthly payment</strong> shows your total housing cost including principal,
-      interest, taxes, insurance, and HOA fees. This is what you'll actually pay each month.
+      <strong>Monthly payment</strong> shows your total housing cost including principal, interest, taxes,
+      insurance, and HOA fees. This is what you'll actually pay each month.
     </p>
     <p>
-      <strong>Total interest</strong> is the total amount you'll pay in interest over
-      the life of the loan. A shorter term or lower rate reduces this significantly.
+      <strong>Total interest</strong> is the total amount you'll pay in interest over the life of the
+      loan. A shorter term or lower rate reduces this significantly.
     </p>
     <p>
-      <strong>Loan-to-value (LTV)</strong> ratio shows what percentage of the home
-      value you're borrowing. Lower LTV means more equity and potentially better rates.
+      <strong>Loan-to-value (LTV)</strong> ratio shows what percentage of the home value you're borrowing.
+      Lower LTV means more equity and potentially better rates.
     </p>
   </ContentSection>
 

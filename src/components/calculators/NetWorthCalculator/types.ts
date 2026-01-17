@@ -16,7 +16,13 @@ export interface Liability {
   category: LiabilityCategory;
 }
 
-export type AssetCategory = 'cash' | 'investments' | 'retirement' | 'property' | 'vehicles' | 'other';
+export type AssetCategory =
+  | 'cash'
+  | 'investments'
+  | 'retirement'
+  | 'property'
+  | 'vehicles'
+  | 'other';
 export type LiabilityCategory = 'mortgage' | 'auto' | 'student' | 'credit' | 'other';
 
 export interface NetWorthInputs {

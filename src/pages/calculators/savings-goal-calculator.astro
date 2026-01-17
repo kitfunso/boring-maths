@@ -14,17 +14,16 @@ import SavingsGoalCalculator from '../../components/calculators/SavingsGoal/Savi
 
 // SEO Configuration
 const title = 'Savings Goal Calculator | Plan Your Savings with Interest & Inflation';
-const description = 'Free savings goal calculator with compound interest and inflation adjustment. Calculate how much to save monthly to reach your financial goals.';
-const keywords = 'savings goal calculator, savings calculator with inflation, compound interest calculator, monthly savings calculator, investment goal planner';
+const description =
+  'Free savings goal calculator with compound interest and inflation adjustment. Calculate how much to save monthly to reach your financial goals.';
+const keywords =
+  'savings goal calculator, savings calculator with inflation, compound interest calculator, monthly savings calculator, investment goal planner';
 const canonicalURL = '/calculators/savings-goal-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Savings Goal' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Savings Goal' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,33 +46,40 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How much should I save each month?",
-    answer: "A common guideline is the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings. However, your specific savings amount depends on your goals and timeline. Use our calculator to find the exact monthly amount needed to reach your target."
+    question: 'How much should I save each month?',
+    answer:
+      'A common guideline is the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings. However, your specific savings amount depends on your goals and timeline. Use our calculator to find the exact monthly amount needed to reach your target.',
   },
   {
-    question: "What is a realistic savings goal?",
-    answer: "Realistic savings goals include: 3-6 months of expenses for an emergency fund, 20% down payment for a home, or 10-15% of income for retirement. Start with smaller goals and increase as you build the habit. Our calculator helps you see if your goal is achievable."
+    question: 'What is a realistic savings goal?',
+    answer:
+      'Realistic savings goals include: 3-6 months of expenses for an emergency fund, 20% down payment for a home, or 10-15% of income for retirement. Start with smaller goals and increase as you build the habit. Our calculator helps you see if your goal is achievable.',
   },
   {
-    question: "How does compound interest work for savings?",
-    answer: "Compound interest means you earn interest on both your principal and previously earned interest. For example, $1,000 at 7% annual return becomes $1,070 after year one. In year two, you earn 7% on $1,070, not just $1,000. This 'interest on interest' accelerates wealth building over time."
+    question: 'How does compound interest work for savings?',
+    answer:
+      "Compound interest means you earn interest on both your principal and previously earned interest. For example, $1,000 at 7% annual return becomes $1,070 after year one. In year two, you earn 7% on $1,070, not just $1,000. This 'interest on interest' accelerates wealth building over time.",
   },
   {
-    question: "Why should I account for inflation in savings?",
-    answer: "Inflation reduces purchasing power over time. If you're saving for a goal 10 years away, that $50,000 will buy less than it does today. At 3% inflation, $50,000 today equals about $67,000 in future dollars. Our calculator shows the real value of your goal."
+    question: 'Why should I account for inflation in savings?',
+    answer:
+      "Inflation reduces purchasing power over time. If you're saving for a goal 10 years away, that $50,000 will buy less than it does today. At 3% inflation, $50,000 today equals about $67,000 in future dollars. Our calculator shows the real value of your goal.",
   },
   {
     question: "What's a good expected return rate for savings?",
-    answer: "High-yield savings accounts offer 4-5% (2024). Stock market index funds historically average 7-10% annually. A balanced portfolio might expect 5-7%. Use lower estimates for conservative planning. Our default of 7% represents a moderate investment portfolio."
+    answer:
+      'High-yield savings accounts offer 4-5% (2024). Stock market index funds historically average 7-10% annually. A balanced portfolio might expect 5-7%. Use lower estimates for conservative planning. Our default of 7% represents a moderate investment portfolio.',
   },
   {
-    question: "Should I contribute weekly, bi-weekly, or monthly?",
-    answer: "More frequent contributions slightly increase returns due to earlier investment. However, the difference is minimal - about 0.2% more annually for weekly vs monthly. Choose the frequency that matches your pay schedule for easier budgeting."
+    question: 'Should I contribute weekly, bi-weekly, or monthly?',
+    answer:
+      'More frequent contributions slightly increase returns due to earlier investment. However, the difference is minimal - about 0.2% more annually for weekly vs monthly. Choose the frequency that matches your pay schedule for easier budgeting.',
   },
   {
-    question: "How do I reach my savings goal faster?",
-    answer: "Increase contributions when you get raises, automate your savings, reduce expenses, earn more through side hustles, and choose higher-yield investments (with appropriate risk). Even small increases compound significantly over time."
-  }
+    question: 'How do I reach my savings goal faster?',
+    answer:
+      'Increase contributions when you get raises, automate your savings, reduce expenses, earn more through side hustles, and choose higher-yield investments (with appropriate risk). Even small increases compound significantly over time.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -111,47 +117,43 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Start with your <strong>savings goal</strong> - the total amount you want
-      to accumulate. This could be for a house down payment, emergency fund,
-      retirement milestone, or any financial target.
+      Start with your <strong>savings goal</strong> - the total amount you want to accumulate. This could
+      be for a house down payment, emergency fund, retirement milestone, or any financial target.
     </p>
     <p>
-      Enter any <strong>current savings</strong> you've already set aside toward
-      this goal. Your existing balance will grow with compound interest, reducing
-      the amount you need to contribute monthly.
+      Enter any <strong>current savings</strong> you've already set aside toward this goal. Your existing
+      balance will grow with compound interest, reducing the amount you need to contribute monthly.
     </p>
     <p>
-      Set your <strong>timeline</strong> realistically. Longer timeframes mean
-      smaller monthly contributions but more time for market fluctuations.
-      Shorter timeframes require larger contributions but offer more certainty.
+      Set your <strong>timeline</strong> realistically. Longer timeframes mean smaller monthly contributions
+      but more time for market fluctuations. Shorter timeframes require larger contributions but offer
+      more certainty.
     </p>
     <p>
-      Adjust the <strong>expected return</strong> based on your investment strategy.
-      Savings accounts yield 4-5%, bonds 3-5%, and diversified stock portfolios
-      historically average 7-10%. Use conservative estimates for critical goals.
+      Adjust the <strong>expected return</strong> based on your investment strategy. Savings accounts
+      yield 4-5%, bonds 3-5%, and diversified stock portfolios historically average 7-10%. Use conservative
+      estimates for critical goals.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      The <strong>contribution amount</strong> is your required periodic savings
-      to reach your goal on time. This factors in compound interest earnings,
-      making the total contributions less than your goal amount.
+      The <strong>contribution amount</strong> is your required periodic savings to reach your goal on
+      time. This factors in compound interest earnings, making the total contributions less than your
+      goal amount.
     </p>
     <p>
-      <strong>Total contributions</strong> shows how much you'll actually put in
-      from your pocket. <strong>Interest earned</strong> is the extra money your
-      investments generate - this is the power of compound growth.
+      <strong>Total contributions</strong> shows how much you'll actually put in from your pocket. <strong
+        >Interest earned</strong
+      > is the extra money your investments generate - this is the power of compound growth.
     </p>
     <p>
-      The <strong>real return rate</strong> shows your actual purchasing power gain
-      after accounting for inflation. This is the true measure of wealth building,
-      not the nominal return rate.
+      The <strong>real return rate</strong> shows your actual purchasing power gain after accounting for
+      inflation. This is the true measure of wealth building, not the nominal return rate.
     </p>
     <p>
-      The <strong>inflation note</strong> reveals what your goal amount will be
-      worth in today's dollars. Use this to decide if you should increase your
-      target to maintain the same purchasing power.
+      The <strong>inflation note</strong> reveals what your goal amount will be worth in today's dollars.
+      Use this to decide if you should increase your target to maintain the same purchasing power.
     </p>
   </ContentSection>
 

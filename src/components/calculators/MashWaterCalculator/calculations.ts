@@ -19,17 +19,21 @@ function calculateStrikeTemp(
 ): number {
   // Strike water temp formula
   // The constant 0.2 represents grain's thermal mass relative to water
-  const strikeTemp = ((0.2 / mashThickness) * (targetMashTemp - grainTemp)) + targetMashTemp;
+  const strikeTemp = (0.2 / mashThickness) * (targetMashTemp - grainTemp) + targetMashTemp;
   return strikeTemp;
 }
 
 /**
  * Convert temperature between F and C
  */
-function convertTemp(temp: number, from: 'fahrenheit' | 'celsius', to: 'fahrenheit' | 'celsius'): number {
+function convertTemp(
+  temp: number,
+  from: 'fahrenheit' | 'celsius',
+  to: 'fahrenheit' | 'celsius'
+): number {
   if (from === to) return temp;
-  if (from === 'fahrenheit') return (temp - 32) * 5 / 9;
-  return (temp * 9 / 5) + 32;
+  if (from === 'fahrenheit') return ((temp - 32) * 5) / 9;
+  return (temp * 9) / 5 + 32;
 }
 
 /**

@@ -14,17 +14,16 @@ import WeddingAlcoholCalculator from '../../components/calculators/WeddingAlcoho
 
 // SEO Configuration
 const title = 'Wedding Alcohol Calculator | How Much Alcohol for Your Wedding';
-const description = 'Free wedding alcohol calculator to estimate beer, wine, and liquor quantities for your reception. Based on guest count, event duration, and drinking preferences.';
-const keywords = 'wedding alcohol calculator, how much alcohol for wedding, wedding drink calculator, wedding bar calculator, reception alcohol estimator';
+const description =
+  'Free wedding alcohol calculator to estimate beer, wine, and liquor quantities for your reception. Based on guest count, event duration, and drinking preferences.';
+const keywords =
+  'wedding alcohol calculator, how much alcohol for wedding, wedding drink calculator, wedding bar calculator, reception alcohol estimator';
 const canonicalURL = '/calculators/wedding-alcohol-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Wedding Alcohol' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Wedding Alcohol' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,33 +46,40 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How much alcohol do I need for 100 guests?",
-    answer: "For 100 guests at a 5-hour reception with moderate drinking, you'll typically need about 400-500 drinks total. This translates to roughly 30-40 bottles of wine, 150-200 beers, and 5-8 bottles of liquor. Our calculator adjusts these numbers based on your specific event duration and guest drinking preferences."
+    question: 'How much alcohol do I need for 100 guests?',
+    answer:
+      "For 100 guests at a 5-hour reception with moderate drinking, you'll typically need about 400-500 drinks total. This translates to roughly 30-40 bottles of wine, 150-200 beers, and 5-8 bottles of liquor. Our calculator adjusts these numbers based on your specific event duration and guest drinking preferences.",
   },
   {
     question: "What's the standard drink calculation for weddings?",
-    answer: "The industry standard is approximately 1 drink per guest per hour for the first hour, then 0.5-1 drink per hour after that. For a 5-hour reception, plan for about 4-5 drinks per drinking guest. Remember that not all guests drink alcohol - typically 15-20% will abstain."
+    answer:
+      'The industry standard is approximately 1 drink per guest per hour for the first hour, then 0.5-1 drink per hour after that. For a 5-hour reception, plan for about 4-5 drinks per drinking guest. Remember that not all guests drink alcohol - typically 15-20% will abstain.',
   },
   {
-    question: "How do I split between beer, wine, and liquor?",
-    answer: "A common split is 40% wine, 40% beer, and 20% liquor/cocktails. However, this varies by crowd. Younger guests tend to prefer beer and cocktails, while older guests often prefer wine. Consider your guest list when adjusting these percentages."
+    question: 'How do I split between beer, wine, and liquor?',
+    answer:
+      'A common split is 40% wine, 40% beer, and 20% liquor/cocktails. However, this varies by crowd. Younger guests tend to prefer beer and cocktails, while older guests often prefer wine. Consider your guest list when adjusting these percentages.',
   },
   {
-    question: "How many drinks per bottle should I calculate?",
-    answer: "A standard 750ml wine bottle yields 5 glasses. A 750ml liquor bottle makes about 16 cocktails (1.5oz per drink). Beer is typically 1 serving per bottle/can. For champagne toasts, one bottle serves 6 flutes."
+    question: 'How many drinks per bottle should I calculate?',
+    answer:
+      'A standard 750ml wine bottle yields 5 glasses. A 750ml liquor bottle makes about 16 cocktails (1.5oz per drink). Beer is typically 1 serving per bottle/can. For champagne toasts, one bottle serves 6 flutes.',
   },
   {
-    question: "Should I buy extra alcohol for my wedding?",
-    answer: "Yes, we recommend buying 10-15% more than calculated to account for spillage, heavier-than-expected drinking, and unexpected guests. Most stores allow returns of unopened bottles within 30 days, so there's little risk in over-buying."
+    question: 'Should I buy extra alcohol for my wedding?',
+    answer:
+      "Yes, we recommend buying 10-15% more than calculated to account for spillage, heavier-than-expected drinking, and unexpected guests. Most stores allow returns of unopened bottles within 30 days, so there's little risk in over-buying.",
   },
   {
-    question: "How do I save money on wedding alcohol?",
-    answer: "Buy in bulk from warehouse stores, choose house wines and beers over premium brands, limit the cocktail menu to 2-3 signature drinks, and skip the top-shelf liquor for mixed drinks. Consider a beer and wine only bar to significantly reduce costs."
+    question: 'How do I save money on wedding alcohol?',
+    answer:
+      'Buy in bulk from warehouse stores, choose house wines and beers over premium brands, limit the cocktail menu to 2-3 signature drinks, and skip the top-shelf liquor for mixed drinks. Consider a beer and wine only bar to significantly reduce costs.',
   },
   {
-    question: "Do I need a bartender for my wedding?",
-    answer: "For events with more than 50 guests, professional bartenders are recommended. Plan for 1 bartender per 50 guests. They ensure responsible service, manage the bar efficiently, and can handle complex drink orders."
-  }
+    question: 'Do I need a bartender for my wedding?',
+    answer:
+      'For events with more than 50 guests, professional bartenders are recommended. Plan for 1 bartender per 50 guests. They ensure responsible service, manage the bar efficiently, and can handle complex drink orders.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -111,42 +117,38 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Start by entering your <strong>guest count</strong> and <strong>event duration</strong>.
-      Most wedding receptions last 4-6 hours, including cocktail hour. The calculator
-      accounts for pre-dinner drinks, dinner service, and dancing.
+      Start by entering your <strong>guest count</strong> and <strong>event duration</strong>. Most
+      wedding receptions last 4-6 hours, including cocktail hour. The calculator accounts for
+      pre-dinner drinks, dinner service, and dancing.
     </p>
     <p>
-      Adjust the <strong>percentage who drink</strong> based on your guest list.
-      Typically, 15-20% of guests don't drink alcohol. If you're having a daytime
-      wedding or many families with children, this percentage may be higher.
+      Adjust the <strong>percentage who drink</strong> based on your guest list. Typically, 15-20% of
+      guests don't drink alcohol. If you're having a daytime wedding or many families with children, this
+      percentage may be higher.
     </p>
     <p>
-      Set the <strong>drinking level</strong> based on your crowd. Light drinkers
-      average less than 1 drink per hour, moderate drinkers about 1 per hour, and
-      heavy drinkers 1.5+ per hour. When in doubt, go with moderate.
+      Set the <strong>drinking level</strong> based on your crowd. Light drinkers average less than 1
+      drink per hour, moderate drinkers about 1 per hour, and heavy drinkers 1.5+ per hour. When in doubt,
+      go with moderate.
     </p>
     <p>
-      Finally, adjust the <strong>drink preferences</strong> to match your guest list.
-      Consider offering a signature cocktail with beer and wine to simplify your bar
-      while keeping costs manageable.
+      Finally, adjust the <strong>drink preferences</strong> to match your guest list. Consider offering
+      a signature cocktail with beer and wine to simplify your bar while keeping costs manageable.
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      The calculator shows you the <strong>number of bottles</strong> needed for each
-      drink type. Wine bottles (750ml) serve about 5 glasses, while liquor bottles
-      make approximately 16 cocktails.
+      The calculator shows you the <strong>number of bottles</strong> needed for each drink type. Wine
+      bottles (750ml) serve about 5 glasses, while liquor bottles make approximately 16 cocktails.
     </p>
     <p>
-      The <strong>total drinks</strong> figure represents all servings across all
-      drink types. Compare this to your drinking guest count to ensure you have
-      enough variety and quantity.
+      The <strong>total drinks</strong> figure represents all servings across all drink types. Compare
+      this to your drinking guest count to ensure you have enough variety and quantity.
     </p>
     <p>
-      Remember to add <strong>non-alcoholic options</strong> like sparkling water,
-      sodas, and mocktails for non-drinking guests. Plan for 2-3 non-alcoholic
-      drinks per non-drinking guest.
+      Remember to add <strong>non-alcoholic options</strong> like sparkling water, sodas, and mocktails
+      for non-drinking guests. Plan for 2-3 non-alcoholic drinks per non-drinking guest.
     </p>
   </ContentSection>
 

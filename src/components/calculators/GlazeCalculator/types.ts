@@ -79,7 +79,11 @@ export const GLAZE_MATERIALS: { name: string; category: string }[] = [
 ];
 
 // Common glaze recipes for reference
-export const GLAZE_RECIPES: { name: string; cone: string; ingredients: { name: string; percentage: number }[] }[] = [
+export const GLAZE_RECIPES: {
+  name: string;
+  cone: string;
+  ingredients: { name: string; percentage: number }[];
+}[] = [
   {
     name: 'Leach 4321 (Cone 10)',
     cone: '10',

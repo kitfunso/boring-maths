@@ -90,8 +90,12 @@ export function ToolDeflectionCalculator() {
                   onClick={() =>
                     setInputs({
                       ...inputs,
-                      toolDiameter: inputs.lengthUnit === 'inches' ? preset.diameter : preset.diameter * 25.4,
-                      stickout: inputs.lengthUnit === 'inches' ? preset.maxStickout : preset.maxStickout * 25.4,
+                      toolDiameter:
+                        inputs.lengthUnit === 'inches' ? preset.diameter : preset.diameter * 25.4,
+                      stickout:
+                        inputs.lengthUnit === 'inches'
+                          ? preset.maxStickout
+                          : preset.maxStickout * 25.4,
                     })
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-xs ring-1 ring-white/5 hover:ring-blue-500/30"
@@ -124,7 +128,9 @@ export function ToolDeflectionCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Cutting Parameters</h2>
+          <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">
+            Cutting Parameters
+          </h2>
 
           <div className="space-y-4">
             <div>
@@ -221,9 +227,7 @@ export function ToolDeflectionCalculator() {
             <div className="text-4xl font-bold">
               {formatDeflection(results.deflection, results.deflectionUnit)}
             </div>
-            <div className="mt-2 text-lg font-medium">
-              {statusLabels[results.status]}
-            </div>
+            <div className="mt-2 text-lg font-medium">{statusLabels[results.status]}</div>
             <div className="mt-1 text-sm opacity-80">
               {results.deflectionRatio.toFixed(2)}x recommended limit
             </div>
@@ -241,7 +245,13 @@ export function ToolDeflectionCalculator() {
             label="Deflection Ratio"
             value={`${(results.deflectionRatio * 100).toFixed(0)}%`}
             sublabel="of limit"
-            color={results.status === 'safe' ? 'green' : results.status === 'warning' ? 'purple' : 'purple'}
+            color={
+              results.status === 'safe'
+                ? 'green'
+                : results.status === 'warning'
+                  ? 'purple'
+                  : 'purple'
+            }
           />
           <ResultCard
             label="Tool Stiffness"
@@ -262,7 +272,17 @@ export function ToolDeflectionCalculator() {
           <ul className="space-y-2">
             {results.recommendations.map((rec, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-[var(--color-subtle)]">
-                <span className={results.status === 'danger' ? 'text-red-400' : results.status === 'warning' ? 'text-amber-400' : 'text-green-400'}>•</span>
+                <span
+                  className={
+                    results.status === 'danger'
+                      ? 'text-red-400'
+                      : results.status === 'warning'
+                        ? 'text-amber-400'
+                        : 'text-green-400'
+                  }
+                >
+                  •
+                </span>
                 {rec}
               </li>
             ))}
@@ -270,11 +290,13 @@ export function ToolDeflectionCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Stickout Guidelines</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Stickout Guidelines
+          </h3>
           <div className="grid grid-cols-3 gap-2 text-sm">
             <div className="rounded-lg bg-green-900/20 p-3 text-center">
               <div className="font-medium text-green-400">Safe</div>
-              <div className="text-xs text-[var(--color-subtle)]">{"<"} 3:1 L/D</div>
+              <div className="text-xs text-[var(--color-subtle)]">{'<'} 3:1 L/D</div>
             </div>
             <div className="rounded-lg bg-amber-900/20 p-3 text-center">
               <div className="font-medium text-amber-400">Caution</div>
@@ -282,7 +304,7 @@ export function ToolDeflectionCalculator() {
             </div>
             <div className="rounded-lg bg-red-900/20 p-3 text-center">
               <div className="font-medium text-red-400">Risk</div>
-              <div className="text-xs text-[var(--color-subtle)]">{">"}5:1 L/D</div>
+              <div className="text-xs text-[var(--color-subtle)]">{'>'}5:1 L/D</div>
             </div>
           </div>
         </div>

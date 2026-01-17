@@ -75,10 +75,7 @@ function simulatePayoff(
   let totalInterest = 0;
 
   // Continue until all debts are paid or max months reached
-  while (
-    workingDebts.some((d) => d.currentBalance > 0.01) &&
-    month < MAX_MONTHS
-  ) {
+  while (workingDebts.some((d) => d.currentBalance > 0.01) && month < MAX_MONTHS) {
     month++;
 
     const monthPayments: MonthlyDebtPayment[] = [];
@@ -90,9 +87,7 @@ function simulatePayoff(
     // Calculate available extra payment (minimums from paid-off debts + extra)
     let availableExtra =
       extraPayment +
-      workingDebts
-        .filter((d) => d.isPaidOff)
-        .reduce((sum, d) => sum + d.minimumPayment, 0);
+      workingDebts.filter((d) => d.isPaidOff).reduce((sum, d) => sum + d.minimumPayment, 0);
 
     // Sort active debts by strategy for payment priority
     const activeDebts = sortDebtsByStrategy(
@@ -163,9 +158,7 @@ function simulatePayoff(
       totalPayment: round(monthTotalPayment),
       totalPrincipal: round(monthTotalPrincipal),
       totalInterest: round(monthTotalInterest),
-      totalRemainingBalance: round(
-        workingDebts.reduce((sum, d) => sum + d.currentBalance, 0)
-      ),
+      totalRemainingBalance: round(workingDebts.reduce((sum, d) => sum + d.currentBalance, 0)),
       payments: monthPayments,
       debtsPaidOff,
     });

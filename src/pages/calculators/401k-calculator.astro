@@ -11,15 +11,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { Calculator401k } from '../../components/calculators/401kCalculator';
 
 const title = '401k Calculator | Project Your Retirement Savings';
-const description = 'Free 401k calculator with employer matching. See how your retirement savings grow with compound interest, employer contributions, and salary increases over time.';
-const keywords = '401k calculator, retirement calculator, employer match calculator, 401k contribution calculator, retirement savings calculator, 401k growth calculator, compound interest retirement';
+const description =
+  'Free 401k calculator with employer matching. See how your retirement savings grow with compound interest, employer contributions, and salary increases over time.';
+const keywords =
+  '401k calculator, retirement calculator, employer match calculator, 401k contribution calculator, retirement savings calculator, 401k growth calculator, compound interest retirement';
 const canonicalURL = '/calculators/401k-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: '401k Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: '401k Calculator' }];
 
 const relatedCalculators = [
   {
@@ -40,32 +39,39 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is a 401k?",
-    answer: "A 401k is an employer-sponsored retirement savings plan that allows you to contribute a portion of your pre-tax salary. Contributions grow tax-deferred until withdrawal in retirement. Many employers also match a portion of your contributions, essentially giving you free money."
+    question: 'What is a 401k?',
+    answer:
+      'A 401k is an employer-sponsored retirement savings plan that allows you to contribute a portion of your pre-tax salary. Contributions grow tax-deferred until withdrawal in retirement. Many employers also match a portion of your contributions, essentially giving you free money.',
   },
   {
-    question: "What is employer matching?",
-    answer: "Employer matching is when your company contributes additional money to your 401k based on your contributions. A common match is 50% of your contributions up to 6% of your salary. If you make $75,000 and contribute 6% ($4,500), your employer adds $2,250."
+    question: 'What is employer matching?',
+    answer:
+      'Employer matching is when your company contributes additional money to your 401k based on your contributions. A common match is 50% of your contributions up to 6% of your salary. If you make $75,000 and contribute 6% ($4,500), your employer adds $2,250.',
   },
   {
-    question: "What is the 401k contribution limit for 2024?",
-    answer: "For 2024, the employee contribution limit is $23,000. If you're 50 or older, you can contribute an additional $7,500 catch-up contribution for a total of $30,500. Employer matching contributions don't count toward your personal limit."
+    question: 'What is the 401k contribution limit for 2024?',
+    answer:
+      "For 2024, the employee contribution limit is $23,000. If you're 50 or older, you can contribute an additional $7,500 catch-up contribution for a total of $30,500. Employer matching contributions don't count toward your personal limit.",
   },
   {
-    question: "How much should I contribute to my 401k?",
-    answer: "At minimum, contribute enough to get your full employer match - it's free money! Financial experts often recommend saving 10-15% of your income for retirement. If you're starting late, you may need to save more to catch up."
+    question: 'How much should I contribute to my 401k?',
+    answer:
+      "At minimum, contribute enough to get your full employer match - it's free money! Financial experts often recommend saving 10-15% of your income for retirement. If you're starting late, you may need to save more to catch up.",
   },
   {
-    question: "What is the 4% rule?",
-    answer: "The 4% rule is a guideline for retirement withdrawals. It suggests you can withdraw 4% of your portfolio in the first year of retirement, then adjust for inflation each year, with a high probability of not running out of money over 30 years."
+    question: 'What is the 4% rule?',
+    answer:
+      'The 4% rule is a guideline for retirement withdrawals. It suggests you can withdraw 4% of your portfolio in the first year of retirement, then adjust for inflation each year, with a high probability of not running out of money over 30 years.',
   },
   {
-    question: "Should I contribute to a 401k or Roth IRA?",
-    answer: "It depends on your tax situation. 401k contributions are pre-tax (reducing current taxes), while Roth IRA contributions are after-tax (tax-free in retirement). Many people do both. Always get the full employer match first, then consider a Roth IRA."
+    question: 'Should I contribute to a 401k or Roth IRA?',
+    answer:
+      'It depends on your tax situation. 401k contributions are pre-tax (reducing current taxes), while Roth IRA contributions are after-tax (tax-free in retirement). Many people do both. Always get the full employer match first, then consider a Roth IRA.',
   },
   {
-    question: "How does compound interest work in a 401k?",
-    answer: "Your 401k grows through compound interest - you earn returns on both your contributions and previous earnings. Over decades, compounding dramatically accelerates growth. Starting early maximizes this effect, even with smaller contributions."
+    question: 'How does compound interest work in a 401k?',
+    answer:
+      'Your 401k grows through compound interest - you earn returns on both your contributions and previous earnings. Over decades, compounding dramatically accelerates growth. Starting early maximizes this effect, even with smaller contributions.',
   },
 ];
 
@@ -103,40 +109,39 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>current age</strong> and <strong>retirement age</strong> to set
-      your investment timeline. The longer you have until retirement, the more time
-      compound interest has to grow your wealth.
+      Enter your <strong>current age</strong> and <strong>retirement age</strong> to set your investment
+      timeline. The longer you have until retirement, the more time compound interest has to grow your
+      wealth.
     </p>
     <p>
       Input your <strong>annual salary</strong> and <strong>contribution percentage</strong>.
-      Remember, contributing at least enough to get your full employer match is essential -
-      it's free money you're leaving on the table otherwise.
+      Remember, contributing at least enough to get your full employer match is essential - it's
+      free money you're leaving on the table otherwise.
     </p>
     <p>
-      Set your <strong>employer match details</strong> - the percentage they match and the
-      limit. For example, 50% match up to 6% means if you contribute 6% of salary, they add 3%.
+      Set your <strong>employer match details</strong> - the percentage they match and the limit. For
+      example, 50% match up to 6% means if you contribute 6% of salary, they add 3%.
     </p>
     <p>
-      Adjust the <strong>expected annual return</strong> based on your investment style.
-      The S&P 500 has historically returned about 10% annually (7% after inflation).
+      Adjust the <strong>expected annual return</strong> based on your investment style. The S&P 500 has
+      historically returned about 10% annually (7% after inflation).
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Total at Retirement</strong> shows your projected 401k balance when you
-      reach retirement age. This includes all your contributions, employer matches, and
-      investment growth.
+      <strong>Total at Retirement</strong> shows your projected 401k balance when you reach retirement
+      age. This includes all your contributions, employer matches, and investment growth.
     </p>
     <p>
-      <strong>Monthly Income (4% Rule)</strong> estimates how much you could safely withdraw
-      monthly in retirement following the 4% withdrawal rule, which has historically
-      sustained portfolios for 30+ years.
+      <strong>Monthly Income (4% Rule)</strong> estimates how much you could safely withdraw monthly in
+      retirement following the 4% withdrawal rule, which has historically sustained portfolios for 30+
+      years.
     </p>
     <p>
-      The <strong>contribution breakdown</strong> shows how much comes from your contributions,
-      employer matches, and investment growth. You'll often find that investment growth
-      makes up the largest portion over time.
+      The <strong>contribution breakdown</strong> shows how much comes from your contributions, employer
+      matches, and investment growth. You'll often find that investment growth makes up the largest portion
+      over time.
     </p>
   </ContentSection>
 

@@ -24,20 +24,55 @@ export interface ClayShrinkageResult {
 }
 
 // Common clay bodies with shrinkage rates
-export const CLAY_TYPES: { value: string; label: string; totalShrinkage: number; dryShrinkage: number }[] = [
+export const CLAY_TYPES: {
+  value: string;
+  label: string;
+  totalShrinkage: number;
+  dryShrinkage: number;
+}[] = [
   // Earthenware
   { value: 'terracotta', label: 'Terracotta (Cone 06-02)', totalShrinkage: 10, dryShrinkage: 5 },
-  { value: 'earthenware-red', label: 'Red Earthenware (Cone 06-02)', totalShrinkage: 11, dryShrinkage: 5 },
-  { value: 'earthenware-white', label: 'White Earthenware (Cone 06-02)', totalShrinkage: 10, dryShrinkage: 5 },
+  {
+    value: 'earthenware-red',
+    label: 'Red Earthenware (Cone 06-02)',
+    totalShrinkage: 11,
+    dryShrinkage: 5,
+  },
+  {
+    value: 'earthenware-white',
+    label: 'White Earthenware (Cone 06-02)',
+    totalShrinkage: 10,
+    dryShrinkage: 5,
+  },
   // Stoneware
-  { value: 'stoneware-light', label: 'Stoneware - Light (Cone 6)', totalShrinkage: 12, dryShrinkage: 6 },
-  { value: 'stoneware-dark', label: 'Stoneware - Dark (Cone 6)', totalShrinkage: 12, dryShrinkage: 6 },
-  { value: 'stoneware-high', label: 'Stoneware - High Fire (Cone 10)', totalShrinkage: 13, dryShrinkage: 6 },
+  {
+    value: 'stoneware-light',
+    label: 'Stoneware - Light (Cone 6)',
+    totalShrinkage: 12,
+    dryShrinkage: 6,
+  },
+  {
+    value: 'stoneware-dark',
+    label: 'Stoneware - Dark (Cone 6)',
+    totalShrinkage: 12,
+    dryShrinkage: 6,
+  },
+  {
+    value: 'stoneware-high',
+    label: 'Stoneware - High Fire (Cone 10)',
+    totalShrinkage: 13,
+    dryShrinkage: 6,
+  },
   { value: 'speckled-buff', label: 'Speckled Buff (Cone 6)', totalShrinkage: 11, dryShrinkage: 5 },
   // Porcelain
   { value: 'porcelain-cone6', label: 'Porcelain (Cone 6)', totalShrinkage: 13, dryShrinkage: 6 },
   { value: 'porcelain-cone10', label: 'Porcelain (Cone 10)', totalShrinkage: 14, dryShrinkage: 7 },
-  { value: 'translucent-porcelain', label: 'Translucent Porcelain', totalShrinkage: 15, dryShrinkage: 7 },
+  {
+    value: 'translucent-porcelain',
+    label: 'Translucent Porcelain',
+    totalShrinkage: 15,
+    dryShrinkage: 7,
+  },
   // Specialty
   { value: 'raku', label: 'Raku Clay', totalShrinkage: 8, dryShrinkage: 4 },
   { value: 'paper-clay', label: 'Paper Clay', totalShrinkage: 10, dryShrinkage: 5 },

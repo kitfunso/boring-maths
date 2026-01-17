@@ -9,20 +9,84 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = 'All Calculators | Free Online Calculator Tools';
-const description = 'Browse all free online calculators organized by category. Finance, income, business, home improvement, health, events, and everyday calculators.';
+const description =
+  'Browse all free online calculators organized by category. Finance, income, business, home improvement, health, events, and everyday calculators.';
 const keywords = 'online calculators, free calculators, calculator tools, math calculators';
 const canonicalURL = '/calculators/';
 
 const categories = [
-  { name: 'UK Tax', slug: 'uk-tax', description: 'Income tax, stamp duty, pensions, NI', icon: 'calculator', color: 'coral', count: 7 },
-  { name: 'US Tax', slug: 'us-tax', description: 'Federal tax, 1099, capital gains, quarterly', icon: 'dollar', color: 'blue', count: 4 },
-  { name: 'Finance', slug: 'finance', description: 'FIRE, mortgage, compound interest, savings', icon: 'dollar', color: 'violet', count: 7 },
-  { name: 'Income', slug: 'income', description: 'Salary, freelance rates, career planning', icon: 'trending', color: 'green', count: 4 },
-  { name: 'Business', slug: 'business', description: 'Profit, break-even, entrepreneur tools', icon: 'briefcase', color: 'amber', count: 3 },
-  { name: 'Home & DIY', slug: 'home', description: 'Paint, flooring, mulch, electricity', icon: 'home', color: 'ocean', count: 4 },
-  { name: 'Health', slug: 'health', description: 'BMI, calories, wellness metrics', icon: 'heart', color: 'pink', count: 2 },
-  { name: 'Events', slug: 'events', description: 'Party planning, weddings, BBQ', icon: 'glass', color: 'coral', count: 3 },
-  { name: 'Everyday', slug: 'everyday', description: 'Tips, percentages, conversions', icon: 'calculator', color: 'violet', count: 6 },
+  {
+    name: 'UK Tax',
+    slug: 'uk-tax',
+    description: 'Income tax, stamp duty, pensions, NI',
+    icon: 'calculator',
+    color: 'coral',
+    count: 7,
+  },
+  {
+    name: 'US Tax',
+    slug: 'us-tax',
+    description: 'Federal tax, 1099, capital gains, quarterly',
+    icon: 'dollar',
+    color: 'blue',
+    count: 4,
+  },
+  {
+    name: 'Finance',
+    slug: 'finance',
+    description: 'FIRE, mortgage, compound interest, savings',
+    icon: 'dollar',
+    color: 'violet',
+    count: 7,
+  },
+  {
+    name: 'Income',
+    slug: 'income',
+    description: 'Salary, freelance rates, career planning',
+    icon: 'trending',
+    color: 'green',
+    count: 4,
+  },
+  {
+    name: 'Business',
+    slug: 'business',
+    description: 'Profit, break-even, entrepreneur tools',
+    icon: 'briefcase',
+    color: 'amber',
+    count: 3,
+  },
+  {
+    name: 'Home & DIY',
+    slug: 'home',
+    description: 'Paint, flooring, mulch, electricity',
+    icon: 'home',
+    color: 'ocean',
+    count: 4,
+  },
+  {
+    name: 'Health',
+    slug: 'health',
+    description: 'BMI, calories, wellness metrics',
+    icon: 'heart',
+    color: 'pink',
+    count: 2,
+  },
+  {
+    name: 'Events',
+    slug: 'events',
+    description: 'Party planning, weddings, BBQ',
+    icon: 'glass',
+    color: 'coral',
+    count: 3,
+  },
+  {
+    name: 'Everyday',
+    slug: 'everyday',
+    description: 'Tips, percentages, conversions',
+    icon: 'calculator',
+    color: 'violet',
+    count: 6,
+  },
 ];
 
 const iconColors = {
@@ -36,13 +100,18 @@ const iconColors = {
 };
 
 const iconPaths = {
-  dollar: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  dollar:
+    'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
   trending: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-  briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  briefcase:
+    'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-  glass: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-  calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  heart:
+    'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  glass:
+    'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  calculator:
+    'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
 };
 
 const totalCalculators = categories.reduce((sum, cat) => sum + cat.count, 0);
@@ -59,32 +128,58 @@ const totalCalculators = categories.reduce((sum, cat) => sum + cat.count, 0);
       <h1 class="text-4xl md:text-5xl font-display text-[var(--color-cream)] mb-4">
         All <span class="gradient-text">Calculators</span>
       </h1>
-      <p class="text-lg text-[var(--color-subtle)] mb-6">{totalCalculators} free calculators in {categories.length} categories</p>
+      <p class="text-lg text-[var(--color-subtle)] mb-6">
+        {totalCalculators} free calculators in {categories.length} categories
+      </p>
     </div>
   </section>
 
   <section class="px-6 py-8 mb-16">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((cat) => (
-          <a href={"/calculators/" + cat.slug + "/"} class="bento-card group glow">
-            <div class={"card-icon bg-gradient-to-br " + iconColors[cat.color]}>
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={iconPaths[cat.icon]} />
-              </svg>
-            </div>
-            <h2 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)]">{cat.name}</h2>
-            <p class="text-sm text-[var(--color-subtle)] mb-4">{cat.description}</p>
-            <div class="flex justify-between mt-auto pt-2">
-              <span class="text-xs text-[var(--color-muted)]">{cat.count} calculators</span>
-              <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)]">
-                <svg class="w-4 h-4 text-[var(--color-subtle)] group-hover:text-[var(--color-void)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        {
+          categories.map((cat) => (
+            <a href={'/calculators/' + cat.slug + '/'} class="bento-card group glow">
+              <div class={'card-icon bg-gradient-to-br ' + iconColors[cat.color]}>
+                <svg
+                  class="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d={iconPaths[cat.icon]}
+                  />
                 </svg>
               </div>
-            </div>
-          </a>
-        ))}
+              <h2 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)]">
+                {cat.name}
+              </h2>
+              <p class="text-sm text-[var(--color-subtle)] mb-4">{cat.description}</p>
+              <div class="flex justify-between mt-auto pt-2">
+                <span class="text-xs text-[var(--color-muted)]">{cat.count} calculators</span>
+                <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)]">
+                  <svg
+                    class="w-4 h-4 text-[var(--color-subtle)] group-hover:text-[var(--color-void)]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -92,8 +187,12 @@ const totalCalculators = categories.reduce((sum, cat) => sum + cat.count, 0);
   <section class="px-6 py-8">
     <div class="max-w-4xl mx-auto">
       <div class="glass rounded-3xl p-8 text-center">
-        <h2 class="text-2xl font-display text-[var(--color-cream)] mb-4">Looking for a specific calculator?</h2>
-        <p class="text-[var(--color-subtle)] mb-6">Use the search on our homepage to quickly find any calculator.</p>
+        <h2 class="text-2xl font-display text-[var(--color-cream)] mb-4">
+          Looking for a specific calculator?
+        </h2>
+        <p class="text-[var(--color-subtle)] mb-6">
+          Use the search on our homepage to quickly find any calculator.
+        </p>
         <a href="/#calculators" class="btn-primary inline-flex">
           <span>Search All Calculators</span>
         </a>
@@ -103,6 +202,18 @@ const totalCalculators = categories.reduce((sum, cat) => sum + cat.count, 0);
 </BaseLayout>
 
 <style>
-  .bento-card { animation: card-appear 0.5s ease forwards; opacity: 0; }
-  @keyframes card-appear { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .bento-card {
+    animation: card-appear 0.5s ease forwards;
+    opacity: 0;
+  }
+  @keyframes card-appear {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>

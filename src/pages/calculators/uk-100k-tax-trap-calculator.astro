@@ -11,8 +11,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UK100kTaxTrapCalculator } from '../../components/calculators/UK100kTaxTrapCalculator';
 
 const title = 'UK £100k Tax Trap Calculator | Escape the 60% Marginal Rate';
-const description = 'Free UK tax trap calculator for high earners. See how much you lose to the £100k-£125k tax trap and calculate optimal pension contributions to restore your Personal Allowance.';
-const keywords = 'UK tax trap calculator, 100k tax trap, 60% tax rate UK, personal allowance calculator, pension sacrifice calculator, UK tax calculator, salary sacrifice calculator, high earner tax UK';
+const description =
+  'Free UK tax trap calculator for high earners. See how much you lose to the £100k-£125k tax trap and calculate optimal pension contributions to restore your Personal Allowance.';
+const keywords =
+  'UK tax trap calculator, 100k tax trap, 60% tax rate UK, personal allowance calculator, pension sacrifice calculator, UK tax calculator, salary sacrifice calculator, high earner tax UK';
 const canonicalURL = '/calculators/uk-100k-tax-trap-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -40,36 +42,44 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is the UK £100k tax trap?",
-    answer: "When your income exceeds £100,000, you lose £1 of your £12,570 Personal Allowance for every £2 earned above this threshold. This creates an effective marginal tax rate of up to 62% (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140. Your Personal Allowance is completely lost at £125,140."
+    question: 'What is the UK £100k tax trap?',
+    answer:
+      'When your income exceeds £100,000, you lose £1 of your £12,570 Personal Allowance for every £2 earned above this threshold. This creates an effective marginal tax rate of up to 62% (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140. Your Personal Allowance is completely lost at £125,140.',
   },
   {
-    question: "Why is it called the 60% tax trap?",
-    answer: "For every £2 you earn over £100,000, you lose £1 of Personal Allowance. That £1 would have been tax-free but is now taxed at 40% (Higher Rate). So you effectively pay an extra 20% tax on top of the 40% rate, plus 2% NI. Total: 62% (often rounded to 60%)."
+    question: 'Why is it called the 60% tax trap?',
+    answer:
+      'For every £2 you earn over £100,000, you lose £1 of Personal Allowance. That £1 would have been tax-free but is now taxed at 40% (Higher Rate). So you effectively pay an extra 20% tax on top of the 40% rate, plus 2% NI. Total: 62% (often rounded to 60%).',
   },
   {
-    question: "How can I escape the £100k tax trap?",
-    answer: "The most common strategy is pension contributions via salary sacrifice. By reducing your taxable income below £100,000, you restore your full Personal Allowance. For example, if you earn £120,000, contributing £20,000 to pension brings your taxable income to £100,000 and restores the full £12,570 Personal Allowance."
+    question: 'How can I escape the £100k tax trap?',
+    answer:
+      'The most common strategy is pension contributions via salary sacrifice. By reducing your taxable income below £100,000, you restore your full Personal Allowance. For example, if you earn £120,000, contributing £20,000 to pension brings your taxable income to £100,000 and restores the full £12,570 Personal Allowance.',
   },
   {
     question: "What's the difference between salary sacrifice and personal pension contributions?",
-    answer: "Salary sacrifice reduces your gross salary before tax and NI, so you save both income tax and National Insurance. Personal pension contributions only get tax relief (added to your pension), not NI savings. Salary sacrifice is generally more tax-efficient for high earners, saving approximately an extra 2% in NI."
+    answer:
+      'Salary sacrifice reduces your gross salary before tax and NI, so you save both income tax and National Insurance. Personal pension contributions only get tax relief (added to your pension), not NI savings. Salary sacrifice is generally more tax-efficient for high earners, saving approximately an extra 2% in NI.',
   },
   {
-    question: "Does Scotland have a different tax trap?",
-    answer: "Scotland has different income tax bands (19% Starter, 20% Basic, 21% Intermediate, 42% Higher, 45% Advanced, 48% Top rates), but the Personal Allowance rules are the same across the UK. Scottish taxpayers still lose £1 of PA for every £2 over £100k. However, the Higher Rate in Scotland is 42% (not 40%), making the trap slightly worse."
+    question: 'Does Scotland have a different tax trap?',
+    answer:
+      'Scotland has different income tax bands (19% Starter, 20% Basic, 21% Intermediate, 42% Higher, 45% Advanced, 48% Top rates), but the Personal Allowance rules are the same across the UK. Scottish taxpayers still lose £1 of PA for every £2 over £100k. However, the Higher Rate in Scotland is 42% (not 40%), making the trap slightly worse.',
   },
   {
-    question: "What about the £260k Tapered Annual Allowance?",
-    answer: "High earners with 'adjusted income' over £260,000 face a tapered Annual Allowance for pension contributions, reducing from £60,000 to a minimum of £10,000. This is a separate issue from the £100k tax trap. This calculator focuses on the £100k-£125k trap; consult a financial advisor for tapered allowance planning."
+    question: 'What about the £260k Tapered Annual Allowance?',
+    answer:
+      "High earners with 'adjusted income' over £260,000 face a tapered Annual Allowance for pension contributions, reducing from £60,000 to a minimum of £10,000. This is a separate issue from the £100k tax trap. This calculator focuses on the £100k-£125k trap; consult a financial advisor for tapered allowance planning.",
   },
   {
-    question: "Can I avoid the tax trap with other strategies?",
-    answer: "Besides pension contributions, you could: 1) Donate to charity via Gift Aid (reduces taxable income), 2) Use salary sacrifice for other benefits (cycle to work, childcare vouchers), 3) If self-employed, timing income/expenses across tax years. However, pension contributions are usually the most effective for employed high earners."
+    question: 'Can I avoid the tax trap with other strategies?',
+    answer:
+      'Besides pension contributions, you could: 1) Donate to charity via Gift Aid (reduces taxable income), 2) Use salary sacrifice for other benefits (cycle to work, childcare vouchers), 3) If self-employed, timing income/expenses across tax years. However, pension contributions are usually the most effective for employed high earners.',
   },
   {
-    question: "Does my bonus push me into the tax trap?",
-    answer: "Yes, bonuses count as taxable income. If your salary plus bonus exceeds £100,000, you'll lose Personal Allowance. Consider asking your employer to pay your bonus directly into your pension (salary sacrifice) to avoid the trap. Some employers allow one-off pension contributions from bonuses."
+    question: 'Does my bonus push me into the tax trap?',
+    answer:
+      "Yes, bonuses count as taxable income. If your salary plus bonus exceeds £100,000, you'll lose Personal Allowance. Consider asking your employer to pay your bonus directly into your pension (salary sacrifice) to avoid the trap. Some employers allow one-off pension contributions from bonuses.",
   },
 ];
 
@@ -112,7 +122,8 @@ const schemaBreadcrumbs = [
       <strong>£1 for every £2 earned</strong> above the threshold.
     </p>
     <p>
-      This creates an effective <strong>marginal tax rate of 62%</strong> on income between £100,000 and £125,140:
+      This creates an effective <strong>marginal tax rate of 62%</strong> on income between £100,000 and
+      £125,140:
     </p>
     <ul>
       <li><strong>40%</strong> Higher Rate income tax</li>
@@ -128,12 +139,11 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Escape the Tax Trap">
     <p>
-      The most effective strategy for employed high earners is <strong>pension contributions via salary sacrifice</strong>.
-      By reducing your taxable income below £100,000, you restore your full Personal Allowance.
+      The most effective strategy for employed high earners is <strong
+        >pension contributions via salary sacrifice</strong
+      >. By reducing your taxable income below £100,000, you restore your full Personal Allowance.
     </p>
-    <p>
-      For example, if you earn £120,000:
-    </p>
+    <p>For example, if you earn £120,000:</p>
     <ul>
       <li>You're £20,000 into the trap zone</li>
       <li>You've lost £10,000 of Personal Allowance (£20k × 50%)</li>
@@ -141,14 +151,17 @@ const schemaBreadcrumbs = [
       <li>Contributing £20,000 to pension restores the full PA and saves £4,000+ in tax</li>
     </ul>
     <p>
-      The beauty of salary sacrifice is that you <strong>save both income tax AND National Insurance</strong>,
-      unlike personal pension contributions which only receive tax relief.
+      The beauty of salary sacrifice is that you <strong
+        >save both income tax AND National Insurance</strong
+      >, unlike personal pension contributions which only receive tax relief.
     </p>
   </ContentSection>
 
   <ContentSection title="Scotland vs England Tax Rates">
     <p>
-      While the Personal Allowance taper rules apply across the UK, <strong>Scotland has different income tax bands</strong>:
+      While the Personal Allowance taper rules apply across the UK, <strong
+        >Scotland has different income tax bands</strong
+      >:
     </p>
     <ul>
       <li><strong>Starter Rate (19%):</strong> £12,571 - £14,876</li>
@@ -159,8 +172,8 @@ const schemaBreadcrumbs = [
       <li><strong>Top Rate (48%):</strong> Over £125,140</li>
     </ul>
     <p>
-      Scottish taxpayers in the trap zone face a slightly higher marginal rate (42% vs 40% for the Higher Rate portion),
-      making pension optimization even more valuable.
+      Scottish taxpayers in the trap zone face a slightly higher marginal rate (42% vs 40% for the
+      Higher Rate portion), making pension optimization even more valuable.
     </p>
   </ContentSection>
 

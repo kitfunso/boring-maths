@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateSpeedsFeeds, formatNumber, getRPMWarning, getFeedRateWarning } from './calculations';
+import {
+  calculateSpeedsFeeds,
+  formatNumber,
+  getRPMWarning,
+  getFeedRateWarning,
+} from './calculations';
 import {
   getDefaultInputs,
   MATERIALS,
@@ -32,7 +37,10 @@ export default function SpeedsFeedsCalculator() {
 
   const result = useMemo(() => calculateSpeedsFeeds(inputs), [inputs]);
 
-  const updateInput = <K extends keyof SpeedsFeedsInputs>(field: K, value: SpeedsFeedsInputs[K]) => {
+  const updateInput = <K extends keyof SpeedsFeedsInputs>(
+    field: K,
+    value: SpeedsFeedsInputs[K]
+  ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -40,9 +48,11 @@ export default function SpeedsFeedsCalculator() {
   const feedWarning = getFeedRateWarning(result.feedRate, inputs.material);
 
   // Group materials by type
-  const metalMaterials = MATERIALS.filter(m => !m.value.includes('plastic') && !m.value.includes('wood'));
-  const plasticMaterials = MATERIALS.filter(m => m.value.includes('plastic'));
-  const woodMaterials = MATERIALS.filter(m => m.value.includes('wood'));
+  const metalMaterials = MATERIALS.filter(
+    (m) => !m.value.includes('plastic') && !m.value.includes('wood')
+  );
+  const plasticMaterials = MATERIALS.filter((m) => m.value.includes('plastic'));
+  const woodMaterials = MATERIALS.filter((m) => m.value.includes('wood'));
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -64,17 +74,23 @@ export default function SpeedsFeedsCalculator() {
             >
               <optgroup label="Metals">
                 {metalMaterials.map((m) => (
-                  <option key={m.value} value={m.value}>{m.label}</option>
+                  <option key={m.value} value={m.value}>
+                    {m.label}
+                  </option>
                 ))}
               </optgroup>
               <optgroup label="Plastics">
                 {plasticMaterials.map((m) => (
-                  <option key={m.value} value={m.value}>{m.label}</option>
+                  <option key={m.value} value={m.value}>
+                    {m.label}
+                  </option>
                 ))}
               </optgroup>
               <optgroup label="Wood">
                 {woodMaterials.map((m) => (
-                  <option key={m.value} value={m.value}>{m.label}</option>
+                  <option key={m.value} value={m.value}>
+                    {m.label}
+                  </option>
                 ))}
               </optgroup>
             </select>
@@ -111,7 +127,7 @@ export default function SpeedsFeedsCalculator() {
               <div>
                 <Label htmlFor="flutes">Number of Flutes</Label>
                 <ButtonGroup
-                  options={FLUTE_OPTIONS.map(f => ({ value: String(f), label: String(f) }))}
+                  options={FLUTE_OPTIONS.map((f) => ({ value: String(f), label: String(f) }))}
                   value={String(inputs.numberOfFlutes)}
                   onChange={(value) => updateInput('numberOfFlutes', Number(value))}
                   size="sm"
@@ -120,7 +136,7 @@ export default function SpeedsFeedsCalculator() {
               <div>
                 <Label>Operation Type</Label>
                 <ButtonGroup
-                  options={OPERATION_TYPES.map(o => ({ value: o.value, label: o.label }))}
+                  options={OPERATION_TYPES.map((o) => ({ value: o.value, label: o.label }))}
                   value={inputs.operationType}
                   onChange={(value) => updateInput('operationType', value as OperationType)}
                   size="sm"
@@ -215,8 +231,18 @@ export default function SpeedsFeedsCalculator() {
                 G-Code Reference
               </h3>
               <div className="font-mono text-sm bg-black/30 rounded-lg p-4 text-green-400">
-                <div>S{formatNumber(result.rpm)} M3 <span className="text-[var(--color-muted)]">(Spindle on CW at {formatNumber(result.rpm)} RPM)</span></div>
-                <div>F{formatNumber(result.feedRate, 1)} <span className="text-[var(--color-muted)]">(Feed rate {formatNumber(result.feedRate, 1)} IPM)</span></div>
+                <div>
+                  S{formatNumber(result.rpm)} M3{' '}
+                  <span className="text-[var(--color-muted)]">
+                    (Spindle on CW at {formatNumber(result.rpm)} RPM)
+                  </span>
+                </div>
+                <div>
+                  F{formatNumber(result.feedRate, 1)}{' '}
+                  <span className="text-[var(--color-muted)]">
+                    (Feed rate {formatNumber(result.feedRate, 1)} IPM)
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -226,22 +252,29 @@ export default function SpeedsFeedsCalculator() {
                 Formulas Used
               </h3>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
-                <div><strong>RPM</strong> = (SFM × 12) / (π × Diameter)</div>
-                <div><strong>Feed Rate</strong> = RPM × Chip Load × Number of Flutes</div>
-                <div><strong>MRR</strong> = Feed Rate × DOC × Tool Diameter</div>
+                <div>
+                  <strong>RPM</strong> = (SFM × 12) / (π × Diameter)
+                </div>
+                <div>
+                  <strong>Feed Rate</strong> = RPM × Chip Load × Number of Flutes
+                </div>
+                <div>
+                  <strong>MRR</strong> = Feed Rate × DOC × Tool Diameter
+                </div>
               </div>
             </div>
 
             {/* Tips */}
             <Alert variant="tip" title="Machining Tips:">
               Start conservative and increase speeds/feeds as you gain confidence with your setup.
-              Listen for chatter (vibration) and watch chip formation. Ideal chips are small, consistent, and not discolored from heat.
+              Listen for chatter (vibration) and watch chip formation. Ideal chips are small,
+              consistent, and not discolored from heat.
             </Alert>
 
             {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
-                result={`${formatNumber(result.rpm)} RPM, ${formatNumber(result.feedRate, 1)} IPM for ${MATERIALS.find(m => m.value === inputs.material)?.label}`}
+                result={`${formatNumber(result.rpm)} RPM, ${formatNumber(result.feedRate, 1)} IPM for ${MATERIALS.find((m) => m.value === inputs.material)?.label}`}
                 calculatorName="Speeds & Feeds Calculator"
               />
             </div>

@@ -62,9 +62,8 @@ export function PrimingSugarCalculator() {
                   onClick={() =>
                     setInputs({
                       ...inputs,
-                      batchVolume: inputs.volumeUnit === 'gallons'
-                        ? preset.gallons
-                        : preset.gallons * 3.78541,
+                      batchVolume:
+                        inputs.volumeUnit === 'gallons' ? preset.gallons : preset.gallons * 3.78541,
                     })
                   }
                   className="rounded-lg bg-[var(--color-background)] px-3 py-1.5 text-xs ring-1 ring-white/5 hover:ring-amber-500/30"
@@ -163,8 +162,8 @@ export function PrimingSugarCalculator() {
 
           <div className="mt-4 rounded-lg bg-amber-900/20 p-3 ring-1 ring-amber-500/20">
             <p className="text-sm text-amber-200/80">
-              Corn sugar (dextrose) is most common. Table sugar works equally well.
-              Honey and DME add subtle flavor but require more weight.
+              Corn sugar (dextrose) is most common. Table sugar works equally well. Honey and DME
+              add subtle flavor but require more weight.
             </p>
           </div>
         </div>
@@ -180,7 +179,7 @@ export function PrimingSugarCalculator() {
               <span className="ml-2 text-2xl">{results.sugarUnit}</span>
             </div>
             <div className="mt-2 text-amber-300">
-              {SUGAR_TYPES.find(s => s.value === inputs.sugarType)?.label}
+              {SUGAR_TYPES.find((s) => s.value === inputs.sugarType)?.label}
             </div>
           </div>
         </div>
@@ -191,11 +190,7 @@ export function PrimingSugarCalculator() {
             value={`${results.sugarPerBottle} ${results.bottleUnit}`}
             color="blue"
           />
-          <ResultCard
-            label="Target CO₂"
-            value={formatCO2(results.totalCO2)}
-            color="green"
-          />
+          <ResultCard label="Target CO₂" value={formatCO2(results.totalCO2)} color="green" />
           <ResultCard
             label="Residual CO₂"
             value={formatCO2(results.residualCO2)}
@@ -211,7 +206,9 @@ export function PrimingSugarCalculator() {
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Sugar Alternatives</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Sugar Alternatives
+          </h3>
           <div className="space-y-2">
             {results.sugarAlternatives.map((alt, i) => (
               <div key={i} className="flex justify-between text-sm">
@@ -236,7 +233,9 @@ export function PrimingSugarCalculator() {
         )}
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Bottle Conditioning</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Bottle Conditioning
+          </h3>
           <div className="space-y-2 text-sm text-[var(--color-subtle)]">
             <div className="flex items-center gap-2">
               <span className="w-6 text-center font-bold text-amber-400">1</span>

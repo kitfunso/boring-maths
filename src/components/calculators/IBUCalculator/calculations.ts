@@ -24,10 +24,23 @@ function tinsethUtilization(og: number, boilTime: number): number {
 function ragerUtilization(og: number, boilTime: number): number {
   // Utilization lookup table (simplified)
   const utilizationTable: { [key: number]: number } = {
-    0: 0, 5: 0.055, 10: 0.1, 15: 0.137, 20: 0.167,
-    25: 0.192, 30: 0.212, 35: 0.229, 40: 0.242, 45: 0.253,
-    50: 0.263, 55: 0.27, 60: 0.276, 70: 0.285, 80: 0.291,
-    90: 0.295, 120: 0.301,
+    0: 0,
+    5: 0.055,
+    10: 0.1,
+    15: 0.137,
+    20: 0.167,
+    25: 0.192,
+    30: 0.212,
+    35: 0.229,
+    40: 0.242,
+    45: 0.253,
+    50: 0.263,
+    55: 0.27,
+    60: 0.276,
+    70: 0.285,
+    80: 0.291,
+    90: 0.295,
+    120: 0.301,
   };
 
   // Find closest boil time
@@ -97,7 +110,7 @@ function calculateAdditionIBU(
 
   // Calculate IBU
   // Formula: (Alpha Acid% × Weight oz × Utilization × 7490) / Volume gallons
-  const ibu = (addition.alphaAcid / 100 * weightOz * utilization * 7490) / volumeGallons;
+  const ibu = ((addition.alphaAcid / 100) * weightOz * utilization * 7490) / volumeGallons;
 
   return { ibu: Math.round(ibu * 10) / 10, utilization: Math.round(utilization * 1000) / 10 };
 }
@@ -111,9 +124,7 @@ function determineBeerStyle(ibu: number, og: number): string {
   const buGuRatio = gu > 0 ? ibu / gu : 0;
 
   // Find matching styles
-  const matchingStyles = BEER_STYLES.filter(
-    (style) => ibu >= style.ibuMin && ibu <= style.ibuMax
-  );
+  const matchingStyles = BEER_STYLES.filter((style) => ibu >= style.ibuMin && ibu <= style.ibuMax);
 
   if (matchingStyles.length > 0) {
     return matchingStyles.map((s) => s.style).join(' / ');

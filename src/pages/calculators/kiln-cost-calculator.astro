@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { KilnCostCalculator } from '../../components/calculators/KilnCostCalculator';
 
 const title = 'Kiln Firing Cost Calculator | Pottery Kiln Electricity Cost';
-const description = 'Free kiln cost calculator for pottery and ceramics. Calculate electricity cost for bisque and glaze firings. Includes cone temperature reference and firing time estimates.';
-const keywords = 'kiln cost calculator, pottery kiln, electric kiln, firing cost, cone temperature, bisque fire, glaze fire, ceramics, pottery';
+const description =
+  'Free kiln cost calculator for pottery and ceramics. Calculate electricity cost for bisque and glaze firings. Includes cone temperature reference and firing time estimates.';
+const keywords =
+  'kiln cost calculator, pottery kiln, electric kiln, firing cost, cone temperature, bisque fire, glaze fire, ceramics, pottery';
 const canonicalURL = '/calculators/kiln-cost-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "How much does it cost to fire a kiln?",
-    answer: "A typical mid-size electric kiln (7 cubic feet) firing to cone 6 costs $15-30 in electricity, depending on your local rates. High-fire to cone 10 costs more. Smaller kilns cost less. This calculator gives you an estimate based on your specific kiln and electricity rate."
+    question: 'How much does it cost to fire a kiln?',
+    answer:
+      'A typical mid-size electric kiln (7 cubic feet) firing to cone 6 costs $15-30 in electricity, depending on your local rates. High-fire to cone 10 costs more. Smaller kilns cost less. This calculator gives you an estimate based on your specific kiln and electricity rate.',
   },
   {
-    question: "Why does my kiln take longer to fire than expected?",
-    answer: "Firing time increases with: heavy loads (more thermal mass), worn elements (less heat output), slow ramp rates programmed, lid/door seal issues, or power supply problems. Old elements can increase firing time by 30-50% before failing completely."
+    question: 'Why does my kiln take longer to fire than expected?',
+    answer:
+      'Firing time increases with: heavy loads (more thermal mass), worn elements (less heat output), slow ramp rates programmed, lid/door seal issues, or power supply problems. Old elements can increase firing time by 30-50% before failing completely.',
   },
   {
-    question: "How can I reduce my kiln firing costs?",
-    answer: "Fire full loads whenever possible (cost per piece drops dramatically), use off-peak electricity rates if available, maintain your kiln elements, ensure good lid/door seals, and consider the trade-off between slow firing (longer but gentler) vs fast firing (less time but more risk)."
+    question: 'How can I reduce my kiln firing costs?',
+    answer:
+      'Fire full loads whenever possible (cost per piece drops dramatically), use off-peak electricity rates if available, maintain your kiln elements, ensure good lid/door seals, and consider the trade-off between slow firing (longer but gentler) vs fast firing (less time but more risk).',
   },
   {
     question: "What's the difference between cone ratings?",
-    answer: "Cones measure heat work, not just temperature. Low-fire (cone 06-04) is ~1800-1950°F, mid-fire (cone 5-6) is ~2150-2230°F, and high-fire (cone 9-10) is ~2300-2350°F. Higher cones require more energy and time, increasing cost."
+    answer:
+      'Cones measure heat work, not just temperature. Low-fire (cone 06-04) is ~1800-1950°F, mid-fire (cone 5-6) is ~2150-2230°F, and high-fire (cone 9-10) is ~2300-2350°F. Higher cones require more energy and time, increasing cost.',
   },
   {
-    question: "How do I know when to replace kiln elements?",
-    answer: "Replace elements when: firing time increases significantly (25%+), you see uneven heating/hot spots, elements show sagging or white/shiny spots, or the kiln can't reach target temperature. Elements typically last 100-200 firings depending on temperature and use."
+    question: 'How do I know when to replace kiln elements?',
+    answer:
+      "Replace elements when: firing time increases significantly (25%+), you see uneven heating/hot spots, elements show sagging or white/shiny spots, or the kiln can't reach target temperature. Elements typically last 100-200 firings depending on temperature and use.",
   },
   {
-    question: "Is gas or electric cheaper for kiln firing?",
-    answer: "Gas is often cheaper per BTU but requires more skill to operate, ventilation infrastructure, and has higher upfront costs. Electric kilns are simpler, more consistent, and easier for beginners. For most hobbyists and small studios, electric is more practical despite potentially higher operating costs."
+    question: 'Is gas or electric cheaper for kiln firing?',
+    answer:
+      'Gas is often cheaper per BTU but requires more skill to operate, ventilation infrastructure, and has higher upfront costs. Electric kilns are simpler, more consistent, and easier for beginners. For most hobbyists and small studios, electric is more practical despite potentially higher operating costs.',
   },
 ];
 
@@ -100,9 +108,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Kiln Energy Use">
     <p>
-      Electric kilns don't run at full power continuously. They cycle on and off
-      to maintain temperature, averaging 45-65% of rated wattage depending on
-      firing phase, load density, and kiln insulation quality.
+      Electric kilns don't run at full power continuously. They cycle on and off to maintain
+      temperature, averaging 45-65% of rated wattage depending on firing phase, load density, and
+      kiln insulation quality.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Typical Firing Times</h3>
     <div class="grid md:grid-cols-3 gap-4 mt-4">
@@ -157,7 +165,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Cost Factors">
     <ul class="list-disc list-inside space-y-2">
-      <li><strong>Electricity rate:</strong> Varies widely ($0.08-0.30/kWh) - check your utility bill</li>
+      <li>
+        <strong>Electricity rate:</strong> Varies widely ($0.08-0.30/kWh) - check your utility bill
+      </li>
       <li><strong>Kiln size:</strong> Larger kilns use more power but cost less per cubic foot</li>
       <li><strong>Target temperature:</strong> Higher cones require exponentially more energy</li>
       <li><strong>Firing schedule:</strong> Slow firings use more energy but may be necessary</li>

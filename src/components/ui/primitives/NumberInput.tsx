@@ -1,6 +1,9 @@
 import type { InputHTMLAttributes } from 'react';
 
-export interface NumberInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'type'> {
+export interface NumberInputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'onChange' | 'type'
+> {
   /** Current value */
   value: number | string;
   /** Change handler */

@@ -40,7 +40,9 @@ import ShareResults from '../../ui/ShareResults';
 
 export default function GoFullTimeCalculator() {
   // State
-  const [inputs, setInputs] = useState<GoFullTimeInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<GoFullTimeInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Memoized calculation
@@ -49,10 +51,7 @@ export default function GoFullTimeCalculator() {
   }, [inputs]);
 
   // Generic input updater
-  const updateInput = <K extends keyof GoFullTimeInputs>(
-    field: K,
-    value: GoFullTimeInputs[K]
-  ) => {
+  const updateInput = <K extends keyof GoFullTimeInputs>(field: K, value: GoFullTimeInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -86,9 +85,8 @@ export default function GoFullTimeCalculator() {
   };
 
   // Format income ratio for display
-  const incomeRatio = inputs.monthlyExpenses > 0
-    ? (inputs.monthlySideIncome / inputs.monthlyExpenses) * 100
-    : 0;
+  const incomeRatio =
+    inputs.monthlyExpenses > 0 ? (inputs.monthlySideIncome / inputs.monthlyExpenses) * 100 : 0;
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -97,12 +95,7 @@ export default function GoFullTimeCalculator() {
         <CalculatorHeader
           title="Go Full-Time Calculator"
           subtitle="Calculate when you can quit your job to freelance or pursue your side hustle full-time"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -127,13 +120,13 @@ export default function GoFullTimeCalculator() {
                     value={inputs.annualSalary}
                     onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
                   />
-                  <p className="text-sm text-[var(--color-muted)] mt-1">Your take-home pay after taxes</p>
+                  <p className="text-sm text-[var(--color-muted)] mt-1">
+                    Your take-home pay after taxes
+                  </p>
                 </div>
 
                 <div>
-                  <Label htmlFor="monthlyBenefitsValue">
-                    Monthly Benefits Value
-                  </Label>
+                  <Label htmlFor="monthlyBenefitsValue">Monthly Benefits Value</Label>
                   <Input
                     id="monthlyBenefitsValue"
                     variant="currency"
@@ -171,7 +164,9 @@ export default function GoFullTimeCalculator() {
                     value={inputs.monthlyExpenses}
                     onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
                   />
-                  <p className="text-sm text-[var(--color-muted)] mt-1">Essential costs: rent, food, utilities, insurance</p>
+                  <p className="text-sm text-[var(--color-muted)] mt-1">
+                    Essential costs: rent, food, utilities, insurance
+                  </p>
                 </div>
 
                 <div>
@@ -187,7 +182,9 @@ export default function GoFullTimeCalculator() {
                     value={inputs.currentSavings}
                     onChange={(e) => updateInput('currentSavings', Number(e.target.value))}
                   />
-                  <p className="text-sm text-[var(--color-muted)] mt-1">Savings dedicated to your transition</p>
+                  <p className="text-sm text-[var(--color-muted)] mt-1">
+                    Savings dedicated to your transition
+                  </p>
                 </div>
               </Grid>
             </div>
@@ -217,9 +214,7 @@ export default function GoFullTimeCalculator() {
                 </div>
 
                 <div>
-                  <Label htmlFor="monthlyGrowthRate">
-                    Expected Monthly Growth Rate
-                  </Label>
+                  <Label htmlFor="monthlyGrowthRate">Expected Monthly Growth Rate</Label>
                   <Input
                     id="monthlyGrowthRate"
                     variant="percentage"
@@ -285,14 +280,18 @@ export default function GoFullTimeCalculator() {
               value={formatDate(result.recommendedQuitDate)}
               subtitle={
                 result.isReadyToQuit
-                  ? "You meet the criteria at your selected risk level"
+                  ? 'You meet the criteria at your selected risk level'
                   : result.monthsToRecommendedQuit > 0
                     ? `${formatMonths(result.monthsToRecommendedQuit)} from now`
-                    : "Keep growing your income and savings"
+                    : 'Keep growing your income and savings'
               }
               footer={
                 <>
-                  Based on <span className="font-semibold">{RISK_THRESHOLDS[inputs.riskTolerance].label}</span> risk tolerance
+                  Based on{' '}
+                  <span className="font-semibold">
+                    {RISK_THRESHOLDS[inputs.riskTolerance].label}
+                  </span>{' '}
+                  risk tolerance
                 </>
               }
             />
@@ -300,8 +299,12 @@ export default function GoFullTimeCalculator() {
             {/* Readiness Progress */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-[var(--color-cream)]">Overall Readiness</span>
-                <span className="text-sm font-bold text-[var(--color-cream)]">{result.readinessPercent}%</span>
+                <span className="text-sm font-medium text-[var(--color-cream)]">
+                  Overall Readiness
+                </span>
+                <span className="text-sm font-bold text-[var(--color-cream)]">
+                  {result.readinessPercent}%
+                </span>
               </div>
               <div className="w-full bg-white/10 rounded-full h-4 overflow-hidden">
                 <div
@@ -311,11 +314,10 @@ export default function GoFullTimeCalculator() {
               </div>
               <div className="flex justify-between mt-3 text-sm text-[var(--color-subtle)]">
                 <span>
-                  Savings: {formatCurrency(inputs.currentSavings, inputs.currency)} / {formatCurrency(result.savingsNeededForRisk, inputs.currency)}
+                  Savings: {formatCurrency(inputs.currentSavings, inputs.currency)} /{' '}
+                  {formatCurrency(result.savingsNeededForRisk, inputs.currency)}
                 </span>
-                <span>
-                  Income: {formatPercentage(incomeRatio)} of expenses
-                </span>
+                <span>Income: {formatPercentage(incomeRatio)} of expenses</span>
               </div>
             </div>
 
@@ -403,10 +405,17 @@ export default function GoFullTimeCalculator() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm text-[var(--color-subtle)]">
                       <div>
-                        Savings needed: <span className="font-medium">{formatCurrency(scenario.savingsNeeded, inputs.currency)}</span>
+                        Savings needed:{' '}
+                        <span className="font-medium">
+                          {formatCurrency(scenario.savingsNeeded, inputs.currency)}
+                        </span>
                       </div>
                       <div>
-                        Income needed: <span className="font-medium">{formatCurrency(scenario.incomeNeeded, inputs.currency)}</span>/mo
+                        Income needed:{' '}
+                        <span className="font-medium">
+                          {formatCurrency(scenario.incomeNeeded, inputs.currency)}
+                        </span>
+                        /mo
                       </div>
                     </div>
                   </div>
@@ -423,17 +432,31 @@ export default function GoFullTimeCalculator() {
                 <div className="flex items-center justify-between py-3 border-b border-white/10">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-blue-900/30 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-4 h-4 text-blue-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     </div>
                     <div>
                       <div className="font-medium text-[var(--color-cream)]">Crossover Point</div>
-                      <div className="text-sm text-[var(--color-muted)]">Side income covers expenses</div>
+                      <div className="text-sm text-[var(--color-muted)]">
+                        Side income covers expenses
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-semibold text-[var(--color-cream)]">{formatDate(result.crossoverDate)}</div>
+                    <div className="font-semibold text-[var(--color-cream)]">
+                      {formatDate(result.crossoverDate)}
+                    </div>
                     <div className="text-sm text-[var(--color-muted)]">
                       {result.monthsToCrossover === 0
                         ? 'Already achieved!'
@@ -447,17 +470,33 @@ export default function GoFullTimeCalculator() {
                 <div className="flex items-center justify-between py-3 border-b border-white/10">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-green-900/30 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg
+                        className="w-4 h-4 text-green-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <div className="font-medium text-[var(--color-cream)]">Recommended Quit Date</div>
-                      <div className="text-sm text-[var(--color-muted)]">Based on {RISK_THRESHOLDS[inputs.riskTolerance].label.toLowerCase()} risk</div>
+                      <div className="font-medium text-[var(--color-cream)]">
+                        Recommended Quit Date
+                      </div>
+                      <div className="text-sm text-[var(--color-muted)]">
+                        Based on {RISK_THRESHOLDS[inputs.riskTolerance].label.toLowerCase()} risk
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-semibold text-[var(--color-cream)]">{formatDate(result.recommendedQuitDate)}</div>
+                    <div className="font-semibold text-[var(--color-cream)]">
+                      {formatDate(result.recommendedQuitDate)}
+                    </div>
                     <div className="text-sm text-[var(--color-muted)]">
                       {result.isReadyToQuit
                         ? 'Ready now!'
@@ -471,17 +510,33 @@ export default function GoFullTimeCalculator() {
                 <div className="flex items-center justify-between py-3">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                      <svg
+                        className="w-4 h-4 text-purple-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                        />
                       </svg>
                     </div>
                     <div>
-                      <div className="font-medium text-[var(--color-cream)]">Full Income Replacement</div>
-                      <div className="text-sm text-[var(--color-muted)]">Side income matches salary + benefits</div>
+                      <div className="font-medium text-[var(--color-cream)]">
+                        Full Income Replacement
+                      </div>
+                      <div className="text-sm text-[var(--color-muted)]">
+                        Side income matches salary + benefits
+                      </div>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-semibold text-[var(--color-cream)]">{formatDate(result.fullReplacementDate)}</div>
+                    <div className="font-semibold text-[var(--color-cream)]">
+                      {formatDate(result.fullReplacementDate)}
+                    </div>
                     <div className="text-sm text-[var(--color-muted)]">
                       {result.monthsToFullReplacement === 0
                         ? 'Already achieved!'
@@ -501,16 +556,21 @@ export default function GoFullTimeCalculator() {
               </h3>
               <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
                 <div>
-                  <div className="text-sm text-[var(--color-muted)] mb-1">Your Current Monthly Income</div>
+                  <div className="text-sm text-[var(--color-muted)] mb-1">
+                    Your Current Monthly Income
+                  </div>
                   <div className="text-2xl font-bold text-[var(--color-cream)]">
                     {formatCurrency(result.monthlySalary, inputs.currency)}
                   </div>
                   <div className="text-sm text-[var(--color-muted)]">
-                    + {formatCurrency(inputs.monthlyBenefitsValue, inputs.currency)} benefits = {formatCurrency(result.monthlyTotalCompensation, inputs.currency)} total
+                    + {formatCurrency(inputs.monthlyBenefitsValue, inputs.currency)} benefits ={' '}
+                    {formatCurrency(result.monthlyTotalCompensation, inputs.currency)} total
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm text-[var(--color-muted)] mb-1">Side Income vs. Total Comp</div>
+                  <div className="text-sm text-[var(--color-muted)] mb-1">
+                    Side Income vs. Total Comp
+                  </div>
                   <div className="text-2xl font-bold text-[var(--color-cream)]">
                     {formatCurrency(result.incomeGapToSalary, inputs.currency)}
                   </div>
@@ -531,10 +591,13 @@ export default function GoFullTimeCalculator() {
                   const amount = inputs.monthlyExpenses * months;
                   const achieved = inputs.currentSavings >= amount;
                   const label =
-                    months === 3 ? 'Minimum Buffer' :
-                    months === 6 ? 'Comfortable Buffer' :
-                    months === 9 ? 'Secure Buffer' :
-                    'Fortress Buffer';
+                    months === 3
+                      ? 'Minimum Buffer'
+                      : months === 6
+                        ? 'Comfortable Buffer'
+                        : months === 9
+                          ? 'Secure Buffer'
+                          : 'Fortress Buffer';
 
                   return (
                     <div key={months} className="flex items-center justify-between">
@@ -543,10 +606,14 @@ export default function GoFullTimeCalculator() {
                           className={`w-3 h-3 rounded-full shrink-0 ${achieved ? 'bg-green-500' : 'bg-white/20'}`}
                         />
                         <div className="flex flex-col sm:flex-row sm:gap-1">
-                          <span className={`text-sm ${achieved ? 'text-green-400 font-medium' : 'text-[var(--color-subtle)]'}`}>
+                          <span
+                            className={`text-sm ${achieved ? 'text-green-400 font-medium' : 'text-[var(--color-subtle)]'}`}
+                          >
                             {label}
                           </span>
-                          <span className={`text-sm ${achieved ? 'text-green-400/70' : 'text-[var(--color-muted)]'}`}>
+                          <span
+                            className={`text-sm ${achieved ? 'text-green-400/70' : 'text-[var(--color-muted)]'}`}
+                          >
                             ({months} months)
                           </span>
                         </div>

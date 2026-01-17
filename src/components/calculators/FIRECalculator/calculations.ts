@@ -58,12 +58,7 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
   const totalNeeded = desiredRetirementExpenses / safeWithdrawalRate;
 
   // Calculate years to FIRE
-  const yearsToFIRE = calculateYearsToFIRE(
-    currentSavings,
-    annualSavings,
-    totalNeeded,
-    realReturn
-  );
+  const yearsToFIRE = calculateYearsToFIRE(currentSavings, annualSavings, totalNeeded, realReturn);
 
   const ageAtFIRE = currentAge + yearsToFIRE;
 

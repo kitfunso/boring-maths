@@ -8,13 +8,7 @@ import type { GPACalculatorInputs, GPACalculatorResult } from './types';
 import { gradePoints4_0, gradePoints4_3 } from './types';
 
 export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
-  const {
-    gradeScale,
-    courses,
-    currentGPA,
-    currentCredits,
-    includeCurrentGPA,
-  } = inputs;
+  const { gradeScale, courses, currentGPA, currentCredits, includeCurrentGPA } = inputs;
 
   const gradePoints = gradeScale === '4.3' ? gradePoints4_3 : gradePoints4_0;
 
@@ -30,9 +24,7 @@ export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
     }
   }
 
-  const semesterGPA = semesterCredits > 0
-    ? semesterGradePoints / semesterCredits
-    : 0;
+  const semesterGPA = semesterCredits > 0 ? semesterGradePoints / semesterCredits : 0;
 
   // Calculate cumulative GPA if including current
   let cumulativeGPA = semesterGPA;
@@ -42,9 +34,7 @@ export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
     const previousGradePoints = currentGPA * currentCredits;
     const totalGradePoints = previousGradePoints + semesterGradePoints;
     cumulativeCredits = currentCredits + semesterCredits;
-    cumulativeGPA = cumulativeCredits > 0
-      ? totalGradePoints / cumulativeCredits
-      : 0;
+    cumulativeGPA = cumulativeCredits > 0 ? totalGradePoints / cumulativeCredits : 0;
   }
 
   // Determine letter grade equivalent
@@ -80,7 +70,7 @@ export function getGPADescription(gpa: number): string {
   if (gpa >= 3.9) return 'Summa Cum Laude';
   if (gpa >= 3.7) return 'Magna Cum Laude';
   if (gpa >= 3.5) return 'Cum Laude';
-  if (gpa >= 3.0) return 'Dean\'s List';
+  if (gpa >= 3.0) return "Dean's List";
   if (gpa >= 2.0) return 'Good Standing';
   if (gpa >= 1.0) return 'Academic Probation';
   return 'Academic Warning';

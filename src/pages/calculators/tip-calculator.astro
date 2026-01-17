@@ -14,17 +14,16 @@ import TipCalculator from '../../components/calculators/TipCalculator/TipCalcula
 
 // SEO Configuration
 const title = 'Tip Calculator | Split Bill Between Friends';
-const description = 'Calculate tips quickly and split bills between friends. See tip amounts for 15%, 18%, 20%, and 25%. Free, easy-to-use tip calculator.';
-const keywords = 'tip calculator, split bill calculator, tip calculator app, how much to tip, restaurant tip calculator, bill splitter, gratuity calculator';
+const description =
+  'Calculate tips quickly and split bills between friends. See tip amounts for 15%, 18%, 20%, and 25%. Free, easy-to-use tip calculator.';
+const keywords =
+  'tip calculator, split bill calculator, tip calculator app, how much to tip, restaurant tip calculator, bill splitter, gratuity calculator';
 const canonicalURL = '/calculators/tip-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Tip Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Tip Calculator' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,29 +46,35 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How much should I tip at a restaurant?",
-    answer: "In the US, 15-20% is standard for restaurant service. 15% indicates adequate service, 18% is typical for good service, and 20% or more shows appreciation for excellent service. In other countries, tipping customs vary significantly - in some places, service is included in the bill."
+    question: 'How much should I tip at a restaurant?',
+    answer:
+      'In the US, 15-20% is standard for restaurant service. 15% indicates adequate service, 18% is typical for good service, and 20% or more shows appreciation for excellent service. In other countries, tipping customs vary significantly - in some places, service is included in the bill.',
   },
   {
-    question: "How do I calculate a 20% tip quickly?",
-    answer: "To calculate 20% quickly: move the decimal point one place left (that's 10%), then double it. For example, on a $45 bill: 10% is $4.50, doubled is $9.00. For 15%, find 10% and add half. For 18%, find 20% and subtract a bit."
+    question: 'How do I calculate a 20% tip quickly?',
+    answer:
+      "To calculate 20% quickly: move the decimal point one place left (that's 10%), then double it. For example, on a $45 bill: 10% is $4.50, doubled is $9.00. For 15%, find 10% and add half. For 18%, find 20% and subtract a bit.",
   },
   {
-    question: "Should I tip on the total before or after tax?",
-    answer: "Technically, you should tip on the pre-tax amount since tax goes to the government, not the server. However, many people tip on the post-tax total for convenience. The difference is usually small - do what feels right to you."
+    question: 'Should I tip on the total before or after tax?',
+    answer:
+      'Technically, you should tip on the pre-tax amount since tax goes to the government, not the server. However, many people tip on the post-tax total for convenience. The difference is usually small - do what feels right to you.',
   },
   {
-    question: "How do I split a bill fairly between friends?",
-    answer: "The simplest method is to divide the total (including tip) equally. If people ordered significantly different amounts, you can split the bill proportionally or have each person calculate their share plus tip. Using a calculator makes this much easier."
+    question: 'How do I split a bill fairly between friends?',
+    answer:
+      'The simplest method is to divide the total (including tip) equally. If people ordered significantly different amounts, you can split the bill proportionally or have each person calculate their share plus tip. Using a calculator makes this much easier.',
   },
   {
-    question: "Do I need to tip for takeout orders?",
-    answer: "Tipping for takeout is optional but increasingly common. 10-15% is appropriate if you want to tip, especially for large or complex orders. During the pandemic, many people started tipping more for takeout to support restaurant workers."
+    question: 'Do I need to tip for takeout orders?',
+    answer:
+      'Tipping for takeout is optional but increasingly common. 10-15% is appropriate if you want to tip, especially for large or complex orders. During the pandemic, many people started tipping more for takeout to support restaurant workers.',
   },
   {
-    question: "How much should I tip for delivery?",
-    answer: "For food delivery, 15-20% of the order total is standard, with a minimum of $3-5 for small orders. Consider tipping more for bad weather, long distances, large orders, or if the driver had to climb stairs to reach you."
-  }
+    question: 'How much should I tip for delivery?',
+    answer:
+      'For food delivery, 15-20% of the order total is standard, with a minimum of $3-5 for small orders. Consider tipping more for bad weather, long distances, large orders, or if the driver had to climb stairs to reach you.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -111,40 +116,40 @@ const schemaBreadcrumbs = [
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>bill amount</strong> (before tip) to get started. The calculator
-      will instantly show you tip amounts for common percentages.
+      Enter your <strong>bill amount</strong> (before tip) to get started. The calculator will instantly
+      show you tip amounts for common percentages.
     </p>
     <p>
-      Use the <strong>tip percentage slider</strong> or quick-select buttons to choose
-      your preferred tip amount. The slider allows fine-grained control from 0% to 50%.
+      Use the <strong>tip percentage slider</strong> or quick-select buttons to choose your preferred
+      tip amount. The slider allows fine-grained control from 0% to 50%.
     </p>
     <p>
-      If you're dining with friends, use the <strong>split between</strong> control to
-      divide the bill equally. The calculator shows both per-person and total amounts.
+      If you're dining with friends, use the <strong>split between</strong> control to divide the bill
+      equally. The calculator shows both per-person and total amounts.
     </p>
     <p>
-      The <strong>quick reference table</strong> shows tip amounts for 15%, 18%, 20%, and
-      25% - click any row to select that tip percentage.
+      The <strong>quick reference table</strong> shows tip amounts for 15%, 18%, 20%, and 25% - click
+      any row to select that tip percentage.
     </p>
   </ContentSection>
 
   <!-- Understanding Results Section -->
   <ContentSection title="Tipping Guidelines">
     <p>
-      <strong>15%</strong> - Adequate service. The server did their job but nothing
-      exceptional. This is the minimum for acceptable service in the US.
+      <strong>15%</strong> - Adequate service. The server did their job but nothing exceptional. This
+      is the minimum for acceptable service in the US.
     </p>
     <p>
-      <strong>18%</strong> - Good service. Your server was attentive, friendly, and
-      efficient. This is becoming the new "standard" tip in many areas.
+      <strong>18%</strong> - Good service. Your server was attentive, friendly, and efficient. This is
+      becoming the new "standard" tip in many areas.
     </p>
     <p>
-      <strong>20%</strong> - Great service. Your server went above and beyond, making
-      your dining experience memorable. This is the expected tip for good service.
+      <strong>20%</strong> - Great service. Your server went above and beyond, making your dining experience
+      memorable. This is the expected tip for good service.
     </p>
     <p>
-      <strong>25%+</strong> - Exceptional service. Reserve this for truly outstanding
-      experiences or to show extra appreciation for servers during difficult situations.
+      <strong>25%+</strong> - Exceptional service. Reserve this for truly outstanding experiences or to
+      show extra appreciation for servers during difficult situations.
     </p>
   </ContentSection>
 

@@ -5,7 +5,7 @@
 import { EU_COUNTRIES, type VATInputs, type VATResult, type EUCountry } from './types';
 
 export function getCountryByCode(code: string): EUCountry | undefined {
-  return EU_COUNTRIES.find(c => c.code === code);
+  return EU_COUNTRIES.find((c) => c.code === code);
 }
 
 export function calculateVAT(inputs: VATInputs): VATResult {

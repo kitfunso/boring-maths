@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { PrimingSugarCalculator } from '../../components/calculators/PrimingSugarCalculator';
 
 const title = 'Priming Sugar Calculator | Bottle Conditioning Carbonation';
-const description = 'Free priming sugar calculator for homebrewing. Calculate carbonation sugar amounts for bottle conditioning with corn sugar, table sugar, honey, or DME.';
-const keywords = 'priming sugar calculator, bottle conditioning, carbonation, homebrew, corn sugar, dextrose, CO2 volumes, beer carbonation';
+const description =
+  'Free priming sugar calculator for homebrewing. Calculate carbonation sugar amounts for bottle conditioning with corn sugar, table sugar, honey, or DME.';
+const keywords =
+  'priming sugar calculator, bottle conditioning, carbonation, homebrew, corn sugar, dextrose, CO2 volumes, beer carbonation';
 const canonicalURL = '/calculators/priming-sugar-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is priming sugar?",
-    answer: "Priming sugar is fermentable sugar added at bottling to create carbonation. Yeast in the beer consumes the sugar, producing CO₂ that dissolves into the beer since the bottle is sealed. This is called bottle conditioning or natural carbonation."
+    question: 'What is priming sugar?',
+    answer:
+      'Priming sugar is fermentable sugar added at bottling to create carbonation. Yeast in the beer consumes the sugar, producing CO₂ that dissolves into the beer since the bottle is sealed. This is called bottle conditioning or natural carbonation.',
   },
   {
-    question: "Why does beer temperature at bottling matter?",
-    answer: "Colder beer holds more dissolved CO₂ from fermentation (residual CO₂). This calculator accounts for residual CO₂ based on your beer temperature - warmer beer has less residual CO₂, so you need more priming sugar to reach your target carbonation level."
+    question: 'Why does beer temperature at bottling matter?',
+    answer:
+      'Colder beer holds more dissolved CO₂ from fermentation (residual CO₂). This calculator accounts for residual CO₂ based on your beer temperature - warmer beer has less residual CO₂, so you need more priming sugar to reach your target carbonation level.',
   },
   {
     question: "What's the difference between corn sugar and table sugar?",
-    answer: "Corn sugar (dextrose) is 100% fermentable and leaves no flavor. Table sugar (sucrose) is also 100% fermentable but requires slightly less weight. Both work equally well. The taste difference is undetectable in finished beer."
+    answer:
+      'Corn sugar (dextrose) is 100% fermentable and leaves no flavor. Table sugar (sucrose) is also 100% fermentable but requires slightly less weight. Both work equally well. The taste difference is undetectable in finished beer.',
   },
   {
-    question: "How long does bottle conditioning take?",
-    answer: "Standard ales carbonate in 2-3 weeks at 65-75°F. Lagers and high-gravity beers may take 3-4 weeks. Cold storage slows carbonation significantly. Test one bottle at 2 weeks before chilling the whole batch. Carbonation continues to improve for months."
+    question: 'How long does bottle conditioning take?',
+    answer:
+      'Standard ales carbonate in 2-3 weeks at 65-75°F. Lagers and high-gravity beers may take 3-4 weeks. Cold storage slows carbonation significantly. Test one bottle at 2 weeks before chilling the whole batch. Carbonation continues to improve for months.',
   },
   {
-    question: "What are CO₂ volumes?",
-    answer: "CO₂ volumes measure carbonation level - one 'volume' means the CO₂ would occupy the same space as the beer at standard temperature and pressure. British ales are around 1.5-2.0 volumes, American beers 2.0-2.5, Belgian ales 2.5-3.5, and wheat beers up to 4.5 volumes."
+    question: 'What are CO₂ volumes?',
+    answer:
+      "CO₂ volumes measure carbonation level - one 'volume' means the CO₂ would occupy the same space as the beer at standard temperature and pressure. British ales are around 1.5-2.0 volumes, American beers 2.0-2.5, Belgian ales 2.5-3.5, and wheat beers up to 4.5 volumes.",
   },
   {
-    question: "How do I avoid bottle bombs?",
-    answer: "Ensure fermentation is complete (stable gravity readings 3 days apart). Don't over-prime - use a calculator like this one. Use bottles rated for carbonation. Avoid high carbonation levels (>3.5 vol) unless using Belgian or champagne bottles. Store at proper temperature."
+    question: 'How do I avoid bottle bombs?',
+    answer:
+      "Ensure fermentation is complete (stable gravity readings 3 days apart). Don't over-prime - use a calculator like this one. Use bottles rated for carbonation. Avoid high carbonation levels (>3.5 vol) unless using Belgian or champagne bottles. Store at proper temperature.",
   },
 ];
 
@@ -100,8 +108,8 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Carbonation Levels by Beer Style">
     <p>
-      Different beer styles traditionally have different carbonation levels.
-      Use these as starting points - personal preference matters too.
+      Different beer styles traditionally have different carbonation levels. Use these as starting
+      points - personal preference matters too.
     </p>
     <div class="grid md:grid-cols-4 gap-4 mt-4">
       <div class="bg-amber-900/20 rounded-lg p-4">
@@ -154,7 +162,8 @@ const schemaBreadcrumbs = [
           <tr class="border-b border-white/5">
             <td class="py-2 px-3 font-medium text-[var(--color-text)]">Table Sugar (Sucrose)</td>
             <td class="py-2 px-3 text-right text-amber-400">3.64</td>
-            <td class="py-2 px-3 text-[var(--color-subtle)]">Slightly less needed, equally clean</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Slightly less needed, equally clean</td
+            >
           </tr>
           <tr class="border-b border-white/5">
             <td class="py-2 px-3 font-medium text-[var(--color-text)]">Honey</td>
@@ -169,7 +178,9 @@ const schemaBreadcrumbs = [
           <tr>
             <td class="py-2 px-3 font-medium text-[var(--color-text)]">Belgian Candi Sugar</td>
             <td class="py-2 px-3 text-right text-amber-400">3.64</td>
-            <td class="py-2 px-3 text-[var(--color-subtle)]">Similar to table sugar, authentic for Belgians</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]"
+              >Similar to table sugar, authentic for Belgians</td
+            >
           </tr>
         </tbody>
       </table>

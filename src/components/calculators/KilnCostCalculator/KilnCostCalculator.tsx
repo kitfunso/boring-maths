@@ -102,14 +102,14 @@ export function KilnCostCalculator() {
               label="Firing Type"
               value={inputs.firingType}
               onChange={(v) => {
-                const firingType = FIRING_TYPES.find(f => f.value === v);
+                const firingType = FIRING_TYPES.find((f) => f.value === v);
                 setInputs({
                   ...inputs,
                   firingType: v as any,
                   targetCone: firingType?.defaultCone || inputs.targetCone,
                 });
               }}
-              options={FIRING_TYPES.map(f => ({ value: f.value, label: f.label }))}
+              options={FIRING_TYPES.map((f) => ({ value: f.value, label: f.label }))}
             />
 
             <Select
@@ -174,7 +174,7 @@ export function KilnCostCalculator() {
                 value={inputs.electricityRate}
                 onChange={(v) => setInputs({ ...inputs, electricityRate: v })}
                 min={0.05}
-                max={0.40}
+                max={0.4}
                 step={0.01}
                 formatValue={(v) => `$${v.toFixed(2)}/kWh`}
               />
@@ -216,18 +216,12 @@ export function KilnCostCalculator() {
             <div className="text-5xl font-bold text-orange-400">
               ${results.totalCost.toFixed(2)}
             </div>
-            <div className="mt-2 text-orange-300">
-              estimated cost for this firing
-            </div>
+            <div className="mt-2 text-orange-300">estimated cost for this firing</div>
           </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Firing Time"
-            value={formatTime(results.estimatedTime)}
-            color="blue"
-          />
+          <ResultCard label="Firing Time" value={formatTime(results.estimatedTime)} color="blue" />
           <ResultCard
             label="Peak Temperature"
             value={`${results.peakTemperature}°F`}
@@ -251,14 +245,12 @@ export function KilnCostCalculator() {
           <div className="space-y-3">
             <div className="flex justify-between">
               <span className="text-[var(--color-subtle)]">Target Cone</span>
-              <span className="font-medium text-[var(--color-text)]">
-                Cone {inputs.targetCone}
-              </span>
+              <span className="font-medium text-[var(--color-text)]">Cone {inputs.targetCone}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-[var(--color-subtle)]">Firing Type</span>
               <span className="font-medium text-[var(--color-text)]">
-                {FIRING_TYPES.find(f => f.value === inputs.firingType)?.label}
+                {FIRING_TYPES.find((f) => f.value === inputs.firingType)?.label}
               </span>
             </div>
             <div className="flex justify-between">
@@ -269,15 +261,15 @@ export function KilnCostCalculator() {
             </div>
             <div className="flex justify-between border-t border-white/10 pt-3">
               <span className="text-[var(--color-subtle)]">CO₂ Emissions</span>
-              <span className="font-medium text-orange-400">
-                ~{results.co2Emissions} lbs
-              </span>
+              <span className="font-medium text-orange-400">~{results.co2Emissions} lbs</span>
             </div>
           </div>
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
-          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Quick Cone Reference</h3>
+          <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">
+            Quick Cone Reference
+          </h3>
           <div className="grid grid-cols-3 gap-2 text-sm">
             <div className="rounded-lg bg-red-900/20 p-2 text-center">
               <div className="font-medium text-red-400">Low Fire</div>

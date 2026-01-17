@@ -51,7 +51,11 @@ function getAirViscosity(tempC: number): number {
 /**
  * Convert units to metric for calculation
  */
-function convertToMetric(inputs: ReynoldsInputs): { diameter: number; velocity: number; tempC: number } {
+function convertToMetric(inputs: ReynoldsInputs): {
+  diameter: number;
+  velocity: number;
+  tempC: number;
+} {
   if (inputs.unitSystem === 'metric') {
     return {
       diameter: inputs.diameter / 1000, // mm to m
@@ -62,7 +66,7 @@ function convertToMetric(inputs: ReynoldsInputs): { diameter: number; velocity: 
     return {
       diameter: inputs.diameter * 0.0254, // inches to m
       velocity: inputs.velocity * 0.3048, // ft/s to m/s
-      tempC: (inputs.temperature - 32) * 5 / 9, // °F to °C
+      tempC: ((inputs.temperature - 32) * 5) / 9, // °F to °C
     };
   }
 }

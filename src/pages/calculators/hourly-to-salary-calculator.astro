@@ -14,17 +14,16 @@ import HourlyToSalaryCalculator from '../../components/calculators/HourlyToSalar
 
 // SEO Configuration
 const title = 'Hourly to Salary Calculator | Convert Hourly Rate to Annual Pay';
-const description = 'Free hourly to salary calculator. Convert your hourly wage to annual salary, monthly, and bi-weekly pay. Includes tax adjustments and overtime calculations.';
-const keywords = 'hourly to salary calculator, hourly rate to annual salary, wage to salary converter, hourly pay calculator, salary converter';
+const description =
+  'Free hourly to salary calculator. Convert your hourly wage to annual salary, monthly, and bi-weekly pay. Includes tax adjustments and overtime calculations.';
+const keywords =
+  'hourly to salary calculator, hourly rate to annual salary, wage to salary converter, hourly pay calculator, salary converter';
 const canonicalURL = '/calculators/hourly-to-salary-calculator';
 
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Hourly to Salary' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Hourly to Salary' }];
 
 // Related calculators
 const relatedCalculators = [
@@ -47,33 +46,40 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: "How do I convert hourly wage to annual salary?",
-    answer: "Multiply your hourly rate by the number of hours you work per week, then multiply by 52 (weeks per year). For example, $20/hour × 40 hours × 52 weeks = $41,600 annual salary. Our calculator also factors in taxes and overtime if applicable."
+    question: 'How do I convert hourly wage to annual salary?',
+    answer:
+      'Multiply your hourly rate by the number of hours you work per week, then multiply by 52 (weeks per year). For example, $20/hour × 40 hours × 52 weeks = $41,600 annual salary. Our calculator also factors in taxes and overtime if applicable.',
   },
   {
-    question: "What is the formula for hourly to salary?",
-    answer: "The basic formula is: Annual Salary = Hourly Rate × Hours Per Week × Weeks Per Year. For a standard full-time schedule: Salary = Hourly Rate × 40 × 52 = Hourly Rate × 2,080. This gives you gross annual income before taxes."
+    question: 'What is the formula for hourly to salary?',
+    answer:
+      'The basic formula is: Annual Salary = Hourly Rate × Hours Per Week × Weeks Per Year. For a standard full-time schedule: Salary = Hourly Rate × 40 × 52 = Hourly Rate × 2,080. This gives you gross annual income before taxes.',
   },
   {
-    question: "How much is $20 an hour annually?",
-    answer: "$20 per hour working 40 hours per week for 52 weeks equals $41,600 per year before taxes. After typical taxes (25%), take-home would be approximately $31,200. Adjust for your actual tax rate and time off for accurate numbers."
+    question: 'How much is $20 an hour annually?',
+    answer:
+      '$20 per hour working 40 hours per week for 52 weeks equals $41,600 per year before taxes. After typical taxes (25%), take-home would be approximately $31,200. Adjust for your actual tax rate and time off for accurate numbers.',
   },
   {
-    question: "How much is $15 an hour per year?",
-    answer: "$15 per hour at full-time (40 hours/week, 52 weeks) equals $31,200 gross annual salary. After taxes of about 20-25%, expect take-home pay of roughly $23,400-$24,960 per year."
+    question: 'How much is $15 an hour per year?',
+    answer:
+      '$15 per hour at full-time (40 hours/week, 52 weeks) equals $31,200 gross annual salary. After taxes of about 20-25%, expect take-home pay of roughly $23,400-$24,960 per year.',
   },
   {
-    question: "Should I include overtime in salary calculations?",
-    answer: "Yes, if you regularly work overtime. Overtime is typically paid at 1.5x your regular rate (time and a half) for hours over 40 per week. Some jobs pay 2x (double time) for holidays or excessive hours. Include consistent overtime for accurate annual projections."
+    question: 'Should I include overtime in salary calculations?',
+    answer:
+      'Yes, if you regularly work overtime. Overtime is typically paid at 1.5x your regular rate (time and a half) for hours over 40 per week. Some jobs pay 2x (double time) for holidays or excessive hours. Include consistent overtime for accurate annual projections.',
   },
   {
-    question: "How do I calculate bi-weekly pay from hourly?",
-    answer: "Multiply your hourly rate by hours worked per week, then multiply by 2 (for two weeks). For example: $25/hour × 40 hours × 2 weeks = $2,000 gross bi-weekly pay. There are 26 bi-weekly pay periods per year."
+    question: 'How do I calculate bi-weekly pay from hourly?',
+    answer:
+      'Multiply your hourly rate by hours worked per week, then multiply by 2 (for two weeks). For example: $25/hour × 40 hours × 2 weeks = $2,000 gross bi-weekly pay. There are 26 bi-weekly pay periods per year.',
   },
   {
     question: "What's the difference between gross and net salary?",
-    answer: "Gross salary is your total earnings before any deductions. Net salary (take-home pay) is what you actually receive after taxes, Social Security, Medicare, and other deductions. Net is typically 20-35% less than gross depending on your tax bracket."
-  }
+    answer:
+      'Gross salary is your total earnings before any deductions. Net salary (take-home pay) is what you actually receive after taxes, Social Security, Medicare, and other deductions. Net is typically 20-35% less than gross depending on your tax bracket.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -111,47 +117,42 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <p>
-      Enter your <strong>hourly rate</strong> - this is the amount you're paid
-      for each hour of work before any taxes or deductions. If you're not sure,
-      check your pay stub or employment contract.
+      Enter your <strong>hourly rate</strong> - this is the amount you're paid for each hour of work before
+      any taxes or deductions. If you're not sure, check your pay stub or employment contract.
     </p>
     <p>
-      Specify your <strong>hours per week</strong>. Full-time is typically 40 hours,
-      but enter your actual hours if you work part-time or extended hours regularly.
-      This doesn't include overtime - that's calculated separately.
+      Specify your <strong>hours per week</strong>. Full-time is typically 40 hours, but enter your
+      actual hours if you work part-time or extended hours regularly. This doesn't include overtime
+      - that's calculated separately.
     </p>
     <p>
-      Adjust <strong>weeks per year</strong> to account for unpaid time off.
-      If you get paid vacation, keep it at 52. If you take 2 weeks unpaid,
-      change it to 50 for more accurate annual projections.
+      Adjust <strong>weeks per year</strong> to account for unpaid time off. If you get paid vacation,
+      keep it at 52. If you take 2 weeks unpaid, change it to 50 for more accurate annual projections.
     </p>
     <p>
       If you regularly work overtime, enable the <strong>overtime toggle</strong>
-      and enter your typical overtime hours. Select the overtime rate multiplier
-      (1.5x is standard in the US).
+      and enter your typical overtime hours. Select the overtime rate multiplier (1.5x is standard in
+      the US).
     </p>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <p>
-      <strong>Annual salary</strong> shows your total yearly earnings. The gross
-      amount is before taxes, while net is your take-home pay after estimated taxes.
-      Actual taxes vary based on deductions and filing status.
+      <strong>Annual salary</strong> shows your total yearly earnings. The gross amount is before taxes,
+      while net is your take-home pay after estimated taxes. Actual taxes vary based on deductions and
+      filing status.
     </p>
     <p>
-      <strong>Monthly income</strong> is your annual salary divided by 12 months.
-      This is useful for budgeting monthly expenses like rent, utilities, and
-      subscriptions.
+      <strong>Monthly income</strong> is your annual salary divided by 12 months. This is useful for budgeting
+      monthly expenses like rent, utilities, and subscriptions.
     </p>
     <p>
-      <strong>Bi-weekly pay</strong> represents what you'd receive every two weeks
-      (26 pay periods per year). Many employers pay bi-weekly, making this figure
-      helpful for paycheck-to-paycheck planning.
+      <strong>Bi-weekly pay</strong> represents what you'd receive every two weeks (26 pay periods per
+      year). Many employers pay bi-weekly, making this figure helpful for paycheck-to-paycheck planning.
     </p>
     <p>
-      <strong>Weekly pay</strong> is your gross and net for each week of work.
-      Compare this to your actual paycheck to verify the calculator matches your
-      real earnings.
+      <strong>Weekly pay</strong> is your gross and net for each week of work. Compare this to your actual
+      paycheck to verify the calculator matches your real earnings.
     </p>
   </ContentSection>
 

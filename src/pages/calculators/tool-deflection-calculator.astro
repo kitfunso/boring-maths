@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ToolDeflectionCalculator } from '../../components/calculators/ToolDeflectionCalculator';
 
 const title = 'Tool Deflection Calculator | End Mill Deflection for CNC';
-const description = 'Free tool deflection calculator for CNC machining. Calculate end mill deflection, maximum depth of cut, and cutting force limits using cantilever beam formulas.';
-const keywords = 'tool deflection calculator, end mill deflection, CNC machining, cantilever beam, cutting force, stickout, deflection limit, carbide, HSS';
+const description =
+  'Free tool deflection calculator for CNC machining. Calculate end mill deflection, maximum depth of cut, and cutting force limits using cantilever beam formulas.';
+const keywords =
+  'tool deflection calculator, end mill deflection, CNC machining, cantilever beam, cutting force, stickout, deflection limit, carbide, HSS';
 const canonicalURL = '/calculators/tool-deflection-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "Why does tool deflection matter?",
-    answer: "Tool deflection causes dimensional inaccuracy, poor surface finish, chatter, and can lead to tool breakage. Even 0.001\" deflection affects finish quality. For precision work, keep deflection under 0.0005\" (0.0127mm). This calculator helps you stay within safe limits."
+    question: 'Why does tool deflection matter?',
+    answer:
+      'Tool deflection causes dimensional inaccuracy, poor surface finish, chatter, and can lead to tool breakage. Even 0.001" deflection affects finish quality. For precision work, keep deflection under 0.0005" (0.0127mm). This calculator helps you stay within safe limits.',
   },
   {
-    question: "How does stickout affect deflection?",
-    answer: "Deflection increases with the CUBE of stickout length. Doubling stickout increases deflection 8x. Minimize stickout to the shortest length possible for your operation. Use extended reach tools only when necessary, and reduce feeds/depths accordingly."
+    question: 'How does stickout affect deflection?',
+    answer:
+      'Deflection increases with the CUBE of stickout length. Doubling stickout increases deflection 8x. Minimize stickout to the shortest length possible for your operation. Use extended reach tools only when necessary, and reduce feeds/depths accordingly.',
   },
   {
-    question: "Which is stiffer - carbide or HSS?",
-    answer: "Carbide has a higher modulus of elasticity (roughly 85-90 Mpsi) compared to HSS (30 Mpsi), making carbide about 3x stiffer. Carbide deflects less under the same load, but is more brittle and can snap if deflection limits are exceeded."
+    question: 'Which is stiffer - carbide or HSS?',
+    answer:
+      'Carbide has a higher modulus of elasticity (roughly 85-90 Mpsi) compared to HSS (30 Mpsi), making carbide about 3x stiffer. Carbide deflects less under the same load, but is more brittle and can snap if deflection limits are exceeded.',
   },
   {
-    question: "How does tool diameter affect deflection?",
-    answer: "Deflection is inversely proportional to diameter to the 4th power. A 1/2\" tool has 16x less deflection than a 1/4\" tool under the same conditions. When possible, use the largest diameter that fits your geometry."
+    question: 'How does tool diameter affect deflection?',
+    answer:
+      'Deflection is inversely proportional to diameter to the 4th power. A 1/2" tool has 16x less deflection than a 1/4" tool under the same conditions. When possible, use the largest diameter that fits your geometry.',
   },
   {
-    question: "What is a safe deflection limit?",
-    answer: "General guidelines: Roughing - up to 0.002\" (0.05mm), Finishing - under 0.0005\" (0.013mm), Precision - under 0.0002\" (0.005mm). This calculator provides warnings when you exceed typical limits for your operation type."
+    question: 'What is a safe deflection limit?',
+    answer:
+      'General guidelines: Roughing - up to 0.002" (0.05mm), Finishing - under 0.0005" (0.013mm), Precision - under 0.0002" (0.005mm). This calculator provides warnings when you exceed typical limits for your operation type.',
   },
   {
-    question: "How do I reduce tool deflection?",
-    answer: "Reduce stickout (most effective), use larger diameter tool, switch to carbide from HSS, reduce depth/width of cut, lower feed rate, add more flutes (reduces chip load per tooth), or use a shrink-fit holder for better rigidity."
+    question: 'How do I reduce tool deflection?',
+    answer:
+      'Reduce stickout (most effective), use larger diameter tool, switch to carbide from HSS, reduce depth/width of cut, lower feed rate, add more flutes (reduces chip load per tooth), or use a shrink-fit holder for better rigidity.',
   },
 ];
 
@@ -100,9 +108,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Tool Deflection">
     <p>
-      Tool deflection is a critical factor in CNC machining quality. An end mill acts
-      as a cantilever beam - fixed at the holder and free at the cutting end. Cutting
-      forces push the tool away from the workpiece, causing dimensional errors.
+      Tool deflection is a critical factor in CNC machining quality. An end mill acts as a
+      cantilever beam - fixed at the holder and free at the cutting end. Cutting forces push the
+      tool away from the workpiece, causing dimensional errors.
     </p>
     <div class="grid md:grid-cols-3 gap-4 mt-4">
       <div class="bg-gray-900/40 rounded-lg p-4">

@@ -12,15 +12,14 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { IBUCalculator } from '../../components/calculators/IBUCalculator';
 
 const title = 'IBU Calculator | Hop Bitterness for Homebrew';
-const description = 'Free IBU calculator using Tinseth, Rager, and Garetz formulas. Calculate hop bitterness for beer with multiple hop additions. Includes 20+ hop varieties.';
-const keywords = 'ibu calculator, hop calculator, bitterness calculator, tinseth formula, homebrewing, beer brewing, hop utilization, alpha acid';
+const description =
+  'Free IBU calculator using Tinseth, Rager, and Garetz formulas. Calculate hop bitterness for beer with multiple hop additions. Includes 20+ hop varieties.';
+const keywords =
+  'ibu calculator, hop calculator, bitterness calculator, tinseth formula, homebrewing, beer brewing, hop utilization, alpha acid';
 const canonicalURL = '/calculators/ibu-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'IBU Calculator' },
-];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'IBU Calculator' }];
 
 const relatedCalculators = [
   {
@@ -34,28 +33,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What are IBUs and why do they matter?",
-    answer: "IBU (International Bitterness Units) measure hop bitterness in beer. One IBU equals 1 milligram of iso-alpha acid per liter. IBUs help you balance malt sweetness with hop bitterness - the BU:GU ratio shows this balance."
+    question: 'What are IBUs and why do they matter?',
+    answer:
+      'IBU (International Bitterness Units) measure hop bitterness in beer. One IBU equals 1 milligram of iso-alpha acid per liter. IBUs help you balance malt sweetness with hop bitterness - the BU:GU ratio shows this balance.',
   },
   {
-    question: "Which IBU formula should I use?",
-    answer: "Tinseth is most widely used and works well for most brewing scenarios. Rager can be more accurate for high-gravity beers. Garetz accounts for additional factors but is more complex. For homebrewing, Tinseth is recommended."
+    question: 'Which IBU formula should I use?',
+    answer:
+      'Tinseth is most widely used and works well for most brewing scenarios. Rager can be more accurate for high-gravity beers. Garetz accounts for additional factors but is more complex. For homebrewing, Tinseth is recommended.',
   },
   {
-    question: "Why do pellet hops have better utilization?",
-    answer: "Pellet hops are processed and compressed, rupturing the lupulin glands that contain alpha acids. This allows better extraction during the boil. Pellets typically give 10% better utilization than whole leaf hops."
+    question: 'Why do pellet hops have better utilization?',
+    answer:
+      'Pellet hops are processed and compressed, rupturing the lupulin glands that contain alpha acids. This allows better extraction during the boil. Pellets typically give 10% better utilization than whole leaf hops.',
   },
   {
-    question: "Does boil time affect bitterness?",
-    answer: "Yes! Longer boil times extract more alpha acids. 60-minute additions maximize bitterness. 15-30 minute additions add some bitterness plus flavor. Late additions (0-10 min) contribute mostly aroma with minimal bitterness."
+    question: 'Does boil time affect bitterness?',
+    answer:
+      'Yes! Longer boil times extract more alpha acids. 60-minute additions maximize bitterness. 15-30 minute additions add some bitterness plus flavor. Late additions (0-10 min) contribute mostly aroma with minimal bitterness.',
   },
   {
-    question: "Why does gravity affect hop utilization?",
-    answer: "Higher gravity worts (more sugar) reduce hop utilization because the alpha acids are less soluble in concentrated solutions. A 1.080 OG wort will get less bitterness from the same hops than a 1.040 OG wort."
+    question: 'Why does gravity affect hop utilization?',
+    answer:
+      'Higher gravity worts (more sugar) reduce hop utilization because the alpha acids are less soluble in concentrated solutions. A 1.080 OG wort will get less bitterness from the same hops than a 1.040 OG wort.',
   },
   {
     question: "What's a good BU:GU ratio for different styles?",
-    answer: "BU:GU = IBU ÷ ((OG - 1) × 1000). Under 0.5 = malty (Scottish Ale, Bock). 0.5-0.8 = balanced (Pale Ale, Porter). Over 0.8 = hoppy (IPA, DIPA). Use this to balance your recipe to style."
+    answer:
+      'BU:GU = IBU ÷ ((OG - 1) × 1000). Under 0.5 = malty (Scottish Ale, Bock). 0.5-0.8 = balanced (Pale Ale, Porter). Over 0.8 = hoppy (IPA, DIPA). Use this to balance your recipe to style.',
   },
 ];
 
@@ -93,9 +98,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding Hop Bitterness">
     <p>
-      Hops provide bitterness, flavor, and aroma to beer. Alpha acids in hops are
-      isomerized during the boil, creating the bitter compounds we taste. The longer
-      and more vigorous the boil, the more bitterness extracted.
+      Hops provide bitterness, flavor, and aroma to beer. Alpha acids in hops are isomerized during
+      the boil, creating the bitter compounds we taste. The longer and more vigorous the boil, the
+      more bitterness extracted.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Hop Addition Timing</h3>
     <ul class="list-disc list-inside space-y-1">

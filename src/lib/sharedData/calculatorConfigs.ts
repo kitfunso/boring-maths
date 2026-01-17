@@ -18,13 +18,7 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     id: 'freelance-day-rate',
     name: 'Freelance Day Rate Calculator',
     imports: ['annualIncome', 'currency'],
-    exports: [
-      'annualIncome',
-      'monthlyIncome',
-      'hourlyRate',
-      'dayRate',
-      'currency',
-    ],
+    exports: ['annualIncome', 'monthlyIncome', 'hourlyRate', 'dayRate', 'currency'],
   },
 
   'hourly-to-salary': {
@@ -47,12 +41,7 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     id: 'emergency-fund',
     name: 'Emergency Fund Calculator',
     imports: ['monthlyExpenses', 'monthlyIncome', 'currentSavings', 'currency'],
-    exports: [
-      'monthlyExpenses',
-      'emergencyFundTarget',
-      'currentSavings',
-      'currency',
-    ],
+    exports: ['monthlyExpenses', 'emergencyFundTarget', 'currentSavings', 'currency'],
   },
 
   'savings-goal': {
@@ -187,9 +176,7 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
 /**
  * Get configuration for a specific calculator by ID.
  */
-export function getCalculatorConfig(
-  id: string
-): CalculatorDataConfig | undefined {
+export function getCalculatorConfig(id: string): CalculatorDataConfig | undefined {
   return CALCULATOR_CONFIGS[id];
 }
 
@@ -197,9 +184,7 @@ export function getCalculatorConfig(
  * Get all calculators that could receive data from a given calculator.
  * Useful for showing "data will be available in..." messaging.
  */
-export function getConnectedCalculators(
-  sourceId: string
-): CalculatorDataConfig[] {
+export function getConnectedCalculators(sourceId: string): CalculatorDataConfig[] {
   const source = CALCULATOR_CONFIGS[sourceId];
   if (!source) return [];
 
@@ -209,9 +194,7 @@ export function getConnectedCalculators(
     if (config.id === sourceId) continue;
 
     // Check if any exports from source match imports in this calculator
-    const hasConnection = source.exports.some((exp) =>
-      config.imports.includes(exp)
-    );
+    const hasConnection = source.exports.some((exp) => config.imports.includes(exp));
 
     if (hasConnection) {
       connected.push(config);

@@ -8,7 +8,12 @@
 import { useState, useMemo } from 'preact/hooks';
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
-import { type Currency, getCurrencySymbol, getRegionFromCurrency, getInitialCurrency } from '../../../lib/regions';
+import {
+  type Currency,
+  getCurrencySymbol,
+  getRegionFromCurrency,
+  getInitialCurrency,
+} from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -27,7 +32,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function HourlyToSalaryCalculator() {
-  const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
@@ -63,12 +70,7 @@ export default function HourlyToSalaryCalculator() {
         <CalculatorHeader
           title="Convert Hourly Rate to Salary"
           subtitle="See your annual, monthly, and bi-weekly earnings"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -114,7 +116,9 @@ export default function HourlyToSalaryCalculator() {
                   value={inputs.weeksPerYear}
                   onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">52 weeks minus vacation time</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  52 weeks minus vacation time
+                </p>
               </div>
             </Grid>
 
@@ -146,7 +150,11 @@ export default function HourlyToSalaryCalculator() {
 
             {/* Overtime Fields */}
             {inputs.includeOvertime && (
-              <Grid responsive={{ sm: 1, md: 2 }} gap="lg" className="pl-8 border-l-4 border-white/10">
+              <Grid
+                responsive={{ sm: 1, md: 2 }}
+                gap="lg"
+                className="pl-8 border-l-4 border-white/10"
+              >
                 <div>
                   <Label htmlFor="overtimeHours">Overtime Hours/Week</Label>
                   <Input
@@ -218,8 +226,8 @@ export default function HourlyToSalaryCalculator() {
             {/* Overtime Info */}
             {inputs.includeOvertime && result.overtimeEarnings > 0 && (
               <Alert variant="info" title="Overtime earnings:">
-                {formatCurrency(result.overtimeEarnings, result.currency)} per year
-                {' '}({inputs.overtimeHours} hours/week at {inputs.overtimeMultiplier}x rate)
+                {formatCurrency(result.overtimeEarnings, result.currency)} per year (
+                {inputs.overtimeHours} hours/week at {inputs.overtimeMultiplier}x rate)
               </Alert>
             )}
 

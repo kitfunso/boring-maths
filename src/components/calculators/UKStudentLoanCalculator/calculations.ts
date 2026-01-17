@@ -74,7 +74,7 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
     }
 
     // Increase salary for next year
-    currentSalary *= (1 + salaryGrowth / 100);
+    currentSalary *= 1 + salaryGrowth / 100;
   }
 
   const willRepayInFull = balance <= 0;

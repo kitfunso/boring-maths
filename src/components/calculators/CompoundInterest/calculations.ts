@@ -18,12 +18,18 @@ function round(value: number, decimals: number = 2): number {
  */
 function getPeriodsPerYear(frequency: CompoundFrequency): number {
   switch (frequency) {
-    case 'daily': return 365;
-    case 'monthly': return 12;
-    case 'quarterly': return 4;
-    case 'semiannually': return 2;
-    case 'annually': return 1;
-    default: return 12;
+    case 'daily':
+      return 365;
+    case 'monthly':
+      return 12;
+    case 'quarterly':
+      return 4;
+    case 'semiannually':
+      return 2;
+    case 'annually':
+      return 1;
+    default:
+      return 12;
   }
 }
 
@@ -32,14 +38,8 @@ function getPeriodsPerYear(frequency: CompoundFrequency): number {
  * Properly handles different compound frequencies
  */
 export function calculateCompoundInterest(inputs: CompoundInterestInputs): CompoundInterestResult {
-  const {
-    currency,
-    principal,
-    monthlyContribution,
-    interestRate,
-    years,
-    compoundFrequency,
-  } = inputs;
+  const { currency, principal, monthlyContribution, interestRate, years, compoundFrequency } =
+    inputs;
 
   const n = getPeriodsPerYear(compoundFrequency); // Compounds per year
   const r = interestRate; // Annual rate as decimal

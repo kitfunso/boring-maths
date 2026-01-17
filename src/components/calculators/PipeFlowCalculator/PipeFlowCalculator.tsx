@@ -34,10 +34,7 @@ export default function PipeFlowCalculator() {
     return calculatePipeFlow(inputs);
   }, [inputs]);
 
-  const updateInput = <K extends keyof PipeFlowInputs>(
-    field: K,
-    value: PipeFlowInputs[K]
-  ) => {
+  const updateInput = <K extends keyof PipeFlowInputs>(field: K, value: PipeFlowInputs[K]) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -48,17 +45,17 @@ export default function PipeFlowCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        diameter: Math.round(prev.diameter / 25.4 * 100) / 100,  // mm to inches
-        velocity: Math.round(prev.velocity / 0.3048 * 100) / 100, // m/s to ft/s
-        flowRate: Math.round(prev.flowRate * 4.403 * 10) / 10,   // m³/h to GPM
+        diameter: Math.round((prev.diameter / 25.4) * 100) / 100, // mm to inches
+        velocity: Math.round((prev.velocity / 0.3048) * 100) / 100, // m/s to ft/s
+        flowRate: Math.round(prev.flowRate * 4.403 * 10) / 10, // m³/h to GPM
       }));
     } else {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
-        diameter: Math.round(prev.diameter * 25.4),              // inches to mm
+        diameter: Math.round(prev.diameter * 25.4), // inches to mm
         velocity: Math.round(prev.velocity * 0.3048 * 100) / 100, // ft/s to m/s
-        flowRate: Math.round(prev.flowRate / 4.403 * 100) / 100, // GPM to m³/h
+        flowRate: Math.round((prev.flowRate / 4.403) * 100) / 100, // GPM to m³/h
       }));
     }
   };
@@ -146,8 +143,7 @@ export default function PipeFlowCalculator() {
               {/* Pipe Diameter */}
               <div>
                 <Label htmlFor="diameter" required={inputs.solveFor !== 'diameter'}>
-                  Diameter ({diameterUnit})
-                  {inputs.solveFor === 'diameter' && ' [Calc]'}
+                  Diameter ({diameterUnit}){inputs.solveFor === 'diameter' && ' [Calc]'}
                 </Label>
                 <Input
                   id="diameter"
@@ -163,8 +159,7 @@ export default function PipeFlowCalculator() {
               {/* Flow Velocity */}
               <div>
                 <Label htmlFor="velocity" required={inputs.solveFor !== 'velocity'}>
-                  Velocity ({velocityUnit})
-                  {inputs.solveFor === 'velocity' && ' [Calc]'}
+                  Velocity ({velocityUnit}){inputs.solveFor === 'velocity' && ' [Calc]'}
                 </Label>
                 <Input
                   id="velocity"
@@ -180,8 +175,7 @@ export default function PipeFlowCalculator() {
               {/* Flow Rate */}
               <div>
                 <Label htmlFor="flowRate" required={inputs.solveFor !== 'flowRate'}>
-                  Flow Rate ({flowRateUnit})
-                  {inputs.solveFor === 'flowRate' && ' [Calc]'}
+                  Flow Rate ({flowRateUnit}){inputs.solveFor === 'flowRate' && ' [Calc]'}
                 </Label>
                 <Input
                   id="flowRate"
@@ -201,7 +195,9 @@ export default function PipeFlowCalculator() {
           {/* Results */}
           <div className="space-y-6">
             {/* Primary Result */}
-            <div className={`rounded-2xl p-8 text-center border-2 ${getStatusColor(result.velocityStatus)}`}>
+            <div
+              className={`rounded-2xl p-8 text-center border-2 ${getStatusColor(result.velocityStatus)}`}
+            >
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 {inputs.solveFor === 'diameter' && 'Required Pipe Diameter'}
                 {inputs.solveFor === 'velocity' && 'Flow Velocity'}
@@ -230,24 +226,38 @@ export default function PipeFlowCalculator() {
                 Flow Parameters
               </h3>
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'diameter' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'diameter' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">Diameter</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.diameter, 1)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.diameter, 1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{diameterUnit}</p>
                 </div>
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'velocity' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'velocity' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">Velocity</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.velocity)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.velocity)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{velocityUnit}</p>
                 </div>
-                <div className={`text-center p-3 rounded-lg ${inputs.solveFor === 'flowRate' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}>
+                <div
+                  className={`text-center p-3 rounded-lg ${inputs.solveFor === 'flowRate' ? 'bg-purple-950/50 border border-purple-500/30' : ''}`}
+                >
                   <p className="text-xs text-[var(--color-muted)] mb-1">Flow Rate</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.flowRate, 1)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.flowRate, 1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{flowRateUnit}</p>
                 </div>
                 <div className="text-center p-3 rounded-lg">
                   <p className="text-xs text-[var(--color-muted)] mb-1">Area</p>
-                  <p className="font-bold text-[var(--color-cream)] tabular-nums">{formatNumber(result.crossSectionalArea, 1)}</p>
+                  <p className="font-bold text-[var(--color-cream)] tabular-nums">
+                    {formatNumber(result.crossSectionalArea, 1)}
+                  </p>
                   <p className="text-xs text-[var(--color-muted)]">{areaUnit}</p>
                 </div>
               </Grid>
@@ -256,7 +266,12 @@ export default function PipeFlowCalculator() {
             {/* Velocity Recommendation */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
-                Recommended Velocity for {inputs.fluidCategory === 'liquid' ? 'Liquids' : inputs.fluidCategory === 'gas' ? 'Gases' : 'Steam'}
+                Recommended Velocity for{' '}
+                {inputs.fluidCategory === 'liquid'
+                  ? 'Liquids'
+                  : inputs.fluidCategory === 'gas'
+                    ? 'Gases'
+                    : 'Steam'}
               </h3>
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[var(--color-muted)]">Range:</span>

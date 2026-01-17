@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { EIDosingCalculator } from '../../components/calculators/EIDosingCalculator';
 
 const title = 'EI Dosing Calculator | Aquarium Fertilizer Calculator';
-const description = 'Free EI dosing calculator for planted aquariums. Calculate dry fertilizer amounts for Estimative Index method. Includes KNO3, KH2PO4, K2SO4, and trace element dosing.';
-const keywords = 'ei dosing calculator, estimative index, planted aquarium, aquarium fertilizer, kno3 dosing, planted tank, dry fertilizer, aquarium nutrients';
+const description =
+  'Free EI dosing calculator for planted aquariums. Calculate dry fertilizer amounts for Estimative Index method. Includes KNO3, KH2PO4, K2SO4, and trace element dosing.';
+const keywords =
+  'ei dosing calculator, estimative index, planted aquarium, aquarium fertilizer, kno3 dosing, planted tank, dry fertilizer, aquarium nutrients';
 const canonicalURL = '/calculators/ei-dosing-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -41,28 +43,34 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: "What is the Estimative Index (EI) method?",
-    answer: "EI is a fertilization method that provides excess nutrients to ensure plants never run out. You dose more than plants need during the week, then perform a large water change (50%) to reset nutrient levels. This eliminates deficiencies without precise testing."
+    question: 'What is the Estimative Index (EI) method?',
+    answer:
+      'EI is a fertilization method that provides excess nutrients to ensure plants never run out. You dose more than plants need during the week, then perform a large water change (50%) to reset nutrient levels. This eliminates deficiencies without precise testing.',
   },
   {
-    question: "Do I need CO2 injection for EI dosing?",
-    answer: "Standard EI is designed for high-light, CO2-injected tanks where plants grow fast and need lots of nutrients. For low-light or non-CO2 tanks, use 'EI Low Light' which doses at half the standard rate. Too many nutrients without enough light/CO2 promotes algae."
+    question: 'Do I need CO2 injection for EI dosing?',
+    answer:
+      "Standard EI is designed for high-light, CO2-injected tanks where plants grow fast and need lots of nutrients. For low-light or non-CO2 tanks, use 'EI Low Light' which doses at half the standard rate. Too many nutrients without enough light/CO2 promotes algae.",
   },
   {
-    question: "Why dose macros and micros on alternating days?",
-    answer: "Some believe phosphate can precipitate iron if dosed together, though this is debated. Alternating days is traditional EI practice. Many successful aquarists dose everything together without issues. The key is consistency and regular water changes."
+    question: 'Why dose macros and micros on alternating days?',
+    answer:
+      'Some believe phosphate can precipitate iron if dosed together, though this is debated. Alternating days is traditional EI practice. Many successful aquarists dose everything together without issues. The key is consistency and regular water changes.',
   },
   {
     question: "What's the difference between dry salts and liquid fertilizers?",
-    answer: "Dry salts (KNO3, KH2PO4, etc.) are much more economical - often 10-20x cheaper per dose than commercial liquids. They require a scale and mixing but last much longer. This calculator provides grams needed for dry salts."
+    answer:
+      'Dry salts (KNO3, KH2PO4, etc.) are much more economical - often 10-20x cheaper per dose than commercial liquids. They require a scale and mixing but last much longer. This calculator provides grams needed for dry salts.',
   },
   {
-    question: "Why is my tank still getting algae with EI?",
-    answer: "Algae in EI tanks usually indicates a CO2 or light issue, not nutrients. Check CO2 levels (aim for 30ppm), ensure consistent CO2 during photoperiod, verify light isn't too intense, and maintain the 50% weekly water change. Also check for ammonia spikes."
+    question: 'Why is my tank still getting algae with EI?',
+    answer:
+      "Algae in EI tanks usually indicates a CO2 or light issue, not nutrients. Check CO2 levels (aim for 30ppm), ensure consistent CO2 during photoperiod, verify light isn't too intense, and maintain the 50% weekly water change. Also check for ammonia spikes.",
   },
   {
-    question: "Can I use EI in a shrimp tank?",
-    answer: "Yes, but some shrimp are sensitive to copper in trace mixes. Use a shrimp-safe trace mix or dose at lower levels. The macros (NPK) are fine for shrimp. Many breeders successfully run planted shrimp tanks with modified EI dosing."
+    question: 'Can I use EI in a shrimp tank?',
+    answer:
+      'Yes, but some shrimp are sensitive to copper in trace mixes. Use a shrimp-safe trace mix or dose at lower levels. The macros (NPK) are fine for shrimp. Many breeders successfully run planted shrimp tanks with modified EI dosing.',
   },
 ];
 
@@ -100,9 +108,9 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Understanding the EI Method">
     <p>
-      The Estimative Index, developed by Tom Barr, takes a different approach
-      to planted tank fertilization: instead of testing and targeting specific
-      levels, you ensure plants always have more nutrients than they need.
+      The Estimative Index, developed by Tom Barr, takes a different approach to planted tank
+      fertilization: instead of testing and targeting specific levels, you ensure plants always have
+      more nutrients than they need.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">The EI Philosophy</h3>
     <ul class="list-disc list-inside space-y-1">
@@ -159,8 +167,8 @@ const schemaBreadcrumbs = [
       </div>
     </div>
     <p class="mt-4 text-sm text-[var(--color-subtle)]">
-      Dry salts can be purchased from aquarium specialty vendors or hydroponics suppliers.
-      A few dollars worth of dry ferts can last a year for most tanks.
+      Dry salts can be purchased from aquarium specialty vendors or hydroponics suppliers. A few
+      dollars worth of dry ferts can last a year for most tanks.
     </p>
   </ContentSection>
 

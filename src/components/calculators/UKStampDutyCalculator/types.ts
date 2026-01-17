@@ -48,5 +48,5 @@ export const LOCATION_LABELS: Record<PropertyLocation, string> = {
 export const BUYER_TYPE_LABELS: Record<BuyerType, string> = {
   'first-time': 'First-time Buyer',
   'home-mover': 'Moving Home',
-  'additional': 'Additional Property',
+  additional: 'Additional Property',
 };

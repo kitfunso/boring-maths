@@ -39,9 +39,8 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
   const totalAnnualTaxSavings = federalTaxSavings + stateTaxSavings + ficaTaxSavings;
 
   // Effective discount on contributions
-  const effectiveDiscount = taxableContribution > 0
-    ? (totalAnnualTaxSavings / taxableContribution) * 100
-    : 0;
+  const effectiveDiscount =
+    taxableContribution > 0 ? (totalAnnualTaxSavings / taxableContribution) * 100 : 0;
 
   // Project balance over time
   const annualReturn = expectedReturn / 100;

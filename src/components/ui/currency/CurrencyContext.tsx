@@ -38,9 +38,11 @@ export function CurrencyProvider({ children }: { children: ComponentChildren }) 
     localStorage.setItem(STORAGE_KEY, newCurrency);
 
     // Dispatch custom event so other components can react
-    window.dispatchEvent(new CustomEvent('currencyChange', {
-      detail: { currency: newCurrency }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('currencyChange', {
+        detail: { currency: newCurrency },
+      })
+    );
   };
 
   const config = CURRENCIES[currency];
@@ -57,11 +59,7 @@ export function CurrencyProvider({ children }: { children: ComponentChildren }) 
     return null;
   }
 
-  return (
-    <CurrencyContext.Provider value={value}>
-      {children}
-    </CurrencyContext.Provider>
-  );
+  return <CurrencyContext.Provider value={value}>{children}</CurrencyContext.Provider>;
 }
 
 /**

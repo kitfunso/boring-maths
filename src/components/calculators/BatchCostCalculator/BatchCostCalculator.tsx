@@ -262,9 +262,7 @@ export function BatchCostCalculator() {
               label="Packaging Cost per Unit"
               type="number"
               value={inputs.packagingCostPerUnit}
-              onChange={(v) =>
-                setInputs({ ...inputs, packagingCostPerUnit: parseFloat(v) || 0 })
-              }
+              onChange={(v) => setInputs({ ...inputs, packagingCostPerUnit: parseFloat(v) || 0 })}
               min={0}
               step={0.1}
               suffix="$"
@@ -323,7 +321,9 @@ export function BatchCostCalculator() {
             <div className="text-5xl font-bold text-green-400">
               {formatCurrency(results.suggestedRetailPrice)}
             </div>
-            <div className="mt-2 text-green-300">per unit at {inputs.targetProfitMargin}% margin</div>
+            <div className="mt-2 text-green-300">
+              per unit at {inputs.targetProfitMargin}% margin
+            </div>
           </div>
         </div>
 

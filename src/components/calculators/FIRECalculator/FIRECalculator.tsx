@@ -17,11 +17,7 @@ import {
   RISK_PROFILE_RETURNS,
   FIRE_TYPE_INFO,
 } from './calculations';
-import {
-  getDefaultInputs,
-  type FIRECalculatorInputs,
-  type RiskProfile,
-} from './types';
+import { getDefaultInputs, type FIRECalculatorInputs, type RiskProfile } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -122,12 +118,7 @@ export default function FIRECalculator() {
         <CalculatorHeader
           title="FIRE Calculator"
           subtitle="Financial Independence, Retire Early - Calculate your path to freedom"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -152,9 +143,7 @@ export default function FIRECalculator() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="currentSavings">
-                    Current Savings ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="currentSavings">Current Savings ({currencySymbol})</Label>
                   <Input
                     id="currentSavings"
                     type="number"
@@ -167,9 +156,7 @@ export default function FIRECalculator() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="annualIncome">
-                    Annual Income ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="annualIncome">Annual Income ({currencySymbol})</Label>
                   <Input
                     id="annualIncome"
                     type="number"
@@ -182,9 +169,7 @@ export default function FIRECalculator() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="annualExpenses">
-                    Annual Expenses ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="annualExpenses">Annual Expenses ({currencySymbol})</Label>
                   <Input
                     id="annualExpenses"
                     type="number"
@@ -206,9 +191,7 @@ export default function FIRECalculator() {
               </h3>
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                 <div>
-                  <Label htmlFor="monthlySavings">
-                    Monthly Investment ({currencySymbol})
-                  </Label>
+                  <Label htmlFor="monthlySavings">Monthly Investment ({currencySymbol})</Label>
                   <Input
                     id="monthlySavings"
                     type="number"
@@ -293,7 +276,12 @@ export default function FIRECalculator() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </summary>
               <Grid responsive={{ sm: 1, md: 3 }} gap="md" className="mt-3">
@@ -355,12 +343,11 @@ export default function FIRECalculator() {
               footer={
                 <>
                   Time to FIRE:{' '}
-                  <span className="font-semibold">
-                    {formatYears(result.yearsToFIRE)}
-                  </span>
+                  <span className="font-semibold">{formatYears(result.yearsToFIRE)}</span>
                   {result.yearsToFIRE !== Infinity && (
                     <span className="text-[var(--color-muted)]">
-                      {' '}(age {Math.round(result.ageAtFIRE)})
+                      {' '}
+                      (age {Math.round(result.ageAtFIRE)})
                     </span>
                   )}
                 </>
@@ -394,7 +381,11 @@ export default function FIRECalculator() {
               <MetricCard
                 label="Years to FIRE"
                 value={result.yearsToFIRE === Infinity ? '∞' : result.yearsToFIRE.toFixed(1)}
-                sublabel={result.yearsToFIRE !== Infinity ? `Age ${Math.round(result.ageAtFIRE)}` : 'Increase savings'}
+                sublabel={
+                  result.yearsToFIRE !== Infinity
+                    ? `Age ${Math.round(result.ageAtFIRE)}`
+                    : 'Increase savings'
+                }
               />
               <MetricCard
                 label="Savings Rate"
@@ -460,8 +451,8 @@ export default function FIRECalculator() {
                 <p className="text-[var(--color-cream)]">
                   At age <span className="font-bold text-amber-300">{result.coastFIREAge}</span>,
                   you can stop saving entirely. Your investments (
-                  {formatCurrency(result.coastFIREAmount, result.currency)}) will grow to your
-                  FIRE number by age 65 through compound interest alone.
+                  {formatCurrency(result.coastFIREAmount, result.currency)}) will grow to your FIRE
+                  number by age 65 through compound interest alone.
                 </p>
               </div>
             )}
@@ -481,7 +472,8 @@ export default function FIRECalculator() {
                   </div>
                   {result.savingsRate.monthlyShortfall > 0 && (
                     <div className="text-sm text-amber-400 mt-1">
-                      +{formatCurrency(result.savingsRate.monthlyShortfall, result.currency)}/month needed
+                      +{formatCurrency(result.savingsRate.monthlyShortfall, result.currency)}/month
+                      needed
                     </div>
                   )}
                 </div>
@@ -550,7 +542,10 @@ export default function FIRECalculator() {
             {/* Tips */}
             <Alert variant="tip" title="FIRE Tips">
               <ul className="list-disc list-inside space-y-1 text-sm">
-                <li>The 4% rule is based on the Trinity Study - historically safe for 30-year retirements</li>
+                <li>
+                  The 4% rule is based on the Trinity Study - historically safe for 30-year
+                  retirements
+                </li>
                 <li>Consider a 3.5% withdrawal rate for early retirement (40+ years)</li>
                 <li>Geographic arbitrage can dramatically lower your FIRE number</li>
                 <li>Include healthcare costs in your expense calculations</li>

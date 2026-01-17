@@ -12,8 +12,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { USCapitalGainsTaxCalculator } from '../../components/calculators/USCapitalGainsTaxCalculator';
 
 const title = 'Capital Gains Tax Calculator 2025 | Stocks, Crypto & Investments';
-const description = 'Free capital gains tax calculator for 2025. Calculate tax on stocks, cryptocurrency, real estate, and other investments. Includes long-term vs short-term rates and NIIT.';
-const keywords = 'capital gains tax calculator, stock tax calculator, crypto tax calculator, long term capital gains, short term capital gains, NIIT calculator, investment tax';
+const description =
+  'Free capital gains tax calculator for 2025. Calculate tax on stocks, cryptocurrency, real estate, and other investments. Includes long-term vs short-term rates and NIIT.';
+const keywords =
+  'capital gains tax calculator, stock tax calculator, crypto tax calculator, long term capital gains, short term capital gains, NIIT calculator, investment tax';
 const canonicalURL = '/calculators/us-capital-gains-tax-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -42,35 +44,43 @@ const relatedCalculators = [
 const faqs = [
   {
     question: "What's the difference between short-term and long-term capital gains?",
-    answer: "Short-term gains are from assets held 12 months or less and are taxed as ordinary income (10-37%). Long-term gains are from assets held more than 12 months and qualify for preferential rates (0%, 15%, or 20%). The holding period starts the day after purchase and includes the day of sale."
+    answer:
+      'Short-term gains are from assets held 12 months or less and are taxed as ordinary income (10-37%). Long-term gains are from assets held more than 12 months and qualify for preferential rates (0%, 15%, or 20%). The holding period starts the day after purchase and includes the day of sale.',
   },
   {
-    question: "What are the 2025 long-term capital gains tax rates?",
-    answer: "For 2025, long-term capital gains rates are: 0% for single filers up to $48,350 taxable income, 15% from $48,351-$533,400, and 20% above $533,400. For married filing jointly: 0% up to $96,700, 15% up to $600,050, and 20% above. These rates are significantly lower than ordinary income rates."
+    question: 'What are the 2025 long-term capital gains tax rates?',
+    answer:
+      'For 2025, long-term capital gains rates are: 0% for single filers up to $48,350 taxable income, 15% from $48,351-$533,400, and 20% above $533,400. For married filing jointly: 0% up to $96,700, 15% up to $600,050, and 20% above. These rates are significantly lower than ordinary income rates.',
   },
   {
-    question: "What is the Net Investment Income Tax (NIIT)?",
-    answer: "NIIT is an additional 3.8% tax on investment income (including capital gains) for high earners. It applies when your modified adjusted gross income exceeds $200,000 (single) or $250,000 (married filing jointly). The tax is on the lesser of your net investment income or the amount over the threshold."
+    question: 'What is the Net Investment Income Tax (NIIT)?',
+    answer:
+      'NIIT is an additional 3.8% tax on investment income (including capital gains) for high earners. It applies when your modified adjusted gross income exceeds $200,000 (single) or $250,000 (married filing jointly). The tax is on the lesser of your net investment income or the amount over the threshold.',
   },
   {
-    question: "How is cryptocurrency taxed?",
-    answer: "Cryptocurrency is taxed the same as stocks and other capital assets. Selling, trading, or spending crypto triggers a taxable event. Short-term gains (held ≤12 months) are taxed at ordinary income rates. Long-term gains (held >12 months) qualify for preferential rates. Receiving crypto as income is taxed as ordinary income."
+    question: 'How is cryptocurrency taxed?',
+    answer:
+      'Cryptocurrency is taxed the same as stocks and other capital assets. Selling, trading, or spending crypto triggers a taxable event. Short-term gains (held ≤12 months) are taxed at ordinary income rates. Long-term gains (held >12 months) qualify for preferential rates. Receiving crypto as income is taxed as ordinary income.',
   },
   {
-    question: "Can I offset gains with losses (tax-loss harvesting)?",
-    answer: "Yes, capital losses can offset capital gains dollar-for-dollar. If losses exceed gains, you can deduct up to $3,000 ($1,500 if married filing separately) from ordinary income. Remaining losses carry forward indefinitely. Note: the wash sale rule prevents claiming a loss if you buy the same or substantially identical security within 30 days."
+    question: 'Can I offset gains with losses (tax-loss harvesting)?',
+    answer:
+      'Yes, capital losses can offset capital gains dollar-for-dollar. If losses exceed gains, you can deduct up to $3,000 ($1,500 if married filing separately) from ordinary income. Remaining losses carry forward indefinitely. Note: the wash sale rule prevents claiming a loss if you buy the same or substantially identical security within 30 days.',
   },
   {
-    question: "How do I calculate cost basis for stocks?",
-    answer: "Cost basis is typically the purchase price plus any fees or commissions. For stocks bought at different times, you can use specific identification (choose which shares to sell), FIFO (first in, first out), or average cost (for mutual funds). Your broker usually tracks this and reports it on Form 1099-B."
+    question: 'How do I calculate cost basis for stocks?',
+    answer:
+      'Cost basis is typically the purchase price plus any fees or commissions. For stocks bought at different times, you can use specific identification (choose which shares to sell), FIFO (first in, first out), or average cost (for mutual funds). Your broker usually tracks this and reports it on Form 1099-B.',
   },
   {
-    question: "Are there any ways to avoid capital gains tax?",
-    answer: "Legal strategies include: holding assets over 12 months for lower long-term rates, tax-loss harvesting, investing through tax-advantaged accounts (401k, IRA, HSA), using the $250k/$500k home sale exclusion, donating appreciated assets to charity, and timing sales in lower income years. Each strategy has specific rules and limitations."
+    question: 'Are there any ways to avoid capital gains tax?',
+    answer:
+      'Legal strategies include: holding assets over 12 months for lower long-term rates, tax-loss harvesting, investing through tax-advantaged accounts (401k, IRA, HSA), using the $250k/$500k home sale exclusion, donating appreciated assets to charity, and timing sales in lower income years. Each strategy has specific rules and limitations.',
   },
   {
-    question: "How are real estate gains taxed?",
-    answer: "Real estate gains are taxed as capital gains, with special rules for primary residences. You can exclude up to $250,000 in gains ($500,000 for married couples) if you owned and lived in the home for at least 2 of the last 5 years. Investment property gains are fully taxable, though 1031 exchanges can defer taxes."
+    question: 'How are real estate gains taxed?',
+    answer:
+      'Real estate gains are taxed as capital gains, with special rules for primary residences. You can exclude up to $250,000 in gains ($500,000 for married couples) if you owned and lived in the home for at least 2 of the last 5 years. Investment property gains are fully taxable, though 1031 exchanges can defer taxes.',
   },
 ];
 
@@ -108,25 +118,40 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
-      <li><strong class="text-[var(--color-cream)]">Enter your purchase price</strong> – Original cost basis including any fees paid.</li>
-      <li><strong class="text-[var(--color-cream)]">Enter your sale price</strong> – Amount received from the sale after fees.</li>
-      <li><strong class="text-[var(--color-cream)]">Specify holding period</strong> – Number of months you held the asset (more than 12 = long-term).</li>
-      <li><strong class="text-[var(--color-cream)]">Add your other income</strong> – This determines your tax bracket and NIIT eligibility.</li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your purchase price</strong> – Original cost basis
+        including any fees paid.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your sale price</strong> – Amount received from
+        the sale after fees.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Specify holding period</strong> – Number of months you
+        held the asset (more than 12 = long-term).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add your other income</strong> – This determines your
+        tax bracket and NIIT eligibility.
+      </li>
     </ol>
   </ContentSection>
 
   <ContentSection title="Understanding Your Results">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        Your <strong class="text-emerald-400">capital gain</strong> is the difference between sale price and purchase price.
-        Gains are taxed differently based on how long you held the asset.
+        Your <strong class="text-emerald-400">capital gain</strong> is the difference between sale price
+        and purchase price. Gains are taxed differently based on how long you held the asset.
       </p>
       <p>
-        <strong class="text-amber-400">Short-term gains</strong> (≤12 months) are taxed at your ordinary income rate, which can be as high as 37%.
-        <strong class="text-emerald-400">Long-term gains</strong> (>12 months) qualify for lower rates of 0%, 15%, or 20%.
+        <strong class="text-amber-400">Short-term gains</strong> (≤12 months) are taxed at your ordinary
+        income rate, which can be as high as 37%.
+        <strong class="text-emerald-400">Long-term gains</strong> (>12 months) qualify for lower rates
+        of 0%, 15%, or 20%.
       </p>
       <p>
-        If you have a <strong class="text-blue-400">capital loss</strong>, you can use it to offset other gains or deduct up to $3,000 from ordinary income per year.
+        If you have a <strong class="text-blue-400">capital loss</strong>, you can use it to offset
+        other gains or deduct up to $3,000 from ordinary income per year.
       </p>
     </div>
   </ContentSection>

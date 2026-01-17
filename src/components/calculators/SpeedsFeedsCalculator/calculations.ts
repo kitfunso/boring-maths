@@ -6,15 +6,24 @@ import type { SpeedsFeedsInputs, SpeedsFeedsResult } from './types';
 import { MATERIALS, OPERATION_TYPES } from './types';
 
 export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResult {
-  const { material, toolDiameter, toolDiameterUnit, numberOfFlutes, operationType, depthOfCut, depthOfCutUnit } = inputs;
+  const {
+    material,
+    toolDiameter,
+    toolDiameterUnit,
+    numberOfFlutes,
+    operationType,
+    depthOfCut,
+    depthOfCutUnit,
+  } = inputs;
 
   // Convert to inches if needed
   const diameterInches = toolDiameterUnit === 'mm' ? toolDiameter / 25.4 : toolDiameter;
   const docInches = depthOfCutUnit === 'mm' ? depthOfCut / 25.4 : depthOfCut;
 
   // Get material properties
-  const materialData = MATERIALS.find(m => m.value === material) || MATERIALS[0];
-  const operationData = OPERATION_TYPES.find(o => o.value === operationType) || OPERATION_TYPES[0];
+  const materialData = MATERIALS.find((m) => m.value === material) || MATERIALS[0];
+  const operationData =
+    OPERATION_TYPES.find((o) => o.value === operationType) || OPERATION_TYPES[0];
 
   // Apply multipliers
   const effectiveSFM = materialData.sfm * operationData.sfmMultiplier;
@@ -76,7 +85,12 @@ export function getRPMWarning(rpm: number): string | null {
 }
 
 export function getFeedRateWarning(feedRate: number, material: string): string | null {
-  if (feedRate > 200 && !material.includes('aluminum') && !material.includes('plastic') && !material.includes('wood')) {
+  if (
+    feedRate > 200 &&
+    !material.includes('aluminum') &&
+    !material.includes('plastic') &&
+    !material.includes('wood')
+  ) {
     return 'High feed rate for this material - verify your setup';
   }
   if (feedRate < 5) {

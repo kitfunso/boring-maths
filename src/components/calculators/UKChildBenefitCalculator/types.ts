@@ -30,12 +30,12 @@ export function getDefaultInputs(): UKChildBenefitInputs {
 
 // 2024/25 Child Benefit rates
 export const CHILD_BENEFIT_RATES = {
-  firstChild: 25.60,  // per week
-  additionalChild: 16.95,  // per week
+  firstChild: 25.6, // per week
+  additionalChild: 16.95, // per week
 };
 
 // HICBC thresholds (changed in 2024)
 export const HICBC_THRESHOLDS = {
-  start: 60000,  // HICBC starts
-  end: 80000,    // 100% clawback
+  start: 60000, // HICBC starts
+  end: 80000, // 100% clawback
 };

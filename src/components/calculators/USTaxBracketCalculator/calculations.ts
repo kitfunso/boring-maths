@@ -4,16 +4,20 @@
  * Calculates federal income tax using 2025 tax brackets.
  */
 
-import type { USTaxBracketInputs, USTaxBracketResult, TaxBracketBreakdown, FilingStatus } from './types';
+import type {
+  USTaxBracketInputs,
+  USTaxBracketResult,
+  TaxBracketBreakdown,
+  FilingStatus,
+} from './types';
 import { TAX_BRACKETS_2025, STANDARD_DEDUCTIONS_2025 } from './types';
 
 export function calculateUSTaxBracket(inputs: USTaxBracketInputs): USTaxBracketResult {
   const { filingStatus, grossIncome, deductionType, itemizedDeductions } = inputs;
 
   const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
-  const deductionUsed = deductionType === 'standard'
-    ? standardDeduction
-    : Math.max(itemizedDeductions, 0);
+  const deductionUsed =
+    deductionType === 'standard' ? standardDeduction : Math.max(itemizedDeductions, 0);
 
   const taxableIncome = Math.max(0, grossIncome - deductionUsed);
   const brackets = TAX_BRACKETS_2025[filingStatus];
@@ -48,9 +52,7 @@ export function calculateUSTaxBracket(inputs: USTaxBracketInputs): USTaxBracketR
     remainingIncome -= incomeInBracket;
   }
 
-  const effectiveRate = taxableIncome > 0
-    ? (federalTax / grossIncome) * 100
-    : 0;
+  const effectiveRate = taxableIncome > 0 ? (federalTax / grossIncome) * 100 : 0;
 
   const afterTaxIncome = grossIncome - federalTax;
 

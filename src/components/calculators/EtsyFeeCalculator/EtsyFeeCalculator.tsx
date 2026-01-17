@@ -180,9 +180,7 @@ export default function EtsyFeeCalculator() {
         <CalculatorHeader
           title="Calculate Your Marketplace Fees"
           subtitle="Compare Etsy vs eBay fees side-by-side"
-          actions={
-            <CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -246,7 +244,9 @@ export default function EtsyFeeCalculator() {
                   value={inputs.shippingCost}
                   onChange={(e) => updateInput('shippingCost', Number(e.target.value))}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">Your actual shipping expense</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  Your actual shipping expense
+                </p>
               </div>
 
               <div>
@@ -346,9 +346,7 @@ export default function EtsyFeeCalculator() {
                   netProfit={result.etsy.netProfit}
                   profitMargin={result.etsy.profitMargin}
                   currency={result.currency}
-                  isWinner={
-                    inputs.platform === 'both' && result.lowerFeePlatform === 'Etsy'
-                  }
+                  isWinner={inputs.platform === 'both' && result.lowerFeePlatform === 'Etsy'}
                 />
               )}
               {showEbay && (
@@ -359,9 +357,7 @@ export default function EtsyFeeCalculator() {
                   netProfit={result.ebay.netProfit}
                   profitMargin={result.ebay.profitMargin}
                   currency={result.currency}
-                  isWinner={
-                    inputs.platform === 'both' && result.lowerFeePlatform === 'eBay'
-                  }
+                  isWinner={inputs.platform === 'both' && result.lowerFeePlatform === 'eBay'}
                 />
               )}
             </Grid>
@@ -449,7 +445,9 @@ export default function EtsyFeeCalculator() {
               />
               <MetricCard
                 label={showEtsy && showEbay ? 'Etsy Fee Rate' : 'Effective Fee Rate'}
-                value={formatPercentage(showEtsy ? result.etsy.effectiveFeeRate : result.ebay.effectiveFeeRate)}
+                value={formatPercentage(
+                  showEtsy ? result.etsy.effectiveFeeRate : result.ebay.effectiveFeeRate
+                )}
                 sublabel="of total sale"
               />
               {showEtsy && showEbay && (
@@ -498,7 +496,8 @@ export default function EtsyFeeCalculator() {
                 <>
                   For items under ~$15, eBay typically has lower fees due to Etsy's fixed listing
                   and payment processing fees. For higher-priced items, Etsy often wins with its
-                  lower percentage-based fees. Consider your target market and where your buyers shop.
+                  lower percentage-based fees. Consider your target market and where your buyers
+                  shop.
                 </>
               ) : inputs.platform === 'etsy' ? (
                 <>
@@ -509,8 +508,8 @@ export default function EtsyFeeCalculator() {
               ) : (
                 <>
                   Maximize eBay profits by choosing the right category and offering combined
-                  shipping on multiple items. Consider eBay Store subscriptions if you sell
-                  high volume for reduced final value fees.
+                  shipping on multiple items. Consider eBay Store subscriptions if you sell high
+                  volume for reduced final value fees.
                 </>
               )}
             </Alert>

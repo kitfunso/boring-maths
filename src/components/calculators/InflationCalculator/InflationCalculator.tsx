@@ -3,7 +3,12 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { calculateInflation, formatCurrency, formatPercent, getDecadeAverages } from './calculations';
+import {
+  calculateInflation,
+  formatCurrency,
+  formatPercent,
+  getDecadeAverages,
+} from './calculations';
 import { getDefaultInputs, MIN_YEAR, MAX_YEAR, type InflationInputs } from './types';
 import {
   ThemeProvider,
@@ -120,11 +125,17 @@ export default function InflationCalculator() {
           {/* Results */}
           <div className="space-y-6">
             <ResultCard
-              label={isForward ? `${formatCurrency(inputs.amount)} in ${inputs.startYear} equals` : `${formatCurrency(inputs.amount)} in ${inputs.endYear} was worth`}
+              label={
+                isForward
+                  ? `${formatCurrency(inputs.amount)} in ${inputs.startYear} equals`
+                  : `${formatCurrency(inputs.amount)} in ${inputs.endYear} was worth`
+              }
               value={formatCurrency(result.adjustedAmount)}
               subtitle={`in ${isForward ? inputs.endYear : inputs.startYear} dollars`}
               footer={
-                <>{result.yearsElapsed} years, {formatPercent(result.totalInflation)} total change</>
+                <>
+                  {result.yearsElapsed} years, {formatPercent(result.totalInflation)} total change
+                </>
               }
             />
 
@@ -162,18 +173,24 @@ export default function InflationCalculator() {
                 </h3>
                 <div className="mb-2">
                   <div className="flex justify-between text-sm mb-1">
-                    <span>What ${inputs.amount} buys today vs {inputs.startYear}</span>
+                    <span>
+                      What ${inputs.amount} buys today vs {inputs.startYear}
+                    </span>
                     <span className="text-red-400">-{result.purchasingPowerLost.toFixed(1)}%</span>
                   </div>
                   <div className="w-full bg-green-900/50 rounded-full h-6 overflow-hidden">
                     <div
                       className="h-full bg-red-500/70 rounded-r-full transition-all"
-                      style={{ width: `${Math.min(result.purchasingPowerLost, 100)}%`, marginLeft: 'auto' }}
+                      style={{
+                        width: `${Math.min(result.purchasingPowerLost, 100)}%`,
+                        marginLeft: 'auto',
+                      }}
                     />
                   </div>
                 </div>
                 <p className="text-sm text-[var(--color-muted)] mt-3">
-                  You would need {formatCurrency(result.adjustedAmount)} today to have the same purchasing power as {formatCurrency(inputs.amount)} in {inputs.startYear}.
+                  You would need {formatCurrency(result.adjustedAmount)} today to have the same
+                  purchasing power as {formatCurrency(inputs.amount)} in {inputs.startYear}.
                 </p>
               </div>
             )}
@@ -188,12 +205,22 @@ export default function InflationCalculator() {
                   <div
                     key={d.decade}
                     className={`text-center p-3 rounded-lg ${
-                      d.rate > 5 ? 'bg-red-900/30' : d.rate > 3 ? 'bg-amber-900/30' : 'bg-green-900/30'
+                      d.rate > 5
+                        ? 'bg-red-900/30'
+                        : d.rate > 3
+                          ? 'bg-amber-900/30'
+                          : 'bg-green-900/30'
                     }`}
                   >
-                    <p className={`text-lg font-bold ${
-                      d.rate > 5 ? 'text-red-400' : d.rate > 3 ? 'text-amber-400' : 'text-green-400'
-                    }`}>
+                    <p
+                      className={`text-lg font-bold ${
+                        d.rate > 5
+                          ? 'text-red-400'
+                          : d.rate > 3
+                            ? 'text-amber-400'
+                            : 'text-green-400'
+                      }`}
+                    >
                       {d.rate.toFixed(1)}%
                     </p>
                     <p className="text-xs text-[var(--color-muted)]">{d.decade}</p>
@@ -201,15 +228,17 @@ export default function InflationCalculator() {
                 ))}
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-3">
-                Average annual inflation rate per decade. The 1970s-80s had the highest inflation (stagflation era).
+                Average annual inflation rate per decade. The 1970s-80s had the highest inflation
+                (stagflation era).
               </p>
             </div>
 
             {/* Tips */}
             <Alert variant="tip" title="Understanding Inflation:">
-              Inflation measures how much prices increase over time, reducing purchasing power. The Federal Reserve
-              targets 2% annual inflation. Historical US average is about 3.3% since 1920. High inflation (1970s-80s)
-              and deflation (Great Depression) are both economically challenging.
+              Inflation measures how much prices increase over time, reducing purchasing power. The
+              Federal Reserve targets 2% annual inflation. Historical US average is about 3.3% since
+              1920. High inflation (1970s-80s) and deflation (Great Depression) are both
+              economically challenging.
             </Alert>
 
             {/* Share */}

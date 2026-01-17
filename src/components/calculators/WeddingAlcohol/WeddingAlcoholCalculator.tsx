@@ -134,9 +134,7 @@ export default function WeddingAlcoholCalculator() {
 
             {/* Drink Type Preferences - Custom sliders with drink-specific colors */}
             <div>
-              <Label className="mb-3">
-                Drink Preferences (must total 100%)
-              </Label>
+              <Label className="mb-3">Drink Preferences (must total 100%)</Label>
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between text-sm mb-1 text-[var(--color-cream)]">
@@ -201,7 +199,9 @@ export default function WeddingAlcoholCalculator() {
                   {formatNumber(result.wineBottles)}
                 </p>
                 <p className="text-red-400/80 text-sm font-medium mt-1">Wine Bottles</p>
-                <p className="text-red-400/60 text-xs mt-1">({result.breakdown.wineServings} glasses)</p>
+                <p className="text-red-400/60 text-xs mt-1">
+                  ({result.breakdown.wineServings} glasses)
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-amber-950/50 to-amber-900/30 border-2 border-amber-500/30 rounded-2xl p-6 text-center">
@@ -210,7 +210,9 @@ export default function WeddingAlcoholCalculator() {
                   {formatNumber(result.beerBottles)}
                 </p>
                 <p className="text-amber-400/80 text-sm font-medium mt-1">Beer Bottles</p>
-                <p className="text-amber-400/60 text-xs mt-1">({result.breakdown.beerServings} servings)</p>
+                <p className="text-amber-400/60 text-xs mt-1">
+                  ({result.breakdown.beerServings} servings)
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-blue-950/50 to-blue-900/30 border-2 border-blue-500/30 rounded-2xl p-6 text-center">
@@ -219,7 +221,9 @@ export default function WeddingAlcoholCalculator() {
                   {formatNumber(result.liquorBottles)}
                 </p>
                 <p className="text-blue-400/80 text-sm font-medium mt-1">Liquor Bottles</p>
-                <p className="text-blue-400/60 text-xs mt-1">({result.breakdown.liquorServings} cocktails)</p>
+                <p className="text-blue-400/60 text-xs mt-1">
+                  ({result.breakdown.liquorServings} cocktails)
+                </p>
               </div>
             </Grid>
 
@@ -252,8 +256,8 @@ export default function WeddingAlcoholCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
-              Buy 10-15% extra to account for spillage, heavy drinkers, and unexpected guests.
-              Most stores allow returns of unopened bottles.
+              Buy 10-15% extra to account for spillage, heavy drinkers, and unexpected guests. Most
+              stores allow returns of unopened bottles.
             </Alert>
 
             {/* Share Results */}

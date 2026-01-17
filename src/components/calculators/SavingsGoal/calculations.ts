@@ -21,10 +21,13 @@ function round(value: number, decimals: number = 2): number {
  */
 function getPeriodsPerYear(frequency: string): number {
   switch (frequency) {
-    case 'weekly': return 52;
-    case 'biweekly': return 26;
+    case 'weekly':
+      return 52;
+    case 'biweekly':
+      return 26;
     case 'monthly':
-    default: return 12;
+    default:
+      return 12;
   }
 }
 
@@ -39,9 +42,7 @@ function getPeriodsPerYear(frequency: string): number {
  * @param inputs - Calculator input values
  * @returns Calculated savings plan
  */
-export function calculateSavingsGoal(
-  inputs: SavingsGoalInputs
-): SavingsGoalResult {
+export function calculateSavingsGoal(inputs: SavingsGoalInputs): SavingsGoalResult {
   const {
     currency,
     goalAmount,
@@ -57,7 +58,7 @@ export function calculateSavingsGoal(
   const periodRate = annualReturn / periodsPerYear;
 
   // Calculate real return rate (after inflation)
-  const realReturnRate = ((1 + annualReturn) / (1 + inflationRate)) - 1;
+  const realReturnRate = (1 + annualReturn) / (1 + inflationRate) - 1;
 
   // Calculate inflation-adjusted goal (what the goal is worth in today's dollars)
   const inflationAdjustedGoal = goalAmount / Math.pow(1 + inflationRate, timelineYears);
@@ -84,8 +85,13 @@ export function calculateSavingsGoal(
 
   // Calculate totals
   const totalContributions = contributionAmount * totalPeriods;
-  const finalBalance = futureValueOfCurrent + totalContributions +
-    (periodRate > 0 ? contributionAmount * ((Math.pow(1 + periodRate, totalPeriods) - 1) / periodRate - totalPeriods) : 0);
+  const finalBalance =
+    futureValueOfCurrent +
+    totalContributions +
+    (periodRate > 0
+      ? contributionAmount *
+        ((Math.pow(1 + periodRate, totalPeriods) - 1) / periodRate - totalPeriods)
+      : 0);
   const totalInterest = finalBalance - currentSavings - totalContributions;
 
   // Generate projection data (monthly samples)
@@ -95,9 +101,13 @@ export function calculateSavingsGoal(
   let totalInt = 0;
 
   const monthlyRate = annualReturn / 12;
-  const monthlyContribution = contributionAmount * periodsPerYear / 12;
+  const monthlyContribution = (contributionAmount * periodsPerYear) / 12;
 
-  for (let month = 0; month <= timelineYears * 12; month += Math.max(1, Math.floor(timelineYears * 12 / 24))) {
+  for (
+    let month = 0;
+    month <= timelineYears * 12;
+    month += Math.max(1, Math.floor((timelineYears * 12) / 24))
+  ) {
     projectionData.push({
       month,
       balance: round(balance),
@@ -106,7 +116,7 @@ export function calculateSavingsGoal(
     });
 
     // Calculate next period (simplified monthly)
-    const monthsToAdd = Math.max(1, Math.floor(timelineYears * 12 / 24));
+    const monthsToAdd = Math.max(1, Math.floor((timelineYears * 12) / 24));
     for (let m = 0; m < monthsToAdd && month + m < timelineYears * 12; m++) {
       const interest = balance * monthlyRate;
       totalInt += interest;

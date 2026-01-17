@@ -7,11 +7,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateRaise, formatCurrency } from './calculations';
-import {
-  getDefaultInputs,
-  type RaiseCalculatorInputs,
-  type RaiseCalculatorResult,
-} from './types';
+import { getDefaultInputs, type RaiseCalculatorInputs, type RaiseCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -30,7 +26,9 @@ import {
 import ShareResults from '../../ui/ShareResults';
 
 export default function RaiseCalculator() {
-  const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() =>
+    getDefaultInputs(getInitialCurrency())
+  );
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -62,12 +60,7 @@ export default function RaiseCalculator() {
         <CalculatorHeader
           title="Calculate Your Raise Value"
           subtitle="See the long-term impact of a salary increase"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -151,7 +144,9 @@ export default function RaiseCalculator() {
                   value={Math.round(inputs.investmentReturn * 100)}
                   onChange={(e) => updateInput('investmentReturn', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">7% is typical for stock market</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  7% is typical for stock market
+                </p>
               </div>
 
               <div>
@@ -165,7 +160,9 @@ export default function RaiseCalculator() {
                   value={Math.round(inputs.annualGrowthRate * 100)}
                   onChange={(e) => updateInput('annualGrowthRate', Number(e.target.value) / 100)}
                 />
-                <p className="text-sm text-[var(--color-muted)] mt-1">3% is typical for most careers</p>
+                <p className="text-sm text-[var(--color-muted)] mt-1">
+                  3% is typical for most careers
+                </p>
               </div>
             </Grid>
           </div>
@@ -181,7 +178,10 @@ export default function RaiseCalculator() {
               subtitle={`Over ${inputs.yearsToRetirement} years`}
               footer={
                 <>
-                  If invested at {Math.round(inputs.investmentReturn * 100)}%: <span className="font-semibold text-green-600">{formatCurrency(result.investedValue, result.currency)}</span>
+                  If invested at {Math.round(inputs.investmentReturn * 100)}%:{' '}
+                  <span className="font-semibold text-green-600">
+                    {formatCurrency(result.investedValue, result.currency)}
+                  </span>
                 </>
               }
             />
@@ -217,25 +217,27 @@ export default function RaiseCalculator() {
                 Value Over Time
               </h3>
               <div className="space-y-4">
-                {[5, 10, 15, 20, 25, 30].filter(year => year <= inputs.yearsToRetirement).map((year) => {
-                  const yearData = result.yearlyBreakdown[year - 1];
-                  if (!yearData) return null;
-                  return (
-                    <div key={year} className="flex items-center justify-between">
-                      <span className="text-[var(--color-subtle)]">After {year} years</span>
-                      <div className="text-right">
-                        <span className="font-medium text-[var(--color-cream)]">
-                          {formatCurrency(yearData.cumulativeIncome, result.currency)}
-                        </span>
-                        <span className="text-[var(--color-muted)] mx-2">→</span>
-                        <span className="font-medium text-green-600">
-                          {formatCurrency(yearData.investedValue, result.currency)}
-                        </span>
-                        <span className="text-xs text-[var(--color-muted)] ml-1">invested</span>
+                {[5, 10, 15, 20, 25, 30]
+                  .filter((year) => year <= inputs.yearsToRetirement)
+                  .map((year) => {
+                    const yearData = result.yearlyBreakdown[year - 1];
+                    if (!yearData) return null;
+                    return (
+                      <div key={year} className="flex items-center justify-between">
+                        <span className="text-[var(--color-subtle)]">After {year} years</span>
+                        <div className="text-right">
+                          <span className="font-medium text-[var(--color-cream)]">
+                            {formatCurrency(yearData.cumulativeIncome, result.currency)}
+                          </span>
+                          <span className="text-[var(--color-muted)] mx-2">→</span>
+                          <span className="font-medium text-green-600">
+                            {formatCurrency(yearData.investedValue, result.currency)}
+                          </span>
+                          <span className="text-xs text-[var(--color-muted)] ml-1">invested</span>
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
 
@@ -246,17 +248,22 @@ export default function RaiseCalculator() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-800">
                 <div>
-                  <span className="font-medium">Per week:</span> {formatCurrency(result.raiseAmount / 52, result.currency, 2)} extra
+                  <span className="font-medium">Per week:</span>{' '}
+                  {formatCurrency(result.raiseAmount / 52, result.currency, 2)} extra
                 </div>
                 <div>
-                  <span className="font-medium">Per day:</span> {formatCurrency(result.raiseAmount / 260, result.currency, 2)} extra
+                  <span className="font-medium">Per day:</span>{' '}
+                  {formatCurrency(result.raiseAmount / 260, result.currency, 2)} extra
                 </div>
                 <div>
-                  <span className="font-medium">Per paycheck (bi-weekly):</span> {formatCurrency(result.raiseAmount / 26, result.currency, 2)}
+                  <span className="font-medium">Per paycheck (bi-weekly):</span>{' '}
+                  {formatCurrency(result.raiseAmount / 26, result.currency, 2)}
                 </div>
                 <div>
-                  <span className="font-medium">5-year cumulative:</span> {formatCurrency(
-                    result.yearlyBreakdown[Math.min(4, inputs.yearsToRetirement - 1)]?.cumulativeIncome || 0,
+                  <span className="font-medium">5-year cumulative:</span>{' '}
+                  {formatCurrency(
+                    result.yearlyBreakdown[Math.min(4, inputs.yearsToRetirement - 1)]
+                      ?.cumulativeIncome || 0,
                     result.currency
                   )}
                 </div>
@@ -265,8 +272,9 @@ export default function RaiseCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Negotiation tip:">
-              A seemingly small 3% raise on a $60,000 salary is worth over $45,000 over 20 years (more if invested).
-              Always negotiate - the worst they can say is no, but the upside is life-changing.
+              A seemingly small 3% raise on a $60,000 salary is worth over $45,000 over 20 years
+              (more if invested). Always negotiate - the worst they can say is no, but the upside is
+              life-changing.
             </Alert>
 
             {/* Share Results */}

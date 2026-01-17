@@ -15,13 +15,7 @@ export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
  * Form label component with optional required indicator and badge.
  * Updated for dark theme.
  */
-export function Label({
-  children,
-  required,
-  badge,
-  className = '',
-  ...props
-}: LabelProps) {
+export function Label({ children, required, badge, className = '', ...props }: LabelProps) {
   return (
     <label
       className={`block text-sm font-medium text-[var(--color-cream)] mb-2 ${className}`}
@@ -29,9 +23,7 @@ export function Label({
     >
       {children}
       {required && <span className="text-[var(--color-accent)] ml-1">*</span>}
-      {badge && (
-        <span className="text-[var(--color-muted)] font-normal ml-2">({badge})</span>
-      )}
+      {badge && <span className="text-[var(--color-muted)] font-normal ml-2">({badge})</span>}
     </label>
   );
 }
