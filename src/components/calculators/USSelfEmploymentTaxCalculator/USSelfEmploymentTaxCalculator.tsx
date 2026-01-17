@@ -18,6 +18,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
@@ -328,6 +329,13 @@ export default function USSelfEmploymentTaxCalculator() {
                   <span className="text-[var(--color-cream)]">0.9%</span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Total tax: ${formatCurrency(result.totalTax)} (${formatPercent(result.effectiveRate)} effective). SE tax: ${formatCurrency(result.selfEmploymentTax)}, Federal: ${formatCurrency(result.federalIncomeTax)}. Quarterly: ${formatCurrency(result.quarterlyPayment)}. After-tax: ${formatCurrency(result.afterTaxIncome)}.`}
+                calculatorName="Self-Employment Tax Calculator"
+              />
             </div>
           </div>
         </div>

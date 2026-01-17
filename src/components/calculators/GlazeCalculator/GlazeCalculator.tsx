@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { GlazeInputs, GlazeIngredient } from './types';
 import { GLAZE_MATERIALS, GLAZE_RECIPES } from './types';
 import { calculateGlaze } from './calculations';
@@ -279,6 +280,13 @@ export function GlazeCalculator() {
             materials (silica, barium, lithium, colorants) are hazardous when inhaled. Work in a
             well-ventilated area.
           </p>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Glaze batch: ${results.totalDryWeight} ${inputs.weightUnit} dry materials + ${results.waterWeight} ${inputs.weightUnit} water = ${results.totalBatchWeight} ${inputs.weightUnit} total. ${inputs.ingredients.length} ingredients at ${inputs.waterRatio * 100}% water ratio.`}
+            calculatorName="Glaze Recipe Calculator"
+          />
         </div>
       </div>
     </div>

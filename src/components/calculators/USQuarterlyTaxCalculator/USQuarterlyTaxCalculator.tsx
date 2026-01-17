@@ -16,6 +16,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
@@ -341,6 +342,13 @@ export default function USQuarterlyTaxCalculator() {
                 </div>
               </div>
             )}
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Quarterly payment: ${formatCurrency(result.quarterlyPayment)}. Est. total tax: ${formatCurrency(result.estimatedTotalTax)}. SE tax: ${formatCurrency(result.selfEmploymentTax)}, Federal: ${formatCurrency(result.federalIncomeTax)}. Penalty risk: ${result.penaltyRisk}.`}
+                calculatorName="Quarterly Estimated Tax Calculator"
+              />
+            </div>
           </div>
         </div>
       </Card>

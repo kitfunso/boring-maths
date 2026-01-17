@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { KilnCostInputs } from './types';
 import { KILN_PRESETS, FIRING_TYPES, CONE_TEMPS } from './types';
 import { calculateKilnCost, formatTime, getConeOptions } from './calculations';
@@ -310,6 +311,13 @@ export function KilnCostCalculator() {
             <li>• Use a kiln shelf system that allows good air flow</li>
             <li>• Track your firings to identify cost patterns</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Kiln firing cost: $${results.totalCost.toFixed(2)}. Cone ${inputs.targetCone} (${results.peakTemperature}F/${results.peakTempC}C). ${formatTime(results.estimatedTime)} firing time. Energy: ${results.energyUsed} ${inputs.kilnType === 'electric' ? 'kWh' : inputs.gasUnit}.`}
+            calculatorName="Kiln Cost Calculator"
+          />
         </div>
       </div>
     </div>

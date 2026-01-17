@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Select, Slider, ButtonGroup } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { TapDrillInputs } from './types';
 import { IMPERIAL_THREADS, METRIC_THREADS } from './types';
 import { calculateTapDrill } from './calculations';
@@ -178,6 +179,13 @@ export function TapDrillCalculator() {
                 <li>• Start tap perpendicular to surface</li>
                 <li>• Use a bottoming tap for blind holes after starting tap</li>
               </ul>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Tap drill for ${inputs.threadSize}: ${results.closestDrill} (${results.tapDrillSizeFormatted}) at ${results.threadPercentage}% thread engagement. Major dia: ${results.majorDiameter.toFixed(4)}${inputs.threadType === 'imperial' ? '"' : 'mm'}.`}
+                calculatorName="Tap Drill Calculator"
+              />
             </div>
           </>
         )}

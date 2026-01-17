@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { MashWaterInputs } from './types';
 import { MASH_TEMPS, MASH_THICKNESS, SPARGE_TYPES } from './types';
 import { calculateMashWater } from './calculations';
@@ -365,6 +366,13 @@ export function MashWaterCalculator() {
             <li>• Higher mash temps = more body, sweeter beer</li>
             <li>• Check actual mash temp after mixing and adjust</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Strike water: ${results.strikeWaterVolume} ${results.volumeUnit} at ${results.strikeWaterTemp}${results.tempUnit}. Total water: ${results.totalWaterNeeded} ${results.volumeUnit}. Target mash: ${inputs.targetMashTemp}${results.tempUnit} for ${inputs.grainWeight} ${inputs.weightUnit === 'pounds' ? 'lbs' : 'kg'} grain.`}
+            calculatorName="Mash Water Calculator"
+          />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
   Input,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function UKDividendTaxCalculator() {
   const [inputs, setInputs] = useLocalStorage<UKDividendTaxInputs>(
@@ -235,6 +236,13 @@ export default function UKDividendTaxCalculator() {
                   <span className="text-[var(--color-cream)]">39.35%</span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Dividend tax: ${formatCurrency(result.dividendTax)} on ${formatCurrency(inputs.dividendIncome)} dividends (${result.effectiveDividendRate}% effective rate). Total income: ${formatCurrency(result.totalIncome)}, net after all taxes: ${formatCurrency(result.totalIncome - result.totalTax)}.`}
+                calculatorName="UK Dividend Tax Calculator"
+              />
             </div>
           </div>
         </div>

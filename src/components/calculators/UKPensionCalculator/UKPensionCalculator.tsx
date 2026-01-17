@@ -10,6 +10,7 @@ import {
   Input,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function UKPensionCalculator() {
   const [inputs, setInputs] = useLocalStorage<UKPensionInputs>(
@@ -307,6 +308,13 @@ export default function UKPensionCalculator() {
                 <li>• The 4% rule provides a rough guide to sustainable withdrawals</li>
                 <li>• This is a simplified projection – actual results will vary</li>
               </ul>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Projected pension pot at age ${inputs.retirementAge}: ${formatCurrency(result.projectedPot)} (${formatCurrency(result.projectedPotReal)} in today's money). Est. annual income: ${formatCurrency(result.annualIncome4Percent)} using 4% rule.`}
+                calculatorName="UK Pension Calculator"
+              />
             </div>
           </div>
         </div>

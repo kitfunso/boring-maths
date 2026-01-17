@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { PrimingSugarInputs } from './types';
 import { SUGAR_TYPES, STYLE_PRESETS, BATCH_PRESETS } from './types';
 import { calculatePrimingSugar, formatCO2 } from './calculations';
@@ -269,6 +270,13 @@ export function PrimingSugarCalculator() {
             <li>• Test one bottle at 2 weeks before chilling batch</li>
             <li>• Carbonation drops are less precise but convenient</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Priming sugar: ${results.sugarAmount} ${results.sugarUnit} for ${inputs.batchVolume} ${inputs.volumeUnit === 'gallons' ? 'gal' : 'L'} batch. Target CO2: ${formatCO2(results.totalCO2)}. Per 12oz bottle: ${results.sugarPerBottle} ${results.bottleUnit}.`}
+            calculatorName="Priming Sugar Calculator"
+          />
         </div>
       </div>
     </div>

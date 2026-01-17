@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, ButtonGroup } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { CO2Inputs } from './types';
 import { calculateCO2, calculateTargetPH } from './calculations';
 
@@ -170,6 +171,13 @@ export function CO2Calculator() {
             <li>• Use a drop checker as a secondary CO2 indicator</li>
             <li>• Never inject CO2 at night when plants don&apos;t photosynthesize</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`CO2 Level: ${results.co2ppm} ppm (${results.co2Level}). pH: ${inputs.ph}, KH: ${inputs.kh} dKH. Suggested bubble rate: ${results.suggestedBubbleRate} BPS.`}
+            calculatorName="CO2 Calculator"
+          />
         </div>
       </div>
     </div>

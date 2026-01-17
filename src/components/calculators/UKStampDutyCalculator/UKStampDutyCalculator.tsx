@@ -17,6 +17,7 @@ import {
   Input,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function UKStampDutyCalculator() {
   const [inputs, setInputs] = useLocalStorage<UKStampDutyInputs>(
@@ -248,6 +249,13 @@ export default function UKStampDutyCalculator() {
                   <p className="text-lg font-semibold text-[var(--color-cream)]">{formatCurrency(inputs.propertyPrice + result.totalTax)}</p>
                 </div>
               </Grid>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`${result.taxName}: ${formatCurrency(result.totalTax)} on ${formatCurrency(inputs.propertyPrice)} property (${formatPercent(result.effectiveRate)} effective rate). Total cost including tax: ${formatCurrency(inputs.propertyPrice + result.totalTax)}.`}
+                calculatorName="UK Stamp Duty Calculator"
+              />
             </div>
           </div>
         </div>

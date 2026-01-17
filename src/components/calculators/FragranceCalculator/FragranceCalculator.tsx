@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { FragranceInputs } from './types';
 import { WAX_TYPES, CONTAINER_SIZES } from './types';
 import { calculateFragrance } from './calculations';
@@ -238,6 +239,13 @@ export function FragranceCalculator() {
             cause the candle to sweat, produce soot, or create fire hazards. Always test burn
             candles before selling.
           </p>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Fragrance needed: ${results.fragranceAmount} ${inputs.weightUnit} at ${inputs.fragranceLoad}% load for ${inputs.waxWeight} ${inputs.weightUnit} of wax. Total batch weight: ${results.totalWeight} ${inputs.weightUnit}.`}
+            calculatorName="Fragrance Load Calculator"
+          />
         </div>
       </div>
     </div>

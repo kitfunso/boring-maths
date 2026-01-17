@@ -10,6 +10,7 @@ import {
   Input,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 export default function UKChildBenefitCalculator() {
   const [inputs, setInputs] = useLocalStorage<UKChildBenefitInputs>(
@@ -250,6 +251,13 @@ export default function UKChildBenefitCalculator() {
                   <span className="text-[var(--color-cream)]">£80,000</span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Child Benefit for ${inputs.numberOfChildren} child(ren): ${formatCurrency(result.annualBenefit)}/year gross. Net benefit after HICBC: ${formatCurrency(result.netBenefit)}/year (${result.clawbackPercentage}% clawed back).`}
+                calculatorName="UK Child Benefit Calculator"
+              />
             </div>
           </div>
         </div>

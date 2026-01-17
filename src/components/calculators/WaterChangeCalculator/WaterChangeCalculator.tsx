@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { WaterChangeInputs } from './types';
 import { PARAMETER_PRESETS, CHANGE_PRESETS, TANK_PRESETS, FREQUENCY_OPTIONS } from './types';
 import { calculateWaterChange, formatParameter } from './calculations';
@@ -284,6 +285,13 @@ export function WaterChangeCalculator() {
             <li>• Smaller, regular changes are better than large, infrequent ones</li>
             <li>• Test parameters before and after to verify improvement</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Water change: ${results.waterToRemove} ${results.volumeUnit} (${inputs.changePercent}%) from ${inputs.tankVolume} ${results.volumeUnit} tank. ${formatParameter(inputs.currentParameter, inputs.parameterType)} -> ${formatParameter(results.parameterAfterChange, inputs.parameterType)} (${results.reductionPercent}% reduction).`}
+            calculatorName="Water Change Calculator"
+          />
         </div>
       </div>
     </div>

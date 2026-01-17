@@ -11,6 +11,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const sacrificeTypeOptions = Object.entries(SACRIFICE_TYPES).map(([key, type]) => ({
   value: key as SacrificeType,
@@ -260,6 +261,13 @@ export default function UKSalarySacrificeCalculator() {
                   <span className="text-teal-400 font-medium">{formatCurrency(result.trueCostOfBenefit / 12)}</span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Salary sacrifice: ${formatCurrency(inputs.sacrificeAmount)}/year. Effective discount: ${result.effectiveDiscount}%. True cost: ${formatCurrency(result.trueCostOfBenefit)}. Total savings: ${formatCurrency(result.totalSavings)} (Tax: ${formatCurrency(result.incomeTaxSaved)}, NI: ${formatCurrency(result.niSavedEmployee)}).`}
+                calculatorName="UK Salary Sacrifice Calculator"
+              />
             </div>
           </div>
         </div>

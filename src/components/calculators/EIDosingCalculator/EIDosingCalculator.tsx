@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { EIDosingInputs } from './types';
 import { DOSING_SCHEDULES, TANK_PRESETS, FERTILIZERS } from './types';
 import { calculateEIDosing, gramsToTeaspoons } from './calculations';
@@ -330,6 +331,13 @@ export function EIDosingCalculator() {
             <li>• Reduce doses for low-light or non-CO2 setups</li>
             <li>• Watch for algae if light/CO2 doesn&apos;t match fert levels</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`EI Dosing for ${inputs.tankVolume} ${inputs.volumeUnit} tank. Per dose (3x weekly): KNO3 ${results.kno3PerDose}g, KH2PO4 ${results.kh2po4PerDose}g, K2SO4 ${results.k2so4PerDose}g, CSM+B ${results.csmBPerDose}g. Weekly targets: NO3 ${results.nitrateAchieved}ppm, PO4 ${results.phosphateAchieved}ppm.`}
+            calculatorName="EI Dosing Calculator"
+          />
         </div>
       </div>
     </div>

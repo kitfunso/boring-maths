@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { CandleWaxInputs } from './types';
 import { WAX_TYPES, CONTAINER_PRESETS, FILL_OPTIONS } from './types';
 import { calculateCandleWax, formatBurnTime } from './calculations';
@@ -303,6 +304,13 @@ export function CandleWaxCalculator() {
             Always test burn every candle design. Incorrect wick sizing can cause tunneling,
             sooting, or dangerous flame heights. Never leave burning candles unattended.
           </p>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Wax needed: ${results.waxWeight} ${results.weightUnit} for ${inputs.numberOfContainers} container(s). Per container: ${results.waxWeightPerContainer} ${results.weightUnit}. Est. burn time: ${formatBurnTime(results.burnTime)} per candle.`}
+            calculatorName="Candle Wax Calculator"
+          />
         </div>
       </div>
     </div>

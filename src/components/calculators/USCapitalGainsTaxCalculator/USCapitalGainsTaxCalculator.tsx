@@ -18,6 +18,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
@@ -377,6 +378,13 @@ export default function USCapitalGainsTaxCalculator() {
                   {' '}NIIT adds 3.8% for high earners.
                 </p>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={isLoss ? `Capital loss: ${formatCurrency(Math.abs(gain))}. Can offset gains or deduct up to $3,000/year from income.` : `Capital gains tax: ${formatCurrency(result.totalTax)} on ${formatCurrency(result.capitalGain)} gain (${result.isLongTerm ? 'long-term' : 'short-term'}). Effective rate: ${formatPercent(result.effectiveRate)}. Net proceeds: ${formatCurrency(result.netProceeds)}.`}
+                calculatorName="Capital Gains Tax Calculator"
+              />
             </div>
           </div>
         </div>

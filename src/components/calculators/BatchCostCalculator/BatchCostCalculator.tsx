@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { BatchCostInputs, MaterialItem } from './types';
 import {
   MATERIAL_PRESETS,
@@ -433,6 +434,13 @@ export function BatchCostCalculator() {
             <li>• Premium packaging justifies higher retail prices</li>
             <li>• Track actual times and costs to refine estimates</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Batch Cost: ${formatCurrency(results.totalBatchCost)} for ${inputs.unitsProduced} units. Cost/unit: ${formatCurrency(results.totalCostPerUnit)}, Retail: ${formatCurrency(results.suggestedRetailPrice)}, Profit: ${formatCurrency(results.totalProfit)}`}
+            calculatorName="Batch Cost Calculator"
+          />
         </div>
       </div>
     </div>

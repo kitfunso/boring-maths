@@ -11,6 +11,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const loanPlanOptions = Object.entries(LOAN_PLANS).map(([key, plan]) => ({
   value: key as LoanPlan,
@@ -274,6 +275,13 @@ export default function UKStudentLoanCalculator() {
                   <span className="text-[var(--color-cream)]">{currentPlan.writeOffYears} years</span>
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Student loan (${currentPlan.name}): ${formatCurrency(result.monthlyRepayment)}/month repayment. Balance: ${formatCurrency(inputs.loanBalance)}. ${result.willRepayInFull ? `Repaid in ${result.yearsToRepay} years` : `Written off in ${result.yearsToRepay} years`}. Total to repay: ${formatCurrency(result.totalRepaid)}.`}
+                calculatorName="UK Student Loan Calculator"
+              />
             </div>
           </div>
         </div>

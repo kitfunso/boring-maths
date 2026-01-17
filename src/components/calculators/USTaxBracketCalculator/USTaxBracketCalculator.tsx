@@ -11,6 +11,7 @@ import {
   ButtonGroup,
   Grid,
 } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
@@ -319,6 +320,13 @@ export default function USTaxBracketCalculator() {
                   </>
                 )}
               </div>
+            </div>
+
+            <div className="flex justify-center pt-4">
+              <ShareResults
+                result={`Federal tax: ${formatCurrency(result.federalTax)} on ${formatCurrency(inputs.grossIncome)} income. Marginal bracket: ${result.marginalBracketLabel}, effective rate: ${formatPercent(result.effectiveRate)}. After-tax: ${formatCurrency(result.afterTaxIncome)}.`}
+                calculatorName="US Tax Bracket Calculator"
+              />
             </div>
           </div>
         </div>

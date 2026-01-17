@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { ToolDeflectionInputs } from './types';
 import { TOOL_MATERIALS, FLUTE_OPTIONS, MATERIAL_FACTORS, TOOL_PRESETS } from './types';
 import { calculateToolDeflection, formatDeflection } from './calculations';
@@ -295,6 +296,13 @@ export function ToolDeflectionCalculator() {
             <li>• Use carbide over HSS for 3x more stiffness</li>
             <li>• Consider shrink-fit or hydraulic tool holders</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Tool deflection: ${formatDeflection(results.deflection, results.deflectionUnit)} (${results.status}). ${inputs.toolDiameter}${inputs.lengthUnit === 'inches' ? '"' : 'mm'} ${inputs.toolMaterial} end mill, ${inputs.stickout}${inputs.lengthUnit === 'inches' ? '"' : 'mm'} stickout. L/D ratio: ${(inputs.stickout / inputs.toolDiameter).toFixed(1)}:1.`}
+            calculatorName="Tool Deflection Calculator"
+          />
         </div>
       </div>
     </div>

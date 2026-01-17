@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { YeastPitchRateInputs } from './types';
 import {
   PITCH_RATES,
@@ -430,6 +431,13 @@ export function YeastPitchRateCalculator() {
             <li>• Higher gravity beers stress yeast more - pitch more</li>
             <li>• Underpitching causes off-flavors and slow fermentation</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Yeast pitch rate: ${results.pitchRate.toFixed(2)} M/mL/°P (target: ${results.targetPitchRate}). Cells needed: ${formatCells(results.cellsNeeded)}, available: ${formatCells(results.cellsAvailable)}. ${inputs.batchVolume} ${inputs.volumeUnit === 'gallons' ? 'gal' : 'L'} ${inputs.beerType} at OG ${inputs.originalGravity}.`}
+            calculatorName="Yeast Pitch Rate Calculator"
+          />
         </div>
       </div>
     </div>

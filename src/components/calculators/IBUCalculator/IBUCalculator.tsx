@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { IBUInputs, HopAddition } from './types';
 import { HOP_VARIETIES } from './types';
 import { calculateIBU } from './calculations';
@@ -293,6 +294,13 @@ export function IBUCalculator() {
             <li>• Double IPA: 60-120 IBU</li>
             <li>• Stout: 25-45 IBU</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Total IBU: ${results.totalIBU} (${results.beerStyle}). BU:GU Ratio: ${results.bitteringRatio.toFixed(2)}. ${inputs.hopAdditions.length} hop addition(s) in ${inputs.batchSize} ${inputs.batchUnit} batch at OG ${inputs.originalGravity}.`}
+            calculatorName="IBU Calculator"
+          />
         </div>
       </div>
     </div>

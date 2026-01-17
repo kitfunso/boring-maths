@@ -5,6 +5,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import ShareResults from '../../ui/ShareResults';
 import type { CuttingTimeInputs } from './types';
 import { OPERATION_TYPES, MACHINE_RATES } from './types';
 import { calculateCuttingTime, formatTime } from './calculations';
@@ -335,6 +336,13 @@ export function CuttingTimeCalculator() {
             <li>• Complex geometries may require additional time</li>
             <li>• Includes basic rapid moves, not complex tool paths</li>
           </ul>
+        </div>
+
+        <div className="flex justify-center pt-4">
+          <ShareResults
+            result={`Cycle time: ${formatTime(results.totalCycleTime)} per part. Total job time: ${formatTime(results.totalJobTime)} for ${inputs.quantity} parts. Est. cost: $${adjustedCost.toFixed(2)} ($${(adjustedCost / inputs.quantity).toFixed(2)}/part).`}
+            calculatorName="Cutting Time Calculator"
+          />
         </div>
       </div>
     </div>
