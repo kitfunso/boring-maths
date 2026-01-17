@@ -1,0 +1,180 @@
+---
+/**
+ * Priming Sugar Calculator Page
+ * Calculate carbonation sugar for bottle conditioning beer
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { PrimingSugarCalculator } from '../../components/calculators/PrimingSugarCalculator';
+
+const title = 'Priming Sugar Calculator | Bottle Conditioning Carbonation';
+const description = 'Free priming sugar calculator for homebrewing. Calculate carbonation sugar amounts for bottle conditioning with corn sugar, table sugar, honey, or DME.';
+const keywords = 'priming sugar calculator, bottle conditioning, carbonation, homebrew, corn sugar, dextrose, CO2 volumes, beer carbonation';
+const canonicalURL = '/calculators/priming-sugar-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Priming Sugar Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol from gravity readings.',
+    href: '/calculators/abv-calculator',
+    icon: 'beaker' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Yeast Pitch Rate',
+    description: 'Calculate proper yeast cell counts.',
+    href: '/calculators/yeast-pitch-rate-calculator',
+    icon: 'scale' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is priming sugar?",
+    answer: "Priming sugar is fermentable sugar added at bottling to create carbonation. Yeast in the beer consumes the sugar, producing CO₂ that dissolves into the beer since the bottle is sealed. This is called bottle conditioning or natural carbonation."
+  },
+  {
+    question: "Why does beer temperature at bottling matter?",
+    answer: "Colder beer holds more dissolved CO₂ from fermentation (residual CO₂). This calculator accounts for residual CO₂ based on your beer temperature - warmer beer has less residual CO₂, so you need more priming sugar to reach your target carbonation level."
+  },
+  {
+    question: "What's the difference between corn sugar and table sugar?",
+    answer: "Corn sugar (dextrose) is 100% fermentable and leaves no flavor. Table sugar (sucrose) is also 100% fermentable but requires slightly less weight. Both work equally well. The taste difference is undetectable in finished beer."
+  },
+  {
+    question: "How long does bottle conditioning take?",
+    answer: "Standard ales carbonate in 2-3 weeks at 65-75°F. Lagers and high-gravity beers may take 3-4 weeks. Cold storage slows carbonation significantly. Test one bottle at 2 weeks before chilling the whole batch. Carbonation continues to improve for months."
+  },
+  {
+    question: "What are CO₂ volumes?",
+    answer: "CO₂ volumes measure carbonation level - one 'volume' means the CO₂ would occupy the same space as the beer at standard temperature and pressure. British ales are around 1.5-2.0 volumes, American beers 2.0-2.5, Belgian ales 2.5-3.5, and wheat beers up to 4.5 volumes."
+  },
+  {
+    question: "How do I avoid bottle bombs?",
+    answer: "Ensure fermentation is complete (stable gravity readings 3 days apart). Don't over-prime - use a calculator like this one. Use bottles rated for carbonation. Avoid high carbonation levels (>3.5 vol) unless using Belgian or champagne bottles. Store at proper temperature."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Priming Sugar Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Priming Sugar Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Priming Sugar Calculator"
+    description="Calculate the right amount of priming sugar for bottle conditioning your homebrew. Choose from various sugar types and target carbonation levels by style."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <PrimingSugarCalculator client:visible />
+  </section>
+
+  <ContentSection title="Carbonation Levels by Beer Style">
+    <p>
+      Different beer styles traditionally have different carbonation levels.
+      Use these as starting points - personal preference matters too.
+    </p>
+    <div class="grid md:grid-cols-4 gap-4 mt-4">
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">British Ales</h4>
+        <div class="text-xl font-bold text-amber-300">1.5-2.0 vol</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Lower carbonation. Bitters, milds, porters, stouts.
+        </div>
+      </div>
+      <div class="bg-yellow-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-yellow-400 mb-2">American Ales</h4>
+        <div class="text-xl font-bold text-yellow-300">2.2-2.7 vol</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Moderate carbonation. IPAs, pale ales, ambers.
+        </div>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Belgian Ales</h4>
+        <div class="text-xl font-bold text-orange-300">2.5-3.5 vol</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Higher carbonation. Tripels, saisons, witbiers.
+        </div>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Wheat Beers</h4>
+        <div class="text-xl font-bold text-blue-300">3.0-4.5 vol</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Very high carbonation. Hefeweizen, Berliner weisse.
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Sugar Type Comparison">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Sugar Type</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">g per gal/vol</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Corn Sugar (Dextrose)</td>
+            <td class="py-2 px-3 text-right text-amber-400">4.0</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Most common, clean, no flavor</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Table Sugar (Sucrose)</td>
+            <td class="py-2 px-3 text-right text-amber-400">3.64</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Slightly less needed, equally clean</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Honey</td>
+            <td class="py-2 px-3 text-right text-amber-400">5.2</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Adds subtle honey character</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Dry Malt Extract</td>
+            <td class="py-2 px-3 text-right text-amber-400">6.45</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Adds malty flavor, traditional</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Belgian Candi Sugar</td>
+            <td class="py-2 px-3 text-right text-amber-400">3.64</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Similar to table sugar, authentic for Belgians</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,168 @@
+---
+/**
+ * Tool Deflection Calculator Page
+ * Calculate end mill deflection for CNC machining
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { ToolDeflectionCalculator } from '../../components/calculators/ToolDeflectionCalculator';
+
+const title = 'Tool Deflection Calculator | End Mill Deflection for CNC';
+const description = 'Free tool deflection calculator for CNC machining. Calculate end mill deflection, maximum depth of cut, and cutting force limits using cantilever beam formulas.';
+const keywords = 'tool deflection calculator, end mill deflection, CNC machining, cantilever beam, cutting force, stickout, deflection limit, carbide, HSS';
+const canonicalURL = '/calculators/tool-deflection-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Tool Deflection Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Speeds & Feeds Calculator',
+    description: 'Calculate RPM and feed rate for cutting.',
+    href: '/calculators/speeds-feeds-calculator',
+    icon: 'cog' as const,
+    color: 'gray' as const,
+  },
+  {
+    title: 'Tap Drill Calculator',
+    description: 'Find tap drill sizes for threads.',
+    href: '/calculators/tap-drill-calculator',
+    icon: 'wrench' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "Why does tool deflection matter?",
+    answer: "Tool deflection causes dimensional inaccuracy, poor surface finish, chatter, and can lead to tool breakage. Even 0.001\" deflection affects finish quality. For precision work, keep deflection under 0.0005\" (0.0127mm). This calculator helps you stay within safe limits."
+  },
+  {
+    question: "How does stickout affect deflection?",
+    answer: "Deflection increases with the CUBE of stickout length. Doubling stickout increases deflection 8x. Minimize stickout to the shortest length possible for your operation. Use extended reach tools only when necessary, and reduce feeds/depths accordingly."
+  },
+  {
+    question: "Which is stiffer - carbide or HSS?",
+    answer: "Carbide has a higher modulus of elasticity (roughly 85-90 Mpsi) compared to HSS (30 Mpsi), making carbide about 3x stiffer. Carbide deflects less under the same load, but is more brittle and can snap if deflection limits are exceeded."
+  },
+  {
+    question: "How does tool diameter affect deflection?",
+    answer: "Deflection is inversely proportional to diameter to the 4th power. A 1/2\" tool has 16x less deflection than a 1/4\" tool under the same conditions. When possible, use the largest diameter that fits your geometry."
+  },
+  {
+    question: "What is a safe deflection limit?",
+    answer: "General guidelines: Roughing - up to 0.002\" (0.05mm), Finishing - under 0.0005\" (0.013mm), Precision - under 0.0002\" (0.005mm). This calculator provides warnings when you exceed typical limits for your operation type."
+  },
+  {
+    question: "How do I reduce tool deflection?",
+    answer: "Reduce stickout (most effective), use larger diameter tool, switch to carbide from HSS, reduce depth/width of cut, lower feed rate, add more flutes (reduces chip load per tooth), or use a shrink-fit holder for better rigidity."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Tool Deflection Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Tool Deflection Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Tool Deflection Calculator"
+    description="Calculate end mill deflection for CNC machining. Optimize stickout, diameter, and cutting parameters to prevent chatter and tool breakage."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <ToolDeflectionCalculator client:visible />
+  </section>
+
+  <ContentSection title="Understanding Tool Deflection">
+    <p>
+      Tool deflection is a critical factor in CNC machining quality. An end mill acts
+      as a cantilever beam - fixed at the holder and free at the cutting end. Cutting
+      forces push the tool away from the workpiece, causing dimensional errors.
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-gray-900/40 rounded-lg p-4">
+        <h4 class="font-semibold text-gray-300 mb-2">Cantilever Formula</h4>
+        <div class="text-lg font-mono text-gray-400">δ = FL³ / 3EI</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          δ = deflection, F = force, L = length, E = modulus, I = moment of inertia
+        </div>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Moment of Inertia</h4>
+        <div class="text-lg font-mono text-blue-300">I = πd⁴ / 64</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          For solid round tools. Diameter has the most impact (4th power).
+        </div>
+      </div>
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">Key Insight</h4>
+        <div class="text-lg font-bold text-amber-300">L³ vs d⁴</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Stickout length cubed in numerator, diameter to 4th power in denominator.
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Tool Material Properties">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Material</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Modulus (Mpsi)</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Relative Stiffness</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Solid Carbide</td>
+            <td class="py-2 px-3 text-right text-amber-400">87</td>
+            <td class="py-2 px-3 text-right text-green-400">3x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Precision, hard materials</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Cobalt HSS</td>
+            <td class="py-2 px-3 text-right text-amber-400">32</td>
+            <td class="py-2 px-3 text-right text-yellow-400">1.1x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Heat resistance, toughness</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">HSS</td>
+            <td class="py-2 px-3 text-right text-amber-400">30</td>
+            <td class="py-2 px-3 text-right text-gray-400">1x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">General purpose, softer materials</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

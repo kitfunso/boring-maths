@@ -12,7 +12,8 @@ import {
   formatHourlyRate,
   formatPercent,
   getComparisonColor,
-  TAX_BRACKETS,
+  getTaxBrackets,
+  SELF_EMPLOYMENT_TAX_INFO,
 } from './calculations';
 import {
   getDefaultInputs,
@@ -326,7 +327,7 @@ export default function ContractorVsEmployeeCalculator() {
 
                 <Grid responsive={{ sm: 2 }} gap="sm">
                   <div>
-                    <Label htmlFor="dental">Dental/Vision/mo</Label>
+                    <Label htmlFor="dental">Dental/Vision</Label>
                     <Input
                       id="dental"
                       type="number"
@@ -338,9 +339,10 @@ export default function ContractorVsEmployeeCalculator() {
                         updateInput('employerDentalVisionMonthly', Number(e.target.value))
                       }
                     />
+                    <p className="text-xs text-[var(--color-muted)] mt-1">per month</p>
                   </div>
                   <div>
-                    <Label htmlFor="lifeDisability">Life/Disability/mo</Label>
+                    <Label htmlFor="lifeDisability">Life/Disability</Label>
                     <Input
                       id="lifeDisability"
                       type="number"
@@ -352,6 +354,7 @@ export default function ContractorVsEmployeeCalculator() {
                         updateInput('employerLifeDisabilityMonthly', Number(e.target.value))
                       }
                     />
+                    <p className="text-xs text-[var(--color-muted)] mt-1">per month</p>
                   </div>
                 </Grid>
 
@@ -421,7 +424,7 @@ export default function ContractorVsEmployeeCalculator() {
               </summary>
               <Grid responsive={{ sm: 1, md: 3 }} gap="md" className="mt-3">
                 <div>
-                  <Label htmlFor="federalTax">Federal Tax Bracket</Label>
+                  <Label htmlFor="federalTax">{inputs.currency === 'GBP' ? 'Income Tax Band' : inputs.currency === 'EUR' ? 'Income Tax Rate' : 'Federal Tax Bracket'}</Label>
                   <select
                     id="federalTax"
                     className="w-full bg-[var(--color-charcoal)] border border-white/10 rounded-xl px-4 py-3 text-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50 focus:border-[var(--color-accent)]/50 cursor-pointer hover:bg-[var(--color-slate)] transition-colors"
@@ -431,7 +434,7 @@ export default function ContractorVsEmployeeCalculator() {
                       updateInput('federalTaxBracket', Number(e.target.value))
                     }
                   >
-                    {TAX_BRACKETS.map((bracket) => (
+                    {getTaxBrackets(inputs.currency).map((bracket) => (
                       <option key={bracket.rate} value={bracket.rate} className="bg-[var(--color-charcoal)] text-[var(--color-cream)]">
                         {bracket.label} ({bracket.range})
                       </option>
@@ -439,34 +442,41 @@ export default function ContractorVsEmployeeCalculator() {
                   </select>
                 </div>
                 <div>
-                  <Label htmlFor="stateTax">State Tax Rate (%)</Label>
+                  <Label htmlFor="stateTax">{inputs.currency === 'USD' ? 'State Tax Rate (%)' : 'Local/Regional Tax (%)'}</Label>
                   <Input
                     id="stateTax"
                     type="number"
                     min={0}
                     max={15}
                     step={0.5}
-                    value={inputs.stateTaxRate * 100}
+                    value={Math.round(inputs.stateTaxRate * 1000) / 10}
                     onChange={(e) =>
                       updateInput('stateTaxRate', Number(e.target.value) / 100)
                     }
                   />
+                  {inputs.currency !== 'USD' && (
+                    <p className="text-xs text-[var(--color-muted)] mt-1">
+                      Optional local taxes if applicable
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <Label htmlFor="seTax">Self-Employment Tax (%)</Label>
+                  <Label htmlFor="seTax">{inputs.currency === 'GBP' ? 'Self-Employed NICs (%)' : 'Self-Employment Tax (%)'}</Label>
                   <Input
                     id="seTax"
                     type="number"
                     min={0}
                     max={20}
                     step={0.1}
-                    value={inputs.selfEmploymentTaxRate * 100}
+                    value={Math.round(inputs.selfEmploymentTaxRate * 1000) / 10}
                     onChange={(e) =>
                       updateInput('selfEmploymentTaxRate', Number(e.target.value) / 100)
                     }
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">
-                    15.3% US (SS + Medicare)
+                    {inputs.currency === 'USD' && '15.3% US (SS + Medicare)'}
+                    {inputs.currency === 'GBP' && '9% Class 4 NICs'}
+                    {inputs.currency === 'EUR' && '~15% social contributions (varies by country)'}
                   </p>
                 </div>
               </Grid>
@@ -625,9 +635,9 @@ export default function ContractorVsEmployeeCalculator() {
                 sublabel="Employee benefits value"
               />
               <MetricCard
-                label="Self-Emp Tax"
+                label={inputs.currency === 'GBP' ? 'Self-Emp NICs' : 'Self-Emp Tax'}
                 value={formatCurrency(result.contractor.selfEmploymentTax, result.currency)}
-                sublabel="Additional 7.65% FICA"
+                sublabel={SELF_EMPLOYMENT_TAX_INFO[inputs.currency].label}
               />
               <MetricCard
                 label="Business Costs"

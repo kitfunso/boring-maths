@@ -1,0 +1,197 @@
+---
+/**
+ * Yeast Pitch Rate Calculator Page
+ * Calculate proper yeast cell counts for fermentation
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { YeastPitchRateCalculator } from '../../components/calculators/YeastPitchRateCalculator';
+
+const title = 'Yeast Pitch Rate Calculator | Cell Count for Brewing';
+const description = 'Free yeast pitch rate calculator for homebrewing. Calculate proper yeast cell counts, viability, and starter sizes for ales and lagers.';
+const keywords = 'yeast pitch rate calculator, cell count, yeast starter, brewing, homebrew, liquid yeast, dry yeast, viability, fermentation';
+const canonicalURL = '/calculators/yeast-pitch-rate-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Yeast Pitch Rate Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol from gravity readings.',
+    href: '/calculators/abv-calculator',
+    icon: 'beaker' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Priming Sugar Calculator',
+    description: 'Calculate carbonation sugar amounts.',
+    href: '/calculators/priming-sugar-calculator',
+    icon: 'scale' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "What is pitch rate and why does it matter?",
+    answer: "Pitch rate is the number of yeast cells per milliliter of wort per degree Plato. Proper pitch rate ensures healthy fermentation, clean flavors, and complete attenuation. Underpitching causes stress flavors, slow fermentation, and potential stalls. Overpitching can reduce ester production."
+  },
+  {
+    question: "How many yeast cells do I need?",
+    answer: "For ales: 0.75 million cells per mL per °Plato. For lagers: 1.5 million (double). A 5-gallon batch at 1.050 (12.5°P) needs about 175 billion cells for ale, 350 billion for lager. One fresh liquid yeast pack has ~100 billion viable cells."
+  },
+  {
+    question: "How does yeast age affect viability?",
+    answer: "Liquid yeast loses about 21% viability per month after manufacture. A 2-month-old pack may only have 60% viable cells. Dry yeast is much more stable, losing only about 1% per month when stored properly. Always check manufacture dates."
+  },
+  {
+    question: "When do I need a yeast starter?",
+    answer: "Make a starter when: brewing lagers (always), high gravity beers (>1.060), yeast is more than 2 weeks old, or you only have one pack for a 5+ gallon batch. Starters grow more cells by providing fresh wort and oxygen in a controlled environment."
+  },
+  {
+    question: "Does a stir plate matter for starters?",
+    answer: "Yes significantly. A stir plate provides constant oxygen exposure and keeps yeast in suspension, roughly doubling cell growth compared to a static starter. Intermittent shaking is a middle ground. Stir plates are the most efficient method for growing yeast."
+  },
+  {
+    question: "Should I decant my starter before pitching?",
+    answer: "For starters over 1 liter, cold crash for 24-48 hours and decant most of the liquid. Starter wort is low-oxygen and slightly oxidized - you don't want to add much to your beer. For small starters or pitch-at-high-kraeusen, pour the whole thing in."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Yeast Pitch Rate Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Yeast Pitch Rate Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Yeast Pitch Rate Calculator"
+    description="Calculate proper yeast cell counts for healthy fermentation. Account for yeast age, viability, and starter growth to hit your pitch rate targets."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <YeastPitchRateCalculator client:visible />
+  </section>
+
+  <ContentSection title="Pitch Rate Guidelines">
+    <p>
+      Different beer types require different pitch rates. Lagers need more yeast because
+      cold fermentation is more stressful. High gravity beers need more cells to fully
+      attenuate.
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-amber-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-amber-400 mb-2">Ales</h4>
+        <div class="text-xl font-bold text-amber-300">0.75 M/mL/°P</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Standard for most ales. IPAs, pale ales, porters, stouts.
+          ~175B cells for 5 gal at 1.050.
+        </div>
+      </div>
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Lagers</h4>
+        <div class="text-xl font-bold text-blue-300">1.5 M/mL/°P</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Double the ale rate. Cold fermentation is stressful.
+          ~350B cells for 5 gal at 1.050.
+        </div>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">High Gravity</h4>
+        <div class="text-xl font-bold text-purple-300">1.0+ M/mL/°P</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Higher rates for OG > 1.075. Prevents stalls and off-flavors.
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Yeast Viability by Format">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Format</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Cells/Package</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Loss Rate</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Liquid (White Labs/Wyeast)</td>
+            <td class="py-2 px-3 text-right text-amber-400">100B</td>
+            <td class="py-2 px-3 text-right text-red-400">~21%/month</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Best fresh, starter often needed</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Dry (Fermentis/Lallemand)</td>
+            <td class="py-2 px-3 text-right text-amber-400">200B</td>
+            <td class="py-2 px-3 text-right text-green-400">~1%/month</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Very stable, rehydrate before pitching</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Harvested Slurry</td>
+            <td class="py-2 px-3 text-right text-amber-400">~1000B/cup</td>
+            <td class="py-2 px-3 text-right text-yellow-400">~50%/month</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Use within 2 weeks, starter recommended</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Making a Yeast Starter">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-2">
+        <h4 class="font-semibold text-amber-400">Starter Procedure</h4>
+        <ol class="text-sm space-y-1 text-[var(--color-subtle)] list-decimal list-inside">
+          <li>Boil 100g DME per liter of water (1.036-1.040)</li>
+          <li>Cool to ~70°F, transfer to sanitized flask/jar</li>
+          <li>Pitch yeast and cover with foil</li>
+          <li>Place on stir plate or shake periodically</li>
+          <li>Ferment 24-48 hours until activity slows</li>
+          <li>Cold crash and decant (optional)</li>
+          <li>Pitch into wort at fermentation temp</li>
+        </ol>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-blue-400">Starter Size Guide</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• <strong>500mL-1L:</strong> Boost viability of old liquid yeast</li>
+          <li>• <strong>1-2L:</strong> Standard for ales from single pack</li>
+          <li>• <strong>2-4L:</strong> Lagers or high gravity beers</li>
+          <li>• <strong>Stir plate:</strong> ~2x growth vs static</li>
+          <li>• <strong>Shaken:</strong> ~1.5x growth, middle ground</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

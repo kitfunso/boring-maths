@@ -397,7 +397,7 @@ export default function GoFullTimeCalculator() {
                             : formatMonths(scenario.monthsUntilReady)}
                       </span>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 text-sm text-[var(--color-subtle)]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm text-[var(--color-subtle)]">
                       <div>
                         Savings needed: <span className="font-medium">{formatCurrency(scenario.savingsNeeded, inputs.currency)}</span>
                       </div>
@@ -536,13 +536,18 @@ export default function GoFullTimeCalculator() {
                     <div key={months} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div
-                          className={`w-3 h-3 rounded-full ${achieved ? 'bg-green-500' : 'bg-white/20'}`}
+                          className={`w-3 h-3 rounded-full shrink-0 ${achieved ? 'bg-green-500' : 'bg-white/20'}`}
                         />
-                        <span className={`text-sm ${achieved ? 'text-green-400 font-medium' : 'text-[var(--color-subtle)]'}`}>
-                          {label} ({months} months)
-                        </span>
+                        <div className="flex flex-col sm:flex-row sm:gap-1">
+                          <span className={`text-sm ${achieved ? 'text-green-400 font-medium' : 'text-[var(--color-subtle)]'}`}>
+                            {label}
+                          </span>
+                          <span className={`text-sm ${achieved ? 'text-green-400/70' : 'text-[var(--color-muted)]'}`}>
+                            ({months} months)
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-sm font-medium tabular-nums">
+                      <span className="text-sm font-medium tabular-nums shrink-0">
                         {formatCurrency(amount, inputs.currency)}
                       </span>
                     </div>

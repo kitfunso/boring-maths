@@ -5,8 +5,7 @@
  * Features multiple FIRE variants, projections, and milestone tracking.
  */
 
-import { useState, useMemo } from 'preact/hooks';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { useState, useMemo, useCallback } from 'preact/hooks';
 import {
   calculateFIRE,
   formatCurrency,
@@ -48,21 +47,49 @@ export default function FIRECalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Debounce inputs to avoid recalculating on every keystroke
-  const debouncedInputs = useDebounce(inputs, 150);
-
-  // Calculate results with debounced inputs
+  // Calculate results
   const result = useMemo(() => {
-    return calculateFIRE(debouncedInputs);
-  }, [debouncedInputs]);
+    return calculateFIRE(inputs);
+  }, [inputs]);
 
-  // Update input
+  // Update input - handles empty strings gracefully
   const updateInput = <K extends keyof FIRECalculatorInputs>(
     field: K,
     value: FIRECalculatorInputs[K]
   ) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
+
+  // Handle number input changes - only update if valid number or keep previous value
+  const handleNumberChange = useCallback((field: keyof FIRECalculatorInputs, e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const rawValue = target.value;
+
+    // Allow empty string during typing - don't snap to 0
+    if (rawValue === '' || rawValue === '-') {
+      return;
+    }
+
+    const numValue = Number(rawValue);
+    if (!isNaN(numValue)) {
+      updateInput(field, numValue as FIRECalculatorInputs[typeof field]);
+    }
+  }, []);
+
+  // Handle percentage inputs (stored as decimals)
+  const handlePercentChange = useCallback((field: keyof FIRECalculatorInputs, e: Event) => {
+    const target = e.target as HTMLInputElement;
+    const rawValue = target.value;
+
+    if (rawValue === '' || rawValue === '-') {
+      return;
+    }
+
+    const numValue = Number(rawValue);
+    if (!isNaN(numValue)) {
+      updateInput(field, (numValue / 100) as FIRECalculatorInputs[typeof field]);
+    }
+  }, []);
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
@@ -120,9 +147,8 @@ export default function FIRECalculator() {
                     min={18}
                     max={70}
                     value={inputs.currentAge}
-                    onChange={(e) =>
-                      updateInput('currentAge', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('currentAge', e)}
+                    onInput={(e) => handleNumberChange('currentAge', e)}
                   />
                 </div>
                 <div>
@@ -136,9 +162,8 @@ export default function FIRECalculator() {
                     max={10000000}
                     step={1000}
                     value={inputs.currentSavings}
-                    onChange={(e) =>
-                      updateInput('currentSavings', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('currentSavings', e)}
+                    onInput={(e) => handleNumberChange('currentSavings', e)}
                   />
                 </div>
                 <div>
@@ -152,9 +177,8 @@ export default function FIRECalculator() {
                     max={1000000}
                     step={1000}
                     value={inputs.annualIncome}
-                    onChange={(e) =>
-                      updateInput('annualIncome', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('annualIncome', e)}
+                    onInput={(e) => handleNumberChange('annualIncome', e)}
                   />
                 </div>
                 <div>
@@ -168,9 +192,8 @@ export default function FIRECalculator() {
                     max={500000}
                     step={1000}
                     value={inputs.annualExpenses}
-                    onChange={(e) =>
-                      updateInput('annualExpenses', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('annualExpenses', e)}
+                    onInput={(e) => handleNumberChange('annualExpenses', e)}
                   />
                 </div>
               </Grid>
@@ -193,9 +216,8 @@ export default function FIRECalculator() {
                     max={50000}
                     step={100}
                     value={inputs.monthlySavings}
-                    onChange={(e) =>
-                      updateInput('monthlySavings', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('monthlySavings', e)}
+                    onInput={(e) => handleNumberChange('monthlySavings', e)}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Current savings rate:{' '}
@@ -215,9 +237,8 @@ export default function FIRECalculator() {
                     max={500000}
                     step={1000}
                     value={inputs.desiredRetirementExpenses}
-                    onChange={(e) =>
-                      updateInput('desiredRetirementExpenses', Number(e.target.value))
-                    }
+                    onBlur={(e) => handleNumberChange('desiredRetirementExpenses', e)}
+                    onInput={(e) => handleNumberChange('desiredRetirementExpenses', e)}
                   />
                 </div>
               </Grid>
@@ -284,10 +305,9 @@ export default function FIRECalculator() {
                     min={0}
                     max={10}
                     step={0.5}
-                    value={inputs.inflationRate * 100}
-                    onChange={(e) =>
-                      updateInput('inflationRate', Number(e.target.value) / 100)
-                    }
+                    value={Math.round(inputs.inflationRate * 1000) / 10}
+                    onBlur={(e) => handlePercentChange('inflationRate', e)}
+                    onInput={(e) => handlePercentChange('inflationRate', e)}
                   />
                 </div>
                 <div>
@@ -298,10 +318,9 @@ export default function FIRECalculator() {
                     min={2}
                     max={6}
                     step={0.25}
-                    value={inputs.safeWithdrawalRate * 100}
-                    onChange={(e) =>
-                      updateInput('safeWithdrawalRate', Number(e.target.value) / 100)
-                    }
+                    value={Math.round(inputs.safeWithdrawalRate * 1000) / 10}
+                    onBlur={(e) => handlePercentChange('safeWithdrawalRate', e)}
+                    onInput={(e) => handlePercentChange('safeWithdrawalRate', e)}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     4% is the traditional rule
@@ -315,10 +334,9 @@ export default function FIRECalculator() {
                     min={1}
                     max={15}
                     step={0.5}
-                    value={inputs.expectedReturn * 100}
-                    onChange={(e) =>
-                      updateInput('expectedReturn', Number(e.target.value) / 100)
-                    }
+                    value={Math.round(inputs.expectedReturn * 1000) / 10}
+                    onBlur={(e) => handlePercentChange('expectedReturn', e)}
+                    onInput={(e) => handlePercentChange('expectedReturn', e)}
                   />
                 </div>
               </Grid>

@@ -97,6 +97,12 @@ const calculators = [
   { id: 'mash-water-calculator', name: 'Mash Water Calculator', emoji: '🍺', color: '#d97706', tagline: 'All-grain brewing calculator' },
   { id: 'kiln-cost-calculator', name: 'Kiln Cost Calculator', emoji: '🔥', color: '#c2410c', tagline: 'Pottery kiln electricity cost' },
   { id: 'candle-wax-calculator', name: 'Candle Wax Calculator', emoji: '🕯️', color: '#a855f7', tagline: 'Container volume to wax weight' },
+  // Niche Calculators - Phase 4
+  { id: 'tool-deflection-calculator', name: 'Tool Deflection Calculator', emoji: '📏', color: '#64748b', tagline: 'CNC end mill deflection' },
+  { id: 'water-change-calculator', name: 'Water Change Calculator', emoji: '💧', color: '#0ea5e9', tagline: 'Aquarium dilution calculator' },
+  { id: 'priming-sugar-calculator', name: 'Priming Sugar Calculator', emoji: '🍺', color: '#d97706', tagline: 'Bottle conditioning carbonation' },
+  { id: 'yeast-pitch-rate-calculator', name: 'Yeast Pitch Rate', emoji: '🧫', color: '#d97706', tagline: 'Cell count for brewing' },
+  { id: 'batch-cost-calculator', name: 'Batch Cost Calculator', emoji: '💰', color: '#a855f7', tagline: 'Craft pricing calculator' },
 ];
 
 // Font loading - use local font files from @fontsource/inter

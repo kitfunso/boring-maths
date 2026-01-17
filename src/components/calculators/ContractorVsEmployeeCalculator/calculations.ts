@@ -394,14 +394,51 @@ export function getComparisonColor(contractorValue: number, employeeValue: numbe
 }
 
 /**
- * Common tax brackets for reference
+ * Tax brackets by region
  */
-export const TAX_BRACKETS = [
-  { rate: 0.10, label: '10%', range: '$0 - $11,000' },
-  { rate: 0.12, label: '12%', range: '$11,001 - $44,725' },
-  { rate: 0.22, label: '22%', range: '$44,726 - $95,375' },
-  { rate: 0.24, label: '24%', range: '$95,376 - $183,000' },
-  { rate: 0.32, label: '32%', range: '$183,001 - $231,250' },
-  { rate: 0.35, label: '35%', range: '$231,251 - $578,125' },
-  { rate: 0.37, label: '37%', range: '$578,126+' },
-];
+export const TAX_BRACKETS_BY_REGION: Record<Currency, Array<{ rate: number; label: string; range: string }>> = {
+  USD: [
+    { rate: 0.10, label: '10%', range: '$0 - $11,000' },
+    { rate: 0.12, label: '12%', range: '$11,001 - $44,725' },
+    { rate: 0.22, label: '22%', range: '$44,726 - $95,375' },
+    { rate: 0.24, label: '24%', range: '$95,376 - $183,000' },
+    { rate: 0.32, label: '32%', range: '$183,001 - $231,250' },
+    { rate: 0.35, label: '35%', range: '$231,251 - $578,125' },
+    { rate: 0.37, label: '37%', range: '$578,126+' },
+  ],
+  GBP: [
+    { rate: 0.00, label: '0%', range: '£0 - £12,570' },
+    { rate: 0.20, label: '20%', range: '£12,571 - £50,270' },
+    { rate: 0.40, label: '40%', range: '£50,271 - £125,140' },
+    { rate: 0.45, label: '45%', range: '£125,141+' },
+  ],
+  EUR: [
+    { rate: 0.00, label: '0%', range: '€0 - €10,000' },
+    { rate: 0.14, label: '14%', range: '€10,001 - €15,000' },
+    { rate: 0.24, label: '24%', range: '€15,001 - €28,000' },
+    { rate: 0.34, label: '34%', range: '€28,001 - €55,000' },
+    { rate: 0.42, label: '42%', range: '€55,001 - €75,000' },
+    { rate: 0.45, label: '45%', range: '€75,001+' },
+  ],
+};
+
+/**
+ * Get tax brackets for a currency (for backwards compatibility)
+ */
+export function getTaxBrackets(currency: Currency) {
+  return TAX_BRACKETS_BY_REGION[currency];
+}
+
+/**
+ * Default US tax brackets (for backwards compatibility)
+ */
+export const TAX_BRACKETS = TAX_BRACKETS_BY_REGION.USD;
+
+/**
+ * Self-employment tax info by region
+ */
+export const SELF_EMPLOYMENT_TAX_INFO: Record<Currency, { rate: number; label: string }> = {
+  USD: { rate: 0.153, label: 'Additional 7.65% FICA' },
+  GBP: { rate: 0.09, label: 'Class 4 NICs' },
+  EUR: { rate: 0.15, label: 'Social contributions (varies)' },
+};

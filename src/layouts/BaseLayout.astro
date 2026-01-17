@@ -103,7 +103,7 @@ const ogImageURL = ogImage
     <title>{title}</title>
 
     <!-- View Transitions for instant navigation -->
-    <ViewTransitions />
+    <ViewTransitions fallback="swap" />
   </head>
   <body class="min-h-screen mesh-bg noise relative">
     <!-- Ambient Glow Background -->
@@ -300,14 +300,29 @@ const ogImageURL = ogImage
       </div>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- Mobile Menu Script - Works with View Transitions -->
     <script>
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
+      function initMobileMenu() {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-      menuBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('hidden');
-      });
+        // Remove existing listener to prevent duplicates
+        menuBtn?.replaceWith(menuBtn.cloneNode(true));
+        const newMenuBtn = document.getElementById('mobile-menu-btn');
+
+        newMenuBtn?.addEventListener('click', () => {
+          mobileMenu?.classList.toggle('hidden');
+        });
+
+        // Close menu on navigation
+        mobileMenu?.classList.add('hidden');
+      }
+
+      // Run on initial load
+      initMobileMenu();
+
+      // Re-run after View Transitions navigation
+      document.addEventListener('astro:page-load', initMobileMenu);
     </script>
 
     <!-- Cookie Consent Banner -->

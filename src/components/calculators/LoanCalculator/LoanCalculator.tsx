@@ -4,7 +4,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateLoan, formatCurrency, formatTermDisplay } from './calculations';
-import { getDefaultInputs, LOAN_TYPES, TERM_PRESETS, type LoanInputs, type LoanType } from './types';
+import { getDefaultInputs, LOAN_TYPES, type LoanInputs, type LoanType } from './types';
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
 import {
   ThemeProvider,
@@ -115,7 +115,11 @@ export default function LoanCalculator() {
                 step={12}
                 value={inputs.loanTerm}
                 onChange={(value) => updateInput('loanTerm', value)}
-                labels={TERM_PRESETS.map((p) => ({ value: p.months, label: p.label }))}
+                labels={{
+                  min: '1 year',
+                  mid: '3.5 years',
+                  max: '7 years',
+                }}
               />
             </div>
           </div>

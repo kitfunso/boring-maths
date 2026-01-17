@@ -1,0 +1,208 @@
+---
+/**
+ * Batch Cost Calculator Page
+ * Calculate material costs, labor, and pricing for crafts
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { BatchCostCalculator } from '../../components/calculators/BatchCostCalculator';
+
+const title = 'Batch Cost Calculator | Craft Pricing & Profit Calculator';
+const description = 'Free batch cost calculator for soap makers, chandlers, and crafters. Calculate material costs, labor, overhead, and suggested retail pricing for profitable pricing.';
+const keywords = 'batch cost calculator, craft pricing, soap making cost, candle cost calculator, profit margin, wholesale pricing, handmade pricing, Etsy pricing';
+const canonicalURL = '/calculators/batch-cost-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Batch Cost Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Lye Calculator',
+    description: 'Calculate lye amounts for soap making.',
+    href: '/calculators/lye-calculator',
+    icon: 'beaker' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Fragrance Calculator',
+    description: 'Calculate fragrance load percentages.',
+    href: '/calculators/fragrance-calculator',
+    icon: 'scale' as const,
+    color: 'pink' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How do I price handmade products?",
+    answer: "Use the formula: Materials + Labor + Overhead + Profit = Retail Price. Many crafters use a 2x or 2.5x markup on costs for retail, with wholesale at 50% of retail. This calculator helps you find the right price based on your actual costs and target margin."
+  },
+  {
+    question: "Should I include my time as a cost?",
+    answer: "Absolutely. Your time has value. If you don't pay yourself, you're subsidizing your customers. Start with at least minimum wage, but aim for a rate that reflects your skill level. As you gain experience and efficiency, your effective hourly rate will increase."
+  },
+  {
+    question: "What overhead costs should I include?",
+    answer: "Overhead includes: workspace costs (rent/utilities portion), equipment depreciation, insurance, website/platform fees, marketing, shipping supplies, packaging, taxes, and business software. A percentage of total direct costs (10-30%) is a common approach."
+  },
+  {
+    question: "How do I set wholesale pricing?",
+    answer: "Standard wholesale is 50% of retail. This gives retailers room for their markup. Your wholesale price must cover all costs plus profit. If you can't profit at 50%, either reduce costs or increase retail price. Some makers do 60/40 or offer tiered discounts."
+  },
+  {
+    question: "What profit margin should I target?",
+    answer: "Handmade goods typically target 30-50% margins for sustainable businesses. Premium or specialty items can command 75-100%+. Low margins work only with high volume. Factor in platform fees (Etsy takes ~12% including payment processing) when setting margins."
+  },
+  {
+    question: "How do I calculate cost per unit for bulk materials?",
+    answer: "Divide bulk price by total units. For oils by weight: price ÷ ounces = cost per ounce. For fragrance oils sold by pound: price ÷ 16oz = per ounce. Track your actual usage to refine estimates. Buy in bulk only if storage conditions allow."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Batch Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Batch Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Batch Cost Calculator"
+    description="Calculate the true cost of your handmade products. Factor in materials, labor, overhead, and profit margin to set prices that sustain your craft business."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <BatchCostCalculator client:visible />
+  </section>
+
+  <ContentSection title="Pricing Formula">
+    <p>
+      Profitable pricing starts with knowing your true costs. Many crafters
+      undercharge because they forget overhead or undervalue their time.
+    </p>
+    <div class="bg-[var(--color-surface)] rounded-lg p-6 ring-1 ring-white/10 mt-4">
+      <div class="text-center mb-4">
+        <span class="text-lg font-mono text-amber-400">
+          Retail = (Materials + Labor + Packaging + Overhead) × (1 + Margin%)
+        </span>
+      </div>
+      <div class="grid md:grid-cols-4 gap-4 mt-4 text-sm">
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-purple-400">Materials</div>
+          <div class="text-[var(--color-subtle)]">All raw ingredients and supplies consumed in the batch</div>
+        </div>
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-blue-400">Labor</div>
+          <div class="text-[var(--color-subtle)]">Your time × hourly rate you want to earn</div>
+        </div>
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-green-400">Overhead</div>
+          <div class="text-[var(--color-subtle)]">Workspace, equipment, fees, insurance, etc.</div>
+        </div>
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-amber-400">Profit Margin</div>
+          <div class="text-[var(--color-subtle)]">Your business profit beyond paying yourself</div>
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Hidden Costs to Consider">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-2">
+        <h4 class="font-semibold text-red-400">Often Forgotten</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• Platform fees (Etsy: ~12% total)</li>
+          <li>• Payment processing (3% typically)</li>
+          <li>• Returns and remakes</li>
+          <li>• Photography and listing time</li>
+          <li>• Customer service time</li>
+          <li>• Shipping materials and labels</li>
+          <li>• Market/show booth fees</li>
+          <li>• Business insurance</li>
+        </ul>
+      </div>
+      <div class="space-y-2">
+        <h4 class="font-semibold text-green-400">Efficiency Tips</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>• Track time for 5+ batches to get accurate labor</li>
+          <li>• Buy bulk when you can store properly</li>
+          <li>• Batch similar tasks (pour all, package all)</li>
+          <li>• Standardize products to reduce complexity</li>
+          <li>• Price shipping into products if possible</li>
+          <li>• Increase prices yearly to match costs</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Pricing Benchmarks">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Product</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Typical Material %</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Retail Range</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Bar Soap (4-5oz)</td>
+            <td class="py-2 px-3 text-right text-amber-400">25-35%</td>
+            <td class="py-2 px-3 text-right text-green-400">$6-12</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Premium ingredients justify higher prices</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Candle (8oz)</td>
+            <td class="py-2 px-3 text-right text-amber-400">30-40%</td>
+            <td class="py-2 px-3 text-right text-green-400">$18-28</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Container and fragrance drive costs</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Lotion (4oz)</td>
+            <td class="py-2 px-3 text-right text-amber-400">20-30%</td>
+            <td class="py-2 px-3 text-right text-green-400">$12-20</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Preservatives and actives add value</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Lip Balm</td>
+            <td class="py-2 px-3 text-right text-amber-400">15-25%</td>
+            <td class="py-2 px-3 text-right text-green-400">$4-8</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]">Small size = low materials but fiddly to make</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-sm text-[var(--color-subtle)] mt-4">
+      These are general market benchmarks. Your unique branding, quality, and target market
+      may justify prices above or below these ranges.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

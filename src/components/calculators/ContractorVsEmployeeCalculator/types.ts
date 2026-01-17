@@ -162,6 +162,15 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
 
   const d = defaults[currency];
 
+  // Region-specific tax defaults
+  const taxDefaults = {
+    USD: { federalTaxBracket: 0.22, stateTaxRate: 0.05, selfEmploymentTaxRate: 0.153 },
+    GBP: { federalTaxBracket: 0.20, stateTaxRate: 0, selfEmploymentTaxRate: 0.09 },
+    EUR: { federalTaxBracket: 0.24, stateTaxRate: 0, selfEmploymentTaxRate: 0.15 },
+  };
+
+  const tax = taxDefaults[currency];
+
   return {
     // Contractor
     contractorHourlyRate: d.contractorHourlyRate,
@@ -178,21 +187,21 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
     employerHealthInsuranceMonthly: d.employerHealthInsuranceMonthly,
     employerDentalVisionMonthly: 50,
     employerLifeDisabilityMonthly: 30,
-    paidTimeOffDays: 15,
-    paidHolidaysDays: 10,
+    paidTimeOffDays: currency === 'GBP' ? 25 : currency === 'EUR' ? 25 : 15,
+    paidHolidaysDays: currency === 'GBP' ? 8 : currency === 'EUR' ? 10 : 10,
     otherBenefitsAnnual: 2000,
 
     // Contractor costs
     contractorHealthInsuranceMonthly: d.contractorHealthInsuranceMonthly,
     contractorRetirementContribPercent: 15,
     contractorBusinessExpensesMonthly: 200,
-    contractorAccountingAnnual: 1500,
+    contractorAccountingAnnual: currency === 'GBP' ? 1000 : currency === 'EUR' ? 1200 : 1500,
     contractorInsuranceAnnual: 1000,
 
-    // Taxes (US defaults)
-    federalTaxBracket: 0.22,
-    stateTaxRate: 0.05,
-    selfEmploymentTaxRate: 0.153,
+    // Taxes (region-specific defaults)
+    federalTaxBracket: tax.federalTaxBracket,
+    stateTaxRate: tax.stateTaxRate,
+    selfEmploymentTaxRate: tax.selfEmploymentTaxRate,
 
     currency,
   };

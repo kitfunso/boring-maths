@@ -1,0 +1,172 @@
+---
+/**
+ * Water Change Calculator Page
+ * Calculate aquarium water changes and parameter adjustments
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { WaterChangeCalculator } from '../../components/calculators/WaterChangeCalculator';
+
+const title = 'Water Change Calculator | Aquarium Parameter Dilution';
+const description = 'Free aquarium water change calculator. Calculate how water changes affect nitrate, ammonia, and other parameters. Plan your maintenance schedule for healthy fish.';
+const keywords = 'water change calculator, aquarium calculator, nitrate dilution, fish tank maintenance, water parameters, aquarium care, freshwater, saltwater';
+const canonicalURL = '/calculators/water-change-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Water Change Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Fish Stocking Calculator',
+    description: 'Calculate safe fish stocking levels.',
+    href: '/calculators/fish-stocking-calculator',
+    icon: 'beaker' as const,
+    color: 'cyan' as const,
+  },
+  {
+    title: 'CO₂ Calculator',
+    description: 'Calculate CO₂ levels from pH and KH.',
+    href: '/calculators/co2-calculator',
+    icon: 'scale' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: "How often should I change aquarium water?",
+    answer: "Most freshwater tanks benefit from weekly 20-30% water changes. Heavily stocked tanks or those with messy fish may need 50% weekly. Lightly stocked planted tanks might only need 10-20% biweekly. Monitor nitrates - keep them under 20-40ppm for most freshwater fish."
+  },
+  {
+    question: "Why doesn't a water change completely remove nitrates?",
+    answer: "Water changes work by dilution. A 50% change removes 50% of the nitrates. To reduce from 40ppm to 10ppm requires multiple changes or one very large change. This calculator shows exactly how many changes are needed to reach your target."
+  },
+  {
+    question: "Can I do too large a water change?",
+    answer: "Large water changes (50%+) are safe if temperature and pH match closely. The main risks are temperature shock and pH swings. Sensitive fish and invertebrates prefer smaller, more frequent changes. In emergencies (ammonia spike), large changes are necessary and beneficial."
+  },
+  {
+    question: "Should I gravel vacuum during water changes?",
+    answer: "Yes, vacuuming removes fish waste and uneaten food before they decompose and add to nitrates. Vacuum about 1/3 of the substrate each change, rotating areas weekly. For planted tanks with root feeders, vacuum sparingly around plants."
+  },
+  {
+    question: "How do I match water temperature?",
+    answer: "Aim for within 2°F (1°C) of tank temperature. Use a thermometer on your tap water after running it for a minute. Most fish tolerate small temperature differences, but sensitive species and during breeding require closer matching."
+  },
+  {
+    question: "Do water changes stress fish?",
+    answer: "Properly done water changes don't stress healthy fish. Fish evolved with water changes from rain and flowing water. Stress comes from large parameter swings (temp, pH) or going too long between changes, letting toxins build up. Consistent small changes are less stressful than infrequent large ones."
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Water Change Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Water Change Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Water Change Calculator"
+    description="Calculate how water changes affect your aquarium parameters. Plan dilution schedules for nitrate, ammonia, and other water quality targets."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <WaterChangeCalculator client:visible />
+  </section>
+
+  <ContentSection title="Water Parameter Guidelines">
+    <p>
+      Regular water changes are essential for maintaining healthy water parameters.
+      Different fish have different tolerances, but these are general guidelines for
+      most freshwater aquariums.
+    </p>
+    <div class="grid md:grid-cols-4 gap-4 mt-4">
+      <div class="bg-red-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-red-400 mb-2">Ammonia (NH₃)</h4>
+        <div class="text-xl font-bold text-red-300">0 ppm</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Any detectable ammonia is dangerous. Emergency water changes if detected.
+        </div>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Nitrite (NO₂)</h4>
+        <div class="text-xl font-bold text-orange-300">0 ppm</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Toxic to fish. Should always be zero in cycled tanks.
+        </div>
+      </div>
+      <div class="bg-yellow-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-yellow-400 mb-2">Nitrate (NO₃)</h4>
+        <div class="text-xl font-bold text-yellow-300">&lt;20 ppm</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Ideally under 20ppm. Some fish tolerate up to 40ppm.
+        </div>
+      </div>
+      <div class="bg-cyan-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-cyan-400 mb-2">pH</h4>
+        <div class="text-xl font-bold text-cyan-300">6.5-7.5</div>
+        <div class="text-sm text-[var(--color-subtle)] mt-2">
+          Stability matters more than exact value. Avoid swings.
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="The Dilution Formula">
+    <div class="bg-[var(--color-surface)] rounded-lg p-6 ring-1 ring-white/10">
+      <div class="text-center mb-4">
+        <span class="text-lg font-mono text-amber-400">
+          New Level = Current × (1 - Change%) + New Water × Change%
+        </span>
+      </div>
+      <p class="text-sm text-[var(--color-subtle)]">
+        This formula shows how your parameter level changes after a water change.
+        If your new water has 0 ppm of the parameter (like nitrate-free tap water),
+        a 50% water change cuts the level in half each time.
+      </p>
+      <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm">
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-[var(--color-text)]">25% Change</div>
+          <div class="text-[var(--color-subtle)]">Reduces by 25% each time</div>
+          <div class="text-xs text-amber-400 mt-1">40ppm → 30 → 22.5 → 17</div>
+        </div>
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-[var(--color-text)]">50% Change</div>
+          <div class="text-[var(--color-subtle)]">Cuts in half each time</div>
+          <div class="text-xs text-amber-400 mt-1">40ppm → 20 → 10 → 5</div>
+        </div>
+        <div class="bg-[var(--color-background)] rounded p-3">
+          <div class="font-semibold text-[var(--color-text)]">75% Change</div>
+          <div class="text-[var(--color-subtle)]">Reduces by 75% each time</div>
+          <div class="text-xs text-amber-400 mt-1">40ppm → 10 → 2.5 → 0.6</div>
+        </div>
+      </div>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

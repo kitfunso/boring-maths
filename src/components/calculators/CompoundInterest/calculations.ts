@@ -29,6 +29,7 @@ function getPeriodsPerYear(frequency: CompoundFrequency): number {
 
 /**
  * Calculate compound interest with monthly contributions
+ * Properly handles different compound frequencies
  */
 export function calculateCompoundInterest(inputs: CompoundInterestInputs): CompoundInterestResult {
   const {
@@ -41,7 +42,7 @@ export function calculateCompoundInterest(inputs: CompoundInterestInputs): Compo
   } = inputs;
 
   const n = getPeriodsPerYear(compoundFrequency); // Compounds per year
-  const r = interestRate; // Annual rate
+  const r = interestRate; // Annual rate as decimal
   const t = years;
   const pmt = monthlyContribution;
 
@@ -51,19 +52,34 @@ export function calculateCompoundInterest(inputs: CompoundInterestInputs): Compo
   let totalContributions = principal;
   let totalInterest = 0;
 
-  for (let year = 1; year <= t; year++) {
-    // Add monthly contributions throughout the year
-    const annualContribution = pmt * 12;
+  // Determine compound period in months
+  const monthsPerCompound = 12 / n;
+  const ratePerPeriod = r / n;
 
-    // Calculate interest for this year (simplified with compound growth)
-    // Using formula for future value with periodic contributions
+  for (let year = 1; year <= t; year++) {
+    const annualContribution = pmt * 12;
     const startBalance = balance;
 
-    // For more accurate simulation, calculate month by month
-    for (let month = 0; month < 12; month++) {
-      // Add monthly interest
-      const monthlyRate = r / 12;
-      balance = balance * (1 + monthlyRate) + pmt;
+    // Simulate month by month, applying compound interest at the right frequency
+    for (let month = 1; month <= 12; month++) {
+      // Add monthly contribution first
+      balance += pmt;
+
+      // Apply compound interest if this is a compounding period
+      // Daily: compound every month (approximated as monthly for simplicity with daily rate)
+      // Monthly: compound every month
+      // Quarterly: compound every 3 months
+      // Semi-annually: compound every 6 months
+      // Annually: compound every 12 months
+      if (compoundFrequency === 'daily') {
+        // For daily compounding, use daily rate applied ~30 times per month
+        const dailyRate = r / 365;
+        const daysInMonth = 30; // Approximation
+        balance = balance * Math.pow(1 + dailyRate, daysInMonth);
+      } else if (month % monthsPerCompound === 0) {
+        // Apply compound interest for this period
+        balance = balance * (1 + ratePerPeriod);
+      }
     }
 
     const yearInterest = balance - startBalance - annualContribution;

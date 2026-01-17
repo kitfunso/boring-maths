@@ -61,13 +61,16 @@ function calculateRunway(
 
 /**
  * Calculate savings needed for a specific risk level
+ * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
  */
 function calculateSavingsNeeded(
   monthlyExpenses: number,
-  riskLevel: RiskTolerance
+  riskLevel: RiskTolerance,
+  customBufferMonths?: number
 ): number {
   const threshold = RISK_THRESHOLDS[riskLevel];
-  return monthlyExpenses * threshold.runwayMonths;
+  const runwayMonths = customBufferMonths ?? threshold.runwayMonths;
+  return monthlyExpenses * runwayMonths;
 }
 
 /**
@@ -83,15 +86,18 @@ function calculateIncomeNeeded(
 
 /**
  * Check if ready to quit at a specific risk level
+ * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
  */
 function isReadyAtRiskLevel(
   currentSavings: number,
   monthlySideIncome: number,
   monthlyExpenses: number,
-  riskLevel: RiskTolerance
+  riskLevel: RiskTolerance,
+  customBufferMonths?: number
 ): boolean {
   const threshold = RISK_THRESHOLDS[riskLevel];
-  const requiredSavings = monthlyExpenses * threshold.runwayMonths;
+  const runwayMonths = customBufferMonths ?? threshold.runwayMonths;
+  const requiredSavings = monthlyExpenses * runwayMonths;
   const requiredIncome = monthlyExpenses * threshold.incomePercentOfExpenses;
 
   return currentSavings >= requiredSavings && monthlySideIncome >= requiredIncome;
@@ -99,6 +105,7 @@ function isReadyAtRiskLevel(
 
 /**
  * Calculate months until ready at a specific risk level
+ * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
  */
 function monthsUntilReady(
   currentSavings: number,
@@ -106,10 +113,12 @@ function monthsUntilReady(
   monthlyExpenses: number,
   monthlyGrowthRate: number,
   monthlySavingsRate: number,
-  riskLevel: RiskTolerance
+  riskLevel: RiskTolerance,
+  customBufferMonths?: number
 ): number {
   const threshold = RISK_THRESHOLDS[riskLevel];
-  const requiredSavings = monthlyExpenses * threshold.runwayMonths;
+  const runwayMonths = customBufferMonths ?? threshold.runwayMonths;
+  const requiredSavings = monthlyExpenses * runwayMonths;
   const requiredIncome = monthlyExpenses * threshold.incomePercentOfExpenses;
 
   // Calculate months to reach income threshold
@@ -297,8 +306,8 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   // Estimate monthly savings capacity (assuming we can save side income while employed)
   const monthlySavingsCapacity = Math.max(0, monthlySideIncome * 0.8); // 80% of side income can be saved
 
-  // Savings needed at selected risk level
-  const savingsNeededForRisk = calculateSavingsNeeded(monthlyExpenses, riskTolerance);
+  // Savings needed at selected risk level (uses user's desired buffer)
+  const savingsNeededForRisk = calculateSavingsNeeded(monthlyExpenses, riskTolerance, desiredSafetyBuffer);
   const incomeNeededForRisk = calculateIncomeNeeded(monthlyExpenses, riskTolerance);
 
   // Is ready to quit?
@@ -306,7 +315,8 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     currentSavings,
     monthlySideIncome,
     monthlyExpenses,
-    riskTolerance
+    riskTolerance,
+    desiredSafetyBuffer
   );
 
   // Months until ready
@@ -316,7 +326,8 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     monthlyExpenses,
     monthlyGrowthRate,
     monthlySavingsCapacity,
-    riskTolerance
+    riskTolerance,
+    desiredSafetyBuffer
   );
 
   // Recommended quit date
