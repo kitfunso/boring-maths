@@ -143,7 +143,11 @@ export default function GoFullTimeCalculator() {
                     value={inputs.monthlyBenefitsValue}
                     onChange={(e) => updateInput('monthlyBenefitsValue', Number(e.target.value))}
                   />
-                  <p className="text-sm text-[var(--color-muted)] mt-1">Health insurance, 401k match, perks</p>
+                  <p className="text-sm text-[var(--color-muted)] mt-1">
+                    {inputs.currency === 'USD' && 'Health insurance, 401k match, perks'}
+                    {inputs.currency === 'GBP' && 'Private insurance, pension match, perks'}
+                    {inputs.currency === 'EUR' && 'Insurance, pension contributions, perks'}
+                  </p>
                 </div>
               </Grid>
             </div>

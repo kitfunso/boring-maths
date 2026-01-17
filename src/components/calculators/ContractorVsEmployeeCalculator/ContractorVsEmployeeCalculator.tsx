@@ -276,7 +276,9 @@ export default function ContractorVsEmployeeCalculator() {
 
                 <Grid responsive={{ sm: 2 }} gap="sm">
                   <div>
-                    <Label htmlFor="match401k">401k Match (%)</Label>
+                    <Label htmlFor="match401k">
+                      {inputs.currency === 'USD' ? '401k Match (%)' : 'Pension Match (%)'}
+                    </Label>
                     <Input
                       id="match401k"
                       type="number"
