@@ -22,18 +22,25 @@ const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'B
 
 const relatedCalculators = [
   {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate your ideal protein, carbs, and fat intake.',
+    href: '/calculators/macro-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
     title: 'Age Calculator',
     description: 'Calculate your exact age and life statistics.',
     href: '/calculators/age-calculator',
-    icon: 'calendar' as const,
+    icon: 'calculator' as const,
     color: 'purple' as const,
-  },
-  {
-    title: 'Unit Converter',
-    description: 'Convert between different units of measurement.',
-    href: '/calculators/unit-converter',
-    icon: 'clock' as const,
-    color: 'blue' as const,
   },
 ];
 
@@ -135,6 +142,40 @@ const schemaBreadcrumbs = [
       Remember that BMI is just one indicator of health. <strong>Body composition</strong>, fitness
       level, and other factors are equally important. Consult a healthcare provider for a complete
       health assessment.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="BMI Categories Explained">
+    <p>
+      <strong>Underweight (BMI below 18.5):</strong> May indicate nutritional deficiency or other health
+      issues. Being underweight can lead to weakened immunity, bone loss, and fertility problems.
+    </p>
+    <p>
+      <strong>Normal weight (BMI 18.5-24.9):</strong> Associated with the lowest health risks. This range
+      has the lowest incidence of weight-related health conditions.
+    </p>
+    <p>
+      <strong>Overweight (BMI 25-29.9):</strong> May increase risk of heart disease, type 2 diabetes,
+      and high blood pressure. Lifestyle changes can help move into the normal range.
+    </p>
+    <p>
+      <strong>Obese (BMI 30+):</strong> Significantly higher risk for chronic conditions. Consulting a
+      healthcare provider for a weight management plan is recommended.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Limitations of BMI">
+    <p>
+      <strong>Doesn't measure body fat:</strong> BMI doesn't distinguish between muscle, bone, and fat.
+      Muscular individuals may have a high BMI despite low body fat.
+    </p>
+    <p>
+      <strong>Age differences:</strong> Older adults may have more body fat than younger adults at the
+      same BMI. The scale doesn't account for changes in body composition with age.
+    </p>
+    <p>
+      <strong>Consider other metrics:</strong> Waist circumference, waist-to-hip ratio, and body fat percentage
+      provide additional insights into health risks that BMI alone cannot capture.
     </p>
   </ContentSection>
 

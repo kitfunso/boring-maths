@@ -12,7 +12,7 @@ import CompoundInterestCalculator from '../../components/calculators/CompoundInt
 
 const title = 'Compound Interest Calculator | How Fast Will My Money Grow?';
 const description =
-  'Free compound interest calculator with monthly contributions. See how your savings grow over 5, 10, 20, or 30 years. Visualize the power of compound growth with charts.';
+  'Free compound interest calculator with monthly contributions. See how your savings grow over time with charts.';
 const keywords =
   'compound interest calculator, compound interest formula, how to calculate compound interest, investment growth calculator, savings growth calculator, money growth calculator, rule of 72 calculator';
 const canonicalURL = '/calculators/compound-interest-calculator';
@@ -25,6 +25,20 @@ const breadcrumbs = [
 
 const relatedCalculators = [
   {
+    title: 'FIRE Calculator',
+    description: 'Calculate your path to financial independence.',
+    href: '/calculators/fire-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: '401k Calculator',
+    description: 'Project your retirement savings with employer match.',
+    href: '/calculators/401k-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
     title: 'Savings Goal Calculator',
     description: 'Plan your savings to reach any financial goal.',
     href: '/calculators/savings-goal-calculator',
@@ -32,11 +46,11 @@ const relatedCalculators = [
     color: 'yellow' as const,
   },
   {
-    title: 'Mortgage Calculator',
-    description: 'Calculate your monthly mortgage payment.',
-    href: '/calculators/mortgage-calculator',
-    icon: 'home' as const,
-    color: 'green' as const,
+    title: 'Inflation Calculator',
+    description: 'See how inflation affects purchasing power over time.',
+    href: '/calculators/inflation-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
   },
 ];
 
@@ -142,6 +156,37 @@ const schemaBreadcrumbs = [
       The <strong>growth chart</strong> shows how contributions (your money) and interest (earned money)
       grow over time. Notice how interest becomes a larger portion in later years - that's compound interest
       at work.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="The Power of Starting Early">
+    <p>
+      <strong>Time is your greatest asset.</strong> Starting at age 25 instead of 35 with the same monthly
+      contribution can result in nearly double the final amount, even though you only contributed for
+      an extra 10 years.
+    </p>
+    <p>
+      <strong>Example:</strong> $300/month at 7% starting at age 25 grows to $566,000 by age 65. Starting
+      the same $300/month at age 35 only reaches $283,000 - half as much with just 10 fewer years.
+    </p>
+    <p>
+      <strong>The early years matter most</strong> because compound interest accelerates over time. Money
+      invested today has decades to grow, while money invested later has less time to compound.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Realistic Return Expectations">
+    <p>
+      <strong>Historical averages:</strong> The S&P 500 has returned about 10% annually before inflation,
+      or 7% after inflation adjustment. These are long-term averages with significant year-to-year variation.
+    </p>
+    <p>
+      <strong>Bonds are more conservative:</strong> Government bonds typically return 4-5%, while high-yield
+      savings accounts offer 4-5% in high-rate environments. Lower risk means lower returns.
+    </p>
+    <p>
+      <strong>Account for inflation:</strong> A 7% return with 3% inflation means your real purchasing
+      power grows at only 4%. Use our inflation calculator to understand the true value of your savings.
     </p>
   </ContentSection>
 

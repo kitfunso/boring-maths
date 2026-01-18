@@ -25,6 +25,13 @@ const breadcrumbs = [
 
 const relatedCalculators = [
   {
+    title: 'Loan Calculator',
+    description: 'Calculate monthly payments for auto, personal, and student loans.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
     title: 'Compound Interest Calculator',
     description: 'See how investments grow over time with compound interest.',
     href: '/calculators/compound-interest-calculator',
@@ -32,11 +39,18 @@ const relatedCalculators = [
     color: 'yellow' as const,
   },
   {
+    title: 'FIRE Calculator',
+    description: 'Calculate your path to financial independence and early retirement.',
+    href: '/calculators/fire-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
     title: 'Savings Goal Calculator',
     description: 'Plan your savings to reach any financial goal.',
     href: '/calculators/savings-goal-calculator',
     icon: 'dollar' as const,
-    color: 'yellow' as const,
+    color: 'green' as const,
   },
 ];
 
@@ -142,6 +156,42 @@ const schemaBreadcrumbs = [
     <p>
       <strong>Loan-to-value (LTV)</strong> ratio shows what percentage of the home value you're borrowing.
       Lower LTV means more equity and potentially better rates.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="15-Year vs 30-Year Mortgage">
+    <p>
+      A <strong>15-year mortgage</strong> typically offers interest rates 0.5-0.75% lower than 30-year
+      loans. While monthly payments are higher, you'll pay significantly less interest over the life of
+      the loan and build equity faster.
+    </p>
+    <p>
+      A <strong>30-year mortgage</strong> has lower monthly payments, giving you more flexibility in your
+      budget. This can be advantageous if you invest the difference or need cash flow for other goals.
+    </p>
+    <p>
+      <strong>Example:</strong> On a $300,000 loan at 7% interest, a 15-year mortgage costs $2,696/month
+      with $185,000 total interest. A 30-year mortgage costs $1,996/month but $418,000 total interest
+      - more than double.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for First-Time Home Buyers">
+    <p>
+      <strong>Get pre-approved first.</strong> A mortgage pre-approval shows sellers you're serious and
+      tells you exactly how much house you can afford before you start shopping.
+    </p>
+    <p>
+      <strong>Don't forget closing costs.</strong> Budget 2-5% of the loan amount for closing costs on
+      top of your down payment. On a $300,000 home, that's $6,000-$15,000 extra.
+    </p>
+    <p>
+      <strong>Consider all costs.</strong> Your mortgage payment isn't your only expense. Factor in property
+      taxes, insurance, maintenance (1-2% of home value annually), and potential HOA fees.
+    </p>
+    <p>
+      <strong>Shop around for rates.</strong> Getting quotes from 3-5 lenders can save you thousands over
+      the life of your loan. Even a 0.25% rate difference matters significantly.
     </p>
   </ContentSection>
 
