@@ -66,7 +66,7 @@ function simulatePayoff(
   }));
 
   // Sort by strategy
-  const sortedDebts = sortDebtsByStrategy(workingDebts, strategy);
+  sortDebtsByStrategy(workingDebts, strategy);
   const payoffOrder: string[] = [];
   const timeline: MonthlySnapshot[] = [];
 

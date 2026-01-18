@@ -36,7 +36,7 @@ export function BatchCostCalculator() {
   const handleCraftTypeChange = (type: string) => {
     setInputs({
       ...inputs,
-      craftType: type as any,
+      craftType: type as BatchCostInputs['craftType'],
       materials: MATERIAL_PRESETS[type] || MATERIAL_PRESETS.custom,
       unitsProduced: DEFAULT_UNITS[type] || 10,
     });

@@ -4,7 +4,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CandleWaxInputs } from './types';
 import { WAX_TYPES, CONTAINER_PRESETS, FILL_OPTIONS } from './types';
@@ -47,7 +47,9 @@ export function CandleWaxCalculator() {
                   { value: 'volume', label: 'Direct Volume' },
                 ]}
                 value={inputs.calculationMode}
-                onChange={(v) => setInputs({ ...inputs, calculationMode: v as any })}
+                onChange={(v) =>
+                  setInputs({ ...inputs, calculationMode: v as CandleWaxInputs['calculationMode'] })
+                }
               />
             </div>
 
@@ -83,7 +85,12 @@ export function CandleWaxCalculator() {
                       { value: 'oval', label: 'Oval' },
                     ]}
                     value={inputs.containerShape}
-                    onChange={(v) => setInputs({ ...inputs, containerShape: v as any })}
+                    onChange={(v) =>
+                      setInputs({
+                        ...inputs,
+                        containerShape: v as CandleWaxInputs['containerShape'],
+                      })
+                    }
                   />
                 </div>
 
@@ -142,7 +149,9 @@ export function CandleWaxCalculator() {
                       { value: 'ml', label: 'mL' },
                     ]}
                     value={inputs.volumeUnit}
-                    onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                    onChange={(v) =>
+                      setInputs({ ...inputs, volumeUnit: v as CandleWaxInputs['volumeUnit'] })
+                    }
                   />
                 </div>
               </div>
@@ -204,7 +213,9 @@ export function CandleWaxCalculator() {
                   { value: 'pounds', label: 'Pounds' },
                 ]}
                 value={inputs.weightUnit}
-                onChange={(v) => setInputs({ ...inputs, weightUnit: v as any })}
+                onChange={(v) =>
+                  setInputs({ ...inputs, weightUnit: v as CandleWaxInputs['weightUnit'] })
+                }
               />
             </div>
           </div>

@@ -64,7 +64,12 @@ export function YeastPitchRateCalculator() {
                     { value: 'liters', label: 'Liters' },
                   ]}
                   value={inputs.volumeUnit}
-                  onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      volumeUnit: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                    })
+                  }
                 />
               </div>
             </div>
@@ -124,7 +129,12 @@ export function YeastPitchRateCalculator() {
                   { value: 'hybrid', label: 'Hybrid' },
                 ]}
                 value={inputs.beerType}
-                onChange={(v) => setInputs({ ...inputs, beerType: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    beerType: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                  })
+                }
               />
               <p className="mt-2 text-xs text-[var(--color-subtle)]">
                 {PITCH_RATES[inputs.beerType].description}
@@ -231,7 +241,12 @@ export function YeastPitchRateCalculator() {
                     label: val.label,
                   }))}
                   value={inputs.starterType}
-                  onChange={(v) => setInputs({ ...inputs, starterType: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      starterType: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                    })
+                  }
                 />
               </div>
 

@@ -41,7 +41,7 @@ export default function IdealGasLawCalculator() {
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;
-    const std = getStandardConditions(system);
+    void getStandardConditions(system); // Standard conditions available if needed
 
     if (system === 'imperial') {
       setInputs((prev) => ({

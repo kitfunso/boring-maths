@@ -19,8 +19,6 @@ import {
   ThemeProvider,
   Card,
   CalculatorHeader,
-  Label,
-  Input,
   Grid,
   Divider,
   ResultCard,

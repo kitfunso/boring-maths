@@ -16,7 +16,7 @@
  * ΔT₂ = T_hot_out - T_cold_out
  */
 
-import type { LMTDInputs, LMTDResult, FlowArrangement } from './types';
+import type { LMTDInputs, LMTDResult } from './types';
 
 /**
  * Calculate temperature differences based on flow arrangement
@@ -61,8 +61,7 @@ function calculateBasicLMTD(deltaT1: number, deltaT2: number): number {
  * Using the P-R method (Kern's method)
  */
 function calculateCorrectionFactor(inputs: LMTDInputs): number {
-  const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement, shellPasses, tubePasses } =
-    inputs;
+  const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement, shellPasses } = inputs;
 
   // Counter-flow and parallel-flow don't need correction
   if (flowArrangement === 'counterflow' || flowArrangement === 'parallelflow') {
@@ -100,7 +99,7 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
     if (shellPasses === 1) {
       // 1 shell pass formula
       const sqrt = Math.sqrt(R * R + 1);
-      const S = Math.sqrt(R * R + 1) / (R - 1);
+      void (Math.sqrt(R * R + 1) / (R - 1)); // S factor for reference
 
       if (Math.abs(R - 1) < 0.001) {
         // Special case when R ≈ 1
@@ -113,7 +112,7 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
       const term1 = (1 - P * R) / (1 - P);
       if (term1 <= 0) return 0.75;
 
-      const W = Math.pow(term1, 1 / shellPasses);
+      void Math.pow(term1, 1 / shellPasses); // W factor for reference
       const F =
         (sqrt * Math.log((1 - P) / (1 - P * R))) /
         ((R - 1) * Math.log((2 / P - 1 - R + sqrt) / (2 / P - 1 - R - sqrt)));

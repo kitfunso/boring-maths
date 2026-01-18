@@ -3,7 +3,7 @@
  * Tax on dividends and salary vs dividend comparison
  */
 
-import type { UKDividendTaxInputs, UKDividendTaxResult, TaxBreakdown, TaxRegion } from './types';
+import type { UKDividendTaxInputs, UKDividendTaxResult, TaxBreakdown } from './types';
 import { DIVIDEND_RATES, TAX_THRESHOLDS } from './types';
 
 /**
@@ -120,7 +120,6 @@ function calculateDividendTax(
 
   // Determine which band dividends fall into based on total income
   const personalAllowance = calculatePersonalAllowance(salaryIncome + dividendIncome);
-  const taxableTotal = salaryIncome + dividendIncome - personalAllowance;
   const salaryUsedInBands = Math.max(0, salaryIncome - personalAllowance);
 
   let tax = 0;
@@ -131,8 +130,6 @@ function calculateDividendTax(
   const higherRateBandSize = TAX_THRESHOLDS.higherRateLimit - TAX_THRESHOLDS.basicRateLimit;
 
   const basicRateRemaining = Math.max(0, basicRateBandSize - salaryUsedInBands);
-  const higherRateStart = basicRateBandSize;
-  const additionalRateStart = basicRateBandSize + higherRateBandSize;
 
   // Basic rate dividends (8.75%)
   if (remainingDividends > 0 && basicRateRemaining > 0) {

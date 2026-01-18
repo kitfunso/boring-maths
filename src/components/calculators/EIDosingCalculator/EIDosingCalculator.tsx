@@ -7,7 +7,7 @@ import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { EIDosingInputs } from './types';
-import { DOSING_SCHEDULES, TANK_PRESETS, FERTILIZERS } from './types';
+import { DOSING_SCHEDULES, TANK_PRESETS } from './types';
 import { calculateEIDosing, gramsToTeaspoons } from './calculations';
 
 export function EIDosingCalculator() {
@@ -55,7 +55,9 @@ export function EIDosingCalculator() {
                   { value: 'liters', label: 'Liters' },
                 ]}
                 value={inputs.volumeUnit}
-                onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                onChange={(v) =>
+                  setInputs({ ...inputs, volumeUnit: v as EIDosingInputs[keyof EIDosingInputs] })
+                }
               />
             </div>
 
@@ -86,7 +88,9 @@ export function EIDosingCalculator() {
             <Select
               label="Dosing Schedule"
               value={inputs.dosingSched}
-              onChange={(v) => setInputs({ ...inputs, dosingSched: v as any })}
+              onChange={(v) =>
+                setInputs({ ...inputs, dosingSched: v as EIDosingInputs[keyof EIDosingInputs] })
+              }
               options={DOSING_SCHEDULES.map((s) => ({
                 value: s.value,
                 label: s.label,
@@ -168,7 +172,12 @@ export function EIDosingCalculator() {
                   { value: 'liquid', label: 'Liquid' },
                 ]}
                 value={inputs.fertilizerType}
-                onChange={(v) => setInputs({ ...inputs, fertilizerType: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    fertilizerType: v as EIDosingInputs[keyof EIDosingInputs],
+                  })
+                }
               />
             </div>
 

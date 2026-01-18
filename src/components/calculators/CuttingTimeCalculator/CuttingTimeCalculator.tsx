@@ -49,7 +49,12 @@ export function CuttingTimeCalculator() {
             <Select
               label="Operation"
               value={inputs.operationType}
-              onChange={(v) => setInputs({ ...inputs, operationType: v as any })}
+              onChange={(v) =>
+                setInputs({
+                  ...inputs,
+                  operationType: v as CuttingTimeInputs[keyof CuttingTimeInputs],
+                })
+              }
               options={OPERATION_TYPES}
             />
 
@@ -64,7 +69,12 @@ export function CuttingTimeCalculator() {
                     { value: 'mm', label: 'mm' },
                   ]}
                   value={inputs.pathUnit}
-                  onChange={(v) => setInputs({ ...inputs, pathUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      pathUnit: v as CuttingTimeInputs[keyof CuttingTimeInputs],
+                    })
+                  }
                 />
               </div>
               <div>
@@ -77,7 +87,12 @@ export function CuttingTimeCalculator() {
                     { value: 'mmpm', label: 'mm/min' },
                   ]}
                   value={inputs.feedUnit}
-                  onChange={(v) => setInputs({ ...inputs, feedUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      feedUnit: v as CuttingTimeInputs[keyof CuttingTimeInputs],
+                    })
+                  }
                 />
               </div>
             </div>

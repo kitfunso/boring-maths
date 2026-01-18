@@ -64,8 +64,7 @@ const LTT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
-// Wales has no first-time buyer relief
-const LTT_FIRST_TIME = LTT_STANDARD;
+// Wales has no first-time buyer relief (uses LTT_STANDARD)
 
 // =============================================================================
 // SURCHARGES

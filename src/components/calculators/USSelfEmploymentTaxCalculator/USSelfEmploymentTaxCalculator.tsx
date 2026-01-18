@@ -3,7 +3,6 @@ import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSelfEmploymentTax, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
-  FILING_STATUS_LABELS,
   STANDARD_DEDUCTIONS_2025,
   SE_TAX_RATES,
   type USSelfEmploymentTaxInputs,

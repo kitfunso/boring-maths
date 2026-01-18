@@ -70,31 +70,7 @@ function getFlowRegime(Re: number): 'Laminar' | 'Transitional' | 'Turbulent' {
 }
 
 /**
- * Calculate Darcy friction factor
- *
- * Laminar: f = 64/Re
- * Turbulent: Swamee-Jain approximation of Colebrook-White
- */
-function calculateFrictionFactor(Re: number, epsilon: number, D: number): number {
-  if (Re < 2300) {
-    // Laminar flow
-    return 64 / Re;
-  }
-
-  // Turbulent flow - Swamee-Jain equation (explicit approximation)
-  // Valid for 5000 ≤ Re ≤ 10^8 and 10^-6 ≤ ε/D ≤ 10^-2
-  const relRoughness = epsilon / D;
-
-  // Swamee-Jain equation
-  const term1 = relRoughness / 3.7;
-  const term2 = 5.74 / Math.pow(Re, 0.9);
-  const f = 0.25 / Math.pow(Math.log10(term1 + term2), 2);
-
-  return f;
-}
-
-/**
- * Alternative: Colebrook-White iterative solution (more accurate)
+ * Colebrook-White iterative solution for friction factor
  */
 function colebrookWhite(Re: number, epsilon: number, D: number, maxIter: number = 50): number {
   if (Re < 2300) return 64 / Re;

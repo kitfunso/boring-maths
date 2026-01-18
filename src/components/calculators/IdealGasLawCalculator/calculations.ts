@@ -11,7 +11,7 @@
  * T = Temperature (K)
  */
 
-import type { IdealGasInputs, IdealGasResult, SolveFor } from './types';
+import type { IdealGasInputs, IdealGasResult } from './types';
 
 // Gas constant
 const R = 8.314; // J/(mol·K) = Pa·m³/(mol·K)
@@ -68,7 +68,7 @@ function fromSI(
  * Solve ideal gas law for the specified variable
  */
 export function calculateIdealGas(inputs: IdealGasInputs): IdealGasResult {
-  const { solveFor, unitSystem, mass, molarMass } = inputs;
+  const { solveFor, unitSystem, molarMass } = inputs;
   let { P, V, n, T } = toSI(inputs);
 
   // Solve for the requested variable

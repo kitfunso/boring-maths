@@ -9,7 +9,6 @@ import { useState, useMemo } from 'preact/hooks';
 import { calculatePressureDrop, getRoughness, formatNumber } from './calculations';
 import {
   getDefaultInputs,
-  PIPE_ROUGHNESS,
   FLUID_PRESETS,
   type PressureDropInputs,
   type UnitSystem,

@@ -14,7 +14,6 @@ import {
   COMMON_DISCOUNTS,
   CALCULATION_MODES,
   type DiscountInputs,
-  type CalculationMode,
 } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
@@ -24,7 +23,6 @@ import {
   CurrencySelector,
   Label,
   Input,
-  ButtonGroup,
   Grid,
   Divider,
   ResultCard,

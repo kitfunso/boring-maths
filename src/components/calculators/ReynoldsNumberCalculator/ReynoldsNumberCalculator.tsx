@@ -9,7 +9,6 @@ import { useState, useMemo } from 'preact/hooks';
 import { calculateReynolds, formatNumber, formatScientific } from './calculations';
 import {
   getDefaultInputs,
-  FLOW_REGIMES,
   FLUID_VISCOSITIES,
   type ReynoldsInputs,
   type UnitSystem,

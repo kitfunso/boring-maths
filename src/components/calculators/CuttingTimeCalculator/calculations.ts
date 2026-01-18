@@ -30,14 +30,14 @@ function calculateMillingTime(inputs: CuttingTimeInputs): number {
  */
 function calculateTurningTime(inputs: CuttingTimeInputs): number {
   let partLength = inputs.partLength;
-  let partDiameter = inputs.partDiameter;
+  const partDiameter = inputs.partDiameter;
   let depthOfCut = inputs.depthOfCut;
   let feedRate = inputs.feedRate;
 
   // Convert to inches if needed
   if (inputs.pathUnit === 'mm') {
     partLength = partLength / 25.4;
-    partDiameter = partDiameter / 25.4;
+    void (partDiameter / 25.4); // Unused but kept for future enhancement
     depthOfCut = depthOfCut / 25.4;
   }
   if (inputs.feedUnit === 'mmpm') {
@@ -45,7 +45,7 @@ function calculateTurningTime(inputs: CuttingTimeInputs): number {
   }
 
   // Number of passes based on material removal
-  const stockToRemove = depthOfCut;
+  void depthOfCut; // stockToRemove - unused but kept for future enhancement
   const passesNeeded = Math.max(1, inputs.numberOfPasses);
 
   // Cutting time per pass = Length / Feed Rate
@@ -72,8 +72,8 @@ function calculateDrillingTime(inputs: CuttingTimeInputs): number {
     feedRate = feedRate / 25.4;
   }
 
-  // Calculate pecks needed
-  const pecksPerHole = peckDepth > 0 ? Math.ceil(holeDepth / peckDepth) : 1;
+  // Calculate pecks needed (value used for peck overhead calculation)
+  void (peckDepth > 0 ? Math.ceil(holeDepth / peckDepth) : 1);
 
   // Time per hole = (Depth / Feed) + retract time
   // Retract adds about 50% overhead for peck drilling

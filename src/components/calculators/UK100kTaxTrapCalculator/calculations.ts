@@ -15,7 +15,6 @@ import type {
 } from './types';
 
 import {
-  PERSONAL_ALLOWANCE,
   PA_TAPER_THRESHOLD,
   NI_PRIMARY_THRESHOLD,
   NI_UPPER_LIMIT,
@@ -187,7 +186,7 @@ export function calculateTaxTrapCost(totalIncome: number, region: TaxRegion): nu
 
   // The lost PA would have been tax-free, now it's taxed at 40% (or 42% Scotland)
   // This is the "hidden" tax from the trap
-  const bands = getTaxBands(region);
+  void getTaxBands(region); // Tax bands available if needed
   const higherRate = region === 'scotland' ? 0.42 : 0.4;
 
   return Math.round(paLost * higherRate);

@@ -51,7 +51,12 @@ export function PrimingSugarCalculator() {
                   { value: 'liters', label: 'Liters' },
                 ]}
                 value={inputs.volumeUnit}
-                onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    volumeUnit: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                  })
+                }
               />
             </div>
 
@@ -83,7 +88,12 @@ export function PrimingSugarCalculator() {
                   { value: 'keg', label: 'Keg' },
                 ]}
                 value={inputs.containerType}
-                onChange={(v) => setInputs({ ...inputs, containerType: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    containerType: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                  })
+                }
               />
             </div>
           </div>
@@ -140,7 +150,12 @@ export function PrimingSugarCalculator() {
                     { value: 'celsius', label: '°C' },
                   ]}
                   value={inputs.tempUnit}
-                  onChange={(v) => setInputs({ ...inputs, tempUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      tempUnit: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                    })
+                  }
                 />
               </div>
             </div>

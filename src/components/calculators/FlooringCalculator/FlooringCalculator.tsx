@@ -11,7 +11,6 @@ import {
   formatCurrency,
   formatArea,
   formatWastePercentage,
-  FLOORING_TYPE_NAMES,
   PATTERN_NAMES,
 } from './calculations';
 import {

@@ -6,7 +6,6 @@
  */
 
 import type { Currency } from '../../../lib/regions';
-import { getRegionDefaults, getDefaultSalary } from '../../../lib/regions';
 
 /**
  * Input values for the Mortgage Calculator
@@ -61,8 +60,6 @@ export interface MortgageResult {
  * Get default input values for a given currency
  */
 export function getDefaultInputs(currency: Currency = 'USD'): MortgageInputs {
-  const regionDefaults = getRegionDefaults(currency);
-
   // Region-specific home prices
   const homePrices: Record<Currency, number> = {
     USD: 350000,

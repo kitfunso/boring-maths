@@ -2,7 +2,7 @@
  * Discount Calculator - Calculation Logic
  */
 
-import type { DiscountInputs, DiscountResult, CalculationMode } from './types';
+import type { DiscountInputs, DiscountResult } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 

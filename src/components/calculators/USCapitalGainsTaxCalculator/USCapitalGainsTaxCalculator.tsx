@@ -4,7 +4,6 @@ import { calculateCapitalGainsTax, formatCurrency, formatPercent } from './calcu
 import {
   getDefaultInputs,
   NIIT_THRESHOLDS,
-  ASSET_TYPE_LABELS,
   type USCapitalGainsInputs,
   type FilingStatus,
   type AssetType,

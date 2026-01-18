@@ -4,7 +4,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateDogAge, formatAge } from './calculations';
-import { getDefaultInputs, DOG_SIZES, type DogAgeInputs, type DogSize } from './types';
+import { getDefaultInputs, DOG_SIZES, type DogAgeInputs } from './types';
 import {
   ThemeProvider,
   Card,

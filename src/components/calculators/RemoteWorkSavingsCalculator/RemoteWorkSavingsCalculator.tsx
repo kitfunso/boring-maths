@@ -6,13 +6,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import {
-  calculateRemoteWorkSavings,
-  formatCurrency,
-  formatCurrencyDecimal,
-  formatHours,
-  getSavingsColor,
-} from './calculations';
+import { calculateRemoteWorkSavings, formatCurrency, formatCurrencyDecimal } from './calculations';
 import { getDefaultInputs, type RemoteWorkSavingsInputs, type CommuteType } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {

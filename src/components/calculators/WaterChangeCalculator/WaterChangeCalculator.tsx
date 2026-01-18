@@ -53,7 +53,12 @@ export function WaterChangeCalculator() {
                   { value: 'liters', label: 'Liters' },
                 ]}
                 value={inputs.volumeUnit}
-                onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    volumeUnit: v as WaterChangeInputs[keyof WaterChangeInputs],
+                  })
+                }
               />
             </div>
 
@@ -110,7 +115,12 @@ export function WaterChangeCalculator() {
             <Select
               label="Change Frequency"
               value={inputs.changeFrequency}
-              onChange={(v) => setInputs({ ...inputs, changeFrequency: v as any })}
+              onChange={(v) =>
+                setInputs({
+                  ...inputs,
+                  changeFrequency: v as WaterChangeInputs[keyof WaterChangeInputs],
+                })
+              }
               options={FREQUENCY_OPTIONS.map((f) => ({
                 value: f.value,
                 label: f.label,
@@ -132,7 +142,7 @@ export function WaterChangeCalculator() {
                 const preset = PARAMETER_PRESETS.find((p) => p.value === v);
                 setInputs({
                   ...inputs,
-                  parameterType: v as any,
+                  parameterType: v as WaterChangeInputs[keyof WaterChangeInputs],
                   newWaterParameter: preset?.newWaterDefault || 0,
                   targetParameter: preset?.safeMax || 20,
                 });

@@ -13,7 +13,6 @@ import {
   generateCourseId,
   type GPACalculatorInputs,
   type Course,
-  type GradeScale,
 } from './types';
 import {
   ThemeProvider,
@@ -177,7 +176,7 @@ export default function GPACalculator() {
               </div>
 
               <div className="space-y-3">
-                {inputs.courses.map((course, index) => (
+                {inputs.courses.map((course, _index) => (
                   <div
                     key={course.id}
                     className="bg-[var(--color-night)] rounded-xl p-4 border border-white/10"

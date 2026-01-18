@@ -68,7 +68,6 @@ export default function DebtPayoffCalculator() {
   };
 
   const selectedResult = inputs.strategy === 'avalanche' ? result.avalanche : result.snowball;
-  const otherResult = inputs.strategy === 'avalanche' ? result.snowball : result.avalanche;
 
   return (
     <ThemeProvider defaultColor="blue">

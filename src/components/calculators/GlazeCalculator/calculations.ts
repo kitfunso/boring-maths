@@ -24,7 +24,7 @@ function convertWeight(weight: number, from: string, to: string): number {
  * Calculate glaze batch weights from percentages
  */
 export function calculateGlaze(inputs: GlazeInputs): GlazeResults {
-  const { ingredients, targetWeight, weightUnit, waterRatio } = inputs;
+  const { ingredients, targetWeight, waterRatio } = inputs;
 
   // Calculate total percentage
   const percentageTotal = ingredients.reduce((sum, ing) => sum + ing.percentage, 0);

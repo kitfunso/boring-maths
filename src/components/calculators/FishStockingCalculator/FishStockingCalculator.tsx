@@ -28,7 +28,6 @@ import {
   Input,
   Grid,
   Divider,
-  ResultCard,
   MetricCard,
   ButtonGroup,
   Alert,

@@ -4,7 +4,7 @@
  */
 
 import type { ToolDeflectionInputs, ToolDeflectionResults } from './types';
-import { TOOL_MATERIALS, FLUTE_OPTIONS, MATERIAL_FACTORS } from './types';
+import { TOOL_MATERIALS, FLUTE_OPTIONS } from './types';
 
 /**
  * Calculate moment of inertia for a circular cross-section

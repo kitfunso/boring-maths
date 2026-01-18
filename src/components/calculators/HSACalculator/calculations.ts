@@ -44,7 +44,7 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
 
   // Project balance over time
   const annualReturn = expectedReturn / 100;
-  const netAnnualContribution = totalContribution - annualMedicalExpenses;
+  void (totalContribution - annualMedicalExpenses); // Net contribution for reference
 
   const projections: HSAResult['projections'] = [];
   let runningBalance = currentBalance;

@@ -4,7 +4,7 @@
  */
 
 import { useState, useMemo } from 'preact/hooks';
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { GlazeInputs, GlazeIngredient } from './types';
 import { GLAZE_MATERIALS, GLAZE_RECIPES } from './types';
@@ -48,7 +48,7 @@ export function GlazeCalculator() {
     }
   };
 
-  const updateIngredient = (id: string, field: keyof GlazeIngredient, value: any) => {
+  const updateIngredient = (id: string, field: keyof GlazeIngredient, value: string | number) => {
     setInputs({
       ...inputs,
       ingredients: inputs.ingredients.map((i) => (i.id === id ? { ...i, [field]: value } : i)),
@@ -143,7 +143,7 @@ export function GlazeCalculator() {
           </div>
 
           <div className="space-y-3">
-            {inputs.ingredients.map((ing, index) => (
+            {inputs.ingredients.map((ing, _index) => (
               <div
                 key={ing.id}
                 className="flex items-center gap-3 rounded-lg bg-orange-900/20 p-3 ring-1 ring-orange-500/20"

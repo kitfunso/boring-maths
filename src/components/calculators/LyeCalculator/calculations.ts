@@ -18,7 +18,6 @@ export function calculateLye(inputs: LyeCalculatorInputs): LyeCalculatorResult {
 
   // Calculate total oil weight
   const totalOilWeight = oils.reduce((sum, o) => sum + o.weight, 0);
-  const totalOilWeightGrams = toGrams(totalOilWeight);
 
   // Calculate lye needed for each oil
   const oilBreakdown = oils.map((oilEntry) => {

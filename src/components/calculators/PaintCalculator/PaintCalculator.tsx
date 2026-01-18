@@ -13,7 +13,7 @@ import {
   type PaintCalculatorResult,
   type PaintQuality,
 } from './types';
-import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
+import { type Currency, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -35,8 +35,6 @@ export default function PaintCalculator() {
   const [inputs, setInputs] = useState<PaintCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );
-
-  const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Calculate results
   const result: PaintCalculatorResult = useMemo(() => {

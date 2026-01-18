@@ -6,7 +6,6 @@
  */
 
 import type { Currency } from '../../../lib/regions';
-import { getRegionDefaults } from '../../../lib/regions';
 
 /**
  * Input values for the Savings Goal Calculator

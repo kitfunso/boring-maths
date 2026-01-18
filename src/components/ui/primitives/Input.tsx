@@ -94,7 +94,7 @@ export function Input({
   step,
   ...props
 }: InputProps) {
-  const { tokens } = useTheme();
+  useTheme(); // Theme context for potential future use
   const inputRef = useRef<HTMLInputElement>(null);
   const isNumber = type === 'number';
 

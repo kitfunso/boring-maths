@@ -66,7 +66,7 @@ export function calculateApplianceCost(
   appliance: SelectedAppliance,
   daysPerMonth: number,
   ratePerKwh: number,
-  currency: Currency
+  _currency: Currency
 ): {
   name: string;
   watts: number;

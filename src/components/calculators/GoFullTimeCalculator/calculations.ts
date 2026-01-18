@@ -36,13 +36,6 @@ function monthsToReachIncome(
 }
 
 /**
- * Project income at a future month
- */
-function projectIncome(currentIncome: number, monthlyGrowthRate: number, months: number): number {
-  return currentIncome * Math.pow(1 + monthlyGrowthRate, months);
-}
-
-/**
  * Calculate runway considering monthly deficit/surplus
  *
  * If side income < expenses: runway = savings / (expenses - sideIncome)

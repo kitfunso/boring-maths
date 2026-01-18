@@ -11,7 +11,6 @@ import {
   type CalorieInputs,
   type UnitSystem,
   type Gender,
-  type ActivityLevel,
   type Goal,
 } from './types';
 import {

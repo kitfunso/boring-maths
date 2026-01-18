@@ -11,7 +11,7 @@
  * D = Pipe diameter
  */
 
-import type { PipeFlowInputs, PipeFlowResult, SolveFor, FluidCategory } from './types';
+import type { PipeFlowInputs, PipeFlowResult, FluidCategory } from './types';
 import { VELOCITY_RECOMMENDATIONS, STANDARD_PIPE_SIZES_MM, STANDARD_PIPE_SIZES_IN } from './types';
 
 /**

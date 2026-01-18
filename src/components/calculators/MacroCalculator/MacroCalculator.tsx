@@ -4,7 +4,7 @@
  * Calculate daily macronutrient needs based on body metrics and fitness goals.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMacros, formatNumber } from './calculations';
 import {

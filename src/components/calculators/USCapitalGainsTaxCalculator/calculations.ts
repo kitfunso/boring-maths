@@ -42,7 +42,6 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
 
   // Calculate taxable income (simplified)
   const taxableOtherIncome = Math.max(0, otherIncome - standardDeduction);
-  const totalIncome = taxableOtherIncome + capitalGain;
 
   // Calculate capital gains tax
   let capitalGainsTax: number;

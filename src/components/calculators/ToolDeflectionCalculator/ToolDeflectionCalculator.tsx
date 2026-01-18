@@ -79,7 +79,12 @@ export function ToolDeflectionCalculator() {
                   { value: 'mm', label: 'mm' },
                 ]}
                 value={inputs.lengthUnit}
-                onChange={(v) => setInputs({ ...inputs, lengthUnit: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    lengthUnit: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                  })
+                }
               />
             </div>
 
@@ -108,7 +113,12 @@ export function ToolDeflectionCalculator() {
             <Select
               label="Tool Material"
               value={inputs.toolMaterial}
-              onChange={(v) => setInputs({ ...inputs, toolMaterial: v as any })}
+              onChange={(v) =>
+                setInputs({
+                  ...inputs,
+                  toolMaterial: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                })
+              }
               options={TOOL_MATERIALS.map((m) => ({
                 value: m.value,
                 label: m.label,
@@ -118,7 +128,7 @@ export function ToolDeflectionCalculator() {
             <Select
               label="Flute Count"
               value={inputs.fluteCount.toString()}
-              onChange={(v) => setInputs({ ...inputs, fluteCount: parseInt(v) as any })}
+              onChange={(v) => setInputs({ ...inputs, fluteCount: parseInt(v) })}
               options={FLUTE_OPTIONS.map((f) => ({
                 value: f.value.toString(),
                 label: f.label,
@@ -143,7 +153,12 @@ export function ToolDeflectionCalculator() {
                   { value: 'force', label: 'Direct Force' },
                 ]}
                 value={inputs.calculationMode}
-                onChange={(v) => setInputs({ ...inputs, calculationMode: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    calculationMode: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                  })
+                }
               />
             </div>
 
@@ -167,7 +182,12 @@ export function ToolDeflectionCalculator() {
                       { value: 'N', label: 'N' },
                     ]}
                     value={inputs.forceUnit}
-                    onChange={(v) => setInputs({ ...inputs, forceUnit: v as any })}
+                    onChange={(v) =>
+                      setInputs({
+                        ...inputs,
+                        forceUnit: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                      })
+                    }
                   />
                 </div>
               </div>

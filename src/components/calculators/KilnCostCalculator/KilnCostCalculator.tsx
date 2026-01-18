@@ -7,7 +7,7 @@ import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { KilnCostInputs } from './types';
-import { KILN_PRESETS, FIRING_TYPES, CONE_TEMPS } from './types';
+import { KILN_PRESETS, FIRING_TYPES } from './types';
 import { calculateKilnCost, formatTime, getConeOptions } from './calculations';
 
 export function KilnCostCalculator() {
@@ -47,7 +47,9 @@ export function KilnCostCalculator() {
                   { value: 'gas', label: 'Gas' },
                 ]}
                 value={inputs.kilnType}
-                onChange={(v) => setInputs({ ...inputs, kilnType: v as any })}
+                onChange={(v) =>
+                  setInputs({ ...inputs, kilnType: v as KilnCostInputs[keyof KilnCostInputs] })
+                }
               />
             </div>
 
@@ -105,7 +107,7 @@ export function KilnCostCalculator() {
                 const firingType = FIRING_TYPES.find((f) => f.value === v);
                 setInputs({
                   ...inputs,
-                  firingType: v as any,
+                  firingType: v as KilnCostInputs[keyof KilnCostInputs],
                   targetCone: firingType?.defaultCone || inputs.targetCone,
                 });
               }}
@@ -143,7 +145,12 @@ export function KilnCostCalculator() {
                   { value: 'fast', label: 'Fast' },
                 ]}
                 value={inputs.firingSchedule}
-                onChange={(v) => setInputs({ ...inputs, firingSchedule: v as any })}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    firingSchedule: v as KilnCostInputs[keyof KilnCostInputs],
+                  })
+                }
               />
             </div>
 
@@ -158,7 +165,9 @@ export function KilnCostCalculator() {
                   { value: 'heavy', label: 'Heavy' },
                 ]}
                 value={inputs.loadDensity}
-                onChange={(v) => setInputs({ ...inputs, loadDensity: v as any })}
+                onChange={(v) =>
+                  setInputs({ ...inputs, loadDensity: v as KilnCostInputs[keyof KilnCostInputs] })
+                }
               />
             </div>
           </div>
@@ -190,7 +199,9 @@ export function KilnCostCalculator() {
                       { value: 'gallon', label: 'Gallons (Propane)' },
                     ]}
                     value={inputs.gasUnit}
-                    onChange={(v) => setInputs({ ...inputs, gasUnit: v as any })}
+                    onChange={(v) =>
+                      setInputs({ ...inputs, gasUnit: v as KilnCostInputs[keyof KilnCostInputs] })
+                    }
                   />
                 </div>
                 <Input

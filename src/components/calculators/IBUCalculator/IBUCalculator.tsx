@@ -62,7 +62,7 @@ export function IBUCalculator() {
     }
   };
 
-  const updateHopAddition = (id: string, field: keyof HopAddition, value: any) => {
+  const updateHopAddition = (id: string, field: keyof HopAddition, value: string | number) => {
     setInputs({
       ...inputs,
       hopAdditions: inputs.hopAdditions.map((h) => (h.id === id ? { ...h, [field]: value } : h)),
@@ -263,7 +263,7 @@ export function IBUCalculator() {
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">IBU Breakdown</h3>
           <div className="space-y-3">
-            {results.ibuByAddition.map((addition, index) => {
+            {results.ibuByAddition.map((addition, _index) => {
               const hop = inputs.hopAdditions.find((h) => h.id === addition.id);
               return (
                 <div key={addition.id} className="flex items-center justify-between">

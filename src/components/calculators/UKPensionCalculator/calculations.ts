@@ -24,7 +24,6 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
   const annualContribution = (monthlyContribution + employerContribution) * 12;
   const growthRate = expectedGrowth / 100;
   const inflation = inflationRate / 100;
-  const realGrowthRate = (1 + growthRate) / (1 + inflation) - 1;
 
   let potValue = currentPot;
   let totalContributions = currentPot;

@@ -43,7 +43,6 @@ export default function USPaycheckCalculator() {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   // Calculate percentages for breakdown
-  const totalTaxes = result.federalTax + result.stateTax + result.socialSecurity + result.medicare;
   const deductionBreakdown = [
     { label: 'Federal Tax', value: result.federalTax, color: 'bg-blue-500' },
     { label: 'State Tax', value: result.stateTax, color: 'bg-purple-500' },

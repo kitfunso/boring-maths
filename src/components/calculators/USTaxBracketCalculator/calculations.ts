@@ -69,7 +69,7 @@ export function calculateUSTaxBracket(inputs: USTaxBracketInputs): USTaxBracketR
   };
 }
 
-function formatBracketRange(min: number, max: number, status: FilingStatus): string {
+function formatBracketRange(min: number, max: number, _status: FilingStatus): string {
   if (max === Infinity) {
     return `Over ${formatCurrency(min)}`;
   }

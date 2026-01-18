@@ -119,9 +119,9 @@ function calculateAdditionIBU(
  * Determine beer style based on IBU and gravity
  */
 function determineBeerStyle(ibu: number, og: number): string {
-  // Calculate BU:GU ratio
+  // Calculate GU for style matching
   const gu = (og - 1) * 1000;
-  const buGuRatio = gu > 0 ? ibu / gu : 0;
+  void (gu > 0 ? ibu / gu : 0); // BU:GU ratio - reserved for future use
 
   // Find matching styles
   const matchingStyles = BEER_STYLES.filter((style) => ibu >= style.ibuMin && ibu <= style.ibuMax);

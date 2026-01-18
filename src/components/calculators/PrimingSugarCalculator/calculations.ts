@@ -101,8 +101,7 @@ export function calculatePrimingSugar(inputs: PrimingSugarInputs): PrimingSugarR
   // Determine units for display
   let sugarAmount = sugarGrams;
   let sugarUnit = 'g';
-  let bottleAmount = gramsPerBottle;
-  let bottleUnit = 'g';
+  const gramsPerBottleValue = gramsPerBottle;
 
   // Convert to oz if amount is large enough
   if (sugarGrams > 100) {
@@ -113,8 +112,8 @@ export function calculatePrimingSugar(inputs: PrimingSugarInputs): PrimingSugarR
   return {
     sugarAmount: Math.round(sugarAmount * 10) / 10,
     sugarUnit,
-    sugarPerBottle: Math.round(bottleAmount * 100) / 100,
-    bottleUnit,
+    sugarPerBottle: Math.round(gramsPerBottleValue * 100) / 100,
+    bottleUnit: 'g',
     residualCO2: Math.round(residualCO2 * 100) / 100,
     addedCO2: Math.round(addedCO2 * 100) / 100,
     totalCO2: Math.round(inputs.targetCO2 * 100) / 100,

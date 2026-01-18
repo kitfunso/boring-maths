@@ -59,7 +59,12 @@ export function MashWaterCalculator() {
                     { value: 'kg', label: 'kg' },
                   ]}
                   value={inputs.weightUnit}
-                  onChange={(v) => setInputs({ ...inputs, weightUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      weightUnit: v as MashWaterInputs[keyof MashWaterInputs],
+                    })
+                  }
                 />
               </div>
               <div>
@@ -72,7 +77,9 @@ export function MashWaterCalculator() {
                     { value: 'celsius', label: '°C' },
                   ]}
                   value={inputs.tempUnit}
-                  onChange={(v) => setInputs({ ...inputs, tempUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({ ...inputs, tempUnit: v as MashWaterInputs[keyof MashWaterInputs] })
+                  }
                 />
               </div>
             </div>
@@ -165,7 +172,9 @@ export function MashWaterCalculator() {
             <Select
               label="Sparge Type"
               value={inputs.spargeType}
-              onChange={(v) => setInputs({ ...inputs, spargeType: v as any })}
+              onChange={(v) =>
+                setInputs({ ...inputs, spargeType: v as MashWaterInputs[keyof MashWaterInputs] })
+              }
               options={SPARGE_TYPES}
             />
 
@@ -200,7 +209,12 @@ export function MashWaterCalculator() {
                     { value: 'liters', label: 'Liters' },
                   ]}
                   value={inputs.volumeUnit}
-                  onChange={(v) => setInputs({ ...inputs, volumeUnit: v as any })}
+                  onChange={(v) =>
+                    setInputs({
+                      ...inputs,
+                      volumeUnit: v as MashWaterInputs[keyof MashWaterInputs],
+                    })
+                  }
                 />
               </div>
             </div>

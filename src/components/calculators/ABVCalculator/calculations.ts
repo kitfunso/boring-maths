@@ -5,8 +5,8 @@
 import type { ABVInputs, ABVResult } from './types';
 
 export function calculateABV(inputs: ABVInputs): ABVResult {
-  let { originalGravity, finalGravity, temperatureCorrection, measurementTemp, calibrationTemp } =
-    inputs;
+  const { temperatureCorrection, measurementTemp, calibrationTemp } = inputs;
+  let { originalGravity, finalGravity } = inputs;
 
   // Temperature correction if enabled
   if (temperatureCorrection) {
