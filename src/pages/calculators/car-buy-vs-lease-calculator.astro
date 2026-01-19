@@ -1,0 +1,165 @@
+---
+/**
+ * Car Buy vs Lease Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CarBuyLease from '../../components/calculators/CarBuyLease/CarBuyLease';
+
+const title = 'Buy vs Lease Car Calculator | Compare Total Costs';
+const description =
+  'Should you buy or lease your next car? Compare total costs including depreciation, loan interest, mileage fees, and resale value to make the right choice.';
+const keywords =
+  'buy vs lease calculator, should I buy or lease a car, car lease calculator, auto loan calculator, car buying decision, lease vs buy comparison';
+const canonicalURL = '/calculators/car-buy-vs-lease-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Car Buy vs Lease Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate auto loan payments.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Save for your car purchase.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Budget for car emergencies.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is it better to buy or lease a car?',
+    answer:
+      'It depends on your situation. Buying is typically better if you drive high miles, keep cars 5+ years, or want to build equity. Leasing can be better if you want lower monthly payments, prefer new cars every 2-3 years, or drive under 12,000 miles/year.',
+  },
+  {
+    question: 'What are the hidden costs of leasing?',
+    answer:
+      'Hidden lease costs include: excess mileage fees ($0.15-0.30/mile over limit), wear and tear charges at turn-in, disposition fees ($300-500), early termination penalties, and gap insurance. Also, you pay for features/repairs that benefit the next owner.',
+  },
+  {
+    question: 'Why are lease payments lower than loan payments?',
+    answer:
+      "Lease payments only cover the car's depreciation during the lease term (typically 40-50% of value), not the full price. Buy payments must cover the entire purchase price. However, buying builds equity while leasing builds nothing.",
+  },
+  {
+    question: 'What happens if I exceed my mileage limit?',
+    answer:
+      "You'll pay excess mileage fees when you return the car, typically $0.15-0.30 per mile over the limit. For example, 5,000 excess miles at $0.20/mile = $1,000. If you know you'll drive more, negotiate higher mileage upfront (cheaper than excess fees).",
+  },
+  {
+    question: 'Can I negotiate a lease like a purchase?',
+    answer:
+      'Yes! Negotiate the "capitalized cost" (vehicle price), which directly affects your payment. Also negotiate the money factor (interest rate) and any fees. The residual value is usually set by the manufacturer and non-negotiable.',
+  },
+  {
+    question: "What's the break-even point for buying vs leasing?",
+    answer:
+      'Buying typically breaks even with leasing around year 4-5, when the car is paid off but still has significant value. Before that, leasing often has lower total costs. After that, buying wins because you own a paid-off vehicle.',
+  },
+  {
+    question: 'Should I lease if I drive a lot?',
+    answer:
+      'Generally no. Standard leases allow 10,000-15,000 miles/year. High-mileage drivers face steep excess fees or must negotiate expensive high-mileage leases. If you drive 15,000+ miles/year, buying is usually more economical.',
+  },
+  {
+    question: 'What about maintenance and warranty with leasing?',
+    answer:
+      "Leased cars are typically under warranty for the entire lease term, so major repairs are covered. This reduces maintenance uncertainty. However, you're still responsible for routine maintenance (oil, tires, brakes) and must return the car in good condition.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Car Buy vs Lease Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Car Buy vs Lease Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Buy vs Lease Car Calculator"
+    description="Should you buy or lease your next car? Compare the true total cost of ownership including depreciation, interest, and that equity you'll build (or won't) over time."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CarBuyLease client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>vehicle price</strong> and your <strong>expected annual mileage</strong>.
+      High mileage significantly impacts the lease vs buy decision.
+    </p>
+    <p>
+      Set how many <strong>years you plan to keep the vehicle</strong>. Longer ownership periods
+      typically favor buying as you benefit from a paid-off car.
+    </p>
+    <p>
+      Enter <strong>buy scenario details</strong>: down payment, loan rate, and term. Use actual
+      quotes from dealers or lenders for accuracy.
+    </p>
+    <p>
+      Enter <strong>lease scenario details</strong>: monthly payment, down payment (due at signing),
+      term, and mileage allowance. Get these numbers from actual lease quotes.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>recommendation</strong> shows which option has lower total cost over your ownership
+      period, accounting for the resale value if you buy.
+    </p>
+    <p>
+      <strong>Net cost for buying</strong> = total payments minus the car's value at the end. You keep
+      this equity or sell the car.
+    </p>
+    <p>
+      <strong>Net cost for leasing</strong> = total payments with no equity. However, you get a new car
+      every lease term.
+    </p>
+    <p>
+      <strong>Cost per mile</strong> helps compare efficiency if you're unsure about mileage. Lower is
+      better.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

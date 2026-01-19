@@ -1,0 +1,165 @@
+---
+/**
+ * Wedding Budget Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import WeddingBudget from '../../components/calculators/WeddingBudget/WeddingBudget';
+
+const title = 'Wedding Budget Calculator | Plan Your Perfect Day';
+const description =
+  'Plan your wedding budget with our free calculator. Get recommended allocations for venue, catering, photography, and more based on your total budget and guest count.';
+const keywords =
+  'wedding budget calculator, how much should I spend on wedding, wedding cost breakdown, wedding planning budget, average wedding cost';
+const canonicalURL = '/calculators/wedding-budget-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Wedding Budget Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Wedding Alcohol Calculator',
+    description: 'Calculate drinks for your reception.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Save for your wedding day.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Build savings before the big day.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much should I spend on a wedding?',
+    answer:
+      'There\'s no "should" - spend what you can comfortably afford. The average US wedding costs around $30,000 (2024), but weddings range from $5,000 to $100,000+. Focus on what matters most to you and your partner rather than hitting an arbitrary number.',
+  },
+  {
+    question: 'What percentage should go to the venue?',
+    answer:
+      "Venue costs typically represent 10-20% of your budget, but this varies widely. All-inclusive venues (with catering) might be 40-50% of budget. Urban venues cost more than rural. Consider what's included before comparing percentages.",
+  },
+  {
+    question: 'How much per guest is reasonable?',
+    answer:
+      'Budget-conscious weddings run $100-150 per guest. Moderate weddings are $200-300 per guest. Upscale weddings are $350-500+ per guest. Guest count is the biggest budget driver - cutting 20 guests can save $4,000-10,000.',
+  },
+  {
+    question: 'What do couples regret spending on?',
+    answer:
+      "Common regrets include: over-the-top flowers that nobody remembers, expensive favors guests leave behind, elaborate invitations (digital works!), and premium open bar when signature cocktails would suffice. Most couples wish they'd spent more on photography.",
+  },
+  {
+    question: "What shouldn't I skimp on?",
+    answer:
+      "Photography is #1 - it's your only lasting memory. Good food matters to guests. A skilled DJ/band keeps the party going. Comfortable shoes for yourself. And always keep a contingency fund (5-10%) for surprises.",
+  },
+  {
+    question: 'How do I save money on catering?',
+    answer:
+      'Options to reduce costs: buffet vs plated service (20-30% savings), limited bar vs premium open bar, brunch/lunch reception, heavy appetizers instead of dinner, signature cocktails vs full bar, or a Sunday daytime wedding.',
+  },
+  {
+    question: 'Are wedding packages worth it?',
+    answer:
+      'All-inclusive packages can save 15-25% vs booking separately, plus reduce planning stress. But they limit flexibility. Best for couples who want simplicity. Compare total costs carefully - some "packages" aren\'t actually cheaper.',
+  },
+  {
+    question: 'How far in advance should I book vendors?',
+    answer:
+      'Popular venues: 12-18 months. Photographers: 9-12 months. Bands/DJs: 6-9 months. Florists: 6-8 months. Caterers: 6-9 months. Earlier for peak season (May-October) or destination weddings.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Wedding Budget Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Wedding Budget Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Wedding Budget Calculator"
+    description="Plan your perfect day without breaking the bank. Enter your total budget and guest count, set your priorities, and get a personalized allocation for every category."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <WeddingBudget client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>total wedding budget</strong> - the maximum you want to spend. Be
+      realistic and include a buffer for unexpected costs.
+    </p>
+    <p>
+      Set your <strong>guest count</strong>. This is the biggest cost driver. Each additional guest
+      adds catering, seating, favors, and more. Be ruthless with your list if budget is tight.
+    </p>
+    <p>
+      Use the <strong>priority buttons</strong> to tell us what matters most. "Splurge" on what you'll
+      remember, "Save Here" on what you won't miss.
+    </p>
+    <p>
+      The calculator automatically <strong>adjusts allocations</strong> based on your priorities while
+      keeping the total within budget.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>budget tier</strong> shows where you fall compared to typical weddings. This affects
+      realistic vendor expectations and what's achievable.
+    </p>
+    <p>
+      <strong>Recommended allocations</strong> show how to divide your budget. These are starting points
+      - every wedding is different. Use them as guidelines, not rules.
+    </p>
+    <p>
+      The <strong>contingency fund</strong> (5% of budget) is for surprises like last-minute alterations,
+      weather backup plans, or that amazing cake topper you discover.
+    </p>
+    <p>
+      <strong>Cost per guest</strong> helps you understand the true impact of your guest list decisions
+      and compare to industry averages.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

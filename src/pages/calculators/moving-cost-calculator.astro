@@ -1,0 +1,161 @@
+---
+/**
+ * Moving Cost Estimator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import MovingCost from '../../components/calculators/MovingCost/MovingCost';
+
+const title = 'Moving Cost Calculator | Estimate Your Relocation Expenses';
+const description =
+  'Calculate how much it costs to move locally or cross country. Get estimates for movers, packing, storage, and hidden costs to budget your relocation.';
+const keywords =
+  'moving cost calculator, how much does it cost to move, moving estimate, cross country moving costs, local moving costs, relocation budget';
+const canonicalURL = '/calculators/moving-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Moving Cost Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Should you buy or rent in your new city?',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Build a safety net for your move.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Save up for your relocation.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much does it cost to move locally?',
+    answer:
+      'Local moves (under 50 miles) typically cost $300-$1,500 for a 2-bedroom home with professional movers. DIY with a rental truck runs $100-$400. Costs vary by home size, stairs, and how much stuff you have.',
+  },
+  {
+    question: 'How much does a cross-country move cost?',
+    answer:
+      'Cross-country moves (1,000+ miles) typically cost $2,000-$7,500+ for a 2-bedroom home. Costs depend on distance, weight, and services. DIY can save 50%+ but requires significant time and effort.',
+  },
+  {
+    question: 'What hidden costs should I budget for?',
+    answer:
+      'Often-forgotten costs include: utility connection fees, security deposits, temporary housing, meals during the move, pet boarding, cleaning old/new place, updating vehicle registration, and replacement items damaged in transit.',
+  },
+  {
+    question: 'Is DIY moving really cheaper?',
+    answer:
+      'DIY saves 40-70% on moving costs but adds time, physical labor, and risk. Consider: truck rental, gas, equipment, helpers, food, potential injuries, and value of your time. For small local moves, DIY makes sense. For large or long-distance moves, professionals may be worth it.',
+  },
+  {
+    question: 'When is the cheapest time to move?',
+    answer:
+      'Off-peak months (October-April) are 20-25% cheaper than peak summer months. Weekdays are cheaper than weekends. Mid-month is cheaper than end-of-month. Avoid holiday weekends and the first/last days of the month.',
+  },
+  {
+    question: 'How far in advance should I book movers?',
+    answer:
+      'Book 4-6 weeks ahead for local moves, 6-8 weeks for long distance. During peak season (May-September), book 8-12 weeks ahead. Last-minute bookings cost 20-40% more and limit your options.',
+  },
+  {
+    question: 'What does moving insurance cover?',
+    answer:
+      'Basic coverage (included) pays $0.60/lb per item - woefully inadequate for electronics or valuables. Full value protection costs extra but covers repair or replacement at current value. Consider your renters/homeowners insurance too.',
+  },
+  {
+    question: 'How can I reduce moving costs?',
+    answer:
+      'Tips: (1) Declutter and sell items before moving, (2) Get multiple quotes, (3) Move off-peak, (4) Pack yourself, (5) Use free boxes from stores, (6) Ship books via media mail, (7) Ask about discounts (military, AAA, senior).',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Moving Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Moving Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Moving Cost Calculator"
+    description="Planning a move? Estimate your total relocation costs including movers, packing, storage, and those hidden expenses that catch everyone off guard."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <MovingCost client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>move type</strong> based on distance. Local moves are charged hourly, while
+      long-distance moves are based on weight and distance.
+    </p>
+    <p>
+      Choose your <strong>home size</strong> to estimate the volume of belongings. Larger homes require
+      more time, labor, and truck space.
+    </p>
+    <p>
+      Select your <strong>moving method</strong>: DIY (you do everything), Labor Only (movers
+      load/unload your rental truck), or Full Service (movers handle everything).
+    </p>
+    <p>
+      Add <strong>additional services</strong> like professional packing, storage, or cleaning to get
+      a complete picture of your moving costs.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>estimated total</strong> includes all services you selected plus a buffer for hidden
+      costs. The range shows best-case and worst-case scenarios.
+    </p>
+    <p>
+      The <strong>hidden costs buffer</strong> accounts for unexpected expenses like deposits, temporary
+      housing, and fees you might not anticipate.
+    </p>
+    <p>
+      <strong>Money-saving tips</strong> are personalized based on your selections to help you reduce
+      costs where possible.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

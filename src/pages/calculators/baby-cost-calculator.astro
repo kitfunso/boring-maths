@@ -1,0 +1,183 @@
+---
+/**
+ * Baby Cost Calculator Page
+ *
+ * SEO-optimized page targeting: "how much does a baby cost first year calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BabyCost from '../../components/calculators/BabyCost/BabyCost';
+
+// SEO Configuration
+const title = 'Baby Cost Calculator | First Year Expenses Estimator';
+const description =
+  'Estimate how much a baby costs in the first year. Calculate childcare, diapers, feeding, healthcare, gear, and lost income to budget for your new arrival.';
+const keywords =
+  'baby cost calculator, how much does a baby cost, first year baby expenses, baby budget calculator, newborn costs, cost of having a baby';
+const canonicalURL = '/calculators/baby-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Baby Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Build your safety net before baby arrives.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings for baby expenses.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Subscription Audit',
+    description: 'Find money to redirect to baby fund.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'chart' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much does a baby cost in the first year?',
+    answer:
+      'In the US, first-year baby costs typically range from $12,000 to $25,000+, depending on choices like childcare, feeding method, and whether you buy new or used gear. The biggest variables are childcare (if returning to work) and healthcare costs.',
+  },
+  {
+    question: 'What are the biggest baby expenses?',
+    answer:
+      'The largest expenses are typically: (1) Childcare/lost income - often 50%+ of total costs, (2) Healthcare - delivery and well-baby visits, (3) Gear - car seat, stroller, crib, (4) Diapers - around $800-1,000/year for disposables, (5) Formula - $1,500-2,000/year if not breastfeeding.',
+  },
+  {
+    question: 'Is breastfeeding really free?',
+    answer:
+      "Breastfeeding significantly reduces feeding costs, but it's not completely free. Expenses include a breast pump ($50-300, often covered by insurance), nursing bras, pads, storage bags, and potentially lactation consultant visits. Still, it saves $1,000-2,000+ vs formula.",
+  },
+  {
+    question: 'How much do diapers cost per month?',
+    answer:
+      'Disposable diapers cost $60-80/month on average. Newborns use 8-12 diapers/day, decreasing to 6-8 by age 1. Cloth diapers cost $300-500 upfront but save money long-term, especially if used for multiple children.',
+  },
+  {
+    question: 'Should I buy new or used baby gear?',
+    answer:
+      'Many items can be safely bought used: clothes, toys, strollers, cribs (check recalls), and bouncers. Always buy NEW: car seats (safety standards and unknown crash history), mattresses (hygiene), and bottles/nipples. Used gear can save $2,000+ in the first year.',
+  },
+  {
+    question: 'How much maternity leave should I plan for?',
+    answer:
+      'In the US, FMLA provides 12 weeks unpaid leave if eligible. Many take 6-12 weeks. Budget for lost income if your leave is unpaid or partially paid. In the UK, statutory maternity pay covers 39 weeks at reduced rates.',
+  },
+  {
+    question: 'What baby costs do people forget to budget for?',
+    answer:
+      'Commonly forgotten costs: (1) Health insurance premium increase to add baby, (2) Delivery out-of-pocket costs even with insurance, (3) Lost income during unpaid leave, (4) Baby-proofing the home, (5) More laundry = higher utility bills, (6) Photos and announcements.',
+  },
+  {
+    question: 'How can I reduce baby costs?',
+    answer:
+      'Cost-saving strategies: (1) Accept hand-me-downs and buy used, (2) Breastfeed if possible, (3) Use cloth diapers, (4) Skip unnecessary gear (wipe warmers, etc.), (5) Delay purchases until you know what you need, (6) Register for essentials and request diapers/wipes as gifts.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Baby Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Baby Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Baby Cost Calculator"
+    description="How much does a baby really cost? Estimate your first-year expenses including childcare, feeding, diapers, healthcare, and the often-forgotten cost of parental leave."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BabyCost client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by selecting your <strong>childcare plan</strong>. If you'll return to work, choose
+      daycare or nanny and specify how many months in the first year. Childcare is often the biggest
+      expense.
+    </p>
+    <p>
+      Choose your <strong>feeding method</strong>. Breastfeeding reduces costs significantly, while
+      formula can add $1,500+ to your first-year budget. Many parents use a combination.
+    </p>
+    <p>
+      Select <strong>diaper preference</strong>. Disposables are convenient but costly. Cloth
+      diapers have higher upfront costs but save money over time, especially for multiple children.
+    </p>
+    <p>
+      Indicate whether you'll <strong>buy new or used gear</strong>. Hand-me-downs and secondhand
+      items can save thousands. Just ensure car seats are new and unexpired.
+    </p>
+    <p>
+      Enter your <strong>parental leave details</strong>. Lost income during unpaid or partially
+      paid leave is often the largest "hidden" cost that new parents underestimate.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>total first-year cost</strong> includes all categories: childcare, feeding, diapers,
+      healthcare, gear, lost income, and miscellaneous expenses.
+    </p>
+    <p>
+      The <strong>monthly budget</strong> includes a 10% buffer for unexpected expenses. Babies often
+      surprise you with unanticipated needs.
+    </p>
+    <p>
+      The <strong>cost breakdown</strong> shows where your money goes. For most families, childcare or
+      lost income dominates. Use this to identify where to focus savings efforts.
+    </p>
+    <p>
+      <strong>Savings opportunities</strong> highlight ways to reduce costs based on your current selections.
+      Small changes can add up to significant savings.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

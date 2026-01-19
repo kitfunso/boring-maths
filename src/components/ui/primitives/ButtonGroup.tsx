@@ -74,8 +74,8 @@ export function ButtonGroup<T extends string>({
               rounded-xl border-2 font-medium transition-all
               ${
                 isActive
-                  ? `${tokens.border500} ${tokens.bg50} ${tokens.text700}`
-                  : `border-white/10 hover:${tokens.border200} text-[var(--color-cream)]`
+                  ? `${tokens.border500} ${tokens.bg600} text-white`
+                  : `border-white/10 bg-white/5 hover:bg-white/10 text-[var(--color-cream)]`
               }
             `
               .trim()

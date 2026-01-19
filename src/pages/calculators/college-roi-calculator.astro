@@ -1,0 +1,165 @@
+---
+/**
+ * College ROI Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CollegeROI from '../../components/calculators/CollegeROI/CollegeROI';
+
+const title = 'College ROI Calculator | Is College Worth It?';
+const description =
+  'Calculate the return on investment for college, trade school, or bootcamps. Compare lifetime earnings, payback period, and opportunity costs to make an informed education decision.';
+const keywords =
+  'college ROI calculator, is college worth it, education return on investment, college cost calculator, trade school vs college, bootcamp ROI';
+const canonicalURL = '/calculators/college-roi-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'College ROI Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Student Loan Calculator',
+    description: 'Plan your loan repayment strategy.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Salary to Hourly',
+    description: 'Understand your true hourly rate.',
+    href: '/calculators/salary-to-hourly-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Plan for financial independence.',
+    href: '/calculators/fire-calculator',
+    icon: 'chart' as const,
+    color: 'orange' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is college still worth it financially?',
+    answer:
+      'It depends on your major, school costs, and career path. On average, college graduates earn $1M+ more over their lifetime than high school graduates. However, high student debt, low-paying majors, or expensive private schools can make the ROI negative. STEM, business, and healthcare majors typically have the best financial returns.',
+  },
+  {
+    question: 'What is a good ROI for college?',
+    answer:
+      "An ROI above 100% means you'll earn back double what you invested. ROI above 50% is generally considered good. Anything below 0% means you would have been better off financially without the education. The average 4-year degree has ~300% ROI, but this varies enormously by major and school.",
+  },
+  {
+    question: 'How do bootcamps compare to college?',
+    answer:
+      "Coding bootcamps can offer excellent ROI (often 200-400%) due to low costs ($10-20K), short duration (3-6 months), and high starting salaries ($60-80K). However, they're specific to tech careers and lack the broader education, networking, and credential signaling of a degree.",
+  },
+  {
+    question: 'What is opportunity cost in education?',
+    answer:
+      'Opportunity cost is the money you could have earned if you worked instead of attending school. A 4-year degree means 4 years of forgone earnings ($30K-50K/year). This "hidden cost" is often ignored but can be larger than tuition for expensive programs.',
+  },
+  {
+    question: 'Does where you go to college matter financially?',
+    answer:
+      'Elite schools show minimal earnings premium for most students compared to state schools. Exceptions: business, law, and prestige-dependent fields. The main factors affecting earnings are your major, skills, and network - not the school name. Avoid taking on $200K debt for a $50K/year career.',
+  },
+  {
+    question: 'Are trade schools a better investment?',
+    answer:
+      'Trade schools can be excellent investments: lower costs ($5-15K), shorter duration (6-24 months), and starting salaries of $40-60K+ for skilled trades. Electricians, plumbers, and HVAC technicians often out-earn many college graduates while having less debt.',
+  },
+  {
+    question: 'How do I calculate my personal college ROI?',
+    answer:
+      "ROI = (Lifetime Earnings Premium - Total Cost) / Total Cost × 100. Include: tuition, fees, living expenses, interest on loans, and opportunity cost. Compare to what you'd earn with just a high school diploma in your field. Our calculator does this automatically.",
+  },
+  {
+    question: "What if I don't finish my degree?",
+    answer:
+      "Dropping out is often the worst financial outcome: you have the debt but not the degree's earning premium. If you're struggling, consider: community college credits, part-time enrollment, or vocational certificates that provide credentials without a full degree.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'College ROI Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="College ROI Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="College ROI Calculator"
+    description="Is college worth it? Compare the return on investment for different education paths including 4-year degrees, community college, trade schools, and coding bootcamps."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CollegeROI client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>education path</strong> to see default costs and salary expectations for that
+      option. You can then customize all values to match your specific situation.
+    </p>
+    <p>
+      Enter <strong>tuition, scholarships, and living expenses</strong>. Be realistic - include
+      room, board, books, and transportation if you'll be away from home.
+    </p>
+    <p>
+      Set your <strong>expected starting salary</strong> based on research for your specific major and
+      location. The default growth rate reflects typical career progression.
+    </p>
+    <p>
+      The <strong>alternative salary</strong> represents what you'd earn without this education - this
+      helps calculate the true opportunity cost of your education.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>ROI (Return on Investment)</strong> shows how much you earn back for every dollar invested.
+      100% ROI means you double your money over your career.
+    </p>
+    <p>
+      <strong>Payback period</strong> shows how many years until your education investment is recovered.
+      Shorter is better - under 10 years is excellent.
+    </p>
+    <p>
+      <strong>Lifetime earnings premium</strong> is the total extra money you'll earn compared to not
+      getting this education, after accounting for all costs.
+    </p>
+    <p>
+      <strong>Debt-to-income ratio</strong> shows loan burden relative to starting salary. Above 1.5x
+      indicates potential financial stress.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

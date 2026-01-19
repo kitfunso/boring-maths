@@ -1,0 +1,161 @@
+---
+/**
+ * Vacation Budget Planner Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import VacationBudget from '../../components/calculators/VacationBudget/VacationBudget';
+
+const title = 'Vacation Budget Calculator | Plan Your Trip Costs';
+const description =
+  'Plan your vacation budget with our free calculator. Estimate costs for flights, hotels, food, activities, and more to avoid overspending on your next trip.';
+const keywords =
+  'vacation budget calculator, trip cost calculator, travel budget planner, how much for vacation, trip expense calculator, holiday budget';
+const canonicalURL = '/calculators/vacation-budget-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Vacation Budget Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Save up for your dream vacation.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Subscription Audit',
+    description: 'Find money to fund your travels.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'chart' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Build savings before traveling.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much should I budget for a vacation?',
+    answer:
+      'A good rule of thumb is $150-$250 per person per day for moderate domestic travel, including accommodation, food, and activities. International trips to expensive destinations can be $300-$500+ per person per day. Budget destinations might be $50-$100 per person per day.',
+  },
+  {
+    question: 'What expenses do people forget to budget for?',
+    answer:
+      'Commonly forgotten costs: airport parking or rideshare, travel insurance, tips and gratuities, resort fees, baggage fees, phone/data plans abroad, souvenirs, laundry, and the "last night splurge" dinner. Add a 10-15% buffer for these surprises.',
+  },
+  {
+    question: 'How can I save money on accommodation?',
+    answer:
+      'Options: book vacation rentals with kitchens (save on meals), travel during shoulder season, stay outside city centers, use hotel loyalty points, book directly for better rates, consider hostels or house-sitting, or try home exchanges.',
+  },
+  {
+    question: 'When is the cheapest time to book flights?',
+    answer:
+      'Domestic flights: book 1-3 months ahead. International: 2-8 months ahead. Tuesdays and Wednesdays are often cheapest to fly. Use price alerts and be flexible with dates. January, February, and September are typically the cheapest months to travel.',
+  },
+  {
+    question: 'Should I get travel insurance?',
+    answer:
+      'Travel insurance is recommended for: expensive trips ($5,000+), international travel, trips with non-refundable bookings, adventure activities, or if you have health concerns. It typically costs 4-8% of your trip cost and covers cancellation, medical emergencies, and lost luggage.',
+  },
+  {
+    question: 'How much should I budget for food while traveling?',
+    answer:
+      'Budget: $20-$40/day (grocery stores, street food). Moderate: $50-$80/day (mix of restaurants and self-catering). Upscale: $100-$200+/day (restaurants for most meals). Breakfast at accommodation and lunch as main meal can save significantly.',
+  },
+  {
+    question: 'Do I need a car rental?',
+    answer:
+      'Consider car rental if: visiting multiple destinations, staying outside city centers, traveling with kids/elderly, or destination has poor public transit. Skip it for: city trips with good transit, beach resorts, or European cities where parking is difficult/expensive.',
+  },
+  {
+    question: 'How do I stick to my vacation budget?',
+    answer:
+      'Tips: use a daily spending allowance, track expenses with an app, pre-pay what you can (accommodation, tours), use local currency to avoid fees, eat where locals eat, take advantage of free activities, and save "splurge" money for one special experience.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Vacation Budget Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Vacation Budget Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Vacation Budget Calculator"
+    description="Plan your perfect trip without the financial stress. Estimate costs for flights, accommodation, food, activities, and all those hidden expenses that can blow your budget."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <VacationBudget client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start with the basics: <strong>number of travelers</strong> and <strong>nights</strong>.
+      Remember, more nights means more daily expenses add up.
+    </p>
+    <p>
+      Select your <strong>destination type</strong> to get reasonable default costs. Customize these based
+      on your research for specific locations.
+    </p>
+    <p>
+      Choose your <strong>travel style</strong>. Budget travelers stay in hostels and cook meals.
+      Luxury travelers stay at resorts and dine out for every meal.
+    </p>
+    <p>
+      Adjust <strong>daily expenses</strong> based on actual research for your destination. Costs vary
+      significantly between cities and countries.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>total trip budget</strong> includes all categories plus a 10% contingency fund for unexpected
+      expenses.
+    </p>
+    <p>
+      <strong>Per person per day</strong> is a useful metric to compare with travel guides and other travelers'
+      experiences at your destination.
+    </p>
+    <p>
+      The <strong>savings plan</strong> shows how long it would take to save this amount if you put aside
+      10% of a median income. Adjust your timeline based on your actual savings rate.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
