@@ -1,0 +1,187 @@
+---
+/**
+ * Buy vs Rent Calculator Page
+ *
+ * SEO-optimized page targeting: "should I buy or rent calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BuyVsRent from '../../components/calculators/BuyVsRent/BuyVsRent';
+
+// SEO Configuration
+const title = 'Buy vs Rent Calculator | Compare True Costs of Homeownership';
+const description =
+  'Compare the real cost of buying vs renting a home. Factor in appreciation, taxes, maintenance, and opportunity cost to make a data-driven housing decision.';
+const keywords =
+  'buy vs rent calculator, should I buy or rent, rent vs buy comparison, home buying calculator, renting vs owning, cost of homeownership, housing decision calculator';
+const canonicalURL = '/calculators/buy-vs-rent-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Buy vs Rent Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly payments and total interest.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'See how much you need saved for emergencies.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Plan your path to financial independence.',
+    href: '/calculators/fire-calculator',
+    icon: 'trending' as const,
+    color: 'orange' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'Is buying always better than renting?',
+    answer:
+      'No. The "buy vs rent" decision depends on many factors: how long you plan to stay, local market conditions, your financial situation, and opportunity cost of your down payment. In expensive markets with low rent-to-price ratios, renting and investing can build more wealth than buying.',
+  },
+  {
+    question: 'How long do I need to stay to make buying worth it?',
+    answer:
+      'Typically 5-7 years is the break-even point, but this varies significantly by market. Closing costs (2-5% of home price) and selling costs (6-10%) mean you need time for appreciation to overcome transaction costs. Our calculator shows your specific break-even year.',
+  },
+  {
+    question: 'What hidden costs of homeownership should I consider?',
+    answer:
+      'Beyond the mortgage, homeowners pay: property taxes (1-3% annually), insurance ($1,000-3,000/year), maintenance (1-2% of home value), HOA fees, repairs, and closing costs. These can add 30-50% on top of your mortgage payment.',
+  },
+  {
+    question: 'How does the opportunity cost of a down payment work?',
+    answer:
+      'If you rent, you could invest your down payment in the stock market. Historically, stocks return 7-10% annually. This "opportunity cost" means your down payment money could grow significantly while renting. Our calculator compares this investment growth to home equity.',
+  },
+  {
+    question: 'Should I include tax benefits in my calculation?',
+    answer:
+      "The mortgage interest deduction only helps if you itemize deductions (most people take the standard deduction). In the US, it's less valuable since the 2017 tax changes. In the UK and most of Europe, there is no mortgage interest deduction for primary residences.",
+  },
+  {
+    question: 'What appreciation rate should I use?',
+    answer:
+      'Historically, US home prices have appreciated 3-4% annually on average, roughly matching inflation. However, this varies dramatically by location and time period. Be conservative - using 2-3% is safer than assuming recent high appreciation will continue.',
+  },
+  {
+    question: 'How do I account for rising rent?',
+    answer:
+      'Rent typically increases 2-5% annually, depending on your market and lease terms. Owning locks in your housing cost (though taxes, insurance, and maintenance still rise). Our calculator projects rent increases over your stay duration.',
+  },
+  {
+    question: 'What if I sell before paying off the mortgage?',
+    answer:
+      'Most people sell before paying off their mortgage. You keep the equity (home value minus remaining mortgage) minus selling costs (typically 6-10% for agent fees, closing costs, repairs). Our calculator tracks your equity year by year.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Buy vs Rent Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Buy vs Rent Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Buy vs Rent Calculator"
+    description="Should you buy a home or keep renting? This calculator compares the true cost of each option, including hidden costs, opportunity cost of your down payment, and long-term wealth building."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BuyVsRent client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering the <strong>home price</strong> you're considering and your
+      <strong>down payment percentage</strong>. A 20% down payment avoids PMI, but many buyers put
+      down less.
+    </p>
+    <p>
+      Enter your expected <strong>mortgage rate</strong> and <strong>term</strong>. Current rates
+      vary by credit score and loan type - check with lenders for accurate quotes.
+    </p>
+    <p>
+      Don't forget the <strong>hidden costs</strong>: property taxes, insurance, HOA fees, and
+      maintenance. These can add significantly to your monthly costs.
+    </p>
+    <p>
+      For the rental comparison, enter your current or expected <strong>monthly rent</strong> and the
+      typical annual rent increase in your area (usually 2-5%).
+    </p>
+    <p>
+      The <strong>stay duration</strong> is crucial - buying makes more sense the longer you stay. Enter
+      how many years you realistically expect to live in this home.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>monthly cost comparison</strong> shows what you'll pay each month for owning vs renting.
+      Remember that only part of your mortgage payment builds equity.
+    </p>
+    <p>
+      The <strong>break-even year</strong> shows when buying becomes financially better than renting.
+      If you might move before this, renting could be the smarter choice.
+    </p>
+    <p>
+      <strong>Net worth comparison</strong> is the key metric. For buying, it's your home equity. For
+      renting, it's your investment portfolio (if you invested the down payment and monthly savings).
+    </p>
+    <p>
+      The <strong>year-by-year breakdown</strong> shows how equity builds over time. Notice how early
+      mortgage payments go mostly to interest, with equity building faster in later years.
+    </p>
+    <p>
+      The <strong>recommendation</strong> summarizes the financial winner, but remember to consider non-financial
+      factors like stability, flexibility, and lifestyle preferences.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

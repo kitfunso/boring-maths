@@ -1,0 +1,183 @@
+---
+/**
+ * Subscription Audit Calculator Page
+ *
+ * SEO-optimized page targeting: "how much am I spending on subscriptions calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SubscriptionAudit from '../../components/calculators/SubscriptionAudit/SubscriptionAudit';
+
+// SEO Configuration
+const title = 'Subscription Audit Calculator | Track Your Monthly Spending';
+const description =
+  'Find out how much you really spend on subscriptions. Add up Netflix, Spotify, gym memberships and more to see your total monthly cost and identify savings.';
+const keywords =
+  'subscription audit calculator, how much do I spend on subscriptions, subscription tracker, monthly subscription cost, cancel subscriptions save money, subscription spending calculator';
+const canonicalURL = '/calculators/subscription-audit-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Subscription Audit Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'Calculate how much you need saved for emergencies.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Plan your path to financial independence.',
+    href: '/calculators/fire-calculator',
+    icon: 'trending' as const,
+    color: 'orange' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings with inflation adjustment.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much does the average person spend on subscriptions?',
+    answer:
+      'Studies show Americans spend an average of $219/month on subscriptions, though they typically estimate only $86/month - underestimating by over 2.5x. This includes streaming services, software, gym memberships, food delivery, and other recurring charges.',
+  },
+  {
+    question: 'What subscriptions do people forget about?',
+    answer:
+      'Common forgotten subscriptions include: cloud storage (iCloud, Google One), app subscriptions buried in App Store, annual memberships (Amazon Prime, Costco), free trials that converted to paid, old software licenses, and gym memberships you no longer use.',
+  },
+  {
+    question: 'How do I find all my subscriptions?',
+    answer:
+      'Check these places: (1) Bank and credit card statements for the past 3 months, (2) Apple/Google Play subscription settings, (3) PayPal recurring payments, (4) Email inbox searching for "receipt" or "subscription", (5) Password manager for accounts you may have forgotten.',
+  },
+  {
+    question: 'When should I cancel a subscription?',
+    answer:
+      "Consider canceling when: you haven't used it in 30+ days, you can get similar value elsewhere for free, you signed up for a feature you no longer need, or the cost per use is higher than alternatives. Our calculator flags subscriptions you rate as 'rarely' or 'never' used.",
+  },
+  {
+    question: 'Are annual subscriptions worth it?',
+    answer:
+      'Annual plans typically save 15-25% compared to monthly billing. However, only commit annually if: (1) you\'ve used the service for 3+ months and still find it valuable, (2) the company is stable, and (3) you can afford the upfront cost. Don\'t fall for "annual discount" on services you might cancel.',
+  },
+  {
+    question: 'How can I reduce subscription costs?',
+    answer:
+      'Strategies include: (1) Downgrade to lower tiers you actually use, (2) Share family plans with household members, (3) Rotate entertainment subscriptions monthly, (4) Use free alternatives (Spotify free vs Premium), (5) Call to cancel and often get offered retention discounts.',
+  },
+  {
+    question: 'What are subscription alternatives?',
+    answer:
+      'For streaming: library services offer free access to many shows. For software: open-source alternatives exist for most tools. For fitness: YouTube has free workouts. For news: many articles are free via library access. For music: free tiers with ads often suffice.',
+  },
+  {
+    question: 'How often should I audit my subscriptions?',
+    answer:
+      "Review your subscriptions quarterly (every 3 months) at minimum. Set a calendar reminder. Also audit when: you notice unexpected charges, your income changes, you get a new service (check for overlap), or you realize you haven't used something recently.",
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Subscription Audit Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Subscription Audit Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Subscription Audit Calculator"
+    description="Think you know how much you spend on subscriptions? Most people underestimate by 2-3x. Add up all your recurring charges and find savings opportunities."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <SubscriptionAudit client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      First, enter your <strong>estimated monthly spending</strong> on subscriptions. Be honest - this
+      helps you see the reality gap that most people experience.
+    </p>
+    <p>
+      Add each subscription using <strong>"Add Custom"</strong> or click <strong>"Quick Add"</strong
+      >
+      to select from common services like Netflix, Spotify, and Amazon Prime.
+    </p>
+    <p>
+      For each subscription, enter the <strong>cost and billing frequency</strong>. The calculator
+      converts everything to monthly amounts for easy comparison.
+    </p>
+    <p>
+      Rate your <strong>actual usage</strong> honestly: daily, weekly, monthly, rarely, or never. This
+      drives the recommendations for which subscriptions to keep, review, or cancel.
+    </p>
+    <p>
+      Mark subscriptions as <strong>"Essential"</strong> if you truly can't live without them. This affects
+      the recommendations - essential services get more leeway.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Reality Check</strong> compares your estimate to your actual spending. Don't be surprised
+      if you're off by 50-200% - this is extremely common.
+    </p>
+    <p>
+      The <strong>category breakdown</strong> shows where your subscription money goes. Streaming and
+      software often dominate, but small subscriptions add up fast.
+    </p>
+    <p>
+      Each subscription gets a <strong>recommendation</strong>: Keep (good value), Review (consider
+      alternatives), or Cancel (not worth it). These are based on your usage ratings.
+    </p>
+    <p>
+      The <strong>cost per use</strong> shows the real value. A $15/month service used daily costs $0.50/use.
+      The same service used once a month costs $15/use - very different value.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
