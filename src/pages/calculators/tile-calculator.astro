@@ -1,0 +1,158 @@
+---
+/**
+ * Tile Calculator Page
+ *
+ * SEO-optimized page targeting: "how much tile do I need calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import TileCalculator from '../../components/calculators/TileCalculator/TileCalculator';
+
+// SEO Configuration
+const title = 'Tile Calculator | How Much Tile Do I Need?';
+const description =
+  'Calculate exactly how much tile, grout, and adhesive you need. Enter dimensions, tile size, and pattern to get accurate quantities with cost estimates.';
+const keywords =
+  'tile calculator, how much tile do I need, tile grout calculator, thinset calculator, tile square footage, flooring tile calculator, backsplash tile calculator';
+const canonicalURL = '/calculators/tile-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Tile Calculator' }];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring materials with waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your room.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate how many tiles I need?',
+    answer:
+      'Measure your area (length x width) to get square footage. Divide by the area of one tile (convert tile dimensions to feet first). Add 10-20% for waste depending on your pattern. For example, for 100 sq ft with 12x12" tiles: 100 sq ft + 10% = 110 tiles needed.',
+  },
+  {
+    question: 'How much grout do I need for tiling?',
+    answer:
+      'Grout coverage depends on tile size, grout width, and depth. Larger tiles need less grout per square foot. As a rule of thumb: for 12x12" tiles with 1/8" grout lines, expect about 1 lb of grout per 10-15 square feet.',
+  },
+  {
+    question: 'What is the best tile pattern for waste?',
+    answer:
+      'Straight (grid) patterns produce the least waste at around 10%. Brick/offset patterns need 12%, diagonal patterns need 15%, and herringbone patterns need 20% or more due to angled cuts at edges.',
+  },
+  {
+    question: 'Do I need backer board for floor tiles?',
+    answer:
+      'Cement backer board is recommended for wet areas (bathrooms, showers) and required over plywood subfloors. It provides a stable, moisture-resistant substrate. For concrete subfloors in dry areas, you can tile directly with proper preparation.',
+  },
+  {
+    question: 'How much thinset adhesive do I need?',
+    answer:
+      'Coverage varies by trowel size and tile type. A 50 lb bag typically covers 50-100 sq ft for floor tiles with a 1/4" x 1/4" trowel. Large format tiles and uneven substrates require more thinset.',
+  },
+  {
+    question: 'Should I buy extra tiles?',
+    answer:
+      'Yes, always buy 10-15% extra for cuts and future repairs. Save leftover tiles - matching exact colors later can be impossible as dye lots vary. Most manufacturers discontinue patterns within a few years.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Tile Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Tile Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Tile Calculator"
+    description="Calculate exactly how much tile, grout, and adhesive you need for any tiling project. Get accurate quantities based on your tile size and installation pattern."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <TileCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>surface type</strong> (floor, wall, backsplash, or shower) and enter the
+      <strong>area dimensions</strong> in feet.
+    </p>
+    <p>
+      Choose your <strong>tile size</strong> from common options or enter custom dimensions. Select your
+      <strong>installation pattern</strong> - this affects waste percentage significantly.
+    </p>
+    <p>
+      Select your <strong>grout width</strong> and check the options for materials you need: grout, thinset
+      adhesive, and cement backer board.
+    </p>
+    <p>
+      Enter pricing to get <strong>cost estimates</strong>. The calculator automatically adds
+      appropriate waste factor based on your pattern choice.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>tiles needed</strong> includes waste factor for cuts and breakage. Round up when buying
+      boxes - you cannot buy individual tiles.
+    </p>
+    <p>
+      <strong>Grout bags</strong> are calculated based on tile size and grout width. Most home improvement
+      stores sell 10 lb bags that cover approximately 25-35 sq ft.
+    </p>
+    <p>
+      <strong>Thinset adhesive</strong> coverage assumes a standard 1/4" x 1/4" notched trowel. Large
+      format tiles may require larger trowel notches and more adhesive.
+    </p>
+    <p>
+      <strong>Backer board</strong> sheets are 3x5 feet (15 sq ft). Always use cement backer board in
+      wet areas like showers and around tubs.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

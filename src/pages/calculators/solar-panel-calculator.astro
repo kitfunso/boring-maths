@@ -1,0 +1,172 @@
+---
+/**
+ * Solar Panel Calculator Page
+ *
+ * SEO-optimized page targeting: "solar panel payback calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SolarCalculator from '../../components/calculators/SolarCalculator/SolarCalculator';
+
+// SEO Configuration
+const title = 'Solar Panel Calculator | Payback Period & Savings';
+const description =
+  'Calculate solar panel system costs, payback period, and 25-year savings. Factor in tax credits, rebates, and electricity rate increases to see your true ROI.';
+const keywords =
+  'solar panel calculator, solar payback calculator, solar ROI calculator, solar savings calculator, solar panel cost calculator, solar energy calculator, photovoltaic calculator';
+const canonicalURL = '/calculators/solar-panel-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Solar Panel Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Calculate how much your appliances cost to run.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Plan your savings for home improvements.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How long does it take for solar panels to pay for themselves?',
+    answer:
+      'The average solar payback period in the US is 6-9 years, depending on your electricity rates, sun exposure, system cost, and available incentives. After payback, you enjoy free electricity for the remaining 15-20 years of the system warranty.',
+  },
+  {
+    question: 'How much can I save with solar panels over 25 years?',
+    answer:
+      'A typical 7kW residential system can save $25,000-$50,000+ over 25 years, depending on your electricity rates and rate increases. With 3% annual electricity rate increases (the historical average), savings compound significantly over time.',
+  },
+  {
+    question: 'What is the federal solar tax credit?',
+    answer:
+      'The US federal solar Investment Tax Credit (ITC) allows you to deduct 30% of your solar installation cost from your federal taxes through 2032. This applies to both purchased and financed systems. The credit steps down to 26% in 2033 and 22% in 2034.',
+  },
+  {
+    question: 'How much does a home solar system cost?',
+    answer:
+      'Average residential solar costs $2.50-$3.50 per watt before incentives. A typical 7kW system costs $17,500-$24,500 before the 30% federal tax credit. After incentives, net costs are typically $12,000-$17,000.',
+  },
+  {
+    question: 'How many solar panels do I need?',
+    answer:
+      'Most homes need a 5-10 kW system. Divide your annual kWh usage by your area peak sun hours (typically 4-6) and by 365 to estimate kW needed. A 7kW system with 400W panels needs about 18 panels, covering roughly 350 sq ft of roof space.',
+  },
+  {
+    question: 'Should I finance or pay cash for solar?',
+    answer:
+      'Cash purchases provide the best long-term ROI since you avoid interest costs. However, $0-down solar loans can provide immediate savings if your loan payment is less than your current electric bill. Compare total costs over the loan term to decide.',
+  },
+  {
+    question: 'How much electricity will solar panels produce?',
+    answer:
+      'A solar system produces roughly: kW capacity x peak sun hours x 365 x 0.85 (efficiency) = annual kWh. A 7kW system in an area with 5 peak sun hours produces about 10,800 kWh per year - enough for the average US home.',
+  },
+  {
+    question: 'What affects solar panel payback period?',
+    answer:
+      'Key factors: electricity rates (higher = faster payback), sun exposure, system cost, available incentives, and financing terms. Areas with high electricity rates ($0.20+/kWh) and good sun often see 5-7 year payback periods.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Solar Panel Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Solar Panel Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Solar Panel Calculator"
+    description="Calculate your solar investment payback period, 25-year savings, and ROI. Factor in tax credits, rebates, and rising electricity costs to make an informed decision."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <SolarCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select a <strong>system size</strong> preset or enter custom values. System cost is estimated automatically
+      based on average installation costs, but you can enter actual quotes you have received.
+    </p>
+    <p>
+      Enter your <strong>monthly electricity bill</strong> and <strong>rate per kWh</strong> from your
+      utility bill. These determine your potential savings. Include the expected annual rate increase
+      (historically about 3% per year).
+    </p>
+    <p>
+      Adjust <strong>peak sun hours</strong> for your location (3-6 hours typical in most areas) and
+      <strong>system efficiency</strong> (80-85% accounts for inverter losses and shading).
+    </p>
+    <p>
+      Enter available <strong>incentives</strong>: federal tax credit (30% through 2032 in the US),
+      state credits, and local rebates. Enable financing to see monthly payment estimates.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Payback period</strong> is when cumulative savings equal your net system cost. Shorter is
+      better - most residential solar systems pay back in 6-9 years.
+    </p>
+    <p>
+      <strong>25-year savings</strong> represents total electricity cost avoided over the typical warranty
+      period. This accounts for annual electricity rate increases.
+    </p>
+    <p>
+      <strong>ROI percentage</strong> compares your 25-year savings to net system cost. A 200% ROI means
+      you earn back 3x what you invested (your money + 2x profit).
+    </p>
+    <p>
+      <strong>Bill coverage</strong> shows what percentage of your electricity usage the system produces.
+      100% coverage means the system fully offsets your usage on an annual basis.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

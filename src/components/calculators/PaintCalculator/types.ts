@@ -1,107 +1,152 @@
 /**
  * Paint Calculator - Type Definitions
- *
- * Calculator to determine how much paint you need for a room.
  */
 
 import type { Currency } from '../../../lib/regions';
 
+export type RoomType = 'bedroom' | 'living_room' | 'bathroom' | 'kitchen' | 'hallway' | 'custom';
 export type PaintQuality = 'economy' | 'standard' | 'premium';
+export type SurfaceType = 'smooth' | 'textured' | 'rough';
 
-/**
- * Input values for the Paint Calculator
- */
 export interface PaintCalculatorInputs {
-  /** Selected currency (for cost estimates) */
   currency: Currency;
 
-  /** Room length in feet */
-  roomLength: number;
+  // Room dimensions
+  roomType: RoomType;
+  roomLength: number; // feet
+  roomWidth: number; // feet
+  ceilingHeight: number; // feet
 
-  /** Room width in feet */
-  roomWidth: number;
-
-  /** Wall height in feet */
-  wallHeight: number;
-
-  /** Number of doors to subtract */
+  // Openings to subtract
   doorCount: number;
-
-  /** Number of windows to subtract */
   windowCount: number;
 
-  /** Number of coats to apply */
+  // Paint options
   coats: number;
-
-  /** Paint quality level */
   paintQuality: PaintQuality;
-
-  /** Include primer */
-  includePrimer: boolean;
-
-  /** Include trim paint */
+  surfaceType: SurfaceType;
+  includeCeiling: boolean;
   includeTrim: boolean;
+  needsPrimer: boolean;
 }
 
-/**
- * Calculated results from the Paint Calculator
- */
+export interface PaintItem {
+  type: string;
+  gallons: number;
+  cost: number;
+  coverage: string;
+}
+
 export interface PaintCalculatorResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Total wall area in square feet */
-  totalWallArea: number;
+  // Area calculations
+  wallArea: number; // sq ft
+  ceilingArea: number; // sq ft
+  trimLength: number; // linear ft
+  totalPaintableArea: number; // sq ft
 
-  /** Area to subtract (doors, windows) */
-  subtractedArea: number;
-
-  /** Paintable area in square feet */
-  paintableArea: number;
-
-  /** Gallons of wall paint needed */
-  gallonsNeeded: number;
-
-  /** Primer gallons (if included) */
+  // Paint needed
+  wallPaintGallons: number;
+  ceilingPaintGallons: number;
+  trimPaintQuarts: number;
   primerGallons: number;
 
-  /** Trim paint quarts (if included) */
-  trimQuarts: number;
+  // Costs
+  paintCost: number;
+  primerCost: number;
+  suppliesCost: number;
+  totalCost: number;
 
-  /** Estimated cost */
-  estimatedCost: number;
+  // Breakdown
+  items: PaintItem[];
 
-  /** Time estimate in hours */
-  timeEstimate: number;
+  // Time estimate
+  prepTimeHours: number;
+  paintTimeHours: number;
+  totalTimeHours: number;
 
-  /** Breakdown of what to buy */
-  shoppingList: {
-    item: string;
-    quantity: number;
-    unit: string;
-    estimatedPrice: number;
-  }[];
+  // Tips
+  tips: string[];
 }
 
-/**
- * Get default input values for a given currency
- */
+// Paint coverage (sq ft per gallon)
+export const PAINT_COVERAGE: Record<SurfaceType, number> = {
+  smooth: 400,
+  textured: 350,
+  rough: 300,
+};
+
+// Paint prices per gallon by quality
+export const PAINT_PRICES: Record<Currency, Record<PaintQuality, number>> = {
+  USD: {
+    economy: 25,
+    standard: 40,
+    premium: 65,
+  },
+  GBP: {
+    economy: 20,
+    standard: 32,
+    premium: 52,
+  },
+  EUR: {
+    economy: 22,
+    standard: 36,
+    premium: 58,
+  },
+};
+
+// Primer price per gallon
+export const PRIMER_PRICES: Record<Currency, number> = {
+  USD: 20,
+  GBP: 16,
+  EUR: 18,
+};
+
+// Trim paint price per quart
+export const TRIM_PAINT_PRICES: Record<Currency, number> = {
+  USD: 18,
+  GBP: 14,
+  EUR: 16,
+};
+
+// Supplies cost estimate
+export const SUPPLIES_COST: Record<Currency, number> = {
+  USD: 50,
+  GBP: 40,
+  EUR: 45,
+};
+
+// Standard opening sizes (sq ft)
+export const DOOR_AREA = 21; // 3ft x 7ft
+export const WINDOW_AREA = 12; // 3ft x 4ft average
+
+// Room presets
+export const ROOM_PRESETS: Record<RoomType, { length: number; width: number; height: number }> = {
+  bedroom: { length: 12, width: 12, height: 9 },
+  living_room: { length: 18, width: 14, height: 9 },
+  bathroom: { length: 8, width: 6, height: 9 },
+  kitchen: { length: 12, width: 10, height: 9 },
+  hallway: { length: 15, width: 4, height: 9 },
+  custom: { length: 12, width: 12, height: 9 },
+};
+
 export function getDefaultInputs(currency: Currency = 'USD'): PaintCalculatorInputs {
   return {
     currency,
+    roomType: 'bedroom',
     roomLength: 12,
-    roomWidth: 10,
-    wallHeight: 8,
+    roomWidth: 12,
+    ceilingHeight: 9,
     doorCount: 1,
     windowCount: 2,
     coats: 2,
     paintQuality: 'standard',
-    includePrimer: true,
-    includeTrim: false,
+    surfaceType: 'smooth',
+    includeCeiling: false,
+    includeTrim: true,
+    needsPrimer: false,
   };
 }
 
-/**
- * Default input values
- */
 export const DEFAULT_INPUTS: PaintCalculatorInputs = getDefaultInputs('USD');

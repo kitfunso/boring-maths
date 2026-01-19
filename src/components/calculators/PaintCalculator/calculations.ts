@@ -1,159 +1,175 @@
 /**
  * Paint Calculator - Calculation Logic
- *
- * Pure functions for calculating paint quantities.
  */
 
-import type { PaintCalculatorInputs, PaintCalculatorResult, PaintQuality } from './types';
-import type { Currency } from '../../../lib/regions';
-import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
+import type { PaintCalculatorInputs, PaintCalculatorResult, PaintItem } from './types';
+import {
+  PAINT_COVERAGE,
+  PAINT_PRICES,
+  PRIMER_PRICES,
+  TRIM_PAINT_PRICES,
+  SUPPLIES_COST,
+  DOOR_AREA,
+  WINDOW_AREA,
+} from './types';
 
-/** Average door area in square feet */
-const DOOR_AREA = 21;
-
-/** Average window area in square feet */
-const WINDOW_AREA = 15;
-
-/** Coverage per gallon in square feet */
-const COVERAGE_PER_GALLON = 350;
-
-/** Waste factor (10% extra) */
-const WASTE_FACTOR = 1.1;
-
-/** Paint prices by quality and currency */
-const PAINT_PRICES: Record<Currency, Record<PaintQuality, number>> = {
-  USD: { economy: 25, standard: 40, premium: 65 },
-  GBP: { economy: 20, standard: 35, premium: 55 },
-  EUR: { economy: 22, standard: 38, premium: 60 },
-};
-
-/** Primer price per gallon by currency */
-const PRIMER_PRICES: Record<Currency, number> = {
-  USD: 20,
-  GBP: 15,
-  EUR: 18,
-};
-
-/** Trim paint price per quart by currency */
-const TRIM_PRICES: Record<Currency, number> = {
-  USD: 18,
-  GBP: 14,
-  EUR: 16,
-};
-
-/** Hours per 100 sq ft */
-const HOURS_PER_100_SQFT = 0.5;
-
-/**
- * Calculate paint requirements
- */
 export function calculatePaint(inputs: PaintCalculatorInputs): PaintCalculatorResult {
   const {
     currency,
     roomLength,
     roomWidth,
-    wallHeight,
+    ceilingHeight,
     doorCount,
     windowCount,
     coats,
     paintQuality,
-    includePrimer,
+    surfaceType,
+    includeCeiling,
     includeTrim,
+    needsPrimer,
   } = inputs;
 
-  // Calculate wall perimeter and area
+  const items: PaintItem[] = [];
+
+  // Calculate wall area
   const perimeter = 2 * (roomLength + roomWidth);
-  const totalWallArea = perimeter * wallHeight;
+  const grossWallArea = perimeter * ceilingHeight;
+  const openingsArea = doorCount * DOOR_AREA + windowCount * WINDOW_AREA;
+  const wallArea = Math.max(0, grossWallArea - openingsArea);
 
-  // Subtract doors and windows
-  const doorArea = doorCount * DOOR_AREA;
-  const windowArea = windowCount * WINDOW_AREA;
-  const subtractedArea = doorArea + windowArea;
-  const paintableArea = Math.max(0, totalWallArea - subtractedArea);
+  // Calculate ceiling area
+  const ceilingArea = roomLength * roomWidth;
 
-  // Calculate paint needed (with waste factor)
-  const areaPerCoat = paintableArea * coats;
-  const rawGallons = (areaPerCoat / COVERAGE_PER_GALLON) * WASTE_FACTOR;
-  const gallonsNeeded = Math.ceil(rawGallons);
+  // Calculate trim length (baseboard + door/window trim)
+  const baseboardLength = perimeter;
+  const doorTrimLength = doorCount * 17;
+  const windowTrimLength = windowCount * 12;
+  const trimLength = baseboardLength + doorTrimLength + windowTrimLength;
 
-  // Primer (one coat, same coverage)
-  const rawPrimerGallons = includePrimer ? (paintableArea / COVERAGE_PER_GALLON) * WASTE_FACTOR : 0;
-  const primerGallons = Math.ceil(rawPrimerGallons);
+  // Get paint coverage for surface type
+  const coverage = PAINT_COVERAGE[surfaceType];
 
-  // Trim paint (estimate based on room perimeter)
-  // Assume ~20 linear feet of trim per quart
-  const trimQuarts = includeTrim ? Math.ceil(perimeter / 20) : 0;
+  // Calculate wall paint needed (with 10% waste factor)
+  const wallAreaWithCoats = wallArea * coats;
+  const wallPaintGallons = Math.ceil((wallAreaWithCoats / coverage) * 1.1);
+
+  // Calculate ceiling paint needed
+  let ceilingPaintGallons = 0;
+  if (includeCeiling) {
+    const ceilingAreaWithCoats = ceilingArea * coats;
+    ceilingPaintGallons = Math.ceil((ceilingAreaWithCoats / coverage) * 1.1);
+  }
+
+  // Calculate trim paint needed (quarts, 1 quart covers ~100 linear ft)
+  let trimPaintQuarts = 0;
+  if (includeTrim) {
+    trimPaintQuarts = Math.ceil((trimLength * coats) / 100);
+  }
+
+  // Calculate primer needed
+  let primerGallons = 0;
+  if (needsPrimer) {
+    const totalArea = wallArea + (includeCeiling ? ceilingArea : 0);
+    primerGallons = Math.ceil((totalArea / coverage) * 1.1);
+  }
 
   // Calculate costs
-  const paintPrice = PAINT_PRICES[currency][paintQuality];
-  const paintCost = gallonsNeeded * paintPrice;
-  const primerCost = primerGallons * PRIMER_PRICES[currency];
-  const trimCost = trimQuarts * TRIM_PRICES[currency];
-  const estimatedCost = paintCost + primerCost + trimCost;
+  const paintPricePerGallon = PAINT_PRICES[currency][paintQuality];
+  const primerPrice = PRIMER_PRICES[currency];
+  const trimPaintPrice = TRIM_PAINT_PRICES[currency];
+  const suppliesCost = SUPPLIES_COST[currency];
 
-  // Time estimate
-  const baseTime = (paintableArea / 100) * HOURS_PER_100_SQFT * coats;
-  const prepTime = 1; // 1 hour for prep
-  const primerTime = includePrimer ? (paintableArea / 100) * HOURS_PER_100_SQFT : 0;
-  const trimTime = includeTrim ? perimeter * 0.02 : 0; // 0.02 hours per linear foot
-  const timeEstimate = Math.round((baseTime + prepTime + primerTime + trimTime) * 10) / 10;
+  const wallPaintCost = wallPaintGallons * paintPricePerGallon;
+  const ceilingPaintCost = ceilingPaintGallons * paintPricePerGallon;
+  const trimPaintCost = trimPaintQuarts * trimPaintPrice;
+  const primerCost = primerGallons * primerPrice;
+  const paintCost = wallPaintCost + ceilingPaintCost + trimPaintCost;
+  const totalCost = paintCost + primerCost + suppliesCost;
 
-  // Build shopping list
-  const shoppingList: PaintCalculatorResult['shoppingList'] = [];
+  // Build items list
+  if (wallPaintGallons > 0) {
+    items.push({
+      type: 'Wall Paint',
+      gallons: wallPaintGallons,
+      cost: wallPaintCost,
+      coverage: wallArea + ' sq ft walls',
+    });
+  }
+
+  if (ceilingPaintGallons > 0) {
+    items.push({
+      type: 'Ceiling Paint',
+      gallons: ceilingPaintGallons,
+      cost: ceilingPaintCost,
+      coverage: ceilingArea + ' sq ft ceiling',
+    });
+  }
+
+  if (trimPaintQuarts > 0) {
+    items.push({
+      type: 'Trim Paint (quarts)',
+      gallons: trimPaintQuarts,
+      cost: trimPaintCost,
+      coverage: Math.round(trimLength) + ' linear ft trim',
+    });
+  }
 
   if (primerGallons > 0) {
-    shoppingList.push({
-      item: 'Primer',
-      quantity: primerGallons,
-      unit: primerGallons === 1 ? 'gallon' : 'gallons',
-      estimatedPrice: primerCost,
+    items.push({
+      type: 'Primer',
+      gallons: primerGallons,
+      cost: primerCost,
+      coverage: wallArea + (includeCeiling ? ceilingArea : 0) + ' sq ft',
     });
   }
 
-  shoppingList.push({
-    item: `${paintQuality.charAt(0).toUpperCase() + paintQuality.slice(1)} Paint`,
-    quantity: gallonsNeeded,
-    unit: gallonsNeeded === 1 ? 'gallon' : 'gallons',
-    estimatedPrice: paintCost,
-  });
+  // Time estimates (hours)
+  const totalArea = wallArea + (includeCeiling ? ceilingArea : 0);
+  const prepTimeHours = Math.ceil(totalArea / 200);
+  const paintTimeHours = Math.ceil((totalArea * coats) / 150);
+  const trimTimeHours = includeTrim ? Math.ceil(trimLength / 50) : 0;
+  const totalTimeHours = prepTimeHours + paintTimeHours + trimTimeHours;
 
-  if (trimQuarts > 0) {
-    shoppingList.push({
-      item: 'Trim Paint',
-      quantity: trimQuarts,
-      unit: trimQuarts === 1 ? 'quart' : 'quarts',
-      estimatedPrice: trimCost,
-    });
+  // Tips
+  const tips: string[] = [];
+
+  if (surfaceType === 'rough') {
+    tips.push('Rough surfaces need more paint - consider an extra gallon for touch-ups');
   }
+
+  if (!needsPrimer && paintQuality !== 'premium') {
+    tips.push('Primer improves coverage and adhesion, especially over dark colors');
+  }
+
+  if (coats === 1) {
+    tips.push('Two coats provide better coverage and durability');
+  }
+
+  if (paintQuality === 'economy') {
+    tips.push('Premium paint often covers better, potentially requiring fewer coats');
+  }
+
+  tips.push('Always buy slightly more paint than calculated for touch-ups');
+  tips.push('Stir paint thoroughly and maintain a wet edge to avoid lap marks');
 
   return {
     currency,
-    totalWallArea: Math.round(totalWallArea),
-    subtractedArea: Math.round(subtractedArea),
-    paintableArea: Math.round(paintableArea),
-    gallonsNeeded,
+    wallArea: Math.round(wallArea),
+    ceilingArea: Math.round(ceilingArea),
+    trimLength: Math.round(trimLength),
+    totalPaintableArea: Math.round(wallArea + (includeCeiling ? ceilingArea : 0)),
+    wallPaintGallons,
+    ceilingPaintGallons,
+    trimPaintQuarts,
     primerGallons,
-    trimQuarts,
-    estimatedCost: Math.round(estimatedCost),
-    timeEstimate,
-    shoppingList,
+    paintCost: Math.round(paintCost),
+    primerCost: Math.round(primerCost),
+    suppliesCost,
+    totalCost: Math.round(totalCost),
+    items,
+    prepTimeHours,
+    paintTimeHours: paintTimeHours + trimTimeHours,
+    totalTimeHours,
+    tips,
   };
-}
-
-/**
- * Format a number as currency
- */
-export function formatCurrency(
-  value: number,
-  currency: Currency = 'USD',
-  decimals: number = 0
-): string {
-  return formatCurrencyByRegion(value, currency, decimals);
-}
-
-/**
- * Format square feet
- */
-export function formatArea(sqft: number): string {
-  return `${sqft.toLocaleString()} sq ft`;
 }

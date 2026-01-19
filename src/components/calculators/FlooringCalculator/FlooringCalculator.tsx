@@ -90,7 +90,7 @@ export default function FlooringCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="yellow">
+    <ThemeProvider defaultColor="green">
       <Card variant="elevated">
         {/* Header */}
         <CalculatorHeader
@@ -337,15 +337,15 @@ export default function FlooringCalculator() {
                 <span className="font-semibold text-[var(--color-cream)]">
                   Total Estimated Cost
                 </span>
-                <span className="font-bold text-amber-400">
+                <span className="font-bold text-emerald-400">
                   {formatCurrency(result.totalCost, result.currency)}
                 </span>
               </div>
             </div>
 
             {/* Pattern Waste Comparison */}
-            <div className="bg-amber-950/30 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
+            <div className="bg-emerald-950/30 rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">
                 Waste By Pattern
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -362,15 +362,15 @@ export default function FlooringCalculator() {
                   return (
                     <div
                       key={pattern}
-                      className={`text-center p-3 rounded-lg ${isSelected ? 'bg-amber-800/40 ring-2 ring-amber-400' : 'bg-amber-900/30'}`}
+                      className={`text-center p-3 rounded-lg ${isSelected ? 'bg-emerald-800/40 ring-2 ring-emerald-400' : 'bg-emerald-900/30'}`}
                     >
                       <div
-                        className={`text-lg font-bold ${isSelected ? 'text-amber-300' : 'text-amber-400'}`}
+                        className={`text-lg font-bold ${isSelected ? 'text-emerald-300' : 'text-emerald-400'}`}
                       >
                         {wastePercent}%
                       </div>
                       <div
-                        className={`text-xs ${isSelected ? 'text-amber-400' : 'text-amber-400'}`}
+                        className={`text-xs ${isSelected ? 'text-emerald-400' : 'text-emerald-400'}`}
                       >
                         {name.split('/')[0]}
                       </div>
@@ -381,11 +381,11 @@ export default function FlooringCalculator() {
             </div>
 
             {/* Don't Forget List */}
-            <div className="bg-amber-950/30 rounded-xl p-6">
-              <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
+            <div className="bg-emerald-950/30 rounded-xl p-6">
+              <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">
                 Don't Forget
               </h3>
-              <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-amber-300">
+              <ul className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-emerald-300">
                 <li>Spacers (1/4" or 3/8")</li>
                 <li>Tapping block</li>
                 <li>Pull bar</li>

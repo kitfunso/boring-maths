@@ -1,0 +1,170 @@
+---
+/**
+ * Fence Calculator Page
+ *
+ * SEO-optimized page targeting: "fence material calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import FenceCalculator from '../../components/calculators/FenceCalculator/FenceCalculator';
+
+// SEO Configuration
+const title = 'Fence Calculator | Posts, Panels & Materials';
+const description =
+  'Calculate exactly how many fence posts, panels, concrete bags, and hardware you need. Compare DIY vs professional installation costs for wood, vinyl, chain link, and more.';
+const keywords =
+  'fence calculator, fence post calculator, fence panel calculator, fence material calculator, fence cost calculator, how many fence posts do I need, fence concrete calculator';
+const canonicalURL = '/calculators/fence-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Fence Calculator' }];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Mulch Calculator',
+    description: 'Calculate mulch for your landscaping project.',
+    href: '/calculators/mulch-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate paint for staining your new fence.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How many fence posts do I need?',
+    answer:
+      'Divide your total fence length by post spacing (typically 8 feet), then add 1 for the end post. Add extra posts for corners (1-2 each) and gates (2 per gate). For example: 100 feet with 8 ft spacing = 13 posts + corners + gate posts.',
+  },
+  {
+    question: 'How far apart should fence posts be?',
+    answer:
+      'Standard post spacing is 6-8 feet for most fence types. Use 6 feet for high winds, heavy panels, or privacy fences. Use 8 feet for lighter materials in calm areas. Never exceed 10 feet between posts.',
+  },
+  {
+    question: 'How many bags of concrete per fence post?',
+    answer:
+      'Typically 2-3 bags of 50 lb concrete per post for 4x4 posts in standard soil. Large posts (6x6) or soft soil may need 3-4 bags. Each bag fills about 0.4 cubic feet - a standard post hole needs about 0.8-1.0 cubic feet.',
+  },
+  {
+    question: 'How deep should fence posts be buried?',
+    answer:
+      'Bury posts 1/3 of their total length: 24 inches deep for a 6-foot fence (8-foot posts), 32 inches for an 8-foot fence (12-foot posts). In frost-prone areas, dig below the frost line - typically 36-42 inches.',
+  },
+  {
+    question: 'How much does it cost to install a fence?',
+    answer:
+      'DIY fence costs range from $5-15 per linear foot for materials depending on material type. Professional installation adds $15-30 per linear foot for labor. A typical 150-foot wood privacy fence costs $2,000-4,000 DIY or $5,000-9,000 installed.',
+  },
+  {
+    question: 'Should I use double posts at corners?',
+    answer:
+      'Yes, double posts at corners provide better stability and easier panel attachment. Each panel can attach to its own post rather than sharing. This is especially important for privacy fences and areas with high winds.',
+  },
+  {
+    question: 'What size fence posts should I use?',
+    answer:
+      'Standard fences use 4x4 posts. Use 6x6 posts for: gates (especially wide ones), corner/end posts on tall fences, heavy panels like composite, or windy locations. Aluminum fences use smaller proprietary posts.',
+  },
+  {
+    question: 'Do I need a permit to build a fence?',
+    answer:
+      'Most areas require permits for fences over 6 feet tall. Many require permits for any fence in front yards or near property lines. Always check local building codes and HOA rules. Call 811 before digging to locate utilities.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Fence Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Fence Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Fence Calculator"
+    description="Calculate exactly how many posts, panels, and concrete bags you need for your fence project. Compare materials and get accurate cost estimates for DIY or professional installation."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <FenceCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>total perimeter length</strong> in feet, including where gates will go. Measure
+      carefully along the entire fence line, following any curves or angles.
+    </p>
+    <p>
+      Select your <strong>fence material</strong> (wood, vinyl, chain link, aluminum, or composite) and
+      desired <strong>height</strong>. Material choice significantly affects both cost and
+      durability.
+    </p>
+    <p>
+      Add <strong>gates</strong> as needed - walk gates for foot traffic (3-4 ft wide) and drive gates
+      for vehicles (10-12 ft wide). The calculator subtracts gate widths from fence panels needed.
+    </p>
+    <p>
+      Adjust <strong>post spacing</strong> (6-8 feet typical), enter number of <strong
+        >corners</strong
+      >, and check if you want double posts at corners for added stability.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Panels needed</strong> is calculated based on your fence length divided by standard panel
+      width (varies by material). Always buy 1-2 extra panels for mistakes and future repairs.
+    </p>
+    <p>
+      <strong>Posts needed</strong> includes line posts, gate posts, and corner posts. Double-post corners
+      add one extra post per corner for improved stability.
+    </p>
+    <p>
+      <strong>Concrete bags</strong> are calculated at your specified bags per post (typically 2 for 4x4
+      posts). Adjust higher for soft soil, tall fences, or areas below frost line.
+    </p>
+    <p>
+      <strong>Labor estimates</strong> show typical professional installation costs in your area. Get
+      multiple quotes - costs vary significantly by contractor and complexity.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
