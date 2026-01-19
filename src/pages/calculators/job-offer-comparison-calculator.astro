@@ -1,0 +1,185 @@
+---
+/**
+ * Job Offer Comparison Calculator Page
+ *
+ * SEO-optimized page targeting: "compare two job offers calculator total compensation"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import JobOfferComparison from '../../components/calculators/JobOfferComparison/JobOfferComparison';
+
+// SEO Configuration
+const title = 'Job Offer Comparison Calculator | Compare Total Compensation';
+const description =
+  'Compare two job offers by total compensation. Factor in salary, bonus, equity, 401k match, health benefits, PTO value, and commute costs to make the right career decision.';
+const keywords =
+  'job offer comparison calculator, compare job offers, total compensation calculator, salary comparison, job offer negotiation, benefits comparison calculator';
+const canonicalURL = '/calculators/job-offer-comparison-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Job Offer Comparison Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of a salary increase.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Contractor vs Employee Calculator',
+    description: 'Compare contract rates to full-time salaries.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+  {
+    title: 'Remote Work Savings Calculator',
+    description: 'Calculate how much remote work saves you.',
+    href: '/calculators/remote-work-savings-calculator',
+    icon: 'home' as const,
+    color: 'cyan' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I compare job offers with different benefits?',
+    answer:
+      'Convert all benefits to annual monetary value. Include: base salary, bonus (expected value), equity (annual vesting value), 401k match (your contribution * match rate), health insurance (employer premium - your cost), PTO (daily rate * days), and other perks. Our calculator does this automatically.',
+  },
+  {
+    question: 'Should I include commute costs when comparing offers?',
+    answer:
+      "Absolutely. Commute costs include gas, wear on your car (~$0.67/mile IRS rate), parking, and tolls. But also consider the time cost - an extra 30 minutes each way is 250+ hours per year. At your hourly rate, that's significant. Our calculator factors in both.",
+  },
+  {
+    question: 'How much is a day of PTO actually worth?',
+    answer:
+      "Your PTO value equals your daily rate (annual salary / 260 working days). If you earn $75,000, each PTO day is worth about $288. An offer with 5 more PTO days is worth $1,440+ annually. Don't dismiss PTO differences as minor.",
+  },
+  {
+    question: 'How do I value equity or RSUs in a job offer?',
+    answer:
+      'For public companies, use the current stock value of your annual vesting amount. For startups, be conservative - most equity becomes worthless. Consider using 10-25% of the stated value for early-stage startups. Our calculator lets you input your own estimate.',
+  },
+  {
+    question: "What's the typical 401k match I should expect?",
+    answer:
+      'The most common 401k match is 50% of contributions up to 6% of salary (effectively 3% free money). Some companies offer 100% match up to 4-6%, or even higher. A 6% match on a $100,000 salary is $6,000/year - equivalent to a $6,000 raise.',
+  },
+  {
+    question: 'How do I compare offers with different bonus structures?',
+    answer:
+      "Consider the expected value, not the maximum. If a 10% bonus is 'target' with 80% of employees hitting it, use 10%. If it's discretionary and rarely paid in full, discount it. Ask the recruiter what percentage of employees hit target bonus.",
+  },
+  {
+    question: 'Should I take a higher salary or better benefits?',
+    answer:
+      'It depends on your situation. Pre-tax benefits (401k match, health insurance) are more tax-efficient than salary. But salary forms the base for future raises and often for future job offers. Our calculator shows the total value to help you decide.',
+  },
+  {
+    question: 'How much more should a new job pay to be worth switching?',
+    answer:
+      'A common rule is 10-20% more total compensation to offset the risk and disruption of changing jobs. However, consider non-monetary factors: career growth, learning opportunities, work-life balance, management quality, and job security.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Job Offer Comparison Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Job Offer Comparison Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Job Offer Comparison Calculator"
+    description="Compare two job offers by total compensation. See which offer is really better when you factor in salary, bonus, equity, benefits, and commute costs."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <JobOfferComparison client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the details for both job offers including <strong>base salary</strong>,
+      <strong>bonus percentage</strong>, and any <strong>equity or RSUs</strong> (use the annual vesting
+      value).
+    </p>
+    <p>
+      Add the <strong>401k match details</strong> - both the match percentage and the limit they'll match
+      up to. For example, "4% match up to 6%" means they'll match dollar-for-dollar on the first 4% of
+      your contribution, up to 6% of your salary.
+    </p>
+    <p>
+      Include <strong>health insurance costs</strong>. Enter your monthly premium contribution and
+      the total annual value of the health plan (usually found on your benefits summary).
+    </p>
+    <p>
+      Don't forget <strong>commute details</strong>. Enter the one-way distance and how many days
+      per week you'll be in the office. The calculator factors in both the direct cost and time
+      opportunity cost.
+    </p>
+    <p>
+      Adjust the <strong>calculation settings</strong> at the bottom to set your hourly time value (what
+      your time is worth to you) and driving cost per mile.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Net Total Compensation</strong> is the key number. It includes all monetary benefits
+      minus your commute costs and (optionally) commute time value.
+    </p>
+    <p>
+      The <strong>component breakdown</strong> shows how each offer compares across different categories.
+      The highlighted bars indicate which offer is better in each area.
+    </p>
+    <p>
+      The <strong>effective hourly rate</strong> divides your net compensation by total time spent (work
+      hours plus commute). This reveals the true value of your time at each job.
+    </p>
+    <p>
+      The <strong>considerations section</strong> highlights significant differences between the offers
+      that might influence your decision beyond pure compensation.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

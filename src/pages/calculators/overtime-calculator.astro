@@ -1,0 +1,182 @@
+---
+/**
+ * Overtime Calculator Page
+ *
+ * SEO-optimized page targeting: "is overtime worth it after taxes calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import OvertimeCalculator from '../../components/calculators/OvertimeCalculator/OvertimeCalculator';
+
+// SEO Configuration
+const title = 'Overtime Calculator | Is Overtime Worth It After Taxes?';
+const description =
+  'Calculate your real overtime pay after taxes. See your effective hourly rate, how much you actually keep, and whether overtime is worth it for your situation.';
+const keywords =
+  'overtime calculator, is overtime worth it, overtime after taxes calculator, overtime pay calculator, effective overtime rate, overtime tax calculator';
+const canonicalURL = '/calculators/overtime-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Overtime Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly rates to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of a salary increase.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'US Tax Bracket Calculator',
+    description: 'Find out what tax bracket you are in.',
+    href: '/calculators/us-tax-bracket-calculator',
+    icon: 'calculator' as const,
+    color: 'gray' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'Is overtime taxed at a higher rate?',
+    answer:
+      "Not exactly. Overtime isn't taxed at a special higher rate. However, the extra income can push you into a higher marginal tax bracket, so you may pay more tax on that additional income. More importantly, all the combined deductions (federal, state, FICA) can add up to 30-40% of your overtime pay.",
+  },
+  {
+    question: 'Why does my overtime paycheck seem smaller than expected?',
+    answer:
+      "Your employer withholds taxes based on annualized income. When you earn overtime, the payroll system assumes you'll earn that much every pay period, so it withholds more. You may get some back as a tax refund, but the net effect is that overtime is taxed at your marginal rate.",
+  },
+  {
+    question: "What's the law on overtime pay?",
+    answer:
+      "In the US, the Fair Labor Standards Act (FLSA) requires non-exempt employees to receive 1.5x their regular rate for hours worked over 40 in a workweek. Some states have additional requirements. Exempt employees (salaried) typically don't receive overtime pay.",
+  },
+  {
+    question: 'How much of my overtime do I actually keep?',
+    answer:
+      'It depends on your tax situation, but most people keep 60-75% of their overtime pay. Federal income tax (10-37%), state income tax (0-13%), Social Security (6.2%), and Medicare (1.45%) all take a cut. Use our calculator to see your exact amount.',
+  },
+  {
+    question: 'Does overtime affect my tax bracket?',
+    answer:
+      'It can. If overtime pushes your annual income into a higher bracket, the portion above the bracket threshold is taxed at the higher rate. But remember: only the income above the threshold is taxed higher, not all your income. This is how marginal tax brackets work.',
+  },
+  {
+    question: 'When is overtime not worth it?',
+    answer:
+      "Consider if overtime isn't worth it when: (1) your effective after-tax rate is close to or below your regular rate, (2) it significantly impacts your health or relationships, (3) you could earn more per hour doing something else, or (4) the extra income pushes you into benefit phase-outs (like student loan repayment plans).",
+  },
+  {
+    question: 'How do I maximize my overtime pay?',
+    answer:
+      "You can't avoid taxes on overtime, but you can: (1) contribute more to pre-tax retirement accounts to lower your taxable income, (2) time overtime to avoid income spikes that trigger higher withholding, (3) adjust your W-4 if you're over-withholding, (4) use HSA contributions if eligible.",
+  },
+  {
+    question: 'Is double time better than time and a half?',
+    answer:
+      'Yes, but not twice as good after taxes. If your regular rate is $25/hr, time and a half pays $37.50/hr gross but maybe $26/hr net. Double time pays $50/hr gross but maybe $32/hr net. The extra taxes on the higher income eat into the difference.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Overtime Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Overtime Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Is Overtime Worth It?"
+    description="Find out what your overtime really pays after taxes. See your effective hourly rate and decide if the extra hours are worth your time."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <OvertimeCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>regular hourly rate</strong> - this is your base pay before overtime multipliers
+      apply.
+    </p>
+    <p>
+      Add your <strong>current annual income</strong> before any overtime. This determines your tax bracket
+      and how overtime income will be taxed.
+    </p>
+    <p>
+      Use the slider to set how many <strong>overtime hours per week</strong> you're considering. The
+      calculator assumes you work overtime consistently throughout the year.
+    </p>
+    <p>
+      Select your <strong>overtime rate</strong> - most employers pay time and a half (1.5x), but some
+      pay double time (2x) for weekends or holidays.
+    </p>
+    <p>
+      For US users, set your <strong>filing status</strong> and <strong>state tax rate</strong> for accurate
+      calculations. Enable FICA to include Social Security and Medicare taxes.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>effective hourly rate</strong> is the key number - it shows what you actually earn per
+      overtime hour after all taxes are deducted.
+    </p>
+    <p>
+      Compare your <strong>gross vs net overtime</strong> to see how much goes to taxes. The visual bar
+      shows what percentage you keep.
+    </p>
+    <p>
+      The <strong>tax impact</strong> section shows your current bracket and whether overtime pushes you
+      into a higher one. Don't panic if it does - only the excess is taxed at the higher rate.
+    </p>
+    <p>
+      Use the <strong>hours needed</strong> section to quickly see how many overtime hours you need for
+      specific financial goals like an extra $500 or $1,000.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,183 @@
+---
+/**
+ * Salary to Hourly Calculator Page
+ *
+ * SEO-optimized page targeting: "salary to hourly rate calculator with benefits"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SalaryToHourly from '../../components/calculators/SalaryToHourly/SalaryToHourly';
+
+// SEO Configuration
+const title = 'Salary to Hourly Calculator | Find Your True Hourly Rate';
+const description =
+  'Convert your annual salary to hourly rate based on actual hours worked. Factor in unpaid overtime, benefits value, and PTO to find what you really earn per hour.';
+const keywords =
+  'salary to hourly calculator, salary to hourly rate, annual to hourly conversion, true hourly rate calculator, salary converter, hourly rate with benefits';
+const canonicalURL = '/calculators/salary-to-hourly-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Salary to Hourly Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly rates to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Job Offer Comparison Calculator',
+    description: 'Compare two job offers by total compensation.',
+    href: '/calculators/job-offer-comparison-calculator',
+    icon: 'trending' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Overtime Calculator',
+    description: 'Is overtime worth it after taxes?',
+    href: '/calculators/overtime-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate salary to hourly rate?',
+    answer:
+      "The standard formula is: Annual Salary ÷ 2,080 hours (40 hours × 52 weeks). But this doesn't account for actual hours worked. Our calculator uses your real weekly hours to show your true hourly rate, which is often much lower than the standard calculation suggests.",
+  },
+  {
+    question: 'Why is my true hourly rate lower than expected?',
+    answer:
+      "If you work more than 40 hours per week, your actual hourly rate is lower. A $65,000 salary at 50 hours/week is $25/hour, not the $31.25/hour you'd calculate at 40 hours. Many salaried employees don't realize they're effectively earning less per hour due to unpaid overtime.",
+  },
+  {
+    question: 'Should I include benefits when calculating hourly rate?',
+    answer:
+      'For comparing total compensation between jobs, yes. Benefits can add 20-40% to your compensation. Health insurance alone can be worth $5,000-$15,000/year. 401k matching, equity, and other perks add more. Our calculator shows both salary-only and total comp hourly rates.',
+  },
+  {
+    question: 'How much is a day of PTO worth?',
+    answer:
+      'Each PTO day is worth your daily rate: Annual Salary ÷ 260 working days. On a $65,000 salary, each PTO day is worth about $250. Someone offering 20 days PTO vs 10 days is effectively offering $2,500 more in compensation.',
+  },
+  {
+    question: 'What is the standard hours calculation (2,080)?',
+    answer:
+      '2,080 comes from 40 hours per week × 52 weeks per year. This is the standard full-time work year used by HR departments and government agencies. However, after accounting for holidays and PTO, actual working hours are typically 1,800-2,000.',
+  },
+  {
+    question: 'How do I compare salaried vs hourly jobs?',
+    answer:
+      "Convert both to the same terms. For salary: divide by actual expected hours to get true hourly rate. For hourly: multiply by expected hours and add estimated benefits value. Remember that hourly workers often get overtime pay (1.5x) while salaried workers don't.",
+  },
+  {
+    question: 'What salary equals $30 per hour?',
+    answer:
+      "At a standard 40 hours/week: $30 × 2,080 = $62,400/year. But if you actually work 45 hours/week, you'd need about $70,200 to maintain a true $30/hour rate. Use our calculator to see exact conversions at different hour levels.",
+  },
+  {
+    question: 'Is unpaid overtime common for salaried employees?',
+    answer:
+      'Yes, very common. Surveys show salaried employees work an average of 47-49 hours per week. This hidden overtime can reduce effective hourly pay by 15-20%. The Fair Labor Standards Act exempts many salaried workers from overtime pay requirements.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Salary to Hourly Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Salary to Hourly Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Salary to Hourly Calculator"
+    description="Find your true hourly rate based on actual hours worked. See the real value of your time when you factor in unpaid overtime and benefits."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <SalaryToHourly client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>annual salary</strong> - this is your base pay before taxes, not including bonuses
+      or equity.
+    </p>
+    <p>
+      Use the slider to set your <strong>actual hours worked per week</strong>. Be honest - include
+      early mornings, late nights, working lunches, and weekend work. Most salaried employees work
+      more than 40 hours.
+    </p>
+    <p>
+      Add your <strong>PTO and paid holidays</strong>. These reduce your actual working weeks but
+      you still get paid, so they effectively increase your hourly rate.
+    </p>
+    <p>
+      Include your <strong>annual benefits value</strong> for a total compensation view. Add up your employer's
+      health insurance contribution, 401k match, equity grants, and other perks.
+    </p>
+    <p>
+      If you have <strong>unpaid time off</strong> (personal days, unpaid sick leave, sabbatical), add
+      those weeks to see how they affect your effective rate.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Your <strong>true hourly rate</strong> is based on actual hours worked, not the standard 2,080-hour
+      year. If you work 50 hours/week, your rate is calculated using real hours.
+    </p>
+    <p>
+      The <strong>hourly rate comparison</strong> chart shows how your effective rate changes at different
+      hour levels. Notice how each extra 5 hours/week reduces your rate by about 10%.
+    </p>
+    <p>
+      The <strong>total compensation hourly rate</strong> includes benefits value divided by your actual
+      hours. This is useful when comparing to freelance or contractor rates.
+    </p>
+    <p>
+      The <strong>cost of unpaid overtime</strong> shows the dollar value of extra hours you're working
+      without additional pay - what you'd earn if you were paid 1.5x for overtime.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
