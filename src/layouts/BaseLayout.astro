@@ -100,6 +100,19 @@ const ogImageURL = ogImage
 
     <title>{title}</title>
 
+    <!-- Organization Schema for Google Logo -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'Boring Math',
+        url: 'https://boring-math.com',
+        logo: 'https://boring-math.com/logo.png',
+        sameAs: [],
+      })}
+    />
+
     <!-- View Transitions for instant navigation -->
     <ViewTransitions fallback="swap" />
   </head>
