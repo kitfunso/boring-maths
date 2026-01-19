@@ -1,0 +1,153 @@
+---
+/**
+ * Rental Property ROI Calculator Page
+ *
+ * SEO-optimized page for rental property investment analysis.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RentalPropertyROI from '../../components/calculators/RentalPropertyROI/RentalPropertyROI';
+
+// SEO Configuration
+const title = 'Rental Property ROI Calculator | Analyze Investment Returns';
+const description =
+  'Calculate cash-on-cash return, cap rate, and monthly cash flow for rental properties. Analyze ROI with vacancy rates, CapEx reserves, and property management costs.';
+const keywords =
+  'rental property calculator, cap rate calculator, cash on cash return, rental property ROI, investment property calculator, cash flow calculator, real estate investment';
+const canonicalURL = '/calculators/rental-property-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Rental Property Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly mortgage payments.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Should you buy or continue renting?',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is cap rate?',
+    answer:
+      'Cap rate (capitalization rate) is Net Operating Income divided by purchase price. A $300,000 property with $18,000 NOI has a 6% cap rate. Higher cap rates indicate higher returns but often come with more risk.',
+  },
+  {
+    question: 'What is cash-on-cash return?',
+    answer:
+      'Cash-on-cash return measures annual cash flow divided by total cash invested (down payment + closing costs). If you invested $60,000 and receive $4,800/year in cash flow, your cash-on-cash return is 8%.',
+  },
+  {
+    question: 'What is the 1% rule?',
+    answer:
+      'The 1% rule is a quick screening tool: monthly rent should be at least 1% of purchase price. A $200,000 property should rent for $2,000+/month. Properties meeting this rule often cash flow well, but it is just a starting point.',
+  },
+  {
+    question: 'What is CapEx reserve?',
+    answer:
+      'CapEx (Capital Expenditure) reserve is money set aside for major repairs - roof replacement, HVAC, appliances. Most investors reserve 5-10% of rent. Without this, one major repair can wipe out years of cash flow.',
+  },
+  {
+    question: 'Should I include property management?',
+    answer:
+      'Include 8-10% for property management even if you plan to self-manage. Your time has value, and you may want professional management later. Including it gives you a more conservative (realistic) analysis.',
+  },
+  {
+    question: 'What vacancy rate should I use?',
+    answer:
+      'Use 5-8% for single-family homes in good areas, 8-10% for multi-family or less desirable locations. Check local market data. Even one month vacancy per year is 8.3%.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Rental Property Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Rental Property ROI Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Rental Property ROI Calculator"
+    description="Analyze rental property investments with detailed cash flow projections. Calculate cap rate, cash-on-cash return, and see 5-year equity growth projections."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RentalPropertyROI client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>purchase price</strong> and expected <strong>monthly rent</strong>. The
+      calculator immediately shows if the property passes the 1% rule.
+    </p>
+    <p>
+      Set your <strong>down payment percentage</strong> and <strong>interest rate</strong> to calculate
+      mortgage payments. Adjust the term for different scenarios.
+    </p>
+    <p>
+      Include all <strong>operating expenses</strong> - property taxes, insurance, HOA, and reserves for
+      maintenance, CapEx, and vacancy.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Monthly cash flow</strong> is what remains after all expenses and mortgage payments. Positive
+      cash flow means the property pays for itself.
+    </p>
+    <p>
+      <strong>Cap rate</strong> measures property performance independent of financing. Use it to compare
+      properties regardless of how they are financed.
+    </p>
+    <p>
+      <strong>Cash-on-cash return</strong> measures return on your actual cash invested. This is usually
+      the most important metric for investors.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

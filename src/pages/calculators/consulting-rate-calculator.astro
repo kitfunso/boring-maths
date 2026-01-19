@@ -1,0 +1,153 @@
+---
+/**
+ * Consulting Rate Calculator Page
+ *
+ * SEO-optimized page for calculating consulting rates.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ConsultingRate from '../../components/calculators/ConsultingRate/ConsultingRate';
+
+// SEO Configuration
+const title = 'Consulting Rate Calculator | Calculate Your Hourly & Day Rate';
+const description =
+  'Calculate your consulting hourly rate, day rate, and project rates based on desired income. Understand why $50/hr employee does not equal $50/hr consultant.';
+const keywords =
+  'consulting rate calculator, freelance rate calculator, hourly rate calculator, day rate calculator, consultant pricing, freelance pricing, contractor rate';
+const canonicalURL = '/calculators/consulting-rate-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Consulting Rate Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your freelance day rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Employee Cost Calculator',
+    description: 'Understand true employee costs.',
+    href: '/calculators/employee-cost-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'Why do consultants charge more than employees earn per hour?',
+    answer:
+      'Consultants pay both employer AND employee taxes (15.3% self-employment tax in US), fund their own benefits, cover business expenses, have no paid vacation or sick days, and bear the risk of inconsistent work. These factors typically mean charging 2-3x what an equivalent employee earns.',
+  },
+  {
+    question: 'How many billable hours should I plan for?',
+    answer:
+      'Most consultants achieve 60-70% utilization. With 2,080 work hours per year, expect 1,200-1,500 billable hours. Account for vacation, holidays, admin work, marketing, and between-project gaps.',
+  },
+  {
+    question: 'What is a reasonable day rate?',
+    answer:
+      'Day rates typically equal 8x your hourly rate or slightly less. Some consultants offer a small discount for day commitments. Rates vary widely by industry, experience, and location.',
+  },
+  {
+    question: 'Should I offer project-based pricing?',
+    answer:
+      'Project pricing often works better for both parties. Clients get budget certainty, and you are not penalized for efficiency. Price projects based on value delivered, not hours - you can often earn more.',
+  },
+  {
+    question: 'How do I handle retainer clients?',
+    answer:
+      'Retainers provide income stability. Offer a 10-15% discount for monthly commitment. Ensure the retainer covers a specific scope or hour allocation to avoid scope creep.',
+  },
+  {
+    question: 'What business expenses should consultants budget for?',
+    answer:
+      'Common expenses include: professional liability insurance, accounting/legal services, software and tools, marketing and website, professional development, home office or coworking space, and travel. Budget $10,000-$25,000/year depending on your business.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Consulting Rate Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Consulting Rate Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Consulting Rate Calculator"
+    description="Calculate what you need to charge as a consultant to achieve your income goals. Understand exactly why consultants charge more than employees earn."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ConsultingRate client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start with your <strong>desired annual take-home income</strong> - what you want in your pocket
+      after taxes, expenses, and everything else.
+    </p>
+    <p>
+      Set your <strong>billable hours per week</strong> and <strong>weeks per year</strong>
+      realistically. Account for non-billable time like admin, marketing, and business development.
+    </p>
+    <p>
+      Include all <strong>business costs</strong> - health insurance, retirement, business expenses, and
+      tax rates for your location.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Your <strong>hourly rate</strong> ensures you earn your target income while covering all costs and
+      building in a profit margin for growth and risk.
+    </p>
+    <p>
+      The <strong>rate breakdown</strong> shows exactly where your hourly rate goes - take-home pay, taxes,
+      benefits, expenses, and profit.
+    </p>
+    <p>
+      The <strong>employee equivalence</strong> shows what salary an employer would pay for someone at
+      your rate, helping you compare apples to apples.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,148 @@
+---
+/**
+ * Startup Cost Calculator Page
+ *
+ * SEO-optimized page for estimating startup costs.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import StartupCost from '../../components/calculators/StartupCost/StartupCost';
+
+// SEO Configuration
+const title = 'Startup Cost Calculator | Estimate Your Business Launch Costs';
+const description =
+  'Calculate how much capital you need to start your business. Estimate one-time costs, monthly burn rate, and runway requirements for restaurants, consulting, e-commerce, and more.';
+const keywords =
+  'startup cost calculator, business startup costs, how much to start a business, startup budget, burn rate calculator, runway calculator, small business costs';
+const canonicalURL = '/calculators/startup-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Startup Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Break-Even Calculator',
+    description: 'Find out when your business will become profitable.',
+    href: '/calculators/break-even-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Calculate the optimal price for your products.',
+    href: '/calculators/pricing-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much does it cost to start a small business?',
+    answer:
+      'Startup costs vary widely by business type. A consulting business might start with $5,000-$10,000, while a restaurant could require $100,000-$500,000. E-commerce businesses typically fall in between at $10,000-$50,000. Use this calculator with your specific business type for accurate estimates.',
+  },
+  {
+    question: 'What is runway and why does it matter?',
+    answer:
+      'Runway is how long your business can operate before running out of money. Most experts recommend 12-18 months of runway. This gives you time to become profitable or raise additional funding without running out of cash.',
+  },
+  {
+    question: 'Should I include a contingency buffer?',
+    answer:
+      'Yes, always include a 15-25% contingency buffer. Unexpected costs always arise - equipment breaks, permits cost more than expected, or revenue takes longer to materialize. A contingency buffer prevents these surprises from sinking your business.',
+  },
+  {
+    question: 'What are one-time vs monthly costs?',
+    answer:
+      'One-time costs are paid once at startup (equipment, legal fees, deposits, renovations). Monthly costs recur each month (rent, utilities, salaries, marketing). Your total capital needs include both one-time costs plus monthly costs multiplied by your runway months.',
+  },
+  {
+    question: 'How much should I pay myself as a founder?',
+    answer:
+      'Pay yourself enough to cover living expenses without stress. Many founders take below-market salaries initially, but taking nothing leads to burnout. A common approach is covering your basic needs (housing, food, insurance) while reinvesting the rest.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Startup Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Startup Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Startup Cost Calculator"
+    description="Estimate how much capital you need to launch your business. Get a detailed breakdown of one-time costs, monthly expenses, and total runway requirements."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <StartupCost client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>business type</strong> to load industry-typical cost estimates. The calculator
+      includes presets for consulting, e-commerce, SaaS, service businesses, retail, and restaurants.
+    </p>
+    <p>
+      Adjust the <strong>number of employees</strong> and <strong>runway months</strong> based on your
+      plans. More employees and longer runway significantly increase capital requirements.
+    </p>
+    <p>
+      Set your <strong>founder salary</strong> to cover your living expenses during the startup phase.
+      Don't forget to include a contingency buffer for unexpected costs.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>One-time costs</strong> are expenses you pay once at launch - equipment, legal setup, initial
+      inventory, security deposits, and renovations.
+    </p>
+    <p>
+      <strong>Monthly burn rate</strong> is your ongoing monthly expenses including rent, utilities, software,
+      marketing, and salaries. This determines how quickly you consume your capital.
+    </p>
+    <p>
+      <strong>Total capital needed</strong> combines one-time costs plus monthly burn multiplied by runway
+      months, plus your contingency buffer. This is the minimum you need to start.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

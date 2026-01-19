@@ -1,0 +1,148 @@
+---
+/**
+ * Employee Cost Calculator Page
+ *
+ * SEO-optimized page for calculating true employee costs.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import EmployeeCost from '../../components/calculators/EmployeeCost/EmployeeCost';
+
+// SEO Configuration
+const title = 'Employee Cost Calculator | True Cost of Hiring';
+const description =
+  'Calculate the true cost of an employee including salary, benefits, taxes, and overhead. Understand the 1.25-1.4x burden multiplier and calculate billable rates.';
+const keywords =
+  'employee cost calculator, true cost of employee, burden rate calculator, fully loaded cost, employee overhead, billable rate calculator, hiring costs';
+const canonicalURL = '/calculators/employee-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Employee Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Consulting Rate Calculator',
+    description: 'Calculate what to charge as a consultant.',
+    href: '/calculators/consulting-rate-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Startup Cost Calculator',
+    description: 'Estimate total costs to start your business.',
+    href: '/calculators/startup-cost-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is the burden rate or burden multiplier?',
+    answer:
+      'The burden rate is the ratio of total employee cost to base salary. A 1.3x burden means a $50,000 salary actually costs $65,000 when you add benefits, taxes, and overhead. Most employers see a 1.25-1.4x multiplier.',
+  },
+  {
+    question: 'What costs are included beyond salary?',
+    answer:
+      'Beyond salary, employers pay payroll taxes (FICA, unemployment), health insurance, retirement contributions, training, equipment, office space allocation, and other benefits. These hidden costs add up quickly.',
+  },
+  {
+    question: 'Why does true hourly cost differ from salary-based hourly?',
+    answer:
+      'A $60,000 salary divided by 2,080 hours gives $28.85/hour. But employees get paid vacation, sick days, and holidays, reducing actual working hours. Add employer costs, and true hourly cost might be $40-50/hour.',
+  },
+  {
+    question: 'How do I calculate billable rate from employee cost?',
+    answer:
+      'Divide true hourly cost by (1 - profit margin). For a $45/hour true cost and 30% profit margin: $45 / 0.70 = $64/hour billable rate. This ensures you cover costs and make profit on billable work.',
+  },
+  {
+    question: 'What payroll taxes do employers pay?',
+    answer:
+      'In the US, employers pay 6.2% Social Security and 1.45% Medicare (7.65% total FICA), plus federal and state unemployment taxes (FUTA/SUTA). In the UK, employers pay National Insurance. Total typically ranges 7-15% of salary.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Employee Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Employee Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Employee Cost Calculator"
+    description="Discover the true cost of hiring an employee. Calculate the burden rate multiplier and understand why a $50/hour employee costs much more than $50/hour."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <EmployeeCost client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>annual salary</strong> you plan to offer. The calculator shows the nominal hourly
+      rate for reference.
+    </p>
+    <p>
+      Add <strong>benefits costs</strong> including health insurance, retirement match percentage, and
+      paid time off days. These vary significantly by company and location.
+    </p>
+    <p>
+      Include <strong>overhead costs</strong> like training budget, equipment, and office space allocation
+      per employee.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>burden multiplier</strong> shows how much total cost exceeds base salary. A 1.35x multiplier
+      means every dollar of salary costs you $1.35 total.
+    </p>
+    <p>
+      <strong>True hourly cost</strong> is what each hour of employee time actually costs when you factor
+      in all expenses and actual working hours (after PTO).
+    </p>
+    <p>
+      The <strong>billable rate</strong> tells you what to charge clients for this employee's time to
+      achieve your target profit margin.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,154 @@
+---
+/**
+ * SaaS Metrics Calculator Page
+ *
+ * SEO-optimized page for SaaS business metrics analysis.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SaaSMetrics from '../../components/calculators/SaaSMetrics/SaaSMetrics';
+
+// SEO Configuration
+const title = 'SaaS Metrics Calculator | MRR, LTV, CAC & Growth Analysis';
+const description =
+  'Calculate key SaaS metrics including MRR, ARR, LTV, CAC payback, churn analysis, and Rule of 40. Get a health score based on industry benchmarks.';
+const keywords =
+  'saas metrics calculator, mrr calculator, arr calculator, ltv cac ratio, saas churn calculator, rule of 40, saas health score, subscription metrics';
+const canonicalURL = '/calculators/saas-metrics-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'SaaS Metrics Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Startup Cost Calculator',
+    description: 'Estimate costs to launch your SaaS.',
+    href: '/calculators/startup-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Break-Even Calculator',
+    description: 'Find when your SaaS becomes profitable.',
+    href: '/calculators/break-even-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is MRR and ARR?',
+    answer:
+      'MRR (Monthly Recurring Revenue) is your predictable monthly subscription income. ARR (Annual Recurring Revenue) is MRR multiplied by 12. These are the core metrics that define SaaS business health.',
+  },
+  {
+    question: 'What is a good LTV:CAC ratio?',
+    answer:
+      'A 3:1 LTV:CAC ratio is considered healthy - you earn $3 for every $1 spent acquiring a customer. Below 2:1 means acquisition costs are too high. Above 5:1 may mean you are under-investing in growth.',
+  },
+  {
+    question: 'What is CAC payback period?',
+    answer:
+      'CAC payback is how many months it takes to recover customer acquisition costs. Under 12 months is ideal for B2B SaaS. Under 6 months indicates very efficient acquisition.',
+  },
+  {
+    question: 'What is the Rule of 40?',
+    answer:
+      'The Rule of 40 states that growth rate plus profit margin should exceed 40%. A company growing 30% with 15% profit margins scores 45%, passing the test. This balances growth against profitability.',
+  },
+  {
+    question: 'What is a good churn rate for SaaS?',
+    answer:
+      'Monthly churn under 3% is excellent for B2B SaaS. 3-5% is acceptable. Above 5% requires immediate attention. For B2C, rates tend to be higher, with 5-7% considered acceptable.',
+  },
+  {
+    question: 'What is the Quick Ratio?',
+    answer:
+      'Quick Ratio measures growth efficiency: (New MRR + Expansion MRR) / (Churned MRR + Contraction MRR). A ratio above 4 indicates healthy growth. Below 1 means you are shrinking.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'SaaS Metrics Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="SaaS Metrics Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="SaaS Metrics Calculator"
+    description="Analyze your SaaS business health with industry-standard metrics. Calculate MRR, LTV, CAC payback, and get scores based on investor benchmarks."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <SaaSMetrics client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your current <strong>number of paying customers</strong> and <strong>ARPU</strong>
+      (Average Revenue Per User) to calculate your MRR.
+    </p>
+    <p>
+      Set your <strong>monthly churn rate</strong> and <strong>growth rate</strong> to see LTV calculations
+      and 12-month projections.
+    </p>
+    <p>
+      Include your <strong>Customer Acquisition Cost</strong> (CAC) and <strong>gross margin</strong
+      >
+      to calculate LTV:CAC ratio and payback period.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>health score card</strong> compares each metric against industry benchmarks and rates
+      them as excellent, good, warning, or poor.
+    </p>
+    <p>
+      <strong>12-month projections</strong> show expected customer count, MRR, and ARR based on your current
+      growth and churn rates.
+    </p>
+    <p>
+      <strong>Advanced metrics</strong> like Rule of 40, Quick Ratio, and Magic Number help you understand
+      your business from an investor perspective.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

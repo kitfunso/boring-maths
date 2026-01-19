@@ -1,0 +1,150 @@
+---
+/**
+ * Pricing Calculator Page
+ *
+ * SEO-optimized page for product pricing strategies.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PricingCalculator from '../../components/calculators/PricingCalculator/PricingCalculator';
+
+// SEO Configuration
+const title = 'Pricing Calculator | Find Your Optimal Product Price';
+const description =
+  'Calculate the optimal price for your products using cost-plus, value-based, and competitive pricing strategies. Compare approaches and find the best price for profitability.';
+const keywords =
+  'pricing calculator, product pricing, cost plus pricing, value based pricing, competitive pricing, pricing strategy, profit margin calculator';
+const canonicalURL = '/calculators/pricing-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Pricing Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Break-Even Calculator',
+    description: 'Calculate how many units you need to sell.',
+    href: '/calculators/break-even-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Marketplace Fees Calculator',
+    description: 'Compare fees across Etsy, eBay, and Amazon.',
+    href: '/calculators/marketplace-fees-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is cost-plus pricing?',
+    answer:
+      'Cost-plus pricing adds a fixed markup to your total costs. For example, if your product costs $20 and you want a 50% margin, you price at $40. It is simple and ensures profitability, but may leave money on the table if customers would pay more.',
+  },
+  {
+    question: 'What is value-based pricing?',
+    answer:
+      'Value-based pricing sets prices based on the perceived value to customers rather than your costs. If customers see your product as worth $100, you might price at $70-80 regardless of whether it costs you $10 or $50 to make.',
+  },
+  {
+    question: 'When should I use competitive pricing?',
+    answer:
+      'Competitive pricing works well in commodity markets where products are similar. Match or slightly undercut competitors to win on price. However, this can lead to race-to-the-bottom dynamics and thin margins.',
+  },
+  {
+    question: 'What is a good profit margin?',
+    answer:
+      'It varies by industry. Software typically achieves 70-90% gross margins. Retail sees 30-50%. Restaurants average 60-70% on food. Compare your margin to industry benchmarks and ensure it covers all costs plus desired profit.',
+  },
+  {
+    question: 'How do I determine perceived value?',
+    answer:
+      'Research your target customers through surveys, interviews, and competitor analysis. Ask what they currently pay for alternatives, what problems your product solves, and how much those problems cost them. The value of solving a $10,000 problem is worth more than solving a $100 problem.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Pricing Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Pricing Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Pricing Calculator"
+    description="Find the optimal price for your products using three different pricing strategies. Compare cost-plus, value-based, and competitive pricing to maximize profitability."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PricingCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>product cost</strong> (materials, manufacturing) and <strong
+        >overhead per unit</strong
+      >
+      (your fixed costs divided by expected units sold).
+    </p>
+    <p>
+      Add your <strong>competitor price</strong> and <strong>perceived value</strong> to enable value-based
+      and competitive pricing calculations.
+    </p>
+    <p>
+      Select your primary <strong>pricing strategy</strong> to see the recommended price, then compare
+      all three approaches in the strategy comparison table.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>strategy comparison</strong> shows prices, margins, and monthly profit for all three
+      approaches side by side so you can make an informed decision.
+    </p>
+    <p>
+      The <strong>price range</strong> shows your floor (minimum to cover costs) and ceiling (maximum
+      before losing customers) to help you understand your pricing flexibility.
+    </p>
+    <p>
+      <strong>Break-even units</strong> tells you how many you need to sell at the recommended price to
+      cover your fixed costs.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

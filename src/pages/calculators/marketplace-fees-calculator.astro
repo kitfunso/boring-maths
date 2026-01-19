@@ -1,0 +1,153 @@
+---
+/**
+ * Marketplace Fees Calculator Page
+ *
+ * SEO-optimized page for comparing Etsy, eBay, and Amazon fees.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import MarketplaceFees from '../../components/calculators/MarketplaceFees/MarketplaceFees';
+
+// SEO Configuration
+const title = 'Marketplace Fees Calculator | Compare Etsy, eBay & Amazon';
+const description =
+  'Compare selling fees across Etsy, eBay, and Amazon. Calculate your net profit on each platform and find which marketplace gives you the best margins.';
+const keywords =
+  'marketplace fees calculator, etsy fees, ebay fees, amazon fees, selling fees comparison, etsy fee calculator, ebay final value fee, amazon referral fee';
+const canonicalURL = '/calculators/marketplace-fees-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Marketplace Fees Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Etsy Fee Calculator',
+    description: 'Detailed Etsy fee breakdown.',
+    href: '/calculators/etsy-fee-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Find the optimal price for your products.',
+    href: '/calculators/pricing-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What fees does Etsy charge?',
+    answer:
+      'Etsy charges a $0.20 listing fee, 6.5% transaction fee on sale price plus shipping, 3% + $0.25 payment processing, and a small regulatory fee. Offsite ads add 12-15% on sales from external advertising.',
+  },
+  {
+    question: 'What fees does eBay charge?',
+    answer:
+      'eBay charges a final value fee (typically 13.25% for most categories) on item price plus shipping, plus a $0.30 per-order fee. Payment processing is included in the final value fee.',
+  },
+  {
+    question: 'What fees does Amazon charge?',
+    answer:
+      'Amazon charges a referral fee (typically 15% but varies by category from 8-17%) plus a $0.99 per-item fee for individual sellers, or $39.99/month for professional sellers. FBA adds fulfillment fees.',
+  },
+  {
+    question: 'Which marketplace has the lowest fees?',
+    answer:
+      'It depends on your price point and product category. Generally, eBay is competitive for lower-priced items, Etsy for handmade/vintage, and Amazon for high-volume sellers who can offset fees with volume and FBA benefits.',
+  },
+  {
+    question: 'What are Etsy Offsite Ads?',
+    answer:
+      'Etsy advertises your listings on Google, Facebook, and other platforms. If a sale comes from these ads, you pay 12% (if you make over $10,000/year) or 15% (under $10,000). Sellers making over $10,000 cannot opt out.',
+  },
+  {
+    question: 'Should I sell on multiple platforms?',
+    answer:
+      'Multi-channel selling expands reach but increases complexity. Start with one platform to master it, then expand. Ensure your prices account for different fee structures on each platform.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Marketplace Fees Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Marketplace Fees Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Marketplace Fees Calculator"
+    description="Compare selling fees across Etsy, eBay, and Amazon side-by-side. See exactly how much you'll profit on each platform for your products."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <MarketplaceFees client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>item price</strong> and <strong>shipping charged</strong> to customers. This
+      is your gross revenue per sale.
+    </p>
+    <p>
+      Add your <strong>product cost</strong> and <strong>actual shipping cost</strong> to calculate your
+      true profit after all fees.
+    </p>
+    <p>
+      Toggle <strong>Etsy Offsite Ads</strong> and <strong>Amazon FBA</strong> to see how these optional
+      programs affect your fees.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Each platform card shows a <strong>complete fee breakdown</strong> including all transaction fees,
+      payment processing, and platform-specific charges.
+    </p>
+    <p>
+      The <strong>effective fee rate</strong> shows total fees as a percentage of your sale, making comparison
+      easy regardless of price point.
+    </p>
+    <p>
+      <strong>Price for target margin</strong> tells you what to charge on each platform to achieve your
+      desired profit margin.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
