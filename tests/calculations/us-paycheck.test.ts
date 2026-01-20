@@ -1,0 +1,48 @@
+/**
+ * UsPaycheck Calculator - Unit Tests
+ */
+
+import { describe, it, expect } from 'vitest';
+import { calculatePaycheck } from '../../src/components/calculators/USPaycheckCalculator/calculations';
+import { getDefaultInputs } from '../../src/components/calculators/USPaycheckCalculator/types';
+import type { PaycheckInputs } from '../../src/components/calculators/USPaycheckCalculator/types';
+
+describe('UsPaycheckCalculator', () => {
+  describe('calculatePaycheck', () => {
+    it('should calculate with default inputs', () => {
+      const inputs = getDefaultInputs();
+
+      const result = calculatePaycheck(inputs);
+
+      expect(result).toBeDefined();
+      // TODO: Add specific assertions for result properties
+    });
+
+    it('should handle edge case: zero values', () => {
+      const inputs = getDefaultInputs();
+      // TODO: Set specific fields to 0 and test behavior
+
+      const result = calculatePaycheck(inputs);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle large values', () => {
+      const inputs = getDefaultInputs();
+      // TODO: Set large values and verify calculations
+
+      const result = calculatePaycheck(inputs);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should produce consistent results', () => {
+      const inputs = getDefaultInputs();
+
+      const result1 = calculatePaycheck(inputs);
+      const result2 = calculatePaycheck(inputs);
+
+      expect(result1).toEqual(result2);
+    });
+  });
+});

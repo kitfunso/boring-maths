@@ -1,0 +1,73 @@
+---
+/**
+ * 404 Not Found Page
+ *
+ * Custom error page for better UX
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '404 - Page Not Found | Boring Math Calculators';
+const description = 'The page you are looking for could not be found.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="relative px-6 py-24 min-h-[60vh] flex items-center justify-center">
+    <div class="max-w-2xl mx-auto text-center">
+      <span
+        class="text-[120px] md:text-[180px] font-display font-bold text-[var(--color-accent)] opacity-20 leading-none block"
+      >
+        404
+      </span>
+      <h1 class="text-display text-[var(--color-cream)] mb-4 -mt-8">Page Not Found</h1>
+      <p class="text-lg text-[var(--color-subtle)] mb-8">
+        Oops! The calculator you're looking for doesn't exist or has been moved.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[var(--color-accent)] text-[var(--color-night)] font-semibold hover:opacity-90 transition-opacity"
+        >
+          Go to Homepage
+        </a>
+        <a
+          href="/calculators"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/20 text-[var(--color-cream)] font-semibold hover:bg-white/5 transition-colors"
+        >
+          Browse Calculators
+        </a>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/10">
+        <p class="text-sm text-[var(--color-muted)] mb-4">Popular calculators:</p>
+        <div class="flex flex-wrap gap-2 justify-center">
+          <a
+            href="/calculators/savings-goal-calculator"
+            class="text-sm px-3 py-1 rounded-full bg-white/5 text-[var(--color-subtle)] hover:bg-white/10 transition-colors"
+          >
+            Savings Goal
+          </a>
+          <a
+            href="/calculators/compound-interest-calculator"
+            class="text-sm px-3 py-1 rounded-full bg-white/5 text-[var(--color-subtle)] hover:bg-white/10 transition-colors"
+          >
+            Compound Interest
+          </a>
+          <a
+            href="/calculators/buy-vs-rent-calculator"
+            class="text-sm px-3 py-1 rounded-full bg-white/5 text-[var(--color-subtle)] hover:bg-white/10 transition-colors"
+          >
+            Buy vs Rent
+          </a>
+          <a
+            href="/calculators/tip-calculator"
+            class="text-sm px-3 py-1 rounded-full bg-white/5 text-[var(--color-subtle)] hover:bg-white/10 transition-colors"
+          >
+            Tip Calculator
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
