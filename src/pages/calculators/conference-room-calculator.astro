@@ -1,0 +1,161 @@
+---
+/**
+ * Conference Room Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ConferenceRoomCalculator from '../../components/calculators/ConferenceRoomCalculator/ConferenceRoomCalculator';
+
+const title = 'Conference Room Calculator | Meeting Room Capacity Planner';
+const description =
+  'Calculate maximum seating capacity for your conference room or meeting space. Compare theater, classroom, U-shape, and boardroom layouts to find the best setup for your event.';
+const keywords =
+  'conference room calculator, meeting room capacity, seating capacity calculator, room layout planner, theater vs classroom seating, boardroom capacity, event space calculator';
+const canonicalURL = '/calculators/conference-room-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Conference Room Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Event Seating Calculator',
+    description: 'Plan banquet and wedding layouts.',
+    href: '/calculators/event-seating-calculator',
+    icon: 'home' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Plan food for your meeting.',
+    href: '/calculators/catering-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Break-Even Calculator',
+    description: 'Calculate event profitability.',
+    href: '/calculators/break-even-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How many square feet per person for a conference room?',
+    answer:
+      'Theater style: 6-8 sq ft/person. Classroom: 15-18 sq ft/person. Banquet rounds: 10-12 sq ft/person. U-shape/Hollow square: 20-25 sq ft/person. Boardroom: 20-25 sq ft/person. Cocktail/standing: 6-8 sq ft/person.',
+  },
+  {
+    question: 'What is theater style seating?',
+    answer:
+      'Theater style has rows of chairs facing the front with no tables. It maximizes capacity and is best for presentations, lectures, and keynote speeches where attendees only need to listen and watch, not take notes.',
+  },
+  {
+    question: 'What is classroom style seating?',
+    answer:
+      'Classroom style has rows of tables (usually 6ft) with chairs on one side, all facing front. Great for training sessions, workshops, and presentations where attendees need writing surfaces. Uses more space than theater.',
+  },
+  {
+    question: 'When should I use U-shape seating?',
+    answer:
+      'U-shape is ideal for meetings with discussion, workshops under 30 people, and board meetings where a presenter needs to interact with attendees. Everyone can see each other and the presenter has access to all participants.',
+  },
+  {
+    question: 'What is the minimum conference room size?',
+    answer:
+      'For a 6-person boardroom: minimum 150 sq ft (10x15). For 10-person classroom: minimum 300 sq ft (15x20). For 50-person theater: minimum 400 sq ft (20x20). Always add space for AV equipment, aisles, and presenter area.',
+  },
+  {
+    question: 'How wide should aisles be?',
+    answer:
+      'Main aisles: 4-5 feet minimum. Cross aisles: 3-4 feet. For ADA compliance: 36 inches minimum, 44 inches recommended. Fire codes typically require clear paths to exits. Check local regulations for your venue.',
+  },
+  {
+    question: 'How do I plan for AV equipment?',
+    answer:
+      'Projector screens need 6-10 feet of front clearance. Place screens at seated eye level. Audio systems need space for speakers. Budget 50-100 sq ft for AV area. Ensure adequate power outlets and cable management.',
+  },
+  {
+    question: 'What about breakout rooms?',
+    answer:
+      'For workshops, plan breakout spaces of 150-200 sq ft for groups of 6-8. One breakout room per 15-20 main room attendees. Alternatively, use corners of the main room with portable dividers for small group work.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Conference Room Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Conference Room Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Conference Room Calculator"
+    description="Maximize your meeting space with the right layout. Calculate room capacity for different seating styles, compare configurations, and get equipment recommendations for your conference room or event space."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <ConferenceRoomCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>room dimensions</strong> in feet. Measure the actual usable floor space, not
+      including permanent fixtures like columns or built-in furniture.
+    </p>
+    <p>
+      Select your preferred <strong>seating style</strong>. The calculator shows capacity for all
+      styles so you can compare options and choose the best fit for your event.
+    </p>
+    <p>
+      Adjust <strong>spacing requirements</strong> including aisle width and wall clearance. Use wider
+      aisles for formal events or when ADA accessibility is important.
+    </p>
+    <p>
+      Toggle <strong>equipment options</strong> to see how projectors, whiteboards, and podiums affect
+      your available space and capacity.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Maximum capacity</strong> shows the most people that can fit with your selected seating
+      style and spacing requirements.
+    </p>
+    <p>
+      The <strong>capacity comparison</strong> helps you see trade-offs between different layouts. Theater
+      holds the most, while boardroom is most spacious per person.
+    </p>
+    <p>
+      The <strong>materials list</strong> tells you exactly what furniture and equipment to order or rent
+      for your configuration.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

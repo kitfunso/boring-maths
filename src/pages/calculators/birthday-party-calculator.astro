@@ -1,0 +1,162 @@
+---
+/**
+ * Birthday Party Budget Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BirthdayPartyBudget from '../../components/calculators/BirthdayPartyBudget/BirthdayPartyBudget';
+
+const title = 'Birthday Party Budget Calculator | Kids Party Cost Planner';
+const description =
+  "Plan your child's birthday party budget with our free calculator. Estimate costs for venue, food, decorations, entertainment, and goody bags based on guest count and party style.";
+const keywords =
+  'birthday party budget calculator, kids party cost, children birthday budget, party planning calculator, how much for birthday party, party expense planner';
+const canonicalURL = '/calculators/birthday-party-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Birthday Party Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Baby Cost Calculator',
+    description: 'Plan expenses for a new baby.',
+    href: '/calculators/baby-cost-calculator',
+    icon: 'home' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Save up for party expenses.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Party Drink Calculator',
+    description: 'Plan beverages for your party.',
+    href: '/calculators/party-drink-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much should I spend on a kids birthday party?',
+    answer:
+      'The average kids birthday party costs $300-$500. A simple home party can be done for $100-$200. Venue parties at activity centers range from $300-$800. Elaborate themed parties with entertainment can exceed $1,000. The key is setting a budget that works for your family.',
+  },
+  {
+    question: 'How many kids should I invite to a birthday party?',
+    answer:
+      "A common guideline is to invite the child's age plus one (a 5-year-old gets 6 guests). For younger children (under 4), keep it small (4-6 kids). For school-age children, consider inviting the whole class if rules require it, or stick to close friends.",
+  },
+  {
+    question: 'What should I put in goody bags?',
+    answer:
+      'Budget-friendly options: stickers, bubbles, small toys, candy, play-doh, temporary tattoos. Skip goody bags entirely and do a take-home craft instead. Dollar stores are great for supplies. Aim for $3-8 per bag depending on party style.',
+  },
+  {
+    question: 'How much cake do I need?',
+    answer:
+      'A standard sheet cake serves 24-48 depending on size. A 2-tier cake serves 30-40. Plan 1 serving per child plus parents who stay. Order 10% extra if serving other desserts. Cupcakes are an easy alternative - 1.5 per guest.',
+  },
+  {
+    question: 'How long should a kids birthday party be?',
+    answer:
+      'Ages 1-3: 1-1.5 hours. Ages 4-6: 1.5-2 hours. Ages 7-10: 2-2.5 hours. Ages 11+: 2-3 hours or open-ended for sleepovers. Shorter is often better for young children to avoid meltdowns.',
+  },
+  {
+    question: 'Should I hire entertainment?',
+    answer:
+      'Entertainment is optional but can make your job easier. Popular options: magician ($150-300), character appearance ($100-250), bounce house rental ($150-400), face painter ($100-200/hour). DIY games and activities work great for smaller budgets.',
+  },
+  {
+    question: 'How do I save money on a birthday party?',
+    answer:
+      'Host at home or a park. Do DIY decorations. Make your own cake. Skip goody bags or make them simple. Limit the guest list. Have a potluck element. Choose a theme that uses items you already have. Party at non-peak times (morning, weekday).',
+  },
+  {
+    question: 'When should I send birthday party invitations?',
+    answer:
+      'Send invitations 3-4 weeks before the party. For popular dates (summer, holidays), send 5-6 weeks ahead. Include RSVP deadline 1 week before. Digital invitations are free and allow easy tracking.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Birthday Party Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Birthday Party Budget Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Birthday Party Budget Calculator"
+    description="Plan the perfect birthday party without overspending. Estimate all your costs including venue, food, cake, decorations, entertainment, and goody bags based on your child's age and party style."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <BirthdayPartyBudget client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>number of kids</strong> expected at the party and your child's <strong
+        >age</strong
+      >. The calculator provides age-appropriate suggestions based on these inputs.
+    </p>
+    <p>
+      Select your <strong>venue type</strong>. Home parties are most affordable, while activity
+      centers often include entertainment and cleanup in their package price.
+    </p>
+    <p>
+      Choose your <strong>party style</strong>: simple (basic decorations), themed (coordinated
+      colors and characters), or elaborate (professional-level decorations and activities).
+    </p>
+    <p>
+      Adjust individual budget categories based on your priorities. Some families splurge on
+      entertainment while keeping food simple, and vice versa.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>total budget</strong> gives you a realistic estimate including all categories and add-ons
+      you selected.
+    </p>
+    <p>
+      <strong>Cost per child</strong> helps you compare to typical party budgets and make adjustments
+      if needed.
+    </p>
+    <p>
+      The <strong>age-specific tips</strong> are tailored to your child's developmental stage and what
+      activities work best for their age group.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

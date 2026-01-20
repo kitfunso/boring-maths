@@ -1,0 +1,161 @@
+---
+/**
+ * Catering Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CateringCalculator from '../../components/calculators/CateringCalculator/CateringCalculator';
+
+const title = 'Catering Calculator | Food Quantity Planner for Events';
+const description =
+  'Calculate how much food to order for your catered event. Get accurate quantities for protein, sides, appetizers, and desserts based on guest count and meal type.';
+const keywords =
+  'catering calculator, food quantity calculator, event food planner, how much food per person, catering order guide, party food calculator';
+const canonicalURL = '/calculators/catering-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Catering Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Party Drink Calculator',
+    description: 'Plan non-alcoholic beverages for your event.',
+    href: '/calculators/party-drink-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Event Seating Calculator',
+    description: 'Plan your venue layout and table arrangement.',
+    href: '/calculators/event-seating-calculator',
+    icon: 'home' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Wedding Alcohol Calculator',
+    description: 'Plan bar quantities for weddings.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much food per person for a buffet?',
+    answer:
+      'Plan for 1 to 1.25 pounds of food per adult for a full meal buffet. This includes about 6oz of protein, 4-5oz of starch, 4oz of vegetables, and 2-3oz of salad. Add 15% extra for buffet-style service to account for waste and presentation.',
+  },
+  {
+    question: 'How many appetizers per person before dinner?',
+    answer:
+      'For a cocktail hour before a meal, plan 6-8 appetizer pieces per person for the first hour. For an appetizers-only event, plan 12-15 pieces per person per hour. Variety is key - offer 4-6 different types.',
+  },
+  {
+    question: 'What is the 50/25/25 catering rule?',
+    answer:
+      'A common catering guideline: 50% of your food should be starches and grains, 25% protein, and 25% vegetables. This creates balanced portions and helps control costs since starches are typically less expensive than proteins.',
+  },
+  {
+    question: 'How do I calculate food for dietary restrictions?',
+    answer:
+      'A safe estimate is 10-15% vegetarian, 5% vegan, and 5% gluten-free. Always ask on your RSVP. Prepare these portions separately and label them clearly. Many dietary-restricted options can work for multiple restrictions.',
+  },
+  {
+    question: 'How much dessert should I order?',
+    answer:
+      'Plan 1 dessert serving per person plus 10% extra. If offering multiple dessert options, total portions should still equal guest count plus buffer. Mini desserts allow guests to sample multiple options.',
+  },
+  {
+    question: 'What is the difference between plated and buffet quantities?',
+    answer:
+      'Plated service requires about 5% extra food for kitchen mistakes. Buffet requires 15-20% extra for presentation, seconds, and waste. Plated gives you portion control while buffet offers more flexibility.',
+  },
+  {
+    question: 'How far in advance should I order catering?',
+    answer:
+      'Book your caterer 2-3 months in advance for large events. Finalize your menu 2-3 weeks before. Provide final guest count 48-72 hours before the event. Most caterers charge for the guaranteed count regardless of attendance.',
+  },
+  {
+    question: 'How much bread/rolls should I order?',
+    answer:
+      'Plan 1.5 rolls per person for a seated dinner. For a buffet with bread station, plan 2 rolls per person. Include butter portions - about 1 tablespoon (1 pat) per person.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Catering Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Catering Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Catering Calculator"
+    description="Plan the perfect amount of food for your catered event. Get accurate quantities for protein, sides, appetizers, and desserts based on your guest count, meal type, and service style."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CateringCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>guest count</strong> and <strong>event duration</strong>. Longer events may
+      need additional snacks or refreshments.
+    </p>
+    <p>
+      Select your <strong>meal type</strong> based on the occasion. Appetizers-only is great for cocktail
+      parties, while heavy meals are appropriate for celebrations where guests expect a substantial feast.
+    </p>
+    <p>
+      Choose your <strong>service style</strong>. Buffet requires more food due to presentation and
+      seconds, while plated service offers precise portion control.
+    </p>
+    <p>
+      Adjust <strong>dietary restrictions</strong> percentages based on your guest list. When in doubt,
+      add extra vegetarian options - they're often enjoyed by everyone.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>per-person amounts</strong> show recommended portions based on industry standards. These
+      account for typical appetite levels and service style waste.
+    </p>
+    <p>
+      The <strong>caterer order guide</strong> provides rounded quantities suitable for ordering from
+      caterers or grocery stores. It includes buffer amounts for your service style.
+    </p>
+    <p>
+      <strong>Dietary counts</strong> help you plan separate dishes for guests with restrictions. Some
+      overlap may occur (vegetarian who is also gluten-free).
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,161 @@
+---
+/**
+ * Graduation Party Planner Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import GraduationPartyPlanner from '../../components/calculators/GraduationPartyPlanner/GraduationPartyPlanner';
+
+const title = 'Graduation Party Planner | Food & Drink Calculator';
+const description =
+  'Plan your graduation party with our free calculator. Get food quantities, drink amounts, and cost estimates for high school, college, or graduate school celebrations.';
+const keywords =
+  'graduation party planner, graduation food calculator, how much food for graduation party, graduation party budget, open house food calculator, graduation celebration planner';
+const canonicalURL = '/calculators/graduation-party-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Graduation Party Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Catering Calculator',
+    description: 'Detailed food quantity planning.',
+    href: '/calculators/catering-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Party Drink Calculator',
+    description: 'Plan non-alcoholic beverages.',
+    href: '/calculators/party-drink-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'College ROI Calculator',
+    description: 'Is that degree worth it?',
+    href: '/calculators/college-roi-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much food do I need for a graduation party?',
+    answer:
+      'For an open house style party (guests come and go): plan 8-10 finger food pieces per person. For a sit-down meal: 1-1.25 pounds of food per person total. Include a mix of proteins, sides, and appetizers. Always have 10-15% extra.',
+  },
+  {
+    question: 'What is the best time to have a graduation open house?',
+    answer:
+      "2-5 PM is ideal for an open house - it bridges lunch and dinner so guests aren't expecting a full meal. This also allows you to attend other graduation parties. Weekend afternoons see the best attendance.",
+  },
+  {
+    question: 'How much does a graduation party cost?',
+    answer:
+      'A simple home open house: $200-$500. A catered backyard party: $500-$1,500. A venue party: $1,000-$3,000+. Per-person costs range from $10-35 depending on food choices and whether you DIY or hire caterers.',
+  },
+  {
+    question: 'What food should I serve at a graduation party?',
+    answer:
+      'Popular options: sandwich/slider bar, taco bar, BBQ, pasta salads, fruit and veggie trays, chips and dips. Include a graduation cake or cupcakes. Easy finger foods work best for open house style parties.',
+  },
+  {
+    question: 'How many people should I invite?',
+    answer:
+      'Consider: family, close friends, classmates, teachers, neighbors, coworkers of parents. For open houses, invite more than you expect - typically 60-70% will attend. Stagger invitation times if space is limited.',
+  },
+  {
+    question: 'What decorations do I need?',
+    answer:
+      'Essential: congratulations banner, balloons in school colors, photo display of graduate. Nice to have: themed tablecloths and napkins, memory board, achievement display, centerpieces. School colors make decorating easy.',
+  },
+  {
+    question: 'Should I hire a caterer?',
+    answer:
+      'Caterers make sense for 40+ guests or if you want to enjoy the party. DIY works well for smaller gatherings and saves 40-60%. Consider a hybrid: cater the main dishes, DIY the sides and desserts.',
+  },
+  {
+    question: 'How do I handle gifts at a graduation party?',
+    answer:
+      'Set up a card/gift table near the entrance with a basket for cards. Some families provide addressed thank-you cards for guests to fill out. Open gifts after the party, not during. Send thank-you notes within 2 weeks.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Graduation Party Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Graduation Party Planner"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Graduation Party Planner"
+    description="Celebrate this milestone with the right amount of food and drinks. Get accurate quantities for your graduation open house, dinner party, or backyard celebration based on guest count and party style."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <GraduationPartyPlanner client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your expected <strong>guest count</strong> and <strong>party duration</strong>. For open
+      houses, estimate based on RSVPs plus 10-20% extra.
+    </p>
+    <p>
+      Select the <strong>graduation type</strong> and <strong>party style</strong>. High school
+      graduation parties are often more casual, while graduate school celebrations may be more
+      formal.
+    </p>
+    <p>
+      Choose your <strong>menu style</strong>: finger food for mingling, buffet for a full meal, or
+      catered for a premium experience.
+    </p>
+    <p>
+      Toggle individual <strong>menu items</strong> on or off to customize your food and beverage offerings.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>food shopping list</strong> provides specific quantities for each item you need to purchase
+      or prepare.
+    </p>
+    <p>
+      <strong>Cost estimates</strong> are based on typical grocery store prices. Actual costs may vary
+      based on your location and where you shop.
+    </p>
+    <p>
+      The <strong>planning timeline</strong> helps you stay organized leading up to the party, ensuring
+      nothing is forgotten at the last minute.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

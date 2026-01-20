@@ -98,7 +98,7 @@ export default function PartyDrinkCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="red">
+    <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
         {/* Header */}
         <CalculatorHeader

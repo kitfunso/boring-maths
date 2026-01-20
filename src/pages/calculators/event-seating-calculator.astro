@@ -1,0 +1,161 @@
+---
+/**
+ * Event Seating Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import EventSeatingCalculator from '../../components/calculators/EventSeatingCalculator/EventSeatingCalculator';
+
+const title = 'Event Seating Calculator | Room Layout & Capacity Planner';
+const description =
+  'Calculate how many tables fit in your venue and plan your event layout. Get room size requirements, table arrangements, and seating capacity for weddings, banquets, and corporate events.';
+const keywords =
+  'event seating calculator, wedding seating chart, venue capacity calculator, table layout planner, banquet room calculator, how many tables fit';
+const canonicalURL = '/calculators/event-seating-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Event Seating Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Catering Calculator',
+    description: 'Plan food quantities for your event.',
+    href: '/calculators/catering-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Wedding Alcohol Calculator',
+    description: 'Plan bar quantities for weddings.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Conference Room Calculator',
+    description: 'Plan meeting room layouts.',
+    href: '/calculators/conference-room-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much space per person at an event?',
+    answer:
+      'For seated dinner with dancing: 15-17 sq ft per person. Cocktail reception: 8-10 sq ft per person. Conference/meeting: 10-12 sq ft per person. Wedding ceremony: 6-8 sq ft per person. These include circulation space.',
+  },
+  {
+    question: 'How many people fit at a 60-inch round table?',
+    answer:
+      '60-inch (5ft) round tables comfortably seat 8 guests. You can squeeze 10, but place settings will be tight. 72-inch rounds seat 10-12 comfortably. Allow 24 inches of table space per guest.',
+  },
+  {
+    question: 'What size dance floor do I need?',
+    answer:
+      'Plan for 4.5 sq ft per dancer. Typically 30-40% of guests dance at any time. For 100 guests: about 35 guests dancing = 157 sq ft minimum, so a 12x14 or 15x15 dance floor works well.',
+  },
+  {
+    question: 'How much space between tables?',
+    answer:
+      'Minimum 5-6 feet between table edges (not centers) for comfortable movement and service. Main aisles should be at least 4 feet wide. Allow more space for wheelchair accessibility.',
+  },
+  {
+    question: 'What is the best table shape for my event?',
+    answer:
+      'Round tables: Best for conversation, fit more guests, classic look. Rectangular: Better space efficiency, good for long rooms, formal feel. Square: Modern look, great for small groups. Mix shapes for visual interest.',
+  },
+  {
+    question: 'How do I plan a head table?',
+    answer:
+      'Traditional head tables face guests and seat 8-12. Rectangular tables work best. Allow 30 inches per person for comfort. Consider a sweetheart table (just couple) or kings table (long table with wedding party on both sides).',
+  },
+  {
+    question: 'What about space for a DJ or band?',
+    answer:
+      'DJ booth: 6x8 feet minimum. Live band (4-5 piece): 12x8 feet minimum. Add space for speakers if not included. Place away from dinner tables to allow conversation during speeches.',
+  },
+  {
+    question: 'How do I maximize capacity in my venue?',
+    answer:
+      'Use rectangular tables for maximum seating. Minimize dance floor or schedule it after dinner when tables clear. Consider cocktail tables for some guests. Remove any unnecessary furniture or decor taking up floor space.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Event Seating Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Event Seating Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Event Seating Calculator"
+    description="Plan your venue layout with confidence. Calculate how many tables you need, minimum room size required, and get layout suggestions for weddings, banquets, corporate events, and parties."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <EventSeatingCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>guest count</strong> to start. This is the total number of people who need seats
+      at your event.
+    </p>
+    <p>
+      Select the <strong>table shape and size</strong> you plan to use. Round tables are popular for weddings
+      and banquets, while rectangular tables work well for corporate events.
+    </p>
+    <p>
+      Adjust the <strong>dance floor percentage</strong> based on your event. Weddings typically need
+      15-20% for dancing, while corporate dinners may need none.
+    </p>
+    <p>
+      Add <strong>additional spaces</strong> like DJ area, buffet stations, or a head table to get accurate
+      room size requirements.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>minimum room size</strong> includes all seating, aisles, and special areas. Look for
+      venues at least this size, though larger is always better for comfort.
+    </p>
+    <p>
+      The <strong>space breakdown</strong> shows how your room will be divided. Use this to discuss layout
+      options with your venue coordinator.
+    </p>
+    <p>
+      <strong>Layout suggestions</strong> are based on your event type and guest count. These are starting
+      points - your venue may have specific recommendations.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

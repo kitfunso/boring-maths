@@ -1,0 +1,161 @@
+---
+/**
+ * Holiday Dinner Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import HolidayDinnerCalculator from '../../components/calculators/HolidayDinnerCalculator/HolidayDinnerCalculator';
+
+const title = 'Holiday Dinner Calculator | Turkey Size & Side Dish Planner';
+const description =
+  'Calculate the perfect turkey size and side dish quantities for Thanksgiving or Christmas dinner. Get cooking times, thawing schedules, and a complete preparation timeline.';
+const keywords =
+  'holiday dinner calculator, turkey size calculator, thanksgiving calculator, how big turkey do I need, christmas dinner planner, turkey cooking time, holiday meal planner';
+const canonicalURL = '/calculators/holiday-dinner-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Holiday Dinner Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Catering Calculator',
+    description: 'Plan large holiday gatherings.',
+    href: '/calculators/catering-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Plan meat quantities for cookouts.',
+    href: '/calculators/bbq-calculator',
+    icon: 'trending' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Savings Goal Calculator',
+    description: 'Budget for holiday expenses.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How many pounds of turkey per person?',
+    answer:
+      'Plan for 1-1.25 pounds of turkey per adult and 0.75 pounds per child. This accounts for bone weight and provides generous portions. For leftovers, add 25-50% more. A 15-pound turkey serves about 10-12 people.',
+  },
+  {
+    question: 'How long does it take to thaw a frozen turkey?',
+    answer:
+      'In the refrigerator: allow 24 hours for every 4-5 pounds. A 16-pound turkey needs 3-4 days. In cold water: 30 minutes per pound, changing water every 30 minutes. Never thaw at room temperature.',
+  },
+  {
+    question: 'How long to cook a turkey?',
+    answer:
+      'At 325°F, unstuffed: 13-15 minutes per pound. Stuffed: 15-17 minutes per pound. A 15-pound unstuffed turkey takes about 3.5-4 hours. Always use a meat thermometer - internal temp should reach 165°F in the thickest part of the thigh.',
+  },
+  {
+    question: 'Should I stuff my turkey?',
+    answer:
+      'While traditional, stuffing inside the turkey increases cooking time and food safety risks. Cooking stuffing separately (dressing) is safer and allows for crispier top. If stuffing, ensure the center reaches 165°F.',
+  },
+  {
+    question: 'How do I make turkey gravy?',
+    answer:
+      'Use pan drippings: skim off excess fat, add flour (2 tbsp per cup of liquid), whisk constantly, add turkey or chicken stock until desired consistency. Simmer 5-10 minutes. Season to taste. Make 1/4 cup gravy per person.',
+  },
+  {
+    question: 'What side dishes go with turkey?',
+    answer:
+      'Classic sides: mashed potatoes, gravy, stuffing/dressing, cranberry sauce, green bean casserole, sweet potato casserole, dinner rolls, roasted vegetables. Plan 3-5 sides plus bread and dessert. About 1/2 cup of each side per person.',
+  },
+  {
+    question: 'How do I plan my cooking timeline?',
+    answer:
+      'Work backwards from dinner time. Turkey needs to rest 30-45 minutes after cooking. Calculate cook time, then add 1 hour for prep and resting. Casseroles can share oven space. Make pies and cranberry sauce a day ahead.',
+  },
+  {
+    question: 'How do I keep turkey moist?',
+    answer:
+      "Brine turkey 12-24 hours before (or buy pre-brined). Butter under the skin. Start breast-side down, flip halfway. Baste every 45 minutes. Tent with foil if browning too fast. Most importantly: don't overcook! Use a thermometer.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Holiday Dinner Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Holiday Dinner Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Holiday Dinner Calculator"
+    description="Take the guesswork out of Thanksgiving and Christmas dinner planning. Calculate the perfect turkey size, get accurate cooking times, and know exactly how much of each side dish to prepare for your guests."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <HolidayDinnerCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>guest count</strong>, distinguishing between adults and children since they
+      eat different amounts.
+    </p>
+    <p>
+      Select your <strong>leftover preference</strong>. "Some leftovers" adds about 25% more food,
+      while "lots of leftovers" adds 50% - perfect for turkey sandwiches the next day.
+    </p>
+    <p>
+      Choose whether you're using a <strong>fresh or frozen turkey</strong> and your preferred
+      <strong>cooking method</strong>. The calculator adjusts thaw time and cook time accordingly.
+    </p>
+    <p>
+      Toggle the <strong>side dishes</strong> you plan to serve. The calculator provides quantities for
+      each selected side.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>turkey size</strong> is rounded to common weights available at grocery stores. If your
+      calculated size falls between standard sizes, go larger.
+    </p>
+    <p>
+      <strong>Cook time</strong> is for an unstuffed turkey. Add 15-30 minutes if stuffing the turkey.
+      Always verify doneness with a meat thermometer.
+    </p>
+    <p>
+      The <strong>cooking timeline</strong> helps you coordinate multiple dishes and ensures everything
+      is ready at the same time.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
