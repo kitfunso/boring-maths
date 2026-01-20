@@ -1,0 +1,159 @@
+---
+/**
+ * SDLT Calculator Page
+ * Stamp Duty Land Tax for England and Northern Ireland
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SDLTCalculator } from '../../components/calculators/SDLTCalculator';
+
+const title = 'SDLT Calculator UK | Stamp Duty Land Tax 2024';
+const description =
+  'Free SDLT calculator for England and Northern Ireland. Calculate Stamp Duty Land Tax with first-time buyer relief, additional property surcharge (3%), and non-resident rates (2%).';
+const keywords =
+  'sdlt calculator, stamp duty land tax, stamp duty calculator england, first time buyer stamp duty, additional property stamp duty, stamp duty 2024, sdlt rates, non resident stamp duty';
+const canonicalURL = '/calculators/sdlt-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'SDLT Calculator' }];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'All UK nations including Wales.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'ADS Calculator',
+    description: "Scotland's Additional Dwelling Supplement.",
+    href: '/calculators/ads-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Stamp Duty Land Tax (SDLT)?',
+    answer:
+      'Stamp Duty Land Tax is a tax on property purchases in England and Northern Ireland. The amount depends on the property price and your circumstances. Scotland has LBTT and Wales has LTT - both are separate tax systems with different rates.',
+  },
+  {
+    question: 'What are the current SDLT rates for 2024?',
+    answer:
+      'Standard SDLT rates are: 0% up to £250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £425,000 and 5% from £425,001-£625,000 on properties up to £625,000.',
+  },
+  {
+    question: 'How does first-time buyer relief work?',
+    answer:
+      'First-time buyers pay no SDLT on properties up to £425,000, and 5% on the portion from £425,001-£625,000. This relief only applies to properties priced at £625,000 or less. If the property exceeds £625,000, you pay standard rates on the entire purchase.',
+  },
+  {
+    question: 'What is the additional property surcharge?',
+    answer:
+      "If you're buying a second home, buy-to-let, or any additional residential property, you pay an extra 3% surcharge on top of standard rates. This applies to the entire purchase price, not just portions above certain thresholds.",
+  },
+  {
+    question: 'What is the non-resident surcharge?',
+    answer:
+      'Non-UK residents pay an additional 2% surcharge on residential property purchases. This applies on top of all other rates including the additional property surcharge. It has been in effect since April 2021.',
+  },
+  {
+    question: 'When do I pay SDLT?',
+    answer:
+      'You must file an SDLT return and pay the tax within 14 days of completing your property purchase. Your solicitor or conveyancer usually handles this on your behalf. Late payment incurs interest and penalties.',
+  },
+  {
+    question: 'Is SDLT the same across the UK?',
+    answer:
+      'No. SDLT applies only to England and Northern Ireland. Scotland has Land and Buildings Transaction Tax (LBTT) with different rates and thresholds. Wales has Land Transaction Tax (LTT) with its own rate structure.',
+  },
+  {
+    question: 'Can I get SDLT relief on my main home?',
+    answer:
+      "If you're replacing your main residence and the purchase completes before the sale of your old home, you may initially pay the additional property surcharge. You can claim a refund within 3 years if you sell your previous main home within that period.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'SDLT Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="SDLT Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="SDLT Calculator"
+    description="Calculate Stamp Duty Land Tax for England and Northern Ireland property purchases."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SDLTCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the property price</strong> - The full purchase
+        price of the property you're buying.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your location</strong> - Choose England or Northern
+        Ireland (Scotland and Wales have different tax systems).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose buyer type</strong> - First-time buyer, moving
+        home, or purchasing an additional property.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Non-resident status</strong> - Toggle if you're not
+        a UK resident (adds 2% surcharge).
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator shows your <strong class="text-[var(--color-cream)]">total SDLT due</strong>
+        and the <strong class="text-[var(--color-cream)]">effective rate</strong> as a percentage of the
+        property price.
+      </p>
+      <p>
+        SDLT is calculated on a tiered basis - you only pay the higher rate on the portion of the
+        price within that band, not the entire property value. The
+        <strong class="text-[var(--color-cream)]">band breakdown</strong> shows exactly how much tax applies
+        at each tier.
+      </p>
+      <p>
+        First-time buyers will see their <strong class="text-emerald-400">savings</strong> compared to
+        standard rates. Additional property buyers and non-residents will see their
+        <strong class="text-amber-400">surcharges</strong> clearly itemized.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

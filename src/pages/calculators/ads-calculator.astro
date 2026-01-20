@@ -1,0 +1,151 @@
+---
+/**
+ * ADS Calculator Page
+ * Scotland Additional Dwelling Supplement
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { ADSCalculator } from '../../components/calculators/ADSCalculator';
+
+const title = 'Additional Dwelling Supplement Calculator | Scotland ADS Tax';
+const description =
+  "Free Scotland ADS calculator. Calculate the Additional Dwelling Supplement (6%) on additional properties, plus LBTT. Includes first-time buyer relief for Scotland's property taxes.";
+const keywords =
+  'ads calculator scotland, additional dwelling supplement, scotland property tax, lbtt calculator, scotland stamp duty, second home tax scotland, buy to let scotland, ads tax rate';
+const canonicalURL = '/calculators/ads-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'ADS Calculator' }];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT for England, Scotland & Wales.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'SDLT Calculator',
+    description: 'England & NI Stamp Duty Land Tax.',
+    href: '/calculators/sdlt-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the Additional Dwelling Supplement (ADS)?',
+    answer:
+      "The Additional Dwelling Supplement is an extra tax charged on purchases of additional residential properties in Scotland. It's 6% of the full purchase price, payable on top of the standard Land and Buildings Transaction Tax (LBTT). It applies to second homes, buy-to-let properties, and holiday homes.",
+  },
+  {
+    question: 'What is the current ADS rate in Scotland?',
+    answer:
+      'The ADS rate is 6% of the full purchase price for additional residential properties. This rate was increased from 4% in December 2022. Unlike LBTT which is banded, ADS is charged on the entire property value.',
+  },
+  {
+    question: 'When do I have to pay ADS?',
+    answer:
+      'You pay ADS when buying an additional residential property in Scotland worth £40,000 or more if you already own another property anywhere in the world. This includes second homes, buy-to-let investments, and properties bought for family members if you retain an interest in another property.',
+  },
+  {
+    question: 'Can I get an ADS refund?',
+    answer:
+      'Yes, you may be eligible for an ADS refund if you sell your previous main residence within 18 months of buying your new home. You must claim the refund within 3 years of the ADS payment date. The property sold must have been your only or main residence.',
+  },
+  {
+    question: 'What is LBTT in Scotland?',
+    answer:
+      "Land and Buildings Transaction Tax (LBTT) is Scotland's property purchase tax, replacing UK Stamp Duty since 2015. Standard rates are: 0% up to £145,000, 2% from £145,001-£250,000, 5% from £250,001-£325,000, 10% from £325,001-£750,000, and 12% above £750,000.",
+  },
+  {
+    question: 'Is there first-time buyer relief in Scotland?',
+    answer:
+      'Yes, first-time buyers in Scotland benefit from an increased nil-rate band of £175,000 (compared to £145,000 for other buyers). This means first-time buyers pay no LBTT on properties up to £175,000, potentially saving up to £600.',
+  },
+  {
+    question: 'How is ADS different from the English additional property surcharge?',
+    answer:
+      "Scotland's ADS is 6% while England's additional property surcharge is 3%. Both are charged on the full purchase price. However, LBTT bands in Scotland are different from SDLT bands in England, so the total tax can vary significantly between the two nations.",
+  },
+  {
+    question: 'Do companies pay ADS?',
+    answer:
+      'Yes, companies purchasing residential property in Scotland are subject to both LBTT and ADS. The 6% ADS applies to all additional residential property purchases, regardless of whether the buyer is an individual or a company.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'ADS Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="ADS Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Scotland ADS Calculator"
+    description="Calculate Additional Dwelling Supplement (6%) and LBTT for Scottish property purchases."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <ADSCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the property price</strong> - The full purchase
+        price of the property you're buying in Scotland.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your buyer type</strong> - Choose whether you're
+        a first-time buyer, moving home, or purchasing an additional property.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Toggle additional property</strong> - If this is a second
+        home, buy-to-let, or you own property elsewhere, enable this to add ADS.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator shows your <strong class="text-[var(--color-cream)]">total tax due</strong>
+        combining both LBTT and ADS where applicable.
+      </p>
+      <p>
+        <strong class="text-purple-400">ADS (6%)</strong> is charged on the full purchase price for additional
+        properties. This is separate from and in addition to the standard LBTT rates.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">LBTT band breakdown</strong> shows how much tax
+        applies at each rate tier. First-time buyers benefit from a higher nil-rate band of £175,000.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

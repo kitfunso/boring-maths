@@ -1,0 +1,173 @@
+---
+/**
+ * W2 to 1099 Calculator Page
+ * Convert W2 employee rate to equivalent 1099 contractor rate
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { W2To1099Calculator } from '../../components/calculators/W2To1099Calculator';
+
+const title = 'W2 to 1099 Rate Calculator | Contractor Rate Converter';
+const description =
+  'Free W2 to 1099 calculator. Convert your employee salary to equivalent contractor rate. Accounts for self-employment tax (15.3%), health insurance, 401k match, PTO, and business expenses.';
+const keywords =
+  'w2 to 1099 calculator, contractor rate calculator, freelance rate calculator, self employment tax calculator, employee to contractor conversion, hourly rate converter, 1099 vs w2';
+const canonicalURL = '/calculators/w2-to-1099-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'W2 to 1099 Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Contractor vs Employee',
+    description: 'Compare total compensation packages.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Self-Employment Tax',
+    description: 'Calculate your SE tax liability.',
+    href: '/calculators/us-self-employment-tax-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the typical W2 to 1099 rate multiplier?',
+    answer:
+      'Most experts recommend multiplying your W2 hourly rate by 1.25x to 1.5x to get your equivalent 1099 rate. The exact multiplier depends on your benefits package, health insurance costs, and business expenses. Higher-benefit W2 jobs require higher multipliers.',
+  },
+  {
+    question: 'What is self-employment tax?',
+    answer:
+      'Self-employment tax is 15.3% (12.4% Social Security + 2.9% Medicare) on 92.35% of your net self-employment income. As a W2 employee, your employer pays half of this (7.65%). As a 1099 contractor, you pay the full amount yourself, making it one of the biggest hidden costs of contracting.',
+  },
+  {
+    question: 'How do I account for lost health insurance?',
+    answer:
+      "Typical employer health insurance costs $500-800/month per employee. As a contractor, you'll pay this entirely yourself through marketplace insurance, COBRA, or a spouse's plan. Add this annual cost to your rate calculation - it's often $6,000-10,000/year.",
+  },
+  {
+    question: 'Should I factor in PTO?',
+    answer:
+      "Yes! W2 employees typically get 15-25 days of paid time off plus holidays. As a 1099 contractor, you don't get paid when you're not working. This means your annual billable hours are lower, so your hourly rate needs to be higher to achieve the same annual income.",
+  },
+  {
+    question: 'What about 401k employer match?',
+    answer:
+      "Many employers match 3-6% of your salary in 401k contributions. This is free money you lose as a contractor. While you can open a SEP-IRA or Solo 401k, there's no employer match. Factor this into your rate calculation.",
+  },
+  {
+    question: 'What business expenses should I consider?',
+    answer:
+      'Common contractor expenses include: accounting/taxes ($1,000-3,000/year), liability insurance ($500-2,000/year), software and tools ($100-500/month), home office costs, and professional development. Budget $200-500/month for these costs.',
+  },
+  {
+    question: 'What are billable hours?',
+    answer:
+      "Billable hours are the hours you can actually charge clients for. As a contractor, you'll spend time on admin, marketing, invoicing, and other unbillable work. Most contractors can bill 75-85% of their working hours. A 40-hour week might only yield 32-34 billable hours.",
+  },
+  {
+    question: 'Is it worth going 1099?',
+    answer:
+      'It depends on your situation. Contractors often earn 20-50% more gross income but must cover their own benefits and taxes. The flexibility and potential for higher earnings can be valuable, but you lose job security and benefits. Use this calculator to determine your minimum rate before deciding.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'W2 to 1099 Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="W2 to 1099 Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="W2 to 1099 Rate Calculator"
+    description="Find your equivalent contractor rate that matches your W2 total compensation."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <W2To1099Calculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your W2 rate</strong> - Input your current hourly
+        rate or annual salary as a W2 employee.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add your benefits</strong> - Enter the value of your
+        current employer benefits: health insurance, 401k match, PTO days, and other perks.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review your equivalent rate</strong> - See the 1099
+        hourly rate you'd need to charge to match your total W2 compensation.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator shows your <strong class="text-green-400">equivalent 1099 rate</strong> - the hourly
+        rate you need to charge as a contractor to match your W2 total compensation.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">multiplier</strong> shows how many times your W2
+        rate you need to charge. A multiplier of 1.4x means if you make $50/hour as W2, you need $70/hour
+        as 1099.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">cost breakdown</strong> shows exactly where the
+        difference comes from: self-employment tax, lost benefits, and business expenses.
+        <strong class="text-amber-400">Amber items</strong> are costs you'll bear as a contractor.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="The 1099 vs W2 Trade-off">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        <strong class="text-[var(--color-cream)]">What you gain as 1099:</strong> Higher gross pay, tax
+        deductions, flexible schedule, multiple clients, work location freedom, and no office politics.
+      </p>
+      <p>
+        <strong class="text-[var(--color-cream)]">What you lose as 1099:</strong> Employer-paid benefits,
+        paid time off, job security, employer FICA contribution, retirement matching, and consistent income.
+      </p>
+      <p>
+        <strong class="text-green-400">Rule of thumb:</strong> Only consider 1099 work if the rate is
+        at least 1.25x your W2 equivalent. For comprehensive benefits packages, aim for 1.4x-1.5x.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
