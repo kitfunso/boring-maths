@@ -6,13 +6,16 @@ describe('YeastPitchRateCalculator', () => {
   describe('calculateYeastPitchRate', () => {
     it('should calculate with valid inputs', () => {
       const inputs: YeastPitchRateInputs = {
-        batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.050,
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        originalGravity: 1.05,
         yeastFormat: 'dry',
-        packetsOrVials: 1,
+        packagesAvailable: 1,
         yeastAge: 0,
-        starterSize: 0,
+        cellsPerPackage: 200,
+        starterVolume: 0,
+        useStarter: false,
+        starterType: 'simple',
         beerType: 'ale',
       };
 
@@ -25,24 +28,30 @@ describe('YeastPitchRateCalculator', () => {
 
     it('should handle different beer types', () => {
       const inputsAle: YeastPitchRateInputs = {
-        batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.050,
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        originalGravity: 1.05,
         yeastFormat: 'dry',
-        packetsOrVials: 1,
+        packagesAvailable: 1,
         yeastAge: 0,
-        starterSize: 0,
+        cellsPerPackage: 200,
+        starterVolume: 0,
+        useStarter: false,
+        starterType: 'simple',
         beerType: 'ale',
       };
 
       const inputsLager: YeastPitchRateInputs = {
-        batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.050,
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        originalGravity: 1.05,
         yeastFormat: 'dry',
-        packetsOrVials: 2,
+        packagesAvailable: 2,
         yeastAge: 0,
-        starterSize: 0,
+        cellsPerPackage: 200,
+        starterVolume: 0,
+        useStarter: false,
+        starterType: 'simple',
         beerType: 'lager',
       };
 
@@ -56,13 +65,16 @@ describe('YeastPitchRateCalculator', () => {
 
     it('should produce consistent results', () => {
       const inputs: YeastPitchRateInputs = {
-        batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.060,
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        originalGravity: 1.06,
         yeastFormat: 'liquid',
-        packetsOrVials: 2,
+        packagesAvailable: 2,
         yeastAge: 30,
-        starterSize: 0,
+        cellsPerPackage: 100,
+        starterVolume: 0,
+        useStarter: false,
+        starterType: 'simple',
         beerType: 'ale',
       };
 

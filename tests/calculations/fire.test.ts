@@ -1,43 +1,47 @@
 import { describe, it, expect } from 'vitest';
 import { calculateFIRE } from '../../src/components/calculators/FIRECalculator/calculations';
-import type { FIREInputs } from '../../src/components/calculators/FIRECalculator/types';
+import type { FIRECalculatorInputs } from '../../src/components/calculators/FIRECalculator/types';
 
 describe('FireCalculator', () => {
   describe('calculateFIRE', () => {
     it('should calculate with valid inputs', () => {
-      const inputs: FIREInputs = {
+      const inputs: FIRECalculatorInputs = {
         currentAge: 30,
         currentSavings: 50000,
-        monthlyIncome: 8000,
-        monthlyExpenses: 4000,
-        expectedReturn: 7,
-        withdrawalRate: 4,
-        inflationRate: 2.5,
-        includeSocialSecurity: false,
-        estimatedSSMonthly: 0,
-        ssStartAge: 67,
+        annualIncome: 96000,
+        annualExpenses: 48000,
+        monthlySavings: 4000,
+        targetRetirementAge: 50,
+        desiredRetirementExpenses: 48000,
+        expectedReturn: 0.07,
+        inflationRate: 0.025,
+        safeWithdrawalRate: 0.04,
+        riskProfile: 'moderate',
+        currency: 'USD',
       };
 
       const result = calculateFIRE(inputs);
 
       expect(result).toBeDefined();
-      expect(result.fireNumber).toBeGreaterThan(0);
+      expect(result.fireNumbers.regular).toBeGreaterThan(0);
       expect(result.yearsToFIRE).toBeGreaterThan(0);
-      expect(result.fireAge).toBeGreaterThan(inputs.currentAge);
+      expect(result.ageAtFIRE).toBeGreaterThan(inputs.currentAge);
     });
 
     it('should produce consistent results', () => {
-      const inputs: FIREInputs = {
+      const inputs: FIRECalculatorInputs = {
         currentAge: 35,
         currentSavings: 100000,
-        monthlyIncome: 10000,
-        monthlyExpenses: 5000,
-        expectedReturn: 7,
-        withdrawalRate: 4,
-        inflationRate: 2.5,
-        includeSocialSecurity: false,
-        estimatedSSMonthly: 0,
-        ssStartAge: 67,
+        annualIncome: 120000,
+        annualExpenses: 60000,
+        monthlySavings: 5000,
+        targetRetirementAge: 55,
+        desiredRetirementExpenses: 60000,
+        expectedReturn: 0.07,
+        inflationRate: 0.025,
+        safeWithdrawalRate: 0.04,
+        riskProfile: 'moderate',
+        currency: 'USD',
       };
 
       const result1 = calculateFIRE(inputs);

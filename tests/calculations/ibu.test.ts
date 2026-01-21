@@ -5,37 +5,37 @@ import type { IBUInputs, HopAddition } from '../../src/components/calculators/IB
 describe('IbuCalculator', () => {
   describe('calculateIBU', () => {
     it('should calculate with valid inputs', () => {
-      const hops: HopAddition[] = [
-        { name: 'Cascade', weight: 1, alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
-        { name: 'Centennial', weight: 1, alphaAcid: 10, boilTime: 15, form: 'pellet' },
+      const hopAdditions: HopAddition[] = [
+        { id: '1', hopName: 'Cascade', weight: 1, weightUnit: 'oz', alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
+        { id: '2', hopName: 'Centennial', weight: 1, weightUnit: 'oz', alphaAcid: 10, boilTime: 15, form: 'pellet' },
       ];
 
       const inputs: IBUInputs = {
-        hops,
+        hopAdditions,
         batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.050,
-        ibuFormula: 'tinseth',
+        batchUnit: 'gallons',
+        originalGravity: 1.05,
+        formula: 'tinseth',
       };
 
       const result = calculateIBU(inputs);
 
       expect(result).toBeDefined();
       expect(result.totalIBU).toBeGreaterThan(0);
-      expect(result.hopBreakdown).toHaveLength(2);
+      expect(result.ibuByAddition).toHaveLength(2);
     });
 
     it('should produce consistent results', () => {
-      const hops: HopAddition[] = [
-        { name: 'Cascade', weight: 1, alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
+      const hopAdditions: HopAddition[] = [
+        { id: '1', hopName: 'Cascade', weight: 1, weightUnit: 'oz', alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
       ];
 
       const inputs: IBUInputs = {
-        hops,
+        hopAdditions,
         batchSize: 5,
-        batchSizeUnit: 'gallons',
-        originalGravity: 1.050,
-        ibuFormula: 'tinseth',
+        batchUnit: 'gallons',
+        originalGravity: 1.05,
+        formula: 'tinseth',
       };
 
       const result1 = calculateIBU(inputs);
