@@ -1248,7 +1248,7 @@ const categoryColors: Record<string, string> = {
               data-description={calc.description.toLowerCase()}
               data-href={calc.href}
               data-country={calc.country || 'all'}
-              style={`animation-delay: ${index * 50}ms;`}
+              style={`animation-delay: ${Math.min(index * 30, 600)}ms;`}
             >
               <!-- Top row: Category + Star -->
               <div class="absolute top-5 right-5 flex items-center gap-2 z-10">
@@ -1536,6 +1536,12 @@ const categoryColors: Record<string, string> = {
     // Initialize recently used on page load
     renderRecentlyUsed();
 
+    // Mark cards as loaded after initial animation to enable instant filtering
+    setTimeout(() => {
+      calculatorCards.forEach(card => card.classList.add('loaded'));
+      document.querySelectorAll('.ad-in-grid').forEach(ad => ad.classList.add('loaded'));
+    }, 800);
+
     // Favorites management
 
     function getFavorites(): string[] {
@@ -1789,6 +1795,14 @@ const categoryColors: Record<string, string> = {
   .ad-in-grid {
     animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     opacity: 0;
+  }
+
+  /* After initial load, disable animation for instant filtering */
+  .calculator-card.loaded,
+  .ad-in-grid.loaded {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   .ad-in-grid {
