@@ -6,11 +6,17 @@ describe('KilnCostCalculator', () => {
   describe('calculateKilnCost', () => {
     it('should calculate with valid inputs', () => {
       const inputs: KilnCostInputs = {
+        kilnType: 'electric',
         kilnSize: 7,
+        kilnWattage: 11.5,
+        targetCone: '04',
         firingType: 'bisque',
+        firingTime: 8,
         electricityRate: 0.12,
-        firingConeTemp: 'cone04',
-        loadPercentage: 80,
+        gasRate: 0,
+        gasUnit: 'therm',
+        firingSchedule: 'medium',
+        loadDensity: 'medium',
       };
 
       const result = calculateKilnCost(inputs);
@@ -21,19 +27,31 @@ describe('KilnCostCalculator', () => {
 
     it('should handle different firing types', () => {
       const inputsBisque: KilnCostInputs = {
+        kilnType: 'electric',
         kilnSize: 7,
+        kilnWattage: 11.5,
+        targetCone: '04',
         firingType: 'bisque',
+        firingTime: 8,
         electricityRate: 0.12,
-        firingConeTemp: 'cone04',
-        loadPercentage: 80,
+        gasRate: 0,
+        gasUnit: 'therm',
+        firingSchedule: 'medium',
+        loadDensity: 'medium',
       };
 
       const inputsGlaze: KilnCostInputs = {
+        kilnType: 'electric',
         kilnSize: 7,
+        kilnWattage: 11.5,
+        targetCone: '6',
         firingType: 'glaze',
+        firingTime: 10,
         electricityRate: 0.12,
-        firingConeTemp: 'cone6',
-        loadPercentage: 80,
+        gasRate: 0,
+        gasUnit: 'therm',
+        firingSchedule: 'medium',
+        loadDensity: 'medium',
       };
 
       const resultBisque = calculateKilnCost(inputsBisque);
@@ -45,18 +63,24 @@ describe('KilnCostCalculator', () => {
 
     it('should produce consistent results', () => {
       const inputs: KilnCostInputs = {
+        kilnType: 'electric',
         kilnSize: 10,
+        kilnWattage: 15,
+        targetCone: '10',
         firingType: 'glaze',
+        firingTime: 12,
         electricityRate: 0.15,
-        firingConeTemp: 'cone10',
-        loadPercentage: 100,
+        gasRate: 0,
+        gasUnit: 'therm',
+        firingSchedule: 'slow',
+        loadDensity: 'heavy',
       };
 
       const result1 = calculateKilnCost(inputs);
       const result2 = calculateKilnCost(inputs);
 
       expect(result1.totalCost).toBe(result2.totalCost);
-      expect(result1.kwhUsed).toBe(result2.kwhUsed);
+      expect(result1.energyUsed).toBe(result2.energyUsed);
     });
   });
 });

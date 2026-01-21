@@ -3,44 +3,47 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { calculateIncomeTax } from '../../src/components/calculators/UK100kTaxTrapCalculator/calculations';
+import { calculateUK100kTax } from '../../src/components/calculators/UK100kTaxTrapCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UK100kTaxTrapCalculator/types';
-import type { UK100kInputs } from '../../src/components/calculators/UK100kTaxTrapCalculator/types';
 
 describe('Uk100kTaxTrapCalculator', () => {
-  describe('calculateIncomeTax', () => {
+  describe('calculateUK100kTax', () => {
     it('should calculate with default inputs', () => {
       const inputs = getDefaultInputs();
 
-      const result = calculateIncomeTax(inputs);
+      const result = calculateUK100kTax(inputs);
 
       expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.totalIncome).toBeGreaterThan(0);
+      expect(result.takeHomePay).toBeGreaterThan(0);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.grossSalary = 0;
+      inputs.bonus = 0;
 
-      const result = calculateIncomeTax(inputs);
+      const result = calculateUK100kTax(inputs);
 
       expect(result).toBeDefined();
+      expect(result.totalIncome).toBe(0);
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.grossSalary = 200000;
 
-      const result = calculateIncomeTax(inputs);
+      const result = calculateUK100kTax(inputs);
 
       expect(result).toBeDefined();
+      expect(result.totalIncome).toBe(200000);
     });
 
     it('should produce consistent results', () => {
       const inputs = getDefaultInputs();
 
-      const result1 = calculateIncomeTax(inputs);
-      const result2 = calculateIncomeTax(inputs);
+      const result1 = calculateUK100kTax(inputs);
+      const result2 = calculateUK100kTax(inputs);
 
       expect(result1).toEqual(result2);
     });

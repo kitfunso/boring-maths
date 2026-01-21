@@ -12,8 +12,9 @@ describe('TipCalculator', () => {
       const inputs: TipCalculatorInputs = {
         currency: 'USD',
         billAmount: 100,
-        tipPercentage: 0.20,
+        tipPercentage: 0.2,
         splitCount: 1,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -27,8 +28,9 @@ describe('TipCalculator', () => {
       const inputs: TipCalculatorInputs = {
         currency: 'USD',
         billAmount: 100,
-        tipPercentage: 0.20,
+        tipPercentage: 0.2,
         splitCount: 4,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -46,6 +48,7 @@ describe('TipCalculator', () => {
         billAmount: 50,
         tipPercentage: 0,
         splitCount: 1,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -60,6 +63,7 @@ describe('TipCalculator', () => {
         billAmount: 33.33,
         tipPercentage: 0.18,
         splitCount: 1,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -72,8 +76,9 @@ describe('TipCalculator', () => {
       const inputs: TipCalculatorInputs = {
         currency: 'USD',
         billAmount: 100,
-        tipPercentage: 0.20,
+        tipPercentage: 0.2,
         splitCount: 1,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -82,7 +87,7 @@ describe('TipCalculator', () => {
       expect(result.suggestions[0].percentage).toBe(0.15);
       expect(result.suggestions[0].tipAmount).toBe(15);
       expect(result.suggestions[1].percentage).toBe(0.18);
-      expect(result.suggestions[2].percentage).toBe(0.20);
+      expect(result.suggestions[2].percentage).toBe(0.2);
       expect(result.suggestions[3].percentage).toBe(0.25);
     });
 
@@ -90,8 +95,9 @@ describe('TipCalculator', () => {
       const inputs: TipCalculatorInputs = {
         currency: 'USD',
         billAmount: 100,
-        tipPercentage: 0.20,
+        tipPercentage: 0.2,
         splitCount: 0,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
@@ -106,6 +112,7 @@ describe('TipCalculator', () => {
         billAmount: 100,
         tipPercentage: 0.15,
         splitCount: 1,
+        useCustomSplit: false,
       };
 
       const result = calculateTip(inputs);
