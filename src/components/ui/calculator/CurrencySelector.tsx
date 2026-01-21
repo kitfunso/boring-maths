@@ -81,6 +81,7 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
 
   return (
     <select
+      key={`currency-select-${value}`}
       value={value}
       onChange={(e) => handleChange(e.currentTarget.value as Currency)}
       className={`
