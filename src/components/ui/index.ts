@@ -69,6 +69,9 @@ export type { SliderProps } from './primitives/Slider';
 export { Checkbox } from './primitives/Checkbox';
 export type { CheckboxProps } from './primitives/Checkbox';
 
+export { Toggle } from './primitives/Toggle';
+export type { ToggleProps } from './primitives/Toggle';
+
 // Layout
 export { Card } from './layout/Card';
 export type { CardProps } from './layout/Card';

@@ -30,6 +30,7 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -249,51 +250,24 @@ export default function PaintCalculator() {
 
               {/* Options */}
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('needsPrimer', !inputs.needsPrimer)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.needsPrimer ? 'bg-amber-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.needsPrimer ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Include Primer</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('includeCeiling', !inputs.includeCeiling)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.includeCeiling ? 'bg-amber-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.includeCeiling ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Paint Ceiling</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('includeTrim', !inputs.includeTrim)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.includeTrim ? 'bg-amber-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.includeTrim ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Include Trim Paint</span>
-                </div>
+                <Toggle
+                  checked={inputs.needsPrimer}
+                  onChange={(checked) => updateInput('needsPrimer', checked)}
+                  label="Include Primer"
+                  size="sm"
+                />
+                <Toggle
+                  checked={inputs.includeCeiling}
+                  onChange={(checked) => updateInput('includeCeiling', checked)}
+                  label="Paint Ceiling"
+                  size="sm"
+                />
+                <Toggle
+                  checked={inputs.includeTrim}
+                  onChange={(checked) => updateInput('includeTrim', checked)}
+                  label="Include Trim Paint"
+                  size="sm"
+                />
               </div>
             </div>
 

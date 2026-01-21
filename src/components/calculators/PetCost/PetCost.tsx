@@ -28,6 +28,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -146,38 +147,18 @@ export default function PetCost() {
               </div>
 
               {/* Premium Food */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('premiumFood', !inputs.premiumFood)}
-                  className={`w-12 h-6 rounded-full transition-all ${
-                    inputs.premiumFood ? 'bg-amber-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      inputs.premiumFood ? 'translate-x-6' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)]">Premium Food (+50%)</span>
-              </div>
+              <Toggle
+                checked={inputs.premiumFood}
+                onChange={(checked) => updateInput('premiumFood', checked)}
+                label="Premium Food (+50%)"
+              />
 
               {/* Pet Insurance */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('hasPetInsurance', !inputs.hasPetInsurance)}
-                  className={`w-12 h-6 rounded-full transition-all ${
-                    inputs.hasPetInsurance ? 'bg-amber-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      inputs.hasPetInsurance ? 'translate-x-6' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)]">Pet Insurance</span>
-              </div>
+              <Toggle
+                checked={inputs.hasPetInsurance}
+                onChange={(checked) => updateInput('hasPetInsurance', checked)}
+                label="Pet Insurance"
+              />
 
               <Divider />
 
@@ -206,21 +187,11 @@ export default function PetCost() {
               {/* Daycare (dogs only) */}
               {inputs.petType === 'dog' && (
                 <>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => updateInput('useDaycare', !inputs.useDaycare)}
-                      className={`w-12 h-6 rounded-full transition-all ${
-                        inputs.useDaycare ? 'bg-amber-500' : 'bg-white/20'
-                      }`}
-                    >
-                      <div
-                        className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                          inputs.useDaycare ? 'translate-x-6' : 'translate-x-0.5'
-                        }`}
-                      />
-                    </button>
-                    <span className="text-[var(--color-cream)]">Use Daycare</span>
-                  </div>
+                  <Toggle
+                    checked={inputs.useDaycare}
+                    onChange={(checked) => updateInput('useDaycare', checked)}
+                    label="Use Daycare"
+                  />
                   {inputs.useDaycare && (
                     <Slider
                       label="Daycare Days per Month"
@@ -242,21 +213,11 @@ export default function PetCost() {
               {/* Boarding */}
               {inputs.petType !== 'fish' && (
                 <>
-                  <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => updateInput('useBoarding', !inputs.useBoarding)}
-                      className={`w-12 h-6 rounded-full transition-all ${
-                        inputs.useBoarding ? 'bg-amber-500' : 'bg-white/20'
-                      }`}
-                    >
-                      <div
-                        className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                          inputs.useBoarding ? 'translate-x-6' : 'translate-x-0.5'
-                        }`}
-                      />
-                    </button>
-                    <span className="text-[var(--color-cream)]">Boarding/Pet Sitting</span>
-                  </div>
+                  <Toggle
+                    checked={inputs.useBoarding}
+                    onChange={(checked) => updateInput('useBoarding', checked)}
+                    label="Boarding/Pet Sitting"
+                  />
                   {inputs.useBoarding && (
                     <Slider
                       label="Weeks of Boarding per Year"

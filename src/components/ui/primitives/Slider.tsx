@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from 'react';
+import { useId } from 'preact/hooks';
 import { useTheme } from '../theme/ThemeContext';
 
 export interface SliderProps extends Omit<
@@ -30,6 +31,8 @@ export interface SliderProps extends Omit<
   showValue?: boolean;
   /** Label text */
   label?: string;
+  /** Accessible name for screen readers (required if no label) */
+  'aria-label'?: string;
   /** Additional class names */
   className?: string;
 }
@@ -63,10 +66,14 @@ export function Slider({
   labels,
   showValue = false,
   label,
+  'aria-label': ariaLabel,
   className = '',
   ...props
 }: SliderProps) {
   const { tokens } = useTheme();
+  const id = useId();
+  const sliderId = `slider-${id}`;
+  const labelId = `slider-label-${id}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(e.target.value));
@@ -81,7 +88,11 @@ export function Slider({
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm font-medium text-[var(--color-cream)] mb-2">
+        <label
+          id={labelId}
+          htmlFor={sliderId}
+          className="block text-sm font-medium text-[var(--color-cream)] mb-2"
+        >
           {label}
           {showValue && (
             <>
@@ -91,12 +102,19 @@ export function Slider({
         </label>
       )}
       <input
+        id={sliderId}
         type="range"
         min={min}
         max={max}
         step={step}
         value={value}
         onChange={handleChange}
+        aria-labelledby={label ? labelId : undefined}
+        aria-label={!label ? ariaLabel || `Value: ${currentLabel}` : undefined}
+        aria-valuemin={min}
+        aria-valuemax={max}
+        aria-valuenow={value}
+        aria-valuetext={currentLabel}
         className={`
           w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer
           ${tokens.accent}
@@ -104,7 +122,10 @@ export function Slider({
         {...props}
       />
       {(labels?.min || labels?.mid || labels?.max) && (
-        <div className="flex justify-between text-sm text-[var(--color-muted)] mt-1">
+        <div
+          className="flex justify-between text-sm text-[var(--color-muted)] mt-1"
+          aria-hidden="true"
+        >
           <span>{labels?.min || min}</span>
           {labels?.mid && <span>{labels.mid}</span>}
           <span>{labels?.max || max}</span>

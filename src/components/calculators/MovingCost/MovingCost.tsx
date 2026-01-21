@@ -28,6 +28,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -163,44 +164,24 @@ export default function MovingCost() {
                 { key: 'hasStairs', label: 'Stairs at Origin/Destination' },
                 { key: 'requiresElevator', label: 'Elevator Building' },
               ].map(({ key, label }) => (
-                <div key={key} className="flex items-center gap-3">
-                  <button
-                    onClick={() =>
-                      updateInput(
-                        key as keyof MovingCostInputs,
-                        !inputs[key as keyof MovingCostInputs]
-                      )
-                    }
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs[key as keyof MovingCostInputs] ? 'bg-emerald-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs[key as keyof MovingCostInputs] ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">{label}</span>
-                </div>
+                <Toggle
+                  key={key}
+                  checked={inputs[key as keyof MovingCostInputs] as boolean}
+                  onChange={(checked) => updateInput(key as keyof MovingCostInputs, checked)}
+                  label={label}
+                  size="sm"
+                />
               ))}
 
               {/* Storage */}
               <div className="pt-2 border-t border-white/10">
-                <div className="flex items-center gap-3 mb-3">
-                  <button
-                    onClick={() => updateInput('needsStorage', !inputs.needsStorage)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.needsStorage ? 'bg-emerald-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.needsStorage ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Need Storage</span>
+                <div className="mb-3">
+                  <Toggle
+                    checked={inputs.needsStorage}
+                    onChange={(checked) => updateInput('needsStorage', checked)}
+                    label="Need Storage"
+                    size="sm"
+                  />
                 </div>
                 {inputs.needsStorage && (
                   <Slider

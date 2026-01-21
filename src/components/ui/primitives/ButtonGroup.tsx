@@ -1,3 +1,4 @@
+import { useId } from 'preact/hooks';
 import { useTheme } from '../theme/ThemeContext';
 
 export interface ButtonGroupOption<T = string> {
@@ -16,6 +17,8 @@ export interface ButtonGroupProps<T = string> {
   columns?: 2 | 3 | 4;
   /** Size variant */
   size?: 'sm' | 'md' | 'lg';
+  /** Accessible label for the group */
+  'aria-label'?: string;
   /** Additional class names */
   className?: string;
 }
@@ -54,21 +57,49 @@ export function ButtonGroup<T extends string>({
   onChange,
   columns,
   size = 'md',
+  'aria-label': ariaLabel,
   className = '',
 }: ButtonGroupProps<T>) {
   const { tokens } = useTheme();
+  const groupId = useId();
 
   const cols = columns || ((options.length <= 4 ? options.length : 3) as 2 | 3 | 4);
 
+  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+    let newIndex = index;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      newIndex = (index + 1) % options.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      newIndex = (index - 1 + options.length) % options.length;
+    }
+    if (newIndex !== index) {
+      onChange(options[newIndex].value);
+      // Focus the new button
+      const btn = document.getElementById(`${groupId}-${newIndex}`);
+      btn?.focus();
+    }
+  };
+
   return (
-    <div className={`grid ${GRID_COLS[cols]} gap-3 ${className}`}>
-      {options.map((option) => {
+    <div
+      role="radiogroup"
+      aria-label={ariaLabel}
+      className={`grid ${GRID_COLS[cols]} gap-3 ${className}`}
+    >
+      {options.map((option, index) => {
         const isActive = option.value === value;
         return (
           <button
+            id={`${groupId}-${index}`}
             key={String(option.value)}
             type="button"
+            role="radio"
+            aria-checked={isActive}
+            tabIndex={isActive ? 0 : -1}
             onClick={() => onChange(option.value)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             className={`
               ${SIZE_CLASSES[size]}
               rounded-xl border-2 font-medium transition-all
