@@ -3,9 +3,15 @@
  *
  * Persists state to localStorage and syncs across tabs.
  * Perfect for saving calculator inputs so users don't lose their work.
+ *
+ * When loading saved state that has a 'currency' field, it will automatically
+ * sync with the global currency preference from 'boring-math-currency'.
  */
 
 import { useState, useEffect, useCallback } from 'preact/hooks';
+import { type Currency, getInitialCurrency } from '../lib/regions';
+
+const CURRENCY_STORAGE_KEY = 'boring-math-currency';
 
 export function useLocalStorage<T>(
   key: string,
@@ -20,7 +26,21 @@ export function useLocalStorage<T>(
     try {
       const stored = localStorage.getItem(key);
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored) as T;
+
+        // If the saved state has a currency field, sync it with the global preference
+        if (parsed && typeof parsed === 'object' && 'currency' in parsed) {
+          const globalCurrency = getInitialCurrency();
+          const savedCurrency = (parsed as { currency: Currency }).currency;
+
+          // If global currency differs from saved, update the currency field
+          // but keep all other saved values
+          if (globalCurrency !== savedCurrency) {
+            return { ...parsed, currency: globalCurrency };
+          }
+        }
+
+        return parsed;
       }
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);

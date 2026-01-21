@@ -1,7 +1,10 @@
-import { useEffect } from 'preact/hooks';
+import { useEffect, useLayoutEffect, useRef } from 'preact/hooks';
 import { CURRENCY_OPTIONS, type Currency } from '../../../lib/regions';
 
 const STORAGE_KEY = 'boring-math-currency';
+
+// Use useLayoutEffect on client, useEffect on server
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export interface CurrencySelectorProps {
   /** Currently selected currency */
@@ -30,24 +33,36 @@ export interface CurrencySelectorProps {
  * ```
  */
 export function CurrencySelector({ value, onChange, className = '' }: CurrencySelectorProps) {
-  // Sync with global currency on mount and listen for changes
+  // Keep refs to avoid stale closures in event handlers
+  const valueRef = useRef(value);
+  const onChangeRef = useRef(onChange);
+
+  // Update refs when props change
   useEffect(() => {
-    // Load initial value from localStorage
+    valueRef.current = value;
+    onChangeRef.current = onChange;
+  }, [value, onChange]);
+
+  // Sync with global currency on mount (synchronously before paint)
+  useIsomorphicLayoutEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && ['USD', 'GBP', 'EUR'].includes(stored) && stored !== value) {
       onChange(stored as Currency);
     }
+  }, []); // Only on mount
 
-    // Listen for changes from other calculators
+  // Listen for changes from other calculators
+  useEffect(() => {
     const handler = (e: CustomEvent<{ currency: Currency }>) => {
-      if (e.detail.currency !== value) {
-        onChange(e.detail.currency);
+      const newCurrency = e.detail.currency;
+      if (newCurrency && newCurrency !== valueRef.current) {
+        onChangeRef.current(newCurrency);
       }
     };
 
     window.addEventListener('currencyChange', handler as EventListener);
     return () => window.removeEventListener('currencyChange', handler as EventListener);
-  }, []);
+  }, []); // Stable handler using refs
 
   const handleChange = (newCurrency: Currency) => {
     // Save to localStorage
