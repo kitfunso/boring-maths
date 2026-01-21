@@ -33,6 +33,7 @@ import {
   ResultCard,
   MetricCard,
   Alert,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -267,55 +268,24 @@ export default function TileCalculator() {
 
               {/* Options */}
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('includeGrout', !inputs.includeGrout)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.includeGrout ? 'bg-cyan-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.includeGrout ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Include Grout</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('includeAdhesive', !inputs.includeAdhesive)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.includeAdhesive ? 'bg-cyan-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.includeAdhesive ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">
-                    Include Thinset Adhesive
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('includeBacker', !inputs.includeBacker)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.includeBacker ? 'bg-cyan-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.includeBacker ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">
-                    Include Cement Backer Board
-                  </span>
-                </div>
+                <Toggle
+                  checked={inputs.includeGrout}
+                  onChange={(checked) => updateInput('includeGrout', checked)}
+                  label="Include Grout"
+                  size="sm"
+                />
+                <Toggle
+                  checked={inputs.includeAdhesive}
+                  onChange={(checked) => updateInput('includeAdhesive', checked)}
+                  label="Include Thinset Adhesive"
+                  size="sm"
+                />
+                <Toggle
+                  checked={inputs.includeBacker}
+                  onChange={(checked) => updateInput('includeBacker', checked)}
+                  label="Include Cement Backer Board"
+                  size="sm"
+                />
               </div>
             </div>
 

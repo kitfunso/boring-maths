@@ -32,6 +32,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -153,40 +154,20 @@ export default function StartupCost() {
               </div>
 
               {/* Needs Office */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('needsOffice', !inputs.needsOffice)}
-                  className={`w-10 h-5 rounded-full transition-all ${
-                    inputs.needsOffice ? 'bg-emerald-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.needsOffice ? 'translate-x-5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)] text-sm">Need Office/Retail Space</span>
-              </div>
+              <Toggle
+                checked={inputs.needsOffice}
+                onChange={(checked) => updateInput('needsOffice', checked)}
+                label="Need Office/Retail Space"
+                size="sm"
+              />
 
               {/* Contingency */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('includeContingency', !inputs.includeContingency)}
-                  className={`w-10 h-5 rounded-full transition-all ${
-                    inputs.includeContingency ? 'bg-emerald-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.includeContingency ? 'translate-x-5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)] text-sm">
-                  Include {inputs.contingencyPercent}% Contingency Buffer
-                </span>
-              </div>
+              <Toggle
+                checked={inputs.includeContingency}
+                onChange={(checked) => updateInput('includeContingency', checked)}
+                label={`Include ${inputs.contingencyPercent}% Contingency Buffer`}
+                size="sm"
+              />
 
               {inputs.includeContingency && (
                 <Slider

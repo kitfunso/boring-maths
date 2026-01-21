@@ -33,6 +33,7 @@ import {
   MetricCard,
   Alert,
   Slider,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -296,21 +297,12 @@ export default function SolarCalculator() {
               </div>
 
               {/* Financing Toggle */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('financed', !inputs.financed)}
-                  className={`w-10 h-5 rounded-full transition-all ${
-                    inputs.financed ? 'bg-amber-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.financed ? 'translate-x-5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)] text-sm">Finance with Solar Loan</span>
-              </div>
+              <Toggle
+                checked={inputs.financed}
+                onChange={(checked) => updateInput('financed', checked)}
+                label="Finance with Solar Loan"
+                size="sm"
+              />
 
               {inputs.financed && (
                 <Grid cols={2} gap="md">

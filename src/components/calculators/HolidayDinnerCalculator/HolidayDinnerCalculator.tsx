@@ -25,6 +25,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -210,28 +211,13 @@ export default function HolidayDinnerCalculator() {
                   { key: 'includeRolls', label: 'Dinner Rolls' },
                   { key: 'includePie', label: 'Pies' },
                 ].map(({ key, label }) => (
-                  <div key={key} className="flex items-center gap-2">
-                    <button
-                      onClick={() =>
-                        updateInput(
-                          key as keyof HolidayDinnerInputs,
-                          !inputs[key as keyof HolidayDinnerInputs]
-                        )
-                      }
-                      className={`w-8 h-4 rounded-full transition-all ${
-                        inputs[key as keyof HolidayDinnerInputs] ? 'bg-red-500' : 'bg-white/20'
-                      }`}
-                    >
-                      <div
-                        className={`w-3 h-3 rounded-full bg-white transition-transform ${
-                          inputs[key as keyof HolidayDinnerInputs]
-                            ? 'translate-x-4'
-                            : 'translate-x-0.5'
-                        }`}
-                      />
-                    </button>
-                    <span className="text-[var(--color-cream)] text-sm">{label}</span>
-                  </div>
+                  <Toggle
+                    key={key}
+                    checked={inputs[key as keyof HolidayDinnerInputs] as boolean}
+                    onChange={(checked) => updateInput(key as keyof HolidayDinnerInputs, checked)}
+                    label={label}
+                    size="sm"
+                  />
                 ))}
               </div>
             </div>

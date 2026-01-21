@@ -33,6 +33,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -220,21 +221,12 @@ export default function VacationBudget() {
               </div>
 
               {/* Car Rental */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('needsCarRental', !inputs.needsCarRental)}
-                  className={`w-12 h-6 rounded-full transition-all ${
-                    inputs.needsCarRental ? 'bg-cyan-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      inputs.needsCarRental ? 'translate-x-6' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)]">Need Car Rental</span>
-              </div>
+              <Toggle
+                checked={inputs.needsCarRental}
+                onChange={(checked) => updateInput('needsCarRental', checked)}
+                label="Need Car Rental"
+                size="md"
+              />
               {inputs.needsCarRental && (
                 <div>
                   <Label htmlFor="carRentalPerDay">Car Rental per Day</Label>
@@ -253,21 +245,12 @@ export default function VacationBudget() {
               )}
 
               {/* Travel Insurance */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('travelInsurance', !inputs.travelInsurance)}
-                  className={`w-12 h-6 rounded-full transition-all ${
-                    inputs.travelInsurance ? 'bg-cyan-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      inputs.travelInsurance ? 'translate-x-6' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)]">Include Travel Insurance</span>
-              </div>
+              <Toggle
+                checked={inputs.travelInsurance}
+                onChange={(checked) => updateInput('travelInsurance', checked)}
+                label="Include Travel Insurance"
+                size="md"
+              />
 
               <div>
                 <Label htmlFor="souvenirBudget">Souvenir & Shopping Budget</Label>

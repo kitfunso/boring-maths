@@ -33,6 +33,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -175,21 +176,12 @@ export default function BabyCost() {
               </div>
 
               {/* Health Insurance */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('hasHealthInsurance', !inputs.hasHealthInsurance)}
-                  className={`w-12 h-6 rounded-full transition-all ${
-                    inputs.hasHealthInsurance ? 'bg-rose-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                      inputs.hasHealthInsurance ? 'translate-x-6' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)]">Has Health Insurance</span>
-              </div>
+              <Toggle
+                checked={inputs.hasHealthInsurance}
+                onChange={(checked) => updateInput('hasHealthInsurance', checked)}
+                label="Has Health Insurance"
+                size="md"
+              />
 
               {inputs.hasHealthInsurance && inputs.currency === 'USD' && (
                 <Grid responsive={{ sm: 2 }} gap="md">

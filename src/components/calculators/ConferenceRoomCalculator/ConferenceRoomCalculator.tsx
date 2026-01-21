@@ -24,6 +24,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -156,21 +157,12 @@ export default function ConferenceRoomCalculator() {
               </Grid>
 
               {/* Stage/Presenter Area */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('stageOrPresenterArea', !inputs.stageOrPresenterArea)}
-                  className={`w-10 h-5 rounded-full transition-all ${
-                    inputs.stageOrPresenterArea ? 'bg-cyan-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.stageOrPresenterArea ? 'translate-x-5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)] text-sm">Stage/Presenter Area</span>
-              </div>
+              <Toggle
+                checked={inputs.stageOrPresenterArea}
+                onChange={(checked) => updateInput('stageOrPresenterArea', checked)}
+                label="Stage/Presenter Area"
+                size="sm"
+              />
 
               {inputs.stageOrPresenterArea && (
                 <Slider
@@ -200,28 +192,13 @@ export default function ConferenceRoomCalculator() {
                 { key: 'includePodium', label: 'Podium/Lectern' },
                 { key: 'adaAccessible', label: 'ADA Accessible' },
               ].map(({ key, label }) => (
-                <div key={key} className="flex items-center gap-3">
-                  <button
-                    onClick={() =>
-                      updateInput(
-                        key as keyof ConferenceRoomInputs,
-                        !inputs[key as keyof ConferenceRoomInputs]
-                      )
-                    }
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs[key as keyof ConferenceRoomInputs] ? 'bg-cyan-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs[key as keyof ConferenceRoomInputs]
-                          ? 'translate-x-5'
-                          : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">{label}</span>
-                </div>
+                <Toggle
+                  key={key}
+                  checked={!!inputs[key as keyof ConferenceRoomInputs]}
+                  onChange={(checked) => updateInput(key as keyof ConferenceRoomInputs, checked)}
+                  label={label}
+                  size="sm"
+                />
               ))}
             </div>
 

@@ -27,6 +27,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -204,23 +205,13 @@ export default function CateringCalculator() {
                 { key: 'includeDessert', label: 'Include Dessert' },
                 { key: 'includeBreads', label: 'Include Bread/Rolls' },
               ].map(({ key, label }) => (
-                <div key={key} className="flex items-center gap-3">
-                  <button
-                    onClick={() =>
-                      updateInput(key as keyof CateringInputs, !inputs[key as keyof CateringInputs])
-                    }
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs[key as keyof CateringInputs] ? 'bg-red-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs[key as keyof CateringInputs] ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">{label}</span>
-                </div>
+                <Toggle
+                  key={key}
+                  checked={inputs[key as keyof CateringInputs] as boolean}
+                  onChange={(checked) => updateInput(key as keyof CateringInputs, checked)}
+                  label={label}
+                  size="sm"
+                />
               ))}
             </div>
 

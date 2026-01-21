@@ -35,6 +35,7 @@ import {
   MetricCard,
   Alert,
   ButtonGroup,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -271,28 +272,13 @@ export default function BirthdayPartyBudget() {
                 { key: 'includeCharacter', label: 'Character Appearance' },
                 { key: 'includePhotographer', label: 'Photographer' },
               ].map(({ key, label }) => (
-                <div key={key} className="flex items-center gap-3">
-                  <button
-                    onClick={() =>
-                      updateInput(
-                        key as keyof BirthdayPartyInputs,
-                        !inputs[key as keyof BirthdayPartyInputs]
-                      )
-                    }
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs[key as keyof BirthdayPartyInputs] ? 'bg-amber-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs[key as keyof BirthdayPartyInputs]
-                          ? 'translate-x-5'
-                          : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">{label}</span>
-                </div>
+                <Toggle
+                  key={key}
+                  checked={inputs[key as keyof BirthdayPartyInputs] as boolean}
+                  onChange={(checked) => updateInput(key as keyof BirthdayPartyInputs, checked)}
+                  label={label}
+                  size="sm"
+                />
               ))}
             </div>
 

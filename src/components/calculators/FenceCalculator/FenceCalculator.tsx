@@ -33,6 +33,7 @@ import {
   MetricCard,
   Alert,
   Slider,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -211,23 +212,12 @@ export default function FenceCalculator() {
                 </div>
               </Grid>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('doublePostCorners', !inputs.doublePostCorners)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.doublePostCorners ? 'bg-emerald-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.doublePostCorners ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">Double Posts at Corners</span>
-                </div>
-              </div>
+              <Toggle
+                checked={inputs.doublePostCorners}
+                onChange={(checked) => updateInput('doublePostCorners', checked)}
+                label="Double Posts at Corners"
+                size="sm"
+              />
 
               <Divider />
 

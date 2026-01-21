@@ -25,6 +25,7 @@ import {
   Divider,
   ResultCard,
   Alert,
+  Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -140,43 +141,21 @@ export default function MarketplaceFees() {
               </div>
 
               {/* Etsy Offsite Ads Toggle */}
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => updateInput('etsyOffsiteAds', !inputs.etsyOffsiteAds)}
-                  className={`w-10 h-5 rounded-full transition-all ${
-                    inputs.etsyOffsiteAds ? 'bg-orange-500' : 'bg-white/20'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.etsyOffsiteAds ? 'translate-x-5' : 'translate-x-0.5'
-                    }`}
-                  />
-                </button>
-                <span className="text-[var(--color-cream)] text-sm">
-                  Etsy Offsite Ads (15% fee on referred sales)
-                </span>
-              </div>
+              <Toggle
+                checked={inputs.etsyOffsiteAds}
+                onChange={(checked) => updateInput('etsyOffsiteAds', checked)}
+                label="Etsy Offsite Ads (15% fee on referred sales)"
+                size="sm"
+              />
 
               {/* Amazon FBA Toggle */}
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => updateInput('amazonFBA', !inputs.amazonFBA)}
-                    className={`w-10 h-5 rounded-full transition-all ${
-                      inputs.amazonFBA ? 'bg-yellow-500' : 'bg-white/20'
-                    }`}
-                  >
-                    <div
-                      className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                        inputs.amazonFBA ? 'translate-x-5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-[var(--color-cream)] text-sm">
-                    Amazon FBA (Fulfillment by Amazon)
-                  </span>
-                </div>
+                <Toggle
+                  checked={inputs.amazonFBA}
+                  onChange={(checked) => updateInput('amazonFBA', checked)}
+                  label="Amazon FBA (Fulfillment by Amazon)"
+                  size="sm"
+                />
 
                 {inputs.amazonFBA && (
                   <div>
