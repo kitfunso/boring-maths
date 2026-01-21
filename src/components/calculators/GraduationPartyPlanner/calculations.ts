@@ -15,7 +15,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     currency,
     guestCount,
     graduationType,
-    partyStyle,
     menuStyle,
     partyDuration,
     includeMainDish,

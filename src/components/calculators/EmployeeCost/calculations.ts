@@ -30,11 +30,6 @@ export function calculateEmployeeCost(inputs: EmployeeCostInputs): EmployeeCostR
   const totalPtoDays = ptoDays + holidays;
   const workingDaysPerYear = weeksPerYear * 5 - totalPtoDays;
   const actualWorkingHours = workingDaysPerYear * (hoursPerWeek / 5);
-  const totalAnnualHours = weeksPerYear * hoursPerWeek;
-
-  // Cost of PTO (paid for time not worked)
-  const dailyRate = annualSalary / (weeksPerYear * 5);
-  const ptoCost = dailyRate * totalPtoDays;
 
   // Total benefits cost
   const totalBenefits = healthInsurance + retirementMatch + otherBenefits;

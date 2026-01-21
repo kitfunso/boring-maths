@@ -9,9 +9,6 @@ import { US_TAX_BRACKETS, UK_TAX_BRACKETS } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/** FICA tax rate (Social Security 6.2% + Medicare 1.45%) */
-const FICA_RATE = 0.0765;
-
 /** Social Security wage base for 2025 */
 const SS_WAGE_BASE = 176100;
 
@@ -133,12 +130,10 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
 
   // Monthly breakdown showing cumulative effect and diminishing returns
   const monthlyBreakdown: OvertimeCalculatorResult['monthlyBreakdown'] = [];
-  let cumulativeGross = 0;
   let cumulativeNet = 0;
 
   for (let month = 1; month <= 12; month++) {
     const monthlyGross = (weeklyGrossOT * WEEKS_PER_YEAR) / 12;
-    cumulativeGross += monthlyGross;
 
     // Calculate tax with progressive income
     const incomeToDate = currentAnnualIncome * (month / 12);

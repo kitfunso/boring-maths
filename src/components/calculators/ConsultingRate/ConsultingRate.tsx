@@ -6,7 +6,7 @@
 
 import { useState, useMemo } from 'preact/hooks';
 import { calculateConsultingRate } from './calculations';
-import { getDefaultInputs, type ConsultingRateInputs, COMMON_EXPENSES } from './types';
+import { getDefaultInputs, type ConsultingRateInputs } from './types';
 import {
   type Currency,
   getCurrencySymbol,

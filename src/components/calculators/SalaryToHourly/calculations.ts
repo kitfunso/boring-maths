@@ -8,9 +8,6 @@ import type { SalaryToHourlyInputs, SalaryToHourlyResult } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/** Standard work hours per day */
-const HOURS_PER_DAY = 8;
-
 /** Standard weeks per year */
 const WEEKS_PER_YEAR = 52;
 

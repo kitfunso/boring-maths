@@ -9,7 +9,6 @@ import { calculateFence } from './calculations';
 import {
   getDefaultInputs,
   MATERIAL_PRICES,
-  CONCRETE_PRICES,
   type FenceCalculatorInputs,
   type FenceMaterial,
   type FenceHeight,

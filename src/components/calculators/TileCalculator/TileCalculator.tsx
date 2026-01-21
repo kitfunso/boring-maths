@@ -33,7 +33,6 @@ import {
   ResultCard,
   MetricCard,
   Alert,
-  Slider,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 

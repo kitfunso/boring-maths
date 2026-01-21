@@ -144,7 +144,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     };
   } else if (seatingStyle === 'boardroom') {
     // Single large table
-    const tableWidth = Math.min(5, effectiveWidth * 0.4);
     const tableLength2 = Math.min(seatingLength - 4, 20);
     const seatsLong = Math.floor(tableLength2 / 2.5) * 2; // both long sides
     const seatsShort = 2; // ends

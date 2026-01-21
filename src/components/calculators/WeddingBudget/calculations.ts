@@ -110,7 +110,7 @@ const TYPICAL_RANGES: Record<string, Record<WeddingStyle, { min: number; max: nu
 };
 
 export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudgetResult {
-  const { currency, totalBudget, guestCount, weddingStyle, priorities } = inputs;
+  const { currency, totalBudget, guestCount, priorities } = inputs;
 
   // Determine budget tier
   const perGuestBudget = totalBudget / guestCount;

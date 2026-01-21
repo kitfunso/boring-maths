@@ -48,14 +48,6 @@ export default function BuyVsRent() {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Get winner color
-  const winnerColor =
-    result.finalComparison.winner === 'buy'
-      ? 'text-emerald-400'
-      : result.finalComparison.winner === 'rent'
-        ? 'text-blue-400'
-        : 'text-[var(--color-cream)]';
-
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">

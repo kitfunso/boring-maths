@@ -92,20 +92,16 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
 
   // Select recommended price based on strategy
   let recommendedPrice: number;
-  let recommendedAnalysis: PricingAnalysis;
 
   switch (strategy) {
     case 'value_based':
       recommendedPrice = valueBasedAnalysis.price;
-      recommendedAnalysis = valueBasedAnalysis;
       break;
     case 'competitive':
       recommendedPrice = competitiveAnalysis.price;
-      recommendedAnalysis = competitiveAnalysis;
       break;
     default:
       recommendedPrice = costPlusAnalysis.price;
-      recommendedAnalysis = costPlusAnalysis;
   }
 
   // Ensure price covers costs

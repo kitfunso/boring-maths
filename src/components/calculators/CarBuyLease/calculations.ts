@@ -38,13 +38,11 @@ export function calculateCarBuyLease(inputs: CarBuyLeaseInputs): CarBuyLeaseResu
 
   // Year-by-year comparison
   const yearByYear: YearComparison[] = [];
-  const totalMonths = yearsToOwn * 12;
 
   let buyCumulative = downPayment;
   let leaseCumulative = leaseDownPayment;
   let currentCarValue = vehiclePrice;
   let loanBalance = loanAmount;
-  let leaseNumber = 1;
   let leaseMonthsUsed = 0;
   let totalExcessMiles = 0;
 
@@ -87,7 +85,6 @@ export function calculateCarBuyLease(inputs: CarBuyLeaseInputs): CarBuyLeaseResu
         // Start new lease
         leaseYearCost += leaseDownPayment;
         leaseMonthsUsed = 0;
-        leaseNumber++;
       }
     }
     leaseCumulative += leaseYearCost;

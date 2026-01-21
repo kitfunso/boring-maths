@@ -21,7 +21,6 @@ import {
   CurrencySelector,
   Label,
   Input,
-  Slider,
   Grid,
   Divider,
   ResultCard,

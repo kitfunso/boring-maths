@@ -167,7 +167,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
   // Overall health rating
   const scores = healthScores.map((h) => h.score);
   const excellentCount = scores.filter((s) => s === 'excellent').length;
-  const goodCount = scores.filter((s) => s === 'good').length;
   const warningCount = scores.filter((s) => s === 'warning').length;
   const poorCount = scores.filter((s) => s === 'poor').length;
 

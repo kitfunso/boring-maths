@@ -16,12 +16,7 @@ import {
   type SurfaceType,
   type RoomType,
 } from './types';
-import {
-  type Currency,
-  getCurrencySymbol,
-  getInitialCurrency,
-  formatCurrency,
-} from '../../../lib/regions';
+import { type Currency, getInitialCurrency, formatCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -30,13 +25,11 @@ import {
   Label,
   Input,
   ButtonGroup,
-  Checkbox,
   Grid,
   Divider,
   ResultCard,
   MetricCard,
   Alert,
-  Slider,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
@@ -44,8 +37,6 @@ export default function PaintCalculator() {
   const [inputs, setInputs] = useState<PaintCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );
-
-  const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Calculate results
   const result: PaintCalculatorResult = useMemo(() => {

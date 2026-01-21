@@ -75,10 +75,6 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
     const annualSaving =
       annualProductionKwh * currentRate + (srecValue * annualProductionKwh) / 1000;
 
-    // Subtract loan payment if financed
-    const netAnnualSaving =
-      financed && year <= loanTermYears ? annualSaving - monthlyPayment * 12 : annualSaving;
-
     cumulativeSavings += annualSaving;
     yearSavings.push(cumulativeSavings);
 

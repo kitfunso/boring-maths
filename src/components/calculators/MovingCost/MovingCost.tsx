@@ -14,12 +14,7 @@ import {
   type MoveMethod,
   type Season,
 } from './types';
-import {
-  type Currency,
-  getCurrencySymbol,
-  getInitialCurrency,
-  formatCurrency,
-} from '../../../lib/regions';
+import { type Currency, getInitialCurrency, formatCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -66,8 +61,6 @@ export default function MovingCost() {
   const [inputs, setInputs] = useState<MovingCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );
-
-  const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculateMovingCost(inputs), [inputs]);
 

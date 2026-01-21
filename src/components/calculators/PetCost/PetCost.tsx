@@ -14,12 +14,7 @@ import {
   type DogSize,
   type HealthStatus,
 } from './types';
-import {
-  type Currency,
-  getCurrencySymbol,
-  getInitialCurrency,
-  formatCurrency,
-} from '../../../lib/regions';
+import { type Currency, getInitialCurrency, formatCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -70,8 +65,6 @@ const HEALTH_OPTIONS = [
 
 export default function PetCost() {
   const [inputs, setInputs] = useState<PetCostInputs>(() => getDefaultInputs(getInitialCurrency()));
-
-  const currencySymbol = getCurrencySymbol(inputs.currency);
 
   const result = useMemo(() => calculatePetCost(inputs), [inputs]);
 

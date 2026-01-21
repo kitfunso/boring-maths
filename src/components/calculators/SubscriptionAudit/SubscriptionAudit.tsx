@@ -10,7 +10,6 @@ import { analyzeSubscriptions, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
   createSubscription,
-  generateId,
   CATEGORY_LABELS,
   COMMON_SUBSCRIPTIONS,
   type SubscriptionAuditInputs,
