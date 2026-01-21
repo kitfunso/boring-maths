@@ -1,6 +1,8 @@
 {
   "name": "Boring Math Calculators",
   "short_name": "Boring Math",
+  "description": "Free online calculators for everyday math problems",
+  "start_url": "/?source=pwa",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -15,5 +17,7 @@
   ],
   "theme_color": "#07070a",
   "background_color": "#07070a",
-  "display": "standalone"
+  "display": "standalone",
+  "scope": "/",
+  "orientation": "any"
 }

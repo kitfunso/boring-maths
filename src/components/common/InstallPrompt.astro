@@ -1,0 +1,90 @@
+---
+/**
+ * PWA Install Prompt - Shows on mobile after 2nd visit
+ * Encourages users to add the app to their home screen for quick access.
+ */
+---
+
+<div id="install-prompt" class="fixed bottom-4 left-4 right-4 z-50 hidden md:hidden">
+  <div
+    class="bg-[var(--color-charcoal)] border border-[var(--color-accent)]/30 rounded-2xl p-4 shadow-xl"
+  >
+    <div class="flex items-center gap-3">
+      <div
+        class="w-10 h-10 rounded-xl bg-[var(--color-accent)]/20 flex items-center justify-center flex-shrink-0"
+      >
+        <svg
+          class="w-5 h-5 text-[var(--color-accent)]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium text-[var(--color-cream)]">Add to Home Screen</p>
+        <p class="text-xs text-[var(--color-muted)] truncate">Quick access to calculators</p>
+      </div>
+      <button
+        id="install-btn"
+        class="px-3 py-1.5 bg-[var(--color-accent)] text-[var(--color-void)] text-sm font-medium rounded-lg flex-shrink-0"
+      >
+        Add
+      </button>
+      <button
+        id="install-dismiss"
+        class="p-1.5 text-[var(--color-muted)] hover:text-[var(--color-cream)] flex-shrink-0"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let deferredPrompt: Event | null = null;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Show prompt on 2nd visit
+    const visits = parseInt(localStorage.getItem('bm_visits') || '0') + 1;
+    localStorage.setItem('bm_visits', visits.toString());
+
+    const dismissed = localStorage.getItem('bm_install_dismissed');
+    if (visits >= 2 && !dismissed) {
+      const prompt = document.getElementById('install-prompt');
+      if (prompt) prompt.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('install-btn')?.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      // @ts-ignore - prompt() exists on BeforeInstallPromptEvent
+      (deferredPrompt as any).prompt();
+      const result = await (deferredPrompt as any).userChoice;
+      if (result.outcome === 'accepted') {
+        localStorage.setItem('bm_install_dismissed', 'true');
+      }
+      deferredPrompt = null;
+      document.getElementById('install-prompt')?.classList.add('hidden');
+    }
+  });
+
+  document.getElementById('install-dismiss')?.addEventListener('click', () => {
+    localStorage.setItem('bm_install_dismissed', 'true');
+    document.getElementById('install-prompt')?.classList.add('hidden');
+  });
+</script>

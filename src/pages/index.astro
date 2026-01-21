@@ -1058,10 +1058,10 @@ const categoryColors: Record<string, string> = {
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- Hero Section -->
-  <section class="relative flex items-center justify-center overflow-hidden px-6 py-4">
-    <!-- Floating geometric elements -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+  <!-- Hero Section - Compact on mobile -->
+  <section class="relative flex items-center justify-center overflow-hidden px-6 py-2 md:py-4">
+    <!-- Floating geometric elements - hidden on mobile -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none hidden md:block" aria-hidden="true">
       <div class="absolute top-20 left-[10%] w-20 h-20 border border-white/10 rounded-2xl rotate-12 animate-float"></div>
       <div class="absolute top-40 right-[15%] w-16 h-16 border border-[var(--color-accent)]/20 rounded-full animate-float" style="animation-delay: -2s;"></div>
       <div class="absolute bottom-32 left-[20%] w-12 h-12 bg-[var(--color-accent)]/10 rounded-lg rotate-45 animate-float" style="animation-delay: -4s;"></div>
@@ -1069,35 +1069,34 @@ const categoryColors: Record<string, string> = {
     </div>
 
     <div class="relative max-w-6xl mx-auto text-center">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-2 animate-slide-up">
+      <!-- Badge - smaller on mobile -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 mb-1 md:mb-2 animate-slide-up">
         <span class="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-        <span class="text-sm text-[var(--color-subtle)]">{calculators.length} Free Calculators</span>
+        <span class="text-xs md:text-sm text-[var(--color-subtle)]">{calculators.length} Free Calculators</span>
       </div>
 
-      <!-- Main Headline -->
-      <h1 class="text-headline mb-3 animate-slide-up delay-100" style="opacity: 0;">
+      <!-- Main Headline - smaller on mobile -->
+      <h1 class="text-2xl md:text-headline mb-2 md:mb-3 animate-slide-up delay-100" style="opacity: 0;">
         <span class="text-[var(--color-cream)]">Boring</span>
-        <span class="relative inline-block mx-2">
+        <span class="relative inline-block mx-1 md:mx-2">
           <span class="gradient-text">Math</span>
           <svg class="absolute -bottom-1 left-0 w-full h-2 text-[var(--color-accent)]" viewBox="0 0 100 12" preserveAspectRatio="none">
             <path d="M0,8 Q50,0 100,8" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/>
           </svg>
         </span>
-        <br class="md:hidden" />
         <span class="text-[var(--color-cream)]">Made</span>
         <span class="font-display italic text-[var(--color-accent)]"> Easy</span>
       </h1>
 
-      <!-- Subheadline -->
-      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-4 animate-slide-up delay-200" style="opacity: 0;">
+      <!-- Subheadline - hidden on mobile -->
+      <p class="hidden md:block text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-4 animate-slide-up delay-200" style="opacity: 0;">
         Free, simple calculators for freelancers, planners, and anyone who needs
         <span class="text-[var(--color-cream)]">quick answers</span> to everyday math problems.
         <span class="text-[var(--color-accent)]">Fast. Free. Easy.</span>
       </p>
 
-      <!-- Quick Stats -->
-      <div class="grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
+      <!-- Quick Stats - hidden on mobile -->
+      <div class="hidden md:grid grid-cols-3 gap-8 max-w-xl mx-auto animate-fade-in delay-300" style="opacity: 0;">
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">{calculators.length}</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Calculators</div>
@@ -1109,6 +1108,20 @@ const categoryColors: Record<string, string> = {
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-display text-[var(--color-cream)]">100%</div>
           <div class="text-micro text-[var(--color-muted)] mt-1">Free</div>
+        </div>
+      </div>
+
+      <!-- Mobile Quick Access - Popular calculators for instant access -->
+      <div class="md:hidden mt-3 animate-slide-up delay-100">
+        <div class="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide">
+          {calculators.filter(c => c.mostUsed).slice(0, 5).map(calc => (
+            <a
+              href={calc.href}
+              class="flex-shrink-0 px-3 py-2 rounded-xl bg-[var(--color-charcoal)] border border-white/10 hover:border-[var(--color-accent)]/50 transition-colors"
+            >
+              <span class="text-xs font-medium text-[var(--color-cream)] whitespace-nowrap">{calc.title.replace(' Calculator', '')}</span>
+            </a>
+          ))}
         </div>
       </div>
     </div>
@@ -1165,8 +1178,8 @@ const categoryColors: Record<string, string> = {
         </div>
       </div>
 
-      <!-- Category Filter -->
-      <div class="flex flex-wrap justify-center gap-2 mb-2" id="category-filter">
+      <!-- Category Filter - scrollable on mobile -->
+      <div class="flex md:flex-wrap md:justify-center gap-2 mb-2 overflow-x-auto pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide" id="category-filter">
         <!-- Favorites toggle -->
         <button
           class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border
@@ -1196,8 +1209,8 @@ const categoryColors: Record<string, string> = {
         
       </div>
 
-      <!-- Region Filter -->
-      <div class="flex flex-wrap justify-center gap-2 mb-6" id="region-filter">
+      <!-- Region Filter - scrollable on mobile -->
+      <div class="flex md:flex-wrap md:justify-center gap-2 mb-4 md:mb-6 overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide" id="region-filter">
         <span class="text-xs text-[var(--color-muted)] uppercase tracking-wider mr-2 self-center">Region:</span>
         <button
           class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border

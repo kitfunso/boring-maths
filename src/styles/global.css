@@ -332,6 +332,17 @@ select::-webkit-scrollbar-thumb {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Utility: Hide Scrollbar (for horizontal scrolling filters)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Number Input - Modern Spin Buttons
    ═══════════════════════════════════════════════════════════════════════════ */
 

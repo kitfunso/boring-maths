@@ -9,6 +9,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://boring-math.com/',
 
+  // Consistent trailing slash handling for better SEO
+  trailingSlash: 'never',
+
   vite: {
     plugins: [tailwindcss()],
     build: {
@@ -25,7 +28,25 @@ export default defineConfig({
 
   integrations: [
     preact({ compat: true }), // Enable React compatibility
-    sitemap(),
+    sitemap({
+      // Add lastmod for better crawling signals
+      serialize(item) {
+        // Set lastmod to build time for all pages
+        item.lastmod = new Date().toISOString();
+        // Set priority based on page depth
+        if (item.url === 'https://boring-math.com/') {
+          item.priority = 1.0;
+          item.changefreq = 'weekly';
+        } else if (item.url.includes('/calculators/')) {
+          item.priority = 0.8;
+          item.changefreq = 'monthly';
+        } else {
+          item.priority = 0.5;
+          item.changefreq = 'monthly';
+        }
+        return item;
+      },
+    }),
   ],
 
   output: 'static',
