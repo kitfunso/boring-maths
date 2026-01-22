@@ -34,6 +34,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 /**
  * Fee breakdown row component
  */
@@ -138,6 +139,9 @@ function PlatformCard({
 }
 
 export default function EtsyFeeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Marketplace Fees');
+
   const [inputs, setInputs] = useState<EtsyFeeInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);

@@ -19,7 +19,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function DogAgeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Dog Age Calculator');
+
   const [inputs, setInputs] = useState<DogAgeInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateDogAge(inputs), [inputs]);

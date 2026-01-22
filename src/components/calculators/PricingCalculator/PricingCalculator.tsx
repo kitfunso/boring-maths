@@ -35,7 +35,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PricingCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Pricing Calculator');
+
   const [inputs, setInputs] = useState<PricingInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const currencySymbol = getCurrencySymbol(inputs.currency);

@@ -28,7 +28,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PressureDropCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Pressure Drop Calculator');
+
   const [inputs, setInputs] = useState<PressureDropInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => {

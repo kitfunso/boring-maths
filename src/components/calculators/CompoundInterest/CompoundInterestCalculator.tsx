@@ -32,7 +32,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function CompoundInterestCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Compound Interest Calculator');
+
   const [inputs, setInputs] = useLocalStorage<CompoundInterestInputs>('calc-compound-inputs', () =>
     getDefaultInputs(getInitialCurrency())
   );

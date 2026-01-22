@@ -32,7 +32,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ContractorVsEmployeeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Contractor vs Employee Calculator');
+
   const [inputs, setInputs] = useState<ContractorVsEmployeeInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const TILE_SIZE_OPTIONS = [
   { value: '4x4', label: '4x4"' },
   { value: '6x6', label: '6x6"' },
@@ -69,6 +70,9 @@ const GROUT_WIDTH_OPTIONS = [
 ];
 
 export default function TileCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Tile Calculator');
+
   const [inputs, setInputs] = useState<TileCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

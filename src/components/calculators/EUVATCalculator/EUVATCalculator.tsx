@@ -26,7 +26,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function EUVATCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('EU VAT Calculator');
+
   const [inputs, setInputs] = useState<VATInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateVAT(inputs), [inputs]);

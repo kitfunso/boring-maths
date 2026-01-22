@@ -34,7 +34,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PaintCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Paint Needs');
+
   const [inputs, setInputs] = useState<PaintCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

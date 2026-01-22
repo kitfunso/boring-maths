@@ -27,7 +27,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ReynoldsNumberCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Reynolds Number Calculator');
+
   const [inputs, setInputs] = useState<ReynoldsInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => {

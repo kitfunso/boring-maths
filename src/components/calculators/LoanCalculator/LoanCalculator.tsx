@@ -23,7 +23,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function LoanCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Loan Payment Calculator');
+
   const [inputs, setInputs] = useState<LoanInputs>(() => getDefaultInputs(getInitialCurrency()));
   const [showAmortization, setShowAmortization] = useState(false);
   const currencySymbol = getCurrencySymbol(inputs.currency);

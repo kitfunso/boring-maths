@@ -31,6 +31,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const MEAL_TYPE_OPTIONS = [
   { value: 'appetizers_only', label: 'Apps Only' },
   { value: 'light_meal', label: 'Light' },
@@ -53,6 +54,9 @@ const EVENT_TIME_OPTIONS = [
 ];
 
 export default function CateringCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Catering Calculator');
+
   const [inputs, setInputs] = useState<CateringInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

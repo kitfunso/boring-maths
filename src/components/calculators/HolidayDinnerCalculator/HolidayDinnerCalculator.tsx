@@ -29,6 +29,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const LEFTOVER_OPTIONS = [
   { value: 'none', label: 'No Leftovers' },
   { value: 'some', label: 'Some Leftovers' },
@@ -47,6 +48,9 @@ const COOKING_METHOD_OPTIONS = [
 ];
 
 export default function HolidayDinnerCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Holiday Dinner Calculator');
+
   const [inputs, setInputs] = useState<HolidayDinnerInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateHolidayDinner(inputs), [inputs]);

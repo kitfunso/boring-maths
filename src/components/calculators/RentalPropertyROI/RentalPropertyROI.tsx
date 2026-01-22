@@ -29,7 +29,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function RentalPropertyROI() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Rental Property ROI Calculator');
+
   const [inputs, setInputs] = useState<RentalPropertyInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

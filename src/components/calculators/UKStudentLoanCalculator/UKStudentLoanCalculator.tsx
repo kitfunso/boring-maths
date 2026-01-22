@@ -5,12 +5,16 @@ import { getDefaultInputs, LOAN_PLANS, type UKStudentLoanInputs, type LoanPlan }
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const loanPlanOptions = Object.entries(LOAN_PLANS).map(([key, plan]) => ({
   value: key as LoanPlan,
   label: plan.name,
 }));
 
 export default function UKStudentLoanCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Student Loan Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKStudentLoanInputs>(
     'calc-uk-student-loan-inputs',
     getDefaultInputs

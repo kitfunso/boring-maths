@@ -27,7 +27,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function TipCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Tip');
+
   const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () =>
     getDefaultInputs(getInitialCurrency())
   );

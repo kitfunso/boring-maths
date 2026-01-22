@@ -29,7 +29,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function EmployeeCost() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Employee Cost Calculator');
+
   const [inputs, setInputs] = useState<EmployeeCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

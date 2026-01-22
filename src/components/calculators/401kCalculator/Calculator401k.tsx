@@ -21,7 +21,11 @@ import {
   PrintResults,
 } from '../../ui';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function Calculator401k() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('401k Calculator');
+
   const [inputs, setInputs] = useLocalStorage<Calculator401kInputs>(
     'calc-401k-inputs',
     getDefaultInputs

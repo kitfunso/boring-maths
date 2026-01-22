@@ -24,7 +24,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function BreakEvenCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Break-Even Point');
+
   const [inputs, setInputs] = useState<BreakEvenInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

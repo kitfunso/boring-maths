@@ -29,7 +29,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ConsultingRate() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Consulting Rate Calculator');
+
   const [inputs, setInputs] = useState<ConsultingRateInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

@@ -28,6 +28,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const SEATING_STYLE_OPTIONS = [
   { value: 'theater', label: 'Theater' },
   { value: 'classroom', label: 'Classroom' },
@@ -43,6 +44,9 @@ const ROOM_SHAPE_OPTIONS = [
 ];
 
 export default function ConferenceRoomCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Conference Room Calculator');
+
   const [inputs, setInputs] = useState<ConferenceRoomInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateConferenceRoom(inputs), [inputs]);

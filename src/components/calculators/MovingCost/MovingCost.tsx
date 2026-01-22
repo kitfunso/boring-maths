@@ -32,6 +32,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const MOVE_TYPE_OPTIONS = [
   { value: 'local', label: 'Local (<50mi)' },
   { value: 'long_distance', label: 'Long Distance' },
@@ -59,6 +60,9 @@ const SEASON_OPTIONS = [
 ];
 
 export default function MovingCost() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Moving Cost Estimator');
+
   const [inputs, setInputs] = useState<MovingCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

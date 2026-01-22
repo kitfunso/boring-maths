@@ -27,7 +27,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function WeddingAlcoholCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Estimate Your Wedding Alcohol');
+
   const [inputs, setInputs] = useState<WeddingAlcoholInputs>(DEFAULT_INPUTS);
 
   // Calculate results whenever inputs change

@@ -29,7 +29,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function HSACalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('HSA Calculator');
+
   const [inputs, setInputs] = useState<HSAInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateHSA(inputs), [inputs]);

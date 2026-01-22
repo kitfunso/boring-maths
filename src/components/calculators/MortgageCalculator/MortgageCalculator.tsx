@@ -26,7 +26,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function MortgageCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Mortgage');
+
   const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () =>
     getDefaultInputs(getInitialCurrency())
   );

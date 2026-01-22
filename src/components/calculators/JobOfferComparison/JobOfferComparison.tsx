@@ -30,6 +30,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 /**
  * Single offer input panel
  */
@@ -301,6 +302,9 @@ function ComparisonBar({
 }
 
 export default function JobOfferComparison() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Compare Job Offers');
+
   const [inputs, setInputs] = useState<JobOfferComparisonInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

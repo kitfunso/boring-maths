@@ -11,6 +11,7 @@ import {
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
@@ -26,6 +27,9 @@ const ASSET_TYPE_OPTIONS = [
 ];
 
 export default function USCapitalGainsTaxCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Capital Gains Tax Calculator');
+
   const [inputs, setInputs] = useLocalStorage<USCapitalGainsInputs>(
     'calc-us-capital-gains-inputs',
     getDefaultInputs

@@ -34,7 +34,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function FishStockingCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Fish Stocking Calculator');
+
   const [inputs, setInputs] = useState<FishStockingInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateFishStocking(inputs), [inputs]);

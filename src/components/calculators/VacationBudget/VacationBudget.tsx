@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const DESTINATION_OPTIONS = [
   { value: 'domestic', label: 'Domestic' },
   { value: 'international_cheap', label: 'International (Budget)' },
@@ -51,6 +52,9 @@ const TRAVEL_STYLE_OPTIONS = [
 ];
 
 export default function VacationBudget() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Vacation Budget Planner');
+
   const [inputs, setInputs] = useState<VacationBudgetInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

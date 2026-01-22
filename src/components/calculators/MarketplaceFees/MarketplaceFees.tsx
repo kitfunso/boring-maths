@@ -29,6 +29,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const PLATFORM_COLORS = {
   etsy: 'bg-orange-500/20 border-orange-500 text-orange-400',
   ebay: 'bg-blue-500/20 border-blue-500 text-blue-400',
@@ -36,6 +37,9 @@ const PLATFORM_COLORS = {
 };
 
 export default function MarketplaceFees() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Marketplace Fees Calculator');
+
   const [inputs, setInputs] = useState<MarketplaceFeesInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

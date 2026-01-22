@@ -24,7 +24,11 @@ import {
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Select, Alert } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function W2To1099Calculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('W2 to 1099 Rate Calculator');
+
   const [inputs, setInputs] = useLocalStorage<W2To1099CalculatorInputs>(
     'calc-w2-to-1099-inputs',
     getDefaultInputs

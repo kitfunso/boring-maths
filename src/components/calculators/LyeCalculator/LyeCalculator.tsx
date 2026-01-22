@@ -35,7 +35,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function LyeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Soap Lye Calculator');
+
   const [inputs, setInputs] = useState<LyeCalculatorInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateLye(inputs), [inputs]);

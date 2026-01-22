@@ -26,7 +26,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function RemoteWorkSavingsCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Remote Work Savings Calculator');
+
   const [inputs, setInputs] = useState<RemoteWorkSavingsInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

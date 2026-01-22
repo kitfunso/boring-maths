@@ -36,6 +36,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const BUSINESS_TYPE_OPTIONS = [
   { value: 'consulting', label: 'Consulting' },
   { value: 'ecommerce', label: 'E-Commerce' },
@@ -46,6 +47,9 @@ const BUSINESS_TYPE_OPTIONS = [
 ];
 
 export default function StartupCost() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Startup Cost Calculator');
+
   const [inputs, setInputs] = useState<StartupCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

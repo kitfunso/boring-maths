@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function DiscountCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Discount Calculator');
+
   const [inputs, setInputs] = useState<DiscountInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

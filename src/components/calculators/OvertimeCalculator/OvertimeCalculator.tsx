@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function OvertimeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Is Overtime Worth It?');
+
   const [inputs, setInputs] = useState<OvertimeCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

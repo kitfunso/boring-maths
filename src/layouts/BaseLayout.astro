@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
 // Determine OG image: use custom if provided, otherwise default
 const ogImageURL = ogImage
   ? new URL(ogImage, siteURL).href
-  : new URL('/og/default.png', siteURL).href;
+  : new URL('/og/default.webp', siteURL).href;
 ---
 
 <!doctype html>

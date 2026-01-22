@@ -32,7 +32,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ABVCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('ABV Calculator');
+
   const [inputs, setInputs] = useState<ABVInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateABV(inputs), [inputs]);

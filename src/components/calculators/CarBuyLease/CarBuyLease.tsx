@@ -29,7 +29,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function CarBuyLease() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Car Buy vs Lease Calculator');
+
   const [inputs, setInputs] = useState<CarBuyLeaseInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

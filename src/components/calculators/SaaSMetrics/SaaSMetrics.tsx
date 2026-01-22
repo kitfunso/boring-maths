@@ -29,6 +29,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const SCORE_COLORS = {
   excellent: 'text-emerald-400 bg-emerald-500/20',
   good: 'text-blue-400 bg-blue-500/20',
@@ -37,6 +38,9 @@ const SCORE_COLORS = {
 };
 
 export default function SaaSMetrics() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('SaaS Metrics Calculator');
+
   const [inputs, setInputs] = useState<SaaSMetricsInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

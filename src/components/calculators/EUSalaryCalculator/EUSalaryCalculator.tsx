@@ -25,7 +25,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function EUSalaryCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('EU Salary Calculator');
+
   const [inputs, setInputs] = useState<SalaryInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateSalary(inputs), [inputs]);

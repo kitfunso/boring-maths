@@ -34,6 +34,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const PRIORITY_LABELS: Record<Priority, string> = {
   low: 'Save Here',
   medium: 'Standard',
@@ -49,6 +50,9 @@ const PRIORITY_COLORS: Record<Priority, string> = {
 };
 
 export default function WeddingBudget() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Wedding Budget Calculator');
+
   const [inputs, setInputs] = useState<WeddingBudgetInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

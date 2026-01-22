@@ -39,6 +39,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const VENUE_OPTIONS = [
   { value: 'home', label: 'Home' },
   { value: 'park', label: 'Park' },
@@ -53,6 +54,9 @@ const STYLE_OPTIONS = [
 ];
 
 export default function BirthdayPartyBudget() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Birthday Party Budget');
+
   const [inputs, setInputs] = useState<BirthdayPartyInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

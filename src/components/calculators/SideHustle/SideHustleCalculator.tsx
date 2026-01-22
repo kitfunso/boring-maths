@@ -28,7 +28,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function SideHustleCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Analyze Your Side Hustle');
+
   const [inputs, setInputs] = useState<SideHustleInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

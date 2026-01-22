@@ -19,7 +19,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function AgeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Age Calculator');
+
   const [inputs, setInputs] = useState<AgeCalculatorInputs>(() => getDefaultInputs());
 
   const result: AgeResult = useMemo(() => {

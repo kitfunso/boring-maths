@@ -28,7 +28,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function BMICalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your BMI');
+
   const [inputs, setInputs] = useLocalStorage<BMIInputs>('calc-bmi-inputs', getDefaultInputs);
 
   const result: BMIResult = useMemo(() => {

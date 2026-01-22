@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function SavingsGoalCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Plan Your Savings Goal');
+
   const [inputs, setInputs] = useState<SavingsGoalInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

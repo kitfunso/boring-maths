@@ -11,6 +11,7 @@ import {
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const sacrificeTypeOptions = Object.entries(SACRIFICE_TYPES).map(([key, type]) => ({
   value: key as SacrificeType,
   label: type.name,
@@ -22,6 +23,9 @@ const taxRegionOptions = [
 ];
 
 export default function UKSalarySacrificeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Salary Sacrifice Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKSalarySacrificeInputs>(
     'calc-uk-salary-sacrifice-inputs',
     getDefaultInputs

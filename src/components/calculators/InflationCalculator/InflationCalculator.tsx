@@ -25,7 +25,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function InflationCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Inflation Calculator');
+
   const [inputs, setInputs] = useState<InflationInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateInflation(inputs), [inputs]);

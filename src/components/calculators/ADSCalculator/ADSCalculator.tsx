@@ -18,7 +18,11 @@ import {
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ADSCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Additional Dwelling Supplement Calculator');
+
   const [inputs, setInputs] = useLocalStorage<ADSCalculatorInputs>(
     'calc-ads-inputs',
     getDefaultInputs

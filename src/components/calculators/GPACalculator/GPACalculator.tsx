@@ -27,7 +27,11 @@ import {
   PrintResults,
 } from '../../ui';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function GPACalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('GPA Calculator');
+
   const [inputs, setInputs] = useLocalStorage<GPACalculatorInputs>(
     'calc-gpa-inputs',
     getDefaultInputs

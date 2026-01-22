@@ -37,10 +37,14 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 /**
  * Main calculator component
  */
 export default function FreelanceDayRateCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Day Rate');
+
   const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

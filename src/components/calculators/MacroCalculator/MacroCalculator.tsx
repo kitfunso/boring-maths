@@ -30,7 +30,11 @@ import {
   PrintResults,
 } from '../../ui';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function MacroCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Macro Calculator');
+
   const [inputs, setInputs] = useLocalStorage<MacroCalculatorInputs>(
     'calc-macro-inputs',
     getDefaultInputs

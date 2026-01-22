@@ -5,7 +5,11 @@ import { getDefaultInputs, HICBC_THRESHOLDS, type UKChildBenefitInputs } from '.
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UKChildBenefitCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Child Benefit Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKChildBenefitInputs>(
     'calc-uk-child-benefit-inputs',
     getDefaultInputs

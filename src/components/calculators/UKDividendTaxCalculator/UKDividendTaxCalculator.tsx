@@ -5,7 +5,11 @@ import { getDefaultInputs, DIVIDEND_RATES, type UKDividendTaxInputs } from './ty
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UKDividendTaxCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Dividend Tax Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKDividendTaxInputs>(
     'calc-uk-dividend-tax-inputs',
     getDefaultInputs

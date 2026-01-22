@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function EmergencyFundCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Build Your Emergency Fund');
+
   const [inputs, setInputs] = useState<EmergencyFundInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

@@ -40,7 +40,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function MulchCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Mulch Needs');
+
   const [inputs, setInputs] = useState<MulchCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

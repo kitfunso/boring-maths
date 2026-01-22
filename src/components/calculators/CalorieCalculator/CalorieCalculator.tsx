@@ -28,7 +28,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function CalorieCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calorie Calculator');
+
   const [inputs, setInputs] = useState<CalorieInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateCalories(inputs), [inputs]);

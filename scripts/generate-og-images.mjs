@@ -1,13 +1,15 @@
 /**
  * Generate OG Images for all calculators
  *
- * Uses satori to render JSX to SVG, then resvg to convert to PNG
+ * Uses satori to render JSX to SVG, then resvg to convert to PNG,
+ * then sharp to convert to optimized WebP for smaller file sizes.
  * Run: node scripts/generate-og-images.mjs
  */
 
 import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import sharp from 'sharp';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -287,7 +289,14 @@ async function generateOGImage(calculator, fonts) {
     },
   });
 
-  return resvg.render().asPng();
+  const pngBuffer = resvg.render().asPng();
+
+  // Convert PNG to WebP for smaller file size (typically 60-80% smaller)
+  const webpBuffer = await sharp(pngBuffer)
+    .webp({ quality: 85, effort: 6 })
+    .toBuffer();
+
+  return webpBuffer;
 }
 
 // Main function
@@ -301,14 +310,16 @@ async function main() {
     mkdirSync(outputDir, { recursive: true });
   }
 
-  console.log(`Generating ${calculators.length} OG images...`);
+  console.log(`Generating ${calculators.length} OG images as WebP...`);
 
+  let totalSaved = 0;
   for (const calc of calculators) {
     try {
-      const png = await generateOGImage(calc, fonts);
-      const outputPath = join(outputDir, `${calc.id}.png`);
-      writeFileSync(outputPath, png);
-      console.log(`  ✓ ${calc.name} -> ${calc.id}.png`);
+      const webp = await generateOGImage(calc, fonts);
+      const outputPath = join(outputDir, `${calc.id}.webp`);
+      writeFileSync(outputPath, webp);
+      totalSaved += webp.length;
+      console.log(`  ✓ ${calc.name} -> ${calc.id}.webp (${Math.round(webp.length / 1024)}KB)`);
     } catch (error) {
       console.error(`  ✗ ${calc.name}: ${error.message}`);
     }
@@ -323,14 +334,15 @@ async function main() {
       color: '#c4ff00',
       tagline: 'Free Online Calculators',
     };
-    const png = await generateOGImage(defaultCalc, fonts);
-    writeFileSync(join(outputDir, 'default.png'), png);
-    console.log('  ✓ Default OG image');
+    const webp = await generateOGImage(defaultCalc, fonts);
+    writeFileSync(join(outputDir, 'default.webp'), webp);
+    totalSaved += webp.length;
+    console.log(`  ✓ Default OG image (${Math.round(webp.length / 1024)}KB)`);
   } catch (error) {
     console.error(`  ✗ Default: ${error.message}`);
   }
 
-  console.log('\nDone! OG images saved to public/og/');
+  console.log(`\nDone! OG images saved to public/og/ (Total: ${(totalSaved / 1024 / 1024).toFixed(2)}MB)`);
 }
 
 main().catch(console.error);

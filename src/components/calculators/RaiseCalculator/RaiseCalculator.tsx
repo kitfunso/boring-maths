@@ -25,7 +25,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function RaiseCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Raise Value');
+
   const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

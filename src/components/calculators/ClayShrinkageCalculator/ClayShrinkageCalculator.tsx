@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ClayShrinkageCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Clay Shrinkage Calculator');
+
   const [inputs, setInputs] = useState<ClayShrinkageInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateClayShrinkage(inputs), [inputs]);

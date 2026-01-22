@@ -30,7 +30,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function DebtPayoffCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Debt Payoff Calculator');
+
   const [inputs, setInputs] = useState<DebtPayoffInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 /**
  * Single subscription row
  */
@@ -174,6 +175,9 @@ function RecommendationBadge({ recommendation }: { recommendation: 'keep' | 'rev
 }
 
 export default function SubscriptionAudit() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Subscription Audit');
+
   const [inputs, setInputs] = useState<SubscriptionAuditInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

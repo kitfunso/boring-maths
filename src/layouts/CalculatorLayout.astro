@@ -47,10 +47,10 @@ const calculatorOgImage =
       // Extract calculator slug from URL like "/calculators/tip-calculator"
       const match = canonicalURL.match(/\/calculators\/([^\/]+)/);
       if (match) {
-        return `/og/${match[1]}.png`;
+        return `/og/${match[1]}.webp`;
       }
     }
-    return '/og/default.png';
+    return '/og/default.webp';
   })();
 
 // Icon paths for related calculator cards

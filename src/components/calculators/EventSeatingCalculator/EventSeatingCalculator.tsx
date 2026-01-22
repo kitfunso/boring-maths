@@ -28,6 +28,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const TABLE_SHAPE_OPTIONS = [
   { value: 'round', label: 'Round' },
   { value: 'rectangular', label: 'Rectangular' },
@@ -68,6 +69,9 @@ const TABLE_SIZE_OPTIONS: Record<TableShape, { value: number; label: string }[]>
 };
 
 export default function EventSeatingCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Event Seating Calculator');
+
   const [inputs, setInputs] = useState<EventSeatingInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateEventSeating(inputs), [inputs]);

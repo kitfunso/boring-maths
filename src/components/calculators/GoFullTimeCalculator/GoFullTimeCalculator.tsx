@@ -38,7 +38,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function GoFullTimeCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Go Full-Time Calculator');
+
   // State
   const [inputs, setInputs] = useState<GoFullTimeInputs>(() =>
     getDefaultInputs(getInitialCurrency())

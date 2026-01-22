@@ -26,7 +26,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UnitConverter() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Unit Converter');
+
   const [inputs, setInputs] = useState<UnitConverterInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => convert(inputs), [inputs]);

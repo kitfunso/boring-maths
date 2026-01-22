@@ -32,7 +32,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function SpeedsFeedsCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Speeds & Feeds Calculator');
+
   const [inputs, setInputs] = useState<SpeedsFeedsInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateSpeedsFeeds(inputs), [inputs]);

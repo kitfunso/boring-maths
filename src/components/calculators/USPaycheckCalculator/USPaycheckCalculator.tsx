@@ -28,7 +28,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function USPaycheckCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('US Paycheck Calculator');
+
   const [inputs, setInputs] = useState<PaycheckInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculatePaycheck(inputs), [inputs]);

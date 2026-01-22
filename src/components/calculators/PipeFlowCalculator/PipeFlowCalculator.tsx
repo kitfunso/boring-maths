@@ -27,7 +27,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PipeFlowCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Pipe Flow Calculator');
+
   const [inputs, setInputs] = useState<PipeFlowInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => {

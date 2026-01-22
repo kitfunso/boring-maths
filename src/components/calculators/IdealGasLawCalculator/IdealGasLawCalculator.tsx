@@ -28,7 +28,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function IdealGasLawCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Ideal Gas Law Calculator');
+
   const [inputs, setInputs] = useState<IdealGasInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => {

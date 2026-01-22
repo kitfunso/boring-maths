@@ -35,6 +35,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const PATH_OPTIONS = [
   { value: 'four_year', label: '🎓 4-Year College' },
   { value: 'community_college', label: '📚 Community College' },
@@ -44,6 +45,9 @@ const PATH_OPTIONS = [
 ];
 
 export default function CollegeROI() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('College ROI Calculator');
+
   const [inputs, setInputs] = useState<CollegeROIInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

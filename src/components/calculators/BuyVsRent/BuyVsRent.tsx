@@ -26,7 +26,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function BuyVsRent() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Buy vs Rent Calculator');
+
   const [inputs, setInputs] = useState<BuyVsRentInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

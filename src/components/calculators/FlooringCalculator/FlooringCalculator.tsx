@@ -38,7 +38,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function FlooringCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Calculate Your Flooring Needs');
+
   const [inputs, setInputs] = useState<FlooringCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

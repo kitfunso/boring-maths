@@ -27,7 +27,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function NetWorthCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Net Worth Calculator');
+
   const [inputs, setInputs] = useState<NetWorthInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculateNetWorth(inputs), [inputs]);

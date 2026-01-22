@@ -36,7 +36,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function FIRECalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('FIRE Calculator');
+
   const [inputs, setInputs] = useState<FIRECalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

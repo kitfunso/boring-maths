@@ -12,7 +12,11 @@ import {
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UKStampDutyCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Stamp Duty Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKStampDutyInputs>(
     'calc-uk-stamp-duty-inputs',
     getDefaultInputs

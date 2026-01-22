@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const CHILDCARE_OPTIONS = [
   { value: 'none', label: 'Stay-at-home' },
   { value: 'family', label: 'Family help' },
@@ -62,6 +63,9 @@ const GEAR_OPTIONS = [
 ];
 
 export default function BabyCost() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Baby Cost Calculator');
+
   const [inputs, setInputs] = useState<BabyCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

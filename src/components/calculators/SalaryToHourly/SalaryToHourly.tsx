@@ -26,7 +26,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function SalaryToHourly() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Salary to Hourly Calculator');
+
   const [inputs, setInputs] = useState<SalaryToHourlyInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

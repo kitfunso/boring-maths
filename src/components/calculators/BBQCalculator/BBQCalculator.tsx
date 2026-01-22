@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function BBQCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Plan Your BBQ');
+
   const [inputs, setInputs] = useState<BBQCalculatorInputs>(() => getDefaultInputs());
 
   // Calculate results

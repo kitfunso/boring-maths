@@ -31,6 +31,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const GRADUATION_TYPE_OPTIONS = [
   { value: 'high_school', label: 'High School' },
   { value: 'college', label: 'College' },
@@ -50,6 +51,9 @@ const MENU_STYLE_OPTIONS = [
 ];
 
 export default function GraduationPartyPlanner() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Graduation Party Planner');
+
   const [inputs, setInputs] = useState<GraduationPartyInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

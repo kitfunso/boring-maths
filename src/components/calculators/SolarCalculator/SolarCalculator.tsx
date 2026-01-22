@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const SYSTEM_SIZE_OPTIONS = [
   { value: 'small', label: '4 kW' },
   { value: 'medium', label: '7 kW' },
@@ -45,6 +46,9 @@ const SYSTEM_SIZE_OPTIONS = [
 ];
 
 export default function SolarCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Solar Panel Calculator');
+
   const [inputs, setInputs] = useState<SolarCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

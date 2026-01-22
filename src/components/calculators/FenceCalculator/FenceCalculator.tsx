@@ -37,6 +37,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const MATERIAL_OPTIONS = [
   { value: 'wood', label: 'Wood' },
   { value: 'vinyl', label: 'Vinyl' },
@@ -52,6 +53,9 @@ const HEIGHT_OPTIONS = [
 ];
 
 export default function FenceCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Fence Calculator');
+
   const [inputs, setInputs] = useState<FenceCalculatorInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

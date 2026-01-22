@@ -32,6 +32,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 const PET_ICONS: Record<PetType, string> = {
   dog: '🐕',
   cat: '🐈',
@@ -65,6 +66,9 @@ const HEALTH_OPTIONS = [
 ];
 
 export default function PetCost() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Pet Ownership Cost Calculator');
+
   const [inputs, setInputs] = useState<PetCostInputs>(() => getDefaultInputs(getInitialCurrency()));
 
   const result = useMemo(() => calculatePetCost(inputs), [inputs]);

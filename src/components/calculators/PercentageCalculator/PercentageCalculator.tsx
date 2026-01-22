@@ -31,7 +31,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PercentageCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Percentage Calculator');
+
   const [inputs, setInputs] = useState<PercentageCalculatorInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => calculate(inputs), [inputs]);

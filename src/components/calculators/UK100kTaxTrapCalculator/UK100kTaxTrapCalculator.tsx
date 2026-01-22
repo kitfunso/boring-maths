@@ -29,7 +29,11 @@ import {
   PrintResults,
 } from '../../ui';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UK100kTaxTrapCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK £100k Tax Trap Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UK100kInputs>('calc-uk100k-inputs', getDefaultInputs);
 
   const result = useMemo(() => calculateUK100kTax(inputs), [inputs]);

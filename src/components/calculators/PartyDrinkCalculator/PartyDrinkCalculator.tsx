@@ -35,7 +35,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function PartyDrinkCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('Plan Your Party Drinks');
+
   const [inputs, setInputs] = useState<PartyDrinkInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

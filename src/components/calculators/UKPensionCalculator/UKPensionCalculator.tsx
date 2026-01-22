@@ -5,7 +5,11 @@ import { getDefaultInputs, PENSION_CONSTANTS, type UKPensionInputs } from './typ
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function UKPensionCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('UK Pension Calculator');
+
   const [inputs, setInputs] = useLocalStorage<UKPensionInputs>(
     'calc-uk-pension-inputs',
     getDefaultInputs

@@ -27,7 +27,11 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
+import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function LMTDCalculator() {
+  // Track calculator usage for analytics
+  useCalculatorTracking('LMTD Calculator');
+
   const [inputs, setInputs] = useState<LMTDInputs>(() => getDefaultInputs());
 
   const result = useMemo(() => {
