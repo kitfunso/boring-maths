@@ -1178,8 +1178,29 @@ const categoryColors: Record<string, string> = {
         </div>
       </div>
 
-      <!-- Category Filter - scrollable on mobile -->
-      <div class="flex md:flex-wrap md:justify-center gap-2 mb-2 overflow-x-auto pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide" id="category-filter">
+      <!-- Mobile Filter Toggle Button -->
+      <div class="md:hidden mb-3">
+        <button
+          id="mobile-filter-toggle"
+          class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[var(--color-charcoal)] border border-white/10 text-[var(--color-cream)]"
+        >
+          <span class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            <span class="text-sm font-medium">Filter by Category</span>
+          </span>
+          <span class="flex items-center gap-2">
+            <span id="active-filter-badge" class="hidden px-2 py-0.5 rounded-full bg-[var(--color-accent)] text-[var(--color-void)] text-xs font-medium"></span>
+            <svg id="filter-chevron" class="w-5 h-5 text-[var(--color-muted)] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Category Filter - hidden on mobile by default, shown on desktop -->
+      <div id="filter-panel" class="hidden md:flex md:flex-wrap md:justify-center gap-2 mb-2 overflow-x-auto pb-2 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide transition-all duration-300 ease-out">
         <!-- Favorites toggle -->
         <button
           class="category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border
@@ -1206,11 +1227,11 @@ const categoryColors: Record<string, string> = {
             {category}
           </button>
         ))}
-        
+
       </div>
 
-      <!-- Region Filter - scrollable on mobile -->
-      <div class="flex md:flex-wrap md:justify-center gap-2 mb-4 md:mb-6 overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide" id="region-filter">
+      <!-- Region Filter - hidden on mobile by default, shown on desktop -->
+      <div id="region-filter-panel" class="hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4 md:mb-6 overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide transition-all duration-300 ease-out">
         <span class="text-xs text-[var(--color-muted)] uppercase tracking-wider mr-2 self-center">Region:</span>
         <button
           class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
@@ -1430,6 +1451,44 @@ const categoryColors: Record<string, string> = {
     const recentlyUsedSection = document.getElementById('recently-used-section');
     const recentlyUsedGrid = document.getElementById('recently-used-grid');
     const clearRecentBtn = document.getElementById('clear-recent');
+
+    // Mobile filter toggle
+    const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+    const filterPanel = document.getElementById('filter-panel');
+    const regionFilterPanel = document.getElementById('region-filter-panel');
+    const filterChevron = document.getElementById('filter-chevron');
+    const activeFilterBadge = document.getElementById('active-filter-badge');
+    let filtersExpanded = false;
+
+    function toggleMobileFilters() {
+      filtersExpanded = !filtersExpanded;
+      if (filtersExpanded) {
+        filterPanel?.classList.remove('hidden');
+        filterPanel?.classList.add('flex', 'flex-wrap');
+        regionFilterPanel?.classList.remove('hidden');
+        regionFilterPanel?.classList.add('flex', 'flex-wrap');
+        filterChevron?.classList.add('rotate-180');
+      } else {
+        filterPanel?.classList.add('hidden');
+        filterPanel?.classList.remove('flex', 'flex-wrap');
+        regionFilterPanel?.classList.add('hidden');
+        regionFilterPanel?.classList.remove('flex', 'flex-wrap');
+        filterChevron?.classList.remove('rotate-180');
+      }
+    }
+
+    function updateActiveFilterBadge(filterName: string | null) {
+      if (activeFilterBadge) {
+        if (filterName && filterName !== 'All') {
+          activeFilterBadge.textContent = filterName;
+          activeFilterBadge.classList.remove('hidden');
+        } else {
+          activeFilterBadge.classList.add('hidden');
+        }
+      }
+    }
+
+    mobileFilterToggle?.addEventListener('click', toggleMobileFilters);
 
     // Storage keys
     const FAVORITES_KEY = 'boring-math-favorites';
@@ -1712,9 +1771,11 @@ const categoryColors: Record<string, string> = {
           if (showingFavorites) {
             button.classList.remove('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
             button.classList.add('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+            updateActiveFilterBadge('Favorites');
           } else {
             button.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
             button.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+            updateActiveFilterBadge(currentCategory !== 'All' ? currentCategory : (currentCountry !== 'all' ? currentCountry : null));
           }
         } else {
           const isCountryFilter = button.hasAttribute("data-country");
@@ -1722,9 +1783,11 @@ const categoryColors: Record<string, string> = {
           if (isCountryFilter) {
             currentCategory = "All";
             currentCountry = button.getAttribute("data-country") || "all";
+            updateActiveFilterBadge(currentCountry !== 'all' ? currentCountry : null);
           } else {
             currentCategory = category || "All";
             currentCountry = "all";
+            updateActiveFilterBadge(currentCategory !== 'All' ? currentCategory : null);
           }
           showingFavorites = false;
 
@@ -1752,6 +1815,11 @@ const categoryColors: Record<string, string> = {
         }
 
         filterCards();
+
+        // Auto-collapse filters on mobile after selection
+        if (window.innerWidth < 768 && filtersExpanded) {
+          toggleMobileFilters();
+        }
       });
     });
 
