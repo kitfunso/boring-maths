@@ -33,6 +33,9 @@ export interface CurrencySelectorProps {
  * ```
  */
 export function CurrencySelector({ value, onChange, className = '' }: CurrencySelectorProps) {
+  // Ref to the select element for direct DOM manipulation
+  const selectRef = useRef<HTMLSelectElement>(null);
+
   // Keep refs to avoid stale closures in event handlers
   const valueRef = useRef(value);
   const onChangeRef = useRef(onChange);
@@ -42,6 +45,13 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
     valueRef.current = value;
     onChangeRef.current = onChange;
   }, [value, onChange]);
+
+  // Force select DOM to match value prop (fixes hydration mismatch)
+  useIsomorphicLayoutEffect(() => {
+    if (selectRef.current && selectRef.current.value !== value) {
+      selectRef.current.value = value;
+    }
+  }, [value]);
 
   // Sync with global currency preference
   const syncWithGlobal = () => {
@@ -97,7 +107,7 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
 
   return (
     <select
-      key={`currency-select-${value}`}
+      ref={selectRef}
       value={value}
       onChange={(e) => handleChange(e.currentTarget.value as Currency)}
       className={`
