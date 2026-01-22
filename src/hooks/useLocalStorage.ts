@@ -8,7 +8,7 @@
  * sync with the global currency preference from 'boring-math-currency'.
  */
 
-import { useState, useEffect, useCallback } from 'preact/hooks';
+import { useState, useEffect, useCallback, useRef } from 'preact/hooks';
 import { type Currency, getInitialCurrency } from '../lib/regions';
 
 const CURRENCY_STORAGE_KEY = 'boring-math-currency';
@@ -50,6 +50,40 @@ export function useLocalStorage<T>(
   };
 
   const [state, setState] = useState<T>(getInitialValue);
+
+  // Keep a ref to current state for use in event handlers
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
+
+  // Re-sync currency on page navigation (for Astro View Transitions)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const syncCurrency = () => {
+      const currentState = stateRef.current;
+      // Only sync if state has a currency field
+      if (currentState && typeof currentState === 'object' && 'currency' in currentState) {
+        const globalCurrency = getInitialCurrency();
+        const currentCurrency = (currentState as { currency: Currency }).currency;
+
+        if (globalCurrency !== currentCurrency) {
+          setState((prev) => ({ ...prev, currency: globalCurrency }) as T);
+        }
+      }
+    };
+
+    // Sync on Astro page load (View Transitions)
+    document.addEventListener('astro:page-load', syncCurrency);
+
+    // Also sync immediately in case we just navigated
+    syncCurrency();
+
+    return () => {
+      document.removeEventListener('astro:page-load', syncCurrency);
+    };
+  }, [key]); // Only re-run if key changes
 
   // Persist to localStorage whenever state changes
   useEffect(() => {
