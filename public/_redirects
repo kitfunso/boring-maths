@@ -1,0 +1,17 @@
+# Redirect trailing slashes to non-trailing slash versions
+# This ensures URL consistency with trailingSlash: 'never' in Astro config
+# Format: [from] [to] [status]
+
+# Static pages
+/about/                      /about                       301!
+/privacy/                    /privacy                     301!
+/affiliate-disclosure/       /affiliate-disclosure        301!
+
+# Calculator category pages
+/calculators/business/       /calculators/business        301!
+
+# All calculator pages (must come after more specific rules)
+/calculators/*/              /calculators/:splat          301!
+
+# Calculators index - redirect to homepage (which shows all calculators)
+/calculators/                /                            301!

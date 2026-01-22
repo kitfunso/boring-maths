@@ -5,7 +5,7 @@
    "Boring" name, breathtaking design - the ultimate irony
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* Google Fonts - Loaded via preload in BaseLayout.astro for performance */
+/* Fonts loaded locally via @fontsource in BaseLayout.astro for faster LCP */
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Design Tokens

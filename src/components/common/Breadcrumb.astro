@@ -1,0 +1,100 @@
+---
+/**
+ * Breadcrumb Navigation Component
+ *
+ * Provides visual navigation breadcrumbs for calculator pages.
+ * Matches the existing schema markup in SEOHead.astro.
+ */
+
+export interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+
+// Always include Home as the first item
+const breadcrumbs = [{ name: 'Home', href: '/' }, ...items];
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex items-center flex-wrap gap-1.5 text-sm">
+    {
+      breadcrumbs.map((item, index) => {
+        const isLast = index === breadcrumbs.length - 1;
+        return (
+          <li class="flex items-center">
+            {index > 0 && (
+              <svg
+                class="w-4 h-4 text-[var(--color-muted)] mx-1.5 flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            )}
+            {isLast ? (
+              <span
+                class="text-[var(--color-subtle)] font-medium truncate max-w-[200px] sm:max-w-none"
+                aria-current="page"
+              >
+                {item.name}
+              </span>
+            ) : (
+              <a
+                href={item.href}
+                class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors truncate max-w-[100px] sm:max-w-none"
+              >
+                {item.name}
+              </a>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
+
+<style>
+  nav {
+    /* Fade in animation */
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile: horizontal scroll if too long */
+  @media (max-width: 640px) {
+    ol {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      flex-wrap: nowrap;
+      padding-bottom: 4px;
+    }
+
+    ol::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>

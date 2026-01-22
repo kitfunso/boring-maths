@@ -1,6 +1,12 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
+// Local fonts - faster than Google Fonts, no external requests
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
 import Analytics from '../components/common/Analytics.astro';
 import CookieConsent from '../components/common/CookieConsent.astro';
 import AdBlockDetector from '../components/common/AdBlockDetector.astro';
@@ -42,28 +48,7 @@ const ogImageURL = ogImage
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#07070a" />
 
-    <!-- Preconnect to Google Fonts for faster font loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Google Fonts - Non-blocking load with reduced weights -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <!-- Fonts loaded locally via @fontsource for faster LCP -->
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullCanonicalURL} />
@@ -106,7 +91,7 @@ const ogImageURL = ogImage
 
     <title>{title}</title>
 
-    <!-- Organization Schema for Google Logo -->
+    <!-- Organization Schema for Google Logo & Knowledge Panel -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
@@ -114,7 +99,17 @@ const ogImageURL = ogImage
         '@type': 'Organization',
         name: 'Boring Math',
         url: 'https://boring-math.com',
-        logo: 'https://boring-math.com/logo.png',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://boring-math.com/logo.png',
+          width: 512,
+          height: 512,
+          caption: 'Boring Math Calculators Logo',
+        },
+        image: 'https://boring-math.com/logo.png',
+        description:
+          'Free online calculators for everyday math problems. Making boring math surprisingly delightful.',
+        foundingDate: '2024',
         sameAs: [],
       })}
     />
