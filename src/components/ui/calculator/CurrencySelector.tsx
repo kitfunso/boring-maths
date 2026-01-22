@@ -43,15 +43,31 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
     onChangeRef.current = onChange;
   }, [value, onChange]);
 
-  // Sync with global currency on mount (synchronously before paint)
-  useIsomorphicLayoutEffect(() => {
+  // Sync with global currency preference
+  const syncWithGlobal = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && ['USD', 'GBP', 'EUR'].includes(stored) && stored !== value) {
-      onChange(stored as Currency);
+    if (stored && ['USD', 'GBP', 'EUR'].includes(stored) && stored !== valueRef.current) {
+      onChangeRef.current(stored as Currency);
     }
-  }, []); // Only on mount
+  };
 
-  // Listen for changes from other calculators
+  // Sync on mount (synchronously before paint)
+  useIsomorphicLayoutEffect(() => {
+    syncWithGlobal();
+  }, []);
+
+  // Re-sync on Astro View Transitions navigation
+  useEffect(() => {
+    const handlePageLoad = () => {
+      // Small delay to ensure localStorage is updated
+      setTimeout(syncWithGlobal, 0);
+    };
+
+    document.addEventListener('astro:page-load', handlePageLoad);
+    return () => document.removeEventListener('astro:page-load', handlePageLoad);
+  }, []);
+
+  // Listen for changes from other calculators/homepage
   useEffect(() => {
     const handler = (e: CustomEvent<{ currency: Currency }>) => {
       const newCurrency = e.detail.currency;
