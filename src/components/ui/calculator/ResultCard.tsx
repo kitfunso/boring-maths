@@ -59,6 +59,9 @@ export function ResultCard({
         rounded-2xl ${SIZE_CLASSES[size].padding} text-center
         ${className}
       `}
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
     >
       <p className={`text-sm font-semibold ${tokens.text600} uppercase tracking-wider mb-2`}>
         {label}

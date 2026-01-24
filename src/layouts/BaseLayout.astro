@@ -118,6 +118,14 @@ const ogImageURL = ogImage
     <ViewTransitions fallback="swap" />
   </head>
   <body class="min-h-screen mesh-bg noise relative">
+    <!-- Skip Link for Keyboard Navigation -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-[var(--color-void)] focus:rounded-lg focus:outline-none"
+    >
+      Skip to main content
+    </a>
+
     <!-- Ambient Glow Background -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
       <div
@@ -190,7 +198,9 @@ const ogImageURL = ogImage
           <!-- Mobile Menu Button -->
           <button
             class="md:hidden p-2 rounded-lg text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5 transition-colors"
-            aria-label="Toggle menu"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
             id="mobile-menu-btn"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -237,7 +247,7 @@ const ogImageURL = ogImage
     <div class="h-[72px]"></div>
 
     <!-- Main Content -->
-    <main class="relative">
+    <main id="main-content" class="relative">
       <slot />
     </main>
 
@@ -385,11 +395,14 @@ const ogImageURL = ogImage
         const newMenuBtn = document.getElementById('mobile-menu-btn');
 
         newMenuBtn?.addEventListener('click', () => {
-          mobileMenu?.classList.toggle('hidden');
+          const isHidden = mobileMenu?.classList.toggle('hidden');
+          // Update aria-expanded for accessibility
+          newMenuBtn.setAttribute('aria-expanded', (!isHidden).toString());
         });
 
-        // Close menu on navigation
+        // Close menu on navigation and reset aria-expanded
         mobileMenu?.classList.add('hidden');
+        newMenuBtn?.setAttribute('aria-expanded', 'false');
       }
 
       // Run on initial load

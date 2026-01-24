@@ -110,6 +110,7 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
       ref={selectRef}
       value={value}
       onChange={(e) => handleChange(e.currentTarget.value as Currency)}
+      aria-label="Select currency"
       className={`
         bg-[var(--color-charcoal)] text-[var(--color-cream)] border border-white/20
         rounded-xl px-4 py-2 text-sm
