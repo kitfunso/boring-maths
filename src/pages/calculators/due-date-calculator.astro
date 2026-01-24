@@ -1,0 +1,202 @@
+---
+/**
+ * Due Date Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import DueDateCalculator from '../../components/calculators/DueDateCalculator/DueDateCalculator';
+
+const title = "Pregnancy Due Date Calculator | Estimate Your Baby's Arrival";
+const description =
+  'Free pregnancy due date calculator. Calculate your estimated delivery date using last menstrual period (LMP), conception date, IVF transfer, or ultrasound measurements.';
+const keywords =
+  'due date calculator, pregnancy calculator, expected delivery date, EDD calculator, pregnancy due date, conception date calculator, IVF due date, ultrasound due date, gestational age calculator';
+const canonicalURL = '/calculators/due-date-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Due Date Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs during pregnancy.',
+    href: '/calculators/calorie-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Baby Cost Calculator',
+    description: 'Estimate the cost of having a baby in the first year.',
+    href: '/calculators/baby-cost-calculator',
+    icon: 'piggy-bank' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is a pregnancy due date calculated?',
+    answer:
+      "The most common method uses Naegele's rule: add 280 days (40 weeks) to the first day of your last menstrual period (LMP). This assumes a 28-day cycle with ovulation on day 14. Our calculator adjusts for different cycle lengths.",
+  },
+  {
+    question: 'Which due date calculation method is most accurate?',
+    answer:
+      'Early ultrasound (between 8-12 weeks) is generally the most accurate method, with a margin of error of about 5-7 days. LMP calculations can be affected by irregular cycles. IVF transfer dates are very accurate since the conception timing is known precisely.',
+  },
+  {
+    question: 'What if my cycle is longer or shorter than 28 days?',
+    answer:
+      'Our calculator adjusts for cycle length. If your cycle is longer than 28 days, ovulation occurs later, pushing your due date back. If shorter, ovulation occurs earlier, moving your due date forward. Enter your average cycle length for a more accurate estimate.',
+  },
+  {
+    question: 'How accurate are due date predictions?',
+    answer:
+      'Only about 4-5% of babies are born on their exact due date. However, about 80% of babies are born within 2 weeks of their due date. Due dates are best thought of as estimates rather than exact predictions.',
+  },
+  {
+    question: 'What do the trimesters mean?',
+    answer:
+      'Pregnancy is divided into three trimesters. The first trimester (weeks 1-12) involves early development. The second trimester (weeks 13-26) is often called the "honeymoon period" as many symptoms ease. The third trimester (weeks 27-40) is when the baby gains most of their weight.',
+  },
+  {
+    question: 'How is IVF due date calculated differently?',
+    answer:
+      "For IVF pregnancies, the due date is calculated from the transfer date rather than LMP. A 5-day embryo transfer adds 261 days, while a 3-day embryo transfer adds 263 days. This accounts for the embryo's development before transfer.",
+  },
+  {
+    question: 'What is gestational age vs. fetal age?',
+    answer:
+      'Gestational age counts from the first day of your last period and is used for due date calculations (40 weeks total). Fetal age counts from conception and is about 2 weeks less than gestational age (38 weeks total). Medical professionals typically use gestational age.',
+  },
+  {
+    question: 'When should I have my first prenatal appointment?',
+    answer:
+      'Most healthcare providers schedule the first prenatal visit between weeks 6-8 of pregnancy. This appointment typically includes confirming the pregnancy, estimating the due date, and initial health screenings.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Due Date Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Pregnancy Due Date Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Pregnancy Due Date Calculator"
+    description="Calculate your estimated due date and track your pregnancy milestones."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <DueDateCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose your preferred <strong>calculation method</strong>. The Last Menstrual Period (LMP)
+      method is most common, but you can also use conception date, IVF transfer date, or ultrasound
+      measurements.
+    </p>
+    <p>
+      For the <strong>LMP method</strong>, enter the first day of your last period and your average
+      cycle length (if different from 28 days). The calculator uses Naegele's rule to estimate your
+      due date.
+    </p>
+    <p>
+      If you know your <strong>conception date</strong>, this can provide a more accurate estimate
+      since it removes uncertainty about ovulation timing.
+    </p>
+    <p>
+      For <strong>IVF pregnancies</strong>, enter your transfer date and embryo type (3-day or
+      5-day). The calculator adjusts for embryo development before transfer.
+    </p>
+    <p>
+      Using <strong>ultrasound measurements</strong>? Enter the date of your ultrasound and the
+      gestational age shown on the report (weeks and days).
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      Your <strong>estimated due date</strong> is the most likely date for delivery, though actual birth
+      dates can vary by 2-3 weeks in either direction.
+    </p>
+    <p>
+      The <strong>progress bar</strong> shows how far along you are in your pregnancy. You'll also see
+      your current trimester and the percentage of pregnancy completed.
+    </p>
+    <p>
+      The <strong>milestone timeline</strong> highlights key pregnancy events and their estimated dates,
+      from early development through to your due date.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Pregnancy Trimesters Explained">
+    <p>
+      <strong>First Trimester (Weeks 1-12):</strong> This is when major organ systems develop. Common
+      symptoms include fatigue, nausea, and breast tenderness. The risk of miscarriage decreases significantly
+      after week 12.
+    </p>
+    <p>
+      <strong>Second Trimester (Weeks 13-26):</strong> Often called the "golden period" as many early
+      symptoms subside. The baby begins moving, and you may learn the gender around week 16-20. The anatomy
+      scan typically occurs at week 20.
+    </p>
+    <p>
+      <strong>Third Trimester (Weeks 27-40):</strong> The baby gains significant weight and prepares for
+      birth. You may experience more discomfort as the baby grows. Full term is considered 39-40 weeks.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Important Considerations">
+    <p>
+      <strong>Due dates are estimates:</strong> Every pregnancy is unique. While 40 weeks is the standard
+      pregnancy length, normal delivery can occur anywhere from 37 to 42 weeks.
+    </p>
+    <p>
+      <strong>Multiple pregnancies:</strong> If you're expecting twins or multiples, your due date may
+      be earlier. Consult your healthcare provider for accurate timing.
+    </p>
+    <p>
+      <strong>Irregular cycles:</strong> If your menstrual cycles are irregular, an early ultrasound may
+      provide a more accurate due date than LMP calculations.
+    </p>
+    <p>
+      <strong>Medical guidance:</strong> This calculator provides estimates for educational purposes.
+      Always consult your healthcare provider for personalized medical advice and official due date confirmation.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

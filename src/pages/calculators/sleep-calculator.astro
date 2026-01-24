@@ -1,0 +1,212 @@
+---
+/**
+ * Sleep Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SleepCalculator from '../../components/calculators/SleepCalculator/SleepCalculator';
+
+const title = 'Sleep Calculator | Find Your Optimal Bedtime & Wake Time';
+const description =
+  'Free sleep calculator based on 90-minute sleep cycles. Calculate the best time to go to bed or wake up for optimal rest. Includes nap calculator and personalized recommendations by age.';
+const keywords =
+  'sleep calculator, bedtime calculator, wake up time calculator, sleep cycle calculator, 90 minute sleep cycle, nap calculator, optimal sleep time, how much sleep do I need';
+const canonicalURL = '/calculators/sleep-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Sleep Calculator' }];
+
+const relatedCalculators = [
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Check your Body Mass Index and health category.',
+    href: '/calculators/bmi-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is a sleep cycle and why does it matter?',
+    answer:
+      'A sleep cycle is a pattern your brain goes through during sleep, lasting approximately 90 minutes. Each cycle includes light sleep, deep sleep, and REM (rapid eye movement) sleep. Waking up at the end of a complete cycle, rather than in the middle, helps you feel more refreshed and alert. This is why timing your sleep in 90-minute increments is so effective.',
+  },
+  {
+    question: 'How many hours of sleep do I need?',
+    answer:
+      'Sleep needs vary by age. Teenagers (13-17) need 8-10 hours, adults (18-64) need 7-9 hours, and seniors (65+) need 7-8 hours per night. However, individual needs can vary. The key is to wake up feeling rested and maintain consistent energy throughout the day.',
+  },
+  {
+    question: 'Why do I feel groggy when I wake up?',
+    answer:
+      'Grogginess upon waking, called sleep inertia, often occurs when you wake during deep sleep or REM sleep rather than at the end of a complete sleep cycle. Using a sleep calculator to time your wake-up at the end of a 90-minute cycle can significantly reduce morning grogginess.',
+  },
+  {
+    question: 'How long does it take to fall asleep?',
+    answer:
+      'The average person takes 10-20 minutes to fall asleep, which is called sleep latency. Our calculator defaults to 15 minutes but lets you adjust this. If you consistently fall asleep in under 5 minutes, you may be sleep deprived. If it takes over 30 minutes, you might have difficulty sleeping.',
+  },
+  {
+    question: 'Are power naps actually beneficial?',
+    answer:
+      'Yes, a 20-minute power nap can boost alertness, mood, and performance without causing grogginess. This duration keeps you in light sleep stages. Avoid 45-60 minute naps as you may wake during deep sleep feeling worse. For a full restorative nap, aim for 90 minutes to complete one full sleep cycle.',
+  },
+  {
+    question: 'What is the best time to go to bed?',
+    answer:
+      'The best bedtime depends on when you need to wake up and allows for 4-6 complete 90-minute sleep cycles. For most adults, going to bed between 9 PM and midnight aligns with natural circadian rhythms. The key is consistency - going to bed and waking at the same times daily, even on weekends.',
+  },
+  {
+    question: 'Does age affect sleep quality?',
+    answer:
+      'Yes, sleep patterns change with age. Older adults tend to have lighter sleep, wake more frequently, and spend less time in deep sleep and REM stages. While seniors may need slightly less sleep (7-8 hours), sleep quality becomes more important. Maintaining good sleep hygiene helps counteract age-related sleep changes.',
+  },
+  {
+    question: 'How can I improve my sleep quality?',
+    answer:
+      'Improve sleep quality by maintaining a consistent schedule, keeping your bedroom cool (65-68°F/18-20°C) and dark, avoiding screens for an hour before bed, limiting caffeine after noon, exercising regularly (but not near bedtime), and avoiding large meals close to bedtime. Creating a relaxing pre-sleep routine also signals your body it is time to wind down.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Sleep Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Sleep Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Sleep Calculator"
+    description="Calculate optimal bedtimes and wake times based on natural 90-minute sleep cycles."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SleepCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose your <strong>calculation mode</strong> - whether you need to wake at a specific time, are
+      going to bed at a specific time, or want nap recommendations.
+    </p>
+    <p>
+      Enter your <strong>target time</strong> - either when you need to wake up or when you're planning
+      to go to bed. The calculator will suggest optimal times for the other.
+    </p>
+    <p>
+      Select your <strong>age group</strong> for personalized sleep duration recommendations. Adjust the
+      <strong>fall asleep time</strong> if you typically take longer or shorter to drift off (average
+      is 15 minutes).
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Sleep Cycles">
+    <p>
+      <strong>The 90-minute cycle:</strong> Your sleep consists of repeating cycles lasting about 90 minutes
+      each. Each cycle progresses through light sleep, deep sleep, and REM sleep before starting again.
+    </p>
+    <p>
+      <strong>Deep sleep (stages 3-4):</strong> This is when your body repairs tissues, builds bone and
+      muscle, and strengthens your immune system. Waking during deep sleep causes significant grogginess.
+    </p>
+    <p>
+      <strong>REM sleep:</strong> This stage is crucial for memory consolidation, learning, and emotional
+      processing. Dreams occur primarily during REM. REM periods get longer as the night progresses.
+    </p>
+    <p>
+      <strong>Why timing matters:</strong> Waking at the end of a cycle, during light sleep, allows you
+      to feel refreshed even with less total sleep than waking mid-cycle during deep sleep.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="The Science of Napping">
+    <p>
+      <strong>Power nap (20 minutes):</strong> Keeps you in light sleep, providing an alertness boost
+      without grogginess. Ideal for a quick mid-day refresh.
+    </p>
+    <p>
+      <strong>Avoid 45-60 minute naps:</strong> This duration often means waking during deep sleep, causing
+      sleep inertia that can last 30+ minutes and leave you feeling worse than before.
+    </p>
+    <p>
+      <strong>Full cycle nap (90 minutes):</strong> Allows you to complete one full sleep cycle including
+      REM. Great for creativity and memory, but may affect nighttime sleep if taken too late in the day.
+    </p>
+    <p>
+      <strong>Best nap time:</strong> Early afternoon (1-3 PM) aligns with your natural circadian dip.
+      Avoid napping after 3 PM as it can interfere with nighttime sleep.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Sleep Recommendations by Age">
+    <p>
+      <strong>Teenagers (13-17 years):</strong> Need 8-10 hours due to ongoing brain development and hormonal
+      changes. Teens naturally have a later circadian rhythm, making early school times challenging.
+    </p>
+    <p>
+      <strong>Adults (18-64 years):</strong> Need 7-9 hours for optimal health and cognitive function.
+      Chronic sleep deprivation in adults is linked to obesity, heart disease, and decreased immune function.
+    </p>
+    <p>
+      <strong>Seniors (65+ years):</strong> Need 7-8 hours, though sleep often becomes more fragmented.
+      Multiple shorter sleep periods may replace one long sleep session, which is normal for this age
+      group.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Better Sleep">
+    <p>
+      <strong>Maintain consistency:</strong> Go to bed and wake up at the same times every day, including
+      weekends. This strengthens your circadian rhythm.
+    </p>
+    <p>
+      <strong>Create the right environment:</strong> Keep your bedroom dark, quiet, and cool (65-68°F
+      / 18-20°C). Consider blackout curtains and white noise if needed.
+    </p>
+    <p>
+      <strong>Mind your consumption:</strong> Avoid caffeine at least 6 hours before bed, limit alcohol
+      (it disrupts REM sleep), and avoid large meals within 3 hours of bedtime.
+    </p>
+    <p>
+      <strong>Prepare for sleep:</strong> Reduce screen exposure for 1 hour before bed as blue light suppresses
+      melatonin. Develop a relaxing pre-sleep routine like reading or gentle stretching.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

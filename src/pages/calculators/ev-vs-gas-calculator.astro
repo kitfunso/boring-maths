@@ -1,0 +1,231 @@
+---
+/**
+ * EV vs Gas Cost Calculator Page
+ *
+ * SEO-optimized page targeting: "ev vs gas calculator", "electric car cost comparison", "ev cost calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import EVvsGasCalculator from '../../components/calculators/EVvsGasCalculator/EVvsGasCalculator';
+
+// SEO Configuration
+const title = 'EV vs Gas Calculator | Electric Car Cost Comparison';
+const description =
+  'Free EV vs gas cost calculator. Compare total cost of ownership between electric and gas vehicles including purchase price, fuel, maintenance, and incentives.';
+const keywords =
+  'ev vs gas calculator, electric car cost comparison, ev cost calculator, electric vehicle savings, ev vs gas cost, electric car vs gas car, ev total cost of ownership, electric vehicle calculator';
+const canonicalURL = '/calculators/ev-vs-gas-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'EV vs Gas Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate auto loan payments and interest.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Car Buy vs Lease',
+    description: 'Compare buying versus leasing a vehicle.',
+    href: '/calculators/car-buy-vs-lease-calculator',
+    icon: 'chart' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'CO2 Calculator',
+    description: 'Calculate your carbon footprint.',
+    href: '/calculators/co2-calculator',
+    icon: 'leaf' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much cheaper is it to charge an EV vs filling up with gas?',
+    answer:
+      'On average, charging an EV costs 50-70% less per mile than fueling a gas vehicle. For example, driving 12,000 miles annually might cost $500-600 in electricity versus $1,500-2,000 in gas. However, costs vary significantly based on local electricity rates, gas prices, and vehicle efficiency.',
+  },
+  {
+    question: 'Are EVs really cheaper to maintain than gas cars?',
+    answer:
+      'Yes, EVs typically cost 30-50% less to maintain than gas vehicles. EVs have fewer moving parts, no oil changes, no transmission fluid, and regenerative braking reduces brake wear. Common EV maintenance includes tire rotation, cabin air filters, and brake fluid changes. However, EV battery replacement (typically needed after 8-10+ years) can be expensive.',
+  },
+  {
+    question: 'What federal and state incentives are available for EVs?',
+    answer:
+      'The US federal tax credit offers up to $7,500 for qualifying new EVs. Many states offer additional incentives including tax credits, rebates ($500-$5,000), HOV lane access, and reduced registration fees. The Inflation Reduction Act of 2022 also added used EV credits up to $4,000. Check your state incentives as they vary significantly.',
+  },
+  {
+    question: 'How long does it take for an EV to pay for itself vs a gas car?',
+    answer:
+      'The break-even point typically ranges from 3-8 years depending on the price difference between vehicles, driving habits, and local energy costs. Higher gas prices and more miles driven shorten the payback period. With federal tax credits, many EVs now reach break-even in 4-5 years.',
+  },
+  {
+    question: 'Should I charge at home or use public chargers?',
+    answer:
+      'Home charging is significantly cheaper - typically $0.10-0.20 per kWh versus $0.30-0.60 at public DC fast chargers. Most EV owners charge 80-90% at home overnight using Level 2 chargers. Public chargers are best for road trips. Installing a home Level 2 charger costs $500-2,000 but pays for itself quickly.',
+  },
+  {
+    question: 'How does EV insurance compare to gas car insurance?',
+    answer:
+      'EV insurance typically costs 10-25% more than comparable gas vehicles due to higher repair costs and specialized parts. However, some insurers offer EV discounts, and savings on fuel and maintenance often offset the higher premiums. Shop around as rates vary significantly between providers.',
+  },
+  {
+    question: 'What about EV battery degradation over time?',
+    answer:
+      'Modern EV batteries typically retain 80-90% capacity after 8-10 years. Most manufacturers offer 8-year/100,000-mile battery warranties. Battery replacement costs $5,000-15,000 but prices are dropping. For most owners, the battery will outlast the useful life of the vehicle.',
+  },
+  {
+    question: 'Are EVs worth it if I drive less than average?',
+    answer:
+      'Low-mileage drivers see smaller fuel savings, making the break-even period longer. If you drive under 8,000 miles/year, a gas vehicle or hybrid might be more economical unless you can get significant incentives. High-mileage drivers (15,000+ miles/year) see the biggest EV savings.',
+  },
+  {
+    question: 'How do electricity costs vary by time of day?',
+    answer:
+      'Many utilities offer time-of-use rates where overnight charging costs 30-50% less than peak hours. If your utility offers these rates, charging overnight can cost as little as $0.05-0.10 per kWh. Some utilities also offer special EV rates. This calculator uses your average rate, but off-peak charging provides additional savings.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'EV vs Gas Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="EV vs Gas Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="EV vs Gas Cost Calculator"
+    description="Compare the true cost of ownership between electric and gas vehicles. Include purchase price, fuel, maintenance, insurance, and incentives to find your best option."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <EVvsGasCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering the <strong>purchase prices</strong> for both vehicles you're comparing. Include
+      any available EV tax credits or incentives to see their impact on total cost.
+    </p>
+    <p>
+      Adjust your <strong>driving habits</strong> - annual mileage significantly affects fuel costs. The
+      average American drives about 12,000 miles per year, but your actual mileage may differ.
+    </p>
+    <p>
+      Fine-tune the <strong>EV details</strong> including efficiency (miles per kWh), electricity rates,
+      and how much you'll charge at home versus public chargers. Home charging is typically 50-70% cheaper.
+    </p>
+    <p>
+      Configure <strong>gas vehicle details</strong> with fuel efficiency (MPG), current gas prices, and
+      typical maintenance costs. Gas vehicles generally have higher maintenance due to oil changes, transmission
+      service, and more wear items.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Better Choice</strong> card shows which vehicle saves money over your ownership period.
+      Remember that the "better" choice financially may not account for all factors like driving experience
+      or environmental impact.
+    </p>
+    <p>
+      <strong>Side-by-side comparison</strong> breaks down costs into categories. Pay attention to which
+      categories favor each vehicle - EVs typically win on fuel and maintenance, while gas cars often
+      have lower purchase prices.
+    </p>
+    <p>
+      The <strong>break-even point</strong> shows when EV savings offset the higher purchase price. If
+      you plan to keep the vehicle beyond this point, the EV becomes more economical.
+    </p>
+    <p>
+      <strong>CO2 savings</strong> represent environmental impact. EVs produce fewer emissions even when
+      accounting for electricity generation from the grid.
+    </p>
+  </ContentSection>
+
+  <!-- Factors to Consider Section -->
+  <ContentSection title="Key Factors in EV vs Gas Decisions">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-emerald-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-emerald-400 mb-2">EV Advantages</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Lower fuel costs (electricity vs gas)</li>
+          <li>Reduced maintenance (no oil changes, fewer brake replacements)</li>
+          <li>Federal and state tax incentives</li>
+          <li>HOV lane access in many states</li>
+          <li>Quieter, smoother driving experience</li>
+          <li>Home charging convenience</li>
+        </ul>
+      </div>
+      <div class="bg-orange-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-orange-400 mb-2">Gas Vehicle Advantages</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Lower upfront purchase price</li>
+          <li>Extensive fueling infrastructure</li>
+          <li>Faster refueling (5 min vs 30+ min)</li>
+          <li>No range anxiety concerns</li>
+          <li>Lower insurance costs typically</li>
+          <li>Proven long-term reliability data</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <!-- Regional Considerations -->
+  <ContentSection title="Regional Cost Variations">
+    <p>
+      Electricity and gas prices vary significantly by location. States like California and Hawaii
+      have higher electricity rates but also higher gas prices and more EV incentives. States with
+      cheap electricity (like Washington or Louisiana) can make EVs even more attractive.
+    </p>
+    <p>
+      <strong>Climate matters too:</strong> Extreme cold can reduce EV range by 20-40%, increasing effective
+      cost per mile. Hot climates affect both EVs (battery cooling) and gas vehicles (AC usage) similarly.
+    </p>
+    <p>
+      Check your local utility for special EV rates or time-of-use pricing that could reduce your
+      charging costs by 30-50% compared to standard rates.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
