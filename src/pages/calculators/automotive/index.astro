@@ -1,0 +1,93 @@
+---
+/**
+ * Automotive Calculators Hub Page
+ *
+ * SEO-optimized category page for car and vehicle calculators.
+ * Targets: "ev calculator", "car cost calculator", "ev vs gas calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Automotive';
+const title = 'Automotive Calculators | EV vs Gas, Car Costs & More';
+const description =
+  'Free automotive calculators to compare EV vs gas costs, calculate car expenses, and make smarter vehicle decisions. Save money on your next car purchase.';
+const keywords =
+  'ev vs gas calculator, electric car cost calculator, car cost comparison, ev savings calculator, car buy vs lease, fuel cost calculator, automotive calculator';
+const canonicalURL = '/calculators/automotive/';
+
+const calculators = [
+  {
+    title: 'EV vs Gas Calculator',
+    description: 'Compare total cost of ownership between electric and gas vehicles over time.',
+    href: '/calculators/ev-vs-gas-calculator',
+    icon: 'bolt',
+    color: 'green',
+  },
+  {
+    title: 'Car Buy vs Lease Calculator',
+    description: 'Decide whether buying or leasing makes more financial sense for you.',
+    href: '/calculators/car-buy-vs-lease-calculator',
+    icon: 'swap',
+    color: 'blue',
+  },
+  {
+    title: 'CO2 Calculator',
+    description: 'Calculate your carbon footprint from driving and other activities.',
+    href: '/calculators/co2-calculator',
+    icon: 'leaf',
+    color: 'green',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="bolt"
+  color="green"
+  tagline="Make smarter vehicle decisions with data-driven calculations"
+  calculators={calculators}
+>
+  <p>
+    Our automotive calculators help you make informed decisions about vehicle ownership. Whether
+    you're considering an electric vehicle, deciding between buying or leasing, or tracking your
+    carbon footprint, these tools provide the data you need.
+  </p>
+  <p>
+    The EV vs Gas calculator accounts for purchase price, fuel/electricity costs, maintenance,
+    insurance, and available tax credits to give you a complete picture of ownership costs over
+    time.
+  </p>
+  <h3>Key Considerations When Comparing Vehicles</h3>
+  <ul>
+    <li>
+      <strong>Total Cost of Ownership:</strong> Include purchase price, fuel, maintenance, insurance,
+      and depreciation
+    </li>
+    <li>
+      <strong>EV Tax Credits:</strong> Federal credits up to $7,500 (US) can significantly reduce EV purchase
+      costs
+    </li>
+    <li>
+      <strong>Electricity Rates:</strong> Home charging is typically 3-4x cheaper than public fast charging
+    </li>
+    <li>
+      <strong>Maintenance Savings:</strong> EVs have fewer moving parts, resulting in lower maintenance
+      costs
+    </li>
+    <li>
+      <strong>Break-Even Point:</strong> The time it takes for an EV's lower operating costs to offset
+      its higher purchase price
+    </li>
+  </ul>
+  <p class="text-sm mt-4 text-[var(--color-muted)]">
+    <em>
+      Note: Actual costs vary based on your location, driving habits, electricity rates, and
+      specific vehicle models. Use these calculators as a starting point for your research.
+    </em>
+  </p>
+</CategoryLayout>

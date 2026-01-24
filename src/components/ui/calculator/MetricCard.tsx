@@ -43,8 +43,13 @@ export function MetricCard({
         hover:border-white/20 transition-all
         ${className}
       `}
+      role="group"
+      aria-label={label}
     >
-      <p className="text-xs font-medium text-[var(--color-muted)] uppercase tracking-wider mb-1">
+      <p
+        className="text-xs font-medium text-[var(--color-muted)] uppercase tracking-wider mb-1"
+        aria-hidden="true"
+      >
         {label}
       </p>
       <p className={`text-xl md:text-2xl font-bold tabular-nums ${valueColorClass}`}>{value}</p>

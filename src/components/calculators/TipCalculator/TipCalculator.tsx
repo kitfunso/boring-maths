@@ -109,12 +109,20 @@ export default function TipCalculator() {
             </div>
 
             {/* Quick Tip Buttons */}
-            <div>
-              <p className="text-sm text-[var(--color-subtle)] mb-2">Quick select:</p>
-              <div className="flex flex-wrap gap-2">
+            <div role="group" aria-label="Quick tip percentage selection">
+              <p id="quick-select-label" className="text-sm text-[var(--color-subtle)] mb-2">
+                Quick select:
+              </p>
+              <div
+                className="flex flex-wrap gap-2"
+                role="radiogroup"
+                aria-labelledby="quick-select-label"
+              >
                 {[15, 18, 20, 25].map((pct) => (
                   <button
                     key={pct}
+                    role="radio"
+                    aria-checked={Math.round(inputs.tipPercentage * 100) === pct}
                     onClick={() => selectTipPercentage(pct / 100)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       Math.round(inputs.tipPercentage * 100) === pct
@@ -131,15 +139,20 @@ export default function TipCalculator() {
             {/* Split Count */}
             <div>
               <Label htmlFor="splitCount">Split Between</Label>
-              <div className="flex items-center gap-4">
+              <div
+                className="flex items-center gap-4"
+                role="group"
+                aria-label="Number of people to split bill"
+              >
                 <button
                   onClick={() => updateInput('splitCount', Math.max(1, inputs.splitCount - 1))}
-                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all"
+                  aria-label="Decrease number of people"
+                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all disabled:opacity-50"
                   disabled={inputs.splitCount <= 1}
                 >
                   −
                 </button>
-                <div className="flex-1 text-center">
+                <div className="flex-1 text-center" aria-live="polite">
                   <span className="text-3xl font-bold text-[var(--color-cream)]">
                     {inputs.splitCount}
                   </span>
@@ -149,7 +162,8 @@ export default function TipCalculator() {
                 </div>
                 <button
                   onClick={() => updateInput('splitCount', Math.min(20, inputs.splitCount + 1))}
-                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all"
+                  aria-label="Increase number of people"
+                  className="w-12 h-12 rounded-full bg-[var(--color-night)] hover:bg-white/10 text-xl font-bold text-[var(--color-cream)] transition-all disabled:opacity-50"
                   disabled={inputs.splitCount >= 20}
                 >
                   +
@@ -223,24 +237,43 @@ export default function TipCalculator() {
                 Quick Reference
               </h3>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full text-sm" aria-label="Compare tip percentages">
                   <thead>
                     <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">
-                      <th className="text-left py-2">Tip %</th>
-                      <th className="text-right py-2">Tip</th>
-                      <th className="text-right py-2">Total</th>
-                      {inputs.splitCount > 1 && <th className="text-right py-2">Per Person</th>}
+                      <th scope="col" className="text-left py-2">
+                        Tip %
+                      </th>
+                      <th scope="col" className="text-right py-2">
+                        Tip
+                      </th>
+                      <th scope="col" className="text-right py-2">
+                        Total
+                      </th>
+                      {inputs.splitCount > 1 && (
+                        <th scope="col" className="text-right py-2">
+                          Per Person
+                        </th>
+                      )}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10">
                     {result.suggestions.map((suggestion) => (
                       <tr
                         key={suggestion.percentage}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={suggestion.percentage === inputs.tipPercentage}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            selectTipPercentage(suggestion.percentage);
+                          }
+                        }}
                         className={`${
                           suggestion.percentage === inputs.tipPercentage
                             ? 'bg-green-900/40 font-medium text-green-400'
-                            : 'hover:bg-white/5'
-                        } cursor-pointer transition-colors`}
+                            : 'hover:bg-white/5 focus:bg-white/5'
+                        } cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-green-500/50`}
                         onClick={() => selectTipPercentage(suggestion.percentage)}
                       >
                         <td className="py-2">{Math.round(suggestion.percentage * 100)}%</td>

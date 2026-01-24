@@ -41,7 +41,13 @@ const VARIANT_STYLES = {
 
 const VARIANT_ICONS = {
   info: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -51,7 +57,13 @@ const VARIANT_ICONS = {
     </svg>
   ),
   warning: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -61,7 +73,13 @@ const VARIANT_ICONS = {
     </svg>
   ),
   error: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -71,7 +89,13 @@ const VARIANT_ICONS = {
     </svg>
   ),
   success: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -81,7 +105,13 @@ const VARIANT_ICONS = {
     </svg>
   ),
   tip: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
