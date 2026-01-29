@@ -1918,6 +1918,9 @@ const categoryColors: Record<string, string> = {
   // Initialize on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', initCalculatorPage);
 
+  // Re-initialize after Astro View Transitions navigation
+  document.addEventListener('astro:page-load', initCalculatorPage);
+
   // Re-initialize on back/forward navigation (fixes filter state)
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) {

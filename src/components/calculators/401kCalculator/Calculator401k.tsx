@@ -246,7 +246,7 @@ export default function Calculator401k() {
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Year-by-Year Projection
                 </h3>
-                <table className="w-full text-sm">
+                <table className="w-full text-sm min-w-[550px]">
                   <thead>
                     <tr className="text-[var(--color-muted)] text-left">
                       <th className="pb-2 pr-4">Age</th>

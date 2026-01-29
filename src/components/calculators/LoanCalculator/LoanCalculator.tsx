@@ -212,8 +212,8 @@ export default function LoanCalculator() {
                 {/* Amortization Table */}
                 {showAmortization && (
                   <div className="bg-[var(--color-night)] rounded-xl border border-white/10 overflow-hidden">
-                    <div className="max-h-96 overflow-y-auto">
-                      <table className="w-full text-sm">
+                    <div className="max-h-96 overflow-y-auto overflow-x-auto">
+                      <table className="w-full text-sm min-w-[500px]">
                         <thead className="sticky top-0 bg-[var(--color-void)]">
                           <tr className="text-[var(--color-muted)] uppercase text-xs">
                             <th className="p-3 text-left">Month</th>

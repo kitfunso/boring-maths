@@ -251,57 +251,59 @@ export default function SDLTCalculator() {
                 Tax Band Breakdown
               </h3>
               <div className="bg-white/5 rounded-xl overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Band
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Rate
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Tax
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.bands.map((band, index) => (
-                      <tr key={index} className="border-b border-white/5 last:border-0">
-                        <td className="px-4 py-3 text-sm text-[var(--color-subtle)]">
-                          {formatCurrency(band.from)} - {formatCurrency(band.to)}
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[400px]">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Band
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Rate
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Tax
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.bands.map((band, index) => (
+                        <tr key={index} className="border-b border-white/5 last:border-0">
+                          <td className="px-4 py-3 text-sm text-[var(--color-subtle)]">
+                            {formatCurrency(band.from)} - {formatCurrency(band.to)}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm text-[var(--color-subtle)]">
+                            {formatPercent(band.rate * 100, 1)}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm font-medium text-[var(--color-cream)]">
+                            {formatCurrency(band.taxDue)}
+                          </td>
+                        </tr>
+                      ))}
+                      {result.bands.length === 0 && (
+                        <tr>
+                          <td
+                            colSpan={3}
+                            className="px-4 py-3 text-sm text-[var(--color-muted)] text-center"
+                          >
+                            No tax due - below threshold
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                    <tfoot>
+                      <tr className="bg-white/5">
+                        <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
+                          Total
                         </td>
-                        <td className="text-right px-4 py-3 text-sm text-[var(--color-subtle)]">
-                          {formatPercent(band.rate * 100, 1)}
-                        </td>
-                        <td className="text-right px-4 py-3 text-sm font-medium text-[var(--color-cream)]">
-                          {formatCurrency(band.taxDue)}
+                        <td></td>
+                        <td className="text-right px-4 py-3 text-sm font-bold text-blue-400">
+                          {formatCurrency(result.sdltAmount)}
                         </td>
                       </tr>
-                    ))}
-                    {result.bands.length === 0 && (
-                      <tr>
-                        <td
-                          colSpan={3}
-                          className="px-4 py-3 text-sm text-[var(--color-muted)] text-center"
-                        >
-                          No tax due - below threshold
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                  <tfoot>
-                    <tr className="bg-white/5">
-                      <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
-                        Total
-                      </td>
-                      <td></td>
-                      <td className="text-right px-4 py-3 text-sm font-bold text-blue-400">
-                        {formatCurrency(result.sdltAmount)}
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             </div>
 

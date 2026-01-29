@@ -239,77 +239,79 @@ export default function ADSCalculator() {
                 LBTT Band Breakdown
               </h3>
               <div className="bg-white/5 rounded-xl overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Band
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Rate
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Tax
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.lbttBands.map((band, index) => (
-                      <tr key={index} className="border-b border-white/5 last:border-0">
-                        <td className="px-4 py-3 text-sm text-[var(--color-subtle)]">
-                          {formatCurrency(band.from)} - {formatCurrency(band.to)}
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[400px]">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Band
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Rate
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Tax
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.lbttBands.map((band, index) => (
+                        <tr key={index} className="border-b border-white/5 last:border-0">
+                          <td className="px-4 py-3 text-sm text-[var(--color-subtle)]">
+                            {formatCurrency(band.from)} - {formatCurrency(band.to)}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm text-[var(--color-subtle)]">
+                            {formatPercent(band.rate * 100, 0)}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm font-medium text-[var(--color-cream)]">
+                            {formatCurrency(band.taxDue)}
+                          </td>
+                        </tr>
+                      ))}
+                      {result.lbttBands.length === 0 && (
+                        <tr>
+                          <td
+                            colSpan={3}
+                            className="px-4 py-3 text-sm text-[var(--color-muted)] text-center"
+                          >
+                            No LBTT due - below threshold
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                    <tfoot>
+                      <tr className="bg-white/5">
+                        <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
+                          LBTT Total
                         </td>
-                        <td className="text-right px-4 py-3 text-sm text-[var(--color-subtle)]">
-                          {formatPercent(band.rate * 100, 0)}
-                        </td>
-                        <td className="text-right px-4 py-3 text-sm font-medium text-[var(--color-cream)]">
-                          {formatCurrency(band.taxDue)}
+                        <td></td>
+                        <td className="text-right px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
+                          {formatCurrency(result.lbttAmount)}
                         </td>
                       </tr>
-                    ))}
-                    {result.lbttBands.length === 0 && (
-                      <tr>
-                        <td
-                          colSpan={3}
-                          className="px-4 py-3 text-sm text-[var(--color-muted)] text-center"
-                        >
-                          No LBTT due - below threshold
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                  <tfoot>
-                    <tr className="bg-white/5">
-                      <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
-                        LBTT Total
-                      </td>
-                      <td></td>
-                      <td className="text-right px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
-                        {formatCurrency(result.lbttAmount)}
-                      </td>
-                    </tr>
-                    {adsApplies && (
-                      <tr className="bg-purple-950/30">
-                        <td className="px-4 py-3 text-sm font-semibold text-purple-400">
-                          + ADS (6%)
+                      {adsApplies && (
+                        <tr className="bg-purple-950/30">
+                          <td className="px-4 py-3 text-sm font-semibold text-purple-400">
+                            + ADS (6%)
+                          </td>
+                          <td></td>
+                          <td className="text-right px-4 py-3 text-sm font-bold text-purple-400">
+                            {formatCurrency(result.adsAmount)}
+                          </td>
+                        </tr>
+                      )}
+                      <tr className="bg-white/10">
+                        <td className="px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
+                          Grand Total
                         </td>
                         <td></td>
                         <td className="text-right px-4 py-3 text-sm font-bold text-purple-400">
-                          {formatCurrency(result.adsAmount)}
+                          {formatCurrency(result.totalTax)}
                         </td>
                       </tr>
-                    )}
-                    <tr className="bg-white/10">
-                      <td className="px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
-                        Grand Total
-                      </td>
-                      <td></td>
-                      <td className="text-right px-4 py-3 text-sm font-bold text-purple-400">
-                        {formatCurrency(result.totalTax)}
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             </div>
 

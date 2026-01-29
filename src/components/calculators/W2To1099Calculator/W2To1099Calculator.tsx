@@ -285,64 +285,66 @@ export default function W2To1099Calculator() {
                 Cost Breakdown
               </h3>
               <div className="bg-white/5 rounded-xl overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/10">
-                      <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        Item
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        W2 Value
-                      </th>
-                      <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
-                        1099 Cost
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.breakdown.map((item, index) => (
-                      <tr key={index} className="border-b border-white/5 last:border-0">
-                        <td className="px-4 py-3">
-                          <p className="text-sm text-[var(--color-subtle)]">{item.label}</p>
-                          {item.note && (
-                            <p className="text-xs text-[var(--color-muted)]">{item.note}</p>
-                          )}
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[400px]">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          Item
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          W2 Value
+                        </th>
+                        <th className="text-right px-4 py-3 text-sm font-medium text-[var(--color-muted)]">
+                          1099 Cost
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.breakdown.map((item, index) => (
+                        <tr key={index} className="border-b border-white/5 last:border-0">
+                          <td className="px-4 py-3">
+                            <p className="text-sm text-[var(--color-subtle)]">{item.label}</p>
+                            {item.note && (
+                              <p className="text-xs text-[var(--color-muted)]">{item.note}</p>
+                            )}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm text-[var(--color-cream)] tabular-nums">
+                            {item.w2Value > 0 ? formatCurrency(item.w2Value) : '-'}
+                          </td>
+                          <td className="text-right px-4 py-3 text-sm font-medium tabular-nums">
+                            {item.contractorCost > 0 ? (
+                              <span
+                                className={
+                                  item.label === 'Base Salary'
+                                    ? 'text-[var(--color-cream)]'
+                                    : 'text-amber-400'
+                                }
+                              >
+                                {formatCurrency(item.contractorCost)}
+                              </span>
+                            ) : (
+                              '-'
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                    <tfoot>
+                      <tr className="bg-white/5">
+                        <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
+                          Total
                         </td>
-                        <td className="text-right px-4 py-3 text-sm text-[var(--color-cream)] tabular-nums">
-                          {item.w2Value > 0 ? formatCurrency(item.w2Value) : '-'}
+                        <td className="text-right px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
+                          {formatCurrency(result.totalW2Value)}
                         </td>
-                        <td className="text-right px-4 py-3 text-sm font-medium tabular-nums">
-                          {item.contractorCost > 0 ? (
-                            <span
-                              className={
-                                item.label === 'Base Salary'
-                                  ? 'text-[var(--color-cream)]'
-                                  : 'text-amber-400'
-                              }
-                            >
-                              {formatCurrency(item.contractorCost)}
-                            </span>
-                          ) : (
-                            '-'
-                          )}
+                        <td className="text-right px-4 py-3 text-sm font-bold text-green-400">
+                          {formatCurrency(result.w2AnnualSalary + result.totalAdditionalCosts)}
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
-                  <tfoot>
-                    <tr className="bg-white/5">
-                      <td className="px-4 py-3 text-sm font-semibold text-[var(--color-cream)]">
-                        Total
-                      </td>
-                      <td className="text-right px-4 py-3 text-sm font-bold text-[var(--color-cream)]">
-                        {formatCurrency(result.totalW2Value)}
-                      </td>
-                      <td className="text-right px-4 py-3 text-sm font-bold text-green-400">
-                        {formatCurrency(result.w2AnnualSalary + result.totalAdditionalCosts)}
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                    </tfoot>
+                  </table>
+                </div>
               </div>
             </div>
 

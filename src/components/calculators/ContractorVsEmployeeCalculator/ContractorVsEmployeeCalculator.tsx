@@ -577,7 +577,7 @@ export default function ContractorVsEmployeeCalculator() {
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Detailed Comparison
               </h3>
-              <table className="w-full text-sm">
+              <table className="w-full text-sm min-w-[400px]">
                 <thead>
                   <tr className="border-b border-[var(--color-charcoal)]">
                     <th className="text-left py-2 text-[var(--color-muted)] font-medium">Item</th>
