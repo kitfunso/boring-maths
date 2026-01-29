@@ -9,6 +9,16 @@ const description = 'Free online calculators for everyday math problems. Calcula
 // All calculators with categories
 const calculators = [
   {
+    title: 'UK £100k Tax Trap',
+    description: 'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart',
+    color: 'coral',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: true,
+  },
+  {
     title: 'Go Full-Time Calculator',
     description: 'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
     href: '/calculators/go-full-time-calculator',
@@ -370,16 +380,6 @@ const calculators = [
     icon: 'calculator',
     color: 'violet',
     category: 'Everyday',
-    mostUsed: false,
-  },
-  {
-    title: 'UK £100k Tax Trap',
-    description: 'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
-    href: '/calculators/uk-100k-tax-trap-calculator',
-    icon: 'chart',
-    color: 'coral',
-    category: 'Finance',
-    country: 'UK',
     mostUsed: false,
   },
   {
@@ -1139,19 +1139,6 @@ const categoryColors: Record<string, string> = {
         </div>
       </div>
 
-      <!-- Mobile Quick Access - Popular calculators for instant access -->
-      <div class="md:hidden mt-3 animate-slide-up delay-100">
-        <div class="flex gap-2 overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide">
-          {calculators.filter(c => c.mostUsed).slice(0, 5).map(calc => (
-            <a
-              href={calc.href}
-              class="flex-shrink-0 px-3 py-2 rounded-xl bg-[var(--color-charcoal)] border border-white/10 hover:border-[var(--color-accent)]/50 transition-colors"
-            >
-              <span class="text-xs font-medium text-[var(--color-cream)] whitespace-nowrap">{calc.title.replace(' Calculator', '')}</span>
-            </a>
-          ))}
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1469,7 +1456,7 @@ const categoryColors: Record<string, string> = {
 
 <script>
   // Calculator filtering, search, favorites, and recently used functionality
-  document.addEventListener('DOMContentLoaded', () => {
+  function initCalculatorPage() {
     const filterButtons = document.querySelectorAll('.category-btn');
     const calculatorCards = document.querySelectorAll('.calculator-card');
     const emptyState = document.getElementById('empty-state');
@@ -1487,6 +1474,60 @@ const categoryColors: Record<string, string> = {
     const filterChevron = document.getElementById('filter-chevron');
     const activeFilterBadge = document.getElementById('active-filter-badge');
     let filtersExpanded = false;
+
+    // Reset filter panel state on page load (fixes back navigation issue)
+    function resetFilterState() {
+      filtersExpanded = false;
+      filterPanel?.classList.add('hidden');
+      filterPanel?.classList.remove('flex', 'flex-wrap');
+      regionFilterPanel?.classList.add('hidden');
+      regionFilterPanel?.classList.remove('flex', 'flex-wrap');
+      filterChevron?.classList.remove('rotate-180');
+
+      // Reset all filter buttons to default state
+      filterButtons.forEach(btn => {
+        const category = btn.getAttribute('data-category');
+        if (category === 'All') {
+          btn.classList.remove('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+          btn.classList.add('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+        } else if (category !== 'Favorites') {
+          btn.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+          btn.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'bg-violet-500', 'border-transparent');
+        }
+      });
+
+      // Reset favorites button
+      if (favoritesFilter) {
+        favoritesFilter.classList.add('text-[var(--color-subtle)]', 'bg-transparent', 'border-white/10');
+        favoritesFilter.classList.remove('text-[var(--color-void)]', 'bg-[var(--color-accent)]', 'border-transparent');
+      }
+
+      // Reset active filter badge
+      activeFilterBadge?.classList.add('hidden');
+
+      // Clear search input
+      if (searchInput) {
+        searchInput.value = '';
+      }
+      clearSearch?.classList.add('hidden');
+
+      // Show all calculator cards
+      calculatorCards.forEach(card => {
+        card.classList.remove('hidden');
+      });
+
+      // Show all ads
+      document.querySelectorAll('.ad-in-grid').forEach(ad => {
+        (ad as HTMLElement).classList.remove('hidden');
+        (ad as HTMLElement).style.display = '';
+      });
+
+      // Hide empty state
+      emptyState?.classList.add('hidden');
+    }
+
+    // Initialize with reset state
+    resetFilterState();
 
     function toggleMobileFilters() {
       filtersExpanded = !filtersExpanded;
@@ -1871,6 +1912,16 @@ const categoryColors: Record<string, string> = {
         searchInput.focus();
       }
     });
+  }
+
+  // Initialize on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', initCalculatorPage);
+
+  // Re-initialize on back/forward navigation (fixes filter state)
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      initCalculatorPage();
+    }
   });
 </script>
 
