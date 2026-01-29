@@ -106,6 +106,17 @@ body {
   overflow-x: hidden;
 }
 
+/* Remove 300ms tap delay on mobile for all interactive elements */
+button,
+a,
+input,
+select,
+textarea,
+[role='button'],
+.bento-card {
+  touch-action: manipulation;
+}
+
 /* Selection */
 ::selection {
   background: var(--color-accent);
