@@ -5,7 +5,7 @@
  * pension contributions to restore their Personal Allowance.
  */
 
-import { useMemo } from 'preact/hooks';
+import { useMemo, useEffect } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateUK100kTax, formatCurrency, formatPercent } from './calculations';
 import {
@@ -35,6 +35,27 @@ export default function UK100kTaxTrapCalculator() {
   useCalculatorTracking('UK £100k Tax Trap Calculator');
 
   const [inputs, setInputs] = useLocalStorage<UK100kInputs>('calc-uk100k-inputs', getDefaultInputs);
+
+  // Load inputs from URL parameters on mount (for shared links)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const urlInputs: Partial<UK100kInputs> = {};
+
+    if (params.has('grossSalary')) urlInputs.grossSalary = Number(params.get('grossSalary'));
+    if (params.has('bonusIncome')) urlInputs.bonusIncome = Number(params.get('bonusIncome'));
+    if (params.has('taxRegion')) urlInputs.taxRegion = params.get('taxRegion') as TaxRegion;
+    if (params.has('studentLoanPlan'))
+      urlInputs.studentLoanPlan = params.get('studentLoanPlan') as StudentLoanPlan;
+    if (params.has('currentPensionPercent'))
+      urlInputs.currentPensionPercent = Number(params.get('currentPensionPercent'));
+
+    if (Object.keys(urlInputs).length > 0) {
+      setInputs((prev) => ({ ...prev, ...urlInputs }));
+      // Clean URL without reload
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   const result = useMemo(() => calculateUK100kTax(inputs), [inputs]);
 
@@ -327,7 +348,7 @@ export default function UK100kTaxTrapCalculator() {
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Before vs After Optimization
                 </h3>
-                <table className="w-full text-sm">
+                <table className="w-full text-sm min-w-[450px]">
                   <thead>
                     <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">
                       <th className="text-left pb-3"></th>
@@ -409,6 +430,13 @@ export default function UK100kTaxTrapCalculator() {
               <ShareResults
                 result={`UK Tax: ${formatCurrency(result.incomeTax + result.nationalInsurance)} on ${formatCurrency(result.totalIncome)} income | Take-home: ${formatCurrency(result.takeHomePay)} | ${result.isInTaxTrap ? 'In 60% tax trap - could save ' + formatCurrency(result.annualTaxSaved) + ' with pension optimization' : 'Below tax trap threshold'}`}
                 calculatorName="UK £100k Tax Trap Calculator"
+                inputs={{
+                  grossSalary: inputs.grossSalary,
+                  bonusIncome: inputs.bonusIncome,
+                  taxRegion: inputs.taxRegion,
+                  studentLoanPlan: inputs.studentLoanPlan,
+                  currentPensionPercent: inputs.currentPensionPercent,
+                }}
               />
               <PrintResults
                 title="UK £100k Tax Trap Calculator Results"

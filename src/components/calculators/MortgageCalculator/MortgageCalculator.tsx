@@ -4,7 +4,7 @@
  * Calculate monthly mortgage payments with principal, interest, taxes, and insurance.
  */
 
-import { useMemo } from 'preact/hooks';
+import { useMemo, useEffect } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMortgage, formatCurrency } from './calculations';
 import { getDefaultInputs, type MortgageInputs, type MortgageResult } from './types';
@@ -34,6 +34,27 @@ export default function MortgageCalculator() {
   const [inputs, setInputs] = useLocalStorage<MortgageInputs>('calc-mortgage-inputs', () =>
     getDefaultInputs(getInitialCurrency())
   );
+
+  // Load inputs from URL parameters on mount (for shared links)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const urlInputs: Partial<MortgageInputs> = {};
+
+    if (params.has('homePrice')) urlInputs.homePrice = Number(params.get('homePrice'));
+    if (params.has('downPayment')) urlInputs.downPayment = Number(params.get('downPayment'));
+    if (params.has('interestRate')) urlInputs.interestRate = Number(params.get('interestRate'));
+    if (params.has('loanTermYears')) urlInputs.loanTermYears = Number(params.get('loanTermYears'));
+    if (params.has('propertyTax')) urlInputs.propertyTax = Number(params.get('propertyTax'));
+    if (params.has('homeInsurance')) urlInputs.homeInsurance = Number(params.get('homeInsurance'));
+    if (params.has('hoaFees')) urlInputs.hoaFees = Number(params.get('hoaFees'));
+    if (params.has('currency')) urlInputs.currency = params.get('currency') as Currency;
+
+    if (Object.keys(urlInputs).length > 0) {
+      setInputs((prev) => ({ ...prev, ...urlInputs }));
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
@@ -316,6 +337,16 @@ export default function MortgageCalculator() {
                   <ShareResults
                     result={`Monthly mortgage payment: ${formatCurrency(result.monthlyTotal, result.currency)} for a ${formatCurrency(inputs.homePrice, inputs.currency)} home (${inputs.loanTermYears} years at ${(inputs.interestRate * 100).toFixed(2)}%)`}
                     calculatorName="Mortgage Calculator"
+                    inputs={{
+                      homePrice: inputs.homePrice,
+                      downPayment: inputs.downPayment,
+                      interestRate: inputs.interestRate,
+                      loanTermYears: inputs.loanTermYears,
+                      propertyTax: inputs.propertyTax,
+                      homeInsurance: inputs.homeInsurance,
+                      hoaFees: inputs.hoaFees,
+                      currency: inputs.currency,
+                    }}
                   />
                   <PrintResults
                     title="Mortgage Calculator Results"
