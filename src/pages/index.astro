@@ -1174,11 +1174,6 @@ const categoryColors: Record<string, string> = {
           <HomepageCurrencySelector client:idle />
         </div>
       </div>
-      <!-- Mobile Currency Selector (search is in header) -->
-      <div class="flex justify-end mb-3 md:hidden">
-        <HomepageCurrencySelector client:idle />
-      </div>
-
       <!-- Recent Section (hidden by default, shown via JS) -->
       <div id="recently-used-section" class="hidden mb-5">
         <div class="flex items-center justify-between mb-2">
@@ -1198,25 +1193,24 @@ const categoryColors: Record<string, string> = {
         </div>
       </div>
 
-      <!-- Mobile Filter Toggle Button -->
-      <div class="md:hidden mb-3">
+      <!-- Mobile Filter Toggle + Currency Selector Row -->
+      <div class="md:hidden mb-3 flex items-center gap-2">
         <button
           id="mobile-filter-toggle"
-          class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[var(--color-charcoal)] border border-white/10 text-[var(--color-cream)]"
+          class="flex-1 flex items-center justify-between px-3 py-2 rounded-xl bg-[var(--color-charcoal)] border border-white/10 text-[var(--color-cream)]"
         >
-          <span class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
-            <span class="text-sm font-medium">Filter by Category</span>
+            <span class="text-xs font-medium">Filter</span>
+            <span id="active-filter-badge" class="hidden px-1.5 py-0.5 rounded-full bg-[var(--color-accent)] text-[var(--color-void)] text-[10px] font-medium"></span>
           </span>
-          <span class="flex items-center gap-2">
-            <span id="active-filter-badge" class="hidden px-2 py-0.5 rounded-full bg-[var(--color-accent)] text-[var(--color-void)] text-xs font-medium"></span>
-            <svg id="filter-chevron" class="w-5 h-5 text-[var(--color-muted)] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </span>
+          <svg id="filter-chevron" class="w-4 h-4 text-[var(--color-muted)] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
+        <HomepageCurrencySelector client:idle />
       </div>
 
       <!-- Category Filter - hidden on mobile by default, shown on desktop -->
