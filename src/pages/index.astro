@@ -1143,10 +1143,10 @@ const categoryColors: Record<string, string> = {
   </section>
 
   <!-- Calculators Section with Category Filter -->
-  <section class="relative px-6 py-6" id="calculators">
+  <section class="relative px-6 py-3 md:py-6" id="calculators">
     <div class="max-w-7xl mx-auto">
-      <!-- Search Bar and Currency Selector -->
-      <div class="max-w-2xl mx-auto mb-5">
+      <!-- Search Bar and Currency Selector - Hidden on mobile (search is in header) -->
+      <div class="max-w-2xl mx-auto mb-5 hidden md:block">
         <div class="flex items-center gap-3">
           <div class="relative flex-1">
             <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1173,6 +1173,10 @@ const categoryColors: Record<string, string> = {
           <!-- Global Currency Selector -->
           <HomepageCurrencySelector client:idle />
         </div>
+      </div>
+      <!-- Mobile Currency Selector (search is in header) -->
+      <div class="flex justify-end mb-3 md:hidden">
+        <HomepageCurrencySelector client:idle />
       </div>
 
       <!-- Recent Section (hidden by default, shown via JS) -->
@@ -1462,6 +1466,7 @@ const categoryColors: Record<string, string> = {
     const calculatorCards = document.querySelectorAll('.calculator-card');
     const emptyState = document.getElementById('empty-state');
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const headerSearchInput = document.getElementById('header-search-input') as HTMLInputElement;
     const clearSearch = document.getElementById('clear-search');
     const favoritesFilter = document.getElementById('favorites-filter');
     const recentlyUsedSection = document.getElementById('recently-used-section');
@@ -1506,9 +1511,12 @@ const categoryColors: Record<string, string> = {
       // Reset active filter badge
       activeFilterBadge?.classList.add('hidden');
 
-      // Clear search input
+      // Clear search inputs (desktop and header)
       if (searchInput) {
         searchInput.value = '';
+      }
+      if (headerSearchInput) {
+        headerSearchInput.value = '';
       }
       clearSearch?.classList.add('hidden');
 
@@ -1893,23 +1901,28 @@ const categoryColors: Record<string, string> = {
       });
     });
 
-    // Search functionality
-    searchInput?.addEventListener('input', () => {
-      currentSearch = searchInput.value;
+    // Search functionality - sync both desktop and header (mobile) search inputs
+    function handleSearch(value: string) {
+      currentSearch = value;
       filterCards();
+
+      // Sync both inputs
+      if (searchInput && searchInput.value !== value) searchInput.value = value;
+      if (headerSearchInput && headerSearchInput.value !== value) headerSearchInput.value = value;
 
       // Show/hide clear button
       if (clearSearch) {
         clearSearch.classList.toggle('hidden', !currentSearch);
       }
-    });
+    }
+
+    searchInput?.addEventListener('input', () => handleSearch(searchInput.value));
+    headerSearchInput?.addEventListener('input', () => handleSearch(headerSearchInput.value));
 
     clearSearch?.addEventListener('click', () => {
+      handleSearch('');
       if (searchInput) {
-        searchInput.value = '';
-        currentSearch = '';
-        filterCards();
-        clearSearch.classList.add('hidden');
+        clearSearch?.classList.add('hidden');
         searchInput.focus();
       }
     });
