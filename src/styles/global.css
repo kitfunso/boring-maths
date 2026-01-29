@@ -382,9 +382,15 @@ input[type='number'] {
   bottom: 2px;
   display: flex;
   flex-direction: column;
-  width: 28px;
+  width: 40px; /* Larger touch target on mobile */
   border-radius: 0 8px 8px 0; /* 10px input radius minus 2px inset */
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .spin-controls {
+    width: 28px;
+  }
 }
 
 .spin-controls button {
@@ -425,9 +431,17 @@ input[type='number'] {
 }
 
 .spin-controls svg {
-  width: 14px;
-  height: 14px;
-  stroke-width: 3;
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.5;
+}
+
+@media (min-width: 768px) {
+  .spin-controls svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 3;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

@@ -16,9 +16,9 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 const SIZE_CLASSES = {
-  sm: 'py-2 text-base',
-  md: 'py-3 text-lg',
-  lg: 'py-4 text-xl',
+  sm: 'py-2.5 md:py-2 text-base',
+  md: 'py-4 md:py-3 text-lg',
+  lg: 'py-5 md:py-4 text-xl',
 };
 
 /**

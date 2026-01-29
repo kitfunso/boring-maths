@@ -11,14 +11,18 @@ interface ShareResultsProps {
   result: string;
   calculatorName: string;
   className?: string;
+  /** Optional inputs to encode in the shareable URL */
+  inputs?: Record<string, string | number | boolean>;
 }
 
 export default function ShareResults({
   result,
   calculatorName,
   className = '',
+  inputs,
 }: ShareResultsProps) {
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -54,7 +58,21 @@ export default function ShareResults({
     };
   }, [isOpen]);
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  // Build URL with input parameters for sharing
+  const buildShareUrl = () => {
+    if (typeof window === 'undefined') return '';
+    const url = new URL(window.location.href.split('?')[0]);
+    if (inputs) {
+      Object.entries(inputs).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          url.searchParams.set(key, String(value));
+        }
+      });
+    }
+    return url.toString();
+  };
+
+  const shareUrl = buildShareUrl();
   const shareText = `${result} - Calculated with ${calculatorName} on Boring Math`;
 
   const shareLinks = {
@@ -62,6 +80,16 @@ export default function ShareResults({
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+  };
+
+  const copyLinkToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link:', err);
+    }
   };
 
   const copyToClipboard = async () => {
@@ -157,7 +185,39 @@ export default function ShareResults({
 
             <div className="border-t border-white/10 my-1"></div>
 
-            {/* Copy Link */}
+            {/* Copy Link with inputs */}
+            <button
+              role="menuitem"
+              onClick={copyLinkToClipboard}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 text-[var(--color-subtle)] hover:text-[var(--color-cream)] transition-colors text-sm w-full text-left"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                {linkCopied ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                  />
+                )}
+              </svg>
+              <span>{linkCopied ? 'Link Copied!' : 'Copy Link'}</span>
+            </button>
+
+            {/* Copy Result text */}
             <button
               role="menuitem"
               onClick={copyToClipboard}
