@@ -42,6 +42,7 @@ export function getDefaultInputs(): UKStudentLoanInputs {
 }
 
 // 2024/25 Student Loan thresholds and rates
+// Interest rates updated based on prevailing market rate/RPI
 export const LOAN_PLANS = {
   plan1: {
     name: 'Plan 1',
@@ -49,7 +50,7 @@ export const LOAN_PLANS = {
     threshold: 24990,
     rate: 0.09,
     writeOffYears: 25,
-    interestRate: 0.0625, // Currently 6.25% (Sept 2024)
+    interestRate: 0.043, // 4.3% (from March 2025, based on lower RPI)
   },
   plan2: {
     name: 'Plan 2',

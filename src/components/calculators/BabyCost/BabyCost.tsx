@@ -229,9 +229,8 @@ export default function BabyCost() {
                   max={52}
                   showValue
                   labels={{
-                    min: '0',
-                    mid: '26',
-                    max: '52',
+                    min: '0 wks',
+                    max: '52 wks',
                     current: (v) => `${v} weeks`,
                   }}
                 />
@@ -243,8 +242,8 @@ export default function BabyCost() {
                   max={12}
                   showValue
                   labels={{
-                    min: '0',
-                    max: '12',
+                    min: '0 wks',
+                    max: '12 wks',
                     current: (v) => `${v} weeks`,
                   }}
                 />
@@ -256,10 +255,10 @@ export default function BabyCost() {
                 onChange={(value) => updateInput('paidLeavePercent', value / 100)}
                 min={0}
                 max={100}
+                step={5}
                 showValue
                 labels={{
                   min: '0%',
-                  mid: '50%',
                   max: '100%',
                   current: (v) => `${v}%`,
                 }}

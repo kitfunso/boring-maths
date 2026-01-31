@@ -358,6 +358,54 @@ export default function FIRECalculator() {
               }
             />
 
+            {/* Target vs Projected Age Comparison */}
+            {result.yearsToFIRE !== Infinity &&
+              Math.round(result.ageAtFIRE) !== inputs.targetRetirementAge && (
+                <Alert
+                  variant={
+                    Math.round(result.ageAtFIRE) <= inputs.targetRetirementAge
+                      ? 'success'
+                      : 'warning'
+                  }
+                  title={
+                    Math.round(result.ageAtFIRE) <= inputs.targetRetirementAge
+                      ? 'On Track!'
+                      : 'Target Adjustment Needed'
+                  }
+                >
+                  {Math.round(result.ageAtFIRE) < inputs.targetRetirementAge ? (
+                    <p>
+                      Great news! At your current savings rate, you'll reach FIRE at age{' '}
+                      <strong>{Math.round(result.ageAtFIRE)}</strong> —{' '}
+                      <strong>
+                        {inputs.targetRetirementAge - Math.round(result.ageAtFIRE)} years earlier
+                      </strong>{' '}
+                      than your target of age {inputs.targetRetirementAge}.
+                    </p>
+                  ) : (
+                    <p>
+                      Your target retirement age is <strong>{inputs.targetRetirementAge}</strong>,
+                      but at your current savings rate, you'll reach FIRE at age{' '}
+                      <strong>{Math.round(result.ageAtFIRE)}</strong> —{' '}
+                      <strong>
+                        {Math.round(result.ageAtFIRE) - inputs.targetRetirementAge} years later
+                      </strong>
+                      . To retire by {inputs.targetRetirementAge}, you need a{' '}
+                      <strong>{formatPercent(result.savingsRate.requiredRateForTarget)}</strong>{' '}
+                      savings rate
+                      {result.savingsRate.monthlyShortfall > 0 && (
+                        <>
+                          {' '}
+                          (+{formatCurrency(result.savingsRate.monthlyShortfall, result.currency)}
+                          /month)
+                        </>
+                      )}
+                      .
+                    </p>
+                  )}
+                </Alert>
+              )}
+
             {/* Progress Bar */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between items-center mb-2">
