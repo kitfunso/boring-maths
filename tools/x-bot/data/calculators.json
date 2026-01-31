@@ -1,0 +1,184 @@
+{
+  "calculators": [
+    {
+      "slug": "fire-calculator",
+      "name": "FIRE Calculator",
+      "category": "finance",
+      "keywords": ["fire", "retirement", "financial independence", "early retirement"],
+      "hooks": [
+        "When can you retire?",
+        "What's your FIRE number?",
+        "Could you retire in 10 years?"
+      ],
+      "target_audience": ["personal finance enthusiasts", "FIRE community", "millennials"]
+    },
+    {
+      "slug": "compound-interest-calculator",
+      "name": "Compound Interest Calculator",
+      "category": "finance",
+      "keywords": ["compound interest", "investing", "savings", "growth"],
+      "hooks": [
+        "The 8th wonder of the world",
+        "How $100/month becomes $1M",
+        "Time in market beats timing the market"
+      ],
+      "target_audience": ["investors", "savers", "beginners"]
+    },
+    {
+      "slug": "mortgage-calculator",
+      "name": "Mortgage Calculator",
+      "category": "finance",
+      "keywords": ["mortgage", "home buying", "house", "property"],
+      "hooks": [
+        "Can you afford that house?",
+        "What mortgage can you get?",
+        "The true cost of your dream home"
+      ],
+      "target_audience": ["first time buyers", "home buyers", "property investors"]
+    },
+    {
+      "slug": "uk-100k-tax-trap-calculator",
+      "name": "UK £100k Tax Trap Calculator",
+      "category": "finance",
+      "keywords": ["uk tax", "100k", "tax trap", "personal allowance"],
+      "hooks": [
+        "Earning £100k-£125k? You're losing 60%",
+        "The UK's sneaky 60% tax rate",
+        "How to escape the £100k tax trap"
+      ],
+      "target_audience": ["uk professionals", "high earners", "uk finance"]
+    },
+    {
+      "slug": "tip-calculator",
+      "name": "Tip Calculator",
+      "category": "everyday",
+      "keywords": ["tip", "tipping", "restaurant", "bill splitting"],
+      "hooks": [
+        "Split the bill fairly",
+        "No more mental math at dinner",
+        "Tip calculator with bill splitting"
+      ],
+      "target_audience": ["everyone", "diners", "groups"]
+    },
+    {
+      "slug": "bmi-calculator",
+      "name": "BMI Calculator",
+      "category": "health",
+      "keywords": ["bmi", "weight", "health", "body mass"],
+      "hooks": [
+        "Know your BMI in seconds",
+        "Quick health check",
+        "BMI calculator with categories"
+      ],
+      "target_audience": ["health conscious", "fitness", "weight loss"]
+    },
+    {
+      "slug": "paint-calculator",
+      "name": "Paint Calculator",
+      "category": "home",
+      "keywords": ["paint", "diy", "home improvement", "decorating"],
+      "hooks": [
+        "How much paint do you actually need?",
+        "Stop overbuying paint",
+        "DIY paint calculator"
+      ],
+      "target_audience": ["diy enthusiasts", "homeowners", "decorators"]
+    },
+    {
+      "slug": "bbq-calculator",
+      "name": "BBQ Calculator",
+      "category": "food",
+      "keywords": ["bbq", "barbecue", "meat", "grilling", "cookout"],
+      "hooks": [
+        "How much meat for your BBQ?",
+        "Never run out of burgers again",
+        "BBQ planning made easy"
+      ],
+      "target_audience": ["bbq lovers", "hosts", "summer party planners"]
+    },
+    {
+      "slug": "wedding-alcohol-calculator",
+      "name": "Wedding Alcohol Calculator",
+      "category": "events",
+      "keywords": ["wedding", "alcohol", "drinks", "reception", "party"],
+      "hooks": [
+        "How much booze for the big day?",
+        "Wedding bar calculator",
+        "Don't run dry at your wedding"
+      ],
+      "target_audience": ["engaged couples", "wedding planners", "event hosts"]
+    },
+    {
+      "slug": "freelance-day-rate-calculator",
+      "name": "Freelance Day Rate Calculator",
+      "category": "business",
+      "keywords": ["freelance", "day rate", "contractor", "consulting"],
+      "hooks": [
+        "What should you charge?",
+        "Salary to day rate converter",
+        "Stop undercharging as a freelancer"
+      ],
+      "target_audience": ["freelancers", "contractors", "consultants"]
+    },
+    {
+      "slug": "uk-student-loan-calculator",
+      "name": "UK Student Loan Calculator",
+      "category": "finance",
+      "keywords": ["student loan", "uk", "plan 1", "plan 2", "repayment"],
+      "hooks": [
+        "When will you pay off your student loan?",
+        "Will your loan get written off?",
+        "UK student loan repayment calculator"
+      ],
+      "target_audience": ["uk graduates", "students", "young professionals"]
+    },
+    {
+      "slug": "baby-cost-calculator",
+      "name": "Baby Cost Calculator",
+      "category": "family",
+      "keywords": ["baby", "cost", "parenting", "family planning"],
+      "hooks": [
+        "How much does a baby cost in year 1?",
+        "Planning for parenthood?",
+        "The real cost of having a baby"
+      ],
+      "target_audience": ["expecting parents", "family planners", "parents"]
+    },
+    {
+      "slug": "calorie-calculator",
+      "name": "Calorie Calculator",
+      "category": "health",
+      "keywords": ["calories", "tdee", "diet", "nutrition", "weight loss"],
+      "hooks": [
+        "How many calories should you eat?",
+        "TDEE calculator",
+        "Calorie needs for your goals"
+      ],
+      "target_audience": ["dieters", "fitness enthusiasts", "health conscious"]
+    },
+    {
+      "slug": "debt-payoff-calculator",
+      "name": "Debt Payoff Calculator",
+      "category": "finance",
+      "keywords": ["debt", "payoff", "snowball", "avalanche"],
+      "hooks": [
+        "Snowball vs avalanche: which wins?",
+        "How fast can you be debt-free?",
+        "Debt payoff strategy calculator"
+      ],
+      "target_audience": ["debt payoff journey", "personal finance", "budgeters"]
+    },
+    {
+      "slug": "side-hustle-calculator",
+      "name": "Side Hustle Calculator",
+      "category": "business",
+      "keywords": ["side hustle", "gig economy", "extra income", "profit"],
+      "hooks": [
+        "Is your side hustle actually profitable?",
+        "Side gig profit calculator",
+        "What's your true hourly rate?"
+      ],
+      "target_audience": ["side hustlers", "gig workers", "entrepreneurs"]
+    }
+  ]
+}

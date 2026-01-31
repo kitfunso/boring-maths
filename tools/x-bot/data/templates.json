@@ -1,0 +1,56 @@
+{
+  "tweet_templates": {
+    "question_hook": [
+      "{hook} 🤔\n\nTry our free {name}: {url}",
+      "Ever wondered: {hook}\n\n{url}",
+      "{hook}\n\nFind out in seconds 👇\n{url}"
+    ],
+    "problem_solution": [
+      "Tired of {problem}?\n\nOur {name} does the math for you ✨\n\n{url}",
+      "Stop {problem}.\n\nUse this instead 👇\n{url}",
+      "{problem}? There's a calculator for that.\n\n{url}"
+    ],
+    "did_you_know": [
+      "Did you know? {fact}\n\nCalculate yours: {url}",
+      "Fun fact: {fact} 📊\n\n{url}",
+      "TIL: {fact}\n\nCheck yours here: {url}"
+    ],
+    "call_to_action": [
+      "Calculate your {topic} in under 30 seconds ⚡\n\n{url}",
+      "Free {name} - no signup required 🙌\n\n{url}",
+      "Bookmark this: {name}\n\nYou'll need it eventually 📌\n\n{url}"
+    ],
+    "seasonal": [
+      "Planning a {event}? You'll need this 👇\n\n{url}",
+      "{event} season is here! Calculate {topic}: {url}",
+      "Getting ready for {event}? Don't forget to plan: {url}"
+    ],
+    "engagement": [
+      "What's your {topic}? Drop it in the replies 👇\n\nCalculate here: {url}",
+      "Let's play a game: guess your {topic}, then check with our calculator\n\n{url}",
+      "Reply with your result! 📊\n\n{url}"
+    ]
+  },
+  "reply_templates": {
+    "helpful": [
+      "I made a free calculator for exactly this! {url}",
+      "This might help - {name}: {url}",
+      "There's a calculator for that! {url}"
+    ],
+    "casual": [
+      "Oh I built something for this actually: {url}",
+      "Funny timing - just made a {name}: {url}",
+      "Literally made a calculator for this 😅 {url}"
+    ]
+  },
+  "hashtag_pools": {
+    "finance": ["#PersonalFinance", "#FIRE", "#Investing", "#MoneyTwitter", "#FinTwit"],
+    "health": ["#Health", "#Fitness", "#Wellness", "#HealthyLiving"],
+    "home": ["#DIY", "#HomeImprovement", "#Homeowner", "#InteriorDesign"],
+    "business": ["#Freelance", "#Entrepreneur", "#SideHustle", "#SmallBusiness"],
+    "events": ["#Wedding", "#WeddingPlanning", "#EventPlanning", "#Party"],
+    "food": ["#BBQ", "#Grilling", "#Foodie", "#SummerVibes"],
+    "family": ["#Parenting", "#NewParents", "#FamilyPlanning", "#MomLife"],
+    "everyday": ["#LifeHacks", "#Useful", "#MathMadeEasy"]
+  }
+}

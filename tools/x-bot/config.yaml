@@ -1,0 +1,75 @@
+# X Bot Configuration
+
+# Website info
+site:
+  name: "Boring Math Calculators"
+  url: "https://boring-math.com"
+  handle: "@boringmath"  # Your X handle
+
+# Content generation settings
+generator:
+  # LLM provider: openai or anthropic
+  provider: "openai"
+  model: "gpt-4o-mini"
+  
+  # Tweet style preferences
+  style:
+    tone: "helpful and slightly witty"
+    include_emoji: true
+    max_hashtags: 2
+    always_include_link: true
+
+# Posting settings
+poster:
+  # Minimum hours between posts
+  min_hours_between_posts: 4
+  
+  # Posting schedule (24h format, UTC)
+  schedule:
+    - "09:00"
+    - "14:00"
+    - "19:00"
+  
+  # Days to post (0=Monday, 6=Sunday)
+  days: [0, 1, 2, 3, 4]  # Weekdays only
+
+# Monitoring settings
+monitor:
+  # Keywords to watch for
+  keywords:
+    - "fire calculator"
+    - "retirement calculator"
+    - "mortgage calculator"
+    - "compound interest"
+    - "tip calculator"
+    - "how much paint"
+    - "bmi calculator"
+    - "uk tax trap"
+    - "student loan calculator"
+    - "baby cost"
+    - "wedding alcohol"
+    - "bbq calculator"
+  
+  # Check interval in minutes
+  check_interval: 15
+  
+  # Minimum engagement to reply to
+  min_likes: 0
+  min_retweets: 0
+  
+  # Don't reply to accounts with fewer followers than this
+  min_follower_count: 10
+  
+  # Blacklist accounts (don't reply to these)
+  blacklist: []
+
+# Rate limiting
+rate_limits:
+  max_posts_per_day: 10
+  max_replies_per_hour: 5
+  max_searches_per_15min: 15
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/x-bot.log"
