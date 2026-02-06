@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CalorieCalculator from '../../components/calculators/CalorieCalculator/CalorieCalculator';
 
 // SEO Configuration
-const title = 'Calorie Calculator | TDEE & BMR Calculator';
+const title = 'Free Calorie Calculator - Find Your TDEE & Daily Needs | Boring Math';
 const description =
-  'Free calorie calculator with Mifflin-St Jeor formula. Calculate TDEE, BMR, and daily calories for weight loss or muscle gain.';
+  'Calculate your Total Daily Energy Expenditure and BMR based on age, weight, height, and activity level. Get personalized calorie targets. No signup required.';
 const keywords =
   'calorie calculator, TDEE calculator, BMR calculator, daily calorie needs, calories to lose weight, maintenance calories, macro calculator, weight loss calculator';
 const canonicalURL = '/calculators/calorie-calculator';
@@ -115,6 +115,22 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter body stats', text: 'Input your age, gender, height, and weight.' },
+      {
+        name: 'Select activity level',
+        text: 'Choose your typical daily activity level from sedentary to very active.',
+      },
+      {
+        name: 'Set your goal',
+        text: 'Select whether you want to lose weight, maintain, or gain weight.',
+      },
+      {
+        name: 'View calorie targets',
+        text: 'See your BMR, TDEE, and recommended daily calorie intake for your goal.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <!-- Hero Section -->

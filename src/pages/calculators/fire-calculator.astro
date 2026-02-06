@@ -14,9 +14,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import FIRECalculator from '../../components/calculators/FIRECalculator/FIRECalculator';
 
 // SEO Configuration
-const title = 'FIRE Calculator | Retire Early Calculator';
+const title = 'Free FIRE Calculator - Find Your Early Retirement Number | Boring Math';
 const description =
-  'Calculate your FIRE number for financial independence. Find when you can retire early with Lean FIRE, Fat FIRE, and Coast FIRE projections.';
+  'Calculate your FIRE number and find when you can retire early. Factor in savings rate, investments, and withdrawal strategy. Instant results, no signup.';
 const keywords =
   'FIRE calculator, financial independence calculator, retire early calculator, FIRE number, 25x rule, 4% rule calculator, lean FIRE, fat FIRE, coast FIRE, early retirement calculator';
 const canonicalURL = '/calculators/fire-calculator';
@@ -128,6 +128,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter current finances',
+        text: 'Input your current savings, investments, and annual income.',
+      },
+      {
+        name: 'Set savings rate',
+        text: 'Enter the percentage of income you save and invest each month.',
+      },
+      {
+        name: 'Adjust assumptions',
+        text: 'Set expected investment returns, inflation rate, and safe withdrawal rate.',
+      },
+      {
+        name: 'Review FIRE timeline',
+        text: 'See your FIRE number, years to retirement, and projected portfolio growth.',
+      },
+    ]}
+    estimatedTime="PT3M"
   />
 
   <!-- Hero Section -->

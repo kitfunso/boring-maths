@@ -1,0 +1,121 @@
+---
+/**
+ * Engineering Calculators Hub Page
+ *
+ * SEO-optimized category page for engineering calculators.
+ * Targets: "engineering calculator", "fluid dynamics calculator", "CNC calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Engineering';
+const title = 'Free Engineering Calculators | Fluid & CNC Tools | Boring Math';
+const description =
+  'Free engineering calculators for fluid dynamics, thermodynamics, and CNC machining. Calculate pipe flow, Reynolds number, speeds and feeds, and more. Instant results, no signup.';
+const keywords =
+  'engineering calculator, fluid dynamics calculator, CNC calculator, pipe flow calculator, Reynolds number, speeds and feeds, pressure drop, LMTD calculator, ideal gas law, machining calculator';
+const canonicalURL = '/calculators/engineering/';
+
+const calculators = [
+  {
+    title: 'Pipe Flow Calculator',
+    description: 'Calculate flow rate, velocity, and pressure for pipe systems.',
+    href: '/calculators/pipe-flow-calculator',
+    icon: 'calculator',
+    color: 'blue',
+  },
+  {
+    title: 'Pressure Drop Calculator',
+    description: 'Calculate pressure drop through pipes and fittings.',
+    href: '/calculators/pressure-drop-calculator',
+    icon: 'calculator',
+    color: 'blue',
+  },
+  {
+    title: 'Reynolds Number Calculator',
+    description: 'Determine laminar or turbulent flow with Reynolds number.',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'calculator',
+    color: 'ocean',
+  },
+  {
+    title: 'LMTD Calculator',
+    description: 'Calculate Log Mean Temperature Difference for heat exchangers.',
+    href: '/calculators/lmtd-calculator',
+    icon: 'calculator',
+    color: 'coral',
+  },
+  {
+    title: 'Ideal Gas Law Calculator',
+    description: 'Solve PV=nRT for any variable in ideal gas calculations.',
+    href: '/calculators/ideal-gas-law-calculator',
+    icon: 'calculator',
+    color: 'green',
+  },
+  {
+    title: 'Speeds & Feeds Calculator',
+    description: 'Calculate optimal CNC cutting speeds and feed rates.',
+    href: '/calculators/speeds-feeds-calculator',
+    icon: 'calculator',
+    color: 'amber',
+  },
+  {
+    title: 'Cutting Time Calculator',
+    description: 'Estimate CNC machining time for milling and turning operations.',
+    href: '/calculators/cutting-time-calculator',
+    icon: 'calculator',
+    color: 'amber',
+  },
+  {
+    title: 'Tap Drill Calculator',
+    description: 'Find the correct tap drill size for any thread specification.',
+    href: '/calculators/tap-drill-calculator',
+    icon: 'calculator',
+    color: 'blue',
+  },
+  {
+    title: 'Tool Deflection Calculator',
+    description: 'Calculate end mill deflection to prevent chatter and poor finishes.',
+    href: '/calculators/tool-deflection-calculator',
+    icon: 'calculator',
+    color: 'amber',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="calculator"
+  color="blue"
+  tagline="Professional engineering tools for fluid dynamics and CNC machining"
+  calculators={calculators}
+>
+  <p>
+    Our engineering calculators cover fluid dynamics, thermodynamics, and CNC machining. Each tool
+    uses standard engineering formulas and is designed for quick, accurate calculations in the field
+    or at your desk.
+  </p>
+  <p>
+    Whether you're sizing pipes, analyzing heat exchangers, or setting up CNC programs, these
+    calculators handle the math so you can focus on design and problem-solving.
+  </p>
+  <h3>Engineering Disciplines</h3>
+  <ul>
+    <li>
+      <strong>Fluid Dynamics:</strong> Pipe flow, pressure drop, and Reynolds number for piping system
+      design and analysis
+    </li>
+    <li>
+      <strong>Thermodynamics:</strong> LMTD for heat exchanger sizing and ideal gas law for gas behavior
+      calculations
+    </li>
+    <li>
+      <strong>CNC Machining:</strong> Speeds and feeds, cutting time, tap drill sizes, and tool deflection
+      for precision manufacturing
+    </li>
+  </ul>
+</CategoryLayout>

@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import BMICalculator from '../../components/calculators/BMICalculator/BMICalculator';
 
-const title = 'BMI Calculator | Check Your Body Mass Index for Adults';
+const title = 'Free BMI Calculator - Check Your Body Mass Index | Boring Math';
 const description =
-  "Free BMI calculator for adults. Check if you're underweight, normal, overweight, or obese. Works with metric (kg/cm) and imperial (lbs/ft) units.";
+  'Calculate your Body Mass Index instantly with height and weight. See your BMI category and healthy weight range. No signup required.';
 const keywords =
   'bmi calculator, body mass index calculator, am I overweight, healthy weight calculator, bmi chart, bmi for adults, weight for height calculator';
 const canonicalURL = '/calculators/bmi-calculator';
@@ -103,6 +103,15 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter your height', text: 'Input your height in feet and inches or centimeters.' },
+      { name: 'Enter your weight', text: 'Input your weight in pounds or kilograms.' },
+      {
+        name: 'View your BMI',
+        text: 'See your BMI score, category, and healthy weight range for your height.',
+      },
+    ]}
+    estimatedTime="PT1M"
   />
 
   <HeroSection

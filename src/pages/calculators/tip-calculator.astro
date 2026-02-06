@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import TipCalculator from '../../components/calculators/TipCalculator/TipCalculator';
 
 // SEO Configuration
-const title = 'Tip Calculator | Split Bill Between Friends';
+const title = 'Free Tip Calculator - Split Bills Instantly | Boring Math';
 const description =
-  'Free tip calculator to quickly calculate tips and split bills between friends. See tip amounts for 15%, 18%, 20%, and 25% with per-person totals.';
+  'Calculate tips and split restaurant bills between friends in seconds. Choose tip percentage, see per-person amounts. No signup required.';
 const keywords =
   'tip calculator, split bill calculator, tip calculator app, how much to tip, restaurant tip calculator, bill splitter, gratuity calculator';
 const canonicalURL = '/calculators/tip-calculator';
@@ -28,18 +28,11 @@ const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'T
 // Related calculators
 const relatedCalculators = [
   {
-    title: 'Wedding Alcohol Calculator',
-    description: 'Calculate how much beer, wine, and liquor you need for your event.',
-    href: '/calculators/wedding-alcohol-calculator',
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert hourly wages to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
     icon: 'calculator' as const,
-    color: 'purple' as const,
-  },
-  {
-    title: 'Side Hustle Calculator',
-    description: 'Calculate if your side project is truly profitable.',
-    href: '/calculators/side-hustle-profitability-calculator',
-    icon: 'trending' as const,
-    color: 'red' as const,
+    color: 'blue' as const,
   },
 ];
 
@@ -100,6 +93,16 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter bill amount', text: 'Input the total bill amount before tip.' },
+      { name: 'Choose tip percentage', text: 'Select a tip percentage or enter a custom amount.' },
+      { name: 'Set number of people', text: 'Enter how many people are splitting the bill.' },
+      {
+        name: 'See per-person amount',
+        text: 'View the tip amount, total with tip, and each person share.',
+      },
+    ]}
+    estimatedTime="PT1M"
   />
 
   <!-- Hero Section -->

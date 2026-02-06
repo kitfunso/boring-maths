@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import FlooringCalculator from '../../components/calculators/FlooringCalculator/FlooringCalculator';
 
 // SEO Configuration
-const title = 'Flooring Calculator | How Much Flooring Do I Need?';
+const title = 'Free Flooring Calculator - Sq Ft & Cost Estimate | Boring Math';
 const description =
-  'Calculate exactly how much flooring you need with waste factor. Enter room dimensions, choose your pattern, get boxes needed with cost estimates. Includes diagonal, herringbone, and chevron waste calculations.';
+  'Calculate how much flooring you need in square feet and estimate total cost. Includes waste factor for cuts and corners. Instant results, no signup.';
 const keywords =
   'flooring calculator, how much flooring do I need, flooring waste calculator, laminate flooring calculator, hardwood flooring calculator, flooring square footage calculator, flooring cost estimator';
 const canonicalURL = '/calculators/flooring-calculator';
@@ -113,6 +113,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter room dimensions',
+        text: 'Input the length and width of each room or area to be floored.',
+      },
+      {
+        name: 'Set waste factor',
+        text: 'Add a waste percentage for cuts, corners, and pattern matching. Typically 10% for standard layouts.',
+      },
+      {
+        name: 'Enter cost per square foot',
+        text: 'Input the price per square foot of your chosen flooring material.',
+      },
+      {
+        name: 'Review total estimate',
+        text: 'See total square footage needed, waste amount, and estimated material cost.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <!-- Hero Section -->

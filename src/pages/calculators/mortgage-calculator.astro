@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import MortgageCalculator from '../../components/calculators/MortgageCalculator/MortgageCalculator';
 
-const title = 'Mortgage Calculator | How Much House Can I Afford?';
+const title = 'Free Mortgage Calculator - Payments with PMI & Taxes | Boring Math';
 const description =
-  'Free mortgage calculator with PMI, taxes, and insurance. Calculate monthly payments, see how much house you can afford, and compare 15 vs 30-year loans.';
+  'Calculate monthly mortgage payments with PMI, property tax, and insurance included. Compare 15 vs 30-year loans instantly. No signup required.';
 const keywords =
   'mortgage calculator, how much house can I afford, home loan calculator, monthly mortgage payment calculator, mortgage payment with taxes and insurance, PMI calculator, first time home buyer calculator';
 const canonicalURL = '/calculators/mortgage-calculator';
@@ -113,6 +113,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter home price',
+        text: 'Input the total purchase price of the property you are considering.',
+      },
+      {
+        name: 'Set down payment',
+        text: 'Specify your down payment amount. A 20% down payment avoids PMI requirements.',
+      },
+      {
+        name: 'Adjust interest rate',
+        text: 'Set the interest rate to match current market rates or your lender quote.',
+      },
+      {
+        name: 'Include additional costs',
+        text: 'Add property tax, insurance, and HOA fees to see your true monthly housing cost.',
+      },
+    ]}
+    estimatedTime="PT3M"
   />
 
   <HeroSection

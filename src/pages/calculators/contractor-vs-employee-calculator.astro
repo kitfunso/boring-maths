@@ -14,9 +14,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
 
 // SEO Configuration
-const title = 'Contractor vs Employee Calculator | 1099 vs W2 Comparison';
+const title = 'Free 1099 vs W2 Calculator - Compare Pay & Benefits | Boring Math';
 const description =
-  'Compare contractor rates to employee salaries with our free calculator. Account for self-employment tax, benefits, health insurance, and hidden costs to make informed career decisions.';
+  'Compare 1099 contractor vs W2 employee pay side-by-side. Account for self-employment tax, benefits, and hidden costs. Instant results, no signup.';
 const keywords =
   'contractor vs employee calculator, 1099 vs W2 calculator, freelance rate calculator, contract rate to salary, self-employment tax calculator, contractor hourly rate, freelance vs full-time, independent contractor calculator';
 const canonicalURL = '/calculators/contractor-vs-employee-calculator';
@@ -51,6 +51,13 @@ const relatedCalculators = [
     href: '/calculators/go-full-time-calculator',
     icon: 'trending' as const,
     color: 'purple' as const,
+  },
+  {
+    title: 'Salary to Hourly Calculator',
+    description: 'Convert salary to true hourly rate.',
+    href: '/calculators/salary-to-hourly-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
   },
 ];
 
@@ -131,6 +138,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter contractor rate',
+        text: 'Input your hourly or annual contractor rate including expected billable hours per year.',
+      },
+      {
+        name: 'Enter employee salary',
+        text: 'Input the equivalent W2 employee salary you are comparing against.',
+      },
+      {
+        name: 'Add benefits and costs',
+        text: 'Include health insurance costs, retirement match, paid time off, and other benefits to compare.',
+      },
+      {
+        name: 'Review comparison',
+        text: 'See the side-by-side breakdown of total compensation, taxes, and net income for both options.',
+      },
+    ]}
+    estimatedTime="PT3M"
   />
 
   <!-- Hero Section -->

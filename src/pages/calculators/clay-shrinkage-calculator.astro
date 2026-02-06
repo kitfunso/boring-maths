@@ -11,9 +11,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ClayShrinkageCalculator } from '../../components/calculators/ClayShrinkageCalculator';
 
-const title = 'Clay Shrinkage Calculator | Pottery Size Calculator';
+const title = 'Free Clay Shrinkage Calculator - Thrown to Fired Size | Boring Math';
 const description =
-  'Free clay shrinkage calculator for potters. Calculate thrown vs fired sizes for stoneware, porcelain, earthenware, and custom clay bodies.';
+  'Calculate pottery shrinkage from wet clay to fired piece for stoneware, porcelain, and earthenware. Enter thrown size, get fired size. Instant results, no signup.';
 const keywords =
   'clay shrinkage calculator, pottery calculator, ceramic shrinkage, thrown size, fired size, stoneware shrinkage, porcelain shrinkage';
 const canonicalURL = '/calculators/clay-shrinkage-calculator';
@@ -25,6 +25,27 @@ const breadcrumbs = [
 ];
 
 const relatedCalculators = [
+  {
+    title: 'Glaze Calculator',
+    description: 'Calculate glaze recipes and batch sizes for pottery.',
+    href: '/calculators/glaze-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Kiln Cost Calculator',
+    description: 'Estimate electricity costs for kiln firings.',
+    href: '/calculators/kiln-cost-calculator',
+    icon: 'bolt' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate material costs for production pottery.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
   {
     title: 'Unit Converter',
     description: 'Convert between inches and centimeters.',
@@ -65,6 +86,21 @@ const faqs = [
     answer:
       'You can reduce shrinkage by: adding grog (pre-fired clay particles), firing to a lower temperature, or using a clay body formulated for lower shrinkage. However, lower shrinkage often means less vitrification and durability.',
   },
+  {
+    question: 'How do I make a shrinkage ruler for my clay?',
+    answer:
+      'Roll a slab and cut a strip exactly 10 inches or 25 cm long. Mark even increments (1 inch or 1 cm). Let it dry and fire to your target cone. The resulting ruler automatically accounts for shrinkage when you measure new pieces.',
+  },
+  {
+    question: 'Does glaze affect the final size of pottery?',
+    answer:
+      'Glaze adds a very thin layer (typically 0.5-1mm) but does not significantly change dimensions. However, glaze can cause slight warping during firing, especially on flat pieces. Account for glaze thickness only when extremely tight tolerances are needed.',
+  },
+  {
+    question: 'Can I calculate shrinkage for custom clay blends?',
+    answer:
+      'Yes. Test tiles are essential for custom blends since published shrinkage rates only apply to standard formulations. Mix your custom blend, make several test tiles with measured lines, and fire to your target temperature to determine the actual shrinkage rate.',
+  },
 ];
 
 const schemaBreadcrumbs = [
@@ -88,6 +124,21 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Select your clay type',
+        text: 'Choose stoneware, porcelain, earthenware, or enter a custom shrinkage rate for your clay body.',
+      },
+      {
+        name: 'Enter desired fired size',
+        text: 'Input the final size you want after the piece is fully fired and cooled.',
+      },
+      {
+        name: 'Read the thrown size',
+        text: 'The calculator shows how large to throw or form the piece in wet clay to achieve your target fired size.',
+      },
+    ]}
+    estimatedTime="PT1M"
   />
 
   <HeroSection

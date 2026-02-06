@@ -11,9 +11,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ADSCalculator } from '../../components/calculators/ADSCalculator';
 
-const title = 'Additional Dwelling Supplement Calculator | Scotland ADS Tax';
+const title = 'Free Scotland ADS Calculator - 6% Tax + LBTT | Boring Math';
 const description =
-  "Free Scotland ADS calculator. Calculate the Additional Dwelling Supplement (6%) on additional properties, plus LBTT. Includes first-time buyer relief for Scotland's property taxes.";
+  "Calculate Scotland's 6% Additional Dwelling Supplement plus LBTT on second homes and buy-to-let properties. Includes first-time buyer relief. Instant results, no signup.";
 const keywords =
   'additional dwelling supplement calculator, ads calculator scotland, additional dwelling supplement, scotland property tax, lbtt calculator, scotland stamp duty, second home tax scotland, buy to let scotland, ads tax rate';
 const canonicalURL = '/calculators/ads-calculator';
@@ -33,6 +33,20 @@ const relatedCalculators = [
     title: 'SDLT Calculator',
     description: 'England & NI Stamp Duty Land Tax.',
     href: '/calculators/sdlt-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the true costs of buying vs renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly mortgage payments with PMI and taxes.',
+    href: '/calculators/mortgage-calculator',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
@@ -102,6 +116,21 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter property price',
+        text: 'Input the full purchase price of the property you are buying in Scotland.',
+      },
+      {
+        name: 'Select buyer type',
+        text: 'Choose whether you are a first-time buyer, moving home, or purchasing an additional property.',
+      },
+      {
+        name: 'Toggle additional property',
+        text: 'Enable this if the property is a second home, buy-to-let, or you own property elsewhere to add the 6% ADS.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <HeroSection

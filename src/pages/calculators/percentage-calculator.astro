@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PercentageCalculator from '../../components/calculators/PercentageCalculator/PercentageCalculator';
 
 // SEO Configuration
-const title = 'Percentage Calculator | What is X% of Y? | Free Online Tool';
+const title = 'Free Percentage Calculator - X% of Y Instantly | Boring Math';
 const description =
-  'Free percentage calculator: find what percent of a number is, calculate percentage change, increase or decrease values by a percentage. Fast and easy to use.';
+  'Calculate percentages instantly - find X% of Y, percentage change, and percent difference. Three calculators in one. No signup required.';
 const keywords =
   'percentage calculator, what is percent of, percent calculator, percentage change calculator, percent increase calculator, percent decrease calculator, how to calculate percentage';
 const canonicalURL = '/calculators/percentage-calculator';
@@ -115,6 +115,21 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Choose calculation type',
+        text: 'Select what percentage of Y, percentage change, or percentage difference.',
+      },
+      {
+        name: 'Enter your numbers',
+        text: 'Input the values you want to calculate the percentage for.',
+      },
+      {
+        name: 'Get instant result',
+        text: 'See the calculated percentage with step-by-step explanation of the formula used.',
+      },
+    ]}
+    estimatedTime="PT1M"
   />
 
   <!-- Hero Section -->

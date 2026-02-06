@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SleepCalculator from '../../components/calculators/SleepCalculator/SleepCalculator';
 
-const title = 'Sleep Calculator | Find Your Optimal Bedtime & Wake Time';
+const title = 'Free Sleep Calculator - Find Your Best Bedtime | Boring Math';
 const description =
-  'Free sleep calculator based on 90-minute sleep cycles. Calculate the best time to go to bed or wake up for optimal rest. Includes nap calculator and personalized recommendations by age.';
+  'Find your optimal bedtime and wake time based on 90-minute sleep cycles. Wake up refreshed by sleeping in complete cycles. Instant results, no signup.';
 const keywords =
   'sleep calculator, bedtime calculator, wake up time calculator, sleep cycle calculator, 90 minute sleep cycle, nap calculator, optimal sleep time, how much sleep do I need';
 const canonicalURL = '/calculators/sleep-calculator';
@@ -108,6 +108,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Choose your mode',
+        text: 'Select whether you want to find a bedtime or a wake time.',
+      },
+      {
+        name: 'Enter your time',
+        text: 'Input when you need to wake up or when you plan to go to bed.',
+      },
+      {
+        name: 'Account for falling asleep',
+        text: 'The calculator adds 15 minutes for the average time to fall asleep.',
+      },
+      {
+        name: 'Pick a sleep cycle',
+        text: 'Choose from the suggested times that align with complete 90-minute sleep cycles.',
+      },
+    ]}
+    estimatedTime="PT1M"
   />
 
   <HeroSection

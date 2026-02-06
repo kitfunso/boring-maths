@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import BBQCalculator from '../../components/calculators/BBQCalculator/BBQCalculator';
 
 // SEO Configuration
-const title = 'BBQ Calculator | How Much Meat Per Person';
+const title = 'Free BBQ Calculator - Meat Per Person + Shopping List | Boring Math';
 const description =
-  'Calculate how much meat, sides, and supplies you need for your BBQ or cookout. Enter guest count and get a complete shopping list with grilling times.';
+  'Calculate exactly how much meat per person for your BBQ or cookout. Get a complete shopping list with sides and grilling times. Instant results, no signup.';
 const keywords =
   'BBQ calculator, how much meat per person, cookout calculator, BBQ planning, meat calculator, grilling calculator, barbecue portions';
 const canonicalURL = '/calculators/bbq-calculator';
@@ -40,6 +40,20 @@ const relatedCalculators = [
     href: '/calculators/tip-calculator',
     icon: 'trending' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Party Drink Calculator',
+    description: 'Estimate non-alcoholic drinks, juice, and ice for your party.',
+    href: '/calculators/party-drink-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate daily calorie needs and macros.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'pink' as const,
   },
 ];
 
@@ -75,6 +89,16 @@ const faqs = [
     answer:
       'Classic BBQ sides include: coleslaw, baked beans, potato salad, corn on the cob, mac and cheese, and green salad. Plan for 2-4 sides per person, with about 1/2 cup of each side dish. Having 3-4 different options gives variety without overwhelming.',
   },
+  {
+    question: 'How much pulled pork per person?',
+    answer:
+      'Plan for 1/3 pound of cooked pulled pork per person for sandwiches. Since pork shoulder loses about 40-50% of its weight during cooking, buy 2/3 pound of raw pork per person. For 20 guests, that is about 13-14 pounds of raw pork butt or shoulder.',
+  },
+  {
+    question: 'How do I plan a BBQ for 50 or more people?',
+    answer:
+      'For large BBQs: buy meat 3-5 days ahead from a butcher, start cooking early in the morning, and use multiple grills or smokers. Plan 1/2 pound of cooked meat per person, 3-4 side dishes, and 2-3 drinks per person per hour. Assign helpers for serving and cleanup.',
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -100,6 +124,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter guest count',
+        text: 'Input the total number of guests and how many are children under 12.',
+      },
+      {
+        name: 'Set appetite level',
+        text: 'Choose light, average, or hungry depending on your crowd and event type.',
+      },
+      {
+        name: 'Choose meat type',
+        text: 'Select your main protein: burgers, chicken, ribs, or mixed for a classic variety.',
+      },
+      {
+        name: 'Get your shopping list',
+        text: 'Review the complete shopping list with exact quantities for meat, sides, and supplies.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <!-- Hero Section -->

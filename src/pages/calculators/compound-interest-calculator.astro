@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CompoundInterestCalculator from '../../components/calculators/CompoundInterest/CompoundInterestCalculator';
 
-const title = 'Compound Interest Calculator | How Fast Will My Money Grow?';
+const title = 'Free Compound Interest Calculator - Watch Money Grow | Boring Math';
 const description =
-  'Free compound interest calculator with monthly contributions. See how your savings grow over time with charts.';
+  'See how your money grows with compound interest over time. Adjust rate, contributions, and compounding frequency. Instant results, no signup.';
 const keywords =
   'compound interest calculator, compound interest formula, how to calculate compound interest, investment growth calculator, savings growth calculator, money growth calculator, rule of 72 calculator';
 const canonicalURL = '/calculators/compound-interest-calculator';
@@ -113,6 +113,25 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter initial investment',
+        text: 'Input your starting principal amount or current savings balance.',
+      },
+      {
+        name: 'Set interest rate and period',
+        text: 'Enter the expected annual interest rate and the number of years to invest.',
+      },
+      {
+        name: 'Add monthly contributions',
+        text: 'Optionally add regular monthly contributions to see how they accelerate growth.',
+      },
+      {
+        name: 'View growth chart',
+        text: 'Review the year-by-year breakdown showing how compound interest grows your money.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <HeroSection

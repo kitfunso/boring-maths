@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PaintCalculator from '../../components/calculators/PaintCalculator/PaintCalculator';
 
 // SEO Configuration
-const title = 'Paint Calculator | How Much Paint Do I Need?';
+const title = 'Free Paint Calculator - Gallons Needed for Any Room | Boring Math';
 const description =
-  'Calculate exactly how much paint you need for your room. Enter dimensions, get gallons needed with cost estimates. Includes primer and trim paint calculations.';
+  'Calculate exactly how many gallons of paint you need for walls and ceilings. Account for doors, windows, and coats. Instant results, no signup.';
 const keywords =
   'paint calculator, how much paint do I need, paint coverage calculator, room paint calculator, wall paint estimator, gallons of paint calculator';
 const canonicalURL = '/calculators/paint-calculator';
@@ -100,6 +100,22 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter room dimensions',
+        text: 'Input room length, width, and ceiling height in feet or meters.',
+      },
+      {
+        name: 'Subtract openings',
+        text: 'Enter the number and size of doors and windows to subtract from the paintable area.',
+      },
+      { name: 'Set number of coats', text: 'Choose how many coats of paint you plan to apply.' },
+      {
+        name: 'View paint estimate',
+        text: 'See total square footage and gallons of paint needed with recommended coverage rates.',
+      },
+    ]}
+    estimatedTime="PT2M"
   />
 
   <!-- Hero Section -->

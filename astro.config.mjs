@@ -37,6 +37,9 @@ export default defineConfig({
         if (item.url === 'https://boring-math.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
+        } else if (item.url.match(/\/calculators\/[a-z-]+\/$/)) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
         } else if (item.url.includes('/calculators/')) {
           item.priority = 0.8;
           item.changefreq = 'monthly';

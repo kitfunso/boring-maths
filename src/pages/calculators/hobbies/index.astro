@@ -1,0 +1,135 @@
+---
+/**
+ * Hobbies & Crafts Calculators Hub Page
+ *
+ * SEO-optimized category page for hobby and craft calculators.
+ * Targets: "craft calculator", "hobby calculator", "pottery calculator"
+ */
+
+import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+
+const category = 'Hobbies';
+const title = 'Free Hobby & Craft Calculators | Tools for Makers | Boring Math';
+const description =
+  'Free calculators for pottery, candle making, soap making, aquariums, and more. Tools for crafters, makers, and hobbyists. Instant results, no signup.';
+const keywords =
+  'craft calculator, hobby calculator, pottery calculator, candle making calculator, soap calculator, aquarium calculator, clay shrinkage, glaze calculator, fragrance calculator';
+const canonicalURL = '/calculators/hobbies/';
+
+const calculators = [
+  {
+    title: 'Clay Shrinkage Calculator',
+    description: 'Calculate thrown vs fired sizes for stoneware, porcelain, and earthenware.',
+    href: '/calculators/clay-shrinkage-calculator',
+    icon: 'cube',
+    color: 'amber',
+  },
+  {
+    title: 'Glaze Calculator',
+    description: 'Calculate glaze recipes and batch sizes for pottery.',
+    href: '/calculators/glaze-calculator',
+    icon: 'calculator',
+    color: 'blue',
+  },
+  {
+    title: 'Kiln Cost Calculator',
+    description: 'Estimate electricity costs for kiln firings.',
+    href: '/calculators/kiln-cost-calculator',
+    icon: 'bolt',
+    color: 'amber',
+  },
+  {
+    title: 'Candle Wax Calculator',
+    description: 'Calculate wax, fragrance, and dye for candle making.',
+    href: '/calculators/candle-wax-calculator',
+    icon: 'fire',
+    color: 'coral',
+  },
+  {
+    title: 'Fragrance Calculator',
+    description: 'Calculate fragrance oil amounts for candles and soaps.',
+    href: '/calculators/fragrance-calculator',
+    icon: 'leaf',
+    color: 'green',
+  },
+  {
+    title: 'Lye Calculator',
+    description: 'Calculate lye and water amounts for cold process soap making.',
+    href: '/calculators/lye-calculator',
+    icon: 'calculator',
+    color: 'ocean',
+  },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate material costs for production crafts.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'dollar',
+    color: 'green',
+  },
+  {
+    title: 'Fish Stocking Calculator',
+    description: 'Calculate how many fish your aquarium can safely hold.',
+    href: '/calculators/fish-stocking-calculator',
+    icon: 'calculator',
+    color: 'ocean',
+  },
+  {
+    title: 'CO2 Calculator',
+    description: 'Calculate CO2 injection rates for planted aquariums.',
+    href: '/calculators/co2-calculator',
+    icon: 'calculator',
+    color: 'green',
+  },
+  {
+    title: 'EI Dosing Calculator',
+    description: 'Calculate Estimative Index fertilizer dosing for planted tanks.',
+    href: '/calculators/ei-dosing-calculator',
+    icon: 'leaf',
+    color: 'green',
+  },
+  {
+    title: 'Water Change Calculator',
+    description: 'Calculate water change volumes and schedules for aquariums.',
+    href: '/calculators/water-change-calculator',
+    icon: 'calculator',
+    color: 'ocean',
+  },
+];
+---
+
+<CategoryLayout
+  category={category}
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  icon="cube"
+  color="amber"
+  tagline="Precision tools for crafters, makers, and hobbyists"
+  calculators={calculators}
+>
+  <p>
+    Our hobby and craft calculators help you get precise results every time. Whether you're throwing
+    pottery, pouring candles, making soap, or maintaining an aquarium, these tools eliminate the
+    guesswork.
+  </p>
+  <p>
+    Each calculator uses proven formulas from experienced crafters and hobbyists. Save time, reduce
+    waste, and get consistent results on every project.
+  </p>
+  <h3>Craft Categories</h3>
+  <ul>
+    <li>
+      <strong>Pottery & Ceramics:</strong> Clay shrinkage, glaze recipes, and kiln cost calculators for
+      potters at every level
+    </li>
+    <li>
+      <strong>Candle & Soap Making:</strong> Wax, fragrance, lye, and batch cost calculators for precise
+      formulations
+    </li>
+    <li>
+      <strong>Aquarium Keeping:</strong> Fish stocking, CO2 injection, fertilizer dosing, and water change
+      calculators for healthy tanks
+    </li>
+  </ul>
+</CategoryLayout>
