@@ -12,7 +12,6 @@ from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass
 
-from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -49,21 +48,43 @@ class ContentGenerator:
         self.calculators = self._load_json("calculators.json")["calculators"]
         self.templates = self._load_json("templates.json")
         
-        # Initialize LLM client
-        provider = config.get("generator", {}).get("provider", "openai")
-        if provider == "openai":
-            self.llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-            self.model = config.get("generator", {}).get("model", "gpt-4o-mini")
-        else:
-            raise ValueError(f"Unsupported provider: {provider}")
+        # Load pre-generated tweets (no API needed)
+        self.pre_generated = self._load_pre_generated()
+        
+        # Initialize LLM client (optional - for dynamic generation)
+        self.provider = config.get("generator", {}).get("provider", "none")
+        self.model = config.get("generator", {}).get("model", "")
+        self.llm = None
+        
+        if self.provider == "anthropic" and os.getenv("ANTHROPIC_API_KEY"):
+            try:
+                import anthropic
+                self.llm = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+            except ImportError:
+                logger.warning("Anthropic not installed, using pre-generated tweets")
+        elif self.provider == "openai" and os.getenv("OPENAI_API_KEY"):
+            try:
+                from openai import OpenAI
+                self.llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            except ImportError:
+                logger.warning("OpenAI not installed, using pre-generated tweets")
         
         logger.info(f"Content generator initialized with {len(self.calculators)} calculators")
     
     def _load_json(self, filename: str) -> dict:
         """Load a JSON file from the data directory."""
         path = DATA_DIR / filename
-        with open(path) as f:
+        with open(path, encoding="utf-8") as f:
             return json.load(f)
+    
+    def _load_pre_generated(self) -> list[dict]:
+        """Load pre-generated tweets."""
+        path = DATA_DIR / "pre_generated_tweets.json"
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+                return data.get("tweets", [])
+        return []
     
     def _get_calculator_url(self, slug: str) -> str:
         """Get the full URL for a calculator."""
@@ -86,6 +107,25 @@ class ContentGenerator:
         Returns:
             GeneratedTweet object
         """
+        # Try pre-generated tweets first (no API needed)
+        if self.pre_generated:
+            if calculator_slug:
+                matching = [t for t in self.pre_generated if t["calculator"] == calculator_slug]
+            else:
+                matching = self.pre_generated
+            
+            if matching:
+                selected = random.choice(matching)
+                calc = next((c for c in self.calculators if c["slug"] == selected["calculator"]), None)
+                return GeneratedTweet(
+                    text=selected["text"],
+                    calculator_slug=selected["calculator"],
+                    calculator_name=calc["name"] if calc else selected["calculator"],
+                    template_type="pre_generated",
+                    hashtags=[]
+                )
+        
+        # Fallback to dynamic generation
         # Select calculator
         if calculator_slug:
             calc = next((c for c in self.calculators if c["slug"] == calculator_slug), None)
@@ -103,7 +143,7 @@ class ContentGenerator:
         
         url = self._get_calculator_url(calc["slug"])
         
-        if use_llm:
+        if use_llm and self.llm:
             tweet_text = self._generate_with_llm(calc, ttype, url)
         else:
             tweet_text = self._generate_from_template(calc, ttype, url)
@@ -171,14 +211,21 @@ Requirements:
 Generate ONLY the tweet text, nothing else."""
 
         try:
-            response = self.llm.chat.completions.create(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=150,
-                temperature=0.8
-            )
-            
-            tweet = response.choices[0].message.content.strip()
+            if self.provider == "anthropic":
+                response = self.llm.messages.create(
+                    model=self.model,
+                    max_tokens=150,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                tweet = response.content[0].text.strip()
+            else:
+                response = self.llm.chat.completions.create(
+                    model=self.model,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=150,
+                    temperature=0.8
+                )
+                tweet = response.choices[0].message.content.strip()
             
             # Remove any quotes the LLM might have added
             tweet = tweet.strip('"\'')
@@ -269,14 +316,21 @@ Requirements:
 Generate ONLY the reply text, nothing else."""
 
         try:
-            response = self.llm.chat.completions.create(
-                model=self.model,
-                messages=[{"role": "user", "content": prompt}],
-                max_tokens=100,
-                temperature=0.7
-            )
-            
-            reply = response.choices[0].message.content.strip().strip('"\'')
+            if self.provider == "anthropic":
+                response = self.llm.messages.create(
+                    model=self.model,
+                    max_tokens=100,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                reply = response.content[0].text.strip().strip('"\'')
+            else:
+                response = self.llm.chat.completions.create(
+                    model=self.model,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=100,
+                    temperature=0.7
+                )
+                reply = response.choices[0].message.content.strip().strip('"\'')
             
             # Ensure URL is present
             if url not in reply:

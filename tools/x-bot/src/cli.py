@@ -32,7 +32,7 @@ from src.generator import get_generator
 from src.poster import get_poster
 from src.monitor import get_monitor
 
-console = Console()
+console = Console(force_terminal=True, color_system="auto")
 CONFIG_FILE = Path(__file__).parent.parent / "config.yaml"
 
 

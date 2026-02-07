@@ -8,9 +8,9 @@ site:
 
 # Content generation settings
 generator:
-  # LLM provider: openai or anthropic
-  provider: "openai"
-  model: "gpt-4o-mini"
+  # LLM provider: openai, anthropic, or none (uses pre-generated tweets)
+  provider: "none"
+  model: ""
   
   # Tweet style preferences
   style:

@@ -121,4 +121,29 @@ useEffect(() => {
 
 ---
 
-*Last updated: 2026-02-06*
+---
+
+## Tooling
+
+### X-Bot (`tools/x-bot/`)
+Automated Twitter/X content generation and posting:
+- Templates in `data/templates.json`
+- Calculator data in `data/calculators.json`
+- CLI: `python -m src.cli generate`, `post`, `monitor`
+- Requires X API credentials + OpenAI key in `.env`
+
+Use for scheduled content posting after manual review of generated drafts.
+
+---
+
+## Task Queue Hygiene
+
+### Archive Completed Tasks
+Don't let completed tasks sit in "Active" section — creates confusion when checking for work. Move to DONE.md or separate archive section.
+
+### Empty Backlog Is Success
+No tasks = job done. Don't manufacture busywork. Wait for assignment.
+
+---
+
+*Last updated: 2026-02-07*
