@@ -146,4 +146,19 @@ No tasks = job done. Don't manufacture busywork. Wait for assignment.
 
 ---
 
-*Last updated: 2026-02-07*
+## Key Documentation
+
+### ADDING_CALCULATORS.md (`docs/ADDING_CALCULATORS.md`)
+Comprehensive guide for AI-assisted calculator creation:
+- Keyword research criteria and tools
+- Input/output definition templates
+- Complete file structure (types → calculations → component → page)
+- AI prompts for each step
+- Testing checklist (functionality, design, accessibility, SEO, performance)
+- Example code for every file type
+
+**Use this for every new calculator.** It's the single source of truth for the development workflow.
+
+---
+
+*Last updated: 2026-02-08*
