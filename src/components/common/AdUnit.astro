@@ -2,7 +2,9 @@
 /**
  * AdUnit Component
  *
- * Reusable Google AdSense ad unit component.
+ * Reusable Google AdSense ad unit component with lazy loading.
+ * Uses IntersectionObserver to defer ad loading until visible,
+ * keeping Lighthouse scores high.
  * Only renders in production to avoid ad serving errors during development.
  */
 
@@ -13,6 +15,7 @@ export interface Props {
   layoutKey?: string;
   className?: string;
   style?: string;
+  lazy?: boolean;
 }
 
 const {
@@ -22,15 +25,17 @@ const {
   layoutKey,
   className = '',
   style = 'display:block',
+  lazy = true,
 } = Astro.props;
 
 const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
+const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 {
   isProd && (
-    <div class={`ad-container ${className}`}>
+    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'}>
       <ins
         class="adsbygoogle"
         style={style}
@@ -41,8 +46,37 @@ const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
         data-ad-layout={layout}
         data-ad-layout-key={layoutKey}
       />
-      <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
+  )
+}
+
+{
+  isProd && lazy && (
+    <script is:inline define:vars={{ uniqueId }}>
+      (function() {
+        var el = document.getElementById(uniqueId);
+        if (!el) return;
+        if ('IntersectionObserver' in window) {
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+                obs.disconnect();
+              }
+            });
+          }, { rootMargin: '200px' });
+          obs.observe(el);
+        } else {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        }
+      })();
+    </script>
+  )
+}
+
+{
+  isProd && !lazy && (
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   )
 }
 
@@ -50,7 +84,7 @@ const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
   !isProd && (
     <div class={`ad-placeholder ${className}`}>
       <div class="bg-[var(--color-charcoal)] border border-dashed border-white/20 rounded-xl py-3 px-4 text-center">
-        <p class="text-xs text-[var(--color-muted)]">Ad (slot: {slot})</p>
+        <p class="text-xs text-[var(--color-muted)]">Ad (slot: {slot}{lazy ? ', lazy' : ''})</p>
       </div>
     </div>
   )

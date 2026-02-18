@@ -1,0 +1,59 @@
+---
+/**
+ * AffiliateCard Component
+ *
+ * Reusable card for recommending financial products with affiliate links.
+ * Styled to match the blue trust palette. Includes required disclosure.
+ */
+
+export interface Props {
+  productName: string;
+  description: string;
+  ctaText?: string;
+  href?: string;
+  icon?: string;
+}
+
+const {
+  productName,
+  description,
+  ctaText = 'Learn More',
+  href = '#affiliate-placeholder',
+  icon = '💰',
+} = Astro.props;
+---
+
+<div class="affiliate-card bento-card p-5 my-6 border border-blue-500/20 relative overflow-hidden">
+  <!-- Subtle blue accent glow -->
+  <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative flex flex-col sm:flex-row items-start gap-4">
+    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-xl">
+      {icon}
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <h4 class="font-display text-lg text-[var(--color-cream)] mb-1">{productName}</h4>
+      <p class="text-sm text-[var(--color-subtle)] mb-3 line-clamp-2">{description}</p>
+
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-lg shadow-blue-500/20"
+        >
+          {ctaText}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+
+        <span class="text-[10px] text-[var(--color-muted)] leading-tight">
+          Affiliate link · We may earn a commission at no extra cost to you.
+          <a href="/affiliate-disclosure" class="underline hover:text-[var(--color-subtle)]">Disclosure</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
