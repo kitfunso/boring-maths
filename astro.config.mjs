@@ -52,6 +52,10 @@ export default defineConfig({
     }),
   ],
 
+  redirects: {
+    '/privacy': '/privacy-policy',
+  },
+
   output: 'static',
 
   // Prefetch links for faster navigation
