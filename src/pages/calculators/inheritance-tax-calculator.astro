@@ -1,0 +1,170 @@
+---
+/**
+ * UK Inheritance Tax Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { InheritanceTaxCalculator } from '../../components/calculators/InheritanceTaxCalculator';
+
+const title = 'Free Inheritance Tax Calculator — UK IHT Estimator 2024/25 | Boring Math';
+const description =
+  'Free UK inheritance tax calculator. Estimate IHT with nil-rate band (£325k), residence nil-rate band (£175k), spouse exemption, and charitable giving relief.';
+const keywords =
+  'inheritance tax calculator, iht calculator, inheritance tax uk, nil rate band, residence nil rate band, inheritance tax threshold, inheritance tax spouse exemption, inheritance tax 2024';
+const canonicalURL = '/calculators/inheritance-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Inheritance Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT on property purchases.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Escape the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Pension Calculator',
+    description: 'Plan your retirement pension.',
+    href: '/calculators/uk-pension-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'UK Dividend Tax Calculator',
+    description: 'Calculate tax on dividend income.',
+    href: '/calculators/uk-dividend-tax-calculator',
+    icon: 'chart' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the inheritance tax threshold in the UK?',
+    answer:
+      'The standard inheritance tax threshold (nil-rate band) is £325,000. Estates valued below this amount pay no inheritance tax. This threshold has been frozen since 2009 and is set to remain at £325,000 until at least April 2028.',
+  },
+  {
+    question: 'What is the residence nil-rate band (RNRB)?',
+    answer:
+      'The residence nil-rate band is an additional £175,000 allowance available when you leave your main home to direct descendants (children, grandchildren, stepchildren). This brings the potential tax-free threshold to £500,000 per person. The RNRB is tapered for estates over £2 million, reducing by £1 for every £2 above this threshold.',
+  },
+  {
+    question: 'How does the spouse exemption work?',
+    answer:
+      'Transfers between married couples and civil partners are completely exempt from inheritance tax, regardless of the amount. Additionally, any unused nil-rate band and residence nil-rate band can be transferred to the surviving spouse, potentially doubling the tax-free threshold to £1 million for couples.',
+  },
+  {
+    question: 'Are gifts subject to inheritance tax?',
+    answer:
+      'Gifts made more than 7 years before death are completely exempt. Gifts made within 7 years may be taxed on a sliding scale (taper relief): 0–3 years = 40%, 3–4 years = 32%, 4–5 years = 24%, 5–6 years = 16%, 6–7 years = 8%. Small gifts up to £250 per person per year and the annual exemption of £3,000 are always exempt.',
+  },
+  {
+    question: 'What is the inheritance tax rate?',
+    answer:
+      'The standard IHT rate is 40% on the value of the estate above the nil-rate band. A reduced rate of 36% applies if you leave at least 10% of the net estate to charity. This can be a tax-efficient way to reduce your IHT bill while supporting good causes.',
+  },
+  {
+    question: 'How can I reduce my inheritance tax bill?',
+    answer:
+      'Key strategies include: making gifts during your lifetime (exempt after 7 years), leaving at least 10% to charity (reduces rate to 36%), using pension funds (usually outside the estate), setting up trusts, taking out life insurance written in trust to cover the IHT bill, and making use of business and agricultural property relief.',
+  },
+  {
+    question: 'When is inheritance tax due?',
+    answer:
+      'IHT is normally due within 6 months of the end of the month in which the person died. If paid late, interest is charged. For property and certain assets, you can opt to pay in annual instalments over 10 years, though interest still applies on the outstanding balance.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Inheritance Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Inheritance Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Inheritance Tax Calculator"
+    description="Estimate UK inheritance tax (IHT) on your estate. Includes nil-rate band, residence nil-rate band, spouse exemption, and charitable giving relief."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <InheritanceTaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your total estate value</strong> – Include property,
+        savings, investments, and possessions.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add your main residence value</strong> – This determines
+        eligibility for the residence nil-rate band.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select applicable exemptions</strong> – Toggle spouse
+        exemption, direct descendant relief, and transferred allowances.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Include gifts and charity</strong> – Add gifts made
+        in the last 7 years and any charitable bequests.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding the Nil-Rate Bands">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-[var(--color-cream)]">nil-rate band (NRB)</strong> of £325,000 is the
+        basic tax-free threshold. Everyone gets this allowance, regardless of their circumstances.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">residence nil-rate band (RNRB)</strong> adds up
+        to £175,000 extra when you leave your home to direct descendants. Combined, a single person can
+        pass on up to <strong class="text-emerald-400">£500,000</strong> tax-free.
+      </p>
+      <p>
+        Married couples and civil partners can <strong class="text-blue-400"
+          >transfer unused allowances</strong
+        >, potentially creating a combined tax-free threshold of up to <strong
+          class="text-emerald-400">£1,000,000</strong
+        >.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

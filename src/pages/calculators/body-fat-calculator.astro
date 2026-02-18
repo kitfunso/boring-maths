@@ -1,0 +1,182 @@
+---
+/**
+ * Body Fat Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BodyFatCalculator from '../../components/calculators/BodyFatCalculator/BodyFatCalculator';
+
+const title = 'Free Body Fat Calculator — Navy Method Estimate | Boring Math';
+const description =
+  'Estimate your body fat percentage using the U.S. Navy method. Just enter height, waist, neck, and hip measurements. Instant results with category classification.';
+const keywords =
+  'body fat calculator, body fat percentage, Navy method body fat, body composition calculator, body fat estimate, how to measure body fat, body fat categories, lean body mass';
+const canonicalURL = '/calculators/body-fat-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Body Fat Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index.',
+    href: '/calculators/bmi-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'TDEE Calculator',
+    description: 'Find your Total Daily Energy Expenditure.',
+    href: '/calculators/tdee-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Estimate daily calorie needs for your goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Get your ideal macronutrient breakdown.',
+    href: '/calculators/macro-calculator',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the U.S. Navy body fat method?',
+    answer:
+      'The U.S. Navy method estimates body fat percentage using circumference measurements (waist, neck, and hips for women) along with height. It was developed by the Naval Health Research Center and is used by the U.S. military for fitness assessments. It is reasonably accurate (within 3-4% of DEXA scans for most people).',
+  },
+  {
+    question: 'How accurate is this body fat calculator?',
+    answer:
+      'The Navy method is typically accurate within 3-4% of more precise methods like DEXA scans or hydrostatic weighing. It works best for people with average body compositions and may be less accurate for very lean athletes or those with significant obesity.',
+  },
+  {
+    question: 'What is a healthy body fat percentage?',
+    answer:
+      'For men, 14-18% is considered the fitness range and 18-25% is average. For women, 21-25% is fitness and 25-32% is average. Essential fat (the minimum for health) is 2-6% for men and 10-14% for women. Athletes typically range 6-14% (men) and 14-21% (women).',
+  },
+  {
+    question: 'How do I measure my waist correctly?',
+    answer:
+      "Stand relaxed and wrap a flexible tape measure around your waist at navel (belly button) level. Don't suck in your stomach. The tape should be snug but not compressing the skin. Take two measurements and average them.",
+  },
+  {
+    question: 'Why is body fat percentage better than BMI?',
+    answer:
+      'BMI only uses height and weight, so it can\'t distinguish between muscle and fat. A muscular person may have a "overweight" BMI but low body fat. Body fat percentage directly measures composition, giving a more accurate picture of health and fitness.',
+  },
+  {
+    question: 'How often should I measure body fat?',
+    answer:
+      'Measure every 2-4 weeks at the same time of day (morning, before eating). Body fat changes slowly, so measuring more frequently leads to frustration from normal daily fluctuations. Track the trend over months, not individual readings.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Body Fat Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Body Fat Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Select your sex', text: 'Choose male or female as the formula differs.' },
+      {
+        name: 'Enter measurements',
+        text: 'Measure and input your height, waist, neck, and hip (women) circumferences.',
+      },
+      {
+        name: 'View results',
+        text: 'See your estimated body fat percentage and fitness category.',
+      },
+    ]}
+    estimatedTime="PT2M"
+  />
+
+  <HeroSection
+    title="Body Fat Calculator"
+    description="Estimate your body fat percentage using the proven U.S. Navy method with simple tape measurements."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <BodyFatCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>sex</strong> — the Navy method uses different formulas for men and women. Women
+      require an additional hip measurement.
+    </p>
+    <p>
+      Enter your <strong>height, waist, and neck</strong> measurements using a flexible tape measure.
+      For women, also measure your <strong>hips</strong> at the widest point.
+    </p>
+    <p>
+      The calculator instantly shows your <strong>estimated body fat percentage</strong> and classifies
+      you into a fitness category from Essential Fat to Obese.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Body Fat vs. BMI">
+    <p>
+      <strong>BMI is a screening tool,</strong> not a body composition measure. It uses only height and
+      weight, which means a muscular person can be classified as "overweight" despite having low body
+      fat.
+    </p>
+    <p>
+      <strong>Body fat percentage</strong> directly measures how much of your weight is fat versus lean
+      mass (muscle, bone, organs, water). This gives a much more accurate picture of your health and fitness
+      level.
+    </p>
+    <p>
+      Use both metrics together: <strong>BMI for a quick screening</strong> and body fat percentage for
+      a deeper understanding of your body composition.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Accurate Measurements">
+    <p>
+      <strong>Measure in the morning</strong> before eating or drinking, wearing minimal clothing. This
+      gives the most consistent readings over time.
+    </p>
+    <p>
+      <strong>Stand relaxed</strong> — don't flex muscles or suck in your stomach. The tape should be
+      level and snug without compressing the skin.
+    </p>
+    <p>
+      <strong>Take each measurement twice</strong> and use the average. If the two readings differ by
+      more than 0.5 cm (0.25 inches), measure a third time.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

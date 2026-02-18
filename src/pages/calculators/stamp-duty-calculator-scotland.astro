@@ -1,0 +1,161 @@
+---
+/**
+ * Scotland Stamp Duty (LBTT) Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { LBTTCalculator } from '../../components/calculators/LBTTCalculator';
+
+const title = 'Free Stamp Duty Calculator Scotland (LBTT) — Property Tax 2024/25 | Boring Math';
+const description =
+  'Free Scotland stamp duty (LBTT) calculator. Calculate Land and Buildings Transaction Tax with first-time buyer relief, ADS surcharge, and non-resident rates.';
+const keywords =
+  'lbtt calculator, stamp duty scotland, land and buildings transaction tax, scotland property tax, lbtt rates, first time buyer scotland, additional dwelling supplement, ads scotland';
+const canonicalURL = '/calculators/stamp-duty-calculator-scotland';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Stamp Duty Calculator Scotland (LBTT)' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT for England & Northern Ireland.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Stamp Duty Calculator Wales',
+    description: 'Calculate LTT for Welsh property purchases.',
+    href: '/calculators/stamp-duty-calculator-wales',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Scotland ADS Calculator',
+    description: 'Calculate Additional Dwelling Supplement.',
+    href: '/calculators/ads-calculator',
+    icon: 'calculator' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate your monthly mortgage payments.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is LBTT in Scotland?',
+    answer:
+      "Land and Buildings Transaction Tax (LBTT) is Scotland's property purchase tax, replacing UK Stamp Duty from April 2015. It's administered by Revenue Scotland. LBTT is a progressive tax — you only pay the higher rate on the portion of the price within each band.",
+  },
+  {
+    question: 'What are the current LBTT rates?',
+    answer:
+      'LBTT rates are: 0% up to £145,000 (£175,000 for first-time buyers), 2% from £145,001–£250,000, 5% from £250,001–£325,000, 10% from £325,001–£750,000, and 12% above £750,000.',
+  },
+  {
+    question: 'Is there first-time buyer relief in Scotland?',
+    answer:
+      'Yes, first-time buyers in Scotland benefit from an increased nil-rate band of £175,000 (compared to £145,000 for other buyers). This can save up to £600 on your LBTT bill. You must not have previously owned a property anywhere in the world.',
+  },
+  {
+    question: 'What is the Additional Dwelling Supplement (ADS)?',
+    answer:
+      "The ADS is an extra 6% tax on the total purchase price when buying an additional residential property in Scotland worth £40,000 or more. This applies to second homes, buy-to-let properties, and holiday homes. It's paid on top of LBTT.",
+  },
+  {
+    question: 'How does LBTT compare to English stamp duty?',
+    answer:
+      "LBTT has lower starting thresholds (£145,000 vs £250,000 for SDLT) but different band structures. Scotland's ADS at 6% is higher than England's additional property surcharge of 5%. Overall costs vary by property price and buyer type.",
+  },
+  {
+    question: 'When do I need to pay LBTT?',
+    answer:
+      'LBTT must be paid within 30 days of the effective date of the transaction (usually the date of entry/settlement). Your solicitor normally handles the LBTT return and payment on your behalf through Revenue Scotland.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Stamp Duty Calculator Scotland (LBTT)', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Stamp Duty Calculator Scotland (LBTT)"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Stamp Duty Calculator Scotland (LBTT)"
+    description="Calculate Land and Buildings Transaction Tax for property purchases in Scotland. Includes first-time buyer relief, ADS surcharge, and non-resident rates."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <LBTTCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the property price</strong> – The full purchase
+        price of the property you're buying in Scotland.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose buyer type</strong> – First-time buyer, moving
+        home, or purchasing an additional property.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Non-resident status</strong> – Toggle if you're not
+        a UK resident (adds 2% surcharge).
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="LBTT vs SDLT: Key Differences">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Scotland's LBTT has <strong class="text-[var(--color-cream)]"
+          >lower starting thresholds</strong
+        >
+        than England's SDLT. The nil-rate band starts at £145,000 (vs £250,000 in England), meaning you
+        start paying tax sooner.
+      </p>
+      <p>
+        However, LBTT is a <strong class="text-[var(--color-cream)]">truly progressive tax</strong> —
+        like income tax, you only pay the higher rate on the portion within each band. This means the
+        jump between bands is smoother than the old "slab" system.
+      </p>
+      <p>
+        The <strong class="text-amber-400">ADS at 6%</strong> is higher than England's 5% surcharge for
+        additional properties, making second homes more expensive in Scotland relative to England.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

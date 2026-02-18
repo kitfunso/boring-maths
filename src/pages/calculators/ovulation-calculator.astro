@@ -1,0 +1,188 @@
+---
+/**
+ * Ovulation Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import OvulationCalculator from '../../components/calculators/OvulationCalculator/OvulationCalculator';
+
+const title = 'Free Ovulation Calculator — Track Your Fertile Window | Boring Math';
+const description =
+  'Estimate your ovulation date and fertile window based on your cycle length. Plan ahead with upcoming cycle predictions. Instant results, no signup.';
+const keywords =
+  'ovulation calculator, fertile window calculator, when do I ovulate, ovulation date, fertility calculator, menstrual cycle calculator, best days to conceive, ovulation predictor';
+const canonicalURL = '/calculators/ovulation-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Ovulation Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Due Date Calculator',
+    description: "Estimate your baby's arrival date.",
+    href: '/calculators/due-date-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Check your Body Mass Index.',
+    href: '/calculators/bmi-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Estimate your daily calorie needs.',
+    href: '/calculators/calorie-calculator',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'When does ovulation occur?',
+    answer:
+      'Ovulation typically occurs about 14 days before the start of your next period. For a 28-day cycle, that\'s around day 14. For a 30-day cycle, it\'s around day 16. The "14 days before" rule is more reliable than counting from the start of your period.',
+  },
+  {
+    question: 'What is the fertile window?',
+    answer:
+      'The fertile window is the approximately 6-day period when pregnancy is possible: the 5 days before ovulation plus ovulation day itself. Sperm can survive up to 5 days in the reproductive tract, while the egg is viable for 12-24 hours after release.',
+  },
+  {
+    question: 'How accurate is an ovulation calculator?',
+    answer:
+      'Ovulation calculators provide estimates based on average cycle patterns. They work best for women with regular cycles. Factors like stress, illness, travel, and hormonal changes can shift ovulation. For higher accuracy, combine with ovulation predictor kits (OPKs) or basal body temperature tracking.',
+  },
+  {
+    question: 'What is a normal cycle length?',
+    answer:
+      'A normal menstrual cycle is 21-35 days, with 28 days being the most commonly cited average. Cycles can vary by a few days from month to month. If your cycles are consistently shorter than 21 days or longer than 35 days, consult a healthcare provider.',
+  },
+  {
+    question: 'What are signs of ovulation?',
+    answer:
+      'Common signs include: a slight rise in basal body temperature (0.5-1°F after ovulation), changes in cervical mucus (becomes clear and stretchy like egg whites), mild pelvic pain or cramping (mittelschmerz), increased libido, and breast tenderness.',
+  },
+  {
+    question: 'Can I ovulate more than once per cycle?',
+    answer:
+      'You can release more than one egg during the same ovulation event (which is how fraternal twins happen), but you only ovulate once per cycle. After ovulation, hormonal changes prevent additional eggs from being released until the next cycle.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Ovulation Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Ovulation Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter your last period date',
+        text: 'Select the first day of your most recent menstrual period.',
+      },
+      {
+        name: 'Enter cycle length',
+        text: 'Input your average cycle length in days (typically 21-35).',
+      },
+      {
+        name: 'View results',
+        text: 'See your estimated ovulation date, fertile window, and upcoming cycles.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <HeroSection
+    title="Ovulation Calculator"
+    description="Estimate your fertile window and ovulation date to help plan or prevent pregnancy."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <OvulationCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>first day of your last menstrual period</strong> — this is day 1 of your cycle.
+      Then enter your <strong>average cycle length</strong> (count from day 1 of one period to day 1 of
+      the next).
+    </p>
+    <p>
+      The calculator estimates your <strong>ovulation date</strong> (14 days before your next expected
+      period) and shows a <strong>6-day fertile window</strong> when conception is most likely.
+    </p>
+    <p>
+      It also projects <strong>3 upcoming cycles</strong> so you can plan ahead. Results update instantly
+      as you change inputs.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Cycle">
+    <p>
+      The menstrual cycle has four phases: <strong>menstruation</strong> (days 1-5), the <strong
+        >follicular phase</strong
+      >
+      (days 1-13), <strong>ovulation</strong> (around day 14), and the <strong>luteal phase</strong> (days
+      15-28).
+    </p>
+    <p>
+      The <strong>luteal phase</strong> (from ovulation to your next period) is remarkably consistent
+      at about 14 days for most women. The follicular phase (before ovulation) is what varies and causes
+      different cycle lengths.
+    </p>
+    <p>
+      <strong>Sperm can survive up to 5 days</strong> in the reproductive tract, which is why the fertile
+      window starts before ovulation. The egg is only viable for 12-24 hours after release.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Improving Accuracy">
+    <p>
+      <strong>Track your cycles</strong> for 3-6 months to get an accurate average cycle length. Apps
+      or a simple calendar work well.
+    </p>
+    <p>
+      <strong>Ovulation predictor kits (OPKs)</strong> detect the LH surge that occurs 24-36 hours before
+      ovulation, providing a more precise prediction than calendar methods alone.
+    </p>
+    <p>
+      <strong>Basal body temperature (BBT)</strong> rises 0.5-1°F after ovulation. Track it daily with
+      a sensitive thermometer to confirm your ovulation pattern over time.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

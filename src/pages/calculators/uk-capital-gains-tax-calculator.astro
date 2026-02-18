@@ -1,0 +1,167 @@
+---
+/**
+ * UK Capital Gains Tax Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKCapitalGainsTaxCalculator } from '../../components/calculators/UKCapitalGainsTaxCalculator';
+
+const title = 'Free UK Capital Gains Tax Calculator — Property & Shares CGT 2024/25 | Boring Math';
+const description =
+  'Free UK capital gains tax calculator for 2024/25. Calculate CGT on property, shares, and other assets with different rates for basic and higher rate taxpayers.';
+const keywords =
+  'capital gains tax calculator uk, cgt calculator, capital gains tax property uk, capital gains tax shares, cgt rates 2024, annual cgt exemption, capital gains tax allowance';
+const canonicalURL = '/calculators/uk-capital-gains-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Capital Gains Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT on property purchases.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Escape the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Dividend Tax Calculator',
+    description: 'Calculate tax on dividend income.',
+    href: '/calculators/uk-dividend-tax-calculator',
+    icon: 'chart' as const,
+    color: 'teal' as const,
+  },
+  {
+    title: 'Inheritance Tax Calculator',
+    description: 'Estimate UK inheritance tax on your estate.',
+    href: '/calculators/inheritance-tax-calculator',
+    icon: 'calculator' as const,
+    color: 'red' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What are the UK CGT rates for 2024/25?',
+    answer:
+      'For 2024/25, CGT rates on residential property are 18% (basic rate) and 24% (higher rate). For other assets like shares and crypto, rates are 10% (basic rate) and 20% (higher rate). The rate you pay depends on your total taxable income and gains.',
+  },
+  {
+    question: 'What is the annual CGT exemption?',
+    answer:
+      'The annual exempt amount for 2024/25 is £3,000 (reduced from £6,000 in 2023/24 and £12,300 before that). This means the first £3,000 of capital gains each tax year is tax-free. Each individual has their own exemption.',
+  },
+  {
+    question: 'How is CGT calculated on property?',
+    answer:
+      'CGT on property is calculated on the gain (sale price minus purchase price minus allowable costs). Allowable costs include solicitor fees, estate agent fees, stamp duty paid on purchase, and the cost of improvements (but not maintenance). Your main home is usually exempt under Private Residence Relief.',
+  },
+  {
+    question: 'Is my main home subject to CGT?',
+    answer:
+      'No, your main home (principal private residence) is usually exempt from CGT under Private Residence Relief. However, CGT may apply if you have let part of it out, used part exclusively for business, have grounds over 5,000 square metres, or were absent for extended periods.',
+  },
+  {
+    question: 'How do I report and pay CGT?',
+    answer:
+      "For property disposals, you must report and pay CGT within 60 days of completion using the HMRC CGT on UK property service. For other assets, you report through your Self Assessment tax return. If you don't usually file a return, you may need to register.",
+  },
+  {
+    question: 'Can I offset capital losses against gains?',
+    answer:
+      'Yes, capital losses can be offset against gains in the same tax year. If losses exceed gains, you can carry them forward indefinitely to use against future gains. You must report losses to HMRC within 4 years of the end of the tax year to carry them forward.',
+  },
+  {
+    question: 'What are allowable costs for CGT?',
+    answer:
+      "Allowable costs include: purchase price, buying costs (solicitor, surveyor), selling costs (estate agent, solicitor), improvement costs that enhance the asset's value (e.g., extensions, not repairs), and stamp duty paid on purchase. You cannot deduct mortgage interest or maintenance costs.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Capital Gains Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Capital Gains Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Capital Gains Tax Calculator"
+    description="Calculate capital gains tax on property, shares, and other assets. Includes 2024/25 rates with different rates for residential property vs other assets."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKCapitalGainsTaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter sale and purchase prices</strong> – The full amounts
+        for the asset you're selling.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Add allowable costs</strong> – Include legal fees, improvements,
+        and stamp duty paid.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select asset type</strong> – Residential property has
+        higher CGT rates than shares and other assets.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose your tax band</strong> – Your income tax band
+        determines which CGT rate applies.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Property vs Shares CGT Rates">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The UK has <strong class="text-[var(--color-cream)]">different CGT rates</strong> depending on
+        the type of asset. Residential property attracts higher rates than shares and other assets.
+      </p>
+      <p>
+        <strong class="text-amber-400">Residential property:</strong> 18% for basic rate taxpayers, 24%
+        for higher/additional rate taxpayers (increased from 28% to 24% from April 2024).
+      </p>
+      <p>
+        <strong class="text-emerald-400">Shares and other assets:</strong> 10% for basic rate taxpayers,
+        20% for higher/additional rate taxpayers. These rates apply to shares, crypto, personal possessions
+        worth over £6,000, and business assets.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

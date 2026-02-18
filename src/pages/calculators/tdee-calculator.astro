@@ -1,0 +1,181 @@
+---
+/**
+ * TDEE Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import TDEECalculator from '../../components/calculators/TDEECalculator/TDEECalculator';
+
+const title = 'Free TDEE Calculator — Know Your Daily Calories | Boring Math';
+const description =
+  'Calculate your Total Daily Energy Expenditure (TDEE) using the Mifflin-St Jeor formula. Get BMR, activity-adjusted calories, and macro splits. Instant results, no signup.';
+const keywords =
+  'TDEE calculator, total daily energy expenditure, BMR calculator, basal metabolic rate, calorie calculator, Mifflin-St Jeor, macro calculator, weight loss calories, bulking calories';
+const canonicalURL = '/calculators/tdee-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'TDEE Calculator' }];
+
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Estimate daily calorie needs for your goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and health category.',
+    href: '/calculators/bmi-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Get your ideal protein, carbs, and fat breakdown.',
+    href: '/calculators/macro-calculator',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Body Fat Calculator',
+    description: 'Estimate your body fat percentage using the Navy method.',
+    href: '/calculators/body-fat-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is TDEE?',
+    answer:
+      'TDEE stands for Total Daily Energy Expenditure. It is the total number of calories your body burns in a day, including your basal metabolic rate (BMR), physical activity, and the thermic effect of food. Knowing your TDEE helps you set calorie targets for weight loss, maintenance, or muscle gain.',
+  },
+  {
+    question: 'What is the Mifflin-St Jeor equation?',
+    answer:
+      'The Mifflin-St Jeor equation is considered the most accurate formula for estimating BMR. For men: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + 5. For women: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 161. Your TDEE is then BMR multiplied by an activity factor.',
+  },
+  {
+    question: 'How do I choose my activity level?',
+    answer:
+      'Be honest about your typical week. Sedentary means a desk job with no exercise. Lightly active is 1-3 light workouts per week. Moderately active is 3-5 moderate sessions. Very active is 6-7 hard sessions. Extra active includes athletes or people with physically demanding jobs who also train.',
+  },
+  {
+    question: 'How many calories should I eat to lose weight?',
+    answer:
+      'A safe and sustainable deficit is 500 calories below your TDEE, which equates to roughly 1 pound (0.45 kg) of fat loss per week. Never go below 1,200 calories (women) or 1,500 calories (men) without medical supervision.',
+  },
+  {
+    question: 'What are macro splits?',
+    answer:
+      'Macro splits divide your daily calories into protein, carbohydrates, and fat. A balanced split is 30/40/30. Low-carb diets use 40/20/40. High-carb (endurance athletes) use 25/55/20. Keto is 25/5/70. The best split depends on your goals and preferences.',
+  },
+  {
+    question: 'How accurate is a TDEE calculator?',
+    answer:
+      'TDEE calculators provide a solid starting estimate, typically within 10% of your actual expenditure. Factors like genetics, hormones, NEAT (non-exercise activity thermogenesis), and muscle mass create individual variation. Use your TDEE as a starting point, then adjust based on real-world results over 2-3 weeks.',
+  },
+  {
+    question: 'What is the difference between BMR and TDEE?',
+    answer:
+      'BMR (Basal Metabolic Rate) is the calories your body burns at complete rest — just to keep you alive (breathing, circulation, cell repair). TDEE includes BMR plus calories burned through physical activity, exercise, and digesting food. TDEE is always higher than BMR.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'TDEE Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="TDEE Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter your details', text: 'Input your age, sex, height, and weight.' },
+      { name: 'Select activity level', text: 'Choose how active you are during a typical week.' },
+      {
+        name: 'View your TDEE',
+        text: 'See your daily calorie needs, BMR, and weight goal targets.',
+      },
+      { name: 'Check macro splits', text: 'Review suggested protein, carb, and fat breakdowns.' },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <HeroSection
+    title="TDEE Calculator"
+    description="Find out how many calories you burn each day based on your body stats and activity level."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <TDEECalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>age, sex, height, and weight</strong> to calculate your Basal Metabolic Rate
+      (BMR) using the Mifflin-St Jeor equation — the most accurate formula validated by research.
+    </p>
+    <p>
+      Select your <strong>activity level</strong> honestly. This multiplier converts your resting BMR
+      into your Total Daily Energy Expenditure. Most people overestimate their activity level.
+    </p>
+    <p>
+      Use the <strong>goal calories</strong> to plan weight loss (-500 cal/day ≈ 1 lb/week loss) or lean
+      muscle gain (+500 cal/day). The macro splits help you distribute calories across protein, carbs,
+      and fat.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding TDEE and BMR">
+    <p>
+      Your <strong>BMR</strong> accounts for 60-75% of daily calorie burn. It powers breathing, circulation,
+      brain function, and cellular repair — the energy you'd burn lying in bed all day.
+    </p>
+    <p>
+      <strong>Physical activity</strong> adds 15-30% depending on how active you are. The thermic effect
+      of food (digesting what you eat) accounts for roughly 10% of total expenditure.
+    </p>
+    <p>
+      <strong>NEAT</strong> (Non-Exercise Activity Thermogenesis) — fidgeting, walking, standing — can
+      vary by up to 2,000 calories between individuals and is often the biggest hidden variable.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Using Your TDEE">
+    <p>
+      <strong>Track for 2-3 weeks</strong> before adjusting. Weigh yourself at the same time daily and
+      use the weekly average. If your weight is stable, your TDEE estimate is accurate.
+    </p>
+    <p>
+      <strong>Don't crash diet.</strong> Extreme deficits (over 1,000 cal below TDEE) cause muscle loss,
+      metabolic adaptation, and are unsustainable. Aim for a moderate 500-calorie deficit.
+    </p>
+    <p>
+      <strong>Recalculate every 10-15 lbs.</strong> As your weight changes, so does your TDEE. A lighter
+      body burns fewer calories, so your deficit needs adjustment over time.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

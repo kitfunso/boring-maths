@@ -1,0 +1,163 @@
+---
+/**
+ * Wales Stamp Duty (LTT) Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { LTTCalculator } from '../../components/calculators/LTTCalculator';
+
+const title = 'Free Stamp Duty Calculator Wales (LTT) — Land Transaction Tax 2024/25 | Boring Math';
+const description =
+  'Free Wales stamp duty (LTT) calculator. Calculate Land Transaction Tax with higher rates for additional properties and non-resident surcharge.';
+const keywords =
+  'ltt calculator, stamp duty wales, land transaction tax, wales property tax, ltt rates, wales stamp duty rates, additional property wales, ltt calculator wales';
+const canonicalURL = '/calculators/stamp-duty-calculator-wales';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Stamp Duty Calculator Wales (LTT)' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT for England & Northern Ireland.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Stamp Duty Calculator Scotland',
+    description: 'Calculate LBTT for Scottish property purchases.',
+    href: '/calculators/stamp-duty-calculator-scotland',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate your monthly mortgage payments.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'calculator' as const,
+    color: 'teal' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the true costs of buying vs renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'red' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Land Transaction Tax (LTT)?',
+    answer:
+      "Land Transaction Tax replaced UK Stamp Duty in Wales from April 2018. It's administered by the Welsh Revenue Authority (WRA). LTT is a progressive tax on property and land transactions in Wales.",
+  },
+  {
+    question: 'What are the current LTT rates in Wales?',
+    answer:
+      'Standard LTT rates are: 0% up to £225,000, 6% from £225,001–£400,000, 7.5% from £400,001–£750,000, 10% from £750,001–£1,500,000, and 12% above £1,500,000.',
+  },
+  {
+    question: 'Is there first-time buyer relief in Wales?',
+    answer:
+      'No, Wales does not offer first-time buyer relief for LTT. Unlike England (SDLT) and Scotland (LBTT), all buyers in Wales pay the same standard rates regardless of whether they are first-time buyers.',
+  },
+  {
+    question: 'What are the higher rates for additional properties?',
+    answer:
+      'Additional properties in Wales attract higher LTT rates: 4% up to £180,000, 7.5% from £180,001–£250,000, 9% from £250,001–£400,000, 11.5% from £400,001–£750,000, 14% from £750,001–£1,500,000, and 16% above £1,500,000.',
+  },
+  {
+    question: 'How does LTT compare to SDLT in England?',
+    answer:
+      'Wales has a higher nil-rate threshold (£225,000 vs £250,000 for England) and different band structures. However, Wales has no first-time buyer relief. For higher-value properties, Wales tends to have slightly higher rates at some bands.',
+  },
+  {
+    question: 'When do I need to pay LTT?',
+    answer:
+      'LTT must be filed and paid within 30 days of the effective date of the transaction. Returns are filed online with the Welsh Revenue Authority (WRA). Your solicitor or conveyancer typically handles this.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Stamp Duty Calculator Wales (LTT)', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Stamp Duty Calculator Wales (LTT)"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Stamp Duty Calculator Wales (LTT)"
+    description="Calculate Land Transaction Tax for property purchases in Wales. Includes higher rates for additional properties and non-resident surcharge."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <LTTCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the property price</strong> – The full purchase
+        price of the property you're buying in Wales.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose purchase type</strong> – Standard purchase or
+        additional property (second homes, buy-to-let).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Non-resident status</strong> – Toggle if you're not
+        a UK resident (adds 2% surcharge).
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding LTT in Wales">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Wales has its own <strong class="text-[var(--color-cream)]"
+          >Land Transaction Tax (LTT)</strong
+        >, separate from England's SDLT and Scotland's LBTT. The Welsh Revenue Authority administers
+        this tax.
+      </p>
+      <p>
+        Unlike England and Scotland, <strong class="text-amber-400"
+          >Wales has no first-time buyer relief</strong
+        >. All buyers pay the same standard rates. However, the nil-rate threshold of £225,000 is
+        relatively generous.
+      </p>
+      <p>
+        Additional property buyers face <strong class="text-[var(--color-cream)]"
+          >significantly higher rates</strong
+        >
+        across all bands, with rates ranging from 4% to 16% compared to standard rates of 0% to 12%.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

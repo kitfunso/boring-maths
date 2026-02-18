@@ -1,0 +1,171 @@
+---
+/**
+ * UK Council Tax Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { CouncilTaxCalculator } from '../../components/calculators/CouncilTaxCalculator';
+
+const title = 'Free Council Tax Calculator — Estimate Your Annual Bill | Boring Math';
+const description =
+  'Free UK council tax calculator. Estimate your annual council tax by property band and region. Includes single person discount and second home premium calculations.';
+const keywords =
+  'council tax calculator, council tax bands, council tax 2024, council tax by postcode, council tax band calculator, single person discount council tax, second home council tax';
+const canonicalURL = '/calculators/council-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Council Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT, LBTT, or LTT on property purchases.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK £100k Tax Trap',
+    description: 'Escape the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate your monthly mortgage payments.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the true costs of buying vs renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'teal' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is council tax calculated?',
+    answer:
+      'Council tax is based on the valuation band of your property (A to H) and the Band D rate set by your local council. Each band has a fixed ratio to Band D: Band A is 6/9ths, Band B is 7/9ths, up to Band H which is 2× the Band D rate. Your council sets the Band D rate annually based on its spending needs.',
+  },
+  {
+    question: 'What are the council tax bands?',
+    answer:
+      'In England, properties are banded A–H based on their value on 1 April 1991. Band A: up to £40,000, Band B: £40,001–£52,000, Band C: £52,001–£68,000, Band D: £68,001–£88,000, Band E: £88,001–£120,000, Band F: £120,001–£160,000, Band G: £160,001–£320,000, Band H: over £320,000.',
+  },
+  {
+    question: 'What is the single person discount?',
+    answer:
+      'If you are the only adult living in a property (not counting students, carers, or severely mentally impaired people), you qualify for a 25% discount on your council tax. You need to apply to your local council to receive this discount.',
+  },
+  {
+    question: 'What is the second home council tax premium?',
+    answer:
+      'From April 2025, councils in England can charge up to 100% extra council tax on second homes (doubling the bill). This is enabled by the Levelling Up and Regeneration Act 2023. Some councils had already been charging premiums where local rules allowed.',
+  },
+  {
+    question: 'Can I challenge my council tax band?',
+    answer:
+      'Yes, you can challenge your council tax band if you believe your property is in the wrong band. Contact the Valuation Office Agency (VOA) in England and Wales, or the Scottish Assessors Association in Scotland. Check similar properties in your area on the VOA website for comparison.',
+  },
+  {
+    question: 'Are there other council tax discounts available?',
+    answer:
+      'Yes. Full-time students get 100% exemption. Properties left empty may get discounts (though many councils now charge premiums on long-term empty homes). People with disabilities may get a reduction, and council tax support (formerly council tax benefit) is available for people on low incomes.',
+  },
+  {
+    question: 'How do I pay council tax?',
+    answer:
+      'Council tax is usually paid in 10 monthly instalments from April to January, though you can request to pay over 12 months. Payment methods include direct debit, online banking, and at the Post Office. Most councils offer a discount for paying the full year upfront.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Council Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Council Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Council Tax Calculator"
+    description="Estimate your annual council tax based on your property band and council region. Includes single person discount and second home premium."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CouncilTaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your property band</strong> – Bands A to H based
+        on your property's 1991 valuation.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose your region</strong> – Average rates vary significantly
+        across UK regions.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Apply discounts</strong> – Toggle single person discount
+        if you're the only adult resident.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Check second home status</strong> – Second homes may
+        face a 100% premium from April 2025.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Council Tax Bands">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Council tax bands are based on <strong class="text-[var(--color-cream)]"
+          >property values as of 1 April 1991</strong
+        >
+        in England and Scotland (1 April 2003 in Wales). The banding system means your tax isn't directly
+        proportional to your property's current value.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">Band D rate</strong> is the reference point. Band
+        A pays two-thirds of Band D, while Band H pays double. This means the difference between the cheapest
+        and most expensive band is only 3:1, despite massive differences in property values.
+      </p>
+      <p>
+        <strong class="text-emerald-400">Regional variation</strong> is significant – London tends to
+        have lower council tax rates despite higher property values, while northern councils and rural
+        areas often charge more due to different funding models.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

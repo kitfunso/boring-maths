@@ -1,0 +1,184 @@
+---
+/**
+ * Currency Converter Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CurrencyConverter from '../../components/calculators/CurrencyConverter/CurrencyConverter';
+
+const title = 'Free Currency Converter — Convert 20+ Currencies Instantly | Boring Math';
+const description =
+  'Convert between USD, EUR, GBP, JPY, and 16 more world currencies. See exchange rates, inverse rates, and a quick reference table. Instant results, no signup.';
+const keywords =
+  'currency converter, exchange rate calculator, USD to GBP, EUR to USD, currency exchange, money converter, forex calculator, dollar to pound, dollar to euro';
+const canonicalURL = '/calculators/currency-converter';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Currency Converter' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Inflation Calculator',
+    description: 'See how inflation affects purchasing power.',
+    href: '/calculators/inflation-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages quickly.',
+    href: '/calculators/percentage-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between units of measurement.',
+    href: '/calculators/unit-converter',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how investments grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How are exchange rates determined?',
+    answer:
+      'Exchange rates are determined by supply and demand in the foreign exchange (forex) market. Factors include interest rates, inflation, trade balances, political stability, and economic performance. Major currencies float freely, while some are pegged to other currencies.',
+  },
+  {
+    question: 'What is the difference between bid and ask rates?',
+    answer:
+      'The bid price is what a buyer will pay for a currency, and the ask price is what a seller wants. The difference (spread) is the profit for the exchange service. Banks and services add their own spread on top of the interbank rate, which is why you always get less than the "market rate."',
+  },
+  {
+    question: 'Why do banks offer different rates than Google?',
+    answer:
+      'Google and financial sites show the mid-market (interbank) rate — the midpoint between buy and sell prices used by banks trading with each other. Banks, airports, and money transfer services add a markup (spread) of 1-8% as their profit margin.',
+  },
+  {
+    question: 'What is the best way to exchange currency?',
+    answer:
+      'For the best rates: (1) Use a no-fee debit/credit card abroad, (2) Transfer via services like Wise or Revolut, (3) Avoid airport exchanges which have the worst rates, (4) Compare rates from multiple sources before converting large amounts.',
+  },
+  {
+    question: 'Are these rates live?',
+    answer:
+      'These are approximate reference rates updated periodically. They provide a good estimate for planning and comparison but should not be used for actual financial transactions. Always check the rate offered by your specific bank or service before converting.',
+  },
+  {
+    question: 'What is a currency pair?',
+    answer:
+      'A currency pair shows the exchange rate between two currencies. EUR/USD = 1.09 means 1 Euro buys 1.09 US Dollars. The first currency is the "base" and the second is the "quote." Major pairs always include USD; cross pairs do not.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Currency Converter', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Currency Converter"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter an amount', text: 'Type the amount you want to convert.' },
+      {
+        name: 'Select currencies',
+        text: 'Choose your source and target currencies from 20+ options.',
+      },
+      {
+        name: 'View conversion',
+        text: 'See the converted amount, exchange rate, and quick reference table.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <HeroSection
+    title="Currency Converter"
+    description="Instantly convert between 20 major world currencies with a quick reference table."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CurrencyConverter client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Converter">
+    <p>
+      Enter the <strong>amount</strong> you want to convert. Select your <strong
+        >source currency</strong
+      >
+      (what you have) and <strong>target currency</strong> (what you want). Use the swap button to quickly
+      reverse the conversion.
+    </p>
+    <p>
+      The <strong>quick reference table</strong> shows common amounts so you can quickly look up conversions
+      without re-entering values. Great for travel planning or quick estimates.
+    </p>
+    <p>
+      The <strong>inverse rate</strong> shows how much 1 unit of the target currency is worth in the source
+      currency — useful for checking prices in the other direction.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Exchange Rates">
+    <p>
+      <strong>The mid-market rate</strong> is the "true" rate — the midpoint between buy and sell prices
+      in the forex market. It's what you see on Google and financial news sites.
+    </p>
+    <p>
+      <strong>You'll never get the mid-market rate</strong> from a bank or exchange service. They add
+      a spread (markup) of 1-5% as profit. Online services like Wise typically offer the smallest spreads.
+    </p>
+    <p>
+      <strong>Rates change constantly</strong> during trading hours (24/5 for major pairs). For large
+      conversions, timing can matter — but trying to "time" forex markets is generally not recommended.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Saving on Currency Exchange">
+    <p>
+      <strong>Avoid airport exchanges</strong> — they typically have the worst rates with spreads of 5-10%.
+      Plan ahead and exchange before you travel.
+    </p>
+    <p>
+      <strong>Use travel-friendly cards</strong> like Wise, Revolut, or cards with no foreign transaction
+      fees. They offer near mid-market rates and charge 0-1% fees.
+    </p>
+    <p>
+      <strong>Always pay in local currency</strong> when abroad. If a card terminal asks "pay in your
+      home currency?" always say no — their conversion rate will be much worse (this is called Dynamic
+      Currency Conversion).
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

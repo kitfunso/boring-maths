@@ -1,0 +1,180 @@
+---
+/**
+ * Time Zone Converter Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import TimeZoneConverter from '../../components/calculators/TimeZoneConverter/TimeZoneConverter';
+
+const title = 'Free Time Zone Converter — Convert Time Instantly | Boring Math';
+const description =
+  'Convert time between 30+ time zones worldwide. See a quick reference table for common conversions. Instant results with day-shift detection.';
+const keywords =
+  'time zone converter, time difference calculator, what time is it in, time zone calculator, world clock, EST to GMT, PST to IST, time conversion, international time zones';
+const canonicalURL = '/calculators/time-zone-converter';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Time Zone Converter' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between units of measurement.',
+    href: '/calculators/unit-converter',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between 20+ world currencies.',
+    href: '/calculators/currency-converter',
+    icon: 'dollar' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages quickly.',
+    href: '/calculators/percentage-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How many time zones are there?',
+    answer:
+      'There are 24 standard time zones based on 15° longitude intervals, but in practice there are over 30 because some regions use half-hour (India at UTC+5:30) or quarter-hour (Nepal at UTC+5:45) offsets. Some countries span multiple zones (Russia has 11).',
+  },
+  {
+    question: 'What is UTC?',
+    answer:
+      'UTC (Coordinated Universal Time) is the global time standard. It replaced GMT as the reference point for all time zones. UTC+0 is the same as GMT. All other time zones are expressed as offsets from UTC (e.g., EST is UTC-5, JST is UTC+9).',
+  },
+  {
+    question: 'What is the difference between GMT and UTC?',
+    answer:
+      'GMT (Greenwich Mean Time) and UTC are essentially the same time, but UTC is the modern scientific standard based on atomic clocks. GMT is the traditional name tied to the Royal Observatory in Greenwich, London. For practical purposes, GMT = UTC+0.',
+  },
+  {
+    question: 'Does this converter handle Daylight Saving Time?',
+    answer:
+      "This converter uses standard time offsets. DST is not automatically applied because different regions observe DST on different dates (and some don't observe it at all). When DST is active, most zones shift forward by 1 hour (e.g., EST becomes EDT at UTC-4).",
+  },
+  {
+    question: 'What is the International Date Line?',
+    answer:
+      'The International Date Line (IDL) runs roughly along 180° longitude in the Pacific Ocean. When you cross it going west, you advance one day. Going east, you go back one day. It zigzags around island nations to keep countries on the same date.',
+  },
+  {
+    question: 'How do I schedule a meeting across time zones?',
+    answer:
+      'Find overlap in business hours. For US-Europe calls, 9-11 AM Eastern (2-4 PM London) works well. For US-Asia, early morning US or late evening Asia is typical. Use the reference table in this converter to quickly find convenient times for both sides.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Time Zone Converter', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Time Zone Converter"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter the time', text: 'Input the hours and minutes you want to convert.' },
+      { name: 'Select time zones', text: 'Choose the source and destination time zones.' },
+      {
+        name: 'View result',
+        text: 'See the converted time with day-shift indicator and reference table.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <HeroSection
+    title="Time Zone Converter"
+    description="Instantly convert time between 30+ time zones worldwide with a handy reference table."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <TimeZoneConverter client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Converter">
+    <p>
+      Enter the <strong>time</strong> in 24-hour format (e.g., 14:30 for 2:30 PM). Select the
+      <strong>source time zone</strong> (where the time is) and the <strong
+        >destination time zone</strong
+      >
+      (where you want to know the time).
+    </p>
+    <p>
+      The converter shows the <strong>equivalent time</strong> and indicates if it falls on a different
+      calendar day. Use the <strong>swap button</strong> to quickly reverse the conversion.
+    </p>
+    <p>
+      The <strong>quick reference table</strong> shows conversions for every 3 hours, making it easy to
+      find meeting times across time zones.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Common Time Zone Conversions">
+    <p>
+      <strong>US to UK:</strong> EST (New York) is 5 hours behind GMT (London). When it's 9 AM in New
+      York, it's 2 PM in London.
+    </p>
+    <p>
+      <strong>US to India:</strong> EST is 10.5 hours behind IST (Mumbai). When it's 9 AM in New York,
+      it's 7:30 PM in Mumbai.
+    </p>
+    <p>
+      <strong>US to Japan:</strong> EST is 14 hours behind JST (Tokyo). When it's 9 AM in New York, it's
+      11 PM the same day in Tokyo.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Working Across Time Zones">
+    <p>
+      <strong>Use a world clock app</strong> on your phone to track 2-3 key time zones. Most phones let
+      you add multiple clocks to your home screen.
+    </p>
+    <p>
+      <strong>Always specify the time zone</strong> when scheduling. "Let's meet at 3 PM EST" is clear.
+      "Let's meet at 3 PM" is ambiguous in international contexts.
+    </p>
+    <p>
+      <strong>Be mindful of DST transitions.</strong> Not all countries observe Daylight Saving Time,
+      and those that do change on different dates. Double-check during March/April and October/November.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
