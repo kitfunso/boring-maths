@@ -13,5 +13,6 @@ public/og/
 
 # Files with HTML comments in expressions (Prettier Astro parser limitation)
 src/components/common/Analytics.astro
+src/components/common/AdUnit.astro
 src/layouts/CategoryLayout.astro
 src/pages/index.astro
