@@ -34,7 +34,7 @@ export default defineConfig({
         if (item.url === 'https://boring-math.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
-        } else if (item.url.match(/\/calculators\/[a-z-]+\/$/)) {
+        } else if (item.url.match(/\/calculators\/(automotive|brewing|business|engineering|events|everyday|finance|health|hobbies|home|income|uk-tax|us-tax)$/)) {
           item.priority = 0.9;
           item.changefreq = 'weekly';
         } else if (item.url.includes('/calculators/')) {
