@@ -8,7 +8,19 @@
 /affiliate-disclosure/       /affiliate-disclosure        301!
 
 # Calculator category pages
+/calculators/automotive/     /calculators/automotive      301!
+/calculators/brewing/        /calculators/brewing         301!
 /calculators/business/       /calculators/business        301!
+/calculators/engineering/    /calculators/engineering     301!
+/calculators/events/         /calculators/events          301!
+/calculators/everyday/       /calculators/everyday        301!
+/calculators/finance/        /calculators/finance         301!
+/calculators/health/         /calculators/health          301!
+/calculators/hobbies/        /calculators/hobbies         301!
+/calculators/home/           /calculators/home            301!
+/calculators/income/         /calculators/income          301!
+/calculators/uk-tax/         /calculators/uk-tax          301!
+/calculators/us-tax/         /calculators/us-tax          301!
 
 # All calculator pages (must come after more specific rules)
 /calculators/*/              /calculators/:splat          301!

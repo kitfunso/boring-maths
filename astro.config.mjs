@@ -29,10 +29,7 @@ export default defineConfig({
   integrations: [
     preact({ compat: true }), // Enable React compatibility
     sitemap({
-      // Add lastmod for better crawling signals
       serialize(item) {
-        // Set lastmod to build time for all pages
-        item.lastmod = new Date().toISOString();
         // Set priority based on page depth
         if (item.url === 'https://boring-math.com/') {
           item.priority = 1.0;
