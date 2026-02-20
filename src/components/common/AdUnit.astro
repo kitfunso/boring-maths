@@ -32,12 +32,11 @@ const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
 const minHeight = format === 'horizontal' ? 50 : format === 'vertical' ? 250 : 90;
-const maxHeight = format === 'horizontal' ? 150 : format === 'vertical' ? 600 : 300;
 ---
 
 {
   isProd && (
-    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'} style={`min-height:${minHeight}px;max-height:${maxHeight}px;overflow:hidden`}>
+    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'} style={`min-height:${minHeight}px`}>
       <ins
         class="adsbygoogle"
         style={style}
