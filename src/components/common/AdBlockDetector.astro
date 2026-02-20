@@ -58,9 +58,8 @@
 </div>
 
 <script is:inline>
-  // DISABLED: Re-enable when AdSense is approved
   // Only run in production
-  if (false && window.location.hostname !== 'localhost') {
+  if (window.location.hostname !== 'localhost') {
     // Check if user dismissed the notice recently (within 7 days)
     const dismissed = localStorage.getItem('adblock-notice-dismissed');
     const dismissedTime = dismissed ? parseInt(dismissed, 10) : 0;
