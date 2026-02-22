@@ -3,8 +3,8 @@
  * AdUnit Component
  *
  * Reusable Google AdSense ad unit component with lazy loading.
- * Uses IntersectionObserver to defer ad loading until visible,
- * keeping Lighthouse scores high.
+ * Ad initialization is handled centrally by BaseLayout's astro:page-load listener,
+ * which supports both initial loads and ViewTransitions re-navigation.
  * Only renders in production to avoid ad serving errors during development.
  */
 
@@ -48,36 +48,6 @@ const minHeight = format === 'horizontal' ? 50 : format === 'vertical' ? 250 : 9
         data-ad-layout-key={layoutKey}
       />
     </div>
-  )
-}
-
-{
-  isProd && lazy && (
-    <script is:inline define:vars={{ uniqueId }}>
-      (function() {
-        var el = document.getElementById(uniqueId);
-        if (!el) return;
-        if ('IntersectionObserver' in window) {
-          var obs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-                obs.disconnect();
-              }
-            });
-          }, { rootMargin: '200px' });
-          obs.observe(el);
-        } else {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        }
-      })();
-    </script>
-  )
-}
-
-{
-  isProd && !lazy && (
-    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   )
 }
 
