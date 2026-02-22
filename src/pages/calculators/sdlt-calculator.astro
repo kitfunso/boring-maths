@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { SDLTCalculator } from '../../components/calculators/SDLTCalculator';
 
-const title = 'Free SDLT Calculator 2025 — UK Stamp Duty Tax | Boring Math';
+const title = 'SDLT Calculator 2025/26 — Stamp Duty Land Tax UK | Boring Math';
 const description =
   'Calculate UK Stamp Duty Land Tax for 2025 on property purchases. Includes first-time buyer relief and additional property surcharge. No signup required.';
 const keywords =
@@ -22,6 +22,13 @@ const siteUrl = 'https://boring-math.com';
 const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'SDLT Calculator' }];
 
 const relatedCalculators = [
+  {
+    title: 'UK Stamp Duty Guide',
+    description: 'Complete SDLT, LBTT & LTT guide 2025/26.',
+    href: '/calculators/uk-tax/stamp-duty',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
   {
     title: 'UK Stamp Duty Calculator',
     description: 'All UK nations including Wales.',
@@ -151,6 +158,75 @@ const schemaBreadcrumbs = [
         First-time buyers will see their <strong class="text-emerald-400">savings</strong> compared to
         standard rates. Additional property buyers and non-residents will see their
         <strong class="text-amber-400">surcharges</strong> clearly itemized.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="SDLT Rates and Thresholds 2025/26">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        From 1 April 2025, the temporary SDLT thresholds introduced during the pandemic revert to
+        their previous levels. This significantly affects both standard buyers and first-time
+        buyers, increasing the amount of stamp duty payable on most property purchases.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Standard SDLT Rates (from April 2025)</h4>
+      <p>
+        The nil-rate band reverts from £250,000 to <strong class="text-[var(--color-cream)]"
+          >£125,000</strong
+        >. The full rate structure is: 0% on the first £125,000, 2% from £125,001 to £250,000, 5%
+        from £250,001 to £925,000, 10% from £925,001 to £1,500,000, and 12% on any amount above
+        £1,500,000. For a £300,000 property, this means paying £5,000 in SDLT compared to £2,500
+        under the temporary thresholds — a doubling of the tax bill.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">First-Time Buyer Relief</h4>
+      <p>
+        The first-time buyer nil-rate threshold drops from £425,000 to <strong
+          class="text-[var(--color-cream)]">£300,000</strong
+        >, and the maximum property price eligible for relief falls from £625,000 to <strong
+          class="text-[var(--color-cream)]">£500,000</strong
+        >. First-time buyers purchasing a property at or below £500,000 pay 0% on the first £300,000
+        and 5% on the portion from £300,001 to £500,000. If the purchase price exceeds £500,000,
+        standard rates apply to the entire purchase with no relief.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Additional Property Surcharge</h4>
+      <p>
+        From 31 October 2024, the surcharge on additional residential properties (second homes,
+        buy-to-let investments) increased from 3% to <strong class="text-[var(--color-cream)]"
+          >5%</strong
+        >. This higher rate applies on top of the standard SDLT bands across the entire purchase
+        price. For a £400,000 buy-to-let property, the surcharge alone adds £20,000 to the tax bill.
+        Companies purchasing residential property also pay this surcharge.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Non-Resident Buyer Surcharge</h4>
+      <p>
+        Non-UK residents purchasing residential property pay an additional <strong
+          class="text-[var(--color-cream)]">2%</strong
+        >
+        surcharge on top of all other applicable rates, including the additional property surcharge if
+        relevant. This means a non-resident purchasing a second home could pay standard SDLT plus 5% plus
+        2% — a total surcharge of 7% on the full property price.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">SDLT vs LBTT vs LTT</h4>
+      <p>
+        SDLT only applies to property purchases in England and Northern Ireland. Scotland uses
+        <a
+          href="/calculators/stamp-duty-calculator-scotland"
+          class="text-[var(--color-accent)] hover:underline"
+          >Land and Buildings Transaction Tax (LBTT)</a
+        > with different rates and thresholds, plus a 6% Additional Dwelling Supplement. Wales uses
+        <a
+          href="/calculators/stamp-duty-calculator-wales"
+          class="text-[var(--color-accent)] hover:underline">Land Transaction Tax (LTT)</a
+        > with its own rate structure. Compare all three with our
+        <a
+          href="/calculators/uk-stamp-duty-calculator"
+          class="text-[var(--color-accent)] hover:underline">UK Stamp Duty Calculator</a
+        > to see the differences side by side.
       </p>
     </div>
   </ContentSection>

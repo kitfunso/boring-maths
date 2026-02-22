@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { BatchCostCalculator } from '../../components/calculators/BatchCostCalculator';
 
-const title = 'Free Batch Cost Calculator — Craft Pricing & Profit Calculator | Boring Math';
+const title = 'Batch Cost Calculator — Handmade Product Pricing & Profit | Boring Math';
 const description =
   'Free batch cost calculator for soap makers, chandlers, and crafters. Calculate material costs, labor, overhead, and suggested retail pricing for profitable pricing.';
 const keywords =
@@ -25,6 +25,13 @@ const breadcrumbs = [
 ];
 
 const relatedCalculators = [
+  {
+    title: 'Candle Making Guide',
+    description: 'Complete guide to candle making calculators.',
+    href: '/calculators/hobbies/candle-making',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
   {
     title: 'Lye Calculator',
     description: 'Calculate lye amounts for soap making.',

@@ -1,0 +1,299 @@
+---
+/**
+ * Candle Making Hub Page
+ * Guide to candle making calculators with links to wax, fragrance, and cost tools
+ */
+
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../../components/common/SEOHead.astro';
+import HeroSection from '../../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../../components/calculators/shared/FAQSection.astro';
+
+const title = 'Candle Making Calculators — Wax, Fragrance & Cost Tools | Boring Math';
+const description =
+  'Free candle making calculators for wax weight, fragrance load, and batch costing. Plan your candle projects, choose the right wax type, and price your products for profit.';
+const keywords =
+  'candle making calculator, candle wax calculator, fragrance load calculator, candle cost calculator, candle making supplies, soy wax calculator, candle business pricing';
+const canonicalURL = '/calculators/hobbies/candle-making';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Hobbies', href: '/calculators/hobbies' },
+  { label: 'Candle Making Guide' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Candle Wax Calculator',
+    description: 'Calculate how much wax you need for any container.',
+    href: '/calculators/candle-wax-calculator',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Fragrance Calculator',
+    description: 'Calculate fragrance oil amounts by wax type.',
+    href: '/calculators/fragrance-calculator',
+    icon: 'beaker' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Price your handmade products for profit.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much wax do I need to make a candle?',
+    answer:
+      'The amount of wax depends on your container size and wax type. Multiply the container volume (in fluid ounces) by the wax density (0.86 for soy, 0.90 for paraffin or coconut, 0.96 for beeswax) and fill percentage (typically 85%). For example, a 9oz jar needs about 7oz of soy wax. Use our Candle Wax Calculator for exact amounts.',
+  },
+  {
+    question: 'What percentage of fragrance oil should I use?',
+    answer:
+      'Fragrance load depends on your wax type. Soy wax typically holds 6-10% fragrance oil, paraffin 6-12%, and coconut wax 6-10%. Start at the lower end and test burn before increasing. Too much fragrance can cause sweating, poor burn, or safety issues. Our Fragrance Calculator provides exact amounts by wax type.',
+  },
+  {
+    question: 'Which wax is best for beginners?',
+    answer:
+      'Soy wax (like Golden Brands 464) is the most beginner-friendly option. It has good scent throw, easy cleanup with soap and water, a forgiving melt point, and produces clean-burning candles. Paraffin is easier to work with for smooth tops but is petroleum-based. Coconut wax blends offer excellent scent throw but cost more.',
+  },
+  {
+    question: 'How do I price my candles for profit?',
+    answer:
+      'Use the formula: (Materials + Labor + Overhead) x Markup = Retail Price. For an 8oz soy candle, typical material costs are $3-5. Add your labor time, packaging, and overhead, then apply a 2-2.5x markup for retail or 1.5x for wholesale. An 8oz candle typically retails for $18-28 depending on branding and market. Use our Batch Cost Calculator for precise pricing.',
+  },
+  {
+    question: 'What wick size should I use for my candle?',
+    answer:
+      'Wick size depends on container diameter: 2-inch containers need a small wick (CD 6-8), 3-inch containers need medium (CD 10-14), and 4-inch or larger containers often need multiple wicks. Always test burn your candles — the right wick creates a full melt pool within 1-2 hours without tunneling or excessive soot.',
+  },
+  {
+    question: 'How do I avoid sinkholes and wet spots in candles?',
+    answer:
+      'Sinkholes form when wax contracts as it cools. Pour at a lower temperature (120-135°F for soy), use a heat gun to smooth the top after cooling, or plan for a second pour. Wet spots (adhesion loss on glass) are mostly cosmetic — pouring at a lower temperature and preheating jars to 100°F can reduce them. Some wet spots are unavoidable with natural waxes.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Hobbies', url: '/calculators/hobbies' },
+  { name: 'Candle Making Guide', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Candle Making Calculators"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Candle Making Calculators"
+    description="Everything you need to plan candle projects, from wax weight and fragrance load to pricing for profit. Free tools for hobbyists and small businesses."
+  />
+
+  <!-- Calculator Cards -->
+  <section class="mb-16">
+    <div class="grid md:grid-cols-3 gap-6">
+      <a
+        href="/calculators/candle-wax-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-amber-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+            ></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Candle Wax Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Calculate exact wax weight for any container size. Supports soy, coconut, paraffin, and
+          beeswax with density adjustments and wick recommendations.
+        </p>
+      </a>
+
+      <a
+        href="/calculators/fragrance-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-purple-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+            ></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Fragrance Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Calculate the right fragrance oil amount for your wax type and batch size. Includes safe
+          maximum load percentages and scent throw tips.
+        </p>
+      </a>
+
+      <a
+        href="/calculators/batch-cost-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-green-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Batch Cost Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Price your candles for profit. Factor in materials, labor, overhead, and marketplace fees
+          to find the right retail and wholesale price.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <ContentSection title="Getting Started with Candle Making">
+    <p>
+      Candle making is one of the most accessible crafts to start at home, and one of the few
+      hobbies that can turn into a profitable small business. Whether you are making candles for
+      gifts, home decor, or to sell on Etsy, understanding the math behind your materials saves
+      money and produces better results.
+    </p>
+    <p>
+      The three core calculations every candle maker needs are: <strong>how much wax</strong> fills your
+      container, <strong>how much fragrance oil</strong> gives optimal scent throw without safety issues,
+      and <strong>what price</strong> covers your costs while leaving room for profit. Our calculators
+      handle all three.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Choosing the Right Wax">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-3">
+        <h4 class="font-semibold text-amber-400">Soy Wax (464/444)</h4>
+        <p class="text-sm">
+          The most popular choice for container candles. Soy wax is natural, renewable, burns
+          cleanly, and has a density of 0.86 oz/fl oz. It has a lower melting point (120-180°F)
+          making it beginner-friendly. Golden Brands 464 is the industry standard for single-pour
+          containers.
+        </p>
+      </div>
+      <div class="space-y-3">
+        <h4 class="font-semibold text-blue-400">Coconut Wax</h4>
+        <p class="text-sm">
+          Premium option with excellent scent throw and a creamy appearance. Density of 0.90 oz/fl
+          oz. More expensive than soy but produces a luxury product. Often blended with other waxes
+          for improved performance and cost management.
+        </p>
+      </div>
+      <div class="space-y-3">
+        <h4 class="font-semibold text-green-400">Paraffin</h4>
+        <p class="text-sm">
+          The traditional candle wax with the strongest scent throw and best glass adhesion. Density
+          of 0.90 oz/fl oz. Easier to achieve smooth tops and vibrant colors. Petroleum-based, which
+          some customers prefer to avoid.
+        </p>
+      </div>
+      <div class="space-y-3">
+        <h4 class="font-semibold text-yellow-400">Beeswax</h4>
+        <p class="text-sm">
+          Natural wax with a subtle honey scent and the highest density at 0.96 oz/fl oz. Burns
+          longest of any wax type. Best for pillar candles and natural products. Limited fragrance
+          capacity compared to other waxes.
+        </p>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="How These Calculators Work Together">
+    <p>
+      Start with the <a
+        href="/calculators/candle-wax-calculator"
+        class="text-[var(--color-accent)] hover:underline">Candle Wax Calculator</a
+      > to determine how much wax your containers need. Enter your container dimensions or volume, select
+      your wax type, and get the exact weight including a 10-15% overage for pour pot residue and second
+      pours.
+    </p>
+    <p>
+      Next, use the <a
+        href="/calculators/fragrance-calculator"
+        class="text-[var(--color-accent)] hover:underline">Fragrance Calculator</a
+      > to find the right amount of fragrance oil. Input your total wax weight and target fragrance load
+      percentage (6-10% for most waxes). The calculator shows both the fragrance weight and the adjusted
+      wax weight after adding fragrance.
+    </p>
+    <p>
+      Finally, plug your material costs into the <a
+        href="/calculators/batch-cost-calculator"
+        class="text-[var(--color-accent)] hover:underline">Batch Cost Calculator</a
+      > to set profitable retail prices. Include wax, fragrance, wicks, containers, labels, packaging,
+      your labor time, and overhead. The calculator suggests retail and wholesale prices at your target
+      margin.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Pricing Candles for Profit">
+    <p>
+      A common mistake new candle makers make is pricing too low. An 8oz soy candle typically costs
+      $3-5 in materials (wax, fragrance, wick, container, label). Add labor, packaging, platform
+      fees (Etsy takes roughly 12%), and shipping supplies, and your true cost per candle is often
+      $8-12.
+    </p>
+    <p>
+      Apply a 2x-2.5x markup on total costs for retail pricing. This means an 8oz candle should
+      retail for $18-28, which aligns with market expectations for handmade candles. If you plan to
+      sell wholesale to shops, price retail at 2.5x so your 50% wholesale discount still covers
+      costs.
+    </p>
+    <p>
+      Track your actual costs for at least 5 batches before finalizing prices. Real-world material
+      usage, cure time, failed pours, and shipping damage all affect your true cost per unit.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

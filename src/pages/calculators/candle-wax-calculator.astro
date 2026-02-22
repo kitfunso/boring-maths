@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { CandleWaxCalculator } from '../../components/calculators/CandleWaxCalculator';
 
-const title = 'Free Candle Wax Calculator — Container Volume to Wax Weight | Boring Math';
+const title = 'Candle Wax Calculator — How Much Wax Do I Need? | Boring Math';
 const description =
   'Free candle wax calculator. Calculate how much wax you need for any container size. Includes wax density for soy, coconut, paraffin, and beeswax. Wick size recommendations.';
 const keywords =
@@ -25,6 +25,13 @@ const breadcrumbs = [
 ];
 
 const relatedCalculators = [
+  {
+    title: 'Candle Making Guide',
+    description: 'Complete guide to candle making calculators.',
+    href: '/calculators/hobbies/candle-making',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
   {
     title: 'Fragrance Calculator',
     description: 'Calculate fragrance oil amounts.',

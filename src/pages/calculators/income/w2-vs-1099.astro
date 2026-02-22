@@ -1,0 +1,361 @@
+---
+/**
+ * W2 vs 1099 Hub Page
+ * Guide to employee vs contractor pay with links to related calculators
+ */
+
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../../components/common/SEOHead.astro';
+import HeroSection from '../../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../../components/calculators/shared/FAQSection.astro';
+
+const title = 'W2 vs 1099: Employee vs Contractor Pay Guide | Boring Math';
+const description =
+  'Understand the true cost of W2 vs 1099 employment. Compare self-employment tax, benefits, and take-home pay with free calculators for contractors, freelancers, and consultants.';
+const keywords =
+  'w2 vs 1099, employee vs contractor, 1099 vs w2 calculator, contractor pay, self employment tax, freelance rate, consulting rate calculator, w2 to 1099 conversion';
+const canonicalURL = '/calculators/income/w2-vs-1099';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Income', href: '/calculators/income' },
+  { label: 'W2 vs 1099 Guide' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'W2 to 1099 Calculator',
+    description: 'Convert salary to equivalent contractor rate.',
+    href: '/calculators/w2-to-1099-calculator',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Contractor vs Employee',
+    description: 'Side-by-side total compensation comparison.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'Consulting Rate Calculator',
+    description: 'Find your hourly and day rate.',
+    href: '/calculators/consulting-rate-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Freelance Day Rate',
+    description: 'Calculate your optimal daily rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the difference between W2 and 1099?',
+    answer:
+      'A W2 employee works for a company that withholds income taxes, pays half of Social Security and Medicare taxes (7.65%), and typically provides benefits like health insurance and paid time off. A 1099 contractor is self-employed, pays the full 15.3% self-employment tax, arranges their own benefits, and has more flexibility in how and when they work.',
+  },
+  {
+    question: 'How much more should a 1099 contractor make than a W2 employee?',
+    answer:
+      'A 1099 contractor should charge at least 1.25x to 1.5x the equivalent W2 hourly rate to break even after accounting for self-employment tax, health insurance, retirement match, paid time off, and business expenses. For roles with generous benefits packages, 1.4x to 1.5x is more appropriate. Use our W2 to 1099 Calculator for your exact multiplier.',
+  },
+  {
+    question: 'What is self-employment tax and how much is it?',
+    answer:
+      'Self-employment tax is 15.3% on net self-employment income, covering Social Security (12.4% up to $168,600 in 2024) and Medicare (2.9% on all earnings). As a W2 employee, your employer pays half (7.65%). As a 1099 contractor, you pay both halves. You can deduct half of the SE tax from your adjusted gross income.',
+  },
+  {
+    question: 'Can I switch from W2 to 1099 at the same job?',
+    answer:
+      'Sometimes, but be cautious. The IRS has strict rules about worker classification. If a company controls when, where, and how you work, you are likely an employee regardless of what label they use. Misclassification can result in penalties for the employer and lost protections for you. Genuine 1099 arrangements involve real independence in how work is performed.',
+  },
+  {
+    question: 'What tax deductions can 1099 contractors take?',
+    answer:
+      'Common deductions include: home office (dedicated workspace), health insurance premiums, retirement contributions (SEP-IRA or Solo 401k), business equipment and software, professional development, business travel, cell phone and internet (business portion), accounting and legal fees, and professional liability insurance. The qualified business income deduction (QBI) can also reduce taxable income by up to 20%.',
+  },
+  {
+    question: 'Should I form an LLC or S-Corp as a contractor?',
+    answer:
+      'An LLC provides liability protection but does not change your tax treatment. An S-Corp can save on self-employment tax if you earn over $80,000-$100,000 per year by splitting income between salary (subject to SE tax) and distributions (not subject to SE tax). However, S-Corps add complexity, require payroll, and have ongoing compliance costs. Consult a tax professional for your specific situation.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Income', url: '/calculators/income' },
+  { name: 'W2 vs 1099 Guide', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="W2 vs 1099 Employment Guide"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="W2 vs 1099 Guide"
+    description="Understand the true financial difference between employee and contractor pay. Free calculators to help you compare, convert, and negotiate rates."
+  />
+
+  <!-- Calculator Cards -->
+  <section class="mb-16">
+    <div class="grid md:grid-cols-2 gap-6">
+      <a
+        href="/calculators/w2-to-1099-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-blue-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          W2 to 1099 Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Convert your W2 salary to an equivalent 1099 contractor rate. Accounts for self-employment
+          tax, health insurance, retirement match, PTO, and business expenses.
+        </p>
+      </a>
+
+      <a
+        href="/calculators/contractor-vs-employee-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-purple-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+            ></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Contractor vs Employee Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Side-by-side comparison of total compensation. Enter both offers and see which gives you
+          more net income after all taxes and costs.
+        </p>
+      </a>
+
+      <a
+        href="/calculators/consulting-rate-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-green-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Consulting Rate Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Calculate your hourly and day rate based on target income. See how much you need to charge
+          to cover all costs and earn your desired take-home.
+        </p>
+      </a>
+
+      <a
+        href="/calculators/freelance-day-rate-calculator"
+        class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-amber-500/50 transition-all group"
+      >
+        <div
+          class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4"
+        >
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+            ></path>
+          </svg>
+        </div>
+        <h3
+          class="text-lg font-display text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+        >
+          Freelance Day Rate Calculator
+        </h3>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Find your optimal freelance daily rate and compare it to a full-time salary with tax
+          adjustments and benefits factored in.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <ContentSection title="Key Differences Between W2 and 1099">
+    <p>
+      The distinction between W2 employees and 1099 independent contractors affects everything from
+      your tax bill to your daily work life. Understanding these differences is essential before
+      accepting a contract position or converting from full-time employment.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6 mt-4">
+      <div class="space-y-3">
+        <h4 class="font-semibold text-blue-400">W2 Employee</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Employer pays 7.65% of FICA taxes</li>
+          <li>Health insurance (employer covers 80-83%)</li>
+          <li>401(k) with employer match (3-6%)</li>
+          <li>Paid time off and holidays</li>
+          <li>Unemployment insurance coverage</li>
+          <li>Workers' compensation protection</li>
+          <li>Set schedule and work location</li>
+        </ul>
+      </div>
+      <div class="space-y-3">
+        <h4 class="font-semibold text-green-400">1099 Contractor</h4>
+        <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
+          <li>Pay full 15.3% self-employment tax</li>
+          <li>Self-fund health insurance ($500-800/mo)</li>
+          <li>Solo 401(k) or SEP-IRA (no match)</li>
+          <li>No paid time off — time off is unpaid</li>
+          <li>No unemployment insurance</li>
+          <li>Need own liability insurance</li>
+          <li>Flexible schedule and location</li>
+        </ul>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="The True Cost of Going 1099">
+    <p>
+      Most people underestimate how much more a contractor needs to earn to match employee take-home
+      pay. Consider a W2 employee earning $100,000 per year with standard benefits:
+    </p>
+    <div class="bg-[var(--color-surface)] rounded-lg p-6 ring-1 ring-white/10 mt-4">
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-between">
+          <span class="text-[var(--color-subtle)]">Extra self-employment tax (7.65%)</span>
+          <span class="text-red-400 font-mono">+$7,650</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--color-subtle)]">Health insurance (employer portion)</span>
+          <span class="text-red-400 font-mono">+$7,900</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--color-subtle)]">Lost 401(k) match (4%)</span>
+          <span class="text-red-400 font-mono">+$4,000</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--color-subtle)]">Paid time off (15 days + holidays)</span>
+          <span class="text-red-400 font-mono">+$8,650</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-[var(--color-subtle)]">Business expenses and insurance</span>
+          <span class="text-red-400 font-mono">+$5,000</span>
+        </div>
+        <div class="border-t border-white/10 pt-3 flex justify-between font-semibold">
+          <span class="text-[var(--color-cream)]">Minimum contractor gross needed</span>
+          <span class="text-amber-400 font-mono">~$133,200</span>
+        </div>
+      </div>
+    </div>
+    <p class="mt-4">
+      That is a <strong>1.33x multiplier</strong> just to break even — and does not include a risk premium
+      for income instability, gaps between contracts, or the time spent on non-billable work like marketing
+      and administration.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="When Does 1099 Make Financial Sense?">
+    <p>
+      Contracting makes the most financial sense when the rate premium is significant and you can
+      manage costs effectively. Here are the scenarios where it typically works:
+    </p>
+    <ul class="list-disc list-inside space-y-2 mt-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">High rate premium:</strong> The contract rate is 1.4x
+        or more than the equivalent salary, leaving room for costs plus extra income.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Spouse's benefits:</strong> Access to health insurance
+        through a partner eliminates one of the biggest contractor costs.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">High-demand skills:</strong> Fields like software engineering,
+        data science, and specialized consulting have steady demand and premium rates.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Tax optimization:</strong> S-Corp election, business
+        deductions, and retirement contributions can significantly improve the after-tax picture for higher
+        earners.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Multiple clients:</strong> Working with several clients
+        reduces the risk of income loss from any single engagement ending.
+      </li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Setting Your Contractor Rate">
+    <p>Use our calculators to approach rate-setting from two directions:</p>
+    <p>
+      <strong>Bottom-up:</strong> The <a
+        href="/calculators/w2-to-1099-calculator"
+        class="text-[var(--color-accent)] hover:underline">W2 to 1099 Calculator</a
+      > converts your current or target salary into the minimum contractor rate needed to maintain the
+      same take-home pay. This is your floor — never go below this number.
+    </p>
+    <p>
+      <strong>Top-down:</strong> The <a
+        href="/calculators/consulting-rate-calculator"
+        class="text-[var(--color-accent)] hover:underline">Consulting Rate Calculator</a
+      > starts with your desired income and works backward to the hourly and day rates needed to achieve
+      it. This accounts for your specific costs, tax bracket, and utilization rate.
+    </p>
+    <p>
+      <strong>Compare offers:</strong> When you have both a salary offer and a contract offer on the table,
+      the <a
+        href="/calculators/contractor-vs-employee-calculator"
+        class="text-[var(--color-accent)] hover:underline">Contractor vs Employee Calculator</a
+      > shows you exactly which option puts more money in your pocket after all taxes and costs.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

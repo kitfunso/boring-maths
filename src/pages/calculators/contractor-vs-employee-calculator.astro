@@ -14,7 +14,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
 
 // SEO Configuration
-const title = 'Free 1099 vs W2 Calculator — Compare Pay & Benefits | Boring Math';
+const title = '1099 vs W2 Calculator — Contractor vs Employee Comparison | Boring Math';
 const description =
   'Compare 1099 contractor vs W2 employee pay side-by-side. Account for self-employment tax, benefits, and hidden costs. Instant results, no signup.';
 const keywords =
@@ -31,6 +31,13 @@ const breadcrumbs = [
 
 // Related calculators
 const relatedCalculators = [
+  {
+    title: 'W2 vs 1099 Guide',
+    description: 'Complete guide to employee vs contractor pay.',
+    href: '/calculators/income/w2-vs-1099',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
   {
     title: 'Hourly to Salary Calculator',
     description: 'Convert hourly wages to annual salary and back.',
@@ -51,13 +58,6 @@ const relatedCalculators = [
     href: '/calculators/go-full-time-calculator',
     icon: 'trending' as const,
     color: 'purple' as const,
-  },
-  {
-    title: 'Salary to Hourly Calculator',
-    description: 'Convert salary to true hourly rate.',
-    href: '/calculators/salary-to-hourly-calculator',
-    icon: 'calculator' as const,
-    color: 'blue' as const,
   },
 ];
 

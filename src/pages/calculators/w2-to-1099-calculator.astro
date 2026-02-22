@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { W2To1099Calculator } from '../../components/calculators/W2To1099Calculator';
 
-const title = 'Free W2 to 1099 Rate Calculator — Contractor Rate Converter | Boring Math';
+const title = 'W2 to 1099 Calculator — Convert Salary to Contractor Rate | Boring Math';
 const description =
   'Free W2 to 1099 calculator. Convert your employee salary to equivalent contractor rate. Accounts for self-employment tax (15.3%), health insurance, 401k match, PTO, and business expenses.';
 const keywords =
@@ -25,6 +25,13 @@ const breadcrumbs = [
 ];
 
 const relatedCalculators = [
+  {
+    title: 'W2 vs 1099 Guide',
+    description: 'Complete guide to employee vs contractor pay.',
+    href: '/calculators/income/w2-vs-1099',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
   {
     title: 'Contractor vs Employee',
     description: 'Compare total compensation packages.',
@@ -165,6 +172,55 @@ const schemaBreadcrumbs = [
       <p>
         <strong class="text-green-400">Rule of thumb:</strong> Only consider 1099 work if the rate is
         at least 1.25x your W2 equivalent. For comprehensive benefits packages, aim for 1.4x-1.5x.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Key Factors in Your W2 to 1099 Conversion">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Converting from W2 employment to 1099 contracting involves several hidden costs that many
+        people overlook. Understanding these factors is critical to setting a rate that actually
+        maintains your standard of living.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Self-Employment Tax (15.3%)</h4>
+      <p>
+        As a W2 employee, your employer pays half of your Social Security and Medicare taxes
+        (7.65%). As a 1099 contractor, you pay the full 15.3% yourself — broken down as 12.4% for
+        Social Security (on income up to $168,600 in 2024) and 2.9% for Medicare on all earnings.
+        You can deduct half of your self-employment tax from your adjusted gross income, but this is
+        still a significant cost that reduces your take-home pay by thousands of dollars each year.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Health Insurance Costs</h4>
+      <p>
+        The average annual premium for employer-sponsored health insurance is $7,911 for single
+        coverage and over $22,000 for family coverage (2023 KFF survey). Employers typically cover
+        80-83% of this cost. As a contractor, you bear the full premium yourself through marketplace
+        plans, COBRA, or a professional association plan. While self-employed health insurance
+        premiums are tax-deductible, the out-of-pocket cost is substantial and must be factored into
+        your rate.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Retirement Contribution Differences</h4>
+      <p>
+        Many employers offer 401(k) matching contributions of 3-6% of salary — effectively free
+        money that disappears when you go independent. As a contractor, you can open a Solo 401(k)
+        or SEP-IRA with high contribution limits ($69,000 combined in 2024), but there is no
+        employer match. If your current employer matches 4% on a $100,000 salary, that is $4,000 per
+        year in lost compensation your contractor rate needs to replace.
+      </p>
+
+      <h4 class="font-semibold text-[var(--color-cream)]">Utilization Rate and Billable Hours</h4>
+      <p>
+        Full-time employees are paid for 2,080 hours per year (40 hours x 52 weeks). Contractors
+        must account for non-billable time spent on marketing, invoicing, administrative tasks,
+        professional development, and finding new clients. Most independent consultants achieve a
+        utilization rate of 65-80%, meaning only 1,350 to 1,660 hours per year are actually
+        billable. Factor in 2-4 weeks of unpaid vacation and sick time, and your effective billable
+        hours drop further. This is why a $50/hour W2 rate typically requires $70-80/hour as a
+        contractor just to break even.
       </p>
     </div>
   </ContentSection>
