@@ -288,9 +288,19 @@ const colorClasses: Record<string, string> = {
             )
           }
 
-          <!-- Sidebar Ad Units -->
-          <AdUnit slot="1563990305" format="vertical" className="rounded-xl overflow-hidden" />
-          <AdUnit slot="8459010640" format="vertical" className="rounded-xl overflow-hidden" />
+          <!-- Sidebar Ad Units (lazy=false: sticky positioning breaks IntersectionObserver) -->
+          <AdUnit
+            slot="1563990305"
+            format="vertical"
+            className="rounded-xl overflow-hidden"
+            lazy={false}
+          />
+          <AdUnit
+            slot="8459010640"
+            format="vertical"
+            className="rounded-xl overflow-hidden"
+            lazy={false}
+          />
         </div>
       </aside>
     </div>
