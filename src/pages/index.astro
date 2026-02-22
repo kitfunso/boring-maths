@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AdCard from '../components/common/AdCard.astro';
 import HomepageCurrencySelector from '../components/common/HomepageCurrencySelector';
 
 const title = 'Boring Math Calculators | Free Online Calculators';
@@ -1385,18 +1384,6 @@ const categoryColors: Record<string, string> = {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4" id="calculators-grid">
         {calculators.map((calc, index) => (
           <>
-            {/* Insert ad after 5th calculator */}
-            {index === 5 && (
-              <AdCard adSlot="5882277756" className="ad-in-grid" />
-            )}
-            {/* Insert ad after 12th calculator */}
-            {index === 12 && (
-              <AdCard adSlot="3894231051" className="ad-in-grid" />
-            )}
-            {/* Insert ad after 22nd calculator */}
-            {index === 22 && (
-              <AdCard adSlot="1943032749" className="ad-in-grid" />
-            )}
             <div
               class="calculator-card bento-card group relative glow"
               data-category={calc.category}
@@ -1628,11 +1615,6 @@ const categoryColors: Record<string, string> = {
       });
 
       // Show all ads
-      document.querySelectorAll('.ad-in-grid').forEach(ad => {
-        (ad as HTMLElement).classList.remove('hidden');
-        (ad as HTMLElement).style.display = '';
-      });
-
       // Hide empty state
       emptyState?.classList.add('hidden');
     }
@@ -1791,7 +1773,6 @@ const categoryColors: Record<string, string> = {
     // Mark cards as loaded after initial animation to enable instant filtering
     setTimeout(() => {
       calculatorCards.forEach(card => card.classList.add('loaded'));
-      document.querySelectorAll('.ad-in-grid').forEach(ad => ad.classList.add('loaded'));
     }, 800);
 
     // Favorites management
@@ -1894,46 +1875,6 @@ const categoryColors: Record<string, string> = {
           card.classList.add('hidden');
         }
       });
-
-      // Handle ads - hide if they would be in first 2 positions when filtered
-      const grid = document.getElementById('calculators-grid');
-
-      if (grid && isFiltered) {
-        // Walk through grid children in DOM order
-        // Hide ads if they would appear before 2 visible calculators
-        const children = Array.from(grid.children) as HTMLElement[];
-        let visibleCalcCount = 0;
-
-        children.forEach(child => {
-          const isAd = child.classList.contains('ad-in-grid');
-          const isCalc = child.classList.contains('calculator-card');
-          const isHidden = child.classList.contains('hidden');
-
-          // Count visible calculators (not hidden, is a calculator card)
-          if (isCalc && !isHidden) {
-            visibleCalcCount++;
-          }
-
-          if (isAd) {
-            // Hide ad if fewer than 2 visible calculators have appeared before it
-            // Use both class and inline style to ensure it works
-            if (visibleCalcCount < 2) {
-              child.classList.add('hidden');
-              child.style.display = 'none';
-            } else {
-              child.classList.remove('hidden');
-              child.style.display = '';
-            }
-          }
-        });
-      } else {
-        // No filter active - show all ads
-        const adCards = document.querySelectorAll('.ad-in-grid') as NodeListOf<HTMLElement>;
-        adCards.forEach(ad => {
-          ad.classList.remove('hidden');
-          ad.style.display = '';
-        });
-      }
 
       // Show/hide empty state
       if (emptyState) {
@@ -2070,22 +2011,16 @@ const categoryColors: Record<string, string> = {
     to { opacity: 1; }
   }
 
-  .calculator-card,
-  .ad-in-grid {
+  .calculator-card {
     animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     opacity: 0;
   }
 
   /* After initial load, disable animation for instant filtering */
-  .calculator-card.loaded,
-  .ad-in-grid.loaded {
+  .calculator-card.loaded {
     animation: none;
     opacity: 1;
     transform: none;
-  }
-
-  .ad-in-grid {
-    animation-delay: 250ms;
   }
 
   @keyframes card-appear {
