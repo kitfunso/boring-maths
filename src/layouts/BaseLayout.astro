@@ -99,28 +99,9 @@ const ogImageURL = ogImage
         var ads = document.querySelectorAll('ins.adsbygoogle');
         for (var i = 0; i < ads.length; i++) {
           if (ads[i].getAttribute('data-adsbygoogle-status')) continue;
-          var container = ads[i].closest('[data-ad-lazy]');
-          var isLazy = container && container.getAttribute('data-ad-lazy') === 'true';
-          if (isLazy && 'IntersectionObserver' in window) {
-            (function (el) {
-              var obs = new IntersectionObserver(
-                function (entries) {
-                  if (entries[0].isIntersecting) {
-                    try {
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                    } catch (e) {}
-                    obs.disconnect();
-                  }
-                },
-                { rootMargin: '200px' }
-              );
-              obs.observe(el);
-            })(container);
-          } else {
-            try {
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {}
-          }
+          try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          } catch (e) {}
         }
       });
     </script>
