@@ -1,0 +1,194 @@
+---
+/**
+ * UK Employer Cost Calculator Page
+ * True cost of hiring someone in the UK: salary + employer NIC + pension + apprenticeship levy
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKEmployerCostCalculator } from '../../components/calculators/UKEmployerCostCalculator';
+
+const title = 'UK Employer Cost Calculator 2025/26 -- True Cost of Hiring | Boring Math';
+const description =
+  'Free UK employer cost calculator. Calculate the true total cost of hiring someone: salary + employer NIC (15%) + auto-enrolment pension + apprenticeship levy. Updated for 2025/26 tax year.';
+const keywords =
+  'employer cost calculator uk, true cost of hiring uk, employer national insurance calculator, cost to employ someone uk, employer nic calculator 2025, employer pension contribution calculator, apprenticeship levy calculator';
+const canonicalURL = '/calculators/uk-employer-cost-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Tax', href: '/calculators/uk-tax' },
+  { label: 'UK Employer Cost Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Salary Sacrifice Calculator',
+    description: 'Calculate tax and NI savings from salary sacrifice.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'UK 100k Tax Trap Calculator',
+    description: 'Understand the 60% marginal tax rate.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Pension Calculator',
+    description: 'Project your retirement pot with employer match.',
+    href: '/calculators/uk-pension-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'UK Dividend Tax Calculator',
+    description: 'Compare salary vs dividend for company directors.',
+    href: '/calculators/uk-dividend-tax-calculator',
+    icon: 'chart' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the employer NIC rate for 2025/26?',
+    answer:
+      'From April 2025, employer National Insurance contributions (NIC) are charged at 15% on earnings above the secondary threshold of £5,000. This is an increase from the previous rate of 13.8% above £9,100. The combination of a higher rate and lower threshold significantly increases employer costs, particularly for lower-paid roles.',
+  },
+  {
+    question: 'What is the true cost of employing someone on £60,000?',
+    answer:
+      'For an employee earning £60,000 in 2025/26, the employer pays: £8,250 in employer NIC (15% on £55,000 above the £5,000 threshold), plus pension contributions of at least £1,320.90 (3% of qualifying earnings between £6,240 and £50,270). The total employer cost is approximately £69,571 before apprenticeship levy, making the hidden cost around 16% above the headline salary.',
+  },
+  {
+    question: 'What is auto-enrolment and how much does it cost employers?',
+    answer:
+      'Auto-enrolment requires employers to enrol eligible workers into a workplace pension scheme and make minimum contributions. For 2025/26, the minimum employer contribution is 3% of qualifying earnings, which are earnings between £6,240 and £50,270. For someone earning £50,000, the employer pension cost is approximately £1,320.90 per year.',
+  },
+  {
+    question: 'What is the apprenticeship levy and who pays it?',
+    answer:
+      'The apprenticeship levy is a tax on employers with an annual pay bill exceeding £3 million. It is charged at 0.5% of the total pay bill, with a £15,000 annual allowance. For example, an employer with a £5 million pay bill would pay (£5,000,000 x 0.5%) - £15,000 = £10,000 in apprenticeship levy. Small employers with a pay bill under £3 million do not pay the levy.',
+  },
+  {
+    question: 'What is the Employment Allowance for 2025/26?',
+    answer:
+      'The Employment Allowance for 2025/26 is £10,500, up from £5,000 in previous years. It allows eligible employers to reduce their employer NIC bill by up to £10,500 per year. Most small and medium businesses qualify, but companies where the director is the only employee paid above the NIC threshold are excluded. It is not available to public sector employers.',
+  },
+  {
+    question: 'How did employer costs change in April 2025?',
+    answer:
+      'April 2025 brought two significant changes to employer costs. First, the employer NIC rate rose from 13.8% to 15%. Second, the secondary threshold (the point at which employer NIC kicks in) dropped from £9,100 to £5,000. Together, these changes mean employers pay more NIC on a much larger portion of each employee salary. The Employment Allowance increase to £10,500 partially offsets this for smaller employers.',
+  },
+  {
+    question: 'Do employer pension contributions have to be based on qualifying earnings?',
+    answer:
+      'The minimum auto-enrolment contribution of 3% must be calculated on qualifying earnings (between £6,240 and £50,270 for 2025/26). However, many employers choose to contribute more, or to calculate contributions on total earnings rather than qualifying earnings. Some employers offer matching contributions where they will match what the employee puts in, up to a set percentage.',
+  },
+  {
+    question: 'How can employers reduce the cost of hiring?',
+    answer:
+      'Employers can reduce hiring costs through several means: claiming the Employment Allowance (worth up to £10,500 in NIC savings), using salary sacrifice schemes which reduce NIC on sacrificed amounts, hiring apprentices under 25 (NIC exempt up to £50,270), and claiming the National Insurance holiday for hiring in certain freeport areas. Planning pension contributions carefully and using the apprenticeship levy for training can also help optimise total costs.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Tax', url: '/calculators/uk-tax' },
+  { name: 'UK Employer Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Employer Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Employer Cost Calculator"
+    description="Calculate the true total cost of employing someone in the UK. See the full picture: salary plus employer NIC, auto-enrolment pension, and apprenticeship levy. Updated for the 2025/26 tax year."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKEmployerCostCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the annual gross salary</strong> -- the headline
+        salary you are paying (or planning to pay) the employee.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select the tax region</strong> -- England/NI/Wales or
+        Scotland. This does not affect employer costs but is included for consistency with other calculators.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Set the pension contribution rate</strong> -- the minimum
+        auto-enrolment rate is 3%, but you can adjust up to 25% to reflect your scheme.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Toggle the Apprenticeship Levy</strong> -- switch this
+        on if your organisation has a pay bill exceeding £3 million.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Toggle the Employment Allowance</strong> -- switch this
+        on if you are an eligible small employer to see the NIC reduction.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review the comparison table</strong> -- see how costs
+        scale across different salary levels at a glance.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-blue-400">total employer cost</strong> is the full amount your business
+        pays to employ someone. It includes the gross salary plus all mandatory employer contributions:
+        National Insurance, pension, and (where applicable) the apprenticeship levy.
+      </p>
+      <p>
+        <strong class="text-red-400">Employer NIC</strong> is typically the largest hidden cost. For 2025/26,
+        employers pay 15% on all earnings above £5,000. On a £60,000 salary, that is £8,250 in NIC alone.
+      </p>
+      <p>
+        The <strong class="text-blue-400">pension contribution</strong> is calculated on qualifying earnings
+        between £6,240 and £50,270. At the 3% minimum rate, this ranges from zero (for salaries under
+        £6,240) to approximately £1,321 (for salaries above £50,270).
+      </p>
+      <p>
+        The <strong class="text-amber-400">hidden cost percentage</strong> shows how much more than the
+        headline salary the employee actually costs. A typical hidden cost of 15-18% means a £60,000 employee
+        really costs your business around £69,000-£71,000.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">comparison table</strong> is the key feature of
+        this calculator. It shows total employer costs side by side at different salary levels, making
+        it easy to budget for hiring or compare the true cost of different roles.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
