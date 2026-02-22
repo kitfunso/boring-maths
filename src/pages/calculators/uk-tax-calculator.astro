@@ -1,0 +1,286 @@
+---
+/**
+ * UK Tax Calculator Page
+ * The #1 most important page: "uk tax calculator", "take home pay calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKTaxCalculator } from '../../components/calculators/UKTaxCalculator';
+
+const title = 'UK Tax Calculator 2025/26 - Take Home Pay Calculator | Boring Math';
+const description =
+  'Free UK tax calculator for 2025/26. Calculate your take-home pay after income tax, National Insurance, student loans, and pension contributions. Covers England, Scotland, Wales and Northern Ireland with accurate PAYE calculations.';
+const keywords =
+  'uk tax calculator, take home pay calculator, uk income tax calculator, salary after tax uk, uk tax calculator 2025, paye calculator, national insurance calculator, uk salary calculator, tax calculator uk 2025/26, how much tax will i pay';
+const canonicalURL = '/calculators/uk-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Tax', href: '/calculators/uk-tax' },
+  { label: 'UK Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK 100k Tax Trap Calculator',
+    description: 'See how the 60% marginal rate affects earners between £100k and £125k.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'UK Salary Sacrifice Calculator',
+    description: 'Calculate tax and NI savings from salary sacrifice pension contributions.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'UK Student Loan Calculator',
+    description: 'See detailed repayment projections and when your loan will be written off.',
+    href: '/calculators/uk-student-loan-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'UK Employer Cost Calculator',
+    description: 'Calculate the true total cost of employing someone including employer NIC.',
+    href: '/calculators/uk-employer-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK Dividend Tax Calculator',
+    description: 'Compare salary vs dividend for company directors and investors.',
+    href: '/calculators/uk-dividend-tax-calculator',
+    icon: 'chart' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much income tax will I pay on my salary in 2025/26?',
+    answer:
+      'Income tax depends on your earnings and where you live. In England, Wales, and Northern Ireland, you pay 0% on the first £12,570 (personal allowance), 20% on earnings from £12,571 to £50,270, 40% on earnings from £50,271 to £125,140, and 45% on earnings above £125,140. Scotland has its own rates ranging from 19% to 48%. Enter your salary above for an exact calculation.',
+  },
+  {
+    question: 'What is the personal allowance for 2025/26?',
+    answer:
+      'The personal allowance for 2025/26 is £12,570. This is the amount you can earn before paying any income tax. It has been frozen at this level since 2021/22. If you earn over £100,000, your personal allowance is reduced by £1 for every £2 above £100,000, meaning it is completely lost at £125,140.',
+  },
+  {
+    question: 'How much National Insurance do I pay?',
+    answer:
+      'For 2025/26, employees pay National Insurance at 8% on earnings between £12,570 and £50,270 per year, and 2% on earnings above £50,270. If you earn £35,000, your annual NIC would be £1,794.40 (8% of £22,430). NIC is calculated on your employment income only, not on savings, dividends, or rental income.',
+  },
+  {
+    question: 'How do Scottish income tax rates differ from the rest of the UK?',
+    answer:
+      'Scotland has six income tax bands compared to three in the rest of the UK. The 2025/26 Scottish rates are: 19% Starter rate (£12,571 to £14,876), 20% Basic rate (£14,877 to £26,561), 21% Intermediate rate (£26,562 to £43,662), 42% Higher rate (£43,663 to £75,000), 45% Advanced rate (£75,001 to £125,140), and 48% Top rate (above £125,140). Scottish taxpayers generally pay more tax on incomes above about £28,000.',
+  },
+  {
+    question: 'What is the £100k tax trap?',
+    answer:
+      'When your income exceeds £100,000, your personal allowance of £12,570 starts to be withdrawn at a rate of £1 for every £2 of income above £100,000. This creates an effective marginal tax rate of 60% on income between £100,000 and £125,140 (40% income tax plus 20% from the lost personal allowance). Many people use salary sacrifice pension contributions to bring their income below £100,000 and avoid this trap.',
+  },
+  {
+    question: 'How are student loan repayments calculated?',
+    answer:
+      'Student loan repayments are based on your gross salary, not your taxable income. For 2025/26, Plan 1 repayments are 9% of earnings above £24,990. Plan 2 is 9% above £27,295. Plan 4 (Scotland) is 9% above £31,395. Plan 5 is 9% above £25,000. Postgraduate loans are 6% above £21,000. You can have both an undergraduate and postgraduate loan repayment at the same time.',
+  },
+  {
+    question: 'What is the difference between relief at source and salary sacrifice pensions?',
+    answer:
+      'With relief at source, your pension contribution is taken from your net pay (after tax), and your pension provider reclaims basic rate tax relief (20%) from HMRC. Higher and additional rate taxpayers need to claim extra relief through self-assessment. With salary sacrifice, your employer reduces your contractual salary by the pension amount before calculating tax and NIC, meaning you save both income tax and National Insurance on the sacrificed amount.',
+  },
+  {
+    question: 'What is the effective tax rate and why does it matter?',
+    answer:
+      'Your effective tax rate is the total percentage of your gross salary that goes to all deductions: income tax, National Insurance, student loans, and pension. It gives you a single number showing what proportion of your earnings you actually keep. For example, someone earning £35,000 with a 5% pension might have an effective deduction rate of around 28%, meaning they keep about 72% of their gross salary as take-home pay.',
+  },
+  {
+    question: 'Is my bonus taxed differently from my salary?',
+    answer:
+      'Bonuses are taxed the same way as regular salary. They are added to your total annual income and taxed at your marginal rate. The reason bonuses often seem more heavily taxed is that they can push you into a higher tax band. For example, if your salary is £45,000, a £10,000 bonus means £5,270 of that bonus is taxed at 40% instead of 20%. Your payroll may also apply emergency tax rates to bonuses, but this is corrected by year end.',
+  },
+  {
+    question: 'How often are UK tax rates updated?',
+    answer:
+      'UK tax rates and thresholds are usually announced in the Autumn Budget (typically November) and take effect from 6 April the following year, which is the start of the UK tax year. The personal allowance and basic rate threshold have been frozen since 2021/22 and are expected to remain at current levels until 2028/29. This calculator is updated for the 2025/26 tax year (6 April 2025 to 5 April 2026).',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Tax', url: '/calculators/uk-tax' },
+  { name: 'UK Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Tax Calculator 2025/26"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Tax Calculator 2025/26"
+    description="Calculate your take-home pay after income tax, National Insurance, student loans, and pension contributions. Updated for the 2025/26 tax year with accurate rates for England, Scotland, Wales, and Northern Ireland."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKTaxCalculator client:visible />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your annual gross salary</strong> -- your total
+        yearly pay before any deductions. This is the headline salary on your contract.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your tax region</strong> -- choose England/NI/Wales
+        or Scotland. Scottish taxpayers have different income tax rates.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose your display frequency</strong> -- see your take-home
+        pay broken down annually, monthly, weekly, or daily.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Select your student loan plan</strong> -- if you have
+        a student loan, select the correct plan type to include repayments in your calculation.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Set your pension contribution</strong> -- enter the
+        percentage of your gross salary that goes to your workplace pension (default 5%).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose pension type</strong> -- select relief at source
+        or salary sacrifice depending on how your employer handles pension contributions.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review the full breakdown</strong> -- see exactly where
+        every pound of your salary goes, with the tax band table showing how much is taxed at each rate.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The <strong class="text-emerald-400">take-home pay</strong> is the headline figure: the amount
+        that actually lands in your bank account after all mandatory deductions. This is what matters
+        for your household budget.
+      </p>
+      <p>
+        <strong class="text-red-400">Income tax</strong> is calculated on your earnings above the personal
+        allowance (£12,570). The rate depends on which band your income falls into and whether you are
+        in Scotland.
+      </p>
+      <p>
+        <strong class="text-amber-400">National Insurance</strong> is calculated separately from income
+        tax. Employees pay 8% on earnings between £12,570 and £50,270, and 2% on anything above.
+      </p>
+      <p>
+        The <strong class="text-amber-400">effective deduction rate</strong> shows your total deductions
+        (tax, NIC, loans, pension) as a percentage of your gross salary. This gives you a single number
+        to understand your overall tax burden.
+      </p>
+      <p>
+        The <strong class="text-blue-400">marginal rate</strong> tells you how much tax you would pay
+        on your next pound earned. This is crucial for understanding pay rises, bonuses, and whether salary
+        sacrifice or other tax planning would benefit you.
+      </p>
+      <p>
+        The <strong class="text-[var(--color-cream)]">tax band breakdown table</strong> shows exactly
+        how your income tax is calculated: how much of your income falls into each band and the tax charged
+        at each rate. This is the same calculation HMRC uses.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="2025/26 Tax Rates at a Glance">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm text-[var(--color-subtle)]">
+        <thead>
+          <tr class="text-left text-[var(--color-muted)] border-b border-white/10">
+            <th class="pb-3 pr-4 font-medium">Band</th>
+            <th class="pb-3 pr-4 font-medium">England/NI/Wales</th>
+            <th class="pb-3 font-medium">Scotland</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Personal Allowance (£0 - £12,570)</td>
+            <td class="py-2 pr-4">0%</td>
+            <td class="py-2">0%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Starter (£12,571 - £14,876)</td>
+            <td class="py-2 pr-4">20%</td>
+            <td class="py-2">19%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Basic (£14,877 - £26,561)</td>
+            <td class="py-2 pr-4">20%</td>
+            <td class="py-2">20%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Intermediate (£26,562 - £43,662)</td>
+            <td class="py-2 pr-4">20%</td>
+            <td class="py-2">21%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Higher (£43,663 - £50,270)</td>
+            <td class="py-2 pr-4">20%</td>
+            <td class="py-2">42%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Higher (£50,271 - £75,000)</td>
+            <td class="py-2 pr-4">40%</td>
+            <td class="py-2">42%</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Advanced (£75,001 - £125,140)</td>
+            <td class="py-2 pr-4">40%</td>
+            <td class="py-2">45%</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 text-[var(--color-cream)]">Additional/Top (above £125,140)</td>
+            <td class="py-2 pr-4">45%</td>
+            <td class="py-2">48%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-6 space-y-2 text-sm text-[var(--color-muted)]">
+      <p>
+        <strong class="text-[var(--color-subtle)]">Employee NIC:</strong> 8% on £12,570 to £50,270, then
+        2% above.
+      </p>
+      <p>
+        <strong class="text-[var(--color-subtle)]">Personal Allowance:</strong> £12,570 (tapers by £1
+        for every £2 above £100,000).
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
