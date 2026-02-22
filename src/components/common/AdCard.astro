@@ -30,8 +30,8 @@ const hasAdsense = true;
           style="display:block; min-height: 100px; width: 100%;"
           data-ad-client={clientId}
           data-ad-slot={adSlot}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
+          data-ad-format="rectangle"
+          data-full-width-responsive="false"
         />
       </>
     ) : (
@@ -57,10 +57,12 @@ const hasAdsense = true;
 <style>
   .ad-card {
     min-height: 140px;
+    max-height: 280px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--gradient-card);
+    overflow: hidden;
   }
 
   /* Ensure hidden class overrides display:flex */
