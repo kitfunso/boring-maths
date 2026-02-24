@@ -14,3 +14,5 @@
 - AdSense pub-id: `ca-pub-8014911033000505`
 - Affiliate links: placeholder URLs (not yet live)
 - Update monthly after reconciliation
+- 2026-02-23: No revenue yet. First Dev.to blog post published for traffic building. 118 calculators live.
+- 2026-02-23: Second Dev.to post published (compound interest deep-dive). 121 calculators live. GSC trending up (40 clicks, 5.2K impressions as of Feb 22).

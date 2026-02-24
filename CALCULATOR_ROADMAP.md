@@ -4,13 +4,15 @@
 
 ## Executive Summary
 
-Based on market research and SEO analysis, this roadmap outlines **51 calculator opportunities (45 US + 6 UK)** organized into 6 phases over time. Each calculator targets specific long-tail keywords with moderate search volume (<500/month) and low competition - the sweet spot for passive SEO traffic.
+Based on market research and SEO analysis, this roadmap outlines **71 calculator opportunities (51 original + 20 US expansion)** organized into phases over time. Each calculator targets specific long-tail keywords with moderate search volume (<500/month) and low competition - the sweet spot for passive SEO traffic.
+
+**Status (February 2026):** 124 calculators live. Phases 5-11 complete. Phase 12 partially complete (5/20). 53+ bonus calculators built beyond the original roadmap across brewing, engineering, health, hobbies, everyday, and EU/UK tax niches.
 
 ---
 
-## Current State (Phase 4 Complete)
+## Current State (Phases 5-11 Complete)
 
-### Existing Calculators (5)
+### Original Calculators (5)
 | Calculator | Category | Target Keyword |
 |------------|----------|----------------|
 | Freelance Day Rate Calculator | Career/Finance | "freelance day rate calculator with tax adjustment" |
@@ -21,11 +23,11 @@ Based on market research and SEO analysis, this roadmap outlines **51 calculator
 
 ---
 
-## Phase 5: Career & Income Expansion (6 Calculators)
+## Phase 5: Career & Income Expansion (6 Calculators) ✅ COMPLETE
 
-Building on the successful career/finance category with high commercial intent keywords.
+All 6 calculators built and live.
 
-### 5.1 Contractor vs Employee Calculator
+### 5.1 Contractor vs Employee Calculator ✅
 **Target Keyword:** "contractor vs full time employee calculator"
 **Inputs:** Contract rate, full-time salary offer, benefits value, tax rate, billable hours
 **Outputs:** True compensation comparison, break-even rate, recommendation
@@ -33,7 +35,7 @@ Building on the successful career/finance category with high commercial intent k
 **Color Theme:** Teal
 **Difficulty:** Medium
 
-### 5.2 Raise Calculator (Cost of Not Getting One)
+### 5.2 Raise Calculator (Cost of Not Getting One) ✅
 **Target Keyword:** "how much is a raise worth calculator"
 **Inputs:** Current salary, raise percentage, years until retirement, investment return rate
 **Outputs:** Lifetime value of raise, opportunity cost of not negotiating, compound growth
@@ -41,7 +43,7 @@ Building on the successful career/finance category with high commercial intent k
 **Color Theme:** Gold
 **Difficulty:** Easy
 
-### 5.3 Remote Work Savings Calculator
+### 5.3 Remote Work Savings Calculator ✅
 **Target Keyword:** "remote work savings calculator commute"
 **Inputs:** Commute distance, gas price, car costs, parking, work clothes budget, eating out frequency
 **Outputs:** Annual savings, time saved, CO2 reduction, hourly "raise" equivalent
@@ -49,7 +51,7 @@ Building on the successful career/finance category with high commercial intent k
 **Color Theme:** Cyan
 **Difficulty:** Easy
 
-### 5.4 Job Offer Comparison Calculator
+### 5.4 Job Offer Comparison Calculator ✅
 **Target Keyword:** "compare two job offers calculator total compensation"
 **Inputs:** Base salary, bonus, equity/RSUs, 401k match, health benefits, PTO days, commute costs
 **Outputs:** Total compensation for each offer, side-by-side comparison, recommendation
@@ -57,7 +59,7 @@ Building on the successful career/finance category with high commercial intent k
 **Color Theme:** Indigo
 **Difficulty:** Medium
 
-### 5.5 Overtime Worth It Calculator
+### 5.5 Overtime Worth It Calculator ✅
 **Target Keyword:** "is overtime worth it after taxes calculator"
 **Inputs:** Regular hourly rate, overtime rate, current tax bracket, hours of OT
 **Outputs:** Net overtime pay, effective hourly rate after tax, break-even analysis
@@ -65,7 +67,7 @@ Building on the successful career/finance category with high commercial intent k
 **Color Theme:** Orange
 **Difficulty:** Easy
 
-### 5.6 Salary to Hourly Converter (Reverse)
+### 5.6 Salary to Hourly Converter (Reverse) ✅
 **Target Keyword:** "salary to hourly rate calculator with benefits"
 **Inputs:** Annual salary, benefits value, hours worked per week, PTO days
 **Outputs:** True hourly rate, comparison to market rates, overtime threshold
@@ -75,11 +77,11 @@ Building on the successful career/finance category with high commercial intent k
 
 ---
 
-## Phase 6: Personal Finance Deep Dive (8 Calculators)
+## Phase 6: Personal Finance Deep Dive (8 Calculators) ✅ COMPLETE
 
-High-intent financial planning calculators with strong affiliate potential.
+All 8 calculators built and live.
 
-### 6.1 Emergency Fund Calculator
+### 6.1 Emergency Fund Calculator ✅
 **Target Keyword:** "how much emergency fund do I need calculator"
 **Inputs:** Monthly expenses, job stability (industry), dependents, existing savings, risk tolerance
 **Outputs:** Recommended fund size (3-12 months), monthly savings target, timeline to goal
@@ -87,7 +89,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Navy
 **Difficulty:** Easy
 
-### 6.2 FIRE Number Calculator (Early Retirement)
+### 6.2 FIRE Number Calculator (Early Retirement) ✅
 **Target Keyword:** "FIRE number calculator how much to retire early"
 **Inputs:** Annual expenses, current savings, savings rate, expected return, desired retirement age
 **Outputs:** FIRE number (25x rule), years to FIRE, required savings rate adjustments
@@ -95,7 +97,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Orange
 **Difficulty:** Medium
 
-### 6.3 Debt Payoff Calculator (Avalanche vs Snowball)
+### 6.3 Debt Payoff Calculator (Avalanche vs Snowball) ✅
 **Target Keyword:** "debt payoff calculator avalanche vs snowball"
 **Inputs:** List of debts (balance, rate, minimum payment), extra monthly payment
 **Outputs:** Payoff timeline for each method, interest saved, recommended strategy
@@ -103,7 +105,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Red
 **Difficulty:** Hard
 
-### 6.4 Subscription Audit Calculator
+### 6.4 Subscription Audit Calculator ✅
 **Target Keyword:** "how much am I spending on subscriptions calculator"
 **Inputs:** List of subscriptions (name, cost, frequency), usage rating
 **Outputs:** Monthly/yearly total, recommendations to cancel, potential savings
@@ -111,7 +113,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Purple
 **Difficulty:** Medium
 
-### 6.5 Buy vs Rent Calculator
+### 6.5 Buy vs Rent Calculator ✅
 **Target Keyword:** "should I buy or rent a house calculator"
 **Inputs:** Home price, down payment, mortgage rate, rent amount, expected stay duration, maintenance %
 **Outputs:** Break-even point, 5/10/15-year comparison, opportunity cost of down payment
@@ -119,7 +121,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Brown
 **Difficulty:** Hard
 
-### 6.6 Compound Interest Visualizer
+### 6.6 Compound Interest Visualizer ✅
 **Target Keyword:** "compound interest calculator with monthly contributions"
 **Inputs:** Initial amount, monthly contribution, interest rate, time period
 **Outputs:** Final amount, interest earned, year-by-year growth chart
@@ -127,7 +129,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Green
 **Difficulty:** Easy
 
-### 6.7 Tax Bracket Calculator
+### 6.7 Tax Bracket Calculator ✅
 **Target Keyword:** "what tax bracket am I in calculator"
 **Inputs:** Filing status, gross income, deductions (standard/itemized)
 **Outputs:** Marginal bracket, effective rate, tax owed, bracket visualization
@@ -135,7 +137,7 @@ High-intent financial planning calculators with strong affiliate potential.
 **Color Theme:** Gray
 **Difficulty:** Medium
 
-### 6.8 Quarterly Tax Estimator (Self-Employed)
+### 6.8 Quarterly Tax Estimator (Self-Employed) ✅
 **Target Keyword:** "quarterly tax calculator self employed"
 **Inputs:** Expected annual income, business expenses, filing status, state
 **Outputs:** Quarterly payment amounts, due dates, self-employment tax breakdown
@@ -145,11 +147,11 @@ High-intent financial planning calculators with strong affiliate potential.
 
 ---
 
-## Phase 7: Life Events & Decisions (8 Calculators)
+## Phase 7: Life Events & Decisions (8 Calculators) ✅ COMPLETE
 
-High-emotion life decisions that drive engagement and sharing.
+All 8 calculators built and live.
 
-### 7.1 Baby Cost Calculator (First Year)
+### 7.1 Baby Cost Calculator (First Year) ✅
 **Target Keyword:** "how much does a baby cost first year calculator"
 **Inputs:** Childcare type, feeding method, diaper preference, health insurance status
 **Outputs:** Estimated first-year cost, monthly budget, category breakdown
@@ -157,7 +159,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Pink
 **Difficulty:** Medium
 
-### 7.2 Pet Ownership Cost Calculator
+### 7.2 Pet Ownership Cost Calculator ✅
 **Target Keyword:** "how much does a dog cost per year calculator"
 **Inputs:** Pet type, breed size, health status, lifestyle (grooming, daycare, travel)
 **Outputs:** Annual cost, lifetime cost, monthly budget needed
@@ -165,7 +167,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Amber
 **Difficulty:** Medium
 
-### 7.3 Wedding Budget Calculator
+### 7.3 Wedding Budget Calculator ✅
 **Target Keyword:** "how much should I spend on wedding calculator"
 **Inputs:** Total budget, guest count, priorities (venue vs food vs photography)
 **Outputs:** Recommended allocation by category, per-guest cost, vendor budget ranges
@@ -173,7 +175,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Rose
 **Difficulty:** Medium
 
-### 7.4 Moving Cost Estimator
+### 7.4 Moving Cost Estimator ✅
 **Target Keyword:** "how much does it cost to move cross country calculator"
 **Inputs:** Current/destination cities, home size, DIY vs professional, timing
 **Outputs:** Estimated cost range, breakdown by category, money-saving tips
@@ -181,7 +183,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Teal
 **Difficulty:** Medium
 
-### 7.5 College ROI Calculator
+### 7.5 College ROI Calculator ✅
 **Target Keyword:** "is college worth it calculator by major"
 **Inputs:** Intended major, school cost, scholarship amount, expected starting salary
 **Outputs:** Payback period, lifetime earnings premium, debt-to-income ratio
@@ -189,7 +191,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Navy
 **Difficulty:** Hard
 
-### 7.6 Car Buy vs Lease Calculator
+### 7.6 Car Buy vs Lease Calculator ✅
 **Target Keyword:** "buy or lease car calculator total cost"
 **Inputs:** Purchase price, lease terms, financing terms, annual mileage, ownership duration
 **Outputs:** Total cost comparison, break-even point, recommendation based on usage
@@ -197,7 +199,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Silver
 **Difficulty:** Medium
 
-### 7.7 Tip Calculator with Bill Split
+### 7.7 Tip Calculator with Bill Split ✅
 **Target Keyword:** "tip calculator split between friends"
 **Inputs:** Bill total, tip percentage, number of people, individual items (optional)
 **Outputs:** Tip amount, total per person, individual breakdown
@@ -205,7 +207,7 @@ High-emotion life decisions that drive engagement and sharing.
 **Color Theme:** Green
 **Difficulty:** Easy
 
-### 7.8 Vacation Budget Planner
+### 7.8 Vacation Budget Planner ✅
 **Target Keyword:** "vacation budget calculator per day"
 **Inputs:** Destination, duration, travel style, activities, flights, accommodation
 **Outputs:** Daily budget, total trip cost, category breakdown, savings timeline
@@ -215,11 +217,11 @@ High-emotion life decisions that drive engagement and sharing.
 
 ---
 
-## Phase 8: Home & DIY Projects (7 Calculators)
+## Phase 8: Home & DIY Projects (7 Calculators) ✅ COMPLETE
 
-Practical calculators for homeowners with strong search intent.
+All 7 calculators built and live.
 
-### 8.1 Paint Calculator
+### 8.1 Paint Calculator ✅
 **Target Keyword:** "how much paint do I need calculator by room size"
 **Inputs:** Room dimensions, number of coats, window/door count, paint coverage rate
 **Outputs:** Gallons needed, cost estimate, time estimate
@@ -227,7 +229,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Rainbow gradient
 **Difficulty:** Easy
 
-### 8.2 Flooring Calculator
+### 8.2 Flooring Calculator ✅
 **Target Keyword:** "how much flooring do I need calculator with waste"
 **Inputs:** Room dimensions, flooring type, pattern (diagonal adds waste), obstacles
 **Outputs:** Square footage needed, boxes to buy, waste percentage, cost estimate
@@ -235,7 +237,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Wood Brown
 **Difficulty:** Easy
 
-### 8.3 Tile and Grout Calculator
+### 8.3 Tile and Grout Calculator ✅
 **Target Keyword:** "tile calculator with grout and adhesive"
 **Inputs:** Area dimensions, tile size, grout line width, wall vs floor
 **Outputs:** Tiles needed, grout amount, adhesive amount, cost breakdown
@@ -243,7 +245,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Slate
 **Difficulty:** Medium
 
-### 8.4 Electricity Cost Calculator
+### 8.4 Electricity Cost Calculator ✅
 **Target Keyword:** "how much does it cost to run appliance calculator"
 **Inputs:** Appliance wattage, hours used per day, electricity rate
 **Outputs:** Daily/monthly/yearly cost, comparison to efficient alternatives
@@ -251,7 +253,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Yellow
 **Difficulty:** Easy
 
-### 8.5 Solar Panel Payback Calculator
+### 8.5 Solar Panel Payback Calculator ✅
 **Target Keyword:** "solar panel calculator payback period"
 **Inputs:** System cost, electricity rate, sun hours, incentives/rebates, financing
 **Outputs:** Payback period, 25-year savings, ROI percentage
@@ -259,7 +261,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Sun Orange
 **Difficulty:** Hard
 
-### 8.6 Fence Material Calculator
+### 8.6 Fence Material Calculator ✅
 **Target Keyword:** "how much fencing do I need calculator"
 **Inputs:** Perimeter length, fence height, gate count, material type
 **Outputs:** Posts needed, panels/boards, concrete bags, hardware, cost estimate
@@ -267,7 +269,7 @@ Practical calculators for homeowners with strong search intent.
 **Color Theme:** Cedar
 **Difficulty:** Medium
 
-### 8.7 Mulch Calculator
+### 8.7 Mulch Calculator ✅
 **Target Keyword:** "how much mulch do I need calculator cubic yards"
 **Inputs:** Area dimensions, desired depth, mulch type
 **Outputs:** Cubic yards needed, bags vs bulk comparison, cost estimate
@@ -277,11 +279,11 @@ Practical calculators for homeowners with strong search intent.
 
 ---
 
-## Phase 9: Business & Entrepreneurship (8 Calculators)
+## Phase 9: Business & Entrepreneurship (8 Calculators) ✅ COMPLETE
 
-Tools for small business owners and aspiring entrepreneurs.
+All 8 calculators built and live.
 
-### 9.1 Break-Even Calculator
+### 9.1 Break-Even Calculator ✅
 **Target Keyword:** "break even point calculator for small business"
 **Inputs:** Fixed costs, variable cost per unit, selling price per unit
 **Outputs:** Break-even units, break-even revenue, margin analysis
@@ -289,7 +291,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Blue
 **Difficulty:** Easy
 
-### 9.2 Startup Cost Estimator
+### 9.2 Startup Cost Estimator ✅
 **Target Keyword:** "how much does it cost to start a business calculator"
 **Inputs:** Business type, location, employees, equipment needs, runway months
 **Outputs:** One-time costs, monthly burn rate, total capital needed
@@ -297,7 +299,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Emerald
 **Difficulty:** Medium
 
-### 9.3 Pricing Calculator (Cost-Plus)
+### 9.3 Pricing Calculator (Cost-Plus) ✅
 **Target Keyword:** "how to price my product calculator markup"
 **Inputs:** Product cost, overhead allocation, desired margin, competitor prices
 **Outputs:** Recommended price, margin analysis, volume needed for profitability
@@ -305,7 +307,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Gold
 **Difficulty:** Medium
 
-### 9.4 Employee True Cost Calculator
+### 9.4 Employee True Cost Calculator ✅
 **Target Keyword:** "true cost of employee calculator with benefits"
 **Inputs:** Salary, benefits (health, 401k, PTO), payroll taxes, overhead
 **Outputs:** True hourly cost, annual burden cost, billable rate needed
@@ -313,7 +315,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Slate
 **Difficulty:** Medium
 
-### 9.5 Rental Property ROI Calculator
+### 9.5 Rental Property ROI Calculator ✅
 **Target Keyword:** "rental property calculator cash on cash return"
 **Inputs:** Purchase price, down payment, rent, expenses, vacancy rate
 **Outputs:** Cash-on-cash return, cap rate, monthly cash flow, break-even occupancy
@@ -321,7 +323,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Navy
 **Difficulty:** Hard
 
-### 9.6 SaaS Metrics Calculator
+### 9.6 SaaS Metrics Calculator ✅
 **Target Keyword:** "SaaS metrics calculator MRR ARR churn"
 **Inputs:** Monthly customers, average revenue per user, churn rate, growth rate
 **Outputs:** MRR, ARR, LTV, CAC payback, growth projections
@@ -329,7 +331,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Purple
 **Difficulty:** Medium
 
-### 9.7 Etsy/eBay Fee Calculator
+### 9.7 Etsy/eBay Fee Calculator ✅
 **Target Keyword:** "Etsy fee calculator how much do I actually make"
 **Inputs:** Item price, shipping charged, platform, payment processor
 **Outputs:** Net profit, effective fee percentage, price to achieve target margin
@@ -337,7 +339,7 @@ Tools for small business owners and aspiring entrepreneurs.
 **Color Theme:** Orange
 **Difficulty:** Easy
 
-### 9.8 Consulting Rate Calculator
+### 9.8 Consulting Rate Calculator ✅
 **Target Keyword:** "how to set consulting rate calculator"
 **Inputs:** Desired annual income, billable hours target, expenses, profit margin
 **Outputs:** Hourly rate, day rate, project rate guidance, industry comparison
@@ -347,11 +349,11 @@ Tools for small business owners and aspiring entrepreneurs.
 
 ---
 
-## Phase 10: Event Planning (8 Calculators)
+## Phase 10: Event Planning (8 Calculators) ✅ COMPLETE
 
-Expanding the successful events category with more specific tools.
+All 8 calculators built and live.
 
-### 10.1 Catering Calculator
+### 10.1 Catering Calculator ✅
 **Target Keyword:** "how much food to order for party calculator per person"
 **Inputs:** Guest count, event duration, meal type (buffet/plated), dietary restrictions %
 **Outputs:** Pounds of food by category, serving counts, caterer order guide
@@ -359,7 +361,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Burgundy
 **Difficulty:** Medium
 
-### 10.2 Party Drink Calculator (Non-Alcoholic)
+### 10.2 Party Drink Calculator (Non-Alcoholic) ✅
 **Target Keyword:** "how much soda and water for party calculator"
 **Inputs:** Guest count, event duration, weather (hot events = more drinks), mix preference
 **Outputs:** Liters/bottles of each drink type, ice needed, cup count
@@ -367,7 +369,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Aqua
 **Difficulty:** Easy
 
-### 10.3 Event Seating Calculator
+### 10.3 Event Seating Calculator ✅
 **Target Keyword:** "how many tables for wedding reception calculator"
 **Inputs:** Guest count, table shape (round/rectangular), table size, dance floor %
 **Outputs:** Tables needed, room size required, layout suggestions
@@ -375,7 +377,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Ivory
 **Difficulty:** Easy
 
-### 10.4 Birthday Party Budget Calculator
+### 10.4 Birthday Party Budget Calculator ✅
 **Target Keyword:** "birthday party budget calculator per kid"
 **Inputs:** Number of kids, venue type, party supplies, food, entertainment, goody bags
 **Outputs:** Total budget, cost per child, category breakdown
@@ -383,7 +385,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Confetti Multi
 **Difficulty:** Easy
 
-### 10.5 Graduation Party Planner
+### 10.5 Graduation Party Planner ✅
 **Target Keyword:** "graduation party food calculator how much to buy"
 **Inputs:** Guest count, party style (open house vs seated), duration, menu items
 **Outputs:** Food quantities, drink amounts, cost estimate
@@ -391,7 +393,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** School colors selector
 **Difficulty:** Medium
 
-### 10.6 BBQ Calculator
+### 10.6 BBQ Calculator ✅
 **Target Keyword:** "how much meat to buy for BBQ calculator per person"
 **Inputs:** Guest count, meat types, sides count, appetite level (adults vs kids)
 **Outputs:** Pounds of each meat, sides quantities, charcoal/propane needed
@@ -399,7 +401,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Smoke Gray
 **Difficulty:** Easy
 
-### 10.7 Holiday Dinner Calculator
+### 10.7 Holiday Dinner Calculator ✅
 **Target Keyword:** "how big of a turkey for thanksgiving calculator"
 **Inputs:** Guest count, leftover preference, dietary restrictions, side dish count
 **Outputs:** Turkey size, cooking time, sides quantities, oven timing schedule
@@ -407,7 +409,7 @@ Expanding the successful events category with more specific tools.
 **Color Theme:** Autumn Orange
 **Difficulty:** Medium
 
-### 10.8 Conference/Meeting Calculator
+### 10.8 Conference/Meeting Calculator ✅
 **Target Keyword:** "conference room capacity calculator with social distancing"
 **Inputs:** Room dimensions, seating style, spacing requirements, AV needs
 **Outputs:** Max capacity, recommended setup, materials needed
@@ -419,29 +421,30 @@ Expanding the successful events category with more specific tools.
 
 ## Implementation Priority Matrix
 
-### High Priority (Strong SEO + Easy Build)
-1. Emergency Fund Calculator
-2. Tip Calculator with Bill Split
-3. Paint Calculator
-4. Electricity Cost Calculator
-5. Raise Calculator
-6. Break-Even Calculator
-7. BBQ Calculator
+### ✅ All Previously Prioritized Calculators — COMPLETE
+All High Priority, Medium Priority, and Long-Term calculators from the original matrix have been built and deployed.
 
-### Medium Priority (Strong SEO + Medium Build)
-1. Contractor vs Employee Calculator
-2. FIRE Number Calculator
-3. Baby Cost Calculator
-4. Wedding Budget Calculator
-5. Catering Calculator
-6. Quarterly Tax Estimator
+### Remaining Phase 12 Calculators (Priority Order)
+**High Priority (Strong SEO):**
+1. Roth vs Traditional Calculator — "Roth vs traditional calculator" (high search volume)
+2. W-4 Tax Withholding Calculator — "W-4 calculator" (seasonal demand Jan-Apr)
+3. FSA Calculator — "FSA calculator" (open enrollment season)
+4. Net Worth Percentile Calculator — "net worth percentile calculator" (easy build)
 
-### Long-Term (High Value + Complex Build)
-1. Debt Payoff Calculator (Avalanche vs Snowball)
-2. Buy vs Rent Calculator
-3. College ROI Calculator
-4. Solar Panel Payback Calculator
-5. Rental Property ROI Calculator
+**Medium Priority:**
+5. RMD Calculator — "required minimum distribution calculator"
+6. Social Security Benefits Calculator — "social security calculator"
+7. Mortgage Affordability Calculator — "how much house can I afford"
+8. HELOC Calculator — "HELOC calculator"
+9. Estate & Gift Tax Calculator — "estate tax calculator"
+10. Federal Student Loan Repayment Calculator — "student loan repayment calculator"
+
+**Lower Priority (Complex/Niche):**
+11. AMT Calculator — "ISO AMT calculator"
+12. PSLF Calculator — "public service loan forgiveness calculator"
+13. State Tax Comparison Calculator — "best state for taxes"
+14. Cost of Living Comparison Calculator — "cost of living calculator"
+15. Property Tax Calculator — "property tax by state"
 
 ---
 
@@ -504,11 +507,11 @@ Each new calculator should include:
 
 ---
 
-## Phase 11: UK & International Expansion (7 Calculators)
+## Phase 11: UK & International Expansion (7 Calculators) ✅ COMPLETE
 
-Targeting the UK market with region-specific financial tools. High search volume in UK with less competition than US equivalents.
+All 7 calculators built and live.
 
-### 11.1 UK £100k Tax Trap Calculator ✅ COMPLETE
+### 11.1 UK £100k Tax Trap Calculator ✅
 **Target Keyword:** "uk 100k tax trap calculator"
 **Status:** Implemented
 **Inputs:** Gross salary, bonus, tax region (England/Scotland), student loan plan, pension %
@@ -517,7 +520,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Rose
 **Difficulty:** Hard
 
-### 11.2 UK Stamp Duty Calculator
+### 11.2 UK Stamp Duty Calculator ✅
 **Target Keyword:** "stamp duty calculator uk 2024"
 **Inputs:** Property price, buyer type (first-time/home mover/additional), property location (England/Wales/Scotland/NI)
 **Outputs:** SDLT/LBTT/LTT amount, effective rate, band breakdown, first-time buyer savings
@@ -525,7 +528,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Navy
 **Difficulty:** Medium
 
-### 11.3 UK Child Benefit Calculator
+### 11.3 UK Child Benefit Calculator ✅
 **Target Keyword:** "high income child benefit charge calculator"
 **Inputs:** Annual income, number of children, partner's income
 **Outputs:** Child benefit amount, HICBC clawback, net benefit, break-even income
@@ -533,7 +536,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Pink
 **Difficulty:** Easy
 
-### 11.4 UK Student Loan Repayment Calculator
+### 11.4 UK Student Loan Repayment Calculator ✅
 **Target Keyword:** "student loan repayment calculator uk plan 2"
 **Inputs:** Loan balance, current salary, expected salary growth, loan plan type
 **Outputs:** Monthly repayment, years to payoff, total repaid, write-off date comparison
@@ -541,7 +544,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Blue
 **Difficulty:** Medium
 
-### 11.5 UK Salary Sacrifice Calculator
+### 11.5 UK Salary Sacrifice Calculator ✅
 **Target Keyword:** "salary sacrifice calculator uk"
 **Inputs:** Gross salary, sacrifice amount, sacrifice type (pension/cycle/childcare)
 **Outputs:** Tax saved, NI saved, net cost of benefit, employer NI savings
@@ -549,7 +552,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Teal
 **Difficulty:** Medium
 
-### 11.6 UK Pension Calculator
+### 11.6 UK Pension Calculator ✅
 **Target Keyword:** "uk pension calculator retirement"
 **Inputs:** Current age, retirement age, current pot, monthly contribution, employer match
 **Outputs:** Projected pot at retirement, annual income (4% rule), state pension integration
@@ -557,7 +560,7 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Green
 **Difficulty:** Medium
 
-### 11.7 UK Dividend Tax Calculator
+### 11.7 UK Dividend Tax Calculator ✅
 **Target Keyword:** "dividend tax calculator uk"
 **Inputs:** Salary income, dividend income, tax year
 **Outputs:** Tax on dividends, effective rate, comparison to salary, £1,000 allowance usage
@@ -565,11 +568,11 @@ Targeting the UK market with region-specific financial tools. High search volume
 **Color Theme:** Amber
 **Difficulty:** Medium
 
-## Phase 12: US Tax & Finance Expansion (20 Calculators)
+## Phase 12: US Tax & Finance Expansion (20 Calculators) — IN PROGRESS (5/20)
 
 Targeting the US market with comprehensive tax and financial planning tools. High search volume with seasonal spikes during tax season (Jan-Apr).
 
-### 12.1 US Tax Bracket Calculator ✅ COMPLETE
+### 12.1 US Tax Bracket Calculator ✅
 **Target Keyword:** "what tax bracket am I in calculator 2025"
 **Status:** Implemented
 **Inputs:** Filing status, gross income, deductions (standard/itemized), state
@@ -578,7 +581,7 @@ Targeting the US market with comprehensive tax and financial planning tools. Hig
 **Color Theme:** Gray
 **Difficulty:** Medium
 
-### 12.2 Self-Employment Tax Calculator (1099)
+### 12.2 Self-Employment Tax Calculator (1099) ✅
 **Target Keyword:** "self employment tax calculator", "1099 tax calculator"
 **Inputs:** Net self-employment income, other income, filing status, business expenses
 **Outputs:** SE tax (15.3%), federal income tax, quarterly payments, 50% SE tax deduction
@@ -586,7 +589,7 @@ Targeting the US market with comprehensive tax and financial planning tools. Hig
 **Color Theme:** Blue
 **Difficulty:** Medium
 
-### 12.3 Quarterly Estimated Tax Calculator
+### 12.3 Quarterly Estimated Tax Calculator ✅
 **Target Keyword:** "quarterly tax calculator", "estimated tax calculator 1040-ES"
 **Inputs:** Expected annual income, withholdings, filing status, prior year tax, SE income
 **Outputs:** Quarterly payment amounts, due dates, safe harbor calculation, penalty avoidance
@@ -594,7 +597,7 @@ Targeting the US market with comprehensive tax and financial planning tools. Hig
 **Color Theme:** Indigo
 **Difficulty:** Medium
 
-### 12.4 Capital Gains Tax Calculator
+### 12.4 Capital Gains Tax Calculator ✅
 **Target Keyword:** "capital gains tax calculator", "long term vs short term capital gains"
 **Inputs:** Purchase price, sale price, holding period, filing status, total income, state
 **Outputs:** Short vs long-term classification, tax owed, NIIT (3.8%), effective rate
@@ -602,7 +605,7 @@ Targeting the US market with comprehensive tax and financial planning tools. Hig
 **Color Theme:** Green
 **Difficulty:** Medium
 
-### 12.5 HSA Calculator (Triple Tax Advantage)
+### 12.5 HSA Calculator (Triple Tax Advantage) ✅
 **Target Keyword:** "HSA calculator", "HSA contribution calculator"
 **Inputs:** Coverage type (individual/family), age, tax bracket, expected medical expenses
 **Outputs:** Maximum contribution, triple tax savings, FICA savings (7.65%), investment growth
@@ -814,14 +817,14 @@ This roadmap was informed by:
 
 ## Next Steps
 
-1. **Validate keywords** - Use Ahrefs/Semrush to confirm search volume and difficulty
-2. **Prioritize Phase 5** - Select 2-3 calculators to build next
-3. **Create component library additions** - Build reusable parts for new patterns
-4. **Establish content templates** - Streamline the writing process
-5. **Set up tracking** - Implement calculator usage analytics
+1. **Finish Phase 12** — 15 US tax/finance calculators remaining (see priority order above)
+2. **Drive traffic** — Phase 1 (Google indexing) and Phase 4 (backlinks) from SEO-ROADMAP still open
+3. **Monetise** — AdSense is live but no revenue yet; consider affiliate links for finance calculators
+4. **Syndicate** — Reddit/Dev.to/LinkedIn posts drafted but not posted (see BACKLINK-STRATEGY.md)
 
 ---
 
-*Last Updated: January 2026*
-*Total Proposed Calculators: 71 (51 original + 20 US expansion)*
-*Estimated Build Time per Calculator: 2-4 hours*
+*Last Updated: February 2026*
+*Total Live Calculators: 124*
+*Roadmap Calculators Remaining: 15 (Phase 12)*
+*Bonus Calculators Built Beyond Roadmap: 53+ (brewing, engineering, health, hobbies, EU, etc.)*

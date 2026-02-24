@@ -4,14 +4,9 @@
 
 ---
 
-## 1. Reddit Strategy
+## 1. ~~Reddit Strategy~~ — SCRAPPED
 
-### Rules for Reddit Success
-1. **Don't spam** - Be a genuine community member first
-2. **Provide value** - Share the calculator as a helpful resource, not self-promotion
-3. **Engage in comments** - Answer questions, be helpful
-4. **Use text posts** - Link posts often get removed
-5. **Check subreddit rules** - Some ban self-promotion entirely
+**Reason:** Links consistently get flagged as self-promotion regardless of approach. Not worth the effort.
 
 ### Calculator → Subreddit Matches
 
@@ -153,7 +148,7 @@ Found it useful for my own tax planning - hopefully helps others in the same sit
 
 ### Description Template
 ```
-Boring Math Calculators is a collection of 75+ free online calculators for everyday problems.
+Boring Math Calculators is a collection of 120+ free online calculators for everyday problems.
 
 From FIRE retirement planning to wedding alcohol quantities, tip splitting to paint coverage - we've got you covered.
 
@@ -196,18 +191,16 @@ For readers who want to run the numbers themselves, I've built a free [Calculato
 
 ## 5. Tool Directories
 
-Submit to these free directories:
+Full step-by-step instructions with copy-paste text in `docs/directory-submissions.md`.
 
-| Directory | URL | Status |
-|-----------|-----|--------|
-| AlternativeTo | alternativeto.net | [ ] |
-| Product Hunt | producthunt.com | [ ] |
-| SaaSHub | saashub.com | [ ] |
-| ToolPilot | toolpilot.ai | [ ] |
-| There's An AI For That | theresanaiforthat.com | [ ] |
-| Indie Hackers | indiehackers.com/products | [ ] |
-| BetaList | betalist.com | [ ] |
-| Launching Next | launchingnext.com | [ ] |
+| Directory | Status |
+|-----------|--------|
+| awesome-calculators (GitHub PR) | [ ] |
+| AlternativeTo | [ ] |
+| SaaSHub | [ ] |
+| BetaList | [ ] |
+| Indie Hackers | [ ] |
+| Product Hunt | [ ] (see `docs/product-hunt-launch.md`) |
 
 ---
 
@@ -244,21 +237,18 @@ Submit to these free directories:
 ## Priority Order
 
 ### Week 1
-1. [ ] Post FIRE calculator to r/financialindependence
-2. [ ] Post UK tax calculator to r/UKPersonalFinance
-3. [ ] Post paint calculator to r/HomeImprovement
-4. [ ] Sign up for HARO
+1. [ ] Sign up for HARO
+2. [ ] Submit to 3 tool directories (AlternativeTo, SaaSHub, Indie Hackers)
+3. [ ] Post maker story on Twitter/X
 
 ### Week 2
-1. [ ] Post wedding calculator to r/weddingplanning
-2. [ ] Post homebrew calculators to r/Homebrewing
-3. [ ] Submit to 3 tool directories
-4. [ ] Respond to 2-3 HARO queries
+1. [ ] Respond to 2-3 HARO queries
+2. [ ] Submit to 3 more tool directories (ToolPilot, BetaList, Launching Next)
+3. [ ] LinkedIn post about building 120+ calculators
 
 ### Week 3
 1. [ ] Product Hunt launch
-2. [ ] Post remaining calculators to relevant subreddits
-3. [ ] Start engaging in finance communities as helpful member
+2. [ ] Pitch 1 guest post to finance blog
 
 ---
 
@@ -272,4 +262,4 @@ Submit to these free directories:
 
 ---
 
-*Last Updated: January 2026*
+*Last Updated: February 2026*
