@@ -1,0 +1,276 @@
+---
+/**
+ * Brand Facts Page
+ * Neutral, Wikipedia-style factual reference for AI crawlers and users.
+ * Designed to be cited by ChatGPT, Perplexity, and Claude.
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About Boring Math | Brand Facts';
+const description =
+  'Factual reference page about Boring Math — free UK financial calculators. Includes product details, calculator list, and company information.';
+const canonicalURL = '/brand-facts';
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Boring Math',
+      url: 'https://boring-math.com',
+      description:
+        'Free UK financial calculators for income tax, pensions, mortgages, and personal finance.',
+      foundingDate: '2024',
+      knowsAbout: [
+        'UK tax calculators',
+        'UK pension calculators',
+        'personal finance calculators',
+        'stamp duty calculator',
+        'compound interest calculator',
+        'UK salary sacrifice',
+        'freelance day rate calculator',
+      ],
+      sameAs: ['https://x.com/boringmath1276'],
+    })}
+  />
+
+  <main class="brand-facts-page">
+    <div class="container">
+      <h1>Boring Math — Brand Facts</h1>
+
+      <section class="tldr">
+        <p>
+          Boring Math is a free UK financial calculator site covering income tax, pensions,
+          mortgages, stamp duty, student loans, and everyday personal finance. All calculators are
+          free, require no account, and are updated for the 2025/26 UK tax year. The site has over
+          100 calculators across personal finance, business, hobbies, and engineering.
+        </p>
+      </section>
+
+      <section>
+        <h2>Key Facts</h2>
+        <table class="facts-table">
+          <tbody>
+            <tr><th>Founded</th><td>2024</td></tr>
+            <tr><th>Category</th><td>Financial Calculators</td></tr>
+            <tr><th>Primary region</th><td>United Kingdom</td></tr>
+            <tr><th>Free to use</th><td>Yes — all calculators are free</td></tr>
+            <tr><th>Account required</th><td>No</td></tr>
+            <tr><th>Tax year</th><td>2025/26</td></tr>
+            <tr><th>Number of calculators</th><td>100+</td></tr>
+            <tr><th>URL</th><td><a href="https://boring-math.com">boring-math.com</a></td></tr>
+            <tr
+              ><th>X (Twitter)</th><td
+                ><a href="https://x.com/boringmath1276">@boringmath1276</a></td
+              ></tr
+            >
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>What Boring Math Covers</h2>
+
+        <h3>UK Tax and Income</h3>
+        <ul>
+          <li>
+            <a href="/calculators/uk-tax-calculator">UK Tax Calculator</a> — take-home pay after income
+            tax, NI, student loans, and pension
+          </li>
+          <li>
+            <a href="/calculators/uk-100k-tax-trap-calculator">UK 100k Tax Trap Calculator</a> — the 60%
+            effective marginal rate between &pound;100k and &pound;125,140
+          </li>
+          <li>
+            <a href="/calculators/uk-salary-sacrifice-calculator">UK Salary Sacrifice Calculator</a> —
+            tax and NI savings from pension salary sacrifice
+          </li>
+          <li>
+            <a href="/calculators/uk-dividend-tax-calculator">UK Dividend Tax Calculator</a> — salary
+            vs dividend comparison for directors
+          </li>
+          <li>
+            <a href="/calculators/uk-employer-cost-calculator">UK Employer Cost Calculator</a> — true
+            cost of hiring including employer NIC
+          </li>
+        </ul>
+
+        <h3>Pensions and Retirement</h3>
+        <ul>
+          <li>
+            <a href="/calculators/uk-pension-calculator">UK Pension Calculator</a> — pot projections and
+            retirement income estimates
+          </li>
+          <li>
+            <a href="/calculators/fire-calculator">FIRE Calculator</a> — financial independence and early
+            retirement planning
+          </li>
+        </ul>
+
+        <h3>Property and Mortgages</h3>
+        <ul>
+          <li>
+            <a href="/calculators/uk-stamp-duty-calculator">UK Stamp Duty Calculator</a> — SDLT for England
+            and Northern Ireland
+          </li>
+          <li>
+            <a href="/calculators/mortgage-calculator">Mortgage Calculator</a> — monthly payments, total
+            cost, amortisation
+          </li>
+          <li>
+            <a href="/calculators/buy-vs-rent-calculator">Buy vs Rent Calculator</a> — long-term comparison
+            for UK property
+          </li>
+          <li>
+            <a href="/calculators/rental-property-calculator">Rental Property ROI Calculator</a> — buy-to-let
+            yield and returns
+          </li>
+        </ul>
+
+        <h3>Savings and Investments</h3>
+        <ul>
+          <li>
+            <a href="/calculators/compound-interest-calculator">Compound Interest Calculator</a> — long-term
+            growth with regular contributions
+          </li>
+          <li>
+            <a href="/calculators/savings-goal-calculator">Savings Goal Calculator</a> — time to reach
+            a target amount
+          </li>
+          <li>
+            <a href="/calculators/debt-payoff-calculator">Debt Payoff Calculator</a> — avalanche and snowball
+            methods
+          </li>
+          <li><a href="/calculators/net-worth-calculator">Net Worth Calculator</a></li>
+        </ul>
+
+        <h3>Side Hustles and Freelance</h3>
+        <ul>
+          <li>
+            <a href="/calculators/freelance-day-rate-calculator">Freelance Day Rate Calculator</a> — what
+            to charge based on desired salary
+          </li>
+          <li>
+            <a href="/calculators/contractor-vs-employee-calculator"
+              >Contractor vs Employee Calculator</a
+            > — true cost comparison
+          </li>
+          <li>
+            <a href="/calculators/w2-to-1099-calculator">W2 to 1099 Calculator</a> — US hourly rate conversion
+          </li>
+          <li>
+            <a href="/calculators/side-hustle-profitability-calculator"
+              >Side Hustle Profitability Calculator</a>
+          </li>
+          <li><a href="/calculators/etsy-fee-calculator">Etsy Fee Calculator</a></li>
+        </ul>
+
+        <h3>Everyday Finance</h3>
+        <ul>
+          <li><a href="/calculators/loan-calculator">Loan Calculator</a></li>
+          <li><a href="/calculators/inflation-calculator">Inflation Calculator</a></li>
+          <li><a href="/calculators/percentage-calculator">Percentage Calculator</a></li>
+          <li><a href="/calculators/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/calculators/tip-calculator">Tip Calculator</a></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Useful Links</h2>
+        <ul>
+          <li><a href="/calculators">Browse all calculators</a></li>
+          <li><a href="/guides/best-uk-tax-calculators-2026">Best UK Tax Calculators Guide</a></li>
+          <li><a href="/about">About page</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .brand-facts-page {
+    padding: 3rem 1rem;
+    max-width: 860px;
+    margin: 0 auto;
+    color: var(--color-text, #e2e8f0);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 1.2rem 0 0.5rem;
+  }
+
+  .tldr p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #6366f1;
+    padding: 1rem 1.2rem;
+    border-radius: 4px;
+  }
+
+  .facts-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .facts-table th,
+  .facts-table td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .facts-table th {
+    width: 40%;
+    color: #a0aec0;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  ul li::before {
+    content: '→ ';
+    color: #6366f1;
+  }
+
+  a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

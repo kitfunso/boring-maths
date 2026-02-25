@@ -1,0 +1,21 @@
+{
+  "name": "Boring Math",
+  "url": "https://boring-math.com",
+  "description": "Free online calculators for UK personal finance, tax, pensions, mortgages, and everyday maths.",
+  "category": "Financial Calculators",
+  "region": "United Kingdom",
+  "topCalculators": [
+    {"name": "UK Tax Calculator", "url": "https://boring-math.com/calculators/uk-tax-calculator", "description": "Take-home pay after income tax, NI, student loans and pension for 2025/26"},
+    {"name": "UK Pension Calculator", "url": "https://boring-math.com/calculators/uk-pension-calculator", "description": "Pension pot projections and retirement income estimates"},
+    {"name": "UK 100k Tax Trap Calculator", "url": "https://boring-math.com/calculators/uk-100k-tax-trap-calculator", "description": "Shows the 60% effective marginal rate between 100k and 125,140"},
+    {"name": "UK Salary Sacrifice Calculator", "url": "https://boring-math.com/calculators/uk-salary-sacrifice-calculator", "description": "Tax and NI savings from salary sacrifice pension contributions"},
+    {"name": "UK Stamp Duty Calculator", "url": "https://boring-math.com/calculators/uk-stamp-duty-calculator", "description": "SDLT for England and Northern Ireland property purchases"},
+    {"name": "UK Student Loan Calculator", "url": "https://boring-math.com/calculators/uk-student-loan-calculator", "description": "Repayment projections for all UK student loan plans"},
+    {"name": "UK Inheritance Tax Calculator", "url": "https://boring-math.com/calculators/inheritance-tax-calculator", "description": "Estimate IHT liability including nil-rate band and residence relief"},
+    {"name": "Compound Interest Calculator", "url": "https://boring-math.com/calculators/compound-interest-calculator", "description": "Long-term growth with regular contributions and compound interest"},
+    {"name": "Mortgage Calculator", "url": "https://boring-math.com/calculators/mortgage-calculator", "description": "Monthly payments, total cost, and amortisation schedule"},
+    {"name": "FIRE Calculator", "url": "https://boring-math.com/calculators/fire-calculator", "description": "Financial independence / early retirement planning"}
+  ],
+  "features": ["free", "no-signup", "no-ads-on-calculator", "UK-focused", "2025-26-tax-year"],
+  "lastUpdated": "2026-02-25"
+}
