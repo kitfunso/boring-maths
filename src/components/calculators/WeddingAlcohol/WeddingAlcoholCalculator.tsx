@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState, useMemo, useRef } from 'preact/hooks';
 import { calculateWeddingAlcohol, formatNumber } from './calculations';
 import {
   DEFAULT_INPUTS,
@@ -47,35 +47,48 @@ export default function WeddingAlcoholCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Track previously changed slider so we can lock it when the user adjusts a second one
+  const lastChanged = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
+
   // Update a drink percentage while keeping total at 100%
+  // If the user adjusts a second slider, only the third (untouched) one auto-adjusts
   const updateDrinkPercent = (
     changed: 'winePercent' | 'beerPercent' | 'liquorPercent',
     newValue: number
   ) => {
     const clamped = Math.min(100, Math.max(0, newValue));
     const remaining = 100 - clamped;
-
-    const otherKeys = (['winePercent', 'beerPercent', 'liquorPercent'] as const).filter(
-      (k) => k !== changed
-    );
-    const otherTotal = otherKeys.reduce((sum, k) => sum + inputs[k], 0);
-
+    const allKeys = ['winePercent', 'beerPercent', 'liquorPercent'] as const;
     const newInputs = { ...inputs, [changed]: clamped };
-    if (otherTotal > 0) {
-      for (const k of otherKeys) {
-        newInputs[k] = Math.round((inputs[k] / otherTotal) * remaining);
-      }
-      // Fix rounding so total is exactly 100
-      const roundedTotal = clamped + otherKeys.reduce((s, k) => s + newInputs[k], 0);
-      if (roundedTotal !== 100) {
-        newInputs[otherKeys[0]] += 100 - roundedTotal;
-      }
+
+    const prev = lastChanged.current;
+
+    if (prev && prev !== changed) {
+      // User is adjusting a second slider: lock the previous one, only adjust the third
+      const autoKey = allKeys.find((k) => k !== changed && k !== prev)!;
+      newInputs[autoKey] = Math.max(0, 100 - clamped - inputs[prev]);
+      // If the locked + changed exceed 100, clamp the auto to 0
+      if (newInputs[autoKey] < 0) newInputs[autoKey] = 0;
     } else {
-      // Both others are 0, split evenly
-      newInputs[otherKeys[0]] = Math.round(remaining / 2);
-      newInputs[otherKeys[1]] = remaining - Math.round(remaining / 2);
+      // First slider being adjusted: redistribute the other two proportionally
+      const otherKeys = allKeys.filter((k) => k !== changed);
+      const otherTotal = otherKeys.reduce((sum, k) => sum + inputs[k], 0);
+
+      if (otherTotal > 0) {
+        for (const k of otherKeys) {
+          newInputs[k] = Math.round((inputs[k] / otherTotal) * remaining);
+        }
+        const roundedTotal = clamped + otherKeys.reduce((s, k) => s + newInputs[k], 0);
+        if (roundedTotal !== 100) {
+          newInputs[otherKeys[0]] += 100 - roundedTotal;
+        }
+      } else {
+        newInputs[otherKeys[0]] = Math.round(remaining / 2);
+        newInputs[otherKeys[1]] = remaining - Math.round(remaining / 2);
+      }
     }
 
+    lastChanged.current = changed;
     setInputs(newInputs);
   };
 

@@ -31,12 +31,11 @@ const {
 const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
-const minHeight = format === 'horizontal' ? 50 : format === 'vertical' ? 250 : 90;
 ---
 
 {
   isProd && (
-    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'} style={`min-height:${minHeight}px`}>
+    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'}>
       <ins
         class="adsbygoogle"
         style={style}
@@ -60,3 +59,23 @@ const minHeight = format === 'horizontal' ? 50 : format === 'vertical' ? 250 : 9
     </div>
   )
 }
+
+<style>
+  /* Collapse ad containers when AdSense doesn't fill them */
+  .ad-container {
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  .ad-container:has(ins[data-ad-status="unfilled"]) {
+    max-height: 0 !important;
+    opacity: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .ad-container.ad-unfilled {
+    max-height: 0 !important;
+    opacity: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+</style>

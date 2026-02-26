@@ -102,6 +102,27 @@ const ogImageURL = ogImage
             (adsbygoogle = window.adsbygoogle || []).push({});
           } catch (e) {}
         }
+
+        // Collapse unfilled ad containers after AdSense processes them
+        setTimeout(function () {
+          var containers = document.querySelectorAll('.ad-container');
+          for (var i = 0; i < containers.length; i++) {
+            var ins = containers[i].querySelector('ins.adsbygoogle');
+            if (!ins) continue;
+            var status = ins.getAttribute('data-ad-status');
+            var iframe = ins.querySelector('iframe');
+            var hasContent = iframe && iframe.clientHeight > 0;
+            if (
+              status === 'unfilled' ||
+              (!hasContent && ins.getAttribute('data-adsbygoogle-status'))
+            ) {
+              containers[i].classList.add('ad-unfilled');
+              // Also collapse parent mobile anchor wrapper if present
+              var anchor = containers[i].closest('.mobile-anchor-ad');
+              if (anchor) anchor.style.display = 'none';
+            }
+          }
+        }, 3000);
       });
     </script>
 
