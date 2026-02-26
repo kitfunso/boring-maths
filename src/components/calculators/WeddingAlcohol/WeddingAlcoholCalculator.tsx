@@ -47,6 +47,38 @@ export default function WeddingAlcoholCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Update a drink percentage while keeping total at 100%
+  const updateDrinkPercent = (
+    changed: 'winePercent' | 'beerPercent' | 'liquorPercent',
+    newValue: number
+  ) => {
+    const clamped = Math.min(100, Math.max(0, newValue));
+    const remaining = 100 - clamped;
+
+    const otherKeys = (['winePercent', 'beerPercent', 'liquorPercent'] as const).filter(
+      (k) => k !== changed
+    );
+    const otherTotal = otherKeys.reduce((sum, k) => sum + inputs[k], 0);
+
+    const newInputs = { ...inputs, [changed]: clamped };
+    if (otherTotal > 0) {
+      for (const k of otherKeys) {
+        newInputs[k] = Math.round((inputs[k] / otherTotal) * remaining);
+      }
+      // Fix rounding so total is exactly 100
+      const roundedTotal = clamped + otherKeys.reduce((s, k) => s + newInputs[k], 0);
+      if (roundedTotal !== 100) {
+        newInputs[otherKeys[0]] += 100 - roundedTotal;
+      }
+    } else {
+      // Both others are 0, split evenly
+      newInputs[otherKeys[0]] = Math.round(remaining / 2);
+      newInputs[otherKeys[1]] = remaining - Math.round(remaining / 2);
+    }
+
+    setInputs(newInputs);
+  };
+
   // Check if drink percentages are valid
   const percentageTotal = inputs.winePercent + inputs.beerPercent + inputs.liquorPercent;
   const isPercentageValid = percentageTotal >= 99 && percentageTotal <= 101;
@@ -150,7 +182,7 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.winePercent}
-                    onChange={(e) => updateInput('winePercent', Number(e.target.value))}
+                    onChange={(e) => updateDrinkPercent('winePercent', Number(e.target.value))}
                     className="w-full h-2 bg-red-950/50 rounded-lg appearance-none cursor-pointer accent-red-500"
                   />
                 </div>
@@ -164,7 +196,7 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.beerPercent}
-                    onChange={(e) => updateInput('beerPercent', Number(e.target.value))}
+                    onChange={(e) => updateDrinkPercent('beerPercent', Number(e.target.value))}
                     className="w-full h-2 bg-amber-950/50 rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
                 </div>
@@ -178,7 +210,7 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.liquorPercent}
-                    onChange={(e) => updateInput('liquorPercent', Number(e.target.value))}
+                    onChange={(e) => updateDrinkPercent('liquorPercent', Number(e.target.value))}
                     className="w-full h-2 bg-blue-950/50 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                 </div>
