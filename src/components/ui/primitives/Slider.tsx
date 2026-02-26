@@ -116,7 +116,7 @@ export function Slider({
         aria-valuenow={value}
         aria-valuetext={currentLabel}
         className={`
-          w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer
+          w-full rounded-lg appearance-none cursor-pointer
           ${tokens.accent}
         `}
         {...props}

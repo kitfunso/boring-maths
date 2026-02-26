@@ -201,7 +201,7 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.winePercent}
                     onChange={(e) => updateDrinkPercent('winePercent', Number(e.target.value))}
-                    className="w-full h-2 bg-red-950/50 rounded-lg appearance-none cursor-pointer accent-red-500"
+                    className="w-full rounded-lg appearance-none cursor-pointer accent-red-500"
                   />
                 </div>
                 <div>
@@ -215,7 +215,7 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.beerPercent}
                     onChange={(e) => updateDrinkPercent('beerPercent', Number(e.target.value))}
-                    className="w-full h-2 bg-amber-950/50 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                    className="w-full rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
                 </div>
                 <div>
@@ -229,7 +229,7 @@ export default function WeddingAlcoholCalculator() {
                     max="100"
                     value={inputs.liquorPercent}
                     onChange={(e) => updateDrinkPercent('liquorPercent', Number(e.target.value))}
-                    className="w-full h-2 bg-blue-950/50 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    className="w-full rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                 </div>
               </div>
