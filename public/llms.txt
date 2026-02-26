@@ -1,0 +1,45 @@
+# Boring Math Calculators
+
+> Free online calculators for UK tax, personal finance, business, health, and everyday maths. All calculators run in-browser with no signup required.
+
+## UK Tax & Finance Calculators
+- [UK Tax Calculator](https://boring-math.com/calculators/uk-tax-calculator): Calculate take-home pay after income tax, National Insurance, and student loan deductions for any UK salary.
+- [UK 100k Tax Trap Calculator](https://boring-math.com/calculators/uk-100k-tax-trap-calculator): See the 60% effective tax rate between £100,000-£125,140 where personal allowance tapers.
+- [Salary Sacrifice Calculator](https://boring-math.com/calculators/uk-salary-sacrifice-calculator): Compare take-home pay with and without salary sacrifice pension contributions, including employer NIC savings.
+- [UK Pension Calculator](https://boring-math.com/calculators/uk-pension-calculator): Project pension pot growth, retirement income, and shortfall analysis.
+- [UK Student Loan Calculator](https://boring-math.com/calculators/uk-student-loan-calculator): Model repayments for Plan 1, 2, 4, and 5 student loans with interest and write-off projections.
+- [Contractor vs Employee Calculator](https://boring-math.com/calculators/contractor-vs-employee-calculator): Side-by-side comparison of contractor day rates vs equivalent employee salaries after tax.
+- [UK Dividend Tax Calculator](https://boring-math.com/calculators/uk-dividend-tax-calculator): Calculate dividend tax liability for company directors and shareholders.
+- [UK Capital Gains Tax Calculator](https://boring-math.com/calculators/uk-capital-gains-tax-calculator): Estimate CGT on property, shares, and other assets.
+- [Inheritance Tax Calculator](https://boring-math.com/calculators/inheritance-tax-calculator): Estimate IHT liability including nil-rate band and residence nil-rate band.
+- [UK Stamp Duty Calculator](https://boring-math.com/calculators/uk-stamp-duty-calculator): Calculate SDLT for residential property purchases in England and Northern Ireland.
+- [Stamp Duty Scotland](https://boring-math.com/calculators/stamp-duty-calculator-scotland): LBTT calculator for Scottish property purchases.
+- [Stamp Duty Wales](https://boring-math.com/calculators/stamp-duty-calculator-wales): LTT calculator for Welsh property purchases.
+- [Council Tax Calculator](https://boring-math.com/calculators/council-tax-calculator): Look up council tax bands and amounts by local authority.
+- [UK Child Benefit Calculator](https://boring-math.com/calculators/uk-child-benefit-calculator): Calculate child benefit including High Income Child Benefit Charge.
+- [UK Employer Cost Calculator](https://boring-math.com/calculators/uk-employer-cost-calculator): Total cost of employing someone including employer NIC and pension.
+- [UK Nursery Cost Calculator](https://boring-math.com/calculators/uk-nursery-cost-calculator): Estimate childcare costs with tax-free childcare and funded hours.
+
+## Personal Finance Calculators
+- [Compound Interest Calculator](https://boring-math.com/calculators/compound-interest-calculator): Model compound growth with regular contributions, different compounding frequencies.
+- [Savings Goal Calculator](https://boring-math.com/calculators/savings-goal-calculator): How much to save monthly to reach a target amount.
+- [FIRE Calculator](https://boring-math.com/calculators/fire-calculator): Financial independence / retire early projections.
+- [Debt Payoff Calculator](https://boring-math.com/calculators/debt-payoff-calculator): Snowball and avalanche debt repayment strategies.
+- [Mortgage Calculator](https://boring-math.com/calculators/mortgage-calculator): Monthly payments, total interest, and amortisation schedule.
+- [Buy vs Rent Calculator](https://boring-math.com/calculators/buy-vs-rent-calculator): Compare the long-term cost of buying vs renting.
+- [Net Worth Calculator](https://boring-math.com/calculators/net-worth-calculator): Track assets and liabilities.
+- [Emergency Fund Calculator](https://boring-math.com/calculators/emergency-fund-calculator): How much emergency savings you need.
+- [Inflation Calculator](https://boring-math.com/calculators/inflation-calculator): Purchasing power and inflation-adjusted values.
+- [Loan Calculator](https://boring-math.com/calculators/loan-calculator): Monthly payments and total cost for any loan.
+
+## Business & Freelance Calculators
+- [Freelance Day Rate Calculator](https://boring-math.com/calculators/freelance-day-rate-calculator): Convert annual salary to equivalent contractor day rate.
+- [Consulting Rate Calculator](https://boring-math.com/calculators/consulting-rate-calculator): Calculate consulting hourly/daily rates based on target income.
+- [Break Even Calculator](https://boring-math.com/calculators/break-even-calculator): Find your break-even point for products or services.
+- [Pricing Calculator](https://boring-math.com/calculators/pricing-calculator): Cost-plus and margin-based pricing.
+- [SaaS Metrics Calculator](https://boring-math.com/calculators/saas-metrics-calculator): MRR, ARR, churn, LTV, CAC calculations.
+- [Startup Cost Calculator](https://boring-math.com/calculators/startup-cost-calculator): Estimate initial business setup costs.
+- [Side Hustle Profitability Calculator](https://boring-math.com/calculators/side-hustle-profitability-calculator): Is your side hustle actually making money after all costs?
+
+## Documentation
+- [All Calculators](https://boring-math.com/calculators): Browse all 120+ calculators by category.
