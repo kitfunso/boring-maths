@@ -47,8 +47,10 @@ export default function WeddingAlcoholCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Track previously changed slider so we can lock it when the user adjusts a second one
-  const lastChanged = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
+  // Track which slider is currently being dragged, and which was dragged before it.
+  // When the user switches to a new slider, the previous one becomes "locked."
+  const activeSlider = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
+  const lockedSlider = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
 
   // Update a drink percentage while keeping total at 100%
   // If the user adjusts a second slider, only the third (untouched) one auto-adjusts
@@ -61,14 +63,18 @@ export default function WeddingAlcoholCalculator() {
     const allKeys = ['winePercent', 'beerPercent', 'liquorPercent'] as const;
     const newInputs = { ...inputs, [changed]: clamped };
 
-    const prev = lastChanged.current;
+    // When switching to a different slider, lock the previous one
+    if (activeSlider.current && activeSlider.current !== changed) {
+      lockedSlider.current = activeSlider.current;
+    }
+    activeSlider.current = changed;
 
-    if (prev && prev !== changed) {
-      // User is adjusting a second slider: lock the previous one, only adjust the third
-      const autoKey = allKeys.find((k) => k !== changed && k !== prev)!;
-      newInputs[autoKey] = Math.max(0, 100 - clamped - inputs[prev]);
-      // If the locked + changed exceed 100, clamp the auto to 0
-      if (newInputs[autoKey] < 0) newInputs[autoKey] = 0;
+    const locked = lockedSlider.current;
+
+    if (locked && locked !== changed) {
+      // A previous slider is locked: only adjust the third
+      const autoKey = allKeys.find((k) => k !== changed && k !== locked)!;
+      newInputs[autoKey] = Math.max(0, 100 - clamped - newInputs[locked]);
     } else {
       // First slider being adjusted: redistribute the other two proportionally
       const otherKeys = allKeys.filter((k) => k !== changed);
@@ -88,7 +94,6 @@ export default function WeddingAlcoholCalculator() {
       }
     }
 
-    lastChanged.current = changed;
     setInputs(newInputs);
   };
 
