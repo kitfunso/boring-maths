@@ -47,50 +47,28 @@ export default function WeddingAlcoholCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Track the order of slider interactions: [most recent, previous]
-  const sliderHistory = useRef<Array<'winePercent' | 'beerPercent' | 'liquorPercent'>>([]);
+  // Track the two most recently touched sliders. The third always auto-adjusts.
+  const touched = useRef<Array<'winePercent' | 'beerPercent' | 'liquorPercent'>>([]);
 
-  // Update a drink percentage while keeping total at 100%
-  // First slider dragged: other two adjust proportionally
-  // Second slider dragged: only the third (untouched) one adjusts
   const updateDrinkPercent = (
     changed: 'winePercent' | 'beerPercent' | 'liquorPercent',
     newValue: number
   ) => {
     const clamped = Math.min(100, Math.max(0, newValue));
-    const remaining = 100 - clamped;
     const allKeys = ['winePercent', 'beerPercent', 'liquorPercent'] as const;
 
-    // Update history: push changed to front, keep max 2 unique entries
-    const hist = sliderHistory.current.filter((k) => k !== changed);
-    sliderHistory.current = [changed, ...hist].slice(0, 2);
+    // Update touch history: most recent first, max 2 unique
+    const hist = touched.current.filter((k) => k !== changed);
+    touched.current = [changed, ...hist].slice(0, 2);
 
-    // The "locked" slider is the second entry in history (the previously adjusted one)
-    const locked = sliderHistory.current.length >= 2 ? sliderHistory.current[1] : null;
+    const next = { ...inputs, [changed]: clamped };
 
-    const next: Record<string, number> = { ...inputs, [changed]: clamped };
-
-    if (locked) {
-      // Two sliders touched: lock the previous one, auto-adjust the third
-      const autoKey = allKeys.find((k) => k !== changed && k !== locked)!;
-      next[autoKey] = Math.max(0, 100 - clamped - inputs[locked]);
-    } else {
-      // Only one slider touched so far: redistribute the other two proportionally
-      const otherKeys = allKeys.filter((k) => k !== changed);
-      const otherTotal = otherKeys.reduce((sum, k) => sum + inputs[k], 0);
-
-      if (otherTotal > 0) {
-        for (const k of otherKeys) {
-          next[k] = Math.round((inputs[k] / otherTotal) * remaining);
-        }
-        // Fix rounding
-        const total = clamped + otherKeys.reduce((s, k) => s + next[k], 0);
-        if (total !== 100) next[otherKeys[0]] += 100 - total;
-      } else {
-        next[otherKeys[0]] = Math.round(remaining / 2);
-        next[otherKeys[1]] = remaining - Math.round(remaining / 2);
-      }
+    if (touched.current.length >= 2) {
+      // Two sliders have been set manually. Auto-adjust the third.
+      const autoKey = allKeys.find((k) => !touched.current.includes(k))!;
+      next[autoKey] = Math.max(0, 100 - touched.current.reduce((s, k) => s + next[k], 0));
     }
+    // If only one slider touched, just move it. Don't touch the others.
 
     setInputs(next as WeddingAlcoholInputs);
   };
