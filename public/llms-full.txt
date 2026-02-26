@@ -1,0 +1,533 @@
+# Boring Math Calculators - Full Reference
+
+> Free online calculators for UK tax, personal finance, business, health, and everyday maths. All calculators run entirely in-browser with no signup, no data collection, and no cookies required for functionality. Built for UK users but many calculators work internationally.
+
+## UK Tax & Finance Calculators
+
+### UK Tax Calculator
+URL: https://boring-math.com/calculators/uk-tax-calculator
+Calculate take-home pay after income tax, National Insurance, and student loan deductions for any UK salary. Covers England, Scotland, Wales and Northern Ireland with 2025/26 PAYE rates.
+- Personal allowance: £12,570 (tapers above £100k)
+- Basic rate: 20% (£12,571-£50,270)
+- Higher rate: 40% (£50,271-£125,140)
+- Additional rate: 45% (above £125,140)
+- Employee NIC: 8% (£12,570-£50,270), 2% above
+- Supports Scottish tax bands (19%-48%)
+- Student loan Plan 1, 2, 4, 5 and postgraduate deductions
+- Pension contribution modelling (salary sacrifice and relief at source)
+
+### UK 100k Tax Trap Calculator
+URL: https://boring-math.com/calculators/uk-100k-tax-trap-calculator
+Shows the 60% effective tax rate between £100,000 and £125,140 where personal allowance tapers. For every £2 earned above £100k, you lose £1 of personal allowance, creating an effective 60% marginal rate (40% tax + 20% lost allowance). The calculator models salary sacrifice strategies to stay below the threshold.
+
+### UK Salary Sacrifice Calculator
+URL: https://boring-math.com/calculators/uk-salary-sacrifice-calculator
+Compare take-home pay with and without salary sacrifice arrangements. Supports pension, cycle-to-work, childcare vouchers, and electric vehicle schemes. Shows income tax saved, employee NIC saved, employer NIC saved, true cost of benefit, and effective discount percentage. Handles personal allowance taper for £100k+ earners.
+
+### UK Pension Calculator
+URL: https://boring-math.com/calculators/uk-pension-calculator
+Project pension pot growth with employer and employee contributions. Models investment growth, charges, and retirement income. Shows shortfall analysis against target retirement income.
+
+### UK Student Loan Calculator
+URL: https://boring-math.com/calculators/uk-student-loan-calculator
+Model repayments for Plan 1, 2, 4, and 5 student loans. Shows monthly repayments, total amount repaid, interest accrued, and write-off date. Plan 2 interest is linked to RPI + up to 3% depending on income. Write-off: Plan 1 after 25 years, Plan 2 after 40 years, Plan 4 after 30 years, Plan 5 after 40 years.
+
+### Contractor vs Employee Calculator
+URL: https://boring-math.com/calculators/contractor-vs-employee-calculator
+Side-by-side comparison of contractor day rates vs equivalent employee salaries. Accounts for employer NIC, pension, holiday, sick pay, and other employment costs. Shows the day rate needed to match an employee salary after accounting for all benefits.
+
+### UK Dividend Tax Calculator
+URL: https://boring-math.com/calculators/uk-dividend-tax-calculator
+Calculate dividend tax liability for company directors and shareholders. 2025/26 rates: £500 dividend allowance, then 8.75% basic, 33.75% higher, 39.35% additional rate.
+
+### UK Capital Gains Tax Calculator
+URL: https://boring-math.com/calculators/uk-capital-gains-tax-calculator
+Estimate CGT on property, shares, and other assets. 2025/26: £3,000 annual exempt amount. Residential property: 18%/24%. Other assets: 10%/20%.
+
+### Inheritance Tax Calculator
+URL: https://boring-math.com/calculators/inheritance-tax-calculator
+Estimate IHT liability. Nil-rate band: £325,000. Residence nil-rate band: £175,000. Rate: 40% above threshold. Includes taper relief for estates between £2M-£2.35M.
+
+### UK Stamp Duty Calculator (England & NI)
+URL: https://boring-math.com/calculators/uk-stamp-duty-calculator
+Calculate Stamp Duty Land Tax for residential property purchases. Bands: 0% up to £250,000, 5% £250,001-£925,000, 10% £925,001-£1.5M, 12% above £1.5M. First-time buyer relief: 0% up to £425,000.
+
+### Stamp Duty Calculator Scotland
+URL: https://boring-math.com/calculators/stamp-duty-calculator-scotland
+Land and Buildings Transaction Tax (LBTT) for Scottish property. Bands differ from England.
+
+### Stamp Duty Calculator Wales
+URL: https://boring-math.com/calculators/stamp-duty-calculator-wales
+Land Transaction Tax (LTT) for Welsh property purchases.
+
+### SDLT Calculator (Additional Dwellings)
+URL: https://boring-math.com/calculators/sdlt-calculator
+Stamp duty for additional properties (second homes, buy-to-let). 5% surcharge on top of standard rates.
+
+### Council Tax Calculator
+URL: https://boring-math.com/calculators/council-tax-calculator
+Look up council tax bands and amounts by local authority area.
+
+### UK Child Benefit Calculator
+URL: https://boring-math.com/calculators/uk-child-benefit-calculator
+Calculate child benefit payments and High Income Child Benefit Charge. 2025/26: £26.05/week first child, £17.25/week additional children. HICBC applies when higher earner exceeds £60,000.
+
+### UK Employer Cost Calculator
+URL: https://boring-math.com/calculators/uk-employer-cost-calculator
+Total cost of employing someone including employer NIC (13.8% above £5,000), workplace pension (minimum 3%), and other statutory costs.
+
+### UK Nursery Cost Calculator
+URL: https://boring-math.com/calculators/uk-nursery-cost-calculator
+Estimate childcare costs accounting for tax-free childcare (up to £2,000/year per child) and government-funded hours (15-30 hours depending on age and eligibility).
+
+## Personal Finance Calculators
+
+### Compound Interest Calculator
+URL: https://boring-math.com/calculators/compound-interest-calculator
+Model compound growth with regular contributions. Supports daily, monthly, quarterly, and annual compounding. Shows year-by-year breakdown of contributions vs growth.
+
+### Savings Goal Calculator
+URL: https://boring-math.com/calculators/savings-goal-calculator
+Calculate how much to save monthly to reach a target amount by a target date, accounting for interest rate.
+
+### FIRE Calculator
+URL: https://boring-math.com/calculators/fire-calculator
+Financial Independence / Retire Early projections. Models savings rate, investment returns, and safe withdrawal rate (typically 4%) to calculate your FIRE number and timeline.
+
+### Debt Payoff Calculator
+URL: https://boring-math.com/calculators/debt-payoff-calculator
+Compare snowball (smallest balance first) and avalanche (highest interest first) debt repayment strategies. Shows total interest paid and payoff timeline for each method.
+
+### Mortgage Calculator
+URL: https://boring-math.com/calculators/mortgage-calculator
+Calculate monthly mortgage payments, total interest, and full amortisation schedule for repayment mortgages.
+
+### Buy vs Rent Calculator
+URL: https://boring-math.com/calculators/buy-vs-rent-calculator
+Compare long-term financial outcomes of buying vs renting. Factors in property appreciation, mortgage interest, maintenance, opportunity cost of deposit, and rent increases.
+
+### Net Worth Calculator
+URL: https://boring-math.com/calculators/net-worth-calculator
+Track total assets minus liabilities across property, investments, savings, pensions, and debts.
+
+### Emergency Fund Calculator
+URL: https://boring-math.com/calculators/emergency-fund-calculator
+Calculate recommended emergency fund size based on monthly expenses, income stability, and dependents. Generally 3-6 months of essential expenses.
+
+### Inflation Calculator
+URL: https://boring-math.com/calculators/inflation-calculator
+Calculate purchasing power changes and inflation-adjusted values over time.
+
+### Loan Calculator
+URL: https://boring-math.com/calculators/loan-calculator
+Monthly payments and total cost for any loan amount, interest rate, and term.
+
+### Rental Property Calculator
+URL: https://boring-math.com/calculators/rental-property-calculator
+Analyse rental property investment returns including rental yield, cash flow, ROI, and capital appreciation.
+
+## Business & Freelance Calculators
+
+### Freelance Day Rate Calculator
+URL: https://boring-math.com/calculators/freelance-day-rate-calculator
+Convert annual salary to equivalent contractor day rate accounting for holidays, sick days, training, admin time, and self-employment costs.
+
+### Consulting Rate Calculator
+URL: https://boring-math.com/calculators/consulting-rate-calculator
+Calculate consulting hourly and daily rates based on target annual income, billable hours, and overhead.
+
+### Contractor vs Employee Calculator
+URL: https://boring-math.com/calculators/contractor-vs-employee-calculator
+Compare contractor day rates with equivalent employee salaries including all employment benefits and costs.
+
+### Break Even Calculator
+URL: https://boring-math.com/calculators/break-even-calculator
+Find break-even point in units and revenue for products or services based on fixed costs, variable costs, and selling price.
+
+### Pricing Calculator
+URL: https://boring-math.com/calculators/pricing-calculator
+Cost-plus and margin-based pricing for products and services.
+
+### SaaS Metrics Calculator
+URL: https://boring-math.com/calculators/saas-metrics-calculator
+Calculate MRR, ARR, churn rate, LTV, CAC, and LTV:CAC ratio for subscription businesses.
+
+### Startup Cost Calculator
+URL: https://boring-math.com/calculators/startup-cost-calculator
+Estimate initial business setup costs across legal, technology, marketing, and operational categories.
+
+### Side Hustle Profitability Calculator
+URL: https://boring-math.com/calculators/side-hustle-profitability-calculator
+Calculate true profitability of a side hustle after materials, time, platform fees, and tax.
+
+### Employee Cost Calculator
+URL: https://boring-math.com/calculators/employee-cost-calculator
+Total cost of employment including salary, benefits, taxes, equipment, and overhead.
+
+### Etsy Fee Calculator
+URL: https://boring-math.com/calculators/etsy-fee-calculator
+Calculate Etsy selling fees including listing fee, transaction fee, payment processing, and shipping.
+
+### Marketplace Fees Calculator
+URL: https://boring-math.com/calculators/marketplace-fees-calculator
+Compare fees across Amazon, eBay, Etsy, and other marketplace platforms.
+
+### Go Full Time Calculator
+URL: https://boring-math.com/calculators/go-full-time-calculator
+Determine if your side business can replace your full-time income accounting for benefits, taxes, and stability.
+
+## US Tax Calculators
+
+### US Tax Bracket Calculator
+URL: https://boring-math.com/calculators/us-tax-bracket-calculator
+Federal income tax brackets and effective tax rate for US taxpayers.
+
+### US Paycheck Calculator
+URL: https://boring-math.com/calculators/us-paycheck-calculator
+Calculate take-home pay after federal tax, state tax, Social Security, and Medicare.
+
+### W2 to 1099 Calculator
+URL: https://boring-math.com/calculators/w2-to-1099-calculator
+Convert W2 employee hourly rate to equivalent 1099 contractor rate.
+
+### US Self-Employment Tax Calculator
+URL: https://boring-math.com/calculators/us-self-employment-tax-calculator
+Calculate self-employment tax (Social Security + Medicare) for freelancers and sole proprietors.
+
+### US Quarterly Tax Calculator
+URL: https://boring-math.com/calculators/us-quarterly-tax-calculator
+Estimate quarterly estimated tax payments for self-employed individuals.
+
+### US Capital Gains Tax Calculator
+URL: https://boring-math.com/calculators/us-capital-gains-tax-calculator
+Short-term and long-term capital gains tax rates based on filing status and income.
+
+### 401k Calculator
+URL: https://boring-math.com/calculators/401k-calculator
+Project 401k retirement savings with employer match, contribution limits, and investment growth.
+
+### HSA Calculator
+URL: https://boring-math.com/calculators/hsa-calculator
+Health Savings Account contribution limits, tax savings, and investment growth projections.
+
+## Health & Wellness Calculators
+
+### BMI Calculator
+URL: https://boring-math.com/calculators/bmi-calculator
+Body Mass Index calculation with category classification.
+
+### Body Fat Calculator
+URL: https://boring-math.com/calculators/body-fat-calculator
+Estimate body fat percentage using multiple measurement methods.
+
+### Calorie Calculator
+URL: https://boring-math.com/calculators/calorie-calculator
+Daily calorie needs based on age, gender, weight, height, and activity level.
+
+### TDEE Calculator
+URL: https://boring-math.com/calculators/tdee-calculator
+Total Daily Energy Expenditure for meal planning and weight management.
+
+### Macro Calculator
+URL: https://boring-math.com/calculators/macro-calculator
+Calculate protein, carbohydrate, and fat targets based on goals.
+
+### Sleep Calculator
+URL: https://boring-math.com/calculators/sleep-calculator
+Optimal bedtime and wake time based on sleep cycles (90-minute intervals).
+
+### Due Date Calculator
+URL: https://boring-math.com/calculators/due-date-calculator
+Estimate pregnancy due date from last menstrual period or conception date.
+
+### Ovulation Calculator
+URL: https://boring-math.com/calculators/ovulation-calculator
+Predict fertile window and ovulation date based on cycle length.
+
+### Dog Age Calculator
+URL: https://boring-math.com/calculators/dog-age-calculator
+Convert dog years to human years using breed-specific ageing rates.
+
+### Age Calculator
+URL: https://boring-math.com/calculators/age-calculator
+Calculate exact age in years, months, and days between two dates.
+
+## Home & DIY Calculators
+
+### Paint Calculator
+URL: https://boring-math.com/calculators/paint-calculator
+Calculate paint needed for a room based on dimensions, coats, and paint coverage.
+
+### Flooring Calculator
+URL: https://boring-math.com/calculators/flooring-calculator
+Calculate flooring material needed including waste factor.
+
+### Tile Calculator
+URL: https://boring-math.com/calculators/tile-calculator
+Calculate tiles needed for floors or walls with grout spacing and waste.
+
+### Fence Calculator
+URL: https://boring-math.com/calculators/fence-calculator
+Materials needed for fence construction including posts, panels, and concrete.
+
+### Mulch Calculator
+URL: https://boring-math.com/calculators/mulch-calculator
+Calculate mulch volume needed for garden beds based on area and desired depth.
+
+### Solar Panel Calculator
+URL: https://boring-math.com/calculators/solar-panel-calculator
+Estimate solar panel system size, cost, and savings based on energy usage and location.
+
+### Electricity Cost Calculator
+URL: https://boring-math.com/calculators/electricity-cost-calculator
+Calculate running cost of electrical appliances based on wattage, usage hours, and electricity rate.
+
+### EV vs Gas Calculator
+URL: https://boring-math.com/calculators/ev-vs-gas-calculator
+Compare total cost of ownership between electric and petrol/diesel vehicles.
+
+## Event & Party Calculators
+
+### Wedding Alcohol Calculator
+URL: https://boring-math.com/calculators/wedding-alcohol-calculator
+Calculate wine, beer, and spirits needed for a wedding based on guest count, drinking habits, and event duration. Adjustable drink type percentages that auto-balance to 100%.
+
+### Wedding Budget Calculator
+URL: https://boring-math.com/calculators/wedding-budget-calculator
+Plan wedding budget across venue, catering, photography, flowers, and all other categories.
+
+### BBQ Calculator
+URL: https://boring-math.com/calculators/bbq-calculator
+Calculate meat and sides needed per person for a barbecue event.
+
+### Party Drink Calculator
+URL: https://boring-math.com/calculators/party-drink-calculator
+Estimate drinks needed for any party based on guest count and duration.
+
+### Birthday Party Calculator
+URL: https://boring-math.com/calculators/birthday-party-calculator
+Budget planning for birthday parties including venue, food, decorations, and entertainment.
+
+### Graduation Party Calculator
+URL: https://boring-math.com/calculators/graduation-party-calculator
+Plan graduation celebration budget and supplies.
+
+### Holiday Dinner Calculator
+URL: https://boring-math.com/calculators/holiday-dinner-calculator
+Calculate food quantities for holiday dinners based on guest count.
+
+### Catering Calculator
+URL: https://boring-math.com/calculators/catering-calculator
+Estimate catering quantities and costs for events.
+
+### Event Seating Calculator
+URL: https://boring-math.com/calculators/event-seating-calculator
+Plan seating arrangements for events based on room dimensions and table types.
+
+### Conference Room Calculator
+URL: https://boring-math.com/calculators/conference-room-calculator
+Calculate conference room capacity for different seating arrangements.
+
+## Utility Calculators
+
+### Percentage Calculator
+URL: https://boring-math.com/calculators/percentage-calculator
+Calculate percentages, percentage change, and percentage of a number.
+
+### Discount Calculator
+URL: https://boring-math.com/calculators/discount-calculator
+Calculate sale prices and savings with single or stacked discounts.
+
+### Tip Calculator
+URL: https://boring-math.com/calculators/tip-calculator
+Calculate tip amount and split bills between multiple people.
+
+### Unit Converter
+URL: https://boring-math.com/calculators/unit-converter
+Convert between metric and imperial units for length, weight, volume, and temperature.
+
+### Currency Converter
+URL: https://boring-math.com/calculators/currency-converter
+Convert between major world currencies using current exchange rates.
+
+### Time Zone Converter
+URL: https://boring-math.com/calculators/time-zone-converter
+Convert times between different time zones worldwide.
+
+### GPA Calculator
+URL: https://boring-math.com/calculators/gpa-calculator
+Calculate Grade Point Average from course grades and credit hours.
+
+## Brewing & Craft Calculators
+
+### ABV Calculator
+URL: https://boring-math.com/calculators/abv-calculator
+Calculate alcohol by volume from original and final gravity readings.
+
+### IBU Calculator
+URL: https://boring-math.com/calculators/ibu-calculator
+Calculate International Bitterness Units for homebrew recipes.
+
+### Mash Water Calculator
+URL: https://boring-math.com/calculators/mash-water-calculator
+Calculate strike water volume and temperature for all-grain brewing.
+
+### Priming Sugar Calculator
+URL: https://boring-math.com/calculators/priming-sugar-calculator
+Calculate priming sugar needed for bottle conditioning beer.
+
+### Yeast Pitch Rate Calculator
+URL: https://boring-math.com/calculators/yeast-pitch-rate-calculator
+Calculate optimal yeast cell count for fermentation.
+
+### Lye Calculator
+URL: https://boring-math.com/calculators/lye-calculator
+Calculate sodium hydroxide needed for cold process soap making.
+
+### Fragrance Calculator
+URL: https://boring-math.com/calculators/fragrance-calculator
+Calculate fragrance oil percentages for candles and soap.
+
+### Candle Wax Calculator
+URL: https://boring-math.com/calculators/candle-wax-calculator
+Calculate wax needed for candle making based on container dimensions.
+
+### Glaze Calculator
+URL: https://boring-math.com/calculators/glaze-calculator
+Calculate ceramic glaze recipe quantities.
+
+### Clay Shrinkage Calculator
+URL: https://boring-math.com/calculators/clay-shrinkage-calculator
+Calculate clay shrinkage percentage from wet to fired dimensions.
+
+## Engineering Calculators
+
+### Ideal Gas Law Calculator
+URL: https://boring-math.com/calculators/ideal-gas-law-calculator
+Solve PV=nRT for any variable given the other three.
+
+### Reynolds Number Calculator
+URL: https://boring-math.com/calculators/reynolds-number-calculator
+Calculate Reynolds number for fluid flow to determine laminar vs turbulent flow.
+
+### Pipe Flow Calculator
+URL: https://boring-math.com/calculators/pipe-flow-calculator
+Calculate flow rate, velocity, and pressure in pipes.
+
+### Pressure Drop Calculator
+URL: https://boring-math.com/calculators/pressure-drop-calculator
+Calculate pressure drop in piping systems.
+
+### LMTD Calculator
+URL: https://boring-math.com/calculators/lmtd-calculator
+Log Mean Temperature Difference for heat exchanger design.
+
+### Speeds and Feeds Calculator
+URL: https://boring-math.com/calculators/speeds-feeds-calculator
+Calculate CNC machining speeds and feed rates.
+
+### Tap Drill Calculator
+URL: https://boring-math.com/calculators/tap-drill-calculator
+Find correct drill size for tapped holes.
+
+### Tool Deflection Calculator
+URL: https://boring-math.com/calculators/tool-deflection-calculator
+Calculate cutting tool deflection for CNC machining.
+
+### Cutting Time Calculator
+URL: https://boring-math.com/calculators/cutting-time-calculator
+Estimate CNC machining cycle time.
+
+## Aquarium & Pet Calculators
+
+### Fish Stocking Calculator
+URL: https://boring-math.com/calculators/fish-stocking-calculator
+Calculate appropriate fish stocking levels for aquarium size.
+
+### Water Change Calculator
+URL: https://boring-math.com/calculators/water-change-calculator
+Calculate water change volumes and frequency for aquariums.
+
+### EI Dosing Calculator
+URL: https://boring-math.com/calculators/ei-dosing-calculator
+Calculate Estimative Index fertiliser dosing for planted aquariums.
+
+### Pet Cost Calculator
+URL: https://boring-math.com/calculators/pet-cost-calculator
+Estimate annual and lifetime costs of pet ownership.
+
+### Baby Cost Calculator
+URL: https://boring-math.com/calculators/baby-cost-calculator
+Estimate first-year and ongoing costs of having a baby.
+
+## Other Calculators
+
+### CO2 Calculator
+URL: https://boring-math.com/calculators/co2-calculator
+Calculate personal carbon footprint from travel, energy, and lifestyle.
+
+### Vacation Budget Calculator
+URL: https://boring-math.com/calculators/vacation-budget-calculator
+Plan travel budget across flights, accommodation, food, and activities.
+
+### Moving Cost Calculator
+URL: https://boring-math.com/calculators/moving-cost-calculator
+Estimate costs of moving house including removals, deposits, and fees.
+
+### Remote Work Savings Calculator
+URL: https://boring-math.com/calculators/remote-work-savings-calculator
+Calculate money saved by working from home vs commuting.
+
+### Subscription Audit Calculator
+URL: https://boring-math.com/calculators/subscription-audit-calculator
+Track and analyse monthly subscription spending.
+
+### Job Offer Comparison Calculator
+URL: https://boring-math.com/calculators/job-offer-comparison-calculator
+Compare total compensation packages including salary, benefits, pension, and perks.
+
+### Hourly to Salary Calculator
+URL: https://boring-math.com/calculators/hourly-to-salary-calculator
+Convert hourly wage to annual salary and vice versa.
+
+### Salary to Hourly Calculator
+URL: https://boring-math.com/calculators/salary-to-hourly-calculator
+Convert annual salary to equivalent hourly rate based on working hours.
+
+### Overtime Calculator
+URL: https://boring-math.com/calculators/overtime-calculator
+Calculate overtime pay at time-and-a-half or double-time rates.
+
+### Raise Calculator
+URL: https://boring-math.com/calculators/raise-calculator
+Calculate the impact of a pay raise on annual and monthly income.
+
+### College ROI Calculator
+URL: https://boring-math.com/calculators/college-roi-calculator
+Compare return on investment of different university degrees.
+
+### Ads Calculator
+URL: https://boring-math.com/calculators/ads-calculator
+Calculate advertising metrics: CPC, CPM, CTR, ROAS, and conversion rates.
+
+### EU Salary Calculator
+URL: https://boring-math.com/calculators/eu-salary-calculator
+Compare salaries across European countries accounting for tax and cost of living.
+
+### EU VAT Calculator
+URL: https://boring-math.com/calculators/eu-vat-calculator
+Calculate VAT amounts for EU member states at standard and reduced rates.
+
+### Batch Cost Calculator
+URL: https://boring-math.com/calculators/batch-cost-calculator
+Calculate per-unit cost for batch production runs.
+
+---
+
+## About
+
+Boring Math Calculators (boring-math.com) is a free calculator site focused on making everyday maths accessible. All calculations run client-side in the browser. No data is sent to any server. No account required. The site is built with Astro and Preact, hosted on Cloudflare Pages.
+
+## Contact
+Website: https://boring-math.com
+Contact: https://boring-math.com/contact
