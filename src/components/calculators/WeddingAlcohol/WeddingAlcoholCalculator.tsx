@@ -47,13 +47,12 @@ export default function WeddingAlcoholCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Track which slider is currently being dragged, and which was dragged before it.
-  // When the user switches to a new slider, the previous one becomes "locked."
-  const activeSlider = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
-  const lockedSlider = useRef<'winePercent' | 'beerPercent' | 'liquorPercent' | null>(null);
+  // Track the order of slider interactions: [most recent, previous]
+  const sliderHistory = useRef<Array<'winePercent' | 'beerPercent' | 'liquorPercent'>>([]);
 
   // Update a drink percentage while keeping total at 100%
-  // If the user adjusts a second slider, only the third (untouched) one auto-adjusts
+  // First slider dragged: other two adjust proportionally
+  // Second slider dragged: only the third (untouched) one adjusts
   const updateDrinkPercent = (
     changed: 'winePercent' | 'beerPercent' | 'liquorPercent',
     newValue: number
@@ -61,40 +60,39 @@ export default function WeddingAlcoholCalculator() {
     const clamped = Math.min(100, Math.max(0, newValue));
     const remaining = 100 - clamped;
     const allKeys = ['winePercent', 'beerPercent', 'liquorPercent'] as const;
-    const newInputs = { ...inputs, [changed]: clamped };
 
-    // When switching to a different slider, lock the previous one
-    if (activeSlider.current && activeSlider.current !== changed) {
-      lockedSlider.current = activeSlider.current;
-    }
-    activeSlider.current = changed;
+    // Update history: push changed to front, keep max 2 unique entries
+    const hist = sliderHistory.current.filter((k) => k !== changed);
+    sliderHistory.current = [changed, ...hist].slice(0, 2);
 
-    const locked = lockedSlider.current;
+    // The "locked" slider is the second entry in history (the previously adjusted one)
+    const locked = sliderHistory.current.length >= 2 ? sliderHistory.current[1] : null;
 
-    if (locked && locked !== changed) {
-      // A previous slider is locked: only adjust the third
+    const next: Record<string, number> = { ...inputs, [changed]: clamped };
+
+    if (locked) {
+      // Two sliders touched: lock the previous one, auto-adjust the third
       const autoKey = allKeys.find((k) => k !== changed && k !== locked)!;
-      newInputs[autoKey] = Math.max(0, 100 - clamped - newInputs[locked]);
+      next[autoKey] = Math.max(0, 100 - clamped - inputs[locked]);
     } else {
-      // First slider being adjusted: redistribute the other two proportionally
+      // Only one slider touched so far: redistribute the other two proportionally
       const otherKeys = allKeys.filter((k) => k !== changed);
       const otherTotal = otherKeys.reduce((sum, k) => sum + inputs[k], 0);
 
       if (otherTotal > 0) {
         for (const k of otherKeys) {
-          newInputs[k] = Math.round((inputs[k] / otherTotal) * remaining);
+          next[k] = Math.round((inputs[k] / otherTotal) * remaining);
         }
-        const roundedTotal = clamped + otherKeys.reduce((s, k) => s + newInputs[k], 0);
-        if (roundedTotal !== 100) {
-          newInputs[otherKeys[0]] += 100 - roundedTotal;
-        }
+        // Fix rounding
+        const total = clamped + otherKeys.reduce((s, k) => s + next[k], 0);
+        if (total !== 100) next[otherKeys[0]] += 100 - total;
       } else {
-        newInputs[otherKeys[0]] = Math.round(remaining / 2);
-        newInputs[otherKeys[1]] = remaining - Math.round(remaining / 2);
+        next[otherKeys[0]] = Math.round(remaining / 2);
+        next[otherKeys[1]] = remaining - Math.round(remaining / 2);
       }
     }
 
-    setInputs(newInputs);
+    setInputs(next as WeddingAlcoholInputs);
   };
 
   // Check if drink percentages are valid
@@ -200,7 +198,12 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.winePercent}
-                    onChange={(e) => updateDrinkPercent('winePercent', Number(e.target.value))}
+                    onInput={(e) =>
+                      updateDrinkPercent(
+                        'winePercent',
+                        Number((e.target as HTMLInputElement).value)
+                      )
+                    }
                     className="w-full rounded-lg appearance-none cursor-pointer accent-red-500"
                   />
                 </div>
@@ -214,7 +217,12 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.beerPercent}
-                    onChange={(e) => updateDrinkPercent('beerPercent', Number(e.target.value))}
+                    onInput={(e) =>
+                      updateDrinkPercent(
+                        'beerPercent',
+                        Number((e.target as HTMLInputElement).value)
+                      )
+                    }
                     className="w-full rounded-lg appearance-none cursor-pointer accent-amber-500"
                   />
                 </div>
@@ -228,7 +236,12 @@ export default function WeddingAlcoholCalculator() {
                     min="0"
                     max="100"
                     value={inputs.liquorPercent}
-                    onChange={(e) => updateDrinkPercent('liquorPercent', Number(e.target.value))}
+                    onInput={(e) =>
+                      updateDrinkPercent(
+                        'liquorPercent',
+                        Number((e.target as HTMLInputElement).value)
+                      )
+                    }
                     className="w-full rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                 </div>
