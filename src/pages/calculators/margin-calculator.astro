@@ -1,0 +1,179 @@
+---
+/**
+ * Margin Calculator Page
+ *
+ * SEO-optimised page targeting: "margin calculator", "profit margin calculator", "markup calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import MarginCalculator from '../../components/calculators/MarginCalculator/MarginCalculator';
+
+// SEO Configuration
+const title = 'Free Margin Calculator - Profit Margin and Markup | Boring Math';
+const description =
+  'Calculate profit margin, markup percentage, and gross profit instantly. Switch between cost + revenue, cost + margin, or revenue + margin modes. No signup required.';
+const keywords =
+  'margin calculator, profit margin calculator, markup calculator, gross profit calculator, margin vs markup, profit margin formula, markup percentage';
+const canonicalURL = '/calculators/margin-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Margin Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Break-Even Calculator',
+    description: 'Find out when your business becomes profitable.',
+    href: '/calculators/break-even-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Set optimal prices for your products and services.',
+    href: '/calculators/pricing-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is the difference between margin and markup?',
+    answer:
+      'Margin is the percentage of revenue that is profit (gross profit divided by revenue). Markup is the percentage added on top of cost to reach the selling price (gross profit divided by cost). For example, if you buy something for 60 and sell it for 100, your margin is 40% but your markup is 66.7%.',
+  },
+  {
+    question: 'How do I calculate profit margin?',
+    answer:
+      'Profit margin is calculated as (Revenue - Cost) / Revenue x 100. For example, if your revenue is 100 and your cost is 70, your profit margin is (100 - 70) / 100 x 100 = 30%. This tells you what percentage of each pound or dollar of revenue is profit.',
+  },
+  {
+    question: 'What is a good profit margin?',
+    answer:
+      'A good profit margin varies by industry. Retail businesses typically see 2-5% net margins, whilst software companies may achieve 20-40%. Gross margins are generally higher: 50%+ for services, 30-50% for manufacturing, and 20-40% for retail. Compare your margin against industry benchmarks rather than a universal standard.',
+  },
+  {
+    question: 'Why does a 50% markup not equal a 50% margin?',
+    answer:
+      'Because they use different denominators. A 50% markup means you add 50% of the cost to the price (cost 100, sell for 150). But the margin on that sale is only 33.3%, because profit (50) divided by revenue (150) is 33.3%. Markup is always a higher number than the corresponding margin.',
+  },
+  {
+    question: 'How do I convert between margin and markup?',
+    answer:
+      'To convert markup to margin: Margin = Markup / (1 + Markup). To convert margin to markup: Markup = Margin / (1 - Margin). For example, a 25% margin equals a 33.3% markup, and a 100% markup equals a 50% margin. The reference table in the calculator shows common conversions.',
+  },
+  {
+    question: 'Can profit margin be negative?',
+    answer:
+      'Yes, a negative profit margin means you are selling below cost - i.e. making a loss on each sale. This can happen deliberately (loss leaders to attract customers) or accidentally (underpricing, unexpected cost increases). If your margin is negative, review your pricing strategy or reduce costs.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Margin Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Margin Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Choose calculation mode',
+        text: 'Select whether you have cost + revenue, cost + margin percentage, or revenue + margin percentage.',
+      },
+      {
+        name: 'Enter your values',
+        text: 'Input the cost price, revenue, or margin percentage depending on your selected mode.',
+      },
+      {
+        name: 'View your results',
+        text: 'See your profit margin, markup percentage, and gross profit calculated instantly.',
+      },
+      {
+        name: 'Compare margin and markup',
+        text: 'Use the reference table to understand how margin and markup relate to each other.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Margin Calculator"
+    description="Calculate profit margin, markup percentage, and gross profit. Switch between input modes and see results update in real time."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <MarginCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing your <strong>calculation mode</strong>. If you know both cost and revenue,
+      select "Cost + Revenue". If you know the cost and target margin, select "Cost + Margin %". If
+      you know revenue and target margin, select "Revenue + Margin %".
+    </p>
+    <p>
+      Enter your values and the calculator will instantly show your <strong>profit margin</strong>,
+      <strong>markup percentage</strong>, and <strong>gross profit</strong>. All results update in
+      real time as you type.
+    </p>
+    <p>
+      Use the <strong>currency selector</strong> to switch between currencies. The
+      <strong>margin vs markup reference table</strong> shows common conversions so you can quickly see
+      the relationship between the two.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Margin and Markup">
+    <p>
+      <strong>Profit Margin</strong> tells you what percentage of your selling price is profit. A 40%
+      margin means 40p of every pound (or 40 cents of every dollar) is profit.
+    </p>
+    <p>
+      <strong>Markup</strong> tells you how much you added on top of cost. A 100% markup means you doubled
+      the cost price. This is useful when setting prices from a known cost.
+    </p>
+    <p>
+      <strong>Gross Profit</strong> is the absolute amount of profit per unit - simply revenue minus cost.
+      This is the actual money you keep before overheads and other expenses.
+    </p>
+    <p>
+      The key insight: margin is always lower than markup for the same transaction. A 50% markup
+      gives only a 33.3% margin. Many businesses confuse the two, leading to pricing errors.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,174 @@
+---
+/**
+ * Pace Calculator Page
+ *
+ * SEO-optimised page targeting: "running pace calculator splits"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PaceCalculator from '../../components/calculators/PaceCalculator/PaceCalculator';
+
+// SEO Configuration
+const title = 'Free Pace Calculator - Running & Walking Splits Instantly | Boring Math';
+const description =
+  'Calculate your running or walking pace, finish time, or distance. See split times for 5K, 10K, half marathon and marathon. No signup required.';
+const keywords =
+  'pace calculator, running pace calculator, split time calculator, marathon pace, 5k pace calculator, walking pace calculator, km pace to mile pace, running speed calculator';
+const canonicalURL = '/calculators/pace-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Pace Calculator' }];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Estimate daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your body mass index quickly.',
+    href: '/calculators/bmi-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is a good running pace for beginners?',
+    answer:
+      'A good starting pace for beginners is around 7:00 to 8:00 minutes per kilometre (11:00 to 13:00 per mile). The key is to run at a pace where you can hold a conversation comfortably. As your fitness improves, your pace will naturally get faster.',
+  },
+  {
+    question: 'How do I convert pace from minutes per kilometre to minutes per mile?',
+    answer:
+      'To convert from min/km to min/mile, multiply by 1.60934. For example, a pace of 5:00/km equals roughly 8:03/mile. This calculator shows both units automatically so you never need to convert manually.',
+  },
+  {
+    question: 'What pace do I need for a sub-4-hour marathon?',
+    answer:
+      'To finish a marathon in under 4 hours, you need an average pace of approximately 5:41 per kilometre (9:09 per mile). This is a popular goal for recreational runners and requires consistent training over several months.',
+  },
+  {
+    question: 'How are split times calculated?',
+    answer:
+      'Split times are calculated by multiplying your pace (time per kilometre) by the race distance in kilometres. For example, if your pace is 6:00/km, your 5 km split would be 30:00 and your 10 km split would be 1:00:00. This assumes an even pacing strategy.',
+  },
+  {
+    question: 'What is the difference between pace and speed?',
+    answer:
+      'Pace is the time it takes to cover a unit of distance (e.g. 5:30 per km), while speed is the distance covered per unit of time (e.g. 10.9 km/h). Runners typically use pace because it is easier to maintain a consistent effort, whilst speed is more common in cycling and driving.',
+  },
+  {
+    question: 'Should I run at the same pace for every distance?',
+    answer:
+      'No. Shorter races like a 5K are run at a faster pace than longer races like a marathon. A general rule is that your marathon pace will be 45-90 seconds per kilometre slower than your 5K pace. Training plans typically include a mix of easy runs, tempo runs, and interval sessions at different paces.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Pace Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Pace Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Choose calculation mode',
+        text: 'Select whether to calculate pace, time, or distance.',
+      },
+      { name: 'Select distance unit', text: 'Choose kilometres or miles for your preferred unit.' },
+      {
+        name: 'Enter your values',
+        text: 'Input distance and time, distance and pace, or pace and time depending on your chosen mode.',
+      },
+      {
+        name: 'View your results',
+        text: 'See your pace per km and per mile, speed in km/h and mph, and split times for common race distances.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Pace Calculator"
+    description="Calculate your running or walking pace, finish time, or distance. View split times for common race distances instantly."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PaceCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose your <strong>calculation mode</strong>: calculate pace from distance and time,
+      calculate time from distance and pace, or calculate distance from pace and time.
+    </p>
+    <p>
+      Select your preferred <strong>distance unit</strong> (kilometres or miles). All results show both
+      metric and imperial values regardless of your selection.
+    </p>
+    <p>
+      Results update <strong>instantly</strong> as you type. The split times table shows projected finish
+      times for 1 km, 5 km, 10 km, half marathon, and marathon distances based on your current pace.
+    </p>
+    <p>
+      Use the <strong>share</strong> or <strong>print</strong> buttons to save or send your results to
+      training partners.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Pace">
+    <p>
+      <strong>Pace</strong> is measured in minutes per kilometre (or per mile). A lower number means a
+      faster pace. Most runners find it easier to maintain a target pace than a target speed.
+    </p>
+    <p>
+      <strong>Speed</strong> is the inverse of pace, measured in km/h or mph. This is useful when setting
+      a treadmill or comparing with cycling speeds.
+    </p>
+    <p>
+      <strong>Split times</strong> show how long it would take to complete common race distances at your
+      current pace. These assume even pacing throughout the race.
+    </p>
+    <p>
+      <strong>Negative splits</strong> (running the second half faster than the first) is generally considered
+      the best race strategy. Try entering a pace 10-15 seconds per km slower for your first-half target.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

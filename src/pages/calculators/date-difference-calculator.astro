@@ -1,0 +1,174 @@
+---
+/**
+ * Date Difference Calculator Page
+ *
+ * SEO-optimized page targeting: "date difference calculator days between dates"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import DateDifferenceCalculator from '../../components/calculators/DateDifferenceCalculator/DateDifferenceCalculator';
+
+// SEO Configuration
+const title = 'Free Date Difference Calculator — Days Between Dates | Boring Math';
+const description =
+  'Calculate the exact number of days, weeks, months, and years between two dates. Includes business day calculation and detailed breakdown. No signup required.';
+const keywords =
+  'date difference calculator, days between dates, date calculator, how many days between, business days calculator, date duration, weeks between dates, months between dates';
+const canonicalURL = '/calculators/date-difference-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Date Difference Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age in years, months, and days.',
+    href: '/calculators/age-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Due Date Calculator',
+    description: 'Estimate your pregnancy due date and milestones.',
+    href: '/calculators/due-date-calculator',
+    icon: 'calculator' as const,
+    color: 'pink' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do you calculate the number of days between two dates?',
+    answer:
+      'Subtract the earlier date from the later date. This calculator converts both dates to their numeric representations and divides the difference by the number of milliseconds in a day (86,400,000). The result is the exact number of calendar days between the two dates.',
+  },
+  {
+    question: 'What is the difference between calendar days and business days?',
+    answer:
+      'Calendar days include every day (Monday through Sunday). Business days, also called working days, only count weekdays (Monday through Friday) and exclude Saturdays and Sundays. Public holidays are not automatically excluded as they vary by country.',
+  },
+  {
+    question: 'Should I include the end date when counting days?',
+    answer:
+      'It depends on what you are counting. If you want to know how many days something lasts (for example, a holiday from the 1st to the 5th), you would include the end date (5 days). If you want the gap between two events, you would exclude the end date (4 days). Use the toggle in the calculator to switch between these modes.',
+  },
+  {
+    question: 'How many business days are in a year?',
+    answer:
+      'A typical year has approximately 260 to 262 business days (52 weeks times 5 working days, adjusted for how weekends fall). The exact number depends on what day of the week the year starts and whether it is a leap year. Public holidays will further reduce the number of actual working days.',
+  },
+  {
+    question: 'How do I calculate months between two dates accurately?',
+    answer:
+      'Months vary in length (28 to 31 days), so there is no single exact conversion. This calculator provides both an approximate decimal month count (using an average of 30.4375 days per month) and a precise breakdown showing whole years, whole months, and remaining days.',
+  },
+  {
+    question: 'Does this calculator account for leap years?',
+    answer:
+      'Yes. The calculator uses the native JavaScript Date object which correctly handles leap years. February 29th is properly counted in leap years (every 4 years, except centuries not divisible by 400). The day count between dates is always accurate regardless of leap years.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Date Difference Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Date Difference Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter start date', text: 'Select or type the start date using the date picker.' },
+      { name: 'Enter end date', text: 'Select or type the end date using the date picker.' },
+      {
+        name: 'Choose counting options',
+        text: 'Toggle whether to include the end date and whether to show business days.',
+      },
+      {
+        name: 'View results',
+        text: 'See the total days, weeks, months, years, and a detailed breakdown including business days.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Date Difference Calculator"
+    description="Calculate the exact number of days, weeks, months, and years between any two dates. Includes business day counting and detailed breakdowns."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <DateDifferenceCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter a <strong>start date</strong> and an <strong>end date</strong> using the date pickers. The
+      calculator instantly shows the difference in multiple units.
+    </p>
+    <p>
+      Use the <strong>include end date</strong> toggle to control whether the end date itself is counted.
+      This is useful when counting the length of a stay or event duration.
+    </p>
+    <p>
+      Enable <strong>business days</strong> to see how many working days (Monday to Friday) fall within
+      your date range. Weekend days are shown separately.
+    </p>
+    <p>
+      The <strong>conversion reference table</strong> shows your date difference expressed in days, weeks,
+      months, years, hours, and minutes for quick comparison.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding the Results">
+    <p>
+      <strong>Total Days</strong> - The exact number of calendar days between your two dates. This is
+      the most precise measurement.
+    </p>
+    <p>
+      <strong>Breakdown</strong> - Shows the difference as a combination of years, months, and days. For
+      example, 400 days would show as 1 year, 1 month, and 4 days.
+    </p>
+    <p>
+      <strong>Business Days</strong> - The number of weekdays (Monday through Friday) in the range. Public
+      holidays are not automatically excluded as they vary by location.
+    </p>
+    <p>
+      <strong>Approximate Values</strong> - Months and years are shown as decimals because months have
+      different lengths (28-31 days) and years can be 365 or 366 days.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

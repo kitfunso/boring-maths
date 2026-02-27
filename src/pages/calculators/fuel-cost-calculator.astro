@@ -1,0 +1,182 @@
+---
+/**
+ * Fuel Cost Calculator Page
+ *
+ * SEO-optimised page targeting: "fuel cost calculator UK", "petrol cost calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import FuelCostCalculator from '../../components/calculators/FuelCostCalculator/FuelCostCalculator';
+
+// SEO Configuration
+const title = 'Free Fuel Cost Calculator — Estimate Petrol Costs Instantly | Boring Math';
+const description =
+  'Calculate the fuel cost of any journey. Enter distance, fuel efficiency, and price per litre to see total cost, fuel needed, and cost per mile. UK defaults included.';
+const keywords =
+  'fuel cost calculator, petrol cost calculator, journey fuel cost, mpg calculator, fuel consumption calculator, cost per mile calculator, diesel cost calculator, UK fuel cost';
+const canonicalURL = '/calculators/fuel-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Fuel Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'EV vs Petrol Calculator',
+    description: 'Compare running costs of electric and petrol vehicles.',
+    href: '/calculators/ev-vs-gas-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'CO2 Calculator',
+    description: 'Estimate the carbon footprint of your journey.',
+    href: '/calculators/co2-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate the fuel cost of a journey?',
+    answer:
+      "Divide your journey distance by your vehicle's fuel efficiency (mpg) to get the number of gallons needed, then multiply by the price per gallon. Alternatively, convert your efficiency to litres per 100 km, multiply by the distance in km divided by 100, then multiply by the price per litre. This calculator handles all of that automatically.",
+  },
+  {
+    question: 'What is a good mpg for a car in the UK?',
+    answer:
+      'A typical petrol car in the UK achieves between 35 and 50 mpg (UK gallons). Diesel cars tend to be slightly more efficient, often reaching 45 to 65 mpg. Hybrid vehicles can exceed 60 mpg, and the figure varies depending on driving conditions, vehicle age, and engine size.',
+  },
+  {
+    question: 'What is the difference between UK gallons and US gallons?',
+    answer:
+      'A UK (imperial) gallon is approximately 4.546 litres, while a US gallon is approximately 3.785 litres. This means a UK gallon is about 20% larger than a US gallon. When comparing mpg figures, UK mpg will always appear higher than US mpg for the same vehicle because the gallon is larger.',
+  },
+  {
+    question: 'How can I improve my fuel efficiency?',
+    answer:
+      'Maintain steady speeds and avoid harsh acceleration or braking. Keep your tyres inflated to the recommended pressure, as underinflated tyres increase rolling resistance. Remove unnecessary weight and roof boxes when not in use. Use the correct engine oil grade, and service your vehicle regularly. Driving at 60 mph rather than 70 mph on motorways can reduce fuel consumption by around 10%.',
+  },
+  {
+    question: 'Should I use the advertised mpg figure for my car?',
+    answer:
+      'Official manufacturer mpg figures are measured under controlled laboratory conditions (WLTP cycle) and are useful for comparing vehicles. However, real-world fuel economy is typically 10-20% lower than the advertised figure due to factors like traffic, weather, driving style, and terrain. Use your actual mpg for more accurate cost estimates.',
+  },
+  {
+    question: 'Is it cheaper to drive or take the train in the UK?',
+    answer:
+      'It depends on the journey. For solo travellers, trains can be cheaper on popular routes with advance tickets. However, for two or more passengers sharing a car, driving is often more economical, especially on longer journeys. Consider parking costs, tolls, and congestion charges when comparing. Use this calculator to find your driving cost and compare with rail fares.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Fuel Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Fuel Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter your journey distance',
+        text: 'Input the one-way distance in miles or kilometres.',
+      },
+      {
+        name: 'Set your fuel efficiency',
+        text: 'Enter your vehicle fuel efficiency in mpg or litres per 100 km.',
+      },
+      {
+        name: 'Enter the fuel price',
+        text: 'Input the current price per litre or per gallon for petrol or diesel.',
+      },
+      {
+        name: 'Toggle round trip if needed',
+        text: 'Enable round trip to automatically double the distance.',
+      },
+      {
+        name: 'View your results',
+        text: 'See total fuel cost, fuel needed, and cost per mile or kilometre.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Fuel Cost Calculator"
+    description="Estimate the fuel cost of any journey. Enter your distance, fuel efficiency, and fuel price to see how much your trip will cost."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <FuelCostCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>distance</strong> of your journey in miles or kilometres. Toggle between units
+      using the buttons below the distance input.
+    </p>
+    <p>
+      Set your vehicle's <strong>fuel efficiency</strong> in miles per gallon (mpg) or litres per 100
+      km. The unit automatically matches your chosen distance unit. UK mpg uses imperial gallons (4.546
+      litres), not US gallons.
+    </p>
+    <p>
+      Enter the current <strong>fuel price</strong> in pence per litre, pounds per litre, or pounds per
+      gallon. The default is pence per litre, which matches how most UK forecourts display prices.
+    </p>
+    <p>
+      Enable the <strong>round trip</strong> toggle if you need to calculate the cost of a return journey.
+      This simply doubles the distance for you.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Total Fuel Cost</strong> shows the estimated cost of fuel for your journey in your selected
+      currency. This is calculated from the distance, your vehicle's efficiency, and the fuel price you
+      entered.
+    </p>
+    <p>
+      <strong>Fuel Needed</strong> shows the total volume of fuel required, displayed in both litres and
+      UK gallons. Use this figure when planning whether you need to fill up before departing.
+    </p>
+    <p>
+      <strong>Cost per Mile/Kilometre</strong> shows your fuel running cost per unit of distance. This
+      is useful for comparing driving costs against public transport or for calculating mileage reimbursement.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

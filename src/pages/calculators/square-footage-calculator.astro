@@ -1,0 +1,186 @@
+---
+/**
+ * Square Footage Calculator Page
+ *
+ * SEO-optimised page targeting: "square footage calculator room area cost"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SquareFootageCalculator from '../../components/calculators/SquareFootageCalculator/SquareFootageCalculator';
+
+// SEO Configuration
+const title = 'Free Square Footage Calculator - Measure Any Room Shape Instantly | Boring Math';
+const description =
+  'Calculate square footage for rectangles, circles, triangles, and L-shaped rooms. Convert between sq ft, sq metres, and sq yards. Includes cost estimator for flooring and painting.';
+const keywords =
+  'square footage calculator, room area calculator, sq ft calculator, square metres calculator, floor area calculator, room size calculator, L-shaped room calculator, cost per square foot';
+const canonicalURL = '/calculators/square-footage-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Square Footage Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate how much flooring you need with waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Tile Calculator',
+    description: 'Work out tile quantities and costs for any room.',
+    href: '/calculators/tile-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate the square footage of a room?',
+    answer:
+      'For a rectangular room, multiply the length by the width. For example, a room that is 12 feet long and 10 feet wide has an area of 120 square feet (12 x 10 = 120). If you have measurements in feet and inches, convert the inches to a decimal first (e.g. 12 ft 6 in = 12.5 ft).',
+  },
+  {
+    question: 'How do I convert square feet to square metres?',
+    answer:
+      'Multiply the area in square feet by 0.092903 to get square metres. For example, 100 sq ft = 9.29 sq m. To convert the other way, multiply square metres by 10.764 to get square feet.',
+  },
+  {
+    question: 'How do I calculate the area of an L-shaped room?',
+    answer:
+      'Break the L-shape into two rectangles. Measure the length and width of each rectangle, calculate the area of each one separately, then add them together. This calculator handles this automatically when you select the L-Shape option.',
+  },
+  {
+    question: 'How many square feet are in a square yard?',
+    answer:
+      'There are 9 square feet in one square yard. To convert square feet to square yards, divide by 9. For example, 180 sq ft = 20 sq yd. This is because one yard equals 3 feet, and 3 x 3 = 9.',
+  },
+  {
+    question: 'How do I calculate square footage for a circular room?',
+    answer:
+      'Use the formula: Area = pi x radius squared. If you know the diameter, divide it by 2 to get the radius first. For example, a circular room with a 10-foot diameter has a radius of 5 feet, so the area is 3.14159 x 5 x 5 = 78.54 square feet.',
+  },
+  {
+    question: 'How much extra material should I order for flooring or painting?',
+    answer:
+      'A good rule of thumb is to order 5-10% extra material to account for waste, cuts, and mistakes. For complex room shapes or diagonal installations, consider ordering 10-15% extra. This calculator gives you the exact area; add the waste factor when placing your order.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Square Footage Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Square Footage Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Choose your room shape',
+        text: 'Select rectangle, circle, triangle, or L-shape to match your room layout.',
+      },
+      {
+        name: 'Select measurement units',
+        text: 'Toggle between feet and inches or metres depending on your preference.',
+      },
+      {
+        name: 'Enter dimensions',
+        text: 'Input the length, width, radius, or other measurements for your chosen shape.',
+      },
+      {
+        name: 'View area results',
+        text: 'See the area in square feet, square metres, and square yards instantly.',
+      },
+      {
+        name: 'Estimate costs',
+        text: 'Enable the cost estimator and enter a price per square foot or metre for flooring, painting, or other projects.',
+      },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Square Footage Calculator"
+    description="Calculate the area of any room shape in square feet, square metres, and square yards. Includes a built-in cost estimator for flooring, painting, and more."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <SquareFootageCalculator client:visible />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing your <strong>room shape</strong> - rectangle for standard rooms, circle for round
+      spaces, triangle for unusual layouts, or L-shape for rooms with an alcove or extension.
+    </p>
+    <p>
+      Toggle between <strong>feet and inches</strong> or <strong>metres</strong> depending on how you
+      measured. For imperial measurements, enter the feet and inches separately for precision.
+    </p>
+    <p>
+      The calculator instantly shows the area in <strong
+        >square feet, square metres, and square yards</strong
+      >. Enable the <strong>cost estimator</strong> to see how much materials will cost at a given price
+      per square foot or square metre.
+    </p>
+    <p>
+      For <strong>L-shaped rooms</strong>, measure each rectangular section separately. The
+      calculator adds both sections together to give you the total area.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Square feet (sq ft)</strong> is the most common unit for room area in the UK and US. One
+      square foot is the area of a square with sides measuring one foot (12 inches).
+    </p>
+    <p>
+      <strong>Square metres (sq m)</strong> is the metric equivalent, commonly used in Europe and for
+      scientific purposes. One square metre equals approximately 10.76 square feet.
+    </p>
+    <p>
+      <strong>Square yards (sq yd)</strong> is sometimes used for carpet and flooring. One square yard
+      equals 9 square feet (a 3ft by 3ft area).
+    </p>
+    <p>
+      The <strong>cost estimator</strong> multiplies your area by the price per unit. Use it for quick
+      estimates on flooring, tiling, painting, carpet, or any material sold by area.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
