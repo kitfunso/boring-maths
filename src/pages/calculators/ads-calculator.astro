@@ -94,6 +94,16 @@ const faqs = [
     answer:
       'Yes, companies purchasing residential property in Scotland are subject to both LBTT and ADS. The 6% ADS applies to all additional residential property purchases, regardless of whether the buyer is an individual or a company.',
   },
+  {
+    question: 'Are there any ADS exemptions?',
+    answer:
+      'Yes. ADS does not apply if: you are buying your only or main residence and selling your previous one at the same time; the property costs less than £40,000; you are a registered social landlord; or the purchase is of a mixed property (part residential, part commercial). Inherited properties may also be exempt in certain circumstances - Revenue Scotland publishes detailed guidance on their website.',
+  },
+  {
+    question: 'How do I claim an ADS refund and what is the deadline?',
+    answer:
+      'If you paid ADS but then sold your previous main residence within 18 months, you can reclaim the ADS. Submit an amendment to your original LBTT return via the Revenue Scotland online portal or by post. The deadline is 3 years from the date of the original ADS payment, not from the date of sale. You will need to provide the sale date and price of the previous property.',
+  },
 ];
 
 const schemaBreadcrumbs = [
@@ -140,7 +150,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <ADSCalculator client:visible />
+    <ADSCalculator client:load />
   </section>
 
   <ContentSection title="How to Use This Calculator">
@@ -175,6 +185,73 @@ const schemaBreadcrumbs = [
         applies at each rate tier. First-time buyers benefit from a higher nil-rate band of £175,000.
       </p>
     </div>
+  </ContentSection>
+
+  <ContentSection title="Worked Example: Buying a Buy-to-Let in Edinburgh">
+    <p>
+      Say you already own your home and you buy a buy-to-let flat in Edinburgh for <strong
+        >£250,000</strong
+      >. Here is what you pay:
+    </p>
+    <h3 class="text-lg font-semibold mt-6 mb-2">LBTT (standard rates)</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>0% on first £145,000 = £0</li>
+      <li>2% on £145,001-£250,000 (£105,000) = £2,100</li>
+      <li><strong>LBTT total: £2,100</strong></li>
+    </ul>
+    <h3 class="text-lg font-semibold mt-6 mb-2">ADS (6% on full purchase price)</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>6% x £250,000 = £15,000</li>
+    </ul>
+    <h3 class="text-lg font-semibold mt-6 mb-2">Total tax due</h3>
+    <p>
+      £2,100 + £15,000 = <strong>£17,100</strong> - that is 6.84% of the purchase price.
+    </p>
+    <p class="mt-4">
+      Compare that to a first-time buyer purchasing the same property as their only home: they would
+      pay £0 LBTT (under the £175,000 nil-rate) if the price were lower, or just £1,500 LBTT on a
+      £250,000 property with the first-time buyer relief. No ADS applies. The additional property
+      premium is substantial.
+    </p>
+    <p class="mt-4">
+      At <strong>£400,000</strong> - closer to Edinburgh's average - the figures are:
+    </p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li>LBTT: £2,100 + £3,750 (5% on £75k) = £5,850</li>
+      <li>ADS: 6% x £400,000 = £24,000</li>
+      <li><strong>Total: £29,850</strong> (7.46% of purchase price)</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="When ADS Applies - and When It Does Not">
+    <p>
+      ADS applies when you are buying a <strong
+        >second residential property in Scotland worth £40,000 or more</strong
+      > and you already own at least one other property anywhere in the world at the end of the day of
+      purchase.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Common situations where ADS applies</h3>
+    <ul class="list-disc list-inside space-y-2">
+      <li>Buying a rental property while still owning your home</li>
+      <li>Buying a holiday home in Scotland</li>
+      <li>Buying a property for a family member while retaining ownership of your own home</li>
+      <li>A company buying residential property</li>
+    </ul>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Common situations where ADS does not apply</h3>
+    <ul class="list-disc list-inside space-y-2">
+      <li>
+        You are replacing your main residence (selling the old one on or before the purchase date)
+      </li>
+      <li>The property costs less than £40,000</li>
+      <li>The property is entirely non-residential (commercial)</li>
+      <li>You are a first-time buyer with no other properties</li>
+    </ul>
+    <p class="mt-4">
+      The current ADS rate is <strong>6%</strong>, raised from 4% in December 2022. Unlike LBTT
+      which uses a tiered band system, ADS is a flat percentage applied to the <strong
+        >whole purchase price</strong
+      > - so a small increase in property value means a proportionally higher ADS bill.
+    </p>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

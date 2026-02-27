@@ -11,8 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { W2To1099Calculator } from '../../components/calculators/W2To1099Calculator';
 
-const title =
-  'Free W2 to 1099 Calculator — Convert Hourly Rate & Salary to Contractor | Boring Math';
+const title = 'W2 to 1099 Calculator - Compare Employee vs Contractor Pay | Boring Math';
 const description =
   'Free W2 to 1099 calculator. Convert your employee hourly rate or annual salary to equivalent 1099 contractor rate. Accounts for self-employment tax (15.3%), health insurance, 401k match, PTO, and business expenses. Instant results.';
 const keywords =
@@ -90,6 +89,16 @@ const faqs = [
     answer:
       'It depends on your situation. Contractors often earn 20-50% more gross income but must cover their own benefits and taxes. The flexibility and potential for higher earnings can be valuable, but you lose job security and benefits. Use this calculator to determine your minimum rate before deciding.',
   },
+  {
+    question: 'How do I pay quarterly estimated taxes as a 1099 contractor?',
+    answer:
+      "The IRS requires you to pay estimated taxes four times a year if you expect to owe more than $1,000 in tax. Deadlines are typically April 15, June 15, September 15, and January 15. Use Form 1040-ES to calculate your payment. A common method is to pay 110% of last year's tax liability split across four payments, which protects you from underpayment penalties even if your income grows.",
+  },
+  {
+    question: 'Do state taxes affect my 1099 vs W2 comparison?',
+    answer:
+      'Yes, significantly. States like Texas, Florida, and Nevada have no income tax, so the gap between W2 and 1099 is smaller there. States like California (up to 13.3%) or New York (up to 10.9%) add substantially to your tax burden as a contractor. Some states also have their own self-employment or business taxes on top of federal SE tax. Run your numbers with your actual state rate before accepting a contractor offer.',
+  },
 ];
 
 const schemaBreadcrumbs = [
@@ -121,7 +130,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <W2To1099Calculator client:visible />
+    <W2To1099Calculator client:load />
   </section>
 
   <ContentSection title="How to Use This Calculator">
@@ -223,6 +232,126 @@ const schemaBreadcrumbs = [
         hours drop further. This is why a $50/hour W2 rate typically requires $70-80/hour as a
         contractor just to break even.
       </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Worked Example: $80,000 W2 Salary, What 1099 Rate Do You Need?">
+    <p>
+      Say you earn $80,000 per year as a W2 software developer, with a standard benefits package.
+      Your employer pays half your payroll taxes, provides health insurance, and matches 4% of
+      salary into your 401(k). Here is the maths for working out the 1099 day rate that makes you
+      whole.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">
+      Step 1: What does your W2 package actually cost your employer?
+    </h3>
+    <div
+      class="space-y-1 text-[var(--color-subtle)] text-sm font-mono bg-[var(--color-surface)] rounded-lg p-4 mt-2"
+    >
+      <div class="flex justify-between"><span>Base salary</span><span>$80,000</span></div>
+      <div class="flex justify-between"><span>Employer FICA (7.65%)</span><span>$6,120</span></div>
+      <div class="flex justify-between">
+        <span>Employer health insurance contribution</span><span>$6,500</span>
+      </div>
+      <div class="flex justify-between"><span>401(k) match (4%)</span><span>$3,200</span></div>
+      <div
+        class="flex justify-between font-semibold text-[var(--color-cream)] border-t border-[var(--color-border)] pt-2 mt-2"
+      >
+        <span>Total employer cost</span><span>$95,820</span>
+      </div>
+    </div>
+    <h3 class="text-lg font-semibold mt-6 mb-2">Step 2: What does 1099 add in costs to you?</h3>
+    <div
+      class="space-y-1 text-[var(--color-subtle)] text-sm font-mono bg-[var(--color-surface)] rounded-lg p-4 mt-2"
+    >
+      <div class="flex justify-between">
+        <span>Self-employment tax (15.3% on 92.35% of net)</span><span>~$11,300</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Health insurance premium (full cost, self-pay)</span><span>$7,200</span>
+      </div>
+      <div class="flex justify-between">
+        <span>No 401(k) match to replace</span><span>$3,200</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Business expenses (accounting, software, etc.)</span><span>$3,000</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Unpaid time (3 weeks sick/holiday/gaps)</span><span>~$4,600</span>
+      </div>
+      <div
+        class="flex justify-between font-semibold text-[var(--color-cream)] border-t border-[var(--color-border)] pt-2 mt-2"
+      >
+        <span>Total extra costs vs W2</span><span>~$29,300</span>
+      </div>
+    </div>
+    <h3 class="text-lg font-semibold mt-6 mb-2">Step 3: The minimum 1099 gross you need</h3>
+    <p class="text-[var(--color-subtle)]">
+      To take home the same net as your $80,000 W2 job, you need to gross roughly $80,000 + $29,300
+      = <strong class="text-green-400">$109,300 per year</strong> as a contractor. At 1,700 billable hours
+      (accounting for non-billable time), that works out to roughly
+      <strong class="text-green-400">$64/hour</strong>. If your W2 effective hourly is around $38/hr
+      ($80k / 2,080 hours), you need a multiplier of 1.68x just to break even.
+    </p>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      That is the floor. If you want contracting to be financially worthwhile, aim for $75-80/hr to
+      account for periods without a client and the stress of variable income.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="The Hidden Costs of Going 1099">
+    <p>
+      Most people focus on the self-employment tax rate when switching from W2 to 1099. That is only
+      part of the picture. Here are the costs that catch contractors off guard.
+    </p>
+    <div class="space-y-4 mt-4 text-[var(--color-subtle)]">
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Self-employment tax: 15.3%</h4>
+        <p>
+          As a W2 employee, your employer quietly pays 7.65% of your wages in payroll taxes on your
+          behalf. You never see it. As a 1099 contractor, you pay the full 15.3% yourself (Social
+          Security at 12.4% up to $176,100, plus Medicare at 2.9% on everything). On $100,000 of net
+          profit, that is $14,130 in SE tax before you even start on income tax. You can deduct half
+          of it from your adjusted gross income, which softens the blow slightly.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">No employer benefits</h4>
+        <p>
+          Health insurance, dental, vision, life insurance, disability cover, commuter benefits, and
+          gym subsidies all disappear. A decent self-employed health plan for a 35-year-old on the
+          ACA marketplace costs $400-600/month before the deductible. Family coverage easily runs
+          $1,200-1,800/month. These are post-tax costs unless you qualify for the self-employed
+          health insurance deduction.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Quarterly estimated taxes</h4>
+        <p>
+          W2 withholding happens automatically. As a contractor you must calculate and pay your own
+          tax every quarter or face an underpayment penalty (currently around 8% annualised). Most
+          contractors set aside 25-30% of every payment into a separate account and pay the IRS in
+          April, June, September, and January.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Gaps between contracts</h4>
+        <p>
+          W2 employees get paid during notice periods, sick leave, and between projects. Contractors
+          do not. A 3-week gap between contracts on a $100/hour rate costs you $12,000 in lost
+          income. Even experienced contractors typically budget for 4-6 weeks of unbilled time per
+          year.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Admin overhead</h4>
+        <p>
+          You will need an accountant ($500-2,000/year for a straightforward 1099 return), business
+          bank account, invoicing software, and potentially professional liability insurance. Add
+          time spent chasing invoices, negotiating renewals, and doing your own taxes. Budget at
+          least 3-5 hours per week of unbillable admin.
+        </p>
+      </div>
     </div>
   </ContentSection>
 

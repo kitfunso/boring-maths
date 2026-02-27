@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import ConferenceRoomCalculator from '../../components/calculators/ConferenceRoomCalculator/ConferenceRoomCalculator';
 
-const title = 'Conference Room Capacity Calculator — Seating Layout Planner | Boring Math';
+const title = 'Conference Room Calculator - Seating Capacity by Layout Style | Boring Math';
 const description =
   'Calculate maximum seating capacity for your conference room or meeting space. Compare theater, classroom, U-shape, and boardroom layouts to find the best setup for your event.';
 const keywords =
@@ -120,7 +120,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <ConferenceRoomCalculator client:visible />
+    <ConferenceRoomCalculator client:load />
   </section>
 
   <ContentSection title="How to Use This Calculator">
@@ -155,6 +155,124 @@ const schemaBreadcrumbs = [
       The <strong>materials list</strong> tells you exactly what furniture and equipment to order or rent
       for your configuration.
     </p>
+  </ContentSection>
+
+  <ContentSection title="Planning a 40-Person Training: Theater vs Classroom">
+    <p>
+      You have a 1,200 sq ft rectangular room (30 ft x 40 ft) and need to fit 40 people for a
+      full-day training session. Here is how theater and classroom layouts compare in practice.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-3">Theater Layout</h4>
+        <div class="space-y-2 text-sm text-[var(--color-subtle)]">
+          <div class="flex justify-between">
+            <span>Usable area (after wall clearance)</span><span>~1,050 sq ft</span>
+          </div>
+          <div class="flex justify-between"><span>Space per person</span><span>7 sq ft</span></div>
+          <div class="flex justify-between"><span>Max capacity</span><span>~150 people</span></div>
+          <div class="flex justify-between font-medium text-[var(--color-cream)]">
+            <span>For 40 people, you use</span><span>280 sq ft</span>
+          </div>
+        </div>
+        <p class="mt-3 text-sm text-[var(--color-subtle)]">
+          Theater works fine for 40. You have space for a presenter area, a 10 ft screen, and
+          comfortable row gaps. But attendees cannot take notes easily, and all-day chair-only
+          seating causes fatigue.
+        </p>
+        <p class="mt-2 text-sm font-medium text-amber-400">
+          Best for: keynotes, morning briefings, short sessions under 2 hours.
+        </p>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-3">Classroom Layout</h4>
+        <div class="space-y-2 text-sm text-[var(--color-subtle)]">
+          <div class="flex justify-between">
+            <span>Usable area (after wall clearance)</span><span>~1,050 sq ft</span>
+          </div>
+          <div class="flex justify-between"><span>Space per person</span><span>16 sq ft</span></div>
+          <div class="flex justify-between"><span>Max capacity</span><span>~65 people</span></div>
+          <div class="flex justify-between font-medium text-[var(--color-cream)]">
+            <span>For 40 people, you use</span><span>640 sq ft</span>
+          </div>
+        </div>
+        <p class="mt-3 text-sm text-[var(--color-subtle)]">
+          Classroom fits 40 with room to spare. Each attendee has a table surface for a laptop and
+          notepad. You retain 400+ sq ft for aisles, presenter space, and a small AV cart.
+        </p>
+        <p class="mt-2 text-sm font-medium text-green-400">
+          Best for: full-day training, workshops, anything involving laptops or writing.
+        </p>
+      </div>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      For a 40-person full-day training in a 1,200 sq ft room, classroom is the right call. You need
+      20 six-foot rectangular tables arranged in 5 rows of 4, with 40 chairs on the single
+      front-facing side. Allow a 5 ft centre aisle and 4 ft side aisles. The presenter needs at
+      least 6 ft of clear space at the front for movement and a 70-80 inch display or projector
+      screen at eye level for the back row.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Common Mistakes When Planning Meeting Rooms">
+    <p>
+      Most room planning errors fall into a handful of categories. Getting these right before you
+      order furniture saves you a costly reorganisation on the day.
+    </p>
+    <div class="space-y-4 mt-4 text-[var(--color-subtle)]">
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Forgetting AV equipment footprint</h4>
+        <p>
+          A projector screen needs 6-10 ft of clearance in front of it - that space cannot have
+          seats. A lectern or AV cart takes up 15-25 sq ft. If you have a 60-inch TV on a mobile
+          stand, you need another 8-10 sq ft plus clearance for people to see around it. Strip out
+          50-100 sq ft from your usable area before calculating capacity.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Not accounting for columns and alcoves
+        </h4>
+        <p>
+          Internal columns block sightlines and reduce usable rows. A single 2 ft x 2 ft column in
+          the middle of your room can eliminate 4-6 seats and force an awkward aisle redesign.
+          Alcoves and irregular walls create dead zones. Always plan from a to-scale floor plan, not
+          just square footage.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Ignoring fire code occupancy limits</h4>
+        <p>
+          Your local fire code sets a maximum occupancy for any room based on the floor area and the
+          number of exits. In the UK, standard assembly space allowances are roughly 0.5 sq m per
+          person for standing and 0.7 sq m per person seated. In the US, the International Building
+          Code uses 7 sq ft per person for assembly without fixed seats. These limits can be lower
+          than what the furniture physically fits, and they are legally binding. Check with your
+          building manager before confirming a headcount.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Underestimating aisle clearance</h4>
+        <p>
+          The minimum aisle width for egress under most fire codes is 36 inches (about 90 cm). In
+          practice, 44-48 inches feels comfortable and allows wheelchair access. Squeezing aisles to
+          fit one more row is the most common mistake - and the first thing a fire marshal will flag
+          during an inspection.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Planning for maximum, not comfortable, capacity
+        </h4>
+        <p>
+          The calculator gives you the mathematical maximum. For a full-day meeting, comfortable
+          capacity is roughly 80% of that figure. People need elbow room, personal space, and easy
+          access to seats without disrupting the row. If your max is 50 people, book the room for
+          40. The difference in comfort is significant, especially in warmer months when the room's
+          ventilation is already under strain.
+        </p>
+      </div>
+    </div>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

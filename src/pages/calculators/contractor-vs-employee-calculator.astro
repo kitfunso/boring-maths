@@ -14,7 +14,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
 
 // SEO Configuration
-const title = '1099 vs W2 Calculator — Contractor vs Employee Comparison | Boring Math';
+const title = 'Contractor vs Employee Calculator - True Cost Comparison | Boring Math';
 const description =
   'A £500/day contractor working 220 days earns £110,000 gross but takes home roughly £75,000 after tax and costs. A £75,000 employee takes home £53,070 plus pension, holiday, and sick pay. Side-by-side comparison calculator.';
 const keywords =
@@ -167,7 +167,7 @@ const schemaBreadcrumbs = [
 
   <!-- Calculator Component -->
   <section class="mb-16" aria-label="Calculator">
-    <ContractorVsEmployeeCalculator client:visible />
+    <ContractorVsEmployeeCalculator client:load />
   </section>
 
   <!-- How to Use Section -->
@@ -254,6 +254,81 @@ const schemaBreadcrumbs = [
       <strong>Factor in tax optimization.</strong> Contractors have more tax flexibility - retirement
       accounts (SEP-IRA, Solo 401k), business deductions, and potentially S-Corp election can improve
       the math significantly. Consult a tax professional.
+    </p>
+  </ContentSection>
+
+  <!-- Worked Example Section -->
+  <ContentSection title="A Real Example: $75/hr Contractor vs $120k Employee">
+    <p>
+      Say you have two offers: a contract role at <strong>$75/hr</strong> and a permanent role at
+      <strong>$120,000 salary</strong>. The contractor rate looks lower - but is it?
+    </p>
+    <h3 class="text-lg font-semibold mt-6 mb-3">Contractor at $75/hr</h3>
+    <p>
+      Assume 45 billable weeks per year (allowing 7 weeks for holiday, gaps between contracts, and
+      sick time) at 40 hours per week:
+    </p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li><strong>Gross income:</strong> 45 weeks x 40 hrs x $75 = $135,000</li>
+      <li><strong>Self-employment tax (15.3%):</strong> -$19,490 (on 92.35% of net)</li>
+      <li><strong>Health insurance (family):</strong> -$9,600/yr ($800/month)</li>
+      <li><strong>Business expenses (software, accounting, liability):</strong> -$4,000</li>
+      <li><strong>Federal + state income tax (~28% effective):</strong> -$28,600</li>
+      <li><strong>Net take-home: approximately $73,300</strong></li>
+    </ul>
+    <h3 class="text-lg font-semibold mt-6 mb-3">Employee at $120,000</h3>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li><strong>Base salary:</strong> $120,000</li>
+      <li><strong>Employer health insurance contribution:</strong> +$8,400/yr</li>
+      <li><strong>401(k) match (4%):</strong> +$4,800</li>
+      <li><strong>20 days PTO + 10 holidays:</strong> +$11,500 in paid rest value</li>
+      <li><strong>Federal + state income tax + FICA (~30% effective):</strong> -$36,000</li>
+      <li>
+        <strong
+          >Net take-home cash: approximately $84,000 + $24,700 in benefits = $108,700 total
+          compensation</strong>
+      </li>
+    </ul>
+    <p class="mt-4">
+      On a straight cash basis the contractor nets about $73k vs the employee's $84k. Factor in
+      benefits and the gap widens to $73k vs $109k. To truly break even, the contractor would need
+      roughly <strong>$95-100/hr</strong> billing the same hours - or significantly more billable weeks.
+    </p>
+  </ContentSection>
+
+  <!-- What Most People Get Wrong Section -->
+  <ContentSection title="What Most People Get Wrong">
+    <p>
+      Most people compare the headline numbers: $75/hr sounds like $156,000 annualised (2,080 hours)
+      against $120,000. That gap looks enormous. But several things quietly eat into it:
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Bench time</h3>
+    <p>
+      Contracts end, clients go quiet, and there's always a gap before the next one starts. Even
+      good contractors lose 6-10 weeks a year to unpaid bench time. At $75/hr that's $18,000-$30,000
+      in lost gross income per year.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Non-billable hours</h3>
+    <p>
+      Every hour spent on proposals, invoicing, chasing payments, and keeping skills current is
+      unpaid. Plan for at least 4-6 hours per week of non-billable work - that's 200-300 hours a
+      year of your time for free.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">The employer-paid FICA half</h3>
+    <p>
+      Employees pay 7.65% FICA; their employer matches it invisibly. Contractors pay both halves:
+      15.3%. On $100,000 of net earnings that's an extra $7,650 the contractor pays that an employee
+      never sees on their payslip.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Admin overhead</h3>
+    <p>
+      Accounting, bookkeeping, professional liability insurance, and a business bank account add up.
+      Budget $3,000-$5,000 per year as a realistic floor for running yourself as a business.
+    </p>
+    <p class="mt-4">
+      None of this means contracting is a bad deal - the flexibility and upside can be worth it. But
+      the break-even rate is almost always higher than people expect when they run their first
+      comparison.
     </p>
   </ContentSection>
 

@@ -46,6 +46,13 @@ const relatedCalculators = [
     icon: 'scale' as const,
     color: 'green' as const,
   },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate cost per candle across wax, fragrance, wicks, and packaging.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
 ];
 
 const faqs = [
@@ -110,7 +117,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <CandleWaxCalculator client:visible />
+    <CandleWaxCalculator client:load />
   </section>
 
   <ContentSection title="Wax Density by Type">

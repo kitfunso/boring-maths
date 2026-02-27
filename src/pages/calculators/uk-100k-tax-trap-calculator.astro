@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UK100kTaxTrapCalculator } from '../../components/calculators/UK100kTaxTrapCalculator';
 
-const title = 'Free UK 60% Tax Trap Calculator — Beat the 100k Tax Trap | Boring Math';
+const title = 'UK 100k Tax Trap Calculator - See Your Real 60% Tax Rate | Boring Math';
 const description =
   'Earning £105,000 in the UK means a 60% effective tax rate on £5,000 of your income. Between £100,000 and £125,140 you lose £1 of personal allowance for every £2 earned. Calculator shows your exact marginal rate and salary sacrifice escape strategies.';
 const keywords =
@@ -126,7 +126,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <UK100kTaxTrapCalculator client:visible />
+    <UK100kTaxTrapCalculator client:load />
   </section>
 
   <ContentSection title="Understanding the £100k Tax Trap">
@@ -188,6 +188,110 @@ const schemaBreadcrumbs = [
     <p>
       Scottish taxpayers in the trap zone face a slightly higher marginal rate (42% vs 40% for the
       Higher Rate portion), making pension optimization even more valuable.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Why the Effective Rate Is Exactly 60% - the Maths">
+    <p>
+      Between £100,000 and £125,140 your personal allowance shrinks by £1 for every £2 you earn.
+      That mechanism creates a hidden extra tax on top of the standard 40% higher rate.
+    </p>
+    <p class="mt-4">Here is the arithmetic on a single extra pound of income in that zone:</p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li>You earn £1 above £100,000</li>
+      <li>You pay <strong>40p income tax</strong> on that £1 (higher rate)</li>
+      <li>Your personal allowance falls by 50p (£1 divided by 2)</li>
+      <li>
+        That 50p was previously tax-free; it is now taxed at 40%, costing you <strong
+          >20p more</strong>
+      </li>
+      <li>National Insurance at 2% (above the Upper Earnings Limit) adds <strong>2p</strong></li>
+      <li><strong>Total: 62p lost from every £1 earned in this band</strong></li>
+    </ul>
+    <p class="mt-4">
+      The "60% trap" label comes from rounding: 40% tax + 20% effective PA taper = 60%, ignoring the
+      2% NI. Either way, it is the highest effective marginal rate faced by the vast majority of UK
+      employees.
+    </p>
+    <h3 class="text-lg font-semibold mt-6 mb-2">Worked example: earning £110,000 vs £99,000</h3>
+    <p>
+      Someone earning <strong>£99,000</strong> keeps their full £12,570 personal allowance. Their approximate
+      take-home (2024/25, England):
+    </p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li>Personal allowance: £12,570 tax-free</li>
+      <li>Basic rate band: 20% on £37,700 = £7,540</li>
+      <li>Higher rate: 40% on £48,730 = £19,492</li>
+      <li>National Insurance: approximately £5,490</li>
+      <li><strong>Take-home: approximately £64,478</strong></li>
+    </ul>
+    <p class="mt-4">
+      Someone earning <strong>£110,000</strong> has lost £5,000 of personal allowance (£10k above threshold,
+      divided by 2):
+    </p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li>Personal allowance: only £7,570 tax-free (£12,570 - £5,000)</li>
+      <li>
+        Tax and NI on the extra £11,000 of income: approximately £6,820 (at the 62% effective rate)
+      </li>
+      <li><strong>Take-home: approximately £69,170</strong></li>
+    </ul>
+    <p class="mt-4">
+      The person earning £110,000 takes home only about <strong>£4,692 more</strong> than the person on
+      £99,000 despite earning £11,000 more gross. That extra gross income was taxed at an average rate
+      of 57%.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How to Avoid the 100k Tax Trap">
+    <p>
+      The goal is simple: reduce your <strong>adjusted net income</strong> (the figure HMRC uses for personal
+      allowance purposes) to £100,000 or below. Several routes exist.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">1. Pension contributions via salary sacrifice</h3>
+    <p>
+      This is the most effective route for most employed people. Your employer reduces your gross
+      salary before PAYE, cutting both income tax and National Insurance. If you earn £120,000,
+      sacrificing £20,000 into your workplace pension:
+    </p>
+    <ul class="list-disc list-inside space-y-1 mt-2">
+      <li>Adjusted net income falls to £100,000</li>
+      <li>Full personal allowance restored: saves £5,040 in income tax</li>
+      <li>NI saving on £20,000 at 2%: saves £400</li>
+      <li><strong>Total saving: approximately £5,440 on a £20,000 pension contribution</strong></li>
+    </ul>
+    <p class="mt-2">
+      The effective cost to you is £14,560 to put £20,000 into your pension - a 27% discount, before
+      investment growth.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">
+      2. Personal pension contributions (Relief at Source)
+    </h3>
+    <p>
+      If salary sacrifice is not available, you can pay into a personal pension directly. Basic-rate
+      tax relief is added automatically (20%). You then claim the higher-rate relief and the
+      personal allowance restoration through Self Assessment. The cash saving is the same; you just
+      have to wait until your tax return.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">3. Gift Aid donations</h3>
+    <p>
+      Charitable donations under Gift Aid reduce your adjusted net income in the same way as pension
+      contributions. If you donate £800 to charity via Gift Aid, HMRC treats it as a £1,000 donation
+      and your adjusted net income falls by £1,000. This restores £500 of personal allowance, saving
+      £200 in tax - on top of the charity receiving tax relief. It is not as efficient as pensions
+      (you give the money away) but genuinely reduces your tax bill.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">4. Bonus sacrifice</h3>
+    <p>
+      If your bonus takes you over £100,000, ask whether your employer can pay it directly into your
+      pension as an employer contribution. Many do. This keeps you below the threshold without using
+      any of your annual allowance (employer contributions count separately under different rules).
+      Check with your payroll team well before bonus payment date.
+    </p>
+    <p class="mt-4">
+      Keep an eye on your <strong>annual pension allowance</strong> (£60,000 for most people in 2024/25).
+      High earners with total adjusted income above £260,000 face a tapered allowance down to £10,000.
+      If you are anywhere near these limits, a financial adviser will pay for themselves many times over.
     </p>
   </ContentSection>
 

@@ -55,6 +55,13 @@ const relatedCalculators = [
     icon: 'heart' as const,
     color: 'pink' as const,
   },
+  {
+    title: 'Catering Calculator',
+    description: 'Plan food quantities for larger events and professional catering.',
+    href: '/calculators/catering-calculator',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
 ];
 
 // FAQ data
@@ -153,7 +160,7 @@ const schemaBreadcrumbs = [
 
   <!-- Calculator Component -->
   <section class="mb-16" aria-label="Calculator">
-    <BBQCalculator client:visible />
+    <BBQCalculator client:load />
   </section>
 
   <!-- How to Use Section -->

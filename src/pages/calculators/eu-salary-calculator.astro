@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { EUSalaryCalculator } from '../../components/calculators/EUSalaryCalculator';
 
-const title = 'Free EU Salary Calculator 2025 — Net Pay Calculator Europe | Boring Math';
+const title = 'EU Salary Calculator 2026 - Compare Net Pay Across Europe | Boring Math';
 const description =
   'Free EU salary calculator comparing net pay across European countries. Calculate take-home salary after tax in Germany, France, Netherlands, Spain, Italy, and more.';
 const keywords =
@@ -38,6 +38,20 @@ const relatedCalculators = [
     href: '/calculators/contractor-vs-employee-calculator',
     icon: 'swap' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Work out your financial independence number.',
+    href: '/calculators/fire-calculator',
+    icon: 'trending' as const,
+    color: 'orange' as const,
+  },
+  {
+    title: 'UK Tax Calculator',
+    description: 'Calculate take-home pay in the UK.',
+    href: '/calculators/uk-tax-calculator',
+    icon: 'calculator' as const,
+    color: 'purple' as const,
   },
 ];
 
@@ -113,7 +127,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <EUSalaryCalculator client:visible />
+    <EUSalaryCalculator client:load />
   </section>
 
   <ContentSection title="Understanding EU Salaries">
@@ -161,6 +175,103 @@ const schemaBreadcrumbs = [
     <p class="mt-4 text-sm text-[var(--color-muted)]">
       Note: Higher tax countries often provide more public services, healthcare, education, and
       social safety nets.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="EUR 50,000 Salary: What You Actually Take Home in 3 Countries">
+    <p>
+      A gross salary of EUR 50,000 per year looks the same on paper across Europe. But once your
+      employer deducts income tax and social security contributions, the numbers diverge sharply.
+      Here is what a single person with no children, no special deductions, and a standard
+      employment contract would take home in three major economies in 2025.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-[var(--color-border)]">
+            <th class="text-left py-2 pr-4 font-semibold text-[var(--color-cream)]">Country</th>
+            <th class="text-right py-2 pr-4 font-semibold text-[var(--color-cream)]">Gross</th>
+            <th class="text-right py-2 pr-4 font-semibold text-[var(--color-cream)]">Income Tax</th>
+            <th class="text-right py-2 pr-4 font-semibold text-[var(--color-cream)]">Social Sec.</th
+            >
+            <th class="text-right py-2 font-semibold text-green-400">Net Take-Home</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">Germany</td>
+            <td class="text-right py-2 pr-4">EUR 50,000</td>
+            <td class="text-right py-2 pr-4">~EUR 10,300</td>
+            <td class="text-right py-2 pr-4">~EUR 10,200</td>
+            <td class="text-right py-2 text-green-400 font-semibold">~EUR 29,500</td>
+          </tr>
+          <tr class="border-b border-[var(--color-border)]/50">
+            <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">Netherlands</td>
+            <td class="text-right py-2 pr-4">EUR 50,000</td>
+            <td class="text-right py-2 pr-4">~EUR 12,800</td>
+            <td class="text-right py-2 pr-4">~EUR 3,100</td>
+            <td class="text-right py-2 text-green-400 font-semibold">~EUR 34,100</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">France</td>
+            <td class="text-right py-2 pr-4">EUR 50,000</td>
+            <td class="text-right py-2 pr-4">~EUR 7,800</td>
+            <td class="text-right py-2 pr-4">~EUR 11,400</td>
+            <td class="text-right py-2 text-green-400 font-semibold">~EUR 30,800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-sm text-[var(--color-muted)]">
+      Figures are estimates for a single earner with no children using standard 2025 rates. Germany
+      includes the solidarity surcharge. Netherlands figures include the general tax credit
+      (algemene heffingskorting). France employee social contributions are high but the income tax
+      bands are more generous at this level. Your actual net will vary based on your personal
+      situation.
+    </p>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      The headline finding: the Netherlands comes out EUR 4,600 ahead of Germany annually on the
+      same gross salary. That is nearly EUR 380 more per month, purely from tax structure
+      differences.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Cost of Living vs Take-Home Pay">
+    <p>
+      Net salary figures only tell you what lands in your bank account. They do not tell you what
+      that money buys. A EUR 34,000 net salary in Amsterdam and a EUR 29,500 net in Munich feel very
+      different once you factor in rent, transport, and daily costs.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">What to compare alongside net pay</h3>
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Rent:</strong> A one-bedroom flat in Amsterdam city
+        centre costs around EUR 1,800-2,200/month. In Munich it is EUR 1,500-1,900/month. Paris central
+        is EUR 1,400-1,800/month. These three cities are relatively close, but secondary cities in each
+        country are much cheaper.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Healthcare:</strong> In France and Germany, statutory
+        health insurance covers most costs with small co-payments. In the Netherlands you pay a mandatory
+        excess (eigen risico) of EUR 385 per year before coverage kicks in, plus a monthly premium of
+        around EUR 130-160.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Transport:</strong> Germany's Deutschlandticket gives
+        nationwide public transport for EUR 58/month. The Netherlands has good rail coverage but monthly
+        passes vary by route. France has the Navigo pass in Paris at around EUR 86/month.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Childcare:</strong> France has heavily subsidised creches
+        (EUR 200-400/month). Germany's Kita costs depend on the state and family income. Dutch childcare
+        is expensive (EUR 900-1,400/month per child) though the government reimburses a significant portion.
+      </li>
+    </ul>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      The practical upshot: if you are choosing between a job offer in Amsterdam vs Munich, compare
+      the net salary after your main fixed costs rather than raw take-home pay. For most single
+      professionals, the Netherlands' tax credit system and Germany's lower rents outside major
+      cities can narrow the gap considerably.
     </p>
   </ContentSection>
 

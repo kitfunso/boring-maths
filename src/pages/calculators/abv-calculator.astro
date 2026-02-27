@@ -50,6 +50,20 @@ const relatedCalculators = [
     icon: 'calculator' as const,
     color: 'amber' as const,
   },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate cost per unit for homebrew batches and recipe ingredients.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'CO2 Calculator',
+    description: 'Calculate CO2 volumes and carbonation for beer and sparkling drinks.',
+    href: '/calculators/co2-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
 ];
 
 const faqs = [
@@ -114,7 +128,7 @@ const schemaBreadcrumbs = [
   />
 
   <section class="mb-16" aria-label="Calculator">
-    <ABVCalculator client:visible />
+    <ABVCalculator client:load />
   </section>
 
   <ContentSection title="Understanding Gravity Readings">

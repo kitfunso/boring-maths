@@ -51,6 +51,20 @@ const relatedCalculators = [
     icon: 'chart' as const,
     color: 'yellow' as const,
   },
+  {
+    title: 'Margin Calculator',
+    description: 'Calculate gross margin and markup on any product or service.',
+    href: '/calculators/margin-calculator',
+    icon: 'percent' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'ROI Calculator',
+    description: 'Calculate return on investment for any spend or campaign.',
+    href: '/calculators/roi-calculator',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
 ];
 
 // FAQ data
@@ -125,7 +139,7 @@ const schemaBreadcrumbs = [
 
   <!-- Calculator Component -->
   <section class="mb-16" aria-label="Calculator">
-    <DiscountCalculator client:visible />
+    <DiscountCalculator client:load />
   </section>
 
   <!-- How to Use Section -->
