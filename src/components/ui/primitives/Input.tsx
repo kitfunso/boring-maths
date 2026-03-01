@@ -16,7 +16,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
 }
 
 const SIZE_CLASSES = {
-  sm: 'py-2.5 md:py-2 text-base',
+  sm: 'py-3 md:py-2 text-base',
   md: 'py-4 md:py-3 text-lg',
   lg: 'py-5 md:py-4 text-xl',
 };
@@ -184,6 +184,7 @@ export function Input({
       <input
         ref={inputRef}
         type={type}
+        inputMode={isNumber ? 'decimal' : undefined}
         disabled={disabled}
         min={min}
         max={max}

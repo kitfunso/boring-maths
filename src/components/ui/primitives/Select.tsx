@@ -26,7 +26,7 @@ export interface SelectProps<T = string> extends Omit<
 }
 
 const SIZE_CLASSES = {
-  sm: 'py-2 text-sm',
+  sm: 'py-3 text-base',
   md: 'py-3 text-lg',
   lg: 'py-4 text-xl',
 };

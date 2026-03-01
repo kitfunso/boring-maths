@@ -24,9 +24,9 @@ export interface ButtonGroupProps<T = string> {
 }
 
 const SIZE_CLASSES = {
-  sm: 'py-2 px-2 text-xs sm:text-sm',
-  md: 'py-2.5 px-2 text-xs sm:text-sm md:text-base',
-  lg: 'py-3 px-3 text-sm sm:text-base md:text-lg',
+  sm: 'py-3 px-3 text-sm',
+  md: 'py-3.5 px-3 text-sm sm:text-base',
+  lg: 'py-4 px-3 text-base sm:text-lg',
 };
 
 const GRID_COLS = {
