@@ -1,0 +1,721 @@
+---
+/**
+ * Guide: The UK £100k Tax Trap Explained
+ * Target queries: "100k tax trap", "60% tax trap", "100k tax trap calculator", "personal allowance taper"
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'The UK £100k Tax Trap Explained (2025/26) | Boring Math';
+const description =
+  'Earn £100k-£125,140 in the UK and you face a 60% effective tax rate. Here is how the personal allowance taper works, with worked examples and how to escape it.';
+const canonicalURL = '/guides/uk-100k-tax-trap-explained';
+
+const faqs = [
+  {
+    question: 'What is the £100k tax trap?',
+    answer:
+      'When your income exceeds £100,000, HMRC reduces your personal allowance by £1 for every £2 you earn above £100,000. This creates an effective marginal tax rate of 60% on income between £100,000 and £125,140 — the point at which the personal allowance disappears entirely.',
+  },
+  {
+    question: 'How does a 60% tax rate happen at £100k?',
+    answer:
+      'Between £100,000 and £125,140 you pay 40% income tax on earnings, plus you lose £1 of personal allowance for every £2 earned. That lost allowance was previously tax-free, so it effectively becomes taxable at 40%. 40% on the earnings + 40% on the lost allowance = 60% combined effective rate. Add 2% employee NIC and the real rate is 62%.',
+  },
+  {
+    question: 'How do I escape the 60% tax trap?',
+    answer:
+      'The most practical route is salary sacrifice into a pension. Your employer reduces your gross salary by the sacrifice amount, which reduces your "adjusted net income" used to calculate the personal allowance taper. Sacrificing enough to bring adjusted net income below £100,000 restores your full personal allowance and eliminates the 60% band entirely.',
+  },
+  {
+    question: 'Does salary sacrifice actually work for the 100k trap?',
+    answer:
+      'Yes. If your employer offers salary sacrifice, you save income tax at 40%, National Insurance at 2%, and you restore the personal allowance — giving an effective saving of 60% on every pound sacrificed. A £10,000 salary sacrifice by someone earning £110,000 saves approximately £6,200 in tax and NIC combined.',
+  },
+  {
+    question: 'What counts as "adjusted net income" for the taper?',
+    answer:
+      'Adjusted net income is your total income minus certain deductions: pension contributions (including salary sacrifice), Gift Aid donations, and trading losses. Crucially, it is gross pension contributions that count, not just employee contributions. Both employer and employee contributions made via salary sacrifice reduce your adjusted net income.',
+  },
+  {
+    question: 'Can I use a pension lump sum payment to get out of the trap?',
+    answer:
+      'Yes. A personal pension contribution (not via salary sacrifice) also reduces your adjusted net income. If your employer does not offer salary sacrifice, paying a lump sum into a personal pension or SIPP before 5 April achieves the same effect. You claim higher-rate tax relief via self-assessment.',
+  },
+  {
+    question: 'Is the 100k trap the same in Scotland?',
+    answer:
+      'The personal allowance taper applies to all UK taxpayers, including Scotland. However, Scottish income tax rates differ: the higher rate above £43,662 is 42% and the advanced rate above £75,000 is 45%. This means the effective rate in the taper zone is slightly different in Scotland, though the principle of salary sacrifice still reduces adjusted net income.',
+  },
+];
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'The UK £100k Tax Trap Explained (2025/26)',
+      description:
+        'How the personal allowance taper creates a 60% effective tax rate between £100,000 and £125,140, with worked examples and strategies to reduce your bill.',
+      url: 'https://boring-math.com/guides/uk-100k-tax-trap-explained',
+      author: {
+        '@type': 'Organization',
+        name: 'Boring Math',
+      },
+      dateModified: '2026-03-01',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <main class="guide-page">
+    <div class="container">
+      <header class="guide-header">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a> › <a href="/guides">Guides</a> › The UK £100k Tax Trap Explained
+        </nav>
+        <h1>{title}</h1>
+        <p class="subtitle">
+          2025/26 tax year &bull; Updated March 2026 &bull; Applies to England, Wales, and Northern
+          Ireland
+        </p>
+      </header>
+
+      <section class="tldr-block" aria-label="Quick summary">
+        <h2>TL;DR</h2>
+        <p>
+          Earn between £100,000 and £125,140 in the UK and every pound is taxed at an effective rate
+          of 60% (62% including NIC). This happens because your personal allowance — normally
+          £12,570 — is tapered away at a rate of £1 for every £2 earned above £100,000. The most
+          reliable fix is salary sacrifice into a pension, which reduces your adjusted net income
+          and restores the full allowance.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>How the Personal Allowance Taper Works</h2>
+        <p>
+          In the 2025/26 tax year, everyone in the UK gets a personal allowance of £12,570. This is
+          the amount you can earn before paying any income tax. Above that, you pay 20% (basic
+          rate), then 40% (higher rate above £50,270), and 45% (additional rate above £125,140).
+        </p>
+        <p>
+          Here is the part most people miss: once your income exceeds £100,000, that personal
+          allowance starts shrinking. HMRC reduces it by £1 for every £2 of income above £100,000.
+          So:
+        </p>
+        <ul>
+          <li>At £100,000: full personal allowance of £12,570</li>
+          <li>At £106,000: personal allowance reduced to £9,570</li>
+          <li>At £112,570: personal allowance halved to £6,285</li>
+          <li>At £125,140: personal allowance gone entirely (£0)</li>
+        </ul>
+        <p>
+          Once the allowance is fully withdrawn at £125,140, you continue at the standard 40% and
+          45% rates. The trap only exists in that £25,140 corridor.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Why the Effective Rate Is 60%, Not 40%</h2>
+        <p>
+          You might expect income above £100,000 to be taxed at 40% (the higher rate). But each
+          additional pound earned in this zone has a double cost:
+        </p>
+        <ol>
+          <li>You pay 40% income tax on the pound earned.</li>
+          <li>
+            You lose 50p of personal allowance (£1 allowance lost for every £2 earned). That 50p was
+            previously sheltered from tax, so it now gets taxed at 40%: an extra 20p.
+          </li>
+        </ol>
+        <p>
+          Total tax per additional pound: 40p + 20p = 60p. That is a 60% effective marginal rate.
+          Add 2% employee National Insurance contributions (which still apply in this range) and the
+          real rate is 62%.
+        </p>
+        <div class="example-box">
+          <h3>Worked example: earning £110,000</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gross income</td>
+                <td>£110,000</td>
+              </tr>
+              <tr>
+                <td>Personal allowance (tapered)</td>
+                <td>£7,570 (reduced from £12,570)</td>
+              </tr>
+              <tr>
+                <td>Basic rate tax (20% on £7,571-£50,270)</td>
+                <td>£8,540</td>
+              </tr>
+              <tr>
+                <td>Higher rate tax (40% on £50,271-£110,000)</td>
+                <td>£23,892</td>
+              </tr>
+              <tr>
+                <td>Employee NIC</td>
+                <td>~£4,254</td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Total tax and NIC</strong></td>
+                <td><strong>£36,686</strong></td>
+              </tr>
+              <tr class="total-row">
+                <td><strong>Take-home pay</strong></td>
+                <td><strong>£73,314</strong></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Compare that to earning exactly £100,000, where your take-home is approximately £67,430.
+            The extra £10,000 gross only adds £5,884 net. Effective rate on that extra £10k: <strong
+              >41.2% before NIC, 58.8% after NIC</strong
+            >.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>The Trap in Numbers: £100k vs £125,140</h2>
+        <p>Let's compare two salaries at the edges of the trap to show the full damage:</p>
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <h3>Salary: £100,000</h3>
+            <ul>
+              <li>Personal allowance: £12,570</li>
+              <li>Income tax: ~£27,432</li>
+              <li>Employee NIC: ~£3,924</li>
+              <li><strong>Take-home: ~£68,644</strong></li>
+            </ul>
+          </div>
+          <div class="comparison-card">
+            <h3>Salary: £125,140</h3>
+            <ul>
+              <li>Personal allowance: £0</li>
+              <li>Income tax: ~£42,516</li>
+              <li>Employee NIC: ~£4,426</li>
+              <li><strong>Take-home: ~£78,198</strong></li>
+            </ul>
+          </div>
+        </div>
+        <p>
+          Earning £25,140 more gross adds only £9,554 net. That is an effective rate of 62% on every
+          pound in the trap zone. Most people would rather keep £25,140 in a pension — where it
+          grows tax-free — than hand 62% to HMRC.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>How to Escape the 100k Tax Trap</h2>
+        <p>
+          The goal is to reduce your <strong>adjusted net income</strong> below £100,000. Adjusted net
+          income is your gross income minus certain deductions. The main tools are:
+        </p>
+        <h3>1. Salary sacrifice into a pension</h3>
+        <p>
+          This is the cleanest solution. Your employer reduces your gross salary before tax and NIC
+          are calculated. A £15,000 salary sacrifice on a £115,000 salary brings adjusted net income
+          to £100,000, restoring the full personal allowance. You save:
+        </p>
+        <ul>
+          <li>£6,000 in income tax (40% on £15,000)</li>
+          <li>£300 in employee NIC (2% on £15,000)</li>
+          <li>£2,514 from restored personal allowance (taxed at 40%)</li>
+          <li><strong>Total saving: approximately £8,814</strong></li>
+        </ul>
+        <p>
+          That £15,000 goes into your pension instead of HMRC. Use the <a
+            href="/calculators/uk-salary-sacrifice-calculator">UK Salary Sacrifice Calculator</a
+          > to model the exact saving for your salary, or check the <a
+            href="/calculators/uk-100k-tax-trap-calculator">UK 100k Tax Trap Calculator</a
+          > to see your current exposure.
+        </p>
+        <h3>2. Personal pension contributions (SIPP)</h3>
+        <p>
+          If your employer does not offer salary sacrifice, you can pay into a personal pension or
+          SIPP. The contribution reduces your adjusted net income on your self-assessment return.
+          You claim 40% higher-rate relief on top of the 20% basic rate relief added automatically.
+          The NIC saving is not available here — only salary sacrifice gets that — but the income
+          tax saving is identical.
+        </p>
+        <h3>3. Gift Aid donations</h3>
+        <p>
+          Charitable donations made under Gift Aid also reduce adjusted net income. If you donate
+          £1,000 to a registered charity and claim Gift Aid, your adjusted net income falls by
+          £1,250 (the grossed-up amount). This is less efficient than a pension — you're actually
+          giving the money away — but it can help if you're only slightly above £100,000 and have
+          planned charitable giving anyway.
+        </p>
+        <h3>4. Employer pension contributions</h3>
+        <p>
+          Direct employer contributions (not salary sacrifice, but extra employer payments) are
+          excluded from your taxable income. If your employer is willing to increase their pension
+          contribution in lieu of salary, this achieves the same effect as salary sacrifice. This is
+          worth asking about during pay negotiations.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Salary Sacrifice: The Maths at Different Salary Levels</h2>
+        <p>
+          The saving from salary sacrifice is largest in the taper zone. Here are the approximate
+          savings for different salaries:
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Salary</th>
+                <th>Sacrifice needed to hit £100k</th>
+                <th>Approx. tax + NIC saving</th>
+                <th>Effective saving rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>£105,000</td>
+                <td>£5,000</td>
+                <td>~£3,100</td>
+                <td>62%</td>
+              </tr>
+              <tr>
+                <td>£110,000</td>
+                <td>£10,000</td>
+                <td>~£6,200</td>
+                <td>62%</td>
+              </tr>
+              <tr>
+                <td>£115,000</td>
+                <td>£15,000</td>
+                <td>~£9,300</td>
+                <td>62%</td>
+              </tr>
+              <tr>
+                <td>£120,000</td>
+                <td>£20,000</td>
+                <td>~£12,400</td>
+                <td>62%</td>
+              </tr>
+              <tr>
+                <td>£125,140</td>
+                <td>£25,140</td>
+                <td>~£15,600</td>
+                <td>62%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          These are approximate figures. Use the <a
+            href="/calculators/uk-salary-sacrifice-calculator">Salary Sacrifice Calculator</a
+          > for precise numbers including your student loan, pension scheme type, and employer contribution.
+          For pension planning beyond the immediate tax saving, the <a
+            href="/calculators/uk-pension-calculator">UK Pension Calculator</a
+          > shows how this affects your retirement pot.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>What the Annual Pension Allowance Means for This Strategy</h2>
+        <p>
+          You can contribute up to £60,000 per year to pensions (or 100% of your salary if lower).
+          For most people in the £100k-£125k range, sacrificing £5,000-£25,000 stays comfortably
+          within this limit. The £60,000 annual allowance includes employer contributions, so check
+          your employer is not already contributing heavily before planning a large sacrifice.
+        </p>
+        <p>
+          If you have unused allowance from previous years (you can carry forward up to 3 years),
+          you may be able to make larger one-off contributions. This is particularly useful if your
+          salary has just crossed £100,000 for the first time.
+        </p>
+        <p>
+          The lifetime allowance was abolished in April 2024, removing the old cap on total pension
+          savings. You are no longer penalised for building a large pension pot, which makes the
+          salary sacrifice strategy even more attractive for long-term savers.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Common Mistakes People Make</h2>
+        <ul>
+          <li>
+            <strong>Assuming their employer offers salary sacrifice when they don't.</strong> Check your
+            payslip or ask HR. If your employer runs a "salary exchange" or "SMART pension" scheme, salary
+            sacrifice is available. If not, you'll need to use personal pension contributions instead.
+          </li>
+          <li>
+            <strong>Forgetting bonus payments.</strong> A £15,000 bonus can push you from £90,000 to £105,000
+            unexpectedly. Ask your employer whether bonus sacrifice is possible — many schemes allow it
+            and the saving on a £5,000 bonus sacrifice at this level is around £3,100.
+          </li>
+          <li>
+            <strong>Not filing self-assessment.</strong> If you earn over £100,000, you must register
+            for self-assessment and file a tax return each year. HMRC does not always contact you; the
+            responsibility is yours.
+          </li>
+          <li>
+            <strong>Thinking the trap disappears after £125,140.</strong> Above £125,140, you lose the
+            personal allowance entirely but the rate reverts to standard 40% and 45% rates. There is no
+            trap above that level — but you're also paying more tax overall.
+          </li>
+          <li>
+            <strong>Ignoring child benefit implications.</strong> If you or your partner receives child
+            benefit and either of you earns over £60,000, the High Income Child Benefit Charge applies.
+            This is a separate taper and stacks on top of the personal allowance taper. The combined effect
+            above £60,000 can be significant for families. This is a reason to consider salary sacrifice
+            even before reaching £100,000.
+          </li>
+        </ul>
+      </section>
+
+      <section class="calculator-cta">
+        <h2>Calculate Your Exposure</h2>
+        <p>
+          The fastest way to see the exact numbers for your salary is to use the calculators. Start
+          with the 100k Tax Trap Calculator to see your current tax position, then model a salary
+          sacrifice to find the optimal contribution.
+        </p>
+        <div class="cta-links">
+          <a href="/calculators/uk-100k-tax-trap-calculator" class="cta-primary">
+            UK 100k Tax Trap Calculator →
+          </a>
+          <a href="/calculators/uk-salary-sacrifice-calculator" class="cta-secondary">
+            Salary Sacrifice Calculator →
+          </a>
+          <a href="/calculators/uk-pension-calculator" class="cta-secondary">
+            UK Pension Calculator →
+          </a>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        {
+          faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </section>
+
+      <section class="browse-more">
+        <h2>Related Guides and Calculators</h2>
+        <p>
+          For a broader look at UK tax tools, see our <a href="/guides/best-uk-tax-calculators-2026"
+            >Best UK Tax Calculators 2026</a
+          > guide. For a deep dive into salary sacrifice mechanics, read the <a
+            href="/guides/salary-sacrifice-uk-guide">Salary Sacrifice UK Guide</a
+          >.
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    padding: 2rem 1rem 4rem;
+    color: var(--color-text, #e2e8f0);
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-bottom: 0.75rem;
+  }
+
+  .breadcrumb a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .guide-header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #a0aec0;
+    font-size: 0.95rem;
+  }
+
+  .tldr-block {
+    background: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid #6366f1;
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+  }
+
+  .tldr-block h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #818cf8;
+    margin-bottom: 0.6rem;
+  }
+
+  .tldr-block p {
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #c7d2fe;
+  }
+
+  p {
+    line-height: 1.75;
+    color: #a0aec0;
+    font-size: 0.97rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #a0aec0;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  strong {
+    color: #e2e8f0;
+  }
+
+  .example-box {
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .example-box h3 {
+    color: #818cf8;
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 600px) {
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .comparison-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .comparison-card h3 {
+    font-size: 1rem;
+    color: #c7d2fe;
+    margin-top: 0;
+  }
+
+  .comparison-card ul {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: #a0aec0;
+  }
+
+  th {
+    font-weight: 500;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .total-row td {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0;
+  }
+
+  .calculator-cta {
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .calculator-cta h2 {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .cta-primary {
+    background: #6366f1;
+    color: #fff;
+  }
+
+  .cta-primary:hover {
+    background: #4f46e5;
+    text-decoration: none;
+  }
+
+  .cta-secondary {
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    color: #818cf8;
+  }
+
+  .cta-secondary:hover {
+    border-color: #818cf8;
+    text-decoration: none;
+  }
+
+  .faq-section h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.8rem 0;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e2e8f0;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    color: #6366f1;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item p {
+    margin-top: 0.7rem;
+    color: #a0aec0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .browse-more p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+</style>

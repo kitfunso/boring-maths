@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import GraduationPartyPlanner from '../../components/calculators/GraduationPartyPlanner/GraduationPartyPlanner';
 
-const title = 'Free Graduation Party Planner — Food & Drink Calculator | Boring Math';
+const title = 'Graduation Party Calculator - Food, Drinks & Budget | Boring Math';
 const description =
-  'Plan your graduation party with our free calculator. Get food quantities, drink amounts, and cost estimates for high school, college, or graduate school celebrations.';
+  'Plan your graduation party in minutes. Get exact food quantities, drink amounts, and cost estimates for any guest count. Covers open houses, BBQs, and sit-down meals.';
 const keywords =
   'graduation party planner, graduation food calculator, how much food for graduation party, graduation party budget, open house food calculator, graduation celebration planner';
 const canonicalURL = '/calculators/graduation-party-calculator';
@@ -154,6 +154,122 @@ const schemaBreadcrumbs = [
     <p>
       The <strong>planning timeline</strong> helps you stay organized leading up to the party, ensuring
       nothing is forgotten at the last minute.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="What Does a Graduation Party Actually Cost?">
+    <p>
+      Costs vary enormously depending on whether you host at home or book a venue, and how many
+      guests you invite. Here are realistic ranges based on party type:
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Home Open House</h4>
+        <p class="text-2xl font-bold text-[var(--color-cream)] mb-1">£150-£400</p>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>25-50 guests</li>
+          <li>DIY food and drinks</li>
+          <li>Basic decorations</li>
+          <li>£6-£10 per head</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Backyard or Garden Party</h4>
+        <p class="text-2xl font-bold text-[var(--color-cream)] mb-1">£400-£900</p>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>30-80 guests</li>
+          <li>BBQ or buffet spread</li>
+          <li>Hired tables and chairs</li>
+          <li>£10-£18 per head</li>
+        </ul>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">Venue Party</h4>
+        <p class="text-2xl font-bold text-[var(--color-cream)] mb-1">£800-£2,500+</p>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>40-120 guests</li>
+          <li>Venue hire + catering</li>
+          <li>Full service included</li>
+          <li>£20-£40 per head</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      The biggest variable is labour. If you cook everything yourself, you can feed 40 guests for
+      around £120-£180. Hiring a caterer for the same number adds £300-£600 on top. For most home
+      parties, the food bill lands between £5 and £12 per person when you shop and cook yourself.
+    </p>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      Don't forget one-off costs: a graduation cake for 40 people runs £40-£80 from a supermarket,
+      or £80-£180 from a bakery. Balloons, banners, and table decorations add another £20-£60. If
+      you hire a marquee or gazebo, budget £80-£200 on top.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Food and Drink Quantities Per Person">
+    <p>
+      Getting quantities right is the most practical part of party planning. Too little and you're
+      embarrassed; too much and you've wasted money. These figures are for an open house where
+      guests arrive and leave over 2-3 hours, not a sit-down meal.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Food Item</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Per Person (open house)</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">For 40 guests</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Finger sandwiches or rolls</td>
+            <td class="py-2 pr-4">3-4 pieces</td>
+            <td class="py-2">120-160 pieces</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Sausage rolls or pastries</td>
+            <td class="py-2 pr-4">2-3 pieces</td>
+            <td class="py-2">80-120 pieces</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Crisps and nibbles</td>
+            <td class="py-2 pr-4">30g</td>
+            <td class="py-2">1.2 kg (6-8 sharing bags)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Fruit and vegetable platter</td>
+            <td class="py-2 pr-4">80-100g</td>
+            <td class="py-2">3.5-4 kg prepared</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Cake or dessert</td>
+            <td class="py-2 pr-4">1 slice</td>
+            <td class="py-2">40 portions (1 large sheet cake)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Soft drinks</td>
+            <td class="py-2 pr-4">2 glasses (500ml)</td>
+            <td class="py-2">20 litres (10 x 2L bottles)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Prosecco or wine (if serving)</td>
+            <td class="py-2 pr-4">1.5 glasses (225ml)</td>
+            <td class="py-2">9 litres (12 standard bottles)</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Tea and coffee</td>
+            <td class="py-2 pr-4">1.5 cups</td>
+            <td class="py-2">60 cups (400g coffee, 80 tea bags)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      Add 15% to all quantities as a buffer. If you have an afternoon open house (2-5pm), guests
+      usually eat less than at a lunchtime event because many will have eaten before arriving.
+      Conversely, an evening party expects more substantial food. Always have a mix of hot and cold
+      options, and label anything with allergens clearly.
     </p>
   </ContentSection>
 

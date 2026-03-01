@@ -1,0 +1,702 @@
+---
+/**
+ * Guide: Salary Sacrifice UK Guide
+ * Target queries: "salary sacrifice uk", "salary sacrifice pension", "salary sacrifice calculator", "is salary sacrifice worth it"
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Salary Sacrifice UK Guide 2025/26 - Is It Worth It? | Boring Math';
+const description =
+  'Salary sacrifice reduces income tax and NIC. At £50k, a £5k sacrifice saves £2,400 in tax plus £600 in NIC. At £110k it saves 62%. Here is how it works.';
+const canonicalURL = '/guides/salary-sacrifice-uk-guide';
+
+const faqs = [
+  {
+    question: 'What is salary sacrifice?',
+    answer:
+      'Salary sacrifice (also called salary exchange) is an agreement between you and your employer to reduce your gross salary, with the sacrificed amount paid directly into your pension instead. Because the reduction happens before tax and National Insurance are calculated, you save on both. Your employer also saves on employer NIC, and some pass that saving on to your pension too.',
+  },
+  {
+    question: 'Is salary sacrifice the same as personal pension contributions?',
+    answer:
+      'No. Personal pension contributions come out of your take-home pay after tax. You get tax relief added to the pension, but you do not save on National Insurance. With salary sacrifice, the contribution is made before tax and NIC, so you save on both. At 40% tax and 2% NIC, salary sacrifice saves £420 per £1,000 more than a personal contribution.',
+  },
+  {
+    question: 'Does salary sacrifice affect my state pension?',
+    answer:
+      'Only if it reduces your earnings below the Lower Earnings Limit (£6,396 in 2025/26). Above that threshold, NIC credits are maintained and your state pension entitlement is not affected. For most workers, salary sacrifice has no impact on state pension at all.',
+  },
+  {
+    question: 'Does salary sacrifice affect my mortgage?',
+    answer:
+      'It can. Mortgage lenders typically assess your ability to repay based on your contractual salary, which is reduced by the sacrifice. Some lenders accept the pre-sacrifice salary; others use the lower figure. If you are applying for a mortgage soon, discuss this with your mortgage broker before making a large sacrifice.',
+  },
+  {
+    question: 'Can my employer refuse salary sacrifice?',
+    answer:
+      'Yes. Salary sacrifice is voluntary for employers. Many large employers offer it through their pension scheme; smaller employers may not. There is no legal right to demand it. If your employer does not offer it, you can achieve a similar tax saving (but not the NIC saving) through personal pension contributions claimed via self-assessment.',
+  },
+  {
+    question: 'Is there a limit to salary sacrifice?',
+    answer:
+      'The total pension contribution (employee plus employer) cannot exceed £60,000 per year or 100% of your earnings, whichever is lower. Additionally, salary sacrifice cannot take your cash salary below the National Minimum Wage. In practice, most people sacrifice a fraction of their salary and neither limit causes issues.',
+  },
+  {
+    question: 'What is "is salary sacrifice worth it" — when is it NOT worth doing?',
+    answer:
+      "Salary sacrifice is usually worth doing if you're contributing to a pension anyway. The exception: if you need money now rather than at retirement, locking it into a pension is inflexible. Also, if you're very close to a tax credit threshold or benefit entitlement based on income, reducing your gross salary may affect those. Check the knock-on effects before committing.",
+  },
+];
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Article',
+      headline: 'Salary Sacrifice UK Guide 2025/26',
+      description:
+        'How salary sacrifice works, the tax and NIC savings at different salary levels, and when it is worth doing.',
+      url: 'https://boring-math.com/guides/salary-sacrifice-uk-guide',
+      author: {
+        '@type': 'Organization',
+        name: 'Boring Math',
+      },
+      dateModified: '2026-03-01',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <main class="guide-page">
+    <div class="container">
+      <header class="guide-header">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a> › <a href="/guides">Guides</a> › Salary Sacrifice UK Guide
+        </nav>
+        <h1>{title}</h1>
+        <p class="subtitle">2025/26 tax year &bull; Updated March 2026 &bull; UK employees only</p>
+      </header>
+
+      <section class="tldr-block" aria-label="Quick summary">
+        <h2>TL;DR</h2>
+        <p>
+          Salary sacrifice lets you redirect part of your gross salary into your pension before tax
+          and National Insurance are deducted. At a basic rate (20% tax, 8% NIC below £50,270), you
+          effectively put £1 into your pension for around 72p out of pocket. At higher rate (40%
+          tax, 2% NIC), that drops to around 58p. For anyone in the £100k-£125,140 personal
+          allowance taper zone, the effective rate is 38p per £1, one of the best legitimate tax
+          savings in the UK.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>How Salary Sacrifice Works</h2>
+        <p>
+          The mechanism is straightforward. You agree with your employer to reduce your contractual
+          salary by a set amount. Your employer pays that amount directly into your pension scheme.
+          Because this happens before your payslip is calculated, your taxable pay is lower, and
+          both income tax and National Insurance are calculated on the reduced figure.
+        </p>
+        <p>
+          It is not a loop-hole. HMRC explicitly allows it, and it has been a standard part of UK
+          workplace pension schemes for decades. The government prefers people to save for
+          retirement, so it deliberately structures the rules to make salary sacrifice more
+          efficient than post-tax contributions.
+        </p>
+        <h3>The difference from a personal pension contribution</h3>
+        <p>
+          If you make a personal pension contribution from your take-home pay, the pension provider
+          claims 20% basic rate relief from HMRC and adds it to your pot. Higher-rate taxpayers can
+          claim the additional relief via self-assessment. What you cannot claim back is the
+          National Insurance you already paid on those earnings.
+        </p>
+        <p>
+          With salary sacrifice, there is no NIC paid in the first place. On a £5,000 sacrifice:
+        </p>
+        <ul>
+          <li>
+            Personal contribution (40% taxpayer): saves £2,000 in income tax via relief. NIC saving:
+            £0.
+          </li>
+          <li>
+            Salary sacrifice (40% taxpayer): saves £2,000 in income tax + £100 in employee NIC (2%).
+            Total saving: £2,100.
+          </li>
+        </ul>
+        <p>
+          Over a career, that NIC saving compounds. Your employer also saves employer NIC (13.8%
+          below the Upper Secondary Threshold), and many employers pass some or all of this saving
+          to your pension as a bonus contribution.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>The Real Saving at Different Salary Levels</h2>
+        <p>
+          The tax saving depends on which rate bands your sacrifice falls into. Here are the numbers
+          for a £5,000 annual salary sacrifice at four different salary levels:
+        </p>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Salary</th>
+                <th>Tax rate on sacrifice</th>
+                <th>NIC rate on sacrifice</th>
+                <th>Total saving per £5,000 sacrifice</th>
+                <th>Net cost to you</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>£30,000</td>
+                <td>20%</td>
+                <td>8%</td>
+                <td>£1,400</td>
+                <td>£3,600</td>
+              </tr>
+              <tr>
+                <td>£50,000</td>
+                <td>20-40% (mixed)</td>
+                <td>8%</td>
+                <td>~£1,800</td>
+                <td>~£3,200</td>
+              </tr>
+              <tr>
+                <td>£80,000</td>
+                <td>40%</td>
+                <td>2%</td>
+                <td>£2,100</td>
+                <td>£2,900</td>
+              </tr>
+              <tr>
+                <td>£110,000</td>
+                <td>60% (taper zone)</td>
+                <td>2%</td>
+                <td>£3,100</td>
+                <td>£1,900</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The numbers at £110,000 are striking. You put £5,000 into your pension at a net cost of
+          £1,900. HMRC effectively contributes £3,100. This is why salary sacrifice is particularly
+          valuable for those in the £100k-£125,140 taper zone — see the <a
+            href="/guides/uk-100k-tax-trap-explained">UK 100k Tax Trap guide</a
+          > for a full explanation.
+        </p>
+        <p>
+          Use the <a href="/calculators/uk-salary-sacrifice-calculator"
+            >UK Salary Sacrifice Calculator</a
+          > to get the precise figures for your salary, pension scheme, and student loan plan.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Worked Examples at Each Salary Level</h2>
+
+        <div class="example-box">
+          <h3>£30,000 salary: £3,000 sacrifice</h3>
+          <p>All income is in the basic rate band (20% tax, 8% NIC).</p>
+          <ul>
+            <li>Income tax saving: £600</li>
+            <li>Employee NIC saving: £240</li>
+            <li>Total saving: £840</li>
+            <li>Take-home reduction: £2,160 (not £3,000)</li>
+          </ul>
+          <p>
+            Your pension receives £3,000. You lose £2,160 from take-home pay. You can also check
+            whether your employer passes their NIC saving (13.8% of £3,000 = £414) to your pension —
+            some employers add this automatically.
+          </p>
+        </div>
+
+        <div class="example-box">
+          <h3>£50,000 salary: £5,000 sacrifice</h3>
+          <p>
+            At £50,000, the first few thousand of sacrifice falls partly in the basic rate band and
+            partly crosses the higher rate threshold (£50,270). Approximately £4,730 of the
+            sacrifice is at 20% and £270 at 40% (numbers approximate because the personal allowance
+            affects exact thresholds).
+          </p>
+          <ul>
+            <li>Income tax saving: approximately £1,050</li>
+            <li>
+              Employee NIC saving: £400 (8% on all £5,000, assuming all below the £50,270 threshold)
+            </li>
+            <li>Total saving: approximately £1,450</li>
+            <li>Take-home reduction: £3,550</li>
+          </ul>
+          <p>
+            At £50,000 you are near the basic-to-higher rate boundary. Sacrifice that takes your
+            taxable income below £50,270 saves at 20% + 8% NIC (28% total). Any sacrifice in the
+            higher rate band saves 40% + 2% NIC (42% total). This is why the exact crossing point
+            matters — use the calculator to find your threshold.
+          </p>
+        </div>
+
+        <div class="example-box">
+          <h3>£80,000 salary: £10,000 sacrifice</h3>
+          <p>All in the higher rate band (40% tax, 2% NIC above £50,270).</p>
+          <ul>
+            <li>Income tax saving: £4,000</li>
+            <li>Employee NIC saving: £200</li>
+            <li>Total saving: £4,200</li>
+            <li>Take-home reduction: £5,800</li>
+          </ul>
+          <p>
+            You put £10,000 into your pension for a net cost of £5,800. The effective rate is 42%.
+            If your employer also adds their NIC saving (13.8% of £10,000 = £1,380), your pension
+            receives £11,380 while your take-home only drops by £5,800.
+          </p>
+        </div>
+
+        <div class="example-box">
+          <h3>£120,000 salary: £20,000 sacrifice</h3>
+          <p>
+            This salary sits in the personal allowance taper zone. The full £20,000 sacrifice falls
+            in the 60% effective rate band, because every pound reduces both taxable income at 40%
+            and restores tapered personal allowance (also taxed at 40%).
+          </p>
+          <ul>
+            <li>Income tax saving: approximately £10,057 (including restored allowance value)</li>
+            <li>Employee NIC saving: £400 (2% on £20,000)</li>
+            <li>Total saving: approximately £10,457</li>
+            <li>Take-home reduction: £9,543</li>
+          </ul>
+          <p>
+            You sacrifice £20,000 and your take-home drops by under £9,600. Your pension receives
+            £20,000. The effective saving rate exceeds 52% — better than any ISA or savings account
+            return. See the <a href="/calculators/uk-100k-tax-trap-calculator"
+              >100k Tax Trap Calculator</a
+            > for exact numbers at your salary.
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <h2>Salary Sacrifice vs Personal Pension Contributions: Side by Side</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Salary Sacrifice</th>
+                <th>Personal Pension (SIPP)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Income tax relief</td>
+                <td>Yes (via reduced gross pay)</td>
+                <td>Yes (provider claims 20%, you claim 40%+ via self-assessment)</td>
+              </tr>
+              <tr>
+                <td>Employee NIC saving</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Employer NIC saving</td>
+                <td>Yes (employer may share it)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Affects adjusted net income for taper</td>
+                <td>Yes</td>
+                <td>Yes (grossed-up amount)</td>
+              </tr>
+              <tr>
+                <td>Requires employer participation</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Can affect mortgage borrowing</td>
+                <td>Sometimes (lower contractual salary)</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Admin</td>
+                <td>Employer handles it</td>
+                <td>You submit via self-assessment</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          For most employees with access to salary sacrifice, it is the better option because of the
+          NIC saving. The only scenario where a personal pension beats it is if you have no salary
+          sacrifice scheme available, or if reducing your contractual salary would cause problems
+          with a pending mortgage application.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>The 100k Trap: Why Salary Sacrifice Is Especially Valuable Here</h2>
+        <p>
+          Salary sacrifice is effective at all salary levels, but it is transformational for people
+          earning £100,000-£125,140. In this range, the personal allowance taper creates an
+          effective 60% marginal tax rate. Every pound of salary sacrifice in this zone:
+        </p>
+        <ul>
+          <li>Reduces income tax by 40p (higher rate on the pound saved)</li>
+          <li>Restores 50p of personal allowance, which saves another 20p in tax</li>
+          <li>Saves 2p in employee NIC</li>
+          <li>Total saving: approximately 62p per pound sacrificed</li>
+        </ul>
+        <p>
+          That means a £10,000 salary sacrifice costs you around £3,800 in take-home pay and goes
+          into your pension. No legal investment strategy comes close to that return. The <a
+            href="/guides/uk-100k-tax-trap-explained">100k Tax Trap Guide</a
+          > explains the mechanics in full detail. The <a
+            href="/calculators/uk-salary-sacrifice-calculator">Salary Sacrifice Calculator</a
+          > shows the exact numbers for your salary.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>Things to Check Before You Start</h2>
+        <ul>
+          <li>
+            <strong>Ask HR if your employer offers salary sacrifice.</strong> Look for "salary exchange"
+            or "SMART pension" in your benefits documentation. Not all employers offer it.
+          </li>
+          <li>
+            <strong>Check if your employer passes on their NIC saving.</strong> Some add 13.8% of your
+            sacrifice to your pension. Others keep it. This is worth asking about — it can add thousands
+            to your pension annually.
+          </li>
+          <li>
+            <strong>Confirm the minimum wage floor.</strong> Your remaining cash salary after sacrifice
+            cannot fall below the National Living Wage (£12.21/hour from April 2025). For part-time workers,
+            this can limit how much you can sacrifice.
+          </li>
+          <li>
+            <strong>Review death in service and life cover.</strong> Some employer schemes base life cover
+            on your contractual salary. A large sacrifice could reduce the payout. Check your policy before
+            committing.
+          </li>
+          <li>
+            <strong>Consider annual allowance timing.</strong> You can contribute up to £60,000 per year
+            across all pension inputs. Carry-forward allows up to three years of unused allowance. If
+            you're planning a large one-off sacrifice, verify you have enough allowance available.
+          </li>
+        </ul>
+      </section>
+
+      <section class="calculator-cta">
+        <h2>Calculate Your Saving</h2>
+        <p>
+          The fastest way to see your exact numbers is to run the calculator. Enter your salary,
+          current pension contribution, and sacrifice amount to see the tax and NIC saving
+          instantly.
+        </p>
+        <div class="cta-links">
+          <a href="/calculators/uk-salary-sacrifice-calculator" class="cta-primary">
+            Salary Sacrifice Calculator →
+          </a>
+          <a href="/calculators/uk-tax-calculator" class="cta-secondary"> UK Tax Calculator → </a>
+          <a href="/calculators/uk-100k-tax-trap-calculator" class="cta-secondary">
+            100k Tax Trap Calculator →
+          </a>
+          <a href="/calculators/uk-pension-calculator" class="cta-secondary">
+            UK Pension Calculator →
+          </a>
+        </div>
+      </section>
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        {
+          faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </section>
+
+      <section class="browse-more">
+        <h2>Related Reading</h2>
+        <p>
+          If you earn over £100,000, read the <a href="/guides/uk-100k-tax-trap-explained"
+            >UK 100k Tax Trap Explained</a
+          > guide first — salary sacrifice is the primary escape route. For a broader look at UK tax tools,
+          see <a href="/guides/best-uk-tax-calculators-2026">Best UK Tax Calculators 2026</a>. <a
+            href="/calculators">Browse all calculators →</a
+          >
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    padding: 2rem 1rem 4rem;
+    color: var(--color-text, #e2e8f0);
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-bottom: 0.75rem;
+  }
+
+  .breadcrumb a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .guide-header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #a0aec0;
+    font-size: 0.95rem;
+  }
+
+  .tldr-block {
+    background: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid #6366f1;
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+  }
+
+  .tldr-block h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #818cf8;
+    margin-bottom: 0.6rem;
+  }
+
+  .tldr-block p {
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: #c7d2fe;
+  }
+
+  p {
+    line-height: 1.75;
+    color: #a0aec0;
+    font-size: 0.97rem;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #a0aec0;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  strong {
+    color: #e2e8f0;
+  }
+
+  .example-box {
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .example-box h3 {
+    color: #818cf8;
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  .example-box ul {
+    margin: 0.5rem 0;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: #a0aec0;
+  }
+
+  th {
+    font-weight: 500;
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .calculator-cta {
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .calculator-cta h2 {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .cta-primary {
+    background: #6366f1;
+    color: #fff;
+  }
+
+  .cta-primary:hover {
+    background: #4f46e5;
+    text-decoration: none;
+  }
+
+  .cta-secondary {
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    color: #818cf8;
+  }
+
+  .cta-secondary:hover {
+    border-color: #818cf8;
+    text-decoration: none;
+  }
+
+  .faq-section h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.8rem 0;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e2e8f0;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    color: #6366f1;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item p {
+    margin-top: 0.7rem;
+    color: #a0aec0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .browse-more p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+</style>

@@ -25,5 +25,8 @@
 # All calculator pages (must come after more specific rules)
 /calculators/*/              /calculators/:splat          301!
 
+# Guide pages
+/guides/*/                   /guides/:splat               301!
+
 # Calculators index - redirect to homepage (which shows all calculators)
 /calculators/                /                            301!

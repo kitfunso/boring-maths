@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import BirthdayPartyBudget from '../../components/calculators/BirthdayPartyBudget/BirthdayPartyBudget';
 
-const title = 'Free Birthday Party Budget Calculator — Kids Party Cost Planner | Boring Math';
+const title = 'Birthday Party Cost Calculator - Kids Party Budget | Boring Math';
 const description =
-  "Plan your child's birthday party budget with our free calculator. Estimate costs for venue, food, decorations, entertainment, and goody bags based on guest count and party style.";
+  'Calculate birthday party costs by age and guest count. Average kids party: £200-£500. Find out your budget for venue, food, entertainment, and goody bags before you book.';
 const keywords =
   'birthday party budget calculator, kids party cost, children birthday budget, party planning calculator, how much for birthday party, party expense planner';
 const canonicalURL = '/calculators/birthday-party-calculator';
@@ -156,6 +156,110 @@ const schemaBreadcrumbs = [
       The <strong>age-specific tips</strong> are tailored to your child's developmental stage and what
       activities work best for their age group.
     </p>
+  </ContentSection>
+
+  <ContentSection title="Birthday Party Budget by Age Group">
+    <p>
+      What makes sense for a 3-year-old is completely different from a 10-year-old's party. Here is
+      what typical parties cost at each stage, and what actually matters to children at that age.
+    </p>
+    <div class="space-y-4 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-1">Ages 1-3: Keep it tiny</h4>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Toddlers don't know it's their birthday. The party is really for the parents and close
+          family. Keep it to 6-10 guests, 1-1.5 hours, and entirely at home. Typical spend: <strong
+            class="text-[var(--color-cream)]">£80-£180</strong
+          >. You need cake, a few sandwiches, and balloons. That's genuinely it.
+        </p>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-1">Ages 4-6: First "real" parties</h4>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Kids this age remember the party and care about themes. A soft play centre or home party
+          works well. Invite 8-12 children, expect 2 hours. Typical spend: <strong
+            class="text-[var(--color-cream)]">£150-£350</strong
+          >. Venue soft play parties often include food, which simplifies planning significantly. If
+          home-based, spend about £7-£10 per child on food and goody bags.
+        </p>
+      </div>
+      <div class="bg-yellow-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-yellow-400 mb-1">Ages 7-10: Activity parties</h4>
+        <p class="text-sm text-[var(--color-subtle)]">
+          This is when bowling, trampolining, laser tag, and cinema parties become popular. Activity
+          venues charge £8-£18 per child for the activity, plus you'll likely add pizza or party
+          food. Typical spend for 12 guests: <strong class="text-[var(--color-cream)]"
+            >£200-£450</strong
+          >. Home parties with organised games (pass the parcel, treasure hunt) cost £100-£200 for
+          the same number.
+        </p>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-1">Ages 11+: Experience over stuff</h4>
+        <p class="text-sm text-[var(--color-subtle)]">
+          Older kids prefer smaller, more grown-up experiences: escape rooms (£15-£25 per person),
+          cinema trips, bowling, or a sleepover with 4-6 close friends. Guest lists get smaller but
+          the per-head cost rises. Typical spend: <strong class="text-[var(--color-cream)]"
+            >£150-£400</strong
+          > for a smaller group with a focused activity.
+        </p>
+      </div>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="How to Cut Costs Without Cutting Corners">
+    <p>
+      The average parent spends more than they planned to on birthday parties. These practical
+      changes make the biggest difference without your child noticing.
+    </p>
+    <div class="space-y-3 mt-4 text-[var(--color-subtle)]">
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Host at home or a free outdoor space
+        </h4>
+        <p>
+          Venue hire is the single biggest cost. A park, your garden, or your living room costs
+          nothing. You save £80-£300 compared to soft play or activity centres. Add a rented bouncy
+          castle (£60-£100) and you still come out ahead.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Buy supermarket cake, not bakery</h4>
+        <p>
+          A decorated supermarket birthday cake for 20 serves costs £12-£25. The equivalent from an
+          independent bakery runs £40-£80. Kids are impressed by candles and singing, not fondant
+          craftsmanship. Save the bakery cake for milestone birthdays.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Replace goody bags with one activity
+        </h4>
+        <p>
+          Goody bags cost £3-£6 per child and are often binned within a day. Replace them with a
+          take-home craft made at the party (slime, decorated biscuits, painted flowerpots) for
+          roughly the same cost but far more memorable. For 10 children, you spend the same £30-£60
+          but the children actually remember it.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Limit the guest list ruthlessly</h4>
+        <p>
+          Every child added costs £7-£15 more in food, goody bag, and venue space. Going from 15 to
+          10 guests saves £35-£75 and makes the party easier to manage. Younger children genuinely
+          prefer smaller parties where they can see their close friends more easily.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Skip the entertainer for under-5s</h4>
+        <p>
+          Hiring a children's entertainer (magician, party host) costs £100-£250 for an hour.
+          Children under 5 often find performances overstimulating or confusing. Free party games
+          (musical statues, sleeping lions, pass the parcel) work better and cost the price of a few
+          small prizes (£5-£15 total).
+        </p>
+      </div>
+    </div>
   </ContentSection>
 
   <FAQSection faqs={faqs} />
