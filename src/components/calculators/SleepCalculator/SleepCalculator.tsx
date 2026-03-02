@@ -8,13 +8,7 @@ import type { ChangeEvent } from 'react';
 import { useMemo } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSleepTimes, calculateNapTimes } from './calculations';
-import {
-  getDefaultInputs,
-  AGE_SLEEP_NEEDS,
-  type SleepInputs,
-  type CalculationMode,
-  type AgeGroup,
-} from './types';
+import { getDefaultInputs, type SleepInputs, type CalculationMode, type AgeGroup } from './types';
 import {
   ThemeProvider,
   Card,
@@ -100,8 +94,6 @@ export default function SleepCalculator() {
         return 'bg-blue-950/50 border-blue-500/30';
     }
   };
-
-  const needs = AGE_SLEEP_NEEDS[inputs.ageGroup];
 
   // Generate share text based on mode
   const getShareText = () => {

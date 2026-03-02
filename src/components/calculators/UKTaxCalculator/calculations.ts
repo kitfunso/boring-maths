@@ -357,9 +357,6 @@ export function calculateUKTax(inputs: UKTaxInputs): UKTaxResult {
     taxCodeOverride
   );
 
-  // Taxable income
-  const taxableIncome = Math.max(0, taxableGross - personalAllowance);
-
   // Income tax - for relief at source, pension doesn't reduce taxable income
   // For salary sacrifice, pension already reduced the gross
   let incomeTaxGross = taxableGross;

@@ -22,7 +22,6 @@ import {
   Input,
   Slider,
   Grid,
-  Divider,
   ResultCard,
   MetricCard,
   Alert,

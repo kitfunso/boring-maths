@@ -1721,6 +1721,45 @@ const categoryColors: Record<string, string> = {
       pink: 'from-pink-500 to-rose-500',
     };
 
+    function createRecentCard(item: RecentItem, data: { title: string; icon: string; color: string }) {
+      const gradient = colorGradients[data.color] || colorGradients.blue;
+      const displayTitle = data.title.replace(/\s*Calculator$/i, '');
+
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.className =
+        'recent-card glass rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-white/10 transition-all group flex-shrink-0 snap-start whitespace-nowrap';
+
+      const iconContainer = document.createElement('div');
+      iconContainer.className = `w-6 h-6 rounded-md bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0`;
+
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('class', 'w-3.5 h-3.5 text-white');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', 'currentColor');
+      svg.setAttribute('viewBox', '0 0 24 24');
+
+      const path = document.createElementNS(svgNS, 'path');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('stroke-width', '1.5');
+      path.setAttribute('d', data.icon);
+      svg.appendChild(path);
+
+      iconContainer.appendChild(svg);
+
+      const titleSpan = document.createElement('span');
+      titleSpan.className =
+        'text-xs text-[var(--color-cream)] group-hover:text-[var(--color-accent)] transition-colors';
+      titleSpan.textContent = displayTitle;
+
+      link.appendChild(iconContainer);
+      link.appendChild(titleSpan);
+
+      return link;
+    }
+
     function renderRecentlyUsed() {
       const recent = getRecentlyUsed();
 
@@ -1733,24 +1772,13 @@ const categoryColors: Record<string, string> = {
 
       recentlyUsedSection.classList.remove('hidden');
 
-      recentlyUsedGrid.innerHTML = recent.map(item => {
+      recentlyUsedGrid.textContent = '';
+
+      recent.forEach(item => {
         const data = calculatorData[item.href];
-        if (!data) return '';
-
-        const gradient = colorGradients[data.color] || colorGradients.blue;
-        const displayTitle = data.title.replace(/\s*Calculator$/i, '');
-
-        return `
-          <a href="${item.href}" class="recent-card glass rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-white/10 transition-all group flex-shrink-0 snap-start whitespace-nowrap">
-            <div class="w-6 h-6 rounded-md bg-gradient-to-br ${gradient} flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="${data.icon}" />
-              </svg>
-            </div>
-            <span class="text-xs text-[var(--color-cream)] group-hover:text-[var(--color-accent)] transition-colors">${displayTitle}</span>
-          </a>
-        `;
-      }).join('');
+        if (!data) return;
+        recentlyUsedGrid.appendChild(createRecentCard(item, data));
+      });
     }
 
     // Track calculator clicks
