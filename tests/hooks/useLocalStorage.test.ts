@@ -1,6 +1,6 @@
 import { render, screen, act } from '@testing-library/preact';
 import { h } from 'preact';
-import { describe, it, expect } from 'vitest';
+import { afterEach, describe, it, expect } from 'vitest';
 import { useLocalStorage } from '../../src/hooks/useLocalStorage';
 
 function LocalStorageHarness() {
@@ -9,10 +9,23 @@ function LocalStorageHarness() {
 }
 
 describe('useLocalStorage', () => {
-  it('resets state to initial value when storage key is removed in another tab', () => {
-    localStorage.getItem = () => JSON.stringify('saved-value');
+  afterEach(() => {
+    localStorage.clear();
+  });
 
+  it('resets state to initial value when storage key is removed in another tab', () => {
     render(h(LocalStorageHarness, {}));
+    expect(screen.getByText('initial-value')).toBeInTheDocument();
+
+    act(() => {
+      window.dispatchEvent(
+        new StorageEvent('storage', {
+          key: 'test-storage-key',
+          newValue: JSON.stringify('saved-value'),
+        })
+      );
+    });
+
     expect(screen.getByText('saved-value')).toBeInTheDocument();
 
     act(() => {
