@@ -16,7 +16,6 @@ import {
   Grid,
   Divider,
   ResultCard,
-  MetricCard,
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';

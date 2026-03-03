@@ -11,8 +11,6 @@
 import { useState, useEffect, useCallback, useRef } from 'preact/hooks';
 import { type Currency, getInitialCurrency } from '../lib/regions';
 
-const CURRENCY_STORAGE_KEY = 'boring-math-currency';
-
 export function useLocalStorage<T>(
   key: string,
   initialValue: T | (() => T)
@@ -101,7 +99,14 @@ export function useLocalStorage<T>(
     if (typeof window === 'undefined') return;
 
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === key && e.newValue) {
+      if (e.key === key) {
+        if (e.newValue === null) {
+          const initial =
+            typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
+          setState(initial);
+          return;
+        }
+
         try {
           setState(JSON.parse(e.newValue));
         } catch {
@@ -112,7 +117,7 @@ export function useLocalStorage<T>(
 
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
-  }, [key]);
+  }, [key, initialValue]);
 
   // Clear function to reset to initial value
   const clear = useCallback(() => {
