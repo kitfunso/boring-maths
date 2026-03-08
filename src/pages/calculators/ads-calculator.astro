@@ -12,9 +12,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ADSCalculator } from '../../components/calculators/ADSCalculator';
 
 const title =
-  'Free UK Additional Dwelling Supplement Calculator — Scotland ADS + LBTT | Boring Math';
+  'Additional Dwelling Supplement Calculator (Scotland ADS + LBTT 2025/26) | Boring Math';
 const description =
-  "Calculate Scotland's Additional Dwelling Supplement (ADS) on second homes and buy-to-let properties. Includes LBTT and first-time buyer relief. Instant results, no signup.";
+  "Calculate Scotland's Additional Dwelling Supplement (ADS) and LBTT in seconds. See your exact 6% ADS bill on second homes and buy-to-let purchases with worked examples.";
 const keywords =
   'additional dwelling supplement calculator, additional dwelling supplement, ads calculator scotland, scotland property tax, lbtt calculator, scotland stamp duty, second home tax scotland, buy to let scotland, ads tax rate, scotland additional dwelling';
 const canonicalURL = '/calculators/ads-calculator';
@@ -23,6 +23,13 @@ const siteUrl = 'https://boring-math.com';
 const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'ADS Calculator' }];
 
 const relatedCalculators = [
+  {
+    title: 'ADS Guide (Scotland)',
+    description: 'Worked examples for additional dwelling supplement bills.',
+    href: '/calculators/uk-tax/additional-dwelling-supplement-explained',
+    icon: 'chart' as const,
+    color: 'amber' as const,
+  },
   {
     title: 'UK Stamp Duty Guide',
     description: 'Complete SDLT, LBTT & LTT guide 2025/26.',

@@ -28,6 +28,7 @@ export interface Props {
   relatedCalculators?: RelatedCalculator[];
   showAds?: boolean;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -38,6 +39,7 @@ const {
   relatedCalculators = [],
   showAds = false,
   ogImage,
+  noindex = false,
 } = Astro.props;
 
 // Generate breadcrumb items from canonical URL
@@ -113,6 +115,7 @@ const colorClasses: Record<string, string> = {
   keywords={keywords}
   canonicalURL={canonicalURL}
   ogImage={calculatorOgImage}
+  noindex={noindex}
 >
   <!-- Schema.org markup slot -->
   <slot name="schema" />

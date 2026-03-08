@@ -1,5 +1,37 @@
 # Backlink Strategy for Boring Math Calculators
 
+## March 2026 High-ROI Sprint (5 Money-Page Backlinks)
+
+**Goal:** Ship 5 live backlinks to high-intent pages this month.
+
+| # | Target page | Link type | Prospect/source | Owner | Status |
+|---|-------------|-----------|-----------------|-------|--------|
+| 1 | `/calculators/ads-calculator` | UK property resource mention | Scottish property blog roundup (stamp duty / LBTT tools) | Kit | [ ] |
+| 2 | `/calculators/ads-calculator` | Forum/helpful answer link | UK home-buying Q&A thread (ADS question) | Kit | [ ] |
+| 3 | `/calculators/w2-to-1099-calculator` | Freelancer guest contribution | Contractor/freelancer newsletter or blog | Kit | [ ] |
+| 4 | `/calculators/income/convert-w2-hourly-rate-to-1099` | Educational link in long-form post | Career switch / consulting-rate article | Kit | [ ] |
+| 5 | `/calculators/uk-tax/additional-dwelling-supplement-explained` | UK tax resource list | UK personal finance resource page | Kit | [ ] |
+
+### Execution Rules
+
+1. Do not chase random DR. Relevance first.
+2. Anchor text must match page intent naturally, no spam exact-match stuffing.
+3. Every placement gets a UTM variant in outreach where possible.
+4. Log each live link with date + URL + first crawl date in `REVENUE.md`.
+5. If a link is nofollow but highly relevant traffic-wise, keep it.
+
+### Outreach copy blocks (fast)
+
+**ADS page pitch**
+
+> I built a free Scotland ADS + LBTT calculator with worked examples for additional property purchases. If you keep a buyer resources section, this is the exact link: https://boring-math.com/calculators/ads-calculator
+
+**W2/1099 page pitch**
+
+> We published a practical W2-to-1099 conversion calculator plus formula breakdown, focused on true parity after tax, PTO and benefits. Link if useful for your contractor rate guide: https://boring-math.com/calculators/w2-to-1099-calculator
+
+---
+
 ## Quick Wins (Do This Week)
 
 ---

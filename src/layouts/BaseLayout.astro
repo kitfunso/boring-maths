@@ -17,6 +17,7 @@ export interface Props {
   keywords?: string;
   canonicalURL?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   keywords = 'calculator, online calculator, free calculator, math calculator',
   canonicalURL = Astro.url.pathname,
   ogImage,
+  noindex = false,
 } = Astro.props;
 
 const siteURL = Astro.site || 'https://boring-math.com';
@@ -48,7 +50,9 @@ const ogImageURL = ogImage
     <meta name="theme-color" content="#07070a" />
     <meta
       name="robots"
-      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+      content={noindex
+        ? 'noindex, follow'
+        : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'}
     />
 
     <!-- Fonts loaded locally via @fontsource for faster LCP -->

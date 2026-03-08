@@ -18,6 +18,9 @@
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,astro,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,astro,css}\"",
+    "seo:cluster": "node scripts/seo/keyword-cluster-pipeline.mjs",
+    "seo:gsc-refresh": "node scripts/seo/gsc-refresh-workflow.mjs",
+    "seo:internal-links": "node scripts/seo/internal-link-map.mjs",
     "qa": "npm run format:check && npm run lint && npm run test && npm run build",
     "prepare": "husky"
   },

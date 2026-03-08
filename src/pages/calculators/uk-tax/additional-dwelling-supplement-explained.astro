@@ -1,0 +1,183 @@
+---
+/**
+ * Additional Dwelling Supplement Guide Page
+ * Intent page for ADS questions + worked examples
+ */
+
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../../components/common/SEOHead.astro';
+import HeroSection from '../../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../../components/calculators/shared/FAQSection.astro';
+
+const title =
+  'Additional Dwelling Supplement in Scotland (2025/26): Rates, Rules, Examples | Boring Math';
+const description =
+  "Clear guide to Scotland's Additional Dwelling Supplement (ADS): who pays it, current 6% rate, refund rules, and worked LBTT + ADS examples for buy-to-let and second homes.";
+const keywords =
+  'additional dwelling supplement scotland, ads scotland 6%, additional dwelling supplement calculator, lbtt additional property, ads refund 18 months, scotland second home tax';
+const canonicalURL = '/calculators/uk-tax/additional-dwelling-supplement-explained';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Tax', href: '/calculators/uk-tax' },
+  { label: 'Additional Dwelling Supplement Guide' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ADS Calculator',
+    description: 'Calculate your exact ADS and LBTT bill in seconds.',
+    href: '/calculators/ads-calculator',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'UK Stamp Duty Guide',
+    description: 'Compare SDLT, LBTT, and LTT rules across the UK.',
+    href: '/calculators/uk-tax/stamp-duty',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Model transaction tax across England, Scotland, and Wales.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Additional Dwelling Supplement in Scotland?',
+    answer:
+      'Additional Dwelling Supplement (ADS) is an extra 6% tax in Scotland on top of LBTT when you buy an additional residential property, such as a buy-to-let or second home.',
+  },
+  {
+    question: 'What is the current ADS rate?',
+    answer:
+      'The ADS rate is currently 6% of the full purchase price. It is not banded. Even if only part of the price falls above an LBTT threshold, ADS still applies to the whole amount.',
+  },
+  {
+    question: 'Can I claim an ADS refund?',
+    answer:
+      'Yes, in many replacement-main-home scenarios. If you buy first and then sell your previous main residence within 18 months, you can usually reclaim ADS, provided conditions are met and the claim is submitted on time.',
+  },
+  {
+    question: 'Is ADS the same as English second-home stamp duty?',
+    answer:
+      'No. They are similar concepts but different tax systems. England uses SDLT with an additional property surcharge, while Scotland uses LBTT plus ADS at a separate 6% rate.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Tax', url: '/calculators/uk-tax' },
+  { name: 'Additional Dwelling Supplement Guide', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Additional Dwelling Supplement Guide"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Scotland Additional Dwelling Supplement Guide"
+    description="Everything you need to know about ADS in 2025/26, who pays it, how much it costs, and when you can reclaim it."
+  />
+
+  <ContentSection title="How ADS Works in One Line">
+    <p>
+      ADS is an extra <strong>6%</strong> on the full property price when you buy an additional residential
+      property in Scotland. It sits on top of normal LBTT bands, so your total bill can jump quickly.
+    </p>
+    <p class="mt-3">
+      If you want your exact figure immediately, use the
+      <a href="/calculators/ads-calculator" class="text-[var(--color-accent)] hover:underline">
+        ADS calculator</a
+      > and then come back to this guide for edge cases and refund rules.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Worked Example: £320,000 Buy-to-Let in Glasgow">
+    <p>Assume this is an additional property, so ADS applies.</p>
+    <div class="space-y-1 text-sm font-mono bg-[var(--color-surface)] rounded-lg p-4 mt-4">
+      <div class="flex justify-between"><span>LBTT on first £145,000</span><span>£0</span></div>
+      <div class="flex justify-between">
+        <span>LBTT on £145,001-£250,000 at 2%</span><span>£2,100</span>
+      </div>
+      <div class="flex justify-between">
+        <span>LBTT on £250,001-£320,000 at 5%</span><span>£3,500</span>
+      </div>
+      <div class="flex justify-between text-amber-400">
+        <span>ADS at 6% on £320,000</span><span>£19,200</span>
+      </div>
+      <div class="flex justify-between font-semibold border-t border-white/10 pt-2 mt-2">
+        <span>Total tax due</span><span>£24,800</span>
+      </div>
+    </div>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      In this example, ADS is more than three quarters of the full transaction tax bill.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="When ADS Usually Applies">
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>
+        You already own a residential property anywhere in the world, and buy another in Scotland.
+      </li>
+      <li>You are buying a buy-to-let, holiday home, or second home over £40,000.</li>
+      <li>A company purchases Scottish residential property.</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="When ADS May Not Apply or May Be Refundable">
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Main-residence replacement:</strong> if you dispose
+        of your previous main home within the allowed period, ADS can often be reclaimed.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Lower-value property:</strong> purchases under £40,000
+        are generally outside ADS.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Non-residential transactions:</strong> purely commercial
+        property deals are not subject to ADS.
+      </li>
+    </ul>
+    <p class="mt-3">
+      Borderline cases happen often, especially with mixed-use property, inherited shares, or
+      separated couples. For high-value deals, check current Revenue Scotland guidance before
+      completion.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Practical Buyer Checklist">
+    <ol class="list-decimal list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>Confirm whether the transaction counts as an additional dwelling at completion date.</li>
+      <li>Model LBTT + ADS together, not separately, before agreeing final offer.</li>
+      <li>
+        If replacing your main residence, log target sale timeline and refund deadlines immediately.
+      </li>
+      <li>Keep documentary evidence ready for any refund claim process.</li>
+    </ol>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,190 @@
+---
+/**
+ * Convert W2 hourly to 1099 intent page
+ */
+
+import CalculatorLayout from '../../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../../components/common/SEOHead.astro';
+import HeroSection from '../../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../../components/calculators/shared/FAQSection.astro';
+
+const title = 'Convert W2 Hourly Rate to 1099 Contractor Rate: Formula + Examples | Boring Math';
+const description =
+  'Learn how to convert a W2 hourly rate into a realistic 1099 contractor rate. Includes formula, hidden cost checklist, and worked examples using self-employment tax and benefit replacement.';
+const keywords =
+  'convert w2 hourly rate to 1099, w2 to 1099 formula, 1099 contractor rate calculator, contractor hourly rate from salary, 1099 vs w2 hourly';
+const canonicalURL = '/calculators/income/convert-w2-hourly-rate-to-1099';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Income', href: '/calculators/income' },
+  { label: 'Convert W2 Hourly to 1099' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'W2 to 1099 Calculator',
+    description: 'Run the full conversion with your own numbers.',
+    href: '/calculators/w2-to-1099-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Contractor vs Employee Calculator',
+    description: 'Compare two offers side by side after taxes and benefits.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'swap' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'W2 vs 1099 Guide',
+    description: 'Broader strategy guide for employment type decisions.',
+    href: '/calculators/income/w2-vs-1099',
+    icon: 'chart' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is a good multiplier for W2 to 1099 conversion?',
+    answer:
+      'Most people need at least 1.3x to 1.6x, depending on benefits and utilization. Rich W2 benefits and low billable-hours assumptions push the required multiplier higher.',
+  },
+  {
+    question: 'Why is the 1099 number so much higher than W2?',
+    answer:
+      'As a contractor you pay the full self-employment tax, replace employer-paid benefits, absorb unpaid time off, and cover business overhead. The headline hourly number must carry all of that.',
+  },
+  {
+    question: 'Should I calculate from salary or hourly pay?',
+    answer:
+      'Either can work, as long as you convert to annual total compensation first. The key is to model total W2 value, then reprice that value on realistic billable hours as 1099.',
+  },
+  {
+    question: 'Does state tax matter in this conversion?',
+    answer:
+      'Yes. State income tax changes net take-home materially. The same W2 and 1099 gross numbers can produce very different outcomes across states.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Income', url: '/calculators/income' },
+  { name: 'Convert W2 Hourly to 1099', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Convert W2 Hourly to 1099 Guide"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="How to Convert W2 Hourly Rate to 1099 Contractor Rate"
+    description="Use a defensible formula, not a guess. This guide shows how to calculate a 1099 rate that actually replaces your W2 package."
+  />
+
+  <ContentSection title="The Conversion Formula">
+    <p>A practical conversion is:</p>
+    <p class="font-mono bg-[var(--color-surface)] rounded-lg p-3 mt-3">
+      1099 hourly rate = (W2 annual value + contractor-only costs + risk buffer) / realistic
+      billable hours
+    </p>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      Most people skip the billable-hours step and underprice by 15-30%.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Worked Example: $50/hr W2 to 1099">
+    <p>
+      Assume your W2 pay is <strong>$50/hr</strong> at 2,080 hours, so base salary is $104,000.
+    </p>
+    <div class="space-y-1 text-sm font-mono bg-[var(--color-surface)] rounded-lg p-4 mt-4">
+      <div class="flex justify-between"><span>W2 base salary</span><span>$104,000</span></div>
+      <div class="flex justify-between">
+        <span>Employer-paid payroll tax value</span><span>$7,956</span>
+      </div>
+      <div class="flex justify-between"><span>Health insurance value</span><span>$7,200</span></div>
+      <div class="flex justify-between">
+        <span>401(k) match replacement</span><span>$4,160</span>
+      </div>
+      <div class="flex justify-between"><span>PTO replacement</span><span>$6,000</span></div>
+      <div class="flex justify-between"><span>Business overhead</span><span>$3,500</span></div>
+      <div class="flex justify-between font-semibold border-t border-white/10 pt-2 mt-2">
+        <span>Target gross for parity</span><span>$132,816</span>
+      </div>
+    </div>
+    <p class="mt-3 text-[var(--color-subtle)]">
+      If you only bill <strong>1,700 hours</strong> per year, your break-even rate is about
+      <strong>$78/hr</strong>, roughly <strong>1.56x</strong> your W2 hourly rate.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Checklist of Hidden Costs to Include">
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>Full 15.3% self-employment tax burden</li>
+      <li>Employer health coverage you must now self-fund</li>
+      <li>Employer retirement match you need to replace</li>
+      <li>Unpaid holiday, sickness, and contract gaps</li>
+      <li>Accounting, insurance, software, and admin time</li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Common Pricing Mistakes">
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]"
+          >Using a flat multiplier with no assumptions:</strong
+        >
+        1.3x is not universally safe.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Ignoring utilization:</strong> 2,080 paid W2 hours is
+        not equivalent to 2,080 billable contractor hours.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Comparing gross only:</strong> net cash flow is what
+        matters.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Forgetting risk premium:</strong> variable income needs
+        a cushion.
+      </li>
+    </ul>
+  </ContentSection>
+
+  <ContentSection title="Run Your Own Numbers">
+    <p>
+      Use the
+      <a
+        href="/calculators/w2-to-1099-calculator"
+        class="text-[var(--color-accent)] hover:underline"
+      >
+        W2 to 1099 calculator</a
+      > for your exact rate, then validate offer comparisons with the
+      <a
+        href="/calculators/contractor-vs-employee-calculator"
+        class="text-[var(--color-accent)] hover:underline"
+      >
+        contractor vs employee calculator</a
+      > before negotiation.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

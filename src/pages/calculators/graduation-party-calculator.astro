@@ -46,6 +46,20 @@ const relatedCalculators = [
     icon: 'home' as const,
     color: 'green' as const,
   },
+  {
+    title: 'UK Student Loan Calculator',
+    description: 'Project repayments and write-off timeline after graduation.',
+    href: '/calculators/uk-student-loan-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'W2 to 1099 Calculator',
+    description: 'Compare first-job salary versus contractor offers.',
+    href: '/calculators/w2-to-1099-calculator',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
 ];
 
 const faqs = [
@@ -271,6 +285,35 @@ const schemaBreadcrumbs = [
       Conversely, an evening party expects more substantial food. Always have a mix of hot and cold
       options, and label anything with allergens clearly.
     </p>
+  </ContentSection>
+
+  <ContentSection title="After the Party: 3 Money Checks for New Graduates">
+    <p>
+      Graduation season often coincides with first job offers and repayment letters. A quick
+      15-minute numbers check now can save real money over the next 12 months.
+    </p>
+    <ul class="list-disc list-inside space-y-2 mt-3 text-[var(--color-subtle)]">
+      <li>
+        If your first salary is in the UK, model deductions with the
+        <a href="/calculators/uk-tax-calculator" class="text-[var(--color-accent)] hover:underline"
+          >UK Tax Calculator</a
+        > so you know your true monthly take-home before signing tenancy or financing decisions.
+      </li>
+      <li>
+        If you studied in the UK, run your plan and salary through the
+        <a
+          href="/calculators/uk-student-loan-calculator"
+          class="text-[var(--color-accent)] hover:underline">UK Student Loan Calculator</a
+        > to see monthly repayments and likely write-off path.
+      </li>
+      <li>
+        If you are choosing between a salaried role and a contract role, compare offers with the
+        <a
+          href="/calculators/w2-to-1099-calculator"
+          class="text-[var(--color-accent)] hover:underline">W2 to 1099 Calculator</a
+        > before accepting headline rates at face value.
+      </li>
+    </ul>
   </ContentSection>
 
   <FAQSection faqs={faqs} />
