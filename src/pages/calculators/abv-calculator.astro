@@ -11,9 +11,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ABVCalculator } from '../../components/calculators/ABVCalculator';
 
-const title = 'Free ABV Calculator — Alcohol By Volume Calculator | Boring Math';
+const title = 'ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead';
 const description =
-  'Free ABV calculator for homebrewing beer, wine, mead, and cider. Calculate alcohol content from original and final gravity readings with attenuation. Instant results, no signup.';
+  'Free ABV calculator. Enter your original gravity (OG) and final gravity (FG) to calculate alcohol by volume for beer, wine, mead, and cider. Instant results with attenuation.';
 const keywords =
   'abv calculator, alcohol by volume calculator, alcohol calculator, gravity calculator, homebrew calculator, beer abv, wine abv, mead calculator, original gravity, final gravity, abv calculation, abv formula, specific gravity calculator';
 const canonicalURL = '/calculators/abv-calculator';
@@ -97,6 +97,16 @@ const faqs = [
     answer:
       'ABV (Alcohol By Volume) measures alcohol as a percentage of total volume. ABW (Alcohol By Weight) measures by mass. ABV is about 1.25× higher than ABW because alcohol is lighter than water. Most countries use ABV.',
   },
+  {
+    question: 'Can I use a refractometer instead of a hydrometer?',
+    answer:
+      'Yes, but with a caveat. Refractometers work perfectly for pre-fermentation OG readings. After fermentation, alcohol in the sample skews the reading, so you need to apply a correction factor. Many online calculators (including ours) can convert refractometer FG readings to true gravity. Hydrometers are more straightforward for FG measurements.',
+  },
+  {
+    question: 'What if my final gravity is higher than expected?',
+    answer:
+      'A high FG usually means fermentation stalled. Common causes: yeast pitched too cold, insufficient yeast cells, low nutrient levels, or high-gravity wort that exhausted the yeast. Try raising the temperature by 2-3°F, gently swirling the fermenter, or pitching fresh yeast. Wait 48 hours and re-check gravity before concluding fermentation is done.',
+  },
 ];
 
 const schemaBreadcrumbs = [
@@ -146,6 +156,73 @@ const schemaBreadcrumbs = [
       <li><strong>Dry Wine:</strong> OG 1.080-1.100, FG 0.990-1.000</li>
       <li><strong>Mead:</strong> OG 1.090-1.140, FG varies by style</li>
     </ul>
+  </ContentSection>
+
+  <ContentSection title="The ABV Formula Explained">
+    <p>The standard ABV formula used by homebrewers is straightforward:</p>
+    <div class="bg-[var(--color-surface)] rounded-lg p-4 mt-3 mb-4 font-mono text-center text-lg">
+      ABV% = (OG - FG) × 131.25
+    </div>
+    <p>
+      Where OG is the original gravity reading before fermentation and FG is the final gravity after
+      fermentation is complete. The constant 131.25 converts the gravity difference into an alcohol
+      percentage by volume.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">Worked Example</h3>
+    <p>You brew an IPA with OG of 1.065 and FG of 1.012:</p>
+    <div class="bg-[var(--color-surface)] rounded-lg p-4 mt-3 mb-4 font-mono text-sm space-y-1">
+      <div>ABV = (1.065 - 1.012) × 131.25</div>
+      <div>ABV = 0.053 × 131.25</div>
+      <div class="text-green-400 font-semibold">ABV = 6.96%</div>
+    </div>
+    <p>
+      For higher gravity brews (OG above 1.080), some brewers use the alternate formula by Gosset: <span
+        class="font-mono text-sm">ABV = (76.08 × (OG - FG) / (1.775 - OG)) × (FG / 0.794)</span
+      >. This accounts for the non-linear relationship between gravity and alcohol at higher
+      concentrations. For most standard-strength beers, the simple formula is accurate enough.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Common Mistakes When Measuring ABV">
+    <div class="space-y-4">
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Reading the hydrometer at the wrong point
+        </h4>
+        <p>
+          Always read at the bottom of the meniscus (the curved surface of the liquid), not the top.
+          The liquid clings slightly to the glass, creating a curve. Reading at the top can add
+          0.002-0.004 to your measurement, enough to throw off your ABV by 0.3-0.5%.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Skipping temperature correction</h4>
+        <p>
+          Hydrometers are calibrated at a specific temperature (usually 60°F / 15.6°C or 68°F /
+          20°C). A sample at 80°F reads about 0.002 lower than its true gravity. If you take OG from
+          hot wort without correcting, your calculated ABV will be too low.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">Taking FG too early</h4>
+        <p>
+          Fermentation can appear done while there is still active yeast at work. Always take two
+          readings 48-72 hours apart. If they match, fermentation is finished. Bottling too early
+          with residual sugar risks over-carbonation or bottle bombs.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-[var(--color-cream)]">
+          Using a refractometer for FG without correction
+        </h4>
+        <p>
+          Refractometers measure sugar concentration through light refraction. After fermentation,
+          the alcohol in your sample bends light differently, giving a falsely high reading. You
+          need a refractometer correction calculator to convert the Brix reading to true gravity
+          when alcohol is present.
+        </p>
+      </div>
+    </div>
   </ContentSection>
 
   <ContentSection title="ABV by Style">

@@ -56,6 +56,10 @@ export default defineConfig({
     '/calculators/w2-to-1099-calculator/': '/calculators/w2-to-1099-calculator',
   },
 
+  build: {
+    format: 'file',
+  },
+
   output: 'static',
 
   // Prefetch links for faster navigation
