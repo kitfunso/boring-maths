@@ -57,7 +57,9 @@ export default defineConfig({
   },
 
   build: {
-    format: 'file',
+    // Cloudflare Pages needs directory-style output for nested extensionless
+    // routes like /calculators/401k-calculator to resolve reliably.
+    format: 'directory',
   },
 
   output: 'static',
