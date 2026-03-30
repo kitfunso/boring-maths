@@ -107,8 +107,9 @@ class ContentGenerator:
         Returns:
             GeneratedTweet object
         """
-        # Try pre-generated tweets first (no API needed)
-        if self.pre_generated:
+        # Use pre-generated tweets only when the caller wants the "smart" path
+        # but no live LLM is available. Explicit template mode should stay template-based.
+        if use_llm and not self.llm and self.pre_generated:
             if calculator_slug:
                 matching = [t for t in self.pre_generated if t["calculator"] == calculator_slug]
             else:
@@ -280,6 +281,12 @@ Generate ONLY the tweet text, nothing else."""
             text = f"{other_text}\n\n{url_line}".strip()
         
         return f"{text}{hashtag_str}"
+
+    def _generate_reply_from_template(self, calc: dict, url: str) -> str:
+        """Generate a reply from the local template set."""
+        templates = self.templates.get("reply_templates", {}).get("helpful", [])
+        template = random.choice(templates) if templates else "Check this out: {url}"
+        return template.format(name=calc["name"], url=url)
     
     def generate_reply(self, original_tweet: str, calculator_slug: str) -> str:
         """
@@ -297,6 +304,9 @@ Generate ONLY the tweet text, nothing else."""
             raise ValueError(f"Calculator not found: {calculator_slug}")
         
         url = self._get_calculator_url(calc["slug"])
+
+        if not self.llm:
+            return self._generate_reply_from_template(calc, url)
         
         prompt = f"""Generate a helpful, non-spammy reply to this tweet.
 
@@ -340,10 +350,7 @@ Generate ONLY the reply text, nothing else."""
             
         except Exception as e:
             logger.warning(f"LLM reply generation failed: {e}")
-            # Fallback to template
-            templates = self.templates.get("reply_templates", {}).get("helpful", [])
-            template = random.choice(templates) if templates else "Check this out: {url}"
-            return template.format(name=calc["name"], url=url)
+            return self._generate_reply_from_template(calc, url)
     
     def generate_batch(self, count: int = 5, unique_calculators: bool = True) -> list[GeneratedTweet]:
         """
