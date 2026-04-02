@@ -10,11 +10,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UK100kTaxTrapCalculator } from '../../components/calculators/UK100kTaxTrapCalculator';
 
-const title = 'UK 100k Tax Trap Calculator - See Your Real 60% Tax Rate | Boring Math';
+const title = 'How to Calculate Personal Allowance Over £100k | UK Tax Trap Calculator';
 const description =
-  'Earning £105,000 in the UK means a 60% effective tax rate on £5,000 of your income. Between £100,000 and £125,140 you lose £1 of personal allowance for every £2 earned. Calculator shows your exact marginal rate and salary sacrifice escape strategies.';
+  'Calculate how much personal allowance you lose over £100k in the UK. See your exact £100k tax trap, marginal rate, adjusted net income, and how much salary sacrifice restores the allowance.';
 const keywords =
-  '60% tax trap calculator, UK tax trap calculator, 100k tax trap, personal allowance calculator, pension sacrifice calculator, UK tax calculator, salary sacrifice calculator, high earner tax UK, tax trap 100k';
+  'how to calculate personal allowance over 100k, loss of personal allowance calculator, 60% tax trap calculator, UK tax trap calculator, 100k tax trap, personal allowance calculator, pension sacrifice calculator, UK tax calculator, salary sacrifice calculator, high earner tax UK, tax trap 100k';
 const canonicalURL = '/calculators/uk-100k-tax-trap-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -59,6 +59,11 @@ const faqs = [
     question: 'What is the UK £100k tax trap?',
     answer:
       'When your income exceeds £100,000, you lose £1 of your £12,570 Personal Allowance for every £2 earned above this threshold. This creates an effective marginal tax rate of up to 62% (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140. Your Personal Allowance is completely lost at £125,140.',
+  },
+  {
+    question: 'How do I calculate Personal Allowance over £100k?',
+    answer:
+      'Take the standard Personal Allowance of £12,570. Work out how far your adjusted net income is above £100,000, divide that excess by 2, then subtract the result from £12,570. Example: at £110,000 you are £10,000 over, so you lose £5,000 of allowance and keep £7,570. At £125,140 the allowance is fully gone.',
   },
   {
     question: 'Why is it called the 60% tax trap?',
@@ -122,12 +127,41 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="UK £100k Tax Trap Calculator"
-    description="See how the 60% marginal tax rate affects you and calculate optimal pension contributions to escape the trap."
+    description="Calculate your personal allowance over £100k, see how much of it you lose, and work out the pension or salary sacrifice needed to get it back."
   />
 
   <section class="mb-16" aria-label="Calculator">
     <UK100kTaxTrapCalculator client:load />
   </section>
+
+  <ContentSection title="How to Calculate Personal Allowance Over £100k">
+    <p>
+      The formula is simple. Start with the standard <strong>Personal Allowance of £12,570</strong>.
+      For every <strong>£2 of adjusted net income above £100,000</strong>, subtract <strong
+        >£1</strong
+      >
+      from that allowance.
+    </p>
+    <ul>
+      <li><strong>Income of £100,000:</strong> full Personal Allowance of £12,570</li>
+      <li>
+        <strong>Income of £110,000:</strong> £10,000 over the threshold, so allowance falls by £5,000
+        to £7,570
+      </li>
+      <li>
+        <strong>Income of £120,000:</strong> £20,000 over the threshold, so allowance falls by £10,000
+        to £2,570
+      </li>
+      <li><strong>Income of £125,140:</strong> allowance fully removed</li>
+    </ul>
+    <p>
+      If you want the long version, read our <a
+        href="/guides/uk-100k-tax-trap-explained"
+        class="text-[var(--color-accent)] hover:underline"
+        >guide to calculating personal allowance over £100k</a
+      >. If you want the exact number for your salary, use the calculator above.
+    </p>
+  </ContentSection>
 
   <ContentSection title="Understanding the £100k Tax Trap">
     <p>

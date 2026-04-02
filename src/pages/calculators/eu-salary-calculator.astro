@@ -11,11 +11,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { EUSalaryCalculator } from '../../components/calculators/EUSalaryCalculator';
 
-const title = 'EU Salary Calculator: How Much Do You Actually Keep? (2026 Tax Rates)';
+const title = 'EU Salary Calculator 2025/2026: Compare Net Pay Across Europe';
 const description =
-  'Enter your gross salary, pick your country. See your exact net pay in Germany, France, Netherlands, Spain, Italy and 20+ EU countries side by side. Updated for 2026 tax brackets.';
+  'Use this EU salary calculator to compare gross vs net pay across Europe. Check 2025 and 2026 take-home estimates for Germany, France, Netherlands, Spain, Italy, and 20+ other countries.';
 const keywords =
-  'eu salary calculator, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
+  'eu salary calculator, eu salary calculator 2025, eu salary calculator 2026, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
 const canonicalURL = '/calculators/eu-salary-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -87,9 +87,14 @@ const faqs = [
       "Some EU countries traditionally pay a 13th month salary (or 14th in some cases). This is common in Spain, Portugal, Italy, Austria, and Greece. It's usually part of annual compensation, paid in December or split between summer and winter. Our calculator uses annual figures.",
   },
   {
+    question: 'Is this EU salary calculator updated for 2025 and 2026?',
+    answer:
+      'Yes. The calculator is designed for current cross-country comparison and is useful for both 2025 and 2026 salary planning. Tax rules change at different times across Europe, so treat the results as strong planning estimates rather than payroll-grade figures, especially if your country has local taxes, family allowances, or special expat regimes.',
+  },
+  {
     question: 'How accurate are these calculations?',
     answer:
-      'These are simplified estimates for comparison purposes. Actual take-home pay depends on factors like marital status, children, local/municipal taxes, pension contributions, health insurance choices, and specific deductions. Consult a local tax advisor for precise calculations.',
+      'These are simplified estimates for comparison purposes. Actual take-home pay depends on factors like marital status, children, local or municipal taxes, pension contributions, health insurance choices, and specific deductions. Consult a local tax advisor for precise calculations.',
   },
   {
     question: 'Can I compare salaries between EU and non-EU countries?',
@@ -123,7 +128,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="EU Salary Calculator"
-    description="Compare net salary across European countries. See how much you'd take home after tax and social security in Germany, France, Netherlands, and more."
+    description="Compare 2025 and 2026 net salary estimates across European countries. See how much you'd take home after tax and social security in Germany, France, Netherlands, and more."
   />
 
   <section class="mb-16" aria-label="Calculator">

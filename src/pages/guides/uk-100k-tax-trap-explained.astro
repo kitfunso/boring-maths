@@ -1,21 +1,26 @@
 ---
 /**
  * Guide: The UK £100k Tax Trap Explained
- * Target queries: "100k tax trap", "60% tax trap", "100k tax trap calculator", "personal allowance taper"
+ * Target queries: "100k tax trap", "60% tax trap", "100k tax trap calculator", "personal allowance taper", "how to calculate personal allowance over 100k"
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'The UK £100k Tax Trap Explained (2025/26) | Boring Math';
+const title = 'How to Calculate Personal Allowance Over £100k (2025/26 UK) | Boring Math';
 const description =
-  'Earn £100k-£125,140 in the UK and you face a 60% effective tax rate. Here is how the personal allowance taper works, with worked examples and how to escape it.';
+  'Calculate how much personal allowance you lose over £100k in the UK, how the £100k tax trap works, and how salary sacrifice or pension contributions can restore it.';
 const canonicalURL = '/guides/uk-100k-tax-trap-explained';
 
 const faqs = [
   {
     question: 'What is the £100k tax trap?',
     answer:
-      'When your income exceeds £100,000, HMRC reduces your personal allowance by £1 for every £2 you earn above £100,000. This creates an effective marginal tax rate of 60% on income between £100,000 and £125,140 — the point at which the personal allowance disappears entirely.',
+      'When your income exceeds £100,000, HMRC reduces your personal allowance by £1 for every £2 you earn above £100,000. This creates an effective marginal tax rate of 60% on income between £100,000 and £125,140, the point at which the personal allowance disappears entirely.',
+  },
+  {
+    question: 'How do I calculate personal allowance over £100k?',
+    answer:
+      'Start with the standard Personal Allowance of £12,570. Work out how far your adjusted net income is above £100,000, divide that excess by 2, then subtract the result from £12,570. At £110,000, you are £10,000 over the threshold, so you lose £5,000 of allowance and keep £7,570. At £125,140, the allowance is gone.',
   },
   {
     question: 'How does a 60% tax rate happen at £100k?',
@@ -30,7 +35,7 @@ const faqs = [
   {
     question: 'Does salary sacrifice actually work for the 100k trap?',
     answer:
-      'Yes. If your employer offers salary sacrifice, you save income tax at 40%, National Insurance at 2%, and you restore the personal allowance — giving an effective saving of 60% on every pound sacrificed. A £10,000 salary sacrifice by someone earning £110,000 saves approximately £6,200 in tax and NIC combined.',
+      'Yes. If your employer offers salary sacrifice, you save income tax at 40%, National Insurance at 2%, and you restore the personal allowance, giving an effective saving of 60% on every pound sacrificed. A £10,000 salary sacrifice by someone earning £110,000 saves approximately £6,200 in tax and NIC combined.',
   },
   {
     question: 'What counts as "adjusted net income" for the taper?',
@@ -54,15 +59,15 @@ const schemaData = {
   '@graph': [
     {
       '@type': 'Article',
-      headline: 'The UK £100k Tax Trap Explained (2025/26)',
+      headline: 'How to Calculate Personal Allowance Over £100k (2025/26 UK)',
       description:
-        'How the personal allowance taper creates a 60% effective tax rate between £100,000 and £125,140, with worked examples and strategies to reduce your bill.',
+        'How the personal allowance taper creates the £100k tax trap, how to calculate your allowance loss, and what restores it.',
       url: 'https://boring-math.com/guides/uk-100k-tax-trap-explained',
       author: {
         '@type': 'Organization',
         name: 'Boring Math',
       },
-      dateModified: '2026-03-01',
+      dateModified: '2026-04-02',
     },
     {
       '@type': 'FAQPage',
@@ -86,11 +91,12 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › The UK £100k Tax Trap Explained
+          <a href="/">Home</a> › <a href="/guides">Guides</a> › How to Calculate Personal Allowance Over
+          £100k
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
-          2025/26 tax year &bull; Updated March 2026 &bull; Applies to England, Wales, and Northern
+          2025/26 tax year &bull; Updated April 2026 &bull; Applies to England, Wales, and Northern
           Ireland
         </p>
       </header>
@@ -99,10 +105,36 @@ const schemaData = {
         <h2>TL;DR</h2>
         <p>
           Earn between £100,000 and £125,140 in the UK and every pound is taxed at an effective rate
-          of 60% (62% including NIC). This happens because your personal allowance — normally
-          £12,570 — is tapered away at a rate of £1 for every £2 earned above £100,000. The most
+          of 60% (62% including NIC). This happens because your personal allowance, normally
+          £12,570, is tapered away at a rate of £1 for every £2 earned above £100,000. The most
           reliable fix is salary sacrifice into a pension, which reduces your adjusted net income
           and restores the full allowance.
+        </p>
+      </section>
+
+      <section class="content-section">
+        <h2>How to Calculate Personal Allowance Over £100k</h2>
+        <p>
+          Start with the standard personal allowance of <strong>£12,570</strong>. Then work out how
+          far your <strong>adjusted net income</strong> is above <strong>£100,000</strong>. For
+          every
+          <strong>£2</strong> above the threshold, you lose <strong>£1</strong> of allowance.
+        </p>
+        <ul>
+          <li><strong>£100,000 income:</strong> full allowance of £12,570</li>
+          <li>
+            <strong>£110,000 income:</strong> £10,000 over the threshold, so allowance falls by £5,000
+            to £7,570
+          </li>
+          <li>
+            <strong>£120,000 income:</strong> £20,000 over the threshold, so allowance falls by £10,000
+            to £2,570
+          </li>
+          <li><strong>£125,140 income:</strong> allowance fully removed</li>
+        </ul>
+        <p>
+          That is the whole calculation. The trap appears because the lost allowance makes part of
+          your income taxable again at 40%, on top of the usual higher-rate tax.
         </p>
       </section>
 
@@ -222,8 +254,8 @@ const schemaData = {
         </div>
         <p>
           Earning £25,140 more gross adds only £9,554 net. That is an effective rate of 62% on every
-          pound in the trap zone. Most people would rather keep £25,140 in a pension — where it
-          grows tax-free — than hand 62% to HMRC.
+          pound in the trap zone. Most people would rather keep £25,140 in a pension, where it grows
+          tax-free, than hand 62% to HMRC.
         </p>
       </section>
 
@@ -257,16 +289,16 @@ const schemaData = {
           If your employer does not offer salary sacrifice, you can pay into a personal pension or
           SIPP. The contribution reduces your adjusted net income on your self-assessment return.
           You claim 40% higher-rate relief on top of the 20% basic rate relief added automatically.
-          The NIC saving is not available here — only salary sacrifice gets that — but the income
-          tax saving is identical.
+          The NIC saving is not available here. Only salary sacrifice gets that, but the income tax
+          saving is identical.
         </p>
         <h3>3. Gift Aid donations</h3>
         <p>
           Charitable donations made under Gift Aid also reduce adjusted net income. If you donate
           £1,000 to a registered charity and claim Gift Aid, your adjusted net income falls by
-          £1,250 (the grossed-up amount). This is less efficient than a pension — you're actually
-          giving the money away — but it can help if you're only slightly above £100,000 and have
-          planned charitable giving anyway.
+          £1,250 (the grossed-up amount). This is less efficient than a pension because you're
+          actually giving the money away, but it can help if you're only slightly above £100,000 and
+          have planned charitable giving anyway.
         </p>
         <h3>4. Employer pension contributions</h3>
         <p>
@@ -367,7 +399,7 @@ const schemaData = {
           </li>
           <li>
             <strong>Forgetting bonus payments.</strong> A £15,000 bonus can push you from £90,000 to £105,000
-            unexpectedly. Ask your employer whether bonus sacrifice is possible — many schemes allow it
+            unexpectedly. Ask your employer whether bonus sacrifice is possible. Many schemes allow it,
             and the saving on a £5,000 bonus sacrifice at this level is around £3,100.
           </li>
           <li>
@@ -378,7 +410,7 @@ const schemaData = {
           <li>
             <strong>Thinking the trap disappears after £125,140.</strong> Above £125,140, you lose the
             personal allowance entirely but the rate reverts to standard 40% and 45% rates. There is no
-            trap above that level — but you're also paying more tax overall.
+            trap above that level, but you're also paying more tax overall.
           </li>
           <li>
             <strong>Ignoring child benefit implications.</strong> If you or your partner receives child
