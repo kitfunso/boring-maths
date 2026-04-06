@@ -133,8 +133,8 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     exports: ['currency'],
   },
 
-  'side-hustle': {
-    id: 'side-hustle',
+  'side-hustle-profitability': {
+    id: 'side-hustle-profitability',
     name: 'Side Hustle Profitability Calculator',
     imports: ['hourlyRate', 'currency'],
     exports: ['monthlyIncome', 'hourlyRate', 'currency'],
