@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "astro dev",
     "generate-og": "node scripts/generate-og-images.mjs",
-    "prebuild": "npm run generate-og",
+    "validate:shared-data": "node scripts/validate-shared-data.mjs",
+    "prebuild": "npm run generate-og && npm run validate:shared-data",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
