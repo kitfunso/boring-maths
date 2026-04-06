@@ -1356,7 +1356,6 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
-<<<<<<< HEAD
     title: 'Streaming Value Calculator',
     description: 'Calculate cost per hour for Netflix, Disney+, and more to find your best and worst value subscriptions.',
     href: '/calculators/streaming-value-calculator',
