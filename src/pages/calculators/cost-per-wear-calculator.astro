@@ -1,0 +1,181 @@
+---
+/**
+ * Cost Per Wear Calculator Page
+ *
+ * SEO-optimized page targeting: "cost per wear calculator", "is this worth buying"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CostPerWearCalculator from '../../components/calculators/CostPerWearCalculator/CostPerWearCalculator';
+
+// SEO Configuration
+const title = 'Cost Per Wear Calculator | Is It Worth Buying? | Boring Math';
+const description =
+  'Calculate the true cost per wear of any clothing or accessory purchase. Compare investment pieces vs cheap alternatives to make smarter buying decisions. No signup required.';
+const keywords =
+  'cost per wear calculator, is this worth buying, cost per use calculator, clothing investment calculator, price per wear, sustainable fashion calculator, wardrobe cost analysis, investment piece calculator';
+const canonicalURL = '/calculators/cost-per-wear-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Cost Per Wear Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices and savings on any purchase.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Subscription Audit',
+    description: 'Track and analyze your subscriptions to find savings.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'dollar' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Plan how to reach your savings goals.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Break Even',
+    description: 'Find out when your investment pays for itself.',
+    href: '/calculators/break-even-calculator',
+    icon: 'trending' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is cost per wear?',
+    answer:
+      'Cost per wear is the total cost of an item (purchase price plus maintenance) divided by the number of times you wear it. A $200 jacket worn 200 times costs $1 per wear. A $50 jacket worn 20 times costs $2.50 per wear. The cheaper item can end up costing more per use.',
+  },
+  {
+    question: 'What is a good cost per wear?',
+    answer:
+      'Under $1 per wear is the gold standard and means the item has earned its place in your wardrobe. Under $5 per wear is reasonable for most everyday clothing. Above $10 per wear, you should ask whether the item is worth keeping or if a cheaper alternative makes more sense.',
+  },
+  {
+    question: 'How does cost per wear help with sustainable fashion?',
+    answer:
+      'Cost per wear encourages buying fewer, higher-quality items that last longer instead of cheap fast fashion that falls apart quickly. A well-made $150 coat worn for 5 years is both cheaper per wear and generates less waste than buying a $30 coat every year.',
+  },
+  {
+    question: 'Should I include dry cleaning in the cost per wear calculation?',
+    answer:
+      'Yes. Maintenance costs like dry cleaning, shoe repairs, and special detergents are part of the true cost of owning an item. A $100 blazer that costs $15 per month to dry clean adds $540 in care costs over 3 years, which significantly raises the cost per wear.',
+  },
+  {
+    question: 'How do I estimate wears per month?',
+    answer:
+      'Think about how often you realistically reach for the item. Daily basics like jeans might get 15-20 wears per month. A work blazer might get 8-12. A cocktail dress might only get 1-2. Be honest with your estimate; overstating wears will make any purchase look like a bargain.',
+  },
+  {
+    question: 'When is an expensive item actually worth it?',
+    answer:
+      'An expensive item is worth it when its cost per wear is lower than the alternative, or when it fills a gap nothing else in your wardrobe covers. Classic, versatile pieces in neutral colors tend to have the lowest cost per wear because they pair with everything and get worn constantly.',
+  },
+  {
+    question: 'How does this calculator compare two items?',
+    answer:
+      'The calculator compares the cost per wear of your item against a cheaper alternative, then calculates how many times you would need to replace the alternative over the same time period. This total replacement cost is compared to the single purchase to show which option saves money long-term.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Cost Per Wear Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Cost Per Wear Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Cost Per Wear Calculator"
+    description="Calculate the true cost per wear of any purchase. Compare an investment piece against a cheaper alternative to see which one actually saves you money."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <CostPerWearCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>purchase price</strong> of the item you're considering, along with how
+      often you expect to wear it each month and how many months you think it will last.
+    </p>
+    <p>
+      If the item has ongoing <strong>care costs</strong> like dry cleaning or special maintenance,
+      add that monthly amount. This gets factored into the true lifetime cost.
+    </p>
+    <p>
+      Fill in the <strong>alternative section</strong> with a cheaper version of the same item to
+      see a side-by-side comparison. The calculator accounts for replacement cycles: if the cheap
+      version only lasts 12 months, you'll need 3 of them to match a 36-month item.
+    </p>
+    <p>
+      The <strong>verdict</strong> tells you whether the investment piece or the budget option is
+      the smarter buy based on total cost over the same time period.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Cost Per Wear</strong> is the headline number. It divides total cost (purchase +
+      maintenance) by total wears. Lower is better.
+    </p>
+    <p>
+      <strong>Total Lifetime Cost</strong> includes both the purchase price and all care costs over
+      the item's expected lifespan. This is what the item actually costs you.
+    </p>
+    <p>
+      The <strong>comparison bar</strong> gives you a visual snapshot of which item delivers more
+      value per wear. Green means that option wins on cost per wear.
+    </p>
+    <p>
+      <strong>Savings vs Alternative</strong> shows the dollar difference over the full time period.
+      A positive number means the investment piece saves you money long-term.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

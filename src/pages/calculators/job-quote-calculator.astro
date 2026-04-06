@@ -1,0 +1,180 @@
+---
+/**
+ * Job Quote Calculator Page
+ *
+ * SEO-optimized page targeting: "job quote calculator for tradesmen"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import JobQuoteCalculator from '../../components/calculators/JobQuoteCalculator/JobQuoteCalculator';
+
+// SEO Configuration
+const title = 'Free Job Quote Calculator for Tradespeople | Boring Math';
+const description =
+  'Build accurate job quotes in seconds. Add materials, labour hours, markup, VAT, and travel fees. Works for plumbers, electricians, builders, painters, and all trades. No signup required.';
+const keywords =
+  'job quote calculator for tradesmen, trade quote calculator, plumber quote calculator, electrician job quote, builder pricing calculator, tradesman quote template, job costing calculator, markup calculator for trades';
+const canonicalURL = '/calculators/job-quote-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Job Quote Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Freelance Day Rate',
+    description: 'Calculate your ideal freelance or trade day rate.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Margin Calculator',
+    description: 'Calculate gross margin and markup on any product or service.',
+    href: '/calculators/margin-calculator',
+    icon: 'percent' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Break-Even Calculator',
+    description: 'Calculate how many jobs you need to cover business costs.',
+    href: '/calculators/break-even-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Find optimal pricing with multiple strategies.',
+    href: '/calculators/pricing-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Hourly to Salary',
+    description: 'Convert hourly rate to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate a job quote as a tradesman?',
+    answer:
+      'Add up your material costs, multiply your hourly rate by estimated labour hours, add any travel or callout fee, then apply your markup percentage. Finally, add VAT if you are VAT registered. This calculator does all of that automatically.',
+  },
+  {
+    question: 'What markup should tradespeople charge?',
+    answer:
+      'Most tradespeople apply 15-30% markup on the total job cost to cover overheads and profit. Specialist or emergency work often commands 30-50%. Your markup needs to cover van costs, insurance, tools, downtime between jobs, and profit.',
+  },
+  {
+    question: 'Do I need to charge VAT on trade jobs?',
+    answer:
+      'In the UK, you must register for VAT and charge 20% on invoices once your taxable turnover exceeds the VAT threshold (currently 90,000 per year). Below that threshold, VAT registration is optional. In the US, sales tax rules vary by state.',
+  },
+  {
+    question: 'Should I charge a callout or travel fee?',
+    answer:
+      'A callout fee covers your travel time and fuel costs to reach the job. Most tradespeople charge 20-50 for local callouts. For jobs further away, charging mileage on top is common. Some trades waive the callout fee if the customer proceeds with the work.',
+  },
+  {
+    question: 'How do I decide on my hourly rate?',
+    answer:
+      'Research local rates for your trade. As a guide: plumbers and electricians typically charge 40-60/hour, builders 35-50/hour, and painters 25-40/hour. Factor in your experience, qualifications, and local demand. Remember this rate needs to cover your wages, tax, insurance, and business costs.',
+  },
+  {
+    question: 'What is the difference between markup and margin?',
+    answer:
+      'Markup is the percentage added on top of your costs. A 20% markup on a 100 cost gives a 120 price. Margin is profit as a percentage of the selling price. That same 20 profit on a 120 price is a 16.7% margin. This calculator shows both so you can see the true profitability.',
+  },
+  {
+    question: 'How should I quote for materials?',
+    answer:
+      'List every material with its actual cost. Many tradespeople add 10-20% on top of material costs to cover trips to the merchant, waste, and the convenience of supplying materials. Be transparent with customers about whether materials are at cost or marked up.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Job Quote Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Job Quote Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Job Quote Calculator"
+    description="Build accurate quotes for any trade job. Add materials, set your hourly rate, apply markup and VAT, and get a professional breakdown in seconds."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <JobQuoteCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>trade type</strong> to get a suggested hourly rate, or enter your own.
+      Set the number of <strong>labour hours</strong> the job will take.
+    </p>
+    <p>
+      Add each <strong>material</strong> with its cost. Click "Add Item" for more line items and
+      remove any you don't need.
+    </p>
+    <p>
+      Set your <strong>markup percentage</strong> to cover overheads and profit. Add a
+      <strong>travel or callout fee</strong> if applicable, and set the <strong>VAT rate</strong>
+      (20% for UK VAT-registered businesses, 0% if not registered or in the US).
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Total Quote</strong> is what the customer pays, including VAT if applicable. Use
+      this as the bottom line on your invoice.
+    </p>
+    <p>
+      The <strong>Quote Breakdown</strong> shows every component: materials, labour, travel, markup,
+      and VAT. This transparency helps justify your price to customers.
+    </p>
+    <p>
+      <strong>Profit Margin</strong> shows what percentage of the ex-VAT subtotal is your markup.
+      Aim for at least 15-20% to run a sustainable trade business.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

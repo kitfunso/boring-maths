@@ -1,0 +1,172 @@
+---
+/**
+ * Water Intake Calculator Page
+ *
+ * SEO-optimized page targeting: "water intake calculator", "how much water should I drink"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import WaterIntakeCalculator from '../../components/calculators/WaterIntakeCalculator/WaterIntakeCalculator';
+
+// SEO Configuration
+const title = 'Water Intake Calculator | How Much Water Should I Drink? | Boring Math';
+const description =
+  'Calculate your recommended daily water intake based on body weight, activity level, and climate. Find out exactly how much water you should drink per day. Free, no signup.';
+const keywords =
+  'water intake calculator, how much water should I drink, daily water intake, hydration calculator, water consumption calculator, water per day calculator';
+const canonicalURL = '/calculators/water-intake-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Water Intake Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and healthy weight range.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate daily protein, carbs, and fat targets.',
+    href: '/calculators/macro-calculator',
+    icon: 'heart' as const,
+    color: 'coral' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much water should I drink per day?',
+    answer:
+      'A common guideline is 35ml per kilogram of body weight (about 0.5 oz per pound). For a 70kg (154lb) person, that is roughly 2.4 liters (81 oz). Activity level, climate, and individual health factors can increase or decrease this amount.',
+  },
+  {
+    question: 'Is the "8 glasses a day" rule accurate?',
+    answer:
+      'The 8 glasses (about 1.9 liters) rule is a rough starting point, not a scientific standard. Actual needs depend on body size, physical activity, temperature, and diet. Many people need more, especially if they exercise or live in hot climates.',
+  },
+  {
+    question: 'What are the signs of dehydration?',
+    answer:
+      'Common signs include dark yellow urine, dry mouth, fatigue, dizziness, headache, and reduced urine output. Mild dehydration can affect concentration and mood before physical symptoms appear. Pale yellow urine generally indicates good hydration.',
+  },
+  {
+    question: 'Does coffee or tea count toward daily water intake?',
+    answer:
+      'Yes. While caffeine has a mild diuretic effect, the water in coffee and tea still contributes to your daily fluid intake. Studies show moderate caffeine consumption does not cause net fluid loss. However, water remains the best primary hydration source.',
+  },
+  {
+    question: 'Do I need more water during exercise?',
+    answer:
+      'Yes. The American College of Sports Medicine recommends drinking 200-300ml (7-10 oz) of water 30 minutes before exercise and 200-300ml every 10-20 minutes during exercise. For sessions over an hour, consider an electrolyte drink to replace lost sodium.',
+  },
+  {
+    question: 'How does pregnancy affect water needs?',
+    answer:
+      'Pregnant women need about 300ml (10 oz) of extra water per day to support increased blood volume and amniotic fluid. Breastfeeding mothers need even more, roughly 700ml (24 oz) extra, since breast milk is about 87% water.',
+  },
+  {
+    question: 'Can you drink too much water?',
+    answer:
+      'Yes. Overhydration (hyponatremia) occurs when you drink so much water that blood sodium levels drop dangerously low. This is rare and usually only happens during extreme endurance events. For most people, drinking to thirst and monitoring urine color is sufficient.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Water Intake Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Water Intake Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Water Intake Calculator"
+    description="Calculate your recommended daily water intake based on your weight, activity level, and environment."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <WaterIntakeCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>unit system</strong> (kilograms or pounds) and enter your body weight.
+    </p>
+    <p>
+      Choose your <strong>activity level</strong> to account for exercise and physical work.
+      Higher activity increases water needs to replace fluid lost through sweat.
+    </p>
+    <p>
+      Select your <strong>climate</strong>. Hot and humid environments increase water loss
+      through perspiration, raising your daily requirement.
+    </p>
+    <p>
+      Toggle <strong>pregnancy or breastfeeding</strong> if applicable. Both conditions
+      increase fluid needs to support maternal and infant health.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Daily Intake</strong> is your total recommended water consumption in milliliters,
+      ounces, and cups. This includes water from all beverages.
+    </p>
+    <p>
+      <strong>Per Hour</strong> shows how much to drink each waking hour to spread your intake
+      evenly throughout the day (based on 16 waking hours).
+    </p>
+    <p>
+      <strong>Exercise Extra</strong> shows the additional water needed due to your activity level
+      above the sedentary baseline.
+    </p>
+    <p>
+      The <strong>comparison to 8 glasses</strong> shows how your personalized recommendation
+      relates to the common "8 glasses a day" guideline.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

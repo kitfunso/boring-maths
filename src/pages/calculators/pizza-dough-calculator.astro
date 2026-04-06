@@ -1,0 +1,188 @@
+---
+/**
+ * Pizza Dough Calculator Page
+ *
+ * SEO-optimized page targeting: "pizza dough calculator", "pizza dough recipe by weight"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PizzaDoughCalculator from '../../components/calculators/PizzaDoughCalculator/PizzaDoughCalculator';
+
+// SEO Configuration
+const title = 'Pizza Dough Calculator by Weight | Boring Math';
+const description =
+  "Calculate exact pizza dough ingredients by weight using baker's percentages. Recipes for Neapolitan, New York, Detroit, and pan pizza styles with hydration control. No signup required.";
+const keywords =
+  "pizza dough calculator, pizza dough recipe by weight, baker's percentage pizza, neapolitan pizza dough, ny style pizza dough, detroit pizza dough, pizza hydration calculator, pizza yeast calculator, homemade pizza dough recipe";
+const canonicalURL = '/calculators/pizza-dough-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Pizza Dough Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Unit Converter',
+    description: 'Convert between weight, volume, and temperature units.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat, sides, and supplies for your cookout.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Holiday Dinner Calculator',
+    description: 'Calculate food quantities for holiday dinners.',
+    href: '/calculators/holiday-dinner-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Calculate food quantities and costs for events.',
+    href: '/calculators/catering-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: "What is baker's percentage and why use it for pizza dough?",
+    answer:
+      "Baker's percentage expresses every ingredient as a percentage of the flour weight (flour is always 100%). This makes recipes easy to scale to any number of pizzas. For example, 63% hydration means 630g of water per 1000g of flour. Professional bakers use this system because it keeps ratios consistent regardless of batch size.",
+  },
+  {
+    question: 'What hydration should I use for pizza dough?',
+    answer:
+      "Hydration depends on the style. Neapolitan works best at 60-65%, New York style at 62-66%, Detroit at 70-75%, and pan pizza at 65-70%. Higher hydration produces a lighter, more open crumb but makes the dough stickier and harder to handle. Start at the low end of the range and increase as you gain experience.",
+  },
+  {
+    question: "What's the difference between instant, active dry, and fresh yeast?",
+    answer:
+      "Instant yeast (rapid rise) can be mixed directly into flour and activates quickly. Active dry yeast needs to be dissolved in warm water first and uses about 1.5x the amount of instant. Fresh (cake) yeast is perishable and uses 3x the amount of instant. All three produce the same result when properly converted. This calculator handles the conversion automatically.",
+  },
+  {
+    question: 'How long should pizza dough rise?',
+    answer:
+      "Rise time varies by style and temperature. At room temperature (~22C/72F), Neapolitan and NY style benefit from 24 hours, Detroit needs about 2 hours, and pan pizza about 1.5 hours. Cold fermenting in the fridge (4C/40F) takes 3-4x longer but develops significantly more flavor. Many professionals cold-ferment Neapolitan dough for 48-72 hours.",
+  },
+  {
+    question: 'What flour should I use for pizza dough?',
+    answer:
+      "For Neapolitan, use Tipo 00 flour (finely milled, 12-13% protein) like Caputo Pizzeria. For NY style, bread flour (12-14% protein) works best for that chewy texture. Detroit and pan styles work well with bread flour or all-purpose. Avoid cake flour or self-rising flour, which have too little protein to develop proper gluten structure.",
+  },
+  {
+    question: 'Why does my pizza dough shrink back when I stretch it?',
+    answer:
+      "The gluten is too tight. Let the dough rest at room temperature for at least 30 minutes after taking it out of the fridge. If it still springs back, let it rest another 15-20 minutes. Proper fermentation time also helps relax the gluten. Under-fermented dough is much harder to stretch.",
+  },
+  {
+    question: 'Can I make pizza dough ahead of time?',
+    answer:
+      "Yes, and it often tastes better. After mixing and kneading, divide into balls, lightly oil, place in sealed containers, and refrigerate for 24-72 hours. The slow cold fermentation develops complex flavors. Take the dough out 1-2 hours before baking to let it come to room temperature and become easier to stretch.",
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Pizza Dough Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Pizza Dough Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Pizza Dough Calculator"
+    description="Calculate exact ingredient weights for any pizza style using baker's percentages. Scale from 1 to 20 pizzas."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <PizzaDoughCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>dough style</strong> first. Each style has different base ingredients,
+      hydration ranges, and baking temperatures tuned for that particular crust.
+    </p>
+    <p>
+      Set the <strong>number of pizzas</strong> and <strong>size</strong>. The calculator determines
+      the dough ball weight for each pizza based on diameter and style, then scales all ingredients.
+    </p>
+    <p>
+      Adjust <strong>hydration</strong> using the slider. Higher hydration produces a lighter, airier
+      crust but is harder to handle. The ideal range is shown for your selected style.
+    </p>
+    <p>
+      Choose your <strong>yeast type</strong> and the calculator converts the amount automatically.
+      All three types (instant, active dry, fresh) produce the same result when properly measured.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      All weights are in <strong>grams</strong> for precision. Using a kitchen scale (not cups) is
+      essential for consistent pizza dough. A $10 digital scale will transform your results.
+    </p>
+    <p>
+      The <strong>ingredient breakdown</strong> shows baker's percentages next to each weight. Flour
+      is always 100%, and every other ingredient is relative to it.
+    </p>
+    <p>
+      <strong>Rise times</strong> shown are for room temperature (~22C / 72F). For cold fermentation
+      in the fridge, multiply by 3-4x. Cold fermentation develops more complex flavors.
+    </p>
+    <p>
+      <strong>Oven temperatures</strong> vary dramatically by style. Neapolitan needs extreme heat
+      (450C+) best achieved in a dedicated pizza oven. Home ovens typically max out at 250-260C,
+      which works well for NY, Detroit, and pan styles.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,173 @@
+---
+/**
+ * Tipping Guide Calculator Page
+ *
+ * SEO-optimized page targeting: "how much to tip in Europe", "tipping calculator by country"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import TippingGuideCalculator from '../../components/calculators/TippingGuideCalculator/TippingGuideCalculator';
+
+// SEO Configuration
+const title = 'Tipping Guide Calculator by Country | Boring Math';
+const description =
+  'Look up tipping customs for 12 countries and 6 service types. Calculate how much to tip in Europe, Japan, the US, and more. Free, instant results.';
+const keywords =
+  'how much to tip in Europe, tipping calculator by country, tipping guide, tip customs Japan, tip percentage by country, restaurant tip guide, hotel tipping etiquette, international tipping norms';
+const canonicalURL = '/calculators/tipping-guide-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Tipping Guide Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills between friends.',
+    href: '/calculators/tip-calculator',
+    icon: 'percent' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between world currencies with live rates.',
+    href: '/calculators/currency-converter',
+    icon: 'swap' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much should I tip in Europe?',
+    answer:
+      'In most European countries, a service charge is included in the bill. Leaving an extra 5-10% is a polite gesture for good service, but never obligatory. France, Germany, Italy, Spain, and the Netherlands all include service by law or custom. The UK is an exception where 10-12.5% is more common.',
+  },
+  {
+    question: 'Is it rude to tip in Japan?',
+    answer:
+      'Yes. Tipping is considered rude in Japan because excellent service is a point of professional pride. Leaving money on the table may confuse or even offend staff. If you want to show gratitude, a sincere thank-you or a small gift is more appropriate.',
+  },
+  {
+    question: 'What countries have the highest tipping expectations?',
+    answer:
+      'The United States and Canada have the highest tipping expectations, where 15-25% is standard at restaurants. Servers in these countries earn below the standard minimum wage and depend on tips for most of their income. Mexico also has a strong tipping culture at 10-15%.',
+  },
+  {
+    question: 'Should I tip on the pre-tax or post-tax amount?',
+    answer:
+      'Technically, the tip should be calculated on the pre-tax subtotal, since tax goes to the government. In practice, many people tip on the full amount for convenience. The difference is usually small.',
+  },
+  {
+    question: 'Do I need to tip for hotel housekeeping?',
+    answer:
+      'It depends on the country. In the US and Canada, $2-5 per night is standard. In Europe, a small tip (1-2 euros) is appreciated at upscale hotels but not expected. In Japan and Australia, housekeeping tips are not customary.',
+  },
+  {
+    question: 'How much should I tip a taxi driver abroad?',
+    answer:
+      'In the US and Canada, 15% is standard. In Europe, rounding up to the nearest whole number is sufficient. In Japan and Australia, no tip is expected. In Mexico and Brazil, rounding up or 5-10% is appropriate.',
+  },
+  {
+    question: 'What does "service compris" mean on a French bill?',
+    answer:
+      'Service compris means "service included." French law requires a 15% service charge to be built into menu prices. You are not expected to tip on top of this, though leaving small change (a few euros) for exceptional service is a nice gesture.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Tipping Guide Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Tipping Guide Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Select a country', text: 'Choose the country you are visiting from the dropdown.' },
+      { name: 'Pick a service type', text: 'Select whether you need restaurant, taxi, hotel, delivery, hairdresser, or bar tipping info.' },
+      { name: 'Enter the bill amount', text: 'Type in the total bill before any tip.' },
+      { name: 'Review the suggestion', text: 'See the suggested tip percentage, cultural note, and whether service is already included.' },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Tipping Guide Calculator"
+    description="Look up tipping customs for 12 countries and 6 service types. Know exactly how much to tip before you travel."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <TippingGuideCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select the <strong>country</strong> you are visiting and the <strong>service type</strong> you
+      need tipping advice for. The calculator will show you the local custom, whether service is
+      already included in the bill, and a cultural note explaining the etiquette.
+    </p>
+    <p>
+      Enter your <strong>bill amount</strong> to see the suggested tip in your selected currency.
+      The rounded total makes it easy to leave a clean amount.
+    </p>
+    <p>
+      Use the <strong>comparison table</strong> to quickly scan how the same service is tipped across
+      all 12 countries. Click any row to switch countries instantly.
+    </p>
+  </ContentSection>
+
+  <!-- Regional Overview -->
+  <ContentSection title="Tipping Customs by Region">
+    <p>
+      <strong>North America (US, Canada, Mexico)</strong> - Tipping is deeply embedded in the service
+      industry. In the US and Canada, servers earn below minimum wage and rely on tips. 15-25% at
+      restaurants is standard.
+    </p>
+    <p>
+      <strong>Europe (UK, France, Germany, Italy, Spain, Netherlands)</strong> - Most European
+      countries include a service charge in the bill by law or custom. An extra 5-10% is a polite
+      gesture but never required. The UK has higher expectations at 10-12.5%.
+    </p>
+    <p>
+      <strong>Asia-Pacific (Japan, Australia)</strong> - Japan considers tipping rude. Australia pays
+      fair wages, so tips are appreciated but not expected. 10% at a restaurant in Australia is
+      generous.
+    </p>
+    <p>
+      <strong>South America (Brazil)</strong> - A 10% "gorjeta" is standard on Brazilian restaurant
+      bills. It is technically optional but almost universally paid.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,187 @@
+---
+/**
+ * Road Trip Cost Calculator Page
+ *
+ * SEO-optimized page targeting: "road trip cost calculator", "gas cost for road trip"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RoadTripCostCalculator from '../../components/calculators/RoadTripCostCalculator/RoadTripCostCalculator';
+
+// SEO Configuration
+const title = 'Road Trip Cost Calculator | Gas & Budget Planner | Boring Math';
+const description =
+  'Calculate the total cost of your road trip including gas, food, hotels, and tolls. Split costs between passengers, compare to flying, and estimate CO2 emissions. Free, no signup.';
+const keywords =
+  'road trip cost calculator, gas cost for road trip, road trip budget planner, fuel cost calculator, trip cost estimator, road trip gas calculator, driving cost calculator, road trip expenses';
+const canonicalURL = '/calculators/road-trip-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Road Trip Cost Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'EV vs Gas Calculator',
+    description: 'Compare total cost of ownership between electric and gas vehicles.',
+    href: '/calculators/ev-vs-gas-calculator',
+    icon: 'bolt' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Electricity Cost',
+    description: 'Calculate appliance running costs - daily, monthly, and yearly.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Plan how to reach your savings goals.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart' as const,
+    color: 'accent' as const,
+  },
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills.',
+    href: '/calculators/tip-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, temperature, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate the gas cost for a road trip?',
+    answer:
+      'Divide your total trip distance by your vehicle\'s fuel economy (MPG or L/100km), then multiply by the current fuel price. For example, a 500-mile trip at 25 MPG needs 20 gallons. At $3.50/gallon, that\'s $70 in gas. This calculator handles the math for both imperial and metric units.',
+  },
+  {
+    question: 'What is a good fuel economy for a road trip?',
+    answer:
+      'Highway fuel economy is typically 20-30% better than city driving. A midsize sedan gets 30-35 MPG highway, an SUV 25-30 MPG, and a truck 18-25 MPG. Driving at 55-65 mph, keeping tires inflated, and reducing weight all improve fuel economy on long trips.',
+  },
+  {
+    question: 'How do I split road trip costs fairly?',
+    answer:
+      'The most common method is to divide total costs (gas, tolls, food, lodging) equally among all passengers. Some groups split only fuel and tolls evenly, while each person pays their own food and lodging. This calculator divides all entered costs by the number of passengers.',
+  },
+  {
+    question: 'Is it cheaper to drive or fly?',
+    answer:
+      'Driving is usually cheaper for trips under 500 miles, especially with 2+ passengers splitting costs. Flying becomes more economical for longer distances or solo travelers, once you factor in the time cost. This calculator provides a rough flight comparison to help you decide.',
+  },
+  {
+    question: 'How much should I budget for food on a road trip?',
+    answer:
+      'Budget $30-50 per person per day for a mix of fast food and sit-down restaurants. You can save by packing a cooler with snacks, sandwiches, and drinks. Eating at grocery stores and gas stations instead of restaurants can cut food costs by 30-50%.',
+  },
+  {
+    question: 'How much CO2 does driving produce?',
+    answer:
+      'A typical car emits about 8.9 kg of CO2 per gallon of gasoline burned (or 2.3 kg per liter). A 500-mile trip at 25 MPG produces roughly 178 kg of CO2. Carpooling reduces per-person emissions proportionally. One mature tree absorbs about 22 kg of CO2 per year.',
+  },
+  {
+    question: 'What costs do people forget when planning a road trip?',
+    answer:
+      'Common forgotten costs include tolls, parking fees, vehicle maintenance before the trip, car washes, attraction entrance fees, souvenirs, and increased insurance for long trips. Budget an extra 10-20% on top of your calculated costs for unexpected expenses.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Road Trip Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Road Trip Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Road Trip Cost Calculator"
+    description="Estimate your total road trip budget including gas, food, hotels, and tolls. Split costs between passengers and compare driving vs flying."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RoadTripCostCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Set your <strong>distance unit</strong> (miles or kilometers) and enter the total trip distance.
+      The calculator automatically adjusts fuel economy units when you switch.
+    </p>
+    <p>
+      Enter your vehicle's <strong>fuel economy</strong> and the current fuel price. You can find your
+      car's highway MPG on the window sticker or at fueleconomy.gov.
+    </p>
+    <p>
+      Add <strong>passengers</strong> to see how splitting costs reduces the per-person price.
+      More travelers means cheaper per person.
+    </p>
+    <p>
+      Include <strong>tolls, food, and hotel</strong> costs for a complete budget. Hotel costs are
+      calculated for (days - 1) nights, assuming you arrive home on the last day.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Cost Per Person</strong> is the headline number, dividing the entire trip cost equally
+      among all passengers. This is the amount each traveler should contribute.
+    </p>
+    <p>
+      The <strong>cost breakdown</strong> shows fuel, food, hotels, and tolls separately so you can
+      see where your money goes and find areas to optimize.
+    </p>
+    <p>
+      <strong>CO2 Emissions</strong> shows the environmental impact of your trip with a tree-planting
+      equivalent. Carpooling cuts per-person emissions proportionally.
+    </p>
+    <p>
+      The <strong>driving vs flying</strong> comparison gives a rough estimate based on distance and
+      passenger count. It includes only base airfare, not baggage or transport to/from airports.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
