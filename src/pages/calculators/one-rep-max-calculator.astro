@@ -1,0 +1,182 @@
+---
+/**
+ * One Rep Max (1RM) Calculator Page
+ *
+ * SEO-optimized page targeting: "1RM calculator", "one rep max calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import OneRepMaxCalculator from '../../components/calculators/OneRepMaxCalculator/OneRepMaxCalculator';
+
+// SEO Configuration
+const title = 'One Rep Max Calculator (1RM) | Boring Math';
+const description =
+  'Estimate your one rep max using Epley, Brzycki, Lander, Lombardi, and O\'Conner formulas. Get percentage tables, training zones, and formula comparisons for your strength program.';
+const keywords =
+  '1RM calculator, one rep max calculator, one rep max estimator, strength training calculator, weight lifting calculator, Epley formula, Brzycki formula, max lift calculator, training percentages';
+const canonicalURL = '/calculators/one-rep-max-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'One Rep Max Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and see healthy weight ranges.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'TDEE Calculator',
+    description: 'Find your total daily energy expenditure based on activity level.',
+    href: '/calculators/tdee-calculator',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate your daily protein, carbs, and fat needs based on your goals.',
+    href: '/calculators/macro-calculator',
+    icon: 'heart' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level and goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is a one rep max (1RM)?',
+    answer:
+      'Your one rep max is the maximum weight you can lift for a single repetition with proper form. It serves as a benchmark for measuring strength and is used to calculate training loads. Rather than testing it directly (which carries injury risk), most lifters estimate it from a submaximal set.',
+  },
+  {
+    question: 'Which 1RM formula is most accurate?',
+    answer:
+      'No single formula is universally best. Epley and Brzycki are the most widely used and tend to agree closely at lower rep ranges (1-10 reps). Brzycki can be slightly more accurate for sets of 1-6 reps, while Epley tracks better at moderate rep ranges. For best results, compare multiple formulas and use the average as your working estimate.',
+  },
+  {
+    question: 'How do I use training percentages?',
+    answer:
+      'Training percentages prescribe load relative to your 1RM. Strength programs typically use 85-100% of 1RM for 1-5 reps. Hypertrophy (muscle growth) programs use 65-85% for 6-12 reps. Endurance work uses 50-65% for 13-20+ reps. These zones help structure progressive overload across training cycles.',
+  },
+  {
+    question: 'Why do estimates become less accurate at higher reps?',
+    answer:
+      'All 1RM formulas were developed using data from sets of roughly 1-10 reps. Above 10 reps, fatigue patterns, cardiovascular demand, and technique breakdown introduce error. A 20-rep set tests muscular endurance as much as raw strength, making the extrapolation to a single heavy rep unreliable.',
+  },
+  {
+    question: 'Should I ever test a true 1RM?',
+    answer:
+      'Direct 1RM testing can be useful for powerlifters and competitive strength athletes, but it carries injury risk and requires significant recovery time. For most trainees, estimating 1RM from a 3-5 rep set is safer and practical. If you do test directly, always warm up thoroughly, use a spotter, and avoid grinding through reps with poor form.',
+  },
+  {
+    question: 'How often should I recalculate my 1RM?',
+    answer:
+      'Recalculate every 4-8 weeks as you progress, or whenever your training weights feel significantly easier or harder than prescribed. Strength gains happen faster for beginners (update monthly) and slow down for advanced lifters (update every 2-3 months). Track trends over time rather than reacting to single-session fluctuations.',
+  },
+  {
+    question: 'Does body weight affect my 1RM estimate?',
+    answer:
+      'The formulas estimate absolute 1RM based on the weight lifted and reps performed, regardless of body weight. However, relative strength (1RM divided by body weight) is a better comparison metric across different body sizes. A 100 kg squat means something different for a 60 kg lifter versus a 120 kg lifter.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'One Rep Max Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="One Rep Max Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="One Rep Max Calculator"
+    description="Estimate your maximum single-rep lift from any submaximal set. Compare five proven formulas and get training zone recommendations."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <OneRepMaxCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>weight you lifted</strong> and the <strong>number of reps</strong> you
+      completed with good form. The calculator estimates your one rep max using the selected formula.
+    </p>
+    <p>
+      Toggle between <strong>kg and lbs</strong> to work in your preferred unit. The conversion
+      preserves your entered weight when switching.
+    </p>
+    <p>
+      Choose a <strong>formula</strong> from the dropdown to see how different estimation methods
+      compare. Epley is the default and most commonly used in strength programming.
+    </p>
+    <p>
+      Use the <strong>percentage table</strong> to find working weights for your training program.
+      The <strong>training zones</strong> section shows recommended rep and load ranges for
+      strength, hypertrophy, and endurance goals.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Estimated 1RM</strong> is the predicted maximum weight you could lift for a
+      single repetition. Use this as a planning tool, not an absolute ceiling.
+    </p>
+    <p>
+      <strong>Training Zones</strong> break your 1RM into practical ranges. Strength work (85-100%)
+      builds maximal force. Hypertrophy (65-85%) optimizes muscle growth. Endurance (50-65%)
+      builds work capacity and conditioning.
+    </p>
+    <p>
+      The <strong>Percentage Table</strong> converts your 1RM into specific weights at each
+      intensity level, making it easy to load the bar for any prescribed percentage.
+    </p>
+    <p>
+      <strong>Formula Comparison</strong> shows all five estimates side by side. Disagreement
+      between formulas is normal; the spread gives you a confidence range for your true 1RM.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
