@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { calculateGlaze } from '../../src/components/calculators/GlazeCalculator/calculations';
-import type { GlazeInputs, GlazeIngredient } from '../../src/components/calculators/GlazeCalculator/types';
+import type {
+  GlazeInputs,
+  GlazeIngredient,
+} from '../../src/components/calculators/GlazeCalculator/types';
 
 describe('GlazeCalculator', () => {
   describe('calculateGlaze', () => {

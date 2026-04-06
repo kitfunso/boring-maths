@@ -25,11 +25,13 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function TipCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TipCalculatorInputs, TipCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    TipCalculatorInputs,
+    TipCalculatorResult
+  >({
     name: 'Calculate Your Tip',
     slug: 'calc-tip-inputs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTip,
   });
 

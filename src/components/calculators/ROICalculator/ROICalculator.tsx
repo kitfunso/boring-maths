@@ -31,11 +31,13 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function ROICalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<ROICalculatorInputs, ROICalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    ROICalculatorInputs,
+    ROICalculatorResult
+  >({
     name: 'Calculate Your ROI',
     slug: 'calc-roi-inputs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateROI,
   });
 

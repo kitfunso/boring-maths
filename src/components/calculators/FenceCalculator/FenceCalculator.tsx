@@ -50,10 +50,12 @@ const HEIGHT_OPTIONS = [
 ];
 
 export default function FenceCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<FenceCalculatorInputs, ReturnType<typeof calculateFence>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    FenceCalculatorInputs,
+    ReturnType<typeof calculateFence>
+  >({
     name: 'Fence Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFence,
   });
 

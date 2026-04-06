@@ -36,10 +36,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PartyDrinkCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PartyDrinkInputs, PartyDrinkResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PartyDrinkInputs,
+    PartyDrinkResult
+  >({
     name: 'Plan Your Party Drinks',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePartyDrinks,
   });
 

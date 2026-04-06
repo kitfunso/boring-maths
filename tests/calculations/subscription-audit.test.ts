@@ -1,14 +1,41 @@
 import { describe, it, expect } from 'vitest';
 import { analyzeSubscriptions } from '../../src/components/calculators/SubscriptionAudit/calculations';
-import type { SubscriptionAuditInputs, Subscription } from '../../src/components/calculators/SubscriptionAudit/types';
+import type {
+  SubscriptionAuditInputs,
+  Subscription,
+} from '../../src/components/calculators/SubscriptionAudit/types';
 
 describe('SubscriptionAuditCalculator', () => {
   describe('analyzeSubscriptions', () => {
     it('should calculate with valid inputs', () => {
       const subscriptions: Subscription[] = [
-        { id: '1', name: 'Netflix', cost: 15.99, frequency: 'monthly', category: 'streaming', usage: 'weekly', essential: false },
-        { id: '2', name: 'Spotify', cost: 9.99, frequency: 'monthly', category: 'music', usage: 'daily', essential: true },
-        { id: '3', name: 'Adobe CC', cost: 52.99, frequency: 'monthly', category: 'software', usage: 'daily', essential: true },
+        {
+          id: '1',
+          name: 'Netflix',
+          cost: 15.99,
+          frequency: 'monthly',
+          category: 'streaming',
+          usage: 'weekly',
+          essential: false,
+        },
+        {
+          id: '2',
+          name: 'Spotify',
+          cost: 9.99,
+          frequency: 'monthly',
+          category: 'music',
+          usage: 'daily',
+          essential: true,
+        },
+        {
+          id: '3',
+          name: 'Adobe CC',
+          cost: 52.99,
+          frequency: 'monthly',
+          category: 'software',
+          usage: 'daily',
+          essential: true,
+        },
       ];
 
       const inputs: SubscriptionAuditInputs = {
@@ -27,7 +54,15 @@ describe('SubscriptionAuditCalculator', () => {
 
     it('should produce consistent results', () => {
       const subscriptions: Subscription[] = [
-        { id: '1', name: 'Netflix', cost: 15.99, frequency: 'monthly', category: 'streaming', usage: 'weekly', essential: false },
+        {
+          id: '1',
+          name: 'Netflix',
+          cost: 15.99,
+          frequency: 'monthly',
+          category: 'streaming',
+          usage: 'weekly',
+          essential: false,
+        },
       ];
 
       const inputs: SubscriptionAuditInputs = {

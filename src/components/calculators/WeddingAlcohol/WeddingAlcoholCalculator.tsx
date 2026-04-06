@@ -28,7 +28,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function WeddingAlcoholCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<WeddingAlcoholInputs, WeddingAlcoholResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    WeddingAlcoholInputs,
+    WeddingAlcoholResult
+  >({
     name: 'Estimate Your Wedding Alcohol',
     defaults: DEFAULT_INPUTS,
     compute: calculateWeddingAlcohol,

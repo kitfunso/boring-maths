@@ -45,10 +45,12 @@ const SYSTEM_SIZE_OPTIONS = [
 ];
 
 export default function SolarCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<SolarCalculatorInputs, ReturnType<typeof calculateSolar>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    SolarCalculatorInputs,
+    ReturnType<typeof calculateSolar>
+  >({
     name: 'Solar Panel Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSolar,
   });
 

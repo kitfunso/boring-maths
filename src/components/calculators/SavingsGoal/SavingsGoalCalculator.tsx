@@ -30,10 +30,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SavingsGoalCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<SavingsGoalInputs, SavingsGoalResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    SavingsGoalInputs,
+    SavingsGoalResult
+  >({
     name: 'Plan Your Savings Goal',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSavingsGoal,
   });
 

@@ -9,14 +9,14 @@ import {
 describe('gsc refresh core', () => {
   it('normalises full URL to pathname', () => {
     expect(toUrlPath('https://boring-math.com/calculators/uk-tax-calculator')).toBe(
-      '/calculators/uk-tax-calculator',
+      '/calculators/uk-tax-calculator'
     );
   });
 
   it('detects missing query terms from page text', () => {
     const coverage = coverageForQuery(
       'uk dividend tax calculator',
-      'UK tax calculator with income tax bands and examples',
+      'UK tax calculator with income tax bands and examples'
     );
 
     expect(coverage.coverage_ratio).toBeLessThan(1);

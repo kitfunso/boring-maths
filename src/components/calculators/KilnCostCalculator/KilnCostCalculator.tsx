@@ -12,20 +12,24 @@ import { calculateKilnCost, formatTime, getConeOptions } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function KilnCostCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<KilnCostInputs, ReturnType<typeof calculateKilnCost>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<KilnCostInputs, ReturnType<typeof calculateKilnCost>>({
     defaults: {
-    kilnType: 'electric',
-    kilnSize: 7,
-    kilnWattage: 11.5,
-    targetCone: '6',
-    firingType: 'glaze',
-    firingTime: 8,
-    electricityRate: 0.12,
-    gasRate: 1.5,
-    gasUnit: 'therm',
-    firingSchedule: 'medium',
-    loadDensity: 'medium',
-  },
+      kilnType: 'electric',
+      kilnSize: 7,
+      kilnWattage: 11.5,
+      targetCone: '6',
+      firingType: 'glaze',
+      firingTime: 8,
+      electricityRate: 0.12,
+      gasRate: 1.5,
+      gasUnit: 'therm',
+      firingSchedule: 'medium',
+      loadDensity: 'medium',
+    },
     compute: calculateKilnCost,
   });
 

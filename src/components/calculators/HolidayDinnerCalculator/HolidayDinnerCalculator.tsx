@@ -45,7 +45,10 @@ const COOKING_METHOD_OPTIONS = [
 ];
 
 export default function HolidayDinnerCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<HolidayDinnerInputs, ReturnType<typeof calculateHolidayDinner>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    HolidayDinnerInputs,
+    ReturnType<typeof calculateHolidayDinner>
+  >({
     name: 'Holiday Dinner Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateHolidayDinner,

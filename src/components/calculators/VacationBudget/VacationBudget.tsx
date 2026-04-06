@@ -49,10 +49,12 @@ const TRAVEL_STYLE_OPTIONS = [
 ];
 
 export default function VacationBudget() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<VacationBudgetInputs, ReturnType<typeof calculateVacationBudget>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    VacationBudgetInputs,
+    ReturnType<typeof calculateVacationBudget>
+  >({
     name: 'Vacation Budget Planner',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateVacationBudget,
   });
 

@@ -17,8 +17,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function TimeZoneConverter() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TimeZoneConverterInputs, ReturnType<typeof convertTimeZone>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function TimeZoneConverter() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    TimeZoneConverterInputs,
+    ReturnType<typeof convertTimeZone>
+  >({
     name: 'Time Zone Converter',
     slug: 'calc-timezone-inputs',
     defaults: getDefaultInputs,

@@ -37,10 +37,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function GoFullTimeCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<GoFullTimeInputs, GoFullTimeResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    GoFullTimeInputs,
+    GoFullTimeResult
+  >({
     name: 'Go Full-Time Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateGoFullTime,
   });
 

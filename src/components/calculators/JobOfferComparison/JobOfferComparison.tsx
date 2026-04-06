@@ -299,10 +299,12 @@ function ComparisonBar({
 }
 
 export default function JobOfferComparison() {
-  const { inputs, result, setInputs } = useCalculatorState<JobOfferComparisonInputs, JobOfferComparisonResult>({
+  const { inputs, result, setInputs } = useCalculatorState<
+    JobOfferComparisonInputs,
+    JobOfferComparisonResult
+  >({
     name: 'Compare Job Offers',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateComparison,
   });
 

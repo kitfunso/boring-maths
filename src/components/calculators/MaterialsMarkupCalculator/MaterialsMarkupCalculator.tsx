@@ -211,9 +211,7 @@ export default function MaterialsMarkupCalculator() {
               <>
                 {/* Primary Result */}
                 <ResultCard
-                  label={
-                    inputs.mode === 'sellToMarkup' ? 'Markup' : 'Selling Price'
-                  }
+                  label={inputs.mode === 'sellToMarkup' ? 'Markup' : 'Selling Price'}
                   value={
                     inputs.mode === 'sellToMarkup'
                       ? formatPercent(result.markupPercent)
@@ -281,20 +279,24 @@ export default function MaterialsMarkupCalculator() {
                   </h3>
                   <div className="space-y-4">
                     <p className="text-sm text-[var(--color-subtle)]">
-                      Markup and margin both measure profit, but from different bases. Confusing them
-                      is the most common pricing mistake in the trades.
+                      Markup and margin both measure profit, but from different bases. Confusing
+                      them is the most common pricing mistake in the trades.
                     </p>
                     {/* Visual bar comparison */}
                     <div className="space-y-3">
                       <div>
                         <div className="flex justify-between text-xs text-[var(--color-subtle)] mb-1">
                           <span>Markup ({formatPercent(result.markupPercent)} of cost)</span>
-                          <span>{formatCurrency(result.profitPerUnit, inputs.currency)} profit</span>
+                          <span>
+                            {formatCurrency(result.profitPerUnit, inputs.currency)} profit
+                          </span>
                         </div>
                         <div className="h-6 bg-[var(--color-void)] rounded-lg overflow-hidden flex">
                           <div
                             className="bg-blue-500/60 flex items-center justify-center text-xs text-white"
-                            style={{ width: `${Math.min((100 / (100 + result.markupPercent)) * 100, 100)}%` }}
+                            style={{
+                              width: `${Math.min((100 / (100 + result.markupPercent)) * 100, 100)}%`,
+                            }}
                           >
                             Cost
                           </div>
@@ -316,8 +318,12 @@ export default function MaterialsMarkupCalculator() {
                       </div>
                       <div>
                         <div className="flex justify-between text-xs text-[var(--color-subtle)] mb-1">
-                          <span>Margin ({formatPercent(result.marginPercent)} of selling price)</span>
-                          <span>{formatCurrency(result.profitPerUnit, inputs.currency)} profit</span>
+                          <span>
+                            Margin ({formatPercent(result.marginPercent)} of selling price)
+                          </span>
+                          <span>
+                            {formatCurrency(result.profitPerUnit, inputs.currency)} profit
+                          </span>
                         </div>
                         <div className="h-6 bg-[var(--color-void)] rounded-lg overflow-hidden flex">
                           <div
@@ -405,8 +411,8 @@ export default function MaterialsMarkupCalculator() {
 
                 <Alert variant="tip" title="Pricing tip:">
                   Always clarify whether a percentage refers to markup (on cost) or margin (on
-                  selling price). A 50% markup is 33.3% margin. Getting this wrong can cost you
-                  a third of your expected profit.
+                  selling price). A 50% markup is 33.3% margin. Getting this wrong can cost you a
+                  third of your expected profit.
                 </Alert>
               </>
             ) : (

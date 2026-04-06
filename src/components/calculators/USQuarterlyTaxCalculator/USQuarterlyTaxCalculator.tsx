@@ -16,7 +16,10 @@ const FILING_STATUS_OPTIONS = [
 ];
 
 export default function USQuarterlyTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<USQuarterlyTaxInputs, ReturnType<typeof calculateQuarterlyTax>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    USQuarterlyTaxInputs,
+    ReturnType<typeof calculateQuarterlyTax>
+  >({
     name: 'Quarterly Estimated Tax Calculator',
     slug: 'calc-us-quarterly-tax-inputs',
     defaults: getDefaultInputs,

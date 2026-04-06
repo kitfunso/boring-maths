@@ -39,10 +39,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function MulchCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<MulchCalculatorInputs, MulchCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    MulchCalculatorInputs,
+    MulchCalculatorResult
+  >({
     name: 'Calculate Your Mulch Needs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMulch,
   });
 

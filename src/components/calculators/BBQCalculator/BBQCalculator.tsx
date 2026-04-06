@@ -30,7 +30,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function BBQCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<BBQCalculatorInputs, BBQCalculatorResult>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    BBQCalculatorInputs,
+    BBQCalculatorResult
+  >({
     name: 'Plan Your BBQ',
     defaults: () => getDefaultInputs(),
     compute: calculateBBQ,

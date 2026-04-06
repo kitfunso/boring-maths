@@ -163,9 +163,7 @@ export default function TippingGuideCalculator() {
               label="Suggested Total"
               value={formatCurrency(result.totalWithTip, result.currency)}
               subtitle={
-                tipPercentDisplay > 0
-                  ? `${tipPercentDisplay}% tip included`
-                  : 'No tip expected'
+                tipPercentDisplay > 0 ? `${tipPercentDisplay}% tip included` : 'No tip expected'
               }
               footer={
                 result.roundedTotal !== result.totalWithTip ? (

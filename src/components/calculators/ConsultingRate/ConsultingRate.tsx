@@ -28,10 +28,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ConsultingRate() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<ConsultingRateInputs, ReturnType<typeof calculateConsultingRate>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    ConsultingRateInputs,
+    ReturnType<typeof calculateConsultingRate>
+  >({
     name: 'Consulting Rate Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateConsultingRate,
   });
 

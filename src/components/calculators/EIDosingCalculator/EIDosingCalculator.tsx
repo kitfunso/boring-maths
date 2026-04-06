@@ -10,19 +10,23 @@ import { calculateEIDosing, gramsToTeaspoons } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function EIDosingCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<EIDosingInputs, ReturnType<typeof calculateEIDosing>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<EIDosingInputs, ReturnType<typeof calculateEIDosing>>({
     defaults: {
-    tankVolume: 55,
-    volumeUnit: 'gallons',
-    dosingSched: 'ei-standard',
-    nitrateTarget: 20,
-    phosphateTarget: 2,
-    potassiumTarget: 20,
-    ironTarget: 0.3,
-    fertilizerType: 'dry',
-    waterChangePercent: 50,
-    waterChangeFrequency: 'weekly',
-  },
+      tankVolume: 55,
+      volumeUnit: 'gallons',
+      dosingSched: 'ei-standard',
+      nitrateTarget: 20,
+      phosphateTarget: 2,
+      potassiumTarget: 20,
+      ironTarget: 0.3,
+      fertilizerType: 'dry',
+      waterChangePercent: 50,
+      waterChangeFrequency: 'weekly',
+    },
     compute: calculateEIDosing,
   });
 

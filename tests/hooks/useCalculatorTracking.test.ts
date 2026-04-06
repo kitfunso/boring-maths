@@ -4,13 +4,7 @@ import { useState } from 'preact/hooks';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { useCalculatorTracking } from '../../src/hooks/useCalculatorTracking';
 
-function TrackingHarness({
-  name,
-  hasInteracted,
-}: {
-  name: string;
-  hasInteracted: boolean;
-}) {
+function TrackingHarness({ name, hasInteracted }: { name: string; hasInteracted: boolean }) {
   useCalculatorTracking(name, hasInteracted);
   return h('div', null, 'tracker');
 }
@@ -18,9 +12,7 @@ function TrackingHarness({
 function InteractiveHarness({ name }: { name: string }) {
   const [interacted, setInteracted] = useState(false);
   useCalculatorTracking(name, interacted);
-  return h('div', null, [
-    h('button', { onClick: () => setInteracted(true) }, 'interact'),
-  ]);
+  return h('div', null, [h('button', { onClick: () => setInteracted(true) }, 'interact')]);
 }
 
 describe('useCalculatorTracking', () => {

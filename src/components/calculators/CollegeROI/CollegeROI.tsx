@@ -42,10 +42,12 @@ const PATH_OPTIONS = [
 ];
 
 export default function CollegeROI() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<CollegeROIInputs, ReturnType<typeof calculateCollegeROI>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    CollegeROIInputs,
+    ReturnType<typeof calculateCollegeROI>
+  >({
     name: 'College ROI Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCollegeROI,
   });
 

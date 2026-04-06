@@ -68,9 +68,7 @@ export default function CookingTimeCalculator() {
 
   const handleMeatChange = (meatType: MeatType) => {
     const methods = AVAILABLE_METHODS[meatType];
-    const method = methods.includes(inputs.cookingMethod)
-      ? inputs.cookingMethod
-      : methods[0];
+    const method = methods.includes(inputs.cookingMethod) ? inputs.cookingMethod : methods[0];
     setInputs((prev) => ({ ...prev, meatType, cookingMethod: method }));
   };
 
@@ -188,16 +186,8 @@ export default function CookingTimeCalculator() {
                   />
                   <MetricCard
                     label={result.temperatureF > 0 ? 'Oven / Device' : 'Setting'}
-                    value={
-                      result.temperatureF > 0
-                        ? `${result.temperatureF}°F`
-                        : 'LOW'
-                    }
-                    sublabel={
-                      result.temperatureF > 0
-                        ? `${result.temperatureC}°C`
-                        : 'Slow cooker'
-                    }
+                    value={result.temperatureF > 0 ? `${result.temperatureF}°F` : 'LOW'}
+                    sublabel={result.temperatureF > 0 ? `${result.temperatureC}°C` : 'Slow cooker'}
                   />
                   <MetricCard
                     label="Resting Time"
@@ -214,9 +204,9 @@ export default function CookingTimeCalculator() {
 
                 {/* Resting Reminder */}
                 <Alert variant="tip" title="Resting is essential">
-                  After cooking, rest the meat for {result.restingMinutes} minutes loosely
-                  tented with foil. Internal temperature will rise 5-10°F during rest, and
-                  juices redistribute for a more tender result.
+                  After cooking, rest the meat for {result.restingMinutes} minutes loosely tented
+                  with foil. Internal temperature will rise 5-10°F during rest, and juices
+                  redistribute for a more tender result.
                 </Alert>
 
                 {/* Method-specific Notes */}
@@ -238,10 +228,9 @@ export default function CookingTimeCalculator() {
 
                 {/* Food Safety Reminder */}
                 <Alert variant="info" title="USDA food safety">
-                  Always verify internal temperature with a meat thermometer inserted into
-                  the thickest part, away from bone. Poultry must reach 165°F (74°C).
-                  Whole cuts of beef, pork, and lamb should reach at least 145°F (63°C)
-                  with a 3-minute rest.
+                  Always verify internal temperature with a meat thermometer inserted into the
+                  thickest part, away from bone. Poultry must reach 165°F (74°C). Whole cuts of
+                  beef, pork, and lamb should reach at least 145°F (63°C) with a 3-minute rest.
                 </Alert>
               </>
             ) : (

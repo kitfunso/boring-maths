@@ -115,7 +115,10 @@ function DimensionInput({
 }
 
 export default function SquareFootageCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<SquareFootageCalculatorInputs, ReturnType<typeof calculateSquareFootage>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    SquareFootageCalculatorInputs,
+    ReturnType<typeof calculateSquareFootage>
+  >({
     name: 'Square Footage Calculator',
     slug: 'calc-sqft-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),

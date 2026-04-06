@@ -11,7 +11,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKStampDutyCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKStampDutyInputs, ReturnType<typeof calculateStampDuty>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKStampDutyInputs,
+    ReturnType<typeof calculateStampDuty>
+  >({
     name: 'UK Stamp Duty Calculator',
     slug: 'calc-uk-stamp-duty-inputs',
     defaults: getDefaultInputs,

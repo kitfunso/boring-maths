@@ -77,9 +77,8 @@ export function calculateMaterialsMarkup(inputs: MaterialsMarkupInputs): Materia
     case 'sellToMarkup': {
       sell = sellingPrice;
       markup = costPrice > 0 ? ((sellingPrice - costPrice) / costPrice) * 100 : 0;
-      margin = costPrice > 0 && sellingPrice > 0
-        ? ((sellingPrice - costPrice) / sellingPrice) * 100
-        : 0;
+      margin =
+        costPrice > 0 && sellingPrice > 0 ? ((sellingPrice - costPrice) / sellingPrice) * 100 : 0;
       break;
     }
     case 'marginToSell': {

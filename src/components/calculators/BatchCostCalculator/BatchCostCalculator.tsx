@@ -17,19 +17,23 @@ import { calculateBatchCost, formatCurrency, generateId } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function BatchCostCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<BatchCostInputs, ReturnType<typeof calculateBatchCost>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<BatchCostInputs, ReturnType<typeof calculateBatchCost>>({
     defaults: {
-    craftType: 'soap',
-    batchName: 'My Batch',
-    unitsProduced: 10,
-    materials: MATERIAL_PRESETS.soap,
-    laborHours: 2,
-    laborRate: 15,
-    overheadPercent: 15,
-    packagingCostPerUnit: 0.5,
-    targetProfitMargin: 50,
-    wholesaleDiscount: 50,
-  },
+      craftType: 'soap',
+      batchName: 'My Batch',
+      unitsProduced: 10,
+      materials: MATERIAL_PRESETS.soap,
+      laborHours: 2,
+      laborRate: 15,
+      overheadPercent: 15,
+      packagingCostPerUnit: 0.5,
+      targetProfitMargin: 50,
+      wholesaleDiscount: 50,
+    },
     compute: calculateBatchCost,
   });
 

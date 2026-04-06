@@ -70,11 +70,16 @@ export default function RoadTripCostCalculator() {
       // Convert fuel economy
       let newFuelEconomy = prev.fuelEconomy;
       if (prev.fuelUnit === 'mpg' && newFuelUnit === 'l100km') {
-        newFuelEconomy = prev.fuelEconomy > 0 ? Math.round((235.215 / prev.fuelEconomy) * 10) / 10 : 8;
-      } else if ((prev.fuelUnit === 'l100km' || prev.fuelUnit === 'kmpl') && newFuelUnit === 'mpg') {
-        newFuelEconomy = prev.fuelUnit === 'l100km' && prev.fuelEconomy > 0
-          ? Math.round((235.215 / prev.fuelEconomy) * 10) / 10
-          : 25;
+        newFuelEconomy =
+          prev.fuelEconomy > 0 ? Math.round((235.215 / prev.fuelEconomy) * 10) / 10 : 8;
+      } else if (
+        (prev.fuelUnit === 'l100km' || prev.fuelUnit === 'kmpl') &&
+        newFuelUnit === 'mpg'
+      ) {
+        newFuelEconomy =
+          prev.fuelUnit === 'l100km' && prev.fuelEconomy > 0
+            ? Math.round((235.215 / prev.fuelEconomy) * 10) / 10
+            : 25;
       }
 
       // Convert fuel price
@@ -336,9 +341,7 @@ export default function RoadTripCostCalculator() {
                       <div className="text-2xl font-bold text-[var(--color-cream)]">
                         {formatNumber(result.co2Emissions, 0)} kg
                       </div>
-                      <div className="text-sm text-[var(--color-subtle)] mt-1">
-                        CO2 emissions
-                      </div>
+                      <div className="text-sm text-[var(--color-subtle)] mt-1">CO2 emissions</div>
                     </div>
                     <div className="text-center p-4 rounded-lg bg-[var(--color-void)]">
                       <div className="text-2xl font-bold text-green-400">
@@ -375,9 +378,7 @@ export default function RoadTripCostCalculator() {
                       <div className="text-2xl font-bold text-blue-400">
                         {formatCurrency(result.comparisonToFlying, inputs.currency)}
                       </div>
-                      <div className="text-sm text-[var(--color-subtle)] mt-1">
-                        economy class
-                      </div>
+                      <div className="text-sm text-[var(--color-subtle)] mt-1">economy class</div>
                     </div>
                   </Grid>
                   <div className="mt-4 text-center">
@@ -389,7 +390,8 @@ export default function RoadTripCostCalculator() {
                         : `Flying saves ${formatCurrency(Math.abs(drivingSavings), inputs.currency)}`}
                     </span>
                     <span className="text-xs text-[var(--color-muted)] block mt-1">
-                      Flight estimate is approximate and excludes baggage, hotels at destination, etc.
+                      Flight estimate is approximate and excludes baggage, hotels at destination,
+                      etc.
                     </span>
                   </div>
                 </div>

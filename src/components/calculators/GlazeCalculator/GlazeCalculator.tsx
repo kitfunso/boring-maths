@@ -14,18 +14,22 @@ function generateId(): string {
 }
 
 export function GlazeCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<GlazeInputs, ReturnType<typeof calculateGlaze>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<GlazeInputs, ReturnType<typeof calculateGlaze>>({
     defaults: {
-    ingredients: [
-      { id: generateId(), name: 'Custer Feldspar', percentage: 40 },
-      { id: generateId(), name: 'Silica (Flint)', percentage: 30 },
-      { id: generateId(), name: 'Whiting (Calcium Carbonate)', percentage: 20 },
-      { id: generateId(), name: 'EPK Kaolin', percentage: 10 },
-    ],
-    targetWeight: 1000,
-    weightUnit: 'grams',
-    waterRatio: 0.5,
-  },
+      ingredients: [
+        { id: generateId(), name: 'Custer Feldspar', percentage: 40 },
+        { id: generateId(), name: 'Silica (Flint)', percentage: 30 },
+        { id: generateId(), name: 'Whiting (Calcium Carbonate)', percentage: 20 },
+        { id: generateId(), name: 'EPK Kaolin', percentage: 10 },
+      ],
+      targetWeight: 1000,
+      weightUnit: 'grams',
+      waterRatio: 0.5,
+    },
     compute: calculateGlaze,
   });
 

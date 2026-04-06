@@ -3,11 +3,7 @@
  */
 
 import { calculateHeartRateZones } from './calculations';
-import {
-  getDefaultInputs,
-  METHOD_OPTIONS,
-  type HeartRateZoneInputs,
-} from './types';
+import { getDefaultInputs, METHOD_OPTIONS, type HeartRateZoneInputs } from './types';
 import {
   ThemeProvider,
   Card,
@@ -101,9 +97,7 @@ export default function HeartRateZoneCalculator() {
 
             {/* Resting Heart Rate */}
             <div>
-              <Label htmlFor="restingHeartRate">
-                Resting Heart Rate (BPM)
-              </Label>
+              <Label htmlFor="restingHeartRate">Resting Heart Rate (BPM)</Label>
               <Input
                 id="restingHeartRate"
                 type="number"
@@ -127,9 +121,7 @@ export default function HeartRateZoneCalculator() {
               />
               {inputs.useCustomMaxHR && (
                 <div className="mt-3">
-                  <Label htmlFor="maxHeartRate">
-                    Max Heart Rate (BPM)
-                  </Label>
+                  <Label htmlFor="maxHeartRate">Max Heart Rate (BPM)</Label>
                   <Input
                     id="maxHeartRate"
                     type="number"
@@ -185,11 +177,7 @@ export default function HeartRateZoneCalculator() {
 
                 {/* Summary Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
-                  <MetricCard
-                    label="Max HR"
-                    value={`${result.maxHR}`}
-                    sublabel="BPM"
-                  />
+                  <MetricCard label="Max HR" value={`${result.maxHR}`} sublabel="BPM" />
                   <MetricCard
                     label="Resting HR"
                     value={`${inputs.restingHeartRate}`}
@@ -217,7 +205,10 @@ export default function HeartRateZoneCalculator() {
                     {result.zones.map((zone, i) => {
                       const widthPct = maxBPM > 0 ? (zone.maxBPM / maxBPM) * 100 : 0;
                       return (
-                        <div key={zone.zone} className={`rounded-xl border p-4 ${ZONE_BORDER_COLORS[i]}`}>
+                        <div
+                          key={zone.zone}
+                          className={`rounded-xl border p-4 ${ZONE_BORDER_COLORS[i]}`}
+                        >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-3">
                               <span
@@ -292,8 +283,8 @@ export default function HeartRateZoneCalculator() {
                 </div>
 
                 <Alert variant="tip" title="Training tip:">
-                  Most training should happen in Zones 1-3. Limit Zone 4-5 work to 1-2 sessions
-                  per week and allow adequate recovery between high-intensity efforts.
+                  Most training should happen in Zones 1-3. Limit Zone 4-5 work to 1-2 sessions per
+                  week and allow adequate recovery between high-intensity efforts.
                 </Alert>
               </>
             ) : (

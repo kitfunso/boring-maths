@@ -106,10 +106,7 @@ export default function PizzaDoughCalculator() {
                   step={1}
                   value={inputs.numberOfPizzas}
                   onChange={(e) =>
-                    updateInput(
-                      'numberOfPizzas',
-                      Math.min(20, Math.max(1, Number(e.target.value)))
-                    )
+                    updateInput('numberOfPizzas', Math.min(20, Math.max(1, Number(e.target.value))))
                   }
                 />
               </div>
@@ -179,17 +176,13 @@ export default function PizzaDoughCalculator() {
                 Ingredients
               </h3>
               <div className="space-y-3">
-                <IngredientRow label="Flour (Tipo 00 or bread)" grams={result.flour} percent={100} />
                 <IngredientRow
-                  label="Water"
-                  grams={result.water}
-                  percent={inputs.hydration}
+                  label="Flour (Tipo 00 or bread)"
+                  grams={result.flour}
+                  percent={100}
                 />
-                <IngredientRow
-                  label="Salt"
-                  grams={result.salt}
-                  percent={activeStyle.saltPercent}
-                />
+                <IngredientRow label="Water" grams={result.water} percent={inputs.hydration} />
+                <IngredientRow label="Salt" grams={result.salt} percent={activeStyle.saltPercent} />
                 <IngredientRow
                   label={`Yeast (${YEAST_TYPE_OPTIONS.find((y) => y.value === inputs.yeastType)?.label ?? 'Instant'})`}
                   grams={result.yeast}
@@ -237,17 +230,17 @@ export default function PizzaDoughCalculator() {
 
             {/* Tips */}
             <Alert variant="tip" title="Rise time tips">
-              Room temperature (~22 C / 72 F) rise times are shown above. For a cold ferment
-              in the fridge (4 C / 40 F), multiply the rise time by 3-4x. Cold fermentation
-              develops more flavor. Neapolitan dough benefits greatly from 24-72 hours in the fridge.
+              Room temperature (~22 C / 72 F) rise times are shown above. For a cold ferment in the
+              fridge (4 C / 40 F), multiply the rise time by 3-4x. Cold fermentation develops more
+              flavor. Neapolitan dough benefits greatly from 24-72 hours in the fridge.
             </Alert>
 
             {inputs.hydration > activeStyle.hydrationRange[1] && (
               <Alert variant="info" title="High hydration">
                 You've set hydration above the typical range for {activeStyle.label} (
                 {activeStyle.hydrationRange[0]}-{activeStyle.hydrationRange[1]}%). Higher hydration
-                makes dough stickier and harder to handle, but can produce a lighter, more open crumb
-                if you have experience working with wet doughs.
+                makes dough stickier and harder to handle, but can produce a lighter, more open
+                crumb if you have experience working with wet doughs.
               </Alert>
             )}
 
@@ -284,9 +277,7 @@ function IngredientRow({
     <div className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
       <div className="text-[var(--color-cream)] text-sm">{label}</div>
       <div className="flex items-center gap-4">
-        {percent !== null && (
-          <span className="text-xs text-[var(--color-muted)]">{percent}%</span>
-        )}
+        {percent !== null && <span className="text-xs text-[var(--color-muted)]">{percent}%</span>}
         <span className="font-semibold text-[var(--color-cream)] tabular-nums min-w-[70px] text-right">
           {formatWeight(grams)}
         </span>

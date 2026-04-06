@@ -26,8 +26,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function TDEECalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TDEEInputs, ReturnType<typeof calculateTDEE>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function TDEECalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    TDEEInputs,
+    ReturnType<typeof calculateTDEE>
+  >({
     name: 'TDEE Calculator',
     slug: 'calc-tdee-inputs',
     defaults: getDefaultInputs,

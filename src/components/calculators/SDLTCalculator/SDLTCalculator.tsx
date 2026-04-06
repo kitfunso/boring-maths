@@ -19,7 +19,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function SDLTCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<SDLTCalculatorInputs, ReturnType<typeof calculateSDLT>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    SDLTCalculatorInputs,
+    ReturnType<typeof calculateSDLT>
+  >({
     name: 'SDLT Calculator',
     slug: 'calc-sdlt-inputs',
     defaults: getDefaultInputs,

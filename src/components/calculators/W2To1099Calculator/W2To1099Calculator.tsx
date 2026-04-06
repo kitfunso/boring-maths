@@ -22,7 +22,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Select, Aler
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function W2To1099Calculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<W2To1099CalculatorInputs, ReturnType<typeof calculateW2To1099>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    W2To1099CalculatorInputs,
+    ReturnType<typeof calculateW2To1099>
+  >({
     name: 'W2 to 1099 Rate Calculator',
     slug: 'calc-w2-to-1099-inputs',
     defaults: getDefaultInputs,

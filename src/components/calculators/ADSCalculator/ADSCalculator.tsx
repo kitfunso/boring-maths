@@ -16,7 +16,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function ADSCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<ADSCalculatorInputs, ReturnType<typeof calculateADS>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    ADSCalculatorInputs,
+    ReturnType<typeof calculateADS>
+  >({
     name: 'Additional Dwelling Supplement Calculator',
     slug: 'calc-ads-inputs',
     defaults: getDefaultInputs,

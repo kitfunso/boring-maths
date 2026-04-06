@@ -27,7 +27,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PressureDropCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PressureDropInputs, ReturnType<typeof calculatePressureDrop>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PressureDropInputs,
+    ReturnType<typeof calculatePressureDrop>
+  >({
     name: 'Pressure Drop Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePressureDrop,

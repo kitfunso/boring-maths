@@ -4,7 +4,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKPensionCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKPensionInputs, ReturnType<typeof calculatePension>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKPensionInputs,
+    ReturnType<typeof calculatePension>
+  >({
     name: 'UK Pension Calculator',
     slug: 'calc-uk-pension-inputs',
     defaults: getDefaultInputs,

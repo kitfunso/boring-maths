@@ -51,7 +51,7 @@ export const UK_CAR_RATE_OVER_10K = 0.25;
 /** Pence per mile for motorcycles (flat rate) */
 export const UK_MOTORCYCLE_RATE = 0.24;
 /** Pence per mile for bicycles (flat rate) */
-export const UK_BICYCLE_RATE = 0.20;
+export const UK_BICYCLE_RATE = 0.2;
 
 // ---------------------------------------------------------------------------
 // US IRS Standard Mileage Rate (2025)
@@ -65,7 +65,7 @@ export const US_IRS_RATE_2025 = 0.67;
 // ---------------------------------------------------------------------------
 
 export const ESTIMATED_TAX_RATES: Record<MileageRegion, number> = {
-  UK: 0.20, // Basic rate income tax
+  UK: 0.2, // Basic rate income tax
   US: 0.22, // Federal 22% bracket (typical self-employed)
 };
 

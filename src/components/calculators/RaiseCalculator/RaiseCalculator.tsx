@@ -24,10 +24,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RaiseCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<RaiseCalculatorInputs, RaiseCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    RaiseCalculatorInputs,
+    RaiseCalculatorResult
+  >({
     name: 'Calculate Your Raise Value',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRaise,
   });
 

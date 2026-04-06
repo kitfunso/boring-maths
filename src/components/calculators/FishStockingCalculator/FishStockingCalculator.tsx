@@ -33,7 +33,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FishStockingCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<FishStockingInputs, ReturnType<typeof calculateFishStocking>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    FishStockingInputs,
+    ReturnType<typeof calculateFishStocking>
+  >({
     name: 'Fish Stocking Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateFishStocking,

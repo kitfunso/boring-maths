@@ -95,12 +95,9 @@ export function useCalculatorState<TInputs, TResult>(
 
   const result = useMemo(() => compute(inputs), [inputs]);
 
-  const updateInput = useCallback(
-    <K extends keyof TInputs>(field: K, value: TInputs[K]): void => {
-      setInputs((prev) => ({ ...prev, [field]: value }));
-    },
-    []
-  );
+  const updateInput = useCallback(<K extends keyof TInputs>(field: K, value: TInputs[K]): void => {
+    setInputs((prev) => ({ ...prev, [field]: value }));
+  }, []);
 
   return { inputs, result, updateInput, setInputs };
 }

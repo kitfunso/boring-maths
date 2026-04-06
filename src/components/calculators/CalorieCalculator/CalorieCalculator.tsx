@@ -27,7 +27,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function CalorieCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<CalorieInputs, ReturnType<typeof calculateCalories>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    CalorieInputs,
+    ReturnType<typeof calculateCalories>
+  >({
     name: 'Calorie Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateCalories,

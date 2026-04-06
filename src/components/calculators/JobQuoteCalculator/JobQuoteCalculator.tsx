@@ -14,11 +14,7 @@ import {
   type TradeType,
   type MaterialLineItem,
 } from './types';
-import {
-  type Currency,
-  getCurrencySymbol,
-  getInitialCurrency,
-} from '../../../lib/regions';
+import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
   ThemeProvider,
   Card,
@@ -55,8 +51,7 @@ export default function JobQuoteCalculator() {
 
   const handleTradeChange = (value: string) => {
     const trade = value as TradeType;
-    const multiplier =
-      inputs.currency === 'GBP' ? 0.8 : inputs.currency === 'EUR' ? 0.9 : 1;
+    const multiplier = inputs.currency === 'GBP' ? 0.8 : inputs.currency === 'EUR' ? 0.9 : 1;
     setInputs((prev) => ({
       ...prev,
       tradeType: trade,
@@ -67,10 +62,7 @@ export default function JobQuoteCalculator() {
   const addMaterial = () => {
     setInputs((prev) => ({
       ...prev,
-      materials: [
-        ...prev.materials,
-        { id: generateMaterialId(), name: '', cost: 0 },
-      ],
+      materials: [...prev.materials, { id: generateMaterialId(), name: '', cost: 0 }],
     }));
   };
 
@@ -85,9 +77,7 @@ export default function JobQuoteCalculator() {
   const updateMaterial = (id: string, updates: Partial<MaterialLineItem>) => {
     setInputs((prev) => ({
       ...prev,
-      materials: prev.materials.map((m) =>
-        m.id === id ? { ...m, ...updates } : m
-      ),
+      materials: prev.materials.map((m) => (m.id === id ? { ...m, ...updates } : m)),
     }));
   };
 
@@ -100,12 +90,7 @@ export default function JobQuoteCalculator() {
         <CalculatorHeader
           title="Job Quote Calculator"
           subtitle="Build accurate quotes for any trade job"
-          actions={
-            <CurrencySelector
-              value={inputs.currency}
-              onChange={handleCurrencyChange}
-            />
-          }
+          actions={<CurrencySelector value={inputs.currency} onChange={handleCurrencyChange} />}
         />
 
         <div className="p-6 md:p-8">
@@ -142,9 +127,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={0.5}
                     value={inputs.labourHours}
-                    onChange={(e) =>
-                      updateInput('labourHours', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('labourHours', Number(e.target.value))}
                   />
                 </div>
 
@@ -159,9 +142,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={1}
                     value={inputs.hourlyRate}
-                    onChange={(e) =>
-                      updateInput('hourlyRate', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -210,10 +191,7 @@ export default function JobQuoteCalculator() {
                           step={0.01}
                           onChange={(e) =>
                             updateMaterial(material.id, {
-                              cost:
-                                parseFloat(
-                                  (e.target as HTMLInputElement).value
-                                ) || 0,
+                              cost: parseFloat((e.target as HTMLInputElement).value) || 0,
                             })
                           }
                           className="w-full rounded bg-[var(--color-surface)] px-2 py-1 text-sm text-[var(--color-cream)] ring-1 ring-white/10 text-right"
@@ -237,9 +215,7 @@ export default function JobQuoteCalculator() {
               <div className="rounded-lg bg-blue-900/20 p-3 ring-1 ring-blue-500/20">
                 <div className="flex justify-between text-sm">
                   <span className="text-blue-200/80">Materials Total</span>
-                  <span className="font-bold text-blue-400">
-                    {fmt(result.materialsSubtotal)}
-                  </span>
+                  <span className="font-bold text-blue-400">{fmt(result.materialsSubtotal)}</span>
                 </div>
               </div>
 
@@ -274,14 +250,10 @@ export default function JobQuoteCalculator() {
                     max={100}
                     step={0.5}
                     value={inputs.vatRate}
-                    onChange={(e) =>
-                      updateInput('vatRate', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('vatRate', Number(e.target.value))}
                     suffix="%"
                   />
-                  <p className="text-xs text-[var(--color-muted)] mt-1">
-                    UK standard: 20%, US: 0%
-                  </p>
+                  <p className="text-xs text-[var(--color-muted)] mt-1">UK standard: 20%, US: 0%</p>
                 </div>
 
                 <div>
@@ -293,9 +265,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={5}
                     value={inputs.travelFee}
-                    onChange={(e) =>
-                      updateInput('travelFee', Number(e.target.value))
-                    }
+                    onChange={(e) => updateInput('travelFee', Number(e.target.value))}
                   />
                 </div>
               </Grid>
@@ -307,17 +277,12 @@ export default function JobQuoteCalculator() {
                 label="Total Quote"
                 value={fmt(result.totalQuote)}
                 subtitle={
-                  result.vatAmount > 0
-                    ? `Including ${fmt(result.vatAmount)} VAT`
-                    : 'No VAT applied'
+                  result.vatAmount > 0 ? `Including ${fmt(result.vatAmount)} VAT` : 'No VAT applied'
                 }
               />
 
               <Grid responsive={{ sm: 2 }} gap="md">
-                <MetricCard
-                  label="Materials"
-                  value={fmt(result.materialsSubtotal)}
-                />
+                <MetricCard label="Materials" value={fmt(result.materialsSubtotal)} />
                 <MetricCard
                   label="Labour"
                   value={fmt(result.labourSubtotal)}
@@ -357,9 +322,7 @@ export default function JobQuoteCalculator() {
                   </div>
                   {inputs.travelFee > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-[var(--color-muted)]">
-                        Travel / Callout
-                      </span>
+                      <span className="text-[var(--color-muted)]">Travel / Callout</span>
                       <span className="tabular-nums text-[var(--color-cream)]">
                         {fmt(inputs.travelFee)}
                       </span>
@@ -376,18 +339,14 @@ export default function JobQuoteCalculator() {
                     </div>
                   )}
                   <div className="border-t border-white/10 pt-2 flex justify-between font-medium">
-                    <span className="text-[var(--color-cream)]">
-                      Subtotal (ex-VAT)
-                    </span>
+                    <span className="text-[var(--color-cream)]">Subtotal (ex-VAT)</span>
                     <span className="tabular-nums text-[var(--color-cream)]">
                       {fmt(result.subtotalBeforeVAT)}
                     </span>
                   </div>
                   {result.vatAmount > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-[var(--color-muted)]">
-                        VAT ({inputs.vatRate}%)
-                      </span>
+                      <span className="text-[var(--color-muted)]">VAT ({inputs.vatRate}%)</span>
                       <span className="tabular-nums text-[var(--color-cream)]">
                         {fmt(result.vatAmount)}
                       </span>
@@ -395,9 +354,7 @@ export default function JobQuoteCalculator() {
                   )}
                   <div className="border-t border-white/10 pt-2 flex justify-between font-bold text-base">
                     <span className="text-blue-400">Total Quote</span>
-                    <span className="tabular-nums text-blue-400">
-                      {fmt(result.totalQuote)}
-                    </span>
+                    <span className="tabular-nums text-blue-400">{fmt(result.totalQuote)}</span>
                   </div>
                 </div>
               </div>
@@ -408,11 +365,7 @@ export default function JobQuoteCalculator() {
                   {TRADE_OPTIONS.map((trade) => {
                     const rate =
                       TRADE_RATE_PRESETS[trade.value] *
-                      (inputs.currency === 'GBP'
-                        ? 0.8
-                        : inputs.currency === 'EUR'
-                          ? 0.9
-                          : 1);
+                      (inputs.currency === 'GBP' ? 0.8 : inputs.currency === 'EUR' ? 0.9 : 1);
                     return (
                       <div key={trade.value} className="flex justify-between">
                         <span>{trade.label}</span>
@@ -427,8 +380,8 @@ export default function JobQuoteCalculator() {
 
               {result.profitMarginPercent < 10 && (
                 <Alert variant="error" title="Low Margin">
-                  Your profit margin is below 10%. Consider increasing your
-                  markup or hourly rate to maintain a sustainable business.
+                  Your profit margin is below 10%. Consider increasing your markup or hourly rate to
+                  maintain a sustainable business.
                 </Alert>
               )}
 

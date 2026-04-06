@@ -27,7 +27,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function UnitConverter() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<UnitConverterInputs, ReturnType<typeof convert>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    UnitConverterInputs,
+    ReturnType<typeof convert>
+  >({
     name: 'Unit Converter',
     defaults: () => getDefaultInputs(),
     compute: convert,

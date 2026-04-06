@@ -9,8 +9,12 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Select, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function CouncilTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<CouncilTaxInputs, ReturnType<typeof calculateCouncilTax>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function CouncilTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    CouncilTaxInputs,
+    ReturnType<typeof calculateCouncilTax>
+  >({
     name: 'Council Tax Calculator',
     slug: 'calc-council-tax-inputs',
     defaults: getDefaultInputs,

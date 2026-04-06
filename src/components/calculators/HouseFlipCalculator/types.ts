@@ -30,7 +30,10 @@ export interface HouseFlipResult {
 }
 
 export function getDefaultInputs(currency: Currency = 'USD'): HouseFlipInputs {
-  const prices: Record<Currency, { purchase: number; renovation: number; arv: number; holding: number }> = {
+  const prices: Record<
+    Currency,
+    { purchase: number; renovation: number; arv: number; holding: number }
+  > = {
     USD: { purchase: 200000, renovation: 50000, arv: 320000, holding: 1500 },
     GBP: { purchase: 160000, renovation: 40000, arv: 260000, holding: 1200 },
     EUR: { purchase: 180000, renovation: 45000, arv: 290000, holding: 1300 },

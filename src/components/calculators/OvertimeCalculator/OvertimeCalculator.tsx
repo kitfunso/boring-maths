@@ -30,10 +30,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function OvertimeCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<OvertimeCalculatorInputs, OvertimeCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    OvertimeCalculatorInputs,
+    OvertimeCalculatorResult
+  >({
     name: 'Is Overtime Worth It?',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateOvertime,
   });
 

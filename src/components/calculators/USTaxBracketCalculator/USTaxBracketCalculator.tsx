@@ -22,7 +22,10 @@ const DEDUCTION_OPTIONS = [
 ];
 
 export default function USTaxBracketCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<USTaxBracketInputs, ReturnType<typeof calculateUSTaxBracket>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    USTaxBracketInputs,
+    ReturnType<typeof calculateUSTaxBracket>
+  >({
     name: 'US Tax Bracket Calculator',
     slug: 'calc-us-tax-bracket-inputs',
     defaults: getDefaultInputs,

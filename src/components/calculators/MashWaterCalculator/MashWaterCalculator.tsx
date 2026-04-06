@@ -10,23 +10,27 @@ import { calculateMashWater } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function MashWaterCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<MashWaterInputs, ReturnType<typeof calculateMashWater>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<MashWaterInputs, ReturnType<typeof calculateMashWater>>({
     defaults: {
-    grainWeight: 10,
-    weightUnit: 'pounds',
-    grainTemp: 68,
-    targetMashTemp: 152,
-    tempUnit: 'fahrenheit',
-    mashThickness: 1.25,
-    equipmentLoss: 0.25,
-    grainAbsorption: 0.125,
-    boilTime: 60,
-    evaporationRate: 1.0,
-    preboilVolume: 6.5,
-    volumeUnit: 'gallons',
-    spargeType: 'batch',
-    batchSpargeCount: 2,
-  },
+      grainWeight: 10,
+      weightUnit: 'pounds',
+      grainTemp: 68,
+      targetMashTemp: 152,
+      tempUnit: 'fahrenheit',
+      mashThickness: 1.25,
+      equipmentLoss: 0.25,
+      grainAbsorption: 0.125,
+      boilTime: 60,
+      evaporationRate: 1.0,
+      preboilVolume: 6.5,
+      volumeUnit: 'gallons',
+      spargeType: 'batch',
+      batchSpargeCount: 2,
+    },
     compute: calculateMashWater,
   });
 

@@ -3,11 +3,7 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import {
-  calculateRentAffordability,
-  formatCurrency,
-  formatPercent,
-} from './calculations';
+import { calculateRentAffordability, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
   INCOME_TYPE_OPTIONS,
@@ -150,9 +146,7 @@ export default function RentAffordabilityCalculator() {
 
             {/* Existing Monthly Debts */}
             <div>
-              <Label htmlFor="existingDebts">
-                Existing Monthly Debts
-              </Label>
+              <Label htmlFor="existingDebts">Existing Monthly Debts</Label>
               <Input
                 id="existingDebts"
                 variant="currency"
@@ -170,9 +164,7 @@ export default function RentAffordabilityCalculator() {
 
             {/* Savings Goal */}
             <div>
-              <Label htmlFor="savingsGoalPercent">
-                Savings Goal (% of net income)
-              </Label>
+              <Label htmlFor="savingsGoalPercent">Savings Goal (% of net income)</Label>
               <Input
                 id="savingsGoalPercent"
                 variant="percentage"
@@ -194,9 +186,7 @@ export default function RentAffordabilityCalculator() {
 
             {inputs.includeUtilities && (
               <div>
-                <Label htmlFor="estimatedUtilities">
-                  Estimated Monthly Utilities
-                </Label>
+                <Label htmlFor="estimatedUtilities">Estimated Monthly Utilities</Label>
                 <Input
                   id="estimatedUtilities"
                   variant="currency"
@@ -249,9 +239,7 @@ export default function RentAffordabilityCalculator() {
                     label="After Rent"
                     value={formatCurrency(result.remainingAfterRent, inputs.currency)}
                     sublabel="remaining monthly"
-                    valueColor={
-                      result.remainingAfterRent > 0 ? 'text-green-400' : 'text-red-400'
-                    }
+                    valueColor={result.remainingAfterRent > 0 ? 'text-green-400' : 'text-red-400'}
                   />
                   <MetricCard
                     label="Savings Room"
@@ -278,7 +266,8 @@ export default function RentAffordabilityCalculator() {
                 {/* Budget Breakdown */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
-                    50/30/20 Budget Breakdown (Net: {formatCurrency(result.effectiveIncome, inputs.currency)}/mo)
+                    50/30/20 Budget Breakdown (Net:{' '}
+                    {formatCurrency(result.effectiveIncome, inputs.currency)}/mo)
                   </h3>
                   <div className="space-y-4">
                     <BudgetBar
@@ -307,15 +296,15 @@ export default function RentAffordabilityCalculator() {
 
                 {result.remainingAfterRent < 0 && (
                   <Alert variant="warning" title="Tight budget">
-                    At the recommended rent, your remaining income after debts and savings goals
-                    is negative. Consider reducing your target rent or debts.
+                    At the recommended rent, your remaining income after debts and savings goals is
+                    negative. Consider reducing your target rent or debts.
                   </Alert>
                 )}
 
                 <Alert variant="tip" title="Keep in mind:">
-                  These are guidelines, not hard limits. Your actual affordability depends on
-                  local cost of living, lifestyle, and financial goals. When in doubt, aim for
-                  the lower number.
+                  These are guidelines, not hard limits. Your actual affordability depends on local
+                  cost of living, lifestyle, and financial goals. When in doubt, aim for the lower
+                  number.
                 </Alert>
               </>
             ) : (
@@ -327,10 +316,7 @@ export default function RentAffordabilityCalculator() {
             {/* Share Results */}
             {hasIncome && (
               <div className="flex justify-center pt-4">
-                <ShareResults
-                  result={shareText}
-                  calculatorName="Rent Affordability Calculator"
-                />
+                <ShareResults result={shareText} calculatorName="Rent Affordability Calculator" />
               </div>
             )}
           </div>

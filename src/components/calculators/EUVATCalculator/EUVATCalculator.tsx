@@ -25,7 +25,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EUVATCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<VATInputs, ReturnType<typeof calculateVAT>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    VATInputs,
+    ReturnType<typeof calculateVAT>
+  >({
     name: 'EU VAT Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateVAT,

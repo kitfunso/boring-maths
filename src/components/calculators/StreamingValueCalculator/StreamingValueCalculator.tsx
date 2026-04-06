@@ -3,11 +3,7 @@
  */
 
 import { useCallback } from 'preact/hooks';
-import {
-  calculateStreamingValue,
-  formatDollars,
-  formatCostPerHour,
-} from './calculations';
+import { calculateStreamingValue, formatDollars, formatCostPerHour } from './calculations';
 import { getDefaultInputs, type StreamingValueInputs, type StreamingService } from './types';
 import {
   ThemeProvider,
@@ -196,10 +192,7 @@ export default function StreamingValueCalculator() {
                   </h3>
                   <div className="space-y-3">
                     {result.perServiceMetrics.map((metric) => {
-                      const barWidth = Math.min(
-                        100,
-                        (metric.costPerHour / maxCostPerHour) * 100
-                      );
+                      const barWidth = Math.min(100, (metric.costPerHour / maxCostPerHour) * 100);
                       return (
                         <div key={metric.name}>
                           <div className="flex items-center justify-between mb-1">
@@ -240,8 +233,8 @@ export default function StreamingValueCalculator() {
                 {/* Recommended Cut */}
                 {result.recommendedCut && (
                   <Alert variant="tip" title="Money-saving tip:">
-                    Consider dropping <strong>{result.recommendedCut}</strong> -- it has the
-                    worst cost-per-hour ratio among your subscriptions. That saves you{' '}
+                    Consider dropping <strong>{result.recommendedCut}</strong> -- it has the worst
+                    cost-per-hour ratio among your subscriptions. That saves you{' '}
                     <strong>
                       {formatDollars(
                         result.perServiceMetrics.find((m) => m.name === result.recommendedCut)

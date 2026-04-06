@@ -136,7 +136,10 @@ function PlatformCard({
 }
 
 export default function EtsyFeeCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<EtsyFeeInputs, EtsyFeeResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    EtsyFeeInputs,
+    EtsyFeeResult
+  >({
     name: 'Calculate Your Marketplace Fees',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMarketplaceFees,

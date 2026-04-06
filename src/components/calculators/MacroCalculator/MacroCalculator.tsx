@@ -28,7 +28,10 @@ import {
 } from '../../ui';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function MacroCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<MacroCalculatorInputs, ReturnType<typeof calculateMacros>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    MacroCalculatorInputs,
+    ReturnType<typeof calculateMacros>
+  >({
     name: 'Macro Calculator',
     slug: 'calc-macro-inputs',
     defaults: getDefaultInputs,

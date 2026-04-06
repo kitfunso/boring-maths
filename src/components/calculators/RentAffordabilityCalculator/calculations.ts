@@ -28,7 +28,9 @@ function estimateNetFromGross(gross: number, currency: Currency): number {
   return round2(gross * GROSS_TO_NET[currency]);
 }
 
-export function calculateRentAffordability(inputs: RentAffordabilityInputs): RentAffordabilityResult {
+export function calculateRentAffordability(
+  inputs: RentAffordabilityInputs
+): RentAffordabilityResult {
   const {
     monthlyIncome,
     incomeType,

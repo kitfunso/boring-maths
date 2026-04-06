@@ -44,7 +44,11 @@ export interface OneRepMaxResult {
   readonly trainingZones: readonly TrainingZone[];
 }
 
-export const FORMULA_OPTIONS: readonly { value: FormulaName; label: string; description: string }[] = [
+export const FORMULA_OPTIONS: readonly {
+  value: FormulaName;
+  label: string;
+  description: string;
+}[] = [
   { value: 'epley', label: 'Epley', description: 'Most widely used formula' },
   { value: 'brzycki', label: 'Brzycki', description: 'Accurate for lower rep ranges' },
   { value: 'lander', label: 'Lander', description: 'Good general-purpose estimate' },

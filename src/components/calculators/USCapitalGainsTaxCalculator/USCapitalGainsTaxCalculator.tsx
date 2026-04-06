@@ -24,7 +24,10 @@ const ASSET_TYPE_OPTIONS = [
 ];
 
 export default function USCapitalGainsTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<USCapitalGainsInputs, ReturnType<typeof calculateCapitalGainsTax>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    USCapitalGainsInputs,
+    ReturnType<typeof calculateCapitalGainsTax>
+  >({
     name: 'Capital Gains Tax Calculator',
     slug: 'calc-us-capital-gains-inputs',
     defaults: getDefaultInputs,

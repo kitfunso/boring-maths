@@ -43,7 +43,9 @@ describe('internal link map core', () => {
     const taxLinks = links.filter((row) => row.source_url === '/calculators/uk-tax-calculator');
 
     expect(taxLinks.length).toBeGreaterThan(0);
-    expect(taxLinks.some((row) => row.target_url === '/calculators/uk-dividend-tax-calculator')).toBe(true);
+    expect(
+      taxLinks.some((row) => row.target_url === '/calculators/uk-dividend-tax-calculator')
+    ).toBe(true);
     expect(taxLinks.some((row) => row.target_url === '/calculators/bbq-calculator')).toBe(false);
   });
 
@@ -61,13 +63,16 @@ describe('internal link map core', () => {
       {
         maxLinksPerPage: 1,
         minSimilarity: 0.15,
-      },
+      }
     );
 
-    const counts = links.reduce((acc, row) => {
-      acc[row.source_url] = (acc[row.source_url] ?? 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const counts = links.reduce(
+      (acc, row) => {
+        acc[row.source_url] = (acc[row.source_url] ?? 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     Object.values(counts).forEach((count) => expect(count).toBeLessThanOrEqual(1));
   });

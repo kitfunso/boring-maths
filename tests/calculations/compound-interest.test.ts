@@ -68,7 +68,7 @@ describe('CompoundInterestCalculator', () => {
         currency: 'USD',
         principal: 1000,
         monthlyContribution: 0,
-        interestRate: 0.10,
+        interestRate: 0.1,
         years: 5,
         compoundFrequency: 'annually',
       };

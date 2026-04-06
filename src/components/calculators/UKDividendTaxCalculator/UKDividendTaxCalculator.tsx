@@ -4,7 +4,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKDividendTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKDividendTaxInputs, ReturnType<typeof calculateDividendTaxResult>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKDividendTaxInputs,
+    ReturnType<typeof calculateDividendTaxResult>
+  >({
     name: 'UK Dividend Tax Calculator',
     slug: 'calc-uk-dividend-tax-inputs',
     defaults: getDefaultInputs,

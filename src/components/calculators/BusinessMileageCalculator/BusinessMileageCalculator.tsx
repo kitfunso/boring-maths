@@ -151,8 +151,7 @@ export default function BusinessMileageCalculator() {
                       Estimated tax saving:{' '}
                       <span className="font-semibold text-[var(--color-accent)]">
                         {formatCurrency(result.annualTaxSaving, currencyCode)}
-                      </span>
-                      {' '}
+                      </span>{' '}
                       per year (at {Math.round(result.estimatedTaxRate * 100)}% marginal rate)
                     </>
                   }
@@ -208,7 +207,9 @@ export default function BusinessMileageCalculator() {
                       </div>
                     ))}
                     <div className="flex items-center justify-between pt-2 border-t border-white/20">
-                      <span className="font-semibold text-[var(--color-cream)]">Total Deduction</span>
+                      <span className="font-semibold text-[var(--color-cream)]">
+                        Total Deduction
+                      </span>
                       <span className="font-bold text-lg text-[var(--color-accent)]">
                         {formatCurrency(result.taxDeduction, currencyCode)}
                       </span>
@@ -222,7 +223,9 @@ export default function BusinessMileageCalculator() {
                     {inputs.region === 'UK' ? 'UK vs US' : 'US vs UK'} Rate Comparison
                   </h3>
                   <Grid responsive={{ sm: 2 }} gap="md">
-                    <div className={`p-4 rounded-lg ${inputs.region === 'UK' ? 'bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30' : 'bg-white/5'}`}>
+                    <div
+                      className={`p-4 rounded-lg ${inputs.region === 'UK' ? 'bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30' : 'bg-white/5'}`}
+                    >
                       <div className="text-sm text-[var(--color-muted)] mb-1">UK (HMRC)</div>
                       <div className="text-lg font-bold text-[var(--color-cream)]">
                         {inputs.region === 'UK'
@@ -233,7 +236,9 @@ export default function BusinessMileageCalculator() {
                         45p/25p per mile (car)
                       </div>
                     </div>
-                    <div className={`p-4 rounded-lg ${inputs.region === 'US' ? 'bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30' : 'bg-white/5'}`}>
+                    <div
+                      className={`p-4 rounded-lg ${inputs.region === 'US' ? 'bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30' : 'bg-white/5'}`}
+                    >
                       <div className="text-sm text-[var(--color-muted)] mb-1">US (IRS)</div>
                       <div className="text-lg font-bold text-[var(--color-cream)]">
                         {inputs.region === 'US'

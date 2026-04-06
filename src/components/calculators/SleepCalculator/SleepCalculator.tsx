@@ -24,7 +24,10 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function SleepCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<SleepInputs, ReturnType<typeof calculateSleepTimes>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    SleepInputs,
+    ReturnType<typeof calculateSleepTimes>
+  >({
     name: 'Sleep Calculator',
     slug: 'calc-sleep-inputs',
     defaults: getDefaultInputs,

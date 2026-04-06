@@ -41,7 +41,10 @@ const ROOM_SHAPE_OPTIONS = [
 ];
 
 export default function ConferenceRoomCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<ConferenceRoomInputs, ReturnType<typeof calculateConferenceRoom>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    ConferenceRoomInputs,
+    ReturnType<typeof calculateConferenceRoom>
+  >({
     name: 'Conference Room Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateConferenceRoom,

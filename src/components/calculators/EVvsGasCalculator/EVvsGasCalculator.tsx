@@ -31,7 +31,10 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EVvsGasCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<EVvsGasInputs, ReturnType<typeof calculateEVvsGas>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    EVvsGasInputs,
+    ReturnType<typeof calculateEVvsGas>
+  >({
     name: 'EV vs Gas Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEVvsGas,

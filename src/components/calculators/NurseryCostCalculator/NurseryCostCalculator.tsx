@@ -26,8 +26,12 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Select, Alert } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function NurseryCostCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<NurseryCostInputs, ReturnType<typeof calculateNurseryCost>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function NurseryCostCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    NurseryCostInputs,
+    ReturnType<typeof calculateNurseryCost>
+  >({
     name: 'UK Nursery Cost Calculator',
     slug: 'calc-nursery-cost-inputs',
     defaults: getDefaultInputs,

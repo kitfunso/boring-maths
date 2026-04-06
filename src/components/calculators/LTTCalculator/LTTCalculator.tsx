@@ -2,8 +2,12 @@ import { calculateLTT, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, BUYER_TYPE_LABELS, type LTTInputs, type WalesBuyerType } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function LTTCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<LTTInputs, ReturnType<typeof calculateLTT>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function LTTCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    LTTInputs,
+    ReturnType<typeof calculateLTT>
+  >({
     name: 'LTT Calculator Wales',
     slug: 'calc-ltt-inputs',
     defaults: getDefaultInputs,

@@ -10,21 +10,25 @@ import { calculateToolDeflection, formatDeflection } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function ToolDeflectionCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<ToolDeflectionInputs, ReturnType<typeof calculateToolDeflection>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<ToolDeflectionInputs, ReturnType<typeof calculateToolDeflection>>({
     defaults: {
-    toolDiameter: 0.25,
-    stickout: 1.0,
-    lengthUnit: 'inches',
-    toolMaterial: 'carbide',
-    fluteCount: 4,
-    cuttingForce: 10,
-    forceUnit: 'lbs',
-    calculationMode: 'parameters',
-    depthOfCut: 0.1,
-    widthOfCut: 0.125,
-    feedRate: 10,
-    materialFactor: 1.0,
-  },
+      toolDiameter: 0.25,
+      stickout: 1.0,
+      lengthUnit: 'inches',
+      toolMaterial: 'carbide',
+      fluteCount: 4,
+      cuttingForce: 10,
+      forceUnit: 'lbs',
+      calculationMode: 'parameters',
+      depthOfCut: 0.1,
+      widthOfCut: 0.125,
+      feedRate: 10,
+      materialFactor: 1.0,
+    },
     compute: calculateToolDeflection,
   });
 

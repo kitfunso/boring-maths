@@ -34,7 +34,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function LyeCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<LyeCalculatorInputs, ReturnType<typeof calculateLye>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    LyeCalculatorInputs,
+    ReturnType<typeof calculateLye>
+  >({
     name: 'Soap Lye Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateLye,

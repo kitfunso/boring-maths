@@ -10,20 +10,24 @@ import { calculateCandleWax, formatBurnTime } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CandleWaxCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<CandleWaxInputs, ReturnType<typeof calculateCandleWax>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<CandleWaxInputs, ReturnType<typeof calculateCandleWax>>({
     defaults: {
-    calculationMode: 'dimensions',
-    containerDiameter: 3.0,
-    containerHeight: 3.5,
-    containerShape: 'cylinder',
-    ovalWidth: 2.5,
-    fillPercentage: 85,
-    directVolume: 9,
-    volumeUnit: 'ounces',
-    waxType: 'soy-464',
-    numberOfContainers: 1,
-    weightUnit: 'ounces',
-  },
+      calculationMode: 'dimensions',
+      containerDiameter: 3.0,
+      containerHeight: 3.5,
+      containerShape: 'cylinder',
+      ovalWidth: 2.5,
+      fillPercentage: 85,
+      directVolume: 9,
+      volumeUnit: 'ounces',
+      waxType: 'soy-464',
+      numberOfContainers: 1,
+      weightUnit: 'ounces',
+    },
     compute: calculateCandleWax,
   });
 

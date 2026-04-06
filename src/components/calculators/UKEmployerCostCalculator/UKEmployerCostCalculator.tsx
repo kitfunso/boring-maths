@@ -18,13 +18,17 @@ import {
   Grid,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const taxRegionOptions = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+const taxRegionOptions = [
   { value: 'england' as TaxRegion, label: 'England/NI/Wales' },
   { value: 'scotland' as TaxRegion, label: 'Scotland' },
 ];
 
 export default function UKEmployerCostCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKEmployerCostInputs, ReturnType<typeof calculateEmployerCost>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKEmployerCostInputs,
+    ReturnType<typeof calculateEmployerCost>
+  >({
     name: 'UK Employer Cost Calculator',
     slug: 'calc-uk-employer-cost-inputs',
     defaults: getDefaultInputs,

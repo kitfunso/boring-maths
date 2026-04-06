@@ -10,16 +10,20 @@ import { calculatePrimingSugar, formatCO2 } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function PrimingSugarCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<PrimingSugarInputs, ReturnType<typeof calculatePrimingSugar>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<PrimingSugarInputs, ReturnType<typeof calculatePrimingSugar>>({
     defaults: {
-    batchVolume: 5,
-    volumeUnit: 'gallons',
-    beerTemp: 65,
-    tempUnit: 'fahrenheit',
-    targetCO2: 2.4,
-    sugarType: 'corn',
-    containerType: 'bottle',
-  },
+      batchVolume: 5,
+      volumeUnit: 'gallons',
+      beerTemp: 65,
+      tempUnit: 'fahrenheit',
+      targetCO2: 2.4,
+      sugarType: 'corn',
+      containerType: 'bottle',
+    },
     compute: calculatePrimingSugar,
   });
 

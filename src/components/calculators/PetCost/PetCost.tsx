@@ -63,7 +63,10 @@ const HEALTH_OPTIONS = [
 ];
 
 export default function PetCost() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PetCostInputs, ReturnType<typeof calculatePetCost>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PetCostInputs,
+    ReturnType<typeof calculatePetCost>
+  >({
     name: 'Pet Ownership Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePetCost,

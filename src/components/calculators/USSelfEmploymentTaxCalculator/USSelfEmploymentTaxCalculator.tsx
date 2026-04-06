@@ -22,7 +22,10 @@ const DEDUCTION_OPTIONS = [
 ];
 
 export default function USSelfEmploymentTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<USSelfEmploymentTaxInputs, ReturnType<typeof calculateSelfEmploymentTax>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    USSelfEmploymentTaxInputs,
+    ReturnType<typeof calculateSelfEmploymentTax>
+  >({
     name: 'Self-Employment Tax Calculator',
     slug: 'calc-us-self-employment-tax-inputs',
     defaults: getDefaultInputs,

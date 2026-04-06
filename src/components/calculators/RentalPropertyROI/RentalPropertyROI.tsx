@@ -28,10 +28,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RentalPropertyROI() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<RentalPropertyInputs, ReturnType<typeof calculateRentalPropertyROI>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    RentalPropertyInputs,
+    ReturnType<typeof calculateRentalPropertyROI>
+  >({
     name: 'Rental Property ROI Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRentalPropertyROI,
   });
 

@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function NetWorthCalculator() {
-  const { inputs, result, setInputs } = useCalculatorState<NetWorthInputs, ReturnType<typeof calculateNetWorth>>({
+  const { inputs, result, setInputs } = useCalculatorState<
+    NetWorthInputs,
+    ReturnType<typeof calculateNetWorth>
+  >({
     name: 'Net Worth Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateNetWorth,

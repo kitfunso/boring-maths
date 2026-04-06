@@ -167,11 +167,7 @@ export default function BakingConversionCalculator() {
                   label="Converted Amount"
                   value={formatAmount(result.convertedAmount, inputs.toUnit)}
                   subtitle={`${formatAmount(inputs.amount, inputs.fromUnit)} ${INGREDIENT_LABELS[inputs.ingredient]}`}
-                  footer={
-                    <>
-                      Density: {result.ingredientDensity} g per cup
-                    </>
-                  }
+                  footer={<>Density: {result.ingredientDensity} g per cup</>}
                 />
 
                 {/* Metrics */}
@@ -237,7 +233,13 @@ export default function BakingConversionCalculator() {
                             key={row.cups}
                             className="border-b border-white/5 text-[var(--color-cream)]"
                           >
-                            <td className="py-2 pr-4">{row.cups === 0.25 ? '\u00bc' : row.cups === 0.5 ? '\u00bd' : row.cups}</td>
+                            <td className="py-2 pr-4">
+                              {row.cups === 0.25
+                                ? '\u00bc'
+                                : row.cups === 0.5
+                                  ? '\u00bd'
+                                  : row.cups}
+                            </td>
                             <td className="py-2 pr-4 font-medium text-[var(--color-accent)]">
                               {row.grams} g
                             </td>
@@ -251,9 +253,9 @@ export default function BakingConversionCalculator() {
 
                 {/* Precision note */}
                 <Alert variant="tip" title="Baking precision">
-                  {result.precisionNote} Professional bakers weigh ingredients because measuring cups
-                  can vary by 10-20% depending on technique. A $15 kitchen scale is the single best
-                  upgrade for consistent baking.
+                  {result.precisionNote} Professional bakers weigh ingredients because measuring
+                  cups can vary by 10-20% depending on technique. A $15 kitchen scale is the single
+                  best upgrade for consistent baking.
                 </Alert>
               </>
             ) : (

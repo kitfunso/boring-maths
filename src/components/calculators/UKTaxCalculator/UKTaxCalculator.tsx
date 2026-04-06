@@ -22,7 +22,8 @@ import {
   Grid,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const taxRegionOptions = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+const taxRegionOptions = [
   { value: 'england' as TaxRegion, label: 'England/NI/Wales' },
   { value: 'scotland' as TaxRegion, label: 'Scotland' },
 ];
@@ -49,7 +50,10 @@ const pensionTypeOptions = [
 ];
 
 export default function UKTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKTaxInputs, ReturnType<typeof calculateUKTax>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKTaxInputs,
+    ReturnType<typeof calculateUKTax>
+  >({
     name: 'UK Tax Calculator',
     slug: 'calc-uk-tax-inputs',
     defaults: getDefaultInputs,

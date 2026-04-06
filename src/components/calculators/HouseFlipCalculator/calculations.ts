@@ -44,11 +44,7 @@ export function calculateHouseFlip(inputs: HouseFlipInputs): HouseFlipResult {
 
   // Total costs = everything except the purchase price itself
   const totalCosts =
-    renovationBudget +
-    financingCost +
-    totalHoldingCosts +
-    purchaseClosingCosts +
-    sellingCosts;
+    renovationBudget + financingCost + totalHoldingCosts + purchaseClosingCosts + sellingCosts;
 
   // Total investment = purchase price + all costs
   const totalInvestment = purchasePrice + totalCosts;
@@ -70,8 +66,7 @@ export function calculateHouseFlip(inputs: HouseFlipInputs): HouseFlipResult {
   const breakEvenARV = totalInvestment;
 
   // Monthly carry cost (financing + holding)
-  const monthlyCarryCost =
-    (loanAmount * monthlyRate) + monthlyHoldingCosts;
+  const monthlyCarryCost = loanAmount * monthlyRate + monthlyHoldingCosts;
 
   // Good deal if purchase price is at or below the 70% rule max
   const isGoodDeal = purchasePrice <= seventyPercentRuleMax && estimatedProfit > 0;

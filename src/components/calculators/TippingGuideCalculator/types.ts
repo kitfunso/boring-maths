@@ -25,13 +25,7 @@ export type TippingCountry =
   | 'Brazil'
   | 'Mexico';
 
-export type ServiceType =
-  | 'restaurant'
-  | 'taxi'
-  | 'hotel'
-  | 'delivery'
-  | 'hairdresser'
-  | 'bar';
+export type ServiceType = 'restaurant' | 'taxi' | 'hotel' | 'delivery' | 'hairdresser' | 'bar';
 
 // ---------------------------------------------------------------------------
 // Tipping Data Structure
@@ -113,7 +107,8 @@ export const TIPPING_DATA: Readonly<Record<TippingCountry, CountryTippingProfile
       hotel: {
         suggestedPercent: 0.05,
         serviceIncluded: false,
-        culturalNote: 'Tipping hotel staff is appreciated but not expected. A pound or two is fine.',
+        culturalNote:
+          'Tipping hotel staff is appreciated but not expected. A pound or two is fine.',
       },
       delivery: {
         suggestedPercent: 0.1,
@@ -128,7 +123,8 @@ export const TIPPING_DATA: Readonly<Record<TippingCountry, CountryTippingProfile
       bar: {
         suggestedPercent: 0,
         serviceIncluded: false,
-        culturalNote: 'Tipping at bars is rare. Offering to "buy the barman a drink" is the tradition.',
+        culturalNote:
+          'Tipping at bars is rare. Offering to "buy the barman a drink" is the tradition.',
       },
     },
   },
@@ -294,8 +290,7 @@ export const TIPPING_DATA: Readonly<Record<TippingCountry, CountryTippingProfile
       taxi: {
         suggestedPercent: 0,
         serviceIncluded: true,
-        culturalNote:
-          'Do not tip. Drivers may refuse or chase you to return the extra money.',
+        culturalNote: 'Do not tip. Drivers may refuse or chase you to return the extra money.',
       },
       hotel: {
         suggestedPercent: 0,

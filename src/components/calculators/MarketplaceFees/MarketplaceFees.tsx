@@ -34,10 +34,12 @@ const PLATFORM_COLORS = {
 };
 
 export default function MarketplaceFees() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<MarketplaceFeesInputs, ReturnType<typeof calculateMarketplaceFees>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    MarketplaceFeesInputs,
+    ReturnType<typeof calculateMarketplaceFees>
+  >({
     name: 'Marketplace Fees Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMarketplaceFees,
   });
 

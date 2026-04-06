@@ -272,16 +272,19 @@ export default function HouseFlipCalculator() {
                         70% Rule: {meetsSeventyRule ? 'PASSES' : 'FAILS'}
                       </h3>
                       <p className="text-sm text-[var(--color-subtle)] mt-1">
-                        Maximum purchase price: {formatCurrency(result.seventyPercentRuleMax, inputs.currency)}
-                        {' '}(ARV {formatCurrency(inputs.afterRepairValue, inputs.currency)} x 70% - {formatCurrency(inputs.renovationBudget, inputs.currency)} repairs)
+                        Maximum purchase price:{' '}
+                        {formatCurrency(result.seventyPercentRuleMax, inputs.currency)} (ARV{' '}
+                        {formatCurrency(inputs.afterRepairValue, inputs.currency)} x 70% -{' '}
+                        {formatCurrency(inputs.renovationBudget, inputs.currency)} repairs)
                       </p>
                       <p className="text-sm text-[var(--color-subtle)] mt-1">
-                        Your purchase price: {formatCurrency(inputs.purchasePrice, inputs.currency)}
-                        {' '}({meetsSeventyRule ? 'below' : 'above'} max by{' '}
+                        Your purchase price: {formatCurrency(inputs.purchasePrice, inputs.currency)}{' '}
+                        ({meetsSeventyRule ? 'below' : 'above'} max by{' '}
                         {formatCurrency(
                           Math.abs(result.seventyPercentRuleMax - inputs.purchasePrice),
                           inputs.currency
-                        )})
+                        )}
+                        )
                       </p>
                     </div>
                   </div>
@@ -335,8 +338,8 @@ export default function HouseFlipCalculator() {
 
                 {result.isGoodDeal ? (
                   <Alert variant="tip" title="This looks like a solid deal.">
-                    The purchase price passes the 70% rule and the projected profit is positive. Always
-                    budget an extra 10-20% for unexpected renovation costs.
+                    The purchase price passes the 70% rule and the projected profit is positive.
+                    Always budget an extra 10-20% for unexpected renovation costs.
                   </Alert>
                 ) : (
                   <Alert variant="warning" title="Proceed with caution.">

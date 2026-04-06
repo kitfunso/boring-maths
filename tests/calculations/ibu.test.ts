@@ -6,8 +6,24 @@ describe('IbuCalculator', () => {
   describe('calculateIBU', () => {
     it('should calculate with valid inputs', () => {
       const hopAdditions: HopAddition[] = [
-        { id: '1', hopName: 'Cascade', weight: 1, weightUnit: 'oz', alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
-        { id: '2', hopName: 'Centennial', weight: 1, weightUnit: 'oz', alphaAcid: 10, boilTime: 15, form: 'pellet' },
+        {
+          id: '1',
+          hopName: 'Cascade',
+          weight: 1,
+          weightUnit: 'oz',
+          alphaAcid: 5.5,
+          boilTime: 60,
+          form: 'pellet',
+        },
+        {
+          id: '2',
+          hopName: 'Centennial',
+          weight: 1,
+          weightUnit: 'oz',
+          alphaAcid: 10,
+          boilTime: 15,
+          form: 'pellet',
+        },
       ];
 
       const inputs: IBUInputs = {
@@ -27,7 +43,15 @@ describe('IbuCalculator', () => {
 
     it('should produce consistent results', () => {
       const hopAdditions: HopAddition[] = [
-        { id: '1', hopName: 'Cascade', weight: 1, weightUnit: 'oz', alphaAcid: 5.5, boilTime: 60, form: 'pellet' },
+        {
+          id: '1',
+          hopName: 'Cascade',
+          weight: 1,
+          weightUnit: 'oz',
+          alphaAcid: 5.5,
+          boilTime: 60,
+          form: 'pellet',
+        },
       ];
 
       const inputs: IBUInputs = {

@@ -30,7 +30,10 @@ import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
 export default function PaceCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<PaceCalculatorInputs, ReturnType<typeof calculatePace>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    PaceCalculatorInputs,
+    ReturnType<typeof calculatePace>
+  >({
     name: 'Pace Calculator',
     slug: 'calc-pace-inputs',
     defaults: getDefaultInputs,

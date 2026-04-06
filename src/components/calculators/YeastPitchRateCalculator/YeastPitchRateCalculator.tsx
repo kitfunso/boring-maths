@@ -17,20 +17,24 @@ import { calculateYeastPitchRate, formatCells } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function YeastPitchRateCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<YeastPitchRateInputs, ReturnType<typeof calculateYeastPitchRate>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<YeastPitchRateInputs, ReturnType<typeof calculateYeastPitchRate>>({
     defaults: {
-    batchVolume: 5,
-    volumeUnit: 'gallons',
-    originalGravity: 1.05,
-    beerType: 'ale',
-    yeastFormat: 'liquid',
-    yeastAge: 14,
-    packagesAvailable: 1,
-    cellsPerPackage: 100,
-    starterVolume: 1.5,
-    useStarter: false,
-    starterType: 'stir-plate',
-  },
+      batchVolume: 5,
+      volumeUnit: 'gallons',
+      originalGravity: 1.05,
+      beerType: 'ale',
+      yeastFormat: 'liquid',
+      yeastAge: 14,
+      packagesAvailable: 1,
+      cellsPerPackage: 100,
+      starterVolume: 1.5,
+      useStarter: false,
+      starterType: 'stir-plate',
+    },
     compute: calculateYeastPitchRate,
   });
 

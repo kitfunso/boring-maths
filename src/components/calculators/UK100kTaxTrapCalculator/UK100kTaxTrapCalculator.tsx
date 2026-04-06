@@ -29,7 +29,10 @@ import {
 } from '../../ui';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UK100kTaxTrapCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<UK100kInputs, ReturnType<typeof calculateUK100kTax>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    UK100kInputs,
+    ReturnType<typeof calculateUK100kTax>
+  >({
     name: 'UK £100k Tax Trap Calculator',
     slug: 'calc-uk100k-inputs',
     defaults: getDefaultInputs,

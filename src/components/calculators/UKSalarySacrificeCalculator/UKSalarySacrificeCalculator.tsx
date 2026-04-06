@@ -20,7 +20,10 @@ const taxRegionOptions = [
 ];
 
 export default function UKSalarySacrificeCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKSalarySacrificeInputs, ReturnType<typeof calculateSalarySacrifice>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKSalarySacrificeInputs,
+    ReturnType<typeof calculateSalarySacrifice>
+  >({
     name: 'UK Salary Sacrifice Calculator',
     slug: 'calc-uk-salary-sacrifice-inputs',
     defaults: getDefaultInputs,

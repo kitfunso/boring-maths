@@ -45,7 +45,9 @@ describe('keyword cluster pipeline core', () => {
     expect(summary.length).toBeGreaterThan(0);
 
     for (let i = 0; i < summary.length - 1; i += 1) {
-      expect(summary[i].avg_priority_score).toBeGreaterThanOrEqual(summary[i + 1].avg_priority_score);
+      expect(summary[i].avg_priority_score).toBeGreaterThanOrEqual(
+        summary[i + 1].avg_priority_score
+      );
     }
   });
 });

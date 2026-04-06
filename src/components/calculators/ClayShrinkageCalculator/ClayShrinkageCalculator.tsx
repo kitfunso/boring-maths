@@ -32,7 +32,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ClayShrinkageCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<ClayShrinkageInputs, ReturnType<typeof calculateClayShrinkage>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    ClayShrinkageInputs,
+    ReturnType<typeof calculateClayShrinkage>
+  >({
     name: 'Clay Shrinkage Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateClayShrinkage,

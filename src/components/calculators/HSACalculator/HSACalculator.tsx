@@ -28,7 +28,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function HSACalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<HSAInputs, ReturnType<typeof calculateHSA>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    HSAInputs,
+    ReturnType<typeof calculateHSA>
+  >({
     name: 'HSA Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateHSA,

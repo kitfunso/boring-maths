@@ -9,8 +9,12 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function UKCapitalGainsTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKCGTInputs, ReturnType<typeof calculateUKCGT>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function UKCapitalGainsTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKCGTInputs,
+    ReturnType<typeof calculateUKCGT>
+  >({
     name: 'UK Capital Gains Tax Calculator',
     slug: 'calc-uk-cgt-inputs',
     defaults: getDefaultInputs,

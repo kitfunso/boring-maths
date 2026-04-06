@@ -23,8 +23,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function BodyFatCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<BodyFatInputs, ReturnType<typeof calculateBodyFat>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function BodyFatCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    BodyFatInputs,
+    ReturnType<typeof calculateBodyFat>
+  >({
     name: 'Body Fat Calculator',
     slug: 'calc-bodyfat-inputs',
     defaults: getDefaultInputs,

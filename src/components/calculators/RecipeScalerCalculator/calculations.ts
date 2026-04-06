@@ -70,7 +70,9 @@ function formatFraction(value: number): string {
       .replace(/0+$/, '')}`;
   }
 
-  return String(Number.isInteger(value) ? value : value.toFixed(2).replace(/0+$/, '').replace(/\.$/, ''));
+  return String(
+    Number.isInteger(value) ? value : value.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
+  );
 }
 
 /**
@@ -94,8 +96,7 @@ export function smartRound(value: number, unit: string, isBakingMode: boolean): 
 export function calculateRecipeScaler(inputs: RecipeScalerInputs): RecipeScalerResult {
   const { originalServings, desiredServings, ingredients, isBakingMode } = inputs;
 
-  const scaleFactor =
-    originalServings > 0 ? desiredServings / originalServings : 1;
+  const scaleFactor = originalServings > 0 ? desiredServings / originalServings : 1;
 
   const scaledIngredients: ScaledIngredient[] = ingredients.map((ing) => {
     const raw = ing.amount * scaleFactor;

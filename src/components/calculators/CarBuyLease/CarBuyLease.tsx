@@ -28,10 +28,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function CarBuyLease() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<CarBuyLeaseInputs, ReturnType<typeof calculateCarBuyLease>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    CarBuyLeaseInputs,
+    ReturnType<typeof calculateCarBuyLease>
+  >({
     name: 'Car Buy vs Lease Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCarBuyLease,
   });
 

@@ -3,7 +3,10 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { calculateLoan, formatTermDisplay } from '../../src/components/calculators/LoanCalculator/calculations';
+import {
+  calculateLoan,
+  formatTermDisplay,
+} from '../../src/components/calculators/LoanCalculator/calculations';
 import type { LoanInputs } from '../../src/components/calculators/LoanCalculator/types';
 
 describe('LoanCalculator', () => {
@@ -57,9 +60,7 @@ describe('LoanCalculator', () => {
       expect(result.amortization).toHaveLength(12);
 
       // First payment should have more interest than last
-      expect(result.amortization[0].interest).toBeGreaterThan(
-        result.amortization[11].interest
-      );
+      expect(result.amortization[0].interest).toBeGreaterThan(result.amortization[11].interest);
 
       // Last payment should have balance of 0
       expect(result.amortization[11].balance).toBe(0);

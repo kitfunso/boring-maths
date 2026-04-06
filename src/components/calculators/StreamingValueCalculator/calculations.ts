@@ -54,9 +54,8 @@ export function calculateStreamingValue(inputs: StreamingValueInputs): Streaming
 
   const sorted = [...perServiceMetrics].sort((a, b) => a.costPerHour - b.costPerHour);
 
-  const totalMonthlyCost = Math.round(
-    enabled.reduce((sum, s) => sum + s.monthlyPrice, 0) * 100
-  ) / 100;
+  const totalMonthlyCost =
+    Math.round(enabled.reduce((sum, s) => sum + s.monthlyPrice, 0) * 100) / 100;
 
   const totalYearlyCost = Math.round(totalMonthlyCost * 12 * 100) / 100;
 

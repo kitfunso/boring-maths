@@ -8,15 +8,8 @@ import type { JobQuoteInputs, JobQuoteResult } from './types';
 import { formatCurrency as regionFormatCurrency, type Currency } from '../../../lib/regions';
 
 export function calculateJobQuote(inputs: JobQuoteInputs): JobQuoteResult {
-  const {
-    currency,
-    materials,
-    labourHours,
-    hourlyRate,
-    markupPercent,
-    vatRate,
-    travelFee,
-  } = inputs;
+  const { currency, materials, labourHours, hourlyRate, markupPercent, vatRate, travelFee } =
+    inputs;
 
   // Materials subtotal
   const materialsSubtotal = materials.reduce((sum, item) => sum + Math.max(0, item.cost), 0);
@@ -43,10 +36,7 @@ export function calculateJobQuote(inputs: JobQuoteInputs): JobQuoteResult {
 
   // Profit margin: markup + labour profit as % of total (ex-VAT)
   // Profit = markup amount (materials cost is pass-through, labour is revenue)
-  const profitMarginPercent =
-    subtotalBeforeVAT > 0
-      ? (markupAmount / subtotalBeforeVAT) * 100
-      : 0;
+  const profitMarginPercent = subtotalBeforeVAT > 0 ? (markupAmount / subtotalBeforeVAT) * 100 : 0;
 
   return {
     currency,

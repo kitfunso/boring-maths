@@ -34,7 +34,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PricingCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PricingInputs, ReturnType<typeof calculatePricing>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PricingInputs,
+    ReturnType<typeof calculatePricing>
+  >({
     name: 'Pricing Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePricing,

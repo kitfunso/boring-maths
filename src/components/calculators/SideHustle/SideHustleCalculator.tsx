@@ -27,10 +27,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SideHustleCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<SideHustleInputs, SideHustleResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    SideHustleInputs,
+    SideHustleResult
+  >({
     name: 'Analyze Your Side Hustle',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSideHustle,
   });
 

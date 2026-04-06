@@ -30,10 +30,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EmergencyFundCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<EmergencyFundInputs, EmergencyFundResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    EmergencyFundInputs,
+    EmergencyFundResult
+  >({
     name: 'Build Your Emergency Fund',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEmergencyFund,
   });
 

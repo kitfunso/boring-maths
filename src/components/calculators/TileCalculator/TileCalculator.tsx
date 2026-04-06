@@ -67,10 +67,12 @@ const GROUT_WIDTH_OPTIONS = [
 ];
 
 export default function TileCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<TileCalculatorInputs, ReturnType<typeof calculateTile>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    TileCalculatorInputs,
+    ReturnType<typeof calculateTile>
+  >({
     name: 'Tile Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTile,
   });
 

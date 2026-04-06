@@ -2,11 +2,7 @@
  * Coffee Spend Calculator - Preact Component
  */
 
-import {
-  calculateCoffeeSpend,
-  formatCurrency,
-  formatCurrencyWhole,
-} from './calculations';
+import { calculateCoffeeSpend, formatCurrency, formatCurrencyWhole } from './calculations';
 import { getDefaultInputs, type CoffeeSpendInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
 import {
@@ -88,9 +84,7 @@ export default function CoffeeSpendCalculator() {
 
             {/* Home brew cost */}
             <div>
-              <Label htmlFor="homeBrewCost">
-                Home brew cost per cup
-              </Label>
+              <Label htmlFor="homeBrewCost">Home brew cost per cup</Label>
               <Input
                 id="homeBrewCost"
                 variant="currency"
@@ -251,8 +245,8 @@ export default function CoffeeSpendCalculator() {
 
                 <Alert variant="tip" title="The Latte Factor:">
                   Small daily expenses add up. But this calculator isn't about guilt. It's about
-                  awareness. If your daily coffee brings you joy, keep buying it. If you're
-                  spending out of habit, the savings are real.
+                  awareness. If your daily coffee brings you joy, keep buying it. If you're spending
+                  out of habit, the savings are real.
                 </Alert>
               </>
             ) : (

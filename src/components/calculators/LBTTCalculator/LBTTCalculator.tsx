@@ -7,8 +7,12 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function LBTTCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<LBTTInputs, ReturnType<typeof calculateLBTT>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function LBTTCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    LBTTInputs,
+    ReturnType<typeof calculateLBTT>
+  >({
     name: 'LBTT Calculator Scotland',
     slug: 'calc-lbtt-inputs',
     defaults: getDefaultInputs,

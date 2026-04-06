@@ -18,8 +18,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function CurrencyConverter() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<CurrencyConverterInputs, ReturnType<typeof convertCurrency>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function CurrencyConverter() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    CurrencyConverterInputs,
+    ReturnType<typeof convertCurrency>
+  >({
     name: 'Currency Converter',
     slug: 'calc-currency-inputs',
     defaults: getDefaultInputs,

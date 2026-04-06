@@ -51,10 +51,12 @@ const STYLE_OPTIONS = [
 ];
 
 export default function BirthdayPartyBudget() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<BirthdayPartyInputs, ReturnType<typeof calculateBirthdayPartyBudget>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    BirthdayPartyInputs,
+    ReturnType<typeof calculateBirthdayPartyBudget>
+  >({
     name: 'Birthday Party Budget',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBirthdayPartyBudget,
   });
 

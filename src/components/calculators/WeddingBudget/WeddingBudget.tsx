@@ -47,10 +47,12 @@ const PRIORITY_COLORS: Record<Priority, string> = {
 };
 
 export default function WeddingBudget() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<WeddingBudgetInputs, ReturnType<typeof calculateWeddingBudget>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    WeddingBudgetInputs,
+    ReturnType<typeof calculateWeddingBudget>
+  >({
     name: 'Wedding Budget Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateWeddingBudget,
   });
 

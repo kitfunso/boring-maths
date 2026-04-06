@@ -89,20 +89,17 @@ export function useKeyboardShortcuts({
     });
   }, []);
 
-  const showToast = useCallback(
-    (message: string, color: 'green' | 'blue') => {
-      // Clear any existing toast timer
-      if (toastTimerRef.current !== null) {
-        clearTimeout(toastTimerRef.current);
-      }
-      setToast({ message, color });
-      toastTimerRef.current = setTimeout(() => {
-        setToast(null);
-        toastTimerRef.current = null;
-      }, 2000);
-    },
-    []
-  );
+  const showToast = useCallback((message: string, color: 'green' | 'blue') => {
+    // Clear any existing toast timer
+    if (toastTimerRef.current !== null) {
+      clearTimeout(toastTimerRef.current);
+    }
+    setToast({ message, color });
+    toastTimerRef.current = setTimeout(() => {
+      setToast(null);
+      toastTimerRef.current = null;
+    }, 2000);
+  }, []);
 
   const copyToClipboard = useCallback(async () => {
     if (!onCopy) return;

@@ -11,13 +11,17 @@ import { calculateCO2, calculateTargetPH } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CO2Calculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<CO2Inputs, ReturnType<typeof calculateCO2>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<CO2Inputs, ReturnType<typeof calculateCO2>>({
     defaults: {
-    ph: 6.8,
-    kh: 4,
-    tankVolume: 20,
-    volumeUnit: 'gallons',
-  },
+      ph: 6.8,
+      kh: 4,
+      tankVolume: 20,
+      volumeUnit: 'gallons',
+    },
     compute: calculateCO2,
   });
 

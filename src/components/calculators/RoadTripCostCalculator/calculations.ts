@@ -165,7 +165,9 @@ export function calculateRoadTripCost(inputs: RoadTripInputs): RoadTripResult {
   const treesNeeded = Math.ceil(co2Emissions / CO2_PER_TREE_PER_YEAR_KG);
 
   // Flight comparison
-  const comparisonToFlying = round2(estimateFlightCost(distanceMiles, effectivePassengers, currency));
+  const comparisonToFlying = round2(
+    estimateFlightCost(distanceMiles, effectivePassengers, currency)
+  );
 
   return {
     totalFuelCost,

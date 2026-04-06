@@ -66,7 +66,10 @@ const TABLE_SIZE_OPTIONS: Record<TableShape, { value: number; label: string }[]>
 };
 
 export default function EventSeatingCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<EventSeatingInputs, ReturnType<typeof calculateEventSeating>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    EventSeatingInputs,
+    ReturnType<typeof calculateEventSeating>
+  >({
     name: 'Event Seating Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateEventSeating,

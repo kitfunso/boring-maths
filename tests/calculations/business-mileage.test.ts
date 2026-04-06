@@ -82,7 +82,7 @@ describe('BusinessMileageCalculator', () => {
       expect(result.annualMiles).toBe(2400);
       expect(result.taxDeduction).toBe(480);
       expect(result.rateBreakdown).toHaveLength(1);
-      expect(result.rateBreakdown[0].rate).toBe(0.20);
+      expect(result.rateBreakdown[0].rate).toBe(0.2);
     });
 
     it('should calculate tax saving using estimated marginal rate', () => {
@@ -92,7 +92,7 @@ describe('BusinessMileageCalculator', () => {
       // UK basic rate: 20%
       // Deduction £2,160 * 0.20 = £432
       expect(result.annualTaxSaving).toBe(432);
-      expect(result.estimatedTaxRate).toBe(0.20);
+      expect(result.estimatedTaxRate).toBe(0.2);
     });
 
     it('should calculate US tax saving', () => {

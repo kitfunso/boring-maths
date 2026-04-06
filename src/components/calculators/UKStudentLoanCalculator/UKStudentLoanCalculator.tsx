@@ -9,7 +9,10 @@ const loanPlanOptions = Object.entries(LOAN_PLANS).map(([key, plan]) => ({
 }));
 
 export default function UKStudentLoanCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKStudentLoanInputs, ReturnType<typeof calculateStudentLoan>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKStudentLoanInputs,
+    ReturnType<typeof calculateStudentLoan>
+  >({
     name: 'UK Student Loan Calculator',
     slug: 'calc-uk-student-loan-inputs',
     defaults: getDefaultInputs,

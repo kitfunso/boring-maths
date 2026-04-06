@@ -51,10 +51,12 @@ const EVENT_TIME_OPTIONS = [
 ];
 
 export default function CateringCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<CateringInputs, ReturnType<typeof calculateCatering>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    CateringInputs,
+    ReturnType<typeof calculateCatering>
+  >({
     name: 'Catering Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCatering,
   });
 

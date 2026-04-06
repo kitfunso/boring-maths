@@ -31,7 +31,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ABVCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<ABVInputs, ReturnType<typeof calculateABV>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    ABVInputs,
+    ReturnType<typeof calculateABV>
+  >({
     name: 'ABV Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateABV,

@@ -57,10 +57,12 @@ const SEASON_OPTIONS = [
 ];
 
 export default function MovingCost() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<MovingCostInputs, ReturnType<typeof calculateMovingCost>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    MovingCostInputs,
+    ReturnType<typeof calculateMovingCost>
+  >({
     name: 'Moving Cost Estimator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMovingCost,
   });
 

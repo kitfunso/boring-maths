@@ -91,26 +91,36 @@ export const ICON_COLORS: Readonly<Record<ColorName, string>> = {
 // ---------------------------------------------------------------------------
 
 export const ICON_PATHS: Readonly<Record<IconName, string>> = {
-  dollar: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-  percent: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  dollar:
+    'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  percent:
+    'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
   chart: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-  glass: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  shield:
+    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  glass:
+    'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
   trending: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-  calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  calculator:
+    'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
   cube: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
   bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
   fire: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
   home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  heart:
+    'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
   swap: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
-  calendar: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  calendar:
+    'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
   paw: 'M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
   layers: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
   leaf: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
-  rocket: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
-  briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-  users: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+  rocket:
+    'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
+  briefcase:
+    'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  users:
+    'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
 };
 
 // ---------------------------------------------------------------------------
@@ -142,7 +152,8 @@ export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
 export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'UK \u00a3100k Tax Trap',
-    description: 'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
+    description:
+      'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
     href: '/calculators/uk-100k-tax-trap-calculator',
     icon: 'chart',
     color: 'coral',
@@ -152,7 +163,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Nursery Cost',
-    description: 'Calculate childcare costs with free hours, Tax-Free Childcare, and government support.',
+    description:
+      'Calculate childcare costs with free hours, Tax-Free Childcare, and government support.',
     href: '/calculators/uk-nursery-cost-calculator',
     icon: 'heart',
     color: 'violet',
@@ -162,7 +174,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Go Full-Time Calculator',
-    description: 'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
+    description:
+      'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
     href: '/calculators/go-full-time-calculator',
     icon: 'rocket',
     color: 'blue',
@@ -171,7 +184,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Contractor vs Employee',
-    description: 'Compare contractor rates vs salary accounting for taxes, benefits, and hidden costs.',
+    description:
+      'Compare contractor rates vs salary accounting for taxes, benefits, and hidden costs.',
     href: '/calculators/contractor-vs-employee-calculator',
     icon: 'swap',
     color: 'green',
@@ -180,7 +194,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'FIRE Calculator',
-    description: 'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
+    description:
+      'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
     href: '/calculators/fire-calculator',
     icon: 'fire',
     color: 'amber',
@@ -270,7 +285,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Freelance Day Rate',
-    description: 'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
+    description:
+      'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
     href: '/calculators/freelance-day-rate-calculator',
     icon: 'dollar',
     color: 'blue',
@@ -432,7 +448,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Cost Per Wear',
-    description: 'Calculate the true cost per wear of clothing and compare investment pieces vs cheap alternatives.',
+    description:
+      'Calculate the true cost per wear of clothing and compare investment pieces vs cheap alternatives.',
     href: '/calculators/cost-per-wear-calculator',
     icon: 'layers',
     color: 'violet',
@@ -469,7 +486,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // Chemical Engineering Calculators
   {
     title: 'Reynolds Number',
-    description: 'Calculate Reynolds number to determine flow regime (laminar, transitional, turbulent).',
+    description:
+      'Calculate Reynolds number to determine flow regime (laminar, transitional, turbulent).',
     href: '/calculators/reynolds-number-calculator',
     icon: 'bolt',
     color: 'blue',
@@ -505,7 +523,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Pressure Drop Calculator',
-    description: 'Calculate pipe pressure drop using Darcy-Weisbach equation with friction factors.',
+    description:
+      'Calculate pipe pressure drop using Darcy-Weisbach equation with friction factors.',
     href: '/calculators/pressure-drop-calculator',
     icon: 'chart',
     color: 'amber',
@@ -525,7 +544,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'HSA Calculator',
-    description: 'Calculate triple tax advantage savings with contribution limits and long-term growth.',
+    description:
+      'Calculate triple tax advantage savings with contribution limits and long-term growth.',
     href: '/calculators/hsa-calculator',
     icon: 'heart',
     color: 'green',
@@ -562,7 +582,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Stamp Duty Calculator',
-    description: 'Calculate SDLT, LBTT, or LTT with first-time buyer relief and additional property surcharge.',
+    description:
+      'Calculate SDLT, LBTT, or LTT with first-time buyer relief and additional property surcharge.',
     href: '/calculators/uk-stamp-duty-calculator',
     icon: 'home',
     color: 'blue',
@@ -572,7 +593,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Child Benefit Calculator',
-    description: 'Calculate Child Benefit and High Income Child Benefit Charge (HICBC) with pension strategies.',
+    description:
+      'Calculate Child Benefit and High Income Child Benefit Charge (HICBC) with pension strategies.',
     href: '/calculators/uk-child-benefit-calculator',
     icon: 'heart',
     color: 'coral',
@@ -582,7 +604,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Student Loan Calculator',
-    description: 'Project student loan repayments for Plan 1, 2, 4, 5 and Postgraduate with write-off dates.',
+    description:
+      'Project student loan repayments for Plan 1, 2, 4, 5 and Postgraduate with write-off dates.',
     href: '/calculators/uk-student-loan-calculator',
     icon: 'calculator',
     color: 'blue',
@@ -592,7 +615,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Salary Sacrifice Calculator',
-    description: 'Calculate tax and NI savings from pension, cycle-to-work, and EV salary sacrifice.',
+    description:
+      'Calculate tax and NI savings from pension, cycle-to-work, and EV salary sacrifice.',
     href: '/calculators/uk-salary-sacrifice-calculator',
     icon: 'trending',
     color: 'ocean',
@@ -602,7 +626,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Pension Calculator',
-    description: 'Project your retirement pot and income using the 4% rule with inflation adjustment.',
+    description:
+      'Project your retirement pot and income using the 4% rule with inflation adjustment.',
     href: '/calculators/uk-pension-calculator',
     icon: 'chart',
     color: 'green',
@@ -612,7 +637,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK Dividend Tax Calculator',
-    description: 'Calculate tax on dividends and compare with salary for limited company directors.',
+    description:
+      'Calculate tax on dividends and compare with salary for limited company directors.',
     href: '/calculators/uk-dividend-tax-calculator',
     icon: 'dollar',
     color: 'amber',
@@ -622,7 +648,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'US Tax Bracket Calculator',
-    description: 'Find your 2025 federal tax bracket with visual breakdown of how your income is taxed.',
+    description:
+      'Find your 2025 federal tax bracket with visual breakdown of how your income is taxed.',
     href: '/calculators/us-tax-bracket-calculator',
     icon: 'chart',
     color: 'blue',
@@ -632,7 +659,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Self-Employment Tax Calculator',
-    description: 'Calculate 15.3% SE tax, federal income tax, and quarterly payments for freelancers.',
+    description:
+      'Calculate 15.3% SE tax, federal income tax, and quarterly payments for freelancers.',
     href: '/calculators/us-self-employment-tax-calculator',
     icon: 'dollar',
     color: 'violet',
@@ -684,7 +712,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // New Calculators
   {
     title: 'Inflation Calculator',
-    description: 'Calculate how inflation affects purchasing power using historical US CPI data from 1920-2025.',
+    description:
+      'Calculate how inflation affects purchasing power using historical US CPI data from 1920-2025.',
     href: '/calculators/inflation-calculator',
     icon: 'trending',
     color: 'amber',
@@ -693,7 +722,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Net Worth Calculator',
-    description: 'Calculate your total net worth by tracking assets and liabilities with category breakdowns.',
+    description:
+      'Calculate your total net worth by tracking assets and liabilities with category breakdowns.',
     href: '/calculators/net-worth-calculator',
     icon: 'chart',
     color: 'green',
@@ -702,7 +732,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'US Paycheck Calculator',
-    description: 'Calculate your take-home pay with federal taxes, state taxes, and deductions for all 50 states.',
+    description:
+      'Calculate your take-home pay with federal taxes, state taxes, and deductions for all 50 states.',
     href: '/calculators/us-paycheck-calculator',
     icon: 'dollar',
     color: 'blue',
@@ -713,7 +744,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // Niche Calculators - Phase 1
   {
     title: 'Speeds & Feeds Calculator',
-    description: 'Calculate optimal RPM and feed rate for CNC milling with chip load and material data.',
+    description:
+      'Calculate optimal RPM and feed rate for CNC milling with chip load and material data.',
     href: '/calculators/speeds-feeds-calculator',
     icon: 'bolt',
     color: 'blue',
@@ -722,7 +754,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Fish Stocking Calculator',
-    description: 'Calculate how many fish your aquarium can hold based on tank size, filtration, and plants.',
+    description:
+      'Calculate how many fish your aquarium can hold based on tank size, filtration, and plants.',
     href: '/calculators/fish-stocking-calculator',
     icon: 'heart',
     color: 'ocean',
@@ -731,7 +764,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'ABV Calculator',
-    description: 'Calculate alcohol content from original and final gravity for beer, wine, mead, and cider.',
+    description:
+      'Calculate alcohol content from original and final gravity for beer, wine, mead, and cider.',
     href: '/calculators/abv-calculator',
     icon: 'glass',
     color: 'amber',
@@ -740,7 +774,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Clay Shrinkage Calculator',
-    description: 'Calculate thrown vs fired pottery sizes for stoneware, porcelain, and earthenware clay bodies.',
+    description:
+      'Calculate thrown vs fired pottery sizes for stoneware, porcelain, and earthenware clay bodies.',
     href: '/calculators/clay-shrinkage-calculator',
     icon: 'cube',
     color: 'coral',
@@ -749,7 +784,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Soap Lye Calculator',
-    description: 'Calculate NaOH or KOH amounts for cold process soap with superfat and water ratios.',
+    description:
+      'Calculate NaOH or KOH amounts for cold process soap with superfat and water ratios.',
     href: '/calculators/lye-calculator',
     icon: 'layers',
     color: 'violet',
@@ -805,7 +841,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // Niche Calculators - Phase 3
   {
     title: 'Cutting Time Calculator',
-    description: 'Estimate machining time for milling, turning, and drilling with cost calculation.',
+    description:
+      'Estimate machining time for milling, turning, and drilling with cost calculation.',
     href: '/calculators/cutting-time-calculator',
     icon: 'bolt',
     color: 'blue',
@@ -832,7 +869,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Kiln Cost Calculator',
-    description: 'Calculate electricity cost for pottery kiln firings with cone temperature reference.',
+    description:
+      'Calculate electricity cost for pottery kiln firings with cone temperature reference.',
     href: '/calculators/kiln-cost-calculator',
     icon: 'fire',
     color: 'coral',
@@ -851,7 +889,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // Niche Calculators - Phase 4
   {
     title: 'Tool Deflection Calculator',
-    description: 'Calculate end mill deflection for CNC machining with stickout and cutting force analysis.',
+    description:
+      'Calculate end mill deflection for CNC machining with stickout and cutting force analysis.',
     href: '/calculators/tool-deflection-calculator',
     icon: 'bolt',
     color: 'blue',
@@ -869,7 +908,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Priming Sugar Calculator',
-    description: 'Calculate carbonation sugar for bottle conditioning with CO\u2082 volumes by style.',
+    description:
+      'Calculate carbonation sugar for bottle conditioning with CO\u2082 volumes by style.',
     href: '/calculators/priming-sugar-calculator',
     icon: 'glass',
     color: 'amber',
@@ -887,7 +927,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Batch Cost Calculator',
-    description: 'Calculate material costs, labor, overhead, and pricing for soap, candles, and crafts.',
+    description:
+      'Calculate material costs, labor, overhead, and pricing for soap, candles, and crafts.',
     href: '/calculators/batch-cost-calculator',
     icon: 'dollar',
     color: 'violet',
@@ -897,7 +938,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // Additional calculators
   {
     title: 'Scotland ADS Calculator',
-    description: 'Calculate Additional Dwelling Supplement for second property purchases in Scotland.',
+    description:
+      'Calculate Additional Dwelling Supplement for second property purchases in Scotland.',
     href: '/calculators/ads-calculator',
     icon: 'home',
     color: 'blue',
@@ -907,7 +949,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Baby Cost Calculator',
-    description: 'Estimate the first-year costs of having a baby including essentials, healthcare, and childcare.',
+    description:
+      'Estimate the first-year costs of having a baby including essentials, healthcare, and childcare.',
     href: '/calculators/baby-cost-calculator',
     icon: 'heart',
     color: 'pink',
@@ -916,7 +959,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Birthday Party Calculator',
-    description: 'Plan and budget a birthday party with venue, food, decorations, and entertainment costs.',
+    description:
+      'Plan and budget a birthday party with venue, food, decorations, and entertainment costs.',
     href: '/calculators/birthday-party-calculator',
     icon: 'glass',
     color: 'coral',
@@ -952,7 +996,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'College ROI Calculator',
-    description: 'Calculate the return on investment of a college degree based on costs and expected salary.',
+    description:
+      'Calculate the return on investment of a college degree based on costs and expected salary.',
     href: '/calculators/college-roi-calculator',
     icon: 'chart',
     color: 'violet',
@@ -970,7 +1015,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Consulting Rate Calculator',
-    description: 'Calculate your ideal consulting hourly or daily rate based on expenses and target income.',
+    description:
+      'Calculate your ideal consulting hourly or daily rate based on expenses and target income.',
     href: '/calculators/consulting-rate-calculator',
     icon: 'dollar',
     color: 'green',
@@ -979,7 +1025,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Employee Cost Calculator',
-    description: 'Calculate the true cost of an employee including salary, benefits, taxes, and overhead.',
+    description:
+      'Calculate the true cost of an employee including salary, benefits, taxes, and overhead.',
     href: '/calculators/employee-cost-calculator',
     icon: 'dollar',
     color: 'blue',
@@ -988,7 +1035,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Event Seating Calculator',
-    description: 'Calculate seating arrangements and capacity for weddings, conferences, and events.',
+    description:
+      'Calculate seating arrangements and capacity for weddings, conferences, and events.',
     href: '/calculators/event-seating-calculator',
     icon: 'layers',
     color: 'coral',
@@ -997,7 +1045,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Fence Calculator',
-    description: 'Calculate materials needed for fencing projects including posts, rails, and pickets.',
+    description:
+      'Calculate materials needed for fencing projects including posts, rails, and pickets.',
     href: '/calculators/fence-calculator',
     icon: 'layers',
     color: 'amber',
@@ -1024,7 +1073,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Job Offer Comparison',
-    description: 'Compare multiple job offers including salary, benefits, commute, and growth potential.',
+    description:
+      'Compare multiple job offers including salary, benefits, commute, and growth potential.',
     href: '/calculators/job-offer-comparison-calculator',
     icon: 'swap',
     color: 'green',
@@ -1042,7 +1092,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Moving Cost Calculator',
-    description: 'Estimate the total cost of moving including movers, supplies, and travel expenses.',
+    description:
+      'Estimate the total cost of moving including movers, supplies, and travel expenses.',
     href: '/calculators/moving-cost-calculator',
     icon: 'home',
     color: 'blue',
@@ -1078,7 +1129,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Rental Property ROI',
-    description: 'Calculate return on investment for rental properties including cash flow and cap rate.',
+    description:
+      'Calculate return on investment for rental properties including cash flow and cap rate.',
     href: '/calculators/rental-property-calculator',
     icon: 'home',
     color: 'green',
@@ -1105,7 +1157,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'UK SDLT Calculator',
-    description: 'Calculate Stamp Duty Land Tax for property purchases in England and Northern Ireland.',
+    description:
+      'Calculate Stamp Duty Land Tax for property purchases in England and Northern Ireland.',
     href: '/calculators/sdlt-calculator',
     icon: 'home',
     color: 'blue',
@@ -1124,7 +1177,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Startup Cost Calculator',
-    description: 'Estimate initial costs for starting a business including legal, equipment, and marketing.',
+    description:
+      'Estimate initial costs for starting a business including legal, equipment, and marketing.',
     href: '/calculators/startup-cost-calculator',
     icon: 'rocket',
     color: 'violet',
@@ -1160,7 +1214,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'W2 to 1099 Calculator',
-    description: 'Convert W2 salary to equivalent 1099 contractor rate accounting for taxes and benefits.',
+    description:
+      'Convert W2 salary to equivalent 1099 contractor rate accounting for taxes and benefits.',
     href: '/calculators/w2-to-1099-calculator',
     icon: 'swap',
     color: 'green',
@@ -1180,7 +1235,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // New Calculators - January 2025
   {
     title: 'Due Date Calculator',
-    description: 'Calculate your pregnancy due date with LMP, conception, IVF, or ultrasound methods.',
+    description:
+      'Calculate your pregnancy due date with LMP, conception, IVF, or ultrasound methods.',
     href: '/calculators/due-date-calculator',
     icon: 'heart',
     color: 'coral',
@@ -1217,7 +1273,8 @@ export const calculators: readonly CalculatorEntry[] = [
   // New Calculators - February 2025
   {
     title: 'TDEE Calculator',
-    description: 'Calculate your Total Daily Energy Expenditure based on activity level and body composition.',
+    description:
+      'Calculate your Total Daily Energy Expenditure based on activity level and body composition.',
     href: '/calculators/tdee-calculator',
     icon: 'heart',
     color: 'coral',
@@ -1272,7 +1329,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Inheritance Tax Calculator',
-    description: 'Calculate UK inheritance tax liability with nil-rate band and residence allowance.',
+    description:
+      'Calculate UK inheritance tax liability with nil-rate band and residence allowance.',
     href: '/calculators/inheritance-tax-calculator',
     icon: 'chart',
     color: 'violet',
@@ -1312,7 +1370,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Pizza Dough Calculator',
-    description: "Calculate pizza dough ingredients by weight using baker's percentages for any style.",
+    description:
+      "Calculate pizza dough ingredients by weight using baker's percentages for any style.",
     href: '/calculators/pizza-dough-calculator',
     icon: 'fire',
     color: 'coral',
@@ -1330,7 +1389,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Water Intake Calculator',
-    description: 'Calculate your recommended daily water intake based on weight, activity, and climate.',
+    description:
+      'Calculate your recommended daily water intake based on weight, activity, and climate.',
     href: '/calculators/water-intake-calculator',
     icon: 'heart',
     color: 'ocean',
@@ -1348,7 +1408,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Coffee Spend Calculator',
-    description: 'Calculate how much your daily coffee habit costs per year and what invested savings could grow to.',
+    description:
+      'Calculate how much your daily coffee habit costs per year and what invested savings could grow to.',
     href: '/calculators/coffee-spend-calculator',
     icon: 'fire',
     color: 'amber',
@@ -1357,7 +1418,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Streaming Value Calculator',
-    description: 'Calculate cost per hour for Netflix, Disney+, and more to find your best and worst value subscriptions.',
+    description:
+      'Calculate cost per hour for Netflix, Disney+, and more to find your best and worst value subscriptions.',
     href: '/calculators/streaming-value-calculator',
     icon: 'glass',
     color: 'violet',
@@ -1366,7 +1428,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Screen Time Calculator',
-    description: 'Calculate your daily, weekly, and yearly screen time with opportunity costs and age-group comparison.',
+    description:
+      'Calculate your daily, weekly, and yearly screen time with opportunity costs and age-group comparison.',
     href: '/calculators/screen-time-calculator',
     icon: 'glass',
     color: 'violet',
@@ -1375,7 +1438,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Trades Hourly Rate',
-    description: 'Work out what to charge per hour as a tradesperson, factoring in overheads, tax, and desired income.',
+    description:
+      'Work out what to charge per hour as a tradesperson, factoring in overheads, tax, and desired income.',
     href: '/calculators/trades-hourly-rate-calculator',
     icon: 'calculator',
     color: 'amber',
@@ -1384,7 +1448,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Rent Affordability',
-    description: 'Calculate how much rent you can afford using the 30%, 50/30/20, and 28/36 DTI rules.',
+    description:
+      'Calculate how much rent you can afford using the 30%, 50/30/20, and 28/36 DTI rules.',
     href: '/calculators/rent-affordability-calculator',
     icon: 'home',
     color: 'green',
@@ -1393,7 +1458,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Materials Markup Calculator',
-    description: 'Calculate selling prices from cost and markup. Understand markup vs margin with visual explanations.',
+    description:
+      'Calculate selling prices from cost and markup. Understand markup vs margin with visual explanations.',
     href: '/calculators/materials-markup-calculator',
     icon: 'percent',
     color: 'amber',
@@ -1411,7 +1477,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'House Flip Calculator',
-    description: 'Analyze fix-and-flip profitability with the 70% rule, financing costs, and full cost breakdown.',
+    description:
+      'Analyze fix-and-flip profitability with the 70% rule, financing costs, and full cost breakdown.',
     href: '/calculators/house-flip-calculator',
     icon: 'home',
     color: 'blue',
@@ -1420,7 +1487,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Business Mileage Calculator',
-    description: 'Calculate tax-deductible business mileage using HMRC AMAP rates or IRS standard mileage rate.',
+    description:
+      'Calculate tax-deductible business mileage using HMRC AMAP rates or IRS standard mileage rate.',
     href: '/calculators/business-mileage-calculator',
     icon: 'briefcase',
     color: 'green',
@@ -1429,7 +1497,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Heart Rate Zone Calculator',
-    description: 'Calculate your 5 training heart rate zones using max HR percentage or Karvonen method.',
+    description:
+      'Calculate your 5 training heart rate zones using max HR percentage or Karvonen method.',
     href: '/calculators/heart-rate-zone-calculator',
     icon: 'heart',
     color: 'coral',
@@ -1438,7 +1507,8 @@ export const calculators: readonly CalculatorEntry[] = [
   },
   {
     title: 'Leftovers Calculator',
-    description: 'Find out how long leftovers last in the fridge, freezer, or counter with USDA food safety data.',
+    description:
+      'Find out how long leftovers last in the fridge, freezer, or counter with USDA food safety data.',
     href: '/calculators/leftovers-calculator',
     icon: 'shield',
     color: 'green',

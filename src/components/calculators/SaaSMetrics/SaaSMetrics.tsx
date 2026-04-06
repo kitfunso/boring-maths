@@ -35,10 +35,12 @@ const SCORE_COLORS = {
 };
 
 export default function SaaSMetrics() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<SaaSMetricsInputs, ReturnType<typeof calculateSaaSMetrics>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    SaaSMetricsInputs,
+    ReturnType<typeof calculateSaaSMetrics>
+  >({
     name: 'SaaS Metrics Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSaaSMetrics,
   });
 

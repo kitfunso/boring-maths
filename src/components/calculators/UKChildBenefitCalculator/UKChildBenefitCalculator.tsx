@@ -4,7 +4,10 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../..
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKChildBenefitCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<UKChildBenefitInputs, ReturnType<typeof calculateChildBenefit>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    UKChildBenefitInputs,
+    ReturnType<typeof calculateChildBenefit>
+  >({
     name: 'UK Child Benefit Calculator',
     slug: 'calc-uk-child-benefit-inputs',
     defaults: getDefaultInputs,

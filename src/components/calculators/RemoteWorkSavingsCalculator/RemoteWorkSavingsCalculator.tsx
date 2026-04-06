@@ -25,10 +25,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RemoteWorkSavingsCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<RemoteWorkSavingsInputs, ReturnType<typeof calculateRemoteWorkSavings>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    RemoteWorkSavingsInputs,
+    ReturnType<typeof calculateRemoteWorkSavings>
+  >({
     name: 'Remote Work Savings Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRemoteWorkSavings,
   });
 

@@ -37,10 +37,8 @@ interface ToastProps {
 }
 
 const TOAST_GRADIENTS = {
-  green:
-    'linear-gradient(145deg, rgba(34, 197, 94, 0.95) 0%, rgba(22, 163, 74, 0.98) 100%)',
-  blue:
-    'linear-gradient(145deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.98) 100%)',
+  green: 'linear-gradient(145deg, rgba(34, 197, 94, 0.95) 0%, rgba(22, 163, 74, 0.98) 100%)',
+  blue: 'linear-gradient(145deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.98) 100%)',
 } as const;
 
 const TOAST_ICONS = {
@@ -86,11 +84,7 @@ interface HelpPanelProps {
 
 function HelpPanel({ calculatorName, onClose }: HelpPanelProps) {
   return (
-    <div
-      id="keyboard-shortcuts-help"
-      role="dialog"
-      aria-label="Keyboard shortcuts"
-    >
+    <div id="keyboard-shortcuts-help" role="dialog" aria-label="Keyboard shortcuts">
       <div
         style={{
           position: 'fixed',
@@ -186,9 +180,7 @@ export default function KeyboardShortcutOverlay({
 }: KeyboardShortcutsState) {
   return (
     <>
-      {isHelpOpen && (
-        <HelpPanel calculatorName={calculatorName} onClose={dismissHelp} />
-      )}
+      {isHelpOpen && <HelpPanel calculatorName={calculatorName} onClose={dismissHelp} />}
       {toast !== null && <Toast message={toast.message} color={toast.color} />}
     </>
   );

@@ -60,10 +60,12 @@ const GEAR_OPTIONS = [
 ];
 
 export default function BabyCost() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<BabyCostInputs, ReturnType<typeof calculateBabyCost>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    BabyCostInputs,
+    ReturnType<typeof calculateBabyCost>
+  >({
     name: 'Baby Cost Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBabyCost,
   });
 

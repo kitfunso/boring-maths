@@ -44,10 +44,12 @@ const BUSINESS_TYPE_OPTIONS = [
 ];
 
 export default function StartupCost() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<StartupCostInputs, ReturnType<typeof calculateStartupCost>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    StartupCostInputs,
+    ReturnType<typeof calculateStartupCost>
+  >({
     name: 'Startup Cost Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateStartupCost,
   });
 

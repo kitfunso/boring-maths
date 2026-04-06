@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PipeFlowCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PipeFlowInputs, ReturnType<typeof calculatePipeFlow>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PipeFlowInputs,
+    ReturnType<typeof calculatePipeFlow>
+  >({
     name: 'Pipe Flow Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePipeFlow,

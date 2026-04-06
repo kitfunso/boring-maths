@@ -37,10 +37,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FIRECalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<FIRECalculatorInputs, ReturnType<typeof calculateFIRE>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    FIRECalculatorInputs,
+    ReturnType<typeof calculateFIRE>
+  >({
     name: 'FIRE Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFIRE,
   });
 

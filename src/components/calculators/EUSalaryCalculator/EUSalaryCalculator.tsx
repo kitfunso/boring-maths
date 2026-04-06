@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EUSalaryCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<SalaryInputs, ReturnType<typeof calculateSalary>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    SalaryInputs,
+    ReturnType<typeof calculateSalary>
+  >({
     name: 'EU Salary Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateSalary,

@@ -149,8 +149,14 @@ describe('HeartRateZoneCalculator', () => {
         restingHeartRate: 50,
       };
 
-      const percentResult = calculateHeartRateZones({ ...baseInputs, method: 'percentage' as const });
-      const karvonenResult = calculateHeartRateZones({ ...baseInputs, method: 'karvonen' as const });
+      const percentResult = calculateHeartRateZones({
+        ...baseInputs,
+        method: 'percentage' as const,
+      });
+      const karvonenResult = calculateHeartRateZones({
+        ...baseInputs,
+        method: 'karvonen' as const,
+      });
 
       // Zone 1 min: Karvonen should be higher because it adds resting HR
       // Percentage: 50% x 190 = 95

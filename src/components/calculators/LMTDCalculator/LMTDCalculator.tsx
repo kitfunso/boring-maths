@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function LMTDCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<LMTDInputs, ReturnType<typeof calculateLMTD>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    LMTDInputs,
+    ReturnType<typeof calculateLMTD>
+  >({
     name: 'LMTD Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateLMTD,

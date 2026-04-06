@@ -14,11 +14,7 @@ import type {
   EquivalentMeasurement,
   Ingredient,
 } from './types';
-import {
-  INGREDIENT_DENSITIES,
-  IS_VOLUME_UNIT,
-  UNIT_LABELS,
-} from './types';
+import { INGREDIENT_DENSITIES, IS_VOLUME_UNIT, UNIT_LABELS } from './types';
 
 // ── Volume conversions (all relative to ml) ──────────────────────────
 

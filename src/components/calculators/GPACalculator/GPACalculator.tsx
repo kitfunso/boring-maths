@@ -27,7 +27,10 @@ import {
 } from '../../ui';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function GPACalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<GPACalculatorInputs, ReturnType<typeof calculateGPA>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    GPACalculatorInputs,
+    ReturnType<typeof calculateGPA>
+  >({
     name: 'GPA Calculator',
     slug: 'calc-gpa-inputs',
     defaults: getDefaultInputs,

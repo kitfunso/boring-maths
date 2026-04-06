@@ -24,7 +24,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function LoanCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<LoanInputs, ReturnType<typeof calculateLoan>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    LoanInputs,
+    ReturnType<typeof calculateLoan>
+  >({
     name: 'Loan Payment Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateLoan,

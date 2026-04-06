@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ReynoldsNumberCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<ReynoldsInputs, ReturnType<typeof calculateReynolds>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    ReynoldsInputs,
+    ReturnType<typeof calculateReynolds>
+  >({
     name: 'Reynolds Number Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateReynolds,

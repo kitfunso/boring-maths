@@ -27,7 +27,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function IdealGasLawCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<IdealGasInputs, ReturnType<typeof calculateIdealGas>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    IdealGasInputs,
+    ReturnType<typeof calculateIdealGas>
+  >({
     name: 'Ideal Gas Law Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateIdealGas,

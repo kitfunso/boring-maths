@@ -18,7 +18,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DogAgeCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<DogAgeInputs, ReturnType<typeof calculateDogAge>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    DogAgeInputs,
+    ReturnType<typeof calculateDogAge>
+  >({
     name: 'Dog Age Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateDogAge,

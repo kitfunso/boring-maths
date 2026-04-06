@@ -26,7 +26,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function InflationCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<InflationInputs, ReturnType<typeof calculateInflation>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    InflationInputs,
+    ReturnType<typeof calculateInflation>
+  >({
     name: 'Inflation Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateInflation,

@@ -25,21 +25,19 @@ export function calculateCostPerWear(inputs: CostPerWearInputs): CostPerWearResu
   const totalCareCost = careCostPerMonth * expectedLifespanMonths;
   const totalLifetimeCost = purchasePrice + totalCareCost;
   const costPerWear = totalWears > 0 ? totalLifetimeCost / totalWears : 0;
-  const annualCost = expectedLifespanMonths > 0
-    ? (totalLifetimeCost / expectedLifespanMonths) * 12
-    : 0;
+  const annualCost =
+    expectedLifespanMonths > 0 ? (totalLifetimeCost / expectedLifespanMonths) * 12 : 0;
 
   // Alternative item (no separate care cost; baked into replacement frequency)
   const altTotalWears = alternativeWearsPerMonth * alternativeLifespanMonths;
-  const alternativeCostPerWear = altTotalWears > 0
-    ? alternativePrice / altTotalWears
-    : 0;
+  const alternativeCostPerWear = altTotalWears > 0 ? alternativePrice / altTotalWears : 0;
 
   // To compare fairly over the same lifespan as the main item,
   // figure out how many replacement cycles the alternative needs.
-  const replacementCycles = alternativeLifespanMonths > 0
-    ? Math.ceil(expectedLifespanMonths / alternativeLifespanMonths)
-    : 1;
+  const replacementCycles =
+    alternativeLifespanMonths > 0
+      ? Math.ceil(expectedLifespanMonths / alternativeLifespanMonths)
+      : 1;
   const alternativeTotalCost = alternativePrice * replacementCycles;
 
   const isBetterValue = costPerWear <= alternativeCostPerWear;
@@ -60,11 +58,7 @@ export function calculateCostPerWear(inputs: CostPerWearInputs): CostPerWearResu
   };
 }
 
-function buildVerdict(
-  costPerWear: number,
-  isBetterValue: boolean,
-  savings: number
-): string {
+function buildVerdict(costPerWear: number, isBetterValue: boolean, savings: number): string {
   if (costPerWear <= 1) {
     return 'Great value! Under $1 per wear is the gold standard for wardrobe investments.';
   }

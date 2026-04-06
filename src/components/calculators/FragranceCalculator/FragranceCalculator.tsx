@@ -10,14 +10,18 @@ import { calculateFragrance } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function FragranceCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<FragranceInputs, ReturnType<typeof calculateFragrance>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<FragranceInputs, ReturnType<typeof calculateFragrance>>({
     defaults: {
-    waxWeight: 16,
-    weightUnit: 'ounces',
-    fragranceLoad: 8,
-    waxType: 'soy-464',
-    numberOfCandles: 2,
-  },
+      waxWeight: 16,
+      weightUnit: 'ounces',
+      fragranceLoad: 8,
+      waxType: 'soy-464',
+      numberOfCandles: 2,
+    },
     compute: calculateFragrance,
   });
 

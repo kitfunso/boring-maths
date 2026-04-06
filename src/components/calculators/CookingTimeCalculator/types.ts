@@ -51,31 +51,27 @@ export const MEAT_TYPE_LABELS: Readonly<Record<MeatType, string>> = {
   'lamb-chops': 'Lamb Chops',
   'turkey-whole': 'Whole Turkey',
   'turkey-breast': 'Turkey Breast',
-  'salmon': 'Salmon',
-  'ham': 'Ham (pre-cooked)',
+  salmon: 'Salmon',
+  ham: 'Ham (pre-cooked)',
 };
 
 export const METHOD_LABELS: Readonly<Record<CookingMethod, string>> = {
-  'oven': 'Oven',
+  oven: 'Oven',
   'slow-cooker': 'Slow Cooker',
   'air-fryer': 'Air Fryer',
-  'grill': 'Grill',
+  grill: 'Grill',
 };
 
 export const DONENESS_LABELS: Readonly<Record<Doneness, string>> = {
-  'rare': 'Rare',
+  rare: 'Rare',
   'medium-rare': 'Medium Rare',
-  'medium': 'Medium',
+  medium: 'Medium',
   'medium-well': 'Medium Well',
   'well-done': 'Well Done',
 };
 
 /** Meats that support doneness selection (beef and lamb). */
-export const DONENESS_MEATS: readonly MeatType[] = [
-  'beef-roast',
-  'lamb-leg',
-  'lamb-chops',
-];
+export const DONENESS_MEATS: readonly MeatType[] = ['beef-roast', 'lamb-leg', 'lamb-chops'];
 
 /** Methods available per meat type (some meats don't suit all methods). */
 export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod[]>> = {
@@ -88,8 +84,8 @@ export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod
   'lamb-chops': ['oven', 'air-fryer', 'grill'],
   'turkey-whole': ['oven', 'slow-cooker'],
   'turkey-breast': ['oven', 'slow-cooker', 'grill'],
-  'salmon': ['oven', 'air-fryer', 'grill'],
-  'ham': ['oven', 'slow-cooker'],
+  salmon: ['oven', 'air-fryer', 'grill'],
+  ham: ['oven', 'slow-cooker'],
 };
 
 /**
@@ -111,79 +107,437 @@ export interface CookingDataEntry {
  * Based on USDA guidelines and common culinary standards.
  */
 export const DONENESS_INTERNAL_TEMPS: Readonly<Record<Doneness, number>> = {
-  'rare': 125,
+  rare: 125,
   'medium-rare': 135,
-  'medium': 145,
+  medium: 145,
   'medium-well': 150,
   'well-done': 160,
 };
 
-export const COOKING_DATA: Readonly<Record<MeatType, Readonly<Record<CookingMethod, CookingDataEntry>>>> = {
+export const COOKING_DATA: Readonly<
+  Record<MeatType, Readonly<Record<CookingMethod, CookingDataEntry>>>
+> = {
   'beef-roast': {
-    'oven': { minutesPerPound: 20, ovenTempF: 325, internalTempF: 145, restingMinutes: 15, notes: ['Sear all sides in a hot pan before roasting for a better crust.', 'Let roast come to room temperature for 30-60 min before cooking.'] },
-    'slow-cooker': { minutesPerPound: 60, ovenTempF: 0, internalTempF: 145, restingMinutes: 10, notes: ['Cook on LOW for best results.', 'Add 1 cup of liquid (broth, wine, or water).', 'No need to sear first, but it adds flavor.'] },
-    'air-fryer': { minutesPerPound: 20, ovenTempF: 360, internalTempF: 145, restingMinutes: 15, notes: [] },
-    'grill': { minutesPerPound: 18, ovenTempF: 350, internalTempF: 145, restingMinutes: 15, notes: ['Use indirect heat after initial sear.', 'Maintain grill temperature at 325-375F.', 'Use a drip pan under the roast.'] },
+    oven: {
+      minutesPerPound: 20,
+      ovenTempF: 325,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: [
+        'Sear all sides in a hot pan before roasting for a better crust.',
+        'Let roast come to room temperature for 30-60 min before cooking.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 60,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 10,
+      notes: [
+        'Cook on LOW for best results.',
+        'Add 1 cup of liquid (broth, wine, or water).',
+        'No need to sear first, but it adds flavor.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 360,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 18,
+      ovenTempF: 350,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: [
+        'Use indirect heat after initial sear.',
+        'Maintain grill temperature at 325-375F.',
+        'Use a drip pan under the roast.',
+      ],
+    },
   },
   'chicken-whole': {
-    'oven': { minutesPerPound: 20, ovenTempF: 375, internalTempF: 165, restingMinutes: 15, notes: ['Pat skin dry and season under the skin for crispy results.', 'Tent with foil if skin browns too quickly.'] },
-    'slow-cooker': { minutesPerPound: 50, ovenTempF: 0, internalTempF: 165, restingMinutes: 10, notes: ['Cook on LOW 6-8 hours or HIGH 4-5 hours.', 'Elevate chicken on vegetable bed for even cooking.', 'Skin will not crisp; broil briefly after for crispy skin.'] },
-    'air-fryer': { minutesPerPound: 20, ovenTempF: 380, internalTempF: 165, restingMinutes: 15, notes: [] },
-    'grill': { minutesPerPound: 20, ovenTempF: 375, internalTempF: 165, restingMinutes: 15, notes: ['Use indirect heat with a drip pan.', 'Maintain grill at 350-400F.', 'Add wood chips for smoky flavor.'] },
+    oven: {
+      minutesPerPound: 20,
+      ovenTempF: 375,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: [
+        'Pat skin dry and season under the skin for crispy results.',
+        'Tent with foil if skin browns too quickly.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 50,
+      ovenTempF: 0,
+      internalTempF: 165,
+      restingMinutes: 10,
+      notes: [
+        'Cook on LOW 6-8 hours or HIGH 4-5 hours.',
+        'Elevate chicken on vegetable bed for even cooking.',
+        'Skin will not crisp; broil briefly after for crispy skin.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 380,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 20,
+      ovenTempF: 375,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: [
+        'Use indirect heat with a drip pan.',
+        'Maintain grill at 350-400F.',
+        'Add wood chips for smoky flavor.',
+      ],
+    },
   },
   'chicken-breast': {
-    'oven': { minutesPerPound: 22, ovenTempF: 400, internalTempF: 165, restingMinutes: 5, notes: ['Pound to even thickness for uniform cooking.', 'Use a meat thermometer to avoid overcooking.'] },
-    'slow-cooker': { minutesPerPound: 50, ovenTempF: 0, internalTempF: 165, restingMinutes: 5, notes: [] },
-    'air-fryer': { minutesPerPound: 18, ovenTempF: 380, internalTempF: 165, restingMinutes: 5, notes: ['Flip halfway through cooking time.', 'Spray lightly with oil for crispier exterior.', 'Do not overcrowd the basket.'] },
-    'grill': { minutesPerPound: 16, ovenTempF: 400, internalTempF: 165, restingMinutes: 5, notes: ['Grill over direct medium-high heat.', 'Oil the grates to prevent sticking.', '6-8 minutes per side for average breast.'] },
+    oven: {
+      minutesPerPound: 22,
+      ovenTempF: 400,
+      internalTempF: 165,
+      restingMinutes: 5,
+      notes: [
+        'Pound to even thickness for uniform cooking.',
+        'Use a meat thermometer to avoid overcooking.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 50,
+      ovenTempF: 0,
+      internalTempF: 165,
+      restingMinutes: 5,
+      notes: [],
+    },
+    'air-fryer': {
+      minutesPerPound: 18,
+      ovenTempF: 380,
+      internalTempF: 165,
+      restingMinutes: 5,
+      notes: [
+        'Flip halfway through cooking time.',
+        'Spray lightly with oil for crispier exterior.',
+        'Do not overcrowd the basket.',
+      ],
+    },
+    grill: {
+      minutesPerPound: 16,
+      ovenTempF: 400,
+      internalTempF: 165,
+      restingMinutes: 5,
+      notes: [
+        'Grill over direct medium-high heat.',
+        'Oil the grates to prevent sticking.',
+        '6-8 minutes per side for average breast.',
+      ],
+    },
   },
   'pork-roast': {
-    'oven': { minutesPerPound: 25, ovenTempF: 350, internalTempF: 145, restingMinutes: 15, notes: ['Score the fat cap in a crosshatch pattern.', 'USDA recommends 145F with a 3-minute rest.'] },
-    'slow-cooker': { minutesPerPound: 60, ovenTempF: 0, internalTempF: 145, restingMinutes: 10, notes: ['Cook on LOW 8-10 hours for pull-apart tenderness.', 'Add liquid and aromatics for flavor.'] },
-    'air-fryer': { minutesPerPound: 25, ovenTempF: 360, internalTempF: 145, restingMinutes: 15, notes: [] },
-    'grill': { minutesPerPound: 22, ovenTempF: 350, internalTempF: 145, restingMinutes: 15, notes: ['Use indirect heat after searing.', 'Baste with sauce in the last 20 minutes.'] },
+    oven: {
+      minutesPerPound: 25,
+      ovenTempF: 350,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: [
+        'Score the fat cap in a crosshatch pattern.',
+        'USDA recommends 145F with a 3-minute rest.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 60,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 10,
+      notes: [
+        'Cook on LOW 8-10 hours for pull-apart tenderness.',
+        'Add liquid and aromatics for flavor.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 25,
+      ovenTempF: 360,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 22,
+      ovenTempF: 350,
+      internalTempF: 145,
+      restingMinutes: 15,
+      notes: ['Use indirect heat after searing.', 'Baste with sauce in the last 20 minutes.'],
+    },
   },
   'pork-chops': {
-    'oven': { minutesPerPound: 25, ovenTempF: 400, internalTempF: 145, restingMinutes: 5, notes: ['Sear in a hot skillet first, then finish in oven.', 'Bone-in chops stay juicier.'] },
-    'slow-cooker': { minutesPerPound: 55, ovenTempF: 0, internalTempF: 145, restingMinutes: 5, notes: [] },
-    'air-fryer': { minutesPerPound: 20, ovenTempF: 400, internalTempF: 145, restingMinutes: 5, notes: ['Flip halfway through.', 'Spray basket with oil to prevent sticking.', 'Works best with bone-in, 1-inch thick chops.'] },
-    'grill': { minutesPerPound: 18, ovenTempF: 400, internalTempF: 145, restingMinutes: 5, notes: ['Grill over direct medium-high heat.', '4-5 minutes per side for 1-inch chops.', 'Brine for 30 minutes before grilling for extra moisture.'] },
+    oven: {
+      minutesPerPound: 25,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: ['Sear in a hot skillet first, then finish in oven.', 'Bone-in chops stay juicier.'],
+    },
+    'slow-cooker': {
+      minutesPerPound: 55,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Flip halfway through.',
+        'Spray basket with oil to prevent sticking.',
+        'Works best with bone-in, 1-inch thick chops.',
+      ],
+    },
+    grill: {
+      minutesPerPound: 18,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Grill over direct medium-high heat.',
+        '4-5 minutes per side for 1-inch chops.',
+        'Brine for 30 minutes before grilling for extra moisture.',
+      ],
+    },
   },
   'lamb-leg': {
-    'oven': { minutesPerPound: 20, ovenTempF: 325, internalTempF: 145, restingMinutes: 20, notes: ['Stud with garlic slivers and fresh rosemary.', 'Start at 450F for 15 min, then reduce to 325F.'] },
-    'slow-cooker': { minutesPerPound: 55, ovenTempF: 0, internalTempF: 145, restingMinutes: 10, notes: ['Cook on LOW 8-10 hours.', 'Add red wine, garlic, and herbs for flavor.'] },
-    'air-fryer': { minutesPerPound: 20, ovenTempF: 360, internalTempF: 145, restingMinutes: 20, notes: [] },
-    'grill': { minutesPerPound: 18, ovenTempF: 350, internalTempF: 145, restingMinutes: 20, notes: ['Butterfly and flatten for even grilling.', 'Use indirect heat for bone-in leg.', 'Marinate overnight in lemon, garlic, and herbs.'] },
+    oven: {
+      minutesPerPound: 20,
+      ovenTempF: 325,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [
+        'Stud with garlic slivers and fresh rosemary.',
+        'Start at 450F for 15 min, then reduce to 325F.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 55,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 10,
+      notes: ['Cook on LOW 8-10 hours.', 'Add red wine, garlic, and herbs for flavor.'],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 360,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 18,
+      ovenTempF: 350,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [
+        'Butterfly and flatten for even grilling.',
+        'Use indirect heat for bone-in leg.',
+        'Marinate overnight in lemon, garlic, and herbs.',
+      ],
+    },
   },
   'lamb-chops': {
-    'oven': { minutesPerPound: 18, ovenTempF: 400, internalTempF: 145, restingMinutes: 5, notes: ['Sear in a very hot pan first, then finish in oven.', 'Season simply with salt, pepper, and rosemary.'] },
-    'slow-cooker': { minutesPerPound: 50, ovenTempF: 0, internalTempF: 145, restingMinutes: 5, notes: [] },
-    'air-fryer': { minutesPerPound: 16, ovenTempF: 400, internalTempF: 145, restingMinutes: 5, notes: ['Flip halfway through.', 'Cook in a single layer.', 'Pat dry and season well for best sear.'] },
-    'grill': { minutesPerPound: 14, ovenTempF: 450, internalTempF: 145, restingMinutes: 5, notes: ['Grill over direct high heat.', '3-4 minutes per side for medium-rare.', 'Let meat reach room temperature before grilling.'] },
+    oven: {
+      minutesPerPound: 18,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Sear in a very hot pan first, then finish in oven.',
+        'Season simply with salt, pepper, and rosemary.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 50,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [],
+    },
+    'air-fryer': {
+      minutesPerPound: 16,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Flip halfway through.',
+        'Cook in a single layer.',
+        'Pat dry and season well for best sear.',
+      ],
+    },
+    grill: {
+      minutesPerPound: 14,
+      ovenTempF: 450,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Grill over direct high heat.',
+        '3-4 minutes per side for medium-rare.',
+        'Let meat reach room temperature before grilling.',
+      ],
+    },
   },
   'turkey-whole': {
-    'oven': { minutesPerPound: 15, ovenTempF: 325, internalTempF: 165, restingMinutes: 30, notes: ['Tent breast with foil if it browns too quickly.', 'Stuff cavity with aromatics (not stuffing) for even cooking.', 'Allow 1 lb per person when planning.'] },
-    'slow-cooker': { minutesPerPound: 45, ovenTempF: 0, internalTempF: 165, restingMinutes: 15, notes: ['Only fits turkeys up to ~6-7 lbs in most slow cookers.', 'Cook on LOW. Does not produce crispy skin.'] },
-    'air-fryer': { minutesPerPound: 15, ovenTempF: 350, internalTempF: 165, restingMinutes: 30, notes: [] },
-    'grill': { minutesPerPound: 15, ovenTempF: 325, internalTempF: 165, restingMinutes: 30, notes: [] },
+    oven: {
+      minutesPerPound: 15,
+      ovenTempF: 325,
+      internalTempF: 165,
+      restingMinutes: 30,
+      notes: [
+        'Tent breast with foil if it browns too quickly.',
+        'Stuff cavity with aromatics (not stuffing) for even cooking.',
+        'Allow 1 lb per person when planning.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 45,
+      ovenTempF: 0,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: [
+        'Only fits turkeys up to ~6-7 lbs in most slow cookers.',
+        'Cook on LOW. Does not produce crispy skin.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 15,
+      ovenTempF: 350,
+      internalTempF: 165,
+      restingMinutes: 30,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 15,
+      ovenTempF: 325,
+      internalTempF: 165,
+      restingMinutes: 30,
+      notes: [],
+    },
   },
   'turkey-breast': {
-    'oven': { minutesPerPound: 20, ovenTempF: 350, internalTempF: 165, restingMinutes: 15, notes: ['Brine overnight for maximum juiciness.', 'Place breast side up on a rack.'] },
-    'slow-cooker': { minutesPerPound: 50, ovenTempF: 0, internalTempF: 165, restingMinutes: 10, notes: ['Cook on LOW 6-8 hours.', 'Add a splash of broth to prevent drying.'] },
-    'air-fryer': { minutesPerPound: 20, ovenTempF: 350, internalTempF: 165, restingMinutes: 15, notes: [] },
-    'grill': { minutesPerPound: 18, ovenTempF: 350, internalTempF: 165, restingMinutes: 15, notes: ['Use indirect heat.', 'Maintain grill at 325-375F.'] },
+    oven: {
+      minutesPerPound: 20,
+      ovenTempF: 350,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: ['Brine overnight for maximum juiciness.', 'Place breast side up on a rack.'],
+    },
+    'slow-cooker': {
+      minutesPerPound: 50,
+      ovenTempF: 0,
+      internalTempF: 165,
+      restingMinutes: 10,
+      notes: ['Cook on LOW 6-8 hours.', 'Add a splash of broth to prevent drying.'],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 350,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 18,
+      ovenTempF: 350,
+      internalTempF: 165,
+      restingMinutes: 15,
+      notes: ['Use indirect heat.', 'Maintain grill at 325-375F.'],
+    },
   },
-  'salmon': {
-    'oven': { minutesPerPound: 20, ovenTempF: 400, internalTempF: 145, restingMinutes: 3, notes: ['Skin side down on a parchment-lined sheet.', 'Cook until flesh flakes easily with a fork.'] },
-    'slow-cooker': { minutesPerPound: 35, ovenTempF: 0, internalTempF: 145, restingMinutes: 3, notes: [] },
-    'air-fryer': { minutesPerPound: 14, ovenTempF: 390, internalTempF: 145, restingMinutes: 3, notes: ['Skin side down.', 'No need to flip.', 'Pat dry and season before cooking.', 'Check early; salmon cooks fast in an air fryer.'] },
-    'grill': { minutesPerPound: 12, ovenTempF: 400, internalTempF: 145, restingMinutes: 3, notes: ['Skin side down first over medium-high heat.', 'Use a cedar plank for smoky flavor.', '4-6 minutes per side for 1-inch fillets.'] },
+  salmon: {
+    oven: {
+      minutesPerPound: 20,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 3,
+      notes: [
+        'Skin side down on a parchment-lined sheet.',
+        'Cook until flesh flakes easily with a fork.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 35,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 3,
+      notes: [],
+    },
+    'air-fryer': {
+      minutesPerPound: 14,
+      ovenTempF: 390,
+      internalTempF: 145,
+      restingMinutes: 3,
+      notes: [
+        'Skin side down.',
+        'No need to flip.',
+        'Pat dry and season before cooking.',
+        'Check early; salmon cooks fast in an air fryer.',
+      ],
+    },
+    grill: {
+      minutesPerPound: 12,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 3,
+      notes: [
+        'Skin side down first over medium-high heat.',
+        'Use a cedar plank for smoky flavor.',
+        '4-6 minutes per side for 1-inch fillets.',
+      ],
+    },
   },
-  'ham': {
-    'oven': { minutesPerPound: 15, ovenTempF: 325, internalTempF: 140, restingMinutes: 15, notes: ['Pre-cooked ham only needs reheating to 140F.', 'Score the surface and apply glaze in the last 30 minutes.', 'Cover with foil to prevent drying.'] },
-    'slow-cooker': { minutesPerPound: 40, ovenTempF: 0, internalTempF: 140, restingMinutes: 10, notes: ['Cook on LOW 4-6 hours.', 'Add pineapple, brown sugar, or glaze.', 'Great for freeing up the oven on holidays.'] },
-    'air-fryer': { minutesPerPound: 15, ovenTempF: 320, internalTempF: 140, restingMinutes: 15, notes: [] },
-    'grill': { minutesPerPound: 15, ovenTempF: 325, internalTempF: 140, restingMinutes: 15, notes: [] },
+  ham: {
+    oven: {
+      minutesPerPound: 15,
+      ovenTempF: 325,
+      internalTempF: 140,
+      restingMinutes: 15,
+      notes: [
+        'Pre-cooked ham only needs reheating to 140F.',
+        'Score the surface and apply glaze in the last 30 minutes.',
+        'Cover with foil to prevent drying.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 40,
+      ovenTempF: 0,
+      internalTempF: 140,
+      restingMinutes: 10,
+      notes: [
+        'Cook on LOW 4-6 hours.',
+        'Add pineapple, brown sugar, or glaze.',
+        'Great for freeing up the oven on holidays.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 15,
+      ovenTempF: 320,
+      internalTempF: 140,
+      restingMinutes: 15,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 15,
+      ovenTempF: 325,
+      internalTempF: 140,
+      restingMinutes: 15,
+      notes: [],
+    },
   },
 };
 

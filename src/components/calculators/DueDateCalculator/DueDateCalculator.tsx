@@ -18,8 +18,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function DueDateCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<DueDateInputs, ReturnType<typeof calculateDueDate>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function DueDateCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    DueDateInputs,
+    ReturnType<typeof calculateDueDate>
+  >({
     name: 'Due Date Calculator',
     slug: 'calc-due-date-inputs',
     defaults: getDefaultInputs,

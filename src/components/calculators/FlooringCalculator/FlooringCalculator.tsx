@@ -37,10 +37,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FlooringCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<FlooringCalculatorInputs, FlooringCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    FlooringCalculatorInputs,
+    FlooringCalculatorResult
+  >({
     name: 'Calculate Your Flooring Needs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFlooring,
   });
 

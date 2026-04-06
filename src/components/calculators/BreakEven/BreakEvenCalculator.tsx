@@ -23,10 +23,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function BreakEvenCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<BreakEvenInputs, BreakEvenResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    BreakEvenInputs,
+    BreakEvenResult
+  >({
     name: 'Calculate Your Break-Even Point',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBreakEven,
   });
 

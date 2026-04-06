@@ -32,9 +32,9 @@ export function calculateCookingTime(inputs: CookingTimeInputs): CookingTimeResu
   let minutesPerPound = data.minutesPerPound;
   if (DONENESS_MEATS.includes(meatType)) {
     const donenessMultiplier: Record<string, number> = {
-      'rare': 0.75,
+      rare: 0.75,
       'medium-rare': 0.85,
-      'medium': 1.0,
+      medium: 1.0,
       'medium-well': 1.1,
       'well-done': 1.25,
     };
@@ -53,12 +53,16 @@ export function calculateCookingTime(inputs: CookingTimeInputs): CookingTimeResu
   if (cookingMethod === 'slow-cooker') {
     const slowCookerHours = Math.round(hours * 10) / 10;
     if (slowCookerHours > 2) {
-      notes.unshift(`Total slow cooker time: approximately ${slowCookerHours.toFixed(1)} hours on LOW.`);
+      notes.unshift(
+        `Total slow cooker time: approximately ${slowCookerHours.toFixed(1)} hours on LOW.`
+      );
     }
   }
 
   if (DONENESS_MEATS.includes(meatType)) {
-    notes.push(`Pull at ${internalTempF}F (${fToC(internalTempF)}C) internal; temperature rises during rest.`);
+    notes.push(
+      `Pull at ${internalTempF}F (${fToC(internalTempF)}C) internal; temperature rises during rest.`
+    );
   }
 
   return {

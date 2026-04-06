@@ -25,18 +25,21 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const MODE_OPTIONS = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+const MODE_OPTIONS = [
   { value: 'cost-revenue' as MarginInputMode, label: 'Cost + Revenue' },
   { value: 'cost-margin' as MarginInputMode, label: 'Cost + Margin %' },
   { value: 'revenue-margin' as MarginInputMode, label: 'Revenue + Margin %' },
 ];
 
 export default function MarginCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<MarginCalculatorInputs, ReturnType<typeof calculateMargin>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    MarginCalculatorInputs,
+    ReturnType<typeof calculateMargin>
+  >({
     name: 'Margin Calculator',
     slug: 'calc-margin-inputs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMargin,
   });
 

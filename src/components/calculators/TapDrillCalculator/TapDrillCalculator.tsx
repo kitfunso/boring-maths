@@ -10,12 +10,16 @@ import { calculateTapDrill } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function TapDrillCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<TapDrillInputs, ReturnType<typeof calculateTapDrill>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<TapDrillInputs, ReturnType<typeof calculateTapDrill>>({
     defaults: {
-    threadType: 'imperial',
-    threadSize: '1/4-20',
-    threadPercentage: 75,
-  },
+      threadType: 'imperial',
+      threadSize: '1/4-20',
+      threadPercentage: 75,
+    },
     compute: calculateTapDrill,
   });
 

@@ -130,8 +130,7 @@ export default function RecipeScalerCalculator() {
               <div className="flex flex-wrap gap-2">
                 {QUICK_SCALES.map(({ label, factor }) => {
                   const isActive =
-                    inputs.desiredServings ===
-                    Math.round(inputs.originalServings * factor);
+                    inputs.desiredServings === Math.round(inputs.originalServings * factor);
                   return (
                     <button
                       key={label}
@@ -199,7 +198,11 @@ export default function RecipeScalerCalculator() {
                         step={0.25}
                         value={ing.amount}
                         onChange={(e) =>
-                          updateIngredient(index, 'amount', Number((e.target as HTMLInputElement).value))
+                          updateIngredient(
+                            index,
+                            'amount',
+                            Number((e.target as HTMLInputElement).value)
+                          )
                         }
                         className="w-full bg-transparent border-b border-white/10 pb-1 text-sm text-[var(--color-cream)] text-right focus:border-[var(--color-accent)] outline-none"
                       />
@@ -317,9 +320,7 @@ export default function RecipeScalerCalculator() {
                         <span className="text-sm font-semibold text-[var(--color-accent)] text-right w-20">
                           {ing.displayAmount}
                         </span>
-                        <span className="text-sm text-[var(--color-subtle)] w-16">
-                          {ing.unit}
-                        </span>
+                        <span className="text-sm text-[var(--color-subtle)] w-16">{ing.unit}</span>
                       </div>
                     ))}
                   </div>

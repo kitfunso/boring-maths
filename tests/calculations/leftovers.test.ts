@@ -153,9 +153,7 @@ describe('LeftoversCalculator', () => {
     });
 
     it('should return correct data for all food categories', () => {
-      const categories = Object.keys(FOOD_SAFETY_DATA) as Array<
-        keyof typeof FOOD_SAFETY_DATA
-      >;
+      const categories = Object.keys(FOOD_SAFETY_DATA) as Array<keyof typeof FOOD_SAFETY_DATA>;
 
       for (const category of categories) {
         const inputs: LeftoversInputs = {

@@ -25,10 +25,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SalaryToHourly() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<SalaryToHourlyInputs, SalaryToHourlyResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    SalaryToHourlyInputs,
+    SalaryToHourlyResult
+  >({
     name: 'Salary to Hourly Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSalaryToHourly,
   });
 

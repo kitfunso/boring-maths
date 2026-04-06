@@ -3,7 +3,10 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { calculateCookingTime, formatTime } from '../../src/components/calculators/CookingTimeCalculator/calculations';
+import {
+  calculateCookingTime,
+  formatTime,
+} from '../../src/components/calculators/CookingTimeCalculator/calculations';
 import type { CookingTimeInputs } from '../../src/components/calculators/CookingTimeCalculator/types';
 
 describe('CookingTimeCalculator', () => {

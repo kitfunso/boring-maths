@@ -14,24 +14,28 @@ function generateId(): string {
 }
 
 export function IBUCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<IBUInputs, ReturnType<typeof calculateIBU>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<IBUInputs, ReturnType<typeof calculateIBU>>({
     defaults: {
-    batchSize: 5,
-    batchUnit: 'gallons',
-    originalGravity: 1.055,
-    hopAdditions: [
-      {
-        id: generateId(),
-        hopName: 'Cascade',
-        weight: 1,
-        weightUnit: 'oz',
-        alphaAcid: 5.5,
-        boilTime: 60,
-        form: 'pellet',
-      },
-    ],
-    formula: 'tinseth',
-  },
+      batchSize: 5,
+      batchUnit: 'gallons',
+      originalGravity: 1.055,
+      hopAdditions: [
+        {
+          id: generateId(),
+          hopName: 'Cascade',
+          weight: 1,
+          weightUnit: 'oz',
+          alphaAcid: 5.5,
+          boilTime: 60,
+          form: 'pellet',
+        },
+      ],
+      formula: 'tinseth',
+    },
     compute: calculateIBU,
   });
 

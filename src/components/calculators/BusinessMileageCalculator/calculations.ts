@@ -10,11 +10,7 @@
  *   - 67 cents per mile (2025)
  */
 
-import type {
-  BusinessMileageInputs,
-  BusinessMileageResult,
-  RateBreakdownLine,
-} from './types';
+import type { BusinessMileageInputs, BusinessMileageResult, RateBreakdownLine } from './types';
 import {
   UK_CAR_RATE_FIRST_10K,
   UK_CAR_RATE_OVER_10K,
@@ -121,9 +117,7 @@ function getElectricNote(
 /**
  * Main calculation function
  */
-export function calculateBusinessMileage(
-  inputs: BusinessMileageInputs
-): BusinessMileageResult {
+export function calculateBusinessMileage(inputs: BusinessMileageInputs): BusinessMileageResult {
   const { region, milesPerWeek, weeksPerYear, vehicleType, isElectric } = inputs;
 
   const annualMiles = Math.round(milesPerWeek * weeksPerYear);
@@ -163,10 +157,7 @@ export function formatCurrency(value: number, currency: Currency = 'USD'): strin
   return formatCurrencyByRegion(value, currency, 2);
 }
 
-export function formatPenceOrCents(
-  value: number,
-  region: BusinessMileageInputs['region']
-): string {
+export function formatPenceOrCents(value: number, region: BusinessMileageInputs['region']): string {
   if (region === 'UK') {
     return `${Math.round(value * 100)}p`;
   }

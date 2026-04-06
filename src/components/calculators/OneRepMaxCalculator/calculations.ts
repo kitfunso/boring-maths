@@ -43,7 +43,7 @@ function lander(weight: number, reps: number): number {
 
 function lombardi(weight: number, reps: number): number {
   if (reps === 1) return weight;
-  return weight * Math.pow(reps, 0.10);
+  return weight * Math.pow(reps, 0.1);
 }
 
 function oconner(weight: number, reps: number): number {

@@ -32,10 +32,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DiscountCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<DiscountInputs, ReturnType<typeof calculateDiscount>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    DiscountInputs,
+    ReturnType<typeof calculateDiscount>
+  >({
     name: 'Discount Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateDiscount,
   });
 

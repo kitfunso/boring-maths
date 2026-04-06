@@ -146,23 +146,17 @@ export default function LeftoversCalculator() {
                 value={`${result.fridgeDays} days`}
                 sublabel="at 40\u00B0F / 4\u00B0C"
                 valueColor={
-                  inputs.storageMethod === 'fridge'
-                    ? 'text-[var(--color-accent)]'
-                    : undefined
+                  inputs.storageMethod === 'fridge' ? 'text-[var(--color-accent)]' : undefined
                 }
               />
               <MetricCard
                 label="Freezer"
                 value={
-                  result.freezerMonths > 0
-                    ? `${result.freezerMonths} months`
-                    : 'Not recommended'
+                  result.freezerMonths > 0 ? `${result.freezerMonths} months` : 'Not recommended'
                 }
                 sublabel="at 0\u00B0F / -18\u00B0C"
                 valueColor={
-                  inputs.storageMethod === 'freezer'
-                    ? 'text-[var(--color-accent)]'
-                    : undefined
+                  inputs.storageMethod === 'freezer' ? 'text-[var(--color-accent)]' : undefined
                 }
               />
               <MetricCard
@@ -174,9 +168,7 @@ export default function LeftoversCalculator() {
                 }
                 sublabel="room temperature"
                 valueColor={
-                  inputs.storageMethod === 'counter'
-                    ? 'text-[var(--color-accent)]'
-                    : undefined
+                  inputs.storageMethod === 'counter' ? 'text-[var(--color-accent)]' : undefined
                 }
               />
             </Grid>
@@ -201,10 +193,7 @@ export default function LeftoversCalculator() {
               </h3>
               <ul className="space-y-2">
                 {result.spoilageSigns.map((sign, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-[var(--color-subtle)]"
-                  >
+                  <li key={i} className="flex items-start gap-3 text-[var(--color-subtle)]">
                     <span className="text-red-400 mt-0.5 shrink-0">&#9888;</span>
                     <span>{sign}</span>
                   </li>
@@ -219,10 +208,7 @@ export default function LeftoversCalculator() {
               </h3>
               <ul className="space-y-2">
                 {result.freezingTips.map((tip, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-[var(--color-subtle)]"
-                  >
+                  <li key={i} className="flex items-start gap-3 text-[var(--color-subtle)]">
                     <span className="text-blue-400 mt-0.5 shrink-0">&#10052;</span>
                     <span>{tip}</span>
                   </li>
@@ -232,8 +218,8 @@ export default function LeftoversCalculator() {
 
             {/* General Safety Tip */}
             <Alert variant="tip" title="USDA 2-Hour Rule">
-              Perishable food left at room temperature for more than 2 hours should be discarded.
-              In hot weather (above 90\u00B0F / 32\u00B0C), this window shrinks to 1 hour. Always
+              Perishable food left at room temperature for more than 2 hours should be discarded. In
+              hot weather (above 90\u00B0F / 32\u00B0C), this window shrinks to 1 hour. Always
               refrigerate or freeze leftovers promptly.
             </Alert>
           </div>

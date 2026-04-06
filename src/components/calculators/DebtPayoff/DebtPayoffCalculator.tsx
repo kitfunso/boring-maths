@@ -29,10 +29,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DebtPayoffCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<DebtPayoffInputs, ReturnType<typeof calculateDebtPayoff>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    DebtPayoffInputs,
+    ReturnType<typeof calculateDebtPayoff>
+  >({
     name: 'Debt Payoff Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateDebtPayoff,
   });
 

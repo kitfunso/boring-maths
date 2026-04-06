@@ -27,7 +27,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function USPaycheckCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<PaycheckInputs, ReturnType<typeof calculatePaycheck>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    PaycheckInputs,
+    ReturnType<typeof calculatePaycheck>
+  >({
     name: 'US Paycheck Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePaycheck,

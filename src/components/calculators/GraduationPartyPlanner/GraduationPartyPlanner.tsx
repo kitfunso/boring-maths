@@ -48,10 +48,12 @@ const MENU_STYLE_OPTIONS = [
 ];
 
 export default function GraduationPartyPlanner() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<GraduationPartyInputs, ReturnType<typeof calculateGraduationParty>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    GraduationPartyInputs,
+    ReturnType<typeof calculateGraduationParty>
+  >({
     name: 'Graduation Party Planner',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateGraduationParty,
   });
 

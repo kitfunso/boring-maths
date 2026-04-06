@@ -31,7 +31,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SpeedsFeedsCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<SpeedsFeedsInputs, ReturnType<typeof calculateSpeedsFeeds>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    SpeedsFeedsInputs,
+    ReturnType<typeof calculateSpeedsFeeds>
+  >({
     name: 'Speeds & Feeds Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateSpeedsFeeds,

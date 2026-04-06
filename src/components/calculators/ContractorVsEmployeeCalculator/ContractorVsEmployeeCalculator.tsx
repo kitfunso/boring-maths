@@ -31,10 +31,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ContractorVsEmployeeCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<ContractorVsEmployeeInputs, ReturnType<typeof calculateComparison_main>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    ContractorVsEmployeeInputs,
+    ReturnType<typeof calculateComparison_main>
+  >({
     name: 'Contractor vs Employee Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateComparison_main,
   });
 

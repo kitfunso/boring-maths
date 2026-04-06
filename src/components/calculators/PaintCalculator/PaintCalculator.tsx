@@ -33,10 +33,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PaintCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<PaintCalculatorInputs, PaintCalculatorResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    PaintCalculatorInputs,
+    PaintCalculatorResult
+  >({
     name: 'Calculate Your Paint Needs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePaint,
   });
 

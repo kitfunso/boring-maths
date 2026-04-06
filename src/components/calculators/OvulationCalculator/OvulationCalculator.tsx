@@ -17,7 +17,8 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';function formatDate(dateStr: string): string {
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T12:00:00');
   return d.toLocaleDateString('en-US', {
     weekday: 'short',
@@ -28,7 +29,10 @@ import { useCalculatorBase } from '../../../hooks/useCalculatorBase';function fo
 }
 
 export default function OvulationCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<OvulationInputs, ReturnType<typeof calculateOvulation>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    OvulationInputs,
+    ReturnType<typeof calculateOvulation>
+  >({
     name: 'Ovulation Calculator',
     slug: 'calc-ovulation-inputs',
     defaults: getDefaultInputs,

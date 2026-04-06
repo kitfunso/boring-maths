@@ -111,10 +111,10 @@ describe('StreamingValueCalculator', () => {
     it('should assign correct value ratings', () => {
       const inputs: StreamingValueInputs = {
         subscriptions: [
-          { name: 'Great', monthlyPrice: 10, hoursWatchedPerMonth: 20, enabled: true },   // $0.50/hr
-          { name: 'Good', monthlyPrice: 15, hoursWatchedPerMonth: 10, enabled: true },    // $1.50/hr
-          { name: 'Fair', monthlyPrice: 12, hoursWatchedPerMonth: 4, enabled: true },     // $3.00/hr
-          { name: 'Poor', monthlyPrice: 16, hoursWatchedPerMonth: 2, enabled: true },     // $8.00/hr
+          { name: 'Great', monthlyPrice: 10, hoursWatchedPerMonth: 20, enabled: true }, // $0.50/hr
+          { name: 'Good', monthlyPrice: 15, hoursWatchedPerMonth: 10, enabled: true }, // $1.50/hr
+          { name: 'Fair', monthlyPrice: 12, hoursWatchedPerMonth: 4, enabled: true }, // $3.00/hr
+          { name: 'Poor', monthlyPrice: 16, hoursWatchedPerMonth: 2, enabled: true }, // $8.00/hr
         ],
       };
 

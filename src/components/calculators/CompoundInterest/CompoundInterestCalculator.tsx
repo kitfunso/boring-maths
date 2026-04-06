@@ -30,11 +30,13 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function CompoundInterestCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<CompoundInterestInputs, CompoundInterestResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    CompoundInterestInputs,
+    CompoundInterestResult
+  >({
     name: 'Compound Interest Calculator',
     slug: 'calc-compound-inputs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCompoundInterest,
   });
 

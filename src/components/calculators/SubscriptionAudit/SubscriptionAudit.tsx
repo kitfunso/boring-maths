@@ -174,10 +174,12 @@ function RecommendationBadge({ recommendation }: { recommendation: 'keep' | 'rev
 }
 
 export default function SubscriptionAudit() {
-  const { inputs, result, setInputs } = useCalculatorState<SubscriptionAuditInputs, SubscriptionAuditResult>({
+  const { inputs, result, setInputs } = useCalculatorState<
+    SubscriptionAuditInputs,
+    SubscriptionAuditResult
+  >({
     name: 'Subscription Audit',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: analyzeSubscriptions,
   });
 

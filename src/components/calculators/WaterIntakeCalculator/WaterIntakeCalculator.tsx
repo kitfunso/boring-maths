@@ -192,7 +192,10 @@ export default function WaterIntakeCalculator() {
                         className="w-8 h-10 rounded-b-lg rounded-t-sm border-2 border-blue-400/40 bg-blue-500/30 flex items-end justify-center overflow-hidden"
                         aria-hidden="true"
                       >
-                        <div className="w-full bg-blue-400/60 rounded-b-md" style={{ height: '70%' }} />
+                        <div
+                          className="w-full bg-blue-400/60 rounded-b-md"
+                          style={{ height: '70%' }}
+                        />
                       </div>
                     ))}
                   </div>

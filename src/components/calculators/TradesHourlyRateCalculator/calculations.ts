@@ -31,13 +31,8 @@ export function sumMonthlyOverheads(overheads: Overheads): number {
  * Main calculation: derive required hourly rate from desired annual income.
  */
 export function calculateTradesHourlyRate(inputs: TradesHourlyRateInputs): TradesHourlyRateResult {
-  const {
-    desiredAnnualIncome,
-    workingWeeksPerYear,
-    billableHoursPerWeek,
-    overheads,
-    taxRate,
-  } = inputs;
+  const { desiredAnnualIncome, workingWeeksPerYear, billableHoursPerWeek, overheads, taxRate } =
+    inputs;
 
   const totalOverheadsMonthly = sumMonthlyOverheads(overheads);
   const totalOverheadsYearly = totalOverheadsMonthly * 12;
@@ -52,9 +47,7 @@ export function calculateTradesHourlyRate(inputs: TradesHourlyRateInputs): Trade
 
   // Rate per billable hour
   const requiredHourlyRate =
-    billableHoursPerYear > 0
-      ? Math.round((grossRequired / billableHoursPerYear) * 100) / 100
-      : 0;
+    billableHoursPerYear > 0 ? Math.round((grossRequired / billableHoursPerYear) * 100) / 100 : 0;
 
   const requiredDayRate = Math.round(requiredHourlyRate * 8 * 100) / 100;
 
@@ -78,9 +71,7 @@ export function calculateTradesHourlyRate(inputs: TradesHourlyRateInputs): Trade
       ? Math.round((totalOverheadsYearly / billableHoursPerYear) * 100) / 100
       : 0;
   const taxPerHour =
-    billableHoursPerYear > 0
-      ? Math.round((totalTax / billableHoursPerYear) * 100) / 100
-      : 0;
+    billableHoursPerYear > 0 ? Math.round((totalTax / billableHoursPerYear) * 100) / 100 : 0;
 
   return {
     requiredHourlyRate,

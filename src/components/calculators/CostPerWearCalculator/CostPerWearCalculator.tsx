@@ -37,12 +37,22 @@ export default function CostPerWearCalculator() {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  const mainBarWidth = result.costPerWear > 0 && result.alternativeCostPerWear > 0
-    ? Math.min(100, (result.costPerWear / Math.max(result.costPerWear, result.alternativeCostPerWear)) * 100)
-    : 50;
-  const altBarWidth = result.costPerWear > 0 && result.alternativeCostPerWear > 0
-    ? Math.min(100, (result.alternativeCostPerWear / Math.max(result.costPerWear, result.alternativeCostPerWear)) * 100)
-    : 50;
+  const mainBarWidth =
+    result.costPerWear > 0 && result.alternativeCostPerWear > 0
+      ? Math.min(
+          100,
+          (result.costPerWear / Math.max(result.costPerWear, result.alternativeCostPerWear)) * 100
+        )
+      : 50;
+  const altBarWidth =
+    result.costPerWear > 0 && result.alternativeCostPerWear > 0
+      ? Math.min(
+          100,
+          (result.alternativeCostPerWear /
+            Math.max(result.costPerWear, result.alternativeCostPerWear)) *
+            100
+        )
+      : 50;
 
   return (
     <ThemeProvider defaultColor="purple">
@@ -118,9 +128,7 @@ export default function CostPerWearCalculator() {
               </div>
 
               <div>
-                <Label htmlFor="careCostPerMonth">
-                  Care Cost / Month (dry cleaning, etc.)
-                </Label>
+                <Label htmlFor="careCostPerMonth">Care Cost / Month (dry cleaning, etc.)</Label>
                 <Input
                   id="careCostPerMonth"
                   variant="currency"
@@ -231,7 +239,9 @@ export default function CostPerWearCalculator() {
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-[var(--color-cream)]">{inputs.itemName || 'Your Item'}</span>
+                        <span className="text-[var(--color-cream)]">
+                          {inputs.itemName || 'Your Item'}
+                        </span>
                         <span className="text-[var(--color-accent)] font-semibold">
                           {formatCurrency(result.costPerWear, inputs.currency)}/wear
                         </span>
@@ -286,7 +296,9 @@ export default function CostPerWearCalculator() {
                     label={result.savingsVsAlternative >= 0 ? 'You Save' : 'Extra Cost'}
                     value={formatCurrency(Math.abs(result.savingsVsAlternative), inputs.currency)}
                     sublabel="vs alternative"
-                    valueColor={result.savingsVsAlternative >= 0 ? 'text-green-400' : 'text-rose-400'}
+                    valueColor={
+                      result.savingsVsAlternative >= 0 ? 'text-green-400' : 'text-rose-400'
+                    }
                   />
                 </Grid>
 

@@ -30,7 +30,10 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PercentageCalculator() {
-  const { inputs, result, updateInput } = useCalculatorState<PercentageCalculatorInputs, ReturnType<typeof calculate>>({
+  const { inputs, result, updateInput } = useCalculatorState<
+    PercentageCalculatorInputs,
+    ReturnType<typeof calculate>
+  >({
     name: 'Percentage Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculate,

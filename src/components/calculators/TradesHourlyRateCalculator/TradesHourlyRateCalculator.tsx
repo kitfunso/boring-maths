@@ -3,11 +3,7 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import {
-  calculateTradesHourlyRate,
-  formatCurrency,
-  formatCurrencyWhole,
-} from './calculations';
+import { calculateTradesHourlyRate, formatCurrency, formatCurrencyWhole } from './calculations';
 import {
   getDefaultInputs,
   OVERHEAD_LABELS,
@@ -61,15 +57,12 @@ export default function TradesHourlyRateCalculator() {
     result.breakdownPerHour.overheadsPerHour +
     result.breakdownPerHour.taxPerHour;
 
-  const incomeWidth = breakdownTotal > 0
-    ? (result.breakdownPerHour.incomePerHour / breakdownTotal) * 100
-    : 0;
-  const overheadsWidth = breakdownTotal > 0
-    ? (result.breakdownPerHour.overheadsPerHour / breakdownTotal) * 100
-    : 0;
-  const taxWidth = breakdownTotal > 0
-    ? (result.breakdownPerHour.taxPerHour / breakdownTotal) * 100
-    : 0;
+  const incomeWidth =
+    breakdownTotal > 0 ? (result.breakdownPerHour.incomePerHour / breakdownTotal) * 100 : 0;
+  const overheadsWidth =
+    breakdownTotal > 0 ? (result.breakdownPerHour.overheadsPerHour / breakdownTotal) * 100 : 0;
+  const taxWidth =
+    breakdownTotal > 0 ? (result.breakdownPerHour.taxPerHour / breakdownTotal) * 100 : 0;
 
   return (
     <ThemeProvider defaultColor="yellow">
@@ -106,9 +99,7 @@ export default function TradesHourlyRateCalculator() {
               </h3>
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                 <div>
-                  <Label htmlFor="workingWeeksPerYear">
-                    Working Weeks / Year
-                  </Label>
+                  <Label htmlFor="workingWeeksPerYear">Working Weeks / Year</Label>
                   <Slider
                     id="workingWeeksPerYear"
                     min={20}
@@ -122,9 +113,7 @@ export default function TradesHourlyRateCalculator() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="billableHoursPerWeek">
-                    Billable Hours / Week
-                  </Label>
+                  <Label htmlFor="billableHoursPerWeek">Billable Hours / Week</Label>
                   <Slider
                     id="billableHoursPerWeek"
                     min={10}
@@ -142,9 +131,7 @@ export default function TradesHourlyRateCalculator() {
 
             {/* Tax Rate */}
             <div>
-              <Label htmlFor="taxRate">
-                Estimated Tax Rate (%)
-              </Label>
+              <Label htmlFor="taxRate">Estimated Tax Rate (%)</Label>
               <Slider
                 id="taxRate"
                 min={0}
@@ -181,7 +168,9 @@ export default function TradesHourlyRateCalculator() {
                 ))}
               </Grid>
               <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center">
-                <span className="text-sm font-medium text-[var(--color-cream)]">Total Monthly Overheads</span>
+                <span className="text-sm font-medium text-[var(--color-cream)]">
+                  Total Monthly Overheads
+                </span>
                 <span className="text-lg font-bold text-[var(--color-accent)]">
                   {formatCurrency(result.totalOverheadsMonthly, inputs.currency)}
                 </span>
@@ -302,9 +291,9 @@ export default function TradesHourlyRateCalculator() {
                 </div>
 
                 <Alert variant="tip" title="Pricing tip:">
-                  This is your minimum rate to cover costs and hit your income target.
-                  Consider adding a 10-20% buffer for unexpected expenses, slow periods,
-                  and job-to-job travel time that you can't bill for.
+                  This is your minimum rate to cover costs and hit your income target. Consider
+                  adding a 10-20% buffer for unexpected expenses, slow periods, and job-to-job
+                  travel time that you can't bill for.
                 </Alert>
               </>
             ) : (

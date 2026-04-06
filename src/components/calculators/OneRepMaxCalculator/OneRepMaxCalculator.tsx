@@ -125,7 +125,9 @@ export default function OneRepMaxCalculator() {
                 max={30}
                 step={1}
                 value={inputs.reps}
-                onChange={(e) => updateInput('reps', Math.min(30, Math.max(1, Number(e.target.value))))}
+                onChange={(e) =>
+                  updateInput('reps', Math.min(30, Math.max(1, Number(e.target.value))))
+                }
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 1-30 reps. Lower rep ranges give more accurate estimates.
@@ -160,7 +162,8 @@ export default function OneRepMaxCalculator() {
                   subtitle={`Using ${FORMULA_OPTIONS.find((f) => f.value === inputs.formula)?.label} formula`}
                   footer={
                     <>
-                      Based on {inputs.weight} {inputs.unit} x {inputs.reps} rep{inputs.reps > 1 ? 's' : ''}
+                      Based on {inputs.weight} {inputs.unit} x {inputs.reps} rep
+                      {inputs.reps > 1 ? 's' : ''}
                     </>
                   }
                 />
@@ -211,7 +214,9 @@ export default function OneRepMaxCalculator() {
                       >
                         <div
                           className={`text-lg font-bold tabular-nums ${
-                            row.percent === 100 ? 'text-[var(--color-accent)]' : 'text-[var(--color-cream)]'
+                            row.percent === 100
+                              ? 'text-[var(--color-accent)]'
+                              : 'text-[var(--color-cream)]'
                           }`}
                         >
                           {row.percent}%

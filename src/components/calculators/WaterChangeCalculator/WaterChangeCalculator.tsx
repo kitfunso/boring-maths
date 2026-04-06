@@ -10,17 +10,21 @@ import { calculateWaterChange, formatParameter } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function WaterChangeCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<WaterChangeInputs, ReturnType<typeof calculateWaterChange>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<WaterChangeInputs, ReturnType<typeof calculateWaterChange>>({
     defaults: {
-    tankVolume: 55,
-    volumeUnit: 'gallons',
-    changePercent: 25,
-    currentParameter: 40,
-    targetParameter: 20,
-    parameterType: 'nitrate',
-    newWaterParameter: 0,
-    changeFrequency: 'weekly',
-  },
+      tankVolume: 55,
+      volumeUnit: 'gallons',
+      changePercent: 25,
+      currentParameter: 40,
+      targetParameter: 20,
+      parameterType: 'nitrate',
+      newWaterParameter: 0,
+      changeFrequency: 'weekly',
+    },
     compute: calculateWaterChange,
   });
 

@@ -21,8 +21,12 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function DateDifferenceCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<DateDifferenceInputs, DateDifferenceResult>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function DateDifferenceCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    DateDifferenceInputs,
+    DateDifferenceResult
+  >({
     name: 'Date Difference Calculator',
     slug: 'calc-date-diff-inputs',
     defaults: getDefaultInputs,

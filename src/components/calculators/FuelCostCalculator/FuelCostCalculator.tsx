@@ -31,12 +31,15 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function FuelCostCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorBase<FuelCostInputs, FuelCostResult>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function FuelCostCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    FuelCostInputs,
+    FuelCostResult
+  >({
     name: 'Fuel Cost Calculator',
     slug: 'calc-fuel-cost-inputs',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency('GBP')),
+    defaults: () => getDefaultInputs(getInitialCurrency('GBP')),
     compute: calculateFuelCost,
   });
 

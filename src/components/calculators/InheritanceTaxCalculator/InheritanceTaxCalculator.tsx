@@ -2,8 +2,12 @@ import { calculateIHT, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, type IHTInputs } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function InheritanceTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<IHTInputs, ReturnType<typeof calculateIHT>>({
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+export default function InheritanceTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<
+    IHTInputs,
+    ReturnType<typeof calculateIHT>
+  >({
     name: 'Inheritance Tax Calculator',
     slug: 'calc-inheritance-tax-inputs',
     defaults: getDefaultInputs,

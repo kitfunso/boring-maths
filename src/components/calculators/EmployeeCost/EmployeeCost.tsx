@@ -28,10 +28,12 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EmployeeCost() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<EmployeeCostInputs, ReturnType<typeof calculateEmployeeCost>>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+    EmployeeCostInputs,
+    ReturnType<typeof calculateEmployeeCost>
+  >({
     name: 'Employee Cost Calculator',
-    defaults: () =>
-    getDefaultInputs(getInitialCurrency()),
+    defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEmployeeCost,
   });
 

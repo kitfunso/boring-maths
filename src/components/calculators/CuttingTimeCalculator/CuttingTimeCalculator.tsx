@@ -12,27 +12,31 @@ import { calculateCuttingTime, formatTime } from './calculations';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CuttingTimeCalculator() {
-  const { inputs, result: results, setInputs } = useCalculatorState<CuttingTimeInputs, ReturnType<typeof calculateCuttingTime>>({
+  const {
+    inputs,
+    result: results,
+    setInputs,
+  } = useCalculatorState<CuttingTimeInputs, ReturnType<typeof calculateCuttingTime>>({
     defaults: {
-    operationType: 'milling',
-    pathLength: 24,
-    pathUnit: 'inches',
-    feedRate: 20,
-    feedUnit: 'ipm',
-    numberOfPasses: 1,
-    partLength: 6,
-    partDiameter: 2,
-    depthOfCut: 0.1,
-    holeDepth: 1,
-    numberOfHoles: 8,
-    peckDepth: 0.25,
-    rapidRate: 400,
-    rapidDistance: 12,
-    toolChangeTime: 0.25,
-    numberOfToolChanges: 2,
-    setupTime: 15,
-    quantity: 10,
-  },
+      operationType: 'milling',
+      pathLength: 24,
+      pathUnit: 'inches',
+      feedRate: 20,
+      feedUnit: 'ipm',
+      numberOfPasses: 1,
+      partLength: 6,
+      partDiameter: 2,
+      depthOfCut: 0.1,
+      holeDepth: 1,
+      numberOfHoles: 8,
+      peckDepth: 0.25,
+      rapidRate: 400,
+      rapidDistance: 12,
+      toolChangeTime: 0.25,
+      numberOfToolChanges: 2,
+      setupTime: 15,
+      quantity: 10,
+    },
     compute: calculateCuttingTime,
   });
 

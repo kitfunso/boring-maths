@@ -11,7 +11,12 @@ function KeyboardHarness({ onReset }: { onReset?: () => void }) {
     calculatorName: 'Test Calculator',
   });
 
-  return h('div', null, h('input', { 'aria-label': 'test-input' }), h(KeyboardShortcutOverlay, state));
+  return h(
+    'div',
+    null,
+    h('input', { 'aria-label': 'test-input' }),
+    h(KeyboardShortcutOverlay, state)
+  );
 }
 
 describe('useKeyboardShortcuts', () => {

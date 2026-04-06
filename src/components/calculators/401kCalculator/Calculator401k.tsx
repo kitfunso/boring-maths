@@ -19,7 +19,10 @@ import {
 } from '../../ui';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function Calculator401k() {
-  const { inputs, result, updateInput } = useCalculatorBase<Calculator401kInputs, ReturnType<typeof calculate401k>>({
+  const { inputs, result, updateInput } = useCalculatorBase<
+    Calculator401kInputs,
+    ReturnType<typeof calculate401k>
+  >({
     name: '401k Calculator',
     slug: 'calc-401k-inputs',
     defaults: getDefaultInputs,
