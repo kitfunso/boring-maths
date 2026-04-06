@@ -67,6 +67,6 @@ export default defineConfig({
   // Prefetch links for faster navigation
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport',
+    defaultStrategy: 'hover',
   },
 });
