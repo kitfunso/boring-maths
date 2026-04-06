@@ -1,0 +1,182 @@
+---
+/**
+ * Baking Conversion Calculator Page
+ *
+ * SEO-optimized page targeting: "cups to grams calculator baking", "baking conversion calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BakingConversionCalculator from '../../components/calculators/BakingConversionCalculator/BakingConversionCalculator';
+
+// SEO Configuration
+const title = 'Baking Conversion Calculator | Cups to Grams | Boring Math';
+const description =
+  'Convert cups to grams, ounces to ml, and more for 14 baking ingredients. Accurate ingredient-specific densities for flour, sugar, butter, and beyond. Free, instant results.';
+const keywords =
+  'cups to grams calculator baking, baking conversion calculator, flour cups to grams, sugar cups to grams, butter conversion, baking measurements, cooking unit converter, metric baking conversion, ounces to grams baking';
+const canonicalURL = '/calculators/baking-conversion-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Baking Conversion Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, temperature, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level and goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate your daily protein, carbs, and fat needs based on your goals.',
+    href: '/calculators/macro-calculator',
+    icon: 'heart' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percent change, and more with instant results.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How many grams is 1 cup of flour?',
+    answer:
+      'One cup of all-purpose flour weighs approximately 120 grams (4.25 oz). Bread flour is slightly heavier at about 130 grams per cup. These values assume the spoon-and-level method. Scooping directly from the bag can add 20-30 grams per cup, which is why weighing is recommended.',
+  },
+  {
+    question: 'Why do baking conversions depend on the ingredient?',
+    answer:
+      'A cup is a measure of volume, not weight. One cup of sugar (200 g) weighs nearly twice as much as one cup of flour (120 g) because sugar granules pack more densely. This is why you cannot use a single cups-to-grams ratio for all ingredients.',
+  },
+  {
+    question: 'Why is weighing ingredients better than measuring cups?',
+    answer:
+      'Measuring cups can vary by 10-20% depending on how you fill them. Scooping flour packs it down and adds extra; sifting it first makes the cup lighter. A kitchen scale eliminates this inconsistency, giving the same result every time. Professional bakeries always weigh.',
+  },
+  {
+    question: 'How do I convert a US recipe to metric?',
+    answer:
+      'Replace each volume measurement with its gram equivalent for the specific ingredient. For example, "2 cups flour" becomes "240 g flour," and "1 cup sugar" becomes "200 g sugar." Oven temperatures convert at the standard ratio: 350 F = 175 C. Use this calculator to handle each ingredient individually.',
+  },
+  {
+    question: 'What is the difference between US cups and metric cups?',
+    answer:
+      'A US customary cup is 236.6 ml, while a metric cup (used in Australia) is exactly 250 ml. A UK/Imperial cup is 284 ml but is rarely used in modern recipes. This calculator uses the US cup. If your recipe is Australian, multiply cup amounts by 1.057 before entering them.',
+  },
+  {
+    question: 'How many tablespoons are in a cup?',
+    answer:
+      'There are exactly 16 US tablespoons in 1 US cup, and 3 teaspoons in 1 tablespoon. So 1 cup = 16 tablespoons = 48 teaspoons. These are exact volume-to-volume conversions regardless of the ingredient.',
+  },
+  {
+    question: 'Can I use this for liquids like milk and oil?',
+    answer:
+      'Yes. For water and milk the density is close to 1 g/ml (237 g and 244 g per cup respectively), so volume-to-volume conversions are straightforward. Oil is slightly lighter at 218 g per cup. Honey is much denser at 340 g per cup, so it matters which liquid you select.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Baking Conversion Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Baking Conversion Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Baking Conversion Calculator"
+    description="Convert cups, grams, ounces, tablespoons, and milliliters for any baking ingredient. Ingredient-specific densities for accurate results."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BakingConversionCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>ingredient</strong> first. Each ingredient has a different density, so
+      1 cup of flour weighs differently than 1 cup of sugar.
+    </p>
+    <p>
+      Enter the <strong>amount</strong> you want to convert, choose the <strong>from</strong> and
+      <strong>to</strong> units, and the result appears instantly. Use the swap button to reverse
+      the conversion.
+    </p>
+    <p>
+      The <strong>quick reference table</strong> below the result shows common cup-to-gram-to-ounce
+      equivalents for the selected ingredient, useful when scaling an entire recipe.
+    </p>
+    <p>
+      Volume-to-volume conversions (e.g. cups to tablespoons) are exact. Volume-to-weight
+      conversions (e.g. cups to grams) use the ingredient's density and may vary slightly
+      depending on how the ingredient is measured.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>converted amount</strong> is the primary result, showing your measurement in the
+      target unit for the specific ingredient you selected.
+    </p>
+    <p>
+      <strong>Density</strong> tells you how many grams one cup of the ingredient weighs. Higher
+      density means the ingredient is heavier per cup.
+    </p>
+    <p>
+      The <strong>equivalents</strong> panel shows the same quantity expressed in every available
+      unit, so you can pick whichever one your recipe or scale uses.
+    </p>
+    <p>
+      When converting between volume and weight, a precision note reminds you that a kitchen scale
+      will always be more accurate than measuring cups.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

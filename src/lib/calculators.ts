@@ -431,6 +431,15 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
+    title: 'Baking Conversion Calculator',
+    description: 'Convert cups to grams, ounces to ml, and more for 14 baking ingredients.',
+    href: '/calculators/baking-conversion-calculator',
+    icon: 'swap',
+    color: 'amber',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
     title: 'Dog Age Calculator',
     description: 'Convert dog years to human years using accurate, science-based formulas.',
     href: '/calculators/dog-age-calculator',
