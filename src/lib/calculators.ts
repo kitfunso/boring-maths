@@ -1346,6 +1346,15 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'Business Mileage Calculator',
+    description: 'Calculate tax-deductible business mileage using HMRC AMAP rates or IRS standard mileage rate.',
+    href: '/calculators/business-mileage-calculator',
+    icon: 'briefcase',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------

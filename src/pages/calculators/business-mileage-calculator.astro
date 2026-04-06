@@ -1,0 +1,190 @@
+---
+/**
+ * Business Mileage Calculator Page
+ *
+ * SEO-optimized page targeting: "business mileage calculator", "HMRC mileage rates",
+ * "IRS mileage rate 2025", "mileage tax deduction"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import BusinessMileageCalculator from '../../components/calculators/BusinessMileageCalculator/BusinessMileageCalculator';
+
+// SEO Configuration
+const title = 'Business Mileage Calculator | HMRC & IRS Rates | Boring Math';
+const description =
+  'Calculate your business mileage tax deduction using HMRC AMAP rates (45p/25p) or the 2025 IRS standard mileage rate (67c/mile). Covers cars, motorcycles, and bicycles. Free, instant results.';
+const keywords =
+  'business mileage calculator, HMRC mileage rate, IRS mileage rate 2025, mileage tax deduction, 45p per mile, approved mileage allowance payments, AMAP calculator, mileage claim calculator, self employed mileage, business miles calculator';
+const canonicalURL = '/calculators/business-mileage-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Business Mileage Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Freelance Day Rate',
+    description: 'Calculate your ideal freelance rate vs salary.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Job Quote Calculator',
+    description: 'Build accurate job quotes with materials and labour.',
+    href: '/calculators/job-quote-calculator',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'EV vs Gas Calculator',
+    description: 'Compare total cost of ownership for electric vs gas.',
+    href: '/calculators/ev-vs-gas-calculator',
+    icon: 'bolt' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Road Trip Cost',
+    description: 'Calculate gas, hotel, and total road trip costs.',
+    href: '/calculators/road-trip-cost-calculator',
+    icon: 'rocket' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Self-Employment Tax',
+    description: 'Calculate SE tax and quarterly payments.',
+    href: '/calculators/us-self-employment-tax-calculator',
+    icon: 'dollar' as const,
+    color: 'violet' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What are the HMRC mileage rates for 2024/25?',
+    answer:
+      'HMRC Approved Mileage Allowance Payments (AMAP) rates are 45p per mile for the first 10,000 business miles and 25p per mile after that for cars and vans. Motorcycles get 24p per mile and bicycles get 20p per mile. These rates have been unchanged since 2011.',
+  },
+  {
+    question: 'What is the IRS standard mileage rate for 2025?',
+    answer:
+      'The IRS standard mileage rate for business use of a vehicle is 67 cents per mile for 2025. This covers depreciation, gas, insurance, maintenance, and other vehicle expenses. You cannot claim these costs separately if you use the standard rate.',
+  },
+  {
+    question: 'Can I claim mileage for commuting to work?',
+    answer:
+      'No. In both the UK and US, ordinary commuting between your home and permanent workplace is not claimable. Business mileage only covers travel between workplaces, to client sites, or temporary work locations. If you work from home and travel to a client site, that journey counts as business mileage.',
+  },
+  {
+    question: 'Is the mileage rate different for electric cars?',
+    answer:
+      'No. In the UK, HMRC applies the same 45p/25p AMAP rates regardless of whether your car runs on petrol, diesel, or electricity. In the US, the IRS standard rate of 67c/mile applies equally to all vehicles including EVs. The rate is designed to cover all running costs.',
+  },
+  {
+    question: 'How much tax can I save by claiming mileage?',
+    answer:
+      'Your tax saving depends on your marginal tax rate. As a UK basic rate taxpayer (20%), claiming 10,000 miles at 45p saves you 10,000 x 0.45 x 0.20 = £900. Higher rate taxpayers (40%) would save £1,800 on the same mileage. In the US, the deduction reduces your taxable income dollar-for-dollar.',
+  },
+  {
+    question: 'Do I need to keep a mileage log?',
+    answer:
+      'Yes. HMRC and the IRS both require contemporaneous records of business mileage. Your log should include the date, start and end locations, purpose of the trip, and miles driven. Many people use a mileage tracking app to automate this. HMRC requires records for 5 years; the IRS typically requires 3 years from the filing date.',
+  },
+  {
+    question: 'Can I claim mileage if my employer reimburses me?',
+    answer:
+      'In the UK, if your employer pays less than the HMRC AMAP rate, you can claim Mileage Allowance Relief (MAR) on the difference. For example, if your employer pays 30p per mile, you can claim relief on the remaining 15p (for the first 10,000 miles). In the US, if your employer reimburses at a rate below the IRS standard, you generally cannot deduct the difference as an employee (post-2017 Tax Cuts and Jobs Act).',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Business Mileage Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Business Mileage Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Business Mileage Calculator"
+    description="Calculate your tax-deductible business mileage using HMRC AMAP rates (UK) or the IRS standard mileage rate (US). Covers cars, motorcycles, and bicycles."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BusinessMileageCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>vehicle type</strong> (car, motorcycle, or bicycle) and toggle the
+      electric vehicle option if applicable.
+    </p>
+    <p>
+      Enter your <strong>weekly business miles</strong>. Only include miles driven for business
+      purposes, not commuting between home and your regular workplace.
+    </p>
+    <p>
+      Adjust <strong>working weeks per year</strong> to account for holidays and time off. The
+      default of 48 weeks is typical for most workers.
+    </p>
+    <p>
+      Switch currency to <strong>GBP</strong> for UK HMRC rates or <strong>USD</strong> for US IRS
+      rates. The calculator automatically applies the correct rates for each country.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Annual Mileage Deduction</strong> is the total amount you can claim against your
+      taxable income. In the UK this is your AMAP claim; in the US it is your standard mileage
+      deduction.
+    </p>
+    <p>
+      <strong>Estimated Tax Saving</strong> shows what the deduction is worth in actual tax
+      reduction, calculated at the basic/standard marginal tax rate. Higher rate taxpayers will
+      save more.
+    </p>
+    <p>
+      The <strong>Rate Breakdown</strong> shows exactly how the deduction is calculated. For UK
+      cars, the first 10,000 miles are at the higher 45p rate, with any additional miles at 25p.
+    </p>
+    <p>
+      The <strong>UK vs US Comparison</strong> shows how the same mileage would be valued under
+      each country's system, useful if you operate in both markets.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
