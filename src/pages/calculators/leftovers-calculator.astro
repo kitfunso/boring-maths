@@ -1,0 +1,190 @@
+---
+/**
+ * Leftovers Calculator Page
+ *
+ * SEO-optimized page targeting: "how long do leftovers last",
+ * "food safety calculator", "leftover food storage"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import LeftoversCalculator from '../../components/calculators/LeftoversCalculator/LeftoversCalculator';
+
+// SEO Configuration
+const title = 'How Long Do Leftovers Last? | Food Safety Calculator | Boring Math';
+const description =
+  'Find out how long your leftovers are safe to eat. USDA-based food safety data for 15 food types with fridge, freezer, and counter storage times. Free calculator.';
+const keywords =
+  'how long do leftovers last, leftover food safety, food storage calculator, how long is chicken good in the fridge, USDA food safety, food expiration calculator, leftover shelf life, refrigerator storage times';
+const canonicalURL = '/calculators/leftovers-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Leftovers Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat and supplies for your cookout.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Baking Conversion Calculator',
+    description: 'Convert cups to grams, ounces to ml, and more.',
+    href: '/calculators/baking-conversion-calculator',
+    icon: 'swap' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Calculate food quantities and costs for events.',
+    href: '/calculators/catering-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate your daily protein, carbs, and fat needs.',
+    href: '/calculators/macro-calculator',
+    icon: 'heart' as const,
+    color: 'coral' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How long are leftovers good in the fridge?',
+    answer:
+      'Most cooked leftovers are safe in the fridge for 3-4 days at 40\u00B0F (4\u00B0C) or below, according to the USDA. Some items like hard-boiled eggs and bread last up to 7 days. Dressed salads should be eaten within 1-2 days. Always store leftovers in airtight containers and refrigerate within 2 hours of cooking.',
+  },
+  {
+    question: 'Can you eat leftovers after 5 days?',
+    answer:
+      'For most cooked foods (meat, poultry, fish, pasta, rice, soups), the USDA recommends eating leftovers within 3-4 days. After 5 days, the risk of foodborne illness increases significantly. Some foods like deli meats (5 days) and hard-boiled eggs (7 days) have slightly longer windows. When in doubt, throw it out.',
+  },
+  {
+    question: 'How long can leftovers sit out at room temperature?',
+    answer:
+      'Perishable leftovers should not sit at room temperature for more than 2 hours. In hot weather above 90\u00B0F (32\u00B0C), this drops to just 1 hour. Bacteria grow rapidly between 40\u00B0F and 140\u00B0F (the "Danger Zone"). Cooked rice is especially risky and should be refrigerated within 1 hour due to Bacillus cereus spores.',
+  },
+  {
+    question: 'How do I know if leftovers have gone bad?',
+    answer:
+      'Common signs of spoiled leftovers include: a sour, off, or ammonia-like smell; slimy or sticky texture; visible mold of any color; significant discoloration (grey, green, or pink); and unusual taste. However, some dangerous bacteria produce no visible changes, so always follow the time guidelines even if food looks and smells fine.',
+  },
+  {
+    question: 'Is it safe to reheat leftovers more than once?',
+    answer:
+      'While there is no fixed limit on reheating, each cycle of cooling and reheating increases the risk of bacterial growth. The USDA recommends reheating leftovers to an internal temperature of 165\u00B0F (74\u00B0C) measured with a food thermometer. Only reheat the portion you plan to eat, and avoid reheating the same food more than twice.',
+  },
+  {
+    question: 'Do leftovers last longer in the freezer?',
+    answer:
+      'Yes. Freezing at 0\u00B0F (-18\u00B0C) or below keeps food safe indefinitely, though quality degrades over time. Most cooked meats maintain quality for 2-4 months frozen. Soups and stews freeze well for 2-3 months. Some foods like dressed salads and hard-boiled egg whites do not freeze well. Always thaw in the refrigerator, not on the counter.',
+  },
+  {
+    question: 'What is the USDA 2-hour rule?',
+    answer:
+      'The USDA 2-hour rule states that perishable food should not remain at room temperature (between 40\u00B0F and 140\u00B0F / 4\u00B0C and 60\u00B0C) for more than 2 hours total. This includes cooking time, serving time, and cooling time. In temperatures above 90\u00B0F (32\u00B0C), the safe window is only 1 hour. Food left out longer should be discarded.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Leftovers Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Leftovers Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="How Long Do Leftovers Last?"
+    description="Check if your leftovers are still safe to eat. USDA-based storage times for 15 common food types with fridge, freezer, and counter guidelines."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <LeftoversCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>food type</strong> from the dropdown. The calculator covers 15 common
+      leftover categories including meats, grains, dairy, and more.
+    </p>
+    <p>
+      Choose your <strong>storage method</strong>: fridge, freezer, or counter. Each method
+      has different safe storage windows based on USDA guidelines.
+    </p>
+    <p>
+      Enter the <strong>date the food was prepared</strong> or first stored. The calculator
+      determines how many days remain before the food should be discarded.
+    </p>
+    <p>
+      Review the <strong>spoilage signs</strong> specific to your food type. Even within safe
+      time windows, always inspect food before eating.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding USDA Food Safety Guidelines">
+    <p>
+      The <strong>fridge storage time</strong> assumes your refrigerator is set to 40&#xB0;F (4&#xB0;C)
+      or below. Most cooked leftovers last 3-4 days in the fridge.
+    </p>
+    <p>
+      <strong>Freezer storage</strong> times reflect quality rather than safety. Food frozen at
+      0&#xB0;F (-18&#xB0;C) remains safe indefinitely, but texture and flavor degrade over time.
+    </p>
+    <p>
+      The <strong>counter time</strong> follows the USDA "Danger Zone" rule. Bacteria multiply
+      rapidly between 40&#xB0;F and 140&#xB0;F (4&#xB0;C and 60&#xB0;C), making room-temperature storage
+      the highest risk option.
+    </p>
+    <p>
+      <strong>Reheating temperature</strong> matters. Most leftovers should reach an internal
+      temperature of 165&#xB0;F (74&#xB0;C) to kill potential pathogens. Use a food thermometer
+      rather than relying on visual cues.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
