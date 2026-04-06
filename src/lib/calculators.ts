@@ -1346,6 +1346,15 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'Leftovers Calculator',
+    description: 'Find out how long leftovers last in the fridge, freezer, or counter with USDA food safety data.',
+    href: '/calculators/leftovers-calculator',
+    icon: 'shield',
+    color: 'green',
+    category: 'Everyday',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------
