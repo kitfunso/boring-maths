@@ -4,9 +4,6 @@
  * Calculate Additional Dwelling Supplement (ADS) for Scotland
  * ADS is 6% on top of LBTT for additional properties.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateADS, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -17,25 +14,14 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function ADSCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Additional Dwelling Supplement Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<ADSCalculatorInputs>(
-    'calc-ads-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateADS(inputs), [inputs]);
-
-  const updateInput = <K extends keyof ADSCalculatorInputs>(
-    field: K,
-    value: ADSCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<ADSCalculatorInputs, ReturnType<typeof calculateADS>>({
+    name: 'Additional Dwelling Supplement Calculator',
+    slug: 'calc-ads-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateADS,
+  });
 
   // Sync isAdditionalProperty with buyerType
   const handleBuyerTypeChange = (type: BuyerType) => {

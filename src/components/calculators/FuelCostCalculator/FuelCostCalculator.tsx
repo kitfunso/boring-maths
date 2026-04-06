@@ -5,9 +5,6 @@
  * Supports miles/km, mpg/L per 100km, and multiple fuel price units.
  * UK-centric defaults with currency selector support.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateFuelCost, formatCurrency, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -34,24 +31,16 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function FuelCostCalculator() {
-  useCalculatorTracking('Fuel Cost Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<FuelCostInputs>('calc-fuel-cost-inputs', () =>
-    getDefaultInputs(getInitialCurrency('GBP'))
-  );
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function FuelCostCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<FuelCostInputs, FuelCostResult>({
+    name: 'Fuel Cost Calculator',
+    slug: 'calc-fuel-cost-inputs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency('GBP')),
+    compute: calculateFuelCost,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result: FuelCostResult = useMemo(() => {
-    return calculateFuelCost(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof FuelCostInputs>(field: K, value: FuelCostInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

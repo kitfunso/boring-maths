@@ -1,5 +1,4 @@
 import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateUKTax, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -23,9 +22,7 @@ import {
   Grid,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-const taxRegionOptions = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const taxRegionOptions = [
   { value: 'england' as TaxRegion, label: 'England/NI/Wales' },
   { value: 'scotland' as TaxRegion, label: 'Scotland' },
 ];
@@ -52,15 +49,12 @@ const pensionTypeOptions = [
 ];
 
 export default function UKTaxCalculator() {
-  useCalculatorTracking('UK Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKTaxInputs>('calc-uk-tax-inputs', getDefaultInputs);
-
-  const result = useMemo(() => calculateUKTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKTaxInputs>(field: K, value: UKTaxInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKTaxInputs, ReturnType<typeof calculateUKTax>>({
+    name: 'UK Tax Calculator',
+    slug: 'calc-uk-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateUKTax,
+  });
 
   const divisor = PAY_DIVISORS[inputs.payFrequency];
   const frequencyLabel =

@@ -4,8 +4,6 @@
  * Interactive calculator for planning savings with compound interest.
  * Migrated to use the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateSavingsGoal, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -30,30 +28,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SavingsGoalCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Plan Your Savings Goal');
-
-  const [inputs, setInputs] = useState<SavingsGoalInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<SavingsGoalInputs, SavingsGoalResult>({
+    name: 'Plan Your Savings Goal',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateSavingsGoal,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: SavingsGoalResult = useMemo(() => {
-    return calculateSavingsGoal(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof SavingsGoalInputs>(
-    field: K,
-    value: SavingsGoalInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

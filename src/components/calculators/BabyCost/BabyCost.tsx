@@ -3,8 +3,6 @@
  *
  * Estimate the costs of having a baby in the first year.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateBabyCost } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +34,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const CHILDCARE_OPTIONS = [
   { value: 'none', label: 'Stay-at-home' },
   { value: 'family', label: 'Family help' },
@@ -63,20 +60,14 @@ const GEAR_OPTIONS = [
 ];
 
 export default function BabyCost() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Baby Cost Calculator');
-
-  const [inputs, setInputs] = useState<BabyCostInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<BabyCostInputs, ReturnType<typeof calculateBabyCost>>({
+    name: 'Baby Cost Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateBabyCost,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateBabyCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof BabyCostInputs>(field: K, value: BabyCostInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

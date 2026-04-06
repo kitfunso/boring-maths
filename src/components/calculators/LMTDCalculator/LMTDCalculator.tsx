@@ -4,8 +4,6 @@
  * Calculate Log Mean Temperature Difference for heat exchanger design.
  * Supports counter-flow, parallel-flow, cross-flow, and shell & tube configurations.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateLMTD, convertTemperature } from './calculations';
 import {
   getDefaultInputs,
@@ -26,21 +24,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function LMTDCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('LMTD Calculator');
-
-  const [inputs, setInputs] = useState<LMTDInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => {
-    return calculateLMTD(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof LMTDInputs>(field: K, value: LMTDInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<LMTDInputs, ReturnType<typeof calculateLMTD>>({
+    name: 'LMTD Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateLMTD,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;

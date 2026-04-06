@@ -2,22 +2,22 @@
  * Tap Drill Size Calculator Component
  * Calculate drill sizes for tapping threads
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Select, Slider, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { TapDrillInputs } from './types';
 import { IMPERIAL_THREADS, METRIC_THREADS } from './types';
 import { calculateTapDrill } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function TapDrillCalculator() {
-  const [inputs, setInputs] = useState<TapDrillInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<TapDrillInputs, ReturnType<typeof calculateTapDrill>>({
+    defaults: {
     threadType: 'imperial',
     threadSize: '1/4-20',
     threadPercentage: 75,
+  },
+    compute: calculateTapDrill,
   });
-
-  const results = useMemo(() => calculateTapDrill(inputs), [inputs]);
 
   const threadOptions =
     inputs.threadType === 'imperial'

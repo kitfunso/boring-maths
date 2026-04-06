@@ -3,8 +3,6 @@
  *
  * Calculate tiles, grout, and adhesive needed for tiling projects.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateTile } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +34,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const TILE_SIZE_OPTIONS = [
   { value: '4x4', label: '4x4"' },
   { value: '6x6', label: '6x6"' },
@@ -70,23 +67,14 @@ const GROUT_WIDTH_OPTIONS = [
 ];
 
 export default function TileCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Tile Calculator');
-
-  const [inputs, setInputs] = useState<TileCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<TileCalculatorInputs, ReturnType<typeof calculateTile>>({
+    name: 'Tile Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateTile,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateTile(inputs), [inputs]);
-
-  const updateInput = <K extends keyof TileCalculatorInputs>(
-    field: K,
-    value: TileCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

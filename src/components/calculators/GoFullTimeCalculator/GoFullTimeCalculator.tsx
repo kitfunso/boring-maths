@@ -4,8 +4,6 @@
  * Helps people figure out when they can quit their job to pursue
  * freelancing or a side hustle (like vibe coding on Claude Code) full-time.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateGoFullTime,
   formatCurrency,
@@ -37,27 +35,22 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function GoFullTimeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Go Full-Time Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<GoFullTimeInputs, GoFullTimeResult>({
+    name: 'Go Full-Time Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateGoFullTime,
+  });
 
   // State
-  const [inputs, setInputs] = useState<GoFullTimeInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Memoized calculation
-  const result: GoFullTimeResult = useMemo(() => {
-    return calculateGoFullTime(inputs);
-  }, [inputs]);
 
   // Generic input updater
-  const updateInput = <K extends keyof GoFullTimeInputs>(field: K, value: GoFullTimeInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Currency change handler (resets to defaults)
   const handleCurrencyChange = (newCurrency: Currency) => {

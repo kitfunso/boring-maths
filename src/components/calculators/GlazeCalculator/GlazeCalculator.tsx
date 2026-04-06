@@ -2,20 +2,20 @@
  * Glaze Recipe Calculator Component
  * Scale and calculate pottery glaze recipes
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { GlazeInputs, GlazeIngredient } from './types';
 import { GLAZE_MATERIALS, GLAZE_RECIPES } from './types';
 import { calculateGlaze } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 function generateId(): string {
   return Math.random().toString(36).substr(2, 9);
 }
 
 export function GlazeCalculator() {
-  const [inputs, setInputs] = useState<GlazeInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<GlazeInputs, ReturnType<typeof calculateGlaze>>({
+    defaults: {
     ingredients: [
       { id: generateId(), name: 'Custer Feldspar', percentage: 40 },
       { id: generateId(), name: 'Silica (Flint)', percentage: 30 },
@@ -25,9 +25,9 @@ export function GlazeCalculator() {
     targetWeight: 1000,
     weightUnit: 'grams',
     waterRatio: 0.5,
+  },
+    compute: calculateGlaze,
   });
-
-  const results = useMemo(() => calculateGlaze(inputs), [inputs]);
 
   const addIngredient = () => {
     setInputs({

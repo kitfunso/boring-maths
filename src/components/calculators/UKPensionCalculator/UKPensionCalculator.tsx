@@ -1,25 +1,15 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculatePension, formatCurrency } from './calculations';
 import { getDefaultInputs, PENSION_CONSTANTS, type UKPensionInputs } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKPensionCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Pension Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKPensionInputs>(
-    'calc-uk-pension-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculatePension(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKPensionInputs>(field: K, value: UKPensionInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKPensionInputs, ReturnType<typeof calculatePension>>({
+    name: 'UK Pension Calculator',
+    slug: 'calc-uk-pension-inputs',
+    defaults: getDefaultInputs,
+    compute: calculatePension,
+  });
 
   return (
     <ThemeProvider defaultColor="green">

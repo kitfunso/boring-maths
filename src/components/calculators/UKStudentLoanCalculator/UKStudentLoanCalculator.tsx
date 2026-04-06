@@ -1,33 +1,20 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateStudentLoan, formatCurrency } from './calculations';
 import { getDefaultInputs, LOAN_PLANS, type UKStudentLoanInputs, type LoanPlan } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const loanPlanOptions = Object.entries(LOAN_PLANS).map(([key, plan]) => ({
   value: key as LoanPlan,
   label: plan.name,
 }));
 
 export default function UKStudentLoanCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Student Loan Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKStudentLoanInputs>(
-    'calc-uk-student-loan-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateStudentLoan(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKStudentLoanInputs>(
-    field: K,
-    value: UKStudentLoanInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKStudentLoanInputs, ReturnType<typeof calculateStudentLoan>>({
+    name: 'UK Student Loan Calculator',
+    slug: 'calc-uk-student-loan-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateStudentLoan,
+  });
 
   const currentPlan = LOAN_PLANS[inputs.loanPlan];
 

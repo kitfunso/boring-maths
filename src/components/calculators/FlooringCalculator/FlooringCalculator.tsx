@@ -4,8 +4,6 @@
  * Interactive calculator for determining flooring quantities.
  * Features pattern-based waste calculations and shopping list generation.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateFlooring,
   formatCurrency,
@@ -37,30 +35,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FlooringCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Flooring Needs');
-
-  const [inputs, setInputs] = useState<FlooringCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<FlooringCalculatorInputs, FlooringCalculatorResult>({
+    name: 'Calculate Your Flooring Needs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateFlooring,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: FlooringCalculatorResult = useMemo(() => {
-    return calculateFlooring(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof FlooringCalculatorInputs>(
-    field: K,
-    value: FlooringCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

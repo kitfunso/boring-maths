@@ -3,9 +3,6 @@
  *
  * Calculate investment growth with compound interest over time.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateCompoundInterest, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -31,28 +28,17 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function CompoundInterestCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Compound Interest Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<CompoundInterestInputs>('calc-compound-inputs', () =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<CompoundInterestInputs, CompoundInterestResult>({
+    name: 'Compound Interest Calculator',
+    slug: 'calc-compound-inputs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateCompoundInterest,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result: CompoundInterestResult = useMemo(() => {
-    return calculateCompoundInterest(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof CompoundInterestInputs>(
-    field: K,
-    value: CompoundInterestInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

@@ -3,21 +3,23 @@
  * Calculate CO2 levels from pH and KH readings
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { ResultCard, Input, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CO2Inputs } from './types';
 import { calculateCO2, calculateTargetPH } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CO2Calculator() {
-  const [inputs, setInputs] = useState<CO2Inputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<CO2Inputs, ReturnType<typeof calculateCO2>>({
+    defaults: {
     ph: 6.8,
     kh: 4,
     tankVolume: 20,
     volumeUnit: 'gallons',
+  },
+    compute: calculateCO2,
   });
-
-  const results = useMemo(() => calculateCO2(inputs), [inputs]);
 
   const targetPH = useMemo(() => calculateTargetPH(inputs.kh, 30), [inputs.kh]);
 

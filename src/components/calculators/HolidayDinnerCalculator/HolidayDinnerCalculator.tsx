@@ -3,8 +3,6 @@
  *
  * Calculate turkey size, cooking time, and side quantities.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateHolidayDinner } from './calculations';
 import {
   getDefaultInputs,
@@ -28,8 +26,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const LEFTOVER_OPTIONS = [
   { value: 'none', label: 'No Leftovers' },
   { value: 'some', label: 'Some Leftovers' },
@@ -48,19 +45,11 @@ const COOKING_METHOD_OPTIONS = [
 ];
 
 export default function HolidayDinnerCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Holiday Dinner Calculator');
-
-  const [inputs, setInputs] = useState<HolidayDinnerInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateHolidayDinner(inputs), [inputs]);
-
-  const updateInput = <K extends keyof HolidayDinnerInputs>(
-    field: K,
-    value: HolidayDinnerInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<HolidayDinnerInputs, ReturnType<typeof calculateHolidayDinner>>({
+    name: 'Holiday Dinner Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateHolidayDinner,
+  });
 
   const handleGuestCountChange = (total: number) => {
     const children = Math.min(inputs.childCount, total);

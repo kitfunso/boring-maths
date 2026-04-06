@@ -3,8 +3,6 @@
  *
  * Estimate the cost of moving to a new home.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateMovingCost } from './calculations';
 import {
   getDefaultInputs,
@@ -31,8 +29,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const MOVE_TYPE_OPTIONS = [
   { value: 'local', label: 'Local (<50mi)' },
   { value: 'long_distance', label: 'Long Distance' },
@@ -60,18 +57,12 @@ const SEASON_OPTIONS = [
 ];
 
 export default function MovingCost() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Moving Cost Estimator');
-
-  const [inputs, setInputs] = useState<MovingCostInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
-
-  const result = useMemo(() => calculateMovingCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof MovingCostInputs>(field: K, value: MovingCostInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<MovingCostInputs, ReturnType<typeof calculateMovingCost>>({
+    name: 'Moving Cost Estimator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateMovingCost,
+  });
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

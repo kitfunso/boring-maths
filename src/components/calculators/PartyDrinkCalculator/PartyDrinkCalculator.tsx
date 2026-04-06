@@ -5,7 +5,7 @@
  * Accounts for weather, event type, and kid-friendly options.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { calculatePartyDrinks, formatCurrency, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -34,25 +34,14 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PartyDrinkCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Plan Your Party Drinks');
-
-  const [inputs, setInputs] = useState<PartyDrinkInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
-
-  // Calculate results
-  const result: PartyDrinkResult = useMemo(() => {
-    return calculatePartyDrinks(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof PartyDrinkInputs>(field: K, value: PartyDrinkInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PartyDrinkInputs, PartyDrinkResult>({
+    name: 'Plan Your Party Drinks',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculatePartyDrinks,
+  });
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

@@ -4,10 +4,6 @@
  * Interactive calculator for room area with multiple shapes,
  * unit conversion, and cost estimation.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 import { calculateSquareFootage, formatArea } from './calculations';
 import {
   getDefaultInputs,
@@ -35,6 +31,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
 const SHAPE_OPTIONS: { value: RoomShape; label: string }[] = [
   { value: 'rectangle', label: 'Rectangle' },
@@ -118,26 +115,15 @@ function DimensionInput({
 }
 
 export default function SquareFootageCalculator() {
-  useCalculatorTracking('Square Footage Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<SquareFootageCalculatorInputs>(
-    'calc-sqft-inputs',
-    () => getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<SquareFootageCalculatorInputs, ReturnType<typeof calculateSquareFootage>>({
+    name: 'Square Footage Calculator',
+    slug: 'calc-sqft-inputs',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculateSquareFootage,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const isMetric = inputs.unitSystem === 'metric';
-
-  const result = useMemo(() => {
-    return calculateSquareFootage(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof SquareFootageCalculatorInputs>(
-    field: K,
-    value: SquareFootageCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

@@ -5,9 +5,6 @@
  * Shows detailed breakdown of costs including self-employment tax,
  * benefits, and business expenses.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import {
   calculateW2To1099,
   formatCurrency,
@@ -23,25 +20,14 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Select, Alert } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function W2To1099Calculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('W2 to 1099 Rate Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<W2To1099CalculatorInputs>(
-    'calc-w2-to-1099-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateW2To1099(inputs), [inputs]);
-
-  const updateInput = <K extends keyof W2To1099CalculatorInputs>(
-    field: K,
-    value: W2To1099CalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<W2To1099CalculatorInputs, ReturnType<typeof calculateW2To1099>>({
+    name: 'W2 to 1099 Rate Calculator',
+    slug: 'calc-w2-to-1099-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateW2To1099,
+  });
 
   // Sync hourly and salary when input mode changes
   const handleInputModeChange = (mode: InputMode) => {

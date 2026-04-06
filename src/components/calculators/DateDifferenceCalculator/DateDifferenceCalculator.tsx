@@ -4,9 +4,6 @@
  * Interactive calculator showing the difference between two dates
  * in days, weeks, months, years with business day support.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateDateDifference, formatNumber, formatBreakdown } from './calculations';
 import { getDefaultInputs, type DateDifferenceInputs, type DateDifferenceResult } from './types';
 import {
@@ -24,28 +21,15 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function DateDifferenceCalculator() {
-  useCalculatorTracking('Date Difference Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<DateDifferenceInputs>(
-    'calc-date-diff-inputs',
-    getDefaultInputs
-  );
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function DateDifferenceCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<DateDifferenceInputs, DateDifferenceResult>({
+    name: 'Date Difference Calculator',
+    slug: 'calc-date-diff-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateDateDifference,
+  });
 
   // Calculate results reactively
-  const result: DateDifferenceResult = useMemo(() => {
-    return calculateDateDifference(inputs);
-  }, [inputs]);
-
-  // Update a single input field
-  const updateInput = <K extends keyof DateDifferenceInputs>(
-    field: K,
-    value: DateDifferenceInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const breakdownText = formatBreakdown(result.breakdown);
   const sign = result.isNegative ? '-' : '';

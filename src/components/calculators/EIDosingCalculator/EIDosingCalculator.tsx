@@ -2,16 +2,16 @@
  * EI Dosing Calculator Component
  * Estimative Index fertilization for planted aquariums
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { EIDosingInputs } from './types';
 import { DOSING_SCHEDULES, TANK_PRESETS } from './types';
 import { calculateEIDosing, gramsToTeaspoons } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function EIDosingCalculator() {
-  const [inputs, setInputs] = useState<EIDosingInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<EIDosingInputs, ReturnType<typeof calculateEIDosing>>({
+    defaults: {
     tankVolume: 55,
     volumeUnit: 'gallons',
     dosingSched: 'ei-standard',
@@ -22,9 +22,9 @@ export function EIDosingCalculator() {
     fertilizerType: 'dry',
     waterChangePercent: 50,
     waterChangeFrequency: 'weekly',
+  },
+    compute: calculateEIDosing,
   });
-
-  const results = useMemo(() => calculateEIDosing(inputs), [inputs]);
 
   const selectedSchedule = DOSING_SCHEDULES.find((s) => s.value === inputs.dosingSched);
 

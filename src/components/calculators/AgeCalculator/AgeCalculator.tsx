@@ -3,8 +3,6 @@
  *
  * Calculate age from birthdate with detailed breakdown.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateAge } from './calculations';
 import { getDefaultInputs, type AgeCalculatorInputs, type AgeResult } from './types';
 import {
@@ -18,24 +16,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function AgeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Age Calculator');
-
-  const [inputs, setInputs] = useState<AgeCalculatorInputs>(() => getDefaultInputs());
-
-  const result: AgeResult = useMemo(() => {
-    return calculateAge(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof AgeCalculatorInputs>(
-    field: K,
-    value: AgeCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<AgeCalculatorInputs, AgeResult>({
+    name: 'Age Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateAge,
+  });
 
   // Format numbers with commas
   const formatNumber = (num: number): string => num.toLocaleString();

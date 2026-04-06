@@ -4,8 +4,6 @@
  * Interactive calculator for showing the long-term value of a raise.
  * Uses the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateRaise, formatCurrency } from './calculations';
 import { getDefaultInputs, type RaiseCalculatorInputs, type RaiseCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -24,30 +22,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RaiseCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Raise Value');
-
-  const [inputs, setInputs] = useState<RaiseCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<RaiseCalculatorInputs, RaiseCalculatorResult>({
+    name: 'Calculate Your Raise Value',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateRaise,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: RaiseCalculatorResult = useMemo(() => {
-    return calculateRaise(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof RaiseCalculatorInputs>(
-    field: K,
-    value: RaiseCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

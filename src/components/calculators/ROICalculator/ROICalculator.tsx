@@ -4,9 +4,6 @@
  * Interactive calculator for return on investment with
  * real-time calculation and annualised ROI.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateROI, formatCurrency, formatPercentage } from './calculations';
 import {
   getDefaultInputs,
@@ -32,31 +29,19 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function ROICalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your ROI');
-
-  const [inputs, setInputs] = useLocalStorage<ROICalculatorInputs>('calc-roi-inputs', () =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<ROICalculatorInputs, ROICalculatorResult>({
+    name: 'Calculate Your ROI',
+    slug: 'calc-roi-inputs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateROI,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Calculate results reactively
-  const result: ROICalculatorResult = useMemo(() => {
-    return calculateROI(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof ROICalculatorInputs>(
-    field: K,
-    value: ROICalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

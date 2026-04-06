@@ -2,16 +2,16 @@
  * Priming Sugar Calculator Component
  * Calculate carbonation sugar for bottle conditioning
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { PrimingSugarInputs } from './types';
 import { SUGAR_TYPES, STYLE_PRESETS, BATCH_PRESETS } from './types';
 import { calculatePrimingSugar, formatCO2 } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function PrimingSugarCalculator() {
-  const [inputs, setInputs] = useState<PrimingSugarInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<PrimingSugarInputs, ReturnType<typeof calculatePrimingSugar>>({
+    defaults: {
     batchVolume: 5,
     volumeUnit: 'gallons',
     beerTemp: 65,
@@ -19,9 +19,9 @@ export function PrimingSugarCalculator() {
     targetCO2: 2.4,
     sugarType: 'corn',
     containerType: 'bottle',
+  },
+    compute: calculatePrimingSugar,
   });
-
-  const results = useMemo(() => calculatePrimingSugar(inputs), [inputs]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">

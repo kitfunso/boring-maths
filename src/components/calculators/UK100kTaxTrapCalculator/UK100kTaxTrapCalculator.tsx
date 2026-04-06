@@ -5,8 +5,7 @@
  * pension contributions to restore their Personal Allowance.
  */
 
-import { useMemo, useEffect } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
+import { useEffect } from 'preact/hooks';
 import { calculateUK100kTax, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -28,13 +27,14 @@ import {
   ShareResults,
   PrintResults,
 } from '../../ui';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UK100kTaxTrapCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK £100k Tax Trap Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UK100kInputs>('calc-uk100k-inputs', getDefaultInputs);
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<UK100kInputs, ReturnType<typeof calculateUK100kTax>>({
+    name: 'UK £100k Tax Trap Calculator',
+    slug: 'calc-uk100k-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateUK100kTax,
+  });
 
   // Load inputs from URL parameters on mount (for shared links)
   useEffect(() => {
@@ -56,12 +56,6 @@ export default function UK100kTaxTrapCalculator() {
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, []);
-
-  const result = useMemo(() => calculateUK100kTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UK100kInputs>(field: K, value: UK100kInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Color coding for results
   const getTrapStatusColor = () => {

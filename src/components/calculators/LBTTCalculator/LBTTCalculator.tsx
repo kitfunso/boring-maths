@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateLBTT, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -9,17 +7,13 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function LBTTCalculator() {
-  useCalculatorTracking('LBTT Calculator Scotland');
-
-  const [inputs, setInputs] = useLocalStorage<LBTTInputs>('calc-lbtt-inputs', getDefaultInputs);
-  const result = useMemo(() => calculateLBTT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof LBTTInputs>(field: K, value: LBTTInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function LBTTCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<LBTTInputs, ReturnType<typeof calculateLBTT>>({
+    name: 'LBTT Calculator Scotland',
+    slug: 'calc-lbtt-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateLBTT,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

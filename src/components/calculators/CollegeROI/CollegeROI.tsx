@@ -3,8 +3,6 @@
  *
  * Evaluate the return on investment for different education paths.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateCollegeROI } from './calculations';
 import {
   getDefaultInputs,
@@ -34,8 +32,7 @@ import {
   ButtonGroup,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const PATH_OPTIONS = [
   { value: 'four_year', label: '🎓 4-Year College' },
   { value: 'community_college', label: '📚 Community College' },
@@ -45,20 +42,14 @@ const PATH_OPTIONS = [
 ];
 
 export default function CollegeROI() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('College ROI Calculator');
-
-  const [inputs, setInputs] = useState<CollegeROIInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<CollegeROIInputs, ReturnType<typeof calculateCollegeROI>>({
+    name: 'College ROI Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateCollegeROI,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateCollegeROI(inputs), [inputs]);
-
-  const updateInput = <K extends keyof CollegeROIInputs>(field: K, value: CollegeROIInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

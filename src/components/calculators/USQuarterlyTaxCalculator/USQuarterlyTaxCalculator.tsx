@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateQuarterlyTax, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -9,8 +7,7 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
@@ -19,22 +16,12 @@ const FILING_STATUS_OPTIONS = [
 ];
 
 export default function USQuarterlyTaxCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Quarterly Estimated Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<USQuarterlyTaxInputs>(
-    'calc-us-quarterly-tax-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateQuarterlyTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof USQuarterlyTaxInputs>(
-    field: K,
-    value: USQuarterlyTaxInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<USQuarterlyTaxInputs, ReturnType<typeof calculateQuarterlyTax>>({
+    name: 'Quarterly Estimated Tax Calculator',
+    slug: 'calc-us-quarterly-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateQuarterlyTax,
+  });
 
   const getPenaltyRiskColor = () => {
     switch (result.penaltyRisk) {

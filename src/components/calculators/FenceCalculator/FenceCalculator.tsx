@@ -3,8 +3,6 @@
  *
  * Calculate posts, panels, concrete, and hardware for fence projects.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateFence } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +34,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const MATERIAL_OPTIONS = [
   { value: 'wood', label: 'Wood' },
   { value: 'vinyl', label: 'Vinyl' },
@@ -53,23 +50,14 @@ const HEIGHT_OPTIONS = [
 ];
 
 export default function FenceCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Fence Calculator');
-
-  const [inputs, setInputs] = useState<FenceCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<FenceCalculatorInputs, ReturnType<typeof calculateFence>>({
+    name: 'Fence Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateFence,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateFence(inputs), [inputs]);
-
-  const updateInput = <K extends keyof FenceCalculatorInputs>(
-    field: K,
-    value: FenceCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

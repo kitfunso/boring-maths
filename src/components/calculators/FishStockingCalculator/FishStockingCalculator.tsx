@@ -1,8 +1,6 @@
 /**
  * Fish Stocking Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateFishStocking,
   formatGallons,
@@ -33,22 +31,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FishStockingCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Fish Stocking Calculator');
-
-  const [inputs, setInputs] = useState<FishStockingInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateFishStocking(inputs), [inputs]);
-
-  const updateInput = <K extends keyof FishStockingInputs>(
-    field: K,
-    value: FishStockingInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<FishStockingInputs, ReturnType<typeof calculateFishStocking>>({
+    name: 'Fish Stocking Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateFishStocking,
+  });
 
   const addFish = (species: string, size: number) => {
     const newFish: FishEntry = {

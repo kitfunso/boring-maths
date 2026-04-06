@@ -6,7 +6,6 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMargin, formatCurrency, getMarginMarkupTable } from './calculations';
 import { getDefaultInputs, type MarginCalculatorInputs, type MarginInputMode } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -26,35 +25,27 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-const MODE_OPTIONS = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const MODE_OPTIONS = [
   { value: 'cost-revenue' as MarginInputMode, label: 'Cost + Revenue' },
   { value: 'cost-margin' as MarginInputMode, label: 'Cost + Margin %' },
   { value: 'revenue-margin' as MarginInputMode, label: 'Revenue + Margin %' },
 ];
 
 export default function MarginCalculator() {
-  useCalculatorTracking('Margin Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<MarginCalculatorInputs>('calc-margin-inputs', () =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<MarginCalculatorInputs, ReturnType<typeof calculateMargin>>({
+    name: 'Margin Calculator',
+    slug: 'calc-margin-inputs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateMargin,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
   // Calculate results in real time
-  const result = useMemo(() => calculateMargin(inputs), [inputs]);
 
   // Margin vs markup reference table
   const referenceTable = useMemo(() => getMarginMarkupTable(), []);
-
-  const updateInput = <K extends keyof MarginCalculatorInputs>(
-    field: K,
-    value: MarginCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

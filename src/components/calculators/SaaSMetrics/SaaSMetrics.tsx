@@ -3,8 +3,6 @@
  *
  * Calculate and analyze key SaaS business metrics.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateSaaSMetrics } from './calculations';
 import { getDefaultInputs, type SaaSMetricsInputs } from './types';
 import {
@@ -28,8 +26,7 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const SCORE_COLORS = {
   excellent: 'text-emerald-400 bg-emerald-500/20',
   good: 'text-blue-400 bg-blue-500/20',
@@ -38,22 +35,14 @@ const SCORE_COLORS = {
 };
 
 export default function SaaSMetrics() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('SaaS Metrics Calculator');
-
-  const [inputs, setInputs] = useState<SaaSMetricsInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<SaaSMetricsInputs, ReturnType<typeof calculateSaaSMetrics>>({
+    name: 'SaaS Metrics Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateSaaSMetrics,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateSaaSMetrics(inputs), [inputs]);
-
-  const updateInput = <K extends keyof SaaSMetricsInputs>(
-    field: K,
-    value: SaaSMetricsInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

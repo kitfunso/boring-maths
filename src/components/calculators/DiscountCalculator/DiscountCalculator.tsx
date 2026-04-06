@@ -2,7 +2,7 @@
  * Discount Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import {
   calculateDiscount,
   calculateDiscountScenarios,
@@ -30,26 +30,21 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DiscountCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Discount Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<DiscountInputs, ReturnType<typeof calculateDiscount>>({
+    name: 'Discount Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateDiscount,
+  });
 
-  const [inputs, setInputs] = useState<DiscountInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  const result = useMemo(() => calculateDiscount(inputs), [inputs]);
   const scenarios = useMemo(
     () => calculateDiscountScenarios(inputs.originalPrice, COMMON_DISCOUNTS),
     [inputs.originalPrice]
   );
-
-  const updateInput = <K extends keyof DiscountInputs>(field: K, value: DiscountInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

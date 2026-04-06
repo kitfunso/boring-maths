@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateUKCGT, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -11,18 +9,13 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function UKCapitalGainsTaxCalculator() {
-  useCalculatorTracking('UK Capital Gains Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKCGTInputs>('calc-uk-cgt-inputs', getDefaultInputs);
-
-  const result = useMemo(() => calculateUKCGT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKCGTInputs>(field: K, value: UKCGTInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function UKCapitalGainsTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<UKCGTInputs, ReturnType<typeof calculateUKCGT>>({
+    name: 'UK Capital Gains Tax Calculator',
+    slug: 'calc-uk-cgt-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateUKCGT,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

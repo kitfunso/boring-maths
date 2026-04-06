@@ -2,7 +2,7 @@
  * EU Salary Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import {
   calculateSalary,
   calculateAllCountries,
@@ -24,23 +24,18 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EUSalaryCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('EU Salary Calculator');
+  const { inputs, result, updateInput } = useCalculatorState<SalaryInputs, ReturnType<typeof calculateSalary>>({
+    name: 'EU Salary Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateSalary,
+  });
 
-  const [inputs, setInputs] = useState<SalaryInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateSalary(inputs), [inputs]);
   const allCountries = useMemo(
     () => calculateAllCountries(inputs.grossSalary),
     [inputs.grossSalary]
   );
-
-  const updateInput = <K extends keyof SalaryInputs>(field: K, value: SalaryInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const selectedCountry = getCountryByCode(inputs.countryCode) || EU_TAX_DATA[0];
 

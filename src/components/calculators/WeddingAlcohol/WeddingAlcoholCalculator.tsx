@@ -5,7 +5,7 @@
  * Migrated to use the design system components.
  */
 
-import { useState, useMemo, useRef } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 import { calculateWeddingAlcohol, formatNumber } from './calculations';
 import {
   DEFAULT_INPUTS,
@@ -26,26 +26,15 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function WeddingAlcoholCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Estimate Your Wedding Alcohol');
-
-  const [inputs, setInputs] = useState<WeddingAlcoholInputs>(DEFAULT_INPUTS);
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<WeddingAlcoholInputs, WeddingAlcoholResult>({
+    name: 'Estimate Your Wedding Alcohol',
+    defaults: DEFAULT_INPUTS,
+    compute: calculateWeddingAlcohol,
+  });
 
   // Calculate results whenever inputs change
-  const result: WeddingAlcoholResult = useMemo(() => {
-    return calculateWeddingAlcohol(inputs);
-  }, [inputs]);
-
-  // Update a single input field
-  const updateInput = <K extends keyof WeddingAlcoholInputs>(
-    field: K,
-    value: WeddingAlcoholInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Track the two most recently touched sliders. The third always auto-adjusts.
   const touched = useRef<Array<'winePercent' | 'beerPercent' | 'liquorPercent'>>([]);

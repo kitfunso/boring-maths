@@ -5,7 +5,7 @@
  * Features multiple FIRE variants, projections, and milestone tracking.
  */
 
-import { useState, useMemo, useCallback } from 'preact/hooks';
+import { useCallback } from 'preact/hooks';
 import {
   calculateFIRE,
   formatCurrency,
@@ -35,30 +35,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function FIRECalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('FIRE Calculator');
-
-  const [inputs, setInputs] = useState<FIRECalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<FIRECalculatorInputs, ReturnType<typeof calculateFIRE>>({
+    name: 'FIRE Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateFIRE,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result = useMemo(() => {
-    return calculateFIRE(inputs);
-  }, [inputs]);
-
-  // Update input - handles empty strings gracefully
-  const updateInput = <K extends keyof FIRECalculatorInputs>(
-    field: K,
-    value: FIRECalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle number input changes - only update if valid number or keep previous value
   const handleNumberChange = useCallback((field: keyof FIRECalculatorInputs, e: Event) => {

@@ -5,7 +5,6 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateGPA, getGPADescription } from './calculations';
 import {
   getDefaultInputs,
@@ -26,26 +25,16 @@ import {
   ShareResults,
   PrintResults,
 } from '../../ui';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function GPACalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('GPA Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<GPACalculatorInputs, ReturnType<typeof calculateGPA>>({
+    name: 'GPA Calculator',
+    slug: 'calc-gpa-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateGPA,
+  });
 
-  const [inputs, setInputs] = useLocalStorage<GPACalculatorInputs>(
-    'calc-gpa-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateGPA(inputs), [inputs]);
   const gradeOptions = useMemo(() => getGradeOptions(inputs.gradeScale), [inputs.gradeScale]);
-
-  const updateInput = <K extends keyof GPACalculatorInputs>(
-    field: K,
-    value: GPACalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const updateCourse = (id: string, field: keyof Course, value: string | number) => {
     setInputs((prev) => ({

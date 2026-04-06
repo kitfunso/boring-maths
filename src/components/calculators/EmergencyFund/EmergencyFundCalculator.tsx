@@ -4,8 +4,6 @@
  * Interactive calculator for determining emergency fund needs.
  * Uses the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateEmergencyFund, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -30,30 +28,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EmergencyFundCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Build Your Emergency Fund');
-
-  const [inputs, setInputs] = useState<EmergencyFundInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<EmergencyFundInputs, EmergencyFundResult>({
+    name: 'Build Your Emergency Fund',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateEmergencyFund,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: EmergencyFundResult = useMemo(() => {
-    return calculateEmergencyFund(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof EmergencyFundInputs>(
-    field: K,
-    value: EmergencyFundInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

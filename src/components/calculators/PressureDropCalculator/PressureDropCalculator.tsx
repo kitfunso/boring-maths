@@ -4,8 +4,6 @@
  * Calculate pressure drop in pipes using Darcy-Weisbach equation.
  * Includes automatic friction factor calculation.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePressureDrop, getRoughness, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -27,24 +25,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PressureDropCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Pressure Drop Calculator');
-
-  const [inputs, setInputs] = useState<PressureDropInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => {
-    return calculatePressureDrop(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof PressureDropInputs>(
-    field: K,
-    value: PressureDropInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PressureDropInputs, ReturnType<typeof calculatePressureDrop>>({
+    name: 'Pressure Drop Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculatePressureDrop,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;

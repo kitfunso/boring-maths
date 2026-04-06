@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateStampDuty, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -11,25 +9,14 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKStampDutyCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Stamp Duty Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKStampDutyInputs>(
-    'calc-uk-stamp-duty-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateStampDuty(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKStampDutyInputs>(
-    field: K,
-    value: UKStampDutyInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKStampDutyInputs, ReturnType<typeof calculateStampDuty>>({
+    name: 'UK Stamp Duty Calculator',
+    slug: 'calc-uk-stamp-duty-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateStampDuty,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

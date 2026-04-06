@@ -4,8 +4,6 @@
  * Compare two job offers by total compensation including salary,
  * benefits, equity, and quality of life factors.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateComparison, formatCurrency, formatDifference } from './calculations';
 import {
   getDefaultInputs,
@@ -29,8 +27,7 @@ import {
   Checkbox,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 /**
  * Single offer input panel
  */
@@ -302,19 +299,14 @@ function ComparisonBar({
 }
 
 export default function JobOfferComparison() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Compare Job Offers');
-
-  const [inputs, setInputs] = useState<JobOfferComparisonInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, setInputs } = useCalculatorState<JobOfferComparisonInputs, JobOfferComparisonResult>({
+    name: 'Compare Job Offers',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateComparison,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: JobOfferComparisonResult = useMemo(() => {
-    return calculateComparison(inputs);
-  }, [inputs]);
 
   // Update offer
   const updateOffer1 = (updates: Partial<JobOffer>) => {

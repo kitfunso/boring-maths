@@ -4,8 +4,6 @@
  * Interactive calculator for determining paint quantities.
  * Uses the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePaint } from './calculations';
 import {
   getDefaultInputs,
@@ -33,28 +31,14 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PaintCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Paint Needs');
-
-  const [inputs, setInputs] = useState<PaintCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
-
-  // Calculate results
-  const result: PaintCalculatorResult = useMemo(() => {
-    return calculatePaint(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof PaintCalculatorInputs>(
-    field: K,
-    value: PaintCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PaintCalculatorInputs, PaintCalculatorResult>({
+    name: 'Calculate Your Paint Needs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculatePaint,
+  });
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

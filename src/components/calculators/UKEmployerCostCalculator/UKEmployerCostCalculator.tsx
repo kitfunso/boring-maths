@@ -1,5 +1,4 @@
 import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateEmployerCost, calculateComparisonTable, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -19,34 +18,23 @@ import {
   Grid,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-const taxRegionOptions = [
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';const taxRegionOptions = [
   { value: 'england' as TaxRegion, label: 'England/NI/Wales' },
   { value: 'scotland' as TaxRegion, label: 'Scotland' },
 ];
 
 export default function UKEmployerCostCalculator() {
-  useCalculatorTracking('UK Employer Cost Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKEmployerCostInputs>(
-    'calc-uk-employer-cost-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateEmployerCost(inputs), [inputs]);
+  const { inputs, result, updateInput } = useCalculatorBase<UKEmployerCostInputs, ReturnType<typeof calculateEmployerCost>>({
+    name: 'UK Employer Cost Calculator',
+    slug: 'calc-uk-employer-cost-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateEmployerCost,
+  });
 
   const comparisonTable = useMemo(
     () => calculateComparisonTable(COMPARISON_SALARIES, inputs),
     [inputs]
   );
-
-  const updateInput = <K extends keyof UKEmployerCostInputs>(
-    field: K,
-    value: UKEmployerCostInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   return (
     <ThemeProvider defaultColor="blue">

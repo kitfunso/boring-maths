@@ -2,8 +2,6 @@
  * Yeast Pitch Rate Calculator Component
  * Calculate proper yeast cell counts for fermentation
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { YeastPitchRateInputs } from './types';
@@ -16,9 +14,11 @@ import {
   BATCH_PRESETS,
 } from './types';
 import { calculateYeastPitchRate, formatCells } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function YeastPitchRateCalculator() {
-  const [inputs, setInputs] = useState<YeastPitchRateInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<YeastPitchRateInputs, ReturnType<typeof calculateYeastPitchRate>>({
+    defaults: {
     batchVolume: 5,
     volumeUnit: 'gallons',
     originalGravity: 1.05,
@@ -30,9 +30,9 @@ export function YeastPitchRateCalculator() {
     starterVolume: 1.5,
     useStarter: false,
     starterType: 'stir-plate',
+  },
+    compute: calculateYeastPitchRate,
   });
-
-  const results = useMemo(() => calculateYeastPitchRate(inputs), [inputs]);
 
   const selectedYeastFormat = YEAST_FORMATS.find((f) => f.value === inputs.yeastFormat);
 

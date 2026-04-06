@@ -1,8 +1,6 @@
 /**
  * ABV Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateABV,
   formatABV,
@@ -31,19 +29,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ABVCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('ABV Calculator');
-
-  const [inputs, setInputs] = useState<ABVInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateABV(inputs), [inputs]);
-
-  const updateInput = <K extends keyof ABVInputs>(field: K, value: ABVInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<ABVInputs, ReturnType<typeof calculateABV>>({
+    name: 'ABV Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateABV,
+  });
 
   const applyStyle = (og: number, fg: number, type: BeverageType) => {
     setInputs((prev) => ({

@@ -1,20 +1,14 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateLTT, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, BUYER_TYPE_LABELS, type LTTInputs, type WalesBuyerType } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function LTTCalculator() {
-  useCalculatorTracking('LTT Calculator Wales');
-
-  const [inputs, setInputs] = useLocalStorage<LTTInputs>('calc-ltt-inputs', getDefaultInputs);
-  const result = useMemo(() => calculateLTT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof LTTInputs>(field: K, value: LTTInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function LTTCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<LTTInputs, ReturnType<typeof calculateLTT>>({
+    name: 'LTT Calculator Wales',
+    slug: 'calc-ltt-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateLTT,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

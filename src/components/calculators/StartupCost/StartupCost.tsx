@@ -3,8 +3,6 @@
  *
  * Estimate total startup costs based on business type.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateStartupCost } from './calculations';
 import {
   getDefaultInputs,
@@ -35,8 +33,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const BUSINESS_TYPE_OPTIONS = [
   { value: 'consulting', label: 'Consulting' },
   { value: 'ecommerce', label: 'E-Commerce' },
@@ -47,22 +44,14 @@ const BUSINESS_TYPE_OPTIONS = [
 ];
 
 export default function StartupCost() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Startup Cost Calculator');
-
-  const [inputs, setInputs] = useState<StartupCostInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<StartupCostInputs, ReturnType<typeof calculateStartupCost>>({
+    name: 'Startup Cost Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateStartupCost,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateStartupCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof StartupCostInputs>(
-    field: K,
-    value: StartupCostInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

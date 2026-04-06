@@ -1,9 +1,6 @@
 /**
  * Body Fat Calculator - Preact Component
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateBodyFat } from './calculations';
 import {
   getDefaultInputs,
@@ -26,21 +23,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function BodyFatCalculator() {
-  useCalculatorTracking('Body Fat Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<BodyFatInputs>(
-    'calc-bodyfat-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateBodyFat(inputs), [inputs]);
-
-  const updateInput = <K extends keyof BodyFatInputs>(field: K, value: BodyFatInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function BodyFatCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<BodyFatInputs, ReturnType<typeof calculateBodyFat>>({
+    name: 'Body Fat Calculator',
+    slug: 'calc-bodyfat-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateBodyFat,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system !== inputs.unitSystem) {

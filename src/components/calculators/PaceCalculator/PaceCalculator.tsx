@@ -4,10 +4,6 @@
  * Interactive calculator for running/walking pace, time, and distance.
  * Three modes: Calculate Pace, Calculate Time, Calculate Distance.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 import { calculatePace } from './calculations';
 import {
   getDefaultInputs,
@@ -31,23 +27,15 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
 export default function PaceCalculator() {
-  useCalculatorTracking('Pace Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<PaceCalculatorInputs>(
-    'calc-pace-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculatePace(inputs), [inputs]);
-
-  const updateInput = <K extends keyof PaceCalculatorInputs>(
-    field: K,
-    value: PaceCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<PaceCalculatorInputs, ReturnType<typeof calculatePace>>({
+    name: 'Pace Calculator',
+    slug: 'calc-pace-inputs',
+    defaults: getDefaultInputs,
+    compute: calculatePace,
+  });
 
   const unitLabel = inputs.distanceUnit === 'km' ? 'km' : 'mi';
 

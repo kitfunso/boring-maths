@@ -1,9 +1,6 @@
 /**
  * Ovulation Calculator - Preact Component
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateOvulation } from './calculations';
 import { getDefaultInputs, type OvulationInputs } from './types';
 import {
@@ -20,9 +17,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-function formatDate(dateStr: string): string {
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T12:00:00');
   return d.toLocaleDateString('en-US', {
     weekday: 'short',
@@ -33,18 +28,12 @@ function formatDate(dateStr: string): string {
 }
 
 export default function OvulationCalculator() {
-  useCalculatorTracking('Ovulation Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<OvulationInputs>(
-    'calc-ovulation-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateOvulation(inputs), [inputs]);
-
-  const updateInput = <K extends keyof OvulationInputs>(field: K, value: OvulationInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<OvulationInputs, ReturnType<typeof calculateOvulation>>({
+    name: 'Ovulation Calculator',
+    slug: 'calc-ovulation-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateOvulation,
+  });
 
   const shareText = `Estimated ovulation: ${formatDate(result.ovulationDate)}. Fertile window: ${formatDate(result.fertileWindowStart)} – ${formatDate(result.fertileWindowEnd)}`;
 

@@ -3,8 +3,6 @@
  *
  * Compare snowball vs avalanche debt repayment strategies.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateDebtPayoff, formatCurrency, formatDuration } from './calculations';
 import {
   getDefaultInputs,
@@ -29,22 +27,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DebtPayoffCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Debt Payoff Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<DebtPayoffInputs, ReturnType<typeof calculateDebtPayoff>>({
+    name: 'Debt Payoff Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateDebtPayoff,
+  });
 
-  const [inputs, setInputs] = useState<DebtPayoffInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateDebtPayoff(inputs), [inputs]);
-
-  const updateInput = <K extends keyof DebtPayoffInputs>(field: K, value: DebtPayoffInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

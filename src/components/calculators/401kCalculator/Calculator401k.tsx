@@ -3,9 +3,6 @@
  *
  * Calculate retirement savings with employer matching and compound growth.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculate401k, formatCurrency } from './calculations';
 import { getDefaultInputs, type Calculator401kInputs } from './types';
 import {
@@ -20,25 +17,14 @@ import {
   ShareResults,
   PrintResults,
 } from '../../ui';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function Calculator401k() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('401k Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<Calculator401kInputs>(
-    'calc-401k-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculate401k(inputs), [inputs]);
-
-  const updateInput = <K extends keyof Calculator401kInputs>(
-    field: K,
-    value: Calculator401kInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<Calculator401kInputs, ReturnType<typeof calculate401k>>({
+    name: '401k Calculator',
+    slug: 'calc-401k-inputs',
+    defaults: getDefaultInputs,
+    compute: calculate401k,
+  });
 
   return (
     <ThemeProvider defaultColor="green">

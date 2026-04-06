@@ -3,8 +3,6 @@
  *
  * Health Savings Account calculator showing triple tax advantage.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateHSA, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -28,19 +26,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function HSACalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('HSA Calculator');
-
-  const [inputs, setInputs] = useState<HSAInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateHSA(inputs), [inputs]);
-
-  const updateInput = <K extends keyof HSAInputs>(field: K, value: HSAInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<HSAInputs, ReturnType<typeof calculateHSA>>({
+    name: 'HSA Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateHSA,
+  });
 
   const coverageOptions = [
     { value: 'individual', label: `Individual ($${HSA_LIMITS_2025.individual.toLocaleString()})` },

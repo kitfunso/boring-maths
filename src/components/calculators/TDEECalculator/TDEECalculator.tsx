@@ -1,9 +1,6 @@
 /**
  * TDEE Calculator - Preact Component
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateTDEE } from './calculations';
 import {
   getDefaultInputs,
@@ -29,18 +26,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function TDEECalculator() {
-  useCalculatorTracking('TDEE Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<TDEEInputs>('calc-tdee-inputs', getDefaultInputs);
-
-  const result = useMemo(() => calculateTDEE(inputs), [inputs]);
-
-  const updateInput = <K extends keyof TDEEInputs>(field: K, value: TDEEInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function TDEECalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TDEEInputs, ReturnType<typeof calculateTDEE>>({
+    name: 'TDEE Calculator',
+    slug: 'calc-tdee-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateTDEE,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === 'imperial' && inputs.unitSystem === 'metric') {

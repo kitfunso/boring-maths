@@ -3,15 +3,17 @@
  * Calculate machining time for CNC operations
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CuttingTimeInputs } from './types';
 import { OPERATION_TYPES, MACHINE_RATES } from './types';
 import { calculateCuttingTime, formatTime } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CuttingTimeCalculator() {
-  const [inputs, setInputs] = useState<CuttingTimeInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<CuttingTimeInputs, ReturnType<typeof calculateCuttingTime>>({
+    defaults: {
     operationType: 'milling',
     pathLength: 24,
     pathUnit: 'inches',
@@ -30,11 +32,11 @@ export function CuttingTimeCalculator() {
     numberOfToolChanges: 2,
     setupTime: 15,
     quantity: 10,
+  },
+    compute: calculateCuttingTime,
   });
 
   const [machineRate, setMachineRate] = useState(75);
-
-  const results = useMemo(() => calculateCuttingTime(inputs), [inputs]);
 
   const adjustedCost = (results.totalJobTime / 60) * machineRate;
 

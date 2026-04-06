@@ -1,24 +1,14 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateIHT, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, type IHTInputs } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function InheritanceTaxCalculator() {
-  useCalculatorTracking('Inheritance Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<IHTInputs>(
-    'calc-inheritance-tax-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateIHT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof IHTInputs>(field: K, value: IHTInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function InheritanceTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<IHTInputs, ReturnType<typeof calculateIHT>>({
+    name: 'Inheritance Tax Calculator',
+    slug: 'calc-inheritance-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateIHT,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

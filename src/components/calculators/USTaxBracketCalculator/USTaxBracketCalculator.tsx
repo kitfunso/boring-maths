@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateUSTaxBracket, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -10,8 +8,7 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
@@ -25,22 +22,12 @@ const DEDUCTION_OPTIONS = [
 ];
 
 export default function USTaxBracketCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('US Tax Bracket Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<USTaxBracketInputs>(
-    'calc-us-tax-bracket-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateUSTaxBracket(inputs), [inputs]);
-
-  const updateInput = <K extends keyof USTaxBracketInputs>(
-    field: K,
-    value: USTaxBracketInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<USTaxBracketInputs, ReturnType<typeof calculateUSTaxBracket>>({
+    name: 'US Tax Bracket Calculator',
+    slug: 'calc-us-tax-bracket-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateUSTaxBracket,
+  });
 
   const bracketColors: Record<number, string> = {
     10: 'bg-emerald-500',
