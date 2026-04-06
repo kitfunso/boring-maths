@@ -1,0 +1,231 @@
+---
+/**
+ * House Flip Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import HouseFlipCalculator from '../../components/calculators/HouseFlipCalculator/HouseFlipCalculator';
+
+const title = 'House Flip Calculator | Fix and Flip Profit Analysis | Boring Math';
+const description =
+  'Analyze house flip profitability with the 70% rule, financing costs, holding costs, and selling expenses. Calculate ROI, cash-on-cash return, and break-even ARV for any fix-and-flip deal.';
+const keywords =
+  'house flip calculator, fix and flip calculator, 70 percent rule calculator, house flipping profit, ARV calculator, real estate flip analysis, flip or flop calculator, renovation ROI, house flip ROI';
+const canonicalURL = '/calculators/house-flip-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'House Flip Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'ROI Calculator',
+    description: 'Calculate return on investment for any project or asset.',
+    href: '/calculators/roi-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly payments, total interest, and loan costs.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Rental Property ROI',
+    description: 'Calculate return on investment for rental properties.',
+    href: '/calculators/rental-property-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the long-term costs of buying vs renting a home.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the 70% rule in house flipping?',
+    answer:
+      'The 70% rule states that an investor should pay no more than 70% of the After Repair Value (ARV) minus repair costs. For example, if a home has an ARV of $300,000 and needs $50,000 in repairs, the maximum purchase price should be $300,000 x 0.70 - $50,000 = $160,000. This margin accounts for holding costs, financing, selling expenses, and profit.',
+  },
+  {
+    question: 'What is After Repair Value (ARV) and how do I estimate it?',
+    answer:
+      'After Repair Value is the estimated market value of a property after all renovations are complete. Estimate ARV by looking at comparable sales (comps) of recently sold, renovated homes in the same neighborhood with similar size and features. Real estate agents, appraisers, and sites like Zillow or Redfin provide comp data.',
+  },
+  {
+    question: 'What costs should I include in a house flip analysis?',
+    answer:
+      'A thorough analysis includes: purchase price, closing costs (2-5%), renovation budget, financing costs (interest on hard money or conventional loans), holding costs (property taxes, insurance, utilities, HOA), and selling costs (agent commissions at 5-6%, seller closing costs). Most beginners underestimate renovation and holding costs.',
+  },
+  {
+    question: 'What is a good ROI for a house flip?',
+    answer:
+      'Most experienced flippers target a minimum ROI of 10-20% on total investment, though many aim higher. Cash-on-cash return (profit relative to your actual cash invested) is often a better metric since you typically use financing. A cash-on-cash return above 25-30% is considered strong.',
+  },
+  {
+    question: 'How long does a typical house flip take?',
+    answer:
+      'Most flips take 4-8 months from purchase to sale. Simple cosmetic renovations can be completed in 2-3 months, while major structural work may take 6+ months. Every extra month of holding time adds financing and carrying costs, so speed is critical to profitability.',
+  },
+  {
+    question: 'What financing options are available for house flips?',
+    answer:
+      'Common options include hard money loans (8-15% interest, 1-3 points, 6-12 month terms), private money lenders, home equity lines of credit (HELOC), conventional investment property loans, and cash. Hard money loans close faster and have fewer requirements but cost more. Many flippers start with hard money and refinance to conventional once they build a track record.',
+  },
+  {
+    question: 'Should I always follow the 70% rule strictly?',
+    answer:
+      'The 70% rule is a guideline, not an absolute. In competitive or high-value markets, experienced flippers sometimes work with tighter margins (75-80% of ARV minus repairs). However, beginners should stick to 70% or lower to build in a safety margin for unexpected costs, which are common in renovation projects.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'House Flip Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="House Flip Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter purchase details',
+        text: 'Input the property purchase price and estimated closing costs percentage.',
+      },
+      {
+        name: 'Set renovation budget',
+        text: 'Enter your total estimated renovation and repair costs.',
+      },
+      {
+        name: 'Configure financing',
+        text: 'Set your down payment percentage and loan interest rate.',
+      },
+      {
+        name: 'Add holding costs',
+        text: 'Enter the expected holding period in months and monthly carrying costs (taxes, insurance, utilities).',
+      },
+      {
+        name: 'Set exit numbers',
+        text: 'Enter the After Repair Value and selling costs percentage to see your projected profit.',
+      },
+    ]}
+    estimatedTime="PT4M"
+  />
+
+  <HeroSection
+    title="House Flip Calculator"
+    description="Analyze fix-and-flip deals with the 70% rule, full cost breakdown, and profit projections."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <HouseFlipCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start with the <strong>purchase price</strong> and <strong>closing costs</strong> for the acquisition.
+      Closing costs for investment properties typically run 2-5% of the purchase price.
+    </p>
+    <p>
+      Enter your <strong>renovation budget</strong> with a realistic estimate. Get contractor bids before
+      committing and add 10-20% contingency for surprises behind walls.
+    </p>
+    <p>
+      Set your <strong>financing terms</strong> including down payment and interest rate. Hard money lenders
+      typically require 20-30% down at 8-15% interest. If paying cash, set the down payment to 100%.
+    </p>
+    <p>
+      Include <strong>holding costs</strong> like property taxes, insurance, and utilities. These add up
+      fast and eat into profit every month the property sits unsold.
+    </p>
+    <p>
+      Enter the <strong>After Repair Value (ARV)</strong> based on comparable sales and your <strong>selling
+      costs</strong> (typically 5-6% for agent commissions plus transfer taxes).
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding the 70% Rule">
+    <p>
+      The <strong>70% rule</strong> is the most widely used quick-analysis tool in house flipping. It states
+      that you should pay no more than 70% of the ARV minus repair costs.
+    </p>
+    <p>
+      <strong>Formula:</strong> Maximum Purchase Price = ARV x 0.70 - Estimated Repairs
+    </p>
+    <p>
+      The 30% margin covers your profit, holding costs, financing, and selling expenses. In practice,
+      your actual margin depends on how long you hold and your financing costs.
+    </p>
+    <p>
+      This calculator shows whether your deal passes or fails the 70% rule, along with the exact
+      maximum purchase price you should pay.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Key Metrics Explained">
+    <p>
+      <strong>Total Investment</strong> is your all-in cost: purchase price plus every dollar spent on
+      renovation, financing, holding, closing, and selling. Compare this to ARV for your profit.
+    </p>
+    <p>
+      <strong>ROI</strong> measures profit as a percentage of total investment. A 15% ROI on a $300,000
+      investment is $45,000 profit.
+    </p>
+    <p>
+      <strong>Cash-on-Cash Return</strong> measures profit against your actual cash invested (down payment,
+      renovation, closing, and holding costs). This is often higher than ROI because you use leverage.
+    </p>
+    <p>
+      <strong>Break-Even ARV</strong> is the minimum sale price where you neither make nor lose money.
+      If the market softens, this tells you how much cushion you have.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Common House Flipping Mistakes">
+    <p>
+      <strong>Underestimating renovation costs.</strong> The number one killer of flip profitability.
+      Always get multiple contractor bids and add 15-20% contingency for hidden problems.
+    </p>
+    <p>
+      <strong>Overestimating ARV.</strong> Be conservative with your after repair value. Use the lowest
+      reasonable comp, not the highest. One bad comp can turn a profitable deal into a loss.
+    </p>
+    <p>
+      <strong>Ignoring holding costs.</strong> Every month you hold a property costs money in taxes,
+      insurance, utilities, and loan interest. A 6-month project that stretches to 12 months can
+      eliminate your entire profit margin.
+    </p>
+    <p>
+      <strong>Skipping the inspection.</strong> A thorough inspection before purchase reveals structural,
+      electrical, plumbing, and foundation issues that would otherwise become expensive surprises.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
