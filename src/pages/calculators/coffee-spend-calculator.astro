@@ -1,0 +1,184 @@
+---
+/**
+ * Coffee Spend Calculator Page
+ *
+ * SEO-optimized page targeting: "coffee spend calculator", "latte factor calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CoffeeSpendCalculator from '../../components/calculators/CoffeeSpendCalculator/CoffeeSpendCalculator';
+
+// SEO Configuration
+const title = 'Coffee Spend Calculator | The Latte Factor | Boring Math';
+const description =
+  'Calculate how much you spend on coffee per year and what you could save by switching to home brew. See how invested savings grow over 10, 20, and 30 years.';
+const keywords =
+  'how much do I spend on coffee a year, coffee cost calculator, latte factor, coffee spending calculator, daily coffee cost, coffee savings, latte factor calculator, home brew savings';
+const canonicalURL = '/calculators/coffee-spend-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Coffee Spend Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Compound Interest',
+    description: 'See how investments grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'accent' as const,
+  },
+  {
+    title: 'Subscription Audit',
+    description: 'Find and cut hidden subscription costs.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'dollar' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Plan how to reach your savings goals.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart' as const,
+    color: 'accent' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Calculate your path to financial independence.',
+    href: '/calculators/fire-calculator',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Remote Work Savings',
+    description: 'Calculate how much you save working from home.',
+    href: '/calculators/remote-work-savings-calculator',
+    icon: 'home' as const,
+    color: 'ocean' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much does the average person spend on coffee per year?',
+    answer:
+      'The average American spends $1,100 to $2,200 per year on coffee, depending on how many cups they buy and where. At $5 per cup and one daily purchase on workdays, that\'s about $1,300/year. Two cups a day pushes it past $2,600.',
+  },
+  {
+    question: 'What is the Latte Factor?',
+    answer:
+      'The Latte Factor is a concept from David Bach\'s book "The Automatic Millionaire." It argues that small daily expenses, like a $5 latte, add up to massive sums over a lifetime. While the math is real, critics point out that cutting lattes alone won\'t make you rich. Systemic factors like income, housing costs, and healthcare matter more.',
+  },
+  {
+    question: 'Is the Latte Factor actually true?',
+    answer:
+      'The math checks out: $5/day invested at 7% for 30 years does grow to roughly $180,000. But critics argue it oversimplifies personal finance. Cutting a $5 coffee won\'t overcome stagnant wages or high rent. The real value is awareness. Know what you spend, then decide what\'s worth it.',
+  },
+  {
+    question: 'How much does it cost to make coffee at home?',
+    answer:
+      'Home-brewed drip coffee costs roughly $0.20-$0.50 per cup depending on the beans and method. A pour-over runs $0.30-$0.60. Espresso-based drinks with a home machine cost $0.50-$1.00 once you factor in milk and the machine amortized over time. All dramatically cheaper than $5-$7 at a cafe.',
+  },
+  {
+    question: 'Should I actually stop buying coffee?',
+    answer:
+      'That depends on you. If your daily coffee is a ritual you love, it\'s probably money well spent. If you\'re buying out of habit or convenience, switching to home brew a few days a week is an easy win. The goal isn\'t deprivation. It\'s spending intentionally.',
+  },
+  {
+    question: 'How does the investment calculation work?',
+    answer:
+      'The calculator uses the future value of an annuity formula. It assumes you invest the difference between cafe coffee and home brew at the end of each year, compounded annually at your chosen return rate. The default 7% approximates average stock market returns after inflation.',
+  },
+  {
+    question: 'What return rate should I use?',
+    answer:
+      'The S&P 500 has returned roughly 10% annually before inflation (about 7% after). If you\'re a conservative investor, use 5-6%. For a broad market index fund investor, 7% is a reasonable long-term assumption. The calculator lets you adjust from 0% to 15%.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Coffee Spend Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Coffee Spend Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Coffee Spend Calculator"
+    description="Find out how much your daily coffee habit costs per year and what those savings could grow to if invested."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <CoffeeSpendCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Set how many <strong>coffees you buy per day</strong> using the slider. Adjust the
+      <strong>price per cup</strong> to match your usual order. A basic drip coffee might be $3,
+      while a latte or specialty drink runs $5-$7.
+    </p>
+    <p>
+      The <strong>home brew cost</strong> defaults to $0.50/cup, which covers most drip and
+      pour-over methods. Adjust up if you use expensive beans or an espresso machine.
+    </p>
+    <p>
+      The <strong>investment return slider</strong> lets you model what happens if you invest the
+      difference. The default 7% reflects historical stock market returns after inflation.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>yearly spend</strong> is the headline number: total money leaving your wallet for
+      cafe coffee across all buying days in a year.
+    </p>
+    <p>
+      <strong>Yearly savings</strong> shows the gap between cafe spending and making the same number
+      of cups at home. This is the amount available to redirect.
+    </p>
+    <p>
+      The <strong>investment projections</strong> show compound growth if you invested the annual
+      savings. These use the future value of an annuity formula with your chosen return rate.
+    </p>
+    <p>
+      <strong>Fun equivalents</strong> translate your savings into concrete things. Sometimes seeing
+      "14 fancy dinners" lands harder than seeing a dollar figure.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
