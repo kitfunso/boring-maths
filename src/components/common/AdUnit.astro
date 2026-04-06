@@ -63,6 +63,7 @@ const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
 <style>
   /* Collapse ad containers when AdSense doesn't fill them */
   .ad-container {
+    min-height: 100px; /* Reserve space to prevent CLS */
     overflow: hidden;
     transition: max-height 0.3s ease, opacity 0.3s ease;
   }

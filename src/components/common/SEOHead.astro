@@ -53,22 +53,6 @@ const {
 
 const siteUrl = Astro.site?.origin || 'https://boring-math.com';
 
-// Organization schema (for brand recognition)
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  '@id': `${siteUrl}/#organization`,
-  name: 'Boring Math Calculators',
-  url: siteUrl,
-  logo: {
-    '@type': 'ImageObject',
-    url: `${siteUrl}/favicon.svg`,
-    width: 512,
-    height: 512,
-  },
-  description: 'Free online calculators for everyday math problems',
-};
-
 // WebApplication schema (better than just SoftwareApplication for web tools)
 const appSchema = {
   '@context': 'https://schema.org',
@@ -180,9 +164,6 @@ const howToSchema =
       }
     : null;
 ---
-
-<!-- Organization Schema (site-wide identity) -->
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
 <!-- WebApplication Schema (primary calculator schema) -->
 <script type="application/ld+json" set:html={JSON.stringify(appSchema)} />

@@ -30,3 +30,6 @@
 
 # Calculators index - redirect to homepage (which shows all calculators)
 /calculators/                /                            301!
+
+# Sitemap redirect (Astro generates sitemap-index.xml)
+/sitemap.xml                 /sitemap-index.xml           301
