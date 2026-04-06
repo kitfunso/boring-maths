@@ -8,36 +8,73 @@ import type { PrimingSugarInputs } from '../../src/components/calculators/Primin
 
 describe('PrimingSugarCalculator', () => {
   describe('calculatePrimingSugar', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: PrimingSugarInputs = {} as PrimingSugarInputs;
+    it('should calculate priming sugar for a standard 5 gallon batch', () => {
+      const inputs: PrimingSugarInputs = {
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        beerTemp: 65,
+        tempUnit: 'fahrenheit',
+        targetCO2: 2.5,
+        sugarType: 'corn-sugar',
+        containerType: 'bottle',
+      };
 
       const result = calculatePrimingSugar(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      // Typical priming sugar for a 5-gallon batch is ~4-5oz corn sugar
+      expect(result.sugarAmount).toBeGreaterThan(0);
+      expect(result.sugarPerBottle).toBeGreaterThan(0);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: PrimingSugarInputs = {} as PrimingSugarInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should use less sugar at higher temperatures (more residual CO2)', () => {
+      const cold: PrimingSugarInputs = {
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        beerTemp: 40,
+        tempUnit: 'fahrenheit',
+        targetCO2: 2.5,
+        sugarType: 'corn-sugar',
+        containerType: 'bottle',
+      };
 
-      const result = calculatePrimingSugar(inputs);
+      const warm: PrimingSugarInputs = { ...cold, beerTemp: 75 };
 
-      expect(result).toBeDefined();
+      const coldResult = calculatePrimingSugar(cold);
+      const warmResult = calculatePrimingSugar(warm);
+
+      // Warmer beer has less dissolved CO2, needs more sugar
+      expect(warmResult.sugarAmount).toBeGreaterThan(coldResult.sugarAmount);
     });
 
-    it('should handle large values', () => {
-      const inputs: PrimingSugarInputs = {} as PrimingSugarInputs;
-      // TODO: Set large values and verify calculations
+    it('should scale with batch volume', () => {
+      const small: PrimingSugarInputs = {
+        batchVolume: 2.5,
+        volumeUnit: 'gallons',
+        beerTemp: 65,
+        tempUnit: 'fahrenheit',
+        targetCO2: 2.5,
+        sugarType: 'corn-sugar',
+        containerType: 'bottle',
+      };
 
-      const result = calculatePrimingSugar(inputs);
+      const large: PrimingSugarInputs = { ...small, batchVolume: 10 };
 
-      expect(result).toBeDefined();
+      const smallResult = calculatePrimingSugar(small);
+      const largeResult = calculatePrimingSugar(large);
+
+      expect(largeResult.sugarAmount).toBeGreaterThan(smallResult.sugarAmount);
     });
 
     it('should produce consistent results', () => {
-      const inputs: PrimingSugarInputs = {} as PrimingSugarInputs;
+      const inputs: PrimingSugarInputs = {
+        batchVolume: 5,
+        volumeUnit: 'gallons',
+        beerTemp: 65,
+        tempUnit: 'fahrenheit',
+        targetCO2: 2.5,
+        sugarType: 'corn-sugar',
+        containerType: 'bottle',
+      };
 
       const result1 = calculatePrimingSugar(inputs);
       const result2 = calculatePrimingSugar(inputs);

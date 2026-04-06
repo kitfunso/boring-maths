@@ -8,36 +8,73 @@ import type { WeddingAlcoholInputs } from '../../src/components/calculators/Wedd
 
 describe('WeddingAlcoholCalculator', () => {
   describe('calculateWeddingAlcohol', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: WeddingAlcoholInputs = {} as WeddingAlcoholInputs;
+    it('should calculate alcohol for a 100-guest wedding', () => {
+      const inputs: WeddingAlcoholInputs = {
+        guestCount: 100,
+        eventHours: 5,
+        drinkersPercent: 80,
+        drinkingLevel: 'moderate',
+        winePercent: 40,
+        beerPercent: 40,
+        liquorPercent: 20,
+      };
 
       const result = calculateWeddingAlcohol(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.totalDrinks).toBeGreaterThan(0);
+      expect(result.wineBottles).toBeGreaterThan(0);
+      expect(result.beerBottles).toBeGreaterThan(0);
+      expect(result.liquorBottles).toBeGreaterThan(0);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: WeddingAlcoholInputs = {} as WeddingAlcoholInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should scale with guest count', () => {
+      const small: WeddingAlcoholInputs = {
+        guestCount: 50,
+        eventHours: 5,
+        drinkersPercent: 80,
+        drinkingLevel: 'moderate',
+        winePercent: 40,
+        beerPercent: 40,
+        liquorPercent: 20,
+      };
 
-      const result = calculateWeddingAlcohol(inputs);
+      const large: WeddingAlcoholInputs = { ...small, guestCount: 200 };
 
-      expect(result).toBeDefined();
+      const smallResult = calculateWeddingAlcohol(small);
+      const largeResult = calculateWeddingAlcohol(large);
+
+      expect(largeResult.totalDrinks).toBeGreaterThan(smallResult.totalDrinks);
     });
 
-    it('should handle large values', () => {
-      const inputs: WeddingAlcoholInputs = {} as WeddingAlcoholInputs;
-      // TODO: Set large values and verify calculations
+    it('should increase with heavier drinking level', () => {
+      const light: WeddingAlcoholInputs = {
+        guestCount: 100,
+        eventHours: 5,
+        drinkersPercent: 80,
+        drinkingLevel: 'light',
+        winePercent: 40,
+        beerPercent: 40,
+        liquorPercent: 20,
+      };
 
-      const result = calculateWeddingAlcohol(inputs);
+      const heavy: WeddingAlcoholInputs = { ...light, drinkingLevel: 'heavy' };
 
-      expect(result).toBeDefined();
+      const lightResult = calculateWeddingAlcohol(light);
+      const heavyResult = calculateWeddingAlcohol(heavy);
+
+      expect(heavyResult.totalDrinks).toBeGreaterThan(lightResult.totalDrinks);
     });
 
     it('should produce consistent results', () => {
-      const inputs: WeddingAlcoholInputs = {} as WeddingAlcoholInputs;
+      const inputs: WeddingAlcoholInputs = {
+        guestCount: 100,
+        eventHours: 5,
+        drinkersPercent: 80,
+        drinkingLevel: 'moderate',
+        winePercent: 40,
+        beerPercent: 40,
+        liquorPercent: 20,
+      };
 
       const result1 = calculateWeddingAlcohol(inputs);
       const result2 = calculateWeddingAlcohol(inputs);

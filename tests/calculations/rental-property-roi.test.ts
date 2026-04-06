@@ -1,11 +1,10 @@
 /**
- * RentalPropertyRoi Calculator - Unit Tests
+ * RentalPropertyRoiCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateRentalPropertyROI } from '../../src/components/calculators/RentalPropertyROI/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/RentalPropertyROI/types';
-import type { RentalPropertyInputs } from '../../src/components/calculators/RentalPropertyROI/types';
 
 describe('RentalPropertyRoiCalculator', () => {
   describe('calculateRentalPropertyROI', () => {
@@ -14,13 +13,19 @@ describe('RentalPropertyRoiCalculator', () => {
 
       const result = calculateRentalPropertyROI(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalCashInvestment).toBe(69000);
+      expect(result.downPayment).toBe(60000);
+      expect(result.closingCosts).toBe(9000);
+      expect(result.loanAmount).toBe(240000);
+      expect(result.monthlyMortgagePayment).toBe(1597);
+      expect(result.annualMortgagePayment).toBe(19161);
+      expect(result.grossMonthlyRent).toBe(2000);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.purchasePrice = 0;
 
       const result = calculateRentalPropertyROI(inputs);
 
@@ -29,7 +34,7 @@ describe('RentalPropertyRoiCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.purchasePrice = 30000000;
 
       const result = calculateRentalPropertyROI(inputs);
 

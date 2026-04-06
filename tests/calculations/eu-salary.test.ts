@@ -1,10 +1,14 @@
+/**
+ * EUSalary Calculator - Unit Tests
+ */
+
 import { describe, it, expect } from 'vitest';
 import { calculateSalary } from '../../src/components/calculators/EUSalaryCalculator/calculations';
 import type { SalaryInputs } from '../../src/components/calculators/EUSalaryCalculator/types';
 
 describe('EuSalaryCalculator', () => {
   describe('calculateSalary', () => {
-    it('should calculate with valid inputs', () => {
+    it('should calculate German salary correctly', () => {
       const inputs: SalaryInputs = {
         grossSalary: 50000,
         countryCode: 'DE',
@@ -12,7 +16,6 @@ describe('EuSalaryCalculator', () => {
 
       const result = calculateSalary(inputs);
 
-      expect(result).toBeDefined();
       expect(result.grossSalary).toBe(50000);
       expect(result.socialSecurity).toBeGreaterThan(0);
       expect(result.incomeTax).toBeGreaterThan(0);
@@ -20,22 +23,29 @@ describe('EuSalaryCalculator', () => {
       expect(result.netSalary).toBeLessThan(result.grossSalary);
     });
 
-    it('should handle different countries', () => {
-      const inputsDE: SalaryInputs = {
-        grossSalary: 60000,
+    it('should handle zero salary', () => {
+      const inputs: SalaryInputs = {
+        grossSalary: 0,
         countryCode: 'DE',
       };
 
+      const result = calculateSalary(inputs);
+
+      expect(result.grossSalary).toBe(0);
+      expect(result.netSalary).toBe(0);
+    });
+
+    it('should handle different countries', () => {
       const inputsFR: SalaryInputs = {
         grossSalary: 60000,
         countryCode: 'FR',
       };
 
-      const resultDE = calculateSalary(inputsDE);
       const resultFR = calculateSalary(inputsFR);
 
-      expect(resultDE.netSalary).toBeDefined();
-      expect(resultFR.netSalary).toBeDefined();
+      expect(resultFR.grossSalary).toBe(60000);
+      expect(resultFR.netSalary).toBeGreaterThan(0);
+      expect(resultFR.netSalary).toBeLessThan(60000);
     });
 
     it('should produce consistent results', () => {

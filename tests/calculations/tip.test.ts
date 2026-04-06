@@ -1,11 +1,10 @@
 /**
- * Tip Calculator - Unit Tests
+ * TipCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateTip } from '../../src/components/calculators/TipCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/TipCalculator/types';
-import type { TipCalculatorInputs } from '../../src/components/calculators/TipCalculator/types';
 
 describe('TipCalculator', () => {
   describe('calculateTip', () => {
@@ -14,13 +13,17 @@ describe('TipCalculator', () => {
 
       const result = calculateTip(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.tipAmount).toBe(9);
+      expect(result.totalAmount).toBe(59);
+      expect(result.perPersonTotal).toBe(59);
+      expect(result.perPersonTip).toBe(9);
+      expect(result.perPersonBill).toBe(50);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.billAmount = 0;
 
       const result = calculateTip(inputs);
 
@@ -29,7 +32,7 @@ describe('TipCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.billAmount = 5000;
 
       const result = calculateTip(inputs);
 

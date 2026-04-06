@@ -1,11 +1,10 @@
 /**
- * Loan Calculator - Unit Tests
+ * LoanCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateLoan } from '../../src/components/calculators/LoanCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/LoanCalculator/types';
-import type { LoanInputs } from '../../src/components/calculators/LoanCalculator/types';
 
 describe('LoanCalculator', () => {
   describe('calculateLoan', () => {
@@ -14,26 +13,32 @@ describe('LoanCalculator', () => {
 
       const result = calculateLoan(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.monthlyPayment).toBeCloseTo(500.95, 2);
+      expect(result.totalPayment).toBeCloseTo(30056.92, 2);
+      expect(result.totalInterest).toBeCloseTo(5056.92, 2);
+      expect(result.effectiveRate).toBeCloseTo(20.2, 1);
+      expect(result.payoffDate).toBe('April 2031');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.loanAmount = 0;
 
       const result = calculateLoan(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.monthlyPayment).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.loanAmount = 2500000;
 
       const result = calculateLoan(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.monthlyPayment).toBe('number');
+      expect(isFinite(result.monthlyPayment)).toBe(true);
     });
 
     it('should produce consistent results', () => {

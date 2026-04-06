@@ -1,11 +1,10 @@
 /**
- * WeddingBudget Calculator - Unit Tests
+ * WeddingBudgetCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateWeddingBudget } from '../../src/components/calculators/WeddingBudget/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/WeddingBudget/types';
-import type { WeddingBudgetInputs } from '../../src/components/calculators/WeddingBudget/types';
 
 describe('WeddingBudgetCalculator', () => {
   describe('calculateWeddingBudget', () => {
@@ -14,13 +13,19 @@ describe('WeddingBudgetCalculator', () => {
 
       const result = calculateWeddingBudget(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalBudget).toBe(30000);
+      expect(result.guestCount).toBe(100);
+      expect(result.costPerGuest).toBe(300);
+      expect(result.industryAveragePerGuest).toBe(250);
+      expect(result.venueAndCatering).toBe(14849);
+      expect(result.vendorServices).toBe(6721);
+      expect(result.personalTouches).toBe(6930);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.totalBudget = 0;
 
       const result = calculateWeddingBudget(inputs);
 
@@ -29,7 +34,7 @@ describe('WeddingBudgetCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.totalBudget = 3000000;
 
       const result = calculateWeddingBudget(inputs);
 

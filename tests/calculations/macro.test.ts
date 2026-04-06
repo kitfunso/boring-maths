@@ -1,11 +1,10 @@
 /**
- * Macro Calculator - Unit Tests
+ * MacroCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMacros } from '../../src/components/calculators/MacroCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MacroCalculator/types';
-import type { MacroCalculatorInputs } from '../../src/components/calculators/MacroCalculator/types';
 
 describe('MacroCalculator', () => {
   describe('calculateMacros', () => {
@@ -14,26 +13,35 @@ describe('MacroCalculator', () => {
 
       const result = calculateMacros(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.bmr).toBe(1783);
+      expect(result.tdee).toBe(2763);
+      expect(result.targetCalories).toBe(2763);
+      expect(result.protein).toBe(144);
+      expect(result.carbs).toBe(353);
+      expect(result.fat).toBe(86);
+      expect(result.proteinCalories).toBe(576);
+      expect(result.carbsCalories).toBe(1414);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.age = 0;
 
       const result = calculateMacros(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.bmr).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.weight = 18000;
 
       const result = calculateMacros(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.bmr).toBe('number');
+      expect(isFinite(result.bmr)).toBe(true);
     });
 
     it('should produce consistent results', () => {

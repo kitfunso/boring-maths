@@ -8,36 +8,93 @@ import type { ToolDeflectionInputs } from '../../src/components/calculators/Tool
 
 describe('ToolDeflectionCalculator', () => {
   describe('calculateToolDeflection', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: ToolDeflectionInputs = {} as ToolDeflectionInputs;
+    it('should calculate deflection for a 1/2" carbide endmill', () => {
+      const inputs: ToolDeflectionInputs = {
+        toolDiameter: 0.5,
+        stickout: 2.0,
+        lengthUnit: 'inches',
+        toolMaterial: 'carbide',
+        fluteCount: 4,
+        cuttingForce: 50,
+        forceUnit: 'lbs',
+        calculationMode: 'force',
+        depthOfCut: 0.1,
+        widthOfCut: 0.25,
+        feedRate: 10,
+        materialFactor: 1,
+      };
 
       const result = calculateToolDeflection(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.deflection).toBeGreaterThan(0);
+      expect(result.deflection).toBeLessThan(0.01); // sub-0.01" for typical setup
+      expect(result.momentOfInertia).toBeGreaterThan(0);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: ToolDeflectionInputs = {} as ToolDeflectionInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should increase with stickout length', () => {
+      const short: ToolDeflectionInputs = {
+        toolDiameter: 0.5,
+        stickout: 1.5,
+        lengthUnit: 'inches',
+        toolMaterial: 'carbide',
+        fluteCount: 4,
+        cuttingForce: 50,
+        forceUnit: 'lbs',
+        calculationMode: 'force',
+        depthOfCut: 0.1,
+        widthOfCut: 0.25,
+        feedRate: 10,
+        materialFactor: 1,
+      };
 
-      const result = calculateToolDeflection(inputs);
+      const long: ToolDeflectionInputs = { ...short, stickout: 4.0 };
 
-      expect(result).toBeDefined();
+      const shortResult = calculateToolDeflection(short);
+      const longResult = calculateToolDeflection(long);
+
+      // Deflection scales with L^3
+      expect(longResult.deflection).toBeGreaterThan(shortResult.deflection);
     });
 
-    it('should handle large values', () => {
-      const inputs: ToolDeflectionInputs = {} as ToolDeflectionInputs;
-      // TODO: Set large values and verify calculations
+    it('should decrease with larger diameter', () => {
+      const small: ToolDeflectionInputs = {
+        toolDiameter: 0.25,
+        stickout: 2.0,
+        lengthUnit: 'inches',
+        toolMaterial: 'carbide',
+        fluteCount: 4,
+        cuttingForce: 50,
+        forceUnit: 'lbs',
+        calculationMode: 'force',
+        depthOfCut: 0.1,
+        widthOfCut: 0.125,
+        feedRate: 10,
+        materialFactor: 1,
+      };
 
-      const result = calculateToolDeflection(inputs);
+      const large: ToolDeflectionInputs = { ...small, toolDiameter: 0.75 };
 
-      expect(result).toBeDefined();
+      const smallResult = calculateToolDeflection(small);
+      const largeResult = calculateToolDeflection(large);
+
+      expect(largeResult.deflection).toBeLessThan(smallResult.deflection);
     });
 
     it('should produce consistent results', () => {
-      const inputs: ToolDeflectionInputs = {} as ToolDeflectionInputs;
+      const inputs: ToolDeflectionInputs = {
+        toolDiameter: 0.5,
+        stickout: 2.0,
+        lengthUnit: 'inches',
+        toolMaterial: 'carbide',
+        fluteCount: 4,
+        cuttingForce: 50,
+        forceUnit: 'lbs',
+        calculationMode: 'force',
+        depthOfCut: 0.1,
+        widthOfCut: 0.25,
+        feedRate: 10,
+        materialFactor: 1,
+      };
 
       const result1 = calculateToolDeflection(inputs);
       const result2 = calculateToolDeflection(inputs);

@@ -1,11 +1,10 @@
 /**
- * EtsyFee Calculator - Unit Tests
+ * EtsyFeeCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMarketplaceFees } from '../../src/components/calculators/EtsyFeeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EtsyFeeCalculator/types';
-import type { EtsyFeeInputs } from '../../src/components/calculators/EtsyFeeCalculator/types';
 
 describe('EtsyFeeCalculator', () => {
   describe('calculateMarketplaceFees', () => {
@@ -14,13 +13,16 @@ describe('EtsyFeeCalculator', () => {
 
       const result = calculateMarketplaceFees(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.lowerFeePlatform).toBe('Etsy');
+      expect(result.feeSavings).toBeCloseTo(1.3500000000000005, 2);
+      expect(result.higherProfitPlatform).toBe('Etsy');
+      expect(result.profitDifference).toBeCloseTo(1.3500000000000014, 2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.salePrice = 0;
 
       const result = calculateMarketplaceFees(inputs);
 
@@ -29,7 +31,7 @@ describe('EtsyFeeCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.salePrice = 3500;
 
       const result = calculateMarketplaceFees(inputs);
 

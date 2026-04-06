@@ -1,11 +1,10 @@
 /**
- * Percentage Calculator - Unit Tests
+ * PercentageCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculate } from '../../src/components/calculators/PercentageCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PercentageCalculator/types';
-import type { PercentageCalculatorInputs } from '../../src/components/calculators/PercentageCalculator/types';
 
 describe('PercentageCalculator', () => {
   describe('calculate', () => {
@@ -14,13 +13,15 @@ describe('PercentageCalculator', () => {
 
       const result = calculate(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.mode).toBe('percentOf');
+      expect(result.primaryResult).toBe(30);
+      expect(result.primaryLabel).toBe('15% of 200');
+      expect(result.formattedPrimary).toBe('30');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.percentOf_percentage = 0;
 
       const result = calculate(inputs);
 
@@ -29,7 +30,7 @@ describe('PercentageCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.increaseDecrease_value = 10000;
 
       const result = calculate(inputs);
 

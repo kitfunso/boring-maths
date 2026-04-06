@@ -1,11 +1,10 @@
 /**
- * JobOfferComparison Calculator - Unit Tests
+ * JobOfferComparisonCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateComparison } from '../../src/components/calculators/JobOfferComparison/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/JobOfferComparison/types';
-import type { JobOfferComparisonInputs } from '../../src/components/calculators/JobOfferComparison/types';
 
 describe('JobOfferComparisonCalculator', () => {
   describe('calculateComparison', () => {
@@ -14,13 +13,12 @@ describe('JobOfferComparisonCalculator', () => {
 
       const result = calculateComparison(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.hourlyTimeValue = 0;
 
       const result = calculateComparison(inputs);
 
@@ -29,7 +27,7 @@ describe('JobOfferComparisonCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.hourlyTimeValue = 3500;
 
       const result = calculateComparison(inputs);
 

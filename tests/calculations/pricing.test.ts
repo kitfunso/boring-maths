@@ -1,11 +1,10 @@
 /**
- * Pricing Calculator - Unit Tests
+ * PricingCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculatePricing } from '../../src/components/calculators/PricingCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PricingCalculator/types';
-import type { PricingInputs } from '../../src/components/calculators/PricingCalculator/types';
 
 describe('PricingCalculator', () => {
   describe('calculatePricing', () => {
@@ -14,13 +13,19 @@ describe('PricingCalculator', () => {
 
       const result = calculatePricing(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.recommendedPrice).toBeCloseTo(58.33, 2);
+      expect(result.recommendedMargin).toBeCloseTo(23.33, 2);
+      expect(result.recommendedMarginPercent).toBe(40);
+      expect(result.breakEvenUnits).toBe(215);
+      expect(result.breakEvenRevenue).toBe(12541);
+      expect(result.monthlyRevenue).toBe(5833);
+      expect(result.monthlyProfit).toBe(-2667);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.productCost = 0;
 
       const result = calculatePricing(inputs);
 
@@ -29,7 +34,7 @@ describe('PricingCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.productCost = 2500;
 
       const result = calculatePricing(inputs);
 

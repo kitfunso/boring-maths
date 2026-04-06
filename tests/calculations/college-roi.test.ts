@@ -1,11 +1,10 @@
 /**
- * CollegeRoi Calculator - Unit Tests
+ * CollegeRoiCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateCollegeROI } from '../../src/components/calculators/CollegeROI/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CollegeROI/types';
-import type { CollegeROIInputs } from '../../src/components/calculators/CollegeROI/types';
 
 describe('CollegeRoiCalculator', () => {
   describe('calculateCollegeROI', () => {
@@ -14,13 +13,19 @@ describe('CollegeRoiCalculator', () => {
 
       const result = calculateCollegeROI(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalCost).toBe(160000);
+      expect(result.totalLoanAmount).toBe(160000);
+      expect(result.totalInterestPaid).toBe(58012);
+      expect(result.monthlyLoanPayment).toBe(1817);
+      expect(result.paybackPeriod).toBe(19);
+      expect(result.lifetimeEarningsPremium).toBe(1128272);
+      expect(result.roi).toBe(329);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.annualTuition = 0;
 
       const result = calculateCollegeROI(inputs);
 
@@ -29,7 +34,7 @@ describe('CollegeRoiCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.annualTuition = 2500000;
 
       const result = calculateCollegeROI(inputs);
 

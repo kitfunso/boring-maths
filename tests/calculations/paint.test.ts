@@ -1,11 +1,10 @@
 /**
- * Paint Calculator - Unit Tests
+ * PaintCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculatePaint } from '../../src/components/calculators/PaintCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PaintCalculator/types';
-import type { PaintCalculatorInputs } from '../../src/components/calculators/PaintCalculator/types';
 
 describe('PaintCalculator', () => {
   describe('calculatePaint', () => {
@@ -14,13 +13,19 @@ describe('PaintCalculator', () => {
 
       const result = calculatePaint(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.wallArea).toBe(387);
+      expect(result.ceilingArea).toBe(144);
+      expect(result.trimLength).toBe(89);
+      expect(result.totalPaintableArea).toBe(387);
+      expect(result.wallPaintGallons).toBe(3);
+      expect(result.ceilingPaintGallons).toBe(0);
+      expect(result.trimPaintQuarts).toBe(2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.roomLength = 0;
 
       const result = calculatePaint(inputs);
 
@@ -29,7 +34,7 @@ describe('PaintCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.roomLength = 1200;
 
       const result = calculatePaint(inputs);
 

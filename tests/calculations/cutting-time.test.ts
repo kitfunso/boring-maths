@@ -8,36 +8,113 @@ import type { CuttingTimeInputs } from '../../src/components/calculators/Cutting
 
 describe('CuttingTimeCalculator', () => {
   describe('calculateCuttingTime', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: CuttingTimeInputs = {} as CuttingTimeInputs;
+    it('should calculate milling time correctly', () => {
+      const inputs: CuttingTimeInputs = {
+        operationType: 'milling',
+        pathLength: 60,
+        pathUnit: 'inches',
+        feedRate: 30,
+        feedUnit: 'ipm',
+        numberOfPasses: 2,
+        partLength: 0,
+        partDiameter: 0,
+        depthOfCut: 0,
+        holeDepth: 0,
+        numberOfHoles: 0,
+        peckDepth: 0,
+        rapidRate: 200,
+        rapidDistance: 10,
+        toolChangeTime: 15,
+        numberOfToolChanges: 1,
+        setupTime: 10,
+        quantity: 1,
+      };
 
       const result = calculateCuttingTime(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      // 60 inches at 30 IPM = 2 min per pass * 2 passes = 4 min cutting
+      expect(result.cuttingTime).toBeGreaterThan(0);
+      expect(result.totalCycleTime).toBeGreaterThan(result.cuttingTime);
+      expect(result.partsPerHour).toBeGreaterThan(0);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: CuttingTimeInputs = {} as CuttingTimeInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should handle drilling operations', () => {
+      const inputs: CuttingTimeInputs = {
+        operationType: 'drilling',
+        pathLength: 0,
+        pathUnit: 'inches',
+        feedRate: 5,
+        feedUnit: 'ipm',
+        numberOfPasses: 1,
+        partLength: 0,
+        partDiameter: 0,
+        depthOfCut: 0,
+        holeDepth: 1,
+        numberOfHoles: 10,
+        peckDepth: 0.25,
+        rapidRate: 200,
+        rapidDistance: 5,
+        toolChangeTime: 15,
+        numberOfToolChanges: 0,
+        setupTime: 5,
+        quantity: 5,
+      };
 
       const result = calculateCuttingTime(inputs);
 
-      expect(result).toBeDefined();
+      expect(result.cuttingTime).toBeGreaterThan(0);
+      expect(result.totalJobTime).toBeGreaterThan(result.totalCycleTime);
     });
 
-    it('should handle large values', () => {
-      const inputs: CuttingTimeInputs = {} as CuttingTimeInputs;
-      // TODO: Set large values and verify calculations
+    it('should scale with quantity', () => {
+      const base: CuttingTimeInputs = {
+        operationType: 'milling',
+        pathLength: 30,
+        pathUnit: 'inches',
+        feedRate: 30,
+        feedUnit: 'ipm',
+        numberOfPasses: 1,
+        partLength: 0,
+        partDiameter: 0,
+        depthOfCut: 0,
+        holeDepth: 0,
+        numberOfHoles: 0,
+        peckDepth: 0,
+        rapidRate: 200,
+        rapidDistance: 5,
+        toolChangeTime: 0,
+        numberOfToolChanges: 0,
+        setupTime: 0,
+        quantity: 1,
+      };
 
-      const result = calculateCuttingTime(inputs);
+      const r1 = calculateCuttingTime({ ...base, quantity: 1 });
+      const r10 = calculateCuttingTime({ ...base, quantity: 10 });
 
-      expect(result).toBeDefined();
+      expect(r10.totalJobTime).toBeGreaterThan(r1.totalJobTime);
     });
 
     it('should produce consistent results', () => {
-      const inputs: CuttingTimeInputs = {} as CuttingTimeInputs;
+      const inputs: CuttingTimeInputs = {
+        operationType: 'milling',
+        pathLength: 60,
+        pathUnit: 'inches',
+        feedRate: 30,
+        feedUnit: 'ipm',
+        numberOfPasses: 2,
+        partLength: 0,
+        partDiameter: 0,
+        depthOfCut: 0,
+        holeDepth: 0,
+        numberOfHoles: 0,
+        peckDepth: 0,
+        rapidRate: 200,
+        rapidDistance: 10,
+        toolChangeTime: 15,
+        numberOfToolChanges: 1,
+        setupTime: 10,
+        quantity: 1,
+      };
 
       const result1 = calculateCuttingTime(inputs);
       const result2 = calculateCuttingTime(inputs);

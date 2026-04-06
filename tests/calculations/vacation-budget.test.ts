@@ -1,11 +1,10 @@
 /**
- * VacationBudget Calculator - Unit Tests
+ * VacationBudgetCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateVacationBudget } from '../../src/components/calculators/VacationBudget/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/VacationBudget/types';
-import type { VacationBudgetInputs } from '../../src/components/calculators/VacationBudget/types';
 
 describe('VacationBudgetCalculator', () => {
   describe('calculateVacationBudget', () => {
@@ -14,13 +13,19 @@ describe('VacationBudgetCalculator', () => {
 
       const result = calculateVacationBudget(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalBudget).toBe(4521);
+      expect(result.perPerson).toBe(2261);
+      expect(result.perDay).toBe(565);
+      expect(result.perPersonPerDay).toBe(283);
+      expect(result.transportationTotal).toBe(1000);
+      expect(result.accommodationTotal).toBe(1050);
+      expect(result.foodTotal).toBe(960);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.travelers = 0;
 
       const result = calculateVacationBudget(inputs);
 
@@ -29,7 +34,7 @@ describe('VacationBudgetCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.travelers = 200;
 
       const result = calculateVacationBudget(inputs);
 

@@ -1,11 +1,10 @@
 /**
- * Fence Calculator - Unit Tests
+ * FenceCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateFence } from '../../src/components/calculators/FenceCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/FenceCalculator/types';
-import type { FenceCalculatorInputs } from '../../src/components/calculators/FenceCalculator/types';
 
 describe('FenceCalculator', () => {
   describe('calculateFence', () => {
@@ -14,13 +13,19 @@ describe('FenceCalculator', () => {
 
       const result = calculateFence(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.panelsNeeded).toBe(12);
+      expect(result.postsNeeded).toBe(19);
+      expect(result.concreteBags).toBe(38);
+      expect(result.postCaps).toBe(19);
+      expect(result.railsNeeded).toBe(24);
+      expect(result.hardwareKits).toBe(6);
+      expect(result.walkGateCount).toBe(1);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.totalLength = 0;
 
       const result = calculateFence(inputs);
 
@@ -29,7 +34,7 @@ describe('FenceCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.totalLength = 10000;
 
       const result = calculateFence(inputs);
 

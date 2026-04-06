@@ -1,11 +1,10 @@
 /**
- * Tile Calculator - Unit Tests
+ * TileCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateTile } from '../../src/components/calculators/TileCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/TileCalculator/types';
-import type { TileCalculatorInputs } from '../../src/components/calculators/TileCalculator/types';
 
 describe('TileCalculator', () => {
   describe('calculateTile', () => {
@@ -14,13 +13,19 @@ describe('TileCalculator', () => {
 
       const result = calculateTile(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalAreaSqFt).toBe(80);
+      expect(result.areaWithWaste).toBe(88);
+      expect(result.wastePercentage).toBeCloseTo(0.1, 1);
+      expect(result.tilesNeeded).toBe(87);
+      expect(result.boxesNeeded).toBe(9);
+      expect(result.tilesPerSqFt).toBeCloseTo(0.98, 2);
+      expect(result.groutLbs).toBe(17);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.areaLength = 0;
 
       const result = calculateTile(inputs);
 
@@ -29,7 +34,7 @@ describe('TileCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.areaLength = 1000;
 
       const result = calculateTile(inputs);
 

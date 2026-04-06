@@ -1,11 +1,10 @@
 /**
- * FishStocking Calculator - Unit Tests
+ * FishStockingCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateFishStocking } from '../../src/components/calculators/FishStockingCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/FishStockingCalculator/types';
-import type { FishStockingInputs } from '../../src/components/calculators/FishStockingCalculator/types';
 
 describe('FishStockingCalculator', () => {
   describe('calculateFishStocking', () => {
@@ -14,26 +13,34 @@ describe('FishStockingCalculator', () => {
 
       const result = calculateFishStocking(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.tankVolume).toBeCloseTo(19.9, 1);
+      expect(result.effectiveVolume).toBeCloseTo(21.9, 1);
+      expect(result.totalFishInches).toBe(17);
+      expect(result.stockingLevel).toBe(155);
+      expect(result.stockingStatus).toBe('critical');
+      expect(result.bioloadPercentage).toBe(171);
+      expect(result.recommendedMaxInches).toBe(11);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.tankLength = 0;
 
       const result = calculateFishStocking(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.tankVolume).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.tankLength = 2400;
 
       const result = calculateFishStocking(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.tankVolume).toBe('number');
+      expect(isFinite(result.tankVolume)).toBe(true);
     });
 
     it('should produce consistent results', () => {

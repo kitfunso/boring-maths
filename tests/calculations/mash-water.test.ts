@@ -8,36 +8,98 @@ import type { MashWaterInputs } from '../../src/components/calculators/MashWater
 
 describe('MashWaterCalculator', () => {
   describe('calculateMashWater', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: MashWaterInputs = {} as MashWaterInputs;
+    it('should calculate strike water for a 5 gallon batch', () => {
+      const inputs: MashWaterInputs = {
+        grainWeight: 10,
+        weightUnit: 'pounds',
+        grainTemp: 68,
+        targetMashTemp: 152,
+        tempUnit: 'fahrenheit',
+        mashThickness: 1.25,
+        equipmentLoss: 0.5,
+        grainAbsorption: 0.12,
+        boilTime: 60,
+        evaporationRate: 1,
+        preboilVolume: 6.5,
+        volumeUnit: 'gallons',
+        spargeType: 'batch',
+        batchSpargeCount: 2,
+      };
 
       const result = calculateMashWater(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.strikeWaterTemp).toBeGreaterThan(inputs.targetMashTemp);
+      expect(result.strikeWaterVolume).toBeGreaterThan(0);
+      expect(result.totalWaterNeeded).toBeGreaterThan(result.strikeWaterVolume);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: MashWaterInputs = {} as MashWaterInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should calculate higher strike temp for colder grain', () => {
+      const warm: MashWaterInputs = {
+        grainWeight: 10,
+        weightUnit: 'pounds',
+        grainTemp: 72,
+        targetMashTemp: 152,
+        tempUnit: 'fahrenheit',
+        mashThickness: 1.25,
+        equipmentLoss: 0.5,
+        grainAbsorption: 0.12,
+        boilTime: 60,
+        evaporationRate: 1,
+        preboilVolume: 6.5,
+        volumeUnit: 'gallons',
+        spargeType: 'batch',
+        batchSpargeCount: 2,
+      };
 
-      const result = calculateMashWater(inputs);
+      const cold: MashWaterInputs = { ...warm, grainTemp: 40 };
 
-      expect(result).toBeDefined();
+      const warmResult = calculateMashWater(warm);
+      const coldResult = calculateMashWater(cold);
+
+      expect(coldResult.strikeWaterTemp).toBeGreaterThan(warmResult.strikeWaterTemp);
     });
 
-    it('should handle large values', () => {
-      const inputs: MashWaterInputs = {} as MashWaterInputs;
-      // TODO: Set large values and verify calculations
+    it('should handle no-sparge brewing', () => {
+      const inputs: MashWaterInputs = {
+        grainWeight: 12,
+        weightUnit: 'pounds',
+        grainTemp: 68,
+        targetMashTemp: 152,
+        tempUnit: 'fahrenheit',
+        mashThickness: 2.0,
+        equipmentLoss: 0.5,
+        grainAbsorption: 0.12,
+        boilTime: 60,
+        evaporationRate: 1,
+        preboilVolume: 6.5,
+        volumeUnit: 'gallons',
+        spargeType: 'no-sparge',
+        batchSpargeCount: 0,
+      };
 
       const result = calculateMashWater(inputs);
 
-      expect(result).toBeDefined();
+      expect(result.strikeWaterTemp).toBeGreaterThan(0);
+      expect(result.strikeWaterVolume).toBeGreaterThan(0);
     });
 
     it('should produce consistent results', () => {
-      const inputs: MashWaterInputs = {} as MashWaterInputs;
+      const inputs: MashWaterInputs = {
+        grainWeight: 10,
+        weightUnit: 'pounds',
+        grainTemp: 68,
+        targetMashTemp: 152,
+        tempUnit: 'fahrenheit',
+        mashThickness: 1.25,
+        equipmentLoss: 0.5,
+        grainAbsorption: 0.12,
+        boilTime: 60,
+        evaporationRate: 1,
+        preboilVolume: 6.5,
+        volumeUnit: 'gallons',
+        spargeType: 'batch',
+        batchSpargeCount: 2,
+      };
 
       const result1 = calculateMashWater(inputs);
       const result2 = calculateMashWater(inputs);

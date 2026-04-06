@@ -1,11 +1,10 @@
 /**
- * Solar Calculator - Unit Tests
+ * SolarCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateSolar } from '../../src/components/calculators/SolarCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SolarCalculator/types';
-import type { SolarCalculatorInputs } from '../../src/components/calculators/SolarCalculator/types';
 
 describe('SolarCalculator', () => {
   describe('calculateSolar', () => {
@@ -14,13 +13,19 @@ describe('SolarCalculator', () => {
 
       const result = calculateSolar(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.annualProductionKwh).toBe(10859);
+      expect(result.monthlyProductionKwh).toBe(905);
+      expect(result.coveragePercent).toBe(91);
+      expect(result.grossCost).toBe(19250);
+      expect(result.federalCredit).toBe(5775);
+      expect(result.stateCredit).toBe(0);
+      expect(result.totalIncentives).toBe(5775);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.systemSizeKw = 0;
 
       const result = calculateSolar(inputs);
 
@@ -29,7 +34,7 @@ describe('SolarCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.systemSizeKw = 700;
 
       const result = calculateSolar(inputs);
 

@@ -1,11 +1,10 @@
 /**
- * UkSalarySacrifice Calculator - Unit Tests
+ * UkSalarySacrificeCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateSalarySacrifice } from '../../src/components/calculators/UKSalarySacrificeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKSalarySacrificeCalculator/types';
-import type { UKSalarySacrificeInputs } from '../../src/components/calculators/UKSalarySacrificeCalculator/types';
 
 describe('UkSalarySacrificeCalculator', () => {
   describe('calculateSalarySacrifice', () => {
@@ -14,26 +13,35 @@ describe('UkSalarySacrificeCalculator', () => {
 
       const result = calculateSalarySacrifice(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.grossSalaryBefore).toBe(50000);
+      expect(result.grossSalaryAfter).toBe(45000);
+      expect(result.incomeTaxBefore).toBe(7486);
+      expect(result.incomeTaxAfter).toBe(6486);
+      expect(result.incomeTaxSaved).toBe(1000);
+      expect(result.niBeforeEmployee).toBeCloseTo(2994.4, 1);
+      expect(result.niAfterEmployee).toBeCloseTo(2594.4, 1);
+      expect(result.niSavedEmployee).toBe(400);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.grossSalary = 0;
 
       const result = calculateSalarySacrifice(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.grossSalaryBefore).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.grossSalary = 5000000;
 
       const result = calculateSalarySacrifice(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.grossSalaryBefore).toBe('number');
+      expect(isFinite(result.grossSalaryBefore)).toBe(true);
     });
 
     it('should produce consistent results', () => {

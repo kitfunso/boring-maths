@@ -1,11 +1,10 @@
 /**
- * SideHustle Calculator - Unit Tests
+ * SideHustleCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateSideHustle } from '../../src/components/calculators/SideHustle/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SideHustle/types';
-import type { SideHustleInputs } from '../../src/components/calculators/SideHustle/types';
 
 describe('SideHustleCalculator', () => {
   describe('calculateSideHustle', () => {
@@ -14,13 +13,19 @@ describe('SideHustleCalculator', () => {
 
       const result = calculateSideHustle(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.monthlyGrossProfit).toBe(1200);
+      expect(result.monthlyNetProfit).toBe(840);
+      expect(result.annualNetProfit).toBe(10080);
+      expect(result.hoursPerMonth).toBeCloseTo(43.3, 1);
+      expect(result.effectiveHourlyRate).toBeCloseTo(19.4, 1);
+      expect(result.opportunityCost).toBeCloseTo(1082.5, 1);
+      expect(result.netVsMainJob).toBeCloseTo(-242.5, 1);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.monthlyRevenue = 0;
 
       const result = calculateSideHustle(inputs);
 
@@ -29,7 +34,7 @@ describe('SideHustleCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.monthlyRevenue = 150000;
 
       const result = calculateSideHustle(inputs);
 

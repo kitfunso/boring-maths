@@ -1,11 +1,10 @@
 /**
- * SaaSMetrics Calculator - Unit Tests
+ * SaaSMetricsCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateSaaSMetrics } from '../../src/components/calculators/SaaSMetrics/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SaaSMetrics/types';
-import type { SaaSMetricsInputs } from '../../src/components/calculators/SaaSMetrics/types';
 
 describe('SaaSMetricsCalculator', () => {
   describe('calculateSaaSMetrics', () => {
@@ -14,13 +13,19 @@ describe('SaaSMetricsCalculator', () => {
 
       const result = calculateSaaSMetrics(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.mrr).toBe(9900);
+      expect(result.arr).toBe(118800);
+      expect(result.ltv).toBe(1485);
+      expect(result.ltvCacRatio).toBe(3);
+      expect(result.cacPaybackMonths).toBeCloseTo(6.7, 1);
+      expect(result.netRevenueRetention).toBe(95);
+      expect(result.quickRatio).toBe(2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.customers = 0;
 
       const result = calculateSaaSMetrics(inputs);
 
@@ -29,7 +34,7 @@ describe('SaaSMetricsCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.customers = 10000;
 
       const result = calculateSaaSMetrics(inputs);
 

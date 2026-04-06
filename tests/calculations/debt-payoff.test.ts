@@ -1,11 +1,10 @@
 /**
- * DebtPayoff Calculator - Unit Tests
+ * DebtPayoffCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateDebtPayoff } from '../../src/components/calculators/DebtPayoff/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/DebtPayoff/types';
-import type { DebtPayoffInputs } from '../../src/components/calculators/DebtPayoff/types';
 
 describe('DebtPayoffCalculator', () => {
   describe('calculateDebtPayoff', () => {
@@ -14,13 +13,18 @@ describe('DebtPayoffCalculator', () => {
 
       const result = calculateDebtPayoff(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalDebt).toBe(20000);
+      expect(result.totalMinimumPayments).toBe(475);
+      expect(result.monthlyPayment).toBe(675);
+      expect(result.interestSaved).toBeCloseTo(165.35, 2);
+      expect(result.timeDifference).toBe(0);
+      expect(result.selectedStrategy).toBe('avalanche');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.extraPayment = 0;
 
       const result = calculateDebtPayoff(inputs);
 
@@ -29,7 +33,7 @@ describe('DebtPayoffCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.extraPayment = 20000;
 
       const result = calculateDebtPayoff(inputs);
 

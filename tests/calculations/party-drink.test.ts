@@ -1,11 +1,10 @@
 /**
- * PartyDrink Calculator - Unit Tests
+ * PartyDrinkCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculatePartyDrinks } from '../../src/components/calculators/PartyDrinkCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PartyDrinkCalculator/types';
-import type { PartyDrinkInputs } from '../../src/components/calculators/PartyDrinkCalculator/types';
 
 describe('PartyDrinkCalculator', () => {
   describe('calculatePartyDrinks', () => {
@@ -14,13 +13,16 @@ describe('PartyDrinkCalculator', () => {
 
       const result = calculatePartyDrinks(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalServings).toBe(154);
+      expect(result.drinksPerPerson).toBeCloseTo(6.2, 1);
+      expect(result.totalCost).toBe(96);
+      expect(result.costPerPerson).toBeCloseTo(3.84, 2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.guestCount = 0;
 
       const result = calculatePartyDrinks(inputs);
 
@@ -29,7 +31,7 @@ describe('PartyDrinkCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.guestCount = 2500;
 
       const result = calculatePartyDrinks(inputs);
 

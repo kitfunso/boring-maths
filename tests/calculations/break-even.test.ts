@@ -1,11 +1,10 @@
 /**
- * BreakEven Calculator - Unit Tests
+ * BreakEvenCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateBreakEven } from '../../src/components/calculators/BreakEven/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BreakEven/types';
-import type { BreakEvenInputs } from '../../src/components/calculators/BreakEven/types';
 
 describe('BreakEvenCalculator', () => {
   describe('calculateBreakEven', () => {
@@ -14,13 +13,18 @@ describe('BreakEvenCalculator', () => {
 
       const result = calculateBreakEven(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.breakEvenUnits).toBe(334);
+      expect(result.breakEvenRevenue).toBe(10020);
+      expect(result.contributionMargin).toBe(15);
+      expect(result.contributionMarginRatio).toBe(50);
+      expect(result.unitsForTargetProfit).toBe(467);
+      expect(result.revenueForTargetProfit).toBe(14010);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.fixedCosts = 0;
 
       const result = calculateBreakEven(inputs);
 
@@ -29,7 +33,7 @@ describe('BreakEvenCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.fixedCosts = 500000;
 
       const result = calculateBreakEven(inputs);
 

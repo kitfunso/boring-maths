@@ -1,11 +1,10 @@
 /**
- * GraduationPartyPlanner Calculator - Unit Tests
+ * GraduationPartyPlannerCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateGraduationParty } from '../../src/components/calculators/GraduationPartyPlanner/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/GraduationPartyPlanner/types';
-import type { GraduationPartyInputs } from '../../src/components/calculators/GraduationPartyPlanner/types';
 
 describe('GraduationPartyPlannerCalculator', () => {
   describe('calculateGraduationParty', () => {
@@ -14,13 +13,19 @@ describe('GraduationPartyPlannerCalculator', () => {
 
       const result = calculateGraduationParty(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalFoodServings).toBe(250);
+      expect(result.totalDrinkServings).toBe(255);
+      expect(result.estimatedFoodCost).toBe(700);
+      expect(result.estimatedDrinkCost).toBe(200);
+      expect(result.estimatedSuppliesCost).toBe(100);
+      expect(result.totalEstimatedCost).toBe(1000);
+      expect(result.costPerGuest).toBe(20);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.guestCount = 0;
 
       const result = calculateGraduationParty(inputs);
 
@@ -29,7 +34,7 @@ describe('GraduationPartyPlannerCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.guestCount = 5000;
 
       const result = calculateGraduationParty(inputs);
 

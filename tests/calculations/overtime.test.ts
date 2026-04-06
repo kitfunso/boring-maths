@@ -1,11 +1,10 @@
 /**
- * Overtime Calculator - Unit Tests
+ * OvertimeCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateOvertime } from '../../src/components/calculators/OvertimeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/OvertimeCalculator/types';
-import type { OvertimeCalculatorInputs } from '../../src/components/calculators/OvertimeCalculator/types';
 
 describe('OvertimeCalculator', () => {
   describe('calculateOvertime', () => {
@@ -14,13 +13,19 @@ describe('OvertimeCalculator', () => {
 
       const result = calculateOvertime(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.weeklyGrossOT).toBe(375);
+      expect(result.weeklyNetOT).toBeCloseTo(245.06, 2);
+      expect(result.effectiveHourlyRate).toBeCloseTo(24.51, 2);
+      expect(result.annualGrossOT).toBe(19500);
+      expect(result.annualNetOT).toBe(12743);
+      expect(result.totalOTTax).toBe(6757);
+      expect(result.effectiveTaxRate).toBeCloseTo(34.7, 1);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.hourlyRate = 0;
 
       const result = calculateOvertime(inputs);
 
@@ -29,7 +34,7 @@ describe('OvertimeCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.overtimeMultiplier = 150;
 
       const result = calculateOvertime(inputs);
 

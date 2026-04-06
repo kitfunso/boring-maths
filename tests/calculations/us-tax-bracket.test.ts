@@ -1,11 +1,10 @@
 /**
- * UsTaxBracket Calculator - Unit Tests
+ * UsTaxBracketCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateUSTaxBracket } from '../../src/components/calculators/USTaxBracketCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/USTaxBracketCalculator/types';
-import type { USTaxBracketInputs } from '../../src/components/calculators/USTaxBracketCalculator/types';
 
 describe('UsTaxBracketCalculator', () => {
   describe('calculateUSTaxBracket', () => {
@@ -14,26 +13,35 @@ describe('UsTaxBracketCalculator', () => {
 
       const result = calculateUSTaxBracket(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.taxableIncome).toBe(60000);
+      expect(result.federalTax).toBe(8114);
+      expect(result.effectiveRate).toBeCloseTo(10.82, 2);
+      expect(result.marginalRate).toBe(22);
+      expect(result.standardDeduction).toBe(15000);
+      expect(result.deductionUsed).toBe(15000);
+      expect(result.afterTaxIncome).toBe(66886);
+      expect(result.marginalBracketLabel).toBe('22%');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.grossIncome = 0;
 
       const result = calculateUSTaxBracket(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.taxableIncome).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.grossIncome = 7500000;
 
       const result = calculateUSTaxBracket(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.taxableIncome).toBe('number');
+      expect(isFinite(result.taxableIncome)).toBe(true);
     });
 
     it('should produce consistent results', () => {

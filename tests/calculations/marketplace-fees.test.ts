@@ -1,11 +1,10 @@
 /**
- * MarketplaceFees Calculator - Unit Tests
+ * MarketplaceFeesCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMarketplaceFees } from '../../src/components/calculators/MarketplaceFees/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MarketplaceFees/types';
-import type { MarketplaceFeesInputs } from '../../src/components/calculators/MarketplaceFees/types';
 
 describe('MarketplaceFeesCalculator', () => {
   describe('calculateMarketplaceFees', () => {
@@ -14,13 +13,16 @@ describe('MarketplaceFeesCalculator', () => {
 
       const result = calculateMarketplaceFees(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.lowestFeePlatform).toBe('etsy');
+      expect(result.highestProfitPlatform).toBe('etsy');
+      expect(result.feeDifferenceRange).toBeCloseTo(1.61, 2);
+      expect(result.profitDifferenceRange).toBeCloseTo(1.61, 2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.itemPrice = 0;
 
       const result = calculateMarketplaceFees(inputs);
 
@@ -29,7 +31,7 @@ describe('MarketplaceFeesCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.itemPrice = 3500;
 
       const result = calculateMarketplaceFees(inputs);
 

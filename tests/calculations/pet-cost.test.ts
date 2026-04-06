@@ -1,11 +1,10 @@
 /**
- * PetCost Calculator - Unit Tests
+ * PetCostCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculatePetCost } from '../../src/components/calculators/PetCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PetCost/types';
-import type { PetCostInputs } from '../../src/components/calculators/PetCost/types';
 
 describe('PetCostCalculator', () => {
   describe('calculatePetCost', () => {
@@ -14,13 +13,19 @@ describe('PetCostCalculator', () => {
 
       const result = calculatePetCost(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.petType).toBe('dog');
+      expect(result.annualCost).toBe(2200);
+      expect(result.monthlyCost).toBe(183);
+      expect(result.lifetimeCost).toBe(19800);
+      expect(result.expectedLifespan).toBe(12);
+      expect(result.foodCost).toBe(600);
+      expect(result.vetCost).toBe(500);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.age = 0;
 
       const result = calculatePetCost(inputs);
 
@@ -29,7 +34,7 @@ describe('PetCostCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.groomingFrequency = 400;
 
       const result = calculatePetCost(inputs);
 

@@ -1,11 +1,10 @@
 /**
- * HolidayDinner Calculator - Unit Tests
+ * HolidayDinnerCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateHolidayDinner } from '../../src/components/calculators/HolidayDinnerCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HolidayDinnerCalculator/types';
-import type { HolidayDinnerInputs } from '../../src/components/calculators/HolidayDinnerCalculator/types';
 
 describe('HolidayDinnerCalculator', () => {
   describe('calculateHolidayDinner', () => {
@@ -14,26 +13,29 @@ describe('HolidayDinnerCalculator', () => {
 
       const result = calculateHolidayDinner(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.totalSideServings).toBe(80);
+      expect(result.vegetarianMains).toBe(0);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.guestCount = 0;
 
       const result = calculateHolidayDinner(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalSideServings).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.guestCount = 1000;
 
       const result = calculateHolidayDinner(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalSideServings).toBe('number');
+      expect(isFinite(result.totalSideServings)).toBe(true);
     });
 
     it('should produce consistent results', () => {

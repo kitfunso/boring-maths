@@ -1,11 +1,10 @@
 /**
- * Catering Calculator - Unit Tests
+ * CateringCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateCatering } from '../../src/components/calculators/CateringCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CateringCalculator/types';
-import type { CateringInputs } from '../../src/components/calculators/CateringCalculator/types';
 
 describe('CateringCalculator', () => {
   describe('calculateCatering', () => {
@@ -14,13 +13,19 @@ describe('CateringCalculator', () => {
 
       const result = calculateCatering(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.proteinPounds).toBe(19);
+      expect(result.starchPounds).toBe(11);
+      expect(result.vegetablePounds).toBe(12);
+      expect(result.saladPounds).toBe(8);
+      expect(result.breadUnits).toBe(87);
+      expect(result.dessertServings).toBe(58);
+      expect(result.appetizerServings).toBe(345);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.guestCount = 0;
 
       const result = calculateCatering(inputs);
 
@@ -29,7 +34,7 @@ describe('CateringCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.guestCount = 5000;
 
       const result = calculateCatering(inputs);
 

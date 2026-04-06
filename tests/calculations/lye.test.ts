@@ -1,11 +1,10 @@
 /**
- * Lye Calculator - Unit Tests
+ * LyeCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateLye } from '../../src/components/calculators/LyeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/LyeCalculator/types';
-import type { LyeCalculatorInputs } from '../../src/components/calculators/LyeCalculator/types';
 
 describe('LyeCalculator', () => {
   describe('calculateLye', () => {
@@ -14,26 +13,33 @@ describe('LyeCalculator', () => {
 
       const result = calculateLye(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.totalOilWeight).toBe(28);
+      expect(result.lyeAmount).toBeCloseTo(3.88, 2);
+      expect(result.waterAmount).toBeCloseTo(7.75, 2);
+      expect(result.totalBatchWeight).toBeCloseTo(39.63, 2);
+      expect(result.superfatAmount).toBeCloseTo(1.4, 1);
+      expect(result.lyeConcentration).toBeCloseTo(33.3, 1);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.superfatPercent = 0;
 
       const result = calculateLye(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalOilWeight).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.waterRatio = 200;
 
       const result = calculateLye(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalOilWeight).toBe('number');
+      expect(isFinite(result.totalOilWeight)).toBe(true);
     });
 
     it('should produce consistent results', () => {

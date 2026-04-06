@@ -1,11 +1,10 @@
 /**
- * EmergencyFund Calculator - Unit Tests
+ * EmergencyFundCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateEmergencyFund } from '../../src/components/calculators/EmergencyFund/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EmergencyFund/types';
-import type { EmergencyFundInputs } from '../../src/components/calculators/EmergencyFund/types';
 
 describe('EmergencyFundCalculator', () => {
   describe('calculateEmergencyFund', () => {
@@ -14,13 +13,17 @@ describe('EmergencyFundCalculator', () => {
 
       const result = calculateEmergencyFund(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.recommendedMonths).toBe(6);
+      expect(result.targetAmount).toBe(21000);
+      expect(result.amountNeeded).toBe(13000);
+      expect(result.percentComplete).toBeCloseTo(38.1, 1);
+      expect(result.monthsToGoal).toBe(25);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.monthlyExpenses = 0;
 
       const result = calculateEmergencyFund(inputs);
 
@@ -29,7 +32,7 @@ describe('EmergencyFundCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.monthlyExpenses = 350000;
 
       const result = calculateEmergencyFund(inputs);
 

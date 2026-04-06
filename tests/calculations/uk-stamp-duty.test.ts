@@ -1,11 +1,10 @@
 /**
- * UkStampDuty Calculator - Unit Tests
+ * UkStampDutyCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateStampDuty } from '../../src/components/calculators/UKStampDutyCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKStampDutyCalculator/types';
-import type { UKStampDutyInputs } from '../../src/components/calculators/UKStampDutyCalculator/types';
 
 describe('UkStampDutyCalculator', () => {
   describe('calculateStampDuty', () => {
@@ -14,26 +13,33 @@ describe('UkStampDutyCalculator', () => {
 
       const result = calculateStampDuty(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.totalTax).toBe(0);
+      expect(result.effectiveRate).toBe(0);
+      expect(result.additionalPropertySurcharge).toBe(0);
+      expect(result.nonResidentSurcharge).toBe(0);
+      expect(result.firstTimeBuyerSaving).toBe(5000);
+      expect(result.taxName).toBe('Stamp Duty (SDLT)');
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.propertyPrice = 0;
 
       const result = calculateStampDuty(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalTax).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.propertyPrice = 35000000;
 
       const result = calculateStampDuty(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.totalTax).toBe('number');
+      expect(isFinite(result.totalTax)).toBe(true);
     });
 
     it('should produce consistent results', () => {

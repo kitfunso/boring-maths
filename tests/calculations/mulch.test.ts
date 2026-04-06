@@ -1,11 +1,10 @@
 /**
- * Mulch Calculator - Unit Tests
+ * MulchCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMulch } from '../../src/components/calculators/MulchCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MulchCalculator/types';
-import type { MulchCalculatorInputs } from '../../src/components/calculators/MulchCalculator/types';
 
 describe('MulchCalculator', () => {
   describe('calculateMulch', () => {
@@ -14,13 +13,19 @@ describe('MulchCalculator', () => {
 
       const result = calculateMulch(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.areaSqFt).toBe(40);
+      expect(result.volumeCuFt).toBe(10);
+      expect(result.volumeCuYards).toBeCloseTo(0.37, 2);
+      expect(result.bags2CuFt).toBe(5);
+      expect(result.bags3CuFt).toBe(4);
+      expect(result.estimatedWeight).toBe(180);
+      expect(result.bulkCost).toBeCloseTo(12.96, 2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.length = 0;
 
       const result = calculateMulch(inputs);
 
@@ -29,7 +34,7 @@ describe('MulchCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.length = 1000;
 
       const result = calculateMulch(inputs);
 

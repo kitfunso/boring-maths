@@ -8,36 +8,60 @@ import type { FragranceInputs } from '../../src/components/calculators/Fragrance
 
 describe('FragranceCalculator', () => {
   describe('calculateFragrance', () => {
-    it('should calculate with default inputs', () => {
-      // TODO: Create test inputs
-      const inputs: FragranceInputs = {} as FragranceInputs;
+    it('should calculate fragrance amount for standard candle', () => {
+      const inputs: FragranceInputs = {
+        waxWeight: 8,
+        weightUnit: 'ounces',
+        fragranceLoad: 10,
+        waxType: 'soy-464',
+        numberOfCandles: 1,
+      };
 
       const result = calculateFragrance(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      // 10% of 8oz = 0.8oz fragrance
+      expect(result.fragranceAmount).toBeCloseTo(0.8, 1);
+      expect(result.totalWeight).toBeCloseTo(8.8, 1);
+      expect(result.isWithinLimit).toBe(true);
     });
 
-    it('should handle edge case: zero values', () => {
-      const inputs: FragranceInputs = {} as FragranceInputs;
-      // TODO: Set specific fields to 0 and test behavior
+    it('should detect exceeding max fragrance limit', () => {
+      const inputs: FragranceInputs = {
+        waxWeight: 8,
+        weightUnit: 'ounces',
+        fragranceLoad: 15,
+        waxType: 'soy-464',
+        numberOfCandles: 1,
+      };
 
       const result = calculateFragrance(inputs);
 
-      expect(result).toBeDefined();
+      // Soy 464 max is 10%, so 15% should exceed
+      expect(result.isWithinLimit).toBe(false);
     });
 
-    it('should handle large values', () => {
-      const inputs: FragranceInputs = {} as FragranceInputs;
-      // TODO: Set large values and verify calculations
+    it('should scale for multiple candles', () => {
+      const inputs: FragranceInputs = {
+        waxWeight: 8,
+        weightUnit: 'ounces',
+        fragranceLoad: 8,
+        waxType: 'soy-464',
+        numberOfCandles: 10,
+      };
 
       const result = calculateFragrance(inputs);
 
-      expect(result).toBeDefined();
+      expect(result.fragranceAmount).toBeGreaterThan(result.fragrancePerCandle);
     });
 
     it('should produce consistent results', () => {
-      const inputs: FragranceInputs = {} as FragranceInputs;
+      const inputs: FragranceInputs = {
+        waxWeight: 8,
+        weightUnit: 'ounces',
+        fragranceLoad: 10,
+        waxType: 'soy-464',
+        numberOfCandles: 1,
+      };
 
       const result1 = calculateFragrance(inputs);
       const result2 = calculateFragrance(inputs);

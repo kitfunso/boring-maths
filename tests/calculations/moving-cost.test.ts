@@ -1,11 +1,10 @@
 /**
- * MovingCost Calculator - Unit Tests
+ * MovingCostCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMovingCost } from '../../src/components/calculators/MovingCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MovingCost/types';
-import type { MovingCostInputs } from '../../src/components/calculators/MovingCost/types';
 
 describe('MovingCostCalculator', () => {
   describe('calculateMovingCost', () => {
@@ -14,13 +13,19 @@ describe('MovingCostCalculator', () => {
 
       const result = calculateMovingCost(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.totalCost).toBe(1420);
+      expect(result.lowEstimate).toBe(1136);
+      expect(result.highEstimate).toBe(1704);
+      expect(result.movingServiceCost).toBe(1000);
+      expect(result.packingCost).toBe(0);
+      expect(result.suppliesCost).toBe(90);
+      expect(result.storageCost).toBe(0);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.distance = 0;
 
       const result = calculateMovingCost(inputs);
 
@@ -29,7 +34,7 @@ describe('MovingCostCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.distance = 2000;
 
       const result = calculateMovingCost(inputs);
 

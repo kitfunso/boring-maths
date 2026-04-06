@@ -1,11 +1,10 @@
 /**
- * BuyVsRent Calculator - Unit Tests
+ * BuyVsRentCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateBuyVsRent } from '../../src/components/calculators/BuyVsRent/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BuyVsRent/types';
-import type { BuyVsRentInputs } from '../../src/components/calculators/BuyVsRent/types';
 
 describe('BuyVsRentCalculator', () => {
   describe('calculateBuyVsRent', () => {
@@ -14,13 +13,19 @@ describe('BuyVsRentCalculator', () => {
 
       const result = calculateBuyVsRent(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.downPayment).toBe(80000);
+      expect(result.loanAmount).toBe(320000);
+      expect(result.monthlyMortgage).toBe(2023);
+      expect(result.monthlyOwnershipCost).toBe(2881);
+      expect(result.closingCosts).toBe(12000);
+      expect(result.initialRent).toBe(2000);
+      expect(result.monthlyRentCost).toBe(2017);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.homePrice = 0;
 
       const result = calculateBuyVsRent(inputs);
 
@@ -29,7 +34,7 @@ describe('BuyVsRentCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.homePrice = 40000000;
 
       const result = calculateBuyVsRent(inputs);
 

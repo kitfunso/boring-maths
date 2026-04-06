@@ -1,11 +1,10 @@
 /**
- * Mortgage Calculator - Unit Tests
+ * MortgageCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateMortgage } from '../../src/components/calculators/MortgageCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MortgageCalculator/types';
-import type { MortgageInputs } from '../../src/components/calculators/MortgageCalculator/types';
 
 describe('MortgageCalculator', () => {
   describe('calculateMortgage', () => {
@@ -14,13 +13,19 @@ describe('MortgageCalculator', () => {
 
       const result = calculateMortgage(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.loanAmount).toBe(280000);
+      expect(result.monthlyPI).toBeCloseTo(1769.79, 2);
+      expect(result.monthlyTax).toBe(350);
+      expect(result.monthlyInsurance).toBe(125);
+      expect(result.monthlyHOA).toBe(0);
+      expect(result.monthlyTotal).toBeCloseTo(2244.79, 2);
+      expect(result.totalPayments).toBeCloseTo(637124.57, 2);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.homePrice = 0;
 
       const result = calculateMortgage(inputs);
 
@@ -29,7 +34,7 @@ describe('MortgageCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.homePrice = 35000000;
 
       const result = calculateMortgage(inputs);
 

@@ -1,11 +1,10 @@
 /**
- * UsCapitalGainsTax Calculator - Unit Tests
+ * UsCapitalGainsTaxCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateCapitalGainsTax } from '../../src/components/calculators/USCapitalGainsTaxCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/USCapitalGainsTaxCalculator/types';
-import type { USCapitalGainsInputs } from '../../src/components/calculators/USCapitalGainsTaxCalculator/types';
 
 describe('UsCapitalGainsTaxCalculator', () => {
   describe('calculateCapitalGainsTax', () => {
@@ -14,26 +13,35 @@ describe('UsCapitalGainsTaxCalculator', () => {
 
       const result = calculateCapitalGainsTax(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.capitalGain).toBe(5000);
+      expect(result.isLongTerm).toBe(false);
+      expect(result.holdingPeriodLabel).toBe('8 months (Short-term)');
+      expect(result.taxRate).toBe(22);
+      expect(result.capitalGainsTax).toBe(1100);
+      expect(result.niitApplies).toBe(false);
+      expect(result.niitAmount).toBe(0);
+      expect(result.totalTax).toBe(1100);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.purchasePrice = 0;
 
       const result = calculateCapitalGainsTax(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.capitalGain).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.purchasePrice = 1000000;
 
       const result = calculateCapitalGainsTax(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.capitalGain).toBe('number');
+      expect(isFinite(result.capitalGain)).toBe(true);
     });
 
     it('should produce consistent results', () => {

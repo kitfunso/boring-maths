@@ -1,11 +1,10 @@
 /**
- * HourlyToSalary Calculator - Unit Tests
+ * HourlyToSalaryCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateHourlyToSalary } from '../../src/components/calculators/HourlyToSalary/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HourlyToSalary/types';
-import type { HourlyToSalaryInputs } from '../../src/components/calculators/HourlyToSalary/types';
 
 describe('HourlyToSalaryCalculator', () => {
   describe('calculateHourlyToSalary', () => {
@@ -14,13 +13,19 @@ describe('HourlyToSalaryCalculator', () => {
 
       const result = calculateHourlyToSalary(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.grossAnnual).toBe(74880);
+      expect(result.netAnnual).toBe(52416);
+      expect(result.grossMonthly).toBe(6240);
+      expect(result.netMonthly).toBe(4368);
+      expect(result.grossBiWeekly).toBe(2880);
+      expect(result.netBiWeekly).toBe(2016);
+      expect(result.grossWeekly).toBe(1440);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.hourlyRate = 0;
 
       const result = calculateHourlyToSalary(inputs);
 
@@ -29,7 +34,7 @@ describe('HourlyToSalaryCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.hoursPerWeek = 4000;
 
       const result = calculateHourlyToSalary(inputs);
 

@@ -1,11 +1,10 @@
 /**
- * GoFullTime Calculator - Unit Tests
+ * GoFullTimeCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateGoFullTime } from '../../src/components/calculators/GoFullTimeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/GoFullTimeCalculator/types';
-import type { GoFullTimeInputs } from '../../src/components/calculators/GoFullTimeCalculator/types';
 
 describe('GoFullTimeCalculator', () => {
   describe('calculateGoFullTime', () => {
@@ -14,13 +13,19 @@ describe('GoFullTimeCalculator', () => {
 
       const result = calculateGoFullTime(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.currency).toBe('USD');
+      expect(result.monthlySalary).toBe(6250);
+      expect(result.monthlyTotalCompensation).toBe(7050);
+      expect(result.currentRunwayMonths).toBe(10);
+      expect(result.breakEvenSideIncome).toBe(4000);
+      expect(result.incomeGapToSalary).toBe(5550);
+      expect(result.incomeGapToExpenses).toBe(2500);
+      expect(result.monthsToCrossover).toBe(11);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.annualSalary = 0;
 
       const result = calculateGoFullTime(inputs);
 
@@ -29,7 +34,7 @@ describe('GoFullTimeCalculator', () => {
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.annualSalary = 7500000;
 
       const result = calculateGoFullTime(inputs);
 

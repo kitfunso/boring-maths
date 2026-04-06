@@ -1,11 +1,10 @@
 /**
- * Hsa Calculator - Unit Tests
+ * HsaCalculator Calculator - Unit Tests
  */
 
 import { describe, it, expect } from 'vitest';
 import { calculateHSA } from '../../src/components/calculators/HSACalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HSACalculator/types';
-import type { HSAInputs } from '../../src/components/calculators/HSACalculator/types';
 
 describe('HsaCalculator', () => {
   describe('calculateHSA', () => {
@@ -14,26 +13,35 @@ describe('HsaCalculator', () => {
 
       const result = calculateHSA(inputs);
 
-      expect(result).toBeDefined();
-      // TODO: Add specific assertions for result properties
+      expect(result.maxContribution).toBe(4300);
+      expect(result.catchUpAmount).toBe(0);
+      expect(result.totalLimit).toBe(4300);
+      expect(result.totalContribution).toBe(3500);
+      expect(result.overContribution).toBe(0);
+      expect(result.remainingRoom).toBe(800);
+      expect(result.federalTaxSavings).toBe(660);
+      expect(result.stateTaxSavings).toBe(150);
     });
 
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set specific fields to 0 and test behavior
+      inputs.annualContribution = 0;
 
       const result = calculateHSA(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.maxContribution).toBe('number');
     });
 
     it('should handle large values', () => {
       const inputs = getDefaultInputs();
-      // TODO: Set large values and verify calculations
+      inputs.annualContribution = 300000;
 
       const result = calculateHSA(inputs);
 
       expect(result).toBeDefined();
+      expect(typeof result.maxContribution).toBe('number');
+      expect(isFinite(result.maxContribution)).toBe(true);
     });
 
     it('should produce consistent results', () => {
