@@ -1515,6 +1515,87 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'Date Difference Calculator',
+    description: 'Calculate the exact number of days, weeks, months, and years between two dates.',
+    href: '/calculators/date-difference-calculator',
+    icon: 'calendar',
+    color: 'blue',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Fuel Cost Calculator',
+    description:
+      'Estimate the fuel cost of any journey from distance, efficiency, and price per litre.',
+    href: '/calculators/fuel-cost-calculator',
+    icon: 'fire',
+    color: 'green',
+    category: 'Automotive',
+    mostUsed: false,
+  },
+  {
+    title: 'Margin Calculator',
+    description:
+      'Calculate profit margin, markup percentage, and gross profit with multiple input modes.',
+    href: '/calculators/margin-calculator',
+    icon: 'percent',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Pace Calculator',
+    description:
+      'Calculate running or walking pace, finish time, or distance with split times for race distances.',
+    href: '/calculators/pace-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'ROI Calculator',
+    description:
+      'Calculate return on investment, annualised ROI (CAGR), and total gain or loss instantly.',
+    href: '/calculators/roi-calculator',
+    icon: 'chart',
+    color: 'amber',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Square Footage Calculator',
+    description:
+      'Calculate area for rectangles, circles, triangles, and L-shaped rooms with cost estimator.',
+    href: '/calculators/square-footage-calculator',
+    icon: 'home',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Employer Cost Calculator',
+    description:
+      'Calculate the true total cost of employing someone: salary plus employer NIC, pension, and levy.',
+    href: '/calculators/uk-employer-cost-calculator',
+    icon: 'briefcase',
+    color: 'blue',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Tax Calculator',
+    description:
+      'Calculate take-home pay after income tax, National Insurance, student loans, and pension.',
+    href: '/calculators/uk-tax-calculator',
+    icon: 'calculator',
+    color: 'blue',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------
