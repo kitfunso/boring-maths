@@ -1319,6 +1319,15 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Business',
     mostUsed: false,
   },
+  {
+    title: 'Coffee Spend Calculator',
+    description: 'Calculate how much your daily coffee habit costs per year and what invested savings could grow to.',
+    href: '/calculators/coffee-spend-calculator',
+    icon: 'fire',
+    color: 'amber',
+    category: 'Everyday',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------
