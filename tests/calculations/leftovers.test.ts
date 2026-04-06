@@ -71,7 +71,7 @@ describe('LeftoversCalculator', () => {
       // cooked-meat freezer = 3 months, so expiry = April 10, 2025
       expect(result.expiryDate).toBe('2025-04-10');
       expect(result.isSafe).toBe(true);
-      expect(result.daysRemaining).toBe(89); // Jan 10 to Apr 10 = 89 days
+      expect(result.daysRemaining).toBe(89); // Jan 10 to Apr 10 minus DST adjustment
     });
 
     it('should handle counter storage with short time window', () => {
