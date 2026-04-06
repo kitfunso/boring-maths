@@ -3,8 +3,6 @@
  *
  * Plan and estimate vacation expenses.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateVacationBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +34,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const DESTINATION_OPTIONS = [
   { value: 'domestic', label: 'Domestic' },
   { value: 'international_cheap', label: 'International (Budget)' },
@@ -52,23 +49,14 @@ const TRAVEL_STYLE_OPTIONS = [
 ];
 
 export default function VacationBudget() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Vacation Budget Planner');
-
-  const [inputs, setInputs] = useState<VacationBudgetInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<VacationBudgetInputs, ReturnType<typeof calculateVacationBudget>>({
+    name: 'Vacation Budget Planner',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateVacationBudget,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateVacationBudget(inputs), [inputs]);
-
-  const updateInput = <K extends keyof VacationBudgetInputs>(
-    field: K,
-    value: VacationBudgetInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

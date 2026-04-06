@@ -3,8 +3,6 @@
  *
  * Plan and estimate birthday party expenses for kids.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateBirthdayPartyBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -38,8 +36,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const VENUE_OPTIONS = [
   { value: 'home', label: 'Home' },
   { value: 'park', label: 'Park' },
@@ -54,22 +51,14 @@ const STYLE_OPTIONS = [
 ];
 
 export default function BirthdayPartyBudget() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Birthday Party Budget');
-
-  const [inputs, setInputs] = useState<BirthdayPartyInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<BirthdayPartyInputs, ReturnType<typeof calculateBirthdayPartyBudget>>({
+    name: 'Birthday Party Budget',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateBirthdayPartyBudget,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateBirthdayPartyBudget(inputs), [inputs]);
-
-  const updateInput = <K extends keyof BirthdayPartyInputs>(
-    field: K,
-    value: BirthdayPartyInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

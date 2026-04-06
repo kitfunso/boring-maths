@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateCouncilTax, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -11,21 +9,13 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Select, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function CouncilTaxCalculator() {
-  useCalculatorTracking('Council Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<CouncilTaxInputs>(
-    'calc-council-tax-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateCouncilTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof CouncilTaxInputs>(field: K, value: CouncilTaxInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function CouncilTaxCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<CouncilTaxInputs, ReturnType<typeof calculateCouncilTax>>({
+    name: 'Council Tax Calculator',
+    slug: 'calc-council-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateCouncilTax,
+  });
 
   const bandOptions = Object.entries(PROPERTY_BAND_LABELS).map(([value, label]) => ({
     value,

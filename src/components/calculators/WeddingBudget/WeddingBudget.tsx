@@ -3,8 +3,6 @@
  *
  * Plan and allocate your wedding budget across categories.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateWeddingBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -33,8 +31,7 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const PRIORITY_LABELS: Record<Priority, string> = {
   low: 'Save Here',
   medium: 'Standard',
@@ -50,23 +47,14 @@ const PRIORITY_COLORS: Record<Priority, string> = {
 };
 
 export default function WeddingBudget() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Wedding Budget Calculator');
-
-  const [inputs, setInputs] = useState<WeddingBudgetInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<WeddingBudgetInputs, ReturnType<typeof calculateWeddingBudget>>({
+    name: 'Wedding Budget Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateWeddingBudget,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateWeddingBudget(inputs), [inputs]);
-
-  const updateInput = <K extends keyof WeddingBudgetInputs>(
-    field: K,
-    value: WeddingBudgetInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const updatePriority = (category: keyof CategoryPriority, value: Priority) => {
     setInputs((prev) => ({

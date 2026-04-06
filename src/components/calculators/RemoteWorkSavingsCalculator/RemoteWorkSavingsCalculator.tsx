@@ -4,8 +4,6 @@
  * Interactive calculator showing how much you save by working remotely.
  * Includes transportation, food, clothing, time value, and CO2 reduction.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateRemoteWorkSavings, formatCurrency, formatCurrencyDecimal } from './calculations';
 import { getDefaultInputs, type RemoteWorkSavingsInputs, type CommuteType } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -25,30 +23,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RemoteWorkSavingsCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Remote Work Savings Calculator');
-
-  const [inputs, setInputs] = useState<RemoteWorkSavingsInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<RemoteWorkSavingsInputs, ReturnType<typeof calculateRemoteWorkSavings>>({
+    name: 'Remote Work Savings Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateRemoteWorkSavings,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result = useMemo(() => {
-    return calculateRemoteWorkSavings(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof RemoteWorkSavingsInputs>(
-    field: K,
-    value: RemoteWorkSavingsInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

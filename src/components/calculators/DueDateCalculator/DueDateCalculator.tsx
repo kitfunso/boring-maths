@@ -3,9 +3,6 @@
  *
  * Calculate pregnancy due date using multiple methods.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateDueDate } from './calculations';
 import { getDefaultInputs, type DueDateInputs, type CalculationMethod } from './types';
 import {
@@ -21,24 +18,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function DueDateCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Due Date Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<DueDateInputs>(
-    'calc-due-date-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => {
-    return calculateDueDate(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof DueDateInputs>(field: K, value: DueDateInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function DueDateCalculator() {
+  const { inputs, result, updateInput } = useCalculatorBase<DueDateInputs, ReturnType<typeof calculateDueDate>>({
+    name: 'Due Date Calculator',
+    slug: 'calc-due-date-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateDueDate,
+  });
 
   const methodOptions = [
     { value: 'lmp' as const, label: 'Last Period' },

@@ -3,8 +3,6 @@
  *
  * Calculate food quantities for catered events.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateCatering } from './calculations';
 import {
   getDefaultInputs,
@@ -30,8 +28,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const MEAL_TYPE_OPTIONS = [
   { value: 'appetizers_only', label: 'Apps Only' },
   { value: 'light_meal', label: 'Light' },
@@ -54,18 +51,12 @@ const EVENT_TIME_OPTIONS = [
 ];
 
 export default function CateringCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Catering Calculator');
-
-  const [inputs, setInputs] = useState<CateringInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
-
-  const result = useMemo(() => calculateCatering(inputs), [inputs]);
-
-  const updateInput = <K extends keyof CateringInputs>(field: K, value: CateringInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<CateringInputs, ReturnType<typeof calculateCatering>>({
+    name: 'Catering Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateCatering,
+  });
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

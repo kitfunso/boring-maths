@@ -4,8 +4,6 @@
  * Calculate Reynolds number to determine flow regime (laminar/turbulent).
  * Essential for chemical engineers working with fluid flow systems.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateReynolds, formatNumber, formatScientific } from './calculations';
 import {
   getDefaultInputs,
@@ -26,21 +24,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ReynoldsNumberCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Reynolds Number Calculator');
-
-  const [inputs, setInputs] = useState<ReynoldsInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => {
-    return calculateReynolds(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof ReynoldsInputs>(field: K, value: ReynoldsInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<ReynoldsInputs, ReturnType<typeof calculateReynolds>>({
+    name: 'Reynolds Number Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateReynolds,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;

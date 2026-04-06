@@ -6,7 +6,6 @@
 
 import type { ChangeEvent } from 'react';
 import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSleepTimes, calculateNapTimes } from './calculations';
 import { getDefaultInputs, type SleepInputs, type CalculationMode, type AgeGroup } from './types';
 import {
@@ -23,18 +22,14 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function SleepCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Sleep Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<SleepInputs>('calc-sleep-inputs', getDefaultInputs);
-
-  const result = useMemo(() => {
-    return calculateSleepTimes(inputs);
-  }, [inputs]);
+  const { inputs, result, updateInput } = useCalculatorBase<SleepInputs, ReturnType<typeof calculateSleepTimes>>({
+    name: 'Sleep Calculator',
+    slug: 'calc-sleep-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateSleepTimes,
+  });
 
   const napResults = useMemo(() => {
     if (inputs.mode === 'napTime') {
@@ -45,10 +40,6 @@ export default function SleepCalculator() {
     }
     return [];
   }, [inputs.mode]);
-
-  const updateInput = <K extends keyof SleepInputs>(field: K, value: SleepInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const modeOptions = [
     { value: 'wakeTime' as const, label: 'I need to wake at...' },

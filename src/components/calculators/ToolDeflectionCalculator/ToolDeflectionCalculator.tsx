@@ -2,16 +2,16 @@
  * Tool Deflection Calculator Component
  * Calculate end mill deflection to prevent tool breakage
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { ToolDeflectionInputs } from './types';
 import { TOOL_MATERIALS, FLUTE_OPTIONS, MATERIAL_FACTORS, TOOL_PRESETS } from './types';
 import { calculateToolDeflection, formatDeflection } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function ToolDeflectionCalculator() {
-  const [inputs, setInputs] = useState<ToolDeflectionInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<ToolDeflectionInputs, ReturnType<typeof calculateToolDeflection>>({
+    defaults: {
     toolDiameter: 0.25,
     stickout: 1.0,
     lengthUnit: 'inches',
@@ -24,9 +24,9 @@ export function ToolDeflectionCalculator() {
     widthOfCut: 0.125,
     feedRate: 10,
     materialFactor: 1.0,
+  },
+    compute: calculateToolDeflection,
   });
-
-  const results = useMemo(() => calculateToolDeflection(inputs), [inputs]);
 
   const statusColors = {
     safe: 'text-green-400 bg-green-900/20 ring-green-500/30',

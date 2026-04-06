@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSalarySacrifice, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -10,8 +8,7 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const sacrificeTypeOptions = Object.entries(SACRIFICE_TYPES).map(([key, type]) => ({
   value: key as SacrificeType,
   label: type.name,
@@ -23,22 +20,12 @@ const taxRegionOptions = [
 ];
 
 export default function UKSalarySacrificeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Salary Sacrifice Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKSalarySacrificeInputs>(
-    'calc-uk-salary-sacrifice-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateSalarySacrifice(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKSalarySacrificeInputs>(
-    field: K,
-    value: UKSalarySacrificeInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKSalarySacrificeInputs, ReturnType<typeof calculateSalarySacrifice>>({
+    name: 'UK Salary Sacrifice Calculator',
+    slug: 'calc-uk-salary-sacrifice-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateSalarySacrifice,
+  });
 
   const currentType = SACRIFICE_TYPES[inputs.sacrificeType];
 

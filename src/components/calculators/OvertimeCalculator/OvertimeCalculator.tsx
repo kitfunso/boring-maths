@@ -4,8 +4,6 @@
  * Calculate if overtime is worth it after taxes with
  * diminishing returns visualization.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateOvertime, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -30,30 +28,16 @@ import {
   Select,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function OvertimeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Is Overtime Worth It?');
-
-  const [inputs, setInputs] = useState<OvertimeCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<OvertimeCalculatorInputs, OvertimeCalculatorResult>({
+    name: 'Is Overtime Worth It?',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateOvertime,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: OvertimeCalculatorResult = useMemo(() => {
-    return calculateOvertime(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof OvertimeCalculatorInputs>(
-    field: K,
-    value: OvertimeCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

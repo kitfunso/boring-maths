@@ -2,24 +2,24 @@
  * Fragrance Load Calculator Component
  * Calculate fragrance oil amounts for candle making
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { FragranceInputs } from './types';
 import { WAX_TYPES, CONTAINER_SIZES } from './types';
 import { calculateFragrance } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function FragranceCalculator() {
-  const [inputs, setInputs] = useState<FragranceInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<FragranceInputs, ReturnType<typeof calculateFragrance>>({
+    defaults: {
     waxWeight: 16,
     weightUnit: 'ounces',
     fragranceLoad: 8,
     waxType: 'soy-464',
     numberOfCandles: 2,
+  },
+    compute: calculateFragrance,
   });
-
-  const results = useMemo(() => calculateFragrance(inputs), [inputs]);
 
   const selectedWax = WAX_TYPES.find((w) => w.value === inputs.waxType);
 

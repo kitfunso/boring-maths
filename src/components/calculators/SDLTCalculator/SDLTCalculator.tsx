@@ -5,9 +5,6 @@
  * Includes first-time buyer relief, additional property surcharge,
  * and non-resident surcharge.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSDLT, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -20,25 +17,14 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function SDLTCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('SDLT Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<SDLTCalculatorInputs>(
-    'calc-sdlt-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateSDLT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof SDLTCalculatorInputs>(
-    field: K,
-    value: SDLTCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<SDLTCalculatorInputs, ReturnType<typeof calculateSDLT>>({
+    name: 'SDLT Calculator',
+    slug: 'calc-sdlt-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateSDLT,
+  });
 
   const showFTBWarning =
     inputs.buyerType === 'first-time' && inputs.propertyPrice > FIRST_TIME_BUYER_THRESHOLD;

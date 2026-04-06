@@ -2,7 +2,7 @@
  * Inflation Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import {
   calculateInflation,
   formatCurrency,
@@ -24,20 +24,15 @@ import {
   Checkbox,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function InflationCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Inflation Calculator');
+  const { inputs, result, updateInput } = useCalculatorState<InflationInputs, ReturnType<typeof calculateInflation>>({
+    name: 'Inflation Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateInflation,
+  });
 
-  const [inputs, setInputs] = useState<InflationInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateInflation(inputs), [inputs]);
   const decadeAverages = useMemo(() => getDecadeAverages(), []);
-
-  const updateInput = <K extends keyof InflationInputs>(field: K, value: InflationInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const isForward = inputs.endYear >= inputs.startYear;
 

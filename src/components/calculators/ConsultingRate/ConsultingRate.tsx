@@ -3,8 +3,6 @@
  *
  * Calculate consulting rates based on desired income.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateConsultingRate } from './calculations';
 import { getDefaultInputs, type ConsultingRateInputs } from './types';
 import {
@@ -28,25 +26,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ConsultingRate() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Consulting Rate Calculator');
-
-  const [inputs, setInputs] = useState<ConsultingRateInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<ConsultingRateInputs, ReturnType<typeof calculateConsultingRate>>({
+    name: 'Consulting Rate Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateConsultingRate,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateConsultingRate(inputs), [inputs]);
-
-  const updateInput = <K extends keyof ConsultingRateInputs>(
-    field: K,
-    value: ConsultingRateInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

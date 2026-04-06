@@ -4,7 +4,7 @@
  * Compare the true costs of owning an electric vehicle versus a gas vehicle.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { calculateEVvsGas } from './calculations';
 import { getDefaultInputs, type EVvsGasInputs } from './types';
 import {
@@ -29,14 +29,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EVvsGasCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('EV vs Gas Calculator');
-
-  const [inputs, setInputs] = useState<EVvsGasInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<EVvsGasInputs, ReturnType<typeof calculateEVvsGas>>({
+    name: 'EV vs Gas Calculator',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculateEVvsGas,
+  });
 
   // Collapsible sections state
   const [expandedSections, setExpandedSections] = useState({
@@ -47,11 +46,6 @@ export default function EVvsGasCalculator() {
   });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateEVvsGas(inputs), [inputs]);
-
-  const updateInput = <K extends keyof EVvsGasInputs>(field: K, value: EVvsGasInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

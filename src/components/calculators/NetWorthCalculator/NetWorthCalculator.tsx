@@ -1,8 +1,6 @@
 /**
  * Net Worth Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateNetWorth, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -26,15 +24,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function NetWorthCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Net Worth Calculator');
-
-  const [inputs, setInputs] = useState<NetWorthInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateNetWorth(inputs), [inputs]);
+  const { inputs, result, setInputs } = useCalculatorState<NetWorthInputs, ReturnType<typeof calculateNetWorth>>({
+    name: 'Net Worth Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateNetWorth,
+  });
 
   const addAsset = () => {
     const newAsset: Asset = {

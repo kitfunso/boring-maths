@@ -4,8 +4,6 @@
  * Calculate pipe diameter, flow velocity, or volumetric flow rate.
  * Includes velocity recommendations for different fluid types.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePipeFlow, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -26,21 +24,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PipeFlowCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Pipe Flow Calculator');
-
-  const [inputs, setInputs] = useState<PipeFlowInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => {
-    return calculatePipeFlow(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof PipeFlowInputs>(field: K, value: PipeFlowInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PipeFlowInputs, ReturnType<typeof calculatePipeFlow>>({
+    name: 'Pipe Flow Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculatePipeFlow,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;

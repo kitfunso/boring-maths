@@ -4,7 +4,7 @@
  * Convert between various units of measurement.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { convert, getAllConversions } from './calculations';
 import {
   getDefaultInputs,
@@ -25,26 +25,18 @@ import {
   Divider,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function UnitConverter() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Unit Converter');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<UnitConverterInputs, ReturnType<typeof convert>>({
+    name: 'Unit Converter',
+    defaults: () => getDefaultInputs(),
+    compute: convert,
+  });
 
-  const [inputs, setInputs] = useState<UnitConverterInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => convert(inputs), [inputs]);
   const allConversions = useMemo(
     () => getAllConversions(inputs.value, inputs.fromUnit, inputs.category),
     [inputs.value, inputs.fromUnit, inputs.category]
   );
-
-  const updateInput = <K extends keyof UnitConverterInputs>(
-    field: K,
-    value: UnitConverterInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCategoryChange = (category: UnitCategory) => {
     const units = UNITS[category];

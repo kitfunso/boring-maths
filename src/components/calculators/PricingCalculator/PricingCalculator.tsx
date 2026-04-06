@@ -3,8 +3,6 @@
  *
  * Calculate optimal product pricing using multiple strategies.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePricing } from './calculations';
 import {
   getDefaultInputs,
@@ -34,20 +32,15 @@ import {
   ButtonGroup,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PricingCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Pricing Calculator');
-
-  const [inputs, setInputs] = useState<PricingInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PricingInputs, ReturnType<typeof calculatePricing>>({
+    name: 'Pricing Calculator',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculatePricing,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculatePricing(inputs), [inputs]);
-
-  const updateInput = <K extends keyof PricingInputs>(field: K, value: PricingInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

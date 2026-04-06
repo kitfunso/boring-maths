@@ -3,8 +3,6 @@
  *
  * Calculate table and room requirements for events.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateEventSeating } from './calculations';
 import {
   getDefaultInputs,
@@ -27,8 +25,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const TABLE_SHAPE_OPTIONS = [
   { value: 'round', label: 'Round' },
   { value: 'rectangular', label: 'Rectangular' },
@@ -69,19 +66,11 @@ const TABLE_SIZE_OPTIONS: Record<TableShape, { value: number; label: string }[]>
 };
 
 export default function EventSeatingCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Event Seating Calculator');
-
-  const [inputs, setInputs] = useState<EventSeatingInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateEventSeating(inputs), [inputs]);
-
-  const updateInput = <K extends keyof EventSeatingInputs>(
-    field: K,
-    value: EventSeatingInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<EventSeatingInputs, ReturnType<typeof calculateEventSeating>>({
+    name: 'Event Seating Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateEventSeating,
+  });
 
   const handleTableShapeChange = (shape: TableShape) => {
     const sizes = TABLE_SIZE_OPTIONS[shape];

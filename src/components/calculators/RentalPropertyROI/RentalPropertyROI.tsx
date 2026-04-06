@@ -3,8 +3,6 @@
  *
  * Calculate rental property investment returns.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateRentalPropertyROI } from './calculations';
 import { getDefaultInputs, type RentalPropertyInputs } from './types';
 import {
@@ -28,25 +26,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function RentalPropertyROI() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Rental Property ROI Calculator');
-
-  const [inputs, setInputs] = useState<RentalPropertyInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<RentalPropertyInputs, ReturnType<typeof calculateRentalPropertyROI>>({
+    name: 'Rental Property ROI Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateRentalPropertyROI,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateRentalPropertyROI(inputs), [inputs]);
-
-  const updateInput = <K extends keyof RentalPropertyInputs>(
-    field: K,
-    value: RentalPropertyInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

@@ -3,9 +3,6 @@
  *
  * Calculate Body Mass Index with health category classification.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateBMI } from './calculations';
 import {
   getDefaultInputs,
@@ -27,21 +24,14 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function BMICalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your BMI');
-
-  const [inputs, setInputs] = useLocalStorage<BMIInputs>('calc-bmi-inputs', getDefaultInputs);
-
-  const result: BMIResult = useMemo(() => {
-    return calculateBMI(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof BMIInputs>(field: K, value: BMIInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<BMIInputs, BMIResult>({
+    name: 'Calculate Your BMI',
+    slug: 'calc-bmi-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateBMI,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     // Convert values when switching units

@@ -1,8 +1,6 @@
 /**
  * EU VAT Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateVAT,
   formatCurrency,
@@ -25,19 +23,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EUVATCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('EU VAT Calculator');
-
-  const [inputs, setInputs] = useState<VATInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateVAT(inputs), [inputs]);
-
-  const updateInput = <K extends keyof VATInputs>(field: K, value: VATInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<VATInputs, ReturnType<typeof calculateVAT>>({
+    name: 'EU VAT Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateVAT,
+  });
 
   const handleCountryChange = (code: string) => {
     const country = getCountryByCode(code);

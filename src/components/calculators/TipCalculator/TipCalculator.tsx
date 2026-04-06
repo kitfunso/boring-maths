@@ -4,9 +4,6 @@
  * Interactive calculator for tips with bill splitting.
  * Uses the design system components.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateTip, formatCurrency } from './calculations';
 import { getDefaultInputs, type TipCalculatorInputs, type TipCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -26,30 +23,17 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function TipCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Tip');
-
-  const [inputs, setInputs] = useLocalStorage<TipCalculatorInputs>('calc-tip-inputs', () =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TipCalculatorInputs, TipCalculatorResult>({
+    name: 'Calculate Your Tip',
+    slug: 'calc-tip-inputs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateTip,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: TipCalculatorResult = useMemo(() => {
-    return calculateTip(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof TipCalculatorInputs>(
-    field: K,
-    value: TipCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateSelfEmploymentTax, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -10,8 +8,7 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
@@ -25,22 +22,12 @@ const DEDUCTION_OPTIONS = [
 ];
 
 export default function USSelfEmploymentTaxCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Self-Employment Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<USSelfEmploymentTaxInputs>(
-    'calc-us-self-employment-tax-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateSelfEmploymentTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof USSelfEmploymentTaxInputs>(
-    field: K,
-    value: USSelfEmploymentTaxInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<USSelfEmploymentTaxInputs, ReturnType<typeof calculateSelfEmploymentTax>>({
+    name: 'Self-Employment Tax Calculator',
+    slug: 'calc-us-self-employment-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateSelfEmploymentTax,
+  });
 
   return (
     <ThemeProvider defaultColor="indigo">

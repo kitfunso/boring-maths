@@ -4,8 +4,6 @@
  * Interactive calculator for planning BBQ quantities.
  * Uses the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateBBQ, formatPounds } from './calculations';
 import {
   getDefaultInputs,
@@ -30,26 +28,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function BBQCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Plan Your BBQ');
-
-  const [inputs, setInputs] = useState<BBQCalculatorInputs>(() => getDefaultInputs());
-
-  // Calculate results
-  const result: BBQCalculatorResult = useMemo(() => {
-    return calculateBBQ(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof BBQCalculatorInputs>(
-    field: K,
-    value: BBQCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<BBQCalculatorInputs, BBQCalculatorResult>({
+    name: 'Plan Your BBQ',
+    defaults: () => getDefaultInputs(),
+    compute: calculateBBQ,
+  });
 
   const appetiteOptions = [
     { value: 'light' as const, label: 'Light' },

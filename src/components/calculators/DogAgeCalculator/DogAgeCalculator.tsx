@@ -1,8 +1,6 @@
 /**
  * Dog Age Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateDogAge, formatAge } from './calculations';
 import { getDefaultInputs, DOG_SIZES, type DogAgeInputs } from './types';
 import {
@@ -18,19 +16,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function DogAgeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Dog Age Calculator');
-
-  const [inputs, setInputs] = useState<DogAgeInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateDogAge(inputs), [inputs]);
-
-  const updateInput = <K extends keyof DogAgeInputs>(field: K, value: DogAgeInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<DogAgeInputs, ReturnType<typeof calculateDogAge>>({
+    name: 'Dog Age Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateDogAge,
+  });
 
   const getStageColor = () => {
     switch (result.lifeStage) {

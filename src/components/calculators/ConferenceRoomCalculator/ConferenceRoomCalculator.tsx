@@ -3,8 +3,6 @@
  *
  * Calculate room capacity and setup requirements.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateConferenceRoom } from './calculations';
 import {
   getDefaultInputs,
@@ -27,8 +25,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const SEATING_STYLE_OPTIONS = [
   { value: 'theater', label: 'Theater' },
   { value: 'classroom', label: 'Classroom' },
@@ -44,19 +41,11 @@ const ROOM_SHAPE_OPTIONS = [
 ];
 
 export default function ConferenceRoomCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Conference Room Calculator');
-
-  const [inputs, setInputs] = useState<ConferenceRoomInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateConferenceRoom(inputs), [inputs]);
-
-  const updateInput = <K extends keyof ConferenceRoomInputs>(
-    field: K,
-    value: ConferenceRoomInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<ConferenceRoomInputs, ReturnType<typeof calculateConferenceRoom>>({
+    name: 'Conference Room Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateConferenceRoom,
+  });
 
   return (
     <ThemeProvider defaultColor="blue">

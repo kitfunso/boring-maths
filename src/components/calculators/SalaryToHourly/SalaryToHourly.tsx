@@ -4,8 +4,6 @@
  * Convert annual salary to true hourly rate, factoring in
  * actual hours worked, benefits, and PTO.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateSalaryToHourly, formatCurrency } from './calculations';
 import { getDefaultInputs, type SalaryToHourlyInputs, type SalaryToHourlyResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -25,30 +23,16 @@ import {
   Checkbox,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SalaryToHourly() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Salary to Hourly Calculator');
-
-  const [inputs, setInputs] = useState<SalaryToHourlyInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<SalaryToHourlyInputs, SalaryToHourlyResult>({
+    name: 'Salary to Hourly Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateSalaryToHourly,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: SalaryToHourlyResult = useMemo(() => {
-    return calculateSalaryToHourly(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof SalaryToHourlyInputs>(
-    field: K,
-    value: SalaryToHourlyInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

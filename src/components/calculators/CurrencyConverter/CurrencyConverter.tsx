@@ -1,9 +1,6 @@
 /**
  * Currency Converter - Preact Component
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { convertCurrency } from './calculations';
 import { getDefaultInputs, CURRENCIES, type CurrencyConverterInputs } from './types';
 import {
@@ -21,24 +18,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function CurrencyConverter() {
-  useCalculatorTracking('Currency Converter');
-
-  const [inputs, setInputs] = useLocalStorage<CurrencyConverterInputs>(
-    'calc-currency-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => convertCurrency(inputs), [inputs]);
-
-  const updateInput = <K extends keyof CurrencyConverterInputs>(
-    field: K,
-    value: CurrencyConverterInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function CurrencyConverter() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<CurrencyConverterInputs, ReturnType<typeof convertCurrency>>({
+    name: 'Currency Converter',
+    slug: 'calc-currency-inputs',
+    defaults: getDefaultInputs,
+    compute: convertCurrency,
+  });
 
   const swapCurrencies = () => {
     setInputs((prev) => ({

@@ -1,8 +1,6 @@
 /**
  * US Paycheck Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePaycheck, formatCurrency, formatPercent, getStateName } from './calculations';
 import {
   getDefaultInputs,
@@ -27,19 +25,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function USPaycheckCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('US Paycheck Calculator');
-
-  const [inputs, setInputs] = useState<PaycheckInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculatePaycheck(inputs), [inputs]);
-
-  const updateInput = <K extends keyof PaycheckInputs>(field: K, value: PaycheckInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<PaycheckInputs, ReturnType<typeof calculatePaycheck>>({
+    name: 'US Paycheck Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculatePaycheck,
+  });
 
   // Group states by region for easier selection
   const states = Object.entries(STATE_TAX_DATA)

@@ -3,8 +3,6 @@
  *
  * Plan food and drink quantities for graduation parties.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateGraduationParty } from './calculations';
 import {
   getDefaultInputs,
@@ -30,8 +28,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const GRADUATION_TYPE_OPTIONS = [
   { value: 'high_school', label: 'High School' },
   { value: 'college', label: 'College' },
@@ -51,21 +48,12 @@ const MENU_STYLE_OPTIONS = [
 ];
 
 export default function GraduationPartyPlanner() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Graduation Party Planner');
-
-  const [inputs, setInputs] = useState<GraduationPartyInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
-
-  const result = useMemo(() => calculateGraduationParty(inputs), [inputs]);
-
-  const updateInput = <K extends keyof GraduationPartyInputs>(
-    field: K,
-    value: GraduationPartyInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<GraduationPartyInputs, ReturnType<typeof calculateGraduationParty>>({
+    name: 'Graduation Party Planner',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateGraduationParty,
+  });
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

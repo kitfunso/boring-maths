@@ -4,9 +4,6 @@
  * Calculate childcare costs in the UK including free hours eligibility,
  * Tax-Free Childcare, and Universal Credit support.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import {
   calculateNurseryCost,
   formatCurrency,
@@ -29,24 +26,13 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Select, Alert } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function NurseryCostCalculator() {
-  useCalculatorTracking('UK Nursery Cost Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<NurseryCostInputs>(
-    'calc-nursery-cost-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateNurseryCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof NurseryCostInputs>(
-    field: K,
-    value: NurseryCostInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function NurseryCostCalculator() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<NurseryCostInputs, ReturnType<typeof calculateNurseryCost>>({
+    name: 'UK Nursery Cost Calculator',
+    slug: 'calc-nursery-cost-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateNurseryCost,
+  });
 
   const updateChild = (
     index: number,

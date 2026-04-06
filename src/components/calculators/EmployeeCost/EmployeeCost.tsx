@@ -3,8 +3,6 @@
  *
  * Calculate the true cost of an employee.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateEmployeeCost } from './calculations';
 import { getDefaultInputs, type EmployeeCostInputs } from './types';
 import {
@@ -28,25 +26,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function EmployeeCost() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Employee Cost Calculator');
-
-  const [inputs, setInputs] = useState<EmployeeCostInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<EmployeeCostInputs, ReturnType<typeof calculateEmployeeCost>>({
+    name: 'Employee Cost Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateEmployeeCost,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateEmployeeCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof EmployeeCostInputs>(
-    field: K,
-    value: EmployeeCostInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

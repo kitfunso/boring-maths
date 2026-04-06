@@ -4,8 +4,6 @@
  * Interactive calculator for determining mulch quantities.
  * Features different mulch types with density differences and cost comparisons.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateMulch,
   formatCurrency,
@@ -39,30 +37,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function MulchCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Mulch Needs');
-
-  const [inputs, setInputs] = useState<MulchCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<MulchCalculatorInputs, MulchCalculatorResult>({
+    name: 'Calculate Your Mulch Needs',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateMulch,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: MulchCalculatorResult = useMemo(() => {
-    return calculateMulch(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof MulchCalculatorInputs>(
-    field: K,
-    value: MulchCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

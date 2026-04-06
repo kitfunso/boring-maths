@@ -4,8 +4,6 @@
  * Interactive calculator for converting hourly rates to annual salary.
  * Migrated to use the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
 import {
@@ -30,31 +28,17 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function HourlyToSalaryCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Convert Hourly Rate to Salary');
-
-  const [inputs, setInputs] = useState<HourlyToSalaryInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<HourlyToSalaryInputs, HourlyToSalaryResult>({
+    name: 'Convert Hourly Rate to Salary',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateHourlyToSalary,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
-
-  // Calculate results
-  const result: HourlyToSalaryResult = useMemo(() => {
-    return calculateHourlyToSalary(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof HourlyToSalaryInputs>(
-    field: K,
-    value: HourlyToSalaryInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

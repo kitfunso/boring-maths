@@ -2,8 +2,6 @@
  * Batch Cost Calculator Component
  * Calculate material costs, labor, and pricing for crafts
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { BatchCostInputs, MaterialItem } from './types';
@@ -16,9 +14,11 @@ import {
   OVERHEAD_PRESETS,
 } from './types';
 import { calculateBatchCost, formatCurrency, generateId } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function BatchCostCalculator() {
-  const [inputs, setInputs] = useState<BatchCostInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<BatchCostInputs, ReturnType<typeof calculateBatchCost>>({
+    defaults: {
     craftType: 'soap',
     batchName: 'My Batch',
     unitsProduced: 10,
@@ -29,9 +29,9 @@ export function BatchCostCalculator() {
     packagingCostPerUnit: 0.5,
     targetProfitMargin: 50,
     wholesaleDiscount: 50,
+  },
+    compute: calculateBatchCost,
   });
-
-  const results = useMemo(() => calculateBatchCost(inputs), [inputs]);
 
   const handleCraftTypeChange = (type: string) => {
     setInputs({

@@ -2,16 +2,16 @@
  * Mash Water Calculator Component
  * Strike water and sparge calculations for all-grain brewing
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { MashWaterInputs } from './types';
 import { MASH_TEMPS, MASH_THICKNESS, SPARGE_TYPES } from './types';
 import { calculateMashWater } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function MashWaterCalculator() {
-  const [inputs, setInputs] = useState<MashWaterInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<MashWaterInputs, ReturnType<typeof calculateMashWater>>({
+    defaults: {
     grainWeight: 10,
     weightUnit: 'pounds',
     grainTemp: 68,
@@ -26,9 +26,9 @@ export function MashWaterCalculator() {
     volumeUnit: 'gallons',
     spargeType: 'batch',
     batchSpargeCount: 2,
+  },
+    compute: calculateMashWater,
   });
-
-  const results = useMemo(() => calculateMashWater(inputs), [inputs]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">

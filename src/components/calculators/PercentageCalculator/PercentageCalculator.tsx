@@ -7,8 +7,6 @@
  * - Percentage change from X to Y
  * - X increased/decreased by Y%
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculate, formatNumber, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -30,22 +28,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function PercentageCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Percentage Calculator');
-
-  const [inputs, setInputs] = useState<PercentageCalculatorInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculate(inputs), [inputs]);
-
-  const updateInput = <K extends keyof PercentageCalculatorInputs>(
-    field: K,
-    value: PercentageCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<PercentageCalculatorInputs, ReturnType<typeof calculate>>({
+    name: 'Percentage Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculate,
+  });
 
   const modeOptions = MODE_OPTIONS.map((m) => ({
     value: m.value,

@@ -4,7 +4,7 @@
  * Calculate solar panel system costs, payback period, and long-term savings.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { calculateSolar } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +36,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const SYSTEM_SIZE_OPTIONS = [
   { value: 'small', label: '4 kW' },
   { value: 'medium', label: '7 kW' },
@@ -46,24 +45,16 @@ const SYSTEM_SIZE_OPTIONS = [
 ];
 
 export default function SolarCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Solar Panel Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<SolarCalculatorInputs, ReturnType<typeof calculateSolar>>({
+    name: 'Solar Panel Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateSolar,
+  });
 
-  const [inputs, setInputs] = useState<SolarCalculatorInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
   const [systemSizePreset, setSystemSizePreset] = useState<SystemSize>('medium');
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateSolar(inputs), [inputs]);
-
-  const updateInput = <K extends keyof SolarCalculatorInputs>(
-    field: K,
-    value: SolarCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

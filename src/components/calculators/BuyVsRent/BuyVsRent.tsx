@@ -4,8 +4,6 @@
  * Compare the true cost of buying a home vs renting,
  * factoring in all hidden costs and opportunity costs.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateBuyVsRent, formatCurrency } from './calculations';
 import { getDefaultInputs, type BuyVsRentInputs, type BuyVsRentResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -25,27 +23,16 @@ import {
   Checkbox,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function BuyVsRent() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Buy vs Rent Calculator');
-
-  const [inputs, setInputs] = useState<BuyVsRentInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<BuyVsRentInputs, BuyVsRentResult>({
+    name: 'Buy vs Rent Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateBuyVsRent,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: BuyVsRentResult = useMemo(() => {
-    return calculateBuyVsRent(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof BuyVsRentInputs>(field: K, value: BuyVsRentInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

@@ -1,9 +1,6 @@
 /**
  * Time Zone Converter - Preact Component
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { convertTimeZone } from './calculations';
 import { getDefaultInputs, TIME_ZONES, type TimeZoneConverterInputs } from './types';
 import {
@@ -20,24 +17,13 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
-
-export default function TimeZoneConverter() {
-  useCalculatorTracking('Time Zone Converter');
-
-  const [inputs, setInputs] = useLocalStorage<TimeZoneConverterInputs>(
-    'calc-timezone-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => convertTimeZone(inputs), [inputs]);
-
-  const updateInput = <K extends keyof TimeZoneConverterInputs>(
-    field: K,
-    value: TimeZoneConverterInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';export default function TimeZoneConverter() {
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<TimeZoneConverterInputs, ReturnType<typeof convertTimeZone>>({
+    name: 'Time Zone Converter',
+    slug: 'calc-timezone-inputs',
+    defaults: getDefaultInputs,
+    compute: convertTimeZone,
+  });
 
   const swapZones = () => {
     setInputs((prev) => ({

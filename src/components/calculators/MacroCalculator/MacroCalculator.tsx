@@ -3,9 +3,6 @@
  *
  * Calculate daily macronutrient needs based on body metrics and fitness goals.
  */
-
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMacros, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -29,25 +26,14 @@ import {
   ShareResults,
   PrintResults,
 } from '../../ui';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function MacroCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Macro Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<MacroCalculatorInputs>(
-    'calc-macro-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateMacros(inputs), [inputs]);
-
-  const updateInput = <K extends keyof MacroCalculatorInputs>(
-    field: K,
-    value: MacroCalculatorInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<MacroCalculatorInputs, ReturnType<typeof calculateMacros>>({
+    name: 'Macro Calculator',
+    slug: 'calc-macro-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateMacros,
+  });
 
   const handleUnitChange = (newUnit: UnitSystem) => {
     if (newUnit === inputs.unitSystem) return;

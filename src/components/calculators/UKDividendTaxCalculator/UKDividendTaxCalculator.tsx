@@ -1,28 +1,15 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateDividendTaxResult, formatCurrency } from './calculations';
 import { getDefaultInputs, DIVIDEND_RATES, type UKDividendTaxInputs } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKDividendTaxCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Dividend Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKDividendTaxInputs>(
-    'calc-uk-dividend-tax-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateDividendTaxResult(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKDividendTaxInputs>(
-    field: K,
-    value: UKDividendTaxInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKDividendTaxInputs, ReturnType<typeof calculateDividendTaxResult>>({
+    name: 'UK Dividend Tax Calculator',
+    slug: 'calc-uk-dividend-tax-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateDividendTaxResult,
+  });
 
   return (
     <ThemeProvider defaultColor="amber">

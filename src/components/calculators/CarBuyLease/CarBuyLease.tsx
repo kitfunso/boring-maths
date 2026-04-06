@@ -3,8 +3,6 @@
  *
  * Compare the true costs of buying versus leasing a vehicle.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateCarBuyLease } from './calculations';
 import { getDefaultInputs, type CarBuyLeaseInputs } from './types';
 import {
@@ -28,26 +26,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function CarBuyLease() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Car Buy vs Lease Calculator');
-
-  const [inputs, setInputs] = useState<CarBuyLeaseInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<CarBuyLeaseInputs, ReturnType<typeof calculateCarBuyLease>>({
+    name: 'Car Buy vs Lease Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateCarBuyLease,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateCarBuyLease(inputs), [inputs]);
-
-  const updateInput = <K extends keyof CarBuyLeaseInputs>(
-    field: K,
-    value: CarBuyLeaseInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

@@ -4,8 +4,6 @@
  * PV = nRT calculator for gas phase calculations.
  * Solves for any variable given the other three.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateIdealGas, formatNumber, getStandardConditions } from './calculations';
 import {
   getDefaultInputs,
@@ -27,21 +25,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function IdealGasLawCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Ideal Gas Law Calculator');
-
-  const [inputs, setInputs] = useState<IdealGasInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => {
-    return calculateIdealGas(inputs);
-  }, [inputs]);
-
-  const updateInput = <K extends keyof IdealGasInputs>(field: K, value: IdealGasInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<IdealGasInputs, ReturnType<typeof calculateIdealGas>>({
+    name: 'Ideal Gas Law Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateIdealGas,
+  });
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;

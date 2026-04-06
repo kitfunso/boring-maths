@@ -1,28 +1,15 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateChildBenefit, formatCurrency } from './calculations';
 import { getDefaultInputs, HICBC_THRESHOLDS, type UKChildBenefitInputs } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKChildBenefitCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('UK Child Benefit Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<UKChildBenefitInputs>(
-    'calc-uk-child-benefit-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateChildBenefit(inputs), [inputs]);
-
-  const updateInput = <K extends keyof UKChildBenefitInputs>(
-    field: K,
-    value: UKChildBenefitInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<UKChildBenefitInputs, ReturnType<typeof calculateChildBenefit>>({
+    name: 'UK Child Benefit Calculator',
+    slug: 'calc-uk-child-benefit-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateChildBenefit,
+  });
 
   const getStatusColor = () => {
     if (result.clawbackPercentage === 0) return 'emerald';

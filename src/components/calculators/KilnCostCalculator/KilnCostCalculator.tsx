@@ -3,15 +3,17 @@
  * Calculate electricity and gas costs for pottery kiln firings
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { KilnCostInputs } from './types';
 import { KILN_PRESETS, FIRING_TYPES } from './types';
 import { calculateKilnCost, formatTime, getConeOptions } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function KilnCostCalculator() {
-  const [inputs, setInputs] = useState<KilnCostInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<KilnCostInputs, ReturnType<typeof calculateKilnCost>>({
+    defaults: {
     kilnType: 'electric',
     kilnSize: 7,
     kilnWattage: 11.5,
@@ -23,9 +25,9 @@ export function KilnCostCalculator() {
     gasUnit: 'therm',
     firingSchedule: 'medium',
     loadDensity: 'medium',
+  },
+    compute: calculateKilnCost,
   });
-
-  const results = useMemo(() => calculateKilnCost(inputs), [inputs]);
 
   const coneOptions = useMemo(() => getConeOptions(), []);
 

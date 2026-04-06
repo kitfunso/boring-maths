@@ -2,16 +2,16 @@
  * Water Change Calculator Component
  * Calculate dilution and parameter adjustment for aquariums
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { WaterChangeInputs } from './types';
 import { PARAMETER_PRESETS, CHANGE_PRESETS, TANK_PRESETS, FREQUENCY_OPTIONS } from './types';
 import { calculateWaterChange, formatParameter } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function WaterChangeCalculator() {
-  const [inputs, setInputs] = useState<WaterChangeInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<WaterChangeInputs, ReturnType<typeof calculateWaterChange>>({
+    defaults: {
     tankVolume: 55,
     volumeUnit: 'gallons',
     changePercent: 25,
@@ -20,9 +20,9 @@ export function WaterChangeCalculator() {
     parameterType: 'nitrate',
     newWaterParameter: 0,
     changeFrequency: 'weekly',
+  },
+    compute: calculateWaterChange,
   });
-
-  const results = useMemo(() => calculateWaterChange(inputs), [inputs]);
 
   const selectedPreset = PARAMETER_PRESETS.find((p) => p.value === inputs.parameterType);
 

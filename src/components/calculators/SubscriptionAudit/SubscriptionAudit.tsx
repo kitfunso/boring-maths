@@ -5,7 +5,7 @@
  * to identify savings opportunities.
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { analyzeSubscriptions, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -36,8 +36,7 @@ import {
   Checkbox,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 /**
  * Single subscription row
  */
@@ -175,20 +174,16 @@ function RecommendationBadge({ recommendation }: { recommendation: 'keep' | 'rev
 }
 
 export default function SubscriptionAudit() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Subscription Audit');
+  const { inputs, result, setInputs } = useCalculatorState<SubscriptionAuditInputs, SubscriptionAuditResult>({
+    name: 'Subscription Audit',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: analyzeSubscriptions,
+  });
 
-  const [inputs, setInputs] = useState<SubscriptionAuditInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
   const [showQuickAdd, setShowQuickAdd] = useState(false);
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: SubscriptionAuditResult = useMemo(() => {
-    return analyzeSubscriptions(inputs);
-  }, [inputs]);
 
   // Update subscription
   const updateSubscription = (id: string, updates: Partial<Subscription>) => {

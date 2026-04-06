@@ -2,20 +2,20 @@
  * IBU Calculator Component
  * Calculate hop bitterness for homebrewing
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { IBUInputs, HopAddition } from './types';
 import { HOP_VARIETIES } from './types';
 import { calculateIBU } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 function generateId(): string {
   return Math.random().toString(36).substr(2, 9);
 }
 
 export function IBUCalculator() {
-  const [inputs, setInputs] = useState<IBUInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<IBUInputs, ReturnType<typeof calculateIBU>>({
+    defaults: {
     batchSize: 5,
     batchUnit: 'gallons',
     originalGravity: 1.055,
@@ -31,9 +31,9 @@ export function IBUCalculator() {
       },
     ],
     formula: 'tinseth',
+  },
+    compute: calculateIBU,
   });
-
-  const results = useMemo(() => calculateIBU(inputs), [inputs]);
 
   const addHopAddition = () => {
     setInputs({

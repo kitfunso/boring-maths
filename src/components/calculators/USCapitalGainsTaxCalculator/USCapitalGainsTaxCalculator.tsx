@@ -1,5 +1,3 @@
-import { useMemo } from 'preact/hooks';
-import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateCapitalGainsTax, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -10,8 +8,7 @@ import {
 } from './types';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 const FILING_STATUS_OPTIONS = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
@@ -27,22 +24,12 @@ const ASSET_TYPE_OPTIONS = [
 ];
 
 export default function USCapitalGainsTaxCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Capital Gains Tax Calculator');
-
-  const [inputs, setInputs] = useLocalStorage<USCapitalGainsInputs>(
-    'calc-us-capital-gains-inputs',
-    getDefaultInputs
-  );
-
-  const result = useMemo(() => calculateCapitalGainsTax(inputs), [inputs]);
-
-  const updateInput = <K extends keyof USCapitalGainsInputs>(
-    field: K,
-    value: USCapitalGainsInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorBase<USCapitalGainsInputs, ReturnType<typeof calculateCapitalGainsTax>>({
+    name: 'Capital Gains Tax Calculator',
+    slug: 'calc-us-capital-gains-inputs',
+    defaults: getDefaultInputs,
+    compute: calculateCapitalGainsTax,
+  });
 
   const isLoss = inputs.salePrice < inputs.purchasePrice;
   const gain = inputs.salePrice - inputs.purchasePrice;

@@ -2,7 +2,7 @@
  * Loan Payment Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { calculateLoan, formatCurrency, formatTermDisplay } from './calculations';
 import { getDefaultInputs, LOAN_TYPES, type LoanInputs, type LoanType } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -22,21 +22,16 @@ import {
   Slider,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function LoanCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Loan Payment Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<LoanInputs, ReturnType<typeof calculateLoan>>({
+    name: 'Loan Payment Calculator',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculateLoan,
+  });
 
-  const [inputs, setInputs] = useState<LoanInputs>(() => getDefaultInputs(getInitialCurrency()));
   const [showAmortization, setShowAmortization] = useState(false);
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  const result = useMemo(() => calculateLoan(inputs), [inputs]);
-
-  const updateInput = <K extends keyof LoanInputs>(field: K, value: LoanInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

@@ -4,8 +4,6 @@
  * Interactive calculator for determining break-even point.
  * Uses the design system components.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateBreakEven, formatCurrency } from './calculations';
 import { getDefaultInputs, type BreakEvenInputs, type BreakEvenResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -23,27 +21,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function BreakEvenCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Break-Even Point');
-
-  const [inputs, setInputs] = useState<BreakEvenInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<BreakEvenInputs, BreakEvenResult>({
+    name: 'Calculate Your Break-Even Point',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateBreakEven,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: BreakEvenResult = useMemo(() => {
-    return calculateBreakEven(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof BreakEvenInputs>(field: K, value: BreakEvenInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

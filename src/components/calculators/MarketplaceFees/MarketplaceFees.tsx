@@ -3,8 +3,6 @@
  *
  * Compare fees across Etsy, eBay, and Amazon.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateMarketplaceFees } from './calculations';
 import { getDefaultInputs, type MarketplaceFeesInputs, PLATFORM_FEES } from './types';
 import {
@@ -28,8 +26,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const PLATFORM_COLORS = {
   etsy: 'bg-orange-500/20 border-orange-500 text-orange-400',
   ebay: 'bg-blue-500/20 border-blue-500 text-blue-400',
@@ -37,22 +34,14 @@ const PLATFORM_COLORS = {
 };
 
 export default function MarketplaceFees() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Marketplace Fees Calculator');
-
-  const [inputs, setInputs] = useState<MarketplaceFeesInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<MarketplaceFeesInputs, ReturnType<typeof calculateMarketplaceFees>>({
+    name: 'Marketplace Fees Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateMarketplaceFees,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-  const result = useMemo(() => calculateMarketplaceFees(inputs), [inputs]);
-
-  const updateInput = <K extends keyof MarketplaceFeesInputs>(
-    field: K,
-    value: MarketplaceFeesInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

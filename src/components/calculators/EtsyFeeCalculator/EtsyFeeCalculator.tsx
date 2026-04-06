@@ -4,8 +4,6 @@
  * Interactive calculator for comparing marketplace fees between Etsy and eBay.
  * Uses the design system components with green theme.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculateMarketplaceFees, formatCurrency, formatPercentage } from './calculations';
 import {
   getDefaultInputs,
@@ -33,8 +31,7 @@ import {
   ButtonGroup,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 /**
  * Fee breakdown row component
  */
@@ -139,22 +136,13 @@ function PlatformCard({
 }
 
 export default function EtsyFeeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Your Marketplace Fees');
-
-  const [inputs, setInputs] = useState<EtsyFeeInputs>(() => getDefaultInputs(getInitialCurrency()));
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<EtsyFeeInputs, EtsyFeeResult>({
+    name: 'Calculate Your Marketplace Fees',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculateMarketplaceFees,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result: EtsyFeeResult = useMemo(() => {
-    return calculateMarketplaceFees(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof EtsyFeeInputs>(field: K, value: EtsyFeeInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

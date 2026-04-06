@@ -3,8 +3,6 @@
  *
  * Estimate the annual and lifetime costs of pet ownership.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { calculatePetCost } from './calculations';
 import {
   getDefaultInputs,
@@ -31,8 +29,7 @@ import {
   Toggle,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 const PET_ICONS: Record<PetType, string> = {
   dog: '🐕',
   cat: '🐈',
@@ -66,16 +63,11 @@ const HEALTH_OPTIONS = [
 ];
 
 export default function PetCost() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Pet Ownership Cost Calculator');
-
-  const [inputs, setInputs] = useState<PetCostInputs>(() => getDefaultInputs(getInitialCurrency()));
-
-  const result = useMemo(() => calculatePetCost(inputs), [inputs]);
-
-  const updateInput = <K extends keyof PetCostInputs>(field: K, value: PetCostInputs[K]) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<PetCostInputs, ReturnType<typeof calculatePetCost>>({
+    name: 'Pet Ownership Cost Calculator',
+    defaults: () => getDefaultInputs(getInitialCurrency()),
+    compute: calculatePetCost,
+  });
 
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));

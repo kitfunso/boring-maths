@@ -1,8 +1,6 @@
 /**
  * Speeds & Feeds Calculator - React Component
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateSpeedsFeeds,
   formatNumber,
@@ -31,22 +29,13 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function SpeedsFeedsCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Speeds & Feeds Calculator');
-
-  const [inputs, setInputs] = useState<SpeedsFeedsInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateSpeedsFeeds(inputs), [inputs]);
-
-  const updateInput = <K extends keyof SpeedsFeedsInputs>(
-    field: K,
-    value: SpeedsFeedsInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
+  const { inputs, result, updateInput } = useCalculatorState<SpeedsFeedsInputs, ReturnType<typeof calculateSpeedsFeeds>>({
+    name: 'Speeds & Feeds Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateSpeedsFeeds,
+  });
 
   const rpmWarning = getRPMWarning(result.rpm);
   const feedWarning = getFeedRateWarning(result.feedRate, inputs.material);

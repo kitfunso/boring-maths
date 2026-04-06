@@ -2,7 +2,7 @@
  * Clay Shrinkage Calculator - React Component
  */
 
-import { useState, useMemo } from 'preact/hooks';
+import { useMemo } from 'preact/hooks';
 import {
   calculateClayShrinkage,
   formatSize,
@@ -30,26 +30,18 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ClayShrinkageCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Clay Shrinkage Calculator');
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<ClayShrinkageInputs, ReturnType<typeof calculateClayShrinkage>>({
+    name: 'Clay Shrinkage Calculator',
+    defaults: () => getDefaultInputs(),
+    compute: calculateClayShrinkage,
+  });
 
-  const [inputs, setInputs] = useState<ClayShrinkageInputs>(() => getDefaultInputs());
-
-  const result = useMemo(() => calculateClayShrinkage(inputs), [inputs]);
   const shrinkageTable = useMemo(
     () => generateShrinkageTable(result.totalShrinkage, inputs.unit),
     [result.totalShrinkage, inputs.unit]
   );
-
-  const updateInput = <K extends keyof ClayShrinkageInputs>(
-    field: K,
-    value: ClayShrinkageInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   const handleClayTypeChange = (clayType: string) => {
     const clay = CLAY_TYPES.find((c) => c.value === clayType);

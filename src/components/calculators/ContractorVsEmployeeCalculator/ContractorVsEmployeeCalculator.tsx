@@ -4,8 +4,6 @@
  * Interactive calculator comparing contractor/freelance rates against
  * full-time employment, accounting for hidden costs and benefits.
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import {
   calculateComparison_main,
   formatCurrency,
@@ -31,30 +29,16 @@ import {
   Alert,
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
-
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function ContractorVsEmployeeCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Contractor vs Employee Calculator');
-
-  const [inputs, setInputs] = useState<ContractorVsEmployeeInputs>(() =>
-    getDefaultInputs(getInitialCurrency())
-  );
+  const { inputs, result, updateInput, setInputs } = useCalculatorState<ContractorVsEmployeeInputs, ReturnType<typeof calculateComparison_main>>({
+    name: 'Contractor vs Employee Calculator',
+    defaults: () =>
+    getDefaultInputs(getInitialCurrency()),
+    compute: calculateComparison_main,
+  });
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
-
-  // Calculate results
-  const result = useMemo(() => {
-    return calculateComparison_main(inputs);
-  }, [inputs]);
-
-  // Update input
-  const updateInput = <K extends keyof ContractorVsEmployeeInputs>(
-    field: K,
-    value: ContractorVsEmployeeInputs[K]
-  ) => {
-    setInputs((prev) => ({ ...prev, [field]: value }));
-  };
 
   // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {

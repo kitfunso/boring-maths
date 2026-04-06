@@ -2,16 +2,16 @@
  * Candle Wax Calculator Component
  * Calculate wax weight from container volume
  */
-
-import { useState, useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CandleWaxInputs } from './types';
 import { WAX_TYPES, CONTAINER_PRESETS, FILL_OPTIONS } from './types';
 import { calculateCandleWax, formatBurnTime } from './calculations';
+import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
 export function CandleWaxCalculator() {
-  const [inputs, setInputs] = useState<CandleWaxInputs>({
+  const { inputs, result: results, setInputs } = useCalculatorState<CandleWaxInputs, ReturnType<typeof calculateCandleWax>>({
+    defaults: {
     calculationMode: 'dimensions',
     containerDiameter: 3.0,
     containerHeight: 3.5,
@@ -23,9 +23,9 @@ export function CandleWaxCalculator() {
     waxType: 'soy-464',
     numberOfContainers: 1,
     weightUnit: 'ounces',
+  },
+    compute: calculateCandleWax,
   });
-
-  const results = useMemo(() => calculateCandleWax(inputs), [inputs]);
 
   const selectedWax = WAX_TYPES.find((w) => w.value === inputs.waxType);
 
