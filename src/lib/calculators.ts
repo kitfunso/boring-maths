@@ -516,6 +516,15 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
+    title: 'One Rep Max (1RM)',
+    description: 'Estimate your maximum single-rep lift using five proven strength formulas.',
+    href: '/calculators/one-rep-max-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
     title: 'GPA Calculator',
     description: 'Calculate your semester and cumulative GPA with multiple grade scales.',
     href: '/calculators/gpa-calculator',
