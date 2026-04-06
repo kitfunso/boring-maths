@@ -1,0 +1,191 @@
+---
+/**
+ * Cooking Time Calculator Page
+ *
+ * SEO-optimized page targeting: "cooking time calculator by weight", "how long to cook"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CookingTimeCalculator from '../../components/calculators/CookingTimeCalculator/CookingTimeCalculator';
+
+// SEO Configuration
+const title = 'Cooking Time Calculator by Weight | Boring Math';
+const description =
+  'Calculate cooking time by weight for beef, chicken, turkey, pork, lamb, salmon, and ham. Get oven temps, internal temperatures (USDA safe), and resting times. Works for oven, slow cooker, air fryer, and grill.';
+const keywords =
+  'cooking time calculator, how long to cook, meat cooking time by weight, oven cooking calculator, internal temperature chart, cooking time per pound, slow cooker time calculator, air fryer cooking time, grill time calculator, USDA safe temperature';
+const canonicalURL = '/calculators/cooking-time-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Cooking Time Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat and sides for your BBQ.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Holiday Dinner Calculator',
+    description: 'Plan food for holiday gatherings.',
+    href: '/calculators/holiday-dinner-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Pizza Dough Calculator',
+    description: "Baker's percentages for any pizza style.",
+    href: '/calculators/pizza-dough-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Baking Conversion Calculator',
+    description: 'Convert cups to grams and more.',
+    href: '/calculators/baking-conversion-calculator',
+    icon: 'swap' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Plan food quantities for events.',
+    href: '/calculators/catering-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I calculate cooking time by weight?',
+    answer:
+      "Multiply the weight in pounds by the minutes-per-pound rate for your meat and cooking method. For example, a 5 lb chicken in the oven at 375°F takes about 20 minutes per pound, so 5 × 20 = 100 minutes (1 hour 40 minutes). Always verify doneness with a meat thermometer.",
+  },
+  {
+    question: 'What are the USDA safe internal temperatures?',
+    answer:
+      'The USDA recommends: poultry (chicken, turkey) must reach 165°F (74°C). Whole cuts of beef, pork, lamb, and veal should reach 145°F (63°C) with a 3-minute rest. Ground meats should reach 160°F (71°C). Pre-cooked ham should be reheated to 140°F (60°C). Fish should reach 145°F (63°C).',
+  },
+  {
+    question: 'Why is resting time important?',
+    answer:
+      "Resting allows the internal temperature to rise 5-10°F through carryover cooking, and lets juices redistribute throughout the meat. Without resting, juices pool out when you cut, leaving the meat drier. Rest times vary: 5 minutes for thin cuts like chicken breast, up to 30 minutes for a whole turkey.",
+  },
+  {
+    question: 'How do slow cooker times compare to oven times?',
+    answer:
+      'Slow cooker times are roughly 3-4x longer than oven times. The low, steady heat breaks down connective tissue for tender results. Generally, LOW setting = 8-10 hours and HIGH setting = 4-6 hours for roasts. Always ensure the internal temperature reaches the safe minimum.',
+  },
+  {
+    question: 'Can I cook a frozen piece of meat without thawing?',
+    answer:
+      "You can cook frozen meat safely, but it takes approximately 50% longer than thawed meat. The USDA confirms this is safe as long as the internal temperature reaches the required minimum. However, slow cookers should not be used for frozen meat because it spends too long in the 40-140°F danger zone.",
+  },
+  {
+    question: 'How does an air fryer compare to a conventional oven?',
+    answer:
+      'Air fryers cook about 20-25% faster than conventional ovens because the circulating hot air transfers heat more efficiently. They also produce crispier exteriors. Reduce the oven temperature by about 25°F when adapting oven recipes for an air fryer, and check for doneness earlier.',
+  },
+  {
+    question: 'How accurate is a cooking time calculator?',
+    answer:
+      'Cooking time calculators give reliable estimates, but actual times vary based on your specific oven calibration, meat shape and starting temperature, altitude, and bone-in vs boneless cuts. Always use an instant-read meat thermometer to confirm doneness rather than relying on time alone.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Cooking Time Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Cooking Time Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Cooking Time Calculator"
+    description="Enter the type and weight of your meat to get cooking time, oven temperature, internal temperature target, and resting time for any method."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <CookingTimeCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>meat type</strong> from the dropdown. Options include beef roast, whole
+      chicken, chicken breast, pork roast, pork chops, lamb leg, lamb chops, whole turkey, turkey
+      breast, salmon, and ham.
+    </p>
+    <p>
+      Enter the <strong>weight</strong> in pounds or kilograms. Use the toggle to switch between
+      units.
+    </p>
+    <p>
+      Choose your <strong>cooking method</strong>: oven, slow cooker, air fryer, or grill.
+      Available methods depend on the meat selected.
+    </p>
+    <p>
+      For beef and lamb, select your preferred <strong>doneness</strong> from rare through
+      well-done. The calculator adjusts both the cooking time and target internal temperature
+      accordingly.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Total Cooking Time</strong> is the estimated time your meat spends cooking. Use it
+      as a guide, not a guarantee. Oven calibration, starting temperature, and cut shape all
+      influence actual times.
+    </p>
+    <p>
+      <strong>Internal Temperature</strong> is the most important number. Use an instant-read
+      thermometer inserted into the thickest part, avoiding bone. This is the true measure of
+      doneness and food safety.
+    </p>
+    <p>
+      <strong>Resting Time</strong> is how long the meat should rest after you pull it from the
+      heat. Carryover cooking raises the temperature by 5-10°F during this period.
+    </p>
+    <p>
+      <strong>Tips</strong> are method-specific suggestions to get the best result from your
+      cooking approach.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

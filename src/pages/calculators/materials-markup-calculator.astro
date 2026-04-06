@@ -1,0 +1,182 @@
+---
+/**
+ * Materials Markup Calculator Page
+ *
+ * SEO-optimized page targeting: "materials markup calculator", "markup vs margin"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import MaterialsMarkupCalculator from '../../components/calculators/MaterialsMarkupCalculator/MaterialsMarkupCalculator';
+
+// SEO Configuration
+const title = 'Materials Markup Calculator | Markup vs Margin Explained | Boring Math';
+const description =
+  'Calculate selling prices from cost and markup percentage. Understand the difference between markup and margin with visual explanations. Includes typical markups by trade. Free, no signup.';
+const keywords =
+  'materials markup calculator, markup vs margin, markup calculator, margin calculator, cost plus markup, trade markup, profit margin calculator, selling price calculator, contractor markup, plumbing markup';
+const canonicalURL = '/calculators/materials-markup-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Materials Markup Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Job Quote Calculator',
+    description: 'Build accurate job quotes with materials, labour, and markup.',
+    href: '/calculators/job-quote-calculator',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Calculate optimal product pricing with profit analysis.',
+    href: '/calculators/pricing-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Break-Even Point',
+    description: 'Find how many units you need to sell to cover costs.',
+    href: '/calculators/break-even-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices and percent-off savings.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate material costs, labour, and pricing for crafts.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'dollar' as const,
+    color: 'violet' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is the difference between markup and margin?',
+    answer:
+      'Markup is profit expressed as a percentage of cost. Margin is profit expressed as a percentage of selling price. A 50% markup on a $100 cost gives a $150 selling price and $50 profit. That same $50 profit is a 33.3% margin ($50 / $150). Same dollars, different percentages.',
+  },
+  {
+    question: 'Why does 50% markup not equal 50% margin?',
+    answer:
+      'Because they use different denominators. Markup divides profit by cost; margin divides profit by selling price. Since selling price is always larger than cost (when profitable), the margin percentage is always smaller than the markup percentage for the same dollar profit.',
+  },
+  {
+    question: 'How do I convert markup to margin?',
+    answer:
+      'Margin = Markup / (100 + Markup) x 100. For example, 30% markup: 30 / (100 + 30) x 100 = 23.1% margin. To go the other way: Markup = Margin / (100 - Margin) x 100.',
+  },
+  {
+    question: 'What markup should I use for my trade?',
+    answer:
+      'Typical markups vary by trade: Plumbing 20-50%, Electrical 15-40%, HVAC 25-50%, Carpentry 15-35%, Painting 15-40%, Roofing 20-45%, Landscaping 25-60%, General Contractors 10-30%. These cover materials only; labour is quoted separately.',
+  },
+  {
+    question: 'Should I quote customers using markup or margin?',
+    answer:
+      'Most trades quote using markup on materials cost, but your accounting software likely reports margin. Know both numbers. If you tell a client "30% markup" but your books show 23% margin, nothing is wrong. They are the same profit expressed two ways.',
+  },
+  {
+    question: 'How does quantity affect the calculation?',
+    answer:
+      'The per-unit selling price and percentages stay the same regardless of quantity. The quantity field multiplies profit per unit to give you total profit for the batch. This helps when quoting materials for a whole job.',
+  },
+  {
+    question: 'What happens if I set margin to 100%?',
+    answer:
+      'A 100% margin would mean the entire selling price is profit and the cost is zero, which is impossible for physical materials. The calculator caps margin below 100%. In practice, margins above 60-70% are rare for materials in most trades.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Materials Markup Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Materials Markup Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Materials Markup Calculator"
+    description="Calculate selling prices from cost and markup. See the difference between markup and margin with clear visuals."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <MaterialsMarkupCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Choose your <strong>calculation mode</strong>: "Markup to Selling Price" if you know your cost and desired markup, "Find Markup %" if you know what you want to charge, or "Margin to Selling Price" if you think in margin terms.
+    </p>
+    <p>
+      Enter the <strong>cost price</strong> per unit. This is what you pay your supplier for the materials before any markup.
+    </p>
+    <p>
+      Enter the <strong>markup or margin percentage</strong>, or the selling price depending on your mode. The calculator shows all three values regardless of which you enter.
+    </p>
+    <p>
+      Use the <strong>quantity field</strong> to see total profit for a batch of materials, useful when quoting entire jobs.
+    </p>
+    <p>
+      Reference the <strong>trade-typical markups</strong> at the bottom to see what others in your industry charge.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Markup vs Margin">
+    <p>
+      <strong>Markup</strong> is the percentage added on top of your cost. A 30% markup on $100 cost gives a $130 selling price. It answers: "How much am I adding to my cost?"
+    </p>
+    <p>
+      <strong>Margin</strong> is the percentage of the selling price that is profit. That same $30 profit on a $130 selling price is a 23.1% margin. It answers: "What fraction of revenue is profit?"
+    </p>
+    <p>
+      The <strong>visual comparison</strong> in the results shows the same profit bar measured against cost (markup) vs selling price (margin). The bar lengths are different because the bases are different, even though the dollar profit is identical.
+    </p>
+    <p>
+      The <strong>quick reference table</strong> shows common markup percentages and their margin equivalents. Memorize a few: 25% markup = 20% margin, 50% markup = 33.3% margin, 100% markup = 50% margin.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,189 @@
+---
+/**
+ * Rent Affordability Calculator Page
+ *
+ * SEO-optimized page targeting: "how much rent can I afford", "rent calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RentAffordabilityCalculator from '../../components/calculators/RentAffordabilityCalculator/RentAffordabilityCalculator';
+
+// SEO Configuration
+const title = 'How Much Rent Can I Afford? | Rent Calculator | Boring Math';
+const description =
+  'Calculate how much rent you can afford using the 30% rule, 50/30/20 rule, and 28/36 DTI rule. See your budget breakdown and recommended max rent instantly. No signup required.';
+const keywords =
+  'rent affordability calculator, how much rent can I afford, rent budget calculator, 30 percent rule rent, 50 30 20 rule rent, rent to income ratio, affordable rent calculator, monthly rent calculator';
+const canonicalURL = '/calculators/rent-affordability-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Rent Affordability Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare long-term costs of buying vs renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Plan monthly contributions to hit your savings target.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart' as const,
+    color: 'accent' as const,
+  },
+  {
+    title: 'Emergency Fund',
+    description: 'Calculate your ideal emergency fund size.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    description: 'Compare snowball vs avalanche payoff strategies.',
+    href: '/calculators/debt-payoff-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Net Worth Calculator',
+    description: 'Track your total assets and liabilities.',
+    href: '/calculators/net-worth-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much of my income should go to rent?',
+    answer:
+      'The most common guideline is the 30% rule: spend no more than 30% of your gross (pre-tax) monthly income on rent. If you earn $5,000/month gross, that means $1,500 max. However, in high-cost cities many renters spend 40-50%. The lower you keep it, the more room you have for savings and emergencies.',
+  },
+  {
+    question: 'What is the 50/30/20 rule for rent?',
+    answer:
+      'The 50/30/20 rule splits your after-tax income into three buckets: 50% for needs (rent, utilities, groceries, insurance, minimum debt payments), 30% for wants (dining out, entertainment, hobbies), and 20% for savings and extra debt payoff. Your rent should fit within the 50% needs bucket alongside other essentials.',
+  },
+  {
+    question: 'What is the 28/36 DTI rule?',
+    answer:
+      'The 28/36 rule is used by mortgage lenders but applies to renters too. It says housing costs (rent + utilities) should not exceed 28% of gross income, and total debt payments (housing + car loans + student loans + credit cards) should not exceed 36% of gross income. This is often the most conservative of the three rules.',
+  },
+  {
+    question: 'Should I use gross or net income to calculate rent affordability?',
+    answer:
+      'It depends on which rule you follow. The 30% rule and 28/36 DTI rule traditionally use gross (pre-tax) income. The 50/30/20 rule uses net (after-tax) income. This calculator handles both: enter whichever you know and it will estimate the other. When in doubt, using net income gives a more conservative (safer) result.',
+  },
+  {
+    question: 'What if I have student loans or car payments?',
+    answer:
+      'Existing debt reduces how much you can afford in rent. Enter your total monthly debt payments and the calculator adjusts the 50/30/20 and 28/36 results automatically. If your debts are high, you may need to target rent well below the 30% rule to stay financially stable.',
+  },
+  {
+    question: 'Should I include utilities in my rent budget?',
+    answer:
+      'Yes, when comparing apartments. Some listings include utilities; others do not. Toggle "Include utilities" in this calculator to subtract estimated utility costs from your max rent. This gives you a more realistic picture of the base rent you can afford when utilities are separate.',
+  },
+  {
+    question: 'What if no apartments fit my budget?',
+    answer:
+      'Consider getting a roommate (splitting rent drops your share significantly), moving further from the city center, negotiating with landlords on longer lease terms, or looking at studio apartments. Also review your debt payments: paying off a car loan frees up monthly cash flow for rent.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Rent Affordability Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Rent Affordability Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Rent Affordability Calculator"
+    description="Find out how much rent you can afford using three proven budgeting rules, then see your full budget breakdown."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RentAffordabilityCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select whether you're entering <strong>gross</strong> (before tax) or <strong>net</strong>
+      (after tax) income, then enter your monthly amount.
+    </p>
+    <p>
+      Add any <strong>existing monthly debts</strong> such as car payments, student loans, or
+      credit card minimums. These reduce the rent you can comfortably afford.
+    </p>
+    <p>
+      Set a <strong>savings goal</strong> as a percentage of net income. The default is 20%,
+      matching the 50/30/20 rule.
+    </p>
+    <p>
+      Toggle <strong>Include utilities</strong> if your rent doesn't cover them. The calculator
+      subtracts utility costs from your maximum rent, giving you the base rent you can afford.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Recommended Maximum Rent</strong> uses the most conservative of the three rules.
+      Staying at or below this number gives you the strongest financial cushion.
+    </p>
+    <p>
+      The <strong>three rule cards</strong> show the max rent under each budgeting framework.
+      Green means the rule produces a positive rent budget; red means your debts or expenses
+      consume too much income for that rule to work.
+    </p>
+    <p>
+      The <strong>budget breakdown</strong> visualizes the 50/30/20 split of your net income
+      so you can see exactly how much goes to needs, wants, and savings.
+    </p>
+    <p>
+      <strong>After Rent</strong> shows what's left of your net income after rent, debts, and
+      utilities. <strong>Savings Room</strong> shows what remains after also meeting your
+      savings goal.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,180 @@
+---
+/**
+ * Tradesperson Hourly Rate Calculator Page
+ *
+ * SEO-optimized page targeting: "tradesperson hourly rate calculator what to charge"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import TradesHourlyRateCalculator from '../../components/calculators/TradesHourlyRateCalculator/TradesHourlyRateCalculator';
+
+// SEO Configuration
+const title = 'Tradesperson Hourly Rate Calculator | What to Charge | Boring Math';
+const description =
+  'Work out exactly what to charge per hour as a plumber, electrician, carpenter, or any tradesperson. Factors in overheads, tax, van costs, tools, insurance, and your desired take-home pay.';
+const keywords =
+  'tradesperson hourly rate calculator, what to charge per hour, plumber rate calculator, electrician hourly rate, carpenter day rate, trade business calculator, self-employed hourly rate';
+const canonicalURL = '/calculators/trades-hourly-rate-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Trades Hourly Rate' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Job Quote Calculator',
+    description: 'Build accurate job quotes with materials, labour, markup, and VAT.',
+    href: '/calculators/job-quote-calculator',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Freelance Day Rate Calculator',
+    description: 'Calculate your ideal freelance day rate vs salary.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Consulting Rate Calculator',
+    description: 'Calculate your optimal consulting hourly or daily rate.',
+    href: '/calculators/consulting-rate-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data for both display and schema
+const faqs = [
+  {
+    question: 'How do I work out what to charge per hour as a tradesperson?',
+    answer:
+      'Start with how much you want to earn after tax each year. Add your annual business costs (van, insurance, tools, phone, accountant). Divide by the number of hours you can actually bill clients. Then gross it up for tax. This calculator does all of that for you.',
+  },
+  {
+    question: 'What is a good hourly rate for a tradesperson?',
+    answer:
+      'Rates vary by trade, region, and experience. In the UK, most tradespeople charge between £30-£60/hour. In the US, $50-$100/hour is typical. The right rate depends on your specific overheads, local market, and desired income. Use this calculator with your real numbers instead of guessing.',
+  },
+  {
+    question: 'How many billable hours can I realistically work per week?',
+    answer:
+      'Most tradespeople can bill around 25-35 hours per week. The rest goes to quoting, travel between jobs, buying materials, admin, invoicing, and marketing. A common mistake is assuming you can bill 40+ hours, which leads to undercharging. Be honest about your non-billable time.',
+  },
+  {
+    question: 'Should I charge a day rate or hourly rate?',
+    answer:
+      'Day rates work well for larger jobs where scope is clear. Hourly rates suit smaller jobs, call-outs, and maintenance work. Many tradespeople offer both: an hourly rate for small jobs and a discounted day rate for full-day bookings (typically 7-8 hours). This calculator shows both.',
+  },
+  {
+    question: 'What overheads should I include in my rate?',
+    answer:
+      'Include everything you spend to run the business: van lease or running costs, fuel, public liability and professional indemnity insurance, tools and equipment replacement, training and certifications, phone and internet, accountant fees, software subscriptions, workwear, and marketing. Forgetting overheads is the most common reason tradespeople undercharge.',
+  },
+  {
+    question: 'How do I account for tax in my hourly rate?',
+    answer:
+      'Your hourly rate must cover income tax and self-employment contributions on top of your desired take-home pay. In the UK this is typically 20-40% depending on earnings (Income Tax + Class 2 and 4 National Insurance). In the US, budget 25-35% (federal + state + 15.3% self-employment tax). This calculator grosses up your rate automatically.',
+  },
+  {
+    question: 'What about weeks I cannot find work?',
+    answer:
+      'The "working weeks per year" slider handles this. If you take 4 weeks holiday and expect 2 weeks of quiet periods, set it to 46. Being realistic here prevents you from setting a rate that only works at 100% utilisation. Most tradespeople work 44-48 billable weeks per year.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Tradesperson Hourly Rate Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Tradesperson Hourly Rate Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Tradesperson Hourly Rate Calculator"
+    description="Work out exactly what to charge per hour or per day. Enter your desired income, overheads, and tax rate to find the minimum rate that keeps your business profitable."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <TradesHourlyRateCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start with your <strong>desired annual take-home income</strong> — this is what you want to
+      keep after paying all business expenses and tax. Think of it as your personal salary.
+    </p>
+    <p>
+      Next, set your <strong>working hours</strong>. Be realistic about how many weeks per year
+      you actually work (accounting for holidays, illness, and quiet periods) and how many
+      hours per week you can genuinely bill to clients. Time spent quoting, travelling, and
+      doing admin is not billable.
+    </p>
+    <p>
+      Fill in your <strong>monthly overheads</strong> — every cost you incur to run your trade
+      business. Include van costs, insurance, tool replacement, training, phone, and your
+      accountant. These get factored into the rate so every billable hour covers its share.
+    </p>
+    <p>
+      Finally, set your <strong>estimated tax rate</strong>. If you are unsure, 28-30% is a
+      reasonable starting point for most self-employed tradespeople in the UK and US.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>Required Hourly Rate</strong> is the minimum you need to charge per billable
+      hour to cover your overheads, pay your tax, and hit your income target. Charge less
+      than this and you are subsidising your clients from your own pocket.
+    </p>
+    <p>
+      The <strong>Day Rate</strong> is calculated as 8 billable hours at your hourly rate.
+      Many tradespeople offer a slight discount for full-day bookings to incentivise larger jobs.
+    </p>
+    <p>
+      The <strong>per-hour breakdown chart</strong> shows where every pound or dollar of your
+      hourly rate goes: how much covers your income, how much covers overheads, and how
+      much goes to tax. This helps you understand why your rate needs to be higher than you
+      might expect.
+    </p>
+    <p>
+      The <strong>non-billable percentage</strong> shows how much of a standard 40-hour week
+      is spent on non-billable work (travel, admin, quoting). If this number is high, your
+      hourly rate needs to be higher to compensate.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,173 @@
+---
+/**
+ * Screen Time Calculator Page
+ *
+ * SEO-optimized page targeting: "screen time calculator", "how much screen time"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import ScreenTimeCalculator from '../../components/calculators/ScreenTimeCalculator/ScreenTimeCalculator';
+
+// SEO Configuration
+const title = 'Screen Time Calculator | How Much Time Are You Spending? | Boring Math';
+const description =
+  'Calculate your daily, weekly, and yearly screen time. See opportunity costs, compare to averages by age group, and discover what you could do with that time instead.';
+const keywords =
+  'screen time calculator, daily screen time, how much screen time, screen time by age, screen time statistics, phone usage calculator, digital wellness calculator, screen time average';
+const canonicalURL = '/calculators/screen-time-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Screen Time Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Coffee Spend Calculator',
+    description: 'Calculate how much your daily coffee habit costs per year.',
+    href: '/calculators/coffee-spend-calculator',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Sleep Calculator',
+    description: 'Find your optimal bedtime based on sleep cycles.',
+    href: '/calculators/sleep-calculator',
+    icon: 'bolt' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age and life statistics.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'What is the average screen time per day?',
+    answer:
+      'Average daily screen time varies by age group. Children (6-12) average about 4.5 hours, teens (13-17) about 7 hours, and adults about 6.5 hours per day. These figures include phones, tablets, computers, and TV but exclude screen time for school or work.',
+  },
+  {
+    question: 'How much screen time is too much?',
+    answer:
+      'The American Academy of Pediatrics recommends no more than 1 hour per day for children aged 2-5, and consistent limits for children 6 and older. For adults, research suggests more than 2 hours of recreational screen time is associated with reduced wellbeing. The key is the type of usage: productive screen time has different effects than passive scrolling.',
+  },
+  {
+    question: 'How does screen time affect health?',
+    answer:
+      'Excessive screen time is linked to eye strain, disrupted sleep (especially before bed), reduced physical activity, and increased risk of anxiety and depression. Blue light from screens can suppress melatonin production, making it harder to fall asleep. Taking regular breaks using the 20-20-20 rule (every 20 minutes, look at something 20 feet away for 20 seconds) helps reduce eye strain.',
+  },
+  {
+    question: 'What counts as productive screen time?',
+    answer:
+      'Productive screen time includes activities that build skills or create value: learning through educational content, working, creative projects (writing, design, coding), and meaningful communication. Passive screen time includes scrolling social media without purpose, binge-watching, and idle browsing.',
+  },
+  {
+    question: 'How is the lifetime projection calculated?',
+    answer:
+      'The lifetime projection multiplies your daily screen time by the remaining life expectancy for your age group (approximately 70 years for children, 63 for teens, 50 for adults). It then converts total hours into years. This is a rough projection assuming your current habits continue unchanged.',
+  },
+  {
+    question: 'How accurate are the opportunity cost estimates?',
+    answer:
+      'The opportunity cost estimates use well-researched averages: reading a book takes about 6 hours, learning a language takes roughly 600 hours, training for a marathon takes about 500 hours, and completing an online course averages 40 hours. These are approximations to illustrate what is possible, not guarantees.',
+  },
+  {
+    question: 'How can I reduce my screen time?',
+    answer:
+      'Start by tracking your actual usage with built-in tools (Screen Time on iOS, Digital Wellbeing on Android). Set app-specific time limits. Create phone-free zones (bedroom, dining table). Replace one screen habit with an offline activity. Use grayscale mode to make your phone less appealing. Even reducing by 30 minutes per day saves over 180 hours per year.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Screen Time Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Screen Time Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Screen Time Calculator"
+    description="Break down your daily screen habits by category, compare to age-group averages, and see what you could accomplish with that time instead."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ScreenTimeCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Select your <strong>age group</strong> to compare your screen time against the average for
+      your demographic.
+    </p>
+    <p>
+      Adjust the <strong>category sliders</strong> to break down your daily screen time. The total
+      updates automatically as you change each category.
+    </p>
+    <p>
+      Review the <strong>yearly reveal</strong> to see the total days and projected lifetime years
+      you will spend on screens at your current rate.
+    </p>
+    <p>
+      Check the <strong>opportunity cost cards</strong> to see what you could accomplish with the
+      same amount of time, from reading books to learning a language.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Yearly Days</strong> shows your total daily screen time converted into full 24-hour
+      days per year. At 5 hours per day, that is over 76 days.
+    </p>
+    <p>
+      <strong>Lifetime Projection</strong> estimates total screen years based on remaining life
+      expectancy for your age group, assuming your current habits continue.
+    </p>
+    <p>
+      <strong>Productive Percent</strong> shows what fraction of your screen time goes toward
+      productive activities versus leisure. Higher is not always better, but awareness helps.
+    </p>
+    <p>
+      <strong>Compared to Average</strong> shows whether you are above or below the typical screen
+      time for your age group, helping you benchmark your habits.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

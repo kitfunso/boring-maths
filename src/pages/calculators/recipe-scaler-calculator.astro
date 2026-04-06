@@ -1,0 +1,183 @@
+---
+/**
+ * Recipe Scaler Calculator Page
+ *
+ * SEO-optimized page targeting: "recipe scaler", "double recipe calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import RecipeScalerCalculator from '../../components/calculators/RecipeScalerCalculator/RecipeScalerCalculator';
+
+// SEO Configuration
+const title = 'Recipe Scaler Calculator | Double or Halve Any Recipe | Boring Math';
+const description =
+  'Scale any recipe up or down instantly. Double a recipe, halve it, or convert to any serving size. Smart rounding for baking — no 2.33 eggs. Free, no signup.';
+const keywords =
+  'recipe scaler, recipe multiplier, double recipe calculator, halve recipe calculator, recipe converter, scale recipe, recipe size converter, baking calculator, cooking calculator, recipe serving calculator';
+const canonicalURL = '/calculators/recipe-scaler-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Recipe Scaler Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Baking Conversion Calculator',
+    description: 'Convert cups to grams, ounces to ml, and more.',
+    href: '/calculators/baking-conversion-calculator',
+    icon: 'swap' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat, sides, and supplies for your cookout.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Holiday Dinner Calculator',
+    description: 'Calculate food quantities for holiday dinners.',
+    href: '/calculators/holiday-dinner-calculator',
+    icon: 'glass' as const,
+    color: 'coral' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How do I double a recipe?',
+    answer:
+      'Set original servings to the recipe amount and desired servings to double that number. The calculator multiplies every ingredient by 2x. For baking, use baking mode for kitchen-friendly fractions instead of awkward decimals.',
+  },
+  {
+    question: 'Why do my scaled amounts look different from simple multiplication?',
+    answer:
+      'Baking mode rounds amounts to practical kitchen measurements. You can\'t measure 2.33 eggs or 0.167 cups. The calculator rounds eggs and whole items to the nearest whole number, and cups/tablespoons to the nearest quarter for accuracy you can actually measure.',
+  },
+  {
+    question: 'Should I adjust cooking time when scaling a recipe?',
+    answer:
+      'Yes. Larger batches take longer to cook through, and smaller batches finish sooner. The calculator provides time adjustment guidelines. Always use a thermometer for meat and check baked goods with a toothpick rather than relying on time alone.',
+  },
+  {
+    question: 'Do I need a bigger pan when doubling a recipe?',
+    answer:
+      'Usually yes. Overfilling pans causes uneven cooking and spillovers. When doubling, use a larger pan or split into two standard pans. The calculator suggests pan adjustments based on your scale factor.',
+  },
+  {
+    question: 'What is the difference between baking mode and cooking mode?',
+    answer:
+      'Baking mode rounds to kitchen-friendly fractions: whole numbers for eggs, quarter-cup increments for volume measurements. Cooking mode keeps precise decimal values, which works fine for soups, sauces, and dishes where exact proportions are less critical.',
+  },
+  {
+    question: 'Can I scale baking recipes by any amount?',
+    answer:
+      'You can, but scaling baking recipes above 3x in a single batch can cause problems. Leavening agents (baking soda, baking powder, yeast) do not scale linearly. For large increases, make multiple separate batches instead of one giant batch.',
+  },
+  {
+    question: 'How do I halve a recipe?',
+    answer:
+      'Set your original servings and then set desired servings to half. The calculator handles the tricky math, like halving 3 eggs (rounds to 2 in baking mode) or converting 3/4 cup to a measurable fraction.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Recipe Scaler Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Recipe Scaler Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Recipe Scaler Calculator"
+    description="Scale any recipe up or down with smart rounding for baking. No more 2.33 eggs."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <RecipeScalerCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter the <strong>original servings</strong> from your recipe and the <strong>desired servings</strong>
+      you want to make. Use the quick scale buttons to instantly double, triple, or halve.
+    </p>
+    <p>
+      Add your <strong>ingredients</strong> with amounts and units. The calculator scales every ingredient
+      proportionally and rounds to practical measurements.
+    </p>
+    <p>
+      Toggle <strong>baking mode</strong> for recipes where precision matters. Baking mode rounds cups
+      to the nearest quarter and eggs to whole numbers. Turn it off for soups, sauces, and flexible recipes.
+    </p>
+    <p>
+      Check the <strong>pan size</strong> and <strong>cooking time</strong> suggestions below the results.
+      Larger batches need bigger pans and more time in the oven.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The <strong>scale factor</strong> shows the multiplier applied to every ingredient. A factor of 2.00x
+      means everything doubles. A factor of 0.50x means everything halves.
+    </p>
+    <p>
+      The <strong>original vs scaled</strong> table shows both amounts side by side so you can verify the
+      math and spot any rounding you want to adjust manually.
+    </p>
+    <p>
+      <strong>Pan size</strong> and <strong>cooking time</strong> suggestions are guidelines.
+      Every oven is different, so always check doneness rather than relying solely on time.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

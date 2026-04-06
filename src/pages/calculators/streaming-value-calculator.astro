@@ -1,0 +1,179 @@
+---
+/**
+ * Streaming Value Calculator Page
+ *
+ * SEO-optimized page targeting: "streaming value calculator", "is netflix worth it"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import StreamingValueCalculator from '../../components/calculators/StreamingValueCalculator/StreamingValueCalculator';
+
+// SEO Configuration
+const title = 'Streaming Value Calculator | Is Netflix Worth It? | Boring Math';
+const description =
+  'Calculate the cost per hour of every streaming service you use. Find your best and worst value subscriptions and see which ones to cut. Netflix, Disney+, HBO Max, Hulu, and more.';
+const keywords =
+  'streaming value calculator, is netflix worth it, streaming cost per hour, streaming subscription comparison, best streaming value, cancel streaming services, streaming cost calculator, how much do I spend on streaming';
+const canonicalURL = '/calculators/streaming-value-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Streaming Value Calculator' },
+];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Subscription Audit',
+    description: 'Track and analyze all your subscriptions.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'dollar' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Coffee Spend Calculator',
+    description: 'See how your coffee habit adds up.',
+    href: '/calculators/coffee-spend-calculator',
+    icon: 'fire' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Plan how to reach your savings goals.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart' as const,
+    color: 'accent' as const,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices and savings.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Electricity Cost',
+    description: 'Calculate appliance running costs.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt' as const,
+    color: 'amber' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How is the cost per hour calculated?',
+    answer:
+      'Cost per hour = monthly subscription price divided by hours watched per month. For example, if Netflix costs $15.49 and you watch 20 hours, that is $0.77 per hour of entertainment. Lower cost per hour means better value.',
+  },
+  {
+    question: 'What counts as a "great value" streaming service?',
+    answer:
+      'Under $1 per hour is great value, $1-2 is good, $2-4 is fair, and over $4 per hour is poor value. The rating depends entirely on how much you actually watch, not the sticker price. A cheap service you never use is worse value than an expensive one you watch daily.',
+  },
+  {
+    question: 'Should I cancel the "worst value" service?',
+    answer:
+      'Not necessarily. Cost per hour is one way to measure value. You might keep a service for one specific show, for family members, or because it bundles with another product (like Amazon Prime with free shipping). Use the numbers as a starting point for decisions, not a final verdict.',
+  },
+  {
+    question: 'How much does the average person spend on streaming?',
+    answer:
+      'As of 2025, the average US household spends about $60-80 per month on streaming services. With price increases across Netflix, Disney+, and others, many households are now spending over $100 per month without realizing it. This calculator helps you see the full picture.',
+  },
+  {
+    question: 'Is it cheaper to rotate streaming services?',
+    answer:
+      'Yes. Instead of paying for 5+ services simultaneously, subscribe to one or two at a time, binge what you want, then switch. Most services let you cancel and resubscribe without penalty. Rotating through 4 services at $15 each costs $15-30 per month instead of $60.',
+  },
+  {
+    question: 'Does this include ad-supported tiers?',
+    answer:
+      'The default prices reflect ad-free tiers as of early 2025. You can adjust the monthly price for any service by modifying the preset values. Many services offer cheaper ad-supported plans that can dramatically improve your cost per hour.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Streaming Value Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Streaming Value Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Streaming Value Calculator"
+    description="Find out which streaming services give you the best value per hour and which ones are draining your wallet."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <StreamingValueCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      <strong>Toggle on</strong> each streaming service you currently subscribe to. The default
+      prices reflect standard ad-free tiers as of early 2025.
+    </p>
+    <p>
+      <strong>Adjust the hours slider</strong> to match how much you actually watch each service
+      per month. Be honest -- overestimating makes bad subscriptions look good.
+    </p>
+    <p>
+      The calculator ranks every service by <strong>cost per hour</strong>, color-coded from
+      green (great value) to red (poor value), so you can see at a glance where your money goes.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      <strong>Total Monthly/Yearly Cost</strong> is the combined price of all your active
+      subscriptions. Many people underestimate this number.
+    </p>
+    <p>
+      <strong>Cost Per Hour</strong> is the key metric. It shows how much you pay per hour of
+      content consumed. A $16 service you watch 20 hours costs $0.80/hr (great). The same
+      service at 2 hours costs $8/hr (terrible).
+    </p>
+    <p>
+      <strong>Value Rating</strong> uses color coding: green means you are getting solid value,
+      red means the subscription costs more per hour than a movie ticket.
+    </p>
+    <p>
+      The <strong>recommended cut</strong> highlights the service with the worst cost-per-hour
+      ratio, helping you make the biggest impact with a single cancellation.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
