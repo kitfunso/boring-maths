@@ -11,6 +11,8 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   size?: 'sm' | 'md' | 'lg';
   /** Error state */
   error?: boolean;
+  /** Show spin controls for number inputs (default: true) */
+  showControls?: boolean;
   /** Additional class names */
   className?: string;
 }
@@ -22,7 +24,8 @@ const SIZE_CLASSES = {
 };
 
 /**
- * Custom spin controls component for number inputs
+ * Custom spin controls component for number inputs.
+ * Supports disabled state on individual buttons when at min/max bounds.
  */
 function SpinControls({
   inputRef,
@@ -39,9 +42,13 @@ function SpinControls({
 }) {
   const stepNum = typeof step === 'string' ? parseFloat(step) : step;
 
+  const getCurrentValue = (): number => {
+    return parseFloat(inputRef.current?.value ?? '0') || 0;
+  };
+
   const increment = () => {
     if (!inputRef.current || disabled) return;
-    const currentValue = parseFloat(inputRef.current.value) || 0;
+    const currentValue = getCurrentValue();
     const newValue = currentValue + stepNum;
     if (max === undefined || newValue <= max) {
       inputRef.current.value = String(newValue);
@@ -51,7 +58,7 @@ function SpinControls({
 
   const decrement = () => {
     if (!inputRef.current || disabled) return;
-    const currentValue = parseFloat(inputRef.current.value) || 0;
+    const currentValue = getCurrentValue();
     const newValue = currentValue - stepNum;
     if (min === undefined || newValue >= min) {
       inputRef.current.value = String(newValue);
@@ -61,14 +68,30 @@ function SpinControls({
 
   if (disabled) return null;
 
+  const currentValue = getCurrentValue();
+  const isAtMax = max !== undefined && currentValue >= max;
+  const isAtMin = min !== undefined && currentValue <= min;
+
   return (
     <div className="spin-controls">
-      <button type="button" onClick={increment} tabIndex={-1} aria-label="Increase value">
+      <button
+        type="button"
+        onClick={increment}
+        tabIndex={-1}
+        disabled={isAtMax}
+        aria-label="Increase value"
+      >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M18 15l-6-6-6 6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      <button type="button" onClick={decrement} tabIndex={-1} aria-label="Decrease value">
+      <button
+        type="button"
+        onClick={decrement}
+        tabIndex={-1}
+        disabled={isAtMin}
+        aria-label="Decrease value"
+      >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -78,14 +101,30 @@ function SpinControls({
 }
 
 /**
- * Themed input component with support for currency and percentage variants.
- * Updated for dark theme with custom spin controls.
+ * Themed input component with support for currency, percentage, and number variants.
+ * Includes custom spin controls with keyboard support for number inputs.
+ *
+ * @example
+ * ```tsx
+ * // Currency input
+ * <Input variant="currency" currencySymbol="$" min={0} step={100} />
+ *
+ * // Percentage input
+ * <Input variant="percentage" min={0} max={100} step={0.5} />
+ *
+ * // Number input without spin controls
+ * <Input type="number" showControls={false} />
+ *
+ * // Text input
+ * <Input type="text" placeholder="Enter name" />
+ * ```
  */
 export function Input({
   variant = 'default',
   currencySymbol = '$',
   size = 'md',
   error = false,
+  showControls = true,
   className = '',
   type = 'number',
   disabled,
@@ -97,6 +136,31 @@ export function Input({
   useTheme(); // Theme context for potential future use
   const inputRef = useRef<HTMLInputElement>(null);
   const isNumber = type === 'number';
+  const shouldShowControls = isNumber && showControls;
+
+  const stepNum = typeof step === 'number' ? step : typeof step === 'string' ? parseFloat(step) : 1;
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (!isNumber || !inputRef.current) return;
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const currentValue = parseFloat(inputRef.current.value) || 0;
+      const newValue = currentValue + stepNum;
+      if (max === undefined || newValue <= Number(max)) {
+        inputRef.current.value = String(newValue);
+        inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const currentValue = parseFloat(inputRef.current.value) || 0;
+      const newValue = currentValue - stepNum;
+      if (min === undefined || newValue >= Number(min)) {
+        inputRef.current.value = String(newValue);
+        inputRef.current.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    }
+  };
 
   const baseClasses = `
     w-full border rounded-[10px] transition-all duration-200 tabular-nums
@@ -129,10 +193,11 @@ export function Input({
           min={min}
           max={max}
           step={step}
-          className={`${baseClasses} pl-8 pr-10 ${className}`}
+          onKeyDown={handleKeyDown}
+          className={`${baseClasses} pl-8 ${shouldShowControls ? 'pr-10' : 'pr-4'} ${className}`}
           {...props}
         />
-        {isNumber && (
+        {shouldShowControls && (
           <SpinControls
             inputRef={inputRef}
             disabled={disabled}
@@ -156,7 +221,8 @@ export function Input({
           min={min}
           max={max}
           step={step}
-          className={`${baseClasses} pl-4 pr-16 ${className}`}
+          onKeyDown={handleKeyDown}
+          className={`${baseClasses} pl-4 ${shouldShowControls ? 'pr-16' : 'pr-12'} ${className}`}
           {...props}
         />
         <span
@@ -165,7 +231,7 @@ export function Input({
         >
           %
         </span>
-        {isNumber && (
+        {shouldShowControls && (
           <SpinControls
             inputRef={inputRef}
             disabled={disabled}
@@ -179,20 +245,21 @@ export function Input({
   }
 
   // Default variant
-  return (
-    <div className="spin-input-wrapper w-full">
-      <input
-        ref={inputRef}
-        type={type}
-        inputMode={isNumber ? 'decimal' : undefined}
-        disabled={disabled}
-        min={min}
-        max={max}
-        step={step}
-        className={`${baseClasses} px-4 pr-10 ${className}`}
-        {...props}
-      />
-      {isNumber && (
+  if (shouldShowControls) {
+    return (
+      <div className="spin-input-wrapper w-full">
+        <input
+          ref={inputRef}
+          type={type}
+          inputMode="decimal"
+          disabled={disabled}
+          min={min}
+          max={max}
+          step={step}
+          onKeyDown={handleKeyDown}
+          className={`${baseClasses} px-4 pr-10 ${className}`}
+          {...props}
+        />
         <SpinControls
           inputRef={inputRef}
           disabled={disabled}
@@ -200,7 +267,23 @@ export function Input({
           max={typeof max === 'number' ? max : undefined}
           step={typeof step === 'number' ? step : 1}
         />
-      )}
-    </div>
+      </div>
+    );
+  }
+
+  // Default variant without spin controls (or text input)
+  return (
+    <input
+      ref={inputRef}
+      type={type}
+      inputMode={isNumber ? 'decimal' : undefined}
+      disabled={disabled}
+      min={min}
+      max={max}
+      step={step}
+      onKeyDown={isNumber ? handleKeyDown : undefined}
+      className={`${baseClasses} px-4 ${className}`}
+      {...props}
+    />
   );
 }
