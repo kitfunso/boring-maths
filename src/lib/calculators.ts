@@ -1356,6 +1356,7 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
+<<<<<<< HEAD
     title: 'Streaming Value Calculator',
     description: 'Calculate cost per hour for Netflix, Disney+, and more to find your best and worst value subscriptions.',
     href: '/calculators/streaming-value-calculator',
@@ -1425,6 +1426,15 @@ export const calculators: readonly CalculatorEntry[] = [
     icon: 'briefcase',
     color: 'green',
     category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Heart Rate Zone Calculator',
+    description: 'Calculate your 5 training heart rate zones using max HR percentage or Karvonen method.',
+    href: '/calculators/heart-rate-zone-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
     mostUsed: false,
   },
 ];
