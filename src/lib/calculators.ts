@@ -1409,6 +1409,15 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'House Flip Calculator',
+    description: 'Analyze fix-and-flip profitability with the 70% rule, financing costs, and full cost breakdown.',
+    href: '/calculators/house-flip-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------
