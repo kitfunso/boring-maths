@@ -1,6 +1,6 @@
 import { calculateIHT, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, type IHTInputs } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Toggle } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function InheritanceTaxCalculator() {
@@ -104,83 +104,23 @@ export default function InheritanceTaxCalculator() {
 
             {/* Toggles */}
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateInput('leavingToDirectDescendants', !inputs.leavingToDirectDescendants)
-                  }
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    inputs.leavingToDirectDescendants ? 'bg-blue-500' : 'bg-white/20'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.leavingToDirectDescendants ? 'translate-x-7' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <Label
-                  className="mb-0 cursor-pointer"
-                  onClick={() =>
-                    updateInput('leavingToDirectDescendants', !inputs.leavingToDirectDescendants)
-                  }
-                >
-                  Leaving home to children/grandchildren (RNRB)
-                </Label>
-              </div>
+              <Toggle
+                checked={inputs.leavingToDirectDescendants}
+                onChange={(val) => updateInput('leavingToDirectDescendants', val)}
+                label="Leaving home to children/grandchildren (RNRB)"
+              />
 
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateInput('marriedOrCivilPartner', !inputs.marriedOrCivilPartner)
-                  }
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    inputs.marriedOrCivilPartner ? 'bg-blue-500' : 'bg-white/20'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.marriedOrCivilPartner ? 'translate-x-7' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <Label
-                  className="mb-0 cursor-pointer"
-                  onClick={() =>
-                    updateInput('marriedOrCivilPartner', !inputs.marriedOrCivilPartner)
-                  }
-                >
-                  Transferring deceased spouse's unused allowance
-                </Label>
-              </div>
+              <Toggle
+                checked={inputs.marriedOrCivilPartner}
+                onChange={(val) => updateInput('marriedOrCivilPartner', val)}
+                label="Transferring deceased spouse's unused allowance"
+              />
 
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() =>
-                    updateInput('spouseInheritingEstate', !inputs.spouseInheritingEstate)
-                  }
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    inputs.spouseInheritingEstate ? 'bg-blue-500' : 'bg-white/20'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.spouseInheritingEstate ? 'translate-x-7' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <Label
-                  className="mb-0 cursor-pointer"
-                  onClick={() =>
-                    updateInput('spouseInheritingEstate', !inputs.spouseInheritingEstate)
-                  }
-                >
-                  Spouse/civil partner inheriting entire estate (exempt)
-                </Label>
-              </div>
+              <Toggle
+                checked={inputs.spouseInheritingEstate}
+                onChange={(val) => updateInput('spouseInheritingEstate', val)}
+                label="Spouse/civil partner inheriting entire estate (exempt)"
+              />
             </div>
           </div>
 

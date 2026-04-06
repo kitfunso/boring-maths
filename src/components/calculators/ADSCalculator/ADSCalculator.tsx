@@ -12,7 +12,7 @@ import {
   type ADSCalculatorInputs,
   type BuyerType,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Toggle } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function ADSCalculator() {
@@ -91,27 +91,11 @@ export default function ADSCalculator() {
 
             {/* Additional Property Toggle */}
             {inputs.buyerType !== 'additional' && (
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => updateInput('isAdditionalProperty', !inputs.isAdditionalProperty)}
-                  className={`relative w-12 h-6 rounded-full transition-colors ${
-                    inputs.isAdditionalProperty ? 'bg-purple-500' : 'bg-white/20'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                      inputs.isAdditionalProperty ? 'translate-x-7' : 'translate-x-1'
-                    }`}
-                  />
-                </button>
-                <Label
-                  className="mb-0 cursor-pointer"
-                  onClick={() => updateInput('isAdditionalProperty', !inputs.isAdditionalProperty)}
-                >
-                  This is an additional property (ADS applies)
-                </Label>
-              </div>
+              <Toggle
+                checked={inputs.isAdditionalProperty}
+                onChange={(val) => updateInput('isAdditionalProperty', val)}
+                label="This is an additional property (ADS applies)"
+              />
             )}
           </div>
 

@@ -7,7 +7,7 @@ import {
   type PropertyLocation,
   type BuyerType,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Toggle } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKStampDutyCalculator() {
@@ -96,27 +96,11 @@ export default function UKStampDutyCalculator() {
             </div>
 
             {/* Non-Resident Toggle */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => updateInput('isNonResident', !inputs.isNonResident)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  inputs.isNonResident ? 'bg-blue-500' : 'bg-white/20'
-                }`}
-              >
-                <span
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    inputs.isNonResident ? 'translate-x-7' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <Label
-                className="mb-0 cursor-pointer"
-                onClick={() => updateInput('isNonResident', !inputs.isNonResident)}
-              >
-                Non-UK Resident (+2% surcharge)
-              </Label>
-            </div>
+            <Toggle
+              checked={inputs.isNonResident}
+              onChange={(val) => updateInput('isNonResident', val)}
+              label="Non-UK Resident (+2% surcharge)"
+            />
           </div>
 
           {/* Results Section */}

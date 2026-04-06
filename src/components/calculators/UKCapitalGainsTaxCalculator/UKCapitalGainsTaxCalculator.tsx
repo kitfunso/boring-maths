@@ -7,7 +7,7 @@ import {
   type AssetType,
   type TaxBand,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Toggle } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function UKCapitalGainsTaxCalculator() {
@@ -153,27 +153,11 @@ export default function UKCapitalGainsTaxCalculator() {
               </div>
             )}
 
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => updateInput('useAnnualExemption', !inputs.useAnnualExemption)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  inputs.useAnnualExemption ? 'bg-blue-500' : 'bg-white/20'
-                }`}
-              >
-                <span
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    inputs.useAnnualExemption ? 'translate-x-7' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <Label
-                className="mb-0 cursor-pointer"
-                onClick={() => updateInput('useAnnualExemption', !inputs.useAnnualExemption)}
-              >
-                Use annual CGT exemption (£3,000 for 2024/25)
-              </Label>
-            </div>
+            <Toggle
+              checked={inputs.useAnnualExemption}
+              onChange={(val) => updateInput('useAnnualExemption', val)}
+              label="Use annual CGT exemption (£3,000 for 2024/25)"
+            />
           </div>
 
           {/* Results */}

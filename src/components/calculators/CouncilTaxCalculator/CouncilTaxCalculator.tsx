@@ -7,7 +7,7 @@ import {
   type PropertyBand,
   type CouncilRegion,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Select, Grid } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Select, Grid, Toggle } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function CouncilTaxCalculator() {
@@ -68,50 +68,18 @@ export default function CouncilTaxCalculator() {
             </div>
 
             {/* Single Person Discount */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => updateInput('singlePersonDiscount', !inputs.singlePersonDiscount)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  inputs.singlePersonDiscount ? 'bg-blue-500' : 'bg-white/20'
-                }`}
-              >
-                <span
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    inputs.singlePersonDiscount ? 'translate-x-7' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <Label
-                className="mb-0 cursor-pointer"
-                onClick={() => updateInput('singlePersonDiscount', !inputs.singlePersonDiscount)}
-              >
-                Single person discount (25% off)
-              </Label>
-            </div>
+            <Toggle
+              checked={inputs.singlePersonDiscount}
+              onChange={(val) => updateInput('singlePersonDiscount', val)}
+              label="Single person discount (25% off)"
+            />
 
             {/* Second Home */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => updateInput('isSecondHome', !inputs.isSecondHome)}
-                className={`relative w-12 h-6 rounded-full transition-colors ${
-                  inputs.isSecondHome ? 'bg-blue-500' : 'bg-white/20'
-                }`}
-              >
-                <span
-                  className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                    inputs.isSecondHome ? 'translate-x-7' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-              <Label
-                className="mb-0 cursor-pointer"
-                onClick={() => updateInput('isSecondHome', !inputs.isSecondHome)}
-              >
-                Second home (100% premium from April 2025)
-              </Label>
-            </div>
+            <Toggle
+              checked={inputs.isSecondHome}
+              onChange={(val) => updateInput('isSecondHome', val)}
+              label="Second home (100% premium from April 2025)"
+            />
           </div>
 
           {/* Results */}
