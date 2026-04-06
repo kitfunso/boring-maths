@@ -107,3 +107,4 @@ export type { DataExportIndicatorProps } from './calculator/DataExportIndicator'
 // Actions
 export { default as ShareResults } from './ShareResults';
 export { default as PrintResults } from './PrintResults';
+export { default as KeyboardShortcutOverlay } from './KeyboardShortcutOverlay';

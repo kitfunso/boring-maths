@@ -30,6 +30,11 @@ export default defineConfig({
     alias: {
       // Match the project's import aliases if any
       '@': '/src',
+      // Preact compat aliases (mirrors Astro's @astrojs/preact compat mode)
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime',
+      'react/jsx-dev-runtime': 'preact/jsx-runtime',
     },
   },
 });
