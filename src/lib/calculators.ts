@@ -1346,6 +1346,15 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
+  {
+    title: 'Heart Rate Zone Calculator',
+    description: 'Calculate your 5 training heart rate zones using max HR percentage or Karvonen method.',
+    href: '/calculators/heart-rate-zone-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------

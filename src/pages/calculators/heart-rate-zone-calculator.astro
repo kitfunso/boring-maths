@@ -1,0 +1,208 @@
+---
+/**
+ * Heart Rate Zone Calculator Page
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import HeartRateZoneCalculator from '../../components/calculators/HeartRateZoneCalculator/HeartRateZoneCalculator';
+
+const title = 'Heart Rate Zone Calculator | Training Zones | Boring Math';
+const description =
+  'Calculate your 5 heart rate training zones using max HR percentage or Karvonen method. Find optimal BPM ranges for fat burn, endurance, and performance.';
+const keywords =
+  'heart rate zone calculator, training zones, karvonen formula, max heart rate, fat burning zone, aerobic zone, anaerobic threshold, VO2 max zone, heart rate reserve';
+const canonicalURL = '/calculators/heart-rate-zone-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Heart Rate Zone Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and see healthy weight ranges.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'TDEE Calculator',
+    description: 'Calculate your Total Daily Energy Expenditure.',
+    href: '/calculators/tdee-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Pace Calculator',
+    description: 'Calculate running pace, distance, and finish time.',
+    href: '/calculators/pace-calculator',
+    icon: 'bolt' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs based on activity level.',
+    href: '/calculators/calorie-calculator',
+    icon: 'fire' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What are heart rate training zones?',
+    answer:
+      'Heart rate training zones are ranges of heartbeats per minute that correspond to different exercise intensities. There are 5 standard zones: Zone 1 (Recovery, 50-60%), Zone 2 (Fat Burn, 60-70%), Zone 3 (Aerobic, 70-80%), Zone 4 (Anaerobic, 80-90%), and Zone 5 (VO2 Max, 90-100%). Training in different zones produces different physiological adaptations.',
+  },
+  {
+    question: 'How do I calculate my max heart rate?',
+    answer:
+      'The simplest formula is 220 minus your age. For a 30-year-old, that gives 190 BPM. This is an estimate and individual max heart rates can vary by 10-20 BPM. For a more accurate number, consider a graded exercise test supervised by a healthcare professional.',
+  },
+  {
+    question: 'What is the Karvonen method?',
+    answer:
+      'The Karvonen method (also called Heart Rate Reserve method) accounts for your resting heart rate, producing more personalized zones. The formula is: Target HR = (Max HR - Resting HR) x Zone% + Resting HR. It is generally considered more accurate than the simple percentage method, especially for trained athletes with lower resting heart rates.',
+  },
+  {
+    question: 'Which zone is best for burning fat?',
+    answer:
+      'Zone 2 (60-70% of max HR) is traditionally called the "fat burning zone" because the body uses a higher percentage of fat as fuel at lower intensities. However, higher-intensity exercise burns more total calories and can be equally effective for fat loss. A mix of Zone 2 endurance work and higher-intensity intervals is optimal for most people.',
+  },
+  {
+    question: 'How do I measure my resting heart rate?',
+    answer:
+      'Measure your resting heart rate first thing in the morning before getting out of bed. Place two fingers on your wrist or neck, count the beats for 60 seconds (or count for 15 seconds and multiply by 4). Average several days of measurements for the most accurate result. Fitness trackers and smartwatches can also track resting heart rate automatically.',
+  },
+  {
+    question: 'How much time should I spend in each zone?',
+    answer:
+      'A common approach is the 80/20 rule: spend about 80% of training time in Zones 1-2 (easy effort) and 20% in Zones 3-5 (moderate to hard). This polarized training model is used by elite endurance athletes. Beginners should focus mostly on Zone 2 to build an aerobic base before adding higher-intensity work.',
+  },
+  {
+    question: 'Why are my Karvonen zones different from percentage zones?',
+    answer:
+      'The Karvonen method includes resting heart rate in the calculation, which shifts zones higher. Someone with a low resting heart rate (e.g., 50 BPM) has a larger heart rate reserve, so their zones will be wider and slightly higher than the simple percentage method. The Karvonen method is generally more accurate for fit individuals.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Heart Rate Zone Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Heart Rate Zone Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      { name: 'Enter your age', text: 'Input your age to estimate your maximum heart rate.' },
+      { name: 'Add resting heart rate', text: 'Enter your resting heart rate for Karvonen method accuracy.' },
+      { name: 'Choose a method', text: 'Select Max HR Percentage or Karvonen for zone calculation.' },
+      { name: 'View your zones', text: 'See your 5 personalized heart rate training zones with BPM ranges.' },
+    ]}
+    estimatedTime="PT1M"
+  />
+
+  <HeroSection
+    title="Heart Rate Zone Calculator"
+    description="Calculate your 5 training zones and find the right intensity for any fitness goal."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <HeartRateZoneCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>age</strong> to estimate your maximum heart rate using the standard
+      220-age formula. If you know your actual max HR from a fitness test, check the box and
+      enter it directly for more accurate zones.
+    </p>
+    <p>
+      Add your <strong>resting heart rate</strong> for the Karvonen method. Measure it first thing
+      in the morning before getting out of bed. A lower resting heart rate generally indicates
+      better cardiovascular fitness.
+    </p>
+    <p>
+      Choose between the <strong>Max HR Percentage</strong> method (simpler, good for general use)
+      and the <strong>Karvonen method</strong> (accounts for fitness level via resting heart rate).
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding the 5 Training Zones">
+    <p>
+      <strong>Zone 1 - Recovery (50-60%):</strong> Very light effort. Use for warm-ups, cool-downs,
+      and active recovery days. You should be able to hold a full conversation easily.
+    </p>
+    <p>
+      <strong>Zone 2 - Fat Burn (60-70%):</strong> Light effort and the foundation of endurance training.
+      Your body primarily uses fat for fuel. Long, steady sessions in this zone build aerobic base.
+    </p>
+    <p>
+      <strong>Zone 3 - Aerobic (70-80%):</strong> Moderate effort that improves cardiovascular efficiency.
+      Breathing becomes heavier but you can still speak in short sentences. Tempo runs and steady-state
+      cycling fall here.
+    </p>
+    <p>
+      <strong>Zone 4 - Anaerobic (80-90%):</strong> Hard effort near your lactate threshold. Trains your
+      body to clear lactic acid faster. Interval training and race-pace efforts target this zone.
+    </p>
+    <p>
+      <strong>Zone 5 - VO2 Max (90-100%):</strong> Maximum effort sustainable for only short bursts.
+      Develops peak power and speed. Sprint intervals and all-out efforts live here.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Percentage vs Karvonen Method">
+    <p>
+      The <strong>percentage method</strong> simply multiplies your max heart rate by the zone percentage.
+      It is straightforward and works well for most recreational exercisers.
+    </p>
+    <p>
+      The <strong>Karvonen method</strong> uses heart rate reserve (max HR minus resting HR) and produces
+      zones that better reflect individual fitness. A trained athlete with a resting HR of 50 BPM will
+      get different zones than a sedentary person with a resting HR of 80 BPM, even at the same age.
+    </p>
+    <p>
+      For <strong>serious training</strong>, the Karvonen method is generally recommended because it
+      accounts for cardiovascular fitness. The percentage method is adequate for general fitness and
+      weight management goals.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Tips for Training by Heart Rate">
+    <p>
+      <strong>Use a heart rate monitor</strong> for accurate real-time feedback. Chest straps are more
+      accurate than optical wrist sensors, especially during high-intensity or interval work.
+    </p>
+    <p>
+      <strong>Cardiac drift</strong> means your heart rate can rise over a long session even at constant
+      effort. This is normal, especially in heat. Focus on perceived effort alongside heart rate data.
+    </p>
+    <p>
+      <strong>Medications and caffeine</strong> can affect heart rate. Beta-blockers lower max HR, while
+      caffeine and decongestants can raise it. Factor these in when interpreting your zones.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
