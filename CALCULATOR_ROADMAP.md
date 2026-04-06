@@ -6,7 +6,7 @@
 
 Based on market research and SEO analysis, this roadmap outlines **71 calculator opportunities (51 original + 20 US expansion)** organized into phases over time. Each calculator targets specific long-tail keywords with moderate search volume (<500/month) and low competition - the sweet spot for passive SEO traffic.
 
-**Status (February 2026):** 124 calculators live. Phases 5-11 complete. Phase 12 partially complete (5/20). 53+ bonus calculators built beyond the original roadmap across brewing, engineering, health, hobbies, everyday, and EU/UK tax niches.
+**Status (April 2026):** 150+ calculators live. Phases 5-11 complete. Phase 12 partially complete (5/20). Phase 13+ in progress (20 built in April 2026 across trades, cooking, fitness, viral, regional, and real estate). See CALCULATOR_ROADMAP_PHASE13+.md for the expansion plan.
 
 ---
 
@@ -824,7 +824,7 @@ This roadmap was informed by:
 
 ---
 
-*Last Updated: February 2026*
-*Total Live Calculators: 124*
-*Roadmap Calculators Remaining: 15 (Phase 12)*
-*Bonus Calculators Built Beyond Roadmap: 53+ (brewing, engineering, health, hobbies, EU, etc.)*
+*Last Updated: April 2026*
+*Total Live Calculators: 150+*
+*Roadmap Calculators Remaining: 15 (Phase 12) + 34 (Phase 13+)*
+*See CALCULATOR_ROADMAP_PHASE13+.md for the full expansion plan*

@@ -155,7 +155,7 @@ Ensure all calculators work perfectly on mobile.
 - [x] No critical issues found
 
 ### Phase 6: Content ✅ COMPLETE
-- [x] All 124 calculators have 6+ FAQs
+- [x] All 150+ calculators have 6+ FAQs
 - [x] All pages have "How to use" sections
 - [x] All pages have "Understanding results" sections
 - [x] Enhanced high-traffic pages (mortgage, BMI, compound interest)
