@@ -1,0 +1,1297 @@
+/**
+ * Calculator Catalog - Single Source of Truth
+ *
+ * All calculator metadata, icon mappings, and color definitions.
+ * Import from here instead of duplicating across pages/layouts.
+ */
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+export type IconName =
+  | 'dollar'
+  | 'percent'
+  | 'chart'
+  | 'shield'
+  | 'glass'
+  | 'trending'
+  | 'calculator'
+  | 'cube'
+  | 'bolt'
+  | 'fire'
+  | 'home'
+  | 'heart'
+  | 'swap'
+  | 'calendar'
+  | 'paw'
+  | 'layers'
+  | 'leaf'
+  | 'rocket'
+  | 'briefcase'
+  | 'users';
+
+export type ColorName =
+  | 'blue'
+  | 'green'
+  | 'accent'
+  | 'violet'
+  | 'coral'
+  | 'ocean'
+  | 'amber'
+  | 'pink';
+
+export type CategoryName =
+  | 'Finance'
+  | 'Income'
+  | 'Business'
+  | 'Events'
+  | 'Machining'
+  | 'Aquarium'
+  | 'Brewing'
+  | 'Crafts'
+  | 'Home'
+  | 'Everyday'
+  | 'Health'
+  | 'Engineering'
+  | 'Life'
+  | 'Automotive'
+  | 'UK Tax';
+
+export type CountryCode = 'UK' | 'US' | 'EU';
+
+export interface CalculatorEntry {
+  readonly title: string;
+  readonly description: string;
+  readonly href: string;
+  readonly icon: IconName;
+  readonly color: ColorName;
+  readonly category: CategoryName;
+  readonly country?: CountryCode;
+  readonly mostUsed: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Icon gradient classes (for dark-theme icon backgrounds)
+// ---------------------------------------------------------------------------
+
+export const ICON_COLORS: Readonly<Record<ColorName, string>> = {
+  blue: 'from-blue-500 to-blue-600',
+  green: 'from-emerald-500 to-emerald-600',
+  accent: 'from-[#c4ff00] to-[#9acc00]',
+  violet: 'from-violet-500 to-purple-600',
+  coral: 'from-rose-500 to-red-500',
+  ocean: 'from-cyan-500 to-teal-500',
+  amber: 'from-amber-500 to-orange-500',
+  pink: 'from-pink-500 to-rose-500',
+};
+
+// ---------------------------------------------------------------------------
+// Icon SVG path data (stroke paths for 24x24 viewBox)
+// ---------------------------------------------------------------------------
+
+export const ICON_PATHS: Readonly<Record<IconName, string>> = {
+  dollar: 'M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  percent: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  chart: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  glass: 'M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  trending: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+  calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+  cube: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
+  bolt: 'M13 10V3L4 14h7v7l9-11h-7z',
+  fire: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  home: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+  heart: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  swap: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
+  calendar: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  paw: 'M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-9 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z',
+  layers: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  leaf: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+  rocket: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
+  briefcase: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+  users: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+};
+
+// ---------------------------------------------------------------------------
+// Category badge colors (for homepage category pills)
+// ---------------------------------------------------------------------------
+
+export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
+  Income: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+  Finance: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
+  Business: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
+  Events: 'text-rose-400 bg-rose-500/10 border-rose-500/20',
+  Machining: 'text-slate-400 bg-slate-500/10 border-slate-500/20',
+  Aquarium: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  Brewing: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  Crafts: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
+  Home: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
+  Everyday: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
+  Health: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+  Engineering: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
+  Life: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
+  Automotive: 'text-green-400 bg-green-500/10 border-green-500/20',
+  'UK Tax': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+};
+
+// ---------------------------------------------------------------------------
+// Calculator Catalog
+// ---------------------------------------------------------------------------
+
+export const calculators: readonly CalculatorEntry[] = [
+  {
+    title: 'UK \u00a3100k Tax Trap',
+    description: 'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
+    href: '/calculators/uk-100k-tax-trap-calculator',
+    icon: 'chart',
+    color: 'coral',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: true,
+  },
+  {
+    title: 'UK Nursery Cost',
+    description: 'Calculate childcare costs with free hours, Tax-Free Childcare, and government support.',
+    href: '/calculators/uk-nursery-cost-calculator',
+    icon: 'heart',
+    color: 'violet',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Go Full-Time Calculator',
+    description: 'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
+    href: '/calculators/go-full-time-calculator',
+    icon: 'rocket',
+    color: 'blue',
+    category: 'Income',
+    mostUsed: true,
+  },
+  {
+    title: 'Contractor vs Employee',
+    description: 'Compare contractor rates vs salary accounting for taxes, benefits, and hidden costs.',
+    href: '/calculators/contractor-vs-employee-calculator',
+    icon: 'swap',
+    color: 'green',
+    category: 'Income',
+    mostUsed: true,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
+    href: '/calculators/fire-calculator',
+    icon: 'fire',
+    color: 'amber',
+    category: 'Finance',
+    mostUsed: true,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Calculate monthly payments, total interest, and loan costs for your home.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home',
+    color: 'green',
+    category: 'Finance',
+    mostUsed: true,
+  },
+  {
+    title: 'Compound Interest',
+    description: 'See how investments grow over time with the power of compound interest.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart',
+    color: 'accent',
+    category: 'Finance',
+    mostUsed: true,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate monthly payments and total interest for any loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'BMI Calculator',
+    description: 'Calculate your Body Mass Index and see healthy weight ranges.',
+    href: '/calculators/bmi-calculator',
+    icon: 'heart',
+    color: 'violet',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percent change, and more with instant results.',
+    href: '/calculators/percentage-calculator',
+    icon: 'percent',
+    color: 'violet',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Calorie Calculator',
+    description: 'Calculate your daily calorie needs (TDEE) based on activity level and goals.',
+    href: '/calculators/calorie-calculator',
+    icon: 'heart',
+    color: 'green',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Tip Calculator',
+    description: 'Calculate tips instantly and split bills between friends with ease.',
+    href: '/calculators/tip-calculator',
+    icon: 'percent',
+    color: 'green',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, temperature, volume, and more.',
+    href: '/calculators/unit-converter',
+    icon: 'swap',
+    color: 'blue',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Age Calculator',
+    description: 'Calculate your exact age in years, months, days with zodiac signs.',
+    href: '/calculators/age-calculator',
+    icon: 'calendar',
+    color: 'violet',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Freelance Day Rate',
+    description: 'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
+    href: '/calculators/freelance-day-rate-calculator',
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Hourly to Salary',
+    description: 'Convert hourly rate to annual salary with tax adjustments and take-home pay.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'calculator',
+    color: 'green',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Raise Calculator',
+    description: 'See the lifetime value of salary increases and career compounding.',
+    href: '/calculators/raise-calculator',
+    icon: 'trending',
+    color: 'ocean',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Remote Work Savings',
+    description: 'Calculate how much you save working from home - gas, time, food, and more.',
+    href: '/calculators/remote-work-savings-calculator',
+    icon: 'home',
+    color: 'ocean',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Savings Goal',
+    description: 'Calculate monthly contributions to reach your savings goal with inflation.',
+    href: '/calculators/savings-goal-calculator',
+    icon: 'chart',
+    color: 'accent',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Emergency Fund',
+    description: 'Calculate your ideal emergency fund size based on expenses and stability.',
+    href: '/calculators/emergency-fund-calculator',
+    icon: 'shield',
+    color: 'violet',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    description: 'Compare snowball vs avalanche strategies to pay off debt faster.',
+    href: '/calculators/debt-payoff-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Side Hustle Profit',
+    description: 'Determine if your side hustle is truly profitable with effective hourly rate.',
+    href: '/calculators/side-hustle-profitability-calculator',
+    icon: 'trending',
+    color: 'coral',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Etsy/eBay Fee Calculator',
+    description: 'Compare marketplace fees and calculate your net profit on Etsy vs eBay.',
+    href: '/calculators/etsy-fee-calculator',
+    icon: 'dollar',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Break-Even Point',
+    description: 'Calculate how many units you need to sell to cover business costs.',
+    href: '/calculators/break-even-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate paint needed for any room with gallons and shopping list.',
+    href: '/calculators/paint-calculator',
+    icon: 'cube',
+    color: 'violet',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring needed with pattern-specific waste factors and box counts.',
+    href: '/calculators/flooring-calculator',
+    icon: 'layers',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Mulch Calculator',
+    description: 'Calculate how much mulch you need in cubic yards or bags for your garden beds.',
+    href: '/calculators/mulch-calculator',
+    icon: 'leaf',
+    color: 'green',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Electricity Cost',
+    description: 'Calculate appliance running costs - daily, monthly, and yearly.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'bolt',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Wedding Alcohol',
+    description: 'Estimate beer, wine, and liquor for your celebration based on guest count.',
+    href: '/calculators/wedding-alcohol-calculator',
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'BBQ Calculator',
+    description: 'Calculate meat, sides, and supplies for your cookout or BBQ party.',
+    href: '/calculators/bbq-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Party Drink Calculator',
+    description: 'Estimate non-alcoholic drinks, juice, water, and ice for your party or event.',
+    href: '/calculators/party-drink-calculator',
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Discount Calculator',
+    description: 'Calculate sale prices, percent off, and total savings on any purchase.',
+    href: '/calculators/discount-calculator',
+    icon: 'percent',
+    color: 'coral',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Dog Age Calculator',
+    description: 'Convert dog years to human years using accurate, science-based formulas.',
+    href: '/calculators/dog-age-calculator',
+    icon: 'paw',
+    color: 'amber',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  // Chemical Engineering Calculators
+  {
+    title: 'Reynolds Number',
+    description: 'Calculate Reynolds number to determine flow regime (laminar, transitional, turbulent).',
+    href: '/calculators/reynolds-number-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Ideal Gas Law (PV=nRT)',
+    description: 'Calculate pressure, volume, moles, or temperature using the ideal gas law.',
+    href: '/calculators/ideal-gas-law-calculator',
+    icon: 'cube',
+    color: 'green',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Pipe Flow Calculator',
+    description: 'Size pipes, calculate velocity, or flow rate with velocity recommendations.',
+    href: '/calculators/pipe-flow-calculator',
+    icon: 'layers',
+    color: 'violet',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'LMTD Calculator',
+    description: 'Calculate Log Mean Temperature Difference for heat exchanger design.',
+    href: '/calculators/lmtd-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  {
+    title: 'Pressure Drop Calculator',
+    description: 'Calculate pipe pressure drop using Darcy-Weisbach equation with friction factors.',
+    href: '/calculators/pressure-drop-calculator',
+    icon: 'chart',
+    color: 'amber',
+    category: 'Engineering',
+    mostUsed: false,
+  },
+  // New Calculators
+  {
+    title: '401k Calculator',
+    description: 'Project retirement savings with employer matching and compound growth.',
+    href: '/calculators/401k-calculator',
+    icon: 'chart',
+    color: 'green',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'HSA Calculator',
+    description: 'Calculate triple tax advantage savings with contribution limits and long-term growth.',
+    href: '/calculators/hsa-calculator',
+    icon: 'heart',
+    color: 'green',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Macro Calculator',
+    description: 'Calculate your daily protein, carbs, and fat needs based on your goals.',
+    href: '/calculators/macro-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'GPA Calculator',
+    description: 'Calculate your semester and cumulative GPA with multiple grade scales.',
+    href: '/calculators/gpa-calculator',
+    icon: 'calculator',
+    color: 'violet',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Stamp Duty Calculator',
+    description: 'Calculate SDLT, LBTT, or LTT with first-time buyer relief and additional property surcharge.',
+    href: '/calculators/uk-stamp-duty-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Child Benefit Calculator',
+    description: 'Calculate Child Benefit and High Income Child Benefit Charge (HICBC) with pension strategies.',
+    href: '/calculators/uk-child-benefit-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Student Loan Calculator',
+    description: 'Project student loan repayments for Plan 1, 2, 4, 5 and Postgraduate with write-off dates.',
+    href: '/calculators/uk-student-loan-calculator',
+    icon: 'calculator',
+    color: 'blue',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: true,
+  },
+  {
+    title: 'UK Salary Sacrifice Calculator',
+    description: 'Calculate tax and NI savings from pension, cycle-to-work, and EV salary sacrifice.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'trending',
+    color: 'ocean',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Pension Calculator',
+    description: 'Project your retirement pot and income using the 4% rule with inflation adjustment.',
+    href: '/calculators/uk-pension-calculator',
+    icon: 'chart',
+    color: 'green',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Dividend Tax Calculator',
+    description: 'Calculate tax on dividends and compare with salary for limited company directors.',
+    href: '/calculators/uk-dividend-tax-calculator',
+    icon: 'dollar',
+    color: 'amber',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'US Tax Bracket Calculator',
+    description: 'Find your 2025 federal tax bracket with visual breakdown of how your income is taxed.',
+    href: '/calculators/us-tax-bracket-calculator',
+    icon: 'chart',
+    color: 'blue',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Self-Employment Tax Calculator',
+    description: 'Calculate 15.3% SE tax, federal income tax, and quarterly payments for freelancers.',
+    href: '/calculators/us-self-employment-tax-calculator',
+    icon: 'dollar',
+    color: 'violet',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Quarterly Estimated Tax Calculator',
+    description: 'Calculate quarterly tax payments with safe harbor rules to avoid penalties.',
+    href: '/calculators/us-quarterly-tax-calculator',
+    icon: 'calendar',
+    color: 'violet',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  {
+    title: 'Capital Gains Tax Calculator',
+    description: 'Calculate tax on stocks, crypto, and investments with NIIT and long-term rates.',
+    href: '/calculators/us-capital-gains-tax-calculator',
+    icon: 'trending',
+    color: 'green',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  // EU Calculators
+  {
+    title: 'EU VAT Calculator',
+    description: 'Calculate VAT for all 27 EU countries. Add, remove, or reverse calculate VAT.',
+    href: '/calculators/eu-vat-calculator',
+    icon: 'percent',
+    color: 'blue',
+    category: 'Finance',
+    country: 'EU',
+    mostUsed: false,
+  },
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net salary across European countries after tax and social security.',
+    href: '/calculators/eu-salary-calculator',
+    icon: 'dollar',
+    color: 'violet',
+    category: 'Finance',
+    country: 'EU',
+    mostUsed: false,
+  },
+  // New Calculators
+  {
+    title: 'Inflation Calculator',
+    description: 'Calculate how inflation affects purchasing power using historical US CPI data from 1920-2025.',
+    href: '/calculators/inflation-calculator',
+    icon: 'trending',
+    color: 'amber',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Net Worth Calculator',
+    description: 'Calculate your total net worth by tracking assets and liabilities with category breakdowns.',
+    href: '/calculators/net-worth-calculator',
+    icon: 'chart',
+    color: 'green',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'US Paycheck Calculator',
+    description: 'Calculate your take-home pay with federal taxes, state taxes, and deductions for all 50 states.',
+    href: '/calculators/us-paycheck-calculator',
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Finance',
+    country: 'US',
+    mostUsed: false,
+  },
+  // Niche Calculators - Phase 1
+  {
+    title: 'Speeds & Feeds Calculator',
+    description: 'Calculate optimal RPM and feed rate for CNC milling with chip load and material data.',
+    href: '/calculators/speeds-feeds-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Machining',
+    mostUsed: false,
+  },
+  {
+    title: 'Fish Stocking Calculator',
+    description: 'Calculate how many fish your aquarium can hold based on tank size, filtration, and plants.',
+    href: '/calculators/fish-stocking-calculator',
+    icon: 'heart',
+    color: 'ocean',
+    category: 'Aquarium',
+    mostUsed: false,
+  },
+  {
+    title: 'ABV Calculator',
+    description: 'Calculate alcohol content from original and final gravity for beer, wine, mead, and cider.',
+    href: '/calculators/abv-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Clay Shrinkage Calculator',
+    description: 'Calculate thrown vs fired pottery sizes for stoneware, porcelain, and earthenware clay bodies.',
+    href: '/calculators/clay-shrinkage-calculator',
+    icon: 'cube',
+    color: 'coral',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  {
+    title: 'Soap Lye Calculator',
+    description: 'Calculate NaOH or KOH amounts for cold process soap with superfat and water ratios.',
+    href: '/calculators/lye-calculator',
+    icon: 'layers',
+    color: 'violet',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  // Niche Calculators - Phase 2
+  {
+    title: 'Tap Drill Calculator',
+    description: 'Find the correct drill size for any thread with adjustable thread percentage.',
+    href: '/calculators/tap-drill-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Machining',
+    mostUsed: false,
+  },
+  {
+    title: 'Aquarium CO2 Calculator',
+    description: 'Calculate CO2 levels from pH and KH readings with drop checker color guide.',
+    href: '/calculators/co2-calculator',
+    icon: 'bolt',
+    color: 'ocean',
+    category: 'Aquarium',
+    mostUsed: false,
+  },
+  {
+    title: 'IBU Calculator',
+    description: 'Calculate hop bitterness using Tinseth formula with multiple hop additions.',
+    href: '/calculators/ibu-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Glaze Recipe Calculator',
+    description: 'Scale pottery glaze recipes to any batch size with common material presets.',
+    href: '/calculators/glaze-calculator',
+    icon: 'cube',
+    color: 'coral',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  {
+    title: 'Fragrance Calculator',
+    description: 'Calculate fragrance oil amounts for candle making with wax-specific max loads.',
+    href: '/calculators/fragrance-calculator',
+    icon: 'fire',
+    color: 'violet',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  // Niche Calculators - Phase 3
+  {
+    title: 'Cutting Time Calculator',
+    description: 'Estimate machining time for milling, turning, and drilling with cost calculation.',
+    href: '/calculators/cutting-time-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Machining',
+    mostUsed: false,
+  },
+  {
+    title: 'EI Dosing Calculator',
+    description: 'Calculate Estimative Index fertilizer doses for planted aquariums.',
+    href: '/calculators/ei-dosing-calculator',
+    icon: 'bolt',
+    color: 'ocean',
+    category: 'Aquarium',
+    mostUsed: false,
+  },
+  {
+    title: 'Mash Water Calculator',
+    description: 'Calculate strike water temperature and sparge volumes for all-grain brewing.',
+    href: '/calculators/mash-water-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Kiln Cost Calculator',
+    description: 'Calculate electricity cost for pottery kiln firings with cone temperature reference.',
+    href: '/calculators/kiln-cost-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  {
+    title: 'Candle Wax Calculator',
+    description: 'Calculate wax weight from container volume with wick sizing recommendations.',
+    href: '/calculators/candle-wax-calculator',
+    icon: 'fire',
+    color: 'violet',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  // Niche Calculators - Phase 4
+  {
+    title: 'Tool Deflection Calculator',
+    description: 'Calculate end mill deflection for CNC machining with stickout and cutting force analysis.',
+    href: '/calculators/tool-deflection-calculator',
+    icon: 'bolt',
+    color: 'blue',
+    category: 'Machining',
+    mostUsed: false,
+  },
+  {
+    title: 'Water Change Calculator',
+    description: 'Calculate how water changes affect aquarium parameters with dilution schedules.',
+    href: '/calculators/water-change-calculator',
+    icon: 'heart',
+    color: 'ocean',
+    category: 'Aquarium',
+    mostUsed: false,
+  },
+  {
+    title: 'Priming Sugar Calculator',
+    description: 'Calculate carbonation sugar for bottle conditioning with CO\u2082 volumes by style.',
+    href: '/calculators/priming-sugar-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Yeast Pitch Rate Calculator',
+    description: 'Calculate proper yeast cell counts for healthy fermentation with starter sizing.',
+    href: '/calculators/yeast-pitch-rate-calculator',
+    icon: 'glass',
+    color: 'amber',
+    category: 'Brewing',
+    mostUsed: false,
+  },
+  {
+    title: 'Batch Cost Calculator',
+    description: 'Calculate material costs, labor, overhead, and pricing for soap, candles, and crafts.',
+    href: '/calculators/batch-cost-calculator',
+    icon: 'dollar',
+    color: 'violet',
+    category: 'Crafts',
+    mostUsed: false,
+  },
+  // Additional calculators
+  {
+    title: 'Scotland ADS Calculator',
+    description: 'Calculate Additional Dwelling Supplement for second property purchases in Scotland.',
+    href: '/calculators/ads-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: true,
+  },
+  {
+    title: 'Baby Cost Calculator',
+    description: 'Estimate the first-year costs of having a baby including essentials, healthcare, and childcare.',
+    href: '/calculators/baby-cost-calculator',
+    icon: 'heart',
+    color: 'pink',
+    category: 'Life',
+    mostUsed: false,
+  },
+  {
+    title: 'Birthday Party Calculator',
+    description: 'Plan and budget a birthday party with venue, food, decorations, and entertainment costs.',
+    href: '/calculators/birthday-party-calculator',
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the long-term costs of buying vs renting a home over time.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home',
+    color: 'green',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Car Buy vs Lease',
+    description: 'Compare the total cost of buying vs leasing a vehicle over time.',
+    href: '/calculators/car-buy-vs-lease-calculator',
+    icon: 'swap',
+    color: 'blue',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Calculate food quantities and costs for catered events of any size.',
+    href: '/calculators/catering-calculator',
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'College ROI Calculator',
+    description: 'Calculate the return on investment of a college degree based on costs and expected salary.',
+    href: '/calculators/college-roi-calculator',
+    icon: 'chart',
+    color: 'violet',
+    category: 'Life',
+    mostUsed: false,
+  },
+  {
+    title: 'Conference Room Calculator',
+    description: 'Plan conference or meeting room layouts with seating capacity calculations.',
+    href: '/calculators/conference-room-calculator',
+    icon: 'layers',
+    color: 'blue',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Consulting Rate Calculator',
+    description: 'Calculate your ideal consulting hourly or daily rate based on expenses and target income.',
+    href: '/calculators/consulting-rate-calculator',
+    icon: 'dollar',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Employee Cost Calculator',
+    description: 'Calculate the true cost of an employee including salary, benefits, taxes, and overhead.',
+    href: '/calculators/employee-cost-calculator',
+    icon: 'dollar',
+    color: 'blue',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Event Seating Calculator',
+    description: 'Calculate seating arrangements and capacity for weddings, conferences, and events.',
+    href: '/calculators/event-seating-calculator',
+    icon: 'layers',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Fence Calculator',
+    description: 'Calculate materials needed for fencing projects including posts, rails, and pickets.',
+    href: '/calculators/fence-calculator',
+    icon: 'layers',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Graduation Party Calculator',
+    description: 'Plan and budget a graduation party with food, decorations, and entertainment.',
+    href: '/calculators/graduation-party-calculator',
+    icon: 'glass',
+    color: 'violet',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Holiday Dinner Calculator',
+    description: 'Calculate food quantities for Thanksgiving, Christmas, or holiday dinners.',
+    href: '/calculators/holiday-dinner-calculator',
+    icon: 'glass',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  {
+    title: 'Job Offer Comparison',
+    description: 'Compare multiple job offers including salary, benefits, commute, and growth potential.',
+    href: '/calculators/job-offer-comparison-calculator',
+    icon: 'swap',
+    color: 'green',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Marketplace Fees Calculator',
+    description: 'Calculate seller fees across Amazon, eBay, Etsy, and other marketplaces.',
+    href: '/calculators/marketplace-fees-calculator',
+    icon: 'percent',
+    color: 'amber',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Moving Cost Calculator',
+    description: 'Estimate the total cost of moving including movers, supplies, and travel expenses.',
+    href: '/calculators/moving-cost-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Life',
+    mostUsed: false,
+  },
+  {
+    title: 'Overtime Calculator',
+    description: 'Calculate overtime pay including time-and-a-half and double-time rates.',
+    href: '/calculators/overtime-calculator',
+    icon: 'calculator',
+    color: 'green',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'Pet Cost Calculator',
+    description: 'Estimate the annual cost of pet ownership including food, vet, and supplies.',
+    href: '/calculators/pet-cost-calculator',
+    icon: 'heart',
+    color: 'amber',
+    category: 'Life',
+    mostUsed: false,
+  },
+  {
+    title: 'Pricing Calculator',
+    description: 'Calculate optimal product pricing with markup, margin, and profit analysis.',
+    href: '/calculators/pricing-calculator',
+    icon: 'dollar',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Rental Property ROI',
+    description: 'Calculate return on investment for rental properties including cash flow and cap rate.',
+    href: '/calculators/rental-property-calculator',
+    icon: 'home',
+    color: 'green',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'SaaS Metrics Calculator',
+    description: 'Calculate key SaaS metrics including MRR, ARR, churn rate, and LTV.',
+    href: '/calculators/saas-metrics-calculator',
+    icon: 'chart',
+    color: 'violet',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Salary to Hourly',
+    description: 'Convert annual salary to hourly rate with tax and benefits adjustments.',
+    href: '/calculators/salary-to-hourly-calculator',
+    icon: 'calculator',
+    color: 'blue',
+    category: 'Income',
+    mostUsed: false,
+  },
+  {
+    title: 'UK SDLT Calculator',
+    description: 'Calculate Stamp Duty Land Tax for property purchases in England and Northern Ireland.',
+    href: '/calculators/sdlt-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Solar Panel Calculator',
+    description: 'Estimate solar panel system size, costs, and savings for your home.',
+    href: '/calculators/solar-panel-calculator',
+    icon: 'bolt',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Startup Cost Calculator',
+    description: 'Estimate initial costs for starting a business including legal, equipment, and marketing.',
+    href: '/calculators/startup-cost-calculator',
+    icon: 'rocket',
+    color: 'violet',
+    category: 'Business',
+    mostUsed: false,
+  },
+  {
+    title: 'Subscription Audit',
+    description: 'Track and analyze your subscriptions to find savings and reduce waste.',
+    href: '/calculators/subscription-audit-calculator',
+    icon: 'dollar',
+    color: 'coral',
+    category: 'Finance',
+    mostUsed: false,
+  },
+  {
+    title: 'Tile Calculator',
+    description: 'Calculate tiles needed for floors or walls with waste factor and grout.',
+    href: '/calculators/tile-calculator',
+    icon: 'layers',
+    color: 'ocean',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Vacation Budget Calculator',
+    description: 'Plan and budget your vacation including flights, hotels, food, and activities.',
+    href: '/calculators/vacation-budget-calculator',
+    icon: 'calendar',
+    color: 'ocean',
+    category: 'Life',
+    mostUsed: false,
+  },
+  {
+    title: 'W2 to 1099 Calculator',
+    description: 'Convert W2 salary to equivalent 1099 contractor rate accounting for taxes and benefits.',
+    href: '/calculators/w2-to-1099-calculator',
+    icon: 'swap',
+    color: 'green',
+    category: 'Income',
+    country: 'US',
+    mostUsed: true,
+  },
+  {
+    title: 'Wedding Budget Calculator',
+    description: 'Plan your wedding budget with detailed cost breakdowns by category.',
+    href: '/calculators/wedding-budget-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Events',
+    mostUsed: false,
+  },
+  // New Calculators - January 2025
+  {
+    title: 'Due Date Calculator',
+    description: 'Calculate your pregnancy due date with LMP, conception, IVF, or ultrasound methods.',
+    href: '/calculators/due-date-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Sleep Calculator',
+    description: 'Find optimal bedtimes and wake times based on 90-minute sleep cycles.',
+    href: '/calculators/sleep-calculator',
+    icon: 'bolt',
+    color: 'ocean',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'EV vs Gas Calculator',
+    description: 'Compare total cost of ownership between electric and gas vehicles.',
+    href: '/calculators/ev-vs-gas-calculator',
+    icon: 'bolt',
+    color: 'green',
+    category: 'Automotive',
+    mostUsed: false,
+  },
+  // New Calculators - February 2025
+  {
+    title: 'TDEE Calculator',
+    description: 'Calculate your Total Daily Energy Expenditure based on activity level and body composition.',
+    href: '/calculators/tdee-calculator',
+    icon: 'heart',
+    color: 'coral',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Body Fat Calculator',
+    description: 'Estimate your body fat percentage using multiple measurement methods.',
+    href: '/calculators/body-fat-calculator',
+    icon: 'heart',
+    color: 'green',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Ovulation Calculator',
+    description: 'Track your fertile window and predict ovulation dates based on your cycle.',
+    href: '/calculators/ovulation-calculator',
+    icon: 'heart',
+    color: 'violet',
+    category: 'Health',
+    mostUsed: false,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between world currencies with live exchange rates.',
+    href: '/calculators/currency-converter',
+    icon: 'swap',
+    color: 'green',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Time Zone Converter',
+    description: 'Convert times between world time zones with daylight saving support.',
+    href: '/calculators/time-zone-converter',
+    icon: 'calendar',
+    color: 'blue',
+    category: 'Everyday',
+    mostUsed: false,
+  },
+  {
+    title: 'Council Tax Calculator',
+    description: 'Calculate council tax bills by band and local authority across the UK.',
+    href: '/calculators/council-tax-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Inheritance Tax Calculator',
+    description: 'Calculate UK inheritance tax liability with nil-rate band and residence allowance.',
+    href: '/calculators/inheritance-tax-calculator',
+    icon: 'chart',
+    color: 'violet',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Capital Gains Tax Calculator',
+    description: 'Calculate CGT on property, shares, and other assets with annual exempt amount.',
+    href: '/calculators/uk-capital-gains-tax-calculator',
+    icon: 'trending',
+    color: 'green',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Stamp Duty Calculator Scotland (LBTT)',
+    description: 'Calculate Land and Buildings Transaction Tax for property purchases in Scotland.',
+    href: '/calculators/stamp-duty-calculator-scotland',
+    icon: 'home',
+    color: 'ocean',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Stamp Duty Calculator Wales (LTT)',
+    description: 'Calculate Land Transaction Tax for property purchases in Wales.',
+    href: '/calculators/stamp-duty-calculator-wales',
+    icon: 'home',
+    color: 'coral',
+    category: 'UK Tax',
+    country: 'UK',
+    mostUsed: false,
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Helper Functions
+// ---------------------------------------------------------------------------
+
+/** Get all unique category names in catalog order. */
+export function getCategories(): readonly string[] {
+  return ['All', ...new Set(calculators.map((c) => c.category))];
+}
+
+/** Find a calculator by its href slug (e.g. '/calculators/bmi-calculator'). */
+export function getBySlug(href: string): CalculatorEntry | undefined {
+  return calculators.find((c) => c.href === href);
+}
+
+/** Get all calculators in a given category. */
+export function getByCategory(category: CategoryName): readonly CalculatorEntry[] {
+  return calculators.filter((c) => c.category === category);
+}
+
+/** Get all calculators flagged as most-used. */
+export function getMostUsed(): readonly CalculatorEntry[] {
+  return calculators.filter((c) => c.mostUsed);
+}
+
+/** Get all calculators for a specific country. */
+export function getByCountry(country: CountryCode): readonly CalculatorEntry[] {
+  return calculators.filter((c) => c.country === country);
+}
