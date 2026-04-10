@@ -13,9 +13,9 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PartyDrinkCalculator from '../../components/calculators/PartyDrinkCalculator/PartyDrinkCalculator';
 
 // SEO Configuration
-const title = 'Free Party Drink Calculator — Soda, Juice & Water | Boring Math';
+const title = 'Party Drink Calculator — How Many Drinks for 10-200 Guests | Boring Math';
 const description =
-  'Calculate how much non-alcoholic drinks you need for your party. Enter guest count and event type for quantities.';
+  'Calculate exactly how many drinks you need for your party. Get per-person quantities for soda, juice, water, and ice based on guest count, weather, and event type. Free and instant.';
 const keywords =
   'party drink calculator, non-alcoholic drinks calculator, how much soda for party, juice calculator, party water calculator, kids party drinks, event drink planning, ice needed for party';
 const canonicalURL = '/calculators/party-drink-calculator';
@@ -115,7 +115,7 @@ const schemaBreadcrumbs = [
   <!-- Schema.org Markup -->
   <SEOHead
     slot="schema"
-    name="Party Drink Calculator (Non-Alcoholic)"
+    name="Party Drink Calculator"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -124,8 +124,8 @@ const schemaBreadcrumbs = [
 
   <!-- Hero Section -->
   <HeroSection
-    title="Party Drink Calculator (Non-Alcoholic)"
-    description="Calculate exactly how much soda, juice, water, and ice you need for your party. Accounts for weather conditions, event type, and kid-friendly options."
+    title="Party Drink Calculator"
+    description="How many drinks do you need for your party? Enter your guest count and event details to get exact quantities for soda, juice, water, and ice. Adjusts for weather, party length, and kids."
   />
 
   <!-- Calculator Component -->
@@ -213,6 +213,168 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
-  <!-- FAQ Section -->
+  <ContentSection title="Drinks Per Person Per Hour at a Party">
+    <p>
+      The single most useful number in party drink planning is how many drinks each guest will
+      consume per hour. This varies by weather, event type, and whether alcohol is served alongside
+      non-alcoholic options.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Condition</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Drinks / Person / Hour</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Notes</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Cold weather, indoor</td>
+            <td class="py-2 pr-4">0.5</td>
+            <td class="py-2">Hot drinks may replace cold; overall volume drops</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Mild weather (50-70F)</td>
+            <td class="py-2 pr-4">0.75</td>
+            <td class="py-2">Baseline rate for most indoor parties</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Warm weather (70-85F)</td>
+            <td class="py-2 pr-4">1.0</td>
+            <td class="py-2">Standard outdoor party rate</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Hot weather (85F+)</td>
+            <td class="py-2 pr-4">1.5</td>
+            <td class="py-2">Guests actively seek hydration; stock extra water</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Kids' party (any weather)</td>
+            <td class="py-2 pr-4">0.75-1.0</td>
+            <td class="py-2">Smaller servings but more frequent refills</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      Multiply the rate by your guest count and party duration, then add 15% as a buffer. For a
+      4-hour outdoor party with 30 guests in warm weather: 30 guests x 1.0 drinks/hr x 4 hours x
+      1.15 buffer = 138 servings. That is about 17 two-litre bottles or 6 twelve-packs of cans.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Party Drink Calculator by Number of Guests">
+    <p>
+      Quick reference for total drink servings needed at a standard 4-hour party in mild to warm
+      weather. These figures include the 15% buffer and assume a mix of drink types.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Guests</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Total Servings</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">2L Bottles</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">12-Pack Cans</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Ice (lbs)</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">10</td>
+            <td class="py-2 pr-4">46</td>
+            <td class="py-2 pr-4">6</td>
+            <td class="py-2 pr-4">4</td>
+            <td class="py-2">10-15</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">25</td>
+            <td class="py-2 pr-4">115</td>
+            <td class="py-2 pr-4">14</td>
+            <td class="py-2 pr-4">10</td>
+            <td class="py-2">25-35</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">50</td>
+            <td class="py-2 pr-4">230</td>
+            <td class="py-2 pr-4">29</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2">50-70</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">75</td>
+            <td class="py-2 pr-4">345</td>
+            <td class="py-2 pr-4">43</td>
+            <td class="py-2 pr-4">29</td>
+            <td class="py-2">75-100</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">100</td>
+            <td class="py-2 pr-4">460</td>
+            <td class="py-2 pr-4">58</td>
+            <td class="py-2 pr-4">39</td>
+            <td class="py-2">100-140</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">150</td>
+            <td class="py-2 pr-4">690</td>
+            <td class="py-2 pr-4">86</td>
+            <td class="py-2 pr-4">58</td>
+            <td class="py-2">150-200</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      In hot weather, increase all quantities by 30-50%. For parties shorter than 4 hours, reduce
+      proportionally. These numbers assume non-alcoholic drinks only. If you are also serving
+      alcohol, reduce non-alcoholic quantities by about 40% since many adult guests will split
+      between the two.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Non-Alcoholic Drink Mix: What Ratio to Buy">
+    <p>
+      Buying the right mix prevents you from ending up with 10 leftover bottles of one type and
+      nothing of another. The ideal ratio depends on your crowd.
+    </p>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Kids' Party</h4>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>40% juice and juice boxes</li>
+          <li>30% water</li>
+          <li>20% lemonade or punch</li>
+          <li>10% soda (if parents allow)</li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Mixed Family Gathering</h4>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>30% soda (regular and diet)</li>
+          <li>25% water (still and sparkling)</li>
+          <li>25% juice</li>
+          <li>15% punch or lemonade</li>
+          <li>5% tea and coffee</li>
+        </ul>
+      </div>
+      <div class="bg-purple-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-purple-400 mb-2">Adult Casual (No Alcohol)</h4>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-1 list-disc list-inside">
+          <li>35% sparkling water and seltzers</li>
+          <li>25% soda</li>
+          <li>20% iced tea or lemonade</li>
+          <li>15% still water</li>
+          <li>5% mocktails or specialty drinks</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      Always have more water than you think you need. It is the one drink nobody objects to and the
+      first to run out at outdoor events. Buy it in bulk and keep a reserve case in the car.
+    </p>
+  </ContentSection>
+
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

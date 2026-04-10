@@ -10,9 +10,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import GraduationPartyPlanner from '../../components/calculators/GraduationPartyPlanner/GraduationPartyPlanner';
 
-const title = 'Graduation Party Calculator: Exact Food, Drinks & Cost for Your Guest Count';
+const title = 'Graduation Party Calculator — Food, Drinks & Budget for 10-200 Guests | Boring Math';
 const description =
-  'How much food for 50 guests? What does a graduation party actually cost? Enter your headcount and get a complete shopping list with quantities and budget. Works for open houses, BBQs, and sit-down meals.';
+  'Plan your graduation party for 10-200 guests. Calculate food quantities, drinks, seating, and total budget in seconds. Free tool for open houses, BBQs, and sit-down meals.';
 const keywords =
   'graduation party planner, graduation food calculator, how much food for graduation party, graduation party budget, open house food calculator, graduation celebration planner';
 const canonicalURL = '/calculators/graduation-party-calculator';
@@ -121,7 +121,7 @@ const schemaBreadcrumbs = [
 >
   <SEOHead
     slot="schema"
-    name="Graduation Party Planner"
+    name="Graduation Party Calculator"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -129,8 +129,8 @@ const schemaBreadcrumbs = [
   />
 
   <HeroSection
-    title="Graduation Party Planner"
-    description="Celebrate this milestone with the right amount of food and drinks. Get accurate quantities for your graduation open house, dinner party, or backyard celebration based on guest count and party style."
+    title="Graduation Party Calculator"
+    description="Calculate food, drinks, and total budget for your graduation celebration. Enter your guest count and party style to get a complete shopping list with quantities and costs. Works for open houses, BBQs, and sit-down meals."
   />
 
   <section class="mb-16" aria-label="Calculator">
@@ -284,6 +284,122 @@ const schemaBreadcrumbs = [
       usually eat less than at a lunchtime event because many will have eaten before arriving.
       Conversely, an evening party expects more substantial food. Always have a mix of hot and cold
       options, and label anything with allergens clearly.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Indoor vs Outdoor Graduation Party Planning">
+    <p>
+      Where you host changes almost everything about quantities and costs. Here is what to adjust
+      depending on your setup.
+    </p>
+    <div class="grid md:grid-cols-2 gap-6 mt-4">
+      <div class="bg-blue-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-blue-400 mb-2">Outdoor (Garden, Park, Marquee)</h4>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-2 list-disc list-inside">
+          <li>
+            Increase drink quantities by 30-50% in warm weather. Guests drink faster outdoors,
+            especially if there is direct sun.
+          </li>
+          <li>
+            Budget an extra 1-2 lbs of ice per person beyond what you need for chilling bottles.
+            Coolers in sunlight burn through ice.
+          </li>
+          <li>
+            Finger foods and BBQ work better than plated meals. Wind and insects make formal table
+            settings harder to manage.
+          </li>
+          <li>
+            Expect 10-15% higher attendance than RSVPs. Outdoor parties feel more casual and people
+            are more likely to drop in.
+          </li>
+          <li>
+            A gazebo or pop-up tent costs about £80-£200 to hire but protects food from sun and
+            light rain.
+          </li>
+        </ul>
+      </div>
+      <div class="bg-green-900/20 rounded-lg p-4">
+        <h4 class="font-semibold text-green-400 mb-2">Indoor (Home, Hall, Restaurant)</h4>
+        <ul class="text-sm text-[var(--color-subtle)] space-y-2 list-disc list-inside">
+          <li>
+            Space is the binding constraint. Allow 10-15 sq ft per person for a mingling party, or 8
+            sq ft for seated.
+          </li>
+          <li>
+            Drink consumption is steadier indoors. Use the calculator's standard quantities without
+            a weather adjustment.
+          </li>
+          <li>
+            Hot food is easier to serve and keep at temperature. Buffet setups with chafing dishes
+            work well for 30+ guests.
+          </li>
+          <li>
+            Venue hire adds £200-£600 depending on location and duration, but eliminates setup and
+            cleanup time.
+          </li>
+          <li>
+            Noise carries. If you are at home, warn neighbours and set a clear end time on the
+            invitation.
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      A hybrid approach is common: set up food and drinks indoors with overflow seating in the
+      garden or patio. This gives guests options and spreads the crowd so the space does not feel
+      cramped. If weather is uncertain, have a backup plan for moving the drinks station inside.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Graduation Party Budget Per Person">
+    <p>
+      Knowing your per-head cost makes it easy to scale up or down as the guest list changes. These
+      figures assume you are cooking and setting up yourself. Hiring a caterer adds roughly £8-£15
+      per person on top.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Party Style</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Cost Per Person</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Includes</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Best For</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Light finger food</td>
+            <td class="py-2 pr-4">£5-£8</td>
+            <td class="py-2 pr-4">Sandwiches, crisps, fruit, soft drinks</td>
+            <td class="py-2">Open house, 2-3 hours</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">BBQ or buffet</td>
+            <td class="py-2 pr-4">£10-£16</td>
+            <td class="py-2 pr-4">Burgers, sides, salads, cake, drinks</td>
+            <td class="py-2">Garden party, 3-5 hours</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Full catered meal</td>
+            <td class="py-2 pr-4">£20-£35</td>
+            <td class="py-2 pr-4">Starter, main, dessert, drinks, service</td>
+            <td class="py-2">Venue or formal dinner</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Restaurant booking</td>
+            <td class="py-2 pr-4">£25-£50</td>
+            <td class="py-2 pr-4">Set menu, drinks package, private area</td>
+            <td class="py-2">Small group, no prep needed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4 text-[var(--color-subtle)]">
+      The biggest cost saver is doing it yourself. A DIY BBQ for 40 people costs roughly £400-£640
+      in food and drinks. The same guest count at a mid-range caterer runs £800-£1,200. If budget is
+      tight, focus on one or two crowd-pleasing mains (pulled pork, taco bar) rather than spreading
+      thin across many dishes.
     </p>
   </ContentSection>
 
