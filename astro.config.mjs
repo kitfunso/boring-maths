@@ -29,6 +29,9 @@ export default defineConfig({
   integrations: [
     preact({ compat: true }), // Enable React compatibility
     sitemap({
+      filter(page) {
+        return !page.includes('/embed/');
+      },
       serialize(item) {
         // Set priority based on page depth
         if (item.url === 'https://boring-math.com/') {

@@ -266,6 +266,17 @@ const ogImageURL = ogImage
             >
               About
             </a>
+            <a
+              href="/for-business"
+              class:list={[
+                'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+                currentPath === '/for-business'
+                  ? 'text-[var(--color-void)] bg-[var(--color-accent)]'
+                  : 'text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5',
+              ]}
+            >
+              For Business
+            </a>
           </div>
 
           <!-- Mobile Menu Button -->
@@ -310,6 +321,17 @@ const ogImageURL = ogImage
               ]}
             >
               About
+            </a>
+            <a
+              href="/for-business"
+              class:list={[
+                'px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300',
+                currentPath === '/for-business'
+                  ? 'text-[var(--color-void)] bg-[var(--color-accent)]'
+                  : 'text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:bg-white/5',
+              ]}
+            >
+              For Business
             </a>
           </div>
         </div>
@@ -379,6 +401,14 @@ const ogImageURL = ogImage
                   class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
                 >
                   All Calculators
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/for-business"
+                  class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
+                >
+                  For Business
                 </a>
               </li>
               <li>

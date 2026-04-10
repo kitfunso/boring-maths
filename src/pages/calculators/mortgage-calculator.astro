@@ -9,6 +9,10 @@ import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import MortgageCalculator from '../../components/calculators/MortgageCalculator/MortgageCalculator';
+import AffiliateBox from '../../components/common/AffiliateBox.astro';
+import { getAffiliatesForCalculator } from '../../lib/affiliates';
+
+const affiliateConfig = getAffiliatesForCalculator('mortgage-calculator');
 
 const title = 'Free Mortgage Calculator — Payments with PMI & Taxes | Boring Math';
 const description =
@@ -142,6 +146,22 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <MortgageCalculator client:load />
   </section>
+
+  {
+    affiliateConfig && (
+      <AffiliateBox
+        title={affiliateConfig.title}
+        products={affiliateConfig.partners.map((p) => ({
+          name: p.name,
+          description: p.description,
+          url: p.url,
+          cta: p.cta,
+          partner: p.partner,
+        }))}
+        calculatorName="mortgage-calculator"
+      />
+    )
+  }
 
   <ContentSection title="How to Use This Calculator">
     <p>

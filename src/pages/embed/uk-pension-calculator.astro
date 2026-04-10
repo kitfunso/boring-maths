@@ -1,0 +1,14 @@
+---
+import EmbedLayout from '../../layouts/EmbedLayout.astro';
+import { UKPensionCalculator } from '../../components/calculators/UKPensionCalculator';
+
+const slug = 'uk-pension-calculator';
+const title = 'UK Pension Calculator';
+---
+
+<EmbedLayout title={title} calculatorSlug={slug}>
+  <div class="max-w-4xl mx-auto px-4 py-6">
+    <h1 class="text-2xl font-display text-[var(--color-cream)] mb-6">{title}</h1>
+    <UKPensionCalculator client:load />
+  </div>
+</EmbedLayout>

@@ -1,0 +1,589 @@
+---
+/**
+ * B2B Landing Page - Embeddable Calculators for Business
+ *
+ * /for-business - Landing page for businesses wanting to embed calculators
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SnippetGenerator from '../components/embed/SnippetGenerator';
+
+const title = 'Embed Calculators on Your Website | Boring Math for Business';
+const description =
+  'Add free, embeddable calculators to your website. 149 tools for finance, health, engineering and more. One line of HTML. Works on any site.';
+
+// Only showcase calculators that have embed pages
+const showcaseCalculators = [
+  {
+    slug: 'mortgage-calculator',
+    title: 'Mortgage Calculator',
+    description: 'Monthly payments, total interest, and amortisation schedules.',
+    category: 'Finance',
+  },
+  {
+    slug: 'compound-interest-calculator',
+    title: 'Compound Interest',
+    description: 'See how investments grow over time with compounding.',
+    category: 'Finance',
+  },
+  {
+    slug: 'bmi-calculator',
+    title: 'BMI Calculator',
+    description: 'Body mass index with healthy weight ranges.',
+    category: 'Health',
+  },
+  {
+    slug: 'tip-calculator',
+    title: 'Tip Calculator',
+    description: 'Calculate tips and split bills between friends.',
+    category: 'Everyday',
+  },
+  {
+    slug: 'loan-calculator',
+    title: 'Loan Calculator',
+    description: 'Monthly payments and total interest for any loan.',
+    category: 'Finance',
+  },
+  {
+    slug: 'fire-calculator',
+    title: 'FIRE Calculator',
+    description: 'Financial independence projections with Lean, Fat, and Coast FIRE.',
+    category: 'Finance',
+  },
+  {
+    slug: 'uk-100k-tax-trap-calculator',
+    title: 'UK £100k Tax Trap',
+    description: 'Calculate how the 60% marginal rate affects your take-home pay.',
+    category: 'UK Tax',
+  },
+  {
+    slug: 'uk-pension-calculator',
+    title: 'UK Pension',
+    description: 'Project your retirement pot with employer and personal contributions.',
+    category: 'Finance',
+  },
+  {
+    slug: 'uk-stamp-duty-calculator',
+    title: 'UK Stamp Duty',
+    description: 'SDLT, LBTT, and LTT calculations for property purchases.',
+    category: 'UK Tax',
+  },
+  {
+    slug: 'uk-tax-calculator',
+    title: 'UK Tax Calculator',
+    description: 'Income tax, National Insurance, and take-home pay for any salary.',
+    category: 'UK Tax',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h1 class="text-headline md:text-display mb-6">
+        Add our calculators<br />
+        <span class="gradient-text">to your website</span>
+      </h1>
+      <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-10">
+        149 free, embeddable calculators. Finance, health, engineering, and more. Your readers get
+        the tools, you get the engagement.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#embed-builder" class="btn-primary">
+          Try the embed builder
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </a>
+        <a href="#pricing" class="btn-secondary"> View pricing </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Embed Demo -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <div
+        class="rounded-2xl border border-white/10 overflow-hidden bg-[var(--color-night)] shadow-2xl"
+      >
+        <!-- Browser chrome -->
+        <div
+          class="flex items-center gap-2 px-4 py-3 bg-[var(--color-charcoal)] border-b border-white/5"
+        >
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#febc2e]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#28c840]"></div>
+          </div>
+          <div class="flex-1 mx-4">
+            <div
+              class="px-3 py-1.5 bg-[var(--color-night)] rounded-lg text-xs text-[var(--color-muted)] font-mono truncate"
+            >
+              https://your-website.com/tools
+            </div>
+          </div>
+        </div>
+        <!-- Iframe preview -->
+        <div class="p-4 md:p-6 bg-white/[0.02]">
+          <iframe
+            src="/embed/mortgage-calculator"
+            width="100%"
+            height="600"
+            frameborder="0"
+            style="border:none;border-radius:12px;"
+            loading="lazy"
+            title="Mortgage Calculator embed demo"></iframe>
+        </div>
+      </div>
+      <p class="text-center text-sm text-[var(--color-muted)] mt-4">
+        Live preview: Mortgage Calculator embedded on your site
+      </p>
+    </div>
+  </section>
+
+  <!-- How it Works -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-16">How it works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">1</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Pick a calculator</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Choose from 149 tools across finance, health, engineering, everyday math, and more.
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">2</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Copy the code</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            One line of HTML. Configure width and height if you want, then copy.
+          </p>
+        </div>
+        <!-- Step 3 -->
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">3</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Paste and publish</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Works on any website. WordPress, Webflow, Squarespace, custom HTML, you name it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-4">Simple pricing</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-16 max-w-lg mx-auto">
+        Start embedding for free. Upgrade when you need custom branding or dedicated support.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Free Tier -->
+        <div class="bento-card p-8 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-display text-[var(--color-cream)] mb-1">Free</h3>
+            <div class="flex items-baseline gap-1">
+              <span class="text-3xl font-display text-[var(--color-cream)]">&pound;0</span>
+              <span class="text-sm text-[var(--color-muted)]">/month</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Embed any calculator
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Responsive iframe
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              &ldquo;Powered by&rdquo; badge required
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              1 domain
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path></svg
+              >
+              Custom colours
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path></svg
+              >
+              Priority support
+            </li>
+          </ul>
+          <a href="#embed-builder" class="btn-secondary w-full text-center"> Start embedding </a>
+        </div>
+
+        <!-- Pro Tier (highlighted) -->
+        <div
+          class="relative bento-card p-8 flex flex-col border-[var(--color-accent)]/30 ring-1 ring-[var(--color-accent)]/20"
+        >
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+            <span
+              class="px-4 py-1 text-xs font-medium bg-[var(--color-accent)] text-[var(--color-void)] rounded-full"
+            >
+              Most Popular
+            </span>
+          </div>
+          <div class="mb-6">
+            <h3 class="text-xl font-display text-[var(--color-cream)] mb-1">Pro</h3>
+            <div class="flex items-baseline gap-1">
+              <span class="text-3xl font-display text-[var(--color-cream)]">&pound;29</span>
+              <span class="text-sm text-[var(--color-muted)]">/month</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Embed any calculator
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Responsive iframe
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Badge removed
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Custom colours
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Priority support
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              5 domains
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path></svg
+              >
+              Custom calculators
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path></svg
+              >
+              SLA
+            </li>
+          </ul>
+          <a
+            href="mailto:keith@boring-math.com?subject=Boring%20Math%20Pro%20%E2%80%93%20Enquiry"
+            class="btn-primary w-full text-center"
+          >
+            Contact us
+          </a>
+        </div>
+
+        <!-- Enterprise Tier -->
+        <div class="bento-card p-8 flex flex-col">
+          <div class="mb-6">
+            <h3 class="text-xl font-display text-[var(--color-cream)] mb-1">Enterprise</h3>
+            <div class="flex items-baseline gap-1">
+              <span class="text-3xl font-display text-[var(--color-cream)]">Custom</span>
+            </div>
+          </div>
+          <ul class="space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Everything in Pro
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Unlimited domains
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Custom calculators built to spec
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              SLA with uptime guarantee
+            </li>
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg
+                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path></svg
+              >
+              Dedicated account manager
+            </li>
+          </ul>
+          <a
+            href="mailto:keith@boring-math.com?subject=Boring%20Math%20Enterprise%20%E2%80%93%20Enquiry"
+            class="btn-secondary w-full text-center"
+          >
+            Contact us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Embed Builder -->
+  <section id="embed-builder" class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-4">Embed builder</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-12 max-w-lg mx-auto">
+        Pick a calculator, set the size, and copy the code. Done.
+      </p>
+      <div class="bento-card p-6 md:p-8">
+        <SnippetGenerator client:load />
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Showcase -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-4">Popular calculators</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-12 max-w-lg mx-auto">
+        Browse some of our most embedded tools. Click any card to load it in the builder above.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {
+          showcaseCalculators.map((calc) => (
+            <a
+              href={`#embed-builder`}
+              class="bento-card p-5 group"
+              data-calc-slug={calc.slug}
+              aria-label={`Preview ${calc.title} embed`}
+            >
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[var(--color-muted)]">
+                  {calc.category}
+                </span>
+              </div>
+              <h3 class="text-base font-display text-[var(--color-cream)] mb-1 group-hover:text-[var(--color-accent)] transition-colors">
+                {calc.title}
+              </h3>
+              <p class="text-sm text-[var(--color-muted)] leading-relaxed">{calc.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="text-headline mb-4">Questions?</h2>
+      <p class="text-[var(--color-subtle)] mb-8">
+        Drop us an email. We typically reply within a working day.
+      </p>
+      <a
+        href="mailto:keith@boring-math.com?subject=Boring%20Math%20Embed%20%E2%80%93%20Question"
+        class="btn-primary"
+      >
+        Email keith@boring-math.com
+      </a>
+    </div>
+  </section>
+</BaseLayout>

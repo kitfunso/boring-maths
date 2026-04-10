@@ -9,6 +9,10 @@ import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { InheritanceTaxCalculator } from '../../components/calculators/InheritanceTaxCalculator';
+import AffiliateBox from '../../components/common/AffiliateBox.astro';
+import { getAffiliatesForCalculator } from '../../lib/affiliates';
+
+const affiliateConfig = getAffiliatesForCalculator('inheritance-tax-calculator');
 
 const title = 'Free Inheritance Tax Calculator — UK IHT Estimator 2025/26 | Boring Math';
 const description =
@@ -123,6 +127,22 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <InheritanceTaxCalculator client:load />
   </section>
+
+  {
+    affiliateConfig && (
+      <AffiliateBox
+        title={affiliateConfig.title}
+        products={affiliateConfig.partners.map((p) => ({
+          name: p.name,
+          description: p.description,
+          url: p.url,
+          cta: p.cta,
+          partner: p.partner,
+        }))}
+        calculatorName="inheritance-tax-calculator"
+      />
+    )
+  }
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">

@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/instrument-serif/400.css';
+import '@fontsource/instrument-serif/400-italic.css';
+import EmbedBadge from '../components/embed/EmbedBadge.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  calculatorSlug?: string;
+  whiteLabel?: boolean;
+}
+
+const { title, description = '', calculatorSlug = '', whiteLabel = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    {description && <meta name="description" content={description} />}
+    <meta name="theme-color" content="#07070a" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen mesh-bg noise relative">
+    <main>
+      <slot />
+    </main>
+    <EmbedBadge calculatorSlug={calculatorSlug} whiteLabel={whiteLabel} />
+  </body>
+</html>
