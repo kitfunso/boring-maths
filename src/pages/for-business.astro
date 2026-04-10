@@ -1,19 +1,59 @@
 ---
 /**
- * B2B Landing Page - Embeddable Calculators for Business
+ * B2B Landing Page - Sponsored Placements & Embeddable Calculators
  *
- * /for-business - Landing page for businesses wanting to embed calculators
+ * /for-business - Two offerings:
+ * 1. Sponsored placements: businesses pay to feature their products on relevant calculators
+ * 2. Embeddable widgets: businesses embed calculators on their own sites
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SnippetGenerator from '../components/embed/SnippetGenerator';
 
-const title = 'Embed Calculators on Your Website | Boring Math for Business';
+const title = 'Advertise on Our Calculators | Boring Math for Business';
 const description =
-  'Add free, embeddable calculators to your website. 149 tools for finance, health, engineering and more. One line of HTML. Works on any site.';
+  'Put your products in front of high-intent users. Sponsored placements on 149 calculators, or embed our tools on your site. Reach people at the moment they calculate.';
 
-// Only showcase calculators that have embed pages
-const showcaseCalculators = [
+const sponsorExamples = [
+  {
+    calculator: 'Mortgage Calculator',
+    business: 'Banks & brokers',
+    example: 'Your mortgage products shown to users actively calculating repayments.',
+    slug: 'mortgage-calculator',
+  },
+  {
+    calculator: 'UK Pension Calculator',
+    business: 'Pension providers',
+    example: 'Your pension plans featured alongside retirement projections.',
+    slug: 'uk-pension-calculator',
+  },
+  {
+    calculator: 'Compound Interest Calculator',
+    business: 'ISA & investment platforms',
+    example: 'Your investment products shown to users exploring compound growth.',
+    slug: 'compound-interest-calculator',
+  },
+  {
+    calculator: 'Loan Calculator',
+    business: 'Lenders & comparison sites',
+    example: 'Your loan products shown to users calculating repayment options.',
+    slug: 'loan-calculator',
+  },
+  {
+    calculator: 'UK Stamp Duty Calculator',
+    business: 'Estate agents & conveyancers',
+    example: 'Your services shown to users calculating property purchase costs.',
+    slug: 'uk-stamp-duty-calculator',
+  },
+  {
+    calculator: 'FIRE Calculator',
+    business: 'Investment platforms',
+    example: 'Your funds and ISAs shown to users planning early retirement.',
+    slug: 'fire-calculator',
+  },
+];
+
+const embedCalculators = [
   {
     slug: 'mortgage-calculator',
     title: 'Mortgage Calculator',
@@ -75,6 +115,8 @@ const showcaseCalculators = [
     category: 'UK Tax',
   },
 ];
+
+const contactEmail = 'support@boring-math.com';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -82,33 +124,205 @@ const showcaseCalculators = [
   <section class="relative py-24 md:py-32 overflow-hidden">
     <div class="max-w-5xl mx-auto px-6 text-center">
       <h1 class="text-headline md:text-display mb-6">
-        Add our calculators<br />
-        <span class="gradient-text">to your website</span>
+        Reach people at the<br />
+        <span class="gradient-text">moment they calculate</span>
       </h1>
       <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-10">
-        149 free, embeddable calculators. Finance, health, engineering, and more. Your readers get
-        the tools, you get the engagement.
+        149 free calculators across finance, health, and more. Every user is actively making a
+        decision. Put your products where they matter.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#embed-builder" class="btn-primary">
-          Try the embed builder
+        <a href="#sponsored" class="btn-primary">
+          Sponsored placements
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
-            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"></path>
           </svg>
         </a>
-        <a href="#pricing" class="btn-secondary"> View pricing </a>
+        <a href="#embeds" class="btn-secondary">Embed our calculators</a>
       </div>
     </div>
   </section>
 
-  <!-- Live Embed Demo -->
+  <!-- Why It Works -->
   <section class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bento-card p-8 text-center">
+          <div class="text-3xl mb-4">🎯</div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">High intent</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Someone calculating mortgage repayments is closer to buying a house than someone reading a
+            blog post about mortgages.
+          </p>
+        </div>
+        <div class="bento-card p-8 text-center">
+          <div class="text-3xl mb-4">📊</div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Perfect context</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Your product appears right next to the calculation it solves. A bank's mortgage deal shown
+            alongside a mortgage calculation.
+          </p>
+        </div>
+        <div class="bento-card p-8 text-center">
+          <div class="text-3xl mb-4">🔒</div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Exclusive placement</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            One sponsor per calculator. No competing ads. Your product is the recommendation, not one
+            of twenty in a sidebar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsored Placements -->
+  <section id="sponsored" class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-4">Sponsored placements</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-16 max-w-2xl mx-auto">
+        Your product featured on the calculator page that matches it. Users see your offer right
+        after they get their result. One sponsor per calculator, no auction, no competing ads.
+      </p>
+
+      <!-- How Sponsored Placements Work -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">1</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Pick your calculator</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Choose the calculator that matches your product. Mortgage calculator for lenders, pension
+            calculator for pension providers, and so on.
+          </p>
+        </div>
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">2</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">We feature your product</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Your product appears in a dedicated recommendation section below the calculator results.
+            Your brand, your description, your call to action.
+          </p>
+        </div>
+        <div class="relative bento-card p-8 text-center">
+          <div
+            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+          >
+            <span class="text-2xl font-display text-[var(--color-accent)]">3</span>
+          </div>
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Users click through</h3>
+          <p class="text-sm text-[var(--color-subtle)]">
+            Every click tracked and reported monthly. Real users who just ran the numbers and want to
+            take the next step.
+          </p>
+        </div>
+      </div>
+
+      <!-- Available Calculators for Sponsorship -->
+      <h3 class="text-xl font-display text-[var(--color-cream)] text-center mb-8">
+        Available for sponsorship
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+        {
+          sponsorExamples.map((item) => (
+            <div class="bento-card p-6">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="font-display text-[var(--color-cream)]">{item.calculator}</h4>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                  Available
+                </span>
+              </div>
+              <p class="text-sm text-[var(--color-muted)] mb-2">
+                <span class="text-[var(--color-subtle)]">Ideal for:</span> {item.business}
+              </p>
+              <p class="text-sm text-[var(--color-subtle)]">{item.example}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Sponsored Placement Pricing -->
+      <div class="max-w-2xl mx-auto">
+        <div class="bento-card p-8 md:p-10">
+          <h3 class="text-xl font-display text-[var(--color-cream)] mb-6 text-center">
+            Sponsorship pricing
+          </h3>
+          <div class="space-y-6">
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-white/5">
+              <div>
+                <p class="font-medium text-[var(--color-cream)]">Single calculator</p>
+                <p class="text-sm text-[var(--color-muted)] mt-1">
+                  Your product featured on one calculator page
+                </p>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-xl font-display text-[var(--color-cream)]">
+                  &pound;49<span class="text-sm text-[var(--color-muted)]">/month</span>
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-white/5">
+              <div>
+                <p class="font-medium text-[var(--color-cream)]">Category bundle</p>
+                <p class="text-sm text-[var(--color-muted)] mt-1">
+                  All calculators in a category (e.g. all UK tax calculators)
+                </p>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-xl font-display text-[var(--color-cream)]">
+                  &pound;149<span class="text-sm text-[var(--color-muted)]">/month</span>
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="font-medium text-[var(--color-cream)]">Exclusive partner</p>
+                <p class="text-sm text-[var(--color-muted)] mt-1">
+                  All finance calculators site-wide. One partner, maximum reach.
+                </p>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="text-xl font-display text-[var(--color-cream)]">Custom</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 text-center">
+            <a
+              href={`mailto:${contactEmail}?subject=Sponsored%20Placement%20Enquiry`}
+              class="btn-primary"
+            >
+              Get started
+            </a>
+            <p class="text-xs text-[var(--color-muted)] mt-3">
+              All placements include monthly click reports and are clearly marked as sponsored
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo: What a Sponsored Placement Looks Like -->
+  <section class="py-16 md:py-24 border-t border-white/5">
     <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-headline text-center mb-4">What it looks like</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-12 max-w-lg mx-auto">
+        Your product appears in a dedicated section below the calculator. Styled to match the site,
+        with your branding and call to action.
+      </p>
       <div
         class="rounded-2xl border border-white/10 overflow-hidden bg-[var(--color-night)] shadow-2xl"
       >
-        <!-- Browser chrome -->
         <div
           class="flex items-center gap-2 px-4 py-3 bg-[var(--color-charcoal)] border-b border-white/5"
         >
@@ -121,82 +335,107 @@ const showcaseCalculators = [
             <div
               class="px-3 py-1.5 bg-[var(--color-night)] rounded-lg text-xs text-[var(--color-muted)] font-mono truncate"
             >
-              https://your-website.com/tools
+              boring-math.com/calculators/mortgage-calculator
             </div>
           </div>
         </div>
-        <!-- Iframe preview -->
-        <div class="p-4 md:p-6 bg-white/[0.02]">
-          <iframe
-            src="/embed/mortgage-calculator"
-            width="100%"
-            height="600"
-            frameborder="0"
-            style="border:none;border-radius:12px;"
-            loading="lazy"
-            title="Mortgage Calculator embed demo"></iframe>
+        <div class="p-6 md:p-8">
+          <!-- Mock sponsored placement -->
+          <div class="glass rounded-2xl p-6">
+            <p class="text-micro text-[var(--color-accent)] mb-3">Recommended</p>
+            <h3 class="text-lg font-display text-[var(--color-cream)] mb-4">
+              Compare Mortgage Deals
+            </h3>
+            <div class="space-y-3">
+              <div
+                class="block bg-[var(--color-night)] rounded-xl p-4 border border-white/5 hover:border-[var(--color-accent)]/30 transition-all duration-300"
+              >
+                <div class="flex items-center justify-between gap-4">
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-medium text-[var(--color-cream)]">Your Brand Here</h4>
+                    <p class="text-sm text-[var(--color-subtle)] mt-1">
+                      Your product description. "Compare 20,000+ mortgage deals from 90+ lenders.
+                      Free, whole-of-market advice."
+                    </p>
+                  </div>
+                  <span
+                    class="text-[var(--color-accent)] font-medium text-sm whitespace-nowrap flex items-center gap-1"
+                  >
+                    Your CTA
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-[var(--color-muted)] mt-4">
+              * Sponsored placement.
+              <a href="/affiliate-disclosure" class="text-[var(--color-accent)] hover:underline"
+                >Learn more</a
+              >
+            </p>
+          </div>
         </div>
       </div>
       <p class="text-center text-sm text-[var(--color-muted)] mt-4">
-        Live preview: Mortgage Calculator embedded on your site
+        Example: Sponsored placement on the Mortgage Calculator page
       </p>
     </div>
   </section>
 
-  <!-- How it Works -->
-  <section class="py-16 md:py-24">
+  <!-- Embed Section -->
+  <section id="embeds" class="py-16 md:py-24 border-t border-white/5">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-headline text-center mb-16">How it works</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Step 1 -->
+      <h2 class="text-headline text-center mb-4">Embed our calculators</h2>
+      <p class="text-center text-[var(--color-subtle)] mb-16 max-w-2xl mx-auto">
+        Add any of our calculators to your own website. One line of HTML. Free with a small
+        "Powered by" badge, or white-label for a clean integration.
+      </p>
+
+      <!-- How Embeds Work -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         <div class="relative bento-card p-8 text-center">
           <div
-            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+            class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mx-auto mb-5"
           >
-            <span class="text-2xl font-display text-[var(--color-accent)]">1</span>
+            <span class="text-2xl font-display text-violet-400">1</span>
           </div>
           <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Pick a calculator</h3>
           <p class="text-sm text-[var(--color-subtle)]">
             Choose from 149 tools across finance, health, engineering, everyday math, and more.
           </p>
         </div>
-        <!-- Step 2 -->
         <div class="relative bento-card p-8 text-center">
           <div
-            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+            class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mx-auto mb-5"
           >
-            <span class="text-2xl font-display text-[var(--color-accent)]">2</span>
+            <span class="text-2xl font-display text-violet-400">2</span>
           </div>
           <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Copy the code</h3>
           <p class="text-sm text-[var(--color-subtle)]">
             One line of HTML. Configure width and height if you want, then copy.
           </p>
         </div>
-        <!-- Step 3 -->
         <div class="relative bento-card p-8 text-center">
           <div
-            class="w-14 h-14 rounded-2xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center mx-auto mb-5"
+            class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mx-auto mb-5"
           >
-            <span class="text-2xl font-display text-[var(--color-accent)]">3</span>
+            <span class="text-2xl font-display text-violet-400">3</span>
           </div>
           <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Paste and publish</h3>
           <p class="text-sm text-[var(--color-subtle)]">
-            Works on any website. WordPress, Webflow, Squarespace, custom HTML, you name it.
+            Works on any website. WordPress, Webflow, Squarespace, custom HTML.
           </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Pricing -->
-  <section id="pricing" class="py-16 md:py-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-headline text-center mb-4">Simple pricing</h2>
-      <p class="text-center text-[var(--color-subtle)] mb-16 max-w-lg mx-auto">
-        Start embedding for free. Upgrade when you need custom branding or dedicated support.
-      </p>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Embed Pricing -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <!-- Free Tier -->
         <div class="bento-card p-8 flex flex-col">
           <div class="mb-6">
@@ -208,101 +447,25 @@ const showcaseCalculators = [
           </div>
           <ul class="space-y-3 mb-8 flex-1">
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Embed any calculator
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Responsive iframe
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              &ldquo;Powered by&rdquo; badge required
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              1 domain
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path></svg
-              >
-              Custom colours
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path></svg
-              >
-              Priority support
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              &ldquo;Powered by&rdquo; badge
             </li>
           </ul>
-          <a href="#embed-builder" class="btn-secondary w-full text-center"> Start embedding </a>
+          <a href="#embed-builder" class="btn-secondary w-full text-center">Start embedding</a>
         </div>
 
-        <!-- Pro Tier (highlighted) -->
-        <div
-          class="relative bento-card overflow-visible p-8 flex flex-col border-[var(--color-accent)]/30 ring-1 ring-[var(--color-accent)]/20"
-        >
+        <!-- Pro Tier -->
+        <div class="relative bento-card overflow-visible p-8 flex flex-col border-[var(--color-accent)]/30 ring-1 ring-[var(--color-accent)]/20">
           <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-            <span
-              class="px-4 py-1 text-xs font-medium bg-[var(--color-accent)] text-[var(--color-void)] rounded-full"
-            >
+            <span class="px-4 py-1 text-xs font-medium bg-[var(--color-accent)] text-[var(--color-void)] rounded-full">
               Most Popular
             </span>
           </div>
@@ -315,120 +478,28 @@ const showcaseCalculators = [
           </div>
           <ul class="space-y-3 mb-8 flex-1">
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              Embed any calculator
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Everything in Free
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              Responsive iframe
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Badge removed (white-label)
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              Badge removed
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Custom colours
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              Priority support
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               5 domains
             </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path></svg
-              >
-              Custom calculators
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-muted)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-muted)]/40 shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path></svg
-              >
-              SLA
+            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              Priority support
             </li>
           </ul>
           <a
-            href="mailto:keith@boring-math.com?subject=Boring%20Math%20Pro%20%E2%80%93%20Enquiry"
+            href={`mailto:${contactEmail}?subject=Boring%20Math%20Pro%20Embed%20Enquiry`}
             class="btn-primary w-full text-center"
           >
             Contact us
@@ -445,78 +516,24 @@ const showcaseCalculators = [
           </div>
           <ul class="space-y-3 mb-8 flex-1">
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Everything in Pro
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Unlimited domains
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               Custom calculators built to spec
             </li>
             <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
+              <svg class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
               SLA with uptime guarantee
-            </li>
-            <li class="flex items-start gap-3 text-sm text-[var(--color-subtle)]">
-              <svg
-                class="w-5 h-5 text-[var(--color-accent)] shrink-0 mt-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path></svg
-              >
-              Dedicated account manager
             </li>
           </ul>
           <a
-            href="mailto:keith@boring-math.com?subject=Boring%20Math%20Enterprise%20%E2%80%93%20Enquiry"
+            href={`mailto:${contactEmail}?subject=Boring%20Math%20Enterprise%20Embed%20Enquiry`}
             class="btn-secondary w-full text-center"
           >
             Contact us
@@ -527,11 +544,11 @@ const showcaseCalculators = [
   </section>
 
   <!-- Embed Builder -->
-  <section id="embed-builder" class="py-16 md:py-24">
+  <section id="embed-builder" class="py-16 md:py-24 border-t border-white/5">
     <div class="max-w-4xl mx-auto px-6">
       <h2 class="text-headline text-center mb-4">Embed builder</h2>
       <p class="text-center text-[var(--color-subtle)] mb-12 max-w-lg mx-auto">
-        Pick a calculator, set the size, and copy the code. Done.
+        Pick a calculator, set the size, and copy the code.
       </p>
       <div class="bento-card p-6 md:p-8">
         <SnippetGenerator client:load />
@@ -542,18 +559,18 @@ const showcaseCalculators = [
   <!-- Calculator Showcase -->
   <section class="py-16 md:py-24">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-headline text-center mb-4">Popular calculators</h2>
+      <h2 class="text-headline text-center mb-4">Available calculators</h2>
       <p class="text-center text-[var(--color-subtle)] mb-12 max-w-lg mx-auto">
-        Browse some of our most embedded tools. Click any card to load it in the builder above.
+        Sponsor or embed any of these. Click a card to load it in the embed builder.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {
-          showcaseCalculators.map((calc) => (
+          embedCalculators.map((calc) => (
             <a
-              href={`#embed-builder`}
+              href="#embed-builder"
               class="bento-card p-5 group"
               data-calc-slug={calc.slug}
-              aria-label={`Preview ${calc.title} embed`}
+              aria-label={`Preview ${calc.title}`}
             >
               <div class="flex items-center justify-between mb-2">
                 <span class="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[var(--color-muted)]">
@@ -579,10 +596,10 @@ const showcaseCalculators = [
         Drop us an email. We typically reply within a working day.
       </p>
       <a
-        href="mailto:keith@boring-math.com?subject=Boring%20Math%20Embed%20%E2%80%93%20Question"
+        href={`mailto:${contactEmail}?subject=Boring%20Math%20Business%20Enquiry`}
         class="btn-primary"
       >
-        Email keith@boring-math.com
+        Email {contactEmail}
       </a>
     </div>
   </section>
