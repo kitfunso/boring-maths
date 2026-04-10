@@ -1,9 +1,7 @@
 import { useState, useMemo, useRef } from 'preact/hooks';
 import type { CalculatorEntry } from '../../lib/calculators';
 import { calculators } from '../../lib/calculators';
-import { embeddableSlugs } from '../../lib/embeds';
-
-const SITE_URL = 'https://boring-math.com';
+import { embeddableSlugs, getEmbedSnippet } from '../../lib/embeds';
 
 function getEmbedSlug(href: string): string {
   // /calculators/mortgage-calculator -> mortgage-calculator
@@ -44,9 +42,9 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
   }, [search, embeddableCalcs]);
 
   const slug = getEmbedSlug(selected.href);
-  const embedSrc = `${SITE_URL}/embed/${slug}`;
+  const embedSrc = `https://boring-math.com/embed/${slug}`;
 
-  const snippet = `<iframe src="${embedSrc}" width="${width}" height="${height}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy"></iframe>`;
+  const snippet = getEmbedSnippet(slug, width, height);
 
   async function handleCopy() {
     try {

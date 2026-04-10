@@ -36,9 +36,14 @@ export function isWhitelabelOrigin(origin: string): boolean {
   return embedConfig.whitelabelOrigins.includes(origin);
 }
 
+/** Strip characters that could break HTML attribute context */
+export function sanitizeDimension(val: string): string {
+  return val.replace(/[^0-9.%a-z]/gi, '');
+}
+
 /** Generate embed snippet HTML */
 export function getEmbedSnippet(slug: string, width?: string, height?: string): string {
-  const w = width || embedConfig.defaultWidth;
-  const h = height || embedConfig.defaultHeight;
+  const w = sanitizeDimension(width || embedConfig.defaultWidth);
+  const h = sanitizeDimension(height || embedConfig.defaultHeight);
   return `<iframe src="https://boring-math.com/embed/${slug}" width="${w}" height="${h}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy"></iframe>`;
 }
