@@ -55,6 +55,13 @@ const relatedCalculators = [
     color: 'blue' as const,
   },
   {
+    title: 'Best UK Tax Calculators Guide',
+    description: 'Compare Boring Math with HMRC, Listen to Taxman, and The Salary Calculator.',
+    href: '/guides/best-uk-tax-calculators-2026',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
     title: 'UK Dividend Tax Calculator',
     description: 'Compare salary vs dividend for company directors and investors.',
     href: '/calculators/uk-dividend-tax-calculator',
@@ -113,6 +120,16 @@ const faqs = [
     question: 'How often are UK tax rates updated?',
     answer:
       'UK tax rates and thresholds are usually announced in the Autumn Budget (typically November) and take effect from 6 April the following year, which is the start of the UK tax year. The personal allowance and basic rate threshold have been frozen since 2021/22 and are expected to remain at current levels until 2028/29. This calculator is updated for the 2025/26 tax year (6 April 2025 to 5 April 2026).',
+  },
+  {
+    question: 'What is a good alternative to Listen to Taxman or The Salary Calculator?',
+    answer:
+      "A good alternative depends on what you need next. HMRC is useful for an official PAYE sense-check. Listen to Taxman and The Salary Calculator are useful for quick take-home pay estimates and tax-code scenarios. Boring Math is a better fit if you want the take-home figure plus linked calculators for student loans, salary sacrifice, the £100k tax trap, employer cost, dividends, and pension planning without creating an account.",
+  },
+  {
+    question: 'Should I use HMRC or a third-party UK tax calculator?',
+    answer:
+      'Use HMRC when you want an official estimate for a standard PAYE scenario. Use a third-party calculator when you want to compare scenarios quickly, jump into related decisions, or model things HMRC does not turn into a broader planning workflow. A practical approach is to use Boring Math to explore trade-offs, then sense-check a final PAYE case against HMRC if the decision matters.',
   },
 ];
 
@@ -280,6 +297,28 @@ const schemaBreadcrumbs = [
         for every £2 above £100,000).
       </p>
     </div>
+  </ContentSection>
+
+  <ContentSection title="Comparing HMRC, Listen to Taxman and The Salary Calculator">
+    <p>
+      If you searched for a <strong>Listen to Taxman alternative</strong>, a
+      <strong> The Salary Calculator alternative</strong>, or an <strong>HMRC tax calculator
+      alternative</strong>, the real question is usually what you need to do after the take-home pay
+      number appears.
+    </p>
+    <p>
+      HMRC is the official reference point for standard PAYE checks. Listen to Taxman and The Salary
+      Calculator are both well-known for quick salary breakdowns and tax-code detail. Boring Math is
+      stronger when you want the salary result connected to the next decision: student loan repayments,
+      pension type, salary sacrifice, the £100k tax trap, employer cost, or dividend comparisons.
+    </p>
+    <p>
+      For a fuller breakdown of where each tool fits, read the <a
+        href="/guides/best-uk-tax-calculators-2026"
+        class="text-[var(--color-accent)] hover:underline"
+      >best UK tax calculators guide</a>. It compares the main UK options fairly and links to the
+      specialist calculators when the generic salary view is not enough.
+    </p>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

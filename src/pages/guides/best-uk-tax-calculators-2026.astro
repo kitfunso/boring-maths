@@ -8,9 +8,10 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Best UK Tax Calculators 2026 — Free Tools for Take-Home Pay, Pensions and More';
+const title =
+  'Best UK Tax Calculators 2026: HMRC, Listen to Taxman and The Salary Calculator Alternatives';
 const description =
-  'The best free UK tax calculators for 2025/26 — take-home pay, pension projections, stamp duty, salary sacrifice, student loans, and the 100k tax trap. No signup required.';
+  'Compare HMRC, Listen to Taxman, The Salary Calculator, and Boring Math for take-home pay, student loans, salary sacrifice, pensions, and the £100k tax trap. Free tools, no signup required.';
 const canonicalURL = '/guides/best-uk-tax-calculators-2026';
 
 const calculators = [
@@ -73,6 +74,39 @@ const calculators = [
   },
 ];
 
+const competitorComparisons = [
+  {
+    competitor: 'HMRC',
+    bestFor: 'Official PAYE sense-checks for a standard employee scenario.',
+    watchFor:
+      'It is not designed to branch quickly into related planning tools like salary sacrifice, employer cost, or the £100k tax trap.',
+    betterFit: {
+      label: 'UK Tax Calculator',
+      href: '/calculators/uk-tax-calculator',
+    },
+  },
+  {
+    competitor: 'Listen to Taxman',
+    bestFor: 'Quick take-home pay checks, historic tax years, and tax-code-heavy PAYE scenarios.',
+    watchFor:
+      'Once you want to move from salary output to a linked decision, you usually need a second tool.',
+    betterFit: {
+      label: 'UK Salary Sacrifice Calculator',
+      href: '/calculators/uk-salary-sacrifice-calculator',
+    },
+  },
+  {
+    competitor: 'The Salary Calculator',
+    bestFor: 'Salary breakdowns, bonus months, and overtime-led take-home pay checks.',
+    watchFor:
+      'It is less helpful when the next question is about student loans, pensions, the £100k trap, or side-by-side UK tax planning paths.',
+    betterFit: {
+      label: 'UK Student Loan Calculator',
+      href: '/calculators/uk-student-loan-calculator',
+    },
+  },
+];
+
 const faqs = [
   {
     question: 'What is the best free UK tax calculator?',
@@ -103,6 +137,21 @@ const faqs = [
     question: 'Do I need to create an account to use these calculators?',
     answer:
       'No. All calculators on Boring Math are completely free and require no account, no email, and no signup. Everything runs in your browser.',
+  },
+  {
+    question: 'What is a good alternative to Listen to Taxman?',
+    answer:
+      'A good alternative depends on what you need after the take-home pay number. If you want an official PAYE check, use HMRC. If you want linked calculators for salary sacrifice, student loans, pension planning, employer cost, or the £100k tax trap without creating an account, Boring Math is a stronger next step than a salary-only tool.',
+  },
+  {
+    question: 'What is a good alternative to The Salary Calculator?',
+    answer:
+      'The Salary Calculator is useful for salary, overtime, and bonus-led take-home pay checks. Boring Math is a better alternative when you want the take-home result tied to a specific follow-up decision such as student loan repayments, pension projections, salary sacrifice savings, or property tax calculators.',
+  },
+  {
+    question: 'Should I use HMRC or a third-party UK tax calculator?',
+    answer:
+      'Use HMRC when you want the official government service for a standard PAYE estimate. Use a third-party calculator when you want faster scenario comparison, richer follow-up tools, or specialist pages for things like the £100k tax trap, salary sacrifice, student loans, or dividend tax. Many people use both: third-party first for planning, HMRC second as a sense-check.',
   },
 ];
 
@@ -242,6 +291,36 @@ const schemaData = {
             > gives you a projection in under 2 minutes.
           </li>
         </ul>
+      </section>
+
+      <section class="competitor-section">
+        <h2>Alternatives to HMRC, Listen to Taxman and The Salary Calculator</h2>
+        <p>
+          These brand-name searches usually mean you already know the rough category and want the tool
+          that answers the next question fastest. The honest answer is that each tool is good at
+          something slightly different.
+        </p>
+        <div class="comparison-cards">
+          {
+            competitorComparisons.map((item) => (
+              <article class="comparison-card">
+                <h3>{item.competitor}</h3>
+                <p><strong>Best for:</strong> {item.bestFor}</p>
+                <p><strong>Watch for:</strong> {item.watchFor}</p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
+                    >{item.betterFit.label}</a
+                  >
+                </p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="competitor-note">
+          If you want one quick rule: use HMRC for an official estimate, then use Boring Math when the
+          real decision is about salary sacrifice, student loans, pensions, stamp duty, or the £100k
+          tax trap.
+        </p>
       </section>
 
       <section class="faq-section">
@@ -448,6 +527,49 @@ const schemaData = {
   .how-to-choose a {
     color: #818cf8;
     text-decoration: none;
+  }
+
+  .competitor-section p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+
+  .comparison-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .comparison-card {
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+
+  .comparison-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .comparison-card p {
+    margin: 0.45rem 0;
+  }
+
+  .comparison-card a,
+  .competitor-note a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .comparison-card a:hover,
+  .competitor-note a:hover {
+    text-decoration: underline;
+  }
+
+  .competitor-note {
+    margin-top: 1rem;
   }
 
   .faq-item {
