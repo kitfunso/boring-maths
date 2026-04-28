@@ -8,9 +8,9 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Best UK Pension Calculators 2026 — Retirement Planning, FIRE and Salary Sacrifice';
+const title = 'Best UK Pension Calculators 2026: Which? Alternatives, FIRE and Salary Sacrifice';
 const description =
-  'The best free UK pension calculators for 2026 — retirement pot projections, FIRE planning, salary sacrifice optimisation, and state pension estimates. No signup required.';
+  'Compare Boring Math with Which? and other UK pension tools for retirement pot projections, salary sacrifice planning, FIRE calculations, and no-signup pension estimates.';
 const canonicalURL = '/guides/best-uk-pension-calculators-2026';
 
 const calculators = [
@@ -57,6 +57,29 @@ const calculators = [
   },
 ];
 
+const competitorComparisons = [
+  {
+    competitor: 'Which?',
+    bestFor: 'Retirement explainers, pension drawdown content, and broader consumer-finance guidance.',
+    watchFor:
+      'It is less direct when you want a fast no-signup projection and immediate jumps into salary sacrifice or FIRE-style planning.',
+    betterFit: {
+      label: 'UK Pension Calculator',
+      href: '/calculators/uk-pension-calculator',
+    },
+  },
+  {
+    competitor: 'The Salary Calculator',
+    bestFor: 'Checking how pension deductions or salary sacrifice affect take-home pay.',
+    watchFor:
+      'It is useful for payslip modelling, but it is not the best starting point when the real question is how large your retirement pot could be by a target age.',
+    betterFit: {
+      label: 'UK Salary Sacrifice Calculator',
+      href: '/calculators/uk-salary-sacrifice-calculator',
+    },
+  },
+];
+
 const faqs = [
   {
     question: 'How much do I need in my pension to retire comfortably in the UK?',
@@ -87,6 +110,21 @@ const faqs = [
     question: 'When can I access my pension in the UK?',
     answer:
       'You can currently access your private pension from age 55 (rising to 57 from April 2028). The state pension age is 66, rising to 67 between 2026 and 2028, and to 68 in later years. When you access your private pension, you can take up to 25% as a tax-free lump sum and draw the rest as taxable income through drawdown or an annuity.',
+  },
+  {
+    question: 'What is a good alternative to Which?\'s pension calculator?',
+    answer:
+      'Which? is useful if you want broader retirement education, drawdown content, and pension tax explainers. Boring Math is a better alternative when you want a fast pension projection tool with no signup and direct routes into salary sacrifice, FIRE, and tax-planning follow-up calculators.',
+  },
+  {
+    question: 'What is a good alternative to The Salary Calculator for pension planning?',
+    answer:
+      'The Salary Calculator is helpful when you want to see how pension deductions affect take-home pay. Boring Math is a better alternative when your main goal is long-term pension planning, retirement-pot forecasting, or deciding how much extra to contribute before modelling the payslip impact separately.',
+  },
+  {
+    question: 'Should I use a pension calculator or a salary sacrifice calculator?',
+    answer:
+      'Use a pension calculator when you want to know whether your retirement pot will be large enough. Use a salary sacrifice calculator when you want to know the short-term cost of increasing contributions through payroll. The best planning flow is usually pension calculator first, salary sacrifice calculator second.',
   },
 ];
 
@@ -228,6 +266,35 @@ const schemaData = {
             > shows what monthly contributions you need to hit that number.
           </li>
         </ul>
+      </section>
+
+      <section class="competitor-section">
+        <h2>Alternatives to Which? and payslip-first pension tools</h2>
+        <p>
+          Brand-name searches in this cluster usually mean you are close to a decision and want the
+          tool that answers the next question fastest.
+        </p>
+        <div class="comparison-cards">
+          {
+            competitorComparisons.map((item) => (
+              <article class="comparison-card">
+                <h3>{item.competitor}</h3>
+                <p><strong>Best for:</strong> {item.bestFor}</p>
+                <p><strong>Watch for:</strong> {item.watchFor}</p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
+                    >{item.betterFit.label}</a
+                  >
+                </p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="competitor-note">
+          Use Which? when you want broader retirement reading, use The Salary Calculator when the main
+          question is about this month's payslip, and use Boring Math when you want a fast projection
+          plus connected follow-up tools.
+        </p>
       </section>
 
       <section class="faq-section">
@@ -434,6 +501,49 @@ const schemaData = {
   .how-to-choose a {
     color: #818cf8;
     text-decoration: none;
+  }
+
+  .competitor-section p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+
+  .comparison-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .comparison-card {
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+
+  .comparison-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .comparison-card p {
+    margin: 0.45rem 0;
+  }
+
+  .comparison-card a,
+  .competitor-note a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .comparison-card a:hover,
+  .competitor-note a:hover {
+    text-decoration: underline;
+  }
+
+  .competitor-note {
+    margin-top: 1rem;
   }
 
   .faq-item {

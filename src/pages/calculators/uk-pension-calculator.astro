@@ -37,6 +37,13 @@ const relatedCalculators = [
     color: 'teal' as const,
   },
   {
+    title: 'Best UK Pension Calculators Guide',
+    description: 'Compare Boring Math with Which? and other UK pension tools.',
+    href: '/guides/best-uk-pension-calculators-2026',
+    icon: 'chart' as const,
+    color: 'indigo' as const,
+  },
+  {
     title: 'UK £100k Tax Trap',
     description: 'Use pension to escape the 60% tax trap.',
     href: '/calculators/uk-100k-tax-trap-calculator',
@@ -88,17 +95,27 @@ const faqs = [
   {
     question: 'What is the State Pension and how much will I get?',
     answer:
-      'The full new State Pension is currently £11,502/year (2024/25). You need 35 qualifying years of National Insurance contributions to get the full amount. You can check your NI record and forecast on the government website. The State Pension age is currently 66, rising to 67 by 2028.',
+      'The full new State Pension is currently £230.25/week, about £11,973/year, in 2025/26. You need 35 qualifying years of National Insurance contributions to get the full amount. You can check your NI record and forecast on the government website. The State Pension age is currently 66, rising to 67 by 2028.',
   },
   {
     question: 'What is the annual pension allowance?',
     answer:
-      'You can contribute up to £60,000/year to pensions and receive tax relief (2024/25). This includes employee and employer contributions. For high earners (over £260,000), this tapers down to £10,000. You can also carry forward unused allowance from the previous 3 years.',
+      'You can contribute up to £60,000/year to pensions and receive tax relief in 2025/26. This includes employee and employer contributions. For high earners (over £260,000), this tapers down to £10,000. You can also carry forward unused allowance from the previous 3 years.',
   },
   {
     question: 'Should I use salary sacrifice for pension contributions?',
     answer:
       'Usually yes. Salary sacrifice means both you and your employer save National Insurance. Your employer might pass on some of their NI saving to you. It also reduces your salary for student loan calculations and can help avoid the £100k tax trap. However, it does reduce your gross salary on paper, which might affect mortgage applications.',
+  },
+  {
+    question: 'What is a good alternative to Which?\'s pension calculator?',
+    answer:
+      'Which? is useful for retirement education and drawdown content. Boring Math is a better alternative when you want a fast no-signup pension pot projection plus direct links to salary sacrifice, FIRE planning, and the tax decisions that shape how much you can contribute in the first place.',
+  },
+  {
+    question: 'Should I use a pension calculator or a take-home pay calculator?',
+    answer:
+      'Use a pension calculator when your main question is whether your retirement pot is big enough. Use a take-home pay or salary sacrifice calculator when your question is how a contribution changes this month\'s payslip. In practice, most useful pension planning uses both: first model the long-term pot, then check the short-term cost of contributing more.',
   },
 ];
 
@@ -185,10 +202,30 @@ const schemaBreadcrumbs = [
       </p>
       <p>
         Remember to add <strong class="text-blue-400">State Pension</strong> to your private pension income.
-        The full State Pension is currently around £11,500/year, which can significantly boost your retirement
+        The full State Pension is currently around £12,000/year in 2025/26, which can significantly boost your retirement
         income.
       </p>
     </div>
+  </ContentSection>
+
+  <ContentSection title="Comparing Boring Math with Which? and payslip-first tools">
+    <p>
+      If you searched for a <strong>Which? pension calculator alternative</strong>, the question is
+      usually whether you need a retirement projection tool or a broader retirement-content hub.
+    </p>
+    <p>
+      Which? is strong for retirement explainers, pension tax, and drawdown content. Payslip-first
+      tools such as The Salary Calculator are useful when you want to see the immediate effect of pension
+      deductions on take-home pay. Boring Math is stronger when you want a fast pension pot projection,
+      then a clean jump into salary sacrifice, FIRE planning, or the £100k tax trap without leaving the
+      same planning flow.
+    </p>
+    <p>
+      For the broader comparison, read the <a
+        href="/guides/best-uk-pension-calculators-2026"
+        class="text-[var(--color-accent)] hover:underline"
+      >best UK pension calculators guide</a>.
+    </p>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

@@ -13,7 +13,7 @@ import { UKSalarySacrificeCalculator } from '../../components/calculators/UKSala
 
 const title = 'Free UK Salary Sacrifice Calculator 2025/26 — Pension, Cycle & EV | Boring Math';
 const description =
-  'Salary sacrifice a £5,000 pension contribution from a £50,000 salary and it only costs you £3,600 in take-home pay. You save £1,000 in tax and £400 in NIC. Your employer saves £690 too. Calculator for pension, cycle-to-work, childcare, and EV schemes.';
+  'Salary sacrifice a £5,000 pension contribution from a £50,000 salary and it only costs you £3,600 in take-home pay. You save £1,000 in tax and £400 in NIC. Your employer saves £750 too. Calculator for pension, cycle-to-work, childcare, and EV schemes.';
 const keywords =
   'salary sacrifice calculator, salary sacrifice pension, cycle to work scheme calculator, salary sacrifice car uk, salary sacrifice electric car, pension salary sacrifice calculator';
 const canonicalURL = '/calculators/uk-salary-sacrifice-calculator';
@@ -31,6 +31,13 @@ const relatedCalculators = [
     href: '/calculators/uk-pension-calculator',
     icon: 'chart' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Salary Sacrifice Guide',
+    description: 'Compare salary sacrifice with HMRC guidance and The Salary Calculator.',
+    href: '/guides/salary-sacrifice-uk-guide',
+    icon: 'chart' as const,
+    color: 'blue' as const,
   },
   {
     title: 'UK £100k Tax Trap',
@@ -64,7 +71,7 @@ const faqs = [
   {
     question: 'How much can I save with salary sacrifice?',
     answer:
-      'Your savings depend on your tax bracket. Basic rate taxpayers (20%) save around 32% (20% tax + 12% NI). Higher rate taxpayers (40%) save around 42% (40% tax + 2% NI). Scottish taxpayers have different rates. For a £5,000 sacrifice, a 40% taxpayer saves approximately £2,100 in tax and NI.',
+      'Your savings depend on your tax bracket. Basic rate taxpayers (20%) now save around 28% (20% tax + 8% NI). Higher rate taxpayers (40%) save around 42% (40% tax + 2% NI). Scottish taxpayers have different rates. For a £5,000 sacrifice, a 40% taxpayer saves approximately £2,100 in tax and NI.',
   },
   {
     question: 'What benefits can I get through salary sacrifice?',
@@ -84,7 +91,7 @@ const faqs = [
   {
     question: 'Does salary sacrifice affect my State Pension?',
     answer:
-      "Only if your reduced salary falls below the National Insurance Lower Earnings Limit (£6,396/year in 2024/25). Above this threshold, you continue to accrue State Pension entitlement. For most people, salary sacrifice won't affect State Pension, but check if making large sacrifices.",
+      "Only if your reduced salary falls below the National Insurance Lower Earnings Limit (£6,500/year in 2025/26). Above this threshold, you continue to accrue State Pension entitlement. For most people, salary sacrifice won't affect State Pension, but check if making large sacrifices.",
   },
   {
     question: 'What are the rules for cycle-to-work schemes?',
@@ -95,6 +102,16 @@ const faqs = [
     question: 'How does electric vehicle salary sacrifice work?',
     answer:
       "EV salary sacrifice lets you lease an electric car through your employer at a reduced cost due to tax and NI savings. You pay Benefit in Kind (BIK) tax, but for EVs this is currently just 2% of the car's list price – making it very tax-efficient. You also get insurance, maintenance, and charging included in most schemes.",
+  },
+  {
+    question: 'What is a good alternative to The Salary Calculator for salary sacrifice?',
+    answer:
+      'The Salary Calculator is useful for a quick take-home pay estimate with pension deductions, but even its own pension notes say contributions are estimated because pensionable pay can vary by employer. Boring Math is a better alternative when you want a dedicated salary sacrifice view with true cost, employee and employer NI savings, and direct links to the pension, student loan, and £100k tax-trap follow-up decisions.',
+  },
+  {
+    question: 'Should I use HMRC guidance or a salary sacrifice calculator?',
+    answer:
+      'Use HMRC when you want the rules and thresholds. Use a salary sacrifice calculator when you want to model a real decision, such as how much take-home pay you lose, how much NI you save, and whether a pension sacrifice changes your student loan or £100k taper position. The practical move is to use Boring Math for the scenario, then check HMRC if you need the official policy wording.',
   },
 ];
 
@@ -165,10 +182,32 @@ const schemaBreadcrumbs = [
       </p>
       <p>
         Your <strong class="text-blue-400">employer also saves</strong> on National Insurance contributions
-        (13.8%). Some employers share this saving with employees through enhanced pension contributions
+        (15%). Some employers share this saving with employees through enhanced pension contributions
         or other benefits.
       </p>
     </div>
+  </ContentSection>
+
+  <ContentSection title="Comparing HMRC and The Salary Calculator">
+    <p>
+      People searching for a <strong>The Salary Calculator alternative</strong> or an
+      <strong> HMRC salary sacrifice calculator</strong> are usually trying to answer two different
+      questions.
+    </p>
+    <p>
+      HMRC is where you check the rules, such as minimum wage constraints and pension treatment. The
+      Salary Calculator is useful for a broad take-home pay estimate, but its pension notes openly warn
+      that the result is an estimate because employers define pensionable pay differently. Boring Math is
+      stronger when you want a dedicated salary sacrifice decision tool with true cost, employee and
+      employer NI savings, and links to the next decision if pension contributions affect your student
+      loan, retirement plan, or £100k tax trap position.
+    </p>
+    <p>
+      For the fuller comparison, read the <a
+        href="/guides/salary-sacrifice-uk-guide"
+        class="text-[var(--color-accent)] hover:underline"
+      >salary sacrifice UK guide</a>.
+    </p>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

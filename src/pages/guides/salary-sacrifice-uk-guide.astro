@@ -6,10 +6,33 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Salary Sacrifice UK Guide 2025/26 - Is It Worth It? | Boring Math';
+const title = 'Salary Sacrifice UK Guide 2025/26: HMRC and The Salary Calculator Alternatives | Boring Math';
 const description =
-  'Salary sacrifice reduces income tax and NIC. At £50k, a £5k sacrifice saves £2,400 in tax plus £600 in NIC. At £110k it saves 62%. Here is how it works.';
+  'Compare Boring Math with HMRC and The Salary Calculator for salary sacrifice pensions. See when salary exchange beats personal contributions, and calculate the real tax and NIC saving.';
 const canonicalURL = '/guides/salary-sacrifice-uk-guide';
+
+const competitorComparisons = [
+  {
+    competitor: 'HMRC',
+    bestFor: 'Checking the formal salary sacrifice rules, thresholds, and pension treatment.',
+    watchFor:
+      'HMRC explains the rules, but it is not built to compare take-home scenarios or show the true cost of a contribution across adjacent tax decisions.',
+    betterFit: {
+      label: 'UK Salary Sacrifice Calculator',
+      href: '/calculators/uk-salary-sacrifice-calculator',
+    },
+  },
+  {
+    competitor: 'The Salary Calculator',
+    bestFor: 'Broad take-home pay estimates with pension deductions and salary sacrifice options.',
+    watchFor:
+      'Its own pension notes warn that results are estimates because pensionable pay differs by employer, so it is less direct when you want a dedicated sacrifice decision tool.',
+    betterFit: {
+      label: 'UK Pension Calculator',
+      href: '/calculators/uk-pension-calculator',
+    },
+  },
+];
 
 const faqs = [
   {
@@ -47,6 +70,16 @@ const faqs = [
     answer:
       "Salary sacrifice is usually worth doing if you're contributing to a pension anyway. The exception: if you need money now rather than at retirement, locking it into a pension is inflexible. Also, if you're very close to a tax credit threshold or benefit entitlement based on income, reducing your gross salary may affect those. Check the knock-on effects before committing.",
   },
+  {
+    question: 'What is a good alternative to The Salary Calculator for salary sacrifice?',
+    answer:
+      'A good alternative depends on whether you are modelling payslips or making a pension decision. The Salary Calculator is useful for a broad take-home estimate, but Boring Math is better when you want the true salary sacrifice cost, employer NI saving, and direct links into pension planning, student loans, and the £100k tax trap.',
+  },
+  {
+    question: 'Should I use HMRC or a salary sacrifice calculator?',
+    answer:
+      'Use HMRC for the rules. Use a calculator when you need to compare scenarios quickly, such as how much take-home pay you lose for a £5,000 sacrifice or whether a larger pension contribution helps you avoid the personal allowance taper. A practical workflow is Boring Math first, HMRC second if you need the official wording.',
+  },
 ];
 
 const schemaData = {
@@ -62,7 +95,7 @@ const schemaData = {
         '@type': 'Organization',
         name: 'Boring Math',
       },
-      dateModified: '2026-03-01',
+      dateModified: '2026-04-28',
     },
     {
       '@type': 'FAQPage',
@@ -89,7 +122,7 @@ const schemaData = {
           <a href="/">Home</a> › <a href="/guides">Guides</a> › Salary Sacrifice UK Guide
         </nav>
         <h1>{title}</h1>
-        <p class="subtitle">2025/26 tax year &bull; Updated March 2026 &bull; UK employees only</p>
+        <p class="subtitle">2025/26 tax year &bull; Updated April 2026 &bull; UK employees only</p>
       </header>
 
       <section class="tldr-block" aria-label="Quick summary">
@@ -139,9 +172,9 @@ const schemaData = {
           </li>
         </ul>
         <p>
-          Over a career, that NIC saving compounds. Your employer also saves employer NIC (13.8%
-          below the Upper Secondary Threshold), and many employers pass some or all of this saving
-          to your pension as a bonus contribution.
+          Over a career, that NIC saving compounds. Your employer also saves employer NIC (15%
+          above the secondary threshold), and many employers pass some or all of this saving to your
+          pension as a bonus contribution.
         </p>
       </section>
 
@@ -172,10 +205,10 @@ const schemaData = {
               </tr>
               <tr>
                 <td>£50,000</td>
-                <td>20-40% (mixed)</td>
+                <td>20%</td>
                 <td>8%</td>
-                <td>~£1,800</td>
-                <td>~£3,200</td>
+                <td>£1,400</td>
+                <td>£3,600</td>
               </tr>
               <tr>
                 <td>£80,000</td>
@@ -222,7 +255,7 @@ const schemaData = {
           </ul>
           <p>
             Your pension receives £3,000. You lose £2,160 from take-home pay. You can also check
-            whether your employer passes their NIC saving (13.8% of £3,000 = £414) to your pension —
+            whether your employer passes their NIC saving (15% of £3,000 = £450) to your pension —
             some employers add this automatically.
           </p>
         </div>
@@ -230,24 +263,20 @@ const schemaData = {
         <div class="example-box">
           <h3>£50,000 salary: £5,000 sacrifice</h3>
           <p>
-            At £50,000, the first few thousand of sacrifice falls partly in the basic rate band and
-            partly crosses the higher rate threshold (£50,270). Approximately £4,730 of the
-            sacrifice is at 20% and £270 at 40% (numbers approximate because the personal allowance
-            affects exact thresholds).
+            At £50,000, a £5,000 sacrifice stays fully inside the basic rate band because your gross
+            salary is already below the £50,270 upper earnings limit. That means every sacrificed
+            pound saves 20% income tax and 8% employee NIC.
           </p>
           <ul>
-            <li>Income tax saving: approximately £1,050</li>
-            <li>
-              Employee NIC saving: £400 (8% on all £5,000, assuming all below the £50,270 threshold)
-            </li>
-            <li>Total saving: approximately £1,450</li>
-            <li>Take-home reduction: £3,550</li>
+            <li>Income tax saving: £1,000</li>
+            <li>Employee NIC saving: £400</li>
+            <li>Total saving: £1,400</li>
+            <li>Take-home reduction: £3,600</li>
           </ul>
           <p>
-            At £50,000 you are near the basic-to-higher rate boundary. Sacrifice that takes your
-            taxable income below £50,270 saves at 20% + 8% NIC (28% total). Any sacrifice in the
-            higher rate band saves 40% + 2% NIC (42% total). This is why the exact crossing point
-            matters — use the calculator to find your threshold.
+            The higher-rate blend only starts once your salary is above the higher-rate threshold.
+            That is why £50,000 behaves like a clean 28% saving case, while £55,000 or £60,000 can
+            show a mixed result.
           </p>
         </div>
 
@@ -262,8 +291,8 @@ const schemaData = {
           </ul>
           <p>
             You put £10,000 into your pension for a net cost of £5,800. The effective rate is 42%.
-            If your employer also adds their NIC saving (13.8% of £10,000 = £1,380), your pension
-            receives £11,380 while your take-home only drops by £5,800.
+            If your employer also adds their NIC saving (15% of £10,000 = £1,500), your pension
+            receives £11,500 while your take-home only drops by £5,800.
           </p>
         </div>
 
@@ -379,7 +408,7 @@ const schemaData = {
             or "SMART pension" in your benefits documentation. Not all employers offer it.
           </li>
           <li>
-            <strong>Check if your employer passes on their NIC saving.</strong> Some add 13.8% of your
+            <strong>Check if your employer passes on their NIC saving.</strong> Some add 15% of your
             sacrifice to your pension. Others keep it. This is worth asking about — it can add thousands
             to your pension annually.
           </li>
@@ -420,6 +449,35 @@ const schemaData = {
             UK Pension Calculator →
           </a>
         </div>
+      </section>
+
+      <section class="competitor-section">
+        <h2>Alternatives to HMRC and The Salary Calculator</h2>
+        <p>
+          Competitor searches here usually mean you already understand the basic idea of salary
+          sacrifice and want the fastest way to answer a live decision.
+        </p>
+        <div class="comparison-cards">
+          {
+            competitorComparisons.map((item) => (
+              <article class="comparison-card">
+                <h3>{item.competitor}</h3>
+                <p><strong>Best for:</strong> {item.bestFor}</p>
+                <p><strong>Watch for:</strong> {item.watchFor}</p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
+                    >{item.betterFit.label}</a
+                  >
+                </p>
+              </article>
+            ))
+          }
+        </div>
+        <p class="competitor-note">
+          Use HMRC when the question is about compliance, use The Salary Calculator when you want a
+          quick broad payslip estimate, and use Boring Math when you want the sacrifice decision tied
+          to retirement planning, student loans, or the £100k taper.
+        </p>
       </section>
 
       <section class="faq-section">
@@ -654,6 +712,49 @@ const schemaData = {
     margin-bottom: 1.2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 0.5rem;
+  }
+
+  .competitor-section p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+
+  .comparison-cards {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .comparison-card {
+    padding: 1rem 1.1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+  }
+
+  .comparison-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .comparison-card p {
+    margin: 0.45rem 0;
+  }
+
+  .comparison-card a,
+  .competitor-note a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .comparison-card a:hover,
+  .competitor-note a:hover {
+    text-decoration: underline;
+  }
+
+  .competitor-note {
+    margin-top: 1rem;
   }
 
   .faq-item {
