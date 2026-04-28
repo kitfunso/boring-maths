@@ -54,9 +54,6 @@ export default defineConfig({
 
   redirects: {
     '/privacy': '/privacy-policy',
-    '/calculators/uk-student-loan-calculator/': '/calculators/uk-student-loan-calculator',
-    '/calculators/ads-calculator/': '/calculators/ads-calculator',
-    '/calculators/w2-to-1099-calculator/': '/calculators/w2-to-1099-calculator',
   },
 
   build: {

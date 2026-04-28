@@ -108,14 +108,14 @@ const faqs = [
       'Usually yes. Salary sacrifice means both you and your employer save National Insurance. Your employer might pass on some of their NI saving to you. It also reduces your salary for student loan calculations and can help avoid the £100k tax trap. However, it does reduce your gross salary on paper, which might affect mortgage applications.',
   },
   {
-    question: 'What is a good alternative to Which?\'s pension calculator?',
+    question: "What is a good alternative to Which?'s pension calculator?",
     answer:
       'Which? is useful for retirement education and drawdown content. Boring Math is a better alternative when you want a fast no-signup pension pot projection plus direct links to salary sacrifice, FIRE planning, and the tax decisions that shape how much you can contribute in the first place.',
   },
   {
     question: 'Should I use a pension calculator or a take-home pay calculator?',
     answer:
-      'Use a pension calculator when your main question is whether your retirement pot is big enough. Use a take-home pay or salary sacrifice calculator when your question is how a contribution changes this month\'s payslip. In practice, most useful pension planning uses both: first model the long-term pot, then check the short-term cost of contributing more.',
+      "Use a pension calculator when your main question is whether your retirement pot is big enough. Use a take-home pay or salary sacrifice calculator when your question is how a contribution changes this month's payslip. In practice, most useful pension planning uses both: first model the long-term pot, then check the short-term cost of contributing more.",
   },
 ];
 
@@ -140,6 +140,26 @@ const schemaBreadcrumbs = [
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
     breadcrumbs={schemaBreadcrumbs}
+    category="Retirement Planning Calculator"
+    howToSteps={[
+      {
+        name: 'Enter your age and retirement age',
+        text: 'Add your current age and the age you want to retire so the calculator knows how long your pension has to grow.',
+      },
+      {
+        name: 'Add your current pension pot',
+        text: 'Enter the current value of your private pensions using your latest statements or online pension dashboard.',
+      },
+      {
+        name: 'Set monthly contributions',
+        text: 'Include your own monthly contribution and your employer contribution so the projection reflects total pension funding.',
+      },
+      {
+        name: 'Adjust growth assumptions and review the projection',
+        text: 'Tweak the growth rate if needed, then use the projected pot and retirement income figures to see whether your current plan is on track.',
+      },
+    ]}
+    estimatedTime="PT3M"
   />
 
   <HeroSection
@@ -202,8 +222,8 @@ const schemaBreadcrumbs = [
       </p>
       <p>
         Remember to add <strong class="text-blue-400">State Pension</strong> to your private pension income.
-        The full State Pension is currently around £12,000/year in 2025/26, which can significantly boost your retirement
-        income.
+        The full State Pension is currently around £12,000/year in 2025/26, which can significantly boost
+        your retirement income.
       </p>
     </div>
   </ContentSection>
@@ -215,16 +235,16 @@ const schemaBreadcrumbs = [
     </p>
     <p>
       Which? is strong for retirement explainers, pension tax, and drawdown content. Payslip-first
-      tools such as The Salary Calculator are useful when you want to see the immediate effect of pension
-      deductions on take-home pay. Boring Math is stronger when you want a fast pension pot projection,
-      then a clean jump into salary sacrifice, FIRE planning, or the £100k tax trap without leaving the
-      same planning flow.
+      tools such as The Salary Calculator are useful when you want to see the immediate effect of
+      pension deductions on take-home pay. Boring Math is stronger when you want a fast pension pot
+      projection, then a clean jump into salary sacrifice, FIRE planning, or the £100k tax trap
+      without leaving the same planning flow.
     </p>
     <p>
       For the broader comparison, read the <a
         href="/guides/best-uk-pension-calculators-2026"
-        class="text-[var(--color-accent)] hover:underline"
-      >best UK pension calculators guide</a>.
+        class="text-[var(--color-accent)] hover:underline">best UK pension calculators guide</a
+      >.
     </p>
   </ContentSection>
 
