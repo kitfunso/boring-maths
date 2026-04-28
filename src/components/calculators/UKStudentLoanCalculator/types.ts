@@ -41,32 +41,32 @@ export function getDefaultInputs(): UKStudentLoanInputs {
   };
 }
 
-// 2024/25 Student Loan thresholds and rates
-// Interest rates updated based on prevailing market rate/RPI
+// Current Student Loan thresholds and rates
+// Thresholds and rates aligned to current GOV.UK repayment guidance.
 export const LOAN_PLANS = {
   plan1: {
     name: 'Plan 1',
     description: 'Started before Sept 2012 (England/Wales) or any time (Scotland/NI)',
-    threshold: 24990,
+    threshold: 26900,
     rate: 0.09,
     writeOffYears: 25,
-    interestRate: 0.043, // 4.3% (from March 2025, based on lower RPI)
+    interestRate: 0.032,
   },
   plan2: {
     name: 'Plan 2',
     description: 'Started Sept 2012 onwards (England/Wales)',
-    threshold: 27295,
+    threshold: 29385,
     rate: 0.09,
     writeOffYears: 30,
-    interestRate: 0.078, // RPI + up to 3% based on income
+    interestRate: 0.062,
   },
   plan4: {
     name: 'Plan 4',
     description: 'Scotland (started Sept 1998 onwards)',
-    threshold: 31395,
+    threshold: 33795,
     rate: 0.09,
     writeOffYears: 30,
-    interestRate: 0.0625,
+    interestRate: 0.032,
   },
   plan5: {
     name: 'Plan 5',
@@ -74,7 +74,7 @@ export const LOAN_PLANS = {
     threshold: 25000,
     rate: 0.09,
     writeOffYears: 40,
-    interestRate: 0.078,
+    interestRate: 0.032,
   },
   postgrad: {
     name: 'Postgraduate Loan',
@@ -82,6 +82,6 @@ export const LOAN_PLANS = {
     threshold: 21000,
     rate: 0.06,
     writeOffYears: 30,
-    interestRate: 0.078,
+    interestRate: 0.062,
   },
 };

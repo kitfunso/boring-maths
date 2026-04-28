@@ -13,9 +13,9 @@ import { UKStudentLoanCalculator } from '../../components/calculators/UKStudentL
 
 const title = 'Free UK Student Loan Calculator — Plan 1, 2, 4 & 5 | Boring Math';
 const description =
-  'On a £35,000 salary with a Plan 2 student loan you repay £57.88/month (9% of earnings above £27,295). At 7.3% interest your balance grows faster than you repay it. Calculator models all UK plans with repayment timelines and write-off projections.';
+  'On a £35,000 salary with a Plan 2 student loan you repay about £42/month under current thresholds. Model Plans 1, 2, 4, 5 and Postgraduate loans, write-off timing, and how salary sacrifice changes repayments.';
 const keywords =
-  'student loan calculator uk, student loan repayment calculator, plan 2 student loan, student loan write off, student loan threshold 2024, postgraduate loan calculator';
+  'student loan calculator uk, student loan repayment calculator, plan 2 student loan, student loan write off, postgraduate loan calculator, salary calculator alternative student loan';
 const canonicalURL = '/calculators/uk-student-loan-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -47,6 +47,13 @@ const relatedCalculators = [
     color: 'blue' as const,
   },
   {
+    title: 'Best UK Tax Calculators Guide',
+    description: 'Compare HMRC, The Salary Calculator, and Boring Math tools.',
+    href: '/guides/best-uk-tax-calculators-2026',
+    icon: 'chart' as const,
+    color: 'indigo' as const,
+  },
+  {
     title: 'UK Child Benefit Calculator',
     description: 'Calculate child benefit and HICBC charge.',
     href: '/calculators/uk-child-benefit-calculator',
@@ -62,14 +69,14 @@ const faqs = [
       'Plan 1: Started before September 2012 in England/Wales, or any time in Scotland/NI. Plan 2: Started September 2012 onwards in England/Wales. Plan 4: Scotland, started September 1998 onwards. Plan 5: Started September 2023 onwards in England. Postgraduate: Masters or Doctoral loans from 2016 onwards.',
   },
   {
-    question: 'What are the 2024/25 repayment thresholds?',
+    question: 'What are the current repayment thresholds?',
     answer:
-      'Plan 1: £24,990/year. Plan 2: £27,295/year. Plan 4: £31,395/year. Plan 5: £25,000/year. Postgraduate: £21,000/year. You only start repaying once your income exceeds these thresholds.',
+      'Plan 1: £26,900/year. Plan 2: £29,385/year. Plan 4: £33,795/year. Plan 5: £25,000/year. Postgraduate: £21,000/year. You only start repaying once your income exceeds these thresholds.',
   },
   {
     question: 'How much will I repay each month?',
     answer:
-      'For Plan 1, 2, 4, and 5: You pay 9% of everything you earn above your threshold. For Postgraduate loans: You pay 6% above the threshold. For example, on Plan 2 earning £35,000: (£35,000 - £27,295) × 9% = £693.45/year or £57.79/month.',
+      'For Plan 1, 2, 4, and 5: You pay 9% of everything you earn above your threshold. For Postgraduate loans: You pay 6% above the threshold. For example, on Plan 2 earning £35,000: (£35,000 - £29,385) × 9% = £505.35/year or about £42.11/month.',
   },
   {
     question: 'When will my student loan be written off?',
@@ -79,7 +86,7 @@ const faqs = [
   {
     question: 'What interest rate do I pay on my student loan?',
     answer:
-      'Plan 1 & 4: The lower of RPI or Bank of England base rate + 1% (currently around 6.25%). Plan 2 & 5: RPI while studying, then RPI to RPI + 3% based on income (currently up to 7.8%). Postgraduate: RPI + 3% (currently around 7.8%).',
+      'Current rates change over time. Right now, Plan 1, Plan 4, and Plan 5 are 3.2%. Postgraduate loans are 6.2%. Plan 2 is income-linked after study, from 3.2% up to 6.2%, while borrowers still studying are charged RPI plus 3% (currently 6.2%). This calculator assumes you are already in repayment.',
   },
   {
     question: 'Should I pay off my student loan early?',
@@ -95,6 +102,16 @@ const faqs = [
     question: 'Does salary sacrifice affect my student loan repayments?',
     answer:
       'Yes, salary sacrifice (e.g., into pension) reduces your gross salary before student loan calculations. This means lower repayments. However, this also means your loan lasts longer and accrues more interest. For those unlikely to repay in full, this is often beneficial.',
+  },
+  {
+    question: 'What is a good alternative to The Salary Calculator for student loans?',
+    answer:
+      'The Salary Calculator is handy for broad take-home pay checks, but Boring Math is a better alternative when the real question is student-loan-specific: monthly repayments by plan, write-off timing, and how pension salary sacrifice changes what you repay.',
+  },
+  {
+    question: 'Should I use GOV.UK, MoneySavingExpert, or a student loan calculator?',
+    answer:
+      'Use GOV.UK when you want the official thresholds and rule wording. Use MoneySavingExpert when you want strategy explainers about overpayments or whether student loans behave more like a tax than normal debt. Use a calculator like Boring Math when you want to model your own salary, loan plan, and salary-sacrifice choices side by side.',
   },
 ];
 
@@ -181,6 +198,35 @@ const schemaBreadcrumbs = [
         <strong class="text-amber-400">written off</strong>. This is common and not a problem –
         student loans don't affect credit scores and are written off after 25-40 years depending on
         your plan.
+      </p>
+      <p>
+        This calculator assumes you are already in repayment and uses the current published
+        thresholds and interest framework. If you are still studying, Plan 2 interest is usually
+        charged at the higher student rate until the April after you leave your course.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Comparing GOV.UK, The Salary Calculator and MoneySavingExpert">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        People searching for a <strong>The Salary Calculator alternative</strong> or trying to decide
+        between <strong>GOV.UK</strong>, <strong>MoneySavingExpert</strong>, and a repayment tool are
+        usually asking different questions.
+      </p>
+      <p>
+        <strong class="text-[var(--color-cream)]">GOV.UK</strong> is best for the official rules,
+        thresholds, and current interest rates. <strong class="text-[var(--color-cream)]"
+          >MoneySavingExpert</strong
+        > is strong when you want plain-English strategy on overpaying or deciding whether to treat
+        student loans like tax rather than normal debt.
+      </p>
+      <p>
+        <strong class="text-[var(--color-cream)]">Boring Math</strong> is the better fit when you
+        want to model your own numbers fast: your plan, your salary, your likely write-off date, and
+        what changes if you also use the <a href="/calculators/uk-salary-sacrifice-calculator"
+          >UK Salary Sacrifice Calculator</a
+        > or compare take-home pay on the <a href="/calculators/uk-tax-calculator">UK Tax Calculator</a>.
       </p>
     </div>
   </ContentSection>

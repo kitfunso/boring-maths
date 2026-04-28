@@ -6,6 +6,24 @@
 import type { UKStudentLoanInputs, UKStudentLoanResult, YearlyBreakdown } from './types';
 import { LOAN_PLANS } from './types';
 
+function getPlan2InterestRate(annualSalary: number): number {
+  const lowerThreshold = 29385;
+  const upperThreshold = 52884;
+  const baseRate = 0.032;
+  const maxRate = 0.062;
+
+  if (annualSalary <= lowerThreshold) return baseRate;
+  if (annualSalary >= upperThreshold) return maxRate;
+
+  const progress = (annualSalary - lowerThreshold) / (upperThreshold - lowerThreshold);
+  return baseRate + progress * (maxRate - baseRate);
+}
+
+function getAnnualInterestRate(annualSalary: number, plan: keyof typeof LOAN_PLANS): number {
+  if (plan === 'plan2') return getPlan2InterestRate(annualSalary);
+  return LOAN_PLANS[plan].interestRate;
+}
+
 /**
  * Calculate monthly repayment based on salary and loan plan
  */
@@ -49,7 +67,7 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
   // Project year by year until write-off or paid off
   for (let year = 1; year <= plan.writeOffYears && balance > 0; year++) {
     // Calculate interest for the year (simplified - applied at year end)
-    const interestCharged = balance * plan.interestRate;
+    const interestCharged = balance * getAnnualInterestRate(currentSalary, loanPlan);
     balance += interestCharged;
     totalInterest += interestCharged;
 
