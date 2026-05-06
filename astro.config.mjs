@@ -52,9 +52,10 @@ export default defineConfig({
     }),
   ],
 
-  redirects: {
-    '/privacy': '/privacy-policy',
-  },
+  // Note: /privacy is redirected to /privacy-policy at the edge via
+  // public/_redirects (Cloudflare). Astro-level redirects emit a static
+  // HTML stub with <meta robots noindex>, which GSC flagged as
+  // "Excluded by 'noindex' tag" on a sitemap-discovered URL.
 
   build: {
     // Cloudflare Pages needs directory-style output for nested extensionless

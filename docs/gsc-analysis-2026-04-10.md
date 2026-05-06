@@ -2,16 +2,13 @@
 
 ## Summary
 
-- **Total page impressions**: 22,160 (across 146 pages)
-- **Total clicks**: 23
-- **Overall CTR**: 0.10%
-- **Pages with at least 1 click**: 15
-- **Zero-click pages**: 131 (20,274 wasted impressions)
-- **Query-page pairs analyzed**: 200 (GSC API limit per export)
+- **Total impressions**: 649
+- **Total clicks**: 4
+- **Overall CTR**: 0.62%
+- **Pages with data**: 45
+- **Zero-click high-impression pages**: 87
 - **Cannibalized queries**: 8
-- **Content gap signals**: 39
-
-The site generates significant impression volume (22K in 28 days) but converts almost none to clicks. Most pages sit at position 40-90, below the fold on page 1 and often on pages 2-9. The primary opportunity is improving positions on high-impression pages through title optimization, content depth, and internal linking.
+- **Content gap signals**: 33
 
 ## Top 15 Pages by Opportunity Score
 
@@ -19,7 +16,7 @@ Opportunity score = sum of (impressions / position) across all queries for that 
 Higher score = more search demand relative to current ranking.
 
 ### 1. /calculators/abv-calculator
-- **Title**: ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead
+- **Title**: ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead
 - **Opportunity score**: 3.5
 - **Impressions**: 281 | **Clicks**: 0 | **Aggregate CTR**: 0.00%
 - **Top queries**:
@@ -48,7 +45,7 @@ Higher score = more search demand relative to current ranking.
   - `eu salary calculator 2025` — 7 imp, 1 clicks, pos 8.3, score 0.84
 
 ### 4. /calculators/us-tax-bracket-calculator
-- **Title**: Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math
+- **Title**: US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math
 - **Opportunity score**: 0.8
 - **Impressions**: 66 | **Clicks**: 0 | **Aggregate CTR**: 0.00%
 - **Top queries**:
@@ -62,7 +59,7 @@ Higher score = more search demand relative to current ranking.
   - `2024 tax bracket calculator` — 2 imp, 0 clicks, pos 88, score 0.02
 
 ### 5. /calculators/uk-100k-tax-trap-calculator
-- **Title**: How to Calculate Personal Allowance Over £100k | UK Tax Trap Calculator
+- **Title**: UK £100k Tax Trap Calculator — 60% Tax Rate Explained | Boring Math
 - **Opportunity score**: 0.6
 - **Impressions**: 35 | **Clicks**: 0 | **Aggregate CTR**: 0.00%
 - **Top queries**:
@@ -188,7 +185,7 @@ or the position is too low for visibility.
 - **/calculators/pipe-flow-calculator** — 902 imp, pos 80.2, score 11.2
   - Title: Free Pipe Flow Calculator — Pipe Sizing & Velocity | Boring Math
 - **/calculators/abv-calculator** — 754 imp, pos 76.4, score 9.9
-  - Title: ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead
+  - Title: ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead
 - **/calculators/raise-calculator** — 537 imp, pos 56.2, score 9.6
   - Title: Free Raise Calculator — Lifetime Value of a Salary Increase | Boring Math
 - **/calculators/speeds-feeds-calculator** — 720 imp, pos 81.3, score 8.9
@@ -210,7 +207,7 @@ or the position is too low for visibility.
 - **/calculators/sdlt-calculator** — 517 imp, pos 83.3, score 6.2
   - Title: SDLT Calculator 2025/26 — Stamp Duty Land Tax UK | Boring Math
 - **/calculators/us-tax-bracket-calculator** — 509 imp, pos 82.6, score 6.2
-  - Title: Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math
+  - Title: US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math
 - **/calculators/tile-calculator** — 505 imp, pos 82.5, score 6.1
   - Title: Free Tile Calculator — How Much Tile Do I Need? | Boring Math
 - **/calculators/candle-wax-calculator** — 261 imp, pos 42.8, score 6.1
@@ -274,18 +271,18 @@ Adding these terms to titles, H1s, or meta descriptions may improve relevance si
    - Missing terms: approximate
    - 38 imp, pos 77.5, score 0.5
 
-3. **`2022 tax brackets calculator`** → /calculators/us-tax-bracket-calculator
-   - Current title: "Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math"
-   - Missing terms: 2022, brackets
+3. **`alcohol by volume calculator`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
+   - Missing terms: volume
+   - 24 imp, pos 81.0, score 0.3
+
+4. **`2022 tax brackets calculator`** → /calculators/us-tax-bracket-calculator
+   - Current title: "US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math"
+   - Missing terms: 2022
    - 13 imp, pos 80.5, score 0.2
 
-4. **`60% tax trap calculator`** → /calculators/uk-100k-tax-trap-calculator
-   - Current title: "How to Calculate Personal Allowance Over £100k | UK Tax Trap Calculator"
-   - Missing terms: 60%
-   - 8 imp, pos 51.6, score 0.2
-
 5. **`2023 federal tax calculator`** → /calculators/us-tax-bracket-calculator
-   - Current title: "Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math"
+   - Current title: "US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math"
    - Missing terms: 2023
    - 13 imp, pos 87.5, score 0.1
 
@@ -294,126 +291,127 @@ Adding these terms to titles, H1s, or meta descriptions may improve relevance si
    - Missing terms: tax
    - 6 imp, pos 57.8, score 0.1
 
-7. **`alcohol content calculator`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
-   - Missing terms: content
-   - 9 imp, pos 87.2, score 0.1
-
-8. **`2024 tax brackets calculator`** → /calculators/us-tax-bracket-calculator
-   - Current title: "Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math"
-   - Missing terms: 2024, brackets
+7. **`2024 tax brackets calculator`** → /calculators/us-tax-bracket-calculator
+   - Current title: "US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math"
+   - Missing terms: 2024
    - 7 imp, pos 73.6, score 0.1
 
-9. **`alcohol calculator specific gravity`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
-   - Missing terms: specific, gravity
+8. **`alcohol calculator specific gravity`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
+   - Missing terms: specific
    - 7 imp, pos 76.3, score 0.1
 
-10. **`abv gravity calculator`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
-   - Missing terms: gravity
-   - 7 imp, pos 82.6, score 0.1
-
-11. **`alcohol calculator homebrew`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+9. **`alcohol calculator homebrew`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: homebrew
    - 6 imp, pos 80.3, score 0.1
 
-12. **`12x12 tile calculator`** → /calculators/tile-calculator
+10. **`12x12 tile calculator`** → /calculators/tile-calculator
    - Current title: "Free Tile Calculator — How Much Tile Do I Need? | Boring Math"
    - Missing terms: 12x12
    - 5 imp, pos 79.0, score 0.1
 
-13. **`abv equation`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+11. **`abv equation`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: equation
    - 5 imp, pos 88.2, score 0.1
 
-14. **`abv to proof calculator`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+12. **`abv to proof calculator`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: proof
    - 5 imp, pos 89.6, score 0.1
 
-15. **`12x24 tile calculator`** → /calculators/tile-calculator
+13. **`12x24 tile calculator`** → /calculators/tile-calculator
    - Current title: "Free Tile Calculator — How Much Tile Do I Need? | Boring Math"
    - Missing terms: 12x24
    - 4 imp, pos 74.0, score 0.1
 
-16. **`1099 quarterly tax calculator`** → /calculators/us-quarterly-tax-calculator
+14. **`1099 quarterly tax calculator`** → /calculators/us-quarterly-tax-calculator
    - Current title: "Free Quarterly Estimated Tax Calculator 2025 — 1040-ES | Boring Math"
    - Missing terms: 1099
    - 5 imp, pos 93.2, score 0.1
 
-17. **`$100k w2 vs 1099`** → /calculators/contractor-vs-employee-calculator
+15. **`$100k w2 vs 1099`** → /calculators/contractor-vs-employee-calculator
    - Current title: "1099 vs W2 Calculator: Which Actually Pays You More? (2026)"
    - Missing terms: $100k
    - 4 imp, pos 75.0, score 0.1
 
-18. **`alcohol percentage calculator homebrew`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+16. **`alcohol percentage calculator homebrew`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: percentage, homebrew
    - 4 imp, pos 77.2, score 0.1
 
-19. **`alcohol content calculator gravity`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
-   - Missing terms: content, gravity
-   - 4 imp, pos 79.8, score 0.1
-
-20. **`annual raise calculator`** → /calculators/raise-calculator
+17. **`annual raise calculator`** → /calculators/raise-calculator
    - Current title: "Free Raise Calculator — Lifetime Value of a Salary Increase | Boring Math"
    - Missing terms: annual
    - 3 imp, pos 61.3, score 0.0
 
-21. **`alcohol hydrometer calculator`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+18. **`alc vol calculator`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
+   - Missing terms: vol
+   - 4 imp, pos 82.0, score 0.0
+
+19. **`alcohol hydrometer calculator`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: hydrometer
    - 4 imp, pos 82.0, score 0.0
 
-22. **`1040es calculator`** → /calculators/us-quarterly-tax-calculator
+20. **`1040es calculator`** → /calculators/us-quarterly-tax-calculator
    - Current title: "Free Quarterly Estimated Tax Calculator 2025 — 1040-ES | Boring Math"
    - Missing terms: 1040es
    - 3 imp, pos 62.7, score 0.0
 
-23. **`abv calculation`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+21. **`abv calculation`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: calculation
    - 4 imp, pos 84.8, score 0.0
 
-24. **`arr valuation calculator`** → /calculators/saas-metrics-calculator
+22. **`arr valuation calculator`** → /calculators/saas-metrics-calculator
    - Current title: "Free SaaS Metrics Calculator — MRR, LTV, CAC & Growth Analysis | Boring Math"
    - Missing terms: arr, valuation
    - 4 imp, pos 85.0, score 0.0
 
-25. **`alcohol calculator brewing`** → /calculators/abv-calculator
-   - Current title: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+23. **`alcohol calculator brewing`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
    - Missing terms: brewing
    - 4 imp, pos 87.2, score 0.0
+
+24. **`abv formula`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
+   - Missing terms: formula
+   - 4 imp, pos 88.5, score 0.0
+
+25. **`alcohol by volume calculation`** → /calculators/abv-calculator
+   - Current title: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
+   - Missing terms: volume, calculation
+   - 3 imp, pos 75.7, score 0.0
 
 ## Title/Meta Recommendations — Top 5 Opportunities
 
 Concrete title rewrites for the highest-opportunity pages.
 
 ### 1. /calculators/abv-calculator
-- **Current title**: "ABV Calculator — Calculate Alcohol By Volume for Beer, Wine & Mead"
+- **Current title**: "ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead"
 - **Top search terms**: abv, alcohol, beer, gravity, volume, content, specific
-- **Missing from title**: gravity, content, specific
+- **Missing from title**: volume, specific
 - **Top queries driving impressions**:
   - `abv calculator` (60 imp, pos 79.5)
   - `alcohol by volume calculator` (24 imp, pos 81.0)
   - `abv calculator beer` (11 imp, pos 81.5)
   - `abv beer calculator` (8 imp, pos 79.4)
   - `alcohol content calculator` (9 imp, pos 87.2)
-- **Suggested title**: `ABV Calculator — Alcohol Content from Gravity Readings | Beer, Wine & Mead`
-- **Suggested description**: `Free ABV calculator using specific gravity (OG/FG). Calculate alcohol content for beer, wine, mead, and cider. Instant results with attenuation and proof.`
-- **Why**: "gravity" and "content" are high-impression query terms completely absent from the title. Position ~80 means this page is barely visible; stronger title/description relevance could push it toward page 1-2.
-- **File**: `src/pages/calculators/abv-calculator.astro` line 14
+- **Recommendation**: See suggested title below
+- **Suggested title**: Include terms: volume, specific
 
-### 2. / (homepage)
-- **Current title**: (homepage, not extracted from .astro)
+### 2. 
+- **Current title**: "(no title found)"
+- **Top search terms**: activity, based, costing
+- **Missing from title**: activity, based, costing
 - **Top queries driving impressions**:
   - `boring calculator` (17 imp, pos 8.3)
   - `activity based costing calculator` (1 imp, pos 66)
-- **Note**: Homepage is ranking well for branded term "boring calculator" (pos 8.3, 2 clicks). No action needed on branded query. The "activity based costing" impression is noise (1 imp, pos 66).
+- **Recommendation**: See suggested title below
+- **Suggested title**: Include terms: activity, based, costing
 
 ### 3. /calculators/eu-salary-calculator
 - **Current title**: "EU Salary Calculator 2025/2026: Compare Net Pay Across Europe"
@@ -421,37 +419,33 @@ Concrete title rewrites for the highest-opportunity pages.
 - **All top terms present in title**
 - **Top queries driving impressions**:
   - `eu salary calculator 2025` (7 imp, pos 8.3)
-- **Note**: Title is well-optimized. Already at position 8.3 with 1 click. Keep as-is. Focus on building internal links and content depth to push into top 5.
+- **Recommendation**: See suggested title below
 
 ### 4. /calculators/us-tax-bracket-calculator
-- **Current title**: "Free US Tax Bracket Calculator 2025 — Federal Tax | Boring Math"
+- **Current title**: "US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math"
 - **Top search terms**: tax, bracket, 2023, 2025, brackets, 2024, 2022, federal
-- **Missing from title**: 2023, brackets, 2024, 2022
+- **Missing from title**: 2023, 2024, 2022
 - **Top queries driving impressions**:
   - `2022 tax brackets calculator` (13 imp, pos 80.5)
   - `2023 federal tax calculator` (13 imp, pos 87.5)
   - `2024 tax brackets calculator` (7 imp, pos 73.6)
   - `2025 tax bracket calculator` (4 imp, pos 83.8)
   - `2023 income tax calculator` (3 imp, pos 81)
-- **Suggested title**: `US Tax Bracket Calculator 2025/2026 — Federal Income Tax Brackets | Boring Math`
-- **Suggested description**: `Free US federal tax bracket calculator for 2022-2026. See your marginal rate, effective rate, and total tax owed. Covers all filing statuses.`
-- **Why**: Users search for prior-year brackets heavily. Adding "brackets" (plural) and "income" matches more queries. The description should mention historic years to capture long-tail.
-- **File**: `src/pages/calculators/us-tax-bracket-calculator.astro`
+- **Recommendation**: See suggested title below
+- **Suggested title**: Include terms: 2023, 2024, 2022
 
 ### 5. /calculators/uk-100k-tax-trap-calculator
-- **Current title**: "How to Calculate Personal Allowance Over £100k | UK Tax Trap Calculator"
+- **Current title**: "UK £100k Tax Trap Calculator — 60% Tax Rate Explained | Boring Math"
 - **Top search terms**: tax, trap, 100k, 60%, scotland, 100000
-- **Missing from title**: 60%, scotland, 100000
+- **Missing from title**: scotland, 100000
 - **Top queries driving impressions**:
   - `60 tax trap calculator` (10 imp, pos 57.6)
   - `100k tax trap calculator` (7 imp, pos 45.7)
   - `60% tax trap calculator` (8 imp, pos 51.6)
   - `100k tax trap` (6 imp, pos 86.5)
   - `100k tax trap scotland` (2 imp, pos 84)
-- **Suggested title**: `UK £100k Tax Trap Calculator — 60% Tax Rate Explained | Boring Math`
-- **Suggested description**: `Free calculator for the UK £100k tax trap. See how the 60% effective rate works when earning over £100,000. Includes Scottish tax bands.`
-- **Why**: "60% tax trap" queries have the most impressions and the best position (~50). Including "60%" in the title directly matches the top query cluster. "Scotland" in the description captures the Scotland-specific long tail.
-- **File**: `src/pages/calculators/uk-100k-tax-trap-calculator.astro`
+- **Recommendation**: See suggested title below
+- **Suggested title**: Include terms: scotland, 100000
 
 ## Quick Wins — Striking Distance (Position 5-20, Zero Clicks)
 

@@ -4,8 +4,13 @@
 
 # Static pages
 /about/                      /about                       301!
-/privacy/                    /privacy                     301!
 /affiliate-disclosure/       /affiliate-disclosure        301!
+
+# Privacy: hard 301 directly to /privacy-policy
+# (replaces a previous Astro redirect that emitted a noindex meta-refresh stub
+#  flagged by GSC as "Excluded by 'noindex' tag")
+/privacy/                    /privacy-policy              301!
+/privacy                     /privacy-policy              301!
 
 # Calculator category pages
 /calculators/automotive/     /calculators/automotive      301!
