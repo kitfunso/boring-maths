@@ -161,4 +161,25 @@ Comprehensive guide for AI-assisted calculator creation:
 
 ---
 
-*Last updated: 2026-02-22*
+## SEO & AI Search
+
+### AI Overviews / AI Mode is not a separate channel
+Google's [AI optimization guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)
+states AI features "are rooted in our core Search ranking and quality systems." Optimizing
+for AI search **is** SEO. Consequences for this repo:
+
+- **No `llms.txt`, no AI markup, no `brand-facts.json`.** Google explicitly says these files
+  are not needed and are not used. The existing `public/llms.txt` / `llms-full.txt` are
+  harmless but do nothing for Google. Don't build more of them.
+- **Eligibility floor = indexed + snippet-eligible.** Nothing extra. `noindex` or JS-blocked
+  content is invisible to AI features.
+- **Commodity content loses.** Google rewards a unique point of view. Bare calculators with
+  generic filler get answered inline by AI Overviews (zero-click). Depth, methodology, and
+  UK-specific edge cases are the defence.
+- **AEO ≠ separate workstream.** The `aeo-task-2..5` Answer Hub pages are fine as hub/guide
+  content — just file them under content expansion, not a parallel "AEO" track. See the
+  AI Search section in `SEO-ROADMAP.md`.
+
+---
+
+*Last updated: 2026-05-22*

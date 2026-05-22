@@ -175,6 +175,48 @@ Ensure all calculators work perfectly on mobile.
 
 **Key blocker:** Phase 4 (backlinks) is the main remaining lever for driving organic traffic growth.
 
+## AI Search: AI Overviews & AI Mode (added 2026-05-22)
+
+Source: Google's [AI features and your website](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide).
+
+**Core finding: AI Overviews and AI Mode are not a separate channel.** They run on Google's
+core Search ranking and quality systems. Per Google: *"SEO best practices continue to be
+relevant because our generative AI features on Google Search are rooted in our core Search
+ranking and quality systems."* Phases 1-6 above **are** the AI-optimization work. There is
+no second playbook.
+
+### Eligibility floor
+A page only appears in AI Overviews / AI Mode if it is **indexed and snippet-eligible**
+(Google: *"a page must be indexed and eligible to be shown in Google Search with a snippet"*).
+Phase 1 covers this. Keep content out of `noindex` and unblocked for JS rendering.
+
+### What this means for our existing AEO work
+
+| Item | Verdict |
+|------|---------|
+| `public/llms.txt`, `public/llms-full.txt` | Do nothing for Google AI features. Google explicitly says no AI text files / `llms.txt` / special markup are needed. Harmless but low-ROI. Do not expand. |
+| `aeo-task.md` Deliverable 1 (`.well-known/brand-facts.json`) | Do **not** build. Same category as `llms.txt`: a machine-readable file Google ignores. No pickup expected. |
+| `aeo-task-2..5` UK Answer Hub guide pages | **Keep.** These are legitimate topic-cluster hub pages. Google's query fan-out rewards comprehensive hub content. Re-file them under Phase 6 (Content Expansion), not a separate "AEO" track. |
+| FAQPage / WebApplication schema (Phase 2) | Keep. Not required for AI, but still drives rich results. Stop framing it as "AI" work. |
+| Relevance-first backlinks (`BACKLINK-STRATEGY.md`) | Already correct. Google warns against inauthentic "mentions" — our rule already forbids DR-chasing and exact-match stuffing. |
+
+### The real lever: non-commodity content
+Google rewards *"a unique point of view"* and down-weights commodity content. For a
+calculator site the structural risk is zero-click: an AI Overview answers a simple
+calculation inline and the user never visits. Defence is depth a snippet can't reproduce —
+methodology, UK-specific edge cases (the 100k trap, ADS vs SDLT), worked examples, real
+interactivity. UK-specific pages are well-positioned; generic ones (tip, BMI, paint) are
+exposed. Watch **scaled content abuse**: Google flags "separate content for every possible
+variation" built to manipulate rankings — same line as CLAUDE.md rule 5.
+
+### Action items
+- [ ] Retire `aeo-task.md` Deliverable 1 (`brand-facts.json`) — do not build.
+- [ ] Decide on `llms.txt` / `llms-full.txt`: keep as-is (harmless) or remove. No further investment either way.
+- [ ] Re-file `aeo-task-2..5` Answer Hub pages under Phase 6 content expansion.
+- [ ] Audit generic calculators (tip, BMI, paint) for unique-POV depth vs commodity filler.
+
+---
+
 ## Timeline Expectations
 
 | Milestone | Timeframe |
@@ -187,5 +229,5 @@ Ensure all calculators work perfectly on mobile.
 
 ---
 
-*Last Updated: February 2026*
+*Last Updated: 2026-05-22 (added AI Search section)*
 *Total Live Calculators: 124*

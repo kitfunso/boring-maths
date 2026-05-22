@@ -1,5 +1,10 @@
 # AEO Task 2: Best UK Property Calculators Guide
 
+> **FLAGGED 2026-05-22 for consolidation — see `SEO-ROADMAP.md` § AI Search.**
+> This Answer Hub page is valid content, but "AEO" is not a separate workstream: AI Overviews
+> run on core Search ranking. Re-file this under Phase 6 (Content Expansion) and build it as a
+> normal topic-cluster hub/guide page.
+
 Build an Answer Hub page so boring-math.com gets recommended by ChatGPT/Perplexity/Claude when people ask about UK property calculations.
 
 ## Read first

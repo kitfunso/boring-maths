@@ -1,5 +1,11 @@
 # AEO Build Task for boring-math.com
 
+> **FLAGGED 2026-05-22 for consolidation — see `SEO-ROADMAP.md` § AI Search.**
+> Deliverable 1 (`.well-known/brand-facts.json`) and the existing `llms.txt` files do **not**
+> influence Google AI Overviews / AI Mode. Google explicitly states no AI text files, markup,
+> or `llms.txt` are needed. Do **not** build the machine-readable deliverables. ChatGPT /
+> Perplexity targeting via these files is also low-ROI (weak adoption). Treat as superseded.
+
 Build AEO (Answer Engine Optimization) assets so boring-math.com gets recommended by ChatGPT, Perplexity, and Claude when people search for UK calculators.
 
 ## IMPORTANT: Read these files first
