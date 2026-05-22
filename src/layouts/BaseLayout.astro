@@ -90,11 +90,26 @@ const ogImageURL = ogImage
     <!-- Google Analytics -->
     <Analytics />
 
-    <!-- Google AdSense -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8014911033000505"
-      crossorigin="anonymous"></script>
+    <!-- Google AdSense (deferred for performance: loads after first interaction or 3s) -->
+    <script is:inline>
+      (function () {
+        function loadAdSense() {
+          if (window.__adsenseLoaded) return;
+          window.__adsenseLoaded = true;
+          var s = document.createElement('script');
+          s.src =
+            'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8014911033000505';
+          s.async = true;
+          s.crossOrigin = 'anonymous';
+          document.head.appendChild(s);
+        }
+        var events = ['scroll', 'click', 'keydown', 'touchstart', 'mousemove'];
+        events.forEach(function (e) {
+          window.addEventListener(e, loadAdSense, { once: true, passive: true });
+        });
+        setTimeout(loadAdSense, 3000);
+      })();
+    </script>
 
     <!-- Centralized ad initializer (handles ViewTransitions re-navigation) -->
     <script is:inline>
