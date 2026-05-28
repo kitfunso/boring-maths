@@ -1,0 +1,216 @@
+---
+/**
+ * US Mortgage Calculator Page
+ * Total monthly payment including principal, interest, property tax,
+ * homeowners insurance, HOA dues and PMI.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { USMortgageCalculator } from '../../components/calculators/USMortgageCalculator';
+
+const title = 'US Mortgage Calculator with PMI, Taxes and Insurance | Boring Math';
+const description =
+  'Estimate your full monthly mortgage payment: principal, interest, property tax, homeowners insurance, HOA dues and PMI. See your loan amount and loan-to-value ratio instantly.';
+const keywords =
+  'mortgage calculator, us mortgage calculator, mortgage payment calculator, pmi calculator, monthly mortgage payment, mortgage with taxes and insurance, home loan calculator';
+const canonicalURL = '/calculators/us-mortgage-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'US Mortgage Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Basic principal and interest mortgage payment.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the long-term cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Rent Affordability Calculator',
+    description: 'Work out how much rent your income supports.',
+    href: '/calculators/rent-affordability-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Monthly payments and total interest on any loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings and investments grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What does this US mortgage calculator include in the monthly payment?',
+    answer:
+      'It includes all five parts of a typical US monthly housing payment: principal and interest (the loan repayment), property tax, homeowners insurance, HOA dues if you have them, and private mortgage insurance (PMI) when your down payment is under 20 percent. Lenders often refer to the principal, interest, tax and insurance bundle as PITI. Adding HOA and PMI gives you a realistic picture of what leaves your account each month.',
+  },
+  {
+    question: 'How is the principal and interest payment calculated?',
+    answer:
+      'It uses the standard fixed-rate amortization formula: payment equals loan times the monthly rate, divided by one minus (one plus the monthly rate) raised to the power of minus the number of months. The loan is the home price minus your down payment. The monthly rate is your annual interest rate divided by 12, and the number of months is the term in years times 12. For a 30-year loan that is 360 monthly payments.',
+  },
+  {
+    question: 'When do I have to pay PMI?',
+    answer:
+      'On a conventional loan, lenders generally require private mortgage insurance when your down payment is below 20 percent of the home price, because the loan-to-value ratio is above 80 percent. This calculator applies PMI only when your down payment is under 20 percent. PMI protects the lender, not you. It typically falls away as your balance drops toward 78 to 80 percent of the original value. This is a lending convention, not legal advice.',
+  },
+  {
+    question: 'What property tax rate should I enter?',
+    answer:
+      'Property tax in the US varies widely by state, county and city, so there is no single national figure. The calculator defaults to 1.1 percent of the home value per year, a common nationwide average, but real rates range from well under 0.5 percent in some states to over 2 percent in others. Check your county assessor or a recent tax bill for your actual rate and enter it for an accurate estimate.',
+  },
+  {
+    question: 'How much is homeowners insurance?',
+    answer:
+      'Homeowners insurance is a flat annual premium that depends on the property, location and coverage, not the loan size. The calculator defaults to 1500 dollars per year and divides it by 12 for the monthly figure. Premiums vary a lot by region and risk, so replace the default with a real quote when you have one.',
+  },
+  {
+    question: 'What is loan-to-value (LTV) and why does it matter?',
+    answer:
+      'Loan-to-value is your loan amount divided by the home price, shown as a percentage. A 20 percent down payment gives an 80 percent LTV. LTV matters because it drives whether you pay PMI and can affect your interest rate. A lower LTV (a larger down payment) usually means no PMI and better loan terms.',
+  },
+  {
+    question: 'Does this calculator give financial advice?',
+    answer:
+      'No. It is an estimating tool. It assumes a fixed-rate, fully amortizing loan and uses the figures you enter. Actual property tax, insurance and PMI rates depend on your location and lender. Use the result as a starting point and confirm the numbers with your lender and a real quote before making any decision.',
+  },
+  {
+    question: 'Why is my real quote different from this estimate?',
+    answer:
+      'Lender quotes can differ because of escrow timing, rate lock differences, points, origination fees, flood or special insurance, supplemental taxes, and PMI rates that depend on your credit score. This calculator focuses on the recurring monthly payment from your inputs. Adjust the property tax rate, insurance, HOA and PMI rate to match your quote and the totals will line up.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'US Mortgage Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="US Mortgage Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="US Mortgage Calculator"
+    description="Estimate your full monthly mortgage payment including principal, interest, property tax, homeowners insurance, HOA dues and PMI."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <USMortgageCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering the <strong>home price</strong> and your <strong>down payment</strong> in dollars.
+      The calculator subtracts the down payment from the price to find your loan amount, then works out
+      the loan-to-value ratio. A down payment of 20 percent or more avoids private mortgage insurance,
+      so the down payment field has a real impact on your monthly cost.
+    </p>
+    <p>
+      Next, set your <strong>interest rate</strong> and <strong>loan term</strong>. Most US buyers
+      choose a 30-year term, though 15-year loans carry a higher monthly payment with far less total
+      interest. The rate you enter should be the annual percentage rate your lender has quoted. The
+      results update live as you type, so you can try several rates and terms side by side without
+      pressing any button.
+    </p>
+    <p>
+      Finally, fine-tune the recurring costs. The <strong>property tax rate</strong> defaults to 1.1 percent
+      of the home value per year, the <strong>annual home insurance</strong> defaults to 1500 dollars,
+      and the <strong>PMI rate</strong> defaults to 0.5 percent of the loan per year. Add any <strong
+        >monthly HOA dues</strong
+      > if your property has them. Replace each default with your own figures, from your county tax bill,
+      an insurance quote and your lender, to get an estimate that matches your situation.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The core of the payment is the <strong>principal and interest</strong>, computed with the
+      standard fixed-rate amortization formula. The monthly payment equals the loan multiplied by
+      the monthly interest rate, divided by one minus (one plus the monthly rate) raised to the
+      power of minus the number of months. The monthly rate is your annual rate divided by 12, and
+      the number of months is the term in years multiplied by 12. When the interest rate is zero,
+      the formula simply divides the loan evenly across the months.
+    </p>
+    <p>
+      The calculator then adds the ongoing ownership costs. <strong>Monthly property tax</strong> is the
+      home price times the annual property tax rate, divided by 12.
+      <strong>Monthly insurance</strong> is the annual premium divided by 12.
+      <strong>HOA dues</strong> are added directly as a monthly figure.
+    </p>
+    <p>
+      <strong>PMI</strong> is handled conditionally. The calculator checks whether your down payment is
+      less than 20 percent of the home price. If it is, PMI applies and equals the loan amount times the
+      annual PMI rate, divided by 12. If your down payment is 20 percent or more, PMI is zero. The <strong
+        >total monthly payment</strong
+      > is the sum of principal and interest, property tax, insurance, HOA dues and PMI. The <strong
+        >loan-to-value ratio</strong
+      > is the loan amount divided by the home price, shown as a percentage.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The large figure at the top is your <strong>total monthly payment</strong>, the all-in cost of
+      owning the home each month under these inputs. Below it, the monthly breakdown splits that
+      number into its five parts so you can see exactly where the money goes. Principal and interest
+      is usually the largest slice, but property tax and insurance can add several hundred dollars,
+      and PMI can be a meaningful extra cost when your down payment is small.
+    </p>
+    <p>
+      The <strong>loan-to-value ratio</strong> next to the loan amount tells you how much of the home
+      you are financing. At 80 percent LTV or below, no PMI is charged. Above 80 percent, the calculator
+      includes PMI and shows a note explaining that it typically drops off as your balance falls toward
+      78 to 80 percent of the home value. If you see a PMI line you want to remove, increasing your down
+      payment to 20 percent is the direct way to do it.
+    </p>
+    <p>
+      Treat the result as a careful estimate, not a quote. It assumes a fixed rate and a fully
+      amortizing loan, and it relies on the tax, insurance and PMI figures you enter. Real lender
+      quotes can differ because of escrow timing, points, fees and credit-based PMI rates. Use this
+      breakdown to compare scenarios, then confirm the exact numbers with your lender before you
+      commit.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,223 @@
+---
+/**
+ * Roth IRA Calculator Page
+ * Projects tax-free retirement growth from contributions and expected return.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { RothIRACalculator } from '../../components/calculators/RothIRACalculator';
+
+const title = 'Roth IRA Calculator: Project Tax-Free Retirement Growth | Boring Math';
+const description =
+  'Free Roth IRA calculator. Enter your age, balance, annual contribution and expected return to project your tax-free retirement balance. 2026 contribution limit is $7,500, or $8,600 if age 50+.';
+const keywords =
+  'roth ira calculator, roth ira growth calculator, roth ira contribution limit 2026, retirement calculator, tax-free retirement, ira compound growth, roth ira projection';
+const canonicalURL = '/calculators/roth-ira-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Roth IRA Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: '401(k) Calculator',
+    description: 'Project employer-matched retirement growth.',
+    href: '/calculators/401k-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how money grows with compounding.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'HSA Calculator',
+    description: 'Model triple-tax-advantaged HSA savings.',
+    href: '/calculators/hsa-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Work out payments on any fixed loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the Roth IRA contribution limit for 2026?',
+    answer:
+      'For tax year 2026, the IRS limit on annual contributions to a Roth IRA is $7,500 if you are under age 50. Savers age 50 and over can add a catch-up contribution of $1,100, for a total of $8,600. These figures come from IRS Notice 2025-67 and apply to the 2026 tax year. The calculator warns you if your entered contribution is above the limit for your age.',
+  },
+  {
+    question: 'How is the Roth IRA balance calculated?',
+    answer:
+      'The calculator compounds your current balance and your contributions once per year at your expected rate of return. The number of years is your retirement age minus your current age. Your starting balance grows by (1 + return)^years, and your yearly contributions are treated as an end-of-year annuity, so each contribution grows for the years remaining after it is made. The projected balance is the sum of both parts.',
+  },
+  {
+    question: 'Is Roth IRA growth taxed?',
+    answer:
+      'No. A Roth IRA is funded with post-tax money, so qualified growth and withdrawals are tax-free. That is why this calculator does not subtract any income tax from the projected balance. To be a qualified withdrawal, you generally need to be at least 59 and a half and have held the account for at least five years. Non-qualified withdrawals of earnings can be taxed and penalized.',
+  },
+  {
+    question: 'What is the difference between contributions and growth?',
+    answer:
+      'Total contributed is simply your annual contribution multiplied by the number of years. Investment growth is the projected balance minus your contributions minus your starting balance. Because Roth growth is tax-free, the growth figure is what you keep, not a pre-tax number that gets reduced later.',
+  },
+  {
+    question: 'Is there an income limit to contribute to a Roth IRA?',
+    answer:
+      'Yes. Roth IRA eligibility phases out at higher incomes based on modified adjusted gross income (MAGI). For 2026 the phase-out is roughly $153,000 to $168,000 for single filers and $242,000 to $252,000 for married filing jointly. This calculator does not model the phase-out; it assumes you are eligible to contribute the amount you enter. Check your MAGI against the current IRS thresholds.',
+  },
+  {
+    question: 'What rate of return should I use?',
+    answer:
+      'There is no guaranteed rate. Many people model a long-run diversified stock and bond portfolio somewhere in the range of 5 to 8 percent before inflation, but past performance does not predict future results. Try a few values to see how sensitive the projection is. Lowering the assumed return is a simple way to build in a margin of safety.',
+  },
+  {
+    question: 'Does this calculator account for inflation?',
+    answer:
+      'No. The projection is in nominal dollars at your expected return. If you want a rough real (inflation-adjusted) figure, subtract your inflation assumption from the expected return before entering it. For example, a 7 percent return with 2.5 percent inflation is about 4.5 percent in real terms.',
+  },
+  {
+    question: 'Is this financial advice?',
+    answer:
+      'No. This is an educational tool that projects growth from the numbers you enter. It does not recommend any product or strategy and does not account for fees, taxes on non-qualified withdrawals, the MAGI phase-out, or changes in contribution limits. Confirm current limits with the IRS and consider speaking with a qualified advisor for decisions specific to your situation.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Roth IRA Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Roth IRA Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Roth IRA Calculator"
+    description="Project the tax-free balance of your Roth IRA at retirement from your age, current balance, annual contribution and expected return."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <RothIRACalculator client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your current age and retirement age.</strong
+        >
+        The gap between them is the number of years your money has to grow. A longer runway means compounding
+        does more of the work for you.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your current Roth IRA balance.</strong> This is
+        the amount already in the account today. If you are starting from scratch, leave it at zero and
+        let the contributions build the balance.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your annual contribution.</strong> For tax year
+        2026 the IRS limit is $7,500 under age 50, or $8,600 with the age 50 and over catch-up. The calculator
+        flags any amount above the limit for your age so you can adjust it.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your expected annual return.</strong> Try a few
+        values. A conservative return gives a built-in margin of safety, while a higher return shows the
+        upside if markets cooperate.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Read your results.</strong> The big number is your projected
+        tax-free balance at retirement. The grid splits it into years invested, total contributed, and
+        investment growth so you can see how much of the balance is your own money versus compounding.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The calculator uses the standard future value formula with two parts. First, your current
+        balance compounds on its own: it is multiplied by one plus your expected return, raised to
+        the power of the number of years. Second, your yearly contributions are treated as an
+        ordinary annuity, meaning one contribution is made at the end of each year. Each
+        contribution then grows for the number of years remaining until retirement.
+      </p>
+      <p>
+        In words: the projected balance equals your starting balance grown by the compound factor,
+        plus your annual contribution multiplied by the annuity factor, where the annuity factor is
+        the compound factor minus one, divided by the return rate. When the expected return is
+        exactly zero, the formula simplifies to your starting balance plus your annual contribution
+        times the number of years, because nothing compounds.
+      </p>
+      <p>
+        Because a Roth IRA is funded with post-tax dollars, qualified growth and withdrawals are
+        tax-free. For that reason the calculator does <strong class="text-[var(--color-cream)]"
+          >not</strong
+        > apply any income tax to the result. The total contributed figure is your annual contribution
+        times the number of years, and the investment growth figure is the projected balance minus your
+        contributions minus your starting balance. The IRS contribution limit used for the over-limit
+        warning is the 2026 figure: $7,500 under age 50 and $8,600 for age 50 and over, per IRS Notice
+        2025-67.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The headline number is your <strong class="text-[var(--color-cream)]"
+          >projected balance at retirement</strong
+        >. For a qualified Roth IRA this amount is tax-free, so there is no further tax to subtract
+        when you withdraw it in retirement. That is the key advantage of the Roth structure: you pay
+        tax on the way in, not on the way out.
+      </p>
+      <p>
+        The breakdown shows how that balance is built. <strong class="text-[var(--color-cream)]"
+          >Total contributed</strong
+        > is the money you put in. <strong class="text-emerald-400">Investment growth</strong> is everything
+        the account earned on top of your contributions and starting balance. Over a long horizon, growth
+        often dwarfs contributions, which is the compounding effect at work. A small change in the expected
+        return or the number of years can move the final balance substantially, so it is worth trying
+        a range of assumptions rather than trusting a single figure.
+      </p>
+      <p>
+        Keep the limits of the model in mind. It assumes a constant annual return, one contribution
+        at the end of each year, and that you remain eligible to contribute. It does not model
+        market volatility, fees, the MAGI income phase-out, future changes to contribution limits,
+        or taxes and penalties on non-qualified withdrawals. The projection is in nominal dollars,
+        so to think in today's money you can subtract your inflation assumption from the expected
+        return. Treat the output as an educational estimate, not financial advice.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

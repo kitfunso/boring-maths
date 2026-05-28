@@ -1,0 +1,241 @@
+---
+/**
+ * Home Affordability Calculator Page
+ * How much house can I afford, using the conventional 28/36 rule.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { HomeAffordabilityCalculator } from '../../components/calculators/HomeAffordabilityCalculator';
+
+const title = 'Home Affordability Calculator: How Much House Can I Afford | Boring Math';
+const description =
+  'Free home affordability calculator. See how much house you can afford using the 28/36 rule, your maximum home price, loan amount, and estimated monthly payment with tax and insurance.';
+const keywords =
+  'home affordability calculator, how much house can i afford, home buying calculator, 28/36 rule, mortgage affordability, maximum home price, house affordability calculator';
+const canonicalURL = '/calculators/home-affordability-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const relatedCalculators = [
+  {
+    title: 'US Mortgage Calculator',
+    description: 'Monthly payment with PMI, taxes, and insurance.',
+    href: '/calculators/us-mortgage-calculator',
+    icon: 'home',
+    color: 'violet' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Work out monthly repayments and total interest.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home',
+    color: 'blue' as const,
+  },
+  {
+    title: 'Rent Affordability Calculator',
+    description: 'See how much rent you can comfortably afford.',
+    href: '/calculators/rent-affordability-calculator',
+    icon: 'home',
+    color: 'amber' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'swap',
+    color: 'green' as const,
+  },
+  {
+    title: 'US Paycheck Calculator',
+    description: 'Estimate your take-home pay after taxes.',
+    href: '/calculators/us-paycheck-calculator',
+    icon: 'calculator',
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much house can I afford?',
+    answer:
+      'A common starting point is the 28/36 rule. Spend no more than 28 percent of your gross monthly income on housing, and no more than 36 percent on all debt combined, including the new mortgage. This calculator takes the lower of those two limits as your housing budget, subtracts estimated property tax and insurance, and works out the loan that the remaining budget can support. It then adds your down payment to give a maximum home price.',
+  },
+  {
+    question: 'What is the 28/36 rule?',
+    answer:
+      'The 28/36 rule is a lender guideline, not a law. The front-end ratio says your monthly housing payment should be at most 28 percent of your gross monthly income. The back-end ratio says your total monthly debt, including housing, car loans, student loans, and credit card minimums, should be at most 36 percent of your gross monthly income. The smaller of the two limits sets your housing budget.',
+  },
+  {
+    question: 'Why does my monthly payment include tax and insurance?',
+    answer:
+      'A real mortgage payment is more than principal and interest. Lenders usually collect property tax and homeowners insurance as part of the monthly payment through an escrow account. Because both are charged as a percentage of the home price, they reduce the amount left over for principal and interest. This calculator accounts for that, so the home price it shows already includes room in your budget for tax and insurance.',
+  },
+  {
+    question: 'How does the calculator handle property tax and insurance depending on price?',
+    answer:
+      'There is a small circular dependency: property tax and insurance depend on the home price, but the home price depends on how much of your budget is left after tax and insurance. The calculator resolves this with a short repeated calculation. It starts from your down payment, estimates tax and insurance, recomputes the loan and price, and repeats until the price stops changing. This converges quickly to a stable answer.',
+  },
+  {
+    question: 'Does a bigger down payment let me afford more house?',
+    answer:
+      'Yes, dollar for dollar. Your income sets the size of the loan you can support, and that does not change with your down payment. But the maximum home price is the loan plus your down payment, so every extra dollar of down payment raises the price you can reach by a dollar. A larger down payment can also help you avoid private mortgage insurance, which frees up more of your budget.',
+  },
+  {
+    question: 'What property tax and insurance rates should I use?',
+    answer:
+      'Rates vary widely by location. The calculator defaults to a 1.1 percent annual property tax rate and a 0.5 percent annual insurance rate as a national starting point, both as a percentage of the home price. Property tax in particular differs a lot between states and counties, from well under 1 percent to over 2 percent. Check your local rates and adjust the inputs for an accurate result.',
+  },
+  {
+    question: 'Will a lender approve me for exactly this amount?',
+    answer:
+      'Not necessarily. The 28/36 rule is a conventional guideline, and many loan programs are more flexible. FHA loans, for example, often allow ratios closer to 31/43, and lenders weigh your credit score, down payment, loan type, and savings. Your actual approval may be higher or lower. Treat this result as a realistic starting point, then confirm with a lender.',
+  },
+  {
+    question: 'Is this financial advice?',
+    answer:
+      'No. This calculator is a tool that applies a widely used budgeting rule to numbers you enter. It does not account for your full financial picture and does not recommend any specific loan or purchase. Affording the maximum is rarely the same as being comfortable. Use the result to inform your own decision, and speak to a qualified professional before committing.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Home Affordability Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Home Affordability Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Home Affordability Calculator"
+    description="Find out how much house you can afford using the 28/36 rule. See your maximum home price, loan amount, and estimated monthly payment with tax and insurance."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <HomeAffordabilityCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use">
+    <p>
+      This calculator estimates the most expensive home you could comfortably afford, based on your
+      income, debts, and the conventional 28/36 lender rule. Fill in the fields and the results
+      update as you type. There is no submit button.
+    </p>
+    <ol class="list-decimal list-inside space-y-3">
+      <li>
+        <strong>Enter your gross annual income.</strong> Use combined household income before tax. This
+        is the main figure that drives how much you can borrow.
+      </li>
+      <li>
+        <strong>Enter your monthly debt payments.</strong> Add up car loans, student loans, and the minimum
+        payments on credit cards. These count against the 36 percent back-end limit.
+      </li>
+      <li>
+        <strong>Enter your down payment.</strong> This is the cash you can put towards the purchase. It
+        raises your maximum home price dollar for dollar.
+      </li>
+      <li>
+        <strong>Enter the interest rate and loan term.</strong> A typical term is 30 years. The rate affects
+        how large a loan a given monthly payment can support.
+      </li>
+      <li>
+        <strong>Set the property tax and insurance rates.</strong> These default to 1.1 percent and 0.5
+        percent of the home price per year. Adjust them to match your area for a sharper estimate.
+      </li>
+      <li>
+        <strong>Review your results.</strong> You will see your maximum home price, the loan that supports
+        it, the estimated monthly payment broken into its parts, and which rule sets your budget.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      The calculation follows the conventional 28/36 guideline used by many lenders, then solves for
+      the home price that fits your budget once tax and insurance are included. Every figure can be
+      reproduced by hand.
+    </p>
+    <p>
+      <strong>Step one: the housing budget.</strong> Your gross monthly income is your annual income divided
+      by 12. The front-end limit is 28 percent of that monthly income. The back-end limit is 36 percent
+      of monthly income minus your existing monthly debts. Your housing budget is the smaller of these
+      two limits. For example, on 120,000 a year the gross monthly income is 10,000, the front-end limit
+      is 2,800, and with 500 of monthly debts the back-end limit is 3,100. The smaller is 2,800, so the
+      front-end rule binds.
+    </p>
+    <p>
+      <strong>Step two: split the budget between payment and escrow.</strong> The monthly payment has
+      two parts: principal and interest on the loan, and the property tax plus insurance collected in
+      escrow. Tax and insurance are charged as a yearly percentage of the home price, divided by 12 to
+      get the monthly amount. Whatever is left of the housing budget after tax and insurance can go towards
+      principal and interest.
+    </p>
+    <p>
+      <strong>Step three: turn the payment into a loan.</strong> The loan a payment can support is the
+      standard amortization formula run in reverse. In words: the loan equals the monthly payment times
+      one minus one plus the monthly rate raised to the power of minus the number of months, all divided
+      by the monthly rate. The monthly rate is the annual rate divided by 12, and the number of months
+      is the term in years times 12. When the interest rate is zero, the loan is simply the payment times
+      the number of months.
+    </p>
+    <p>
+      <strong>Step four: resolve the circularity.</strong> Tax and insurance depend on the home price,
+      but the price depends on the loan, which depends on the budget left after tax and insurance. The
+      calculator handles this by repeating the calculation: it starts the price at your down payment,
+      estimates tax and insurance, recomputes the loan and price, and loops until the price settles. The
+      maximum home price is the final loan plus your down payment.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is the maximum home price. It combines the loan your income can support
+      with the down payment you have saved. If you want to reach a higher price, you can raise your
+      income, reduce your monthly debts, or save a larger down payment. Each of those moves the
+      number for a different reason.
+    </p>
+    <p>
+      The maximum loan shows how much you could borrow at the rate and term you entered. A higher
+      interest rate shrinks this figure, because more of each monthly payment goes to interest and
+      less is available to support principal. A longer term increases the loan you can support per
+      dollar of payment, but it also increases the total interest you pay over the life of the loan.
+    </p>
+    <p>
+      The estimated monthly payment is broken into principal and interest, and property tax plus
+      insurance. Seeing the split matters because tax and insurance can be a meaningful share of the
+      payment, especially in high-tax areas. The total monthly payment will equal your housing
+      budget, because the calculator works out the largest home that fully uses that budget.
+    </p>
+    <p>
+      The binding rule tells you whether your budget is limited by the front-end rule or the
+      back-end rule. If the front-end rule binds, your income is the constraint, and paying down
+      debt will not raise your budget. If the back-end rule binds, your existing debts are holding
+      you back, and reducing them would let you afford more.
+    </p>
+    <p>
+      Remember that affording the maximum is not the same as being comfortable. The 28/36 rule is a
+      conventional guideline, lenders apply their own standards, and your real costs include
+      maintenance, utilities, and savings goals that this calculator does not model. Use the result
+      as a realistic ceiling, then choose a number that leaves room in your monthly budget. This is
+      a tool, not financial advice.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

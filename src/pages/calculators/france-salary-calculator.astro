@@ -1,0 +1,220 @@
+---
+/**
+ * France Net Salary Calculator Page
+ * Net salary before income tax (net avant impot sur le revenu), 2026 rates.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { FranceSalaryCalculator } from '../../components/calculators/FranceSalaryCalculator';
+
+const title = 'France Net Salary Calculator 2026: Brut to Net Pay | Boring Math';
+const description =
+  'France net salary calculator for 2026. Convert gross (brut) to net (avant impot) pay, see social contributions for cadre and non-cadre, and your monthly take-home estimate.';
+const keywords =
+  'france salary calculator, france net salary calculator, brut net france, salaire net france, france take home pay, cadre non-cadre salary, french payroll calculator 2026, france gross to net';
+const canonicalURL = '/calculators/france-salary-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'France Net Salary Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net pay across European countries.',
+    href: '/calculators/eu-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'EU VAT Calculator',
+    description: 'Add or remove VAT for EU countries.',
+    href: '/calculators/eu-vat-calculator',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between major world currencies.',
+    href: '/calculators/currency-converter',
+    icon: 'swap' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What does this France salary calculator show?',
+    answer:
+      'It converts your annual gross salary (salaire brut) into your net salary before income tax (net avant impot sur le revenu). It deducts the mandatory employee social contributions: old-age pension (vieillesse), CSG and CRDS, the Agirc-Arrco complementary pension, the CEG and CET balancing contributions, and, for cadres, the small APEC contribution. The result is what your payslip shows as net pay before income tax is withheld.',
+  },
+  {
+    question: 'Is income tax included in the result?',
+    answer:
+      'No. Since 2019, French income tax is collected at source (prelevement a la source) and the rate depends on your whole household, not just your salary. This calculator stops at net avant impot sur le revenu, which is the figure most French payslips highlight. Your final take-home will be a little lower once your personal income tax rate is applied by your employer.',
+  },
+  {
+    question: 'What is the difference between cadre and non-cadre?',
+    answer:
+      'Cadre is a managerial or professional status with specific collective-agreement rights; non-cadre covers most other employees. Both pay the same core social contributions in 2026. The main difference in this calculator is that cadres pay an additional APEC contribution of 0.024% of gross up to four times the social security ceiling. The effect on net pay is small, typically a few euros per year.',
+  },
+  {
+    question: 'What is the PMSS and why does it matter?',
+    answer:
+      'The PMSS is the monthly social security ceiling (Plafond mensuel de la Securite sociale). For 2026 it is 3,925 euros per month, or 47,100 euros per year. Several contributions, such as the capped old-age pension and the Agirc-Arrco tranches, change once your salary crosses this ceiling. Earnings up to one PMSS are tranche 1; earnings between one and eight PMSS fall into tranche 2, which carries a higher Agirc-Arrco rate.',
+  },
+  {
+    question: 'Which 2026 rates does the calculator use?',
+    answer:
+      'It uses 2026 employee rates: old-age pension 6.90% on tranche 1 plus 0.40% on full gross, CSG 6.80% deductible plus 2.40% non-deductible and CRDS 0.50% (all on 98.25% of gross up to four PMSS), Agirc-Arrco 3.15% on tranche 1 and 8.64% on tranche 2, CEG 0.86% and 1.08%, CET 0.14% when gross exceeds one PMSS, and APEC 0.024% for cadres. Employee unemployment insurance has been 0% since 2019, so it is not deducted.',
+  },
+  {
+    question: 'Why is there no unemployment (chomage) deduction?',
+    answer:
+      'The employee share of unemployment insurance (assurance chomage) was abolished in France in 2019; it is now paid by the employer only, at 4.05%. For the same reason there is no employee assurance maladie (health) contribution under the general regime. That is why French gross-to-net is gentler than in some neighbouring countries even though total labour cost to the employer is high.',
+  },
+  {
+    question: 'Roughly what percentage of gross do contributions take?',
+    answer:
+      'For a non-cadre earning below the ceiling, employee contributions are around 21% of gross, so net before income tax is about 79% of gross. As salary rises above the ceiling, the higher Agirc-Arrco tranche 2 rate pushes the effective rate up toward 25% for high earners. Your exact figure depends on where your salary sits relative to the PMSS.',
+  },
+  {
+    question: 'How accurate is this estimate?',
+    answer:
+      'It models the standard private-sector employee contributions for 2026 and is a strong planning estimate. It does not include sector-specific or company-specific items such as supplementary health insurance (mutuelle), meal vouchers, profit-sharing, transport reimbursement, or local variations. For an exact figure, check your payslip or ask your employer or an accountant.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'France Net Salary Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="France Net Salary Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="France Net Salary Calculator"
+    description="Convert your gross salary (brut) into net pay before income tax for 2026. See your social contributions and monthly take-home as a cadre or non-cadre."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <FranceSalaryCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your annual gross salary, the figure your contract and payslip call the salaire brut.
+      This is the amount before any employee social contributions are taken off. Then choose your
+      employment status: non-cadre for most employees, or cadre for managers and professionals
+      covered by the cadre collective agreement. The results update instantly as you type, with no
+      submit button to press.
+    </p>
+    <p class="mt-4">
+      If you are paid monthly, multiply your monthly gross by twelve to get the annual figure to
+      enter here. If your contract quotes thirteen or fourteen months, add those extra months in so
+      the annual gross reflects your full yearly compensation. The calculator returns your net
+      salary before income tax, your monthly equivalent, the total contributions deducted, and your
+      effective contribution rate as a percentage of gross.
+    </p>
+    <p class="mt-4">
+      The status toggle matters mainly for high earners. Cadres pay one extra small contribution,
+      APEC, on top of the contributions every employee pays. For most salaries the difference
+      between cadre and non-cadre net pay is only a few euros a year, but the option is there so you
+      can model your exact situation.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <p>
+      French gross-to-net is built from several mandatory employee contributions, each applied to a
+      specific base. The calculator follows the 2026 employee rates and the 2026 social security
+      ceiling (PMSS) of 47,100 euros per year, which is 3,925 euros per month.
+    </p>
+    <h3 class="text-lg font-semibold mt-4 mb-2">The main contributions</h3>
+    <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Old-age pension (vieillesse):</strong> 6.90% on the
+        part of your salary up to one PMSS, plus 0.40% on your full gross.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">CSG and CRDS:</strong> 6.80% deductible CSG, 2.40% non-deductible
+        CSG, and 0.50% CRDS. These apply to 98.25% of your gross thanks to a 1.75% allowance, up to four
+        times the ceiling.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Agirc-Arrco complementary pension:</strong> 3.15% on
+        tranche 1 (up to one PMSS) and 8.64% on tranche 2 (between one and eight PMSS).
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">CEG and CET:</strong> the balancing contributions, 0.86%
+        and 1.08% across the two tranches for CEG, plus 0.14% CET once your gross passes one PMSS.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">APEC (cadres only):</strong> 0.024% of gross up to four
+        PMSS.
+      </li>
+    </ul>
+    <p class="mt-4">
+      The calculator adds these together to get your total employee contributions, then subtracts
+      that total from your gross to give your net before income tax. The employee share of
+      unemployment insurance has been 0% since 2019, so nothing is deducted for it here; the same is
+      true of general-regime health insurance, which is funded through CSG rather than a separate
+      employee line.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure is your net annual salary before income tax. Below it you will see the
+      monthly equivalent, which is simply the annual net divided by twelve. The metric cards then
+      show your gross, your total contributions, and your effective contribution rate, so you can
+      see at a glance what proportion of your salary goes to social contributions.
+    </p>
+    <p class="mt-4">
+      For a non-cadre earning below the ceiling, expect contributions of roughly 21% of gross,
+      leaving about 79% as net before income tax. As your salary climbs above the ceiling, the
+      higher Agirc-Arrco tranche 2 rate of 8.64% starts to bite, and the effective rate drifts up
+      toward 25% for high earners. This is why two people with very different salaries can see
+      noticeably different take-home percentages.
+    </p>
+    <p class="mt-4">
+      Remember the important caveat shown on the result card: this is net before income tax. France
+      withholds income tax at source through the prelevement a la source, at a rate set for your
+      household by the tax authority. Your final amount in the bank will be a little below the net
+      figure here once that personal rate is applied. Treat the output as a solid planning estimate,
+      not a payslip-exact number, and check your own payslip for company-specific items such as a
+      mutuelle health top-up or meal vouchers.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

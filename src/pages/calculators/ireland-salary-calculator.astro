@@ -1,0 +1,212 @@
+---
+/**
+ * Ireland Take-Home Pay Calculator Page
+ * Income tax (PAYE), USC and PRSI for a single Class A employee, tax year 2026.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { IrelandSalaryCalculator } from '../../components/calculators/IrelandSalaryCalculator';
+
+const title = 'Ireland Take-Home Pay Calculator 2026: Net Salary After Tax | Boring Math';
+const description =
+  'Work out your Ireland take-home pay for 2026. This net salary calculator shows income tax (PAYE), USC and PRSI deductions for a single Class A employee on standard credits.';
+const keywords =
+  'ireland take home pay calculator, ireland salary calculator, ireland net salary calculator 2026, ireland tax calculator, paye usc prsi calculator, irish salary calculator, ireland after tax salary';
+const canonicalURL = '/calculators/ireland-salary-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Ireland Take-Home Pay Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net pay across European countries.',
+    href: '/calculators/eu-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'EU VAT Calculator',
+    description: 'Add or remove VAT for EU countries.',
+    href: '/calculators/eu-vat-calculator',
+    icon: 'percent' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Work out monthly loan repayments.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is take-home pay calculated in Ireland?',
+    answer:
+      'Your net pay is your gross salary minus three deductions: income tax (PAYE), the Universal Social Charge (USC) and Pay Related Social Insurance (PRSI). This calculator works out each one for a single person taxed as a Class A employee on standard tax credits, then subtracts the total from your gross salary to give your annual and monthly take-home pay.',
+  },
+  {
+    question: 'What is the standard rate band and tax credit for 2026?',
+    answer:
+      'For the 2026 tax year (Budget 2026, effective 1 January 2026), a single person pays income tax at 20% on the first 44,000 euro of income and 40% on the balance above that. The personal tax credit is 2,000 euro and the PAYE (employee) tax credit is 2,000 euro, giving 4,000 euro of credits that reduce the tax due. If the credits exceed the calculated tax, the income tax is floored at zero.',
+  },
+  {
+    question: 'How does the Universal Social Charge (USC) work in 2026?',
+    answer:
+      'USC is charged on your full gross income on a progressive basis. For 2026 the rates are 0.5% on the first 12,012 euro, 2% on the next slice up to 28,700 euro, 3% on the next slice up to 70,044 euro, and 8% on the balance above 70,044 euro. If your total income for the year is 13,000 euro or less, you are exempt from USC entirely.',
+  },
+  {
+    question: 'How is PRSI calculated for a Class A employee in 2026?',
+    answer:
+      'PRSI for a Class A employee is charged on your gross pay once your earnings are above the weekly threshold of 352 euro. The employee Class A rate rises during 2026: it is 4.2% from January to September and 4.35% from 1 October 2026. This calculator uses a blended full-year rate of 4.2375% so the annual estimate reflects both periods. If you earn 352 euro a week or less, no PRSI is due.',
+  },
+  {
+    question: 'Why does this calculator use a blended 4.2375% PRSI rate?',
+    answer:
+      'The Class A employee PRSI rate changes part way through 2026, moving from 4.2% to 4.35% on 1 October 2026. Rather than apply a single point-in-time rate, the calculator blends the two rates across the full year to give a representative annual estimate. If you only want one period, multiply your gross by 4.2% (Jan to Sep) or 4.35% (from Oct) instead.',
+  },
+  {
+    question: 'Does this calculator include pension contributions or other credits?',
+    answer:
+      'No. The estimate assumes a single person with the standard personal and PAYE credits, no pension contributions, and no other reliefs such as medical insurance relief, the Single Person Child Carer Credit, or the Home Carer Credit. Pension contributions reduce your taxable income, so your real take-home pay may differ. Treat the result as a planning estimate, not payroll-grade output.',
+  },
+  {
+    question: 'Is this Irish tax advice?',
+    answer:
+      'No. This is an information tool that estimates take-home pay using published 2026 rates and bands. It is not financial or tax advice and does not account for every personal circumstance. For figures you can rely on, check Revenue.ie or speak to a qualified tax adviser or your payroll department.',
+  },
+  {
+    question: 'What is the difference between gross and net salary in Ireland?',
+    answer:
+      'Gross salary is your total pay before any deductions. Net salary, also called take-home pay, is what actually reaches your bank account after income tax, USC and PRSI are removed. The calculator shows both your gross and net figures plus the effective deduction rate, which is the total deducted expressed as a percentage of your gross salary.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Ireland Take-Home Pay Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Ireland Take-Home Pay Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Ireland Take-Home Pay Calculator"
+    description="Estimate your 2026 net salary in Ireland after income tax, USC and PRSI. Built for a single Class A employee on standard tax credits."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <IrelandSalaryCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your gross annual salary, the total amount your employer pays you before any deductions.
+      The calculator updates instantly, with no submit button to press. It assumes you are a single
+      person taxed as a Class A employee, the most common category for private sector workers, on
+      the standard personal and PAYE tax credits, with no pension contributions.
+    </p>
+    <p>
+      The headline figure is your net annual take-home pay, the money that actually reaches your
+      bank account once income tax, USC and PRSI are removed. Below it you will see the same amount
+      expressed as a monthly figure, which is useful for budgeting rent, a mortgage, or day to day
+      costs.
+    </p>
+    <p>
+      The breakdown panel splits out each deduction so you can see exactly where your money goes:
+      income tax under PAYE, the Universal Social Charge, and Pay Related Social Insurance. The
+      effective deduction rate tells you the share of your gross salary lost to all three combined.
+      If your circumstances differ, for example you pay into a pension or claim extra credits,
+      adjust your expectations accordingly because those reliefs are not modelled here.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      Take-home pay in Ireland is your gross salary minus three statutory deductions. The calculator
+      works each one out for the 2026 tax year (Budget 2026, effective 1 January 2026) and then
+      subtracts the total.
+    </p>
+    <p>
+      <strong>Income tax (PAYE):</strong> a single person pays 20% on the first 44,000 euro of income
+      and 40% on anything above that. The calculator then subtracts the combined tax credits, made up
+      of a 2,000 euro personal credit and a 2,000 euro PAYE credit, giving 4,000 euro in total. If those
+      credits are larger than the tax due, the income tax is reduced to zero rather than going negative.
+    </p>
+    <p>
+      <strong>Universal Social Charge (USC):</strong> this is charged on your full gross income across
+      progressive bands. The 2026 rates are 0.5% on the first 12,012 euro, 2% on the slice up to 28,700
+      euro, 3% on the slice up to 70,044 euro, and 8% on the balance above 70,044 euro. If your total
+      income for the year is 13,000 euro or less, USC does not apply at all.
+    </p>
+    <p>
+      <strong>Pay Related Social Insurance (PRSI):</strong> Class A employees pay PRSI on their gross
+      pay once weekly earnings exceed 352 euro. The employee rate rises from 4.2% to 4.35% on 1 October
+      2026, so the calculator applies a blended full-year rate of 4.2375% for an annual estimate. Workers
+      earning 352 euro a week or less pay no PRSI.
+    </p>
+    <p>
+      Net pay is then simply gross salary minus income tax, USC and PRSI. The monthly figure divides
+      the annual net by twelve, and the effective rate is the total of all three deductions divided
+      by your gross salary.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The large green figure is your annual take-home pay, with the monthly equivalent shown just
+      underneath. The three smaller cards break out how much goes to income tax, USC and PRSI so you
+      can see which deduction has the biggest impact on your pay. For most middle income earners,
+      income tax is the largest single deduction, with USC and PRSI together adding several thousand
+      euro more.
+    </p>
+    <p>
+      The effective deduction rate is worth watching as your salary rises. Because the 40% income
+      tax band and the 8% USC band only apply to income above their thresholds, low earners keep
+      almost all of their pay while higher earners lose a steadily larger share. This is how a
+      progressive tax system works: the marginal rate on your last euro earned is higher than the
+      average rate across your whole salary.
+    </p>
+    <p>
+      Remember the assumptions baked into the result. It is a 2026 estimate for a single Class A
+      employee on standard credits with no pension. Paying into a pension, claiming additional
+      credits such as the Home Carer Credit, or being assessed jointly with a spouse would all
+      change the numbers. The figures are designed to give you a fast, realistic planning estimate
+      rather than a payroll-grade calculation, so always confirm important decisions against
+      Revenue.ie or with a qualified adviser.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

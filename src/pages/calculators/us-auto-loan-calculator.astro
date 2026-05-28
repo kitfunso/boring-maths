@@ -1,0 +1,239 @@
+---
+/**
+ * US Auto Loan Calculator Page
+ *
+ * Estimates the monthly payment, total interest and total cost of a US car
+ * loan from the vehicle price, down payment, trade in, sales tax rate, APR and
+ * term.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { USAutoLoanCalculator } from '../../components/calculators/USAutoLoanCalculator';
+
+const title = 'US Auto Loan Calculator | Boring Math';
+const description =
+  'Free US auto loan calculator. Enter the vehicle price, down payment, trade in, sales tax rate, APR and term to see your monthly payment, total interest and total cost.';
+const keywords =
+  'auto loan calculator, car loan calculator, car payment calculator, us auto loan calculator, monthly car payment calculator, car loan interest calculator, vehicle finance calculator';
+const canonicalURL = '/calculators/us-auto-loan-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'US Auto Loan Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Loan Calculator',
+    description: 'Work out the monthly payment on any fixed rate loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Estimate your monthly mortgage payment and total interest.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings and investments grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'US Paycheck Calculator',
+    description: 'Estimate your take home pay after federal and state taxes.',
+    href: '/calculators/us-paycheck-calculator',
+    icon: 'dollar' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the long run cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is my car loan monthly payment calculated?',
+    answer:
+      'The calculator uses the standard amortising loan formula. The monthly payment equals the amount financed multiplied by the monthly interest rate, divided by one minus the quantity one plus the monthly rate raised to the power of minus the number of months. The monthly rate is the APR divided by 12. When the APR is zero, the payment is simply the amount financed divided by the number of months.',
+  },
+  {
+    question: 'What is the amount financed?',
+    answer:
+      'The amount financed, also called the principal, is the vehicle price plus sales tax, minus your down payment and any trade in value. This calculator charges sales tax on the full vehicle price, then subtracts your cash down and trade in. If the down payment and trade in cover the whole cost, the amount financed is zero and there is no loan.',
+  },
+  {
+    question: 'Is there a single national sales tax rate in the US?',
+    answer:
+      'No. The US has no national sales tax. Rates are set by each state, and counties and cities can add local rates on top, so the combined rate you pay depends on where you register the vehicle. As a guide, some statewide base rates are California 7.25 percent, Texas 6.25 percent, New York 4 percent and Florida 6 percent, but local add ons often push the total higher. Enter your own combined rate for an accurate result.',
+  },
+  {
+    question: 'Does a trade in reduce the sales tax I pay?',
+    answer:
+      'It depends on your state. Many states charge sales tax only on the price after a trade in credit, which lowers the tax. Others tax the full price. This calculator taxes the full vehicle price by default. If your state gives a trade in tax credit, you can model it by lowering the vehicle price you enter by the trade in amount before reading off the result.',
+  },
+  {
+    question: 'What is APR and how does it differ from the interest rate?',
+    answer:
+      'APR, the annual percentage rate, is the yearly cost of the loan expressed as a percentage. On a simple car loan it is close to the interest rate. The true APR can also fold in certain lender fees, so the rate a dealer quotes may differ slightly from the headline interest rate. Use the APR your lender gives you for the most accurate payment estimate.',
+  },
+  {
+    question: 'Should I choose a longer term to lower my monthly payment?',
+    answer:
+      'A longer term lowers the monthly payment but raises the total interest you pay, because you owe the balance for longer. A shorter term costs more each month but less overall. Try a few terms in the calculator and compare the total interest figure. Longer terms also raise the risk of owing more than the car is worth, since cars lose value faster than the loan is paid down.',
+  },
+  {
+    question: 'Does this calculator include insurance, registration or fees?',
+    answer:
+      'No. It covers the vehicle price, sales tax and loan interest only. Real car purchases also involve registration, title fees, documentation fees and ongoing insurance, which vary by state and lender. Treat the output as an estimate of the financing cost, and budget separately for those extras. This is a planning tool, not financial advice.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'US Auto Loan Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="US Auto Loan Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter the vehicle price',
+        text: 'Input the negotiated price of the car before tax.',
+      },
+      {
+        name: 'Add your down payment and trade in',
+        text: 'Enter the cash you are putting down and the value of any trade in.',
+      },
+      {
+        name: 'Set the tax rate, APR and term',
+        text: 'Enter your combined sales tax rate, the loan APR and the term in months.',
+      },
+      {
+        name: 'Review the payment',
+        text: 'See your monthly payment, total interest and total cost including tax.',
+      },
+    ]}
+    estimatedTime="PT2M"
+  />
+
+  <HeroSection
+    title="US Auto Loan Calculator"
+    description="Estimate your monthly car payment, total interest and total cost from the vehicle price, down payment, trade in, sales tax rate, APR and term."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <USAutoLoanCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use">
+    <p>
+      This calculator turns a few details about your car purchase into a monthly payment, so you can
+      see what a loan would cost before you sign. It works for any US auto loan with a fixed APR.
+    </p>
+    <p>
+      Start with the <strong>vehicle price</strong>, the negotiated price of the car before tax.
+      Then enter your <strong>down payment</strong>, the cash you are paying up front, and your
+      <strong>trade in value</strong>, the amount a dealer credits you for your old vehicle. Both
+      reduce the amount you need to borrow.
+    </p>
+    <p>
+      Enter your <strong>sales tax rate</strong> as the combined state and local rate for where you register
+      the car. There is no single national rate in the US, so check your own city and county rate. Add
+      your loan <strong>APR</strong> as the annual rate your lender quotes, and the
+      <strong>loan term</strong> as the number of months, for example 60 for a five year loan.
+    </p>
+    <p>
+      The results update instantly as you type. Try a larger down payment, a different term, or a
+      lower APR to see how each one changes your monthly payment and the total interest you would
+      pay over the life of the loan.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      The calculator first works out the <strong>amount financed</strong>. It charges sales tax on
+      the full vehicle price, so the sales tax equals the price multiplied by the tax rate divided
+      by one hundred. The amount financed is then the price plus that sales tax, minus your down
+      payment and your trade in value. If that figure would be negative, it is set to zero, because
+      you cannot borrow a negative amount.
+    </p>
+    <p>
+      It then applies the standard amortising loan formula to find the level
+      <strong>monthly payment</strong>. In words: the payment equals the amount financed multiplied
+      by the monthly interest rate, divided by one minus the quantity one plus the monthly rate
+      raised to the power of minus the number of months. The monthly rate is the APR divided by one
+      hundred and then by twelve. When the APR is zero, the payment is simply the amount financed
+      divided by the number of months.
+    </p>
+    <p>
+      From the monthly payment it derives the rest. The <strong>total of payments</strong> is the monthly
+      payment multiplied by the number of months. The <strong>total interest</strong> is the total of
+      payments minus the amount financed, which is the extra you pay for borrowing. The
+      <strong>total cost including tax</strong> is the vehicle price plus the sales tax plus the total
+      interest, the full price of owning the car through the loan.
+    </p>
+    <p>
+      Every figure assumes a fixed APR and equal monthly payments across the term, which is how most
+      US auto loans are structured. It does not model variable rates, balloon payments or skipped
+      months.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is your <strong>monthly payment</strong>, the amount of principal and
+      interest you would pay each month. This is the number most buyers compare against their
+      budget, but it is worth looking past it to the total cost as well.
+    </p>
+    <p>
+      The <strong>amount financed</strong> shows how much you are actually borrowing after your down payment
+      and trade in. A bigger down payment or trade in lowers this figure, which lowers both the monthly
+      payment and the total interest. The <strong>sales tax</strong> figure shows the tax added to the
+      deal, which can be a significant sum on a higher priced vehicle.
+    </p>
+    <p>
+      The <strong>total interest</strong> is the price of borrowing over the whole term. A longer term
+      lowers the monthly payment but raises this number, so a cheaper monthly payment is not always the
+      cheaper deal. The <strong>total cost including tax</strong> brings everything together: the car,
+      the tax and the interest, so you can see the real price of the purchase.
+    </p>
+    <p>
+      Remember these are estimates. They exclude registration, title and documentation fees, gap
+      insurance and your ongoing car insurance, all of which vary by state and lender. Some states
+      also tax the price after a trade in rather than the full price, so adjust the price you enter
+      if that applies to you. Treat the output as a planning guide rather than a quote, and not as
+      financial advice.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

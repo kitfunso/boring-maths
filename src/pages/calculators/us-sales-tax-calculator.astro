@@ -1,0 +1,210 @@
+---
+/**
+ * US Sales Tax Calculator Page
+ * Add sales tax to a price or back it out of a tax-inclusive total.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { USSalesTaxCalculator } from '../../components/calculators/USSalesTaxCalculator';
+
+const title = 'US Sales Tax Calculator: Add or Remove Sales Tax | Boring Math';
+const description =
+  'Free US sales tax calculator. Add sales tax to any price or back it out of a tax-inclusive total using your combined state, county and city rate. Shows tax, total and effective rate.';
+const keywords =
+  'sales tax calculator, us sales tax calculator, add sales tax, remove sales tax, reverse sales tax calculator, sales tax rate, combined sales tax';
+const canonicalURL = '/calculators/us-sales-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'US Sales Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'US Paycheck Calculator',
+    description: 'Estimate take-home pay after federal and state tax.',
+    href: '/calculators/us-paycheck-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'US Tax Bracket Calculator',
+    description: 'See your federal income tax bracket and marginal rate.',
+    href: '/calculators/us-tax-bracket-calculator',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Work out monthly payments and total interest.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Estimate your monthly mortgage payment.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is there a single national US sales tax rate?',
+    answer:
+      'No. The United States has no federal sales tax. Sales tax is set at the state level, and most states let counties, cities and special districts add their own rates on top. The rate you actually pay is the combined total of every applicable jurisdiction at the point of sale, which is why this calculator asks you to enter your combined rate rather than picking a state.',
+  },
+  {
+    question: 'What are the statewide base sales tax rates?',
+    answer:
+      'As of the 2025 tax year, common statewide base rates include California at 7.25%, Texas at 6.25%, New York at 4%, and Florida at 6%. These are the state portion only. Local county and city rates are added on top, so the combined rate you pay at checkout is usually higher. Five states (Alaska, Delaware, Montana, New Hampshire and Oregon) have no statewide sales tax, though some Alaska localities still levy a local one.',
+  },
+  {
+    question: 'How do I find my combined sales tax rate?',
+    answer:
+      'Add the statewide base rate to every local rate that applies at the delivery or purchase address: county, city and any special district. Your state revenue department usually publishes a rate lookup by address or ZIP code. Enter the resulting combined percentage into the calculator. For example, a 7.25% state rate plus a 2.25% local rate gives a combined 9.5% rate.',
+  },
+  {
+    question: 'How does the calculator add sales tax to a price?',
+    answer:
+      'In add mode it treats your amount as the pre-tax price. It multiplies that price by the rate divided by 100 to get the tax, then adds the tax to the price to get the total. For a $100 item at 8.25%, the tax is $8.25 and the total is $108.25.',
+  },
+  {
+    question: 'How does removing sales tax from a total work?',
+    answer:
+      'In remove mode it treats your amount as a tax-inclusive total and works backwards. It divides the total by one plus the rate to recover the pre-tax amount, then subtracts that from the total to find the tax. For a $108.25 total at 8.25%, the pre-tax amount is $100.00 and the tax is $8.25. This is useful for receipts that only show the final price.',
+  },
+  {
+    question: 'What is the effective rate the calculator shows?',
+    answer:
+      'The effective rate is the tax expressed as a percentage of the pre-tax amount. When you add tax, it matches the rate you entered. When you remove tax from a total, it is the same percentage of the recovered net amount, which confirms the back-calculation is consistent.',
+  },
+  {
+    question: 'Is sales tax charged on every purchase?',
+    answer:
+      'No. Many states exempt or reduce tax on categories such as groceries, prescription medicine and clothing, and rules vary widely by state. Some states also have sales tax holidays. This calculator applies whatever single combined rate you enter, so use the rate that applies to your specific item and location. It is a calculation tool, not tax advice.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'US Sales Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="US Sales Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="US Sales Tax Calculator"
+    description="Add sales tax to a price or remove it from a tax-inclusive total. Enter your combined state, county and city rate to see the tax, the total and the effective rate."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <USSalesTaxCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Choose your mode</strong> - pick Add tax to a price
+        when you have a pre-tax amount, or Remove tax from a total when you have a final price that already
+        includes tax.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter the amount</strong> - in add mode this is the
+        price before tax, in remove mode it is the tax-inclusive total from your receipt.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your combined rate</strong> - add up the state
+        rate plus any county, city and special district rates that apply at the point of sale, and type
+        the single combined percentage.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Read your results</strong> - the calculator updates
+        instantly to show the pre-tax amount, the sales tax, the total including tax, and the effective
+        rate.
+      </li>
+    </ol>
+    <p>
+      Everything recalculates as you type, so there is no submit button. Change the rate or switch
+      modes and the numbers update right away, which makes it quick to compare two locations or
+      check a receipt against the price on the shelf.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The math behind sales tax is simple arithmetic, and knowing it helps you sanity-check any
+      receipt. The calculator first turns your percentage into a decimal rate by dividing by 100. A
+      rate of 8.25% becomes 0.0825.
+    </p>
+    <p>
+      In <strong class="text-[var(--color-cream)]">add mode</strong>, your amount is the pre-tax
+      price. The tax is the price multiplied by the rate, and the total is the price plus the tax.
+      For a $200 purchase at a combined 9.5% rate, the tax is 200 times 0.095, which is $19.00, and
+      the total comes to $219.00.
+    </p>
+    <p>
+      In <strong class="text-[var(--color-cream)]">remove mode</strong>, your amount is a
+      tax-inclusive total and the calculator runs the steps in reverse. Because the total equals the
+      net price times one plus the rate, the pre-tax amount is the total divided by one plus the
+      rate. The tax is then the total minus that net amount. For a $219.00 total at 9.5%, the net is
+      219 divided by 1.095, which is $200.00, and the tax is $19.00. A common mistake is to multiply
+      the total by the rate directly, which overstates the tax, so dividing is the correct reverse
+      step.
+    </p>
+    <p>
+      The effective rate the calculator reports is the tax divided by the pre-tax amount, expressed
+      as a percentage. In add mode it equals the rate you entered. In remove mode it confirms that
+      the back-calculation lines up with the rate, which is a useful consistency check.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The large headline figure is the answer to the mode you chose: the total including tax when
+      you are adding tax, or the recovered pre-tax amount when you are removing it. Below it, the
+      breakdown always separates the pre-tax amount, the sales tax and the total, so you can see
+      each component no matter which mode you are in.
+    </p>
+    <p>
+      Remember that the combined rate you enter drives everything. The United States has no national
+      sales tax, so the rate at one address can differ from the rate a few miles away. Statewide
+      base rates for the 2025 tax year are illustrative only: California 7.25%, Texas 6.25%, New
+      York 4% and Florida 6% are the state portions, and local rates push the real combined figure
+      higher in most places. Look up the exact combined rate for your delivery or purchase address
+      before relying on the result.
+    </p>
+    <p>
+      Many states also exempt categories such as groceries or prescription medicine, or run
+      temporary sales tax holidays, so the right rate for one item may not apply to another. This
+      calculator is a tool for working out the arithmetic of a single combined rate. It is not tax
+      advice, and for filing or compliance questions you should check your state revenue department
+      or a qualified professional.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

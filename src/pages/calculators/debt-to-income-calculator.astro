@@ -1,0 +1,210 @@
+---
+/**
+ * Debt-to-Income (DTI) Calculator Page
+ * Front-end and back-end DTI ratios against conventional US lender thresholds.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { DebtToIncomeCalculator } from '../../components/calculators/DebtToIncomeCalculator';
+
+const title = 'Debt-to-Income (DTI) Calculator: Front and Back-End Ratio | Boring Math';
+const description =
+  'Free debt-to-income calculator. Enter your gross monthly income, housing payment, and other debts to get your front-end and back-end DTI ratios against the 28/36 and 43% lender guidelines.';
+const keywords =
+  'debt to income calculator, dti calculator, debt to income ratio, front end dti, back end dti, 28 36 rule, qualified mortgage 43 percent, mortgage dti';
+const canonicalURL = '/calculators/debt-to-income-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Debt-to-Income (DTI) Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'US Mortgage Calculator',
+    description: 'Estimate your monthly payment with taxes, insurance, and PMI.',
+    href: '/calculators/us-mortgage-calculator',
+    icon: 'home' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Home Affordability',
+    description: 'See how much house you can afford on the 28/36 rule.',
+    href: '/calculators/home-affordability-calculator',
+    icon: 'home' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Loan Calculator',
+    description: 'Calculate monthly payments and total interest for any loan.',
+    href: '/calculators/loan-calculator',
+    icon: 'dollar' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'US Paycheck Calculator',
+    description: 'Estimate take-home pay after federal and state taxes.',
+    href: '/calculators/us-paycheck-calculator',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is debt-to-income ratio (DTI)?',
+    answer:
+      'Your debt-to-income ratio is the share of your gross monthly income that goes toward debt payments, written as a percentage. Lenders use it to judge how comfortably you can take on a new loan. There are two versions: the front-end ratio looks at housing costs only, and the back-end ratio includes all of your recurring debt. A lower DTI signals more room in your budget and usually means easier approval and better rates.',
+  },
+  {
+    question: 'How is DTI calculated?',
+    answer:
+      'Front-end DTI = monthly housing payment divided by gross monthly income, times 100. Back-end DTI = (housing payment plus all other monthly debt) divided by gross monthly income, times 100. Gross income is your pay before tax and deductions. For example, if you earn 6,000 dollars a month, pay 1,500 dollars for housing, and 500 dollars on other debts, your front-end DTI is 25% and your back-end DTI is 33.3%.',
+  },
+  {
+    question: 'What is a good debt-to-income ratio?',
+    answer:
+      'Most conventional lenders like to see a front-end ratio at or below 28% and a back-end ratio at or below 36%. This is the long-standing 28/36 rule. A back-end ratio up to 43% is still widely accepted because that is the Qualified Mortgage limit. Above 43% is treated as high risk by many conventional lenders, though some loan programs go higher.',
+  },
+  {
+    question: 'What counts as debt in the back-end ratio?',
+    answer:
+      'Include recurring monthly obligations: your mortgage or rent, car loans, student loans, the minimum payments on credit cards, personal loans, and court-ordered payments like child support or alimony. Do not include everyday costs that are not debt, such as groceries, utilities, phone bills, or streaming subscriptions. Lenders focus on contractual debt payments, not discretionary spending.',
+  },
+  {
+    question: 'What is the 43% Qualified Mortgage limit?',
+    answer:
+      'The 43% back-end figure comes from the Consumer Financial Protection Bureau Qualified Mortgage rule under the Ability-to-Repay requirement, which took effect in 2014. A Qualified Mortgage gives the lender certain legal protections, and a back-end DTI at or below 43% has historically been one way to meet the standard. It is a lender safe-harbour threshold, not a legal cap on what you personally are allowed to borrow.',
+  },
+  {
+    question: 'Does the calculator use gross or net income?',
+    answer:
+      'It uses gross monthly income, meaning your pay before tax and other deductions. This is the standard lenders use because everyone is taxed differently. If you only know your annual gross salary, divide it by 12 to get the monthly figure to enter here.',
+  },
+  {
+    question: 'How can I lower my debt-to-income ratio?',
+    answer:
+      'Two levers move your DTI: reduce monthly debt payments or raise gross income. Paying down or paying off a loan removes its payment from the ratio. Avoiding new debt before applying for a mortgage keeps the ratio stable. Refinancing to a longer term can lower a payment, though it may cost more interest overall. A side income or a documented raise increases the denominator and pulls the ratio down.',
+  },
+  {
+    question: 'Is this debt-to-income calculator financial advice?',
+    answer:
+      'No. This is an educational tool that applies common lender guidelines to the numbers you enter. The 28%, 36%, and 43% thresholds are conventions used across the industry, and individual lenders and loan programs set their own rules. FHA loans, for example, often allow higher ratios. Always confirm requirements with your lender.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Debt-to-Income (DTI) Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Debt-to-Income (DTI) Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Debt-to-Income (DTI) Calculator"
+    description="Calculate your front-end and back-end DTI ratios and see how they compare to the 28/36 rule and the 43% Qualified Mortgage limit."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <DebtToIncomeCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      This calculator turns three numbers into the two ratios mortgage lenders care about most.
+      Enter them and the results update instantly, with no submit button to press.
+    </p>
+    <ol class="list-decimal list-inside space-y-3">
+      <li>
+        <strong>Gross monthly income</strong>: your total pay before tax and deductions. If you only
+        know your annual salary, divide it by 12. Include reliable extra income such as a steady
+        bonus or documented side work, since that is what a lender would count.
+      </li>
+      <li>
+        <strong>Monthly housing payment</strong>: the full cost of where you live. For a mortgage
+        that means principal, interest, property tax, homeowner insurance, any HOA dues, and PMI. If
+        you rent, use your monthly rent.
+      </li>
+      <li>
+        <strong>Other monthly debt payments</strong>: car loans, student loans, the minimum due on
+        credit cards, personal loans, and court-ordered payments like child support. Leave out
+        groceries, utilities, and other living costs that are not debt.
+      </li>
+    </ol>
+    <p>
+      As soon as you have entered your figures, the calculator shows your back-end ratio as the
+      headline number, your front-end ratio and total monthly debt alongside it, and a reference
+      table of the conventional thresholds so you can see exactly where you stand.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      Debt-to-income is a simple division done two ways. Both ratios divide a monthly debt figure by
+      your gross monthly income and express the result as a percentage.
+    </p>
+    <p>
+      The <strong>front-end ratio</strong> measures housing alone. It is your monthly housing payment
+      divided by your gross monthly income, multiplied by 100. If housing costs 1,500 dollars and you
+      earn 6,000 dollars a month, the front-end ratio is 1,500 divided by 6,000, which is 0.25, or 25%.
+    </p>
+    <p>
+      The <strong>back-end ratio</strong> measures all of your debt. It is your housing payment plus every
+      other monthly debt payment, divided by gross monthly income, multiplied by 100. Using the same example
+      with 500 dollars of other debt, total debt is 2,000 dollars. Divided by 6,000 that is 0.3333, which
+      rounds to 33.3%. The back-end ratio is always equal to or higher than the front-end ratio because
+      it adds more debt to the numerator.
+    </p>
+    <p>
+      The calculator rounds each ratio to one decimal place, the way lenders quote them. If you
+      enter zero income the ratios are reported as zero rather than dividing by zero, and any
+      negative entry is treated as zero so a cleared field never produces a nonsense figure.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      Lenders read your back-end ratio first, so the calculator leads with it. The colour and label
+      tell you which band you fall into against the conventional guidelines.
+    </p>
+    <p>
+      A back-end ratio <strong>at or below 36%</strong> sits in the classic conventional comfort zone
+      and shows as green. Between 36% and 43% it shows as amber: still acceptable to many lenders because
+      it is within the Qualified Mortgage limit, but with less breathing room. Above 43% it shows as red,
+      signalling high risk to most conventional lenders. The front-end ratio is judged separately against
+      the 28% housing guideline shown in the metrics.
+    </p>
+    <p>
+      Treat these numbers as a starting point, not a verdict. The 28%, 36%, and 43% figures are
+      widely used conventions rather than fixed rules. Government-backed programs such as FHA loans
+      frequently approve higher ratios, and a strong credit score, large down payment, or healthy
+      cash reserves can offset a higher DTI. If your ratio is higher than you would like, the most
+      reliable ways to improve it are paying down a loan to remove its monthly payment, avoiding new
+      debt before you apply, or increasing documented income. This calculator is an educational
+      tool, not financial advice; confirm the exact requirements with your lender.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

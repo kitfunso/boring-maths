@@ -1,0 +1,221 @@
+---
+/**
+ * Germany Net Salary (Brutto-Netto) Calculator Page
+ *
+ * Estimates employee net pay for tax class I (single) for the 2026 tax year.
+ * Income tax follows section 32a EStG; solidarity surcharge and optional church
+ * tax are added; social insurance uses the 2026 employee rates and ceilings.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { GermanySalaryCalculator } from '../../components/calculators/GermanySalaryCalculator';
+
+const title = 'Germany Net Salary Calculator 2026: Brutto Netto | Boring Math';
+const description =
+  'Work out your German net salary from gross for 2026. This Brutto-Netto calculator estimates income tax, solidarity surcharge, church tax and social insurance for tax class I.';
+const keywords =
+  'germany net salary calculator, brutto netto rechner, german salary calculator, net pay germany, german income tax calculator, tax class 1 germany, gross to net germany';
+const canonicalURL = '/calculators/germany-salary-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Germany Net Salary Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'EU Salary Calculator',
+    description: 'Estimate take-home pay across EU countries.',
+    href: '/calculators/eu-salary-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'EU VAT Calculator',
+    description: 'Add or remove VAT at any EU rate.',
+    href: '/calculators/eu-vat-calculator',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between major world currencies.',
+    href: '/calculators/currency-converter',
+    icon: 'swap' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is German net salary calculated from gross?',
+    answer:
+      'Net pay is gross minus income tax (Lohnsteuer), the solidarity surcharge (Solidaritaetszuschlag), optional church tax (Kirchensteuer), and the employee share of four social insurances: pension, health, unemployment and long-term care. The calculator first works out your taxable income, then applies the statutory income tax formula, then layers the surcharges and social contributions on top.',
+  },
+  {
+    question: 'What is the German basic tax-free allowance for 2026?',
+    answer:
+      'The basic allowance (Grundfreibetrag) for the 2026 tax year is 12,348 EUR. Taxable income up to this amount is taxed at zero percent. The figure is set in section 32a of the Income Tax Act (EStG) for the 2026 assessment year and is uprated most years to track inflation.',
+  },
+  {
+    question: 'What are the German income tax rates for 2026?',
+    answer:
+      'Germany uses a progressive formula in section 32a EStG rather than flat bands. Above the 12,348 EUR allowance the marginal rate climbs smoothly from 14 percent up to 42 percent. The 42 percent top rate begins at 69,879 EUR of taxable income, and a 45 percent rate (the so-called wealth tax rate) applies above 277,826 EUR, all for the 2026 assessment year.',
+  },
+  {
+    question: 'What social insurance do employees pay in Germany in 2026?',
+    answer:
+      'Employees pay roughly half of four contributions in 2026: pension at 9.3 percent up to an income ceiling of 101,400 EUR, unemployment at 1.3 percent up to the same ceiling, health at about 8.75 percent (the 7.3 percent base plus half of the average 2.9 percent supplement) up to a ceiling of 69,750 EUR, and long-term care at 1.8 percent up to that ceiling. Childless employees aged 23 and over pay an extra 0.6 percent for care.',
+  },
+  {
+    question: 'What is the solidarity surcharge and do I pay it?',
+    answer:
+      'The solidarity surcharge (Solidaritaetszuschlag) is 5.5 percent of your income tax. Since 2021 most employees no longer pay it because of a high exemption threshold. For a single person in 2026 there is no surcharge if annual income tax is at or below 20,350 EUR, and a gentle phase-in applies just above that. Only higher earners pay the full 5.5 percent.',
+  },
+  {
+    question: 'How much is church tax in Germany?',
+    answer:
+      'Church tax (Kirchensteuer) is 9 percent of your income tax in most federal states, and 8 percent in Bavaria and Baden-Wuerttemberg. It is only charged if you are a registered member of a tax-collecting religious community. This calculator uses 9 percent when you tick the church tax box. You can leave a church through an official process to stop paying it.',
+  },
+  {
+    question: 'What is tax class I and which one applies to me?',
+    answer:
+      'Tax class I (Steuerklasse I) is the default for single, divorced or widowed employees without children who qualify for special treatment. This calculator estimates net pay for tax class I. Married couples often use classes III, IV or V, and single parents may qualify for class II, which changes the result. Your class is shown on your payslip.',
+  },
+  {
+    question: 'Why might my actual payslip differ from this estimate?',
+    answer:
+      'This tool is an estimate for tax class I using a simplified Vorsorgepauschale (it deducts your social insurance and a 1,230 EUR employee allowance to reach taxable income). Your real net pay can differ if your health insurer charges a supplement other than the 2.9 percent average, if you have children, if you claim extra allowances, or if your tax class is not I. Treat the figure as a close guide, not a payslip.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Germany Net Salary Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Germany Net Salary Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Germany Net Salary Calculator"
+    description="Turn a gross German salary into estimated net pay for 2026. See income tax, solidarity surcharge, church tax and social insurance for tax class I."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <GermanySalaryCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Enter your <strong>gross annual salary</strong> (Bruttojahresgehalt). This is your total yearly
+      pay before any tax or social insurance is taken off. If you only know your monthly gross, multiply
+      it by 12, or by your number of monthly payments if your contract pays a thirteenth salary.
+    </p>
+    <p>
+      Tick <strong>church tax (Kirchensteuer)</strong> if you are a registered member of a tax-collecting
+      religious community. This adds 9 percent of your income tax to your deductions. Leave it unticked
+      if you do not pay church tax.
+    </p>
+    <p>
+      Tick <strong>childless and aged 23 or over</strong> if that describes you. Childless employees in
+      this group pay an extra 0.6 percent towards long-term care insurance, so this slightly lowers your
+      net pay. Parents and younger workers should leave it unticked.
+    </p>
+    <p>
+      The results update instantly as you change any input, so there is no button to press. The
+      headline figure is your estimated <strong>net pay per month</strong>, with the full annual net
+      and a breakdown of every deduction shown below it.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <p>
+      German net pay is gross salary minus income tax, the solidarity surcharge, optional church
+      tax, and the employee share of social insurance. The calculator works through these in order
+      for the <strong>2026 tax year</strong> and for <strong>tax class I</strong>.
+    </p>
+    <p>
+      First it works out your <strong>social insurance</strong>. The employee share is pension at
+      9.3 percent and unemployment at 1.3 percent, each charged up to an income ceiling of 101,400
+      EUR, plus health at about 8.75 percent and long-term care at 1.8 percent, each charged up to a
+      lower ceiling of 69,750 EUR. Childless employees aged 23 and over pay an extra 0.6 percent for
+      care. Income above each ceiling is not charged for that branch.
+    </p>
+    <p>
+      Next it finds your <strong>taxable income</strong> (zu versteuerndes Einkommen). In words, this
+      is gross salary minus the tax-deductible part of your social insurance, which is pension, health
+      and care, but not unemployment insurance, then minus a 1,230 EUR employee lump-sum allowance (the
+      Arbeitnehmer-Pauschbetrag). This simplified approach mirrors the standard Vorsorgepauschale used
+      in payroll.
+    </p>
+    <p>
+      The <strong>income tax</strong> then follows the formula in section 32a of the Income Tax Act (EStG).
+      Taxable income up to the 12,348 EUR basic allowance is taxed at zero. Above that the marginal rate
+      rises smoothly from 14 percent toward 42 percent, with the 42 percent rate reaching in at 69,879
+      EUR and a 45 percent rate above 277,826 EUR of taxable income.
+    </p>
+    <p>
+      Finally the <strong>solidarity surcharge</strong> of 5.5 percent of income tax is added, but only
+      above a high exemption threshold (no surcharge for a single person whose annual income tax is 20,350
+      EUR or less, with a gentle phase-in just above). Church tax of 9 percent of income tax is added
+      if you selected it. Subtracting all of these from gross gives your net pay.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline number is your estimated <strong>net pay per month</strong>, the amount that
+      should land in your bank account after tax and social insurance. The annual net figure beneath
+      it is simply twelve times the monthly figure.
+    </p>
+    <p>
+      The <strong>effective deduction rate</strong> shows the total of all deductions as a percentage
+      of your gross salary. It is usually lower than your top marginal tax rate because the basic allowance
+      and the progressive formula mean your first euros of income are taxed lightly or not at all.
+    </p>
+    <p>
+      The <strong>deductions breakdown</strong> lists each item separately: income tax, solidarity surcharge,
+      church tax if you pay it, and the four social insurances. This makes it easy to see where your money
+      goes. For most middle earners the social insurance contributions are a larger slice than income
+      tax.
+    </p>
+    <p>
+      Treat these figures as a close estimate rather than an exact payslip. The result assumes tax
+      class I, a health insurer supplement at the 2.9 percent average, and no children-related
+      allowances. A different tax class, children, or a different supplement will move the number.
+      This calculator is an information tool and does not provide tax or financial advice. For your
+      exact figures, check your payslip or a tax adviser.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
