@@ -1,0 +1,234 @@
+---
+/**
+ * UK Redundancy Pay Calculator Page
+ * Statutory redundancy pay for 2025/26 (cap effective 6 April 2025)
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKRedundancyPayCalculator } from '../../components/calculators/UKRedundancyPayCalculator';
+
+const title = 'UK Redundancy Pay Calculator 2025/26 | Boring Math';
+const description =
+  'Calculate your UK statutory redundancy pay for 2025/26. Enter your age, full years of service and weekly pay (capped at £719 from 6 April 2025) to see your entitlement.';
+const keywords =
+  'uk redundancy pay calculator, statutory redundancy pay, redundancy pay 2025, redundancy calculator, redundancy pay uk, weekly pay cap, redundancy entitlement';
+const canonicalURL = '/calculators/uk-redundancy-pay-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Redundancy Pay Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Tax Calculator',
+    description: 'Work out income tax and take-home pay.',
+    href: '/calculators/uk-tax-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK Pension Calculator',
+    description: 'Calculate pension contributions and tax relief.',
+    href: '/calculators/uk-pension-calculator',
+    icon: 'chart' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'UK Salary Sacrifice',
+    description: 'Maximize take-home with salary sacrifice.',
+    href: '/calculators/uk-salary-sacrifice-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'UK Child Benefit Calculator',
+    description: 'Check your benefit and the High Income Charge.',
+    href: '/calculators/uk-child-benefit-calculator',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how a redundancy lump sum could grow.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'chart' as const,
+    color: 'purple' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is statutory redundancy pay calculated in the UK?',
+    answer:
+      "Statutory redundancy pay is based on three things: your age, your full years of continuous service, and your weekly pay. For each full year worked you get a set number of week's pay: half a week's pay for years when you were under 22, one week's pay for years aged 22 to 40, and one and a half week's pay for years aged 41 and over. Multiply the total week's pay by your weekly pay (capped) to get the figure.",
+  },
+  {
+    question: 'What is the weekly pay cap for redundancy pay in 2025/26?',
+    answer:
+      "The statutory cap on a week's pay is £719 from 6 April 2025 (the 2025/26 tax year). It was £700 in 2024/25. If your actual weekly pay is higher than the cap, only £719 per week is used in the statutory calculation. The maximum statutory redundancy pay is £21,570, which is 20 years of service at 1.5 week's pay each, capped at £719 a week.",
+  },
+  {
+    question: 'Do I qualify for statutory redundancy pay?',
+    answer:
+      'You qualify for statutory redundancy pay if you are an employee with at least 2 years of continuous service with your employer and you are being made redundant. If you have under 2 years of service, you have no statutory redundancy entitlement, though your contract may offer more.',
+  },
+  {
+    question: 'How many years of service count towards redundancy pay?',
+    answer:
+      'A maximum of 20 years of continuous service can be counted. If you have worked longer than 20 years, only the most recent 20 years are used in the statutory calculation. Service under 2 years means you do not qualify at all.',
+  },
+  {
+    question: 'Is statutory redundancy pay taxed?',
+    answer:
+      'Statutory redundancy pay is generally tax free. Redundancy payments, including statutory redundancy pay and other compensation for loss of your job, are tax free up to £30,000. Amounts above £30,000, and any payments that are really earnings such as pay in lieu of notice or holiday pay, can be taxable. This calculator shows the statutory figure before any other payments.',
+  },
+  {
+    question: 'How does my age affect my redundancy pay?',
+    answer:
+      "Your age during each year of service sets how much that year is worth. Years worked while under 22 give half a week's pay, years aged 22 to 40 give one week's pay, and years aged 41 and over give one and a half week's pay. Because the bands are tied to your age in each year, two people with the same length of service can receive different amounts.",
+  },
+  {
+    question: 'What counts as my weekly pay for the calculation?',
+    answer:
+      'Your weekly pay is the average gross amount you earned per week over the 12 weeks before the day you received your redundancy notice. For the statutory figure this weekly pay is capped at £719 from 6 April 2025. If your pay varies, the average over those 12 weeks is used.',
+  },
+  {
+    question: 'What is the maximum redundancy pay I can get?',
+    answer:
+      'The maximum statutory redundancy pay for 2025/26 is £21,570. This is reached at 20 counted years of service, all at the highest 1.5 week multiplier (age 41 and over), with the weekly pay cap of £719 applied. Your employer may pay more under a contractual or enhanced redundancy scheme, but the statutory maximum is £21,570.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Redundancy Pay Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Redundancy Pay Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Redundancy Pay Calculator"
+    description="Estimate your statutory redundancy pay for 2025/26 from your age, full years of service and weekly pay."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKRedundancyPayCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your age</strong> – Your age decides the multiplier
+        applied to each year of service.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your full years of service</strong> – Count only
+        complete years of continuous service with your employer. You need at least 2 years to qualify,
+        and a maximum of 20 years is counted.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your gross weekly pay</strong> – Use your average
+        gross pay over the 12 weeks before your redundancy notice. The calculator caps this at £719 for
+        the statutory figure.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review your results</strong> – See your total week's
+        pay, the weekly pay used after any cap, and your statutory redundancy pay.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Statutory redundancy pay is built up year by year. For every full year of continuous
+        service, the law awards a number of week's pay that depends on how old you were during that
+        year:
+      </p>
+      <ul class="list-disc list-inside space-y-2">
+        <li>
+          <strong class="text-[var(--color-cream)]">Under 22 during the year:</strong> half a week's pay
+          (0.5).
+        </li>
+        <li>
+          <strong class="text-[var(--color-cream)]">Aged 22 to 40 during the year:</strong> one week's
+          pay (1.0).
+        </li>
+        <li>
+          <strong class="text-[var(--color-cream)]">Aged 41 and over during the year:</strong> one and
+          a half week's pay (1.5).
+        </li>
+      </ul>
+      <p>
+        The formula in words: add up the week's pay for every counted year (working backwards from
+        your current age, using the most recent 20 years if you have served longer), then multiply
+        that total number of week's pay by your weekly pay. For the statutory figure, your weekly
+        pay is first capped at £719 (the cap from 6 April 2025 for the 2025/26 tax year). If your
+        actual weekly pay is below the cap, your real weekly pay is used.
+      </p>
+      <p>
+        Worked example: someone aged 45 with 10 full years of service. The most recent years cover
+        ages 44, 43, 42 and 41 (four years at 1.5 week's pay each, giving 6 week's pay) plus ages 40
+        down to 35 (six years at 1.0 week's pay each, giving 6 week's pay), a total of 12 week's
+        pay. On a weekly pay of £600, which is under the cap, the statutory redundancy pay is 12 x
+        £600 = £7,200. On a weekly pay of £800, the cap of £719 applies, so it becomes 12 x £719 =
+        £8,628.
+      </p>
+      <p>
+        Because 20 years is the most that can be counted and the highest multiplier is 1.5 week's
+        pay, the largest statutory total possible in 2025/26 is 20 x 1.5 x £719 = £21,570. Employers
+        can offer more through a contractual or enhanced redundancy scheme, but they cannot pay less
+        than the statutory amount if you qualify.
+      </p>
+    </div>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        The headline figure is your <strong class="text-[var(--color-cream)]"
+          >statutory redundancy pay</strong
+        >, the legal minimum your employer must pay if you qualify. The result also shows the total
+        number of week's pay you have built up and the weekly pay used after any cap, so you can see
+        how the figure is made up.
+      </p>
+      <p>
+        If your weekly pay is above £719, the calculator shows both the capped statutory amount and
+        an estimate using your full weekly pay. The statutory amount is what the law guarantees; the
+        uncapped estimate is useful only if your contract promises redundancy pay based on your full
+        salary rather than the statutory cap.
+      </p>
+      <p>
+        If you have under 2 years of continuous service, the result shows £0, because there is no
+        statutory redundancy entitlement below that threshold. Statutory redundancy pay is normally
+        tax free, and redundancy payments are tax free up to £30,000, so for most people the figure
+        shown is the amount they actually receive. This calculator is a tool, not financial or legal
+        advice; check your contract and the latest gov.uk guidance for your exact situation.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

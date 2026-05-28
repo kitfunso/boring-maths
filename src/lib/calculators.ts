@@ -1596,6 +1596,49 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'UK',
     mostUsed: false,
   },
+  {
+    title: 'UK Mortgage Affordability',
+    description:
+      'Work out how much you could borrow for a mortgage based on income, deposit, and interest rate.',
+    href: '/calculators/uk-mortgage-affordability-calculator',
+    icon: 'home',
+    color: 'blue',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Mortgage Overpayment',
+    description: 'See how much interest and time you save by overpaying your mortgage.',
+    href: '/calculators/mortgage-overpayment-calculator',
+    icon: 'home',
+    color: 'green',
+    category: 'Finance',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Holiday Entitlement',
+    description:
+      'Calculate your statutory paid holiday entitlement, including pro-rata for part-time work.',
+    href: '/calculators/uk-holiday-entitlement-calculator',
+    icon: 'calendar',
+    color: 'violet',
+    category: 'Income',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Redundancy Pay',
+    description:
+      'Estimate your statutory redundancy pay based on age, years of service, and weekly pay.',
+    href: '/calculators/uk-redundancy-pay-calculator',
+    icon: 'briefcase',
+    color: 'coral',
+    category: 'Income',
+    country: 'UK',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------

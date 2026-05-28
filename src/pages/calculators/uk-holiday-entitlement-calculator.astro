@@ -1,0 +1,213 @@
+---
+/**
+ * UK Holiday Entitlement Calculator Page
+ *
+ * Statutory holiday entitlement under the Working Time Regulations 1998:
+ * 5.6 weeks paid leave, capped at 28 days for a 5-day-plus week, pro-rated for
+ * starters and leavers, with a 12.07% accrual method for irregular hours.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKHolidayEntitlementCalculator } from '../../components/calculators/UKHolidayEntitlementCalculator';
+
+const title = 'UK Holiday Entitlement Calculator 2025/26 | Boring Math';
+const description =
+  'Work out your statutory holiday entitlement in the UK. Calculate paid leave for full-time, part-time and irregular-hours workers, pro-rated for starters and leavers (5.6 weeks, capped at 28 days).';
+const keywords =
+  'holiday entitlement calculator, uk holiday entitlement, statutory holiday calculator, pro rata holiday calculator, part time holiday entitlement, annual leave calculator, 12.07 percent holiday';
+const canonicalURL = '/calculators/uk-holiday-entitlement-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'UK Holiday Entitlement Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Overtime Calculator',
+    description: 'See what your overtime pays after taxes.',
+    href: '/calculators/overtime-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert an hourly rate to annual salary.',
+    href: '/calculators/hourly-to-salary-calculator',
+    icon: 'swap' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Salary to Hourly Calculator',
+    description: 'Convert an annual salary to an hourly rate.',
+    href: '/calculators/salary-to-hourly-calculator',
+    icon: 'swap' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'UK Employer Cost Calculator',
+    description: 'Work out the true cost of an employee.',
+    href: '/calculators/uk-employer-cost-calculator',
+    icon: 'briefcase' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the statutory minimum holiday entitlement in the UK?',
+    answer:
+      'Almost all workers are entitled to 5.6 weeks of paid holiday a year under the Working Time Regulations 1998. This is capped at 28 days for anyone working 5 or more days a week. The 5.6 weeks figure has been in force since the final increase took effect on 1 April 2009 and remains the statutory minimum for 2025/26. Employers can offer more, but not less.',
+  },
+  {
+    question: 'How many days holiday do I get on a 5-day week?',
+    answer:
+      'A full-time worker on a 5-day week gets 5 multiplied by 5.6, which is 28 days of paid leave a year. The 28-day statutory cap means that working 6 or 7 days a week does not increase your legal minimum beyond 28 days, although your employer may choose to give you more.',
+  },
+  {
+    question: 'How is part-time holiday entitlement calculated?',
+    answer:
+      'Multiply the number of days you work each week by 5.6. For example, 3 days a week gives 3 multiplied by 5.6, which is 16.8 days a year. 4 days a week gives 22.4 days. This keeps part-time holiday proportional to a full-timer, so part-time staff are treated fairly.',
+  },
+  {
+    question: 'How do I pro-rate holiday for a starter or leaver?',
+    answer:
+      'If you start or leave part way through the leave year, multiply your full-year entitlement by the fraction of the year you worked. The calculator uses months worked out of 12. For example, a 5-day-week worker who worked 6 months gets 28 multiplied by 6 over 12, which is 14 days. On leaving, your employer pays you for any accrued holiday you have not taken.',
+  },
+  {
+    question: 'What is the 12.07% holiday accrual method?',
+    answer:
+      'For workers with irregular or casual hours, holiday accrues at 12.07% of the hours actually worked. The figure comes from 5.6 weeks of leave divided by the 46.4 working weeks in a year (52 weeks minus 5.6). So 1,000 hours worked accrues 120.7 hours of paid leave. Note that following changes to the rules, the 12.07% accrual method applies to leave years beginning on or after 1 April 2024 for genuinely irregular-hours and part-year workers.',
+  },
+  {
+    question: 'Does holiday entitlement include bank holidays?',
+    answer:
+      'Not automatically. The 5.6 weeks (28 days for full-time) is a single statutory pot. An employer can choose to count the 8 UK bank holidays towards your 28 days, or give them on top. Your contract should state which. The statutory minimum is 28 days in total, however your employer splits it.',
+  },
+  {
+    question: 'Who is entitled to statutory holiday?',
+    answer:
+      'Almost all workers qualify, including agency workers, casual workers and zero-hours workers, not just permanent employees. The genuinely self-employed are not covered. Entitlement starts building from your first day of work. There is no longer a qualifying period before you begin to accrue leave.',
+  },
+  {
+    question: 'Can my employer pay me instead of giving holiday?',
+    answer:
+      'Only when your employment ends. While you are working, your statutory holiday must be taken as time off and cannot be paid in lieu, because the purpose is rest. When you leave a job, your employer must pay you for any statutory holiday you have accrued but not used.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Holiday Entitlement Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Holiday Entitlement Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Holiday Entitlement Calculator"
+    description="Work out your statutory paid holiday under UK law. Covers full-time, part-time and irregular-hours workers, with pro-rating for starters and leavers."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKHolidayEntitlementCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Pick your <strong>working pattern</strong> at the top. Choose "Fixed days per week" if you work
+      a set number of days, or "Irregular hours" if your hours vary week to week.
+    </p>
+    <p>
+      For a fixed pattern, set the <strong>days worked per week</strong> using the plus and minus buttons.
+      A 5-day week earns the full 28-day statutory minimum.
+    </p>
+    <p>
+      Enter the <strong>months worked in the leave year</strong>. Use 12 for a full year, or fewer
+      months to pro-rate entitlement for a starter or a leaver who was only employed for part of the
+      year.
+    </p>
+    <p>
+      For irregular hours, enter the <strong>total hours worked</strong> in the period. The calculator
+      applies the 12.07% statutory accrual rate to show how much paid holiday you have built up.
+    </p>
+    <p>Results update instantly as you change any input, so there is no button to press.</p>
+  </ContentSection>
+
+  <ContentSection title="How It Is Calculated">
+    <p>
+      UK statutory holiday is set by the Working Time Regulations 1998. Every worker is entitled to
+      <strong>5.6 weeks</strong> of paid leave a year. That entitlement is then expressed in days based
+      on how many days you work.
+    </p>
+    <p>
+      For a <strong>fixed working pattern</strong>, the formula in words is: days worked per week
+      multiplied by 5.6, then capped at 28 days. So a 5-day week is 5 times 5.6, which is 28 days. A
+      4-day week is 4 times 5.6, which is 22.4 days. A 3-day week is 3 times 5.6, which is 16.8
+      days.
+    </p>
+    <p>
+      The <strong>28-day cap</strong> applies to anyone working 5 or more days a week. Working a 6-day
+      or 7-day week does not push the statutory minimum above 28 days, although an employer is free to
+      offer more generous contractual leave.
+    </p>
+    <p>
+      To <strong>pro-rate for part of a year</strong>, the full-year figure is multiplied by the
+      fraction of the leave year worked. The calculator uses months worked divided by 12. A
+      5-day-week starter who worked 6 months gets 28 times 6 over 12, which equals 14 days.
+    </p>
+    <p>
+      For <strong>irregular hours</strong>, paid leave accrues at <strong>12.07%</strong> of the hours
+      worked. That percentage is 5.6 weeks of holiday divided by the 46.4 working weeks in a year. So
+      1,000 hours worked accrues 120.7 hours of paid holiday. This method is intended for genuinely irregular-hours
+      and part-year workers.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure shows your <strong>entitlement for the months worked</strong>, in days for
+      a fixed pattern or in hours for irregular hours. This is the paid leave you are legally owed
+      for the period you entered.
+    </p>
+    <p>
+      The <strong>full-year entitlement</strong> shows what you would get for a complete leave year, and
+      the same amount is also shown <strong>in weeks</strong> so you can sense-check it against the 5.6-week
+      statutory baseline.
+    </p>
+    <p>
+      If you work 5 or more days a week, you will see a note that the <strong>28-day cap</strong> applies.
+      This is normal and means your statutory minimum is fixed at 28 days regardless of extra working
+      days.
+    </p>
+    <p>
+      These figures are the statutory minimum only. Your contract may give you more, and your
+      employer decides whether bank holidays are included within the 28 days or granted on top. This
+      calculator is an information tool and does not provide legal advice. Check your employment
+      contract or gov.uk for your specific situation.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

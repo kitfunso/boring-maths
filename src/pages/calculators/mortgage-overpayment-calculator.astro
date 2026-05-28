@@ -1,0 +1,237 @@
+---
+/**
+ * Mortgage Overpayment Calculator Page
+ *
+ * Shows how regular overpayments and one off lump sums cut the interest paid
+ * and shorten the term of a UK repayment mortgage.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { MortgageOverpaymentCalculator } from '../../components/calculators/MortgageOverpaymentCalculator';
+
+const title = 'Mortgage Overpayment Calculator | Boring Math';
+const description =
+  'Free mortgage overpayment calculator. See how much interest you save and how many years you cut off your UK mortgage by overpaying monthly or paying a lump sum.';
+const keywords =
+  'mortgage overpayment calculator, overpay mortgage calculator, mortgage overpayment savings, pay off mortgage early calculator, lump sum mortgage overpayment, mortgage interest saved calculator';
+const canonicalURL = '/calculators/mortgage-overpayment-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Mortgage Overpayment Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Estimate your monthly mortgage payment and total interest.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings and investments grow over time.',
+    href: '/calculators/compound-interest-calculator',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'UK Pension Calculator',
+    description: 'Weigh pension contributions against other uses of spare cash.',
+    href: '/calculators/uk-pension-calculator',
+    icon: 'chart' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the long run cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'home' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Rent Affordability Calculator',
+    description: 'Work out how much rent your income comfortably supports.',
+    href: '/calculators/rent-affordability-calculator',
+    icon: 'calculator' as const,
+    color: 'coral' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How does overpaying my mortgage save money?',
+    answer:
+      'Interest is charged on your outstanding balance. Every overpayment goes straight off the balance, so you are charged interest on a smaller amount for every remaining month. That compounds over the life of the loan, which is why even a modest monthly overpayment can save thousands in interest and clear the mortgage years early.',
+  },
+  {
+    question: 'Is it better to overpay monthly or pay a lump sum?',
+    answer:
+      'Both help. A lump sum paid early removes interest from the very next month onward, so an early lump sum has the largest single effect. Regular monthly overpayments are easier to budget and steadily chip away at the balance. Many people do both: a lump sum when they have spare cash, plus a fixed monthly overpayment. This calculator lets you model either or both together.',
+  },
+  {
+    question: 'Are there limits on how much I can overpay?',
+    answer:
+      'Most UK fixed and discounted rate mortgages allow you to overpay up to 10 percent of the outstanding balance each year without penalty. Beyond that you may face an early repayment charge, often 1 to 5 percent of the amount overpaid. Standard variable rate and tracker mortgages usually allow unlimited overpayments. Always check your own mortgage terms before overpaying.',
+  },
+  {
+    question: 'What is an early repayment charge?',
+    answer:
+      'An early repayment charge (ERC) is a fee some lenders apply if you repay more than your allowance during a fixed or discounted deal period. It is typically a percentage of the amount repaid and falls each year of the deal. If overpaying would trigger an ERC, weigh the charge against the interest you would save before going ahead.',
+  },
+  {
+    question: 'Should I overpay my mortgage or save the money instead?',
+    answer:
+      'It depends on rates and your goals. Overpaying gives a guaranteed return equal to your mortgage interest rate, tax free. If a savings account or pension pays more after tax, saving may win, and a pension also adds tax relief. Many people keep an emergency fund first, then overpay. This calculator only shows the interest saved by overpaying, not a comparison, and is not financial advice.',
+  },
+  {
+    question: 'Will overpaying reduce my monthly payment or my term?',
+    answer:
+      'You usually get to choose. Reducing the term keeps your monthly payment the same and clears the mortgage sooner, which saves the most interest. Reducing the payment lowers your monthly outgoing but keeps the same end date. This calculator assumes overpayments reduce the term, which is the option that maximises interest saved.',
+  },
+  {
+    question: 'Does this calculator account for interest rate changes?',
+    answer:
+      'No. It assumes a single fixed interest rate for the whole remaining term, so the figures are an estimate. If your rate changes when a fixed deal ends, rerun the calculator with the new rate and balance for an updated view. Treat the output as a planning guide rather than an exact forecast.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Mortgage Overpayment Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Mortgage Overpayment Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter your balance',
+        text: 'Input the outstanding balance on your mortgage today.',
+      },
+      {
+        name: 'Add your rate and term',
+        text: 'Set your interest rate and the number of years left to run.',
+      },
+      {
+        name: 'Set your overpayment',
+        text: 'Enter a monthly overpayment, a one off lump sum, or both.',
+      },
+      {
+        name: 'Review the savings',
+        text: 'See the interest saved, the years cut off, and your new payoff date.',
+      },
+    ]}
+    estimatedTime="PT2M"
+  />
+
+  <HeroSection
+    title="Mortgage Overpayment Calculator"
+    description="See how much interest you save and how many years you shave off your mortgage by overpaying each month or paying a lump sum."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <MortgageOverpaymentCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use">
+    <p>
+      This calculator compares your mortgage on its normal schedule against the same mortgage with
+      overpayments, so you can see the difference in pounds and in time. It works for any UK
+      repayment mortgage.
+    </p>
+    <p>
+      Start with your <strong>outstanding balance</strong>, the amount you still owe today rather
+      than the original loan. You can find this on your latest mortgage statement or in your
+      lender's app.
+    </p>
+    <p>
+      Enter your <strong>interest rate</strong> as the annual rate on your current deal, and your
+      <strong>remaining term</strong> as the number of years left to run. If you are three years into
+      a 25 year mortgage, the remaining term is 22 years.
+    </p>
+    <p>
+      Add a <strong>monthly overpayment</strong>, the extra amount you would pay on top of your
+      normal payment each month. Then, if you have a windfall such as a bonus or inheritance, add a <strong
+        >one off lump sum</strong
+      >. You can use one, the other, or both. The results update instantly as you type, so try a few
+      amounts to see what fits your budget.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      The calculator first works out your normal monthly payment using the standard repayment
+      mortgage formula. In words: the monthly payment equals the balance multiplied by the monthly
+      interest rate, divided by one minus the quantity one plus the monthly rate raised to the power
+      of minus the number of months. The monthly rate is the annual rate divided by twelve, and the
+      number of months is the term in years multiplied by twelve. When the rate is zero, the payment
+      is simply the balance divided by the number of months.
+    </p>
+    <p>
+      It then runs two month by month simulations. In each month, the interest charged equals the
+      outstanding balance multiplied by the monthly rate. The principal repaid that month is the
+      payment minus that interest. The balance falls by the principal, and the process repeats until
+      the balance reaches zero.
+    </p>
+    <p>
+      The first simulation uses your normal payment only, giving the baseline total interest and
+      payoff time. The second simulation adds your monthly overpayment to every payment and applies
+      any lump sum at the start, so the balance falls faster, the interest charged each month
+      shrinks, and the mortgage clears sooner.
+    </p>
+    <p>
+      The <strong>interest saved</strong> is the baseline total interest minus the total interest with
+      overpayments. The <strong>time saved</strong> is the difference in the number of months taken to
+      clear the balance, shown as years and months. The <strong>new payoff date</strong>
+      counts the shortened number of months forward from today.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is the <strong>interest saved</strong> over the life of the mortgage. This is
+      money that stays in your pocket rather than going to your lender. Because interest compounds, overpayments
+      made earlier save more than the same amount paid later, which is why starting sooner matters.
+    </p>
+    <p>
+      The <strong>normal monthly payment</strong> shows your contractual payment before any overpayment,
+      so you can sanity check it against your real mortgage statement. The
+      <strong>time saved</strong> tells you how much earlier you would be mortgage free, and the
+      <strong>new payoff date</strong> turns that into a calendar month and year.
+    </p>
+    <p>
+      The <strong>total interest comparison</strong> lays the two scenarios side by side: what you would
+      pay in interest without overpaying, what you would pay with overpaying, and the difference between
+      them. Use it to decide whether the overpayment amount is worth it for the saving it delivers.
+    </p>
+    <p>
+      Remember that these figures assume a single fixed rate for the whole remaining term and that
+      overpayments reduce the term rather than the monthly payment. Real mortgages change rate when
+      deals end, and most lenders cap penalty free overpayments at 10 percent of the balance per
+      year. Check your own mortgage terms, and treat the results as a planning estimate rather than
+      financial advice.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

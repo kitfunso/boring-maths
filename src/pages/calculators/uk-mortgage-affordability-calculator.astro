@@ -1,0 +1,219 @@
+---
+/**
+ * UK Mortgage Affordability Calculator Page
+ * How much could you borrow for a mortgage based on income.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKMortgageAffordabilityCalculator } from '../../components/calculators/UKMortgageAffordabilityCalculator';
+
+const title = 'UK Mortgage Affordability Calculator | Boring Math';
+const description =
+  'Free UK mortgage affordability calculator. See how much you could borrow on your income, your maximum property price, estimated monthly payment, and loan to value.';
+const keywords =
+  'mortgage affordability calculator, how much can i borrow, uk mortgage calculator, income multiple mortgage, how much mortgage can i afford, maximum mortgage uk';
+const canonicalURL = '/calculators/uk-mortgage-affordability-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const relatedCalculators = [
+  {
+    title: 'Mortgage Calculator',
+    description: 'Work out monthly repayments and total interest.',
+    href: '/calculators/mortgage-calculator',
+    icon: 'home',
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator',
+    icon: 'swap',
+    color: 'green' as const,
+  },
+  {
+    title: 'Rent Affordability Calculator',
+    description: 'See how much rent you can comfortably afford.',
+    href: '/calculators/rent-affordability-calculator',
+    icon: 'home',
+    color: 'amber' as const,
+  },
+  {
+    title: 'UK Tax Calculator',
+    description: 'Estimate your take-home pay after tax.',
+    href: '/calculators/uk-tax-calculator',
+    icon: 'calculator',
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much can I borrow for a mortgage in the UK?',
+    answer:
+      'Most UK lenders cap borrowing at around 4.5 times your annual income, though some offer 4 to 4.75 times and a few go higher for certain professions or higher earners. For a joint application, lenders usually combine both incomes. On a 4.5x multiple, a single income of 40,000 supports borrowing of about 180,000. This calculator multiplies your income by the multiple you set, then adds your deposit to estimate the maximum property price.',
+  },
+  {
+    question: 'What income multiple do mortgage lenders use?',
+    answer:
+      'The income multiple is how many times your annual income a lender will lend. 4.5 times income is the most common starting point in the UK. Lenders apply their own caps and also run an affordability assessment on top, so the multiple is a guide rather than a guarantee. You can change the multiple in this calculator to model different lenders.',
+  },
+  {
+    question: 'How is the monthly mortgage payment calculated?',
+    answer:
+      'The estimated monthly payment uses the standard repayment formula: payment equals loan times the monthly interest rate divided by one minus one plus the monthly rate to the power of minus the number of months. The monthly rate is the annual rate divided by 12. The number of months is the term in years times 12. If the rate is zero, the payment is simply the loan divided by the number of months.',
+  },
+  {
+    question: 'Does my deposit affect how much I can borrow?',
+    answer:
+      'Your deposit does not change the borrowing limit set by your income multiple, but it does increase the maximum property price you can reach because price equals the amount you borrow plus your deposit. A larger deposit also lowers your loan to value, which can unlock lower interest rates from lenders.',
+  },
+  {
+    question: 'What is loan to value (LTV) and why does it matter?',
+    answer:
+      'Loan to value is the size of your mortgage as a percentage of the property price. If you borrow 180,000 on a 200,000 home, your LTV is 90 percent. Lower LTVs are seen as lower risk, so lenders typically offer better interest rates at 90, 85, 75, and 60 percent. Increasing your deposit reduces your LTV.',
+  },
+  {
+    question: 'Will I definitely be offered the amount this calculator shows?',
+    answer:
+      'No. This is an estimate based on the income multiple you choose. Lenders also assess your monthly spending, existing debt, credit history, and an affordability stress test against higher interest rates. Your actual offer may be higher or lower. Treat the result as a starting point before speaking to a lender or broker.',
+  },
+  {
+    question: 'Can I include a joint applicant?',
+    answer:
+      'Yes. Enter a second income in the joint applicant field and the calculator adds both incomes together before applying the multiple. A joint application can significantly raise the amount you can borrow because the multiple applies to the combined income.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Mortgage Affordability Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Mortgage Affordability Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Mortgage Affordability Calculator"
+    description="Find out how much you could borrow for a mortgage, your maximum property price, estimated monthly payment, and loan to value."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKMortgageAffordabilityCalculator client:load />
+  </section>
+
+  <ContentSection title="How to use">
+    <p>
+      This calculator estimates how large a mortgage you could take on, based on your income and a
+      lender income multiple. Fill in the fields and the results update as you type. There is no
+      submit button.
+    </p>
+    <ol class="list-decimal list-inside space-y-3">
+      <li>
+        <strong>Enter your annual income.</strong> Use your gross salary before tax. This is the main
+        figure lenders use to size your mortgage.
+      </li>
+      <li>
+        <strong>Add a joint applicant income (optional).</strong> If you are buying with someone else,
+        add their income. The calculator combines both incomes before applying the multiple.
+      </li>
+      <li>
+        <strong>Enter your deposit.</strong> This is the cash you can put towards the purchase. It does
+        not change how much you can borrow, but it raises the maximum property price you can reach.
+      </li>
+      <li>
+        <strong>Set the income multiple.</strong> The default is 4.5, the most common UK starting point.
+        Adjust it to match a specific lender if you know their cap.
+      </li>
+      <li>
+        <strong>Enter the interest rate and term.</strong> These drive the estimated monthly payment.
+        A typical term is 25 years, though terms range from a few years up to 40.
+      </li>
+      <li>
+        <strong>Review your results.</strong> You will see the maximum you could borrow, your maximum
+        property price, the estimated monthly payment, and your loan to value.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      The calculator uses three clear steps. None of them rely on a hidden assumption, so you can
+      reproduce every figure by hand.
+    </p>
+    <p>
+      <strong>Step one: maximum borrowing.</strong> Your income and any joint income are added together,
+      then multiplied by the income multiple. In words: maximum borrowing equals total income times the
+      income multiple. With a combined income of 60,000 and a multiple of 4.5, the maximum borrowing is
+      270,000.
+    </p>
+    <p>
+      <strong>Step two: maximum property price.</strong> Your deposit is added to the maximum borrowing.
+      In words: maximum property price equals maximum borrowing plus deposit. So 270,000 of borrowing
+      with a 30,000 deposit gives a maximum property price of 300,000.
+    </p>
+    <p>
+      <strong>Step three: estimated monthly payment.</strong> The payment uses the standard repayment
+      mortgage formula. In words: the monthly payment equals the loan times the monthly interest rate,
+      divided by one minus one plus the monthly rate raised to the power of minus the number of months.
+      The monthly rate is the annual rate divided by 12, and the number of months is the term in years
+      times 12. When the interest rate is zero, the payment is simply the loan divided by the number of
+      months.
+    </p>
+    <p>
+      <strong>Loan to value.</strong> Finally, loan to value is the borrowing divided by the property
+      price, shown as a percentage. In words: loan to value equals maximum borrowing divided by maximum
+      property price, times 100. Borrowing 270,000 against a 300,000 price is a loan to value of 90 percent.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is the maximum you could borrow. It is driven entirely by your income and
+      the multiple, so the fastest way to increase it is to add a joint applicant or find a lender
+      with a higher multiple. Increasing your deposit does not change this number.
+    </p>
+    <p>
+      The maximum property price is usually the more useful figure when house hunting, because it
+      reflects both your borrowing and your deposit. If you want to afford a more expensive home, a
+      larger deposit moves this figure up pound for pound.
+    </p>
+    <p>
+      The estimated monthly payment shows what the full borrowing would cost each month at the rate
+      and term you entered. A longer term lowers the monthly payment but increases the total
+      interest paid over the life of the loan. A higher interest rate raises the payment. It is
+      worth checking that the payment is comfortable against your monthly budget, not just that the
+      borrowing is available.
+    </p>
+    <p>
+      The loan to value tells you how much of the property is funded by the mortgage. Lower loan to
+      value bands, such as 90, 85, 75, and 60 percent, typically attract better interest rates. If
+      your loan to value is just above one of these thresholds, a slightly larger deposit could move
+      you into a cheaper rate band.
+    </p>
+    <p>
+      Remember that this is an estimate. Real lenders run an affordability assessment that looks at
+      your spending, existing credit commitments, and a stress test against higher rates. Use the
+      result as a realistic starting point, then confirm with a lender or a mortgage broker.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
