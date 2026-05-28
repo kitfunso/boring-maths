@@ -56,6 +56,15 @@ describe('FranceSalaryCalculator', () => {
     expect(result.effectiveRate).toBe(0);
   });
 
+  it('returns finite 0 outputs for NaN / empty input', () => {
+    const result = calculateFranceSalary({ grossAnnualSalary: NaN, status: 'non-cadre' });
+    expect(Number.isFinite(result.netAnnual)).toBe(true);
+    expect(result.totalContributions).toBe(0);
+    expect(result.netAnnual).toBe(0);
+    expect(result.netMonthly).toBe(0);
+    expect(result.effectiveRate).toBe(0);
+  });
+
   it('exposes a 2026 PMSS of 47100 and a sensible default', () => {
     expect(PMSS_ANNUAL).toBe(47100);
     const defaults = getDefaultInputs();

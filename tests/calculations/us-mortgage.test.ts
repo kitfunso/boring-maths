@@ -115,6 +115,31 @@ describe('calculateUSMortgage', () => {
     expect(r.totalMonthly).toBe(125);
   });
 
+  it('non-finite inputs are treated as zero and yield finite outputs', () => {
+    // A cleared field can parse to NaN; an extreme value can overflow to Infinity.
+    // Every such input should behave as 0, leaving all outputs finite.
+    const inputs: USMortgageInputs = {
+      homePrice: NaN,
+      downPayment: Infinity,
+      interestRate: NaN,
+      termYears: NaN,
+      propertyTaxRate: NaN,
+      annualInsurance: NaN,
+      monthlyHOA: NaN,
+      pmiRate: NaN,
+    };
+    const r = calculateUSMortgage(inputs);
+    expect(r.loanAmount).toBe(0);
+    expect(r.principalAndInterest).toBe(0);
+    expect(r.propertyTaxMonthly).toBe(0);
+    expect(r.insuranceMonthly).toBe(0);
+    expect(r.hoaMonthly).toBe(0);
+    expect(r.pmiMonthly).toBe(0);
+    expect(r.totalMonthly).toBe(0);
+    expect(r.ltv).toBe(0);
+    expect(Number.isFinite(r.totalMonthly)).toBe(true);
+  });
+
   it('getDefaultInputs returns a usable, fully populated input set', () => {
     const d = getDefaultInputs();
     const r = calculateUSMortgage(d);

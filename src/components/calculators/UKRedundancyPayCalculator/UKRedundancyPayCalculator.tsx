@@ -4,6 +4,7 @@ import {
   getDefaultInputs,
   STATUTORY_WEEKLY_PAY_CAP,
   MAX_YEARS_COUNTED,
+  MAX_STATUTORY_TOTAL,
   MIN_YEARS_FOR_ELIGIBILITY,
   type UKRedundancyPayInputs,
 } from './calculations';
@@ -212,7 +213,9 @@ export default function UKRedundancyPayCalculator() {
                 </div>
                 <div className="flex justify-between">
                   <span>Maximum statutory total</span>
-                  <span className="text-[var(--color-cream)]">£21,570</span>
+                  <span className="text-[var(--color-cream)]">
+                    {formatCurrency(MAX_STATUTORY_TOTAL)}
+                  </span>
                 </div>
               </div>
             </div>

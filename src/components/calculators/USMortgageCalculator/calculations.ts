@@ -117,14 +117,20 @@ export function calculatePrincipalAndInterest(
  * stays sensible if a field is cleared.
  */
 export function calculateUSMortgage(inputs: USMortgageInputs): USMortgageResult {
-  const homePrice = Math.max(0, inputs.homePrice);
-  const downPayment = Math.max(0, Math.min(inputs.downPayment, homePrice));
-  const interestRate = Math.max(0, inputs.interestRate);
-  const termYears = Math.max(0, inputs.termYears);
-  const propertyTaxRate = Math.max(0, inputs.propertyTaxRate);
-  const annualInsurance = Math.max(0, inputs.annualInsurance);
-  const monthlyHOA = Math.max(0, inputs.monthlyHOA);
-  const pmiRate = Math.max(0, inputs.pmiRate);
+  const homePrice = Number.isFinite(inputs.homePrice) ? Math.max(0, inputs.homePrice) : 0;
+  const downPayment = Number.isFinite(inputs.downPayment)
+    ? Math.max(0, Math.min(inputs.downPayment, homePrice))
+    : 0;
+  const interestRate = Number.isFinite(inputs.interestRate) ? Math.max(0, inputs.interestRate) : 0;
+  const termYears = Number.isFinite(inputs.termYears) ? Math.max(0, inputs.termYears) : 0;
+  const propertyTaxRate = Number.isFinite(inputs.propertyTaxRate)
+    ? Math.max(0, inputs.propertyTaxRate)
+    : 0;
+  const annualInsurance = Number.isFinite(inputs.annualInsurance)
+    ? Math.max(0, inputs.annualInsurance)
+    : 0;
+  const monthlyHOA = Number.isFinite(inputs.monthlyHOA) ? Math.max(0, inputs.monthlyHOA) : 0;
+  const pmiRate = Number.isFinite(inputs.pmiRate) ? Math.max(0, inputs.pmiRate) : 0;
 
   const loanAmount = Math.max(0, homePrice - downPayment);
 

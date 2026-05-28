@@ -76,12 +76,14 @@ export function getDefaultInputs(): USAutoLoanInputs {
  *   r  >  0  ->  principal * r / (1 - (1 + r)^-n)
  */
 export function calculateAutoLoan(inputs: USAutoLoanInputs): USAutoLoanResult {
-  const vehiclePrice = Math.max(0, inputs.vehiclePrice);
-  const downPayment = Math.max(0, inputs.downPayment);
-  const tradeInValue = Math.max(0, inputs.tradeInValue);
-  const salesTaxRate = Math.max(0, inputs.salesTaxRate);
-  const apr = Math.max(0, inputs.apr);
-  const termMonths = Math.max(0, Math.round(inputs.termMonths));
+  const vehiclePrice = Number.isFinite(inputs.vehiclePrice) ? Math.max(0, inputs.vehiclePrice) : 0;
+  const downPayment = Number.isFinite(inputs.downPayment) ? Math.max(0, inputs.downPayment) : 0;
+  const tradeInValue = Number.isFinite(inputs.tradeInValue) ? Math.max(0, inputs.tradeInValue) : 0;
+  const salesTaxRate = Number.isFinite(inputs.salesTaxRate) ? Math.max(0, inputs.salesTaxRate) : 0;
+  const apr = Number.isFinite(inputs.apr) ? Math.max(0, inputs.apr) : 0;
+  const termMonths = Number.isFinite(inputs.termMonths)
+    ? Math.max(0, Math.round(inputs.termMonths))
+    : 0;
 
   const salesTaxAmount = (vehiclePrice * salesTaxRate) / 100;
 

@@ -77,9 +77,11 @@ function countWeeks(age: number, countedYears: number): number {
 }
 
 export function calculateRedundancyPay(inputs: UKRedundancyPayInputs): UKRedundancyPayResult {
-  const age = Math.max(0, Math.floor(inputs.age));
-  const yearsOfService = Math.max(0, Math.floor(inputs.yearsOfService));
-  const weeklyPay = Math.max(0, inputs.weeklyPay);
+  const age = Number.isFinite(inputs.age) ? Math.max(0, Math.floor(inputs.age)) : 0;
+  const yearsOfService = Number.isFinite(inputs.yearsOfService)
+    ? Math.max(0, Math.floor(inputs.yearsOfService))
+    : 0;
+  const weeklyPay = Number.isFinite(inputs.weeklyPay) ? Math.max(0, inputs.weeklyPay) : 0;
 
   const isEligible = yearsOfService >= MIN_YEARS_FOR_ELIGIBILITY;
 

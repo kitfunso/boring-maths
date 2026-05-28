@@ -93,6 +93,24 @@ describe('calculateRothIRA', () => {
     expect(result.totalGrowth).toBe(0);
   });
 
+  it('floors a negative starting balance to zero so the breakdown reconciles', () => {
+    // A typed negative balance is floored to 0 in the maths; the breakdown rows
+    // (starting balance + contributions + growth) must still reconcile to futureValue.
+    const result = calculateRothIRA({
+      currentAge: 30,
+      retirementAge: 31,
+      currentBalance: -5000,
+      annualContribution: 1000,
+      expectedReturn: 0,
+    });
+    expect(Number.isFinite(result.futureValue)).toBe(true);
+    expect(result.futureValue).toBe(1000);
+    expect(result.totalContributed).toBe(1000);
+    expect(result.totalGrowth).toBe(0);
+    // flooredStartingBalance + totalContributed + totalGrowth === futureValue.
+    expect(0 + result.totalContributed + result.totalGrowth).toBe(result.futureValue);
+  });
+
   it('getContributionLimit switches at age 50; defaults are within the limit', () => {
     expect(getContributionLimit(49)).toBe(7500);
     expect(getContributionLimit(50)).toBe(8600);

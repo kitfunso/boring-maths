@@ -10,6 +10,9 @@ import {
   calculateRothIRA,
   getDefaultInputs,
   CATCH_UP_AGE,
+  CONTRIBUTION_LIMIT_UNDER_50,
+  CATCH_UP_CONTRIBUTION,
+  CONTRIBUTION_LIMIT_50_PLUS,
   type RothIRAInputs,
 } from './calculations';
 
@@ -166,9 +169,10 @@ export default function RothIRACalculator() {
             <div class="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
               <p class="text-sm text-amber-400">
                 Your contribution is above the {formatCurrency(result.contributionLimit)} IRS limit
-                for tax year 2026 at your age. The base limit is {formatCurrency(7500)}; savers age{' '}
-                {CATCH_UP_AGE} and over can add a {formatCurrency(1100)} catch-up for a{' '}
-                {formatCurrency(8600)} total.
+                for tax year 2026 at your age. The base limit is{' '}
+                {formatCurrency(CONTRIBUTION_LIMIT_UNDER_50)}; savers age {CATCH_UP_AGE} and over
+                can add a {formatCurrency(CATCH_UP_CONTRIBUTION)} catch-up for a{' '}
+                {formatCurrency(CONTRIBUTION_LIMIT_50_PLUS)} total.
               </p>
             </div>
           )}
@@ -220,7 +224,7 @@ export default function RothIRACalculator() {
               <div class="flex justify-between">
                 <span class="text-[var(--color-subtle)]">Starting balance</span>
                 <span class="text-[var(--color-cream)] tabular-nums">
-                  {formatCurrency(inputs.currentBalance)}
+                  {formatCurrency(Math.max(0, inputs.currentBalance))}
                 </span>
               </div>
               <div class="flex justify-between">

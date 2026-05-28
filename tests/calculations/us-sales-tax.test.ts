@@ -52,6 +52,14 @@ describe('calculateSalesTax', () => {
     expect(result.effectiveRate).toBe(0);
   });
 
+  it('edge case: a NaN amount returns finite zero outputs', () => {
+    const result = calculateSalesTax({ amount: NaN, salesTaxRate: 8.25, mode: 'add' });
+    expect(result.netAmount).toBe(0);
+    expect(result.taxAmount).toBe(0);
+    expect(result.totalAmount).toBe(0);
+    expect(result.effectiveRate).toBe(0);
+  });
+
   it('provides sensible defaults', () => {
     const defaults = getDefaultInputs();
     expect(defaults.amount).toBe(100);

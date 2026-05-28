@@ -74,12 +74,14 @@ export function calculateMonthlyPayment(
 export function calculateMortgageAffordability(
   inputs: MortgageAffordabilityInputs
 ): MortgageAffordabilityResult {
-  const annualIncome = Math.max(0, inputs.annualIncome);
-  const jointIncome = Math.max(0, inputs.jointIncome);
-  const deposit = Math.max(0, inputs.deposit);
-  const incomeMultiple = Math.max(0, inputs.incomeMultiple);
-  const interestRate = Math.max(0, inputs.interestRate);
-  const termYears = Math.max(0, inputs.termYears);
+  const annualIncome = Number.isFinite(inputs.annualIncome) ? Math.max(0, inputs.annualIncome) : 0;
+  const jointIncome = Number.isFinite(inputs.jointIncome) ? Math.max(0, inputs.jointIncome) : 0;
+  const deposit = Number.isFinite(inputs.deposit) ? Math.max(0, inputs.deposit) : 0;
+  const incomeMultiple = Number.isFinite(inputs.incomeMultiple)
+    ? Math.max(0, inputs.incomeMultiple)
+    : 0;
+  const interestRate = Number.isFinite(inputs.interestRate) ? Math.max(0, inputs.interestRate) : 0;
+  const termYears = Number.isFinite(inputs.termYears) ? Math.max(0, inputs.termYears) : 0;
 
   const totalIncome = annualIncome + jointIncome;
   const maxBorrow = totalIncome * incomeMultiple;

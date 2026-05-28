@@ -179,7 +179,7 @@ employeeContrib(gross, isCadre) =
 // Assurance chomage employee share = 0% (do NOT deduct). Assurance maladie employee = 0% (general regime).
 net = gross - employeeContrib(gross, isCadre)
 ```
-- Input: status 'non-cadre' | 'cadre' (default non-cadre). For a non-cadre below the ceiling this yields ~21% deductions; a cadre above the ceiling rises toward ~25% (Agirc-Arrco T2). FAQ must state net = net avant impot sur le revenu.
+- Input: status 'non-cadre' | 'cadre' (default non-cadre). This component model yields ~21% employee deductions near the ceiling; the effective rate edges DOWN for very high earners (because the CSG abattement caps at 4 PMSS and the plafonnee components shrink as a share of gross), so it does NOT rise toward 25%. Do not claim a "rises toward 25%" trend. FAQ must state net = net avant impot sur le revenu.
 - Source: legisocial/URSSAF 2026 (vieillesse 6.90%+0.40%; CSG 6.80%+2.40% on 98.25%; CRDS 0.50%); Agirc-Arrco 2026 (T1 3.15% / T2 8.64% salarial; CEG 0.86%/1.08%; CET 0.14% salarial; APEC 0.024% salarial); urssaf.fr (employee chomage abolished 2019, employer-only 4.05%; PMSS 3925/mo).
 
 ## CENTRAL MERGE (orchestrator, after build workflow)

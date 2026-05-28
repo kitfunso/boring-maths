@@ -96,13 +96,17 @@ export function loanFromPayment(
 export function calculateHomeAffordability(
   inputs: HomeAffordabilityInputs
 ): HomeAffordabilityResult {
-  const annualIncome = Math.max(0, inputs.annualIncome);
-  const monthlyDebts = Math.max(0, inputs.monthlyDebts);
-  const downPayment = Math.max(0, inputs.downPayment);
-  const interestRate = Math.max(0, inputs.interestRate);
-  const termYears = Math.max(0, inputs.termYears);
-  const propertyTaxRate = Math.max(0, inputs.propertyTaxRate);
-  const insuranceRate = Math.max(0, inputs.insuranceRate);
+  const annualIncome = Number.isFinite(inputs.annualIncome) ? Math.max(0, inputs.annualIncome) : 0;
+  const monthlyDebts = Number.isFinite(inputs.monthlyDebts) ? Math.max(0, inputs.monthlyDebts) : 0;
+  const downPayment = Number.isFinite(inputs.downPayment) ? Math.max(0, inputs.downPayment) : 0;
+  const interestRate = Number.isFinite(inputs.interestRate) ? Math.max(0, inputs.interestRate) : 0;
+  const termYears = Number.isFinite(inputs.termYears) ? Math.max(0, inputs.termYears) : 0;
+  const propertyTaxRate = Number.isFinite(inputs.propertyTaxRate)
+    ? Math.max(0, inputs.propertyTaxRate)
+    : 0;
+  const insuranceRate = Number.isFinite(inputs.insuranceRate)
+    ? Math.max(0, inputs.insuranceRate)
+    : 0;
 
   const grossMonthly = annualIncome / MONTHS_PER_YEAR;
   const frontEndLimit = FRONT_END_RATIO * grossMonthly;

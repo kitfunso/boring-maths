@@ -90,6 +90,25 @@ describe('calculateMortgageOverpayment', () => {
     expect(r.newPayoffDate).toBe('2031-01-01');
   });
 
+  it('edge case: non finite and zero term inputs yield finite zeroed outputs', () => {
+    // A blank field reaches the calculator as NaN, and a zero term has no
+    // schedule. Both must produce finite zeros and an empty payoff date rather
+    // than NaN or a ~100 year payoff date from the simulation cap.
+    const inputs: MortgageOverpaymentInputs = {
+      balance: NaN,
+      interestRate: Infinity,
+      termYears: 0,
+      monthlyOverpayment: NaN,
+      lumpSum: NaN,
+    };
+    const r = calculateMortgageOverpayment(inputs, REF);
+    expect(r.monthlyPayment).toBe(0);
+    expect(r.newMonths).toBe(0);
+    expect(r.originalMonths).toBe(0);
+    expect(r.interestSaved).toBe(0);
+    expect(r.newPayoffDate).toBe('');
+  });
+
   it('edge case: no overpayment leaves the term and interest unchanged', () => {
     const inputs: MortgageOverpaymentInputs = {
       balance: 150000,

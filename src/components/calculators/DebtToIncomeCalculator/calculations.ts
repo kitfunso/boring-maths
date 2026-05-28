@@ -41,7 +41,7 @@ export interface DebtToIncomeInputs {
 }
 
 // Plain-English rating buckets for the back-end ratio.
-export type DTIRating = 'ideal' | 'acceptable' | 'caution' | 'high';
+export type DTIRating = 'ideal' | 'acceptable' | 'high';
 
 export interface DebtToIncomeResult {
   // Front-end ratio as a percentage, for example 25 means 25 percent.

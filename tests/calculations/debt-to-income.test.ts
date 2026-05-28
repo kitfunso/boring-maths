@@ -78,4 +78,18 @@ describe('calculateDebtToIncome', () => {
     expect(result.backDTI).toBe(0);
     expect(result.totalMonthlyDebt).toBe(0);
   });
+
+  it('returns finite zero ratios when income is NaN (cleared field)', () => {
+    // An emptied number field passes NaN. The ratios must stay finite 0,
+    // never NaN, so the displayed percentages remain sensible.
+    const result = calculateDebtToIncome({
+      grossMonthlyIncome: NaN,
+      housingPayment: 1500,
+      otherMonthlyDebts: 500,
+    });
+    expect(Number.isFinite(result.frontDTI)).toBe(true);
+    expect(Number.isFinite(result.backDTI)).toBe(true);
+    expect(result.frontDTI).toBe(0);
+    expect(result.backDTI).toBe(0);
+  });
 });

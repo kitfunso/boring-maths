@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { FranceSalaryCalculator } from '../../components/calculators/FranceSalaryCalculator';
 
-const title = 'France Net Salary Calculator 2026: Brut to Net Pay | Boring Math';
+const title = 'France Salary Calculator 2026: Brut to Net | Boring Math';
 const description =
   'France net salary calculator for 2026. Convert gross (brut) to net (avant impot) pay, see social contributions for cadre and non-cadre, and your monthly take-home estimate.';
 const keywords =
@@ -89,7 +89,7 @@ const faqs = [
   {
     question: 'Roughly what percentage of gross do contributions take?',
     answer:
-      'For a non-cadre earning below the ceiling, employee contributions are around 21% of gross, so net before income tax is about 79% of gross. As salary rises above the ceiling, the higher Agirc-Arrco tranche 2 rate pushes the effective rate up toward 25% for high earners. Your exact figure depends on where your salary sits relative to the PMSS.',
+      'For a non-cadre earning below the ceiling, employee contributions are around 21% of gross, so net before income tax is about 79% of gross. The effective rate peaks at roughly 21% just above the ceiling, then edges down for higher earners because the CSG and CRDS allowance caps at four times the PMSS, so the rate trends toward about 20% and lower for very high salaries. Your exact figure depends on where your salary sits relative to the PMSS.',
   },
   {
     question: 'How accurate is this estimate?',
@@ -201,10 +201,11 @@ const schemaBreadcrumbs = [
     </p>
     <p class="mt-4">
       For a non-cadre earning below the ceiling, expect contributions of roughly 21% of gross,
-      leaving about 79% as net before income tax. As your salary climbs above the ceiling, the
-      higher Agirc-Arrco tranche 2 rate of 8.64% starts to bite, and the effective rate drifts up
-      toward 25% for high earners. This is why two people with very different salaries can see
-      noticeably different take-home percentages.
+      leaving about 79% as net before income tax. The effective rate is highest, around 21%, just
+      above the ceiling. For higher earners it edges down rather than up, because the CSG and CRDS
+      allowance caps at four times the PMSS, so the effective rate trends toward about 20% and lower
+      for very high salaries. This is why two people with very different salaries can see noticeably
+      different take-home percentages.
     </p>
     <p class="mt-4">
       Remember the important caveat shown on the result card: this is net before income tax. France

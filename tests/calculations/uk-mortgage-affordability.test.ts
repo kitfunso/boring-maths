@@ -66,4 +66,21 @@ describe('calculateMortgageAffordability', () => {
     // 200000 at 4% over 25 years = 1055.67 per month (rounded to 2dp).
     expect(calculateMonthlyPayment(200000, 4, 25)).toBeCloseTo(1055.67, 2);
   });
+
+  it('treats NaN and Infinity inputs as zero and stays finite', () => {
+    // Cleared or malformed fields parse to NaN/Infinity; outputs must be finite 0.
+    const r = calculateMortgageAffordability({
+      annualIncome: NaN,
+      jointIncome: Infinity,
+      deposit: NaN,
+      incomeMultiple: NaN,
+      interestRate: Infinity,
+      termYears: NaN,
+    });
+    expect(r.totalIncome).toBe(0);
+    expect(r.maxBorrow).toBe(0);
+    expect(r.maxPropertyPrice).toBe(0);
+    expect(r.monthlyPayment).toBe(0);
+    expect(r.ltv).toBe(0);
+  });
 });

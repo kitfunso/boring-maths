@@ -87,6 +87,26 @@ describe('HomeAffordabilityCalculator', () => {
       expect(result.bindingRule).toBe('back');
     });
 
+    it('treats NaN and Infinity inputs as zero, yielding finite zero outputs', () => {
+      // a cleared field reads as NaN; an overflow reads as Infinity. Both floor to 0.
+      const result = calculateHomeAffordability({
+        annualIncome: NaN,
+        monthlyDebts: NaN,
+        downPayment: Infinity,
+        interestRate: NaN,
+        termYears: NaN,
+        propertyTaxRate: NaN,
+        insuranceRate: NaN,
+      });
+
+      expect(Number.isFinite(result.maxHomePrice)).toBe(true);
+      expect(Number.isFinite(result.totalMonthlyPayment)).toBe(true);
+      expect(result.maxHousingPayment).toBe(0);
+      expect(result.maxHomePrice).toBe(0);
+      expect(result.maxLoan).toBe(0);
+      expect(result.totalMonthlyPayment).toBe(0);
+    });
+
     it('returns zeros for zero income (edge case)', () => {
       const result = calculateHomeAffordability({
         annualIncome: 0,

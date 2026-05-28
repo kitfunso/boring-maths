@@ -63,6 +63,24 @@ describe('USAutoLoanCalculator', () => {
       expect(result.totalInterest).toBe(0);
     });
 
+    it('edge case: non-finite inputs (NaN/Infinity) yield finite zero outputs', () => {
+      const result = calculateAutoLoan({
+        vehiclePrice: NaN,
+        downPayment: Infinity,
+        tradeInValue: NaN,
+        salesTaxRate: NaN,
+        apr: Infinity,
+        termMonths: NaN,
+      });
+
+      expect(result.principal).toBe(0);
+      expect(result.salesTaxAmount).toBe(0);
+      expect(result.monthlyPayment).toBe(0);
+      expect(result.totalOfPayments).toBe(0);
+      expect(result.totalInterest).toBe(0);
+      expect(result.totalCost).toBe(0);
+    });
+
     it('edge case: negative inputs are floored at zero', () => {
       const result = calculateAutoLoan({
         vehiclePrice: -100,

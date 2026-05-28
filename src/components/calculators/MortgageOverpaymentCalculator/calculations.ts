@@ -173,11 +173,33 @@ export function calculateMortgageOverpayment(
   inputs: MortgageOverpaymentInputs,
   today: Date = new Date()
 ): MortgageOverpaymentResult {
-  const balance = Math.max(0, inputs.balance);
-  const interestRate = Math.max(0, inputs.interestRate);
-  const termYears = Math.max(0, inputs.termYears);
-  const monthlyOverpayment = Math.max(0, inputs.monthlyOverpayment);
-  const lumpSum = Math.max(0, inputs.lumpSum);
+  // Floor each input at zero, treating a non finite value (NaN or Infinity from
+  // a blank or malformed field) as zero so the result stays finite.
+  const balance = Number.isFinite(inputs.balance) ? Math.max(0, inputs.balance) : 0;
+  const interestRate = Number.isFinite(inputs.interestRate) ? Math.max(0, inputs.interestRate) : 0;
+  const termYears = Number.isFinite(inputs.termYears) ? Math.max(0, inputs.termYears) : 0;
+  const monthlyOverpayment = Number.isFinite(inputs.monthlyOverpayment)
+    ? Math.max(0, inputs.monthlyOverpayment)
+    : 0;
+  const lumpSum = Number.isFinite(inputs.lumpSum) ? Math.max(0, inputs.lumpSum) : 0;
+
+  // With no remaining term there is no schedule to amortise. Return a zeroed
+  // result rather than letting the simulation hit the MAX_MONTHS cap, which
+  // would otherwise surface a payoff date roughly a century away.
+  if (termYears <= 0) {
+    return {
+      monthlyPayment: 0,
+      originalTotalInterest: 0,
+      originalMonths: 0,
+      newTotalInterest: 0,
+      newMonths: 0,
+      interestSaved: 0,
+      monthsSaved: 0,
+      yearsSaved: 0,
+      remainingMonthsSaved: 0,
+      newPayoffDate: '',
+    };
+  }
 
   const monthlyRate = interestRate / 100 / MONTHS_PER_YEAR;
   const monthlyPayment = calculateMonthlyPayment(balance, interestRate, termYears);

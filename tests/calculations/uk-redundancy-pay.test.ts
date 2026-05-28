@@ -50,4 +50,15 @@ describe('calculateRedundancyPay', () => {
     expect(result.isCapApplied).toBe(false);
     expect(result.statutoryPay).toBe(450);
   });
+
+  it('treats non-finite inputs as zero (empty fields -> finite zero outputs)', () => {
+    // Cleared inputs surface as NaN. A NaN age must not silently award 1.5 weeks/year.
+    const result = calculateRedundancyPay({ age: NaN, yearsOfService: NaN, weeklyPay: NaN });
+
+    expect(result.isEligible).toBe(false);
+    expect(result.countedYears).toBe(0);
+    expect(result.totalWeeks).toBe(0);
+    expect(result.statutoryPay).toBe(0);
+    expect(result.uncappedPay).toBe(0);
+  });
 });
