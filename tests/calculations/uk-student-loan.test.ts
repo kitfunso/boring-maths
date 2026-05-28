@@ -13,13 +13,16 @@ describe('UkStudentLoanCalculator', () => {
 
       const result = calculateStudentLoan(inputs);
 
-      expect(result.monthlyRepayment).toBeCloseTo(57.79, 2);
-      expect(result.annualRepayment).toBeCloseTo(693.45, 2);
+      // Plan 2 threshold is GBP 29,385 from April 2026 (gov.uk); repayment = 9% of income above it.
+      // Interest is the income-contingent Plan 2 sliding rate (RPI to RPI+3%), not the flat max rate.
+      expect(result.monthlyRepayment).toBeCloseTo(42.11, 2);
+      expect(result.annualRepayment).toBeCloseTo(505.35, 2);
       expect(result.yearsToRepay).toBe(30);
-      expect(result.totalRepaid).toBeCloseTo(76166.06, 2);
-      expect(result.totalInterest).toBeCloseTo(305010.22, 2);
-      expect(result.writeOffDate).toBe(2056);
-      expect(result.amountWrittenOff).toBeCloseTo(278844.16, 2);
+      expect(result.totalRepaid).toBeCloseTo(70523.06, 2);
+      expect(result.totalInterest).toBeCloseTo(136273.85, 2);
+      // write-off is currentYear + 30 (kept dynamic so the test does not rot each year).
+      expect(result.writeOffDate).toBe(new Date().getFullYear() + 30);
+      expect(result.amountWrittenOff).toBeCloseTo(115750.79, 2);
       expect(result.willRepayInFull).toBe(false);
     });
 
