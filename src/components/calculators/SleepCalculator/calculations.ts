@@ -35,9 +35,10 @@ function formatDuration(minutes: number): string {
 }
 
 function parseTime(timeStr: string): Date {
+  const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
   const [hours, minutes] = timeStr.split(':').map(Number);
   const date = new Date();
-  date.setHours(hours, minutes, 0, 0);
+  date.setHours(safe(hours), safe(minutes), 0, 0);
   return date;
 }
 

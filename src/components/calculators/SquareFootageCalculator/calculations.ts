@@ -13,6 +13,14 @@ const SQ_FT_PER_SQ_YD = 9;
 const FT_PER_METRE = 1 / 0.3048;
 
 /**
+ * Floor a numeric input so a cleared/invalid (non-finite) value becomes 0.
+ * Valid non-negative values pass through unchanged.
+ */
+function safe(value: number): number {
+  return Number.isFinite(value) ? Math.max(0, value) : 0;
+}
+
+/**
  * Round to specified decimal places
  */
 function round(value: number, decimals: number = 2): number {
@@ -25,10 +33,11 @@ function round(value: number, decimals: number = 2): number {
  * convert metres to feet (metric)
  */
 function toFeet(main: number, inches: number, isMetric: boolean): number {
+  const safeMain = safe(main);
   if (isMetric) {
-    return main * FT_PER_METRE;
+    return safeMain * FT_PER_METRE;
   }
-  return main + inches / 12;
+  return safeMain + safe(inches) / 12;
 }
 
 /**
@@ -87,7 +96,7 @@ export function calculateSquareFootage(
 
   // Cost calculation: price is per sq ft (imperial) or per sq m (metric)
   const costArea = inputs.unitSystem === 'metric' ? sqM : sqFt;
-  const totalCost = costArea * inputs.pricePerUnit;
+  const totalCost = costArea * safe(inputs.pricePerUnit);
 
   return {
     currency: inputs.currency,
@@ -96,7 +105,7 @@ export function calculateSquareFootage(
     sqYd: round(sqYd),
     totalCost: round(totalCost),
     costUnitSystem: inputs.unitSystem,
-    pricePerUnit: inputs.pricePerUnit,
+    pricePerUnit: safe(inputs.pricePerUnit),
   };
 }
 

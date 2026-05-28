@@ -8,6 +8,10 @@
 
 import { BODY_FAT_CATEGORIES, type BodyFatInputs, type BodyFatResult } from './types';
 
+function safe(value: number): number {
+  return Number.isFinite(value) ? Math.max(0, value) : 0;
+}
+
 function toCm(inches: number): number {
   return inches * 2.54;
 }
@@ -20,12 +24,13 @@ function round(value: number, decimals: number = 1): number {
 export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
   const { unitSystem, sex } = inputs;
 
-  // Convert everything to cm
-  const height =
-    unitSystem === 'metric' ? inputs.heightCm : toCm(inputs.heightFeet * 12 + inputs.heightInches);
-  const waist = unitSystem === 'metric' ? inputs.waistCm : toCm(inputs.waistInches);
-  const neck = unitSystem === 'metric' ? inputs.neckCm : toCm(inputs.neckInches);
-  const hip = unitSystem === 'metric' ? inputs.hipCm : toCm(inputs.hipInches);
+  // Convert everything to cm (safe() floors non-finite inputs to 0 so a cleared/partial field never yields NaN)
+  const height = safe(
+    unitSystem === 'metric' ? inputs.heightCm : toCm(inputs.heightFeet * 12 + inputs.heightInches)
+  );
+  const waist = safe(unitSystem === 'metric' ? inputs.waistCm : toCm(inputs.waistInches));
+  const neck = safe(unitSystem === 'metric' ? inputs.neckCm : toCm(inputs.neckInches));
+  const hip = safe(unitSystem === 'metric' ? inputs.hipCm : toCm(inputs.hipInches));
 
   let bodyFatPct: number;
 
@@ -35,7 +40,9 @@ export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
     bodyFatPct = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
   }
 
-  bodyFatPct = Math.max(2, Math.min(bodyFatPct, 60));
+  // safe() guards the case where a non-positive log argument (e.g. neck > waist on a cleared field)
+  // yields a non-finite value that the min/max clamp alone would pass through as NaN.
+  bodyFatPct = Math.max(2, Math.min(safe(bodyFatPct), 60));
 
   // Determine category
   let category = 'Average';

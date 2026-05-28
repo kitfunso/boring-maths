@@ -10,6 +10,13 @@ import type { HeartRateZoneInputs, HeartRateZoneResult, HeartRateZone } from './
 import { ZONE_DEFINITIONS } from './types';
 
 /**
+ * Floor a numeric input so a non-finite value (NaN from a cleared or
+ * partial field like "-" / "1e" / "abc") becomes 0. Valid numbers pass
+ * through unchanged.
+ */
+const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
+
+/**
  * Calculate max heart rate using the standard 220-age formula,
  * or use the user-provided value if custom is enabled.
  */
@@ -70,8 +77,15 @@ function buildZones(inputs: HeartRateZoneInputs, maxHR: number): readonly HeartR
  * Main calculation entry point.
  */
 export function calculateHeartRateZones(inputs: HeartRateZoneInputs): HeartRateZoneResult {
-  const maxHR = resolveMaxHR(inputs);
-  const zones = buildZones(inputs, maxHR);
+  const safeInputs: HeartRateZoneInputs = {
+    ...inputs,
+    age: safe(inputs.age),
+    restingHeartRate: safe(inputs.restingHeartRate),
+    maxHeartRate: safe(inputs.maxHeartRate),
+  };
+
+  const maxHR = resolveMaxHR(safeInputs);
+  const zones = buildZones(safeInputs, maxHR);
 
   return {
     maxHR,

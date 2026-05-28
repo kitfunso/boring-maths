@@ -10,6 +10,14 @@ import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
 /**
+ * Floor a numeric input to a non-negative finite value.
+ * Cleared or invalid fields (NaN, Infinity) become 0 so the math never renders "NaN".
+ */
+function safe(value: number): number {
+  return Number.isFinite(value) ? Math.max(0, value) : 0;
+}
+
+/**
  * Get eBay fee rate for a category
  */
 function getEbayFeeRate(category: EbayCategory): number {
@@ -21,7 +29,12 @@ function getEbayFeeRate(category: EbayCategory): number {
  * Calculate Etsy fees for a single platform
  */
 function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
-  const { salePrice, shippingCharged, shippingCost, itemCost, etsyOffsiteAds, quantity } = inputs;
+  const { etsyOffsiteAds } = inputs;
+  const salePrice = safe(inputs.salePrice);
+  const shippingCharged = safe(inputs.shippingCharged);
+  const shippingCost = safe(inputs.shippingCost);
+  const itemCost = safe(inputs.itemCost);
+  const quantity = safe(inputs.quantity);
 
   const totalRevenue = salePrice + shippingCharged;
 
@@ -67,7 +80,11 @@ function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
  * Calculate eBay fees for a single platform
  */
 function computeEbayPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
-  const { salePrice, shippingCharged, shippingCost, itemCost, ebayCategory } = inputs;
+  const { ebayCategory } = inputs;
+  const salePrice = safe(inputs.salePrice);
+  const shippingCharged = safe(inputs.shippingCharged);
+  const shippingCost = safe(inputs.shippingCost);
+  const itemCost = safe(inputs.itemCost);
 
   const totalRevenue = salePrice + shippingCharged;
   const feeRate = getEbayFeeRate(ebayCategory);

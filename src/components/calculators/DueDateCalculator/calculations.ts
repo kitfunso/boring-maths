@@ -22,6 +22,9 @@ const MILESTONES_DATA = [
   { week: 40, name: 'Due Date', description: 'Estimated due date' },
 ];
 
+// Floor a numeric input so a cleared/partial/invalid value (NaN) becomes 0.
+const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
+
 export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -33,7 +36,7 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     case 'lmp': {
       const lmp = new Date(inputs.lmpDate);
       // Naegele's rule: LMP + 280 days (adjusted for cycle length)
-      const adjustment = inputs.cycleLength - 28;
+      const adjustment = safe(inputs.cycleLength) - 28;
       dueDate = new Date(lmp);
       dueDate.setDate(dueDate.getDate() + PREGNANCY_DAYS + adjustment);
       // Conception typically occurs around day 14 of cycle
@@ -59,7 +62,7 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     }
     case 'ultrasound': {
       const usDate = new Date(inputs.ultrasoundDate);
-      const gestationalDays = inputs.ultrasoundWeeks * 7 + inputs.ultrasoundDays;
+      const gestationalDays = safe(inputs.ultrasoundWeeks) * 7 + safe(inputs.ultrasoundDays);
       // Calculate LMP equivalent
       const lmpEquiv = new Date(usDate);
       lmpEquiv.setDate(lmpEquiv.getDate() - gestationalDays);

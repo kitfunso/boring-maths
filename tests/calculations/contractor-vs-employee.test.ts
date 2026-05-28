@@ -72,5 +72,21 @@ describe('ContractorVsEmployeeCalculator', () => {
 
       expect(result1).toEqual(result2);
     });
+
+    it('should yield finite outputs when numeric inputs are NaN', () => {
+      const inputs = getDefaultInputs('USD');
+      const nanInputs: ContractorVsEmployeeInputs = {
+        ...inputs,
+        contractorHourlyRate: NaN,
+        employeeSalary: NaN,
+        federalTaxBracket: NaN,
+      };
+
+      const result = calculateComparison_main(nanInputs);
+
+      expect(Number.isFinite(result.contractor.netIncome)).toBe(true);
+      expect(Number.isFinite(result.employee.netIncome)).toBe(true);
+      expect(Number.isFinite(result.comparison.annualDifference)).toBe(true);
+    });
   });
 });

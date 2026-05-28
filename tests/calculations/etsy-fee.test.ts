@@ -38,6 +38,24 @@ describe('EtsyFeeCalculator', () => {
       expect(result).toBeDefined();
     });
 
+    it('should yield finite outputs for NaN inputs (cleared/invalid fields)', () => {
+      const inputs = getDefaultInputs();
+      inputs.salePrice = NaN;
+      inputs.shippingCharged = NaN;
+      inputs.shippingCost = NaN;
+      inputs.itemCost = NaN;
+      inputs.quantity = NaN;
+
+      const result = calculateMarketplaceFees(inputs);
+
+      expect(Number.isFinite(result.etsy.totalFees)).toBe(true);
+      expect(Number.isFinite(result.etsy.effectiveFeeRate)).toBe(true);
+      expect(Number.isFinite(result.etsy.netProfit)).toBe(true);
+      expect(Number.isFinite(result.ebay.totalFees)).toBe(true);
+      expect(Number.isFinite(result.ebay.netProfit)).toBe(true);
+      expect(Number.isFinite(result.feeSavings)).toBe(true);
+    });
+
     it('should produce consistent results', () => {
       const inputs = getDefaultInputs();
 

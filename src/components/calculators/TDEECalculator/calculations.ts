@@ -12,14 +12,19 @@ function round(value: number): number {
   return Math.round(value);
 }
 
+/** Floor a numeric input so a non-finite (NaN/Infinity) value becomes 0. */
+function safe(value: number): number {
+  return Number.isFinite(value) ? Math.max(0, value) : 0;
+}
+
 function getWeightKg(inputs: TDEEInputs): number {
-  return inputs.unitSystem === 'metric' ? inputs.weightKg : inputs.weightLbs * 0.453592;
+  return inputs.unitSystem === 'metric' ? safe(inputs.weightKg) : safe(inputs.weightLbs) * 0.453592;
 }
 
 function getHeightCm(inputs: TDEEInputs): number {
   return inputs.unitSystem === 'metric'
-    ? inputs.heightCm
-    : inputs.heightFeet * 30.48 + inputs.heightInches * 2.54;
+    ? safe(inputs.heightCm)
+    : safe(inputs.heightFeet) * 30.48 + safe(inputs.heightInches) * 2.54;
 }
 
 function calculateMacroSplits(tdee: number): MacroSplit[] {
@@ -48,7 +53,8 @@ function calculateMacroSplits(tdee: number): MacroSplit[] {
 export function calculateTDEE(inputs: TDEEInputs): TDEEResult {
   const weightKg = getWeightKg(inputs);
   const heightCm = getHeightCm(inputs);
-  const { sex, age, activityLevel } = inputs;
+  const { sex, activityLevel } = inputs;
+  const age = safe(inputs.age);
 
   // Mifflin-St Jeor
   const bmr =

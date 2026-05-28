@@ -92,9 +92,11 @@ function roundTo1dp(value: number): number {
  * ratios are reported as zero rather than dividing by zero.
  */
 export function calculateDebtToIncome(inputs: DebtToIncomeInputs): DebtToIncomeResult {
-  const grossMonthlyIncome = Math.max(0, inputs.grossMonthlyIncome);
-  const housingPayment = Math.max(0, inputs.housingPayment);
-  const otherMonthlyDebts = Math.max(0, inputs.otherMonthlyDebts);
+  // Floor at 0 and treat non-finite (cleared/NaN) fields as 0 so the ratios stay finite.
+  const safe = (v: number) => (Number.isFinite(v) ? Math.max(0, v) : 0);
+  const grossMonthlyIncome = safe(inputs.grossMonthlyIncome);
+  const housingPayment = safe(inputs.housingPayment);
+  const otherMonthlyDebts = safe(inputs.otherMonthlyDebts);
 
   const totalMonthlyDebt = housingPayment + otherMonthlyDebts;
 

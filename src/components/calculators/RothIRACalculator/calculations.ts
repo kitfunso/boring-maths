@@ -72,11 +72,13 @@ export function getContributionLimit(age: number): number {
  * Negative inputs are floored at zero so a cleared field stays sensible.
  */
 export function calculateRothIRA(inputs: RothIRAInputs): RothIRAResult {
-  const currentAge = Math.max(0, inputs.currentAge);
-  const retirementAge = Math.max(0, inputs.retirementAge);
-  const currentBalance = Math.max(0, inputs.currentBalance);
-  const annualContribution = Math.max(0, inputs.annualContribution);
-  const expectedReturn = Math.max(0, inputs.expectedReturn);
+  // Floor inputs at 0 and treat non-finite (cleared/NaN) fields as 0 so results stay finite.
+  const safe = (v: number) => (Number.isFinite(v) ? Math.max(0, v) : 0);
+  const currentAge = safe(inputs.currentAge);
+  const retirementAge = safe(inputs.retirementAge);
+  const currentBalance = safe(inputs.currentBalance);
+  const annualContribution = safe(inputs.annualContribution);
+  const expectedReturn = safe(inputs.expectedReturn);
 
   const years = Math.max(0, retirementAge - currentAge);
   const r = expectedReturn / 100;

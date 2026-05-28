@@ -25,6 +25,12 @@ const CO2_LBS_PER_TREE_YEAR = 48;
 const LBS_PER_TON = 2000;
 
 /**
+ * Floor a numeric input to 0 when it is non-finite (NaN/Infinity from a
+ * cleared or partial field). Valid finite values pass through unchanged.
+ */
+const safe = (value: number): number => (Number.isFinite(value) ? value : 0);
+
+/**
  * Calculate transportation savings
  */
 function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
@@ -37,18 +43,16 @@ function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
   milesAvoided: number;
   gallonsSaved: number;
 } {
-  const {
-    commuteType,
-    commuteDistanceMiles,
-    officeDaysPerWeek,
-    weeksPerYear,
-    gasPricePerGallon,
-    vehicleMpg,
-    maintenanceCostPerMile,
-    parkingCostDaily,
-    tollsDaily,
-    transitCostDaily,
-  } = inputs;
+  const { commuteType } = inputs;
+  const commuteDistanceMiles = safe(inputs.commuteDistanceMiles);
+  const officeDaysPerWeek = safe(inputs.officeDaysPerWeek);
+  const weeksPerYear = safe(inputs.weeksPerYear);
+  const gasPricePerGallon = safe(inputs.gasPricePerGallon);
+  const vehicleMpg = safe(inputs.vehicleMpg);
+  const maintenanceCostPerMile = safe(inputs.maintenanceCostPerMile);
+  const parkingCostDaily = safe(inputs.parkingCostDaily);
+  const tollsDaily = safe(inputs.tollsDaily);
+  const transitCostDaily = safe(inputs.transitCostDaily);
 
   const commuteDaysPerYear = officeDaysPerWeek * weeksPerYear;
   const roundTripMiles = commuteDistanceMiles * 2;
@@ -63,7 +67,7 @@ function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
   let gallonsSaved = 0;
 
   if (commuteType === 'car' || commuteType === 'mixed') {
-    const gallonsUsed = annualMiles / vehicleMpg;
+    const gallonsUsed = safe(annualMiles / vehicleMpg);
     gas = gallonsUsed * gasPricePerGallon;
     maintenance = annualMiles * maintenanceCostPerMile;
     parking = parkingCostDaily * commuteDaysPerYear;
@@ -102,15 +106,13 @@ function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
   coffee: number;
   total: number;
 } {
-  const {
-    officeDaysPerWeek,
-    weeksPerYear,
-    workLunchCostDaily,
-    homeLunchCostDaily,
-    workClothesBudgetMonthly,
-    dryCleaningMonthly,
-    coffeeAtWorkDaily,
-  } = inputs;
+  const officeDaysPerWeek = safe(inputs.officeDaysPerWeek);
+  const weeksPerYear = safe(inputs.weeksPerYear);
+  const workLunchCostDaily = safe(inputs.workLunchCostDaily);
+  const homeLunchCostDaily = safe(inputs.homeLunchCostDaily);
+  const workClothesBudgetMonthly = safe(inputs.workClothesBudgetMonthly);
+  const dryCleaningMonthly = safe(inputs.dryCleaningMonthly);
+  const coffeeAtWorkDaily = safe(inputs.coffeeAtWorkDaily);
 
   const commuteDaysPerYear = officeDaysPerWeek * weeksPerYear;
 
@@ -135,7 +137,10 @@ function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
  * Calculate time analysis
  */
 function calculateTimeAnalysis(inputs: RemoteWorkSavingsInputs): TimeAnalysis {
-  const { commuteTimeMinutes, officeDaysPerWeek, weeksPerYear, hourlyRate } = inputs;
+  const commuteTimeMinutes = safe(inputs.commuteTimeMinutes);
+  const officeDaysPerWeek = safe(inputs.officeDaysPerWeek);
+  const weeksPerYear = safe(inputs.weeksPerYear);
+  const hourlyRate = safe(inputs.hourlyRate);
 
   const dailyCommuteMinutes = commuteTimeMinutes * 2; // Round trip
   const weeklyCommuteHours = (dailyCommuteMinutes * officeDaysPerWeek) / 60;
@@ -190,12 +195,12 @@ export function calculateRemoteWorkSavings(
   // Build savings breakdown
   const totalAnnualSavings = transport.total + lifestyle.total;
   const totalMonthlySavings = totalAnnualSavings / 12;
-  const commuteDaysPerYear = inputs.officeDaysPerWeek * inputs.weeksPerYear;
-  const totalDailySavings = totalAnnualSavings / commuteDaysPerYear;
+  const commuteDaysPerYear = safe(inputs.officeDaysPerWeek) * safe(inputs.weeksPerYear);
+  const totalDailySavings = safe(totalAnnualSavings / commuteDaysPerYear);
 
   // Effective hourly raise (savings spread across work hours)
-  const annualWorkHours = 40 * inputs.weeksPerYear;
-  const effectiveHourlyRaise = totalAnnualSavings / annualWorkHours;
+  const annualWorkHours = 40 * safe(inputs.weeksPerYear);
+  const effectiveHourlyRaise = safe(totalAnnualSavings / annualWorkHours);
 
   const savings: SavingsBreakdown = {
     gasSavings: transport.gas,
@@ -222,9 +227,9 @@ export function calculateRemoteWorkSavings(
 
   // Comparison (office costs vs remote costs)
   const officeCosts = totalAnnualSavings; // What you spend going to office
-  const remoteCosts = inputs.homeLunchCostDaily * commuteDaysPerYear; // Minimal remote costs
+  const remoteCosts = safe(inputs.homeLunchCostDaily) * commuteDaysPerYear; // Minimal remote costs
   const netSavings = officeCosts - remoteCosts + remoteCosts; // Net is just office costs for simplicity
-  const savingsPercentage = (netSavings / (officeCosts + remoteCosts)) * 100;
+  const savingsPercentage = safe((netSavings / (officeCosts + remoteCosts)) * 100);
 
   const comparison: ArrangementComparison = {
     officeCosts,

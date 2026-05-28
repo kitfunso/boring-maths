@@ -23,48 +23,62 @@ const AVERAGE_COMMUTE_SPEED = 30;
 const WORK_HOURS_PER_DAY = 8;
 
 /**
+ * Floor a numeric input so a non-finite value (NaN/Infinity from a cleared or
+ * partial field, e.g. Number('-')) becomes 0 instead of propagating to the UI.
+ */
+const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
+
+/**
  * Calculate values for a single job offer
  */
 function calculateOffer(offer: JobOffer, inputs: JobOfferComparisonInputs): OfferCalculation {
-  const { hourlyTimeValue, costPerMile, includeCommuteTime, contribution401k } = inputs;
+  const hourlyTimeValue = safe(inputs.hourlyTimeValue);
+  const costPerMile = safe(inputs.costPerMile);
+  const contribution401k = safe(inputs.contribution401k);
+  const { includeCommuteTime } = inputs;
 
   // Base and bonus
-  const baseSalary = offer.baseSalary;
-  const bonusAmount = baseSalary * offer.bonusPercentage;
+  const baseSalary = safe(offer.baseSalary);
+  const bonusAmount = baseSalary * safe(offer.bonusPercentage);
 
   // Equity
-  const equityValue = offer.annualEquity;
+  const equityValue = safe(offer.annualEquity);
 
   // 401k match calculation
   // Match is the lesser of: (contribution * match %) or (salary * match limit)
+  const match401kLimit = safe(offer.match401kLimit);
   const contributionAmount = baseSalary * contribution401k;
-  const maxMatchableAmount = baseSalary * offer.match401kLimit;
+  const maxMatchableAmount = baseSalary * match401kLimit;
   const actualContribution = Math.min(contributionAmount, maxMatchableAmount);
-  const match401kValue = actualContribution * (offer.match401kPercentage / offer.match401kLimit);
+  const match401kValue =
+    match401kLimit > 0
+      ? actualContribution * (safe(offer.match401kPercentage) / match401kLimit)
+      : 0;
 
   // Health benefits (employer value - employee cost)
-  const annualHealthCost = offer.healthInsuranceCost * 12;
-  const healthBenefitNet = offer.healthBenefitValue - annualHealthCost;
+  const annualHealthCost = safe(offer.healthInsuranceCost) * 12;
+  const healthBenefitNet = safe(offer.healthBenefitValue) - annualHealthCost;
 
   // PTO value (daily rate * days)
   const dailyRate = baseSalary / WORKING_DAYS_PER_YEAR;
-  const ptoValue = dailyRate * offer.ptoDays;
+  const ptoValue = dailyRate * safe(offer.ptoDays);
 
   // Commute calculations
-  const commuteDaysPerYear = WORKING_DAYS_PER_YEAR * (offer.officeDaysPerWeek / 5);
-  const annualCommuteMiles = offer.commuteDistance * 2 * commuteDaysPerYear; // round trip
+  const commuteDaysPerYear = WORKING_DAYS_PER_YEAR * (safe(offer.officeDaysPerWeek) / 5);
+  const commuteDistance = safe(offer.commuteDistance);
+  const annualCommuteMiles = commuteDistance * 2 * commuteDaysPerYear; // round trip
   const commuteCost = annualCommuteMiles * costPerMile;
 
   // Commute time value (opportunity cost)
-  const dailyCommuteHours = (offer.commuteDistance * 2) / AVERAGE_COMMUTE_SPEED;
+  const dailyCommuteHours = (commuteDistance * 2) / AVERAGE_COMMUTE_SPEED;
   const annualCommuteHours = dailyCommuteHours * commuteDaysPerYear;
   const commuteTimeValue = includeCommuteTime ? annualCommuteHours * hourlyTimeValue : 0;
 
   // Other benefits
-  const otherBenefitsValue = offer.otherBenefits;
+  const otherBenefitsValue = safe(offer.otherBenefits);
 
   // Signing bonus (counted at full value for first year comparison)
-  const signingBonusValue = offer.signingBonus;
+  const signingBonusValue = safe(offer.signingBonus);
 
   // Totals
   const totalCashComp = baseSalary + bonusAmount + signingBonusValue;

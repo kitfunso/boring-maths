@@ -164,6 +164,25 @@ describe('HeartRateZoneCalculator', () => {
       expect(karvonenResult.zones[0].minBPM).toBeGreaterThan(percentResult.zones[0].minBPM);
     });
 
+    it('should yield finite outputs when numeric inputs are NaN', () => {
+      const inputs = {
+        ...getDefaultInputs(),
+        age: NaN,
+        restingHeartRate: NaN,
+        maxHeartRate: NaN,
+        useCustomMaxHR: true,
+        method: 'karvonen' as const,
+      };
+
+      const result = calculateHeartRateZones(inputs);
+
+      expect(Number.isFinite(result.maxHR)).toBe(true);
+      for (const zone of result.zones) {
+        expect(Number.isFinite(zone.minBPM)).toBe(true);
+        expect(Number.isFinite(zone.maxBPM)).toBe(true);
+      }
+    });
+
     it('should have zone percentages matching defined ranges', () => {
       const inputs = getDefaultInputs();
       const result = calculateHeartRateZones(inputs);

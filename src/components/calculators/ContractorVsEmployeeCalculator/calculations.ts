@@ -325,11 +325,48 @@ function generateLineItems(
 }
 
 /**
+ * Floor a numeric input so a non-finite value (NaN/Infinity from a cleared or
+ * partial entry like "-" or "1e") becomes 0. Valid numbers pass through unchanged.
+ */
+const safe = (v: number): number => (Number.isFinite(v) ? v : 0);
+
+/**
+ * Coerce every numeric input to a finite value, leaving non-numeric fields intact.
+ */
+function sanitizeInputs(inputs: ContractorVsEmployeeInputs): ContractorVsEmployeeInputs {
+  return {
+    ...inputs,
+    contractorHourlyRate: safe(inputs.contractorHourlyRate),
+    contractorBillableHoursPerWeek: safe(inputs.contractorBillableHoursPerWeek),
+    contractorWeeksPerYear: safe(inputs.contractorWeeksPerYear),
+    employeeSalary: safe(inputs.employeeSalary),
+    employeeBonusPercent: safe(inputs.employeeBonusPercent),
+    employer401kMatch: safe(inputs.employer401kMatch),
+    employer401kMatchLimit: safe(inputs.employer401kMatchLimit),
+    employerHealthInsuranceMonthly: safe(inputs.employerHealthInsuranceMonthly),
+    employerDentalVisionMonthly: safe(inputs.employerDentalVisionMonthly),
+    employerLifeDisabilityMonthly: safe(inputs.employerLifeDisabilityMonthly),
+    paidTimeOffDays: safe(inputs.paidTimeOffDays),
+    paidHolidaysDays: safe(inputs.paidHolidaysDays),
+    otherBenefitsAnnual: safe(inputs.otherBenefitsAnnual),
+    contractorHealthInsuranceMonthly: safe(inputs.contractorHealthInsuranceMonthly),
+    contractorRetirementContribPercent: safe(inputs.contractorRetirementContribPercent),
+    contractorBusinessExpensesMonthly: safe(inputs.contractorBusinessExpensesMonthly),
+    contractorAccountingAnnual: safe(inputs.contractorAccountingAnnual),
+    contractorInsuranceAnnual: safe(inputs.contractorInsuranceAnnual),
+    federalTaxBracket: safe(inputs.federalTaxBracket),
+    stateTaxRate: safe(inputs.stateTaxRate),
+    selfEmploymentTaxRate: safe(inputs.selfEmploymentTaxRate),
+  };
+}
+
+/**
  * Main calculation function
  */
 export function calculateComparison_main(
-  inputs: ContractorVsEmployeeInputs
+  rawInputs: ContractorVsEmployeeInputs
 ): ContractorVsEmployeeResult {
+  const inputs = sanitizeInputs(rawInputs);
   const contractor = calculateContractorCompensation(inputs);
   const employee = calculateEmployeeCompensation(inputs);
   const comparison = calculateComparison(contractor, employee, inputs);

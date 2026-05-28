@@ -42,5 +42,22 @@ describe('JobOfferComparisonCalculator', () => {
 
       expect(result1).toEqual(result2);
     });
+
+    it('should yield finite outputs when inputs are NaN (cleared/partial fields)', () => {
+      const inputs = getDefaultInputs();
+      inputs.offer1.baseSalary = NaN;
+      inputs.offer2.match401kLimit = NaN;
+      inputs.hourlyTimeValue = NaN;
+      inputs.costPerMile = NaN;
+
+      const result = calculateComparison(inputs);
+
+      expect(Number.isFinite(result.offer1.netComp)).toBe(true);
+      expect(Number.isFinite(result.offer2.netComp)).toBe(true);
+      expect(Number.isFinite(result.offer1.effectiveHourlyRate)).toBe(true);
+      expect(Number.isFinite(result.offer2.match401kValue)).toBe(true);
+      expect(Number.isFinite(result.difference.netComp)).toBe(true);
+      expect(Number.isFinite(result.difference.percentageDiff)).toBe(true);
+    });
   });
 });

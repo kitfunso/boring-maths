@@ -62,5 +62,40 @@ describe('RemoteWorkSavingsCalculator', () => {
 
       expect(result1).toEqual(result2);
     });
+
+    it('should produce finite outputs when numeric inputs are NaN (cleared fields)', () => {
+      const inputs: RemoteWorkSavingsInputs = {
+        commuteType: 'car',
+        commuteDistanceMiles: NaN,
+        commuteTimeMinutes: NaN,
+        officeDaysPerWeek: NaN,
+        weeksPerYear: NaN,
+        gasPricePerGallon: NaN,
+        vehicleMpg: NaN,
+        maintenanceCostPerMile: NaN,
+        parkingCostDaily: NaN,
+        tollsDaily: NaN,
+        transitCostDaily: NaN,
+        workLunchCostDaily: NaN,
+        homeLunchCostDaily: NaN,
+        workClothesBudgetMonthly: NaN,
+        dryCleaningMonthly: NaN,
+        coffeeAtWorkDaily: NaN,
+        hourlyRate: NaN,
+        includeEnvironmentalImpact: true,
+        currency: 'USD',
+      };
+
+      const result = calculateRemoteWorkSavings(inputs);
+
+      expect(Number.isFinite(result.annualSavings)).toBe(true);
+      expect(Number.isFinite(result.monthlySavings)).toBe(true);
+      expect(Number.isFinite(result.effectiveRaise)).toBe(true);
+      expect(Number.isFinite(result.hoursReclaimed)).toBe(true);
+      expect(Number.isFinite(result.savings.totalTransportSavings)).toBe(true);
+      expect(Number.isFinite(result.savings.totalLifestyleSavings)).toBe(true);
+      expect(Number.isFinite(result.environmental.co2TonsSavedAnnual)).toBe(true);
+      expect(Number.isFinite(result.time.valueOfTimeSaved)).toBe(true);
+    });
   });
 });
