@@ -1,0 +1,215 @@
+---
+/**
+ * Gravel Calculator Page
+ *
+ * SEO-optimized page targeting: "how much gravel do I need calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { GravelCalculator } from '../../components/calculators/GravelCalculator';
+
+// SEO Configuration
+const title = 'Gravel Calculator: Tonnes, Bulk Bags and Cost (Metric and Imperial)';
+const description =
+  'Free gravel calculator. Enter length, width, and depth to get tonnes needed, cubic metres, bulk bags, and cost for driveways, paths, and beds.';
+const keywords =
+  'gravel calculator, how much gravel do I need, gravel tonnes calculator, bulk bag gravel calculator, gravel cost calculator, aggregate calculator, driveway gravel calculator';
+const canonicalURL = '/calculators/gravel-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Gravel Calculator' },
+];
+
+// Related calculators (from the safe pool, domain-appropriate)
+const relatedCalculators = [
+  {
+    title: 'Mulch Calculator',
+    description: 'Calculate mulch needed for garden beds.',
+    href: '/calculators/mulch-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Square Footage Calculator',
+    description: 'Measure area in square feet or square metres.',
+    href: '/calculators/square-footage-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Tile Calculator',
+    description: 'Calculate tiles, grout, and adhesive for any project.',
+    href: '/calculators/tile-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your room.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring materials with a waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How much gravel do I need?',
+    answer:
+      'Multiply length by width by depth (all in the same unit) to get the volume, then multiply by the gravel density to get the weight. For a 5m x 3m bed at 0.05m (50mm) deep, the volume is 0.75 cubic metres. At a typical density of 1.5 tonnes per cubic metre, that is about 1.13 tonnes, or 2 bulk bags.',
+  },
+  {
+    question: 'What is the density of gravel?',
+    answer:
+      'Most loose gravels and aggregates weigh between 1.4 and 1.7 tonnes per cubic metre. Pea gravel and limestone chippings sit around 1.5, crushed stone and ballast nearer 1.6, and a gravel and sand mix can reach 1.7. Moisture and compaction change the real figure, so check with your supplier when you need a precise quote.',
+  },
+  {
+    question: 'How deep should a gravel layer be?',
+    answer:
+      'For decorative beds and footpaths, a 50mm (0.05m) layer is usually enough. For a driveway that carries cars, aim for 75mm to 100mm of gravel over a compacted sub-base. Deeper layers need more material, which is why the calculator asks for depth as well as the surface area.',
+  },
+  {
+    question: 'How many bulk bags of gravel will I need?',
+    answer:
+      'A standard bulk bag (also called a dumpy bag or tonne bag) holds roughly 0.85 tonnes of gravel. The calculator divides your total tonnage by 0.85 and rounds up, because suppliers sell whole bags. For large jobs, loose tipped gravel by the tonne is often cheaper per tonne than bagged gravel.',
+  },
+  {
+    question: 'Why does the calculator add a waste allowance?',
+    answer:
+      'Gravel settles, spreads unevenly, and some is lost to handling. A 5 to 10 percent allowance keeps you from running short before the job is finished. The default is 5 percent; increase it for sloped or uneven ground, or reduce it to zero if you want the exact theoretical volume.',
+  },
+  {
+    question: 'Does the calculator work in feet as well as metres?',
+    answer:
+      'Yes. Switch the units toggle to feet and enter length, width, and depth in feet. The calculator converts every dimension to metres internally (one foot is 0.3048 metres), works out the volume in cubic metres, and reports tonnes and bulk bags. Density is always entered in tonnes per cubic metre.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Gravel Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Gravel Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Gravel Calculator"
+    description="Work out exactly how many tonnes and bulk bags of gravel you need for a driveway, path, or border. Enter your dimensions in metres or feet and get the volume, weight, and an optional cost estimate."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <GravelCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing your <strong>units</strong>, metres or feet, then enter the
+      <strong>length</strong> and <strong>width</strong> of the area you want to cover. For an irregular
+      space, split it into rectangles, calculate each one, and add the results together.
+    </p>
+    <p>
+      Set the <strong>depth</strong> of the gravel layer. A 50mm (0.05m) layer suits decorative beds and
+      footpaths, while a driveway that carries vehicles needs 75mm to 100mm over a firm sub-base. Depth
+      matters as much as surface area, so measure it honestly rather than guessing.
+    </p>
+    <p>
+      Pick a <strong>gravel type</strong> from the list. Each option sets a typical density, but you can
+      override it: choose Custom density, or simply type your own figure into the density field if your
+      supplier has given you an exact value.
+    </p>
+    <p>
+      Adjust the <strong>extra allowance</strong> if you want more or less buffer than the default 5 percent,
+      and enter a <strong>price per tonne</strong> to see a cost estimate. Everything updates live as
+      you type, so there is no submit button to press.
+    </p>
+  </ContentSection>
+
+  <!-- How It Is Calculated Section -->
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The maths behind gravel quantities is straightforward geometry followed by a density
+      conversion. First the calculator works out the <strong>volume</strong>: length times width
+      times depth. When you enter feet, each dimension is converted to metres first (one foot is
+      0.3048 metres), so the volume always comes out in cubic metres.
+    </p>
+    <p>
+      Next it converts volume into <strong>weight</strong>. Gravel is sold by the tonne, so the
+      calculator multiplies the volume in cubic metres by the density in tonnes per cubic metre. A
+      typical loose gravel density is 1.5 tonnes per cubic metre, but the real figure ranges from
+      about 1.4 for light pea gravel up to 1.7 for a compacted gravel and sand mix.
+    </p>
+    <p>
+      The <strong>waste allowance</strong> is then applied by multiplying the weight by one plus the allowance
+      percentage. With the default 5 percent, a result of 1 tonne becomes 1.05 tonnes. Finally, the calculator
+      divides the total tonnage by 0.85, the weight of a standard bulk bag, and rounds up to whole bags,
+      because suppliers do not sell part bags.
+    </p>
+    <p>
+      As a worked example, a 5m by 3m bed at 0.05m deep gives 0.75 cubic metres. At 1.5 tonnes per
+      cubic metre with no waste that is 1.13 tonnes, which rounds up to 2 bulk bags. Add the default
+      5 percent allowance and the tonnage rises to about 1.18 tonnes.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure is the <strong>tonnes needed</strong>, including your waste allowance.
+      This is the number to give a supplier when ordering loose tipped gravel, which is usually the
+      cheapest option for larger driveways and paths.
+    </p>
+    <p>
+      The <strong>volume in cubic metres</strong> is shown before waste, so you can compare it against
+      quotes that price by volume rather than weight. It is also a useful sanity check: if the volume
+      looks far too large or small, re-check your depth, since a value entered in millimetres instead
+      of metres is the most common mistake.
+    </p>
+    <p>
+      The <strong>bulk bags</strong> figure tells you how many tonne bags to order if you prefer bagged
+      delivery. Bags are easier to move and store but cost more per tonne than loose gravel. The <strong
+        >estimated cost</strong
+      > appears once you enter a price per tonne, multiplying your total tonnage by that rate. These are
+      planning estimates; always confirm exact quantities and prices with your supplier before you order.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
