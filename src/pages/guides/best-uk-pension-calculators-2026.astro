@@ -60,7 +60,8 @@ const calculators = [
 const competitorComparisons = [
   {
     competitor: 'Which?',
-    bestFor: 'Retirement explainers, pension drawdown content, and broader consumer-finance guidance.',
+    bestFor:
+      'Retirement explainers, pension drawdown content, and broader consumer-finance guidance.',
     watchFor:
       'It is less direct when you want a fast no-signup projection and immediate jumps into salary sacrifice or FIRE-style planning.',
     betterFit: {
@@ -112,7 +113,7 @@ const faqs = [
       'You can currently access your private pension from age 55 (rising to 57 from April 2028). The state pension age is 66, rising to 67 between 2026 and 2028, and to 68 in later years. When you access your private pension, you can take up to 25% as a tax-free lump sum and draw the rest as taxable income through drawdown or an annuity.',
   },
   {
-    question: 'What is a good alternative to Which?\'s pension calculator?',
+    question: "What is a good alternative to Which?'s pension calculator?",
     answer:
       'Which? is useful if you want broader retirement education, drawdown content, and pension tax explainers. Boring Math is a better alternative when you want a fast pension projection tool with no signup and direct routes into salary sacrifice, FIRE, and tax-planning follow-up calculators.',
   },
@@ -279,21 +280,24 @@ const schemaData = {
             competitorComparisons.map((item) => (
               <article class="comparison-card">
                 <h3>{item.competitor}</h3>
-                <p><strong>Best for:</strong> {item.bestFor}</p>
-                <p><strong>Watch for:</strong> {item.watchFor}</p>
                 <p>
-                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
-                    >{item.betterFit.label}</a
-                  >
+                  <strong>Best for:</strong> {item.bestFor}
+                </p>
+                <p>
+                  <strong>Watch for:</strong> {item.watchFor}
+                </p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong>{' '}
+                  <a href={item.betterFit.href}>{item.betterFit.label}</a>
                 </p>
               </article>
             ))
           }
         </div>
         <p class="competitor-note">
-          Use Which? when you want broader retirement reading, use The Salary Calculator when the main
-          question is about this month's payslip, and use Boring Math when you want a fast projection
-          plus connected follow-up tools.
+          Use Which? when you want broader retirement reading, use The Salary Calculator when the
+          main question is about this month's payslip, and use Boring Math when you want a fast
+          projection plus connected follow-up tools.
         </p>
       </section>
 

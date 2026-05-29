@@ -301,30 +301,33 @@ const schemaData = {
       <section class="competitor-section">
         <h2>Alternatives to HMRC, Listen to Taxman and The Salary Calculator</h2>
         <p>
-          These brand-name searches usually mean you already know the rough category and want the tool
-          that answers the next question fastest. The honest answer is that each tool is good at
-          something slightly different.
+          These brand-name searches usually mean you already know the rough category and want the
+          tool that answers the next question fastest. The honest answer is that each tool is good
+          at something slightly different.
         </p>
         <div class="comparison-cards">
           {
             competitorComparisons.map((item) => (
               <article class="comparison-card">
                 <h3>{item.competitor}</h3>
-                <p><strong>Best for:</strong> {item.bestFor}</p>
-                <p><strong>Watch for:</strong> {item.watchFor}</p>
                 <p>
-                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
-                    >{item.betterFit.label}</a
-                  >
+                  <strong>Best for:</strong> {item.bestFor}
+                </p>
+                <p>
+                  <strong>Watch for:</strong> {item.watchFor}
+                </p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong>{' '}
+                  <a href={item.betterFit.href}>{item.betterFit.label}</a>
                 </p>
               </article>
             ))
           }
         </div>
         <p class="competitor-note">
-          If you want one quick rule: use HMRC for an official estimate, then use Boring Math when the
-          real decision is about salary sacrifice, student loans, pensions, stamp duty, or the £100k
-          tax trap.
+          If you want one quick rule: use HMRC for an official estimate, then use Boring Math when
+          the real decision is about salary sacrifice, student loans, pensions, stamp duty, or the
+          £100k tax trap.
         </p>
       </section>
 
