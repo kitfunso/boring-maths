@@ -6,7 +6,8 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Salary Sacrifice UK Guide 2025/26: HMRC and The Salary Calculator Alternatives | Boring Math';
+const title =
+  'Salary Sacrifice UK Guide 2025/26: HMRC and The Salary Calculator Alternatives | Boring Math';
 const description =
   'Compare Boring Math with HMRC and The Salary Calculator for salary sacrifice pensions. See when salary exchange beats personal contributions, and calculate the real tax and NIC saving.';
 const canonicalURL = '/guides/salary-sacrifice-uk-guide';
@@ -172,8 +173,8 @@ const schemaData = {
           </li>
         </ul>
         <p>
-          Over a career, that NIC saving compounds. Your employer also saves employer NIC (15%
-          above the secondary threshold), and many employers pass some or all of this saving to your
+          Over a career, that NIC saving compounds. Your employer also saves employer NIC (15% above
+          the secondary threshold), and many employers pass some or all of this saving to your
           pension as a bonus contribution.
         </p>
       </section>
@@ -408,9 +409,9 @@ const schemaData = {
             or "SMART pension" in your benefits documentation. Not all employers offer it.
           </li>
           <li>
-            <strong>Check if your employer passes on their NIC saving.</strong> Some add 15% of your
-            sacrifice to your pension. Others keep it. This is worth asking about — it can add thousands
-            to your pension annually.
+            <strong>Check if your employer passes on their NIC saving.</strong> Some add 15% of your sacrifice
+            to your pension. Others keep it. This is worth asking about — it can add thousands to your
+            pension annually.
           </li>
           <li>
             <strong>Confirm the minimum wage floor.</strong> Your remaining cash salary after sacrifice
@@ -462,12 +463,15 @@ const schemaData = {
             competitorComparisons.map((item) => (
               <article class="comparison-card">
                 <h3>{item.competitor}</h3>
-                <p><strong>Best for:</strong> {item.bestFor}</p>
-                <p><strong>Watch for:</strong> {item.watchFor}</p>
                 <p>
-                  <strong>Better fit on Boring Math:</strong> <a href={item.betterFit.href}
-                    >{item.betterFit.label}</a
-                  >
+                  <strong>Best for:</strong> {item.bestFor}
+                </p>
+                <p>
+                  <strong>Watch for:</strong> {item.watchFor}
+                </p>
+                <p>
+                  <strong>Better fit on Boring Math:</strong>{' '}
+                  <a href={item.betterFit.href}>{item.betterFit.label}</a>
                 </p>
               </article>
             ))
@@ -475,8 +479,8 @@ const schemaData = {
         </div>
         <p class="competitor-note">
           Use HMRC when the question is about compliance, use The Salary Calculator when you want a
-          quick broad payslip estimate, and use Boring Math when you want the sacrifice decision tied
-          to retirement planning, student loans, or the £100k taper.
+          quick broad payslip estimate, and use Boring Math when you want the sacrifice decision
+          tied to retirement planning, student loans, or the £100k taper.
         </p>
       </section>
 

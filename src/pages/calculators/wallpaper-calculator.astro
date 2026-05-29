@@ -1,0 +1,212 @@
+---
+/**
+ * Wallpaper Calculator Page
+ *
+ * SEO-optimized page targeting: "how many rolls of wallpaper do I need calculator"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { WallpaperCalculator } from '../../components/calculators/WallpaperCalculator';
+
+// SEO Configuration
+const title = 'Wallpaper Calculator: How Many Rolls Do I Need (Drops + Pattern Repeat)';
+const description =
+  'Free wallpaper calculator. Enter your room perimeter and wall height to get the number of rolls needed, with drops per roll and pattern repeat waste built in.';
+const keywords =
+  'wallpaper calculator, how many rolls of wallpaper do I need, wallpaper roll calculator, pattern repeat wallpaper, wallpaper drops calculator, how much wallpaper';
+const canonicalURL = '/calculators/wallpaper-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Wallpaper Calculator' },
+];
+
+// Related calculators (from the safe pool, domain-appropriate)
+const relatedCalculators = [
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your room.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Tile Calculator',
+    description: 'Calculate tiles, grout, and adhesive for any project.',
+    href: '/calculators/tile-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring materials with a waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Square Footage Calculator',
+    description: 'Measure area for any room or surface.',
+    href: '/calculators/square-footage-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How many rolls of wallpaper do I need?',
+    answer:
+      'First find your wall perimeter by adding up the length of every wall, or use 2 x (length + width) for a simple rectangular room. Divide the perimeter by the roll width to get the number of vertical strips (drops) you need. Then divide the roll length by your wall height to see how many drops you can cut from one roll, and divide the drops needed by the drops per roll. For a 16 m perimeter with 2.4 m high walls and standard rolls, that works out to 31 drops, 4 drops per roll, and 8 rolls.',
+  },
+  {
+    question: 'What is a wallpaper drop?',
+    answer:
+      'A drop is a single vertical strip of wallpaper that runs from the top of the wall to the bottom, including a small trimming allowance. Hanging wallpaper is really just hanging a series of drops side by side around the room. The number of drops you need is set by your wall perimeter and the width of the roll, not by the height of the room.',
+  },
+  {
+    question: 'Why does pattern repeat increase the number of rolls?',
+    answer:
+      'A pattern repeat is the vertical distance between identical points in the design. To make the pattern line up across drops, you have to cut each strip at a repeat boundary, so every drop wastes part of a repeat at the top. The calculator adds the pattern repeat to your wall height when working out how many usable drops fit on a roll. A large repeat can mean one fewer drop per roll, which pushes the roll count up.',
+  },
+  {
+    question: 'What are standard wallpaper roll dimensions?',
+    answer:
+      'A standard UK and European wallpaper roll is about 10.05 m long and 0.53 m wide, giving roughly 5.3 square metres of paper. American rolls are often wider and sold in single or double rolls, so always check the label and enter the actual roll length and width if they differ from the defaults.',
+  },
+  {
+    question: 'Should I buy a spare roll?',
+    answer:
+      'Yes. Buy at least one extra roll beyond the calculated amount and keep it for future repairs. Wallpaper is printed in batches, and the batch (or dye lot) number on the label can vary slightly between print runs. A roll bought months later may not match exactly, so a spare from the original batch is worth keeping.',
+  },
+  {
+    question: 'Does this calculator account for doors and windows?',
+    answer:
+      'No, and that is intentional. Subtracting doors and windows tempts people to under-order, and offcuts above and below openings are rarely large enough to reuse cleanly. Calculating for the full perimeter gives a safe quantity. If you have a very large opening such as a wide patio door, you can reduce the perimeter you enter to suit.',
+  },
+  {
+    question: 'What if my wall height plus pattern repeat is taller than one roll?',
+    answer:
+      'Then no full drop can be cut from a single roll, and the calculator shows a warning instead of a misleading number. This usually means very tall walls or an unusually large repeat. Choose a longer roll, or look for a paper with a smaller repeat or a free-match design that does not need pattern alignment.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Wallpaper Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Wallpaper Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Wallpaper Calculator"
+    description="Work out exactly how many rolls of wallpaper your room needs. Enter the perimeter and wall height and the calculator handles drops, roll size, and pattern repeat waste for you."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <WallpaperCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing your <strong>measurement unit</strong>, metres or feet. Enter the
+      <strong>room length</strong> and <strong>room width</strong> and the calculator will work out the
+      wall perimeter for you. If you have measured the walls directly, type the total into the
+      <strong>wall perimeter</strong> field and it will override the length and width.
+    </p>
+    <p>
+      Next, enter the <strong>wall height</strong> from floor to ceiling. Then set the
+      <strong>roll length</strong> and <strong>roll width</strong>. The defaults match a standard UK
+      roll, 10.05 m long by 0.53 m wide, but you should change them to match the label on the paper
+      you plan to buy, especially for wider American rolls.
+    </p>
+    <p>
+      Finally, enter the <strong>pattern repeat</strong>. Leave it at zero for plain or free-match
+      paper. If the design has a repeat, find the figure on the product page or roll label and enter
+      it. The result updates live as you type, so you can compare papers and roll sizes instantly.
+    </p>
+  </ContentSection>
+
+  <!-- How It Is Calculated Section -->
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The maths behind wallpaper estimating is geometry, not guesswork. The calculator first finds
+      the <strong>wall perimeter</strong>. If you entered a perimeter directly it uses that;
+      otherwise it adds up the four walls using two times the sum of length and width.
+    </p>
+    <p>
+      It then works out the <strong>drops needed</strong>, the number of vertical strips that go
+      around the room. That is the perimeter divided by the roll width, rounded up to the next whole
+      strip, because you cannot hang a fraction of a strip. With a 16 m perimeter and a 0.53 m wide
+      roll, that is 16 divided by 0.53, which is just over 30, so it rounds up to 31 drops.
+    </p>
+    <p>
+      Next it finds the <strong>drops per roll</strong>. Each drop has to clear the wall height plus
+      one pattern repeat so the design lines up, so the effective drop length is the height plus the
+      repeat. The roll length divided by that effective drop length, rounded down to a whole number,
+      gives the usable drops per roll. With a 10.05 m roll and a 2.4 m height and no repeat, that is
+      four drops per roll.
+    </p>
+    <p>
+      The number of <strong>rolls</strong> is then the drops needed divided by the drops per roll, rounded
+      up. For our example that is 31 divided by 4, which rounds up to 8 rolls. Every input is treated
+      as a non-negative number, so blank or invalid entries never produce a misleading figure. If the
+      height plus repeat is taller than a single roll, the calculator warns you instead of returning a
+      meaningless answer.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure is the <strong>rolls needed</strong> to cover your walls. The calculator also
+      suggests buying one extra roll, shown as rolls with spare, so you have matching paper from the same
+      batch for repairs and tricky offcuts.
+    </p>
+    <p>
+      The <strong>drops needed</strong> and <strong>drops per roll</strong> figures show the working behind
+      the result. If drops per roll looks low, check your pattern repeat: a large repeat eats into the
+      usable length of every roll and can add to the total. The measurement summary repeats your perimeter,
+      height, and effective drop length in metres so you can sanity check the numbers against your own
+      tape measure.
+    </p>
+    <p>
+      Treat the result as a confident estimate for a standard rectangular room. Rooms with many
+      corners, chimney breasts, or alcoves use a little more paper because each obstacle creates
+      extra offcuts. When in doubt, round up and keep the spare. Paper from a later batch may not
+      match, so it is far cheaper to over-order by one roll now than to re-paper a wall later.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

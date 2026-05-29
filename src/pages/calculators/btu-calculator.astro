@@ -1,0 +1,198 @@
+---
+/**
+ * BTU Calculator Page
+ *
+ * SEO-optimized page targeting: "btu calculator for room air conditioner / heater"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { BTUCalculator } from '../../components/calculators/BTUCalculator';
+
+// SEO Configuration
+const title = 'BTU Calculator: Size a Room Air Conditioner or Heater (sq ft to BTU)';
+const description =
+  'Free BTU calculator for room air conditioning and heating. Enter room dimensions to get the recommended BTU/hr capacity, kW, cooling tons, and running cost.';
+const keywords =
+  'btu calculator, how many btu do I need, air conditioner sizing, room ac calculator, heating btu calculator, btu per square foot, ac tonnage calculator';
+const canonicalURL = '/calculators/btu-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'BTU Calculator' }];
+
+// Related calculators
+const relatedCalculators = [
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for your room.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring materials with waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Tile Calculator',
+    description: 'Calculate tiles, grout, and adhesive for a room.',
+    href: '/calculators/tile-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How many BTUs do I need per square foot?',
+    answer:
+      'A common rule of thumb is about 20 BTU per square foot for cooling and 25 BTU per square foot for heating. For a 180 square foot room that is roughly 3,600 BTU/hr for an air conditioner or 4,500 BTU/hr for a heater, before adjusting for sun, ceiling height, and occupants.',
+  },
+  {
+    question: 'How do I convert BTU to kW or tons?',
+    answer:
+      'To convert BTU/hr to kilowatts, multiply by 0.000293. So 12,000 BTU/hr is about 3.5 kW. For cooling, capacity is also quoted in tons: 1 ton equals 12,000 BTU/hr, so a 9,000 BTU/hr unit is 0.75 tons.',
+  },
+  {
+    question: 'Why does sun exposure and ceiling height matter?',
+    answer:
+      'A very sunny room gains extra heat, so cooling load goes up by around 10 percent, while a heavily shaded room can drop by 10 percent. Ceiling height scales the load too: this calculator measures against an 8 foot standard, so a 10 foot ceiling raises capacity by about 25 percent because there is more air to condition.',
+  },
+  {
+    question: 'Do kitchens and extra people need more BTUs?',
+    answer:
+      'Yes. Kitchens add appliance and cooking heat, so this calculator adds roughly 4,000 BTU/hr. Each regular occupant beyond the first two adds about 600 BTU/hr because people give off heat. A busy, sunny kitchen needs noticeably more capacity than a quiet shaded bedroom of the same size.',
+  },
+  {
+    question: 'Is a bigger air conditioner always better?',
+    answer:
+      'No. An oversized unit cools the room quickly then shuts off, a pattern called short-cycling. That leaves humidity behind, creates uneven temperatures, and wastes energy. Sizing close to the calculated figure gives steadier comfort and lower running costs.',
+  },
+  {
+    question: 'How is the running cost estimated?',
+    answer:
+      'The calculator multiplies the recommended capacity in kilowatts by the hours you run the unit each day and by your electricity rate. Enter the rate in pence per kilowatt-hour and the result is shown in your chosen currency. This is an indicative figure, since real consumption depends on efficiency rating, weather, and thermostat settings.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'BTU Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="BTU Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="BTU Calculator"
+    description="Work out the cooling or heating capacity your room needs. Enter the dimensions and a few room details to get the recommended BTU/hr, kilowatts, cooling tons, and an estimated running cost."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <BTUCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing your <strong>mode</strong>: cooling if you are sizing an air conditioner, or
+      heating if you are sizing a heater. The mode changes the base rate used, since heating a room
+      generally needs more capacity per square foot than cooling it.
+    </p>
+    <p>
+      Enter the <strong>room length and width</strong> in feet. The calculator multiplies these to get
+      the floor area, then applies the base rate. Set the <strong>ceiling height</strong> as well: most
+      rooms are 8 feet, and anything taller increases the volume of air you have to condition.
+    </p>
+    <p>
+      Adjust the <strong>room conditions</strong> to match reality. In cooling mode, pick the sun exposure:
+      a south-facing room in full sun runs hotter than a shaded north-facing one. In heating mode, pick
+      the insulation quality, because a draughty, poorly insulated room loses heat faster. Choose the
+      room type (a kitchen adds appliance heat) and the number of regular occupants, since each person
+      gives off body heat.
+    </p>
+    <p>
+      The <strong>running cost</strong> fields are optional. Enter your electricity rate in pence per
+      kilowatt-hour and the hours per day you expect the unit to run, and the calculator estimates the
+      daily and monthly cost in your chosen currency. Everything updates live as you type, so there is
+      no submit button to press.
+    </p>
+  </ContentSection>
+
+  <!-- How It Is Calculated Section -->
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The starting point is floor area times a base rate. This calculator uses the widely quoted
+      rules of thumb of <strong>20 BTU per square foot for cooling</strong> and
+      <strong>25 BTU per square foot for heating</strong>. For a 12 by 15 foot room that is 180
+      square feet, giving a base of 3,600 BTU/hr for cooling.
+    </p>
+    <p>
+      That base is then adjusted. Ceiling height scales the figure against an 8 foot standard, so a
+      10 foot ceiling multiplies the load by 1.25. In cooling mode a very sunny room adds about 10
+      percent and a shaded room subtracts about 10 percent. In heating mode, poor insulation adds
+      about 20 percent while good insulation subtracts about 10 percent.
+    </p>
+    <p>
+      Two additive loads come next. A kitchen adds roughly 4,000 BTU/hr for cooking and appliance
+      heat, and every occupant beyond the first two adds about 600 BTU/hr. The final figure is
+      rounded to a sensible step so it lines up with real product capacities. The result is also
+      converted to kilowatts (multiply BTU/hr by 0.000293) and, for cooling, to tons (divide BTU/hr
+      by 12,000).
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure is the <strong>recommended capacity in BTU/hr</strong>. When you shop for
+      a unit, match this number as closely as you can rather than rounding far above it. Oversizing
+      leads to short-cycling, where the unit blasts on and off, leaving humidity and uneven
+      temperatures behind while burning extra energy.
+    </p>
+    <p>
+      The <strong>kilowatt</strong> figure is the same capacity in metric units, useful when comparing
+      heat pumps and electric heaters sold in kW. For air conditioners, the <strong
+        >cooling tons</strong
+      >
+      value helps when products are listed by tonnage rather than BTU.
+    </p>
+    <p>
+      The <strong>running cost</strong> is an indicative estimate based on the capacity, your run time,
+      and your electricity rate. Real consumption depends on the efficiency rating of the unit, outdoor
+      weather, and how you set the thermostat, so treat it as a guide for comparing options rather than
+      an exact bill. A more efficient unit with the same capacity will cost less to run.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

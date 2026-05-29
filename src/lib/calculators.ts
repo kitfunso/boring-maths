@@ -1734,6 +1734,56 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'EU',
     mostUsed: false,
   },
+  {
+    title: 'Concrete Calculator',
+    description:
+      'Work out how much concrete you need for a slab, footing, or column, in bags and cubic metres.',
+    href: '/calculators/concrete-calculator',
+    icon: 'cube',
+    color: 'amber',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Gravel Calculator',
+    description:
+      'Calculate how many tonnes and bulk bags of gravel you need to cover an area to a given depth.',
+    href: '/calculators/gravel-calculator',
+    icon: 'cube',
+    color: 'ocean',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'Wallpaper Calculator',
+    description:
+      'Find out how many rolls of wallpaper you need for a room, allowing for pattern repeat.',
+    href: '/calculators/wallpaper-calculator',
+    icon: 'layers',
+    color: 'violet',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'BTU Calculator',
+    description:
+      'Size the right air conditioner or heater for a room based on its area, ceiling, and sun exposure.',
+    href: '/calculators/btu-calculator',
+    icon: 'fire',
+    color: 'coral',
+    category: 'Home',
+    mostUsed: false,
+  },
+  {
+    title: 'EV Charging Cost Calculator',
+    description: 'Estimate the cost to charge your electric car at home, per charge and per mile.',
+    href: '/calculators/ev-charging-cost-calculator',
+    icon: 'bolt',
+    color: 'green',
+    category: 'Automotive',
+    country: 'UK',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------

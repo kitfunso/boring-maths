@@ -1,0 +1,208 @@
+---
+/**
+ * EV Charging Cost Calculator Page
+ *
+ * SEO-optimized page targeting: "ev charging cost calculator uk"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { EVChargingCostCalculator } from '../../components/calculators/EVChargingCostCalculator';
+
+// SEO Configuration
+const title = 'EV Charging Cost Calculator: Home and Public Charging Cost (UK)';
+const description =
+  'Free EV charging cost calculator. Enter your battery size, charge levels, and electricity rate in pence per kWh to see the cost to charge, cost per mile, and full-charge cost in pounds.';
+const keywords =
+  'ev charging cost calculator, electric car charging cost, cost to charge ev, ev cost per mile, home charging cost, ev charging calculator uk, electric vehicle running cost';
+const canonicalURL = '/calculators/ev-charging-cost-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'EV Charging Cost Calculator' },
+];
+
+// Related calculators (from the safe pool, domain-appropriate)
+const relatedCalculators = [
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Work out the running cost of any appliance from its wattage.',
+    href: '/calculators/electricity-cost-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between currencies at live exchange rates.',
+    href: '/calculators/currency-converter',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Square Footage Calculator',
+    description: 'Calculate the area of a room or space.',
+    href: '/calculators/square-footage-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data (6+ accurate FAQs)
+const faqs = [
+  {
+    question: 'How do I calculate the cost to charge my EV?',
+    answer:
+      'Multiply the energy you add to the battery by your electricity rate. Energy added equals battery size times the change in charge percentage. For example, a 60 kWh battery charged from 20% to 80% adds 36 kWh. At a 90% charging efficiency you draw about 40 kWh from the grid, and at 28p per kWh that costs 40 x 0.28 = 11.20 pounds.',
+  },
+  {
+    question: 'Why is the rate entered in pence per kWh?',
+    answer:
+      'UK electricity tariffs are quoted in pence per kilowatt hour (kWh), so the calculator takes the rate in pence and converts to pounds by dividing by 100. A rate of 28p per kWh becomes 0.28 pounds per kWh in the cost calculation.',
+  },
+  {
+    question: 'What is the difference between home and public charging cost?',
+    answer:
+      'Home charging on a standard or off-peak tariff is usually the cheapest way to charge. Off-peak overnight rates can be well below the daytime price. Public rapid and ultra-rapid chargers are convenient but cost considerably more per kWh, so the same charge can cost several times as much away from home.',
+  },
+  {
+    question: 'What is charging efficiency and why does it matter?',
+    answer:
+      'Not all the energy drawn from the grid reaches the battery. Some is lost as heat in the charger, cables, and battery management. Charging efficiency is the share that actually lands in the battery, typically around 85% to 95%. The calculator divides the energy added by this efficiency so you pay for the energy you actually draw, not just what reaches the battery.',
+  },
+  {
+    question: 'How is cost per mile calculated?',
+    answer:
+      'Cost per mile uses the electricity you actually draw from the grid, including charging losses: your rate divided by your charging efficiency, then divided by your miles per kWh. At 28p per kWh, 90% efficiency, and 3.5 miles per kWh, that is (0.28 / 0.9) / 3.5 = about 0.089 pounds per mile, or roughly 9 pence per mile.',
+  },
+  {
+    question: 'Are the default values accurate for my car?',
+    answer:
+      'The defaults are illustrative. A 60 kWh battery, 28p per kWh rate, 90% efficiency, and 3.5 miles per kWh are reasonable mid-range figures, but every car and tariff differs. Enter your own battery size, real-world efficiency, and current tariff for an accurate estimate.',
+  },
+  {
+    question: 'Should I charge to 100% every time?',
+    answer:
+      'For day-to-day use, many manufacturers suggest charging to around 80% to reduce battery wear, and topping up to 100% only before a long trip. This calculator lets you set any current and target charge so you can compare the cost of a partial top-up against a full charge.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'EV Charging Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="EV Charging Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="EV Charging Cost Calculator"
+    description="Work out exactly what it costs to charge your electric car. Enter your battery size, charge levels, and electricity rate to see the cost for this charge, the cost per mile, and the price of a full charge."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <EVChargingCostCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by entering your <strong>battery size</strong> in kilowatt hours (kWh). This is the usable
+      capacity of your car, which you can find in the vehicle handbook or the manufacturer specification.
+    </p>
+    <p>
+      Set your <strong>current charge</strong> and <strong>target charge</strong> as percentages. The
+      calculator works out the energy added between those two points. The target must be higher than the
+      current charge, otherwise there is nothing to add and the calculator shows a warning instead of
+      a misleading number.
+    </p>
+    <p>
+      Enter your <strong>electricity rate in pence per kWh</strong>. This is how UK tariffs are
+      quoted. The 28p default is illustrative, so replace it with your own home, off-peak, or public
+      charger rate for an accurate figure.
+    </p>
+    <p>
+      Adjust the <strong>charging efficiency</strong> if you know it, or leave it at the 90% default.
+      Finally, set your real-world <strong>miles per kWh</strong> to see the cost per mile. Every result
+      updates live as you type, with no submit button to press.
+    </p>
+  </ContentSection>
+
+  <!-- How It Is Calculated Section -->
+  <ContentSection title="How It Is Calculated">
+    <p>
+      The calculator first finds the <strong>energy added</strong> to the battery. That is the battery
+      size multiplied by the difference between the target and current charge percentages. A 60 kWh battery
+      taken from 20% to 80% adds 60 times 60% which is 36 kWh.
+    </p>
+    <p>
+      Next it finds the <strong>energy drawn from the grid</strong>. Because charging is not
+      perfectly efficient, the energy you pay for is higher than the energy that reaches the
+      battery. The calculator divides the energy added by the charging efficiency. At 90%
+      efficiency, 36 kWh added means about 40 kWh drawn from the grid.
+    </p>
+    <p>
+      The <strong>cost for this charge</strong> is the energy drawn multiplied by the rate in pounds.
+      The rate is entered in pence, so it is divided by 100 first. At 28p per kWh, 40 kWh costs 40 times
+      0.28 which is 11.20 pounds, not 1,120.
+    </p>
+    <p>
+      <strong>Cost per mile</strong> reflects the grid energy you pay for: the rate divided by your charging
+      efficiency, then by your miles per kWh, so (0.28 / 0.9) / 3.5 is about 9 pence per mile. The <strong
+        >full charge cost</strong
+      > applies the same method to a complete 0 to 100% charge, including charging losses.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline figure is the <strong>cost for this charge</strong> in pounds, based on the charge
+      window and rate you entered. Use it to compare a quick top-up at home against the same energy from
+      a public charger.
+    </p>
+    <p>
+      <strong>Cost per mile</strong> turns your electricity rate into a running cost you can compare directly
+      with petrol or diesel. It depends on your real-world efficiency, which falls in cold weather and
+      at motorway speeds, so check it against your own trip data.
+    </p>
+    <p>
+      <strong>Full charge cost</strong> shows the price of a complete 0 to 100% charge at your rate, a
+      useful reference even if you rarely charge to full. <strong>Energy added</strong> shows the kWh
+      that reach the battery alongside the slightly higher figure drawn from the grid, which is what you
+      actually pay for.
+    </p>
+    <p>
+      These figures are estimates for planning and comparison. Real costs vary with battery
+      condition, temperature, charger type, and how your tariff prices peak and off-peak periods.
+      They are not financial advice.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

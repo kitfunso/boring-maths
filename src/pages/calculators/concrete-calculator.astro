@@ -1,0 +1,219 @@
+---
+/**
+ * Concrete Calculator Page
+ *
+ * SEO-optimized page targeting: "concrete calculator how many bags"
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { ConcreteCalculator } from '../../components/calculators/ConcreteCalculator';
+
+// SEO Configuration
+const title = 'Concrete Calculator: How Many Bags for a Slab, Footing or Column';
+const description =
+  'Free concrete calculator. Enter your slab, footing, or column dimensions in metres or feet to get bags needed, volume in cubic metres and cubic yards, plus cost.';
+const keywords =
+  'concrete calculator, how many bags of concrete, concrete slab calculator, concrete volume calculator, cubic metres concrete, footing concrete calculator, column concrete calculator';
+const canonicalURL = '/calculators/concrete-calculator';
+
+const siteUrl = 'https://boring-math.com';
+
+// Breadcrumbs
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators' },
+  { label: 'Concrete Calculator' },
+];
+
+// Related calculators (from the safe pool)
+const relatedCalculators = [
+  {
+    title: 'Tile Calculator',
+    description: 'Work out tiles, grout, and adhesive for any project.',
+    href: '/calculators/tile-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Paint Calculator',
+    description: 'Calculate how much paint you need for a room.',
+    href: '/calculators/paint-calculator',
+    icon: 'calculator' as const,
+    color: 'yellow' as const,
+  },
+  {
+    title: 'Mulch Calculator',
+    description: 'Find how much mulch to buy for garden beds.',
+    href: '/calculators/mulch-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Flooring Calculator',
+    description: 'Calculate flooring materials with a waste factor.',
+    href: '/calculators/flooring-calculator',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Square Footage Calculator',
+    description: 'Measure area for any room or surface.',
+    href: '/calculators/square-footage-calculator',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+// FAQ data
+const faqs = [
+  {
+    question: 'How many bags of concrete do I need?',
+    answer:
+      'Work out the volume of your pour in cubic metres, add a waste allowance, then divide by the yield of one bag. A standard 25kg bag of pre-mix yields about 0.011 cubic metres, so 1 cubic metre needs roughly 91 bags. For the worked example of a 4m x 3m x 0.1m slab, the volume is 1.2 cubic metres, 1.32 cubic metres with 10 percent waste, which is 120 bags.',
+  },
+  {
+    question: 'What is the bag yield assumption in this calculator?',
+    answer:
+      'The default is 0.011 cubic metres per bag, which matches a typical 25kg bag of dry pre-mixed concrete once it is mixed with water. Bag sizes vary by brand and country, so check the yield printed on your bag and update the field if it differs. A 20kg bag yields less, and a 40kg bag yields more.',
+  },
+  {
+    question: 'Should I buy bags or order ready-mix concrete?',
+    answer:
+      'Ready-mix concrete is sold by the cubic metre and delivered by truck. For pours above roughly 1 cubic metre it is usually cheaper, faster, and gives a more consistent mix than hand-mixing dozens of bags. For small jobs like a single footing or a few fence posts, bags are convenient and avoid a minimum delivery charge.',
+  },
+  {
+    question: 'Why does the calculator add a waste allowance?',
+    answer:
+      'Some concrete is always lost to spillage, over-excavation, uneven sub-base, and material stuck in the mixer or wheelbarrow. A 10 percent allowance is a common default for slabs. You can lower it for tidy, well-formed pours or raise it for rough ground and awkward shapes.',
+  },
+  {
+    question: 'How do I calculate concrete for a round column?',
+    answer:
+      'Switch the shape to column. The calculator then treats the width field as the diameter and the depth field as the height, and uses the formula pi times radius squared times height. For example, a column with a 0.5m diameter and 2m height holds about 0.39 cubic metres of concrete.',
+  },
+  {
+    question: 'How do I convert cubic metres to cubic yards?',
+    answer:
+      'Multiply cubic metres by 1.30795. The calculator shows both so you can match whichever unit your supplier quotes. For instance, 1.32 cubic metres is about 1.73 cubic yards.',
+  },
+  {
+    question: 'What thickness should a concrete slab be?',
+    answer:
+      'A typical garden path or shed base is 100mm (0.1m) thick over a compacted sub-base. Driveways and slabs that carry vehicles are usually thicker and may need reinforcement. This calculator estimates material volume only, so check local building guidance for structural requirements.',
+  },
+  {
+    question: 'Does the calculator work in feet as well as metres?',
+    answer:
+      'Yes. Switch the units to feet and enter your dimensions in feet. The calculator converts every dimension to metres before computing the volume, so the bag count and cubic yard figure stay correct.',
+  },
+];
+
+// SEO schema breadcrumbs
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Concrete Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <!-- Schema.org Markup -->
+  <SEOHead
+    slot="schema"
+    name="Concrete Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <!-- Hero Section -->
+  <HeroSection
+    title="Concrete Calculator"
+    description="Estimate how many bags of concrete you need for a slab, footing, or column. Enter your dimensions in metres or feet and get the volume, cubic yards, and a quick cost estimate."
+  />
+
+  <!-- Calculator Component -->
+  <section class="mb-16" aria-label="Calculator">
+    <ConcreteCalculator client:load />
+  </section>
+
+  <!-- How to Use Section -->
+  <ContentSection title="How to Use This Calculator">
+    <p>
+      Start by choosing the <strong>shape</strong> of your pour: a flat <strong>slab</strong> such as
+      a shed base or path, a <strong>footing</strong> such as a strip foundation, or a round
+      <strong>column</strong> such as a post hole or pier.
+    </p>
+    <p>
+      Pick your <strong>units</strong>, either metres or feet, then enter the dimensions. For a slab
+      or footing you enter length, width, and depth. For a column the fields change to
+      <strong>diameter</strong> and <strong>height</strong>, because a column is round rather than
+      rectangular.
+    </p>
+    <p>
+      Set a <strong>waste allowance</strong>. Ten percent is a sensible default that covers spillage
+      and uneven ground. Lower it for clean, well-formed pours, or raise it for rough excavation.
+    </p>
+    <p>
+      Check the <strong>bag yield</strong>. The default of 0.011 cubic metres per bag matches a
+      standard 25kg pre-mix bag. If your bags are a different size, read the yield on the packaging
+      and update the field. Finally, enter a <strong>price per bag</strong> to see a rough cost. The result
+      updates live as you type, so there is no submit button to press.
+    </p>
+  </ContentSection>
+
+  <!-- How It Is Calculated Section -->
+  <ContentSection title="How It Is Calculated">
+    <p>
+      For a <strong>slab</strong> or <strong>footing</strong>, the volume is simply length
+      multiplied by width multiplied by depth. If you entered feet, each dimension is first
+      converted to metres by multiplying by 0.3048, so the volume comes out in cubic metres.
+    </p>
+    <p>
+      For a <strong>column</strong>, the calculator uses the volume of a cylinder: pi multiplied by
+      the radius squared multiplied by the height. The radius is half of the diameter you entered.
+    </p>
+    <p>
+      Next, the <strong>waste allowance</strong> is applied by multiplying the volume by one plus the
+      waste percentage divided by 100. A 1.2 cubic metre slab with a 10 percent allowance becomes 1.32
+      cubic metres. That figure is divided by the bag yield and rounded up to a whole number, because
+      you cannot buy part of a bag. With a 0.011 cubic metre yield, 1.32 cubic metres needs 120 bags.
+      The cubic yard figure is the volume with waste multiplied by 1.30795, and the cost is the bag count
+      multiplied by the price per bag.
+    </p>
+  </ContentSection>
+
+  <!-- Understanding Results Section -->
+  <ContentSection title="Understanding Your Results">
+    <p>
+      The headline number is the <strong>bags needed</strong>. It already includes your waste
+      allowance and is rounded up, so it is the quantity to buy rather than the exact amount the
+      pour consumes. Keeping a spare bag or two on site is wise for any pour.
+    </p>
+    <p>
+      The <strong>volume in cubic metres</strong> is the raw size of the pour before waste. Use it to
+      compare against ready-mix quotes, which are priced per cubic metre. The
+      <strong>cubic yards</strong> figure is the same volume with waste in imperial units, useful if your
+      supplier quotes in yards.
+    </p>
+    <p>
+      The <strong>cost</strong> is a bags-only estimate based on the price you entered. It does not include
+      reinforcement mesh, formwork timber, a sub-base, delivery, or labour, so treat it as a starting
+      point for budgeting. If any dimension is left at zero the calculator shows a prompt rather than
+      a misleading number, so you always know the figures are based on a complete set of measurements.
+    </p>
+  </ContentSection>
+
+  <!-- FAQ Section -->
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
