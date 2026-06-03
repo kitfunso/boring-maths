@@ -865,6 +865,13 @@ const categories = getCategories();
   .calculator-card {
     animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     opacity: 0;
+    /* Skip style/layout/paint for off-screen cards so the ~140 below the fold
+       don't gate the in-viewport LCP card's paint. Render-skipping only (content
+       stays in the DOM and is indexable); contain-intrinsic-size reserves an
+       approximate height and the `auto` keyword caches the real size after first
+       render so scrolling does not jump. */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 240px;
   }
 
   /* After initial load, disable animation for instant filtering */
