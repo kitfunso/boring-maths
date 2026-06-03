@@ -137,12 +137,15 @@ const ogImageURL = ogImage
             var hasContent = iframe && iframe.clientHeight > 0;
             var unfilled =
               status === 'unfilled' || (!hasContent && ins.getAttribute('data-adsbygoogle-status'));
+            var filled = status === 'filled' || hasContent;
             var anchor = containers[i].closest('.mobile-anchor-ad');
             if (unfilled) {
               containers[i].classList.add('ad-unfilled');
               if (anchor) anchor.style.display = 'none';
-            } else if (anchor) {
-              // Anchor filled: reserve bottom space so the fixed bar doesn't cover content.
+            } else if (anchor && filled) {
+              // Anchor POSITIVELY filled: reserve bottom space so the fixed bar doesn't
+              // cover content. Gated on an observed fill (not !unfilled) so a pending,
+              // blocked, or never-loaded anchor never leaves a permanent bottom gap.
               document.body.classList.add('has-anchor-ad');
             }
           }
