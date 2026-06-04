@@ -9,8 +9,10 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://boring-math.com/',
 
-  // Consistent trailing slash handling for better SEO
-  trailingSlash: 'never',
+  // Cloudflare Pages serves directory-format output at the trailing-slash URL
+  // and 308-redirects the non-slash form, so we align canonical + sitemap to
+  // 'always' to match what is actually served (avoids a canonical/served mismatch).
+  trailingSlash: 'always',
 
   vite: {
     plugins: [tailwindcss()],
