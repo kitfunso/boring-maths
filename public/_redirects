@@ -1,40 +1,18 @@
-# Redirect trailing slashes to non-trailing slash versions
-# This ensures URL consistency with trailingSlash: 'never' in Astro config
-# Format: [from] [to] [status]
-
-# Static pages
-/about/                      /about                       301!
-/affiliate-disclosure/       /affiliate-disclosure        301!
+# Alias and legacy-path redirects.
+#
+# Trailing-slash normalization is intentionally NOT handled here. Cloudflare
+# serves the directory-format build output at the trailing-slash URL (200) and
+# 308-redirects the non-slash form to it, and astro.config uses
+# trailingSlash: 'always' so canonical + sitemap match what is served. The old
+# per-path slash-stripping rules (/about/ -> /about, /calculators/*/ -> :splat,
+# /guides/*/ -> :splat, etc.) were removed: they contradicted 'always' and were
+# already shadowed dead by the directory assets (the slash URL serves 200).
 
 # Privacy: hard 301 directly to /privacy-policy
 # (replaces a previous Astro redirect that emitted a noindex meta-refresh stub
 #  flagged by GSC as "Excluded by 'noindex' tag")
 /privacy/                    /privacy-policy              301!
 /privacy                     /privacy-policy              301!
-
-# Calculator category pages
-/calculators/automotive/     /calculators/automotive      301!
-/calculators/brewing/        /calculators/brewing         301!
-/calculators/business/       /calculators/business        301!
-/calculators/engineering/    /calculators/engineering     301!
-/calculators/events/         /calculators/events          301!
-/calculators/everyday/       /calculators/everyday        301!
-/calculators/finance/        /calculators/finance         301!
-/calculators/health/         /calculators/health          301!
-/calculators/hobbies/        /calculators/hobbies         301!
-/calculators/home/           /calculators/home            301!
-/calculators/income/         /calculators/income          301!
-/calculators/uk-tax/         /calculators/uk-tax          301!
-/calculators/us-tax/         /calculators/us-tax          301!
-
-# All calculator pages (must come after more specific rules)
-/calculators/*/              /calculators/:splat          301!
-
-# Guide pages
-/guides/*/                   /guides/:splat               301!
-
-# Calculators index - redirect to homepage (which shows all calculators)
-/calculators/                /                            301!
 
 # Sitemap redirect (Astro generates sitemap-index.xml)
 /sitemap.xml                 /sitemap-index.xml           301
