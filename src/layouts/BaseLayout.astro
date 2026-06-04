@@ -30,7 +30,12 @@ const {
 } = Astro.props;
 
 const siteURL = Astro.site || 'https://boring-math.com';
-const fullCanonicalURL = new URL(canonicalURL, siteURL).href;
+// Normalize to a trailing slash so the canonical (and og:url/twitter:url derived
+// from it) matches what Cloudflare serves (directory format) and the sitemap
+// (trailingSlash: 'always'). Pages pass hardcoded non-slash paths, so normalize
+// centrally here rather than editing every page. Root '/' is left unchanged.
+const canonicalPath = canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`;
+const fullCanonicalURL = new URL(canonicalPath, siteURL).href;
 const currentPath = Astro.url.pathname;
 
 // Determine OG image: use custom if provided, otherwise default
