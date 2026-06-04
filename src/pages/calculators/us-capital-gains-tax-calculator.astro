@@ -11,9 +11,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { USCapitalGainsTaxCalculator } from '../../components/calculators/USCapitalGainsTaxCalculator';
 
-const title = 'Free Capital Gains Tax Calculator — Stocks & Crypto | Boring Math';
+const title = 'US Capital Gains Tax Calculator 2025: Stocks, Crypto & Real Estate';
 const description =
-  'Free capital gains tax calculator for 2025. Calculate tax on stocks, crypto, and investments with long-term vs short-term rates.';
+  'Free US capital gains tax calculator for 2025. Federal short-term vs long-term rates on stocks, crypto, and real estate, plus the 3.8% NIIT for high earners.';
 const keywords =
   'capital gains tax calculator, stock tax calculator, crypto tax calculator, long term capital gains, short term capital gains, NIIT calculator, investment tax';
 const canonicalURL = '/calculators/us-capital-gains-tax-calculator';
@@ -21,7 +21,7 @@ const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
   { label: 'Calculators', href: '/calculators' },
-  { label: 'Capital Gains Tax Calculator' },
+  { label: 'US Capital Gains Tax Calculator' },
 ];
 
 const relatedCalculators = [
@@ -93,7 +93,7 @@ const faqs = [
 
 const schemaBreadcrumbs = [
   { name: 'Calculators', url: '/calculators' },
-  { name: 'Capital Gains Tax Calculator', url: canonicalURL },
+  { name: 'US Capital Gains Tax Calculator', url: canonicalURL },
 ];
 ---
 
@@ -107,7 +107,7 @@ const schemaBreadcrumbs = [
 >
   <SEOHead
     slot="schema"
-    name="Capital Gains Tax Calculator"
+    name="US Capital Gains Tax Calculator"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -115,8 +115,8 @@ const schemaBreadcrumbs = [
   />
 
   <HeroSection
-    title="Capital Gains Tax Calculator"
-    description="Calculate tax on stocks, cryptocurrency, real estate, and other investments. See the difference between short-term and long-term rates."
+    title="US Capital Gains Tax Calculator"
+    description="Calculate US federal tax on stocks, cryptocurrency, real estate, and other investments. See the difference between short-term and long-term rates."
   />
 
   <section class="mb-16" aria-label="Calculator">
