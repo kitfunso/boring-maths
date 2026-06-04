@@ -13,10 +13,24 @@ from collections import defaultdict
 from typing import NamedTuple
 
 # Paths
-BASE_DIR = Path("C:/Users/skf_s/boring-maths")
-GSC_DIR = BASE_DIR / "gsc-export" / "2026-04-10"
+BASE_DIR = Path(__file__).resolve().parent.parent
 PAGES_DIR = BASE_DIR / "src" / "pages" / "calculators"
-OUTPUT_PATH = BASE_DIR / "docs" / "gsc-analysis-2026-04-10.md"
+
+
+def _latest_export_dir() -> Path:
+    """Newest dated subfolder under gsc-export/ (so analysis always reads the freshest pull)."""
+    export_root = BASE_DIR / "gsc-export"
+    dated = sorted(
+        (d for d in export_root.iterdir() if d.is_dir() and (d / "gsc-pages-28d.json").exists()),
+        key=lambda d: d.name,
+    )
+    if not dated:
+        raise SystemExit(f"No GSC export folders found under {export_root}. Run: npm run seo:gsc-pull")
+    return dated[-1]
+
+
+GSC_DIR = _latest_export_dir()
+OUTPUT_PATH = BASE_DIR / "docs" / f"gsc-analysis-{GSC_DIR.name}.md"
 
 # --- Data Loading ---
 
@@ -202,7 +216,7 @@ def generate_report(
     page_titles: dict[str, str],
 ) -> str:
     lines = []
-    lines.append("# GSC Analysis Report — 2026-04-10 (28-day window)")
+    lines.append(f"# GSC Analysis Report — {GSC_DIR.name} (28-day window)")
     lines.append("")
     lines.append("## Summary")
     lines.append("")

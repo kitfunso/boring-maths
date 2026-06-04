@@ -20,6 +20,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,astro,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,astro,css}\"",
     "seo:cluster": "node scripts/seo/keyword-cluster-pipeline.mjs",
+    "seo:gsc-pull": "node scripts/seo/gsc-pull.mjs",
     "seo:gsc-refresh": "node scripts/seo/gsc-refresh-workflow.mjs",
     "seo:internal-links": "node scripts/seo/internal-link-map.mjs",
     "test:e2e": "npx playwright test",

@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# GSC API credentials + cached OAuth token (never commit)
+scripts/seo/.gsc-client.json
+scripts/seo/.gsc-token.json
+
 # macOS-specific files
 .DS_Store
 
