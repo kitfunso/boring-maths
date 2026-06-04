@@ -99,6 +99,23 @@ body {
   overflow-x: hidden;
 }
 
+/* Safe-area utility (referenced by the mobile anchor ad wrapper) */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/*
+ * When the mobile anchor ad is FILLED, BaseLayout's ad init adds .has-anchor-ad
+ * to <body> so page content clears the fixed bar. Added conditionally, so an
+ * unfilled (hidden) anchor leaves no permanent bottom gap. padding-bottom does
+ * not reposition existing content, so applying it post-load is CLS-safe.
+ */
+@media (max-width: 1023px) {
+  body.has-anchor-ad {
+    padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  }
+}
+
 /* Remove 300ms tap delay on mobile for all interactive elements */
 button,
 a,

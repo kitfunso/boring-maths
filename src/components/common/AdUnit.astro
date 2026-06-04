@@ -16,6 +16,12 @@ export interface Props {
   className?: string;
   style?: string;
   lazy?: boolean;
+  /**
+   * When set (px), this is an in-flow slot: reserve a fixed-height box and HOLD it
+   * (never collapse) so a filled creative fits exactly and unfilled slots do not
+   * shift layout. Keeps mobile CLS at zero on the two in-content calculator slots.
+   */
+  reserveHeight?: number;
 }
 
 const {
@@ -26,23 +32,44 @@ const {
   className = '',
   style = 'display:block',
   lazy = true,
+  reserveHeight,
 } = Astro.props;
 
 const isProd = import.meta.env.PROD;
 const clientId = import.meta.env.PUBLIC_ADSENSE_ID || 'ca-pub-8014911033000505';
 const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
+
+// In-flow reserve-and-hold slot: deterministic fixed-height box, no collapse.
+const isReserved = typeof reserveHeight === 'number' && reserveHeight > 0;
+const containerClass = `ad-container${isReserved ? ' ad-reserved' : ''} ${className}`.trim();
+const containerStyle = isReserved
+  ? `min-height:${reserveHeight}px;height:${reserveHeight}px`
+  : undefined;
+// Fixed-height, responsive-width unit (Google AdSense answer 9183363): omitting
+// data-ad-format + data-full-width-responsive bounds the served creative to the box.
+const insStyle = isReserved ? `display:block;width:100%;height:${reserveHeight}px` : style;
 ---
 
 {
   isProd && (
-    <div class={`ad-container ${className}`} id={uniqueId} data-ad-lazy={lazy ? 'true' : 'false'}>
+    <div
+      class={containerClass}
+      id={uniqueId}
+      data-ad-lazy={lazy ? 'true' : 'false'}
+      style={containerStyle}
+    >
+      {isReserved && (
+        <span class="ad-reserved-label" aria-hidden="true">
+          Advertisement
+        </span>
+      )}
       <ins
         class="adsbygoogle"
-        style={style}
+        style={insStyle}
         data-ad-client={clientId}
         data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
+        data-ad-format={isReserved ? undefined : format}
+        data-full-width-responsive={isReserved ? undefined : 'true'}
         data-ad-layout={layout}
         data-ad-layout-key={layoutKey}
       />
@@ -61,22 +88,50 @@ const uniqueId = `ad-${slot}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
 <style>
-  /* Collapse ad containers when AdSense doesn't fill them */
   .ad-container {
     min-height: 100px; /* Reserve space to prevent CLS */
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
   }
-  .ad-container:has(ins[data-ad-status="unfilled"]) {
+  /*
+   * Collapse ONLY non-reserved unfilled slots (mobile anchor + desktop sidebar/top).
+   * No transition: an animated max-height collapse is itself a layout-shift event.
+   * Reserved in-flow slots (.ad-reserved) are excluded so they never collapse.
+   */
+  .ad-container:not(.ad-reserved):has(ins[data-ad-status="unfilled"]) {
     max-height: 0 !important;
     opacity: 0;
     margin: 0 !important;
     padding: 0 !important;
   }
-  .ad-container.ad-unfilled {
+  .ad-container:not(.ad-reserved).ad-unfilled {
     max-height: 0 !important;
     opacity: 0;
     margin: 0 !important;
     padding: 0 !important;
+  }
+  /*
+   * Reserved in-flow slot: a fixed deterministic box that holds its height.
+   * The faint placeholder sits behind the <ins>; a filled creative paints over it,
+   * an unfilled slot simply shows it — neither changes the box height (CLS = 0).
+   */
+  .ad-container.ad-reserved {
+    position: relative;
+  }
+  .ad-container.ad-reserved ins.adsbygoogle {
+    position: relative;
+    z-index: 1;
+  }
+  .ad-reserved-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    pointer-events: none;
+    z-index: 0;
   }
 </style>
