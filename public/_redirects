@@ -8,11 +8,12 @@
 # /guides/*/ -> :splat, etc.) were removed: they contradicted 'always' and were
 # already shadowed dead by the directory assets (the slash URL serves 200).
 
-# Privacy: hard 301 directly to /privacy-policy
-# (replaces a previous Astro redirect that emitted a noindex meta-refresh stub
-#  flagged by GSC as "Excluded by 'noindex' tag")
-/privacy/                    /privacy-policy              301!
-/privacy                     /privacy-policy              301!
+# Privacy: 301 the /privacy alias to the real page. Target MUST be the
+# trailing-slash URL: Cloudflare serves the page at /privacy-policy/ (the
+# directory asset); a redirect target of /privacy-policy (no file at that exact
+# path) does not resolve and 404s, which is why the old rule never fired.
+/privacy/                    /privacy-policy/             301
+/privacy                     /privacy-policy/             301
 
 # Sitemap redirect (Astro generates sitemap-index.xml)
 /sitemap.xml                 /sitemap-index.xml           301
