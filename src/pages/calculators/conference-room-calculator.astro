@@ -12,9 +12,9 @@ import ConferenceRoomCalculator from '../../components/calculators/ConferenceRoo
 
 const title = 'Meeting Room Capacity Calculator: How Many People Fit in Your Room?';
 const description =
-  'Enter your room dimensions and see exactly how many people fit in theater, classroom, U-shape, and boardroom layouts. Compare setups side by side before you book.';
+  'Free room capacity calculator. Enter your room dimensions to see seating capacity for theater, classroom, U-shape, and boardroom layouts. Compare setups before you book.';
 const keywords =
-  'conference room calculator, meeting room capacity, seating capacity calculator, meeting space calculator, room capacity calculator, room layout planner, theater vs classroom seating, boardroom capacity';
+  'conference room calculator, meeting room capacity, seating capacity calculator, meeting space calculator, room capacity calculator, conference room size per person, square feet per person meeting room, room layout planner, theater vs classroom seating, boardroom capacity';
 const canonicalURL = '/calculators/conference-room-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -53,6 +53,16 @@ const faqs = [
     question: 'How many square feet per person for a conference room?',
     answer:
       'Theater style: 6-8 sq ft/person. Classroom: 15-18 sq ft/person. Banquet rounds: 10-12 sq ft/person. U-shape/Hollow square: 20-25 sq ft/person. Boardroom: 20-25 sq ft/person. Cocktail/standing: 6-8 sq ft/person.',
+  },
+  {
+    question: 'How much space per person does a meeting room need?',
+    answer:
+      'Plan on 6-8 sq ft (0.6-0.7 sq m) per person for theater rows, 15-18 sq ft (1.4-1.7 sq m) for classroom tables, 10-12 sq ft (0.9-1.1 sq m) for banquet rounds, and 20-25 sq ft (1.9-2.3 sq m) for boardroom or U-shape layouts. Standing room needs 6-8 sq ft per person. Any layout with tables needs roughly two to three times the space of chairs alone.',
+  },
+  {
+    question: 'How do I calculate seating capacity of a room?',
+    answer:
+      'Divide the usable floor area by the square footage per person for your layout. A 600 sq ft room set theater style at 6-8 sq ft per person seats roughly 75-100 people; the same room in classroom style at 15-18 sq ft per person seats 33-40. Measure usable area after subtracting wall clearance, aisles, and presenter space, and check your fire code occupancy limit before confirming a headcount.',
   },
   {
     question: 'What is theater style seating?',
@@ -122,6 +132,71 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <ConferenceRoomCalculator client:load />
   </section>
+
+  <ContentSection title="Conference Room Size Per Person">
+    <p>
+      A conference room needs roughly 6 to 25 square feet per person (0.6 to 2.3 sq m), depending on
+      the layout. Theater seating is the tightest at 6-8 sq ft per person; boardroom and U-shape
+      layouts need 20-25 sq ft per person because tables take up most of the floor. To estimate
+      seating capacity, divide your usable floor area by the figure for your layout.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Layout</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Sq ft per person</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">Sq m per person</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Best for</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 text-[var(--color-cream)]">Theater</td>
+            <td class="text-right py-2 px-3">6-8</td>
+            <td class="text-right py-2 px-3">0.6-0.7</td>
+            <td class="py-2 px-3">Presentations, all-hands, keynotes</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 text-[var(--color-cream)]">Classroom</td>
+            <td class="text-right py-2 px-3">15-18</td>
+            <td class="text-right py-2 px-3">1.4-1.7</td>
+            <td class="py-2 px-3">Training with laptops or note-taking</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 text-[var(--color-cream)]">Banquet rounds</td>
+            <td class="text-right py-2 px-3">10-12</td>
+            <td class="text-right py-2 px-3">0.9-1.1</td>
+            <td class="py-2 px-3">Working lunches, group discussions</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 text-[var(--color-cream)]">Boardroom / conference</td>
+            <td class="text-right py-2 px-3">20-25</td>
+            <td class="text-right py-2 px-3">1.9-2.3</td>
+            <td class="py-2 px-3">Executive meetings, small groups</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 text-[var(--color-cream)]">U-shape</td>
+            <td class="text-right py-2 px-3">20-25</td>
+            <td class="text-right py-2 px-3">1.9-2.3</td>
+            <td class="py-2 px-3">Workshops with presenter interaction</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-3 text-[var(--color-cream)]">Cocktail (standing)</td>
+            <td class="text-right py-2 px-3">6-8</td>
+            <td class="text-right py-2 px-3">0.6-0.7</td>
+            <td class="py-2 px-3">Networking, informal mixers</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-4">
+      Usable floor area is the room minus wall clearance, aisles, and any presenter or AV space,
+      which is why a 1,000 sq ft room never seats the full 1,000 / 6 = 166 theater capacity. The
+      room capacity calculator above does that subtraction for you and shows seating capacity for
+      every layout at once.
+    </p>
+  </ContentSection>
 
   <ContentSection title="How to Use This Calculator">
     <p>

@@ -12,7 +12,7 @@ import { UKCapitalGainsTaxCalculator } from '../../components/calculators/UKCapi
 
 const title = 'UK Capital Gains Tax Calculator 2025/26: Property, Shares & Crypto CGT';
 const description =
-  'Free UK capital gains tax calculator for 2025/26. Work out CGT on property, shares, and crypto at 18%/24% and 10%/20% rates. Same across England, Scotland, Wales and NI.';
+  'Free UK capital gains tax calculator for 2025/26. Work out CGT on property, shares, and crypto at the 18% and 24% rates. Same across England, Scotland, Wales and NI.';
 const keywords =
   'capital gains tax calculator uk, cgt calculator, capital gains tax property uk, capital gains tax shares, cgt rates 2025, annual cgt exemption, capital gains tax allowance';
 const canonicalURL = '/calculators/uk-capital-gains-tax-calculator';
@@ -56,14 +56,14 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: 'What are the UK CGT rates for 2024/25?',
+    question: 'What are the UK CGT rates for 2025/26?',
     answer:
-      'For 2024/25, CGT rates on residential property are 18% (basic rate) and 24% (higher rate). For other assets like shares and crypto, rates are 10% (basic rate) and 20% (higher rate). The rate you pay depends on your total taxable income and gains.',
+      'For 2025/26, CGT rates are 18% (basic rate) and 24% (higher rate) for all chargeable assets, including residential property, shares, and crypto. Rates on shares and other assets rose from 10%/20% to 18%/24% for disposals on or after 30 October 2024. The rate you pay depends on your total taxable income and gains.',
   },
   {
     question: 'What is the annual CGT exemption?',
     answer:
-      'The annual exempt amount for 2024/25 is £3,000 (reduced from £6,000 in 2023/24 and £12,300 before that). This means the first £3,000 of capital gains each tax year is tax-free. Each individual has their own exemption.',
+      'The annual exempt amount for 2025/26 is £3,000 (reduced from £6,000 in 2023/24 and £12,300 before that). This means the first £3,000 of capital gains each tax year is tax-free. Each individual has their own exemption.',
   },
   {
     question: 'How is CGT calculated on property?',
@@ -83,7 +83,7 @@ const faqs = [
   {
     question: 'Is capital gains tax different in Scotland?',
     answer:
-      'No. Unlike income tax, capital gains tax is not devolved, so CGT rates and the annual exempt amount are the same across England, Scotland, Wales, and Northern Ireland. Scottish taxpayers use the same 18% and 24% property rates and 10% and 20% rates on shares and other assets, based on their UK income tax band.',
+      'No. Capital gains tax is reserved to Westminster, not devolved, so CGT rates and the £3,000 annual exempt amount are the same across England, Scotland, Wales, and Northern Ireland. For a Scottish taxpayer, whether the basic or higher CGT rate applies is set by the UK-wide higher-rate threshold of £50,270, not by the Scottish income tax bands.',
   },
   {
     question: 'Can I offset capital losses against gains?',
@@ -153,17 +153,18 @@ const schemaBreadcrumbs = [
   <ContentSection title="Property vs Shares CGT Rates">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
-        The UK has <strong class="text-[var(--color-cream)]">different CGT rates</strong> depending on
-        the type of asset. Residential property attracts higher rates than shares and other assets.
+        Since 30 October 2024 the UK charges the
+        <strong class="text-[var(--color-cream)]">same CGT rates</strong> on every type of chargeable
+        asset: 18% for basic rate taxpayers and 24% for higher/additional rate taxpayers.
       </p>
       <p>
         <strong class="text-amber-400">Residential property:</strong> 18% for basic rate taxpayers, 24%
-        for higher/additional rate taxpayers (increased from 28% to 24% from April 2024).
+        for higher/additional rate taxpayers (the higher-rate charge fell from 28% to 24% in April 2024).
       </p>
       <p>
-        <strong class="text-emerald-400">Shares and other assets:</strong> 10% for basic rate taxpayers,
-        20% for higher/additional rate taxpayers. These rates apply to shares, crypto, personal possessions
-        worth over £6,000, and business assets.
+        <strong class="text-emerald-400">Shares and other assets:</strong> also 18% and 24%, raised from
+        10%/20% for disposals on or after 30 October 2024. These rates apply to shares, crypto, personal
+        possessions worth over £6,000, and business assets.
       </p>
     </div>
   </ContentSection>

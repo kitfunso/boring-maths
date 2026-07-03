@@ -2,7 +2,8 @@
 /**
  * Cooking Time Calculator Page
  *
- * SEO-optimized page targeting: "cooking time calculator by weight", "how long to cook"
+ * SEO-optimized page targeting: "meat cooking time calculator", "how to calculate cooking time",
+ * "beef/pork/chicken cook time calculator", "cooking time by weight"
  */
 
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
@@ -13,11 +14,11 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CookingTimeCalculator from '../../components/calculators/CookingTimeCalculator/CookingTimeCalculator';
 
 // SEO Configuration
-const title = 'Cooking Time Calculator by Weight | Boring Math';
+const title = 'Meat Cooking Time Calculator: Beef, Pork & Chicken | Boring Math';
 const description =
-  'Calculate cooking time by weight for beef, chicken, turkey, pork, lamb, salmon, and ham. Get oven temps, internal temperatures (USDA safe), and resting times. Works for oven, slow cooker, air fryer, and grill.';
+  'Calculate cooking time for beef, pork, chicken, lamb, and turkey by weight in lbs or kg. Minutes per pound, oven temps, USDA and UK FSA safe internal temperatures, and resting times.';
 const keywords =
-  'cooking time calculator, how long to cook, meat cooking time by weight, oven cooking calculator, internal temperature chart, cooking time per pound, slow cooker time calculator, air fryer cooking time, grill time calculator, USDA safe temperature';
+  'meat cooking time calculator, how to calculate cooking time, beef cooking time calculator, pork cooking time calculator, chicken cook time calculator, cooking time per pound, cooking time per kg, meat cook time calculator, lamb cooking times, cooking time by weight, safe internal temperature, USDA safe temperature';
 const canonicalURL = '/calculators/cooking-time-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -70,9 +71,29 @@ const relatedCalculators = [
 // FAQ data
 const faqs = [
   {
-    question: 'How do I calculate cooking time by weight?',
+    question: 'How do I calculate cooking time?',
     answer:
-      'Multiply the weight in pounds by the minutes-per-pound rate for your meat and cooking method. For example, a 5 lb chicken in the oven at 375°F takes about 20 minutes per pound, so 5 × 20 = 100 minutes (1 hour 40 minutes). Always verify doneness with a meat thermometer.',
+      'Multiply the weight of the meat by the minutes-per-pound rate for that meat and cooking method, then add resting time. For example, a 5 lb whole chicken in the oven at 375°F takes about 20 minutes per pound, so 5 × 20 = 100 minutes (1 hour 40 minutes), plus 15 minutes rest. Always confirm doneness with a meat thermometer, not the clock.',
+  },
+  {
+    question: 'How do I calculate cooking time for beef?',
+    answer:
+      'For a beef roast in a 325°F (163°C) oven, allow about 20 minutes per pound for medium, 15 minutes per pound for rare, and 25 minutes per pound for well done. A 4 lb roast cooked to medium takes about 1 hour 20 minutes plus 15 minutes rest. Pull it at 135°F (57°C) for medium rare or 145°F (63°C) for medium; the temperature keeps rising as it rests.',
+  },
+  {
+    question: 'How do I calculate cooking time for pork?',
+    answer:
+      'Allow about 25 minutes per pound (55 minutes per kg) for a pork roast at 350°F (177°C), so a 3 lb roast takes about 75 minutes. Pork chops cook faster at a higher heat: 400°F in the oven, or 4-5 minutes per side on a grill for 1-inch chops. Whole cuts of pork are done at 145°F (63°C) with a 3-minute rest, per USDA guidance.',
+  },
+  {
+    question: 'How do I calculate cooking time for chicken?',
+    answer:
+      'A whole chicken roasts at 375°F (191°C) for about 20 minutes per pound, so a 5 lb bird takes about 1 hour 40 minutes. Chicken breasts bake at 400°F for about 22 minutes per pound, or 18 minutes per pound in an air fryer at 380°F. All chicken is done at 165°F (74°C) internal; there is no rare or medium option for poultry.',
+  },
+  {
+    question: 'How long should I cook meat per kg?',
+    answer:
+      'Multiply the per-pound rate by 2.2. Roast beef at medium works out to about 44 minutes per kg, pork roast about 55 minutes per kg, whole chicken about 44 minutes per kg, lamb leg about 44 minutes per kg, and whole turkey about 33 minutes per kg. The calculator accepts weights in kg directly and does this conversion for you.',
   },
   {
     question: 'What are the USDA safe internal temperatures?',
@@ -80,24 +101,19 @@ const faqs = [
       'The USDA recommends: poultry (chicken, turkey) must reach 165°F (74°C). Whole cuts of beef, pork, lamb, and veal should reach 145°F (63°C) with a 3-minute rest. Ground meats should reach 160°F (71°C). Pre-cooked ham should be reheated to 140°F (60°C). Fish should reach 145°F (63°C).',
   },
   {
+    question: 'What does the UK FSA recommend for cooking meat?',
+    answer:
+      'The UK Food Standards Agency works to a core temperature of 70°C held for 2 minutes (75°C for 30 seconds is an accepted equivalent). Poultry, pork, and anything minced or rolled must be cooked all the way through with no pink meat and juices running clear. Whole cuts of beef and lamb, such as steaks and joints, can be served rare provided the outside surfaces are fully cooked.',
+  },
+  {
     question: 'Why is resting time important?',
     answer:
       'Resting allows the internal temperature to rise 5-10°F through carryover cooking, and lets juices redistribute throughout the meat. Without resting, juices pool out when you cut, leaving the meat drier. Rest times vary: 5 minutes for thin cuts like chicken breast, up to 30 minutes for a whole turkey.',
   },
   {
-    question: 'How do slow cooker times compare to oven times?',
-    answer:
-      'Slow cooker times are roughly 3-4x longer than oven times. The low, steady heat breaks down connective tissue for tender results. Generally, LOW setting = 8-10 hours and HIGH setting = 4-6 hours for roasts. Always ensure the internal temperature reaches the safe minimum.',
-  },
-  {
     question: 'Can I cook a frozen piece of meat without thawing?',
     answer:
       'You can cook frozen meat safely, but it takes approximately 50% longer than thawed meat. The USDA confirms this is safe as long as the internal temperature reaches the required minimum. However, slow cookers should not be used for frozen meat because it spends too long in the 40-140°F danger zone.',
-  },
-  {
-    question: 'How does an air fryer compare to a conventional oven?',
-    answer:
-      'Air fryers cook about 20-25% faster than conventional ovens because the circulating hot air transfers heat more efficiently. They also produce crispier exteriors. Reduce the oven temperature by about 25°F when adapting oven recipes for an air fryer, and check for doneness earlier.',
   },
   {
     question: 'How accurate is a cooking time calculator?',
@@ -124,7 +140,7 @@ const schemaBreadcrumbs = [
   <!-- Schema.org Markup -->
   <SEOHead
     slot="schema"
-    name="Cooking Time Calculator"
+    name="Meat Cooking Time Calculator"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -133,14 +149,354 @@ const schemaBreadcrumbs = [
 
   <!-- Hero Section -->
   <HeroSection
-    title="Cooking Time Calculator"
-    description="Enter the type and weight of your meat to get cooking time, oven temperature, internal temperature target, and resting time for any method."
+    title="Meat Cooking Time Calculator"
+    description="Calculate cooking time for beef, pork, chicken, lamb, turkey, salmon, and ham by weight in lbs or kg. Get the cooking time, oven temperature, safe internal temperature, and resting time for oven, slow cooker, air fryer, or grill."
   />
 
   <!-- Calculator Component -->
   <section class="mb-16" aria-label="Calculator">
     <CookingTimeCalculator client:load />
   </section>
+
+  <!-- Answer-First: How to Calculate Cooking Time -->
+  <ContentSection title="How to Calculate Cooking Time">
+    <p>
+      To calculate cooking time, multiply the weight of the meat by a minutes-per-pound rate set by
+      the meat and the oven temperature: a beef roast at 325°F (163°C) needs about
+      <strong>20 minutes per pound</strong> for medium, a pork roast at 350°F (177°C) about
+      <strong>25 minutes per pound</strong>, and a whole chicken at 375°F (191°C) about
+      <strong>20 minutes per pound</strong>. Working in kilograms, multiply the per-pound rate by
+      2.2, so roast beef runs about 44 minutes per kg. Then add resting time after cooking: 5
+      minutes for chops and breasts, 15-30 minutes for large roasts, during which the internal
+      temperature rises another 5-10°F.
+    </p>
+    <p>
+      Time is only an estimate. The real test of doneness is <strong>internal temperature</strong>,
+      measured with an instant-read thermometer in the thickest part of the meat, away from bone.
+      Oven calibration, bone-in vs boneless cuts, and the meat's starting temperature all shift the
+      clock, but the target temperature never changes.
+    </p>
+    <p>
+      Cooking method changes the rate. A <strong>slow cooker</strong> on LOW takes roughly 2.5-3 times
+      the oven time. An <strong>air fryer</strong> runs 10-25% faster than a conventional oven for smaller
+      cuts like chops, breasts, and fillets. Grill times track oven times when you cook over indirect
+      heat.
+    </p>
+    <p>
+      Temperatures on this page are for conventional ovens. For a fan (convection) oven, reduce the
+      Celsius setting by about 20°C, so 375°F / 191°C conventional is roughly 170°C fan.
+    </p>
+  </ContentSection>
+
+  <!-- Beef Cooking Times -->
+  <ContentSection title="Beef Cooking Times">
+    <p>
+      Roast beef at <strong>325°F (163°C)</strong>. The rate and the pull temperature both depend on
+      how done you want it. Pull the roast when it reads the temperature below; it will climb a few
+      more degrees while it rests for 15 minutes.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Doneness</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Pull temperature</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Rare</td>
+            <td class="py-2 pr-4">15</td>
+            <td class="py-2 pr-4">33</td>
+            <td class="py-2">125°F (52°C)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Medium rare</td>
+            <td class="py-2 pr-4">17</td>
+            <td class="py-2 pr-4">37</td>
+            <td class="py-2">135°F (57°C)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Medium</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2">145°F (63°C)</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Medium well</td>
+            <td class="py-2 pr-4">22</td>
+            <td class="py-2 pr-4">49</td>
+            <td class="py-2">150°F (66°C)</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Well done</td>
+            <td class="py-2 pr-4">25</td>
+            <td class="py-2 pr-4">55</td>
+            <td class="py-2">160°F (71°C)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A 4 lb (1.8 kg) beef roast cooked to medium takes about 1 hour 20 minutes plus 15 minutes
+      rest. In a slow cooker on LOW, allow about 60 minutes per pound instead.
+    </p>
+  </ContentSection>
+
+  <!-- Pork Cooking Times -->
+  <ContentSection title="Pork Cooking Times">
+    <p>
+      Whole cuts of pork are done at <strong>145°F (63°C)</strong> with a 3-minute rest, per USDA guidance.
+      That leaves the meat slightly blush pink in the center, which is safe for whole cuts. A 3 lb (1.4
+      kg) pork roast takes about 75 minutes at 350°F.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Cut and method</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Temperature</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Rest</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Pork roast, oven</td>
+            <td class="py-2 pr-4">350°F (177°C)</td>
+            <td class="py-2 pr-4">25</td>
+            <td class="py-2 pr-4">55</td>
+            <td class="py-2">15 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Pork roast, slow cooker</td>
+            <td class="py-2 pr-4">LOW</td>
+            <td class="py-2 pr-4">60</td>
+            <td class="py-2 pr-4">132</td>
+            <td class="py-2">10 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Pork chops, oven</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">25</td>
+            <td class="py-2 pr-4">55</td>
+            <td class="py-2">5 min</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Pork chops, air fryer</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2">5 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      On a grill, 1-inch pork chops need 4-5 minutes per side over direct medium-high heat. For
+      pull-apart pulled pork, run the slow cooker on LOW for 8-10 hours regardless of the per-pound
+      math; the extra time breaks down connective tissue.
+    </p>
+  </ContentSection>
+
+  <!-- Chicken Cooking Times -->
+  <ContentSection title="Chicken Cooking Times">
+    <p>
+      All chicken is cooked to <strong>165°F (74°C)</strong> internal, whatever the cut or method. There
+      is no rare or medium for poultry. A 5 lb (2.3 kg) whole chicken at 375°F takes about 1 hour 40 minutes
+      plus 15 minutes rest.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Cut and method</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Temperature</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Rest</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Whole chicken, oven</td>
+            <td class="py-2 pr-4">375°F (191°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2">15 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Whole chicken, grill (indirect)</td>
+            <td class="py-2 pr-4">375°F (191°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2">15 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Chicken breast, oven</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">22</td>
+            <td class="py-2 pr-4">49</td>
+            <td class="py-2">5 min</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Chicken breast, air fryer</td>
+            <td class="py-2 pr-4">380°F (193°C)</td>
+            <td class="py-2 pr-4">18</td>
+            <td class="py-2 pr-4">40</td>
+            <td class="py-2">5 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      On a grill, boneless breasts need 6-8 minutes per side over direct medium-high heat. In a slow
+      cooker, a whole chicken takes 6-8 hours on LOW or 4-5 hours on HIGH; the skin will not crisp,
+      so broil briefly afterward if you want it.
+    </p>
+  </ContentSection>
+
+  <!-- Lamb, Turkey, Ham, Salmon -->
+  <ContentSection title="Lamb, Turkey, Ham, and Salmon Cooking Times">
+    <p>
+      Lamb uses the same doneness scale as beef: at 325°F, a leg of lamb runs from 15 minutes per
+      pound for rare up to 25 for well done, with 20 minutes per pound giving medium. Times below
+      are for medium.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Meat</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Oven temp</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Internal temp</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Rest</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Lamb leg (medium)</td>
+            <td class="py-2 pr-4">325°F (163°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">20 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Lamb chops (medium)</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">18</td>
+            <td class="py-2 pr-4">40</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">5 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Whole turkey</td>
+            <td class="py-2 pr-4">325°F (163°C)</td>
+            <td class="py-2 pr-4">15</td>
+            <td class="py-2 pr-4">33</td>
+            <td class="py-2 pr-4">165°F (74°C)</td>
+            <td class="py-2">30 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Turkey breast</td>
+            <td class="py-2 pr-4">350°F (177°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2 pr-4">165°F (74°C)</td>
+            <td class="py-2">15 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Salmon</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">20</td>
+            <td class="py-2 pr-4">44</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">3 min</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Ham (pre-cooked, reheat)</td>
+            <td class="py-2 pr-4">325°F (163°C)</td>
+            <td class="py-2 pr-4">15</td>
+            <td class="py-2 pr-4">33</td>
+            <td class="py-2 pr-4">140°F (60°C)</td>
+            <td class="py-2">15 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      A 12 lb (5.4 kg) turkey at 325°F takes about 3 hours. Lamb chops on a grill need only 3-4
+      minutes per side over direct high heat for medium rare.
+    </p>
+  </ContentSection>
+
+  <!-- Safe Internal Temperatures -->
+  <ContentSection title="Safe Internal Temperatures: USDA and UK FSA">
+    <p>
+      Two agencies publish the reference values most kitchens use. The <strong>USDA</strong> (US) sets
+      a minimum internal temperature per meat. The <strong>UK Food Standards Agency</strong>
+      works to a core temperature of 70°C held for 2 minutes, with 75°C for 30 seconds as an accepted
+      equivalent. Both agree on the key distinction: whole cuts of beef and lamb only carry bacteria on
+      the surface, so they can be served rare if the outside is fully cooked, while poultry, pork, and
+      anything minced must be cooked through.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Meat</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">USDA minimum</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">UK FSA guidance</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Chicken and turkey</td>
+            <td class="py-2 pr-4">165°F (74°C)</td>
+            <td class="py-2">Cooked through; no pink meat, juices run clear</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Beef and lamb, whole cuts</td>
+            <td class="py-2 pr-4">145°F (63°C) + 3 min rest</td>
+            <td class="py-2">May be served rare if the outside is fully cooked</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Pork, whole cuts</td>
+            <td class="py-2 pr-4">145°F (63°C) + 3 min rest</td>
+            <td class="py-2">Cook thoroughly; no pink meat</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Minced meat, burgers, sausages</td>
+            <td class="py-2 pr-4">160°F (71°C)</td>
+            <td class="py-2">Cook all the way through; never rare</td>
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Fish</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">Until opaque and flakes easily</td>
+          </tr>
+          <tr>
+            <td class="py-2 pr-4">Pre-cooked ham (reheating)</td>
+            <td class="py-2 pr-4">140°F (60°C)</td>
+            <td class="py-2">Reheat until steaming hot throughout</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      These are published food-safety reference values, not cooking preferences. Once the meal is
+      done, storage has its own clock: the
+      <a href="/calculators/leftovers-calculator" class="text-[var(--color-accent)] hover:underline"
+        >leftovers calculator</a
+      > covers how long cooked meat keeps in the fridge or freezer.
+    </p>
+  </ContentSection>
 
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">

@@ -11,11 +11,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { SpeedsFeedsCalculator } from '../../components/calculators/SpeedsFeedsCalculator';
 
-const title = 'Free Speeds & Feeds Calculator — CNC Milling RPM & Feed Rate | Boring Math';
+const title = 'Speeds and Feeds Calculator: SFM, RPM & Feed Rate for CNC';
 const description =
-  'Free speeds and feeds calculator for CNC milling. Calculate optimal RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
+  'Free speeds and feeds calculator for CNC milling. Calculate surface feet per minute (SFM), RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
 const keywords =
-  'speeds and feeds calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, sfm calculator, milling calculator, machinist calculator';
+  'speeds and feeds calculator, surface feet per minute calculator, sfm calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, milling calculator, machinist calculator';
 const canonicalURL = '/calculators/speeds-feeds-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -65,6 +65,11 @@ const faqs = [
     question: 'How do I calculate RPM from SFM?',
     answer:
       'RPM = (SFM × 12) / (π × Tool Diameter). For example, cutting aluminum at 800 SFM with a 0.5" endmill: RPM = (800 × 12) / (3.14159 × 0.5) = 6,112 RPM.',
+  },
+  {
+    question: 'How do I calculate surface feet per minute?',
+    answer:
+      'SFM = 0.262 × tool diameter (inches) × RPM. A 0.5" endmill at 6,000 RPM runs at 0.262 × 0.5 × 6,000 = 786 SFM. The 0.262 constant is π/12, which converts tool diameter and spindle revolutions into feet of cutting edge travel per minute.',
   },
   {
     question: 'What is chip load and why does it matter?',
@@ -133,6 +138,20 @@ const schemaBreadcrumbs = [
       <li><strong>Feed Rate:</strong> Table movement speed (IPM or mm/min)</li>
       <li><strong>Chip Load:</strong> Material thickness per tooth per revolution</li>
     </ul>
+  </ContentSection>
+
+  <ContentSection title="What Is Surface Feet Per Minute (SFM)?">
+    <p>
+      Surface feet per minute (SFM) is how fast the cutting edge travels across the workpiece
+      surface, measured in feet per minute. It is set by the material and tool type, then converted
+      to spindle speed for your tool diameter.
+    </p>
+    <p>
+      SFM = 0.262 × tool diameter (inches) × RPM. Working backwards: RPM = (SFM × 3.82) / tool
+      diameter. The 0.262 and 3.82 constants are shorthand for π/12 and 12/π. This calculator starts
+      from a recommended SFM for your material and operation, then solves for RPM using the exact
+      form RPM = (SFM × 12) / (π × diameter).
+    </p>
   </ContentSection>
 
   <ContentSection title="Material Guidelines">

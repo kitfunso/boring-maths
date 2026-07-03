@@ -13,11 +13,11 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import DiscountCalculator from '../../components/calculators/DiscountCalculator/DiscountCalculator';
 
 // SEO Configuration
-const title = 'Discount Calculator — Calculate % Off Any Price | Boring Math';
+const title = 'Discount Calculator: Percent Off & Final Sale Price | Boring Math';
 const description =
   'Calculate percent off any price instantly. See how to calculate 20% off, 30% off, or any discount. Find sale prices, savings, and compare deals. No signup required.';
 const keywords =
-  'discount calculator, how to calculate 20 off, percent off calculator, sale price calculator, calculate percentage off, savings calculator, markdown calculator, price reduction calculator';
+  'discount calculator, percent off calculator, discount percentage calculator, percentage saving calculator, how to calculate 20 off, sale price calculator, calculate percentage off, savings calculator, markdown calculator, price reduction calculator';
 const canonicalURL = '/calculators/discount-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -78,6 +78,11 @@ const faqs = [
     question: 'How do I find the discount percentage?',
     answer:
       'To find the discount percentage: Subtract the sale price from the original price to get the discount amount. Divide the discount by the original price and multiply by 100. For example: Original $100, Sale $75. Discount = $25. Percentage = (25 ÷ 100) × 100 = 25% off.',
+  },
+  {
+    question: 'How do I calculate my percentage saving?',
+    answer:
+      "Divide the amount you saved by the original price and multiply by 100. Saving $15 on a $60 item is (15 ÷ 60) × 100 = a 25% saving. Percentage saving and discount percentage are the same number, just framed from the buyer's side.",
   },
   {
     question: "What does 'percent off' mean?",
@@ -141,6 +146,26 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <DiscountCalculator client:load />
   </section>
+
+  <!-- How to Calculate Percent Off Section -->
+  <ContentSection title="How Do I Calculate Percent Off?">
+    <p>
+      To calculate percent off, multiply the original price by (1 - discount / 100). That gives you
+      the sale price directly. For 30% off a $50 item: $50 x (1 - 30/100) = $50 x 0.70 = <strong
+        >$35</strong
+      >. The other $15 is your saving.
+    </p>
+    <p>
+      To find the discount percentage from two prices, divide the price difference by the original
+      price and multiply by 100. If a jacket dropped from $80 to $60: (80 - 60) / 80 x 100 = <strong
+        >25% off</strong
+      >. The same formula gives you your percentage saving.
+    </p>
+    <p>
+      The calculator above works in all three directions: enter a percent off to get the sale price,
+      enter both prices to get the discount percentage, or enter the amount saved to get both.
+    </p>
+  </ContentSection>
 
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">

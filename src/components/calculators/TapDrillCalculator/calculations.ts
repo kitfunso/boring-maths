@@ -60,9 +60,10 @@ function calculateImperialTapDrill(
   // Minor diameter for 100% thread
   const minorDiameter100 = majorDiameter - 1.0825 / tpi;
 
-  // Calculate tap drill for desired thread percentage
-  // Tap drill = Major - (thread% × 1.0825 / (100 × TPI))
-  const tapDrill = majorDiameter - ((threadPercentage / 100) * 1.0825) / tpi;
+  // Calculate tap drill for desired thread percentage (Machinery's Handbook)
+  // Tap drill = Major - (thread% / 100) × 1.29904 / TPI  (= Major - thread%/76.98/TPI)
+  // 1.29904 = double the 60° sharp-V thread depth per unit pitch; 75% -> Major - 0.974/TPI
+  const tapDrill = majorDiameter - ((threadPercentage / 100) * 1.29904) / tpi;
 
   return {
     tapDrill,
@@ -90,8 +91,9 @@ function calculateMetricTapDrill(
   // Pitch diameter
   const pitchDiameter = majorDiameter - 0.6495 * pitch;
 
-  // Calculate tap drill for desired thread percentage
-  const tapDrill = majorDiameter - (threadPercentage / 100) * 1.0825 * pitch;
+  // Calculate tap drill for desired thread percentage (Machinery's Handbook)
+  // Tap drill = Major - (thread% / 100) × 1.29904 × pitch; 75% -> Major - 0.974 × pitch (M6x1.0 -> 5.0mm)
+  const tapDrill = majorDiameter - (threadPercentage / 100) * 1.29904 * pitch;
 
   return {
     tapDrill,

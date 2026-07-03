@@ -14,7 +14,7 @@ import { getAffiliatesForCalculator } from '../../lib/affiliates';
 
 const affiliateConfig = getAffiliatesForCalculator('uk-100k-tax-trap-calculator');
 
-const title = '60% Tax Trap Calculator: £100k–£125,140 (England + Scotland)';
+const title = '60% Tax Trap Calculator: Personal Allowance Over £100k';
 const description =
   'Free £100,000 tax trap calculator. See the 60% effective tax rate between £100k and £125,140 personal allowance taper. Includes England, Scotland, and salary sacrifice escape routes.';
 const keywords =
@@ -65,9 +65,14 @@ const faqs = [
       'When your income exceeds £100,000, you lose £1 of your £12,570 Personal Allowance for every £2 earned above this threshold. This creates an effective marginal tax rate of up to 62% (40% income tax + 2% NI + 20% from PA loss) on income between £100k and £125,140. Your Personal Allowance is completely lost at £125,140.',
   },
   {
-    question: 'How do I calculate Personal Allowance over £100k?',
+    question: 'How do I calculate my personal allowance if I earn over £100k?',
     answer:
-      'Take the standard Personal Allowance of £12,570. Work out how far your adjusted net income is above £100,000, divide that excess by 2, then subtract the result from £12,570. Example: at £110,000 you are £10,000 over, so you lose £5,000 of allowance and keep £7,570. At £125,140 the allowance is fully gone.',
+      'Use the formula: personal allowance = £12,570 minus (adjusted net income minus £100,000) divided by 2, floored at zero. Example: at £110,000 you are £10,000 over, so you lose £5,000 of allowance and keep £7,570 (£12,570 - £5,000). At £125,140 or above the allowance is fully lost.',
+  },
+  {
+    question: 'How much tax do I pay between £100k and £125,140?',
+    answer:
+      'Each extra £1 in this band costs about 60p in income tax for taxpayers in England, Wales and Northern Ireland: 40p at the higher rate plus 20p from the loss of personal allowance. Adding 2% National Insurance takes the effective marginal rate to 62%. Earning the full £25,140 between the two thresholds costs roughly £15,590 in tax and NI, leaving about £9,550. Scottish income tax rates in this band are higher, so the effective rate for Scottish taxpayers is higher still.',
   },
   {
     question: 'Why is it called the 60% tax trap?',
@@ -87,7 +92,7 @@ const faqs = [
   {
     question: 'Does Scotland have a different tax trap?',
     answer:
-      'Scotland has different income tax bands (19% Starter, 20% Basic, 21% Intermediate, 42% Higher, 45% Advanced, 48% Top rates), but the Personal Allowance rules are the same across the UK. Scottish taxpayers still lose £1 of PA for every £2 over £100k. However, the Higher Rate in Scotland is 42% (not 40%), making the trap slightly worse.',
+      "Scotland has different income tax bands (19% Starter, 20% Basic, 21% Intermediate, 42% Higher, 45% Advanced, 48% Top rates), but the Personal Allowance rules are the same across the UK. Scottish taxpayers still lose £1 of PA for every £2 over £100k. The £100k to £125,140 zone falls in Scotland's 45% Advanced rate band, so the effective marginal rate there is about 67.5% before National Insurance, compared with 60% in the rest of the UK.",
   },
   {
     question: 'What about the £260k Tapered Annual Allowance?',
@@ -154,13 +159,13 @@ const schemaBreadcrumbs = [
     )
   }
 
-  <ContentSection title="How to Calculate Personal Allowance Over £100k">
+  <ContentSection title="How to Calculate Your Personal Allowance Over £100,000">
     <p>
-      The formula is simple. Start with the standard <strong>Personal Allowance of £12,570</strong>.
-      For every <strong>£2 of adjusted net income above £100,000</strong>, subtract <strong
-        >£1</strong
-      >
-      from that allowance.
+      <strong
+        >Personal allowance = £12,570 minus (adjusted net income minus £100,000) divided by 2</strong
+      >, floored at zero. Worked example at £110,000: you are £10,000 over the threshold, so the
+      reduction is £5,000 and you keep £12,570 - £5,000 = <strong>£7,570</strong>. This loss of
+      personal allowance continues until £125,140, where the allowance reaches zero.
     </p>
     <ul>
       <li><strong>Income of £100,000:</strong> full Personal Allowance of £12,570</li>
@@ -232,16 +237,18 @@ const schemaBreadcrumbs = [
       >:
     </p>
     <ul>
-      <li><strong>Starter Rate (19%):</strong> £12,571 - £14,876</li>
-      <li><strong>Basic Rate (20%):</strong> £14,877 - £26,561</li>
-      <li><strong>Intermediate Rate (21%):</strong> £26,562 - £43,662</li>
+      <li><strong>Starter Rate (19%):</strong> £12,571 - £16,537</li>
+      <li><strong>Basic Rate (20%):</strong> £16,538 - £29,526</li>
+      <li><strong>Intermediate Rate (21%):</strong> £29,527 - £43,662</li>
       <li><strong>Higher Rate (42%):</strong> £43,663 - £75,000</li>
       <li><strong>Advanced Rate (45%):</strong> £75,001 - £125,140</li>
       <li><strong>Top Rate (48%):</strong> Over £125,140</li>
     </ul>
     <p>
-      Scottish taxpayers in the trap zone face a slightly higher marginal rate (42% vs 40% for the
-      Higher Rate portion), making pension optimization even more valuable.
+      The £100,000 to £125,140 trap zone sits inside Scotland's 45% Advanced rate band, not the 40%
+      rate paid in the rest of the UK. With the personal allowance taper on top, each extra £1 in
+      the zone costs about 67.5p in income tax for a Scottish taxpayer, against roughly 60p
+      elsewhere in the UK.
     </p>
   </ContentSection>
 

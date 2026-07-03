@@ -13,11 +13,11 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import RaiseCalculator from '../../components/calculators/RaiseCalculator/RaiseCalculator';
 
 // SEO Configuration
-const title = 'Annual Raise Calculator: Salary Increase Value (3%, 5%, Any %)';
+const title = 'Salary Raise Calculator: Annual Increase Value (3%, 5%, Any %)';
 const description =
-  'Free annual raise calculator. Enter any salary increase percentage (1%, 2%, 3%, 5%) to see the lifetime value, monthly pay change, and what it compounds to if invested.';
+  'Free salary raise calculator. Enter any salary increase percentage (1%, 2%, 3%, 5%) to see the lifetime value, monthly pay change, and what it compounds to if invested.';
 const keywords =
-  'raise calculator, salary increase calculator, how much is a raise worth, pay raise calculator, salary negotiation calculator, lifetime value of raise';
+  'salary raise calculator, raise calculator, annual raise calculator, annual increase calculator, salary increase calculator, how to calculate salary increase, how much is a raise worth, pay raise calculator, salary negotiation calculator, lifetime value of raise';
 const canonicalURL = '/calculators/raise-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -45,6 +45,11 @@ const relatedCalculators = [
 
 // FAQ data
 const faqs = [
+  {
+    question: 'How do I calculate a salary increase percentage?',
+    answer:
+      'To find the percentage from two salaries: subtract the old salary from the new one, divide by the old salary, and multiply by 100. Going from $60,000 to $63,000 is (63,000 - 60,000) / 60,000 x 100 = a 5% increase. To go the other direction and find the new salary from a percentage, multiply the current salary by (1 + raise / 100): $60,000 x 1.05 = $63,000.',
+  },
   {
     question: 'How much is a 5% raise worth over my career?',
     answer:
@@ -95,7 +100,7 @@ const schemaBreadcrumbs = [
   <!-- Schema.org Markup -->
   <SEOHead
     slot="schema"
-    name="Raise Calculator"
+    name="Salary Raise Calculator"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -104,7 +109,7 @@ const schemaBreadcrumbs = [
 
   <!-- Hero Section -->
   <HeroSection
-    title="Raise Calculator"
+    title="Salary Raise Calculator"
     description="See the true lifetime value of a salary increase. Calculate how a raise compounds over your career and what it could be worth if invested."
   />
 
@@ -112,6 +117,24 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <RaiseCalculator client:load />
   </section>
+
+  <!-- How to Calculate Section -->
+  <ContentSection title="How to Calculate a Salary Increase">
+    <p>
+      To calculate a salary increase, multiply your current salary by (1 + raise percentage / 100).
+      A 5% raise on a $60,000 salary is $60,000 x 1.05 = <strong>$63,000</strong>: an extra $3,000
+      per year, or $250 per month before taxes.
+    </p>
+    <p>
+      To work backwards and find the raise percentage from two salaries, divide the difference by
+      the old salary and multiply by 100. Moving from $52,000 to $55,000 is (55,000 - 52,000) /
+      52,000 x 100 = a <strong>5.8% increase</strong>.
+    </p>
+    <p>
+      The calculator above does this for you, then goes further: it shows what the raise adds up to
+      over your remaining career and what the extra income could grow to if invested.
+    </p>
+  </ContentSection>
 
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">

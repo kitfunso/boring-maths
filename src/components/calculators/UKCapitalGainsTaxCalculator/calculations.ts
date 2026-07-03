@@ -1,17 +1,19 @@
 /**
  * UK Capital Gains Tax Calculations
- * 2024/25 rates
+ * 2025/26 rates
  */
 
 import type { UKCGTInputs, UKCGTResult } from './types';
 
-// 2024/25 CGT rates
+// CGT rates: unified at 18%/24% for all chargeable assets for disposals
+// on or after 30 October 2024 (shares/other rose from 10%/20%).
+// Verified against gov.uk/capital-gains-tax/rates 2026-07-03.
 const CGT_RATES = {
   property: { basic: 0.18, higher: 0.24 },
-  other: { basic: 0.1, higher: 0.2 },
+  other: { basic: 0.18, higher: 0.24 },
 };
 
-const ANNUAL_EXEMPTION = 3000; // 2024/25 (reduced from £6,000)
+const ANNUAL_EXEMPTION = 3000; // 2025/26 (reduced from £6,000)
 const BASIC_RATE_THRESHOLD = 37700; // Basic rate band width
 
 export function calculateUKCGT(inputs: UKCGTInputs): UKCGTResult {

@@ -53,6 +53,10 @@ const {
 
 const siteUrl = Astro.site?.origin || 'https://boring-math.com';
 
+// Normalize to a trailing slash so schema URLs match the <link rel="canonical">
+// emitted by BaseLayout (trailingSlash: 'always'). Pages pass non-slash paths.
+const canonicalUrl = url.endsWith('/') ? url : `${url}/`;
+
 // WebApplication schema (better than just SoftwareApplication for web tools)
 const appSchema = {
   '@context': 'https://schema.org',
@@ -69,7 +73,7 @@ const appSchema = {
     availability: 'https://schema.org/InStock',
   },
   description: description,
-  url: url,
+  url: canonicalUrl,
   provider: {
     '@id': `${siteUrl}/#organization`,
   },
@@ -89,7 +93,7 @@ const webPageSchema = {
   '@type': 'WebPage',
   name: name,
   description: description,
-  url: url,
+  url: canonicalUrl,
   isPartOf: {
     '@type': 'WebSite',
     name: 'Boring Math Calculators',

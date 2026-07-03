@@ -12,9 +12,9 @@ import BirthdayPartyBudget from '../../components/calculators/BirthdayPartyBudge
 
 const title = 'Birthday Party Cost Calculator: What Will Your Party Actually Cost?';
 const description =
-  "Enter your child's age and guest count. Get a realistic cost breakdown for venue, food, entertainment, and goody bags. Average kids party runs $250-$600, but yours might be different.";
+  "Enter your child's age and guest count. Get a realistic cost breakdown for venue, food, entertainment, and goody bags. A typical kids birthday party runs $300-$600, but yours might be different.";
 const keywords =
-  'birthday party budget calculator, kids party cost, children birthday budget, party planning calculator, how much for birthday party, party expense planner';
+  'birthday party budget calculator, kids birthday party cost, average cost of kids birthday party, kids birthday party cost by age, children birthday budget, party planning calculator, how much for birthday party, how much does it cost to throw a party, party expense planner';
 const canonicalURL = '/calculators/birthday-party-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -50,9 +50,29 @@ const relatedCalculators = [
 
 const faqs = [
   {
+    question: 'What is the average cost of a kids birthday party?',
+    answer:
+      'A typical kids birthday party costs $300-$600 at home and $400-$1,000 or more at a venue in the US. In the UK, most parties run roughly £200-£500. The biggest cost drivers are guest count, venue hire, and paid entertainment; food, cake, and decorations are usually smaller line items.',
+  },
+  {
     question: 'How much should I spend on a kids birthday party?',
     answer:
-      'The average kids birthday party costs $300-$500. A simple home party can be done for $100-$200. Venue parties at activity centers range from $300-$800. Elaborate themed parties with entertainment can exceed $1,000. The key is setting a budget that works for your family.',
+      'The average kids birthday party costs $300-$600. A simple home party can be done for $100-$200. Venue parties at activity centers range from $300-$800. Elaborate themed parties with entertainment can exceed $1,000. The key is setting a budget that works for your family.',
+  },
+  {
+    question: 'How much does it cost to throw a party?',
+    answer:
+      'For a kids birthday party, typical totals are $300-$600 at home or $400-$1,000+ at a venue (UK: roughly £200-£500). The math is the same for any party: venue cost, plus food and drink per guest, plus entertainment, plus extras like decorations and favors. Multiply the per-guest items by your headcount and add the fixed costs.',
+  },
+  {
+    question: 'How does the cost of a kids birthday party change by age?',
+    answer:
+      'Toddler parties (ages 1-3) are the cheapest, often $100-$250 / £80-£180, with small guest lists and no paid entertainment. Costs peak between ages 4 and 10 as guest lists grow and venues or entertainers get added, typically $300-$600 / £150-£450. From age 11, guest lists shrink but per-head activities like escape rooms or laser tag cost more, so totals stay similar with fewer guests.',
+  },
+  {
+    question: 'How much should I charge for hosting kids parties?',
+    answer:
+      "Rates for children's party entertainers vary by region, experience, act type, and party length. Typical market rates in the US are $100-$300 per hour for magicians, character performers, and face painters; in the UK, £80-£250 per party is common. Group size, travel time, materials like balloons and prizes, and weekend demand all factor into what entertainers in a given area charge.",
   },
   {
     question: 'How many kids should I invite to a birthday party?',
@@ -122,6 +142,27 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <BirthdayPartyBudget client:load />
   </section>
+
+  <ContentSection title="Average Cost of a Kids Birthday Party">
+    <p>
+      A typical kids birthday party costs <strong>$300-$600 at home</strong> and <strong
+        >$400-$1,000+ at a venue</strong
+      > in the US. In the UK, most parties land between <strong>£200 and £500</strong>. Treat these
+      as typical ranges, not targets: guest count, venue hire, and paid entertainment drive most of
+      the difference between a cheap party and an expensive one.
+    </p>
+    <p>
+      Age changes the shape of the budget more than the total. Toddler parties are the cheapest:
+      fewer guests, shorter parties, and no paid entertainment needed. Costs peak in the primary
+      school years, when guest lists are longest and venue or entertainer fees are common. Tween and
+      teen parties flip the pattern: fewer guests, but pricier per-head activities like escape
+      rooms, cinema trips, or laser tag.
+    </p>
+    <p>
+      The age-by-age breakdown further down shows typical spends at each stage. The calculator above
+      builds an estimate from your actual guest count, venue type, and party style.
+    </p>
+  </ContentSection>
 
   <ContentSection title="How to Use This Calculator">
     <p>

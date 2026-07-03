@@ -210,10 +210,58 @@ exposed. Watch **scaled content abuse**: Google flags "separate content for ever
 variation" built to manipulate rankings — same line as CLAUDE.md rule 5.
 
 ### Action items
-- [ ] Retire `aeo-task.md` Deliverable 1 (`brand-facts.json`) — do not build.
-- [ ] Decide on `llms.txt` / `llms-full.txt`: keep as-is (harmless) or remove. No further investment either way.
-- [ ] Re-file `aeo-task-2..5` Answer Hub pages under Phase 6 content expansion.
+- [x] Retire `aeo-task.md` Deliverable 1 (`brand-facts.json`) — do not build. (Closed 2026-07-03: not built, no plans.)
+- [x] Decide on `llms.txt` / `llms-full.txt`: **keep as-is**, zero further investment. (Decided 2026-07-03.)
+- [x] Re-file `aeo-task-2..5` Answer Hub pages under Phase 6 content expansion. (They are content work, not a separate AEO track.)
 - [ ] Audit generic calculators (tip, BMI, paint) for unique-POV depth vs commodity filler.
+
+---
+
+## GSC Review — 2026-07-03 (28-day window, API pull)
+
+Fresh pull via `npm run seo:gsc-pull` (OAuth re-consented; token was expired). Analysis in
+`docs/gsc-analysis-2026-07-03.md`.
+
+### Trend (28d vs the 2026-06-04 pull)
+| Metric | Jun 4 pull | Jul 3 pull |
+|--------|-----------|-----------|
+| Clicks | 27 | 55 |
+| Impressions | 30,829 | 39,746 |
+| Pages with impressions | 160 | 290 |
+
+Clicks doubled and impressions +29% month-over-month. Absolute numbers still small; the
+site is visible (39k impressions) but ranks pos 70-95 for nearly all money queries.
+
+### Findings
+1. **Trailing-slash consolidation is in progress, not a problem.** 126 URL pairs still show
+   both slash/non-slash variants in GSC (82% of impressions already on the canonical slash
+   form). Canonical + sitemap + serving are aligned (`trailingSlash: 'always'`); the
+   non-slash 308s. No action; monitor next pull. The "cannibalized queries" count in the
+   analysis report is inflated by these pairs.
+2. **Authority, not on-page, is the binding constraint for the big UK tax pages.** CGT
+   (2.6k imp), IHT (1.9k imp), moving-cost (2.1k imp), salary-sacrifice, dividend-tax all
+   sit at pos 80-95. Titles are already competitive. Phase 4 (backlinks) has been open
+   since February and is still the main lever.
+3. **A striking-distance cluster exists at pos 30-65** where on-page work can plausibly
+   reach page 1-2: cooking-time (~900 imp of pork/beef/chicken queries the page didn't
+   cover), conference-room (room/seating capacity queries), discount (percent-off),
+   raise (salary raise), tap-drill (thread percentage), 100k-trap (personal allowance
+   over 100k), birthday-party (average cost queries).
+
+### Actions taken 2026-07-03
+- Schema URLs in `SEOHead.astro` normalized to the trailing-slash canonical form (were
+  emitting the 308-redirecting non-slash form in JSON-LD).
+- On-page query alignment + answer-first content sections added for: cooking-time,
+  raise, discount, conference-room, birthday-party, uk-100k-tax-trap, uk-capital-gains
+  (Scotland FAQ), inheritance-tax (liability phrasing), tap-drill, speeds-feeds (SFM),
+  moving-cost (estimator phrasing), water-intake ("a day" phrasing).
+- Em dashes removed from titles on touched pages per house style.
+
+### Candidate follow-ups (not done)
+- [ ] Internal links sitewide are slash-less hrefs, so every internal crawl hop eats a
+  308. Consider emitting slash-form internal hrefs centrally. Low priority.
+- [ ] Bing Webmaster Tools (Phase 1 leftover) — feeds Copilot/ChatGPT answers, cheap AEO win.
+- [ ] Next GSC pull ~2026-08-01: check whether the striking-distance set moved.
 
 ---
 
@@ -229,5 +277,5 @@ variation" built to manipulate rankings — same line as CLAUDE.md rule 5.
 
 ---
 
-*Last Updated: 2026-05-22 (added AI Search section)*
-*Total Live Calculators: 124*
+*Last Updated: 2026-07-03 (GSC review + striking-distance on-page pass)*
+*Total Live Calculators: 167 (registry count, verified `src/lib/calculators.ts` 2026-07-03)*

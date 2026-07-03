@@ -25,14 +25,14 @@ hippo outcome --good
 # CLAUDE.md - boring-math.com
 
 ## Project Overview
-149 free online calculators (Astro 5 + Preact + Tailwind 4) deployed on Cloudflare Pages. Monetizing through AdSense, affiliate links, and B2B embeddable widgets. See `docs/PRD.md` for full scope and `docs/ARCHITECTURE.md` for technical design.
+167 free online calculators (Astro 5 + Preact + Tailwind 4) deployed on Cloudflare Pages. Monetizing through AdSense, affiliate links, and B2B embeddable widgets. See `docs/PRD.md` for full scope and `docs/ARCHITECTURE.md` for technical design.
 
 ## Architecture
 Static site. No backend. Calculator logic runs client-side in Preact components. Each calculator lives in `src/components/calculators/[Name]/` with its page in `src/pages/calculators/`. Registry of all calculators in `src/lib/calculators.ts`. See `docs/ARCHITECTURE.md`.
 
 ## Non-Negotiable Rules
 
-1. **All 149 calculators stay free.** Never paywall existing calculator functionality. Premium means white-label/API/advanced features, not gating what's already free.
+1. **All calculators stay free (167 in the registry as of 2026-07).** Never paywall existing calculator functionality. Premium means white-label/API/advanced features, not gating what's already free.
 2. **Affiliate links must have disclosure.** Every page with affiliate links uses `rel="nofollow sponsored noopener"` and links to `/affiliate-disclosure`. Already enforced in AffiliateBox/AffiliateCard components.
 3. **No financial advice.** Calculators are tools. Never add language that could be construed as recommending a specific financial product or action.
 4. **Embeds must not break the host site.** Embed pages use EmbedLayout with no external scripts (no AdSense), scoped styles, and sandboxed iframes. Test cross-origin.
@@ -59,4 +59,4 @@ Static site. No backend. Calculator logic runs client-side in Preact components.
 - Don't confuse hub/guide pages (19 exist) with calculators. They're intentionally excluded from the registry.
 - Don't run AdSense in embed routes. Google will ban the account.
 - Don't hardcode affiliate URLs in calculator pages. Use `affiliates.ts` config so they can be updated in one place.
-- Trailing slashes matter. Site is configured with `trailingSlash: 'never'`. Don't add them.
+- Trailing slashes matter. Site is configured with `trailingSlash: 'always'` (canonical = served slash form on Cloudflare Pages). BaseLayout and SEOHead normalize centrally; pages pass slash-less `canonicalURL` consts.
