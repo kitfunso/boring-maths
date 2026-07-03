@@ -262,6 +262,12 @@ site is visible (39k impressions) but ranks pos 70-95 for nearly all money queri
   308. Consider emitting slash-form internal hrefs centrally. Low priority.
 - [ ] Bing Webmaster Tools (Phase 1 leftover) — feeds Copilot/ChatGPT answers, cheap AEO win.
 - [ ] Next GSC pull ~2026-08-01: check whether the striking-distance set moved.
+- [ ] Tax-year refresh: UK pages are still branded "2025/26" but the current tax year is
+  2026/27 (since 6 Apr 2026). CGT rates/AEA verified identical across both years, so nothing
+  is false, but titles lose freshness signal. Refresh needs per-calculator figure verification
+  (thresholds, bands, allowances) — do NOT bulk find-and-replace the year. IHT FAQ's
+  "frozen until at least April 2028" and the 100k-trap page's advice-flavoured wording
+  ("consider asking your employer...") should be handled in the same pass.
 
 ---
 
