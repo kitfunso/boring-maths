@@ -11,5 +11,13 @@
   },
   { "from": "/calculators/fish-stocking-calculator/", "to": "/calculators/water-change-calculator/" },
   { "from": "/calculators/ei-dosing-calculator/", "to": "/calculators/water-change-calculator/" },
-  { "from": "/calculators/water-change-calculator/", "to": "/calculators/ei-dosing-calculator/" }
+  { "from": "/calculators/water-change-calculator/", "to": "/calculators/ei-dosing-calculator/" },
+  { "from": "/calculators/glaze-calculator/", "to": "/calculators/kiln-cost-calculator/" },
+  { "from": "/calculators/clay-shrinkage-calculator/", "to": "/calculators/kiln-cost-calculator/" },
+  { "from": "/calculators/electricity-cost-calculator/", "to": "/calculators/kiln-cost-calculator/" },
+  { "from": "/calculators/kiln-cost-calculator/", "to": "/calculators/electricity-cost-calculator/" },
+  { "from": "/calculators/cooking-time-calculator/", "to": "/calculators/leftovers-calculator/" },
+  { "from": "/calculators/holiday-dinner-calculator/", "to": "/calculators/leftovers-calculator/" },
+  { "from": "/calculators/bbq-calculator/", "to": "/calculators/leftovers-calculator/" },
+  { "from": "/guides/best-math-everyday-calculators/", "to": "/calculators/leftovers-calculator/" }
 ]
