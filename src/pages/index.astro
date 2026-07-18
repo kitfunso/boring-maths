@@ -505,7 +505,10 @@ const categories = getCategories();
       try {
         const stored: RecentItem[] = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
         // Heal legacy entries saved before the trailing-slash migration.
-        return stored.map((item) => ({ ...item, href: withTrailingSlash(item.href) }));
+        // Filter first so one malformed entry can't wipe the whole list.
+        return stored
+          .filter((item) => typeof item?.href === 'string')
+          .map((item) => ({ ...item, href: withTrailingSlash(item.href) }));
       } catch {
         return [];
       }
@@ -636,7 +639,8 @@ const categories = getCategories();
       try {
         const stored: string[] = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
         // Heal legacy entries saved before the trailing-slash migration.
-        return stored.map(withTrailingSlash);
+        // Filter first so one malformed entry can't wipe the whole list.
+        return stored.filter((x): x is string => typeof x === 'string').map(withTrailingSlash);
       } catch {
         return [];
       }

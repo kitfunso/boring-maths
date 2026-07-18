@@ -65,14 +65,33 @@ const LTT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
-// Wales has no first-time buyer relief (uses LTT_STANDARD)
+// Wales additional-property purchases use the HIGHER-RATE band table INSTEAD of
+// standard rates (not a surcharge on top). First-time buyers get no relief.
+// Keep in sync with src/components/calculators/LTTCalculator/calculations.ts (LTT_HIGHER).
+const LTT_HIGHER: Array<{ from: number; to: number; rate: number }> = [
+  { from: 0, to: 180000, rate: 0.05 },
+  { from: 180001, to: 250000, rate: 0.085 },
+  { from: 250001, to: 400000, rate: 0.1 },
+  { from: 400001, to: 750000, rate: 0.125 },
+  { from: 750001, to: 1500000, rate: 0.15 },
+  { from: 1500001, to: Infinity, rate: 0.17 },
+];
 
 // =============================================================================
 // SURCHARGES
 // =============================================================================
 
-/** Additional property surcharge (second homes, buy-to-let) */
+/** England & NI additional-property surcharge (second homes, buy-to-let):
+ *  5% added on top of the SDLT bands, applied to the whole price. */
 const ADDITIONAL_PROPERTY_SURCHARGE = 0.05; // 5% from Oct 2024
+
+/** Scotland Additional Dwelling Supplement (ADS): 8% of the FULL purchase
+ *  price, charged on top of the standard LBTT bands (from 5 December 2024).
+ *  There is NO minimum-price floor in the dedicated calculators, so none is
+ *  applied here. Keep in sync with
+ *  src/components/calculators/ADSCalculator/types.ts (ADS_RATE) and
+ *  src/components/calculators/LBTTCalculator/calculations.ts (ADS_RATE). */
+const SCOTLAND_ADS_RATE = 0.08;
 
 /** Non-UK resident surcharge */
 const NON_RESIDENT_SURCHARGE = 0.02; // 2%
@@ -94,11 +113,14 @@ function getBands(
   }
 
   if (location === 'scotland') {
+    // Additional-property buyers use the standard bands; the 8% ADS is added
+    // separately (mirrors LBTTCalculator/ADSCalculator).
     return buyerType === 'first-time' ? LBTT_FIRST_TIME : LBTT_STANDARD;
   }
 
-  // Wales - no FTB relief
-  return LTT_STANDARD;
+  // Wales - no FTB relief. Additional property uses the higher-rate band table
+  // instead of standard bands (mirrors LTTCalculator).
+  return buyerType === 'additional' ? LTT_HIGHER : LTT_STANDARD;
 }
 
 function calculateBandTax(
@@ -154,28 +176,55 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
     };
   }
 
-  // Get base bands
+  // Get base bands (Wales additional-property -> higher-rate band table)
   const bands = getBands(location, buyerType, propertyPrice);
 
-  // Calculate additional surcharge rate
-  let additionalRate = 0;
-  if (buyerType === 'additional') {
-    additionalRate += ADDITIONAL_PROPERTY_SURCHARGE;
+  const isAdditional = buyerType === 'additional';
+
+  // Band-rate additions applied on top of the selected bands:
+  //  - England/NI additional property: +5% across the whole price (SDLT surcharge)
+  //  - Non-UK resident: +2% (unchanged)
+  // Scotland's ADS is a separate lump (below); Wales' higher rates are already
+  // encoded in the band table, so neither adds a band-rate here.
+  let bandSurchargeRate = 0;
+  if (isAdditional && location === 'england') {
+    bandSurchargeRate += ADDITIONAL_PROPERTY_SURCHARGE;
   }
   if (isNonResident) {
-    additionalRate += NON_RESIDENT_SURCHARGE;
+    bandSurchargeRate += NON_RESIDENT_SURCHARGE;
   }
 
-  // Calculate tax with all applicable rates
-  const taxBands = calculateBandTax(propertyPrice, bands, additionalRate);
-  const totalTax = taxBands.reduce((sum, band) => sum + band.taxDue, 0);
+  // Calculate tax with the applicable band-rate additions
+  const taxBands = calculateBandTax(propertyPrice, bands, bandSurchargeRate);
 
-  // Calculate surcharge breakdowns
+  // Scotland ADS: 8% of the FULL purchase price, on top of the LBTT bands
+  const scotlandAds =
+    isAdditional && location === 'scotland' ? Math.round(propertyPrice * SCOTLAND_ADS_RATE) : 0;
+
+  const totalTax = taxBands.reduce((sum, band) => sum + band.taxDue, 0) + scotlandAds;
+
+  // Base tax (no surcharge) on the selected bands, for the breakdowns below
   const baseTaxBands = calculateBandTax(propertyPrice, bands, 0);
   const baseTax = baseTaxBands.reduce((sum, band) => sum + band.taxDue, 0);
 
-  const additionalPropertySurcharge =
-    buyerType === 'additional' ? Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE) : 0;
+  // Region-aware "additional property" figure for the surcharge breakdown:
+  //  - England/NI: 5% of the price
+  //  - Scotland: the 8% ADS lump
+  //  - Wales: extra tax from the higher-rate bands vs standard bands
+  let additionalPropertySurcharge = 0;
+  if (isAdditional) {
+    if (location === 'england') {
+      additionalPropertySurcharge = Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE);
+    } else if (location === 'scotland') {
+      additionalPropertySurcharge = scotlandAds;
+    } else {
+      const standardTax = calculateBandTax(propertyPrice, LTT_STANDARD, 0).reduce(
+        (sum, band) => sum + band.taxDue,
+        0
+      );
+      additionalPropertySurcharge = baseTax - standardTax;
+    }
+  }
 
   const nonResidentSurcharge = isNonResident
     ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)

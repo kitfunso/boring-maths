@@ -21,6 +21,15 @@ export default function UKStampDutyCalculator() {
     compute: calculateStampDuty,
   });
 
+  // Region-aware label for the additional-property line: England/NI charge a
+  // 5% SDLT surcharge, Scotland an 8% ADS, Wales higher LTT rates instead.
+  const additionalSurchargeLabel =
+    inputs.location === 'scotland'
+      ? 'Additional Dwelling Supplement (8%)'
+      : inputs.location === 'wales'
+        ? 'Higher residential rates'
+        : 'Additional property (5%)';
+
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
@@ -159,7 +168,7 @@ export default function UKStampDutyCalculator() {
                 <div className="space-y-1 text-sm">
                   {result.additionalPropertySurcharge > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-[var(--color-subtle)]">Additional property (5%)</span>
+                      <span className="text-[var(--color-subtle)]">{additionalSurchargeLabel}</span>
                       <span className="text-amber-400">
                         {formatCurrency(result.additionalPropertySurcharge)}
                       </span>

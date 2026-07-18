@@ -3,20 +3,13 @@
 // URL form (Cloudflare 308s it; canonical is trailingSlash:'always').
 import fs from 'node:fs';
 import path from 'node:path';
+import { walkFiles } from '../lib/walk-files.mjs';
 
 const DIST = path.resolve('dist');
 const offenders = [];
 if (!fs.existsSync(DIST)) {
   console.error('dist/ not found. Run `npm run build` first.');
   process.exit(1);
-}
-
-function walk(dir) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(p);
-    else if (entry.name.endsWith('.html')) checkFile(p);
-  }
 }
 
 function checkFile(file) {
@@ -32,7 +25,7 @@ function checkFile(file) {
   }
 }
 
-walk(DIST);
+for (const file of walkFiles(DIST, /\.html$/)) checkFile(file);
 if (offenders.length > 0) {
   console.error(`FAIL: ${offenders.length} internal hrefs missing trailing slash`);
   for (const o of offenders.slice(0, 40)) console.error(`  ${o}`);

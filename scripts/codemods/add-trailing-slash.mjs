@@ -5,22 +5,25 @@
 // object fields only; skips /embed routes. Never matches canonicalURL
 // consts (different syntax).
 import fs from 'node:fs';
-import path from 'node:path';
+import { walkFiles } from '../lib/walk-files.mjs';
 
 const FILE_RE = /\.(astro|ts|tsx)$/;
+// Captures an optional #fragment or ?query suffix separately so the slash
+// lands on the path portion only (href="/foo#faq" -> href="/foo/#faq").
+// check-internal-links.mjs strips the fragment/query before checking, so
+// keeping this in sync keeps the codemod and the postbuild checker agreeing.
 const RULES = [
-  [/href="(\/(?!embed\b)[a-z0-9-]+(?:\/[a-z0-9-]+)*)"/g, 'href="$1/"'],
-  [/href: '(\/(?!embed\b)[a-z0-9-]+(?:\/[a-z0-9-]+)*)'/g, "href: '$1/'"],
+  [
+    /href="(\/(?!embed\b)[a-z0-9-]+(?:\/[a-z0-9-]+)*)((?:[#?][^"]*)?)"/g,
+    'href="$1/$2"',
+  ],
+  [
+    /href: '(\/(?!embed\b)[a-z0-9-]+(?:\/[a-z0-9-]+)*)((?:[#?][^']*)?)'/g,
+    "href: '$1/$2'",
+  ],
 ];
 
 let filesChanged = 0;
-function walk(dir) {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(p);
-    else if (FILE_RE.test(entry.name)) rewrite(p);
-  }
-}
 function rewrite(file) {
   const before = fs.readFileSync(file, 'utf8');
   let after = before;
@@ -31,5 +34,5 @@ function rewrite(file) {
     console.log(`rewrote ${file}`);
   }
 }
-walk('src');
+for (const file of walkFiles('src', FILE_RE)) rewrite(file);
 console.log(`${filesChanged} files changed`);

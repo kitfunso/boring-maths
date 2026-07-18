@@ -1,28 +1,24 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
+import { walkFiles } from '../../scripts/lib/walk-files.mjs';
+import { EM, TITLE_RE, DESCRIPTION_RE } from '../../scripts/lib/title-em-dash.mjs';
 
-const EM = '—';
-
-// Captures the quoted string body directly (group 2) instead of stopping at
-// the first semicolon, which would falsely pass a title like 'A; B — C'.
-const TITLE_RE = /const title\s*=\s*(['"`])((?:\\.|(?!\1).)*)\1/gs;
-
-function collectAstroFiles(dir: string, out: string[] = []): string[] {
-  for (const entry of readdirSync(dir, { withFileTypes: true })) {
-    const p = join(dir, entry.name);
-    if (entry.isDirectory()) collectAstroFiles(p, out);
-    else if (entry.name.endsWith('.astro')) out.push(p);
-  }
-  return out;
-}
-
-describe('Page titles contain no em dashes (house style; descriptions deferred)', () => {
+describe('Page titles and descriptions contain no em dashes (house style)', () => {
   it('page title consts are em-dash free', () => {
     const offenders: string[] = [];
-    for (const file of collectAstroFiles('src/pages')) {
+    for (const file of walkFiles('src/pages', /\.astro$/)) {
       const src = readFileSync(file, 'utf8');
       const matches = [...src.matchAll(TITLE_RE)];
+      if (matches.some((m) => m[2].includes(EM))) offenders.push(file);
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('page description consts are em-dash free', () => {
+    const offenders: string[] = [];
+    for (const file of walkFiles('src/pages', /\.astro$/)) {
+      const src = readFileSync(file, 'utf8');
+      const matches = [...src.matchAll(DESCRIPTION_RE)];
       if (matches.some((m) => m[2].includes(EM))) offenders.push(file);
     }
     expect(offenders).toEqual([]);

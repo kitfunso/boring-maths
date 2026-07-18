@@ -10,7 +10,7 @@
     "validate:shared-data": "node scripts/validate-shared-data.mjs",
     "prebuild": "npm run generate-og && npm run validate:shared-data",
     "build": "astro build",
-    "postbuild": "node scripts/seo/check-internal-links.mjs",
+    "postbuild": "node scripts/seo/check-internal-links.mjs && node scripts/seo/check-link-edges.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",
