@@ -271,6 +271,68 @@ site is visible (39k impressions) but ranks pos 70-95 for nearly all money queri
 
 ---
 
+## GSC Review — 2026-07-18 (28-day window, API pull)
+
+Fresh pull via `npm run seo:gsc-pull` (OAuth re-consented; testing-mode app expires the
+refresh token after ~7 days, so every pull more than a week after the last needs `--reauth`).
+Analysis in `docs/gsc-analysis-2026-07-18.md`.
+
+### Trend
+| Metric | Jun 4 pull | Jul 3 pull | Jul 18 pull |
+|--------|-----------|-----------|------------|
+| Clicks | 27 | 55 | 59 |
+| Impressions | 30,829 | 39,746 | 50,801 |
+| Pages with impressions | 160 | 290 | 168 |
+
+Impressions +28% in two weeks; clicks near-flat. Visibility keeps compounding but almost
+everything ranks pos 40-90 on money queries, where CTR is ~0.
+
+### Findings
+1. **Trailing-slash consolidation is complete in GSC.** Cannibalized-query count fell
+   1305 → 91 and the page count halved (290 → 168) as slash pairs merged. The remaining
+   cannibalization list is real but low-stakes (wales vs UK stamp duty, conference-room
+   vs event-seating, UK vs US CGT).
+2. **The Jul-3 striking-distance pass is working, slowly.** Cooking cluster moved ~+6
+   positions (55-62 → 44-56) with impressions up 909 → 1,177. Not yet page 1-2.
+3. **Clicks come from the event/party niche, not the money pages.** party-drink 12 clicks
+   (pos 8.7), graduation-party 7 (pos 9.7), event-seating 6, conference-room 3,
+   coffee-spend 3 — over half of all site clicks. The UK-tax cluster (4.8k visible
+   impressions across 131 queries) still sits at avg pos 82.7 with 0 clicks:
+   authority-bound, unchanged since February.
+4. **42% of impressions are on hidden (anonymized) queries**, and nearly all clicks land
+   there too — visible query rows account for only 3 of the 59 clicks. Long-tail is doing
+   the work.
+5. **Coverage is complete; adding calculators is not the lever.** Every demand signal in
+   the query data already has a page (Scotland LBTT, car buy-vs-lease, compound interest,
+   ideal gas law, debt avalanche, 100k trap). They rank pos 65-93 — same authority story.
+6. **Zero-click exposure confirmed for instant-answer queries.** "70% off $80"-style
+   queries rank pos 9-11 with zero clicks (Google answers inline). Single-input
+   calculators are exposed; multi-input tools (moving cost, IHT, LBTT) are defensible.
+
+### Recommended actions (priority order)
+1. **Execute Phase 4 backlinks — open since February, now the only meaningful lever for
+   the money cluster.** Assets already written: `docs/backlink-sprint-2026-03.md`,
+   `docs/directory-submissions.md`, `docs/product-hunt-launch.md`, `docs/outreach/`.
+   Landscape note: HARO shut down Dec 2024 and was revived by Featured.com in Apr 2025;
+   the current working set is Qwoted, Featured, Source of Sources, and #JournoRequest on X.
+2. **Push the pos 10-20 striking set onto page 1** with internal links + content depth:
+   go-full-time (18.3), due-date (17.9), screen-time (16.7), kiln-cost (16.4),
+   etsy-fee (15.0), tipping-guide (14.6), employee-cost (14.5), bbq (13.0),
+   water-change (11.2), leftovers (11.0). Every page that currently earns clicks sits at
+   pos 8-22, so page 1-2 is where clicks start.
+3. **Build out the events/party cluster as a hub** (it earns >half of clicks): interlink
+   party-drink, graduation-party, event-seating, conference-room, birthday-party,
+   wedding-*; consider a party-planning guide page as the hub.
+4. **2026/27 tax-year refresh** (tracked above) — freshness signal for the money pages
+   while links accrue. Per-calculator figure verification, no bulk find-and-replace.
+5. Cheap tail: Bing Webmaster Tools (Phase 1 leftover; feeds Copilot/ChatGPT); emit
+   slash-form internal hrefs to kill the sitewide 308 hop; strip em dashes from the 40+
+   page titles the Jul-3 pass didn't touch (house style).
+
+Next pull ~2026-08-01: check the striking-distance set and whether Phase 4 links landed.
+
+---
+
 ## Timeline Expectations
 
 | Milestone | Timeframe |
@@ -283,5 +345,5 @@ site is visible (39k impressions) but ranks pos 70-95 for nearly all money queri
 
 ---
 
-*Last Updated: 2026-07-03 (GSC review + striking-distance on-page pass)*
+*Last Updated: 2026-07-18 (GSC review; slash consolidation confirmed complete)*
 *Total Live Calculators: 167 (registry count, verified `src/lib/calculators.ts` 2026-07-03)*
