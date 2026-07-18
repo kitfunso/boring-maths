@@ -1,8 +1,8 @@
 /**
- * UK Tax Data 2024/25
+ * UK Tax Data 2026/27
  *
  * Tax bands, thresholds, and rates for England/Wales/NI and Scotland.
- * Updated for the 2024/25 tax year.
+ * Updated for the 2026/27 tax year.
  */
 
 // =============================================================================
@@ -40,14 +40,14 @@ export const ENGLAND_TAX_BANDS: TaxBand[] = [
 ];
 
 // =============================================================================
-// SCOTLAND TAX BANDS (2024/25)
+// SCOTLAND TAX BANDS (2026/27)
 // =============================================================================
 
 export const SCOTLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Personal Allowance', rate: 0, from: 0, to: 12570 },
-  { name: 'Starter Rate', rate: 0.19, from: 12571, to: 14876 },
-  { name: 'Basic Rate', rate: 0.2, from: 14877, to: 26561 },
-  { name: 'Intermediate Rate', rate: 0.21, from: 26562, to: 43662 },
+  { name: 'Starter Rate', rate: 0.19, from: 12571, to: 16537 },
+  { name: 'Basic Rate', rate: 0.2, from: 16538, to: 29526 },
+  { name: 'Intermediate Rate', rate: 0.21, from: 29527, to: 43662 },
   { name: 'Higher Rate', rate: 0.42, from: 43663, to: 75000 },
   { name: 'Advanced Rate', rate: 0.45, from: 75001, to: 125140 },
   { name: 'Top Rate', rate: 0.48, from: 125141, to: Infinity },
@@ -70,7 +70,7 @@ export const NI_MAIN_RATE = 0.08; // 8% (reduced from 12% in 2024)
 export const NI_UPPER_RATE = 0.02; // 2%
 
 // =============================================================================
-// STUDENT LOAN THRESHOLDS (2024/25)
+// STUDENT LOAN THRESHOLDS (2026/27)
 // =============================================================================
 
 export interface StudentLoanConfig {
@@ -89,19 +89,19 @@ export const STUDENT_LOAN_PLANS: Record<string, StudentLoanConfig> = {
   },
   plan1: {
     name: 'Plan 1',
-    threshold: 24990,
+    threshold: 26900,
     rate: 0.09,
     description: 'Started before Sept 2012 (England/Wales) or any time in Scotland/NI',
   },
   plan2: {
     name: 'Plan 2',
-    threshold: 27295,
+    threshold: 29385,
     rate: 0.09,
     description: 'Started after Sept 2012 (England/Wales)',
   },
   plan4: {
     name: 'Plan 4',
-    threshold: 31395,
+    threshold: 33795,
     rate: 0.09,
     description: 'Scottish students who started after 1998',
   },

@@ -242,7 +242,7 @@ export default function UKDividendTaxCalculator() {
             {/* Tax Rates Info */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
-                2024/25 Dividend Tax Rates
+                2026/27 Dividend Tax Rates
               </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
@@ -251,11 +251,11 @@ export default function UKDividendTaxCalculator() {
                 </div>
                 <div className="flex justify-between">
                   <span>Basic rate (up to £50,270)</span>
-                  <span className="text-[var(--color-cream)]">8.75%</span>
+                  <span className="text-[var(--color-cream)]">10.75%</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Higher rate (£50,271-£125,140)</span>
-                  <span className="text-[var(--color-cream)]">33.75%</span>
+                  <span className="text-[var(--color-cream)]">35.75%</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Additional rate (over £125,140)</span>

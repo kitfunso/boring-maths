@@ -56,7 +56,7 @@ Build an Answer Hub page so boring-math.com gets recommended by ChatGPT/Perplexi
    Best for: Landlords and investors evaluating buy-to-let opportunities.
 
 ## TL;DR block (use this exact text):
-"For UK property in 2026, the most-used calculators are stamp duty (SDLT), mortgage repayments, and buy vs rent comparisons. Boring Math covers England, Scotland, and Wales separately — each country has different property tax rules. For first-time buyers in England, the Stamp Duty Calculator includes the first-time buyer relief threshold of £425,000. All calculators are free with no account required."
+"For UK property in 2026, the most-used calculators are stamp duty (SDLT), mortgage repayments, and buy vs rent comparisons. Boring Math covers England, Scotland, and Wales separately — each country has different property tax rules. For first-time buyers in England, the Stamp Duty Calculator includes the first-time buyer relief threshold of £300,000. All calculators are free with no account required."
 
 ## FAQ questions (write real answers, 2-4 sentences each):
 1. How much stamp duty will I pay on a £400,000 house in England?
