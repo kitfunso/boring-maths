@@ -13,12 +13,16 @@ describe('SdltCalculator', () => {
 
       const result = calculateSDLT(inputs);
 
-      expect(result.sdltAmount).toBe(0);
-      expect(result.effectiveRate).toBe(0);
+      // Default: £350,000 first-time buyer in England. Under 2026/27 SDLT
+      // (nil to £125k, 2% to £250k, 5% above), FTB relief gives 0% to £300k
+      // and 5% on £300,001-£350,000 = £2,500. Standard tax would be £7,500,
+      // so the FTB saving is £5,000.
+      expect(result.sdltAmount).toBe(2500);
+      expect(result.effectiveRate).toBeCloseTo(0.714, 2);
       expect(result.additionalPropertySurcharge).toBe(0);
       expect(result.nonResidentSurcharge).toBe(0);
       expect(result.firstTimeBuyerSaving).toBe(5000);
-      expect(result.baseTax).toBe(0);
+      expect(result.baseTax).toBe(2500);
     });
 
     it('should handle edge case: zero values', () => {

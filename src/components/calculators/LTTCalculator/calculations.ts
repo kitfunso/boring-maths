@@ -1,6 +1,6 @@
 /**
  * Wales Land Transaction Tax (LTT) Calculations
- * 2024/25 rates
+ * 2026/27 rates (main rates from 10 Oct 2022, higher rates from 11 Dec 2024)
  */
 
 import type { LTTInputs, LTTResult, LTTBand } from './types';
@@ -14,12 +14,12 @@ const LTT_STANDARD = [
 ];
 
 const LTT_HIGHER = [
-  { from: 0, to: 180000, rate: 0.04 },
-  { from: 180001, to: 250000, rate: 0.075 },
-  { from: 250001, to: 400000, rate: 0.09 },
-  { from: 400001, to: 750000, rate: 0.115 },
-  { from: 750001, to: 1500000, rate: 0.14 },
-  { from: 1500001, to: Infinity, rate: 0.16 },
+  { from: 0, to: 180000, rate: 0.05 },
+  { from: 180001, to: 250000, rate: 0.085 },
+  { from: 250001, to: 400000, rate: 0.1 },
+  { from: 400001, to: 750000, rate: 0.125 },
+  { from: 750001, to: 1500000, rate: 0.15 },
+  { from: 1500001, to: Infinity, rate: 0.17 },
 ];
 
 const NON_RESIDENT_SURCHARGE = 0.02;

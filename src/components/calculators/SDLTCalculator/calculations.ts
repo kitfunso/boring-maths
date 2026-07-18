@@ -22,7 +22,7 @@ function getSDLTBands(
   buyerType: BuyerType,
   propertyPrice: number
 ): Array<{ from: number; to: number; rate: number }> {
-  // First-time buyer relief only applies if property is 625k or less
+  // First-time buyer relief only applies if property is 500k or less
   if (buyerType === 'first-time' && propertyPrice <= FIRST_TIME_BUYER_THRESHOLD) {
     return SDLT_FIRST_TIME_BANDS;
   }

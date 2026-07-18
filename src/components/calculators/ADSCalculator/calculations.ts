@@ -2,7 +2,7 @@
  * ADS Calculator - Calculation Logic
  *
  * Calculates Additional Dwelling Supplement (ADS) for Scotland
- * ADS is 6% of the FULL purchase price for additional properties
+ * ADS is 8% of the FULL purchase price for additional properties
  */
 
 import type { ADSCalculatorInputs, ADSCalculatorResult, TaxBand, BuyerType } from './types';
@@ -63,7 +63,7 @@ export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
   // Determine if ADS applies (additional property or buyer type is additional)
   const adsApplies = isAdditionalProperty || buyerType === 'additional';
 
-  // Calculate ADS (6% on full purchase price)
+  // Calculate ADS (8% on full purchase price)
   const adsAmount = adsApplies ? Math.round(propertyPrice * ADS_RATE) : 0;
 
   // Get LBTT bands based on buyer type

@@ -2,7 +2,7 @@
  * UK Stamp Duty Calculations
  *
  * SDLT (England & NI), LBTT (Scotland), LTT (Wales)
- * Updated for 2024/25 rates
+ * Updated for 2026/27 rates
  */
 
 import type {
@@ -18,19 +18,20 @@ import type {
 // =============================================================================
 
 const SDLT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
-  { from: 0, to: 250000, rate: 0 },
+  { from: 0, to: 125000, rate: 0 },
+  { from: 125001, to: 250000, rate: 0.02 },
   { from: 250001, to: 925000, rate: 0.05 },
   { from: 925001, to: 1500000, rate: 0.1 },
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
 const SDLT_FIRST_TIME: Array<{ from: number; to: number; rate: number }> = [
-  { from: 0, to: 425000, rate: 0 },
-  { from: 425001, to: 625000, rate: 0.05 },
-  // Above £625k, first-time buyer relief not available - use standard rates
+  { from: 0, to: 300000, rate: 0 },
+  { from: 300001, to: 500000, rate: 0.05 },
+  // Above £500k, first-time buyer relief not available - use standard rates
 ];
 
-const SDLT_FIRST_TIME_THRESHOLD = 625000; // Max property price for FTB relief
+const SDLT_FIRST_TIME_THRESHOLD = 500000; // Max property price for FTB relief
 
 // =============================================================================
 // SCOTLAND - LBTT BANDS
