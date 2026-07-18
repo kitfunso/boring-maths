@@ -1,0 +1,15 @@
+[
+  { "from": "/calculators/sleep-calculator/", "to": "/calculators/screen-time-calculator/" },
+  {
+    "from": "/calculators/subscription-audit-calculator/",
+    "to": "/calculators/screen-time-calculator/"
+  },
+  { "from": "/calculators/coffee-spend-calculator/", "to": "/calculators/screen-time-calculator/" },
+  {
+    "from": "/guides/best-health-fitness-calculators/",
+    "to": "/calculators/screen-time-calculator/"
+  },
+  { "from": "/calculators/fish-stocking-calculator/", "to": "/calculators/water-change-calculator/" },
+  { "from": "/calculators/ei-dosing-calculator/", "to": "/calculators/water-change-calculator/" },
+  { "from": "/calculators/water-change-calculator/", "to": "/calculators/ei-dosing-calculator/" }
+]

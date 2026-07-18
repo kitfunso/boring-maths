@@ -39,6 +39,13 @@ const relatedCalculators = [
     icon: 'scale' as const,
     color: 'green' as const,
   },
+  {
+    title: 'EI Dosing Calculator',
+    description: 'Calculate Estimative Index fertilizer dosing for planted tanks.',
+    href: '/calculators/ei-dosing-calculator/',
+    icon: 'leaf' as const,
+    color: 'green' as const,
+  },
 ];
 
 const faqs = [
@@ -106,6 +113,21 @@ const schemaBreadcrumbs = [
   <section class="mb-16" aria-label="Calculator">
     <WaterChangeCalculator client:load />
   </section>
+
+  <ContentSection title="How Much Water Should I Change">
+    <p>
+      Most freshwater tanks need a <strong>10-30% water change weekly</strong>, keeping nitrate
+      under the <strong>20 ppm</strong> safe threshold this calculator uses, with 40 ppm as the upper
+      warning level before a change becomes urgent. A water change is a dilution, not a removal: a 50%
+      change cuts a parameter in half, a 25% change reduces it by a quarter, and a 75% change removes
+      three-quarters, each time you do it.
+    </p>
+    <p>
+      The calculator applies that dilution formula to your tank size and current reading, so you can
+      see the exact level after your next change and how many changes it takes to reach a target,
+      rather than guessing at a percentage.
+    </p>
+  </ContentSection>
 
   <ContentSection title="Water Parameter Guidelines">
     <p>
