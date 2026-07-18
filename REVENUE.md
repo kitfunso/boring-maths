@@ -24,11 +24,11 @@
 
 **Referring domains:** the GSC API exposes no Links report. This number only exists in the GSC UI and has to be pulled by hand.
 
-**[KEITH]** Go to search.google.com/search-console > select property `sc-domain:boring-math.com` > **Links** (left sidebar) > **Top linking sites**. Copy the count and the top 3 sites into the row below.
+Baseline pulled 2026-07-18 from the GSC Links report (sc-domain:boring-math.com): **83 external links total** across ~5 referring domains. The top 5 sites account for 82 of the 83 links, and dev.to/forem.com are the same platform (Forem mirrors dev.to content), so the independent-domain count is effectively 4. This is the number the backlink sprint exists to move.
 
 | Date | Referring domains | Top 3 linking sites |
 |------|--------------------|-----------------------|
-| | | |
+| 2026-07-18 | ~5 (83 external links) | dev.to (48), forem.com (23), twitterwebviewer.com (6); also reddit.com (4), 2ip.ru (1) |
 
 **Known links:**
 - awesome-calculators GitHub PR #27: https://github.com/xxczaki/awesome-calculators/pull/27. Checked 2026-07-18 via `gh pr view`: state is OPEN, `mergedAt` is null. Not live yet, the link only counts once the PR merges. `docs/directory-submissions.md` had this row marked done (✅); corrected there to reflect the actual PR state.
