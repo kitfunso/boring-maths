@@ -4,13 +4,13 @@
 
 **Goal:** Ship 5 live backlinks to high-intent pages this month.
 
-| # | Target page | Link type | Prospect/source | Owner | Status |
-|---|-------------|-----------|-----------------|-------|--------|
-| 1 | `/calculators/ads-calculator` | UK property resource mention | Scottish property blog roundup (stamp duty / LBTT tools) | Kit | [ ] |
-| 2 | `/calculators/ads-calculator` | Forum/helpful answer link | UK home-buying Q&A thread (ADS question) | Kit | [ ] |
-| 3 | `/calculators/w2-to-1099-calculator` | Freelancer guest contribution | Contractor/freelancer newsletter or blog | Kit | [ ] |
-| 4 | `/calculators/income/convert-w2-hourly-rate-to-1099` | Educational link in long-form post | Career switch / consulting-rate article | Kit | [ ] |
-| 5 | `/calculators/uk-tax/additional-dwelling-supplement-explained` | UK tax resource list | UK personal finance resource page | Kit | [ ] |
+| # | Target page | Link type | Prospect/source | Owner | Status | 2026-07 status |
+|---|-------------|-----------|-----------------|-------|--------|-----------------|
+| 1 | `/calculators/ads-calculator` | UK property resource mention | Scottish property blog roundup (stamp duty / LBTT tools) | Kit | [ ] | Not started |
+| 2 | `/calculators/ads-calculator` | Forum/helpful answer link | UK home-buying Q&A thread (ADS question) | Kit | [ ] | Not started |
+| 3 | `/calculators/w2-to-1099-calculator` | Freelancer guest contribution | Contractor/freelancer newsletter or blog | Kit | [ ] | Not started |
+| 4 | `/calculators/income/convert-w2-hourly-rate-to-1099` | Educational link in long-form post | Career switch / consulting-rate article | Kit | [ ] | Not started |
+| 5 | `/calculators/uk-tax/additional-dwelling-supplement-explained` | UK tax resource list | UK personal finance resource page | Kit | [ ] | Not started |
 
 ### Execution Rules
 
