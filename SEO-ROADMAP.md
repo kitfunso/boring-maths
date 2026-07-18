@@ -258,8 +258,9 @@ site is visible (39k impressions) but ranks pos 70-95 for nearly all money queri
 - Em dashes removed from titles on touched pages per house style.
 
 ### Candidate follow-ups (not done)
-- [ ] Internal links sitewide are slash-less hrefs, so every internal crawl hop eats a
-  308. Consider emitting slash-form internal hrefs centrally. Low priority.
+- [x] Internal links sitewide are slash-less hrefs, so every internal crawl hop eats a
+  308. Consider emitting slash-form internal hrefs centrally. Low priority. (Done
+  2026-07-18: sitewide codemod + postbuild checker.)
 - [ ] Bing Webmaster Tools (Phase 1 leftover) — feeds Copilot/ChatGPT answers, cheap AEO win.
 - [ ] Next GSC pull ~2026-08-01: check whether the striking-distance set moved.
 - [ ] Tax-year refresh: UK pages are still branded "2025/26" but the current tax year is
@@ -331,6 +332,17 @@ everything ranks pos 40-90 on money queries, where CTR is ~0.
 
 Next pull ~2026-08-01: check the striking-distance set and whether Phase 4 links landed.
 
+### Status 2026-07-18 (execution)
+- E done: slash-form internal links and em-dash title sweep, both with permanent
+  verifiers (postbuild link checker, em-dash title guard test).
+- D done: 2026/27 tax-year refresh, all figures source-verified. SDLT, ADS, dividend
+  and child benefit were materially stale and are now fixed.
+- B/C done: 53 asserted link edges, events/party hub extended to 10 pages,
+  cannibalization guards in place.
+- A drafted: backlink baseline, log, journalist kit and 5 pitches written. Keith-gated
+  before going further: directory signups, outreach sends, Product Hunt, Bing
+  Webmaster Tools.
+
 ---
 
 ## Timeline Expectations
@@ -345,5 +357,5 @@ Next pull ~2026-08-01: check the striking-distance set and whether Phase 4 links
 
 ---
 
-*Last Updated: 2026-07-18 (GSC review; slash consolidation confirmed complete)*
+*Last Updated: 2026-07-18 (GSC follow-through executed: workstreams E, D, B, C shipped; A drafted)*
 *Total Live Calculators: 167 (registry count, verified `src/lib/calculators.ts` 2026-07-03)*
