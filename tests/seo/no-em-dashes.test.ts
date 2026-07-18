@@ -4,6 +4,10 @@ import { join } from 'node:path';
 
 const EM = '—';
 
+// Captures the quoted string body directly (group 2) instead of stopping at
+// the first semicolon, which would falsely pass a title like 'A; B — C'.
+const TITLE_RE = /const title\s*=\s*(['"`])((?:\\.|(?!\1).)*)\1/gs;
+
 function collectAstroFiles(dir: string, out: string[] = []): string[] {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, entry.name);
@@ -13,13 +17,13 @@ function collectAstroFiles(dir: string, out: string[] = []): string[] {
   return out;
 }
 
-describe('SERP-visible strings contain no em dashes (house style)', () => {
+describe('Page titles contain no em dashes (house style; descriptions deferred)', () => {
   it('page title consts are em-dash free', () => {
     const offenders: string[] = [];
     for (const file of collectAstroFiles('src/pages')) {
       const src = readFileSync(file, 'utf8');
-      const decls = src.match(/const title\s*=[^;]*;/gs) ?? [];
-      if (decls.some((d) => d.includes(EM))) offenders.push(file);
+      const matches = [...src.matchAll(TITLE_RE)];
+      if (matches.some((m) => m[2].includes(EM))) offenders.push(file);
     }
     expect(offenders).toEqual([]);
   });
