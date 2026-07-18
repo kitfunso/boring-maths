@@ -32,5 +32,21 @@
   { "from": "/calculators/freelance-day-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
   { "from": "/calculators/consulting-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
   { "from": "/calculators/go-full-time-calculator/", "to": "/calculators/consulting-rate-calculator/" },
-  { "from": "/calculators/due-date-calculator/", "to": "/calculators/ovulation-calculator/" }
+  { "from": "/calculators/due-date-calculator/", "to": "/calculators/ovulation-calculator/" },
+
+  { "from": "/calculators/startup-cost-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  { "from": "/calculators/break-even-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  { "from": "/calculators/consulting-rate-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  { "from": "/calculators/employee-cost-calculator/", "to": "/calculators/break-even-calculator/" },
+  { "from": "/calculators/employee-cost-calculator/", "to": "/calculators/uk-employer-cost-calculator/" },
+  { "from": "/calculators/uk-employer-cost-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  { "from": "/calculators/pricing-calculator/", "to": "/calculators/etsy-fee-calculator/" },
+  { "from": "/calculators/materials-markup-calculator/", "to": "/calculators/etsy-fee-calculator/" },
+  { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/marketplace-fees-calculator/" },
+  { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/pricing-calculator/" },
+  { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/materials-markup-calculator/" },
+  {
+    "from": "/guides/best-business-startup-calculators/",
+    "to": "/calculators/etsy-fee-calculator/"
+  }
 ]
