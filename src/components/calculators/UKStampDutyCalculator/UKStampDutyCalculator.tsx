@@ -104,12 +104,15 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* Non-Resident Toggle */}
-            <Toggle
-              checked={inputs.isNonResident}
-              onChange={(val) => updateInput('isNonResident', val)}
-              label="Non-UK Resident (+2% surcharge)"
-            />
+            {/* Non-Resident Toggle: the 2% surcharge is SDLT-only, so only
+                offered for England & NI (no LBTT/LTT equivalent) */}
+            {inputs.location === 'england' && (
+              <Toggle
+                checked={inputs.isNonResident}
+                onChange={(val) => updateInput('isNonResident', val)}
+                label="Non-UK Resident (+2% surcharge)"
+              />
+            )}
           </div>
 
           {/* Results Section */}

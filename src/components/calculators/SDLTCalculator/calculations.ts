@@ -13,6 +13,7 @@ import {
   FIRST_TIME_BUYER_THRESHOLD,
   ADDITIONAL_PROPERTY_SURCHARGE_RATE,
   NON_RESIDENT_SURCHARGE_RATE,
+  SURCHARGE_MIN_PRICE,
 } from './types';
 
 /**
@@ -80,12 +81,14 @@ export function calculateSDLT(inputs: SDLTCalculatorInputs): SDLTCalculatorResul
   // Get base bands
   const bands = getSDLTBands(buyerType, propertyPrice);
 
-  // Calculate additional surcharge rate
+  // Calculate additional surcharge rate; both surcharges only apply to
+  // purchases of £40,000 or more (gov.uk)
+  const surchargesApply = propertyPrice >= SURCHARGE_MIN_PRICE;
   let additionalRate = 0;
-  if (buyerType === 'additional') {
+  if (buyerType === 'additional' && surchargesApply) {
     additionalRate += ADDITIONAL_PROPERTY_SURCHARGE_RATE;
   }
-  if (isNonResident) {
+  if (isNonResident && surchargesApply) {
     additionalRate += NON_RESIDENT_SURCHARGE_RATE;
   }
 
@@ -99,11 +102,12 @@ export function calculateSDLT(inputs: SDLTCalculatorInputs): SDLTCalculatorResul
 
   // Calculate surcharge breakdowns
   const additionalPropertySurcharge =
-    buyerType === 'additional' ? Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE_RATE) : 0;
+    buyerType === 'additional' && surchargesApply
+      ? Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE_RATE)
+      : 0;
 
-  const nonResidentSurcharge = isNonResident
-    ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE_RATE)
-    : 0;
+  const nonResidentSurcharge =
+    isNonResident && surchargesApply ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE_RATE) : 0;
 
   // Calculate first-time buyer saving
   let firstTimeBuyerSaving = 0;

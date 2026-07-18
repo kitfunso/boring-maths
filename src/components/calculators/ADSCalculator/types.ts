@@ -56,6 +56,13 @@ export const LBTT_FIRST_TIME_BANDS: Array<{ from: number; to: number; rate: numb
  */
 export const ADS_RATE = 0.08;
 
+/**
+ * ADS does not apply when the consideration is less than £40,000
+ * (revenue.scot ADS guidance). Keep in sync with
+ * LBTTCalculator/calculations.ts and UKStampDutyCalculator/calculations.ts.
+ */
+export const ADS_MIN_PRICE = 40000;
+
 export const BUYER_TYPE_LABELS: Record<BuyerType, string> = {
   'first-time': 'First-time Buyer',
   'home-mover': 'Moving Home',

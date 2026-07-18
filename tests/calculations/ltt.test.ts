@@ -19,13 +19,11 @@ describe('LTTCalculator', () => {
       const result = calculateLTT({
         propertyPrice: 900000,
         buyerType: 'standard',
-        isNonResident: false,
       });
 
       expect(result.totalTax).toBe(51750);
       expect(result.effectiveRate).toBeCloseTo(5.75, 4);
       expect(result.higherRatesSurcharge).toBe(0);
-      expect(result.nonResidentSurcharge).toBe(0);
       expect(result.bands).toEqual([
         { from: 0, to: 225000, rate: 0, taxDue: 0 },
         { from: 225001, to: 400000, rate: 0.06, taxDue: 10500 },
@@ -48,7 +46,6 @@ describe('LTTCalculator', () => {
       const result = calculateLTT({
         propertyPrice: 900000,
         buyerType: 'additional',
-        isNonResident: false,
       });
 
       expect(result.totalTax).toBe(96200);
@@ -61,6 +58,32 @@ describe('LTTCalculator', () => {
         { from: 400001, to: 750000, rate: 0.125, taxDue: 43750 },
         { from: 750001, to: 900000, rate: 0.15, taxDue: 22500 },
       ]);
+    });
+
+    it('should use standard bands for an additional property below the £40,000 threshold', () => {
+      // gov.wales: higher rates apply when you buy a residential property
+      // worth £40,000 or more. £39,999 additional: standard bands (0% below
+      // £225k), so no tax and no higher-rates surcharge.
+      const result = calculateLTT({
+        propertyPrice: 39999,
+        buyerType: 'additional',
+      });
+
+      expect(result.totalTax).toBe(0);
+      expect(result.higherRatesSurcharge).toBe(0);
+      expect(result.bands).toEqual([{ from: 0, to: 39999, rate: 0, taxDue: 0 }]);
+    });
+
+    it('should apply higher bands at exactly £40,000', () => {
+      // Higher band 1 (0-180k@5%): (40000-0+1)*0.05 = 2000.05 -> 2000.
+      // Standard bands give 0 at this price, so higherRatesSurcharge = 2000.
+      const result = calculateLTT({
+        propertyPrice: 40000,
+        buyerType: 'additional',
+      });
+
+      expect(result.totalTax).toBe(2000);
+      expect(result.higherRatesSurcharge).toBe(2000);
     });
   });
 });

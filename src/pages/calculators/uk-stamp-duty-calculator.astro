@@ -79,7 +79,7 @@ const faqs = [
   {
     question: 'Do non-UK residents pay more stamp duty?',
     answer:
-      'Yes, non-UK residents pay an additional 2% surcharge on top of all other rates (including the additional property surcharge if applicable). This has been in place since April 2021.',
+      'In England and Northern Ireland, non-UK residents pay an additional 2% SDLT surcharge on top of all other rates (including the additional property surcharge if applicable) on purchases of £40,000 or more. It has been in place since April 2021. Scotland (LBTT) and Wales (LTT) have no non-resident surcharge.',
   },
   {
     question: 'What is LBTT in Scotland?',
@@ -123,7 +123,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="UK Stamp Duty Calculator"
-    description="Calculate stamp duty for property purchases in England, Scotland, and Wales. Includes first-time buyer relief, additional property surcharge, and non-resident rates."
+    description="Calculate stamp duty for property purchases in England, Scotland, and Wales. Includes first-time buyer relief, additional property surcharge, and non-resident rates (England & NI)."
   />
 
   <section class="mb-16" aria-label="Calculator">
@@ -145,8 +145,9 @@ const schemaBreadcrumbs = [
         home, or purchasing an additional property.
       </li>
       <li>
-        <strong class="text-[var(--color-cream)]">Non-resident status</strong> – Toggle if you're not
-        a UK resident (adds 2% surcharge).
+        <strong class="text-[var(--color-cream)]">Non-resident status</strong> – For England & NI only,
+        toggle if you're not a UK resident (adds 2% to SDLT on purchases of £40,000 or more). Scotland
+        and Wales have no non-resident surcharge.
       </li>
     </ol>
   </ContentSection>

@@ -87,14 +87,22 @@ const ADDITIONAL_PROPERTY_SURCHARGE = 0.05; // 5% from Oct 2024
 
 /** Scotland Additional Dwelling Supplement (ADS): 8% of the FULL purchase
  *  price, charged on top of the standard LBTT bands (from 5 December 2024).
- *  There is NO minimum-price floor in the dedicated calculators, so none is
- *  applied here. Keep in sync with
+ *  Keep in sync with
  *  src/components/calculators/ADSCalculator/types.ts (ADS_RATE) and
  *  src/components/calculators/LBTTCalculator/calculations.ts (ADS_RATE). */
 const SCOTLAND_ADS_RATE = 0.08;
 
-/** Non-UK resident surcharge */
+/** Non-UK resident surcharge: SDLT-only, so England & NI. It does NOT exist
+ *  for Scotland's LBTT or Wales' LTT (gov.uk: "The surcharge does not apply
+ *  to purchases of land or buildings in Scotland or Wales"). */
 const NON_RESIDENT_SURCHARGE = 0.02; // 2%
+
+/** All three regimes exempt low-value purchases from their additional-property
+ *  element, and the SDLT non-resident surcharge shares the same floor:
+ *  England/NI higher rates and 2% surcharge apply from £40,000 (gov.uk),
+ *  Scotland's ADS from £40,000 (revenue.scot), and Wales' higher rates from
+ *  £40,000 (gov.wales). */
+const SURCHARGE_MIN_PRICE = 40000;
 
 // =============================================================================
 // CALCULATION FUNCTIONS
@@ -119,8 +127,10 @@ function getBands(
   }
 
   // Wales - no FTB relief. Additional property uses the higher-rate band table
-  // instead of standard bands (mirrors LTTCalculator).
-  return buyerType === 'additional' ? LTT_HIGHER : LTT_STANDARD;
+  // instead of standard bands, from £40,000 (mirrors LTTCalculator).
+  return buyerType === 'additional' && propertyPrice >= SURCHARGE_MIN_PRICE
+    ? LTT_HIGHER
+    : LTT_STANDARD;
 }
 
 function calculateBandTax(
@@ -180,17 +190,20 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
   const bands = getBands(location, buyerType, propertyPrice);
 
   const isAdditional = buyerType === 'additional';
+  // £40k floor shared by every additional-property element and the SDLT
+  // non-resident surcharge (see SURCHARGE_MIN_PRICE).
+  const surchargesApply = propertyPrice >= SURCHARGE_MIN_PRICE;
 
   // Band-rate additions applied on top of the selected bands:
   //  - England/NI additional property: +5% across the whole price (SDLT surcharge)
-  //  - Non-UK resident: +2% (unchanged)
+  //  - Non-UK resident: +2%, England & NI only (SDLT-only surcharge)
   // Scotland's ADS is a separate lump (below); Wales' higher rates are already
   // encoded in the band table, so neither adds a band-rate here.
   let bandSurchargeRate = 0;
-  if (isAdditional && location === 'england') {
+  if (isAdditional && location === 'england' && surchargesApply) {
     bandSurchargeRate += ADDITIONAL_PROPERTY_SURCHARGE;
   }
-  if (isNonResident) {
+  if (isNonResident && location === 'england' && surchargesApply) {
     bandSurchargeRate += NON_RESIDENT_SURCHARGE;
   }
 
@@ -199,7 +212,9 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
 
   // Scotland ADS: 8% of the FULL purchase price, on top of the LBTT bands
   const scotlandAds =
-    isAdditional && location === 'scotland' ? Math.round(propertyPrice * SCOTLAND_ADS_RATE) : 0;
+    isAdditional && location === 'scotland' && surchargesApply
+      ? Math.round(propertyPrice * SCOTLAND_ADS_RATE)
+      : 0;
 
   const totalTax = taxBands.reduce((sum, band) => sum + band.taxDue, 0) + scotlandAds;
 
@@ -212,7 +227,7 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
   //  - Scotland: the 8% ADS lump
   //  - Wales: extra tax from the higher-rate bands vs standard bands
   let additionalPropertySurcharge = 0;
-  if (isAdditional) {
+  if (isAdditional && surchargesApply) {
     if (location === 'england') {
       additionalPropertySurcharge = Math.round(propertyPrice * ADDITIONAL_PROPERTY_SURCHARGE);
     } else if (location === 'scotland') {
@@ -226,9 +241,10 @@ export function calculateStampDuty(inputs: UKStampDutyInputs): UKStampDutyResult
     }
   }
 
-  const nonResidentSurcharge = isNonResident
-    ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)
-    : 0;
+  const nonResidentSurcharge =
+    isNonResident && location === 'england' && surchargesApply
+      ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)
+      : 0;
 
   // Calculate first-time buyer saving
   let firstTimeBuyerSaving = 0;

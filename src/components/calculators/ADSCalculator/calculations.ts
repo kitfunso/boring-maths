@@ -6,7 +6,7 @@
  */
 
 import type { ADSCalculatorInputs, ADSCalculatorResult, TaxBand, BuyerType } from './types';
-import { LBTT_STANDARD_BANDS, LBTT_FIRST_TIME_BANDS, ADS_RATE } from './types';
+import { LBTT_STANDARD_BANDS, LBTT_FIRST_TIME_BANDS, ADS_RATE, ADS_MIN_PRICE } from './types';
 
 /**
  * Get appropriate LBTT bands based on buyer type
@@ -60,8 +60,10 @@ export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
     };
   }
 
-  // Determine if ADS applies (additional property or buyer type is additional)
-  const adsApplies = isAdditionalProperty || buyerType === 'additional';
+  // ADS applies to additional properties bought for £40,000 or more
+  // (revenue.scot: no ADS when the consideration is under £40,000)
+  const adsApplies =
+    (isAdditionalProperty || buyerType === 'additional') && propertyPrice >= ADS_MIN_PRICE;
 
   // Calculate ADS (8% on full purchase price)
   const adsAmount = adsApplies ? Math.round(propertyPrice * ADS_RATE) : 0;
