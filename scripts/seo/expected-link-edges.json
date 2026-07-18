@@ -48,5 +48,62 @@
   {
     "from": "/guides/best-business-startup-calculators/",
     "to": "/calculators/etsy-fee-calculator/"
+  },
+
+  {
+    "from": "/guides/best-wedding-event-calculators/",
+    "to": "/calculators/conference-room-calculator/"
+  },
+  {
+    "from": "/guides/best-wedding-event-calculators/",
+    "to": "/calculators/holiday-dinner-calculator/"
+  },
+  { "from": "/guides/best-wedding-event-calculators/", "to": "/calculators/bbq-calculator/" },
+  {
+    "from": "/calculators/party-drink-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/graduation-party-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/event-seating-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/conference-room-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/birthday-party-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/wedding-budget-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  {
+    "from": "/calculators/wedding-alcohol-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  { "from": "/calculators/catering-calculator/", "to": "/guides/best-wedding-event-calculators/" },
+  {
+    "from": "/calculators/holiday-dinner-calculator/",
+    "to": "/guides/best-wedding-event-calculators/"
+  },
+  { "from": "/calculators/bbq-calculator/", "to": "/guides/best-wedding-event-calculators/" },
+  {
+    "from": "/calculators/birthday-party-calculator/",
+    "to": "/calculators/graduation-party-calculator/"
+  },
+  { "from": "/calculators/wedding-budget-calculator/", "to": "/calculators/catering-calculator/" },
+  {
+    "from": "/calculators/wedding-alcohol-calculator/",
+    "to": "/calculators/wedding-budget-calculator/"
+  },
+  {
+    "from": "/calculators/wedding-alcohol-calculator/",
+    "to": "/calculators/party-drink-calculator/"
   }
 ]

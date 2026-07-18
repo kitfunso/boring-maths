@@ -71,6 +71,30 @@ const calculators = [
       'Calculates how many tables and chairs you need based on guest count, table shape, and spacing requirements.',
     bestFor: 'Event planners arranging seating layouts.',
   },
+  {
+    rank: 8,
+    name: 'Conference Room Calculator',
+    href: '/calculators/conference-room-calculator/',
+    description:
+      'Calculates meeting room capacity for theater, classroom, banquet, U-shape, and boardroom layouts based on room dimensions.',
+    bestFor: 'Event planners and office managers working out how many people a room can hold.',
+  },
+  {
+    rank: 9,
+    name: 'Holiday Dinner Calculator',
+    href: '/calculators/holiday-dinner-calculator/',
+    description:
+      'Calculates turkey size, cooking time, and side dish quantities for Thanksgiving or Christmas dinner based on guest count.',
+    bestFor: 'Anyone hosting a holiday meal who needs to know how large a turkey to buy.',
+  },
+  {
+    rank: 10,
+    name: 'BBQ Calculator',
+    href: '/calculators/bbq-calculator/',
+    description:
+      'Calculates how much meat, sides, and supplies to buy for a cookout based on guest count and appetite level.',
+    bestFor: 'Anyone hosting a BBQ or cookout who wants an exact shopping list.',
+  },
 ];
 
 const faqs = [
@@ -103,6 +127,16 @@ const faqs = [
     question: "How much should I budget for a children's birthday party?",
     answer:
       "A children's birthday party in the UK typically costs £100-£300 for a home party (10-15 children) covering food, cake, decorations, and party bags at about £5-£8 per child. Venue-based parties with entertainment cost £200-£500. The Birthday Party Calculator breaks down quantities for food, drinks, party bags, and decorations based on your guest count.",
+  },
+  {
+    question: 'How many people fit in a meeting room?',
+    answer:
+      'It depends on the seating layout. Theater style (rows of chairs, no tables) is the most space-efficient at 6 square feet per person. Classroom style (tables with chairs facing front) needs about 18 square feet per person. Banquet rounds need about 12 square feet per person. Boardroom, U-shape, and hollow square layouts need the most space at 25 square feet per person because everyone needs table access. The Conference Room Calculator divides your usable floor area by the right figure for your layout.',
+  },
+  {
+    question: 'How much meat per person for a BBQ?',
+    answer:
+      'Plan on 1/3 pound (0.33 lb) of raw meat per person for a light appetite, 1/2 pound (0.5 lb) for a moderate appetite, and 3/4 pound (0.75 lb) for a hungry crowd. Children typically eat about half an adult portion. The BBQ Calculator adds a 10% buffer on top of these amounts to cover uneven appetites and seconds.',
   },
 ];
 
@@ -165,7 +199,7 @@ const schemaData = {
       </section>
 
       <section class="ranked-list">
-        <h2>Top 7 Wedding & Event Calculators for 2026</h2>
+        <h2>Top 10 Wedding & Event Calculators for 2026</h2>
         {
           calculators.map((c) => (
             <article class="calculator-card">
