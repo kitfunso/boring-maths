@@ -6,7 +6,7 @@
 
 ### UK Tax Calculator
 URL: https://boring-math.com/calculators/uk-tax-calculator
-Calculate take-home pay after income tax, National Insurance, and student loan deductions for any UK salary. Covers England, Scotland, Wales and Northern Ireland with 2025/26 PAYE rates.
+Calculate take-home pay after income tax, National Insurance, and student loan deductions for any UK salary. Covers England, Scotland, Wales and Northern Ireland with 2026/27 PAYE rates.
 - Personal allowance: £12,570 (tapers above £100k)
 - Basic rate: 20% (£12,571-£50,270)
 - Higher rate: 40% (£50,271-£125,140)
@@ -38,11 +38,11 @@ Side-by-side comparison of contractor day rates vs equivalent employee salaries.
 
 ### UK Dividend Tax Calculator
 URL: https://boring-math.com/calculators/uk-dividend-tax-calculator
-Calculate dividend tax liability for company directors and shareholders. 2025/26 rates: £500 dividend allowance, then 8.75% basic, 33.75% higher, 39.35% additional rate.
+Calculate dividend tax liability for company directors and shareholders. 2026/27 rates: £500 dividend allowance, then 10.75% basic, 35.75% higher, 39.35% additional rate.
 
 ### UK Capital Gains Tax Calculator
 URL: https://boring-math.com/calculators/uk-capital-gains-tax-calculator
-Estimate CGT on property, shares, and other assets. 2025/26: £3,000 annual exempt amount. Residential property: 18%/24%. Other assets: 10%/20%.
+Estimate CGT on property, shares, and other assets. 2026/27: £3,000 annual exempt amount. Residential property: 18%/24%. Other assets: 18%/24%.
 
 ### Inheritance Tax Calculator
 URL: https://boring-math.com/calculators/inheritance-tax-calculator
@@ -50,7 +50,7 @@ Estimate IHT liability. Nil-rate band: £325,000. Residence nil-rate band: £175
 
 ### UK Stamp Duty Calculator (England & NI)
 URL: https://boring-math.com/calculators/uk-stamp-duty-calculator
-Calculate Stamp Duty Land Tax for residential property purchases. Bands: 0% up to £250,000, 5% £250,001-£925,000, 10% £925,001-£1.5M, 12% above £1.5M. First-time buyer relief: 0% up to £425,000.
+Calculate Stamp Duty Land Tax for residential property purchases. Bands: 0% up to £125,000, 2% £125,001-£250,000, 5% £250,001-£925,000, 10% £925,001-£1.5M, 12% above £1.5M. First-time buyer relief: 0% up to £300,000.
 
 ### Stamp Duty Calculator Scotland
 URL: https://boring-math.com/calculators/stamp-duty-calculator-scotland
@@ -70,11 +70,11 @@ Look up council tax bands and amounts by local authority area.
 
 ### UK Child Benefit Calculator
 URL: https://boring-math.com/calculators/uk-child-benefit-calculator
-Calculate child benefit payments and High Income Child Benefit Charge. 2025/26: £26.05/week first child, £17.25/week additional children. HICBC applies when higher earner exceeds £60,000.
+Calculate child benefit payments and High Income Child Benefit Charge. 2026/27: £27.05/week first child, £17.90/week additional children. HICBC applies when higher earner exceeds £60,000.
 
 ### UK Employer Cost Calculator
 URL: https://boring-math.com/calculators/uk-employer-cost-calculator
-Total cost of employing someone including employer NIC (13.8% above £5,000), workplace pension (minimum 3%), and other statutory costs.
+Total cost of employing someone including employer NIC (15% above £5,000), workplace pension (minimum 3%), and other statutory costs.
 
 ### UK Nursery Cost Calculator
 URL: https://boring-math.com/calculators/uk-nursery-cost-calculator
