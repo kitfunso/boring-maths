@@ -103,16 +103,16 @@ test.describe('Mobile menu', () => {
     const menu = page.locator('#mobile-menu');
 
     // Menu links should not be visible initially
-    await expect(menu.locator('a[href="/about"]')).not.toBeVisible();
+    await expect(menu.locator('a[href="/about/"]')).not.toBeVisible();
 
     // Open the menu
     await menuBtn.click();
     await expect(menu.locator('a[href="/"]')).toBeVisible();
-    await expect(menu.locator('a[href="/about"]')).toBeVisible();
+    await expect(menu.locator('a[href="/about/"]')).toBeVisible();
 
     // Close the menu
     await menuBtn.click();
-    await expect(menu.locator('a[href="/about"]')).not.toBeVisible();
+    await expect(menu.locator('a[href="/about/"]')).not.toBeVisible();
   });
 });
 
@@ -147,7 +147,7 @@ test.describe('Mobile filter toggle', () => {
 
 test.describe('Calculator page', () => {
   test('tip calculator loads with inputs and results', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     // Use getByRole with name to avoid Astro dev toolbar h1 conflicts
     const heading = page.getByRole('heading', { name: /tip calculator/i, level: 1 });
@@ -163,7 +163,7 @@ test.describe('Calculator page', () => {
   });
 
   test('percentage calculator loads with mode selector', async ({ page }) => {
-    await page.goto('/calculators/percentage-calculator');
+    await page.goto('/calculators/percentage-calculator/');
 
     const heading = page.getByRole('heading', { name: /percentage calculator/i, level: 1 });
     await expect(heading).toBeVisible();
@@ -179,7 +179,7 @@ test.describe('Calculator page', () => {
 
 test.describe('Calculator computation', () => {
   test('tip calculator updates result when bill amount changes', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     const billInput = page.locator('#billAmount');
     const resultCard = page.locator('[role="status"][aria-live="polite"]').first();
@@ -193,7 +193,7 @@ test.describe('Calculator computation', () => {
   });
 
   test('tip calculator quick select buttons change tip percentage', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     // Wait for Preact hydration
     const billInput = page.locator('#billAmount');
@@ -242,17 +242,17 @@ test.describe('Navigation', () => {
   test('navigating to About page works', async ({ page }) => {
     await page.goto('/');
 
-    await page.locator('a[href="/about"]').first().click();
-    await page.waitForURL('**/about');
+    await page.locator('a[href="/about/"]').first().click();
+    await page.waitForURL('**/about/');
 
     const heading = page.locator('main h1, header.text-center h1').first();
     await expect(heading).toBeVisible();
   });
 
   test('breadcrumb links back to homepage', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
-    const breadcrumbLink = page.locator('a[href="/calculators"], a[href="/"]').first();
+    const breadcrumbLink = page.locator('a[href="/calculators/"], a[href="/"]').first();
     await expect(breadcrumbLink).toBeVisible();
   });
 });
@@ -263,14 +263,14 @@ test.describe('Navigation', () => {
 
 test.describe('Share URL params', () => {
   test('share button is present on calculator page', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     const shareBtn = page.locator('button:has-text("Share Result")');
     await expect(shareBtn).toBeVisible({ timeout: 15_000 });
   });
 
   test('share menu opens with social links and copy buttons', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     const shareBtn = page.locator('button:has-text("Share Result")');
     await expect(shareBtn).toBeVisible({ timeout: 15_000 });
@@ -324,7 +324,7 @@ test.describe('404 page', () => {
 
 test.describe('SEO meta', () => {
   test('calculator page has title and meta description', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     const title = await page.title();
     expect(title).toContain('Tip Calculator');
@@ -346,7 +346,7 @@ test.describe('SEO meta', () => {
 
 test.describe('Tip calculator split', () => {
   test('increasing split count updates the result label', async ({ page }) => {
-    await page.goto('/calculators/tip-calculator');
+    await page.goto('/calculators/tip-calculator/');
 
     const billInput = page.locator('#billAmount');
     await billInput.fill('100');
