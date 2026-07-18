@@ -49,7 +49,7 @@ export function getDefaultInputs(): UKPensionInputs {
 
 // UK Pension constants
 export const PENSION_CONSTANTS = {
-  statePensionFull: 11502, // 2024/25 full new State Pension per year
+  statePensionFull: 12548, // 2026/27 full new State Pension per year (£241.30/week)
   statePensionAge: 67, // Current state pension age
   annualAllowance: 60000, // Annual pension contribution limit
   autoEnrolmentMin: 0.05, // 5% employee minimum
