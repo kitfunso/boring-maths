@@ -18,27 +18,30 @@ const keywords =
 const canonicalURL = '/calculators/sleep-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Sleep Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Sleep Calculator' },
+];
 
 const relatedCalculators = [
   {
     title: 'Age Calculator',
     description: 'Calculate your exact age and life statistics.',
-    href: '/calculators/age-calculator',
+    href: '/calculators/age-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
   {
     title: 'Calorie Calculator',
     description: 'Calculate your daily calorie needs based on activity level.',
-    href: '/calculators/calorie-calculator',
+    href: '/calculators/calorie-calculator/',
     icon: 'fire' as const,
     color: 'coral' as const,
   },
   {
     title: 'BMI Calculator',
     description: 'Check your Body Mass Index and health category.',
-    href: '/calculators/bmi-calculator',
+    href: '/calculators/bmi-calculator/',
     icon: 'chart' as const,
     color: 'green' as const,
   },

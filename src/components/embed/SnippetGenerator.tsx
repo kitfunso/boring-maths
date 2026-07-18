@@ -4,8 +4,8 @@ import { calculators } from '../../lib/calculators';
 import { embeddableSlugs, getEmbedSnippet } from '../../lib/embeds';
 
 function getEmbedSlug(href: string): string {
-  // /calculators/mortgage-calculator -> mortgage-calculator
-  return href.replace('/calculators/', '');
+  // /calculators/mortgage-calculator/ -> mortgage-calculator
+  return href.replace('/calculators/', '').replace(/\/$/, '');
 }
 
 interface SnippetGeneratorProps {

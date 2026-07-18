@@ -18,20 +18,23 @@ const keywords =
 const canonicalURL = '/calculators/macro-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Macro Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Macro Calculator' },
+];
 
 const relatedCalculators = [
   {
     title: 'Calorie Calculator',
     description: 'Calculate your daily calorie needs.',
-    href: '/calculators/calorie-calculator',
+    href: '/calculators/calorie-calculator/',
     icon: 'fire' as const,
     color: 'red' as const,
   },
   {
     title: 'BMI Calculator',
     description: 'Check your body mass index.',
-    href: '/calculators/bmi-calculator',
+    href: '/calculators/bmi-calculator/',
     icon: 'scale' as const,
     color: 'blue' as const,
   },

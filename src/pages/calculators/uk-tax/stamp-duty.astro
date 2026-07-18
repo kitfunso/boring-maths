@@ -19,8 +19,8 @@ const canonicalURL = '/calculators/uk-tax/stamp-duty';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'UK Tax', href: '/calculators/uk-tax' },
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'UK Tax', href: '/calculators/uk-tax/' },
   { label: 'Stamp Duty Guide' },
 ];
 
@@ -28,28 +28,28 @@ const relatedCalculators = [
   {
     title: 'SDLT Calculator',
     description: 'England & Northern Ireland stamp duty.',
-    href: '/calculators/sdlt-calculator',
+    href: '/calculators/sdlt-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'UK Stamp Duty Calculator',
     description: 'All UK nations side by side.',
-    href: '/calculators/uk-stamp-duty-calculator',
+    href: '/calculators/uk-stamp-duty-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
   {
     title: 'Scotland LBTT Calculator',
     description: 'Land and Buildings Transaction Tax.',
-    href: '/calculators/stamp-duty-calculator-scotland',
+    href: '/calculators/stamp-duty-calculator-scotland/',
     icon: 'calculator' as const,
     color: 'green' as const,
   },
   {
     title: 'Wales LTT Calculator',
     description: 'Land Transaction Tax.',
-    href: '/calculators/stamp-duty-calculator-wales',
+    href: '/calculators/stamp-duty-calculator-wales/',
     icon: 'calculator' as const,
     color: 'coral' as const,
   },
@@ -121,7 +121,7 @@ const schemaBreadcrumbs = [
   <section class="mb-16">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a
-        href="/calculators/sdlt-calculator"
+        href="/calculators/sdlt-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-blue-500/50 transition-all group"
       >
         <div
@@ -148,7 +148,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/uk-stamp-duty-calculator"
+        href="/calculators/uk-stamp-duty-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-purple-500/50 transition-all group"
       >
         <div
@@ -175,7 +175,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/stamp-duty-calculator-scotland"
+        href="/calculators/stamp-duty-calculator-scotland/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-green-500/50 transition-all group"
       >
         <div
@@ -202,7 +202,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/stamp-duty-calculator-wales"
+        href="/calculators/stamp-duty-calculator-wales/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-rose-500/50 transition-all group"
       >
         <div
@@ -229,7 +229,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/ads-calculator"
+        href="/calculators/ads-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-amber-500/50 transition-all group"
       >
         <div
@@ -367,7 +367,7 @@ const schemaBreadcrumbs = [
       <li>
         <strong class="text-blue-400">England (SDLT):</strong> 5% surcharge from October 2024 (increased
         from 3%). Applies to the full purchase price. Use the
-        <a href="/calculators/sdlt-calculator" class="text-[var(--color-accent)] hover:underline"
+        <a href="/calculators/sdlt-calculator/" class="text-[var(--color-accent)] hover:underline"
           >SDLT Calculator</a
         >
         with "Additional Property" selected.
@@ -376,12 +376,12 @@ const schemaBreadcrumbs = [
         <strong class="text-emerald-400">Scotland (LBTT):</strong> 6% Additional Dwelling Supplement (ADS).
         Applies to the full purchase price. Can be reclaimed within 18 months if you sell your previous
         main home. Use the
-        <a href="/calculators/ads-calculator" class="text-[var(--color-accent)] hover:underline"
+        <a href="/calculators/ads-calculator/" class="text-[var(--color-accent)] hover:underline"
           >ADS Calculator</a
         >
         for exact figures, then review edge cases in the
         <a
-          href="/calculators/uk-tax/additional-dwelling-supplement-explained"
+          href="/calculators/uk-tax/additional-dwelling-supplement-explained/"
           class="text-[var(--color-accent)] hover:underline">ADS Scotland guide</a
         >.
       </li>
@@ -389,7 +389,7 @@ const schemaBreadcrumbs = [
         <strong class="text-rose-400">Wales (LTT):</strong> 4% higher rates surcharge on additional properties.
         Applies to the full purchase price. Use the
         <a
-          href="/calculators/stamp-duty-calculator-wales"
+          href="/calculators/stamp-duty-calculator-wales/"
           class="text-[var(--color-accent)] hover:underline">Wales LTT Calculator</a
         >
         with additional property selected.

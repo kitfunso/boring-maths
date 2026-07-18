@@ -19,8 +19,8 @@ const canonicalURL = '/calculators/hobbies/candle-making';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'Hobbies', href: '/calculators/hobbies' },
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Hobbies', href: '/calculators/hobbies/' },
   { label: 'Candle Making Guide' },
 ];
 
@@ -28,21 +28,21 @@ const relatedCalculators = [
   {
     title: 'Candle Wax Calculator',
     description: 'Calculate how much wax you need for any container.',
-    href: '/calculators/candle-wax-calculator',
+    href: '/calculators/candle-wax-calculator/',
     icon: 'fire' as const,
     color: 'amber' as const,
   },
   {
     title: 'Fragrance Calculator',
     description: 'Calculate fragrance oil amounts by wax type.',
-    href: '/calculators/fragrance-calculator',
+    href: '/calculators/fragrance-calculator/',
     icon: 'beaker' as const,
     color: 'purple' as const,
   },
   {
     title: 'Batch Cost Calculator',
     description: 'Price your handmade products for profit.',
-    href: '/calculators/batch-cost-calculator',
+    href: '/calculators/batch-cost-calculator/',
     icon: 'dollar' as const,
     color: 'green' as const,
   },
@@ -114,7 +114,7 @@ const schemaBreadcrumbs = [
   <section class="mb-16">
     <div class="grid md:grid-cols-3 gap-6">
       <a
-        href="/calculators/candle-wax-calculator"
+        href="/calculators/candle-wax-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-amber-500/50 transition-all group"
       >
         <div
@@ -141,7 +141,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/fragrance-calculator"
+        href="/calculators/fragrance-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-purple-500/50 transition-all group"
       >
         <div
@@ -168,7 +168,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/batch-cost-calculator"
+        href="/calculators/batch-cost-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-green-500/50 transition-all group"
       >
         <div
@@ -252,7 +252,7 @@ const schemaBreadcrumbs = [
   <ContentSection title="How These Calculators Work Together">
     <p>
       Start with the <a
-        href="/calculators/candle-wax-calculator"
+        href="/calculators/candle-wax-calculator/"
         class="text-[var(--color-accent)] hover:underline">Candle Wax Calculator</a
       > to determine how much wax your containers need. Enter your container dimensions or volume, select
       your wax type, and get the exact weight including a 10-15% overage for pour pot residue and second
@@ -260,7 +260,7 @@ const schemaBreadcrumbs = [
     </p>
     <p>
       Next, use the <a
-        href="/calculators/fragrance-calculator"
+        href="/calculators/fragrance-calculator/"
         class="text-[var(--color-accent)] hover:underline">Fragrance Calculator</a
       > to find the right amount of fragrance oil. Input your total wax weight and target fragrance load
       percentage (6-10% for most waxes). The calculator shows both the fragrance weight and the adjusted
@@ -268,7 +268,7 @@ const schemaBreadcrumbs = [
     </p>
     <p>
       Finally, plug your material costs into the <a
-        href="/calculators/batch-cost-calculator"
+        href="/calculators/batch-cost-calculator/"
         class="text-[var(--color-accent)] hover:underline">Batch Cost Calculator</a
       > to set profitable retail prices. Include wax, fragrance, wicks, containers, labels, packaging,
       your labor time, and overhead. The calculator suggests retail and wholesale prices at your target

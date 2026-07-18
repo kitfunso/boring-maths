@@ -23,35 +23,38 @@ const canonicalURL = '/calculators/mulch-calculator';
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Mulch Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Mulch Calculator' },
+];
 
 // Related calculators
 const relatedCalculators = [
   {
     title: 'Paint Calculator',
     description: 'Calculate how much paint you need for your room walls.',
-    href: '/calculators/paint-calculator',
+    href: '/calculators/paint-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
   {
     title: 'Flooring Calculator',
     description: 'Calculate flooring materials with waste factor.',
-    href: '/calculators/flooring-calculator',
+    href: '/calculators/flooring-calculator/',
     icon: 'calculator' as const,
     color: 'yellow' as const,
   },
   {
     title: 'Fence Calculator',
     description: 'Calculate fencing materials and costs.',
-    href: '/calculators/fence-calculator',
+    href: '/calculators/fence-calculator/',
     icon: 'calculator' as const,
     color: 'amber' as const,
   },
   {
     title: 'Solar Panel Calculator',
     description: 'Calculate solar panel savings and ROI.',
-    href: '/calculators/solar-panel-calculator',
+    href: '/calculators/solar-panel-calculator/',
     icon: 'bolt' as const,
     color: 'green' as const,
   },

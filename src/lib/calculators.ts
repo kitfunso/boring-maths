@@ -154,7 +154,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK \u00a3100k Tax Trap',
     description:
       'Calculate how the 60% marginal rate affects you and find optimal pension contributions.',
-    href: '/calculators/uk-100k-tax-trap-calculator',
+    href: '/calculators/uk-100k-tax-trap-calculator/',
     icon: 'chart',
     color: 'coral',
     category: 'Finance',
@@ -165,7 +165,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Nursery Cost',
     description:
       'Calculate childcare costs with free hours, Tax-Free Childcare, and government support.',
-    href: '/calculators/uk-nursery-cost-calculator',
+    href: '/calculators/uk-nursery-cost-calculator/',
     icon: 'heart',
     color: 'violet',
     category: 'Finance',
@@ -176,7 +176,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Go Full-Time Calculator',
     description:
       'Calculate when you can quit your job to pursue freelancing or side hustle full-time.',
-    href: '/calculators/go-full-time-calculator',
+    href: '/calculators/go-full-time-calculator/',
     icon: 'rocket',
     color: 'blue',
     category: 'Income',
@@ -186,7 +186,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Contractor vs Employee',
     description:
       'Compare contractor rates vs salary accounting for taxes, benefits, and hidden costs.',
-    href: '/calculators/contractor-vs-employee-calculator',
+    href: '/calculators/contractor-vs-employee-calculator/',
     icon: 'swap',
     color: 'green',
     category: 'Income',
@@ -196,7 +196,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'FIRE Calculator',
     description:
       'Calculate your path to Financial Independence, Retire Early with Lean, Fat, and Coast FIRE projections.',
-    href: '/calculators/fire-calculator',
+    href: '/calculators/fire-calculator/',
     icon: 'fire',
     color: 'amber',
     category: 'Finance',
@@ -205,7 +205,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Mortgage Calculator',
     description: 'Calculate monthly payments, total interest, and loan costs for your home.',
-    href: '/calculators/mortgage-calculator',
+    href: '/calculators/mortgage-calculator/',
     icon: 'home',
     color: 'green',
     category: 'Finance',
@@ -214,7 +214,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Compound Interest',
     description: 'See how investments grow over time with the power of compound interest.',
-    href: '/calculators/compound-interest-calculator',
+    href: '/calculators/compound-interest-calculator/',
     icon: 'chart',
     color: 'accent',
     category: 'Finance',
@@ -223,7 +223,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Loan Calculator',
     description: 'Calculate monthly payments and total interest for any loan.',
-    href: '/calculators/loan-calculator',
+    href: '/calculators/loan-calculator/',
     icon: 'dollar',
     color: 'blue',
     category: 'Finance',
@@ -232,7 +232,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'BMI Calculator',
     description: 'Calculate your Body Mass Index and see healthy weight ranges.',
-    href: '/calculators/bmi-calculator',
+    href: '/calculators/bmi-calculator/',
     icon: 'heart',
     color: 'violet',
     category: 'Health',
@@ -241,7 +241,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Percentage Calculator',
     description: 'Calculate percentages, percent change, and more with instant results.',
-    href: '/calculators/percentage-calculator',
+    href: '/calculators/percentage-calculator/',
     icon: 'percent',
     color: 'violet',
     category: 'Everyday',
@@ -250,7 +250,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Calorie Calculator',
     description: 'Calculate your daily calorie needs (TDEE) based on activity level and goals.',
-    href: '/calculators/calorie-calculator',
+    href: '/calculators/calorie-calculator/',
     icon: 'heart',
     color: 'green',
     category: 'Health',
@@ -259,7 +259,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Tip Calculator',
     description: 'Calculate tips instantly and split bills between friends with ease.',
-    href: '/calculators/tip-calculator',
+    href: '/calculators/tip-calculator/',
     icon: 'percent',
     color: 'green',
     category: 'Everyday',
@@ -268,7 +268,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Unit Converter',
     description: 'Convert between length, weight, temperature, volume, and more.',
-    href: '/calculators/unit-converter',
+    href: '/calculators/unit-converter/',
     icon: 'swap',
     color: 'blue',
     category: 'Everyday',
@@ -277,7 +277,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Age Calculator',
     description: 'Calculate your exact age in years, months, days with zodiac signs.',
-    href: '/calculators/age-calculator',
+    href: '/calculators/age-calculator/',
     icon: 'calendar',
     color: 'violet',
     category: 'Everyday',
@@ -287,7 +287,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Freelance Day Rate',
     description:
       'Calculate your ideal freelance rate vs salary position, including tax adjustments and benefits analysis.',
-    href: '/calculators/freelance-day-rate-calculator',
+    href: '/calculators/freelance-day-rate-calculator/',
     icon: 'dollar',
     color: 'blue',
     category: 'Income',
@@ -296,7 +296,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Hourly to Salary',
     description: 'Convert hourly rate to annual salary with tax adjustments and take-home pay.',
-    href: '/calculators/hourly-to-salary-calculator',
+    href: '/calculators/hourly-to-salary-calculator/',
     icon: 'calculator',
     color: 'green',
     category: 'Income',
@@ -305,7 +305,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Raise Calculator',
     description: 'See the lifetime value of salary increases and career compounding.',
-    href: '/calculators/raise-calculator',
+    href: '/calculators/raise-calculator/',
     icon: 'trending',
     color: 'ocean',
     category: 'Income',
@@ -314,7 +314,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Remote Work Savings',
     description: 'Calculate how much you save working from home - gas, time, food, and more.',
-    href: '/calculators/remote-work-savings-calculator',
+    href: '/calculators/remote-work-savings-calculator/',
     icon: 'home',
     color: 'ocean',
     category: 'Income',
@@ -323,7 +323,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Savings Goal',
     description: 'Calculate monthly contributions to reach your savings goal with inflation.',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     icon: 'chart',
     color: 'accent',
     category: 'Finance',
@@ -332,7 +332,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Emergency Fund',
     description: 'Calculate your ideal emergency fund size based on expenses and stability.',
-    href: '/calculators/emergency-fund-calculator',
+    href: '/calculators/emergency-fund-calculator/',
     icon: 'shield',
     color: 'violet',
     category: 'Finance',
@@ -341,7 +341,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Debt Payoff Calculator',
     description: 'Compare snowball vs avalanche strategies to pay off debt faster.',
-    href: '/calculators/debt-payoff-calculator',
+    href: '/calculators/debt-payoff-calculator/',
     icon: 'chart',
     color: 'blue',
     category: 'Finance',
@@ -350,7 +350,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Side Hustle Profit',
     description: 'Determine if your side hustle is truly profitable with effective hourly rate.',
-    href: '/calculators/side-hustle-profitability-calculator',
+    href: '/calculators/side-hustle-profitability-calculator/',
     icon: 'trending',
     color: 'coral',
     category: 'Business',
@@ -359,7 +359,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Etsy/eBay Fee Calculator',
     description: 'Compare marketplace fees and calculate your net profit on Etsy vs eBay.',
-    href: '/calculators/etsy-fee-calculator',
+    href: '/calculators/etsy-fee-calculator/',
     icon: 'dollar',
     color: 'green',
     category: 'Business',
@@ -368,7 +368,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Break-Even Point',
     description: 'Calculate how many units you need to sell to cover business costs.',
-    href: '/calculators/break-even-calculator',
+    href: '/calculators/break-even-calculator/',
     icon: 'chart',
     color: 'blue',
     category: 'Business',
@@ -377,7 +377,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Paint Calculator',
     description: 'Calculate paint needed for any room with gallons and shopping list.',
-    href: '/calculators/paint-calculator',
+    href: '/calculators/paint-calculator/',
     icon: 'cube',
     color: 'violet',
     category: 'Home',
@@ -386,7 +386,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Flooring Calculator',
     description: 'Calculate flooring needed with pattern-specific waste factors and box counts.',
-    href: '/calculators/flooring-calculator',
+    href: '/calculators/flooring-calculator/',
     icon: 'layers',
     color: 'amber',
     category: 'Home',
@@ -395,7 +395,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Mulch Calculator',
     description: 'Calculate how much mulch you need in cubic yards or bags for your garden beds.',
-    href: '/calculators/mulch-calculator',
+    href: '/calculators/mulch-calculator/',
     icon: 'leaf',
     color: 'green',
     category: 'Home',
@@ -404,7 +404,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Electricity Cost',
     description: 'Calculate appliance running costs - daily, monthly, and yearly.',
-    href: '/calculators/electricity-cost-calculator',
+    href: '/calculators/electricity-cost-calculator/',
     icon: 'bolt',
     color: 'amber',
     category: 'Home',
@@ -413,7 +413,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Wedding Alcohol',
     description: 'Estimate beer, wine, and liquor for your celebration based on guest count.',
-    href: '/calculators/wedding-alcohol-calculator',
+    href: '/calculators/wedding-alcohol-calculator/',
     icon: 'glass',
     color: 'coral',
     category: 'Events',
@@ -422,7 +422,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'BBQ Calculator',
     description: 'Calculate meat, sides, and supplies for your cookout or BBQ party.',
-    href: '/calculators/bbq-calculator',
+    href: '/calculators/bbq-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Events',
@@ -431,7 +431,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Party Drink Calculator',
     description: 'Estimate non-alcoholic drinks, juice, water, and ice for your party or event.',
-    href: '/calculators/party-drink-calculator',
+    href: '/calculators/party-drink-calculator/',
     icon: 'glass',
     color: 'coral',
     category: 'Events',
@@ -440,7 +440,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Discount Calculator',
     description: 'Calculate sale prices, percent off, and total savings on any purchase.',
-    href: '/calculators/discount-calculator',
+    href: '/calculators/discount-calculator/',
     icon: 'percent',
     color: 'coral',
     category: 'Everyday',
@@ -450,7 +450,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Cost Per Wear',
     description:
       'Calculate the true cost per wear of clothing and compare investment pieces vs cheap alternatives.',
-    href: '/calculators/cost-per-wear-calculator',
+    href: '/calculators/cost-per-wear-calculator/',
     icon: 'layers',
     color: 'violet',
     category: 'Everyday',
@@ -459,7 +459,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Baking Conversion Calculator',
     description: 'Convert cups to grams, ounces to ml, and more for 14 baking ingredients.',
-    href: '/calculators/baking-conversion-calculator',
+    href: '/calculators/baking-conversion-calculator/',
     icon: 'swap',
     color: 'amber',
     category: 'Everyday',
@@ -468,7 +468,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Recipe Scaler',
     description: 'Scale any recipe up or down with smart rounding for baking.',
-    href: '/calculators/recipe-scaler-calculator',
+    href: '/calculators/recipe-scaler-calculator/',
     icon: 'layers',
     color: 'green',
     category: 'Everyday',
@@ -477,7 +477,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Dog Age Calculator',
     description: 'Convert dog years to human years using accurate, science-based formulas.',
-    href: '/calculators/dog-age-calculator',
+    href: '/calculators/dog-age-calculator/',
     icon: 'paw',
     color: 'amber',
     category: 'Everyday',
@@ -488,7 +488,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Reynolds Number',
     description:
       'Calculate Reynolds number to determine flow regime (laminar, transitional, turbulent).',
-    href: '/calculators/reynolds-number-calculator',
+    href: '/calculators/reynolds-number-calculator/',
     icon: 'bolt',
     color: 'blue',
     category: 'Engineering',
@@ -497,7 +497,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Ideal Gas Law (PV=nRT)',
     description: 'Calculate pressure, volume, moles, or temperature using the ideal gas law.',
-    href: '/calculators/ideal-gas-law-calculator',
+    href: '/calculators/ideal-gas-law-calculator/',
     icon: 'cube',
     color: 'green',
     category: 'Engineering',
@@ -506,7 +506,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Pipe Flow Calculator',
     description: 'Size pipes, calculate velocity, or flow rate with velocity recommendations.',
-    href: '/calculators/pipe-flow-calculator',
+    href: '/calculators/pipe-flow-calculator/',
     icon: 'layers',
     color: 'violet',
     category: 'Engineering',
@@ -515,7 +515,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'LMTD Calculator',
     description: 'Calculate Log Mean Temperature Difference for heat exchanger design.',
-    href: '/calculators/lmtd-calculator',
+    href: '/calculators/lmtd-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Engineering',
@@ -525,7 +525,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Pressure Drop Calculator',
     description:
       'Calculate pipe pressure drop using Darcy-Weisbach equation with friction factors.',
-    href: '/calculators/pressure-drop-calculator',
+    href: '/calculators/pressure-drop-calculator/',
     icon: 'chart',
     color: 'amber',
     category: 'Engineering',
@@ -535,7 +535,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: '401k Calculator',
     description: 'Project retirement savings with employer matching and compound growth.',
-    href: '/calculators/401k-calculator',
+    href: '/calculators/401k-calculator/',
     icon: 'chart',
     color: 'green',
     category: 'Finance',
@@ -546,7 +546,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'HSA Calculator',
     description:
       'Calculate triple tax advantage savings with contribution limits and long-term growth.',
-    href: '/calculators/hsa-calculator',
+    href: '/calculators/hsa-calculator/',
     icon: 'heart',
     color: 'green',
     category: 'Finance',
@@ -556,7 +556,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Macro Calculator',
     description: 'Calculate your daily protein, carbs, and fat needs based on your goals.',
-    href: '/calculators/macro-calculator',
+    href: '/calculators/macro-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Health',
@@ -565,7 +565,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'One Rep Max (1RM)',
     description: 'Estimate your maximum single-rep lift using five proven strength formulas.',
-    href: '/calculators/one-rep-max-calculator',
+    href: '/calculators/one-rep-max-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Health',
@@ -574,7 +574,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'GPA Calculator',
     description: 'Calculate your semester and cumulative GPA with multiple grade scales.',
-    href: '/calculators/gpa-calculator',
+    href: '/calculators/gpa-calculator/',
     icon: 'calculator',
     color: 'violet',
     category: 'Everyday',
@@ -584,7 +584,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Stamp Duty Calculator',
     description:
       'Calculate SDLT, LBTT, or LTT with first-time buyer relief and additional property surcharge.',
-    href: '/calculators/uk-stamp-duty-calculator',
+    href: '/calculators/uk-stamp-duty-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Finance',
@@ -595,7 +595,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Child Benefit Calculator',
     description:
       'Calculate Child Benefit and High Income Child Benefit Charge (HICBC) with pension strategies.',
-    href: '/calculators/uk-child-benefit-calculator',
+    href: '/calculators/uk-child-benefit-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Finance',
@@ -606,7 +606,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Student Loan Calculator',
     description:
       'Project student loan repayments for Plan 1, 2, 4, 5 and Postgraduate with write-off dates.',
-    href: '/calculators/uk-student-loan-calculator',
+    href: '/calculators/uk-student-loan-calculator/',
     icon: 'calculator',
     color: 'blue',
     category: 'Finance',
@@ -617,7 +617,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Salary Sacrifice Calculator',
     description:
       'Calculate tax and NI savings from pension, cycle-to-work, and EV salary sacrifice.',
-    href: '/calculators/uk-salary-sacrifice-calculator',
+    href: '/calculators/uk-salary-sacrifice-calculator/',
     icon: 'trending',
     color: 'ocean',
     category: 'Finance',
@@ -628,7 +628,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Pension Calculator',
     description:
       'Project your retirement pot and income using the 4% rule with inflation adjustment.',
-    href: '/calculators/uk-pension-calculator',
+    href: '/calculators/uk-pension-calculator/',
     icon: 'chart',
     color: 'green',
     category: 'Finance',
@@ -639,7 +639,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Dividend Tax Calculator',
     description:
       'Calculate tax on dividends and compare with salary for limited company directors.',
-    href: '/calculators/uk-dividend-tax-calculator',
+    href: '/calculators/uk-dividend-tax-calculator/',
     icon: 'dollar',
     color: 'amber',
     category: 'Finance',
@@ -650,7 +650,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'US Tax Bracket Calculator',
     description:
       'Find your 2025 federal tax bracket with visual breakdown of how your income is taxed.',
-    href: '/calculators/us-tax-bracket-calculator',
+    href: '/calculators/us-tax-bracket-calculator/',
     icon: 'chart',
     color: 'blue',
     category: 'Finance',
@@ -661,7 +661,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Self-Employment Tax Calculator',
     description:
       'Calculate 15.3% SE tax, federal income tax, and quarterly payments for freelancers.',
-    href: '/calculators/us-self-employment-tax-calculator',
+    href: '/calculators/us-self-employment-tax-calculator/',
     icon: 'dollar',
     color: 'violet',
     category: 'Finance',
@@ -671,7 +671,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Quarterly Estimated Tax Calculator',
     description: 'Calculate quarterly tax payments with safe harbor rules to avoid penalties.',
-    href: '/calculators/us-quarterly-tax-calculator',
+    href: '/calculators/us-quarterly-tax-calculator/',
     icon: 'calendar',
     color: 'violet',
     category: 'Finance',
@@ -681,7 +681,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Capital Gains Tax Calculator',
     description: 'Calculate tax on stocks, crypto, and investments with NIIT and long-term rates.',
-    href: '/calculators/us-capital-gains-tax-calculator',
+    href: '/calculators/us-capital-gains-tax-calculator/',
     icon: 'trending',
     color: 'green',
     category: 'Finance',
@@ -692,7 +692,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'EU VAT Calculator',
     description: 'Calculate VAT for all 27 EU countries. Add, remove, or reverse calculate VAT.',
-    href: '/calculators/eu-vat-calculator',
+    href: '/calculators/eu-vat-calculator/',
     icon: 'percent',
     color: 'blue',
     category: 'Finance',
@@ -702,7 +702,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'EU Salary Calculator',
     description: 'Compare net salary across European countries after tax and social security.',
-    href: '/calculators/eu-salary-calculator',
+    href: '/calculators/eu-salary-calculator/',
     icon: 'dollar',
     color: 'violet',
     category: 'Finance',
@@ -714,7 +714,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Inflation Calculator',
     description:
       'Calculate how inflation affects purchasing power using historical US CPI data from 1920-2025.',
-    href: '/calculators/inflation-calculator',
+    href: '/calculators/inflation-calculator/',
     icon: 'trending',
     color: 'amber',
     category: 'Finance',
@@ -724,7 +724,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Net Worth Calculator',
     description:
       'Calculate your total net worth by tracking assets and liabilities with category breakdowns.',
-    href: '/calculators/net-worth-calculator',
+    href: '/calculators/net-worth-calculator/',
     icon: 'chart',
     color: 'green',
     category: 'Finance',
@@ -734,7 +734,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'US Paycheck Calculator',
     description:
       'Calculate your take-home pay with federal taxes, state taxes, and deductions for all 50 states.',
-    href: '/calculators/us-paycheck-calculator',
+    href: '/calculators/us-paycheck-calculator/',
     icon: 'dollar',
     color: 'blue',
     category: 'Finance',
@@ -746,7 +746,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Speeds & Feeds Calculator',
     description:
       'Calculate optimal RPM and feed rate for CNC milling with chip load and material data.',
-    href: '/calculators/speeds-feeds-calculator',
+    href: '/calculators/speeds-feeds-calculator/',
     icon: 'bolt',
     color: 'blue',
     category: 'Machining',
@@ -756,7 +756,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Fish Stocking Calculator',
     description:
       'Calculate how many fish your aquarium can hold based on tank size, filtration, and plants.',
-    href: '/calculators/fish-stocking-calculator',
+    href: '/calculators/fish-stocking-calculator/',
     icon: 'heart',
     color: 'ocean',
     category: 'Aquarium',
@@ -766,7 +766,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'ABV Calculator',
     description:
       'Calculate alcohol content from original and final gravity for beer, wine, mead, and cider.',
-    href: '/calculators/abv-calculator',
+    href: '/calculators/abv-calculator/',
     icon: 'glass',
     color: 'amber',
     category: 'Brewing',
@@ -776,7 +776,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Clay Shrinkage Calculator',
     description:
       'Calculate thrown vs fired pottery sizes for stoneware, porcelain, and earthenware clay bodies.',
-    href: '/calculators/clay-shrinkage-calculator',
+    href: '/calculators/clay-shrinkage-calculator/',
     icon: 'cube',
     color: 'coral',
     category: 'Crafts',
@@ -786,7 +786,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Soap Lye Calculator',
     description:
       'Calculate NaOH or KOH amounts for cold process soap with superfat and water ratios.',
-    href: '/calculators/lye-calculator',
+    href: '/calculators/lye-calculator/',
     icon: 'layers',
     color: 'violet',
     category: 'Crafts',
@@ -796,7 +796,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Tap Drill Calculator',
     description: 'Find the correct drill size for any thread with adjustable thread percentage.',
-    href: '/calculators/tap-drill-calculator',
+    href: '/calculators/tap-drill-calculator/',
     icon: 'bolt',
     color: 'blue',
     category: 'Machining',
@@ -805,7 +805,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Aquarium CO2 Calculator',
     description: 'Calculate CO2 levels from pH and KH readings with drop checker color guide.',
-    href: '/calculators/co2-calculator',
+    href: '/calculators/co2-calculator/',
     icon: 'bolt',
     color: 'ocean',
     category: 'Aquarium',
@@ -814,7 +814,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'IBU Calculator',
     description: 'Calculate hop bitterness using Tinseth formula with multiple hop additions.',
-    href: '/calculators/ibu-calculator',
+    href: '/calculators/ibu-calculator/',
     icon: 'glass',
     color: 'amber',
     category: 'Brewing',
@@ -823,7 +823,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Glaze Recipe Calculator',
     description: 'Scale pottery glaze recipes to any batch size with common material presets.',
-    href: '/calculators/glaze-calculator',
+    href: '/calculators/glaze-calculator/',
     icon: 'cube',
     color: 'coral',
     category: 'Crafts',
@@ -832,7 +832,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Fragrance Calculator',
     description: 'Calculate fragrance oil amounts for candle making with wax-specific max loads.',
-    href: '/calculators/fragrance-calculator',
+    href: '/calculators/fragrance-calculator/',
     icon: 'fire',
     color: 'violet',
     category: 'Crafts',
@@ -843,7 +843,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Cutting Time Calculator',
     description:
       'Estimate machining time for milling, turning, and drilling with cost calculation.',
-    href: '/calculators/cutting-time-calculator',
+    href: '/calculators/cutting-time-calculator/',
     icon: 'bolt',
     color: 'blue',
     category: 'Machining',
@@ -852,7 +852,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'EI Dosing Calculator',
     description: 'Calculate Estimative Index fertilizer doses for planted aquariums.',
-    href: '/calculators/ei-dosing-calculator',
+    href: '/calculators/ei-dosing-calculator/',
     icon: 'bolt',
     color: 'ocean',
     category: 'Aquarium',
@@ -861,7 +861,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Mash Water Calculator',
     description: 'Calculate strike water temperature and sparge volumes for all-grain brewing.',
-    href: '/calculators/mash-water-calculator',
+    href: '/calculators/mash-water-calculator/',
     icon: 'glass',
     color: 'amber',
     category: 'Brewing',
@@ -871,7 +871,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Kiln Cost Calculator',
     description:
       'Calculate electricity cost for pottery kiln firings with cone temperature reference.',
-    href: '/calculators/kiln-cost-calculator',
+    href: '/calculators/kiln-cost-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Crafts',
@@ -880,7 +880,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Candle Wax Calculator',
     description: 'Calculate wax weight from container volume with wick sizing recommendations.',
-    href: '/calculators/candle-wax-calculator',
+    href: '/calculators/candle-wax-calculator/',
     icon: 'fire',
     color: 'violet',
     category: 'Crafts',
@@ -891,7 +891,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Tool Deflection Calculator',
     description:
       'Calculate end mill deflection for CNC machining with stickout and cutting force analysis.',
-    href: '/calculators/tool-deflection-calculator',
+    href: '/calculators/tool-deflection-calculator/',
     icon: 'bolt',
     color: 'blue',
     category: 'Machining',
@@ -900,7 +900,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Water Change Calculator',
     description: 'Calculate how water changes affect aquarium parameters with dilution schedules.',
-    href: '/calculators/water-change-calculator',
+    href: '/calculators/water-change-calculator/',
     icon: 'heart',
     color: 'ocean',
     category: 'Aquarium',
@@ -910,7 +910,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Priming Sugar Calculator',
     description:
       'Calculate carbonation sugar for bottle conditioning with CO\u2082 volumes by style.',
-    href: '/calculators/priming-sugar-calculator',
+    href: '/calculators/priming-sugar-calculator/',
     icon: 'glass',
     color: 'amber',
     category: 'Brewing',
@@ -919,7 +919,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Yeast Pitch Rate Calculator',
     description: 'Calculate proper yeast cell counts for healthy fermentation with starter sizing.',
-    href: '/calculators/yeast-pitch-rate-calculator',
+    href: '/calculators/yeast-pitch-rate-calculator/',
     icon: 'glass',
     color: 'amber',
     category: 'Brewing',
@@ -929,7 +929,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Batch Cost Calculator',
     description:
       'Calculate material costs, labor, overhead, and pricing for soap, candles, and crafts.',
-    href: '/calculators/batch-cost-calculator',
+    href: '/calculators/batch-cost-calculator/',
     icon: 'dollar',
     color: 'violet',
     category: 'Crafts',
@@ -940,7 +940,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Scotland ADS Calculator',
     description:
       'Calculate Additional Dwelling Supplement for second property purchases in Scotland.',
-    href: '/calculators/ads-calculator',
+    href: '/calculators/ads-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Finance',
@@ -951,7 +951,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Baby Cost Calculator',
     description:
       'Estimate the first-year costs of having a baby including essentials, healthcare, and childcare.',
-    href: '/calculators/baby-cost-calculator',
+    href: '/calculators/baby-cost-calculator/',
     icon: 'heart',
     color: 'pink',
     category: 'Life',
@@ -961,7 +961,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Birthday Party Calculator',
     description:
       'Plan and budget a birthday party with venue, food, decorations, and entertainment costs.',
-    href: '/calculators/birthday-party-calculator',
+    href: '/calculators/birthday-party-calculator/',
     icon: 'glass',
     color: 'coral',
     category: 'Events',
@@ -970,7 +970,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Buy vs Rent Calculator',
     description: 'Compare the long-term costs of buying vs renting a home over time.',
-    href: '/calculators/buy-vs-rent-calculator',
+    href: '/calculators/buy-vs-rent-calculator/',
     icon: 'home',
     color: 'green',
     category: 'Finance',
@@ -979,7 +979,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Car Buy vs Lease',
     description: 'Compare the total cost of buying vs leasing a vehicle over time.',
-    href: '/calculators/car-buy-vs-lease-calculator',
+    href: '/calculators/car-buy-vs-lease-calculator/',
     icon: 'swap',
     color: 'blue',
     category: 'Finance',
@@ -988,7 +988,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Catering Calculator',
     description: 'Calculate food quantities and costs for catered events of any size.',
-    href: '/calculators/catering-calculator',
+    href: '/calculators/catering-calculator/',
     icon: 'glass',
     color: 'coral',
     category: 'Events',
@@ -998,7 +998,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'College ROI Calculator',
     description:
       'Calculate the return on investment of a college degree based on costs and expected salary.',
-    href: '/calculators/college-roi-calculator',
+    href: '/calculators/college-roi-calculator/',
     icon: 'chart',
     color: 'violet',
     category: 'Life',
@@ -1007,7 +1007,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Conference Room Calculator',
     description: 'Plan conference or meeting room layouts with seating capacity calculations.',
-    href: '/calculators/conference-room-calculator',
+    href: '/calculators/conference-room-calculator/',
     icon: 'layers',
     color: 'blue',
     category: 'Events',
@@ -1017,7 +1017,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Consulting Rate Calculator',
     description:
       'Calculate your ideal consulting hourly or daily rate based on expenses and target income.',
-    href: '/calculators/consulting-rate-calculator',
+    href: '/calculators/consulting-rate-calculator/',
     icon: 'dollar',
     color: 'green',
     category: 'Business',
@@ -1027,7 +1027,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Employee Cost Calculator',
     description:
       'Calculate the true cost of an employee including salary, benefits, taxes, and overhead.',
-    href: '/calculators/employee-cost-calculator',
+    href: '/calculators/employee-cost-calculator/',
     icon: 'dollar',
     color: 'blue',
     category: 'Business',
@@ -1037,7 +1037,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Event Seating Calculator',
     description:
       'Calculate seating arrangements and capacity for weddings, conferences, and events.',
-    href: '/calculators/event-seating-calculator',
+    href: '/calculators/event-seating-calculator/',
     icon: 'layers',
     color: 'coral',
     category: 'Events',
@@ -1047,7 +1047,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Fence Calculator',
     description:
       'Calculate materials needed for fencing projects including posts, rails, and pickets.',
-    href: '/calculators/fence-calculator',
+    href: '/calculators/fence-calculator/',
     icon: 'layers',
     color: 'amber',
     category: 'Home',
@@ -1056,7 +1056,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Graduation Party Calculator',
     description: 'Plan and budget a graduation party with food, decorations, and entertainment.',
-    href: '/calculators/graduation-party-calculator',
+    href: '/calculators/graduation-party-calculator/',
     icon: 'glass',
     color: 'violet',
     category: 'Events',
@@ -1065,7 +1065,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Holiday Dinner Calculator',
     description: 'Calculate food quantities for Thanksgiving, Christmas, or holiday dinners.',
-    href: '/calculators/holiday-dinner-calculator',
+    href: '/calculators/holiday-dinner-calculator/',
     icon: 'glass',
     color: 'coral',
     category: 'Events',
@@ -1075,7 +1075,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Job Offer Comparison',
     description:
       'Compare multiple job offers including salary, benefits, commute, and growth potential.',
-    href: '/calculators/job-offer-comparison-calculator',
+    href: '/calculators/job-offer-comparison-calculator/',
     icon: 'swap',
     color: 'green',
     category: 'Income',
@@ -1084,7 +1084,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Marketplace Fees Calculator',
     description: 'Calculate seller fees across Amazon, eBay, Etsy, and other marketplaces.',
-    href: '/calculators/marketplace-fees-calculator',
+    href: '/calculators/marketplace-fees-calculator/',
     icon: 'percent',
     color: 'amber',
     category: 'Business',
@@ -1094,7 +1094,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Moving Cost Calculator',
     description:
       'Estimate the total cost of moving including movers, supplies, and travel expenses.',
-    href: '/calculators/moving-cost-calculator',
+    href: '/calculators/moving-cost-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Life',
@@ -1103,7 +1103,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Overtime Calculator',
     description: 'Calculate overtime pay including time-and-a-half and double-time rates.',
-    href: '/calculators/overtime-calculator',
+    href: '/calculators/overtime-calculator/',
     icon: 'calculator',
     color: 'green',
     category: 'Income',
@@ -1112,7 +1112,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Pet Cost Calculator',
     description: 'Estimate the annual cost of pet ownership including food, vet, and supplies.',
-    href: '/calculators/pet-cost-calculator',
+    href: '/calculators/pet-cost-calculator/',
     icon: 'heart',
     color: 'amber',
     category: 'Life',
@@ -1121,7 +1121,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Pricing Calculator',
     description: 'Calculate optimal product pricing with markup, margin, and profit analysis.',
-    href: '/calculators/pricing-calculator',
+    href: '/calculators/pricing-calculator/',
     icon: 'dollar',
     color: 'green',
     category: 'Business',
@@ -1131,7 +1131,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Rental Property ROI',
     description:
       'Calculate return on investment for rental properties including cash flow and cap rate.',
-    href: '/calculators/rental-property-calculator',
+    href: '/calculators/rental-property-calculator/',
     icon: 'home',
     color: 'green',
     category: 'Business',
@@ -1140,7 +1140,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'SaaS Metrics Calculator',
     description: 'Calculate key SaaS metrics including MRR, ARR, churn rate, and LTV.',
-    href: '/calculators/saas-metrics-calculator',
+    href: '/calculators/saas-metrics-calculator/',
     icon: 'chart',
     color: 'violet',
     category: 'Business',
@@ -1149,7 +1149,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Salary to Hourly',
     description: 'Convert annual salary to hourly rate with tax and benefits adjustments.',
-    href: '/calculators/salary-to-hourly-calculator',
+    href: '/calculators/salary-to-hourly-calculator/',
     icon: 'calculator',
     color: 'blue',
     category: 'Income',
@@ -1159,7 +1159,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK SDLT Calculator',
     description:
       'Calculate Stamp Duty Land Tax for property purchases in England and Northern Ireland.',
-    href: '/calculators/sdlt-calculator',
+    href: '/calculators/sdlt-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Finance',
@@ -1169,7 +1169,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Solar Panel Calculator',
     description: 'Estimate solar panel system size, costs, and savings for your home.',
-    href: '/calculators/solar-panel-calculator',
+    href: '/calculators/solar-panel-calculator/',
     icon: 'bolt',
     color: 'amber',
     category: 'Home',
@@ -1179,7 +1179,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Startup Cost Calculator',
     description:
       'Estimate initial costs for starting a business including legal, equipment, and marketing.',
-    href: '/calculators/startup-cost-calculator',
+    href: '/calculators/startup-cost-calculator/',
     icon: 'rocket',
     color: 'violet',
     category: 'Business',
@@ -1188,7 +1188,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Subscription Audit',
     description: 'Track and analyze your subscriptions to find savings and reduce waste.',
-    href: '/calculators/subscription-audit-calculator',
+    href: '/calculators/subscription-audit-calculator/',
     icon: 'dollar',
     color: 'coral',
     category: 'Finance',
@@ -1197,7 +1197,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Tile Calculator',
     description: 'Calculate tiles needed for floors or walls with waste factor and grout.',
-    href: '/calculators/tile-calculator',
+    href: '/calculators/tile-calculator/',
     icon: 'layers',
     color: 'ocean',
     category: 'Home',
@@ -1206,7 +1206,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Vacation Budget Calculator',
     description: 'Plan and budget your vacation including flights, hotels, food, and activities.',
-    href: '/calculators/vacation-budget-calculator',
+    href: '/calculators/vacation-budget-calculator/',
     icon: 'calendar',
     color: 'ocean',
     category: 'Life',
@@ -1216,7 +1216,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'W2 to 1099 Calculator',
     description:
       'Convert W2 salary to equivalent 1099 contractor rate accounting for taxes and benefits.',
-    href: '/calculators/w2-to-1099-calculator',
+    href: '/calculators/w2-to-1099-calculator/',
     icon: 'swap',
     color: 'green',
     category: 'Income',
@@ -1226,7 +1226,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Wedding Budget Calculator',
     description: 'Plan your wedding budget with detailed cost breakdowns by category.',
-    href: '/calculators/wedding-budget-calculator',
+    href: '/calculators/wedding-budget-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Events',
@@ -1237,7 +1237,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Due Date Calculator',
     description:
       'Calculate your pregnancy due date with LMP, conception, IVF, or ultrasound methods.',
-    href: '/calculators/due-date-calculator',
+    href: '/calculators/due-date-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Health',
@@ -1246,7 +1246,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Sleep Calculator',
     description: 'Find optimal bedtimes and wake times based on 90-minute sleep cycles.',
-    href: '/calculators/sleep-calculator',
+    href: '/calculators/sleep-calculator/',
     icon: 'bolt',
     color: 'ocean',
     category: 'Health',
@@ -1255,7 +1255,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'EV vs Gas Calculator',
     description: 'Compare total cost of ownership between electric and gas vehicles.',
-    href: '/calculators/ev-vs-gas-calculator',
+    href: '/calculators/ev-vs-gas-calculator/',
     icon: 'bolt',
     color: 'green',
     category: 'Automotive',
@@ -1264,7 +1264,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Road Trip Cost Calculator',
     description: 'Calculate gas, food, hotel, and total road trip costs with per-person splitting.',
-    href: '/calculators/road-trip-cost-calculator',
+    href: '/calculators/road-trip-cost-calculator/',
     icon: 'rocket',
     color: 'amber',
     category: 'Automotive',
@@ -1275,7 +1275,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'TDEE Calculator',
     description:
       'Calculate your Total Daily Energy Expenditure based on activity level and body composition.',
-    href: '/calculators/tdee-calculator',
+    href: '/calculators/tdee-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Health',
@@ -1284,7 +1284,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Body Fat Calculator',
     description: 'Estimate your body fat percentage using multiple measurement methods.',
-    href: '/calculators/body-fat-calculator',
+    href: '/calculators/body-fat-calculator/',
     icon: 'heart',
     color: 'green',
     category: 'Health',
@@ -1293,7 +1293,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Ovulation Calculator',
     description: 'Track your fertile window and predict ovulation dates based on your cycle.',
-    href: '/calculators/ovulation-calculator',
+    href: '/calculators/ovulation-calculator/',
     icon: 'heart',
     color: 'violet',
     category: 'Health',
@@ -1302,7 +1302,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Currency Converter',
     description: 'Convert between world currencies with live exchange rates.',
-    href: '/calculators/currency-converter',
+    href: '/calculators/currency-converter/',
     icon: 'swap',
     color: 'green',
     category: 'Everyday',
@@ -1311,7 +1311,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Time Zone Converter',
     description: 'Convert times between world time zones with daylight saving support.',
-    href: '/calculators/time-zone-converter',
+    href: '/calculators/time-zone-converter/',
     icon: 'calendar',
     color: 'blue',
     category: 'Everyday',
@@ -1320,7 +1320,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Council Tax Calculator',
     description: 'Calculate council tax bills by band and local authority across the UK.',
-    href: '/calculators/council-tax-calculator',
+    href: '/calculators/council-tax-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'UK Tax',
@@ -1331,7 +1331,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Inheritance Tax Calculator',
     description:
       'Calculate UK inheritance tax liability with nil-rate band and residence allowance.',
-    href: '/calculators/inheritance-tax-calculator',
+    href: '/calculators/inheritance-tax-calculator/',
     icon: 'chart',
     color: 'violet',
     category: 'UK Tax',
@@ -1341,7 +1341,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'UK Capital Gains Tax Calculator',
     description: 'Calculate CGT on property, shares, and other assets with annual exempt amount.',
-    href: '/calculators/uk-capital-gains-tax-calculator',
+    href: '/calculators/uk-capital-gains-tax-calculator/',
     icon: 'trending',
     color: 'green',
     category: 'UK Tax',
@@ -1351,7 +1351,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Stamp Duty Calculator Scotland (LBTT)',
     description: 'Calculate Land and Buildings Transaction Tax for property purchases in Scotland.',
-    href: '/calculators/stamp-duty-calculator-scotland',
+    href: '/calculators/stamp-duty-calculator-scotland/',
     icon: 'home',
     color: 'ocean',
     category: 'UK Tax',
@@ -1361,7 +1361,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Stamp Duty Calculator Wales (LTT)',
     description: 'Calculate Land Transaction Tax for property purchases in Wales.',
-    href: '/calculators/stamp-duty-calculator-wales',
+    href: '/calculators/stamp-duty-calculator-wales/',
     icon: 'home',
     color: 'coral',
     category: 'UK Tax',
@@ -1372,7 +1372,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Pizza Dough Calculator',
     description:
       "Calculate pizza dough ingredients by weight using baker's percentages for any style.",
-    href: '/calculators/pizza-dough-calculator',
+    href: '/calculators/pizza-dough-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Everyday',
@@ -1381,7 +1381,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Tipping Guide Calculator',
     description: 'Look up tipping customs for 12 countries and 6 service types before you travel.',
-    href: '/calculators/tipping-guide-calculator',
+    href: '/calculators/tipping-guide-calculator/',
     icon: 'users',
     color: 'blue',
     category: 'Everyday',
@@ -1391,7 +1391,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Water Intake Calculator',
     description:
       'Calculate your recommended daily water intake based on weight, activity, and climate.',
-    href: '/calculators/water-intake-calculator',
+    href: '/calculators/water-intake-calculator/',
     icon: 'heart',
     color: 'ocean',
     category: 'Health',
@@ -1400,7 +1400,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Job Quote Calculator',
     description: 'Build accurate job quotes with materials, labour, markup, and VAT for any trade.',
-    href: '/calculators/job-quote-calculator',
+    href: '/calculators/job-quote-calculator/',
     icon: 'briefcase',
     color: 'blue',
     category: 'Business',
@@ -1410,7 +1410,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Coffee Spend Calculator',
     description:
       'Calculate how much your daily coffee habit costs per year and what invested savings could grow to.',
-    href: '/calculators/coffee-spend-calculator',
+    href: '/calculators/coffee-spend-calculator/',
     icon: 'fire',
     color: 'amber',
     category: 'Everyday',
@@ -1420,7 +1420,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Streaming Value Calculator',
     description:
       'Calculate cost per hour for Netflix, Disney+, and more to find your best and worst value subscriptions.',
-    href: '/calculators/streaming-value-calculator',
+    href: '/calculators/streaming-value-calculator/',
     icon: 'glass',
     color: 'violet',
     category: 'Everyday',
@@ -1430,7 +1430,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Screen Time Calculator',
     description:
       'Calculate your daily, weekly, and yearly screen time with opportunity costs and age-group comparison.',
-    href: '/calculators/screen-time-calculator',
+    href: '/calculators/screen-time-calculator/',
     icon: 'glass',
     color: 'violet',
     category: 'Life',
@@ -1440,7 +1440,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Trades Hourly Rate',
     description:
       'Work out what to charge per hour as a tradesperson, factoring in overheads, tax, and desired income.',
-    href: '/calculators/trades-hourly-rate-calculator',
+    href: '/calculators/trades-hourly-rate-calculator/',
     icon: 'calculator',
     color: 'amber',
     category: 'Business',
@@ -1450,7 +1450,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Rent Affordability',
     description:
       'Calculate how much rent you can afford using the 30%, 50/30/20, and 28/36 DTI rules.',
-    href: '/calculators/rent-affordability-calculator',
+    href: '/calculators/rent-affordability-calculator/',
     icon: 'home',
     color: 'green',
     category: 'Finance',
@@ -1460,7 +1460,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Materials Markup Calculator',
     description:
       'Calculate selling prices from cost and markup. Understand markup vs margin with visual explanations.',
-    href: '/calculators/materials-markup-calculator',
+    href: '/calculators/materials-markup-calculator/',
     icon: 'percent',
     color: 'amber',
     category: 'Business',
@@ -1469,7 +1469,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Cooking Time Calculator',
     description: 'Calculate cooking time by weight with safe internal temperatures for any method.',
-    href: '/calculators/cooking-time-calculator',
+    href: '/calculators/cooking-time-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Everyday',
@@ -1479,7 +1479,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'House Flip Calculator',
     description:
       'Analyze fix-and-flip profitability with the 70% rule, financing costs, and full cost breakdown.',
-    href: '/calculators/house-flip-calculator',
+    href: '/calculators/house-flip-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Finance',
@@ -1489,7 +1489,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Business Mileage Calculator',
     description:
       'Calculate tax-deductible business mileage using HMRC AMAP rates or IRS standard mileage rate.',
-    href: '/calculators/business-mileage-calculator',
+    href: '/calculators/business-mileage-calculator/',
     icon: 'briefcase',
     color: 'green',
     category: 'Business',
@@ -1499,7 +1499,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Heart Rate Zone Calculator',
     description:
       'Calculate your 5 training heart rate zones using max HR percentage or Karvonen method.',
-    href: '/calculators/heart-rate-zone-calculator',
+    href: '/calculators/heart-rate-zone-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Health',
@@ -1509,7 +1509,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Leftovers Calculator',
     description:
       'Find out how long leftovers last in the fridge, freezer, or counter with USDA food safety data.',
-    href: '/calculators/leftovers-calculator',
+    href: '/calculators/leftovers-calculator/',
     icon: 'shield',
     color: 'green',
     category: 'Everyday',
@@ -1518,7 +1518,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Date Difference Calculator',
     description: 'Calculate the exact number of days, weeks, months, and years between two dates.',
-    href: '/calculators/date-difference-calculator',
+    href: '/calculators/date-difference-calculator/',
     icon: 'calendar',
     color: 'blue',
     category: 'Everyday',
@@ -1528,7 +1528,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Fuel Cost Calculator',
     description:
       'Estimate the fuel cost of any journey from distance, efficiency, and price per litre.',
-    href: '/calculators/fuel-cost-calculator',
+    href: '/calculators/fuel-cost-calculator/',
     icon: 'fire',
     color: 'green',
     category: 'Automotive',
@@ -1538,7 +1538,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Margin Calculator',
     description:
       'Calculate profit margin, markup percentage, and gross profit with multiple input modes.',
-    href: '/calculators/margin-calculator',
+    href: '/calculators/margin-calculator/',
     icon: 'percent',
     color: 'green',
     category: 'Business',
@@ -1548,7 +1548,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Pace Calculator',
     description:
       'Calculate running or walking pace, finish time, or distance with split times for race distances.',
-    href: '/calculators/pace-calculator',
+    href: '/calculators/pace-calculator/',
     icon: 'heart',
     color: 'coral',
     category: 'Health',
@@ -1558,7 +1558,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'ROI Calculator',
     description:
       'Calculate return on investment, annualised ROI (CAGR), and total gain or loss instantly.',
-    href: '/calculators/roi-calculator',
+    href: '/calculators/roi-calculator/',
     icon: 'chart',
     color: 'amber',
     category: 'Finance',
@@ -1568,7 +1568,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Square Footage Calculator',
     description:
       'Calculate area for rectangles, circles, triangles, and L-shaped rooms with cost estimator.',
-    href: '/calculators/square-footage-calculator',
+    href: '/calculators/square-footage-calculator/',
     icon: 'home',
     color: 'amber',
     category: 'Home',
@@ -1578,7 +1578,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Employer Cost Calculator',
     description:
       'Calculate the true total cost of employing someone: salary plus employer NIC, pension, and levy.',
-    href: '/calculators/uk-employer-cost-calculator',
+    href: '/calculators/uk-employer-cost-calculator/',
     icon: 'briefcase',
     color: 'blue',
     category: 'UK Tax',
@@ -1589,7 +1589,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Tax Calculator',
     description:
       'Calculate take-home pay after income tax, National Insurance, student loans, and pension.',
-    href: '/calculators/uk-tax-calculator',
+    href: '/calculators/uk-tax-calculator/',
     icon: 'calculator',
     color: 'blue',
     category: 'UK Tax',
@@ -1600,7 +1600,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Mortgage Affordability',
     description:
       'Work out how much you could borrow for a mortgage based on income, deposit, and interest rate.',
-    href: '/calculators/uk-mortgage-affordability-calculator',
+    href: '/calculators/uk-mortgage-affordability-calculator/',
     icon: 'home',
     color: 'blue',
     category: 'Finance',
@@ -1610,7 +1610,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Mortgage Overpayment',
     description: 'See how much interest and time you save by overpaying your mortgage.',
-    href: '/calculators/mortgage-overpayment-calculator',
+    href: '/calculators/mortgage-overpayment-calculator/',
     icon: 'home',
     color: 'green',
     category: 'Finance',
@@ -1621,7 +1621,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Holiday Entitlement',
     description:
       'Calculate your statutory paid holiday entitlement, including pro-rata for part-time work.',
-    href: '/calculators/uk-holiday-entitlement-calculator',
+    href: '/calculators/uk-holiday-entitlement-calculator/',
     icon: 'calendar',
     color: 'violet',
     category: 'Income',
@@ -1632,7 +1632,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'UK Redundancy Pay',
     description:
       'Estimate your statutory redundancy pay based on age, years of service, and weekly pay.',
-    href: '/calculators/uk-redundancy-pay-calculator',
+    href: '/calculators/uk-redundancy-pay-calculator/',
     icon: 'briefcase',
     color: 'coral',
     category: 'Income',
@@ -1643,7 +1643,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'US Sales Tax Calculator',
     description:
       'Add or remove US sales tax at any state or local rate, with the pre-tax and total amounts.',
-    href: '/calculators/us-sales-tax-calculator',
+    href: '/calculators/us-sales-tax-calculator/',
     icon: 'percent',
     color: 'green',
     category: 'US Tax',
@@ -1654,7 +1654,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'US Auto Loan Calculator',
     description:
       'Work out your monthly car payment including sales tax, trade-in, and down payment.',
-    href: '/calculators/us-auto-loan-calculator',
+    href: '/calculators/us-auto-loan-calculator/',
     icon: 'dollar',
     color: 'blue',
     category: 'Finance',
@@ -1665,7 +1665,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Roth IRA Calculator',
     description:
       'Project the tax-free growth of your Roth IRA to retirement, with 2026 contribution limits.',
-    href: '/calculators/roth-ira-calculator',
+    href: '/calculators/roth-ira-calculator/',
     icon: 'trending',
     color: 'accent',
     category: 'Finance',
@@ -1676,7 +1676,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'US Mortgage Calculator',
     description:
       'Estimate your full monthly payment including principal, interest, property tax, insurance, HOA, and PMI.',
-    href: '/calculators/us-mortgage-calculator',
+    href: '/calculators/us-mortgage-calculator/',
     icon: 'home',
     color: 'violet',
     category: 'Finance',
@@ -1686,7 +1686,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Home Affordability Calculator',
     description: 'See how much house you can afford on your income using the 28/36 lending rule.',
-    href: '/calculators/home-affordability-calculator',
+    href: '/calculators/home-affordability-calculator/',
     icon: 'home',
     color: 'coral',
     category: 'Finance',
@@ -1696,7 +1696,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Debt-to-Income Calculator',
     description: 'Calculate your front-end and back-end DTI ratios against common lender limits.',
-    href: '/calculators/debt-to-income-calculator',
+    href: '/calculators/debt-to-income-calculator/',
     icon: 'percent',
     color: 'amber',
     category: 'Finance',
@@ -1706,7 +1706,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Ireland Salary Calculator',
     description: 'Calculate your Irish take-home pay after income tax, USC, and PRSI for 2026.',
-    href: '/calculators/ireland-salary-calculator',
+    href: '/calculators/ireland-salary-calculator/',
     icon: 'calculator',
     color: 'green',
     category: 'Income',
@@ -1717,7 +1717,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Germany Salary Calculator',
     description:
       'Estimate your German net salary (Brutto-Netto) after income tax and social contributions for 2026.',
-    href: '/calculators/germany-salary-calculator',
+    href: '/calculators/germany-salary-calculator/',
     icon: 'calculator',
     color: 'blue',
     category: 'Income',
@@ -1727,7 +1727,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'France Salary Calculator',
     description: 'Convert your French gross salary to net pay after social contributions for 2026.',
-    href: '/calculators/france-salary-calculator',
+    href: '/calculators/france-salary-calculator/',
     icon: 'calculator',
     color: 'violet',
     category: 'Income',
@@ -1738,7 +1738,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Concrete Calculator',
     description:
       'Work out how much concrete you need for a slab, footing, or column, in bags and cubic metres.',
-    href: '/calculators/concrete-calculator',
+    href: '/calculators/concrete-calculator/',
     icon: 'cube',
     color: 'amber',
     category: 'Home',
@@ -1748,7 +1748,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Gravel Calculator',
     description:
       'Calculate how many tonnes and bulk bags of gravel you need to cover an area to a given depth.',
-    href: '/calculators/gravel-calculator',
+    href: '/calculators/gravel-calculator/',
     icon: 'cube',
     color: 'ocean',
     category: 'Home',
@@ -1758,7 +1758,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'Wallpaper Calculator',
     description:
       'Find out how many rolls of wallpaper you need for a room, allowing for pattern repeat.',
-    href: '/calculators/wallpaper-calculator',
+    href: '/calculators/wallpaper-calculator/',
     icon: 'layers',
     color: 'violet',
     category: 'Home',
@@ -1768,7 +1768,7 @@ export const calculators: readonly CalculatorEntry[] = [
     title: 'BTU Calculator',
     description:
       'Size the right air conditioner or heater for a room based on its area, ceiling, and sun exposure.',
-    href: '/calculators/btu-calculator',
+    href: '/calculators/btu-calculator/',
     icon: 'fire',
     color: 'coral',
     category: 'Home',
@@ -1777,7 +1777,7 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'EV Charging Cost Calculator',
     description: 'Estimate the cost to charge your electric car at home, per charge and per mile.',
-    href: '/calculators/ev-charging-cost-calculator',
+    href: '/calculators/ev-charging-cost-calculator/',
     icon: 'bolt',
     color: 'green',
     category: 'Automotive',
