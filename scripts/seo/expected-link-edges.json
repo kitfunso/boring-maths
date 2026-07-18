@@ -19,5 +19,18 @@
   { "from": "/calculators/cooking-time-calculator/", "to": "/calculators/leftovers-calculator/" },
   { "from": "/calculators/holiday-dinner-calculator/", "to": "/calculators/leftovers-calculator/" },
   { "from": "/calculators/bbq-calculator/", "to": "/calculators/leftovers-calculator/" },
-  { "from": "/guides/best-math-everyday-calculators/", "to": "/calculators/leftovers-calculator/" }
+  { "from": "/guides/best-math-everyday-calculators/", "to": "/calculators/leftovers-calculator/" },
+
+  { "from": "/calculators/tip-calculator/", "to": "/calculators/tipping-guide-calculator/" },
+  { "from": "/calculators/vacation-budget-calculator/", "to": "/calculators/tipping-guide-calculator/" },
+  { "from": "/calculators/currency-converter/", "to": "/calculators/tipping-guide-calculator/" },
+  { "from": "/calculators/tipping-guide-calculator/", "to": "/calculators/vacation-budget-calculator/" },
+  {
+    "from": "/guides/best-math-everyday-calculators/",
+    "to": "/calculators/tipping-guide-calculator/"
+  },
+  { "from": "/calculators/freelance-day-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
+  { "from": "/calculators/consulting-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
+  { "from": "/calculators/go-full-time-calculator/", "to": "/calculators/consulting-rate-calculator/" },
+  { "from": "/calculators/due-date-calculator/", "to": "/calculators/ovulation-calculator/" }
 ]
