@@ -22,7 +22,11 @@ const LBTT_FIRST_TIME = [
 ];
 
 const ADS_RATE = 0.08; // 8% Additional Dwelling Supplement (from 5 December 2024)
-const NON_RESIDENT_SURCHARGE = 0.02;
+// ADS does not apply when the consideration is less than £40,000 (revenue.scot).
+// Keep in sync with ADSCalculator/types.ts and UKStampDutyCalculator/calculations.ts.
+// Note: LBTT has NO non-resident surcharge - the 2% surcharge is SDLT-only
+// (England & NI; gov.uk non-resident SDLT guidance).
+const ADS_MIN_PRICE = 40000;
 
 function getBands(buyerType: ScotlandBuyerType) {
   return buyerType === 'first-time' ? LBTT_FIRST_TIME : LBTT_STANDARD;
@@ -50,7 +54,7 @@ function calculateBandTax(
 }
 
 export function calculateLBTT(inputs: LBTTInputs): LBTTResult {
-  const { propertyPrice, buyerType, isNonResident } = inputs;
+  const { propertyPrice, buyerType } = inputs;
 
   if (propertyPrice <= 0) {
     return {
@@ -58,7 +62,6 @@ export function calculateLBTT(inputs: LBTTInputs): LBTTResult {
       effectiveRate: 0,
       bands: [],
       adsSurcharge: 0,
-      nonResidentSurcharge: 0,
       firstTimeBuyerSaving: 0,
     };
   }
@@ -67,10 +70,10 @@ export function calculateLBTT(inputs: LBTTInputs): LBTTResult {
   const taxBands = calculateBandTax(propertyPrice, bands);
   const baseTax = taxBands.reduce((sum, b) => sum + b.taxDue, 0);
 
-  const adsSurcharge = buyerType === 'additional' ? Math.round(propertyPrice * ADS_RATE) : 0;
-  const nonResidentSurcharge = isNonResident
-    ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)
-    : 0;
+  const adsSurcharge =
+    buyerType === 'additional' && propertyPrice >= ADS_MIN_PRICE
+      ? Math.round(propertyPrice * ADS_RATE)
+      : 0;
 
   let firstTimeBuyerSaving = 0;
   if (buyerType === 'first-time') {
@@ -79,14 +82,13 @@ export function calculateLBTT(inputs: LBTTInputs): LBTTResult {
     firstTimeBuyerSaving = Math.max(0, standardTax - baseTax);
   }
 
-  const totalTax = baseTax + adsSurcharge + nonResidentSurcharge;
+  const totalTax = baseTax + adsSurcharge;
 
   return {
     totalTax,
     effectiveRate: propertyPrice > 0 ? (totalTax / propertyPrice) * 100 : 0,
     bands: taxBands,
     adsSurcharge,
-    nonResidentSurcharge,
     firstTimeBuyerSaving,
   };
 }

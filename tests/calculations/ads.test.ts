@@ -42,6 +42,36 @@ describe('AdsCalculator', () => {
       expect(result.firstTimeBuyerSaving).toBe(0);
     });
 
+    it('should not apply ADS below the £40,000 threshold', () => {
+      // revenue.scot: ADS does not apply when the consideration for the
+      // property being purchased is less than £40,000.
+      // £39,999 additional property: LBTT bands give 0 (below the £145k nil
+      // band) and ADS is 0 because the price is under the floor, so total = 0.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 39999;
+      inputs.buyerType = 'additional';
+      inputs.isAdditionalProperty = true;
+
+      const result = calculateADS(inputs);
+
+      expect(result.adsAmount).toBe(0);
+      expect(result.lbttAmount).toBe(0);
+      expect(result.totalTax).toBe(0);
+    });
+
+    it('should apply ADS at exactly £40,000', () => {
+      // ADS = round(40000 * 0.08) = 3200; LBTT bands give 0 below £145k.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 40000;
+      inputs.buyerType = 'additional';
+      inputs.isAdditionalProperty = true;
+
+      const result = calculateADS(inputs);
+
+      expect(result.adsAmount).toBe(3200);
+      expect(result.totalTax).toBe(3200);
+    });
+
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
       inputs.propertyPrice = 0;

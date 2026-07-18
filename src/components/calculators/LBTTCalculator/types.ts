@@ -7,7 +7,6 @@ export type ScotlandBuyerType = 'first-time' | 'home-mover' | 'additional';
 export interface LBTTInputs {
   propertyPrice: number;
   buyerType: ScotlandBuyerType;
-  isNonResident: boolean;
 }
 
 export interface LBTTBand {
@@ -22,7 +21,6 @@ export interface LBTTResult {
   effectiveRate: number;
   bands: LBTTBand[];
   adsSurcharge: number;
-  nonResidentSurcharge: number;
   firstTimeBuyerSaving: number;
 }
 
@@ -30,7 +28,6 @@ export function getDefaultInputs(): LBTTInputs {
   return {
     propertyPrice: 250000,
     buyerType: 'first-time',
-    isNonResident: false,
   };
 }
 

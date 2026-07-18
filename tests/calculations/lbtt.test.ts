@@ -19,13 +19,11 @@ describe('LBTTCalculator', () => {
       const result = calculateLBTT({
         propertyPrice: 400000,
         buyerType: 'home-mover',
-        isNonResident: false,
       });
 
       expect(result.totalTax).toBe(13350);
       expect(result.effectiveRate).toBeCloseTo(3.3375, 4);
       expect(result.adsSurcharge).toBe(0);
-      expect(result.nonResidentSurcharge).toBe(0);
       expect(result.firstTimeBuyerSaving).toBe(0);
       expect(result.bands).toEqual([
         { from: 0, to: 145000, rate: 0, taxDue: 0 },
@@ -46,13 +44,36 @@ describe('LBTTCalculator', () => {
       const result = calculateLBTT({
         propertyPrice: 300000,
         buyerType: 'additional',
-        isNonResident: false,
       });
 
       expect(result.adsSurcharge).toBe(24000);
       expect(result.totalTax).toBe(28600);
       expect(result.effectiveRate).toBeCloseTo(9.5333, 3);
       expect(result.firstTimeBuyerSaving).toBe(0);
+    });
+
+    it('should not apply ADS below the £40,000 threshold', () => {
+      // revenue.scot: ADS does not apply when the consideration for the
+      // property being purchased is less than £40,000.
+      // £39,999 additional: bands give 0 (below the £145k nil band), ADS 0.
+      const result = calculateLBTT({
+        propertyPrice: 39999,
+        buyerType: 'additional',
+      });
+
+      expect(result.adsSurcharge).toBe(0);
+      expect(result.totalTax).toBe(0);
+    });
+
+    it('should apply ADS at exactly £40,000', () => {
+      // ADS = round(40000 * 0.08) = 3200; LBTT bands give 0 below £145k.
+      const result = calculateLBTT({
+        propertyPrice: 40000,
+        buyerType: 'additional',
+      });
+
+      expect(result.adsSurcharge).toBe(3200);
+      expect(result.totalTax).toBe(3200);
     });
 
     it('should give a first-time buyer the higher nil-rate band', () => {
@@ -63,7 +84,6 @@ describe('LBTTCalculator', () => {
       const result = calculateLBTT({
         propertyPrice: 150000,
         buyerType: 'first-time',
-        isNonResident: false,
       });
 
       expect(result.totalTax).toBe(0);

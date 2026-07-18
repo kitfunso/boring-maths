@@ -22,7 +22,11 @@ const LTT_HIGHER = [
   { from: 1500001, to: Infinity, rate: 0.17 },
 ];
 
-const NON_RESIDENT_SURCHARGE = 0.02;
+// Higher rates apply when the property is worth £40,000 or more (gov.wales).
+// Keep in sync with UKStampDutyCalculator/calculations.ts.
+// Note: LTT has NO non-resident surcharge - the 2% surcharge is SDLT-only
+// (England & NI; gov.uk non-resident SDLT guidance).
+const HIGHER_RATES_MIN_PRICE = 40000;
 
 function calculateBandTax(
   propertyPrice: number,
@@ -46,7 +50,7 @@ function calculateBandTax(
 }
 
 export function calculateLTT(inputs: LTTInputs): LTTResult {
-  const { propertyPrice, buyerType, isNonResident } = inputs;
+  const { propertyPrice, buyerType } = inputs;
 
   if (propertyPrice <= 0) {
     return {
@@ -54,11 +58,13 @@ export function calculateLTT(inputs: LTTInputs): LTTResult {
       effectiveRate: 0,
       bands: [],
       higherRatesSurcharge: 0,
-      nonResidentSurcharge: 0,
     };
   }
 
-  const bands = buyerType === 'additional' ? LTT_HIGHER : LTT_STANDARD;
+  const bands =
+    buyerType === 'additional' && propertyPrice >= HIGHER_RATES_MIN_PRICE
+      ? LTT_HIGHER
+      : LTT_STANDARD;
   const taxBands = calculateBandTax(propertyPrice, bands);
   const baseTax = taxBands.reduce((sum, b) => sum + b.taxDue, 0);
 
@@ -70,17 +76,13 @@ export function calculateLTT(inputs: LTTInputs): LTTResult {
     higherRatesSurcharge = baseTax - standardTax;
   }
 
-  const nonResidentSurcharge = isNonResident
-    ? Math.round(propertyPrice * NON_RESIDENT_SURCHARGE)
-    : 0;
-  const totalTax = baseTax + nonResidentSurcharge;
+  const totalTax = baseTax;
 
   return {
     totalTax,
     effectiveRate: propertyPrice > 0 ? (totalTax / propertyPrice) * 100 : 0,
     bands: taxBands,
     higherRatesSurcharge,
-    nonResidentSurcharge,
   };
 }
 

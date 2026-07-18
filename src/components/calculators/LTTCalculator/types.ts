@@ -7,7 +7,6 @@ export type WalesBuyerType = 'standard' | 'additional';
 export interface LTTInputs {
   propertyPrice: number;
   buyerType: WalesBuyerType;
-  isNonResident: boolean;
 }
 
 export interface LTTBand {
@@ -22,14 +21,12 @@ export interface LTTResult {
   effectiveRate: number;
   bands: LTTBand[];
   higherRatesSurcharge: number;
-  nonResidentSurcharge: number;
 }
 
 export function getDefaultInputs(): LTTInputs {
   return {
     propertyPrice: 250000,
     buyerType: 'standard',
-    isNonResident: false,
   };
 }
 

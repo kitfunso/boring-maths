@@ -126,22 +126,104 @@ describe('UkStampDutyCalculator', () => {
       expect(result.taxName).toBe('Stamp Duty (SDLT)');
     });
 
-    it('(d) scotland + additional below £40k: ADS still applies (no minimum floor in source)', () => {
-      // The dedicated ADSCalculator/LBTTCalculator apply ADS at any price > 0
-      // with NO £40k floor, so the combined calculator must not add one either.
-      // £30,000, Scotland, additional:
-      //   LBTT base (0-145k@0%) = 0
-      //   ADS = round(30000*0.08) = 2400
-      //   total = 2400
+    it('(d) scotland + additional below £40k: no ADS (revenue.scot £40,000 threshold)', () => {
+      // revenue.scot: ADS does not apply when the consideration for the
+      // property being purchased is less than £40,000.
+      // £30,000, Scotland, additional: LBTT base (0-145k@0%) = 0, ADS = 0,
+      // total = 0. Mirrors ADSCalculator/LBTTCalculator.
       const result = calculateStampDuty({
         propertyPrice: 30000,
         location: 'scotland',
         buyerType: 'additional',
         isNonResident: false,
       });
-      expect(result.totalTax).toBe(2400);
-      expect(result.additionalPropertySurcharge).toBe(2400);
+      expect(result.totalTax).toBe(0);
+      expect(result.additionalPropertySurcharge).toBe(0);
       expect(result.taxName).toBe('LBTT');
+    });
+
+    it('(e) england + additional below £40k: no 5% surcharge (gov.uk £40,000 threshold)', () => {
+      // gov.uk: the higher SDLT rates apply when you buy a residential
+      // property for £40,000 or more. £39,999: standard bands give 0 and no
+      // surcharge is added.
+      const result = calculateStampDuty({
+        propertyPrice: 39999,
+        location: 'england',
+        buyerType: 'additional',
+        isNonResident: false,
+      });
+      expect(result.totalTax).toBe(0);
+      expect(result.additionalPropertySurcharge).toBe(0);
+    });
+
+    it('(f) wales + additional below £40k: standard bands, no higher rates (gov.wales threshold)', () => {
+      // gov.wales: higher rates apply when you buy a residential property
+      // worth £40,000 or more. £39,999: standard bands (0% below £225k) -> 0.
+      const result = calculateStampDuty({
+        propertyPrice: 39999,
+        location: 'wales',
+        buyerType: 'additional',
+        isNonResident: false,
+      });
+      expect(result.totalTax).toBe(0);
+      expect(result.additionalPropertySurcharge).toBe(0);
+    });
+  });
+
+  describe('non-resident surcharge region scope', () => {
+    it('applies the 2% surcharge in England & NI', () => {
+      // gov.uk: the 2% surcharge applies to England and Northern Ireland.
+      // £300,000 home-mover, non-resident: standard bands +2%:
+      //   band1: (125001)*0.02 = 2500.02 -> 2500
+      //   band2: 125000*0.04 = 5000
+      //   band3: 50000*0.07  = 3500
+      //   total = 11000; surcharge line = round(300000*0.02) = 6000
+      const result = calculateStampDuty({
+        propertyPrice: 300000,
+        location: 'england',
+        buyerType: 'home-mover',
+        isNonResident: true,
+      });
+      expect(result.totalTax).toBe(11000);
+      expect(result.nonResidentSurcharge).toBe(6000);
+    });
+
+    it('does not apply in Scotland (LBTT has no non-resident surcharge)', () => {
+      // gov.uk: "The surcharge does not apply to purchases of land or
+      // buildings in Scotland or Wales." £300,000 Scotland home-mover:
+      // standard LBTT = 2100 + 2500 = 4600 regardless of residence.
+      const result = calculateStampDuty({
+        propertyPrice: 300000,
+        location: 'scotland',
+        buyerType: 'home-mover',
+        isNonResident: true,
+      });
+      expect(result.totalTax).toBe(4600);
+      expect(result.nonResidentSurcharge).toBe(0);
+    });
+
+    it('does not apply in Wales (LTT has no non-resident surcharge)', () => {
+      // £300,000 Wales home-mover: band2 = (300000-225001+1)*0.06 = 4500.
+      const result = calculateStampDuty({
+        propertyPrice: 300000,
+        location: 'wales',
+        buyerType: 'home-mover',
+        isNonResident: true,
+      });
+      expect(result.totalTax).toBe(4500);
+      expect(result.nonResidentSurcharge).toBe(0);
+    });
+
+    it('does not apply below £40,000 even in England', () => {
+      // gov.uk: the surcharge applies to freehold purchases of £40,000 or more.
+      const result = calculateStampDuty({
+        propertyPrice: 39999,
+        location: 'england',
+        buyerType: 'home-mover',
+        isNonResident: true,
+      });
+      expect(result.totalTax).toBe(0);
+      expect(result.nonResidentSurcharge).toBe(0);
     });
   });
 });

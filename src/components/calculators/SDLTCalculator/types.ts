@@ -68,6 +68,13 @@ export const ADDITIONAL_PROPERTY_SURCHARGE_RATE = 0.05;
  */
 export const NON_RESIDENT_SURCHARGE_RATE = 0.02;
 
+/**
+ * Both surcharges apply only to purchases of £40,000 or more (gov.uk:
+ * higher rates and the non-resident surcharge each carry a £40,000 floor).
+ * Keep in sync with UKStampDutyCalculator/calculations.ts.
+ */
+export const SURCHARGE_MIN_PRICE = 40000;
+
 export const LOCATION_LABELS: Record<PropertyLocation, string> = {
   england: 'England',
   'northern-ireland': 'Northern Ireland',

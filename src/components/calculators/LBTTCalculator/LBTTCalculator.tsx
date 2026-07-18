@@ -5,7 +5,7 @@ import {
   type LBTTInputs,
   type ScotlandBuyerType,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid, Toggle } from '../../ui';
+import { ThemeProvider, Card, CalculatorHeader, Label, Input, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function LBTTCalculator() {
@@ -68,12 +68,6 @@ export default function LBTTCalculator() {
                 ))}
               </div>
             </div>
-
-            <Toggle
-              checked={inputs.isNonResident}
-              onChange={(val) => updateInput('isNonResident', val)}
-              label="Non-UK Resident (+2% surcharge)"
-            />
           </div>
 
           {/* Results */}
@@ -108,26 +102,16 @@ export default function LBTTCalculator() {
               </div>
             )}
 
-            {(result.adsSurcharge > 0 || result.nonResidentSurcharge > 0) && (
+            {result.adsSurcharge > 0 && (
               <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
                 <p className="text-amber-400 font-medium mb-2">Surcharges Applied:</p>
                 <div className="space-y-1 text-sm">
-                  {result.adsSurcharge > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-[var(--color-subtle)]">
-                        Additional Dwelling Supplement (8%)
-                      </span>
-                      <span className="text-amber-400">{formatCurrency(result.adsSurcharge)}</span>
-                    </div>
-                  )}
-                  {result.nonResidentSurcharge > 0 && (
-                    <div className="flex justify-between">
-                      <span className="text-[var(--color-subtle)]">Non-UK resident (2%)</span>
-                      <span className="text-amber-400">
-                        {formatCurrency(result.nonResidentSurcharge)}
-                      </span>
-                    </div>
-                  )}
+                  <div className="flex justify-between">
+                    <span className="text-[var(--color-subtle)]">
+                      Additional Dwelling Supplement (8%)
+                    </span>
+                    <span className="text-amber-400">{formatCurrency(result.adsSurcharge)}</span>
+                  </div>
                 </div>
               </div>
             )}

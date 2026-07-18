@@ -55,4 +55,61 @@ describe('SdltCalculator', () => {
       expect(result1).toEqual(result2);
     });
   });
+
+  describe('£40,000 surcharge threshold', () => {
+    it('should not apply the additional-property surcharge below £40,000', () => {
+      // gov.uk: the higher SDLT rates apply when you buy a residential
+      // property for £40,000 or more. £39,999 additional: standard bands give
+      // 0 (below the £125k nil band) and no 5% surcharge, so total = 0.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 39999;
+      inputs.buyerType = 'additional';
+
+      const result = calculateSDLT(inputs);
+
+      expect(result.sdltAmount).toBe(0);
+      expect(result.additionalPropertySurcharge).toBe(0);
+    });
+
+    it('should apply the 5% surcharge at exactly £40,000', () => {
+      // Band 1 with +5%: (40000-0+1)*0.05 = 2000.05 -> 2000.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 40000;
+      inputs.buyerType = 'additional';
+
+      const result = calculateSDLT(inputs);
+
+      expect(result.sdltAmount).toBe(2000);
+      expect(result.additionalPropertySurcharge).toBe(2000);
+    });
+
+    it('should not apply the non-resident surcharge below £40,000', () => {
+      // gov.uk: the 2% non-resident surcharge applies to freehold residential
+      // purchases of £40,000 or more.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 39999;
+      inputs.buyerType = 'home-mover';
+      inputs.isNonResident = true;
+
+      const result = calculateSDLT(inputs);
+
+      expect(result.sdltAmount).toBe(0);
+      expect(result.nonResidentSurcharge).toBe(0);
+    });
+
+    it('should apply the 2% non-resident surcharge at £300,000', () => {
+      // Standard bands with +2%: band1 (125001)*0.02 = 2500.02 -> 2500,
+      // band2 125000*0.04 = 5000, band3 50000*0.07 = 3500; total = 11000.
+      // Surcharge line = round(300000*0.02) = 6000.
+      const inputs = getDefaultInputs();
+      inputs.propertyPrice = 300000;
+      inputs.buyerType = 'home-mover';
+      inputs.isNonResident = true;
+
+      const result = calculateSDLT(inputs);
+
+      expect(result.sdltAmount).toBe(11000);
+      expect(result.nonResidentSurcharge).toBe(6000);
+    });
+  });
 });
