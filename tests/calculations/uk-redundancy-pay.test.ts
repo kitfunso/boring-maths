@@ -10,14 +10,14 @@ describe('calculateRedundancyPay', () => {
     // Age 45, 10 years, GBP 800/week.
     // Years walk back over ages 44,43,42,41 (>=41 -> 1.5 each = 6.0 weeks)
     // and ages 40,39,38,37,36,35 (22-40 -> 1.0 each = 6.0 weeks). Total 12.0 weeks.
-    // Weekly pay capped at 719. Statutory = 12 * 719 = 8628.
+    // Weekly pay capped at 751. Statutory = 12 * 751 = 9012.
     const result = calculateRedundancyPay({ age: 45, yearsOfService: 10, weeklyPay: 800 });
 
     expect(result.isEligible).toBe(true);
     expect(result.totalWeeks).toBe(12);
     expect(result.cappedWeeklyPay).toBe(STATUTORY_WEEKLY_PAY_CAP);
     expect(result.isCapApplied).toBe(true);
-    expect(result.statutoryPay).toBe(8628);
+    expect(result.statutoryPay).toBe(9012);
     expect(result.uncappedPay).toBe(9600); // 12 * 800
   });
 
@@ -32,12 +32,12 @@ describe('calculateRedundancyPay', () => {
 
   it('caps service at 20 years and reaches the statutory maximum', () => {
     // Age 65, 25 years -> only 20 counted, all over ages 64..45 (>=41 -> 1.5 each).
-    // 20 * 1.5 = 30 weeks. 30 * 719 = 21570 = the statutory maximum.
+    // 20 * 1.5 = 30 weeks. 30 * 751 = 22530 = the statutory maximum.
     const result = calculateRedundancyPay({ age: 65, yearsOfService: 25, weeklyPay: 1000 });
 
     expect(result.countedYears).toBe(20);
     expect(result.totalWeeks).toBe(30);
-    expect(result.statutoryPay).toBe(21570);
+    expect(result.statutoryPay).toBe(22530);
     expect(result.statutoryPay).toBe(MAX_STATUTORY_TOTAL);
   });
 

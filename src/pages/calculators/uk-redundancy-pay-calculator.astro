@@ -1,7 +1,7 @@
 ---
 /**
  * UK Redundancy Pay Calculator Page
- * Statutory redundancy pay for 2025/26 (cap effective 6 April 2025)
+ * Statutory redundancy pay for 2026/27 (cap effective 6 April 2026)
  */
 
 import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
@@ -11,11 +11,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UKRedundancyPayCalculator } from '../../components/calculators/UKRedundancyPayCalculator';
 
-const title = 'UK Redundancy Pay Calculator 2025/26 | Boring Math';
+const title = 'UK Redundancy Pay Calculator 2026/27 | Boring Math';
 const description =
-  'Calculate your UK statutory redundancy pay for 2025/26. Enter your age, full years of service and weekly pay (capped at £719 from 6 April 2025) to see your entitlement.';
+  'Calculate your UK statutory redundancy pay for 2026/27. Enter your age, full years of service and weekly pay (capped at £751 from 6 April 2026) to see your entitlement.';
 const keywords =
-  'uk redundancy pay calculator, statutory redundancy pay, redundancy pay 2025, redundancy calculator, redundancy pay uk, weekly pay cap, redundancy entitlement';
+  'uk redundancy pay calculator, statutory redundancy pay, redundancy pay 2026, redundancy calculator, redundancy pay uk, weekly pay cap, redundancy entitlement';
 const canonicalURL = '/calculators/uk-redundancy-pay-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -69,9 +69,9 @@ const faqs = [
       "Statutory redundancy pay is based on three things: your age, your full years of continuous service, and your weekly pay. For each full year worked you get a set number of week's pay: half a week's pay for years when you were under 22, one week's pay for years aged 22 to 40, and one and a half week's pay for years aged 41 and over. Multiply the total week's pay by your weekly pay (capped) to get the figure.",
   },
   {
-    question: 'What is the weekly pay cap for redundancy pay in 2025/26?',
+    question: 'What is the weekly pay cap for redundancy pay in 2026/27?',
     answer:
-      "The statutory cap on a week's pay is £719 from 6 April 2025 (the 2025/26 tax year). It was £700 in 2024/25. If your actual weekly pay is higher than the cap, only £719 per week is used in the statutory calculation. The maximum statutory redundancy pay is £21,570, which is 20 years of service at 1.5 week's pay each, capped at £719 a week.",
+      "The statutory cap on a week's pay is £751 from 6 April 2026 (the 2026/27 tax year). It was £719 in 2025/26. If your actual weekly pay is higher than the cap, only £751 per week is used in the statutory calculation. The maximum statutory redundancy pay is £22,530, which is 20 years of service at 1.5 week's pay each, capped at £751 a week.",
   },
   {
     question: 'Do I qualify for statutory redundancy pay?',
@@ -96,12 +96,12 @@ const faqs = [
   {
     question: 'What counts as my weekly pay for the calculation?',
     answer:
-      'Your weekly pay is the average gross amount you earned per week over the 12 weeks before the day you received your redundancy notice. For the statutory figure this weekly pay is capped at £719 from 6 April 2025. If your pay varies, the average over those 12 weeks is used.',
+      'Your weekly pay is the average gross amount you earned per week over the 12 weeks before the day you received your redundancy notice. For the statutory figure this weekly pay is capped at £751 from 6 April 2026. If your pay varies, the average over those 12 weeks is used.',
   },
   {
     question: 'What is the maximum redundancy pay I can get?',
     answer:
-      'The maximum statutory redundancy pay for 2025/26 is £21,570. This is reached at 20 counted years of service, all at the highest 1.5 week multiplier (age 41 and over), with the weekly pay cap of £719 applied. Your employer may pay more under a contractual or enhanced redundancy scheme, but the statutory maximum is £21,570.',
+      'The maximum statutory redundancy pay for 2026/27 is £22,530. This is reached at 20 counted years of service, all at the highest 1.5 week multiplier (age 41 and over), with the weekly pay cap of £751 applied. Your employer may pay more under a contractual or enhanced redundancy scheme, but the statutory maximum is £22,530.',
   },
 ];
 
@@ -130,7 +130,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="UK Redundancy Pay Calculator"
-    description="Estimate your statutory redundancy pay for 2025/26 from your age, full years of service and weekly pay."
+    description="Estimate your statutory redundancy pay for 2026/27 from your age, full years of service and weekly pay."
   />
 
   <section class="mb-16" aria-label="Calculator">
@@ -150,7 +150,7 @@ const schemaBreadcrumbs = [
       </li>
       <li>
         <strong class="text-[var(--color-cream)]">Enter your gross weekly pay</strong> – Use your average
-        gross pay over the 12 weeks before your redundancy notice. The calculator caps this at £719 for
+        gross pay over the 12 weeks before your redundancy notice. The calculator caps this at £751 for
         the statutory figure.
       </li>
       <li>
@@ -185,7 +185,7 @@ const schemaBreadcrumbs = [
         The formula in words: add up the week's pay for every counted year (working backwards from
         your current age, using the most recent 20 years if you have served longer), then multiply
         that total number of week's pay by your weekly pay. For the statutory figure, your weekly
-        pay is first capped at £719 (the cap from 6 April 2025 for the 2025/26 tax year). If your
+        pay is first capped at £751 (the cap from 6 April 2026 for the 2026/27 tax year). If your
         actual weekly pay is below the cap, your real weekly pay is used.
       </p>
       <p>
@@ -193,12 +193,12 @@ const schemaBreadcrumbs = [
         ages 44, 43, 42 and 41 (four years at 1.5 week's pay each, giving 6 week's pay) plus ages 40
         down to 35 (six years at 1.0 week's pay each, giving 6 week's pay), a total of 12 week's
         pay. On a weekly pay of £600, which is under the cap, the statutory redundancy pay is 12 x
-        £600 = £7,200. On a weekly pay of £800, the cap of £719 applies, so it becomes 12 x £719 =
-        £8,628.
+        £600 = £7,200. On a weekly pay of £800, the cap of £751 applies, so it becomes 12 x £751 =
+        £9,012.
       </p>
       <p>
         Because 20 years is the most that can be counted and the highest multiplier is 1.5 week's
-        pay, the largest statutory total possible in 2025/26 is 20 x 1.5 x £719 = £21,570. Employers
+        pay, the largest statutory total possible in 2026/27 is 20 x 1.5 x £751 = £22,530. Employers
         can offer more through a contractual or enhanced redundancy scheme, but they cannot pay less
         than the statutory amount if you qualify.
       </p>
@@ -215,7 +215,7 @@ const schemaBreadcrumbs = [
         how the figure is made up.
       </p>
       <p>
-        If your weekly pay is above £719, the calculator shows both the capped statutory amount and
+        If your weekly pay is above £751, the calculator shows both the capped statutory amount and
         an estimate using your full weekly pay. The statutory amount is what the law guarantees; the
         uncapped estimate is useful only if your contract promises redundancy pay based on your full
         salary rather than the statutory cap.

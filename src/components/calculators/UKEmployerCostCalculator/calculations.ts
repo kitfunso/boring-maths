@@ -1,6 +1,6 @@
 /**
  * UK Employer Cost Calculator - Calculation Logic
- * 2025/26 tax year
+ * 2026/27 tax year
  */
 
 import type { UKEmployerCostInputs, UKEmployerCostResult, SalaryComparisonRow } from './types';
@@ -13,7 +13,7 @@ import {
 
 /**
  * Calculate employer National Insurance contributions
- * 2025/26: 15% on earnings above £5,000
+ * 2026/27: 15% on earnings above £5,000
  */
 function calculateEmployerNIC(grossSalary: number, useEmploymentAllowance: boolean): number {
   const { rate, threshold } = EMPLOYER_NIC_2025;

@@ -30,7 +30,7 @@ export default function UKRedundancyPayCalculator() {
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Redundancy Pay Calculator"
-          subtitle="Estimate your statutory redundancy pay (2025/26)"
+          subtitle="Estimate your statutory redundancy pay (2026/27)"
         />
 
         <div className="p-6 md:p-8">
@@ -197,14 +197,14 @@ export default function UKRedundancyPayCalculator() {
               </div>
             </div>
 
-            {/* 2025/26 limits info */}
+            {/* 2026/27 limits info */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
-                2025/26 Statutory Limits
+                2026/27 Statutory Limits
               </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">
-                  <span>Weekly pay cap (from 6 April 2025)</span>
+                  <span>Weekly pay cap (from 6 April 2026)</span>
                   <span className="text-[var(--color-cream)]">£{STATUTORY_WEEKLY_PAY_CAP}</span>
                 </div>
                 <div className="flex justify-between">
@@ -222,7 +222,7 @@ export default function UKRedundancyPayCalculator() {
 
             <div className="flex justify-center pt-4">
               <ShareResults
-                result={`Statutory redundancy pay: ${formatCurrency(result.statutoryPay)} (${result.totalWeeks} week's pay across ${result.countedYears} year(s) of service, 2025/26 rates).`}
+                result={`Statutory redundancy pay: ${formatCurrency(result.statutoryPay)} (${result.totalWeeks} week's pay across ${result.countedYears} year(s) of service, 2026/27 rates).`}
                 calculatorName="UK Redundancy Pay Calculator"
               />
             </div>

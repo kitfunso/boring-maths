@@ -280,7 +280,7 @@ export default function UKChildBenefitCalculator() {
             {/* HICBC Thresholds Info */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
-                2024/25 HICBC Thresholds
+                2026/27 HICBC Thresholds
               </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">

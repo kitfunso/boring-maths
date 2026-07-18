@@ -45,7 +45,7 @@ export default function UKEmployerCostCalculator() {
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Employer Cost Calculator"
-          subtitle="See the true total cost of hiring someone in the UK (2025/26)"
+          subtitle="See the true total cost of hiring someone in the UK (2026/27)"
         />
 
         <div className="p-6 md:p-8">
@@ -327,7 +327,7 @@ export default function UKEmployerCostCalculator() {
                   />
                 </svg>
                 <div>
-                  <p className="text-blue-400 font-medium">2025/26 Employer NIC Changes</p>
+                  <p className="text-blue-400 font-medium">2026/27 Employer NIC Changes</p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
                     From April 2025, employer NIC rose from 13.8% to 15%, and the threshold dropped
                     from £9,100 to £5,000. This significantly increases the cost of employing

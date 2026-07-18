@@ -1,13 +1,12 @@
 /**
  * UKEmployerCostCalculator - Figure Pinning Tests
  *
- * These tests pin the CURRENT numeric behavior of calculateEmployerCost() as
- * of the 2025/26 tax-year constants in
- * src/components/calculators/UKEmployerCostCalculator/types.ts. They exist as
- * a safety net before the 2026/27 tax-year refresh (Task D1-D5): when the
- * constants are updated, these pins will fail and must be recomputed against
- * the new GOV.UK figures. Until then, they lock in what the code actually
- * returns today.
+ * These tests pin the numeric behavior of calculateEmployerCost() as
+ * of the 2026/27 tax-year constants in
+ * src/components/calculators/UKEmployerCostCalculator/types.ts. During the
+ * 2026/27 tax-year refresh (Task D1-D5) the employer NIC rate/threshold,
+ * Employment Allowance, auto-enrolment band and Apprenticeship Levy were all
+ * confirmed unchanged against GOV.UK, so these pins carried over unchanged.
  */
 
 import { describe, it, expect } from 'vitest';
