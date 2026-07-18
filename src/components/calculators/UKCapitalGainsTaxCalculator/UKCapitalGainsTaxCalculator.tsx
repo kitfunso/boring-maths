@@ -26,7 +26,7 @@ export default function UKCapitalGainsTaxCalculator() {
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Capital Gains Tax Calculator"
-          subtitle="Calculate CGT on property, shares, and other assets for 2024/25"
+          subtitle="Calculate CGT on property, shares, and other assets for 2026/27"
         />
 
         <div className="p-6 md:p-8">
@@ -156,7 +156,7 @@ export default function UKCapitalGainsTaxCalculator() {
             <Toggle
               checked={inputs.useAnnualExemption}
               onChange={(val) => updateInput('useAnnualExemption', val)}
-              label="Use annual CGT exemption (£3,000 for 2024/25)"
+              label="Use annual CGT exemption (£3,000 for 2026/27)"
             />
           </div>
 

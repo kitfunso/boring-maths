@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PartyDrinkCalculator from '../../components/calculators/PartyDrinkCalculator/PartyDrinkCalculator';
 
 // SEO Configuration
-const title = 'Party Drink Calculator — How Many Drinks for 10-200 Guests | Boring Math';
+const title = 'Party Drink Calculator: How Many Drinks for 10-200 Guests | Boring Math';
 const description =
   'Calculate exactly how many drinks you need for your party. Get per-person quantities for soda, juice, water, and ice based on guest count, weather, and event type. Free and instant.';
 const keywords =
@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Party Drink Calculator' },
 ];
 
@@ -33,23 +33,30 @@ const relatedCalculators = [
   {
     title: 'BBQ Calculator',
     description: 'Calculate how much meat and supplies for your cookout.',
-    href: '/calculators/bbq-calculator',
+    href: '/calculators/bbq-calculator/',
     icon: 'calculator' as const,
     color: 'red' as const,
   },
   {
     title: 'Wedding Alcohol Calculator',
     description: 'Estimate beer, wine, and liquor for weddings and events.',
-    href: '/calculators/wedding-alcohol-calculator',
+    href: '/calculators/wedding-alcohol-calculator/',
     icon: 'trending' as const,
     color: 'purple' as const,
   },
   {
     title: 'Tip Calculator',
     description: 'Calculate tips and split bills between friends.',
-    href: '/calculators/tip-calculator',
+    href: '/calculators/tip-calculator/',
     icon: 'calculator' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Wedding and Event Planning Guide',
+    description: 'Compare all wedding and event planning calculators in one place.',
+    href: '/guides/best-wedding-event-calculators/',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
   },
 ];
 

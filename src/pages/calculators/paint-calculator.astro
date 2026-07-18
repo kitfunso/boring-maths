@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PaintCalculator from '../../components/calculators/PaintCalculator/PaintCalculator';
 
 // SEO Configuration
-const title = 'Free Paint Calculator — Gallons Needed for Any Room | Boring Math';
+const title = 'Free Paint Calculator: Gallons Needed for Any Room | Boring Math';
 const description =
   'Calculate exactly how many gallons of paint you need for walls and ceilings. Account for doors, windows, and coats. Instant results, no signup.';
 const keywords =
@@ -23,21 +23,24 @@ const canonicalURL = '/calculators/paint-calculator';
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Paint Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Paint Calculator' },
+];
 
 // Related calculators
 const relatedCalculators = [
   {
     title: 'Electricity Cost Calculator',
     description: 'Calculate how much it costs to run appliances in your home.',
-    href: '/calculators/electricity-cost-calculator',
+    href: '/calculators/electricity-cost-calculator/',
     icon: 'calculator' as const,
     color: 'yellow' as const,
   },
   {
     title: 'Savings Goal Calculator',
     description: 'Plan your savings for home improvement projects.',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     icon: 'trending' as const,
     color: 'yellow' as const,
   },

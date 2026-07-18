@@ -1,6 +1,6 @@
 /**
  * UK Employer Cost Calculator Types
- * 2025/26 tax year rates for employer NIC, auto-enrolment pension, and apprenticeship levy
+ * 2026/27 tax year rates for employer NIC, auto-enrolment pension, and apprenticeship levy
  */
 
 export type TaxRegion = 'england' | 'scotland';
@@ -47,7 +47,7 @@ export function getDefaultInputs(): UKEmployerCostInputs {
   };
 }
 
-// 2025/26 Employer National Insurance rates (from April 2025)
+// 2026/27 Employer National Insurance rates (15% from 6 April 2025, maintained)
 export const EMPLOYER_NIC_2025 = {
   rate: 0.15, // 15% (up from 13.8%)
   threshold: 5000, // Secondary threshold: £5,000 (down from £9,100)
@@ -56,14 +56,14 @@ export const EMPLOYER_NIC_2025 = {
 // Employment Allowance for eligible small employers
 export const EMPLOYMENT_ALLOWANCE = 10500;
 
-// Auto-enrolment qualifying earnings band 2025/26
+// Auto-enrolment qualifying earnings band 2026/27 (maintained at 2025/26 levels)
 export const AUTO_ENROLMENT = {
   lowerLimit: 6240,
   upperLimit: 50270,
   minimumEmployerRate: 0.03, // 3% minimum
 };
 
-// Apprenticeship Levy 2025/26
+// Apprenticeship Levy 2026/27
 export const APPRENTICESHIP_LEVY = {
   rate: 0.005, // 0.5% of total pay bill
   allowance: 15000, // £15,000 annual allowance

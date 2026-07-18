@@ -1,6 +1,6 @@
 /**
  * UK Capital Gains Tax Calculations
- * 2025/26 rates
+ * 2026/27 rates
  */
 
 import type { UKCGTInputs, UKCGTResult } from './types';
@@ -13,7 +13,7 @@ const CGT_RATES = {
   other: { basic: 0.18, higher: 0.24 },
 };
 
-const ANNUAL_EXEMPTION = 3000; // 2025/26 (reduced from £6,000)
+const ANNUAL_EXEMPTION = 3000; // 2026/27 (reduced from £6,000)
 const BASIC_RATE_THRESHOLD = 37700; // Basic rate band width
 
 export function calculateUKCGT(inputs: UKCGTInputs): UKCGTResult {
@@ -27,7 +27,7 @@ export function calculateUKCGT(inputs: UKCGTInputs): UKCGTResult {
   const rates = CGT_RATES[assetType];
 
   // Calculate how much of the basic rate band is remaining
-  const personalAllowance = 12570;
+  const personalAllowance = 12570; // keep in sync with UKTaxCalculator/types.ts PERSONAL_ALLOWANCE
   const taxableIncome = Math.max(0, annualIncome - personalAllowance);
   const basicRateBandRemaining =
     taxBand === 'basic' ? Math.max(0, BASIC_RATE_THRESHOLD - taxableIncome) : 0;

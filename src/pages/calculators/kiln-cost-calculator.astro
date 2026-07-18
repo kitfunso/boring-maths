@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { KilnCostCalculator } from '../../components/calculators/KilnCostCalculator';
 
-const title = 'Free Kiln Firing Cost Calculator — Pottery Kiln Electricity Cost | Boring Math';
+const title = 'Free Kiln Firing Cost Calculator: Pottery Kiln Electricity Cost | Boring Math';
 const description =
   'Free kiln cost calculator for pottery and ceramics. Calculate electricity cost for bisque and glaze firings. Includes cone temperature reference and firing time estimates.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/kiln-cost-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Kiln Cost Calculator' },
 ];
 
@@ -28,16 +28,23 @@ const relatedCalculators = [
   {
     title: 'Clay Shrinkage Calculator',
     description: 'Calculate thrown vs fired size.',
-    href: '/calculators/clay-shrinkage-calculator',
+    href: '/calculators/clay-shrinkage-calculator/',
     icon: 'scale' as const,
     color: 'orange' as const,
   },
   {
     title: 'Glaze Calculator',
     description: 'Scale glaze batch recipes.',
-    href: '/calculators/glaze-calculator',
+    href: '/calculators/glaze-calculator/',
     icon: 'beaker' as const,
     color: 'purple' as const,
+  },
+  {
+    title: 'Electricity Cost Calculator',
+    description: 'Calculate running costs for any appliance.',
+    href: '/calculators/electricity-cost-calculator/',
+    icon: 'bolt' as const,
+    color: 'yellow' as const,
   },
 ];
 
@@ -107,11 +114,33 @@ const schemaBreadcrumbs = [
     <KilnCostCalculator client:load />
   </section>
 
+  <ContentSection title="How to Calculate Kiln Firing Cost">
+    <p>
+      Kiln firing cost is <strong>energy used (kWh) &times; your electricity rate</strong>, and
+      energy used is <strong>kiln wattage &times; firing hours &times; duty cycle</strong>. Electric
+      kilns cycle on and off rather than running at full power the whole firing, averaging a
+      <strong>45% duty cycle for light loads, 55% for medium loads, and 65% for heavy loads</strong> in
+      this calculator.
+    </p>
+    <p>
+      Firing schedule changes the hours side of that equation: a <strong
+        >slow schedule multiplies the base firing time by 1.3</strong
+      >, a <strong>fast schedule by 0.75</strong>, with medium as the 1.0 baseline. Bisque firings
+      add roughly <strong>2 extra hours</strong> to the base time for the slower initial ramp that drives
+      off residual water in the clay.
+    </p>
+    <p>
+      For emissions, the calculator uses <strong>0.92 lbs CO2 per kWh</strong> for electric firings, versus
+      <strong>11.7 lbs per therm</strong> of natural gas or <strong>12.7 lbs per gallon</strong> of propane
+      for gas kilns.
+    </p>
+  </ContentSection>
+
   <ContentSection title="Understanding Kiln Energy Use">
     <p>
-      Electric kilns don't run at full power continuously. They cycle on and off to maintain
-      temperature, averaging 45-65% of rated wattage depending on firing phase, load density, and
-      kiln insulation quality.
+      Electric kilns don't run at full power continuously. They cycle on and off to hold
+      temperature, so the energy a firing actually draws depends on firing phase, load density, and
+      kiln insulation quality rather than rated wattage alone.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">Typical Firing Times</h3>
     <div class="grid md:grid-cols-3 gap-4 mt-4">

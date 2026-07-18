@@ -10,17 +10,17 @@ import HeroSection from '../../../components/calculators/shared/HeroSection.astr
 import ContentSection from '../../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../../components/calculators/shared/FAQSection.astro';
 
-const title = 'UK Stamp Duty Guide 2025/26 — SDLT, LBTT & LTT Calculators | Boring Math';
+const title = 'UK Stamp Duty Guide 2026/27: SDLT, LBTT & LTT Calculators | Boring Math';
 const description =
-  'Complete guide to UK stamp duty in 2025/26. Compare SDLT (England), LBTT (Scotland), and LTT (Wales) rates, thresholds, and relief with free calculators for every nation.';
+  'Complete guide to UK stamp duty in 2026/27. Compare SDLT (England), LBTT (Scotland), and LTT (Wales) rates, thresholds, and relief with free calculators for every nation.';
 const keywords =
-  'stamp duty uk, sdlt calculator, lbtt calculator, ltt calculator, stamp duty land tax, stamp duty 2025, first time buyer stamp duty, additional property stamp duty, stamp duty scotland, stamp duty wales';
+  'stamp duty uk, sdlt calculator, lbtt calculator, ltt calculator, stamp duty land tax, stamp duty 2026, first time buyer stamp duty, additional property stamp duty, stamp duty scotland, stamp duty wales';
 const canonicalURL = '/calculators/uk-tax/stamp-duty';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
-  { label: 'UK Tax', href: '/calculators/uk-tax' },
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'UK Tax', href: '/calculators/uk-tax/' },
   { label: 'Stamp Duty Guide' },
 ];
 
@@ -28,28 +28,28 @@ const relatedCalculators = [
   {
     title: 'SDLT Calculator',
     description: 'England & Northern Ireland stamp duty.',
-    href: '/calculators/sdlt-calculator',
+    href: '/calculators/sdlt-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'UK Stamp Duty Calculator',
     description: 'All UK nations side by side.',
-    href: '/calculators/uk-stamp-duty-calculator',
+    href: '/calculators/uk-stamp-duty-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
   {
     title: 'Scotland LBTT Calculator',
     description: 'Land and Buildings Transaction Tax.',
-    href: '/calculators/stamp-duty-calculator-scotland',
+    href: '/calculators/stamp-duty-calculator-scotland/',
     icon: 'calculator' as const,
     color: 'green' as const,
   },
   {
     title: 'Wales LTT Calculator',
     description: 'Land Transaction Tax.',
-    href: '/calculators/stamp-duty-calculator-wales',
+    href: '/calculators/stamp-duty-calculator-wales/',
     icon: 'calculator' as const,
     color: 'coral' as const,
   },
@@ -62,7 +62,7 @@ const faqs = [
       'Stamp duty is a tax on property purchases in the UK. In England and Northern Ireland it is called Stamp Duty Land Tax (SDLT), in Scotland it is Land and Buildings Transaction Tax (LBTT), and in Wales it is Land Transaction Tax (LTT). You must pay it within 14 days of completing your property purchase. Your solicitor or conveyancer usually handles the payment.',
   },
   {
-    question: 'How much stamp duty will I pay in 2025/26?',
+    question: 'How much stamp duty will I pay in 2026/27?',
     answer:
       'The amount depends on the property price, your location, and your circumstances. From April 2025, the SDLT nil-rate band reverts to £125,000 (from £250,000). A standard buyer purchasing a £300,000 property in England will pay £5,000 in SDLT. First-time buyers, additional property buyers, and non-residents all have different rates. Use our calculators for exact figures.',
   },
@@ -74,7 +74,7 @@ const faqs = [
   {
     question: 'What is the additional property surcharge?',
     answer:
-      'Buying a second home or buy-to-let property incurs a surcharge on top of standard rates. In England, it is 5% (increased from 3% in October 2024). In Scotland, the Additional Dwelling Supplement (ADS) is 6%. In Wales, the higher rates for additional properties add 4% surcharge. These apply to the entire purchase price.',
+      'Buying a second home or buy-to-let property incurs a surcharge on top of standard rates. In England, it is 5% (increased from 3% in October 2024). In Scotland, the Additional Dwelling Supplement (ADS) is 8%. In Wales, additional properties use higher LTT rates that start at 5%. These apply to the entire purchase price.',
   },
   {
     question: 'Is stamp duty different in Scotland and Wales?',
@@ -105,7 +105,7 @@ const schemaBreadcrumbs = [
 >
   <SEOHead
     slot="schema"
-    name="UK Stamp Duty Guide 2025/26"
+    name="UK Stamp Duty Guide 2026/27"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -114,14 +114,14 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="UK Stamp Duty Guide"
-    description="Compare stamp duty rates across England, Scotland, and Wales. Free calculators for SDLT, LBTT, and LTT with 2025/26 rates and thresholds."
+    description="Compare stamp duty rates across England, Scotland, and Wales. Free calculators for SDLT, LBTT, and LTT with 2026/27 rates and thresholds."
   />
 
   <!-- Calculator Cards -->
   <section class="mb-16">
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <a
-        href="/calculators/sdlt-calculator"
+        href="/calculators/sdlt-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-blue-500/50 transition-all group"
       >
         <div
@@ -148,7 +148,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/uk-stamp-duty-calculator"
+        href="/calculators/uk-stamp-duty-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-purple-500/50 transition-all group"
       >
         <div
@@ -175,7 +175,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/stamp-duty-calculator-scotland"
+        href="/calculators/stamp-duty-calculator-scotland/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-green-500/50 transition-all group"
       >
         <div
@@ -202,7 +202,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/stamp-duty-calculator-wales"
+        href="/calculators/stamp-duty-calculator-wales/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-rose-500/50 transition-all group"
       >
         <div
@@ -229,7 +229,7 @@ const schemaBreadcrumbs = [
       </a>
 
       <a
-        href="/calculators/ads-calculator"
+        href="/calculators/ads-calculator/"
         class="block p-6 rounded-2xl bg-[var(--color-surface)] ring-1 ring-white/10 hover:ring-amber-500/50 transition-all group"
       >
         <div
@@ -250,14 +250,14 @@ const schemaBreadcrumbs = [
           Scotland ADS Calculator
         </h3>
         <p class="text-sm text-[var(--color-subtle)]">
-          Calculate the 6% Additional Dwelling Supplement on second homes and buy-to-let properties
+          Calculate the 8% Additional Dwelling Supplement on second homes and buy-to-let properties
           in Scotland.
         </p>
       </a>
     </div>
   </section>
 
-  <ContentSection title="UK Stamp Duty Rate Tables 2025/26">
+  <ContentSection title="UK Stamp Duty Rate Tables 2026/27">
     <p>
       Stamp duty in the UK is not a single tax — it is three separate systems operated by different
       governments. The rates, thresholds, and relief schemes differ significantly between England,
@@ -343,7 +343,7 @@ const schemaBreadcrumbs = [
       </div>
       <div class="bg-emerald-900/20 rounded-lg p-4">
         <h4 class="font-semibold text-emerald-400 mb-2">Scotland (LBTT)</h4>
-        <div class="text-2xl font-bold text-emerald-300 mb-1">£2,100</div>
+        <div class="text-2xl font-bold text-emerald-300 mb-1">£4,000</div>
         <p class="text-xs text-[var(--color-subtle)]">
           0% up to £175,000, then 2% to £250,000, 5% above. First-time buyer nil-rate to £175k.
         </p>
@@ -367,29 +367,29 @@ const schemaBreadcrumbs = [
       <li>
         <strong class="text-blue-400">England (SDLT):</strong> 5% surcharge from October 2024 (increased
         from 3%). Applies to the full purchase price. Use the
-        <a href="/calculators/sdlt-calculator" class="text-[var(--color-accent)] hover:underline"
+        <a href="/calculators/sdlt-calculator/" class="text-[var(--color-accent)] hover:underline"
           >SDLT Calculator</a
         >
         with "Additional Property" selected.
       </li>
       <li>
-        <strong class="text-emerald-400">Scotland (LBTT):</strong> 6% Additional Dwelling Supplement (ADS).
+        <strong class="text-emerald-400">Scotland (LBTT):</strong> 8% Additional Dwelling Supplement (ADS).
         Applies to the full purchase price. Can be reclaimed within 18 months if you sell your previous
         main home. Use the
-        <a href="/calculators/ads-calculator" class="text-[var(--color-accent)] hover:underline"
+        <a href="/calculators/ads-calculator/" class="text-[var(--color-accent)] hover:underline"
           >ADS Calculator</a
         >
         for exact figures, then review edge cases in the
         <a
-          href="/calculators/uk-tax/additional-dwelling-supplement-explained"
+          href="/calculators/uk-tax/additional-dwelling-supplement-explained/"
           class="text-[var(--color-accent)] hover:underline">ADS Scotland guide</a
         >.
       </li>
       <li>
-        <strong class="text-rose-400">Wales (LTT):</strong> 4% higher rates surcharge on additional properties.
-        Applies to the full purchase price. Use the
+        <strong class="text-rose-400">Wales (LTT):</strong> higher LTT rates on additional properties,
+        from 5% up to 17% (raised in December 2024), replacing the standard bands. Use the
         <a
-          href="/calculators/stamp-duty-calculator-wales"
+          href="/calculators/stamp-duty-calculator-wales/"
           class="text-[var(--color-accent)] hover:underline">Wales LTT Calculator</a
         >
         with additional property selected.
@@ -403,11 +403,11 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
-  <ContentSection title="Key Changes in 2025/26">
+  <ContentSection title="Recent Changes to UK Stamp Duty">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
         Several significant changes took effect in the 2025/26 tax year that increase stamp duty
-        costs for most buyers:
+        costs for most buyers, and still apply in 2026/27:
       </p>
       <ul class="list-disc list-inside space-y-2">
         <li>
@@ -423,8 +423,8 @@ const schemaBreadcrumbs = [
           to 5% in England (October 2024), adding thousands to buy-to-let and second home purchases.
         </li>
         <li>
-          <strong class="text-[var(--color-cream)]">Scotland ADS at 6%</strong> remains the highest additional
-          property surcharge in the UK.
+          <strong class="text-[var(--color-cream)]">Scotland ADS at 8%</strong> (raised from 6% on 5 December
+          2024) remains the highest additional property surcharge in the UK.
         </li>
       </ul>
     </div>

@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import FenceCalculator from '../../components/calculators/FenceCalculator/FenceCalculator';
 
 // SEO Configuration
-const title = 'Free Fence Calculator — Posts, Panels & Materials | Boring Math';
+const title = 'Free Fence Calculator: Posts, Panels & Materials | Boring Math';
 const description =
   'Calculate exactly how many fence posts, panels, concrete bags, and hardware you need. Compare DIY vs professional installation costs for wood, vinyl, chain link, and more.';
 const keywords =
@@ -23,35 +23,38 @@ const canonicalURL = '/calculators/fence-calculator';
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Fence Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Fence Calculator' },
+];
 
 // Related calculators
 const relatedCalculators = [
   {
     title: 'Mulch Calculator',
     description: 'Calculate mulch for your landscaping project.',
-    href: '/calculators/mulch-calculator',
+    href: '/calculators/mulch-calculator/',
     icon: 'calculator' as const,
     color: 'green' as const,
   },
   {
     title: 'Paint Calculator',
     description: 'Calculate paint for staining your new fence.',
-    href: '/calculators/paint-calculator',
+    href: '/calculators/paint-calculator/',
     icon: 'calculator' as const,
     color: 'yellow' as const,
   },
   {
     title: 'Tile Calculator',
     description: 'Calculate tiles needed for floors and walls.',
-    href: '/calculators/tile-calculator',
+    href: '/calculators/tile-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'Solar Panel Calculator',
     description: 'Calculate solar panel savings and ROI.',
-    href: '/calculators/solar-panel-calculator',
+    href: '/calculators/solar-panel-calculator/',
     icon: 'bolt' as const,
     color: 'green' as const,
   },

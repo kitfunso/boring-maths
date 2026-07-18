@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import VacationBudget from '../../components/calculators/VacationBudget/VacationBudget';
 
-const title = 'Free Vacation Budget Calculator — Plan Your Trip Costs | Boring Math';
+const title = 'Free Vacation Budget Calculator: Plan Your Trip Costs | Boring Math';
 const description =
   'Plan your vacation budget with our free calculator. Estimate costs for flights, hotels, food, activities, and more to avoid overspending on your next trip.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/vacation-budget-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Vacation Budget Calculator' },
 ];
 
@@ -28,23 +28,30 @@ const relatedCalculators = [
   {
     title: 'Savings Goal Calculator',
     description: 'Save up for your dream vacation.',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     icon: 'trending' as const,
     color: 'green' as const,
   },
   {
     title: 'Subscription Audit',
     description: 'Find money to fund your travels.',
-    href: '/calculators/subscription-audit-calculator',
+    href: '/calculators/subscription-audit-calculator/',
     icon: 'chart' as const,
     color: 'purple' as const,
   },
   {
     title: 'Emergency Fund Calculator',
     description: 'Build savings before traveling.',
-    href: '/calculators/emergency-fund-calculator',
+    href: '/calculators/emergency-fund-calculator/',
     icon: 'shield' as const,
     color: 'blue' as const,
+  },
+  {
+    title: 'Tipping Guide Calculator',
+    description: 'Know how much to tip at your destination.',
+    href: '/calculators/tipping-guide-calculator/',
+    icon: 'swap' as const,
+    color: 'coral' as const,
   },
 ];
 

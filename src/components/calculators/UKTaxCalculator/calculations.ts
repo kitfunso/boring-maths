@@ -1,6 +1,6 @@
 /**
  * UK Tax Calculator - Calculation Logic
- * 2025/26 tax year
+ * 2026/27 tax year
  */
 
 import type { UKTaxInputs, UKTaxResult, TaxBandBreakdown } from './types';
@@ -261,8 +261,8 @@ function calculateMarginalRate(
 
   if (taxRegion === 'scotland') {
     if (grossSalary <= pa) rate = 0;
-    else if (grossSalary <= 14876) rate = 19;
-    else if (grossSalary <= 26561) rate = 20;
+    else if (grossSalary <= 16537) rate = 19;
+    else if (grossSalary <= 29526) rate = 20;
     else if (grossSalary <= 43662) rate = 21;
     else if (grossSalary <= 75000) rate = 42;
     else if (grossSalary <= 125140) rate = 45;

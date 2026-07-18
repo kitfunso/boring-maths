@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import GraduationPartyPlanner from '../../components/calculators/GraduationPartyPlanner/GraduationPartyPlanner';
 
-const title = 'Graduation Party Calculator — Food, Drinks & Budget for 10-200 Guests | Boring Math';
+const title = 'Graduation Party Calculator: Food, Drinks & Budget for 10-200 Guests | Boring Math';
 const description =
   'Plan your graduation party for 10-200 guests. Calculate food quantities, drinks, seating, and total budget in seconds. Free tool for open houses, BBQs, and sit-down meals.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/graduation-party-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Graduation Party Calculator' },
 ];
 
@@ -28,37 +28,44 @@ const relatedCalculators = [
   {
     title: 'Catering Calculator',
     description: 'Detailed food quantity planning.',
-    href: '/calculators/catering-calculator',
+    href: '/calculators/catering-calculator/',
     icon: 'chart' as const,
     color: 'red' as const,
   },
   {
     title: 'Party Drink Calculator',
     description: 'Plan non-alcoholic beverages.',
-    href: '/calculators/party-drink-calculator',
+    href: '/calculators/party-drink-calculator/',
     icon: 'trending' as const,
     color: 'blue' as const,
   },
   {
     title: 'College ROI Calculator',
     description: 'Is that degree worth it?',
-    href: '/calculators/college-roi-calculator',
+    href: '/calculators/college-roi-calculator/',
     icon: 'home' as const,
     color: 'green' as const,
   },
   {
     title: 'UK Student Loan Calculator',
     description: 'Project repayments and write-off timeline after graduation.',
-    href: '/calculators/uk-student-loan-calculator',
+    href: '/calculators/uk-student-loan-calculator/',
     icon: 'calculator' as const,
     color: 'violet' as const,
   },
   {
     title: 'W2 to 1099 Calculator',
     description: 'Compare first-job salary versus contractor offers.',
-    href: '/calculators/w2-to-1099-calculator',
+    href: '/calculators/w2-to-1099-calculator/',
     icon: 'swap' as const,
     color: 'blue' as const,
+  },
+  {
+    title: 'Wedding and Event Planning Guide',
+    description: 'Compare all wedding and event planning calculators in one place.',
+    href: '/guides/best-wedding-event-calculators/',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
   },
 ];
 
@@ -411,21 +418,21 @@ const schemaBreadcrumbs = [
     <ul class="list-disc list-inside space-y-2 mt-3 text-[var(--color-subtle)]">
       <li>
         If your first salary is in the UK, model deductions with the
-        <a href="/calculators/uk-tax-calculator" class="text-[var(--color-accent)] hover:underline"
+        <a href="/calculators/uk-tax-calculator/" class="text-[var(--color-accent)] hover:underline"
           >UK Tax Calculator</a
         > so you know your true monthly take-home before signing tenancy or financing decisions.
       </li>
       <li>
         If you studied in the UK, run your plan and salary through the
         <a
-          href="/calculators/uk-student-loan-calculator"
+          href="/calculators/uk-student-loan-calculator/"
           class="text-[var(--color-accent)] hover:underline">UK Student Loan Calculator</a
         > to see monthly repayments and likely write-off path.
       </li>
       <li>
         If you are choosing between a salaried role and a contract role, compare offers with the
         <a
-          href="/calculators/w2-to-1099-calculator"
+          href="/calculators/w2-to-1099-calculator/"
           class="text-[var(--color-accent)] hover:underline">W2 to 1099 Calculator</a
         > before accepting headline rates at face value.
       </li>

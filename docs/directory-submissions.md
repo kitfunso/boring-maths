@@ -1,7 +1,7 @@
 # Directory Submissions — Boring Math
 
 **Site:** https://boring-math.com
-**Tagline:** 120+ free calculators for life's boring math
+**Tagline:** 167 free calculators for life's boring math
 **Description:** Free online calculators for personal finance, tax, health, lifestyle, and more. No signup, no ads wall, just math.
 **Categories:** Calculators, Finance Tools, Free Tools, Web Apps
 **Alternative to:** calculator.net, omnicalculator.com
@@ -12,7 +12,7 @@
 
 | # | Directory | Status | Notes |
 |---|-----------|--------|-------|
-| 1 | awesome-calculators (GitHub) | ✅ PR #27 | https://github.com/xxczaki/awesome-calculators/pull/27 |
+| 1 | awesome-calculators (GitHub) | 🔶 PR #27 open, not merged | https://github.com/xxczaki/awesome-calculators/pull/27, checked 2026-07-18, still awaiting merge |
 | 2 | AlternativeTo | [ ] TODO — manual | High traffic, strong SEO. Sign up + submit form. |
 | 3 | SaaSHub | [ ] TODO — manual | Quick form. Sign up + submit. |
 | 4 | Product Hunt | [ ] TODO — manual | See `docs/product-hunt-launch.md` |
@@ -29,6 +29,8 @@
 **Repo:** https://github.com/xxczaki/awesome-calculators (234 stars)
 **Time:** 5 minutes
 
+**Note (2026-07-18):** the PR text below still says "120+" because that's what was submitted when PR #27 was opened. The count is now 167. If Keith wants the live PR to match, he needs to push a follow-up commit to the PR branch, editing the text below won't change what's already open on GitHub.
+
 ### Steps
 1. Go to https://github.com/xxczaki/awesome-calculators
 2. Click **Fork** (top right)
@@ -37,7 +39,7 @@
 5. Add this line in alphabetical order:
 
 ```
-- [Boring Math](https://boring-math.com/) - 120+ free calculators for finance, tax, health, home improvement, and lifestyle decisions. All client-side, no signup required.
+- [Boring Math](https://boring-math.com/) - 167 free calculators for finance, tax, health, home improvement, and lifestyle decisions. All client-side, no signup required.
 ```
 
 6. Click **Commit changes** → commit message: `Add Boring Math to Web section`
@@ -51,7 +53,7 @@ Add Boring Math to Web section
 
 **Body:**
 ```
-Adding Boring Math (https://boring-math.com/) — a collection of 120+ free online calculators covering personal finance, tax (US/UK/EU), health, home improvement, brewing, engineering, and lifestyle.
+Adding Boring Math (https://boring-math.com/) — a collection of 167 free online calculators covering personal finance, tax (US/UK/EU), health, home improvement, brewing, engineering, and lifestyle.
 
 All calculations run client-side in the browser. No signup, no paywall.
 ```
@@ -74,7 +76,7 @@ All calculations run client-side in the browser. No signup, no paywall.
 |-------|-------|
 | Name | Boring Math |
 | URL | https://boring-math.com |
-| Description | 120+ free online calculators for personal finance, tax, health, home improvement, and lifestyle. All calculations run in your browser — no signup, no data collection, no paywall. Covers FIRE planning, mortgage, tax brackets (US/UK), compound interest, BBQ portions, paint coverage, and much more. |
+| Description | 167 free online calculators for personal finance, tax, health, home improvement, and lifestyle. All calculations run in your browser — no signup, no data collection, no paywall. Covers FIRE planning, mortgage, tax brackets (US/UK), compound interest, BBQ portions, paint coverage, and much more. |
 | Platform | Web |
 | Tags | Calculator, Finance, Free, Math, Tax |
 | Alternative to | calculator.net, omnicalculator.com |
@@ -97,7 +99,7 @@ All calculations run client-side in the browser. No signup, no paywall.
 |-------|-------|
 | Name | Boring Math |
 | URL | https://boring-math.com |
-| Tagline | 120+ free calculators for life's boring math |
+| Tagline | 167 free calculators for life's boring math |
 | Description | Free online calculators for personal finance, tax (US, UK, EU), health, home improvement, brewing, engineering, and lifestyle decisions. No signup required. All calculations happen client-side in your browser. |
 | Category | Calculators / Productivity |
 | Pricing | Free |
@@ -121,7 +123,7 @@ All calculations run client-side in the browser. No signup, no paywall.
 |-------|-------|
 | Startup name | Boring Math |
 | URL | https://boring-math.com |
-| Tagline | 120+ free calculators for life's boring math |
+| Tagline | 167 free calculators for life's boring math |
 | Description | Free online calculators for everyday problems — FIRE retirement planning, mortgage payments, tax brackets, compound interest, BBQ portions, paint coverage, and 100+ more. All calculations run in your browser. No signup, no email capture, no paywall. |
 | Category | Productivity / Finance |
 
@@ -142,14 +144,14 @@ All calculations run client-side in the browser. No signup, no paywall.
 
 **Title:**
 ```
-I built 120+ free calculators and put them all on one site
+I built 167 free calculators and put them all on one site
 ```
 
 **Body:**
 ```
 I kept Googling things like "how much paint do I need" or "is my side hustle actually profitable" and getting ad-stuffed sites that barely worked on mobile.
 
-So I started building calculators. One turned into ten, ten turned into fifty, and now there are 120+.
+So I started building calculators. One turned into ten, ten turned into fifty, and now there are 167.
 
 Categories include:
 - Personal finance (FIRE, mortgage, compound interest, debt payoff)

@@ -12,6 +12,7 @@ import BaseLayout from './BaseLayout.astro';
 import AdUnit from '../components/common/AdUnit.astro';
 import Breadcrumb from '../components/common/Breadcrumb.astro';
 import { ICON_PATHS } from '../lib/calculators';
+import { withTrailingSlash } from '../lib/url';
 
 export interface RelatedCalculator {
   title: string;
@@ -57,7 +58,7 @@ const breadcrumbItems = (() => {
       .join(' ');
     return [
       { name: 'Calculators', href: '/' },
-      { name, href: canonicalURL },
+      { name, href: withTrailingSlash(canonicalURL) },
     ];
   }
   return [];

@@ -9,16 +9,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title =
-  'Best Free Savings and Investment Calculators 2026 — Compound Interest, Net Worth, Debt Payoff';
+  'Best Free Savings and Investment Calculators 2026: Compound Interest, Net Worth, Debt Payoff';
 const description =
-  'The best free savings and investment calculators — compound interest, savings goals, net worth tracking, ROI, debt payoff, inflation impact, and emergency fund planning. No signup required.';
+  'The best free savings and investment calculators - compound interest, savings goals, net worth tracking, ROI, debt payoff, inflation impact, and emergency fund planning. No signup required.';
 const canonicalURL = '/guides/best-savings-investment-calculators';
 
 const calculators = [
   {
     rank: 1,
     name: 'Compound Interest Calculator',
-    href: '/calculators/compound-interest-calculator',
+    href: '/calculators/compound-interest-calculator/',
     description:
       'Shows how money grows over time with regular contributions and compound interest, with charts showing growth trajectory.',
     bestFor: 'Anyone wanting to visualise long-term investment or savings growth.',
@@ -26,7 +26,7 @@ const calculators = [
   {
     rank: 2,
     name: 'Savings Goal Calculator',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     description:
       'Calculates how much to save monthly to reach a target amount by a specific date, or how long a given savings rate takes.',
     bestFor: 'Anyone setting a specific financial target like a house deposit or holiday fund.',
@@ -34,7 +34,7 @@ const calculators = [
   {
     rank: 3,
     name: 'Net Worth Calculator',
-    href: '/calculators/net-worth-calculator',
+    href: '/calculators/net-worth-calculator/',
     description:
       'Totals assets minus liabilities to give your current net worth, with categories for property, investments, cash, and debts.',
     bestFor: 'Anyone wanting a snapshot of their overall financial position.',
@@ -42,7 +42,7 @@ const calculators = [
   {
     rank: 4,
     name: 'ROI Calculator',
-    href: '/calculators/roi-calculator',
+    href: '/calculators/roi-calculator/',
     description:
       'Calculates return on investment as a percentage from the initial cost and final value or gain.',
     bestFor: 'Anyone evaluating whether an investment, project, or purchase was worth it.',
@@ -50,7 +50,7 @@ const calculators = [
   {
     rank: 5,
     name: 'Debt Payoff Calculator',
-    href: '/calculators/debt-payoff-calculator',
+    href: '/calculators/debt-payoff-calculator/',
     description:
       'Shows how long it takes to pay off debt with a given monthly payment, and how much interest you will pay total.',
     bestFor:
@@ -59,7 +59,7 @@ const calculators = [
   {
     rank: 6,
     name: 'Inflation Calculator',
-    href: '/calculators/inflation-calculator',
+    href: '/calculators/inflation-calculator/',
     description:
       'Shows how inflation erodes purchasing power over time, converting between past and future values.',
     bestFor:
@@ -68,7 +68,7 @@ const calculators = [
   {
     rank: 7,
     name: 'Emergency Fund Calculator',
-    href: '/calculators/emergency-fund-calculator',
+    href: '/calculators/emergency-fund-calculator/',
     description:
       'Calculates how large your emergency fund should be based on monthly expenses, income stability, and dependants.',
     bestFor: 'Anyone building or evaluating the size of their rainy day fund.',
@@ -114,7 +114,7 @@ const schemaData = {
     {
       '@type': 'ItemList',
       name: 'Best Savings and Investment Calculators 2026',
-      url: 'https://boring-math.com/guides/best-savings-investment-calculators',
+      url: 'https://boring-math.com/guides/best-savings-investment-calculators/',
       numberOfItems: calculators.length,
       itemListElement: calculators.map((c, i) => ({
         '@type': 'ListItem',
@@ -146,7 +146,7 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › Best Savings & Investment Calculators
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Savings & Investment Calculators
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
@@ -225,22 +225,22 @@ const schemaData = {
         <ul>
           <li>
             If you want to see how your savings or investments grow over time, start with the <a
-              href="/calculators/compound-interest-calculator">Compound Interest Calculator</a
+              href="/calculators/compound-interest-calculator/">Compound Interest Calculator</a
             >.
           </li>
           <li>
             If you have a specific savings target and deadline, use the <a
-              href="/calculators/savings-goal-calculator">Savings Goal Calculator</a
+              href="/calculators/savings-goal-calculator/">Savings Goal Calculator</a
             > to find your required monthly contribution.
           </li>
           <li>
-            If you're carrying debt, use the <a href="/calculators/debt-payoff-calculator"
+            If you're carrying debt, use the <a href="/calculators/debt-payoff-calculator/"
               >Debt Payoff Calculator</a
             > to see your payoff timeline and total interest cost.
           </li>
           <li>
             If you want a full picture of where you stand financially, the <a
-              href="/calculators/net-worth-calculator">Net Worth Calculator</a
+              href="/calculators/net-worth-calculator/">Net Worth Calculator</a
             > totals your assets and liabilities in under 5 minutes.
           </li>
         </ul>
@@ -262,7 +262,7 @@ const schemaData = {
         <h2>Browse More Calculators</h2>
         <p>
           Boring Math has 150+ free calculators covering savings, investment, tax, property,
-          freelance, and everyday finance. <a href="/calculators">Browse the full list →</a>
+          freelance, and everyday finance. <a href="/calculators/">Browse the full list →</a>
         </p>
       </section>
     </div>

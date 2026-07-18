@@ -13,10 +13,10 @@ describe('UkChildBenefitCalculator', () => {
 
       const result = calculateChildBenefit(inputs);
 
-      expect(result.weeklyBenefit).toBeCloseTo(42.55, 2);
-      expect(result.annualBenefit).toBeCloseTo(2212.6, 1);
+      expect(result.weeklyBenefit).toBeCloseTo(44.95, 2);
+      expect(result.annualBenefit).toBeCloseTo(2337.4, 1);
       expect(result.hicbcCharge).toBe(0);
-      expect(result.netBenefit).toBeCloseTo(2212.6, 1);
+      expect(result.netBenefit).toBeCloseTo(2337.4, 1);
       expect(result.clawbackPercentage).toBe(0);
       expect(result.isWorthClaiming).toBe(true);
       expect(result.breakEvenIncome).toBe(80000);

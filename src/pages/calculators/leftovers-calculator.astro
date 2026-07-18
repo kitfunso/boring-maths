@@ -25,7 +25,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Leftovers Calculator' },
 ];
 
@@ -34,35 +34,35 @@ const relatedCalculators = [
   {
     title: 'Calorie Calculator',
     description: 'Calculate daily calorie needs based on activity level.',
-    href: '/calculators/calorie-calculator',
+    href: '/calculators/calorie-calculator/',
     icon: 'heart' as const,
     color: 'green' as const,
   },
   {
     title: 'BBQ Calculator',
     description: 'Calculate meat and supplies for your cookout.',
-    href: '/calculators/bbq-calculator',
+    href: '/calculators/bbq-calculator/',
     icon: 'fire' as const,
     color: 'coral' as const,
   },
   {
     title: 'Baking Conversion Calculator',
     description: 'Convert cups to grams, ounces to ml, and more.',
-    href: '/calculators/baking-conversion-calculator',
+    href: '/calculators/baking-conversion-calculator/',
     icon: 'swap' as const,
     color: 'amber' as const,
   },
   {
     title: 'Catering Calculator',
     description: 'Calculate food quantities and costs for events.',
-    href: '/calculators/catering-calculator',
+    href: '/calculators/catering-calculator/',
     icon: 'glass' as const,
     color: 'coral' as const,
   },
   {
     title: 'Macro Calculator',
     description: 'Calculate your daily protein, carbs, and fat needs.',
-    href: '/calculators/macro-calculator',
+    href: '/calculators/macro-calculator/',
     icon: 'heart' as const,
     color: 'coral' as const,
   },
@@ -73,12 +73,12 @@ const faqs = [
   {
     question: 'How long are leftovers good in the fridge?',
     answer:
-      'Most cooked leftovers are safe in the fridge for 3-4 days at 40\u00B0F (4\u00B0C) or below, according to the USDA. Some items like hard-boiled eggs and bread last up to 7 days. Dressed salads should be eaten within 1-2 days. Always store leftovers in airtight containers and refrigerate within 2 hours of cooking.',
+      'Most cooked leftovers are safe in the fridge for 4 days at 40\u00B0F (4\u00B0C) or below, according to the USDA. Some items like hard-boiled eggs and bread last up to 7 days. Dressed salads should be eaten within 1-2 days. Always store leftovers in airtight containers and refrigerate within 2 hours of cooking.',
   },
   {
     question: 'Can you eat leftovers after 5 days?',
     answer:
-      'For most cooked foods (meat, poultry, fish, pasta, rice, soups), the USDA recommends eating leftovers within 3-4 days. After 5 days, the risk of foodborne illness increases significantly. Some foods like deli meats (5 days) and hard-boiled eggs (7 days) have slightly longer windows. When in doubt, throw it out.',
+      'For most cooked foods (meat, poultry, fish, pasta, rice, soups), the USDA recommends eating leftovers within 4 days. After 5 days, the risk of foodborne illness increases significantly. Some foods like deli meats (5 days) and hard-boiled eggs (7 days) have slightly longer windows. When in doubt, throw it out.',
   },
   {
     question: 'How long can leftovers sit out at room temperature?',
@@ -143,6 +143,24 @@ const schemaBreadcrumbs = [
     <LeftoversCalculator client:load />
   </section>
 
+  <!-- Answer-First: How Long Do Leftovers Last -->
+  <ContentSection title="How Long Do Leftovers Last">
+    <p>
+      Most cooked leftovers, meat, poultry, pasta, rice, soup, pizza, vegetables, casseroles, and
+      sauces, are safe for <strong>4 days in the fridge</strong> in the USDA-based data this calculator
+      uses. Cooked fish is shorter at <strong>3 days</strong>, dressed salad at
+      <strong>2 days</strong>, and hard-boiled eggs, bread, and dairy each last up to
+      <strong>7 days</strong>.
+    </p>
+    <p>
+      At room temperature, the safe window drops sharply: <strong>2 hours</strong> for most food types,
+      just <strong>1 hour for cooked rice</strong> because of Bacillus cereus spores, and up to
+      <strong>48 hours</strong> for bread. Freezer life is measured in months rather than days and varies
+      by food, from 1 month for dairy up to 6 months for cooked rice, while most meats and mains reheat
+      safely to <strong>165&#xB0;F (74&#xB0;C)</strong>.
+    </p>
+  </ContentSection>
+
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
@@ -167,7 +185,7 @@ const schemaBreadcrumbs = [
   <ContentSection title="Understanding USDA Food Safety Guidelines">
     <p>
       The <strong>fridge storage time</strong> assumes your refrigerator is set to 40&#xB0;F (4&#xB0;C)
-      or below. Most cooked leftovers last 3-4 days in the fridge.
+      or below. Most cooked leftovers last 4 days in the fridge.
     </p>
     <p>
       <strong>Freezer storage</strong> times reflect quality rather than safety. Food frozen at 0&#xB0;F

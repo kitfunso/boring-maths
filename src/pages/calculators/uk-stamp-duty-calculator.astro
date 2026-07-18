@@ -11,45 +11,45 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UKStampDutyCalculator } from '../../components/calculators/UKStampDutyCalculator';
 
-const title = 'UK Stamp Duty Calculator 2025/26: SDLT Rates & First-Time Buyer Relief';
+const title = 'UK Stamp Duty Calculator 2026/27: SDLT Rates & First-Time Buyer Relief';
 const description =
-  'Stamp duty on a £300,000 house in England is £2,500 (0% on first £250,000, 5% on next £50,000). First-time buyers pay £0 up to £425,000. Calculator for SDLT on residential purchases including additional dwelling surcharge.';
+  'Stamp duty on a £300,000 house in England is £5,000 (2% from £125,001-£250,000, 5% from £250,001-£300,000). First-time buyers pay £0 up to £300,000. Calculator for SDLT on residential purchases including additional dwelling surcharge.';
 const keywords =
-  'stamp duty calculator uk, sdlt calculator, stamp duty land tax, lbtt calculator scotland, ltt calculator wales, first time buyer stamp duty, additional property stamp duty, stamp duty 2025';
+  'stamp duty calculator uk, sdlt calculator, stamp duty land tax, lbtt calculator scotland, ltt calculator wales, first time buyer stamp duty, additional property stamp duty, stamp duty 2026';
 const canonicalURL = '/calculators/uk-stamp-duty-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'UK Stamp Duty Calculator' },
 ];
 
 const relatedCalculators = [
   {
     title: 'UK Stamp Duty Guide',
-    description: 'Complete SDLT, LBTT & LTT guide 2025/26.',
-    href: '/calculators/uk-tax/stamp-duty',
+    description: 'Complete SDLT, LBTT & LTT guide 2026/27.',
+    href: '/calculators/uk-tax/stamp-duty/',
     icon: 'chart' as const,
     color: 'blue' as const,
   },
   {
     title: 'Stamp Duty Calculator Scotland',
     description: 'Calculate LBTT for Scottish property purchases.',
-    href: '/calculators/stamp-duty-calculator-scotland',
+    href: '/calculators/stamp-duty-calculator-scotland/',
     icon: 'home' as const,
     color: 'green' as const,
   },
   {
     title: 'Stamp Duty Calculator Wales',
     description: 'Calculate LTT for Welsh property purchases.',
-    href: '/calculators/stamp-duty-calculator-wales',
+    href: '/calculators/stamp-duty-calculator-wales/',
     icon: 'home' as const,
     color: 'teal' as const,
   },
   {
     title: 'Mortgage Calculator',
     description: 'Calculate your monthly payments.',
-    href: '/calculators/mortgage-calculator',
+    href: '/calculators/mortgage-calculator/',
     icon: 'home' as const,
     color: 'green' as const,
   },
@@ -64,17 +64,17 @@ const faqs = [
   {
     question: 'What are the current SDLT rates in England?',
     answer:
-      'From April 2025, SDLT rates are: 0% up to £250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £425,000 and 5% from £425,001-£625,000 (properties up to £625,000 only).',
+      'From 1 April 2025, SDLT rates are: 0% up to £125,000, 2% from £125,001-£250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £300,000 and 5% from £300,001-£500,000 (properties up to £500,000 only).',
   },
   {
     question: 'How does first-time buyer relief work?',
     answer:
-      'First-time buyers in England/NI pay no SDLT on properties up to £425,000, and 5% on the portion from £425,001-£625,000. The relief only applies to properties up to £625,000. In Scotland, first-time buyers get an increased nil-rate band of £175,000 instead of £145,000. Wales has no first-time buyer relief.',
+      'First-time buyers in England/NI pay no SDLT on properties up to £300,000, and 5% on the portion from £300,001-£500,000. The relief only applies to properties up to £500,000. In Scotland, first-time buyers get an increased nil-rate band of £175,000 instead of £145,000. Wales has no first-time buyer relief.',
   },
   {
     question: 'What is the additional property surcharge?',
     answer:
-      "If you're buying a second home or buy-to-let property, you pay an extra 5% surcharge (increased from 3% in October 2024) on top of standard rates. This applies to the entire purchase price. The surcharge applies across all UK nations.",
+      "If you're buying a second home or buy-to-let property in England or Northern Ireland, you pay an extra 5% SDLT surcharge (increased from 3% in October 2024) on top of standard rates, applied to the entire purchase price. Scotland charges an 8% Additional Dwelling Supplement and Wales applies higher LTT rates instead.",
   },
   {
     question: 'Do non-UK residents pay more stamp duty?',

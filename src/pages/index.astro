@@ -373,6 +373,8 @@ const categories = getCategories();
 
 <script>
   // Calculator filtering, search, favorites, and recently used functionality
+  import { withTrailingSlash } from '../lib/url';
+
   function initCalculatorPage() {
     const filterButtons = document.querySelectorAll('.category-btn');
     const calculatorCards = document.querySelectorAll('.calculator-card');
@@ -501,7 +503,12 @@ const categories = getCategories();
 
     function getRecentlyUsed(): RecentItem[] {
       try {
-        return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+        const stored: RecentItem[] = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
+        // Heal legacy entries saved before the trailing-slash migration.
+        // Filter first so one malformed entry can't wipe the whole list.
+        return stored
+          .filter((item) => typeof item?.href === 'string')
+          .map((item) => ({ ...item, href: withTrailingSlash(item.href) }));
       } catch {
         return [];
       }
@@ -630,7 +637,10 @@ const categories = getCategories();
 
     function getFavorites(): string[] {
       try {
-        return JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+        const stored: string[] = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]');
+        // Heal legacy entries saved before the trailing-slash migration.
+        // Filter first so one malformed entry can't wipe the whole list.
+        return stored.filter((x): x is string => typeof x === 'string').map(withTrailingSlash);
       } catch {
         return [];
       }

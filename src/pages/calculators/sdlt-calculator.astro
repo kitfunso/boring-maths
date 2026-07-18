@@ -11,35 +11,35 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { SDLTCalculator } from '../../components/calculators/SDLTCalculator';
 
-const title = 'SDLT Calculator 2025/26 — Stamp Duty Land Tax UK | Boring Math';
+const title = 'SDLT Calculator 2026/27: Stamp Duty Land Tax UK | Boring Math';
 const description =
-  'Calculate UK Stamp Duty Land Tax for 2025 on property purchases. Includes first-time buyer relief and additional property surcharge. No signup required.';
+  'Calculate UK Stamp Duty Land Tax for 2026/27 on property purchases. Includes first-time buyer relief and additional property surcharge. No signup required.';
 const keywords =
-  'sdlt calculator uk, sdlt calculator, stamp duty land tax, stamp duty calculator england, first time buyer stamp duty, additional property stamp duty, stamp duty 2025, sdlt rates, non resident stamp duty';
+  'sdlt calculator uk, sdlt calculator, stamp duty land tax, stamp duty calculator england, first time buyer stamp duty, additional property stamp duty, stamp duty 2026, sdlt rates, non resident stamp duty';
 const canonicalURL = '/calculators/sdlt-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'SDLT Calculator' }];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators/' }, { label: 'SDLT Calculator' }];
 
 const relatedCalculators = [
   {
     title: 'UK Stamp Duty Guide',
-    description: 'Complete SDLT, LBTT & LTT guide 2025/26.',
-    href: '/calculators/uk-tax/stamp-duty',
+    description: 'Complete SDLT, LBTT & LTT guide 2026/27.',
+    href: '/calculators/uk-tax/stamp-duty/',
     icon: 'chart' as const,
     color: 'blue' as const,
   },
   {
     title: 'UK Stamp Duty Calculator',
     description: 'All UK nations including Wales.',
-    href: '/calculators/uk-stamp-duty-calculator',
+    href: '/calculators/uk-stamp-duty-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'ADS Calculator',
     description: "Scotland's Additional Dwelling Supplement.",
-    href: '/calculators/ads-calculator',
+    href: '/calculators/ads-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
@@ -52,19 +52,19 @@ const faqs = [
       'Stamp Duty Land Tax is a tax on property purchases in England and Northern Ireland. The amount depends on the property price and your circumstances. Scotland has LBTT and Wales has LTT - both are separate tax systems with different rates.',
   },
   {
-    question: 'What are the current SDLT rates for 2025?',
+    question: 'What are the current SDLT rates for 2026/27?',
     answer:
-      'Standard SDLT rates are: 0% up to £250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £425,000 and 5% from £425,001-£625,000 on properties up to £625,000.',
+      'Standard SDLT rates are: 0% up to £125,000, 2% from £125,001-£250,000, 5% from £250,001-£925,000, 10% from £925,001-£1,500,000, and 12% above £1,500,000. First-time buyers pay 0% up to £300,000 and 5% from £300,001-£500,000 on properties up to £500,000.',
   },
   {
     question: 'How does first-time buyer relief work?',
     answer:
-      'First-time buyers pay no SDLT on properties up to £425,000, and 5% on the portion from £425,001-£625,000. This relief only applies to properties priced at £625,000 or less. If the property exceeds £625,000, you pay standard rates on the entire purchase.',
+      'First-time buyers pay no SDLT on properties up to £300,000, and 5% on the portion from £300,001-£500,000. This relief only applies to properties priced at £500,000 or less. If the property exceeds £500,000, you pay standard rates on the entire purchase.',
   },
   {
     question: 'What is the additional property surcharge?',
     answer:
-      "If you're buying a second home, buy-to-let, or any additional residential property, you pay an extra 3% surcharge on top of standard rates. This applies to the entire purchase price, not just portions above certain thresholds.",
+      "If you're buying a second home, buy-to-let, or any additional residential property, you pay an extra 5% surcharge on top of standard rates. This applies to the entire purchase price, not just portions above certain thresholds.",
   },
   {
     question: 'What is the non-resident surcharge?',
@@ -162,7 +162,7 @@ const schemaBreadcrumbs = [
     </div>
   </ContentSection>
 
-  <ContentSection title="SDLT Rates and Thresholds 2025/26">
+  <ContentSection title="SDLT Rates and Thresholds 2026/27">
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
         From 1 April 2025, the temporary SDLT thresholds introduced during the pandemic revert to
@@ -215,16 +215,16 @@ const schemaBreadcrumbs = [
       <p>
         SDLT only applies to property purchases in England and Northern Ireland. Scotland uses
         <a
-          href="/calculators/stamp-duty-calculator-scotland"
+          href="/calculators/stamp-duty-calculator-scotland/"
           class="text-[var(--color-accent)] hover:underline"
           >Land and Buildings Transaction Tax (LBTT)</a
-        > with different rates and thresholds, plus a 6% Additional Dwelling Supplement. Wales uses
+        > with different rates and thresholds, plus an 8% Additional Dwelling Supplement. Wales uses
         <a
-          href="/calculators/stamp-duty-calculator-wales"
+          href="/calculators/stamp-duty-calculator-wales/"
           class="text-[var(--color-accent)] hover:underline">Land Transaction Tax (LTT)</a
         > with its own rate structure. Compare all three with our
         <a
-          href="/calculators/uk-stamp-duty-calculator"
+          href="/calculators/uk-stamp-duty-calculator/"
           class="text-[var(--color-accent)] hover:underline">UK Stamp Duty Calculator</a
         > to see the differences side by side.
       </p>

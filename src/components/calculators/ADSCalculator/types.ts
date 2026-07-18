@@ -52,9 +52,9 @@ export const LBTT_FIRST_TIME_BANDS: Array<{ from: number; to: number; rate: numb
 ];
 
 /**
- * ADS rate - 6% on full purchase price for additional properties
+ * ADS rate - 8% on full purchase price for additional properties (from 5 December 2024)
  */
-export const ADS_RATE = 0.06;
+export const ADS_RATE = 0.08;
 
 export const BUYER_TYPE_LABELS: Record<BuyerType, string> = {
   'first-time': 'First-time Buyer',

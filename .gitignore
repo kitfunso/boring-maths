@@ -21,6 +21,10 @@ pnpm-debug.log*
 scripts/seo/.gsc-client.json
 scripts/seo/.gsc-token.json
 
+# GSC raw exports + keyword-pipeline output (25k-row data dumps; analysis lives in docs/)
+gsc-export/
+scripts/seo/output/
+
 # macOS-specific files
 .DS_Store
 
@@ -31,3 +35,8 @@ scripts/seo/.gsc-token.json
 tmpclaude-*
 
 .hippo/
+
+# playwright artifacts (regenerated every e2e run)
+playwright-report/
+test-results/
+lh-*.json

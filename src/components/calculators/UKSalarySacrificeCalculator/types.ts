@@ -58,7 +58,7 @@ export const SACRIFICE_TYPES = {
   },
 };
 
-// 2024/25 England/NI Income Tax bands
+// 2026/27 England/NI Income Tax bands
 export const ENGLAND_TAX_BANDS = {
   personalAllowance: 12570,
   basicRate: { threshold: 50270, rate: 0.2 },
@@ -66,23 +66,23 @@ export const ENGLAND_TAX_BANDS = {
   additionalRate: { rate: 0.45 },
 };
 
-// 2024/25 Scotland Income Tax bands
+// 2026/27 Scotland Income Tax bands
 export const SCOTLAND_TAX_BANDS = {
   personalAllowance: 12570,
-  starterRate: { threshold: 14876, rate: 0.19 },
-  basicRate: { threshold: 26561, rate: 0.2 },
+  starterRate: { threshold: 16537, rate: 0.19 },
+  basicRate: { threshold: 29526, rate: 0.2 },
   intermediateRate: { threshold: 43662, rate: 0.21 },
   higherRate: { threshold: 75000, rate: 0.42 },
   advancedRate: { threshold: 125140, rate: 0.45 },
   topRate: { rate: 0.48 },
 };
 
-// 2024/25 National Insurance rates
+// 2026/27 National Insurance rates
 export const NI_RATES = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,
   mainRate: 0.08, // 8% between thresholds
   upperRate: 0.02, // 2% above UEL
-  employerRate: 0.138, // 13.8% employer NI
-  employerThreshold: 9100,
+  employerRate: 0.15, // 15% employer NI (from 6 April 2025)
+  employerThreshold: 5000,
 };

@@ -13,12 +13,12 @@ describe('UkDividendTaxCalculator', () => {
 
       const result = calculateDividendTaxResult(inputs);
 
-      expect(result.dividendTax).toBeCloseTo(3138.75, 2);
-      expect(result.effectiveDividendRate).toBeCloseTo(31.4, 1);
+      expect(result.dividendTax).toBeCloseTo(3328.75, 2);
+      expect(result.effectiveDividendRate).toBeCloseTo(33.3, 1);
       expect(result.allowanceUsed).toBe(500);
       expect(result.allowanceRemaining).toBe(0);
       expect(result.totalIncome).toBe(60000);
-      expect(result.totalTax).toBeCloseTo(13619.15, 2);
+      expect(result.totalTax).toBeCloseTo(13809.15, 2);
       expect(result.incomeTaxOnSalary).toBe(7486);
       expect(result.niOnSalary).toBeCloseTo(2994.4, 1);
     });

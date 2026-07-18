@@ -131,7 +131,7 @@ function calculateDividendTax(
 
   const basicRateRemaining = Math.max(0, basicRateBandSize - salaryUsedInBands);
 
-  // Basic rate dividends (8.75%)
+  // Basic rate dividends (10.75%)
   if (remainingDividends > 0 && basicRateRemaining > 0) {
     const basicRateDividends = Math.min(remainingDividends, basicRateRemaining);
     const basicRateTax = basicRateDividends * basicRate;
@@ -139,14 +139,14 @@ function calculateDividendTax(
     remainingDividends -= basicRateDividends;
 
     breakdown.push({
-      band: 'Basic rate (8.75%)',
+      band: 'Basic rate (10.75%)',
       amount: basicRateDividends,
       rate: basicRate,
       tax: basicRateTax,
     });
   }
 
-  // Higher rate dividends (33.75%)
+  // Higher rate dividends (35.75%)
   const higherRateRemaining = Math.max(
     0,
     higherRateBandSize - Math.max(0, salaryUsedInBands - basicRateBandSize)
@@ -158,7 +158,7 @@ function calculateDividendTax(
     remainingDividends -= higherRateDividends;
 
     breakdown.push({
-      band: 'Higher rate (33.75%)',
+      band: 'Higher rate (35.75%)',
       amount: higherRateDividends,
       rate: higherRate,
       tax: higherRateTax,

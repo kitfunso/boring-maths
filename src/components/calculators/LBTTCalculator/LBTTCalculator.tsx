@@ -115,7 +115,7 @@ export default function LBTTCalculator() {
                   {result.adsSurcharge > 0 && (
                     <div className="flex justify-between">
                       <span className="text-[var(--color-subtle)]">
-                        Additional Dwelling Supplement (6%)
+                        Additional Dwelling Supplement (8%)
                       </span>
                       <span className="text-amber-400">{formatCurrency(result.adsSurcharge)}</span>
                     </div>

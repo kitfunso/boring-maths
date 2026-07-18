@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import HourlyToSalaryCalculator from '../../components/calculators/HourlyToSalary/HourlyToSalaryCalculator';
 
 // SEO Configuration
-const title = 'Free Hourly to Salary Calculator — Convert Instantly | Boring Math';
+const title = 'Free Hourly to Salary Calculator: Convert Instantly | Boring Math';
 const description =
   'Convert hourly wages to annual salary and see weekly, biweekly, and monthly earnings. Account for overtime and paid time off. No signup required.';
 const keywords =
@@ -23,21 +23,24 @@ const canonicalURL = '/calculators/hourly-to-salary-calculator';
 const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Hourly to Salary' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Hourly to Salary' },
+];
 
 // Related calculators
 const relatedCalculators = [
   {
     title: 'Salary to Hourly Calculator',
     description: 'Convert salary to true hourly rate.',
-    href: '/calculators/salary-to-hourly-calculator',
+    href: '/calculators/salary-to-hourly-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'Raise Calculator',
     description: 'Calculate the impact of a salary raise.',
-    href: '/calculators/raise-calculator',
+    href: '/calculators/raise-calculator/',
     icon: 'trending' as const,
     color: 'green' as const,
   },

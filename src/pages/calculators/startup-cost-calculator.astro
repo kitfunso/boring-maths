@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import StartupCost from '../../components/calculators/StartupCost/StartupCost';
 
 // SEO Configuration
-const title = 'Free Startup Cost Calculator — Estimate Your Business Launch Costs | Boring Math';
+const title = 'Free Startup Cost Calculator: Estimate Your Business Launch Costs | Boring Math';
 const description =
   'Calculate how much capital you need to start your business. Estimate one-time costs, monthly burn rate, and runway requirements for restaurants, consulting, e-commerce, and more.';
 const keywords =
@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Startup Cost Calculator' },
 ];
 
@@ -33,16 +33,23 @@ const relatedCalculators = [
   {
     title: 'Break-Even Calculator',
     description: 'Find out when your business will become profitable.',
-    href: '/calculators/break-even-calculator',
+    href: '/calculators/break-even-calculator/',
     icon: 'trending' as const,
     color: 'blue' as const,
   },
   {
     title: 'Pricing Calculator',
     description: 'Calculate the optimal price for your products.',
-    href: '/calculators/pricing-calculator',
+    href: '/calculators/pricing-calculator/',
     icon: 'calculator' as const,
     color: 'yellow' as const,
+  },
+  {
+    title: 'Employee Cost Calculator',
+    description: 'Calculate the true cost of your first hire.',
+    href: '/calculators/employee-cost-calculator/',
+    icon: 'users' as const,
+    color: 'blue' as const,
   },
 ];
 

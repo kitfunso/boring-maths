@@ -8,16 +8,16 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Best Homebrewing and Craft Calculators — ABV, IBU, Candle Wax, BBQ and More';
+const title = 'Best Homebrewing and Craft Calculators: ABV, IBU, Candle Wax, BBQ and More';
 const description =
-  'The best free homebrewing and craft calculators — ABV, IBU, mash water, priming sugar, candle wax, lye for soap, clay shrinkage, and BBQ quantities. No signup required.';
+  'The best free homebrewing and craft calculators - ABV, IBU, mash water, priming sugar, candle wax, lye for soap, clay shrinkage, and BBQ quantities. No signup required.';
 const canonicalURL = '/guides/best-homebrewing-calculators';
 
 const calculators = [
   {
     rank: 1,
     name: 'ABV Calculator',
-    href: '/calculators/abv-calculator',
+    href: '/calculators/abv-calculator/',
     description:
       'Calculates the alcohol by volume (ABV) of your homebrew from original gravity (OG) and final gravity (FG) readings using the standard formula.',
     bestFor: 'Homebrewers measuring the alcohol content of beer, cider, wine, or mead.',
@@ -25,7 +25,7 @@ const calculators = [
   {
     rank: 2,
     name: 'IBU Calculator',
-    href: '/calculators/ibu-calculator',
+    href: '/calculators/ibu-calculator/',
     description:
       'Calculates International Bitterness Units (IBU) based on hop additions, alpha acid content, boil time, and batch size using the Tinseth formula.',
     bestFor: 'Homebrewers formulating or replicating beer recipes.',
@@ -33,7 +33,7 @@ const calculators = [
   {
     rank: 3,
     name: 'Mash Water Calculator',
-    href: '/calculators/mash-water-calculator',
+    href: '/calculators/mash-water-calculator/',
     description:
       'Calculates strike water volume and temperature for all-grain homebrewing, plus sparge water volume to hit your target pre-boil volume.',
     bestFor: 'All-grain homebrewers planning a brew day.',
@@ -41,7 +41,7 @@ const calculators = [
   {
     rank: 4,
     name: 'Priming Sugar Calculator',
-    href: '/calculators/priming-sugar-calculator',
+    href: '/calculators/priming-sugar-calculator/',
     description:
       'Calculates how much priming sugar (corn sugar, table sugar, or DME) to add at bottling to achieve a target carbonation level.',
     bestFor: 'Homebrewers bottling beer and wanting consistent carbonation.',
@@ -49,7 +49,7 @@ const calculators = [
   {
     rank: 5,
     name: 'Candle Wax Calculator',
-    href: '/calculators/candle-wax-calculator',
+    href: '/calculators/candle-wax-calculator/',
     description:
       'Calculates how much wax you need to fill a given container or number of candles, accounting for wax density and pour shrinkage.',
     bestFor: 'Candle makers scaling up a batch or buying supplies.',
@@ -57,7 +57,7 @@ const calculators = [
   {
     rank: 6,
     name: 'BBQ Calculator',
-    href: '/calculators/bbq-calculator',
+    href: '/calculators/bbq-calculator/',
     description:
       'Calculates how much BBQ meat and food to buy per person for a cookout, accounting for raw-to-cooked weight loss and side dishes.',
     bestFor: 'Anyone hosting a BBQ and needing to buy the right quantities.',
@@ -65,7 +65,7 @@ const calculators = [
   {
     rank: 7,
     name: 'Clay Shrinkage Calculator',
-    href: '/calculators/clay-shrinkage-calculator',
+    href: '/calculators/clay-shrinkage-calculator/',
     description:
       "Calculates the final size of a ceramic piece after firing, given the clay body's shrinkage rate and the wet/leather-hard dimensions.",
     bestFor: 'Potters and ceramicists calculating final dimensions of functional ware.',
@@ -111,7 +111,7 @@ const schemaData = {
     {
       '@type': 'ItemList',
       name: 'Best Homebrewing and Craft Calculators',
-      url: 'https://boring-math.com/guides/best-homebrewing-calculators',
+      url: 'https://boring-math.com/guides/best-homebrewing-calculators/',
       numberOfItems: calculators.length,
       itemListElement: calculators.map((c, i) => ({
         '@type': 'ListItem',
@@ -143,7 +143,7 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › Best Homebrewing Calculators
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Homebrewing Calculators
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
@@ -221,22 +221,22 @@ const schemaData = {
         <ul>
           <li>
             If you're measuring the strength of your homebrew, use the <a
-              href="/calculators/abv-calculator">ABV Calculator</a
+              href="/calculators/abv-calculator/">ABV Calculator</a
             > with your hydrometer readings.
           </li>
           <li>
             If you're designing a beer recipe and want to dial in bitterness, the <a
-              href="/calculators/ibu-calculator">IBU Calculator</a
+              href="/calculators/ibu-calculator/">IBU Calculator</a
             > uses the Tinseth formula for accurate results.
           </li>
           <li>
             If you're making candles and need to know how much wax to buy, the <a
-              href="/calculators/candle-wax-calculator">Candle Wax Calculator</a
+              href="/calculators/candle-wax-calculator/">Candle Wax Calculator</a
             > accounts for density and pour shrinkage.
           </li>
           <li>
             If you're hosting a BBQ and need to buy the right amount of meat, the <a
-              href="/calculators/bbq-calculator">BBQ Calculator</a
+              href="/calculators/bbq-calculator/">BBQ Calculator</a
             > factors in raw-to-cooked weight loss.
           </li>
         </ul>
@@ -258,7 +258,7 @@ const schemaData = {
         <h2>Browse More Calculators</h2>
         <p>
           Boring Math has 150+ free calculators covering homebrewing, crafts, cooking, UK tax,
-          pensions, and everyday maths. <a href="/calculators">Browse the full list →</a>
+          pensions, and everyday maths. <a href="/calculators/">Browse the full list →</a>
         </p>
       </section>
     </div>

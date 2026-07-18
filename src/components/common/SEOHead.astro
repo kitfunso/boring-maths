@@ -21,6 +21,8 @@ export interface HowToStep {
   text: string;
 }
 
+import { withTrailingSlash } from '../../lib/url';
+
 export interface Props {
   /** Calculator name for WebApplication schema */
   name: string;
@@ -128,11 +130,15 @@ const faqSchema =
 
 // BreadcrumbList schema
 const fullBreadcrumbs = [
-  { name: 'Home', url: siteUrl },
-  ...breadcrumbs.map((b) => ({
-    name: b.name,
-    url: b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}`,
-  })),
+  { name: 'Home', url: withTrailingSlash(siteUrl) },
+  ...breadcrumbs.map((b) => {
+    const absoluteUrl = b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}`;
+    // Normalize to a trailing slash to match the canonical (trailingSlash: 'always').
+    return {
+      name: b.name,
+      url: withTrailingSlash(absoluteUrl),
+    };
+  }),
 ];
 
 const breadcrumbSchema = {

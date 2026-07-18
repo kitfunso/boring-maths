@@ -1,6 +1,6 @@
 /**
  * Scotland LBTT Calculations
- * Land and Buildings Transaction Tax rates 2024/25
+ * Land and Buildings Transaction Tax rates 2026/27
  */
 
 import type { LBTTInputs, LBTTResult, LBTTBand, ScotlandBuyerType } from './types';
@@ -21,7 +21,7 @@ const LBTT_FIRST_TIME = [
   { from: 750001, to: Infinity, rate: 0.12 },
 ];
 
-const ADS_RATE = 0.06; // 6% Additional Dwelling Supplement
+const ADS_RATE = 0.08; // 8% Additional Dwelling Supplement (from 5 December 2024)
 const NON_RESIDENT_SURCHARGE = 0.02;
 
 function getBands(buyerType: ScotlandBuyerType) {

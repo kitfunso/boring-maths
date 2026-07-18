@@ -11,7 +11,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { WaterChangeCalculator } from '../../components/calculators/WaterChangeCalculator';
 
-const title = 'Free Water Change Calculator — Aquarium Parameter Dilution | Boring Math';
+const title = 'Free Water Change Calculator: Aquarium Parameter Dilution | Boring Math';
 const description =
   'Free aquarium water change calculator. Calculate how water changes affect nitrate, ammonia, and other parameters. Plan your maintenance schedule for healthy fish.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/water-change-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Water Change Calculator' },
 ];
 
@@ -28,15 +28,22 @@ const relatedCalculators = [
   {
     title: 'Fish Stocking Calculator',
     description: 'Calculate safe fish stocking levels.',
-    href: '/calculators/fish-stocking-calculator',
+    href: '/calculators/fish-stocking-calculator/',
     icon: 'beaker' as const,
     color: 'cyan' as const,
   },
   {
     title: 'CO₂ Calculator',
     description: 'Calculate CO₂ levels from pH and KH.',
-    href: '/calculators/co2-calculator',
+    href: '/calculators/co2-calculator/',
     icon: 'scale' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'EI Dosing Calculator',
+    description: 'Calculate Estimative Index fertilizer dosing for planted tanks.',
+    href: '/calculators/ei-dosing-calculator/',
+    icon: 'leaf' as const,
     color: 'green' as const,
   },
 ];
@@ -107,6 +114,21 @@ const schemaBreadcrumbs = [
     <WaterChangeCalculator client:load />
   </section>
 
+  <ContentSection title="How Much Water Should I Change">
+    <p>
+      Most freshwater tanks need a <strong>10-30% water change weekly</strong>, keeping nitrate
+      under the <strong>20 ppm</strong> safe threshold this calculator uses, with 40 ppm as the upper
+      warning level before a change becomes urgent. A water change is a dilution, not a removal: a 50%
+      change cuts a parameter in half, a 25% change reduces it by a quarter, and a 75% change removes
+      three-quarters, each time you do it.
+    </p>
+    <p>
+      The calculator applies that dilution formula to your tank size and current reading, so you can
+      see the exact level after your next change and how many changes it takes to reach a target,
+      rather than guessing at a percentage.
+    </p>
+  </ContentSection>
+
   <ContentSection title="Water Parameter Guidelines">
     <p>
       Regular water changes are essential for maintaining healthy water parameters. Different fish
@@ -152,24 +174,21 @@ const schemaBreadcrumbs = [
         </span>
       </div>
       <p class="text-sm text-[var(--color-subtle)]">
-        This formula shows how your parameter level changes after a water change. If your new water
-        has 0 ppm of the parameter (like nitrate-free tap water), a 50% water change cuts the level
-        in half each time.
+        This formula shows how your parameter level changes after a water change. When your new
+        water has 0 ppm of the parameter (like nitrate-free tap water), the worked examples below
+        trace how repeated changes at a fixed percentage bring a 40 ppm reading down step by step.
       </p>
       <div class="grid md:grid-cols-3 gap-4 mt-4 text-sm">
         <div class="bg-[var(--color-background)] rounded p-3">
           <div class="font-semibold text-[var(--color-text)]">25% Change</div>
-          <div class="text-[var(--color-subtle)]">Reduces by 25% each time</div>
           <div class="text-xs text-amber-400 mt-1">40ppm → 30 → 22.5 → 17</div>
         </div>
         <div class="bg-[var(--color-background)] rounded p-3">
           <div class="font-semibold text-[var(--color-text)]">50% Change</div>
-          <div class="text-[var(--color-subtle)]">Cuts in half each time</div>
           <div class="text-xs text-amber-400 mt-1">40ppm → 20 → 10 → 5</div>
         </div>
         <div class="bg-[var(--color-background)] rounded p-3">
           <div class="font-semibold text-[var(--color-text)]">75% Change</div>
-          <div class="text-[var(--color-subtle)]">Reduces by 75% each time</div>
           <div class="text-xs text-amber-400 mt-1">40ppm → 10 → 2.5 → 0.6</div>
         </div>
       </div>

@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/event-seating-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Event Seating Calculator' },
 ];
 
@@ -28,23 +28,30 @@ const relatedCalculators = [
   {
     title: 'Catering Calculator',
     description: 'Plan food quantities for your event.',
-    href: '/calculators/catering-calculator',
+    href: '/calculators/catering-calculator/',
     icon: 'chart' as const,
     color: 'red' as const,
   },
   {
     title: 'Wedding Alcohol Calculator',
     description: 'Plan bar quantities for weddings.',
-    href: '/calculators/wedding-alcohol-calculator',
+    href: '/calculators/wedding-alcohol-calculator/',
     icon: 'trending' as const,
     color: 'green' as const,
   },
   {
     title: 'Conference Room Calculator',
     description: 'Plan meeting room layouts.',
-    href: '/calculators/conference-room-calculator',
+    href: '/calculators/conference-room-calculator/',
     icon: 'home' as const,
     color: 'blue' as const,
+  },
+  {
+    title: 'Wedding and Event Planning Guide',
+    description: 'Compare all wedding and event planning calculators in one place.',
+    href: '/guides/best-wedding-event-calculators/',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
   },
 ];
 

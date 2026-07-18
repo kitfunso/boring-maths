@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Tipping Guide Calculator' },
 ];
 
@@ -33,15 +33,22 @@ const relatedCalculators = [
   {
     title: 'Tip Calculator',
     description: 'Calculate tips and split bills between friends.',
-    href: '/calculators/tip-calculator',
+    href: '/calculators/tip-calculator/',
     icon: 'percent' as const,
     color: 'green' as const,
   },
   {
     title: 'Currency Converter',
     description: 'Convert between world currencies with live rates.',
-    href: '/calculators/currency-converter',
+    href: '/calculators/currency-converter/',
     icon: 'swap' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Vacation Budget Calculator',
+    description: 'Plan costs for your next trip.',
+    href: '/calculators/vacation-budget-calculator/',
+    icon: 'trending' as const,
     color: 'green' as const,
   },
 ];

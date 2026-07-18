@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import FreelanceDayRateCalculator from '../../components/calculators/FreelanceDayRate/FreelanceDayRateCalculator';
 
 // SEO Configuration
-const title = 'Free Freelance Day Rate Calculator — vs Salary + Tax | Boring Math';
+const title = 'Free Freelance Day Rate Calculator: vs Salary + Tax | Boring Math';
 const description =
   'A £60,000 employee salary converts to roughly a £350/day contractor rate once you account for holidays, sick days, pension, employer NIC, and business costs. Calculator converts any salary to equivalent day rate.';
 const keywords =
@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Freelance Day Rate' },
 ];
 
@@ -33,30 +33,37 @@ const relatedCalculators = [
   {
     title: 'W2 to 1099 Calculator',
     description: 'Convert your W2 hourly rate to the equivalent 1099 contractor rate.',
-    href: '/calculators/w2-to-1099-calculator',
+    href: '/calculators/w2-to-1099-calculator/',
     icon: 'calculator' as const,
     color: 'green' as const,
   },
   {
     title: 'W2 vs 1099 Guide',
     description: 'Complete guide to employee vs contractor pay.',
-    href: '/calculators/income/w2-vs-1099',
+    href: '/calculators/income/w2-vs-1099/',
     icon: 'chart' as const,
     color: 'green' as const,
   },
   {
     title: 'Consulting Rate Calculator',
     description: 'Calculate your optimal consulting rate.',
-    href: '/calculators/consulting-rate-calculator',
+    href: '/calculators/consulting-rate-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'Contractor vs Employee Calculator',
     description: 'Compare 1099 contractor vs W2 employee pay.',
-    href: '/calculators/contractor-vs-employee-calculator',
+    href: '/calculators/contractor-vs-employee-calculator/',
     icon: 'calculator' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Go Full-Time Calculator',
+    description: 'See when your side income can replace your salary.',
+    href: '/calculators/go-full-time-calculator/',
+    icon: 'trending' as const,
+    color: 'purple' as const,
   },
 ];
 

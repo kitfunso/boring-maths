@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { MacroCalculator } from '../../components/calculators/MacroCalculator';
 
-const title = 'Free Macro Calculator — Calculate Your Daily Protein, Carbs & Fat | Boring Math';
+const title = 'Free Macro Calculator: Calculate Your Daily Protein, Carbs & Fat | Boring Math';
 const description =
   'Free macro calculator to find your optimal daily protein, carbs, and fat intake. Based on your body metrics, activity level, and fitness goals.';
 const keywords =
@@ -18,20 +18,23 @@ const keywords =
 const canonicalURL = '/calculators/macro-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'Macro Calculator' }];
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Macro Calculator' },
+];
 
 const relatedCalculators = [
   {
     title: 'Calorie Calculator',
     description: 'Calculate your daily calorie needs.',
-    href: '/calculators/calorie-calculator',
+    href: '/calculators/calorie-calculator/',
     icon: 'fire' as const,
     color: 'red' as const,
   },
   {
     title: 'BMI Calculator',
     description: 'Check your body mass index.',
-    href: '/calculators/bmi-calculator',
+    href: '/calculators/bmi-calculator/',
     icon: 'scale' as const,
     color: 'blue' as const,
   },

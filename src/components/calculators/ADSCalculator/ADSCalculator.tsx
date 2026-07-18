@@ -2,7 +2,7 @@
  * ADS Calculator - React Component
  *
  * Calculate Additional Dwelling Supplement (ADS) for Scotland
- * ADS is 6% on top of LBTT for additional properties.
+ * ADS is 8% on top of LBTT for additional properties.
  */
 import { calculateADS, formatCurrency, formatPercent } from './calculations';
 import {
@@ -174,7 +174,7 @@ export default function ADSCalculator() {
                       Additional Dwelling Supplement Applies
                     </p>
                     <p className="text-sm text-[var(--color-subtle)] mt-1">
-                      ADS of 6% ({formatCurrency(result.adsAmount)}) is charged on the full purchase
+                      ADS of 8% ({formatCurrency(result.adsAmount)}) is charged on the full purchase
                       price for additional properties in Scotland.
                     </p>
                   </div>
@@ -265,7 +265,7 @@ export default function ADSCalculator() {
                       {adsApplies && (
                         <tr className="bg-purple-950/30">
                           <td className="px-4 py-3 text-sm font-semibold text-purple-400">
-                            + ADS (6%)
+                            + ADS (8%)
                           </td>
                           <td></td>
                           <td className="text-right px-4 py-3 text-sm font-bold text-purple-400">

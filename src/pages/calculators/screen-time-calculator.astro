@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Screen Time Calculator' },
 ];
 
@@ -33,21 +33,21 @@ const relatedCalculators = [
   {
     title: 'Coffee Spend Calculator',
     description: 'Calculate how much your daily coffee habit costs per year.',
-    href: '/calculators/coffee-spend-calculator',
+    href: '/calculators/coffee-spend-calculator/',
     icon: 'fire' as const,
     color: 'amber' as const,
   },
   {
     title: 'Sleep Calculator',
     description: 'Find your optimal bedtime based on sleep cycles.',
-    href: '/calculators/sleep-calculator',
+    href: '/calculators/sleep-calculator/',
     icon: 'bolt' as const,
     color: 'ocean' as const,
   },
   {
     title: 'Age Calculator',
     description: 'Calculate your exact age and life statistics.',
-    href: '/calculators/age-calculator',
+    href: '/calculators/age-calculator/',
     icon: 'calendar' as const,
     color: 'violet' as const,
   },
@@ -128,6 +128,23 @@ const schemaBreadcrumbs = [
     <ScreenTimeCalculator client:load />
   </section>
 
+  <!-- Answer-First: How Much Screen Time Is Average -->
+  <ContentSection title="How Much Screen Time Is Average">
+    <p>
+      Average daily screen time is <strong>4.5 hours for children (6-12)</strong>,
+      <strong>7 hours for teens (13-17)</strong>, and <strong>6.5 hours for adults</strong>, the
+      age-group baselines this calculator uses to benchmark your own total. At 5 hours a day, that
+      works out to over 76 days a year once you convert total hours into full 24-hour days.
+    </p>
+    <p>
+      The lifetime projection extends that yearly total across the years typically left at your
+      current rate: about <strong>70 remaining years for children</strong>,
+      <strong>63 for teens</strong>, and <strong>50 for adults</strong>. Multiply yearly hours by
+      those remaining years and convert to years, and habitual use adds up to several years of a
+      lifetime spent looking at a screen.
+    </p>
+  </ContentSection>
+
   <!-- How to Use Section -->
   <ContentSection title="How to Use This Calculator">
     <p>
@@ -152,7 +169,7 @@ const schemaBreadcrumbs = [
   <ContentSection title="Understanding Your Results">
     <p>
       <strong>Yearly Days</strong> shows your total daily screen time converted into full 24-hour days
-      per year. At 5 hours per day, that is over 76 days.
+      per year, so you can see the annual footprint of your current habits at a glance.
     </p>
     <p>
       <strong>Lifetime Projection</strong> estimates total screen years based on remaining life expectancy

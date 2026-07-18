@@ -9,16 +9,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title =
-  'Best Free Salary and Income Calculators 2026 — Hourly to Salary, Pay Raise, Overtime and Job Offers';
+  'Best Free Salary and Income Calculators 2026: Hourly to Salary, Pay Raise, Overtime and Job Offers';
 const description =
-  'The best free salary and income calculators — hourly to salary conversion, pay raise impact, overtime pay, job offer comparison, consulting rates, and remote work savings. No signup required.';
+  'The best free salary and income calculators - hourly to salary conversion, pay raise impact, overtime pay, job offer comparison, consulting rates, and remote work savings. No signup required.';
 const canonicalURL = '/guides/best-salary-income-calculators';
 
 const calculators = [
   {
     rank: 1,
     name: 'Salary to Hourly Calculator',
-    href: '/calculators/salary-to-hourly-calculator',
+    href: '/calculators/salary-to-hourly-calculator/',
     description:
       'Converts annual salary to hourly, weekly, and monthly rates accounting for working hours and weeks per year.',
     bestFor: 'Anyone comparing salary and hourly job offers.',
@@ -26,7 +26,7 @@ const calculators = [
   {
     rank: 2,
     name: 'Hourly to Salary Calculator',
-    href: '/calculators/hourly-to-salary-calculator',
+    href: '/calculators/hourly-to-salary-calculator/',
     description:
       'Converts hourly pay rate to annual salary equivalent based on hours per week and weeks per year.',
     bestFor: 'Hourly workers wanting to know their annual equivalent income.',
@@ -34,7 +34,7 @@ const calculators = [
   {
     rank: 3,
     name: 'Raise Calculator',
-    href: '/calculators/raise-calculator',
+    href: '/calculators/raise-calculator/',
     description:
       'Calculates the impact of a pay raise in pounds or dollars, showing new salary, monthly increase, and effective hourly rate change.',
     bestFor: 'Anyone who received or is negotiating a raise and wants to see the real impact.',
@@ -42,7 +42,7 @@ const calculators = [
   {
     rank: 4,
     name: 'Overtime Calculator',
-    href: '/calculators/overtime-calculator',
+    href: '/calculators/overtime-calculator/',
     description:
       'Calculates overtime pay at time-and-a-half or double-time rates based on hourly rate, regular hours, and overtime hours worked.',
     bestFor: 'Hourly employees calculating expected overtime earnings.',
@@ -50,7 +50,7 @@ const calculators = [
   {
     rank: 5,
     name: 'Job Offer Comparison Calculator',
-    href: '/calculators/job-offer-comparison-calculator',
+    href: '/calculators/job-offer-comparison-calculator/',
     description:
       'Compares two or more job offers side by side including salary, benefits, bonus, commute costs, and perks to find the best total package.',
     bestFor: 'Anyone choosing between multiple job offers.',
@@ -58,7 +58,7 @@ const calculators = [
   {
     rank: 6,
     name: 'Consulting Rate Calculator',
-    href: '/calculators/consulting-rate-calculator',
+    href: '/calculators/consulting-rate-calculator/',
     description:
       'Calculates a target consulting hourly or day rate based on desired income, billable hours, overhead, and profit margin.',
     bestFor: 'Consultants and coaches setting project or retainer rates.',
@@ -66,7 +66,7 @@ const calculators = [
   {
     rank: 7,
     name: 'Remote Work Savings Calculator',
-    href: '/calculators/remote-work-savings-calculator',
+    href: '/calculators/remote-work-savings-calculator/',
     description:
       'Estimates annual savings from working remotely including commute, lunch, wardrobe, and childcare costs avoided.',
     bestFor: 'Anyone evaluating whether a remote job offer is worth a salary cut.',
@@ -112,7 +112,7 @@ const schemaData = {
     {
       '@type': 'ItemList',
       name: 'Best Free Salary and Income Calculators 2026',
-      url: 'https://boring-math.com/guides/best-salary-income-calculators',
+      url: 'https://boring-math.com/guides/best-salary-income-calculators/',
       numberOfItems: calculators.length,
       itemListElement: calculators.map((c, i) => ({
         '@type': 'ListItem',
@@ -144,7 +144,7 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › Best Salary and Income Calculators 2026
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Salary and Income Calculators 2026
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
@@ -223,22 +223,23 @@ const schemaData = {
         <ul>
           <li>
             If you want to compare a salary job with an hourly job, use the <a
-              href="/calculators/salary-to-hourly-calculator">Salary to Hourly Calculator</a
-            > or <a href="/calculators/hourly-to-salary-calculator">Hourly to Salary Calculator</a> to
+              href="/calculators/salary-to-hourly-calculator/">Salary to Hourly Calculator</a
+            > or <a href="/calculators/hourly-to-salary-calculator/">Hourly to Salary Calculator</a> to
             put both on the same basis.
           </li>
           <li>
             If you received a raise offer and want to know the real monthly impact after tax, use
-            the <a href="/calculators/raise-calculator">Raise Calculator</a>.
+            the <a href="/calculators/raise-calculator/">Raise Calculator</a>.
           </li>
           <li>
             If you are choosing between multiple job offers, the <a
-              href="/calculators/job-offer-comparison-calculator">Job Offer Comparison Calculator</a
+              href="/calculators/job-offer-comparison-calculator/"
+              >Job Offer Comparison Calculator</a
             > factors in benefits, commute, and perks beyond base salary.
           </li>
           <li>
             If you are going freelance or consulting, the <a
-              href="/calculators/consulting-rate-calculator">Consulting Rate Calculator</a
+              href="/calculators/consulting-rate-calculator/">Consulting Rate Calculator</a
             > works backwards from your target income to set the right day rate.
           </li>
         </ul>
@@ -260,7 +261,7 @@ const schemaData = {
         <h2>Browse More Calculators</h2>
         <p>
           Boring Math has 150+ free calculators covering salary, tax, pensions, property, savings,
-          freelance, and everyday finance. <a href="/calculators">Browse the full list →</a>
+          freelance, and everyday finance. <a href="/calculators/">Browse the full list →</a>
         </p>
       </section>
     </div>

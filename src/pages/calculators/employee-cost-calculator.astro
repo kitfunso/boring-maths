@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import EmployeeCost from '../../components/calculators/EmployeeCost/EmployeeCost';
 
 // SEO Configuration
-const title = 'Free Employee Cost Calculator — True Cost of Hiring | Boring Math';
+const title = 'Free Employee Cost Calculator: True Cost of Hiring | Boring Math';
 const description =
   'Calculate the true cost of an employee including salary, benefits, taxes, and overhead. Understand the 1.25-1.4x burden multiplier and calculate billable rates.';
 const keywords =
@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Employee Cost Calculator' },
 ];
 
@@ -33,16 +33,31 @@ const relatedCalculators = [
   {
     title: 'Consulting Rate Calculator',
     description: 'Calculate what to charge as a consultant.',
-    href: '/calculators/consulting-rate-calculator',
+    href: '/calculators/consulting-rate-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'Startup Cost Calculator',
     description: 'Estimate total costs to start your business.',
-    href: '/calculators/startup-cost-calculator',
+    href: '/calculators/startup-cost-calculator/',
     icon: 'trending' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Break-Even Calculator',
+    description: 'Find out how many sales cover this new cost.',
+    href: '/calculators/break-even-calculator/',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'UK Employer Cost Calculator',
+    description:
+      'Compare with the UK-specific version covering NIC, pension, and apprenticeship levy.',
+    href: '/calculators/uk-employer-cost-calculator/',
+    icon: 'calculator' as const,
+    color: 'ocean' as const,
   },
 ];
 

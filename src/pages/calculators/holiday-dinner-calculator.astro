@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import HolidayDinnerCalculator from '../../components/calculators/HolidayDinnerCalculator/HolidayDinnerCalculator';
 
-const title = 'Free Holiday Dinner Calculator — Turkey Size & Side Dish Planner | Boring Math';
+const title = 'Free Holiday Dinner Calculator: Turkey Size & Side Dish Planner | Boring Math';
 const description =
   'Calculate the perfect turkey size and side dish quantities for Thanksgiving or Christmas dinner. Get cooking times, thawing schedules, and a complete preparation timeline.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/holiday-dinner-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Holiday Dinner Calculator' },
 ];
 
@@ -28,23 +28,37 @@ const relatedCalculators = [
   {
     title: 'Catering Calculator',
     description: 'Plan large holiday gatherings.',
-    href: '/calculators/catering-calculator',
+    href: '/calculators/catering-calculator/',
     icon: 'chart' as const,
     color: 'red' as const,
   },
   {
     title: 'BBQ Calculator',
     description: 'Plan meat quantities for cookouts.',
-    href: '/calculators/bbq-calculator',
+    href: '/calculators/bbq-calculator/',
     icon: 'trending' as const,
     color: 'red' as const,
   },
   {
     title: 'Savings Goal Calculator',
     description: 'Budget for holiday expenses.',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     icon: 'home' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Leftovers Calculator',
+    description: 'Check how long your cooked leftovers stay safe to eat.',
+    href: '/calculators/leftovers-calculator/',
+    icon: 'shield' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Wedding and Event Planning Guide',
+    description: 'Compare all wedding and event planning calculators in one place.',
+    href: '/guides/best-wedding-event-calculators/',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
   },
 ];
 

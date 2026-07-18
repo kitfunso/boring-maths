@@ -8,13 +8,13 @@
  *   - age 22 to 40 (inclusive) during that year: 1.0 week's pay
  *   - age 41 and over during that year: 1.5 week's pay
  * A maximum of 20 years of service can be counted (most recent 20).
- * Weekly pay is capped for the statutory figure. The cap is GBP 719 from
- * 6 April 2025 (2025/26 tax year). The maximum statutory total is therefore
- * 20 x 1.5 x GBP 719 = GBP 21,570.
+ * Weekly pay is capped for the statutory figure. The cap is GBP 751 from
+ * 6 April 2026 (2026/27 tax year). The maximum statutory total is therefore
+ * 20 x 1.5 x GBP 751 = GBP 22,530.
  */
 
-// 2025/26 statutory limits, effective 6 April 2025.
-export const STATUTORY_WEEKLY_PAY_CAP = 719;
+// 2026/27 statutory limits, effective 6 April 2026.
+export const STATUTORY_WEEKLY_PAY_CAP = 751;
 export const MAX_YEARS_COUNTED = 20;
 export const MIN_YEARS_FOR_ELIGIBILITY = 2;
 

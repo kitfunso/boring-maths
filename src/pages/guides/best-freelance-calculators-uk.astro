@@ -8,16 +8,16 @@
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const title = 'Best Freelance and Contractor Calculators UK — Day Rate, W2 to 1099, IR35';
+const title = 'Best Freelance and Contractor Calculators UK: Day Rate, W2 to 1099, IR35';
 const description =
-  'The best free freelance and contractor calculators — UK day rate, contractor vs employee, W2 to 1099 conversion, side hustle profitability, and consulting rates. No signup required.';
+  'The best free freelance and contractor calculators - UK day rate, contractor vs employee, W2 to 1099 conversion, side hustle profitability, and consulting rates. No signup required.';
 const canonicalURL = '/guides/best-freelance-calculators-uk';
 
 const calculators = [
   {
     rank: 1,
     name: 'Freelance Day Rate Calculator',
-    href: '/calculators/freelance-day-rate-calculator',
+    href: '/calculators/freelance-day-rate-calculator/',
     description:
       'Calculates what you need to charge per day as a freelancer to match a target annual salary, accounting for unpaid holidays, sick days, tax, and business expenses.',
     bestFor:
@@ -26,7 +26,7 @@ const calculators = [
   {
     rank: 2,
     name: 'W2 to 1099 Calculator',
-    href: '/calculators/w2-to-1099-calculator',
+    href: '/calculators/w2-to-1099-calculator/',
     description:
       'Converts a US W2 hourly or annual rate to the equivalent 1099 contractor rate, accounting for self-employment tax, benefits, and paid time off that contractors must fund themselves.',
     bestFor: 'US workers switching from employment to contracting, or comparing job offers.',
@@ -34,7 +34,7 @@ const calculators = [
   {
     rank: 3,
     name: 'Contractor vs Employee Calculator',
-    href: '/calculators/contractor-vs-employee-calculator',
+    href: '/calculators/contractor-vs-employee-calculator/',
     description:
       'Compares the true financial difference between contracting and employment, including tax treatment, benefits, pension, and day rate vs salary.',
     bestFor: 'UK workers deciding whether to go limited company, umbrella, or stay employed.',
@@ -42,7 +42,7 @@ const calculators = [
   {
     rank: 4,
     name: 'Go Full-Time Calculator',
-    href: '/calculators/go-full-time-calculator',
+    href: '/calculators/go-full-time-calculator/',
     description:
       'Calculates whether your side hustle earns enough to replace your salary, accounting for tax, loss of employment benefits, and income variability.',
     bestFor: 'Anyone considering quitting their job to run their business full-time.',
@@ -50,7 +50,7 @@ const calculators = [
   {
     rank: 5,
     name: 'Side Hustle Profitability Calculator',
-    href: '/calculators/side-hustle-profitability-calculator',
+    href: '/calculators/side-hustle-profitability-calculator/',
     description:
       'Calculates true hourly earnings from a side hustle after expenses, tax, and time spent on admin — not just gross revenue.',
     bestFor: "Anyone with a side hustle who wants to know if it's actually worth their time.",
@@ -58,7 +58,7 @@ const calculators = [
   {
     rank: 6,
     name: 'Consulting Rate Calculator',
-    href: '/calculators/consulting-rate-calculator',
+    href: '/calculators/consulting-rate-calculator/',
     description:
       'Calculates a target consulting day or hourly rate based on desired income, billable hours, overhead costs, and desired profit margin.',
     bestFor: 'Consultants and coaches setting project or retainer rates.',
@@ -104,7 +104,7 @@ const schemaData = {
     {
       '@type': 'ItemList',
       name: 'Best Freelance and Contractor Calculators UK',
-      url: 'https://boring-math.com/guides/best-freelance-calculators-uk',
+      url: 'https://boring-math.com/guides/best-freelance-calculators-uk/',
       numberOfItems: calculators.length,
       itemListElement: calculators.map((c, i) => ({
         '@type': 'ListItem',
@@ -136,7 +136,7 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › Best Freelance Calculators UK
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Freelance Calculators UK
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
@@ -214,23 +214,23 @@ const schemaData = {
         <ul>
           <li>
             If you're a UK freelancer setting or reviewing your day rate, start with the <a
-              href="/calculators/freelance-day-rate-calculator">Freelance Day Rate Calculator</a
+              href="/calculators/freelance-day-rate-calculator/">Freelance Day Rate Calculator</a
             >.
           </li>
           <li>
             If you're a US worker comparing a W2 job offer to a 1099 contract, use the <a
-              href="/calculators/w2-to-1099-calculator">W2 to 1099 Calculator</a
+              href="/calculators/w2-to-1099-calculator/">W2 to 1099 Calculator</a
             > to see the true equivalent rate.
           </li>
           <li>
             If you're deciding between going limited company or staying employed in the UK, the <a
-              href="/calculators/contractor-vs-employee-calculator"
+              href="/calculators/contractor-vs-employee-calculator/"
               >Contractor vs Employee Calculator</a
             > breaks down the full financial picture.
           </li>
           <li>
             If you're thinking about quitting your job for your side hustle, run the numbers through
-            the <a href="/calculators/go-full-time-calculator">Go Full-Time Calculator</a> first.
+            the <a href="/calculators/go-full-time-calculator/">Go Full-Time Calculator</a> first.
           </li>
         </ul>
       </section>
@@ -251,7 +251,7 @@ const schemaData = {
         <h2>Browse More Calculators</h2>
         <p>
           Boring Math has 150+ free calculators covering UK tax, pensions, property, savings,
-          freelance, and everyday finance. <a href="/calculators">Browse the full list →</a>
+          freelance, and everyday finance. <a href="/calculators/">Browse the full list →</a>
         </p>
       </section>
     </div>

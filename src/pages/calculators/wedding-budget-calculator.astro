@@ -10,7 +10,7 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import WeddingBudget from '../../components/calculators/WeddingBudget/WeddingBudget';
 
-const title = 'Free Wedding Budget Calculator — Plan Your Perfect Day | Boring Math';
+const title = 'Free Wedding Budget Calculator: Plan Your Perfect Day | Boring Math';
 const description =
   'Plan your wedding budget with our free calculator. Get recommended allocations for venue, catering, photography, and more based on your total budget and guest count.';
 const keywords =
@@ -20,7 +20,7 @@ const canonicalURL = '/calculators/wedding-budget-calculator';
 const siteUrl = 'https://boring-math.com';
 
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Wedding Budget Calculator' },
 ];
 
@@ -28,23 +28,37 @@ const relatedCalculators = [
   {
     title: 'Wedding Alcohol Calculator',
     description: 'Calculate drinks for your reception.',
-    href: '/calculators/wedding-alcohol-calculator',
+    href: '/calculators/wedding-alcohol-calculator/',
     icon: 'calculator' as const,
     color: 'purple' as const,
   },
   {
     title: 'Savings Goal Calculator',
     description: 'Save for your wedding day.',
-    href: '/calculators/savings-goal-calculator',
+    href: '/calculators/savings-goal-calculator/',
     icon: 'trending' as const,
     color: 'green' as const,
   },
   {
     title: 'Emergency Fund Calculator',
     description: 'Build savings before the big day.',
-    href: '/calculators/emergency-fund-calculator',
+    href: '/calculators/emergency-fund-calculator/',
     icon: 'shield' as const,
     color: 'blue' as const,
+  },
+  {
+    title: 'Catering Calculator',
+    description: 'Calculate food quantities for your reception.',
+    href: '/calculators/catering-calculator/',
+    icon: 'chart' as const,
+    color: 'red' as const,
+  },
+  {
+    title: 'Wedding and Event Planning Guide',
+    description: 'Compare all wedding and event planning calculators in one place.',
+    href: '/guides/best-wedding-event-calculators/',
+    icon: 'calendar' as const,
+    color: 'violet' as const,
   },
 ];
 

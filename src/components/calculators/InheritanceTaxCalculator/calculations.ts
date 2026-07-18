@@ -1,6 +1,6 @@
 /**
  * UK Inheritance Tax Calculations
- * 2024/25 rates – nil-rate band frozen until April 2028
+ * 2026/27 rates - nil-rate band frozen until April 2031 (extended at Budget 2025)
  */
 
 import type { IHTInputs, IHTResult } from './types';

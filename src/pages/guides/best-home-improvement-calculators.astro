@@ -9,16 +9,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title =
-  'Best Free Home Improvement Calculators 2026 — Paint, Tile, Flooring, Fencing and More';
+  'Best Free Home Improvement Calculators 2026: Paint, Tile, Flooring, Fencing and More';
 const description =
-  'The best free home improvement calculators — how much paint, tile, flooring, mulch, and fencing you need, plus solar panel savings and electricity costs. No signup required.';
+  'The best free home improvement calculators - how much paint, tile, flooring, mulch, and fencing you need, plus solar panel savings and electricity costs. No signup required.';
 const canonicalURL = '/guides/best-home-improvement-calculators';
 
 const calculators = [
   {
     rank: 1,
     name: 'Paint Calculator',
-    href: '/calculators/paint-calculator',
+    href: '/calculators/paint-calculator/',
     description:
       'Calculates how many litres or gallons of paint you need based on room dimensions, number of coats, and door/window exclusions.',
     bestFor: 'Anyone painting a room and wanting to buy the right amount.',
@@ -26,7 +26,7 @@ const calculators = [
   {
     rank: 2,
     name: 'Tile Calculator',
-    href: '/calculators/tile-calculator',
+    href: '/calculators/tile-calculator/',
     description:
       'Calculates how many tiles you need for a floor or wall, including wastage allowance for cuts and breakage.',
     bestFor: 'DIYers tiling a bathroom, kitchen, or floor.',
@@ -34,7 +34,7 @@ const calculators = [
   {
     rank: 3,
     name: 'Flooring Calculator',
-    href: '/calculators/flooring-calculator',
+    href: '/calculators/flooring-calculator/',
     description:
       'Calculates how much flooring material (laminate, hardwood, vinyl) you need based on room dimensions with waste factor.',
     bestFor: 'Anyone installing new flooring and ordering materials.',
@@ -42,7 +42,7 @@ const calculators = [
   {
     rank: 4,
     name: 'Square Footage Calculator',
-    href: '/calculators/square-footage-calculator',
+    href: '/calculators/square-footage-calculator/',
     description:
       'Calculates area in square feet or square metres for rooms, gardens, or any rectangular, circular, or irregular spaces.',
     bestFor: 'Anyone measuring space for materials, rent, or property listings.',
@@ -50,7 +50,7 @@ const calculators = [
   {
     rank: 5,
     name: 'Mulch Calculator',
-    href: '/calculators/mulch-calculator',
+    href: '/calculators/mulch-calculator/',
     description:
       'Calculates how many bags or cubic yards of mulch you need for a garden bed based on area and desired depth.',
     bestFor: 'Gardeners preparing beds for the season.',
@@ -58,7 +58,7 @@ const calculators = [
   {
     rank: 6,
     name: 'Fence Calculator',
-    href: '/calculators/fence-calculator',
+    href: '/calculators/fence-calculator/',
     description:
       'Calculates how many posts, panels, rails, and concrete bags you need for a fence based on total length and panel width.',
     bestFor: 'Anyone building or replacing a garden fence.',
@@ -66,7 +66,7 @@ const calculators = [
   {
     rank: 7,
     name: 'Solar Panel Calculator',
-    href: '/calculators/solar-panel-calculator',
+    href: '/calculators/solar-panel-calculator/',
     description:
       'Estimates how many solar panels you need, annual energy generation, savings on electricity bills, and payback period.',
     bestFor: 'Homeowners considering solar installation.',
@@ -74,7 +74,7 @@ const calculators = [
   {
     rank: 8,
     name: 'Electricity Cost Calculator',
-    href: '/calculators/electricity-cost-calculator',
+    href: '/calculators/electricity-cost-calculator/',
     description:
       'Calculates the running cost of any appliance based on wattage, usage hours, and your electricity rate.',
     bestFor: 'Anyone wanting to understand which appliances cost the most to run.',
@@ -120,7 +120,7 @@ const schemaData = {
     {
       '@type': 'ItemList',
       name: 'Best Free Home Improvement Calculators 2026',
-      url: 'https://boring-math.com/guides/best-home-improvement-calculators',
+      url: 'https://boring-math.com/guides/best-home-improvement-calculators/',
       numberOfItems: calculators.length,
       itemListElement: calculators.map((c, i) => ({
         '@type': 'ListItem',
@@ -152,7 +152,7 @@ const schemaData = {
     <div class="container">
       <header class="guide-header">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a> › <a href="/guides">Guides</a> › Best Home Improvement Calculators
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Home Improvement Calculators
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
@@ -230,26 +230,26 @@ const schemaData = {
         <h2>How to Choose</h2>
         <ul>
           <li>
-            If you're painting a room, use the <a href="/calculators/paint-calculator"
+            If you're painting a room, use the <a href="/calculators/paint-calculator/"
               >Paint Calculator</a
             > to buy the right number of litres and avoid waste or return trips.
           </li>
           <li>
-            If you're tiling or laying flooring, the <a href="/calculators/tile-calculator"
+            If you're tiling or laying flooring, the <a href="/calculators/tile-calculator/"
               >Tile Calculator</a
-            > and <a href="/calculators/flooring-calculator">Flooring Calculator</a> both include wastage
+            > and <a href="/calculators/flooring-calculator/">Flooring Calculator</a> both include wastage
             factors so you order enough material without overspending.
           </li>
           <li>
             If you're working on an outdoor project like a garden bed or fence, the <a
-              href="/calculators/mulch-calculator">Mulch Calculator</a
-            > and <a href="/calculators/fence-calculator">Fence Calculator</a> give you exact quantities
+              href="/calculators/mulch-calculator/">Mulch Calculator</a
+            > and <a href="/calculators/fence-calculator/">Fence Calculator</a> give you exact quantities
             for materials.
           </li>
           <li>
             If you're considering solar panels or want to reduce energy bills, the <a
-              href="/calculators/solar-panel-calculator">Solar Panel Calculator</a
-            > estimates payback period and the <a href="/calculators/electricity-cost-calculator"
+              href="/calculators/solar-panel-calculator/">Solar Panel Calculator</a
+            > estimates payback period and the <a href="/calculators/electricity-cost-calculator/"
               >Electricity Cost Calculator</a
             > shows which appliances cost the most to run.
           </li>
@@ -272,7 +272,7 @@ const schemaData = {
         <h2>Browse More Calculators</h2>
         <p>
           Boring Math has 150+ free calculators covering home improvement, DIY, energy, finance, and
-          everyday maths. <a href="/calculators">Browse the full list →</a>
+          everyday maths. <a href="/calculators/">Browse the full list →</a>
         </p>
       </section>
     </div>

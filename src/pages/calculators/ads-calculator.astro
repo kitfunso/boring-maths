@@ -12,49 +12,49 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { ADSCalculator } from '../../components/calculators/ADSCalculator';
 
 const title =
-  'Additional Dwelling Supplement Calculator (Scotland ADS + LBTT 2025/26) | Boring Math';
+  'Additional Dwelling Supplement Calculator (Scotland ADS + LBTT 2026/27) | Boring Math';
 const description =
-  "Calculate Scotland's Additional Dwelling Supplement (ADS) and LBTT in seconds. See your exact 6% ADS bill on second homes and buy-to-let purchases with worked examples.";
+  "Calculate Scotland's Additional Dwelling Supplement (ADS) and LBTT in seconds. See your exact 8% ADS bill on second homes and buy-to-let purchases with worked examples.";
 const keywords =
   'additional dwelling supplement calculator, additional dwelling supplement, ads calculator scotland, scotland property tax, lbtt calculator, scotland stamp duty, second home tax scotland, buy to let scotland, ads tax rate, scotland additional dwelling';
 const canonicalURL = '/calculators/ads-calculator';
 const siteUrl = 'https://boring-math.com';
 
-const breadcrumbs = [{ label: 'Calculators', href: '/calculators' }, { label: 'ADS Calculator' }];
+const breadcrumbs = [{ label: 'Calculators', href: '/calculators/' }, { label: 'ADS Calculator' }];
 
 const relatedCalculators = [
   {
     title: 'ADS Guide (Scotland)',
     description: 'Worked examples for additional dwelling supplement bills.',
-    href: '/calculators/uk-tax/additional-dwelling-supplement-explained',
+    href: '/calculators/uk-tax/additional-dwelling-supplement-explained/',
     icon: 'chart' as const,
     color: 'amber' as const,
   },
   {
     title: 'UK Stamp Duty Guide',
-    description: 'Complete SDLT, LBTT & LTT guide 2025/26.',
-    href: '/calculators/uk-tax/stamp-duty',
+    description: 'Complete SDLT, LBTT & LTT guide 2026/27.',
+    href: '/calculators/uk-tax/stamp-duty/',
     icon: 'chart' as const,
     color: 'blue' as const,
   },
   {
     title: 'UK Stamp Duty Calculator',
     description: 'Calculate SDLT for England, Scotland & Wales.',
-    href: '/calculators/uk-stamp-duty-calculator',
+    href: '/calculators/uk-stamp-duty-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'SDLT Calculator',
     description: 'England & NI Stamp Duty Land Tax.',
-    href: '/calculators/sdlt-calculator',
+    href: '/calculators/sdlt-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
   {
     title: 'Mortgage Calculator',
     description: 'Calculate monthly mortgage payments with PMI and taxes.',
-    href: '/calculators/mortgage-calculator',
+    href: '/calculators/mortgage-calculator/',
     icon: 'calculator' as const,
     color: 'blue' as const,
   },
@@ -64,12 +64,12 @@ const faqs = [
   {
     question: 'What is the Additional Dwelling Supplement (ADS)?',
     answer:
-      "The Additional Dwelling Supplement is an extra tax charged on purchases of additional residential properties in Scotland. It's 6% of the full purchase price, payable on top of the standard Land and Buildings Transaction Tax (LBTT). It applies to second homes, buy-to-let properties, and holiday homes.",
+      "The Additional Dwelling Supplement is an extra tax charged on purchases of additional residential properties in Scotland. It's 8% of the full purchase price, payable on top of the standard Land and Buildings Transaction Tax (LBTT). It applies to second homes, buy-to-let properties, and holiday homes.",
   },
   {
     question: 'What is the current ADS rate in Scotland?',
     answer:
-      'The ADS rate is 6% of the full purchase price for additional residential properties. This rate was increased from 4% in December 2022. Unlike LBTT which is banded, ADS is charged on the entire property value.',
+      'The ADS rate is 8% of the full purchase price for additional residential properties. It rose to 8% on 5 December 2024 (previously 6%). Unlike LBTT which is banded, ADS is charged on the entire property value.',
   },
   {
     question: 'When do I have to pay ADS?',
@@ -94,12 +94,12 @@ const faqs = [
   {
     question: 'How is ADS different from the English additional property surcharge?',
     answer:
-      "Scotland's ADS is 6% while England's additional property surcharge is 3%. Both are charged on the full purchase price. However, LBTT bands in Scotland are different from SDLT bands in England, so the total tax can vary significantly between the two nations.",
+      "Scotland's ADS is 8% while England's additional property surcharge is 5%. Both are charged on the full purchase price. However, LBTT bands in Scotland are different from SDLT bands in England, so the total tax can vary significantly between the two nations.",
   },
   {
     question: 'Do companies pay ADS?',
     answer:
-      'Yes, companies purchasing residential property in Scotland are subject to both LBTT and ADS. The 6% ADS applies to all additional residential property purchases, regardless of whether the buyer is an individual or a company.',
+      'Yes, companies purchasing residential property in Scotland are subject to both LBTT and ADS. The 8% ADS applies to all additional residential property purchases, regardless of whether the buyer is an individual or a company.',
   },
   {
     question: 'Are there any ADS exemptions?',
@@ -145,7 +145,7 @@ const schemaBreadcrumbs = [
       },
       {
         name: 'Toggle additional property',
-        text: 'Enable this if the property is a second home, buy-to-let, or you own property elsewhere to add the 6% ADS.',
+        text: 'Enable this if the property is a second home, buy-to-let, or you own property elsewhere to add the 8% ADS.',
       },
     ]}
     estimatedTime="PT2M"
@@ -153,7 +153,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="Additional Dwelling Supplement Calculator"
-    description="Free Scotland ADS calculator. Calculate the Additional Dwelling Supplement (6%) and LBTT for Scottish property purchases."
+    description="Free Scotland ADS calculator. Calculate the Additional Dwelling Supplement (8%) and LBTT for Scottish property purchases."
   />
 
   <section class="mb-16" aria-label="Calculator">
@@ -184,7 +184,7 @@ const schemaBreadcrumbs = [
         combining both LBTT and ADS where applicable.
       </p>
       <p>
-        <strong class="text-purple-400">ADS (6%)</strong> is charged on the full purchase price for additional
+        <strong class="text-purple-400">ADS (8%)</strong> is charged on the full purchase price for additional
         properties. This is separate from and in addition to the standard LBTT rates.
       </p>
       <p>
@@ -206,13 +206,13 @@ const schemaBreadcrumbs = [
       <li>2% on £145,001-£250,000 (£105,000) = £2,100</li>
       <li><strong>LBTT total: £2,100</strong></li>
     </ul>
-    <h3 class="text-lg font-semibold mt-6 mb-2">ADS (6% on full purchase price)</h3>
+    <h3 class="text-lg font-semibold mt-6 mb-2">ADS (8% on full purchase price)</h3>
     <ul class="list-disc list-inside space-y-1">
-      <li>6% x £250,000 = £15,000</li>
+      <li>8% x £250,000 = £20,000</li>
     </ul>
     <h3 class="text-lg font-semibold mt-6 mb-2">Total tax due</h3>
     <p>
-      £2,100 + £15,000 = <strong>£17,100</strong> - that is 6.84% of the purchase price.
+      £2,100 + £20,000 = <strong>£22,100</strong> - that is 8.84% of the purchase price.
     </p>
     <p class="mt-4">
       Compare that to a first-time buyer purchasing the same property as their only home: they would
@@ -224,9 +224,9 @@ const schemaBreadcrumbs = [
       At <strong>£400,000</strong> - closer to Edinburgh's average - the figures are:
     </p>
     <ul class="list-disc list-inside space-y-1 mt-2">
-      <li>LBTT: £2,100 + £3,750 (5% on £75k) = £5,850</li>
-      <li>ADS: 6% x £400,000 = £24,000</li>
-      <li><strong>Total: £29,850</strong> (7.46% of purchase price)</li>
+      <li>LBTT: £2,100 + £3,750 + £7,500 (2%, 5% and 10% bands) = £13,350</li>
+      <li>ADS: 8% x £400,000 = £32,000</li>
+      <li><strong>Total: £45,350</strong> (11.34% of purchase price)</li>
     </ul>
   </ContentSection>
 
@@ -254,7 +254,7 @@ const schemaBreadcrumbs = [
       <li>You are a first-time buyer with no other properties</li>
     </ul>
     <p class="mt-4">
-      The current ADS rate is <strong>6%</strong>, raised from 4% in December 2022. Unlike LBTT
+      The current ADS rate is <strong>8%</strong>, raised from 6% on 5 December 2024. Unlike LBTT
       which uses a tiered band system, ADS is a flat percentage applied to the <strong
         >whole purchase price</strong
       > - so a small increase in property value means a proportionally higher ADS bill.

@@ -13,7 +13,7 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import PricingCalculator from '../../components/calculators/PricingCalculator/PricingCalculator';
 
 // SEO Configuration
-const title = 'Free Pricing Calculator — Find Your Optimal Product Price | Boring Math';
+const title = 'Free Pricing Calculator: Find Your Optimal Product Price | Boring Math';
 const description =
   'Calculate the optimal price for your products using cost-plus, value-based, and competitive pricing strategies. Compare approaches and find the best price for profitability.';
 const keywords =
@@ -24,7 +24,7 @@ const siteUrl = 'https://boring-math.com';
 
 // Breadcrumbs
 const breadcrumbs = [
-  { label: 'Calculators', href: '/calculators' },
+  { label: 'Calculators', href: '/calculators/' },
   { label: 'Pricing Calculator' },
 ];
 
@@ -33,16 +33,23 @@ const relatedCalculators = [
   {
     title: 'Break-Even Calculator',
     description: 'Calculate how many units you need to sell.',
-    href: '/calculators/break-even-calculator',
+    href: '/calculators/break-even-calculator/',
     icon: 'trending' as const,
     color: 'blue' as const,
   },
   {
     title: 'Marketplace Fees Calculator',
     description: 'Compare fees across Etsy, eBay, and Amazon.',
-    href: '/calculators/marketplace-fees-calculator',
+    href: '/calculators/marketplace-fees-calculator/',
     icon: 'calculator' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Etsy Fee Calculator',
+    description: 'See your net profit after Etsy and eBay fees.',
+    href: '/calculators/etsy-fee-calculator/',
+    icon: 'percent' as const,
+    color: 'coral' as const,
   },
 ];
 
