@@ -99,5 +99,22 @@ describe('UKEmployerCostCalculator', () => {
       expect(result.totalEmployerCost).toBeCloseTo(4605570.9, 2);
       expect(result.hiddenCostPercentage).toBe(15.1);
     });
+
+    it('boundary-exact: employer NIC before the allowance exactly equals EMPLOYMENT_ALLOWANCE=10500 at types.ts:57, leaving zero slack', () => {
+      const result = calculateEmployerCost({
+        grossSalary: 75000,
+        taxRegion: 'england',
+        pensionRate: 3,
+        includeApprenticeshipLevy: false,
+        includeEmploymentAllowance: true,
+      });
+
+      // (75000 - 5000) * 0.15 = 10500, exactly equal to EMPLOYMENT_ALLOWANCE
+      expect(result.employerNIC).toBe(0);
+      expect(result.employerNICRate).toBe(0);
+      expect(result.pensionContribution).toBeCloseTo(1320.9, 2);
+      expect(result.totalEmployerCost).toBeCloseTo(76320.9, 2);
+      expect(result.hiddenCostPercentage).toBe(1.8);
+    });
   });
 });

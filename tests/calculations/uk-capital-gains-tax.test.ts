@@ -122,5 +122,27 @@ describe('UKCapitalGainsTaxCalculator', () => {
       expect(result.higherRateTax).toBe(11280);
       expect(result.totalTax).toBe(11280);
     });
+
+    it('property asset crossing into the basic rate band: pins CGT_RATES.property.basic=0.18 at calculations.ts:12', () => {
+      const result = calculateUKCGT({
+        salePrice: 150000,
+        purchasePrice: 100000,
+        costs: 0,
+        assetType: 'property',
+        taxBand: 'basic',
+        annualIncome: 30000,
+        useAnnualExemption: true,
+      });
+
+      // gain = 50000; taxableGain = 47000
+      // taxableIncome = 30000 - 12570 = 17430; basicRateBandRemaining = 37700 - 17430 = 20270
+      expect(result.gain).toBe(50000);
+      expect(result.taxableGain).toBe(47000);
+      expect(result.basicRateAmount).toBe(20270);
+      expect(result.higherRateAmount).toBe(26730);
+      expect(result.basicRateTax).toBe(3649);
+      expect(result.higherRateTax).toBe(6415);
+      expect(result.totalTax).toBe(10064);
+    });
   });
 });
