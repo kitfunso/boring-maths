@@ -1,12 +1,12 @@
 /**
  * UKTaxCalculator - Figure Pinning Tests
  *
- * These tests pin the CURRENT numeric behavior of calculateUKTax() as of the
- * 2025/26 tax-year constants in src/components/calculators/UKTaxCalculator/types.ts.
- * They exist as a safety net before the 2026/27 tax-year refresh (Task D1-D5):
- * when the constants are updated, these pins will fail and must be recomputed
- * against the new GOV.UK figures. Until then, they lock in what the code
- * actually returns today (not what the law says it should return).
+ * These tests pin the numeric behavior of calculateUKTax() as of the
+ * 2026/27 tax-year constants in src/components/calculators/UKTaxCalculator/types.ts.
+ * They were recomputed against GOV.UK 2026/27 figures during the tax-year
+ * refresh (Task D1-D5). If the constants change again, these pins will fail
+ * and must be recomputed against the new GOV.UK figures, not blindly updated
+ * to whatever the code returns.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -155,15 +155,15 @@ describe('UKTaxCalculator', () => {
       });
 
       expect(result.taxableIncome).toBe(67430);
-      expect(result.incomeTax).toBeCloseTo(21778.31, 2);
+      expect(result.incomeTax).toBeCloseTo(21732.05, 2);
       expect(result.nationalInsurance).toBeCloseTo(3610.6, 2);
-      expect(result.takeHomePay).toBeCloseTo(54611.09, 2);
+      expect(result.takeHomePay).toBeCloseTo(54657.35, 2);
       expect(result.effectiveTaxRate).toBe(31.7);
       expect(result.marginalRate).toBe(47);
       expect(result.taxBands).toEqual([
-        { band: 'Starter Rate', rate: 19, from: 12571, to: 14876, taxableAmount: 2306, tax: 438.14 },
-        { band: 'Basic Rate', rate: 20, from: 14877, to: 26561, taxableAmount: 11685, tax: 2337 },
-        { band: 'Intermediate Rate', rate: 21, from: 26562, to: 43662, taxableAmount: 17101, tax: 3591.21 },
+        { band: 'Starter Rate', rate: 19, from: 12571, to: 16537, taxableAmount: 3967, tax: 753.73 },
+        { band: 'Basic Rate', rate: 20, from: 16538, to: 29526, taxableAmount: 12989, tax: 2597.8 },
+        { band: 'Intermediate Rate', rate: 21, from: 29527, to: 43662, taxableAmount: 14136, tax: 2968.56 },
         { band: 'Higher Rate', rate: 42, from: 43663, to: 75000, taxableAmount: 31338, tax: 13161.96 },
         { band: 'Advanced Rate', rate: 45, from: 75001, to: 125140, taxableAmount: 5000, tax: 2250 },
       ]);
@@ -208,21 +208,21 @@ describe('UKTaxCalculator', () => {
       });
 
       expect(result.personalAllowance).toBe(0);
-      expect(result.incomeTax).toBeCloseTo(51612.41, 2);
+      expect(result.incomeTax).toBeCloseTo(51566.15, 2);
       expect(result.nationalInsurance).toBeCloseTo(4810.6, 2);
-      expect(result.takeHomePay).toBeCloseTo(83576.99, 2);
+      expect(result.takeHomePay).toBeCloseTo(83623.25, 2);
       expect(result.marginalRate).toBe(50);
       expect(result.taxBands).toEqual([
-        { band: 'Starter Rate', rate: 19, from: 1, to: 14876, taxableAmount: 14876, tax: 2826.44 },
-        { band: 'Basic Rate', rate: 20, from: 14877, to: 26561, taxableAmount: 11685, tax: 2337 },
-        { band: 'Intermediate Rate', rate: 21, from: 26562, to: 43662, taxableAmount: 17101, tax: 3591.21 },
+        { band: 'Starter Rate', rate: 19, from: 1, to: 16537, taxableAmount: 16537, tax: 3142.03 },
+        { band: 'Basic Rate', rate: 20, from: 16538, to: 29526, taxableAmount: 12989, tax: 2597.8 },
+        { band: 'Intermediate Rate', rate: 21, from: 29527, to: 43662, taxableAmount: 14136, tax: 2968.56 },
         { band: 'Higher Rate', rate: 42, from: 43663, to: 75000, taxableAmount: 31338, tax: 13161.96 },
         { band: 'Advanced Rate', rate: 45, from: 75001, to: 125140, taxableAmount: 50140, tax: 22563 },
         { band: 'Top Rate', rate: 48, from: 125141, to: 140000, taxableAmount: 14860, tax: 7132.8 },
       ]);
     });
 
-    it('blind persons allowance: pins BLIND_PERSONS_ALLOWANCE=3070 at types.ts:71, added on top of PERSONAL_ALLOWANCE', () => {
+    it('blind persons allowance: pins BLIND_PERSONS_ALLOWANCE=3250 at types.ts:71, added on top of PERSONAL_ALLOWANCE', () => {
       const result = calculateUKTax({
         grossSalary: 35000,
         taxRegion: 'england',
@@ -234,16 +234,16 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // 12570 + 3070 = 15640
-      expect(result.personalAllowance).toBe(15640);
-      expect(result.taxableIncome).toBe(19360);
-      expect(result.incomeTax).toBe(3872);
+      // 12570 + 3250 = 15820
+      expect(result.personalAllowance).toBe(15820);
+      expect(result.taxableIncome).toBe(19180);
+      expect(result.incomeTax).toBe(3836);
       expect(result.taxBands).toEqual([
-        { band: 'Basic Rate', rate: 20, from: 15641, to: 50270, taxableAmount: 19360, tax: 3872 },
+        { band: 'Basic Rate', rate: 20, from: 15821, to: 50270, taxableAmount: 19180, tax: 3836 },
       ]);
     });
 
-    it('student loan plan1: pins STUDENT_LOAN_THRESHOLDS.plan1 (threshold=24990, rate=0.09) at types.ts:102', () => {
+    it('student loan plan1: pins STUDENT_LOAN_THRESHOLDS.plan1 (threshold=26900, rate=0.09) at types.ts:102', () => {
       const result = calculateUKTax({
         grossSalary: 40000,
         taxRegion: 'england',
@@ -255,13 +255,13 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 24990) * 0.09 = 1350.9
-      expect(result.studentLoanRepayment).toBeCloseTo(1350.9, 2);
+      // (40000 - 26900) * 0.09 = 1179
+      expect(result.studentLoanRepayment).toBeCloseTo(1179, 2);
       expect(result.postgraduateLoanRepayment).toBe(0);
       expect(result.marginalRate).toBe(37);
     });
 
-    it('student loan plan2: pins STUDENT_LOAN_THRESHOLDS.plan2 (threshold=27295, rate=0.09) at types.ts:103', () => {
+    it('student loan plan2: pins STUDENT_LOAN_THRESHOLDS.plan2 (threshold=29385, rate=0.09) at types.ts:103', () => {
       const result = calculateUKTax({
         grossSalary: 40000,
         taxRegion: 'england',
@@ -273,12 +273,12 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 27295) * 0.09 = 1143.45
-      expect(result.studentLoanRepayment).toBeCloseTo(1143.45, 2);
+      // (40000 - 29385) * 0.09 = 955.35
+      expect(result.studentLoanRepayment).toBeCloseTo(955.35, 2);
       expect(result.marginalRate).toBe(37);
     });
 
-    it('student loan plan4: pins STUDENT_LOAN_THRESHOLDS.plan4 (threshold=31395, rate=0.09) at types.ts:104', () => {
+    it('student loan plan4: pins STUDENT_LOAN_THRESHOLDS.plan4 (threshold=33795, rate=0.09) at types.ts:104', () => {
       const result = calculateUKTax({
         grossSalary: 40000,
         taxRegion: 'england',
@@ -290,8 +290,8 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 31395) * 0.09 = 774.45
-      expect(result.studentLoanRepayment).toBeCloseTo(774.45, 2);
+      // (40000 - 33795) * 0.09 = 558.45
+      expect(result.studentLoanRepayment).toBeCloseTo(558.45, 2);
       expect(result.marginalRate).toBe(37);
     });
 

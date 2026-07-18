@@ -1,6 +1,6 @@
 /**
  * UK Tax Calculator Types & Constants
- * 2025/26 tax year rates for income tax, NIC, student loans, and pensions
+ * 2026/27 tax year rates for income tax, NIC, student loans, and pensions
  */
 
 export type TaxRegion = 'england' | 'scotland';
@@ -61,16 +61,16 @@ export function getDefaultInputs(): UKTaxInputs {
   };
 }
 
-// 2025/26 Personal Allowance
+// 2026/27 Personal Allowance
 export const PERSONAL_ALLOWANCE = 12570;
 export const PA_TAPER_THRESHOLD = 100000; // Starts tapering above £100k
 export const PA_TAPER_RATE = 0.5; // £1 lost per £2 over threshold
 export const PA_FULLY_LOST = 125140; // Fully lost at this income
 
-// Blind Person's Allowance
-export const BLIND_PERSONS_ALLOWANCE = 3070;
+// Blind Person's Allowance (2026/27)
+export const BLIND_PERSONS_ALLOWANCE = 3250;
 
-// 2025/26 England/NI/Wales Income Tax Bands
+// 2026/27 England/NI/Wales Income Tax Bands
 export const ENGLAND_TAX_BANDS = [
   { name: 'Personal Allowance', rate: 0, from: 1, to: 12570 },
   { name: 'Basic Rate', rate: 0.2, from: 12571, to: 50270 },
@@ -78,18 +78,18 @@ export const ENGLAND_TAX_BANDS = [
   { name: 'Additional Rate', rate: 0.45, from: 125141, to: Infinity },
 ];
 
-// 2025/26 Scotland Income Tax Bands
+// 2026/27 Scotland Income Tax Bands
 export const SCOTLAND_TAX_BANDS = [
   { name: 'Personal Allowance', rate: 0, from: 1, to: 12570 },
-  { name: 'Starter Rate', rate: 0.19, from: 12571, to: 14876 },
-  { name: 'Basic Rate', rate: 0.2, from: 14877, to: 26561 },
-  { name: 'Intermediate Rate', rate: 0.21, from: 26562, to: 43662 },
+  { name: 'Starter Rate', rate: 0.19, from: 12571, to: 16537 },
+  { name: 'Basic Rate', rate: 0.2, from: 16538, to: 29526 },
+  { name: 'Intermediate Rate', rate: 0.21, from: 29527, to: 43662 },
   { name: 'Higher Rate', rate: 0.42, from: 43663, to: 75000 },
   { name: 'Advanced Rate', rate: 0.45, from: 75001, to: 125140 },
   { name: 'Top Rate', rate: 0.48, from: 125141, to: Infinity },
 ];
 
-// 2025/26 Employee National Insurance
+// 2026/27 Employee National Insurance
 export const EMPLOYEE_NIC = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,
@@ -97,11 +97,11 @@ export const EMPLOYEE_NIC = {
   upperRate: 0.02, // 2% above UEL
 };
 
-// 2025/26 Student Loan Thresholds
+// 2026/27 Student Loan Thresholds
 export const STUDENT_LOAN_THRESHOLDS = {
-  plan1: { threshold: 24990, rate: 0.09 },
-  plan2: { threshold: 27295, rate: 0.09 },
-  plan4: { threshold: 31395, rate: 0.09 },
+  plan1: { threshold: 26900, rate: 0.09 },
+  plan2: { threshold: 29385, rate: 0.09 },
+  plan4: { threshold: 33795, rate: 0.09 },
   plan5: { threshold: 25000, rate: 0.09 },
   postgraduate: { threshold: 21000, rate: 0.06 },
 };

@@ -130,7 +130,7 @@ export default function UKTaxCalculator() {
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
         <CalculatorHeader
-          title="UK Tax Calculator 2025/26"
+          title="UK Tax Calculator 2026/27"
           subtitle="Calculate your take-home pay after income tax, NIC, student loans, and pension"
         />
 
@@ -563,9 +563,9 @@ export default function UKTaxCalculator() {
                   />
                 </svg>
                 <div>
-                  <p className="text-blue-400 font-medium">2025/26 Tax Year</p>
+                  <p className="text-blue-400 font-medium">2026/27 Tax Year</p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
-                    This calculator uses the 2025/26 tax year rates (April 2025 to April 2026).
+                    This calculator uses the 2026/27 tax year rates (April 2026 to April 2027).
                     Personal allowance remains frozen at £12,570. Employee NIC is 8% between £12,570
                     and £50,270, then 2% above.
                     {inputs.taxRegion === 'scotland' &&

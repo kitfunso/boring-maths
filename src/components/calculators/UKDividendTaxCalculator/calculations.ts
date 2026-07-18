@@ -139,7 +139,7 @@ function calculateDividendTax(
     remainingDividends -= basicRateDividends;
 
     breakdown.push({
-      band: 'Basic rate (8.75%)',
+      band: 'Basic rate (10.75%)',
       amount: basicRateDividends,
       rate: basicRate,
       tax: basicRateTax,
@@ -158,7 +158,7 @@ function calculateDividendTax(
     remainingDividends -= higherRateDividends;
 
     breakdown.push({
-      band: 'Higher rate (33.75%)',
+      band: 'Higher rate (35.75%)',
       amount: higherRateDividends,
       rate: higherRate,
       tax: higherRateTax,

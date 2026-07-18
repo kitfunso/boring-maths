@@ -39,15 +39,15 @@ export function getDefaultInputs(): UKDividendTaxInputs {
   };
 }
 
-// 2024/25 Dividend tax rates
+// 2026/27 Dividend tax rates
 export const DIVIDEND_RATES = {
   allowance: 500,
-  basicRate: 0.0875,
-  higherRate: 0.3375,
+  basicRate: 0.1075,
+  higherRate: 0.3575,
   additionalRate: 0.3935,
 };
 
-// 2024/25 Income tax thresholds
+// 2026/27 Income tax thresholds
 export const TAX_THRESHOLDS = {
   personalAllowance: 12570,
   basicRateLimit: 50270,

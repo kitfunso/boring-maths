@@ -1,6 +1,6 @@
 /**
  * UK Tax Calculator - Calculation Logic
- * 2025/26 tax year
+ * 2026/27 tax year
  */
 
 import type { UKTaxInputs, UKTaxResult, TaxBandBreakdown } from './types';

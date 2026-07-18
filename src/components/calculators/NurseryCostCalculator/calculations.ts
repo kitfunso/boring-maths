@@ -14,7 +14,7 @@ import type {
 } from './types';
 
 // =============================================================================
-// CONSTANTS - 2025/26 RATES
+// CONSTANTS - 2026/27 RATES
 // =============================================================================
 
 /**
@@ -45,15 +45,15 @@ export const HOURLY_RATES: Record<UKRegion, Record<ChildAge, number>> = {
 };
 
 /**
- * Free hours eligibility thresholds (2025/26)
+ * Free hours eligibility thresholds (2026/27)
  */
 export const FREE_HOURS = {
   /** Universal 15 hours for all 3-4 year olds */
   UNIVERSAL_15: 15,
   /** 30 hours for working parents */
   WORKING_30: 30,
-  /** Minimum income per parent for working entitlement (16 hrs x NMW) */
-  MIN_INCOME_PER_PARENT: 10158, // £195/week x 52
+  /** Minimum income per parent for working entitlement (16 hrs x NLW 21+) */
+  MIN_INCOME_PER_PARENT: 10574.72, // £2,643.68 per 3 months x 4
   /** Maximum income per parent */
   MAX_INCOME_PER_PARENT: 100000,
   /** UC income threshold for 2-year-old 15 hours */
@@ -63,7 +63,7 @@ export const FREE_HOURS = {
 };
 
 /**
- * Tax-Free Childcare limits (2025/26)
+ * Tax-Free Childcare limits (2026/27)
  */
 export const TAX_FREE_CHILDCARE = {
   /** Maximum government contribution per child per year */
@@ -72,22 +72,22 @@ export const TAX_FREE_CHILDCARE = {
   MAX_CONTRIBUTION_DISABLED: 4000,
   /** Government pays £2 for every £8 deposited (20%) */
   RATE: 0.2,
-  /** Minimum income per parent (per quarter) */
-  MIN_INCOME_QUARTERLY: 2539,
+  /** Minimum income per parent (per quarter, NLW 21+ x 16 hrs x 13 weeks) */
+  MIN_INCOME_QUARTERLY: 2643.68,
   /** Maximum income per parent */
   MAX_INCOME: 100000,
 };
 
 /**
- * Universal Credit childcare element (2025/26)
+ * Universal Credit childcare element (2026/27, from 6 April 2026)
  */
 export const UC_CHILDCARE = {
   /** Percentage of costs covered */
   COVERAGE_RATE: 0.85,
   /** Maximum per month for 1 child */
-  MAX_ONE_CHILD: 1031.88,
+  MAX_ONE_CHILD: 1071.09,
   /** Maximum per month for 2+ children */
-  MAX_TWO_PLUS: 1768.94,
+  MAX_TWO_PLUS: 1836.16,
 };
 
 // =============================================================================

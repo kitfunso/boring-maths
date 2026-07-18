@@ -1,13 +1,13 @@
 /**
  * NurseryCostCalculator - Figure Pinning Tests
  *
- * These tests pin the CURRENT numeric behavior of calculateNurseryCost() as
- * of the 2025/26 rates in
- * src/components/calculators/NurseryCostCalculator/calculations.ts. They
- * exist as a safety net before the 2026/27 tax-year refresh (Task D1-D5):
- * when the constants are updated, these pins will fail and must be
- * recomputed against the new GOV.UK / Coram Family and Childcare Survey
- * figures. Until then, they lock in what the code actually returns today.
+ * These tests pin the numeric behavior of calculateNurseryCost() as
+ * of the 2026/27 rates in
+ * src/components/calculators/NurseryCostCalculator/calculations.ts. The
+ * statutory figures (free-hours minimum earnings, Universal Credit childcare
+ * caps) were recomputed against GOV.UK 2026/27 figures during the tax-year
+ * refresh (Task D1-D5). The average hourly nursery rates are market survey
+ * data (Coram Family and Childcare Survey) and are unchanged.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -80,7 +80,7 @@ describe('NurseryCostCalculator', () => {
       expect(result.savingsPercentage).toBe(0.6);
     });
 
-    it('Universal Credit, two children, low income: pins UC_CHILDCARE.COVERAGE_RATE=0.85 (calculations.ts:86) and the 2-year-old UC branch (isEligibleFor2YearOldHours, calculations.ts:131-138). Note: the 85%-of-cost figure here (1366.02/month) does NOT reach the MAX_TWO_PLUS=1768.94 cap (calculations.ts:90) -- see the separate cap-binding scenario below for that.', () => {
+    it('Universal Credit, two children, low income: pins UC_CHILDCARE.COVERAGE_RATE=0.85 (calculations.ts:86) and the 2-year-old UC branch (isEligibleFor2YearOldHours, calculations.ts:131-138). Note: the 85%-of-cost figure here (1366.02/month) does NOT reach the MAX_TWO_PLUS=1836.16 cap (calculations.ts:90) -- see the separate cap-binding scenario below for that.', () => {
       const result = calculateNurseryCost({
         region: 'outer-london',
         children: [
@@ -101,7 +101,7 @@ describe('NurseryCostCalculator', () => {
       expect(result.totalGrossAnnualCost).toBe(23560);
       expect(result.totalFreeHoursValue).toBe(4275);
       // monthly cost after free hours (19285/12) * 0.85 coverage, under the
-      // MAX_TWO_PLUS cap of 1768.94/month, annualised (*12)
+      // MAX_TWO_PLUS cap of 1836.16/month, annualised (*12)
       expect(result.ucChildcareElement).toBeCloseTo(16392.25, 2);
       expect(result.totalNetAnnualCost).toBeCloseTo(2892.75, 2);
     });
@@ -233,12 +233,12 @@ describe('NurseryCostCalculator', () => {
       expect(result.totalNetAnnualCost).toBeCloseTo(1540, 2);
     });
 
-    it('boundary-exact: household income per parent exactly at MIN_INCOME_PER_PARENT=10158 (calculations.ts:56) is eligible for working-parent hours', () => {
+    it('boundary-exact: household income per parent exactly at MIN_INCOME_PER_PARENT=10574.72 (calculations.ts:56) is eligible for working-parent hours', () => {
       const result = calculateNurseryCost({
         region: 'rest-of-uk',
         children: [{ id: '1', age: '2-years', hoursPerWeek: 20, hasDisability: false }],
         employmentStatus: 'both-working',
-        householdIncome: 20316, // 2 * 10158 exactly
+        householdIncome: 21149.44, // 2 * 10574.72 exactly
         benefitStatus: 'none',
         useTaxFreeChildcare: false,
         weeksPerYear: 38,
@@ -250,12 +250,12 @@ describe('NurseryCostCalculator', () => {
       expect(result.totalNetAnnualCost).toBe(0);
     });
 
-    it('boundary-exact: household income per parent one pound below MIN_INCOME_PER_PARENT=10158 (calculations.ts:56) is NOT eligible', () => {
+    it('boundary-exact: household income per parent just below MIN_INCOME_PER_PARENT=10574.72 (calculations.ts:56) is NOT eligible', () => {
       const result = calculateNurseryCost({
         region: 'rest-of-uk',
         children: [{ id: '1', age: '2-years', hoursPerWeek: 20, hasDisability: false }],
         employmentStatus: 'both-working',
-        householdIncome: 20315, // one pound below 2 * 10158
+        householdIncome: 21149.42, // per parent 10574.71, just below 10574.72
         benefitStatus: 'none',
         useTaxFreeChildcare: false,
         weeksPerYear: 38,
@@ -340,7 +340,7 @@ describe('NurseryCostCalculator', () => {
       expect(result.totalNetAnnualCost).toBe(21670);
     });
 
-    it('Universal Credit cap binds, one child: pins UC_CHILDCARE.MAX_ONE_CHILD=1031.88 (calculations.ts:88)', () => {
+    it('Universal Credit cap binds, one child: pins UC_CHILDCARE.MAX_ONE_CHILD=1071.09 (calculations.ts:88)', () => {
       const result = calculateNurseryCost({
         region: 'inner-london',
         children: [{ id: '1', age: 'under-2', hoursPerWeek: 50, hasDisability: false }],
@@ -352,14 +352,14 @@ describe('NurseryCostCalculator', () => {
       });
 
       // monthlyAfterFreeHours = 24700/12 = 2058.33; * 0.85 = 1749.58, which
-      // exceeds MAX_ONE_CHILD (1031.88), so the element is capped there
-      // and annualised: 1031.88 * 12 = 12382.56
+      // exceeds MAX_ONE_CHILD (1071.09), so the element is capped there
+      // and annualised: 1071.09 * 12 = 12853.08
       expect(result.eligibleForUCChildcare).toBe(true);
-      expect(result.ucChildcareElement).toBeCloseTo(12382.56, 2);
-      expect(result.totalNetAnnualCost).toBeCloseTo(12317.44, 2);
+      expect(result.ucChildcareElement).toBeCloseTo(12853.08, 2);
+      expect(result.totalNetAnnualCost).toBeCloseTo(11846.92, 2);
     });
 
-    it('Universal Credit cap binds, two-plus children: pins UC_CHILDCARE.MAX_TWO_PLUS=1768.94 (calculations.ts:90)', () => {
+    it('Universal Credit cap binds, two-plus children: pins UC_CHILDCARE.MAX_TWO_PLUS=1836.16 (calculations.ts:90)', () => {
       const result = calculateNurseryCost({
         region: 'inner-london',
         children: [
@@ -374,11 +374,11 @@ describe('NurseryCostCalculator', () => {
       });
 
       // monthlyAfterFreeHours = 49400/12 = 4116.67; * 0.85 = 3499.17, which
-      // exceeds MAX_TWO_PLUS (1768.94), so the element is capped there
-      // and annualised: 1768.94 * 12 = 21227.28
+      // exceeds MAX_TWO_PLUS (1836.16), so the element is capped there
+      // and annualised: 1836.16 * 12 = 22033.92
       expect(result.eligibleForUCChildcare).toBe(true);
-      expect(result.ucChildcareElement).toBe(21227.28);
-      expect(result.totalNetAnnualCost).toBe(28172.72);
+      expect(result.ucChildcareElement).toBeCloseTo(22033.92, 2);
+      expect(result.totalNetAnnualCost).toBeCloseTo(27366.08, 2);
     });
   });
 });
