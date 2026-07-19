@@ -22,6 +22,7 @@ import {
 } from './types';
 import { DATA_LAST_VERIFIED } from './data/peakCalendar';
 import MultiSelectChips from './MultiSelectChips';
+import DateRangePicker from './DateRangePicker';
 import {
   ThemeProvider,
   Card,
@@ -161,25 +162,16 @@ export default function AviosDestinationFinder() {
                 />
               </div>
               <div>
-                <Label htmlFor="dateFrom">Travel dates (optional)</Label>
-                {/* grid-cols-2 (minmax(0,1fr)) lets the date inputs shrink below their
-                    intrinsic width; a flex row cannot and overflows the card on tablets */}
-                <div className="grid grid-cols-2 gap-2">
-                  <Input
-                    id="dateFrom"
-                    type="date"
-                    aria-label="Travel start date"
-                    value={inputs.dateFrom}
-                    onChange={(e) => updateInput('dateFrom', e.target.value)}
-                  />
-                  <Input
-                    id="dateTo"
-                    type="date"
-                    aria-label="Travel end date"
-                    value={inputs.dateTo}
-                    onChange={(e) => updateInput('dateTo', e.target.value)}
-                  />
-                </div>
+                <Label htmlFor="dateRange">Travel dates (optional)</Label>
+                <DateRangePicker
+                  id="dateRange"
+                  valueFrom={inputs.dateFrom}
+                  valueTo={inputs.dateTo}
+                  onChange={(from, to) => {
+                    updateInput('dateFrom', from);
+                    updateInput('dateTo', to);
+                  }}
+                />
               </div>
             </Grid>
 
