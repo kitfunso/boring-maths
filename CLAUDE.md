@@ -32,7 +32,7 @@ Static site. No backend. Calculator logic runs client-side in Preact components.
 
 ## Non-Negotiable Rules
 
-1. **All calculators stay free (167 in the registry as of 2026-07).** Never paywall existing calculator functionality. Premium means white-label/API/advanced features, not gating what's already free.
+1. **All calculators stay free (168 in the registry as of 2026-07).** Never paywall existing calculator functionality. Premium means white-label/API/advanced features, not gating what's already free.
 2. **Affiliate links must have disclosure.** Every page with affiliate links uses `rel="nofollow sponsored noopener"` and links to `/affiliate-disclosure`. Already enforced in AffiliateBox/AffiliateCard components.
 3. **No financial advice.** Calculators are tools. Never add language that could be construed as recommending a specific financial product or action.
 4. **Embeds must not break the host site.** Embed pages use EmbedLayout with no external scripts (no AdSense), scoped styles, and sandboxed iframes. Test cross-origin.

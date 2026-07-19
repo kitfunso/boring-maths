@@ -1784,6 +1784,16 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'UK',
     mostUsed: false,
   },
+  {
+    title: 'Avios Destination Finder',
+    description:
+      'See every BA destination your Avios can reach, filtered by budget, dates, region, and holiday type.',
+    href: '/calculators/avios-destination-finder/',
+    icon: 'trending',
+    color: 'blue',
+    category: 'Everyday',
+    mostUsed: false,
+  },
 ];
 
 // ---------------------------------------------------------------------------
