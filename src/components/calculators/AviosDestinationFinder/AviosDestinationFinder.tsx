@@ -138,7 +138,9 @@ export default function AviosDestinationFinder() {
               </div>
               <div>
                 <Label htmlFor="dateFrom">Travel dates (optional)</Label>
-                <div className="flex gap-2">
+                {/* grid-cols-2 (minmax(0,1fr)) lets the date inputs shrink below their
+                    intrinsic width; a flex row cannot and overflows the card on tablets */}
+                <div className="grid grid-cols-2 gap-2">
                   <Input
                     id="dateFrom"
                     type="date"
