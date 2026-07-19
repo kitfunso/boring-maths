@@ -53,3 +53,28 @@ export function seasonsForRange(dateFrom: string, dateTo: string): SeasonWindow 
   if (beyondCalendar) return { hasOffPeak: true, hasPeak: true, beyondCalendar: true };
   return { hasOffPeak, hasPeak, beyondCalendar: false };
 }
+
+export interface PartyPricing {
+  readonly avios: number;
+  readonly cash: number;
+}
+
+/**
+ * Total Avios + cash for the whole party and trip.
+ * Companion voucher (2 travellers): second seat costs no Avios, but the
+ * cash element is always payable per person (VOUCHER_RULES).
+ */
+export function partyTotals(
+  oneWayAvios: number,
+  oneWayCash: number,
+  travellers: 1 | 2,
+  companionVoucher: boolean,
+  tripType: TripType
+): PartyPricing {
+  const legs = tripType === 'return' ? 2 : 1;
+  const aviosSeats = travellers === 2 && companionVoucher ? 1 : travellers;
+  return {
+    avios: oneWayAvios * aviosSeats * legs,
+    cash: oneWayCash * travellers * legs,
+  };
+}

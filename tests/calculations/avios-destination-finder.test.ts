@@ -3,7 +3,10 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { seasonsForRange } from '../../src/components/calculators/AviosDestinationFinder/calculations';
+import {
+  seasonsForRange,
+  partyTotals,
+} from '../../src/components/calculators/AviosDestinationFinder/calculations';
 
 describe('AviosDestinationFinder', () => {
   describe('seasonsForRange', () => {
@@ -44,6 +47,34 @@ describe('AviosDestinationFinder', () => {
     it('treats an invalid range (from after to) as both seasons', () => {
       const s = seasonsForRange('2026-06-20', '2026-06-01');
       expect(s).toEqual({ hasOffPeak: true, hasPeak: true, beyondCalendar: false });
+    });
+  });
+
+  describe('partyTotals', () => {
+    // Amsterdam economy off-peak anchor: 10,000 Avios + £1 one-way per person.
+    it('doubles Avios and cash for 2 travellers without a voucher, return', () => {
+      const t = partyTotals(10000, 1, 2, false, 'return');
+      expect(t.avios).toBe(40000); // 10,000 x 2 pax x 2 legs
+      expect(t.cash).toBe(4); // £1 x 2 pax x 2 legs
+    });
+
+    it('halves the Avios (not the cash) with a companion voucher for 2', () => {
+      const t = partyTotals(10000, 1, 2, true, 'return');
+      expect(t.avios).toBe(20000); // second seat costs no Avios
+      expect(t.cash).toBe(4); // taxes/fees still due for both passengers
+    });
+
+    it('ignores the voucher for a single traveller (solo variant is out of scope v1)', () => {
+      const t = partyTotals(10000, 1, 1, true, 'oneWay');
+      expect(t.avios).toBe(10000);
+      expect(t.cash).toBe(1);
+    });
+
+    it('one-way is half of return', () => {
+      const ret = partyTotals(27500, 60, 1, false, 'return');
+      const ow = partyTotals(27500, 60, 1, false, 'oneWay');
+      expect(ret.avios).toBe(ow.avios * 2);
+      expect(ret.cash).toBe(ow.cash * 2);
     });
   });
 });
