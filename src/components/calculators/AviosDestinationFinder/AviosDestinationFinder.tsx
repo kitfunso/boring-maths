@@ -59,8 +59,11 @@ function formatAvios(v: number | null): string {
 
 function ResultRow({ row }: { row: DestinationResult }) {
   const d = row.destination;
+  // Over-budget rows dim via muted text colour, not opacity: opacity-50 halved
+  // the contrast of already-muted subtext below WCAG AA and dimmed the
+  // "Over budget" cue that is supposed to stand out.
   return (
-    <tr className={row.withinBudget ? '' : 'opacity-50'}>
+    <tr className={row.withinBudget ? '' : 'text-[var(--color-muted)]'}>
       <td className="py-2">
         <span className="font-medium">{d.city}</span>{' '}
         <span className="text-[var(--color-muted)]">{d.country}</span>
@@ -71,10 +74,16 @@ function ResultRow({ row }: { row: DestinationResult }) {
           {d.holidayTypes.map((t) => HOLIDAY_TYPE_LABELS[t]).join(' | ')}
         </div>
       </td>
-      <td className="text-right py-2 tabular-nums">{formatAvios(row.aviosOffPeak)}</td>
-      <td className="text-right py-2 tabular-nums">{formatAvios(row.aviosPeak)}</td>
-      <td className="text-right py-2 tabular-nums">£{row.cashTotal.toFixed(2)}</td>
-      <td className="text-right py-2 tabular-nums">{row.budgetPercent}%</td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {formatAvios(row.aviosOffPeak)}
+      </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {formatAvios(row.aviosPeak)}
+      </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        £{row.cashTotal.toFixed(2)}
+      </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">{row.budgetPercent}%</td>
     </tr>
   );
 }
@@ -286,16 +295,16 @@ export default function AviosDestinationFinder() {
                       <th scope="col" className="text-left py-2">
                         Destination
                       </th>
-                      <th scope="col" className="text-right py-2">
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         Off-peak Avios
                       </th>
-                      <th scope="col" className="text-right py-2">
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         Peak Avios
                       </th>
-                      <th scope="col" className="text-right py-2">
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         + cash from
                       </th>
-                      <th scope="col" className="text-right py-2">
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         % of budget
                       </th>
                     </tr>

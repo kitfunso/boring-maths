@@ -275,10 +275,10 @@ const schemaBreadcrumbs = [
         <thead>
           <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
             <th scope="col" class="text-left py-2">Destination</th>
-            <th scope="col" class="text-right py-2">Economy off-peak</th>
-            <th scope="col" class="text-right py-2">Economy peak</th>
-            <th scope="col" class="text-right py-2">Business off-peak</th>
-            <th scope="col" class="text-right py-2">+ cash from</th>
+            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy off-peak</th>
+            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy peak</th>
+            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
+            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-white/10">
@@ -291,10 +291,18 @@ const schemaBreadcrumbs = [
                   <td class="py-2">
                     {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
                   </td>
-                  <td class="text-right py-2 tabular-nums">{e ? nf.format(e.offPeak) : '-'}</td>
-                  <td class="text-right py-2 tabular-nums">{e ? nf.format(e.peak) : '-'}</td>
-                  <td class="text-right py-2 tabular-nums">{b ? nf.format(b.offPeak) : '-'}</td>
-                  <td class="text-right py-2 tabular-nums">{e ? fmtCash(e.cash) : '-'}</td>
+                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                    {e ? nf.format(e.offPeak) : '-'}
+                  </td>
+                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                    {e ? nf.format(e.peak) : '-'}
+                  </td>
+                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                    {b ? nf.format(b.offPeak) : '-'}
+                  </td>
+                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                    {e ? fmtCash(e.cash) : '-'}
+                  </td>
                 </tr>
               );
             })
@@ -319,11 +327,11 @@ const schemaBreadcrumbs = [
           <thead>
             <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
               <th scope="col" class="text-left py-2">Destination</th>
-              <th scope="col" class="text-right py-2">Economy off-peak</th>
-              <th scope="col" class="text-right py-2">Economy peak</th>
-              <th scope="col" class="text-right py-2">Business off-peak</th>
-              <th scope="col" class="text-right py-2">Business peak</th>
-              <th scope="col" class="text-right py-2">+ cash from</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy off-peak</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy peak</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business peak</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-white/10">
@@ -336,11 +344,21 @@ const schemaBreadcrumbs = [
                     <td class="py-2">
                       {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
                     </td>
-                    <td class="text-right py-2 tabular-nums">{e ? nf.format(e.offPeak) : '-'}</td>
-                    <td class="text-right py-2 tabular-nums">{e ? nf.format(e.peak) : '-'}</td>
-                    <td class="text-right py-2 tabular-nums">{b ? nf.format(b.offPeak) : '-'}</td>
-                    <td class="text-right py-2 tabular-nums">{b ? nf.format(b.peak) : '-'}</td>
-                    <td class="text-right py-2 tabular-nums">{e ? fmtCash(e.cash) : '-'}</td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {e ? nf.format(e.offPeak) : '-'}
+                    </td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {e ? nf.format(e.peak) : '-'}
+                    </td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {b ? nf.format(b.offPeak) : '-'}
+                    </td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {b ? nf.format(b.peak) : '-'}
+                    </td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {e ? fmtCash(e.cash) : '-'}
+                    </td>
                   </tr>
                 );
               })

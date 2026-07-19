@@ -115,8 +115,14 @@ const colorClasses: Record<string, string> = {
         {breadcrumbItems.length > 0 && <Breadcrumb items={breadcrumbItems} />}
 
         <!-- Top Ad Unit (horizontal banner) - Hidden on mobile -->
+        <!-- reserveHeight holds a fixed box so the late-loading ad never shifts layout (CLS) -->
         <div class="hidden lg:block mb-6">
-          <AdUnit slot="9991282844" format="horizontal" className="rounded-xl overflow-hidden" />
+          <AdUnit
+            slot="9991282844"
+            format="horizontal"
+            reserveHeight={100}
+            className="rounded-xl overflow-hidden"
+          />
         </div>
 
         <!-- Main Content Slot -->
