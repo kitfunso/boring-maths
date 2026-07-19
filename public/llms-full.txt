@@ -522,6 +522,18 @@ Calculate VAT amounts for EU member states at standard and reduced rates.
 URL: https://boring-math.com/calculators/batch-cost-calculator/
 Calculate per-unit cost for batch production runs.
 
+## Travel Calculators
+
+### Avios Destination Finder (Unofficial)
+URL: https://boring-math.com/calculators/avios-destination-finder/
+Independent, unofficial British Airways reward flight guide. Search all 199 BA destinations at once by Avios budget, travel dates, region, and holiday type; results are ranked by Avios cost with off-peak and peak prices and the cash element shown. Not affiliated with British Airways; Avios is a trademark of its owner.
+- Guide prices from BA's published Reward Flight Saver table (post 15 December 2025 update), one-way from London, lowest-cash combination
+- Short-haul economy from 10,000 Avios one-way off-peak plus £1 cash (e.g. Amsterdam); New York 27,500 Avios off-peak plus £60; Sydney 55,000 Avios off-peak plus £160
+- Peak/off-peak resolved from BA's published 2026 calendar
+- Companion voucher support: second seat for no extra Avios on BA, Iberia, and Aer Lingus reward bookings; taxes and fees payable for both passengers
+- Shows guide prices only, NOT live reward seat availability; availability must be checked on ba.com
+- Economy, Premium Economy (long-haul only), and Business cabins; First class not covered
+
 ---
 
 ## About
