@@ -333,8 +333,12 @@ export default function AviosDestinationFinder() {
               </Grid>
             )}
 
-            <div className="flex items-center justify-between gap-4">
-              <div className="w-56">
+            {/* Stacks below sm: a single-line justify-between squeezed the toggle
+                into wrapped text. sm:w-auto lets the select shrink-wrap its widest
+                option, so no fixed width can ever clip a sort label again (w-56
+                clipped "Best bang for your buck") */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div className="w-full sm:w-auto sm:flex-none">
                 <Label htmlFor="sortKey">Sort by</Label>
                 <Select
                   id="sortKey"
@@ -343,10 +347,12 @@ export default function AviosDestinationFinder() {
                   options={SORT_OPTIONS}
                 />
               </div>
+              {/* pb-3 optically centres the 24px track against the ~50px select */}
               <Toggle
                 checked={inputs.showOverBudget}
                 onChange={(v) => updateInput('showOverBudget', v)}
                 label="Show over-budget destinations"
+                className="sm:pb-3"
               />
             </div>
 
