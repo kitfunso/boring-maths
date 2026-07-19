@@ -16,8 +16,9 @@ import type {
   SeasonWindow,
 } from './types';
 import { NOT_OFFERED } from './types';
-import { CALENDAR_PUBLISHED_THROUGH, PEAK_RANGES_2026 } from './data/peakCalendar';
+import { CALENDAR_PUBLISHED_THROUGH, isPeakIsoDate } from './data/peakCalendar';
 import { DESTINATIONS } from './data/destinations';
+import { DISTANCE_MILES_FROM_LONDON } from './data/distances';
 
 const MS_PER_DAY = 86_400_000;
 /** Safety cap so a pathological range cannot spin the day loop. */
@@ -27,13 +28,9 @@ function toUtc(iso: string): number {
   return Date.parse(`${iso}T00:00:00Z`);
 }
 
-const PEAK_INTERVALS: readonly { start: number; end: number }[] = PEAK_RANGES_2026.map((r) => ({
-  start: toUtc(r.from),
-  end: toUtc(r.to),
-}));
-
-function isPeakDay(t: number): boolean {
-  return PEAK_INTERVALS.some((p) => t >= p.start && t <= p.end);
+/** Inverse of toUtc for whole-day UTC timestamps produced by the day loop below. */
+function toIsoDate(t: number): string {
+  return new Date(t).toISOString().slice(0, 10);
 }
 
 const BOTH_SEASONS: SeasonWindow = { hasOffPeak: true, hasPeak: true, beyondCalendar: false };
@@ -65,7 +62,7 @@ export function resolveSeasonsForRange(dateFrom: string, dateTo: string): Season
   let hasOffPeak = false;
   let hasPeak = false;
   for (let t = from; t <= cappedTo; t += MS_PER_DAY) {
-    if (isPeakDay(t)) hasPeak = true;
+    if (isPeakIsoDate(toIsoDate(t))) hasPeak = true;
     else hasOffPeak = true;
     if (hasPeak && hasOffPeak) break;
   }
@@ -93,13 +90,45 @@ function cabinPricing(d: Destination, cabin: AviosFinderInputs['cabin']): CabinP
   return d.business;
 }
 
+function round1dp(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
 /**
- * "Distance" sorting proxy: economy off-peak one-way Avios is monotone with
- * BA's distance banding, so it orders rows near-to-far without needing a
- * separately curated distance dataset.
+ * Total order for the peakSaving sort: nulls (no saving computable for the
+ * current date range) always sort last regardless of direction; ties break
+ * on rankAvios ascending. Written as explicit branches rather than
+ * `(a.peakSavingPct ?? x) - (b.peakSavingPct ?? x)` because null-coercion
+ * arithmetic cannot express "nulls last" for both DESC and tie cases at once.
  */
-function distanceProxy(d: Destination): number {
-  return d.economy === NOT_OFFERED ? Number.MAX_SAFE_INTEGER : d.economy.offPeak;
+function comparePeakSaving(a: DestinationResult, b: DestinationResult): number {
+  if (a.peakSavingPct === null && b.peakSavingPct === null) return a.rankAvios - b.rankAvios;
+  if (a.peakSavingPct === null) return 1;
+  if (b.peakSavingPct === null) return -1;
+  return b.peakSavingPct - a.peakSavingPct || a.rankAvios - b.rankAvios;
+}
+
+/** Re-prices a single destination at the given season resolution with the companion voucher off, to measure its saving. */
+function noVoucherRankAvios(
+  d: Destination,
+  inputs: AviosFinderInputs,
+  seasons: SeasonWindow
+): number {
+  const pricing = cabinPricing(d, inputs.cabin);
+  if (pricing === NOT_OFFERED) return 0;
+  const partyBase = {
+    oneWayCash: pricing.cash,
+    travellers: inputs.travellers,
+    companionVoucher: false,
+    tripType: inputs.tripType,
+  };
+  const off = seasons.hasOffPeak
+    ? calculatePartyTotals({ ...partyBase, oneWayAvios: pricing.offPeak })
+    : null;
+  const peak = seasons.hasPeak
+    ? calculatePartyTotals({ ...partyBase, oneWayAvios: pricing.peak })
+    : null;
+  return off ? off.avios : peak!.avios;
 }
 
 export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
@@ -114,12 +143,18 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
 
   let notOfferedCount = 0;
   const rows: DestinationResult[] = [];
+  const legs = inputs.tripType === 'return' ? 2 : 1;
 
   for (const d of filtered) {
     const pricing = cabinPricing(d, inputs.cabin);
     if (pricing === NOT_OFFERED) {
       notOfferedCount += 1;
       continue;
+    }
+
+    const distanceMiles = DISTANCE_MILES_FROM_LONDON[d.iata];
+    if (distanceMiles === undefined) {
+      throw new Error(`Missing DISTANCE_MILES_FROM_LONDON entry for IATA "${d.iata}" (${d.city})`);
     }
 
     const partyBase = {
@@ -137,6 +172,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
 
     const rankAvios = off ? off.avios : peak!.avios;
     const cashTotal = (off ?? peak)!.cash;
+    const partyMiles = distanceMiles * legs * inputs.travellers;
 
     rows.push({
       destination: d,
@@ -147,6 +183,9 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
       withinBudget: rankAvios <= inputs.aviosBudget,
       budgetPercent:
         inputs.aviosBudget > 0 ? Math.round((rankAvios / inputs.aviosBudget) * 100) : 0,
+      distanceMiles,
+      valuePer1k: rankAvios > 0 ? round1dp((partyMiles / rankAvios) * 1000) : 0,
+      peakSavingPct: off && peak ? Math.round(((peak.avios - off.avios) / peak.avios) * 100) : null,
     });
   }
 
@@ -155,17 +194,32 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
     (a: DestinationResult, b: DestinationResult) => number
   > = {
     avios: (a, b) => a.rankAvios - b.rankAvios,
-    distance: (a, b) => distanceProxy(a.destination) - distanceProxy(b.destination),
+    value: (a, b) => b.valuePer1k - a.valuePer1k || a.rankAvios - b.rankAvios,
+    cash: (a, b) => a.cashTotal - b.cashTotal || a.rankAvios - b.rankAvios,
+    peakSaving: comparePeakSaving,
+    distance: (a, b) => a.distanceMiles - b.distanceMiles,
     name: (a, b) => a.destination.city.localeCompare(b.destination.city),
   };
   rows.sort(comparators[inputs.sortKey]);
 
+  const affordable = rows.filter((r) => r.withinBudget);
+  const cheapestAffordable =
+    affordable.length > 0
+      ? affordable.reduce((min, r) => (r.rankAvios < min.rankAvios ? r : min))
+      : null;
+  const voucherSavingAvios =
+    inputs.companionVoucher && inputs.travellers === 2 && cheapestAffordable
+      ? noVoucherRankAvios(cheapestAffordable.destination, inputs, seasons) -
+        cheapestAffordable.rankAvios
+      : 0;
+
   return {
     ranked: rows,
-    affordable: rows.filter((r) => r.withinBudget),
+    affordable,
     overBudget: rows.filter((r) => !r.withinBudget),
     notOfferedCount,
     seasons,
     totalDestinations: filtered.length,
+    voucherSavingAvios,
   };
 }
