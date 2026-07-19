@@ -28,7 +28,9 @@ jobs:
         run: node scripts/data/check-avios-sources.mjs
 
       - name: Open or update tracking issue on drift
-        if: failure()
+        # Gate on the check step specifically: a checkout/setup-node flake
+        # must not file a misleading "source data changed" issue
+        if: failure() && steps.check.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

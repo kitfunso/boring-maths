@@ -83,7 +83,10 @@ function utcOf(iso: string): number {
 }
 
 function fmtShort(iso: string): string {
-  return SHORT_FMT.format(utcOf(iso));
+  // Corrupt localStorage can hand us a non-ISO string; a label fallback
+  // beats crashing the island with a RangeError from Intl.format(NaN)
+  const t = utcOf(iso);
+  return Number.isNaN(t) ? 'Any dates' : SHORT_FMT.format(t);
 }
 
 function fmtLong(iso: string): string {
@@ -273,7 +276,9 @@ export default function DateRangePicker({
       );
       return top === p.top ? p : { ...p, top };
     });
-  }, [open]);
+    // view is a dependency: navigating to a six-row month can grow the
+    // popover after open, re-tripping the bottom-edge clamp
+  }, [open, view]);
 
   // Close on scroll / resize / outside-click / Escape while open.
   useEffect(() => {

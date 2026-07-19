@@ -245,8 +245,12 @@ async function main() {
     console.log('');
   }
 
-  const sorted = results.slice().sort((a, b) => a.url.localeCompare(b.url));
-  writeFileSync(HASHES_FILE, JSON.stringify(sorted, null, 2) + '\n', 'utf-8');
+  // Only --update rewrites the baseline: a read-only check must never
+  // dirty the working tree (or overwrite the baseline with drift entries)
+  if (forceUpdate) {
+    const sorted = results.slice().sort((a, b) => a.url.localeCompare(b.url));
+    writeFileSync(HASHES_FILE, JSON.stringify(sorted, null, 2) + '\n', 'utf-8');
+  }
 
   if (driftDetected) {
     console.log(

@@ -223,7 +223,13 @@ export default function AviosDestinationFinder() {
                 <ButtonGroup
                   aria-label="Number of travellers"
                   value={String(inputs.travellers)}
-                  onChange={(v) => updateInput('travellers', Number(v) as 1 | 2)}
+                  onChange={(v) => {
+                    const travellers = Number(v) as 1 | 2;
+                    updateInput('travellers', travellers);
+                    // The voucher is a 2-for-1: solo trips must drop the flag or
+                    // the summary and budget card keep claiming voucher pricing
+                    if (travellers === 1) updateInput('companionVoucher', false);
+                  }}
                   options={[
                     { value: '1', label: '1' },
                     { value: '2', label: '2' },
