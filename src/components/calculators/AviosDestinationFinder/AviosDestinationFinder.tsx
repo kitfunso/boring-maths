@@ -123,6 +123,17 @@ export default function AviosDestinationFinder() {
 
   const shown = inputs.showOverBudget ? result.ranked : result.affordable;
 
+  const hasAffordable = result.affordable.length > 0;
+  const cheapestTrip = hasAffordable
+    ? result.affordable.reduce((min, row) => (row.rankAvios < min.rankAvios ? row : min))
+    : null;
+  const bestValueTrip = hasAffordable
+    ? result.affordable.reduce((max, row) => (row.valuePer1k > max.valuePer1k ? row : max))
+    : null;
+  const furthestTrip = hasAffordable
+    ? result.affordable.reduce((max, row) => (row.distanceMiles > max.distanceMiles ? row : max))
+    : null;
+
   const topPicks =
     result.affordable.length > 0
       ? ` Top picks: ${result.affordable
@@ -277,7 +288,13 @@ export default function AviosDestinationFinder() {
               <MetricCard
                 label="Your budget"
                 value={`${nf.format(inputs.aviosBudget)} Avios`}
-                sublabel={inputs.companionVoucher ? 'with companion voucher' : undefined}
+                sublabel={
+                  inputs.companionVoucher && result.voucherSavingAvios > 0
+                    ? `Voucher saves ${nf.format(result.voucherSavingAvios)} Avios vs paying for 2 seats`
+                    : inputs.companionVoucher
+                      ? 'with companion voucher'
+                      : undefined
+                }
               />
               <MetricCard
                 label="Cabin"
@@ -289,6 +306,26 @@ export default function AviosDestinationFinder() {
                 }
               />
             </Grid>
+
+            {cheapestTrip && bestValueTrip && furthestTrip && (
+              <Grid responsive={{ sm: 1, md: 3 }} gap="md">
+                <MetricCard
+                  label="Cheapest trip"
+                  value={cheapestTrip.destination.city}
+                  sublabel={`${nf.format(cheapestTrip.rankAvios)} Avios`}
+                />
+                <MetricCard
+                  label="Best bang for your buck"
+                  value={bestValueTrip.destination.city}
+                  sublabel={`${bestValueTrip.valuePer1k.toFixed(1)} mi per 1k Avios`}
+                />
+                <MetricCard
+                  label="Furthest you can fly"
+                  value={furthestTrip.destination.city}
+                  sublabel={`${nf.format(furthestTrip.distanceMiles)} mi for ${nf.format(furthestTrip.rankAvios)} Avios`}
+                />
+              </Grid>
+            )}
 
             <div className="flex items-center justify-between gap-4">
               <div className="w-56">
