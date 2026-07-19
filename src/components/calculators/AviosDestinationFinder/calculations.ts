@@ -45,6 +45,7 @@ const BOTH_SEASONS: SeasonWindow = { hasOffPeak: true, hasPeak: true, beyondCale
  * and set beyondCalendar so the UI can show a "provisional" note. Ranges
  * longer than MAX_RANGE_DAYS return the widest honest answer (both seasons)
  * rather than silently truncating the day scan and reporting it as complete.
+ * Invariant: never returns hasOffPeak and hasPeak both false.
  */
 export function resolveSeasonsForRange(dateFrom: string, dateTo: string): SeasonWindow {
   if (!dateFrom || !dateTo) return BOTH_SEASONS;
