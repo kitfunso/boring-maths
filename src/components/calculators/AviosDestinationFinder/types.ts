@@ -54,6 +54,19 @@ export const CABIN_LABELS: Readonly<Record<Cabin, string>> = {
 export type TripType = 'return' | 'oneWay';
 export type SortKey = 'avios' | 'distance' | 'name';
 
+export interface PartyTotalsInputs {
+  readonly oneWayAvios: number;
+  readonly oneWayCash: number;
+  readonly travellers: 1 | 2;
+  readonly companionVoucher: boolean;
+  readonly tripType: TripType;
+}
+
+export interface PartyPricing {
+  readonly avios: number;
+  readonly cash: number;
+}
+
 /** One-way Avios prices for a cabin plus the fixed GBP cash element. */
 export interface SeasonalAvios {
   readonly offPeak: number;
