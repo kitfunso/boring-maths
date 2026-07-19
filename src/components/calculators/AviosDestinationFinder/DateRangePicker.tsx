@@ -390,7 +390,7 @@ export default function DateRangePicker({
           role="dialog"
           aria-modal="false"
           aria-label="Choose travel dates"
-          className="fixed z-20 bg-[var(--color-night)] border border-white/10 rounded-xl shadow-xl p-4"
+          className="fixed z-50 bg-[var(--color-night)] border border-white/10 rounded-xl shadow-xl p-4"
           style={{ top: `${pos.top}px`, left: `${pos.left}px`, width: `${pos.width}px` }}
         >
           <div className="flex items-center justify-between mb-3">

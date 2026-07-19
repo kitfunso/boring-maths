@@ -355,11 +355,20 @@ export default function AviosDestinationFinder() {
                       <th scope="col" className="text-left py-2">
                         Destination
                       </th>
+                      {/* Two-line headers keep the 8-column table inside the card at
+                          desktop widths; "Off-peak Avios" one-liners forced a 49px
+                          horizontal scroll that hid the Seats column */}
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
-                        Off-peak Avios
+                        Off-peak
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          Avios
+                        </div>
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
-                        Peak Avios
+                        Peak
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          Avios
+                        </div>
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         + cash from
