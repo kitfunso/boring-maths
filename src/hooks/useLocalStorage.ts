@@ -11,6 +11,11 @@
 import { useState, useEffect, useCallback, useRef } from 'preact/hooks';
 import { type Currency, getInitialCurrency } from '../lib/regions';
 
+/** True for plain `{}` object literals; false for arrays, null, and class instances. */
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+
 export function useLocalStorage<T>(
   key: string,
   initialValue: T | (() => T)
@@ -25,20 +30,33 @@ export function useLocalStorage<T>(
       const stored = localStorage.getItem(key);
       if (stored) {
         const parsed = JSON.parse(stored) as T;
+        const defaultsValue =
+          typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
+
+        // Merge persisted state over the current defaults so a payload saved
+        // before a newer field was added (e.g. an input schema gaining a new
+        // array field) doesn't crash the consumer with a missing property.
+        // This is a shallow, one-level merge only: nested objects/arrays on
+        // the parsed value fully replace the matching default, they are not
+        // merged recursively.
+        const merged =
+          isPlainObject(defaultsValue) && isPlainObject(parsed)
+            ? { ...defaultsValue, ...parsed }
+            : parsed;
 
         // If the saved state has a currency field, sync it with the global preference
-        if (parsed && typeof parsed === 'object' && 'currency' in parsed) {
+        if (merged && typeof merged === 'object' && 'currency' in merged) {
           const globalCurrency = getInitialCurrency();
-          const savedCurrency = (parsed as { currency: Currency }).currency;
+          const savedCurrency = (merged as { currency: Currency }).currency;
 
           // If global currency differs from saved, update the currency field
           // but keep all other saved values
           if (globalCurrency !== savedCurrency) {
-            return { ...parsed, currency: globalCurrency };
+            return { ...merged, currency: globalCurrency };
           }
         }
 
-        return parsed;
+        return merged;
       }
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);
