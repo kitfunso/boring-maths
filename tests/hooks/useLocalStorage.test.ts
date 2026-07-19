@@ -97,5 +97,21 @@ describe('useLocalStorage', () => {
       const value = JSON.parse(screen.getByText(/.+/).textContent ?? '{}') as ObjectShape;
       expect(value).toEqual(defaultObject());
     });
+
+    it('applies the same merge to a cross-tab storage event missing a newer field', () => {
+      render(h(ObjectHarness, {}));
+
+      act(() => {
+        window.dispatchEvent(
+          new StorageEvent('storage', {
+            key: 'test-object-key',
+            newValue: JSON.stringify({ a: 2, b: 'saved' }),
+          })
+        );
+      });
+
+      const value = JSON.parse(screen.getByText(/.+/).textContent ?? '{}') as ObjectShape;
+      expect(value).toEqual({ a: 2, b: 'saved', regions: [] });
+    });
   });
 });

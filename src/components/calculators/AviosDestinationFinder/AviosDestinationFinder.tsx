@@ -242,7 +242,7 @@ export default function AviosDestinationFinder() {
               <MetricCard
                 label="Within budget"
                 value={String(result.affordable.length)}
-                sublabel={`of ${result.totalDestinations} destinations`}
+                sublabel={`of ${result.totalDestinations - result.notOfferedCount} destinations`}
                 valueColor="success"
               />
               <MetricCard

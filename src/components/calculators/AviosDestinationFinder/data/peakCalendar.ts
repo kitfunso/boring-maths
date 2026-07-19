@@ -5,6 +5,14 @@
  * corroborated by https://www.aviosintelligence.com/reports/avios-peak-off-peak-dates.
  * 2027 calendar is not yet published in text form - dates beyond
  * CALENDAR_PUBLISHED_THROUGH are treated as "could be either season".
+ *
+ * Annual update checklist (do this when the next year's calendar publishes):
+ * (a) Append the new year's PEAK_RANGES to this file and wire them into
+ *     PEAK_INTERVALS in calculations.ts.
+ * (b) Bump CALENDAR_PUBLISHED_THROUGH.
+ * (c) Bump DATA_LAST_VERIFIED.
+ * (d) Re-verify prices against the source URL in destinations.ts and update
+ *     the anchors/tier pins in the test file if BA repriced.
  */
 
 export interface DateRange {

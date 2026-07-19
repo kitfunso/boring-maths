@@ -126,7 +126,19 @@ export function useLocalStorage<T>(
         }
 
         try {
-          setState(JSON.parse(e.newValue));
+          const parsed = JSON.parse(e.newValue);
+          const defaultsValue =
+            typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
+
+          // Same shallow merge as the initial-load path: a payload saved in
+          // another tab before a newer field was added shouldn't crash this
+          // tab with a missing property.
+          const merged =
+            isPlainObject(defaultsValue) && isPlainObject(parsed)
+              ? { ...defaultsValue, ...parsed }
+              : parsed;
+
+          setState(merged);
         } catch {
           // Ignore parse errors
         }
