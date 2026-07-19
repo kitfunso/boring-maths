@@ -39,6 +39,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
+// BA blocks parameterised deep links for anonymous sessions (verified 2026-07-19);
+// this is the official Reward Flight Finder entry page.
+const BA_REWARD_FLIGHT_FINDER_URL =
+  'https://www.britishairways.com/travel/flightfinder/public/en_gb';
+
 const REGION_OPTIONS = REGIONS.map((r) => ({ value: r, label: r }));
 const HOLIDAY_OPTIONS = HOLIDAY_TYPES.map((t) => ({ value: t, label: HOLIDAY_TYPE_LABELS[t] }));
 const CABIN_OPTIONS = (Object.keys(CABIN_LABELS) as Cabin[]).map((c) => ({
@@ -47,6 +52,9 @@ const CABIN_OPTIONS = (Object.keys(CABIN_LABELS) as Cabin[]).map((c) => ({
 }));
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'avios', label: 'Fewest Avios first' },
+  { value: 'value', label: 'Best bang for your buck' },
+  { value: 'cash', label: 'Lowest cash co-pay' },
+  { value: 'peakSaving', label: 'Biggest off-peak saving' },
   { value: 'distance', label: 'Shortest flights first' },
   { value: 'name', label: 'A to Z' },
 ];
@@ -83,7 +91,23 @@ function ResultRow({ row }: { row: DestinationResult }) {
       <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
         £{row.cashTotal.toFixed(2)}
       </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {nf.format(row.distanceMiles)} <span className="text-[var(--color-muted)] text-xs">mi</span>
+      </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {row.valuePer1k.toFixed(1)}
+      </td>
       <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">{row.budgetPercent}%</td>
+      <td className="text-right py-2 pl-3 whitespace-nowrap">
+        <a
+          href={BA_REWARD_FLIGHT_FINDER_URL}
+          target="_blank"
+          rel="noopener nofollow"
+          className="text-[var(--color-accent)] hover:underline"
+        >
+          Check
+        </a>
+      </td>
     </tr>
   );
 }
@@ -293,7 +317,10 @@ export default function AviosDestinationFinder() {
 
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="overflow-x-auto">
-                <table className="w-full text-sm" aria-label="Destinations ranked by Avios cost">
+                <table
+                  className="w-full text-sm"
+                  aria-label="Destinations, sortable using the Sort by dropdown above"
+                >
                   <thead>
                     <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">
                       <th scope="col" className="text-left py-2">
@@ -309,7 +336,23 @@ export default function AviosDestinationFinder() {
                         + cash from
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
+                        Distance
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-right py-2 pl-3 whitespace-nowrap"
+                        title="Miles flown per 1,000 Avios - higher is better"
+                      >
+                        Value
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          mi per 1k Avios
+                        </div>
+                      </th>
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         % of budget
+                      </th>
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
+                        Seats
                       </th>
                     </tr>
                   </thead>
