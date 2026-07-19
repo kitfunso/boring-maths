@@ -7,6 +7,8 @@ import {
   resolveSeasonsForRange,
   calculatePartyTotals,
 } from '../../src/components/calculators/AviosDestinationFinder/calculations';
+import { DESTINATIONS } from '../../src/components/calculators/AviosDestinationFinder/data/destinations';
+import { REGIONS } from '../../src/components/calculators/AviosDestinationFinder/types';
 
 describe('AviosDestinationFinder', () => {
   describe('resolveSeasonsForRange', () => {
@@ -126,5 +128,63 @@ describe('AviosDestinationFinder', () => {
       expect(ret.avios).toBe(ow.avios * 2);
       expect(ret.cash).toBe(ow.cash * 2);
     });
+  });
+
+  describe('destination data integrity', () => {
+    const byCity = (city: string) => DESTINATIONS.find((d) => d.city === city);
+
+    it('has a meaningful catalogue size', () => {
+      expect(DESTINATIONS.length).toBeGreaterThanOrEqual(100);
+    });
+
+    it('has unique IATA keys', () => {
+      const codes = DESTINATIONS.map((d) => d.iata);
+      expect(new Set(codes).size).toBe(codes.length);
+    });
+
+    it('every destination has a region, at least one holiday type, and economy pricing', () => {
+      for (const d of DESTINATIONS) {
+        expect(REGIONS).toContain(d.region);
+        expect(d.holidayTypes.length).toBeGreaterThan(0);
+        expect(d.economy).not.toBe('not_offered');
+      }
+    });
+
+    it('off-peak never exceeds peak for any offered cabin', () => {
+      for (const d of DESTINATIONS) {
+        for (const cabin of [d.economy, d.premiumEconomy, d.business]) {
+          if (cabin !== 'not_offered') {
+            expect(cabin.offPeak).toBeLessThanOrEqual(cabin.peak);
+            expect(cabin.cash).toBeGreaterThanOrEqual(0);
+          }
+        }
+      }
+    });
+
+    // Anchor rows: verbatim from headforpoints.com table (fetched 2026-07-19).
+    // These lock the captured dataset to the verified source.
+    const ANCHORS: ReadonlyArray<[string, number, number, number, number, number, number]> = [
+      // [city, econOff, econPeak, econCash, bizOff, bizPeak, bizCash]
+      ['Amsterdam', 10000, 10750, 1, 16500, 18000, 15],
+      ['Malaga', 13000, 14000, 1, 22000, 24500, 15],
+      ['Athens', 15000, 16750, 1, 26750, 30000, 15],
+      ['Dubai', 27500, 33000, 60, 88000, 99000, 199.5],
+      ['New York', 27500, 33000, 60, 88000, 99000, 199.5],
+      ['Miami', 33000, 38500, 85, 99000, 110000, 249.5],
+      ['Cape Town', 33000, 38500, 85, 99000, 110000, 249.5],
+      ['Tokyo', 38500, 44000, 110, 110000, 121000, 299.5],
+      ['Singapore', 44000, 49500, 135, 121000, 132000, 335],
+      ['Sydney', 55000, 60500, 160, 159500, 187000, 399.5],
+    ];
+
+    it.each(ANCHORS)(
+      '%s matches the verified source row',
+      (city, econOff, econPeak, econCash, bizOff, bizPeak, bizCash) => {
+        const d = byCity(city);
+        expect(d).toBeDefined();
+        expect(d!.economy).toEqual({ offPeak: econOff, peak: econPeak, cash: econCash });
+        expect(d!.business).toEqual({ offPeak: bizOff, peak: bizPeak, cash: bizCash });
+      }
+    );
   });
 });
