@@ -129,7 +129,11 @@ export interface DestinationResult {
 }
 
 export interface AviosFinderResult {
+  /** All priced rows in global sort order (per inputs.sortKey), affordable and over-budget interleaved. */
+  readonly ranked: readonly DestinationResult[];
+  /** Filtered view of `ranked` (withinBudget only); order is preserved from `ranked`. */
   readonly affordable: readonly DestinationResult[];
+  /** Filtered view of `ranked` (over budget only); order is preserved from `ranked`. */
   readonly overBudget: readonly DestinationResult[];
   /** Destinations hidden because the chosen cabin is not offered. */
   readonly notOfferedCount: number;

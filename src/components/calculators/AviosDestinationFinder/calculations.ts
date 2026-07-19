@@ -161,6 +161,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
   rows.sort(comparators[inputs.sortKey]);
 
   return {
+    ranked: rows,
     affordable: rows.filter((r) => r.withinBudget),
     overBudget: rows.filter((r) => !r.withinBudget),
     notOfferedCount,

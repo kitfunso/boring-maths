@@ -64,6 +64,9 @@ function ResultRow({ row }: { row: DestinationResult }) {
       <td className="py-2">
         <span className="font-medium">{d.city}</span>{' '}
         <span className="text-[var(--color-muted)]">{d.country}</span>
+        {!row.withinBudget && (
+          <span className="ml-2 text-xs text-amber-400 uppercase tracking-wider">Over budget</span>
+        )}
         <div className="text-xs text-[var(--color-muted)]">
           {d.holidayTypes.map((t) => HOLIDAY_TYPE_LABELS[t]).join(' | ')}
         </div>
@@ -84,18 +87,21 @@ export default function AviosDestinationFinder() {
     compute: computeResults,
   });
 
-  const shown = inputs.showOverBudget
-    ? [...result.affordable, ...result.overBudget]
-    : result.affordable;
+  const shown = inputs.showOverBudget ? result.ranked : result.affordable;
+
+  const topPicks =
+    result.affordable.length > 0
+      ? ` Top picks: ${result.affordable
+          .slice(0, 3)
+          .map((r) => r.destination.city)
+          .join(', ')}`
+      : ' None within budget - try a higher budget or wider filters.';
 
   const summary = `${nf.format(inputs.aviosBudget)} Avios (${CABIN_LABELS[inputs.cabin]}, ${
     inputs.travellers
   } traveller${inputs.travellers === 2 ? 's' : ''}${
     inputs.companionVoucher ? ' + companion voucher' : ''
-  }): ${result.affordable.length} destinations within budget. Top picks: ${result.affordable
-    .slice(0, 3)
-    .map((r) => r.destination.city)
-    .join(', ')}`;
+  }): ${result.affordable.length} destinations within budget.${topPicks}`;
 
   return (
     <ThemeProvider defaultColor="blue">

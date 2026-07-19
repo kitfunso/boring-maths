@@ -408,5 +408,55 @@ describe('AviosDestinationFinder', () => {
       const names = r.affordable.map((x) => x.destination.city);
       expect([...names].sort((a, b) => a.localeCompare(b))).toEqual(names);
     });
+
+    describe('ranked: global sort order across the budget split', () => {
+      // Real data, computed via: npx vitest run tests/calculations/avios-destination-finder.test.ts
+      // budget=45000, travellers=1, oneWay, sortKey='name', cabin='economy' (default), no dates
+      // -> rankAvios is economy.offPeak (both seasons apply, off-peak used). Exactly 2 of the
+      // 199 filtered destinations exceed 45000: Melbourne and Sydney (both 55,000), everything
+      // else is <= 44,000. This is a real split in the shipped dataset, not a hand-picked one.
+      const r = computeResults({
+        ...base,
+        aviosBudget: 45000,
+        travellers: 1,
+        tripType: 'oneWay',
+        sortKey: 'name',
+      });
+      const rankedNames = r.ranked.map((x) => x.destination.city);
+
+      it('sorts the whole ranked list globally by name, affordable and over-budget together', () => {
+        expect(r.overBudget.map((x) => x.destination.city)).toEqual(['Melbourne', 'Sydney']);
+        expect(rankedNames).toEqual([...rankedNames].sort((a, b) => a.localeCompare(b)));
+      });
+
+      it('interleaves an over-budget row in its correct alphabetical position (Melbourne)', () => {
+        const i = rankedNames.indexOf('Melbourne');
+        expect(rankedNames[i - 1]).toBe('Mauritius');
+        expect(rankedNames[i + 1]).toBe('Menorca');
+        expect(r.ranked[i].withinBudget).toBe(false);
+      });
+
+      it('interleaves an over-budget row in its correct alphabetical position (Sydney)', () => {
+        const i = rankedNames.indexOf('Sydney');
+        expect(rankedNames[i - 1]).toBe('Stockholm');
+        expect(rankedNames[i + 1]).toBe('Tampa');
+        expect(r.ranked[i].withinBudget).toBe(false);
+      });
+
+      it('would NOT match the naive affordable-then-overBudget concatenation the component used to build', () => {
+        // This is the bug the fix closes: the old component built `shown` as
+        // [...affordable, ...overBudget], which pushes every over-budget row to
+        // the end regardless of sortKey. `ranked` must differ from that shape
+        // whenever a global sort (like 'name') disagrees with the budget split.
+        const naiveConcat = [...r.affordable, ...r.overBudget].map((x) => x.destination.city);
+        expect(rankedNames).not.toEqual(naiveConcat);
+      });
+
+      it('ranked is exactly the union of affordable and over-budget, order preserved', () => {
+        expect(r.ranked.length).toBe(r.affordable.length + r.overBudget.length);
+        expect(r.affordable.every((x) => x.withinBudget)).toBe(true);
+        expect(r.overBudget.every((x) => !x.withinBudget)).toBe(true);
+      });
+    });
   });
 });
