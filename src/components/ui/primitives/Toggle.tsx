@@ -92,7 +92,7 @@ export function Toggle({
         className={`
           ${sizes.track} rounded-full transition-all relative flex-shrink-0
           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--color-void)]
-          ${checked ? `${tokens.bg500} focus:${tokens.ring500}` : 'bg-white/20 focus:ring-white/50'}
+          ${checked ? `${tokens.bg600} ${tokens.ring100}` : 'bg-white/20 focus:ring-white/50'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
         `
           .trim()
@@ -109,10 +109,12 @@ export function Toggle({
             .replace(/\s+/g, ' ')}
         />
       </button>
+      {/* No onClick here: htmlFor already forwards label clicks to the button.
+          A duplicate handler made every label click fire twice, flipping the
+          toggle on and straight back off. */}
       <label
         htmlFor={toggleId}
         className={`text-[var(--color-cream)] ${disabled ? 'opacity-50' : 'cursor-pointer'}`}
-        onClick={handleClick}
       >
         {label}
       </label>
