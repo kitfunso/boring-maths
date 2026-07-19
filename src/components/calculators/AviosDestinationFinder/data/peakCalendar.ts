@@ -7,12 +7,14 @@
  * CALENDAR_PUBLISHED_THROUGH are treated as "could be either season".
  *
  * Annual update checklist (do this when the next year's calendar publishes):
- * (a) Append the new year's PEAK_RANGES to this file and wire them into
- *     PEAK_INTERVALS in calculations.ts.
+ * (a) Append the new year's PEAK_RANGES to this file; PEAK_INTERVALS and
+ *     isPeakIsoDate below rebuild from them automatically.
  * (b) Bump CALENDAR_PUBLISHED_THROUGH.
  * (c) Bump DATA_LAST_VERIFIED.
  * (d) Re-verify prices against the source URL in destinations.ts and update
  *     the anchors/tier pins in the test file if BA repriced.
+ * The monthly avios-data-freshness workflow flags source drift automatically;
+ * after re-verifying, reseed baselines: node scripts/data/check-avios-sources.mjs --update
  */
 
 export interface DateRange {
@@ -56,3 +58,23 @@ export const CALENDAR_PUBLISHED_THROUGH = '2026-12-31';
 
 /** Shown in the UI so users know how fresh the guide data is. */
 export const DATA_LAST_VERIFIED = '2026-07-19';
+
+function toUtc(iso: string): number {
+  return Date.parse(`${iso}T00:00:00Z`);
+}
+
+/** Built once at module load so isPeakIsoDate stays a cheap per-call lookup. */
+const PEAK_INTERVALS: readonly { start: number; end: number }[] = PEAK_RANGES_2026.map((r) => ({
+  start: toUtc(r.from),
+  end: toUtc(r.to),
+}));
+
+/**
+ * Whether an ISO yyyy-mm-dd date falls within a published peak range.
+ * Shared by the calculation layer and the date-range calendar UI so there is
+ * one definition of "peak" across the finder.
+ */
+export function isPeakIsoDate(iso: string): boolean {
+  const t = toUtc(iso);
+  return PEAK_INTERVALS.some((p) => t >= p.start && t <= p.end);
+}

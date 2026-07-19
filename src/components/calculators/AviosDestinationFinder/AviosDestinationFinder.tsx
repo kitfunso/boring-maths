@@ -22,6 +22,7 @@ import {
 } from './types';
 import { DATA_LAST_VERIFIED } from './data/peakCalendar';
 import MultiSelectChips from './MultiSelectChips';
+import DateRangePicker from './DateRangePicker';
 import {
   ThemeProvider,
   Card,
@@ -39,6 +40,11 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
+// BA blocks parameterised deep links for anonymous sessions (verified 2026-07-19);
+// this is the official Reward Flight Finder entry page.
+const BA_REWARD_FLIGHT_FINDER_URL =
+  'https://www.britishairways.com/travel/flightfinder/public/en_gb';
+
 const REGION_OPTIONS = REGIONS.map((r) => ({ value: r, label: r }));
 const HOLIDAY_OPTIONS = HOLIDAY_TYPES.map((t) => ({ value: t, label: HOLIDAY_TYPE_LABELS[t] }));
 const CABIN_OPTIONS = (Object.keys(CABIN_LABELS) as Cabin[]).map((c) => ({
@@ -47,6 +53,9 @@ const CABIN_OPTIONS = (Object.keys(CABIN_LABELS) as Cabin[]).map((c) => ({
 }));
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'avios', label: 'Fewest Avios first' },
+  { value: 'value', label: 'Best bang for your buck' },
+  { value: 'cash', label: 'Lowest cash co-pay' },
+  { value: 'peakSaving', label: 'Biggest off-peak saving' },
   { value: 'distance', label: 'Shortest flights first' },
   { value: 'name', label: 'A to Z' },
 ];
@@ -83,7 +92,23 @@ function ResultRow({ row }: { row: DestinationResult }) {
       <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
         £{row.cashTotal.toFixed(2)}
       </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {nf.format(row.distanceMiles)} <span className="text-[var(--color-muted)] text-xs">mi</span>
+      </td>
+      <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+        {row.valuePer1k.toFixed(1)}
+      </td>
       <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">{row.budgetPercent}%</td>
+      <td className="text-right py-2 pl-3 whitespace-nowrap">
+        <a
+          href={BA_REWARD_FLIGHT_FINDER_URL}
+          target="_blank"
+          rel="noopener nofollow"
+          className="text-[var(--color-accent)] hover:underline"
+        >
+          Check
+        </a>
+      </td>
     </tr>
   );
 }
@@ -97,6 +122,17 @@ export default function AviosDestinationFinder() {
   });
 
   const shown = inputs.showOverBudget ? result.ranked : result.affordable;
+
+  const hasAffordable = result.affordable.length > 0;
+  const cheapestTrip = hasAffordable
+    ? result.affordable.reduce((min, row) => (row.rankAvios < min.rankAvios ? row : min))
+    : null;
+  const bestValueTrip = hasAffordable
+    ? result.affordable.reduce((max, row) => (row.valuePer1k > max.valuePer1k ? row : max))
+    : null;
+  const furthestTrip = hasAffordable
+    ? result.affordable.reduce((max, row) => (row.distanceMiles > max.distanceMiles ? row : max))
+    : null;
 
   const topPicks =
     result.affordable.length > 0
@@ -137,25 +173,16 @@ export default function AviosDestinationFinder() {
                 />
               </div>
               <div>
-                <Label htmlFor="dateFrom">Travel dates (optional)</Label>
-                {/* grid-cols-2 (minmax(0,1fr)) lets the date inputs shrink below their
-                    intrinsic width; a flex row cannot and overflows the card on tablets */}
-                <div className="grid grid-cols-2 gap-2">
-                  <Input
-                    id="dateFrom"
-                    type="date"
-                    aria-label="Travel start date"
-                    value={inputs.dateFrom}
-                    onChange={(e) => updateInput('dateFrom', e.target.value)}
-                  />
-                  <Input
-                    id="dateTo"
-                    type="date"
-                    aria-label="Travel end date"
-                    value={inputs.dateTo}
-                    onChange={(e) => updateInput('dateTo', e.target.value)}
-                  />
-                </div>
+                <Label htmlFor="dateRange">Travel dates (optional)</Label>
+                <DateRangePicker
+                  id="dateRange"
+                  valueFrom={inputs.dateFrom}
+                  valueTo={inputs.dateTo}
+                  onChange={(from, to) => {
+                    updateInput('dateFrom', from);
+                    updateInput('dateTo', to);
+                  }}
+                />
               </div>
             </Grid>
 
@@ -166,6 +193,7 @@ export default function AviosDestinationFinder() {
                 selected={inputs.regions}
                 onChange={(v) => updateInput('regions', v)}
                 ariaLabel="Filter by region"
+                allLabel="All"
               />
             </div>
 
@@ -176,6 +204,7 @@ export default function AviosDestinationFinder() {
                 selected={inputs.holidayTypes}
                 onChange={(v) => updateInput('holidayTypes', v)}
                 ariaLabel="Filter by holiday type"
+                allLabel="All"
               />
             </div>
 
@@ -194,7 +223,13 @@ export default function AviosDestinationFinder() {
                 <ButtonGroup
                   aria-label="Number of travellers"
                   value={String(inputs.travellers)}
-                  onChange={(v) => updateInput('travellers', Number(v) as 1 | 2)}
+                  onChange={(v) => {
+                    const travellers = Number(v) as 1 | 2;
+                    updateInput('travellers', travellers);
+                    // The voucher is a 2-for-1: solo trips must drop the flag or
+                    // the summary and budget card keep claiming voucher pricing
+                    if (travellers === 1) updateInput('companionVoucher', false);
+                  }}
                   options={[
                     { value: '1', label: '1' },
                     { value: '2', label: '2' },
@@ -259,7 +294,13 @@ export default function AviosDestinationFinder() {
               <MetricCard
                 label="Your budget"
                 value={`${nf.format(inputs.aviosBudget)} Avios`}
-                sublabel={inputs.companionVoucher ? 'with companion voucher' : undefined}
+                sublabel={
+                  inputs.companionVoucher && result.voucherSavingAvios > 0
+                    ? `Voucher saves ${nf.format(result.voucherSavingAvios)} Avios vs paying for 2 seats`
+                    : inputs.companionVoucher
+                      ? 'with companion voucher'
+                      : undefined
+                }
               />
               <MetricCard
                 label="Cabin"
@@ -271,6 +312,26 @@ export default function AviosDestinationFinder() {
                 }
               />
             </Grid>
+
+            {cheapestTrip && bestValueTrip && furthestTrip && (
+              <Grid responsive={{ sm: 1, md: 3 }} gap="md">
+                <MetricCard
+                  label="Cheapest trip"
+                  value={cheapestTrip.destination.city}
+                  sublabel={`${nf.format(cheapestTrip.rankAvios)} Avios`}
+                />
+                <MetricCard
+                  label="Best bang for your buck"
+                  value={bestValueTrip.destination.city}
+                  sublabel={`${bestValueTrip.valuePer1k.toFixed(1)} mi per 1k Avios`}
+                />
+                <MetricCard
+                  label="Furthest you can fly"
+                  value={furthestTrip.destination.city}
+                  sublabel={`${nf.format(furthestTrip.distanceMiles)} mi for ${nf.format(furthestTrip.rankAvios)} Avios`}
+                />
+              </Grid>
+            )}
 
             <div className="flex items-center justify-between gap-4">
               <div className="w-56">
@@ -291,23 +352,51 @@ export default function AviosDestinationFinder() {
 
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="overflow-x-auto">
-                <table className="w-full text-sm" aria-label="Destinations ranked by Avios cost">
+                <table
+                  className="w-full text-sm"
+                  aria-label="Destinations, sortable using the Sort by dropdown above"
+                >
                   <thead>
                     <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">
                       <th scope="col" className="text-left py-2">
                         Destination
                       </th>
+                      {/* Two-line headers keep the 8-column table inside the card at
+                          desktop widths; "Off-peak Avios" one-liners forced a 49px
+                          horizontal scroll that hid the Seats column */}
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
-                        Off-peak Avios
+                        Off-peak
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          Avios
+                        </div>
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
-                        Peak Avios
+                        Peak
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          Avios
+                        </div>
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         + cash from
                       </th>
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
+                        Distance
+                      </th>
+                      <th
+                        scope="col"
+                        className="text-right py-2 pl-3 whitespace-nowrap"
+                        title="Miles flown per 1,000 Avios - higher is better"
+                      >
+                        Value
+                        <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">
+                          mi per 1k Avios
+                        </div>
+                      </th>
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         % of budget
+                      </th>
+                      <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
+                        Seats
                       </th>
                     </tr>
                   </thead>

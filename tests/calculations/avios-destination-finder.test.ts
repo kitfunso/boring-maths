@@ -9,7 +9,14 @@ import {
   computeResults,
 } from '../../src/components/calculators/AviosDestinationFinder/calculations';
 import { DESTINATIONS } from '../../src/components/calculators/AviosDestinationFinder/data/destinations';
-import { REGIONS, getDefaultInputs } from '../../src/components/calculators/AviosDestinationFinder/types';
+import {
+  DISTANCE_MILES_FROM_LONDON,
+  assertDistanceCoverage,
+} from '../../src/components/calculators/AviosDestinationFinder/data/distances';
+import {
+  REGIONS,
+  getDefaultInputs,
+} from '../../src/components/calculators/AviosDestinationFinder/types';
 
 describe('AviosDestinationFinder', () => {
   describe('resolveSeasonsForRange', () => {
@@ -457,6 +464,194 @@ describe('AviosDestinationFinder', () => {
         expect(r.affordable.every((x) => x.withinBudget)).toBe(true);
         expect(r.overBudget.every((x) => !x.withinBudget)).toBe(true);
       });
+    });
+  });
+
+  // --- Task 1: real distances, value metrics, new sort keys -----------------
+
+  describe('DISTANCE_MILES_FROM_LONDON and assertDistanceCoverage', () => {
+    it('has a positive distance entry for every destination (closes the regex-extraction loophole)', () => {
+      for (const d of DESTINATIONS) {
+        expect(DISTANCE_MILES_FROM_LONDON[d.iata]).toBeGreaterThan(0);
+      }
+    });
+
+    it('assertDistanceCoverage does not throw for the full destination list', () => {
+      expect(() => assertDistanceCoverage(DESTINATIONS)).not.toThrow();
+    });
+
+    it('assertDistanceCoverage throws listing a destination with no distance entry', () => {
+      const withGap = [...DESTINATIONS, { iata: 'ZZZ', city: 'Nowhere' }];
+      expect(() => assertDistanceCoverage(withGap)).toThrow(/Nowhere \(ZZZ\)/);
+    });
+
+    // Distance sanity anchor: verbatim OurAirports CSV rows (fetched 2026-07-19,
+    // https://davidmegginson.github.io/ourairports-data/airports.csv), columns
+    // "id","ident","type","name","latitude_deg","longitude_deg",...,"iata_code",...
+    //   2434,"EGLL","large_airport","London Heathrow Airport",51.470748,-0.459909,83,"EU","GB","GB-ENG","London","yes","EGLL","LHR","EGLL",,"http://www.heathrow.com/",...
+    //   3622,"KJFK","large_airport","John F. Kennedy International Airport",40.639447,-73.779317,13,"NA","US","US-NY","New York","yes","KJFK","JFK","KJFK","JFK",...
+    //   27145,"YSSY","large_airport","Sydney Kingsford Smith International Airport",-33.946098,151.177002,21,"OC","AU","AU-NSW","Sydney (Mascot)","yes","YSSY","SYD","YSSY",,...
+    // Haversine below is computed independently of the generator script, from
+    // these hardcoded coordinates, to sanity-check the generated table without
+    // trusting any distance figure from memory.
+    it('LHR -> JFK and LHR -> SYD are within 1% of an independently computed haversine', () => {
+      const EARTH_RADIUS_MILES = 3958.7613;
+      const toRadians = (deg: number) => (deg * Math.PI) / 180;
+      const haversineMiles = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+        const dLat = toRadians(lat2 - lat1);
+        const dLon = toRadians(lon2 - lon1);
+        const a =
+          Math.sin(dLat / 2) ** 2 +
+          Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) ** 2;
+        return EARTH_RADIUS_MILES * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      };
+
+      const LHR = { lat: 51.470748, lon: -0.459909 };
+      const JFK = { lat: 40.639447, lon: -73.779317 };
+      const SYD = { lat: -33.946098, lon: 151.177002 };
+
+      const jfkComputed = haversineMiles(LHR.lat, LHR.lon, JFK.lat, JFK.lon);
+      const sydComputed = haversineMiles(LHR.lat, LHR.lon, SYD.lat, SYD.lon);
+
+      expect(Math.abs(DISTANCE_MILES_FROM_LONDON.JFK - jfkComputed) / jfkComputed).toBeLessThan(
+        0.01
+      );
+      expect(Math.abs(DISTANCE_MILES_FROM_LONDON.SYD - sydComputed) / sydComputed).toBeLessThan(
+        0.01
+      );
+    });
+  });
+
+  describe('valuePer1k', () => {
+    const base = getDefaultInputs();
+
+    it('doubles for 2 travellers when the companion voucher is applied to the same row', () => {
+      // New York anchor (both seasons apply with no dates set, so rankAvios
+      // uses the off-peak column for both calls): voucher only changes
+      // aviosSeats, so partyMiles is identical and valuePer1k should double.
+      const noVoucher = computeResults({ ...base, companionVoucher: false });
+      const withVoucher = computeResults({ ...base, companionVoucher: true });
+      const nyNoVoucher = noVoucher.ranked.find((x) => x.destination.city === 'New York')!;
+      const nyWithVoucher = withVoucher.ranked.find((x) => x.destination.city === 'New York')!;
+      expect(nyWithVoucher.valuePer1k).toBeCloseTo(nyNoVoucher.valuePer1k * 2, 5);
+    });
+  });
+
+  describe('peakSavingPct', () => {
+    const base = getDefaultInputs();
+
+    it('is null for every row when the date range is off-peak only', () => {
+      const r = computeResults({ ...base, dateFrom: '2026-06-08', dateTo: '2026-06-11' });
+      expect(r.ranked.every((x) => x.peakSavingPct === null)).toBe(true);
+    });
+
+    it('is null for every row when the date range is peak only', () => {
+      const r = computeResults({ ...base, dateFrom: '2026-08-03', dateTo: '2026-08-14' });
+      expect(r.ranked.every((x) => x.peakSavingPct === null)).toBe(true);
+    });
+
+    it('is a non-negative whole percentage when both seasons apply', () => {
+      const r = computeResults({ ...base });
+      for (const x of r.ranked) {
+        expect(x.peakSavingPct).not.toBeNull();
+        expect(Number.isInteger(x.peakSavingPct)).toBe(true);
+        expect(x.peakSavingPct!).toBeGreaterThanOrEqual(0);
+      }
+    });
+  });
+
+  describe('new sort keys: value, cash, peakSaving', () => {
+    const base = getDefaultInputs();
+
+    it('sorts by value descending, ties broken by rankAvios ascending', () => {
+      const r = computeResults({ ...base, aviosBudget: 1000000, sortKey: 'value' });
+      for (let i = 1; i < r.ranked.length; i++) {
+        const prev = r.ranked[i - 1];
+        const curr = r.ranked[i];
+        if (prev.valuePer1k === curr.valuePer1k) {
+          expect(curr.rankAvios).toBeGreaterThanOrEqual(prev.rankAvios);
+        } else {
+          expect(curr.valuePer1k).toBeLessThanOrEqual(prev.valuePer1k);
+        }
+      }
+    });
+
+    it('sorts by cash ascending, ties broken by rankAvios ascending', () => {
+      const r = computeResults({ ...base, aviosBudget: 1000000, sortKey: 'cash' });
+      for (let i = 1; i < r.ranked.length; i++) {
+        const prev = r.ranked[i - 1];
+        const curr = r.ranked[i];
+        if (prev.cashTotal === curr.cashTotal) {
+          expect(curr.rankAvios).toBeGreaterThanOrEqual(prev.rankAvios);
+        } else {
+          expect(curr.cashTotal).toBeGreaterThanOrEqual(prev.cashTotal);
+        }
+      }
+    });
+
+    it('sorts by peakSaving descending when every row has a value', () => {
+      const r = computeResults({ ...base, aviosBudget: 1000000, sortKey: 'peakSaving' });
+      for (let i = 1; i < r.ranked.length; i++) {
+        expect(r.ranked[i].peakSavingPct!).toBeLessThanOrEqual(r.ranked[i - 1].peakSavingPct!);
+      }
+    });
+
+    it('falls back to rankAvios ascending when peakSavingPct is null for every row (nulls-last total order)', () => {
+      // Off-peak-only range (see peakSavingPct describe above): peakSavingPct
+      // is null for every row, so the null-safe comparator's both-null branch
+      // applies uniformly, collapsing the sort to rankAvios ascending.
+      const r = computeResults({
+        ...base,
+        aviosBudget: 1000000,
+        dateFrom: '2026-06-08',
+        dateTo: '2026-06-11',
+        sortKey: 'peakSaving',
+      });
+      const ranks = r.ranked.map((x) => x.rankAvios);
+      expect([...ranks].sort((a, b) => a - b)).toEqual(ranks);
+    });
+  });
+
+  describe('voucherSavingAvios', () => {
+    const base = getDefaultInputs();
+
+    it('equals the cheapest affordable rankAvios delta between no-voucher and voucher', () => {
+      const withVoucher = computeResults({
+        ...base,
+        aviosBudget: 1000000,
+        companionVoucher: true,
+        travellers: 2,
+      });
+      const cheapest = withVoucher.affordable.reduce((min, x) =>
+        x.rankAvios < min.rankAvios ? x : min
+      );
+      const withoutVoucher = computeResults({
+        ...base,
+        aviosBudget: 1000000,
+        companionVoucher: false,
+        travellers: 2,
+      });
+      const cheapestNoVoucher = withoutVoucher.ranked.find(
+        (x) => x.destination.iata === cheapest.destination.iata
+      )!;
+      expect(withVoucher.voucherSavingAvios).toBe(cheapestNoVoucher.rankAvios - cheapest.rankAvios);
+      expect(withVoucher.voucherSavingAvios).toBeGreaterThan(0);
+    });
+
+    it('is 0 when the companion voucher is off', () => {
+      const r = computeResults({ ...base, companionVoucher: false });
+      expect(r.voucherSavingAvios).toBe(0);
+    });
+
+    it('is 0 for a single traveller even with the voucher flag set', () => {
+      const r = computeResults({ ...base, companionVoucher: true, travellers: 1 });
+      expect(r.voucherSavingAvios).toBe(0);
+    });
+
+    it('is 0 when nothing is affordable', () => {
+      const r = computeResults({ ...base, aviosBudget: 1, companionVoucher: true, travellers: 2 });
+      expect(r.affordable.length).toBe(0);
+      expect(r.voucherSavingAvios).toBe(0);
     });
   });
 });

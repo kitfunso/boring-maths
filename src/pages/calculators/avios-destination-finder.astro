@@ -13,6 +13,10 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import AviosDestinationFinder from '../../components/calculators/AviosDestinationFinder/AviosDestinationFinder';
 import { DESTINATIONS } from '../../components/calculators/AviosDestinationFinder/data/destinations';
 import { DATA_LAST_VERIFIED } from '../../components/calculators/AviosDestinationFinder/data/peakCalendar';
+import {
+  DISTANCE_MILES_FROM_LONDON,
+  assertDistanceCoverage,
+} from '../../components/calculators/AviosDestinationFinder/data/distances';
 import { NOT_OFFERED } from '../../components/calculators/AviosDestinationFinder/types';
 import type {
   Destination,
@@ -42,6 +46,19 @@ function econOf(city: string): SeasonalAvios {
   return e;
 }
 
+// Build-time gate: fails `astro build` (not just vitest) if any destination
+// is missing a distance entry, so a data-generation gap can never ship silently.
+assertDistanceCoverage(DESTINATIONS);
+
+function milesOf(cityOrRow: string | Destination): number {
+  const d = typeof cityOrRow === 'string' ? byCity(cityOrRow) : cityOrRow;
+  const miles = DISTANCE_MILES_FROM_LONDON[d.iata];
+  if (miles === undefined) {
+    throw new Error(`avios-destination-finder page: no distance for "${d.city}"`);
+  }
+  return miles;
+}
+
 const POPULAR_CITIES = [
   'Amsterdam',
   'Paris',
@@ -67,6 +84,30 @@ const shortHaulEcon = DESTINATIONS.map((d) => cabin(d.economy)).filter(
 );
 const shortHaulMinOffPeak = Math.min(...shortHaulEcon.map((e) => e.offPeak));
 const shortHaulMaxPeak = Math.max(...shortHaulEcon.map((e) => e.peak));
+
+// Data-driven example for the "best bang for your buck" FAQ below: the real
+// destination in this dataset with the most miles flown per 1,000 Avios,
+// one-way, per person, in economy off-peak. Every number here is computed
+// from DESTINATIONS and DISTANCE_MILES_FROM_LONDON, nothing is hardcoded.
+interface BestValueExample {
+  city: string;
+  country: string;
+  miles: number;
+  avios: number;
+  valuePer1k: number;
+}
+const bestValue = DESTINATIONS.reduce<BestValueExample | null>((best, d) => {
+  const e = cabin(d.economy);
+  if (!e) return best;
+  const miles = milesOf(d);
+  const valuePer1k = Math.round((miles / e.offPeak) * 1000 * 10) / 10;
+  return !best || valuePer1k > best.valuePer1k
+    ? { city: d.city, country: d.country, miles, avios: e.offPeak, valuePer1k }
+    : best;
+}, null);
+if (!bestValue) {
+  throw new Error('avios-destination-finder page: no economy-priced destinations found');
+}
 
 // SEO Configuration
 const title = 'Avios Destination Finder (Unofficial) | Boring Math';
@@ -158,6 +199,10 @@ const faqs = [
     question: 'How many Avios do I need to fly to Australia?',
     answer: `Sydney costs ${nf.format(sydEcon.offPeak)} Avios one-way off-peak in economy (${nf.format(sydEcon.peak)} peak) plus ${fmtCash(sydEcon.cash)} in cash each way${sydBiz ? `, or ${nf.format(sydBiz.offPeak)} Avios one-way off-peak in business` : ''}. These are the longest, most Avios-expensive routes on the BA network.`,
   },
+  {
+    question: 'What does best bang for your buck mean?',
+    answer: `It's the number of miles you fly for every 1,000 Avios you spend: the higher the figure, the more distance you're getting for your points. ${bestValue.city}, ${bestValue.country} is the best-value route in this tool, at ${bestValue.valuePer1k.toFixed(1)} miles per 1,000 Avios: ${nf.format(bestValue.miles)} miles from London for ${nf.format(bestValue.avios)} Avios one-way off-peak in economy, per person each way. Short-haul city breaks use far fewer Avios but also cover far fewer miles, so they often score lower on this measure even though they cost less overall. Sort the results table above by "Best bang for your buck" to rank every destination this way for your own budget and party size.`,
+  },
 ];
 
 // SEO schema breadcrumbs
@@ -220,7 +265,9 @@ const schemaBreadcrumbs = [
     <p>
       Enter the number of <strong>Avios</strong> you have to spend, then optionally set a travel
       <strong>date range</strong>. Reward flights price differently depending on whether your dates
-      fall in BA's off-peak or peak calendar, which the airline publishes each year.
+      fall in BA's off-peak or peak calendar, which the airline publishes each year. The date picker
+      shades peak dates on the calendar so you can spot the pricier days before you choose your
+      trip.
     </p>
     <p>
       Narrow the list by <strong>region</strong> and <strong>holiday type</strong>, choose your
@@ -279,6 +326,7 @@ const schemaBreadcrumbs = [
             <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy peak</th>
             <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
             <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
+            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Distance</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-white/10">
@@ -302,6 +350,9 @@ const schemaBreadcrumbs = [
                   </td>
                   <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
                     {e ? fmtCash(e.cash) : '-'}
+                  </td>
+                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                    {nf.format(milesOf(d))} mi
                   </td>
                 </tr>
               );
@@ -332,6 +383,7 @@ const schemaBreadcrumbs = [
               <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
               <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business peak</th>
               <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
+              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Distance</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-white/10">
@@ -358,6 +410,9 @@ const schemaBreadcrumbs = [
                     </td>
                     <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
                       {e ? fmtCash(e.cash) : '-'}
+                    </td>
+                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
+                      {nf.format(milesOf(d))} mi
                     </td>
                   </tr>
                 );

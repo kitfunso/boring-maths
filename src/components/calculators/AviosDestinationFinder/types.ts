@@ -52,7 +52,7 @@ export const CABIN_LABELS: Readonly<Record<Cabin, string>> = {
 };
 
 export type TripType = 'return' | 'oneWay';
-export type SortKey = 'avios' | 'distance' | 'name';
+export type SortKey = 'avios' | 'value' | 'cash' | 'peakSaving' | 'distance' | 'name';
 
 export interface PartyTotalsInputs {
   readonly oneWayAvios: number;
@@ -126,6 +126,11 @@ export interface DestinationResult {
   readonly withinBudget: boolean;
   /** rankAvios as % of budget (0 budget -> 0). */
   readonly budgetPercent: number;
+  readonly distanceMiles: number;
+  /** Party miles flown per 1,000 Avios spent (rankAvios basis), 1dp. */
+  readonly valuePer1k: number;
+  /** (peak - offPeak) / peak * 100, whole %; null unless both seasons are priced. */
+  readonly peakSavingPct: number | null;
 }
 
 export interface AviosFinderResult {
@@ -139,6 +144,11 @@ export interface AviosFinderResult {
   readonly notOfferedCount: number;
   readonly seasons: SeasonWindow;
   readonly totalDestinations: number;
+  /**
+   * Avios saved by the companion voucher on the cheapest affordable row.
+   * 0 when the voucher is off, travellers !== 2, or nothing is affordable.
+   */
+  readonly voucherSavingAvios: number;
 }
 
 export function getDefaultInputs(): AviosFinderInputs {
