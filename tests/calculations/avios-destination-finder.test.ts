@@ -6,9 +6,10 @@ import { describe, it, expect } from 'vitest';
 import {
   resolveSeasonsForRange,
   calculatePartyTotals,
+  computeResults,
 } from '../../src/components/calculators/AviosDestinationFinder/calculations';
 import { DESTINATIONS } from '../../src/components/calculators/AviosDestinationFinder/data/destinations';
-import { REGIONS } from '../../src/components/calculators/AviosDestinationFinder/types';
+import { REGIONS, getDefaultInputs } from '../../src/components/calculators/AviosDestinationFinder/types';
 
 describe('AviosDestinationFinder', () => {
   describe('resolveSeasonsForRange', () => {
@@ -324,6 +325,88 @@ describe('AviosDestinationFinder', () => {
           expect(matchesATier(d.premiumEconomy, PE_TIERS)).toBe(true);
         }
       }
+    });
+  });
+
+  describe('computeResults', () => {
+    const base = getDefaultInputs();
+
+    it('ranks affordable destinations by Avios ascending by default', () => {
+      const r = computeResults({ ...base, aviosBudget: 60000 });
+      const ranks = r.affordable.map((x) => x.rankAvios);
+      expect([...ranks].sort((a, b) => a - b)).toEqual(ranks);
+      expect(r.affordable.length).toBeGreaterThan(0);
+    });
+
+    it('marks destinations over budget and excludes them from affordable', () => {
+      const r = computeResults({ ...base, aviosBudget: 30000, travellers: 1 });
+      for (const x of r.affordable) expect(x.rankAvios).toBeLessThanOrEqual(30000);
+      for (const x of r.overBudget) expect(x.rankAvios).toBeGreaterThan(30000);
+      expect(r.affordable.length + r.overBudget.length + r.notOfferedCount).toBe(
+        r.totalDestinations
+      );
+    });
+
+    it('budget boundary: exactly-equal totals count as affordable', () => {
+      // Amsterdam economy off-peak, 1 pax one-way = 10,000 (anchor row)
+      const r = computeResults({
+        ...base,
+        aviosBudget: 10000,
+        travellers: 1,
+        tripType: 'oneWay',
+        dateFrom: '2026-06-08',
+        dateTo: '2026-06-11',
+      });
+      expect(r.affordable.some((x) => x.destination.city === 'Amsterdam')).toBe(true);
+    });
+
+    it('companion voucher brings a return within reach at half the Avios', () => {
+      // New York economy off-peak return for 2: no voucher = 110,000; voucher = 55,000
+      const withVoucher = computeResults({
+        ...base,
+        aviosBudget: 55000,
+        companionVoucher: true,
+        dateFrom: '2026-06-08',
+        dateTo: '2026-06-11',
+      });
+      const ny = withVoucher.affordable.find((x) => x.destination.city === 'New York');
+      expect(ny).toBeDefined();
+      expect(ny!.rankAvios).toBe(55000);
+      expect(ny!.cashTotal).toBe(240); // £60 x 2 pax x 2 legs - cash is never halved
+    });
+
+    it('filters by region and holiday type', () => {
+      const r = computeResults({ ...base, regions: ['Europe'], holidayTypes: ['beach'] });
+      for (const x of [...r.affordable, ...r.overBudget]) {
+        expect(x.destination.region).toBe('Europe');
+        expect(x.destination.holidayTypes).toContain('beach');
+      }
+    });
+
+    it('peak-only ranges price at peak and blank the off-peak column', () => {
+      const r = computeResults({
+        ...base,
+        aviosBudget: 1000000,
+        dateFrom: '2026-08-03',
+        dateTo: '2026-08-14',
+      });
+      const ams = [...r.affordable, ...r.overBudget].find(
+        (x) => x.destination.city === 'Amsterdam'
+      );
+      expect(ams!.aviosOffPeak).toBeNull();
+      expect(ams!.aviosPeak).toBe(43000); // 10,750 x 2 pax x 2 legs
+      expect(ams!.rankAvios).toBe(43000);
+    });
+
+    it('counts not-offered cabins instead of rendering them', () => {
+      const r = computeResults({ ...base, cabin: 'premiumEconomy' });
+      expect(r.notOfferedCount).toBeGreaterThan(0); // short-haul has no PE cabin
+    });
+
+    it('sorts by name when requested', () => {
+      const r = computeResults({ ...base, aviosBudget: 1000000, sortKey: 'name' });
+      const names = r.affordable.map((x) => x.destination.city);
+      expect([...names].sort((a, b) => a.localeCompare(b))).toEqual(names);
     });
   });
 });
