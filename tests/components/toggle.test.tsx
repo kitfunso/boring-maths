@@ -52,6 +52,14 @@ describe('Toggle', () => {
     expect(className).toContain('bg-white/20');
   });
 
+  it('carries a visible focus ring class in both states (WCAG 2.4.7)', () => {
+    const unchecked = renderToggle();
+    expect(unchecked.getByRole('switch').className).toContain('focus:ring-white/80');
+    unchecked.unmount();
+    const checked = renderToggle({ checked: true });
+    expect(checked.getByRole('switch').className).toContain('focus:ring-white/80');
+  });
+
   it('does not fire when disabled (switch and label)', () => {
     const { onChange, getByRole, getByText } = renderToggle({ disabled: true });
     fireEvent.click(getByRole('switch'));
