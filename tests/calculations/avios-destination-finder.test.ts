@@ -142,6 +142,12 @@ describe('AviosDestinationFinder', () => {
       expect(new Set(codes).size).toBe(codes.length);
     });
 
+    it('every IATA code is a 3-letter uppercase code', () => {
+      for (const d of DESTINATIONS) {
+        expect(d.iata).toMatch(/^[A-Z]{3}$/);
+      }
+    });
+
     it('every destination has a region, at least one holiday type, and economy pricing', () => {
       for (const d of DESTINATIONS) {
         expect(REGIONS).toContain(d.region);
@@ -163,28 +169,161 @@ describe('AviosDestinationFinder', () => {
 
     // Anchor rows: verbatim from headforpoints.com table (fetched 2026-07-19).
     // These lock the captured dataset to the verified source.
-    const ANCHORS: ReadonlyArray<[string, number, number, number, number, number, number]> = [
-      // [city, econOff, econPeak, econCash, bizOff, bizPeak, bizCash]
-      ['Amsterdam', 10000, 10750, 1, 16500, 18000, 15],
-      ['Malaga', 13000, 14000, 1, 22000, 24500, 15],
-      ['Athens', 15000, 16750, 1, 26750, 30000, 15],
-      ['Dubai', 27500, 33000, 60, 88000, 99000, 199.5],
-      ['New York', 27500, 33000, 60, 88000, 99000, 199.5],
-      ['Miami', 33000, 38500, 85, 99000, 110000, 249.5],
-      ['Cape Town', 33000, 38500, 85, 99000, 110000, 249.5],
-      ['Tokyo', 38500, 44000, 110, 110000, 121000, 299.5],
-      ['Singapore', 44000, 49500, 135, 121000, 132000, 335],
-      ['Sydney', 55000, 60500, 160, 159500, 187000, 399.5],
+    interface CabinAmount {
+      readonly offPeak: number;
+      readonly peak: number;
+      readonly cash: number;
+    }
+
+    interface Anchor {
+      readonly city: string;
+      readonly economy: CabinAmount;
+      readonly premiumEconomy: CabinAmount | 'not_offered';
+      readonly business: CabinAmount;
+    }
+
+    const ANCHORS: readonly Anchor[] = [
+      // Short-haul: premium economy is not offered on these routes.
+      {
+        city: 'Amsterdam',
+        economy: { offPeak: 10000, peak: 10750, cash: 1 },
+        premiumEconomy: 'not_offered',
+        business: { offPeak: 16500, peak: 18000, cash: 15 },
+      },
+      {
+        city: 'Malaga',
+        economy: { offPeak: 13000, peak: 14000, cash: 1 },
+        premiumEconomy: 'not_offered',
+        business: { offPeak: 22000, peak: 24500, cash: 15 },
+      },
+      {
+        city: 'Athens',
+        economy: { offPeak: 15000, peak: 16750, cash: 1 },
+        premiumEconomy: 'not_offered',
+        business: { offPeak: 26750, peak: 30000, cash: 15 },
+      },
+      // Long-haul: premium economy is offered on these routes.
+      {
+        city: 'Dubai',
+        economy: { offPeak: 27500, peak: 33000, cash: 60 },
+        premiumEconomy: { offPeak: 46750, peak: 66000, cash: 175 },
+        business: { offPeak: 88000, peak: 99000, cash: 199.5 },
+      },
+      {
+        city: 'New York',
+        economy: { offPeak: 27500, peak: 33000, cash: 60 },
+        premiumEconomy: { offPeak: 46750, peak: 66000, cash: 175 },
+        business: { offPeak: 88000, peak: 99000, cash: 199.5 },
+      },
+      {
+        city: 'Miami',
+        economy: { offPeak: 33000, peak: 38500, cash: 85 },
+        premiumEconomy: { offPeak: 52250, peak: 74250, cash: 200 },
+        business: { offPeak: 99000, peak: 110000, cash: 249.5 },
+      },
+      {
+        city: 'Cape Town',
+        economy: { offPeak: 33000, peak: 38500, cash: 85 },
+        premiumEconomy: { offPeak: 52250, peak: 74250, cash: 200 },
+        business: { offPeak: 99000, peak: 110000, cash: 249.5 },
+      },
+      {
+        city: 'Tokyo',
+        economy: { offPeak: 38500, peak: 44000, cash: 110 },
+        premiumEconomy: { offPeak: 55000, peak: 85250, cash: 225 },
+        business: { offPeak: 110000, peak: 121000, cash: 299.5 },
+      },
+      {
+        city: 'Singapore',
+        economy: { offPeak: 44000, peak: 49500, cash: 135 },
+        premiumEconomy: { offPeak: 60500, peak: 88000, cash: 250 },
+        business: { offPeak: 121000, peak: 132000, cash: 335 },
+      },
+      {
+        city: 'Sydney',
+        economy: { offPeak: 55000, peak: 60500, cash: 160 },
+        premiumEconomy: { offPeak: 88000, peak: 126500, cash: 275 },
+        business: { offPeak: 159500, peak: 187000, cash: 399.5 },
+      },
     ];
 
-    it.each(ANCHORS)(
-      '%s matches the verified source row',
-      (city, econOff, econPeak, econCash, bizOff, bizPeak, bizCash) => {
-        const d = byCity(city);
-        expect(d).toBeDefined();
-        expect(d!.economy).toEqual({ offPeak: econOff, peak: econPeak, cash: econCash });
-        expect(d!.business).toEqual({ offPeak: bizOff, peak: bizPeak, cash: bizCash });
+    it.each(ANCHORS)('$city matches the verified source row', (anchor) => {
+      const d = byCity(anchor.city);
+      expect(d).toBeDefined();
+      expect(d!.economy).toEqual(anchor.economy);
+      expect(d!.premiumEconomy).toEqual(anchor.premiumEconomy);
+      expect(d!.business).toEqual(anchor.business);
+    });
+
+    // Pinned tier list: hand-transcribed from the verified capture, independent
+    // of data/destinations.ts. A destination whose price does not match any
+    // tuple here means either this pin list or the data file has drifted from
+    // the verified source - it is not something to "fix" by editing the pin.
+    type Tier = readonly [number, number, number];
+
+    const ECONOMY_TIERS: readonly Tier[] = [
+      [10000, 10750, 1],
+      [13000, 14000, 1],
+      [15000, 16750, 1],
+      [15000, 16750, 51],
+      [24750, 30250, 50],
+      [27500, 33000, 60],
+      [33000, 38500, 85],
+      [38500, 44000, 110],
+      [44000, 49500, 135],
+      [55000, 60500, 160],
+    ];
+
+    const BUSINESS_TIERS: readonly Tier[] = [
+      [16500, 18000, 15],
+      [22000, 24500, 15],
+      [26750, 30000, 15],
+      [26750, 30000, 125],
+      [77000, 88000, 125],
+      [88000, 99000, 199.5],
+      [99000, 110000, 249.5],
+      [110000, 121000, 299.5],
+      [121000, 132000, 335],
+      [159500, 187000, 399.5],
+    ];
+
+    const PE_TIERS: readonly Tier[] = [
+      [41250, 52250, 100],
+      [46750, 66000, 175],
+      [52250, 74250, 200],
+      [55000, 85250, 225],
+      [60500, 88000, 250],
+      [88000, 126500, 275],
+    ];
+
+    const matchesATier = (cabin: CabinAmount, tiers: readonly Tier[]) =>
+      tiers.some(
+        ([offPeak, peak, cash]) =>
+          cabin.offPeak === offPeak && cabin.peak === peak && cabin.cash === cash
+      );
+
+    it('every economy price matches a pinned verified tier', () => {
+      for (const d of DESTINATIONS) {
+        if (d.economy !== 'not_offered') {
+          expect(matchesATier(d.economy, ECONOMY_TIERS)).toBe(true);
+        }
       }
-    );
+    });
+
+    it('every business price matches a pinned verified tier', () => {
+      for (const d of DESTINATIONS) {
+        if (d.business !== 'not_offered') {
+          expect(matchesATier(d.business, BUSINESS_TIERS)).toBe(true);
+        }
+      }
+    });
+
+    it('every offered premium economy price matches a pinned verified tier', () => {
+      for (const d of DESTINATIONS) {
+        if (d.premiumEconomy !== 'not_offered') {
+          expect(matchesATier(d.premiumEconomy, PE_TIERS)).toBe(true);
+        }
+      }
+    });
   });
 });
