@@ -166,6 +166,7 @@ export default function AviosDestinationFinder() {
                 selected={inputs.regions}
                 onChange={(v) => updateInput('regions', v)}
                 ariaLabel="Filter by region"
+                allLabel="All"
               />
             </div>
 
@@ -176,6 +177,7 @@ export default function AviosDestinationFinder() {
                 selected={inputs.holidayTypes}
                 onChange={(v) => updateInput('holidayTypes', v)}
                 ariaLabel="Filter by holiday type"
+                allLabel="All"
               />
             </div>
 
