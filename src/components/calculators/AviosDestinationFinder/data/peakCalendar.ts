@@ -13,6 +13,8 @@
  * (c) Bump DATA_LAST_VERIFIED.
  * (d) Re-verify prices against the source URL in destinations.ts and update
  *     the anchors/tier pins in the test file if BA repriced.
+ * The monthly avios-data-freshness workflow flags source drift automatically;
+ * after re-verifying, reseed baselines: node scripts/data/check-avios-sources.mjs --update
  */
 
 export interface DateRange {

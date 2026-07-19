@@ -1,0 +1,71 @@
+name: Avios Data Freshness
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-sources:
+    name: Check Avios source freshness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run source freshness check
+        id: check
+        run: node scripts/data/check-avios-sources.mjs
+
+      - name: Open or update tracking issue on drift
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Avios source data may have changed - re-verify"
+          BODY_FILE=$(mktemp)
+          cat > "$BODY_FILE" <<EOF
+          The monthly Avios source freshness check found that one or both guide
+          sources for the Avios Destination Finder have changed since the last
+          recorded fingerprint:
+
+          - HfP pricing article (cited in \`data/destinations.ts\`)
+          - AwardWallet peak calendar (cited in \`data/peakCalendar.ts\`)
+
+          This is drift DETECTION only. BA Avios guide prices and the peak
+          calendar typically only change about once a year, so this issue does
+          not mean anything is broken on boring-math.com right now - it means a
+          source page looks different and is worth a human look.
+
+          To resolve:
+          1. Work through the manual re-verification checklist in
+             \`src/components/calculators/AviosDestinationFinder/data/peakCalendar.ts\`.
+          2. If prices or peak dates changed, update \`data/destinations.ts\` and
+             \`data/peakCalendar.ts\` to match the source.
+          3. Re-run \`node scripts/data/check-avios-sources.mjs --update\` to
+             reset the baseline in \`scripts/data/avios-source-hashes.json\` and
+             commit it.
+          4. Close this issue.
+
+          Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EOF
+          # Filter by exact title client-side, not gh's --search: the title
+          # contains a hyphen, which GitHub's search query syntax can parse
+          # as a NOT operator when it follows whitespace.
+          EXISTING=$(gh issue list --state open --limit 100 --json number,title \
+            --jq "[.[] | select(.title == \"$TITLE\")][0].number")
+          if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+          else
+            gh issue create --title "$TITLE" --body-file "$BODY_FILE"
+          fi
