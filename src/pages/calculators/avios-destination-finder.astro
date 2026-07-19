@@ -11,11 +11,67 @@ import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import AviosDestinationFinder from '../../components/calculators/AviosDestinationFinder/AviosDestinationFinder';
+import { DESTINATIONS } from '../../components/calculators/AviosDestinationFinder/data/destinations';
+import { DATA_LAST_VERIFIED } from '../../components/calculators/AviosDestinationFinder/data/peakCalendar';
+import { NOT_OFFERED } from '../../components/calculators/AviosDestinationFinder/types';
+import type {
+  Destination,
+  SeasonalAvios,
+} from '../../components/calculators/AviosDestinationFinder/types';
+
+// ---------------------------------------------------------------------------
+// Build-time pricing data for the static (crawlable) tables and FAQs below.
+// Single source of truth: the same verified dataset the calculator uses, so
+// the server-rendered numbers can never drift from the interactive ones.
+// ---------------------------------------------------------------------------
+
+const nf = new Intl.NumberFormat('en-GB');
+const fmtCash = (n: number): string => (Number.isInteger(n) ? `£${n}` : `£${n.toFixed(2)}`);
+
+const cabin = (c: Destination['economy']): SeasonalAvios | null => (c === NOT_OFFERED ? null : c);
+
+function byCity(city: string): Destination {
+  const found = DESTINATIONS.find((d) => d.city === city);
+  if (!found) throw new Error(`avios-destination-finder page: unknown city "${city}"`);
+  return found;
+}
+
+function econOf(city: string): SeasonalAvios {
+  const e = cabin(byCity(city).economy);
+  if (!e) throw new Error(`avios-destination-finder page: no economy pricing for "${city}"`);
+  return e;
+}
+
+const POPULAR_CITIES = [
+  'Amsterdam',
+  'Paris',
+  'Malaga',
+  'Athens',
+  'Istanbul',
+  'Dubai',
+  'New York',
+  'Orlando',
+  'Barbados',
+  'Tokyo',
+  'Singapore',
+  'Sydney',
+];
+const popularRows = POPULAR_CITIES.map(byCity);
+
+const nyEcon = econOf('New York');
+const sydEcon = econOf('Sydney');
+const sydBiz = cabin(byCity('Sydney').business);
+
+const shortHaulEcon = DESTINATIONS.map((d) => cabin(d.economy)).filter(
+  (e): e is SeasonalAvios => e !== null && e.cash === 1
+);
+const shortHaulMinOffPeak = Math.min(...shortHaulEcon.map((e) => e.offPeak));
+const shortHaulMaxPeak = Math.max(...shortHaulEcon.map((e) => e.peak));
 
 // SEO Configuration
 const title = 'Avios Destination Finder (Unofficial) | Boring Math';
 const description =
-  'See every British Airways destination your Avios can reach. Search by points budget, dates, region and holiday type, with companion voucher support. Free, instant, unofficial guide.';
+  'See every British Airways destination your Avios can reach. Search by points budget, dates, region and holiday type. Free unofficial guide.';
 const keywords =
   'where can I go with my avios, avios destination finder, 50000 avios where can I fly, avios flights from london, companion voucher destinations, BA reward flight guide, avios peak off-peak calculator';
 const canonicalURL = '/calculators/avios-destination-finder';
@@ -89,6 +145,18 @@ const faqs = [
     question: 'Can I book flights through this tool?',
     answer:
       'No. This is a guide-price search tool only, not a booking site. Once you have a shortlist, check real-time reward seat availability and complete your booking on ba.com.',
+  },
+  {
+    question: 'How many Avios do I need to fly from London to New York?',
+    answer: `One-way in economy, New York costs ${nf.format(nyEcon.offPeak)} Avios off-peak or ${nf.format(nyEcon.peak)} Avios peak, plus ${fmtCash(nyEcon.cash)} in cash each way at the lowest-cash combination. A return for two travellers with a companion voucher needs the Avios of one return: ${nf.format(nyEcon.offPeak * 2)} off-peak, with taxes and fees payable for both passengers.`,
+  },
+  {
+    question: 'How many Avios do I need for a short-haul flight to Europe?',
+    answer: `Short-haul economy reward flights from London start at ${nf.format(shortHaulMinOffPeak)} Avios one-way off-peak plus £1 in cash, rising to ${nf.format(shortHaulMaxPeak)} Avios on peak dates for the longest short-haul routes. Use the finder above to see the exact figure for each city.`,
+  },
+  {
+    question: 'How many Avios do I need to fly to Australia?',
+    answer: `Sydney costs ${nf.format(sydEcon.offPeak)} Avios one-way off-peak in economy (${nf.format(sydEcon.peak)} peak) plus ${fmtCash(sydEcon.cash)} in cash each way${sydBiz ? `, or ${nf.format(sydBiz.offPeak)} Avios one-way off-peak in business` : ''}. These are the longest, most Avios-expensive routes on the BA network.`,
   },
 ];
 
@@ -188,6 +256,99 @@ const schemaBreadcrumbs = [
       economy) up to 55,000 Avios plus £160 one-way (Sydney, off-peak economy). Short-haul routes
       have no Premium Economy cabin, and this tool does not cover First class.
     </p>
+  </ContentSection>
+
+  <!-- Static price tables: server-rendered from the same verified dataset the
+       calculator uses, so search engines and answer engines can read the data
+       without executing the interactive island. -->
+  <ContentSection title="Avios Prices from London: Popular Destinations">
+    <p>
+      One-way guide prices per person at the lowest-cash Reward Flight Saver combination, from BA's
+      published table (last verified {DATA_LAST_VERIFIED}). The cash element is payable per person
+      each way; peak and off-peak dates follow BA's published calendar.
+    </p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <caption class="sr-only">
+          Avios prices one-way from London for popular British Airways destinations
+        </caption>
+        <thead>
+          <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
+            <th scope="col" class="text-left py-2">Destination</th>
+            <th scope="col" class="text-right py-2">Economy off-peak</th>
+            <th scope="col" class="text-right py-2">Economy peak</th>
+            <th scope="col" class="text-right py-2">Business off-peak</th>
+            <th scope="col" class="text-right py-2">+ cash from</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/10">
+          {
+            popularRows.map((d) => {
+              const e = cabin(d.economy);
+              const b = cabin(d.business);
+              return (
+                <tr>
+                  <td class="py-2">
+                    {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
+                  </td>
+                  <td class="text-right py-2 tabular-nums">{e ? nf.format(e.offPeak) : '-'}</td>
+                  <td class="text-right py-2 tabular-nums">{e ? nf.format(e.peak) : '-'}</td>
+                  <td class="text-right py-2 tabular-nums">{b ? nf.format(b.offPeak) : '-'}</td>
+                  <td class="text-right py-2 tabular-nums">{e ? fmtCash(e.cash) : '-'}</td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+    <details class="mt-6">
+      <summary class="cursor-pointer font-semibold">
+        Full A-Z Avios price list: all {DESTINATIONS.length} destinations
+      </summary>
+      <p class="mt-3">
+        Economy and business one-way prices for every BA destination in this tool. The cash column
+        is the economy lowest-cash element per person each way; business carries a higher cash
+        element. Premium Economy (long-haul only) and per-party totals are in the finder above.
+      </p>
+      <div class="overflow-x-auto mt-3">
+        <table class="w-full text-sm">
+          <caption class="sr-only">
+            Full list of Avios prices one-way from London for all British Airways destinations
+          </caption>
+          <thead>
+            <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
+              <th scope="col" class="text-left py-2">Destination</th>
+              <th scope="col" class="text-right py-2">Economy off-peak</th>
+              <th scope="col" class="text-right py-2">Economy peak</th>
+              <th scope="col" class="text-right py-2">Business off-peak</th>
+              <th scope="col" class="text-right py-2">Business peak</th>
+              <th scope="col" class="text-right py-2">+ cash from</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/10">
+            {
+              DESTINATIONS.map((d) => {
+                const e = cabin(d.economy);
+                const b = cabin(d.business);
+                return (
+                  <tr>
+                    <td class="py-2">
+                      {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
+                    </td>
+                    <td class="text-right py-2 tabular-nums">{e ? nf.format(e.offPeak) : '-'}</td>
+                    <td class="text-right py-2 tabular-nums">{e ? nf.format(e.peak) : '-'}</td>
+                    <td class="text-right py-2 tabular-nums">{b ? nf.format(b.offPeak) : '-'}</td>
+                    <td class="text-right py-2 tabular-nums">{b ? nf.format(b.peak) : '-'}</td>
+                    <td class="text-right py-2 tabular-nums">{e ? fmtCash(e.cash) : '-'}</td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      </div>
+    </details>
   </ContentSection>
 
   <!-- Companion Voucher Explainer -->
