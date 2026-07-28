@@ -1629,6 +1629,17 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
+    title: 'UK Statutory Sick Pay',
+    description:
+      'Work out SSP: the weekly rate or 80% of your earnings, from day one for up to 28 weeks.',
+    href: '/calculators/uk-statutory-sick-pay-calculator/',
+    icon: 'briefcase',
+    color: 'violet',
+    category: 'Income',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
     title: 'UK Redundancy Pay',
     description:
       'Estimate your statutory redundancy pay based on age, years of service, and weekly pay.',

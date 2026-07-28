@@ -468,6 +468,40 @@ Build shortlist (genuinely new; score = winnability out of 5, from live SERP che
 Next pull ~2026-08-25: compare against this baseline (region tables now in every pull);
 check whether the www 301 landed and whether any Phase 4 links finally shipped.
 
+### Status 2026-07-28 (execution, same day)
+
+- **Action 1 SHIPPED** (PR #18, merged): www → apex 301 in `public/_redirects`;
+  striking-set title rewrites; country-dimension pulls in gsc-pull.
+- **UK admin activation plan executed** (`docs/uk-admin-activation-plan-2026-07.md`,
+  outside-voice reviewed, Keith-approved). Phase 0 diagnosis via the new
+  `npm run seo:gsc-inspect` (URL Inspection API): uk-student-loan = "Redirect
+  error", last crawled 2026-04-01 (pre-slash-consolidation, never re-crawled);
+  uk-redundancy-pay + uk-holiday-entitlement = "URL is unknown to Google" (never
+  crawled; both were editorial orphans); nursery-cost = indexed and freshly
+  crawled at pos 60 (the authority ceiling, working as expected). All three are in
+  the live sitemap — sitemap presence does not get orphans crawled at our
+  authority.
+- **Phase 1 shipped**: differentiated activation edits (student-loan overpay title;
+  holiday pro-rata title; nursery de-staled to 2026 and September-2025 copy
+  tensed; redundancy + holiday linked from the uk-tax hub and employer-cost and
+  added to llms.txt). **Request Indexing for the three URLs is the remaining
+  manual step after deploy.**
+- **Phase 2 shipped**: UK Statutory Sick Pay calculator (registry 168 → 169 with
+  sign-off; current GOV.UK rules: lower of £123.25/week and 80% of AWE, day one,
+  28 weeks; 11 pinning tests). SMP deferred/gated as planned.
+- **Structural guards shipped**: postbuild orphan guard (editorial-inbound-links
+  check with a ratchet baseline — measurement found **26 orphans** incl.
+  cooking-time (3.3k impr), moving-cost (1.8k impr) and uk-mortgage-affordability;
+  those three were linked immediately, 23 remain in
+  `scripts/seo/known-orphans.json` as shrink-only debt); stale-year title test
+  (found and fixed 9 pages shipping "2025" titles — years stripped, not bumped,
+  because data currency is unverified); llms.txt registry-parity test.
+- **New follow-ups surfaced**: (1) burn down the 23-orphan baseline with a proper
+  internal-linking pass; (2) US tax cluster data-currency audit (paycheck,
+  quarterly-1040-ES, self-employment, CGT, HSA) — titles de-yeared until the data
+  is verified 2026-current; (3) SMP calculator, gated on SSP's time-to-first-
+  impression as the domain-vs-pages test.
+
 ---
 
 ## Timeline Expectations

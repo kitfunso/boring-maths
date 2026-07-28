@@ -19,6 +19,9 @@
 - [UK Child Benefit Calculator](https://boring-math.com/calculators/uk-child-benefit-calculator): Calculate child benefit including High Income Child Benefit Charge.
 - [UK Employer Cost Calculator](https://boring-math.com/calculators/uk-employer-cost-calculator): Total cost of employing someone including employer NIC and pension.
 - [UK Nursery Cost Calculator](https://boring-math.com/calculators/uk-nursery-cost-calculator): Estimate childcare costs with tax-free childcare and funded hours.
+- [UK Statutory Sick Pay Calculator](https://boring-math.com/calculators/uk-statutory-sick-pay-calculator): Work out SSP: the weekly rate or 80% of earnings (whichever is lower), from day one, up to 28 weeks.
+- [UK Redundancy Pay Calculator](https://boring-math.com/calculators/uk-redundancy-pay-calculator): Statutory redundancy pay from age, years of service, and capped weekly pay.
+- [UK Holiday Entitlement Calculator](https://boring-math.com/calculators/uk-holiday-entitlement-calculator): Statutory paid leave (5.6 weeks), pro-rated for part-time and irregular-hours workers.
 
 ## Personal Finance Calculators
 - [Compound Interest Calculator](https://boring-math.com/calculators/compound-interest-calculator): Model compound growth with regular contributions, different compounding frequencies.
@@ -47,4 +50,4 @@
 - [Vacation Budget Calculator](https://boring-math.com/calculators/vacation-budget-calculator): Plan and budget a trip including flights, hotels, food, and activities.
 
 ## Documentation
-- [All Calculators](https://boring-math.com/calculators): Browse all 168 calculators by category.
+- [All Calculators](https://boring-math.com/calculators): Browse all 169 calculators by category.
