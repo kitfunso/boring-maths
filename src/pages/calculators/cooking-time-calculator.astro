@@ -14,11 +14,11 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CookingTimeCalculator from '../../components/calculators/CookingTimeCalculator/CookingTimeCalculator';
 
 // SEO Configuration
-const title = 'Meat Cooking Time Calculator: Beef, Pork & Chicken | Boring Math';
+const title = 'Meat Cooking Time & Roasting Calculator: Beef, Pork, Chicken';
 const description =
   'Calculate cooking time for beef, pork, chicken, lamb, and turkey by weight in lbs or kg. Minutes per pound, oven temps, USDA and UK FSA safe internal temperatures, and resting times.';
 const keywords =
-  'meat cooking time calculator, how to calculate cooking time, beef cooking time calculator, pork cooking time calculator, chicken cook time calculator, cooking time per pound, cooking time per kg, meat cook time calculator, lamb cooking times, cooking time by weight, safe internal temperature, USDA safe temperature';
+  'meat cooking time calculator, how to calculate cooking time, beef cooking time calculator, pork cooking time calculator, chicken cook time calculator, cooking time per pound, cooking time per kg, meat cook time calculator, lamb cooking times, cooking time by weight, safe internal temperature, USDA safe temperature, roast calculator, roasting time calculator, roast timer, roast dinner calculator';
 const canonicalURL = '/calculators/cooking-time-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -81,6 +81,11 @@ const faqs = [
     question: 'How do I calculate cooking time?',
     answer:
       'Multiply the weight of the meat by the minutes-per-pound rate for that meat and cooking method, then add resting time. For example, a 5 lb whole chicken in the oven at 375°F takes about 20 minutes per pound, so 5 × 20 = 100 minutes (1 hour 40 minutes), plus 15 minutes rest. Always confirm doneness with a meat thermometer, not the clock.',
+  },
+  {
+    question: 'Can I use this instead of the BBC roast timer?',
+    answer:
+      'Yes. Like the BBC Good Food roast timer, you pick your meat, enter the weight, and choose doneness to get a total roasting time plus resting time. This calculator also works in lbs or kg, shows both US and UK fan-oven temperatures, and lists USDA and UK FSA safe internal temperatures alongside the timing.',
   },
   {
     question: 'How do I calculate cooking time for beef?',

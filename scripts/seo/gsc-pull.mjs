@@ -8,10 +8,13 @@
  *
  * Output matches the existing manual-export schema so scripts/gsc_analysis.py
  * and seo:gsc-refresh keep working unchanged:
- *   gsc-export/<YYYY-MM-DD>/gsc-pages-28d.json      ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-queries-28d.json     ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-query-page-28d.json  (bare rows array)
- *   gsc-export/<YYYY-MM-DD>/_pull-meta.json          (provenance)
+ *   gsc-export/<YYYY-MM-DD>/gsc-pages-28d.json         ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/gsc-queries-28d.json        ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/gsc-query-page-28d.json     (bare rows array)
+ *   gsc-export/<YYYY-MM-DD>/gsc-countries-28d.json      ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/gsc-country-page-28d.json   ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/gsc-country-query-28d.json  ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/_pull-meta.json             (provenance)
  *
  * Setup (one time):
  *   1. Google Cloud Console > APIs & Services > Library > enable "Google Search Console API".
@@ -344,6 +347,18 @@ async function main() {
   console.log(`  queries:    ${queries.rows.length} rows`);
   const queryPage = await queryAll(site, accessToken, { ...base, dimensions: ['query', 'page'] });
   console.log(`  query+page: ${queryPage.rows.length} rows`);
+  const countries = await queryAll(site, accessToken, { ...base, dimensions: ['country'] });
+  console.log(`  countries:  ${countries.rows.length} rows`);
+  const countryPage = await queryAll(site, accessToken, {
+    ...base,
+    dimensions: ['country', 'page'],
+  });
+  console.log(`  country+page:  ${countryPage.rows.length} rows`);
+  const countryQuery = await queryAll(site, accessToken, {
+    ...base,
+    dimensions: ['country', 'query'],
+  });
+  console.log(`  country+query: ${countryQuery.rows.length} rows`);
 
   const label = args.label || endDate;
   const outDir = path.join(REPO_ROOT, 'gsc-export', label);
@@ -353,6 +368,9 @@ async function main() {
   writeJson(path.join(outDir, 'gsc-pages-28d.json'), pages);
   writeJson(path.join(outDir, 'gsc-queries-28d.json'), queries);
   writeJson(path.join(outDir, 'gsc-query-page-28d.json'), queryPage.rows);
+  writeJson(path.join(outDir, 'gsc-countries-28d.json'), countries);
+  writeJson(path.join(outDir, 'gsc-country-page-28d.json'), countryPage);
+  writeJson(path.join(outDir, 'gsc-country-query-28d.json'), countryQuery);
   writeJson(path.join(outDir, '_pull-meta.json'), {
     pulledAt: new Date().toISOString(),
     site,
@@ -363,6 +381,9 @@ async function main() {
       pages: pages.rows.length,
       queries: queries.rows.length,
       queryPage: queryPage.rows.length,
+      countries: countries.rows.length,
+      countryPage: countryPage.rows.length,
+      countryQuery: countryQuery.rows.length,
     },
   });
 

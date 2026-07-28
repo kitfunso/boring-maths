@@ -345,6 +345,131 @@ Next pull ~2026-08-01: check the striking-distance set and whether Phase 4 links
 
 ---
 
+## GSC Review — 2026-07-28 (28-day window, API pull + first region breakdown)
+
+Fresh pull via `npm run seo:gsc-pull` (token expired as expected; `--reauth` + browser
+consent). The pull script now also exports country, country+page and country+query
+dimensions, and `python scripts/gsc_region_analysis.py` produces the per-region report.
+Analysis in `docs/gsc-analysis-2026-07-28.md` + `docs/gsc-region-analysis-2026-07-28.md`.
+
+### Trend
+| Metric | Jul 3 pull | Jul 18 pull | Jul 28 pull |
+|--------|-----------|------------|------------|
+| Clicks | 55 | 59 | 59 |
+| Impressions | 39,746 | 50,801 | 63,220 |
+| Pages with impressions | 290 | 168 | 167 |
+
+Impressions +24% in ten days, clicks flat — but +6.3k of the gain is discount-calculator
+alone (now 12.8k impr at pos 13.9, 0 clicks: the known instant-answer trap). Ex-discount,
+impressions are roughly flat.
+
+### Region findings (new)
+1. **This is a US site in practice.** US = 58% of impressions and 39 of 58 clicks at
+   avg pos 31.7. UK = 21% of impressions, 8 clicks, avg pos 63.3. Canada 3.5%,
+   Australia 2.3%, Ireland/NZ <1% each — anglosphere ≈ 87%. (Vietnam 2.7% is crawler-ish
+   noise: scattered engineering/cooking impressions, zero clicks.)
+2. **The mismatch is the story of the account**: the audience is American, the money
+   cluster is British. UK-intent pages are seen 92% in the UK (correct targeting) but
+   rank pos 60-88 there; US visibility is spread across events/home/machining pages
+   that rank pos 14-35.
+3. **www host leak — new this window.** uk-mortgage-affordability is indexed under
+   `www.boring-math.com` (760 impr at pos 88.3) alongside the apex URL (446 impr at
+   pos 84). www serves HTTP 200 instead of redirecting; canonical correctly points to
+   apex but Google surfaces www anyway. Fix: host-level 301 in `public/_redirects`
+   (`https://www.boring-math.com/* https://boring-math.com/:splat 301`) — works if www
+   is attached as a custom domain on the same Pages project; verify after deploy.
+4. **GSC suppresses clicks in country splits**: only 5 of 39 US clicks survive in the
+   country+page table (0 of 8 UK). Country totals are reliable; per-market page/query
+   tables are impression/position signal only. Caveat now printed in the report header.
+5. **Seasonal fade in the click engine**: party-drink 12 → 7 clicks, graduation-party
+   7 → 4 (season over). Positions held or improved (event-seating 21.9 → 19.0), so this
+   is demand seasonality, not ranking loss. Cluster still earns ~40% of clicks.
+6. **UK money cluster is shrinking, not growing**: uk-capital-gains −468 impr,
+   inheritance-tax −164 vs Jul-18, positions unchanged (76-84).
+7. **New striking-distance assets**: raise-calculator 2,544 impr pos 13.7,
+   conference-room 2,565 impr pos 14.6, cooking-time 3,290 impr pos 26.4 — the three
+   biggest legitimate impression pools outside discount.
+
+### Deep-research round — what to add (winnability-scored, 4 web-research agents)
+UK money verdict is **segmented, not uniformly locked**: IHT/dividend-tax SERPs are
+advisers/insurers only (backlinks-or-nothing), but SDLT/LTT has thin exact-match
+calculator domains on page 1 (crackable), and the non-YMYL UK admin/employment flank is
+wide open — entire SERPs of no-name dedicated domains (even a GitHub Pages site ranks).
+
+**Registry cross-check correction (post-research):** several agent "build" candidates
+already exist — uk-student-loan, uk-redundancy-pay, uk-holiday-entitlement (all THREE
+have ZERO GSC impressions), uk-nursery-cost (144 impr, pos 60.7), bbq-calculator
+(2 impr at pos 8.5 — ranks when shown, barely shown), ibu + priming-sugar (homebrew),
+marketplace-fees (187 impr, pos 22.6 — already striking distance), fence (330 impr,
+pos 42), paint (331 impr, pos 54). The agents verified those SERPs are winnable by
+thin no-name sites, yet our existing pages capture none of that demand. That converts
+"build the UK admin cluster" into an **activation problem**: check indexing/coverage,
+align titles+content with the exact queries the thin incumbents win, and internal-link
+them from the money pages. Only genuinely missing tools remain on the build list.
+
+Build shortlist (genuinely new; score = winnability out of 5, from live SERP checks):
+- **Machining (cluster already clicks at low authority)**: bolt-circle / hole-pattern
+  5/5 (all incumbents thin), thread-engagement expansion of tap-drill 4/5 (page already
+  climbing 47 → 35), chip-load 3/5, surface-finish Ra 3/5 (milling underserved).
+- **UK admin**: statutory sick pay / maternity pay 4/5 (the one genuinely missing
+  piece of the cluster).
+- **Events (ahead of next season)**: baby-shower food 4/5 (SERP is blog worksheets).
+- **Workplace**: commute-cost 4/5 (pairs with remote-work-savings pos 8.7); PTO payout
+  3/5, severance 3/5.
+- **Aquarium**: heater wattage 4/5 (pairs with water-change pos 10.9; the existing
+  room AC/heater sizing page is HVAC, not aquarium).
+- **Activate instead of build**: UK student-loan (add the overpayment angle the SERP
+  rewards), redundancy, holiday-entitlement (pro-rata), nursery-cost (tax-free
+  childcare framing), BBQ (meat-per-person query coverage), marketplace-fees (add CA:
+  Kijiji/FB/Vinted), homebrew (interlink from abv). Painting job-cost: extend
+  paint-calculator with a labor/job-estimate mode rather than a new page.
+- **Skip**: gravel/sod (omnicalculator exact-match), moving-truck-size (fold into
+  moving-cost instead), housewarming (thin demand), anything Google answers inline.
+
+### Deep-research round — what to improve
+1. **Title patterns from pos 8-15 winners**: question-format that previews the answer
+   ("How Many Tables & Chairs Do You Need?"), "Free / no signup" in title or meta
+   (true for us, omitted everywhere), year in title. Apply to event-seating,
+   conference-room, job-offer-comparison, contractor-vs-employee, screen-time.
+2. **cooking-time**: own the orphaned "bbc roasting calculator" demand (BBC tool is
+   dead; only clones rank) — retitle toward roasting + explicit BBC-alternative H2/FAQ.
+3. **raise-calculator**: exact-match domain (raise-calculator.com, year-in-title) owns
+   the head term — pivot title to the differentiator (career/compounding value of a
+   raise) instead of fighting it.
+4. **party-drink**: CTR gap at pos 8.6 is brand trust (Evite/Total Wine on the SERP),
+   not title copy — lowest-ROI page for further title tuning; try trust-signal meta +
+   schema test instead.
+5. **speeds-feeds** (1k impr pos 69): our tool already has 20-material presets + MRR;
+   the real depth gap vs FSWizard/Machining Doctor is the tool-material dimension
+   (HSS vs carbide vs coated, coolant, tool-life estimate).
+6. **moving-cost** (1.8k impr pos 67): highest-volume weak US page — depth pass beats
+   building moving-truck-size as a separate page.
+7. Deprioritize: water-intake (medical-authority ceiling), pace/compound-interest
+   (authority-locked), discount (structurally zero-CTR).
+
+### Recommended actions (priority order)
+1. **Ship the www → apex 301** (one line in `public/_redirects` + verify on deploy).
+   Cheap, stops an active duplicate-host split on a new money page.
+2. **Phase 4 backlinks — still the only lever for the locked UK YMYL head terms**
+   (IHT, dividend). Unchanged since February; Keith-gated sends remain the blocker.
+3. **Activate the existing UK admin cluster** (student-loan, redundancy,
+   holiday-entitlement have ZERO impressions on SERPs thin sites win; nursery-cost
+   pos 60.7): indexing check, query-aligned titles/content, internal links from the
+   money pages. Build SSP/SMP as the one missing piece.
+4. **Machining expansion**: bolt-circle + thread-engagement first; speeds-feeds
+   tool-material depth pass.
+5. **Striking-set title/meta rewrites** per research patterns (event-seating,
+   conference-room, raise, cooking-time/BBC, job-offer, contractor, screen-time).
+6. **Events additions** (BBQ, baby-shower) before the autumn/holiday party season.
+7. Keith-gated backlog unchanged: outreach sends, directories, Product Hunt, Bing
+   Webmaster Tools, CHROMEDRIVER_SKIP_DOWNLOAD env, stale "149 calculators" on
+   /advertise.
+
+Next pull ~2026-08-25: compare against this baseline (region tables now in every pull);
+check whether the www 301 landed and whether any Phase 4 links finally shipped.
+
+---
+
 ## Timeline Expectations
 
 | Milestone | Timeframe |
