@@ -45,7 +45,7 @@
 - [Side Hustle Profitability Calculator](https://boring-math.com/calculators/side-hustle-profitability-calculator): Is your side hustle actually making money after all costs?
 
 ## Travel Calculators
-- [Avios Destination Finder](https://boring-math.com/calculators/avios-destination-finder): Unofficial British Airways reward flight guide. See every BA destination your Avios can reach, ranked by cost, with peak/off-peak prices, cash element, and companion voucher support. Guide prices from BA's published table, not live seat availability.
+- [Avios Calculator & Destination Finder](https://boring-math.com/calculators/avios-destination-finder): Unofficial British Airways Avios calculator and reward flight guide. See every BA destination your Avios can reach, ranked by cost, with peak/off-peak prices, cash element, and companion voucher support. Guide prices from BA's published table, not live seat availability.
 - [Tipping Guide Calculator](https://boring-math.com/calculators/tipping-guide-calculator): Tipping customs for 12 countries and 6 service types.
 - [Vacation Budget Calculator](https://boring-math.com/calculators/vacation-budget-calculator): Plan and budget a trip including flights, hotels, food, and activities.
 

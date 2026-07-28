@@ -39,6 +39,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
+import { useEffect, useState } from 'preact/hooks';
 
 // BA blocks parameterised deep links for anonymous sessions (verified 2026-07-19);
 // this is the official Reward Flight Finder entry page.
@@ -61,6 +62,65 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 ];
 
 const nf = new Intl.NumberFormat('en-GB');
+
+// --- Shareable URLs: filter state <-> query string --------------------------
+// Every search is reflected in the address bar (replaceState, no history spam)
+// so a result set can be copied, bookmarked, or shared. Only non-default
+// values are written; unknown or invalid params are ignored.
+const TRIP_TYPES: readonly TripType[] = ['return', 'oneWay'];
+const SORT_KEYS: readonly SortKey[] = SORT_OPTIONS.map((o) => o.value);
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+
+function inputsFromParams(search: string): Partial<AviosFinderInputs> | null {
+  const params = new URLSearchParams(search);
+  const patch: Record<string, unknown> = {};
+
+  const budget = Number(params.get('budget'));
+  if (Number.isFinite(budget) && budget > 0) patch.aviosBudget = Math.floor(budget);
+  const from = params.get('from');
+  if (from && ISO_DATE.test(from)) patch.dateFrom = from;
+  const to = params.get('to');
+  if (to && ISO_DATE.test(to)) patch.dateTo = to;
+  const regions = params
+    .get('regions')
+    ?.split(',')
+    .filter((r): r is Region => (REGIONS as readonly string[]).includes(r));
+  if (regions && regions.length > 0) patch.regions = regions;
+  const types = params
+    .get('types')
+    ?.split(',')
+    .filter((t): t is HolidayType => (HOLIDAY_TYPES as readonly string[]).includes(t));
+  if (types && types.length > 0) patch.holidayTypes = types;
+  const cabinParam = params.get('cabin');
+  if (cabinParam && cabinParam in CABIN_LABELS) patch.cabin = cabinParam as Cabin;
+  const travellers = params.get('travellers');
+  if (travellers === '1' || travellers === '2') patch.travellers = Number(travellers) as 1 | 2;
+  if (params.get('voucher') === '1') patch.companionVoucher = true;
+  const trip = params.get('trip');
+  if (trip && (TRIP_TYPES as readonly string[]).includes(trip)) patch.tripType = trip as TripType;
+  const sort = params.get('sort');
+  if (sort && (SORT_KEYS as readonly string[]).includes(sort)) patch.sortKey = sort as SortKey;
+  if (params.get('over') === '0') patch.showOverBudget = false;
+
+  return Object.keys(patch).length > 0 ? (patch as Partial<AviosFinderInputs>) : null;
+}
+
+function paramsFromInputs(inputs: AviosFinderInputs): string {
+  const d = getDefaultInputs();
+  const params = new URLSearchParams();
+  if (inputs.aviosBudget !== d.aviosBudget) params.set('budget', String(inputs.aviosBudget));
+  if (inputs.dateFrom) params.set('from', inputs.dateFrom);
+  if (inputs.dateTo) params.set('to', inputs.dateTo);
+  if (inputs.regions.length > 0) params.set('regions', inputs.regions.join(','));
+  if (inputs.holidayTypes.length > 0) params.set('types', inputs.holidayTypes.join(','));
+  if (inputs.cabin !== d.cabin) params.set('cabin', inputs.cabin);
+  if (inputs.travellers !== d.travellers) params.set('travellers', String(inputs.travellers));
+  if (inputs.companionVoucher) params.set('voucher', '1');
+  if (inputs.tripType !== d.tripType) params.set('trip', inputs.tripType);
+  if (inputs.sortKey !== d.sortKey) params.set('sort', inputs.sortKey);
+  if (!inputs.showOverBudget) params.set('over', '0');
+  return params.toString();
+}
 
 function formatAvios(v: number | null): string {
   return v === null ? '-' : nf.format(v);
@@ -114,12 +174,36 @@ function ResultRow({ row }: { row: DestinationResult }) {
 }
 
 export default function AviosDestinationFinder() {
-  const { inputs, result, updateInput } = useCalculatorBase<AviosFinderInputs, AviosFinderResult>({
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
+    AviosFinderInputs,
+    AviosFinderResult
+  >({
     name: 'Avios Destination Finder',
     slug: 'calc-avios-finder-inputs',
     defaults: getDefaultInputs,
     compute: computeResults,
   });
+
+  // Shared-link params win over locally stored state, once, on mount.
+  useEffect(() => {
+    const patch = inputsFromParams(window.location.search);
+    if (patch) setInputs((prev) => ({ ...prev, ...patch }));
+  }, [setInputs]);
+
+  // Keep the address bar in sync so the current search is always shareable.
+  useEffect(() => {
+    const qs = paramsFromInputs(inputs);
+    const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    window.history.replaceState(null, '', url);
+  }, [inputs]);
+
+  const [linkCopied, setLinkCopied] = useState(false);
+  const copySearchLink = (): void => {
+    void navigator.clipboard?.writeText(window.location.href).then(() => {
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    });
+  };
 
   const shown = inputs.showOverBudget ? result.ranked : result.affordable;
 
@@ -421,8 +505,15 @@ export default function AviosDestinationFinder() {
               </div>
             </div>
 
-            <div className="flex justify-center gap-3 pt-4">
+            <div className="flex flex-wrap justify-center gap-3 pt-4">
               <ShareResults result={summary} calculatorName="Avios Destination Finder" />
+              <button
+                type="button"
+                onClick={copySearchLink}
+                className="px-4 py-2 rounded-full text-sm font-medium border border-white/15 text-[var(--color-subtle)] hover:text-[var(--color-cream)] hover:border-white/30 transition-colors"
+              >
+                {linkCopied ? 'Link copied' : 'Copy link to this search'}
+              </button>
             </div>
           </div>
         </div>

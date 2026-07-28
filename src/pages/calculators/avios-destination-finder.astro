@@ -110,11 +110,11 @@ if (!bestValue) {
 }
 
 // SEO Configuration
-const title = 'Avios Destination Finder (Unofficial) | Boring Math';
+const title = 'Avios Calculator & Destination Finder: Where Can Avios Take You?';
 const description =
-  'See every British Airways destination your Avios can reach. Search by points budget, dates, region and holiday type. Free unofficial guide.';
+  'Free unofficial Avios calculator, no signup. See every British Airways destination your points reach, with peak and off-peak prices, cash co-pay and companion voucher support.';
 const keywords =
-  'where can I go with my avios, avios destination finder, 50000 avios where can I fly, avios flights from london, companion voucher destinations, BA reward flight guide, avios peak off-peak calculator';
+  'avios calculator, avios flight calculator, how many avios do I need, avios points calculator, reward flight saver calculator, where can I go with my avios, avios destination finder, 50000 avios where can I fly, avios flights from london, companion voucher destinations, BA reward flight guide, avios peak off-peak calculator';
 const canonicalURL = '/calculators/avios-destination-finder';
 
 const siteUrl = 'https://boring-math.com';
@@ -188,6 +188,10 @@ const faqs = [
       'No. This is a guide-price search tool only, not a booking site. Once you have a shortlist, check real-time reward seat availability and complete your booking on ba.com.',
   },
   {
+    question: 'How do I calculate how many Avios I need?',
+    answer: `Enter your Avios balance, travel dates and cabin in the calculator above; it prices all ${DESTINATIONS.length} British Airways destinations at once from the published reward table and shows which ones fit your budget, with the cash co-pay alongside. As a rule of thumb: short-haul Europe starts at ${nf.format(shortHaulMinOffPeak)} Avios one-way off-peak, and long-haul economy such as New York is ${nf.format(nyEcon.offPeak)} Avios one-way off-peak.`,
+  },
+  {
     question: 'How many Avios do I need to fly from London to New York?',
     answer: `One-way in economy, New York costs ${nf.format(nyEcon.offPeak)} Avios off-peak or ${nf.format(nyEcon.peak)} Avios peak, plus ${fmtCash(nyEcon.cash)} in cash each way at the lowest-cash combination. A return for two travellers with a companion voucher needs the Avios of one return: ${nf.format(nyEcon.offPeak * 2)} off-peak, with taxes and fees payable for both passengers.`,
   },
@@ -251,7 +255,7 @@ const schemaBreadcrumbs = [
 
   <!-- Hero Section -->
   <HeroSection
-    title="Avios Destination Finder"
+    title="Avios Calculator & Destination Finder"
     description="See every British Airways destination your Avios can reach, filtered by budget, dates, region, and holiday type."
   />
 
