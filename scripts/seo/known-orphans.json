@@ -1,0 +1,28 @@
+{
+  "_comment": "Ratchet baseline for check-orphan-pages.mjs (added 2026-07-28). These pages had zero editorial inbound links when the guard shipped. The list may ONLY shrink: add a related-calculator link somewhere sensible, then remove the entry. Adding entries here to silence a NEW orphan defeats the guard - link the page instead.",
+  "knownOrphans": [
+    "/calculators/cost-per-wear-calculator/",
+    "/calculators/recipe-scaler-calculator/",
+    "/calculators/one-rep-max-calculator/",
+    "/calculators/council-tax-calculator/",
+    "/calculators/water-intake-calculator/",
+    "/calculators/streaming-value-calculator/",
+    "/calculators/trades-hourly-rate-calculator/",
+    "/calculators/house-flip-calculator/",
+    "/calculators/business-mileage-calculator/",
+    "/calculators/heart-rate-zone-calculator/",
+    "/calculators/mortgage-overpayment-calculator/",
+    "/calculators/us-sales-tax-calculator/",
+    "/calculators/us-auto-loan-calculator/",
+    "/calculators/roth-ira-calculator/",
+    "/calculators/debt-to-income-calculator/",
+    "/calculators/ireland-salary-calculator/",
+    "/calculators/germany-salary-calculator/",
+    "/calculators/france-salary-calculator/",
+    "/calculators/concrete-calculator/",
+    "/calculators/gravel-calculator/",
+    "/calculators/wallpaper-calculator/",
+    "/calculators/btu-calculator/",
+    "/calculators/ev-charging-cost-calculator/"
+  ]
+}

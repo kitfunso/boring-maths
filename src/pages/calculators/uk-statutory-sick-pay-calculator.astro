@@ -1,0 +1,190 @@
+---
+/**
+ * UK Statutory Sick Pay Calculator Page
+ * Current SSP rules (GOV.UK, checked 2026-07-28): weekly SSP is the lower of
+ * £123.25 and 80% of normal weekly earnings, paid for the working days off
+ * sick, for up to 28 weeks.
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKStatutorySickPayCalculator } from '../../components/calculators/UKStatutorySickPayCalculator';
+
+const title = 'UK Statutory Sick Pay Calculator 2026/27: How Much SSP You Get';
+const description =
+  'Free SSP calculator, no signup. Work out Statutory Sick Pay: the weekly rate or 80% of your earnings (whichever is lower), paid from your first working day off sick, for up to 28 weeks.';
+const keywords =
+  'statutory sick pay calculator, ssp calculator, ssp calculator uk, how much is statutory sick pay, sick pay calculator uk, ssp daily rate, ssp 28 weeks, statutory sick pay rate';
+const canonicalURL = '/calculators/uk-statutory-sick-pay-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'UK Statutory Sick Pay Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Redundancy Pay Calculator',
+    description: 'Estimate statutory redundancy pay by age and service.',
+    href: '/calculators/uk-redundancy-pay-calculator/',
+    icon: 'calculator' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'UK Holiday Entitlement Calculator',
+    description: 'Statutory paid leave, pro-rated for part-time workers.',
+    href: '/calculators/uk-holiday-entitlement-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'UK Tax Calculator',
+    description: 'Work out income tax and take-home pay.',
+    href: '/calculators/uk-tax-calculator/',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'UK Employer Cost Calculator',
+    description: 'The true total cost of employing someone.',
+    href: '/calculators/uk-employer-cost-calculator/',
+    icon: 'calculator' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'Emergency Fund Calculator',
+    description: 'How much savings cover a period off work.',
+    href: '/calculators/emergency-fund-calculator/',
+    icon: 'chart' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is Statutory Sick Pay calculated?',
+    answer:
+      'Your weekly SSP is the lower of the flat weekly rate (£123.25) and 80% of your normal weekly earnings, which your employer averages over an 8-week period. The daily rate is that weekly figure divided by the days you normally work each week, and you are paid it for every full day off sick that you would normally have worked, for up to 28 weeks.',
+  },
+  {
+    question: 'How much is SSP per week?',
+    answer:
+      'Up to £123.25 per week under current rules. If 80% of your average weekly earnings is less than £123.25, you get the 80% figure instead. For example, on average weekly earnings of £100 your SSP is £80 per week. Employers with an occupational sick pay scheme can pay more, but never less than the statutory amount.',
+  },
+  {
+    question: 'When does SSP start? Are there waiting days?',
+    answer:
+      'Under current rules SSP is paid for all the full days you are off sick that you normally would have worked, starting from the first of those days. You qualify once you have been ill for at least one full working day and you tell your employer before their deadline (or within 7 days if they have not set one).',
+  },
+  {
+    question: 'How long can I get SSP for?',
+    answer:
+      'Your employer pays SSP for up to 28 weeks in a period of entitlement. Sickness periods that are 8 weeks or less apart are linked and count together; entitlement ends if a continuous series of linked periods lasts more than 3 years.',
+  },
+  {
+    question: 'Do I need a fit note (sick note) for SSP?',
+    answer:
+      'Only for longer absences: you need a fit note from a healthcare professional if you are off work sick for more than 7 days in a row, counting non-working days. For 7 days or fewer, you can self-certify.',
+  },
+  {
+    question: 'Who qualifies for Statutory Sick Pay?',
+    answer:
+      'You must be classed as an employee, have done some work for your employer, and have been ill for at least one full working day. You cannot get SSP if you have already received the 28-week maximum, or while you are getting Statutory Maternity Pay. Agency workers may also be entitled to SSP.',
+  },
+  {
+    question: 'Can my employer pay more than SSP?',
+    answer:
+      'Yes. Many employers run occupational or contractual sick pay schemes that pay more than the statutory minimum, often full pay for a set number of weeks. Your contract or staff handbook sets those terms; SSP is the legal floor, and you cannot get less than the statutory amount.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Statutory Sick Pay Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Statutory Sick Pay Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Statutory Sick Pay Calculator"
+    description="Work out the SSP you are due: the weekly rate or 80% of your earnings (whichever is lower), from your first working day off sick, for up to 28 weeks."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKStatutorySickPayCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your average gross weekly earnings</strong>
+        – Your employer works this out over an 8-week period. If your pay is steady, your normal gross
+        weekly pay is fine.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your working days per week</strong> – SSP is paid
+        per working day, so a 5-day week splits the weekly rate into five daily payments.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your full working days off sick</strong> – Count
+        only days you would normally have worked, not rest days.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review your results</strong> – See the weekly rate that
+        applies to you, your daily rate, and the total SSP due.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How SSP Is Worked Out">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Statutory Sick Pay has one simple rule at its core: your weekly SSP is
+        <strong class="text-[var(--color-cream)]"
+          >the lower of £123.25 and 80% of your normal weekly earnings</strong
+        >. Most employees on ordinary wages get the flat £123.25; lower earners get 80% of their
+        average weekly earnings instead, so nobody is excluded by an earnings threshold.
+      </p>
+      <p>
+        The weekly figure is then converted to a daily rate by dividing by the number of days you
+        normally work in a week. You are paid that daily rate for every full day off sick that you
+        would normally have worked. Under current rules payment starts from the first working day
+        you are off, and your employer pays it through payroll for up to 28 weeks.
+      </p>
+      <p>
+        Worked example: on average weekly earnings of £600 with a 5-day working week, the flat rate
+        applies (80% of £600 is £480, which is above £123.25, so the lower figure £123.25 is used).
+        The daily rate is £123.25 divided by 5, which is £24.65. Ten working days off sick pays 10 x
+        £24.65 = £246.50.
+      </p>
+      <p>
+        Sickness periods that are 8 weeks or less apart are linked and count as one period of
+        entitlement towards the 28-week maximum. This calculator shows the statutory figure only; it
+        is a tool, not financial or legal advice. Check the latest GOV.UK guidance and your contract
+        for your exact situation.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

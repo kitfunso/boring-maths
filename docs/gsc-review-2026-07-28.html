@@ -79,9 +79,7 @@
 
 <h2>Findings</h2>
 <ol>
-<li><strong>www host leak (new this window).</strong> <code>www.boring-math.com</code> serves HTTP 200 instead of redirecting; uk-mortgage-affordability is now indexed under www (760 impr, pos 88.3) <em>and</em> apex (446 impr, pos 84.0). Canonical points to apex; Google surfaces www anyway. One-line fix, not yet applied (review-only session):
-<pre>https://www.boring-math.com/*    https://boring-math.com/:splat    301</pre>
-<span class="muted">→ add to <code>public/_redirects</code>; fires if www is attached to the Pages project as a custom domain — verify after deploy with <code>curl -sI https://www.boring-math.com/</code> (expect 301).</span></li>
+<li><strong>www host leak (new this window).</strong> <code>www.boring-math.com</code> serves HTTP 200 instead of redirecting; uk-mortgage-affordability is now indexed under www (760 impr, pos 88.3) <em>and</em> apex (446 impr, pos 84.0). Canonical points to apex; Google surfaces www anyway. <strong>Correction (post-deploy):</strong> a <code>_redirects</code> host rule was tried and is a documented no-op — Cloudflare Pages does not support domain-level redirects. The real fix is Keith-gated and one click: CF dashboard → Rules → Redirect Rules → template <em>"Redirect from WWW to Root"</em> (301). Verify with <code>curl -sI https://www.boring-math.com/</code> (expect 301).</li>
 <li><strong>Seasonal fade, not ranking loss.</strong> party-drink 12 → 7 clicks, graduation-party 7 → 4 (graduation season over); positions held or improved (event-seating 21.9 → 19.0). The events cluster still earns ~40% of site clicks.</li>
 <li><strong>UK money cluster shrinking.</strong> uk-capital-gains −468 impr, inheritance-tax −164 vs Jul-18, positions unchanged 76–84. Confirms authority-bound; Phase 4 backlinks (open since Feb) still the only lever for the head terms.</li>
 <li><strong>New striking-distance assets:</strong> raise-calculator (2,544 impr, pos 13.7), conference-room (2,565, pos 14.6), cooking-time (3,290, pos 26.4) — the three biggest legitimate impression pools.</li>

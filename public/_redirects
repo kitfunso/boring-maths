@@ -8,12 +8,15 @@
 # /guides/*/ -> :splat, etc.) were removed: they contradicted 'always' and were
 # already shadowed dead by the directory assets (the slash URL serves 200).
 
-# Host normalization: www is attached to the same Pages project and was being
-# indexed separately by Google (GSC 2026-07-28: uk-mortgage-affordability had
-# 760 impressions under www despite a correct apex canonical). 301 everything
-# on www to the apex host. Verify post-deploy: curl -sI https://www.boring-math.com/
-# must return 301 with Location: https://boring-math.com/
-https://www.boring-math.com/*   https://boring-math.com/:splat   301
+# Host normalization (www -> apex) CANNOT live in this file: Cloudflare Pages
+# _redirects explicitly does not support domain-level redirects
+# (developers.cloudflare.com/pages/configuration/redirects, "Domain-level
+# redirects: unsupported" - a host rule here is silently ignored; verified live
+# 2026-07-28). Google indexes www separately (uk-mortgage-affordability had 760
+# impressions under www despite a correct apex canonical). The fix is a
+# zone-level Redirect Rule: Cloudflare dashboard > Rules > Redirect Rules >
+# template "Redirect from WWW to Root" (301). Verify with:
+#   curl -sI https://www.boring-math.com/   ->  301, Location: https://boring-math.com/
 
 # Privacy: 301 the /privacy alias to the real page. Target MUST be the
 # trailing-slash URL: Cloudflare serves the page at /privacy-policy/ (the
