@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GSC Region Review + Calculator Research — 2026-07-28</title>
+<style>
+  :root { --bg:#fdfcf9; --fg:#1c1c1e; --muted:#6b6b70; --line:#e4e1d8; --card:#ffffff;
+          --good:#0a7a3d; --bad:#b3261e; --accent:#7a5af5; --chip:#f0ede4; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#121214; --fg:#eceae6; --muted:#9a9aa2; --line:#2c2c31; --card:#1b1b1f;
+            --good:#4cc38a; --bad:#ff6b62; --accent:#a78bfa; --chip:#26262c; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0 auto; max-width:960px; padding:2rem 1.25rem 4rem; background:var(--bg);
+         color:var(--fg); font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  h1 { font-size:1.6rem; line-height:1.25; margin:0 0 .3rem; }
+  h2 { font-size:1.15rem; margin:2.2rem 0 .6rem; border-bottom:1px solid var(--line); padding-bottom:.35rem; }
+  h3 { font-size:1rem; margin:1.4rem 0 .4rem; }
+  .sub { color:var(--muted); margin:0 0 1.4rem; }
+  p { margin:.55rem 0; }
+  table { border-collapse:collapse; width:100%; margin:.6rem 0 1rem; font-size:.92rem; }
+  .scroll { overflow-x:auto; }
+  th, td { text-align:left; padding:.38rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-weight:600; color:var(--muted); font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .up { color:var(--good); } .down { color:var(--bad); }
+  .win { display:inline-block; min-width:2.4em; text-align:center; border-radius:.6em;
+         padding:0 .45em; font-weight:600; font-size:.85rem; background:var(--chip); }
+  .w5 { color:var(--good); } .w4 { color:var(--good); opacity:.85; } .w3 { color:var(--muted); } .w2 { color:var(--bad); }
+  code, pre { font-family:ui-monospace,Consolas,monospace; font-size:.88em; background:var(--chip);
+              border-radius:4px; padding:.08em .35em; }
+  pre { padding:.7rem .9rem; overflow-x:auto; line-height:1.45; }
+  details { border:1px solid var(--line); border-radius:8px; padding:.55rem .9rem; margin:.6rem 0; background:var(--card); }
+  summary { cursor:pointer; font-weight:600; }
+  .callout { border-left:3px solid var(--accent); background:var(--card); padding:.6rem .9rem; border-radius:0 8px 8px 0; margin:.8rem 0; }
+  .warn { border-left-color:var(--bad); }
+  ol li, ul li { margin:.3rem 0; }
+  .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+
+<h1>GSC Region Review + Calculator Research</h1>
+<p class="sub">boring-math.com · 28-day window Jul 1–28 2026 · pulled 2026-07-28 via <code>npm run seo:gsc-pull</code> (now with country dimensions)</p>
+
+<h2>The story in four sentences</h2>
+<p><strong>This is a US site with a British money cluster.</strong> The US delivers 58% of impressions and 39 of 58 clicks at average position 31.7; the UK delivers 21% of impressions at position 63.3 and its money pages are shrinking, not growing. Impressions jumped 50.8k → 63.2k in ten days but +6.3k of that is the discount-calculator instant-answer trap (12.8k impressions, position 13.9, zero clicks). The research round's headline: the UK YMYL head terms stay backlink-locked, but a <em>non-YMYL UK admin flank</em> (student loans, statutory pay, childcare, redundancy) and the <em>machining cluster</em> are wide open at our authority level.</p>
+
+<h2>Trend</h2>
+<div class="scroll"><table>
+<tr><th>Metric</th><th class="num">Jul 3</th><th class="num">Jul 18</th><th class="num">Jul 28</th><th class="num">Δ 10d</th></tr>
+<tr><td>Clicks</td><td class="num">55</td><td class="num">59</td><td class="num">59</td><td class="num">0</td></tr>
+<tr><td>Impressions</td><td class="num">39,746</td><td class="num">50,801</td><td class="num">63,220</td><td class="num up">+24%</td></tr>
+<tr><td>Pages with impressions</td><td class="num">290</td><td class="num">168</td><td class="num">167</td><td class="num">−1</td></tr>
+</table></div>
+<p class="muted">Ex-discount-calculator, impressions are roughly flat. Clicks flat = seasonal fade in the party cluster offset by small gains elsewhere.</p>
+
+<h2>Where users actually are</h2>
+<div class="scroll"><table>
+<tr><th>Country</th><th class="num">Clicks</th><th class="num">Impressions</th><th class="num">Share</th><th class="num">CTR</th><th class="num">Avg pos</th></tr>
+<tr><td>United States</td><td class="num">39</td><td class="num">36,569</td><td class="num">57.9%</td><td class="num">0.11%</td><td class="num">31.7</td></tr>
+<tr><td>United Kingdom</td><td class="num">8</td><td class="num">13,284</td><td class="num">21.0%</td><td class="num">0.06%</td><td class="num">63.3</td></tr>
+<tr><td>Canada</td><td class="num">2</td><td class="num">2,180</td><td class="num">3.5%</td><td class="num">0.09%</td><td class="num">34.6</td></tr>
+<tr><td>Vietnam <span class="muted">(noise)</span></td><td class="num">0</td><td class="num">1,721</td><td class="num">2.7%</td><td class="num">0.00%</td><td class="num">36.3</td></tr>
+<tr><td>Australia</td><td class="num">2</td><td class="num">1,432</td><td class="num">2.3%</td><td class="num">0.14%</td><td class="num">30.4</td></tr>
+<tr><td>India</td><td class="num">1</td><td class="num">507</td><td class="num">0.8%</td><td class="num">0.20%</td><td class="num">30.7</td></tr>
+<tr><td class="muted">Anglosphere total (US+UK+CA+AU+IE+NZ)</td><td class="num">51</td><td class="num">~54,180</td><td class="num">~86%</td><td class="num"></td><td class="num"></td></tr>
+</table></div>
+
+<div class="callout warn"><strong>Data caveat baked into the tooling:</strong> GSC silently drops most click rows when country is combined with page/query (only 5 of 39 US clicks survive the country+page split; 0 of 8 UK). Country totals are reliable; per-market page tables are impression/position signal only. <code>scripts/gsc_region_analysis.py</code> now prints this caveat in every report.</div>
+
+<h3>What each market sees</h3>
+<ul>
+<li><strong>US</strong> — events/party (party-drink pos 8.6, conference-room 14.6), home projects (moving-cost 1.8k impr pos 67, mulch 498), machining (cutting-time 4 clicks, tap-drill 2), workplace (raise 2.5k impr pos 13.7, remote-work-savings pos 8.7).</li>
+<li><strong>UK</strong> — the money cluster, all position 60–88: IHT (1.6k impr), uk-capital-gains (1.0k), mortgage-affordability (1.2k across two hosts), salary-sacrifice (693), dividend-tax (690), stamp-duty Wales/Scotland (~920). Correctly geo-targeted (92% of UK-intent impressions land in the UK) — just outranked.</li>
+<li><strong>CA/AU</strong> — long-tail: painting estimates, marketplace seller fees, meeting-room capacity (pos 21–25 in CA), homebrew/abv (82 impr AU), machining.</li>
+</ul>
+
+<h2>Findings</h2>
+<ol>
+<li><strong>www host leak (new this window).</strong> <code>www.boring-math.com</code> serves HTTP 200 instead of redirecting; uk-mortgage-affordability is now indexed under www (760 impr, pos 88.3) <em>and</em> apex (446 impr, pos 84.0). Canonical points to apex; Google surfaces www anyway. One-line fix, not yet applied (review-only session):
+<pre>https://www.boring-math.com/*    https://boring-math.com/:splat    301</pre>
+<span class="muted">→ add to <code>public/_redirects</code>; fires if www is attached to the Pages project as a custom domain — verify after deploy with <code>curl -sI https://www.boring-math.com/</code> (expect 301).</span></li>
+<li><strong>Seasonal fade, not ranking loss.</strong> party-drink 12 → 7 clicks, graduation-party 7 → 4 (graduation season over); positions held or improved (event-seating 21.9 → 19.0). The events cluster still earns ~40% of site clicks.</li>
+<li><strong>UK money cluster shrinking.</strong> uk-capital-gains −468 impr, inheritance-tax −164 vs Jul-18, positions unchanged 76–84. Confirms authority-bound; Phase 4 backlinks (open since Feb) still the only lever for the head terms.</li>
+<li><strong>New striking-distance assets:</strong> raise-calculator (2,544 impr, pos 13.7), conference-room (2,565, pos 14.6), cooking-time (3,290, pos 26.4) — the three biggest legitimate impression pools.</li>
+<li><strong>discount-calculator is noise:</strong> +6,284 impr in ten days to 12.8k at pos 13.9 with 0 clicks. Google answers "X% off $Y" inline. Do not invest.</li>
+</ol>
+
+<h2>Research round — what to add</h2>
+<p>Four parallel web-research agents; winnability scored 1–5 from live SERP composition (who actually ranks, how thin they are). Full sourced write-ups in the session transcript; verdicts merged into <code>SEO-ROADMAP.md § GSC Review — 2026-07-28</code>.</p>
+
+<div class="callout warn"><strong>Registry cross-check correction:</strong> several agent "build" candidates already exist. uk-student-loan, uk-redundancy-pay and uk-holiday-entitlement have <strong>zero GSC impressions</strong> despite sitting on SERPs that thin no-name sites win — that's an <em>activation</em> problem (indexing, query-aligned titles, internal links), not a build gap. Also existing: uk-nursery-cost (144 impr, pos 60.7), bbq (2 impr at pos 8.5 — ranks when shown, barely shown), ibu + priming-sugar, marketplace-fees (187 impr, pos 22.6 — already striking distance), fence (330, pos 42), paint (331, pos 54).</div>
+
+<div class="scroll"><table>
+<tr><th>Calculator</th><th>Cluster / market</th><th class="num">Win</th><th>Why</th></tr>
+<tr><td>Bolt circle / hole pattern</td><td>Machining</td><td class="num"><span class="win w5">5</span></td><td>All incumbents thin (firgelli, toolgrit, littlemachineshop); cluster already clicks for us at low authority</td></tr>
+<tr><td>Statutory sick / maternity pay (UK)</td><td>UK admin</td><td class="num"><span class="win w4">4</span></td><td>Dedicated thin domains rank beside ACAS/GOV.UK; the one genuinely missing piece of the UK admin cluster</td></tr>
+<tr><td>Thread engagement (tap-drill expansion)</td><td>Machining</td><td class="num"><span class="win w4">4</span></td><td>Our page already climbing (47 → 35); vendor/old-UI competition</td></tr>
+<tr><td>Baby-shower food + drink</td><td>Events, US</td><td class="num"><span class="win w4">4</span></td><td>Mostly blog worksheets, no robust tool</td></tr>
+<tr><td>Commute cost</td><td>Workplace, US</td><td class="num"><span class="win w4">4</span></td><td>Thin niche SERP; pairs with remote-work-savings (pos 8.7)</td></tr>
+<tr><td>Aquarium heater wattage</td><td>Aquarium</td><td class="num"><span class="win w4">4</span></td><td>Small-site SERP; pairs with water-change (pos 10.9); existing heater page is room HVAC, not aquarium</td></tr>
+<tr><td>Chip load · Surface finish (Ra)</td><td>Machining</td><td class="num"><span class="win w3">3</span></td><td>Fragmented but crowded; milling variant underserved</td></tr>
+<tr><td>PTO payout · Severance</td><td>Workplace, US</td><td class="num"><span class="win w3">3</span></td><td>Real demand, moderately crowded, no giant</td></tr>
+</table></div>
+
+<details open><summary>Activate instead of build (already in the registry)</summary>
+<ul>
+<li><strong>UK student-loan</strong> — zero impressions; add the overpayment angle the winnable SERP rewards.</li>
+<li><strong>UK redundancy pay, holiday entitlement</strong> — zero impressions; indexing check + query-aligned titles + internal links from the money pages.</li>
+<li><strong>UK nursery-cost</strong> — 144 impr at pos 60.7; lean into tax-free childcare framing (softest SERP found — a GitHub Pages site ranks).</li>
+<li><strong>BBQ</strong> — pos 8.5 but only 2 impressions; broaden "how much meat per person" query coverage.</li>
+<li><strong>Marketplace fees</strong> — pos 22.6, 187 impr; add CA coverage (Kijiji, FB Marketplace, Vinted).</li>
+<li><strong>Homebrew (ibu, priming-sugar)</strong> — interlink from abv-calculator's AU traction.</li>
+<li><strong>Paint</strong> — extend with a labor/job-estimate mode to catch "painting estimate calculator" (CA signal) instead of a new page.</li>
+</ul>
+</details>
+
+<details><summary>Skip list (and why)</summary>
+<ul>
+<li>Gravel, sod/grass-seed — omnicalculator exact-match dominant (the flagged trap).</li>
+<li>Moving-truck-size — fold into the existing moving-cost page instead of fragmenting.</li>
+<li>Housewarming budget — demand too thin.</li>
+<li>Anything Google answers inline (percent-off class) — structurally zero CTR.</li>
+</ul>
+</details>
+
+<h2>Research round — what to improve</h2>
+<div class="scroll"><table>
+<tr><th>Page</th><th>Data</th><th>Action</th></tr>
+<tr><td>cooking-time</td><td class="num">3,290 impr · pos 26.4</td><td>Own the orphaned "bbc roasting calculator" demand (BBC's tool is dead; only clones rank): retitle toward roasting, add explicit BBC-alternative H2/FAQ.</td></tr>
+<tr><td>raise-calculator</td><td class="num">2,544 impr · pos 13.7</td><td>Exact-match domain owns the head term — pivot title to the differentiator: career/compounding value of a raise, add year.</td></tr>
+<tr><td>conference-room</td><td class="num">2,565 impr · pos 14.6</td><td>Fix H1/title mismatch; front-load "Free, no signup" + layout types in meta. Already #7 for some variants.</td></tr>
+<tr><td>event-seating</td><td class="num">463 impr · pos 19.0</td><td>Question-format title: "How Many Tables &amp; Chairs Do You Need?" — the recurring winner pattern.</td></tr>
+<tr><td>party-drink</td><td class="num">2,556 impr · pos 8.6</td><td><strong>Stop tuning the title.</strong> CTR gap at pos 8.6 is brand trust (Evite, Total Wine on SERP). Trust-signal meta + schema test only.</td></tr>
+<tr><td>speeds-feeds</td><td class="num">1,042 impr · pos 68.9</td><td>Verified in repo: we already have 20-material presets + MRR. Real gap vs FSWizard/Machining Doctor: tool-material dimension (HSS/carbide/coated), coolant, tool-life estimate.</td></tr>
+<tr><td>moving-cost</td><td class="num">1,829 impr · pos 67.1</td><td>Highest-volume weak US page — depth pass beats any new moving page.</td></tr>
+<tr><td class="muted">Deprioritize</td><td class="muted"></td><td class="muted">water-intake (medical authority ceiling), pace + compound-interest (authority-locked), discount (zero-CTR by design).</td></tr>
+</table></div>
+
+<h2>Priority actions</h2>
+<ol>
+<li><strong>Ship the www → apex 301</strong> — one line in <code>public/_redirects</code>, stops an active duplicate-host split on a new money page.</li>
+<li><strong>Phase 4 backlinks</strong> — still the only lever for locked UK YMYL head terms (IHT, dividend). Keith-gated sends remain the blocker since February.</li>
+<li><strong>Activate the existing UK admin cluster</strong> — student-loan, redundancy, holiday-entitlement have zero impressions on SERPs thin sites win: indexing check, query-aligned titles, internal links. Build SSP/SMP as the one missing piece.</li>
+<li><strong>Machining expansion</strong> — bolt-circle + thread-engagement first; then speeds-feeds tool-material depth.</li>
+<li><strong>Striking-set title rewrites</strong> — event-seating, conference-room, raise, cooking-time/BBC, job-offer, contractor, screen-time.</li>
+<li><strong>Events additions before party season</strong> — BBQ, baby-shower.</li>
+</ol>
+
+<h2>Artifacts &amp; reproducibility</h2>
+<ul>
+<li><code>docs/gsc-analysis-2026-07-28.md</code> — standard opportunity report (regenerate: <code>python scripts/gsc_analysis.py</code>)</li>
+<li><code>docs/gsc-region-analysis-2026-07-28.md</code> — full region tables (regenerate: <code>python scripts/gsc_region_analysis.py</code>)</li>
+<li><code>SEO-ROADMAP.md § GSC Review — 2026-07-28</code> — canonical review entry</li>
+<li>Raw pull: <code>gsc-export/2026-07-28/</code> (now includes <code>gsc-countries-28d.json</code>, <code>gsc-country-page-28d.json</code>, <code>gsc-country-query-28d.json</code>)</li>
+<li>Tooling changed this session: <code>scripts/seo/gsc-pull.mjs</code> (+3 country exports), <code>scripts/gsc_region_analysis.py</code> (new). Uncommitted.</li>
+</ul>
+
+</body>
+</html>
