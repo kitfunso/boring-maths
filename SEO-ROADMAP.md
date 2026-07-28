@@ -470,8 +470,13 @@ check whether the www 301 landed and whether any Phase 4 links finally shipped.
 
 ### Status 2026-07-28 (execution, same day)
 
-- **Action 1 SHIPPED** (PR #18, merged): www → apex 301 in `public/_redirects`;
-  striking-set title rewrites; country-dimension pulls in gsc-pull.
+- **Action 1 partially shipped** (PR #18, merged): striking-set title rewrites +
+  country-dimension pulls are live. **The www 301 via `public/_redirects` DOES NOT
+  WORK** - Cloudflare Pages `_redirects` does not support domain-level redirects
+  (documented; verified live post-deploy: www still 200). KEITH-GATED one-click
+  fix: CF dashboard > Rules > Redirect Rules > template "Redirect from WWW to
+  Root" (301). Alternatively run `npx wrangler login` in-session and Claude can
+  create the rule via API.
 - **UK admin activation plan executed** (`docs/uk-admin-activation-plan-2026-07.md`,
   outside-voice reviewed, Keith-approved). Phase 0 diagnosis via the new
   `npm run seo:gsc-inspect` (URL Inspection API): uk-student-loan = "Redirect
