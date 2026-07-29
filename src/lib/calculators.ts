@@ -56,6 +56,7 @@ export type CategoryName =
   | 'Engineering'
   | 'Life'
   | 'Automotive'
+  | 'Travel'
   | 'UK Tax';
 
 export type CountryCode = 'UK' | 'US' | 'EU';
@@ -1209,7 +1210,7 @@ export const calculators: readonly CalculatorEntry[] = [
     href: '/calculators/vacation-budget-calculator/',
     icon: 'calendar',
     color: 'ocean',
-    category: 'Life',
+    category: 'Travel',
     mostUsed: false,
   },
   {
@@ -1305,7 +1306,7 @@ export const calculators: readonly CalculatorEntry[] = [
     href: '/calculators/currency-converter/',
     icon: 'swap',
     color: 'green',
-    category: 'Everyday',
+    category: 'Travel',
     mostUsed: false,
   },
   {
@@ -1314,7 +1315,7 @@ export const calculators: readonly CalculatorEntry[] = [
     href: '/calculators/time-zone-converter/',
     icon: 'calendar',
     color: 'blue',
-    category: 'Everyday',
+    category: 'Travel',
     mostUsed: false,
   },
   {
@@ -1384,7 +1385,7 @@ export const calculators: readonly CalculatorEntry[] = [
     href: '/calculators/tipping-guide-calculator/',
     icon: 'users',
     color: 'blue',
-    category: 'Everyday',
+    category: 'Travel',
     mostUsed: false,
   },
   {
@@ -1802,7 +1803,7 @@ export const calculators: readonly CalculatorEntry[] = [
     href: '/calculators/avios-destination-finder/',
     icon: 'trending',
     color: 'blue',
-    category: 'Everyday',
+    category: 'Travel',
     mostUsed: false,
   },
 ];
