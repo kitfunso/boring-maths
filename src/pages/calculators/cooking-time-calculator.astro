@@ -14,11 +14,11 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import CookingTimeCalculator from '../../components/calculators/CookingTimeCalculator/CookingTimeCalculator';
 
 // SEO Configuration
-const title = 'Meat Cooking Time & Roasting Calculator: Beef, Pork, Chicken';
+const title = 'Meat Cooking Time Calculator: Beef, Lamb, Pork, Chicken & Salmon';
 const description =
-  'Calculate cooking time for beef, pork, chicken, lamb, and turkey by weight in lbs or kg. Minutes per pound, oven temps, USDA and UK FSA safe internal temperatures, and resting times.';
+  'Calculate cooking time for beef, lamb, pork, chicken, salmon, and turkey by weight in lbs or kg. Minutes per pound, oven temps, USDA and UK FSA safe internal temperatures, and resting times.';
 const keywords =
-  'meat cooking time calculator, how to calculate cooking time, beef cooking time calculator, pork cooking time calculator, chicken cook time calculator, cooking time per pound, cooking time per kg, meat cook time calculator, lamb cooking times, cooking time by weight, safe internal temperature, USDA safe temperature, roast calculator, roasting time calculator, roast timer, roast dinner calculator';
+  'meat cooking time calculator, how to calculate cooking time, beef cooking time calculator, pork cooking time calculator, chicken cook time calculator, lamb roasting calculator, lamb cooking time calculator, rack of lamb cooking time, lamb shoulder roasting time, how long to roast lamb per kg, salmon cooking time calculator, salmon cooking temperature, cooking time per pound, cooking time per kg, meat cook time calculator, lamb cooking times, cooking time by weight, safe internal temperature, USDA safe temperature, roast calculator, roasting time calculator, roast timer, roast dinner calculator';
 const canonicalURL = '/calculators/cooking-time-calculator';
 
 const siteUrl = 'https://boring-math.com';
@@ -85,7 +85,7 @@ const faqs = [
   {
     question: 'Can I use this instead of the BBC roast timer?',
     answer:
-      'Yes. Like the BBC Good Food roast timer, you pick your meat, enter the weight, and choose doneness to get a total roasting time plus resting time. This calculator also works in lbs or kg, shows both US and UK fan-oven temperatures, and lists USDA and UK FSA safe internal temperatures alongside the timing.',
+      'Yes. Like the BBC Good Food roast timer, you pick your meat, enter the weight, and choose doneness to get a total roasting time plus resting time. Its own interactive roast calculator has stopped working for many visitors, so this is a straightforward replacement that covers the same joints, plus lamb shoulder, rack of lamb, and salmon. This calculator also works in lbs or kg, shows both US and UK fan-oven temperatures, and lists USDA and UK FSA safe internal temperatures alongside the timing.',
   },
   {
     question: 'How do I calculate cooking time for beef?',
@@ -103,6 +103,11 @@ const faqs = [
       'A whole chicken roasts at 375°F (191°C) for about 20 minutes per pound, so a 5 lb bird takes about 1 hour 40 minutes. Chicken breasts bake at 400°F for about 22 minutes per pound, or 18 minutes per pound in an air fryer at 380°F. All chicken is done at 165°F (74°C) internal; there is no rare or medium option for poultry.',
   },
   {
+    question: 'How long do I roast lamb per kg?',
+    answer:
+      "Lamb leg and shoulder take about 44-62 minutes per kg at 325°F (163°C) for medium: leg runs about 44 minutes per kg, shoulder about 62 minutes per kg because it has more connective tissue to break down. Lamb chops and rack of lamb are much quicker, at about 40 minutes per kg at 400°F (204°C). These figures follow the American Lamb Board's cooking time and temperature guide; use the calculator above to adjust for rare through well-done.",
+  },
+  {
     question: 'How long should I cook meat per kg?',
     answer:
       'Multiply the per-pound rate by 2.2. Roast beef at medium works out to about 44 minutes per kg, pork roast about 55 minutes per kg, whole chicken about 44 minutes per kg, lamb leg about 44 minutes per kg, and whole turkey about 33 minutes per kg. The calculator accepts weights in kg directly and does this conversion for you.',
@@ -113,6 +118,11 @@ const faqs = [
       'The USDA recommends: poultry (chicken, turkey) must reach 165°F (74°C). Whole cuts of beef, pork, lamb, and veal should reach 145°F (63°C) with a 3-minute rest. Ground meats should reach 160°F (71°C). Pre-cooked ham should be reheated to 140°F (60°C). Fish should reach 145°F (63°C).',
   },
   {
+    question: 'What temperature is salmon cooked to?',
+    answer:
+      'Salmon is safe at 145°F (63°C) internal, the standard the USDA and UK Food Standards Agency both use for fish. At that point the flesh turns from translucent to opaque and flakes easily with a fork. Many cooks pull salmon a few degrees early, around 135-140°F (57-60°C), and let it rest briefly to finish, since fish keeps cooking for a short time after it leaves the heat.',
+  },
+  {
     question: 'What does the UK FSA recommend for cooking meat?',
     answer:
       'The UK Food Standards Agency works to a core temperature of 70°C held for 2 minutes (75°C for 30 seconds is an accepted equivalent). Poultry, pork, and anything minced or rolled must be cooked all the way through with no pink meat and juices running clear. Whole cuts of beef and lamb, such as steaks and joints, can be served rare provided the outside surfaces are fully cooked.',
@@ -121,6 +131,11 @@ const faqs = [
     question: 'Why is resting time important?',
     answer:
       'Resting allows the internal temperature to rise 5-10°F through carryover cooking, and lets juices redistribute throughout the meat. Without resting, juices pool out when you cut, leaving the meat drier. Rest times vary: 5 minutes for thin cuts like chicken breast, up to 30 minutes for a whole turkey.',
+  },
+  {
+    question: 'How long should you rest lamb after roasting?',
+    answer:
+      "Rest a leg or shoulder of lamb for 20 minutes before carving; both are large joints and need time for the juices to redistribute. Lamb chops and rack of lamb only need about 5 minutes, since they're much smaller cuts. In every case, tent loosely with foil rather than wrapping tightly, so the crust doesn't turn soggy.",
   },
   {
     question: 'Can I cook a frozen piece of meat without thawing?',
@@ -152,7 +167,7 @@ const schemaBreadcrumbs = [
   <!-- Schema.org Markup -->
   <SEOHead
     slot="schema"
-    name="Meat Cooking Time Calculator"
+    name="Meat Cooking Time Calculator: Beef, Lamb, Pork, Chicken & Salmon"
     description={description}
     url={`${siteUrl}${canonicalURL}`}
     faqs={faqs}
@@ -161,8 +176,8 @@ const schemaBreadcrumbs = [
 
   <!-- Hero Section -->
   <HeroSection
-    title="Meat Cooking Time Calculator"
-    description="Calculate cooking time for beef, pork, chicken, lamb, turkey, salmon, and ham by weight in lbs or kg. Get the cooking time, oven temperature, safe internal temperature, and resting time for oven, slow cooker, air fryer, or grill."
+    title="Meat Cooking Time Calculator: Beef, Lamb, Pork, Chicken & Salmon"
+    description="Calculate cooking time for beef, lamb (leg, shoulder, chops, and rack), pork, chicken, turkey, salmon, and ham by weight in lbs or kg. Get the cooking time, oven temperature, safe internal temperature, and resting time for oven, slow cooker, air fryer, or grill."
   />
 
   <!-- Calculator Component -->
@@ -371,18 +386,20 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
-  <!-- Lamb, Turkey, Ham, Salmon -->
-  <ContentSection title="Lamb, Turkey, Ham, and Salmon Cooking Times">
+  <!-- Lamb -->
+  <ContentSection title="Lamb Cooking Times: Leg, Shoulder, Chops, and Rack">
     <p>
-      Lamb uses the same doneness scale as beef: at 325°F, a leg of lamb runs from 15 minutes per
-      pound for rare up to 25 for well done, with 20 minutes per pound giving medium. Times below
-      are for medium.
+      Lamb uses the same doneness scale as beef. Leg and shoulder are large joints and run 15-35
+      minutes per pound depending on doneness, per the American Lamb Board's cooking time and
+      temperature guide. Chops and rack of lamb are thinner, quicker cuts from the rib and loin and
+      only need 9-12 minutes per pound to reach medium-rare. Times in the table below are for
+      medium; select rare through well-done in the calculator above to adjust.
     </p>
     <div class="overflow-x-auto mt-4">
       <table class="w-full text-sm border-collapse">
         <thead>
           <tr class="border-b border-white/10">
-            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Meat</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Cut</th>
             <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Oven temp</th>
             <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
             <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
@@ -400,6 +417,14 @@ const schemaBreadcrumbs = [
             <td class="py-2">20 min</td>
           </tr>
           <tr class="border-b border-white/5">
+            <td class="py-2 pr-4">Lamb shoulder (medium)</td>
+            <td class="py-2 pr-4">325°F (163°C)</td>
+            <td class="py-2 pr-4">28</td>
+            <td class="py-2 pr-4">62</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">20 min</td>
+          </tr>
+          <tr class="border-b border-white/5">
             <td class="py-2 pr-4">Lamb chops (medium)</td>
             <td class="py-2 pr-4">400°F (204°C)</td>
             <td class="py-2 pr-4">18</td>
@@ -407,6 +432,47 @@ const schemaBreadcrumbs = [
             <td class="py-2 pr-4">145°F (63°C)</td>
             <td class="py-2">5 min</td>
           </tr>
+          <tr>
+            <td class="py-2 pr-4">Rack of lamb (medium)</td>
+            <td class="py-2 pr-4">400°F (204°C)</td>
+            <td class="py-2 pr-4">18</td>
+            <td class="py-2 pr-4">40</td>
+            <td class="py-2 pr-4">145°F (63°C)</td>
+            <td class="py-2">5 min</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Lamb chops and rack of lamb on a grill need only 3-4 minutes per side over direct high heat
+      for medium-rare. Lamb shoulder is the classic slow cooker joint: put it on LOW for 6-9 hours
+      and it falls off the bone, well past any doneness setting on the clock. Leg and shoulder are
+      both safe served pink in the centre, the same as beef, since bacteria on whole cuts of lamb
+      live on the surface, not inside the meat.
+    </p>
+  </ContentSection>
+
+  <!-- Turkey, Ham, Salmon -->
+  <ContentSection title="Turkey, Ham, and Salmon Roasting Times">
+    <p>
+      Turkey and other poultry must be cooked through to 165°F (74°C); there is no rare or medium
+      setting. Salmon and other fish are done at 145°F (63°C), or once the flesh turns opaque and
+      flakes easily with a fork. Times below apply to both whole-side and individual-fillet salmon,
+      since the calculator scales by weight rather than shape.
+    </p>
+    <div class="overflow-x-auto mt-4">
+      <table class="w-full text-sm border-collapse">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Meat</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Oven temp</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per lb</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Minutes per kg</th>
+            <th class="text-left py-2 pr-4 text-[var(--color-cream)]">Internal temp</th>
+            <th class="text-left py-2 text-[var(--color-cream)]">Rest</th>
+          </tr>
+        </thead>
+        <tbody class="text-[var(--color-subtle)]">
           <tr class="border-b border-white/5">
             <td class="py-2 pr-4">Whole turkey</td>
             <td class="py-2 pr-4">325°F (163°C)</td>
@@ -443,8 +509,9 @@ const schemaBreadcrumbs = [
       </table>
     </div>
     <p>
-      A 12 lb (5.4 kg) turkey at 325°F takes about 3 hours. Lamb chops on a grill need only 3-4
-      minutes per side over direct high heat for medium rare.
+      A 12 lb (5.4 kg) turkey at 325°F takes about 3 hours. Salmon cooks fastest on the grill (about
+      12 minutes per pound) and slowest in a slow cooker (about 35 minutes per pound); the oven and
+      air fryer sit in between.
     </p>
   </ContentSection>
 
@@ -515,8 +582,8 @@ const schemaBreadcrumbs = [
   <ContentSection title="How to Use This Calculator">
     <p>
       Select your <strong>meat type</strong> from the dropdown. Options include beef roast, whole chicken,
-      chicken breast, pork roast, pork chops, lamb leg, lamb chops, whole turkey, turkey breast, salmon,
-      and ham.
+      chicken breast, pork roast, pork chops, lamb leg, lamb chops, lamb shoulder, rack of lamb, whole
+      turkey, turkey breast, salmon, and ham.
     </p>
     <p>
       Enter the <strong>weight</strong> in pounds or kilograms. Use the toggle to switch between units.

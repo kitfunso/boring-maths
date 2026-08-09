@@ -10,6 +10,8 @@ export type MeatType =
   | 'pork-chops'
   | 'lamb-leg'
   | 'lamb-chops'
+  | 'lamb-shoulder'
+  | 'lamb-rack'
   | 'turkey-whole'
   | 'turkey-breast'
   | 'salmon'
@@ -49,6 +51,8 @@ export const MEAT_TYPE_LABELS: Readonly<Record<MeatType, string>> = {
   'pork-chops': 'Pork Chops',
   'lamb-leg': 'Lamb Leg',
   'lamb-chops': 'Lamb Chops',
+  'lamb-shoulder': 'Lamb Shoulder',
+  'lamb-rack': 'Rack of Lamb',
   'turkey-whole': 'Whole Turkey',
   'turkey-breast': 'Turkey Breast',
   salmon: 'Salmon',
@@ -71,7 +75,13 @@ export const DONENESS_LABELS: Readonly<Record<Doneness, string>> = {
 };
 
 /** Meats that support doneness selection (beef and lamb). */
-export const DONENESS_MEATS: readonly MeatType[] = ['beef-roast', 'lamb-leg', 'lamb-chops'];
+export const DONENESS_MEATS: readonly MeatType[] = [
+  'beef-roast',
+  'lamb-leg',
+  'lamb-chops',
+  'lamb-shoulder',
+  'lamb-rack',
+];
 
 /** Methods available per meat type (some meats don't suit all methods). */
 export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod[]>> = {
@@ -82,6 +92,8 @@ export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod
   'pork-chops': ['oven', 'air-fryer', 'grill'],
   'lamb-leg': ['oven', 'slow-cooker', 'grill'],
   'lamb-chops': ['oven', 'air-fryer', 'grill'],
+  'lamb-shoulder': ['oven', 'slow-cooker', 'grill'],
+  'lamb-rack': ['oven', 'grill'],
   'turkey-whole': ['oven', 'slow-cooker'],
   'turkey-breast': ['oven', 'slow-cooker', 'grill'],
   salmon: ['oven', 'air-fryer', 'grill'],
@@ -389,6 +401,89 @@ export const COOKING_DATA: Readonly<
         'Grill over direct high heat.',
         '3-4 minutes per side for medium-rare.',
         'Let meat reach room temperature before grilling.',
+      ],
+    },
+  },
+  // Oven and slow-cooker times: American Lamb Board, "Lamb Time and Temperature Guide"
+  // (americanlamb.com/wp-content/uploads/2023/10/Lamb-Time-and-Temperature-Guide.pdf) - shoulder
+  // medium range 25-30 min/lb at the board's standard 325F roast temperature. Grill and air-fryer
+  // figures follow the same bone-in-roast approach already used for lamb-leg on this page.
+  'lamb-shoulder': {
+    oven: {
+      minutesPerPound: 28,
+      ovenTempF: 325,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [
+        'Shoulder has more connective tissue than leg; a full rest improves tenderness.',
+        'Score the fat and rub with garlic and rosemary before roasting.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 70,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 10,
+      notes: [
+        'Cook on LOW for the most tender, pull-apart result.',
+        'Shoulder is the classic slow cooker lamb cut thanks to its fat and connective tissue.',
+      ],
+    },
+    'air-fryer': {
+      minutesPerPound: 20,
+      ovenTempF: 360,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 18,
+      ovenTempF: 350,
+      internalTempF: 145,
+      restingMinutes: 20,
+      notes: [
+        'Use indirect heat for a bone-in shoulder roast.',
+        'Cover loosely with foil if the outside browns before the centre is done.',
+      ],
+    },
+  },
+  // American Lamb Board (see source above) lists rack of lamb at the same 9-12 min/lb, 145F
+  // med-rare figure as lamb chops, so this entry mirrors the site's existing lamb-chops rates.
+  // Oven/grill are the board's stated methods; slow-cooker and air-fryer are not surfaced in the
+  // UI (see AVAILABLE_METHODS) but are filled in here to satisfy the shared data shape.
+  'lamb-rack': {
+    oven: {
+      minutesPerPound: 18,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'French the bones for a cleaner presentation and easier carving.',
+        'Sear the fat cap in a hot pan before roasting for extra flavour.',
+      ],
+    },
+    'slow-cooker': {
+      minutesPerPound: 50,
+      ovenTempF: 0,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [],
+    },
+    'air-fryer': {
+      minutesPerPound: 16,
+      ovenTempF: 400,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [],
+    },
+    grill: {
+      minutesPerPound: 14,
+      ovenTempF: 450,
+      internalTempF: 145,
+      restingMinutes: 5,
+      notes: [
+        'Grill over direct high heat, bone side down first.',
+        '3-4 minutes per side for medium-rare, like lamb chops.',
       ],
     },
   },

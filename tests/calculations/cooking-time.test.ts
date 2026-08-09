@@ -7,6 +7,10 @@ import {
   calculateCookingTime,
   formatTime,
 } from '../../src/components/calculators/CookingTimeCalculator/calculations';
+import {
+  AVAILABLE_METHODS,
+  DONENESS_MEATS,
+} from '../../src/components/calculators/CookingTimeCalculator/types';
 import type { CookingTimeInputs } from '../../src/components/calculators/CookingTimeCalculator/types';
 
 describe('CookingTimeCalculator', () => {
@@ -211,6 +215,109 @@ describe('CookingTimeCalculator', () => {
 
       // 0.25 * 14 = 3.5 -> rounds to 4
       expect(result.totalMinutes).toBeGreaterThanOrEqual(1);
+    });
+
+    it('calculates oven time for lamb shoulder correctly', () => {
+      const inputs: CookingTimeInputs = {
+        meatType: 'lamb-shoulder',
+        weight: 4,
+        weightUnit: 'lbs',
+        cookingMethod: 'oven',
+        doneness: 'medium',
+      };
+
+      const result = calculateCookingTime(inputs);
+
+      // 4 lbs * 28 min/lb = 112 min
+      expect(result.totalMinutes).toBe(112);
+      expect(result.temperatureF).toBe(325);
+      expect(result.internalTempF).toBe(145);
+      expect(result.restingMinutes).toBe(20);
+    });
+
+    it('calculates slow cooker time for lamb shoulder', () => {
+      const inputs: CookingTimeInputs = {
+        meatType: 'lamb-shoulder',
+        weight: 4,
+        weightUnit: 'lbs',
+        cookingMethod: 'slow-cooker',
+        doneness: 'medium',
+      };
+
+      const result = calculateCookingTime(inputs);
+
+      // 4 lbs * 70 min/lb = 280 min
+      expect(result.totalMinutes).toBe(280);
+      expect(result.temperatureF).toBe(0);
+      expect(result.internalTempF).toBe(145);
+    });
+
+    it('adjusts lamb shoulder time and internal temp for doneness', () => {
+      const base: CookingTimeInputs = {
+        meatType: 'lamb-shoulder',
+        weight: 5,
+        weightUnit: 'lbs',
+        cookingMethod: 'oven',
+        doneness: 'medium',
+      };
+
+      const mediumResult = calculateCookingTime(base);
+      const rareResult = calculateCookingTime({ ...base, doneness: 'rare' });
+      const wellDoneResult = calculateCookingTime({ ...base, doneness: 'well-done' });
+
+      expect(rareResult.totalMinutes).toBeLessThan(mediumResult.totalMinutes);
+      expect(wellDoneResult.totalMinutes).toBeGreaterThan(mediumResult.totalMinutes);
+      expect(rareResult.internalTempF).toBe(125);
+      expect(wellDoneResult.internalTempF).toBe(160);
+    });
+
+    it('calculates oven time for rack of lamb correctly', () => {
+      const inputs: CookingTimeInputs = {
+        meatType: 'lamb-rack',
+        weight: 1.5,
+        weightUnit: 'lbs',
+        cookingMethod: 'oven',
+        doneness: 'medium-rare',
+      };
+
+      const result = calculateCookingTime(inputs);
+
+      // 18 min/lb base * 0.85 (medium-rare) = ~15, 1.5 lbs * 15 = 23
+      expect(result.internalTempF).toBe(135);
+      expect(result.totalMinutes).toBeGreaterThan(0);
+      expect(result.restingMinutes).toBe(5);
+    });
+
+    it('calculates grill time for rack of lamb correctly', () => {
+      const inputs: CookingTimeInputs = {
+        meatType: 'lamb-rack',
+        weight: 2,
+        weightUnit: 'lbs',
+        cookingMethod: 'grill',
+        doneness: 'medium',
+      };
+
+      const result = calculateCookingTime(inputs);
+
+      // 14 min/lb * 2 lbs = 28 min
+      expect(result.totalMinutes).toBe(28);
+      expect(result.temperatureF).toBe(450);
+      expect(result.internalTempF).toBe(145);
+    });
+  });
+
+  describe('new lamb cuts data shape', () => {
+    it('marks lamb shoulder and rack as doneness meats', () => {
+      expect(DONENESS_MEATS).toContain('lamb-shoulder');
+      expect(DONENESS_MEATS).toContain('lamb-rack');
+    });
+
+    it('only offers oven and grill for rack of lamb (per American Lamb Board guidance)', () => {
+      expect(AVAILABLE_METHODS['lamb-rack']).toEqual(['oven', 'grill']);
+    });
+
+    it('offers oven, slow-cooker, and grill for lamb shoulder', () => {
+      expect(AVAILABLE_METHODS['lamb-shoulder']).toEqual(['oven', 'slow-cooker', 'grill']);
     });
   });
 
