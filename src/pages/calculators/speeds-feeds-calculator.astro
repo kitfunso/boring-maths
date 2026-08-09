@@ -11,11 +11,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { SpeedsFeedsCalculator } from '../../components/calculators/SpeedsFeedsCalculator';
 
-const title = 'Speeds and Feeds Calculator: SFM, RPM & Feed Rate for CNC';
+const title = 'Speeds and Feeds Calculator: SFM & RPM for HSS and Carbide Tools';
 const description =
-  'Free speeds and feeds calculator for CNC milling. Calculate surface feet per minute (SFM), RPM, feed rate, and chip load for aluminum, steel, plastics, and wood.';
+  'Free speeds and feeds calculator for CNC milling. Calculate surface feet per minute (SFM), RPM, feed rate, and chip load for HSS, cobalt, and carbide tools in aluminum, steel, plastics, and wood.';
 const keywords =
-  'speeds and feeds calculator, surface feet per minute calculator, sfm calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, milling calculator, machinist calculator';
+  'speeds and feeds calculator, surface feet per minute calculator, sfm calculator, cnc calculator, rpm calculator, feed rate calculator, chip load, milling calculator, machinist calculator, hss vs carbide speed';
 const canonicalURL = '/calculators/speeds-feeds-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -90,6 +90,16 @@ const faqs = [
     question: "What's the difference between roughing and finishing?",
     answer:
       'Roughing uses higher chip loads and deeper cuts to remove material quickly. Finishing uses lower chip loads and shallower cuts for better surface finish. Our calculator adjusts SFM and chip load accordingly.',
+  },
+  {
+    question: 'Can I run carbide at HSS speeds?',
+    answer:
+      "Yes, but you lose most of carbide's advantage. Carbide holds its edge at much higher temperatures than HSS, so running it at HSS speeds is safe but slow. Going the other way and running HSS at carbide speeds will burn the edge and ruin the tool - always select the correct tool material in the calculator before trusting the RPM.",
+  },
+  {
+    question: 'What SFM should I use for HSS in mild steel?',
+    answer:
+      '80-120 SFM is the commonly quoted range for HSS in mild steel (1018). This calculator uses a 100 SFM baseline for mild steel, reduced to 80 when roughing. Cobalt (M42) tools can typically run 25-50% faster, and carbide 2-4x faster in the same material - select your tool material in the calculator to see the adjusted RPM.',
   },
 ];
 
@@ -175,6 +185,75 @@ const schemaBreadcrumbs = [
         </ul>
       </div>
     </div>
+  </ContentSection>
+
+  <ContentSection title="HSS vs Cobalt vs Carbide: Tool Material and Cutting Speed">
+    <p>
+      Tool material sets how hot the cutting edge can run before it softens, which sets how fast you
+      can cut. HSS (high speed steel) is the baseline. Cobalt HSS (M42) adds heat resistance.
+      Carbide holds its edge at much higher temperatures again, and a coating adds a further speed
+      margin on top of bare carbide. The calculator applies a multiplier on top of the material's
+      baseline SFM for the tool material you select.
+    </p>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-white/10">
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Tool Material</th>
+            <th class="text-right py-2 px-3 text-[var(--color-subtle)]">SFM Multiplier</th>
+            <th class="text-left py-2 px-3 text-[var(--color-subtle)]">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">HSS</td>
+            <td class="py-2 px-3 text-right text-gray-400">1x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]"
+              >Baseline. Tough, cheap, forgiving on older machines.</td
+            >
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Cobalt (M42)</td>
+            <td class="py-2 px-3 text-right text-yellow-400">1.25x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]"
+              >More heat resistant than standard HSS. Good on stainless.</td
+            >
+          </tr>
+          <tr class="border-b border-white/5">
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]">Uncoated Carbide</td>
+            <td class="py-2 px-3 text-right text-amber-400">3x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]"
+              >Holds an edge at high heat. Brittle - needs a rigid setup.</td
+            >
+          </tr>
+          <tr>
+            <td class="py-2 px-3 font-medium text-[var(--color-text)]"
+              >Coated Carbide (TiN/TiAlN)</td
+            >
+            <td class="py-2 px-3 text-right text-green-400">3.9x</td>
+            <td class="py-2 px-3 text-[var(--color-subtle)]"
+              >Coating adds further heat and wear resistance over bare carbide.</td
+            >
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-sm">
+      Sources: cutting speed ranges from the
+      <a
+        href="https://littlemachineshop.com/pages/cutting-speeds"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline">LittleMachineShop.com cutting speeds reference</a
+      >, and cobalt/coating figures from
+      <a
+        href="https://www.griggssteel.com/high-speed-cobalt/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline">Griggs Steel's M42 cobalt reference</a
+      >. Sources disagree on the exact carbide ratio (roughly 2x-5.5x depending on material), so the
+      multipliers above use conservative mid-range values, not the high end.
+    </p>
   </ContentSection>
 
   <FAQSection faqs={faqs} />

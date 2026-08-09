@@ -31,7 +31,9 @@ Baseline pulled 2026-07-18 from the GSC Links report (sc-domain:boring-math.com)
 | 2026-07-18 | ~5 (83 external links) | dev.to (48), forem.com (23), twitterwebviewer.com (6); also reddit.com (4), 2ip.ru (1) |
 
 **Known links:**
-- awesome-calculators GitHub PR #27: https://github.com/xxczaki/awesome-calculators/pull/27. Checked 2026-07-18 via `gh pr view`: state is OPEN, `mergedAt` is null. Not live yet, the link only counts once the PR merges. `docs/directory-submissions.md` had this row marked done (✅); corrected there to reflect the actual PR state.
+- awesome-calculators GitHub PR #27: https://github.com/xxczaki/awesome-calculators/pull/27. Checked 2026-07-18 via `gh pr view`: state is OPEN, `mergedAt` is null. Not live yet, the link only counts once the PR merges. `docs/directory-submissions.md` had this row marked done (✅); corrected there to reflect the actual PR state. Re-checked 2026-08-08: still OPEN, still unmerged.
+
+**Sprint status 2026-08-08:** zero pitches sent (table below still empty, three weeks after drafting). GSC evidence that the sprint matters: IHT 77→65, CGT 78→64, dividend 72→61 in 10 days with no new links — the cluster is climbing into the range where links convert positions into page-one. The five pitches in `docs/outreach/2026-07-pitches.md` are send-ready ("this month" wording fixed to "in July" for accuracy).
 
 **Sprint success definition:** new, relevant, live links to the five money pages below. Each one gets logged with contacted / sent / live dates as it moves. Directory listings (AlternativeTo, SaaSHub, BetaList, Indie Hackers) and the Product Hunt homepage link are secondary, they help the referring-domain count but don't count toward this sprint's goal.
 

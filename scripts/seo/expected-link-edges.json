@@ -9,42 +9,87 @@
     "from": "/guides/best-health-fitness-calculators/",
     "to": "/calculators/screen-time-calculator/"
   },
-  { "from": "/calculators/fish-stocking-calculator/", "to": "/calculators/water-change-calculator/" },
+  {
+    "from": "/calculators/fish-stocking-calculator/",
+    "to": "/calculators/water-change-calculator/"
+  },
   { "from": "/calculators/ei-dosing-calculator/", "to": "/calculators/water-change-calculator/" },
   { "from": "/calculators/water-change-calculator/", "to": "/calculators/ei-dosing-calculator/" },
   { "from": "/calculators/glaze-calculator/", "to": "/calculators/kiln-cost-calculator/" },
   { "from": "/calculators/clay-shrinkage-calculator/", "to": "/calculators/kiln-cost-calculator/" },
-  { "from": "/calculators/electricity-cost-calculator/", "to": "/calculators/kiln-cost-calculator/" },
-  { "from": "/calculators/kiln-cost-calculator/", "to": "/calculators/electricity-cost-calculator/" },
+  {
+    "from": "/calculators/electricity-cost-calculator/",
+    "to": "/calculators/kiln-cost-calculator/"
+  },
+  {
+    "from": "/calculators/kiln-cost-calculator/",
+    "to": "/calculators/electricity-cost-calculator/"
+  },
   { "from": "/calculators/cooking-time-calculator/", "to": "/calculators/leftovers-calculator/" },
   { "from": "/calculators/holiday-dinner-calculator/", "to": "/calculators/leftovers-calculator/" },
   { "from": "/calculators/bbq-calculator/", "to": "/calculators/leftovers-calculator/" },
   { "from": "/guides/best-math-everyday-calculators/", "to": "/calculators/leftovers-calculator/" },
 
   { "from": "/calculators/tip-calculator/", "to": "/calculators/tipping-guide-calculator/" },
-  { "from": "/calculators/vacation-budget-calculator/", "to": "/calculators/tipping-guide-calculator/" },
+  {
+    "from": "/calculators/vacation-budget-calculator/",
+    "to": "/calculators/tipping-guide-calculator/"
+  },
   { "from": "/calculators/currency-converter/", "to": "/calculators/tipping-guide-calculator/" },
-  { "from": "/calculators/tipping-guide-calculator/", "to": "/calculators/vacation-budget-calculator/" },
+  {
+    "from": "/calculators/tipping-guide-calculator/",
+    "to": "/calculators/vacation-budget-calculator/"
+  },
   {
     "from": "/guides/best-math-everyday-calculators/",
     "to": "/calculators/tipping-guide-calculator/"
   },
-  { "from": "/calculators/freelance-day-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
-  { "from": "/calculators/consulting-rate-calculator/", "to": "/calculators/go-full-time-calculator/" },
-  { "from": "/calculators/go-full-time-calculator/", "to": "/calculators/consulting-rate-calculator/" },
+  {
+    "from": "/calculators/freelance-day-rate-calculator/",
+    "to": "/calculators/go-full-time-calculator/"
+  },
+  {
+    "from": "/calculators/consulting-rate-calculator/",
+    "to": "/calculators/go-full-time-calculator/"
+  },
+  {
+    "from": "/calculators/go-full-time-calculator/",
+    "to": "/calculators/consulting-rate-calculator/"
+  },
   { "from": "/calculators/due-date-calculator/", "to": "/calculators/ovulation-calculator/" },
 
-  { "from": "/calculators/startup-cost-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  {
+    "from": "/calculators/startup-cost-calculator/",
+    "to": "/calculators/employee-cost-calculator/"
+  },
   { "from": "/calculators/break-even-calculator/", "to": "/calculators/employee-cost-calculator/" },
-  { "from": "/calculators/consulting-rate-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  {
+    "from": "/calculators/consulting-rate-calculator/",
+    "to": "/calculators/employee-cost-calculator/"
+  },
   { "from": "/calculators/employee-cost-calculator/", "to": "/calculators/break-even-calculator/" },
-  { "from": "/calculators/employee-cost-calculator/", "to": "/calculators/uk-employer-cost-calculator/" },
-  { "from": "/calculators/uk-employer-cost-calculator/", "to": "/calculators/employee-cost-calculator/" },
+  {
+    "from": "/calculators/employee-cost-calculator/",
+    "to": "/calculators/uk-employer-cost-calculator/"
+  },
+  {
+    "from": "/calculators/uk-employer-cost-calculator/",
+    "to": "/calculators/employee-cost-calculator/"
+  },
   { "from": "/calculators/pricing-calculator/", "to": "/calculators/etsy-fee-calculator/" },
-  { "from": "/calculators/materials-markup-calculator/", "to": "/calculators/etsy-fee-calculator/" },
-  { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/marketplace-fees-calculator/" },
+  {
+    "from": "/calculators/materials-markup-calculator/",
+    "to": "/calculators/etsy-fee-calculator/"
+  },
+  {
+    "from": "/calculators/etsy-fee-calculator/",
+    "to": "/calculators/marketplace-fees-calculator/"
+  },
   { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/pricing-calculator/" },
-  { "from": "/calculators/etsy-fee-calculator/", "to": "/calculators/materials-markup-calculator/" },
+  {
+    "from": "/calculators/etsy-fee-calculator/",
+    "to": "/calculators/materials-markup-calculator/"
+  },
   {
     "from": "/guides/best-business-startup-calculators/",
     "to": "/calculators/etsy-fee-calculator/"
@@ -105,5 +150,78 @@
   {
     "from": "/calculators/wedding-alcohol-calculator/",
     "to": "/calculators/party-drink-calculator/"
-  }
+  },
+
+  {
+    "from": "/calculators/uk-pension-calculator/",
+    "to": "/calculators/uk-student-loan-calculator/"
+  },
+  {
+    "from": "/calculators/debt-payoff-calculator/",
+    "to": "/calculators/uk-student-loan-calculator/"
+  },
+  {
+    "from": "/calculators/college-roi-calculator/",
+    "to": "/calculators/uk-student-loan-calculator/"
+  },
+  {
+    "from": "/calculators/uk-100k-tax-trap-calculator/",
+    "to": "/calculators/uk-redundancy-pay-calculator/"
+  },
+  {
+    "from": "/calculators/emergency-fund-calculator/",
+    "to": "/calculators/uk-redundancy-pay-calculator/"
+  },
+  {
+    "from": "/calculators/job-offer-comparison-calculator/",
+    "to": "/calculators/uk-redundancy-pay-calculator/"
+  },
+  {
+    "from": "/calculators/overtime-calculator/",
+    "to": "/calculators/uk-holiday-entitlement-calculator/"
+  },
+  {
+    "from": "/calculators/employee-cost-calculator/",
+    "to": "/calculators/uk-holiday-entitlement-calculator/"
+  },
+  {
+    "from": "/calculators/job-offer-comparison-calculator/",
+    "to": "/calculators/uk-holiday-entitlement-calculator/"
+  },
+  {
+    "from": "/calculators/emergency-fund-calculator/",
+    "to": "/calculators/uk-statutory-sick-pay-calculator/"
+  },
+  {
+    "from": "/calculators/uk-holiday-entitlement-calculator/",
+    "to": "/calculators/uk-statutory-sick-pay-calculator/"
+  },
+  {
+    "from": "/calculators/job-offer-comparison-calculator/",
+    "to": "/calculators/uk-statutory-sick-pay-calculator/"
+  },
+  {
+    "from": "/calculators/baby-cost-calculator/",
+    "to": "/calculators/uk-nursery-cost-calculator/"
+  },
+  {
+    "from": "/calculators/uk-salary-sacrifice-calculator/",
+    "to": "/calculators/uk-nursery-cost-calculator/"
+  },
+  {
+    "from": "/calculators/uk-child-benefit-calculator/",
+    "to": "/calculators/uk-nursery-cost-calculator/"
+  },
+
+  {
+    "from": "/calculators/uk-stamp-duty-calculator/",
+    "to": "/calculators/council-tax-calculator/"
+  },
+  { "from": "/calculators/tdee-calculator/", "to": "/calculators/water-intake-calculator/" },
+  { "from": "/calculators/fence-calculator/", "to": "/calculators/concrete-calculator/" },
+  { "from": "/calculators/mulch-calculator/", "to": "/calculators/gravel-calculator/" },
+  { "from": "/calculators/paint-calculator/", "to": "/calculators/wallpaper-calculator/" },
+  { "from": "/calculators/eu-salary-calculator/", "to": "/calculators/germany-salary-calculator/" },
+  { "from": "/calculators/eu-salary-calculator/", "to": "/calculators/france-salary-calculator/" },
+  { "from": "/calculators/eu-salary-calculator/", "to": "/calculators/ireland-salary-calculator/" }
 ]

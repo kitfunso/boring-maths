@@ -1,0 +1,190 @@
+---
+/**
+ * UK Statutory Maternity Pay Calculator Page
+ * Current SMP rules (GOV.UK, checked 2026-08-08): SMP is paid for up to 39
+ * weeks. The first 6 weeks are paid at 90% of average weekly earnings (AWE),
+ * uncapped. The remaining 33 weeks are paid at the lower of £194.32 and 90%
+ * of AWE. Eligibility needs AWE of at least £129/week and continuous
+ * employment of at least 26 weeks continuing into the qualifying week (the
+ * 15th week before the expected week of childbirth).
+ */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { UKStatutoryMaternityPayCalculator } from '../../components/calculators/UKStatutoryMaternityPayCalculator';
+
+const title = 'UK Statutory Maternity Pay Calculator 2026/27: How Much SMP You Get';
+const description =
+  'Free SMP calculator, no signup. Work out Statutory Maternity Pay: 90% of your earnings for the first 6 weeks, then the lower of £194.32 and 90% of your earnings for up to 33 more weeks, up to 39 weeks in total.';
+const keywords =
+  'statutory maternity pay calculator, smp calculator, smp calculator uk, how much is statutory maternity pay, maternity pay calculator uk, smp weekly rate, smp 39 weeks, statutory maternity pay eligibility';
+const canonicalURL = '/calculators/uk-statutory-maternity-pay-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'UK Statutory Maternity Pay Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'UK Statutory Sick Pay Calculator',
+    description: 'Work out SSP: the weekly rate or 80% of your earnings, whichever is lower.',
+    href: '/calculators/uk-statutory-sick-pay-calculator/',
+    icon: 'briefcase' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'UK Holiday Entitlement Calculator',
+    description: 'Statutory paid leave, pro-rated for part-time workers.',
+    href: '/calculators/uk-holiday-entitlement-calculator/',
+    icon: 'calendar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Baby Cost Calculator',
+    description: 'Estimate the first-year costs of having a baby.',
+    href: '/calculators/baby-cost-calculator/',
+    icon: 'heart' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'UK Nursery Cost Calculator',
+    description: 'Estimate childcare costs with free hours and Tax-Free Childcare.',
+    href: '/calculators/uk-nursery-cost-calculator/',
+    icon: 'heart' as const,
+    color: 'purple' as const,
+  },
+  {
+    title: 'UK Tax Calculator',
+    description: 'Work out income tax and take-home pay.',
+    href: '/calculators/uk-tax-calculator/',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is Statutory Maternity Pay calculated?',
+    answer:
+      'Your SMP has two parts. For the first 6 weeks you get 90% of your average weekly earnings (AWE) before tax, with no upper limit. For the remaining 33 weeks (39 weeks in total) you get whichever is lower: £194.32 per week, or 90% of your AWE. Your employer works out your AWE from your pay in the run-up to the qualifying week.',
+  },
+  {
+    question: 'How much is SMP per week?',
+    answer:
+      'For the first 6 weeks, 90% of your average weekly earnings, uncapped. For weeks 7 to 39, whichever is lower: £194.32 per week, or 90% of your average weekly earnings. For example, on average weekly earnings of £600, the first 6 weeks pay £540 per week, and the remaining 33 weeks pay the capped rate of £194.32 per week.',
+  },
+  {
+    question: 'When does SMP start?',
+    answer:
+      'SMP starts when your maternity leave starts, which you and your employer agree in line with the notice you give. This calculator works out the weekly and total amounts you are entitled to across the 39-week pay period; it does not calculate exact calendar start or end dates.',
+  },
+  {
+    question: 'Why is the first 6 weeks paid differently? What is the 90% rule?',
+    answer:
+      'For the first 6 weeks of your maternity pay period, SMP is set at 90% of your average weekly earnings with no upper limit, so higher earners are not capped during this initial period. From week 7 onward the rate switches to whichever is lower: 90% of earnings, or the standard weekly rate of £194.32, which caps SMP for higher earners for the rest of the 39 weeks.',
+  },
+  {
+    question: 'Who qualifies for SMP? What is the qualifying week?',
+    answer:
+      'To qualify for SMP you need average weekly earnings of at least £129, and continuous employment with your employer of at least 26 weeks continuing into the qualifying week: the 15th week before your expected week of childbirth. If you do not meet both conditions you are not entitled to SMP, though you may be able to claim Maternity Allowance instead.',
+  },
+  {
+    question: 'What is the difference between SMP and Maternity Allowance?',
+    answer:
+      'Statutory Maternity Pay is paid by your employer through payroll if you meet the earnings and continuous-employment conditions. Maternity Allowance is a separate benefit, paid by the government rather than an employer, for people who do not qualify for SMP, for example if you are self-employed or have not built up enough continuous employment with one employer. Eligibility and the amount payable differ from SMP; check GOV.UK for current Maternity Allowance rates and rules.',
+  },
+  {
+    question: 'How long is SMP paid for?',
+    answer:
+      'SMP is payable for up to 39 weeks: 6 weeks at 90% of your average weekly earnings, then up to 33 more weeks at the lower of £194.32 per week and 90% of your earnings. Maternity leave itself can run for up to 52 weeks, but SMP only covers the first 39.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'UK Statutory Maternity Pay Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="UK Statutory Maternity Pay Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="UK Statutory Maternity Pay Calculator"
+    description="Work out the SMP you are due: 90% of your earnings for the first 6 weeks, then the lower of £194.32 and 90% of your earnings for up to 33 more weeks."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <UKStatutoryMaternityPayCalculator client:load />
+  </section>
+
+  <ContentSection title="How to Use This Calculator">
+    <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your average gross weekly earnings</strong>
+        – This is used to work out both your first-6-weeks rate and your weeks 7-39 rate.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Enter your weeks of SMP leave taken</strong> – Leave
+        the default of 39 to see your full entitlement, or enter a lower number to see a partial payment.
+      </li>
+      <li>
+        <strong class="text-[var(--color-cream)]">Review your results</strong> – See your first-6-weeks
+        weekly amount, your weeks 7-39 weekly amount, and the total SMP due.
+      </li>
+    </ol>
+  </ContentSection>
+
+  <ContentSection title="How SMP Is Worked Out">
+    <div class="space-y-4 text-[var(--color-subtle)]">
+      <p>
+        Statutory Maternity Pay is paid in two stages. For the
+        <strong class="text-[var(--color-cream)]">first 6 weeks</strong> you get
+        <strong class="text-[var(--color-cream)]"
+          >90% of your average weekly earnings, with no cap</strong
+        >. For the remaining
+        <strong class="text-[var(--color-cream)]">33 weeks (39 weeks in total)</strong> you get
+        <strong class="text-[var(--color-cream)]"
+          >whichever is lower: £194.32 per week, or 90% of your average weekly earnings</strong
+        >. Higher earners are capped from week 7 onward; lower earners continue to get 90% of their
+        earnings throughout.
+      </p>
+      <p>
+        To qualify, your average weekly earnings need to be at least £129, and you need continuous
+        employment with your employer of at least 26 weeks continuing into the qualifying week: the
+        15th week before your expected week of childbirth. Both conditions must be met.
+      </p>
+      <p>
+        Worked example: on average weekly earnings of £600, the first 6 weeks pay 90% of £600, which
+        is £540 per week (£3,240 in total). 90% of £600 is above the £194.32 standard rate, so the
+        remaining 33 weeks pay the capped rate of £194.32 per week (£6,412.56 in total). The full
+        39-week entitlement is £9,652.56.
+      </p>
+      <p>
+        This calculator shows the statutory figures only; it is a tool, not financial or legal
+        advice. Check the latest GOV.UK guidance and your employer for your exact situation.
+      </p>
+    </div>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
