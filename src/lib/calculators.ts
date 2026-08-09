@@ -1641,6 +1641,17 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
   },
   {
+    title: 'UK Statutory Maternity Pay',
+    description:
+      'Work out SMP: 90% of your earnings for 6 weeks, then the lower of £194.32 and 90% for up to 33 more weeks.',
+    href: '/calculators/uk-statutory-maternity-pay-calculator/',
+    icon: 'briefcase',
+    color: 'violet',
+    category: 'Income',
+    country: 'UK',
+    mostUsed: false,
+  },
+  {
     title: 'UK Redundancy Pay',
     description:
       'Estimate your statutory redundancy pay based on age, years of service, and weekly pay.',
