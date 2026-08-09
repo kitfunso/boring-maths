@@ -91,6 +91,51 @@ describe('calculateStatutoryMaternityPay', () => {
     expect(fails.meetsEarningsThreshold).toBe(false);
   });
 
+  it('below the earnings threshold there is no SMP: £100/wk pays £0, not a hypothetical 90%', () => {
+    // AWE below £129 fails eligibility outright, so no payment outputs at all
+    // (GOV.UK: you may be able to claim Maternity Allowance instead).
+    const r = calculateStatutoryMaternityPay({
+      averageWeeklyEarnings: 100,
+      weeksOfLeaveTaken: 39,
+    });
+    expect(r.meetsEarningsThreshold).toBe(false);
+    expect(r.higherRateWeeklyAmount).toBe(0);
+    expect(r.standardRateWeeklyAmount).toBe(0);
+    expect(r.totalSMP).toBe(0);
+    expect(r.isCapApplied).toBe(false);
+  });
+
+  it('short leave never reaches the standard-rate period: 4 weeks pays 0 standard-rate weeks', () => {
+    // All 4 weeks fall in the uncapped 90% period, so the cap notice condition
+    // (isCapApplied && standardRateWeeksPaid > 0) must not fire on weeks paid.
+    const r = calculateStatutoryMaternityPay({
+      averageWeeklyEarnings: 800,
+      weeksOfLeaveTaken: 4,
+    });
+    expect(r.higherRateWeeksPaid).toBe(4);
+    expect(r.standardRateWeeksPaid).toBe(0);
+    // 4 weeks * £720 (90% of 800) = £2,880
+    expect(r.totalSMP).toBe(2880);
+  });
+
+  it('cap flag binds strictly above the crossover, not at 90%-of-earnings below it', () => {
+    // AWE £215.91: 90% = £194.319 < £194.32, so the earnings-based rate applies (no cap).
+    const below = calculateStatutoryMaternityPay({
+      averageWeeklyEarnings: 215.91,
+      weeksOfLeaveTaken: 39,
+    });
+    expect(below.isCapApplied).toBe(false);
+    expect(below.standardRateWeeklyAmount).toBeCloseTo(194.32, 2);
+
+    // AWE £216: 90% = £194.40 > £194.32, so the cap binds.
+    const above = calculateStatutoryMaternityPay({
+      averageWeeklyEarnings: 216,
+      weeksOfLeaveTaken: 39,
+    });
+    expect(above.isCapApplied).toBe(true);
+    expect(above.standardRateWeeklyAmount).toBe(194.32);
+  });
+
   it('39-week total for a worked example: £600/wk over the full entitlement', () => {
     // 6 weeks at £540 + 33 weeks at £194.32 = 3240 + 6412.56 = 9652.56
     const r = calculateStatutoryMaternityPay({

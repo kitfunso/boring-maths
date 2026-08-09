@@ -282,9 +282,10 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 18 min/lb base * 0.85 (medium-rare) = ~15, 1.5 lbs * 15 = 23
+      // 12 min/lb medium base * 0.85 (medium-rare) = 10.2 -> 10 min/lb, inside the
+      // American Lamb Board's 9-12 min/lb med-rare range. 1.5 lbs * 10 = 15 min.
       expect(result.internalTempF).toBe(135);
-      expect(result.totalMinutes).toBeGreaterThan(0);
+      expect(result.totalMinutes).toBe(15);
       expect(result.restingMinutes).toBe(5);
     });
 
@@ -299,8 +300,8 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 14 min/lb * 2 lbs = 28 min
-      expect(result.totalMinutes).toBe(28);
+      // 12 min/lb (medium) * 2 lbs = 24 min
+      expect(result.totalMinutes).toBe(24);
       expect(result.temperatureF).toBe(450);
       expect(result.internalTempF).toBe(145);
     });

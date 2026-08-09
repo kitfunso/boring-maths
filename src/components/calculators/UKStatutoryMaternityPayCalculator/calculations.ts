@@ -67,10 +67,15 @@ export function calculateStatutoryMaternityPay(
     ? Math.max(0, Math.floor(inputs.weeksOfLeaveTaken))
     : 0;
 
-  const earningsBasedRate = HIGHER_RATE_FRACTION * awe;
+  // Below the earnings threshold there is no SMP entitlement at all (GOV.UK eligibility:
+  // average weekly earnings must be at least the lower earnings limit), so every payment
+  // output is zero rather than a hypothetical amount.
+  const meetsEarningsThreshold = awe >= MIN_AVERAGE_WEEKLY_EARNINGS;
+
+  const earningsBasedRate = meetsEarningsThreshold ? HIGHER_RATE_FRACTION * awe : 0;
   const higherRateWeeklyAmount = round2(earningsBasedRate);
 
-  const isCapApplied = earningsBasedRate >= SMP_STANDARD_WEEKLY_RATE;
+  const isCapApplied = earningsBasedRate > SMP_STANDARD_WEEKLY_RATE;
   const standardRateWeeklyAmount = round2(Math.min(SMP_STANDARD_WEEKLY_RATE, earningsBasedRate));
 
   const cappedAtMaxWeeks = weeksOfLeaveTaken > TOTAL_WEEKS;
@@ -91,7 +96,7 @@ export function calculateStatutoryMaternityPay(
     totalSMP,
     isCapApplied,
     cappedAtMaxWeeks,
-    meetsEarningsThreshold: awe >= MIN_AVERAGE_WEEKLY_EARNINGS,
+    meetsEarningsThreshold,
   };
 }
 

@@ -128,7 +128,7 @@ export default function UKStatutoryMaternityPayCalculator() {
             </Grid>
 
             {/* Cap notice */}
-            {result.isCapApplied && (
+            {result.isCapApplied && result.standardRateWeeksPaid > 0 && (
               <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
                 <h4 className="text-amber-400 font-medium mb-3">
                   £{SMP_STANDARD_WEEKLY_RATE.toFixed(2)} Weekly Cap Applied

@@ -447,13 +447,14 @@ export const COOKING_DATA: Readonly<
       ],
     },
   },
-  // American Lamb Board (see source above) lists rack of lamb at the same 9-12 min/lb, 145F
-  // med-rare figure as lamb chops, so this entry mirrors the site's existing lamb-chops rates.
+  // American Lamb Board (see source above) lists rack of lamb roast/grill at 9-12 min/lb to
+  // 145F med-rare. minutesPerPound here is the MEDIUM baseline (doneness multiplier 1.0), so 12
+  // gives round(12 * 0.85) = 10 min/lb med-rare, inside the board's 9-12 range.
   // Oven/grill are the board's stated methods; slow-cooker and air-fryer are not surfaced in the
   // UI (see AVAILABLE_METHODS) but are filled in here to satisfy the shared data shape.
   'lamb-rack': {
     oven: {
-      minutesPerPound: 18,
+      minutesPerPound: 12,
       ovenTempF: 400,
       internalTempF: 145,
       restingMinutes: 5,
@@ -470,14 +471,14 @@ export const COOKING_DATA: Readonly<
       notes: [],
     },
     'air-fryer': {
-      minutesPerPound: 16,
+      minutesPerPound: 11,
       ovenTempF: 400,
       internalTempF: 145,
       restingMinutes: 5,
       notes: [],
     },
     grill: {
-      minutesPerPound: 14,
+      minutesPerPound: 12,
       ovenTempF: 450,
       internalTempF: 145,
       restingMinutes: 5,
