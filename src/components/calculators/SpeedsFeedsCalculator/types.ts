@@ -9,11 +9,14 @@ export interface SpeedsFeedsInputs {
   toolDiameterUnit: 'in' | 'mm';
   numberOfFlutes: number;
   operationType: OperationType;
+  toolMaterial: ToolMaterial;
   depthOfCut: number;
   depthOfCutUnit: 'in' | 'mm';
 }
 
 export type OperationType = 'roughing' | 'finishing' | 'slotting' | 'drilling';
+
+export type ToolMaterial = 'hss' | 'cobalt' | 'carbide-uncoated' | 'carbide-coated';
 
 export interface SpeedsFeedsResult {
   rpm: number;
@@ -63,6 +66,23 @@ export const OPERATION_TYPES: {
 
 export const FLUTE_OPTIONS = [1, 2, 3, 4, 6, 8];
 
+// Tool material SFM multipliers, applied on top of the HSS-baseline SFM values in
+// MATERIALS above. Sources checked 2026-08-08:
+// - LittleMachineShop.com "Cutting Speeds" reference (https://littlemachineshop.com/pages/cutting-speeds):
+//   uncoated carbide runs ~1.9-5.5x HSS SFM depending on material (cast iron lowest, aluminum/steel highest).
+// - Griggs Steel "High Speed Cobalt" (https://www.griggssteel.com/high-speed-cobalt/) and Amony/HMN Tool
+//   M42-vs-M35 comparison (https://www.hmntool.com/1172.html): cobalt (M42) HSS runs ~25-50% faster than
+//   standard HSS; coated carbide (TiN/TiAlN) commonly runs ~20-50% faster than uncoated carbide.
+// Sources disagree on the exact carbide ratio (1.9x-5.5x) - values below use conservative mid-range picks
+// rather than the high end, consistent with the low end of the carbide range and the low end of the
+// cobalt/coating ranges.
+export const TOOL_MATERIALS: { value: ToolMaterial; label: string; sfmMultiplier: number }[] = [
+  { value: 'hss', label: 'HSS', sfmMultiplier: 1.0 },
+  { value: 'cobalt', label: 'Cobalt (M42)', sfmMultiplier: 1.25 },
+  { value: 'carbide-uncoated', label: 'Uncoated Carbide', sfmMultiplier: 3.0 },
+  { value: 'carbide-coated', label: 'Coated Carbide (TiN/TiAlN)', sfmMultiplier: 3.9 },
+];
+
 export function getDefaultInputs(): SpeedsFeedsInputs {
   return {
     material: 'aluminum',
@@ -70,6 +90,7 @@ export function getDefaultInputs(): SpeedsFeedsInputs {
     toolDiameterUnit: 'in',
     numberOfFlutes: 3,
     operationType: 'roughing',
+    toolMaterial: 'hss',
     depthOfCut: 0.1,
     depthOfCutUnit: 'in',
   };

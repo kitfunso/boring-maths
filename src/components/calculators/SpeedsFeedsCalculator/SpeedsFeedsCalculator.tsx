@@ -11,9 +11,11 @@ import {
   getDefaultInputs,
   MATERIALS,
   OPERATION_TYPES,
+  TOOL_MATERIALS,
   FLUTE_OPTIONS,
   type SpeedsFeedsInputs,
   type OperationType,
+  type ToolMaterial,
 } from './types';
 import {
   ThemeProvider,
@@ -139,6 +141,17 @@ export default function SpeedsFeedsCalculator() {
                 />
               </div>
             </Grid>
+          </div>
+
+          {/* Tool Material */}
+          <div className="mb-6">
+            <Label>Tool Material</Label>
+            <ButtonGroup
+              options={TOOL_MATERIALS.map((t) => ({ value: t.value, label: t.label }))}
+              value={inputs.toolMaterial}
+              onChange={(value) => updateInput('toolMaterial', value as ToolMaterial)}
+              size="sm"
+            />
           </div>
 
           {/* Depth of Cut */}

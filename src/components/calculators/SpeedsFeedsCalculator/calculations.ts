@@ -3,7 +3,7 @@
  */
 
 import type { SpeedsFeedsInputs, SpeedsFeedsResult } from './types';
-import { MATERIALS, OPERATION_TYPES } from './types';
+import { MATERIALS, OPERATION_TYPES, TOOL_MATERIALS } from './types';
 
 export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResult {
   const {
@@ -12,6 +12,7 @@ export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResu
     toolDiameterUnit,
     numberOfFlutes,
     operationType,
+    toolMaterial,
     depthOfCut,
     depthOfCutUnit,
   } = inputs;
@@ -24,9 +25,13 @@ export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResu
   const materialData = MATERIALS.find((m) => m.value === material) || MATERIALS[0];
   const operationData =
     OPERATION_TYPES.find((o) => o.value === operationType) || OPERATION_TYPES[0];
+  const toolMaterialData =
+    TOOL_MATERIALS.find((t) => t.value === toolMaterial) || TOOL_MATERIALS[0];
 
-  // Apply multipliers
-  const effectiveSFM = materialData.sfm * operationData.sfmMultiplier;
+  // Apply multipliers (MATERIALS.sfm is the HSS baseline; toolMaterialData scales it up for
+  // cobalt/carbide/coated tooling - see the sourced comment on TOOL_MATERIALS in types.ts)
+  const effectiveSFM =
+    materialData.sfm * operationData.sfmMultiplier * toolMaterialData.sfmMultiplier;
   const effectiveChipLoad = materialData.chipLoad * operationData.chipLoadMultiplier;
 
   // RPM = (SFM × 12) / (π × Diameter)
