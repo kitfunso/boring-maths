@@ -233,6 +233,17 @@ Focus: mid-tier UK and US finance blogs (DA 20-50) that accept guest contributio
 
 ---
 
+## Category D: Converting-Cluster Communities (added 2026-08-23)
+
+The Aug-23 GSC pull shows clicks concentrate in three clusters: event/party (party-drink 18 clicks pos 8.8), cooking (cooking-time first 2 clicks ever, 4.9k impressions pos 26), and machining (cutting-time, tap-drill, speeds-feeds all converting). These communities match those clusters. Same rules as Category C: answer first, link second. Verify each URL/rules page before first post.
+
+1. **r/Cooking, r/AskCulinary, r/BBQ, r/smoking** — roast/turkey/brisket timing questions are constant. Best: Cooking Time, BBQ. Thanksgiving and Christmas threads are the seasonal spike; be established there before November.
+2. **r/eventplanning, r/weddingplanning** — headcount, drinks, seating math questions. Best: Party Drink, Catering, Event Seating, Wedding Alcohol.
+3. **r/Machinists + practicalmachinist.com forum** — speeds/feeds and tap-drill lookups are daily questions. Best: Speeds & Feeds (now with tool-material dimension), Tap Drill, Cutting Time. Technical audience, zero tolerance for spam; the calculators genuinely answer their questions, lead with the numbers.
+4. **Food-blog resource pages** — pitch the Cooking Time calculator (covers beef/lamb/pork/chicken/salmon with cited sources) as a linked tool for roast guides. Find prospects by searching "roast timing guide" on UK food blogs; the BBC roasting-timer shutdown left dead demand this page already part-owns.
+
+---
+
 ## Priority Order
 
 1. **Directory submissions** (Category B) first. One-time effort, permanent backlinks.

@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PhzsePromo from '../../components/common/PhzsePromo.astro';
 import OvulationCalculator from '../../components/calculators/OvulationCalculator/OvulationCalculator';
 
 const title = 'Free Ovulation Calculator: Track Your Fertile Window | Boring Math';
@@ -171,8 +172,8 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="Improving Accuracy">
     <p>
-      <strong>Track your cycles</strong> for 3-6 months to get an accurate average cycle length. Apps
-      or a simple calendar work well.
+      <strong>Track your cycles</strong> for 3-6 months to get an accurate average cycle length. A cycle
+      tracking app like <a href="https://phzse.com/">Phzse</a> or a simple calendar works well.
     </p>
     <p>
       <strong>Ovulation predictor kits (OPKs)</strong> detect the LH surge that occurs 24-36 hours before
@@ -183,6 +184,8 @@ const schemaBreadcrumbs = [
       a sensitive thermometer to confirm your ovulation pattern over time.
     </p>
   </ContentSection>
+
+  <PhzsePromo />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

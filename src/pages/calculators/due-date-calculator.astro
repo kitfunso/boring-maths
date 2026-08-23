@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import PhzsePromo from '../../components/common/PhzsePromo.astro';
 import DueDateCalculator from '../../components/calculators/DueDateCalculator/DueDateCalculator';
 
 const title = "Free Due Date Calculator - Estimate Baby's Arrival | Boring Math";
@@ -204,6 +205,13 @@ const schemaBreadcrumbs = [
       Always consult your healthcare provider for personalized medical advice and official due date confirmation.
     </p>
   </ContentSection>
+
+  <PhzsePromo
+    heading="Planning around your cycle?"
+    body="Phzse, our cycle tracking app, logs your periods and turns them into a daily forecast of your energy and phase. Free on iPhone and Android, and your data stays on your device."
+    ctaLabel="Get Phzse"
+    ctaHref="https://phzse.com/"
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

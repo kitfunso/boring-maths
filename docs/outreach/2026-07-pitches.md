@@ -4,6 +4,8 @@ Five personalized pitches drafted from the opportunity lists and outreach templa
 
 **Status 2026-08-08:** none of the five sent yet (REVENUE.md sprint table still empty). Fresh GSC support for sending now: the UK money cluster climbed ~14 positions in 10 days without a single new link (IHT 77→65, CGT 78→64, dividend 72→61) — rankings are moving toward striking distance, links are the remaining input. Pitch bodies below re-checked; "this month" wording corrected to "in July" so the claims stay accurate when sent in August.
 
+**Status 2026-08-23:** still none sent. The Aug-23 GSC pull strengthens the case again: the climb continued with zero new links (CGT 64→62, IHT 65→62, dividend 61→58, salary-sacrifice 48→43.5, all still 0 clicks), which is the textbook authority-bound pattern. On-page work is done; these five sends are the open input. Bodies re-checked 2026-08-23: all claims still accurate ("updated in July" holds, ADS 8% unchanged), nothing to edit before sending.
+
 **Context worth knowing before sending:** ADS is 8% of the full purchase price (confirmed in `src/components/calculators/ADSCalculator/calculations.ts`), and the SDLT/LBTT figures across the site were checked and refreshed to verified 2026/27 values on this branch. That means these pitches can honestly say the numbers are updated for 2026/27, that's not a stretch, it's true as of this commit.
 
 ---
