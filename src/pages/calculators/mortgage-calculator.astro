@@ -14,11 +14,11 @@ import { getAffiliatesForCalculator } from '../../lib/affiliates';
 
 const affiliateConfig = getAffiliatesForCalculator('mortgage-calculator');
 
-const title = 'Free Mortgage Calculator: Payments with PMI & Taxes | Boring Math';
+const title = 'Free Mortgage Calculator: Payments, Interest & Overpayments | Boring Math';
 const description =
   'A £250,000 mortgage at 4.5% over 25 years costs £1,390/month with £167,000 total interest. Overpaying £100/month saves £18,000 in interest and clears it 3 years early. Calculator with full amortisation schedule.';
 const keywords =
-  'mortgage calculator, how much house can I afford, home loan calculator, monthly mortgage payment calculator, mortgage payment with taxes and insurance, PMI calculator, first time home buyer calculator';
+  'mortgage calculator, how much house can I afford, home loan calculator, monthly mortgage payment calculator, mortgage overpayment calculator, amortisation schedule, first time home buyer calculator';
 const canonicalURL = '/calculators/mortgage-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -62,6 +62,13 @@ const relatedCalculators = [
     href: '/calculators/savings-goal-calculator/',
     icon: 'dollar' as const,
     color: 'green' as const,
+  },
+  {
+    title: 'Mortgage Overpayment Calculator',
+    description: 'See how much interest overpaying your mortgage saves.',
+    href: '/calculators/mortgage-overpayment-calculator/',
+    icon: 'home' as const,
+    color: 'blue' as const,
   },
 ];
 

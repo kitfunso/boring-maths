@@ -318,5 +318,25 @@
   {
     "from": "/calculators/uk-student-loan-calculator/",
     "to": "/calculators/college-roi-calculator/"
+  },
+  {
+    "from": "/calculators/mortgage-calculator/",
+    "to": "/calculators/mortgage-overpayment-calculator/"
+  },
+  {
+    "from": "/calculators/us-mortgage-calculator/",
+    "to": "/calculators/debt-to-income-calculator/"
+  },
+  {
+    "from": "/calculators/us-paycheck-calculator/",
+    "to": "/calculators/us-sales-tax-calculator/"
+  },
+  {
+    "from": "/calculators/discount-calculator/",
+    "to": "/calculators/us-sales-tax-calculator/"
+  },
+  {
+    "from": "/calculators/401k-calculator/",
+    "to": "/calculators/roth-ira-calculator/"
   }
 ]
