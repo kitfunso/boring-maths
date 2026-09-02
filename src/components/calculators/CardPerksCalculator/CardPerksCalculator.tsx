@@ -210,7 +210,7 @@ export default function CardPerksCalculator() {
 
   const topCard = result.ranked[0] ?? null;
   const shareSummary = topCard
-    ? `${topCard.card.name} comes out top for ${gbp(result.totalSpend)}/yr spend: ${gbp(topCard.breakdown.net)} net a year`
+    ? `${topCard.card.name} ranks first for ${gbp(result.totalSpend)}/yr spend: ${gbp(topCard.breakdown.net)} net a year`
     : 'No cards match these filters';
 
   return (
