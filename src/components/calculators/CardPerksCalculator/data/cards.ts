@@ -31,7 +31,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       '1 point per GBP1 flat rate; page shows no groceries/travel/dining split so the same rate is applied to all four buckets.',
       '2x points apply only on bookings through American Express Travel, not general travel spend; not modelled as a bucket bonus.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); this card page did not state a card-specific figure.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); this card page did not state a card-specific figure.',
       'Complimentary Priority Pass access to over 1,550 lounges with no stated visit cap; the 4 (2025) and 8 (2026 to 2027) figures on the page are lounge pre-booking entitlements, not visit limits.',
       'One guest at no cost for the main Cardmember and the Platinum Supplementary Cardmember.',
     ],
@@ -66,8 +66,8 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       "Page shows this as a credit card, not the charge card the plan brief's candidate list implied; type follows the live page.",
       '1 point per GBP1 flat rate used for all four buckets; 3x on Amex Travel bookings and 2x on direct airline purchases are sub-category bonuses, not a general travel-bucket rate.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
-      'travelInsurance is Travel Accident + Travel Inconvenience cover, not full comprehensive worldwide cover, so mapped to "basic".',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'Travel insurance is Travel Accident + Travel Inconvenience cover, not full comprehensive worldwide cover, so mapped to "basic".',
       'Welcome offer confirmed from Head for Points and Be Clever With Your Cash because the Amex page renders the offer client-side.',
     ],
     minIncome: 20000,
@@ -103,7 +103,7 @@ export const CARDS: readonly CardProduct[] = [
     },
     notes: [
       '1 Avios per GBP1 flat rate, no category split published, applied to all four buckets.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
       'Travel Accident Insurance (up to GBP75,000 on public transport bought with the card) only, mapped to "basic".',
       'Welcome offer figures come from the British Airways Avios credit-cards page; the Amex card page renders its offer banner client-side.',
     ],
@@ -135,10 +135,10 @@ export const CARDS: readonly CardProduct[] = [
     },
     notes: [
       '1.5 Avios/GBP1 general rate mapped to groceries/dining/other; 3 Avios/GBP1 on BA/BA Holidays spend mapped to travel.',
-      'Page states both rates drop to 1.25 Avios/GBP1 from 7 Oct 2026; current rates used as of lastVerified.',
+      'Page states both rates drop to 1.25 Avios/GBP1 from 7 Oct 2026; current rates used as of the last verified date.',
       'Lounge access explicitly not included; card gives BA Club priority check-in/boarding only, not a lounge scheme.',
       'Travel insurance is basic: travel inconvenience cover (cancellations, delays, delayed luggage) and travel accident cover up to GBP250,000 on public transport, no medical cover.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
     ],
     minIncome: 35000,
     sourceUrl: 'https://www.americanexpress.com/en-gb/credit-cards/ba-premium-plus-credit-card/',
@@ -165,7 +165,7 @@ export const CARDS: readonly CardProduct[] = [
     companionVoucher: null,
     notes: [
       '2 points/GBP1 general rate mapped to travel/dining/other; 3x-minimum rate "at Nectar partners" (mainly Sainsbury’s) mapped to groceries.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
     ],
     minIncome: 20000,
     sourceUrl: 'https://www.americanexpress.com/en-gb/credit-cards/nectar-credit-card/',
@@ -198,7 +198,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       '0.5% flat rate up to GBP10,000/year spend, 1% above; no category split published so applied flat to all four buckets.',
       'Cashback modelled in "earn" as percent-per-GBP1, matching the cashback PointCurrency convention used across this dataset.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
       'Travel Accident Insurance (up to GBP150,000 on public transport bought with the card) only, mapped to "basic".',
     ],
     minIncome: 15000,
@@ -232,7 +232,7 @@ export const CARDS: readonly CardProduct[] = [
     companionVoucher: null,
     notes: [
       '0.75% flat rate up to GBP10,000/year spend, 1.25% above; no category split published, applied flat to all four buckets.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
       'Travel Accident Insurance (up to GBP150,000 on public transport bought with the card) only, mapped to "basic".',
     ],
     minIncome: 20000,
@@ -260,7 +260,7 @@ export const CARDS: readonly CardProduct[] = [
     companionVoucher: null,
     notes: [
       '1 point per GBP1 flat rate, no category split published, applied to all four buckets.',
-      'fxFeePct uses the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
+      'The FX fee is the general Amex UK non-sterling fee (2.99%); not stated on this card’s own page.',
       'Travel Accident Insurance (up to GBP150,000 on public transport bought with the card) only, mapped to "basic".',
     ],
     minIncome: 15000,
@@ -302,7 +302,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       '1.5 Avios/GBP1 flat rate, no category split published, applied to all four buckets.',
       'fee is the GBP20/month fee x12; APR figure is the card’s stated representative rate (an alternative 31.9% APR also appears on the page for some circumstances).',
-      'fxFeePct not stated on the issuer page; 2.99% found via independent aggregator search, not confirmed card-specific.',
+      'FX fee not stated on the issuer page; 2.99% found via independent aggregator search, not confirmed card-specific.',
       'Lounge access: over 1,000 lounges worldwide at a discounted GBP24 per person per visit, no stated annual cap.',
     ],
     minIncome: null,
@@ -338,7 +338,7 @@ export const CARDS: readonly CardProduct[] = [
     },
     notes: [
       '1 Avios/GBP1 flat rate, no category split published, applied to all four buckets.',
-      'fxFeePct not stated on the issuer page; 2.99% found via independent aggregator search, not confirmed card-specific.',
+      'FX fee not stated on the issuer page; 2.99% found via independent aggregator search, not confirmed card-specific.',
     ],
     minIncome: null,
     sourceUrl: 'https://www.barclaycard.co.uk/personal/credit-cards/avios',
@@ -360,7 +360,7 @@ export const CARDS: readonly CardProduct[] = [
       units: 18000,
       minSpend: 0,
       windowDays: 90,
-      note: '18,000 points with the first card spend within 90 days; minSpend 0 because any purchase qualifies.',
+      note: '18,000 points with the first card spend within 90 days; no minimum spend because any purchase qualifies.',
     },
     fxFeePct: 2.99,
     lounge: null,
@@ -373,7 +373,7 @@ export const CARDS: readonly CardProduct[] = [
     },
     notes: [
       '1.5 Virgin Points/GBP1 flat rate, no category split published, applied to all four buckets.',
-      'fxFeePct is 0% on EUR/SEK/RON (EEA) spend; the 2.99% non-EEA rate is used here since most foreign spend falls outside those three currencies.',
+      'The FX fee is 0% on EUR/SEK/RON (EEA) spend; the 2.99% non-EEA rate is used here since most foreign spend falls outside those three currencies.',
       '3 points/GBP1 on spend direct with Virgin Atlantic or Virgin Holidays is a sub-category bonus, not a general travel-bucket rate, so travel uses the 1.5 flat rate.',
     ],
     minIncome: null,
@@ -396,7 +396,7 @@ export const CARDS: readonly CardProduct[] = [
       units: 3000,
       minSpend: 0,
       windowDays: 90,
-      note: '3,000 points with the first card spend within 90 days; minSpend 0 because any purchase qualifies.',
+      note: '3,000 points with the first card spend within 90 days; no minimum spend because any purchase qualifies.',
     },
     fxFeePct: 2.99,
     lounge: null,
@@ -409,7 +409,7 @@ export const CARDS: readonly CardProduct[] = [
     },
     notes: [
       '0.75 points/GBP1 flat rate applied to all four buckets; the 1.5 points/GBP1 on Virgin Atlantic/Virgin Holidays spend is a sub-category bonus, not a general travel-bucket rate.',
-      'fxFeePct is 0% on EUR/SEK/RON (EEA) spend; the 2.99% non-EEA rate is used here since most foreign spend falls outside those three currencies.',
+      'The FX fee is 0% on EUR/SEK/RON (EEA) spend; the 2.99% non-EEA rate is used here since most foreign spend falls outside those three currencies.',
     ],
     minIncome: null,
     sourceUrl: 'https://uk.virginmoney.com/cards/products/vaa-cards/',
@@ -442,7 +442,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       '3 HSBC reward points/GBP1 on sterling spend convert to airline miles at 2:1, so the card page states GBP1 = 1.5 airline miles; modelled as 1.5 Avios/GBP1 flat with the airline-point slider applied. The 4 points/GBP1 on other currencies is not modelled as a bucket.',
       'HSBC advertises GBP290 cashback for some new applicants, which would offset the first-year fee; the conditions are not modelled so the fee stays GBP290 in both horizons.',
-      'Card requires an HSBC Premier Account (GBP100k+ income, OR GBP100k+ savings/investments, OR existing Premier status elsewhere); minIncome models only the income leg of this OR-gate.',
+      'Card requires an HSBC Premier Account (GBP100k+ income, OR GBP100k+ savings/investments, OR existing Premier status elsewhere); the minimum income shown models only the income leg of this OR-gate.',
       'Travel insurance is described only as "included as part of Premier Account benefits" with no coverage tier stated on this page; mapped to "comprehensive" given HSBC markets Premier travel cover as worldwide multi-trip.',
     ],
     minIncome: 100000,
@@ -471,7 +471,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       '1% back on supermarket spend mapped to groceries; 0.25% "at supermarket petrol stations and everywhere else" mapped to travel/dining/other.',
       'GBP24 fee is refunded if the holder has a NatWest Reward current account; ongoing fee modelled at the full GBP24 since that is not guaranteed.',
-      'fxFeePct is NatWest’s standard card-abroad charge (2.75%), found via search, not confirmed as Reward-card-specific (the separate Reward Black card is fee-exempt).',
+      'The FX fee is NatWest’s standard card-abroad charge (2.75%), found via search, not confirmed as Reward-card-specific (the separate Reward Black card is fee-exempt).',
       'Purchase protection not mentioned on the fetched page; defaulted to false rather than assumed.',
     ],
     minIncome: 10000,
@@ -651,7 +651,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'Base card is free (GBP0/month Standard tier); the 0.5%/1% cashback rates on the page belong to paid Klarna app-membership tiers, not the free card itself, so earn is modelled as 0.',
       'section75 is false because this schema reserves Section 75 for credit and charge types; bnpl products fall outside that rule even though Klarna markets some purchase protections.',
-      'Basic purchase protection (damage/theft, price-drop, extended-warranty tiers) confirmed on the page; modelled as purchaseProtection=true at the base level.',
+      'Basic purchase protection (damage/theft, price-drop, extended-warranty tiers) confirmed on the page; modelled as purchase protection at the base level.',
     ],
     minIncome: null,
     sourceUrl: 'https://www.klarna.com/uk/klarna-card/',
@@ -678,7 +678,7 @@ export const CARDS: readonly CardProduct[] = [
     companionVoucher: null,
     notes: [
       'Free tier, no cashback scheme, so earn is modelled as 0 across all buckets.',
-      'fxFeePct of 2% applies above the GBP250-per-30-day fee-free allowance stated on the plans page; the 2% rate itself comes from search corroboration (reviews plus a Head for Points forum thread).',
+      'The 2% FX fee applies above the GBP250-per-30-day fee-free allowance stated on the plans page; the 2% rate itself comes from search corroboration (reviews plus a Head for Points forum thread).',
       'Customer protection up to GBP100,000 and Section 75 protection are stated on the plans page, but section75=false here because Curve is not itself a credit/charge issuer under this schema’s type rule.',
       'Lounge access is a Curve Pay Pro+ tier benefit, not included on the free tier; modelled as null.',
     ],
@@ -708,7 +708,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'GBP5.99/month x12 = GBP71.88/year.',
       'No cashback scheme on this tier, so earn is modelled as 0 across all buckets.',
-      'fxFeePct of 2% reuses the Curve Pay rate above the GBP3,333 fee-free allowance stated on the plans page; the rate above the allowance is not stated for this tier.',
+      'The 2% FX fee reuses the Curve Pay rate above the GBP3,333 fee-free allowance stated on the plans page; the rate above the allowance is not stated for this tier.',
       'Lounge access is a Curve Pay Pro+ tier benefit, not included on X; modelled as null.',
       '1% cashback on spend outside Europe is geography-based and cannot be expressed in the category buckets, so earn stays 0 and currency none.',
     ],
@@ -743,7 +743,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'Free plan (GBP0/month), no annual fee equivalent.',
       '1 RevPoint per GBP10 spent, flat rate with no category split on the plans page, applied to all four buckets.',
-      'Fair-use currency exchange allowance is GBP1,000/month Mon-Fri before the 1% fxFeePct applies; a 1% weekend markup also applies, same rate, not modelled separately.',
+      'Fair-use currency exchange allowance is GBP1,000/month Mon-Fri before the 1% FX fee applies; a 1% weekend markup also applies, same rate, not modelled separately.',
       'LoungeKey pass available for purchase at the GBP22 standard market rate from Revolut Airport Lounges terms; no included visits.',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard depending on plan and batch (Finder.com), not stated on the plans page itself.',
       'No purchase protection or travel insurance section for this tier on the plans page.',
@@ -779,9 +779,9 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'GBP3.99/month x12 = GBP47.88/year.',
       '1 RevPoint per GBP10 spent, same rate as Standard, flat across all four buckets.',
-      'Fair-use allowance is GBP3,000/month Mon-Fri before the 0.5% fxFeePct applies; a 0.5% weekend markup also applies, same rate, not modelled separately.',
+      'Fair-use allowance is GBP3,000/month Mon-Fri before the 0.5% FX fee applies; a 0.5% weekend markup also applies, same rate, not modelled separately.',
       'LoungeKey pass available for purchase at the GBP22 standard rate; Plus does not get the Premium/Metal discount.',
-      'Everyday Insurance (purchase cover) is included, mapped to purchaseProtection=true; no travel-insurance line item on this tier, so travelInsurance stays none.',
+      'Everyday Insurance (purchase cover) is included, mapped to purchase protection; no travel-insurance line item on this tier, so travel insurance stays none.',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard (Finder.com), not stated on the plans page itself.',
     ],
     minIncome: null,
@@ -815,9 +815,9 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'GBP7.99/month x12 = GBP95.88/year.',
       '1 RevPoint per GBP4 spent, flat across all four buckets.',
-      'No fair-use limit and no weekend markup stated for currency exchange on this tier, so fxFeePct is 0.',
+      'No fair-use limit and no weekend markup stated for currency exchange on this tier, so the FX fee is 0%.',
       'LoungeKey passes are discounted per the plans page, but the exact discounted GBP figure is not published on any page fetched; GBP22 (the standard market rate) is used here as an upper bound, not the true lower price.',
-      'Everyday Insurance (purchase cover) is included; Premium is not checked for Global medical or other travel-insurance lines on the plans page, so travelInsurance stays none.',
+      'Everyday Insurance (purchase cover) is included; Premium is not checked for Global medical or other travel-insurance lines on the plans page, so travel insurance stays none.',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard (Finder.com), not stated on the plans page itself.',
     ],
     minIncome: null,
@@ -851,7 +851,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'GBP14.99/month x12 = GBP179.88/year.',
       '1 RevPoint per GBP2 spent, flat across all four buckets.',
-      'No fair-use limit and no weekend markup stated for currency exchange on this tier, so fxFeePct is 0.',
+      'No fair-use limit and no weekend markup stated for currency exchange on this tier, so the FX fee is 0%.',
       'LoungeKey passes are discounted per the plans page; exact discounted GBP figure not published, GBP22 standard market rate used as an upper bound.',
       'Global medical insurance up to GBP10m/year is checked for this tier on the plans page; medical cover is the comprehensive criterion in this schema (the Wise Metal vs Ultra comparison also lists global medical on Metal).',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard (Finder.com), not stated on the plans page itself.',
@@ -887,7 +887,7 @@ export const CARDS: readonly CardProduct[] = [
     notes: [
       'GBP55/month x12 = GBP660/year.',
       '1 RevPoint per GBP1 spent, flat across all four buckets.',
-      'Unlimited airport lounge access at no per-visit charge; visitsPerYear modelled as null (unlimited) rather than a specific cap.',
+      'Unlimited airport lounge access at no per-visit charge; visits per year modelled as unlimited rather than a specific cap.',
       'Top insurance tier on the plans page: Global medical (GBP10m/y) and trip and event cancellation (up to 70% back) are both checked for Ultra; car hire excess, winter sports and delayed-luggage lines appear once in the table and are attributed to Ultra as the top tier, so travelInsurance is comprehensive.',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard (Finder.com), not stated on the plans page itself.',
     ],
