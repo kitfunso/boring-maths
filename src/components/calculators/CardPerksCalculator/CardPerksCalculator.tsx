@@ -195,6 +195,14 @@ export default function CardPerksCalculator() {
     window.history.replaceState(null, '', url);
   }, [inputs]);
 
+  // Stamped on mount so the e2e specs can wait for hydration instead of a fixed sleep.
+  useEffect(() => {
+    document.documentElement.dataset.cardPerksReady = 'true';
+    return () => {
+      delete document.documentElement.dataset.cardPerksReady;
+    };
+  }, []);
+
   const copyLink = (): void => {
     void navigator.clipboard?.writeText(window.location.href).then(() => {
       setLinkCopied(true);

@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { collectOverflow } from './helpers/overflow';
 import { CARDS } from '../src/components/calculators/CardPerksCalculator/data/cards';
 
@@ -6,6 +6,12 @@ import { CARDS } from '../src/components/calculators/CardPerksCalculator/data/ca
 
 const PAGE = '/calculators/card-rewards-calculator/';
 const TABLE_NAME = 'Cards ranked by estimated net value';
+
+// The island stamps the attribute on mount, so its presence doubles as the hydration signal.
+const waitForIsland = (page: Page) =>
+  expect(page.locator('html')).toHaveAttribute('data-card-perks-ready', 'true', {
+    timeout: 15_000,
+  });
 
 test.describe('Card Rewards & Perks Calculator', () => {
   test('loads with a heading and a ranked table of at least 20 cards', async ({ page }) => {
@@ -26,7 +32,7 @@ test.describe('Card Rewards & Perks Calculator', () => {
 
     const groceries = page.locator('#spend-groceries');
     await expect(groceries).toBeVisible();
-    await page.waitForTimeout(300); // Preact hydration, same convention as smoke.spec.ts
+    await waitForIsland(page);
 
     await groceries.fill('20000');
     await groceries.blur();
@@ -45,7 +51,7 @@ test.describe('Card Rewards & Perks Calculator', () => {
       .getByRole('group', { name: 'Filter by card type' })
       .getByRole('button', { name: 'Debit card' });
     await expect(chip).toBeVisible();
-    await page.waitForTimeout(300); // Preact hydration, same convention as smoke.spec.ts
+    await waitForIsland(page);
 
     await chip.click();
 
@@ -60,7 +66,7 @@ test.describe('Card Rewards & Perks Calculator', () => {
     await expect(expandButton).toHaveAttribute('aria-expanded', 'false');
     const rowId = await expandButton.getAttribute('aria-controls');
     if (!rowId) throw new Error('Expand button has no aria-controls');
-    await page.waitForTimeout(300); // Preact hydration, same convention as smoke.spec.ts
+    await waitForIsland(page);
 
     await expandButton.click();
     await expect(expandButton).toHaveAttribute('aria-expanded', 'true');
