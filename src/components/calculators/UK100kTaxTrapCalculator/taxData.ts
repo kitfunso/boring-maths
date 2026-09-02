@@ -1,15 +1,5 @@
-/**
- * UK Tax Data 2026/27
- *
- * Tax bands, thresholds, and rates for England/Wales/NI and Scotland.
- * Updated for the 2026/27 tax year.
- */
+/** UK Tax Data 2026/27: tax bands, thresholds, and rates for England/Wales/NI and Scotland. */
 
-// =============================================================================
-// PERSONAL ALLOWANCE
-// =============================================================================
-
-/** Standard Personal Allowance */
 export const PERSONAL_ALLOWANCE = 12570;
 
 /** Income threshold where Personal Allowance starts to taper */
@@ -20,10 +10,6 @@ export const PA_ZERO_THRESHOLD = 125140; // 100000 + (12570 * 2)
 
 /** Rate of PA reduction: £1 lost for every £2 over threshold */
 export const PA_TAPER_RATE = 0.5;
-
-// =============================================================================
-// ENGLAND/WALES/NI TAX BANDS
-// =============================================================================
 
 export interface TaxBand {
   name: string;
@@ -39,10 +25,6 @@ export const ENGLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Additional Rate', rate: 0.45, from: 125141, to: Infinity },
 ];
 
-// =============================================================================
-// SCOTLAND TAX BANDS (2026/27)
-// =============================================================================
-
 export const SCOTLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Personal Allowance', rate: 0, from: 0, to: 12570 },
   { name: 'Starter Rate', rate: 0.19, from: 12571, to: 16537 },
@@ -53,14 +35,9 @@ export const SCOTLAND_TAX_BANDS: TaxBand[] = [
   { name: 'Top Rate', rate: 0.48, from: 125141, to: Infinity },
 ];
 
-// =============================================================================
-// NATIONAL INSURANCE (Employee)
-// =============================================================================
-
 /** NI Primary Threshold - start paying NI */
 export const NI_PRIMARY_THRESHOLD = 12570;
 
-/** NI Upper Earnings Limit */
 export const NI_UPPER_LIMIT = 50270;
 
 /** NI rate between Primary Threshold and Upper Limit */
@@ -68,10 +45,6 @@ export const NI_MAIN_RATE = 0.08; // 8% (reduced from 12% in 2024)
 
 /** NI rate above Upper Earnings Limit */
 export const NI_UPPER_RATE = 0.02; // 2%
-
-// =============================================================================
-// STUDENT LOAN THRESHOLDS (2026/27)
-// =============================================================================
 
 export interface StudentLoanConfig {
   name: string;
@@ -119,50 +92,24 @@ export const STUDENT_LOAN_PLANS: Record<string, StudentLoanConfig> = {
   },
 };
 
-// =============================================================================
-// TAX TRAP ZONE
-// =============================================================================
-
 /** The "60% tax trap" zone where marginal rate is highest */
 export const TAX_TRAP_START = 100000;
 export const TAX_TRAP_END = 125140;
 
-/**
- * Effective marginal rate in the tax trap zone:
- * - 40% income tax
- * - 2% NI (above upper limit)
- * - 20% effective rate from PA loss (£1 lost for £2 earned = 50% of 40% = 20%)
- * = 62% total (or 60% if we ignore NI)
- */
+/** Effective marginal rate in the tax trap zone: 40% income tax + 2% NI + 20% effective PA-taper rate = 62% (60% ex-NI). */
 export const TAX_TRAP_MARGINAL_RATE = 0.62;
 
-// =============================================================================
-// PENSION LIMITS
-// =============================================================================
-
-/** Annual Allowance for pension contributions */
 export const PENSION_ANNUAL_ALLOWANCE = 60000;
 
 /** Tapered Annual Allowance threshold (adjusted income) */
 export const TAPERED_AA_THRESHOLD = 260000;
 
-/** Minimum Annual Allowance after tapering */
 export const MINIMUM_ANNUAL_ALLOWANCE = 10000;
 
-// =============================================================================
-// HELPER FUNCTIONS
-// =============================================================================
-
-/**
- * Get the appropriate tax bands for a region
- */
 export function getTaxBands(region: 'england' | 'scotland'): TaxBand[] {
   return region === 'scotland' ? SCOTLAND_TAX_BANDS : ENGLAND_TAX_BANDS;
 }
 
-/**
- * Calculate Personal Allowance after tapering
- */
 export function calculatePersonalAllowance(totalIncome: number): number {
   if (totalIncome <= PA_TAPER_THRESHOLD) {
     return PERSONAL_ALLOWANCE;
@@ -172,31 +119,20 @@ export function calculatePersonalAllowance(totalIncome: number): number {
   return Math.max(0, PERSONAL_ALLOWANCE - reduction);
 }
 
-/**
- * Calculate how much Personal Allowance has been lost
- */
 export function calculatePALost(totalIncome: number): number {
   return PERSONAL_ALLOWANCE - calculatePersonalAllowance(totalIncome);
 }
 
-/**
- * Check if income is in the tax trap zone
- */
 export function isInTaxTrap(totalIncome: number): boolean {
   return totalIncome > TAX_TRAP_START && totalIncome <= TAX_TRAP_END;
 }
 
-/**
- * Calculate pension contribution needed to restore full Personal Allowance
- */
 export function calculateOptimalPensionToRestorePA(grossIncome: number): number {
   if (grossIncome <= PA_TAPER_THRESHOLD) {
     return 0; // No need, PA is full
   }
 
-  // Contribute enough to bring income down to £100,000
   const optimalContribution = grossIncome - PA_TAPER_THRESHOLD;
 
-  // Cap at Annual Allowance
   return Math.min(optimalContribution, PENSION_ANNUAL_ALLOWANCE);
 }

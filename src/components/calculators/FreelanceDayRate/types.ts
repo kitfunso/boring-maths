@@ -1,80 +1,50 @@
-/**
- * Freelance Day Rate Calculator - Type Definitions
- *
- * This calculator helps freelancers determine their ideal day rate
- * by comparing to equivalent salaried positions with tax adjustments.
- *
- * Supports multiple currencies with region-specific defaults:
- * - USD (United States)
- * - GBP (United Kingdom)
- * - EUR (European Union)
- */
+/** Freelance Day Rate Calculator types: compares a freelance day rate to an equivalent salaried position, with tax adjustments and region-specific defaults for USD, GBP, and EUR. */
 
 import type { Currency } from '../../../lib/regions';
 import { getRegionDefaults, getDefaultSalary } from '../../../lib/regions';
 
-/**
- * Input values for the Freelance Day Rate Calculator
- */
 export interface FreelanceDayRateInputs {
-  /** Selected currency (USD, GBP, EUR) */
   currency: Currency;
 
-  /** Target annual income in selected currency */
   annualSalary: number;
 
   /** Estimated tax rate as decimal (0.25 = 25%) */
   taxRate: number;
 
-  /** Number of vacation days per year */
   vacationDays: number;
 
-  /** Number of public holidays per year */
   holidays: number;
 
   /** Annual value of benefits to self-fund (health insurance, retirement, etc.) */
   benefitsValue: number;
 }
 
-/**
- * Calculated results from the Freelance Day Rate Calculator
- */
 export interface FreelanceDayRateResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Day rate before taxes */
+  /** Day rate before taxes. */
   grossDayRate: number;
 
-  /** Day rate after taxes */
+  /** Day rate after taxes. */
   netDayRate: number;
 
-  /** Hourly rate based on 8-hour workday */
+  /** Hourly rate based on an 8-hour workday. */
   hourlyRate: number;
 
-  /** Monthly income at full utilization (21.7 working days) */
+  /** Monthly income at full utilization (21.7 working days). */
   monthlyIncome: number;
 
-  /** Number of billable working days per year */
   workingDays: number;
 
-  /** Weekly income at full utilization */
   weeklyIncome: number;
 
-  /** Annual income comparison */
   annualComparison: {
-    /** What you'd earn as an employee */
     asEmployee: number;
-    /** What you'd earn as a freelancer at this rate */
     asFreelancer: number;
-    /** Difference between freelance and employee income */
     difference: number;
   };
 }
 
-/**
- * Get default input values for a given currency/region
- */
 export function getDefaultInputs(currency: Currency = 'USD'): FreelanceDayRateInputs {
   const regionDefaults = getRegionDefaults(currency);
 
@@ -88,15 +58,9 @@ export function getDefaultInputs(currency: Currency = 'USD'): FreelanceDayRateIn
   };
 }
 
-/**
- * Default input values (US)
- * @deprecated Use getDefaultInputs(currency) instead for region-specific defaults
- */
+/** @deprecated Use getDefaultInputs(currency) instead for region-specific defaults. */
 export const DEFAULT_INPUTS: FreelanceDayRateInputs = getDefaultInputs('USD');
 
-/**
- * Input field configuration for UI generation
- */
 export interface InputFieldConfig {
   id: keyof Omit<FreelanceDayRateInputs, 'currency'>;
   label: string;
@@ -113,9 +77,6 @@ export interface InputFieldConfig {
   required: boolean;
 }
 
-/**
- * Configuration for all input fields
- */
 export const INPUT_FIELD_CONFIG: InputFieldConfig[] = [
   {
     id: 'annualSalary',

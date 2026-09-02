@@ -1,42 +1,20 @@
-/**
- * Debt-to-Income (DTI) Calculator - pure logic.
- *
- * Computes the two ratios US mortgage lenders use to judge how much of a
- * borrower's gross monthly income is committed to debt:
- *
- *   Front-end DTI = housing payment / gross monthly income
- *   Back-end DTI  = (housing payment + other monthly debts) / gross monthly income
- *
- * Both are expressed as a percentage of gross (pre-tax) income.
- *
- * There is no statutory constant here. The thresholds below are widely used
- * LENDER CONVENTIONS, not law. The single legal reference point is the
- * Qualified Mortgage (QM) back-end limit of 43%, set by the Consumer Financial
- * Protection Bureau under the Ability-to-Repay rule (12 CFR 1026.43,
- * effective 2014). It is a safe-harbour threshold for lenders, not a hard cap
- * on borrowers.
- */
+/** Debt-to-Income (DTI) Calculator: front-end DTI = housing payment / gross monthly income; back-end DTI = (housing payment + other debts) / gross monthly income, both as % of gross (pre-tax) income. Thresholds are lender conventions, not law; the only legal reference is the CFPB Qualified Mortgage back-end limit of 43% (12 CFR 1026.43, eff. 2014), a safe-harbour for lenders, not a hard cap on borrowers. */
 
-// Front-end (housing only) ratio at or below this is considered ideal by most
-// conventional lenders.
+// Front-end ratio at or below this is considered ideal by most conventional lenders.
 export const FRONT_END_IDEAL_MAX = 28;
 
-// Back-end (all debt) ratio at or below this is the classic conventional
-// comfort zone.
+// Back-end (all debt) ratio at or below this is the classic conventional comfort zone.
 export const BACK_END_IDEAL_MAX = 36;
 
-// Back-end ratio at or below this still qualifies under the CFPB Qualified
-// Mortgage Ability-to-Repay rule (43%). Above it is treated as high risk.
+// Back-end ratio at or below this still qualifies under the CFPB QM Ability-to-Repay rule; above it is high risk.
 export const BACK_END_QM_MAX = 43;
 
 export interface DebtToIncomeInputs {
   // Gross (pre-tax) income per month.
   grossMonthlyIncome: number;
-  // Total monthly housing payment: mortgage or rent plus property tax,
-  // insurance, HOA and PMI where they apply.
+  // Total monthly housing payment: mortgage/rent plus property tax, insurance, HOA and PMI where they apply.
   housingPayment: number;
-  // All other recurring monthly debt: car loans, student loans, credit card
-  // minimums, personal loans, child support.
+  // All other recurring monthly debt: car loans, student loans, card minimums, personal loans, child support.
   otherMonthlyDebts: number;
 }
 
@@ -52,7 +30,6 @@ export interface DebtToIncomeResult {
   totalMonthlyDebt: number;
   // Rating of the back-end ratio against conventional lender thresholds.
   rating: DTIRating;
-  // Short human-readable summary of the rating.
   ratingLabel: string;
   // True when the back-end ratio is within the conventional 36 percent zone.
   isWithinConventional: boolean;
@@ -60,11 +37,7 @@ export interface DebtToIncomeResult {
   isWithinQualifiedMortgage: boolean;
 }
 
-/**
- * Map a back-end DTI percentage to a plain-English rating against the
- * conventional lender thresholds. Front-end is judged separately by the caller
- * but the back-end ratio is the headline figure lenders lead with.
- */
+/** Maps back-end DTI to a rating against conventional thresholds; front-end is judged separately by the caller. */
 function rateBackEnd(backDTI: number): { rating: DTIRating; ratingLabel: string } {
   if (backDTI <= BACK_END_IDEAL_MAX) {
     return { rating: 'ideal', ratingLabel: 'Healthy: within the conventional 36% comfort zone' };
@@ -78,19 +51,12 @@ function rateBackEnd(backDTI: number): { rating: DTIRating; ratingLabel: string 
   return { rating: 'high', ratingLabel: 'High: above the 43% Qualified Mortgage limit' };
 }
 
-/**
- * Round a number to one decimal place. DTI is conventionally quoted to a
- * tenth of a percent.
- */
+/** DTI is conventionally quoted to a tenth of a percent. */
 function roundTo1dp(value: number): number {
   return Math.round(value * 10) / 10;
 }
 
-/**
- * Main pure calculation. Negative inputs are floored at zero so a cleared
- * field cannot produce a nonsensical ratio. When gross income is zero the
- * ratios are reported as zero rather than dividing by zero.
- */
+/** Negative inputs floor at zero so a cleared field can't produce a nonsensical ratio; zero income reports zero ratios instead of dividing by zero. */
 export function calculateDebtToIncome(inputs: DebtToIncomeInputs): DebtToIncomeResult {
   // Floor at 0 and treat non-finite (cleared/NaN) fields as 0 so the ratios stay finite.
   const safe = (v: number) => (Number.isFinite(v) ? Math.max(0, v) : 0);
@@ -118,11 +84,7 @@ export function calculateDebtToIncome(inputs: DebtToIncomeInputs): DebtToIncomeR
   };
 }
 
-/**
- * Sensible starting inputs: a 6,000 dollar monthly gross income with a 1,500
- * dollar housing payment and 500 dollars of other debt. Yields a 25 percent
- * front and 33.3 percent back ratio, both inside the conventional zone.
- */
+/** Defaults yield a 25% front-end and 33.3% back-end ratio, both inside the conventional zone. */
 export function getDefaultInputs(): DebtToIncomeInputs {
   return {
     grossMonthlyIncome: 6000,

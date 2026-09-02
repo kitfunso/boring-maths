@@ -1,22 +1,10 @@
-/**
- * Etsy/eBay Fee Calculator - Type Definitions
- *
- * Calculates marketplace fees for Etsy and eBay sellers,
- * providing a side-by-side comparison to help sellers choose
- * the most profitable platform.
- */
+/** Etsy/eBay Fee Calculator - type definitions. Calculates marketplace fees for Etsy and eBay sellers for a side-by-side profitability comparison. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Supported marketplace platforms
- */
 export type Platform = 'etsy' | 'ebay' | 'both';
 
-/**
- * eBay category fee rates (2024)
- * Final value fee percentages vary by category
- */
+/** eBay category IDs; final value fee % varies by category (2024 rates). */
 export type EbayCategory =
   | 'most_categories'
   | 'books_movies_music'
@@ -25,18 +13,12 @@ export type EbayCategory =
   | 'collectibles'
   | 'business_industrial';
 
-/**
- * eBay category configuration
- */
 export interface EbayCategoryConfig {
   id: EbayCategory;
   label: string;
   feeRate: number;
 }
 
-/**
- * eBay category fee rates
- */
 export const EBAY_CATEGORIES: EbayCategoryConfig[] = [
   { id: 'most_categories', label: 'Most Categories', feeRate: 0.1325 },
   { id: 'books_movies_music', label: 'Books, Movies & Music', feeRate: 0.1455 },
@@ -46,32 +28,22 @@ export const EBAY_CATEGORIES: EbayCategoryConfig[] = [
   { id: 'business_industrial', label: 'Business & Industrial', feeRate: 0.1325 },
 ];
 
-/**
- * Input values for the Etsy/eBay Fee Calculator
- */
 export interface EtsyFeeInputs {
-  /** Selected currency (USD, GBP, EUR) */
   currency: Currency;
 
-  /** Item sale price */
   salePrice: number;
 
-  /** Shipping amount charged to buyer */
   shippingCharged: number;
 
-  /** Actual shipping cost to seller */
   shippingCost: number;
 
   /** Cost of goods sold (materials, supplies, etc.) */
   itemCost: number;
 
-  /** Selected platform to compare */
   platform: Platform;
 
-  /** eBay category for fee calculation */
   ebayCategory: EbayCategory;
 
-  /** Whether the sale came from Etsy Offsite Ads */
   etsyOffsiteAds: boolean;
 
   /** Number of items in order (for Etsy listing fee) */
@@ -122,35 +94,23 @@ export interface PlatformFeeBreakdown {
   profitMargin: number;
 }
 
-/**
- * Calculated results from the Etsy/eBay Fee Calculator
- */
 export interface EtsyFeeResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Etsy fee breakdown */
   etsy: PlatformFeeBreakdown;
 
-  /** eBay fee breakdown */
   ebay: PlatformFeeBreakdown;
 
-  /** Which platform has lower fees */
   lowerFeePlatform: 'Etsy' | 'eBay' | 'Same';
 
-  /** Fee savings amount choosing lower fee platform */
   feeSavings: number;
 
-  /** Which platform has higher profit */
   higherProfitPlatform: 'Etsy' | 'eBay' | 'Same';
 
-  /** Profit difference */
   profitDifference: number;
 }
 
-/**
- * Fee structure constants (2024)
- */
+/** Fee structure constants (2024). */
 export const FEE_STRUCTURES = {
   etsy: {
     listingFee: 0.2, // $0.20 per listing
@@ -166,9 +126,6 @@ export const FEE_STRUCTURES = {
   },
 } as const;
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): EtsyFeeInputs {
   const multiplier = currency === 'GBP' ? 0.8 : currency === 'EUR' ? 0.9 : 1;
 
@@ -185,7 +142,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): EtsyFeeInputs {
   };
 }
 
-/**
- * Default input values (USD)
- */
 export const DEFAULT_INPUTS: EtsyFeeInputs = getDefaultInputs('USD');

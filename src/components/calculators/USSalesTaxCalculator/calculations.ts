@@ -1,15 +1,4 @@
-/**
- * US Sales Tax Calculator - pure logic
- *
- * Two modes:
- *  - 'add'    : amount is the pre-tax price. tax = amount * rate; total = amount + tax.
- *  - 'remove' : amount is a tax-inclusive total. net = amount / (1 + rate); tax = amount - net.
- *
- * There is no single national US sales tax rate. State, county and city rates stack,
- * so the user enters their full combined rate. The calculator applies whatever rate is given.
- *
- * No financial advice. Figures are estimates based on the rate the user enters.
- */
+/** US Sales Tax: 'add' mode treats amount as pre-tax (tax = amount*rate, total = amount+tax); 'remove' mode treats amount as tax-inclusive (net = amount/(1+rate)). No single national rate; user enters their full combined state+county+city rate. No financial advice; estimates only. */
 
 export type SalesTaxMode = 'add' | 'remove';
 
@@ -47,23 +36,7 @@ function sanitize(value: number): number {
   return value;
 }
 
-/**
- * Calculate US sales tax.
- *
- * Let rate = salesTaxRate / 100.
- *
- * add mode (amount is pre-tax):
- *   net   = amount
- *   tax   = amount * rate
- *   total = amount + tax
- *
- * remove mode (amount is tax-inclusive):
- *   net   = amount / (1 + rate)
- *   tax   = amount - net
- *   total = amount
- *
- * effectiveRate = net > 0 ? tax / net * 100 : 0
- */
+/** add: net=amount, tax=amount*rate, total=net+tax. remove: net=amount/(1+rate), tax=amount-net, total=amount. effectiveRate=net>0 ? tax/net*100 : 0. rate=salesTaxRate/100. */
 export function calculateSalesTax(inputs: USSalesTaxInputs): USSalesTaxResult {
   const amount = sanitize(inputs.amount);
   const salesTaxRate = sanitize(inputs.salesTaxRate);

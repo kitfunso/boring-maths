@@ -1,21 +1,6 @@
-/**
- * BA peak / off-peak calendar for Avios reward flights - 2026.
- * PEAK dates below; every other 2026 date is off-peak.
- * Source: https://awardwallet.com/airlines/avios-peak-calendar/ (fetched 2026-07-19),
- * corroborated by https://www.aviosintelligence.com/reports/avios-peak-off-peak-dates.
- * 2027 calendar is not yet published in text form - dates beyond
- * CALENDAR_PUBLISHED_THROUGH are treated as "could be either season".
- *
- * Annual update checklist (do this when the next year's calendar publishes):
- * (a) Append the new year's PEAK_RANGES to this file; PEAK_INTERVALS and
- *     isPeakIsoDate below rebuild from them automatically.
- * (b) Bump CALENDAR_PUBLISHED_THROUGH.
- * (c) Bump DATA_LAST_VERIFIED.
- * (d) Re-verify prices against the source URL in destinations.ts and update
- *     the anchors/tier pins in the test file if BA repriced.
- * The monthly avios-data-freshness workflow flags source drift automatically;
- * after re-verifying, reseed baselines: node scripts/data/check-avios-sources.mjs --update
- */
+/** BA peak / off-peak calendar. Dates not listed in a published year are off-peak; dates after
+ *  CALENDAR_PUBLISHED_THROUGH could be either season. Sources, and the annual update steps,
+ *  are in docs/avios-calendar.md. */
 
 export interface DateRange {
   readonly from: string; // ISO yyyy-mm-dd inclusive
@@ -69,11 +54,7 @@ const PEAK_INTERVALS: readonly { start: number; end: number }[] = PEAK_RANGES_20
   end: toUtc(r.to),
 }));
 
-/**
- * Whether an ISO yyyy-mm-dd date falls within a published peak range.
- * Shared by the calculation layer and the date-range calendar UI so there is
- * one definition of "peak" across the finder.
- */
+/** Shared by the calculation layer and the date-range calendar UI, so there is one definition of "peak" across the finder. */
 export function isPeakIsoDate(iso: string): boolean {
   const t = toUtc(iso);
   return PEAK_INTERVALS.some((p) => t >= p.start && t <= p.end);

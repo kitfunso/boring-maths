@@ -1,26 +1,14 @@
-/**
- * Savings Goal Calculator - Type Definitions
- *
- * Calculates monthly contributions needed to reach a savings goal,
- * accounting for compound interest and inflation.
- */
+/** Savings Goal Calculator: monthly contribution needed to reach a target, with compound interest and inflation adjustment, for USD/GBP/EUR. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Input values for the Savings Goal Calculator
- */
 export interface SavingsGoalInputs {
-  /** Selected currency (USD, GBP, EUR) */
   currency: Currency;
 
-  /** Target savings goal amount */
   goalAmount: number;
 
-  /** Current savings balance */
   currentSavings: number;
 
-  /** Time to reach goal in years */
   timelineYears: number;
 
   /** Expected annual return rate as decimal (0.07 = 7%) */
@@ -29,30 +17,20 @@ export interface SavingsGoalInputs {
   /** Expected annual inflation rate as decimal (0.03 = 3%) */
   inflationRate: number;
 
-  /** Contribution frequency */
   contributionFrequency: 'monthly' | 'biweekly' | 'weekly';
 }
 
-/**
- * Calculated results from the Savings Goal Calculator
- */
 export interface SavingsGoalResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Required contribution per period */
   contributionAmount: number;
 
-  /** Contribution frequency label */
   contributionFrequency: string;
 
-  /** Total contributions over the period */
   totalContributions: number;
 
-  /** Total interest earned */
   totalInterest: number;
 
-  /** Final balance at goal date */
   finalBalance: number;
 
   /** Inflation-adjusted goal (real value) */
@@ -61,7 +39,6 @@ export interface SavingsGoalResult {
   /** Real return rate (after inflation) */
   realReturnRate: number;
 
-  /** Monthly breakdown for chart */
   projectionData: Array<{
     month: number;
     balance: number;
@@ -70,9 +47,6 @@ export interface SavingsGoalResult {
   }>;
 }
 
-/**
- * Get default input values for a given currency/region
- */
 export function getDefaultInputs(currency: Currency = 'USD'): SavingsGoalInputs {
   const goalAmounts: Record<Currency, number> = {
     USD: 50000,
@@ -91,7 +65,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): SavingsGoalInputs 
   };
 }
 
-/**
- * Default input values (US)
- */
 export const DEFAULT_INPUTS: SavingsGoalInputs = getDefaultInputs('USD');

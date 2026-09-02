@@ -1,25 +1,12 @@
-/**
- * Subscription Audit Calculator - Type Definitions
- *
- * Track and analyze subscription spending with usage ratings
- * to identify savings opportunities.
- */
+/** Subscription Audit: tracks subscriptions with usage ratings to flag keep/review/cancel candidates and estimate savings, for USD/GBP/EUR. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Billing frequency options
- */
 export type BillingFrequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
 
-/**
- * Usage rating (how often you actually use the subscription)
- */
+/** Usage rating: how often you actually use the subscription. */
 export type UsageRating = 'daily' | 'weekly' | 'monthly' | 'rarely' | 'never';
 
-/**
- * Subscription category
- */
 export type SubscriptionCategory =
   | 'streaming'
   | 'music'
@@ -32,9 +19,6 @@ export type SubscriptionCategory =
   | 'cloud'
   | 'other';
 
-/**
- * Individual subscription entry
- */
 export interface Subscription {
   id: string;
   name: string;
@@ -45,43 +29,29 @@ export interface Subscription {
   essential: boolean;
 }
 
-/**
- * Input values for the Subscription Audit Calculator
- */
 export interface SubscriptionAuditInputs {
-  /** Selected currency */
   currency: Currency;
 
-  /** List of subscriptions */
   subscriptions: Subscription[];
 
   /** User's estimated monthly spend (for comparison) */
   estimatedMonthlySpend: number;
 }
 
-/**
- * Analyzed subscription with calculated values
- */
 export interface AnalyzedSubscription extends Subscription {
   /** Monthly cost (normalized) */
   monthlyCost: number;
 
-  /** Yearly cost */
   yearlyCost: number;
 
   /** Cost per use (based on usage rating) */
   costPerUse: number;
 
-  /** Recommendation */
   recommendation: 'keep' | 'review' | 'cancel';
 
-  /** Reason for recommendation */
   reason: string;
 }
 
-/**
- * Category breakdown
- */
 export interface CategoryBreakdown {
   category: SubscriptionCategory;
   label: string;
@@ -91,20 +61,13 @@ export interface CategoryBreakdown {
   percentage: number;
 }
 
-/**
- * Calculated results from the Subscription Audit Calculator
- */
 export interface SubscriptionAuditResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Total monthly cost */
   totalMonthly: number;
 
-  /** Total yearly cost */
   totalYearly: number;
 
-  /** User's estimate vs actual */
   estimateComparison: {
     estimated: number;
     actual: number;
@@ -112,13 +75,10 @@ export interface SubscriptionAuditResult {
     percentageOff: number;
   };
 
-  /** Analyzed subscriptions with recommendations */
   analyzedSubscriptions: AnalyzedSubscription[];
 
-  /** Category breakdown */
   categoryBreakdown: CategoryBreakdown[];
 
-  /** Potential savings */
   potentialSavings: {
     monthly: number;
     yearly: number;
@@ -126,7 +86,6 @@ export interface SubscriptionAuditResult {
     subscriptionsToReview: number;
   };
 
-  /** Summary stats */
   summary: {
     totalSubscriptions: number;
     essentialCount: number;
@@ -136,9 +95,6 @@ export interface SubscriptionAuditResult {
   };
 }
 
-/**
- * Category labels
- */
 export const CATEGORY_LABELS: Record<SubscriptionCategory, string> = {
   streaming: 'Streaming (Video)',
   music: 'Music & Audio',
@@ -152,9 +108,6 @@ export const CATEGORY_LABELS: Record<SubscriptionCategory, string> = {
   other: 'Other',
 };
 
-/**
- * Common subscription templates
- */
 export const COMMON_SUBSCRIPTIONS: Array<{
   name: string;
   cost: number;
@@ -182,16 +135,10 @@ export const COMMON_SUBSCRIPTIONS: Array<{
   { name: 'Costco Membership', cost: 65, frequency: 'yearly', category: 'shopping' },
 ];
 
-/**
- * Generate unique ID
- */
 export function generateId(): string {
   return Math.random().toString(36).substring(2, 9);
 }
 
-/**
- * Create a new subscription
- */
 export function createSubscription(partial?: Partial<Subscription>): Subscription {
   return {
     id: generateId(),
@@ -205,11 +152,7 @@ export function createSubscription(partial?: Partial<Subscription>): Subscriptio
   };
 }
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): SubscriptionAuditInputs {
-  // Adjust costs for currency
   const multiplier = currency === 'GBP' ? 0.8 : currency === 'EUR' ? 0.92 : 1;
 
   return {
@@ -247,7 +190,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): SubscriptionAuditI
   };
 }
 
-/**
- * Default input values
- */
 export const DEFAULT_INPUTS: SubscriptionAuditInputs = getDefaultInputs('USD');
