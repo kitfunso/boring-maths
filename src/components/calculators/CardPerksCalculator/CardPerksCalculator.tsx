@@ -470,7 +470,12 @@ export default function CardPerksCalculator() {
             </div>
 
             <div className="bg-[var(--color-night)] rounded-xl p-6">
-              <div className="overflow-x-auto">
+              <div
+                className="overflow-x-auto"
+                tabIndex={0}
+                role="region"
+                aria-label="Ranked cards table, scrolls sideways"
+              >
                 <table className="w-full text-sm" aria-label="Cards ranked by estimated net value">
                   <thead>
                     <tr className="text-[var(--color-muted)] text-xs uppercase tracking-wider">

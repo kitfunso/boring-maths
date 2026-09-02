@@ -30,7 +30,12 @@ const cell = 'text-right py-2 pl-3 tabular-nums whitespace-nowrap';
 const cellLeft = 'py-2';
 ---
 
-<div class="overflow-x-auto">
+<div
+  class="overflow-x-auto"
+  tabindex="0"
+  role="region"
+  aria-label="Card facts table, scrolls sideways"
+>
   <table class="w-full text-sm">
     <caption class="sr-only">{caption}</caption>
     <thead>
