@@ -1,26 +1,7 @@
-/**
- * LMTD Calculator - Calculation Logic
- *
- * LMTD = (ΔT₁ - ΔT₂) / ln(ΔT₁/ΔT₂)
- *
- * Where:
- * ΔT₁ = Temperature difference at one end of heat exchanger
- * ΔT₂ = Temperature difference at other end
- *
- * For counter-flow:
- * ΔT₁ = T_hot_in - T_cold_out
- * ΔT₂ = T_hot_out - T_cold_in
- *
- * For parallel-flow:
- * ΔT₁ = T_hot_in - T_cold_in
- * ΔT₂ = T_hot_out - T_cold_out
- */
+/** LMTD = (ΔT1 - ΔT2) / ln(ΔT1/ΔT2). Counter-flow: ΔT1 = T_hot_in - T_cold_out, ΔT2 = T_hot_out - T_cold_in. Parallel-flow: ΔT1 = T_hot_in - T_cold_in, ΔT2 = T_hot_out - T_cold_out. */
 
 import type { LMTDInputs, LMTDResult } from './types';
 
-/**
- * Calculate temperature differences based on flow arrangement
- */
 function calculateDeltaTs(inputs: LMTDInputs): { deltaT1: number; deltaT2: number } {
   const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement } = inputs;
 
@@ -39,11 +20,7 @@ function calculateDeltaTs(inputs: LMTDInputs): { deltaT1: number; deltaT2: numbe
   }
 }
 
-/**
- * Calculate basic LMTD
- */
 function calculateBasicLMTD(deltaT1: number, deltaT2: number): number {
-  // Handle edge cases
   if (deltaT1 <= 0 || deltaT2 <= 0) {
     return 0; // Invalid - temperature cross
   }
@@ -56,10 +33,7 @@ function calculateBasicLMTD(deltaT1: number, deltaT2: number): number {
   return (deltaT1 - deltaT2) / Math.log(deltaT1 / deltaT2);
 }
 
-/**
- * Calculate F correction factor for shell and tube exchangers
- * Using the P-R method (Kern's method)
- */
+/** F correction factor for shell-and-tube exchangers using the P-R method (Kern's method). */
 function calculateCorrectionFactor(inputs: LMTDInputs): number {
   const { hotInlet, hotOutlet, coldInlet, coldOutlet, flowArrangement, shellPasses } = inputs;
 
@@ -68,9 +42,7 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
     return 1.0;
   }
 
-  // Calculate P and R parameters
-  // P = (t2 - t1) / (T1 - t1) - tube side effectiveness
-  // R = (T1 - T2) / (t2 - t1) - heat capacity ratio
+  // P = (t2-t1)/(T1-t1): tube side effectiveness; R = (T1-T2)/(t2-t1): heat capacity ratio.
   const P = (coldOutlet - coldInlet) / (hotInlet - coldInlet);
   const R = (hotInlet - hotOutlet) / (coldOutlet - coldInlet);
 
@@ -97,7 +69,6 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
   // For shell and tube (1 shell pass, even number of tube passes)
   if (flowArrangement === 'shellAndTube') {
     if (shellPasses === 1) {
-      // 1 shell pass formula
       const sqrt = Math.sqrt(R * R + 1);
       void (Math.sqrt(R * R + 1) / (R - 1)); // S factor for reference
 
@@ -127,10 +98,7 @@ function calculateCorrectionFactor(inputs: LMTDInputs): number {
   return 0.9; // Default
 }
 
-/**
- * Calculate effectiveness (ε) of the heat exchanger
- * ε = Q_actual / Q_max
- */
+/** Effectiveness (ε) of the heat exchanger: ε = Q_actual / Q_max. */
 function calculateEffectiveness(inputs: LMTDInputs): number {
   const { hotInlet, hotOutlet, coldInlet, coldOutlet } = inputs;
 
@@ -147,23 +115,17 @@ function calculateEffectiveness(inputs: LMTDInputs): number {
   return Math.min(actualDelta / maxDelta, 1.0);
 }
 
-/**
- * Validate temperature inputs
- */
 function validateInputs(inputs: LMTDInputs): { isValid: boolean; message: string } {
   const { hotInlet, hotOutlet, coldInlet, coldOutlet } = inputs;
 
-  // Hot inlet should be > hot outlet
   if (hotInlet <= hotOutlet) {
     return { isValid: false, message: 'Hot inlet temperature must be greater than hot outlet' };
   }
 
-  // Cold outlet should be > cold inlet
   if (coldOutlet <= coldInlet) {
     return { isValid: false, message: 'Cold outlet temperature must be greater than cold inlet' };
   }
 
-  // Check for temperature cross
   if (hotOutlet < coldInlet) {
     return { isValid: false, message: 'Temperature cross detected - hot outlet below cold inlet' };
   }
@@ -176,33 +138,24 @@ function validateInputs(inputs: LMTDInputs): { isValid: boolean; message: string
   return { isValid: true, message: 'Valid heat exchanger configuration' };
 }
 
-/**
- * Calculate LMTD and related parameters
- */
 export function calculateLMTD(inputs: LMTDInputs): LMTDResult {
   const validation = validateInputs(inputs);
 
-  // Calculate temperature differences
   const { deltaT1, deltaT2 } = calculateDeltaTs(inputs);
 
-  // Calculate basic LMTD
   const lmtd = calculateBasicLMTD(deltaT1, deltaT2);
 
-  // Calculate correction factor
   const correctionFactor = calculateCorrectionFactor(inputs);
 
-  // Calculate corrected LMTD
   const correctedLMTD = lmtd * correctionFactor;
 
-  // Calculate effectiveness
   const effectiveness = calculateEffectiveness(inputs);
 
-  // Calculate heat capacity ratio (R)
   const { hotInlet, hotOutlet, coldInlet, coldOutlet } = inputs;
   const heatCapacityRatio =
     coldOutlet - coldInlet !== 0 ? (hotInlet - hotOutlet) / (coldOutlet - coldInlet) : 1;
 
-  // Calculate NTU (Number of Transfer Units) - approximate
+  // NTU (Number of Transfer Units), approximate.
   const ntu = effectiveness > 0 && effectiveness < 1 ? -Math.log(1 - effectiveness) : 0;
 
   return {
@@ -219,16 +172,10 @@ export function calculateLMTD(inputs: LMTDInputs): LMTDResult {
   };
 }
 
-/**
- * Format temperature for display
- */
 export function formatTemperature(value: number, unit: '°C' | '°F'): string {
   return `${value.toFixed(1)}${unit}`;
 }
 
-/**
- * Convert temperature between units
- */
 export function convertTemperature(value: number, from: 'C' | 'F', to: 'C' | 'F'): number {
   if (from === to) return value;
   if (from === 'C' && to === 'F') return (value * 9) / 5 + 32;

@@ -1,22 +1,14 @@
-// Single source of truth for the em-dash house-style sweep over Astro page
-// frontmatter. Both the codemod (scripts/codemods/strip-title-em-dashes.mjs)
-// and the guard test (tests/seo/no-em-dashes.test.ts) import the matchers and
-// transforms from here so the detection regex and the rewrite never drift apart.
-//
-// Importing this module has NO side effects (pure exports only).
+// Shared by the codemod (scripts/codemods/strip-title-em-dashes.mjs) and the
+// guard test (tests/seo/no-em-dashes.test.ts) so the em-dash detection regex
+// and rewrite logic never drift apart. Pure exports, no side effects.
 
 export const EM = '—'; // em dash: —
 
-// Captures the quoted string body directly (group 2) instead of stopping at the
-// first semicolon, which would leave the em dash untouched in a value like
-// 'A; B — C'. The `s` flag lets the body span newlines (descriptions are often
-// wrapped across several lines in the frontmatter).
+// Captures the quoted body directly (not up to the first semicolon) so a mid-string em dash like in 'A; B — C' isn't missed; the `s` flag lets descriptions span multiple lines.
 export const TITLE_RE = /const title\s*=\s*(['"`])((?:\\.|(?!\1).)*)\1/gs;
 export const DESCRIPTION_RE = /const description\s*=\s*(['"`])((?:\\.|(?!\1).)*)\1/gs;
 
-// Titles: the first em dash becomes a colon when the lead-in has no colon yet
-// (an SEO title reads as "Name: subtitle"); if a colon already precedes the em
-// dash, every em dash becomes " - " instead.
+// Titles: the first em dash becomes a colon if no colon precedes it yet (reads as "Name: subtitle"); otherwise every em dash becomes " - ".
 export function transformTitleBody(body) {
   if (!body.includes(EM)) return body;
   return !body.slice(0, body.indexOf(EM)).includes(':')
@@ -30,11 +22,7 @@ export function transformDescriptionBody(body) {
   return body.replace(/\s*—\s*/g, ' - ');
 }
 
-/**
- * Apply `transformBody` to every quoted const matched by `re` in `src`.
- * Returns the rewritten source (identical reference-wise only if nothing
- * changed, so callers can compare `next !== src`).
- */
+/** Applies transformBody to every quoted const matched by re in src; returns the same reference if nothing changed, so callers can compare `next !== src`. */
 export function rewriteConsts(src, re, transformBody) {
   return src.replace(re, (full, quote, body) => {
     const next = transformBody(body);

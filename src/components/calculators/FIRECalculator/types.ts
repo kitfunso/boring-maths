@@ -1,50 +1,29 @@
-/**
- * FIRE Calculator Types
- *
- * Types for Financial Independence, Retire Early calculations.
- * Supports multiple FIRE variants: Lean, Regular, Fat, and Coast FIRE.
- */
+/** FIRE Calculator types: Financial Independence Retire Early, covering Lean, Regular, Fat, and Coast FIRE variants. */
 
 import { type Currency } from '../../../lib/regions';
 
-/**
- * Risk tolerance for investment return assumptions
- */
 export type RiskProfile = 'conservative' | 'moderate' | 'aggressive';
 
-/**
- * FIRE variant types
- */
 export type FIREType = 'lean' | 'regular' | 'fat' | 'coast';
 
-/**
- * Input parameters for FIRE calculations
- */
 export interface FIRECalculatorInputs {
-  // Current financial situation
   currentAge: number;
   currentSavings: number;
   annualIncome: number;
   annualExpenses: number;
   monthlySavings: number;
 
-  // Goals
   targetRetirementAge: number;
   desiredRetirementExpenses: number; // Annual expenses in retirement
 
-  // Assumptions
   expectedReturn: number; // Pre-retirement return (as decimal, e.g., 0.07)
   inflationRate: number; // As decimal, e.g., 0.03
   safeWithdrawalRate: number; // As decimal, e.g., 0.04 for 4% rule
   riskProfile: RiskProfile;
 
-  // Currency
   currency: Currency;
 }
 
-/**
- * FIRE number breakdown by variant
- */
 export interface FIRENumbers {
   lean: number; // 25x essential expenses only
   regular: number; // 25x current expenses
@@ -52,9 +31,6 @@ export interface FIRENumbers {
   coast: number; // Amount needed now to coast to regular retirement
 }
 
-/**
- * Year-by-year projection data point
- */
 export interface ProjectionDataPoint {
   age: number;
   year: number;
@@ -65,9 +41,6 @@ export interface ProjectionDataPoint {
   percentToFIRE: number;
 }
 
-/**
- * Milestone achievement info
- */
 export interface FIREMilestone {
   type: FIREType;
   label: string;
@@ -77,9 +50,6 @@ export interface FIREMilestone {
   achievable: boolean;
 }
 
-/**
- * Savings rate analysis
- */
 export interface SavingsRateAnalysis {
   currentRate: number; // As percentage
   requiredRateForTarget: number; // Rate needed to hit target age
@@ -87,39 +57,28 @@ export interface SavingsRateAnalysis {
   monthlyShortfall: number; // Additional monthly savings needed
 }
 
-/**
- * Complete calculation results
- */
 export interface FIRECalculatorResult {
-  // Core FIRE numbers
   fireNumbers: FIRENumbers;
 
-  // Primary metrics
   yearsToFIRE: number;
   ageAtFIRE: number;
   totalNeeded: number; // Based on desired retirement expenses
   currentProgress: number; // Percentage toward goal
 
-  // Savings analysis
   savingsRate: SavingsRateAnalysis;
   totalContributions: number; // Sum of all contributions until FIRE
   totalGrowth: number; // Investment growth until FIRE
 
-  // Milestones
   milestones: FIREMilestone[];
 
-  // Coast FIRE specifics
   coastFIREAge: number | null; // Age when you can stop saving
   coastFIREAmount: number; // Amount needed to coast
 
-  // Projections
   projections: ProjectionDataPoint[];
 
-  // Monthly breakdown
   monthlyPassiveIncome: number; // At FIRE
   monthlyExpensesInRetirement: number;
 
-  // Metadata
   currency: Currency;
   assumptions: {
     returnRate: number;
@@ -129,9 +88,6 @@ export interface FIRECalculatorResult {
   };
 }
 
-/**
- * Get default inputs based on currency
- */
 export function getDefaultInputs(currency: Currency): FIRECalculatorInputs {
   const defaults = {
     USD: {

@@ -1,67 +1,43 @@
-/**
- * Square Footage Calculator - Type Definitions
- *
- * Calculate area for different room shapes with unit conversion and cost estimation.
- * Target Keyword: "square footage calculator rooms cost estimate"
- */
+/** Square Footage Calculator - Type Definitions: area for different room shapes, with unit conversion and cost estimation. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Supported room shapes
- */
 export type RoomShape = 'rectangle' | 'circle' | 'triangle' | 'l-shape';
 
-/**
- * Measurement unit system
- */
 export type UnitSystem = 'imperial' | 'metric';
 
-/**
- * Circle measurement mode
- */
 export type CircleMode = 'radius' | 'diameter';
 
-/**
- * Input values for the Square Footage Calculator
- */
 export interface SquareFootageCalculatorInputs {
-  /** Selected currency for cost estimation */
   currency: Currency;
 
-  /** Room shape */
   shape: RoomShape;
 
-  /** Measurement unit system */
   unitSystem: UnitSystem;
 
-  /** Circle measurement mode */
   circleMode: CircleMode;
 
-  // Rectangle dimensions
-  /** Rectangle length - feet portion (imperial) or metres (metric) */
+  /** Feet (imperial) or metres (metric). */
   rectLengthMain: number;
-  /** Rectangle length - inches portion (imperial only) */
+  /** Inches portion, imperial only. */
   rectLengthInches: number;
-  /** Rectangle width - feet portion (imperial) or metres (metric) */
+  /** Feet (imperial) or metres (metric). */
   rectWidthMain: number;
-  /** Rectangle width - inches portion (imperial only) */
+  /** Inches portion, imperial only. */
   rectWidthInches: number;
 
-  // Circle dimensions
-  /** Circle radius/diameter - feet portion (imperial) or metres (metric) */
+  /** Feet (imperial) or metres (metric); radius or diameter per circleMode. */
   circleMain: number;
-  /** Circle radius/diameter - inches portion (imperial only) */
+  /** Inches portion, imperial only. */
   circleInches: number;
 
-  // Triangle dimensions
-  /** Triangle base - feet portion (imperial) or metres (metric) */
+  /** Feet (imperial) or metres (metric). */
   triBaseMain: number;
-  /** Triangle base - inches portion (imperial only) */
+  /** Inches portion, imperial only. */
   triBaseInches: number;
-  /** Triangle height - feet portion (imperial) or metres (metric) */
+  /** Feet (imperial) or metres (metric). */
   triHeightMain: number;
-  /** Triangle height - inches portion (imperial only) */
+  /** Inches portion, imperial only. */
   triHeightInches: number;
 
   // L-Shape dimensions (two rectangles)
@@ -78,42 +54,27 @@ export interface SquareFootageCalculatorInputs {
   lWidth2Main: number;
   lWidth2Inches: number;
 
-  /** Price per unit area for cost estimation */
   pricePerUnit: number;
 
-  /** Whether cost estimation is enabled */
   showCostEstimate: boolean;
 }
 
-/**
- * Calculated results from the Square Footage Calculator
- */
 export interface SquareFootageCalculatorResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Area in square feet */
   sqFt: number;
 
-  /** Area in square metres */
   sqM: number;
 
-  /** Area in square yards */
   sqYd: number;
 
-  /** Estimated total cost */
   totalCost: number;
 
-  /** Unit system used for cost calculation */
   costUnitSystem: UnitSystem;
 
-  /** Price per unit used */
   pricePerUnit: number;
 }
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): SquareFootageCalculatorInputs {
   return {
     currency,
@@ -148,7 +109,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): SquareFootageCalcu
   };
 }
 
-/**
- * Default input values
- */
 export const DEFAULT_INPUTS: SquareFootageCalculatorInputs = getDefaultInputs('USD');

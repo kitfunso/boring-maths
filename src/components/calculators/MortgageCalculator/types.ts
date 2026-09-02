@@ -1,25 +1,13 @@
-/**
- * Mortgage Calculator - Type Definitions
- *
- * Calculates monthly mortgage payments with principal and interest breakdown.
- * Supports multiple currencies.
- */
+/** Mortgage Calculator: monthly payment breakdown (principal, interest, tax, insurance, HOA) across USD/GBP/EUR. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Input values for the Mortgage Calculator
- */
 export interface MortgageInputs {
-  /** Selected currency */
   currency: Currency;
-  /** Home purchase price */
   homePrice: number;
-  /** Down payment amount */
   downPayment: number;
   /** Annual interest rate as decimal (0.065 = 6.5%) */
   interestRate: number;
-  /** Loan term in years */
   loanTermYears: number;
   /** Annual property tax (optional) */
   propertyTax: number;
@@ -29,38 +17,25 @@ export interface MortgageInputs {
   hoaFees: number;
 }
 
-/**
- * Calculated results
- */
 export interface MortgageResult {
   currency: Currency;
   /** Total loan amount (price - down payment) */
   loanAmount: number;
   /** Monthly principal + interest payment */
   monthlyPI: number;
-  /** Monthly property tax */
   monthlyTax: number;
-  /** Monthly insurance */
   monthlyInsurance: number;
-  /** Monthly HOA fees */
   monthlyHOA: number;
-  /** Total monthly payment */
   monthlyTotal: number;
   /** Total payments over loan life */
   totalPayments: number;
-  /** Total interest paid */
   totalInterest: number;
-  /** Down payment percentage */
   downPaymentPercent: number;
   /** Loan-to-value ratio */
   ltvRatio: number;
 }
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): MortgageInputs {
-  // Region-specific home prices
   const homePrices: Record<Currency, number> = {
     USD: 350000,
     GBP: 280000,

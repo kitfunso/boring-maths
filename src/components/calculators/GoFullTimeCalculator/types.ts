@@ -1,24 +1,9 @@
-/**
- * Go Full-Time Calculator - Type Definitions
- *
- * Calculator to determine when you can quit your job to pursue
- * freelancing or a side hustle full-time.
- */
+/** Go Full-Time Calculator - Type Definitions: when you can quit your job to pursue freelancing or a side hustle full-time. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Risk tolerance levels for going full-time
- */
 export type RiskTolerance = 'conservative' | 'moderate' | 'aggressive';
 
-/**
- * Risk tolerance thresholds based on research
- *
- * Conservative: 12 months runway + side income matching expenses
- * Moderate: 6 months runway + side income at 75% of expenses
- * Aggressive: 3 months runway + side income at 50% of expenses
- */
 export interface RiskThreshold {
   runwayMonths: number;
   incomePercentOfExpenses: number;
@@ -47,41 +32,31 @@ export const RISK_THRESHOLDS: Record<RiskTolerance, RiskThreshold> = {
   },
 };
 
-/**
- * Input values for the Go Full-Time Calculator
- */
 export interface GoFullTimeInputs {
-  /** Selected currency */
   currency: Currency;
 
-  /** Current annual salary (after-tax take-home) */
+  /** After-tax take-home. */
   annualSalary: number;
 
-  /** Monthly value of benefits (health insurance, 401k match, etc.) */
+  /** Monthly value (health insurance, 401k match, etc.) */
   monthlyBenefitsValue: number;
 
-  /** Monthly living expenses (essential costs) */
+  /** Essential monthly costs. */
   monthlyExpenses: number;
 
-  /** Current savings/runway fund */
   currentSavings: number;
 
-  /** Current monthly side income */
   monthlySideIncome: number;
 
   /** Expected monthly growth rate of side income (as decimal, e.g., 0.10 = 10%) */
   monthlyGrowthRate: number;
 
-  /** Desired safety buffer in months of expenses */
+  /** Months of expenses. */
   desiredSafetyBuffer: number;
 
-  /** Selected risk tolerance */
   riskTolerance: RiskTolerance;
 }
 
-/**
- * Projection data point for timeline visualization
- */
 export interface ProjectionPoint {
   month: number;
   sideIncome: number;
@@ -89,9 +64,6 @@ export interface ProjectionPoint {
   runway: number;
 }
 
-/**
- * Scenario analysis for different risk levels
- */
 export interface ScenarioAnalysis {
   riskLevel: RiskTolerance;
   savingsNeeded: number;
@@ -100,88 +72,57 @@ export interface ScenarioAnalysis {
   isReady: boolean;
 }
 
-/**
- * Calculated results from the Go Full-Time Calculator
- */
 export interface GoFullTimeResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  // === Current State ===
-
-  /** Monthly salary equivalent (after-tax) */
+  /** After-tax. */
   monthlySalary: number;
 
-  /** Total monthly compensation (salary + benefits) */
+  /** Salary + benefits. */
   monthlyTotalCompensation: number;
 
-  /** Current runway in months (if you quit today) */
+  /** If you quit today. */
   currentRunwayMonths: number;
 
-  /** Break-even side income (minimum to sustain without savings) */
+  /** Minimum to sustain without savings. */
   breakEvenSideIncome: number;
 
-  // === Gap Analysis ===
-
-  /** Income gap: how much more per month needed to match total compensation */
+  /** Per month, to match total compensation. */
   incomeGapToSalary: number;
 
-  /** Income gap: how much more per month needed to cover expenses */
+  /** Per month, to cover expenses. */
   incomeGapToExpenses: number;
 
-  // === Projections ===
-
-  /** Months until side income crosses expenses (crossover point) */
   monthsToCrossover: number;
 
-  /** Months until side income matches total compensation */
   monthsToFullReplacement: number;
 
-  /** Projected date when side income crosses expenses */
   crossoverDate: Date | null;
 
-  /** Projected date when side income matches compensation */
   fullReplacementDate: Date | null;
 
-  // === Recommendations ===
-
-  /** Recommended quit date based on risk tolerance and safety buffer */
+  /** Based on risk tolerance + safety buffer. */
   recommendedQuitDate: Date | null;
 
-  /** Months until recommended quit date */
   monthsToRecommendedQuit: number;
 
-  /** Savings needed to quit at selected risk level */
   savingsNeededForRisk: number;
 
-  /** Is the user ready to quit at their selected risk level? */
   isReadyToQuit: boolean;
 
-  /** Percentage progress toward being ready */
   readinessPercent: number;
 
-  // === Scenario Comparison ===
-
-  /** Analysis for all three risk levels */
   scenarios: ScenarioAnalysis[];
 
-  // === Projections for visualization ===
-
-  /** 24-month projection data */
+  /** 24-month projection. */
   projections: ProjectionPoint[];
 
-  // === Motivational ===
-
-  /** Status message based on readiness */
   statusMessage: string;
 
-  /** Encouragement level (0-100) */
+  /** 0-100. */
   encouragementLevel: number;
 }
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): GoFullTimeInputs {
   const defaults: Record<Currency, Partial<GoFullTimeInputs>> = {
     USD: {
@@ -220,7 +161,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): GoFullTimeInputs {
   };
 }
 
-/**
- * Default input values (US)
- */
 export const DEFAULT_INPUTS: GoFullTimeInputs = getDefaultInputs('USD');

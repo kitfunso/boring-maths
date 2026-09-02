@@ -1,9 +1,4 @@
-/**
- * BTU Calculator - Type Definitions
- *
- * Estimate the cooling (air conditioning) or heating BTU/hr capacity needed
- * to condition a room, based on floor area with standard adjustment factors.
- */
+/** BTU Calculator types: estimate cooling (air conditioning) or heating BTU/hr capacity for a room, from floor area with standard adjustment factors. */
 
 import type { Currency } from '../../../lib/regions';
 
@@ -42,7 +37,6 @@ export interface BTUCalculatorInputs {
 export interface BTUCalculatorResult {
   currency: Currency;
 
-  /** Floor area in square feet. */
   areaSqFt: number;
 
   /** Base BTU/hr before any adjustments (area x base rate). */
@@ -55,7 +49,6 @@ export interface BTUCalculatorResult {
   /** Cooling capacity in "tons" (1 ton = 12,000 BTU/hr). Cooling mode only. */
   tons: number;
 
-  /** Whether inputs are valid / non-degenerate. */
   isValid: boolean;
   /** Warning message when inputs are degenerate (empty when valid). */
   warning: string;

@@ -1,26 +1,17 @@
-/**
- * Job Offer Comparison Calculator - Type Definitions
- *
- * Compare two job offers by total compensation including salary,
- * benefits, equity, and quality of life factors.
- */
+/** Job Offer Comparison Calculator - Type Definitions: compares two offers by total compensation including salary, benefits, equity, and quality of life factors. */
 
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Individual job offer details
- */
 export interface JobOffer {
-  /** Job title or company name for display */
+  /** Job title or company name, for display. */
   name: string;
 
-  /** Base annual salary */
   baseSalary: number;
 
   /** Expected annual bonus (as decimal, e.g., 0.10 = 10%) */
   bonusPercentage: number;
 
-  /** Annual equity/RSU value (vested per year) */
+  /** Equity/RSU value vested per year. */
   annualEquity: number;
 
   /** Employer 401k match percentage (as decimal, e.g., 0.06 = 6%) */
@@ -29,19 +20,17 @@ export interface JobOffer {
   /** Maximum salary matched for 401k (as decimal, e.g., 0.06 = 6% of salary) */
   match401kLimit: number;
 
-  /** Monthly health insurance cost (employee contribution) */
+  /** Monthly cost, employee contribution. */
   healthInsuranceCost: number;
 
-  /** Employer health insurance contribution (annual value) */
+  /** Employer contribution, annual (healthInsuranceCost above is monthly). */
   healthBenefitValue: number;
 
-  /** Annual PTO days */
   ptoDays: number;
 
-  /** One-way commute miles */
+  /** One-way, miles. */
   commuteDistance: number;
 
-  /** Days per week in office (for hybrid/remote) */
   officeDaysPerWeek: number;
 
   /** Other annual benefits (gym, transit, etc.) */
@@ -51,100 +40,77 @@ export interface JobOffer {
   signingBonus: number;
 }
 
-/**
- * Input values for the Job Offer Comparison Calculator
- */
 export interface JobOfferComparisonInputs {
-  /** Selected currency */
   currency: Currency;
 
-  /** First job offer (typically current or primary offer) */
+  /** First offer (typically current/primary). */
   offer1: JobOffer;
 
-  /** Second job offer (comparison offer) */
+  /** Second offer (comparison). */
   offer2: JobOffer;
 
-  /** User's hourly rate for time value calculations */
+  /** Hourly rate, for time-value calculations. */
   hourlyTimeValue: number;
 
-  /** Cost per mile for commute (gas, wear, etc.) */
+  /** Cost per mile (gas, wear, etc.) */
   costPerMile: number;
 
-  /** Include commute time in comparison */
   includeCommuteTime: boolean;
 
   /** User's contribution to 401k (as decimal) */
   contribution401k: number;
 }
 
-/**
- * Calculated values for a single offer
- */
 export interface OfferCalculation {
-  /** Base salary */
   baseSalary: number;
 
-  /** Expected bonus amount */
   bonusAmount: number;
 
-  /** Annual equity value */
   equityValue: number;
 
-  /** 401k match value */
   match401kValue: number;
 
-  /** Health benefits net value (employer contribution - employee cost) */
+  /** Net value (employer contribution minus employee cost). */
   healthBenefitNet: number;
 
-  /** PTO monetary value */
   ptoValue: number;
 
-  /** Annual commute cost */
   commuteCost: number;
 
   /** Value of commute time (opportunity cost) */
   commuteTimeValue: number;
 
-  /** Other benefits value */
   otherBenefitsValue: number;
 
-  /** Signing bonus (prorated over first year) */
+  /** Prorated over first year. */
   signingBonusValue: number;
 
-  /** Total compensation (cash) */
   totalCashComp: number;
 
-  /** Total compensation (all-in) */
+  /** All-in (vs cash-only above). */
   totalComp: number;
 
-  /** Net compensation after commute costs */
+  /** After commute costs. */
   netComp: number;
 
-  /** Effective hourly rate (based on actual work + commute time) */
+  /** Based on work + commute time. */
   effectiveHourlyRate: number;
 }
 
-/**
- * Calculated results from the Job Offer Comparison Calculator
- */
 export interface JobOfferComparisonResult {
-  /** Selected currency for formatting */
   currency: Currency;
 
-  /** Offer 1 calculations */
   offer1: OfferCalculation;
 
-  /** Offer 2 calculations */
   offer2: OfferCalculation;
 
-  /** Difference (offer2 - offer1) */
+  /** offer2 minus offer1. */
   difference: {
     totalComp: number;
     netComp: number;
     percentageDiff: number;
   };
 
-  /** Recommendation */
   recommendation: {
     winner: 1 | 2 | 'tie';
     reason: string;
@@ -152,9 +118,6 @@ export interface JobOfferComparisonResult {
   };
 }
 
-/**
- * Get default job offer values
- */
 export function getDefaultOffer(name: string, currency: Currency): JobOffer {
   const baseSalary = currency === 'GBP' ? 50000 : currency === 'EUR' ? 55000 : 75000;
 
@@ -175,9 +138,6 @@ export function getDefaultOffer(name: string, currency: Currency): JobOffer {
   };
 }
 
-/**
- * Get default input values for a given currency
- */
 export function getDefaultInputs(currency: Currency = 'USD'): JobOfferComparisonInputs {
   const hourlyTimeValue = currency === 'GBP' ? 25 : currency === 'EUR' ? 28 : 35;
   const costPerMile = currency === 'GBP' ? 0.45 : currency === 'EUR' ? 0.3 : 0.67;
@@ -197,7 +157,4 @@ export function getDefaultInputs(currency: Currency = 'USD'): JobOfferComparison
   };
 }
 
-/**
- * Default input values
- */
 export const DEFAULT_INPUTS: JobOfferComparisonInputs = getDefaultInputs('USD');

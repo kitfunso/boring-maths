@@ -181,3 +181,15 @@ Free embeds deployed on client sites → Each embed has "Powered by" backlink �
 Domain authority increases → Rankings improve → More traffic → More revenue →
 More embed clients (repeat)
 ```
+
+## 2026-08-30 - Comment cleanup: moved source detail
+
+Content moved out of source comments during a repo-wide comment-density cleanup (rule: `.claude/rules/coding-standards.md`). Each entry names the file it came from.
+
+### GermanySalaryCalculator/calculations.ts
+Methodology: estimates net pay for tax class I (single, no dependants), 2026 tax year. Derives taxable income (zu versteuerndes Einkommen, zvE) with a simplified Vorsorgepauschale: gross minus the employee share of social insurance minus the employee lump-sum allowance (Arbeitnehmer-Pauschbetrag). Income tax follows the statutory formula in EStG section 32a. Solidarity surcharge and optional church tax layer on top. Estimate only, not payroll-exact; excludes children, marriage splitting, and individual health-insurer rate variation.
+
+Social insurance ceiling and rate derivations (2026): RV/ALV ceiling 101,400 = monthly 8,450 x 12. KV/PV ceiling 69,750 = monthly 5,812.50 x 12. Employee rates: pension 9.3% + unemployment 1.3%; health 7.3% general + 1.45% (half of an assumed 2.9% average Zusatzbeitrag); care 1.8% + 0.6% childless surcharge.
+
+### AviosDestinationFinder/data/voucherRules.ts
+Sources (fetched 2026-07-19): https://www.headforpoints.com/2026/01/03/how-do-british-airways-american-express-241-companion-vouchers-work/ and the BA T&Cs at britishairways.com (gb-companion-voucher-terms). Models the 2-traveller 2-for-1 only; the solo 50% variant is not modeled.
