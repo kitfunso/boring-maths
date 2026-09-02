@@ -1,11 +1,6 @@
-/**
- * MultiSelectChips - toggleable chip group for multi-select filters.
- * Empty selection means "all" by convention of this calculator.
- * Local to this calculator per YAGNI - promote to ui/ only when a second
- * calculator needs it.
- */
-import { useTheme } from '../../ui/theme/ThemeContext';
-import type { ColorTokens } from '../../ui/theme/colors';
+/** MultiSelectChips - toggleable chip group; empty selection means "all". */
+import { useTheme } from '../theme/ThemeContext';
+import type { ColorTokens } from '../theme/colors';
 
 interface ChipOption<T extends string> {
   readonly value: T;

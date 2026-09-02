@@ -1,0 +1,198 @@
+---
+/** Card Rewards & Perks Calculator page. SEO target: UK credit card rewards comparison. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import CardPerksCalculator from '../../components/calculators/CardPerksCalculator/CardPerksCalculator';
+import CardFactsTable from '../../components/calculators/CardPerksCalculator/CardFactsTable.astro';
+import { CARDS } from '../../components/calculators/CardPerksCalculator/data/cards';
+import {
+  DATA_LAST_VERIFIED,
+  DEFAULT_POINT_VALUE_PENCE,
+  DEFAULT_LOUNGE_VISIT_VALUE,
+  DEFAULT_INSURANCE_VALUE,
+  DEFAULT_VOUCHER_VALUE,
+  POINT_VALUE_SOURCES,
+  VOUCHER_BENCHMARK,
+} from '../../components/calculators/CardPerksCalculator/data/pointValues';
+import {
+  POINT_CURRENCIES,
+  POINT_CURRENCY_LABELS,
+} from '../../components/calculators/CardPerksCalculator/types';
+
+const title = 'UK Credit Card Rewards & Perks Calculator: Amex vs Revolut vs Klarna';
+const description =
+  'Compare UK cards by estimated net value for your spend: points, cashback, lounge access, fees and FX on credit, charge, debit and BNPL cards. Free, no sign-up.';
+const keywords =
+  'credit card rewards calculator uk, amex vs revolut, klarna card vs credit card, compare credit card points uk, lounge access credit card uk';
+const canonicalURL = '/calculators/card-rewards-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Card Rewards & Perks Calculator' },
+];
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Card Rewards & Perks Calculator', url: canonicalURL },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Avios Destination Finder',
+    description:
+      'See every British Airways destination your Avios can reach, with peak and off-peak prices.',
+    href: '/calculators/avios-destination-finder/',
+    icon: 'rocket' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Currency Converter',
+    description: 'Convert between world currencies with live exchange rates.',
+    href: '/calculators/currency-converter/',
+    icon: 'swap' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Vacation Budget Calculator',
+    description: 'Plan and budget your vacation including flights, hotels, food, and activities.',
+    href: '/calculators/vacation-budget-calculator/',
+    icon: 'calendar' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'Debt Payoff Calculator',
+    description: 'Compare snowball vs avalanche strategies to pay off debt faster.',
+    href: '/calculators/debt-payoff-calculator/',
+    icon: 'chart' as const,
+    color: 'yellow' as const,
+  },
+];
+
+const loungeCards = CARDS.filter((c) => c.lounge !== null).map((c) => c.name);
+const noFxCards = CARDS.filter((c) => c.fxFeePct === 0).map((c) => c.name);
+const listOrFallback = (names: string[]): string =>
+  names.length > 0 ? names.join(', ') : 'None of the cards compared here';
+
+const faqs = [
+  {
+    question: 'Which cards here have lounge access?',
+    answer: `${listOrFallback(loungeCards)}. Lounge value in the calculator only counts the visits you set, priced at the lounge visit value in "Change the assumptions", minus any price the card itself charges per visit.`,
+  },
+  {
+    question: 'Which cards have no foreign exchange fee?',
+    answer: `${listOrFallback(noFxCards)}. FX fees only affect the "Spend abroad" figure you enter; domestic spend is unaffected either way.`,
+  },
+  {
+    question: 'What does Section 75 cover?',
+    answer:
+      'Section 75 of the Consumer Credit Act 1974 makes a UK credit or charge card issuer jointly liable with the retailer for purchases between £100 and £30,000, if something goes wrong. It only applies to credit and charge cards, never to debit cards, BNPL products, or paid account plans, which is why the Section 75 column reads "No" for those types.',
+  },
+  {
+    question: "Why aren't Klarna and Revolut credit cards?",
+    answer:
+      'Klarna and similar buy-now-pay-later products are regulated differently to credit cards under UK consumer credit law, and Revolut-style current-account cards spend directly from your balance rather than a credit line. Neither carries a representative APR or Section 75 protection, which is why those products appear here as separate card types rather than credit cards. Check the Type column in the table below for every product compared.',
+  },
+  {
+    question: 'How do I value Avios or other points?',
+    answer: `This calculator prices Avios at ${DEFAULT_POINT_VALUE_PENCE.avios}p each by default (${POINT_VALUE_SOURCES.avios.note}), and uses the same figure for Membership Rewards and Virgin Points since Avios is the common transfer partner. Open "Change the assumptions" and move the slider to test a different valuation if you redeem for a specific flight rather than a ballpark cash-out rate.`,
+  },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Card Rewards & Perks Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+    howToSteps={[
+      {
+        name: 'Enter your spend',
+        text: 'Type in your yearly spend by category, spend abroad, and lounge visits.',
+      },
+      {
+        name: 'Set travel and balance',
+        text: 'Choose whether you clear your balance in full, and adjust the assumptions if you want.',
+      },
+      {
+        name: 'Read the ranked table',
+        text: 'Cards are ranked by estimated net value; expand any row for the full breakdown.',
+      },
+      {
+        name: "Check the issuer's terms",
+        text: "Confirm the current offer, fees, and eligibility on the card issuer's own page before applying.",
+      },
+    ]}
+    estimatedTime="PT2M"
+  />
+
+  <HeroSection
+    title="Card Rewards & Perks Calculator"
+    description="Compare UK credit, charge, debit and BNPL cards by estimated net value for the spend you enter."
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <CardPerksCalculator client:load />
+  </section>
+
+  <ContentSection title="How the Estimate Works">
+    <p>
+      For each card, we estimate the value of your everyday spend rewards, lounge visits, travel
+      insurance, and companion vouchers, then subtract the annual fee, foreign exchange fees on the
+      spend you mark as abroad, and any interest charged on a balance you carry. The result is the
+      estimated net value for the numbers you entered above.
+    </p>
+    <p>
+      Default point values used until you change them:{' '}
+      {
+        POINT_CURRENCIES.filter((c) => c !== 'none').map((currency, i, all) => (
+          <>
+            {i > 0 && ', '}
+            {POINT_CURRENCY_LABELS[currency]} at {DEFAULT_POINT_VALUE_PENCE[currency]}p
+          </>
+        ))
+      }. Lounge visits default to £{DEFAULT_LOUNGE_VISIT_VALUE} each, comprehensive travel insurance to
+      £{DEFAULT_INSURANCE_VALUE} a year, and a companion voucher to £{DEFAULT_VOUCHER_VALUE}, based
+      on a {VOUCHER_BENCHMARK.city} economy return, off-peak, from the Avios finder. Every one of these
+      is adjustable in "Change the assumptions" above.
+    </p>
+  </ContentSection>
+
+  <ContentSection title={`Card Facts, Verified ${DATA_LAST_VERIFIED}`}>
+    <p>
+      The same dataset the calculator above uses, so these figures never drift from the interactive
+      numbers. Each card's fee, earn rate, welcome bonus, FX fee, lounge network, insurance level,
+      Section 75 status, and source page are listed below.
+    </p>
+    <CardFactsTable
+      rows={CARDS}
+      caption="UK card fees, earn rates, and perks, verified against issuer pages"
+    />
+  </ContentSection>
+
+  <ContentSection title="What This Calculator Leaves Out">
+    <p>
+      This is an estimate, not a full comparison. It does not model merchant acceptance of Amex,
+      which some UK retailers do not take; credit checks, since approval always depends on your own
+      credit file and is never guaranteed; the exact eligibility windows and card-holding-history
+      rules behind welcome bonuses and companion vouchers; lounge guest fees, which vary by network
+      and visit; the excesses and exclusions inside a comprehensive travel insurance policy; or any
+      EU or US-issued cards, since every product compared here is issued in the UK.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

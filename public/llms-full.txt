@@ -534,6 +534,14 @@ Independent, unofficial British Airways reward flight guide. Search all 199 BA d
 - Shows guide prices only, NOT live reward seat availability; availability must be checked on ba.com
 - Economy, Premium Economy (long-haul only), and Business cabins; First class not covered
 
+### UK Card Rewards & Perks Calculator
+URL: https://boring-math.com/calculators/card-rewards-calculator/
+Compares 20+ UK credit, charge, debit, BNPL and paid-account-plan cards (Amex, Barclaycard, Virgin Atlantic, HSBC, NatWest, Revolut, Klarna, Curve and more) by the estimated net annual value of rewards, welcome bonuses, lounge access, travel insurance and companion vouchers against fees, FX cost and interest, for the spend the visitor enters.
+- Every row is issuer-published data with a source URL and a verified date; a row that cannot be verified is dropped, not guessed
+- Estimates only, not advice: no "best card" ranking language, no application or issuer links, and no commission taken from any card issuer
+- Filters by card type and lounge access; sorts by net value, rewards, perks, fees or FX cost
+- Point values (Avios, Membership Rewards, Virgin Points and others) are user-adjustable with cited defaults
+
 ---
 
 ## About

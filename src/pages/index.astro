@@ -13,6 +13,9 @@ const title = 'Boring Math Calculators | Free Online Calculators';
 const description = 'Free online calculators for everyday math problems. Calculate freelance rates, wedding costs, savings goals, and more. Simple, accurate, and easy to use.';
 
 const categories = getCategories();
+// Both hero pills use the same rainbow glow (global.css); pulled out here so
+// the panel filter and the pill markup can't drift out of sync.
+const HERO_CATEGORIES = ['Avios', 'Cards'];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -123,8 +126,8 @@ const categories = getCategories();
         </div>
       </div>
 
-      <!-- Avios pill: outside the collapsible panel so it shows on every breakpoint -->
-      <div class="flex justify-center mb-3">
+      <!-- Hero pills: outside the collapsible panel so they show on every breakpoint -->
+      <div class="flex justify-center gap-2 mb-3">
         <button
           class="category-btn category-btn-avios px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border
                  text-[var(--color-subtle)] bg-transparent border-white/10"
@@ -132,6 +135,14 @@ const categories = getCategories();
           aria-pressed="false"
         >
           Avios
+        </button>
+        <button
+          class="category-btn category-btn-cards px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 border
+                 text-[var(--color-subtle)] bg-transparent border-white/10"
+          data-category="Cards"
+          aria-pressed="false"
+        >
+          Cards
         </button>
       </div>
 
@@ -171,7 +182,7 @@ const categories = getCategories();
           </svg>
           Favorites
         </button>
-        {categories.filter((category) => category !== 'Avios').map((category) => (
+        {categories.filter((category) => !HERO_CATEGORIES.includes(category)).map((category) => (
           <button
             class:list={[
               "category-btn px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 border",

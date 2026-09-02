@@ -8,7 +8,7 @@
 
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/preact';
-import MultiSelectChips from '../../src/components/calculators/AviosDestinationFinder/MultiSelectChips';
+import MultiSelectChips from '../../src/components/ui/primitives/MultiSelectChips';
 import { ThemeProvider } from '../../src/components/ui/theme/ThemeContext';
 
 const OPTIONS = [

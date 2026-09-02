@@ -1,0 +1,57 @@
+name: Card Data Freshness
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-freshness:
+    name: Check card data freshness
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run card freshness check
+        id: check
+        run: node scripts/data/check-card-freshness.mjs
+
+      - name: Open or update tracking issue on stale rows
+        # Gate on the check step specifically: a checkout/setup-node flake
+        # must not file a misleading "data is stale" issue.
+        if: failure() && steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TITLE="Card data older than 120 days - re-verify"
+          BODY_FILE=$(mktemp)
+          cat > "$BODY_FILE" <<EOF
+          The monthly card data freshness check found one or more rows in
+          \`src/components/calculators/CardPerksCalculator/data/cards.ts\`
+          with a \`lastVerified\` date older than 120 days.
+
+          To resolve:
+          1. Open each stale row's \`sourceUrl\` and re-check the figures.
+          2. Update the row and bump \`lastVerified\` to the date you checked.
+          3. Close this issue.
+
+          Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EOF
+          EXISTING=$(gh issue list --state open --limit 100 --json number,title \
+            --jq "[.[] | select(.title == \"$TITLE\")][0].number")
+          if [ -n "$EXISTING" ] && [ "$EXISTING" != "null" ]; then
+            gh issue comment "$EXISTING" --body-file "$BODY_FILE"
+          else
+            gh issue create --title "$TITLE" --body-file "$BODY_FILE"
+          fi
