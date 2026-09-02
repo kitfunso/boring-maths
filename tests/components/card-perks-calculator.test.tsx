@@ -2,7 +2,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
-import { render, fireEvent } from '@testing-library/preact';
+import { render, fireEvent, within } from '@testing-library/preact';
 import CardPerksCalculator from '../../src/components/calculators/CardPerksCalculator/CardPerksCalculator';
 import { computeResults } from '../../src/components/calculators/CardPerksCalculator/calculations';
 import { buildDefaultInputs } from '../../src/components/calculators/CardPerksCalculator/types';
@@ -32,6 +32,25 @@ describe('CardPerksCalculator', () => {
     fireEvent.input(groceries as HTMLInputElement, { target: { value: '50000' } });
     const after = container.querySelector('table tbody')?.textContent;
     expect(after).not.toBe(before);
+  });
+
+  it('colours the headline net value red once the top card loses money', () => {
+    const chargeOnly = { ...buildDefaultInputs(DEFAULT_ASSUMPTIONS), types: ['charge'] as const };
+    const topNet = Math.max(
+      ...computeResults(chargeOnly, CARDS).ranked.map((r) => r.breakdown.net)
+    );
+    expect(topNet).toBeLessThan(0);
+
+    const { getByRole } = render(<CardPerksCalculator />);
+    const headline = () =>
+      getByRole('group', { name: 'Highest net value' }).querySelector('.tabular-nums');
+    expect(headline()?.className).toContain('text-emerald-400');
+
+    const chips = getByRole('group', { name: 'Filter by card type' });
+    fireEvent.click(within(chips).getByRole('button', { name: 'Charge card' }));
+    expect(headline()?.textContent).toContain('-');
+    expect(headline()?.className).toContain('text-rose-400');
+    expect(headline()?.className).not.toContain('text-emerald-400');
   });
 });
 

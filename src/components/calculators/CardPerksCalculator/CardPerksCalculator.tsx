@@ -214,6 +214,8 @@ export default function CardPerksCalculator() {
     (best, item) => (best === null || item.breakdown.net > best.breakdown.net ? item : best),
     null
   );
+  const headlineColor =
+    topCard === null ? 'default' : topCard.breakdown.net >= 0 ? 'success' : 'error';
   const shareSummary = topCard
     ? `${topCard.card.name} has the highest estimated net value for ${gbp(result.totalSpend)}/yr spend: ${gbp(topCard.breakdown.net)} a year`
     : 'No cards match these filters';
@@ -431,7 +433,7 @@ export default function CardPerksCalculator() {
                 label="Highest net value"
                 value={topCard ? `${gbp(topCard.breakdown.net)} / yr` : 'No match'}
                 sublabel={topCard ? topCard.card.name : undefined}
-                valueColor="success"
+                valueColor={headlineColor}
               />
               <MetricCard
                 label="Cards compared"
