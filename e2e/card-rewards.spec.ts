@@ -70,6 +70,14 @@ test.describe('Card Rewards & Perks Calculator', () => {
     await expect(breakdownRow.getByText('Welcome bonus')).toBeVisible();
   });
 
+  test('both table wrappers are keyboard-focusable labelled regions', async ({ page }) => {
+    await page.goto(PAGE);
+    const regions = page.locator(
+      'div[role="region"][tabindex="0"][aria-label$="scrolls sideways"]'
+    );
+    await expect(regions).toHaveCount(2);
+  });
+
   test('has no sponsored/affiliate links and no direct issuer source links', async ({ page }) => {
     await page.goto(PAGE);
 
