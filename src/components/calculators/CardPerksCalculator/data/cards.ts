@@ -888,7 +888,7 @@ export const CARDS: readonly CardProduct[] = [
       'GBP55/month x12 = GBP660/year.',
       '1 RevPoint per GBP1 spent, flat across all four buckets.',
       'Unlimited airport lounge access at no per-visit charge; visits per year modelled as unlimited rather than a specific cap.',
-      'Top insurance tier on the plans page: Global medical (GBP10m/y) and trip and event cancellation (up to 70% back) are both checked for Ultra; car hire excess, winter sports and delayed-luggage lines appear once in the table and are attributed to Ultra as the top tier, so travelInsurance is comprehensive.',
+      'Top insurance tier on the plans page: Global medical (GBP10m/y) and trip and event cancellation (up to 70% back) are both checked for Ultra; car hire excess, winter sports and delayed-luggage lines appear once in the table and are attributed to Ultra as the top tier, so travel insurance is modelled as comprehensive.',
       'Network modelled as Mastercard; Revolut issues UK cards on both Visa and Mastercard (Finder.com), not stated on the plans page itself.',
     ],
     minIncome: null,
