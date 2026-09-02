@@ -10,6 +10,7 @@ const BASE: Omit<CardProduct, 'earn' | 'tier2' | 'currency' | 'id' | 'name'> = {
   network: 'visa',
   fee: { year1: 0, ongoing: 0 },
   representativeApr: 25,
+  purchaseApr: 25,
   rewardsCapGbp: null,
   welcomeBonus: null,
   fxFeePct: 0,

@@ -42,9 +42,15 @@ function welcomeFor(
 ): { welcome: number; bonusMissed: boolean } {
   if (inputs.horizon !== 'year1' || card.welcomeBonus === null)
     return { welcome: 0, bonusMissed: false };
-  const { units, minSpend, windowDays } = card.welcomeBonus;
-  if (totalSpend * (windowDays / 365) < minSpend) return { welcome: 0, bonusMissed: true };
-  return { welcome: (units * inputs.pointValuePence[card.currency]) / 100, bonusMissed: false };
+  const { units, minSpend, windowDays, introRatePct } = card.welcomeBonus;
+  const windowSpend = totalSpend * (windowDays / 365);
+  if (windowSpend <= 0 || windowSpend < minSpend) return { welcome: 0, bonusMissed: true };
+  // GBP spend x percent = pence, so a rate-capped intro offer only fits cashback (1 unit = 1p).
+  const bonusUnits = introRatePct === null ? units : Math.min(units, windowSpend * introRatePct);
+  return {
+    welcome: (bonusUnits * inputs.pointValuePence[card.currency]) / 100,
+    bonusMissed: false,
+  };
 }
 
 function loungeFor(card: CardProduct, inputs: CardPerksInputs): number {
@@ -77,9 +83,9 @@ export function valueFor(
   const fee = inputs.horizon === 'year1' ? card.fee.year1 : card.fee.ongoing;
   const fx = (inputs.spendAbroad * card.fxFeePct) / 100;
   const interest =
-    inputs.clearsBalance || card.representativeApr === null
+    inputs.clearsBalance || card.purchaseApr === null
       ? 0
-      : (inputs.carriedBalance * card.representativeApr) / 100;
+      : (inputs.carriedBalance * card.purchaseApr) / 100;
 
   const rewards = Math.round(rawRewards);
   const welcomeRounded = Math.round(welcome);
@@ -115,7 +121,12 @@ export function valueFor(
   };
 }
 
-function perksValue(breakdown: ValueBreakdown): number {
+/** Rewards as the column shows them: base rewards plus the welcome bonus, so the sort matches. */
+export function rewardsValue(breakdown: ValueBreakdown): number {
+  return breakdown.rewards + breakdown.welcome;
+}
+
+export function perksValue(breakdown: ValueBreakdown): number {
   return breakdown.lounge + breakdown.insurance + breakdown.voucher;
 }
 
@@ -126,7 +137,7 @@ function tieBreak(a: CardResult, b: CardResult): number {
 
 const COMPARATORS: Record<SortKey, (a: CardResult, b: CardResult) => number> = {
   net: (a, b) => b.breakdown.net - a.breakdown.net || tieBreak(a, b),
-  rewards: (a, b) => b.breakdown.rewards - a.breakdown.rewards || tieBreak(a, b),
+  rewards: (a, b) => rewardsValue(b.breakdown) - rewardsValue(a.breakdown) || tieBreak(a, b),
   perks: (a, b) => perksValue(b.breakdown) - perksValue(a.breakdown) || tieBreak(a, b),
   fees: (a, b) => a.breakdown.fee - b.breakdown.fee || tieBreak(a, b),
   fx: (a, b) => a.breakdown.fx - b.breakdown.fx || tieBreak(a, b),

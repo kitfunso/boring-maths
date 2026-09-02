@@ -55,6 +55,8 @@ export interface WelcomeBonus {
   /** GBP spend needed inside the window. */
   readonly minSpend: number;
   readonly windowDays: number;
+  /** Intro cashback % on window spend; `units` is then the cap in pence. null = flat bonus. */
+  readonly introRatePct: number | null;
   /** Eligibility caveat shown verbatim, e.g. "No Amex card held in the last 24 months". */
   readonly note: string;
 }
@@ -86,6 +88,8 @@ export interface CardProduct {
   readonly fee: { readonly year1: number; readonly ongoing: number };
   /** Representative APR (variable), null for products with no credit line. */
   readonly representativeApr: number | null;
+  /** Purchase rate % p.a. variable, what a carried balance costs; the representative APR also bakes in the fee. */
+  readonly purchaseApr: number | null;
   /** Units earned per GBP 1 spent, per category. 0 = nothing. */
   readonly earn: Readonly<Record<SpendCategory, number>>;
   /** Higher rate once total annual spend passes `fromSpend` (Amex cashback step-ups). */

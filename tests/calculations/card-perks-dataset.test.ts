@@ -96,6 +96,38 @@ describe('CardProduct dataset', () => {
     }
   });
 
+  it('cashback welcome bonuses are in pence and match a GBP figure in their note', () => {
+    for (const c of CARDS) {
+      if (c.currency !== 'cashback' || c.welcomeBonus === null || c.welcomeBonus.units === 0)
+        continue;
+      const gbpFigures = [...c.welcomeBonus.note.matchAll(/GBP([\d,]+(?:\.\d+)?)/g)].map((m) =>
+        Math.round(Number(m[1].replace(/,/g, '')) * 100)
+      );
+      expect(gbpFigures, c.id).toContain(c.welcomeBonus.units);
+    }
+  });
+
+  it('introRatePct is set only on cashback cards, between 0 and 10', () => {
+    for (const c of CARDS) {
+      if (c.welcomeBonus === null || c.welcomeBonus.introRatePct === null) continue;
+      expect(c.currency, c.id).toBe('cashback');
+      expect(c.welcomeBonus.introRatePct, c.id).toBeGreaterThan(0);
+      expect(c.welcomeBonus.introRatePct, c.id).toBeLessThanOrEqual(10);
+    }
+  });
+
+  it('purchaseApr is set for every credit row, null elsewhere, and never above 60', () => {
+    for (const c of CARDS) {
+      if (c.type !== 'credit') {
+        expect(c.purchaseApr, c.id).toBeNull();
+        continue;
+      }
+      expect(c.purchaseApr, c.id).not.toBeNull();
+      expect(c.purchaseApr as number, c.id).toBeGreaterThan(0);
+      expect(c.purchaseApr as number, c.id).toBeLessThanOrEqual(60);
+    }
+  });
+
   it('every PointCurrency in use has a positive default value, except none', () => {
     const inUse = new Set(CARDS.map((c) => c.currency));
     for (const currency of inUse) {

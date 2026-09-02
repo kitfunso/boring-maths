@@ -51,4 +51,4 @@
 - [Vacation Budget Calculator](https://boring-math.com/calculators/vacation-budget-calculator): Plan and budget a trip including flights, hotels, food, and activities.
 
 ## Documentation
-- [All Calculators](https://boring-math.com/calculators): Browse all 169 calculators by category.
+- [All Calculators](https://boring-math.com/calculators): Browse all 171 calculators by category.

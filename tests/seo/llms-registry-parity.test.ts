@@ -27,4 +27,12 @@ describe('llms.txt calculator entries resolve to registry pages', () => {
     const dead = [...new Set(urls)].filter((href) => !registryHrefs.has(href));
     expect(dead, `dead llms.txt entries:\n${dead.join('\n')}`).toEqual([]);
   });
+
+  it('the "Browse all N calculators" count matches the registry', () => {
+    const match = llms.match(/Browse all (\d+) calculators/);
+    expect(match, 'llms.txt must keep the "Browse all N calculators" line').not.toBeNull();
+    expect(Number(match![1]), 'llms.txt calculator count drifted from the registry').toBe(
+      calculators.length
+    );
+  });
 });

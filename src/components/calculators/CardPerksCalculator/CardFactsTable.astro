@@ -14,10 +14,15 @@ const sorted = [...rows].sort((a, b) => a.name.localeCompare(b.name));
 
 const fmtFee = (fee: CardProduct['fee']): string =>
   fee.year1 === fee.ongoing ? `£${fee.year1}` : `£${fee.year1} / £${fee.ongoing}`;
-const fmtWelcome = (card: CardProduct): string =>
-  card.welcomeBonus === null
-    ? 'None'
-    : `${card.welcomeBonus.units.toLocaleString('en-GB')} ${POINT_CURRENCY_LABELS[card.currency]}`;
+const fmtWelcome = (card: CardProduct): string => {
+  if (card.welcomeBonus === null) return 'None';
+  const { units, introRatePct } = card.welcomeBonus;
+  const amount =
+    card.currency === 'cashback'
+      ? `£${units / 100}`
+      : `${units.toLocaleString('en-GB')} ${POINT_CURRENCY_LABELS[card.currency]}`;
+  return introRatePct === null ? amount : `Up to ${amount} (${introRatePct}% intro rate)`;
+};
 const fmtLounge = (card: CardProduct): string =>
   card.lounge === null
     ? 'None'
@@ -31,7 +36,7 @@ const cellLeft = 'py-2';
 ---
 
 <div
-  class="overflow-x-auto"
+  class="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-white"
   tabindex="0"
   role="region"
   aria-label="Card facts table, scrolls sideways"

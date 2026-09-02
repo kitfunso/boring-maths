@@ -38,6 +38,7 @@ const FLAT_CREDIT_CARD: CardProduct = {
   network: 'visa',
   fee: { year1: 0, ongoing: 100 },
   representativeApr: 25,
+  purchaseApr: 20,
   earn: { groceries: 1, travel: 1, dining: 1, other: 1 },
   tier2: null,
   rewardsCapGbp: null,
@@ -46,6 +47,7 @@ const FLAT_CREDIT_CARD: CardProduct = {
     units: 20000,
     minSpend: 3000,
     windowDays: 90,
+    introRatePct: null,
     note: 'No fixture card held before',
   },
   fxFeePct: 3,
@@ -69,6 +71,7 @@ const CAPPED_CASHBACK_DEBIT: CardProduct = {
   network: 'mastercard',
   fee: { year1: 0, ongoing: 0 },
   representativeApr: null,
+  purchaseApr: null,
   earn: { groceries: 1, travel: 1, dining: 1, other: 1 },
   tier2: { fromSpend: 5000, earn: { groceries: 2, travel: 2, dining: 2, other: 2 } },
   rewardsCapGbp: 300,
@@ -95,6 +98,7 @@ const FEE_FREE_PLAN: CardProduct = {
   network: 'amex',
   fee: { year1: 0, ongoing: 0 },
   representativeApr: null,
+  purchaseApr: null,
   earn: { groceries: 0, travel: 0, dining: 0, other: 0 },
   tier2: null,
   rewardsCapGbp: null,
@@ -164,6 +168,34 @@ describe('CardPerksCalculator calculations', () => {
   it('welcome bonus: excluded and bonusMissed true when the window is not met', () => {
     const inputs = inputsWith({ horizon: 'year1', spend: { ...ZERO_SPEND, groceries: 1000 } });
     const result = valueFor(FLAT_CREDIT_CARD, inputs);
+    expect(result.welcome).toBe(0);
+    expect(result.bonusMissed).toBe(true);
+  });
+
+  it('welcome bonus: a rate-capped intro offer scales with window spend and stops at the cap', () => {
+    const card: CardProduct = {
+      ...FLAT_CREDIT_CARD,
+      currency: 'cashback',
+      welcomeBonus: { units: 12500, minSpend: 0, windowDays: 73, introRatePct: 5, note: '' },
+    };
+    const below = valueFor(
+      card,
+      inputsWith({ horizon: 'year1', spend: { ...ZERO_SPEND, groceries: 5000 } })
+    );
+    expect(below.welcome).toBe(50);
+    const above = valueFor(
+      card,
+      inputsWith({ horizon: 'year1', spend: { ...ZERO_SPEND, groceries: 50000 } })
+    );
+    expect(above.welcome).toBe(125);
+  });
+
+  it('welcome bonus: needs some spend even when minSpend is 0', () => {
+    const card: CardProduct = {
+      ...FLAT_CREDIT_CARD,
+      welcomeBonus: { units: 20000, minSpend: 0, windowDays: 90, introRatePct: null, note: '' },
+    };
+    const result = valueFor(card, inputsWith({ horizon: 'year1', spend: ZERO_SPEND }));
     expect(result.welcome).toBe(0);
     expect(result.bonusMissed).toBe(true);
   });
@@ -251,14 +283,14 @@ describe('CardPerksCalculator calculations', () => {
     expect(valueFor(FEE_FREE_PLAN, inputsWith({ spendAbroad: 500 })).fx).toBe(0);
   });
 
-  it('interest is 0 when clearing, 0 when APR is null, else carriedBalance * apr / 100', () => {
+  it('interest is 0 when clearing, 0 when the purchase rate is null, else carriedBalance * purchaseApr / 100', () => {
     expect(
       valueFor(FLAT_CREDIT_CARD, inputsWith({ clearsBalance: true, carriedBalance: 1000 })).interest
     ).toBe(0);
     expect(
       valueFor(FLAT_CREDIT_CARD, inputsWith({ clearsBalance: false, carriedBalance: 1000 }))
         .interest
-    ).toBe(250);
+    ).toBe(200);
     expect(
       valueFor(CAPPED_CASHBACK_DEBIT, inputsWith({ clearsBalance: false, carriedBalance: 1000 }))
         .interest
@@ -304,6 +336,14 @@ describe('CardPerksCalculator calculations', () => {
     const sorted = sortResults(results, 'fees');
     expect(sorted.map((r) => r.card.name)).toEqual(['Delta', 'Alpha', 'Bravo', 'Charlie']);
     expect(sorted.map((r) => r.rank)).toEqual([1, 2, 3, 4]);
+  });
+
+  it('sortResults: rewards uses rewards plus welcome, the value the column shows', () => {
+    const results = [
+      stubResult('Base', { rewards: 300, welcome: 0 }),
+      stubResult('Bonus', { rewards: 200, welcome: 200 }),
+    ];
+    expect(sortResults(results, 'rewards').map((r) => r.card.name)).toEqual(['Bonus', 'Base']);
   });
 
   it('sortResults: fx ascending', () => {

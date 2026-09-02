@@ -1,5 +1,5 @@
 /** UK Card Rewards & Perks Calculator - Preact island; estimates only, not financial advice. */
-import { computeResults } from './calculations';
+import { computeResults, perksValue, rewardsValue } from './calculations';
 import { inputsFromParams, paramsFromInputs } from './urlState';
 import {
   CARD_TYPES,
@@ -46,12 +46,6 @@ function clampMin0(value: number): number {
   return Number.isFinite(value) ? Math.max(0, value) : 0;
 }
 
-function rewardsTotal(b: ValueBreakdown): number {
-  return b.rewards + b.welcome;
-}
-function perksTotal(b: ValueBreakdown): number {
-  return b.lounge + b.insurance + b.voucher;
-}
 function costsTotal(b: ValueBreakdown): number {
   return b.fee + b.fx + b.interest;
 }
@@ -92,10 +86,10 @@ function ResultRow({
         </td>
         <td className="py-2 whitespace-nowrap">{CARD_TYPE_LABELS[card.type]}</td>
         <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-          {gbp(rewardsTotal(breakdown))}
+          {gbp(rewardsValue(breakdown))}
         </td>
         <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-          {gbp(perksTotal(breakdown))}
+          {gbp(perksValue(breakdown))}
         </td>
         <td className="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
           {costsTotal(breakdown) > 0 ? `-${gbp(costsTotal(breakdown))}` : gbp(0)}
@@ -208,9 +202,12 @@ export default function CardPerksCalculator() {
     });
   };
 
-  const topCard = result.ranked[0] ?? null;
+  const topCard = result.ranked.reduce<CardResult | null>(
+    (best, item) => (best === null || item.breakdown.net > best.breakdown.net ? item : best),
+    null
+  );
   const shareSummary = topCard
-    ? `${topCard.card.name} ranks first for ${gbp(result.totalSpend)}/yr spend: ${gbp(topCard.breakdown.net)} net a year`
+    ? `${topCard.card.name} has the highest estimated net value for ${gbp(result.totalSpend)}/yr spend: ${gbp(topCard.breakdown.net)} a year`
     : 'No cards match these filters';
 
   return (
@@ -313,7 +310,7 @@ export default function CardPerksCalculator() {
                 </div>
               )}
               <Alert variant="info" className="mt-4">
-                Interest wipes out rewards fast. The estimate charges the representative APR on the
+                Interest wipes out rewards fast. The estimate charges the card purchase rate on the
                 balance you carry.
               </Alert>
             </div>
@@ -424,8 +421,8 @@ export default function CardPerksCalculator() {
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
               <MetricCard
                 label="Highest net value"
-                value={topCard ? topCard.card.name : 'No match'}
-                sublabel={topCard ? `${gbp(topCard.breakdown.net)} net a year` : undefined}
+                value={topCard ? `${gbp(topCard.breakdown.net)} / yr` : 'No match'}
+                sublabel={topCard ? topCard.card.name : undefined}
                 valueColor="success"
               />
               <MetricCard
@@ -471,7 +468,7 @@ export default function CardPerksCalculator() {
 
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div
-                className="overflow-x-auto"
+                className="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-white"
                 tabIndex={0}
                 role="region"
                 aria-label="Ranked cards table, scrolls sideways"
