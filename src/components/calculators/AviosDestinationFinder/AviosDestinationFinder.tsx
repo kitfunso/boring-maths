@@ -6,11 +6,14 @@
  * seat availability.
  */
 import { computeResults } from './calculations';
+import { inputsFromParams, paramsFromInputs } from './urlState';
 import {
   CABIN_LABELS,
   HOLIDAY_TYPES,
   HOLIDAY_TYPE_LABELS,
   REGIONS,
+  VOUCHER_LABELS,
+  VOUCHER_TYPES,
   getDefaultInputs,
   type AviosFinderInputs,
   type AviosFinderResult,
@@ -52,6 +55,7 @@ const CABIN_OPTIONS = (Object.keys(CABIN_LABELS) as Cabin[]).map((c) => ({
   value: c,
   label: CABIN_LABELS[c],
 }));
+const VOUCHER_OPTIONS = VOUCHER_TYPES.map((v) => ({ value: v, label: VOUCHER_LABELS[v] }));
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'avios', label: 'Fewest Avios first' },
   { value: 'value', label: 'Best bang for your buck' },
@@ -62,65 +66,6 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 ];
 
 const nf = new Intl.NumberFormat('en-GB');
-
-// --- Shareable URLs: filter state <-> query string --------------------------
-// Every search is reflected in the address bar (replaceState, no history spam)
-// so a result set can be copied, bookmarked, or shared. Only non-default
-// values are written; unknown or invalid params are ignored.
-const TRIP_TYPES: readonly TripType[] = ['return', 'oneWay'];
-const SORT_KEYS: readonly SortKey[] = SORT_OPTIONS.map((o) => o.value);
-const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
-
-function inputsFromParams(search: string): Partial<AviosFinderInputs> | null {
-  const params = new URLSearchParams(search);
-  const patch: Record<string, unknown> = {};
-
-  const budget = Number(params.get('budget'));
-  if (Number.isFinite(budget) && budget > 0) patch.aviosBudget = Math.floor(budget);
-  const from = params.get('from');
-  if (from && ISO_DATE.test(from)) patch.dateFrom = from;
-  const to = params.get('to');
-  if (to && ISO_DATE.test(to)) patch.dateTo = to;
-  const regions = params
-    .get('regions')
-    ?.split(',')
-    .filter((r): r is Region => (REGIONS as readonly string[]).includes(r));
-  if (regions && regions.length > 0) patch.regions = regions;
-  const types = params
-    .get('types')
-    ?.split(',')
-    .filter((t): t is HolidayType => (HOLIDAY_TYPES as readonly string[]).includes(t));
-  if (types && types.length > 0) patch.holidayTypes = types;
-  const cabinParam = params.get('cabin');
-  if (cabinParam && cabinParam in CABIN_LABELS) patch.cabin = cabinParam as Cabin;
-  const travellers = params.get('travellers');
-  if (travellers === '1' || travellers === '2') patch.travellers = Number(travellers) as 1 | 2;
-  if (params.get('voucher') === '1') patch.companionVoucher = true;
-  const trip = params.get('trip');
-  if (trip && (TRIP_TYPES as readonly string[]).includes(trip)) patch.tripType = trip as TripType;
-  const sort = params.get('sort');
-  if (sort && (SORT_KEYS as readonly string[]).includes(sort)) patch.sortKey = sort as SortKey;
-  if (params.get('over') === '0') patch.showOverBudget = false;
-
-  return Object.keys(patch).length > 0 ? (patch as Partial<AviosFinderInputs>) : null;
-}
-
-function paramsFromInputs(inputs: AviosFinderInputs): string {
-  const d = getDefaultInputs();
-  const params = new URLSearchParams();
-  if (inputs.aviosBudget !== d.aviosBudget) params.set('budget', String(inputs.aviosBudget));
-  if (inputs.dateFrom) params.set('from', inputs.dateFrom);
-  if (inputs.dateTo) params.set('to', inputs.dateTo);
-  if (inputs.regions.length > 0) params.set('regions', inputs.regions.join(','));
-  if (inputs.holidayTypes.length > 0) params.set('types', inputs.holidayTypes.join(','));
-  if (inputs.cabin !== d.cabin) params.set('cabin', inputs.cabin);
-  if (inputs.travellers !== d.travellers) params.set('travellers', String(inputs.travellers));
-  if (inputs.companionVoucher) params.set('voucher', '1');
-  if (inputs.tripType !== d.tripType) params.set('trip', inputs.tripType);
-  if (inputs.sortKey !== d.sortKey) params.set('sort', inputs.sortKey);
-  if (!inputs.showOverBudget) params.set('over', '0');
-  return params.toString();
-}
 
 function formatAvios(v: number | null): string {
   return v === null ? '-' : nf.format(v);
@@ -184,6 +129,17 @@ export default function AviosDestinationFinder() {
     compute: computeResults,
   });
 
+  // State saved before voucher types carries a boolean that priced 2-for-1 in every cabin.
+  useEffect(() => {
+    setInputs((prev) => {
+      if (!('companionVoucher' in prev)) return prev;
+      const { companionVoucher, ...rest } = prev as AviosFinderInputs & {
+        companionVoucher?: boolean;
+      };
+      return { ...rest, voucher: companionVoucher ? 'premiumPlus' : rest.voucher };
+    });
+  }, [setInputs]);
+
   // Shared-link params win over locally stored state, once, on mount.
   useEffect(() => {
     const patch = inputsFromParams(window.location.search);
@@ -196,6 +152,14 @@ export default function AviosDestinationFinder() {
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
   }, [inputs]);
+
+  // The static price tables below the island follow the cabin via CSS keyed on this attribute.
+  useEffect(() => {
+    document.documentElement.dataset.aviosCabin = inputs.cabin;
+    return () => {
+      delete document.documentElement.dataset.aviosCabin;
+    };
+  }, [inputs.cabin]);
 
   const [linkCopied, setLinkCopied] = useState(false);
   const copySearchLink = (): void => {
@@ -226,11 +190,27 @@ export default function AviosDestinationFinder() {
           .join(', ')}`
       : ' None within budget - try a higher budget or wider filters.';
 
-  const summary = `${nf.format(inputs.aviosBudget)} Avios (${CABIN_LABELS[inputs.cabin]}, ${
+  const cabinLabel = CABIN_LABELS[inputs.cabin];
+  const freeVoucherBlocked =
+    inputs.voucher === 'free' && inputs.travellers === 2 && !result.voucherApplied;
+  const voucherNote = result.voucherApplied
+    ? ` + ${inputs.voucher === 'free' ? 'free' : 'Premium Plus'} companion voucher`
+    : freeVoucherBlocked
+      ? ` (free voucher not valid in ${cabinLabel})`
+      : '';
+  const budgetSublabel = result.voucherApplied
+    ? result.voucherSavingAvios > 0
+      ? `Voucher saves ${nf.format(result.voucherSavingAvios)} Avios vs paying for 2 seats`
+      : 'with companion voucher'
+    : freeVoucherBlocked
+      ? `Free voucher not valid in ${cabinLabel}`
+      : undefined;
+
+  const summary = `${nf.format(inputs.aviosBudget)} Avios (${cabinLabel}, ${
     inputs.travellers
-  } traveller${inputs.travellers === 2 ? 's' : ''}${
-    inputs.companionVoucher ? ' + companion voucher' : ''
-  }): ${result.affordable.length} destinations within budget.${topPicks}`;
+  } traveller${inputs.travellers === 2 ? 's' : ''}${voucherNote}): ${
+    result.affordable.length
+  } destinations within budget.${topPicks}`;
 
   return (
     <ThemeProvider defaultColor="blue">
@@ -310,9 +290,8 @@ export default function AviosDestinationFinder() {
                   onChange={(v) => {
                     const travellers = Number(v) as 1 | 2;
                     updateInput('travellers', travellers);
-                    // The voucher is a 2-for-1: solo trips must drop the flag or
-                    // the summary and budget card keep claiming voucher pricing
-                    if (travellers === 1) updateInput('companionVoucher', false);
+                    // The voucher is a 2-for-1: solo trips drop it so nothing claims voucher pricing
+                    if (travellers === 1) updateInput('voucher', 'none');
                   }}
                   options={[
                     { value: '1', label: '1' },
@@ -335,19 +314,28 @@ export default function AviosDestinationFinder() {
             </Grid>
 
             {inputs.travellers === 2 && (
-              <div>
-                <Toggle
-                  checked={inputs.companionVoucher}
-                  onChange={(v) => updateInput('companionVoucher', v)}
-                  label="I have a BA Amex Companion Voucher (2-for-1)"
-                />
-                {inputs.companionVoucher && inputs.cabin !== 'economy' && (
-                  <p className="text-xs text-[var(--color-muted)] mt-1">
-                    Vouchers from the free BA Amex card are economy-only; the Premium Plus voucher
-                    works in all cabins. Taxes and fees are payable for both travellers.
-                  </p>
-                )}
-              </div>
+              <Grid responsive={{ sm: 1, md: 2 }} gap="md">
+                <div>
+                  <Label htmlFor="voucher">BA Amex companion voucher</Label>
+                  <Select
+                    id="voucher"
+                    value={inputs.voucher}
+                    onChange={(value) => updateInput('voucher', value)}
+                    options={VOUCHER_OPTIONS}
+                  />
+                  {freeVoucherBlocked && (
+                    <p className="text-xs text-amber-400 mt-1">
+                      The free card's voucher is economy only, so {cabinLabel} prices below are for
+                      two full-Avios seats. Pick Economy, or the Premium Plus voucher.
+                    </p>
+                  )}
+                  {result.voucherApplied && (
+                    <p className="text-xs text-[var(--color-muted)] mt-1">
+                      Second seat costs no Avios. Taxes and fees are payable for both travellers.
+                    </p>
+                  )}
+                </div>
+              </Grid>
             )}
           </div>
 
@@ -378,13 +366,7 @@ export default function AviosDestinationFinder() {
               <MetricCard
                 label="Your budget"
                 value={`${nf.format(inputs.aviosBudget)} Avios`}
-                sublabel={
-                  inputs.companionVoucher && result.voucherSavingAvios > 0
-                    ? `Voucher saves ${nf.format(result.voucherSavingAvios)} Avios vs paying for 2 seats`
-                    : inputs.companionVoucher
-                      ? 'with companion voucher'
-                      : undefined
-                }
+                sublabel={budgetSublabel}
               />
               <MetricCard
                 label="Cabin"

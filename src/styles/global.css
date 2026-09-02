@@ -812,6 +812,59 @@ input[type='number'] {
   opacity: 0.6;
 }
 
+/* Avios pill and card badge: the one rainbow surface on the site. Unlayered on
+   purpose, so it beats the Tailwind state classes the homepage filter JS toggles. */
+.category-btn-avios,
+.category-badge-avios {
+  color: var(--color-void);
+  border-color: transparent;
+  background-color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    #ff3d81,
+    #ff9f1c,
+    #c4ff00,
+    #2ee6a8,
+    #3d9bff,
+    #b06bff,
+    #ff3d81
+  );
+  background-size: 300% 100%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.category-btn-avios {
+  position: relative;
+}
+
+.category-btn-avios::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background-image: inherit;
+  background-size: inherit;
+  animation: gradient-shift 8s ease infinite;
+  filter: blur(14px);
+  opacity: 0.55;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.category-btn-avios:hover::before,
+.category-btn-avios[aria-pressed='true']::before {
+  opacity: 0.95;
+}
+
+.category-btn-avios[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.category-btn-avios:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
 /* Mesh Background - Removed for better contrast */
 .mesh-bg {
   background: var(--color-void);

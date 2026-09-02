@@ -8,12 +8,14 @@
 import type {
   AviosFinderInputs,
   AviosFinderResult,
+  Cabin,
   CabinPricing,
   Destination,
   DestinationResult,
   PartyPricing,
   PartyTotalsInputs,
   SeasonWindow,
+  VoucherType,
 } from './types';
 import { NOT_OFFERED } from './types';
 import { CALENDAR_PUBLISHED_THROUGH, isPeakIsoDate } from './data/peakCalendar';
@@ -84,6 +86,12 @@ export function calculatePartyTotals(inputs: PartyTotalsInputs): PartyPricing {
   };
 }
 
+/** The 2-for-1 needs two travellers; the free card's voucher is economy only. */
+export function voucherApplies(voucher: VoucherType, cabin: Cabin, travellers: 1 | 2): boolean {
+  if (travellers !== 2 || voucher === 'none') return false;
+  return voucher === 'premiumPlus' || cabin === 'economy';
+}
+
 function cabinPricing(d: Destination, cabin: AviosFinderInputs['cabin']): CabinPricing {
   if (cabin === 'economy') return d.economy;
   if (cabin === 'premiumEconomy') return d.premiumEconomy;
@@ -144,6 +152,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
   let notOfferedCount = 0;
   const rows: DestinationResult[] = [];
   const legs = inputs.tripType === 'return' ? 2 : 1;
+  const voucherApplied = voucherApplies(inputs.voucher, inputs.cabin, inputs.travellers);
 
   for (const d of filtered) {
     const pricing = cabinPricing(d, inputs.cabin);
@@ -160,7 +169,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
     const partyBase = {
       oneWayCash: pricing.cash,
       travellers: inputs.travellers,
-      companionVoucher: inputs.companionVoucher,
+      companionVoucher: voucherApplied,
       tripType: inputs.tripType,
     };
     const off = seasons.hasOffPeak
@@ -208,7 +217,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
       ? affordable.reduce((min, r) => (r.rankAvios < min.rankAvios ? r : min))
       : null;
   const voucherSavingAvios =
-    inputs.companionVoucher && inputs.travellers === 2 && cheapestAffordable
+    voucherApplied && cheapestAffordable
       ? noVoucherRankAvios(cheapestAffordable.destination, inputs, seasons) -
         cheapestAffordable.rankAvios
       : 0;
@@ -220,6 +229,7 @@ export function computeResults(inputs: AviosFinderInputs): AviosFinderResult {
     notOfferedCount,
     seasons,
     totalDestinations: filtered.length,
+    voucherApplied,
     voucherSavingAvios,
   };
 }
