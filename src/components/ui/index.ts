@@ -72,6 +72,8 @@ export type { CheckboxProps } from './primitives/Checkbox';
 export { Toggle } from './primitives/Toggle';
 export type { ToggleProps } from './primitives/Toggle';
 
+export { default as MultiSelectChips } from './primitives/MultiSelectChips';
+
 // Layout
 export { Card } from './layout/Card';
 export type { CardProps } from './layout/Card';

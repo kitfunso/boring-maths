@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { collectOverflow } from './helpers/overflow';
 
 /**
  * Layout overflow regression tests for the Avios Destination Finder.
@@ -35,59 +36,6 @@ const VIEWPORTS = [
   { width: 1440, height: 900 },
 ];
 
-interface OverflowReport {
-  islandRight: number;
-  offenders: { tag: string; id: string; label: string; right: number; left: number }[];
-  scrollWidth: number;
-  clientWidth: number;
-}
-
-async function collectOverflow(page: import('@playwright/test').Page): Promise<OverflowReport> {
-  return page.evaluate(() => {
-    const anchor = document.querySelector('#dateRange');
-    const island = anchor?.closest('astro-island');
-    if (!island) throw new Error('Avios finder island not found (is #dateRange present?)');
-    // astro-island is display:contents (zero-size rect); measure the Card div it wraps
-    const card = island.firstElementChild;
-    if (!card) throw new Error('Avios finder card not found inside island');
-    const islandRect = card.getBoundingClientRect();
-
-    const inScrollContainer = (el: Element): boolean => {
-      let node = el.parentElement;
-      while (node && node !== island) {
-        const overflowX = getComputedStyle(node).overflowX;
-        if (overflowX === 'auto' || overflowX === 'scroll') return true;
-        node = node.parentElement;
-      }
-      return false;
-    };
-
-    const controls = island.querySelectorAll('input, select, button, label');
-    const offenders: OverflowReport['offenders'] = [];
-    for (const el of controls) {
-      const r = el.getBoundingClientRect();
-      if (r.width === 0 && r.height === 0) continue; // hidden
-      if (inScrollContainer(el)) continue; // intentionally scrollable region
-      if (r.right > islandRect.right + 1 || r.left < islandRect.left - 1) {
-        offenders.push({
-          tag: el.tagName.toLowerCase(),
-          id: el.id || '',
-          label: (el.getAttribute('aria-label') || el.textContent || '').trim().slice(0, 40),
-          right: Math.round(r.right),
-          left: Math.round(r.left),
-        });
-      }
-    }
-
-    return {
-      islandRight: Math.round(islandRect.right),
-      offenders,
-      scrollWidth: document.documentElement.scrollWidth,
-      clientWidth: document.documentElement.clientWidth,
-    };
-  });
-}
-
 test.describe('Avios finder layout overflow sweep', () => {
   for (const viewport of VIEWPORTS) {
     test(`no clipped controls at ${viewport.width}x${viewport.height}`, async ({ page }) => {
@@ -97,7 +45,7 @@ test.describe('Avios finder layout overflow sweep', () => {
       // Wait for hydration: the island's date-range trigger must be interactive
       await expect(page.locator('#dateRange')).toBeVisible();
 
-      const report = await collectOverflow(page);
+      const report = await collectOverflow(page, '#dateRange');
 
       expect(
         report.offenders,

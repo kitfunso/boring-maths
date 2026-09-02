@@ -812,10 +812,13 @@ input[type='number'] {
   opacity: 0.6;
 }
 
-/* Avios pill and card badge: the one rainbow surface on the site. Unlayered on
-   purpose, so it beats the Tailwind state classes the homepage filter JS toggles. */
+/* Avios and Cards pills, and their card badges: the two rainbow surfaces on
+   the site. Unlayered on purpose, so this beats the Tailwind state classes
+   the homepage filter JS toggles. */
 .category-btn-avios,
-.category-badge-avios {
+.category-badge-avios,
+.category-btn-cards,
+.category-badge-cards {
   color: var(--color-void);
   border-color: transparent;
   background-color: transparent;
@@ -833,11 +836,13 @@ input[type='number'] {
   animation: gradient-shift 8s ease infinite;
 }
 
-.category-btn-avios {
+.category-btn-avios,
+.category-btn-cards {
   position: relative;
 }
 
-.category-btn-avios::before {
+.category-btn-avios::before,
+.category-btn-cards::before {
   content: '';
   position: absolute;
   inset: -4px;
@@ -852,15 +857,19 @@ input[type='number'] {
 }
 
 .category-btn-avios:hover::before,
-.category-btn-avios[aria-pressed='true']::before {
+.category-btn-avios[aria-pressed='true']::before,
+.category-btn-cards:hover::before,
+.category-btn-cards[aria-pressed='true']::before {
   opacity: 0.95;
 }
 
-.category-btn-avios[aria-pressed='true'] {
+.category-btn-avios[aria-pressed='true'],
+.category-btn-cards[aria-pressed='true'] {
   box-shadow: inset 0 0 0 2px #fff;
 }
 
-.category-btn-avios:focus-visible {
+.category-btn-avios:focus-visible,
+.category-btn-cards:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }

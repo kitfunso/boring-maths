@@ -1,0 +1,71 @@
+---
+/** Static, crawlable card facts table: same dataset the island uses, no client JS. */
+import { formatEarn } from './formatEarn';
+import type { CardProduct } from './types';
+import { CARD_TYPE_LABELS, POINT_CURRENCY_LABELS } from './types';
+
+interface Props {
+  rows: readonly CardProduct[];
+  caption: string;
+}
+const { rows, caption } = Astro.props;
+
+const sorted = [...rows].sort((a, b) => a.name.localeCompare(b.name));
+
+const fmtFee = (fee: CardProduct['fee']): string =>
+  fee.year1 === fee.ongoing ? `£${fee.year1}` : `£${fee.year1} / £${fee.ongoing}`;
+const fmtWelcome = (card: CardProduct): string =>
+  card.welcomeBonus === null
+    ? 'None'
+    : `${card.welcomeBonus.units.toLocaleString('en-GB')} ${POINT_CURRENCY_LABELS[card.currency]}`;
+const fmtLounge = (card: CardProduct): string =>
+  card.lounge === null
+    ? 'None'
+    : `${card.lounge.network} (${card.lounge.visitsPerYear === null ? 'unlimited' : `${card.lounge.visitsPerYear}/yr`})`;
+const domainOf = (url: string): string => new URL(url).hostname.replace(/^www\./, '');
+
+const head = 'text-right py-2 pl-3 whitespace-nowrap';
+const headLeft = 'text-left py-2';
+const cell = 'text-right py-2 pl-3 tabular-nums whitespace-nowrap';
+const cellLeft = 'py-2';
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full text-sm">
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
+        <th scope="col" class={headLeft}>Card</th>
+        <th scope="col" class={headLeft}>Type</th>
+        <th scope="col" class={head}>Annual fee (yr1 / ongoing)</th>
+        <th scope="col" class={headLeft}>Earn</th>
+        <th scope="col" class={headLeft}>Welcome bonus</th>
+        <th scope="col" class={head}>FX fee</th>
+        <th scope="col" class={headLeft}>Lounge</th>
+        <th scope="col" class={headLeft}>Travel insurance</th>
+        <th scope="col" class={headLeft}>Section 75</th>
+        <th scope="col" class={headLeft}>Verified</th>
+        <th scope="col" class={headLeft}>Source</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/10">
+      {
+        sorted.map((card) => (
+          <tr>
+            <td class={cellLeft}>{card.name}</td>
+            <td class={cellLeft}>{CARD_TYPE_LABELS[card.type]}</td>
+            <td class={cell}>{fmtFee(card.fee)}</td>
+            <td class={cellLeft}>{formatEarn(card)}</td>
+            <td class={cellLeft}>{fmtWelcome(card)}</td>
+            <td class={cell}>{card.fxFeePct}%</td>
+            <td class={cellLeft}>{fmtLounge(card)}</td>
+            <td class={cellLeft}>{card.travelInsurance}</td>
+            <td class={cellLeft}>{card.section75 ? 'Yes' : 'No'}</td>
+            <td class={cellLeft}>{card.lastVerified}</td>
+            <td class={cellLeft}>{domainOf(card.sourceUrl)}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

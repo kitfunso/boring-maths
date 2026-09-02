@@ -21,4 +21,9 @@ describe('calculator categories', () => {
     const avios = calculators.filter((c) => c.category === 'Avios');
     expect(avios.map((c) => c.href)).toEqual(['/calculators/avios-destination-finder/']);
   });
+
+  it('has the card calculator as the only Cards calculator', () => {
+    const cards = calculators.filter((c) => c.category === 'Cards');
+    expect(cards.map((c) => c.href)).toEqual(['/calculators/card-rewards-calculator/']);
+  });
 });

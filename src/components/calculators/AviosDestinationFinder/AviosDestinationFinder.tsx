@@ -24,7 +24,7 @@ import {
   type SortKey,
 } from './types';
 import { DATA_LAST_VERIFIED } from './data/peakCalendar';
-import MultiSelectChips from './MultiSelectChips';
+import MultiSelectChips from '../../ui/primitives/MultiSelectChips';
 import DateRangePicker from './DateRangePicker';
 import {
   ThemeProvider,

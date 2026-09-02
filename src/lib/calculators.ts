@@ -58,6 +58,7 @@ export type CategoryName =
   | 'Automotive'
   | 'Travel'
   | 'Avios'
+  | 'Cards'
   | 'UK Tax'
   | 'US Tax';
 
@@ -147,6 +148,7 @@ export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
   Automotive: 'text-green-400 bg-green-500/10 border-green-500/20',
   Travel: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
   Avios: 'category-badge-avios',
+  Cards: 'category-badge-cards',
   'UK Tax': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
   'US Tax': 'text-red-400 bg-red-500/10 border-red-500/20',
 };
@@ -1820,6 +1822,17 @@ export const calculators: readonly CalculatorEntry[] = [
     icon: 'trending',
     color: 'blue',
     category: 'Avios',
+    mostUsed: false,
+  },
+  {
+    title: 'UK Card Rewards & Perks Calculator',
+    description:
+      'Compare Amex, Revolut, Klarna and 20+ UK cards by the estimated net value of points, cashback, lounges and perks for your own spending.',
+    href: '/calculators/card-rewards-calculator/',
+    icon: 'dollar',
+    color: 'violet',
+    category: 'Cards',
+    country: 'UK',
     mostUsed: false,
   },
 ];

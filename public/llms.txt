@@ -46,6 +46,7 @@
 
 ## Travel Calculators
 - [Avios Calculator & Destination Finder](https://boring-math.com/calculators/avios-destination-finder): Unofficial British Airways Avios calculator and reward flight guide. See every BA destination your Avios can reach, ranked by cost, with peak/off-peak prices, cash element, and companion voucher support. Guide prices from BA's published table, not live seat availability.
+- [UK Card Rewards & Perks Calculator](https://boring-math.com/calculators/card-rewards-calculator): Compare Amex, Revolut, Klarna and 20+ UK cards by the estimated net value of points, cashback, lounges and perks for your own spending. No application links, no commission.
 - [Tipping Guide Calculator](https://boring-math.com/calculators/tipping-guide-calculator): Tipping customs for 12 countries and 6 service types.
 - [Vacation Budget Calculator](https://boring-math.com/calculators/vacation-budget-calculator): Plan and budget a trip including flights, hotels, food, and activities.
 
