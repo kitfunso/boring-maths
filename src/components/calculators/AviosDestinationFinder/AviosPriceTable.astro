@@ -1,0 +1,84 @@
+---
+/**
+ * One static price table with all three cabins in the HTML. The page CSS
+ * shows the cabin the finder has chosen (html[data-avios-cabin]).
+ */
+import { DISTANCE_MILES_FROM_LONDON } from './data/distances';
+import { CABIN_LABELS, NOT_OFFERED } from './types';
+import type { Cabin, Destination, SeasonalAvios } from './types';
+
+interface Props {
+  rows: readonly Destination[];
+  caption: string;
+  class?: string;
+}
+const { rows, caption, class: className = '' } = Astro.props;
+
+const CABINS: readonly Cabin[] = ['economy', 'premiumEconomy', 'business'];
+const nf = new Intl.NumberFormat('en-GB');
+const fmtCash = (n: number): string => (Number.isInteger(n) ? `£${n}` : `£${n.toFixed(2)}`);
+const pricing = (d: Destination, c: Cabin): SeasonalAvios | null =>
+  d[c] === NOT_OFFERED ? null : d[c];
+const milesOf = (d: Destination): number => {
+  const miles = DISTANCE_MILES_FROM_LONDON[d.iata];
+  if (miles === undefined) throw new Error(`AviosPriceTable: no distance for "${d.city}"`);
+  return miles;
+};
+const head = 'text-right py-2 pl-3 whitespace-nowrap';
+const cell = 'text-right py-2 pl-3 tabular-nums whitespace-nowrap';
+---
+
+<div class:list={['overflow-x-auto', className]}>
+  <table class="w-full text-sm">
+    <caption class="sr-only">{caption}</caption>
+    <thead>
+      <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
+        <th scope="col" class="text-left py-2">Destination</th>
+        {
+          CABINS.map((c) => (
+            <>
+              <th scope="col" class={head} data-cabin={c}>
+                {CABIN_LABELS[c]} off-peak
+              </th>
+              <th scope="col" class={head} data-cabin={c}>
+                {CABIN_LABELS[c]} peak
+              </th>
+              <th scope="col" class={head} data-cabin={c}>
+                {CABIN_LABELS[c]} + cash from
+              </th>
+            </>
+          ))
+        }
+        <th scope="col" class={head}>Distance</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-white/10">
+      {
+        rows.map((d) => (
+          <tr>
+            <td class="py-2">
+              {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
+            </td>
+            {CABINS.map((c) => {
+              const p = pricing(d, c);
+              return (
+                <>
+                  <td class={cell} data-cabin={c}>
+                    {p ? nf.format(p.offPeak) : '-'}
+                  </td>
+                  <td class={cell} data-cabin={c}>
+                    {p ? nf.format(p.peak) : '-'}
+                  </td>
+                  <td class={cell} data-cabin={c}>
+                    {p ? fmtCash(p.cash) : '-'}
+                  </td>
+                </>
+              );
+            })}
+            <td class={cell}>{nf.format(milesOf(d))} mi</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

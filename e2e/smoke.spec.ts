@@ -67,6 +67,26 @@ test.describe('Category filtering', () => {
     }
   });
 
+  test('Avios pill filters to the finder and carries the rainbow', async ({ page }) => {
+    await page.goto('/');
+
+    const pill = page.locator('.category-btn[data-category="Avios"]');
+    await expect(pill).toBeVisible();
+    await pill.click();
+    await page.waitForTimeout(400);
+
+    await expect(pill).toHaveAttribute('aria-pressed', 'true');
+    const gradient = await pill.evaluate((el) => getComputedStyle(el).backgroundImage);
+    expect(gradient).toContain('linear-gradient');
+
+    const visible = page.locator('#calculators-grid .calculator-card:not(.hidden)');
+    await expect(visible).toHaveCount(1);
+    await expect(visible.first()).toHaveAttribute(
+      'data-href',
+      '/calculators/avios-destination-finder/'
+    );
+  });
+
   test('search filters cards by title', async ({ page }) => {
     await page.goto('/');
 
@@ -82,8 +102,7 @@ test.describe('Category filtering', () => {
     for (const card of await visible.all()) {
       const title = await card.getAttribute('data-title');
       const desc = await card.getAttribute('data-description');
-      const matches =
-        (title ?? '').includes('tip') || (desc ?? '').includes('tip');
+      const matches = (title ?? '').includes('tip') || (desc ?? '').includes('tip');
       expect(matches).toBe(true);
     }
   });
@@ -138,6 +157,13 @@ test.describe('Mobile filter toggle', () => {
     await toggle.click();
     await page.waitForTimeout(400);
     await expect(filterPanel).toHaveClass(/hidden/);
+  });
+
+  test('Avios pill is visible while the filter panel is collapsed', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page.locator('#filter-panel')).toHaveClass(/hidden/);
+    await expect(page.locator('.category-btn[data-category="Avios"]')).toBeVisible();
   });
 });
 

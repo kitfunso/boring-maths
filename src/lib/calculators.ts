@@ -57,7 +57,9 @@ export type CategoryName =
   | 'Life'
   | 'Automotive'
   | 'Travel'
-  | 'UK Tax';
+  | 'Avios'
+  | 'UK Tax'
+  | 'US Tax';
 
 export type CountryCode = 'UK' | 'US' | 'EU';
 
@@ -143,7 +145,10 @@ export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
   Engineering: 'text-orange-400 bg-orange-500/10 border-orange-500/20',
   Life: 'text-pink-400 bg-pink-500/10 border-pink-500/20',
   Automotive: 'text-green-400 bg-green-500/10 border-green-500/20',
+  Travel: 'text-sky-400 bg-sky-500/10 border-sky-500/20',
+  Avios: 'category-badge-avios',
   'UK Tax': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
+  'US Tax': 'text-red-400 bg-red-500/10 border-red-500/20',
 };
 
 // ---------------------------------------------------------------------------
@@ -1810,11 +1815,11 @@ export const calculators: readonly CalculatorEntry[] = [
   {
     title: 'Avios Destination Finder',
     description:
-      'See every BA destination your Avios can reach, filtered by budget, dates, region, and holiday type.',
+      'See every BA destination your Avios can reach, filtered by budget, travel dates, region, and holiday type.',
     href: '/calculators/avios-destination-finder/',
     icon: 'trending',
     color: 'blue',
-    category: 'Travel',
+    category: 'Avios',
     mostUsed: false,
   },
 ];

@@ -11,6 +11,7 @@ import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import AviosDestinationFinder from '../../components/calculators/AviosDestinationFinder/AviosDestinationFinder';
+import AviosPriceTable from '../../components/calculators/AviosDestinationFinder/AviosPriceTable.astro';
 import { DESTINATIONS } from '../../components/calculators/AviosDestinationFinder/data/destinations';
 import { DATA_LAST_VERIFIED } from '../../components/calculators/AviosDestinationFinder/data/peakCalendar';
 import {
@@ -277,7 +278,9 @@ const schemaBreadcrumbs = [
       Narrow the list by <strong>region</strong> and <strong>holiday type</strong>, choose your
       <strong>cabin</strong> (economy, premium economy, or business), and set how many
       <strong>travellers</strong> are going. If you hold a BA Amex <strong>companion voucher</strong
-      >, toggle it on to see the difference it makes to the Avios total.
+      >, pick which one you have (the free card's economy-only voucher or the Premium Plus voucher)
+      to see the difference it makes to the Avios total. The price tables further down the page
+      follow the cabin you choose.
     </p>
     <p>
       The results table ranks every matching destination by Avios cost, showing off-peak and peak
@@ -309,123 +312,39 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
-  <!-- Static price tables: server-rendered from the same verified dataset the
-       calculator uses, so search engines and answer engines can read the data
-       without executing the interactive island. -->
+  <!-- Static price tables: every cabin is in the HTML for crawlers; the CSS at the
+       bottom of this file shows the cabin the finder has chosen. -->
   <ContentSection title="Avios Prices from London: Popular Destinations">
-    <p>
-      One-way guide prices per person at the lowest-cash Reward Flight Saver combination, from BA's
-      published table (last verified {DATA_LAST_VERIFIED}). The cash element is payable per person
-      each way; peak and off-peak dates follow BA's published calendar.
-    </p>
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <caption class="sr-only">
-          Avios prices one-way from London for popular British Airways destinations
-        </caption>
-        <thead>
-          <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
-            <th scope="col" class="text-left py-2">Destination</th>
-            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy off-peak</th>
-            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy peak</th>
-            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
-            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
-            <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Distance</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-white/10">
-          {
-            popularRows.map((d) => {
-              const e = cabin(d.economy);
-              const b = cabin(d.business);
-              return (
-                <tr>
-                  <td class="py-2">
-                    {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
-                  </td>
-                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                    {e ? nf.format(e.offPeak) : '-'}
-                  </td>
-                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                    {e ? nf.format(e.peak) : '-'}
-                  </td>
-                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                    {b ? nf.format(b.offPeak) : '-'}
-                  </td>
-                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                    {e ? fmtCash(e.cash) : '-'}
-                  </td>
-                  <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                    {nf.format(milesOf(d))} mi
-                  </td>
-                </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
-    </div>
-    <details class="mt-6">
-      <summary class="cursor-pointer font-semibold">
-        Full A-Z Avios price list: all {DESTINATIONS.length} destinations
-      </summary>
-      <p class="mt-3">
-        Economy and business one-way prices for every BA destination in this tool. The cash column
-        is the economy lowest-cash element per person each way; business carries a higher cash
-        element. Premium Economy (long-haul only) and per-party totals are in the finder above.
+    <div id="avios-price-tables">
+      <p>
+        One-way guide prices per person at the lowest-cash Reward Flight Saver combination, from
+        BA's published table (last verified {DATA_LAST_VERIFIED}). The cash element is payable per
+        person each way; peak and off-peak dates follow BA's published calendar. Showing
+        <strong data-cabin="economy">Economy</strong><strong data-cabin="premiumEconomy"
+          >Premium Economy</strong
+        ><strong data-cabin="business">Business</strong> prices: change the cabin in the finder above
+        to switch.
       </p>
-      <div class="overflow-x-auto mt-3">
-        <table class="w-full text-sm">
-          <caption class="sr-only">
-            Full list of Avios prices one-way from London for all British Airways destinations
-          </caption>
-          <thead>
-            <tr class="text-[var(--color-muted)] text-xs uppercase tracking-wider">
-              <th scope="col" class="text-left py-2">Destination</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy off-peak</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Economy peak</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business off-peak</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Business peak</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">+ cash from</th>
-              <th scope="col" class="text-right py-2 pl-3 whitespace-nowrap">Distance</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/10">
-            {
-              DESTINATIONS.map((d) => {
-                const e = cabin(d.economy);
-                const b = cabin(d.business);
-                return (
-                  <tr>
-                    <td class="py-2">
-                      {d.city} <span class="text-[var(--color-muted)]">{d.country}</span>
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {e ? nf.format(e.offPeak) : '-'}
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {e ? nf.format(e.peak) : '-'}
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {b ? nf.format(b.offPeak) : '-'}
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {b ? nf.format(b.peak) : '-'}
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {e ? fmtCash(e.cash) : '-'}
-                    </td>
-                    <td class="text-right py-2 pl-3 tabular-nums whitespace-nowrap">
-                      {nf.format(milesOf(d))} mi
-                    </td>
-                  </tr>
-                );
-              })
-            }
-          </tbody>
-        </table>
-      </div>
-    </details>
+      <AviosPriceTable
+        rows={popularRows}
+        caption="Avios prices one-way from London for popular British Airways destinations"
+      />
+      <details class="mt-6">
+        <summary class="cursor-pointer font-semibold">
+          Full A-Z Avios price list: all {DESTINATIONS.length} destinations
+        </summary>
+        <p class="mt-3">
+          Every BA destination in this tool, one-way per person in the cabin chosen above. The cash
+          column is that cabin's lowest-cash element per person each way. Short-haul routes have no
+          Premium Economy cabin, and per-party totals are in the finder.
+        </p>
+        <AviosPriceTable
+          rows={DESTINATIONS}
+          caption="Full list of Avios prices one-way from London for all British Airways destinations"
+          class="mt-3"
+        />
+      </details>
+    </div>
   </ContentSection>
 
   <!-- Companion Voucher Explainer -->
@@ -439,12 +358,25 @@ const schemaBreadcrumbs = [
     <p>
       The free BA Amex card's voucher covers economy only and is valid for one year, issued after
       £15,000 of card spend in a year. The Premium Plus voucher covers all cabins and is valid for
-      two years, for the same level of annual spend. A solo 50% discount option also exists on some
-      bookings, but this tool does not model it - toggle the voucher on above to see how it changes
-      the Avios total for two travellers.
+      two years, for the same level of annual spend. Choose your voucher in the finder above to see
+      how it changes the Avios total for two travellers; if the free voucher does not cover your
+      cabin, the finder says so and prices two full seats. A solo 50% discount option also exists on
+      some bookings, but this tool does not model it.
     </p>
   </ContentSection>
 
   <!-- FAQ Section -->
   <FAQSection faqs={faqs} />
 </CalculatorLayout>
+
+<style is:global>
+  /* The finder stamps data-avios-cabin on <html>; every cabin stays in the HTML, one is shown. */
+  html:not([data-avios-cabin]) #avios-price-tables [data-cabin]:not([data-cabin='economy']),
+  html[data-avios-cabin='economy'] #avios-price-tables [data-cabin]:not([data-cabin='economy']),
+  html[data-avios-cabin='premiumEconomy']
+    #avios-price-tables
+    [data-cabin]:not([data-cabin='premiumEconomy']),
+  html[data-avios-cabin='business'] #avios-price-tables [data-cabin]:not([data-cabin='business']) {
+    display: none;
+  }
+</style>

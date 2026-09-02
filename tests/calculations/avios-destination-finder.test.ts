@@ -7,6 +7,7 @@ import {
   resolveSeasonsForRange,
   calculatePartyTotals,
   computeResults,
+  voucherApplies,
 } from '../../src/components/calculators/AviosDestinationFinder/calculations';
 import { DESTINATIONS } from '../../src/components/calculators/AviosDestinationFinder/data/destinations';
 import {
@@ -372,7 +373,7 @@ describe('AviosDestinationFinder', () => {
       const withVoucher = computeResults({
         ...base,
         aviosBudget: 55000,
-        companionVoucher: true,
+        voucher: 'premiumPlus',
         dateFrom: '2026-06-08',
         dateTo: '2026-06-11',
       });
@@ -529,8 +530,8 @@ describe('AviosDestinationFinder', () => {
       // New York anchor (both seasons apply with no dates set, so rankAvios
       // uses the off-peak column for both calls): voucher only changes
       // aviosSeats, so partyMiles is identical and valuePer1k should double.
-      const noVoucher = computeResults({ ...base, companionVoucher: false });
-      const withVoucher = computeResults({ ...base, companionVoucher: true });
+      const noVoucher = computeResults({ ...base, voucher: 'none' });
+      const withVoucher = computeResults({ ...base, voucher: 'premiumPlus' });
       const nyNoVoucher = noVoucher.ranked.find((x) => x.destination.city === 'New York')!;
       const nyWithVoucher = withVoucher.ranked.find((x) => x.destination.city === 'New York')!;
       expect(nyWithVoucher.valuePer1k).toBeCloseTo(nyNoVoucher.valuePer1k * 2, 5);
@@ -619,7 +620,7 @@ describe('AviosDestinationFinder', () => {
       const withVoucher = computeResults({
         ...base,
         aviosBudget: 1000000,
-        companionVoucher: true,
+        voucher: 'premiumPlus',
         travellers: 2,
       });
       const cheapest = withVoucher.affordable.reduce((min, x) =>
@@ -628,7 +629,7 @@ describe('AviosDestinationFinder', () => {
       const withoutVoucher = computeResults({
         ...base,
         aviosBudget: 1000000,
-        companionVoucher: false,
+        voucher: 'none',
         travellers: 2,
       });
       const cheapestNoVoucher = withoutVoucher.ranked.find(
@@ -639,19 +640,69 @@ describe('AviosDestinationFinder', () => {
     });
 
     it('is 0 when the companion voucher is off', () => {
-      const r = computeResults({ ...base, companionVoucher: false });
+      const r = computeResults({ ...base, voucher: 'none' });
       expect(r.voucherSavingAvios).toBe(0);
     });
 
     it('is 0 for a single traveller even with the voucher flag set', () => {
-      const r = computeResults({ ...base, companionVoucher: true, travellers: 1 });
+      const r = computeResults({ ...base, voucher: 'premiumPlus', travellers: 1 });
       expect(r.voucherSavingAvios).toBe(0);
     });
 
     it('is 0 when nothing is affordable', () => {
-      const r = computeResults({ ...base, aviosBudget: 1, companionVoucher: true, travellers: 2 });
+      const r = computeResults({ ...base, aviosBudget: 1, voucher: 'premiumPlus', travellers: 2 });
       expect(r.affordable.length).toBe(0);
       expect(r.voucherSavingAvios).toBe(0);
+    });
+  });
+
+  describe('voucherApplies', () => {
+    it('needs two travellers', () => {
+      expect(voucherApplies('premiumPlus', 'business', 1)).toBe(false);
+      expect(voucherApplies('free', 'economy', 1)).toBe(false);
+    });
+
+    it('free voucher is economy only', () => {
+      expect(voucherApplies('free', 'economy', 2)).toBe(true);
+      expect(voucherApplies('free', 'premiumEconomy', 2)).toBe(false);
+      expect(voucherApplies('free', 'business', 2)).toBe(false);
+    });
+
+    it('Premium Plus voucher covers every cabin', () => {
+      expect(voucherApplies('premiumPlus', 'economy', 2)).toBe(true);
+      expect(voucherApplies('premiumPlus', 'premiumEconomy', 2)).toBe(true);
+      expect(voucherApplies('premiumPlus', 'business', 2)).toBe(true);
+    });
+
+    it('none never applies', () => {
+      expect(voucherApplies('none', 'economy', 2)).toBe(false);
+    });
+  });
+
+  describe('voucher types in computeResults', () => {
+    const base = { ...getDefaultInputs(), aviosBudget: 1_000_000, cabin: 'business' as const };
+    const ny = (r: ReturnType<typeof computeResults>) =>
+      r.ranked.find((x) => x.destination.city === 'New York')!;
+
+    it('free voucher in Business prices two full seats', () => {
+      const none = computeResults({ ...base, voucher: 'none' });
+      const free = computeResults({ ...base, voucher: 'free' });
+      expect(free.voucherApplied).toBe(false);
+      expect(free.voucherSavingAvios).toBe(0);
+      expect(ny(free).rankAvios).toBe(ny(none).rankAvios);
+    });
+
+    it('Premium Plus voucher in Business halves the Avios and keeps the cash', () => {
+      const none = computeResults({ ...base, voucher: 'none' });
+      const plus = computeResults({ ...base, voucher: 'premiumPlus' });
+      expect(plus.voucherApplied).toBe(true);
+      expect(ny(plus).rankAvios).toBe(ny(none).rankAvios / 2);
+      expect(ny(plus).cashTotal).toBe(ny(none).cashTotal);
+    });
+
+    it('free voucher applies in Economy', () => {
+      const free = computeResults({ ...base, cabin: 'economy', voucher: 'free' });
+      expect(free.voucherApplied).toBe(true);
     });
   });
 });

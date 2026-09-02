@@ -51,8 +51,20 @@ export const CABIN_LABELS: Readonly<Record<Cabin, string>> = {
   business: 'Business (Club)',
 };
 
-export type TripType = 'return' | 'oneWay';
-export type SortKey = 'avios' | 'value' | 'cash' | 'peakSaving' | 'distance' | 'name';
+export const TRIP_TYPES = ['return', 'oneWay'] as const;
+export type TripType = (typeof TRIP_TYPES)[number];
+export const SORT_KEYS = ['avios', 'value', 'cash', 'peakSaving', 'distance', 'name'] as const;
+export type SortKey = (typeof SORT_KEYS)[number];
+
+/** BA Amex companion vouchers: the free card's is economy only, Premium Plus covers every cabin. */
+export const VOUCHER_TYPES = ['none', 'free', 'premiumPlus'] as const;
+export type VoucherType = (typeof VOUCHER_TYPES)[number];
+
+export const VOUCHER_LABELS: Readonly<Record<VoucherType, string>> = {
+  none: 'None',
+  free: 'Free BA Amex voucher',
+  premiumPlus: 'BA Premium Plus voucher',
+};
 
 export interface PartyTotalsInputs {
   readonly oneWayAvios: number;
@@ -101,7 +113,7 @@ export interface AviosFinderInputs {
   readonly holidayTypes: readonly HolidayType[];
   readonly cabin: Cabin;
   readonly travellers: 1 | 2;
-  readonly companionVoucher: boolean;
+  readonly voucher: VoucherType;
   readonly tripType: TripType;
   readonly sortKey: SortKey;
   readonly showOverBudget: boolean;
@@ -144,10 +156,9 @@ export interface AviosFinderResult {
   readonly notOfferedCount: number;
   readonly seasons: SeasonWindow;
   readonly totalDestinations: number;
-  /**
-   * Avios saved by the companion voucher on the cheapest affordable row.
-   * 0 when the voucher is off, travellers !== 2, or nothing is affordable.
-   */
+  /** True when the chosen voucher gives the 2-for-1 in this cabin for two travellers. */
+  readonly voucherApplied: boolean;
+  /** Avios the voucher saves on the cheapest affordable row; 0 when it does not apply or nothing is affordable. */
   readonly voucherSavingAvios: number;
 }
 
@@ -160,7 +171,7 @@ export function getDefaultInputs(): AviosFinderInputs {
     holidayTypes: [],
     cabin: 'economy',
     travellers: 2,
-    companionVoucher: false,
+    voucher: 'none',
     tripType: 'return',
     sortKey: 'avios',
     showOverBudget: true,
