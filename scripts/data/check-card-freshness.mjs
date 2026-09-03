@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /** Flags CardPerksCalculator rows past the staleness window; parses cards.ts
  *  as text so CI never needs the Astro/TS toolchain. Usage: --days N. */
 

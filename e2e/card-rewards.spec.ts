@@ -6,6 +6,7 @@ import { CARDS } from '../src/components/calculators/CardPerksCalculator/data/ca
 
 const PAGE = '/calculators/card-rewards-calculator/';
 const TABLE_NAME = 'Cards ranked by estimated net value';
+const SHORTLIST_NAME = 'Top ranked cards for your spend';
 
 // The island stamps the attribute on mount, so its presence doubles as the hydration signal.
 const waitForIsland = (page: Page) =>
@@ -13,29 +14,66 @@ const waitForIsland = (page: Page) =>
     timeout: 15_000,
   });
 
+// The page opens at the shortlist, so every deeper layer needs a click first.
+const openNumbers = async (page: Page) => {
+  await waitForIsland(page);
+  await page.locator('summary', { hasText: 'Edit your numbers' }).click();
+  await expect(page.locator('#spend-groceries')).toBeVisible();
+};
+
+const openAllCards = async (page: Page) => {
+  await waitForIsland(page);
+  await page.locator('summary', { hasText: 'Compare all cards' }).click();
+  await expect(page.getByRole('table', { name: TABLE_NAME })).toBeVisible();
+};
+
 test.describe('Card Rewards & Perks Calculator', () => {
-  test('loads with a heading and a ranked table of at least 20 cards', async ({ page }) => {
+  test('opens on the shortlist with the detail layers closed', async ({ page }) => {
     await page.goto(PAGE);
     await expect(
       page.getByRole('heading', { level: 1, name: 'Card Rewards & Perks Calculator' })
     ).toBeVisible();
+    await waitForIsland(page);
+
+    const shortlist = page.getByRole('region', { name: SHORTLIST_NAME });
+    await expect(shortlist).toBeVisible();
+    await expect(shortlist.locator('button[aria-controls^="shortlist-breakdown-"]')).toHaveCount(3);
+
+    await expect(page.locator('#spend-groceries')).toBeHidden();
+    await expect(page.getByRole('table', { name: TABLE_NAME })).toBeHidden();
+  });
+
+  test('the full table opens on request with at least 20 cards', async ({ page }) => {
+    await page.goto(PAGE);
+    await openAllCards(page);
 
     const table = page.getByRole('table', { name: TABLE_NAME });
     const rowCount = await table.locator('tbody tr').count();
     expect(rowCount).toBeGreaterThanOrEqual(20);
   });
 
+  test('changing a spend input changes the shortlist', async ({ page }) => {
+    await page.goto(PAGE);
+    await waitForIsland(page);
+    const shortlist = page.getByRole('region', { name: SHORTLIST_NAME });
+    const before = await shortlist.innerText();
+
+    await openNumbers(page);
+    await page.locator('#spend-groceries').fill('20000');
+    await page.locator('#spend-groceries').blur();
+
+    await expect.poll(() => shortlist.innerText()).not.toBe(before);
+  });
+
   test('changing a spend input changes the top row net value text', async ({ page }) => {
     await page.goto(PAGE);
+    await openAllCards(page);
     const table = page.getByRole('table', { name: TABLE_NAME });
     const netCellBefore = await table.locator('tbody tr').first().locator('td').last().innerText();
 
-    const groceries = page.locator('#spend-groceries');
-    await expect(groceries).toBeVisible();
-    await waitForIsland(page);
-
-    await groceries.fill('20000');
-    await groceries.blur();
+    await openNumbers(page);
+    await page.locator('#spend-groceries').fill('20000');
+    await page.locator('#spend-groceries').blur();
 
     await expect
       .poll(() => table.locator('tbody tr').first().locator('td').last().innerText())
@@ -44,6 +82,7 @@ test.describe('Card Rewards & Perks Calculator', () => {
 
   test('a card-type chip filter reduces the row count', async ({ page }) => {
     await page.goto(PAGE);
+    await openAllCards(page);
     const table = page.getByRole('table', { name: TABLE_NAME });
     const before = await table.locator('tbody tr').count();
 
@@ -51,22 +90,39 @@ test.describe('Card Rewards & Perks Calculator', () => {
       .getByRole('group', { name: 'Filter by card type' })
       .getByRole('button', { name: 'Debit card' });
     await expect(chip).toBeVisible();
-    await waitForIsland(page);
 
     await chip.click();
 
     await expect.poll(() => table.locator('tbody tr').count()).toBeLessThan(before);
   });
 
+  test('expanding a shortlist card reveals its breakdown', async ({ page }) => {
+    await page.goto(PAGE);
+    await waitForIsland(page);
+
+    const shortlist = page.getByRole('region', { name: SHORTLIST_NAME });
+    const toggle = shortlist.locator('button[aria-controls^="shortlist-breakdown-"]').first();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    const panelId = await toggle.getAttribute('aria-controls');
+    if (!panelId) throw new Error('Shortlist toggle has no aria-controls');
+
+    await toggle.click();
+
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    const panel = page.locator(`#${panelId}`);
+    await expect(panel).toBeVisible();
+    await expect(panel.getByText('Welcome bonus')).toBeVisible();
+  });
+
   test('expanding a row reveals its breakdown', async ({ page }) => {
     await page.goto(PAGE);
+    await openAllCards(page);
     const table = page.getByRole('table', { name: TABLE_NAME });
     const expandButton = table.locator('tbody tr').first().getByRole('button');
 
     await expect(expandButton).toHaveAttribute('aria-expanded', 'false');
     const rowId = await expandButton.getAttribute('aria-controls');
     if (!rowId) throw new Error('Expand button has no aria-controls');
-    await waitForIsland(page);
 
     await expandButton.click();
     await expect(expandButton).toHaveAttribute('aria-expanded', 'true');
@@ -78,6 +134,7 @@ test.describe('Card Rewards & Perks Calculator', () => {
 
   test('both table wrappers are keyboard-focusable labelled regions', async ({ page }) => {
     await page.goto(PAGE);
+    await openAllCards(page);
     const regions = page.locator(
       'div[role="region"][tabindex="0"][aria-label$="scrolls sideways"]'
     );
@@ -117,6 +174,8 @@ test.describe('Card Rewards & Perks Calculator', () => {
     test(`no clipped controls at ${viewport.width}x${viewport.height}`, async ({ page }) => {
       await page.setViewportSize(viewport);
       await page.goto(PAGE);
+      await openAllCards(page);
+      await openNumbers(page);
       await expect(page.locator('#spendAbroad')).toBeVisible();
 
       const report = await collectOverflow(page, '#spendAbroad');
