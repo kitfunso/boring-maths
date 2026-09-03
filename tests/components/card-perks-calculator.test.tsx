@@ -24,6 +24,40 @@ describe('CardPerksCalculator', () => {
     expect(rows.length).toBe(expected);
   });
 
+  it('leads with a shortlist and keeps the inputs and the full table collapsed', () => {
+    const { container } = render(<CardPerksCalculator />);
+
+    const tiles = container.querySelectorAll('button[aria-controls^="shortlist-breakdown-"]');
+    expect(tiles.length).toBe(3);
+
+    const summaries = Array.from(container.querySelectorAll('details > summary')).map(
+      (s) => s.textContent ?? ''
+    );
+    expect(summaries.some((t) => t.startsWith('Edit your numbers'))).toBe(true);
+    expect(summaries.some((t) => t.startsWith('Compare all cards'))).toBe(true);
+
+    for (const details of container.querySelectorAll('details')) {
+      expect((details as HTMLDetailsElement).open).toBe(false);
+    }
+  });
+
+  it('reveals a shortlist breakdown only when asked', () => {
+    const { container } = render(<CardPerksCalculator />);
+    const tile = () =>
+      container.querySelector<HTMLButtonElement>(
+        'button[aria-controls^="shortlist-breakdown-"]'
+      ) as HTMLButtonElement;
+
+    const panelId = tile().getAttribute('aria-controls') as string;
+    expect(tile().getAttribute('aria-expanded')).toBe('false');
+    expect(document.getElementById(panelId)).toBeNull();
+
+    fireEvent.click(tile());
+
+    expect(tile().getAttribute('aria-expanded')).toBe('true');
+    expect(document.getElementById(panelId)?.textContent).toContain('Welcome bonus');
+  });
+
   it('changing a spend input changes a rendered net value', () => {
     const { container } = render(<CardPerksCalculator />);
     const before = container.querySelector('table tbody')?.textContent;
