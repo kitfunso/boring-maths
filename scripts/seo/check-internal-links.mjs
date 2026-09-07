@@ -20,7 +20,6 @@ function checkFile(file) {
     const href = raw.replace(/[#?].*$/, ''); // strip fragment/query, THEN check the path
     if (href === '/' || href === '') continue;
     if (/\.[a-z0-9]+$/i.test(href)) continue; // asset files (.xml, .webp, .txt, ...)
-    if (href === '/embed' || href.startsWith('/embed/')) continue;
     if (!href.endsWith('/')) offenders.push(`${path.relative(DIST, file)}: ${raw}`);
   }
 }

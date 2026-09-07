@@ -43,6 +43,11 @@ export function sanitizeDimension(val: string): string {
   return val.replace(/[^0-9.%a-z]/gi, '');
 }
 
+/** Embed page URL. The trailing slash is load-bearing: the site is trailingSlash 'always'. */
+export function embedUrl(slug: string, absolute = false): string {
+  return `${absolute ? 'https://boring-math.com' : ''}/embed/${slug}/`;
+}
+
 /**
  * Generate embed snippet HTML.
  *
@@ -56,6 +61,6 @@ export function getEmbedSnippet(slug: string, width?: string, height?: string): 
   const h = sanitizeDimension(height || embedConfig.defaultHeight);
   const entry = getBySlug(`/calculators/${slug}/`);
   const name = entry ? entry.title : 'Calculator';
-  return `<iframe src="https://boring-math.com/embed/${slug}" width="${w}" height="${h}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy" title="${name}"></iframe>
+  return `<iframe src="${embedUrl(slug, true)}" width="${w}" height="${h}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy" title="${name}"></iframe>
 <p style="font-size:12px;text-align:right;margin-top:4px;"><a href="https://boring-math.com/calculators/${slug}/" rel="nofollow noopener" target="_blank">${name}</a> by Boring Math</p>`;
 }

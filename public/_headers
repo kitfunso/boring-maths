@@ -3,3 +3,8 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Embeds are meant to be framed by third-party sites, so the site-wide DENY
+# above has to come off here. Everything else in /* still applies.
+/embed/*
+  ! X-Frame-Options
