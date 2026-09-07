@@ -266,6 +266,7 @@ const schemaBreadcrumbs = [
   <HeroSection
     title="Avios Calculator & Destination Finder"
     description="See every British Airways destination your Avios can reach, filtered by budget, dates, region, and holiday type."
+    quickAnswer={`Short-haul Europe reward flights start at ${nf.format(shortHaulMinOffPeak)} Avios one-way off-peak, and long-haul economy such as New York is ${nf.format(nyEcon.offPeak)} Avios one-way off-peak, plus ${fmtCash(nyEcon.cash)} cash each way. The finder prices all ${DESTINATIONS.length} British Airways destinations at once and shows which ones your balance reaches.`}
     faqs={faqs}
   />
 
