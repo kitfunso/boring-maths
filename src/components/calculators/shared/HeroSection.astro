@@ -4,17 +4,22 @@
  *
  * Displays the title and description header for calculator pages.
  */
+import { leadAnswer } from '../../../lib/leadAnswer';
+import type { FAQ } from './FAQSection.astro';
 
 export interface Props {
   /** Main heading (H1) */
   title: string;
   /** Subtitle/description text */
   description: string;
-  /** Short numeric answer shown above the tool, for readers and AI answer engines */
+  /** Overrides the answer derived from faqs, when the first FAQ is not the best lead */
   quickAnswer?: string;
+  /** The page's FAQ list; its first answer becomes the lead passage */
+  faqs?: FAQ[];
 }
 
-const { title, description, quickAnswer } = Astro.props;
+const { title, description, quickAnswer, faqs } = Astro.props;
+const answer = quickAnswer ?? leadAnswer(faqs?.[0]);
 ---
 
 <header class="text-center mb-10">
@@ -25,9 +30,9 @@ const { title, description, quickAnswer } = Astro.props;
     {description}
   </p>
   {
-    quickAnswer && (
+    answer && (
       <p class="mt-6 max-w-2xl mx-auto text-left text-[var(--color-cream)] bg-white/5 border-l-2 border-[var(--color-cream)]/40 rounded-r px-4 py-3">
-        {quickAnswer}
+        {answer}
       </p>
     )
   }
