@@ -1,3 +1,5 @@
+import { getBySlug } from './calculators';
+
 export interface EmbedConfig {
   /** Origins allowed for white-label (no badge) */
   whitelabelOrigins: readonly string[];
@@ -41,9 +43,19 @@ export function sanitizeDimension(val: string): string {
   return val.replace(/[^0-9.%a-z]/gi, '');
 }
 
-/** Generate embed snippet HTML */
+/**
+ * Generate embed snippet HTML.
+ *
+ * The credit link sits in the host page, not the iframe: the iframe document is
+ * noindex,nofollow, so a link inside it reaches nobody. rel="nofollow" follows
+ * Google's widget-link guidance - this is a referral and attribution link, not
+ * a ranking one.
+ */
 export function getEmbedSnippet(slug: string, width?: string, height?: string): string {
   const w = sanitizeDimension(width || embedConfig.defaultWidth);
   const h = sanitizeDimension(height || embedConfig.defaultHeight);
-  return `<iframe src="https://boring-math.com/embed/${slug}" width="${w}" height="${h}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy"></iframe>`;
+  const entry = getBySlug(`/calculators/${slug}/`);
+  const name = entry ? entry.title : 'Calculator';
+  return `<iframe src="https://boring-math.com/embed/${slug}" width="${w}" height="${h}" frameborder="0" style="border:none;border-radius:12px;" loading="lazy" title="${name}"></iframe>
+<p style="font-size:12px;text-align:right;margin-top:4px;"><a href="https://boring-math.com/calculators/${slug}/" rel="nofollow noopener" target="_blank">${name}</a> by Boring Math</p>`;
 }
