@@ -1,11 +1,13 @@
 ---
+import { calculatorUrl } from '../../lib/embeds';
+
 export interface Props {
   calculatorSlug: string;
   whiteLabel?: boolean;
 }
 
 const { calculatorSlug, whiteLabel = false } = Astro.props;
-const backlink = `https://boring-math.com/calculators/${calculatorSlug}`;
+const backlink = calculatorUrl(calculatorSlug);
 ---
 
 {

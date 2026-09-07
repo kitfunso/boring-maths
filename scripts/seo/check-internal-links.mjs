@@ -6,6 +6,7 @@ import path from 'node:path';
 import { walkFiles } from '../lib/walk-files.mjs';
 
 const DIST = path.resolve('dist');
+const ORIGIN = 'https://boring-math.com';
 const offenders = [];
 if (!fs.existsSync(DIST)) {
   console.error('dist/ not found. Run `npm run build` first.');
@@ -14,10 +15,10 @@ if (!fs.existsSync(DIST)) {
 
 function checkFile(file) {
   const html = fs.readFileSync(file, 'utf8');
-  for (const match of html.matchAll(/(?<![\w-])href="(\/[^"]*)"/g)) {
+  for (const match of html.matchAll(/(?<![\w-])href="((?:https:\/\/boring-math\.com)?\/[^"]*)"/g)) {
     const raw = match[1];
     if (raw.startsWith('//')) continue; // protocol-relative external
-    const href = raw.replace(/[#?].*$/, ''); // strip fragment/query, THEN check the path
+    const href = raw.replace(ORIGIN, '').replace(/[#?].*$/, ''); // absolute self-links count too
     if (href === '/' || href === '') continue;
     if (/\.[a-z0-9]+$/i.test(href)) continue; // asset files (.xml, .webp, .txt, ...)
     if (!href.endsWith('/')) offenders.push(`${path.relative(DIST, file)}: ${raw}`);
