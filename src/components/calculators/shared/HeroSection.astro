@@ -10,9 +10,11 @@ export interface Props {
   title: string;
   /** Subtitle/description text */
   description: string;
+  /** Short numeric answer shown above the tool, for readers and AI answer engines */
+  quickAnswer?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, quickAnswer } = Astro.props;
 ---
 
 <header class="text-center mb-10">
@@ -22,4 +24,11 @@ const { title, description } = Astro.props;
   <p class="text-xl text-[var(--color-subtle)] max-w-2xl mx-auto">
     {description}
   </p>
+  {
+    quickAnswer && (
+      <p class="mt-6 max-w-2xl mx-auto text-left text-[var(--color-cream)] bg-white/5 border-l-2 border-[var(--color-cream)]/40 rounded-r px-4 py-3">
+        {quickAnswer}
+      </p>
+    )
+  }
 </header>
