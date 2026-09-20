@@ -1,0 +1,188 @@
+---
+/** Singapore Resident Income Tax Calculator page, YA2026 progressive rates. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeIncomeTax } from '../../components/calculators/SingaporeIncomeTax';
+
+const title = 'Singapore Income Tax Calculator YA2026 | Boring Math';
+const description =
+  'Estimate your Singapore resident income tax for Year of Assessment 2026. See total tax, effective rate, marginal rate and the full bracket breakdown using the published progressive rates.';
+const keywords =
+  'singapore income tax calculator, singapore tax calculator 2026, ya2026 tax calculator, iras tax calculator, singapore resident tax rates, singapore chargeable income calculator';
+const canonicalURL = '/calculators/singapore-income-tax-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Income Tax Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore CPF Retirement Sum Calculator',
+    description: 'See where your CPF balance sits against the 2026 retirement sums.',
+    href: '/calculators/singapore-cpf-retirement-sum-calculator/',
+    icon: 'shield' as const,
+    color: 'ocean' as const,
+  },
+  {
+    title: 'Ireland Take-Home Pay Calculator',
+    description: 'Estimate net salary after income tax, USC and PRSI.',
+    href: '/calculators/ireland-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net pay across European countries.',
+    href: '/calculators/eu-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Work out your number for financial independence.',
+    href: '/calculators/fire-calculator/',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What income tax rates apply for YA2026 in Singapore?',
+    answer:
+      'Singapore uses progressive resident rates from 0% on the first 20,000 dollars of chargeable income up to 24% on the amount above 1,000,000 dollars, in twelve bands. These rates are unchanged from YA2024 and YA2025. This calculator uses the same published bracket table, confirmed against PwC Tax Summaries and Statrys because IRAS serves its rate page as a JavaScript app that cannot be read directly.',
+  },
+  {
+    question: 'What is chargeable income and how is it different from my salary?',
+    answer:
+      'Chargeable income is your assessable income (broadly your total income for the year) minus any personal reliefs you qualify for, such as CPF relief, earned income relief or course fees relief. Tax is calculated on chargeable income, not on your gross salary. This calculator lets you enter a total reliefs figure so you can see the effect, or leave it at zero to tax the full assessable income.',
+  },
+  {
+    question: 'How does the progressive bracket system actually work?',
+    answer:
+      'Singapore taxes income in slices, not as a single flat rate on the whole amount. The first 20,000 dollars is tax free, the next 10,000 is taxed at 2%, the next 10,000 at 3.5%, and so on up through the higher bands. Only the portion of your income that falls inside a given band is taxed at that band rate, which is why the effective rate on your total income is always lower than the marginal rate on your last dollar.',
+  },
+  {
+    question: 'What is the difference between my effective rate and my marginal rate?',
+    answer:
+      'Your effective rate is the total tax divided by your chargeable income, expressed as a percentage: it tells you the average bite tax takes out of your income. Your marginal rate is the rate charged on the last dollar of your chargeable income, from the highest bracket you reach. The marginal rate is always higher than or equal to the effective rate because it ignores the lower rates charged on the earlier slices.',
+  },
+  {
+    question: 'Does this calculator include tax rebates or reliefs beyond what I enter?',
+    answer:
+      'No. It applies the published progressive rate table to whatever chargeable income you provide after your own relief figure is subtracted. It does not model specific reliefs like the CPF cash top-up relief, parenthood tax rebate, or any one-off rebate IRAS may announce for a given year. For a precise figure that accounts for every relief and rebate you qualify for, use the IRAS income tax calculator or check your Notice of Assessment.',
+  },
+  {
+    question: 'Is this calculator financial or tax advice?',
+    answer:
+      'No. This tool computes an estimate from published rates; it does not recommend any tax planning strategy, relief claim, or financial product. For a figure you can rely on, or for advice on your specific situation, use the official IRAS calculator or speak to a qualified tax adviser.',
+  },
+  {
+    question: 'Why does the tax jump so much between some of the bands?',
+    answer:
+      'The rate steps are uneven by design: they rise slowly through the lower bands (2%, 3.5%, 7%) to keep tax low for modest incomes, then rise in half-point and full-point steps through the middle bands, before larger jumps to 22%, 23% and 24% at the top. Each step only applies to the income inside that band, so a jump in the rate table does not mean a jump in your total tax bill at that exact income level.',
+  },
+  {
+    question: 'Are these the same rates for non-residents?',
+    answer:
+      'No. Non-resident individuals are taxed differently, generally at a flat 15% on employment income or the resident progressive rates, whichever gives a higher amount, with other income types taxed at a flat 24%. This calculator only applies the resident progressive rates, so it is not accurate for someone who does not meet the Singapore tax residency test for the year.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Income Tax Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Income Tax Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Income Tax Calculator"
+    description="Estimate your YA2026 resident income tax, effective rate, marginal rate and full bracket breakdown."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeIncomeTax client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your annual assessable income, your total income for the year before reliefs. If you
+      want to see the effect of reliefs such as CPF relief or earned income relief, enter their
+      combined total in the second field; the calculator subtracts it to give your chargeable
+      income. Leave it at zero to tax the full assessable income instead.
+    </p>
+    <p>
+      Results update instantly with no submit button. The headline figure is your total tax payable,
+      followed by your effective and marginal rates and a full breakdown of how much tax each
+      bracket contributes.
+    </p>
+    <p>
+      This calculator computes tax only. It does not recommend a relief to claim, a way to reduce
+      your bill, or any other financial decision.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      Singapore resident individuals pay income tax on a progressive bracket system for Year of
+      Assessment 2026: 0% on the first 20,000 dollars of chargeable income, then rising through 2%,
+      3.5%, 7%, 11.5%, 15%, 18%, 19%, 19.5%, 20%, 22% and 23% across the middle bands, up to 24% on
+      chargeable income above 1,000,000 dollars.
+    </p>
+    <p>
+      The calculator walks through each band in order. Only the slice of your chargeable income that
+      falls inside a given band is taxed at that band's rate; everything below it has already been
+      taxed at the lower rates that applied to those earlier slices. Summing the tax from every band
+      gives the total tax payable.
+    </p>
+    <p>
+      Effective rate is total tax divided by chargeable income. Marginal rate is the rate of the
+      highest band your income reaches, the rate that would apply to your next dollar earned.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The bracket breakdown table shows exactly how much of your bill comes from each band, which
+      makes it easy to see why the system is progressive: a large share of tax on a high income
+      usually comes from the upper bands, while the first 20,000 dollars never contributes anything
+      regardless of how much you earn overall.
+    </p>
+    <p>
+      Watch the gap between your effective and marginal rate. A wide gap means most of your income
+      is still being taxed at the lower bands even though your top slice has reached a much higher
+      rate, which is normal for middle incomes under this system.
+    </p>
+    <p>
+      Treat the result as a planning estimate for the YA2026 tax year. It does not include specific
+      reliefs beyond the total you enter, tax rebates, or non-resident tax rules. Confirm figures
+      that matter against the official IRAS calculator or your Notice of Assessment.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

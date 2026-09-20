@@ -62,7 +62,7 @@ export type CategoryName =
   | 'UK Tax'
   | 'US Tax';
 
-export type CountryCode = 'UK' | 'US' | 'EU';
+export type CountryCode = 'UK' | 'US' | 'EU' | 'SG';
 
 export interface CalculatorEntry {
   readonly title: string;
@@ -1833,6 +1833,115 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'violet',
     category: 'Cards',
     country: 'UK',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description:
+      'Work out your Singapore net salary after CPF, using the contribution rates that apply from 1 January 2026.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'calculator',
+    color: 'green',
+    category: 'Income',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Employer CPF Cost Calculator',
+    description:
+      'Total monthly cost of a Singapore hire: employer CPF by age band plus the Skills Development Levy.',
+    href: '/calculators/singapore-employer-cost-calculator/',
+    icon: 'briefcase',
+    color: 'blue',
+    category: 'Business',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Income Tax Calculator',
+    description:
+      'Estimate your Singapore resident income tax for YA2026 using the published progressive brackets.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent',
+    color: 'coral',
+    category: 'Income',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Stamp Duty Calculator',
+    description:
+      'Buyer Stamp Duty and Additional Buyer Stamp Duty on a Singapore property, by residency status and property count.',
+    href: '/calculators/singapore-stamp-duty-calculator/',
+    icon: 'home',
+    color: 'violet',
+    category: 'Finance',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Seller Stamp Duty Calculator',
+    description:
+      'Seller Stamp Duty on a Singapore property sale, using the correct rate table for your purchase date.',
+    href: '/calculators/singapore-seller-stamp-duty-calculator/',
+    icon: 'home',
+    color: 'amber',
+    category: 'Finance',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore CPF Retirement Sum Calculator',
+    description:
+      'See where your CPF balance sits against the 2026 Basic, Full and Enhanced Retirement Sums.',
+    href: '/calculators/singapore-cpf-retirement-sum-calculator/',
+    icon: 'shield',
+    color: 'ocean',
+    category: 'Finance',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Notice Period Calculator',
+    description:
+      'Your MOM notice period by length of service, and the salary in lieu if notice is not served.',
+    href: '/calculators/singapore-notice-period-calculator/',
+    icon: 'calendar',
+    color: 'pink',
+    category: 'Income',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore AWS Bonus Calculator',
+    description:
+      'Prorate a 13th month AWS bonus for a part-year joiner or leaver, showing both methods employers use.',
+    href: '/calculators/singapore-aws-bonus-calculator/',
+    icon: 'dollar',
+    color: 'accent',
+    category: 'Income',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore GST Calculator',
+    description: 'Add or remove Singapore GST at 9%, including the landed cost of imported goods.',
+    href: '/calculators/singapore-gst-calculator/',
+    icon: 'percent',
+    color: 'green',
+    category: 'Everyday',
+    country: 'SG',
+    mostUsed: false,
+  },
+  {
+    title: 'Singapore Utility Bill Calculator',
+    description:
+      'Estimate your SP Group electricity and PUB water bill from your monthly usage, including GST.',
+    href: '/calculators/singapore-utility-bill-calculator/',
+    icon: 'bolt',
+    color: 'amber',
+    category: 'Home',
+    country: 'SG',
     mostUsed: false,
   },
 ];

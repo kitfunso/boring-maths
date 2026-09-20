@@ -1,0 +1,186 @@
+---
+/** Singapore CPF Retirement Sum Calculator page, 2026 BRS/FRS/ERS figures. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeCPFRetirementSum } from '../../components/calculators/SingaporeCPFRetirementSum';
+
+const title = 'Singapore CPF Retirement Sum Calculator 2026 | Boring Math';
+const description =
+  'See where your CPF balance stands against the 2026 Basic, Full and Enhanced Retirement Sums, your shortfall to each, and a projected balance at age 55.';
+const keywords =
+  'singapore cpf retirement sum calculator, cpf brs frs ers 2026, basic retirement sum calculator, full retirement sum calculator, enhanced retirement sum calculator, cpf projection calculator';
+const canonicalURL = '/calculators/singapore-cpf-retirement-sum-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore CPF Retirement Sum Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Income Tax Calculator',
+    description: 'Estimate your YA2026 resident income tax and bracket breakdown.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'FIRE Calculator',
+    description: 'Work out your number for financial independence.',
+    href: '/calculators/fire-calculator/',
+    icon: 'trending' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings grow over time.',
+    href: '/calculators/compound-interest-calculator/',
+    icon: 'trending' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Roth IRA Calculator',
+    description: 'Project a retirement account balance over time.',
+    href: '/calculators/roth-ira-calculator/',
+    icon: 'shield' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What are the Basic, Full and Enhanced Retirement Sums for 2026?',
+    answer:
+      'For 2026, the CPF Board sets the Basic Retirement Sum (BRS) at 110,200 dollars, the Full Retirement Sum (FRS) at 220,400 dollars (exactly twice the BRS), and the Enhanced Retirement Sum (ERS) at 440,800 dollars. These sums apply to members turning 55 in 2026 and set the CPF LIFE payout tier your balance can support.',
+  },
+  {
+    question: 'Why is the Enhanced Retirement Sum 4 times the Basic Retirement Sum?',
+    answer:
+      'From 1 January 2025, the CPF Board raised the ERS ceiling from 3 times the BRS to 4 times the BRS, letting members top up to a higher CPF LIFE payout in retirement. Before that date the ERS was 3x BRS. Some older calculators and PDFs still show the 3x figure, so double check any source you use is current for 2025 and 2026.',
+  },
+  {
+    question: 'How is the projected balance at age 55 calculated?',
+    answer:
+      'The calculator compounds your current balance annually at 4%, the CPF interest rate that applies to Special, MediSave and Retirement Account monies, and adds your expected annual contribution at the end of each year until you turn 55. If you are already 55 or older, no projection is shown because the CPF Board sets your retirement sum at 55 based on your balance at that point, not a future one.',
+  },
+  {
+    question: 'What counts as my CPF balance for this calculator?',
+    answer:
+      'Before age 55, use your combined Ordinary Account and Special Account balance, since both are swept into your new Retirement Account at 55. From age 55 onward, use your Retirement Account balance directly. This calculator treats whatever figure you enter as the amount being measured against the three retirement sums.',
+  },
+  {
+    question: 'Does this calculator show my CPF LIFE monthly payout?',
+    answer:
+      'No, deliberately. The CPF Board does not publish the formula that converts an arbitrary retirement sum balance into a CPF LIFE monthly payout; it only publishes payouts at the standard BRS, FRS and ERS anchor points for a given cohort. Any calculator that shows you a precise monthly payout for a custom balance is interpolating and presenting a guess as a fact. For a reliable payout estimate, use the official CPF LIFE Estimator at cpf.gov.sg.',
+  },
+  {
+    question: 'What happens if my balance already meets the Enhanced Retirement Sum?',
+    answer:
+      'If your balance meets or exceeds the ERS, this calculator shows all three sums as met with a shortfall of zero to each. You have reached the highest CPF LIFE payout tier the scheme currently allows; contributing further to your Retirement Account beyond the ERS is not permitted.',
+  },
+  {
+    question: 'Is this financial advice about how much I should save?',
+    answer:
+      'No. This tool only computes where your numbers currently sit and projects a compounding balance; it does not recommend a savings rate, a top-up amount, or any other course of action. For advice tailored to your retirement plans, speak to a licensed financial adviser or use the planning tools at cpf.gov.sg.',
+  },
+  {
+    question: 'What is the Basic Healthcare Sum and why does it appear here?',
+    answer:
+      'The Basic Healthcare Sum (BHS) is the 2026 ceiling on your MediSave Account, set at 79,000 dollars; it is separate from the three retirement sums and caps how much you need to keep in MediSave for healthcare needs rather than for CPF LIFE payouts. It is included here for reference because it is set annually alongside the retirement sums and is often confused with them.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore CPF Retirement Sum Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore CPF Retirement Sum Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore CPF Retirement Sum Calculator"
+    description="Check your CPF balance against the 2026 Basic, Full and Enhanced Retirement Sums, and project it to age 55."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeCPFRetirementSum client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your current CPF balance, either your combined Ordinary and Special Account balance if
+      you are under 55, or your Retirement Account balance if you are 55 or older. Add your current
+      age and how much you expect to contribute to your account each year.
+    </p>
+    <p>
+      Results update instantly. You will see whether your balance already meets the Basic, Full or
+      Enhanced Retirement Sum for 2026, your shortfall to each one, and, if you are under 55, a
+      projected balance at age 55 based on compounding at the CPF interest rate.
+    </p>
+    <p>
+      This calculator does not output a CPF LIFE monthly payout figure. See the FAQ below for why.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      <strong>Retirement sum status:</strong> your entered balance is compared directly against the 2026
+      figures: Basic Retirement Sum 110,200 dollars, Full Retirement Sum 220,400 dollars, and Enhanced
+      Retirement Sum 440,800 dollars. Shortfalls are simply each sum minus your balance, floored at zero
+      once you have met it.
+    </p>
+    <p>
+      <strong>Projection to 55:</strong> starting from your current balance, the calculator compounds
+      annually at 4%, the rate CPF pays on Special, MediSave and Retirement Account monies, and adds your
+      expected annual contribution at the end of each year, repeated for the number of years between your
+      current age and 55.
+    </p>
+    <p>
+      If you are already 55 or older, the projection is skipped because your retirement sum standing
+      is already fixed at your current balance rather than a future one.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      Meeting the Basic Retirement Sum with a property pledge, or the Full Retirement Sum outright,
+      sets the CPF LIFE payout tier available to you from age 65. Meeting the Enhanced Retirement
+      Sum, raised to 4 times the Basic Retirement Sum from 1 January 2025, unlocks the highest
+      payout tier the scheme currently supports.
+    </p>
+    <p>
+      The projected balance shows what your account could look like at 55 if you keep contributing
+      at your current expected rate and CPF interest holds at 4%. Real balances vary with actual
+      contribution history, interest rate changes, and any withdrawals or transfers.
+    </p>
+    <p>
+      Because CPF Board does not publish a payout formula for arbitrary balances, use this
+      calculator to check your progress toward a sum, and use the official CPF LIFE Estimator when
+      you need an actual expected monthly payout figure.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

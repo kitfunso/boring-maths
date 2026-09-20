@@ -1,0 +1,181 @@
+---
+/** Singapore Utility Bill Calculator page. SP Group electricity + PUB water, both rate-dated so a stale quarter can't pass as current. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeUtilityBill } from '../../components/calculators/SingaporeUtilityBill';
+import {
+  TARIFF_PERIOD,
+  WATER_TARIFF_EFFECTIVE_DATE,
+} from '../../components/calculators/SingaporeUtilityBill/calculations';
+
+const title = 'Singapore Utility Bill Calculator: SP Electricity + PUB Water | Boring Math';
+const description =
+  'Estimate your Singapore SP Group electricity bill and PUB water bill from your monthly usage, including GST. Uses the current quarterly SP tariff and the tiered PUB water rate.';
+const keywords =
+  'singapore utility bill calculator, sp group electricity calculator, singapore electricity bill calculator, pub water bill calculator, singapore water tariff calculator, sp tariff calculator, singapore electricity cost per kwh';
+const canonicalURL = '/calculators/singapore-utility-bill-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Utility Bill Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description: 'Estimate your Singapore net salary after CPF.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Singapore GST Calculator',
+    description: 'Add or remove Singapore GST at 9%.',
+    href: '/calculators/singapore-gst-calculator/',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Electricity Cost',
+    description: 'Calculate appliance running costs.',
+    href: '/calculators/electricity-cost-calculator/',
+    icon: 'bolt' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Singapore Income Tax Calculator',
+    description: 'Work out your annual Singapore income tax.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is the SP Group electricity bill calculated?',
+    answer: `SP Group's regulated tariff is charged per kilowatt-hour (kWh) of electricity used. For ${TARIFF_PERIOD}, the tariff is 31.91 cents per kWh before GST and 34.78 cents per kWh with GST included. Multiply your monthly usage in kWh by the rate to estimate your electricity cost for that quarter.`,
+  },
+  {
+    question: 'Why does the SP tariff keep changing?',
+    answer:
+      'SP Group revises the regulated electricity tariff every quarter to reflect changes in fuel and other costs. Because of this, any rate quoted here, or anywhere else, is only accurate for the quarter it applies to. Always check spgroup.com.sg for the tariff of the current quarter before relying on a bill estimate.',
+  },
+  {
+    question: 'What is included in the SP Group tariff?',
+    answer:
+      'SP Group publishes the regulated tariff as four components: the energy cost (the cost of generating electricity), the network cost (transporting it through the grid), the Market Support Services Fee, and the Market Administration and Power System Operation Fee. This calculator uses the combined published rate rather than estimating a split between them.',
+  },
+  {
+    question: 'How is the PUB water bill calculated, and why does it use tiers?',
+    answer:
+      'PUB charges water in two tiers per month: the first 40 cubic metres at a lower rate, and any usage above 40 cubic metres at a higher rate. Only the excess above 40 cubic metres is charged at the higher tier rate, the first 40 cubic metres always get the lower rate no matter how much you use in total. This works the same way income tax bands do.',
+  },
+  {
+    question: 'What are the three parts of the PUB water tariff?',
+    answer:
+      "Each cubic metre of water is charged as three components: the water tariff itself, the Water Conservation Tax (a percentage of the tariff meant to discourage overuse), and a waterborne fee that funds used-water treatment. These rates changed on 1 April 2025 and are shown separately in the calculator's breakdown.",
+  },
+  {
+    question: 'Does GST apply to my electricity and water bill?',
+    answer:
+      "Yes. Singapore's 9% GST applies on top of both the electricity tariff and the water tariff. This calculator shows each utility before and after GST, plus a combined total, so you can see exactly how much of your bill is GST.",
+  },
+  {
+    question: 'Why might my actual bill be different from this estimate?',
+    answer:
+      "This calculator only estimates the usage-based tariff charges. It doesn't include fixed charges some retailers apply, meter reading timing differences, wastewater or other government fees billed separately, or usage from a different quarter's tariff. If you're on the Open Electricity Market with a retailer other than SP Group, your rate will differ from the SP-regulated tariff used here.",
+  },
+  {
+    question: 'Is this bill estimate accurate enough to budget with?',
+    answer:
+      "It's a reasonable planning estimate using officially published rates, not a substitute for your actual bill. Treat it as a way to sanity-check a bill or estimate a new home's running costs, not as financial advice, and always compare it against your real SP Group or PUB statement.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Utility Bill Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Utility Bill Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Utility Bill Calculator"
+    description={`Estimate your SP Group electricity bill (${TARIFF_PERIOD} tariff) and PUB water bill (from ${WATER_TARIFF_EFFECTIVE_DATE}), including GST.`}
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeUtilityBill client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your monthly electricity usage in kilowatt-hours (kWh) and your monthly water usage in
+      cubic metres. Both are printed on your SP Group and PUB bills. The calculator updates
+      instantly as you type, no submit button needed.
+    </p>
+    <p>
+      The result shows electricity and water costs separately, each before and after GST, plus a
+      combined monthly total. The water breakdown also shows how much of your usage fell into each
+      pricing tier.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      <strong>Electricity:</strong> usage in kWh &times; the SP Group regulated tariff for {
+        TARIFF_PERIOD
+      }. This tariff is revised every quarter, so a rate that is current today may not be current by
+      the time you read this. Always confirm the latest rate at spgroup.com.sg.
+    </p>
+    <p>
+      <strong>Water:</strong> the first 40 cubic metres of monthly usage are charged at the tier 1 rate,
+      and only the usage above 40 cubic metres is charged at the higher tier 2 rate. Each tier's rate
+      is the sum of the water tariff, the Water Conservation Tax, and the waterborne fee, effective from
+      {WATER_TARIFF_EFFECTIVE_DATE}.
+    </p>
+    <p>
+      <strong>GST:</strong> Singapore's 9% GST is added on top of both the electricity and water totals
+      to give the final, GST-inclusive monthly bill.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is your estimated combined monthly bill, GST included, with the before-GST
+      total shown just underneath. The two breakdown panels below split out electricity and water so
+      you can see which utility, and which water tier, is driving your costs.
+    </p>
+    <p>
+      Because the SP tariff changes quarterly and this calculator hardcodes the {TARIFF_PERIOD} rate,
+      treat the electricity figure as accurate for that period only. The water tariff, effective
+      {WATER_TARIFF_EFFECTIVE_DATE}, changes less often but is still worth checking against a recent
+      PUB bill if your usage estimate matters for budgeting.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

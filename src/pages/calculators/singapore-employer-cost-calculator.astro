@@ -1,0 +1,188 @@
+---
+/** Singapore employer cost: employer CPF plus SDL, rates effective 1 Jan 2026. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeEmployerCost } from '../../components/calculators/SingaporeEmployerCost';
+
+const title = 'Singapore Employer CPF Cost Calculator 2026 | Boring Math';
+const description =
+  'Work out the total monthly cost of a Singapore hire. This employer cost calculator adds CPF and the Skills Development Levy using the rates that apply from 1 January 2026.';
+const keywords =
+  'singapore employer cost calculator, employer cpf calculator, skills development levy calculator, singapore hiring cost calculator, cpf employer contribution 2026, cost of employee singapore';
+const canonicalURL = '/calculators/singapore-employer-cost-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Employer CPF Cost Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description: 'See what a Singapore employee takes home after CPF.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Contractor vs Employee Calculator',
+    description: 'Compare the true cost of hiring a contractor versus an employee.',
+    href: '/calculators/contractor-vs-employee-calculator/',
+    icon: 'briefcase' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net pay across European countries.',
+    href: '/calculators/eu-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert an hourly rate to an annual salary.',
+    href: '/calculators/hourly-to-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is the total cost of a Singapore employee calculated?',
+    answer:
+      'Total employer cost is the employee gross wage plus employer CPF contributions plus the Skills Development Levy (SDL). This calculator applies the employer CPF rate for the employee age band and the SDL rate, both effective 1 January 2026, then adds all three together for a monthly and annual figure.',
+  },
+  {
+    question: 'What are the employer CPF contribution rates from 1 January 2026?',
+    answer:
+      'For employees 55 and below, the employer pays 17% of wages. That rate steps down by age band: 16% for 55-to-60, 12.5% for 60-to-65, 9% for 65-to-70, and 7.5% above 70. Contributions apply to Ordinary Wages only, up to the $8,000 monthly ceiling.',
+  },
+  {
+    question: 'What is the Skills Development Levy (SDL)?',
+    answer:
+      'SDL is a monthly levy paid by employers on every employee, local and foreign, to fund workforce upgrading. It is charged at 0.25% of monthly total wages, applied to the first $4,500 of wages, with a minimum of $2 and a maximum of $11.25 per employee per month.',
+  },
+  {
+    question: 'Is SDL charged even on very low wages?',
+    answer:
+      'Yes. SDL has a $2 monthly minimum, so even an employee earning a small wage still costs the employer at least $2 in levy. The minimum only stops applying once 0.25% of wages naturally exceeds $2, which happens above roughly $800 a month, and the levy caps out at $11.25 once wages reach $4,500.',
+  },
+  {
+    question: 'Does employer CPF also attract the $8,000 OW ceiling?',
+    answer:
+      'Yes. Only Ordinary Wages up to $8,000 a month attract CPF, on both the employee and employer sides. Wages above the ceiling are not subject to CPF, so employer CPF cost stops growing once gross wage passes $8,000, even though the wage cost itself keeps rising.',
+  },
+  {
+    question: 'Does this include bonuses or Additional Wages?',
+    answer:
+      "No. Additional Wages, such as an annual bonus, are subject to a separate annual CPF ceiling that depends on the employee's Ordinary Wages for the year. This calculator is built for a monthly salary estimate and does not model Additional Wage contributions.",
+  },
+  {
+    question: 'Is this financial or tax advice?',
+    answer:
+      'No. This is an information tool that estimates employer cost using CPF and SDL rates effective 1 January 2026. It does not account for every scheme or exemption an employer might qualify for. For figures you can rely on, check the CPF Board and IRAS directly.',
+  },
+  {
+    question: 'How much does CPF and SDL typically add to a salary?',
+    answer:
+      "It depends heavily on the employee's age band and wage level. For an employee 55 and below earning above the graduated band, employer CPF alone adds 17% on top of wages up to the OW ceiling, plus a small SDL charge. The calculator shows this as a percentage on top of salary so you can compare across wage levels.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Employer CPF Cost Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Employer CPF Cost Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Employer CPF Cost Calculator"
+    description="Work out the true monthly cost of a Singapore hire: gross wage plus employer CPF and the Skills Development Levy, using rates effective 1 January 2026."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeEmployerCost client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter the employee's monthly gross wage and pick their age band. The calculator updates
+      instantly, with no submit button to press. Employer CPF rates change by age band, so the total
+      cost of two employees on the same wage can differ if they fall into different bands.
+    </p>
+    <p>
+      The headline figure is the total monthly employer cost: the gross wage itself, plus the
+      employer's CPF contribution, plus the Skills Development Levy. Below it you will see the same
+      figure expressed annually, useful for budgeting headcount costs or comparing hires.
+    </p>
+    <p>
+      The metric cards break out employer CPF, SDL, and the combined cost as a percentage on top of
+      the base salary, so you can see at a glance how much a hire really costs beyond the wage
+      itself.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>Total employer cost is the sum of three amounts, using rates effective 1 January 2026.</p>
+    <p>
+      <strong>Employer CPF:</strong> the employer contribution rate for the employee's age band, applied
+      to Ordinary Wages up to the $8,000 monthly ceiling. The rate ranges from 17% for employees 55 and
+      below down to 7.5% for employees above 70.
+    </p>
+    <p>
+      <strong>Skills Development Levy (SDL):</strong> 0.25% of monthly total wages, applied to the first
+      $4,500 of wages, with a $2 minimum and an $11.25 maximum per employee per month. SDL is payable
+      on every employee, local and foreign.
+    </p>
+    <p>
+      Adding the gross wage, employer CPF, and SDL together gives the total monthly cost. The annual
+      figure simply multiplies that by twelve, and the percentage on top of salary divides employer
+      CPF plus SDL by the gross wage.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The large blue figure is the total monthly cost of employing this person, with the annual
+      equivalent shown just underneath. This is the number to use when budgeting headcount, not the
+      gross salary alone, since CPF and SDL are real cash costs on top of wages.
+    </p>
+    <p>
+      The cost-on-top percentage is worth comparing across age bands and wage levels. For an
+      employee 55 and below, employer CPF alone can add up to 17% on top of wages within the OW
+      ceiling, meaningfully more than for an older employee in a lower CPF band.
+    </p>
+    <p>
+      Remember the assumptions baked into the result: this is a 2026 estimate using published CPF
+      and SDL rates for Ordinary Wages only. It does not include Additional Wages such as bonuses,
+      which use a separate annual CPF ceiling. Treat the result as a planning estimate, not
+      payroll-grade output or financial advice.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
