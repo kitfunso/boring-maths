@@ -1,0 +1,557 @@
+---
+/**
+ * Answer Hub: Best Singapore Calculators 2026
+ * Every rate on the linked pages carries its effective date, because Singapore
+ * revises CPF annually, stamp duty by announcement, and utilities quarterly.
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title =
+  'Best Free Singapore Calculators 2026: CPF Take-Home Pay, Stamp Duty, Income Tax and GST';
+const description =
+  'Free Singapore calculators using published 2026 rates - CPF take-home pay, employer CPF and SDL cost, income tax, Buyer and Seller Stamp Duty, CPF retirement sums, notice period, AWS bonus, GST and utility bills. No signup required.';
+const canonicalURL = '/guides/best-singapore-calculators';
+
+const calculators = [
+  {
+    rank: 1,
+    name: 'Singapore Take-Home Pay Calculator',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    description:
+      'Works out your net monthly salary after the employee CPF contribution, using the rates effective 1 January 2026 and the 8,000 dollar Ordinary Wage ceiling.',
+    bestFor: 'Anyone reading a Singapore job offer and wanting the number that reaches the bank.',
+  },
+  {
+    rank: 2,
+    name: 'Singapore Employer CPF Cost Calculator',
+    href: '/calculators/singapore-employer-cost-calculator/',
+    description:
+      'Total monthly cost of a hire: the employer CPF contribution by age band plus the Skills Development Levy, which is charged on every employee.',
+    bestFor: 'Small business owners and HR working out the true cost of a salary.',
+  },
+  {
+    rank: 3,
+    name: 'Singapore Income Tax Calculator',
+    href: '/calculators/singapore-income-tax-calculator/',
+    description:
+      'Resident income tax across the progressive brackets, with the per-band breakdown so you can see the marginal rate separately from the effective rate.',
+    bestFor: 'Residents estimating their annual tax bill before filing.',
+  },
+  {
+    rank: 4,
+    name: 'Singapore Stamp Duty Calculator',
+    href: '/calculators/singapore-stamp-duty-calculator/',
+    description:
+      'Buyer Stamp Duty across its six bands plus Additional Buyer Stamp Duty by residency status and property count, which is where the large numbers come from.',
+    bestFor: 'Anyone budgeting the upfront cash needed to buy a Singapore property.',
+  },
+  {
+    rank: 5,
+    name: 'Singapore Seller Stamp Duty Calculator',
+    href: '/calculators/singapore-seller-stamp-duty-calculator/',
+    description:
+      'Seller Stamp Duty using the correct rate table for your purchase date. Properties bought from 4 July 2025 sit on a different, longer table than earlier ones.',
+    bestFor: 'Sellers checking whether their holding period still attracts duty.',
+  },
+  {
+    rank: 6,
+    name: 'Singapore CPF Retirement Sum Calculator',
+    href: '/calculators/singapore-cpf-retirement-sum-calculator/',
+    description:
+      'Where your balance sits against the 2026 Basic, Full and Enhanced Retirement Sums, with a projection to age 55 at the published CPF interest rate.',
+    bestFor: 'Anyone planning CPF retirement targets rather than guessing at them.',
+  },
+  {
+    rank: 7,
+    name: 'Singapore Notice Period Calculator',
+    href: '/calculators/singapore-notice-period-calculator/',
+    description:
+      'Your statutory notice period by length of service, the salary in lieu if notice is not served, and unused leave encashment, all on MOM computation methods.',
+    bestFor: 'Anyone resigning or being let go who needs their final pay figure.',
+  },
+  {
+    rank: 8,
+    name: 'Singapore AWS Bonus Calculator',
+    href: '/calculators/singapore-aws-bonus-calculator/',
+    description:
+      'Prorates a 13th month AWS bonus for a part-year joiner or leaver, and shows both methods employers use side by side rather than silently picking one.',
+    bestFor: 'Anyone who joined or left partway through the year.',
+  },
+  {
+    rank: 9,
+    name: 'Singapore GST Calculator',
+    href: '/calculators/singapore-gst-calculator/',
+    description:
+      'Adds or removes GST at 9 percent, and works out the landed cost of imported goods including freight, insurance and any duty.',
+    bestFor: 'Shoppers and small businesses, especially on overseas orders.',
+  },
+  {
+    rank: 10,
+    name: 'Singapore Utility Bill Calculator',
+    href: '/calculators/singapore-utility-bill-calculator/',
+    description:
+      'Estimates the SP Group electricity and PUB water bill from your monthly usage, with the tiered water rate applied correctly and GST added.',
+    bestFor: 'Households checking a bill or budgeting a move.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How much CPF is deducted from my salary in Singapore?',
+    answer:
+      'For employees aged 55 and below, the employee share is 20 percent of Ordinary Wages and the employer adds 17 percent, giving a 37 percent total. The employee share steps down with age: 18 percent above 55 to 60, 12.5 percent above 60 to 65, 7.5 percent above 65 to 70, and 5 percent above 70. Contributions apply only to Ordinary Wages up to 8,000 dollars a month, so a higher salary does not increase the monthly CPF deduction beyond that ceiling. These are the rates effective 1 January 2026.',
+  },
+  {
+    question: 'What is the Ordinary Wage ceiling and why does it matter?',
+    answer:
+      'The Ordinary Wage ceiling caps the monthly salary that attracts CPF contributions at 8,000 dollars. Someone earning 10,000 dollars a month pays the same monthly employee CPF as someone earning 8,000 dollars, because the slice above the ceiling is not subject to contributions. It matters most when comparing offers, since take-home pay rises faster than gross pay once you are above the ceiling.',
+  },
+  {
+    question: 'Why is Additional Buyer Stamp Duty so much larger than Buyer Stamp Duty?',
+    answer:
+      'Buyer Stamp Duty is a banded charge that works out to a low single-digit percentage for most homes. Additional Buyer Stamp Duty is a flat percentage applied to the entire purchase price, and the rates are deliberately high for second properties and for foreign buyers. A foreign buyer pays 60 percent of the whole price in ABSD, which on most transactions dwarfs the BSD entirely. This is why the two are always calculated together.',
+  },
+  {
+    question: 'Does the date I bought my property change the Seller Stamp Duty I pay?',
+    answer:
+      'Yes, and this is the single most common error in the calculation. Properties purchased on or after 4 July 2025 fall on a four-year table starting at 16 percent, while properties purchased between 11 March 2017 and 3 July 2025 fall on a three-year table starting at 12 percent. Using the wrong table can produce a figure that is wrong by tens of thousands of dollars, which is why the purchase date is a required input rather than an optional one.',
+  },
+  {
+    question: 'Is AWS, the 13th month bonus, required by law in Singapore?',
+    answer:
+      'No. The Ministry of Manpower is explicit that AWS is a variable payment made according to the terms of the employment contract and is not required by law. Because there is no statutory entitlement, there is also no official formula for prorating it when someone joins or leaves partway through the year. Employers use either a daily method or a completed-months method, and the two give different answers, so the AWS calculator shows both rather than presenting one as correct.',
+  },
+  {
+    question: 'Do I pay CPF on salary in lieu of notice?',
+    answer:
+      'No. CPF contributions are not payable on salary paid in lieu of notice. This catches people out because it is treated differently from ordinary salary, and assuming CPF applies will understate the final payment. The notice period calculator applies the MOM gross rate of pay per day and leaves the amount free of CPF.',
+  },
+  {
+    question: 'Why can these calculators not tell me my CPF LIFE monthly payout?',
+    answer:
+      'CPF Board does not publish a payout formula for arbitrary balances, only figures at a few published anchor points. Any calculator that outputs a precise monthly payout for a custom balance is interpolating between those anchors and presenting an estimate as a fact. Rather than do that, these pages show your standing against the Basic, Full and Enhanced Retirement Sums and point you to the official CPF LIFE Estimator for a payout figure.',
+  },
+  {
+    question: 'How often do Singapore utility rates change?',
+    answer:
+      'The SP Group electricity tariff is revised every quarter, so a figure that was right three months ago may not be right today. The calculator shows which quarter its rate belongs to next to the result rather than presenting it as permanently current. PUB water rates change far less often and are currently those effective 1 April 2025, charged on a tiered basis where only usage above 40 cubic metres a month attracts the higher rate.',
+  },
+];
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ItemList',
+      name: 'Best Free Singapore Calculators 2026',
+      url: 'https://boring-math.com/guides/best-singapore-calculators/',
+      numberOfItems: calculators.length,
+      itemListElement: calculators.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        url: `https://boring-math.com${c.href}`,
+        description: c.description,
+      })),
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <main class="guide-page">
+    <div class="container">
+      <header class="guide-header">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a> › <a href="/guides/">Guides</a> › Best Singapore Calculators 2026
+        </nav>
+        <h1>{title}</h1>
+        <p class="subtitle">
+          Every rate dated &bull; All calculators free &bull; No signup required
+        </p>
+      </header>
+
+      <section class="tldr-block" aria-label="Quick summary">
+        <h2>TL;DR</h2>
+        <p>
+          Singapore money questions almost always come down to a published government rate applied
+          to your own numbers: CPF by age band, stamp duty by band and residency, income tax by
+          bracket, GST at 9 percent. These ten calculators apply those rates and show the working.
+          Each one states the date its rates took effect, because CPF changes annually, stamp duty
+          changes by announcement, and the electricity tariff changes every quarter. All are free
+          with no signup.
+        </p>
+      </section>
+
+      <section class="ranked-list">
+        <h2>Ten Singapore Calculators for 2026</h2>
+        {
+          calculators.map((c) => (
+            <article class="calculator-card">
+              <div class="rank">#{c.rank}</div>
+              <div class="calc-content">
+                <h3>
+                  <a href={c.href}>{c.name}</a>
+                </h3>
+                <p>{c.description}</p>
+                <p class="best-for">
+                  <strong>Best for:</strong> {c.bestFor}
+                </p>
+                <a href={c.href} class="cta-link">
+                  Open calculator →
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </section>
+
+      <section class="comparison-table">
+        <h2>Quick Comparison</h2>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Calculator</th>
+                <th>Best for</th>
+                <th>Free</th>
+                <th>No account needed</th>
+                <th>Rates dated</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                calculators.map((c) => (
+                  <tr>
+                    <td>
+                      <a href={c.href}>{c.name}</a>
+                    </td>
+                    <td>{c.bestFor.split('.')[0]}</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                    <td>Yes</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="how-to-choose">
+        <h2>How to Choose</h2>
+        <ul>
+          <li>
+            Reading a job offer: start with the <a
+              href="/calculators/singapore-take-home-pay-calculator/"
+              >Singapore Take-Home Pay Calculator</a
+            > for the net figure, then the <a href="/calculators/singapore-income-tax-calculator/"
+              >Singapore Income Tax Calculator</a
+            > for the annual tax bill, which CPF does not cover.
+          </li>
+          <li>
+            Hiring someone: the <a href="/calculators/singapore-employer-cost-calculator/"
+              >Singapore Employer CPF Cost Calculator</a
+            > adds employer CPF and the Skills Development Levy to the salary so you see the real monthly
+            cost.
+          </li>
+          <li>
+            Buying a home: the <a href="/calculators/singapore-stamp-duty-calculator/"
+              >Singapore Stamp Duty Calculator</a
+            > covers the upfront duty. If you are selling within a few years of buying, check the <a
+              href="/calculators/singapore-seller-stamp-duty-calculator/"
+              >Singapore Seller Stamp Duty Calculator</a
+            > first, since the rate depends on when you bought.
+          </li>
+          <li>
+            Leaving a job: the <a href="/calculators/singapore-notice-period-calculator/"
+              >Singapore Notice Period Calculator</a
+            > handles notice and leave encashment, and the <a
+              href="/calculators/singapore-aws-bonus-calculator/">Singapore AWS Bonus Calculator</a
+            > handles a part-year bonus.
+          </li>
+          <li>
+            Planning retirement: the <a href="/calculators/singapore-cpf-retirement-sum-calculator/"
+              >Singapore CPF Retirement Sum Calculator</a
+            > compares your balance against the three retirement sums.
+          </li>
+          <li>
+            Day to day: the <a href="/calculators/singapore-gst-calculator/"
+              >Singapore GST Calculator</a
+            > and the <a href="/calculators/singapore-utility-bill-calculator/"
+              >Singapore Utility Bill Calculator</a
+            > cover shopping and household bills.
+          </li>
+        </ul>
+      </section>
+
+      <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        {
+          faqs.map((f) => (
+            <details class="faq-item">
+              <summary>{f.question}</summary>
+              <p>{f.answer}</p>
+            </details>
+          ))
+        }
+      </section>
+
+      <section class="browse-more">
+        <h2>Browse More Calculators</h2>
+        <p>
+          Boring Math has 180+ free calculators covering salary, tax, property, savings, business,
+          and everyday maths. <a href="/calculators/">Browse the full list →</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .guide-page {
+    padding: 2rem 1rem 4rem;
+    color: var(--color-text, #e2e8f0);
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: #718096;
+    margin-bottom: 0.75rem;
+  }
+
+  .breadcrumb a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .guide-header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: #a0aec0;
+    font-size: 0.95rem;
+  }
+
+  .tldr-block {
+    background: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid #6366f1;
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+  }
+
+  .tldr-block h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #818cf8;
+    margin-bottom: 0.6rem;
+  }
+
+  .tldr-block p {
+    line-height: 1.7;
+    font-size: 1.02rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.5rem;
+  }
+
+  .calculator-card {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .rank {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #6366f1;
+    min-width: 2.5rem;
+    padding-top: 0.2rem;
+  }
+
+  .calc-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .calc-content h3 a {
+    color: #e2e8f0;
+    text-decoration: none;
+  }
+
+  .calc-content h3 a:hover {
+    color: #818cf8;
+  }
+
+  .calc-content p {
+    color: #a0aec0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.4rem;
+  }
+
+  .best-for {
+    font-size: 0.9rem !important;
+  }
+
+  .best-for strong {
+    color: #e2e8f0;
+  }
+
+  .cta-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #818cf8;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .cta-link:hover {
+    text-decoration: underline;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 0.65rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  th {
+    color: #a0aec0;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  td a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  td a:hover {
+    text-decoration: underline;
+  }
+
+  .how-to-choose ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .how-to-choose li {
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .how-to-choose li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #6366f1;
+  }
+
+  .how-to-choose a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.8rem 0;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    color: #6366f1;
+    font-size: 1.2rem;
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item p {
+    margin-top: 0.7rem;
+    color: #a0aec0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .browse-more p {
+    color: #a0aec0;
+    line-height: 1.7;
+  }
+
+  .browse-more a {
+    color: #818cf8;
+    text-decoration: none;
+  }
+
+  .browse-more a:hover {
+    text-decoration: underline;
+  }
+</style>

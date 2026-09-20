@@ -50,5 +50,17 @@
 - [Tipping Guide Calculator](https://boring-math.com/calculators/tipping-guide-calculator): Tipping customs for 12 countries and 6 service types.
 - [Vacation Budget Calculator](https://boring-math.com/calculators/vacation-budget-calculator): Plan and budget a trip including flights, hotels, food, and activities.
 
+## Singapore Calculators
+- [Singapore Take-Home Pay Calculator](https://boring-math.com/calculators/singapore-take-home-pay-calculator): Net salary after CPF, using the contribution rates that apply from 1 January 2026.
+- [Singapore Employer Cost Calculator](https://boring-math.com/calculators/singapore-employer-cost-calculator): Total cost of an employee including employer CPF and the Skills Development Levy.
+- [Singapore Income Tax Calculator](https://boring-math.com/calculators/singapore-income-tax-calculator): Resident income tax for YA2026 across the progressive brackets.
+- [Singapore Stamp Duty Calculator](https://boring-math.com/calculators/singapore-stamp-duty-calculator): Buyer's Stamp Duty and Additional Buyer's Stamp Duty by residency status and property count.
+- [Singapore Seller Stamp Duty Calculator](https://boring-math.com/calculators/singapore-seller-stamp-duty-calculator): SSD on a residential sale, using the correct rate table for your purchase date.
+- [Singapore CPF Retirement Sum Calculator](https://boring-math.com/calculators/singapore-cpf-retirement-sum-calculator): Track Basic, Full and Enhanced Retirement Sums against your CPF balances.
+- [Singapore Notice Period Calculator](https://boring-math.com/calculators/singapore-notice-period-calculator): Statutory notice from the MOM table, plus pay in lieu.
+- [Singapore AWS Bonus Calculator](https://boring-math.com/calculators/singapore-aws-bonus-calculator): Pro-rated 13th month Annual Wage Supplement for a partial year.
+- [Singapore GST Calculator](https://boring-math.com/calculators/singapore-gst-calculator): Add or remove 9% GST, including why subtracting 9% gives the wrong answer.
+- [Singapore Utility Bill Calculator](https://boring-math.com/calculators/singapore-utility-bill-calculator): Estimate an SP Group bill from electricity, water and gas usage.
+
 ## Documentation
-- [All Calculators](https://boring-math.com/calculators): Browse all 171 calculators by category.
+- [All Calculators](https://boring-math.com/calculators): Browse all 181 calculators by category.

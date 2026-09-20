@@ -1,0 +1,186 @@
+---
+/** Singapore AWS Bonus Proration Calculator page. Shows both proration methods; AWS is contractual, not statutory. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeAWSBonus } from '../../components/calculators/SingaporeAWSBonus';
+
+const title = 'Singapore AWS Bonus Calculator: 13th Month Proration | Boring Math';
+const description =
+  'Prorate a Singapore AWS (13th month) bonus for a part-year joiner or leaver. Shows both the daily and completed-months proration methods side by side.';
+const keywords =
+  'singapore aws calculator, 13th month bonus calculator, aws proration singapore, annual wage supplement calculator, aws bonus part year';
+const canonicalURL = '/calculators/singapore-aws-bonus-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore AWS Bonus Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Notice Period Calculator',
+    description: 'Statutory notice, salary in lieu, leave encashment and final pay.',
+    href: '/calculators/singapore-notice-period-calculator/',
+    icon: 'calendar' as const,
+    color: 'pink' as const,
+  },
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description: 'Net salary after CPF using current contribution rates.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Singapore Income Tax Calculator',
+    description: 'Estimate resident income tax using the progressive brackets.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Singapore Employer CPF Cost Calculator',
+    description: 'Total monthly cost of a Singapore hire, CPF plus SDL.',
+    href: '/calculators/singapore-employer-cost-calculator/',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'Is AWS (13th month bonus) required by law in Singapore?',
+    answer:
+      "No. The Annual Wage Supplement is a variable payment made according to the terms of your employment contract, not a statutory entitlement under the Employment Act. MOM's own guidance confirms it is not required by law, which is exactly why there is no single official way to prorate it for someone who joins or leaves partway through the year.",
+  },
+  {
+    question: 'Why does this calculator show two different AWS proration methods?',
+    answer:
+      'Because AWS is contractual rather than statutory, employers use different formulas and both are common in practice: a daily method based on days worked out of 365, and a completed-months method based on months worked out of 12. Rather than pick one silently, this calculator shows both so you can compare them and see how much they diverge.',
+  },
+  {
+    question: 'Which AWS proration method is correct?',
+    answer:
+      'Neither method is officially correct; which one applies depends entirely on what your employment contract or company policy says. Some employers use the daily method, some use completed months, and some round differently again. Check your contract, staff handbook, or ask HR which formula your employer actually uses.',
+  },
+  {
+    question: 'How is the daily proration method calculated?',
+    answer:
+      'Method A multiplies your full AWS amount, which is your monthly basic salary times the AWS multiplier, by the number of eligible days you worked divided by 365. This method gives credit for partial months and is generally more precise for mid-month joiners or leavers.',
+  },
+  {
+    question: 'How is the completed-months proration method calculated?',
+    answer:
+      'Method B multiplies your full AWS amount by the number of completed months you worked divided by 12. This method only counts whole months, so a partial month you worked but did not complete is typically not credited, which can make it less generous than the daily method for someone who joins mid-month.',
+  },
+  {
+    question: 'What does the AWS multiplier mean?',
+    answer:
+      'The multiplier expresses your AWS as a number of months of basic salary, most commonly 1.0 for a standard 13th month payment. Some employers pay more or less than a full month, for example 0.5 or 1.5, depending on company performance or contract terms, so adjust the multiplier to match your own agreement.',
+  },
+  {
+    question: 'Does AWS only apply to basic salary?',
+    answer:
+      'This calculator uses your monthly basic salary as the base for the full AWS amount, which is the most common contractual basis. Some employers may define AWS differently, for example including fixed allowances. Check your contract or staff handbook for the exact definition your employer uses.',
+  },
+  {
+    question: 'Is this financial or employment-law advice?',
+    answer:
+      'No. This tool computes both common proration methods from the figures you enter; it does not tell you which one your employer should use or recommend any course of action. It is not financial or employment-law advice. For a figure you will rely on, check your employment contract, ask your employer, or consult mom.gov.sg.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore AWS Bonus Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore AWS Bonus Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore AWS Bonus Calculator"
+    description="Prorate a 13th month AWS bonus for a part-year joiner or leaver, shown both ways because there is no single official method."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeAWSBonus client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your monthly basic salary and your AWS multiplier, 1.0 for a standard full month's
+      payment. Then enter the period you worked in the year, both as days out of 365 and as
+      completed months out of 12. You do not need to make these match exactly, since real employment
+      periods rarely divide evenly into whole months.
+    </p>
+    <p>
+      The calculator instantly shows both proration methods side by side, along with the difference
+      between them in dollars. Compare the two figures against what your employer actually pays, or
+      check your contract, to see which method your company applies.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      The Annual Wage Supplement is contractual, not statutory, so MOM does not prescribe a single
+      proration formula. Two methods are common in practice, and this calculator shows both rather
+      than choosing one for you.
+    </p>
+    <p>
+      <strong>Method A, daily proration:</strong> full AWS amount (monthly basic salary x AWS multiplier)
+      multiplied by eligible days worked, divided by 365.
+    </p>
+    <p>
+      <strong>Method B, completed-months proration:</strong> full AWS amount multiplied by completed months
+      worked, divided by 12.
+    </p>
+    <p>
+      The two methods agree exactly for a full year of service, but can diverge for a part-year
+      joiner or leaver, because Method A credits partial months while Method B only counts whole
+      ones. Which figure your employer actually pays depends entirely on your contract.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The two coloured cards show Method A and Method B computed independently from the days and
+      months you entered. Neither is labelled as the right answer, because the correct figure is
+      whatever your employment contract or company policy specifies.
+    </p>
+    <p>
+      The breakdown panel shows the full AWS amount at your chosen multiplier, and the dollar
+      difference between the two methods. A large difference usually means your days-worked and
+      months-worked inputs describe a mid-month join or leave date, where the two formulas diverge
+      the most.
+    </p>
+    <p>
+      Use this calculator to sanity-check a figure from payroll or HR, not to determine what you are
+      contractually owed. For a figure you will rely on, check your employment contract, staff
+      handbook, or ask your employer directly.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

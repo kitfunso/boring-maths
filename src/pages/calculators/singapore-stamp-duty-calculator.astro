@@ -1,0 +1,192 @@
+---
+/** Singapore Buyer Stamp Duty + ABSD Calculator page. BSD eff. 15 Feb 2023, ABSD eff. 27 Apr 2023. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeStampDuty } from '../../components/calculators/SingaporeStampDuty';
+
+const title = 'Singapore Stamp Duty Calculator 2026: BSD + ABSD | Boring Math';
+const description =
+  'Calculate Singapore Buyer Stamp Duty (BSD) and Additional Buyer Stamp Duty (ABSD) on a residential property purchase, by buyer profile and property count.';
+const keywords =
+  'singapore stamp duty calculator, bsd calculator singapore, absd calculator singapore, buyer stamp duty singapore, additional buyer stamp duty calculator, singapore property stamp duty';
+const canonicalURL = '/calculators/singapore-stamp-duty-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Stamp Duty Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Seller Stamp Duty Calculator',
+    description: 'SSD payable on a Singapore property sale, by holding period.',
+    href: '/calculators/singapore-seller-stamp-duty-calculator/',
+    icon: 'home' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'UK Stamp Duty Calculator (Scotland)',
+    description: 'Land and Buildings Transaction Tax on a Scottish property.',
+    href: '/calculators/stamp-duty-calculator-scotland/',
+    icon: 'home' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'UK Stamp Duty Calculator (Wales)',
+    description: 'Land Transaction Tax on a Welsh property purchase.',
+    href: '/calculators/stamp-duty-calculator-wales/',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Mortgage Calculator',
+    description: 'Work out monthly mortgage repayments.',
+    href: '/calculators/mortgage-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Buyer Stamp Duty (BSD) in Singapore?',
+    answer:
+      'BSD is a tax charged on every property purchase in Singapore, paid by the buyer. For residential property, effective 15 February 2023, it is charged on a marginal band basis: 1% on the first $180,000, 2% on the next $180,000, 3% on the next $640,000, 4% on the next $500,000, 5% on the next $1,500,000, and 6% on anything above $3,000,000. Every buyer pays BSD, regardless of citizenship.',
+  },
+  {
+    question: 'What is Additional Buyer Stamp Duty (ABSD) and who pays it?',
+    answer:
+      'ABSD is an extra tax on top of BSD, charged as a flat percentage of the whole purchase price rather than in bands. It applies based on your residency status and how many residential properties you already own. Singapore Citizens buying their first home pay 0% ABSD; Permanent Residents, Foreigners and Entities always pay some ABSD, even on a first purchase, effective 27 April 2023.',
+  },
+  {
+    question: 'How much ABSD does a Singapore Citizen pay?',
+    answer:
+      'A Singapore Citizen pays 0% ABSD on their first residential property, 20% on their second, and 30% on their third and any subsequent property. This calculator uses the number of properties you already own, before this purchase, to work out which rate applies.',
+  },
+  {
+    question: 'How much ABSD do Permanent Residents, Foreigners and Entities pay?',
+    answer:
+      'A Permanent Resident pays 5% ABSD on a first property, 25% on a second, and 30% on a third or later. Foreigners pay a flat 60% ABSD on any residential property, and entities such as companies pay a flat 65%, regardless of how many properties they already hold.',
+  },
+  {
+    question: 'Does a Free Trade Agreement change the ABSD rate?',
+    answer:
+      'Nationals and permanent residents of a few countries with a relevant Free Trade Agreement with Singapore, such as the US, Switzerland, Liechtenstein and Norway, are treated the same as Singapore Citizens for ABSD purposes. This calculator does not model that exemption; if it may apply to you, check IRAS directly.',
+  },
+  {
+    question: 'Is there ABSD relief for married couples buying a replacement home?',
+    answer:
+      'Yes, a scheme exists that lets a married couple claim a refund of ABSD paid on a replacement residential property if they sell their first one within a set time limit. This calculator does not model that relief; if you may qualify, check the current IRAS conditions before relying on this estimate.',
+  },
+  {
+    question: 'Is BSD or ABSD charged on the purchase price or the market value?',
+    answer:
+      'Both are charged on whichever is higher: the purchase price stated in the contract or the property market value at the time of purchase. This calculator uses the purchase price you enter; if the market value of your property is higher, use that figure instead for an accurate estimate.',
+  },
+  {
+    question: 'Is this stamp duty calculator financial or legal advice?',
+    answer:
+      'No. This tool estimates BSD and ABSD using the published rate bands and does not account for reliefs, exemptions or your full personal circumstances. It is not financial, tax or legal advice. For a figure you can rely on, check IRAS directly or speak to a qualified conveyancing lawyer.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Stamp Duty Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Stamp Duty Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Stamp Duty Calculator"
+    description="Work out Buyer Stamp Duty (BSD) and Additional Buyer Stamp Duty (ABSD) on a Singapore residential property purchase."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeStampDuty client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter the purchase price of the residential property, choose your buyer profile (Singapore
+      Citizen, Permanent Resident, Foreigner or Entity), and select how many residential properties
+      you already own. The calculator updates instantly with no submit button to press.
+    </p>
+    <p>
+      The property count means how many residential properties you owned before this purchase, so
+      selecting 0 means this will be your first, 1 means it will be your second, and 2 or more means
+      it will be your third or later. Foreigners and entities pay the same flat ABSD rate regardless
+      of this figure.
+    </p>
+    <p>
+      The result shows Buyer Stamp Duty, Additional Buyer Stamp Duty, the combined total, and that
+      total as a percentage of the purchase price, alongside a full band-by-band breakdown of how
+      the BSD figure was built up.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      <strong>Buyer Stamp Duty (BSD)</strong> is charged on a marginal band basis, effective 15 February
+      2023: 1% on the first $180,000, 2% on the next $180,000, 3% on the next $640,000, 4% on the next
+      $500,000, 5% on the next $1,500,000, and 6% on any amount above $3,000,000. Each slice of the price
+      is taxed at its own rate, the same way income tax brackets work.
+    </p>
+    <p>
+      <strong>Additional Buyer Stamp Duty (ABSD)</strong> is different: it is a single flat percentage
+      applied to the entire purchase price, not a band walk. The rate depends on your buyer profile and
+      how many residential properties you already own, effective 27 April 2023. Singapore Citizens pay
+      0% / 20% / 30% for a 1st / 2nd / 3rd-plus property, Permanent Residents pay 5% / 25% / 30%, and
+      Foreigners and Entities pay a flat 60% and 65% respectively on any purchase.
+    </p>
+    <p>
+      Total stamp duty is BSD plus ABSD. The calculator also expresses that total as a percentage of
+      the purchase price so you can see the overall tax burden at a glance.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The large green figure is the total stamp duty due, with the effective rate shown just below
+      it. The two cards break BSD and ABSD apart so you can see which one drives your bill. For a
+      Singapore Citizen buying a first home, BSD is the entire cost. For a Foreigner or Entity, ABSD
+      is usually by far the larger figure.
+    </p>
+    <p>
+      The band breakdown shows exactly how the BSD figure was built, band by band, so you can verify
+      the arithmetic yourself or explain it to someone else. This is useful when comparing
+      properties at different price points, since crossing into a new BSD band only raises the rate
+      on the portion of price above that threshold, never the whole amount.
+    </p>
+    <p>
+      Remember this is an estimate using the published bands and does not include legal fees,
+      valuation fees, or agent commissions, and it does not model FTA exemptions or married-couple
+      ABSD relief. Confirm the exact figure with IRAS or a conveyancing lawyer before committing to
+      a purchase.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

@@ -1,0 +1,192 @@
+---
+/** Singapore Seller Stamp Duty Calculator page. Table A eff. 4 Jul 2025, Table B 11 Mar 2017-3 Jul 2025. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeSellerStampDuty } from '../../components/calculators/SingaporeSellerStampDuty';
+
+const title = 'Singapore Seller Stamp Duty Calculator 2026: SSD | Boring Math';
+const description =
+  'Calculate Singapore Seller Stamp Duty (SSD) on a residential property sale. Uses the correct rate table for your purchase date and shows the exact holding period.';
+const keywords =
+  'singapore seller stamp duty calculator, ssd calculator singapore, seller stamp duty singapore, singapore property ssd, ssd holding period singapore';
+const canonicalURL = '/calculators/singapore-seller-stamp-duty-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Seller Stamp Duty Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Stamp Duty Calculator',
+    description: 'BSD and ABSD on a Singapore property purchase.',
+    href: '/calculators/singapore-stamp-duty-calculator/',
+    icon: 'home' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'UK Stamp Duty Calculator (Scotland)',
+    description: 'Land and Buildings Transaction Tax on a Scottish property.',
+    href: '/calculators/stamp-duty-calculator-scotland/',
+    icon: 'home' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Buy vs Rent Calculator',
+    description: 'Compare the true cost of buying against renting.',
+    href: '/calculators/buy-vs-rent-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Home Affordability Calculator',
+    description: 'See how much home you can realistically afford.',
+    href: '/calculators/home-affordability-calculator/',
+    icon: 'home' as const,
+    color: 'amber' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is Seller Stamp Duty (SSD) in Singapore?',
+    answer:
+      'SSD is a tax charged when you sell a residential property in Singapore within a set number of years of buying it. It is designed to discourage short-term flipping. The rate is a flat percentage of the sale price (or market value, whichever is higher) and falls the longer you have held the property, reaching 0% once you have held it long enough.',
+  },
+  {
+    question: 'Why does the SSD rate depend on when I purchased the property?',
+    answer:
+      'The Singapore government has changed the SSD holding periods and rates more than once. Properties purchased on or after 4 July 2025 use a newer table with rates up to 16% and a 4-year holding period. Properties purchased between 11 March 2017 and 3 July 2025 use an older table with rates up to 12% and a 3-year holding period. Using the wrong table for your purchase date is the most common mistake in this calculation.',
+  },
+  {
+    question: 'What are the SSD rates for a property purchased on or after 4 July 2025?',
+    answer:
+      'For a property purchased on or after 4 July 2025, SSD is 16% if sold within 1 year, 12% if sold within more than 1 and up to 2 years, 8% within more than 2 and up to 3 years, 4% within more than 3 and up to 4 years, and 0% once you have held it for more than 4 years.',
+  },
+  {
+    question: 'What are the SSD rates for a property purchased between 2017 and 2025?',
+    answer:
+      'For a property purchased between 11 March 2017 and 3 July 2025 inclusive, SSD is 12% if sold within 1 year, 8% within more than 1 and up to 2 years, 4% within more than 2 and up to 3 years, and 0% once you have held it for more than 3 years.',
+  },
+  {
+    question: 'What if I purchased the property before 11 March 2017?',
+    answer:
+      'This calculator does not cover purchases before 11 March 2017, because that predates the rate tables it is built on. Rather than guess, it flags the purchase as out of scope. Check the SSD rules that applied at the time directly with IRAS if this applies to you.',
+  },
+  {
+    question: 'Is SSD charged on the sale price or the market value?',
+    answer:
+      'SSD is charged on whichever is higher: the price stated in the sale contract or the market value of the property at the time of sale. This calculator uses the sale price you enter; if the market value is higher, use that figure instead for an accurate estimate.',
+  },
+  {
+    question: 'How is the holding period calculated?',
+    answer:
+      'The holding period runs from your purchase date to your sale date, counted in full calendar months and then expressed as years and months. This calculator uses that exact holding period to pick the correct SSD band from whichever rate table applies to your purchase date.',
+  },
+  {
+    question: 'Is this Seller Stamp Duty calculator financial or legal advice?',
+    answer:
+      'No. This tool estimates SSD using the published rate tables and does not account for exemptions or your full personal circumstances. It is not financial, tax or legal advice. For a figure you can rely on, check IRAS directly or speak to a qualified conveyancing lawyer.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Seller Stamp Duty Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Seller Stamp Duty Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Seller Stamp Duty Calculator"
+    description="Work out Seller Stamp Duty (SSD) on a Singapore property sale, using the correct rate table for your purchase date."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeSellerStampDuty client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter the sale price (or market value, whichever is higher), the date you purchased the
+      property, and the date of the sale. The sale date defaults to today, but you can change it to
+      model a future sale. The calculator updates instantly with no submit button to press.
+    </p>
+    <p>
+      The purchase date is required and drives everything: it determines which rate table applies
+      and, combined with the sale date, how long you held the property. Picking the wrong table for
+      your purchase date is the single most common error in this calculation, so the calculator
+      shows exactly which table it used and why.
+    </p>
+    <p>
+      If your purchase date is before 11 March 2017, the calculator flags it as out of scope rather
+      than guessing a rate, since that predates both tables it is built on.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      Seller Stamp Duty is a flat percentage of the sale price, not a band walk like Buyer Stamp
+      Duty. The rate depends on how long you held the property and which rate table applies to your
+      purchase date.
+    </p>
+    <p>
+      <strong>Table A</strong> applies to properties purchased on or after 4 July 2025: 16% if sold within
+      1 year, 12% within more than 1 up to 2 years, 8% within more than 2 up to 3 years, 4% within more
+      than 3 up to 4 years, and 0% after more than 4 years.
+    </p>
+    <p>
+      <strong>Table B</strong> applies to properties purchased between 11 March 2017 and 3 July 2025 inclusive:
+      12% if sold within 1 year, 8% within more than 1 up to 2 years, 4% within more than 2 up to 3 years,
+      and 0% after more than 3 years.
+    </p>
+    <p>
+      The holding period is counted in full calendar months between your purchase and sale dates,
+      then converted to years and months. SSD payable is simply the sale price multiplied by the
+      rate for the band your holding period falls into.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The large green figure is the SSD payable, with the applicable rate and band shown just below
+      it. The three cards break out your exact holding period, the rate applied, and which table was
+      used, so you can see at a glance whether you are close to crossing into a lower band.
+    </p>
+    <p>
+      Because SSD drops to 0% once you clear the final band, timing a sale to cross that threshold
+      can save a meaningful amount, especially on Table A where the top rate is 16%. The "which
+      table applied and why" note explains the reasoning behind the table selection so you can
+      double check it against your own purchase date.
+    </p>
+    <p>
+      This is an estimate based on the published SSD rate tables. It does not account for any
+      exemptions that may apply to your situation. Confirm the exact figure with IRAS or a qualified
+      conveyancing lawyer before relying on it for a transaction.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

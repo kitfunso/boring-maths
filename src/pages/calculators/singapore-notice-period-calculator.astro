@@ -1,0 +1,191 @@
+---
+/** Singapore Notice Period and Final Pay Calculator page. MOM statutory table plus contract override. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeNoticePeriod } from '../../components/calculators/SingaporeNoticePeriod';
+
+const title = 'Singapore Notice Period Calculator: Final Pay & Notice | Boring Math';
+const description =
+  'Work out your Singapore statutory notice period by length of service, salary in lieu of notice, leave encashment and total final pay, using MOM figures.';
+const keywords =
+  'singapore notice period calculator, notice period singapore, salary in lieu of notice singapore, final pay calculator singapore, mom notice period, singapore resignation calculator';
+const canonicalURL = '/calculators/singapore-notice-period-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Notice Period Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore AWS Bonus Calculator',
+    description: 'Prorate a 13th month AWS bonus for a part-year joiner or leaver.',
+    href: '/calculators/singapore-aws-bonus-calculator/',
+    icon: 'dollar' as const,
+    color: 'coral' as const,
+  },
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description: 'Net salary after CPF using current contribution rates.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Singapore Income Tax Calculator',
+    description: 'Estimate resident income tax using the progressive brackets.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+  {
+    title: 'Singapore Employer CPF Cost Calculator',
+    description: 'Total monthly cost of a Singapore hire, CPF plus SDL.',
+    href: '/calculators/singapore-employer-cost-calculator/',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is the statutory notice period calculated in Singapore?',
+    answer:
+      "Under MOM's default table, which applies only when the employment contract is silent on notice, the period runs from 1 day for under 26 weeks of service, up to 1 week for 26 weeks to under 2 years, 2 weeks for 2 to under 5 years, and 4 weeks for 5 years or more. If your contract states a notice period, that written term applies instead of the statutory table, whether it is longer or shorter.",
+  },
+  {
+    question: 'Does CPF apply to salary paid in lieu of notice?',
+    answer:
+      'No. CPF contributions are not payable on salary in lieu of notice, because it is compensation for not working the notice period rather than wages for work done. This is a common and expensive mistake for employers who run it through payroll as ordinary salary. Confirm treatment with CPF Board or your payroll provider before processing it.',
+  },
+  {
+    question: 'How is salary in lieu of notice worked out?',
+    answer:
+      'It is your gross rate of pay per day multiplied by the number of days in your notice period. MOM defines the gross daily rate as (12 x monthly gross salary) divided by (52 x your working days per week), which is why this calculator asks for your working days per week rather than assuming a fixed 26-day month.',
+  },
+  {
+    question: 'What if my contract specifies a different notice period?',
+    answer:
+      'A written notice period in your employment contract overrides the statutory table entirely. Enter it in the contractual override field to see it applied instead of the default. If your contract is silent, or you have none, the statutory table applies.',
+  },
+  {
+    question: 'How much annual leave do I build up in Singapore?',
+    answer:
+      'Under the Employment Act, entitlement starts at 7 days in your first year of service and rises by 1 day for each additional completed year, capping at 14 days from your 8th year onward. Many employers offer more than this statutory minimum, so check your contract for your actual entitlement.',
+  },
+  {
+    question: 'How is unused leave encashed on final pay?',
+    answer:
+      'Unused leave is paid out at the same gross daily rate used for salary in lieu of notice, multiplied by the number of unused days. Only basic salary counts toward this calculation; bonuses, allowances and overtime pay are excluded from the daily rate used for encashment.',
+  },
+  {
+    question: 'Is this employment-law advice?',
+    answer:
+      "No. This tool computes figures from MOM's published notice and leave tables and the numbers you enter; it does not recommend any course of action and is not legal or employment-law advice. For a situation you will rely on, such as a dispute or an unusual contract term, check mom.gov.sg or speak to a qualified employment lawyer or HR professional.",
+  },
+  {
+    question: 'Does this calculator cover termination for misconduct?',
+    answer:
+      'No. This calculator assumes a standard resignation or termination with notice. Dismissal without notice for misconduct, and other special circumstances such as retrenchment benefits, are governed by different rules and are not modelled here. Check mom.gov.sg for those situations.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Notice Period Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Notice Period Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Notice Period Calculator"
+    description="Your statutory notice period by length of service, salary in lieu of notice, leave encashment and total final pay."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeNoticePeriod client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your monthly gross salary, your length of service in years and months, and your working
+      days per week. The calculator updates instantly with no submit button. It first works out the
+      statutory notice period that applies by default under MOM's rules, then lets you override it
+      if your employment contract states a different notice period.
+    </p>
+    <p>
+      Add any unused annual leave days you want encashed, and the calculator will add that to the
+      salary in lieu of notice to give you a total final pay figure. If your contract is silent on
+      notice, leave the override field at 0 and the statutory table applies automatically.
+    </p>
+    <p>
+      Remember that salary in lieu of notice and normal working notice are different scenarios: if
+      you work out your notice period, you simply continue to earn your normal salary for that time.
+      This calculator estimates the lump sum payable when notice is paid in lieu instead of worked.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      <strong>Statutory notice:</strong> MOM's default table runs from 1 day for under 26 weeks of service,
+      to 1 week for 26 weeks up to under 2 years, 2 weeks for 2 up to under 5 years, and 4 weeks for 5
+      years or more. This is the default only; it is superseded entirely by any notice period written
+      into your employment contract.
+    </p>
+    <p>
+      <strong>Salary in lieu of notice:</strong> the calculator finds your gross daily rate of pay as
+      (12 x monthly gross salary) / (52 x working days per week), MOM's own computation method, then multiplies
+      it by the number of working days in whichever notice period applies. CPF is not payable on this
+      amount.
+    </p>
+    <p>
+      <strong>Leave encashment:</strong> your annual leave entitlement builds from 7 days in year 1, rising
+      1 day per completed year, capped at 14 days from year 8 onward. Unused days are encashed at the
+      same gross daily rate, using basic salary only, excluding bonuses, allowances and overtime.
+    </p>
+    <p>Total final pay is simply salary in lieu of notice plus leave encashment.</p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The headline figure is your total final pay: salary in lieu of notice plus any leave
+      encashment. The breakdown below shows your daily rate of pay, the notice period in working
+      days, your leave entitlement to date, and how many unused days were encashed and for how much.
+    </p>
+    <p>
+      Pay close attention to which notice period is applying. If you have entered a contractual
+      override, the calculator shows both your contract figure and the statutory default side by
+      side so you can see how they compare. If you have not entered an override, the statutory
+      default applies and is labelled as such.
+    </p>
+    <p>
+      Treat these figures as a planning estimate. Real final pay can involve other items this
+      calculator does not model, such as retrenchment benefits, outstanding claims, or deductions.
+      For a figure you will rely on, confirm it against mom.gov.sg or your HR or payroll department.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

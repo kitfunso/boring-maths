@@ -1,0 +1,177 @@
+---
+/** Singapore GST Calculator page. Domestic add/remove at 9% plus imported goods landed cost. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeGST } from '../../components/calculators/SingaporeGST';
+
+const title = 'Singapore GST Calculator 2026: Add or Remove 9% GST | Boring Math';
+const description =
+  'Free Singapore GST calculator at the current 9% rate. Add GST to a net amount, remove it from a gross amount, or work out the GST and landed cost on imported goods.';
+const keywords =
+  'singapore gst calculator, gst calculator singapore, add gst singapore, remove gst singapore, singapore 9% gst calculator, singapore import gst calculator, landed cost calculator singapore, gst on imported goods singapore';
+const canonicalURL = '/calculators/singapore-gst-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore GST Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Take-Home Pay Calculator',
+    description: 'Estimate your Singapore net salary after CPF.',
+    href: '/calculators/singapore-take-home-pay-calculator/',
+    icon: 'dollar' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Singapore Income Tax Calculator',
+    description: 'Work out your annual Singapore income tax.',
+    href: '/calculators/singapore-income-tax-calculator/',
+    icon: 'percent' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'Singapore Utility Bill Calculator',
+    description: 'Estimate your SP electricity and PUB water bill.',
+    href: '/calculators/singapore-utility-bill-calculator/',
+    icon: 'bolt' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Percentage Calculator',
+    description: 'Calculate percentages, percent change, and more.',
+    href: '/calculators/percentage-calculator/',
+    icon: 'percent' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the current GST rate in Singapore?',
+    answer:
+      'The Goods and Services Tax (GST) rate in Singapore is 9%, effective since 1 January 2024. It rose from 8% during 2023 and 7% before that, as part of a two-step increase announced in Budget 2022. This calculator always uses the current 9% rate.',
+  },
+  {
+    question: 'How do I add GST to a price?',
+    answer:
+      'Multiply the net amount by 1.09 to get the gross, GST-inclusive price. For example, a net price of $100 becomes $100 x 1.09 = $109, made up of $100 net plus $9 GST. Select "amount excludes GST, add it" and enter the net figure to do this automatically.',
+  },
+  {
+    question: "How do I remove GST from a price, and why can't I just subtract 9%?",
+    answer:
+      'Divide the gross, GST-inclusive amount by 1.09 to get the net price, then subtract that from the gross to get the GST portion. Subtracting 9% of the gross figure directly is wrong: on a $100 gross amount that gives $91.00, but the correct net figure is $91.74. The GST itself is $8.26, not $9.00, because the 9% was originally charged on the smaller net amount, not on the gross.',
+  },
+  {
+    question: 'Does GST apply to goods I import into Singapore?',
+    answer:
+      'Yes. Import GST is charged on the CIF value, meaning the item cost plus insurance plus freight, plus any customs duty payable. It is not charged on the item price alone. This calculator works out the CIF value, adds any duty you enter, then applies 9% GST to that combined base to give the total landed cost.',
+  },
+  {
+    question: 'Is there still a tax-free allowance for low-value imports?',
+    answer:
+      "No, not for goods bought online and shipped by air or post. Since 2023, Singapore's Overseas Vendor Registration (OVR) regime requires GST-registered overseas sellers to charge GST at checkout on low-value goods, those valued at S$400 or less, the same way they would on a higher-value item. The old de minimis exemption for those goods no longer applies.",
+  },
+  {
+    question: 'What duty rate should I use for imported goods?',
+    answer:
+      'Most goods entering Singapore are duty-free, so 0% is the right default for the vast majority of imports. Duty applies mainly to a small list of dutiable goods: intoxicating liquors, tobacco products, motor vehicles, and petroleum products. Check Singapore Customs for the exact rate if you are importing one of those categories.',
+  },
+  {
+    question: 'Is this GST calculator financial or tax advice?',
+    answer:
+      'No. This tool computes GST and landed cost using the published 9% rate and the standard CIF method, but it is not tax, customs, or financial advice. For a specific shipment, declaration, or business filing, check IRAS or Singapore Customs directly, or speak to a qualified adviser.',
+  },
+  {
+    question: 'Does this calculator work for GST-registered businesses filing returns?',
+    answer:
+      "It can help you check the arithmetic on individual invoices or shipments, but it is not a substitute for GST return software or an accountant. Business filings also involve input tax claims, reverse charge rules for imported services, and other details this calculator doesn't model.",
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore GST Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore GST Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore GST Calculator"
+    description="Add or remove Singapore's 9% GST, or work out the GST and total landed cost on goods you import."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeGST client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Switch between the two tabs depending on what you need. Use "Add / remove GST" for everyday
+      pricing: enter an amount and tell the calculator whether it already includes GST or not, and
+      it updates instantly, no submit button needed.
+    </p>
+    <p>
+      Use "Imported goods" when you are working out the cost of something shipped into Singapore.
+      Enter the item cost, shipping, and insurance to get the CIF value, add a duty rate if the
+      goods are dutiable, and the calculator shows the GST due and the total landed cost.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      <strong>Adding GST:</strong> Gross = Net &times; 1.09. A $100 net price becomes $109 gross, with
+      $9 of that being GST.
+    </p>
+    <p>
+      <strong>Removing GST:</strong> Net = Gross &divide; 1.09, then GST = Gross &minus; Net. This is
+      the step people get wrong most often, because subtracting 9% straight off the gross figure is not
+      the reverse of adding it: a $109 gross figure correctly reverses to $100 net and $9 GST, but a $100
+      gross figure reverses to $91.74 net and $8.26 GST, not $91.00 and $9.00.
+    </p>
+    <p>
+      <strong>Imported goods:</strong> GST applies to the CIF value (cost + insurance + freight) plus
+      any duty. GST base = cost + insurance + freight + duty, and GST = that base &times; 9%. Most goods
+      carry no duty, so the base is usually just the CIF value.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      For everyday pricing, the headline figure is the GST amount itself, with the net and gross
+      figures shown underneath so you can see exactly how they relate. For imported goods, the
+      headline is the total landed cost, the full amount you should expect to pay once GST (and
+      duty, if any) is added on top of shipping.
+    </p>
+    <p>
+      Remember this calculator computes, it does not advise. It is a good check on invoices, quotes,
+      and shipment estimates, but it is not a substitute for a GST return, a customs declaration, or
+      advice from IRAS, Singapore Customs, or a qualified adviser.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>

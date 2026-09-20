@@ -1,0 +1,196 @@
+---
+/** Singapore take-home pay: CPF employee contribution, tax year rates effective 1 Jan 2026. */
+
+import CalculatorLayout from '../../layouts/CalculatorLayout.astro';
+import SEOHead from '../../components/common/SEOHead.astro';
+import HeroSection from '../../components/calculators/shared/HeroSection.astro';
+import ContentSection from '../../components/calculators/shared/ContentSection.astro';
+import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import { SingaporeTakeHomePay } from '../../components/calculators/SingaporeTakeHomePay';
+
+const title = 'Singapore Take-Home Pay Calculator 2026: CPF Deductions | Boring Math';
+const description =
+  'Work out your Singapore net salary after CPF. This take-home pay calculator uses the CPF contribution rates that apply from 1 January 2026, by age band.';
+const keywords =
+  'singapore take home pay calculator, singapore salary calculator, cpf calculator 2026, singapore net salary calculator, cpf contribution calculator, singapore cpf rates 2026';
+const canonicalURL = '/calculators/singapore-take-home-pay-calculator';
+const siteUrl = 'https://boring-math.com';
+
+const breadcrumbs = [
+  { label: 'Calculators', href: '/calculators/' },
+  { label: 'Singapore Take-Home Pay Calculator' },
+];
+
+const relatedCalculators = [
+  {
+    title: 'Singapore Employer CPF Cost Calculator',
+    description: 'Total monthly cost of a Singapore hire, employer CPF plus SDL.',
+    href: '/calculators/singapore-employer-cost-calculator/',
+    icon: 'briefcase' as const,
+    color: 'blue' as const,
+  },
+  {
+    title: 'EU Salary Calculator',
+    description: 'Compare net pay across European countries.',
+    href: '/calculators/eu-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'green' as const,
+  },
+  {
+    title: 'Hourly to Salary Calculator',
+    description: 'Convert an hourly rate to an annual salary.',
+    href: '/calculators/hourly-to-salary-calculator/',
+    icon: 'calculator' as const,
+    color: 'amber' as const,
+  },
+  {
+    title: 'Compound Interest Calculator',
+    description: 'See how savings grow over time.',
+    href: '/calculators/compound-interest-calculator/',
+    icon: 'trending' as const,
+    color: 'violet' as const,
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is Singapore take-home pay calculated?',
+    answer:
+      'Your net pay is your gross monthly wage minus your employee CPF contribution. This calculator applies the CPF contribution rates effective 1 January 2026 for your age band to your Ordinary Wages, then subtracts that from your gross wage to give your monthly and annual take-home pay.',
+  },
+  {
+    question: 'What are the CPF contribution rates from 1 January 2026?',
+    answer:
+      'For employees 55 and below, the total contribution is 37% of wages, split 20% employee and 17% employer. The employee share falls to 18% for the 55-to-60 band, 12.5% for 60-to-65, 7.5% for 65-to-70, and 5% above 70. Employer rates also step down by age band, from 17% down to 7.5%.',
+  },
+  {
+    question: 'What is the CPF Ordinary Wage ceiling?',
+    answer:
+      'Only Ordinary Wages up to $8,000 a month attract CPF contributions. Wages above that ceiling are not subject to CPF. Additional Wages, such as an annual bonus, use a separate yearly ceiling based on your OW and are not modelled by this calculator.',
+  },
+  {
+    question: 'Why is there no employee CPF on very low wages?',
+    answer:
+      'CPF uses a graduated contribution structure to avoid a sharp step for low earners. Employees earning $500 a month or less pay no employee CPF at all. Between $500 and $750, the employee share phases in gradually rather than jumping straight to the full rate, and above $750 the flat rate for your age band applies.',
+  },
+  {
+    question: 'Does my age affect how much CPF I pay?',
+    answer:
+      'Yes. CPF contribution rates step down in five age bands: 55 and below, above 55 to 60, above 60 to 65, above 65 to 70, and above 70. Both the employee and employer shares fall as you move into an older band, reflecting lower total contribution rates set by the CPF Board.',
+  },
+  {
+    question: 'Why does the calculator show the employer contribution too?',
+    answer:
+      'The employer CPF contribution is shown for information only. It does not affect your take-home pay, since it is paid by your employer on top of your gross wage rather than deducted from it. It is useful context for understanding your total employment cost, which the companion Employer CPF Cost Calculator covers in full.',
+  },
+  {
+    question: 'Is this financial or tax advice?',
+    answer:
+      'No. This is an information tool that estimates CPF deductions using the contribution rates effective 1 January 2026. It does not account for every personal circumstance, such as CPF top-ups or voluntary contributions. For figures you can rely on, check the CPF Board directly or speak to your employer.',
+  },
+  {
+    question: 'What counts as Ordinary Wages versus Additional Wages?',
+    answer:
+      'Ordinary Wages are the fixed monthly wages you would normally be paid, such as your basic salary and fixed allowances. Additional Wages are variable payments not tied to a specific month, such as bonuses or incentive payouts. This calculator only models CPF on Ordinary Wages up to the monthly ceiling.',
+  },
+];
+
+const schemaBreadcrumbs = [
+  { name: 'Calculators', url: '/calculators' },
+  { name: 'Singapore Take-Home Pay Calculator', url: canonicalURL },
+];
+---
+
+<CalculatorLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonicalURL={canonicalURL}
+  breadcrumbs={breadcrumbs}
+  relatedCalculators={relatedCalculators}
+>
+  <SEOHead
+    slot="schema"
+    name="Singapore Take-Home Pay Calculator"
+    description={description}
+    url={`${siteUrl}${canonicalURL}`}
+    faqs={faqs}
+    breadcrumbs={schemaBreadcrumbs}
+  />
+
+  <HeroSection
+    title="Singapore Take-Home Pay Calculator"
+    description="Estimate your net monthly and annual pay in Singapore after employee CPF, using the contribution rates effective 1 January 2026."
+    faqs={faqs}
+  />
+
+  <section class="mb-16" aria-label="Calculator">
+    <SingaporeTakeHomePay client:load />
+  </section>
+
+  <ContentSection title="How to use this calculator">
+    <p>
+      Enter your monthly gross wage, the fixed amount your employer pays you before any deductions,
+      and pick your age band. The calculator updates instantly, with no submit button to press. CPF
+      contribution rates and the employee/employer split both change by age band, so picking the
+      right one matters.
+    </p>
+    <p>
+      The headline figure is your monthly take-home pay, the amount that actually reaches your bank
+      account once employee CPF is deducted. Below it you will see the same amount expressed as an
+      annual figure, which is useful for budgeting or comparing offers.
+    </p>
+    <p>
+      The metric cards break out your employee CPF, your effective CPF rate as a share of your gross
+      wage, and your employer's CPF contribution shown for information. Only your employee share
+      reduces your take-home pay.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="How it is calculated">
+    <p>
+      Take-home pay in Singapore is your gross monthly wage minus your employee CPF contribution.
+      The calculator uses the CPF contribution rates effective 1 January 2026, applied to your
+      Ordinary Wages up to the $8,000 monthly ceiling.
+    </p>
+    <p>
+      <strong>Below $500:</strong> no employee CPF is due at all, even though your employer still contributes
+      their share.
+    </p>
+    <p>
+      <strong>Between $500 and $750:</strong> the employee share phases in gradually rather than jumping
+      straight to the full rate, smoothing the transition for lower earners.
+    </p>
+    <p>
+      <strong>Above $750:</strong> the flat employee percentage for your age band applies to your wages,
+      up to the $8,000 Ordinary Wage ceiling. Wages above the ceiling are not subject to CPF at all.
+    </p>
+    <p>
+      Additional Wages, such as an annual bonus, use a separate yearly ceiling and are not modelled
+      by this calculator, which is built for a monthly salary estimate.
+    </p>
+  </ContentSection>
+
+  <ContentSection title="Understanding your results">
+    <p>
+      The large green figure is your monthly take-home pay, with the annual equivalent shown just
+      underneath. The employee CPF card shows exactly how much is deducted, and the effective CPF
+      rate shows that deduction as a percentage of your actual gross wage, which is lower than your
+      age band's headline rate once the graduated low-wage band and OW ceiling are taken into
+      account.
+    </p>
+    <p>
+      The employer CPF figure is shown purely for context. It is money your employer contributes on
+      top of your wage, so it never reduces your own take-home pay, but it is a useful number if you
+      are negotiating total compensation or comparing job offers.
+    </p>
+    <p>
+      Remember the assumptions baked into the result: this is a 2026 estimate using published CPF
+      contribution rates for Ordinary Wages only. It does not include Additional Wages such as
+      bonuses, which are subject to a separate annual ceiling. Treat the result as a planning
+      estimate, not payroll-grade output or financial advice.
+    </p>
+  </ContentSection>
+
+  <FAQSection faqs={faqs} />
+</CalculatorLayout>
