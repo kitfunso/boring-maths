@@ -10,6 +10,7 @@ import '@fontsource/instrument-serif/400-italic.css';
 import Analytics from '../components/common/Analytics.astro';
 import AdBlockDetector from '../components/common/AdBlockDetector.astro';
 import InstallPrompt from '../components/common/InstallPrompt.astro';
+import { getAlternates } from '../lib/hreflang';
 
 export interface Props {
   title?: string;
@@ -37,6 +38,8 @@ const siteURL = Astro.site || 'https://boring-math.com';
 const canonicalPath = canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`;
 const fullCanonicalURL = new URL(canonicalPath, siteURL).href;
 const currentPath = Astro.url.pathname;
+// No x-default: every family member targets one locale, none is neutral.
+const alternates = getAlternates(canonicalPath);
 
 // Determine OG image: use custom if provided, otherwise default
 const ogImageURL = ogImage
@@ -64,6 +67,12 @@ const ogImageURL = ogImage
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullCanonicalURL} />
+
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.hreflang} href={new URL(alt.href, siteURL).href} />
+      ))
+    }
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
