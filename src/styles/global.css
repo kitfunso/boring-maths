@@ -114,6 +114,12 @@ body {
   body.has-anchor-ad {
     padding-bottom: calc(100px + env(safe-area-inset-bottom));
   }
+
+  /* Anchor starts with no footprint: appearing costs no CLS, collapsing does.
+     `body ` outranks AdUnit's equal-specificity scoped rule, inlined after this. */
+  body .mobile-anchor-ad .ad-container {
+    min-height: 0;
+  }
 }
 
 /* Remove 300ms tap delay on mobile for all interactive elements */
