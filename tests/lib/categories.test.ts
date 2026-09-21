@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CATEGORY_COLORS, calculators, getCategories } from '@/lib/calculators';
+import { CATEGORY_COLORS, calculators, getCategories, getCountries } from '@/lib/calculators';
 
 describe('calculator categories', () => {
   const used = [...new Set(calculators.map((c) => c.category))];
@@ -25,5 +25,19 @@ describe('calculator categories', () => {
   it('has the card calculator as the only Cards calculator', () => {
     const cards = calculators.filter((c) => c.category === 'Cards');
     expect(cards.map((c) => c.href)).toEqual(['/calculators/card-rewards-calculator/']);
+  });
+});
+
+describe('region filter', () => {
+  const used = [...new Set(calculators.map((c) => c.country).filter(Boolean))];
+
+  it('offers a region button for every country in the registry', () => {
+    // SG shipped 10 calculators with no tab because the buttons were hand-written.
+    expect([...getCountries()].sort()).toEqual([...used].sort());
+  });
+
+  it('orders regions by calculator count, busiest first', () => {
+    const counts = getCountries().map((c) => calculators.filter((x) => x.country === c).length);
+    expect(counts).toEqual([...counts].sort((a, b) => b - a));
   });
 });

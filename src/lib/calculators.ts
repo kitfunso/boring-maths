@@ -1955,6 +1955,17 @@ export function getCategories(): readonly string[] {
   return ['All', ...new Set(calculators.map((c) => c.category))];
 }
 
+/** Region-filter codes, busiest first. Derived so a new country never needs a nav edit. */
+export function getCountries(): readonly CountryCode[] {
+  const counts = new Map<CountryCode, number>();
+  for (const c of calculators) {
+    if (c.country) counts.set(c.country, (counts.get(c.country) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([c]) => c);
+}
+
 /** Find a calculator by its href slug (e.g. '/calculators/bmi-calculator'). */
 export function getBySlug(href: string): CalculatorEntry | undefined {
   return calculators.find((c) => c.href === href);

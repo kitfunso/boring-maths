@@ -4,6 +4,7 @@ import HomepageCurrencySelector from '../components/common/HomepageCurrencySelec
 import {
   calculators,
   getCategories,
+  getCountries,
   ICON_COLORS as iconColors,
   ICON_PATHS as iconPaths,
   CATEGORY_COLORS as categoryColors,
@@ -13,6 +14,7 @@ const title = 'Boring Math Calculators | Free Online Calculators';
 const description = 'Free online calculators for everyday math problems. Calculate freelance rates, wedding costs, savings goals, and more. Simple, accurate, and easy to use.';
 
 const categories = getCategories();
+const countries = getCountries();
 // Both hero pills use the same rainbow glow (global.css); pulled out here so
 // the panel filter and the pill markup can't drift out of sync.
 const HERO_CATEGORIES = ['Avios', 'Cards'];
@@ -202,33 +204,17 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
       <!-- Region Filter - hidden on mobile by default, shown on desktop -->
       <div id="region-filter-panel" class="hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4 md:mb-6 overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide transition-all duration-300 ease-out">
         <span class="text-xs text-[var(--color-muted)] uppercase tracking-wider mr-2 self-center">Region:</span>
-        <button
-          class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
-                 text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]"
-          data-category="US"
-          data-country="US"
-          aria-pressed="false"
-        >
-          US
-        </button>
-        <button
-          class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
-                 text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]"
-          data-category="UK"
-          data-country="UK"
-          aria-pressed="false"
-        >
-          UK
-        </button>
-        <button
-          class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
-                 text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]"
-          data-category="EU"
-          data-country="EU"
-          aria-pressed="false"
-        >
-          EU
-        </button>
+        {countries.map((country) => (
+          <button
+            class="category-btn px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-300 border
+                   text-[var(--color-subtle)] bg-transparent border-white/10 hover:border-white/20 hover:text-[var(--color-cream)]"
+            data-category={country}
+            data-country={country}
+            aria-pressed="false"
+          >
+            {country}
+          </button>
+        ))}
       </div>
 
       <!-- Calculators Grid -->
