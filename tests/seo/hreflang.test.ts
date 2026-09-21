@@ -1,16 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { getAlternates, LOCALE_BY_COUNTRY } from '@/lib/hreflang';
+import { getAlternates, LOCALE_BY_COUNTRY, FAMILIES } from '@/lib/hreflang';
 import { calculators } from '@/lib/calculators';
 
-const FAMILY_HREFS = [
-  [
-    '/calculators/uk-tax-calculator/',
-    '/calculators/us-paycheck-calculator/',
-    '/calculators/singapore-take-home-pay-calculator/',
-  ],
-  ['/calculators/uk-employer-cost-calculator/', '/calculators/singapore-employer-cost-calculator/'],
-  ['/calculators/us-sales-tax-calculator/', '/calculators/singapore-gst-calculator/'],
-];
+const FAMILY_HREFS = FAMILIES.map((f) => f.map((m) => m.href));
 
 const ALLOWED_LOCALES = new Set(['en-GB', 'en-US', 'en-SG']);
 const registryByHref = new Map(calculators.map((c) => [c.href, c]));
@@ -52,6 +44,14 @@ describe('getAlternates', () => {
         const alt = getAlternates(href).find((a) => a.href === href);
         expect(entry?.country && LOCALE_BY_COUNTRY[entry.country]).toBe(alt?.hreflang);
       }
+    }
+  });
+
+  it('never lists the same page in two families', () => {
+    const seen = new Set<string>();
+    for (const href of FAMILY_HREFS.flat()) {
+      expect(seen.has(href), `${href} is in more than one family`).toBe(false);
+      seen.add(href);
     }
   });
 

@@ -8,13 +8,13 @@ export const LOCALE_BY_COUNTRY: Record<CountryCode, string | null> = {
   EU: null,
 };
 
-interface FamilyMember {
+export interface FamilyMember {
   href: string;
   country: CountryCode;
 }
 
 // UK and EU are reserved codes Google ignores; GB is the UK's real region code.
-const FAMILIES: FamilyMember[][] = [
+export const FAMILIES: FamilyMember[][] = [
   [
     { href: '/calculators/uk-tax-calculator/', country: 'UK' },
     { href: '/calculators/us-paycheck-calculator/', country: 'US' },
@@ -27,6 +27,14 @@ const FAMILIES: FamilyMember[][] = [
   [
     { href: '/calculators/us-sales-tax-calculator/', country: 'US' },
     { href: '/calculators/singapore-gst-calculator/', country: 'SG' },
+  ],
+  [
+    { href: '/calculators/uk-stamp-duty-calculator/', country: 'UK' },
+    { href: '/calculators/singapore-stamp-duty-calculator/', country: 'SG' },
+  ],
+  [
+    { href: '/calculators/us-tax-bracket-calculator/', country: 'US' },
+    { href: '/calculators/singapore-income-tax-calculator/', country: 'SG' },
   ],
 ];
 
