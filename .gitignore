@@ -40,3 +40,10 @@ tmpclaude-*
 playwright-report/
 test-results/
 lh-*.json
+
+# local agent/orchestration state, never part of the site
+trajectories/
+.devrl-backlog.md
+.devrl-loop.lock
+.gstack/
+.serena/
