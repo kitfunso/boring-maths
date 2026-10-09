@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import bodyFontUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
+import displayFontUrl from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import italicFontUrl from '../assets/fonts/instrument-serif-italic-basic-latin.woff2?url';
 import HomepageCurrencySelector from '../components/common/HomepageCurrencySelector';
 import {
@@ -22,7 +24,12 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
 ---
 
 <BaseLayout title={title} description={description}>
-  <link slot="head" rel="preload" as="font" type="font/woff2" href={italicFontUrl} crossorigin />
+  <!-- Home only: here the fonts always land before first paint, so a preload saves a round trip. Calculator pages paint first and modelled slower with it. -->
+  <Fragment slot="head">
+    <link rel="preload" as="font" type="font/woff2" href={bodyFontUrl} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={displayFontUrl} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={italicFontUrl} crossorigin />
+  </Fragment>
   <!-- Hero Section - Compact on mobile -->
   <section class="relative flex items-center justify-center overflow-hidden px-6 py-2 md:py-4">
     <!-- Floating geometric elements - hidden on mobile -->

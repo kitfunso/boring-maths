@@ -4,8 +4,6 @@ import '../styles/global.css';
 // Local fonts - faster than Google Fonts, no external requests
 import '@fontsource-variable/space-grotesk/wght.css';
 import '@fontsource/instrument-serif/400.css';
-import bodyFontUrl from '@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url';
-import displayFontUrl from '@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2?url';
 import Analytics from '../components/common/Analytics.astro';
 import AdBlockDetector from '../components/common/AdBlockDetector.astro';
 import InstallPrompt from '../components/common/InstallPrompt.astro';
@@ -65,8 +63,6 @@ const ogImageURL = ogImage
     />
 
     <!-- Fonts loaded locally via @fontsource for faster LCP -->
-    <link rel="preload" as="font" type="font/woff2" href={bodyFontUrl} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={displayFontUrl} crossorigin />
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullCanonicalURL} />
