@@ -6,6 +6,10 @@
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { calculators, getCategories } from '../lib/calculators';
+
+// getCategories() leads with the 'All' filter, which is not a category.
+const categoryCount = getCategories().length - 1;
 
 const title = 'About | Boring Math Calculators';
 const description =
@@ -144,7 +148,7 @@ const iconPaths: Record<string, string> = {
             Each calculator is designed with <strong class="text-[var(--color-cream)]"
               >real-world use cases</strong
             > in mind. Work out a freelance day rate, count your daily calories, plan a loan, or split
-            a dinner bill with 23 calculators across 7 categories.
+            a dinner bill with {calculators.length} calculators across {categoryCount} categories.
           </p>
         </div>
       </div>

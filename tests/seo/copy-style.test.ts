@@ -13,7 +13,8 @@ const TEXT = (name: string): boolean =>
   !/\.(png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|eot|pdf)$/i.test(name);
 const APOSTROPHE = "(?:'|\\u2019|&apos;|&#39;|&rsquo;)";
 const STOCK_PHRASES: readonly RegExp[] = [
-  new RegExp(`whether you${APOSTROPHE}re`, 'i'),
+  // Case-sensitive: the sentence opener is the filler; a mid-sentence "whether you're X or Y" is a real choice.
+  new RegExp(`Whether you${APOSTROPHE}re`),
   /takes? the guesswork/i,
   /dive into/i,
   new RegExp(`in today${APOSTROPHE}s world`, 'i'),
