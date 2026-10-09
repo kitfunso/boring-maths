@@ -11,9 +11,9 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import { UKStampDutyCalculator } from '../../components/calculators/UKStampDutyCalculator';
 
-const title = 'UK Stamp Duty Calculator 2026/27: SDLT Rates & First-Time Buyer Relief';
+const title = 'UK Stamp Duty Calculator 2026/27: England, Scotland & Wales';
 const description =
-  'Stamp duty on a £300,000 house in England is £5,000 (2% from £125,001-£250,000, 5% from £250,001-£300,000). First-time buyers pay £0 up to £300,000. Calculator for SDLT on residential purchases including additional dwelling surcharge.';
+  'Stamp duty on a £300,000 house in England is £5,000 (2% from £125,001-£250,000, 5% from £250,001-£300,000). First-time buyers pay £0 up to £300,000. One calculator for SDLT in England and Northern Ireland, LBTT in Scotland and LTT in Wales.';
 const keywords =
   'stamp duty calculator uk, sdlt calculator, stamp duty land tax, lbtt calculator scotland, ltt calculator wales, first time buyer stamp duty, additional property stamp duty, stamp duty 2026';
 const canonicalURL = '/calculators/uk-stamp-duty-calculator';
@@ -66,6 +66,13 @@ const relatedCalculators = [
     href: '/calculators/council-tax-calculator/',
     icon: 'calculator' as const,
     color: 'amber' as const,
+  },
+  {
+    title: 'SDLT Calculator',
+    description: 'Stamp Duty Land Tax for England and Northern Ireland.',
+    href: '/calculators/sdlt-calculator/',
+    icon: 'home' as const,
+    color: 'blue' as const,
   },
 ];
 
