@@ -39,7 +39,7 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
       </div>
 
       <!-- Main Headline - smaller on mobile -->
-      <h1 class="text-2xl md:text-headline mb-2 md:mb-3 animate-slide-up delay-100" style="opacity: 0;">
+      <h1 class="text-2xl md:text-headline mb-2 md:mb-3 animate-rise">
         <span class="text-[var(--color-cream)]">Boring</span>
         <span class="relative inline-block mx-1 md:mx-2">
           <span class="gradient-text">Math</span>
@@ -880,6 +880,17 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
     animation: hero-slide-up 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   }
 
+  /* Slide with no fade: text that starts invisible delays the largest paint. */
+  @keyframes hero-rise {
+    from {
+      transform: translateY(40px);
+    }
+  }
+
+  .animate-rise {
+    animation: hero-rise 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
   .animate-fade-in {
     animation: fade-in 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   }
@@ -890,8 +901,9 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
   }
 
   .calculator-card {
-    animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    opacity: 0;
+    /* Slide with no fade, held through the stagger delay: a card that starts
+       invisible delays the largest paint. */
+    animation: card-appear 0.5s cubic-bezier(0.19, 1, 0.22, 1) backwards;
     /* Skip style/layout/paint for off-screen cards so the ~140 below the fold
        don't gate the in-viewport LCP card's paint. Render-skipping only (content
        stays in the DOM and is indexable); contain-intrinsic-size reserves an
@@ -910,12 +922,7 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
 
   @keyframes card-appear {
     from {
-      opacity: 0;
       transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 </style>
