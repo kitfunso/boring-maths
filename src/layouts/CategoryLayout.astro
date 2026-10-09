@@ -51,6 +51,8 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://boring-math.com';
+// Pages pass slash-less paths; schema URLs must match the served slash form.
+const canonicalPath = canonicalURL.endsWith('/') ? canonicalURL : `${canonicalURL}/`;
 
 // CollectionPage Schema for SEO
 const collectionSchema = {
@@ -58,7 +60,7 @@ const collectionSchema = {
   "@type": "CollectionPage",
   "name": title,
   "description": description,
-  "url": `${siteUrl}${canonicalURL}`,
+  "url": `${siteUrl}${canonicalPath}`,
   "mainEntity": {
     "@type": "ItemList",
     "numberOfItems": calculators.length,
@@ -86,19 +88,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": siteUrl
+      "item": `${siteUrl}/`
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Calculators",
-      "item": `${siteUrl}/`
+      "item": `${siteUrl}/calculators/`
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": `${category} Calculators`,
-      "item": `${siteUrl}${canonicalURL}`
+      "item": `${siteUrl}${canonicalPath}`
     }
   ]
 };
@@ -109,7 +111,7 @@ const webPageSchema = {
   "@type": "WebPage",
   "name": title,
   "description": description,
-  "url": `${siteUrl}${canonicalURL}`,
+  "url": `${siteUrl}${canonicalPath}`,
   "breadcrumb": breadcrumbSchema,
   "mainContentOfPage": {
     "@type": "WebPageElement",
