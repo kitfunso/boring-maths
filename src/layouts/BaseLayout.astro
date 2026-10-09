@@ -11,6 +11,7 @@ import Analytics from '../components/common/Analytics.astro';
 import AdBlockDetector from '../components/common/AdBlockDetector.astro';
 import InstallPrompt from '../components/common/InstallPrompt.astro';
 import { getAlternates } from '../lib/hreflang';
+import { guideBreadcrumbSchema } from '../lib/guides';
 
 export interface Props {
   title?: string;
@@ -40,6 +41,7 @@ const fullCanonicalURL = new URL(canonicalPath, siteURL).href;
 const currentPath = Astro.url.pathname;
 // No x-default: every family member targets one locale, none is neutral.
 const alternates = getAlternates(canonicalPath);
+const guideBreadcrumbs = guideBreadcrumbSchema(canonicalPath);
 
 // Determine OG image: use custom if provided, otherwise default
 const ogImageURL = ogImage
@@ -192,8 +194,16 @@ const ogImageURL = ogImage
       })}
     />
 
+    {
+      guideBreadcrumbs && (
+        <script type="application/ld+json" set:html={JSON.stringify(guideBreadcrumbs)} />
+      )
+    }
+
     <!-- View Transitions for instant navigation -->
     <ViewTransitions fallback="swap" />
+
+    <slot name="head" />
   </head>
   <body class="min-h-screen mesh-bg noise relative">
     <!-- Skip Link for Keyboard Navigation -->
@@ -442,6 +452,14 @@ const ogImageURL = ogImage
               </li>
               <li>
                 <a
+                  href="/guides/"
+                  class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
+                >
+                  Guides
+                </a>
+              </li>
+              <li>
+                <a
                   href="/for-business/"
                   class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
                 >
@@ -454,6 +472,14 @@ const ogImageURL = ogImage
                   class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
                 >
                   About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/brand-facts/"
+                  class="text-[var(--color-subtle)] hover:text-[var(--color-accent)] transition-colors duration-300 text-sm"
+                >
+                  Brand Facts
                 </a>
               </li>
             </ul>

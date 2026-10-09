@@ -1,0 +1,73 @@
+---
+// Guides hub: the breadcrumb target of every guide, and the inbound link each one needs.
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbSchema } from '../../lib/breadcrumbs';
+import { GUIDES, guideHref } from '../../lib/guides';
+
+const title = 'Calculator Guides | Boring Math';
+const description =
+  'Guides that compare and explain the free calculators on Boring Math: UK tax, pensions, property, US tax, Singapore, salary, home, health and more.';
+const canonicalURL = '/guides';
+const siteUrl = 'https://boring-math.com';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: `${siteUrl}/guides/`,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: GUIDES.length,
+    itemListElement: GUIDES.map((guide, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: guide.name,
+      url: `${siteUrl}${guideHref(guide.slug)}`,
+    })),
+  },
+};
+---
+
+<BaseLayout title={title} description={description} canonicalURL={canonicalURL}>
+  <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} slot="head" />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: 'Guides', path: '/guides/' }]))}
+    slot="head"
+  />
+
+  <section class="relative px-6 py-12 md:py-16">
+    <div class="max-w-7xl mx-auto text-center">
+      <nav class="flex items-center justify-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
+        <a href="/" class="text-[var(--color-muted)] hover:text-[var(--color-cream)]">Home</a>
+        <span class="text-[var(--color-muted)]">/</span>
+        <span class="text-[var(--color-cream)]">Guides</span>
+      </nav>
+      <h1 class="text-4xl md:text-5xl font-display text-[var(--color-cream)] mb-4">
+        Calculator <span class="gradient-text">Guides</span>
+      </h1>
+      <p class="text-lg text-[var(--color-subtle)] mb-6">
+        {GUIDES.length} guides to picking and using the right calculator
+      </p>
+    </div>
+  </section>
+
+  <section class="px-6 py-8 mb-16">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          GUIDES.map((guide) => (
+            <a href={guideHref(guide.slug)} class="bento-card group glow">
+              <h2 class="font-display text-xl text-[var(--color-cream)] mb-2 group-hover:text-[var(--color-accent)]">
+                {guide.name}
+              </h2>
+              <p class="text-sm text-[var(--color-subtle)]">{guide.blurb}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
