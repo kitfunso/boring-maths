@@ -222,7 +222,7 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
         {calculators.map((calc, index) => (
           <>
             <div
-              class="calculator-card bento-card group relative glow"
+              class:list={['calculator-card bento-card group relative glow', { 'first-view': index < 10 }]}
               data-category={calc.category}
               data-title={calc.title.toLowerCase()}
               data-description={calc.description.toLowerCase()}
@@ -911,6 +911,11 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
        render so scrolling does not jump. */
     content-visibility: auto;
     contain-intrinsic-size: auto 240px;
+  }
+
+  /* On screen at load: `auto` would hold their text back a frame, past the first paint. */
+  .calculator-card.first-view {
+    content-visibility: visible;
   }
 
   /* After initial load, disable animation for instant filtering */
