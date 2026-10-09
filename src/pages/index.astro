@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import italicFontUrl from '../assets/fonts/instrument-serif-italic-basic-latin.woff2?url';
 import HomepageCurrencySelector from '../components/common/HomepageCurrencySelector';
 import {
   calculators,
@@ -21,6 +22,7 @@ const HERO_CATEGORIES = ['Avios', 'Cards'];
 ---
 
 <BaseLayout title={title} description={description}>
+  <link slot="head" rel="preload" as="font" type="font/woff2" href={italicFontUrl} crossorigin />
   <!-- Hero Section - Compact on mobile -->
   <section class="relative flex items-center justify-center overflow-hidden px-6 py-2 md:py-4">
     <!-- Floating geometric elements - hidden on mobile -->
