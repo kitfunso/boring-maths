@@ -1,6 +1,8 @@
 # Robots.txt for Boring Math Calculators
 User-agent: *
 Allow: /
+# Cloudflare's email-protection links return 404 to crawlers
+Disallow: /cdn-cgi/
 
 # Sitemap
 Sitemap: https://boring-math.com/sitemap-index.xml
