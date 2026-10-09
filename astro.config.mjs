@@ -63,6 +63,9 @@ export default defineConfig({
     // Cloudflare Pages needs directory-style output for nested extensionless
     // routes like /calculators/401k-calculator to resolve reliably.
     format: 'directory',
+    // Most visits are one page from search, so the stylesheet rides in the HTML
+    // and the first paint does not wait on a second request.
+    inlineStylesheets: 'always',
   },
 
   output: 'static',
