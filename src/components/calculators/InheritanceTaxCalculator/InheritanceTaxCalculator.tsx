@@ -152,7 +152,7 @@ export default function InheritanceTaxCalculator() {
             {inputs.spouseInheritingEstate && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <span className="text-emerald-400 font-medium">
-                  ✓ Spouse exemption applies — no inheritance tax due on transfers between spouses
+                  ✓ Spouse exemption applies: no inheritance tax due on transfers between spouses
                 </span>
               </div>
             )}

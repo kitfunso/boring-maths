@@ -142,7 +142,7 @@ export function calculateTaxTrapCost(totalIncome: number, region: TaxRegion): nu
 
   const paLost = calculatePALost(totalIncome);
 
-  // The lost PA would have been tax-free; it's now taxed at 40% (42% Scotland) — the "hidden" tax from the trap.
+  // The lost PA would have been tax-free; it's now taxed at 40% (42% Scotland): the "hidden" tax from the trap.
   void getTaxBands(region); // Tax bands available if needed
   const higherRate = region === 'scotland' ? 0.42 : 0.4;
 

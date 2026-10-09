@@ -8,7 +8,7 @@
  * - Generic updateInput helper for single-field updates
  *
  * For calculators that previously used plain useState (no persistence),
- * use useCalculatorState instead — same API but without localStorage or tracking.
+ * use useCalculatorState instead: same API but without localStorage or tracking.
  *
  * @example
  * const { inputs, result, updateInput, setInputs } = useCalculatorBase<MyInputs, MyResult>({

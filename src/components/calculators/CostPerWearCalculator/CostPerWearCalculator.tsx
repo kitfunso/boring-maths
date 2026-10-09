@@ -221,7 +221,7 @@ export default function CostPerWearCalculator() {
                   footer={
                     result.costPerWear <= 1 ? (
                       <span className="text-green-400 font-semibold">
-                        Under $1/wear — gold standard!
+                        Under $1/wear: gold standard!
                       </span>
                     ) : (
                       <span className="text-[var(--color-muted)]">
