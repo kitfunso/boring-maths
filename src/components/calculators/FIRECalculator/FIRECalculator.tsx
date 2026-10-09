@@ -364,7 +364,7 @@ export default function FIRECalculator() {
                   {Math.round(result.ageAtFIRE) < inputs.targetRetirementAge ? (
                     <p>
                       Great news! At your current savings rate, you'll reach FIRE at age{' '}
-                      <strong>{Math.round(result.ageAtFIRE)}</strong> —{' '}
+                      <strong>{Math.round(result.ageAtFIRE)}</strong>,{' '}
                       <strong>
                         {inputs.targetRetirementAge - Math.round(result.ageAtFIRE)} years earlier
                       </strong>{' '}
@@ -374,7 +374,7 @@ export default function FIRECalculator() {
                     <p>
                       Your target retirement age is <strong>{inputs.targetRetirementAge}</strong>,
                       but at your current savings rate, you'll reach FIRE at age{' '}
-                      <strong>{Math.round(result.ageAtFIRE)}</strong> —{' '}
+                      <strong>{Math.round(result.ageAtFIRE)}</strong>,{' '}
                       <strong>
                         {Math.round(result.ageAtFIRE) - inputs.targetRetirementAge} years later
                       </strong>

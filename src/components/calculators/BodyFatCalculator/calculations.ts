@@ -57,7 +57,7 @@ export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
     }
   }
 
-  // Fat/lean mass — need weight, but we don't have it. Use generic estimate based on height.
+  // Fat/lean mass: need weight, but we don't have it. Use generic estimate based on height.
   // Actually, let's just return percentages; we don't ask for weight.
   // We can approximate weight from height for display, or just skip mass.
   // Better: return 0 and only show percentage.

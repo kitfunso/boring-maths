@@ -163,7 +163,7 @@ export default function TimeZoneConverter() {
 
           <Alert variant="info">
             <strong>Note:</strong> This converter uses standard time offsets. Daylight Saving Time
-            (DST) is not automatically applied — check whether your regions are currently observing
+            (DST) is not automatically applied. Check whether your regions are currently observing
             DST and adjust accordingly.
           </Alert>
 

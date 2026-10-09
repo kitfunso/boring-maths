@@ -250,7 +250,7 @@ export default function UKMortgageAffordabilityCalculator() {
                   </p>
                 </div>
                 <p class="text-xs text-[var(--color-muted)] text-right max-w-[55%]">
-                  Lower LTV usually unlocks better interest rates. A bigger deposit lowers it.
+                  Lower LTV usually means better interest rates. A bigger deposit lowers it.
                 </p>
               </div>
             </div>

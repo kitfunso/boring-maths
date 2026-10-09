@@ -166,7 +166,7 @@ export default function DogAgeCalculator() {
                 value={
                   result.remainingYears.max > 0
                     ? `${result.remainingYears.min}-${result.remainingYears.max}`
-                    : '—'
+                    : 'n/a'
                 }
                 sublabel="years"
                 valueColor={

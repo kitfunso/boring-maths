@@ -81,7 +81,10 @@ const insStyle = isReserved ? `display:block;width:100%;height:${reserveHeight}p
   !isProd && (
     <div class={`ad-placeholder ${className}`}>
       <div class="bg-[var(--color-charcoal)] border border-dashed border-white/20 rounded-xl py-3 px-4 text-center">
-        <p class="text-xs text-[var(--color-muted)]">Ad (slot: {slot}{lazy ? ', lazy' : ''})</p>
+        <p class="text-xs text-[var(--color-muted)]">
+          Ad (slot: {slot}
+          {lazy ? ', lazy' : ''})
+        </p>
       </div>
     </div>
   )
@@ -97,7 +100,7 @@ const insStyle = isReserved ? `display:block;width:100%;height:${reserveHeight}p
    * No transition: an animated max-height collapse is itself a layout-shift event.
    * Reserved in-flow slots (.ad-reserved) are excluded so they never collapse.
    */
-  .ad-container:not(.ad-reserved):has(ins[data-ad-status="unfilled"]) {
+  .ad-container:not(.ad-reserved):has(ins[data-ad-status='unfilled']) {
     max-height: 0 !important;
     opacity: 0;
     margin: 0 !important;
@@ -112,7 +115,7 @@ const insStyle = isReserved ? `display:block;width:100%;height:${reserveHeight}p
   /*
    * Reserved in-flow slot: a fixed deterministic box that holds its height.
    * The faint placeholder sits behind the <ins>; a filled creative paints over it,
-   * an unfilled slot simply shows it — neither changes the box height (CLS = 0).
+   * an unfilled slot simply shows it; neither changes the box height (CLS = 0).
    */
   .ad-container.ad-reserved {
     position: relative;
