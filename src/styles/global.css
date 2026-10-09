@@ -11,6 +11,16 @@
    Design Tokens
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Italic is used for one hero word, so only Basic Latin ships; other characters fall back to a slanted regular. */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/instrument-serif-italic-basic-latin.woff2') format('woff2');
+  unicode-range: U+0020-007E;
+}
+
 :root {
   /* Core Colors - Dark Luxury Palette */
   --color-void: #07070a;
@@ -45,7 +55,7 @@
   --gradient-glow: radial-gradient(ellipse at center, var(--color-accent-glow) 0%, transparent 70%);
   /* Typography */
   --font-display: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Space Grotesk Variable', system-ui, sans-serif;
 
   /* Spacing */
   --space-xs: 0.25rem;
