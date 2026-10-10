@@ -22,7 +22,10 @@ describe('indexnow core', () => {
   it('reads loc entries from a sitemap', () => {
     const xml =
       '<urlset><url><loc>https://boring-math.com/</loc></url><url><loc> https://boring-math.com/about/ </loc></url></urlset>';
-    expect(sitemapLocs(xml)).toEqual(['https://boring-math.com/', 'https://boring-math.com/about/']);
+    expect(sitemapLocs(xml)).toEqual([
+      'https://boring-math.com/',
+      'https://boring-math.com/about/',
+    ]);
   });
 
   it('builds a payload and refuses URLs from another host', () => {
@@ -33,9 +36,9 @@ describe('indexnow core', () => {
       keyLocation: `https://boring-math.com/${key}.txt`,
       urlList: ['https://boring-math.com/'],
     });
-    expect(() =>
-      buildPayload('boring-math.com', key, ['https://www.boring-math.com/'])
-    ).toThrow(/not on boring-math.com/);
+    expect(() => buildPayload('boring-math.com', key, ['https://www.boring-math.com/'])).toThrow(
+      /not on boring-math.com/
+    );
     expect(() => buildPayload('boring-math.com', key, [])).toThrow(/1 to 10,000/);
   });
 });

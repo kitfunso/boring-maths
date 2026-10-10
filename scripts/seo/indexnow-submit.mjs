@@ -23,13 +23,17 @@ async function liveUrls() {
 
 async function main() {
   const key = findKey(PUBLIC_DIR);
-  const served = await fetch(`https://${HOST}/${key}.txt`).then((res) => (res.ok ? res.text() : ''));
+  const served = await fetch(`https://${HOST}/${key}.txt`).then((res) =>
+    res.ok ? res.text() : ''
+  );
   if (served.trim() !== key) {
     throw new Error(`https://${HOST}/${key}.txt does not serve the key yet; deploy first`);
   }
   const payload = buildPayload(HOST, key, await liveUrls());
   if (process.argv.includes('--dry-run')) {
-    console.log(`dry run: would submit ${payload.urlList.length} URLs, first ${payload.urlList[0]}`);
+    console.log(
+      `dry run: would submit ${payload.urlList.length} URLs, first ${payload.urlList[0]}`
+    );
     return;
   }
   const res = await fetch(ENDPOINT, {
@@ -37,7 +41,9 @@ async function main() {
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
     body: JSON.stringify(payload),
   });
-  console.log(`IndexNow ${res.status} for ${payload.urlList.length} URLs ${await res.text()}`.trim());
+  console.log(
+    `IndexNow ${res.status} for ${payload.urlList.length} URLs ${await res.text()}`.trim()
+  );
   if (res.status !== 200 && res.status !== 202) process.exitCode = 1;
 }
 

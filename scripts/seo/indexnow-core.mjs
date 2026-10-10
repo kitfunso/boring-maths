@@ -8,7 +8,9 @@ export function findKey(publicDir) {
   const keys = fs
     .readdirSync(publicDir)
     .map((name) => name.match(KEY_FILE)?.[1])
-    .filter((key) => key && fs.readFileSync(path.join(publicDir, `${key}.txt`), 'utf8').trim() === key);
+    .filter(
+      (key) => key && fs.readFileSync(path.join(publicDir, `${key}.txt`), 'utf8').trim() === key
+    );
   if (keys.length !== 1) {
     throw new Error(`expected exactly one IndexNow key file in ${publicDir}, found ${keys.length}`);
   }
