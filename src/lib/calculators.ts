@@ -1971,6 +1971,11 @@ export function getBySlug(href: string): CalculatorEntry | undefined {
   return calculators.find((c) => c.href === href);
 }
 
+/** The last path segment of a calculator's href ('/calculators/bmi-calculator/' gives 'bmi-calculator'). */
+export function slugOf(calc: CalculatorEntry): string {
+  return calc.href.split('/')[2];
+}
+
 /** Get all calculators in a given category. */
 export function getByCategory(category: CategoryName): readonly CalculatorEntry[] {
   return calculators.filter((c) => c.category === category);

@@ -6,11 +6,10 @@
   "homepage": "https://boring-math.com",
   "scripts": {
     "dev": "astro dev",
-    "generate-og": "node scripts/generate-og-images.mjs",
     "validate:shared-data": "node scripts/validate-shared-data.mjs",
-    "prebuild": "npm run generate-og && npm run validate:shared-data",
+    "prebuild": "npm run validate:shared-data",
     "build": "astro build",
-    "postbuild": "node scripts/seo/check-internal-links.mjs && node scripts/seo/check-breadcrumb-schema.mjs && node scripts/seo/check-link-edges.mjs && node scripts/seo/check-orphan-pages.mjs && node scripts/seo/check-lead-answers.mjs",
+    "postbuild": "node scripts/seo/check-internal-links.mjs && node scripts/seo/check-breadcrumb-schema.mjs && node scripts/seo/check-link-edges.mjs && node scripts/seo/check-orphan-pages.mjs && node scripts/seo/check-lead-answers.mjs && node scripts/seo/check-og-images.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",

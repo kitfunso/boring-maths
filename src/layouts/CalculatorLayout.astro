@@ -11,7 +11,7 @@
 import BaseLayout from './BaseLayout.astro';
 import AdUnit from '../components/common/AdUnit.astro';
 import Breadcrumb from '../components/common/Breadcrumb.astro';
-import { ICON_PATHS } from '../lib/calculators';
+import { ICON_PATHS, getBySlug, slugOf } from '../lib/calculators';
 import { withTrailingSlash } from '../lib/url';
 
 export interface RelatedCalculator {
@@ -64,19 +64,11 @@ const breadcrumbItems = (() => {
   return [];
 })();
 
-// Auto-generate OG image path from canonical URL if not provided
+// src/pages/og/[slug].webp.ts renders a card per registry entry only; nested guide pages share the default.
+const registryEntry =
+  canonicalURL && getBySlug(withTrailingSlash(new URL(canonicalURL, Astro.site).pathname));
 const calculatorOgImage =
-  ogImage ||
-  (() => {
-    if (canonicalURL) {
-      // Extract calculator slug from URL like "/calculators/tip-calculator"
-      const match = canonicalURL.match(/\/calculators\/([^\/]+)/);
-      if (match) {
-        return `/og/${match[1]}.webp`;
-      }
-    }
-    return '/og/default.webp';
-  })();
+  ogImage || (registryEntry ? `/og/${slugOf(registryEntry)}.webp` : '/og/default.webp');
 
 // Use shared ICON_PATHS from lib/calculators (imported above)
 const iconPaths = ICON_PATHS;
