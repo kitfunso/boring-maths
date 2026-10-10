@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+/* docs/ holds local reports, not site source; scanning one broke the build (invalid code point). */
+@source not '../../docs';
 
 /* ═══════════════════════════════════════════════════════════════════════════
    BORING MATH - Premium Dark Editorial Theme
