@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO checklist, four sites, 2026-10-09</title>
+<style>
+  :root {
+    --ink: #1c1b19; --soft: #5f5b54; --line: #e4dfd6; --paper: #faf8f4; --card: #fff;
+    --done: #1f7a4d; --record: #2c7a7b; --fixed: #2457c5; --partial: #b26a00; --open: #b3261e;
+    --yours: #6b3fa0; --unchecked: #6b6b6b; --na: #9a958c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-size: 20px; margin: 44px 0 10px; }
+  h3 { font-size: 16px; margin: 0 0 6px; }
+  p { margin: 0 0 10px; max-width: 78ch; }
+  .sub { color: var(--soft); }
+  a { color: var(--fixed); }
+  code { font: 13px/1.4 ui-monospace, Consolas, monospace; background: #f1ede5; padding: 1px 5px; border-radius: 4px; }
+  pre { background: #f1ede5; padding: 12px 14px; border-radius: 8px; overflow-x: auto; font: 13px/1.5 ui-monospace, Consolas, monospace; }
+  .answer { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--fixed); border-radius: 8px; padding: 16px 18px; margin: 18px 0 8px; }
+  .answer p:last-child { margin-bottom: 0; }
+  .tally { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .tally div { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .tally b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .tally span { display: block; font-size: 13px; color: var(--soft); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  .filters button { font: inherit; font-size: 13px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); cursor: pointer; }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; min-width: 940px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  thead th { position: sticky; top: 0; background: #f1ede5; font-size: 13px; z-index: 1; }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.item { width: 19%; font-weight: 600; }
+  td.item small { display: block; color: var(--soft); font-weight: 400; }
+  td.cell { width: 20.25%; font-size: 13px; color: var(--soft); }
+  .chip { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; color: #fff; margin-bottom: 4px; }
+  .done { background: var(--done); } .record { background: var(--record); } .fixed { background: var(--fixed); }
+  .partial { background: var(--partial); } .open { background: var(--open); } .yours { background: var(--yours); }
+  .unchecked { background: var(--unchecked); } .na { background: var(--na); }
+  #copy td { font-size: 13px; } #copy td:first-child { white-space: nowrap; font-weight: 600; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--soft); margin: 10px 0 0; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+  .card ul { margin: 6px 0 0; padding-left: 18px; }
+  .card li { margin-bottom: 4px; }
+  .num { font-variant-numeric: tabular-nums; text-align: right; }
+  .bad { color: var(--open); font-weight: 600; } .ok { color: var(--done); font-weight: 600; } .mid { color: var(--partial); font-weight: 600; }
+  ol.asks { padding-left: 20px; } ol.asks li { margin-bottom: 10px; max-width: 78ch; }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; }
+  @media (max-width: 760px) { .tally { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>The 20-item SEO checklist, checked on four sites</h1>
+  <p class="sub">Crawled live on 2026-10-09. Source post: <a href="https://x.com/suraj_sharma14/status/2106240327569035424">Suraj Sharma on X, 2026-10-03</a>. Every number below comes from a script in the last section.</p>
+
+  <div class="answer">
+    <p><b>Short answer: most of the list was already done on all four sites.</b> The basics (server rendering, sitemap, robots, no noindex, canonical tags, one H1, descriptions) pass almost everywhere.</p>
+    <p>The crawl found real defects on three sites. You said "ship", and every fix is merged and live. A live crawl after each deploy confirms it. After the all-done check I shipped three more pull requests; they have their own section below.</p>
+    <p><b>Search Console, pulled today: boring-math.com impressions are down again.</b> 45,084 in the last 28 days, against 78,775 in the 28 days to 2026-09-20. Most of it is the step change of 2026-09-02, five weeks before today's work. The read of 2026-09-20 put that down to the summer season ending and to Google no longer counting deep results. Today's split fits that read. The slide has not stopped, and clicks fell from 65 to 36.</p>
+    <p><b>The 2-second bar: two of the three home pages now pass on the live site.</b> phzse.com models 1.72 s on the live site, down from 3.35 s. braingymdaily.app models 1.73 s, down from 2.69 s. Both score 100.</p>
+    <p><b>boring-math.com still misses it, at 2.09 s.</b> Its code passes: 1.65 s on the Cloudflare Pages address. The live domain adds 0.44 s, which is Cloudflare's analytics tag. The repo cannot move that tag, so it needs one call from you (see What needs you).</p>
+  </div>
+
+  <div class="tally" id="tally"></div>
+
+  <h2>The checklist</h2>
+  <div class="filters" id="filters"></div>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>Item</th><th>boring-math.com</th><th>phzse.com</th><th>braingymdaily.app</th><th>hippo-memory.com</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="legend" id="legend"></div>
+
+  <h2>What I changed</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>boring-math.com: <a href="https://github.com/kitfunso/boring-maths/pull/33">PR #33</a></h3>
+      <p class="sub">Merged on 2026-10-09 as <code>72ce457</code> and live. The second crawl reads 229 pages, 221 with breadcrumb schema, none without an inbound link and no dead link to a page.</p>
+      <ul>
+        <li>New <code>/guides/</code> hub page. Twenty guide pages linked to it and it returned 404.</li>
+        <li>Breadcrumb schema restored on hub and guide pages: 186 of 228 pages before, 221 of 229 now. The layout dropped it silently.</li>
+        <li>Pages with no inbound link: 16 before, 0 now.</li>
+        <li>Two mistyped calculator links fixed.</li>
+        <li>Two new build checks: one fails on a link to a missing page, one on missing breadcrumb schema.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>boring-math.com: <a href="https://github.com/kitfunso/boring-maths/pull/34">PR #34</a></h3>
+      <p class="sub">Merged on 2026-10-09 as <code>6b21c6b</code> and live. The second crawl finds 0 em dashes on 229 pages.</p>
+      <ul>
+        <li>34 filler sentences rewritten. Every rate, threshold and link is unchanged.</li>
+        <li>Every em dash removed from page copy: 111 on 19 pages before, 0 now.</li>
+        <li>The about page said "23 calculators across 7 categories". It now reads both numbers from the registry: 181 and 19.</li>
+        <li>A new test fails on an em dash or a filler opener in page copy.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>phzse.com: branch <code>seo/crawl-fixes</code></h3>
+      <p class="sub">On master at <code>bba5c80</code> and live. The GitHub pipeline ran all five jobs green and deployed.</p>
+      <ul>
+        <li>Seven footer links gained their trailing slash. Each one cost a redirect hop.</li>
+        <li>Privacy, terms, support and premium each have their own title and description. They shared the home page's.</li>
+        <li>29 structured-data URLs gained their trailing slash.</li>
+        <li>Breadcrumb schema: 8 of 17 pages before, 12 of 17 now.</li>
+        <li>The landing headline now paints in the first frame. Measured on the local build: largest paint 867 ms before, 125 ms after. Live, the modelled figure moved from 4.7 s to 4.2 s.</li>
+        <li>The build check now fails on each of these defects.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>braingymdaily.app: <a href="https://github.com/kitfunso/brain-gym/pull/25">PR #25</a></h3>
+      <p class="sub">Merged on 2026-10-09 as <code>a961077</code> and deployed by hand. On the PR, types, lint, unit tests and the static export passed on GitHub. The browser job ran out of its 45-minute cap three tests from the end, with no failure. Those three pass on this box.</p>
+      <ul>
+        <li>Breadcrumb schema on the six guide articles: 6 of 19 pages before, 12 of 19 now.</li>
+        <li>Guide articles now name Brain Gym as author in their schema.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>hippo-memory.com: no change</h3>
+      <p class="sub">All site wording is locked, so I only flag.</p>
+      <ul>
+        <li><code>www.hippo-memory.com</code> answers with the same pages. Each one names the bare domain as the preferred URL, so Google folds them together. A redirect rule would be tidy-up only.</li>
+        <li>The home title is 102 characters. Google cuts titles near 60.</li>
+        <li>The <code>/benchmarks/</code> description is 370 characters. Google cuts descriptions near 160.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>From the second article</h2>
+  <p>Source: <a href="https://x.com/NicholasDulait/status/2108212094214529135">Nicholas Dulait on X</a>. You said "go, improve all website seo accordingly", then "merge both". Both PRs are merged and live.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>boring-math.com: <a href="https://github.com/kitfunso/boring-maths/pull/35">PR #35</a></h3>
+      <p class="sub">Merged on 2026-10-09 as <code>5066716</code> and live. Quality Assurance and Cloudflare Pages passed on the merge commit. Both new titles and the new cards are on the live pages.</p>
+      <ul>
+        <li>Two stamp duty pages claimed the same search. The SDLT page now names England and Northern Ireland. The UK page names England, Scotland and Wales.</li>
+        <li>Their baseline was 30 and 11 impressions in 28 days, at positions 69 and 78. Neither had traction to lose.</li>
+        <li>43 new related-calculator cards on 36 pages. They point at twelve calculators that had search demand and only one or two links.</li>
+        <li>The build now fails if one of the 43 links is dropped.</li>
+        <li>Five similar calculators stay untouched as a comparison group: SaaS metrics, UK capital gains tax, council tax, dog age and pizza dough.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>braingymdaily.app: <a href="https://github.com/kitfunso/brain-gym/pull/26">PR #26</a></h3>
+      <p class="sub">Merged on 2026-10-09 as <code>6ba3015</code> and deployed by hand. All three GitHub jobs passed on the PR. The third crawl reads breadcrumb schema on 17 of 19 live pages.</p>
+      <ul>
+        <li>Breadcrumb schema on five hub pages: 12 of 19 pages before, 17 of 19 live now.</li>
+        <li>Three guides get a fuller description. Each one is copied word for word from the guide's own opening.</li>
+        <li>The "Does brain training work?" description keeps its caveat, so it runs to 183 characters.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Rules I now follow</h3>
+      <ul>
+        <li>New pages go out one or two a week, never as a batch.</li>
+        <li>A shipped page is left alone for 60 days. The stamp duty pair is the one exception, because it had no traction.</li>
+        <li>Read Search Console four and eight weeks after a change, against the untouched group.</li>
+        <li>No <code>llms.txt</code> work. Google's AI features page says no new machine-readable file is needed.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>After the all-done check</h2>
+  <p>The check came back NO on three counts: no fresh Search Console pull, a red Brain Gym <code>main</code>, and checklist rows still partial on the live sites. You said "continue until all done". This is what changed.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>phzse.com: <a href="https://github.com/kitfunso/phzse/pull/4">PR #4</a> and <a href="https://github.com/kitfunso/phzse/pull/5">PR #5</a></h3>
+      <p class="sub">On master at <code>3189cd5</code> and live. Both deploy runs passed. The live crawl reads 16 pages, all 200. <code>www.phzse.com</code> still answers 200 with no redirect.</p>
+      <ul>
+        <li>The first visit no longer reloads itself. The modelled largest paint fell from 4.2 s to 3.35 s on the home page, and from 4.3 s to 3.2 s on the guide.</li>
+        <li><code>/premium/</code> is now treated as the app-only page it is. It left the sitemap, robots.txt blocks it and it carries a noindex header. A visitor with no cycle data is sent to the landing page. That closes the thin-page and missing-H1 rows.</li>
+        <li>The moon logo ships as a 10 KB WebP. It was a 57 KB PNG.</li>
+        <li>The landing footer no longer links to <code>/premium/</code>. The link led back to the page it sat on. A test now fails if the footer links to any path that robots.txt blocks.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>braingymdaily.app: <a href="https://github.com/kitfunso/brain-gym/pull/27">PR #27</a></h3>
+      <p class="sub">Merged as <code>dd96196</code> and deployed by hand. All three GitHub jobs passed on the PR, and the merge carries the same file tree the PR tested. The live crawl reads FAQ schema on 7 of 19 pages, up from 1.</p>
+      <ul>
+        <li>FAQ schema on the six test pages, four questions each. Every question and every answer sentence is also in the visible text of its page.</li>
+        <li>The other 12 pages show no question-and-answer list, so they get no FAQ schema.</li>
+        <li id="bg-main-run"><code>main</code> is green again. The rerun on <code>6ba3015</code> passed, and so did the run on <code>dd96196</code>: all three jobs, the browser job in 42 minutes 50 seconds.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>FAQ schema is no longer a Google lever</h3>
+      <ul>
+        <li>Google's <a href="https://developers.google.com/search/updates#removing-faq-rich-result">search changelog</a> says the FAQ rich result stopped appearing on 2026-05-07. Google has since removed the documentation.</li>
+        <li>The case for keeping it is answer engines, which can read a marked-up question-and-answer pair. I have no measurement of that.</li>
+        <li>Brain Gym's own SEO plan of 2026-09-12 cut FAQ and breadcrumb schema as low payoff. PR #24 put FAQ schema back on the home page for answer engines on 2026-09-25. Today's pull requests follow that later call and the post's list.</li>
+        <li>hippo-memory.com marks each question up once, on <code>/faq/</code>. Six more pages show three to six questions each, and every one repeats a <code>/faq/</code> entry. A code comment says this is on purpose, so that row is done.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Speed fixes I measured and did not ship</h3>
+      <p class="sub">Each ran on a preview address against the current build on the same host. Only runs with a first paint under one second count.</p>
+      <ul>
+        <li>phzse.com, styles inlined in the page: 3.59 and 3.74 s against 3.47 and 3.55 s. No gain. Reverted, never committed.</li>
+        <li>boring-math.com, stylesheet inlined: home page 1.70 s against 1.79 s, but the tip calculator 1.75 s against 1.48 s. Worse where the traffic is.</li>
+        <li>boring-math.com, home page without the fade-in: 1.85 s against 1.92 s. With the first cards drawn early as well: 1.82 s against 1.84 s. Both inside the run-to-run spread.</li>
+        <li>Left in place, because deleting a branch is your call: boring-maths branches <code>perf/inline-stylesheet</code> and <code>perf/home-first-frame</code>, the phzse preview at <code>perf-inline-css.phzse.pages.dev</code>, and an empty local phzse branch <code>perf/inline-css</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The 2-second bar</h2>
+  <p>You said "fix this" about the three home pages over 2 seconds. Each fix ran on a preview against the current build, five runs each, before it was merged. The live figures are in Speed on a phone.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>phzse.com: <a href="https://github.com/kitfunso/phzse/pull/6">PR #6</a></h3>
+      <p class="sub">Merged as <code>bca072f</code> and live. The GitHub pipeline passed and deployed. <code>www.phzse.com</code> still answers 200 with no redirect.</p>
+      <ul>
+        <li><b>Passes.</b> Home page 1.72 s live, was 3.35 s. Guide 1.78 s, was 3.25 s.</li>
+        <li>The web build now starts the app scripts after the first paint. Before, about 260 KB of scripts downloaded beside the styles and fonts the first frame needs.</li>
+        <li>The store badges come from the site itself. That removes three connections to other hosts.</li>
+        <li>The phone apps keep the old build. Nothing changes for them.</li>
+        <li>A first version still downloaded the scripts early and only ran them late. It modelled 2.91 s against 3.06 s, so it did not ship.</li>
+        <li>Browser test of 32 pages: every page becomes interactive right after its first paint.</li>
+        <li>The same pull request lets Google crawl <code>/premium/</code> again, so it can read the noindex header (see Search Console).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>braingymdaily.app: <a href="https://github.com/kitfunso/brain-gym/pull/28">PR #28</a></h3>
+      <p class="sub">Merged as <code>da5bddc</code> and live. All three GitHub jobs passed on the second commit. Deployed by wrangler (<code>1b75fe71</code>), then IndexNow sent 19 URLs.</p>
+      <ul>
+        <li><b>Passes.</b> Home page 1.73 s live, was 2.69 s an hour before the deploy. Stroop guide 1.78 s, was 2.62 s. Five clean runs of five on each.</li>
+        <li>Live check in a real browser: all 19 sitemap pages start the app with no console error, and the home page demo opens.</li>
+        <li>The same step as phzse: the web build starts the app scripts after the first paint. About 205 KB of scripts no longer download before it.</li>
+        <li>The site's security policy lists every inline script by hash. The build adds the new loader to that list by itself.</li>
+        <li>The store apps keep the old build. The browser tests on GitHub now run against the web build.</li>
+        <li>Browser test of the preview, 25 pages: every page becomes interactive right after its first paint, with no blocked script.</li>
+        <li><b>One test broke, and this change broke it.</b> The first round of browser tests on GitHub failed on a layout test that clicks "Try one round" the instant the page loads. The page now finishes loading before the app scripts have attached that button's handler, so the click was lost. Before the fix the test failed 4 local runs of 6. It now waits for the app to start (commit <code>8ef4094</code>) and passes 10 of 10. No other test clicks a prerendered button that way: every other control a test clicks is absent from the page until the app has started.</li>
+        <li><b>What did not change: when the page responds.</b> On the live domain the modelled time until the page reacts to a tap is 2.70 s before and 2.65 s after. The preview had shown 2.61 s against 2.19 s; the live domain does not repeat that. The first paint is also unchanged, at 0.97 s. The fix moves the largest paint and nothing else.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>boring-math.com: <a href="https://github.com/kitfunso/boring-maths/pull/36">PR #36</a></h3>
+      <p class="sub">Merged as <code>74e004c</code> and live. Quality Assurance and Cloudflare Pages passed on the pull request.</p>
+      <ul>
+        <li><b>Still over the bar on the live domain: 2.09 s</b> (2.01 to 2.17). It was 2.1 to 2.2 s, so the live figure did not move.</li>
+        <li>On the Cloudflare Pages address the same change modelled 1.65 s against 1.86 s.</li>
+        <li>What changed: the home page loads three font files in place of five, 58 KB in place of 84 KB, and asks for them early. Only the home page does that. The tip calculator stayed level.</li>
+        <li>Why the live domain is slower: Cloudflare adds its analytics tag to every page there. The tag comes from a second host, and it sends one report request when the page has loaded.</li>
+        <li>Those two requests are the only ones the live domain adds, and both finish just before the first paint. With them the model puts the first paint at 1.76 s. On the Pages address it is 1.25 s.</li>
+        <li>The repo cannot move the tag. The one header that stops Cloudflare adding it also turns off compression for the page.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>What Search Console says</h2>
+  <p>Pulled on 2026-10-09 for all four sites. The window is the 28 days from 2026-09-12 to 2026-10-09.</p>
+  <div class="cards">
+    <div class="card">
+      <h3>boring-math.com: impressions are still sliding</h3>
+      <p><b>This is worse than the last pull.</b> 36 clicks and 45,084 impressions, against 65 clicks and 78,775 impressions in the 28 days to 2026-09-20.</p>
+      <p>The read of 2026-09-20 found a step change on 2026-09-02 and called it the end of the summer party season plus Google no longer counting deep results, with rank unchanged. The earlier window held nine days from before that step. This one holds none.</p>
+      <p>Impressions ran at about 4,200 a day in the last two weeks of August. They fell to about 2,700 a day in the week of 2026-08-31, to about 1,500 a day by late September, and to about 1,050 a day in the first four days of this week.</p>
+      <p>The fall began five weeks before today's changes, so today's work did not cause it. It is spread wide: 51 of 217 pages carry 80% of the loss. Most kept their position. The discount calculator went from 15,711 to 9,067 impressions while its position improved from 15.5 to 11.3.</p>
+      <p><b>Today's split fits that read.</b> By named query, impressions in the top 20 rose from 1,276 to 3,630. Impressions below position 20 fell from 38,647 to 22,325. So the loss sits where almost nobody clicks.</p>
+      <p>Outside the US, UK, Canada and Australia, impressions fell 64%, from 14,279 to 5,209. In the eight that lost most (India, the Philippines, Vietnam and five more) the average position improved from about 60 to between 21 and 32. That is the pattern when deep results stop being shown or counted. In those four countries the fall is 38%, from 64,210 to 39,628.</p>
+      <p>Part of it is real. Pages that rank in the top 20 on average took 44 clicks in the earlier window and 16 in this one.</p>
+      <p class="sub">Not tested: whether the slide since late September is the season still ending or something new. The Search Console read of about 2026-11-06 is the check. One gain: the dog-age calculator went from 296 to 3,248 impressions. Its query "age calculator of dog" sits at position 4.9 with no clicks yet.</p>
+    </div>
+    <div class="card">
+      <h3>phzse.com</h3>
+      <p>1 click and 58 impressions on 8 pages. The largest query is a misspelling, "phinesse", with 14 impressions.</p>
+      <p>Google holds the home page, <code>/guides/</code> and <code>/ovulation-calculator/</code> as indexed.</p>
+      <p>Google also holds <code>/premium/</code> as indexed, last crawled on 2026-09-29. The robots.txt block from PR #4 would have kept it there, because a blocked page hides its own noindex header. <a href="https://github.com/kitfunso/phzse/pull/6">PR #6</a> lifts the block for that one path. The other ten app-only paths are unknown to Google and keep their block.</p>
+    </div>
+    <div class="card">
+      <h3>braingymdaily.app</h3>
+      <p>6 clicks and 203 impressions on 13 pages. Search Console has data only from 2026-09-17, so this is the first read.</p>
+      <p>The home page and the Stroop page are indexed. The test and guide pages show at positions 45 to 78, which is page five and beyond. Rank on those pages is the limit here, not speed and not markup.</p>
+    </div>
+    <div class="card">
+      <h3>hippo-memory.com</h3>
+      <p>19 clicks and 365 impressions on 13 pages, at an average position of 5.6. Almost all of it is the brand name: "hippo memory" has 42 impressions at position 2.4.</p>
+      <p>The home page is indexed, last crawled on 2026-10-07. Google does not know <code>/benchmarks/</code> yet. It last read the sitemap on 2026-09-30 and counted 5 pages; the live sitemap lists 14.</p>
+    </div>
+    <div class="card">
+      <h3>boring-math.com, the standing read</h3>
+      <p>Eight Search Console reads from July to September reached one finding. Titles and on-page edits no longer move rank. The limit is about five referring domains.</p>
+      <p class="sub">So I did not rewrite the 166 long titles or the 133 long descriptions. Search data says that work would not pay.</p>
+    </div>
+  </div>
+
+  <h2>Speed on a phone</h2>
+  <p>Lighthouse, mobile, slow-4G model, live sites. The boring-math.com, phzse.com and braingymdaily.app rows were measured after today's deploys. Each figure is the median of the clean runs out of five. The hippo-memory.com rows are from the first sweep; that site did not change. The post's bar is 2 seconds to the largest paint. Google's own "good" bar is 2.5 seconds, and 0.1 for layout shift.</p>
+  <p><b>What sets the number.</b> The model counts every request that finishes before the first paint. A script that starts after the paint drops out of it. That is the whole fix on the two Next.js sites: the same bytes arrive, but after the first frame. It is also why boring-math.com misses: two requests for Cloudflare's analytics tag finish just before its paint.</p>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>Page</th><th class="num">Score</th><th class="num">First paint</th><th class="num">Largest paint</th><th class="num">Layout shift</th><th>Read</th></tr></thead>
+      <tbody id="speed"></tbody>
+    </table>
+  </div>
+  <details>
+    <summary>Five things the default run hides</summary>
+    <p style="margin-top:8px"><b>boring-math.com, the live domain.</b> The same build models 1.65 s on its Pages address and 2.09 s on <code>boring-math.com</code>. The live page makes two requests the Pages address does not: Cloudflare's analytics tag, from a second host, and the report the tag sends when the page has loaded. In every clean run both finished before the first paint, so the model counts them. The tag is a module script, so a real browser does not wait for it before painting. Earlier today I could not tell the tag from a slower page answer; the request lists of these runs settle it.</p>
+    <p><b>braingymdaily.app.</b> The largest paint moved from 2.69 s to 1.73 s. The moment the page responds to a tap did not: 2.70 s before, 2.65 s after. The app scripts are the same size and now start after the first frame, so they finish at about the same time as before. A tap on "Try one round" in that window does nothing, as it did before today. That gap is the size of the scripts, about 205 KB, and this fix does not shrink them.</p>
+    <p><b>boring-math.com, UK and EU visitors.</b> With real throttling, Google's ad-consent dialog became the largest paint at about 10 seconds. The default run rarely shows it. In the last sweep one home-page run of five did: the dialog was the largest paint, at 6.68 s in the model. That run is left out of the row above. This is a cost of AdSense consent, and I left it alone.</p>
+    <p><b>phzse.com.</b> Before PR #6 the model put the home page at 3.2 to 3.5 s. That was a model of download weight: without throttling the page painted in 0.4 to 0.7 s. The scripts are the same size now and arrive after the first frame. One 135 KB script chunk is still about 120 KB unused on marketing pages. It no longer delays the paint, so splitting it would save data and not paint time.</p>
+    <p><b>This PC.</b> Under load, the test browser here sometimes paints a second late. Those runs are left out of every row, which is why a row may rest on two or three runs of five. With the new build a late run still models 1.75 to 1.79 s on the phzse home page and 2.02 to 2.05 s on the guide. Before PR #6 a late run modelled about 5.0 s. Google's PageSpeed tool would be the neutral check; earlier today its API was out of quota and its web page could not resolve the sites.</p>
+  </details>
+
+  <h2>Stock phrases and em dashes in page copy</h2>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>Site</th><th class="num">Pages</th><th class="num">Stock-phrase hits</th><th class="num">Em dashes</th><th>Read</th></tr></thead>
+      <tbody>
+        <tr><td>boring-math.com</td><td class="num">229</td><td class="num">40 on 14 pages</td><td class="num ok">0</td><td>Live after PR #34. Before it: 74 hits on 43 pages and 111 em dashes on 19. Most of the 40 left are literal: a car journey, today's money, landscaping, comprehensive cover.</td></tr>
+        <tr><td>phzse.com</td><td class="num">16</td><td class="num">9</td><td class="num ok">0</td><td>Eight are "elevated", a physiology term (heart rate, temperature, hormones). Clean.</td></tr>
+        <tr><td>braingymdaily.app</td><td class="num">19</td><td class="num">2</td><td class="num ok">0</td><td>Clean.</td></tr>
+        <tr><td>hippo-memory.com</td><td class="num">14</td><td class="num">8</td><td class="num ok">0</td><td>Seven are "harness", a benchmarking term. Clean.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <details>
+    <summary>Every sentence PR #34 rewrote (34), before and after</summary>
+    <div class="wrap" style="margin-top:10px">
+      <table>
+        <thead><tr><th>Page</th><th>Before</th><th>After</th></tr></thead>
+        <tbody id="copy"></tbody>
+      </table>
+    </div>
+    <p style="margin-top:10px">One FAQ question also changed, in the salary sacrifice guide. It read oddly once its dash went. It is now "Is salary sacrifice worth it, and when is it NOT worth doing?".</p>
+    <p>The em dash edits are punctuation only: 81 edits in 29 files. Stamp duty band rows now read "£125,001 to £250,000". The currency picker produced 46 of the live dashes from one label line.</p>
+  </details>
+
+  <h2>What needs you</h2>
+  <ol class="asks">
+    <li><b>Cloudflare's analytics tag on boring-math.com, yes or no.</b> It is the 0.44 s between the home page and the 2-second bar. Today Cloudflare adds the tag to each page by itself. If Web Analytics for the site is switched to the manual snippet in the Cloudflare dashboard, I put the tag in the repo and start it after the first paint. My pick is yes. Say so and I make the dashboard change in your desktop Chrome. Analytics would miss the few minutes between the switch and my deploy. The other choice is to leave it: a real browser does not wait for the tag, so only the modelled figure changes.</li>
+    <li><b>Author bio and backlinks.</b> The post says to do these two yourself. No page on any of the four sites names a person as author. For boring-math.com, backlinks are the one lever the search data still points at.</li>
+    <li><b>The Brain Gym browser test cap.</b> The job needs 42 to 44 of its 45 minutes: on PR #28 it took 43 minutes 53 seconds and then 42 minutes 20 seconds. A higher cap spends GitHub Actions minutes on a private repo. My pick is to raise it to 60, because a red <code>main</code> for timing alone hides real failures.</li>
+    <li><b>hippo-memory.com wording.</b> The home title is 102 characters and the <code>/benchmarks/</code> description is 370. Both are yours to shorten or keep.</li>
+  </ol>
+
+  <h2>Left open on purpose</h2>
+  <div class="cards">
+    <div class="card"><h3>phzse.com</h3><ul>
+      <li><code>www.phzse.com</code> answers with the same pages, on purpose. The phone apps verify their links on that host, so a www redirect would break them. All 16 www pages name the bare domain as the preferred URL.</li>
+      <li>No public pricing page. <code>/premium/</code> is the in-app paywall, and the landing FAQ states the price. A public page would be a product call.</li>
+      <li><code>/premium/</code> stays in Google's index until Google crawls it again and reads the noindex header. PR #6 lifted the robots.txt block for that path. The Search Console read of about 2026-11-06 will show whether it has dropped out.</li>
+      <li>Left in place, because deleting a branch is your call: the merged branch <code>perf/paint-before-hydration</code> and its preview address.</li>
+    </ul></div>
+    <div class="card"><h3>braingymdaily.app</h3><ul>
+      <li><code>/privacy/</code> and the home page carry no breadcrumb schema. Neither needs it.</li>
+      <li>The browser test job on GitHub runs too close to its 45-minute cap. On PR #27 it passed in 44 minutes 2 seconds. It ran out of the cap on PR #25, and failed twice on <code>main</code> for reasons outside the pages (a test server crash, a font download). I reran <code>6ba3015</code> once and it passed. No run failed on page content. A higher cap spends Actions minutes on a private repo, so that is your call.</li>
+      <li>The page responds to a tap at about 2.65 s in the model, the same as before PR #28 (see Speed). Shrinking the app scripts would move that, and I did not try it.</li>
+      <li>Left in place, because deleting a branch is your call: the merged branch <code>perf/paint-before-hydration</code> and its preview address.</li>
+      <li>Two guide descriptions stay under 70 characters. Their opening sentence is too long to reuse whole, and I did not write new copy for them.</li>
+    </ul></div>
+    <div class="card"><h3>boring-math.com</h3><ul>
+      <li>166 titles over 60 characters and 133 descriptions over 160. House style; the search data says title work does not move rank here.</li>
+      <li>Impressions are still sliding after the step of 2026-09-02 (see Search Console). The read of 2026-09-20 says season and deep-result counting, and today's split fits it. The read of about 2026-11-06 checks whether the slide has stopped.</li>
+      <li>The home page models 2.09 s on the live domain and 1.65 s on its Pages address. The gap is Cloudflare's analytics tag: item 1 in What needs you.</li>
+      <li>Left in place, because deleting a branch is your call: the merged branch <code>perf/home-fonts</code> and its preview address.</li>
+      <li>The ad-consent dialog as largest paint for UK and EU visitors.</li>
+      <li>Layout shift with ads serving is still unmeasured. The throttled run met the consent dialog first.</li>
+      <li>The about page says other sites "bombard you with ads" and that this one chose a different path. The site runs AdSense. Your wording, so I left it.</li>
+    </ul></div>
+    <div class="card"><h3>hippo-memory.com</h3><ul>
+      <li>Google's copy of the sitemap dates from 2026-09-30 and counts 5 pages. The live sitemap lists 14. Google reads sitemaps again without help. A resubmit in Search Console is faster, and my access there is read-only.</li>
+      <li>Google does not know <code>/benchmarks/</code> yet. It is in the sitemap and linked from the site, so this should clear at the next crawl.</li>
+      <li>No page changed today. Every visible string on this site is yours.</li>
+    </ul></div>
+  </div>
+
+  <h2>How to regenerate every number</h2>
+  <pre>cd %TEMP%\claude\C--Users-skf-s\11181604-d6bc-4a0e-8960-1763547dca45\scratchpad\seo
+
+node audit.mjs https://boring-math.com boring.json   # live crawl of one site (phzse.json, braingym.json, hippo.json the same way)
+node summary.mjs boring.json        # checklist counts for one site
+node slop.mjs boring.json           # stock phrases and em dashes in visible text
+bash lh.sh &amp;&amp; node lh-summary.mjs   # the eight Lighthouse runs
+npx lighthouse https://phzse.com/ --only-categories=performance --output=json --output-path=lh-after/phzse-home-1.json --chrome-flags="--headless=new" --quiet   # phzse after the deploy: three runs each for / and /guides/cycle-syncing/, saved in lh-after/
+node dist-check.mjs C:/Users/skf_s/bm-seo-wt/dist https://boring-math.com       # counts in the PR #33 build
+node dist-check.mjs C:/Users/skf_s/phzse-seo-wt/out https://phzse.com           # counts in the phzse branch build
+node dist-check.mjs C:/Users/skf_s/bg-schema-wt/out https://braingymdaily.app   # counts in the Brain Gym build deployed from 6ba3015
+node audit.mjs https://boring-math.com after/boring.json &amp;&amp; node summary.mjs after/boring.json   # the second crawl, after the deploys (phzse and braingym the same way)
+node audit.mjs https://braingymdaily.app after2/braingym.json &amp;&amp; node summary.mjs after2/braingym.json   # the third crawl, after PR #35 and PR #26 (boring.json the same way)
+gh run view 37933275405 --repo kitfunso/brain-gym --log-failed   # the failed browser job on Brain Gym main (37916570642 is the earlier one)
+node slop.mjs after/boring.json     # stock phrases and em dashes after the deploy
+node C:/Users/skf_s/bm-copy-wt/scripts/seo/check-orphan-pages.mjs --report      # inbound link counts after PR #35 (run from bm-copy-wt after npm run build)
+git -C C:/Users/skf_s/bm-copy-wt diff 5066716~1 5066716 -- scripts/seo/expected-link-edges.json | grep -c '^+  { "from"'   # the 43 pinned links in PR #35
+node audit.mjs https://phzse.com after4/phzse.json &amp;&amp; node summary.mjs after4/phzse.json   # the crawl after PR #4, PR #5 and PR #27 (braingym.json and hippo.json the same way)
+node bg-faq-visible.mjs             # Brain Gym: each FAQ schema question and answer sentence against the visible page text
+node hippo-faq-overlap.mjs          # hippo: do the question blocks on six pages repeat /faq/ entries
+node lh-ab.mjs lh-bm-prod lh-bm-preview lh-bm-firstview lh-bm-firstframe lh-bm-nobeacon lh-phzse-inline lh-phzse-final   # clean-run count, median and range per page and variant
+node lh-prepaint.mjs lh-phzse-final/home-1.json   # bytes downloaded before the first paint, by type
+node lh-beacon.mjs lh-bm-nobeacon/*.json lh-bm-firstview/home-control-*.json   # live domain against the Pages address, run by run
+npx lighthouse https://boring-math.com/ --only-categories=performance --blocked-url-patterns="*cloudflareinsights*" --output=json --output-path=lh-bm-nobeacon/home-blocked-1.json --chrome-flags="--headless=new" --quiet   # the analytics tag blocked
+curl -s -o /dev/null -D - -H "Accept: text/html" https://boring-math.com/ | grep -i server-timing   # the live domain's edge and origin time for the page
+git -C C:/Users/skf_s/bg-schema-wt rev-parse a6c0c81^{tree} dd96196^{tree}   # the Brain Gym merge carries the tree the PR tested
+bash lh-run.sh lh-phzse-live3 5 home=https://phzse.com/ guide=https://phzse.com/guides/cycle-syncing/   # phzse live after PR #6, five runs a page
+bash lh-run.sh lh-batch-a 5 bgpreview=https://perf-paint-before-hydration.brain-gym-64w.pages.dev/ bgcontrol=https://brain-gym-64w.pages.dev/ bmhome=https://boring-math.com/ bmtip=https://boring-math.com/calculators/tip-calculator/   # Brain Gym preview against its control, and boring-math live after PR #36
+bash lh-run.sh lh-bg-live-before 5 home=https://braingymdaily.app/ guide=https://braingymdaily.app/guides/what-is-the-stroop-effect/   # Brain Gym live before PR #28 was deployed
+bash lh-run.sh lh-bg-live 5 home=https://braingymdaily.app/ guide=https://braingymdaily.app/guides/what-is-the-stroop-effect/   # Brain Gym live after the deploy
+npx playwright test -c playwright.web.config.ts e2e/layout.spec.ts --repeat-each 5   # in C:/Users/skf_s/bg-schema-wt: the layout test that failed on 8745eb9, ten runs
+gh run view 37965857686 --repo kitfunso/brain-gym --log-failed   # the failed browser job on PR #28's first commit
+node lh-row.mjs lh-batch-a          # per page: clean runs, score, first paint, largest paint (median and range), layout shift
+node lh-ab.mjs lh-bm-fonts2         # PR #36 on the Pages address against the build before it
+node lh-ab.mjs lh-phzse-defer lh-phzse-defer2   # phzse: the version that preloaded the held scripts (2.91 s) and the one that shipped
+node lh-detail.mjs lh-batch-a/bmhome-3.json     # every request the model counts before the paint on the live boring-math home page
+node C:/Users/skf_s/boring-maths/scripts/seo/gsc-pull.mjs --site sc-domain:boring-math.com   # the Search Console pull; --site and --label pick another property and output folder
+node gsc-summary.mjs C:/Users/skf_s/boring-maths/gsc-export/2026-10-09 C:/Users/skf_s/boring-maths/gsc-export/2026-09-20   # totals and movers (other sites: gsc-export/other-sites/phzse/2026-10-09 and so on)
+node gsc-daily.mjs sc-domain:boring-math.com 2026-08-15 2026-10-09   # impressions by day
+node gsc-diff.mjs C:/Users/skf_s/boring-maths/gsc-export/2026-09-20 C:/Users/skf_s/boring-maths/gsc-export/2026-10-09 pages   # which pages carry the loss
+node gsc-split.mjs C:/Users/skf_s/boring-maths/gsc-export/2026-09-20 C:/Users/skf_s/boring-maths/gsc-export/2026-10-09   # the loss by country and by rank
+node gsc-inspect-any.mjs https://phzse.com/ https://phzse.com/premium/ https://phzse.com/ovulation-calculator/   # Google's index state for a URL (any property the same way)
+node gsc-sitemaps.mjs sc-domain:boring-math.com https://phzse.com/ sc-domain:braingymdaily.app sc-domain:hippo-memory.com   # the sitemaps Google holds
+node report-syntax.mjs C:/Users/skf_s/boring-maths/docs/seo-checklist-2026-10-09.html   # parses this page's script
+node gsc-cross.mjs boring.json C:/Users/skf_s/boring-maths/gsc-export/2026-09-20  # crawl against the saved pull
+node copy-verify.mjs C:/Users/skf_s/boring-maths/docs/seo-checklist-2026-10-09.html C:/Users/skf_s/bm-copy-wt   # each before/after pair against the PR #34 diff
+grep -rl $'\u2014' C:/Users/skf_s/bm-copy-wt/dist --include=*.html | wc -l      # built pages in PR #34 that still hold an em dash</pre>
+</main>
+
+<script>
+const STATUS = {
+  done: 'Done', record: 'On record', fixed: 'Fixed, not live', partial: 'Partial',
+  open: 'Open', yours: 'Yours', unchecked: 'Not checked', na: 'Does not apply',
+};
+const MEANING = {
+  done: 'the live site passes', record: 'our notes say done; not re-checked today', fixed: 'the fix is in a PR or branch, waiting for a deploy',
+  partial: 'some pages fail and I left them', open: 'not done', yours: 'the post says do it yourself, or it needs your account',
+  unchecked: 'not checked', na: 'the site has nothing of this kind',
+};
+const SITES = [['b', 'boring-math.com'], ['p', 'phzse.com'], ['g', 'braingymdaily.app'], ['h', 'hippo-memory.com']];
+const ROWS = [
+  ['Render it server-side', 'Words in the raw HTML', {
+    b: ['done', '228 pages. Fewest words on a page: 277.'],
+    p: ['done', '16 pages, each with its text in the raw HTML. Fewest words: 139, on the /tools/ hub, which lists two tools. /premium/ is the app paywall; it is out of the sitemap now and marked noindex.'],
+    g: ['done', '19 pages. Fewest words: 208.'],
+    h: ['done', '14 pages. Fewest words: 429.'] }],
+  ['Generate a sitemap', '', {
+    b: ['done', '228 URLs, all return 200.'], p: ['done', '16 URLs, all return 200. It was 17 before /premium/ came out.'],
+    g: ['done', '19 URLs, all return 200.'], h: ['done', '14 URLs, all return 200.'] }],
+  ['Submit it to Search Console', '', {
+    b: ['done', 'Property sc-domain:boring-math.com. Google last read sitemap-index.xml on 2026-09-29: 228 URLs, no errors.'],
+    p: ['done', 'Property https://phzse.com/. Google last read sitemap.xml on 2026-10-01: 17 URLs, no errors. The live file lists 16 since /premium/ came out.'],
+    g: ['done', 'Property sc-domain:braingymdaily.app. Google last read sitemap.xml on 2026-10-07: 19 URLs, no errors.'],
+    h: ['done', 'Property sc-domain:hippo-memory.com. Google last read sitemap-index.xml on 2026-09-30 and counted 5 URLs, no errors. The live sitemap lists 14, so Google\'s copy is behind.'] }],
+  ['Unblock Googlebot in robots.txt', '', {
+    b: ['done', 'Allow all. Googlebot gets 200.'],
+    p: ['done', 'Allow all public pages. Only signed-in app routes are blocked.'],
+    g: ['done', 'Allow all. AI crawlers are named and allowed.'],
+    h: ['done', 'Allow all. AI crawlers are named and allowed.'] }],
+  ['Delete the noindex tags', '', {
+    b: ['done', '0 on sitemap pages.'], p: ['done', '0 on sitemap pages.'], g: ['done', '0 on sitemap pages.'], h: ['done', '0 on sitemap pages.'] }],
+  ['Kill the redirect chains', '', {
+    b: ['done', 'No sitemap URL redirects. www and http go to the bare domain.'],
+    p: ['done', 'No internal link redirects now; seven footer links did. www.phzse.com answers on purpose: the phone apps verify their links there. All 16 www pages name the bare domain as the preferred URL.'],
+    g: ['done', 'No sitemap URL redirects. www and http go to the bare domain.'],
+    h: ['done', 'No internal redirects. www.hippo-memory.com also answers, and all 14 www pages name the bare domain as the preferred URL.'] }],
+  ['Fix the 404s', '', {
+    b: ['done', 'No sitemap URL 404s and no dead link to a page. /guides/ returns 200 now; 20 pages linked to it while it was a 404. The Cloudflare email link (/cdn-cgi/l/email-protection) returns 404 to a crawler on 5 pages; robots.txt blocks that path.'],
+    p: ['done', 'None to a page. The Cloudflare email link (/cdn-cgi/l/email-protection) returns 404 to a crawler on 3 pages; robots.txt blocks that path.'], g: ['done', 'None.'], h: ['done', 'None.'] }],
+  ['Add canonical tags', 'Each page names itself as the preferred URL', {
+    b: ['done', '228 of 228, all self-naming.'], p: ['done', '16 of 16, all self-naming.'],
+    g: ['done', '19 of 19, all self-naming.'], h: ['done', '14 of 14, all self-naming.'] }],
+  ['Write a meta description for every page', '', {
+    b: ['done', '0 missing, 0 duplicates. 133 run past 160 characters.'],
+    p: ['done', '0 missing, 0 duplicates. Five pages shared one description before.'],
+    g: ['done', '0 missing, 0 duplicates. Two are under 70 characters; it was three.'],
+    h: ['done', '0 missing, 0 duplicates. /benchmarks/ runs to 370 characters.'] }],
+  ['One H1 per page', '', {
+    b: ['done', '228 of 228.'], p: ['done', '16 of 16.'],
+    g: ['done', '19 of 19.'], h: ['done', '14 of 14.'] }],
+  ['Add FAQ schema', 'Google stopped showing FAQ rich results on 2026-05-07, so this is no longer a Google lever', {
+    b: ['done', '206 of 228. The 22 without are the home page, hub pages and legal pages.'],
+    p: ['done', '12 of 16. The four without are the tools hub, privacy, terms and support.'],
+    g: ['done', '7 of 19, up from 1: the home page and the six test pages. The twelve without are six guides, the guides hub, science, Pro, privacy and two landing pages. None shows questions with answers.'],
+    h: ['done', '5 of 14: the FAQ page and the four comparison pages. Six more pages show three to six questions each. Every one repeats a question from /faq/, and the site marks each question up once, on purpose.'] }],
+  ['Add breadcrumbs', 'Breadcrumb schema', {
+    b: ['done', '221 of 229. The eight without are the home page and the about, contact, business, brand and legal pages. It was 186 of 228.'],
+    p: ['done', '12 of 16. The four without are the home page, privacy, terms and support. It was 8 of 17.'],
+    g: ['done', '17 of 19, up from 6: every exercise, guide and hub page. The two without are the home page and /privacy/.'],
+    h: ['done', '13 of 14: every page but the home page.'] }],
+  ['Link the orphan pages', 'Pages no other page links to', {
+    b: ['done', '0. It was 16, among them /brand-facts/ and most guides.'],
+    p: ['done', '0. Privacy, terms and support were reached only through redirecting links before.'],
+    g: ['done', '0.'], h: ['done', '0.'] }],
+  ['Alt text on every image', '', {
+    b: ['na', 'Pages carry no img tags.'],
+    p: ['done', '23 images, none missing alt text.'],
+    g: ['done', '58 store badges use empty alt inside a labelled link, which is correct.'],
+    h: ['na', 'Pages carry no img tags.'] }],
+  ['Convert images to WebP', '', {
+    b: ['na', 'No raster images in pages.'],
+    p: ['done', 'The moon logo is a 10 KB WebP now. It was a 57 KB PNG. The one PNG left is the 5 KB Google Play badge.'],
+    g: ['done', 'One 5 KB PNG badge. Not worth converting.'],
+    h: ['na', 'No raster images in pages.'] }],
+  ['Fix the layout shifts', 'Good is under 0.1', {
+    b: ['done', '0.000 and 0.004. 0.043 with the consent dialog showing.'],
+    p: ['done', '0.000 on both pages.'], g: ['done', '0.000 on both pages.'], h: ['done', '0.000 and 0.001.'] }],
+  ['Load in under 2 seconds', 'Largest paint, phone, slow-4G model', {
+    b: ['partial', 'The tip calculator passes at 1.77 s. The home page is 2.09 s on the live domain and 1.65 s on its Cloudflare Pages address. PR #36 cut its fonts from five files to three. The 0.44 s the live domain adds is Cloudflare\'s analytics tag, which the repo cannot move (see What needs you). For UK and EU visitors the ad-consent dialog paints last, near 10 s.'],
+    p: ['done', '1.72 s on the home page and 1.78 s on the guide after PR #6. They were 3.35 and 3.25 s. The app scripts now start after the first paint.'],
+    g: ['done', '1.73 s on the home page and 1.78 s on a guide, live after PR #28. Was 2.69 and 2.62 s.'],
+    h: ['done', '1.6 to 1.8 s.'] }],
+  ['Remove the obvious AI slop', 'Stock phrases and em dashes in visible text', {
+    b: ['done', '0 em dashes. 40 stock-phrase hits on 14 pages are left, most of them literal: a car journey, today\'s money, landscaping, comprehensive cover. It was 74 hits on 43 pages and 111 em dashes on 19.'],
+    p: ['done', '9 hits, 8 of them the physiology term "elevated". 0 em dashes.'],
+    g: ['done', '2 hits. 0 em dashes.'],
+    h: ['done', '8 hits, 7 of them the benchmarking term "harness". 0 em dashes.'] }],
+  ['Add a real author bio', '', {
+    b: ['yours', 'No page names a person. 2 of 228 pages name an author in schema.'],
+    p: ['yours', 'No page names a person. 7 of 16 pages name an author in schema.'],
+    g: ['yours', 'No page names a person. Guides name Brain Gym as author in schema.'],
+    h: ['yours', 'No page names a person. All 14 pages name an author in schema.'] }],
+  ['Get quality backlinks', '', {
+    b: ['yours', 'About 5 referring domains at the count of 2026-09-07. Search data names this as the limit on traffic.'],
+    p: ['yours', 'Not measured.'], g: ['yours', 'Not measured.'], h: ['yours', 'Not measured.'] }],
+];
+const SPEED = [
+  ['boring-math.com home', 98, 1.76, 2.09, 0.000, 'mid', 'After PR #36. Four clean runs of five: 2.01 to 2.17 s. Just over the 2 s bar, inside Google\'s. The same build models 1.65 s on its Pages address.'],
+  ['boring-math.com tip calculator', 99, 1.76, 1.77, 0.004, 'ok', 'Passes. Three clean runs of five: 1.76 to 1.77 s.'],
+  ['braingymdaily.app home', 100, 0.97, 1.73, 0.000, 'ok', 'Live after PR #28. Was 96 and 2.69 s. Five clean runs of five.'],
+  ['braingymdaily.app Stroop guide', 100, 0.99, 1.78, 0.000, 'ok', 'Live after PR #28. Was 97 and 2.62 s. Five clean runs of five.'],
+  ['hippo-memory.com home', 99, 1.06, 1.77, 0.000, 'ok', 'Passes.'],
+  ['hippo-memory.com benchmarks', 100, 0.97, 1.63, 0.001, 'ok', 'Passes.'],
+  ['phzse.com home', 100, 0.98, 1.72, 0.000, 'ok', 'Passes after PR #6. Three clean runs of five: 1.70 to 1.73 s. Was 3.35 s before PR #6 and 4.67 s before any fix.'],
+  ['phzse.com cycle-syncing guide', 100, 1.26, 1.78, 0.000, 'ok', 'Passes after PR #6. Two clean runs of five, both 1.78 s. Was 3.25 s before PR #6 and 5.09 s before any fix.'],
+];
+
+const COPY = [
+  ['about', 'Whether you\'re a freelancer figuring out your day rate, calculating your daily calories, planning a loan, or just trying to split a dinner bill, we\'ve got you covered with 23 calculators across 7 categories.', 'Work out a freelance day rate, count your daily calories, plan a loan, or split a dinner bill with 181 calculators across 19 categories.'],
+  ['automotive hub', 'Whether you\'re considering an electric vehicle, deciding between buying or leasing, or tracking your carbon footprint, these tools provide the data you need.', 'They give you the data to consider an electric vehicle, choose between buying and leasing, or track your carbon footprint.'],
+  ['brewing hub', 'Whether you\'re an extract brewer or all-grain veteran, these tools handle the math so you can focus on the craft.', 'They handle the math for extract and all-grain brewers alike, so you can focus on the craft.'],
+  ['business hub', 'Whether you\'re selling on Etsy, running a side hustle, or planning a new business venture, these tools help you make informed decisions based on real numbers rather than gut feelings.', 'If you sell on Etsy, run a side hustle, or plan a new business venture, these tools help you make informed decisions based on real numbers rather than gut feelings.'],
+  ['engineering hub', 'Whether you\'re sizing pipes, analyzing heat exchangers, or setting up CNC programs, these calculators handle the math so you can focus on design and problem-solving.', 'These calculators handle the math for sizing pipes, analyzing heat exchangers, and setting up CNC programs, so you can focus on design and problem-solving.'],
+  ['events hub', 'Our event planning calculators take the guesswork out of party planning. Whether you\'re hosting a wedding, throwing a BBQ, or organizing a birthday party, these tools help you buy the right amount of food and drinks.', 'Our event planning calculators help you buy the right amount of food and drinks for a wedding, a BBQ, or a birthday party.'],
+  ['everyday hub', 'Whether you\'re splitting a dinner bill, figuring out a discount, or wondering how old your dog is in human years, these tools give you instant answers.', 'Split a dinner bill, figure out a discount, or find how old your dog is in human years, and get instant answers.'],
+  ['finance hub', 'Whether you\'re planning for early retirement with FIRE, figuring out mortgage payments, or tracking compound interest on your investments, these tools give you the numbers you need.', 'They give you the numbers for planning early retirement with FIRE, figuring out mortgage payments, or tracking compound interest on your investments.'],
+  ['hobbies hub', '...help you get precise results every time. Whether you\'re throwing pottery, pouring candles, making soap, or maintaining an aquarium, these tools eliminate the guesswork.', '...help you get precise results every time you throw pottery, pour candles, make soap, or maintain an aquarium.'],
+  ['home hub', 'Whether you\'re painting a room, laying flooring, or spreading mulch, you\'ll know exactly what to buy.', 'Before you paint a room, lay flooring, or spread mulch, you\'ll know exactly what to buy.'],
+  ['income hub', 'Whether you\'re negotiating a raise, setting freelance rates, or planning to go full-time with your side hustle, these tools provide the clarity you need.', 'Use them when negotiating a raise, setting freelance rates, or planning to go full-time with your side hustle.'],
+  ['UK tax hub', 'Whether you\'re calculating stamp duty on a new home, figuring out student loan repayments, or optimising your salary and dividend mix as a company director, these tools give you accurate numbers instantly.', 'These tools give you accurate numbers instantly for stamp duty on a new home, student loan repayments, or the salary and dividend mix of a company director.'],
+  ['US tax hub', 'Whether you\'re a W-2 employee checking your tax bracket, a freelancer calculating self-employment tax, or an investor figuring out capital gains, these tools give you accurate numbers instantly.', 'W-2 employees checking a tax bracket, freelancers calculating self-employment tax, and investors figuring out capital gains all get accurate numbers instantly.'],
+  ['candle making', 'Whether you are making candles for gifts, home decor, or to sell on Etsy, understanding the math...', 'For candles made as gifts, home decor, or to sell on Etsy, understanding the math...'],
+  ['candle making', 'Easier to achieve smooth tops and vibrant colors.', 'Easier to achieve smooth tops and bright colors.'],
+  ['Etsy fee', 'The winner may change depending on whether you\'re selling a $10 item or a $100 item.', 'The winner may differ between a $10 item and a $100 item.'],
+  ['holiday dinner', 'Take the guesswork out of Thanksgiving and Christmas dinner planning.', 'Plan Thanksgiving and Christmas dinner.'],
+  ['holiday dinner', 'Choose whether you\'re using a fresh or frozen turkey and your preferred cooking method.', 'Choose a fresh or frozen turkey and your preferred cooking method.'],
+  ['rent affordability', 'Select whether you\'re entering gross (before tax) or net (after tax) income...', 'Select gross (before tax) or net (after tax) income...'],
+  ['100k tax trap guide', 'Crucially, it is gross pension contributions that count...', 'It is gross pension contributions that count...'],
+  ['100k tax trap guide', 'For a deep dive into salary sacrifice mechanics, read the...', 'For the mechanics of salary sacrifice, read the...'],
+  ['buy vs rent', 'The stay duration is crucial - buying makes more sense the longer you stay.', 'The stay duration matters: buying makes more sense the longer you stay.'],
+  ['contractor vs employee', 'The break-even analysis is crucial for negotiations.', 'The break-even analysis is useful for negotiations.'],
+  ['dog age', 'Early detection of health issues through regular checkups is crucial.', 'Regular checkups help detect health issues early.'],
+  ['inflation', 'Understanding inflation is crucial for retirement planning, salary negotiations, and investment decisions.', 'Inflation affects retirement planning, salary negotiations, and investment decisions.'],
+  ['macro', 'Hitting this target is crucial for body composition, especially during weight loss.', 'Hitting this target supports body composition, especially during weight loss.'],
+  ['party drink', 'Consider garnishes like citrus slices or fresh mint to elevate presentation.', 'Consider garnishes like citrus slices or fresh mint for presentation.'],
+  ['party drink', 'This is crucial - hot weather can nearly triple drink consumption...', 'Hot weather can nearly triple drink consumption...'],
+  ['sleep', 'This stage is crucial for memory consolidation, learning, and emotional processing.', 'This stage supports memory consolidation, learning, and emotional processing.'],
+  ['UK tax', 'This is crucial for understanding pay rises, bonuses, and whether salary sacrifice...', 'It helps you understand pay rises, bonuses, and whether salary sacrifice...'],
+  ['UK dividend tax', 'Navigate high income marginal rates.', 'See high income marginal rates.'],
+  ['Singapore CPF', '...from 1 January 2025, unlocks the highest payout tier...', '...from 1 January 2025, gives the highest payout tier...'],
+  ['UK mortgage affordability', '...which can unlock lower interest rates from lenders.', '...which can mean lower interest rates from lenders.'],
+  ['UK mortgage affordability', 'Lower LTV usually unlocks better interest rates.', 'Lower LTV usually means better interest rates.'],
+];
+
+const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
+
+const rowsBody = document.getElementById('rows');
+ROWS.forEach(([item, hint, cells], i) => {
+  const tr = el('tr');
+  const td = el('td', 'item', `${i + 1}. ${item}`);
+  if (hint) td.append(el('small', '', hint));
+  tr.append(td);
+  tr.dataset.statuses = SITES.map(([k]) => cells[k][0]).join(' ');
+  for (const [k] of SITES) {
+    const [status, note] = cells[k];
+    const c = el('td', 'cell');
+    c.append(el('span', `chip ${status}`, STATUS[status]), el('div', '', note));
+    tr.append(c);
+  }
+  rowsBody.append(tr);
+});
+
+const tally = document.getElementById('tally');
+for (const [k, name] of SITES) {
+  const counts = {};
+  for (const [, , cells] of ROWS) counts[cells[k][0]] = (counts[cells[k][0]] ?? 0) + 1;
+  const box = el('div');
+  box.append(el('b', '', name));
+  box.append(el('span', '', Object.keys(STATUS).filter((s) => counts[s]).map((s) => `${counts[s]} ${STATUS[s].toLowerCase()}`).join(' · ')));
+  tally.append(box);
+}
+
+const NOT_DONE = ['fixed', 'partial', 'open', 'yours', 'unchecked'];
+const FILTERS = [['All 20 items', null], ['Anything not done', NOT_DONE], ['Fixed, not live', ['fixed']], ['Yours', ['yours', 'unchecked']]];
+const filters = document.getElementById('filters');
+FILTERS.forEach(([label, set], i) => {
+  const b = el('button', '', label);
+  b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+  b.onclick = () => {
+    for (const other of filters.children) other.setAttribute('aria-pressed', 'false');
+    b.setAttribute('aria-pressed', 'true');
+    for (const tr of rowsBody.children) tr.hidden = set !== null && !tr.dataset.statuses.split(' ').some((s) => set.includes(s));
+  };
+  filters.append(b);
+});
+
+const legend = document.getElementById('legend');
+for (const [k, label] of Object.entries(STATUS)) {
+  const s = el('span');
+  s.append(el('span', `chip ${k}`, label), document.createTextNode(` ${MEANING[k]}`));
+  legend.append(s);
+}
+
+const copy = document.getElementById('copy');
+for (const [page, before, after] of COPY) {
+  const tr = el('tr');
+  tr.append(el('td', '', page), el('td', '', before), el('td', '', after));
+  copy.append(tr);
+}
+
+const speed = document.getElementById('speed');
+for (const [page, score, fcp, lcp, cls, tone, read] of SPEED) {
+  const tr = el('tr');
+  tr.append(el('td', '', page), el('td', 'num', String(score)), el('td', 'num', `${fcp.toFixed(2)} s`), el('td', `num ${tone}`, `${lcp.toFixed(2)} s`), el('td', 'num', cls.toFixed(3)), el('td', '', read));
+  speed.append(tr);
+}
+</script>
+</body>
+</html>

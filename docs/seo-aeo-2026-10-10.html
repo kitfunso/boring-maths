@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>boring-math.com: Search Console and AEO pass, 2026-10-10</title>
+<style>
+  :root { --ink:#1d1d1f; --mute:#5f6368; --line:#e3e3e8; --bg:#fbfbfd; --good:#137333; --bad:#b3261e; --warn:#8a5a00; }
+  body { font: 16px/1.55 system-ui, -apple-system, Segoe UI, sans-serif; color: var(--ink); background: var(--bg); margin: 0; }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 36px 0 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .sub { color: var(--mute); margin: 0 0 20px; }
+  .lead { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 14px; background: #fff; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--mute); font-weight: 600; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  code { font: 13px ui-monospace, SFMono-Regular, Consolas, monospace; background: #f1f1f4; padding: 1px 5px; border-radius: 4px; }
+  pre { background: #f1f1f4; padding: 10px 12px; border-radius: 8px; overflow-x: auto; font-size: 13px; }
+  .good { color: var(--good); font-weight: 600; } .bad { color: var(--bad); font-weight: 600; } .warn { color: var(--warn); font-weight: 600; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+<h1>boring-math.com: Search Console and AEO pass</h1>
+<p class="sub">2026-10-10. Search Console window 2026-09-13 to 2026-10-10. Fixes in PR #37, merged as <code>c4813c0</code> and live the same day.</p>
+
+<div class="lead">
+<p><strong>Answer.</strong> Two real AEO defects were found and fixed in PR #37. 110 of 181 calculator pages pointed their share image at a file that did not exist, and Bing has indexed about 72 of 229 sitemap URLs. Search traffic is down, and the slide overlaps Google's September 2026 spam update. The fall is mostly lost impressions, with modest rank erosion. Nothing here proves the update caused it.</p>
+<p><strong>Status:</strong> PR #37 is live. Seven sampled share images return 200, and nested guide pages use the default card. IndexNow accepted all 229 URLs (HTTP 200) on the second try; the first try got 403 because IndexNow had not yet checked the new key. Next check: Bing <code>site:boring-math.com</code> count about 2026-10-17.</p>
+</div>
+
+<h2>1. Search Console read</h2>
+<table>
+<tr><th>Window</th><th class="n">Clicks</th><th class="n">Impressions</th><th class="n">Pages</th></tr>
+<tr><td>2026-09-13 to 2026-10-10 (today's pull)</td><td class="n">36</td><td class="n">42,914</td><td class="n">203</td></tr>
+<tr><td>to 2026-10-09 (yesterday's pull)</td><td class="n">36</td><td class="n">45,084</td><td class="n">203</td></tr>
+<tr><td>to 2026-09-20 (Checkpoint 5)</td><td class="n">65</td><td class="n">78,775</td><td class="n">-</td></tr>
+</table>
+<p>Daily series: about 4,000 impressions and 4 clicks a day in late August; about 1,300 and 1 a day in early October. Average position moved from about 33 (late September) to 44 to 48 (4 to 8 October).</p>
+<p><strong>The top "opportunity" in the standard report is a burst, not demand.</strong> "age calculator of dog" has 2,153 impressions at position 4.9 and 0 clicks. 2,037 of them fell on 1 to 3 October (582, 947, 508), with almost none before 29 September, across the US, Brazil, Canada and five Latin American markets. The natural phrase "dog age calculator" sits at position 52. Do not tune the dog-age page for it; it is also in the PR #35 comparison group.</p>
+<p><strong>Same-page comparison</strong>, 10 to 23 September against 25 September to 8 October, pages with 30 or more impressions in both (86 pages):</p>
+<ul>
+<li>Impressions 30,028 to 19,279 (down 36%); clicks 23 to 17.</li>
+<li>44 pages slipped 2 or more positions; 16 rose. Weighted mean change +0.5, pulled down by the dog-age burst.</li>
+<li>Most impression loss is demand at an unchanged rank: discount-calculator 6,902 to 2,215 at position 11 to 13; cooking-time 1,307 to 515 while its position improved 37 to 34.</li>
+<li>Largest rank losses are the UK money pages: salary sacrifice 40.6 to 56.3, inheritance tax 68.2 to 78.4, UK employer cost 62.3 to 74.1; also raise 14.7 to 32.8, consulting rate 31.6 to 60.3.</li>
+</ul>
+<p><strong>Google update in the window.</strong> Google's status dashboard lists the "September 2026 spam update", 2026-09-24 to 2026-10-08 (status.search.google.com, ranking incident history). The slide sits inside it. Untested: whether the update caused it. The next check is the 2026-11-06 read already scheduled for the PR #35 link experiment.</p>
+
+<h2>2. AEO checks</h2>
+<table>
+<tr><th>Check</th><th>Result</th></tr>
+<tr><td>robots.txt</td><td class="good">Allows all crawlers; only <code>/cdn-cgi/</code> disallowed.</td></tr>
+<tr><td>Cloudflare AI bot policies (dashboard, read-only)</td><td class="good">Search, Agent and Training all "Allow (do not block)". Every per-crawler Block toggle off. Bot Fight Mode, AI Labyrinth and Bot Preference Sync off.</td></tr>
+<tr><td>AI crawler traffic, last 7 days</td><td>6.56k requests from AI crawlers. All crawlers: 4.82k at 200, 1.17k at 404, 330 at 308, 149 at 301, 24 at 403.</td></tr>
+<tr><td>Why the 404s</td><td>Almost all are exploit scanners using AI crawler names (<code>/.env</code>, <code>/.ssh/id_rsa</code>, <code>/actuator/*</code>). Claude-SearchBot's 78 requests were all scanner paths. Not a site problem.</td></tr>
+<tr><td>Share images (<code>og:image</code>)</td><td class="bad">110 of 181 calculator pages pointed at a missing file. PerplexityBot and OAI-SearchBot requested those images and got 404. Fixed in PR #37.</td></tr>
+<tr><td>Bing index</td><td class="bad">About 72 results for <code>site:boring-math.com</code> against 229 sitemap URLs. Bing feeds ChatGPT search and Copilot. IndexNow added in PR #37.</td></tr>
+<tr><td>Anthropic's fetcher</td><td class="good">Loaded <code>/calculators/tip-calculator/</code> with full content.</td></tr>
+</table>
+
+<h2>3. What PR #37 changes</h2>
+<ul>
+<li><strong>Share images from the registry.</strong> The old generator kept a hand list of 77 calculators, unchanged since 2026-01-22, and every card drew a "NO GLYPH" box where the emoji should be. Now <code>src/pages/og/[slug].webp.ts</code> renders one card per registry entry at build time (182 images including the default). A new postbuild gate, <code>check-og-images.mjs</code>, fails the build when any page's <code>og:image</code> is missing; against the old build it reports 110 of 230 pages.</li>
+<li><strong>IndexNow.</strong> A key file at the site root and <code>npm run seo:indexnow</code>, which posts the live sitemap to <code>api.indexnow.org</code> and refuses to run before the key file is deployed.</li>
+<li><strong>Build fix.</strong> Tailwind no longer scans <code>docs/</code>; a local report there had broken the build with "Invalid code point 1120278".</li>
+</ul>
+<p>Checks: build 240 pages, six postbuild gates OK; suite 1289/1289; lint 0 errors; sitemap unchanged at 229 URLs.</p>
+
+<h2>4. Left alone on purpose</h2>
+<ul>
+<li>Titles, descriptions and links on shipped pages: the 2026-10-09 cadence leaves a shipped page alone for 60 days, and PR #34 and #35 touched many pages that day.</li>
+<li>New calculators: CLAUDE.md rule 5 and the registry guard need Keith's sign-off.</li>
+<li>Instant-answer queries (discount, percentage): Google answers them in the results page; standing read says do not invest.</li>
+<li>The authority ceiling (about 5 referring domains) is still the binding constraint; the outreach lever stays closed by Keith's 2026-09-07 ruling.</li>
+<li>Bing Webmaster Tools: needs Keith's Microsoft sign-in. IndexNow covers submission without it.</li>
+</ul>
+
+<h2>5. Regenerate the numbers</h2>
+<pre>npm run seo:gsc-pull                         # gsc-export/2026-10-10/
+python scripts/gsc_analysis.py               # docs/gsc-analysis-2026-10-10.md
+node scratchpad/seo/gsc-daily.mjs 2026-08-20 2026-10-10 "age calculator of dog"
+node scratchpad/seo/gsc-windows.mjs 2026-09-10 2026-09-23 2026-09-25 2026-10-08
+npm run build &amp;&amp; node scripts/seo/check-og-images.mjs
+curl -s -A "Mozilla/5.0" "https://www.bing.com/search?q=site%3Aboring-math.com" | grep -o 'class="sb_count"[^&lt;]*'</pre>
+<p class="sub">The two scratch scripts live in this session's scratchpad, not the repo.</p>
+</main>
+</body>
+</html>
