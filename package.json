@@ -25,6 +25,7 @@
     "seo:gsc-inspect": "node scripts/seo/gsc-inspect.mjs",
     "seo:gsc-refresh": "node scripts/seo/gsc-refresh-workflow.mjs",
     "seo:internal-links": "node scripts/seo/internal-link-map.mjs",
+    "seo:indexnow": "node scripts/seo/indexnow-submit.mjs",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui",
     "qa": "npm run format:check && npm run lint && npm run test && npm run build",
