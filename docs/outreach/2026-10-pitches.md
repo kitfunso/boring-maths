@@ -1,6 +1,6 @@
 # Guest-post pitches, refreshed 2026-10-24
 
-The five July pitches (`2026-07-pitches.md`), updated for sending now. None has been sent; the sprint table in `REVENUE.md` is still empty. Send each from your own email or the site's contact form. Three of the five are sendable; see the contact check below.
+The five July pitches (`2026-07-pitches.md`), updated for sending now. None has been sent; the sprint table in `REVENUE.md` is still empty. Send each from your own email or the site's contact form. Four are sendable (3, 4, 5 and the new 6); see the contact check below.
 
 **Why now:** Google demoted the whole site on 2026-10-16 (`docs/gsc-review-2026-10-24.html`). Authority is part of a site-level quality score, and the site has about five referring domains. These five are the only open authority lever.
 
@@ -13,8 +13,9 @@ The five July pitches (`2026-07-pitches.md`), updated for sending now. None has 
 | 3 | Meaningful Money | Verified. `hello@meaningfulmoney.tv` is not on the site. The contact page has a form, and it gives info@jacksonswealth.com, Pete Matthew's firm. Use the form. | Form at meaningfulmoney.tv/contact |
 | 4 | Save the Student | Not verified. The contact and press pages block automated reads, so open them in a browser before sending. A search result names Laura Brown as Head of Editorial, but her author page also blocks reads, so the greeting stays general. | Form at savethestudent.org/contact |
 | 5 | Revenue Scotland | Verified. revenue.scot/support/contact-us lists info@revenue.scot for general comments or queries. | info@revenue.scot |
+| 6 | Landlord Today | Replacement for the ADS angle. A Cision media listing says its PR opportunities include "guest blogging opportunities". landlordtoday.co.uk/contact-us has a "Contact our press team" link (the address is hidden from automated reads, so open it in a browser) and a general enquiry form. | Press team link at landlordtoday.co.uk/contact-us |
 
-Pitches 1 and 2 stay below for reference only. The ADS angle needs a new Scottish landlord or personal-finance target. Candidates not yet checked: The Savvy Scot (its write-for-us page returned an error on 2026-10-24) and the Scottish Association of Landlords resource pages.
+Pitches 1 and 2 stay below for reference only; pitch 6 reuses pitch 1's angle. Also checked on 2026-10-24 and ruled out: The Savvy Scot (domain no longer resolves), the Scottish Association of Landlords (only a magazine media-pack address found, no contributor route), Landlord Law Blog (England and Wales only).
 
 **What changed from July:**
 
@@ -179,3 +180,34 @@ Principal Researcher and Lead Engineer, boring-math.com
 ```
 
 Long shot: government sites rarely link to third-party tools, and the page carries AdSense. Do not chase a non-reply.
+
+---
+
+## 6. Landlord Today (ADS angle, replaces pitches 1 and 2)
+
+**Contact:** the "Contact our press team" link at landlordtoday.co.uk/contact-us (open it in a browser; the address is hidden from scripts), else the enquiry form on the same page
+
+**Subject:** Guest post idea for Landlord Today: what landlords get wrong about Scottish ADS
+
+```
+Hi,
+
+I run Boring Math (boring-math.com), a site of free calculators, including
+UK tax and property tools. One of them works out the Additional Dwelling
+Supplement, the 8% surcharge on second-property purchases in Scotland:
+https://boring-math.com/calculators/ads-calculator/
+
+I checked its ADS and LBTT rates against Revenue Scotland's published
+rates on 24 October 2026, and the page links to those sources.
+
+I'd like to write a guest post for Landlord Today on what landlords get
+wrong about ADS when buying a second Scottish property: the most common
+miscalculations, when the supplement applies and when it can be reclaimed,
+and how much it adds to a typical purchase. 900 to 1,200 words, original,
+with worked examples from the calculator.
+
+Would that fit?
+
+Keith
+Principal Researcher and Lead Engineer, boring-math.com
+```
