@@ -25,7 +25,7 @@ export const BSD_BANDS: BsdBand[] = [
 // [1st, 2nd, 3rd+] for citizen/PR; a single flat rate for foreigner/entity.
 const ABSD_RATE_TABLE: Record<BuyerProfile, readonly [number, number, number] | number> = {
   citizen: [0, 0.2, 0.3],
-  pr: [0.05, 0.25, 0.3],
+  pr: [0.05, 0.3, 0.35],
   foreigner: 0.6,
   entity: 0.65,
 };

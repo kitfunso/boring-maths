@@ -2,10 +2,10 @@
 
 export const GST_RATE = 0.09;
 
-// SP Group regulated tariff, residential, per kWh.
-export const ELECTRICITY_RATE_BEFORE_GST = 0.3191;
-export const ELECTRICITY_RATE_WITH_GST = 0.3478;
-export const TARIFF_PERIOD = 'July to September 2026';
+// SP Group regulated tariff, residential, per kWh. Q4 2026, effective 1 Oct to 31 Dec 2026.
+export const ELECTRICITY_RATE_BEFORE_GST = 0.2859;
+export const ELECTRICITY_RATE_WITH_GST = 0.3116;
+export const TARIFF_PERIOD = 'October to December 2026';
 
 // PUB water tariff, per cubic metre, effective 1 April 2025.
 export const WATER_TIER_1_LIMIT = 40; // cubic metres/month

@@ -44,45 +44,45 @@ export const FILING_STATUSES: { value: FilingStatus; label: string }[] = [
   { value: 'head', label: 'Head of Household' },
 ];
 
-// 2024 Federal Tax Brackets
-export const FEDERAL_TAX_BRACKETS_2024: Record<
+// 2026 Federal Tax Brackets (Rev. Proc. 2025-32, section 4.01)
+export const FEDERAL_TAX_BRACKETS_2026: Record<
   FilingStatus,
   { min: number; max: number; rate: number; base: number }[]
 > = {
   single: [
-    { min: 0, max: 11600, rate: 0.1, base: 0 },
-    { min: 11600, max: 47150, rate: 0.12, base: 1160 },
-    { min: 47150, max: 100525, rate: 0.22, base: 5426 },
-    { min: 100525, max: 191950, rate: 0.24, base: 17168.5 },
-    { min: 191950, max: 243725, rate: 0.32, base: 39110.5 },
-    { min: 243725, max: 609350, rate: 0.35, base: 55678.5 },
-    { min: 609350, max: Infinity, rate: 0.37, base: 183647.25 },
+    { min: 0, max: 12400, rate: 0.1, base: 0 },
+    { min: 12400, max: 50400, rate: 0.12, base: 1240 },
+    { min: 50400, max: 105700, rate: 0.22, base: 5800 },
+    { min: 105700, max: 201775, rate: 0.24, base: 17966 },
+    { min: 201775, max: 256225, rate: 0.32, base: 41024 },
+    { min: 256225, max: 640600, rate: 0.35, base: 58448 },
+    { min: 640600, max: Infinity, rate: 0.37, base: 192979.25 },
   ],
   married: [
-    { min: 0, max: 23200, rate: 0.1, base: 0 },
-    { min: 23200, max: 94300, rate: 0.12, base: 2320 },
-    { min: 94300, max: 201050, rate: 0.22, base: 10852 },
-    { min: 201050, max: 383900, rate: 0.24, base: 34337 },
-    { min: 383900, max: 487450, rate: 0.32, base: 78221 },
-    { min: 487450, max: 731200, rate: 0.35, base: 111357 },
-    { min: 731200, max: Infinity, rate: 0.37, base: 196669.5 },
+    { min: 0, max: 24800, rate: 0.1, base: 0 },
+    { min: 24800, max: 100800, rate: 0.12, base: 2480 },
+    { min: 100800, max: 211400, rate: 0.22, base: 11600 },
+    { min: 211400, max: 403550, rate: 0.24, base: 35932 },
+    { min: 403550, max: 512450, rate: 0.32, base: 82048 },
+    { min: 512450, max: 768700, rate: 0.35, base: 116896 },
+    { min: 768700, max: Infinity, rate: 0.37, base: 206583.5 },
   ],
   head: [
-    { min: 0, max: 16550, rate: 0.1, base: 0 },
-    { min: 16550, max: 63100, rate: 0.12, base: 1655 },
-    { min: 63100, max: 100500, rate: 0.22, base: 7241 },
-    { min: 100500, max: 191950, rate: 0.24, base: 15469 },
-    { min: 191950, max: 243700, rate: 0.32, base: 37417 },
-    { min: 243700, max: 609350, rate: 0.35, base: 53977 },
-    { min: 609350, max: Infinity, rate: 0.37, base: 181954.5 },
+    { min: 0, max: 17700, rate: 0.1, base: 0 },
+    { min: 17700, max: 67450, rate: 0.12, base: 1770 },
+    { min: 67450, max: 105700, rate: 0.22, base: 7740 },
+    { min: 105700, max: 201750, rate: 0.24, base: 16155 },
+    { min: 201750, max: 256200, rate: 0.32, base: 39207 },
+    { min: 256200, max: 640600, rate: 0.35, base: 56631 },
+    { min: 640600, max: Infinity, rate: 0.37, base: 191171 },
   ],
 };
 
-// Standard deductions for 2024
-export const STANDARD_DEDUCTIONS_2024: Record<FilingStatus, number> = {
-  single: 14600,
-  married: 29200,
-  head: 21900,
+// Standard deductions for 2026 (Rev. Proc. 2025-32, section 4.14)
+export const STANDARD_DEDUCTIONS_2026: Record<FilingStatus, number> = {
+  single: 16100,
+  married: 32200,
+  head: 24150,
 };
 
 // State tax rates (simplified - using flat/effective rates for most states)
@@ -141,9 +141,9 @@ export const STATE_TAX_DATA: Record<string, { name: string; rate: number; hasLoc
     DC: { name: 'Washington D.C.', rate: 8.5 },
   };
 
-// FICA rates for 2024
+// FICA rates for 2026
 export const SOCIAL_SECURITY_RATE = 0.062;
-export const SOCIAL_SECURITY_WAGE_BASE = 168600;
+export const SOCIAL_SECURITY_WAGE_BASE = 184500;
 export const MEDICARE_RATE = 0.0145;
 export const MEDICARE_ADDITIONAL_RATE = 0.009;
 export const MEDICARE_ADDITIONAL_THRESHOLD_SINGLE = 200000;

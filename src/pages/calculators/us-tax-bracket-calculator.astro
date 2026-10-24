@@ -9,13 +9,14 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USTaxBracketCalculator } from '../../components/calculators/USTaxBracketCalculator';
 
-const title = 'US Tax Bracket Calculator (2022, 2023, 2024, 2025, 2026): Federal Income Tax';
+const title = 'US Tax Bracket Calculator (2025, 2026): Federal Income Tax';
 const description =
-  'Free federal income tax bracket calculator for 2022, 2023, 2024, 2025, and 2026. See your marginal rate, effective rate, and total tax owed across all filing statuses.';
+  'Free federal income tax bracket calculator for 2025 and 2026. See your marginal rate, effective rate, and total tax owed across all filing statuses.';
 const keywords =
-  'tax bracket calculator, what tax bracket am I in, federal income tax calculator 2025, marginal tax rate calculator, effective tax rate, us tax calculator';
+  'tax bracket calculator, what tax bracket am I in, federal income tax calculator 2026, marginal tax rate calculator, effective tax rate, us tax calculator';
 const canonicalURL = '/calculators/us-tax-bracket-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -50,9 +51,9 @@ const relatedCalculators = [
 
 const faqs = [
   {
-    question: 'What tax bracket am I in for 2025?',
+    question: 'What tax bracket am I in for 2026?',
     answer:
-      'Your tax bracket depends on your filing status and taxable income. For 2025, single filers are in the 10% bracket up to $11,925, 12% up to $48,475, 22% up to $103,350, 24% up to $197,300, 32% up to $250,525, 35% up to $626,350, and 37% above that. Use our calculator to find your exact bracket.',
+      'Your tax bracket depends on your filing status and taxable income. For 2026, single filers are in the 10% bracket up to $12,400, 12% up to $50,400, 22% up to $105,700, 24% up to $201,775, 32% up to $256,225, 35% up to $640,600, and 37% above that. Use our calculator to find your exact bracket, or switch it to 2025.',
   },
   {
     question: "What's the difference between marginal and effective tax rate?",
@@ -62,17 +63,17 @@ const faqs = [
   {
     question: 'How do tax brackets actually work?',
     answer:
-      "Tax brackets are progressive, meaning different portions of your income are taxed at different rates. For example, if you're single with $60,000 taxable income, the first $11,925 is taxed at 10%, the next $36,550 at 12%, and the remaining $11,525 at 22%. You don't pay 22% on your entire income.",
+      "Tax brackets are progressive, meaning different portions of your income are taxed at different rates. For example, if you're single with $60,000 taxable income, the first $12,400 is taxed at 10%, the next $38,000 at 12%, and the remaining $9,600 at 22%. You don't pay 22% on your entire income.",
   },
   {
     question: 'Should I take the standard deduction or itemize?',
     answer:
-      'Take whichever is larger. For 2025, the standard deduction is $15,000 (single), $30,000 (married filing jointly), or $22,500 (head of household). Only itemize if your deductions (mortgage interest, state taxes up to $10k, charitable donations) exceed these amounts.',
+      'Take whichever is larger. For 2026, the standard deduction is $16,100 (single), $32,200 (married filing jointly), or $24,150 (head of household). Only itemize if your deductions (mortgage interest, state taxes up to $10k, charitable donations) exceed these amounts.',
   },
   {
-    question: 'What is the standard deduction for 2025?',
+    question: 'What are the standard deductions for 2026 and 2025?',
     answer:
-      'For 2025, the standard deduction is: $15,000 for single filers and married filing separately, $30,000 for married filing jointly, and $22,500 for head of household. These amounts are automatically deducted from your gross income before calculating tax.',
+      'For 2026, the standard deduction is: $16,100 for single filers and married filing separately, $32,200 for married filing jointly, and $24,150 for head of household. For 2025, it is $15,750, $31,500, and $23,625 after the One, Big, Beautiful Bill. These amounts are automatically deducted from your gross income before calculating tax.',
   },
   {
     question: 'Does this calculator include state taxes?',
@@ -82,7 +83,7 @@ const faqs = [
   {
     question: 'How can I lower my tax bracket?',
     answer:
-      'You can reduce your taxable income by: contributing to a traditional 401(k) or IRA (up to $23,500 for 401k in 2025), contributing to an HSA if eligible, maximizing deductions, and timing income if self-employed. These strategies can push you into a lower bracket.',
+      'You can reduce your taxable income by: contributing to a traditional 401(k) or IRA (up to $24,500 for 401(k) in 2026), contributing to an HSA if eligible, maximizing deductions, and timing income if self-employed. These strategies can push you into a lower bracket.',
   },
   {
     question: 'What income counts toward my tax bracket?',
@@ -116,7 +117,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="US Tax Bracket Calculator"
-    description="Find your 2025 federal tax bracket and calculate exactly how much you owe. See the breakdown of how your income is taxed at each rate."
+    description="Find your 2025 or 2026 federal tax bracket and calculate exactly how much you owe. See the breakdown of how your income is taxed at each rate."
     faqs={faqs}
   />
 
@@ -126,6 +127,10 @@ const schemaBreadcrumbs = [
 
   <ContentSection title="How to Use This Calculator">
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
+      <li>
+        <strong class="text-[var(--color-cream)]">Select the tax year</strong> – 2026 (the default) or
+        2025.
+      </li>
       <li>
         <strong class="text-[var(--color-cream)]">Select your filing status</strong> – Single, Married
         Filing Jointly, Married Filing Separately, or Head of Household.
@@ -149,8 +154,8 @@ const schemaBreadcrumbs = [
     <div class="space-y-4 text-[var(--color-subtle)]">
       <p>
         The <strong class="text-blue-400">federal income tax</strong> shown is what you owe the IRS based
-        on 2025 tax brackets. This is before any credits (like the Child Tax Credit) which can reduce
-        your final tax bill.
+        on the 2025 or 2026 tax brackets you select. This is before any credits (like the Child Tax Credit)
+        which can reduce your final tax bill.
       </p>
       <p>
         Your <strong class="text-amber-400">marginal rate</strong> (tax bracket) is the rate on your last
@@ -164,6 +169,28 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: IRS releases tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-32, 2026 tax rate tables and inflation adjustments',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-32.pdf',
+      },
+      {
+        label: 'IRS: Federal income tax rates and brackets (2025 tables)',
+        href: 'https://www.irs.gov/filing/federal-income-tax-rates-and-brackets',
+      },
+      {
+        label: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500',
+        href: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

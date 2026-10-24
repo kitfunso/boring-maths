@@ -23,6 +23,19 @@ describe('W2to1099calculatorCalculator', () => {
       expect(result.healthInsuranceCost).toBe(7200);
     });
 
+    it('should cap Social Security at the 2026 wage base but not Medicare', () => {
+      const inputs = getDefaultInputs();
+      inputs.inputMode = 'salary';
+      inputs.w2AnnualSalary = 250000;
+
+      const result = calculateW2To1099(inputs);
+
+      // 250,000 x 92.35% = 230,875: 12.4% x 184,500 + 2.9% x 230,875 = 29,573.375
+      expect(result.selfEmploymentTax).toBe(29573);
+      // Employer pays 6.2% x 184,500 + 1.45% x 250,000
+      expect(result.employerFicaLoss).toBe(15064);
+    });
+
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
       inputs.w2HourlyRate = 0;

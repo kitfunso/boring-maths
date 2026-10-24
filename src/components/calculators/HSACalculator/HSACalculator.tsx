@@ -6,7 +6,7 @@
 import { calculateHSA, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
-  HSA_LIMITS_2025,
+  HSA_LIMITS_2026,
   FEDERAL_TAX_BRACKETS,
   type HSAInputs,
   type CoverageType,
@@ -38,8 +38,8 @@ export default function HSACalculator() {
   });
 
   const coverageOptions = [
-    { value: 'individual', label: `Individual ($${HSA_LIMITS_2025.individual.toLocaleString()})` },
-    { value: 'family', label: `Family ($${HSA_LIMITS_2025.family.toLocaleString()})` },
+    { value: 'individual', label: `Individual ($${HSA_LIMITS_2026.individual.toLocaleString()})` },
+    { value: 'family', label: `Family ($${HSA_LIMITS_2026.family.toLocaleString()})` },
   ];
 
   const taxBracketOptions = FEDERAL_TAX_BRACKETS.map((b) => ({
@@ -66,8 +66,8 @@ export default function HSACalculator() {
                 onChange={(value) => updateInput('coverageType', value as CoverageType)}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
-                2025 contribution limits shown. Catch-up: +$
-                {HSA_LIMITS_2025.catchUp.toLocaleString()} if 55+
+                2026 contribution limits shown. Catch-up: +$
+                {HSA_LIMITS_2026.catchUp.toLocaleString()} if 55+
               </p>
             </div>
 
@@ -121,7 +121,7 @@ export default function HSACalculator() {
                 />
                 {inputs.age >= 55 && (
                   <p className="text-sm text-green-400 mt-1">
-                    You qualify for ${HSA_LIMITS_2025.catchUp.toLocaleString()} catch-up
+                    You qualify for ${HSA_LIMITS_2026.catchUp.toLocaleString()} catch-up
                     contribution!
                   </p>
                 )}
@@ -301,7 +301,7 @@ export default function HSACalculator() {
             {/* Contribution Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
-                label="2025 Limit"
+                label="2026 Limit"
                 value={formatCurrency(result.totalLimit)}
                 sublabel={inputs.age >= 55 ? 'includes catch-up' : inputs.coverageType}
               />

@@ -6,11 +6,11 @@
 
 import type { USCapitalGainsInputs, USCapitalGainsResult, FilingStatus } from './types';
 import {
-  LTCG_BRACKETS_2025,
+  LTCG_BRACKETS_2026,
   NIIT_THRESHOLDS,
   NIIT_RATE,
-  INCOME_TAX_BRACKETS_2025,
-  STANDARD_DEDUCTIONS_2025,
+  INCOME_TAX_BRACKETS_2026,
+  STANDARD_DEDUCTIONS_2026,
 } from './types';
 
 export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapitalGainsResult {
@@ -38,7 +38,7 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   }
 
   // Standard deduction
-  const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
 
   // Calculate taxable income (simplified)
   const taxableOtherIncome = Math.max(0, otherIncome - standardDeduction);
@@ -117,7 +117,7 @@ function calculateLongTermTax(
   taxableOtherIncome: number,
   filingStatus: FilingStatus
 ): { tax: number; effectiveRate: number } {
-  const brackets = LTCG_BRACKETS_2025[filingStatus];
+  const brackets = LTCG_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingGain = gain;
   let incomeUsed = taxableOtherIncome;
@@ -125,11 +125,9 @@ function calculateLongTermTax(
   for (const bracket of brackets) {
     if (remainingGain <= 0) break;
 
+    // Other income already above this band: keep incomeUsed so the gain stacks on top of it
     const bracketRoom = bracket.max - incomeUsed;
-    if (bracketRoom <= 0) {
-      incomeUsed = bracket.max;
-      continue;
-    }
+    if (bracketRoom <= 0) continue;
 
     const gainInBracket = Math.min(remainingGain, bracketRoom);
     tax += gainInBracket * (bracket.rate / 100);
@@ -146,7 +144,7 @@ function calculateShortTermTax(
   taxableOtherIncome: number,
   filingStatus: FilingStatus
 ): { tax: number; marginalRate: number } {
-  const brackets = INCOME_TAX_BRACKETS_2025[filingStatus];
+  const brackets = INCOME_TAX_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingGain = gain;
   let marginalRate = 10;

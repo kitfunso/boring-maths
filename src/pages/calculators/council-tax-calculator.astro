@@ -15,7 +15,7 @@ const title = 'Free Council Tax Calculator: Estimate Your Annual Bill | Boring M
 const description =
   'Free UK council tax calculator. Estimate your annual council tax by property band and region. Includes single person discount and second home premium calculations.';
 const keywords =
-  'council tax calculator, council tax bands, council tax 2024, council tax by postcode, council tax band calculator, single person discount council tax, second home council tax';
+  'council tax calculator, council tax bands, council tax 2026, council tax by postcode, council tax band calculator, single person discount council tax, second home council tax';
 const canonicalURL = '/calculators/council-tax-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -59,12 +59,12 @@ const faqs = [
   {
     question: 'How is council tax calculated?',
     answer:
-      'Council tax is based on the valuation band of your property (A to H) and the Band D rate set by your local council. Each band has a fixed ratio to Band D: Band A is 6/9ths, Band B is 7/9ths, up to Band H which is 2× the Band D rate. Your council sets the Band D rate annually based on its spending needs.',
+      'Council tax is based on the valuation band of your property (A to H) and the Band D rate set by your local council. Each band has a fixed ratio to Band D: Band A is 6/9ths, Band B is 7/9ths, up to Band H which is 2× the Band D rate. Scotland uses higher ratios for Bands E to H, so its Band H is 882/360, about 2.45× Band D. Your council sets the Band D rate annually based on its spending needs.',
   },
   {
     question: 'What are the council tax bands?',
     answer:
-      'In England, properties are banded A–H based on their value on 1 April 1991. Band A: up to £40,000, Band B: £40,001–£52,000, Band C: £52,001–£68,000, Band D: £68,001–£88,000, Band E: £88,001–£120,000, Band F: £120,001–£160,000, Band G: £160,001–£320,000, Band H: over £320,000.',
+      'In England, properties are banded A–H based on their value on 1 April 1991. Band A: up to £40,000, Band B: £40,001–£52,000, Band C: £52,001–£68,000, Band D: £68,001–£88,000, Band E: £88,001–£120,000, Band F: £120,001–£160,000, Band G: £160,001–£320,000, Band H: over £320,000. Scotland also uses 1991 values but with lower ranges (Band H is over £212,000). Wales uses 1 April 2003 values and has a ninth band, Band I, for homes over £424,000.',
   },
   {
     question: 'What is the single person discount?',
@@ -159,12 +159,21 @@ const schemaBreadcrumbs = [
       <p>
         The <strong class="text-[var(--color-cream)]">Band D rate</strong> is the reference point. Band
         A pays two-thirds of Band D, while Band H pays double. This means the difference between the cheapest
-        and most expensive band is only 3:1, despite massive differences in property values.
+        and most expensive band is only 3:1, despite massive differences in property values. Scotland
+        raised its Band E to H ratios in 2017, so a Scottish Band H home pays about 2.45 times Band D,
+        and Welsh Band I pays 21/9 of Band D.
       </p>
       <p>
         <strong class="text-emerald-400">Regional variation</strong> is significant – London tends to
         have lower council tax rates despite higher property values, while northern councils and rural
         areas often charge more due to different funding models.
+      </p>
+      <p>
+        The 2026/27 Band D figures for England, London, Scotland and Wales are the official averages
+        published by each government. The other English regions use the simple average of each
+        council's Band D in that region, from the MHCLG Band D tables. Scottish figures exclude
+        water and sewerage charges. Your own council's Band D can be a few hundred pounds either
+        side of the average.
       </p>
     </div>
   </ContentSection>
@@ -172,6 +181,22 @@ const schemaBreadcrumbs = [
   <SourcesSection
     checked="2026-10-24"
     sources={[
+      {
+        label: 'GOV.UK: Council Tax levels set by local authorities in England 2026 to 2027',
+        href: 'https://www.gov.uk/government/statistics/council-tax-levels-set-by-local-authorities-in-england-2026-to-2027',
+      },
+      {
+        label: 'GOV.UK: Live tables on Council Tax (Band D by council)',
+        href: 'https://www.gov.uk/government/statistical-data-sets/live-tables-on-council-tax',
+      },
+      {
+        label: 'Scottish Government: Council Tax datasets (Council Tax by band 2026-27)',
+        href: 'https://www.gov.scot/publications/council-tax-datasets/',
+      },
+      {
+        label: 'Welsh Government: Council tax levels, April 2026 to March 2027',
+        href: 'https://www.gov.wales/council-tax-levels-april-2026-march-2027-html',
+      },
       {
         label: 'GOV.UK: How domestic properties are assessed for Council Tax bands',
         href: 'https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed',

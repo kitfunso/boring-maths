@@ -9,11 +9,12 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USPaycheckCalculator } from '../../components/calculators/USPaycheckCalculator';
 
 const title = 'Free US Paycheck Calculator: Take-Home Pay After Taxes | Boring Math';
 const description =
-  'Free paycheck calculator with 2024 federal and state tax brackets. Calculate your take-home pay, see tax breakdown, and estimate deductions for all 50 states.';
+  'Free paycheck calculator with 2026 federal tax brackets and state tax rates. Calculate your take-home pay, see tax breakdown, and estimate deductions for all 50 states.';
 const keywords =
   'paycheck calculator, take home pay calculator, salary after taxes, net pay calculator, federal tax calculator, state tax calculator, payroll calculator, income tax calculator';
 const canonicalURL = '/calculators/us-paycheck-calculator';
@@ -66,7 +67,7 @@ const faqs = [
   {
     question: 'How is my take-home pay calculated?',
     answer:
-      'Take-home pay is your gross pay minus all deductions: federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions like 401(k) or HSA contributions. Our calculator uses 2024 tax brackets for accurate estimates.',
+      'Take-home pay is your gross pay minus all deductions: federal income tax, state income tax, Social Security (6.2%), Medicare (1.45%), and any pre-tax deductions like 401(k) or HSA contributions. Our calculator uses 2026 tax brackets for accurate estimates.',
   },
   {
     question: 'What is the difference between gross and net pay?',
@@ -86,12 +87,12 @@ const faqs = [
   {
     question: 'What is FICA and why is it on my paycheck?',
     answer:
-      'FICA (Federal Insurance Contributions Act) includes Social Security (6.2% up to $176,100 in 2025) and Medicare (1.45% on all wages, plus 0.9% additional Medicare tax on wages over $200,000). Your employer pays a matching amount.',
+      'FICA (Federal Insurance Contributions Act) includes Social Security (6.2% up to $184,500 in 2026) and Medicare (1.45% on all wages, plus 0.9% additional Medicare tax on wages over $200,000). Your employer pays a matching amount.',
   },
   {
     question: 'How accurate is this paycheck calculator?',
     answer:
-      "Our calculator uses 2024 federal tax brackets and current state rates for accurate estimates. However, actual pay may vary due to local taxes, specific deductions, or employer withholding differences. It's designed for planning, not exact payroll calculations.",
+      "Our calculator uses 2026 federal tax brackets and simplified state rates for accurate estimates. However, actual pay may vary due to local taxes, specific deductions, or employer withholding differences. It's designed for planning, not exact payroll calculations.",
   },
   {
     question: 'Should I adjust my W-4 withholding?',
@@ -101,7 +102,7 @@ const faqs = [
   {
     question: 'How much should I contribute to my 401(k)?',
     answer:
-      'At minimum, contribute enough to get your full employer match (typically 3-6%). The 2024 limit is $23,000 ($30,500 if 50+). Many financial experts recommend saving 15-20% of income for retirement, including employer match.',
+      'At minimum, contribute enough to get your full employer match (typically 3-6%). The 2026 limit is $24,500 ($32,500 if 50+). Many financial experts recommend saving 15-20% of income for retirement, including employer match.',
   },
 ];
 
@@ -130,7 +131,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="US Paycheck Calculator"
-    description="Calculate your take-home pay after federal taxes, state taxes, Social Security, and Medicare. Includes all 50 states with 2024 tax brackets."
+    description="Calculate your take-home pay after federal taxes, state taxes, Social Security, and Medicare. Includes all 50 states with 2026 federal tax brackets."
     faqs={faqs}
   />
 
@@ -150,7 +151,7 @@ const schemaBreadcrumbs = [
         <strong>Federal Income Tax:</strong> Progressive tax based on your income bracket (10-37%)
       </li>
       <li><strong>State Income Tax:</strong> Varies by state (0% to 13.3% in California)</li>
-      <li><strong>Social Security:</strong> 6.2% on wages up to $176,100 (2025)</li>
+      <li><strong>Social Security:</strong> 6.2% on wages up to $184,500 (2026)</li>
       <li><strong>Medicare:</strong> 1.45% on all wages, plus 0.9% above $200,000</li>
     </ul>
   </ContentSection>
@@ -160,10 +161,10 @@ const schemaBreadcrumbs = [
       <div class="bg-green-900/20 rounded-lg p-4">
         <h4 class="font-semibold text-green-400 mb-2">Pre-Tax Strategies</h4>
         <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
-          <li><strong>401(k):</strong> Up to $23,000/year reduces taxable income</li>
-          <li><strong>HSA:</strong> $4,150 individual / $8,300 family (2024)</li>
-          <li><strong>FSA:</strong> $3,200 for healthcare, $5,000 for dependent care</li>
-          <li><strong>Commuter Benefits:</strong> $315/month for transit or parking</li>
+          <li><strong>401(k):</strong> Up to $24,500/year reduces taxable income</li>
+          <li><strong>HSA:</strong> $4,400 individual / $8,750 family (2026)</li>
+          <li><strong>FSA:</strong> $3,400 for healthcare, $7,500 for dependent care</li>
+          <li><strong>Commuter Benefits:</strong> $340/month for transit or parking</li>
         </ul>
       </div>
       <div class="bg-blue-900/20 rounded-lg p-4">
@@ -176,6 +177,44 @@ const schemaBreadcrumbs = [
       </div>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: IRS releases tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-32, 2026 tax rate tables and inflation adjustments',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-32.pdf',
+      },
+      {
+        label: 'IRS: Topic no. 751, Social Security and Medicare withholding rates',
+        href: 'https://www.irs.gov/taxtopics/tc751',
+      },
+      {
+        label: 'IRS: Questions and answers for the Additional Medicare Tax',
+        href: 'https://www.irs.gov/businesses/small-businesses-self-employed/questions-and-answers-for-the-additional-medicare-tax',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+      {
+        label: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500',
+        href: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-19, 2026 HSA limits',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-19.pdf',
+      },
+      {
+        label: "IRS: Publication 15-B (2026), Employer's Tax Guide to Fringe Benefits",
+        href: 'https://www.irs.gov/publications/p15b',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

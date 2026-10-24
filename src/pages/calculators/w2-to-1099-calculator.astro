@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { W2To1099Calculator } from '../../components/calculators/W2To1099Calculator';
 
 const title = 'W2 to 1099 Calculator: Convert Your Hourly Rate (2026)';
@@ -222,26 +223,26 @@ const schemaBreadcrumbs = [
       <p>
         As a W2 employee, your employer pays half of your Social Security and Medicare taxes
         (7.65%). As a 1099 contractor, you pay the full 15.3% yourself, broken down as 12.4% for
-        Social Security (on income up to $176,100 in 2025) and 2.9% for Medicare on all earnings.
+        Social Security (on income up to $184,500 in 2026) and 2.9% for Medicare on all earnings.
         You can deduct half of your self-employment tax from your adjusted gross income, but this is
         still a significant cost that reduces your take-home pay by thousands of dollars each year.
       </p>
 
       <h4 class="font-semibold text-[var(--color-cream)]">Health Insurance Costs</h4>
       <p>
-        The average annual premium for employer-sponsored health insurance is $7,911 for single
-        coverage and over $22,000 for family coverage (2023 KFF survey). Employers typically cover
-        80-83% of this cost. As a contractor, you bear the full premium yourself through marketplace
-        plans, COBRA, or a professional association plan. While self-employed health insurance
-        premiums are tax-deductible, the out-of-pocket cost is substantial and must be factored into
-        your rate.
+        The average annual premium for employer-sponsored health insurance is $9,325 for single
+        coverage and $26,993 for family coverage (2025 KFF survey). Employers typically cover 84% of
+        the single premium and 74% of the family premium. As a contractor, you bear the full premium
+        yourself through marketplace plans, COBRA, or a professional association plan. While
+        self-employed health insurance premiums are tax-deductible, the out-of-pocket cost is
+        substantial and must be factored into your rate.
       </p>
 
       <h4 class="font-semibold text-[var(--color-cream)]">Retirement Contribution Differences</h4>
       <p>
         Many employers offer 401(k) matching contributions of 3-6% of salary, effectively free money
         that disappears when you go independent. As a contractor, you can open a Solo 401(k) or
-        SEP-IRA with high contribution limits ($69,000 combined in 2024), but there is no employer
+        SEP-IRA with high contribution limits ($72,000 combined in 2026), but there is no employer
         match. If your current employer matches 4% on a $100,000 salary, that is $4,000 per year in
         lost compensation your contractor rate needs to replace.
       </p>
@@ -334,7 +335,7 @@ const schemaBreadcrumbs = [
         <p>
           As a W2 employee, your employer quietly pays 7.65% of your wages in payroll taxes on your
           behalf. You never see it. As a 1099 contractor, you pay the full 15.3% yourself (Social
-          Security at 12.4% up to $176,100, plus Medicare at 2.9% on everything). On $100,000 of net
+          Security at 12.4% up to $184,500, plus Medicare at 2.9% on everything). On $100,000 of net
           profit, that is $14,130 in SE tax before you even start on income tax. You can deduct half
           of it from your adjusted gross income, which softens the blow slightly.
         </p>
@@ -378,6 +379,36 @@ const schemaBreadcrumbs = [
       </div>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: Topic no. 554, Self-employment tax',
+        href: 'https://www.irs.gov/taxtopics/tc554',
+      },
+      {
+        label: 'IRS: Topic no. 751, Social Security and Medicare withholding rates',
+        href: 'https://www.irs.gov/taxtopics/tc751',
+      },
+      {
+        label: 'IRS: Publication 334, Tax Guide for Small Business',
+        href: 'https://www.irs.gov/publications/p334',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+      {
+        label: 'IRS: Notice 2025-67, 2026 retirement plan limits',
+        href: 'https://www.irs.gov/pub/irs-drop/n-25-67.pdf',
+      },
+      {
+        label: 'KFF: 2025 Employer Health Benefits Survey',
+        href: 'https://www.kff.org/health-costs/2025-employer-health-benefits-survey/',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -1,43 +1,68 @@
 /**
  * UK Council Tax Calculations
- * Based on 2024/25 average Band D rates by region
+ * Based on 2026/27 average Band D rates by region
  */
 
-import type { CouncilTaxInputs, CouncilTaxResult, PropertyBand, CouncilRegion } from './types';
+import { nationOf } from './types';
+import type {
+  CouncilTaxInputs,
+  CouncilTaxResult,
+  PropertyBand,
+  CouncilRegion,
+  Nation,
+} from './types';
 
-// Band multipliers relative to Band D (Band D = 1.0)
-const BAND_MULTIPLIERS: Record<PropertyBand, number> = {
-  A: 6 / 9, // 0.667
-  B: 7 / 9, // 0.778
-  C: 8 / 9, // 0.889
-  D: 9 / 9, // 1.000
-  E: 11 / 9, // 1.222
-  F: 13 / 9, // 1.444
-  G: 15 / 9, // 1.667
-  H: 18 / 9, // 2.000
+const ENGLAND_WALES_RATIOS = {
+  A: 6 / 9,
+  B: 7 / 9,
+  C: 8 / 9,
+  D: 9 / 9,
+  E: 11 / 9,
+  F: 13 / 9,
+  G: 15 / 9,
+  H: 18 / 9,
 };
 
-// Average Band D council tax by region (2024/25 figures, approximate)
+// Scotland raised the E-H ratios in April 2017; only Wales has a Band I.
+const BAND_MULTIPLIERS: Record<Nation, Partial<Record<PropertyBand, number>>> = {
+  england: ENGLAND_WALES_RATIOS,
+  wales: { ...ENGLAND_WALES_RATIOS, I: 21 / 9 },
+  scotland: {
+    A: 240 / 360,
+    B: 280 / 360,
+    C: 320 / 360,
+    D: 360 / 360,
+    E: 473 / 360,
+    F: 585 / 360,
+    G: 705 / 360,
+    H: 882 / 360,
+  },
+};
+
+// 2026/27. England, London, Scotland and Wales are the official averages; other English regions
+// are the simple mean of each council's area Band D (MHCLG live table 5). Scotland excludes water.
 const BAND_D_RATES: Record<CouncilRegion, number> = {
-  england_average: 2171,
-  london: 1902,
-  south_east: 2187,
-  south_west: 2268,
-  east: 2164,
-  west_midlands: 2152,
-  east_midlands: 2213,
-  north_west: 2157,
-  north_east: 2190,
-  yorkshire: 2161,
-  scotland_average: 1418,
-  wales_average: 1879,
+  england_average: 2392,
+  london: 2068,
+  south_east: 2475,
+  south_west: 2511,
+  east: 2391,
+  west_midlands: 2400,
+  east_midlands: 2457,
+  north_west: 2483,
+  north_east: 2526,
+  yorkshire: 2374,
+  scotland_average: 1653,
+  wales_average: 2283,
 };
 
 export function calculateCouncilTax(inputs: CouncilTaxInputs): CouncilTaxResult {
   const { propertyBand, region, singlePersonDiscount, isSecondHome } = inputs;
 
   const bandDRate = BAND_D_RATES[region];
-  const bandMultiplier = BAND_MULTIPLIERS[propertyBand];
+  const bands = BAND_MULTIPLIERS[nationOf(region)];
+  // A saved Band I carried over from a Welsh region falls back to the nation's top band.
+  const bandMultiplier = bands[propertyBand] ?? (bands.H as number);
   let annualTax = Math.round(bandDRate * bandMultiplier);
 
   let discount = 0;

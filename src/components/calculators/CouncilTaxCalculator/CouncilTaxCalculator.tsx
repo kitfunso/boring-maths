@@ -3,6 +3,7 @@ import {
   getDefaultInputs,
   PROPERTY_BAND_LABELS,
   REGION_LABELS,
+  nationOf,
   type CouncilTaxInputs,
   type PropertyBand,
   type CouncilRegion,
@@ -21,7 +22,8 @@ export default function CouncilTaxCalculator() {
     compute: calculateCouncilTax,
   });
 
-  const bandOptions = Object.entries(PROPERTY_BAND_LABELS).map(([value, label]) => ({
+  const bandLabels = PROPERTY_BAND_LABELS[nationOf(inputs.region)];
+  const bandOptions = Object.entries(bandLabels).map(([value, label]) => ({
     value,
     label,
   }));
@@ -62,7 +64,13 @@ export default function CouncilTaxCalculator() {
               <Select
                 id="region"
                 value={inputs.region}
-                onChange={(e) => updateInput('region', e.currentTarget.value as CouncilRegion)}
+                onChange={(e) => {
+                  const region = e.currentTarget.value as CouncilRegion;
+                  updateInput('region', region);
+                  if (!PROPERTY_BAND_LABELS[nationOf(region)][inputs.propertyBand]) {
+                    updateInput('propertyBand', 'H');
+                  }
+                }}
                 options={regionOptions}
               />
             </div>

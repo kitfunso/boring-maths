@@ -11,12 +11,12 @@ import type {
   FilingStatus,
 } from './types';
 import {
-  TAX_BRACKETS_2025,
-  STANDARD_DEDUCTIONS_2025,
+  TAX_BRACKETS_2026,
+  STANDARD_DEDUCTIONS_2026,
   SE_TAX_MULTIPLIER,
-  SS_WAGE_BASE_2025,
-  HIGH_INCOME_THRESHOLD,
-  QUARTERLY_DUE_DATES_2025,
+  SS_WAGE_BASE_2026,
+  HIGH_INCOME_THRESHOLDS,
+  QUARTERLY_DUE_DATES_2026,
 } from './types';
 
 export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterlyTaxResult {
@@ -31,7 +31,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   // Calculate Self-Employment Tax
   const seTaxableIncome = selfEmploymentIncome * SE_TAX_MULTIPLIER;
-  const ssSocialSecurityTax = Math.min(seTaxableIncome, SS_WAGE_BASE_2025) * 0.124;
+  const ssSocialSecurityTax = Math.min(seTaxableIncome, SS_WAGE_BASE_2026) * 0.124;
   const ssMedicareTax = seTaxableIncome * 0.029;
   const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax;
 
@@ -39,7 +39,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   const halfSETax = selfEmploymentTax / 2;
 
   // Calculate Federal Income Tax
-  const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
   const agi = expectedAnnualIncome - halfSETax;
   const taxableIncome = Math.max(0, agi - standardDeduction);
   const federalIncomeTax = calculateFederalTax(taxableIncome, filingStatus);
@@ -57,8 +57,9 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   // Rule 1: Pay 90% of current year tax
   const currentYearSafeHarbor = estimatedTotalTax * 0.9;
 
-  // Rule 2: Pay 100% of prior year tax (110% if AGI > $150k)
-  const priorYearSafeHarborPercent = priorYearAGI > HIGH_INCOME_THRESHOLD ? 1.1 : 1.0;
+  // Rule 2: Pay 100% of prior year tax (110% if AGI > $150k, $75k married filing separately)
+  const highIncomeThreshold = HIGH_INCOME_THRESHOLDS[filingStatus];
+  const priorYearSafeHarborPercent = priorYearAGI > highIncomeThreshold ? 1.1 : 1.0;
   const priorYearSafeHarbor = priorYearTax * priorYearSafeHarborPercent;
 
   // Use the lower safe harbor amount
@@ -82,7 +83,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   }
 
   // Generate quarterly payment schedule
-  const quarterPayments: QuarterPayment[] = QUARTERLY_DUE_DATES_2025.map((q, index) => ({
+  const quarterPayments: QuarterPayment[] = QUARTERLY_DUE_DATES_2026.map((q, index) => ({
     quarter: q.quarter,
     dueDate: q.date,
     amount: quarterlyPayment,
@@ -91,7 +92,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   // Safe harbor rule description
   const safeHarborRule =
-    priorYearAGI > HIGH_INCOME_THRESHOLD
+    priorYearAGI > highIncomeThreshold
       ? '110% of prior year tax (high income)'
       : '100% of prior year tax';
 
@@ -120,7 +121,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 }
 
 function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = TAX_BRACKETS_2025[filingStatus];
+  const brackets = TAX_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingIncome = taxableIncome;
 

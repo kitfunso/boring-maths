@@ -1,13 +1,13 @@
-/** SP Group electricity (Jul-Sep 2026) + PUB water (eff. 1 Apr 2025) tests. Expected values hand-computed below each case. */
+/** SP Group electricity (Oct-Dec 2026) + PUB water (eff. 1 Apr 2025) tests. Expected values hand-computed below each case. */
 
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeUtilityBill } from '../../src/components/calculators/SingaporeUtilityBill/calculations';
 
 describe('SingaporeUtilityBill', () => {
-  it('computes electricity for 400 kWh (400 x 0.3191 = 127.64 before GST; 400 x 0.3478 = 139.12 with GST)', () => {
+  it('computes electricity for 400 kWh (400 x 0.2859 = 114.36 before GST; 400 x 0.3116 = 124.64 with GST)', () => {
     const result = calculateSingaporeUtilityBill({ electricityKWh: 400, waterM3: 0 });
-    expect(result.electricityBeforeGST).toBe(127.64);
-    expect(result.electricityWithGST).toBe(139.12);
+    expect(result.electricityBeforeGST).toBe(114.36);
+    expect(result.electricityWithGST).toBe(124.64);
   });
 
   it('computes water for 20 cubic metres, all tier 1 (20 x 3.24 = 64.80 before GST; x1.09 = 70.63 with GST)', () => {
@@ -42,9 +42,9 @@ describe('SingaporeUtilityBill', () => {
     expect(result.combinedWithGST).toBe(0);
   });
 
-  it('combines 400 kWh and 20 cubic metres into one bill (139.12 + 70.632 = 209.75 with GST)', () => {
+  it('combines 400 kWh and 20 cubic metres into one bill (114.36 + 64.80 = 179.16 before GST; 124.64 + 70.632 = 195.27 with GST)', () => {
     const result = calculateSingaporeUtilityBill({ electricityKWh: 400, waterM3: 20 });
-    expect(result.combinedBeforeGST).toBe(192.44);
-    expect(result.combinedWithGST).toBe(209.75);
+    expect(result.combinedBeforeGST).toBe(179.16);
+    expect(result.combinedWithGST).toBe(195.27);
   });
 });

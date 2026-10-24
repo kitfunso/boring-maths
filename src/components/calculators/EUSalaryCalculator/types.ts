@@ -1,7 +1,10 @@
 /**
  * EU Salary Calculator Types
- * Simplified tax calculations for EU countries
+ * Simplified tax calculations for EU countries. Income tax bands are 2026 (Belgium: income year
+ * 2026; France: the 2026 scale on 2025 income); sources are listed on the calculator page.
  */
+
+import { calculateIrelandSalary } from '../IrelandSalaryCalculator/calculations';
 
 export interface EUCountryTax {
   code: string;
@@ -12,8 +15,12 @@ export interface EUCountryTax {
   // Social security (employee portion, simplified)
   socialSecurityRate: number;
   socialSecurityCap?: number;
-  // Standard deduction/tax-free allowance
+  // false when the brackets apply to gross pay (NL box 1 rates already include the premiums)
+  socialSecurityDeductible?: boolean;
+  // Deducted before the brackets; 0 where the first bracket is already a 0% band
   taxFreeAllowance: number;
+  // Full country model where one exists on the site, so both calculators give the same answer
+  detailedModel?: (gross: number) => { socialSecurity: number; incomeTax: number };
 }
 
 export const EU_TAX_DATA: EUCountryTax[] = [
@@ -22,40 +29,43 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Germany',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 11604, rate: 0 },
-      { threshold: 17005, rate: 14 },
-      { threshold: 66760, rate: 24 },
+      { threshold: 12348, rate: 0 },
+      { threshold: 17799, rate: 14 },
+      { threshold: 69878, rate: 24 },
       { threshold: 277825, rate: 42 },
       { threshold: Infinity, rate: 45 },
     ],
     socialSecurityRate: 20.5, // Approx employee share
-    socialSecurityCap: 90600,
-    taxFreeAllowance: 11604,
+    socialSecurityCap: 101400, // Pension ceiling 2026 (SVBezGrV 2026 section 4)
+    taxFreeAllowance: 0,
   },
   {
     code: 'FR',
     name: 'France',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 11294, rate: 0 },
-      { threshold: 28797, rate: 11 },
-      { threshold: 82341, rate: 30 },
-      { threshold: 177106, rate: 41 },
+      { threshold: 11600, rate: 0 },
+      { threshold: 29579, rate: 11 },
+      { threshold: 84577, rate: 30 },
+      { threshold: 181917, rate: 41 },
       { threshold: Infinity, rate: 45 },
     ],
     socialSecurityRate: 22,
-    taxFreeAllowance: 11294,
+    taxFreeAllowance: 0,
   },
   {
     code: 'NL',
     name: 'Netherlands',
     currency: 'EUR',
+    // Box 1: 35.75% to 38,883 is 8.10% tax plus 27.65% premiums, so premiums are not charged twice
     taxBrackets: [
-      { threshold: 75518, rate: 36.93 },
+      { threshold: 38883, rate: 8.1 },
+      { threshold: 78426, rate: 37.56 },
       { threshold: Infinity, rate: 49.5 },
     ],
     socialSecurityRate: 27.65,
-    socialSecurityCap: 66956,
+    socialSecurityCap: 38883,
+    socialSecurityDeductible: false,
     taxFreeAllowance: 0,
   },
   {
@@ -70,8 +80,8 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: 300000, rate: 45 },
       { threshold: Infinity, rate: 47 },
     ],
-    socialSecurityRate: 6.35,
-    socialSecurityCap: 56844,
+    socialSecurityRate: 6.5, // 4.70 + 1.55 + 0.10 + 0.15 (MEI), Seguridad Social 2026
+    socialSecurityCap: 61214.4, // 5,101.20 a month x 12
     taxFreeAllowance: 5550,
   },
   {
@@ -80,7 +90,7 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     currency: 'EUR',
     taxBrackets: [
       { threshold: 28000, rate: 23 },
-      { threshold: 50000, rate: 35 },
+      { threshold: 50000, rate: 33 },
       { threshold: Infinity, rate: 43 },
     ],
     socialSecurityRate: 9.19,
@@ -91,14 +101,14 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Portugal',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 7703, rate: 13.25 },
-      { threshold: 11623, rate: 18 },
-      { threshold: 16472, rate: 23 },
-      { threshold: 21321, rate: 26 },
-      { threshold: 27146, rate: 32.75 },
-      { threshold: 39791, rate: 37 },
-      { threshold: 51997, rate: 43.5 },
-      { threshold: 81199, rate: 45 },
+      { threshold: 8342, rate: 12.5 },
+      { threshold: 12587, rate: 15.7 },
+      { threshold: 17838, rate: 21.2 },
+      { threshold: 23089, rate: 24.1 },
+      { threshold: 29397, rate: 31.1 },
+      { threshold: 43090, rate: 34.9 },
+      { threshold: 46566, rate: 43.1 },
+      { threshold: 86634, rate: 44.6 },
       { threshold: Infinity, rate: 48 },
     ],
     socialSecurityRate: 11,
@@ -109,59 +119,64 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Ireland',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 42000, rate: 20 },
+      { threshold: 44000, rate: 20 },
       { threshold: Infinity, rate: 40 },
     ],
-    socialSecurityRate: 4, // PRSI
-    taxFreeAllowance: 1875, // Single person tax credit equivalent
+    socialSecurityRate: 4.2375, // PRSI, 2026 blend of 4.2% and 4.35%
+    taxFreeAllowance: 0,
+    detailedModel: (gross) => {
+      const r = calculateIrelandSalary({ grossAnnualSalary: gross });
+      return { socialSecurity: r.prsi, incomeTax: r.incomeTax + r.usc };
+    },
   },
   {
     code: 'BE',
     name: 'Belgium',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 15200, rate: 25 },
-      { threshold: 26830, rate: 40 },
-      { threshold: 46440, rate: 45 },
+      { threshold: 16720, rate: 25 },
+      { threshold: 29510, rate: 40 },
+      { threshold: 51070, rate: 45 },
       { threshold: Infinity, rate: 50 },
     ],
     socialSecurityRate: 13.07,
-    taxFreeAllowance: 10160,
+    taxFreeAllowance: 11180,
   },
   {
     code: 'AT',
     name: 'Austria',
     currency: 'EUR',
     taxBrackets: [
-      { threshold: 12816, rate: 0 },
-      { threshold: 20818, rate: 20 },
-      { threshold: 34513, rate: 30 },
-      { threshold: 66612, rate: 40 },
-      { threshold: 99266, rate: 48 },
+      { threshold: 13539, rate: 0 },
+      { threshold: 21992, rate: 20 },
+      { threshold: 36458, rate: 30 },
+      { threshold: 70365, rate: 40 },
+      { threshold: 104859, rate: 48 },
       { threshold: 1000000, rate: 50 },
       { threshold: Infinity, rate: 55 },
     ],
     socialSecurityRate: 18.12,
-    socialSecurityCap: 81000,
-    taxFreeAllowance: 12816,
+    socialSecurityCap: 97020, // 14 x 6,930 monthly ceiling (12 salaries + special payments)
+    taxFreeAllowance: 0,
   },
   {
     code: 'PL',
     name: 'Poland',
     currency: 'PLN',
     taxBrackets: [
+      { threshold: 30000, rate: 0 }, // 3,600 tax-reducing amount / 12%
       { threshold: 120000, rate: 12 },
       { threshold: Infinity, rate: 32 },
     ],
     socialSecurityRate: 13.71,
-    taxFreeAllowance: 30000,
+    taxFreeAllowance: 0,
   },
   {
     code: 'SE',
     name: 'Sweden',
     currency: 'SEK',
     taxBrackets: [
-      { threshold: 614000, rate: 32 }, // Municipal average
+      { threshold: 643000, rate: 32 }, // Municipal average; threshold is the 2026 state tax limit
       { threshold: Infinity, rate: 52 }, // Including state tax
     ],
     socialSecurityRate: 7,
@@ -171,12 +186,16 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     code: 'DK',
     name: 'Denmark',
     currency: 'DKK',
+    // Bands apply to income after AM-bidrag; 37.01 = bundskat 12.01 + average municipal 25.0
     taxBrackets: [
-      { threshold: 588900, rate: 37 }, // Including AM-bidrag
-      { threshold: Infinity, rate: 52.07 },
+      { threshold: 54100, rate: 0 }, // Personfradrag
+      { threshold: 641200, rate: 37.01 },
+      { threshold: 777900, rate: 44.51 }, // + mellemskat 7.5
+      { threshold: 2592700, rate: 52.01 }, // + topskat 7.5
+      { threshold: Infinity, rate: 57.01 }, // + toptopskat 5
     ],
     socialSecurityRate: 8, // AM-bidrag
-    taxFreeAllowance: 48000,
+    taxFreeAllowance: 0,
   },
 ];
 

@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeStampDuty } from '../../components/calculators/SingaporeStampDuty';
 
 const title = 'Singapore Stamp Duty Calculator 2026: BSD + ABSD | Boring Math';
@@ -71,7 +72,7 @@ const faqs = [
   {
     question: 'How much ABSD do Permanent Residents, Foreigners and Entities pay?',
     answer:
-      'A Permanent Resident pays 5% ABSD on a first property, 25% on a second, and 30% on a third or later. Foreigners pay a flat 60% ABSD on any residential property, and entities such as companies pay a flat 65%, regardless of how many properties they already hold.',
+      'A Permanent Resident pays 5% ABSD on a first property, 30% on a second, and 35% on a third or later. Foreigners pay a flat 60% ABSD on any residential property, and entities such as companies pay a flat 65%, regardless of how many properties they already hold.',
   },
   {
     question: 'Does a Free Trade Agreement change the ABSD rate?',
@@ -158,7 +159,7 @@ const schemaBreadcrumbs = [
       <strong>Additional Buyer Stamp Duty (ABSD)</strong> is different: it is a single flat percentage
       applied to the entire purchase price, not a band walk. The rate depends on your buyer profile and
       how many residential properties you already own, effective 27 April 2023. Singapore Citizens pay
-      0% / 20% / 30% for a 1st / 2nd / 3rd-plus property, Permanent Residents pay 5% / 25% / 30%, and
+      0% / 20% / 30% for a 1st / 2nd / 3rd-plus property, Permanent Residents pay 5% / 30% / 35%, and
       Foreigners and Entities pay a flat 60% and 65% respectively on any purchase.
     </p>
     <p>
@@ -187,6 +188,20 @@ const schemaBreadcrumbs = [
       a purchase.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: "IRAS: Buyer's Stamp Duty (BSD)",
+        href: "https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)",
+      },
+      {
+        label: "IRAS: Additional Buyer's Stamp Duty (ABSD)",
+        href: "https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/additional-buyer's-stamp-duty-(absd)",
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

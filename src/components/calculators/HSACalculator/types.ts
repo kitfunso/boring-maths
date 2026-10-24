@@ -2,7 +2,7 @@
  * HSA Calculator - Type Definitions
  *
  * Health Savings Account calculator with triple tax advantage analysis.
- * 2025 contribution limits and tax savings calculations.
+ * 2026 contribution limits and tax savings calculations.
  */
 
 export type CoverageType = 'individual' | 'family';
@@ -89,10 +89,10 @@ export interface HSAResult {
   }[];
 }
 
-/** 2025 HSA Contribution Limits */
-export const HSA_LIMITS_2025 = {
-  individual: 4300,
-  family: 8550,
+/** 2026 HSA Contribution Limits (Rev. Proc. 2025-19; catch-up is fixed by statute) */
+export const HSA_LIMITS_2026 = {
+  individual: 4400,
+  family: 8750,
   catchUp: 1000, // For age 55+
   catchUpAge: 55,
 };

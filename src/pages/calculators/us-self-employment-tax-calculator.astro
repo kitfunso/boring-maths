@@ -9,11 +9,12 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USSelfEmploymentTaxCalculator } from '../../components/calculators/USSelfEmploymentTaxCalculator';
 
 const title = 'Free Self-Employment Tax Calculator: 1099 Freelancer Tax | Boring Math';
 const description =
-  'Free self-employment tax calculator for freelancers and contractors. Calculate your 15.3% SE tax, federal income tax, and quarterly estimated payments for 2025.';
+  'Free self-employment tax calculator for freelancers and contractors. Calculate your 15.3% SE tax, federal income tax, and quarterly estimated payments for 2026.';
 const keywords =
   'self employment tax calculator, 1099 tax calculator, freelance tax calculator, quarterly estimated tax, SE tax calculator, independent contractor tax';
 const canonicalURL = '/calculators/us-self-employment-tax-calculator';
@@ -58,7 +59,7 @@ const faqs = [
   {
     question: 'How do I calculate my self-employment tax?',
     answer:
-      'SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base ($176,100 in 2025). Above that, only the 2.9% Medicare portion applies to additional income.',
+      'SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base ($184,500 in 2026). Above that, only the 2.9% Medicare portion applies to additional income.',
   },
   {
     question: 'Do I need to pay quarterly estimated taxes?',
@@ -76,14 +77,14 @@ const faqs = [
       'Key strategies include: maximizing legitimate business deductions, contributing to a SEP IRA or Solo 401(k), considering S-Corp election if income exceeds ~$50k, and deducting health insurance premiums. An S-Corp can help split income between salary (subject to SE tax) and distributions (not subject to SE tax).',
   },
   {
-    question: 'What is the Social Security wage base for 2025?',
+    question: 'What is the Social Security wage base for 2026?',
     answer:
-      'The Social Security wage base for 2025 is $176,100. This means you only pay the 12.4% Social Security portion of SE tax on the first $176,100 of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k).',
+      'The Social Security wage base for 2026 is $184,500. This means you only pay the 12.4% Social Security portion of SE tax on the first $184,500 of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k).',
   },
   {
     question: 'What is the additional Medicare tax?',
     answer:
-      'An extra 0.9% Medicare tax applies to self-employment income exceeding $200,000 (single) or $250,000 (married filing jointly). This is on top of the regular 2.9% Medicare tax, bringing the Medicare portion to 3.8% on high incomes.',
+      'An extra 0.9% Medicare tax applies to self-employment income exceeding $200,000 (single or head of household), $250,000 (married filing jointly), or $125,000 (married filing separately). This is on top of the regular 2.9% Medicare tax, bringing the Medicare portion to 3.8% on high incomes.',
   },
   {
     question: 'Can I deduct half of my self-employment tax?',
@@ -163,6 +164,40 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: Self-employment tax (Social Security and Medicare taxes)',
+        href: 'https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes',
+      },
+      {
+        label: 'IRS: Topic no. 554, Self-employment tax',
+        href: 'https://www.irs.gov/taxtopics/tc554',
+      },
+      {
+        label: 'IRS: Publication 334, Tax Guide for Small Business',
+        href: 'https://www.irs.gov/publications/p334',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+      {
+        label: 'IRS: IRS releases tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-32, 2026 tax rate tables and inflation adjustments',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-32.pdf',
+      },
+      {
+        label: 'IRS: Publication 505, Tax Withholding and Estimated Tax',
+        href: 'https://www.irs.gov/publications/p505',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

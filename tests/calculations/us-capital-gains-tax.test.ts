@@ -23,6 +23,37 @@ describe('UsCapitalGainsTaxCalculator', () => {
       expect(result.totalTax).toBe(1100);
     });
 
+    it('should apply the 2026 married filing separately 0% and 15% tops', () => {
+      const inputs = getDefaultInputs();
+      inputs.filingStatus = 'married_separately';
+      inputs.holdingPeriodMonths = 24;
+      inputs.purchasePrice = 100000;
+      inputs.salePrice = 130000;
+      inputs.otherIncome = 16100 + 39450; // taxable 39,450 after the 16,100 deduction
+
+      const result = calculateCapitalGainsTax(inputs);
+
+      // 10,000 left in the 0% band (top 49,450); 20,000 taxed at 15%
+      expect(result.capitalGainsTax).toBe(3000);
+      expect(result.niitApplies).toBe(false);
+    });
+
+    it('should apply the 306,850 married filing separately 15% top and NIIT at 125,000', () => {
+      const inputs = getDefaultInputs();
+      inputs.filingStatus = 'married_separately';
+      inputs.holdingPeriodMonths = 24;
+      inputs.purchasePrice = 100000;
+      inputs.salePrice = 130000;
+      inputs.otherIncome = 16100 + 296850; // taxable 296,850
+
+      const result = calculateCapitalGainsTax(inputs);
+
+      // 10,000 at 15% to reach 306,850, then 20,000 at 20% = 5,500
+      expect(result.capitalGainsTax).toBe(5500);
+      expect(result.niitAmount).toBe(1140); // 3.8% x 30,000
+      expect(result.totalTax).toBe(6640);
+    });
+
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
       inputs.purchasePrice = 0;
