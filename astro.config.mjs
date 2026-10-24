@@ -4,6 +4,12 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
+import { calculators } from './src/lib/calculators.ts';
+
+// A noindexed URL in the sitemap shows up in GSC as "Excluded by 'noindex' tag".
+const NOINDEX_URLS = new Set(
+  calculators.filter((c) => c.noindex).map((c) => `https://boring-math.com${c.href}`)
+);
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,7 +38,7 @@ export default defineConfig({
     preact({ compat: true }), // Enable React compatibility
     sitemap({
       filter(page) {
-        return !page.includes('/embed/');
+        return !page.includes('/embed/') && !NOINDEX_URLS.has(page);
       },
       serialize(item) {
         // Set priority based on page depth

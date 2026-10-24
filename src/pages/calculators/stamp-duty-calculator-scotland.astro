@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { LBTTCalculator } from '../../components/calculators/LBTTCalculator';
 
 const title = 'Stamp Duty Calculator Scotland 2026/27: LBTT (Land & Buildings Tax)';
@@ -172,6 +173,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'Revenue Scotland: Residential property',
+        href: 'https://revenue.scot/taxes/land-buildings-transaction-tax/residential-property',
+      },
+      {
+        label: 'Revenue Scotland: The Additional Dwelling Supplement (ADS)',
+        href: 'https://revenue.scot/taxes/land-buildings-transaction-tax/additional-dwelling-supplement-ads',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

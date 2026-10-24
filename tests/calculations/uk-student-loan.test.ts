@@ -19,10 +19,10 @@ describe('UkStudentLoanCalculator', () => {
       expect(result.annualRepayment).toBeCloseTo(505.35, 2);
       expect(result.yearsToRepay).toBe(30);
       expect(result.totalRepaid).toBeCloseTo(70523.06, 2);
-      expect(result.totalInterest).toBeCloseTo(136273.85, 2);
+      expect(result.totalInterest).toBeCloseTo(140574.35, 2);
       // write-off is currentYear + 30 (kept dynamic so the test does not rot each year).
       expect(result.writeOffDate).toBe(new Date().getFullYear() + 30);
-      expect(result.amountWrittenOff).toBeCloseTo(115750.79, 2);
+      expect(result.amountWrittenOff).toBeCloseTo(120051.29, 2);
       expect(result.willRepayInFull).toBe(false);
     });
 

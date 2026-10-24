@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SDLTCalculator } from '../../components/calculators/SDLTCalculator';
 
 const title = 'SDLT Calculator 2026/27: England & Northern Ireland';
@@ -238,6 +239,24 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Stamp Duty Land Tax: Residential property rates',
+        href: 'https://www.gov.uk/stamp-duty-land-tax/residential-property-rates',
+      },
+      {
+        label: 'GOV.UK: Higher rates of Stamp Duty Land Tax',
+        href: 'https://www.gov.uk/guidance/stamp-duty-land-tax-buying-an-additional-residential-property',
+      },
+      {
+        label: 'GOV.UK: Rates of Stamp Duty Land Tax for non-UK residents',
+        href: 'https://www.gov.uk/guidance/rates-of-stamp-duty-land-tax-for-non-uk-residents',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -9,8 +9,8 @@ import { LOAN_PLANS } from './types';
 function getPlan2InterestRate(annualSalary: number): number {
   const lowerThreshold = 29385;
   const upperThreshold = 52884;
-  const baseRate = 0.032;
-  const maxRate = 0.062;
+  const baseRate = 0.041;
+  const maxRate = 0.06;
 
   if (annualSalary <= lowerThreshold) return baseRate;
   if (annualSalary >= upperThreshold) return maxRate;

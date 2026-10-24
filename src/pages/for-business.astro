@@ -9,10 +9,10 @@
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SnippetGenerator from '../components/embed/SnippetGenerator';
+import { calculators } from '../lib/calculators';
 
 const title = 'Advertise on Our Calculators | Boring Math for Business';
-const description =
-  'Put your products in front of high-intent users. Sponsored placements on 149 calculators, or embed our tools on your site. Reach people at the moment they calculate.';
+const description = `Put your products in front of high-intent users. Sponsored placements on ${calculators.length} calculators, or embed our tools on your site. Reach people at the moment they calculate.`;
 
 const sponsorExamples = [
   {
@@ -128,8 +128,8 @@ const contactEmail = 'support@boring-math.com';
         <span class="gradient-text">moment they calculate</span>
       </h1>
       <p class="text-body-lg text-[var(--color-subtle)] max-w-2xl mx-auto mb-10">
-        149 free calculators across finance, health, and more. Every user is actively making a
-        decision. Put your products where they matter.
+        {calculators.length} free calculators across finance, health, and more. Every user is actively
+        making a decision. Put your products where they matter.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="#sponsored" class="btn-primary">
@@ -403,7 +403,8 @@ const contactEmail = 'support@boring-math.com';
           </div>
           <h3 class="text-xl font-display text-[var(--color-cream)] mb-3">Pick a calculator</h3>
           <p class="text-sm text-[var(--color-subtle)]">
-            Choose from 149 tools across finance, health, engineering, everyday math, and more.
+            Choose from {calculators.length} tools across finance, health, engineering, everyday math,
+            and more.
           </p>
         </div>
         <div class="relative bento-card p-6 text-center">

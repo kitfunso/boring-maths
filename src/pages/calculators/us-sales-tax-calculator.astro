@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USSalesTaxCalculator } from '../../components/calculators/USSalesTaxCalculator';
 
 const title = 'US Sales Tax Calculator: Add or Remove Tax | Boring Math';
@@ -206,6 +207,29 @@ const schemaBreadcrumbs = [
       or a qualified professional.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label:
+          'California Department of Tax and Fee Administration: California City & County Sales & Use Tax Rate Information',
+        href: 'https://cdtfa.ca.gov/taxes-and-fees/sales-use-tax-rates.htm',
+      },
+      {
+        label: 'Texas Comptroller of Public Accounts: Sales and Use Tax',
+        href: 'https://comptroller.texas.gov/taxes/sales/',
+      },
+      {
+        label: 'New York State Department of Taxation and Finance: Find sales tax rates',
+        href: 'https://www.tax.ny.gov/bus/st/rates.htm',
+      },
+      {
+        label: 'Florida Department of Revenue: Florida Sales and Use Tax',
+        href: 'https://floridarevenue.com/taxes/taxesfees/Pages/sales_tax.aspx',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -6,10 +6,13 @@
  */
 
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { calculators } from '../lib/calculators';
 
+const count = calculators.length;
+const categoryCount = new Set(calculators.map((c) => c.category)).size;
+const summary = `Free online calculators: ${count} tools across ${categoryCount} categories, with tax and pay calculators for the UK, US, EU and Singapore.`;
 const title = 'About Boring Math | Brand Facts';
-const description =
-  'Factual reference page about Boring Math - free UK financial calculators. Includes product details, calculator list, and company information.';
+const description = `Factual reference page about Boring Math. ${summary} Includes product details, a calculator list, and company information.`;
 const canonicalURL = '/brand-facts';
 ---
 
@@ -21,9 +24,8 @@ const canonicalURL = '/brand-facts';
       '@type': 'Organization',
       name: 'Boring Math',
       url: 'https://boring-math.com',
-      description:
-        'Free UK financial calculators for income tax, pensions, mortgages, and personal finance.',
-      foundingDate: '2024',
+      description: summary,
+      foundingDate: '2026',
       knowsAbout: [
         'UK tax calculators',
         'UK pension calculators',
@@ -43,10 +45,10 @@ const canonicalURL = '/brand-facts';
 
       <section class="tldr">
         <p>
-          Boring Math is a free UK financial calculator site covering income tax, pensions,
-          mortgages, stamp duty, student loans, and everyday personal finance. All calculators are
-          free, require no account, and are updated for the 2026/27 UK tax year. The site has over
-          100 calculators across personal finance, business, hobbies, and engineering.
+          Boring Math is a free calculator site with {count} calculators across {categoryCount}
+          categories: tax and pay for the UK, US, EU and Singapore, personal finance, business, events,
+          home, health, hobbies, and engineering. Every calculator is free and needs no account. The UK
+          tax calculators use 2026/27 rates.
         </p>
       </section>
 
@@ -54,13 +56,13 @@ const canonicalURL = '/brand-facts';
         <h2>Key Facts</h2>
         <table class="facts-table">
           <tbody>
-            <tr><th>Founded</th><td>2024</td></tr>
-            <tr><th>Category</th><td>Financial Calculators</td></tr>
-            <tr><th>Primary region</th><td>United Kingdom</td></tr>
+            <tr><th>Founded</th><td>2026</td></tr>
+            <tr><th>Category</th><td>Online calculators</td></tr>
+            <tr><th>Regional tax tools</th><td>UK, US, EU, Singapore</td></tr>
             <tr><th>Free to use</th><td>Yes, all calculators are free</td></tr>
             <tr><th>Account required</th><td>No</td></tr>
             <tr><th>Tax year</th><td>2026/27</td></tr>
-            <tr><th>Number of calculators</th><td>150+</td></tr>
+            <tr><th>Number of calculators</th><td>{count}</td></tr>
             <tr><th>URL</th><td><a href="https://boring-math.com">boring-math.com</a></td></tr>
             <tr
               ><th>X (Twitter)</th><td
@@ -113,8 +115,8 @@ const canonicalURL = '/brand-facts';
         <h3>Property and Mortgages</h3>
         <ul>
           <li>
-            <a href="/calculators/uk-stamp-duty-calculator/">UK Stamp Duty Calculator</a>: SDLT for
-            England and Northern Ireland
+            <a href="/calculators/sdlt-calculator/">SDLT Calculator</a>: stamp duty for England and
+            Northern Ireland
           </li>
           <li>
             <a href="/calculators/mortgage-calculator/">Mortgage Calculator</a>: monthly payments,

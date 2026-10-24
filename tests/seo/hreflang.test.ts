@@ -8,11 +8,23 @@ const ALLOWED_LOCALES = new Set(['en-GB', 'en-US', 'en-SG']);
 const registryByHref = new Map(calculators.map((c) => [c.href, c]));
 
 describe('getAlternates', () => {
-  it('is reciprocal and self-referencing for every family member', () => {
+  it('is reciprocal and self-referencing across the indexable members of each family', () => {
     for (const family of FAMILY_HREFS) {
+      const indexable = family.filter((href) => !registryByHref.get(href)?.noindex);
       for (const href of family) {
         const alternates = getAlternates(href).map((a) => a.href);
-        expect(new Set(alternates)).toEqual(new Set(family));
+        const expected = indexable.length >= 2 && indexable.includes(href) ? indexable : [];
+        expect(new Set(alternates)).toEqual(new Set(expected));
+      }
+    }
+  });
+
+  it('never points hreflang at a noindexed page', () => {
+    for (const family of FAMILY_HREFS) {
+      for (const href of family) {
+        for (const alt of getAlternates(href)) {
+          expect(registryByHref.get(alt.href)?.noindex).toBeUndefined();
+        }
       }
     }
   });
@@ -38,11 +50,9 @@ describe('getAlternates', () => {
   });
 
   it('each declared locale matches the registry country', () => {
-    for (const family of FAMILY_HREFS) {
-      for (const href of family) {
-        const entry = registryByHref.get(href);
-        const alt = getAlternates(href).find((a) => a.href === href);
-        expect(entry?.country && LOCALE_BY_COUNTRY[entry.country]).toBe(alt?.hreflang);
+    for (const family of FAMILIES) {
+      for (const member of family) {
+        expect(registryByHref.get(member.href)?.country).toBe(member.country);
       }
     }
   });

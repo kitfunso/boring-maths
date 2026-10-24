@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKStudentLoanCalculator } from '../../components/calculators/UKStudentLoanCalculator';
 
 const title = 'UK Student Loan Calculator: Repayments & Should You Overpay?';
@@ -93,7 +94,7 @@ const faqs = [
   {
     question: 'What interest rate do I pay on my student loan?',
     answer:
-      'Current rates change over time. Right now, Plan 1, Plan 4, and Plan 5 are 3.2%. Postgraduate loans are 6.2%. Plan 2 is income-linked after study, from 3.2% up to 6.2%, while borrowers still studying are charged RPI plus 3% (currently 6.2%). This calculator assumes you are already in repayment.',
+      'Current rates change over time. Right now, Plan 1, Plan 4, and Plan 5 are 4.1%. Postgraduate loans are 6%. Plan 2 is income-linked after study, from 4.1% up to 6%, while borrowers still studying are charged RPI plus 3%, capped at 6%. This calculator assumes you are already in repayment.',
   },
   {
     question: 'Should I pay off my student loan early?',
@@ -240,6 +241,21 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Repaying your student loan: How much you repay',
+        href: 'https://www.gov.uk/repaying-your-student-loan/what-you-pay',
+      },
+      {
+        label:
+          'GOV.UK: Repaying your student loan: When your student loan gets written off or cancelled',
+        href: 'https://www.gov.uk/repaying-your-student-loan/when-your-student-loan-gets-written-off-or-cancelled',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

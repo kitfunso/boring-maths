@@ -1,0 +1,52 @@
+---
+/**
+ * Sources Section Component - Dark Theme
+ *
+ * Lists the official pages a calculator's rates and thresholds come from, with the date they were checked.
+ */
+
+export interface Source {
+  /** Publisher and page, e.g. "GOV.UK: Income Tax rates and Personal Allowances" */
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  sources: readonly Source[];
+  /** ISO date the figures were last checked against the sources */
+  checked: string;
+}
+
+const { sources, checked } = Astro.props;
+const checkedLabel = new Date(`${checked}T00:00:00Z`).toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<section class="mb-12" aria-labelledby="sources-heading">
+  <h2
+    id="sources-heading"
+    class="text-xl md:text-2xl font-display text-[var(--color-cream)] mb-4 break-words"
+  >
+    Sources
+  </h2>
+  <p class="text-[var(--color-subtle)] leading-relaxed mb-3">
+    Rates and thresholds checked against these official pages on <time datetime={checked}
+      >{checkedLabel}</time
+    >.
+  </p>
+  <ul class="list-disc pl-5 space-y-2 text-[var(--color-subtle)]">
+    {
+      sources.map((s) => (
+        <li>
+          <a href={s.href} rel="noopener" class="text-[var(--color-accent)] hover:underline">
+            {s.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

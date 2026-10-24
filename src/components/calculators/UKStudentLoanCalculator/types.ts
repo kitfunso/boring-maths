@@ -50,7 +50,7 @@ export const LOAN_PLANS = {
     threshold: 26900,
     rate: 0.09,
     writeOffYears: 25,
-    interestRate: 0.032,
+    interestRate: 0.041,
   },
   plan2: {
     name: 'Plan 2',
@@ -58,7 +58,7 @@ export const LOAN_PLANS = {
     threshold: 29385,
     rate: 0.09,
     writeOffYears: 30,
-    interestRate: 0.062,
+    interestRate: 0.06,
   },
   plan4: {
     name: 'Plan 4',
@@ -66,7 +66,7 @@ export const LOAN_PLANS = {
     threshold: 33795,
     rate: 0.09,
     writeOffYears: 30,
-    interestRate: 0.032,
+    interestRate: 0.041,
   },
   plan5: {
     name: 'Plan 5',
@@ -74,7 +74,7 @@ export const LOAN_PLANS = {
     threshold: 25000,
     rate: 0.09,
     writeOffYears: 40,
-    interestRate: 0.032,
+    interestRate: 0.041,
   },
   postgrad: {
     name: 'Postgraduate Loan',
@@ -82,6 +82,6 @@ export const LOAN_PLANS = {
     threshold: 21000,
     rate: 0.06,
     writeOffYears: 30,
-    interestRate: 0.062,
+    interestRate: 0.06,
   },
 };

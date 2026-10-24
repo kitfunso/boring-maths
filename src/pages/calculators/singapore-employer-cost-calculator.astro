@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeEmployerCost } from '../../components/calculators/SingaporeEmployerCost';
 
 const title = 'Singapore Employer CPF Cost Calculator 2026 | Boring Math';
@@ -183,6 +184,24 @@ const schemaBreadcrumbs = [
       payroll-grade output or financial advice.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'CPF Board: How much CPF contributions to pay',
+        href: 'https://www.cpf.gov.sg/employer/employer-obligations/how-much-cpf-contributions-to-pay',
+      },
+      {
+        label: 'CPF Board: Skills Development Levy',
+        href: 'https://www.cpf.gov.sg/employer/employer-obligations/skills-development-levy',
+      },
+      {
+        label: 'CPF Board: CPF Contribution Rate Table from 1 January 2026',
+        href: 'https://www.cpf.gov.sg/content/dam/web/employer/employer-obligations/documents/CPFcontributionratesfrom1Jan2026.pdf',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

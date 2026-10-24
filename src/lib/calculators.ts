@@ -73,6 +73,8 @@ export interface CalculatorEntry {
   readonly category: CategoryName;
   readonly country?: CountryCode;
   readonly mostUsed: boolean;
+  /** Kept for users but hidden from search: no clicks and under 1,000 impressions Apr-Oct 2026 (docs/gsc-review-2026-10-24.html). */
+  readonly noindex?: true;
 }
 
 // ---------------------------------------------------------------------------
@@ -179,6 +181,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Go Full-Time Calculator',
@@ -189,6 +192,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Income',
     mostUsed: true,
+    noindex: true,
   },
   {
     title: 'Contractor vs Employee',
@@ -218,6 +222,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Finance',
     mostUsed: true,
+    noindex: true,
   },
   {
     title: 'Compound Interest',
@@ -236,6 +241,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'BMI Calculator',
@@ -263,6 +269,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Health',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Tip Calculator',
@@ -290,6 +297,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'violet',
     category: 'Everyday',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Freelance Day Rate',
@@ -345,6 +353,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'violet',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Debt Payoff Calculator',
@@ -381,6 +390,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Paint Calculator',
@@ -399,6 +409,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Home',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Mulch Calculator',
@@ -435,6 +446,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Events',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Party Drink Calculator',
@@ -463,6 +475,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'violet',
     category: 'Everyday',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Baking Conversion Calculator',
@@ -549,6 +562,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'HSA Calculator',
@@ -569,6 +583,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Health',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'One Rep Max (1RM)',
@@ -578,6 +593,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Health',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'GPA Calculator',
@@ -587,6 +603,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'violet',
     category: 'Everyday',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Stamp Duty Calculator',
@@ -598,6 +615,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Child Benefit Calculator',
@@ -609,6 +627,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Student Loan Calculator',
@@ -664,6 +683,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Self-Employment Tax Calculator',
@@ -706,6 +726,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'EU',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'EU Salary Calculator',
@@ -727,6 +748,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Net Worth Calculator',
@@ -737,6 +759,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'US Paycheck Calculator',
@@ -769,6 +792,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'ocean',
     category: 'Aquarium',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'ABV Calculator',
@@ -818,6 +842,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'ocean',
     category: 'Aquarium',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'IBU Calculator',
@@ -827,6 +852,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Brewing',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Glaze Recipe Calculator',
@@ -874,6 +900,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Brewing',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Kiln Cost Calculator',
@@ -904,6 +931,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Machining',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Water Change Calculator',
@@ -932,6 +960,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Brewing',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Batch Cost Calculator',
@@ -983,6 +1012,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Car Buy vs Lease',
@@ -1078,6 +1108,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Events',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Job Offer Comparison',
@@ -1097,6 +1128,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Moving Cost Calculator',
@@ -1125,6 +1157,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Life',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Pricing Calculator',
@@ -1201,6 +1234,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Tile Calculator',
@@ -1239,6 +1273,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Events',
     mostUsed: false,
+    noindex: true,
   },
   // New Calculators - January 2025
   {
@@ -1268,6 +1303,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Automotive',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Road Trip Cost Calculator',
@@ -1297,6 +1333,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Health',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Ovulation Calculator',
@@ -1315,6 +1352,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Travel',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Time Zone Converter',
@@ -1385,6 +1423,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Everyday',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Tipping Guide Calculator',
@@ -1394,6 +1433,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Travel',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Water Intake Calculator',
@@ -1413,6 +1453,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'blue',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Coffee Spend Calculator',
@@ -1453,6 +1494,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Rent Affordability',
@@ -1473,6 +1515,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Cooking Time Calculator',
@@ -1502,6 +1545,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Heart Rate Zone Calculator',
@@ -1512,6 +1556,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Health',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Leftovers Calculator',
@@ -1522,6 +1567,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Everyday',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Date Difference Calculator',
@@ -1551,6 +1597,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'green',
     category: 'Business',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Pace Calculator',
@@ -1571,6 +1618,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Finance',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Square Footage Calculator',
@@ -1624,6 +1672,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Holiday Entitlement',
@@ -1646,6 +1695,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Statutory Maternity Pay',
@@ -1657,6 +1707,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'UK Redundancy Pay',
@@ -1668,6 +1719,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'UK',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'US Sales Tax Calculator',
@@ -1690,6 +1742,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Roth IRA Calculator',
@@ -1701,6 +1754,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'US Mortgage Calculator',
@@ -1712,6 +1766,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Home Affordability Calculator',
@@ -1722,6 +1777,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Debt-to-Income Calculator',
@@ -1732,6 +1788,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Finance',
     country: 'US',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Ireland Salary Calculator',
@@ -1742,6 +1799,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'EU',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Germany Salary Calculator',
@@ -1753,6 +1811,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'EU',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'France Salary Calculator',
@@ -1763,6 +1822,7 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Income',
     country: 'EU',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Concrete Calculator',
@@ -1773,6 +1833,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'amber',
     category: 'Home',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Gravel Calculator',
@@ -1783,6 +1844,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'ocean',
     category: 'Home',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'Wallpaper Calculator',
@@ -1803,6 +1865,7 @@ export const calculators: readonly CalculatorEntry[] = [
     color: 'coral',
     category: 'Home',
     mostUsed: false,
+    noindex: true,
   },
   {
     title: 'EV Charging Cost Calculator',

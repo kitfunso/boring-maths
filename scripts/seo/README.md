@@ -28,6 +28,10 @@ npm run seo:gsc-pull                    # pulls 28d into gsc-export/<today>/
 python scripts/gsc_analysis.py          # auto-reads the newest export folder
 ```
 
+Each pull also writes `gsc-daily-90d.json` (one row per date, last 90 days) and
+prints the last 14 days plus a `CLIFF:` line when a day falls below 25% of the
+prior 7-day median impressions, because the 28d totals hide a short site-level drop.
+
 Flags: `--site "<property>"` (e.g. `sc-domain:boring-math.com`), `--days <n>`,
 `--start/--end <YYYY-MM-DD>`, `--fresh` (include not-yet-finalised data),
 `--reauth` (force fresh consent). The refresh token is cached in

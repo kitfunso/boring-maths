@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeIncomeTax } from '../../components/calculators/SingaporeIncomeTax';
 
 const title = 'Singapore Income Tax Calculator YA2026 | Boring Math';
@@ -183,6 +184,16 @@ const schemaBreadcrumbs = [
       that matter against the official IRAS calculator or your Notice of Assessment.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRAS: Individual Income Tax rates',
+        href: 'https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

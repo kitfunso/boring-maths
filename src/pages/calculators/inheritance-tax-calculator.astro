@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { InheritanceTaxCalculator } from '../../components/calculators/InheritanceTaxCalculator';
 import AffiliateBox from '../../components/common/AffiliateBox.astro';
 import { getAffiliatesForCalculator } from '../../lib/affiliates';
@@ -191,6 +192,24 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: How Inheritance Tax works: thresholds, rules and allowances',
+        href: 'https://www.gov.uk/inheritance-tax',
+      },
+      {
+        label: 'GOV.UK: Work out and apply the residence nil rate band for Inheritance Tax',
+        href: 'https://www.gov.uk/guidance/inheritance-tax-residence-nil-rate-band',
+      },
+      {
+        label: 'GOV.UK: Inheritance Tax thresholds and interest rates',
+        href: 'https://www.gov.uk/government/publications/rates-and-allowances-inheritance-tax-thresholds-and-interest-rates/inheritance-tax-thresholds-and-interest-rates',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

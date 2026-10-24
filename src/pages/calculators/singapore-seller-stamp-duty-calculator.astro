@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeSellerStampDuty } from '../../components/calculators/SingaporeSellerStampDuty';
 
 const title = 'Singapore Seller Stamp Duty Calculator 2026: SSD | Boring Math';
@@ -187,6 +188,16 @@ const schemaBreadcrumbs = [
       conveyancing lawyer before relying on it for a transaction.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: "IRAS: Seller's Stamp Duty (SSD) for Residential Property",
+        href: "https://www.iras.gov.sg/taxes/stamp-duty/for-property/selling-or-disposing-property/seller's-stamp-duty-(ssd)-for-residential-property",
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

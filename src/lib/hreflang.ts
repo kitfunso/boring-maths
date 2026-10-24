@@ -1,5 +1,5 @@
 import { withTrailingSlash } from './url';
-import type { CountryCode } from './calculators';
+import { getBySlug, type CountryCode } from './calculators';
 
 export const LOCALE_BY_COUNTRY: Record<CountryCode, string | null> = {
   UK: 'en-GB',
@@ -43,8 +43,11 @@ export function getAlternates(
 ): { hreflang: string; href: string }[] {
   if (!pathname) return [];
   const path = withTrailingSlash(pathname);
-  const family = FAMILIES.find((f) => f.some((m) => m.href === path));
-  if (!family) return [];
+  // hreflang to a noindexed page is an error in Search Console, so those members drop out.
+  const family = FAMILIES.find((f) => f.some((m) => m.href === path))?.filter(
+    (m) => !getBySlug(m.href)?.noindex
+  );
+  if (!family || family.length < 2 || !family.some((m) => m.href === path)) return [];
   return family
     .map((m) => ({ hreflang: LOCALE_BY_COUNTRY[m.country], href: m.href }))
     .filter((a): a is { hreflang: string; href: string } => a.hreflang !== null);
