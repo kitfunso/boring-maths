@@ -9,13 +9,15 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { EUSalaryCalculator } from '../../components/calculators/EUSalaryCalculator';
+import { calculateSalary } from '../../components/calculators/EUSalaryCalculator/calculations';
 
-const title = 'EU Salary Calculator 2025/2026: Compare Net Pay Across Europe';
+const title = 'EU Salary Calculator 2026: Compare Net Pay Across Europe';
 const description =
-  'Use this EU salary calculator to compare gross vs net pay across Europe. Check 2025 and 2026 take-home estimates for Germany, France, Netherlands, Spain, Italy, and 20+ other countries.';
+  'Use this EU salary calculator to compare gross vs net pay across Europe. Check 2026 take-home estimates for Germany, France, Netherlands, Spain, Italy, Ireland, and more.';
 const keywords =
-  'eu salary calculator, eu salary calculator 2025, eu salary calculator 2026, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
+  'eu salary calculator, eu salary calculator 2026, net salary europe, germany salary calculator, france salary calculator, netherlands salary calculator, european tax calculator, take home pay europe, net pay calculator eu, brutto netto rechner';
 const canonicalURL = '/calculators/eu-salary-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -23,6 +25,16 @@ const breadcrumbs = [
   { label: 'Calculators', href: '/calculators/' },
   { label: 'EU Salary Calculator' },
 ];
+
+// The 50,000 table is computed from the calculator so it cannot drift from the tool.
+const sampleNet = (code: string) => calculateSalary({ grossSalary: 50000, countryCode: code });
+const sample = { DE: sampleNet('DE'), NL: sampleNet('NL'), FR: sampleNet('FR') };
+const rounded = (value: number) => Math.round(value / 100) * 100;
+const approx = (value: number) => `~EUR ${rounded(value).toLocaleString('en-US')}`;
+const nets = Object.values(sample).map((r) => r.netSalary);
+const netGap = rounded(Math.max(...nets) - Math.min(...nets));
+const netGapYear = netGap.toLocaleString('en-US');
+const netGapMonth = Math.round(netGap / 12 / 10) * 10;
 
 const relatedCalculators = [
   {
@@ -78,7 +90,7 @@ const faqs = [
   {
     question: 'How is salary taxed in Germany?',
     answer:
-      'Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 20% for employees. The tax-free allowance is €11,604 (2024). Married couples can benefit from income splitting (Ehegattensplitting).',
+      'Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 20% for employees. The tax-free allowance (Grundfreibetrag) is €12,348 (2026). Married couples can benefit from income splitting (Ehegattensplitting).',
   },
   {
     question: 'What is the difference between gross and net salary?',
@@ -93,7 +105,7 @@ const faqs = [
   {
     question: 'How does the Netherlands salary system work?',
     answer:
-      "The Netherlands has a relatively high tax wedge with income tax up to 49.5% and significant social contributions. However, there's the 30% ruling for skilled migrants which can make a portion of salary tax-free for up to 5 years.",
+      "The Netherlands has a relatively high tax wedge. In 2026 the box 1 rate is 35.75% up to €38,883 (including 27.65% social insurance premiums), 37.56% up to €78,426 and 49.5% above that. However, there's the 30% ruling for skilled migrants which can make a portion of salary tax-free for up to 5 years.",
   },
   {
     question: 'What is the 13th month salary in Europe?',
@@ -101,9 +113,9 @@ const faqs = [
       "Some EU countries traditionally pay a 13th month salary (or 14th in some cases). This is common in Spain, Portugal, Italy, Austria, and Greece. It's usually part of annual compensation, paid in December or split between summer and winter. Our calculator uses annual figures.",
   },
   {
-    question: 'Is this EU salary calculator updated for 2025 and 2026?',
+    question: 'Is this EU salary calculator updated for 2026?',
     answer:
-      'Yes. The calculator is designed for current cross-country comparison and is useful for both 2025 and 2026 salary planning. Tax rules change at different times across Europe, so treat the results as strong planning estimates rather than payroll-grade figures, especially if your country has local taxes, family allowances, or special expat regimes.',
+      'Yes. Income tax bands were checked against official 2026 pages on 24 October 2026 (see Sources). Social security shares, some allowances and tax credits are simplified. Tax rules change at different times across Europe, so treat the results as planning estimates rather than payroll-grade figures, especially if your country has local taxes, family allowances, tax credits, or special expat regimes.',
   },
   {
     question: 'How accurate are these calculations?',
@@ -142,7 +154,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="EU Salary Calculator"
-    description="Compare 2025 and 2026 net salary estimates across European countries. See how much you'd take home after tax and social security in Germany, France, Netherlands, and more."
+    description="Compare 2026 net salary estimates across European countries. See how much you'd take home after tax and social security in Germany, France, Netherlands, and more."
     faqs={faqs}
   />
 
@@ -162,11 +174,23 @@ const schemaBreadcrumbs = [
         <strong>Income Tax:</strong> Progressive rates from 10% (Bulgaria) to 57% (Denmark top rate)
       </li>
       <li>
-        <strong>Social Security:</strong> Employee contributions range from 4% (Ireland) to 27% (Netherlands)
+        <strong>Social Security:</strong> Employee contributions range from about 4% (Ireland PRSI) to
+        27.65% (Netherlands, on the first €38,883)
       </li>
       <li><strong>Tax-Free Allowances:</strong> Vary from €0 to €30,000+ depending on country</li>
       <li><strong>Local Taxes:</strong> Some countries have municipal or regional income taxes</li>
     </ul>
+    <p class="mt-4 text-sm text-[var(--color-muted)]">
+      Income tax bands were checked on 24 October 2026 against official pages for every country in
+      the calculator (Sweden: state tax threshold only). Sources links Germany, France, the
+      Netherlands and Ireland. The others come from the BOE (Spain), Agenzia delle Entrate (Italy),
+      Portal das Financas (Portugal), SPF Finances (Belgium), BMF (Austria), podatki.gov.pl
+      (Poland), Skatteministeriet (Denmark) and Skatteverket (Sweden). Social security ceilings
+      (Germany, Austria, Spain) and rates (Netherlands, Spain, Belgium, Denmark) were also checked.
+      Other social security shares and some allowances are simplified, and tax credits such as the
+      Dutch heffingskortingen are not included. Ireland uses the full model from the Ireland salary
+      calculator: PAYE with the personal and employee credits, USC and PRSI.
+    </p>
   </ContentSection>
 
   <ContentSection title="Highest and Lowest Tax Countries">
@@ -185,7 +209,7 @@ const schemaBreadcrumbs = [
         <h4 class="font-semibold text-red-400 mb-2">Higher Tax Burden</h4>
         <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
           <li>Belgium - Up to 50% + high social security</li>
-          <li>Denmark - Up to 52% total tax rate</li>
+          <li>Denmark - Up to 57% total tax rate</li>
           <li>Sweden - Up to 52% including local taxes</li>
           <li>Germany - Up to 45% + solidarity surcharge</li>
           <li>France - Up to 45% + high contributions</li>
@@ -203,7 +227,8 @@ const schemaBreadcrumbs = [
       A gross salary of EUR 50,000 per year looks the same on paper across Europe. But once your
       employer deducts income tax and social security contributions, the numbers diverge sharply.
       Here is what a single person with no children, no special deductions, and a standard
-      employment contract would take home in three major economies in 2025.
+      employment contract would take home in three major economies, as this calculator estimates
+      with 2026 rates.
     </p>
     <div class="overflow-x-auto mt-4">
       <table class="w-full text-sm border-collapse">
@@ -221,46 +246,50 @@ const schemaBreadcrumbs = [
           <tr class="border-b border-[var(--color-border)]/50">
             <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">Germany</td>
             <td class="text-right py-2 pr-4">EUR 50,000</td>
-            <td class="text-right py-2 pr-4">~EUR 10,300</td>
-            <td class="text-right py-2 pr-4">~EUR 10,200</td>
-            <td class="text-right py-2 text-green-400 font-semibold">~EUR 29,500</td>
+            <td class="text-right py-2 pr-4">{approx(sample.DE.incomeTax)}</td>
+            <td class="text-right py-2 pr-4">{approx(sample.DE.socialSecurity)}</td>
+            <td class="text-right py-2 text-green-400 font-semibold"
+              >{approx(sample.DE.netSalary)}</td
+            >
           </tr>
           <tr class="border-b border-[var(--color-border)]/50">
             <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">Netherlands</td>
             <td class="text-right py-2 pr-4">EUR 50,000</td>
-            <td class="text-right py-2 pr-4">~EUR 12,800</td>
-            <td class="text-right py-2 pr-4">~EUR 3,100</td>
-            <td class="text-right py-2 text-green-400 font-semibold">~EUR 34,100</td>
+            <td class="text-right py-2 pr-4">{approx(sample.NL.incomeTax)}</td>
+            <td class="text-right py-2 pr-4">{approx(sample.NL.socialSecurity)}</td>
+            <td class="text-right py-2 text-green-400 font-semibold"
+              >{approx(sample.NL.netSalary)}</td
+            >
           </tr>
           <tr>
             <td class="py-2 pr-4 font-medium text-[var(--color-cream)]">France</td>
             <td class="text-right py-2 pr-4">EUR 50,000</td>
-            <td class="text-right py-2 pr-4">~EUR 7,800</td>
-            <td class="text-right py-2 pr-4">~EUR 11,400</td>
-            <td class="text-right py-2 text-green-400 font-semibold">~EUR 30,800</td>
+            <td class="text-right py-2 pr-4">{approx(sample.FR.incomeTax)}</td>
+            <td class="text-right py-2 pr-4">{approx(sample.FR.socialSecurity)}</td>
+            <td class="text-right py-2 text-green-400 font-semibold"
+              >{approx(sample.FR.netSalary)}</td
+            >
           </tr>
         </tbody>
       </table>
     </div>
     <p class="mt-4 text-sm text-[var(--color-muted)]">
-      Figures are estimates for a single earner with no children using standard 2025 rates. Germany
-      includes the solidarity surcharge. Netherlands figures include the general tax credit
-      (algemene heffingskorting). France employee social contributions are high but the income tax
-      bands are more generous at this level. Your actual net will vary based on your personal
-      situation.
+      Figures are what this calculator returns for a single earner with no children, using the 2026
+      rates in Sources. They leave out tax credits and the German solidarity surcharge. The Dutch
+      general and labour tax credits (heffingskortingen) are not included, so Dutch take-home is
+      understated here. Your actual net will vary based on your personal situation.
     </p>
     <p class="mt-3 text-[var(--color-subtle)]">
-      The headline finding: the Netherlands comes out EUR 4,600 ahead of Germany annually on the
-      same gross salary. That is nearly EUR 380 more per month, purely from tax structure
-      differences.
+      The headline finding: the highest and lowest of the three differ by about EUR {netGapYear} a year,
+      or about EUR {netGapMonth} a month, on the same gross salary, from differences in tax structure.
     </p>
   </ContentSection>
 
   <ContentSection title="Cost of Living vs Take-Home Pay">
     <p>
       Net salary figures only tell you what lands in your bank account. They do not tell you what
-      that money buys. A EUR 34,000 net salary in Amsterdam and a EUR 29,500 net in Munich feel very
-      different once you factor in rent, transport, and daily costs.
+      that money buys. The same net salary in Amsterdam, Munich or Paris feels very different once
+      you factor in rent, transport, and daily costs.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">What to compare alongside net pay</h3>
     <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
@@ -294,6 +323,28 @@ const schemaBreadcrumbs = [
       cities can narrow the gap considerably.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'German Federal Ministry of Justice: § 32a EStG - Einzelnorm',
+        href: 'https://www.gesetze-im-internet.de/estg/__32a.html',
+      },
+      {
+        label: "Service Public: Quel est le barème de l'impôt sur le revenu ?",
+        href: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F1419',
+      },
+      {
+        label: 'Belastingdienst: Box 1: uitleg en tarieven',
+        href: 'https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1',
+      },
+      {
+        label: 'Irish Revenue: Tax rates, bands and reliefs',
+        href: 'https://www.revenue.ie/en/personal-tax-credits-reliefs-and-exemptions/tax-relief-charts/index.aspx',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

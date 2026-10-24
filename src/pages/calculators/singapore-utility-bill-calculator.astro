@@ -6,8 +6,11 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeUtilityBill } from '../../components/calculators/SingaporeUtilityBill';
 import {
+  ELECTRICITY_RATE_BEFORE_GST,
+  ELECTRICITY_RATE_WITH_GST,
   TARIFF_PERIOD,
   WATER_TARIFF_EFFECTIVE_DATE,
 } from '../../components/calculators/SingaporeUtilityBill/calculations';
@@ -59,7 +62,7 @@ const relatedCalculators = [
 const faqs = [
   {
     question: 'How is the SP Group electricity bill calculated?',
-    answer: `SP Group's regulated tariff is charged per kilowatt-hour (kWh) of electricity used. For ${TARIFF_PERIOD}, the tariff is 31.91 cents per kWh before GST and 34.78 cents per kWh with GST included. Multiply your monthly usage in kWh by the rate to estimate your electricity cost for that quarter.`,
+    answer: `SP Group's regulated tariff is charged per kilowatt-hour (kWh) of electricity used. For ${TARIFF_PERIOD}, the tariff is ${(ELECTRICITY_RATE_BEFORE_GST * 100).toFixed(2)} cents per kWh before GST and ${(ELECTRICITY_RATE_WITH_GST * 100).toFixed(2)} cents per kWh with GST included. Multiply your monthly usage in kWh by the rate to estimate your electricity cost for that quarter.`,
   },
   {
     question: 'Why does the SP tariff keep changing?',
@@ -176,6 +179,17 @@ const schemaBreadcrumbs = [
       PUB bill if your usage estimate matters for budgeting.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'SP Group: Tariff Information',
+        href: 'https://www.spgroup.com.sg/our-services/utilities/tariff-information',
+      },
+      { label: 'PUB: Water Price', href: 'https://www.pub.gov.sg/Public/WaterLoop/Water-Price' },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -83,13 +83,33 @@ describe('SingaporeStampDuty', () => {
       expect(result.absd).toBeCloseTo(300_000, 2);
     });
 
-    it('charges 25% ABSD for a PR 2nd property', () => {
+    it('charges 5% ABSD for a PR 1st property', () => {
+      const result = calculateSingaporeStampDuty({
+        purchasePrice: 1_000_000,
+        buyerProfile: 'pr',
+        propertiesOwned: 0,
+      });
+      expect(result.absd).toBeCloseTo(50_000, 2);
+    });
+
+    it('charges 30% ABSD for a PR 2nd property', () => {
+      // 1,000,000 x 30% = 300,000; BSD 24,600 as in the citizen case above
       const result = calculateSingaporeStampDuty({
         purchasePrice: 1_000_000,
         buyerProfile: 'pr',
         propertiesOwned: 1,
       });
-      expect(result.absd).toBeCloseTo(250_000, 2);
+      expect(result.absd).toBeCloseTo(300_000, 2);
+      expect(result.totalDuty).toBeCloseTo(324_600, 2);
+    });
+
+    it('charges 35% ABSD for a PR 3rd or subsequent property', () => {
+      const result = calculateSingaporeStampDuty({
+        purchasePrice: 1_000_000,
+        buyerProfile: 'pr',
+        propertiesOwned: 2,
+      });
+      expect(result.absd).toBeCloseTo(350_000, 2);
     });
   });
 });

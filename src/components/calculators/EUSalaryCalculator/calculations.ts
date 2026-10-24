@@ -18,7 +18,8 @@ export function calculateSocialSecurity(gross: number, country: EUCountryTax): n
 export function calculateIncomeTax(gross: number, country: EUCountryTax): number {
   // Taxable income after social security and allowances
   const socialSecurity = calculateSocialSecurity(gross, country);
-  let taxableIncome = gross - socialSecurity - country.taxFreeAllowance;
+  const deductible = country.socialSecurityDeductible === false ? 0 : socialSecurity;
+  let taxableIncome = gross - deductible - country.taxFreeAllowance;
   taxableIncome = Math.max(0, taxableIncome);
 
   let tax = 0;
@@ -44,8 +45,9 @@ export function calculateSalary(inputs: SalaryInputs): SalaryResult {
   const { grossSalary, countryCode } = inputs;
   const country = getCountryByCode(countryCode) || EU_TAX_DATA[0];
 
-  const socialSecurity = calculateSocialSecurity(grossSalary, country);
-  const incomeTax = calculateIncomeTax(grossSalary, country);
+  const detailed = country.detailedModel?.(grossSalary);
+  const socialSecurity = detailed?.socialSecurity ?? calculateSocialSecurity(grossSalary, country);
+  const incomeTax = detailed?.incomeTax ?? calculateIncomeTax(grossSalary, country);
   const totalDeductions = socialSecurity + incomeTax;
   const netSalary = grossSalary - totalDeductions;
   const effectiveTaxRate = (totalDeductions / grossSalary) * 100;
