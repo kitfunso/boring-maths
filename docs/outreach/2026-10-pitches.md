@@ -1,8 +1,20 @@
 # Guest-post pitches, refreshed 2026-10-24
 
-The five July pitches (`2026-07-pitches.md`), updated for sending now. None has been sent; the sprint table in `REVENUE.md` is still empty. Send each from your own email or the site's contact form. Fill in `[NAME]` from the site's team page first.
+The five July pitches (`2026-07-pitches.md`), updated for sending now. None has been sent; the sprint table in `REVENUE.md` is still empty. Send each from your own email or the site's contact form. Three of the five are sendable; see the contact check below.
 
 **Why now:** Google demoted the whole site on 2026-10-16 (`docs/gsc-review-2026-10-24.html`). Authority is part of a site-level quality score, and the site has about five referring domains. These five are the only open authority lever.
+
+**Contact check, 2026-10-24.** Each July contact was opened again before this file was handed over:
+
+| # | Target | Status | Send route |
+|---|---|---|---|
+| 1 | The Property Hub | Drop. thepropertyhub.net redirects to propertyhub.net (Rob Dix and Rob Bence). It has no guest-post page, and `editorial@thepropertyhub.net` is not listed anywhere. Its only general address, hello@propertyhub.net, is for account questions. | None |
+| 2 | Simple Landlord | Drop. simplelandlord.co.uk is pre-launch landlord software ("Get early access"). It has no blog, and its Contact link has no target. | None |
+| 3 | Meaningful Money | Verified. `hello@meaningfulmoney.tv` is not on the site. The contact page has a form, and it gives info@jacksonswealth.com, Pete Matthew's firm. Use the form. | Form at meaningfulmoney.tv/contact |
+| 4 | Save the Student | Not verified. The contact and press pages block automated reads, so open them in a browser before sending. A search result names Laura Brown as Head of Editorial, but her author page also blocks reads, so the greeting stays general. | Form at savethestudent.org/contact |
+| 5 | Revenue Scotland | Verified. revenue.scot/support/contact-us lists info@revenue.scot for general comments or queries. | info@revenue.scot |
+
+Pitches 1 and 2 stay below for reference only. The ADS angle needs a new Scottish landlord or personal-finance target. Candidates not yet checked: The Savvy Scot (its write-for-us page returned an error on 2026-10-24) and the Scottish Association of Landlords resource pages.
 
 **What changed from July:**
 
@@ -12,9 +24,9 @@ The five July pitches (`2026-07-pitches.md`), updated for sending now. None has 
 
 ---
 
-## 1. The Property Hub (ADS angle)
+## 1. The Property Hub (ADS angle): DROPPED, see the contact check
 
-**Contact:** editorial@thepropertyhub.net
+**Contact:** none found (`editorial@thepropertyhub.net` is not listed on the site)
 
 **Subject:** Guest post idea for The Property Hub: what landlords get wrong about Scottish ADS
 
@@ -43,9 +55,9 @@ Principal Researcher and Lead Engineer, boring-math.com
 
 ---
 
-## 2. Simple Landlord (ADS and second-property angle)
+## 2. Simple Landlord (ADS and second-property angle): DROPPED, see the contact check
 
-**Contact:** contact form at simplelandlord.co.uk
+**Contact:** none (pre-launch software site, no blog)
 
 **Subject:** Guest post idea for Simple Landlord: what ADS costs on a second Scottish property
 
@@ -76,12 +88,12 @@ Drop the sign-off if the form has separate name and email fields.
 
 ## 3. Meaningful Money (100k tax trap)
 
-**Contact:** hello@meaningfulmoney.tv
+**Contact:** contact form at meaningfulmoney.tv/contact (owner: Pete Matthew)
 
 **Subject:** Guest post idea: the UK's hidden 60% tax trap
 
 ```
-Hi [NAME],
+Hi Pete,
 
 I'm Keith, I run Boring Math (boring-math.com), free calculators including
 UK tax tools. I built a calculator for the effective 60% marginal tax rate
@@ -109,12 +121,12 @@ The FIRE Escape is the alternative if Meaningful Money does not reply; the body 
 
 ## 4. Save the Student (student loan angle)
 
-**Contact:** contact form at savethestudent.org/contact
+**Contact:** contact form at savethestudent.org/contact (check it loads in a browser first)
 
 **Subject:** Guest post idea: UK student loan plans explained, with real repayment numbers
 
 ```
-Hi [NAME],
+Hi there,
 
 I'm Keith, I run Boring Math (boring-math.com). I built a free UK student
 loan repayment calculator that covers Plans 1, 2, 4 and 5 and the

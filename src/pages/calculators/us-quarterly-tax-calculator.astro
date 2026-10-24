@@ -9,11 +9,12 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USQuarterlyTaxCalculator } from '../../components/calculators/USQuarterlyTaxCalculator';
 
 const title = 'Free Quarterly Estimated Tax Calculator: 1040-ES | Boring Math';
 const description =
-  'Free quarterly estimated tax calculator for 2025. Calculate your quarterly payments, understand safe harbor rules, and avoid underpayment penalties. Essential for self-employed taxpayers.';
+  'Free quarterly estimated tax calculator for 2026. Calculate your quarterly payments, understand safe harbor rules, and avoid underpayment penalties. Essential for self-employed taxpayers.';
 const keywords =
   'quarterly tax calculator, estimated tax calculator, 1040-ES calculator, quarterly estimated tax payments, safe harbor tax, self employed quarterly taxes';
 const canonicalURL = '/calculators/us-quarterly-tax-calculator';
@@ -52,7 +53,7 @@ const faqs = [
   {
     question: 'When are quarterly estimated tax payments due?',
     answer:
-      'For 2025, quarterly payments are due: Q1 (Jan-Mar income) on April 15, 2025; Q2 (Apr-May income) on June 16, 2025; Q3 (Jun-Aug income) on September 15, 2025; Q4 (Sep-Dec income) on January 15, 2026. If a due date falls on a weekend or holiday, the deadline moves to the next business day.',
+      'For 2026, quarterly payments are due: Q1 (Jan-Mar income) on April 15, 2026; Q2 (Apr-May income) on June 15, 2026; Q3 (Jun-Aug income) on September 15, 2026; Q4 (Sep-Dec income) on January 15, 2027. If a due date falls on a weekend or holiday, the deadline moves to the next business day.',
   },
   {
     question: 'Do I need to pay quarterly estimated taxes?',
@@ -62,7 +63,7 @@ const faqs = [
   {
     question: 'What is the safe harbor rule for estimated taxes?',
     answer:
-      "Safe harbor protects you from underpayment penalties. You meet safe harbor if you pay either: (1) 90% of the current year's tax, OR (2) 100% of last year's tax (110% if your AGI exceeded $150,000). Meeting either threshold means no penalties, even if you still owe at filing.",
+      "Safe harbor protects you from underpayment penalties. You meet safe harbor if you pay either: (1) 90% of the current year's tax, OR (2) 100% of last year's tax (110% if your prior-year AGI exceeded $150,000, or $75,000 if married filing separately). Meeting either threshold means no penalties, even if you still owe at filing.",
   },
   {
     question: 'What happens if I miss a quarterly tax payment?',
@@ -116,7 +117,7 @@ const schemaBreadcrumbs = [
 
   <HeroSection
     title="Quarterly Estimated Tax Calculator"
-    description="Calculate your quarterly tax payments for 2025 and understand the safe harbor rules to avoid underpayment penalties."
+    description="Calculate your quarterly tax payments for 2026 and understand the safe harbor rules to avoid underpayment penalties."
     faqs={faqs}
   />
 
@@ -128,7 +129,7 @@ const schemaBreadcrumbs = [
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
       <li>
         <strong class="text-[var(--color-cream)]">Enter your expected income</strong> – Your total anticipated
-        income from all sources for 2025.
+        income from all sources for 2026.
       </li>
       <li>
         <strong class="text-[var(--color-cream)]">Specify self-employment income</strong> – Net profit
@@ -139,7 +140,7 @@ const schemaBreadcrumbs = [
         withheld from any W-2 jobs.
       </li>
       <li>
-        <strong class="text-[var(--color-cream)]">Add prior year tax info</strong> – Your 2024 total tax
+        <strong class="text-[var(--color-cream)]">Add prior year tax info</strong> – Your 2025 total tax
         and AGI for safe harbor calculation.
       </li>
     </ol>
@@ -161,6 +162,32 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: Estimated taxes',
+        href: 'https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes',
+      },
+      {
+        label: 'IRS: Publication 505, Tax Withholding and Estimated Tax',
+        href: 'https://www.irs.gov/publications/p505',
+      },
+      {
+        label: 'IRS: IRS releases tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-32, 2026 tax rate tables and inflation adjustments',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-32.pdf',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

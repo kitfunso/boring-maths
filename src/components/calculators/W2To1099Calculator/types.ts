@@ -62,10 +62,11 @@ export interface W2To1099CalculatorResult {
 }
 
 /**
- * Self-employment tax rate (Social Security + Medicare)
- * 15.3% on 92.35% of net self-employment income
+ * Self-employment tax rates on 92.35% of net self-employment income
+ * 12.4% Social Security (up to the wage base) + 2.9% Medicare (all income) = 15.3%
  */
-export const SELF_EMPLOYMENT_TAX_RATE = 0.153;
+export const SOCIAL_SECURITY_SE_RATE = 0.124;
+export const MEDICARE_SE_RATE = 0.029;
 export const SE_TAX_BASE_MULTIPLIER = 0.9235;
 
 /**
@@ -75,9 +76,9 @@ export const SE_TAX_BASE_MULTIPLIER = 0.9235;
 export const EMPLOYER_FICA_RATE = 0.0765;
 
 /**
- * Social Security wage base limit (2024)
+ * Social Security wage base limit (2026)
  */
-export const SS_WAGE_BASE = 168600;
+export const SS_WAGE_BASE = 184500;
 
 /**
  * Standard work assumptions

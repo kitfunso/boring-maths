@@ -1,7 +1,7 @@
 /**
  * US Tax Bracket Calculator Calculations
  *
- * Calculates federal income tax using 2025 tax brackets.
+ * Calculates federal income tax using 2025 or 2026 tax brackets.
  */
 
 import type {
@@ -10,17 +10,17 @@ import type {
   TaxBracketBreakdown,
   FilingStatus,
 } from './types';
-import { TAX_BRACKETS_2025, STANDARD_DEDUCTIONS_2025 } from './types';
+import { TAX_BRACKETS, STANDARD_DEDUCTIONS } from './types';
 
 export function calculateUSTaxBracket(inputs: USTaxBracketInputs): USTaxBracketResult {
-  const { filingStatus, grossIncome, deductionType, itemizedDeductions } = inputs;
+  const { taxYear, filingStatus, grossIncome, deductionType, itemizedDeductions } = inputs;
 
-  const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTIONS[taxYear][filingStatus];
   const deductionUsed =
     deductionType === 'standard' ? standardDeduction : Math.max(itemizedDeductions, 0);
 
   const taxableIncome = Math.max(0, grossIncome - deductionUsed);
-  const brackets = TAX_BRACKETS_2025[filingStatus];
+  const brackets = TAX_BRACKETS[taxYear][filingStatus];
 
   let federalTax = 0;
   let marginalRate = 10;

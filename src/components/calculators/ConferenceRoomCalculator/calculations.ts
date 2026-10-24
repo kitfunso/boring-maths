@@ -107,19 +107,19 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       rows,
       seatsPerRow: tablesPerRow * 2 * 2, // 2 people per table, both sides of aisle
       rowSpacing: 5,
-      tableCount: rows * tablesPerRow * 2,
+      // Table count follows the area-based capacity so it matches the chair count.
+      tableCount: Math.ceil(primaryCapacity / 2),
     };
   } else if (seatingStyle === 'banquet') {
     const tableRadius = 3; // 6ft round table diameter
     const tableSpacing = 4;
     const tablesAcross = Math.floor(effectiveWidth / (tableRadius * 2 + tableSpacing));
     const tablesDeep = Math.floor(seatingLength / (tableRadius * 2 + tableSpacing));
-    const tableCount = tablesAcross * tablesDeep;
     layoutInfo = {
       rows: tablesDeep,
       seatsPerRow: tablesAcross * 8, // 8 per round table
       rowSpacing: tableRadius * 2 + tableSpacing,
-      tableCount,
+      tableCount: Math.ceil(primaryCapacity / 8),
     };
   } else if (seatingStyle === 'u_shape') {
     // U-shape: tables along 3 walls

@@ -8,6 +8,15 @@ import { getDefaultInputs } from '../../src/components/calculators/ConferenceRoo
 
 describe('ConferenceRoomCalculator', () => {
   describe('calculateConferenceRoom', () => {
+    it('sizes the table count to the seated capacity', () => {
+      const classroom = calculateConferenceRoom({ ...getDefaultInputs(), roomLength: 50 });
+      expect(classroom.primaryCapacity).toBe(40);
+      expect(classroom.layoutInfo.tableCount).toBe(20);
+
+      const banquet = calculateConferenceRoom({ ...getDefaultInputs(), seatingStyle: 'banquet' });
+      expect(banquet.layoutInfo.tableCount).toBe(Math.ceil(banquet.primaryCapacity / 8));
+    });
+
     it('should calculate with default inputs', () => {
       const inputs = getDefaultInputs();
 

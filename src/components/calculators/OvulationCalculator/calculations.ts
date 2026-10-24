@@ -2,14 +2,15 @@
  * Ovulation Calculator - Calculation Logic
  *
  * Ovulation typically occurs 14 days before the next period.
- * Fertile window: 5 days before ovulation + ovulation day.
+ * Fertile window: 5 days before ovulation through the day after, since the egg lives up to 24 hours.
  */
 
 import type { OvulationInputs, OvulationResult, FertileWindow } from './types';
 
 function addDays(dateStr: string, days: number): string {
+  // ISO dates parse as UTC midnight, so UTC arithmetic keeps a DST change from shifting the day.
   const d = new Date(dateStr);
-  d.setDate(d.getDate() + days);
+  d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().split('T')[0];
 }
 

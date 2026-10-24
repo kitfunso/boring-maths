@@ -1,7 +1,7 @@
 import { calculateQuarterlyTax, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
-  HIGH_INCOME_THRESHOLD,
+  HIGH_INCOME_THRESHOLDS,
   type USQuarterlyTaxInputs,
   type FilingStatus,
 } from './types';
@@ -91,7 +91,7 @@ export default function USQuarterlyTaxCalculator() {
                 />
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-1">
-                Total expected income for 2025 (W-2 + 1099 + investments)
+                Total expected income for 2026 (W-2 + 1099 + investments)
               </p>
             </div>
 
@@ -144,7 +144,7 @@ export default function USQuarterlyTaxCalculator() {
             {/* Prior Year Tax */}
             <div>
               <Label htmlFor="priorYearTax" required>
-                Prior Year Total Tax (2024)
+                Prior Year Total Tax (2025)
               </Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
@@ -161,14 +161,14 @@ export default function USQuarterlyTaxCalculator() {
                 />
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-1">
-                Line 24 from your 2024 Form 1040 (total tax)
+                Line 24 from your 2025 Form 1040 (total tax)
               </p>
             </div>
 
             {/* Prior Year AGI */}
             <div>
               <Label htmlFor="priorYearAGI" required>
-                Prior Year AGI (2024)
+                Prior Year AGI (2025)
               </Label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
@@ -185,7 +185,7 @@ export default function USQuarterlyTaxCalculator() {
                 />
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-1">
-                Line 11 from your 2024 Form 1040 (determines 100% vs 110% safe harbor)
+                Line 11b from your 2025 Form 1040 (determines 100% vs 110% safe harbor)
               </p>
             </div>
           </div>
@@ -258,7 +258,7 @@ export default function USQuarterlyTaxCalculator() {
             {/* Payment Schedule */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
-                2025 Payment Schedule
+                2026 Payment Schedule
               </h4>
               <div className="space-y-3">
                 {result.quarterPayments.map((payment) => (
@@ -353,13 +353,17 @@ export default function USQuarterlyTaxCalculator() {
                     {result.meetsPriorYearSafeHarbor ? '✓' : '✗'}
                   </span>
                   <span>
-                    Pay {inputs.priorYearAGI > HIGH_INCOME_THRESHOLD ? '110%' : '100%'} of prior
-                    year tax ({formatCurrency(result.safeHarborAmount)})
+                    Pay{' '}
+                    {inputs.priorYearAGI > HIGH_INCOME_THRESHOLDS[inputs.filingStatus]
+                      ? '110%'
+                      : '100%'}{' '}
+                    of prior year tax ({formatCurrency(result.safeHarborAmount)})
                   </span>
                 </div>
                 <p className="text-xs text-[var(--color-muted)] mt-2">
-                  Meeting either rule avoids underpayment penalties. If your prior year AGI exceeds
-                  $150,000, you must pay 110% of prior year tax.
+                  Meeting either rule avoids underpayment penalties. If your prior year AGI exceeds{' '}
+                  {formatCurrency(HIGH_INCOME_THRESHOLDS[inputs.filingStatus])}, you must pay 110%
+                  of prior year tax.
                 </p>
               </div>
             </div>

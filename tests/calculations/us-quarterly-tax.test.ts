@@ -13,14 +13,36 @@ describe('UsQuarterlyTaxCalculator', () => {
 
       const result = calculateQuarterlyTax(inputs);
 
-      expect(result.estimatedTotalTax).toBe(21159);
+      expect(result.estimatedTotalTax).toBe(20715);
       expect(result.selfEmploymentTax).toBe(8478);
-      expect(result.federalIncomeTax).toBe(12681);
+      expect(result.federalIncomeTax).toBe(12237);
       expect(result.alreadyWithheld).toBe(5000);
-      expect(result.remainingTaxDue).toBe(16159);
-      expect(result.quarterlyPayment).toBe(4040);
+      expect(result.remainingTaxDue).toBe(15715);
+      expect(result.quarterlyPayment).toBe(3929);
       expect(result.safeHarborAmount).toBe(15000);
       expect(result.safeHarborRule).toBe('100% of prior year tax');
+    });
+
+    it('should use the 75,000 high-income threshold for married filing separately', () => {
+      const inputs = getDefaultInputs();
+      inputs.filingStatus = 'married_separately';
+      inputs.priorYearAGI = 100000;
+
+      const result = calculateQuarterlyTax(inputs);
+
+      expect(result.safeHarborRule).toBe('110% of prior year tax (high income)');
+      expect(result.safeHarborAmount).toBe(16500); // 110% x 15,000 is below 90% x 20,715
+    });
+
+    it('should schedule the 2026 due dates', () => {
+      const result = calculateQuarterlyTax(getDefaultInputs());
+
+      expect(result.quarterPayments.map((q) => q.dueDate)).toEqual([
+        'April 15, 2026',
+        'June 15, 2026',
+        'September 15, 2026',
+        'January 15, 2027',
+      ]);
     });
 
     it('should handle edge case: zero values', () => {

@@ -5,7 +5,7 @@
  */
 
 import type { HSAInputs, HSAResult } from './types';
-import { HSA_LIMITS_2025, FICA_RATE } from './types';
+import { HSA_LIMITS_2026, FICA_RATE } from './types';
 
 export function calculateHSA(inputs: HSAInputs): HSAResult {
   const {
@@ -22,8 +22,8 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
   } = inputs;
 
   // Calculate contribution limits
-  const baseLimit = HSA_LIMITS_2025[coverageType];
-  const catchUpAmount = age >= HSA_LIMITS_2025.catchUpAge ? HSA_LIMITS_2025.catchUp : 0;
+  const baseLimit = HSA_LIMITS_2026[coverageType];
+  const catchUpAmount = age >= HSA_LIMITS_2026.catchUpAge ? HSA_LIMITS_2026.catchUp : 0;
   const totalLimit = baseLimit + catchUpAmount;
 
   // Total contribution (employee + employer)
@@ -53,7 +53,7 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
 
   for (let year = 1; year <= Math.min(yearsToRetirement, 40); year++) {
     const currentAge = age + year;
-    const yearCatchUp = currentAge >= HSA_LIMITS_2025.catchUpAge ? HSA_LIMITS_2025.catchUp : 0;
+    const yearCatchUp = currentAge >= HSA_LIMITS_2026.catchUpAge ? HSA_LIMITS_2026.catchUp : 0;
     const yearLimit = baseLimit + yearCatchUp;
     const yearContribution = Math.min(totalContribution, yearLimit);
 

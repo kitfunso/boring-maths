@@ -5,8 +5,8 @@
 import type { PaycheckInputs, PaycheckResult, FilingStatus } from './types';
 import {
   PAY_FREQUENCIES,
-  FEDERAL_TAX_BRACKETS_2024,
-  STANDARD_DEDUCTIONS_2024,
+  FEDERAL_TAX_BRACKETS_2026,
+  STANDARD_DEDUCTIONS_2026,
   STATE_TAX_DATA,
   SOCIAL_SECURITY_RATE,
   SOCIAL_SECURITY_WAGE_BASE,
@@ -35,7 +35,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
 
   // Calculate taxable income (annual)
   const annualPreTaxDeductions = preTaxDeductions * payPeriods;
-  const standardDeduction = STANDARD_DEDUCTIONS_2024[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
   const taxableIncome = Math.max(0, grossSalary - annualPreTaxDeductions - standardDeduction);
 
   // Federal income tax (annual)
@@ -95,7 +95,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
 }
 
 function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = FEDERAL_TAX_BRACKETS_2024[filingStatus];
+  const brackets = FEDERAL_TAX_BRACKETS_2026[filingStatus];
 
   for (const bracket of brackets) {
     if (taxableIncome <= bracket.max) {

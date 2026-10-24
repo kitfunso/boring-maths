@@ -7,9 +7,10 @@
 import type { USSelfEmploymentTaxInputs, USSelfEmploymentTaxResult, FilingStatus } from './types';
 import {
   SE_TAX_RATES,
-  TAX_BRACKETS_2025,
-  STANDARD_DEDUCTIONS_2025,
-  QUARTERLY_DUE_DATES_2025,
+  ADDITIONAL_MEDICARE_THRESHOLDS,
+  TAX_BRACKETS_2026,
+  STANDARD_DEDUCTIONS_2026,
+  QUARTERLY_DUE_DATES_2026,
 } from './types';
 
 export function calculateSelfEmploymentTax(
@@ -41,10 +42,7 @@ export function calculateSelfEmploymentTax(
   const medicareTax = seTaxableIncome * SE_TAX_RATES.medicareRate;
 
   // Additional Medicare tax (0.9% on income over threshold)
-  const additionalMedicareThreshold =
-    filingStatus === 'married_jointly'
-      ? SE_TAX_RATES.additionalMedicareMFJThreshold
-      : SE_TAX_RATES.additionalMedicareSingleThreshold;
+  const additionalMedicareThreshold = ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus];
 
   const totalEarnings = netSelfEmployment + otherIncome;
   const additionalMedicareTax =
@@ -58,7 +56,7 @@ export function calculateSelfEmploymentTax(
   const halfSETaxDeduction = (socialSecurityTax + medicareTax) / 2;
 
   // Calculate federal income tax
-  const standardDeduction = STANDARD_DEDUCTIONS_2025[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
   const deductionUsed =
     deductionType === 'standard' ? standardDeduction : Math.max(itemizedDeductions, 0);
 
@@ -97,12 +95,12 @@ export function calculateSelfEmploymentTax(
     effectiveRate: Math.round(effectiveRate * 100) / 100,
     quarterlyPayment: Math.round(quarterlyPayment),
     afterTaxIncome: Math.round(afterTaxIncome),
-    quarterlyDueDates: QUARTERLY_DUE_DATES_2025,
+    quarterlyDueDates: QUARTERLY_DUE_DATES_2026,
   };
 }
 
 function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = TAX_BRACKETS_2025[filingStatus];
+  const brackets = TAX_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingIncome = taxableIncome;
 

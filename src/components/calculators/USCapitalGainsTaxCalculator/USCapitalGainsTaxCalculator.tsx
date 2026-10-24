@@ -2,6 +2,7 @@ import { calculateCapitalGainsTax, formatCurrency, formatPercent } from './calcu
 import {
   getDefaultInputs,
   NIIT_THRESHOLDS,
+  LTCG_BRACKETS_2026,
   type USCapitalGainsInputs,
   type FilingStatus,
   type AssetType,
@@ -36,6 +37,7 @@ export default function USCapitalGainsTaxCalculator() {
 
   const isLoss = inputs.salePrice < inputs.purchasePrice;
   const gain = inputs.salePrice - inputs.purchasePrice;
+  const [zeroRateTop, fifteenRateTop] = LTCG_BRACKETS_2026[inputs.filingStatus].map((b) => b.max);
 
   return (
     <ThemeProvider defaultColor="green">
@@ -383,76 +385,26 @@ export default function USCapitalGainsTaxCalculator() {
               </div>
             )}
 
-            {/* 2025 Rates Reference */}
+            {/* 2026 Rates Reference */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
-                2025 Long-Term Capital Gains Rates
+                2026 Long-Term Capital Gains Rates
               </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
-                {inputs.filingStatus === 'single' && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>0%</span>
-                      <span>Up to $48,350</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>15%</span>
-                      <span>$48,351 - $533,400</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>20%</span>
-                      <span>Over $533,400</span>
-                    </div>
-                  </>
-                )}
-                {inputs.filingStatus === 'married_jointly' && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>0%</span>
-                      <span>Up to $96,700</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>15%</span>
-                      <span>$96,701 - $600,050</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>20%</span>
-                      <span>Over $600,050</span>
-                    </div>
-                  </>
-                )}
-                {inputs.filingStatus === 'married_separately' && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>0%</span>
-                      <span>Up to $48,350</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>15%</span>
-                      <span>$48,351 - $300,025</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>20%</span>
-                      <span>Over $300,025</span>
-                    </div>
-                  </>
-                )}
-                {inputs.filingStatus === 'head_of_household' && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>0%</span>
-                      <span>Up to $64,750</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>15%</span>
-                      <span>$64,751 - $566,700</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>20%</span>
-                      <span>Over $566,700</span>
-                    </div>
-                  </>
-                )}
+                <div className="flex justify-between">
+                  <span>0%</span>
+                  <span>Up to {formatCurrency(zeroRateTop)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>15%</span>
+                  <span>
+                    {formatCurrency(zeroRateTop + 1)} - {formatCurrency(fifteenRateTop)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>20%</span>
+                  <span>Over {formatCurrency(fifteenRateTop)}</span>
+                </div>
                 <p className="text-xs text-[var(--color-muted)] mt-2">
                   Short-term gains are taxed at ordinary income rates (10-37%). NIIT adds 3.8% for
                   high earners.

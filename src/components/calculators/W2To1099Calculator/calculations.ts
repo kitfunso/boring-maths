@@ -14,7 +14,8 @@
 import type { Currency } from '../../../lib/regions';
 import type { W2To1099CalculatorInputs, W2To1099CalculatorResult, CostBreakdown } from './types';
 import {
-  SELF_EMPLOYMENT_TAX_RATE,
+  SOCIAL_SECURITY_SE_RATE,
+  MEDICARE_SE_RATE,
   SE_TAX_BASE_MULTIPLIER,
   EMPLOYER_FICA_RATE,
   SS_WAGE_BASE,
@@ -55,9 +56,10 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
       : SS_WAGE_BASE * 0.062 + baseSalary * 0.0145;
 
   // Calculate self-employment tax (what contractor pays)
-  // 15.3% on 92.35% of net self-employment income
+  // Social Security stops at the wage base; Medicare applies to all 92.35% of net income
   const seIncome = baseSalary * SE_TAX_BASE_MULTIPLIER;
-  const selfEmploymentTax = Math.min(seIncome, SS_WAGE_BASE) * SELF_EMPLOYMENT_TAX_RATE;
+  const selfEmploymentTax =
+    Math.min(seIncome, SS_WAGE_BASE) * SOCIAL_SECURITY_SE_RATE + seIncome * MEDICARE_SE_RATE;
 
   // Health insurance cost (annual)
   const healthInsuranceCost = healthInsuranceMonthly * 12;

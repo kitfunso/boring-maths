@@ -1,7 +1,7 @@
 import { calculateSelfEmploymentTax, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
-  STANDARD_DEDUCTIONS_2025,
+  STANDARD_DEDUCTIONS_2026,
   SE_TAX_RATES,
   type USSelfEmploymentTaxInputs,
   type FilingStatus,
@@ -132,7 +132,7 @@ export default function USSelfEmploymentTaxCalculator() {
                 onChange={(value) => updateInput('deductionType', value as 'standard' | 'itemized')}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
-                Standard deduction: {formatCurrency(STANDARD_DEDUCTIONS_2025[inputs.filingStatus])}
+                Standard deduction: {formatCurrency(STANDARD_DEDUCTIONS_2026[inputs.filingStatus])}
               </p>
             </div>
 
@@ -261,7 +261,7 @@ export default function USSelfEmploymentTaxCalculator() {
                     {formatCurrency(result.quarterlyPayment)} / quarter
                   </p>
                   <div className="mt-3 text-sm text-[var(--color-subtle)]">
-                    <p className="font-medium text-[var(--color-cream)] mb-2">2025 Due Dates:</p>
+                    <p className="font-medium text-[var(--color-cream)] mb-2">2026 Due Dates:</p>
                     <div className="grid grid-cols-2 gap-2">
                       {result.quarterlyDueDates.map((date, index) => (
                         <div key={index} className="flex items-center gap-2">
@@ -316,7 +316,7 @@ export default function USSelfEmploymentTaxCalculator() {
             {/* SE Tax Info */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
-                2025 Self-Employment Tax Rates
+                2026 Self-Employment Tax Rates
               </h4>
               <div className="space-y-2 text-sm text-[var(--color-subtle)]">
                 <div className="flex justify-between">

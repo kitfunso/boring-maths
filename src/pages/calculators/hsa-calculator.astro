@@ -9,13 +9,14 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { HSACalculator } from '../../components/calculators/HSACalculator';
 
 const title = 'Free HSA Calculator: Triple Tax Advantage Savings | Boring Math';
 const description =
-  'Free HSA calculator for 2025. Calculate your triple tax advantage savings, contribution limits, and long-term growth. See how much you save with a Health Savings Account.';
+  'Free HSA calculator for 2026. Calculate your triple tax advantage savings, contribution limits, and long-term growth. See how much you save with a Health Savings Account.';
 const keywords =
-  'hsa calculator, health savings account calculator, hsa contribution limits 2025, hsa tax savings, triple tax advantage, hsa investment calculator, hdhp hsa';
+  'hsa calculator, health savings account calculator, hsa contribution limits 2026, hsa tax savings, triple tax advantage, hsa investment calculator, hdhp hsa';
 const canonicalURL = '/calculators/hsa-calculator';
 const siteUrl = 'https://boring-math.com';
 
@@ -45,14 +46,14 @@ const faqs = [
       'HSAs offer three tax benefits: 1) Contributions are tax-deductible (or pre-tax via payroll), 2) Investment growth is tax-free, and 3) Withdrawals for qualified medical expenses are tax-free. No other account offers all three benefits. After age 65, you can withdraw for any purpose (taxed as income).',
   },
   {
-    question: 'What are the 2025 HSA contribution limits?',
+    question: 'What are the 2026 HSA contribution limits?',
     answer:
-      "For 2025, HSA contribution limits are $4,300 for individual HDHP coverage and $8,550 for family coverage. If you're 55 or older, you can contribute an additional $1,000 catch-up contribution. Employer contributions count toward these limits.",
+      "For 2026, HSA contribution limits are $4,400 for individual HDHP coverage and $8,750 for family coverage. If you're 55 or older, you can contribute an additional $1,000 catch-up contribution. Employer contributions count toward these limits.",
   },
   {
     question: 'Do I need an HDHP to contribute to an HSA?',
     answer:
-      'Yes, you must be enrolled in a High Deductible Health Plan (HDHP) to contribute to an HSA. For 2025, an HDHP has a minimum deductible of $1,650 (individual) or $3,300 (family), and maximum out-of-pocket of $8,300 (individual) or $16,600 (family).',
+      'Yes, you must be enrolled in a High Deductible Health Plan (HDHP) to contribute to an HSA. For 2026, an HDHP has a minimum deductible of $1,700 (individual) or $3,400 (family), and maximum out-of-pocket of $8,500 (individual) or $17,000 (family).',
   },
   {
     question: 'Should I invest my HSA or keep it in cash?',
@@ -132,7 +133,7 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
-  <ContentSection title="2025 HSA Contribution Limits">
+  <ContentSection title="2026 HSA Contribution Limits">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -146,15 +147,15 @@ const schemaBreadcrumbs = [
         <tbody class="text-[var(--color-subtle)]">
           <tr class="border-b border-white/10">
             <td class="py-2">Individual</td>
-            <td class="text-right py-2">$4,300</td>
+            <td class="text-right py-2">$4,400</td>
             <td class="text-right py-2">$1,000</td>
-            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$5,300</td>
+            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$5,400</td>
           </tr>
           <tr>
             <td class="py-2">Family</td>
-            <td class="text-right py-2">$8,550</td>
+            <td class="text-right py-2">$8,750</td>
             <td class="text-right py-2">$1,000</td>
-            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$9,550</td>
+            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$9,750</td>
           </tr>
         </tbody>
       </table>
@@ -164,6 +165,28 @@ const schemaBreadcrumbs = [
       penalty tax.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRS: Revenue Procedure 2025-19, 2026 HSA limits',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-19.pdf',
+      },
+      {
+        label: 'IRS: Publication 969, Health Savings Accounts and Other Tax-Favored Health Plans',
+        href: 'https://www.irs.gov/publications/p969',
+      },
+      {
+        label: 'IRS: Topic no. 751, Social Security and Medicare withholding rates',
+        href: 'https://www.irs.gov/taxtopics/tc751',
+      },
+      {
+        label: 'IRS: IRS releases tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

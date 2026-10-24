@@ -19,8 +19,31 @@ describe('UsSelfEmploymentTaxCalculator', () => {
       expect(result.medicareTax).toBeCloseTo(1874.71, 2);
       expect(result.additionalMedicareTax).toBe(0);
       expect(result.halfSETaxDeduction).toBe(4945);
-      expect(result.taxableIncome).toBe(50055);
-      expect(result.federalIncomeTax).toBeCloseTo(5926.02, 2);
+      expect(result.taxableIncome).toBe(48955);
+      expect(result.federalIncomeTax).toBeCloseTo(5626.56, 2);
+    });
+
+    it('should use the 125,000 Additional Medicare threshold for married filing separately', () => {
+      const inputs = getDefaultInputs();
+      inputs.selfEmploymentIncome = 150000;
+      inputs.businessExpenses = 0;
+
+      inputs.filingStatus = 'married_separately';
+      expect(calculateSelfEmploymentTax(inputs).additionalMedicareTax).toBe(225); // 0.9% x 25,000
+
+      inputs.filingStatus = 'single';
+      expect(calculateSelfEmploymentTax(inputs).additionalMedicareTax).toBe(0);
+    });
+
+    it('should list the 2026 quarterly due dates', () => {
+      const result = calculateSelfEmploymentTax(getDefaultInputs());
+
+      expect(result.quarterlyDueDates).toEqual([
+        'April 15, 2026',
+        'June 15, 2026',
+        'September 15, 2026',
+        'January 15, 2027',
+      ]);
     });
 
     it('should handle edge case: zero values', () => {
