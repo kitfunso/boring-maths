@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { ADSCalculator } from '../../components/calculators/ADSCalculator';
 
 const title =
@@ -261,6 +262,20 @@ const schemaBreadcrumbs = [
       > - so a small increase in property value means a proportionally higher ADS bill.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'Revenue Scotland: The Additional Dwelling Supplement (ADS)',
+        href: 'https://revenue.scot/taxes/land-buildings-transaction-tax/additional-dwelling-supplement-ads',
+      },
+      {
+        label: 'Revenue Scotland: Residential property',
+        href: 'https://revenue.scot/taxes/land-buildings-transaction-tax/residential-property',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKTaxCalculator } from '../../components/calculators/UKTaxCalculator';
 
 const title = 'UK Tax Calculator 2026/27 - Take Home Pay Calculator | Boring Math';
@@ -322,6 +323,25 @@ const schemaBreadcrumbs = [
       generic salary view is not enough.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Income Tax rates and Personal Allowances',
+        href: 'https://www.gov.uk/income-tax-rates',
+      },
+      { label: 'GOV.UK: Income Tax in Scotland', href: 'https://www.gov.uk/scottish-income-tax' },
+      {
+        label: 'GOV.UK: Rates and thresholds for employers 2026 to 2027',
+        href: 'https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027',
+      },
+      {
+        label: 'GOV.UK: Blind Person’s Allowance: What you’ll get',
+        href: 'https://www.gov.uk/blind-persons-allowance/what-youll-get',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

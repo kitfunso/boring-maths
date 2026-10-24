@@ -93,7 +93,7 @@ const colorClasses: Record<string, string> = {
   keywords={keywords}
   canonicalURL={canonicalURL}
   ogImage={calculatorOgImage}
-  noindex={noindex}
+  noindex={noindex || Boolean(registryEntry && registryEntry.noindex)}
 >
   <!-- Schema.org markup slot -->
   <slot name="schema" />

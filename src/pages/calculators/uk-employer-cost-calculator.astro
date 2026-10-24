@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKEmployerCostCalculator } from '../../components/calculators/UKEmployerCostCalculator';
 
 const title = 'UK Employer Cost Calculator 2026/27: True Cost of Hiring | Boring Math';
@@ -219,6 +220,28 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Rates and thresholds for employers 2026 to 2027',
+        href: 'https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027',
+      },
+      {
+        label: 'GOV.UK: Employment Allowance',
+        href: 'https://www.gov.uk/claim-employment-allowance',
+      },
+      {
+        label: 'GOV.UK: Pay Apprenticeship Levy',
+        href: 'https://www.gov.uk/guidance/pay-apprenticeship-levy',
+      },
+      {
+        label: 'GOV.UK: Workplace pensions: What you, your employer and the government pay',
+        href: 'https://www.gov.uk/workplace-pensions/what-you-your-employer-and-the-government-pay',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeCPFRetirementSum } from '../../components/calculators/SingaporeCPFRetirementSum';
 
 const title = 'Singapore CPF Retirement Sum Calculator 2026 | Boring Math';
@@ -181,6 +182,24 @@ const schemaBreadcrumbs = [
       you need an actual expected monthly payout figure.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'CPF Board: 3 steps to being ready for retirement',
+        href: 'https://www.cpf.gov.sg/member/infohub/educational-resources/3-steps-to-being-ready-for-retirement',
+      },
+      {
+        label: 'CPF Board: Top up to enjoy higher retirement payouts',
+        href: 'https://www.cpf.gov.sg/member/growing-your-savings/saving-more-with-cpf/top-up-to-enjoy-higher-retirement-payouts',
+      },
+      {
+        label: 'CPF Board: Earning CPF interest',
+        href: 'https://www.cpf.gov.sg/member/growing-your-savings/earning-higher-returns/earning-attractive-interest',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

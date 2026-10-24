@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { CouncilTaxCalculator } from '../../components/calculators/CouncilTaxCalculator';
 
 const title = 'Free Council Tax Calculator: Estimate Your Annual Bill | Boring Math';
@@ -167,6 +168,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: How domestic properties are assessed for Council Tax bands',
+        href: 'https://www.gov.uk/guidance/understand-how-council-tax-bands-are-assessed',
+      },
+      {
+        label: 'GOV.UK: How Council Tax works: Second homes and empty properties',
+        href: 'https://www.gov.uk/council-tax/second-homes-and-empty-properties',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

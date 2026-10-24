@@ -14,6 +14,7 @@
  *   gsc-export/<YYYY-MM-DD>/gsc-countries-28d.json      ({rows, responseAggregationType})
  *   gsc-export/<YYYY-MM-DD>/gsc-country-page-28d.json   ({rows, responseAggregationType})
  *   gsc-export/<YYYY-MM-DD>/gsc-country-query-28d.json  ({rows, responseAggregationType})
+ *   gsc-export/<YYYY-MM-DD>/gsc-daily-90d.json          ({rows, responseAggregationType}, one row per date)
  *   gsc-export/<YYYY-MM-DD>/_pull-meta.json             (provenance)
  *
  * Setup (one time):
@@ -154,6 +155,76 @@ async function queryAll(site, accessToken, body) {
   return { rows, responseAggregationType: aggType };
 }
 
+// ---------------------------------------------------------------- daily
+
+const DAILY_DAYS = 90;
+const CLIFF_WINDOW = 14;
+const CLIFF_BASELINE = 7;
+const CLIFF_RATIO = 0.25;
+
+// UTC math so DST never shifts a calendar day.
+function addDays(isoDate, n) {
+  const d = new Date(`${isoDate}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+
+function median(values) {
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+// The API omits zero-impression dates, so fill gaps or a dead day vanishes from the check.
+function buildDailySeries(rows) {
+  if (rows.length === 0) return [];
+  const byDate = new Map(rows.map((r) => [r.keys[0], r]));
+  const last = [...byDate.keys()].sort().pop();
+  const series = [];
+  for (let i = CLIFF_WINDOW + CLIFF_BASELINE - 1; i >= 0; i -= 1) {
+    const date = addDays(last, -i);
+    const r = byDate.get(date);
+    series.push({
+      date,
+      clicks: r ? r.clicks : 0,
+      impressions: r ? r.impressions : 0,
+      position: r ? r.position : null,
+    });
+  }
+  return series;
+}
+
+/** First day in the last CLIFF_WINDOW below CLIFF_RATIO of the prior CLIFF_BASELINE-day median. */
+function findCliff(series) {
+  for (let i = series.length - CLIFF_WINDOW; i < series.length; i += 1) {
+    if (i < CLIFF_BASELINE) continue;
+    const base = median(series.slice(i - CLIFF_BASELINE, i).map((d) => d.impressions));
+    if (series[i].impressions < base * CLIFF_RATIO) {
+      return { date: series[i].date, impressions: series[i].impressions, median: base };
+    }
+  }
+  return null;
+}
+
+function reportDaily(rows) {
+  const series = buildDailySeries(rows);
+  const recent = series.slice(-CLIFF_WINDOW);
+  console.log(`\nLast ${recent.length} days (date  clicks  impressions  position):`);
+  for (const d of recent) {
+    const pos = d.position == null ? '-' : d.position.toFixed(1);
+    console.log(`${d.date}  ${d.clicks}  ${d.impressions}  ${pos}`);
+  }
+  const cliff = findCliff(series);
+  if (cliff) {
+    console.log(
+      `CLIFF: ${cliff.date} had ${cliff.impressions} impressions vs a prior ${CLIFF_BASELINE}-day median of ${cliff.median}; ` +
+        `check all pages fell together (site-level) before tuning pages`,
+    );
+  } else {
+    console.log(`No daily cliff in the last ${CLIFF_WINDOW} days.`);
+  }
+}
+
 // ---------------------------------------------------------------- io
 
 function writeJson(file, data) {
@@ -198,6 +269,15 @@ async function main() {
     dimensions: ['country', 'query'],
   });
   console.log(`  country+query: ${countryQuery.rows.length} rows`);
+  // Always 90 days ending at endDate: a 28d total hides a short cliff.
+  const dailyStart = new Date(`${endDate}T00:00:00`);
+  dailyStart.setDate(dailyStart.getDate() - (DAILY_DAYS - 1));
+  const daily = await queryAll(site, accessToken, {
+    ...base,
+    startDate: fmtDate(dailyStart),
+    dimensions: ['date'],
+  });
+  console.log(`  daily 90d:  ${daily.rows.length} rows`);
 
   const label = args.label || endDate;
   const outDir = path.join(REPO_ROOT, 'gsc-export', label);
@@ -210,6 +290,7 @@ async function main() {
   writeJson(path.join(outDir, 'gsc-countries-28d.json'), countries);
   writeJson(path.join(outDir, 'gsc-country-page-28d.json'), countryPage);
   writeJson(path.join(outDir, 'gsc-country-query-28d.json'), countryQuery);
+  writeJson(path.join(outDir, 'gsc-daily-90d.json'), daily);
   writeJson(path.join(outDir, '_pull-meta.json'), {
     pulledAt: new Date().toISOString(),
     site,
@@ -223,6 +304,7 @@ async function main() {
       countries: countries.rows.length,
       countryPage: countryPage.rows.length,
       countryQuery: countryQuery.rows.length,
+      daily90d: daily.rows.length,
     },
   });
 
@@ -230,6 +312,7 @@ async function main() {
   const totalClicks = pages.rows.reduce((a, r) => a + (r.clicks || 0), 0);
   console.log(`\nWrote ${path.relative(REPO_ROOT, outDir)}/`);
   console.log(`Totals: ${totalClicks} clicks / ${totalImpr} impressions across ${pages.rows.length} pages`);
+  reportDaily(daily.rows);
   console.log(`\nNext: python scripts/gsc_analysis.py   (auto-uses the newest export folder)\n`);
 }
 

@@ -12,6 +12,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKHolidayEntitlementCalculator } from '../../components/calculators/UKHolidayEntitlementCalculator';
 
 const title = 'UK Holiday Entitlement Calculator 2026/27: Pro-Rata & Part-Time';
@@ -218,6 +219,24 @@ const schemaBreadcrumbs = [
       contract or gov.uk for your specific situation.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Holiday entitlement',
+        href: 'https://www.gov.uk/holiday-entitlement-rights',
+      },
+      {
+        label: 'GOV.UK: Calculate holiday entitlement',
+        href: 'https://www.gov.uk/calculate-your-holiday-entitlement',
+      },
+      {
+        label: 'legislation.gov.uk: The Working Time Regulations 1998, regulation 15B',
+        href: 'https://www.legislation.gov.uk/uksi/1998/1833/regulation/15B',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

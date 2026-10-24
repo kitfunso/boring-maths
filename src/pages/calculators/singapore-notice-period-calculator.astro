@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeNoticePeriod } from '../../components/calculators/SingaporeNoticePeriod';
 
 const title = 'Singapore Notice Period Calculator: Final Pay & Notice | Boring Math';
@@ -193,6 +194,24 @@ const schemaBreadcrumbs = [
       For a figure you will rely on, confirm it against mom.gov.sg or your HR or payroll department.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'MOM: Termination with notice',
+        href: 'https://www.mom.gov.sg/employment-practices/termination-of-employment/termination-with-notice',
+      },
+      {
+        label: 'MOM: Annual leave eligibility and entitlement',
+        href: 'https://www.mom.gov.sg/employment-practices/leave/annual-leave/eligibility-and-entitlement',
+      },
+      {
+        label: 'MOM: Monthly and daily salary: definitions and calculation',
+        href: 'https://www.mom.gov.sg/employment-practices/salary/monthly-and-daily-salary',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

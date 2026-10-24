@@ -6,6 +6,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { SingaporeGST } from '../../components/calculators/SingaporeGST';
 
 const title = 'Singapore GST Calculator 2026: Add or Remove 9% GST | Boring Math';
@@ -172,6 +173,28 @@ const schemaBreadcrumbs = [
       advice from IRAS, Singapore Customs, or a qualified adviser.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'IRAS: Current GST rates',
+        href: 'https://www.iras.gov.sg/taxes/goods-services-tax-(gst)/basics-of-gst/current-gst-rates',
+      },
+      {
+        label: 'IRAS: GST on Imported Low-Value Goods',
+        href: 'https://www.iras.gov.sg/taxes/goods-services-tax-(gst)/consumers/gst-on-imported-low-value-goods',
+      },
+      {
+        label: 'Singapore Customs: Goods and Services Tax',
+        href: 'https://www.customs.gov.sg/doing-business/valuation-duties-and-fees/goods-and-services-tax-gst/',
+      },
+      {
+        label: 'Singapore Customs: Duties and Dutiable Goods Overview',
+        href: 'https://www.customs.gov.sg/doing-business/valuation-duties-and-fees/duties-and-dutiable-goods/duties-and-dutiable-goods-overview/',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

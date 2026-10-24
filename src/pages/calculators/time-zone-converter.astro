@@ -154,6 +154,19 @@ const schemaBreadcrumbs = [
     </p>
   </ContentSection>
 
+  <ContentSection title="Worked example">
+    <p>
+      It is <strong>15:00</strong> in Los Angeles and you want the time in Tokyo. Choose Los Angeles /
+      PST (UTC-8) as the source and Tokyo / JST (UTC+9) as the destination.
+    </p>
+    <p>
+      The gap is 8 + 9 = 17 hours. 15:00 plus 17 hours is 32:00, which wraps to
+      <strong>08:00 JST</strong> on the <strong>next day</strong>. The converter uses fixed
+      standard-time offsets, so this matches real clocks when Los Angeles is on standard time, as on
+      15 January 2027. On 15 July 2027 it is on daylight time (UTC-7) and the real gap is 16 hours.
+    </p>
+  </ContentSection>
+
   <ContentSection title="Common Time Zone Conversions">
     <p>
       <strong>US to UK:</strong> EST (New York) is 5 hours behind GMT (London). When it's 9 AM in New

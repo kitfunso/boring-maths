@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKCapitalGainsTaxCalculator } from '../../components/calculators/UKCapitalGainsTaxCalculator';
 
 const title = 'UK Capital Gains Tax Calculator 2026/27: Property, Shares & Crypto CGT';
@@ -169,6 +170,24 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: Capital Gains Tax rates',
+        href: 'https://www.gov.uk/capital-gains-tax/rates',
+      },
+      {
+        label: 'GOV.UK: Capital Gains Tax allowances',
+        href: 'https://www.gov.uk/capital-gains-tax/allowances',
+      },
+      {
+        label: 'GOV.UK: Income Tax rates and Personal Allowances',
+        href: 'https://www.gov.uk/income-tax-rates',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

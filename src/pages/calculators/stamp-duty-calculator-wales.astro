@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { LTTCalculator } from '../../components/calculators/LTTCalculator';
 
 const title = 'Stamp Duty Calculator Wales 2026/27: LTT (Land Transaction Tax)';
@@ -174,6 +175,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'Welsh Revenue Authority: Land Transaction Tax rates and bands',
+        href: 'https://www.gov.wales/land-transaction-tax-rates-and-bands',
+      },
+      {
+        label: 'Welsh Revenue Authority: Higher rates of Land Transaction Tax: overview',
+        href: 'https://www.gov.wales/higher-rates-land-transaction-tax-overview',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

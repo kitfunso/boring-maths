@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKPensionCalculator } from '../../components/calculators/UKPensionCalculator';
 import AffiliateBox from '../../components/common/AffiliateBox.astro';
 import { getAffiliatesForCalculator } from '../../lib/affiliates';
@@ -255,6 +256,28 @@ const schemaBreadcrumbs = [
       >.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-10-24"
+    sources={[
+      {
+        label: 'GOV.UK: The new State Pension: What you’ll get',
+        href: 'https://www.gov.uk/new-state-pension/what-youll-get',
+      },
+      {
+        label: 'GOV.UK: Tax on your private pension contributions: Annual allowance',
+        href: 'https://www.gov.uk/tax-on-your-private-pension/annual-allowance',
+      },
+      {
+        label: 'GOV.UK: Tax on your private pension contributions: Tax relief',
+        href: 'https://www.gov.uk/tax-on-your-private-pension/pension-tax-relief',
+      },
+      {
+        label: 'GOV.UK: Workplace pensions: What you, your employer and the government pay',
+        href: 'https://www.gov.uk/workplace-pensions/what-you-your-employer-and-the-government-pay',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>
