@@ -9,7 +9,7 @@
     "validate:shared-data": "node scripts/validate-shared-data.mjs",
     "prebuild": "npm run validate:shared-data",
     "build": "astro build",
-    "postbuild": "node scripts/seo/check-internal-links.mjs && node scripts/seo/check-breadcrumb-schema.mjs && node scripts/seo/check-link-edges.mjs && node scripts/seo/check-orphan-pages.mjs && node scripts/seo/check-lead-answers.mjs && node scripts/seo/check-og-images.mjs && node scripts/seo/check-noindex.mjs",
+    "postbuild": "node scripts/seo/check-internal-links.mjs && node scripts/seo/check-breadcrumb-schema.mjs && node scripts/seo/check-link-edges.mjs && node scripts/seo/check-orphan-pages.mjs && node scripts/seo/check-lead-answers.mjs && node scripts/seo/check-og-images.mjs && node scripts/seo/check-noindex.mjs && node scripts/seo/check-sources-fresh.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest run",

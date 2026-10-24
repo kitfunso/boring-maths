@@ -5,13 +5,12 @@
  */
 
 import type { USSelfEmploymentTaxInputs, USSelfEmploymentTaxResult, FilingStatus } from './types';
+import { SE_TAX_RATES, ADDITIONAL_MEDICARE_THRESHOLDS, QUARTERLY_DUE_DATES_2026 } from './types';
 import {
-  SE_TAX_RATES,
-  ADDITIONAL_MEDICARE_THRESHOLDS,
-  TAX_BRACKETS_2026,
-  STANDARD_DEDUCTIONS_2026,
-  QUARTERLY_DUE_DATES_2026,
-} from './types';
+  FEDERAL_BRACKETS_2026,
+  STANDARD_DEDUCTION_2026,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+} from '../../../lib/us-tax-2026';
 
 export function calculateSelfEmploymentTax(
   inputs: USSelfEmploymentTaxInputs
@@ -32,10 +31,7 @@ export function calculateSelfEmploymentTax(
   const seTaxableIncome = netSelfEmployment * SE_TAX_RATES.selfEmploymentRate;
 
   // Social Security tax (12.4% up to wage base)
-  const socialSecurityTaxableIncome = Math.min(
-    seTaxableIncome,
-    SE_TAX_RATES.socialSecurityWageBase
-  );
+  const socialSecurityTaxableIncome = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026);
   const socialSecurityTax = socialSecurityTaxableIncome * SE_TAX_RATES.socialSecurityRate;
 
   // Medicare tax (2.9% on all SE income)
@@ -56,7 +52,7 @@ export function calculateSelfEmploymentTax(
   const halfSETaxDeduction = (socialSecurityTax + medicareTax) / 2;
 
   // Calculate federal income tax
-  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
   const deductionUsed =
     deductionType === 'standard' ? standardDeduction : Math.max(itemizedDeductions, 0);
 
@@ -100,7 +96,7 @@ export function calculateSelfEmploymentTax(
 }
 
 function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = TAX_BRACKETS_2026[filingStatus];
+  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingIncome = taxableIncome;
 

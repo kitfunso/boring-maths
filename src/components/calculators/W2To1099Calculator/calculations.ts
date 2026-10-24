@@ -18,12 +18,12 @@ import {
   MEDICARE_SE_RATE,
   SE_TAX_BASE_MULTIPLIER,
   EMPLOYER_FICA_RATE,
-  SS_WAGE_BASE,
   STANDARD_ANNUAL_HOURS,
   WORKING_DAYS_PER_YEAR,
   BILLABLE_HOURS_RATIO,
   MONTHLY_BUSINESS_EXPENSES,
 } from './types';
+import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 
 /**
  * Calculate the equivalent 1099 rate from W2 compensation
@@ -51,15 +51,16 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
   // Calculate employer FICA (what employer pays for W2 employee)
   // 7.65% up to SS wage base, then 1.45% Medicare only above
   const employerFicaLoss =
-    baseSalary <= SS_WAGE_BASE
+    baseSalary <= SOCIAL_SECURITY_WAGE_BASE_2026
       ? baseSalary * EMPLOYER_FICA_RATE
-      : SS_WAGE_BASE * 0.062 + baseSalary * 0.0145;
+      : SOCIAL_SECURITY_WAGE_BASE_2026 * 0.062 + baseSalary * 0.0145;
 
   // Calculate self-employment tax (what contractor pays)
   // Social Security stops at the wage base; Medicare applies to all 92.35% of net income
   const seIncome = baseSalary * SE_TAX_BASE_MULTIPLIER;
   const selfEmploymentTax =
-    Math.min(seIncome, SS_WAGE_BASE) * SOCIAL_SECURITY_SE_RATE + seIncome * MEDICARE_SE_RATE;
+    Math.min(seIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * SOCIAL_SECURITY_SE_RATE +
+    seIncome * MEDICARE_SE_RATE;
 
   // Health insurance cost (annual)
   const healthInsuranceCost = healthInsuranceMonthly * 12;

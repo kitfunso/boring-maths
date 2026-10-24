@@ -13,6 +13,7 @@
  */
 
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
+import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 import {
   type ContractorVsEmployeeInputs,
   type ContractorVsEmployeeResult,
@@ -164,8 +165,9 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
   const taxableIncome = grossIncome + bonus;
   const incomeTax = taxableIncome * (federalTaxBracket + stateTaxRate);
 
-  // Employee FICA (7.65%)
-  const employeeFica = Math.min(taxableIncome, 160200) * 0.0765; // 2023 SS cap
+  // Social Security stops at the wage base; Medicare applies to all wages
+  const employeeFica =
+    Math.min(taxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.062 + taxableIncome * 0.0145;
 
   const totalCosts = incomeTax + employeeFica;
   const netIncome = grossIncome + bonus - totalCosts;

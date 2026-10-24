@@ -64,6 +64,21 @@ describe('ContractorVsEmployeeCalculator', () => {
       expect(result.employeeEffectiveRate).toBeGreaterThan(0);
     });
 
+    it('caps employee Social Security at the 2026 wage base but not Medicare', () => {
+      const inputs: ContractorVsEmployeeInputs = {
+        ...getDefaultInputs('USD'),
+        employeeSalary: 200000,
+        employeeBonusPercent: 0,
+        federalTaxBracket: 0.2,
+        stateTaxRate: 0,
+      };
+
+      const { employee } = calculateComparison_main(inputs);
+
+      // Hand check: income tax 200000 * 0.2 = 40000; FICA 184500 * 0.062 + 200000 * 0.0145 = 14339
+      expect(employee.incomeTax).toBeCloseTo(54339, 2);
+    });
+
     it('should produce consistent results', () => {
       const inputs = getDefaultInputs('USD');
 

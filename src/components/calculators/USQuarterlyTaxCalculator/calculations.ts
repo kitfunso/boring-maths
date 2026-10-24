@@ -10,14 +10,12 @@ import type {
   QuarterPayment,
   FilingStatus,
 } from './types';
+import { SE_TAX_MULTIPLIER, HIGH_INCOME_THRESHOLDS, QUARTERLY_DUE_DATES_2026 } from './types';
 import {
-  TAX_BRACKETS_2026,
-  STANDARD_DEDUCTIONS_2026,
-  SE_TAX_MULTIPLIER,
-  SS_WAGE_BASE_2026,
-  HIGH_INCOME_THRESHOLDS,
-  QUARTERLY_DUE_DATES_2026,
-} from './types';
+  FEDERAL_BRACKETS_2026,
+  STANDARD_DEDUCTION_2026,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+} from '../../../lib/us-tax-2026';
 
 export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterlyTaxResult {
   const {
@@ -31,7 +29,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   // Calculate Self-Employment Tax
   const seTaxableIncome = selfEmploymentIncome * SE_TAX_MULTIPLIER;
-  const ssSocialSecurityTax = Math.min(seTaxableIncome, SS_WAGE_BASE_2026) * 0.124;
+  const ssSocialSecurityTax = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.124;
   const ssMedicareTax = seTaxableIncome * 0.029;
   const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax;
 
@@ -39,7 +37,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   const halfSETax = selfEmploymentTax / 2;
 
   // Calculate Federal Income Tax
-  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
   const agi = expectedAnnualIncome - halfSETax;
   const taxableIncome = Math.max(0, agi - standardDeduction);
   const federalIncomeTax = calculateFederalTax(taxableIncome, filingStatus);
@@ -121,7 +119,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 }
 
 function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = TAX_BRACKETS_2026[filingStatus];
+  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingIncome = taxableIncome;
 

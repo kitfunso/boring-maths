@@ -7,6 +7,22 @@
  */
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  FEDERAL_BRACKETS_2026,
+  FEDERAL_TAX_YEAR,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+} from '../../lib/us-tax-2026';
+
+const usd = (n: number) => `$${n.toLocaleString('en-US')}`;
+const singleBrackets = FEDERAL_BRACKETS_2026.single
+  .map((b, i) =>
+    b.max === Infinity
+      ? `and ${b.rate}% (above ${usd(b.min)})`
+      : i === 0
+        ? `${b.rate}% (up to ${usd(b.max)})`
+        : `${b.rate}% (${usd(b.min + 1)} to ${usd(b.max)})`
+  )
+  .join(', ');
 
 const title = 'Best Free US Tax Calculators 2026: Tax Brackets, Paycheck, Self-Employment and More';
 const description =
@@ -74,14 +90,12 @@ const calculators = [
 
 const faqs = [
   {
-    question: 'What are the US federal tax brackets for 2025?',
-    answer:
-      'For 2025, the federal income tax brackets for single filers are 10% (up to $11,925), 12% ($11,926 to $48,475), 22% ($48,476 to $103,350), 24% ($103,351 to $197,300), 32% ($197,301 to $250,525), 35% ($250,526 to $626,350), and 37% (above $626,350). These brackets are progressive, meaning only the income within each range is taxed at that rate, not your entire income.',
+    question: `What are the US federal tax brackets for ${FEDERAL_TAX_YEAR}?`,
+    answer: `For ${FEDERAL_TAX_YEAR}, the federal income tax brackets for single filers are ${singleBrackets}. These brackets are progressive, meaning only the income within each range is taxed at that rate, not your entire income.`,
   },
   {
     question: 'How much self-employment tax do I owe?',
-    answer:
-      'Self-employment tax is 15.3% of your net self-employment income: 12.4% for Social Security (on income up to $176,100 in 2025) and 2.9% for Medicare (on all income, with an additional 0.9% on income above $200,000). The tax is calculated on 92.35% of your net earnings, and you can deduct half of the SE tax from your adjusted gross income.',
+    answer: `Self-employment tax is 15.3% of your net self-employment income: 12.4% for Social Security (on income up to $${SOCIAL_SECURITY_WAGE_BASE_2026.toLocaleString('en-US')} in 2026) and 2.9% for Medicare (on all income, with an additional 0.9% on income above $200,000). The tax is calculated on 92.35% of your net earnings, and you can deduct half of the SE tax from your adjusted gross income.`,
   },
   {
     question: 'How do I calculate quarterly estimated tax payments?',
@@ -101,7 +115,7 @@ const faqs = [
   {
     question: 'How much should I contribute to my 401k?',
     answer:
-      'At minimum, contribute enough to get your full employer match, which is free money. The 2025 employee contribution limit is $23,500 ($31,000 if you are 50 or older). Beyond the match, contributing more reduces your taxable income and grows tax-deferred. A common target is 15% of gross income including the employer match, though the right amount depends on your other savings and retirement timeline.',
+      'At minimum, contribute enough to get your full employer match, which is free money. The 2026 employee contribution limit is $24,500 ($32,500 if you are 50 or older). Beyond the match, contributing more reduces your taxable income and grows tax-deferred. A common target is 15% of gross income including the employer match, though the right amount depends on your other savings and retirement timeline.',
   },
 ];
 
@@ -147,7 +161,7 @@ const schemaData = {
         </nav>
         <h1>{title}</h1>
         <p class="subtitle">
-          Updated for 2025 tax year &bull; All calculators free &bull; No signup required
+          Updated for {FEDERAL_TAX_YEAR} tax year &bull; All calculators free &bull; No signup required
         </p>
       </header>
 

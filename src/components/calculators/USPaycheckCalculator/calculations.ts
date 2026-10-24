@@ -5,16 +5,16 @@
 import type { PaycheckInputs, PaycheckResult, FilingStatus } from './types';
 import {
   PAY_FREQUENCIES,
+  FEDERAL_STATUS,
   FEDERAL_TAX_BRACKETS_2026,
-  STANDARD_DEDUCTIONS_2026,
   STATE_TAX_DATA,
   SOCIAL_SECURITY_RATE,
-  SOCIAL_SECURITY_WAGE_BASE,
   MEDICARE_RATE,
   MEDICARE_ADDITIONAL_RATE,
   MEDICARE_ADDITIONAL_THRESHOLD_SINGLE,
   MEDICARE_ADDITIONAL_THRESHOLD_MARRIED,
 } from './types';
+import { STANDARD_DEDUCTION_2026, SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 
 export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const {
@@ -35,7 +35,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
 
   // Calculate taxable income (annual)
   const annualPreTaxDeductions = preTaxDeductions * payPeriods;
-  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTION_2026[FEDERAL_STATUS[filingStatus]];
   const taxableIncome = Math.max(0, grossSalary - annualPreTaxDeductions - standardDeduction);
 
   // Federal income tax (annual)
@@ -50,7 +50,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const stateTax = annualStateTax / payPeriods;
 
   // Social Security (6.2% up to wage base)
-  const ssWageBase = SOCIAL_SECURITY_WAGE_BASE;
+  const ssWageBase = SOCIAL_SECURITY_WAGE_BASE_2026;
   const ssableIncome = Math.min(grossSalary, ssWageBase);
   const annualSS = ssableIncome * SOCIAL_SECURITY_RATE;
   const socialSecurity = annualSS / payPeriods;

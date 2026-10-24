@@ -54,11 +54,12 @@ export const UK_MOTORCYCLE_RATE = 0.24;
 export const UK_BICYCLE_RATE = 0.2;
 
 // ---------------------------------------------------------------------------
-// US IRS Standard Mileage Rate (2025)
+// US IRS Standard Mileage Rate (2026)
 // ---------------------------------------------------------------------------
 
-/** Cents per mile for business use (2025 IRS rate: 67 cents) */
-export const US_IRS_RATE_2025 = 0.67;
+// IRS raised the 2026 rate mid-year (72.5 cents to 30 June), so the tool uses the rate in force now.
+export const US_IRS_RATE = 0.76;
+export const US_IRS_RATE_LABEL = '76c per mile (from 1 July 2026)';
 
 // ---------------------------------------------------------------------------
 // Estimated marginal tax rates (for tax saving calculation)

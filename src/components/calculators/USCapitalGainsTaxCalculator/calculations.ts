@@ -5,13 +5,8 @@
  */
 
 import type { USCapitalGainsInputs, USCapitalGainsResult, FilingStatus } from './types';
-import {
-  LTCG_BRACKETS_2026,
-  NIIT_THRESHOLDS,
-  NIIT_RATE,
-  INCOME_TAX_BRACKETS_2026,
-  STANDARD_DEDUCTIONS_2026,
-} from './types';
+import { LTCG_BRACKETS_2026, NIIT_THRESHOLDS, NIIT_RATE } from './types';
+import { FEDERAL_BRACKETS_2026, STANDARD_DEDUCTION_2026 } from '../../../lib/us-tax-2026';
 
 export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapitalGainsResult {
   const { filingStatus, purchasePrice, salePrice, holdingPeriodMonths, otherIncome } = inputs;
@@ -38,7 +33,7 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   }
 
   // Standard deduction
-  const standardDeduction = STANDARD_DEDUCTIONS_2026[filingStatus];
+  const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
 
   // Calculate taxable income (simplified)
   const taxableOtherIncome = Math.max(0, otherIncome - standardDeduction);
@@ -144,7 +139,7 @@ function calculateShortTermTax(
   taxableOtherIncome: number,
   filingStatus: FilingStatus
 ): { tax: number; marginalRate: number } {
-  const brackets = INCOME_TAX_BRACKETS_2026[filingStatus];
+  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
   let tax = 0;
   let remainingGain = gain;
   let marginalRate = 10;
