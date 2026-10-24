@@ -76,11 +76,6 @@ export const SE_TAX_BASE_MULTIPLIER = 0.9235;
 export const EMPLOYER_FICA_RATE = 0.0765;
 
 /**
- * Social Security wage base limit (2026)
- */
-export const SS_WAGE_BASE = 184500;
-
-/**
  * Standard work assumptions
  */
 export const HOURS_PER_WEEK = 40;

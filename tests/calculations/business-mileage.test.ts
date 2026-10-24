@@ -14,10 +14,10 @@ describe('BusinessMileageCalculator', () => {
 
       // 100 miles/week * 48 weeks = 4,800 miles
       expect(result.annualMiles).toBe(4800);
-      // US: 4,800 * $0.67 = $3,216
-      expect(result.taxDeduction).toBe(3216);
+      // US: 4,800 * $0.76 = $3,648
+      expect(result.taxDeduction).toBe(3648);
       expect(result.rateBreakdown).toHaveLength(1);
-      expect(result.rateBreakdown[0].rate).toBe(0.67);
+      expect(result.rateBreakdown[0].rate).toBe(0.76);
     });
 
     it('should calculate with default GBP inputs', () => {
@@ -100,8 +100,8 @@ describe('BusinessMileageCalculator', () => {
       const result = calculateBusinessMileage(inputs);
 
       // US rate: 22%
-      // Deduction $3,216 * 0.22 = $707.52
-      expect(result.annualTaxSaving).toBe(707.52);
+      // Deduction $3,648 * 0.22 = $802.56
+      expect(result.annualTaxSaving).toBe(802.56);
       expect(result.estimatedTaxRate).toBe(0.22);
     });
 
@@ -109,8 +109,8 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('USD');
       const result = calculateBusinessMileage(inputs);
 
-      // $3,216 / 12 = $268
-      expect(result.monthlyEquivalent).toBe(268);
+      // $3,648 / 12 = $304
+      expect(result.monthlyEquivalent).toBe(304);
     });
 
     it('should provide electric vehicle note when enabled', () => {
@@ -181,7 +181,7 @@ describe('BusinessMileageCalculator', () => {
 
       expect(result.ukRateFirst10k).toBe(0.45);
       expect(result.ukRateOver10k).toBe(0.25);
-      expect(result.usIRSRate).toBe(0.67);
+      expect(result.usIRSRate).toBe(0.76);
     });
 
     it('should use EUR currency with US region', () => {
@@ -189,7 +189,7 @@ describe('BusinessMileageCalculator', () => {
       // EUR defaults to US region
       expect(inputs.region).toBe('US');
       const result = calculateBusinessMileage(inputs);
-      expect(result.rateBreakdown[0].rate).toBe(0.67);
+      expect(result.rateBreakdown[0].rate).toBe(0.76);
     });
   });
 });

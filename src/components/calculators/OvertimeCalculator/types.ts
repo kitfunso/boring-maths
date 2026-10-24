@@ -5,6 +5,7 @@
  */
 
 import type { Currency } from '../../../lib/regions';
+import { FEDERAL_BRACKETS_2026 } from '../../../lib/us-tax-2026';
 
 /**
  * Tax bracket information
@@ -112,37 +113,25 @@ export interface OvertimeCalculatorResult {
 }
 
 /**
- * US Federal Tax Brackets 2024/2025 (simplified)
+ * US Federal Tax Brackets 2026, derived from the shared table (decimal rates)
  */
-export const US_TAX_BRACKETS: Record<string, TaxBracket[]> = {
-  single: [
-    { rate: 0.1, min: 0, max: 11925, label: '10%' },
-    { rate: 0.12, min: 11925, max: 48475, label: '12%' },
-    { rate: 0.22, min: 48475, max: 103350, label: '22%' },
-    { rate: 0.24, min: 103350, max: 197300, label: '24%' },
-    { rate: 0.32, min: 197300, max: 250525, label: '32%' },
-    { rate: 0.35, min: 250525, max: 626350, label: '35%' },
-    { rate: 0.37, min: 626350, max: Infinity, label: '37%' },
-  ],
-  married: [
-    { rate: 0.1, min: 0, max: 23850, label: '10%' },
-    { rate: 0.12, min: 23850, max: 96950, label: '12%' },
-    { rate: 0.22, min: 96950, max: 206700, label: '22%' },
-    { rate: 0.24, min: 206700, max: 394600, label: '24%' },
-    { rate: 0.32, min: 394600, max: 501050, label: '32%' },
-    { rate: 0.35, min: 501050, max: 751600, label: '35%' },
-    { rate: 0.37, min: 751600, max: Infinity, label: '37%' },
-  ],
-  head_of_household: [
-    { rate: 0.1, min: 0, max: 17000, label: '10%' },
-    { rate: 0.12, min: 17000, max: 64850, label: '12%' },
-    { rate: 0.22, min: 64850, max: 103350, label: '22%' },
-    { rate: 0.24, min: 103350, max: 197300, label: '24%' },
-    { rate: 0.32, min: 197300, max: 250500, label: '32%' },
-    { rate: 0.35, min: 250500, max: 626350, label: '35%' },
-    { rate: 0.37, min: 626350, max: Infinity, label: '37%' },
-  ],
-};
+const OVERTIME_STATUS_MAP = {
+  single: 'single',
+  married: 'married_jointly',
+  head_of_household: 'head_of_household',
+} as const;
+
+export const US_TAX_BRACKETS: Record<string, TaxBracket[]> = Object.fromEntries(
+  Object.entries(OVERTIME_STATUS_MAP).map(([key, status]) => [
+    key,
+    FEDERAL_BRACKETS_2026[status].map((b) => ({
+      rate: b.rate / 100,
+      min: b.min,
+      max: b.max,
+      label: `${b.rate}%`,
+    })),
+  ])
+);
 
 /**
  * UK Tax Brackets 2024/2025

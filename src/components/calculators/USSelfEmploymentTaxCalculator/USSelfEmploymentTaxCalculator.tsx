@@ -1,11 +1,6 @@
 import { calculateSelfEmploymentTax, formatCurrency, formatPercent } from './calculations';
-import {
-  getDefaultInputs,
-  STANDARD_DEDUCTIONS_2026,
-  SE_TAX_RATES,
-  type USSelfEmploymentTaxInputs,
-  type FilingStatus,
-} from './types';
+import { getDefaultInputs, type USSelfEmploymentTaxInputs, type FilingStatus } from './types';
+import { STANDARD_DEDUCTION_2026, SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
@@ -132,7 +127,7 @@ export default function USSelfEmploymentTaxCalculator() {
                 onChange={(value) => updateInput('deductionType', value as 'standard' | 'itemized')}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
-                Standard deduction: {formatCurrency(STANDARD_DEDUCTIONS_2026[inputs.filingStatus])}
+                Standard deduction: {formatCurrency(STANDARD_DEDUCTION_2026[inputs.filingStatus])}
               </p>
             </div>
 
@@ -334,7 +329,7 @@ export default function USSelfEmploymentTaxCalculator() {
                 <div className="flex justify-between">
                   <span>Social Security wage base</span>
                   <span className="text-[var(--color-cream)]">
-                    {formatCurrency(SE_TAX_RATES.socialSecurityWageBase)}
+                    {formatCurrency(SOCIAL_SECURITY_WAGE_BASE_2026)}
                   </span>
                 </div>
                 <div className="flex justify-between">

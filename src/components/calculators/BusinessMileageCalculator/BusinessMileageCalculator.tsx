@@ -14,6 +14,7 @@ import {
 import {
   getDefaultInputs,
   VEHICLE_TYPE_OPTIONS,
+  US_IRS_RATE_LABEL,
   type BusinessMileageInputs,
   type MileageRegion,
 } from './types';
@@ -246,7 +247,7 @@ export default function BusinessMileageCalculator() {
                           : formatCurrency(comparisonResult.taxDeduction, 'USD')}
                       </div>
                       <div className="text-xs text-[var(--color-muted)] mt-1">
-                        67c per mile (2025)
+                        {US_IRS_RATE_LABEL}
                       </div>
                     </div>
                   </Grid>

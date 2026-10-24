@@ -7,20 +7,26 @@
  */
 
 import CategoryLayout from '../../../layouts/CategoryLayout.astro';
+import {
+  FEDERAL_BRACKETS_2026,
+  FEDERAL_TAX_YEAR,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+  STANDARD_DEDUCTION_2026,
+} from '../../../lib/us-tax-2026';
 
 const category = 'US Tax';
 const title = 'US Tax Calculators | Free Federal Tax Tools';
-const description =
-  'Free US tax calculators for 2025. Calculate federal income tax, self-employment tax, quarterly estimated payments, and capital gains tax. IRS-aligned calculations.';
+const description = `Free US tax calculators for ${FEDERAL_TAX_YEAR}. Calculate federal income tax, self-employment tax, quarterly estimated payments, and capital gains tax. IRS-aligned calculations.`;
 const keywords =
-  'us tax calculator, federal tax calculator, irs tax calculator, income tax calculator 2025, self employment tax calculator, 1099 tax calculator, quarterly tax calculator, capital gains tax calculator, tax bracket calculator';
+  'us tax calculator, federal tax calculator, irs tax calculator, income tax calculator 2026, self employment tax calculator, 1099 tax calculator, quarterly tax calculator, capital gains tax calculator, tax bracket calculator';
 const canonicalURL = '/calculators/us-tax';
+const usd = (n: number) => `$${n.toLocaleString('en-US')}`;
 
 const calculators = [
   {
     title: 'US Tax Bracket Calculator',
     description:
-      'Find your 2025 federal tax bracket, calculate tax owed, and see your effective vs marginal rate.',
+      'Find your 2026 federal tax bracket, calculate tax owed, and see your effective vs marginal rate.',
     href: '/calculators/us-tax-bracket-calculator/',
     icon: 'chart',
     color: 'blue',
@@ -60,34 +66,41 @@ const calculators = [
   canonicalURL={canonicalURL}
   icon="dollar"
   color="blue"
-  tagline="Free IRS-aligned tax calculators for the 2025 tax year"
+  tagline={`Free IRS-aligned tax calculators for the ${FEDERAL_TAX_YEAR} tax year`}
   calculators={calculators}
 >
   <p>
     Our US tax calculators help you understand your federal tax liability, plan quarterly payments,
-    and optimize your investment taxes. All calculations use the latest 2025 IRS tax rates and
+    and optimize your investment taxes. All calculations use the {FEDERAL_TAX_YEAR} IRS tax rates and
     thresholds.
   </p>
   <p>
     W-2 employees checking a tax bracket, freelancers calculating self-employment tax, and investors
     figuring out capital gains all get accurate numbers instantly.
   </p>
-  <h3>2025 Federal Tax Brackets (Single)</h3>
+  <h3>{FEDERAL_TAX_YEAR} Federal Tax Brackets (Single)</h3>
   <ul>
-    <li><strong>10%:</strong> $0 - $11,925</li>
-    <li><strong>12%:</strong> $11,926 - $48,475</li>
-    <li><strong>22%:</strong> $48,476 - $103,350</li>
-    <li><strong>24%:</strong> $103,351 - $197,300</li>
-    <li><strong>32%:</strong> $197,301 - $250,525</li>
-    <li><strong>35%:</strong> $250,526 - $626,350</li>
-    <li><strong>37%:</strong> Over $626,350</li>
+    {
+      FEDERAL_BRACKETS_2026.single.map((b) => (
+        <li>
+          <strong>{b.rate}%:</strong>{' '}
+          {b.max === Infinity
+            ? `Over ${usd(b.min)}`
+            : `${usd(b.min === 0 ? 0 : b.min + 1)} - ${usd(b.max)}`}
+        </li>
+      ))
+    }
   </ul>
-  <h3>Key Tax Rates for 2025</h3>
+  <h3>Key Tax Rates for {FEDERAL_TAX_YEAR}</h3>
   <ul>
-    <li><strong>Standard Deduction:</strong> $15,000 (single), $30,000 (married filing jointly)</li>
+    <li>
+      <strong>Standard Deduction:</strong>
+      {usd(STANDARD_DEDUCTION_2026.single)} (single), {usd(STANDARD_DEDUCTION_2026.married_jointly)} (married
+      filing jointly)
+    </li>
     <li><strong>Self-Employment Tax:</strong> 15.3% (12.4% Social Security + 2.9% Medicare)</li>
     <li><strong>Long-Term Capital Gains:</strong> 0%, 15%, or 20% depending on income</li>
     <li><strong>NIIT:</strong> Additional 3.8% on investment income for high earners</li>
-    <li><strong>Social Security Wage Base:</strong> $176,100</li>
+    <li><strong>Social Security Wage Base:</strong> {usd(SOCIAL_SECURITY_WAGE_BASE_2026)}</li>
   </ul>
 </CategoryLayout>

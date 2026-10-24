@@ -6,11 +6,9 @@
 
 import type { OvertimeCalculatorInputs, OvertimeCalculatorResult, TaxBracket } from './types';
 import { US_TAX_BRACKETS, UK_TAX_BRACKETS } from './types';
+import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
-
-/** Social Security wage base for 2025 */
-const SS_WAGE_BASE = 176100;
 
 /** Weeks per year */
 const WEEKS_PER_YEAR = 52;
@@ -49,7 +47,7 @@ function calculateMarginalTax(
   // Add FICA if applicable (US only)
   if (includeFICA && currency === 'USD') {
     // Social Security only up to wage base
-    const ssWagesRemaining = Math.max(0, SS_WAGE_BASE - baseIncome);
+    const ssWagesRemaining = Math.max(0, SOCIAL_SECURITY_WAGE_BASE_2026 - baseIncome);
     const ssWagesTaxed = Math.min(additionalIncome, ssWagesRemaining);
     const ssTax = ssWagesTaxed * 0.062;
     const medicareTax = additionalIncome * 0.0145;

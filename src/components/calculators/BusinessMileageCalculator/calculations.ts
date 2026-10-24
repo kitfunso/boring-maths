@@ -7,7 +7,7 @@
  *   - Bicycle: 20p flat
  *
  * US: IRS Standard Mileage Rate
- *   - 67 cents per mile (2025)
+ *   - 76 cents per mile (from 1 July 2026)
  */
 
 import type { BusinessMileageInputs, BusinessMileageResult, RateBreakdownLine } from './types';
@@ -16,7 +16,7 @@ import {
   UK_CAR_RATE_OVER_10K,
   UK_MOTORCYCLE_RATE,
   UK_BICYCLE_RATE,
-  US_IRS_RATE_2025,
+  US_IRS_RATE,
   ESTIMATED_TAX_RATES,
 } from './types';
 import type { Currency } from '../../../lib/regions';
@@ -86,14 +86,14 @@ function calculateUSDeduction(annualMiles: number): {
   deduction: number;
   breakdown: RateBreakdownLine[];
 } {
-  const amount = round2(annualMiles * US_IRS_RATE_2025);
+  const amount = round2(annualMiles * US_IRS_RATE);
   return {
     deduction: amount,
     breakdown: [
       {
-        label: 'IRS standard rate (2025)',
+        label: 'IRS standard rate (from 1 July 2026)',
         miles: annualMiles,
-        rate: US_IRS_RATE_2025,
+        rate: US_IRS_RATE,
         amount,
       },
     ],
@@ -136,7 +136,7 @@ export function calculateBusinessMileage(inputs: BusinessMileageInputs): Busines
     taxDeduction: deduction,
     ukRateFirst10k: UK_CAR_RATE_FIRST_10K,
     ukRateOver10k: UK_CAR_RATE_OVER_10K,
-    usIRSRate: US_IRS_RATE_2025,
+    usIRSRate: US_IRS_RATE,
     annualTaxSaving,
     monthlyEquivalent,
     electricVehicleNote: getElectricNote(region, vehicleType, isElectric),

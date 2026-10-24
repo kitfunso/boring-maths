@@ -41,10 +41,24 @@ export const TAX_YEARS = [2025, 2026] as const;
 export type TaxYear = (typeof TAX_YEARS)[number];
 export const DEFAULT_TAX_YEAR: TaxYear = 2026;
 
+import {
+  FEDERAL_BRACKETS_2026,
+  STANDARD_DEDUCTION_2026,
+  type FederalFilingStatus,
+} from '../../../lib/us-tax-2026';
+
 export interface TaxBracket {
   min: number;
   max: number;
   rate: number;
+}
+
+function sharedBrackets(): Record<FilingStatus, TaxBracket[]> {
+  const out = {} as Record<FilingStatus, TaxBracket[]>;
+  for (const status of Object.keys(FEDERAL_BRACKETS_2026) as FederalFilingStatus[]) {
+    out[status] = FEDERAL_BRACKETS_2026[status].map((b) => ({ ...b }));
+  }
+  return out;
 }
 
 // 2025: IRS rates and brackets page; 2026: Rev. Proc. 2025-32 section 4.01
@@ -87,44 +101,7 @@ export const TAX_BRACKETS: Record<TaxYear, Record<FilingStatus, TaxBracket[]>> =
       { min: 626350, max: Infinity, rate: 37 },
     ],
   },
-  2026: {
-    single: [
-      { min: 0, max: 12400, rate: 10 },
-      { min: 12400, max: 50400, rate: 12 },
-      { min: 50400, max: 105700, rate: 22 },
-      { min: 105700, max: 201775, rate: 24 },
-      { min: 201775, max: 256225, rate: 32 },
-      { min: 256225, max: 640600, rate: 35 },
-      { min: 640600, max: Infinity, rate: 37 },
-    ],
-    married_jointly: [
-      { min: 0, max: 24800, rate: 10 },
-      { min: 24800, max: 100800, rate: 12 },
-      { min: 100800, max: 211400, rate: 22 },
-      { min: 211400, max: 403550, rate: 24 },
-      { min: 403550, max: 512450, rate: 32 },
-      { min: 512450, max: 768700, rate: 35 },
-      { min: 768700, max: Infinity, rate: 37 },
-    ],
-    married_separately: [
-      { min: 0, max: 12400, rate: 10 },
-      { min: 12400, max: 50400, rate: 12 },
-      { min: 50400, max: 105700, rate: 22 },
-      { min: 105700, max: 201775, rate: 24 },
-      { min: 201775, max: 256225, rate: 32 },
-      { min: 256225, max: 384350, rate: 35 },
-      { min: 384350, max: Infinity, rate: 37 },
-    ],
-    head_of_household: [
-      { min: 0, max: 17700, rate: 10 },
-      { min: 17700, max: 67450, rate: 12 },
-      { min: 67450, max: 105700, rate: 22 },
-      { min: 105700, max: 201750, rate: 24 },
-      { min: 201750, max: 256200, rate: 32 },
-      { min: 256200, max: 640600, rate: 35 },
-      { min: 640600, max: Infinity, rate: 37 },
-    ],
-  },
+  2026: sharedBrackets(),
 };
 
 // Standard deductions: Rev. Proc. 2025-32 section 3.01 (2025, post-OBBBA), 4.14 (2026)
@@ -135,12 +112,7 @@ export const STANDARD_DEDUCTIONS: Record<TaxYear, Record<FilingStatus, number>> 
     married_separately: 15750,
     head_of_household: 23625,
   },
-  2026: {
-    single: 16100,
-    married_jointly: 32200,
-    married_separately: 16100,
-    head_of_household: 24150,
-  },
+  2026: STANDARD_DEDUCTION_2026,
 };
 
 export const FILING_STATUS_LABELS: Record<FilingStatus, string> = {
