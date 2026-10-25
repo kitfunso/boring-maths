@@ -233,7 +233,7 @@ export default function AviosDestinationFinder() {
                   min={0}
                   step={1000}
                   value={inputs.aviosBudget}
-                  onChange={(e) => updateInput('aviosBudget', Number(e.target.value))}
+                  onChange={(e) => updateInput('aviosBudget', Number(e.currentTarget.value))}
                 />
               </div>
               <div>

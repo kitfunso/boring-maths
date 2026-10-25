@@ -148,7 +148,7 @@ export default function SleepCalculator() {
                   type="time"
                   value={inputs.wakeTime}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    updateInput('wakeTime', e.target.value)
+                    updateInput('wakeTime', e.currentTarget.value)
                   }
                 />
               </div>
@@ -165,7 +165,7 @@ export default function SleepCalculator() {
                   type="time"
                   value={inputs.bedTime}
                   onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    updateInput('bedTime', e.target.value)
+                    updateInput('bedTime', e.currentTarget.value)
                   }
                 />
               </div>

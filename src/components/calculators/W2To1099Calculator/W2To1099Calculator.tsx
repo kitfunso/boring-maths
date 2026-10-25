@@ -215,7 +215,7 @@ export default function W2To1099Calculator() {
               <Select
                 id="state"
                 value={inputs.state}
-                onChange={(e) => updateInput('state', e.currentTarget.value)}
+                onChange={(value) => updateInput('state', value)}
                 options={US_STATES.map((s) => ({ value: s.value, label: s.label }))}
               />
             </div>

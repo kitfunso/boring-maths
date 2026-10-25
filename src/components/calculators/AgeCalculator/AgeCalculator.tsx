@@ -46,7 +46,7 @@ export default function AgeCalculator() {
                 id="birthDate"
                 type="date"
                 value={inputs.birthDate}
-                onChange={(e) => updateInput('birthDate', e.target.value)}
+                onChange={(e) => updateInput('birthDate', e.currentTarget.value)}
                 className="w-full px-4 py-3 bg-[var(--color-night)] border border-white/10 rounded-xl
                          text-[var(--color-cream)] focus:border-[var(--color-accent)]
                          focus:ring-2 focus:ring-[var(--color-accent)]/20 transition-all"
@@ -60,7 +60,7 @@ export default function AgeCalculator() {
                 id="targetDate"
                 type="date"
                 value={inputs.targetDate}
-                onChange={(e) => updateInput('targetDate', e.target.value)}
+                onChange={(e) => updateInput('targetDate', e.currentTarget.value)}
                 className="w-full px-4 py-3 bg-[var(--color-night)] border border-white/10 rounded-xl
                          text-[var(--color-cream)] focus:border-[var(--color-accent)]
                          focus:ring-2 focus:ring-[var(--color-accent)]/20 transition-all"

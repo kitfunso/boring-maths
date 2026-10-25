@@ -55,7 +55,7 @@ export default function ABVCalculator() {
   const stylesByType = COMMON_STYLES.filter((s) => s.type === inputs.beverageType);
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="ABV Calculator"
@@ -104,7 +104,7 @@ export default function ABVCalculator() {
                   id="og"
                   type="number"
                   value={inputs.originalGravity}
-                  onChange={(value) => updateInput('originalGravity', Number(value))}
+                  onChange={(e) => updateInput('originalGravity', Number(e.currentTarget.value))}
                   min={0.99}
                   max={1.2}
                   step={0.001}
@@ -119,7 +119,7 @@ export default function ABVCalculator() {
                   id="fg"
                   type="number"
                   value={inputs.finalGravity}
-                  onChange={(value) => updateInput('finalGravity', Number(value))}
+                  onChange={(e) => updateInput('finalGravity', Number(e.currentTarget.value))}
                   min={0.98}
                   max={1.1}
                   step={0.001}
@@ -156,7 +156,7 @@ export default function ABVCalculator() {
                     id="measTemp"
                     type="number"
                     value={inputs.measurementTemp}
-                    onChange={(value) => updateInput('measurementTemp', Number(value))}
+                    onChange={(e) => updateInput('measurementTemp', Number(e.currentTarget.value))}
                     min={32}
                     max={212}
                   />
@@ -167,7 +167,7 @@ export default function ABVCalculator() {
                     id="calTemp"
                     type="number"
                     value={inputs.calibrationTemp}
-                    onChange={(value) => updateInput('calibrationTemp', Number(value))}
+                    onChange={(e) => updateInput('calibrationTemp', Number(e.currentTarget.value))}
                     min={32}
                     max={212}
                   />
@@ -185,7 +185,6 @@ export default function ABVCalculator() {
               label="Alcohol By Volume"
               value={formatABV(result.abv)}
               subtitle={abvCategory.label}
-              valueColor="success"
             />
 
             {/* Key Metrics */}

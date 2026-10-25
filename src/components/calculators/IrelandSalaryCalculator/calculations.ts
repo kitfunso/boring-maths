@@ -31,6 +31,10 @@ export const WEEKS_PER_YEAR = 52;
 // Rate rises from 4.2% (Jan-Sep 2026) to 4.35% (from 1 Oct 2026).
 // Blended full-year 2026 rate used for an annual estimate.
 export const PRSI_RATE = 0.042375;
+// Weekly PRSI credit (subclass AX): 12 euro, cut by one sixth of weekly pay above 352.01
+export const PRSI_CREDIT_MAX_WEEKLY = 12;
+export const PRSI_CREDIT_START = 352.01;
+export const PRSI_CREDIT_TAPER = 6;
 
 export interface IrelandSalaryInputs {
   grossAnnualSalary: number;
@@ -88,12 +92,15 @@ function calculateUSC(gross: number): number {
 
 /**
  * PRSI (Class A employee): nil if weekly earnings are at or below the exemption,
- * otherwise the blended full-year rate on the full gross.
+ * otherwise the blended full-year rate on the full gross, less the weekly PRSI
+ * credit (12 euro, falling by one sixth of weekly pay above 352.01; nil from 424).
  */
 function calculatePRSI(gross: number): number {
   const weeklyEarnings = gross / WEEKS_PER_YEAR;
   if (weeklyEarnings <= PRSI_WEEKLY_EXEMPTION) return 0;
-  return gross * PRSI_RATE;
+  const taper = Math.max(0, weeklyEarnings - PRSI_CREDIT_START) / PRSI_CREDIT_TAPER;
+  const weeklyCredit = Math.max(0, PRSI_CREDIT_MAX_WEEKLY - taper);
+  return Math.max(0, gross * PRSI_RATE - weeklyCredit * WEEKS_PER_YEAR);
 }
 
 export function calculateIrelandSalary(inputs: IrelandSalaryInputs): IrelandSalaryResult {

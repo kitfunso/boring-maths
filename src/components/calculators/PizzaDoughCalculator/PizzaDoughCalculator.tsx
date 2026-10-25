@@ -62,7 +62,7 @@ export default function PizzaDoughCalculator() {
   ].join('');
 
   return (
-    <ThemeProvider defaultColor="coral">
+    <ThemeProvider defaultColor="red">
       <Card variant="elevated">
         <CalculatorHeader
           title="Pizza Dough Calculator"
@@ -106,7 +106,10 @@ export default function PizzaDoughCalculator() {
                   step={1}
                   value={inputs.numberOfPizzas}
                   onChange={(e) =>
-                    updateInput('numberOfPizzas', Math.min(20, Math.max(1, Number(e.target.value))))
+                    updateInput(
+                      'numberOfPizzas',
+                      Math.min(20, Math.max(1, Number(e.currentTarget.value)))
+                    )
                   }
                 />
               </div>
@@ -213,13 +216,13 @@ export default function PizzaDoughCalculator() {
                     : `${result.riseTimeHours} hr`
                 }
                 sublabel="room temp (~22 C)"
-                valueColor="text-[var(--color-accent)]"
+                valueColor="themed"
               />
               <MetricCard
                 label="Oven Temp"
                 value={`${result.ovenTempC} C`}
                 sublabel={`${result.ovenTempF} F`}
-                valueColor="text-orange-400"
+                valueColor="warning"
               />
               <MetricCard
                 label="Hydration"

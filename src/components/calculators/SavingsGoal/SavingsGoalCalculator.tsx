@@ -78,7 +78,7 @@ export default function SavingsGoalCalculator() {
                   min={0}
                   step={1000}
                   value={inputs.goalAmount}
-                  onChange={(e) => updateInput('goalAmount', Number(e.target.value))}
+                  onChange={(e) => updateInput('goalAmount', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -91,7 +91,7 @@ export default function SavingsGoalCalculator() {
                   min={0}
                   step={100}
                   value={inputs.currentSavings}
-                  onChange={(e) => updateInput('currentSavings', Number(e.target.value))}
+                  onChange={(e) => updateInput('currentSavings', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -123,7 +123,7 @@ export default function SavingsGoalCalculator() {
                   max={20}
                   step={0.5}
                   value={Math.round(inputs.annualReturn * 100 * 10) / 10}
-                  onChange={(e) => updateInput('annualReturn', Number(e.target.value) / 100)}
+                  onChange={(e) => updateInput('annualReturn', Number(e.currentTarget.value) / 100)}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   7% is typical for diversified investments
@@ -139,7 +139,9 @@ export default function SavingsGoalCalculator() {
                   max={15}
                   step={0.5}
                   value={Math.round(inputs.inflationRate * 100 * 10) / 10}
-                  onChange={(e) => updateInput('inflationRate', Number(e.target.value) / 100)}
+                  onChange={(e) =>
+                    updateInput('inflationRate', Number(e.currentTarget.value) / 100)
+                  }
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">Historical average is 2-3%</p>
               </div>

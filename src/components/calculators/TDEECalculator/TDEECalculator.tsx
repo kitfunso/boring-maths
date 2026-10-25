@@ -105,7 +105,7 @@ export default function TDEECalculator() {
               <Input
                 type="number"
                 value={inputs.age}
-                onChange={(v) => updateInput('age', Number(v))}
+                onChange={(e) => updateInput('age', Number(e.currentTarget.value))}
                 min={15}
                 max={100}
               />
@@ -119,8 +119,11 @@ export default function TDEECalculator() {
               <Input
                 type="number"
                 value={inputs.unitSystem === 'metric' ? inputs.weightKg : inputs.weightLbs}
-                onChange={(v) =>
-                  updateInput(inputs.unitSystem === 'metric' ? 'weightKg' : 'weightLbs', Number(v))
+                onChange={(e) =>
+                  updateInput(
+                    inputs.unitSystem === 'metric' ? 'weightKg' : 'weightLbs',
+                    Number(e.currentTarget.value)
+                  )
                 }
                 min={30}
                 max={300}
@@ -135,7 +138,7 @@ export default function TDEECalculator() {
               <Input
                 type="number"
                 value={inputs.heightCm}
-                onChange={(v) => updateInput('heightCm', Number(v))}
+                onChange={(e) => updateInput('heightCm', Number(e.currentTarget.value))}
                 min={100}
                 max={250}
               />
@@ -147,7 +150,7 @@ export default function TDEECalculator() {
                 <Input
                   type="number"
                   value={inputs.heightFeet}
-                  onChange={(v) => updateInput('heightFeet', Number(v))}
+                  onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                   min={3}
                   max={8}
                 />
@@ -157,7 +160,7 @@ export default function TDEECalculator() {
                 <Input
                   type="number"
                   value={inputs.heightInches}
-                  onChange={(v) => updateInput('heightInches', Number(v))}
+                  onChange={(e) => updateInput('heightInches', Number(e.currentTarget.value))}
                   min={0}
                   max={11}
                 />
@@ -191,17 +194,17 @@ export default function TDEECalculator() {
             <MetricCard
               label="BMR"
               value={`${result.bmr.toLocaleString()}`}
-              subtitle="cal/day at rest"
+              sublabel="cal/day at rest"
             />
             <MetricCard
               label="To Lose"
               value={`${result.goalCalories.lose.toLocaleString()}`}
-              subtitle="cal/day (-500)"
+              sublabel="cal/day (-500)"
             />
             <MetricCard
               label="To Gain"
               value={`${result.goalCalories.gain.toLocaleString()}`}
-              subtitle="cal/day (+500)"
+              sublabel="cal/day (+500)"
             />
           </Grid>
 
@@ -237,8 +240,22 @@ export default function TDEECalculator() {
           </Alert>
 
           <div class="flex gap-3 flex-wrap">
-            <ShareResults text={shareText} title="TDEE Calculator Results" />
-            <PrintResults />
+            <ShareResults result={shareText} calculatorName="TDEE Calculator Results" />
+            <PrintResults
+              title="TDEE Calculator Results"
+              results={[
+                { label: 'TDEE', value: `${result.tdee.toLocaleString()} cal/day` },
+                { label: 'BMR', value: `${result.bmr.toLocaleString()} cal/day` },
+                {
+                  label: 'Weight Loss',
+                  value: `${result.goalCalories.lose.toLocaleString()} cal/day`,
+                },
+                {
+                  label: 'Weight Gain',
+                  value: `${result.goalCalories.gain.toLocaleString()} cal/day`,
+                },
+              ]}
+            />
           </div>
         </div>
       </Card>

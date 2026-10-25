@@ -2,14 +2,7 @@
  * US Paycheck Calculator Types
  */
 
-import { FEDERAL_BRACKETS_2026, type FederalFilingStatus } from '../../../lib/us-tax-2026';
-
-interface FederalBracketWithBase {
-  min: number;
-  max: number;
-  rate: number;
-  base: number;
-}
+import type { FederalFilingStatus } from '../../../lib/us-tax-2026';
 
 export interface PaycheckInputs {
   grossSalary: number;
@@ -58,22 +51,6 @@ export const FEDERAL_STATUS: Record<FilingStatus, FederalFilingStatus> = {
   single: 'single',
   married: 'married_jointly',
   head: 'head_of_household',
-};
-
-// Decimal rates plus the cumulative tax at each bracket floor, derived from the shared percent table.
-function withBase(status: FederalFilingStatus): FederalBracketWithBase[] {
-  let base = 0;
-  return FEDERAL_BRACKETS_2026[status].map((b) => {
-    const row = { min: b.min, max: b.max, rate: b.rate / 100, base };
-    base += (b.max - b.min) * row.rate;
-    return row;
-  });
-}
-
-export const FEDERAL_TAX_BRACKETS_2026: Record<FilingStatus, FederalBracketWithBase[]> = {
-  single: withBase('single'),
-  married: withBase('married_jointly'),
-  head: withBase('head_of_household'),
 };
 
 // State tax rates (simplified - using flat/effective rates for most states)
@@ -132,12 +109,9 @@ export const STATE_TAX_DATA: Record<string, { name: string; rate: number; hasLoc
     DC: { name: 'Washington D.C.', rate: 8.5 },
   };
 
-// FICA rates for 2026
-export const SOCIAL_SECURITY_RATE = 0.062;
-export const MEDICARE_RATE = 0.0145;
 export const MEDICARE_ADDITIONAL_RATE = 0.009;
-export const MEDICARE_ADDITIONAL_THRESHOLD_SINGLE = 200000;
-export const MEDICARE_ADDITIONAL_THRESHOLD_MARRIED = 250000;
+// Employers withhold above $200,000 whatever the filing status (IRS Topic 560)
+export const MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD = 200000;
 
 export function getDefaultInputs(): PaycheckInputs {
   return {

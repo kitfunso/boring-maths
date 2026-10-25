@@ -27,7 +27,7 @@ describe('keyword cluster pipeline core', () => {
       { keyword: 'tax on salary uk', volume: '600' },
     ]);
 
-    const clusterIds = new Set(rows.map((row) => row.cluster_id));
+    const clusterIds = new Set(rows.map((row: { cluster_id: string }) => row.cluster_id));
     expect(clusterIds.size).toBe(1);
     expect(rows[0].cluster_size).toBe(3);
     expect(rows[1].cluster_size).toBe(3);

@@ -2,7 +2,7 @@
  * Yeast Pitch Rate Calculator Component
  * Calculate proper yeast cell counts for fermentation
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { YeastPitchRateInputs } from './types';
 import {
@@ -49,15 +49,21 @@ export function YeastPitchRateCalculator() {
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Batch Volume"
-                type="number"
-                value={inputs.batchVolume}
-                onChange={(v) => setInputs({ ...inputs, batchVolume: parseFloat(v) || 0 })}
-                min={0.5}
-                step={0.5}
-                suffix={inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}
-              />
+              <div>
+                <Label htmlFor="batch-volume">
+                  Batch Volume ({inputs.volumeUnit === 'gallons' ? 'gal' : 'L'})
+                </Label>
+                <Input
+                  id="batch-volume"
+                  type="number"
+                  value={inputs.batchVolume}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, batchVolume: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0.5}
+                  step={0.5}
+                />
+              </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
                   Unit
@@ -71,7 +77,7 @@ export function YeastPitchRateCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      volumeUnit: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                      volumeUnit: v as YeastPitchRateInputs['volumeUnit'],
                     })
                   }
                 />
@@ -103,7 +109,8 @@ export function YeastPitchRateCalculator() {
               min={1.02}
               max={1.13}
               step={0.001}
-              formatValue={(v) => v.toFixed(3)}
+              showValue
+              labels={{ current: (v) => v.toFixed(3) }}
             />
 
             <div className="grid grid-cols-3 gap-2">
@@ -136,7 +143,7 @@ export function YeastPitchRateCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    beerType: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                    beerType: v as YeastPitchRateInputs['beerType'],
                   })
                 }
               />
@@ -151,41 +158,59 @@ export function YeastPitchRateCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Yeast Details</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Yeast Format"
-              value={inputs.yeastFormat}
-              onChange={(v) => {
-                const format = YEAST_FORMATS.find((f) => f.value === v);
-                setInputs({
-                  ...inputs,
-                  yeastFormat: v,
-                  cellsPerPackage: format?.cellsPerPackage || 100,
-                });
-              }}
-              options={YEAST_FORMATS.map((f) => ({
-                value: f.value,
-                label: f.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="yeast-format">Yeast Format</Label>
+              <Select
+                id="yeast-format"
+                value={inputs.yeastFormat}
+                onChange={(v) => {
+                  const format = YEAST_FORMATS.find((f) => f.value === v);
+                  setInputs({
+                    ...inputs,
+                    yeastFormat: v as YeastPitchRateInputs['yeastFormat'],
+                    cellsPerPackage: format?.cellsPerPackage || 100,
+                  });
+                }}
+                options={YEAST_FORMATS.map((f) => ({
+                  value: f.value,
+                  label: f.label,
+                }))}
+              />
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Packages/Vials"
-                type="number"
-                value={inputs.packagesAvailable}
-                onChange={(v) => setInputs({ ...inputs, packagesAvailable: parseInt(v) || 1 })}
-                min={1}
-                max={10}
-              />
-              <Input
-                label="Cells per Package"
-                type="number"
-                value={inputs.cellsPerPackage}
-                onChange={(v) => setInputs({ ...inputs, cellsPerPackage: parseFloat(v) || 100 })}
-                min={50}
-                max={1000}
-                suffix="B"
-              />
+              <div>
+                <Label htmlFor="packages-vials">Packages/Vials</Label>
+                <Input
+                  id="packages-vials"
+                  type="number"
+                  value={inputs.packagesAvailable}
+                  onChange={(e) =>
+                    setInputs({
+                      ...inputs,
+                      packagesAvailable: parseInt(e.currentTarget.value) || 1,
+                    })
+                  }
+                  min={1}
+                  max={10}
+                />
+              </div>
+              <div>
+                <Label htmlFor="cells-per-package">Cells per Package (B)</Label>
+                <Input
+                  id="cells-per-package"
+                  type="number"
+                  value={inputs.cellsPerPackage}
+                  onChange={(e) =>
+                    setInputs({
+                      ...inputs,
+                      cellsPerPackage: parseFloat(e.currentTarget.value) || 100,
+                    })
+                  }
+                  min={50}
+                  max={1000}
+                />
+              </div>
             </div>
 
             <Slider
@@ -195,7 +220,8 @@ export function YeastPitchRateCalculator() {
               min={0}
               max={selectedYeastFormat?.maxAge || 180}
               step={1}
-              formatValue={(v) => `${v} days`}
+              showValue
+              labels={{ current: (v) => `${v} days` }}
             />
 
             <div className="rounded-lg bg-amber-900/20 p-3 ring-1 ring-amber-500/20">
@@ -248,7 +274,7 @@ export function YeastPitchRateCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      starterType: v as YeastPitchRateInputs[keyof YeastPitchRateInputs],
+                      starterType: v as YeastPitchRateInputs['starterType'],
                     })
                   }
                 />
@@ -261,7 +287,8 @@ export function YeastPitchRateCalculator() {
                 min={0.5}
                 max={4}
                 step={0.5}
-                formatValue={(v) => `${v} L`}
+                showValue
+                labels={{ current: (v) => `${v} L` }}
               />
 
               <div className="flex flex-wrap gap-2">
@@ -318,24 +345,21 @@ export function YeastPitchRateCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard label="Cells Needed" value={formatCells(results.cellsNeeded)} color="blue" />
+          <ResultCard label="Cells Needed" value={formatCells(results.cellsNeeded)} />
           <ResultCard
             label="Cells Available"
             value={formatCells(results.cellsAvailable)}
-            sublabel={inputs.useStarter ? 'with starter' : 'without starter'}
-            color={results.isPitchRateAdequate ? 'green' : 'purple'}
+            subtitle={inputs.useStarter ? 'with starter' : 'without starter'}
           />
           <ResultCard
             label="Packages Needed"
             value={results.packagesNeeded.toString()}
-            sublabel="without starter"
-            color="blue"
+            subtitle="without starter"
           />
           <ResultCard
             label="Yeast Viability"
             value={`${results.viability}%`}
-            sublabel={`at ${inputs.yeastAge} days`}
-            color={results.viability > 75 ? 'green' : results.viability > 50 ? 'purple' : 'blue'}
+            subtitle={`at ${inputs.yeastAge} days`}
           />
         </div>
 

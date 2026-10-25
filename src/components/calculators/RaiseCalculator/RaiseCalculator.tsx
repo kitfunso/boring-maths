@@ -68,7 +68,7 @@ export default function RaiseCalculator() {
                 min={0}
                 step={1000}
                 value={inputs.currentSalary}
-                onChange={(e) => updateInput('currentSalary', Number(e.target.value))}
+                onChange={(e) => updateInput('currentSalary', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -132,7 +132,9 @@ export default function RaiseCalculator() {
                   max={15}
                   step={0.5}
                   value={Math.round(inputs.investmentReturn * 100)}
-                  onChange={(e) => updateInput('investmentReturn', Number(e.target.value) / 100)}
+                  onChange={(e) =>
+                    updateInput('investmentReturn', Number(e.currentTarget.value) / 100)
+                  }
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   7% is typical for stock market
@@ -148,7 +150,9 @@ export default function RaiseCalculator() {
                   max={10}
                   step={0.5}
                   value={Math.round(inputs.annualGrowthRate * 100)}
-                  onChange={(e) => updateInput('annualGrowthRate', Number(e.target.value) / 100)}
+                  onChange={(e) =>
+                    updateInput('annualGrowthRate', Number(e.currentTarget.value) / 100)
+                  }
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   3% is typical for most careers

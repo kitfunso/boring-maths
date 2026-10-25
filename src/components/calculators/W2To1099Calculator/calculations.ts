@@ -23,7 +23,11 @@ import {
   BILLABLE_HOURS_RATIO,
   MONTHLY_BUSINESS_EXPENSES,
 } from './types';
-import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
+import {
+  EMPLOYEE_MEDICARE_RATE,
+  EMPLOYEE_SOCIAL_SECURITY_RATE,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+} from '../../../lib/us-tax-2026';
 
 /**
  * Calculate the equivalent 1099 rate from W2 compensation
@@ -53,7 +57,8 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
   const employerFicaLoss =
     baseSalary <= SOCIAL_SECURITY_WAGE_BASE_2026
       ? baseSalary * EMPLOYER_FICA_RATE
-      : SOCIAL_SECURITY_WAGE_BASE_2026 * 0.062 + baseSalary * 0.0145;
+      : SOCIAL_SECURITY_WAGE_BASE_2026 * EMPLOYEE_SOCIAL_SECURITY_RATE +
+        baseSalary * EMPLOYEE_MEDICARE_RATE;
 
   // Calculate self-employment tax (what contractor pays)
   // Social Security stops at the wage base; Medicare applies to all 92.35% of net income

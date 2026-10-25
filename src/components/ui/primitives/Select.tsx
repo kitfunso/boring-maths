@@ -9,7 +9,7 @@ export interface SelectOption<T = string> {
 
 export interface SelectProps<T = string> extends Omit<
   SelectHTMLAttributes<HTMLSelectElement>,
-  'onChange' | 'value'
+  'onChange' | 'value' | 'size'
 > {
   /** Options to display */
   options: SelectOption<T>[];
@@ -58,7 +58,7 @@ export function Select<T extends string>({
   const { tokens } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(e.target.value as T);
+    onChange(e.currentTarget.value as T);
   };
 
   if (variant === 'header') {

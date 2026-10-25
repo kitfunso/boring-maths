@@ -64,11 +64,11 @@ export default function CalorieCalculator() {
   const getGoalColor = () => {
     switch (inputs.goal) {
       case 'lose':
-        return 'text-red-400';
+        return 'error';
       case 'gain':
-        return 'text-green-400';
+        return 'success';
       default:
-        return 'text-[var(--color-accent)]';
+        return 'themed';
     }
   };
 
@@ -123,7 +123,7 @@ export default function CalorieCalculator() {
                 min={15}
                 max={100}
                 value={inputs.age}
-                onChange={(e) => updateInput('age', Number(e.target.value))}
+                onChange={(e) => updateInput('age', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -139,7 +139,7 @@ export default function CalorieCalculator() {
                   min={100}
                   max={250}
                   value={inputs.heightCm}
-                  onChange={(e) => updateInput('heightCm', Number(e.target.value))}
+                  onChange={(e) => updateInput('heightCm', Number(e.currentTarget.value))}
                 />
               </div>
             ) : (
@@ -154,7 +154,7 @@ export default function CalorieCalculator() {
                     min={3}
                     max={8}
                     value={inputs.heightFeet}
-                    onChange={(e) => updateInput('heightFeet', Number(e.target.value))}
+                    onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -167,7 +167,7 @@ export default function CalorieCalculator() {
                     min={0}
                     max={11}
                     value={inputs.heightInches}
-                    onChange={(e) => updateInput('heightInches', Number(e.target.value))}
+                    onChange={(e) => updateInput('heightInches', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -186,9 +186,9 @@ export default function CalorieCalculator() {
                 value={inputs.unitSystem === 'metric' ? inputs.weightKg : inputs.weightLbs}
                 onChange={(e) => {
                   if (inputs.unitSystem === 'metric') {
-                    updateInput('weightKg', Number(e.target.value));
+                    updateInput('weightKg', Number(e.currentTarget.value));
                   } else {
-                    updateInput('weightLbs', Number(e.target.value));
+                    updateInput('weightLbs', Number(e.currentTarget.value));
                   }
                 }}
               />

@@ -67,7 +67,7 @@ export default function BreakEvenCalculator() {
                 min={0}
                 step={100}
                 value={inputs.fixedCosts}
-                onChange={(e) => updateInput('fixedCosts', Number(e.target.value))}
+                onChange={(e) => updateInput('fixedCosts', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Rent, salaries, insurance, subscriptions, etc.
@@ -87,7 +87,7 @@ export default function BreakEvenCalculator() {
                   min={0}
                   step={1}
                   value={inputs.pricePerUnit}
-                  onChange={(e) => updateInput('pricePerUnit', Number(e.target.value))}
+                  onChange={(e) => updateInput('pricePerUnit', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -102,7 +102,9 @@ export default function BreakEvenCalculator() {
                   min={0}
                   step={1}
                   value={inputs.variableCostPerUnit}
-                  onChange={(e) => updateInput('variableCostPerUnit', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('variableCostPerUnit', Number(e.currentTarget.value))
+                  }
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Materials, shipping, transaction fees, etc.
@@ -122,7 +124,7 @@ export default function BreakEvenCalculator() {
                 min={0}
                 step={100}
                 value={inputs.targetProfit}
-                onChange={(e) => updateInput('targetProfit', Number(e.target.value))}
+                onChange={(e) => updateInput('targetProfit', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 See how many units to hit your profit goal

@@ -115,7 +115,7 @@ export default function MaterialsMarkupCalculator() {
                 min={0}
                 step={0.01}
                 value={inputs.costPrice}
-                onChange={(e) => updateInput('costPrice', Number(e.target.value))}
+                onChange={(e) => updateInput('costPrice', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -132,7 +132,7 @@ export default function MaterialsMarkupCalculator() {
                   min={0}
                   step={1}
                   value={inputs.markupPercent}
-                  onChange={(e) => updateInput('markupPercent', Number(e.target.value))}
+                  onChange={(e) => updateInput('markupPercent', Number(e.currentTarget.value))}
                 />
                 {/* Quick markup buttons */}
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -166,7 +166,7 @@ export default function MaterialsMarkupCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.sellingPrice}
-                  onChange={(e) => updateInput('sellingPrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('sellingPrice', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -184,7 +184,7 @@ export default function MaterialsMarkupCalculator() {
                   max={99.99}
                   step={1}
                   value={inputs.marginPercent}
-                  onChange={(e) => updateInput('marginPercent', Number(e.target.value))}
+                  onChange={(e) => updateInput('marginPercent', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -198,7 +198,7 @@ export default function MaterialsMarkupCalculator() {
                 min={1}
                 step={1}
                 value={inputs.quantity}
-                onChange={(e) => updateInput('quantity', Number(e.target.value))}
+                onChange={(e) => updateInput('quantity', Number(e.currentTarget.value))}
               />
             </div>
           </div>
@@ -241,13 +241,13 @@ export default function MaterialsMarkupCalculator() {
                     label="Markup"
                     value={formatPercent(result.markupPercent)}
                     sublabel="on cost"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Margin"
                     value={formatPercent(result.marginPercent)}
                     sublabel="on selling price"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Profit per Unit"
@@ -257,7 +257,7 @@ export default function MaterialsMarkupCalculator() {
                         ? `Total: ${formatCurrency(result.totalProfit, inputs.currency)}`
                         : 'per item'
                     }
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                 </Grid>
 

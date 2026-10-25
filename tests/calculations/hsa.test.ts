@@ -39,6 +39,19 @@ describe('HsaCalculator', () => {
       expect(result.remainingRoom).toBe(0);
     });
 
+    it('gives zero tax savings, not negative, when the employer alone passes the limit', () => {
+      const inputs = getDefaultInputs();
+      inputs.coverageType = 'individual';
+      inputs.age = 40;
+      inputs.annualContribution = 1000;
+      inputs.employerContribution = 5000;
+
+      const result = calculateHSA(inputs);
+
+      expect(result.totalAnnualTaxSavings).toBe(0);
+      expect(result.effectiveDiscount).toBe(0);
+    });
+
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
       inputs.annualContribution = 0;

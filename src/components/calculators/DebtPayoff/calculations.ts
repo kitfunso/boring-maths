@@ -36,7 +36,7 @@ function calculateMonthlyInterest(balance: number, annualRate: number): number {
 /**
  * Sort debts by strategy
  */
-function sortDebtsByStrategy(debts: Debt[], strategy: PayoffStrategy): Debt[] {
+function sortDebtsByStrategy<T extends Debt>(debts: T[], strategy: PayoffStrategy): T[] {
   const sorted = [...debts];
 
   if (strategy === 'avalanche') {

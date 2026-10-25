@@ -49,7 +49,7 @@ export default function USQuarterlyTaxCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="Quarterly Estimated Tax Calculator"
@@ -116,6 +116,29 @@ export default function USQuarterlyTaxCalculator() {
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Net profit from self-employment (after business expenses)
+              </p>
+            </div>
+
+            {/* W-2 Wages */}
+            <div>
+              <Label htmlFor="w2Wages">W-2 Wages</Label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
+                  $
+                </span>
+                <Input
+                  id="w2Wages"
+                  type="number"
+                  value={inputs.w2Wages}
+                  onChange={(e) => updateInput('w2Wages', Number(e.currentTarget.value))}
+                  min={0}
+                  step={1000}
+                  className="pl-8"
+                />
+              </div>
+              <p className="text-xs text-[var(--color-muted)] mt-1">
+                Salary from any job (part of the total above). Wages use up the Social Security
+                limit first.
               </p>
             </div>
 
@@ -245,11 +268,11 @@ export default function USQuarterlyTaxCalculator() {
                   </p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
                     {result.penaltyRisk === 'none' &&
-                      'Your payments meet safe harbor requirements.'}
+                      'Your withholding alone avoids an underpayment penalty.'}
                     {result.penaltyRisk === 'low' &&
-                      'Consider increasing payments to meet safe harbor.'}
+                      'Your withholding falls a little short of safe harbor. Make the payments below.'}
                     {result.penaltyRisk === 'high' &&
-                      'Increase payments to avoid underpayment penalties.'}
+                      'Without the payments below you would face an underpayment penalty.'}
                   </p>
                 </div>
               </div>
@@ -292,14 +315,20 @@ export default function USQuarterlyTaxCalculator() {
                 <p className="text-2xl font-semibold text-rose-400">
                   {formatCurrency(result.selfEmploymentTax)}
                 </p>
-                <p className="text-xs text-[var(--color-muted)] mt-1">15.3% on SE income</p>
+                <p className="text-xs text-[var(--color-muted)] mt-1">
+                  15.3% on 92.35% of SE profit
+                </p>
               </div>
               <div className="bg-white/5 rounded-xl p-4">
                 <p className="text-xs text-[var(--color-muted)]">Federal Income Tax</p>
                 <p className="text-2xl font-semibold text-blue-400">
                   {formatCurrency(result.federalIncomeTax)}
                 </p>
-                <p className="text-xs text-[var(--color-muted)] mt-1">Based on brackets</p>
+                <p className="text-xs text-[var(--color-muted)] mt-1">
+                  {result.qbiDeduction > 0
+                    ? `After the standard and ${formatCurrency(result.qbiDeduction)} QBI deductions`
+                    : 'After the standard deduction'}
+                </p>
               </div>
             </Grid>
 
@@ -330,7 +359,10 @@ export default function USQuarterlyTaxCalculator() {
 
             {/* Safe Harbor Rules */}
             <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
-              <h4 className="text-sm font-medium text-amber-400 mb-3">Safe Harbor Rules</h4>
+              <h4 className="text-sm font-medium text-amber-400 mb-1">Safe Harbor Rules</h4>
+              <p className="text-xs text-[var(--color-muted)] mb-3">
+                A tick means your withholding alone already covers that rule.
+              </p>
               <div className="space-y-3 text-sm text-[var(--color-subtle)]">
                 <div className="flex items-center gap-2">
                   <span
@@ -341,7 +373,7 @@ export default function USQuarterlyTaxCalculator() {
                     {result.meetsCurrentYearSafeHarbor ? '✓' : '✗'}
                   </span>
                   <span>
-                    Pay 90% of current year tax ({formatCurrency(result.estimatedTotalTax * 0.9)})
+                    Pay 90% of current year tax ({formatCurrency(result.currentYearSafeHarbor)})
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -357,7 +389,7 @@ export default function USQuarterlyTaxCalculator() {
                     {inputs.priorYearAGI > HIGH_INCOME_THRESHOLDS[inputs.filingStatus]
                       ? '110%'
                       : '100%'}{' '}
-                    of prior year tax ({formatCurrency(result.safeHarborAmount)})
+                    of prior year tax ({formatCurrency(result.priorYearSafeHarbor)})
                   </span>
                 </div>
                 <p className="text-xs text-[var(--color-muted)] mt-2">

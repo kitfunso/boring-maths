@@ -56,7 +56,7 @@ export default function OvulationCalculator() {
               <Input
                 type="date"
                 value={inputs.lastPeriodDate}
-                onChange={(v) => updateInput('lastPeriodDate', v)}
+                onChange={(e) => updateInput('lastPeriodDate', e.currentTarget.value)}
               />
             </div>
             <div>
@@ -64,7 +64,7 @@ export default function OvulationCalculator() {
               <Input
                 type="number"
                 value={inputs.cycleLength}
-                onChange={(v) => updateInput('cycleLength', Number(v))}
+                onChange={(e) => updateInput('cycleLength', Number(e.currentTarget.value))}
                 min={21}
                 max={45}
               />
@@ -85,12 +85,12 @@ export default function OvulationCalculator() {
             <MetricCard
               label="Fertile Window"
               value={`${formatDate(result.fertileWindowStart)}`}
-              subtitle={`to ${formatDate(result.fertileWindowEnd)}`}
+              sublabel={`to ${formatDate(result.fertileWindowEnd)}`}
             />
             <MetricCard
               label="Next Period"
               value={formatDate(result.nextPeriodDate)}
-              subtitle="Expected start date"
+              sublabel="Expected start date"
             />
           </Grid>
 
@@ -125,8 +125,18 @@ export default function OvulationCalculator() {
           </Alert>
 
           <div class="flex gap-3 flex-wrap">
-            <ShareResults text={shareText} title="Ovulation Calculator Results" />
-            <PrintResults />
+            <ShareResults result={shareText} calculatorName="Ovulation Calculator Results" />
+            <PrintResults
+              title="Ovulation Calculator Results"
+              results={[
+                { label: 'Estimated Ovulation', value: formatDate(result.ovulationDate) },
+                {
+                  label: 'Fertile Window',
+                  value: `${formatDate(result.fertileWindowStart)} - ${formatDate(result.fertileWindowEnd)}`,
+                },
+                { label: 'Next Period', value: formatDate(result.nextPeriodDate) },
+              ]}
+            />
           </div>
         </div>
       </Card>

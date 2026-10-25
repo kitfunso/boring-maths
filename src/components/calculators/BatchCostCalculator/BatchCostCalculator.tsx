@@ -2,7 +2,7 @@
  * Batch Cost Calculator Component
  * Calculate material costs, labor, and pricing for crafts
  */
-import { ResultCard, Input, Select, Slider } from '../../ui';
+import { ResultCard, Input, Select, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { BatchCostInputs, MaterialItem } from './types';
 import {
@@ -80,31 +80,41 @@ export function BatchCostCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Details</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Craft Type"
-              value={inputs.craftType}
-              onChange={handleCraftTypeChange}
-              options={CRAFT_TYPES.map((t) => ({
-                value: t.value,
-                label: t.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="craft-type">Craft Type</Label>
+              <Select
+                id="craft-type"
+                value={inputs.craftType}
+                onChange={handleCraftTypeChange}
+                options={CRAFT_TYPES.map((t) => ({
+                  value: t.value,
+                  label: t.label,
+                }))}
+              />
+            </div>
 
-            <Input
-              label="Batch Name"
-              type="text"
-              value={inputs.batchName}
-              onChange={(v) => setInputs({ ...inputs, batchName: v })}
-            />
+            <div>
+              <Label htmlFor="batch-name">Batch Name</Label>
+              <Input
+                id="batch-name"
+                type="text"
+                value={inputs.batchName}
+                onChange={(e) => setInputs({ ...inputs, batchName: e.currentTarget.value })}
+              />
+            </div>
 
-            <Input
-              label="Units Produced"
-              type="number"
-              value={inputs.unitsProduced}
-              onChange={(v) => setInputs({ ...inputs, unitsProduced: parseInt(v) || 1 })}
-              min={1}
-              suffix="units"
-            />
+            <div>
+              <Label htmlFor="units-produced">Units Produced (units)</Label>
+              <Input
+                id="units-produced"
+                type="number"
+                value={inputs.unitsProduced}
+                onChange={(e) =>
+                  setInputs({ ...inputs, unitsProduced: parseInt(e.currentTarget.value) || 1 })
+                }
+                min={1}
+              />
+            </div>
           </div>
         </div>
 
@@ -128,6 +138,7 @@ export function BatchCostCalculator() {
                 <div className="mb-2 flex items-center justify-between">
                   <input
                     type="text"
+                    aria-label="Material name"
                     value={material.name}
                     onChange={(e) =>
                       updateMaterial(material.id, {
@@ -147,8 +158,14 @@ export function BatchCostCalculator() {
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <div>
-                    <label className="mb-1 block text-xs text-[var(--color-subtle)]">Qty</label>
+                    <label
+                      htmlFor={`material-qty-${material.id}`}
+                      className="mb-1 block text-xs text-[var(--color-subtle)]"
+                    >
+                      Qty
+                    </label>
                     <input
+                      id={`material-qty-${material.id}`}
                       type="number"
                       value={material.quantity}
                       onChange={(e) =>
@@ -162,8 +179,14 @@ export function BatchCostCalculator() {
                     />
                   </div>
                   <div>
-                    <label className="mb-1 block text-xs text-[var(--color-subtle)]">Unit</label>
+                    <label
+                      htmlFor={`material-unit-${material.id}`}
+                      className="mb-1 block text-xs text-[var(--color-subtle)]"
+                    >
+                      Unit
+                    </label>
                     <select
+                      id={`material-unit-${material.id}`}
                       value={material.unit}
                       onChange={(e) =>
                         updateMaterial(material.id, {
@@ -180,8 +203,14 @@ export function BatchCostCalculator() {
                     </select>
                   </div>
                   <div>
-                    <label className="mb-1 block text-xs text-[var(--color-subtle)]">$/unit</label>
+                    <label
+                      htmlFor={`material-cost-${material.id}`}
+                      className="mb-1 block text-xs text-[var(--color-subtle)]"
+                    >
+                      $/unit
+                    </label>
                     <input
+                      id={`material-cost-${material.id}`}
                       type="number"
                       value={material.costPerUnit}
                       onChange={(e) =>
@@ -217,23 +246,31 @@ export function BatchCostCalculator() {
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Labor Hours"
-                type="number"
-                value={inputs.laborHours}
-                onChange={(v) => setInputs({ ...inputs, laborHours: parseFloat(v) || 0 })}
-                min={0}
-                step={0.25}
-                suffix="hrs"
-              />
-              <Input
-                label="Hourly Rate"
-                type="number"
-                value={inputs.laborRate}
-                onChange={(v) => setInputs({ ...inputs, laborRate: parseFloat(v) || 0 })}
-                min={0}
-                suffix="$/hr"
-              />
+              <div>
+                <Label htmlFor="labor-hours">Labor Hours (hrs)</Label>
+                <Input
+                  id="labor-hours"
+                  type="number"
+                  value={inputs.laborHours}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, laborHours: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0}
+                  step={0.25}
+                />
+              </div>
+              <div>
+                <Label htmlFor="hourly-rate">Hourly Rate ($/hr)</Label>
+                <Input
+                  id="hourly-rate"
+                  type="number"
+                  value={inputs.laborRate}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, laborRate: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0}
+                />
+              </div>
             </div>
 
             <Slider
@@ -243,7 +280,8 @@ export function BatchCostCalculator() {
               min={0}
               max={50}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
 
             <div className="flex flex-wrap gap-2">
@@ -262,15 +300,22 @@ export function BatchCostCalculator() {
               ))}
             </div>
 
-            <Input
-              label="Packaging Cost per Unit"
-              type="number"
-              value={inputs.packagingCostPerUnit}
-              onChange={(v) => setInputs({ ...inputs, packagingCostPerUnit: parseFloat(v) || 0 })}
-              min={0}
-              step={0.1}
-              suffix="$"
-            />
+            <div>
+              <Label htmlFor="packaging-cost-per-unit">Packaging Cost per Unit ($)</Label>
+              <Input
+                id="packaging-cost-per-unit"
+                type="number"
+                value={inputs.packagingCostPerUnit}
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    packagingCostPerUnit: parseFloat(e.currentTarget.value) || 0,
+                  })
+                }
+                min={0}
+                step={0.1}
+              />
+            </div>
           </div>
         </div>
 
@@ -285,7 +330,8 @@ export function BatchCostCalculator() {
               min={10}
               max={150}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
 
             <div className="flex flex-wrap gap-2">
@@ -311,7 +357,8 @@ export function BatchCostCalculator() {
               min={0}
               max={60}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
           </div>
         </div>
@@ -332,27 +379,17 @@ export function BatchCostCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Cost per Unit"
-            value={formatCurrency(results.totalCostPerUnit)}
-            color="blue"
-          />
-          <ResultCard
-            label="Profit per Unit"
-            value={formatCurrency(results.profitPerUnit)}
-            color="green"
-          />
+          <ResultCard label="Cost per Unit" value={formatCurrency(results.totalCostPerUnit)} />
+          <ResultCard label="Profit per Unit" value={formatCurrency(results.profitPerUnit)} />
           <ResultCard
             label="Wholesale Price"
             value={formatCurrency(results.wholesalePrice)}
-            sublabel={`${inputs.wholesaleDiscount}% off retail`}
-            color="purple"
+            subtitle={`${inputs.wholesaleDiscount}% off retail`}
           />
           <ResultCard
             label="Break-Even"
             value={`${results.breakEvenUnits} units`}
-            sublabel="to cover fixed costs"
-            color="blue"
+            subtitle="to cover fixed costs"
           />
         </div>
 

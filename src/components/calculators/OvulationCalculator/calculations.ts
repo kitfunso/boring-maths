@@ -6,6 +6,13 @@
  */
 
 import type { OvulationInputs, OvulationResult, FertileWindow } from './types';
+import { getDefaultInputs } from './types';
+
+const MIN_CYCLE = 21;
+const MAX_CYCLE = 45;
+
+const isIsoDate = (s: string): boolean =>
+  /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s));
 
 function addDays(dateStr: string, days: number): string {
   // ISO dates parse as UTC midnight, so UTC arithmetic keeps a DST change from shifting the day.
@@ -30,7 +37,13 @@ function calculateCycle(periodDate: string, cycleLength: number): FertileWindow 
 }
 
 export function calculateOvulation(inputs: OvulationInputs): OvulationResult {
-  const { lastPeriodDate, cycleLength } = inputs;
+  // A cleared date field or a stored bad value must not throw on every render
+  const lastPeriodDate = isIsoDate(inputs.lastPeriodDate)
+    ? inputs.lastPeriodDate
+    : getDefaultInputs().lastPeriodDate;
+  const cycleLength = Number.isFinite(inputs.cycleLength)
+    ? Math.min(MAX_CYCLE, Math.max(MIN_CYCLE, Math.round(inputs.cycleLength)))
+    : 28;
 
   const cycles: FertileWindow[] = [];
   let periodDate = lastPeriodDate;

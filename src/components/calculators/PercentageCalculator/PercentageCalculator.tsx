@@ -84,7 +84,9 @@ export default function PercentageCalculator() {
                     min={0}
                     step={1}
                     value={inputs.percentOf_percentage}
-                    onChange={(e) => updateInput('percentOf_percentage', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('percentOf_percentage', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -96,7 +98,7 @@ export default function PercentageCalculator() {
                     type="number"
                     step="any"
                     value={inputs.percentOf_value}
-                    onChange={(e) => updateInput('percentOf_value', Number(e.target.value))}
+                    onChange={(e) => updateInput('percentOf_value', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -113,7 +115,9 @@ export default function PercentageCalculator() {
                     type="number"
                     step="any"
                     value={inputs.whatPercent_partValue}
-                    onChange={(e) => updateInput('whatPercent_partValue', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('whatPercent_partValue', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">The number you have</p>
                 </div>
@@ -126,7 +130,9 @@ export default function PercentageCalculator() {
                     type="number"
                     step="any"
                     value={inputs.whatPercent_wholeValue}
-                    onChange={(e) => updateInput('whatPercent_wholeValue', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('whatPercent_wholeValue', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">The total (100%)</p>
                 </div>
@@ -144,7 +150,9 @@ export default function PercentageCalculator() {
                     type="number"
                     step="any"
                     value={inputs.percentChange_fromValue}
-                    onChange={(e) => updateInput('percentChange_fromValue', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('percentChange_fromValue', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">Original amount</p>
                 </div>
@@ -157,7 +165,9 @@ export default function PercentageCalculator() {
                     type="number"
                     step="any"
                     value={inputs.percentChange_toValue}
-                    onChange={(e) => updateInput('percentChange_toValue', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('percentChange_toValue', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">New amount</p>
                 </div>
@@ -177,7 +187,7 @@ export default function PercentageCalculator() {
                       step="any"
                       value={inputs.increaseDecrease_value}
                       onChange={(e) =>
-                        updateInput('increaseDecrease_value', Number(e.target.value))
+                        updateInput('increaseDecrease_value', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -193,7 +203,7 @@ export default function PercentageCalculator() {
                       step={1}
                       value={inputs.increaseDecrease_percentage}
                       onChange={(e) =>
-                        updateInput('increaseDecrease_percentage', Number(e.target.value))
+                        updateInput('increaseDecrease_percentage', Number(e.currentTarget.value))
                       }
                     />
                   </div>

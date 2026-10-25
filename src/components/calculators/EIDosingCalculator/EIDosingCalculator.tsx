@@ -2,7 +2,7 @@
  * EI Dosing Calculator Component
  * Estimative Index fertilization for planted aquariums
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { EIDosingInputs } from './types';
 import { DOSING_SCHEDULES, TANK_PRESETS } from './types';
@@ -40,14 +40,18 @@ export function EIDosingCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Tank Setup</h2>
 
           <div className="space-y-4">
-            <Input
-              label="Tank Volume"
-              type="number"
-              value={inputs.tankVolume}
-              onChange={(v) => setInputs({ ...inputs, tankVolume: parseFloat(v) || 0 })}
-              min={1}
-              suffix={inputs.volumeUnit}
-            />
+            <div>
+              <Label htmlFor="tank-volume">Tank Volume ({inputs.volumeUnit})</Label>
+              <Input
+                id="tank-volume"
+                type="number"
+                value={inputs.tankVolume}
+                onChange={(e) =>
+                  setInputs({ ...inputs, tankVolume: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -60,7 +64,7 @@ export function EIDosingCalculator() {
                 ]}
                 value={inputs.volumeUnit}
                 onChange={(v) =>
-                  setInputs({ ...inputs, volumeUnit: v as EIDosingInputs[keyof EIDosingInputs] })
+                  setInputs({ ...inputs, volumeUnit: v as EIDosingInputs['volumeUnit'] })
                 }
               />
             </div>
@@ -89,17 +93,20 @@ export function EIDosingCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Dosing Method</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Dosing Schedule"
-              value={inputs.dosingSched}
-              onChange={(v) =>
-                setInputs({ ...inputs, dosingSched: v as EIDosingInputs[keyof EIDosingInputs] })
-              }
-              options={DOSING_SCHEDULES.map((s) => ({
-                value: s.value,
-                label: s.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="dosing-schedule">Dosing Schedule</Label>
+              <Select
+                id="dosing-schedule"
+                value={inputs.dosingSched}
+                onChange={(v) =>
+                  setInputs({ ...inputs, dosingSched: v as EIDosingInputs['dosingSched'] })
+                }
+                options={DOSING_SCHEDULES.map((s) => ({
+                  value: s.value,
+                  label: s.label,
+                }))}
+              />
+            </div>
 
             {selectedSchedule && (
               <div className="rounded-lg bg-cyan-900/20 p-3 ring-1 ring-cyan-500/20">
@@ -134,7 +141,8 @@ export function EIDosingCalculator() {
                   min={5}
                   max={50}
                   step={5}
-                  formatValue={(v) => `${v} ppm`}
+                  showValue
+                  labels={{ current: (v) => `${v} ppm` }}
                 />
                 <Slider
                   label="Phosphate (PO₄) Target"
@@ -143,7 +151,8 @@ export function EIDosingCalculator() {
                   min={0.5}
                   max={5}
                   step={0.5}
-                  formatValue={(v) => `${v} ppm`}
+                  showValue
+                  labels={{ current: (v) => `${v} ppm` }}
                 />
                 <Slider
                   label="Potassium (K) Target"
@@ -152,7 +161,8 @@ export function EIDosingCalculator() {
                   min={5}
                   max={50}
                   step={5}
-                  formatValue={(v) => `${v} ppm`}
+                  showValue
+                  labels={{ current: (v) => `${v} ppm` }}
                 />
                 <Slider
                   label="Iron (Fe) Target"
@@ -161,7 +171,8 @@ export function EIDosingCalculator() {
                   min={0.1}
                   max={1}
                   step={0.1}
-                  formatValue={(v) => `${v} ppm`}
+                  showValue
+                  labels={{ current: (v) => `${v} ppm` }}
                 />
               </div>
             )}
@@ -179,7 +190,7 @@ export function EIDosingCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    fertilizerType: v as EIDosingInputs[keyof EIDosingInputs],
+                    fertilizerType: v as EIDosingInputs['fertilizerType'],
                   })
                 }
               />
@@ -192,7 +203,8 @@ export function EIDosingCalculator() {
               min={25}
               max={75}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
           </div>
         </div>
@@ -252,10 +264,10 @@ export function EIDosingCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard label="Weekly NO₃" value={`${results.nitrateAchieved} ppm`} color="blue" />
-          <ResultCard label="Weekly PO₄" value={`${results.phosphateAchieved} ppm`} color="green" />
-          <ResultCard label="Weekly K" value={`${results.potassiumAchieved} ppm`} color="purple" />
-          <ResultCard label="Weekly Fe" value={`${results.ironAchieved} ppm`} color="blue" />
+          <ResultCard label="Weekly NO₃" value={`${results.nitrateAchieved} ppm`} />
+          <ResultCard label="Weekly PO₄" value={`${results.phosphateAchieved} ppm`} />
+          <ResultCard label="Weekly K" value={`${results.potassiumAchieved} ppm`} />
+          <ResultCard label="Weekly Fe" value={`${results.ironAchieved} ppm`} />
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">

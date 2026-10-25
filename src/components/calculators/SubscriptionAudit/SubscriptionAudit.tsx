@@ -88,7 +88,7 @@ function SubscriptionRow({
             min={0}
             step={0.01}
             value={subscription.cost}
-            onChange={(e) => onChange({ cost: Number(e.target.value) })}
+            onChange={(e) => onChange({ cost: Number(e.currentTarget.value) })}
           />
         </div>
         <div>
@@ -96,9 +96,7 @@ function SubscriptionRow({
           <Select
             id={`freq-${subscription.id}`}
             value={subscription.frequency}
-            onChange={(e) =>
-              onChange({ frequency: (e.target as HTMLSelectElement).value as BillingFrequency })
-            }
+            onChange={(value) => onChange({ frequency: value as BillingFrequency })}
             options={[
               { value: 'weekly', label: 'Weekly' },
               { value: 'monthly', label: 'Monthly' },
@@ -112,9 +110,7 @@ function SubscriptionRow({
           <Select
             id={`cat-${subscription.id}`}
             value={subscription.category}
-            onChange={(e) =>
-              onChange({ category: (e.target as HTMLSelectElement).value as SubscriptionCategory })
-            }
+            onChange={(value) => onChange({ category: value as SubscriptionCategory })}
             options={Object.entries(CATEGORY_LABELS).map(([value, label]) => ({
               value,
               label,
@@ -126,9 +122,7 @@ function SubscriptionRow({
           <Select
             id={`usage-${subscription.id}`}
             value={subscription.usage}
-            onChange={(e) =>
-              onChange({ usage: (e.target as HTMLSelectElement).value as UsageRating })
-            }
+            onChange={(value) => onChange({ usage: value as UsageRating })}
             options={[
               { value: 'daily', label: 'Daily' },
               { value: 'weekly', label: 'Weekly' },
@@ -143,7 +137,7 @@ function SubscriptionRow({
       <Checkbox
         id={`essential-${subscription.id}`}
         checked={subscription.essential}
-        onChange={(e) => onChange({ essential: (e.target as HTMLInputElement).checked })}
+        onChange={(checked) => onChange({ essential: checked })}
         label="Essential (can't live without)"
       />
     </div>
@@ -246,7 +240,10 @@ export default function SubscriptionAudit() {
               step={5}
               value={inputs.estimatedMonthlySpend}
               onChange={(e) =>
-                setInputs((prev) => ({ ...prev, estimatedMonthlySpend: Number(e.target.value) }))
+                setInputs((prev) => ({
+                  ...prev,
+                  estimatedMonthlySpend: Number(e.currentTarget.value),
+                }))
               }
             />
             <p className="text-sm text-[var(--color-muted)] mt-1">

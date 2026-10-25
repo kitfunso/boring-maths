@@ -2,7 +2,7 @@
  * Priming Sugar Calculator Component
  * Calculate carbonation sugar for bottle conditioning
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { PrimingSugarInputs } from './types';
 import { SUGAR_TYPES, STYLE_PRESETS, BATCH_PRESETS } from './types';
@@ -35,15 +35,21 @@ export function PrimingSugarCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Size</h2>
 
           <div className="space-y-4">
-            <Input
-              label="Batch Volume"
-              type="number"
-              value={inputs.batchVolume}
-              onChange={(v) => setInputs({ ...inputs, batchVolume: parseFloat(v) || 0 })}
-              min={0.5}
-              step={0.5}
-              suffix={inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}
-            />
+            <div>
+              <Label htmlFor="batch-volume">
+                Batch Volume ({inputs.volumeUnit === 'gallons' ? 'gal' : 'L'})
+              </Label>
+              <Input
+                id="batch-volume"
+                type="number"
+                value={inputs.batchVolume}
+                onChange={(e) =>
+                  setInputs({ ...inputs, batchVolume: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0.5}
+                step={0.5}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -58,7 +64,7 @@ export function PrimingSugarCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    volumeUnit: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                    volumeUnit: v as PrimingSugarInputs['volumeUnit'],
                   })
                 }
               />
@@ -95,7 +101,7 @@ export function PrimingSugarCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    containerType: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                    containerType: v as PrimingSugarInputs['containerType'],
                   })
                 }
               />
@@ -114,7 +120,8 @@ export function PrimingSugarCalculator() {
               min={1.0}
               max={4.5}
               step={0.1}
-              formatValue={(v) => `${v.toFixed(1)} vol`}
+              showValue
+              labels={{ current: (v) => `${v.toFixed(1)} vol` }}
             />
 
             <div className="grid grid-cols-2 gap-2">
@@ -135,15 +142,21 @@ export function PrimingSugarCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Beer Temperature"
-                type="number"
-                value={inputs.beerTemp}
-                onChange={(v) => setInputs({ ...inputs, beerTemp: parseFloat(v) || 0 })}
-                min={32}
-                max={80}
-                suffix={inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'}
-              />
+              <div>
+                <Label htmlFor="beer-temperature">
+                  Beer Temperature ({inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'})
+                </Label>
+                <Input
+                  id="beer-temperature"
+                  type="number"
+                  value={inputs.beerTemp}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, beerTemp: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={32}
+                  max={80}
+                />
+              </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
                   Temp Unit
@@ -157,7 +170,7 @@ export function PrimingSugarCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      tempUnit: v as PrimingSugarInputs[keyof PrimingSugarInputs],
+                      tempUnit: v as PrimingSugarInputs['tempUnit'],
                     })
                   }
                 />
@@ -169,15 +182,18 @@ export function PrimingSugarCalculator() {
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Sugar Type</h2>
 
-          <Select
-            label="Priming Sugar"
-            value={inputs.sugarType}
-            onChange={(v) => setInputs({ ...inputs, sugarType: v })}
-            options={SUGAR_TYPES.map((s) => ({
-              value: s.value,
-              label: s.label,
-            }))}
-          />
+          <div>
+            <Label htmlFor="priming-sugar">Priming Sugar</Label>
+            <Select
+              id="priming-sugar"
+              value={inputs.sugarType}
+              onChange={(v) => setInputs({ ...inputs, sugarType: v })}
+              options={SUGAR_TYPES.map((s) => ({
+                value: s.value,
+                label: s.label,
+              }))}
+            />
+          </div>
 
           <div className="mt-4 rounded-lg bg-amber-900/20 p-3 ring-1 ring-amber-500/20">
             <p className="text-sm text-amber-200/80">
@@ -207,20 +223,17 @@ export function PrimingSugarCalculator() {
           <ResultCard
             label="Per Bottle (12oz)"
             value={`${results.sugarPerBottle} ${results.bottleUnit}`}
-            color="blue"
           />
-          <ResultCard label="Target CO₂" value={formatCO2(results.totalCO2)} color="green" />
+          <ResultCard label="Target CO₂" value={formatCO2(results.totalCO2)} />
           <ResultCard
             label="Residual CO₂"
             value={formatCO2(results.residualCO2)}
-            sublabel="already in beer"
-            color="purple"
+            subtitle="already in beer"
           />
           <ResultCard
             label="CO₂ to Add"
             value={formatCO2(results.addedCO2)}
-            sublabel="from priming"
-            color="blue"
+            subtitle="from priming"
           />
         </div>
 

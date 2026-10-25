@@ -101,7 +101,7 @@ export default function MarginCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.cost}
-                  onChange={(e) => updateInput('cost', Number(e.target.value))}
+                  onChange={(e) => updateInput('cost', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -118,7 +118,7 @@ export default function MarginCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.revenue}
-                  onChange={(e) => updateInput('revenue', Number(e.target.value))}
+                  onChange={(e) => updateInput('revenue', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -135,7 +135,7 @@ export default function MarginCalculator() {
                   max={99.99}
                   step={0.1}
                   value={inputs.marginPercent}
-                  onChange={(e) => updateInput('marginPercent', Number(e.target.value))}
+                  onChange={(e) => updateInput('marginPercent', Number(e.currentTarget.value))}
                 />
               </div>
             )}

@@ -2,7 +2,7 @@
  * Fragrance Load Calculator Component
  * Calculate fragrance oil amounts for candle making
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { FragranceInputs } from './types';
 import { WAX_TYPES, CONTAINER_SIZES } from './types';
@@ -35,15 +35,18 @@ export function FragranceCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Wax Settings</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Wax Type"
-              value={inputs.waxType}
-              onChange={(v) => setInputs({ ...inputs, waxType: v })}
-              options={WAX_TYPES.map((w) => ({
-                value: w.value,
-                label: `${w.label} (max ${w.maxFragrance}%)`,
-              }))}
-            />
+            <div>
+              <Label htmlFor="wax-type">Wax Type</Label>
+              <Select
+                id="wax-type"
+                value={inputs.waxType}
+                onChange={(v) => setInputs({ ...inputs, waxType: v })}
+                options={WAX_TYPES.map((w) => ({
+                  value: w.value,
+                  label: `${w.label} (max ${w.maxFragrance}%)`,
+                }))}
+              />
+            </div>
 
             {selectedWax && (
               <div className="rounded-lg bg-purple-900/20 p-3 ring-1 ring-purple-500/20">
@@ -64,16 +67,20 @@ export function FragranceCalculator() {
               </div>
             )}
 
-            <Input
-              label="Total Wax Weight"
-              type="number"
-              value={inputs.waxWeight}
-              onChange={(v) => setInputs({ ...inputs, waxWeight: parseFloat(v) || 0 })}
-              min={1}
-              max={1000}
-              step={0.5}
-              suffix={inputs.weightUnit}
-            />
+            <div>
+              <Label htmlFor="total-wax-weight">Total Wax Weight ({inputs.weightUnit})</Label>
+              <Input
+                id="total-wax-weight"
+                type="number"
+                value={inputs.waxWeight}
+                onChange={(e) =>
+                  setInputs({ ...inputs, waxWeight: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+                max={1000}
+                step={0.5}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -99,7 +106,8 @@ export function FragranceCalculator() {
               min={3}
               max={12}
               step={0.5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
 
             {!results.isWithinLimit && (
@@ -112,14 +120,19 @@ export function FragranceCalculator() {
               </div>
             )}
 
-            <Input
-              label="Number of Candles"
-              type="number"
-              value={inputs.numberOfCandles}
-              onChange={(v) => setInputs({ ...inputs, numberOfCandles: parseInt(v) || 1 })}
-              min={1}
-              max={100}
-            />
+            <div>
+              <Label htmlFor="number-of-candles">Number of Candles</Label>
+              <Input
+                id="number-of-candles"
+                type="number"
+                value={inputs.numberOfCandles}
+                onChange={(e) =>
+                  setInputs({ ...inputs, numberOfCandles: parseInt(e.currentTarget.value) || 1 })
+                }
+                min={1}
+                max={100}
+              />
+            </div>
           </div>
         </div>
 
@@ -170,14 +183,12 @@ export function FragranceCalculator() {
           <ResultCard
             label="Total Batch Weight"
             value={`${results.totalWeight} ${inputs.weightUnit}`}
-            sublabel="wax + fragrance"
-            color="blue"
+            subtitle="wax + fragrance"
           />
           <ResultCard
             label="Est. Fragrance Cost"
             value={`$${results.costEstimate.toFixed(2)}`}
-            sublabel="@ $2/oz average"
-            color="green"
+            subtitle="@ $2/oz average"
           />
         </div>
 

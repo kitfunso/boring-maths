@@ -35,7 +35,19 @@ describe('UsPaycheckCalculator', () => {
       // Taxable 250,000 - 32,200 = 217,800; 35,932 + 24% x (217,800 - 211,400)
       expect(result.federalTax).toBeCloseTo(37468, 2);
       expect(result.socialSecurity).toBeCloseTo(11439, 2); // 184,500 x 6.2%
-      expect(result.medicare).toBeCloseTo(3625, 2); // 250,000 x 1.45%, at the 250,000 threshold
+      // 250,000 x 1.45% + 0.9% x 50,000: withholding starts at 200,000 for every filing status
+      expect(result.medicare).toBeCloseTo(4075, 2);
+    });
+
+    it('should map head of household to the 2026 head of household table', () => {
+      const inputs = getDefaultInputs();
+      inputs.grossSalary = 100000;
+      inputs.payFrequency = 'annually';
+      inputs.filingStatus = 'head';
+      inputs.state = 'TX';
+
+      // Taxable 100,000 - 24,150 = 75,850: 1,770 + 5,970 + 22% x 8,400 = 9,588
+      expect(calculatePaycheck(inputs).federalTax).toBeCloseTo(9588, 2);
     });
 
     it('should handle edge case: zero values', () => {

@@ -15,15 +15,19 @@ export interface Props {
   sources: readonly Source[];
   /** ISO date the figures were last checked against the sources */
   checked: string;
+  /** ISO date the figures stop being valid (e.g. a quarterly tariff); the freshness gate fails the build after it */
+  validUntil?: string;
 }
 
-const { sources, checked } = Astro.props;
-const checkedLabel = new Date(`${checked}T00:00:00Z`).toLocaleDateString('en-GB', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  timeZone: 'UTC',
-});
+const { sources, checked, validUntil } = Astro.props;
+const longDate = (iso: string) =>
+  new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+const checkedLabel = longDate(checked);
 ---
 
 <section class="mb-12" aria-labelledby="sources-heading">
@@ -38,6 +42,13 @@ const checkedLabel = new Date(`${checked}T00:00:00Z`).toLocaleDateString('en-GB'
       >{checkedLabel}</time
     >.
   </p>
+  {
+    validUntil && (
+      <p class="text-[var(--color-subtle)] leading-relaxed mb-3">
+        These figures are valid until <time datetime={validUntil}>{longDate(validUntil)}</time>.
+      </p>
+    )
+  }
   <ul class="list-disc pl-5 space-y-2 text-[var(--color-subtle)]">
     {
       sources.map((s) => (

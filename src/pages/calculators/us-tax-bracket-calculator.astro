@@ -11,6 +11,27 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USTaxBracketCalculator } from '../../components/calculators/USTaxBracketCalculator';
+import { FEDERAL_BRACKETS_2026, STANDARD_DEDUCTION_2026 } from '../../lib/us-tax-2026';
+
+const usd = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n);
+
+const single = FEDERAL_BRACKETS_2026.single;
+const singleBracketText = single
+  .map((b, i) => {
+    if (b.max === Infinity) return `and ${b.rate}% above that`;
+    return i === 0
+      ? `the ${b.rate}% bracket up to ${usd(b.max)}`
+      : `${b.rate}% up to ${usd(b.max)}`;
+  })
+  .join(', ');
+// Worked example for the "how brackets work" answer: $60,000 taxable income, single filer
+const exampleIncome = 60000;
+const [band1, band2, band3] = single;
 
 const title = 'US Tax Bracket Calculator (2025, 2026): Federal Income Tax';
 const description =
@@ -52,8 +73,7 @@ const relatedCalculators = [
 const faqs = [
   {
     question: 'What tax bracket am I in for 2026?',
-    answer:
-      'Your tax bracket depends on your filing status and taxable income. For 2026, single filers are in the 10% bracket up to $12,400, 12% up to $50,400, 22% up to $105,700, 24% up to $201,775, 32% up to $256,225, 35% up to $640,600, and 37% above that. Use our calculator to find your exact bracket, or switch it to 2025.',
+    answer: `Your tax bracket depends on your filing status and taxable income. For 2026, single filers are in ${singleBracketText}. Use our calculator to find your exact bracket, or switch it to 2025.`,
   },
   {
     question: "What's the difference between marginal and effective tax rate?",
@@ -62,18 +82,15 @@ const faqs = [
   },
   {
     question: 'How do tax brackets actually work?',
-    answer:
-      "Tax brackets are progressive, meaning different portions of your income are taxed at different rates. For example, if you're single with $60,000 taxable income, the first $12,400 is taxed at 10%, the next $38,000 at 12%, and the remaining $9,600 at 22%. You don't pay 22% on your entire income.",
+    answer: `Tax brackets are progressive, meaning different portions of your income are taxed at different rates. For example, if you're single with ${usd(exampleIncome)} taxable income, the first ${usd(band1.max)} is taxed at ${band1.rate}%, the next ${usd(band2.max - band1.max)} at ${band2.rate}%, and the remaining ${usd(exampleIncome - band2.max)} at ${band3.rate}%. You don't pay ${band3.rate}% on your entire income.`,
   },
   {
     question: 'Should I take the standard deduction or itemize?',
-    answer:
-      'Take whichever is larger. For 2026, the standard deduction is $16,100 (single), $32,200 (married filing jointly), or $24,150 (head of household). Only itemize if your deductions (mortgage interest, state taxes up to $10k, charitable donations) exceed these amounts.',
+    answer: `Take whichever is larger. For 2026, the standard deduction is ${usd(STANDARD_DEDUCTION_2026.single)} (single), ${usd(STANDARD_DEDUCTION_2026.married_jointly)} (married filing jointly), or ${usd(STANDARD_DEDUCTION_2026.head_of_household)} (head of household). Only itemize if your deductions exceed these amounts. Itemized deductions include mortgage interest, charitable donations, and state and local taxes up to $40,400 for 2026 ($40,000 for 2025), a cap that shrinks once income passes $505,000.`,
   },
   {
     question: 'What are the standard deductions for 2026 and 2025?',
-    answer:
-      'For 2026, the standard deduction is: $16,100 for single filers and married filing separately, $32,200 for married filing jointly, and $24,150 for head of household. For 2025, it is $15,750, $31,500, and $23,625 after the One, Big, Beautiful Bill. These amounts are automatically deducted from your gross income before calculating tax.',
+    answer: `For 2026, the standard deduction is: ${usd(STANDARD_DEDUCTION_2026.single)} for single filers and married filing separately, ${usd(STANDARD_DEDUCTION_2026.married_jointly)} for married filing jointly, and ${usd(STANDARD_DEDUCTION_2026.head_of_household)} for head of household. For 2025, it is $15,750, $31,500, and $23,625 after the One, Big, Beautiful Bill. These amounts are automatically deducted from your gross income before calculating tax.`,
   },
   {
     question: 'Does this calculator include state taxes?',

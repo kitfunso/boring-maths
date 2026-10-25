@@ -2,7 +2,7 @@
  * Candle Wax Calculator Component
  * Calculate wax weight from container volume
  */
-import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CandleWaxInputs } from './types';
 import { WAX_TYPES, CONTAINER_PRESETS, FILL_OPTIONS } from './types';
@@ -99,50 +99,74 @@ export function CandleWaxCalculator() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <Input
-                    label={inputs.containerShape === 'square' ? 'Side Length' : 'Diameter'}
-                    type="number"
-                    value={inputs.containerDiameter}
-                    onChange={(v) =>
-                      setInputs({ ...inputs, containerDiameter: parseFloat(v) || 0 })
-                    }
-                    min={0.5}
-                    step={0.1}
-                    suffix="in"
-                  />
-                  <Input
-                    label="Height"
-                    type="number"
-                    value={inputs.containerHeight}
-                    onChange={(v) => setInputs({ ...inputs, containerHeight: parseFloat(v) || 0 })}
-                    min={0.5}
-                    step={0.1}
-                    suffix="in"
-                  />
+                  <div>
+                    <Label htmlFor="inputs-containershape-square-side-length">
+                      {inputs.containerShape === 'square' ? 'Side Length' : 'Diameter'} (in)
+                    </Label>
+                    <Input
+                      id="inputs-containershape-square-side-length"
+                      type="number"
+                      value={inputs.containerDiameter}
+                      onChange={(e) =>
+                        setInputs({
+                          ...inputs,
+                          containerDiameter: parseFloat(e.currentTarget.value) || 0,
+                        })
+                      }
+                      min={0.5}
+                      step={0.1}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="height">Height (in)</Label>
+                    <Input
+                      id="height"
+                      type="number"
+                      value={inputs.containerHeight}
+                      onChange={(e) =>
+                        setInputs({
+                          ...inputs,
+                          containerHeight: parseFloat(e.currentTarget.value) || 0,
+                        })
+                      }
+                      min={0.5}
+                      step={0.1}
+                    />
+                  </div>
                 </div>
 
                 {inputs.containerShape === 'oval' && (
-                  <Input
-                    label="Width (shorter axis)"
-                    type="number"
-                    value={inputs.ovalWidth}
-                    onChange={(v) => setInputs({ ...inputs, ovalWidth: parseFloat(v) || 0 })}
-                    min={0.5}
-                    step={0.1}
-                    suffix="in"
-                  />
+                  <div>
+                    <Label htmlFor="width-shorter-axis">Width (shorter axis) (in)</Label>
+                    <Input
+                      id="width-shorter-axis"
+                      type="number"
+                      value={inputs.ovalWidth}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, ovalWidth: parseFloat(e.currentTarget.value) || 0 })
+                      }
+                      min={0.5}
+                      step={0.1}
+                    />
+                  </div>
                 )}
               </>
             ) : (
               <div className="grid grid-cols-2 gap-4">
-                <Input
-                  label="Container Volume"
-                  type="number"
-                  value={inputs.directVolume}
-                  onChange={(v) => setInputs({ ...inputs, directVolume: parseFloat(v) || 0 })}
-                  min={1}
-                  suffix={inputs.volumeUnit === 'ounces' ? 'oz' : 'mL'}
-                />
+                <div>
+                  <Label htmlFor="container-volume">
+                    Container Volume ({inputs.volumeUnit === 'ounces' ? 'oz' : 'mL'})
+                  </Label>
+                  <Input
+                    id="container-volume"
+                    type="number"
+                    value={inputs.directVolume}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, directVolume: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={1}
+                  />
+                </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
                     Volume Unit
@@ -161,12 +185,15 @@ export function CandleWaxCalculator() {
               </div>
             )}
 
-            <Select
-              label="Fill Percentage"
-              value={inputs.fillPercentage.toString()}
-              onChange={(v) => setInputs({ ...inputs, fillPercentage: parseInt(v) })}
-              options={FILL_OPTIONS.map((f) => ({ value: f.value.toString(), label: f.label }))}
-            />
+            <div>
+              <Label htmlFor="fill-percentage">Fill Percentage</Label>
+              <Select
+                id="fill-percentage"
+                value={inputs.fillPercentage.toString()}
+                onChange={(v) => setInputs({ ...inputs, fillPercentage: parseInt(v) })}
+                options={FILL_OPTIONS.map((f) => ({ value: f.value.toString(), label: f.label }))}
+              />
+            </div>
           </div>
         </div>
 
@@ -174,12 +201,15 @@ export function CandleWaxCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Wax Settings</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Wax Type"
-              value={inputs.waxType}
-              onChange={(v) => setInputs({ ...inputs, waxType: v })}
-              options={WAX_TYPES.map((w) => ({ value: w.value, label: w.label }))}
-            />
+            <div>
+              <Label htmlFor="wax-type">Wax Type</Label>
+              <Select
+                id="wax-type"
+                value={inputs.waxType}
+                onChange={(v) => setInputs({ ...inputs, waxType: v })}
+                options={WAX_TYPES.map((w) => ({ value: w.value, label: w.label }))}
+              />
+            </div>
 
             {selectedWax && (
               <div className="rounded-lg bg-purple-900/20 p-3 ring-1 ring-purple-500/20">
@@ -197,14 +227,19 @@ export function CandleWaxCalculator() {
               </div>
             )}
 
-            <Input
-              label="Number of Containers"
-              type="number"
-              value={inputs.numberOfContainers}
-              onChange={(v) => setInputs({ ...inputs, numberOfContainers: parseInt(v) || 1 })}
-              min={1}
-              max={1000}
-            />
+            <div>
+              <Label htmlFor="number-of-containers">Number of Containers</Label>
+              <Input
+                id="number-of-containers"
+                type="number"
+                value={inputs.numberOfContainers}
+                onChange={(e) =>
+                  setInputs({ ...inputs, numberOfContainers: parseInt(e.currentTarget.value) || 1 })
+                }
+                min={1}
+                max={1000}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -245,24 +280,20 @@ export function CandleWaxCalculator() {
           <ResultCard
             label="Container Volume"
             value={`${results.containerVolume} ${inputs.volumeUnit === 'ounces' ? 'fl oz' : 'mL'}`}
-            color="blue"
           />
           <ResultCard
             label="Usable Volume"
             value={`${results.usableVolume} ${inputs.volumeUnit === 'ounces' ? 'fl oz' : 'mL'}`}
-            sublabel={`at ${inputs.fillPercentage}% fill`}
-            color="green"
+            subtitle={`at ${inputs.fillPercentage}% fill`}
           />
           <ResultCard
             label="Est. Burn Time"
             value={formatBurnTime(results.burnTime)}
-            sublabel="per candle"
-            color="purple"
+            subtitle="per candle"
           />
           <ResultCard
             label="Per Container"
             value={`${results.waxWeightPerContainer} ${results.weightUnit}`}
-            color="blue"
           />
         </div>
 

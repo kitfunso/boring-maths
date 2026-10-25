@@ -12,7 +12,7 @@ import { ThemeProvider, Card, CalculatorHeader, Label, Select, Grid, Toggle } fr
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function CouncilTaxCalculator() {
-  const { inputs, result, updateInput } = useCalculatorBase<
+  const { inputs, result, updateInput, setInputs } = useCalculatorBase<
     CouncilTaxInputs,
     ReturnType<typeof calculateCouncilTax>
   >({
@@ -43,19 +43,6 @@ export default function CouncilTaxCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Property Band */}
-            <div>
-              <Label htmlFor="propertyBand" required>
-                Property Band
-              </Label>
-              <Select
-                id="propertyBand"
-                value={inputs.propertyBand}
-                onChange={(e) => updateInput('propertyBand', e.currentTarget.value as PropertyBand)}
-                options={bandOptions}
-              />
-            </div>
-
             {/* Region */}
             <div>
               <Label htmlFor="region" required>
@@ -64,14 +51,30 @@ export default function CouncilTaxCalculator() {
               <Select
                 id="region"
                 value={inputs.region}
-                onChange={(e) => {
-                  const region = e.currentTarget.value as CouncilRegion;
-                  updateInput('region', region);
-                  if (!PROPERTY_BAND_LABELS[nationOf(region)][inputs.propertyBand]) {
-                    updateInput('propertyBand', 'H');
-                  }
+                onChange={(value) => {
+                  const region = value as CouncilRegion;
+                  setInputs((prev) => ({
+                    ...prev,
+                    region,
+                    propertyBand: PROPERTY_BAND_LABELS[nationOf(region)][prev.propertyBand]
+                      ? prev.propertyBand
+                      : 'H',
+                  }));
                 }}
                 options={regionOptions}
+              />
+            </div>
+
+            {/* Property Band */}
+            <div>
+              <Label htmlFor="propertyBand" required>
+                Property Band
+              </Label>
+              <Select
+                id="propertyBand"
+                value={inputs.propertyBand}
+                onChange={(value) => updateInput('propertyBand', value as PropertyBand)}
+                options={bandOptions}
               />
             </div>
 
@@ -86,7 +89,7 @@ export default function CouncilTaxCalculator() {
             <Toggle
               checked={inputs.isSecondHome}
               onChange={(val) => updateInput('isSecondHome', val)}
-              label="Second home (100% premium from April 2025)"
+              label="Second home (100% premium; up to 300% in Wales)"
             />
           </div>
 

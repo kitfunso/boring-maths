@@ -22,7 +22,7 @@ function KeyboardHarness({ onReset }: { onReset?: () => void }) {
 describe('useKeyboardShortcuts', () => {
   it('does not block Ctrl/Cmd+R when onReset is not provided', () => {
     const preventDefault = vi.fn();
-    render(h(KeyboardHarness, {}));
+    render(h(KeyboardHarness, { onReset: undefined }));
 
     fireEvent.keyDown(document, {
       key: 'r',
@@ -34,7 +34,7 @@ describe('useKeyboardShortcuts', () => {
   });
 
   it('shows help overlay with safe text content', () => {
-    render(h(KeyboardHarness, {}));
+    render(h(KeyboardHarness, { onReset: undefined }));
 
     fireEvent.keyDown(document, {
       key: '?',
@@ -46,7 +46,7 @@ describe('useKeyboardShortcuts', () => {
   });
 
   it('toggles help overlay off on second press', () => {
-    render(h(KeyboardHarness, {}));
+    render(h(KeyboardHarness, { onReset: undefined }));
 
     fireEvent.keyDown(document, { key: '?' });
     expect(document.getElementById('keyboard-shortcuts-help')).toBeTruthy();
@@ -69,7 +69,7 @@ describe('useKeyboardShortcuts', () => {
   });
 
   it('renders shortcut rows in help panel', () => {
-    render(h(KeyboardHarness, {}));
+    render(h(KeyboardHarness, { onReset: undefined }));
 
     fireEvent.keyDown(document, { key: '?' });
 

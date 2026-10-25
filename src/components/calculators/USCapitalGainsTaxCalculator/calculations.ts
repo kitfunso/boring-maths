@@ -35,8 +35,9 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   // Standard deduction
   const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
 
-  // Calculate taxable income (simplified)
+  // Calculate taxable income (simplified); deduction left over after other income shelters the gain
   const taxableOtherIncome = Math.max(0, otherIncome - standardDeduction);
+  const taxableGain = Math.max(0, capitalGain - Math.max(0, standardDeduction - otherIncome));
 
   // Calculate capital gains tax
   let capitalGainsTax: number;
@@ -44,14 +45,14 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
 
   if (isLongTerm) {
     // Long-term capital gains rates
-    const ltcgResult = calculateLongTermTax(capitalGain, taxableOtherIncome, filingStatus);
+    const ltcgResult = calculateLongTermTax(taxableGain, taxableOtherIncome, filingStatus);
     capitalGainsTax = ltcgResult.tax;
-    taxRate = ltcgResult.effectiveRate;
+    taxRate = capitalGain > 0 ? (ltcgResult.tax / capitalGain) * 100 : 0;
   } else {
     // Short-term = ordinary income rates
-    const stcgResult = calculateShortTermTax(capitalGain, taxableOtherIncome, filingStatus);
+    const stcgResult = calculateShortTermTax(taxableGain, taxableOtherIncome, filingStatus);
     capitalGainsTax = stcgResult.tax;
-    taxRate = stcgResult.marginalRate;
+    taxRate = taxableGain > 0 ? stcgResult.marginalRate : 0;
   }
 
   // Calculate NIIT (Net Investment Income Tax)
@@ -73,7 +74,7 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   // Calculate what taxes would be if held long-term (for comparison)
   let longTermComparison = null;
   if (!isLongTerm && capitalGain > 0) {
-    const ltcgResult = calculateLongTermTax(capitalGain, taxableOtherIncome, filingStatus);
+    const ltcgResult = calculateLongTermTax(taxableGain, taxableOtherIncome, filingStatus);
     let wouldBeNIIT = 0;
     if (niitApplies) {
       const amountOverThreshold = totalIncomeForNIIT - niitThreshold;

@@ -101,21 +101,12 @@ export interface OvertimeCalculatorResult {
     hours500: number; // hours for $500 extra
     hours1000: number; // hours for $1000 extra
   };
-
-  /** Monthly breakdown showing diminishing returns */
-  monthlyBreakdown: {
-    month: number;
-    grossOT: number;
-    netOT: number;
-    effectiveRate: number;
-    cumulativeNet: number;
-  }[];
 }
 
 /**
  * US Federal Tax Brackets 2026, derived from the shared table (decimal rates)
  */
-const OVERTIME_STATUS_MAP = {
+export const OVERTIME_STATUS_MAP = {
   single: 'single',
   married: 'married_jointly',
   head_of_household: 'head_of_household',
@@ -134,7 +125,7 @@ export const US_TAX_BRACKETS: Record<string, TaxBracket[]> = Object.fromEntries(
 );
 
 /**
- * UK Tax Brackets 2024/2025
+ * UK Tax Brackets 2026/27 (rUK); bands only, the UK calculator does the tax
  */
 export const UK_TAX_BRACKETS: TaxBracket[] = [
   { rate: 0.0, min: 0, max: 12570, label: '0% (Personal Allowance)' },

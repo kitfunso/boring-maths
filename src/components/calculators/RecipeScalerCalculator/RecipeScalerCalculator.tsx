@@ -103,7 +103,7 @@ export default function RecipeScalerCalculator() {
                   step={1}
                   value={inputs.originalServings}
                   onChange={(e) =>
-                    updateInput('originalServings', Math.max(1, Number(e.target.value)))
+                    updateInput('originalServings', Math.max(1, Number(e.currentTarget.value)))
                   }
                 />
               </div>
@@ -118,7 +118,7 @@ export default function RecipeScalerCalculator() {
                   step={1}
                   value={inputs.desiredServings}
                   onChange={(e) =>
-                    updateInput('desiredServings', Math.max(1, Number(e.target.value)))
+                    updateInput('desiredServings', Math.max(1, Number(e.currentTarget.value)))
                   }
                 />
               </div>
@@ -149,17 +149,15 @@ export default function RecipeScalerCalculator() {
             </div>
 
             {/* Baking mode toggle */}
-            <div className="flex items-center justify-between">
-              <div>
-                <Label>Baking Mode</Label>
-                <p className="text-xs text-[var(--color-muted)] mt-0.5">
-                  Round to kitchen-friendly fractions (1/4 cup, whole eggs)
-                </p>
-              </div>
+            <div>
               <Toggle
+                label="Baking Mode"
                 checked={inputs.isBakingMode}
                 onChange={(checked) => updateInput('isBakingMode', checked)}
               />
+              <p className="text-xs text-[var(--color-muted)] mt-1">
+                Round to kitchen-friendly fractions (1/4 cup, whole eggs)
+              </p>
             </div>
 
             {/* Ingredients list */}
@@ -279,7 +277,7 @@ export default function RecipeScalerCalculator() {
                           ? 'scaling down'
                           : 'same size'
                     }
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Ingredients"

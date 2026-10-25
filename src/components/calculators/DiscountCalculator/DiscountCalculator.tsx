@@ -105,7 +105,7 @@ export default function DiscountCalculator() {
                 min={0}
                 step={0.01}
                 value={inputs.originalPrice}
-                onChange={(e) => updateInput('originalPrice', Number(e.target.value))}
+                onChange={(e) => updateInput('originalPrice', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function DiscountCalculator() {
                   max={100}
                   step={1}
                   value={inputs.discountPercent}
-                  onChange={(e) => updateInput('discountPercent', Number(e.target.value))}
+                  onChange={(e) => updateInput('discountPercent', Number(e.currentTarget.value))}
                 />
                 {/* Quick discount buttons */}
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -157,7 +157,7 @@ export default function DiscountCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.finalPrice}
-                  onChange={(e) => updateInput('finalPrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('finalPrice', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -175,7 +175,7 @@ export default function DiscountCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.savedAmount}
-                  onChange={(e) => updateInput('savedAmount', Number(e.target.value))}
+                  onChange={(e) => updateInput('savedAmount', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -225,13 +225,13 @@ export default function DiscountCalculator() {
                     label="Discount"
                     value={formatPercent(result.discountPercent)}
                     sublabel="percent off"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="You Save"
                     value={formatCurrency(result.discountAmount, inputs.currency)}
                     sublabel="total savings"
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="Final Price"

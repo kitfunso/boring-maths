@@ -74,7 +74,9 @@ export default function ConsultingRate() {
                   min={0}
                   step={5000}
                   value={inputs.desiredAnnualIncome}
-                  onChange={(e) => updateInput('desiredAnnualIncome', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('desiredAnnualIncome', Number(e.currentTarget.value))
+                  }
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   What you want in your pocket after taxes and expenses
@@ -143,7 +145,7 @@ export default function ConsultingRate() {
                   min={0}
                   step={1000}
                   value={inputs.businessExpenses}
-                  onChange={(e) => updateInput('businessExpenses', Number(e.target.value))}
+                  onChange={(e) => updateInput('businessExpenses', Number(e.currentTarget.value))}
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   Software, insurance, marketing, travel, etc.
@@ -160,7 +162,7 @@ export default function ConsultingRate() {
                     min={0}
                     step={500}
                     value={inputs.healthInsurance}
-                    onChange={(e) => updateInput('healthInsurance', Number(e.target.value))}
+                    onChange={(e) => updateInput('healthInsurance', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -173,7 +175,9 @@ export default function ConsultingRate() {
                     min={0}
                     step={1000}
                     value={inputs.retirementContributions}
-                    onChange={(e) => updateInput('retirementContributions', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('retirementContributions', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>

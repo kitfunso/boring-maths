@@ -4,7 +4,16 @@
 
 import { describe, it, expect } from 'vitest';
 import { calculateTapDrill } from '../../src/components/calculators/TapDrillCalculator/calculations';
-import type { TapDrillInputs } from '../../src/components/calculators/TapDrillCalculator/types';
+import type {
+  TapDrillInputs,
+  TapDrillResults,
+} from '../../src/components/calculators/TapDrillCalculator/types';
+
+function tapDrill(inputs: TapDrillInputs): TapDrillResults {
+  const found = calculateTapDrill(inputs);
+  if (!found) throw new Error(`no result for ${inputs.threadSize}`);
+  return found;
+}
 
 describe('TapDrillCalculator', () => {
   describe('calculateTapDrill', () => {
@@ -15,7 +24,7 @@ describe('TapDrillCalculator', () => {
         threadPercentage: 75,
       };
 
-      const result = calculateTapDrill(inputs);
+      const result = tapDrill(inputs);
 
       // Handbook: 0.250 - 0.75 x 1.299/20 = 0.2013" -> #7 drill (0.201")
       expect(result.tapDrillSize).toBeCloseTo(0.2013, 3);
@@ -30,7 +39,7 @@ describe('TapDrillCalculator', () => {
         threadPercentage: 75,
       };
 
-      const result = calculateTapDrill(inputs);
+      const result = tapDrill(inputs);
 
       // Handbook: 6 - 0.75 x 1.299 x 1.0 = 5.03mm -> standard 5.0mm drill
       expect(result.tapDrillSize).toBeCloseTo(5.03, 2);
@@ -51,8 +60,8 @@ describe('TapDrillCalculator', () => {
         threadPercentage: 90,
       };
 
-      const lowResult = calculateTapDrill(low);
-      const highResult = calculateTapDrill(high);
+      const lowResult = tapDrill(low);
+      const highResult = tapDrill(high);
 
       // Higher thread % needs a smaller hole (smaller drill)
       expect(highResult.tapDrillSize).toBeLessThan(lowResult.tapDrillSize);

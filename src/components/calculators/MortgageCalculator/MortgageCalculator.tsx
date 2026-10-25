@@ -131,7 +131,7 @@ export default function MortgageCalculator() {
                   min={0}
                   step={10000}
                   value={inputs.homePrice}
-                  onChange={(e) => handleHomePriceChange(Number(e.target.value))}
+                  onChange={(e) => handleHomePriceChange(Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -146,7 +146,7 @@ export default function MortgageCalculator() {
                   min={0}
                   step={1000}
                   value={inputs.downPayment}
-                  onChange={(e) => updateInput('downPayment', Number(e.target.value))}
+                  onChange={(e) => updateInput('downPayment', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -200,7 +200,7 @@ export default function MortgageCalculator() {
                     min={0}
                     step={100}
                     value={inputs.propertyTax}
-                    onChange={(e) => updateInput('propertyTax', Number(e.target.value))}
+                    onChange={(e) => updateInput('propertyTax', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -213,7 +213,7 @@ export default function MortgageCalculator() {
                     min={0}
                     step={100}
                     value={inputs.homeInsurance}
-                    onChange={(e) => updateInput('homeInsurance', Number(e.target.value))}
+                    onChange={(e) => updateInput('homeInsurance', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -226,7 +226,7 @@ export default function MortgageCalculator() {
                     min={0}
                     step={25}
                     value={inputs.hoaFees}
-                    onChange={(e) => updateInput('hoaFees', Number(e.target.value))}
+                    onChange={(e) => updateInput('hoaFees', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>

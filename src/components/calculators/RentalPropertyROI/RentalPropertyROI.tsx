@@ -73,7 +73,7 @@ export default function RentalPropertyROI() {
                   min={0}
                   step={10000}
                   value={inputs.purchasePrice}
-                  onChange={(e) => updateInput('purchasePrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('purchasePrice', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -89,7 +89,7 @@ export default function RentalPropertyROI() {
                     min={0}
                     step={100}
                     value={inputs.monthlyRent}
-                    onChange={(e) => updateInput('monthlyRent', Number(e.target.value))}
+                    onChange={(e) => updateInput('monthlyRent', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -169,7 +169,7 @@ export default function RentalPropertyROI() {
                     min={0}
                     step={100}
                     value={inputs.propertyTaxes}
-                    onChange={(e) => updateInput('propertyTaxes', Number(e.target.value))}
+                    onChange={(e) => updateInput('propertyTaxes', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -182,7 +182,7 @@ export default function RentalPropertyROI() {
                     min={0}
                     step={100}
                     value={inputs.insurance}
-                    onChange={(e) => updateInput('insurance', Number(e.target.value))}
+                    onChange={(e) => updateInput('insurance', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -196,7 +196,7 @@ export default function RentalPropertyROI() {
                   min={0}
                   step={50}
                   value={inputs.hoaFees}
-                  onChange={(e) => updateInput('hoaFees', Number(e.target.value))}
+                  onChange={(e) => updateInput('hoaFees', Number(e.currentTarget.value))}
                 />
               </div>
 

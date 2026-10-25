@@ -222,7 +222,7 @@ export default function ConferenceRoomCalculator() {
                   value={`${Math.round(result.usableSqFt / Math.max(1, result.primaryCapacity))}`}
                   sublabel="per attendee"
                 />
-                {result.layoutInfo.tableCount && (
+                {(result.layoutInfo.tableCount ?? 0) > 0 && (
                   <MetricCard
                     label="Tables Needed"
                     value={`${result.layoutInfo.tableCount}`}

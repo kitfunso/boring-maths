@@ -140,7 +140,7 @@ export default function RentAffordabilityCalculator() {
                 min={0}
                 step={100}
                 value={inputs.monthlyIncome}
-                onChange={(e) => updateInput('monthlyIncome', Number(e.target.value))}
+                onChange={(e) => updateInput('monthlyIncome', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -155,7 +155,7 @@ export default function RentAffordabilityCalculator() {
                 min={0}
                 step={50}
                 value={inputs.existingDebts}
-                onChange={(e) => updateInput('existingDebts', Number(e.target.value))}
+                onChange={(e) => updateInput('existingDebts', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Car payments, student loans, credit card minimums, etc.
@@ -173,7 +173,7 @@ export default function RentAffordabilityCalculator() {
                 max={100}
                 step={5}
                 value={inputs.savingsGoalPercent}
-                onChange={(e) => updateInput('savingsGoalPercent', Number(e.target.value))}
+                onChange={(e) => updateInput('savingsGoalPercent', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -195,7 +195,7 @@ export default function RentAffordabilityCalculator() {
                   min={0}
                   step={25}
                   value={inputs.estimatedUtilities}
-                  onChange={(e) => updateInput('estimatedUtilities', Number(e.target.value))}
+                  onChange={(e) => updateInput('estimatedUtilities', Number(e.currentTarget.value))}
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   Electric, gas, water, internet, etc.
@@ -239,7 +239,7 @@ export default function RentAffordabilityCalculator() {
                     label="After Rent"
                     value={formatCurrency(result.remainingAfterRent, inputs.currency)}
                     sublabel="remaining monthly"
-                    valueColor={result.remainingAfterRent > 0 ? 'text-green-400' : 'text-red-400'}
+                    valueColor={result.remainingAfterRent > 0 ? 'success' : 'error'}
                   />
                   <MetricCard
                     label="Savings Room"
@@ -254,7 +254,7 @@ export default function RentAffordabilityCalculator() {
                         : 0
                     )}
                     sublabel="of net income"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Debt Load"

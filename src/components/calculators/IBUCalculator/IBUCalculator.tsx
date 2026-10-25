@@ -2,7 +2,7 @@
  * IBU Calculator Component
  * Calculate hop bitterness for homebrewing
  */
-import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { IBUInputs, HopAddition } from './types';
 import { HOP_VARIETIES } from './types';
@@ -81,16 +81,20 @@ export function IBUCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Settings</h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input
-              label="Batch Size"
-              type="number"
-              value={inputs.batchSize}
-              onChange={(v) => setInputs({ ...inputs, batchSize: parseFloat(v) || 0 })}
-              min={1}
-              max={100}
-              step={0.5}
-              suffix={inputs.batchUnit}
-            />
+            <div>
+              <Label htmlFor="batch-size">Batch Size ({inputs.batchUnit})</Label>
+              <Input
+                id="batch-size"
+                type="number"
+                value={inputs.batchSize}
+                onChange={(e) =>
+                  setInputs({ ...inputs, batchSize: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+                max={100}
+                step={0.5}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -106,29 +110,36 @@ export function IBUCalculator() {
               />
             </div>
 
-            <Input
-              label="Original Gravity"
-              type="number"
-              value={inputs.originalGravity}
-              onChange={(v) => setInputs({ ...inputs, originalGravity: parseFloat(v) || 1 })}
-              min={1.0}
-              max={1.2}
-              step={0.001}
-              suffix="SG"
-            />
+            <div>
+              <Label htmlFor="original-gravity">Original Gravity (SG)</Label>
+              <Input
+                id="original-gravity"
+                type="number"
+                value={inputs.originalGravity}
+                onChange={(e) =>
+                  setInputs({ ...inputs, originalGravity: parseFloat(e.currentTarget.value) || 1 })
+                }
+                min={1.0}
+                max={1.2}
+                step={0.001}
+              />
+            </div>
 
-            <Select
-              label="IBU Formula"
-              value={inputs.formula}
-              onChange={(v) =>
-                setInputs({ ...inputs, formula: v as 'tinseth' | 'rager' | 'garetz' })
-              }
-              options={[
-                { value: 'tinseth', label: 'Tinseth (recommended)' },
-                { value: 'rager', label: 'Rager' },
-                { value: 'garetz', label: 'Garetz' },
-              ]}
-            />
+            <div>
+              <Label htmlFor="ibu-formula">IBU Formula</Label>
+              <Select
+                id="ibu-formula"
+                value={inputs.formula}
+                onChange={(v) =>
+                  setInputs({ ...inputs, formula: v as 'tinseth' | 'rager' | 'garetz' })
+                }
+                options={[
+                  { value: 'tinseth', label: 'Tinseth (recommended)' },
+                  { value: 'rager', label: 'Rager' },
+                  { value: 'garetz', label: 'Garetz' },
+                ]}
+              />
+            </div>
           </div>
         </div>
 
@@ -159,64 +170,87 @@ export function IBUCalculator() {
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <Select
-                    label="Hop Variety"
-                    value={hop.hopName}
-                    onChange={(v) => {
-                      const variety = HOP_VARIETIES.find((h) => h.name === v);
-                      updateHopAddition(hop.id, 'hopName', v);
-                      if (variety) {
+                  <div>
+                    <Label htmlFor={`hop-variety-${hop.id}`}>Hop Variety</Label>
+                    <Select
+                      id={`hop-variety-${hop.id}`}
+                      value={hop.hopName}
+                      onChange={(v) => {
+                        const variety = HOP_VARIETIES.find((h) => h.name === v);
+                        updateHopAddition(hop.id, 'hopName', v);
+                        if (variety) {
+                          updateHopAddition(
+                            hop.id,
+                            'alphaAcid',
+                            (variety.alphaMin + variety.alphaMax) / 2
+                          );
+                        }
+                      }}
+                      options={HOP_VARIETIES.map((h) => ({ value: h.name, label: h.name }))}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor={`hop-alpha-acid-${hop.id}`}>Alpha Acid (%)</Label>
+                    <Input
+                      id={`hop-alpha-acid-${hop.id}`}
+                      type="number"
+                      value={hop.alphaAcid}
+                      onChange={(e) =>
                         updateHopAddition(
                           hop.id,
                           'alphaAcid',
-                          (variety.alphaMin + variety.alphaMax) / 2
-                        );
+                          parseFloat(e.currentTarget.value) || 0
+                        )
                       }
-                    }}
-                    options={HOP_VARIETIES.map((h) => ({ value: h.name, label: h.name }))}
-                  />
+                      min={1}
+                      max={25}
+                      step={0.1}
+                    />
+                  </div>
 
-                  <Input
-                    label="Alpha Acid %"
-                    type="number"
-                    value={hop.alphaAcid}
-                    onChange={(v) => updateHopAddition(hop.id, 'alphaAcid', parseFloat(v) || 0)}
-                    min={1}
-                    max={25}
-                    step={0.1}
-                    suffix="%"
-                  />
+                  <div>
+                    <Label htmlFor={`hop-weight-${hop.id}`}>{`Weight (${hop.weightUnit})`}</Label>
+                    <Input
+                      id={`hop-weight-${hop.id}`}
+                      type="number"
+                      value={hop.weight}
+                      onChange={(e) =>
+                        updateHopAddition(hop.id, 'weight', parseFloat(e.currentTarget.value) || 0)
+                      }
+                      min={0.1}
+                      max={20}
+                      step={0.1}
+                    />
+                  </div>
 
-                  <Input
-                    label={`Weight (${hop.weightUnit})`}
-                    type="number"
-                    value={hop.weight}
-                    onChange={(v) => updateHopAddition(hop.id, 'weight', parseFloat(v) || 0)}
-                    min={0.1}
-                    max={20}
-                    step={0.1}
-                  />
+                  <div>
+                    <Label htmlFor={`hop-boil-time-${hop.id}`}>Boil Time (min)</Label>
+                    <Input
+                      id={`hop-boil-time-${hop.id}`}
+                      type="number"
+                      value={hop.boilTime}
+                      onChange={(e) =>
+                        updateHopAddition(hop.id, 'boilTime', parseInt(e.currentTarget.value) || 0)
+                      }
+                      min={0}
+                      max={120}
+                    />
+                  </div>
 
-                  <Input
-                    label="Boil Time"
-                    type="number"
-                    value={hop.boilTime}
-                    onChange={(v) => updateHopAddition(hop.id, 'boilTime', parseInt(v) || 0)}
-                    min={0}
-                    max={120}
-                    suffix="min"
-                  />
-
-                  <Select
-                    label="Form"
-                    value={hop.form}
-                    onChange={(v) => updateHopAddition(hop.id, 'form', v)}
-                    options={[
-                      { value: 'pellet', label: 'Pellet (+10% util)' },
-                      { value: 'whole', label: 'Whole Leaf' },
-                      { value: 'plug', label: 'Plug (+2% util)' },
-                    ]}
-                  />
+                  <div>
+                    <Label htmlFor={`hop-form-${hop.id}`}>Form</Label>
+                    <Select
+                      id={`hop-form-${hop.id}`}
+                      value={hop.form}
+                      onChange={(v) => updateHopAddition(hop.id, 'form', v)}
+                      options={[
+                        { value: 'pellet', label: 'Pellet (+10% util)' },
+                        { value: 'whole', label: 'Whole Leaf' },
+                        { value: 'plug', label: 'Plug (+2% util)' },
+                      ]}
+                    />
+                  </div>
 
                   <ButtonGroup
                     options={[
@@ -248,20 +282,15 @@ export function IBUCalculator() {
           <ResultCard
             label="BU:GU Ratio"
             value={results.bitteringRatio.toFixed(2)}
-            sublabel={
+            subtitle={
               results.bitteringRatio < 0.5
                 ? 'Malty'
                 : results.bitteringRatio < 0.8
                   ? 'Balanced'
                   : 'Hoppy'
             }
-            color="green"
           />
-          <ResultCard
-            label="Hop Additions"
-            value={inputs.hopAdditions.length.toString()}
-            color="blue"
-          />
+          <ResultCard label="Hop Additions" value={inputs.hopAdditions.length.toString()} />
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">

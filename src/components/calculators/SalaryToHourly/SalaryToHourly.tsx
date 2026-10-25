@@ -72,7 +72,7 @@ export default function SalaryToHourly() {
                 min={0}
                 step={1000}
                 value={inputs.annualSalary}
-                onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
+                onChange={(e) => updateInput('annualSalary', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -110,7 +110,7 @@ export default function SalaryToHourly() {
                   min={0}
                   max={50}
                   value={inputs.ptoDays}
-                  onChange={(e) => updateInput('ptoDays', Number(e.target.value))}
+                  onChange={(e) => updateInput('ptoDays', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -121,7 +121,7 @@ export default function SalaryToHourly() {
                   min={0}
                   max={20}
                   value={inputs.paidHolidays}
-                  onChange={(e) => updateInput('paidHolidays', Number(e.target.value))}
+                  onChange={(e) => updateInput('paidHolidays', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -136,7 +136,7 @@ export default function SalaryToHourly() {
                 min={0}
                 step={500}
                 value={inputs.benefitsValue}
-                onChange={(e) => updateInput('benefitsValue', Number(e.target.value))}
+                onChange={(e) => updateInput('benefitsValue', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Health insurance, 401k match, other perks
@@ -146,9 +146,7 @@ export default function SalaryToHourly() {
             <Checkbox
               id="includeBenefits"
               checked={inputs.includeBenefits}
-              onChange={(e) =>
-                updateInput('includeBenefits', (e.target as HTMLInputElement).checked)
-              }
+              onChange={(checked) => updateInput('includeBenefits', checked)}
               label="Include benefits in total compensation"
             />
 
@@ -161,7 +159,7 @@ export default function SalaryToHourly() {
                 min={0}
                 max={12}
                 value={inputs.unpaidTimeOff}
-                onChange={(e) => updateInput('unpaidTimeOff', Number(e.target.value))}
+                onChange={(e) => updateInput('unpaidTimeOff', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Unpaid sick days, leave, sabbatical

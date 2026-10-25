@@ -11,6 +11,18 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USSelfEmploymentTaxCalculator } from '../../components/calculators/USSelfEmploymentTaxCalculator';
+import {
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+  QBI_THRESHOLD_2026,
+  QBI_PHASE_IN_END_2026,
+} from '../../lib/us-tax-2026';
+
+const usd = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n);
 
 const title = 'Free Self-Employment Tax Calculator: 1099 Freelancer Tax | Boring Math';
 const description =
@@ -58,8 +70,7 @@ const faqs = [
   },
   {
     question: 'How do I calculate my self-employment tax?',
-    answer:
-      'SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base ($184,500 in 2026). Above that, only the 2.9% Medicare portion applies to additional income.',
+    answer: `SE tax is calculated on 92.35% of your net self-employment income (income minus business expenses). Multiply that by 15.3% for incomes under the Social Security wage base (${usd(SOCIAL_SECURITY_WAGE_BASE_2026)} in 2026). Above that, only the 2.9% Medicare portion applies to additional income.`,
   },
   {
     question: 'Do I need to pay quarterly estimated taxes?',
@@ -78,8 +89,7 @@ const faqs = [
   },
   {
     question: 'What is the Social Security wage base for 2026?',
-    answer:
-      'The Social Security wage base for 2026 is $184,500. This means you only pay the 12.4% Social Security portion of SE tax on the first $184,500 of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k).',
+    answer: `The Social Security wage base for 2026 is ${usd(SOCIAL_SECURITY_WAGE_BASE_2026)}. This means you only pay the 12.4% Social Security portion of SE tax on the first ${usd(SOCIAL_SECURITY_WAGE_BASE_2026)} of net self-employment earnings. Income above this is only subject to the 2.9% Medicare tax (plus 0.9% additional Medicare tax if over $200k).`,
   },
   {
     question: 'What is the additional Medicare tax?',
@@ -156,7 +166,13 @@ const schemaBreadcrumbs = [
       </p>
       <p>
         <strong class="text-blue-400">Federal income tax</strong> is calculated after deducting half your
-        SE tax. This "adjustment" reduces your taxable income, lowering your overall tax burden.
+        SE tax and the standard deduction. The calculator then takes the 20% qualified business income
+        (QBI) deduction, which most sole proprietors can claim. It phases out for single filers with taxable
+        income between {usd(QBI_THRESHOLD_2026.single)} and {usd(QBI_PHASE_IN_END_2026.single)}
+        (joint {usd(QBI_THRESHOLD_2026.married_jointly)} to {
+          usd(QBI_PHASE_IN_END_2026.married_jointly)
+        }) when the business has no employees. A specified service business, such as consulting, can
+        lose it faster.
       </p>
       <p>
         <strong class="text-amber-400">Quarterly payments</strong> help you avoid underpayment penalties.
@@ -166,8 +182,12 @@ const schemaBreadcrumbs = [
   </ContentSection>
 
   <SourcesSection
-    checked="2026-10-24"
+    checked="2026-10-25"
     sources={[
+      {
+        label: 'IRS: Qualified business income deduction',
+        href: 'https://www.irs.gov/newsroom/qualified-business-income-deduction',
+      },
       {
         label: 'IRS: Self-employment tax (Social Security and Medicare taxes)',
         href: 'https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes',

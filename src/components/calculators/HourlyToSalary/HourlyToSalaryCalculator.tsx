@@ -78,7 +78,7 @@ export default function HourlyToSalaryCalculator() {
                 min={0}
                 step={0.5}
                 value={inputs.hourlyRate}
-                onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
+                onChange={(e) => updateInput('hourlyRate', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -92,7 +92,7 @@ export default function HourlyToSalaryCalculator() {
                   min={1}
                   max={80}
                   value={inputs.hoursPerWeek}
-                  onChange={(e) => updateInput('hoursPerWeek', Number(e.target.value))}
+                  onChange={(e) => updateInput('hoursPerWeek', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -104,7 +104,7 @@ export default function HourlyToSalaryCalculator() {
                   min={1}
                   max={52}
                   value={inputs.weeksPerYear}
-                  onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
+                  onChange={(e) => updateInput('weeksPerYear', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   52 weeks minus vacation time
@@ -122,7 +122,7 @@ export default function HourlyToSalaryCalculator() {
                 max={60}
                 step={1}
                 value={Math.round(inputs.taxRate * 100)}
-                onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
+                onChange={(e) => updateInput('taxRate', Number(e.currentTarget.value) / 100)}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 {region === 'US' && 'Federal + State income tax (typically 20-30%)'}
@@ -153,7 +153,7 @@ export default function HourlyToSalaryCalculator() {
                     min={0}
                     max={40}
                     value={inputs.overtimeHours}
-                    onChange={(e) => updateInput('overtimeHours', Number(e.target.value))}
+                    onChange={(e) => updateInput('overtimeHours', Number(e.currentTarget.value))}
                   />
                 </div>
 

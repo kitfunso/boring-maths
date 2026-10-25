@@ -9,9 +9,6 @@ import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 /** CO2 per gallon of gasoline in kg */
 const CO2_PER_GALLON_KG = 8.887;
 
-/** CO2 per liter of gasoline in kg */
-const CO2_PER_LITER_KG = 2.348;
-
 /** Average CO2 a tree absorbs per year in kg */
 const CO2_PER_TREE_PER_YEAR_KG = 22;
 

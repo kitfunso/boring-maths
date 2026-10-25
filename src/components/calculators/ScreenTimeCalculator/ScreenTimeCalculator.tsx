@@ -206,13 +206,13 @@ export default function ScreenTimeCalculator() {
                     label="Yearly"
                     value={`${formatNumber(result.yearlyHours)}h`}
                     sublabel="per year"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Lifetime"
                     value={`${formatNumber(result.lifetimeYears)}y`}
                     sublabel="projected"
-                    valueColor="text-rose-400"
+                    valueColor="error"
                   />
                 </Grid>
 

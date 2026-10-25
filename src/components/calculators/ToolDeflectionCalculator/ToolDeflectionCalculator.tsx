@@ -2,7 +2,7 @@
  * Tool Deflection Calculator Component
  * Calculate end mill deflection to prevent tool breakage
  */
-import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { ToolDeflectionInputs } from './types';
 import { TOOL_MATERIALS, FLUTE_OPTIONS, MATERIAL_FACTORS, TOOL_PRESETS } from './types';
@@ -53,24 +53,36 @@ export function ToolDeflectionCalculator() {
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Tool Diameter"
-                type="number"
-                value={inputs.toolDiameter}
-                onChange={(v) => setInputs({ ...inputs, toolDiameter: parseFloat(v) || 0 })}
-                min={0.01}
-                step={0.0625}
-                suffix={inputs.lengthUnit === 'inches' ? '"' : 'mm'}
-              />
-              <Input
-                label="Stickout Length"
-                type="number"
-                value={inputs.stickout}
-                onChange={(v) => setInputs({ ...inputs, stickout: parseFloat(v) || 0 })}
-                min={0.1}
-                step={0.125}
-                suffix={inputs.lengthUnit === 'inches' ? '"' : 'mm'}
-              />
+              <div>
+                <Label htmlFor="tool-diameter">
+                  Tool Diameter ({inputs.lengthUnit === 'inches' ? '"' : 'mm'})
+                </Label>
+                <Input
+                  id="tool-diameter"
+                  type="number"
+                  value={inputs.toolDiameter}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, toolDiameter: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0.01}
+                  step={0.0625}
+                />
+              </div>
+              <div>
+                <Label htmlFor="stickout-length">
+                  Stickout Length ({inputs.lengthUnit === 'inches' ? '"' : 'mm'})
+                </Label>
+                <Input
+                  id="stickout-length"
+                  type="number"
+                  value={inputs.stickout}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, stickout: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0.1}
+                  step={0.125}
+                />
+              </div>
             </div>
 
             <div>
@@ -86,7 +98,7 @@ export function ToolDeflectionCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    lengthUnit: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                    lengthUnit: v as ToolDeflectionInputs['lengthUnit'],
                   })
                 }
               />
@@ -114,30 +126,41 @@ export function ToolDeflectionCalculator() {
               ))}
             </div>
 
-            <Select
-              label="Tool Material"
-              value={inputs.toolMaterial}
-              onChange={(v) =>
-                setInputs({
-                  ...inputs,
-                  toolMaterial: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
-                })
-              }
-              options={TOOL_MATERIALS.map((m) => ({
-                value: m.value,
-                label: m.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="tool-material">Tool Material</Label>
+              <Select
+                id="tool-material"
+                value={inputs.toolMaterial}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    toolMaterial: v as ToolDeflectionInputs['toolMaterial'],
+                  })
+                }
+                options={TOOL_MATERIALS.map((m) => ({
+                  value: m.value,
+                  label: m.label,
+                }))}
+              />
+            </div>
 
-            <Select
-              label="Flute Count"
-              value={inputs.fluteCount.toString()}
-              onChange={(v) => setInputs({ ...inputs, fluteCount: parseInt(v) })}
-              options={FLUTE_OPTIONS.map((f) => ({
-                value: f.value.toString(),
-                label: f.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="flute-count">Flute Count</Label>
+              <Select
+                id="flute-count"
+                value={inputs.fluteCount.toString()}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    fluteCount: parseInt(v) as ToolDeflectionInputs['fluteCount'],
+                  })
+                }
+                options={FLUTE_OPTIONS.map((f) => ({
+                  value: f.value.toString(),
+                  label: f.label,
+                }))}
+              />
+            </div>
           </div>
         </div>
 
@@ -160,7 +183,7 @@ export function ToolDeflectionCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    calculationMode: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                    calculationMode: v as ToolDeflectionInputs['calculationMode'],
                   })
                 }
               />
@@ -168,14 +191,19 @@ export function ToolDeflectionCalculator() {
 
             {inputs.calculationMode === 'force' ? (
               <div className="grid grid-cols-2 gap-4">
-                <Input
-                  label="Cutting Force"
-                  type="number"
-                  value={inputs.cuttingForce}
-                  onChange={(v) => setInputs({ ...inputs, cuttingForce: parseFloat(v) || 0 })}
-                  min={0.1}
-                  step={1}
-                />
+                <div>
+                  <Label htmlFor="cutting-force">Cutting Force</Label>
+                  <Input
+                    id="cutting-force"
+                    type="number"
+                    value={inputs.cuttingForce}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, cuttingForce: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0.1}
+                    step={1}
+                  />
+                </div>
                 <div>
                   <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
                     Force Unit
@@ -189,7 +217,7 @@ export function ToolDeflectionCalculator() {
                     onChange={(v) =>
                       setInputs({
                         ...inputs,
-                        forceUnit: v as ToolDeflectionInputs[keyof ToolDeflectionInputs],
+                        forceUnit: v as ToolDeflectionInputs['forceUnit'],
                       })
                     }
                   />
@@ -197,46 +225,65 @@ export function ToolDeflectionCalculator() {
               </div>
             ) : (
               <>
-                <Select
-                  label="Workpiece Material"
-                  value={inputs.materialFactor.toString()}
-                  onChange={(v) => setInputs({ ...inputs, materialFactor: parseFloat(v) })}
-                  options={MATERIAL_FACTORS.map((m) => ({
-                    value: m.factor.toString(),
-                    label: m.label,
-                  }))}
-                />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <Input
-                    label="Depth of Cut"
-                    type="number"
-                    value={inputs.depthOfCut}
-                    onChange={(v) => setInputs({ ...inputs, depthOfCut: parseFloat(v) || 0 })}
-                    min={0.001}
-                    step={0.01}
-                    suffix={inputs.lengthUnit === 'inches' ? '"' : 'mm'}
-                  />
-                  <Input
-                    label="Width of Cut"
-                    type="number"
-                    value={inputs.widthOfCut}
-                    onChange={(v) => setInputs({ ...inputs, widthOfCut: parseFloat(v) || 0 })}
-                    min={0.001}
-                    step={0.01}
-                    suffix={inputs.lengthUnit === 'inches' ? '"' : 'mm'}
+                <div>
+                  <Label htmlFor="workpiece-material">Workpiece Material</Label>
+                  <Select
+                    id="workpiece-material"
+                    value={inputs.materialFactor.toString()}
+                    onChange={(v) => setInputs({ ...inputs, materialFactor: parseFloat(v) })}
+                    options={MATERIAL_FACTORS.map((m) => ({
+                      value: m.factor.toString(),
+                      label: m.label,
+                    }))}
                   />
                 </div>
 
-                <Input
-                  label="Feed Rate"
-                  type="number"
-                  value={inputs.feedRate}
-                  onChange={(v) => setInputs({ ...inputs, feedRate: parseFloat(v) || 0 })}
-                  min={0.1}
-                  step={1}
-                  suffix="ipm"
-                />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="depth-of-cut">
+                      Depth of Cut ({inputs.lengthUnit === 'inches' ? '"' : 'mm'})
+                    </Label>
+                    <Input
+                      id="depth-of-cut"
+                      type="number"
+                      value={inputs.depthOfCut}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, depthOfCut: parseFloat(e.currentTarget.value) || 0 })
+                      }
+                      min={0.001}
+                      step={0.01}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="width-of-cut">
+                      Width of Cut ({inputs.lengthUnit === 'inches' ? '"' : 'mm'})
+                    </Label>
+                    <Input
+                      id="width-of-cut"
+                      type="number"
+                      value={inputs.widthOfCut}
+                      onChange={(e) =>
+                        setInputs({ ...inputs, widthOfCut: parseFloat(e.currentTarget.value) || 0 })
+                      }
+                      min={0.001}
+                      step={0.01}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <Label htmlFor="feed-rate">Feed Rate (ipm)</Label>
+                  <Input
+                    id="feed-rate"
+                    type="number"
+                    value={inputs.feedRate}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, feedRate: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0.1}
+                    step={1}
+                  />
+                </div>
               </>
             )}
           </div>
@@ -262,32 +309,22 @@ export function ToolDeflectionCalculator() {
           <ResultCard
             label="Max Recommended"
             value={formatDeflection(results.maxRecommended, results.deflectionUnit)}
-            sublabel="0.1% of diameter"
-            color="blue"
+            subtitle="0.1% of diameter"
           />
           <ResultCard
             label="Deflection Ratio"
             value={`${(results.deflectionRatio * 100).toFixed(0)}%`}
-            sublabel="of limit"
-            color={
-              results.status === 'safe'
-                ? 'green'
-                : results.status === 'warning'
-                  ? 'purple'
-                  : 'purple'
-            }
+            subtitle="of limit"
           />
           <ResultCard
             label="Tool Stiffness"
             value={`${results.stiffness.toLocaleString()}`}
-            sublabel="lbs/inch"
-            color="blue"
+            subtitle="lbs/inch"
           />
           <ResultCard
             label="Stickout Ratio"
             value={`${(inputs.stickout / inputs.toolDiameter).toFixed(1)}:1`}
-            sublabel="L/D ratio"
-            color="green"
+            subtitle="L/D ratio"
           />
         </div>
 

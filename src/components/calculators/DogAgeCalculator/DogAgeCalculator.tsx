@@ -104,7 +104,7 @@ export default function DogAgeCalculator() {
                   min={0}
                   max={25}
                   value={inputs.dogYears}
-                  onChange={(e) => updateInput('dogYears', Number(e.target.value))}
+                  onChange={(e) => updateInput('dogYears', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -115,7 +115,7 @@ export default function DogAgeCalculator() {
                   min={0}
                   max={11}
                   value={inputs.dogMonths}
-                  onChange={(e) => updateInput('dogMonths', Number(e.target.value))}
+                  onChange={(e) => updateInput('dogMonths', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -154,7 +154,7 @@ export default function DogAgeCalculator() {
                 label="Human Years"
                 value={`${result.humanYears}`}
                 sublabel="equivalent"
-                valueColor="text-[var(--color-accent)]"
+                valueColor="themed"
               />
               <MetricCard
                 label="Avg. Lifespan"
@@ -169,9 +169,7 @@ export default function DogAgeCalculator() {
                     : 'n/a'
                 }
                 sublabel="years"
-                valueColor={
-                  result.remainingYears.max > 0 ? 'text-green-400' : 'text-[var(--color-muted)]'
-                }
+                valueColor={result.remainingYears.max > 0 ? 'success' : 'default'}
               />
             </Grid>
 

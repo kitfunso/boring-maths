@@ -117,7 +117,7 @@ export default function PartyDrinkCalculator() {
                   min={1}
                   max={500}
                   value={inputs.guestCount}
-                  onChange={(e) => updateInput('guestCount', Number(e.target.value))}
+                  onChange={(e) => updateInput('guestCount', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -129,7 +129,7 @@ export default function PartyDrinkCalculator() {
                   min={0}
                   max={inputs.guestCount}
                   value={inputs.childrenCount}
-                  onChange={(e) => updateInput('childrenCount', Number(e.target.value))}
+                  onChange={(e) => updateInput('childrenCount', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Kids-friendly drinks will be prioritized

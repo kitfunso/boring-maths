@@ -23,7 +23,7 @@ export default function UKChildBenefitCalculator() {
   const statusColor = getStatusColor();
 
   return (
-    <ThemeProvider defaultColor="pink">
+    <ThemeProvider defaultColor="red">
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Child Benefit Calculator"

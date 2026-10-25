@@ -33,7 +33,7 @@ export default function UKSalarySacrificeCalculator() {
   const currentType = SACRIFICE_TYPES[inputs.sacrificeType];
 
   return (
-    <ThemeProvider defaultColor="teal">
+    <ThemeProvider defaultColor="green">
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Salary Sacrifice Calculator"

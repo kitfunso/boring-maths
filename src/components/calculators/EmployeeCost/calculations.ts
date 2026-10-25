@@ -2,6 +2,7 @@
  * Employee Cost Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { EmployeeCostInputs, EmployeeCostResult, CostBreakdown } from './types';
 
 export function calculateEmployeeCost(inputs: EmployeeCostInputs): EmployeeCostResult {

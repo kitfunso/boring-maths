@@ -1,19 +1,6 @@
-/**
- * Contractor vs Employee Calculator - Calculation Logic
- *
- * Compares true total compensation between contractor/freelance and
- * full-time employment, accounting for hidden costs and benefits.
- *
- * Key factors:
- * - Self-employment tax (additional 7.65% employer portion)
- * - Health insurance cost differential
- * - Retirement match value
- * - PTO value (paid time off as compensation)
- * - Business expenses
- */
+/** Contractor vs employee: net pay plus benefits on each side; tax comes from taxModels.ts. */
 
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
-import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 import {
   type ContractorVsEmployeeInputs,
   type ContractorVsEmployeeResult,
@@ -22,12 +9,26 @@ import {
   type LineItem,
   type EmploymentType,
 } from './types';
+import { type TaxContext, contractorTax, employeeTax } from './taxModels';
 
 /**
  * Standard work hours for comparison
  */
 const STANDARD_WORK_HOURS_PER_WEEK = 40;
 const STANDARD_WORK_WEEKS_PER_YEAR = 52;
+
+// The suggested rate sits this far above break-even to cover unbilled weeks and late payers
+const RATE_BUFFER = 0.1;
+
+function taxContext(inputs: ContractorVsEmployeeInputs): TaxContext {
+  return {
+    currency: inputs.currency,
+    filingStatus: inputs.filingStatus,
+    stateTaxRate: inputs.currency === 'USD' ? inputs.stateTaxRate : 0,
+    euCountry: inputs.euCountry,
+    selfEmployedSocialRate: inputs.selfEmployedSocialRate,
+  };
+}
 
 /**
  * Calculate contractor compensation breakdown
@@ -44,51 +45,33 @@ function calculateContractorCompensation(
     contractorBusinessExpensesMonthly,
     contractorAccountingAnnual,
     contractorInsuranceAnnual,
-    federalTaxBracket,
-    stateTaxRate,
-    selfEmploymentTaxRate,
   } = inputs;
 
-  // Gross income
   const annualBillableHours = contractorBillableHoursPerWeek * contractorWeeksPerYear;
   const grossIncome = contractorHourlyRate * annualBillableHours;
 
-  // Costs
   const healthInsuranceCost = contractorHealthInsuranceMonthly * 12;
   const businessExpenses = contractorBusinessExpensesMonthly * 12;
   const professionalServices = contractorAccountingAnnual + contractorInsuranceAnnual;
-
-  // Self-employment tax (on 92.35% of net self-employment income)
-  const netSEIncome = grossIncome * 0.9235;
-  const selfEmploymentTax = netSEIncome * selfEmploymentTaxRate;
-
-  // Deductible half of SE tax
-  const seTaxDeduction = selfEmploymentTax / 2;
-
-  // Retirement contribution (as percentage of gross)
   const retirementContribution = grossIncome * (contractorRetirementContribPercent / 100);
 
-  // Taxable income (after deductions)
-  const taxableIncome = grossIncome - seTaxDeduction - retirementContribution - healthInsuranceCost;
-  const incomeTax = taxableIncome * (federalTaxBracket + stateTaxRate);
+  // Accounting and liability insurance are business expenses, so tax falls on profit
+  const profit = grossIncome - businessExpenses - professionalServices;
+  const { socialTax, incomeTax } = contractorTax(
+    profit,
+    retirementContribution,
+    healthInsuranceCost,
+    taxContext(inputs)
+  );
 
-  // Total costs
   const totalCosts =
     healthInsuranceCost +
     retirementContribution +
     businessExpenses +
     professionalServices +
-    selfEmploymentTax +
+    socialTax +
     incomeTax;
-
-  // Net income
   const netIncome = grossIncome - totalCosts;
-
-  // Effective hourly rate (based on actual billable hours)
-  const effectiveHourlyRate = netIncome / annualBillableHours;
-
-  // Total compensation (gross + any benefits contractor might get - none typically)
-  const totalCompensation = grossIncome;
 
   return {
     grossIncome,
@@ -102,12 +85,12 @@ function calculateContractorCompensation(
     retirementContribution,
     businessExpenses,
     professionalServices,
-    selfEmploymentTax,
+    socialTax,
     incomeTax,
-    totalCompensation,
+    totalCompensation: grossIncome,
     totalCosts,
     netIncome,
-    effectiveHourlyRate,
+    effectiveHourlyRate: annualBillableHours > 0 ? netIncome / annualBillableHours : 0,
   };
 }
 
@@ -126,15 +109,11 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
     paidTimeOffDays,
     paidHolidaysDays,
     otherBenefitsAnnual,
-    federalTaxBracket,
-    stateTaxRate,
   } = inputs;
 
-  // Gross income
   const grossIncome = employeeSalary;
   const bonus = employeeSalary * (employeeBonusPercent / 100);
 
-  // Benefits value
   const healthInsuranceValue = employerHealthInsuranceMonthly * 12;
   const dentalVisionValue = employerDentalVisionMonthly * 12;
   const lifeDisabilityValue = employerLifeDisabilityMonthly * 12;
@@ -142,13 +121,13 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
   // 401k match value (assumes employee contributes enough to get full match)
   const maxMatchableContribution = employeeSalary * (employer401kMatchLimit / 100);
   const retirementMatchValue =
-    maxMatchableContribution * (employer401kMatch / employer401kMatchLimit);
+    employer401kMatchLimit > 0
+      ? maxMatchableContribution * (employer401kMatch / employer401kMatchLimit)
+      : 0;
 
   // PTO value (daily rate × days)
   const dailyRate = employeeSalary / 260; // ~260 working days per year
   const ptoValue = dailyRate * (paidTimeOffDays + paidHolidaysDays);
-
-  const otherBenefitsValue = otherBenefitsAnnual;
 
   const totalBenefitsValue =
     healthInsuranceValue +
@@ -156,27 +135,17 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
     lifeDisabilityValue +
     retirementMatchValue +
     ptoValue +
-    otherBenefitsValue;
+    otherBenefitsAnnual;
 
-  // Total compensation
   const totalCompensation = grossIncome + bonus + totalBenefitsValue;
 
-  // Employee costs (minimal - just taxes, employer pays FICA)
-  const taxableIncome = grossIncome + bonus;
-  const incomeTax = taxableIncome * (federalTaxBracket + stateTaxRate);
-
-  // Social Security stops at the wage base; Medicare applies to all wages
-  const employeeFica =
-    Math.min(taxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.062 + taxableIncome * 0.0145;
-
-  const totalCosts = incomeTax + employeeFica;
+  const { socialTax, incomeTax } = employeeTax(grossIncome + bonus, taxContext(inputs));
+  const totalCosts = socialTax + incomeTax;
   const netIncome = grossIncome + bonus - totalCosts;
 
-  // Effective hourly rate
-  const standardAnnualHours = STANDARD_WORK_HOURS_PER_WEEK * STANDARD_WORK_WEEKS_PER_YEAR;
   // Subtract PTO since it's paid but not worked
+  const standardAnnualHours = STANDARD_WORK_HOURS_PER_WEEK * STANDARD_WORK_WEEKS_PER_YEAR;
   const actualWorkHours = standardAnnualHours - (paidTimeOffDays + paidHolidaysDays) * 8;
-  const effectiveHourlyRate = netIncome / actualWorkHours;
 
   return {
     grossIncome,
@@ -184,19 +153,38 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
     healthInsuranceValue,
     retirementMatchValue,
     ptoValue,
-    otherBenefitsValue: dentalVisionValue + lifeDisabilityValue + otherBenefitsValue,
+    otherBenefitsValue: dentalVisionValue + lifeDisabilityValue + otherBenefitsAnnual,
     totalBenefitsValue,
     healthInsuranceCost: 0,
     retirementContribution: 0,
     businessExpenses: 0,
     professionalServices: 0,
-    selfEmploymentTax: 0,
-    incomeTax: incomeTax + employeeFica,
+    socialTax,
+    incomeTax,
     totalCompensation,
     totalCosts,
     netIncome,
-    effectiveHourlyRate,
+    effectiveHourlyRate: actualWorkHours > 0 ? netIncome / actualWorkHours : 0,
   };
+}
+
+const employeeValue = (e: CompensationBreakdown) => e.totalCompensation - e.totalCosts;
+
+/** Smallest x >= 0 with f(x) >= target, for f increasing; 0 if f never gets there. */
+function solveIncreasing(f: (x: number) => number, target: number, start: number): number {
+  if (f(0) >= target) return 0;
+  let hi = Math.max(1, start);
+  for (let i = 0; f(hi) < target; i++) {
+    if (i > 40) return 0;
+    hi *= 2;
+  }
+  let lo = 0;
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2;
+    if (f(mid) < target) lo = mid;
+    else hi = mid;
+  }
+  return hi;
 }
 
 /**
@@ -207,65 +195,53 @@ function calculateComparison(
   employee: CompensationBreakdown,
   inputs: ContractorVsEmployeeInputs
 ): ComparisonMetrics {
-  const {
-    contractorHourlyRate,
-    employeeSalary,
-    contractorWeeksPerYear,
-    contractorBillableHoursPerWeek,
-  } = inputs;
+  const { contractorHourlyRate, employeeSalary } = inputs;
 
-  // Determine winner based on total compensation value
-  const contractorValue =
-    contractor.totalCompensation - contractor.totalCosts + contractor.totalBenefitsValue;
-  const employeeValue = employee.totalCompensation - employee.totalCosts;
+  // A contractor has no benefits, so their value is net income
+  const contractorValue = contractor.netIncome;
+  const empValue = employeeValue(employee);
 
-  const winner: EmploymentType = contractorValue > employeeValue ? 'contractor' : 'employee';
-  const annualDifference = Math.abs(contractorValue - employeeValue);
-  const monthlyDifference = annualDifference / 12;
-  const percentageDifference = (annualDifference / Math.min(contractorValue, employeeValue)) * 100;
+  const winner: EmploymentType = contractorValue > empValue ? 'contractor' : 'employee';
+  const annualDifference = Math.abs(contractorValue - empValue);
+  const smaller = Math.min(contractorValue, empValue);
 
-  // Break-even contractor rate to match employee
-  // Contractor needs to cover: employee total comp + SE tax + health insurance + business costs
-  const contractorCostRatio =
-    (contractor.healthInsuranceCost +
-      contractor.businessExpenses +
-      contractor.professionalServices +
-      contractor.selfEmploymentTax) /
-    contractor.grossIncome;
-
-  const annualBillableHours = contractorBillableHoursPerWeek * contractorWeeksPerYear;
-  const breakEvenContractRate =
-    employee.totalCompensation / (annualBillableHours * (1 - contractorCostRatio - 0.1)); // 10% buffer
-
-  // Break-even salary to match contractor
-  // Employee salary that would equal contractor net value
-  const breakEvenSalary = contractor.netIncome / 0.7; // Rough estimate accounting for benefits
-
-  // Rate to salary multiplier
-  const equivalentAnnualRate = contractorHourlyRate * 2080; // Standard work year
-  const rateToSalaryMultiplier = equivalentAnnualRate / employeeSalary;
-
-  // Recommended rate
-  const recommendedContractRate = Math.ceil(breakEvenContractRate / 5) * 5; // Round to nearest $5
+  // Re-run the same tax models instead of guessing a cost ratio
+  const breakEvenContractRate = solveIncreasing(
+    (rate) => calculateContractorCompensation({ ...inputs, contractorHourlyRate: rate }).netIncome,
+    empValue,
+    contractorHourlyRate
+  );
+  const breakEvenSalary = solveIncreasing(
+    (salary) => employeeValue(calculateEmployeeCompensation({ ...inputs, employeeSalary: salary })),
+    contractorValue,
+    employeeSalary
+  );
 
   return {
     winner,
     annualDifference,
-    monthlyDifference,
-    percentageDifference,
+    monthlyDifference: annualDifference / 12,
+    percentageDifference: smaller > 0 ? (annualDifference / smaller) * 100 : 0,
     breakEvenContractRate,
     breakEvenSalary,
-    rateToSalaryMultiplier,
-    recommendedContractRate,
+    rateToSalaryMultiplier: employeeSalary > 0 ? (contractorHourlyRate * 2080) / employeeSalary : 0,
+    recommendedContractRate: Math.ceil((breakEvenContractRate * (1 + RATE_BUFFER)) / 5) * 5,
   };
 }
+
+const SOCIAL_TAX_LABEL: Record<Currency, string> = {
+  USD: 'Social Security & Medicare',
+  GBP: 'National Insurance',
+  EUR: 'Social Contributions',
+};
 
 /**
  * Generate line items for detailed comparison
  */
 function generateLineItems(
   contractor: CompensationBreakdown,
-  employee: CompensationBreakdown
+  employee: CompensationBreakdown,
+  currency: Currency
 ): LineItem[] {
   return [
     {
@@ -302,10 +278,10 @@ function generateLineItems(
       employee: employee.otherBenefitsValue,
     },
     {
-      label: 'Self-Employment Tax',
-      contractor: -contractor.selfEmploymentTax,
-      employee: 0,
-      note: 'Additional 7.65% employer portion of FICA',
+      label: SOCIAL_TAX_LABEL[currency],
+      contractor: -contractor.socialTax,
+      employee: -employee.socialTax,
+      note: SOCIAL_TAX_INFO[currency].note,
     },
     {
       label: 'Business Expenses',
@@ -326,10 +302,7 @@ function generateLineItems(
   ];
 }
 
-/**
- * Floor a numeric input so a non-finite value (NaN/Infinity from a cleared or
- * partial entry like "-" or "1e") becomes 0. Valid numbers pass through unchanged.
- */
+/** A cleared or partial entry ("-", "1e") parses to NaN; treat it as 0. */
 const safe = (v: number): number => (Number.isFinite(v) ? v : 0);
 
 /**
@@ -356,9 +329,8 @@ function sanitizeInputs(inputs: ContractorVsEmployeeInputs): ContractorVsEmploye
     contractorBusinessExpensesMonthly: safe(inputs.contractorBusinessExpensesMonthly),
     contractorAccountingAnnual: safe(inputs.contractorAccountingAnnual),
     contractorInsuranceAnnual: safe(inputs.contractorInsuranceAnnual),
-    federalTaxBracket: safe(inputs.federalTaxBracket),
     stateTaxRate: safe(inputs.stateTaxRate),
-    selfEmploymentTaxRate: safe(inputs.selfEmploymentTaxRate),
+    selfEmployedSocialRate: safe(inputs.selfEmployedSocialRate),
   };
 }
 
@@ -372,7 +344,7 @@ export function calculateComparison_main(
   const contractor = calculateContractorCompensation(inputs);
   const employee = calculateEmployeeCompensation(inputs);
   const comparison = calculateComparison(contractor, employee, inputs);
-  const lineItems = generateLineItems(contractor, employee);
+  const lineItems = generateLineItems(contractor, employee, inputs.currency);
 
   const hoursWorkedContractor =
     inputs.contractorBillableHoursPerWeek * inputs.contractorWeeksPerYear;
@@ -440,54 +412,19 @@ export function getComparisonColor(
 }
 
 /**
- * Tax brackets by region
+ * What the social tax line means on each side, by currency
  */
-export const TAX_BRACKETS_BY_REGION: Record<
-  Currency,
-  Array<{ rate: number; label: string; range: string }>
-> = {
-  USD: [
-    { rate: 0.1, label: '10%', range: '$0 - $11,000' },
-    { rate: 0.12, label: '12%', range: '$11,001 - $44,725' },
-    { rate: 0.22, label: '22%', range: '$44,726 - $95,375' },
-    { rate: 0.24, label: '24%', range: '$95,376 - $183,000' },
-    { rate: 0.32, label: '32%', range: '$183,001 - $231,250' },
-    { rate: 0.35, label: '35%', range: '$231,251 - $578,125' },
-    { rate: 0.37, label: '37%', range: '$578,126+' },
-  ],
-  GBP: [
-    { rate: 0.0, label: '0%', range: '£0 - £12,570' },
-    { rate: 0.2, label: '20%', range: '£12,571 - £50,270' },
-    { rate: 0.4, label: '40%', range: '£50,271 - £125,140' },
-    { rate: 0.45, label: '45%', range: '£125,141+' },
-  ],
-  EUR: [
-    { rate: 0.0, label: '0%', range: '€0 - €10,000' },
-    { rate: 0.14, label: '14%', range: '€10,001 - €15,000' },
-    { rate: 0.24, label: '24%', range: '€15,001 - €28,000' },
-    { rate: 0.34, label: '34%', range: '€28,001 - €55,000' },
-    { rate: 0.42, label: '42%', range: '€55,001 - €75,000' },
-    { rate: 0.45, label: '45%', range: '€75,001+' },
-  ],
-};
-
-/**
- * Get tax brackets for a currency (for backwards compatibility)
- */
-export function getTaxBrackets(currency: Currency) {
-  return TAX_BRACKETS_BY_REGION[currency];
-}
-
-/**
- * Default US tax brackets (for backwards compatibility)
- */
-export const TAX_BRACKETS = TAX_BRACKETS_BY_REGION.USD;
-
-/**
- * Self-employment tax info by region
- */
-export const SELF_EMPLOYMENT_TAX_INFO: Record<Currency, { rate: number; label: string }> = {
-  USD: { rate: 0.153, label: 'Additional 7.65% FICA' },
-  GBP: { rate: 0.09, label: 'Class 4 NICs' },
-  EUR: { rate: 0.15, label: 'Social contributions (varies)' },
+export const SOCIAL_TAX_INFO: Record<Currency, { label: string; note: string }> = {
+  USD: {
+    label: '15.3% on 92.35% of profit',
+    note: 'Contractor pays both halves of FICA. Employee pays 7.65%',
+  },
+  GBP: {
+    label: 'Class 4: 6%, then 2%',
+    note: 'Contractor: Class 4 on profit. Employee: Class 1 on pay',
+  },
+  EUR: {
+    label: 'At the rate you enter',
+    note: "Contractor: the rate you enter. Employee: the country's employee rate",
+  },
 };

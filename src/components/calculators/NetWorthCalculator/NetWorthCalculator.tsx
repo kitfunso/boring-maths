@@ -277,7 +277,6 @@ export default function NetWorthCalculator() {
               subtitle={
                 result.netWorth >= 0 ? 'Assets exceed liabilities' : 'Liabilities exceed assets'
               }
-              valueColor={result.netWorth >= 0 ? 'success' : 'error'}
             />
 
             {/* Key Metrics */}

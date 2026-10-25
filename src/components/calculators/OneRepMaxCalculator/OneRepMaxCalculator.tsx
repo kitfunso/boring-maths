@@ -4,7 +4,6 @@
  * Estimates 1RM using five formulas with percentage table and training zones.
  */
 
-import { useMemo } from 'preact/hooks';
 import { calculateOneRepMax } from './calculations';
 import {
   getDefaultInputs,
@@ -21,7 +20,6 @@ import {
   Input,
   ButtonGroup,
   Select,
-  Grid,
   Divider,
   ResultCard,
   Alert,
@@ -109,7 +107,7 @@ export default function OneRepMaxCalculator() {
                 max={2000}
                 step={inputs.unit === 'kg' ? 2.5 : 5}
                 value={inputs.weight}
-                onChange={(e) => updateInput('weight', Number(e.target.value))}
+                onChange={(e) => updateInput('weight', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -126,7 +124,7 @@ export default function OneRepMaxCalculator() {
                 step={1}
                 value={inputs.reps}
                 onChange={(e) =>
-                  updateInput('reps', Math.min(30, Math.max(1, Number(e.target.value))))
+                  updateInput('reps', Math.min(30, Math.max(1, Number(e.currentTarget.value))))
                 }
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">

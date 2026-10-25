@@ -72,7 +72,7 @@ export default function FuelCostCalculator() {
   const costPerUnitValue = inputs.distanceUnit === 'miles' ? result.costPerMile : result.costPerKm;
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="Fuel Cost Calculator"
@@ -94,7 +94,7 @@ export default function FuelCostCalculator() {
                 min={0}
                 step={1}
                 value={inputs.distance}
-                onChange={(e) => updateInput('distance', Number(e.target.value))}
+                onChange={(e) => updateInput('distance', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -132,7 +132,7 @@ export default function FuelCostCalculator() {
                 min={0.1}
                 step={0.1}
                 value={inputs.efficiency}
-                onChange={(e) => updateInput('efficiency', Number(e.target.value))}
+                onChange={(e) => updateInput('efficiency', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 {inputs.efficiencyUnit === 'mpg'
@@ -185,7 +185,7 @@ export default function FuelCostCalculator() {
                 min={0}
                 step={inputs.fuelPriceUnit === 'pence-per-litre' ? 1 : 0.01}
                 value={inputs.fuelPrice}
-                onChange={(e) => updateInput('fuelPrice', Number(e.target.value))}
+                onChange={(e) => updateInput('fuelPrice', Number(e.currentTarget.value))}
               />
             </div>
           </div>

@@ -75,11 +75,14 @@ export function calculateCouncilTax(inputs: CouncilTaxInputs): CouncilTaxResult 
   }
 
   if (isSecondHome) {
-    // Many councils now charge 100% premium on second homes (from April 2025)
+    // 100% is the England and Scotland maximum; Welsh councils may go to 300%, so Wales says so
     const premium = Math.round(annualTax * 1.0);
     annualTax += premium;
     discount = -premium;
-    discountReason = '100% second home premium applied';
+    discountReason =
+      nationOf(region) === 'wales'
+        ? '100% second home premium applied (Welsh councils can charge up to 300%)'
+        : '100% second home premium applied';
   }
 
   return {

@@ -1,6 +1,7 @@
 /** Contractor vs Employee Calculator types: compares contractor/freelance rates against full-time employment, accounting for hidden costs like self-employment tax, benefits, and retirement. */
 
 import { type Currency } from '../../../lib/regions';
+import type { FederalFilingStatus } from '../../../lib/us-tax-2026';
 
 export type EmploymentType = 'contractor' | 'employee';
 
@@ -29,9 +30,10 @@ export interface ContractorVsEmployeeInputs {
   contractorAccountingAnnual: number;
   contractorInsuranceAnnual: number; // Liability, E&O insurance
 
-  federalTaxBracket: number; // Marginal rate as decimal (e.g., 0.22)
-  stateTaxRate: number; // State income tax as decimal
-  selfEmploymentTaxRate: number; // 15.3% for US (SS + Medicare)
+  filingStatus: FederalFilingStatus; // USD only
+  stateTaxRate: number; // USD only: flat state rate on AGI, as a decimal
+  euCountry: string; // EUR only: a euro country code from EU_TAX_DATA
+  selfEmployedSocialRate: number; // EUR only, as a decimal; US and UK contractors use the law
 
   currency: Currency;
 }
@@ -50,7 +52,7 @@ export interface CompensationBreakdown {
   retirementContribution: number;
   businessExpenses: number;
   professionalServices: number;
-  selfEmploymentTax: number;
+  socialTax: number; // contractor: SE tax, Class 4 NI or social contributions; employee: their share
   incomeTax: number;
 
   totalCompensation: number;
@@ -119,14 +121,6 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
 
   const d = defaults[currency];
 
-  const taxDefaults = {
-    USD: { federalTaxBracket: 0.22, stateTaxRate: 0.05, selfEmploymentTaxRate: 0.153 },
-    GBP: { federalTaxBracket: 0.2, stateTaxRate: 0, selfEmploymentTaxRate: 0.09 },
-    EUR: { federalTaxBracket: 0.24, stateTaxRate: 0, selfEmploymentTaxRate: 0.15 },
-  };
-
-  const tax = taxDefaults[currency];
-
   return {
     contractorHourlyRate: d.contractorHourlyRate,
     contractorBillableHoursPerWeek: 40,
@@ -150,9 +144,10 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
     contractorAccountingAnnual: currency === 'GBP' ? 1000 : currency === 'EUR' ? 1200 : 1500,
     contractorInsuranceAnnual: 1000,
 
-    federalTaxBracket: tax.federalTaxBracket,
-    stateTaxRate: tax.stateTaxRate,
-    selfEmploymentTaxRate: tax.selfEmploymentTaxRate,
+    filingStatus: 'single',
+    stateTaxRate: currency === 'USD' ? 0.05 : 0,
+    euCountry: 'DE',
+    selfEmployedSocialRate: currency === 'EUR' ? 0.15 : 0,
 
     currency,
   };

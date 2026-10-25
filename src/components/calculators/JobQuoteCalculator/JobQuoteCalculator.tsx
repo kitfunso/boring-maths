@@ -127,7 +127,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={0.5}
                     value={inputs.labourHours}
-                    onChange={(e) => updateInput('labourHours', Number(e.target.value))}
+                    onChange={(e) => updateInput('labourHours', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -142,7 +142,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={1}
                     value={inputs.hourlyRate}
-                    onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
+                    onChange={(e) => updateInput('hourlyRate', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -250,8 +250,8 @@ export default function JobQuoteCalculator() {
                     max={100}
                     step={0.5}
                     value={inputs.vatRate}
-                    onChange={(e) => updateInput('vatRate', Number(e.target.value))}
-                    suffix="%"
+                    onChange={(e) => updateInput('vatRate', Number(e.currentTarget.value))}
+                    variant="percentage"
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">UK standard: 20%, US: 0%</p>
                 </div>
@@ -265,7 +265,7 @@ export default function JobQuoteCalculator() {
                     min={0}
                     step={5}
                     value={inputs.travelFee}
-                    onChange={(e) => updateInput('travelFee', Number(e.target.value))}
+                    onChange={(e) => updateInput('travelFee', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>

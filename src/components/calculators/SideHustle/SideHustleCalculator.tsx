@@ -70,7 +70,7 @@ export default function SideHustleCalculator() {
                   min={0}
                   step={100}
                   value={inputs.monthlyRevenue}
-                  onChange={(e) => updateInput('monthlyRevenue', Number(e.target.value))}
+                  onChange={(e) => updateInput('monthlyRevenue', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -84,7 +84,7 @@ export default function SideHustleCalculator() {
                   min={0}
                   max={60}
                   value={inputs.hoursPerWeek}
-                  onChange={(e) => updateInput('hoursPerWeek', Number(e.target.value))}
+                  onChange={(e) => updateInput('hoursPerWeek', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -112,7 +112,9 @@ export default function SideHustleCalculator() {
                       inputMode="numeric"
                       min="0"
                       value={inputs.monthlyExpenses}
-                      onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('monthlyExpenses', Number(e.currentTarget.value))
+                      }
                       className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
                                  text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
@@ -136,7 +138,7 @@ export default function SideHustleCalculator() {
                       inputMode="numeric"
                       min="0"
                       value={inputs.marketingSpend}
-                      onChange={(e) => updateInput('marketingSpend', Number(e.target.value))}
+                      onChange={(e) => updateInput('marketingSpend', Number(e.currentTarget.value))}
                       className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
                                  text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
@@ -160,7 +162,7 @@ export default function SideHustleCalculator() {
                       inputMode="numeric"
                       min="0"
                       value={inputs.toolsCost}
-                      onChange={(e) => updateInput('toolsCost', Number(e.target.value))}
+                      onChange={(e) => updateInput('toolsCost', Number(e.currentTarget.value))}
                       className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
                                  text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
@@ -184,7 +186,7 @@ export default function SideHustleCalculator() {
                       inputMode="numeric"
                       min="0"
                       value={inputs.otherCosts}
-                      onChange={(e) => updateInput('otherCosts', Number(e.target.value))}
+                      onChange={(e) => updateInput('otherCosts', Number(e.currentTarget.value))}
                       className="w-full pl-7 pr-3 py-2 text-sm bg-[var(--color-night)] border border-white/10 rounded-lg
                                  text-[var(--color-cream)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 tabular-nums"
                     />
@@ -207,7 +209,7 @@ export default function SideHustleCalculator() {
                   min={0}
                   step={0.5}
                   value={inputs.mainJobHourlyRate}
-                  onChange={(e) => updateInput('mainJobHourlyRate', Number(e.target.value))}
+                  onChange={(e) => updateInput('mainJobHourlyRate', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   For opportunity cost comparison
@@ -223,7 +225,7 @@ export default function SideHustleCalculator() {
                   max={60}
                   step={1}
                   value={Math.round(inputs.taxRate * 100)}
-                  onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
+                  onChange={(e) => updateInput('taxRate', Number(e.currentTarget.value) / 100)}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   {region === 'US' && 'Include self-employment tax (15.3%)'}

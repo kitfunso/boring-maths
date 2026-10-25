@@ -76,7 +76,7 @@ export function Slider({
   const labelId = `slider-label-${id}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(Number(e.target.value));
+    onChange(Number(e.currentTarget.value));
   };
 
   const currentLabel = labels?.current

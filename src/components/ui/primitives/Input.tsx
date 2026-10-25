@@ -2,7 +2,11 @@ import type { InputHTMLAttributes } from 'react';
 import { useTheme } from '../theme/ThemeContext';
 import { useRef } from 'preact/hooks';
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  'size' | 'disabled'
+> {
+  disabled?: boolean;
   /** Input variant determines prefix/suffix styling */
   variant?: 'default' | 'currency' | 'percentage';
   /** Currency symbol for currency variant (e.g., "$", "£", "€") */

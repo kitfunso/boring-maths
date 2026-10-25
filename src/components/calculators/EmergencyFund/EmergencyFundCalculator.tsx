@@ -93,7 +93,7 @@ export default function EmergencyFundCalculator() {
                   min={0}
                   step={100}
                   value={inputs.monthlyExpenses}
-                  onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
+                  onChange={(e) => updateInput('monthlyExpenses', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Rent, utilities, food, insurance, etc.
@@ -109,7 +109,7 @@ export default function EmergencyFundCalculator() {
                   min={0}
                   step={100}
                   value={inputs.currentSavings}
-                  onChange={(e) => updateInput('currentSavings', Number(e.target.value))}
+                  onChange={(e) => updateInput('currentSavings', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -143,7 +143,7 @@ export default function EmergencyFundCalculator() {
                   min={0}
                   max={10}
                   value={inputs.dependents}
-                  onChange={(e) => updateInput('dependents', Number(e.target.value))}
+                  onChange={(e) => updateInput('dependents', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Children, elderly parents, etc.
@@ -159,7 +159,9 @@ export default function EmergencyFundCalculator() {
                   min={0}
                   step={50}
                   value={inputs.monthlySavingsCapacity}
-                  onChange={(e) => updateInput('monthlySavingsCapacity', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('monthlySavingsCapacity', Number(e.currentTarget.value))
+                  }
                 />
               </div>
             </Grid>

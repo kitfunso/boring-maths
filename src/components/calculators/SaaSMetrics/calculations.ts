@@ -2,6 +2,7 @@
  * SaaS Metrics Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { SaaSMetricsInputs, SaaSMetricsResult, HealthScore, GrowthProjection } from './types';
 import { BENCHMARKS } from './types';
 

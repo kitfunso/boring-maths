@@ -70,7 +70,9 @@ export default function TimeZoneConverter() {
               <Input
                 type="number"
                 value={inputs.hours}
-                onChange={(v) => updateInput('hours', Math.max(0, Math.min(23, Number(v))))}
+                onChange={(e) =>
+                  updateInput('hours', Math.max(0, Math.min(23, Number(e.currentTarget.value))))
+                }
                 min={0}
                 max={23}
               />
@@ -80,7 +82,9 @@ export default function TimeZoneConverter() {
               <Input
                 type="number"
                 value={inputs.minutes}
-                onChange={(v) => updateInput('minutes', Math.max(0, Math.min(59, Number(v))))}
+                onChange={(e) =>
+                  updateInput('minutes', Math.max(0, Math.min(59, Number(e.currentTarget.value))))
+                }
                 min={0}
                 max={59}
               />
@@ -168,8 +172,14 @@ export default function TimeZoneConverter() {
           </Alert>
 
           <div class="flex gap-3 flex-wrap">
-            <ShareResults text={shareText} title="Time Zone Conversion" />
-            <PrintResults />
+            <ShareResults result={shareText} calculatorName="Time Zone Conversion" />
+            <PrintResults
+              title="Time Zone Conversion"
+              results={[
+                { label: 'Conversion', value: shareText },
+                { label: 'Difference', value: `${diffSign}${diffHours} hours` },
+              ]}
+            />
           </div>
         </div>
       </Card>

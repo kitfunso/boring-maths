@@ -64,6 +64,22 @@ describe('UsTaxBracketCalculator', () => {
       expect(result.marginalRate).toBe(35);
     });
 
+    it.each([
+      // Taxable 300,000: 1,240 + 4,560 + 12,166 + 23,058 + 17,424 + 35% x 43,775 = 73,769.25
+      [316100, 300000, 73769.25, 35],
+      // Taxable 700,000: 192,979.25 to 640,600, then 37% x 59,400 = 214,957.25
+      [716100, 700000, 214957.25, 37],
+    ])('should use the 2026 single top bands at gross %i', (gross, taxable, tax, rate) => {
+      const inputs = getDefaultInputs();
+      inputs.grossIncome = gross;
+
+      const result = calculateUSTaxBracket(inputs);
+
+      expect(result.taxableIncome).toBe(taxable);
+      expect(result.federalTax).toBeCloseTo(tax, 2);
+      expect(result.marginalRate).toBe(rate);
+    });
+
     it('should use the 2026 head of household brackets', () => {
       const inputs = getDefaultInputs();
       inputs.filingStatus = 'head_of_household';

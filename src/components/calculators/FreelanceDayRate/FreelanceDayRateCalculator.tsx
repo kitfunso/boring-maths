@@ -111,7 +111,7 @@ export default function FreelanceDayRateCalculator() {
                 max={1000000}
                 step={1000}
                 value={inputs.annualSalary}
-                onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
+                onChange={(e) => updateInput('annualSalary', Number(e.currentTarget.value))}
                 aria-describedby="annualSalary-help"
               />
               <p id="annualSalary-help" className="text-sm text-[var(--color-muted)] mt-1.5">
@@ -131,7 +131,7 @@ export default function FreelanceDayRateCalculator() {
                 max={60}
                 step={1}
                 value={Math.round(inputs.taxRate * 100)}
-                onChange={(e) => updateInput('taxRate', Number(e.target.value) / 100)}
+                onChange={(e) => updateInput('taxRate', Number(e.currentTarget.value) / 100)}
                 aria-describedby="taxRate-help"
               />
               <p id="taxRate-help" className="text-sm text-[var(--color-muted)] mt-1.5">
@@ -152,7 +152,7 @@ export default function FreelanceDayRateCalculator() {
                   min={0}
                   max={60}
                   value={inputs.vacationDays}
-                  onChange={(e) => updateInput('vacationDays', Number(e.target.value))}
+                  onChange={(e) => updateInput('vacationDays', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1.5">
                   {getHelpText('vacationDays')}
@@ -168,7 +168,7 @@ export default function FreelanceDayRateCalculator() {
                   min={0}
                   max={30}
                   value={inputs.holidays}
-                  onChange={(e) => updateInput('holidays', Number(e.target.value))}
+                  onChange={(e) => updateInput('holidays', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1.5">
                   {getHelpText('holidays')}
@@ -189,7 +189,7 @@ export default function FreelanceDayRateCalculator() {
                 max={100000}
                 step={500}
                 value={inputs.benefitsValue}
-                onChange={(e) => updateInput('benefitsValue', Number(e.target.value))}
+                onChange={(e) => updateInput('benefitsValue', Number(e.currentTarget.value))}
                 aria-describedby="benefitsValue-help"
               />
               <p id="benefitsValue-help" className="text-sm text-[var(--color-muted)] mt-1.5">

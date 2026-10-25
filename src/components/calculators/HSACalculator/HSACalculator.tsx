@@ -86,7 +86,7 @@ export default function HSACalculator() {
                   max={10000}
                   step={100}
                   value={inputs.annualContribution}
-                  onChange={(e) => updateInput('annualContribution', Number(e.target.value))}
+                  onChange={(e) => updateInput('annualContribution', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -100,7 +100,9 @@ export default function HSACalculator() {
                   max={5000}
                   step={100}
                   value={inputs.employerContribution}
-                  onChange={(e) => updateInput('employerContribution', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('employerContribution', Number(e.currentTarget.value))
+                  }
                 />
               </div>
             </Grid>
@@ -117,7 +119,7 @@ export default function HSACalculator() {
                   min={18}
                   max={80}
                   value={inputs.age}
-                  onChange={(e) => updateInput('age', Number(e.target.value))}
+                  onChange={(e) => updateInput('age', Number(e.currentTarget.value))}
                 />
                 {inputs.age >= 55 && (
                   <p className="text-sm text-green-400 mt-1">
@@ -174,7 +176,7 @@ export default function HSACalculator() {
                     min={0}
                     step={1000}
                     value={inputs.currentBalance}
-                    onChange={(e) => updateInput('currentBalance', Number(e.target.value))}
+                    onChange={(e) => updateInput('currentBalance', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -185,7 +187,9 @@ export default function HSACalculator() {
                     min={1}
                     max={50}
                     value={inputs.yearsToRetirement}
-                    onChange={(e) => updateInput('yearsToRetirement', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('yearsToRetirement', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -198,7 +202,7 @@ export default function HSACalculator() {
                     max={15}
                     step={0.5}
                     value={inputs.expectedReturn}
-                    onChange={(e) => updateInput('expectedReturn', Number(e.target.value))}
+                    onChange={(e) => updateInput('expectedReturn', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -211,7 +215,9 @@ export default function HSACalculator() {
                     min={0}
                     step={100}
                     value={inputs.annualMedicalExpenses}
-                    onChange={(e) => updateInput('annualMedicalExpenses', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('annualMedicalExpenses', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>

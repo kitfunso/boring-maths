@@ -113,7 +113,7 @@ export default function EUVATCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.amount}
-                  onChange={(e) => updateInput('amount', Number(e.target.value))}
+                  onChange={(e) => updateInput('amount', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -149,7 +149,7 @@ export default function EUVATCalculator() {
                 label="VAT Amount"
                 value={formatCurrency(result.vatAmount)}
                 sublabel={formatPercent(inputs.vatRate)}
-                valueColor="accent"
+                valueColor="themed"
               />
               <MetricCard
                 label="Gross Amount"

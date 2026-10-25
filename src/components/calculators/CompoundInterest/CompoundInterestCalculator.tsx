@@ -84,7 +84,7 @@ export default function CompoundInterestCalculator() {
                   min={0}
                   step={1000}
                   value={inputs.principal}
-                  onChange={(e) => updateInput('principal', Number(e.target.value))}
+                  onChange={(e) => updateInput('principal', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -97,7 +97,9 @@ export default function CompoundInterestCalculator() {
                   min={0}
                   step={50}
                   value={inputs.monthlyContribution}
-                  onChange={(e) => updateInput('monthlyContribution', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('monthlyContribution', Number(e.currentTarget.value))
+                  }
                 />
               </div>
             </Grid>
@@ -115,7 +117,7 @@ export default function CompoundInterestCalculator() {
                   max={30}
                   step={0.1}
                   value={Math.round(inputs.interestRate * 1000) / 10}
-                  onChange={(e) => updateInput('interestRate', Number(e.target.value) / 100)}
+                  onChange={(e) => updateInput('interestRate', Number(e.currentTarget.value) / 100)}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   S&P 500 historical average: ~10%

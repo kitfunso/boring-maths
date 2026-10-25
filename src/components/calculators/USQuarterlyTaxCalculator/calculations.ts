@@ -4,17 +4,14 @@
  * Calculates quarterly payments with safe harbor rules.
  */
 
-import type {
-  USQuarterlyTaxInputs,
-  USQuarterlyTaxResult,
-  QuarterPayment,
-  FilingStatus,
-} from './types';
-import { SE_TAX_MULTIPLIER, HIGH_INCOME_THRESHOLDS, QUARTERLY_DUE_DATES_2026 } from './types';
+import type { USQuarterlyTaxInputs, USQuarterlyTaxResult, QuarterPayment } from './types';
+import { HIGH_INCOME_THRESHOLDS } from './types';
 import {
-  FEDERAL_BRACKETS_2026,
+  ESTIMATED_TAX_DUE_DATES_2026,
   STANDARD_DEDUCTION_2026,
-  SOCIAL_SECURITY_WAGE_BASE_2026,
+  federalIncomeTax,
+  qbiDeduction,
+  selfEmploymentTax,
 } from '../../../lib/us-tax-2026';
 
 export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterlyTaxResult {
@@ -22,28 +19,24 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     filingStatus,
     expectedAnnualIncome,
     selfEmploymentIncome,
+    w2Wages,
     withholdingsFromW2,
     priorYearTax,
     priorYearAGI,
   } = inputs;
 
-  // Calculate Self-Employment Tax
-  const seTaxableIncome = selfEmploymentIncome * SE_TAX_MULTIPLIER;
-  const ssSocialSecurityTax = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.124;
-  const ssMedicareTax = seTaxableIncome * 0.029;
-  const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax;
+  const se = selfEmploymentTax(selfEmploymentIncome, w2Wages, filingStatus);
 
-  // Half SE tax deduction
-  const halfSETax = selfEmploymentTax / 2;
+  const agi = expectedAnnualIncome - se.deductibleHalf;
+  const taxableBeforeQbi = Math.max(0, agi - STANDARD_DEDUCTION_2026[filingStatus]);
+  const qbi = qbiDeduction(
+    selfEmploymentIncome - se.deductibleHalf,
+    taxableBeforeQbi,
+    filingStatus
+  );
+  const federalTax = federalIncomeTax(Math.max(0, taxableBeforeQbi - qbi), filingStatus);
 
-  // Calculate Federal Income Tax
-  const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
-  const agi = expectedAnnualIncome - halfSETax;
-  const taxableIncome = Math.max(0, agi - standardDeduction);
-  const federalIncomeTax = calculateFederalTax(taxableIncome, filingStatus);
-
-  // Total estimated tax
-  const estimatedTotalTax = selfEmploymentTax + federalIncomeTax;
+  const estimatedTotalTax = se.total + federalTax;
 
   // Remaining tax after withholdings
   const remainingTaxDue = Math.max(0, estimatedTotalTax - withholdingsFromW2);
@@ -63,25 +56,24 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   // Use the lower safe harbor amount
   const safeHarborAmount = Math.min(currentYearSafeHarbor, priorYearSafeHarbor);
 
-  // Check if meeting safe harbor
-  const totalPayments = withholdingsFromW2 + quarterlyPayment * 4;
-  const meetsCurrentYearSafeHarbor = totalPayments >= currentYearSafeHarbor;
-  const meetsPriorYearSafeHarbor = totalPayments >= priorYearSafeHarbor;
+  // Judge withholding alone: counting the suggested payments would always pass
+  const meetsCurrentYearSafeHarbor = withholdingsFromW2 >= currentYearSafeHarbor;
+  const meetsPriorYearSafeHarbor = withholdingsFromW2 >= priorYearSafeHarbor;
 
-  // Determine penalty risk
+  // Penalty risk if no estimated payments are made
   let penaltyRisk: 'none' | 'low' | 'high' = 'none';
   if (remainingTaxDue < 1000) {
     penaltyRisk = 'none';
   } else if (meetsCurrentYearSafeHarbor || meetsPriorYearSafeHarbor) {
     penaltyRisk = 'none';
-  } else if (totalPayments >= estimatedTotalTax * 0.8) {
+  } else if (withholdingsFromW2 >= safeHarborAmount * 0.8) {
     penaltyRisk = 'low';
   } else {
     penaltyRisk = 'high';
   }
 
   // Generate quarterly payment schedule
-  const quarterPayments: QuarterPayment[] = QUARTERLY_DUE_DATES_2026.map((q, index) => ({
+  const quarterPayments: QuarterPayment[] = ESTIMATED_TAX_DUE_DATES_2026.map((q, index) => ({
     quarter: q.quarter,
     dueDate: q.date,
     amount: quarterlyPayment,
@@ -103,35 +95,22 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   return {
     estimatedTotalTax: Math.round(estimatedTotalTax),
-    selfEmploymentTax: Math.round(selfEmploymentTax),
-    federalIncomeTax: Math.round(federalIncomeTax),
+    selfEmploymentTax: Math.round(se.total),
+    qbiDeduction: Math.round(qbi),
+    federalIncomeTax: Math.round(federalTax),
     alreadyWithheld: withholdingsFromW2,
     remainingTaxDue: Math.round(remainingTaxDue),
     quarterlyPayment,
     quarterPayments,
     safeHarborAmount: Math.round(safeHarborAmount),
+    currentYearSafeHarbor: Math.round(currentYearSafeHarbor),
+    priorYearSafeHarbor: Math.round(priorYearSafeHarbor),
     safeHarborRule,
     meetsCurrentYearSafeHarbor,
     meetsPriorYearSafeHarbor,
     penaltyRisk,
     annualizedIncomeAdvice,
   };
-}
-
-function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
-  let tax = 0;
-  let remainingIncome = taxableIncome;
-
-  for (const bracket of brackets) {
-    if (remainingIncome <= 0) break;
-    const bracketSize = bracket.max - bracket.min;
-    const incomeInBracket = Math.min(remainingIncome, bracketSize);
-    tax += incomeInBracket * (bracket.rate / 100);
-    remainingIncome -= incomeInBracket;
-  }
-
-  return tax;
 }
 
 export function formatCurrency(value: number): string {
