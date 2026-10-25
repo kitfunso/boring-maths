@@ -71,7 +71,7 @@ export default function MacroCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="orange">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="Macro Calculator"
@@ -132,7 +132,7 @@ export default function MacroCalculator() {
                   min={15}
                   max={100}
                   value={inputs.age}
-                  onChange={(e) => updateInput('age', Number(e.target.value))}
+                  onChange={(e) => updateInput('age', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -149,7 +149,7 @@ export default function MacroCalculator() {
                   min={50}
                   max={500}
                   value={inputs.weight}
-                  onChange={(e) => updateInput('weight', Number(e.target.value))}
+                  onChange={(e) => updateInput('weight', Number(e.currentTarget.value))}
                 />
               </div>
               {inputs.unitSystem === 'imperial' ? (
@@ -163,7 +163,7 @@ export default function MacroCalculator() {
                         min={3}
                         max={8}
                         value={inputs.heightFeet}
-                        onChange={(e) => updateInput('heightFeet', Number(e.target.value))}
+                        onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                       />
                       <span className="text-xs text-[var(--color-muted)] mt-1 block">feet</span>
                     </div>
@@ -174,7 +174,7 @@ export default function MacroCalculator() {
                         min={0}
                         max={11}
                         value={inputs.heightInches}
-                        onChange={(e) => updateInput('heightInches', Number(e.target.value))}
+                        onChange={(e) => updateInput('heightInches', Number(e.currentTarget.value))}
                       />
                       <span className="text-xs text-[var(--color-muted)] mt-1 block">inches</span>
                     </div>
@@ -191,7 +191,7 @@ export default function MacroCalculator() {
                     min={100}
                     max={250}
                     value={inputs.heightFeet}
-                    onChange={(e) => updateInput('heightFeet', Number(e.target.value))}
+                    onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                   />
                 </div>
               )}
@@ -250,7 +250,7 @@ export default function MacroCalculator() {
                 max={2}
                 step={0.1}
                 value={inputs.proteinRatio}
-                onChange={(e) => updateInput('proteinRatio', Number(e.target.value))}
+                onChange={(e) => updateInput('proteinRatio', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 {inputs.unitSystem === 'imperial'

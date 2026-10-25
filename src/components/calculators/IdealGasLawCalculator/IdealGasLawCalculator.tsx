@@ -149,7 +149,7 @@ export default function IdealGasLawCalculator() {
                   step={1}
                   value={inputs.solveFor === 'pressure' ? result.pressure : inputs.pressure}
                   disabled={inputs.solveFor === 'pressure'}
-                  onChange={(e) => updateInput('pressure', Number(e.target.value))}
+                  onChange={(e) => updateInput('pressure', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -165,7 +165,7 @@ export default function IdealGasLawCalculator() {
                   step={0.1}
                   value={inputs.solveFor === 'volume' ? result.volume : inputs.volume}
                   disabled={inputs.solveFor === 'volume'}
-                  onChange={(e) => updateInput('volume', Number(e.target.value))}
+                  onChange={(e) => updateInput('volume', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -182,7 +182,7 @@ export default function IdealGasLawCalculator() {
                   step={0.1}
                   value={inputs.solveFor === 'moles' ? result.moles : inputs.moles}
                   disabled={inputs.solveFor === 'moles'}
-                  onChange={(e) => updateInput('moles', Number(e.target.value))}
+                  onChange={(e) => updateInput('moles', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -199,7 +199,7 @@ export default function IdealGasLawCalculator() {
                     inputs.solveFor === 'temperature' ? result.temperature : inputs.temperature
                   }
                   disabled={inputs.solveFor === 'temperature'}
-                  onChange={(e) => updateInput('temperature', Number(e.target.value))}
+                  onChange={(e) => updateInput('temperature', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -214,7 +214,7 @@ export default function IdealGasLawCalculator() {
                 max={500}
                 step={0.01}
                 value={inputs.molarMass}
-                onChange={(e) => updateInput('molarMass', Number(e.target.value))}
+                onChange={(e) => updateInput('molarMass', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">Used for density calculation</p>
             </div>

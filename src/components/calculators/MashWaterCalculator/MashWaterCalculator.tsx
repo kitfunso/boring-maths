@@ -2,7 +2,7 @@
  * Mash Water Calculator Component
  * Strike water and sparge calculations for all-grain brewing
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { MashWaterInputs } from './types';
 import { MASH_TEMPS, MASH_THICKNESS, SPARGE_TYPES } from './types';
@@ -42,15 +42,21 @@ export function MashWaterCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Grain Bill</h2>
 
           <div className="space-y-4">
-            <Input
-              label="Total Grain Weight"
-              type="number"
-              value={inputs.grainWeight}
-              onChange={(v) => setInputs({ ...inputs, grainWeight: parseFloat(v) || 0 })}
-              min={0.5}
-              step={0.5}
-              suffix={inputs.weightUnit === 'pounds' ? 'lbs' : 'kg'}
-            />
+            <div>
+              <Label htmlFor="total-grain-weight">
+                Total Grain Weight ({inputs.weightUnit === 'pounds' ? 'lbs' : 'kg'})
+              </Label>
+              <Input
+                id="total-grain-weight"
+                type="number"
+                value={inputs.grainWeight}
+                onChange={(e) =>
+                  setInputs({ ...inputs, grainWeight: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0.5}
+                step={0.5}
+              />
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -66,7 +72,7 @@ export function MashWaterCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      weightUnit: v as MashWaterInputs[keyof MashWaterInputs],
+                      weightUnit: v as MashWaterInputs['weightUnit'],
                     })
                   }
                 />
@@ -82,19 +88,25 @@ export function MashWaterCalculator() {
                   ]}
                   value={inputs.tempUnit}
                   onChange={(v) =>
-                    setInputs({ ...inputs, tempUnit: v as MashWaterInputs[keyof MashWaterInputs] })
+                    setInputs({ ...inputs, tempUnit: v as MashWaterInputs['tempUnit'] })
                   }
                 />
               </div>
             </div>
 
-            <Input
-              label="Grain Temperature"
-              type="number"
-              value={inputs.grainTemp}
-              onChange={(v) => setInputs({ ...inputs, grainTemp: parseFloat(v) || 0 })}
-              suffix={inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'}
-            />
+            <div>
+              <Label htmlFor="grain-temperature">
+                Grain Temperature ({inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'})
+              </Label>
+              <Input
+                id="grain-temperature"
+                type="number"
+                value={inputs.grainTemp}
+                onChange={(e) =>
+                  setInputs({ ...inputs, grainTemp: parseFloat(e.currentTarget.value) || 0 })
+                }
+              />
+            </div>
           </div>
         </div>
 
@@ -102,13 +114,19 @@ export function MashWaterCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Mash Settings</h2>
 
           <div className="space-y-4">
-            <Input
-              label="Target Mash Temperature"
-              type="number"
-              value={inputs.targetMashTemp}
-              onChange={(v) => setInputs({ ...inputs, targetMashTemp: parseFloat(v) || 0 })}
-              suffix={inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'}
-            />
+            <div>
+              <Label htmlFor="target-mash-temperature">
+                Target Mash Temperature ({inputs.tempUnit === 'fahrenheit' ? '°F' : '°C'})
+              </Label>
+              <Input
+                id="target-mash-temperature"
+                type="number"
+                value={inputs.targetMashTemp}
+                onChange={(e) =>
+                  setInputs({ ...inputs, targetMashTemp: parseFloat(e.currentTarget.value) || 0 })
+                }
+              />
+            </div>
 
             <div className="flex flex-wrap gap-2">
               {MASH_TEMPS.map((preset) => (
@@ -135,9 +153,11 @@ export function MashWaterCalculator() {
               min={0.75}
               max={2.5}
               step={0.125}
-              formatValue={(v) =>
-                inputs.volumeUnit === 'gallons' ? `${v} qt/lb` : `${(v * 2.086).toFixed(1)} L/kg`
-              }
+              showValue
+              labels={{
+                current: (v) =>
+                  inputs.volumeUnit === 'gallons' ? `${v} qt/lb` : `${(v * 2.086).toFixed(1)} L/kg`,
+              }}
             />
 
             <div className="flex flex-wrap gap-2">
@@ -164,7 +184,8 @@ export function MashWaterCalculator() {
               min={0.05}
               max={0.2}
               step={0.01}
-              formatValue={(v) => `${v} qt/lb`}
+              showValue
+              labels={{ current: (v) => `${v} qt/lb` }}
             />
           </div>
         </div>
@@ -173,36 +194,50 @@ export function MashWaterCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Sparge & Boil</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Sparge Type"
-              value={inputs.spargeType}
-              onChange={(v) =>
-                setInputs({ ...inputs, spargeType: v as MashWaterInputs[keyof MashWaterInputs] })
-              }
-              options={SPARGE_TYPES}
-            />
+            <div>
+              <Label htmlFor="sparge-type">Sparge Type</Label>
+              <Select
+                id="sparge-type"
+                value={inputs.spargeType}
+                onChange={(v) =>
+                  setInputs({ ...inputs, spargeType: v as MashWaterInputs['spargeType'] })
+                }
+                options={SPARGE_TYPES}
+              />
+            </div>
 
             {inputs.spargeType === 'batch' && (
-              <Input
-                label="Number of Batch Sparges"
-                type="number"
-                value={inputs.batchSpargeCount}
-                onChange={(v) => setInputs({ ...inputs, batchSpargeCount: parseInt(v) || 1 })}
-                min={1}
-                max={4}
-              />
+              <div>
+                <Label htmlFor="number-of-batch-sparges">Number of Batch Sparges</Label>
+                <Input
+                  id="number-of-batch-sparges"
+                  type="number"
+                  value={inputs.batchSpargeCount}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, batchSpargeCount: parseInt(e.currentTarget.value) || 1 })
+                  }
+                  min={1}
+                  max={4}
+                />
+              </div>
             )}
 
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Pre-Boil Volume"
-                type="number"
-                value={inputs.preboilVolume}
-                onChange={(v) => setInputs({ ...inputs, preboilVolume: parseFloat(v) || 0 })}
-                min={1}
-                step={0.5}
-                suffix={inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}
-              />
+              <div>
+                <Label htmlFor="pre-boil-volume">
+                  Pre-Boil Volume ({inputs.volumeUnit === 'gallons' ? 'gal' : 'L'})
+                </Label>
+                <Input
+                  id="pre-boil-volume"
+                  type="number"
+                  value={inputs.preboilVolume}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, preboilVolume: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={1}
+                  step={0.5}
+                />
+              </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
                   Volume Unit
@@ -216,7 +251,7 @@ export function MashWaterCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      volumeUnit: v as MashWaterInputs[keyof MashWaterInputs],
+                      volumeUnit: v as MashWaterInputs['volumeUnit'],
                     })
                   }
                 />
@@ -224,38 +259,57 @@ export function MashWaterCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Boil Time"
-                type="number"
-                value={inputs.boilTime}
-                onChange={(v) => setInputs({ ...inputs, boilTime: parseInt(v) || 0 })}
-                min={30}
-                max={120}
-                step={15}
-                suffix="min"
-              />
-              <Input
-                label="Evaporation Rate"
-                type="number"
-                value={inputs.evaporationRate}
-                onChange={(v) => setInputs({ ...inputs, evaporationRate: parseFloat(v) || 0 })}
-                min={0.5}
-                max={2}
-                step={0.1}
-                suffix={`${inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}/hr`}
-              />
+              <div>
+                <Label htmlFor="boil-time">Boil Time (min)</Label>
+                <Input
+                  id="boil-time"
+                  type="number"
+                  value={inputs.boilTime}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, boilTime: parseInt(e.currentTarget.value) || 0 })
+                  }
+                  min={30}
+                  max={120}
+                  step={15}
+                />
+              </div>
+              <div>
+                <Label htmlFor="evaporation-rate">
+                  Evaporation Rate ({`${inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}/hr`})
+                </Label>
+                <Input
+                  id="evaporation-rate"
+                  type="number"
+                  value={inputs.evaporationRate}
+                  onChange={(e) =>
+                    setInputs({
+                      ...inputs,
+                      evaporationRate: parseFloat(e.currentTarget.value) || 0,
+                    })
+                  }
+                  min={0.5}
+                  max={2}
+                  step={0.1}
+                />
+              </div>
             </div>
 
-            <Input
-              label="Equipment Dead Space"
-              type="number"
-              value={inputs.equipmentLoss}
-              onChange={(v) => setInputs({ ...inputs, equipmentLoss: parseFloat(v) || 0 })}
-              min={0}
-              max={2}
-              step={0.1}
-              suffix={inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}
-            />
+            <div>
+              <Label htmlFor="equipment-dead-space">
+                Equipment Dead Space ({inputs.volumeUnit === 'gallons' ? 'gal' : 'L'})
+              </Label>
+              <Input
+                id="equipment-dead-space"
+                type="number"
+                value={inputs.equipmentLoss}
+                onChange={(e) =>
+                  setInputs({ ...inputs, equipmentLoss: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0}
+                max={2}
+                step={0.1}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -277,22 +331,18 @@ export function MashWaterCalculator() {
           <ResultCard
             label="Strike Water Volume"
             value={`${results.strikeWaterVolume} ${results.volumeUnit}`}
-            color="blue"
           />
           <ResultCard
             label="Total Water Needed"
             value={`${results.totalWaterNeeded} ${results.volumeUnit}`}
-            color="green"
           />
           <ResultCard
             label="First Runnings"
             value={`${results.firstRunningsVolume} ${results.volumeUnit}`}
-            color="purple"
           />
           <ResultCard
             label="Post-Boil Volume"
             value={`${results.postBoilVolume} ${results.volumeUnit}`}
-            color="blue"
           />
         </div>
 

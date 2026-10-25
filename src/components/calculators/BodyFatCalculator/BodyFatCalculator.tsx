@@ -87,7 +87,7 @@ export default function BodyFatCalculator() {
               <Input
                 type="number"
                 value={inputs.heightCm}
-                onChange={(v) => updateInput('heightCm', Number(v))}
+                onChange={(e) => updateInput('heightCm', Number(e.currentTarget.value))}
                 min={100}
                 max={250}
               />
@@ -99,7 +99,7 @@ export default function BodyFatCalculator() {
                 <Input
                   type="number"
                   value={inputs.heightFeet}
-                  onChange={(v) => updateInput('heightFeet', Number(v))}
+                  onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                   min={3}
                   max={8}
                 />
@@ -109,7 +109,7 @@ export default function BodyFatCalculator() {
                 <Input
                   type="number"
                   value={inputs.heightInches}
-                  onChange={(v) => updateInput('heightInches', Number(v))}
+                  onChange={(e) => updateInput('heightInches', Number(e.currentTarget.value))}
                   min={0}
                   max={11}
                 />
@@ -124,8 +124,11 @@ export default function BodyFatCalculator() {
               <Input
                 type="number"
                 value={inputs.unitSystem === 'metric' ? inputs.waistCm : inputs.waistInches}
-                onChange={(v) =>
-                  updateInput(inputs.unitSystem === 'metric' ? 'waistCm' : 'waistInches', Number(v))
+                onChange={(e) =>
+                  updateInput(
+                    inputs.unitSystem === 'metric' ? 'waistCm' : 'waistInches',
+                    Number(e.currentTarget.value)
+                  )
                 }
                 min={40}
                 max={200}
@@ -137,8 +140,11 @@ export default function BodyFatCalculator() {
               <Input
                 type="number"
                 value={inputs.unitSystem === 'metric' ? inputs.neckCm : inputs.neckInches}
-                onChange={(v) =>
-                  updateInput(inputs.unitSystem === 'metric' ? 'neckCm' : 'neckInches', Number(v))
+                onChange={(e) =>
+                  updateInput(
+                    inputs.unitSystem === 'metric' ? 'neckCm' : 'neckInches',
+                    Number(e.currentTarget.value)
+                  )
                 }
                 min={20}
                 max={60}
@@ -153,8 +159,11 @@ export default function BodyFatCalculator() {
               <Input
                 type="number"
                 value={inputs.unitSystem === 'metric' ? inputs.hipCm : inputs.hipInches}
-                onChange={(v) =>
-                  updateInput(inputs.unitSystem === 'metric' ? 'hipCm' : 'hipInches', Number(v))
+                onChange={(e) =>
+                  updateInput(
+                    inputs.unitSystem === 'metric' ? 'hipCm' : 'hipInches',
+                    Number(e.currentTarget.value)
+                  )
                 }
                 min={50}
                 max={200}
@@ -208,8 +217,14 @@ export default function BodyFatCalculator() {
           </Alert>
 
           <div class="flex gap-3 flex-wrap">
-            <ShareResults text={shareText} title="Body Fat Calculator Results" />
-            <PrintResults />
+            <ShareResults result={shareText} calculatorName="Body Fat Calculator Results" />
+            <PrintResults
+              title="Body Fat Calculator Results"
+              results={[
+                { label: 'Body Fat', value: `${result.bodyFatPct}%` },
+                { label: 'Category', value: result.category },
+              ]}
+            />
           </div>
         </div>
       </Card>

@@ -185,7 +185,7 @@ export function useSharedData<TInputs extends object>(
       if (sharedKey) {
         const value = (inputs as Record<string, unknown>)[inputKey];
         if (value !== undefined && value !== null) {
-          (dataToExport as Record<string, unknown>)[sharedKey] = value;
+          (dataToExport as Record<string, unknown>)[sharedKey as string] = value;
         }
       }
     }

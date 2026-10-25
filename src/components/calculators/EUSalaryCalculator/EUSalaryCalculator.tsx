@@ -43,7 +43,7 @@ export default function EUSalaryCalculator() {
   const selectedCountry = getCountryByCode(inputs.countryCode) || EU_TAX_DATA[0];
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="EU Salary Calculator"
@@ -94,7 +94,7 @@ export default function EUSalaryCalculator() {
                 min={0}
                 step={1000}
                 value={inputs.grossSalary}
-                onChange={(e) => updateInput('grossSalary', Number(e.target.value))}
+                onChange={(e) => updateInput('grossSalary', Number(e.currentTarget.value))}
               />
             </div>
           </div>

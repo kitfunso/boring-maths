@@ -81,7 +81,7 @@ export default function PricingCalculator() {
                     min={0}
                     step={1}
                     value={inputs.productCost}
-                    onChange={(e) => updateInput('productCost', Number(e.target.value))}
+                    onChange={(e) => updateInput('productCost', Number(e.currentTarget.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">Materials, manufacturing</p>
                 </div>
@@ -97,7 +97,7 @@ export default function PricingCalculator() {
                     min={0}
                     step={1}
                     value={inputs.overheadPerUnit}
-                    onChange={(e) => updateInput('overheadPerUnit', Number(e.target.value))}
+                    onChange={(e) => updateInput('overheadPerUnit', Number(e.currentTarget.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">Fixed costs / units</p>
                 </div>
@@ -112,7 +112,7 @@ export default function PricingCalculator() {
                   min={0}
                   step={100}
                   value={inputs.monthlyFixedCosts}
-                  onChange={(e) => updateInput('monthlyFixedCosts', Number(e.target.value))}
+                  onChange={(e) => updateInput('monthlyFixedCosts', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -132,7 +132,7 @@ export default function PricingCalculator() {
                     min={0}
                     step={1}
                     value={inputs.competitorPrice}
-                    onChange={(e) => updateInput('competitorPrice', Number(e.target.value))}
+                    onChange={(e) => updateInput('competitorPrice', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -145,7 +145,7 @@ export default function PricingCalculator() {
                     min={0}
                     step={5}
                     value={inputs.perceivedValue}
-                    onChange={(e) => updateInput('perceivedValue', Number(e.target.value))}
+                    onChange={(e) => updateInput('perceivedValue', Number(e.currentTarget.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">What customers would pay</p>
                 </div>

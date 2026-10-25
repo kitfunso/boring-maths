@@ -66,7 +66,7 @@ export default function BakingConversionCalculator() {
   }, [inputs.ingredient]);
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="Baking Conversion Calculator"
@@ -99,7 +99,7 @@ export default function BakingConversionCalculator() {
                 min={0}
                 step={0.25}
                 value={inputs.amount}
-                onChange={(e) => updateInput('amount', Number(e.target.value))}
+                onChange={(e) => updateInput('amount', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -181,7 +181,7 @@ export default function BakingConversionCalculator() {
                     label="Result"
                     value={formatAmount(result.convertedAmount, inputs.toUnit)}
                     sublabel="converted"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Density"

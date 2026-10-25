@@ -2,7 +2,7 @@
  * Water Change Calculator Component
  * Calculate dilution and parameter adjustment for aquariums
  */
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { WaterChangeInputs } from './types';
 import { PARAMETER_PRESETS, CHANGE_PRESETS, TANK_PRESETS, FREQUENCY_OPTIONS } from './types';
@@ -38,14 +38,20 @@ export function WaterChangeCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Tank Setup</h2>
 
           <div className="space-y-4">
-            <Input
-              label="Tank Volume"
-              type="number"
-              value={inputs.tankVolume}
-              onChange={(v) => setInputs({ ...inputs, tankVolume: parseFloat(v) || 0 })}
-              min={1}
-              suffix={inputs.volumeUnit === 'gallons' ? 'gal' : 'L'}
-            />
+            <div>
+              <Label htmlFor="tank-volume">
+                Tank Volume ({inputs.volumeUnit === 'gallons' ? 'gal' : 'L'})
+              </Label>
+              <Input
+                id="tank-volume"
+                type="number"
+                value={inputs.tankVolume}
+                onChange={(e) =>
+                  setInputs({ ...inputs, tankVolume: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -60,7 +66,7 @@ export function WaterChangeCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    volumeUnit: v as WaterChangeInputs[keyof WaterChangeInputs],
+                    volumeUnit: v as WaterChangeInputs['volumeUnit'],
                   })
                 }
               />
@@ -97,7 +103,8 @@ export function WaterChangeCalculator() {
               min={5}
               max={75}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
 
             <div className="flex flex-wrap gap-2">
@@ -116,20 +123,23 @@ export function WaterChangeCalculator() {
               ))}
             </div>
 
-            <Select
-              label="Change Frequency"
-              value={inputs.changeFrequency}
-              onChange={(v) =>
-                setInputs({
-                  ...inputs,
-                  changeFrequency: v as WaterChangeInputs[keyof WaterChangeInputs],
-                })
-              }
-              options={FREQUENCY_OPTIONS.map((f) => ({
-                value: f.value,
-                label: f.label,
-              }))}
-            />
+            <div>
+              <Label htmlFor="change-frequency">Change Frequency</Label>
+              <Select
+                id="change-frequency"
+                value={inputs.changeFrequency}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    changeFrequency: v as WaterChangeInputs['changeFrequency'],
+                  })
+                }
+                options={FREQUENCY_OPTIONS.map((f) => ({
+                  value: f.value,
+                  label: f.label,
+                }))}
+              />
+            </div>
           </div>
         </div>
 
@@ -139,54 +149,80 @@ export function WaterChangeCalculator() {
           </h2>
 
           <div className="space-y-4">
-            <Select
-              label="Parameter Type"
-              value={inputs.parameterType}
-              onChange={(v) => {
-                const preset = PARAMETER_PRESETS.find((p) => p.value === v);
-                setInputs({
-                  ...inputs,
-                  parameterType: v as WaterChangeInputs[keyof WaterChangeInputs],
-                  newWaterParameter: preset?.newWaterDefault || 0,
-                  targetParameter: preset?.safeMax || 20,
-                });
-              }}
-              options={PARAMETER_PRESETS.map((p) => ({
-                value: p.value,
-                label: p.label,
-              }))}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Current Level"
-                type="number"
-                value={inputs.currentParameter}
-                onChange={(v) => setInputs({ ...inputs, currentParameter: parseFloat(v) || 0 })}
-                min={0}
-                step={1}
-                suffix={selectedPreset?.unit || ''}
-              />
-              <Input
-                label="Target Level"
-                type="number"
-                value={inputs.targetParameter}
-                onChange={(v) => setInputs({ ...inputs, targetParameter: parseFloat(v) || 0 })}
-                min={0}
-                step={1}
-                suffix={selectedPreset?.unit || ''}
+            <div>
+              <Label htmlFor="parameter-type">Parameter Type</Label>
+              <Select
+                id="parameter-type"
+                value={inputs.parameterType}
+                onChange={(v) => {
+                  const preset = PARAMETER_PRESETS.find((p) => p.value === v);
+                  setInputs({
+                    ...inputs,
+                    parameterType: v as WaterChangeInputs['parameterType'],
+                    newWaterParameter: preset?.newWaterDefault || 0,
+                    targetParameter: preset?.safeMax || 20,
+                  });
+                }}
+                options={PARAMETER_PRESETS.map((p) => ({
+                  value: p.value,
+                  label: p.label,
+                }))}
               />
             </div>
 
-            <Input
-              label="New Water Level"
-              type="number"
-              value={inputs.newWaterParameter}
-              onChange={(v) => setInputs({ ...inputs, newWaterParameter: parseFloat(v) || 0 })}
-              min={0}
-              step={1}
-              suffix={selectedPreset?.unit || ''}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="current-level">Current Level ({selectedPreset?.unit || ''})</Label>
+                <Input
+                  id="current-level"
+                  type="number"
+                  value={inputs.currentParameter}
+                  onChange={(e) =>
+                    setInputs({
+                      ...inputs,
+                      currentParameter: parseFloat(e.currentTarget.value) || 0,
+                    })
+                  }
+                  min={0}
+                  step={1}
+                />
+              </div>
+              <div>
+                <Label htmlFor="target-level">Target Level ({selectedPreset?.unit || ''})</Label>
+                <Input
+                  id="target-level"
+                  type="number"
+                  value={inputs.targetParameter}
+                  onChange={(e) =>
+                    setInputs({
+                      ...inputs,
+                      targetParameter: parseFloat(e.currentTarget.value) || 0,
+                    })
+                  }
+                  min={0}
+                  step={1}
+                />
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="new-water-level">
+                New Water Level ({selectedPreset?.unit || ''})
+              </Label>
+              <Input
+                id="new-water-level"
+                type="number"
+                value={inputs.newWaterParameter}
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    newWaterParameter: parseFloat(e.currentTarget.value) || 0,
+                  })
+                }
+                min={0}
+                step={1}
+              />
+            </div>
 
             {selectedPreset && selectedPreset.value !== 'custom' && (
               <div className="rounded-lg bg-cyan-900/20 p-3 ring-1 ring-cyan-500/20">
@@ -237,24 +273,20 @@ export function WaterChangeCalculator() {
           <ResultCard
             label="After Change"
             value={formatParameter(results.parameterAfterChange, inputs.parameterType)}
-            sublabel={`from ${formatParameter(inputs.currentParameter, inputs.parameterType)}`}
-            color="blue"
+            subtitle={`from ${formatParameter(inputs.currentParameter, inputs.parameterType)}`}
           />
           <ResultCard
             label="Reduction"
             value={`${results.reductionPercent}%`}
-            sublabel="parameter decrease"
-            color="green"
+            subtitle="parameter decrease"
           />
           <ResultCard
             label="Weekly Volume"
             value={`${results.weeklyVolume} ${results.volumeUnit}`}
-            color="purple"
           />
           <ResultCard
             label="Monthly Volume"
             value={`${results.monthlyVolume} ${results.volumeUnit}`}
-            color="blue"
           />
         </div>
 

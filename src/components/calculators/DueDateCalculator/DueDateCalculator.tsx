@@ -54,7 +54,7 @@ export default function DueDateCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="coral">
+    <ThemeProvider defaultColor="red">
       <Card variant="elevated">
         <CalculatorHeader
           title="Pregnancy Due Date Calculator"

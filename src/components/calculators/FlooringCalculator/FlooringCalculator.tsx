@@ -106,7 +106,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={200}
                     value={inputs.roomLength}
-                    onChange={(e) => updateInput('roomLength', Number(e.target.value))}
+                    onChange={(e) => updateInput('roomLength', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -117,7 +117,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={200}
                     value={inputs.roomWidth}
-                    onChange={(e) => updateInput('roomWidth', Number(e.target.value))}
+                    onChange={(e) => updateInput('roomWidth', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -159,7 +159,7 @@ export default function FlooringCalculator() {
                   max={100}
                   step={0.5}
                   value={inputs.sqftPerBox}
-                  onChange={(e) => updateInput('sqftPerBox', Number(e.target.value))}
+                  onChange={(e) => updateInput('sqftPerBox', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Check the box label (typically 20-25 sq ft)
@@ -174,7 +174,7 @@ export default function FlooringCalculator() {
                   max={50}
                   step={0.25}
                   value={inputs.pricePerSqft}
-                  onChange={(e) => updateInput('pricePerSqft', Number(e.target.value))}
+                  onChange={(e) => updateInput('pricePerSqft', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -193,7 +193,7 @@ export default function FlooringCalculator() {
                     min={0}
                     max={10}
                     value={inputs.closetCount}
-                    onChange={(e) => updateInput('closetCount', Number(e.target.value))}
+                    onChange={(e) => updateInput('closetCount', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -204,7 +204,7 @@ export default function FlooringCalculator() {
                     min={1}
                     max={100}
                     value={inputs.closetSize}
-                    onChange={(e) => updateInput('closetSize', Number(e.target.value))}
+                    onChange={(e) => updateInput('closetSize', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -215,7 +215,7 @@ export default function FlooringCalculator() {
                     min={0}
                     max={50}
                     value={inputs.stairSteps}
-                    onChange={(e) => updateInput('stairSteps', Number(e.target.value))}
+                    onChange={(e) => updateInput('stairSteps', Number(e.currentTarget.value))}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">~3.5 sq ft each</p>
                 </div>
@@ -243,7 +243,9 @@ export default function FlooringCalculator() {
                       min={1}
                       max={20}
                       value={inputs.transitionCount}
-                      onChange={(e) => updateInput('transitionCount', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('transitionCount', Number(e.currentTarget.value))
+                      }
                       className="w-20"
                     />
                     <span className="text-sm text-[var(--color-muted)]">doorways</span>

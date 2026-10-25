@@ -71,7 +71,7 @@ export default function USPaycheckCalculator() {
                   id="grossSalary"
                   type="number"
                   value={inputs.grossSalary}
-                  onChange={(value) => updateInput('grossSalary', Number(value))}
+                  onChange={(e) => updateInput('grossSalary', Number(e.currentTarget.value))}
                   prefix="$"
                   min={0}
                   step={1000}
@@ -134,7 +134,7 @@ export default function USPaycheckCalculator() {
                   id="preTax401k"
                   type="number"
                   value={inputs.preTax401k}
-                  onChange={(value) => updateInput('preTax401k', Number(value))}
+                  onChange={(e) => updateInput('preTax401k', Number(e.currentTarget.value))}
                   prefix="$"
                   min={0}
                 />
@@ -145,7 +145,7 @@ export default function USPaycheckCalculator() {
                   id="preTaxHSA"
                   type="number"
                   value={inputs.preTaxHSA}
-                  onChange={(value) => updateInput('preTaxHSA', Number(value))}
+                  onChange={(e) => updateInput('preTaxHSA', Number(e.currentTarget.value))}
                   prefix="$"
                   min={0}
                 />
@@ -156,7 +156,9 @@ export default function USPaycheckCalculator() {
                   id="additionalWithholding"
                   type="number"
                   value={inputs.additionalWithholding}
-                  onChange={(value) => updateInput('additionalWithholding', Number(value))}
+                  onChange={(e) =>
+                    updateInput('additionalWithholding', Number(e.currentTarget.value))
+                  }
                   prefix="$"
                   min={0}
                 />
@@ -172,7 +174,6 @@ export default function USPaycheckCalculator() {
               label="Your Take-Home Pay"
               value={formatCurrency(result.netPay)}
               subtitle={`per ${inputs.payFrequency === 'biweekly' ? 'paycheck' : inputs.payFrequency === 'semimonthly' ? 'pay period' : inputs.payFrequency}`}
-              valueColor="success"
             />
 
             {/* Per-Paycheck Breakdown */}

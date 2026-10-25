@@ -204,7 +204,7 @@ export default function EtsyFeeCalculator() {
                   min={0}
                   step={1}
                   value={inputs.salePrice}
-                  onChange={(e) => updateInput('salePrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('salePrice', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">Item price before shipping</p>
               </div>
@@ -220,7 +220,7 @@ export default function EtsyFeeCalculator() {
                   min={0}
                   step={0.5}
                   value={inputs.shippingCharged}
-                  onChange={(e) => updateInput('shippingCharged', Number(e.target.value))}
+                  onChange={(e) => updateInput('shippingCharged', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">Amount charged to buyer</p>
               </div>
@@ -237,7 +237,7 @@ export default function EtsyFeeCalculator() {
                   min={0}
                   step={0.5}
                   value={inputs.shippingCost}
-                  onChange={(e) => updateInput('shippingCost', Number(e.target.value))}
+                  onChange={(e) => updateInput('shippingCost', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Your actual shipping expense
@@ -253,7 +253,7 @@ export default function EtsyFeeCalculator() {
                   min={0}
                   step={1}
                   value={inputs.itemCost}
-                  onChange={(e) => updateInput('itemCost', Number(e.target.value))}
+                  onChange={(e) => updateInput('itemCost', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">Materials, supplies, etc.</p>
               </div>
@@ -285,7 +285,9 @@ export default function EtsyFeeCalculator() {
                     min={1}
                     max={99}
                     value={inputs.quantity}
-                    onChange={(e) => updateInput('quantity', Math.max(1, Number(e.target.value)))}
+                    onChange={(e) =>
+                      updateInput('quantity', Math.max(1, Number(e.currentTarget.value)))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Items in this order (for listing fees)

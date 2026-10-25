@@ -39,7 +39,7 @@ export default function CoffeeSpendCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="Coffee Spend Calculator"
@@ -78,7 +78,7 @@ export default function CoffeeSpendCalculator() {
                 min={0}
                 step={0.25}
                 value={inputs.pricePerCoffee}
-                onChange={(e) => updateInput('pricePerCoffee', Number(e.target.value))}
+                onChange={(e) => updateInput('pricePerCoffee', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -93,7 +93,7 @@ export default function CoffeeSpendCalculator() {
                 min={0}
                 step={0.05}
                 value={inputs.homeBrewCostPerCup}
-                onChange={(e) => updateInput('homeBrewCostPerCup', Number(e.target.value))}
+                onChange={(e) => updateInput('homeBrewCostPerCup', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -165,7 +165,7 @@ export default function CoffeeSpendCalculator() {
                     label="Yearly"
                     value={formatCurrencyWhole(result.yearlySpend, inputs.currency)}
                     sublabel="per year"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                 </Grid>
 
@@ -186,7 +186,7 @@ export default function CoffeeSpendCalculator() {
                           label="Yearly savings"
                           value={formatCurrencyWhole(result.yearlySavings, inputs.currency)}
                           sublabel="by switching"
-                          valueColor="text-green-400"
+                          valueColor="success"
                         />
                       </Grid>
                     </div>
@@ -206,13 +206,13 @@ export default function CoffeeSpendCalculator() {
                           label="20 years"
                           value={formatCurrencyWhole(result.savingsOver20Years, inputs.currency)}
                           sublabel="invested savings"
-                          valueColor="text-[var(--color-accent)]"
+                          valueColor="themed"
                         />
                         <MetricCard
                           label="30 years"
                           value={formatCurrencyWhole(result.savingsOver30Years, inputs.currency)}
                           sublabel="invested savings"
-                          valueColor="text-green-400"
+                          valueColor="success"
                         />
                       </Grid>
                     </div>

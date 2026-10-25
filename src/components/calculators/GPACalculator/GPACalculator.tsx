@@ -77,7 +77,7 @@ export default function GPACalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="GPA Calculator"
@@ -140,7 +140,7 @@ export default function GPACalculator() {
                       max={inputs.gradeScale === '4.3' ? 4.3 : 4.0}
                       step={0.01}
                       value={inputs.currentGPA}
-                      onChange={(e) => updateInput('currentGPA', Number(e.target.value))}
+                      onChange={(e) => updateInput('currentGPA', Number(e.currentTarget.value))}
                     />
                   </div>
                   <div>
@@ -151,7 +151,7 @@ export default function GPACalculator() {
                       min={0}
                       max={300}
                       value={inputs.currentCredits}
-                      onChange={(e) => updateInput('currentCredits', Number(e.target.value))}
+                      onChange={(e) => updateInput('currentCredits', Number(e.currentTarget.value))}
                     />
                   </div>
                 </Grid>
@@ -183,7 +183,7 @@ export default function GPACalculator() {
                           type="text"
                           placeholder="Course name"
                           value={course.name}
-                          onChange={(e) => updateCourse(course.id, 'name', e.target.value)}
+                          onChange={(e) => updateCourse(course.id, 'name', e.currentTarget.value)}
                         />
                       </div>
                       <div className="w-full md:w-24">
@@ -195,7 +195,7 @@ export default function GPACalculator() {
                           placeholder="Credits"
                           value={course.credits}
                           onChange={(e) =>
-                            updateCourse(course.id, 'credits', Number(e.target.value))
+                            updateCourse(course.id, 'credits', Number(e.currentTarget.value))
                           }
                         />
                         <span className="text-xs text-[var(--color-muted)] mt-1 block md:hidden">

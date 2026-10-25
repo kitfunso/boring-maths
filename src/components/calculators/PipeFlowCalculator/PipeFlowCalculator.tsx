@@ -149,7 +149,7 @@ export default function PipeFlowCalculator() {
                   step={inputs.unitSystem === 'metric' ? 1 : 0.125}
                   value={inputs.solveFor === 'diameter' ? result.diameter : inputs.diameter}
                   disabled={inputs.solveFor === 'diameter'}
-                  onChange={(e) => updateInput('diameter', Number(e.target.value))}
+                  onChange={(e) => updateInput('diameter', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -165,7 +165,7 @@ export default function PipeFlowCalculator() {
                   step={0.1}
                   value={inputs.solveFor === 'velocity' ? result.velocity : inputs.velocity}
                   disabled={inputs.solveFor === 'velocity'}
-                  onChange={(e) => updateInput('velocity', Number(e.target.value))}
+                  onChange={(e) => updateInput('velocity', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -181,7 +181,7 @@ export default function PipeFlowCalculator() {
                   step={1}
                   value={inputs.solveFor === 'flowRate' ? result.flowRate : inputs.flowRate}
                   disabled={inputs.solveFor === 'flowRate'}
-                  onChange={(e) => updateInput('flowRate', Number(e.target.value))}
+                  onChange={(e) => updateInput('flowRate', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>

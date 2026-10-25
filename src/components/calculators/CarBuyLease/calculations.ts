@@ -2,6 +2,7 @@
  * Car Buy vs Lease Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { CarBuyLeaseInputs, CarBuyLeaseResult, YearComparison } from './types';
 
 export function calculateCarBuyLease(inputs: CarBuyLeaseInputs): CarBuyLeaseResult {

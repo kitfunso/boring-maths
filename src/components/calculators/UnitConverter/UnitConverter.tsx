@@ -106,7 +106,7 @@ export default function UnitConverter() {
                 type="number"
                 step="any"
                 value={inputs.value}
-                onChange={(e) => updateInput('value', Number(e.target.value))}
+                onChange={(e) => updateInput('value', Number(e.currentTarget.value))}
               />
             </div>
 

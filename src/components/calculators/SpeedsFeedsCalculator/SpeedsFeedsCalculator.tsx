@@ -107,7 +107,7 @@ export default function SpeedsFeedsCalculator() {
                     id="toolDiameter"
                     type="number"
                     value={inputs.toolDiameter}
-                    onChange={(value) => updateInput('toolDiameter', Number(value))}
+                    onChange={(e) => updateInput('toolDiameter', Number(e.currentTarget.value))}
                     min={0.01}
                     step={0.0625}
                   />
@@ -162,7 +162,7 @@ export default function SpeedsFeedsCalculator() {
                 id="depthOfCut"
                 type="number"
                 value={inputs.depthOfCut}
-                onChange={(value) => updateInput('depthOfCut', Number(value))}
+                onChange={(e) => updateInput('depthOfCut', Number(e.currentTarget.value))}
                 min={0.001}
                 step={0.01}
               />
@@ -188,13 +188,11 @@ export default function SpeedsFeedsCalculator() {
                 label="Spindle Speed"
                 value={`${formatNumber(result.rpm)} RPM`}
                 subtitle="revolutions per minute"
-                valueColor="success"
               />
               <ResultCard
                 label="Feed Rate"
                 value={`${formatNumber(result.feedRate, 1)} IPM`}
                 subtitle="inches per minute"
-                valueColor="success"
               />
             </Grid>
 

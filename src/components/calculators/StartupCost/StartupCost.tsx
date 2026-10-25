@@ -135,7 +135,7 @@ export default function StartupCost() {
                   min={0}
                   step={500}
                   value={inputs.founderSalary}
-                  onChange={(e) => updateInput('founderSalary', Number(e.target.value))}
+                  onChange={(e) => updateInput('founderSalary', Number(e.currentTarget.value))}
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   Your living expenses during runway
@@ -199,7 +199,7 @@ export default function StartupCost() {
                     min={0}
                     step={1000}
                     value={inputs.customEquipment}
-                    onChange={(e) => updateInput('customEquipment', Number(e.target.value))}
+                    onChange={(e) => updateInput('customEquipment', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -213,7 +213,7 @@ export default function StartupCost() {
                     min={0}
                     step={1000}
                     value={inputs.customInventory}
-                    onChange={(e) => updateInput('customInventory', Number(e.target.value))}
+                    onChange={(e) => updateInput('customInventory', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>

@@ -80,7 +80,7 @@ export default function SaaSMetrics() {
                     min={1}
                     step={10}
                     value={inputs.customers}
-                    onChange={(e) => updateInput('customers', Number(e.target.value))}
+                    onChange={(e) => updateInput('customers', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -95,7 +95,7 @@ export default function SaaSMetrics() {
                     min={0}
                     step={10}
                     value={inputs.arpu}
-                    onChange={(e) => updateInput('arpu', Number(e.target.value))}
+                    onChange={(e) => updateInput('arpu', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -148,7 +148,7 @@ export default function SaaSMetrics() {
                     min={0}
                     step={50}
                     value={inputs.cac}
-                    onChange={(e) => updateInput('cac', Number(e.target.value))}
+                    onChange={(e) => updateInput('cac', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -177,7 +177,7 @@ export default function SaaSMetrics() {
                   min={0}
                   step={1000}
                   value={inputs.monthlyOpex}
-                  onChange={(e) => updateInput('monthlyOpex', Number(e.target.value))}
+                  onChange={(e) => updateInput('monthlyOpex', Number(e.currentTarget.value))}
                 />
               </div>
             </div>

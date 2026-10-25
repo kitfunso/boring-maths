@@ -67,7 +67,7 @@ export default function EVvsGasCalculator() {
   const distanceUnit = inputs.useMetric ? 'km' : 'miles';
   const efficiencyLabel = inputs.useMetric ? 'km/kWh' : 'mi/kWh';
   const fuelEfficiencyLabel = inputs.useMetric ? 'km/L' : 'MPG';
-  const fuelUnitLabel = inputs.useMetric ? '/L' : '/gal';
+  const fuelUnitLabel = inputs.useMetric ? 'litre' : 'gallon';
   const co2Unit = inputs.useMetric ? 'kg' : 'lbs';
 
   return (
@@ -169,10 +169,9 @@ export default function EVvsGasCalculator() {
 
                 {expandedSections.drivingHabits && (
                   <div className="px-4 pb-4 space-y-4">
-                    <div className="flex items-center justify-between py-2">
-                      <Label htmlFor="useMetric">Use Metric Units</Label>
+                    <div className="py-2">
                       <Toggle
-                        id="useMetric"
+                        label="Use Metric Units"
                         checked={inputs.useMetric}
                         onChange={(checked) => updateInput('useMetric', checked)}
                       />
@@ -245,14 +244,13 @@ export default function EVvsGasCalculator() {
                     />
 
                     <div>
-                      <Label htmlFor="electricityRate">Home Electricity Rate</Label>
+                      <Label htmlFor="electricityRate">Home Electricity Rate (per kWh)</Label>
                       <Input
                         id="electricityRate"
                         type="number"
                         min={0}
                         step={0.01}
                         value={inputs.electricityRate}
-                        suffix="/kWh"
                         onChange={(e) =>
                           updateInput(
                             'electricityRate',
@@ -279,14 +277,13 @@ export default function EVvsGasCalculator() {
                     />
 
                     <div>
-                      <Label htmlFor="publicChargingRate">Public Charging Rate</Label>
+                      <Label htmlFor="publicChargingRate">Public Charging Rate (per kWh)</Label>
                       <Input
                         id="publicChargingRate"
                         type="number"
                         min={0}
                         step={0.01}
                         value={inputs.publicChargingRate}
-                        suffix="/kWh"
                         onChange={(e) =>
                           updateInput(
                             'publicChargingRate',
@@ -368,14 +365,13 @@ export default function EVvsGasCalculator() {
                     />
 
                     <div>
-                      <Label htmlFor="gasPerGallon">Fuel Price</Label>
+                      <Label htmlFor="gasPerGallon">Fuel Price (per {fuelUnitLabel})</Label>
                       <Input
                         id="gasPerGallon"
                         type="number"
                         min={0}
                         step={0.1}
                         value={inputs.gasPerGallon}
-                        suffix={fuelUnitLabel}
                         onChange={(e) =>
                           updateInput(
                             'gasPerGallon',
@@ -645,16 +641,21 @@ export default function EVvsGasCalculator() {
                 />
                 <PrintResults
                   title="EV vs Gas Cost Comparison"
-                  data={{
-                    'Analysis Period': `${inputs.yearsOwnership} years`,
-                    'Annual Mileage': `${inputs.annualMiles.toLocaleString()} ${distanceUnit}`,
-                    'EV Total Cost': fmt(result.evCosts.total),
-                    'Gas Total Cost': fmt(result.gasCosts.total),
-                    'Total Savings': fmt(Math.abs(result.totalSavings)),
-                    'Better Choice':
-                      result.betterChoice === 'ev' ? 'Electric Vehicle' : 'Gas Vehicle',
-                    'CO2 Saved': `${result.co2Saved.toLocaleString()} ${co2Unit}`,
-                  }}
+                  results={[
+                    { label: 'Analysis Period', value: `${inputs.yearsOwnership} years` },
+                    {
+                      label: 'Annual Mileage',
+                      value: `${inputs.annualMiles.toLocaleString()} ${distanceUnit}`,
+                    },
+                    { label: 'EV Total Cost', value: fmt(result.evCosts.total) },
+                    { label: 'Gas Total Cost', value: fmt(result.gasCosts.total) },
+                    { label: 'Total Savings', value: fmt(Math.abs(result.totalSavings)) },
+                    {
+                      label: 'Better Choice',
+                      value: result.betterChoice === 'ev' ? 'Electric Vehicle' : 'Gas Vehicle',
+                    },
+                    { label: 'CO2 Saved', value: `${result.co2Saved.toLocaleString()} ${co2Unit}` },
+                  ]}
                 />
               </div>
             </div>

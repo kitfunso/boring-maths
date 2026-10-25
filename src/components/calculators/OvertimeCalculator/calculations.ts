@@ -6,7 +6,11 @@
 
 import type { OvertimeCalculatorInputs, OvertimeCalculatorResult, TaxBracket } from './types';
 import { US_TAX_BRACKETS, UK_TAX_BRACKETS, OVERTIME_STATUS_MAP } from './types';
-import { SOCIAL_SECURITY_WAGE_BASE_2026, STANDARD_DEDUCTION_2026 } from '../../../lib/us-tax-2026';
+import {
+  type FederalFilingStatus,
+  STANDARD_DEDUCTION_2026,
+  employeeFica,
+} from '../../../lib/us-tax-2026';
 import { calculateUKTax } from '../UKTaxCalculator/calculations';
 import { getDefaultInputs as getUKTaxDefaults } from '../UKTaxCalculator/types';
 import type { Currency } from '../../../lib/regions';
@@ -100,8 +104,7 @@ function calculateMarginalTax(
   qualifiedOvertime: number,
   model: IncomeTaxModel,
   stateTaxRate: number,
-  includeFICA: boolean,
-  currency: Currency
+  ficaStatus: FederalFilingStatus | null // null when FICA does not apply
 ): { tax: number; effectiveRate: number } {
   let totalTax = 0;
 
@@ -109,14 +112,11 @@ function calculateMarginalTax(
   const stateTax = additionalIncome * stateTaxRate;
   totalTax += stateTax;
 
-  // Add FICA if applicable (US only)
-  if (includeFICA && currency === 'USD') {
-    // Social Security only up to wage base
-    const ssWagesRemaining = Math.max(0, SOCIAL_SECURITY_WAGE_BASE_2026 - baseIncome);
-    const ssWagesTaxed = Math.min(additionalIncome, ssWagesRemaining);
-    const ssTax = ssWagesTaxed * 0.062;
-    const medicareTax = additionalIncome * 0.0145;
-    totalTax += ssTax + medicareTax;
+  // Social Security stops at the wage base; the 0.9% Additional Medicare starts at the threshold
+  if (ficaStatus) {
+    totalTax +=
+      employeeFica(baseIncome + additionalIncome, ficaStatus) -
+      employeeFica(baseIncome, ficaStatus);
   }
 
   totalTax +=
@@ -143,6 +143,7 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
   } = inputs;
 
   const model = incomeTaxModel(currency, filingStatus);
+  const ficaStatus = includeFICA && currency === 'USD' ? OVERTIME_STATUS_MAP[filingStatus] : null;
 
   // Calculate gross overtime
   const overtimeRate = hourlyRate * overtimeMultiplier;
@@ -163,8 +164,7 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
     qualifiedOvertime,
     model,
     stateTaxRate,
-    includeFICA,
-    currency
+    ficaStatus
   );
 
   // Net calculations
@@ -188,37 +188,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
     hours1000: Math.ceil(1000 / effectiveRate),
   };
 
-  // Monthly breakdown showing cumulative effect and diminishing returns
-  const monthlyBreakdown: OvertimeCalculatorResult['monthlyBreakdown'] = [];
-  let cumulativeNet = 0;
-
-  for (let month = 1; month <= 12; month++) {
-    const monthlyGross = (weeklyGrossOT * WEEKS_PER_YEAR) / 12;
-
-    // Calculate tax with progressive income
-    const incomeToDate = currentAnnualIncome * (month / 12);
-    const { tax, effectiveRate: monthEffRate } = calculateMarginalTax(
-      incomeToDate,
-      monthlyGross,
-      qualifiedOvertime / 12,
-      model,
-      stateTaxRate,
-      includeFICA,
-      currency
-    );
-
-    const monthlyNet = monthlyGross - tax;
-    cumulativeNet += monthlyNet;
-
-    monthlyBreakdown.push({
-      month,
-      grossOT: Math.round(monthlyGross),
-      netOT: Math.round(monthlyNet),
-      effectiveRate: overtimeRate * (1 - monthEffRate),
-      cumulativeNet: Math.round(cumulativeNet),
-    });
-  }
-
   return {
     currency,
     weeklyGrossOT: Math.round(weeklyGrossOT * 100) / 100,
@@ -232,7 +201,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
     bracketAfterOT,
     pushesIntoBracket,
     breakEven,
-    monthlyBreakdown,
   };
 }
 

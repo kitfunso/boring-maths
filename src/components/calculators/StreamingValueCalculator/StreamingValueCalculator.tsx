@@ -169,19 +169,19 @@ export default function StreamingValueCalculator() {
                     label="Yearly"
                     value={formatDollars(result.totalYearlyCost)}
                     sublabel="total cost"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Best Value"
                     value={result.bestValue || '--'}
                     sublabel="lowest $/hr"
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="Worst Value"
                     value={result.worstValue || '--'}
                     sublabel="highest $/hr"
-                    valueColor="text-red-400"
+                    valueColor="error"
                   />
                 </Grid>
 

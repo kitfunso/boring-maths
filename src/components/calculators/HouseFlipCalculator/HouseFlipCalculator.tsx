@@ -69,7 +69,7 @@ export default function HouseFlipCalculator() {
                     min={0}
                     step={1000}
                     value={inputs.purchasePrice}
-                    onChange={(e) => updateInput('purchasePrice', Number(e.target.value))}
+                    onChange={(e) => updateInput('purchasePrice', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -84,7 +84,9 @@ export default function HouseFlipCalculator() {
                     max={10}
                     step={0.5}
                     value={inputs.closingCostsPercent}
-                    onChange={(e) => updateInput('closingCostsPercent', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('closingCostsPercent', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>
@@ -107,7 +109,7 @@ export default function HouseFlipCalculator() {
                   min={0}
                   step={1000}
                   value={inputs.renovationBudget}
-                  onChange={(e) => updateInput('renovationBudget', Number(e.target.value))}
+                  onChange={(e) => updateInput('renovationBudget', Number(e.currentTarget.value))}
                 />
               </div>
             </div>
@@ -130,7 +132,9 @@ export default function HouseFlipCalculator() {
                     max={100}
                     step={5}
                     value={inputs.downPaymentPercent}
-                    onChange={(e) => updateInput('downPaymentPercent', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('downPaymentPercent', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -145,7 +149,7 @@ export default function HouseFlipCalculator() {
                     max={30}
                     step={0.25}
                     value={inputs.financingRate}
-                    onChange={(e) => updateInput('financingRate', Number(e.target.value))}
+                    onChange={(e) => updateInput('financingRate', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -168,7 +172,7 @@ export default function HouseFlipCalculator() {
                     max={36}
                     step={1}
                     value={inputs.holdingMonths}
-                    onChange={(e) => updateInput('holdingMonths', Number(e.target.value))}
+                    onChange={(e) => updateInput('holdingMonths', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -183,7 +187,9 @@ export default function HouseFlipCalculator() {
                     min={0}
                     step={100}
                     value={inputs.monthlyHoldingCosts}
-                    onChange={(e) => updateInput('monthlyHoldingCosts', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('monthlyHoldingCosts', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>
@@ -207,7 +213,7 @@ export default function HouseFlipCalculator() {
                     min={0}
                     step={1000}
                     value={inputs.afterRepairValue}
-                    onChange={(e) => updateInput('afterRepairValue', Number(e.target.value))}
+                    onChange={(e) => updateInput('afterRepairValue', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -222,7 +228,9 @@ export default function HouseFlipCalculator() {
                     max={15}
                     step={0.5}
                     value={inputs.sellingCostsPercent}
-                    onChange={(e) => updateInput('sellingCostsPercent', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('sellingCostsPercent', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>
@@ -320,19 +328,19 @@ export default function HouseFlipCalculator() {
                     label="Estimated Profit"
                     value={formatCurrency(result.estimatedProfit, inputs.currency)}
                     sublabel={isProfitable ? 'net profit' : 'net loss'}
-                    valueColor={isProfitable ? 'text-green-400' : 'text-red-400'}
+                    valueColor={isProfitable ? 'success' : 'error'}
                   />
                   <MetricCard
                     label="ROI"
                     value={formatPercent(result.roi)}
                     sublabel="return on investment"
-                    valueColor={result.roi > 0 ? 'text-green-400' : 'text-red-400'}
+                    valueColor={result.roi > 0 ? 'success' : 'error'}
                   />
                   <MetricCard
                     label="Cash-on-Cash"
                     value={formatPercent(result.cashOnCashReturn)}
                     sublabel="return on cash invested"
-                    valueColor={result.cashOnCashReturn > 0 ? 'text-green-400' : 'text-red-400'}
+                    valueColor={result.cashOnCashReturn > 0 ? 'success' : 'error'}
                   />
                 </Grid>
 

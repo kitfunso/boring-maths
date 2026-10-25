@@ -2,6 +2,7 @@
  * Rental Property ROI Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { RentalPropertyInputs, RentalPropertyResult } from './types';
 
 export function calculateRentalPropertyROI(inputs: RentalPropertyInputs): RentalPropertyResult {

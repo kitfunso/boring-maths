@@ -2,7 +2,7 @@
  * Glaze Recipe Calculator Component
  * Scale and calculate pottery glaze recipes
  */
-import { Input, Select, ButtonGroup, Slider } from '../../ui';
+import { Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { GlazeInputs, GlazeIngredient } from './types';
 import { GLAZE_MATERIALS, GLAZE_RECIPES } from './types';
@@ -86,25 +86,32 @@ export function GlazeCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Settings</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Load Recipe Template"
-              value=""
-              onChange={(v) => loadRecipe(v)}
-              options={[
-                { value: '', label: 'Select a recipe...' },
-                ...GLAZE_RECIPES.map((r) => ({ value: r.name, label: `${r.name}` })),
-              ]}
-            />
+            <div>
+              <Label htmlFor="load-recipe-template">Load Recipe Template</Label>
+              <Select
+                id="load-recipe-template"
+                value=""
+                onChange={(v) => loadRecipe(v)}
+                options={[
+                  { value: '', label: 'Select a recipe...' },
+                  ...GLAZE_RECIPES.map((r) => ({ value: r.name, label: `${r.name}` })),
+                ]}
+              />
+            </div>
 
-            <Input
-              label="Target Dry Weight"
-              type="number"
-              value={inputs.targetWeight}
-              onChange={(v) => setInputs({ ...inputs, targetWeight: parseFloat(v) || 0 })}
-              min={1}
-              max={50000}
-              suffix={inputs.weightUnit}
-            />
+            <div>
+              <Label htmlFor="target-dry-weight">Target Dry Weight ({inputs.weightUnit})</Label>
+              <Input
+                id="target-dry-weight"
+                type="number"
+                value={inputs.targetWeight}
+                onChange={(e) =>
+                  setInputs({ ...inputs, targetWeight: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+                max={50000}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -130,7 +137,8 @@ export function GlazeCalculator() {
               min={0.3}
               max={1.0}
               step={0.05}
-              formatValue={(v) => `${(v * 100).toFixed(0)}% of dry weight`}
+              showValue
+              labels={{ current: (v) => `${(v * 100).toFixed(0)}% of dry weight` }}
             />
           </div>
         </div>
@@ -154,23 +162,30 @@ export function GlazeCalculator() {
               >
                 <div className="min-w-0 flex-1">
                   <Select
-                    label=""
+                    aria-label="Material"
                     value={ing.name}
                     onChange={(v) => updateIngredient(ing.id, 'name', v)}
                     options={materialOptions}
                   />
                 </div>
                 <div className="w-24">
-                  <Input
-                    label=""
-                    type="number"
-                    value={ing.percentage}
-                    onChange={(v) => updateIngredient(ing.id, 'percentage', parseFloat(v) || 0)}
-                    min={0}
-                    max={100}
-                    step={0.5}
-                    suffix="%"
-                  />
+                  <div>
+                    <Input
+                      aria-label="Percentage"
+                      type="number"
+                      value={ing.percentage}
+                      onChange={(e) =>
+                        updateIngredient(
+                          ing.id,
+                          'percentage',
+                          parseFloat(e.currentTarget.value) || 0
+                        )
+                      }
+                      min={0}
+                      max={100}
+                      step={0.5}
+                    />
+                  </div>
                 </div>
                 {inputs.ingredients.length > 1 && (
                   <button

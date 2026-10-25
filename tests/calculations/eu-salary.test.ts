@@ -77,11 +77,18 @@ describe('EuSalaryCalculator', () => {
       expect(r.netSalary).toBeCloseTo(de.netAnnual, 2);
     });
 
-    it('Belgium 50,000: the 11,550 tax-free sum comes off the tax at 25%', () => {
-      // SS 6535; taxable 43465; 4180 + 12790 x 0.40 + 13955 x 0.45 = 15575.75; less 11550 x 0.25 = 2887.50
+    it('Belgium 50,000: 6,070 expense cap, tax-free sum at 25%, then 7% municipal surcharge', () => {
+      // SS 6535; after 43465; expenses min(6070, 13039.5) = 6070; base 37395
+      // bands 16720 x 0.25 + 12790 x 0.40 + 7885 x 0.45 = 12844.25; less 2887.50 = 9956.75; x 1.07
       const r = calculateSalary({ grossSalary: 50000, countryCode: 'BE' });
       expect(r.socialSecurity).toBeCloseTo(6535, 2);
-      expect(r.incomeTax).toBeCloseTo(12688.25, 2);
+      expect(r.incomeTax).toBeCloseTo(10653.7225, 2);
+    });
+
+    it('Belgium 20,000: the 30% expense allowance applies below the cap', () => {
+      // SS 2614; after 17386; expenses 5215.8; base 12170.2; bands 3042.55; less 2887.5 = 155.05; x 1.07
+      const r = calculateSalary({ grossSalary: 20000, countryCode: 'BE' });
+      expect(r.incomeTax).toBeCloseTo(165.9035, 2);
     });
 
     it('Austria 50,000: 18.12% social, then the 0/20/30/40% bands', () => {
@@ -91,11 +98,12 @@ describe('EuSalaryCalculator', () => {
       expect(r.incomeTax).toBeCloseTo(7823.2, 2);
     });
 
-    it('Poland 120,000 PLN: 9% health on pay after social, not deducted from the tax base', () => {
-      // social 16452; health (120000 - 16452) x 0.09 = 9319.32; tax 103548 x 0.12 - 3600 = 8825.76
+    it('Poland 120,000 PLN: 9% health on pay after social, 3,000 employee costs off the tax base', () => {
+      // social 16452; health (120000 - 16452) x 0.09 = 9319.32; base 120000 - 16452 - 3000 = 100548
+      // tax (100548 - 30000) x 0.12 = 8465.76
       const r = calculateSalary({ grossSalary: 120000, countryCode: 'PL' });
       expect(r.socialSecurity).toBeCloseTo(25771.32, 2);
-      expect(r.incomeTax).toBeCloseTo(8825.76, 2);
+      expect(r.incomeTax).toBeCloseTo(8465.76, 2);
     });
 
     it.each(['DE', 'IE', 'BE', 'PL'])('%s at zero salary gives zero tax and a 0%% rate', (code) => {

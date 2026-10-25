@@ -154,7 +154,7 @@ export default function ElectricityCostCalculator() {
                   max={1}
                   step={0.01}
                   value={inputs.ratePerKwh}
-                  onChange={(e) => updateInput('ratePerKwh', Number(e.target.value))}
+                  onChange={(e) => updateInput('ratePerKwh', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Check your electricity bill
@@ -245,7 +245,7 @@ export default function ElectricityCostCalculator() {
                           step={0.25}
                           value={appliance.hoursPerDay}
                           onChange={(e) =>
-                            updateApplianceHours(appliance.name, Number(e.target.value))
+                            updateApplianceHours(appliance.name, Number(e.currentTarget.value))
                           }
                           className="w-16 px-2 py-1 rounded bg-[var(--color-charcoal)] border border-white/10 text-center text-sm text-[var(--color-cream)]"
                         />

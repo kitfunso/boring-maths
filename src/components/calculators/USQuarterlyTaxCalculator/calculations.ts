@@ -4,19 +4,14 @@
  * Calculates quarterly payments with safe harbor rules.
  */
 
-import type {
-  USQuarterlyTaxInputs,
-  USQuarterlyTaxResult,
-  QuarterPayment,
-  FilingStatus,
-} from './types';
-import { SE_TAX_MULTIPLIER, HIGH_INCOME_THRESHOLDS, QUARTERLY_DUE_DATES_2026 } from './types';
+import type { USQuarterlyTaxInputs, USQuarterlyTaxResult, QuarterPayment } from './types';
+import { HIGH_INCOME_THRESHOLDS } from './types';
 import {
-  FEDERAL_BRACKETS_2026,
+  ESTIMATED_TAX_DUE_DATES_2026,
   STANDARD_DEDUCTION_2026,
-  SOCIAL_SECURITY_WAGE_BASE_2026,
-  ADDITIONAL_MEDICARE_RATE,
-  ADDITIONAL_MEDICARE_THRESHOLDS,
+  federalIncomeTax,
+  qbiDeduction,
+  selfEmploymentTax,
 } from '../../../lib/us-tax-2026';
 
 export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterlyTaxResult {
@@ -24,32 +19,24 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     filingStatus,
     expectedAnnualIncome,
     selfEmploymentIncome,
+    w2Wages,
     withholdingsFromW2,
     priorYearTax,
     priorYearAGI,
   } = inputs;
 
-  // Calculate Self-Employment Tax
-  const seTaxableIncome = selfEmploymentIncome * SE_TAX_MULTIPLIER;
-  const ssSocialSecurityTax = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.124;
-  const ssMedicareTax = seTaxableIncome * 0.029;
-  // Wages are not an input, so the 0.9% uses the full threshold (Form 8959 Part II)
-  const additionalMedicareTax =
-    Math.max(0, seTaxableIncome - ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus]) *
-    ADDITIONAL_MEDICARE_RATE;
-  const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax + additionalMedicareTax;
+  const se = selfEmploymentTax(selfEmploymentIncome, w2Wages, filingStatus);
 
-  // Half SE tax deduction (Additional Medicare is not deductible)
-  const halfSETax = (ssSocialSecurityTax + ssMedicareTax) / 2;
+  const agi = expectedAnnualIncome - se.deductibleHalf;
+  const taxableBeforeQbi = Math.max(0, agi - STANDARD_DEDUCTION_2026[filingStatus]);
+  const qbi = qbiDeduction(
+    selfEmploymentIncome - se.deductibleHalf,
+    taxableBeforeQbi,
+    filingStatus
+  );
+  const federalTax = federalIncomeTax(Math.max(0, taxableBeforeQbi - qbi), filingStatus);
 
-  // Calculate Federal Income Tax
-  const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
-  const agi = expectedAnnualIncome - halfSETax;
-  const taxableIncome = Math.max(0, agi - standardDeduction);
-  const federalIncomeTax = calculateFederalTax(taxableIncome, filingStatus);
-
-  // Total estimated tax
-  const estimatedTotalTax = selfEmploymentTax + federalIncomeTax;
+  const estimatedTotalTax = se.total + federalTax;
 
   // Remaining tax after withholdings
   const remainingTaxDue = Math.max(0, estimatedTotalTax - withholdingsFromW2);
@@ -86,7 +73,7 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   }
 
   // Generate quarterly payment schedule
-  const quarterPayments: QuarterPayment[] = QUARTERLY_DUE_DATES_2026.map((q, index) => ({
+  const quarterPayments: QuarterPayment[] = ESTIMATED_TAX_DUE_DATES_2026.map((q, index) => ({
     quarter: q.quarter,
     dueDate: q.date,
     amount: quarterlyPayment,
@@ -108,8 +95,9 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   return {
     estimatedTotalTax: Math.round(estimatedTotalTax),
-    selfEmploymentTax: Math.round(selfEmploymentTax),
-    federalIncomeTax: Math.round(federalIncomeTax),
+    selfEmploymentTax: Math.round(se.total),
+    qbiDeduction: Math.round(qbi),
+    federalIncomeTax: Math.round(federalTax),
     alreadyWithheld: withholdingsFromW2,
     remainingTaxDue: Math.round(remainingTaxDue),
     quarterlyPayment,
@@ -123,22 +111,6 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     penaltyRisk,
     annualizedIncomeAdvice,
   };
-}
-
-function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
-  let tax = 0;
-  let remainingIncome = taxableIncome;
-
-  for (const bracket of brackets) {
-    if (remainingIncome <= 0) break;
-    const bracketSize = bracket.max - bracket.min;
-    const incomeInBracket = Math.min(remainingIncome, bracketSize);
-    tax += incomeInBracket * (bracket.rate / 100);
-    remainingIncome -= incomeInBracket;
-  }
-
-  return tax;
 }
 
 export function formatCurrency(value: number): string {

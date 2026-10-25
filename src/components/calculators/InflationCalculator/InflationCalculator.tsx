@@ -40,7 +40,7 @@ export default function InflationCalculator() {
   const isForward = inputs.endYear >= inputs.startYear;
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="Inflation Calculator"
@@ -62,7 +62,7 @@ export default function InflationCalculator() {
                 min={0}
                 step={100}
                 value={inputs.amount}
-                onChange={(e) => updateInput('amount', Number(e.target.value))}
+                onChange={(e) => updateInput('amount', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -78,7 +78,7 @@ export default function InflationCalculator() {
                   min={MIN_YEAR}
                   max={MAX_YEAR}
                   value={inputs.startYear}
-                  onChange={(e) => updateInput('startYear', Number(e.target.value))}
+                  onChange={(e) => updateInput('startYear', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -91,7 +91,7 @@ export default function InflationCalculator() {
                   min={MIN_YEAR}
                   max={MAX_YEAR}
                   value={inputs.endYear}
-                  onChange={(e) => updateInput('endYear', Number(e.target.value))}
+                  onChange={(e) => updateInput('endYear', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -115,7 +115,7 @@ export default function InflationCalculator() {
                     max={50}
                     step={0.1}
                     value={inputs.customRate}
-                    onChange={(e) => updateInput('customRate', Number(e.target.value))}
+                    onChange={(e) => updateInput('customRate', Number(e.currentTarget.value))}
                   />
                 </div>
               )}
@@ -152,7 +152,7 @@ export default function InflationCalculator() {
                 label="Adjusted Amount"
                 value={formatCurrency(result.adjustedAmount)}
                 sublabel={`in ${inputs.endYear}`}
-                valueColor="accent"
+                valueColor="themed"
               />
               <MetricCard
                 label="Total Inflation"

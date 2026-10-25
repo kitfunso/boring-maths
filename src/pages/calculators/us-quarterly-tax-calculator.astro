@@ -11,10 +11,10 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USQuarterlyTaxCalculator } from '../../components/calculators/USQuarterlyTaxCalculator';
-import { QUARTERLY_DUE_DATES_2026 } from '../../components/calculators/USQuarterlyTaxCalculator/types';
+import { ESTIMATED_TAX_DUE_DATES_2026 } from '../../lib/us-tax-2026';
 
 // "Jan 1 - Mar 31" -> "Jan-Mar"
-const dueDatesText = QUARTERLY_DUE_DATES_2026.map((q) => {
+const dueDatesText = ESTIMATED_TAX_DUE_DATES_2026.map((q) => {
   const [firstMonth, lastMonth] = q.period.split(' - ').map((d) => d.split(' ')[0]);
   return `Q${q.quarter} (${firstMonth}-${lastMonth} income) on ${q.date}`;
 }).join('; ');
@@ -142,6 +142,10 @@ const schemaBreadcrumbs = [
         from 1099 work (after business expenses).
       </li>
       <li>
+        <strong class="text-[var(--color-cream)]">Enter W-2 wages</strong> – Salary from any job. Wages
+        use up the Social Security wage base before your self-employment earnings do.
+      </li>
+      <li>
         <strong class="text-[var(--color-cream)]">Include W-2 withholdings</strong> – Tax already being
         withheld from any W-2 jobs.
       </li>
@@ -170,8 +174,12 @@ const schemaBreadcrumbs = [
   </ContentSection>
 
   <SourcesSection
-    checked="2026-10-24"
+    checked="2026-10-25"
     sources={[
+      {
+        label: 'IRS: Qualified business income deduction',
+        href: 'https://www.irs.gov/newsroom/qualified-business-income-deduction',
+      },
       {
         label: 'IRS: Estimated taxes',
         href: 'https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes',

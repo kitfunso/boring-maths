@@ -53,12 +53,18 @@ export function calculateIncomeTax(gross: number, country: BandCountryTax): numb
   const social = socialContributions(gross, country);
   const deductible = country.socialSecurityDeductible === false ? 0 : social;
 
+  const afterSocial = gross - deductible;
+  const exp = country.employeeExpenseDeduction;
+  const expenses = exp ? Math.min(exp.cap, (Math.max(0, afterSocial) * exp.rate) / 100) : 0;
+  const base = afterSocial - expenses;
+  const surcharge = 1 + (country.localSurchargeRate ?? 0) / 100;
+
   if (country.taxFreeAllowanceMode === 'credit') {
     const credit = (country.taxFreeAllowance * (country.taxFreeCreditRate ?? 0)) / 100;
-    return Math.max(0, bandTax(gross - deductible, country.taxBrackets) - credit);
+    return Math.max(0, bandTax(base, country.taxBrackets) - credit) * surcharge;
   }
 
-  return Math.max(0, bandTax(gross - deductible - country.taxFreeAllowance, country.taxBrackets));
+  return Math.max(0, bandTax(base - country.taxFreeAllowance, country.taxBrackets)) * surcharge;
 }
 
 export function calculateSalary(inputs: SalaryInputs): SalaryResult {

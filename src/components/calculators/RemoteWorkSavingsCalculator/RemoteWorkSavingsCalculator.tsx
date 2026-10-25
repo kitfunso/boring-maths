@@ -104,7 +104,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={1}
                     max={100}
                     value={inputs.commuteDistanceMiles}
-                    onChange={(e) => updateInput('commuteDistanceMiles', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('commuteDistanceMiles', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -115,7 +117,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={5}
                     max={180}
                     value={inputs.commuteTimeMinutes}
-                    onChange={(e) => updateInput('commuteTimeMinutes', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('commuteTimeMinutes', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -126,7 +130,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={40}
                     max={52}
                     value={inputs.weeksPerYear}
-                    onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
+                    onChange={(e) => updateInput('weeksPerYear', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -137,7 +141,7 @@ export default function RemoteWorkSavingsCalculator() {
                     min={10}
                     max={500}
                     value={inputs.hourlyRate}
-                    onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
+                    onChange={(e) => updateInput('hourlyRate', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -149,7 +153,7 @@ export default function RemoteWorkSavingsCalculator() {
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                   Car Costs
                 </h3>
-                <Grid responsive={{ sm: 2, md: 5 }} gap="md">
+                <Grid responsive={{ sm: 2, md: 3 }} gap="md">
                   <div>
                     <Label htmlFor="gasPrice">Gas/Gallon ({currencySymbol})</Label>
                     <Input
@@ -159,7 +163,9 @@ export default function RemoteWorkSavingsCalculator() {
                       max={10}
                       step={0.1}
                       value={inputs.gasPricePerGallon}
-                      onChange={(e) => updateInput('gasPricePerGallon', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('gasPricePerGallon', Number(e.currentTarget.value))
+                      }
                     />
                   </div>
                   <div>
@@ -170,7 +176,7 @@ export default function RemoteWorkSavingsCalculator() {
                       min={10}
                       max={60}
                       value={inputs.vehicleMpg}
-                      onChange={(e) => updateInput('vehicleMpg', Number(e.target.value))}
+                      onChange={(e) => updateInput('vehicleMpg', Number(e.currentTarget.value))}
                     />
                   </div>
                   <div>
@@ -181,7 +187,9 @@ export default function RemoteWorkSavingsCalculator() {
                       min={0}
                       max={100}
                       value={inputs.parkingCostDaily}
-                      onChange={(e) => updateInput('parkingCostDaily', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('parkingCostDaily', Number(e.currentTarget.value))
+                      }
                     />
                   </div>
                   <div>
@@ -192,7 +200,7 @@ export default function RemoteWorkSavingsCalculator() {
                       min={0}
                       max={50}
                       value={inputs.tollsDaily}
-                      onChange={(e) => updateInput('tollsDaily', Number(e.target.value))}
+                      onChange={(e) => updateInput('tollsDaily', Number(e.currentTarget.value))}
                     />
                   </div>
                   <div>
@@ -205,7 +213,7 @@ export default function RemoteWorkSavingsCalculator() {
                       step={0.01}
                       value={inputs.maintenanceCostPerMile}
                       onChange={(e) =>
-                        updateInput('maintenanceCostPerMile', Number(e.target.value))
+                        updateInput('maintenanceCostPerMile', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -228,7 +236,7 @@ export default function RemoteWorkSavingsCalculator() {
                     max={50}
                     step={0.5}
                     value={inputs.transitCostDaily}
-                    onChange={(e) => updateInput('transitCostDaily', Number(e.target.value))}
+                    onChange={(e) => updateInput('transitCostDaily', Number(e.currentTarget.value))}
                   />
                 </div>
               </div>
@@ -261,7 +269,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={50}
                     value={inputs.workLunchCostDaily}
-                    onChange={(e) => updateInput('workLunchCostDaily', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('workLunchCostDaily', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -272,7 +282,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={30}
                     value={inputs.homeLunchCostDaily}
-                    onChange={(e) => updateInput('homeLunchCostDaily', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('homeLunchCostDaily', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -283,7 +295,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={20}
                     value={inputs.coffeeAtWorkDaily}
-                    onChange={(e) => updateInput('coffeeAtWorkDaily', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('coffeeAtWorkDaily', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -295,7 +309,7 @@ export default function RemoteWorkSavingsCalculator() {
                     max={500}
                     value={inputs.workClothesBudgetMonthly}
                     onChange={(e) =>
-                      updateInput('workClothesBudgetMonthly', Number(e.target.value))
+                      updateInput('workClothesBudgetMonthly', Number(e.currentTarget.value))
                     }
                   />
                 </div>
@@ -307,7 +321,9 @@ export default function RemoteWorkSavingsCalculator() {
                     min={0}
                     max={200}
                     value={inputs.dryCleaningMonthly}
-                    onChange={(e) => updateInput('dryCleaningMonthly', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('dryCleaningMonthly', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
               </Grid>

@@ -17,7 +17,7 @@ function choose(select: HTMLSelectElement, value: string): void {
   });
 }
 
-function bandValues(container: HTMLElement): string[] {
+function bandValues(container: ParentNode): string[] {
   const band = container.querySelector<HTMLSelectElement>('#propertyBand');
   return Array.from(band?.options ?? []).map((o) => o.value);
 }

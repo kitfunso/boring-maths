@@ -77,7 +77,7 @@ export default function EmployeeCost() {
                   min={0}
                   step={1000}
                   value={inputs.annualSalary}
-                  onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
+                  onChange={(e) => updateInput('annualSalary', Number(e.currentTarget.value))}
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   Nominal: {fmtHr(nominalHourly)}/hr
@@ -94,7 +94,7 @@ export default function EmployeeCost() {
                     min={0}
                     step={500}
                     value={inputs.healthInsurance}
-                    onChange={(e) => updateInput('healthInsurance', Number(e.target.value))}
+                    onChange={(e) => updateInput('healthInsurance', Number(e.currentTarget.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">Employer portion/year</p>
                 </div>
@@ -108,7 +108,7 @@ export default function EmployeeCost() {
                     min={0}
                     step={100}
                     value={inputs.otherBenefits}
-                    onChange={(e) => updateInput('otherBenefits', Number(e.target.value))}
+                    onChange={(e) => updateInput('otherBenefits', Number(e.currentTarget.value))}
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">Life insurance, perks</p>
                 </div>
@@ -175,7 +175,7 @@ export default function EmployeeCost() {
                     min={0}
                     step={500}
                     value={inputs.trainingBudget}
-                    onChange={(e) => updateInput('trainingBudget', Number(e.target.value))}
+                    onChange={(e) => updateInput('trainingBudget', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -188,7 +188,7 @@ export default function EmployeeCost() {
                     min={0}
                     step={500}
                     value={inputs.equipmentCost}
-                    onChange={(e) => updateInput('equipmentCost', Number(e.target.value))}
+                    onChange={(e) => updateInput('equipmentCost', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -202,7 +202,7 @@ export default function EmployeeCost() {
                   min={0}
                   step={500}
                   value={inputs.officeCost}
-                  onChange={(e) => updateInput('officeCost', Number(e.target.value))}
+                  onChange={(e) => updateInput('officeCost', Number(e.currentTarget.value))}
                 />
               </div>
 

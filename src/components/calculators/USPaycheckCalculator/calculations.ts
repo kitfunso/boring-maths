@@ -2,18 +2,21 @@
  * US Paycheck Calculator - Calculation Logic
  */
 
-import type { PaycheckInputs, PaycheckResult, FilingStatus } from './types';
+import type { PaycheckInputs, PaycheckResult } from './types';
 import {
   PAY_FREQUENCIES,
   FEDERAL_STATUS,
-  FEDERAL_TAX_BRACKETS_2026,
   STATE_TAX_DATA,
-  SOCIAL_SECURITY_RATE,
-  MEDICARE_RATE,
   MEDICARE_ADDITIONAL_RATE,
   MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD,
 } from './types';
-import { STANDARD_DEDUCTION_2026, SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
+import {
+  EMPLOYEE_MEDICARE_RATE,
+  EMPLOYEE_SOCIAL_SECURITY_RATE,
+  STANDARD_DEDUCTION_2026,
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+  federalIncomeTax,
+} from '../../../lib/us-tax-2026';
 
 export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const {
@@ -38,7 +41,7 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const taxableIncome = Math.max(0, grossSalary - annualPreTaxDeductions - standardDeduction);
 
   // Federal income tax (annual)
-  const annualFederalTax = calculateFederalTax(taxableIncome, filingStatus);
+  const annualFederalTax = federalIncomeTax(taxableIncome, FEDERAL_STATUS[filingStatus]);
   const federalTax = annualFederalTax / payPeriods + additionalWithholding;
 
   // State income tax (simplified - using flat effective rate)
@@ -51,11 +54,11 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   // Social Security (6.2% up to wage base)
   const ssWageBase = SOCIAL_SECURITY_WAGE_BASE_2026;
   const ssableIncome = Math.min(grossSalary, ssWageBase);
-  const annualSS = ssableIncome * SOCIAL_SECURITY_RATE;
+  const annualSS = ssableIncome * EMPLOYEE_SOCIAL_SECURITY_RATE;
   const socialSecurity = annualSS / payPeriods;
 
   // Medicare (1.45% + 0.9% additional withholding above the threshold)
-  let annualMedicare = grossSalary * MEDICARE_RATE;
+  let annualMedicare = grossSalary * EMPLOYEE_MEDICARE_RATE;
   if (grossSalary > MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD) {
     annualMedicare +=
       (grossSalary - MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD) * MEDICARE_ADDITIONAL_RATE;
@@ -87,20 +90,6 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
     annualGross,
     annualNet: Math.max(0, annualNet),
   };
-}
-
-function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = FEDERAL_TAX_BRACKETS_2026[filingStatus];
-
-  for (const bracket of brackets) {
-    if (taxableIncome <= bracket.max) {
-      return bracket.base + (taxableIncome - bracket.min) * bracket.rate;
-    }
-  }
-
-  // Shouldn't reach here, but handle top bracket
-  const topBracket = brackets[brackets.length - 1];
-  return topBracket.base + (taxableIncome - topBracket.min) * topBracket.rate;
 }
 
 export function formatCurrency(value: number): string {

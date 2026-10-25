@@ -95,7 +95,7 @@ export default function CostPerWearCalculator() {
                   min={0}
                   step={1}
                   value={inputs.purchasePrice}
-                  onChange={(e) => updateInput('purchasePrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('purchasePrice', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -109,7 +109,7 @@ export default function CostPerWearCalculator() {
                   min={0}
                   step={1}
                   value={inputs.wearsPerMonth}
-                  onChange={(e) => updateInput('wearsPerMonth', Number(e.target.value))}
+                  onChange={(e) => updateInput('wearsPerMonth', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -123,7 +123,9 @@ export default function CostPerWearCalculator() {
                   min={1}
                   step={1}
                   value={inputs.expectedLifespanMonths}
-                  onChange={(e) => updateInput('expectedLifespanMonths', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('expectedLifespanMonths', Number(e.currentTarget.value))
+                  }
                 />
               </div>
 
@@ -137,7 +139,7 @@ export default function CostPerWearCalculator() {
                   min={0}
                   step={1}
                   value={inputs.careCostPerMonth}
-                  onChange={(e) => updateInput('careCostPerMonth', Number(e.target.value))}
+                  onChange={(e) => updateInput('careCostPerMonth', Number(e.currentTarget.value))}
                 />
               </div>
             </div>
@@ -160,7 +162,7 @@ export default function CostPerWearCalculator() {
                   min={0}
                   step={1}
                   value={inputs.alternativePrice}
-                  onChange={(e) => updateInput('alternativePrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('alternativePrice', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -174,7 +176,9 @@ export default function CostPerWearCalculator() {
                   min={0}
                   step={1}
                   value={inputs.alternativeWearsPerMonth}
-                  onChange={(e) => updateInput('alternativeWearsPerMonth', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('alternativeWearsPerMonth', Number(e.currentTarget.value))
+                  }
                 />
               </div>
 
@@ -188,7 +192,9 @@ export default function CostPerWearCalculator() {
                   min={1}
                   step={1}
                   value={inputs.alternativeLifespanMonths}
-                  onChange={(e) => updateInput('alternativeLifespanMonths', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('alternativeLifespanMonths', Number(e.currentTarget.value))
+                  }
                 />
               </div>
 
@@ -285,7 +291,7 @@ export default function CostPerWearCalculator() {
                     label="Annual Cost"
                     value={formatCurrency(result.annualCost, inputs.currency)}
                     sublabel="per year"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Alternative Total"
@@ -296,9 +302,7 @@ export default function CostPerWearCalculator() {
                     label={result.savingsVsAlternative >= 0 ? 'You Save' : 'Extra Cost'}
                     value={formatCurrency(Math.abs(result.savingsVsAlternative), inputs.currency)}
                     sublabel="vs alternative"
-                    valueColor={
-                      result.savingsVsAlternative >= 0 ? 'text-green-400' : 'text-rose-400'
-                    }
+                    valueColor={result.savingsVsAlternative >= 0 ? 'success' : 'error'}
                   />
                 </Grid>
 

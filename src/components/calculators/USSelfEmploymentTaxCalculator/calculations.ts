@@ -4,14 +4,13 @@
  * Calculates SE tax, federal income tax, and quarterly payments.
  */
 
-import type { USSelfEmploymentTaxInputs, USSelfEmploymentTaxResult, FilingStatus } from './types';
-import { SE_TAX_RATES, QUARTERLY_DUE_DATES_2026 } from './types';
+import type { USSelfEmploymentTaxInputs, USSelfEmploymentTaxResult } from './types';
 import {
-  FEDERAL_BRACKETS_2026,
+  ESTIMATED_TAX_DUE_DATES_2026,
   STANDARD_DEDUCTION_2026,
-  SOCIAL_SECURITY_WAGE_BASE_2026,
-  ADDITIONAL_MEDICARE_RATE,
-  ADDITIONAL_MEDICARE_THRESHOLDS,
+  federalIncomeTax,
+  qbiDeduction,
+  selfEmploymentTax,
 } from '../../../lib/us-tax-2026';
 
 export function calculateSelfEmploymentTax(
@@ -29,26 +28,9 @@ export function calculateSelfEmploymentTax(
   // Net self-employment income (after business expenses)
   const netSelfEmployment = Math.max(0, selfEmploymentIncome - businessExpenses);
 
-  // Calculate SE Tax (15.3% on 92.35% of net SE income)
-  const seTaxableIncome = netSelfEmployment * SE_TAX_RATES.selfEmploymentRate;
-
-  // W-2 wages use up the Social Security wage base first (Schedule SE lines 8-10)
-  const wageBaseLeft = Math.max(0, SOCIAL_SECURITY_WAGE_BASE_2026 - otherIncome);
-  const socialSecurityTaxableIncome = Math.min(seTaxableIncome, wageBaseLeft);
-  const socialSecurityTax = socialSecurityTaxableIncome * SE_TAX_RATES.socialSecurityRate;
-
-  // Medicare tax (2.9% on all SE income)
-  const medicareTax = seTaxableIncome * SE_TAX_RATES.medicareRate;
-
-  // Additional Medicare on SE earnings: the threshold is cut by wages (Form 8959 Part II)
-  const seThresholdLeft = Math.max(0, ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus] - otherIncome);
-  const additionalMedicareTax =
-    Math.max(0, seTaxableIncome - seThresholdLeft) * ADDITIONAL_MEDICARE_RATE;
-
-  const selfEmploymentTax = socialSecurityTax + medicareTax + additionalMedicareTax;
-
-  // Deductible half of SE tax (for income tax calculation)
-  const halfSETaxDeduction = (socialSecurityTax + medicareTax) / 2;
+  // Other income counts as W-2 wages for the Social Security base and the 0.9% threshold
+  const se = selfEmploymentTax(netSelfEmployment, otherIncome, filingStatus);
+  const halfSETaxDeduction = se.deductibleHalf;
 
   // Calculate federal income tax
   const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
@@ -58,14 +40,13 @@ export function calculateSelfEmploymentTax(
   // Adjusted Gross Income = Net SE + Other Income - Half SE Tax
   const agi = netSelfEmployment + otherIncome - halfSETaxDeduction;
 
-  // Taxable income = AGI - deduction
-  const taxableIncome = Math.max(0, agi - deductionUsed);
+  // The 20% QBI deduction comes after the standard or itemized deduction
+  const taxableBeforeQbi = Math.max(0, agi - deductionUsed);
+  const qbi = qbiDeduction(netSelfEmployment - halfSETaxDeduction, taxableBeforeQbi, filingStatus);
+  const taxableIncome = Math.max(0, taxableBeforeQbi - qbi);
+  const federalTax = federalIncomeTax(taxableIncome, filingStatus);
 
-  // Calculate federal income tax using brackets
-  const federalIncomeTax = calculateFederalTax(taxableIncome, filingStatus);
-
-  // Total tax
-  const totalTax = selfEmploymentTax + federalIncomeTax;
+  const totalTax = se.total + federalTax;
 
   // Effective rate on total income
   const totalIncome = selfEmploymentIncome + otherIncome;
@@ -79,36 +60,20 @@ export function calculateSelfEmploymentTax(
 
   return {
     netSelfEmployment: Math.round(netSelfEmployment),
-    selfEmploymentTax: Math.round(selfEmploymentTax * 100) / 100,
-    socialSecurityTax: Math.round(socialSecurityTax * 100) / 100,
-    medicareTax: Math.round(medicareTax * 100) / 100,
-    additionalMedicareTax: Math.round(additionalMedicareTax * 100) / 100,
+    selfEmploymentTax: Math.round(se.total * 100) / 100,
+    socialSecurityTax: Math.round(se.socialSecurity * 100) / 100,
+    medicareTax: Math.round(se.medicare * 100) / 100,
+    additionalMedicareTax: Math.round(se.additionalMedicare * 100) / 100,
     halfSETaxDeduction: Math.round(halfSETaxDeduction),
+    qbiDeduction: Math.round(qbi),
     taxableIncome: Math.round(taxableIncome),
-    federalIncomeTax: Math.round(federalIncomeTax * 100) / 100,
+    federalIncomeTax: Math.round(federalTax * 100) / 100,
     totalTax: Math.round(totalTax * 100) / 100,
     effectiveRate: Math.round(effectiveRate * 100) / 100,
     quarterlyPayment: Math.round(quarterlyPayment),
     afterTaxIncome: Math.round(afterTaxIncome),
-    quarterlyDueDates: QUARTERLY_DUE_DATES_2026,
+    quarterlyDueDates: ESTIMATED_TAX_DUE_DATES_2026.map((q) => q.date),
   };
-}
-
-function calculateFederalTax(taxableIncome: number, filingStatus: FilingStatus): number {
-  const brackets = FEDERAL_BRACKETS_2026[filingStatus];
-  let tax = 0;
-  let remainingIncome = taxableIncome;
-
-  for (const bracket of brackets) {
-    if (remainingIncome <= 0) break;
-
-    const bracketSize = bracket.max - bracket.min;
-    const incomeInBracket = Math.min(remainingIncome, bracketSize);
-    tax += incomeInBracket * (bracket.rate / 100);
-    remainingIncome -= incomeInBracket;
-  }
-
-  return tax;
 }
 
 export function formatCurrency(value: number): string {

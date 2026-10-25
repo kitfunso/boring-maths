@@ -113,7 +113,7 @@ export default function CookingTimeCalculator() {
                   min={0.1}
                   step={0.1}
                   value={inputs.weight}
-                  onChange={(e) => updateInput('weight', Number(e.target.value))}
+                  onChange={(e) => updateInput('weight', Number(e.currentTarget.value))}
                 />
                 <ButtonGroup
                   options={WEIGHT_UNIT_OPTIONS}
@@ -182,7 +182,7 @@ export default function CookingTimeCalculator() {
                     label="Internal Temp"
                     value={`${result.internalTempF}°F`}
                     sublabel={`${result.internalTempC}°C`}
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label={result.temperatureF > 0 ? 'Oven / Device' : 'Setting'}
@@ -193,7 +193,7 @@ export default function CookingTimeCalculator() {
                     label="Resting Time"
                     value={`${result.restingMinutes} min`}
                     sublabel="after cooking"
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="Rate"

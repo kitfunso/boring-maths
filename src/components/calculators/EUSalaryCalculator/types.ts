@@ -28,6 +28,10 @@ export interface BandCountryTax extends EUCountryBase {
   taxFreeCreditRate?: number;
   // Non-deductible levy on pay after social security, e.g. Poland's 9% health contribution
   healthContributionRate?: number;
+  // Flat-rate work expenses off pay after social security, before the brackets (rate in percent, capped)
+  employeeExpenseDeduction?: { rate: number; cap: number };
+  // Municipal surcharge, percent of the income tax
+  localSurchargeRate?: number;
 }
 
 // Countries with a full calculator on the site reuse it, so both pages give the same answer
@@ -151,6 +155,10 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     taxFreeAllowance: 11550,
     taxFreeAllowanceMode: 'credit',
     taxFreeCreditRate: 25,
+    // 30% of pay after contributions, max 6,070 (fin.belgium.be, income year 2026)
+    employeeExpenseDeduction: { rate: 30, cap: 6070 },
+    // Communal rates run 0% to 9%, average 7% (PwC Worldwide Tax Summaries)
+    localSurchargeRate: 7,
   },
   {
     code: 'AT',
@@ -180,6 +188,8 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     ],
     socialSecurityRate: 13.71,
     healthContributionRate: 9,
+    // Standard employee costs: 250 zl a month, at most 3,000 a year for one job (podatki.gov.pl)
+    employeeExpenseDeduction: { rate: 100, cap: 3000 },
     taxFreeAllowance: 0,
   },
   {

@@ -4,7 +4,7 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import { ResultCard, Input, ButtonGroup } from '../../ui';
+import { ResultCard, Input, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CO2Inputs } from './types';
 import { calculateCO2, calculateTargetPH } from './calculations';
@@ -49,27 +49,35 @@ export function CO2Calculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Water Parameters</h2>
 
           <div className="space-y-4">
-            <Input
-              label="pH Level"
-              type="number"
-              value={inputs.ph}
-              onChange={(v) => setInputs({ ...inputs, ph: parseFloat(v) || 0 })}
-              step={0.1}
-              min={5.5}
-              max={8.5}
-              suffix="pH"
-            />
+            <div>
+              <Label htmlFor="ph-level">pH Level (pH)</Label>
+              <Input
+                id="ph-level"
+                type="number"
+                value={inputs.ph}
+                onChange={(e) =>
+                  setInputs({ ...inputs, ph: parseFloat(e.currentTarget.value) || 0 })
+                }
+                step={0.1}
+                min={5.5}
+                max={8.5}
+              />
+            </div>
 
-            <Input
-              label="Carbonate Hardness (KH)"
-              type="number"
-              value={inputs.kh}
-              onChange={(v) => setInputs({ ...inputs, kh: parseFloat(v) || 0 })}
-              step={0.5}
-              min={0.5}
-              max={20}
-              suffix="dKH"
-            />
+            <div>
+              <Label htmlFor="carbonate-hardness-kh">Carbonate Hardness (KH) (dKH)</Label>
+              <Input
+                id="carbonate-hardness-kh"
+                type="number"
+                value={inputs.kh}
+                onChange={(e) =>
+                  setInputs({ ...inputs, kh: parseFloat(e.currentTarget.value) || 0 })
+                }
+                step={0.5}
+                min={0.5}
+                max={20}
+              />
+            </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-[var(--color-subtle)]">
@@ -85,15 +93,19 @@ export function CO2Calculator() {
               />
             </div>
 
-            <Input
-              label="Tank Volume"
-              type="number"
-              value={inputs.tankVolume}
-              onChange={(v) => setInputs({ ...inputs, tankVolume: parseFloat(v) || 0 })}
-              min={1}
-              max={1000}
-              suffix={inputs.volumeUnit}
-            />
+            <div>
+              <Label htmlFor="tank-volume">Tank Volume ({inputs.volumeUnit})</Label>
+              <Input
+                id="tank-volume"
+                type="number"
+                value={inputs.tankVolume}
+                onChange={(e) =>
+                  setInputs({ ...inputs, tankVolume: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={1}
+                max={1000}
+              />
+            </div>
           </div>
         </div>
 
@@ -127,16 +139,11 @@ export function CO2Calculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard
-            label="Drop Checker Color"
-            value={results.dropCheckerColor}
-            color={results.co2Level === 'optimal' ? 'green' : 'blue'}
-          />
+          <ResultCard label="Drop Checker Color" value={results.dropCheckerColor} />
           <ResultCard
             label="Suggested Bubble Rate"
             value={`${results.suggestedBubbleRate} BPS`}
-            sublabel="bubbles per second"
-            color="purple"
+            subtitle="bubbles per second"
           />
         </div>
 

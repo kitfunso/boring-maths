@@ -135,7 +135,7 @@ export default function SquareFootageCalculator() {
   const unitLabel = isMetric ? 'sq m' : 'sq ft';
 
   return (
-    <ThemeProvider defaultColor="ocean">
+    <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
         <CalculatorHeader
           title="Square Footage Calculator"

@@ -3,11 +3,9 @@
  * Runs before each test file
  */
 
-import { expect, beforeEach, vi } from 'vitest';
-import * as matchers from '@testing-library/jest-dom/matchers';
-
-// Extend Vitest's expect with jest-dom matchers
-expect.extend(matchers);
+import { beforeEach, vi } from 'vitest';
+// Extends expect with the jest-dom matchers and types them for Vitest
+import '@testing-library/jest-dom/vitest';
 
 // Mock localStorage for tests
 const localStorageMock = {

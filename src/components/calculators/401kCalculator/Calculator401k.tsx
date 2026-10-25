@@ -51,7 +51,7 @@ export default function Calculator401k() {
                   min={18}
                   max={80}
                   value={inputs.currentAge}
-                  onChange={(e) => updateInput('currentAge', Number(e.target.value))}
+                  onChange={(e) => updateInput('currentAge', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -64,7 +64,7 @@ export default function Calculator401k() {
                   min={inputs.currentAge + 1}
                   max={85}
                   value={inputs.retirementAge}
-                  onChange={(e) => updateInput('retirementAge', Number(e.target.value))}
+                  onChange={(e) => updateInput('retirementAge', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -79,7 +79,7 @@ export default function Calculator401k() {
                   min={0}
                   step={1000}
                   value={inputs.currentBalance}
-                  onChange={(e) => updateInput('currentBalance', Number(e.target.value))}
+                  onChange={(e) => updateInput('currentBalance', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -92,7 +92,7 @@ export default function Calculator401k() {
                   min={10000}
                   step={1000}
                   value={inputs.annualSalary}
-                  onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
+                  onChange={(e) => updateInput('annualSalary', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -110,7 +110,9 @@ export default function Calculator401k() {
                   max={100}
                   step={1}
                   value={inputs.contributionPercent}
-                  onChange={(e) => updateInput('contributionPercent', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('contributionPercent', Number(e.currentTarget.value))
+                  }
                 />
               </div>
               <div>
@@ -122,7 +124,7 @@ export default function Calculator401k() {
                   max={20}
                   step={0.5}
                   value={inputs.salaryGrowth}
-                  onChange={(e) => updateInput('salaryGrowth', Number(e.target.value))}
+                  onChange={(e) => updateInput('salaryGrowth', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -138,7 +140,9 @@ export default function Calculator401k() {
                   max={100}
                   step={10}
                   value={inputs.employerMatchPercent}
-                  onChange={(e) => updateInput('employerMatchPercent', Number(e.target.value))}
+                  onChange={(e) =>
+                    updateInput('employerMatchPercent', Number(e.currentTarget.value))
+                  }
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   e.g., 50% means employer contributes $0.50 per $1 you contribute
@@ -153,7 +157,7 @@ export default function Calculator401k() {
                   max={100}
                   step={1}
                   value={inputs.employerMatchLimit}
-                  onChange={(e) => updateInput('employerMatchLimit', Number(e.target.value))}
+                  onChange={(e) => updateInput('employerMatchLimit', Number(e.currentTarget.value))}
                 />
                 <p className="text-xs text-[var(--color-muted)] mt-1">
                   e.g., 6% means employer matches up to 6% of your salary
@@ -171,7 +175,7 @@ export default function Calculator401k() {
                 max={20}
                 step={0.5}
                 value={inputs.annualReturn}
-                onChange={(e) => updateInput('annualReturn', Number(e.target.value))}
+                onChange={(e) => updateInput('annualReturn', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Historical S&P 500 average: ~10% (7% after inflation)

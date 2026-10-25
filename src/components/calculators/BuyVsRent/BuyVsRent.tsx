@@ -53,7 +53,7 @@ export default function BuyVsRent() {
 
         <div className="p-6 md:p-8">
           {/* Two Column Layout */}
-          <Grid responsive={{ sm: 1, lg: 2 }} gap="xl">
+          <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
             {/* Buying Inputs */}
             <div className="space-y-4">
               <div className="text-sm font-semibold text-emerald-500 uppercase tracking-wider">
@@ -71,7 +71,7 @@ export default function BuyVsRent() {
                   min={0}
                   step={10000}
                   value={inputs.homePrice}
-                  onChange={(e) => updateInput('homePrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('homePrice', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -101,7 +101,9 @@ export default function BuyVsRent() {
                     max={15}
                     step={0.125}
                     value={Math.round(inputs.mortgageRate * 1000) / 10}
-                    onChange={(e) => updateInput('mortgageRate', Number(e.target.value) / 100)}
+                    onChange={(e) =>
+                      updateInput('mortgageRate', Number(e.currentTarget.value) / 100)
+                    }
                   />
                 </div>
                 <div>
@@ -113,7 +115,7 @@ export default function BuyVsRent() {
                     max={30}
                     step={5}
                     value={inputs.mortgageTerm}
-                    onChange={(e) => updateInput('mortgageTerm', Number(e.target.value))}
+                    onChange={(e) => updateInput('mortgageTerm', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -128,7 +130,9 @@ export default function BuyVsRent() {
                     max={5}
                     step={0.1}
                     value={Math.round(inputs.propertyTaxRate * 1000) / 10}
-                    onChange={(e) => updateInput('propertyTaxRate', Number(e.target.value) / 100)}
+                    onChange={(e) =>
+                      updateInput('propertyTaxRate', Number(e.currentTarget.value) / 100)
+                    }
                   />
                 </div>
                 <div>
@@ -140,7 +144,7 @@ export default function BuyVsRent() {
                     min={0}
                     step={100}
                     value={inputs.homeInsurance}
-                    onChange={(e) => updateInput('homeInsurance', Number(e.target.value))}
+                    onChange={(e) => updateInput('homeInsurance', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -155,7 +159,7 @@ export default function BuyVsRent() {
                     min={0}
                     step={100}
                     value={inputs.hoaFees}
-                    onChange={(e) => updateInput('hoaFees', Number(e.target.value))}
+                    onChange={(e) => updateInput('hoaFees', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -168,7 +172,7 @@ export default function BuyVsRent() {
                     step={0.25}
                     value={Math.round(inputs.maintenancePercent * 100)}
                     onChange={(e) =>
-                      updateInput('maintenancePercent', Number(e.target.value) / 100)
+                      updateInput('maintenancePercent', Number(e.currentTarget.value) / 100)
                     }
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">% of home value/yr</p>
@@ -208,7 +212,7 @@ export default function BuyVsRent() {
                   min={0}
                   step={50}
                   value={inputs.monthlyRent}
-                  onChange={(e) => updateInput('monthlyRent', Number(e.target.value))}
+                  onChange={(e) => updateInput('monthlyRent', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -236,7 +240,7 @@ export default function BuyVsRent() {
                   min={0}
                   step={25}
                   value={inputs.renterInsurance}
-                  onChange={(e) => updateInput('renterInsurance', Number(e.target.value))}
+                  onChange={(e) => updateInput('renterInsurance', Number(e.currentTarget.value))}
                 />
               </div>
 

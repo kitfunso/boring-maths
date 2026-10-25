@@ -28,7 +28,7 @@ export default function USSelfEmploymentTaxCalculator() {
   });
 
   return (
-    <ThemeProvider defaultColor="indigo">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="Self-Employment Tax Calculator"
@@ -219,6 +219,12 @@ export default function USSelfEmploymentTaxCalculator() {
                     -{formatCurrency(result.halfSETaxDeduction)}
                   </span>
                 </div>
+                {result.qbiDeduction > 0 && (
+                  <div className="flex justify-between text-[var(--color-subtle)]">
+                    <span>QBI deduction (20%)</span>
+                    <span className="text-emerald-400">-{formatCurrency(result.qbiDeduction)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-[var(--color-subtle)]">
                   <span>Taxable income</span>
                   <span className="text-[var(--color-cream)]">

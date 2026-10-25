@@ -3,7 +3,7 @@ import { useTheme } from '../theme/ThemeContext';
 
 export interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
-  'type' | 'onChange' | 'checked'
+  'type' | 'onChange' | 'checked' | 'size'
 > {
   /** Controlled checked state */
   checked: boolean;
@@ -52,7 +52,7 @@ export function Checkbox({
   const { tokens } = useTheme();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.checked);
+    onChange(e.currentTarget.checked);
   };
 
   return (

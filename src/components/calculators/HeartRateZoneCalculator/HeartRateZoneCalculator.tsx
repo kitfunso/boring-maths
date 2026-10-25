@@ -53,7 +53,7 @@ const GOAL_LABELS: Record<string, { label: string; description: string }> = {
 };
 
 export default function HeartRateZoneCalculator() {
-  const { inputs, result, updateInput, setInputs } = useCalculatorState<
+  const { inputs, result, updateInput } = useCalculatorState<
     HeartRateZoneInputs,
     ReturnType<typeof calculateHeartRateZones>
   >({
@@ -61,10 +61,6 @@ export default function HeartRateZoneCalculator() {
     defaults: getDefaultInputs,
     compute: calculateHeartRateZones,
   });
-
-  const handleReset = () => {
-    setInputs(getDefaultInputs());
-  };
 
   // Width of zone bar relative to max (zone 5 = 100%)
   const maxBPM = result.zones.length > 0 ? result.zones[result.zones.length - 1].maxBPM : 200;
@@ -91,7 +87,7 @@ export default function HeartRateZoneCalculator() {
                 max={120}
                 step={1}
                 value={inputs.age}
-                onChange={(e) => updateInput('age', Number(e.target.value))}
+                onChange={(e) => updateInput('age', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -105,7 +101,7 @@ export default function HeartRateZoneCalculator() {
                 max={120}
                 step={1}
                 value={inputs.restingHeartRate}
-                onChange={(e) => updateInput('restingHeartRate', Number(e.target.value))}
+                onChange={(e) => updateInput('restingHeartRate', Number(e.currentTarget.value))}
               />
               <p className="mt-1.5 text-xs text-[var(--color-muted)]">
                 Measure first thing in the morning before getting out of bed.
@@ -129,7 +125,7 @@ export default function HeartRateZoneCalculator() {
                     max={240}
                     step={1}
                     value={inputs.maxHeartRate}
-                    onChange={(e) => updateInput('maxHeartRate', Number(e.target.value))}
+                    onChange={(e) => updateInput('maxHeartRate', Number(e.currentTarget.value))}
                   />
                 </div>
               )}
@@ -187,7 +183,7 @@ export default function HeartRateZoneCalculator() {
                     label="HR Reserve"
                     value={`${result.maxHR - inputs.restingHeartRate}`}
                     sublabel="BPM"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Method"

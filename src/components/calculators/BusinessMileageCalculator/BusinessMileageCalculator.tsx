@@ -111,7 +111,7 @@ export default function BusinessMileageCalculator() {
                 max={5000}
                 step={10}
                 value={inputs.milesPerWeek}
-                onChange={(e) => updateInput('milesPerWeek', Number(e.target.value))}
+                onChange={(e) => updateInput('milesPerWeek', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Only include miles driven for business purposes, not commuting.
@@ -128,7 +128,7 @@ export default function BusinessMileageCalculator() {
                 max={52}
                 step={1}
                 value={inputs.weeksPerYear}
-                onChange={(e) => updateInput('weeksPerYear', Number(e.target.value))}
+                onChange={(e) => updateInput('weeksPerYear', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Typical: 48 weeks (accounting for holidays).
@@ -169,13 +169,13 @@ export default function BusinessMileageCalculator() {
                     label="Tax Deduction"
                     value={formatCurrency(result.taxDeduction, currencyCode)}
                     sublabel="claimable amount"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Tax Saving"
                     value={formatCurrency(result.annualTaxSaving, currencyCode)}
                     sublabel="estimated saving"
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="Monthly"

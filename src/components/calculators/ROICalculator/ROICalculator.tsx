@@ -75,7 +75,7 @@ export default function ROICalculator() {
                 min={0}
                 step={100}
                 value={inputs.initialInvestment}
-                onChange={(e) => updateInput('initialInvestment', Number(e.target.value))}
+                onChange={(e) => updateInput('initialInvestment', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -106,7 +106,7 @@ export default function ROICalculator() {
                   min={0}
                   step={100}
                   value={inputs.finalValue}
-                  onChange={(e) => updateInput('finalValue', Number(e.target.value))}
+                  onChange={(e) => updateInput('finalValue', Number(e.currentTarget.value))}
                 />
               </div>
             ) : (
@@ -120,7 +120,7 @@ export default function ROICalculator() {
                   currencySymbol={currencySymbol}
                   step={100}
                   value={inputs.gainAmount}
-                  onChange={(e) => updateInput('gainAmount', Number(e.target.value))}
+                  onChange={(e) => updateInput('gainAmount', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -138,7 +138,7 @@ export default function ROICalculator() {
                     min={1}
                     step={1}
                     value={inputs.timePeriod}
-                    onChange={(e) => updateInput('timePeriod', Number(e.target.value))}
+                    onChange={(e) => updateInput('timePeriod', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div className="w-40">
@@ -195,13 +195,13 @@ export default function ROICalculator() {
                     label="Total Gain / Loss"
                     value={formatCurrency(result.totalGainLoss, result.currency)}
                     sublabel={result.isGain ? 'profit' : 'loss'}
-                    valueColor={result.isGain ? 'success' : 'danger'}
+                    valueColor={result.isGain ? 'success' : 'error'}
                   />
                   <MetricCard
                     label="Annualised ROI"
                     value={formatPercentage(result.annualisedROI)}
                     sublabel="per year (CAGR)"
-                    valueColor={result.annualisedROI >= 0 ? 'success' : 'danger'}
+                    valueColor={result.annualisedROI >= 0 ? 'success' : 'error'}
                   />
                   <MetricCard
                     label="Final Value"

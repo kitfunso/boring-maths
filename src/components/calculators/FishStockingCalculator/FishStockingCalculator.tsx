@@ -79,7 +79,7 @@ export default function FishStockingCalculator() {
   const stockingBarWidth = Math.min(result.stockingLevel, 150);
 
   return (
-    <ThemeProvider defaultColor="ocean">
+    <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
         <CalculatorHeader
           title="Fish Stocking Calculator"
@@ -99,7 +99,7 @@ export default function FishStockingCalculator() {
                   id="length"
                   type="number"
                   value={inputs.tankLength}
-                  onChange={(value) => updateInput('tankLength', Number(value))}
+                  onChange={(e) => updateInput('tankLength', Number(e.currentTarget.value))}
                   min={1}
                 />
               </div>
@@ -109,7 +109,7 @@ export default function FishStockingCalculator() {
                   id="width"
                   type="number"
                   value={inputs.tankWidth}
-                  onChange={(value) => updateInput('tankWidth', Number(value))}
+                  onChange={(e) => updateInput('tankWidth', Number(e.currentTarget.value))}
                   min={1}
                 />
               </div>
@@ -119,7 +119,7 @@ export default function FishStockingCalculator() {
                   id="height"
                   type="number"
                   value={inputs.tankHeight}
-                  onChange={(value) => updateInput('tankHeight', Number(value))}
+                  onChange={(e) => updateInput('tankHeight', Number(e.currentTarget.value))}
                   min={1}
                 />
               </div>

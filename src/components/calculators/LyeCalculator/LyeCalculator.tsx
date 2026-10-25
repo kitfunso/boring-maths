@@ -83,7 +83,7 @@ export default function LyeCalculator() {
   );
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="Soap Lye Calculator"
@@ -167,7 +167,7 @@ export default function LyeCalculator() {
                       <Input
                         type="number"
                         value={oilEntry.weight}
-                        onChange={(value) => updateOil(oilEntry.id, Number(value))}
+                        onChange={(e) => updateOil(oilEntry.id, Number(e.currentTarget.value))}
                         min={0}
                         step={inputs.unit === 'oz' ? 0.5 : 10}
                         className="w-24"
@@ -241,13 +241,11 @@ export default function LyeCalculator() {
                 }
                 value={formatWeight(result.lyeAmount, inputs.unit)}
                 subtitle="lye needed"
-                valueColor="error"
               />
               <ResultCard
                 label="Distilled Water"
                 value={formatWeight(result.waterAmount, inputs.unit)}
                 subtitle={`${result.lyeConcentration}% lye solution`}
-                valueColor="success"
               />
             </Grid>
 

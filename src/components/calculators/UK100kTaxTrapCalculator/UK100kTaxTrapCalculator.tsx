@@ -95,7 +95,7 @@ export default function UK100kTaxTrapCalculator() {
                 max={500000}
                 step={1000}
                 value={inputs.grossSalary}
-                onChange={(e) => updateInput('grossSalary', Number(e.target.value))}
+                onChange={(e) => updateInput('grossSalary', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Your total salary before tax and deductions
@@ -112,7 +112,7 @@ export default function UK100kTaxTrapCalculator() {
                 max={200000}
                 step={1000}
                 value={inputs.bonusIncome}
-                onChange={(e) => updateInput('bonusIncome', Number(e.target.value))}
+                onChange={(e) => updateInput('bonusIncome', Number(e.currentTarget.value))}
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Annual bonus, dividends, or other taxable income
@@ -169,7 +169,9 @@ export default function UK100kTaxTrapCalculator() {
                 max={100}
                 step={1}
                 value={inputs.currentPensionPercent}
-                onChange={(e) => updateInput('currentPensionPercent', Number(e.target.value))}
+                onChange={(e) =>
+                  updateInput('currentPensionPercent', Number(e.currentTarget.value))
+                }
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Your current pension contribution as % of salary (salary sacrifice)

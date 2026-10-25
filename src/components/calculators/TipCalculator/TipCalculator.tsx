@@ -72,7 +72,7 @@ export default function TipCalculator() {
                 min={0}
                 step={0.01}
                 value={inputs.billAmount}
-                onChange={(e) => updateInput('billAmount', Number(e.target.value))}
+                onChange={(e) => updateInput('billAmount', Number(e.currentTarget.value))}
               />
             </div>
 

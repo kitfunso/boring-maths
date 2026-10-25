@@ -2,6 +2,7 @@
  * Consulting Rate Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { ConsultingRateInputs, ConsultingRateResult, RateBreakdown } from './types';
 
 export function calculateConsultingRate(inputs: ConsultingRateInputs): ConsultingRateResult {

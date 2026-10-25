@@ -114,7 +114,7 @@ export default function LMTDCalculator() {
                     type="number"
                     step={1}
                     value={inputs.hotInlet}
-                    onChange={(e) => updateInput('hotInlet', Number(e.target.value))}
+                    onChange={(e) => updateInput('hotInlet', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -126,7 +126,7 @@ export default function LMTDCalculator() {
                     type="number"
                     step={1}
                     value={inputs.hotOutlet}
-                    onChange={(e) => updateInput('hotOutlet', Number(e.target.value))}
+                    onChange={(e) => updateInput('hotOutlet', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -145,7 +145,7 @@ export default function LMTDCalculator() {
                     type="number"
                     step={1}
                     value={inputs.coldInlet}
-                    onChange={(e) => updateInput('coldInlet', Number(e.target.value))}
+                    onChange={(e) => updateInput('coldInlet', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -157,7 +157,7 @@ export default function LMTDCalculator() {
                     type="number"
                     step={1}
                     value={inputs.coldOutlet}
-                    onChange={(e) => updateInput('coldOutlet', Number(e.target.value))}
+                    onChange={(e) => updateInput('coldOutlet', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -174,7 +174,7 @@ export default function LMTDCalculator() {
                     min={1}
                     max={4}
                     value={inputs.shellPasses}
-                    onChange={(e) => updateInput('shellPasses', Number(e.target.value))}
+                    onChange={(e) => updateInput('shellPasses', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -186,7 +186,7 @@ export default function LMTDCalculator() {
                     max={8}
                     step={2}
                     value={inputs.tubePasses}
-                    onChange={(e) => updateInput('tubePasses', Number(e.target.value))}
+                    onChange={(e) => updateInput('tubePasses', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>

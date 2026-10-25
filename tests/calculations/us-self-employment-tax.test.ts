@@ -19,8 +19,11 @@ describe('UsSelfEmploymentTaxCalculator', () => {
       expect(result.medicareTax).toBeCloseTo(1874.71, 2);
       expect(result.additionalMedicareTax).toBe(0);
       expect(result.halfSETaxDeduction).toBe(4945);
-      expect(result.taxableIncome).toBe(48955);
-      expect(result.federalIncomeTax).toBeCloseTo(5626.56, 2);
+      // QBI: 20% of 65,054.66 capped at 20% of 48,954.66 taxable = 9,790.93
+      expect(result.qbiDeduction).toBe(9791);
+      expect(result.taxableIncome).toBe(39164);
+      // 12,400 x 10% + 26,763.73 x 12%
+      expect(result.federalIncomeTax).toBeCloseTo(4451.65, 2);
     });
 
     it('should use the 125,000 Additional Medicare threshold for married filing separately', () => {

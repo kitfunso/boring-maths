@@ -2,6 +2,7 @@
  * Marketplace Fees Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type {
   MarketplaceFeesInputs,
   MarketplaceFeesResult,

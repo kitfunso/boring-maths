@@ -11,7 +11,11 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USSelfEmploymentTaxCalculator } from '../../components/calculators/USSelfEmploymentTaxCalculator';
-import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../lib/us-tax-2026';
+import {
+  SOCIAL_SECURITY_WAGE_BASE_2026,
+  QBI_THRESHOLD_2026,
+  QBI_PHASE_IN_END_2026,
+} from '../../lib/us-tax-2026';
 
 const usd = (n: number) =>
   new Intl.NumberFormat('en-US', {
@@ -162,7 +166,13 @@ const schemaBreadcrumbs = [
       </p>
       <p>
         <strong class="text-blue-400">Federal income tax</strong> is calculated after deducting half your
-        SE tax. This "adjustment" reduces your taxable income, lowering your overall tax burden.
+        SE tax and the standard deduction. The calculator then takes the 20% qualified business income
+        (QBI) deduction, which most sole proprietors can claim. It phases out for single filers with taxable
+        income between {usd(QBI_THRESHOLD_2026.single)} and {usd(QBI_PHASE_IN_END_2026.single)}
+        (joint {usd(QBI_THRESHOLD_2026.married_jointly)} to {
+          usd(QBI_PHASE_IN_END_2026.married_jointly)
+        }) when the business has no employees. A specified service business, such as consulting, can
+        lose it faster.
       </p>
       <p>
         <strong class="text-amber-400">Quarterly payments</strong> help you avoid underpayment penalties.
@@ -172,8 +182,12 @@ const schemaBreadcrumbs = [
   </ContentSection>
 
   <SourcesSection
-    checked="2026-10-24"
+    checked="2026-10-25"
     sources={[
+      {
+        label: 'IRS: Qualified business income deduction',
+        href: 'https://www.irs.gov/newsroom/qualified-business-income-deduction',
+      },
       {
         label: 'IRS: Self-employment tax (Social Security and Medicare taxes)',
         href: 'https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes',

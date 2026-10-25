@@ -117,7 +117,7 @@ export default function GoFullTimeCalculator() {
                     min={0}
                     step={1000}
                     value={inputs.annualSalary}
-                    onChange={(e) => updateInput('annualSalary', Number(e.target.value))}
+                    onChange={(e) => updateInput('annualSalary', Number(e.currentTarget.value))}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Your take-home pay after taxes
@@ -133,7 +133,9 @@ export default function GoFullTimeCalculator() {
                     min={0}
                     step={50}
                     value={inputs.monthlyBenefitsValue}
-                    onChange={(e) => updateInput('monthlyBenefitsValue', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('monthlyBenefitsValue', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     {inputs.currency === 'USD' && 'Health insurance, 401k match, perks'}
@@ -161,7 +163,7 @@ export default function GoFullTimeCalculator() {
                     min={0}
                     step={100}
                     value={inputs.monthlyExpenses}
-                    onChange={(e) => updateInput('monthlyExpenses', Number(e.target.value))}
+                    onChange={(e) => updateInput('monthlyExpenses', Number(e.currentTarget.value))}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Essential costs: rent, food, utilities, insurance
@@ -179,7 +181,7 @@ export default function GoFullTimeCalculator() {
                     min={0}
                     step={1000}
                     value={inputs.currentSavings}
-                    onChange={(e) => updateInput('currentSavings', Number(e.target.value))}
+                    onChange={(e) => updateInput('currentSavings', Number(e.currentTarget.value))}
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Savings dedicated to your transition
@@ -205,7 +207,9 @@ export default function GoFullTimeCalculator() {
                     min={0}
                     step={100}
                     value={inputs.monthlySideIncome}
-                    onChange={(e) => updateInput('monthlySideIncome', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('monthlySideIncome', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Average income from freelancing, consulting, etc.
@@ -221,7 +225,9 @@ export default function GoFullTimeCalculator() {
                     max={50}
                     step={1}
                     value={inputs.monthlyGrowthRate * 100}
-                    onChange={(e) => updateInput('monthlyGrowthRate', Number(e.target.value) / 100)}
+                    onChange={(e) =>
+                      updateInput('monthlyGrowthRate', Number(e.currentTarget.value) / 100)
+                    }
                   />
                   <p className="text-sm text-[var(--color-muted)] mt-1">
                     Realistic: 5-15%. Optimistic: 15-25%

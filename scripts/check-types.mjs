@@ -46,8 +46,6 @@ function collectErrors() {
     '--noEmit',
     '-p',
     'tsconfig.json',
-    '--jsxImportSource',
-    'preact',
     '--pretty',
     'false',
   ]);

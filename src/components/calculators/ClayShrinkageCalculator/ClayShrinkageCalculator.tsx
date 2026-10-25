@@ -58,7 +58,7 @@ export default function ClayShrinkageCalculator() {
   const shrinkageCategory = getShrinkageCategory(result.totalShrinkage);
 
   return (
-    <ThemeProvider defaultColor="coral">
+    <ThemeProvider defaultColor="red">
       <Card variant="elevated">
         <CalculatorHeader
           title="Clay Shrinkage Calculator"
@@ -94,7 +94,7 @@ export default function ClayShrinkageCalculator() {
                     id="size"
                     type="number"
                     value={inputs.knownSize}
-                    onChange={(value) => updateInput('knownSize', Number(value))}
+                    onChange={(e) => updateInput('knownSize', Number(e.currentTarget.value))}
                     min={0.1}
                     step={0.125}
                   />
@@ -166,11 +166,11 @@ export default function ClayShrinkageCalculator() {
                 id="shrinkage"
                 type="number"
                 value={inputs.shrinkagePercent}
-                onChange={(value) => updateInput('shrinkagePercent', Number(value))}
+                onChange={(e) => updateInput('shrinkagePercent', Number(e.currentTarget.value))}
                 min={0}
                 max={30}
                 step={0.5}
-                suffix="%"
+                variant="percentage"
               />
             </div>
           )}
@@ -188,7 +188,6 @@ export default function ClayShrinkageCalculator() {
                   ? `${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} thrown → ${formatSize(result.resultSize, inputs.unit)} fired`
                   : `Throw at ${formatSize(result.resultSize, inputs.unit)} to get ${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} fired`
               }
-              valueColor="success"
             />
 
             {/* Shrinkage Breakdown */}

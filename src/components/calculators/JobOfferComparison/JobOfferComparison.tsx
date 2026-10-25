@@ -75,7 +75,7 @@ function OfferPanel({
           min={0}
           step={1000}
           value={offer.baseSalary}
-          onChange={(e) => onChange({ baseSalary: Number(e.target.value) })}
+          onChange={(e) => onChange({ baseSalary: Number(e.currentTarget.value) })}
         />
       </div>
 
@@ -89,7 +89,7 @@ function OfferPanel({
           max={100}
           step={1}
           value={Math.round(offer.bonusPercentage * 100)}
-          onChange={(e) => onChange({ bonusPercentage: Number(e.target.value) / 100 })}
+          onChange={(e) => onChange({ bonusPercentage: Number(e.currentTarget.value) / 100 })}
         />
       </div>
 
@@ -103,7 +103,7 @@ function OfferPanel({
           min={0}
           step={1000}
           value={offer.annualEquity}
-          onChange={(e) => onChange({ annualEquity: Number(e.target.value) })}
+          onChange={(e) => onChange({ annualEquity: Number(e.currentTarget.value) })}
         />
         <p className="text-xs text-[var(--color-muted)] mt-1">Vested value per year</p>
       </div>
@@ -119,7 +119,7 @@ function OfferPanel({
             max={10}
             step={0.5}
             value={Math.round(offer.match401kPercentage * 100)}
-            onChange={(e) => onChange({ match401kPercentage: Number(e.target.value) / 100 })}
+            onChange={(e) => onChange({ match401kPercentage: Number(e.currentTarget.value) / 100 })}
           />
         </div>
         <div>
@@ -131,7 +131,7 @@ function OfferPanel({
             max={100}
             step={1}
             value={Math.round(offer.match401kLimit * 100)}
-            onChange={(e) => onChange({ match401kLimit: Number(e.target.value) / 100 })}
+            onChange={(e) => onChange({ match401kLimit: Number(e.currentTarget.value) / 100 })}
           />
         </div>
       </Grid>
@@ -147,7 +147,7 @@ function OfferPanel({
             min={0}
             step={25}
             value={offer.healthInsuranceCost}
-            onChange={(e) => onChange({ healthInsuranceCost: Number(e.target.value) })}
+            onChange={(e) => onChange({ healthInsuranceCost: Number(e.currentTarget.value) })}
           />
           <p className="text-xs text-[var(--color-muted)] mt-1">Your contribution</p>
         </div>
@@ -160,7 +160,7 @@ function OfferPanel({
             min={0}
             step={500}
             value={offer.healthBenefitValue}
-            onChange={(e) => onChange({ healthBenefitValue: Number(e.target.value) })}
+            onChange={(e) => onChange({ healthBenefitValue: Number(e.currentTarget.value) })}
           />
           <p className="text-xs text-[var(--color-muted)] mt-1">Employer pays</p>
         </div>
@@ -175,7 +175,7 @@ function OfferPanel({
           min={0}
           max={50}
           value={offer.ptoDays}
-          onChange={(e) => onChange({ ptoDays: Number(e.target.value) })}
+          onChange={(e) => onChange({ ptoDays: Number(e.currentTarget.value) })}
         />
       </div>
 
@@ -189,7 +189,7 @@ function OfferPanel({
             min={0}
             max={100}
             value={offer.commuteDistance}
-            onChange={(e) => onChange({ commuteDistance: Number(e.target.value) })}
+            onChange={(e) => onChange({ commuteDistance: Number(e.currentTarget.value) })}
           />
           <p className="text-xs text-[var(--color-muted)] mt-1">miles</p>
         </div>
@@ -201,7 +201,7 @@ function OfferPanel({
             min={0}
             max={5}
             value={offer.officeDaysPerWeek}
-            onChange={(e) => onChange({ officeDaysPerWeek: Number(e.target.value) })}
+            onChange={(e) => onChange({ officeDaysPerWeek: Number(e.currentTarget.value) })}
           />
         </div>
       </Grid>
@@ -216,7 +216,7 @@ function OfferPanel({
           min={0}
           step={1000}
           value={offer.signingBonus}
-          onChange={(e) => onChange({ signingBonus: Number(e.target.value) })}
+          onChange={(e) => onChange({ signingBonus: Number(e.currentTarget.value) })}
         />
       </div>
 
@@ -230,7 +230,7 @@ function OfferPanel({
           min={0}
           step={100}
           value={offer.otherBenefits}
-          onChange={(e) => onChange({ otherBenefits: Number(e.target.value) })}
+          onChange={(e) => onChange({ otherBenefits: Number(e.currentTarget.value) })}
         />
         <p className="text-xs text-[var(--color-muted)] mt-1">Gym, transit, meals, etc.</p>
       </div>
@@ -344,7 +344,7 @@ export default function JobOfferComparison() {
 
         <div className="p-6 md:p-8">
           {/* Two-column offer inputs */}
-          <Grid responsive={{ sm: 1, lg: 2 }} gap="xl">
+          <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
             <OfferPanel
               offer={inputs.offer1}
               onChange={updateOffer1}
@@ -376,7 +376,7 @@ export default function JobOfferComparison() {
                   min={0}
                   step={5}
                   value={inputs.hourlyTimeValue}
-                  onChange={(e) => updateSettings('hourlyTimeValue', Number(e.target.value))}
+                  onChange={(e) => updateSettings('hourlyTimeValue', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -388,7 +388,7 @@ export default function JobOfferComparison() {
                   min={0}
                   step={0.05}
                   value={inputs.costPerMile}
-                  onChange={(e) => updateSettings('costPerMile', Number(e.target.value))}
+                  onChange={(e) => updateSettings('costPerMile', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -400,7 +400,9 @@ export default function JobOfferComparison() {
                   max={100}
                   step={1}
                   value={Math.round(inputs.contribution401k * 100)}
-                  onChange={(e) => updateSettings('contribution401k', Number(e.target.value) / 100)}
+                  onChange={(e) =>
+                    updateSettings('contribution401k', Number(e.currentTarget.value) / 100)
+                  }
                 />
               </div>
             </Grid>

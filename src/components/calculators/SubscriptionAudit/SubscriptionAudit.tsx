@@ -88,7 +88,7 @@ function SubscriptionRow({
             min={0}
             step={0.01}
             value={subscription.cost}
-            onChange={(e) => onChange({ cost: Number(e.target.value) })}
+            onChange={(e) => onChange({ cost: Number(e.currentTarget.value) })}
           />
         </div>
         <div>
@@ -240,7 +240,10 @@ export default function SubscriptionAudit() {
               step={5}
               value={inputs.estimatedMonthlySpend}
               onChange={(e) =>
-                setInputs((prev) => ({ ...prev, estimatedMonthlySpend: Number(e.target.value) }))
+                setInputs((prev) => ({
+                  ...prev,
+                  estimatedMonthlySpend: Number(e.currentTarget.value),
+                }))
               }
             />
             <p className="text-sm text-[var(--color-muted)] mt-1">

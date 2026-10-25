@@ -17,8 +17,10 @@ export interface SavingsGoalInputs {
   /** Expected annual inflation rate as decimal (0.03 = 3%) */
   inflationRate: number;
 
-  contributionFrequency: 'monthly' | 'biweekly' | 'weekly';
+  contributionFrequency: ContributionFrequency;
 }
+
+export type ContributionFrequency = 'monthly' | 'biweekly' | 'weekly';
 
 export interface SavingsGoalResult {
   currency: Currency;

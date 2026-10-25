@@ -76,7 +76,7 @@ export default function BBQCalculator() {
                   min={1}
                   max={200}
                   value={inputs.guestCount}
-                  onChange={(e) => updateInput('guestCount', Number(e.target.value))}
+                  onChange={(e) => updateInput('guestCount', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -88,7 +88,7 @@ export default function BBQCalculator() {
                   min={0}
                   max={inputs.guestCount}
                   value={inputs.childrenCount}
-                  onChange={(e) => updateInput('childrenCount', Number(e.target.value))}
+                  onChange={(e) => updateInput('childrenCount', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Kids eat about half portions

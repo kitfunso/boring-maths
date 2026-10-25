@@ -111,7 +111,7 @@ export default function BMICalculator() {
                   min={100}
                   max={250}
                   value={inputs.heightCm}
-                  onChange={(e) => updateInput('heightCm', Number(e.target.value))}
+                  onChange={(e) => updateInput('heightCm', Number(e.currentTarget.value))}
                 />
               </div>
             ) : (
@@ -126,7 +126,7 @@ export default function BMICalculator() {
                     min={3}
                     max={8}
                     value={inputs.heightFeet}
-                    onChange={(e) => updateInput('heightFeet', Number(e.target.value))}
+                    onChange={(e) => updateInput('heightFeet', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -139,7 +139,7 @@ export default function BMICalculator() {
                     min={0}
                     max={11}
                     value={inputs.heightInches}
-                    onChange={(e) => updateInput('heightInches', Number(e.target.value))}
+                    onChange={(e) => updateInput('heightInches', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -158,9 +158,9 @@ export default function BMICalculator() {
                 value={inputs.unitSystem === 'metric' ? inputs.weightKg : inputs.weightLbs}
                 onChange={(e) => {
                   if (inputs.unitSystem === 'metric') {
-                    updateInput('weightKg', Number(e.target.value));
+                    updateInput('weightKg', Number(e.currentTarget.value));
                   } else {
-                    updateInput('weightLbs', Number(e.target.value));
+                    updateInput('weightLbs', Number(e.currentTarget.value));
                   }
                 }}
               />

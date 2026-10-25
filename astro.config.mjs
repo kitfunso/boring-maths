@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import preact from '@astrojs/preact';
-import sitemap from '@astrojs/sitemap';
+import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 import { calculators } from './src/lib/calculators.ts';
 
 // A noindexed URL in the sitemap shows up in GSC as "Excluded by 'noindex' tag".
@@ -44,16 +44,20 @@ export default defineConfig({
         // Set priority based on page depth
         if (item.url === 'https://boring-math.com/') {
           item.priority = 1.0;
-          item.changefreq = 'weekly';
-        } else if (item.url.match(/\/calculators\/(automotive|brewing|business|engineering|events|everyday|finance|health|hobbies|home|income|uk-tax|us-tax)\/?$/)) {
+          item.changefreq = ChangeFreqEnum.WEEKLY;
+        } else if (
+          item.url.match(
+            /\/calculators\/(automotive|brewing|business|engineering|events|everyday|finance|health|hobbies|home|income|uk-tax|us-tax)\/?$/
+          )
+        ) {
           item.priority = 0.9;
-          item.changefreq = 'weekly';
+          item.changefreq = ChangeFreqEnum.WEEKLY;
         } else if (item.url.includes('/calculators/')) {
           item.priority = 0.8;
-          item.changefreq = 'monthly';
+          item.changefreq = ChangeFreqEnum.MONTHLY;
         } else {
           item.priority = 0.5;
-          item.changefreq = 'monthly';
+          item.changefreq = ChangeFreqEnum.MONTHLY;
         }
         return item;
       },

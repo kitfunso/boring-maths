@@ -145,9 +145,7 @@ export default function LeftoversCalculator() {
                 label="Fridge"
                 value={`${result.fridgeDays} days`}
                 sublabel="at 40\u00B0F / 4\u00B0C"
-                valueColor={
-                  inputs.storageMethod === 'fridge' ? 'text-[var(--color-accent)]' : undefined
-                }
+                valueColor={inputs.storageMethod === 'fridge' ? 'themed' : undefined}
               />
               <MetricCard
                 label="Freezer"
@@ -155,9 +153,7 @@ export default function LeftoversCalculator() {
                   result.freezerMonths > 0 ? `${result.freezerMonths} months` : 'Not recommended'
                 }
                 sublabel="at 0\u00B0F / -18\u00B0C"
-                valueColor={
-                  inputs.storageMethod === 'freezer' ? 'text-[var(--color-accent)]' : undefined
-                }
+                valueColor={inputs.storageMethod === 'freezer' ? 'themed' : undefined}
               />
               <MetricCard
                 label="Counter"
@@ -167,9 +163,7 @@ export default function LeftoversCalculator() {
                     : `${result.counterHours} hours`
                 }
                 sublabel="room temperature"
-                valueColor={
-                  inputs.storageMethod === 'counter' ? 'text-[var(--color-accent)]' : undefined
-                }
+                valueColor={inputs.storageMethod === 'counter' ? 'themed' : undefined}
               />
             </Grid>
 

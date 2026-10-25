@@ -140,7 +140,7 @@ export default function ReynoldsNumberCalculator() {
                   min={0.1}
                   step={inputs.unitSystem === 'metric' ? 1 : 0.1}
                   value={inputs.diameter}
-                  onChange={(e) => updateInput('diameter', Number(e.target.value))}
+                  onChange={(e) => updateInput('diameter', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -153,7 +153,7 @@ export default function ReynoldsNumberCalculator() {
                   min={0.01}
                   step={0.1}
                   value={inputs.velocity}
-                  onChange={(e) => updateInput('velocity', Number(e.target.value))}
+                  onChange={(e) => updateInput('velocity', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -167,7 +167,7 @@ export default function ReynoldsNumberCalculator() {
                 min={inputs.unitSystem === 'metric' ? 0 : 32}
                 max={inputs.unitSystem === 'metric' ? 100 : 212}
                 value={inputs.temperature}
-                onChange={(e) => updateInput('temperature', Number(e.target.value))}
+                onChange={(e) => updateInput('temperature', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Affects viscosity calculation for water and air
@@ -186,7 +186,7 @@ export default function ReynoldsNumberCalculator() {
                   min={1e-8}
                   step={1e-7}
                   value={inputs.kinematicViscosity}
-                  onChange={(e) => updateInput('kinematicViscosity', Number(e.target.value))}
+                  onChange={(e) => updateInput('kinematicViscosity', Number(e.currentTarget.value))}
                 />
                 <p className="text-sm text-[var(--color-muted)] mt-1">
                   Water ≈ 1×10⁻⁶, Air ≈ 1.5×10⁻⁵, Oil ≈ 1×10⁻⁴ m²/s

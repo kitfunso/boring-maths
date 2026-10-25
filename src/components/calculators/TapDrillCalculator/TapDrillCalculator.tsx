@@ -2,7 +2,7 @@
  * Tap Drill Size Calculator Component
  * Calculate drill sizes for tapping threads
  */
-import { ResultCard, Select, Slider, ButtonGroup } from '../../ui';
+import { ResultCard, Select, Slider, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { TapDrillInputs } from './types';
 import { IMPERIAL_THREADS, METRIC_THREADS } from './types';
@@ -59,12 +59,15 @@ export function TapDrillCalculator() {
               />
             </div>
 
-            <Select
-              label="Thread Size"
-              value={inputs.threadSize}
-              onChange={(v) => setInputs({ ...inputs, threadSize: v })}
-              options={threadOptions}
-            />
+            <div>
+              <Label htmlFor="thread-size">Thread Size</Label>
+              <Select
+                id="thread-size"
+                value={inputs.threadSize}
+                onChange={(v) => setInputs({ ...inputs, threadSize: v })}
+                options={threadOptions}
+              />
+            </div>
 
             <Slider
               label="Thread Engagement %"
@@ -73,7 +76,8 @@ export function TapDrillCalculator() {
               min={50}
               max={100}
               step={5}
-              formatValue={(v) => `${v}%`}
+              showValue
+              labels={{ current: (v) => `${v}%` }}
             />
 
             <div className="rounded-lg bg-slate-800/50 p-4">
@@ -117,16 +121,8 @@ export function TapDrillCalculator() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <ResultCard
-                label="Calculated Drill Size"
-                value={results.tapDrillSizeFormatted}
-                color="blue"
-              />
-              <ResultCard
-                label="Closest Standard Drill"
-                value={results.closestDrill}
-                color="green"
-              />
+              <ResultCard label="Calculated Drill Size" value={results.tapDrillSizeFormatted} />
+              <ResultCard label="Closest Standard Drill" value={results.closestDrill} />
             </div>
 
             <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">

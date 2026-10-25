@@ -62,7 +62,7 @@ export default function CurrencyConverter() {
             <Input
               type="number"
               value={inputs.amount}
-              onChange={(v) => updateInput('amount', Number(v))}
+              onChange={(e) => updateInput('amount', Number(e.currentTarget.value))}
               min={0}
               step={1}
             />
@@ -109,12 +109,12 @@ export default function CurrencyConverter() {
             <MetricCard
               label={`1 ${inputs.fromCurrency}`}
               value={`${result.rate}`}
-              subtitle={inputs.toCurrency}
+              sublabel={inputs.toCurrency}
             />
             <MetricCard
               label={`1 ${inputs.toCurrency}`}
               value={`${result.inverseRate}`}
-              subtitle={inputs.fromCurrency}
+              sublabel={inputs.fromCurrency}
             />
           </Grid>
 
@@ -156,8 +156,18 @@ export default function CurrencyConverter() {
           </Alert>
 
           <div class="flex gap-3 flex-wrap">
-            <ShareResults text={shareText} title="Currency Conversion" />
-            <PrintResults />
+            <ShareResults result={shareText} calculatorName="Currency Conversion" />
+            <PrintResults
+              title="Currency Conversion"
+              results={[
+                { label: 'Conversion', value: shareText },
+                { label: `1 ${inputs.fromCurrency}`, value: `${result.rate} ${inputs.toCurrency}` },
+                {
+                  label: `1 ${inputs.toCurrency}`,
+                  value: `${result.inverseRate} ${inputs.fromCurrency}`,
+                },
+              ]}
+            />
           </div>
         </div>
       </Card>

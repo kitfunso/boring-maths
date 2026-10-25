@@ -14,6 +14,38 @@ import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
 import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../lib/us-tax-2026';
+import { calculateComparison_main } from '../../components/calculators/ContractorVsEmployeeCalculator/calculations';
+import { getDefaultInputs } from '../../components/calculators/ContractorVsEmployeeCalculator/types';
+
+// The worked example runs through the calculator so the page cannot drift from the maths
+const example = calculateComparison_main({
+  ...getDefaultInputs('USD'),
+  contractorHourlyRate: 75,
+  contractorBillableHoursPerWeek: 40,
+  contractorWeeksPerYear: 45,
+  contractorHealthInsuranceMonthly: 800,
+  contractorRetirementContribPercent: 0,
+  contractorBusinessExpensesMonthly: 125,
+  contractorAccountingAnnual: 1500,
+  contractorInsuranceAnnual: 1000,
+  employeeSalary: 120000,
+  employeeBonusPercent: 0,
+  employer401kMatch: 4,
+  employer401kMatchLimit: 4,
+  employerHealthInsuranceMonthly: 700,
+  employerDentalVisionMonthly: 0,
+  employerLifeDisabilityMonthly: 0,
+  paidTimeOffDays: 20,
+  paidHolidaysDays: 10,
+  otherBenefitsAnnual: 0,
+  filingStatus: 'single',
+  stateTaxRate: 0.05,
+});
+const exC = example.contractor;
+const exE = example.employee;
+const usd0 = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
+const thousands = (n: number) => `$${Math.round(n / 1000)}k`;
+const exEmployeeTotal = exE.netIncome + exE.totalBenefitsValue;
 
 // SEO Configuration
 const title = '1099 vs W2 Calculator: Which Actually Pays You More? (2026)';
@@ -203,9 +235,11 @@ const schemaBreadcrumbs = [
       memberships.
     </p>
     <p>
-      Open <strong>Tax Settings</strong> to customize your marginal federal tax bracket, state tax rate,
-      and self-employment tax rate (15.3% in the US). The calculator uses these to compute accurate net
-      income for both scenarios.
+      Open <strong>Tax Settings</strong> to pick your filing status and state tax rate (US) or your country
+      (euro). US tax uses the 2026 brackets, the standard deduction, self-employment tax on profit and
+      the 20% QBI deduction. UK tax uses 2026/27 income tax with Class 4 NI for the contractor and Class
+      1 for the employee. In euro countries the employee side uses that country's model; for the contractor
+      you enter your self-employed social contribution rate.
     </p>
   </ContentSection>
 
@@ -278,31 +312,54 @@ const schemaBreadcrumbs = [
       sick time) at 40 hours per week:
     </p>
     <ul class="list-disc list-inside space-y-1 mt-2">
-      <li><strong>Gross income:</strong> 45 weeks x 40 hrs x $75 = $135,000</li>
-      <li><strong>Self-employment tax (15.3%):</strong> -$19,490 (on 92.35% of net)</li>
-      <li><strong>Health insurance (family):</strong> -$9,600/yr ($800/month)</li>
-      <li><strong>Business expenses (software, accounting, liability):</strong> -$4,000</li>
-      <li><strong>Federal + state income tax (~28% effective):</strong> -$28,600</li>
-      <li><strong>Net take-home: approximately $73,300</strong></li>
+      <li><strong>Gross income:</strong> 45 weeks x 40 hrs x $75 = {usd0(exC.grossIncome)}</li>
+      <li>
+        <strong>Self-employment tax (15.3% on 92.35% of profit):</strong> -{usd0(exC.socialTax)}
+      </li>
+      <li>
+        <strong>Health insurance (family):</strong> -{usd0(exC.healthInsuranceCost)}/yr ($800/month)
+      </li>
+      <li>
+        <strong>Business expenses (software, accounting, liability):</strong> -{
+          usd0(exC.businessExpenses + exC.professionalServices)
+        }
+      </li>
+      <li>
+        <strong>Federal + 5% state income tax:</strong> -{usd0(exC.incomeTax)} (after the standard deduction,
+        half the SE tax, the health insurance deduction and the 20% QBI deduction)
+      </li>
+      <li><strong>Net take-home: {usd0(exC.netIncome)}</strong></li>
     </ul>
     <h3 class="text-lg font-semibold mt-6 mb-3">Employee at $120,000</h3>
     <ul class="list-disc list-inside space-y-1 mt-2">
       <li><strong>Base salary:</strong> $120,000</li>
-      <li><strong>Employer health insurance contribution:</strong> +$8,400/yr</li>
-      <li><strong>401(k) match (4%):</strong> +$4,800</li>
-      <li><strong>20 days PTO + 10 holidays:</strong> +$11,500 in paid rest value</li>
-      <li><strong>Federal + state income tax + FICA (~30% effective):</strong> -$36,000</li>
+      <li>
+        <strong>Employer health insurance contribution:</strong> +{
+          usd0(exE.healthInsuranceValue)
+        }/yr
+      </li>
+      <li><strong>401(k) match (4%):</strong> +{usd0(exE.retirementMatchValue)}</li>
+      <li>
+        <strong>20 days PTO + 10 holidays:</strong> +{usd0(exE.ptoValue)} in paid rest value
+      </li>
+      <li>
+        <strong>Federal + 5% state income tax + FICA:</strong> -{usd0(exE.totalCosts)}
+      </li>
       <li>
         <strong
-          >Net take-home cash: approximately $84,000 + $24,700 in benefits = $108,700 total
-          compensation</strong
+          >Net take-home cash: {usd0(exE.netIncome)} + {usd0(exE.totalBenefitsValue)} in benefits = {
+            usd0(exEmployeeTotal)
+          } total compensation</strong
         >
       </li>
     </ul>
     <p class="mt-4">
-      On a straight cash basis the contractor nets about $73k vs the employee's $84k. Factor in
-      benefits and the gap widens to $73k vs $109k. To truly break even, the contractor would need
-      roughly <strong>$95-100/hr</strong> billing the same hours - or significantly more billable weeks.
+      On a straight cash basis the contractor nets about {thousands(exC.netIncome)} vs the employee's
+      {thousands(exE.netIncome)}. Factor in benefits and the gap widens to {
+        thousands(exC.netIncome)
+      } vs {thousands(exEmployeeTotal)}. To break even, the contractor would need about <strong
+        >{usd0(example.comparison.breakEvenContractRate)}/hr</strong
+      > billing the same hours, or more billable weeks.
     </p>
   </ContentSection>
 
@@ -353,6 +410,26 @@ const schemaBreadcrumbs = [
       {
         label: 'SSA: Contribution and Benefit Base',
         href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+      {
+        label: 'IRS: Revenue Procedure 2025-32, 2026 brackets, deductions and QBI thresholds',
+        href: 'https://www.irs.gov/pub/irs-drop/rp-25-32.pdf',
+      },
+      {
+        label: 'IRS: Qualified business income deduction',
+        href: 'https://www.irs.gov/newsroom/qualified-business-income-deduction',
+      },
+      {
+        label: 'GOV.UK: Income Tax rates and Personal Allowances',
+        href: 'https://www.gov.uk/income-tax-rates',
+      },
+      {
+        label: 'GOV.UK: Self-employed National Insurance rates',
+        href: 'https://www.gov.uk/self-employed-national-insurance-rates',
+      },
+      {
+        label: 'GOV.UK: National Insurance rates and categories',
+        href: 'https://www.gov.uk/national-insurance/how-much-you-pay',
       },
     ]}
   />

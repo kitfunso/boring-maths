@@ -90,7 +90,7 @@ export default function WaterIntakeCalculator() {
                 max={inputs.unit === 'kg' ? 300 : 660}
                 step={1}
                 value={inputs.bodyWeight}
-                onChange={(e) => updateInput('bodyWeight', Number(e.target.value))}
+                onChange={(e) => updateInput('bodyWeight', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -212,13 +212,13 @@ export default function WaterIntakeCalculator() {
                     label="Per Hour"
                     value={`${result.hourlyIntakeMl}ml`}
                     sublabel="during waking hours"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Exercise Extra"
                     value={`+${result.exerciseAdditionMl}ml`}
                     sublabel="activity addition"
-                    valueColor="text-emerald-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="vs 8 Glasses"

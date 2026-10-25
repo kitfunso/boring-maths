@@ -101,15 +101,6 @@ export interface OvertimeCalculatorResult {
     hours500: number; // hours for $500 extra
     hours1000: number; // hours for $1000 extra
   };
-
-  /** Monthly breakdown showing diminishing returns */
-  monthlyBreakdown: {
-    month: number;
-    grossOT: number;
-    netOT: number;
-    effectiveRate: number;
-    cumulativeNet: number;
-  }[];
 }
 
 /**

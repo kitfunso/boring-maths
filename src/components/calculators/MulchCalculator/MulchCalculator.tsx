@@ -125,7 +125,7 @@ export default function MulchCalculator() {
                     max={500}
                     step={0.5}
                     value={inputs.length}
-                    onChange={(e) => updateInput('length', Number(e.target.value))}
+                    onChange={(e) => updateInput('length', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -137,7 +137,7 @@ export default function MulchCalculator() {
                     max={500}
                     step={0.5}
                     value={inputs.width}
-                    onChange={(e) => updateInput('width', Number(e.target.value))}
+                    onChange={(e) => updateInput('width', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -164,7 +164,6 @@ export default function MulchCalculator() {
                 options={mulchTypeOptions}
                 value={inputs.mulchType}
                 onChange={(value) => handleMulchTypeChange(value as MulchType)}
-                columns={5}
               />
               <p className="text-sm text-[var(--color-muted)] mt-2">
                 {MULCH_TYPE_CONFIGS[inputs.mulchType].description}
@@ -186,7 +185,9 @@ export default function MulchCalculator() {
                     max={500}
                     step={1}
                     value={inputs.pricePerCubicYard}
-                    onChange={(e) => updateInput('pricePerCubicYard', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('pricePerCubicYard', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
                 <div>
@@ -198,7 +199,7 @@ export default function MulchCalculator() {
                     max={50}
                     step={0.25}
                     value={inputs.pricePer2CuFtBag}
-                    onChange={(e) => updateInput('pricePer2CuFtBag', Number(e.target.value))}
+                    onChange={(e) => updateInput('pricePer2CuFtBag', Number(e.currentTarget.value))}
                   />
                 </div>
                 <div>
@@ -210,7 +211,7 @@ export default function MulchCalculator() {
                     max={75}
                     step={0.25}
                     value={inputs.pricePer3CuFtBag}
-                    onChange={(e) => updateInput('pricePer3CuFtBag', Number(e.target.value))}
+                    onChange={(e) => updateInput('pricePer3CuFtBag', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -233,7 +234,7 @@ export default function MulchCalculator() {
                       min={0}
                       max={500}
                       value={inputs.deliveryFee}
-                      onChange={(e) => updateInput('deliveryFee', Number(e.target.value))}
+                      onChange={(e) => updateInput('deliveryFee', Number(e.currentTarget.value))}
                       className="w-24"
                     />
                   </div>

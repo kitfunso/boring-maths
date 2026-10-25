@@ -15,7 +15,7 @@ export default function UKDividendTaxCalculator() {
   });
 
   return (
-    <ThemeProvider defaultColor="amber">
+    <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Dividend Tax Calculator"

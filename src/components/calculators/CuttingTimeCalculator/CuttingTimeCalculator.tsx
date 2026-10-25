@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'preact/hooks';
-import { ResultCard, Input, Select, ButtonGroup } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CuttingTimeInputs } from './types';
 import { OPERATION_TYPES, MACHINE_RATES } from './types';
@@ -52,17 +52,20 @@ export function CuttingTimeCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Operation Type</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Operation"
-              value={inputs.operationType}
-              onChange={(v) =>
-                setInputs({
-                  ...inputs,
-                  operationType: v as CuttingTimeInputs[keyof CuttingTimeInputs],
-                })
-              }
-              options={OPERATION_TYPES}
-            />
+            <div>
+              <Label htmlFor="operation">Operation</Label>
+              <Select
+                id="operation"
+                value={inputs.operationType}
+                onChange={(v) =>
+                  setInputs({
+                    ...inputs,
+                    operationType: v as CuttingTimeInputs['operationType'],
+                  })
+                }
+                options={OPERATION_TYPES}
+              />
+            </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -78,7 +81,7 @@ export function CuttingTimeCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      pathUnit: v as CuttingTimeInputs[keyof CuttingTimeInputs],
+                      pathUnit: v as CuttingTimeInputs['pathUnit'],
                     })
                   }
                 />
@@ -96,7 +99,7 @@ export function CuttingTimeCalculator() {
                   onChange={(v) =>
                     setInputs({
                       ...inputs,
-                      feedUnit: v as CuttingTimeInputs[keyof CuttingTimeInputs],
+                      feedUnit: v as CuttingTimeInputs['feedUnit'],
                     })
                   }
                 />
@@ -115,101 +118,150 @@ export function CuttingTimeCalculator() {
           <div className="space-y-4">
             {inputs.operationType === 'milling' && (
               <>
-                <Input
-                  label="Tool Path Length"
-                  type="number"
-                  value={inputs.pathLength}
-                  onChange={(v) => setInputs({ ...inputs, pathLength: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.pathUnit}
-                />
-                <Input
-                  label="Feed Rate"
-                  type="number"
-                  value={inputs.feedRate}
-                  onChange={(v) => setInputs({ ...inputs, feedRate: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.feedUnit}
-                />
-                <Input
-                  label="Number of Passes"
-                  type="number"
-                  value={inputs.numberOfPasses}
-                  onChange={(v) => setInputs({ ...inputs, numberOfPasses: parseInt(v) || 1 })}
-                  min={1}
-                />
+                <div>
+                  <Label htmlFor="tool-path-length">Tool Path Length ({inputs.pathUnit})</Label>
+                  <Input
+                    id="tool-path-length"
+                    type="number"
+                    value={inputs.pathLength}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, pathLength: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="feed-rate">Feed Rate ({inputs.feedUnit})</Label>
+                  <Input
+                    id="feed-rate"
+                    type="number"
+                    value={inputs.feedRate}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, feedRate: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="number-of-passes">Number of Passes</Label>
+                  <Input
+                    id="number-of-passes"
+                    type="number"
+                    value={inputs.numberOfPasses}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, numberOfPasses: parseInt(e.currentTarget.value) || 1 })
+                    }
+                    min={1}
+                  />
+                </div>
               </>
             )}
 
             {inputs.operationType === 'turning' && (
               <>
-                <Input
-                  label="Part Length"
-                  type="number"
-                  value={inputs.partLength}
-                  onChange={(v) => setInputs({ ...inputs, partLength: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.pathUnit}
-                />
-                <Input
-                  label="Part Diameter"
-                  type="number"
-                  value={inputs.partDiameter}
-                  onChange={(v) => setInputs({ ...inputs, partDiameter: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.pathUnit}
-                />
-                <Input
-                  label="Feed Rate"
-                  type="number"
-                  value={inputs.feedRate}
-                  onChange={(v) => setInputs({ ...inputs, feedRate: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.feedUnit}
-                />
-                <Input
-                  label="Number of Passes"
-                  type="number"
-                  value={inputs.numberOfPasses}
-                  onChange={(v) => setInputs({ ...inputs, numberOfPasses: parseInt(v) || 1 })}
-                  min={1}
-                />
+                <div>
+                  <Label htmlFor="part-length">Part Length ({inputs.pathUnit})</Label>
+                  <Input
+                    id="part-length"
+                    type="number"
+                    value={inputs.partLength}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, partLength: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="part-diameter">Part Diameter ({inputs.pathUnit})</Label>
+                  <Input
+                    id="part-diameter"
+                    type="number"
+                    value={inputs.partDiameter}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, partDiameter: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="feed-rate-2">Feed Rate ({inputs.feedUnit})</Label>
+                  <Input
+                    id="feed-rate-2"
+                    type="number"
+                    value={inputs.feedRate}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, feedRate: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="number-of-passes-2">Number of Passes</Label>
+                  <Input
+                    id="number-of-passes-2"
+                    type="number"
+                    value={inputs.numberOfPasses}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, numberOfPasses: parseInt(e.currentTarget.value) || 1 })
+                    }
+                    min={1}
+                  />
+                </div>
               </>
             )}
 
             {inputs.operationType === 'drilling' && (
               <>
-                <Input
-                  label="Hole Depth"
-                  type="number"
-                  value={inputs.holeDepth}
-                  onChange={(v) => setInputs({ ...inputs, holeDepth: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.pathUnit}
-                />
-                <Input
-                  label="Number of Holes"
-                  type="number"
-                  value={inputs.numberOfHoles}
-                  onChange={(v) => setInputs({ ...inputs, numberOfHoles: parseInt(v) || 1 })}
-                  min={1}
-                />
-                <Input
-                  label="Feed Rate"
-                  type="number"
-                  value={inputs.feedRate}
-                  onChange={(v) => setInputs({ ...inputs, feedRate: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.feedUnit}
-                />
-                <Input
-                  label="Peck Depth (0 for no peck)"
-                  type="number"
-                  value={inputs.peckDepth}
-                  onChange={(v) => setInputs({ ...inputs, peckDepth: parseFloat(v) || 0 })}
-                  min={0}
-                  suffix={inputs.pathUnit}
-                />
+                <div>
+                  <Label htmlFor="hole-depth">Hole Depth ({inputs.pathUnit})</Label>
+                  <Input
+                    id="hole-depth"
+                    type="number"
+                    value={inputs.holeDepth}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, holeDepth: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="number-of-holes">Number of Holes</Label>
+                  <Input
+                    id="number-of-holes"
+                    type="number"
+                    value={inputs.numberOfHoles}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, numberOfHoles: parseInt(e.currentTarget.value) || 1 })
+                    }
+                    min={1}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="feed-rate-3">Feed Rate ({inputs.feedUnit})</Label>
+                  <Input
+                    id="feed-rate-3"
+                    type="number"
+                    value={inputs.feedRate}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, feedRate: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="peck-depth-0-for-no-peck">
+                    Peck Depth (0 for no peck) ({inputs.pathUnit})
+                  </Label>
+                  <Input
+                    id="peck-depth-0-for-no-peck"
+                    type="number"
+                    value={inputs.peckDepth}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, peckDepth: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0}
+                  />
+                </div>
               </>
             )}
           </div>
@@ -219,52 +271,81 @@ export function CuttingTimeCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Job Parameters</h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input
-              label="Rapid Rate"
-              type="number"
-              value={inputs.rapidRate}
-              onChange={(v) => setInputs({ ...inputs, rapidRate: parseFloat(v) || 0 })}
-              min={0}
-              suffix="ipm"
-            />
-            <Input
-              label="Rapid Distance"
-              type="number"
-              value={inputs.rapidDistance}
-              onChange={(v) => setInputs({ ...inputs, rapidDistance: parseFloat(v) || 0 })}
-              min={0}
-              suffix={inputs.pathUnit}
-            />
-            <Input
-              label="Tool Changes"
-              type="number"
-              value={inputs.numberOfToolChanges}
-              onChange={(v) => setInputs({ ...inputs, numberOfToolChanges: parseInt(v) || 0 })}
-              min={0}
-            />
-            <Input
-              label="Time per Change"
-              type="number"
-              value={inputs.toolChangeTime}
-              onChange={(v) => setInputs({ ...inputs, toolChangeTime: parseFloat(v) || 0 })}
-              min={0}
-              suffix="min"
-            />
-            <Input
-              label="Setup Time"
-              type="number"
-              value={inputs.setupTime}
-              onChange={(v) => setInputs({ ...inputs, setupTime: parseFloat(v) || 0 })}
-              min={0}
-              suffix="min"
-            />
-            <Input
-              label="Quantity"
-              type="number"
-              value={inputs.quantity}
-              onChange={(v) => setInputs({ ...inputs, quantity: parseInt(v) || 1 })}
-              min={1}
-            />
+            <div>
+              <Label htmlFor="rapid-rate">Rapid Rate (ipm)</Label>
+              <Input
+                id="rapid-rate"
+                type="number"
+                value={inputs.rapidRate}
+                onChange={(e) =>
+                  setInputs({ ...inputs, rapidRate: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0}
+              />
+            </div>
+            <div>
+              <Label htmlFor="rapid-distance">Rapid Distance ({inputs.pathUnit})</Label>
+              <Input
+                id="rapid-distance"
+                type="number"
+                value={inputs.rapidDistance}
+                onChange={(e) =>
+                  setInputs({ ...inputs, rapidDistance: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0}
+              />
+            </div>
+            <div>
+              <Label htmlFor="tool-changes">Tool Changes</Label>
+              <Input
+                id="tool-changes"
+                type="number"
+                value={inputs.numberOfToolChanges}
+                onChange={(e) =>
+                  setInputs({
+                    ...inputs,
+                    numberOfToolChanges: parseInt(e.currentTarget.value) || 0,
+                  })
+                }
+                min={0}
+              />
+            </div>
+            <div>
+              <Label htmlFor="time-per-change">Time per Change (min)</Label>
+              <Input
+                id="time-per-change"
+                type="number"
+                value={inputs.toolChangeTime}
+                onChange={(e) =>
+                  setInputs({ ...inputs, toolChangeTime: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0}
+              />
+            </div>
+            <div>
+              <Label htmlFor="setup-time">Setup Time (min)</Label>
+              <Input
+                id="setup-time"
+                type="number"
+                value={inputs.setupTime}
+                onChange={(e) =>
+                  setInputs({ ...inputs, setupTime: parseFloat(e.currentTarget.value) || 0 })
+                }
+                min={0}
+              />
+            </div>
+            <div>
+              <Label htmlFor="quantity">Quantity</Label>
+              <Input
+                id="quantity"
+                type="number"
+                value={inputs.quantity}
+                onChange={(e) =>
+                  setInputs({ ...inputs, quantity: parseInt(e.currentTarget.value) || 1 })
+                }
+                min={1}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -282,18 +363,10 @@ export function CuttingTimeCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard label="Cutting Time" value={formatTime(results.cuttingTime)} color="blue" />
-          <ResultCard label="Rapid Time" value={formatTime(results.rapidTime)} color="green" />
-          <ResultCard
-            label="Tool Change Time"
-            value={formatTime(results.toolChangeTime)}
-            color="purple"
-          />
-          <ResultCard
-            label="Parts Per Hour"
-            value={results.partsPerHour.toString()}
-            color="green"
-          />
+          <ResultCard label="Cutting Time" value={formatTime(results.cuttingTime)} />
+          <ResultCard label="Rapid Time" value={formatTime(results.rapidTime)} />
+          <ResultCard label="Tool Change Time" value={formatTime(results.toolChangeTime)} />
+          <ResultCard label="Parts Per Hour" value={results.partsPerHour.toString()} />
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
@@ -322,15 +395,18 @@ export function CuttingTimeCalculator() {
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h3 className="mb-4 text-lg font-semibold text-[var(--color-text)]">Cost Estimate</h3>
-          <Select
-            label="Machine Rate"
-            value={machineRate.toString()}
-            onChange={(v) => setMachineRate(parseFloat(v))}
-            options={MACHINE_RATES.map((r) => ({
-              value: r.rate.toString(),
-              label: `${r.label} ($${r.rate}/hr)`,
-            }))}
-          />
+          <div>
+            <Label htmlFor="machine-rate">Machine Rate</Label>
+            <Select
+              id="machine-rate"
+              value={machineRate.toString()}
+              onChange={(v) => setMachineRate(parseFloat(v))}
+              options={MACHINE_RATES.map((r) => ({
+                value: r.rate.toString(),
+                label: `${r.label} ($${r.rate}/hr)`,
+              }))}
+            />
+          </div>
           <div className="mt-4 text-center">
             <div className="text-3xl font-bold text-green-400">${adjustedCost.toFixed(2)}</div>
             <div className="text-sm text-[var(--color-subtle)]">

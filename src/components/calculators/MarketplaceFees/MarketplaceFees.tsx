@@ -83,7 +83,7 @@ export default function MarketplaceFees() {
                     min={0}
                     step={1}
                     value={inputs.itemPrice}
-                    onChange={(e) => updateInput('itemPrice', Number(e.target.value))}
+                    onChange={(e) => updateInput('itemPrice', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -96,7 +96,7 @@ export default function MarketplaceFees() {
                     min={0}
                     step={1}
                     value={inputs.shippingCharged}
-                    onChange={(e) => updateInput('shippingCharged', Number(e.target.value))}
+                    onChange={(e) => updateInput('shippingCharged', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -111,7 +111,7 @@ export default function MarketplaceFees() {
                     min={0}
                     step={1}
                     value={inputs.productCost}
-                    onChange={(e) => updateInput('productCost', Number(e.target.value))}
+                    onChange={(e) => updateInput('productCost', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -124,7 +124,7 @@ export default function MarketplaceFees() {
                     min={0}
                     step={1}
                     value={inputs.shippingCost}
-                    onChange={(e) => updateInput('shippingCost', Number(e.target.value))}
+                    onChange={(e) => updateInput('shippingCost', Number(e.currentTarget.value))}
                   />
                 </div>
               </Grid>
@@ -162,7 +162,7 @@ export default function MarketplaceFees() {
                       min={0}
                       step={0.5}
                       value={inputs.fbaFee}
-                      onChange={(e) => updateInput('fbaFee', Number(e.target.value))}
+                      onChange={(e) => updateInput('fbaFee', Number(e.currentTarget.value))}
                     />
                     <p className="text-xs text-[var(--color-muted)] mt-1">
                       Varies by size/weight - check Amazon calculator

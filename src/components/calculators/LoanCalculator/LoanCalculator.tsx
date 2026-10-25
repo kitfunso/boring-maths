@@ -79,7 +79,7 @@ export default function LoanCalculator() {
                 max={1000000}
                 step={1000}
                 value={inputs.loanAmount}
-                onChange={(e) => updateInput('loanAmount', Number(e.target.value))}
+                onChange={(e) => updateInput('loanAmount', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -96,7 +96,7 @@ export default function LoanCalculator() {
                 max={30}
                 step={0.1}
                 value={inputs.interestRate}
-                onChange={(e) => updateInput('interestRate', Number(e.target.value))}
+                onChange={(e) => updateInput('interestRate', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 Typical for {LOAN_TYPES.find((t) => t.value === inputs.loanType)?.label}:{' '}
@@ -154,7 +154,7 @@ export default function LoanCalculator() {
                     label="Total Interest"
                     value={formatCurrency(result.totalInterest, inputs.currency)}
                     sublabel={`${interestPercentage}% of total`}
-                    valueColor="text-red-400"
+                    valueColor="error"
                   />
                   <MetricCard
                     label="Total Payment"

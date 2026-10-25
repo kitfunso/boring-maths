@@ -81,7 +81,7 @@ export default function OvertimeCalculator() {
                 min={0}
                 step={1}
                 value={inputs.hourlyRate}
-                onChange={(e) => updateInput('hourlyRate', Number(e.target.value))}
+                onChange={(e) => updateInput('hourlyRate', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -97,7 +97,7 @@ export default function OvertimeCalculator() {
                 min={0}
                 step={1000}
                 value={inputs.currentAnnualIncome}
-                onChange={(e) => updateInput('currentAnnualIncome', Number(e.target.value))}
+                onChange={(e) => updateInput('currentAnnualIncome', Number(e.currentTarget.value))}
               />
               <p className="text-sm text-[var(--color-muted)] mt-1">
                 This determines your current tax bracket
@@ -171,7 +171,9 @@ export default function OvertimeCalculator() {
                     max={15}
                     step={0.5}
                     value={Math.round(inputs.stateTaxRate * 100)}
-                    onChange={(e) => updateInput('stateTaxRate', Number(e.target.value) / 100)}
+                    onChange={(e) =>
+                      updateInput('stateTaxRate', Number(e.currentTarget.value) / 100)
+                    }
                   />
                 </div>
               </Grid>

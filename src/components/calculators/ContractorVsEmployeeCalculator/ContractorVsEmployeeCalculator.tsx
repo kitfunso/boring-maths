@@ -10,11 +10,12 @@ import {
   formatHourlyRate,
   formatPercent,
   getComparisonColor,
-  getTaxBrackets,
-  SELF_EMPLOYMENT_TAX_INFO,
+  SOCIAL_TAX_INFO,
 } from './calculations';
 import { getDefaultInputs, type ContractorVsEmployeeInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
+import type { FederalFilingStatus } from '../../../lib/us-tax-2026';
+import { EU_TAX_DATA } from '../EUSalaryCalculator/types';
 import {
   ThemeProvider,
   Card,
@@ -22,6 +23,8 @@ import {
   CurrencySelector,
   Label,
   Input,
+  Select,
+  type SelectOption,
   Grid,
   Divider,
   ResultCard,
@@ -30,6 +33,17 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
+const FILING_STATUS_OPTIONS: SelectOption<FederalFilingStatus>[] = [
+  { value: 'single', label: 'Single' },
+  { value: 'married_jointly', label: 'Married filing jointly' },
+  { value: 'married_separately', label: 'Married filing separately' },
+  { value: 'head_of_household', label: 'Head of household' },
+];
+
+const EURO_COUNTRY_OPTIONS: SelectOption[] = EU_TAX_DATA.filter((c) => c.currency === 'EUR').map(
+  (c) => ({ value: c.code, label: c.name })
+);
+
 export default function ContractorVsEmployeeCalculator() {
   const { inputs, result, updateInput, setInputs } = useCalculatorState<
     ContractorVsEmployeeInputs,
@@ -82,7 +96,9 @@ export default function ContractorVsEmployeeCalculator() {
                     max={1000}
                     step={5}
                     value={inputs.contractorHourlyRate}
-                    onChange={(e) => updateInput('contractorHourlyRate', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('contractorHourlyRate', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
 
@@ -96,7 +112,7 @@ export default function ContractorVsEmployeeCalculator() {
                       max={80}
                       value={inputs.contractorBillableHoursPerWeek}
                       onChange={(e) =>
-                        updateInput('contractorBillableHoursPerWeek', Number(e.target.value))
+                        updateInput('contractorBillableHoursPerWeek', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -109,7 +125,7 @@ export default function ContractorVsEmployeeCalculator() {
                       max={52}
                       value={inputs.contractorWeeksPerYear}
                       onChange={(e) =>
-                        updateInput('contractorWeeksPerYear', Number(e.target.value))
+                        updateInput('contractorWeeksPerYear', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -137,7 +153,7 @@ export default function ContractorVsEmployeeCalculator() {
                     step={50}
                     value={inputs.contractorHealthInsuranceMonthly}
                     onChange={(e) =>
-                      updateInput('contractorHealthInsuranceMonthly', Number(e.target.value))
+                      updateInput('contractorHealthInsuranceMonthly', Number(e.currentTarget.value))
                     }
                   />
                 </div>
@@ -152,7 +168,10 @@ export default function ContractorVsEmployeeCalculator() {
                     step={1}
                     value={inputs.contractorRetirementContribPercent}
                     onChange={(e) =>
-                      updateInput('contractorRetirementContribPercent', Number(e.target.value))
+                      updateInput(
+                        'contractorRetirementContribPercent',
+                        Number(e.currentTarget.value)
+                      )
                     }
                   />
                 </div>
@@ -169,7 +188,10 @@ export default function ContractorVsEmployeeCalculator() {
                     step={50}
                     value={inputs.contractorBusinessExpensesMonthly}
                     onChange={(e) =>
-                      updateInput('contractorBusinessExpensesMonthly', Number(e.target.value))
+                      updateInput(
+                        'contractorBusinessExpensesMonthly',
+                        Number(e.currentTarget.value)
+                      )
                     }
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">
@@ -188,7 +210,7 @@ export default function ContractorVsEmployeeCalculator() {
                       step={100}
                       value={inputs.contractorAccountingAnnual}
                       onChange={(e) =>
-                        updateInput('contractorAccountingAnnual', Number(e.target.value))
+                        updateInput('contractorAccountingAnnual', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -202,7 +224,7 @@ export default function ContractorVsEmployeeCalculator() {
                       step={100}
                       value={inputs.contractorInsuranceAnnual}
                       onChange={(e) =>
-                        updateInput('contractorInsuranceAnnual', Number(e.target.value))
+                        updateInput('contractorInsuranceAnnual', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -225,7 +247,7 @@ export default function ContractorVsEmployeeCalculator() {
                     max={1000000}
                     step={5000}
                     value={inputs.employeeSalary}
-                    onChange={(e) => updateInput('employeeSalary', Number(e.target.value))}
+                    onChange={(e) => updateInput('employeeSalary', Number(e.currentTarget.value))}
                   />
                 </div>
 
@@ -238,7 +260,9 @@ export default function ContractorVsEmployeeCalculator() {
                     max={100}
                     step={5}
                     value={inputs.employeeBonusPercent}
-                    onChange={(e) => updateInput('employeeBonusPercent', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('employeeBonusPercent', Number(e.currentTarget.value))
+                    }
                   />
                 </div>
 
@@ -254,7 +278,9 @@ export default function ContractorVsEmployeeCalculator() {
                       max={10}
                       step={0.5}
                       value={inputs.employer401kMatch}
-                      onChange={(e) => updateInput('employer401kMatch', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('employer401kMatch', Number(e.currentTarget.value))
+                      }
                     />
                   </div>
                   <div>
@@ -267,7 +293,7 @@ export default function ContractorVsEmployeeCalculator() {
                       step={1}
                       value={inputs.employer401kMatchLimit}
                       onChange={(e) =>
-                        updateInput('employer401kMatchLimit', Number(e.target.value))
+                        updateInput('employer401kMatchLimit', Number(e.currentTarget.value))
                       }
                     />
                   </div>
@@ -285,7 +311,7 @@ export default function ContractorVsEmployeeCalculator() {
                     step={50}
                     value={inputs.employerHealthInsuranceMonthly}
                     onChange={(e) =>
-                      updateInput('employerHealthInsuranceMonthly', Number(e.target.value))
+                      updateInput('employerHealthInsuranceMonthly', Number(e.currentTarget.value))
                     }
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">
@@ -304,7 +330,7 @@ export default function ContractorVsEmployeeCalculator() {
                       step={10}
                       value={inputs.employerDentalVisionMonthly}
                       onChange={(e) =>
-                        updateInput('employerDentalVisionMonthly', Number(e.target.value))
+                        updateInput('employerDentalVisionMonthly', Number(e.currentTarget.value))
                       }
                     />
                     <p className="text-xs text-[var(--color-muted)] mt-1">per month</p>
@@ -319,7 +345,7 @@ export default function ContractorVsEmployeeCalculator() {
                       step={10}
                       value={inputs.employerLifeDisabilityMonthly}
                       onChange={(e) =>
-                        updateInput('employerLifeDisabilityMonthly', Number(e.target.value))
+                        updateInput('employerLifeDisabilityMonthly', Number(e.currentTarget.value))
                       }
                     />
                     <p className="text-xs text-[var(--color-muted)] mt-1">per month</p>
@@ -335,7 +361,9 @@ export default function ContractorVsEmployeeCalculator() {
                       min={0}
                       max={50}
                       value={inputs.paidTimeOffDays}
-                      onChange={(e) => updateInput('paidTimeOffDays', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('paidTimeOffDays', Number(e.currentTarget.value))
+                      }
                     />
                   </div>
                   <div>
@@ -346,7 +374,9 @@ export default function ContractorVsEmployeeCalculator() {
                       min={0}
                       max={20}
                       value={inputs.paidHolidaysDays}
-                      onChange={(e) => updateInput('paidHolidaysDays', Number(e.target.value))}
+                      onChange={(e) =>
+                        updateInput('paidHolidaysDays', Number(e.currentTarget.value))
+                      }
                     />
                   </div>
                 </Grid>
@@ -360,7 +390,9 @@ export default function ContractorVsEmployeeCalculator() {
                     max={50000}
                     step={500}
                     value={inputs.otherBenefitsAnnual}
-                    onChange={(e) => updateInput('otherBenefitsAnnual', Number(e.target.value))}
+                    onChange={(e) =>
+                      updateInput('otherBenefitsAnnual', Number(e.currentTarget.value))
+                    }
                   />
                   <p className="text-xs text-[var(--color-muted)] mt-1">
                     Stock grants, gym, tuition, etc.
@@ -387,75 +419,79 @@ export default function ContractorVsEmployeeCalculator() {
                   />
                 </svg>
               </summary>
-              <Grid responsive={{ sm: 1, md: 3 }} gap="md" className="mt-3">
-                <div>
-                  <Label htmlFor="federalTax">
-                    {inputs.currency === 'GBP'
-                      ? 'Income Tax Band'
-                      : inputs.currency === 'EUR'
-                        ? 'Income Tax Rate'
-                        : 'Federal Tax Bracket'}
-                  </Label>
-                  <select
-                    id="federalTax"
-                    className="w-full bg-[var(--color-charcoal)] border border-white/10 rounded-xl px-4 py-3 text-[var(--color-cream)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]/50 focus:border-[var(--color-accent)]/50 cursor-pointer hover:bg-[var(--color-slate)] transition-colors"
-                    style={{ colorScheme: 'dark' }}
-                    value={inputs.federalTaxBracket}
-                    onChange={(e) => updateInput('federalTaxBracket', Number(e.target.value))}
-                  >
-                    {getTaxBrackets(inputs.currency).map((bracket) => (
-                      <option
-                        key={bracket.rate}
-                        value={bracket.rate}
-                        className="bg-[var(--color-charcoal)] text-[var(--color-cream)]"
-                      >
-                        {bracket.label} ({bracket.range})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <Label htmlFor="stateTax">
-                    {inputs.currency === 'USD' ? 'State Tax Rate (%)' : 'Local/Regional Tax (%)'}
-                  </Label>
-                  <Input
-                    id="stateTax"
-                    type="number"
-                    min={0}
-                    max={15}
-                    step={0.5}
-                    value={Math.round(inputs.stateTaxRate * 1000) / 10}
-                    onChange={(e) => updateInput('stateTaxRate', Number(e.target.value) / 100)}
-                  />
-                  {inputs.currency !== 'USD' && (
-                    <p className="text-xs text-[var(--color-muted)] mt-1">
-                      Optional local taxes if applicable
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <Label htmlFor="seTax">
-                    {inputs.currency === 'GBP'
-                      ? 'Self-Employed NICs (%)'
-                      : 'Self-Employment Tax (%)'}
-                  </Label>
-                  <Input
-                    id="seTax"
-                    type="number"
-                    min={0}
-                    max={20}
-                    step={0.1}
-                    value={Math.round(inputs.selfEmploymentTaxRate * 1000) / 10}
-                    onChange={(e) =>
-                      updateInput('selfEmploymentTaxRate', Number(e.target.value) / 100)
-                    }
-                  />
-                  <p className="text-xs text-[var(--color-muted)] mt-1">
-                    {inputs.currency === 'USD' && '15.3% US (SS + Medicare)'}
-                    {inputs.currency === 'GBP' && '9% Class 4 NICs'}
-                    {inputs.currency === 'EUR' && '~15% social contributions (varies by country)'}
+              <Grid responsive={{ sm: 1, md: 2 }} gap="md" className="mt-3">
+                {inputs.currency === 'USD' && (
+                  <>
+                    <div>
+                      <Label htmlFor="filingStatus">Filing Status</Label>
+                      <Select
+                        id="filingStatus"
+                        options={FILING_STATUS_OPTIONS}
+                        value={inputs.filingStatus}
+                        onChange={(value) => updateInput('filingStatus', value)}
+                      />
+                      <p className="text-xs text-[var(--color-muted)] mt-1">
+                        2026 federal brackets, standard deduction and 20% QBI deduction
+                      </p>
+                    </div>
+                    <div>
+                      <Label htmlFor="stateTax">State Tax Rate (%)</Label>
+                      <Input
+                        id="stateTax"
+                        type="number"
+                        min={0}
+                        max={15}
+                        step={0.5}
+                        value={Math.round(inputs.stateTaxRate * 1000) / 10}
+                        onChange={(e) =>
+                          updateInput('stateTaxRate', Number(e.currentTarget.value) / 100)
+                        }
+                      />
+                      <p className="text-xs text-[var(--color-muted)] mt-1">
+                        Flat rate on adjusted gross income
+                      </p>
+                    </div>
+                  </>
+                )}
+                {inputs.currency === 'EUR' && (
+                  <>
+                    <div>
+                      <Label htmlFor="euCountry">Country</Label>
+                      <Select
+                        id="euCountry"
+                        options={EURO_COUNTRY_OPTIONS}
+                        value={inputs.euCountry}
+                        onChange={(value) => updateInput('euCountry', value)}
+                      />
+                      <p className="text-xs text-[var(--color-muted)] mt-1">
+                        2026 income tax and employee social security for this country
+                      </p>
+                    </div>
+                    <div>
+                      <Label htmlFor="seSocial">Self-Employed Social Contributions (%)</Label>
+                      <Input
+                        id="seSocial"
+                        type="number"
+                        min={0}
+                        max={50}
+                        step={0.5}
+                        value={Math.round(inputs.selfEmployedSocialRate * 1000) / 10}
+                        onChange={(e) =>
+                          updateInput('selfEmployedSocialRate', Number(e.currentTarget.value) / 100)
+                        }
+                      />
+                      <p className="text-xs text-[var(--color-muted)] mt-1">
+                        Depends on the country and scheme. Enter your own rate.
+                      </p>
+                    </div>
+                  </>
+                )}
+                {inputs.currency === 'GBP' && (
+                  <p className="text-sm text-[var(--color-muted)]">
+                    2026/27 income tax and National Insurance (England, Wales and Northern Ireland).
+                    Contractors pay Class 4 on profit; employees pay Class 1 on pay.
                   </p>
-                </div>
+                )}
               </Grid>
             </details>
           </div>
@@ -541,7 +577,8 @@ export default function ContractorVsEmployeeCalculator() {
                   </div>
                   <div className="text-sm text-[var(--color-muted)] mt-1">
                     (Break-even:{' '}
-                    {formatHourlyRate(result.comparison.breakEvenContractRate, result.currency)})
+                    {formatHourlyRate(result.comparison.breakEvenContractRate, result.currency)},
+                    plus a 10% buffer)
                   </div>
                 </div>
                 <div>
@@ -622,9 +659,15 @@ export default function ContractorVsEmployeeCalculator() {
                 sublabel="Employee benefits value"
               />
               <MetricCard
-                label={inputs.currency === 'GBP' ? 'Self-Emp NICs' : 'Self-Emp Tax'}
-                value={formatCurrency(result.contractor.selfEmploymentTax, result.currency)}
-                sublabel={SELF_EMPLOYMENT_TAX_INFO[inputs.currency].label}
+                label={
+                  inputs.currency === 'GBP'
+                    ? 'Class 4 NI'
+                    : inputs.currency === 'EUR'
+                      ? 'Social Contributions'
+                      : 'Self-Emp Tax'
+                }
+                value={formatCurrency(result.contractor.socialTax, result.currency)}
+                sublabel={SOCIAL_TAX_INFO[inputs.currency].label}
               />
               <MetricCard
                 label="Business Costs"

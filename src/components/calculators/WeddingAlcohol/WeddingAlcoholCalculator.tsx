@@ -99,7 +99,7 @@ export default function WeddingAlcoholCalculator() {
                   min={1}
                   max={1000}
                   value={inputs.guestCount}
-                  onChange={(e) => updateInput('guestCount', Number(e.target.value))}
+                  onChange={(e) => updateInput('guestCount', Number(e.currentTarget.value))}
                 />
               </div>
 
@@ -113,7 +113,7 @@ export default function WeddingAlcoholCalculator() {
                   min={1}
                   max={12}
                   value={inputs.eventHours}
-                  onChange={(e) => updateInput('eventHours', Number(e.target.value))}
+                  onChange={(e) => updateInput('eventHours', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>

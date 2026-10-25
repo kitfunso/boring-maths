@@ -183,7 +183,7 @@ export default function PressureDropCalculator() {
                   min={1}
                   step={inputs.unitSystem === 'metric' ? 1 : 0.125}
                   value={inputs.diameter}
-                  onChange={(e) => updateInput('diameter', Number(e.target.value))}
+                  onChange={(e) => updateInput('diameter', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -196,7 +196,7 @@ export default function PressureDropCalculator() {
                   min={0.1}
                   step={1}
                   value={inputs.length}
-                  onChange={(e) => updateInput('length', Number(e.target.value))}
+                  onChange={(e) => updateInput('length', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -207,7 +207,7 @@ export default function PressureDropCalculator() {
                   min={0.0001}
                   step={0.001}
                   value={inputs.roughness}
-                  onChange={(e) => updateInput('roughness', Number(e.target.value))}
+                  onChange={(e) => updateInput('roughness', Number(e.currentTarget.value))}
                   disabled={inputs.pipeMaterial !== 'custom'}
                 />
               </div>
@@ -241,7 +241,7 @@ export default function PressureDropCalculator() {
                   min={0.01}
                   step={0.1}
                   value={inputs.velocity}
-                  onChange={(e) => updateInput('velocity', Number(e.target.value))}
+                  onChange={(e) => updateInput('velocity', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -254,7 +254,7 @@ export default function PressureDropCalculator() {
                   min={0.1}
                   step={1}
                   value={inputs.density}
-                  onChange={(e) => updateInput('density', Number(e.target.value))}
+                  onChange={(e) => updateInput('density', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -267,7 +267,7 @@ export default function PressureDropCalculator() {
                   min={0.000001}
                   step={0.0001}
                   value={inputs.viscosity}
-                  onChange={(e) => updateInput('viscosity', Number(e.target.value))}
+                  onChange={(e) => updateInput('viscosity', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>

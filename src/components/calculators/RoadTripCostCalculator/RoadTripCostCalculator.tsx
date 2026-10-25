@@ -139,7 +139,7 @@ export default function RoadTripCostCalculator() {
                 min={0}
                 step={10}
                 value={inputs.totalDistance}
-                onChange={(e) => updateInput('totalDistance', Number(e.target.value))}
+                onChange={(e) => updateInput('totalDistance', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -155,7 +155,7 @@ export default function RoadTripCostCalculator() {
                   min={0}
                   step={0.1}
                   value={inputs.fuelEconomy}
-                  onChange={(e) => updateInput('fuelEconomy', Number(e.target.value))}
+                  onChange={(e) => updateInput('fuelEconomy', Number(e.currentTarget.value))}
                 />
                 {fuelUnitOptions.length > 1 && (
                   <div className="mt-2">
@@ -182,7 +182,7 @@ export default function RoadTripCostCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.fuelPrice}
-                  onChange={(e) => updateInput('fuelPrice', Number(e.target.value))}
+                  onChange={(e) => updateInput('fuelPrice', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -200,7 +200,7 @@ export default function RoadTripCostCalculator() {
                   max={60}
                   step={1}
                   value={inputs.tripDays}
-                  onChange={(e) => updateInput('tripDays', Number(e.target.value))}
+                  onChange={(e) => updateInput('tripDays', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -215,7 +215,10 @@ export default function RoadTripCostCalculator() {
                   step={1}
                   value={inputs.passengers}
                   onChange={(e) =>
-                    updateInput('passengers', Math.min(10, Math.max(1, Number(e.target.value))))
+                    updateInput(
+                      'passengers',
+                      Math.min(10, Math.max(1, Number(e.currentTarget.value)))
+                    )
                   }
                 />
               </div>
@@ -233,7 +236,7 @@ export default function RoadTripCostCalculator() {
                   min={0}
                   step={1}
                   value={inputs.tolls}
-                  onChange={(e) => updateInput('tolls', Number(e.target.value))}
+                  onChange={(e) => updateInput('tolls', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -246,7 +249,7 @@ export default function RoadTripCostCalculator() {
                   min={0}
                   step={5}
                   value={inputs.foodBudgetPerDay}
-                  onChange={(e) => updateInput('foodBudgetPerDay', Number(e.target.value))}
+                  onChange={(e) => updateInput('foodBudgetPerDay', Number(e.currentTarget.value))}
                 />
               </div>
               <div>
@@ -259,7 +262,7 @@ export default function RoadTripCostCalculator() {
                   min={0}
                   step={10}
                   value={inputs.hotelPerNight}
-                  onChange={(e) => updateInput('hotelPerNight', Number(e.target.value))}
+                  onChange={(e) => updateInput('hotelPerNight', Number(e.currentTarget.value))}
                 />
               </div>
             </Grid>
@@ -292,7 +295,7 @@ export default function RoadTripCostCalculator() {
                     label="Fuel"
                     value={formatCurrency(result.totalFuelCost, inputs.currency)}
                     sublabel={`${formatNumber(result.fuelVolume)} ${result.fuelVolumeLabel}`}
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                   <MetricCard
                     label="Food"
@@ -327,7 +330,7 @@ export default function RoadTripCostCalculator() {
                     label="Total Trip"
                     value={formatCurrency(result.totalTripCost, inputs.currency)}
                     sublabel="all costs included"
-                    valueColor="text-[var(--color-accent)]"
+                    valueColor="themed"
                   />
                 </Grid>
 

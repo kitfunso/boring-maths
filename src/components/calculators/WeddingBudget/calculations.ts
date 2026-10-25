@@ -2,6 +2,7 @@
  * Wedding Budget Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type {
   WeddingBudgetInputs,
   WeddingBudgetResult,

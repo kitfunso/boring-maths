@@ -65,7 +65,7 @@ export function ButtonGroup<T extends string | number>({
 
   const cols = columns || ((options.length <= 4 ? options.length : 3) as 2 | 3 | 4);
 
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+  const handleKeyDown = (e: KeyboardEvent, index: number) => {
     let newIndex = index;
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       e.preventDefault();

@@ -49,7 +49,7 @@ export default function USQuarterlyTaxCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="Quarterly Estimated Tax Calculator"
@@ -116,6 +116,29 @@ export default function USQuarterlyTaxCalculator() {
               </div>
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Net profit from self-employment (after business expenses)
+              </p>
+            </div>
+
+            {/* W-2 Wages */}
+            <div>
+              <Label htmlFor="w2Wages">W-2 Wages</Label>
+              <div className="relative">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]">
+                  $
+                </span>
+                <Input
+                  id="w2Wages"
+                  type="number"
+                  value={inputs.w2Wages}
+                  onChange={(e) => updateInput('w2Wages', Number(e.currentTarget.value))}
+                  min={0}
+                  step={1000}
+                  className="pl-8"
+                />
+              </div>
+              <p className="text-xs text-[var(--color-muted)] mt-1">
+                Salary from any job (part of the total above). Wages use up the Social Security
+                limit first.
               </p>
             </div>
 
@@ -292,14 +315,20 @@ export default function USQuarterlyTaxCalculator() {
                 <p className="text-2xl font-semibold text-rose-400">
                   {formatCurrency(result.selfEmploymentTax)}
                 </p>
-                <p className="text-xs text-[var(--color-muted)] mt-1">15.3% on SE income</p>
+                <p className="text-xs text-[var(--color-muted)] mt-1">
+                  15.3% on 92.35% of SE profit
+                </p>
               </div>
               <div className="bg-white/5 rounded-xl p-4">
                 <p className="text-xs text-[var(--color-muted)]">Federal Income Tax</p>
                 <p className="text-2xl font-semibold text-blue-400">
                   {formatCurrency(result.federalIncomeTax)}
                 </p>
-                <p className="text-xs text-[var(--color-muted)] mt-1">Based on brackets</p>
+                <p className="text-xs text-[var(--color-muted)] mt-1">
+                  {result.qbiDeduction > 0
+                    ? `After the standard and ${formatCurrency(result.qbiDeduction)} QBI deductions`
+                    : 'After the standard deduction'}
+                </p>
               </div>
             </Grid>
 

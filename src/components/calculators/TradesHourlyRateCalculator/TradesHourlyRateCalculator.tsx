@@ -2,7 +2,6 @@
  * Tradesperson Hourly Rate Calculator - React Component
  */
 
-import { useMemo } from 'preact/hooks';
 import { calculateTradesHourlyRate, formatCurrency, formatCurrencyWhole } from './calculations';
 import {
   getDefaultInputs,
@@ -88,7 +87,7 @@ export default function TradesHourlyRateCalculator() {
                 min={0}
                 step={1000}
                 value={inputs.desiredAnnualIncome}
-                onChange={(e) => updateInput('desiredAnnualIncome', Number(e.target.value))}
+                onChange={(e) => updateInput('desiredAnnualIncome', Number(e.currentTarget.value))}
               />
             </div>
 
@@ -162,7 +161,7 @@ export default function TradesHourlyRateCalculator() {
                       min={0}
                       step={10}
                       value={inputs.overheads[key]}
-                      onChange={(e) => updateOverhead(key, Number(e.target.value))}
+                      onChange={(e) => updateOverhead(key, Number(e.currentTarget.value))}
                     />
                   </div>
                 ))}
@@ -204,13 +203,13 @@ export default function TradesHourlyRateCalculator() {
                     label="Take-Home"
                     value={formatCurrencyWhole(result.effectiveTakeHome, inputs.currency)}
                     sublabel="per year"
-                    valueColor="text-green-400"
+                    valueColor="success"
                   />
                   <MetricCard
                     label="Overheads"
                     value={formatCurrencyWhole(result.totalOverheadsYearly, inputs.currency)}
                     sublabel="per year"
-                    valueColor="text-red-400"
+                    valueColor="error"
                   />
                   <MetricCard
                     label="Billable Hours"

@@ -2,6 +2,7 @@
  * Startup Cost Calculator - Calculation Logic
  */
 
+import type { Currency } from '../../../lib/regions';
 import type { StartupCostInputs, StartupCostResult, CostBreakdownItem } from './types';
 import { BUSINESS_TYPES, AVG_EMPLOYEE_SALARY } from './types';
 

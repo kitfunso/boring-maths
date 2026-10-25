@@ -86,12 +86,13 @@ export function saveField<K extends keyof SharedCalculatorData>(
 
   const existing = readStoredData() || createEmptyStorage();
 
-  existing.data[key] = {
+  // TS cannot match a generic key against the mapped entry type, so write through a plain record
+  (existing.data as Record<string, SharedDataEntry<unknown>>)[key] = {
     value,
     source,
     sourceName,
     savedAt: Date.now(),
-  } as SharedDataEntry<NonNullable<SharedCalculatorData[K]>>;
+  };
 
   existing.lastUpdated = Date.now();
 
@@ -111,12 +112,12 @@ export function saveFields(
 
   for (const [key, value] of Object.entries(fields)) {
     if (value !== undefined && value !== null) {
-      existing.data[key as keyof SharedCalculatorData] = {
+      (existing.data as Record<string, SharedDataEntry<unknown>>)[key] = {
         value,
         source,
         sourceName,
         savedAt: now,
-      } as SharedDataEntry<NonNullable<SharedCalculatorData[keyof SharedCalculatorData]>>;
+      };
     }
   }
 
@@ -168,7 +169,7 @@ export function getFieldValues<K extends keyof SharedCalculatorData>(
   const entries = getFields(keys);
   const result: Partial<Pick<SharedCalculatorData, K>> = {};
 
-  for (const [key, entry] of Object.entries(entries)) {
+  for (const [key, entry] of Object.entries(entries) as [string, SharedDataEntry<unknown>][]) {
     if (entry) {
       (result as Record<string, unknown>)[key] = entry.value;
     }

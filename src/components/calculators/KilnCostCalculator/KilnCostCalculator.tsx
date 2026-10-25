@@ -4,7 +4,7 @@
  */
 
 import { useMemo } from 'preact/hooks';
-import { ResultCard, Input, Select, ButtonGroup, Slider } from '../../ui';
+import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { KilnCostInputs } from './types';
 import { KILN_PRESETS, FIRING_TYPES } from './types';
@@ -54,7 +54,7 @@ export function KilnCostCalculator() {
                 ]}
                 value={inputs.kilnType}
                 onChange={(v) =>
-                  setInputs({ ...inputs, kilnType: v as KilnCostInputs[keyof KilnCostInputs] })
+                  setInputs({ ...inputs, kilnType: v as KilnCostInputs['kilnType'] })
                 }
               />
             </div>
@@ -78,25 +78,33 @@ export function KilnCostCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <Input
-                label="Kiln Size"
-                type="number"
-                value={inputs.kilnSize}
-                onChange={(v) => setInputs({ ...inputs, kilnSize: parseFloat(v) || 0 })}
-                min={0.5}
-                step={0.5}
-                suffix="cu ft"
-              />
-              {inputs.kilnType === 'electric' && (
+              <div>
+                <Label htmlFor="kiln-size">Kiln Size (cu ft)</Label>
                 <Input
-                  label="Kiln Wattage"
+                  id="kiln-size"
                   type="number"
-                  value={inputs.kilnWattage}
-                  onChange={(v) => setInputs({ ...inputs, kilnWattage: parseFloat(v) || 0 })}
-                  min={1}
+                  value={inputs.kilnSize}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, kilnSize: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={0.5}
                   step={0.5}
-                  suffix="kW"
                 />
+              </div>
+              {inputs.kilnType === 'electric' && (
+                <div>
+                  <Label htmlFor="kiln-wattage">Kiln Wattage (kW)</Label>
+                  <Input
+                    id="kiln-wattage"
+                    type="number"
+                    value={inputs.kilnWattage}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, kilnWattage: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={1}
+                    step={0.5}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -106,38 +114,48 @@ export function KilnCostCalculator() {
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Firing Program</h2>
 
           <div className="space-y-4">
-            <Select
-              label="Firing Type"
-              value={inputs.firingType}
-              onChange={(v) => {
-                const firingType = FIRING_TYPES.find((f) => f.value === v);
-                setInputs({
-                  ...inputs,
-                  firingType: v as KilnCostInputs[keyof KilnCostInputs],
-                  targetCone: firingType?.defaultCone || inputs.targetCone,
-                });
-              }}
-              options={FIRING_TYPES.map((f) => ({ value: f.value, label: f.label }))}
-            />
+            <div>
+              <Label htmlFor="firing-type">Firing Type</Label>
+              <Select
+                id="firing-type"
+                value={inputs.firingType}
+                onChange={(v) => {
+                  const firingType = FIRING_TYPES.find((f) => f.value === v);
+                  setInputs({
+                    ...inputs,
+                    firingType: v as KilnCostInputs['firingType'],
+                    targetCone: firingType?.defaultCone || inputs.targetCone,
+                  });
+                }}
+                options={FIRING_TYPES.map((f) => ({ value: f.value, label: f.label }))}
+              />
+            </div>
 
-            <Select
-              label="Target Cone"
-              value={inputs.targetCone}
-              onChange={(v) => setInputs({ ...inputs, targetCone: v })}
-              options={coneOptions}
-            />
+            <div>
+              <Label htmlFor="target-cone">Target Cone</Label>
+              <Select
+                id="target-cone"
+                value={inputs.targetCone}
+                onChange={(v) => setInputs({ ...inputs, targetCone: v })}
+                options={coneOptions}
+              />
+            </div>
 
             {inputs.firingType === 'custom' && (
-              <Input
-                label="Firing Time"
-                type="number"
-                value={inputs.firingTime}
-                onChange={(v) => setInputs({ ...inputs, firingTime: parseFloat(v) || 0 })}
-                min={1}
-                max={24}
-                step={0.5}
-                suffix="hours"
-              />
+              <div>
+                <Label htmlFor="firing-time">Firing Time (hours)</Label>
+                <Input
+                  id="firing-time"
+                  type="number"
+                  value={inputs.firingTime}
+                  onChange={(e) =>
+                    setInputs({ ...inputs, firingTime: parseFloat(e.currentTarget.value) || 0 })
+                  }
+                  min={1}
+                  max={24}
+                  step={0.5}
+                />
+              </div>
             )}
 
             <div>
@@ -154,7 +172,7 @@ export function KilnCostCalculator() {
                 onChange={(v) =>
                   setInputs({
                     ...inputs,
-                    firingSchedule: v as KilnCostInputs[keyof KilnCostInputs],
+                    firingSchedule: v as KilnCostInputs['firingSchedule'],
                   })
                 }
               />
@@ -172,7 +190,7 @@ export function KilnCostCalculator() {
                 ]}
                 value={inputs.loadDensity}
                 onChange={(v) =>
-                  setInputs({ ...inputs, loadDensity: v as KilnCostInputs[keyof KilnCostInputs] })
+                  setInputs({ ...inputs, loadDensity: v as KilnCostInputs['loadDensity'] })
                 }
               />
             </div>
@@ -191,7 +209,8 @@ export function KilnCostCalculator() {
                 min={0.05}
                 max={0.4}
                 step={0.01}
-                formatValue={(v) => `$${v.toFixed(2)}/kWh`}
+                showValue
+                labels={{ current: (v) => `$${v.toFixed(2)}/kWh` }}
               />
             ) : (
               <>
@@ -206,19 +225,26 @@ export function KilnCostCalculator() {
                     ]}
                     value={inputs.gasUnit}
                     onChange={(v) =>
-                      setInputs({ ...inputs, gasUnit: v as KilnCostInputs[keyof KilnCostInputs] })
+                      setInputs({ ...inputs, gasUnit: v as KilnCostInputs['gasUnit'] })
                     }
                   />
                 </div>
-                <Input
-                  label={inputs.gasUnit === 'therm' ? 'Natural Gas Rate' : 'Propane Rate'}
-                  type="number"
-                  value={inputs.gasRate}
-                  onChange={(v) => setInputs({ ...inputs, gasRate: parseFloat(v) || 0 })}
-                  min={0.1}
-                  step={0.1}
-                  suffix={inputs.gasUnit === 'therm' ? '$/therm' : '$/gal'}
-                />
+                <div>
+                  <Label htmlFor="inputs-gasunit-therm-natural-gas-rate-pr">
+                    {inputs.gasUnit === 'therm' ? 'Natural Gas Rate' : 'Propane Rate'} (
+                    {inputs.gasUnit === 'therm' ? '$/therm' : '$/gal'})
+                  </Label>
+                  <Input
+                    id="inputs-gasunit-therm-natural-gas-rate-pr"
+                    type="number"
+                    value={inputs.gasRate}
+                    onChange={(e) =>
+                      setInputs({ ...inputs, gasRate: parseFloat(e.currentTarget.value) || 0 })
+                    }
+                    min={0.1}
+                    step={0.1}
+                  />
+                </div>
               </>
             )}
           </div>
@@ -238,23 +264,17 @@ export function KilnCostCalculator() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <ResultCard label="Firing Time" value={formatTime(results.estimatedTime)} color="blue" />
+          <ResultCard label="Firing Time" value={formatTime(results.estimatedTime)} />
           <ResultCard
             label="Peak Temperature"
             value={`${results.peakTemperature}°F`}
-            sublabel={`${results.peakTempC}°C`}
-            color="purple"
+            subtitle={`${results.peakTempC}°C`}
           />
           <ResultCard
             label="Energy Used"
             value={`${results.energyUsed} ${inputs.kilnType === 'electric' ? 'kWh' : inputs.gasUnit === 'therm' ? 'therms' : 'gal'}`}
-            color="green"
           />
-          <ResultCard
-            label="Cost Per Cu Ft"
-            value={`$${results.costPerCubicFoot.toFixed(2)}`}
-            color="blue"
-          />
+          <ResultCard label="Cost Per Cu Ft" value={`$${results.costPerCubicFoot.toFixed(2)}`} />
         </div>
 
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">

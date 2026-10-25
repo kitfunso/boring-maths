@@ -43,7 +43,7 @@ export default function PaceCalculator() {
   const unitLabel = inputs.distanceUnit === 'km' ? 'km' : 'mi';
 
   return (
-    <ThemeProvider defaultColor="coral">
+    <ThemeProvider defaultColor="red">
       <Card variant="elevated">
         <CalculatorHeader
           title="Pace Calculator"
@@ -93,7 +93,7 @@ export default function PaceCalculator() {
                   min={0}
                   step={0.01}
                   value={inputs.distance}
-                  onChange={(e) => updateInput('distance', Number(e.target.value))}
+                  onChange={(e) => updateInput('distance', Number(e.currentTarget.value))}
                 />
               </div>
             )}
@@ -115,7 +115,7 @@ export default function PaceCalculator() {
                       step={1}
                       value={inputs.hours}
                       onChange={(e) =>
-                        updateInput('hours', Math.max(0, Math.floor(Number(e.target.value))))
+                        updateInput('hours', Math.max(0, Math.floor(Number(e.currentTarget.value))))
                       }
                     />
                   </div>
@@ -136,7 +136,7 @@ export default function PaceCalculator() {
                       onChange={(e) =>
                         updateInput(
                           'minutes',
-                          Math.max(0, Math.min(59, Math.floor(Number(e.target.value))))
+                          Math.max(0, Math.min(59, Math.floor(Number(e.currentTarget.value))))
                         )
                       }
                     />
@@ -158,7 +158,7 @@ export default function PaceCalculator() {
                       onChange={(e) =>
                         updateInput(
                           'seconds',
-                          Math.max(0, Math.min(59, Math.floor(Number(e.target.value))))
+                          Math.max(0, Math.min(59, Math.floor(Number(e.currentTarget.value))))
                         )
                       }
                     />
@@ -187,7 +187,10 @@ export default function PaceCalculator() {
                       step={1}
                       value={inputs.paceMinutes}
                       onChange={(e) =>
-                        updateInput('paceMinutes', Math.max(0, Math.floor(Number(e.target.value))))
+                        updateInput(
+                          'paceMinutes',
+                          Math.max(0, Math.floor(Number(e.currentTarget.value)))
+                        )
                       }
                     />
                   </div>
@@ -208,7 +211,7 @@ export default function PaceCalculator() {
                       onChange={(e) =>
                         updateInput(
                           'paceSeconds',
-                          Math.max(0, Math.min(59, Math.floor(Number(e.target.value))))
+                          Math.max(0, Math.min(59, Math.floor(Number(e.currentTarget.value))))
                         )
                       }
                     />

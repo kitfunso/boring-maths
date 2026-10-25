@@ -75,7 +75,7 @@ export default function NurseryCostCalculator() {
   };
 
   return (
-    <ThemeProvider defaultColor="violet">
+    <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
         <CalculatorHeader
           title="UK Nursery Cost Calculator"

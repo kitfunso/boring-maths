@@ -133,7 +133,7 @@ export default function DebtPayoffCalculator() {
                         type="text"
                         placeholder="Credit Card"
                         value={debt.name}
-                        onChange={(e) => updateDebt(debt.id, 'name', e.target.value)}
+                        onChange={(e) => updateDebt(debt.id, 'name', e.currentTarget.value)}
                       />
                     </div>
                     <div>
@@ -145,7 +145,9 @@ export default function DebtPayoffCalculator() {
                         type="number"
                         min={0}
                         value={debt.balance}
-                        onChange={(e) => updateDebt(debt.id, 'balance', Number(e.target.value))}
+                        onChange={(e) =>
+                          updateDebt(debt.id, 'balance', Number(e.currentTarget.value))
+                        }
                       />
                     </div>
                     <div>
@@ -159,7 +161,7 @@ export default function DebtPayoffCalculator() {
                         step={0.01}
                         value={debt.interestRate}
                         onChange={(e) =>
-                          updateDebt(debt.id, 'interestRate', Number(e.target.value))
+                          updateDebt(debt.id, 'interestRate', Number(e.currentTarget.value))
                         }
                       />
                     </div>
@@ -173,7 +175,7 @@ export default function DebtPayoffCalculator() {
                         min={0}
                         value={debt.minimumPayment}
                         onChange={(e) =>
-                          updateDebt(debt.id, 'minimumPayment', Number(e.target.value))
+                          updateDebt(debt.id, 'minimumPayment', Number(e.currentTarget.value))
                         }
                       />
                     </div>
@@ -194,7 +196,7 @@ export default function DebtPayoffCalculator() {
               min={0}
               step={50}
               value={inputs.extraPayment}
-              onChange={(e) => updateInput('extraPayment', Number(e.target.value))}
+              onChange={(e) => updateInput('extraPayment', Number(e.currentTarget.value))}
             />
             <p className="text-sm text-[var(--color-muted)] mt-1">
               Total monthly payment: {formatCurrency(result.monthlyPayment, inputs.currency)}
