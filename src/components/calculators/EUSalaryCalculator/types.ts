@@ -5,11 +5,15 @@
  */
 
 import { calculateIrelandSalary } from '../IrelandSalaryCalculator/calculations';
+import { calculateGermanySalary } from '../GermanySalaryCalculator/calculations';
 
-export interface EUCountryTax {
+interface EUCountryBase {
   code: string;
   name: string;
   currency: string;
+}
+
+export interface BandCountryTax extends EUCountryBase {
   // Simplified progressive tax brackets
   taxBrackets: { threshold: number; rate: number }[];
   // Social security (employee portion, simplified)
@@ -19,25 +23,34 @@ export interface EUCountryTax {
   socialSecurityDeductible?: boolean;
   // Deducted before the brackets; 0 where the first bracket is already a 0% band
   taxFreeAllowance: number;
-  // Full country model where one exists on the site, so both calculators give the same answer
-  detailedModel?: (gross: number) => { socialSecurity: number; incomeTax: number };
+  // 'credit': the allowance is taxed at taxFreeCreditRate and that comes off the tax (Belgium)
+  taxFreeAllowanceMode?: 'deduction' | 'credit';
+  taxFreeCreditRate?: number;
+  // Non-deductible levy on pay after social security, e.g. Poland's 9% health contribution
+  healthContributionRate?: number;
 }
+
+// Countries with a full calculator on the site reuse it, so both pages give the same answer
+export interface DetailedCountryTax extends EUCountryBase {
+  detailedModel: (gross: number) => { socialSecurity: number; incomeTax: number };
+}
+
+export type EUCountryTax = BandCountryTax | DetailedCountryTax;
 
 export const EU_TAX_DATA: EUCountryTax[] = [
   {
     code: 'DE',
     name: 'Germany',
     currency: 'EUR',
-    taxBrackets: [
-      { threshold: 12348, rate: 0 },
-      { threshold: 17799, rate: 14 },
-      { threshold: 69878, rate: 24 },
-      { threshold: 277825, rate: 42 },
-      { threshold: Infinity, rate: 45 },
-    ],
-    socialSecurityRate: 20.5, // Approx employee share
-    socialSecurityCap: 101400, // Pension ceiling 2026 (SVBezGrV 2026 section 4)
-    taxFreeAllowance: 0,
+    // Tax class I, no church tax, childless: the Germany calculator's defaults
+    detailedModel: (gross) => {
+      const r = calculateGermanySalary({
+        grossAnnualSalary: gross,
+        churchTax: false,
+        childless: true,
+      });
+      return { socialSecurity: r.socialTotal, incomeTax: r.incomeTax + r.soli };
+    },
   },
   {
     code: 'FR',
@@ -118,12 +131,6 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     code: 'IE',
     name: 'Ireland',
     currency: 'EUR',
-    taxBrackets: [
-      { threshold: 44000, rate: 20 },
-      { threshold: Infinity, rate: 40 },
-    ],
-    socialSecurityRate: 4.2375, // PRSI, 2026 blend of 4.2% and 4.35%
-    taxFreeAllowance: 0,
     detailedModel: (gross) => {
       const r = calculateIrelandSalary({ grossAnnualSalary: gross });
       return { socialSecurity: r.prsi, incomeTax: r.incomeTax + r.usc };
@@ -140,7 +147,10 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: Infinity, rate: 50 },
     ],
     socialSecurityRate: 13.07,
-    taxFreeAllowance: 11180,
+    // Income year 2026 tax-free sum, valued at 25% (BDO key figures, AY 2027)
+    taxFreeAllowance: 11550,
+    taxFreeAllowanceMode: 'credit',
+    taxFreeCreditRate: 25,
   },
   {
     code: 'AT',
@@ -169,6 +179,7 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: Infinity, rate: 32 },
     ],
     socialSecurityRate: 13.71,
+    healthContributionRate: 9,
     taxFreeAllowance: 0,
   },
   {

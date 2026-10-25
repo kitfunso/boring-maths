@@ -34,6 +34,32 @@ describe('UsQuarterlyTaxCalculator', () => {
       expect(result.safeHarborAmount).toBe(16500); // 110% x 15,000 is below 90% x 20,715
     });
 
+    it('should judge penalty risk on withholding alone, not on the suggested payments', () => {
+      const inputs = getDefaultInputs();
+      const result = calculateQuarterlyTax(inputs);
+
+      // 5,000 withheld is under both 18,644 (90% of 20,715) and 15,000 (prior year)
+      expect(result.currentYearSafeHarbor).toBe(18644);
+      expect(result.priorYearSafeHarbor).toBe(15000);
+      expect(result.meetsCurrentYearSafeHarbor).toBe(false);
+      expect(result.meetsPriorYearSafeHarbor).toBe(false);
+      expect(result.penaltyRisk).toBe('high');
+
+      inputs.withholdingsFromW2 = 15000;
+      const covered = calculateQuarterlyTax(inputs);
+      expect(covered.meetsPriorYearSafeHarbor).toBe(true);
+      expect(covered.penaltyRisk).toBe('none');
+    });
+
+    it('should add 0.9% Additional Medicare on SE earnings above the threshold', () => {
+      const inputs = getDefaultInputs();
+      inputs.expectedAnnualIncome = 300000;
+      inputs.selfEmploymentIncome = 300000;
+
+      // 277,050 SE earnings: 184,500 x 12.4% + 277,050 x 2.9% + (277,050 - 200,000) x 0.9%
+      expect(calculateQuarterlyTax(inputs).selfEmploymentTax).toBe(31606);
+    });
+
     it('should schedule the 2026 due dates', () => {
       const result = calculateQuarterlyTax(getDefaultInputs());
 

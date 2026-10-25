@@ -6,17 +6,18 @@
 import type { UKStudentLoanInputs, UKStudentLoanResult, YearlyBreakdown } from './types';
 import { LOAN_PLANS } from './types';
 
+// Plan 2 from 1 Sept 2026 (gov.uk): RPI 4.1% plus up to 3 points scaled by income, then the 6% cap.
+const PLAN2_RPI = 0.041;
+const PLAN2_RATE_CAP = 0.06;
+const PLAN2_UPPER_THRESHOLD = 52885;
+
 function getPlan2InterestRate(annualSalary: number): number {
-  const lowerThreshold = 29385;
-  const upperThreshold = 52884;
-  const baseRate = 0.041;
-  const maxRate = 0.06;
-
-  if (annualSalary <= lowerThreshold) return baseRate;
-  if (annualSalary >= upperThreshold) return maxRate;
-
-  const progress = (annualSalary - lowerThreshold) / (upperThreshold - lowerThreshold);
-  return baseRate + progress * (maxRate - baseRate);
+  const lower = LOAN_PLANS.plan2.threshold;
+  const progress = Math.min(
+    1,
+    Math.max(0, (annualSalary - lower) / (PLAN2_UPPER_THRESHOLD - lower))
+  );
+  return Math.min(PLAN2_RATE_CAP, PLAN2_RPI + progress * 0.03);
 }
 
 function getAnnualInterestRate(annualSalary: number, plan: keyof typeof LOAN_PLANS): number {

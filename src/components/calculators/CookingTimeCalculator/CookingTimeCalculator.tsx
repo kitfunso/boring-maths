@@ -97,7 +97,7 @@ export default function CookingTimeCalculator() {
                 id="meatType"
                 options={MEAT_OPTIONS}
                 value={inputs.meatType}
-                onChange={(e) => handleMeatChange(e.target.value as MeatType)}
+                onChange={(value) => handleMeatChange(value as MeatType)}
               />
             </div>
 

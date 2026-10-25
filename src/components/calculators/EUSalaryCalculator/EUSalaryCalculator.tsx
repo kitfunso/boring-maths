@@ -120,7 +120,7 @@ export default function EUSalaryCalculator() {
               <MetricCard
                 label="Social Security"
                 value={formatCurrency(result.socialSecurity, result.country.currency)}
-                sublabel={`${result.country.socialSecurityRate}%`}
+                sublabel={`${formatPercent(result.grossSalary > 0 ? (result.socialSecurity / result.grossSalary) * 100 : 0)} of gross`}
                 valueColor="error"
               />
               <MetricCard

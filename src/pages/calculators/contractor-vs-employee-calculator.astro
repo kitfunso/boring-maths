@@ -11,6 +11,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import ContractorVsEmployeeCalculator from '../../components/calculators/ContractorVsEmployeeCalculator/ContractorVsEmployeeCalculator';
 import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../lib/us-tax-2026';
 
@@ -342,5 +343,19 @@ const schemaBreadcrumbs = [
   </ContentSection>
 
   <!-- FAQ Section -->
+  <SourcesSection
+    checked="2026-10-25"
+    sources={[
+      {
+        label: 'IRS: Topic no. 554, Self-employment tax',
+        href: 'https://www.irs.gov/taxtopics/tc554',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+    ]}
+  />
+
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

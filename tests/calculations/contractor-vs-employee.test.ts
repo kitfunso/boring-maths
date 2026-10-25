@@ -79,6 +79,21 @@ describe('ContractorVsEmployeeCalculator', () => {
       expect(employee.incomeTax).toBeCloseTo(54339, 2);
     });
 
+    it('caps contractor Social Security at the 2026 wage base but not Medicare', () => {
+      const inputs: ContractorVsEmployeeInputs = {
+        ...getDefaultInputs('USD'),
+        contractorHourlyRate: 125,
+        contractorBillableHoursPerWeek: 40,
+        contractorWeeksPerYear: 50,
+      };
+
+      const { contractor } = calculateComparison_main(inputs);
+
+      // 250,000 x 92.35% = 230,875; 184,500 x 12.4% + 230,875 x 2.9% = 29,573.375
+      expect(contractor.grossIncome).toBe(250000);
+      expect(contractor.selfEmploymentTax).toBeCloseTo(29573.375, 3);
+    });
+
     it('should produce consistent results', () => {
       const inputs = getDefaultInputs('USD');
 

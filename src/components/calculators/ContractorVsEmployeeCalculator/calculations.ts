@@ -47,6 +47,7 @@ function calculateContractorCompensation(
     federalTaxBracket,
     stateTaxRate,
     selfEmploymentTaxRate,
+    currency,
   } = inputs;
 
   // Gross income
@@ -60,7 +61,11 @@ function calculateContractorCompensation(
 
   // Self-employment tax (on 92.35% of net self-employment income)
   const netSEIncome = grossIncome * 0.9235;
-  const selfEmploymentTax = netSEIncome * selfEmploymentTaxRate;
+  // US: the 12.4% Social Security part stops at the wage base, the 2.9% Medicare part does not
+  const selfEmploymentTax =
+    currency === 'USD'
+      ? Math.min(netSEIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.124 + netSEIncome * 0.029
+      : netSEIncome * selfEmploymentTaxRate;
 
   // Deductible half of SE tax
   const seTaxDeduction = selfEmploymentTax / 2;

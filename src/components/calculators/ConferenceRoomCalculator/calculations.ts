@@ -11,6 +11,38 @@ import type {
 } from './types';
 import { SQFT_PER_PERSON, STYLE_DESCRIPTIONS } from './types';
 
+// n items of size s with gap g between them need n*s + (n-1)*g of span
+function fitCount(span: number, size: number, gap: number): number {
+  return Math.max(0, Math.floor((span + gap) / (size + gap)));
+}
+
+const CLASSROOM_TABLE = { length: 6, gap: 1, seats: 2, rowDepth: 5 };
+const BANQUET_TABLE = { diameter: 6, gap: 4, seats: 8 };
+
+/** Seats the table grid physically holds, so a table count never exceeds what fits; Infinity where area alone sizes the room. */
+function gridSeats(
+  style: SeatingStyle,
+  effectiveWidth: number,
+  seatingLength: number,
+  aisleWidth: number
+): number {
+  if (style === 'classroom') {
+    const perSide = fitCount(
+      (effectiveWidth - aisleWidth) / 2,
+      CLASSROOM_TABLE.length,
+      CLASSROOM_TABLE.gap
+    );
+    const rows = Math.floor(seatingLength / CLASSROOM_TABLE.rowDepth);
+    return rows * perSide * 2 * CLASSROOM_TABLE.seats;
+  }
+  if (style === 'banquet') {
+    const across = fitCount(effectiveWidth, BANQUET_TABLE.diameter, BANQUET_TABLE.gap);
+    const deep = fitCount(seatingLength, BANQUET_TABLE.diameter, BANQUET_TABLE.gap);
+    return across * deep * BANQUET_TABLE.seats;
+  }
+  return Infinity;
+}
+
 export function calculateConferenceRoom(inputs: ConferenceRoomInputs): ConferenceRoomResult {
   const {
     roomLength,
@@ -33,11 +65,11 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
 
   // Subtract clearances
   const effectiveLength = roomLength - 2 * wallClearance;
-  const effectiveWidth = roomWidth - 2 * wallClearance;
+  const effectiveWidth = Math.max(0, roomWidth - 2 * wallClearance);
 
   // Subtract stage/presenter area if applicable
   const presentationDepth = stageOrPresenterArea ? stageDepth : 0;
-  const seatingLength = effectiveLength - presentationDepth;
+  const seatingLength = Math.max(0, effectiveLength - presentationDepth);
 
   // Calculate usable area for seating
   let usableSqFt = seatingLength * effectiveWidth;
@@ -53,13 +85,17 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
   }
 
   // ADA requires additional space (5%)
+  usableSqFt = Math.max(0, usableSqFt);
   if (adaAccessible) {
     usableSqFt *= 0.95;
   }
 
   // Calculate capacity for primary style
   const sqFtPerPerson = SQFT_PER_PERSON[seatingStyle];
-  const primaryCapacity = Math.floor(usableSqFt / sqFtPerPerson);
+  const primaryCapacity = Math.min(
+    Math.floor(usableSqFt / sqFtPerPerson),
+    gridSeats(seatingStyle, effectiveWidth, seatingLength, aisleWidth)
+  );
 
   // Calculate capacities for all styles
   const capacitiesByStyle: CapacityResult[] = (Object.keys(SQFT_PER_PERSON) as SeatingStyle[]).map(
@@ -71,11 +107,15 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
         styleUsableSqFt -= aisleWidth * seatingLength;
       }
 
+      styleUsableSqFt = Math.max(0, styleUsableSqFt);
       if (adaAccessible) {
         styleUsableSqFt *= 0.95;
       }
 
-      const capacity = Math.floor(styleUsableSqFt / SQFT_PER_PERSON[style]);
+      const capacity = Math.min(
+        Math.floor(styleUsableSqFt / SQFT_PER_PERSON[style]),
+        gridSeats(style, effectiveWidth, seatingLength, aisleWidth)
+      );
 
       return {
         style: style.replace('_', '-').charAt(0).toUpperCase() + style.replace('_', '-').slice(1),
@@ -101,25 +141,24 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       rowSpacing: 3,
     };
   } else if (seatingStyle === 'classroom') {
-    const tablesPerRow = Math.floor((effectiveWidth - aisleWidth) / 7); // 6ft table + 1ft gap
-    const rows = Math.floor(seatingLength / 5); // 5ft row spacing
+    const tablesPerSide = fitCount(
+      (effectiveWidth - aisleWidth) / 2,
+      CLASSROOM_TABLE.length,
+      CLASSROOM_TABLE.gap
+    );
     layoutInfo = {
-      rows,
-      seatsPerRow: tablesPerRow * 2 * 2, // 2 people per table, both sides of aisle
-      rowSpacing: 5,
-      // Table count follows the area-based capacity so it matches the chair count.
-      tableCount: Math.ceil(primaryCapacity / 2),
+      rows: Math.floor(seatingLength / CLASSROOM_TABLE.rowDepth),
+      seatsPerRow: tablesPerSide * 2 * CLASSROOM_TABLE.seats, // both sides of the aisle
+      rowSpacing: CLASSROOM_TABLE.rowDepth,
+      tableCount: Math.ceil(primaryCapacity / CLASSROOM_TABLE.seats),
     };
   } else if (seatingStyle === 'banquet') {
-    const tableRadius = 3; // 6ft round table diameter
-    const tableSpacing = 4;
-    const tablesAcross = Math.floor(effectiveWidth / (tableRadius * 2 + tableSpacing));
-    const tablesDeep = Math.floor(seatingLength / (tableRadius * 2 + tableSpacing));
+    const { diameter, gap, seats } = BANQUET_TABLE;
     layoutInfo = {
-      rows: tablesDeep,
-      seatsPerRow: tablesAcross * 8, // 8 per round table
-      rowSpacing: tableRadius * 2 + tableSpacing,
-      tableCount: Math.ceil(primaryCapacity / 8),
+      rows: fitCount(seatingLength, diameter, gap),
+      seatsPerRow: fitCount(effectiveWidth, diameter, gap) * seats,
+      rowSpacing: diameter + gap,
+      tableCount: Math.ceil(primaryCapacity / seats),
     };
   } else if (seatingStyle === 'u_shape') {
     // U-shape: tables along 3 walls

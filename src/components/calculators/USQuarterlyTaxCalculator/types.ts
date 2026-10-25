@@ -36,6 +36,8 @@ export interface USQuarterlyTaxResult {
   quarterlyPayment: number;
   quarterPayments: QuarterPayment[];
   safeHarborAmount: number;
+  currentYearSafeHarbor: number;
+  priorYearSafeHarbor: number;
   safeHarborRule: string;
   meetsCurrentYearSafeHarbor: boolean;
   meetsPriorYearSafeHarbor: boolean;

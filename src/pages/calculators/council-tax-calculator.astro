@@ -59,7 +59,7 @@ const faqs = [
   {
     question: 'How is council tax calculated?',
     answer:
-      'Council tax is based on the valuation band of your property (A to H) and the Band D rate set by your local council. Each band has a fixed ratio to Band D: Band A is 6/9ths, Band B is 7/9ths, up to Band H which is 2× the Band D rate. Scotland uses higher ratios for Bands E to H, so its Band H is 882/360, about 2.45× Band D. Your council sets the Band D rate annually based on its spending needs.',
+      'Council tax is based on the valuation band of your property (A to H, or A to I in Wales) and the Band D rate set by your local council. Each band has a fixed ratio to Band D: Band A is 6/9ths, Band B is 7/9ths, up to Band H which is 2× the Band D rate. Scotland uses higher ratios for Bands E to H, so its Band H is 882/360, about 2.45× Band D. Your council sets the Band D rate annually based on its spending needs.',
   },
   {
     question: 'What are the council tax bands?',
@@ -74,7 +74,7 @@ const faqs = [
   {
     question: 'What is the second home council tax premium?',
     answer:
-      'From April 2025, councils in England can charge up to 100% extra council tax on second homes (doubling the bill). This is enabled by the Levelling Up and Regeneration Act 2023. Some councils had already been charging premiums where local rules allowed.',
+      'From April 2025, councils in England can charge up to 100% extra council tax on second homes (doubling the bill). This is enabled by the Levelling Up and Regeneration Act 2023. Scottish councils can also charge up to 100% extra. In Wales the cap has been 300% since April 2023, so a second home can pay up to four times the standard bill. This calculator applies a 100% premium; check your own council for its rate.',
   },
   {
     question: 'Can I challenge my council tax band?',
@@ -130,7 +130,7 @@ const schemaBreadcrumbs = [
     <ol class="list-decimal list-inside space-y-3 text-[var(--color-subtle)]">
       <li>
         <strong class="text-[var(--color-cream)]">Select your property band</strong> – Bands A to H based
-        on your property's 1991 valuation.
+        on your property's 1991 valuation (Bands A to I and 2003 values in Wales).
       </li>
       <li>
         <strong class="text-[var(--color-cream)]">Choose your region</strong> – Average rates vary significantly
@@ -142,7 +142,8 @@ const schemaBreadcrumbs = [
       </li>
       <li>
         <strong class="text-[var(--color-cream)]">Check second home status</strong> – Second homes may
-        face a 100% premium from April 2025.
+        face a premium of up to 100% in England (from April 2025) and Scotland, or up to 300% in Wales.
+        The calculator applies 100%.
       </li>
     </ol>
   </ContentSection>
@@ -157,11 +158,11 @@ const schemaBreadcrumbs = [
         proportional to your property's current value.
       </p>
       <p>
-        The <strong class="text-[var(--color-cream)]">Band D rate</strong> is the reference point. Band
-        A pays two-thirds of Band D, while Band H pays double. This means the difference between the cheapest
-        and most expensive band is only 3:1, despite massive differences in property values. Scotland
-        raised its Band E to H ratios in 2017, so a Scottish Band H home pays about 2.45 times Band D,
-        and Welsh Band I pays 21/9 of Band D.
+        The <strong class="text-[var(--color-cream)]">Band D rate</strong> is the reference point. In
+        England, Band A pays two-thirds of Band D and Band H pays double, so the most expensive band pays
+        only 3 times the cheapest, despite massive differences in property values. Scotland raised its
+        Band E to H ratios in 2017, so a Scottish Band H home pays about 2.45 times Band D and about 3.7
+        times Band A. Welsh Band I pays 21/9 of Band D, 3.5 times Band A.
       </p>
       <p>
         <strong class="text-emerald-400">Regional variation</strong> is significant – London tends to

@@ -140,7 +140,8 @@ export function getDefaultOffer(name: string, currency: Currency): JobOffer {
 
 export function getDefaultInputs(currency: Currency = 'USD'): JobOfferComparisonInputs {
   const hourlyTimeValue = currency === 'GBP' ? 25 : currency === 'EUR' ? 28 : 35;
-  const costPerMile = currency === 'GBP' ? 0.45 : currency === 'EUR' ? 0.3 : 0.67;
+  // HMRC 2026/27 car rate and the IRS rate from 1 July 2026 as true-cost benchmarks
+  const costPerMile = currency === 'GBP' ? 0.55 : currency === 'EUR' ? 0.3 : 0.76;
 
   return {
     currency,

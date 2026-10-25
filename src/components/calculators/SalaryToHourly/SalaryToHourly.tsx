@@ -146,9 +146,7 @@ export default function SalaryToHourly() {
             <Checkbox
               id="includeBenefits"
               checked={inputs.includeBenefits}
-              onChange={(e) =>
-                updateInput('includeBenefits', (e.target as HTMLInputElement).checked)
-              }
+              onChange={(checked) => updateInput('includeBenefits', checked)}
               label="Include benefits in total compensation"
             />
 

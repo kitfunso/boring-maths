@@ -408,9 +408,7 @@ export default function JobOfferComparison() {
               <Checkbox
                 id="include-commute"
                 checked={inputs.includeCommuteTime}
-                onChange={(e) =>
-                  updateSettings('includeCommuteTime', (e.target as HTMLInputElement).checked)
-                }
+                onChange={(checked) => updateSettings('includeCommuteTime', checked)}
                 label="Include commute time as opportunity cost"
               />
             </div>

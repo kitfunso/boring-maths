@@ -1275,7 +1275,7 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
     noindex: true,
   },
-  // New Calculators - January 2025
+  // Added January 2025
   {
     title: 'Due Date Calculator',
     description:

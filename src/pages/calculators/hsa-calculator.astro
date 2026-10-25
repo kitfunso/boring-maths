@@ -11,6 +11,14 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { HSACalculator } from '../../components/calculators/HSACalculator';
+import { HSA_LIMITS_2026 } from '../../components/calculators/HSACalculator/types';
+
+const usd = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n);
 
 const title = 'Free HSA Calculator: Triple Tax Advantage Savings | Boring Math';
 const description =
@@ -47,8 +55,7 @@ const faqs = [
   },
   {
     question: 'What are the 2026 HSA contribution limits?',
-    answer:
-      "For 2026, HSA contribution limits are $4,400 for individual HDHP coverage and $8,750 for family coverage. If you're 55 or older, you can contribute an additional $1,000 catch-up contribution. Employer contributions count toward these limits.",
+    answer: `For 2026, HSA contribution limits are ${usd(HSA_LIMITS_2026.individual)} for individual HDHP coverage and ${usd(HSA_LIMITS_2026.family)} for family coverage. If you're 55 or older, you can contribute an additional ${usd(HSA_LIMITS_2026.catchUp)} catch-up contribution. Employer contributions count toward these limits.`,
   },
   {
     question: 'Do I need an HDHP to contribute to an HSA?',
@@ -147,15 +154,19 @@ const schemaBreadcrumbs = [
         <tbody class="text-[var(--color-subtle)]">
           <tr class="border-b border-white/10">
             <td class="py-2">Individual</td>
-            <td class="text-right py-2">$4,400</td>
-            <td class="text-right py-2">$1,000</td>
-            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$5,400</td>
+            <td class="text-right py-2">{usd(HSA_LIMITS_2026.individual)}</td>
+            <td class="text-right py-2">{usd(HSA_LIMITS_2026.catchUp)}</td>
+            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">
+              {usd(HSA_LIMITS_2026.individual + HSA_LIMITS_2026.catchUp)}
+            </td>
           </tr>
           <tr>
             <td class="py-2">Family</td>
-            <td class="text-right py-2">$8,750</td>
-            <td class="text-right py-2">$1,000</td>
-            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">$9,750</td>
+            <td class="text-right py-2">{usd(HSA_LIMITS_2026.family)}</td>
+            <td class="text-right py-2">{usd(HSA_LIMITS_2026.catchUp)}</td>
+            <td class="text-right py-2 font-semibold text-[var(--color-cream)]">
+              {usd(HSA_LIMITS_2026.family + HSA_LIMITS_2026.catchUp)}
+            </td>
           </tr>
         </tbody>
       </table>

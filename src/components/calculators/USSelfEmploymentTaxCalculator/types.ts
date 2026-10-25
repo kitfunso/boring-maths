@@ -40,15 +40,6 @@ export const SE_TAX_RATES = {
   selfEmploymentRate: 0.9235, // 92.35% of net earnings subject to SE tax
   socialSecurityRate: 0.124, // 12.4%
   medicareRate: 0.029, // 2.9%
-  additionalMedicareRate: 0.009, // 0.9% additional Medicare
-};
-
-// Additional Medicare Tax thresholds by filing status
-export const ADDITIONAL_MEDICARE_THRESHOLDS: Record<FilingStatus, number> = {
-  single: 200000,
-  married_jointly: 250000,
-  married_separately: 125000,
-  head_of_household: 200000,
 };
 
 export const FILING_STATUS_LABELS: Record<FilingStatus, string> = {

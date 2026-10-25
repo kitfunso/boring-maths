@@ -8,7 +8,16 @@ describe('calculateOvulation', () => {
     process.env.TZ = 'Europe/London';
   });
   afterAll(() => {
-    process.env.TZ = originalTz;
+    // Assigning undefined would set the string 'undefined'
+    if (originalTz === undefined) delete process.env.TZ;
+    else process.env.TZ = originalTz;
+  });
+
+  it('falls back instead of throwing when the date is cleared or the cycle is out of range', () => {
+    const r = calculateOvulation({ lastPeriodDate: '', cycleLength: 28 });
+    expect(r.ovulationDate).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    const short = calculateOvulation({ lastPeriodDate: '2026-06-01', cycleLength: 0 });
+    expect(short.nextPeriodDate).toBe('2026-06-22');
   });
 
   it('places ovulation 14 days before the next period with a 7-day window', () => {

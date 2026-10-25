@@ -2,55 +2,80 @@
  * EU Salary Calculator - Calculation Logic
  */
 
-import { EU_TAX_DATA, type SalaryInputs, type SalaryResult, type EUCountryTax } from './types';
+import {
+  EU_TAX_DATA,
+  type BandCountryTax,
+  type SalaryInputs,
+  type SalaryResult,
+  type EUCountryTax,
+} from './types';
 
 export function getCountryByCode(code: string): EUCountryTax | undefined {
   return EU_TAX_DATA.find((c) => c.code === code);
 }
 
-export function calculateSocialSecurity(gross: number, country: EUCountryTax): number {
+function socialContributions(gross: number, country: BandCountryTax): number {
   const taxableAmount = country.socialSecurityCap
     ? Math.min(gross, country.socialSecurityCap)
     : gross;
   return taxableAmount * (country.socialSecurityRate / 100);
 }
 
-export function calculateIncomeTax(gross: number, country: EUCountryTax): number {
-  // Taxable income after social security and allowances
-  const socialSecurity = calculateSocialSecurity(gross, country);
-  const deductible = country.socialSecurityDeductible === false ? 0 : socialSecurity;
-  let taxableIncome = gross - deductible - country.taxFreeAllowance;
-  taxableIncome = Math.max(0, taxableIncome);
+export function calculateSocialSecurity(gross: number, country: BandCountryTax): number {
+  const social = socialContributions(gross, country);
+  const health = ((gross - social) * (country.healthContributionRate ?? 0)) / 100;
+  return social + health;
+}
 
+function bandTax(amount: number, brackets: BandCountryTax['taxBrackets']): number {
+  let remaining = Math.max(0, amount);
   let tax = 0;
   let previousThreshold = 0;
 
-  for (const bracket of country.taxBrackets) {
-    if (taxableIncome <= 0) break;
+  for (const bracket of brackets) {
+    if (remaining <= 0) break;
 
-    const taxableInBracket = Math.min(taxableIncome, bracket.threshold - previousThreshold);
+    const taxableInBracket = Math.min(remaining, bracket.threshold - previousThreshold);
 
     if (taxableInBracket > 0) {
       tax += taxableInBracket * (bracket.rate / 100);
-      taxableIncome -= taxableInBracket;
+      remaining -= taxableInBracket;
     }
 
     previousThreshold = bracket.threshold;
   }
 
-  return Math.max(0, tax);
+  return tax;
+}
+
+export function calculateIncomeTax(gross: number, country: BandCountryTax): number {
+  // Taxable income after social security (a health levy is not deductible) and allowances
+  const social = socialContributions(gross, country);
+  const deductible = country.socialSecurityDeductible === false ? 0 : social;
+
+  if (country.taxFreeAllowanceMode === 'credit') {
+    const credit = (country.taxFreeAllowance * (country.taxFreeCreditRate ?? 0)) / 100;
+    return Math.max(0, bandTax(gross - deductible, country.taxBrackets) - credit);
+  }
+
+  return Math.max(0, bandTax(gross - deductible - country.taxFreeAllowance, country.taxBrackets));
 }
 
 export function calculateSalary(inputs: SalaryInputs): SalaryResult {
-  const { grossSalary, countryCode } = inputs;
+  const { countryCode } = inputs;
+  const grossSalary = Number.isFinite(inputs.grossSalary) ? Math.max(0, inputs.grossSalary) : 0;
   const country = getCountryByCode(countryCode) || EU_TAX_DATA[0];
 
-  const detailed = country.detailedModel?.(grossSalary);
-  const socialSecurity = detailed?.socialSecurity ?? calculateSocialSecurity(grossSalary, country);
-  const incomeTax = detailed?.incomeTax ?? calculateIncomeTax(grossSalary, country);
+  const { socialSecurity, incomeTax } =
+    'detailedModel' in country
+      ? country.detailedModel(grossSalary)
+      : {
+          socialSecurity: calculateSocialSecurity(grossSalary, country),
+          incomeTax: calculateIncomeTax(grossSalary, country),
+        };
   const totalDeductions = socialSecurity + incomeTax;
   const netSalary = grossSalary - totalDeductions;
-  const effectiveTaxRate = (totalDeductions / grossSalary) * 100;
+  const effectiveTaxRate = grossSalary > 0 ? (totalDeductions / grossSalary) * 100 : 0;
 
   return {
     country,

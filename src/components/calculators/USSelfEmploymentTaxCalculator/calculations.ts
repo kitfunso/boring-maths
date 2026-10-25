@@ -5,11 +5,13 @@
  */
 
 import type { USSelfEmploymentTaxInputs, USSelfEmploymentTaxResult, FilingStatus } from './types';
-import { SE_TAX_RATES, ADDITIONAL_MEDICARE_THRESHOLDS, QUARTERLY_DUE_DATES_2026 } from './types';
+import { SE_TAX_RATES, QUARTERLY_DUE_DATES_2026 } from './types';
 import {
   FEDERAL_BRACKETS_2026,
   STANDARD_DEDUCTION_2026,
   SOCIAL_SECURITY_WAGE_BASE_2026,
+  ADDITIONAL_MEDICARE_RATE,
+  ADDITIONAL_MEDICARE_THRESHOLDS,
 } from '../../../lib/us-tax-2026';
 
 export function calculateSelfEmploymentTax(
@@ -30,21 +32,18 @@ export function calculateSelfEmploymentTax(
   // Calculate SE Tax (15.3% on 92.35% of net SE income)
   const seTaxableIncome = netSelfEmployment * SE_TAX_RATES.selfEmploymentRate;
 
-  // Social Security tax (12.4% up to wage base)
-  const socialSecurityTaxableIncome = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026);
+  // W-2 wages use up the Social Security wage base first (Schedule SE lines 8-10)
+  const wageBaseLeft = Math.max(0, SOCIAL_SECURITY_WAGE_BASE_2026 - otherIncome);
+  const socialSecurityTaxableIncome = Math.min(seTaxableIncome, wageBaseLeft);
   const socialSecurityTax = socialSecurityTaxableIncome * SE_TAX_RATES.socialSecurityRate;
 
   // Medicare tax (2.9% on all SE income)
   const medicareTax = seTaxableIncome * SE_TAX_RATES.medicareRate;
 
-  // Additional Medicare tax (0.9% on income over threshold)
-  const additionalMedicareThreshold = ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus];
-
-  const totalEarnings = netSelfEmployment + otherIncome;
+  // Additional Medicare on SE earnings: the threshold is cut by wages (Form 8959 Part II)
+  const seThresholdLeft = Math.max(0, ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus] - otherIncome);
   const additionalMedicareTax =
-    totalEarnings > additionalMedicareThreshold
-      ? (totalEarnings - additionalMedicareThreshold) * SE_TAX_RATES.additionalMedicareRate
-      : 0;
+    Math.max(0, seTaxableIncome - seThresholdLeft) * ADDITIONAL_MEDICARE_RATE;
 
   const selfEmploymentTax = socialSecurityTax + medicareTax + additionalMedicareTax;
 

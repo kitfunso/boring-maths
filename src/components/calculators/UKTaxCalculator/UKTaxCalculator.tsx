@@ -187,9 +187,7 @@ export default function UKTaxCalculator() {
                 id="studentLoan"
                 options={studentLoanOptions}
                 value={inputs.studentLoanPlan}
-                onChange={(e) =>
-                  updateInput('studentLoanPlan', e.currentTarget.value as StudentLoanPlan)
-                }
+                onChange={(value) => updateInput('studentLoanPlan', value as StudentLoanPlan)}
               />
             </div>
 

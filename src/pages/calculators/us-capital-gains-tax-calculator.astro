@@ -11,6 +11,16 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USCapitalGainsTaxCalculator } from '../../components/calculators/USCapitalGainsTaxCalculator';
+import { LTCG_BRACKETS_2026 } from '../../components/calculators/USCapitalGainsTaxCalculator/types';
+
+const usd = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n);
+const [single0, single15, single20] = LTCG_BRACKETS_2026.single;
+const [joint0, joint15, joint20] = LTCG_BRACKETS_2026.married_jointly;
 
 const title = 'US Capital Gains Tax Calculator: Stocks, Crypto & Real Estate';
 const description =
@@ -57,8 +67,7 @@ const faqs = [
   },
   {
     question: 'What are the 2026 long-term capital gains tax rates?',
-    answer:
-      'For 2026, long-term capital gains rates are: 0% for single filers up to $49,450 taxable income, 15% from $49,451-$545,500, and 20% above $545,500. For married filing jointly: 0% up to $98,900, 15% up to $613,700, and 20% above. These rates are significantly lower than ordinary income rates.',
+    answer: `For 2026, long-term capital gains rates are: ${single0.rate}% for single filers up to ${usd(single0.max)} taxable income, ${single15.rate}% from ${usd(single0.max + 1)}-${usd(single15.max)}, and ${single20.rate}% above ${usd(single15.max)}. For married filing jointly: ${joint0.rate}% up to ${usd(joint0.max)}, ${joint15.rate}% up to ${usd(joint15.max)}, and ${joint20.rate}% above. These rates are significantly lower than ordinary income rates.`,
   },
   {
     question: 'What is the Net Investment Income Tax (NIIT)?',

@@ -42,6 +42,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { getAccessToken, fail } from './gsc-auth.mjs';
+import { CLIFF_BASELINE, CLIFF_WINDOW, addDays, fillDailySeries, findCliff } from './gsc-daily-core.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -158,61 +159,17 @@ async function queryAll(site, accessToken, body) {
 // ---------------------------------------------------------------- daily
 
 const DAILY_DAYS = 90;
-const CLIFF_WINDOW = 14;
-const CLIFF_BASELINE = 7;
-const CLIFF_RATIO = 0.25;
+const GSC_LAG_DAYS = 3; // newest date GSC can have is today (UTC) minus this
 
-// UTC math so DST never shifts a calendar day.
-function addDays(isoDate, n) {
-  const d = new Date(`${isoDate}T00:00:00Z`);
-  d.setUTCDate(d.getUTCDate() + n);
-  return d.toISOString().slice(0, 10);
-}
-
-function median(values) {
-  const sorted = [...values].sort((a, b) => a - b);
-  const mid = sorted.length >> 1;
-  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
-}
-
-// The API omits zero-impression dates, so fill gaps or a dead day vanishes from the check.
-function buildDailySeries(rows) {
-  if (rows.length === 0) return [];
-  const byDate = new Map(rows.map((r) => [r.keys[0], r]));
-  const last = [...byDate.keys()].sort().pop();
-  const series = [];
-  for (let i = CLIFF_WINDOW + CLIFF_BASELINE - 1; i >= 0; i -= 1) {
-    const date = addDays(last, -i);
-    const r = byDate.get(date);
-    series.push({
-      date,
-      clicks: r ? r.clicks : 0,
-      impressions: r ? r.impressions : 0,
-      position: r ? r.position : null,
-    });
-  }
-  return series;
-}
-
-/** First day in the last CLIFF_WINDOW below CLIFF_RATIO of the prior CLIFF_BASELINE-day median. */
-function findCliff(series) {
-  for (let i = series.length - CLIFF_WINDOW; i < series.length; i += 1) {
-    if (i < CLIFF_BASELINE) continue;
-    const base = median(series.slice(i - CLIFF_BASELINE, i).map((d) => d.impressions));
-    if (series[i].impressions < base * CLIFF_RATIO) {
-      return { date: series[i].date, impressions: series[i].impressions, median: base };
-    }
-  }
-  return null;
-}
-
-function reportDaily(rows) {
-  const series = buildDailySeries(rows);
+function reportDaily(rows, endDate) {
+  // An explicit --end in the past must not be zero-filled out to today.
+  const cap = addDays(new Date().toISOString().slice(0, 10), -GSC_LAG_DAYS);
+  const series = fillDailySeries(rows, endDate < cap ? endDate : cap);
   const recent = series.slice(-CLIFF_WINDOW);
   console.log(`\nLast ${recent.length} days (date  clicks  impressions  position):`);
   for (const d of recent) {
     const pos = d.position == null ? '-' : d.position.toFixed(1);
-    console.log(`${d.date}  ${d.clicks}  ${d.impressions}  ${pos}`);
+    console.log(`${d.date}  ${d.clicks}  ${d.impressions}  ${pos}${d.filled ? '  (no rows)' : ''}`);
   }
   const cliff = findCliff(series);
   if (cliff) {
@@ -312,7 +269,7 @@ async function main() {
   const totalClicks = pages.rows.reduce((a, r) => a + (r.clicks || 0), 0);
   console.log(`\nWrote ${path.relative(REPO_ROOT, outDir)}/`);
   console.log(`Totals: ${totalClicks} clicks / ${totalImpr} impressions across ${pages.rows.length} pages`);
-  reportDaily(daily.rows);
+  reportDaily(daily.rows, endDate);
   console.log(`\nNext: python scripts/gsc_analysis.py   (auto-uses the newest export folder)\n`);
 }
 

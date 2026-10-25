@@ -11,6 +11,15 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USPaycheckCalculator } from '../../components/calculators/USPaycheckCalculator';
+import { HSA_LIMITS_2026 } from '../../components/calculators/HSACalculator/types';
+import { SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../lib/us-tax-2026';
+
+const usd = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n);
 
 const title = 'Free US Paycheck Calculator: Take-Home Pay After Taxes | Boring Math';
 const description =
@@ -86,8 +95,7 @@ const faqs = [
   },
   {
     question: 'What is FICA and why is it on my paycheck?',
-    answer:
-      'FICA (Federal Insurance Contributions Act) includes Social Security (6.2% up to $184,500 in 2026) and Medicare (1.45% on all wages, plus 0.9% additional Medicare tax on wages over $200,000). Your employer pays a matching amount.',
+    answer: `FICA (Federal Insurance Contributions Act) includes Social Security (6.2% up to ${usd(SOCIAL_SECURITY_WAGE_BASE_2026)} in 2026) and Medicare (1.45% on all wages, plus 0.9% additional Medicare tax on wages over $200,000). Your employer pays a matching amount.`,
   },
   {
     question: 'How accurate is this paycheck calculator?',
@@ -151,7 +159,9 @@ const schemaBreadcrumbs = [
         <strong>Federal Income Tax:</strong> Progressive tax based on your income bracket (10-37%)
       </li>
       <li><strong>State Income Tax:</strong> Varies by state (0% to 13.3% in California)</li>
-      <li><strong>Social Security:</strong> 6.2% on wages up to $184,500 (2026)</li>
+      <li>
+        <strong>Social Security:</strong> 6.2% on wages up to {usd(SOCIAL_SECURITY_WAGE_BASE_2026)} (2026)
+      </li>
       <li><strong>Medicare:</strong> 1.45% on all wages, plus 0.9% above $200,000</li>
     </ul>
   </ContentSection>
@@ -162,7 +172,10 @@ const schemaBreadcrumbs = [
         <h4 class="font-semibold text-green-400 mb-2">Pre-Tax Strategies</h4>
         <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
           <li><strong>401(k):</strong> Up to $24,500/year reduces taxable income</li>
-          <li><strong>HSA:</strong> $4,400 individual / $8,750 family (2026)</li>
+          <li>
+            <strong>HSA:</strong>
+            {usd(HSA_LIMITS_2026.individual)} individual / {usd(HSA_LIMITS_2026.family)} family (2026)
+          </li>
           <li><strong>FSA:</strong> $3,400 for healthcare, $7,500 for dependent care</li>
           <li><strong>Commuter Benefits:</strong> $340/month for transit or parking</li>
         </ul>

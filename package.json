@@ -17,6 +17,7 @@
     "test:coverage": "vitest run --coverage",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
+    "typecheck": "node scripts/check-types.mjs",
     "format": "prettier --write \"src/**/*.{ts,tsx,astro,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,astro,css}\"",
     "seo:cluster": "node scripts/seo/keyword-cluster-pipeline.mjs",

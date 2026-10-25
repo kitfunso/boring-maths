@@ -93,7 +93,7 @@ export default function NurseryCostCalculator() {
               <Select
                 id="region"
                 value={inputs.region}
-                onChange={(e) => updateInput('region', e.currentTarget.value as UKRegion)}
+                onChange={(value) => updateInput('region', value as UKRegion)}
                 options={Object.entries(UK_REGION_LABELS).map(([value, label]) => ({
                   value,
                   label,
@@ -145,9 +145,7 @@ export default function NurseryCostCalculator() {
                         <Select
                           id={`child-age-${index}`}
                           value={child.age}
-                          onChange={(e) =>
-                            updateChild(index, 'age', e.currentTarget.value as ChildAge)
-                          }
+                          onChange={(value) => updateChild(index, 'age', value as ChildAge)}
                           options={Object.entries(CHILD_AGE_LABELS).map(([value, label]) => ({
                             value,
                             label,
@@ -196,9 +194,7 @@ export default function NurseryCostCalculator() {
                 <Select
                   id="employmentStatus"
                   value={inputs.employmentStatus}
-                  onChange={(e) =>
-                    updateInput('employmentStatus', e.currentTarget.value as EmploymentStatus)
-                  }
+                  onChange={(value) => updateInput('employmentStatus', value as EmploymentStatus)}
                   options={Object.entries(EMPLOYMENT_STATUS_LABELS).map(([value, label]) => ({
                     value,
                     label,
@@ -233,9 +229,7 @@ export default function NurseryCostCalculator() {
                 <Select
                   id="benefitStatus"
                   value={inputs.benefitStatus}
-                  onChange={(e) =>
-                    updateInput('benefitStatus', e.currentTarget.value as BenefitStatus)
-                  }
+                  onChange={(value) => updateInput('benefitStatus', value as BenefitStatus)}
                   options={Object.entries(BENEFIT_STATUS_LABELS).map(([value, label]) => ({
                     value,
                     label,
@@ -247,7 +241,7 @@ export default function NurseryCostCalculator() {
                 <Select
                   id="weeksPerYear"
                   value={String(inputs.weeksPerYear)}
-                  onChange={(e) => updateInput('weeksPerYear', Number(e.currentTarget.value))}
+                  onChange={(value) => updateInput('weeksPerYear', Number(value))}
                   options={[
                     { value: '38', label: '38 weeks (term time only)' },
                     { value: '48', label: '48 weeks (with holidays)' },

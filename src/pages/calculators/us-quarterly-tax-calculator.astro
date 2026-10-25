@@ -11,6 +11,13 @@ import ContentSection from '../../components/calculators/shared/ContentSection.a
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
 import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { USQuarterlyTaxCalculator } from '../../components/calculators/USQuarterlyTaxCalculator';
+import { QUARTERLY_DUE_DATES_2026 } from '../../components/calculators/USQuarterlyTaxCalculator/types';
+
+// "Jan 1 - Mar 31" -> "Jan-Mar"
+const dueDatesText = QUARTERLY_DUE_DATES_2026.map((q) => {
+  const [firstMonth, lastMonth] = q.period.split(' - ').map((d) => d.split(' ')[0]);
+  return `Q${q.quarter} (${firstMonth}-${lastMonth} income) on ${q.date}`;
+}).join('; ');
 
 const title = 'Free Quarterly Estimated Tax Calculator: 1040-ES | Boring Math';
 const description =
@@ -52,8 +59,7 @@ const relatedCalculators = [
 const faqs = [
   {
     question: 'When are quarterly estimated tax payments due?',
-    answer:
-      'For 2026, quarterly payments are due: Q1 (Jan-Mar income) on April 15, 2026; Q2 (Apr-May income) on June 15, 2026; Q3 (Jun-Aug income) on September 15, 2026; Q4 (Sep-Dec income) on January 15, 2027. If a due date falls on a weekend or holiday, the deadline moves to the next business day.',
+    answer: `For 2026, quarterly payments are due: ${dueDatesText}. If a due date falls on a weekend or holiday, the deadline moves to the next business day.`,
   },
   {
     question: 'Do I need to pay quarterly estimated taxes?',

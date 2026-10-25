@@ -5,6 +5,9 @@ on:
     branches: [master, main]
   pull_request:
     branches: [master, main]
+  # Weekly run so the date gates (stale sources, expired validUntil) fail without waiting for a deploy
+  schedule:
+    - cron: '0 6 * * 1'
 
 jobs:
   qa:
@@ -29,6 +32,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+
+      - name: Type check (ratchet)
+        run: npm run typecheck
 
       - name: Run tests
         run: npm run test

@@ -10,6 +10,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import OvertimeCalculator from '../../components/calculators/OvertimeCalculator/OvertimeCalculator';
 
 // SEO Configuration
@@ -65,7 +66,7 @@ const faqs = [
   {
     question: 'Is overtime taxed at a higher rate?',
     answer:
-      "Not exactly. Overtime isn't taxed at a special higher rate. However, the extra income can push you into a higher marginal tax bracket, so you may pay more tax on that additional income. More importantly, all the combined deductions (federal, state, FICA) can add up to 30-40% of your overtime pay.",
+      "Not exactly. Overtime isn't taxed at a special higher rate. However, the extra income can push you into a higher marginal tax bracket, so you may pay more tax on that additional income. Together, federal tax, state tax and FICA often take 20-40% of overtime pay. For 2025 to 2028, US workers can also deduct the half-time premium the FLSA requires (up to $12,500, or $25,000 on a joint return) from federal income tax, and this calculator includes that.",
   },
   {
     question: 'Why does my overtime paycheck seem smaller than expected?',
@@ -80,7 +81,7 @@ const faqs = [
   {
     question: 'How much of my overtime do I actually keep?',
     answer:
-      'It depends on your tax situation, but most people keep 60-75% of their overtime pay. Federal income tax (10-37%), state income tax (0-13%), Social Security (6.2%), and Medicare (1.45%) all take a cut. Use our calculator to see your exact amount.',
+      'It depends on your tax situation, but many people keep 60-80% of their overtime pay. Federal income tax (10-37%), state income tax (0-13%), Social Security (6.2%), and Medicare (1.45%) all take a cut, though the federal overtime deduction shelters the half-time premium from income tax. In the UK, income tax and National Insurance (8%, or 2% above £50,270) take the cut. Use our calculator to see your exact amount.',
   },
   {
     question: 'Does overtime affect my tax bracket?',
@@ -95,12 +96,12 @@ const faqs = [
   {
     question: 'How do I maximize my overtime pay?',
     answer:
-      "You can't avoid taxes on overtime, but you can: (1) contribute more to pre-tax retirement accounts to lower your taxable income, (2) time overtime to avoid income spikes that trigger higher withholding, (3) adjust your W-4 if you're over-withholding, (4) use HSA contributions if eligible.",
+      "In the US, the federal overtime deduction (2025 to 2028) already removes income tax on the required half-time premium, up to $12,500 ($25,000 joint), with less above $150,000 of income ($300,000 joint). Beyond that you can: (1) contribute more to pre-tax retirement accounts to lower your taxable income, (2) time overtime to avoid income spikes that trigger higher withholding, (3) adjust your W-4 if you're over-withholding, (4) use HSA contributions if eligible.",
   },
   {
     question: 'Is double time better than time and a half?',
     answer:
-      'Yes, but not twice as good after taxes. If your regular rate is $25/hr, time and a half pays $37.50/hr gross but maybe $26/hr net. Double time pays $50/hr gross but maybe $32/hr net. The extra taxes on the higher income eat into the difference.',
+      "Yes, but not twice as good after taxes. With this calculator's defaults ($25/hr, $52,000 a year, single, 5% state tax), time and a half pays $37.50/hr gross and about $30/hr net. Double time pays $50/hr gross and about $38/hr net. Only the half-time premium qualifies for the federal overtime deduction, so the extra half hour of pay is fully taxed.",
   },
 ];
 
@@ -161,7 +162,9 @@ const schemaBreadcrumbs = [
     </p>
     <p>
       For US users, set your <strong>filing status</strong> and <strong>state tax rate</strong> for accurate
-      calculations. Enable FICA to include Social Security and Medicare taxes.
+      calculations. Enable FICA to include Social Security and Medicare taxes. US results apply the 2026
+      standard deduction and the federal overtime deduction for the half-time premium. UK results use
+      the 2026/27 income tax bands and include National Insurance.
     </p>
   </ContentSection>
 
@@ -186,5 +189,35 @@ const schemaBreadcrumbs = [
   </ContentSection>
 
   <!-- FAQ Section -->
+  <SourcesSection
+    checked="2026-10-25"
+    sources={[
+      {
+        label: 'IRS: What to know about the No Tax on Overtime deduction',
+        href: 'https://www.irs.gov/newsroom/what-to-know-about-the-no-tax-on-overtime-deduction',
+      },
+      {
+        label: 'Cornell LII: 26 U.S. Code section 225, qualified overtime compensation',
+        href: 'https://www.law.cornell.edu/uscode/text/26/225',
+      },
+      {
+        label: 'IRS: Tax inflation adjustments for tax year 2026',
+        href: 'https://www.irs.gov/newsroom/irs-releases-tax-inflation-adjustments-for-tax-year-2026-including-amendments-from-the-one-big-beautiful-bill',
+      },
+      {
+        label: 'SSA: Contribution and Benefit Base',
+        href: 'https://www.ssa.gov/oact/cola/cbb.html',
+      },
+      {
+        label: 'GOV.UK: Income Tax rates and Personal Allowances',
+        href: 'https://www.gov.uk/income-tax-rates',
+      },
+      {
+        label: 'GOV.UK: National Insurance, how much you pay',
+        href: 'https://www.gov.uk/national-insurance/how-much-you-pay',
+      },
+    ]}
+  />
+
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

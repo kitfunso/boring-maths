@@ -152,12 +152,8 @@ export default function OvertimeCalculator() {
                   <Select
                     id="filingStatus"
                     value={inputs.filingStatus}
-                    onChange={(e) =>
-                      updateInput(
-                        'filingStatus',
-                        (e.target as HTMLSelectElement)
-                          .value as OvertimeCalculatorInputs['filingStatus']
-                      )
+                    onChange={(value) =>
+                      updateInput('filingStatus', value as OvertimeCalculatorInputs['filingStatus'])
                     }
                     options={[
                       { value: 'single', label: 'Single' },
@@ -185,7 +181,7 @@ export default function OvertimeCalculator() {
               <Checkbox
                 id="includeFICA"
                 checked={inputs.includeFICA}
-                onChange={(e) => updateInput('includeFICA', (e.target as HTMLInputElement).checked)}
+                onChange={(checked) => updateInput('includeFICA', checked)}
                 label="Include FICA taxes (Social Security + Medicare)"
               />
             )}
@@ -355,7 +351,8 @@ export default function OvertimeCalculator() {
             {result.pushesIntoBracket && (
               <Alert variant="warning" title="Bracket Bump Warning">
                 Your overtime income pushes you into the {result.bracketAfterOT.label} bracket. This
-                doesn't mean all your income is taxed at the higher rate - only the portion above{' '}
+                doesn't mean all your income is taxed at the higher rate - only the{' '}
+                {result.currency === 'USD' ? 'taxable income (after deductions)' : 'income'} above{' '}
                 {formatCurrency(result.currentBracket.max, result.currency)} is taxed at the higher
                 rate.
               </Alert>

@@ -11,8 +11,7 @@ import {
   SOCIAL_SECURITY_RATE,
   MEDICARE_RATE,
   MEDICARE_ADDITIONAL_RATE,
-  MEDICARE_ADDITIONAL_THRESHOLD_SINGLE,
-  MEDICARE_ADDITIONAL_THRESHOLD_MARRIED,
+  MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD,
 } from './types';
 import { STANDARD_DEDUCTION_2026, SOCIAL_SECURITY_WAGE_BASE_2026 } from '../../../lib/us-tax-2026';
 
@@ -55,15 +54,11 @@ export function calculatePaycheck(inputs: PaycheckInputs): PaycheckResult {
   const annualSS = ssableIncome * SOCIAL_SECURITY_RATE;
   const socialSecurity = annualSS / payPeriods;
 
-  // Medicare (1.45% + 0.9% additional above threshold)
-  const medicareThreshold =
-    filingStatus === 'married'
-      ? MEDICARE_ADDITIONAL_THRESHOLD_MARRIED
-      : MEDICARE_ADDITIONAL_THRESHOLD_SINGLE;
-
+  // Medicare (1.45% + 0.9% additional withholding above the threshold)
   let annualMedicare = grossSalary * MEDICARE_RATE;
-  if (grossSalary > medicareThreshold) {
-    annualMedicare += (grossSalary - medicareThreshold) * MEDICARE_ADDITIONAL_RATE;
+  if (grossSalary > MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD) {
+    annualMedicare +=
+      (grossSalary - MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD) * MEDICARE_ADDITIONAL_RATE;
   }
   const medicare = annualMedicare / payPeriods;
 

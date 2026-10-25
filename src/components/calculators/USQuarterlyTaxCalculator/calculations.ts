@@ -15,6 +15,8 @@ import {
   FEDERAL_BRACKETS_2026,
   STANDARD_DEDUCTION_2026,
   SOCIAL_SECURITY_WAGE_BASE_2026,
+  ADDITIONAL_MEDICARE_RATE,
+  ADDITIONAL_MEDICARE_THRESHOLDS,
 } from '../../../lib/us-tax-2026';
 
 export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterlyTaxResult {
@@ -31,10 +33,14 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   const seTaxableIncome = selfEmploymentIncome * SE_TAX_MULTIPLIER;
   const ssSocialSecurityTax = Math.min(seTaxableIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * 0.124;
   const ssMedicareTax = seTaxableIncome * 0.029;
-  const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax;
+  // Wages are not an input, so the 0.9% uses the full threshold (Form 8959 Part II)
+  const additionalMedicareTax =
+    Math.max(0, seTaxableIncome - ADDITIONAL_MEDICARE_THRESHOLDS[filingStatus]) *
+    ADDITIONAL_MEDICARE_RATE;
+  const selfEmploymentTax = ssSocialSecurityTax + ssMedicareTax + additionalMedicareTax;
 
-  // Half SE tax deduction
-  const halfSETax = selfEmploymentTax / 2;
+  // Half SE tax deduction (Additional Medicare is not deductible)
+  const halfSETax = (ssSocialSecurityTax + ssMedicareTax) / 2;
 
   // Calculate Federal Income Tax
   const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
@@ -63,18 +69,17 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
   // Use the lower safe harbor amount
   const safeHarborAmount = Math.min(currentYearSafeHarbor, priorYearSafeHarbor);
 
-  // Check if meeting safe harbor
-  const totalPayments = withholdingsFromW2 + quarterlyPayment * 4;
-  const meetsCurrentYearSafeHarbor = totalPayments >= currentYearSafeHarbor;
-  const meetsPriorYearSafeHarbor = totalPayments >= priorYearSafeHarbor;
+  // Judge withholding alone: counting the suggested payments would always pass
+  const meetsCurrentYearSafeHarbor = withholdingsFromW2 >= currentYearSafeHarbor;
+  const meetsPriorYearSafeHarbor = withholdingsFromW2 >= priorYearSafeHarbor;
 
-  // Determine penalty risk
+  // Penalty risk if no estimated payments are made
   let penaltyRisk: 'none' | 'low' | 'high' = 'none';
   if (remainingTaxDue < 1000) {
     penaltyRisk = 'none';
   } else if (meetsCurrentYearSafeHarbor || meetsPriorYearSafeHarbor) {
     penaltyRisk = 'none';
-  } else if (totalPayments >= estimatedTotalTax * 0.8) {
+  } else if (withholdingsFromW2 >= safeHarborAmount * 0.8) {
     penaltyRisk = 'low';
   } else {
     penaltyRisk = 'high';
@@ -110,6 +115,8 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     quarterlyPayment,
     quarterPayments,
     safeHarborAmount: Math.round(safeHarborAmount),
+    currentYearSafeHarbor: Math.round(currentYearSafeHarbor),
+    priorYearSafeHarbor: Math.round(priorYearSafeHarbor),
     safeHarborRule,
     meetsCurrentYearSafeHarbor,
     meetsPriorYearSafeHarbor,

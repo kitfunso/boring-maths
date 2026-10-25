@@ -51,7 +51,7 @@ const GRID_COLS = {
  * />
  * ```
  */
-export function ButtonGroup<T extends string>({
+export function ButtonGroup<T extends string | number>({
   options,
   value,
   onChange,

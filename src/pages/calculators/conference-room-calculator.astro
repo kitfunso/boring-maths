@@ -234,8 +234,10 @@ const schemaBreadcrumbs = [
     <p>
       Wall clearance and the presenter area leave 38 ft x 24 ft = 912 sq ft. The aisle takes 4 x 38
       = 152, and ADA spacing takes 5% off the remaining 760, leaving <strong>722 sq ft</strong>.
-      Classroom style needs 18 sq ft per person, so 722 / 18 = 40.1, which the tool rounds down to
-      <strong>40 people</strong>. Theater style fits <strong>120</strong> in the same room.
+      Classroom style needs 18 sq ft per person, so the floor area allows 722 / 18 = 40. The tables
+      set the real limit: each side of the aisle is 10 ft wide, which holds one 6 ft table for 2
+      people, and 38 ft of depth holds 7 rows at 5 ft. That is 7 x 2 tables x 2 seats =
+      <strong>28 people</strong>. Theater style fits <strong>120</strong> in the same room.
     </p>
   </ContentSection>
 
@@ -288,14 +290,15 @@ const schemaBreadcrumbs = [
             <span>Usable seating area</span><span>532 sq ft</span>
           </div>
           <div class="flex justify-between"><span>Space per person</span><span>18 sq ft</span></div>
-          <div class="flex justify-between"><span>Max capacity</span><span>29 people</span></div>
+          <div class="flex justify-between"><span>Max capacity</span><span>20 people</span></div>
           <div class="flex justify-between font-medium text-[var(--color-cream)]">
             <span>For 40 people, you need</span><span>720 sq ft</span>
           </div>
         </div>
         <p class="mt-3 text-sm text-[var(--color-subtle)]">
           Classroom does not fit 40 in this room once the presenter area and an accessible aisle are
-          in place. It seats 29, each with a table surface for a laptop and notepad.
+          in place. The floor area would allow 29, but each 10 ft side of the aisle holds only one 6
+          ft table, so 5 rows seat 20, each with a table surface for a laptop and notepad.
         </p>
         <p class="mt-2 text-sm font-medium text-green-400">
           Best for: full-day training, workshops, anything involving laptops or writing.
@@ -303,11 +306,11 @@ const schemaBreadcrumbs = [
       </div>
     </div>
     <p class="mt-4 text-[var(--color-subtle)]">
-      For a 40-person full-day training, classroom needs a bigger room. At 50 ft x 30 ft (1,500 sq
-      ft) the calculator gives 722 sq ft of usable seating area, enough for exactly 40 classroom
-      seats. In the 1,200 sq ft room, the choices are theater seating, a smaller group of 29, or a
-      shorter session. Either way, keep at least 6 ft clear at the front for the presenter and a
-      screen at eye level for the back row.
+      For a 40-person full-day training, classroom needs a wider room, not only a longer one. Each
+      side of the aisle must hold two 6 ft tables (about 13 ft), so the room must be about 36 ft
+      wide. A 42 ft x 36 ft room seats 41 classroom style. In the 1,200 sq ft room, the choices are
+      theater seating, a smaller group of 20, or a shorter session. Either way, keep at least 6 ft
+      clear at the front for the presenter and a screen at eye level for the back row.
     </p>
   </ContentSection>
 

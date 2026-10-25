@@ -41,11 +41,11 @@ export interface RateBreakdownLine {
 }
 
 // ---------------------------------------------------------------------------
-// UK HMRC AMAP Rates (2024/25 tax year, unchanged since 2011)
+// UK HMRC AMAP Rates (2026/27 tax year; cars and vans were 45p from 2011 to 2026)
 // ---------------------------------------------------------------------------
 
 /** Pence per mile for first 10,000 business miles (car) */
-export const UK_CAR_RATE_FIRST_10K = 0.45;
+export const UK_CAR_RATE_FIRST_10K = 0.55;
 /** Pence per mile above 10,000 business miles (car) */
 export const UK_CAR_RATE_OVER_10K = 0.25;
 /** Pence per mile for motorcycles (flat rate) */
@@ -57,9 +57,10 @@ export const UK_BICYCLE_RATE = 0.2;
 // US IRS Standard Mileage Rate (2026)
 // ---------------------------------------------------------------------------
 
-// IRS raised the 2026 rate mid-year (72.5 cents to 30 June), so the tool uses the rate in force now.
+// IRS raised the 2026 rate mid-year (IR-2026-29); annual miles are split evenly across the two halves.
+export const US_IRS_RATE_JAN_JUN = 0.725;
 export const US_IRS_RATE = 0.76;
-export const US_IRS_RATE_LABEL = '76c per mile (from 1 July 2026)';
+export const US_IRS_RATE_LABEL = '72.5c to 30 June, 76c from 1 July 2026';
 
 // ---------------------------------------------------------------------------
 // Estimated marginal tax rates (for tax saving calculation)

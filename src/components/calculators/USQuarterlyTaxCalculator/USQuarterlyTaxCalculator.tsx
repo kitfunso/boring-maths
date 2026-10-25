@@ -245,11 +245,11 @@ export default function USQuarterlyTaxCalculator() {
                   </p>
                   <p className="text-sm text-[var(--color-subtle)] mt-1">
                     {result.penaltyRisk === 'none' &&
-                      'Your payments meet safe harbor requirements.'}
+                      'Your withholding alone avoids an underpayment penalty.'}
                     {result.penaltyRisk === 'low' &&
-                      'Consider increasing payments to meet safe harbor.'}
+                      'Your withholding falls a little short of safe harbor. Make the payments below.'}
                     {result.penaltyRisk === 'high' &&
-                      'Increase payments to avoid underpayment penalties.'}
+                      'Without the payments below you would face an underpayment penalty.'}
                   </p>
                 </div>
               </div>
@@ -330,7 +330,10 @@ export default function USQuarterlyTaxCalculator() {
 
             {/* Safe Harbor Rules */}
             <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
-              <h4 className="text-sm font-medium text-amber-400 mb-3">Safe Harbor Rules</h4>
+              <h4 className="text-sm font-medium text-amber-400 mb-1">Safe Harbor Rules</h4>
+              <p className="text-xs text-[var(--color-muted)] mb-3">
+                A tick means your withholding alone already covers that rule.
+              </p>
               <div className="space-y-3 text-sm text-[var(--color-subtle)]">
                 <div className="flex items-center gap-2">
                   <span
@@ -341,7 +344,7 @@ export default function USQuarterlyTaxCalculator() {
                     {result.meetsCurrentYearSafeHarbor ? '✓' : '✗'}
                   </span>
                   <span>
-                    Pay 90% of current year tax ({formatCurrency(result.estimatedTotalTax * 0.9)})
+                    Pay 90% of current year tax ({formatCurrency(result.currentYearSafeHarbor)})
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -357,7 +360,7 @@ export default function USQuarterlyTaxCalculator() {
                     {inputs.priorYearAGI > HIGH_INCOME_THRESHOLDS[inputs.filingStatus]
                       ? '110%'
                       : '100%'}{' '}
-                    of prior year tax ({formatCurrency(result.safeHarborAmount)})
+                    of prior year tax ({formatCurrency(result.priorYearSafeHarbor)})
                   </span>
                 </div>
                 <p className="text-xs text-[var(--color-muted)] mt-2">

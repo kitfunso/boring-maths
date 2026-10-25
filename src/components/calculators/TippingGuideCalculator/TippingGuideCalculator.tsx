@@ -101,7 +101,7 @@ export default function TippingGuideCalculator() {
               <Select
                 id="country"
                 value={inputs.country}
-                onChange={(e) => handleCountryChange(e.target.value as TippingCountry)}
+                onChange={(value) => handleCountryChange(value as TippingCountry)}
                 options={COUNTRY_OPTIONS}
               />
             </div>
@@ -114,7 +114,7 @@ export default function TippingGuideCalculator() {
               <Select
                 id="serviceType"
                 value={inputs.serviceType}
-                onChange={(e) => updateInput('serviceType', e.target.value as ServiceType)}
+                onChange={(value) => updateInput('serviceType', value as ServiceType)}
                 options={SERVICE_OPTIONS}
               />
             </div>

@@ -2,12 +2,12 @@
  * Business Mileage Calculator - Calculation Logic
  *
  * UK: HMRC Approved Mileage Allowance Payments (AMAP)
- *   - Car/Van: 45p first 10,000 miles, 25p thereafter
+ *   - Car/Van: 55p first 10,000 miles, 25p thereafter (2026/27)
  *   - Motorcycle: 24p flat
  *   - Bicycle: 20p flat
  *
  * US: IRS Standard Mileage Rate
- *   - 76 cents per mile (from 1 July 2026)
+ *   - 72.5 cents per mile to 30 June 2026, 76 cents from 1 July
  */
 
 import type { BusinessMileageInputs, BusinessMileageResult, RateBreakdownLine } from './types';
@@ -16,6 +16,7 @@ import {
   UK_CAR_RATE_OVER_10K,
   UK_MOTORCYCLE_RATE,
   UK_BICYCLE_RATE,
+  US_IRS_RATE_JAN_JUN,
   US_IRS_RATE,
   ESTIMATED_TAX_RATES,
 } from './types';
@@ -86,15 +87,24 @@ function calculateUSDeduction(annualMiles: number): {
   deduction: number;
   breakdown: RateBreakdownLine[];
 } {
-  const amount = round2(annualMiles * US_IRS_RATE);
+  const firstHalfMiles = Math.floor(annualMiles / 2);
+  const secondHalfMiles = annualMiles - firstHalfMiles;
+  const firstHalfAmount = round2(firstHalfMiles * US_IRS_RATE_JAN_JUN);
+  const secondHalfAmount = round2(secondHalfMiles * US_IRS_RATE);
   return {
-    deduction: amount,
+    deduction: round2(firstHalfAmount + secondHalfAmount),
     breakdown: [
       {
-        label: 'IRS standard rate (from 1 July 2026)',
-        miles: annualMiles,
+        label: 'IRS rate, January to June 2026 (half the miles)',
+        miles: firstHalfMiles,
+        rate: US_IRS_RATE_JAN_JUN,
+        amount: firstHalfAmount,
+      },
+      {
+        label: 'IRS rate, July to December 2026 (half the miles)',
+        miles: secondHalfMiles,
         rate: US_IRS_RATE,
-        amount,
+        amount: secondHalfAmount,
       },
     ],
   };
@@ -109,9 +119,9 @@ function getElectricNote(
   if (vehicleType !== 'car') return '';
 
   if (region === 'UK') {
-    return 'UK HMRC mileage rates are the same for electric and petrol/diesel cars. You can claim 45p/25p regardless of fuel type.';
+    return 'UK HMRC mileage rates are the same for electric and petrol/diesel cars. You can claim 55p/25p regardless of fuel type.';
   }
-  return 'The IRS standard mileage rate of 67c applies to all vehicles including EVs. You cannot also deduct electricity charging costs if using the standard rate.';
+  return 'The 2026 IRS standard mileage rate (72.5c to 30 June, 76c from 1 July) applies to all vehicles including EVs. You cannot also deduct electricity charging costs if using the standard rate.';
 }
 
 /**
@@ -161,7 +171,7 @@ export function formatPenceOrCents(value: number, region: BusinessMileageInputs[
   if (region === 'UK') {
     return `${Math.round(value * 100)}p`;
   }
-  return `${Math.round(value * 100)}c`;
+  return `${Number((value * 100).toFixed(1))}c`;
 }
 
 export function formatNumber(value: number): string {

@@ -136,8 +136,8 @@ export const STATE_TAX_DATA: Record<string, { name: string; rate: number; hasLoc
 export const SOCIAL_SECURITY_RATE = 0.062;
 export const MEDICARE_RATE = 0.0145;
 export const MEDICARE_ADDITIONAL_RATE = 0.009;
-export const MEDICARE_ADDITIONAL_THRESHOLD_SINGLE = 200000;
-export const MEDICARE_ADDITIONAL_THRESHOLD_MARRIED = 250000;
+// Employers withhold above $200,000 whatever the filing status (IRS Topic 560)
+export const MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD = 200000;
 
 export function getDefaultInputs(): PaycheckInputs {
   return {

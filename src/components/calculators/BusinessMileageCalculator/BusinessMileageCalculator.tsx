@@ -234,7 +234,7 @@ export default function BusinessMileageCalculator() {
                           : formatCurrency(comparisonResult.taxDeduction, 'GBP')}
                       </div>
                       <div className="text-xs text-[var(--color-muted)] mt-1">
-                        45p/25p per mile (car)
+                        55p/25p per mile (car)
                       </div>
                     </div>
                     <div

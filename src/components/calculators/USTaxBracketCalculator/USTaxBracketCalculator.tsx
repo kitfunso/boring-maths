@@ -9,19 +9,31 @@ import {
   type FilingStatus,
   type TaxYear,
 } from './types';
-import { ThemeProvider, Card, CalculatorHeader, Label, Input, ButtonGroup, Grid } from '../../ui';
+import {
+  ThemeProvider,
+  Card,
+  CalculatorHeader,
+  Label,
+  Input,
+  ButtonGroup,
+  Grid,
+  type ButtonGroupOption,
+} from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
-const FILING_STATUS_OPTIONS = [
+const FILING_STATUS_OPTIONS: ButtonGroupOption<FilingStatus>[] = [
   { value: 'single', label: 'Single' },
   { value: 'married_jointly', label: 'Married Joint' },
   { value: 'married_separately', label: 'Married Sep.' },
   { value: 'head_of_household', label: 'Head of House' },
 ];
 
-const TAX_YEAR_OPTIONS = TAX_YEARS.map((year) => ({ value: year, label: String(year) }));
+const TAX_YEAR_OPTIONS: ButtonGroupOption<TaxYear>[] = TAX_YEARS.map((year) => ({
+  value: year,
+  label: String(year),
+}));
 
-const DEDUCTION_OPTIONS = [
+const DEDUCTION_OPTIONS: ButtonGroupOption<USTaxBracketInputs['deductionType']>[] = [
   { value: 'standard', label: 'Standard' },
   { value: 'itemized', label: 'Itemized' },
 ];
@@ -74,7 +86,8 @@ export default function USTaxBracketCalculator() {
               <ButtonGroup
                 options={TAX_YEAR_OPTIONS}
                 value={inputs.taxYear}
-                onChange={(value) => updateInput('taxYear', value as TaxYear)}
+                onChange={(value) => updateInput('taxYear', value)}
+                aria-label="Tax year"
               />
             </div>
 
@@ -84,7 +97,8 @@ export default function USTaxBracketCalculator() {
               <ButtonGroup
                 options={FILING_STATUS_OPTIONS}
                 value={inputs.filingStatus}
-                onChange={(value) => updateInput('filingStatus', value as FilingStatus)}
+                onChange={(value) => updateInput('filingStatus', value)}
+                aria-label="Filing status"
               />
             </div>
 
@@ -118,7 +132,8 @@ export default function USTaxBracketCalculator() {
               <ButtonGroup
                 options={DEDUCTION_OPTIONS}
                 value={inputs.deductionType}
-                onChange={(value) => updateInput('deductionType', value as 'standard' | 'itemized')}
+                onChange={(value) => updateInput('deductionType', value)}
+                aria-label="Deduction type"
               />
               <p className="text-xs text-[var(--color-muted)] mt-1">
                 Standard deduction for {FILING_STATUS_LABELS[inputs.filingStatus]}:{' '}
@@ -344,7 +359,7 @@ export default function USTaxBracketCalculator() {
 
             <div className="flex justify-center pt-4">
               <ShareResults
-                result={`Federal tax: ${formatCurrency(result.federalTax)} on ${formatCurrency(inputs.grossIncome)} income. Marginal bracket: ${result.marginalBracketLabel}, effective rate: ${formatPercent(result.effectiveRate)}. After-tax: ${formatCurrency(result.afterTaxIncome)}.`}
+                result={`${inputs.taxYear} federal tax: ${formatCurrency(result.federalTax)} on ${formatCurrency(inputs.grossIncome)} income. Marginal bracket: ${result.marginalBracketLabel}, effective rate: ${formatPercent(result.effectiveRate)}. After-tax: ${formatCurrency(result.afterTaxIncome)}.`}
                 calculatorName="US Tax Bracket Calculator"
               />
             </div>

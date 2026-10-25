@@ -278,9 +278,7 @@ export default function BuyVsRent() {
                 <Checkbox
                   id="includeTaxBenefits"
                   checked={inputs.includeTaxBenefits}
-                  onChange={(e) =>
-                    updateInput('includeTaxBenefits', (e.target as HTMLInputElement).checked)
-                  }
+                  onChange={(checked) => updateInput('includeTaxBenefits', checked)}
                   label="Include mortgage interest tax deduction"
                 />
               )}

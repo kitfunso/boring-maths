@@ -90,7 +90,7 @@ const faqs = [
   {
     question: 'How is salary taxed in Germany?',
     answer:
-      'Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 20% for employees. The tax-free allowance (Grundfreibetrag) is €12,348 (2026). Married couples can benefit from income splitting (Ehegattensplitting).',
+      'Germany uses progressive tax brackets from 14% to 45% (plus 5.5% solidarity surcharge). Social contributions (pension, health, unemployment, care insurance) add about 21% for employees. The tax-free allowance (Grundfreibetrag) is €12,348 (2026). Married couples can benefit from income splitting (Ehegattensplitting).',
   },
   {
     question: 'What is the difference between gross and net salary?',
@@ -188,8 +188,11 @@ const schemaBreadcrumbs = [
       (Poland), Skatteministeriet (Denmark) and Skatteverket (Sweden). Social security ceilings
       (Germany, Austria, Spain) and rates (Netherlands, Spain, Belgium, Denmark) were also checked.
       Other social security shares and some allowances are simplified, and tax credits such as the
-      Dutch heffingskortingen are not included. Ireland uses the full model from the Ireland salary
-      calculator: PAYE with the personal and employee credits, USC and PRSI.
+      Dutch heffingskortingen are not included. Belgium takes its 2026 tax-free sum of EUR 11,550 as
+      a 25% credit and leaves out municipal surcharges. Poland adds the 9% health contribution.
+      Germany and Ireland use the full models from their own salary calculators: section 32a tax,
+      solidarity surcharge and the four social insurances for Germany, PAYE with credits, USC and
+      PRSI for Ireland.
     </p>
   </ContentSection>
 
@@ -209,7 +212,7 @@ const schemaBreadcrumbs = [
         <h4 class="font-semibold text-red-400 mb-2">Higher Tax Burden</h4>
         <ul class="text-sm space-y-1 text-[var(--color-subtle)]">
           <li>Belgium - Up to 50% + high social security</li>
-          <li>Denmark - Up to 57% total tax rate</li>
+          <li>Denmark - Up to 57% income tax, about 60% with the 8% AM-bidrag</li>
           <li>Sweden - Up to 52% including local taxes</li>
           <li>Germany - Up to 45% + solidarity surcharge</li>
           <li>France - Up to 45% + high contributions</li>

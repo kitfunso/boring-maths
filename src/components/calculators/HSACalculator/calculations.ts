@@ -32,7 +32,11 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
   const remainingRoom = Math.max(0, totalLimit - totalContribution);
 
   // Tax savings calculations (only on employee contribution, not employer)
-  const taxableContribution = Math.min(annualContribution, totalLimit - employerContribution);
+  // Floored at 0: an employer contribution above the limit leaves no room, not negative savings
+  const taxableContribution = Math.max(
+    0,
+    Math.min(annualContribution, totalLimit - employerContribution)
+  );
   const federalTaxSavings = taxableContribution * (federalTaxRate / 100);
   const stateTaxSavings = taxableContribution * (stateTaxRate / 100);
   const ficaTaxSavings = taxableContribution * FICA_RATE;
