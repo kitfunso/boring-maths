@@ -27,7 +27,6 @@ export default function DateDifferenceCalculator() {
     DateDifferenceInputs,
     DateDifferenceResult
   >({
-    name: 'Date Difference Calculator',
     slug: 'calc-date-diff-inputs',
     defaults: getDefaultInputs,
     compute: calculateDateDifference,

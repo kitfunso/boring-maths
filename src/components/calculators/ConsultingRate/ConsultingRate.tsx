@@ -32,7 +32,6 @@ export default function ConsultingRate() {
     ConsultingRateInputs,
     ReturnType<typeof calculateConsultingRate>
   >({
-    name: 'Consulting Rate Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateConsultingRate,
   });

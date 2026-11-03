@@ -31,7 +31,6 @@ export default function GPACalculator() {
     GPACalculatorInputs,
     ReturnType<typeof calculateGPA>
   >({
-    name: 'GPA Calculator',
     slug: 'calc-gpa-inputs',
     defaults: getDefaultInputs,
     compute: calculateGPA,

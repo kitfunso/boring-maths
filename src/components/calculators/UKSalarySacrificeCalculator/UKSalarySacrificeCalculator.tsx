@@ -24,7 +24,6 @@ export default function UKSalarySacrificeCalculator() {
     UKSalarySacrificeInputs,
     ReturnType<typeof calculateSalarySacrifice>
   >({
-    name: 'UK Salary Sacrifice Calculator',
     slug: 'calc-uk-salary-sacrifice-inputs',
     defaults: getDefaultInputs,
     compute: calculateSalarySacrifice,

@@ -303,7 +303,6 @@ export default function JobOfferComparison() {
     JobOfferComparisonInputs,
     JobOfferComparisonResult
   >({
-    name: 'Compare Job Offers',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateComparison,
   });

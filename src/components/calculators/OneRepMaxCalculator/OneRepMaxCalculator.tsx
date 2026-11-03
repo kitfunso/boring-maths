@@ -35,7 +35,6 @@ export default function OneRepMaxCalculator() {
     OneRepMaxInputs,
     ReturnType<typeof calculateOneRepMax>
   >({
-    name: 'One Rep Max Calculator',
     defaults: getDefaultInputs,
     compute: calculateOneRepMax,
   });

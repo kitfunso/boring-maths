@@ -36,7 +36,6 @@ export default function ClayShrinkageCalculator() {
     ClayShrinkageInputs,
     ReturnType<typeof calculateClayShrinkage>
   >({
-    name: 'Clay Shrinkage Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateClayShrinkage,
   });

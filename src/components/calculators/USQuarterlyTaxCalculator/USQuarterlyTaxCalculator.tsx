@@ -20,7 +20,6 @@ export default function USQuarterlyTaxCalculator() {
     USQuarterlyTaxInputs,
     ReturnType<typeof calculateQuarterlyTax>
   >({
-    name: 'Quarterly Estimated Tax Calculator',
     slug: 'calc-us-quarterly-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateQuarterlyTax,

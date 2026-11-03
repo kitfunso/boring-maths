@@ -64,7 +64,6 @@ export default function BabyCost() {
     BabyCostInputs,
     ReturnType<typeof calculateBabyCost>
   >({
-    name: 'Baby Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBabyCost,
   });

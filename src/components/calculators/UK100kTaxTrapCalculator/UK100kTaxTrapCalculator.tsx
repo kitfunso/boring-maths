@@ -33,7 +33,6 @@ export default function UK100kTaxTrapCalculator() {
     UK100kInputs,
     ReturnType<typeof calculateUK100kTax>
   >({
-    name: 'UK £100k Tax Trap Calculator',
     slug: 'calc-uk100k-inputs',
     defaults: getDefaultInputs,
     compute: calculateUK100kTax,

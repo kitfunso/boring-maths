@@ -49,7 +49,6 @@ export default function SolarCalculator() {
     SolarCalculatorInputs,
     ReturnType<typeof calculateSolar>
   >({
-    name: 'Solar Panel Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSolar,
   });

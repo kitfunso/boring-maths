@@ -27,7 +27,6 @@ export default function BreakEvenCalculator() {
     BreakEvenInputs,
     BreakEvenResult
   >({
-    name: 'Calculate Your Break-Even Point',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBreakEven,
   });

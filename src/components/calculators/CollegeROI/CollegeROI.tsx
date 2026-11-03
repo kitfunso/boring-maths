@@ -46,7 +46,6 @@ export default function CollegeROI() {
     CollegeROIInputs,
     ReturnType<typeof calculateCollegeROI>
   >({
-    name: 'College ROI Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCollegeROI,
   });

@@ -119,7 +119,6 @@ export default function SquareFootageCalculator() {
     SquareFootageCalculatorInputs,
     ReturnType<typeof calculateSquareFootage>
   >({
-    name: 'Square Footage Calculator',
     slug: 'calc-sqft-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSquareFootage,

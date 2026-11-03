@@ -67,7 +67,6 @@ export default function PetCost() {
     PetCostInputs,
     ReturnType<typeof calculatePetCost>
   >({
-    name: 'Pet Ownership Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePetCost,
   });

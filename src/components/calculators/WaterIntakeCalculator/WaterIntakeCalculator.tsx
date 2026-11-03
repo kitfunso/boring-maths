@@ -32,7 +32,6 @@ export default function WaterIntakeCalculator() {
     WaterIntakeInputs,
     WaterIntakeResult
   >({
-    name: 'Water Intake Calculator',
     defaults: getDefaultInputs,
     compute: calculateWaterIntake,
   });

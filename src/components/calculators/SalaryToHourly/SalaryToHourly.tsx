@@ -29,7 +29,6 @@ export default function SalaryToHourly() {
     SalaryToHourlyInputs,
     SalaryToHourlyResult
   >({
-    name: 'Salary to Hourly Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSalaryToHourly,
   });

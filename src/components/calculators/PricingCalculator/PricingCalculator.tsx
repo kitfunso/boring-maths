@@ -38,7 +38,6 @@ export default function PricingCalculator() {
     PricingInputs,
     ReturnType<typeof calculatePricing>
   >({
-    name: 'Pricing Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePricing,
   });

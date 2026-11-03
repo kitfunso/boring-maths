@@ -31,7 +31,6 @@ export default function USPaycheckCalculator() {
     PaycheckInputs,
     ReturnType<typeof calculatePaycheck>
   >({
-    name: 'US Paycheck Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePaycheck,
   });

@@ -15,7 +15,6 @@ export default function UKCapitalGainsTaxCalculator() {
     UKCGTInputs,
     ReturnType<typeof calculateUKCGT>
   >({
-    name: 'UK Capital Gains Tax Calculator',
     slug: 'calc-uk-cgt-inputs',
     defaults: getDefaultInputs,
     compute: calculateUKCGT,

@@ -32,7 +32,6 @@ export default function MacroCalculator() {
     MacroCalculatorInputs,
     ReturnType<typeof calculateMacros>
   >({
-    name: 'Macro Calculator',
     slug: 'calc-macro-inputs',
     defaults: getDefaultInputs,
     compute: calculateMacros,

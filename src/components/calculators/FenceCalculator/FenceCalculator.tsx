@@ -54,7 +54,6 @@ export default function FenceCalculator() {
     FenceCalculatorInputs,
     ReturnType<typeof calculateFence>
   >({
-    name: 'Fence Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFence,
   });

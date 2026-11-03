@@ -19,7 +19,6 @@ import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 export default function AgeCalculator() {
   const { inputs, result, updateInput } = useCalculatorState<AgeCalculatorInputs, AgeResult>({
-    name: 'Age Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateAge,
   });

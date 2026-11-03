@@ -34,7 +34,6 @@ export default function EmergencyFundCalculator() {
     EmergencyFundInputs,
     EmergencyFundResult
   >({
-    name: 'Build Your Emergency Fund',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEmergencyFund,
   });

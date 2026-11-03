@@ -30,7 +30,6 @@ export default function EVChargingCostCalculator() {
     EVChargingCostCalculatorInputs,
     EVChargingCostCalculatorResult
   >({
-    name: 'EV Charging Cost Calculator',
     slug: 'calc-ev-charging-cost-calculator-inputs',
     defaults: getDefaultInputs,
     compute: calculateEVChargingCostCalculator,

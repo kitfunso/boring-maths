@@ -32,7 +32,6 @@ export default function WeddingAlcoholCalculator() {
     WeddingAlcoholInputs,
     WeddingAlcoholResult
   >({
-    name: 'Estimate Your Wedding Alcohol',
     defaults: DEFAULT_INPUTS,
     compute: calculateWeddingAlcohol,
   });

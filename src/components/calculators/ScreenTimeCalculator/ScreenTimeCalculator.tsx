@@ -73,7 +73,6 @@ export default function ScreenTimeCalculator() {
     ScreenTimeInputs,
     ReturnType<typeof calculateScreenTime>
   >({
-    name: 'Screen Time Calculator',
     defaults: getDefaultInputs,
     compute: calculateScreenTime,
   });

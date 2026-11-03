@@ -45,7 +45,6 @@ export default function ConferenceRoomCalculator() {
     ConferenceRoomInputs,
     ReturnType<typeof calculateConferenceRoom>
   >({
-    name: 'Conference Room Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateConferenceRoom,
   });

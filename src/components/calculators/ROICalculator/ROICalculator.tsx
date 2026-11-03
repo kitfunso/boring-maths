@@ -35,7 +35,6 @@ export default function ROICalculator() {
     ROICalculatorInputs,
     ROICalculatorResult
   >({
-    name: 'Calculate Your ROI',
     slug: 'calc-roi-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateROI,

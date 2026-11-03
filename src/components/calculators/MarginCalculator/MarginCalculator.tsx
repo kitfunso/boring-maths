@@ -37,7 +37,6 @@ export default function MarginCalculator() {
     MarginCalculatorInputs,
     ReturnType<typeof calculateMargin>
   >({
-    name: 'Margin Calculator',
     slug: 'calc-margin-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMargin,

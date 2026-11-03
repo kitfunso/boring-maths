@@ -70,7 +70,6 @@ export default function EventSeatingCalculator() {
     EventSeatingInputs,
     ReturnType<typeof calculateEventSeating>
   >({
-    name: 'Event Seating Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateEventSeating,
   });

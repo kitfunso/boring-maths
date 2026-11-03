@@ -47,7 +47,6 @@ export default function StreamingValueCalculator() {
     StreamingValueInputs,
     ReturnType<typeof calculateStreamingValue>
   >({
-    name: 'Streaming Value Calculator',
     defaults: getDefaultInputs,
     compute: calculateStreamingValue,
   });

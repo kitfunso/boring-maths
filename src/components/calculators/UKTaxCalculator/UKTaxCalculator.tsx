@@ -54,7 +54,6 @@ export default function UKTaxCalculator() {
     UKTaxInputs,
     ReturnType<typeof calculateUKTax>
   >({
-    name: 'UK Tax Calculator',
     slug: 'calc-uk-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateUKTax,

@@ -15,7 +15,6 @@ export default function UKStampDutyCalculator() {
     UKStampDutyInputs,
     ReturnType<typeof calculateStampDuty>
   >({
-    name: 'UK Stamp Duty Calculator',
     slug: 'calc-uk-stamp-duty-inputs',
     defaults: getDefaultInputs,
     compute: calculateStampDuty,

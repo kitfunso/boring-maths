@@ -66,7 +66,6 @@ export default function BTUCalculator() {
     BTUCalculatorInputs,
     BTUCalculatorResult
   >({
-    name: 'BTU Calculator',
     slug: 'calc-btu-calculator-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency('GBP')),
     compute: calculateBTUCalculator,

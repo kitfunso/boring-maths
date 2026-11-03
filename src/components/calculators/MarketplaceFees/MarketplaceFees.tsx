@@ -38,7 +38,6 @@ export default function MarketplaceFees() {
     MarketplaceFeesInputs,
     ReturnType<typeof calculateMarketplaceFees>
   >({
-    name: 'Marketplace Fees Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMarketplaceFees,
   });

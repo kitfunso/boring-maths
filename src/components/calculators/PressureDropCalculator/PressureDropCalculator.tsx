@@ -31,7 +31,6 @@ export default function PressureDropCalculator() {
     PressureDropInputs,
     ReturnType<typeof calculatePressureDrop>
   >({
-    name: 'Pressure Drop Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePressureDrop,
   });

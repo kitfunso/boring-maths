@@ -23,7 +23,6 @@ export default function Calculator401k() {
     Calculator401kInputs,
     ReturnType<typeof calculate401k>
   >({
-    name: '401k Calculator',
     slug: 'calc-401k-inputs',
     defaults: getDefaultInputs,
     compute: calculate401k,

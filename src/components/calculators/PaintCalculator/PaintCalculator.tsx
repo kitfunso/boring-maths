@@ -37,7 +37,6 @@ export default function PaintCalculator() {
     PaintCalculatorInputs,
     PaintCalculatorResult
   >({
-    name: 'Calculate Your Paint Needs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePaint,
   });

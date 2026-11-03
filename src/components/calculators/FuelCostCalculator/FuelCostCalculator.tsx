@@ -37,7 +37,6 @@ export default function FuelCostCalculator() {
     FuelCostInputs,
     FuelCostResult
   >({
-    name: 'Fuel Cost Calculator',
     slug: 'calc-fuel-cost-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency('GBP')),
     compute: calculateFuelCost,

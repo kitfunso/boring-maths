@@ -55,7 +55,6 @@ export default function BirthdayPartyBudget() {
     BirthdayPartyInputs,
     ReturnType<typeof calculateBirthdayPartyBudget>
   >({
-    name: 'Birthday Party Budget',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBirthdayPartyBudget,
   });

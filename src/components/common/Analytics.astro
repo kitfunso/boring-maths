@@ -3,7 +3,7 @@
  * Google Analytics 4 Component
  *
  * Only loads in production when GA_ID is configured.
- * Deferred loading for better performance - loads after user interaction or 3s.
+ * Loads on the first real interaction, never on a timer: a timer counted every headless visitor.
  */
 
 const gaId = import.meta.env.PUBLIC_GA_ID || 'G-MGH23JLTKE';
@@ -38,14 +38,6 @@ const isProd = import.meta.env.PROD;
           gtag('event', eventName, params);
         };
 
-        // Track calculator usage
-        window.trackCalculatorUse = function(calculatorName) {
-          gtag('event', 'calculator_used', {
-            calculator_name: calculatorName,
-            calculation_completed: true
-          });
-        };
-
         // Track affiliate clicks
         window.trackAffiliateClick = function(partner, calculator, position) {
           gtag('event', 'affiliate_click', {
@@ -58,15 +50,26 @@ const isProd = import.meta.env.PROD;
 
       // Stub functions until GA loads
       window.trackEvent = function() {};
-      window.trackCalculatorUse = function() {};
       window.trackAffiliateClick = function() {};
 
-      // Load after user interaction or 3 seconds
-      var events = ['scroll', 'click', 'keydown', 'touchstart'];
-      events.forEach(function(e) {
+      ['scroll', 'click', 'keydown', 'touchstart', 'pointermove'].forEach(function(e) {
         window.addEventListener(e, loadGA, { once: true, passive: true });
       });
-      setTimeout(loadGA, 3000);
+
+      // One producer for every calculator: the first control a visitor touches in the widget.
+      var slug = (location.pathname.match(/^\/calculators\/(.+)\/$/) || [])[1];
+      var used = false;
+      function onControl(e) {
+        if (used || !slug || !e.target.closest) return;
+        if (!e.target.closest('astro-island')) return;
+        if (!e.target.closest('input, select, textarea, button, [role="slider"]')) return;
+        used = true;
+        loadGA();
+        window.gtag('event', 'calculator_used', { calculator_name: slug });
+      }
+      ['input', 'change', 'click'].forEach(function(e) {
+        document.addEventListener(e, onControl, { passive: true });
+      });
     })();
   </script>
 )}

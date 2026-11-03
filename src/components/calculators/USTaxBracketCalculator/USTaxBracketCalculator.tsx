@@ -43,7 +43,6 @@ export default function USTaxBracketCalculator() {
     USTaxBracketInputs,
     ReturnType<typeof calculateUSTaxBracket>
   >({
-    name: 'US Tax Bracket Calculator',
     slug: 'calc-us-tax-bracket-inputs',
     defaults: getDefaultInputs,
     compute: calculateUSTaxBracket,

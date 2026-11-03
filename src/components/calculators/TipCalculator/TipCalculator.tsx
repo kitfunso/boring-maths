@@ -29,7 +29,6 @@ export default function TipCalculator() {
     TipCalculatorInputs,
     TipCalculatorResult
   >({
-    name: 'Calculate Your Tip',
     slug: 'calc-tip-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTip,

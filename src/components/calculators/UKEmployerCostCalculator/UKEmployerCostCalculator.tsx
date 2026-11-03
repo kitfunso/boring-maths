@@ -29,7 +29,6 @@ export default function UKEmployerCostCalculator() {
     UKEmployerCostInputs,
     ReturnType<typeof calculateEmployerCost>
   >({
-    name: 'UK Employer Cost Calculator',
     slug: 'calc-uk-employer-cost-inputs',
     defaults: getDefaultInputs,
     compute: calculateEmployerCost,

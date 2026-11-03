@@ -32,7 +32,6 @@ export default function TDEECalculator() {
     TDEEInputs,
     ReturnType<typeof calculateTDEE>
   >({
-    name: 'TDEE Calculator',
     slug: 'calc-tdee-inputs',
     defaults: getDefaultInputs,
     compute: calculateTDEE,

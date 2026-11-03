@@ -24,7 +24,6 @@ export default function CurrencyConverter() {
     CurrencyConverterInputs,
     ReturnType<typeof convertCurrency>
   >({
-    name: 'Currency Converter',
     slug: 'calc-currency-inputs',
     defaults: getDefaultInputs,
     compute: convertCurrency,

@@ -8,7 +8,6 @@ export default function UKPensionCalculator() {
     UKPensionInputs,
     ReturnType<typeof calculatePension>
   >({
-    name: 'UK Pension Calculator',
     slug: 'calc-uk-pension-inputs',
     defaults: getDefaultInputs,
     compute: calculatePension,

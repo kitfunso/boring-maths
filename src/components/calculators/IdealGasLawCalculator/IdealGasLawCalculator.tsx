@@ -31,7 +31,6 @@ export default function IdealGasLawCalculator() {
     IdealGasInputs,
     ReturnType<typeof calculateIdealGas>
   >({
-    name: 'Ideal Gas Law Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateIdealGas,
   });

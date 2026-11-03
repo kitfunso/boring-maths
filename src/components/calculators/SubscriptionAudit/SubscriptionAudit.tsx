@@ -172,7 +172,6 @@ export default function SubscriptionAudit() {
     SubscriptionAuditInputs,
     SubscriptionAuditResult
   >({
-    name: 'Subscription Audit',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: analyzeSubscriptions,
   });

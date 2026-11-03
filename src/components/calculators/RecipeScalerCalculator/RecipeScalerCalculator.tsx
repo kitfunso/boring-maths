@@ -32,7 +32,6 @@ export default function RecipeScalerCalculator() {
     RecipeScalerInputs,
     ReturnType<typeof calculateRecipeScaler>
   >({
-    name: 'Recipe Scaler Calculator',
     defaults: getDefaultInputs,
     compute: calculateRecipeScaler,
   });

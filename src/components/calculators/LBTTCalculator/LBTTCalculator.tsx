@@ -13,7 +13,6 @@ export default function LBTTCalculator() {
     LBTTInputs,
     ReturnType<typeof calculateLBTT>
   >({
-    name: 'LBTT Calculator Scotland',
     slug: 'calc-lbtt-inputs',
     defaults: getDefaultInputs,
     compute: calculateLBTT,

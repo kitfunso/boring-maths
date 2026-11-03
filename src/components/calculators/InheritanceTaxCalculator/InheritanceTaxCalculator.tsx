@@ -8,7 +8,6 @@ export default function InheritanceTaxCalculator() {
     IHTInputs,
     ReturnType<typeof calculateIHT>
   >({
-    name: 'Inheritance Tax Calculator',
     slug: 'calc-inheritance-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateIHT,

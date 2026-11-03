@@ -35,7 +35,6 @@ export default function EVvsGasCalculator() {
     EVvsGasInputs,
     ReturnType<typeof calculateEVvsGas>
   >({
-    name: 'EV vs Gas Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEVvsGas,
   });

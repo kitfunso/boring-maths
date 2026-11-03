@@ -29,7 +29,6 @@ export default function USCapitalGainsTaxCalculator() {
     USCapitalGainsInputs,
     ReturnType<typeof calculateCapitalGainsTax>
   >({
-    name: 'Capital Gains Tax Calculator',
     slug: 'calc-us-capital-gains-inputs',
     defaults: getDefaultInputs,
     compute: calculateCapitalGainsTax,

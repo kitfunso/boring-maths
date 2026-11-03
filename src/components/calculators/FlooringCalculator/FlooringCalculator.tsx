@@ -41,7 +41,6 @@ export default function FlooringCalculator() {
     FlooringCalculatorInputs,
     FlooringCalculatorResult
   >({
-    name: 'Calculate Your Flooring Needs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFlooring,
   });

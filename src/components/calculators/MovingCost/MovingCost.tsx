@@ -61,7 +61,6 @@ export default function MovingCost() {
     MovingCostInputs,
     ReturnType<typeof calculateMovingCost>
   >({
-    name: 'Moving Cost Estimator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMovingCost,
   });

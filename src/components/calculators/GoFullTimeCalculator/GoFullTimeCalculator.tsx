@@ -41,7 +41,6 @@ export default function GoFullTimeCalculator() {
     GoFullTimeInputs,
     GoFullTimeResult
   >({
-    name: 'Go Full-Time Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateGoFullTime,
   });

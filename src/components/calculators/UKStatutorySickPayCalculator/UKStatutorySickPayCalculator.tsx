@@ -16,7 +16,6 @@ export default function UKStatutorySickPayCalculator() {
     UKStatutorySickPayInputs,
     ReturnType<typeof calculateStatutorySickPay>
   >({
-    name: 'UK Statutory Sick Pay Calculator',
     slug: 'calc-uk-statutory-sick-pay-inputs',
     defaults: getDefaultInputs,
     compute: calculateStatutorySickPay,

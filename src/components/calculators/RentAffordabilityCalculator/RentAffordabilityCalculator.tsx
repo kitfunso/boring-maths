@@ -86,7 +86,6 @@ export default function RentAffordabilityCalculator() {
     RentAffordabilityInputs,
     ReturnType<typeof calculateRentAffordability>
   >({
-    name: 'Rent Affordability Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRentAffordability,
   });

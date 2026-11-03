@@ -32,7 +32,6 @@ export default function CarBuyLease() {
     CarBuyLeaseInputs,
     ReturnType<typeof calculateCarBuyLease>
   >({
-    name: 'Car Buy vs Lease Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCarBuyLease,
   });

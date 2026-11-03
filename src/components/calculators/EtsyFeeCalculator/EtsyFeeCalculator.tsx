@@ -140,7 +140,6 @@ export default function EtsyFeeCalculator() {
     EtsyFeeInputs,
     EtsyFeeResult
   >({
-    name: 'Calculate Your Marketplace Fees',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMarketplaceFees,
   });

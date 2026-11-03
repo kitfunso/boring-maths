@@ -39,7 +39,6 @@ export default function SaaSMetrics() {
     SaaSMetricsInputs,
     ReturnType<typeof calculateSaaSMetrics>
   >({
-    name: 'SaaS Metrics Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSaaSMetrics,
   });

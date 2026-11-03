@@ -30,7 +30,6 @@ export default function ReynoldsNumberCalculator() {
     ReynoldsInputs,
     ReturnType<typeof calculateReynolds>
   >({
-    name: 'Reynolds Number Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateReynolds,
   });

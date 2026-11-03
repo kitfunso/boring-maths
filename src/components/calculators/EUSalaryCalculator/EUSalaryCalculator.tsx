@@ -30,7 +30,6 @@ export default function EUSalaryCalculator() {
     SalaryInputs,
     ReturnType<typeof calculateSalary>
   >({
-    name: 'EU Salary Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateSalary,
   });

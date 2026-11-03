@@ -57,7 +57,6 @@ export default function HeartRateZoneCalculator() {
     HeartRateZoneInputs,
     ReturnType<typeof calculateHeartRateZones>
   >({
-    name: 'Heart Rate Zone Calculator',
     defaults: getDefaultInputs,
     compute: calculateHeartRateZones,
   });

@@ -52,7 +52,6 @@ export default function GravelCalculator() {
     GravelCalculatorInputs,
     GravelCalculatorResult
   >({
-    name: 'Gravel Calculator',
     slug: 'calc-gravel-calculator-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency('GBP')),
     compute: calculateGravelCalculator,

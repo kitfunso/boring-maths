@@ -29,7 +29,6 @@ export default function EUVATCalculator() {
     VATInputs,
     ReturnType<typeof calculateVAT>
   >({
-    name: 'EU VAT Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateVAT,
   });
