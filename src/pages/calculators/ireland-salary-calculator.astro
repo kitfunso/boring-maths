@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { IrelandSalaryCalculator } from '../../components/calculators/IrelandSalaryCalculator';
 
 const title = 'Ireland Salary Calculator 2026: Take-Home Pay | Boring Math';
@@ -223,6 +224,32 @@ const schemaBreadcrumbs = [
       Revenue.ie or with a qualified adviser.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'Revenue.ie: Tax rate band',
+        href: 'https://www.revenue.ie/en/jobs-and-pensions/calculating-your-income-tax/tax-rate-band.aspx',
+      },
+      {
+        label: 'Revenue.ie: Tax credits',
+        href: 'https://www.revenue.ie/en/jobs-and-pensions/calculating-your-income-tax/tax-credits.aspx',
+      },
+      {
+        label: 'Revenue.ie: Universal Social Charge (USC)',
+        href: 'https://www.revenue.ie/en/jobs-and-pensions/usc/index.aspx',
+      },
+      {
+        label: 'Revenue.ie: Standard rates and thresholds of USC',
+        href: 'https://www.revenue.ie/en/jobs-and-pensions/usc/standard-rates-thresholds.aspx',
+      },
+      {
+        label: 'Citizens Information: Paying social insurance (PRSI)',
+        href: 'https://www.citizensinformation.ie/en/social-welfare/irish-social-welfare-system/social-insurance-prsi/paying-social-insurance/',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

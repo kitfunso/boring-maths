@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { EUVATCalculator } from '../../components/calculators/EUVATCalculator';
 
 const title = 'Free EU VAT Calculator: Calculate VAT for All EU Countries | Boring Math';
@@ -80,7 +81,7 @@ const faqs = [
   {
     question: 'How often do EU VAT rates change?',
     answer:
-      "EU VAT rates can change, but it's relatively infrequent. Countries must give notice before changes. Recent changes include Finland increasing to 25.5% in 2024 and Estonia to 22%. Always verify current rates for business transactions.",
+      "EU VAT rates can change, but it's relatively infrequent. Countries must give notice before changes. Recent changes include Finland increasing to 25.5% in 2024, and Estonia and Romania now charging 24% and 21%. Always verify current rates for business transactions.",
   },
 ];
 
@@ -126,7 +127,7 @@ const schemaBreadcrumbs = [
     <h3 class="text-lg font-semibold mt-4 mb-2">EU VAT Rate Ranges (2025)</h3>
     <ul class="list-disc list-inside space-y-1">
       <li><strong>Standard rates:</strong> 17% (Luxembourg) to 27% (Hungary)</li>
-      <li><strong>Reduced rates:</strong> 5% to 18% depending on country and product</li>
+      <li><strong>Reduced rates:</strong> 5% to 19% depending on country and product</li>
       <li>
         <strong>Super-reduced:</strong> Some countries offer rates as low as 2.1% (France) to 4.8% (Ireland)
       </li>
@@ -159,6 +160,24 @@ const schemaBreadcrumbs = [
       </div>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'European Commission: VAT rates',
+        href: 'https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/vat-rates_en',
+      },
+      {
+        label: 'European Commission: Taxes in Europe Database (TEDB), VAT rates by Member State',
+        href: 'https://ec.europa.eu/taxation_customs/tedb/index.html',
+      },
+      {
+        label: 'Revenue.ie: Historical VAT rates (Ireland)',
+        href: 'https://www.revenue.ie/en/vat/vat-rates/historical-vat-rates/index.aspx',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

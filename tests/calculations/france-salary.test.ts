@@ -28,24 +28,19 @@ describe('FranceSalaryCalculator', () => {
   });
 
   it('computes net above the ceiling (non-cadre, 60000) with tranche 2 and CET', () => {
-    // T1 = 47100, T2 = 12900, csgBase = 60000 * 0.9825 = 58950.
-    // vieillesse = 47100*0.069 + 60000*0.004 = 3249.9 + 240 = 3489.9
-    // csg/crds   = 58950 * 0.097 = 5718.15
-    // agirc      = 47100*0.0315 + 12900*0.0864 = 1483.65 + 1114.56 = 2598.21
-    // ceg        = 47100*0.0086 + 12900*0.0108 = 405.06 + 139.32 = 544.38
-    // cet        = (47100+12900)*0.0014 = 60000*0.0014 = 84
-    // total      = 12434.64 -> net = 47565.36
+    // Hand-computed with T1 = 48060, T2 = 11940: vieillesse 3556.14, csg/crds 5718.15,
+    // agirc 2545.506, ceg 542.268, cet 84.
     const result = calculateFranceSalary({ grossAnnualSalary: 60000, status: 'non-cadre' });
-    expect(result.totalContributions).toBeCloseTo(12434.64, 2);
-    expect(result.netAnnual).toBeCloseTo(47565.36, 2);
+    expect(result.totalContributions).toBeCloseTo(12446.064, 2);
+    expect(result.netAnnual).toBeCloseTo(47553.936, 2);
   });
 
   it('adds APEC for cadre status (60000 cadre vs non-cadre)', () => {
-    // APEC = min(60000, 4*47100) * 0.00024 = 60000 * 0.00024 = 14.4 extra contribution.
+    // APEC = min(60000, 4*48060) * 0.00024 = 60000 * 0.00024 = 14.4 extra contribution.
     const cadre = calculateFranceSalary({ grossAnnualSalary: 60000, status: 'cadre' });
     const nonCadre = calculateFranceSalary({ grossAnnualSalary: 60000, status: 'non-cadre' });
     expect(cadre.totalContributions - nonCadre.totalContributions).toBeCloseTo(14.4, 4);
-    expect(cadre.totalContributions).toBeCloseTo(12449.04, 2);
+    expect(cadre.totalContributions).toBeCloseTo(12460.464, 2);
   });
 
   it('handles the zero edge case', () => {
@@ -65,8 +60,9 @@ describe('FranceSalaryCalculator', () => {
     expect(result.effectiveRate).toBe(0);
   });
 
-  it('exposes a 2026 PMSS of 47100 and a sensible default', () => {
-    expect(PMSS_ANNUAL).toBe(47100);
+  it('exposes the 2026 PMSS (4005 a month, 48060 a year) and a sensible default', () => {
+    expect(PMSS_ANNUAL).toBe(48060);
+    expect(PMSS_ANNUAL / 12).toBe(4005);
     const defaults = getDefaultInputs();
     expect(defaults.status).toBe('non-cadre');
     expect(defaults.grossAnnualSalary).toBeGreaterThan(0);

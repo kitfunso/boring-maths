@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { FranceSalaryCalculator } from '../../components/calculators/FranceSalaryCalculator';
 
 const title = 'France Salary Calculator 2026: Brut to Net | Boring Math';
@@ -81,7 +82,7 @@ const faqs = [
   {
     question: 'What is the PMSS and why does it matter?',
     answer:
-      'The PMSS is the monthly social security ceiling (Plafond mensuel de la Securite sociale). For 2026 it is 3,925 euros per month, or 47,100 euros per year. Several contributions, such as the capped old-age pension and the Agirc-Arrco tranches, change once your salary crosses this ceiling. Earnings up to one PMSS are tranche 1; earnings between one and eight PMSS fall into tranche 2, which carries a higher Agirc-Arrco rate.',
+      'The PMSS is the monthly social security ceiling (Plafond mensuel de la Securite sociale). For 2026 it is 4,005 euros per month, or 48,060 euros per year. Several contributions, such as the capped old-age pension and the Agirc-Arrco tranches, change once your salary crosses this ceiling. Earnings up to one PMSS are tranche 1; earnings between one and eight PMSS fall into tranche 2, which carries a higher Agirc-Arrco rate.',
   },
   {
     question: 'Which 2026 rates does the calculator use?',
@@ -165,7 +166,7 @@ const schemaBreadcrumbs = [
     <p>
       French gross-to-net is built from several mandatory employee contributions, each applied to a
       specific base. The calculator follows the 2026 employee rates and the 2026 social security
-      ceiling (PMSS) of 47,100 euros per year, which is 3,925 euros per month.
+      ceiling (PMSS) of 48,060 euros per year, which is 4,005 euros per month.
     </p>
     <h3 class="text-lg font-semibold mt-4 mb-2">The main contributions</h3>
     <ul class="list-disc list-inside space-y-2 text-[var(--color-subtle)]">
@@ -224,6 +225,28 @@ const schemaBreadcrumbs = [
       mutuelle health top-up or meal vouchers.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'URSSAF: Taux de cotisations, secteur prive',
+        href: 'https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/taux-cotisations-secteur-prive.html',
+      },
+      {
+        label: 'URSSAF: Plafonds de la Securite sociale',
+        href: 'https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/plafonds-securite-sociale.html',
+      },
+      {
+        label: "Service-Public.fr: CSG et CRDS sur les revenus d'activite et de remplacement",
+        href: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F2971',
+      },
+      {
+        label: 'Agirc-Arrco: Le calcul des cotisations de retraite complementaire',
+        href: 'https://www.agirc-arrco.fr/entreprises/mon-entreprise/calculer-et-declarer/le-calcul-des-cotisations-de-retraite-complementaire/',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

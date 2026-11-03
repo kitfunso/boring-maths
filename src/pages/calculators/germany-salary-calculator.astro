@@ -12,6 +12,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { GermanySalaryCalculator } from '../../components/calculators/GermanySalaryCalculator';
 
 const title = 'Germany Net Salary Calculator 2026: Brutto Netto | Boring Math';
@@ -224,6 +225,40 @@ const schemaBreadcrumbs = [
       exact figures, check your payslip or a tax adviser.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'Bundesfinanzministerium: Programmablaufplan fuer den Lohnsteuerabzug 2026',
+        href: 'https://www.bundesfinanzministerium.de/Content/DE/Downloads/Steuern/Steuerarten/Lohnsteuer/Programmablaufplan/2025-11-12-PAP-2026.html',
+      },
+      {
+        label: 'Gesetze im Internet: EStG section 32a, Einkommensteuertarif',
+        href: 'https://www.gesetze-im-internet.de/estg/__32a.html',
+      },
+      {
+        label: 'Gesetze im Internet: EStG section 9a, Pauschbetraege fuer Werbungskosten',
+        href: 'https://www.gesetze-im-internet.de/estg/__9a.html',
+      },
+      {
+        label: 'Gesetze im Internet: SolzG 1995 section 3, Bemessungsgrundlage und Freigrenze',
+        href: 'https://www.gesetze-im-internet.de/solzg_1995/__3.html',
+      },
+      {
+        label: 'Gesetze im Internet: SolzG 1995 section 4, Zuschlagsatz',
+        href: 'https://www.gesetze-im-internet.de/solzg_1995/__4.html',
+      },
+      {
+        label: 'Gesetze im Internet: SGB V section 241, Allgemeiner Beitragssatz',
+        href: 'https://www.gesetze-im-internet.de/sgb_5/__241.html',
+      },
+      {
+        label: 'BMAS: Sozialversicherungsrechengroessen 2026',
+        href: 'https://www.bmas.de/DE/Service/Presse/Pressemitteilungen/2025/sozialversicherungsrechengroessen-2026.html',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

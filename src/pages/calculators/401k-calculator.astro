@@ -8,6 +8,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { Calculator401k } from '../../components/calculators/401kCalculator';
 
 const title = 'Free 401k Calculator: Project Your Retirement Savings | Boring Math';
@@ -56,9 +57,9 @@ const faqs = [
       'Employer matching is when your company contributes additional money to your 401k based on your contributions. A common match is 50% of your contributions up to 6% of your salary. If you make $75,000 and contribute 6% ($4,500), your employer adds $2,250.',
   },
   {
-    question: 'What is the 401k contribution limit for 2024?',
+    question: 'What is the 401k contribution limit for 2026?',
     answer:
-      "For 2024, the employee contribution limit is $23,000. If you're 50 or older, you can contribute an additional $7,500 catch-up contribution for a total of $30,500. Employer matching contributions don't count toward your personal limit.",
+      "For 2026, the employee contribution limit is $24,500. If you're 50 or older, you can contribute an additional $8,000 catch-up contribution for a total of $32,500. Employer matching contributions don't count toward your personal limit.",
   },
   {
     question: 'How much should I contribute to my 401k?',
@@ -152,6 +153,20 @@ const schemaBreadcrumbs = [
       over time.
     </p>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'IRS: Retirement topics: 401(k) and profit-sharing plan contribution limits',
+        href: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-401k-and-profit-sharing-plan-contribution-limits',
+      },
+      {
+        label: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500',
+        href: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

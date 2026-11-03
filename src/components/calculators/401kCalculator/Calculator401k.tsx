@@ -277,7 +277,7 @@ export default function Calculator401k() {
 
             <Alert variant="tip" title="Maximize your 401k:">
               Always contribute at least enough to get the full employer match - it's free money!
-              The 2024 contribution limit is $23,000 ($30,500 if you're 50+).
+              The 2026 contribution limit is $24,500 ($32,500 if you're 50+).
             </Alert>
 
             {/* Share & Print Results */}
