@@ -39,7 +39,6 @@ export default function RoadTripCostCalculator() {
     RoadTripInputs,
     ReturnType<typeof calculateRoadTripCost>
   >({
-    name: 'Road Trip Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRoadTripCost,
   });

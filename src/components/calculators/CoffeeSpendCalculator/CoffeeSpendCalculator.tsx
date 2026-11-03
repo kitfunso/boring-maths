@@ -27,7 +27,6 @@ export default function CoffeeSpendCalculator() {
     CoffeeSpendInputs,
     ReturnType<typeof calculateCoffeeSpend>
   >({
-    name: 'Coffee Spend Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCoffeeSpend,
   });

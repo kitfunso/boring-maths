@@ -41,7 +41,6 @@ export default function FIRECalculator() {
     FIRECalculatorInputs,
     ReturnType<typeof calculateFIRE>
   >({
-    name: 'FIRE Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateFIRE,
   });

@@ -26,7 +26,6 @@ export default function HouseFlipCalculator() {
     HouseFlipInputs,
     ReturnType<typeof calculateHouseFlip>
   >({
-    name: 'House Flip Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateHouseFlip,
   });

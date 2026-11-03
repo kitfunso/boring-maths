@@ -55,7 +55,6 @@ export default function CateringCalculator() {
     CateringInputs,
     ReturnType<typeof calculateCatering>
   >({
-    name: 'Catering Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCatering,
   });

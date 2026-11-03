@@ -30,7 +30,6 @@ export default function NetWorthCalculator() {
     NetWorthInputs,
     ReturnType<typeof calculateNetWorth>
   >({
-    name: 'Net Worth Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateNetWorth,
   });

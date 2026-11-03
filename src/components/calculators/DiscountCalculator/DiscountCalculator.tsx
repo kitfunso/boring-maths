@@ -36,7 +36,6 @@ export default function DiscountCalculator() {
     DiscountInputs,
     ReturnType<typeof calculateDiscount>
   >({
-    name: 'Discount Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateDiscount,
   });

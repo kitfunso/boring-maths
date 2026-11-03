@@ -40,7 +40,6 @@ export default function WallpaperCalculator() {
     WallpaperCalculatorInputs,
     WallpaperCalculatorResult
   >({
-    name: 'Wallpaper Calculator',
     slug: 'calc-wallpaper-calculator-inputs',
     defaults: getDefaultInputs,
     compute: calculateWallpaperCalculator,

@@ -13,7 +13,6 @@ export default function UKStudentLoanCalculator() {
     UKStudentLoanInputs,
     ReturnType<typeof calculateStudentLoan>
   >({
-    name: 'UK Student Loan Calculator',
     slug: 'calc-uk-student-loan-inputs',
     defaults: getDefaultInputs,
     compute: calculateStudentLoan,

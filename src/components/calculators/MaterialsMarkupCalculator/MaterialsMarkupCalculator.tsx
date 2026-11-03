@@ -42,7 +42,6 @@ export default function MaterialsMarkupCalculator() {
     MaterialsMarkupInputs,
     ReturnType<typeof calculateMaterialsMarkup>
   >({
-    name: 'Materials Markup Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMaterialsMarkup,
   });

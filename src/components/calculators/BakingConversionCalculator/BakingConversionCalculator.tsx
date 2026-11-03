@@ -42,7 +42,6 @@ export default function BakingConversionCalculator() {
     BakingConversionInputs,
     ReturnType<typeof calculateBakingConversion>
   >({
-    name: 'Baking Conversion Calculator',
     defaults: getDefaultInputs,
     compute: calculateBakingConversion,
   });

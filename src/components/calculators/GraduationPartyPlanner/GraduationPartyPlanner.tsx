@@ -52,7 +52,6 @@ export default function GraduationPartyPlanner() {
     GraduationPartyInputs,
     ReturnType<typeof calculateGraduationParty>
   >({
-    name: 'Graduation Party Planner',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateGraduationParty,
   });

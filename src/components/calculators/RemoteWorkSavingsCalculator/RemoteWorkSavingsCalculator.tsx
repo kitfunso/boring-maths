@@ -29,7 +29,6 @@ export default function RemoteWorkSavingsCalculator() {
     RemoteWorkSavingsInputs,
     ReturnType<typeof calculateRemoteWorkSavings>
   >({
-    name: 'Remote Work Savings Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRemoteWorkSavings,
   });

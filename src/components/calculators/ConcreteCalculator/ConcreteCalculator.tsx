@@ -51,7 +51,6 @@ export default function ConcreteCalculator() {
     ConcreteCalculatorInputs,
     ConcreteCalculatorResult
   >({
-    name: 'Concrete Calculator',
     slug: 'calc-concrete-calculator-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency('GBP')),
     compute: calculateConcreteCalculator,

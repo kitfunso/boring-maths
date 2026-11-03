@@ -33,7 +33,6 @@ export default function DebtPayoffCalculator() {
     DebtPayoffInputs,
     ReturnType<typeof calculateDebtPayoff>
   >({
-    name: 'Debt Payoff Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateDebtPayoff,
   });

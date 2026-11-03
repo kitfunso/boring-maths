@@ -32,7 +32,6 @@ export default function TradesHourlyRateCalculator() {
     TradesHourlyRateInputs,
     ReturnType<typeof calculateTradesHourlyRate>
   >({
-    name: 'Tradesperson Hourly Rate Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTradesHourlyRate,
   });

@@ -31,7 +31,6 @@ export default function UnitConverter() {
     UnitConverterInputs,
     ReturnType<typeof convert>
   >({
-    name: 'Unit Converter',
     defaults: () => getDefaultInputs(),
     compute: convert,
   });

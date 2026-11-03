@@ -30,11 +30,7 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
-import { useCalculatorTracking } from '../../../hooks/useCalculatorTracking';
 export default function ElectricityCostCalculator() {
-  // Track calculator usage for analytics
-  useCalculatorTracking('Calculate Electricity Costs');
-
   const [inputs, setInputs] = useState<ElectricityCostInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );

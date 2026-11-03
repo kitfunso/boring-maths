@@ -30,7 +30,6 @@ export default function PipeFlowCalculator() {
     PipeFlowInputs,
     ReturnType<typeof calculatePipeFlow>
   >({
-    name: 'Pipe Flow Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculatePipeFlow,
   });

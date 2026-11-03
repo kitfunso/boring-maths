@@ -34,7 +34,6 @@ export default function OvertimeCalculator() {
     OvertimeCalculatorInputs,
     OvertimeCalculatorResult
   >({
-    name: 'Is Overtime Worth It?',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateOvertime,
   });

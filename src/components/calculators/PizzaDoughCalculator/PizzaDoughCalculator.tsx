@@ -46,7 +46,6 @@ export default function PizzaDoughCalculator() {
     PizzaDoughInputs,
     ReturnType<typeof calculatePizzaDough>
   >({
-    name: 'Pizza Dough Calculator',
     defaults: getDefaultInputs,
     compute: calculatePizzaDough,
   });

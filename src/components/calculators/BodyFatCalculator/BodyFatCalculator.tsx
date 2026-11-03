@@ -29,7 +29,6 @@ export default function BodyFatCalculator() {
     BodyFatInputs,
     ReturnType<typeof calculateBodyFat>
   >({
-    name: 'Body Fat Calculator',
     slug: 'calc-bodyfat-inputs',
     defaults: getDefaultInputs,
     compute: calculateBodyFat,

@@ -49,7 +49,6 @@ export default function ContractorVsEmployeeCalculator() {
     ContractorVsEmployeeInputs,
     ReturnType<typeof calculateComparison_main>
   >({
-    name: 'Contractor vs Employee Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateComparison_main,
   });

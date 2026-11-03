@@ -57,7 +57,6 @@ export default function TippingGuideCalculator() {
     TippingGuideInputs,
     TippingGuideResult
   >({
-    name: 'Tipping Guide Calculator',
     slug: 'calc-tipping-guide-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTippingGuide,

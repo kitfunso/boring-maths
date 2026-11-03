@@ -30,7 +30,6 @@ export default function InflationCalculator() {
     InflationInputs,
     ReturnType<typeof calculateInflation>
   >({
-    name: 'Inflation Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateInflation,
   });

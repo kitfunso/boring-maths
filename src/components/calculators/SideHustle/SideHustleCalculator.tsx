@@ -31,7 +31,6 @@ export default function SideHustleCalculator() {
     SideHustleInputs,
     SideHustleResult
   >({
-    name: 'Analyze Your Side Hustle',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSideHustle,
   });

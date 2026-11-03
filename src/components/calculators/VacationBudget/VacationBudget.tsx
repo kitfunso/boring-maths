@@ -53,7 +53,6 @@ export default function VacationBudget() {
     VacationBudgetInputs,
     ReturnType<typeof calculateVacationBudget>
   >({
-    name: 'Vacation Budget Planner',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateVacationBudget,
   });

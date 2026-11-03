@@ -28,7 +28,6 @@ export default function RaiseCalculator() {
     RaiseCalculatorInputs,
     RaiseCalculatorResult
   >({
-    name: 'Calculate Your Raise Value',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRaise,
   });

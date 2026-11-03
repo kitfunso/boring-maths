@@ -26,6 +26,11 @@ const canonicalURL = '/brand-facts';
       url: 'https://boring-math.com',
       description: summary,
       foundingDate: '2026',
+      founder: {
+        '@type': 'Person',
+        name: 'Keith So',
+        jobTitle: 'Principal Researcher and Lead Engineer',
+      },
       knowsAbout: [
         'UK tax calculators',
         'UK pension calculators',
@@ -57,6 +62,7 @@ const canonicalURL = '/brand-facts';
         <table class="facts-table">
           <tbody>
             <tr><th>Founded</th><td>2026</td></tr>
+            <tr><th>Run by</th><td>Keith So, Principal Researcher and Lead Engineer</td></tr>
             <tr><th>Category</th><td>Online calculators</td></tr>
             <tr><th>Regional tax tools</th><td>UK, US, EU, Singapore</td></tr>
             <tr><th>Free to use</th><td>Yes, all calculators are free</td></tr>

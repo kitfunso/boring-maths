@@ -40,7 +40,6 @@ export default function PartyDrinkCalculator() {
     PartyDrinkInputs,
     PartyDrinkResult
   >({
-    name: 'Plan Your Party Drinks',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculatePartyDrinks,
   });

@@ -8,7 +8,6 @@ export default function UKDividendTaxCalculator() {
     UKDividendTaxInputs,
     ReturnType<typeof calculateDividendTaxResult>
   >({
-    name: 'UK Dividend Tax Calculator',
     slug: 'calc-uk-dividend-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateDividendTaxResult,

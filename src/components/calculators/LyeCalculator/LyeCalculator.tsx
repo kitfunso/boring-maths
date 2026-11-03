@@ -38,7 +38,6 @@ export default function LyeCalculator() {
     LyeCalculatorInputs,
     ReturnType<typeof calculateLye>
   >({
-    name: 'Soap Lye Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateLye,
   });

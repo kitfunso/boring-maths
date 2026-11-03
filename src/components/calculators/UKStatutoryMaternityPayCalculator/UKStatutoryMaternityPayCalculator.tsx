@@ -18,7 +18,6 @@ export default function UKStatutoryMaternityPayCalculator() {
     UKStatutoryMaternityPayInputs,
     ReturnType<typeof calculateStatutoryMaternityPay>
   >({
-    name: 'UK Statutory Maternity Pay Calculator',
     slug: 'calc-uk-statutory-maternity-pay-inputs',
     defaults: getDefaultInputs,
     compute: calculateStatutoryMaternityPay,

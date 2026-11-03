@@ -8,7 +8,6 @@ export default function LTTCalculator() {
     LTTInputs,
     ReturnType<typeof calculateLTT>
   >({
-    name: 'LTT Calculator Wales',
     slug: 'calc-ltt-inputs',
     defaults: getDefaultInputs,
     compute: calculateLTT,

@@ -34,7 +34,6 @@ export default function BBQCalculator() {
     BBQCalculatorInputs,
     BBQCalculatorResult
   >({
-    name: 'Plan Your BBQ',
     defaults: () => getDefaultInputs(),
     compute: calculateBBQ,
   });

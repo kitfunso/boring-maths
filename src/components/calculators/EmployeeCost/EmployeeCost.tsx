@@ -32,7 +32,6 @@ export default function EmployeeCost() {
     EmployeeCostInputs,
     ReturnType<typeof calculateEmployeeCost>
   >({
-    name: 'Employee Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateEmployeeCost,
   });

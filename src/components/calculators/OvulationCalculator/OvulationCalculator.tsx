@@ -33,7 +33,6 @@ export default function OvulationCalculator() {
     OvulationInputs,
     ReturnType<typeof calculateOvulation>
   >({
-    name: 'Ovulation Calculator',
     slug: 'calc-ovulation-inputs',
     defaults: getDefaultInputs,
     compute: calculateOvulation,

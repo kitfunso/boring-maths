@@ -34,7 +34,6 @@ export default function PaceCalculator() {
     PaceCalculatorInputs,
     ReturnType<typeof calculatePace>
   >({
-    name: 'Pace Calculator',
     slug: 'calc-pace-inputs',
     defaults: getDefaultInputs,
     compute: calculatePace,

@@ -31,7 +31,6 @@ export default function CalorieCalculator() {
     CalorieInputs,
     ReturnType<typeof calculateCalories>
   >({
-    name: 'Calorie Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateCalories,
   });

@@ -32,7 +32,6 @@ export default function RentalPropertyROI() {
     RentalPropertyInputs,
     ReturnType<typeof calculateRentalPropertyROI>
   >({
-    name: 'Rental Property ROI Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateRentalPropertyROI,
   });

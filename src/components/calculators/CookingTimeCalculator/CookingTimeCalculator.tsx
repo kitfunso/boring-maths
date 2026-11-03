@@ -53,7 +53,6 @@ export default function CookingTimeCalculator() {
     CookingTimeInputs,
     ReturnType<typeof calculateCookingTime>
   >({
-    name: 'Cooking Time Calculator',
     defaults: getDefaultInputs,
     compute: calculateCookingTime,
   });

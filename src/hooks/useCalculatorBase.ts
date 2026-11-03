@@ -2,17 +2,15 @@
  * useCalculatorBase Hook
  *
  * Consolidates the common boilerplate shared across all calculator components:
- * - Calculator usage tracking (useCalculatorTracking)
  * - Input state with localStorage persistence (useLocalStorage)
  * - Memoized result computation
  * - Generic updateInput helper for single-field updates
  *
  * For calculators that previously used plain useState (no persistence),
- * use useCalculatorState instead: same API but without localStorage or tracking.
+ * use useCalculatorState instead: same API but without localStorage.
  *
  * @example
  * const { inputs, result, updateInput, setInputs } = useCalculatorBase<MyInputs, MyResult>({
- *   name: 'My Calculator',
  *   slug: 'calc-my-inputs',
  *   defaults: getDefaultInputs,
  *   compute: calculateMyResult,
@@ -21,11 +19,8 @@
 
 import { useState, useMemo, useCallback } from 'preact/hooks';
 import { useLocalStorage } from './useLocalStorage';
-import { useCalculatorTracking } from './useCalculatorTracking';
 
 interface UseCalculatorBaseOptions<TInputs, TResult> {
-  /** Display name passed to analytics tracking. */
-  readonly name: string;
   /** localStorage key for persisting inputs across sessions. */
   readonly slug: string;
   /** Default input values. Can be a value or a factory function. */
@@ -46,15 +41,12 @@ interface UseCalculatorReturn<TInputs, TResult> {
 }
 
 /**
- * Full calculator hook with localStorage persistence and analytics tracking.
- * Use for calculators that previously used useLocalStorage + useCalculatorTracking.
+ * Full calculator hook with localStorage persistence.
  */
 export function useCalculatorBase<TInputs, TResult>(
   options: UseCalculatorBaseOptions<TInputs, TResult>
 ): UseCalculatorReturn<TInputs, TResult> {
-  const { name, slug, defaults, compute } = options;
-
-  useCalculatorTracking(name);
+  const { slug, defaults, compute } = options;
 
   const [inputs, setInputs] = useLocalStorage<TInputs>(slug, defaults);
 
@@ -71,8 +63,6 @@ export function useCalculatorBase<TInputs, TResult>(
 }
 
 interface UseCalculatorStateOptions<TInputs, TResult> {
-  /** Display name passed to analytics tracking. Omit to skip tracking. */
-  readonly name?: string;
   /** Default input values. Can be a value or a factory function. */
   readonly defaults: TInputs | (() => TInputs);
   /** Pure function that computes results from the current inputs. */
@@ -82,14 +72,11 @@ interface UseCalculatorStateOptions<TInputs, TResult> {
 /**
  * Lightweight calculator hook with plain useState (no localStorage).
  * Use for calculators that previously used useState without persistence.
- * Optionally tracks usage if name is provided.
  */
 export function useCalculatorState<TInputs, TResult>(
   options: UseCalculatorStateOptions<TInputs, TResult>
 ): UseCalculatorReturn<TInputs, TResult> {
-  const { name, defaults, compute } = options;
-
-  useCalculatorTracking(name ?? '', !!name);
+  const { defaults, compute } = options;
 
   const [inputs, setInputs] = useState<TInputs>(defaults);
 

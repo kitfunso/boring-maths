@@ -30,7 +30,6 @@ export default function LMTDCalculator() {
     LMTDInputs,
     ReturnType<typeof calculateLMTD>
   >({
-    name: 'LMTD Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateLMTD,
   });

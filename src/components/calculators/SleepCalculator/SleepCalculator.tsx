@@ -28,7 +28,6 @@ export default function SleepCalculator() {
     SleepInputs,
     ReturnType<typeof calculateSleepTimes>
   >({
-    name: 'Sleep Calculator',
     slug: 'calc-sleep-inputs',
     defaults: getDefaultInputs,
     compute: calculateSleepTimes,

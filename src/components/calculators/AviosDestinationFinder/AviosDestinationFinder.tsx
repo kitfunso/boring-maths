@@ -123,7 +123,6 @@ export default function AviosDestinationFinder() {
     AviosFinderInputs,
     AviosFinderResult
   >({
-    name: 'Avios Destination Finder',
     slug: 'calc-avios-finder-inputs',
     defaults: getDefaultInputs,
     compute: computeResults,

@@ -29,7 +29,6 @@ export default function BuyVsRent() {
     BuyVsRentInputs,
     BuyVsRentResult
   >({
-    name: 'Buy vs Rent Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBuyVsRent,
   });

@@ -35,7 +35,6 @@ export default function ABVCalculator() {
     ABVInputs,
     ReturnType<typeof calculateABV>
   >({
-    name: 'ABV Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateABV,
   });

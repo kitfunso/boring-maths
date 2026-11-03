@@ -26,7 +26,6 @@ export default function W2To1099Calculator() {
     W2To1099CalculatorInputs,
     ReturnType<typeof calculateW2To1099>
   >({
-    name: 'W2 to 1099 Rate Calculator',
     slug: 'calc-w2-to-1099-inputs',
     defaults: getDefaultInputs,
     compute: calculateW2To1099,

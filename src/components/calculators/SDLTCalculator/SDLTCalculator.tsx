@@ -23,7 +23,6 @@ export default function SDLTCalculator() {
     SDLTCalculatorInputs,
     ReturnType<typeof calculateSDLT>
   >({
-    name: 'SDLT Calculator',
     slug: 'calc-sdlt-inputs',
     defaults: getDefaultInputs,
     compute: calculateSDLT,

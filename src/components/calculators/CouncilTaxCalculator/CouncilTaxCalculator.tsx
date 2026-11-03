@@ -16,7 +16,6 @@ export default function CouncilTaxCalculator() {
     CouncilTaxInputs,
     ReturnType<typeof calculateCouncilTax>
   >({
-    name: 'Council Tax Calculator',
     slug: 'calc-council-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateCouncilTax,

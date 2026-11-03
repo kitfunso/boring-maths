@@ -23,7 +23,6 @@ export default function TimeZoneConverter() {
     TimeZoneConverterInputs,
     ReturnType<typeof convertTimeZone>
   >({
-    name: 'Time Zone Converter',
     slug: 'calc-timezone-inputs',
     defaults: getDefaultInputs,
     compute: convertTimeZone,

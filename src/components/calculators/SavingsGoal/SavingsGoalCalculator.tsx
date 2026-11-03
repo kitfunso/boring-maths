@@ -34,7 +34,6 @@ export default function SavingsGoalCalculator() {
     SavingsGoalInputs,
     SavingsGoalResult
   >({
-    name: 'Plan Your Savings Goal',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateSavingsGoal,
   });

@@ -34,7 +34,6 @@ export default function CompoundInterestCalculator() {
     CompoundInterestInputs,
     CompoundInterestResult
   >({
-    name: 'Compound Interest Calculator',
     slug: 'calc-compound-inputs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCompoundInterest,

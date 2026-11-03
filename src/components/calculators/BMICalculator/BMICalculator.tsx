@@ -27,7 +27,6 @@ import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 export default function BMICalculator() {
   const { inputs, result, updateInput, setInputs } = useCalculatorBase<BMIInputs, BMIResult>({
-    name: 'Calculate Your BMI',
     slug: 'calc-bmi-inputs',
     defaults: getDefaultInputs,
     compute: calculateBMI,

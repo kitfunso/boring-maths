@@ -32,7 +32,6 @@ export default function HSACalculator() {
     HSAInputs,
     ReturnType<typeof calculateHSA>
   >({
-    name: 'HSA Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateHSA,
   });

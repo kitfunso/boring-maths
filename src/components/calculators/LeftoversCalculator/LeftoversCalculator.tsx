@@ -45,7 +45,6 @@ export default function LeftoversCalculator() {
     LeftoversInputs,
     ReturnType<typeof calculateLeftovers>
   >({
-    name: 'Leftovers Calculator',
     defaults: getDefaultInputs,
     compute: calculateLeftovers,
   });

@@ -24,7 +24,6 @@ export default function DueDateCalculator() {
     DueDateInputs,
     ReturnType<typeof calculateDueDate>
   >({
-    name: 'Due Date Calculator',
     slug: 'calc-due-date-inputs',
     defaults: getDefaultInputs,
     compute: calculateDueDate,

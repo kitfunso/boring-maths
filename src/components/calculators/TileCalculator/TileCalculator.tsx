@@ -71,7 +71,6 @@ export default function TileCalculator() {
     TileCalculatorInputs,
     ReturnType<typeof calculateTile>
   >({
-    name: 'Tile Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateTile,
   });

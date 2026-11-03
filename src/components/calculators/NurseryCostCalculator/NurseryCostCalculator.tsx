@@ -32,7 +32,6 @@ export default function NurseryCostCalculator() {
     NurseryCostInputs,
     ReturnType<typeof calculateNurseryCost>
   >({
-    name: 'UK Nursery Cost Calculator',
     slug: 'calc-nursery-cost-inputs',
     defaults: getDefaultInputs,
     compute: calculateNurseryCost,

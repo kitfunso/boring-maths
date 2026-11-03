@@ -28,7 +28,6 @@ export default function LoanCalculator() {
     LoanInputs,
     ReturnType<typeof calculateLoan>
   >({
-    name: 'Loan Payment Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateLoan,
   });

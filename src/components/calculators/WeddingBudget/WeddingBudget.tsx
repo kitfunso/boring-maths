@@ -51,7 +51,6 @@ export default function WeddingBudget() {
     WeddingBudgetInputs,
     ReturnType<typeof calculateWeddingBudget>
   >({
-    name: 'Wedding Budget Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateWeddingBudget,
   });

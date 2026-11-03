@@ -17,7 +17,6 @@ export default function UKRedundancyPayCalculator() {
     UKRedundancyPayInputs,
     ReturnType<typeof calculateRedundancyPay>
   >({
-    name: 'UK Redundancy Pay Calculator',
     slug: 'calc-uk-redundancy-pay-inputs',
     defaults: getDefaultInputs,
     compute: calculateRedundancyPay,

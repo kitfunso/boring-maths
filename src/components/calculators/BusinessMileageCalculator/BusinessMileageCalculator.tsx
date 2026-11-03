@@ -42,7 +42,6 @@ export default function BusinessMileageCalculator() {
     BusinessMileageInputs,
     ReturnType<typeof calculateBusinessMileage>
   >({
-    name: 'Business Mileage Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateBusinessMileage,
   });

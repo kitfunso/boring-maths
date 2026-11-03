@@ -270,7 +270,6 @@ export default function CardPerksCalculator() {
     CardPerksInputs,
     CardPerksResult
   >({
-    name: 'Card Rewards & Perks Calculator',
     slug: 'calc-card-perks',
     defaults: DEFAULTS,
     compute: (currentInputs) => computeResults(currentInputs, CARDS),

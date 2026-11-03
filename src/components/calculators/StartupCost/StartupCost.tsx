@@ -48,7 +48,6 @@ export default function StartupCost() {
     StartupCostInputs,
     ReturnType<typeof calculateStartupCost>
   >({
-    name: 'Startup Cost Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateStartupCost,
   });

@@ -34,7 +34,6 @@ export default function PercentageCalculator() {
     PercentageCalculatorInputs,
     ReturnType<typeof calculate>
   >({
-    name: 'Percentage Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculate,
   });

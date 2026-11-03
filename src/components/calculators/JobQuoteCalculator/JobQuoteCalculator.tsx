@@ -38,7 +38,6 @@ export default function JobQuoteCalculator() {
     JobQuoteInputs,
     ReturnType<typeof calculateJobQuote>
   >({
-    name: 'Job Quote Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateJobQuote,
   });

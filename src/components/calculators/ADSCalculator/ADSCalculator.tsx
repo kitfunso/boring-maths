@@ -20,7 +20,6 @@ export default function ADSCalculator() {
     ADSCalculatorInputs,
     ReturnType<typeof calculateADS>
   >({
-    name: 'Additional Dwelling Supplement Calculator',
     slug: 'calc-ads-inputs',
     defaults: getDefaultInputs,
     compute: calculateADS,

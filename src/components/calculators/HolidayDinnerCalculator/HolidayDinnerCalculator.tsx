@@ -49,7 +49,6 @@ export default function HolidayDinnerCalculator() {
     HolidayDinnerInputs,
     ReturnType<typeof calculateHolidayDinner>
   >({
-    name: 'Holiday Dinner Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateHolidayDinner,
   });

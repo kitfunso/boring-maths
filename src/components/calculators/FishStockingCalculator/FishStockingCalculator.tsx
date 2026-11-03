@@ -37,7 +37,6 @@ export default function FishStockingCalculator() {
     FishStockingInputs,
     ReturnType<typeof calculateFishStocking>
   >({
-    name: 'Fish Stocking Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateFishStocking,
   });

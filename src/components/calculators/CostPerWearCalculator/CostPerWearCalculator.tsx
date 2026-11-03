@@ -26,7 +26,6 @@ export default function CostPerWearCalculator() {
     CostPerWearInputs,
     ReturnType<typeof calculateCostPerWear>
   >({
-    name: 'Cost Per Wear Calculator',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateCostPerWear,
   });

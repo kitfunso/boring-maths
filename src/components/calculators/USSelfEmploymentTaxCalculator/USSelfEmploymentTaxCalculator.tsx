@@ -21,7 +21,6 @@ export default function USSelfEmploymentTaxCalculator() {
     USSelfEmploymentTaxInputs,
     ReturnType<typeof calculateSelfEmploymentTax>
   >({
-    name: 'Self-Employment Tax Calculator',
     slug: 'calc-us-self-employment-tax-inputs',
     defaults: getDefaultInputs,
     compute: calculateSelfEmploymentTax,

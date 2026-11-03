@@ -43,7 +43,6 @@ export default function MulchCalculator() {
     MulchCalculatorInputs,
     MulchCalculatorResult
   >({
-    name: 'Calculate Your Mulch Needs',
     defaults: () => getDefaultInputs(getInitialCurrency()),
     compute: calculateMulch,
   });

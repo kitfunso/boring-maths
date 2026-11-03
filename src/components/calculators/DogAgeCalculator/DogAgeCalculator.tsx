@@ -22,7 +22,6 @@ export default function DogAgeCalculator() {
     DogAgeInputs,
     ReturnType<typeof calculateDogAge>
   >({
-    name: 'Dog Age Calculator',
     defaults: () => getDefaultInputs(),
     compute: calculateDogAge,
   });
