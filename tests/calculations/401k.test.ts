@@ -20,6 +20,24 @@ describe('401kCalculator', () => {
       expect(result.monthlyIncomeAt4Percent).toBe(8019);
     });
 
+    it('caps employee contributions at the 2026 IRS limits ($24,500, $32,500 from age 50)', () => {
+      const inputs = {
+        ...getDefaultInputs(),
+        currentAge: 30,
+        retirementAge: 52,
+        annualSalary: 1000000,
+        contributionPercent: 100,
+        employerMatchPercent: 0,
+        employerMatchLimit: 0,
+        salaryGrowth: 0,
+      };
+
+      const { yearlyBreakdown } = calculate401k(inputs);
+
+      expect(yearlyBreakdown.find((y) => y.age === 49)?.yourContribution).toBe(24500);
+      expect(yearlyBreakdown.find((y) => y.age === 50)?.yourContribution).toBe(32500);
+    });
+
     it('should handle edge case: zero values', () => {
       const inputs = getDefaultInputs();
       inputs.currentAge = 0;

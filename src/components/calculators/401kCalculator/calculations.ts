@@ -40,8 +40,8 @@ export function calculate401k(inputs: Calculator401kInputs): Calculator401kResul
     const employerAnnualContribution =
       currentSalary * (matchablePercent / 100) * (employerMatchPercent / 100);
 
-    // Apply 401k annual limit (2024: $23,000, catch-up $7,500 for 50+)
-    const annualLimit = age >= 50 ? 30500 : 23000;
+    // Apply 401k annual limit (2026: $24,500, catch-up $8,000 for 50+)
+    const annualLimit = age >= 50 ? 32500 : 24500;
     const cappedYourContribution = Math.min(yourAnnualContribution, annualLimit);
 
     totalYourContributions += cappedYourContribution;

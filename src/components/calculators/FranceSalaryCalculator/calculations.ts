@@ -26,8 +26,8 @@ export interface FranceSalaryResult {
   effectiveRate: number;
 }
 
-// Plafond de la Securite sociale 2026: 3925/mo * 12.
-export const PMSS_ANNUAL = 47100;
+// Plafond de la Securite sociale 2026: 4005/mo * 12 (3925/mo, 47100/yr was 2025).
+export const PMSS_ANNUAL = 48060;
 
 // Vieillesse (old-age pension), employee share.
 export const VIEILLESSE_PLAFONNEE_RATE = 0.069; // 6.90% on tranche 1 (up to 1 PMSS)

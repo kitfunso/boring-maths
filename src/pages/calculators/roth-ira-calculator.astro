@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { RothIRACalculator } from '../../components/calculators/RothIRACalculator';
 
 const title = 'Roth IRA Calculator: Project Tax-Free Retirement Growth | Boring Math';
@@ -219,6 +220,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'IRS: Retirement topics: IRA contribution limits',
+        href: 'https://www.irs.gov/retirement-plans/plan-participant-employee/retirement-topics-ira-contribution-limits',
+      },
+      {
+        label: 'IRS: 401(k) limit increases to $24,500 for 2026, IRA limit increases to $7,500',
+        href: 'https://www.irs.gov/newsroom/401k-limit-increases-to-24500-for-2026-ira-limit-increases-to-7500',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

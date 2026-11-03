@@ -14,6 +14,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKStatutoryMaternityPayCalculator } from '../../components/calculators/UKStatutoryMaternityPayCalculator';
 
 const title = 'UK Statutory Maternity Pay Calculator 2026/27: How Much SMP You Get';
@@ -186,6 +187,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: 'GOV.UK: Maternity pay and leave: Pay',
+        href: 'https://www.gov.uk/maternity-pay-leave/pay',
+      },
+      {
+        label: 'GOV.UK: Maternity pay and leave: Eligibility',
+        href: 'https://www.gov.uk/maternity-pay-leave/eligibility',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>

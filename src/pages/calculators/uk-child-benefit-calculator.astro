@@ -9,6 +9,7 @@ import SEOHead from '../../components/common/SEOHead.astro';
 import HeroSection from '../../components/calculators/shared/HeroSection.astro';
 import ContentSection from '../../components/calculators/shared/ContentSection.astro';
 import FAQSection from '../../components/calculators/shared/FAQSection.astro';
+import SourcesSection from '../../components/calculators/shared/SourcesSection.astro';
 import { UKChildBenefitCalculator } from '../../components/calculators/UKChildBenefitCalculator';
 
 const title = 'Free UK Child Benefit Calculator 2026/27: HICBC Calculator | Boring Math';
@@ -180,6 +181,20 @@ const schemaBreadcrumbs = [
       </p>
     </div>
   </ContentSection>
+
+  <SourcesSection
+    checked="2026-11-03"
+    sources={[
+      {
+        label: "GOV.UK: Child Benefit: What you'll get",
+        href: 'https://www.gov.uk/child-benefit/what-youll-get',
+      },
+      {
+        label: 'GOV.UK: High Income Child Benefit Charge',
+        href: 'https://www.gov.uk/child-benefit-tax-charge',
+      },
+    ]}
+  />
 
   <FAQSection faqs={faqs} />
 </CalculatorLayout>
