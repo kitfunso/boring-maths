@@ -4,15 +4,15 @@ import { VELOCITY_RECOMMENDATIONS, STANDARD_PIPE_SIZES_MM, STANDARD_PIPE_SIZES_I
 function toSI(inputs: PipeFlowInputs): { D: number; V: number; Q: number } {
   if (inputs.unitSystem === 'metric') {
     return {
-      D: inputs.diameter / 1000, // mm to m
-      V: inputs.velocity, // m/s
-      Q: inputs.flowRate / 3600, // m³/h to m³/s
+      D: inputs.diameter / 1000,
+      V: inputs.velocity,
+      Q: inputs.flowRate / 3600,
     };
   } else {
     return {
-      D: inputs.diameter * 0.0254, // inches to m
-      V: inputs.velocity * 0.3048, // ft/s to m/s
-      Q: inputs.flowRate * 0.0000631, // GPM to m³/s
+      D: inputs.diameter * 0.0254,
+      V: inputs.velocity * 0.3048,
+      Q: inputs.flowRate * 0.0000631,
     };
   }
 }
@@ -148,7 +148,7 @@ export function calculatePipeFlow(inputs: PipeFlowInputs): PipeFlowResult {
     velocity: result.velocity,
     flowRate: result.flowRate,
     crossSectionalArea: result.area,
-    hydraulicDiameter: result.diameter, // For circular pipes, Dh = D
+    hydraulicDiameter: result.diameter,
     recommendedVelocity: recommended,
     velocityStatus: velocityEval.status,
     velocityWarning: velocityEval.warning,

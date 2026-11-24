@@ -152,7 +152,7 @@ export function getDefaultInputs(currency: Currency = 'USD'): BuyVsRentInputs {
     stayDuration: 10,
     investmentReturn: 0.07,
     marginalTaxRate: 0.22,
-    includeTaxBenefits: currency === 'USD', // Only US has mortgage interest deduction
+    includeTaxBenefits: currency === 'USD',
   };
 }
 

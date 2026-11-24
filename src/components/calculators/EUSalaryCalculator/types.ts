@@ -80,8 +80,8 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: 300000, rate: 45 },
       { threshold: Infinity, rate: 47 },
     ],
-    socialSecurityRate: 6.5, // 4.70 + 1.55 + 0.10 + 0.15 (MEI), Seguridad Social 2026
-    socialSecurityCap: 61214.4, // 5,101.20 a month x 12
+    socialSecurityRate: 6.5,
+    socialSecurityCap: 61214.4,
     taxFreeAllowance: 5550,
   },
   {
@@ -154,7 +154,7 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: Infinity, rate: 55 },
     ],
     socialSecurityRate: 18.12,
-    socialSecurityCap: 97020, // 14 x 6,930 monthly ceiling (12 salaries + special payments)
+    socialSecurityCap: 97020,
     taxFreeAllowance: 0,
   },
   {
@@ -162,7 +162,7 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Poland',
     currency: 'PLN',
     taxBrackets: [
-      { threshold: 30000, rate: 0 }, // 3,600 tax-reducing amount / 12%
+      { threshold: 30000, rate: 0 },
       { threshold: 120000, rate: 12 },
       { threshold: Infinity, rate: 32 },
     ],
@@ -176,8 +176,8 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Sweden',
     currency: 'SEK',
     taxBrackets: [
-      { threshold: 643000, rate: 32 }, // Municipal average; threshold is the 2026 state tax limit
-      { threshold: Infinity, rate: 52 }, // Including state tax
+      { threshold: 643000, rate: 32 },
+      { threshold: Infinity, rate: 52 },
     ],
     socialSecurityRate: 7,
     taxFreeAllowance: 57500,
@@ -187,13 +187,13 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     name: 'Denmark',
     currency: 'DKK',
     taxBrackets: [
-      { threshold: 54100, rate: 0 }, // Personfradrag
+      { threshold: 54100, rate: 0 },
       { threshold: 641200, rate: 37.01 },
-      { threshold: 777900, rate: 44.51 }, // + mellemskat 7.5
-      { threshold: 2592700, rate: 52.01 }, // + topskat 7.5
-      { threshold: Infinity, rate: 57.01 }, // + toptopskat 5
+      { threshold: 777900, rate: 44.51 },
+      { threshold: 2592700, rate: 52.01 },
+      { threshold: Infinity, rate: 57.01 },
     ],
-    socialSecurityRate: 8, // AM-bidrag
+    socialSecurityRate: 8,
     taxFreeAllowance: 0,
   },
 ];

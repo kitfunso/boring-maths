@@ -45,7 +45,7 @@ export const PLATFORM_FEES: Record<Currency, Record<Platform, PlatformConfig>> =
       fees: {
         listingFee: 0,
         transactionFeeRate: 0.1325,
-        paymentProcessingRate: 0, // Included in final value fee
+        paymentProcessingRate: 0,
         paymentProcessingFixed: 0,
         perOrderFee: 0.3,
       },
@@ -56,12 +56,12 @@ export const PLATFORM_FEES: Record<Currency, Record<Platform, PlatformConfig>> =
       color: 'yellow',
       fees: {
         listingFee: 0,
-        transactionFeeRate: 0.15, // Referral fee (varies 8-15%)
+        transactionFeeRate: 0.15,
         paymentProcessingRate: 0,
         paymentProcessingFixed: 0,
         perOrderFee: 0,
         additionalFees: [
-          { name: 'FBA Fee (avg)', rate: 0, isOptional: true }, // Flat fee, handled separately
+          { name: 'FBA Fee (avg)', rate: 0, isOptional: true },
         ],
       },
     },

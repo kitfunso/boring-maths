@@ -45,7 +45,7 @@ describe('LeftoversCalculator', () => {
       const inputs: LeftoversInputs = {
         foodCategory: 'cooked-poultry',
         storageMethod: 'fridge',
-        preparedDate: '2025-01-01', // 9 days ago, well past 4-day limit
+        preparedDate: '2025-01-01',
       };
 
       const result = calculateLeftovers(inputs);
@@ -75,7 +75,7 @@ describe('LeftoversCalculator', () => {
       const inputs: LeftoversInputs = {
         foodCategory: 'cooked-rice',
         storageMethod: 'counter',
-        preparedDate: '2025-01-10', // prepared at midnight
+        preparedDate: '2025-01-10',
       };
 
       const result = calculateLeftovers(inputs);

@@ -31,12 +31,12 @@ export interface PressureDropResult {
 }
 
 export const PIPE_ROUGHNESS: Record<PipeMaterial, number> = {
-  steel: 0.045, // Commercial steel
-  stainless: 0.015, // Stainless steel
-  copper: 0.0015, // Drawn copper tubing
-  pvc: 0.0015, // PVC pipe
-  hdpe: 0.007, // HDPE pipe
-  concrete: 1.0, // Concrete pipe
+  steel: 0.045,
+  stainless: 0.015,
+  copper: 0.0015,
+  pvc: 0.0015,
+  hdpe: 0.007,
+  concrete: 1.0,
   custom: 0.045,
 };
 
@@ -52,11 +52,11 @@ export function getDefaultInputs(): PressureDropInputs {
   return {
     unitSystem: 'metric',
     pipeMaterial: 'steel',
-    diameter: 50, // 50 mm
-    length: 100, // 100 m
-    velocity: 2, // 2 m/s
-    density: 998, // Water
-    viscosity: 0.001002, // Water at 20°C
+    diameter: 50,
+    length: 100,
+    velocity: 2,
+    density: 998,
+    viscosity: 0.001002,
     roughness: PIPE_ROUGHNESS.steel,
   };
 }

@@ -120,7 +120,7 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   if (drinkTypes === 0) {
     drinkItems.push({
       item: 'Water',
-      quantity: Math.ceil(totalDrinks / 8), // gallons
+      quantity: Math.ceil(totalDrinks / 8),
       unit: 'gallons',
       servings: totalDrinks,
     });
@@ -166,7 +166,7 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
       const coffeeOz = coffeeServings * 6;
       drinkItems.push({
         item: 'Coffee',
-        quantity: Math.ceil(coffeeOz / 60), // 60oz per pot
+        quantity: Math.ceil(coffeeOz / 60),
         unit: 'pots',
         servings: coffeeServings,
       });

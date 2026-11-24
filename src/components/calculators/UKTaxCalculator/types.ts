@@ -81,8 +81,8 @@ export const SCOTLAND_TAX_BANDS = [
 export const EMPLOYEE_NIC = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,
-  mainRate: 0.08, // 8% between thresholds
-  upperRate: 0.02, // 2% above UEL
+  mainRate: 0.08,
+  upperRate: 0.02,
 };
 
 export const STUDENT_LOAN_THRESHOLDS = {

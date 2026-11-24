@@ -276,6 +276,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     miscCost: Math.round(miscCost),
     biggestExpense,
     savingsOpportunities,
-    monthlyBudgetNeeded: Math.round(monthlyAverage * 1.1), // 10% buffer
+    monthlyBudgetNeeded: Math.round(monthlyAverage * 1.1),
   };
 }

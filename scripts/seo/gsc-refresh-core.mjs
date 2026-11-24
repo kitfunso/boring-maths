@@ -42,7 +42,6 @@ export function toUrlPath(pageValue) {
       return new URL(raw).pathname || '/';
     }
   } catch {
-    // fall through to manual path handling
   }
 
   if (!raw.startsWith('/')) return `/${raw}`;

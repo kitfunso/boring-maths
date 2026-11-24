@@ -73,8 +73,8 @@ export const SCOTLAND_TAX_BANDS = {
 export const NI_RATES = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,
-  mainRate: 0.08, // 8% between thresholds
-  upperRate: 0.02, // 2% above UEL
-  employerRate: 0.15, // 15% employer NI (from 6 April 2025)
+  mainRate: 0.08,
+  upperRate: 0.02,
+  employerRate: 0.15,
   employerThreshold: 5000,
 };

@@ -64,9 +64,9 @@ export interface GraduationPartyResult {
 }
 
 export const FOOD_PER_PERSON: Record<MenuStyle, number> = {
-  finger_food: 8, // appetizer-style
-  buffet: 14, // full meal
-  catered: 16, // generous portions
+  finger_food: 8,
+  buffet: 14,
+  catered: 16,
 };
 
 export const COST_PER_PERSON: Record<Currency, Record<MenuStyle, number>> = {

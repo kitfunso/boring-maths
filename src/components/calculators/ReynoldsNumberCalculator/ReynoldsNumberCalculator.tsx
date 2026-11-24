@@ -35,17 +35,17 @@ export default function ReynoldsNumberCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        diameter: Math.round((prev.diameter / 25.4) * 10) / 10, // mm to inches
-        velocity: Math.round((prev.velocity / 0.3048) * 10) / 10, // m/s to ft/s
-        temperature: Math.round((prev.temperature * 9) / 5 + 32), // °C to °F
+        diameter: Math.round((prev.diameter / 25.4) * 10) / 10,
+        velocity: Math.round((prev.velocity / 0.3048) * 10) / 10,
+        temperature: Math.round((prev.temperature * 9) / 5 + 32),
       }));
     } else {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
-        diameter: Math.round(prev.diameter * 25.4), // inches to mm
-        velocity: Math.round(prev.velocity * 0.3048 * 10) / 10, // ft/s to m/s
-        temperature: Math.round(((prev.temperature - 32) * 5) / 9), // °F to °C
+        diameter: Math.round(prev.diameter * 25.4),
+        velocity: Math.round(prev.velocity * 0.3048 * 10) / 10,
+        temperature: Math.round(((prev.temperature - 32) * 5) / 9),
       }));
     }
   };

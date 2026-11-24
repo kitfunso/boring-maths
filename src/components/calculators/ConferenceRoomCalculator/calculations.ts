@@ -119,7 +119,7 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     const rows = Math.floor(seatingLength / 3);
     layoutInfo = {
       rows,
-      seatsPerRow: seatsPerRow * 2, // both sides of aisle
+      seatsPerRow: seatsPerRow * 2,
       rowSpacing: 3,
     };
   } else if (seatingStyle === 'classroom') {
@@ -130,7 +130,7 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     );
     layoutInfo = {
       rows: Math.floor(seatingLength / CLASSROOM_TABLE.rowDepth),
-      seatsPerRow: tablesPerSide * 2 * CLASSROOM_TABLE.seats, // both sides of the aisle
+      seatsPerRow: tablesPerSide * 2 * CLASSROOM_TABLE.seats,
       rowSpacing: CLASSROOM_TABLE.rowDepth,
       tableCount: Math.ceil(primaryCapacity / CLASSROOM_TABLE.seats),
     };
@@ -148,7 +148,7 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     const sideTables = Math.floor(seatingLength / tableLength) * 2;
     layoutInfo = {
       rows: 1,
-      seatsPerRow: (bottomTables + sideTables) * 2, // 2 per table (outside only)
+      seatsPerRow: (bottomTables + sideTables) * 2,
       rowSpacing: 0,
       tableCount: bottomTables + sideTables,
     };

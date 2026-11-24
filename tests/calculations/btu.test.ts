@@ -28,7 +28,7 @@ describe('calculateBTUCalculator', () => {
       unit: 'm',
       roomLength: 4,
       roomWidth: 4,
-      ceilingHeight: 2.4384, // 8 ft equivalent -> height factor ~1, no scaling
+      ceilingHeight: 2.4384,
     });
     expect(r.areaSqFt).toBeCloseTo(172.2, 1);
     expect(r.baseBtu).toBeCloseTo(3444, 0);

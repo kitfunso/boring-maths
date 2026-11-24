@@ -105,7 +105,7 @@ export function getDefaultInputs(currency: Currency): RemoteWorkSavingsInputs {
       hourlyRate: 35,
     },
     GBP: {
-      gasPricePerGallon: 6.5, // UK petrol is expensive
+      gasPricePerGallon: 6.5,
       parkingCostDaily: 12,
       transitCostDaily: 10,
       workLunchCostDaily: 10,
@@ -130,8 +130,8 @@ export function getDefaultInputs(currency: Currency): RemoteWorkSavingsInputs {
 
   return {
     commuteType: 'car',
-    commuteDistanceMiles: 15, // One-way
-    commuteTimeMinutes: 30, // One-way
+    commuteDistanceMiles: 15,
+    commuteTimeMinutes: 30,
     officeDaysPerWeek: 5,
     weeksPerYear: 48,
 

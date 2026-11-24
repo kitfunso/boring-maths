@@ -37,17 +37,17 @@ export default function IdealGasLawCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        pressure: Math.round(prev.pressure * 0.145038 * 100) / 100, // kPa to psi
-        volume: Math.round(prev.volume * 0.0353147 * 1000) / 1000, // L to ft³
-        temperature: Math.round((prev.temperature * 9) / 5 + 32), // °C to °F
+        pressure: Math.round(prev.pressure * 0.145038 * 100) / 100,
+        volume: Math.round(prev.volume * 0.0353147 * 1000) / 1000,
+        temperature: Math.round((prev.temperature * 9) / 5 + 32),
       }));
     } else {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
-        pressure: Math.round(prev.pressure * 6.89476 * 100) / 100, // psi to kPa
-        volume: Math.round(prev.volume * 28.3168 * 100) / 100, // ft³ to L
-        temperature: Math.round(((prev.temperature - 32) * 5) / 9), // °F to °C
+        pressure: Math.round(prev.pressure * 6.89476 * 100) / 100,
+        volume: Math.round(prev.volume * 28.3168 * 100) / 100,
+        temperature: Math.round(((prev.temperature - 32) * 5) / 9),
       }));
     }
   };

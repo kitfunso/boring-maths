@@ -228,8 +228,6 @@ export default function DateRangePicker({
       );
       return top === p.top ? p : { ...p, top };
     });
-    // view is a dependency: navigating to a six-row month can grow the
-    // popover after open, re-tripping the bottom-edge clamp
   }, [open, view]);
 
   useEffect(() => {

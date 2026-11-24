@@ -44,7 +44,7 @@ export default function MacroCalculator() {
         weight: weightKg,
         heightFeet: heightCm,
         heightInches: 0,
-        proteinRatio: Math.round(prev.proteinRatio * 2.2 * 10) / 10, // Convert g/lb to g/kg
+        proteinRatio: Math.round(prev.proteinRatio * 2.2 * 10) / 10,
       }));
     } else {
       const weightLbs = Math.round(inputs.weight * 2.20462);
@@ -57,7 +57,7 @@ export default function MacroCalculator() {
         weight: weightLbs,
         heightFeet: feet,
         heightInches: inches,
-        proteinRatio: Math.round((prev.proteinRatio / 2.2) * 10) / 10, // Convert g/kg to g/lb
+        proteinRatio: Math.round((prev.proteinRatio / 2.2) * 10) / 10,
       }));
     }
   };

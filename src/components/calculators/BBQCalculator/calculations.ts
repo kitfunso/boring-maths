@@ -118,7 +118,7 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
     sideQuantities,
     supplies,
     perPerson: {
-      meat: Math.round(meatPerPerson * 16), // convert to oz
+      meat: Math.round(meatPerPerson * 16),
       sides: sideCount,
     },
     grillingInfo: {

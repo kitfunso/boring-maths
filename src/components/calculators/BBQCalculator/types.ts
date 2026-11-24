@@ -50,9 +50,9 @@ export interface BBQCalculatorResult {
 }
 
 export const MEAT_PER_PERSON: Record<AppetiteLevel, number> = {
-  light: 0.33, // 1/3 lb
-  moderate: 0.5, // 1/2 lb
-  hungry: 0.75, // 3/4 lb
+  light: 0.33,
+  moderate: 0.5,
+  hungry: 0.75,
 };
 
 export const CHILD_MULTIPLIER = 0.5;

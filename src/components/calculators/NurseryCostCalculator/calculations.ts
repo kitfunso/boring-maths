@@ -32,7 +32,7 @@ export const HOURLY_RATES: Record<UKRegion, Record<ChildAge, number>> = {
 export const FREE_HOURS = {
   UNIVERSAL_15: 15,
   WORKING_30: 30,
-  MIN_INCOME_PER_PARENT: 10574.72, // £2,643.68 per 3 months x 4
+  MIN_INCOME_PER_PARENT: 10574.72,
   MAX_INCOME_PER_PARENT: 100000,
   UC_INCOME_THRESHOLD_2YO: 15400,
   TERM_WEEKS: 38,

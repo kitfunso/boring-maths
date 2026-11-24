@@ -41,7 +41,7 @@ export default function PressureDropCalculator() {
         velocity: Math.round((prev.velocity / 0.3048) * 100) / 100,
         density: Math.round((prev.density / 16.0185) * 100) / 100,
         viscosity: Math.round((prev.viscosity / 1.488) * 100000) / 100000,
-        roughness: Math.round((prev.roughness / 0.0254) * 100) / 100, // mm to mils
+        roughness: Math.round((prev.roughness / 0.0254) * 100) / 100,
       }));
     } else {
       setInputs((prev) => ({
@@ -52,7 +52,7 @@ export default function PressureDropCalculator() {
         velocity: Math.round(prev.velocity * 0.3048 * 100) / 100,
         density: Math.round(prev.density * 16.0185),
         viscosity: Math.round(prev.viscosity * 1.488 * 100000) / 100000,
-        roughness: Math.round(prev.roughness * 0.0254 * 1000) / 1000, // mils to mm
+        roughness: Math.round(prev.roughness * 0.0254 * 1000) / 1000,
       }));
     }
   };

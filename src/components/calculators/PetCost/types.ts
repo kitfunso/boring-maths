@@ -74,9 +74,9 @@ export const BASE_COSTS = {
       food: 600,
       vet: 500,
       insurance: 600,
-      grooming: 50, // per visit
-      daycare: 30, // per day
-      boarding: 50, // per night
+      grooming: 50,
+      daycare: 30,
+      boarding: 50,
       supplies: 300,
       toys: 100,
       treats: 150,

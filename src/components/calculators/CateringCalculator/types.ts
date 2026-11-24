@@ -80,10 +80,10 @@ export const TOTAL_FOOD_PER_PERSON: Record<MealType, number> = {
 export const APPETIZERS_PER_HOUR = 6;
 
 export const SERVICE_WASTE: Record<ServiceStyle, number> = {
-  buffet: 1.15, // 15% extra for buffet
-  plated: 1.05, // 5% extra for plated
-  stations: 1.2, // 20% extra for stations
-  family_style: 1.1, // 10% extra for family style
+  buffet: 1.15,
+  plated: 1.05,
+  stations: 1.2,
+  family_style: 1.1,
 };
 
 export function getDefaultInputs(currency: Currency = 'USD'): CateringInputs {

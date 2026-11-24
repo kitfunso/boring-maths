@@ -61,10 +61,10 @@ export const TILE_SIZES: Record<TileSize, [number, number]> = {
 };
 
 export const PATTERN_WASTE: Record<TilePattern, number> = {
-  straight: 0.1, // 10%
-  diagonal: 0.15, // 15%
-  herringbone: 0.2, // 20%
-  brick: 0.12, // 12%
+  straight: 0.1,
+  diagonal: 0.15,
+  herringbone: 0.2,
+  brick: 0.12,
 };
 
 export const GROUT_COVERAGE_FACTOR = 25;
@@ -87,7 +87,7 @@ export function getDefaultInputs(currency: Currency = 'USD'): TileCalculatorInpu
     customTileWidth: 12,
     customTileHeight: 12,
     tilePattern: 'straight',
-    groutWidth: 0.125, // 1/8 inch
+    groutWidth: 0.125,
     tilePrice: currency === 'USD' ? 5 : currency === 'GBP' ? 4 : 4.5,
     tilesPerBox: 10,
     includeAdhesive: true,

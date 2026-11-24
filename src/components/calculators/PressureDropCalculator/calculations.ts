@@ -13,21 +13,21 @@ function toSI(inputs: PressureDropInputs): {
 } {
   if (inputs.unitSystem === 'metric') {
     return {
-      D: inputs.diameter / 1000, // mm to m
-      L: inputs.length, // m
-      V: inputs.velocity, // m/s
-      rho: inputs.density, // kg/m³
-      mu: inputs.viscosity, // Pa·s
-      epsilon: inputs.roughness / 1000, // mm to m
+      D: inputs.diameter / 1000,
+      L: inputs.length,
+      V: inputs.velocity,
+      rho: inputs.density,
+      mu: inputs.viscosity,
+      epsilon: inputs.roughness / 1000,
     };
   } else {
     return {
-      D: inputs.diameter * 0.0254, // inches to m
-      L: inputs.length * 0.3048, // ft to m
-      V: inputs.velocity * 0.3048, // ft/s to m/s
-      rho: inputs.density * 16.0185, // lb/ft³ to kg/m³
-      mu: inputs.viscosity * 1.488, // lb/(ft·s) to Pa·s
-      epsilon: (inputs.roughness * 0.0254) / 1000, // mils to m
+      D: inputs.diameter * 0.0254,
+      L: inputs.length * 0.3048,
+      V: inputs.velocity * 0.3048,
+      rho: inputs.density * 16.0185,
+      mu: inputs.viscosity * 1.488,
+      epsilon: (inputs.roughness * 0.0254) / 1000,
     };
   }
 }

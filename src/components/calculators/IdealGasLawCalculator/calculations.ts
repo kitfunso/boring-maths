@@ -26,18 +26,18 @@ function fromSI(
 ): { pressure: number; volume: number; moles: number; temperature: number; temperatureK: number } {
   if (unitSystem === 'metric') {
     return {
-      pressure: P / 1000, // Pa to kPa
-      volume: V * 1000, // m³ to L
+      pressure: P / 1000,
+      volume: V * 1000,
       moles: n,
-      temperature: T - 273.15, // K to °C
+      temperature: T - 273.15,
       temperatureK: T,
     };
   } else {
     return {
-      pressure: P / 6894.76, // Pa to psi
-      volume: V / 0.0283168, // m³ to ft³
+      pressure: P / 6894.76,
+      volume: V / 0.0283168,
       moles: n,
-      temperature: (T * 9) / 5 - 459.67, // K to °F
+      temperature: (T * 9) / 5 - 459.67,
       temperatureK: T,
     };
   }
@@ -101,21 +101,21 @@ export function formatNumber(value: number, decimals: number = 2): string {
 export function getStandardConditions(unitSystem: 'metric' | 'imperial') {
   if (unitSystem === 'metric') {
     return {
-      pressure: 101.325, // kPa
-      temperature: 0, // °C (STP)
+      pressure: 101.325,
+      temperature: 0,
       pressureUnit: 'kPa',
       tempUnit: '°C',
       volumeUnit: 'L',
-      molarVolume: 22.414, // L/mol at STP
+      molarVolume: 22.414,
     };
   } else {
     return {
-      pressure: 14.696, // psi (1 atm)
-      temperature: 32, // °F (STP)
+      pressure: 14.696,
+      temperature: 32,
       pressureUnit: 'psi',
       tempUnit: '°F',
       volumeUnit: 'ft³',
-      molarVolume: 0.7914, // ft³/mol at STP
+      molarVolume: 0.7914,
     };
   }
 }

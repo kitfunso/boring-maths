@@ -96,7 +96,7 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
     writeOffDate,
     amountWrittenOff: Math.round(amountWrittenOff * 100) / 100,
     willRepayInFull,
-    yearlyBreakdown: yearlyBreakdown.slice(0, 10), // First 10 years for display
+    yearlyBreakdown: yearlyBreakdown.slice(0, 10),
   };
 }
 

@@ -50,9 +50,9 @@ export interface FenceCalculatorResult {
 }
 
 export const PANEL_WIDTHS: Record<FenceMaterial, number> = {
-  wood: 8, // typically 8 ft sections
+  wood: 8,
   vinyl: 8,
-  chain_link: 10, // 10 ft rolls
+  chain_link: 10,
   aluminum: 6,
   composite: 6,
 };

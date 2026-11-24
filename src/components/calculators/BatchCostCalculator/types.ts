@@ -66,9 +66,9 @@ export const MATERIAL_PRESETS: Record<string, MaterialItem[]> = {
 };
 
 export const DEFAULT_UNITS: Record<string, number> = {
-  soap: 10, // bars per batch
-  candle: 6, // candles per batch
-  cosmetic: 8, // jars per batch
+  soap: 10,
+  candle: 6,
+  cosmetic: 8,
   custom: 10,
 };
 

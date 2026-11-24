@@ -42,7 +42,7 @@ export function getDefaultInputs(currency: Currency = 'USD'): CompoundInterestIn
     currency,
     principal: principals[currency],
     monthlyContribution: contributions[currency],
-    interestRate: 0.07, // 7%
+    interestRate: 0.07,
     years: 10,
     compoundFrequency: 'monthly',
   };

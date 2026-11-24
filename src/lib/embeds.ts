@@ -7,7 +7,7 @@ export interface EmbedConfig {
 }
 
 export const embedConfig: EmbedConfig = {
-  whitelabelOrigins: [], // Empty for now - populated when customers sign up
+  whitelabelOrigins: [],
   defaultWidth: '100%',
   defaultHeight: '700',
 };

@@ -43,10 +43,10 @@ export function getDefaultInputs(): UKPensionInputs {
 }
 
 export const PENSION_CONSTANTS = {
-  statePensionFull: 12548, // 2026/27 full new State Pension per year (£241.30/week)
-  statePensionAge: 67, // Current state pension age
-  annualAllowance: 60000, // Annual pension contribution limit
-  autoEnrolmentMin: 0.05, // 5% employee minimum
-  autoEnrolmentEmployerMin: 0.03, // 3% employer minimum
-  withdrawalRate: 0.04, // 4% safe withdrawal rule
+  statePensionFull: 12548,
+  statePensionAge: 67,
+  annualAllowance: 60000,
+  autoEnrolmentMin: 0.05,
+  autoEnrolmentEmployerMin: 0.03,
+  withdrawalRate: 0.04,
 };

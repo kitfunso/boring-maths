@@ -108,7 +108,6 @@ export function useLocalStorage<T>(
 
           setState(merged);
         } catch {
-          // Ignore parse errors
         }
       }
     };
@@ -123,7 +122,6 @@ export function useLocalStorage<T>(
     try {
       localStorage.removeItem(key);
     } catch {
-      // Ignore errors
     }
   }, [key, initialValue]);
 

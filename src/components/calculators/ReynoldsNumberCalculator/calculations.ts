@@ -29,15 +29,15 @@ function convertToMetric(inputs: ReynoldsInputs): {
 } {
   if (inputs.unitSystem === 'metric') {
     return {
-      diameter: inputs.diameter / 1000, // mm to m
+      diameter: inputs.diameter / 1000,
       velocity: inputs.velocity,
       tempC: inputs.temperature,
     };
   } else {
     return {
-      diameter: inputs.diameter * 0.0254, // inches to m
-      velocity: inputs.velocity * 0.3048, // ft/s to m/s
-      tempC: ((inputs.temperature - 32) * 5) / 9, // °F to °C
+      diameter: inputs.diameter * 0.0254,
+      velocity: inputs.velocity * 0.3048,
+      tempC: ((inputs.temperature - 32) * 5) / 9,
     };
   }
 }

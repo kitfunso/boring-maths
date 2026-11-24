@@ -91,16 +91,15 @@ export interface EtsyFeeResult {
 
 export const FEE_STRUCTURES = {
   etsy: {
-    listingFee: 0.2, // $0.20 per listing
-    transactionFeeRate: 0.065, // 6.5% of sale + shipping
-    paymentProcessingRate: 0.03, // 3%
-    paymentProcessingFixed: 0.25, // $0.25
-    offsiteAdsRate: 0.15, // 15% if from offsite ad
+    listingFee: 0.2,
+    transactionFeeRate: 0.065,
+    paymentProcessingRate: 0.03,
+    paymentProcessingFixed: 0.25,
+    offsiteAdsRate: 0.15,
   },
   ebay: {
-    finalValueFeeDefault: 0.1325, // 13.25% most categories
-    perOrderFee: 0.3, // $0.30 per order
-    // Payment processing included in final value fee
+    finalValueFeeDefault: 0.1325,
+    perOrderFee: 0.3,
   },
 } as const;
 

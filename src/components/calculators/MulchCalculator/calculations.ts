@@ -34,7 +34,7 @@ export const MULCH_TYPE_CONFIGS: Record<MulchType, MulchTypeConfig> = {
     defaultPricePerCuYard: { USD: 90, GBP: 75, EUR: 85 },
     defaultPricePer2CuFtBag: { USD: 8, GBP: 7, EUR: 7.5 },
     defaultPricePer3CuFtBag: { USD: 11, GBP: 9.5, EUR: 10 },
-    refreshMonths: 120, // 10 years
+    refreshMonths: 120,
     description: 'Long-lasting, great for playgrounds, does not decompose',
   },
   stone: {
@@ -43,7 +43,7 @@ export const MULCH_TYPE_CONFIGS: Record<MulchType, MulchTypeConfig> = {
     defaultPricePerCuYard: { USD: 65, GBP: 55, EUR: 60 },
     defaultPricePer2CuFtBag: { USD: 6, GBP: 5, EUR: 5.5 },
     defaultPricePer3CuFtBag: { USD: 8, GBP: 7, EUR: 7.5 },
-    refreshMonths: 0, // Permanent
+    refreshMonths: 0,
     description: 'Permanent solution, low maintenance, excellent drainage',
   },
   straw: {

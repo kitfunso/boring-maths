@@ -84,7 +84,6 @@ export function useKeyboardShortcuts({
       await navigator.clipboard.writeText(text);
       showToast('Copied to clipboard!', 'green');
     } catch {
-      // Clipboard API not available
     }
   }, [onCopy, showToast]);
 

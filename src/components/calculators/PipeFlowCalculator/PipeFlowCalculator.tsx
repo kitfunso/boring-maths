@@ -35,17 +35,17 @@ export default function PipeFlowCalculator() {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
-        diameter: Math.round((prev.diameter / 25.4) * 100) / 100, // mm to inches
-        velocity: Math.round((prev.velocity / 0.3048) * 100) / 100, // m/s to ft/s
-        flowRate: Math.round(prev.flowRate * 4.403 * 10) / 10, // m³/h to GPM
+        diameter: Math.round((prev.diameter / 25.4) * 100) / 100,
+        velocity: Math.round((prev.velocity / 0.3048) * 100) / 100,
+        flowRate: Math.round(prev.flowRate * 4.403 * 10) / 10,
       }));
     } else {
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
-        diameter: Math.round(prev.diameter * 25.4), // inches to mm
-        velocity: Math.round(prev.velocity * 0.3048 * 100) / 100, // ft/s to m/s
-        flowRate: Math.round((prev.flowRate / 4.403) * 100) / 100, // GPM to m³/h
+        diameter: Math.round(prev.diameter * 25.4),
+        velocity: Math.round(prev.velocity * 0.3048 * 100) / 100,
+        flowRate: Math.round((prev.flowRate / 4.403) * 100) / 100,
       }));
     }
   };

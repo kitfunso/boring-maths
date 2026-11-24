@@ -62,7 +62,7 @@ export interface HSAResult {
 export const HSA_LIMITS_2026 = {
   individual: 4400,
   family: 8750,
-  catchUp: 1000, // For age 55+
+  catchUp: 1000,
   catchUpAge: 55,
 };
 

@@ -127,7 +127,7 @@ function calculateFIRENumbers(
     lean: leanExpenses / swr,
     regular: regularExpenses / swr,
     fat: fatExpenses / swr,
-    coast: 0, // Calculated separately
+    coast: 0,
   };
 }
 

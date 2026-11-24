@@ -37,10 +37,10 @@ export function getDefaultInputs(currency: Currency = 'USD'): MortgageInputs {
   return {
     currency,
     homePrice,
-    downPayment: homePrice * 0.2, // 20% down
-    interestRate: 0.065, // 6.5%
+    downPayment: homePrice * 0.2,
+    interestRate: 0.065,
     loanTermYears: 30,
-    propertyTax: homePrice * 0.012, // ~1.2% annually
+    propertyTax: homePrice * 0.012,
     homeInsurance: 1500,
     hoaFees: 0,
   };

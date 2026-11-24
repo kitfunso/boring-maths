@@ -65,9 +65,9 @@ export const COST_PER_WATT: Record<Currency, number> = {
 };
 
 export const AVG_SUN_HOURS: Record<Currency, number> = {
-  USD: 5, // US average
-  GBP: 3.5, // UK average
-  EUR: 4, // EU average
+  USD: 5,
+  GBP: 3.5,
+  EUR: 4,
 };
 
 export const CO2_PER_KWH = 0.92;

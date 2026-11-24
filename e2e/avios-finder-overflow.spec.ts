@@ -8,7 +8,7 @@ const VIEWPORTS = [
   { width: 375, height: 812 },
   { width: 414, height: 896 },
   { width: 768, height: 1024 },
-  { width: 841, height: 900 }, // width of the reported clipping screenshot
+  { width: 841, height: 900 },
   { width: 1024, height: 900 },
   { width: 1280, height: 900 },
   { width: 1440, height: 900 },

@@ -39,9 +39,9 @@ export default [
       'no-loss-of-precision': 'error',
       'no-floating-decimal': 'off',
 
-      'no-unused-vars': 'off', // Use TypeScript version instead
-      'no-undef': 'off', // TypeScript handles this
-      'no-redeclare': 'off', // TypeScript handles this
+      'no-unused-vars': 'off',
+      'no-undef': 'off',
+      'no-redeclare': 'off',
     },
   },
   {

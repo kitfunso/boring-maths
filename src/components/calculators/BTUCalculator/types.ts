@@ -45,15 +45,15 @@ export const BTU_PER_SQFT_HEATING = 25;
 export const STANDARD_CEILING_HEIGHT = 8;
 
 export const SUN_EXPOSURE_FACTOR: Record<SunExposure, number> = {
-  shaded: 0.9, // shaded rooms: reduce 10%
+  shaded: 0.9,
   average: 1.0,
-  sunny: 1.1, // very sunny rooms: add 10%
+  sunny: 1.1,
 };
 
 export const INSULATION_FACTOR: Record<InsulationQuality, number> = {
-  poor: 1.2, // poorly insulated: add 20%
+  poor: 1.2,
   average: 1.0,
-  good: 0.9, // well insulated: reduce 10%
+  good: 0.9,
 };
 
 export const KITCHEN_EXTRA_BTU = 4000;

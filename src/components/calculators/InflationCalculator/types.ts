@@ -121,7 +121,7 @@ export const HISTORICAL_INFLATION: Record<number, number> = {
   2022: 8.0,
   2023: 4.1,
   2024: 2.9,
-  2025: 2.5, // Projected
+  2025: 2.5,
 };
 
 export const MIN_YEAR = 1920;

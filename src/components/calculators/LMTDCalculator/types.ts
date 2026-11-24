@@ -55,10 +55,10 @@ export function getDefaultInputs(): LMTDInputs {
   return {
     unitSystem: 'metric',
     flowArrangement: 'counterflow',
-    hotInlet: 150, // °C
-    hotOutlet: 90, // °C
-    coldInlet: 30, // °C
-    coldOutlet: 70, // °C
+    hotInlet: 150,
+    hotOutlet: 90,
+    coldInlet: 30,
+    coldOutlet: 70,
     shellPasses: 1,
     tubePasses: 2,
   };

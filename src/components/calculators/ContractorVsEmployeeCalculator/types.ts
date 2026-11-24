@@ -104,8 +104,8 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
     GBP: {
       contractorHourlyRate: 55,
       employeeSalary: 70000,
-      employer401kMatch: 5, // UK pension
-      employerHealthInsuranceMonthly: 100, // NHS supplements
+      employer401kMatch: 5,
+      employerHealthInsuranceMonthly: 100,
       contractorHealthInsuranceMonthly: 150,
     },
     EUR: {
@@ -122,7 +122,7 @@ export function getDefaultInputs(currency: Currency): ContractorVsEmployeeInputs
   return {
     contractorHourlyRate: d.contractorHourlyRate,
     contractorBillableHoursPerWeek: 40,
-    contractorWeeksPerYear: 48, // 4 weeks unpaid time off
+    contractorWeeksPerYear: 48,
 
     employeeSalary: d.employeeSalary,
     employeeBonusPercent: 10,

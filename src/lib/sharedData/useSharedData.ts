@@ -168,7 +168,7 @@ export function useSharedData<TInputs extends object>(
   }, [config, inputs, exportMapping, getExportData, context]);
 
   return {
-    isAvailable: true, // Direct storage access always available
+    isAvailable: true,
     availableImports,
     showImportBanner,
     dismissImportBanner,

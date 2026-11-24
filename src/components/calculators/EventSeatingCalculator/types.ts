@@ -59,25 +59,25 @@ export interface EventSeatingResult {
 
 export const SEATS_BY_TABLE: Record<TableShape, Record<number, number>> = {
   round: {
-    4: 4, // 4ft round = 4 seats
-    5: 6, // 5ft round = 6 seats
-    6: 8, // 6ft round = 8 seats
-    7: 10, // 7ft round = 10 seats
-    8: 12, // 8ft round = 12 seats
+    4: 4,
+    5: 6,
+    6: 8,
+    7: 10,
+    8: 12,
   },
   rectangular: {
-    6: 6, // 6ft table = 6 seats
-    8: 8, // 8ft table = 8 seats
-    10: 10, // 10ft table = 10 seats
-    12: 12, // 12ft table = 12 seats
+    6: 6,
+    8: 8,
+    10: 10,
+    12: 12,
   },
   square: {
-    3: 4, // 3ft square = 4 seats
-    4: 8, // 4ft square = 8 seats (2 per side)
+    3: 4,
+    4: 8,
   },
   cocktail: {
-    2: 4, // 2ft cocktail = 4 standing
-    3: 6, // 3ft cocktail = 6 standing
+    2: 4,
+    3: 6,
   },
 };
 

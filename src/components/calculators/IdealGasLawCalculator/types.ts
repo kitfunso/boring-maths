@@ -40,11 +40,11 @@ export function getDefaultInputs(): IdealGasInputs {
   return {
     unitSystem: 'metric',
     solveFor: 'pressure',
-    pressure: 101.325, // 1 atm in kPa
-    volume: 22.4, // Molar volume at STP
+    pressure: 101.325,
+    volume: 22.4,
     moles: 1,
-    temperature: 0, // STP
-    mass: 28.97, // 1 mole of air
-    molarMass: 28.97, // Air
+    temperature: 0,
+    mass: 28.97,
+    molarMass: 28.97,
   };
 }

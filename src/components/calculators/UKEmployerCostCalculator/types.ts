@@ -43,8 +43,8 @@ export function getDefaultInputs(): UKEmployerCostInputs {
 }
 
 export const EMPLOYER_NIC_2025 = {
-  rate: 0.15, // 15% (up from 13.8%)
-  threshold: 5000, // Secondary threshold: £5,000 (down from £9,100)
+  rate: 0.15,
+  threshold: 5000,
 };
 
 export const EMPLOYMENT_ALLOWANCE = 10500;
@@ -52,12 +52,12 @@ export const EMPLOYMENT_ALLOWANCE = 10500;
 export const AUTO_ENROLMENT = {
   lowerLimit: 6240,
   upperLimit: 50270,
-  minimumEmployerRate: 0.03, // 3% minimum
+  minimumEmployerRate: 0.03,
 };
 
 export const APPRENTICESHIP_LEVY = {
-  rate: 0.005, // 0.5% of total pay bill
-  allowance: 15000, // £15,000 annual allowance
+  rate: 0.005,
+  allowance: 15000,
 };
 
 export const COMPARISON_SALARIES = [25000, 35000, 50000, 60000, 80000, 100000];

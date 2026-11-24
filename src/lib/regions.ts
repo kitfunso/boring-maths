@@ -41,7 +41,7 @@ export const CURRENCIES: Record<Currency, CurrencyConfig> = {
     code: 'EUR',
     symbol: '€',
     name: 'Euro',
-    locale: 'de-DE', // Using German locale for EUR formatting
+    locale: 'de-DE',
     region: 'EU',
   },
 };
@@ -160,7 +160,6 @@ export function getInitialCurrency(fallback: Currency = 'USD'): Currency {
       return stored as Currency;
     }
   } catch {
-    // localStorage might be blocked or unavailable
   }
   return fallback;
 }

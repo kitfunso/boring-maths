@@ -12,8 +12,8 @@ describe('LoanCalculator', () => {
         currency: 'USD',
         loanType: 'personal',
         loanAmount: 10000,
-        interestRate: 5, // 5%
-        loanTerm: 12, // 1 year
+        interestRate: 5,
+        loanTerm: 12,
       };
 
       const result = calculateLoan(inputs);
@@ -28,7 +28,7 @@ describe('LoanCalculator', () => {
         loanType: 'auto',
         loanAmount: 20000,
         interestRate: 6,
-        loanTerm: 60, // 5 years
+        loanTerm: 60,
       };
 
       const result = calculateLoan(inputs);
@@ -98,7 +98,7 @@ describe('LoanCalculator', () => {
         loanType: 'personal',
         loanAmount: 10000,
         interestRate: 10,
-        loanTerm: 36, // 3 years
+        loanTerm: 36,
       };
 
       const result = calculateLoan(inputs);

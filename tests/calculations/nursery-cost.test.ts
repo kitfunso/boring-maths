@@ -97,7 +97,7 @@ describe('NurseryCostCalculator', () => {
         region: 'rest-of-uk',
         children: [{ id: '1', age: '3-4-years', hoursPerWeek: 20, hasDisability: false }],
         employmentStatus: 'both-working',
-        householdIncome: 200000, // 100,000 per parent exactly
+        householdIncome: 200000,
         benefitStatus: 'none',
         useTaxFreeChildcare: true,
         weeksPerYear: 38,
@@ -212,7 +212,7 @@ describe('NurseryCostCalculator', () => {
         region: 'rest-of-uk',
         children: [{ id: '1', age: '2-years', hoursPerWeek: 20, hasDisability: false }],
         employmentStatus: 'both-working',
-        householdIncome: 21149.44, // 2 * 10574.72 exactly
+        householdIncome: 21149.44,
         benefitStatus: 'none',
         useTaxFreeChildcare: false,
         weeksPerYear: 38,
@@ -229,7 +229,7 @@ describe('NurseryCostCalculator', () => {
         region: 'rest-of-uk',
         children: [{ id: '1', age: '2-years', hoursPerWeek: 20, hasDisability: false }],
         employmentStatus: 'both-working',
-        householdIncome: 21149.42, // per parent 10574.71, just below 10574.72
+        householdIncome: 21149.42,
         benefitStatus: 'none',
         useTaxFreeChildcare: false,
         weeksPerYear: 38,

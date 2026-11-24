@@ -88,10 +88,10 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
   const monthlyRetainer = hourlyRate * billableHoursPerWeek * 4.33;
 
   const projectRates = {
-    halfDay: Math.round(dayRate * 0.55), // Slight premium for half days
+    halfDay: Math.round(dayRate * 0.55),
     fullDay: Math.round(dayRate),
-    weekProject: Math.round(weekRate * 0.9), // 10% discount for week commitment
-    monthProject: Math.round(monthlyRetainer * 0.85), // 15% discount for month commitment
+    weekProject: Math.round(weekRate * 0.9),
+    monthProject: Math.round(monthlyRetainer * 0.85),
   };
 
   const employeeHourlyEquivalent = hourlyRate / 1.3;

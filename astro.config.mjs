@@ -32,7 +32,7 @@ export default defineConfig({
   },
 
   integrations: [
-    preact({ compat: true }), // Enable React compatibility
+    preact({ compat: true }),
     sitemap({
       filter(page) {
         return !page.includes('/embed/') && !NOINDEX_URLS.has(page);

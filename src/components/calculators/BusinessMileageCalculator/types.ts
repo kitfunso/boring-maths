@@ -43,8 +43,8 @@ export const US_IRS_RATE = 0.76;
 export const US_IRS_RATE_LABEL = '72.5c to 30 June, 76c from 1 July 2026';
 
 export const ESTIMATED_TAX_RATES: Record<MileageRegion, number> = {
-  UK: 0.2, // Basic rate income tax
-  US: 0.22, // Federal 22% bracket (typical self-employed)
+  UK: 0.2,
+  US: 0.22,
 };
 
 export const VEHICLE_TYPE_OPTIONS: { value: VehicleType; label: string }[] = [

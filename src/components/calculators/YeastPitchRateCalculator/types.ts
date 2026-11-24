@@ -52,31 +52,31 @@ export const YEAST_FORMATS = [
   {
     value: 'liquid',
     label: 'Liquid Yeast (White Labs/Wyeast)',
-    cellsPerPackage: 100, // billions - modern White Labs/Wyeast
-    viabilityRate: 0.21, // % lost per day after manufacture
-    maxAge: 180, // days
+    cellsPerPackage: 100,
+    viabilityRate: 0.21,
+    maxAge: 180,
   },
   {
     value: 'dry',
     label: 'Dry Yeast (Fermentis/Lallemand)',
-    cellsPerPackage: 200, // billions per 11g packet
-    viabilityRate: 0.01, // very stable
-    maxAge: 730, // 2 years
+    cellsPerPackage: 200,
+    viabilityRate: 0.01,
+    maxAge: 730,
   },
   {
     value: 'slurry',
     label: 'Yeast Slurry (Harvested)',
-    cellsPerPackage: 1000, // billions per cup (~240mL)
-    viabilityRate: 0.5, // loses viability faster
-    maxAge: 14, // 2 weeks max
+    cellsPerPackage: 1000,
+    viabilityRate: 0.5,
+    maxAge: 14,
   },
 ];
 
 export const STARTER_GROWTH = {
   simple: {
     label: 'Simple (No Agitation)',
-    growthFactor: 1.4, // cells grown per initial cell
-    maxGrowth: 100, // billions max new cells
+    growthFactor: 1.4,
+    maxGrowth: 100,
   },
   'stir-plate': {
     label: 'Stir Plate',

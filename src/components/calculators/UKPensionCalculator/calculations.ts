@@ -71,7 +71,7 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
     taxReliefGained: Math.round(taxReliefGained),
     yearlyProjection: yearlyProjection.filter(
       (_, i) => i === 0 || i === yearlyProjection.length - 1 || i % 5 === 0
-    ), // Every 5 years plus start/end
+    ),
   };
 }
 

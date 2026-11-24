@@ -31,8 +31,8 @@ export const VELOCITY_RECOMMENDATIONS = {
     slurry: { min: 1.5, max: 4.0, typical: 2.5 },
   },
   gas: {
-    lowPressure: { min: 15, max: 30, typical: 20 }, // < 1 bar gauge
-    highPressure: { min: 30, max: 60, typical: 40 }, // > 10 bar gauge
+    lowPressure: { min: 15, max: 30, typical: 20 },
+    highPressure: { min: 30, max: 60, typical: 40 },
   },
   steam: {
     saturated: { min: 20, max: 40, typical: 25 },
@@ -53,9 +53,9 @@ export function getDefaultInputs(): PipeFlowInputs {
     unitSystem: 'metric',
     solveFor: 'diameter',
     fluidCategory: 'liquid',
-    diameter: 50, // 50 mm
-    velocity: 2, // 2 m/s
-    flowRate: 14.14, // m³/h (approx for 50mm @ 2m/s)
+    diameter: 50,
+    velocity: 2,
+    flowRate: 14.14,
     pipeSchedule: '40',
   };
 }

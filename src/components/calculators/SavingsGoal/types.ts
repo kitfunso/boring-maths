@@ -55,8 +55,8 @@ export function getDefaultInputs(currency: Currency = 'USD'): SavingsGoalInputs 
     goalAmount: goalAmounts[currency],
     currentSavings: 0,
     timelineYears: 5,
-    annualReturn: 0.07, // 7% annual return
-    inflationRate: 0.03, // 3% inflation
+    annualReturn: 0.07,
+    inflationRate: 0.03,
     contributionFrequency: 'monthly',
   };
 }

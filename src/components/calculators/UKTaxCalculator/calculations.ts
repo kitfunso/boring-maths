@@ -263,9 +263,6 @@ function calculateMarginalRate(
   }
 
   if (pensionType === 'salary_sacrifice' && pensionRate > 0) {
-    // Salary sacrifice reduces gross, so marginal deductions are slightly less
-    // But for simplicity, the pension % itself is an additional deduction on each pound
-    // Actually pension % is taken off the top regardless, it's a separate deduction
   }
 
   return round(rate, 1);

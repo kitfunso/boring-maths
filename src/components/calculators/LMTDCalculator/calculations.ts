@@ -5,13 +5,13 @@ function calculateDeltaTs(inputs: LMTDInputs): { deltaT1: number; deltaT2: numbe
 
   if (flowArrangement === 'parallelflow') {
     return {
-      deltaT1: hotInlet - coldInlet, // Hot end
-      deltaT2: hotOutlet - coldOutlet, // Cold end
+      deltaT1: hotInlet - coldInlet,
+      deltaT2: hotOutlet - coldOutlet,
     };
   } else {
     return {
-      deltaT1: hotInlet - coldOutlet, // Hot fluid inlet
-      deltaT2: hotOutlet - coldInlet, // Hot fluid outlet
+      deltaT1: hotInlet - coldOutlet,
+      deltaT2: hotOutlet - coldInlet,
     };
   }
 }

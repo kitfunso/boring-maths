@@ -31,11 +31,11 @@ export interface MacroCalculatorResult {
 }
 
 export const activityMultipliers: Record<ActivityLevel, number> = {
-  sedentary: 1.2, // Little or no exercise
-  light: 1.375, // Light exercise 1-3 days/week
-  moderate: 1.55, // Moderate exercise 3-5 days/week
-  active: 1.725, // Heavy exercise 6-7 days/week
-  very_active: 1.9, // Very heavy exercise, physical job
+  sedentary: 1.2,
+  light: 1.375,
+  moderate: 1.55,
+  active: 1.725,
+  very_active: 1.9,
 };
 
 export const activityLabels: Record<ActivityLevel, string> = {
@@ -53,9 +53,9 @@ export const goalLabels: Record<Goal, string> = {
 };
 
 export const goalCalorieAdjustment: Record<Goal, number> = {
-  lose: -500, // 500 calorie deficit
+  lose: -500,
   maintain: 0,
-  gain: 300, // 300 calorie surplus for lean gains
+  gain: 300,
 };
 
 export function getDefaultInputs(): MacroCalculatorInputs {
@@ -68,6 +68,6 @@ export function getDefaultInputs(): MacroCalculatorInputs {
     heightInches: 10,
     activityLevel: 'moderate',
     goal: 'maintain',
-    proteinRatio: 0.8, // 0.8g per lb of bodyweight
+    proteinRatio: 0.8,
   };
 }

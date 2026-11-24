@@ -63,15 +63,15 @@ export interface EmployeeCostResult {
 }
 
 export const PAYROLL_TAX_RATES: Record<Currency, number> = {
-  USD: 7.65, // FICA (Social Security + Medicare)
-  GBP: 13.8, // Employer's NI
-  EUR: 20, // Varies by country, avg estimate
+  USD: 7.65,
+  GBP: 13.8,
+  EUR: 20,
 };
 
 export const HEALTH_INSURANCE_COSTS: Record<Currency, number> = {
-  USD: 7500, // Average employer contribution
-  GBP: 0, // NHS
-  EUR: 3000, // Varies significantly
+  USD: 7500,
+  GBP: 0,
+  EUR: 3000,
 };
 
 export function getDefaultInputs(currency: Currency = 'USD'): EmployeeCostInputs {
@@ -81,7 +81,7 @@ export function getDefaultInputs(currency: Currency = 'USD'): EmployeeCostInputs
     currency,
     annualSalary: Math.round(60000 * salaryMultiplier),
     healthInsurance: HEALTH_INSURANCE_COSTS[currency],
-    retirementMatchPercent: currency === 'GBP' ? 3 : 4, // 401k match or pension
+    retirementMatchPercent: currency === 'GBP' ? 3 : 4,
     ptoDays: currency === 'USD' ? 15 : currency === 'GBP' ? 28 : 25,
     payrollTaxPercent: PAYROLL_TAX_RATES[currency],
     trainingBudget: Math.round(1500 * salaryMultiplier),

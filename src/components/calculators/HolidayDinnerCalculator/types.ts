@@ -77,9 +77,9 @@ export const LEFTOVER_MULTIPLIER: Record<LeftoverPreference, number> = {
 };
 
 export const COOK_TIME_PER_LB: Record<CookingMethod, number> = {
-  oven: 15, // at 325°F
-  deep_fried: 3.5, // 3.5 min per lb
-  smoked: 30, // at 225-250°F
+  oven: 15,
+  deep_fried: 3.5,
+  smoked: 30,
 };
 
 export const THAW_HOURS_PER_LB = 6;

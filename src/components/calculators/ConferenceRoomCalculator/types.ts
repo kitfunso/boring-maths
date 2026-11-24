@@ -67,13 +67,13 @@ export interface ConferenceRoomResult {
 }
 
 export const SQFT_PER_PERSON: Record<SeatingStyle, number> = {
-  theater: 6, // chairs only, tightly packed
-  classroom: 18, // 6ft tables with chairs
-  banquet: 12, // round tables with chairs
-  u_shape: 25, // tables in U formation
-  hollow_square: 25, // tables in square formation
-  boardroom: 25, // single large table
-  cocktail: 8, // standing, mingling
+  theater: 6,
+  classroom: 18,
+  banquet: 12,
+  u_shape: 25,
+  hollow_square: 25,
+  boardroom: 25,
+  cocktail: 8,
 };
 
 export const STYLE_DESCRIPTIONS: Record<SeatingStyle, string> = {

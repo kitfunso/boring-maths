@@ -139,8 +139,8 @@ export function getDefaultInputs(currency: Currency = 'USD'): GoFullTimeInputs {
     monthlyExpenses: defaults[currency]?.monthlyExpenses ?? 4000,
     currentSavings: defaults[currency]?.currentSavings ?? 25000,
     monthlySideIncome: defaults[currency]?.monthlySideIncome ?? 1500,
-    monthlyGrowthRate: 0.1, // 10% monthly growth default
-    desiredSafetyBuffer: 6, // 6 months default
+    monthlyGrowthRate: 0.1,
+    desiredSafetyBuffer: 6,
     riskTolerance: 'moderate',
   };
 }

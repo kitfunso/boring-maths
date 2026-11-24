@@ -17,7 +17,6 @@ const SDLT_STANDARD: Array<{ from: number; to: number; rate: number }> = [
 const SDLT_FIRST_TIME: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 300000, rate: 0 },
   { from: 300001, to: 500000, rate: 0.05 },
-  // Above £500k, first-time buyer relief not available - use standard rates
 ];
 
 const SDLT_FIRST_TIME_THRESHOLD = 500000;

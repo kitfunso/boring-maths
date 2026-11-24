@@ -57,18 +57,18 @@ export interface BabyCostResult {
 
 export const REGIONAL_COSTS = {
   USD: {
-    daycare: 15000, // $15k/year average US daycare
-    nanny: 35000, // $35k/year full-time nanny
-    formula: 1800, // $150/month
-    disposableDiapers: 900, // $75/month
-    clothDiapers: 400, // upfront + washing
-    newGear: 3000, // crib, stroller, car seat, etc.
+    daycare: 15000,
+    nanny: 35000,
+    formula: 1800,
+    disposableDiapers: 900,
+    clothDiapers: 400,
+    newGear: 3000,
     usedGear: 800,
-    delivery: 3000, // average out-of-pocket with insurance
-    pediatricVisits: 500, // copays for well-baby visits
-    clothing: 600, // $50/month
+    delivery: 3000,
+    pediatricVisits: 500,
+    clothing: 600,
     toys: 300,
-    babyFood: 600, // months 6-12
+    babyFood: 600,
   },
   GBP: {
     daycare: 12000,
@@ -78,8 +78,8 @@ export const REGIONAL_COSTS = {
     clothDiapers: 300,
     newGear: 2000,
     usedGear: 500,
-    delivery: 0, // NHS
-    pediatricVisits: 0, // NHS
+    delivery: 0,
+    pediatricVisits: 0,
     clothing: 400,
     toys: 200,
     babyFood: 400,
@@ -107,7 +107,7 @@ export function getDefaultInputs(currency: Currency = 'USD'): BabyCostInputs {
   return {
     currency,
     childcareType: 'daycare',
-    childcareMonths: 6, // assume return to work at 6 months
+    childcareMonths: 6,
     feedingMethod: 'combination',
     diaperPreference: 'disposable',
     hasHealthInsurance: true,
