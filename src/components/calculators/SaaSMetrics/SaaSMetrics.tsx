@@ -1,8 +1,3 @@
-/**
- * SaaS Metrics Calculator - React Component
- *
- * Calculate and analyze key SaaS business metrics.
- */
 import { calculateSaaSMetrics } from './calculations';
 import { getDefaultInputs, type SaaSMetricsInputs } from './types';
 import {
@@ -62,7 +57,6 @@ export default function SaaSMetrics() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-purple-400 uppercase tracking-wider">
                 Revenue Metrics
@@ -181,9 +175,7 @@ export default function SaaSMetrics() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
-              {/* Overall Health Badge */}
               <div className="flex items-center justify-between">
                 <ResultCard
                   label="Monthly Recurring Revenue"
@@ -206,7 +198,6 @@ export default function SaaSMetrics() {
                 <MetricCard label="Quick Ratio" value={result.quickRatio.toString()} />
               </Grid>
 
-              {/* Health Scores */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Health Score Card
@@ -239,7 +230,6 @@ export default function SaaSMetrics() {
                 </div>
               </div>
 
-              {/* Additional Metrics */}
               <div className="bg-purple-900/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-purple-400 uppercase tracking-wider mb-4">
                   Advanced Metrics
@@ -284,7 +274,6 @@ export default function SaaSMetrics() {
                 </Grid>
               </div>
 
-              {/* 12-Month Projection */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   12-Month Projection
@@ -319,7 +308,6 @@ export default function SaaSMetrics() {
                 </div>
               </div>
 
-              {/* Insights */}
               <Alert variant="tip" title="Key Insights">
                 <ul className="space-y-2 mt-2">
                   {result.insights.map((insight, i) => (
@@ -331,7 +319,6 @@ export default function SaaSMetrics() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`SaaS Metrics: ${fmt(result.mrr)} MRR | ${result.ltvCacRatio}x LTV:CAC | ${result.cacPaybackMonths}mo payback | ${result.ruleOf40}% Rule of 40`}

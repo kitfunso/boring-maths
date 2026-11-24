@@ -1,7 +1,3 @@
-/**
- * CuttingTime Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCuttingTime } from '../../src/components/calculators/CuttingTimeCalculator/calculations';
 import type { CuttingTimeInputs } from '../../src/components/calculators/CuttingTimeCalculator/types';
@@ -32,7 +28,6 @@ describe('CuttingTimeCalculator', () => {
 
       const result = calculateCuttingTime(inputs);
 
-      // 60 inches at 30 IPM = 2 min per pass * 2 passes = 4 min cutting
       expect(result.cuttingTime).toBeGreaterThan(0);
       expect(result.totalCycleTime).toBeGreaterThan(result.cuttingTime);
       expect(result.partsPerHour).toBeGreaterThan(0);

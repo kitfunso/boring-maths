@@ -1,7 +1,3 @@
-/**
- * Inflation Calculator - Calculation Logic
- */
-
 import {
   HISTORICAL_INFLATION,
   DEFAULT_INFLATION_RATE,
@@ -24,7 +20,6 @@ export function calculateInflation(inputs: InflationInputs): InflationResult {
   let adjustedAmount = amount;
 
   if (useCustomRate && customRate !== undefined) {
-    // Use custom fixed rate
     const rate = customRate / 100;
     if (isForward) {
       adjustedAmount = amount * Math.pow(1 + rate, yearsElapsed);
@@ -32,13 +27,11 @@ export function calculateInflation(inputs: InflationInputs): InflationResult {
       adjustedAmount = amount / Math.pow(1 + rate, yearsElapsed);
     }
   } else {
-    // Use historical rates
     for (let year = fromYear; year < toYear; year++) {
       const rate = getInflationRate(year) / 100;
       adjustedAmount *= 1 + rate;
     }
 
-    // If going backwards (what was $X worth in the past?)
     if (!isForward) {
       adjustedAmount = (amount * amount) / adjustedAmount;
     }

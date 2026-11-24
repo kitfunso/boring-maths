@@ -1,10 +1,3 @@
-/**
- * Avios Destination Finder - Calculation Logic
- *
- * Pure functions. No live availability - guide prices from BA's published
- * Reward Flight Saver table (see data/ file headers for sources).
- */
-
 import type {
   AviosFinderInputs,
   AviosFinderResult,
@@ -23,29 +16,18 @@ import { DESTINATIONS } from './data/destinations';
 import { DISTANCE_MILES_FROM_LONDON } from './data/distances';
 
 const MS_PER_DAY = 86_400_000;
-/** Safety cap so a pathological range cannot spin the day loop. */
 const MAX_RANGE_DAYS = 730;
 
 function toUtc(iso: string): number {
   return Date.parse(`${iso}T00:00:00Z`);
 }
 
-/** Inverse of toUtc for whole-day UTC timestamps produced by the day loop below. */
 function toIsoDate(t: number): string {
   return new Date(t).toISOString().slice(0, 10);
 }
 
 const BOTH_SEASONS: SeasonWindow = { hasOffPeak: true, hasPeak: true, beyondCalendar: false };
 
-/**
- * Resolve a date range to the seasons it can contain.
- * Unset or invalid ranges resolve to "both" so the finder still works
- * without dates. Days past the published calendar count as both seasons
- * and set beyondCalendar so the UI can show a "provisional" note. Ranges
- * longer than MAX_RANGE_DAYS return the widest honest answer (both seasons)
- * rather than silently truncating the day scan and reporting it as complete.
- * Invariant: never returns hasOffPeak and hasPeak both false.
- */
 export function resolveSeasonsForRange(dateFrom: string, dateTo: string): SeasonWindow {
   if (!dateFrom || !dateTo) return BOTH_SEASONS;
   const from = toUtc(dateFrom);
@@ -71,11 +53,6 @@ export function resolveSeasonsForRange(dateFrom: string, dateTo: string): Season
   return { hasOffPeak, hasPeak, beyondCalendar: false };
 }
 
-/**
- * Total Avios + cash for the whole party and trip.
- * Companion voucher (2 travellers): second seat costs no Avios, but the
- * cash element is always payable per person (VOUCHER_RULES).
- */
 export function calculatePartyTotals(inputs: PartyTotalsInputs): PartyPricing {
   const { oneWayAvios, oneWayCash, travellers, companionVoucher, tripType } = inputs;
   const legs = tripType === 'return' ? 2 : 1;
@@ -86,7 +63,6 @@ export function calculatePartyTotals(inputs: PartyTotalsInputs): PartyPricing {
   };
 }
 
-/** The 2-for-1 needs two travellers; the free card's voucher is economy only. */
 export function voucherApplies(voucher: VoucherType, cabin: Cabin, travellers: 1 | 2): boolean {
   if (travellers !== 2 || voucher === 'none') return false;
   return voucher === 'premiumPlus' || cabin === 'economy';
@@ -102,13 +78,6 @@ function round1dp(n: number): number {
   return Math.round(n * 10) / 10;
 }
 
-/**
- * Total order for the peakSaving sort: nulls (no saving computable for the
- * current date range) always sort last regardless of direction; ties break
- * on rankAvios ascending. Written as explicit branches rather than
- * `(a.peakSavingPct ?? x) - (b.peakSavingPct ?? x)` because null-coercion
- * arithmetic cannot express "nulls last" for both DESC and tie cases at once.
- */
 function comparePeakSaving(a: DestinationResult, b: DestinationResult): number {
   if (a.peakSavingPct === null && b.peakSavingPct === null) return a.rankAvios - b.rankAvios;
   if (a.peakSavingPct === null) return 1;
@@ -116,7 +85,6 @@ function comparePeakSaving(a: DestinationResult, b: DestinationResult): number {
   return b.peakSavingPct - a.peakSavingPct || a.rankAvios - b.rankAvios;
 }
 
-/** Re-prices a single destination at the given season resolution with the companion voucher off, to measure its saving. */
 function noVoucherRankAvios(
   d: Destination,
   inputs: AviosFinderInputs,

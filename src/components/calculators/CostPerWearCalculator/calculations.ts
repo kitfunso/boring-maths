@@ -1,14 +1,7 @@
-/**
- * Cost Per Wear Calculator - Calculation Logic
- */
-
 import type { CostPerWearInputs, CostPerWearResult } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate cost per wear and compare against an alternative item.
- */
 export function calculateCostPerWear(inputs: CostPerWearInputs): CostPerWearResult {
   const {
     purchasePrice,
@@ -20,7 +13,6 @@ export function calculateCostPerWear(inputs: CostPerWearInputs): CostPerWearResu
     alternativeLifespanMonths,
   } = inputs;
 
-  // Main item
   const totalWears = wearsPerMonth * expectedLifespanMonths;
   const totalCareCost = careCostPerMonth * expectedLifespanMonths;
   const totalLifetimeCost = purchasePrice + totalCareCost;
@@ -28,12 +20,9 @@ export function calculateCostPerWear(inputs: CostPerWearInputs): CostPerWearResu
   const annualCost =
     expectedLifespanMonths > 0 ? (totalLifetimeCost / expectedLifespanMonths) * 12 : 0;
 
-  // Alternative item (no separate care cost; baked into replacement frequency)
   const altTotalWears = alternativeWearsPerMonth * alternativeLifespanMonths;
   const alternativeCostPerWear = altTotalWears > 0 ? alternativePrice / altTotalWears : 0;
 
-  // To compare fairly over the same lifespan as the main item,
-  // figure out how many replacement cycles the alternative needs.
   const replacementCycles =
     alternativeLifespanMonths > 0
       ? Math.ceil(expectedLifespanMonths / alternativeLifespanMonths)

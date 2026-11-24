@@ -1,5 +1,3 @@
-/** Singapore AWS (13th month) proration. AWS is contractual, not statutory, so no method is "correct". */
-
 export const DAYS_PER_YEAR = 365;
 export const MONTHS_PER_YEAR = 12;
 
@@ -26,13 +24,11 @@ export function getDefaultInputs(): SingaporeAWSBonusInputs {
   };
 }
 
-/** Method A: daily proration against a 365-day year. */
 function methodADaily(fullAws: number, daysWorked: number): number {
   const days = Math.min(DAYS_PER_YEAR, Math.max(0, daysWorked || 0));
   return fullAws * (days / DAYS_PER_YEAR);
 }
 
-/** Method B: completed-months proration against a 12-month year. */
 function methodBMonthly(fullAws: number, monthsWorked: number): number {
   const months = Math.min(MONTHS_PER_YEAR, Math.max(0, monthsWorked || 0));
   return fullAws * (months / MONTHS_PER_YEAR);

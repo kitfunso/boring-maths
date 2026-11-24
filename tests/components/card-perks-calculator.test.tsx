@@ -1,5 +1,3 @@
-/** CardPerksCalculator island - render smoke test plus the no-advice copy gate (RAO 2001 art. 36A). */
-
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { render, fireEvent, within } from '@testing-library/preact';

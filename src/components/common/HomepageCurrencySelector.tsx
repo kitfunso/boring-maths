@@ -3,14 +3,9 @@ import { CURRENCY_OPTIONS, type Currency } from '../../lib/regions';
 
 const STORAGE_KEY = 'boring-math-currency';
 
-/**
- * Standalone currency selector for the homepage.
- * Syncs with localStorage and broadcasts changes to all calculators.
- */
 export default function HomepageCurrencySelector() {
   const [currency, setCurrency] = useState<Currency>('USD');
 
-  // Load saved currency on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && ['USD', 'GBP', 'EUR'].includes(saved)) {
@@ -22,7 +17,6 @@ export default function HomepageCurrencySelector() {
     setCurrency(newCurrency);
     localStorage.setItem(STORAGE_KEY, newCurrency);
 
-    // Broadcast to all calculators
     window.dispatchEvent(
       new CustomEvent('currencyChange', {
         detail: { currency: newCurrency },

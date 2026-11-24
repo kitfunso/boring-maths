@@ -1,7 +1,3 @@
-/**
- * Startup Cost Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type { StartupCostInputs, StartupCostResult, CostBreakdownItem } from './types';
 import { BUSINESS_TYPES, AVG_EMPLOYEE_SALARY } from './types';
@@ -24,7 +20,6 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
   const oneTimeBreakdown: CostBreakdownItem[] = [];
   const monthlyBreakdown: CostBreakdownItem[] = [];
 
-  // Calculate one-time costs
   const equipmentCost = customEquipment > 0 ? customEquipment : config.baseCosts.equipment;
   if (equipmentCost > 0) {
     oneTimeBreakdown.push({
@@ -90,7 +85,6 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
     });
   }
 
-  // Calculate monthly costs
   const rentCost =
     needsOffice && config.monthlyCosts.rent === 0
       ? currency === 'USD'
@@ -156,7 +150,6 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
     });
   }
 
-  // Founder salary
   if (founderSalary > 0) {
     monthlyBreakdown.push({
       category: 'Founder Salary',
@@ -166,10 +159,9 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
     });
   }
 
-  // Employee costs
   if (employees > 0) {
     const avgMonthlySalary = Math.round(AVG_EMPLOYEE_SALARY[currency] / 12);
-    const employeeBurden = 1.3; // Benefits, taxes, etc.
+    const employeeBurden = 1.3;
     const totalEmployeeCost = Math.round(avgMonthlySalary * employees * employeeBurden);
 
     monthlyBreakdown.push({
@@ -180,27 +172,22 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
     });
   }
 
-  // Sum up costs
   const oneTimeCosts = oneTimeBreakdown.reduce((sum, item) => sum + item.amount, 0);
   const monthlyBurnRate = monthlyBreakdown.reduce((sum, item) => sum + item.amount, 0);
 
-  // Calculate total capital needed
   const runwayCosts = monthlyBurnRate * runwayMonths;
   let totalCapitalNeeded = oneTimeCosts + runwayCosts;
 
-  // Add contingency
   const contingencyBuffer = includeContingency
     ? Math.round(totalCapitalNeeded * (contingencyPercent / 100))
     : 0;
 
   totalCapitalNeeded += contingencyBuffer;
 
-  // Calculate runway breakdown
   const breakdownByMonth: { month: number; remaining: number; spent: number }[] = [];
   let remaining = totalCapitalNeeded;
   let spent = oneTimeCosts;
 
-  // Month 0 is one-time costs
   breakdownByMonth.push({
     month: 0,
     remaining: totalCapitalNeeded - oneTimeCosts,
@@ -218,7 +205,6 @@ export function calculateStartupCost(inputs: StartupCostInputs): StartupCostResu
     });
   }
 
-  // Generate tips
   const tips: string[] = [];
 
   if (businessType === 'restaurant') {

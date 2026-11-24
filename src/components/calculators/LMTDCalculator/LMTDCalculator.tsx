@@ -1,9 +1,3 @@
-/**
- * LMTD Calculator - React Component
- *
- * Calculate Log Mean Temperature Difference for heat exchanger design.
- * Supports counter-flow, parallel-flow, cross-flow, and shell & tube configurations.
- */
 import { calculateLMTD, convertTemperature } from './calculations';
 import {
   getDefaultInputs,
@@ -77,7 +71,6 @@ export default function LMTDCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Temperature Unit</Label>
               <ButtonGroup
@@ -88,7 +81,6 @@ export default function LMTDCalculator() {
               />
             </div>
 
-            {/* Flow Arrangement */}
             <div>
               <Label>Flow Arrangement</Label>
               <ButtonGroup
@@ -100,7 +92,6 @@ export default function LMTDCalculator() {
               <p className="text-sm text-[var(--color-muted)] mt-2">{flowInfo.description}</p>
             </div>
 
-            {/* Hot Fluid Temperatures */}
             <div>
               <Label className="text-red-400">Hot Fluid</Label>
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
@@ -131,7 +122,6 @@ export default function LMTDCalculator() {
               </Grid>
             </div>
 
-            {/* Cold Fluid Temperatures */}
             <div>
               <Label className="text-blue-400">Cold Fluid</Label>
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
@@ -162,7 +152,6 @@ export default function LMTDCalculator() {
               </Grid>
             </div>
 
-            {/* Shell & Tube specific inputs */}
             {inputs.flowArrangement === 'shellAndTube' && (
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                 <div>
@@ -194,9 +183,7 @@ export default function LMTDCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result - LMTD */}
             <div
               className={`rounded-2xl p-8 text-center border-2 ${
                 result.isValid
@@ -228,7 +215,6 @@ export default function LMTDCalculator() {
               )}
             </div>
 
-            {/* Temperature Differences */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Temperature Differences
@@ -268,7 +254,6 @@ export default function LMTDCalculator() {
               </Grid>
             </div>
 
-            {/* Heat Exchanger Performance */}
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -296,7 +281,6 @@ export default function LMTDCalculator() {
               </div>
             </Grid>
 
-            {/* Flow Diagram */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Temperature Profile
@@ -345,7 +329,6 @@ export default function LMTDCalculator() {
               </div>
             </div>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 LMTD Formula
@@ -367,7 +350,6 @@ export default function LMTDCalculator() {
               1000-6000 W/(m²·K), Gas-gas: 10-30 W/(m²·K).
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`LMTD: ${result.correctedLMTD.toFixed(1)}${tempUnit} (${flowInfo.name}) - Hot: ${inputs.hotInlet}→${inputs.hotOutlet}${tempUnit}, Cold: ${inputs.coldInlet}→${inputs.coldOutlet}${tempUnit}`}

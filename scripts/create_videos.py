@@ -1,10 +1,3 @@
-"""
-Video Creator for Boring Math Calculators
-Creates short-form vertical videos (9:16) with AI narration and real calculator screenshots.
-
-Uses: edge-tts, playwright, ffmpeg, Pillow
-"""
-
 import asyncio
 import json
 import os
@@ -14,18 +7,12 @@ import textwrap
 from dataclasses import dataclass
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Config
-# ---------------------------------------------------------------------------
-
 VIDEOS_DIR = Path(__file__).parent.parent / "videos"
 SITE_URL = "https://boring-math.com"
-WIDTH = 1080  # 9:16 vertical
+WIDTH = 1080
 HEIGHT = 1920
 FONT = "Space Grotesk"
-FONT_FILE = ""  # ffmpeg will use system font
-
-# Try to find Space Grotesk font file
+FONT_FILE = ""
 for candidate in [
     Path(__file__).parent.parent / "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-500-normal.woff2",
     Path("C:/Windows/Fonts/SpaceGrotesk-Medium.ttf"),
@@ -37,12 +24,11 @@ for candidate in [
 
 @dataclass
 class VideoSegment:
-    """One segment of a video: text to narrate + what to show."""
     narration: str
-    screenshot_url: str | None = None  # URL to screenshot, or None for text-only slide
-    screenshot_actions: list[dict] | None = None  # Actions to perform before screenshot
-    overlay_text: str | None = None  # Large text overlay on dark bg (no screenshot)
-    pause_after: float = 0.3  # seconds of pause after this segment
+    screenshot_url: str | None = None
+    screenshot_actions: list[dict] | None = None
+    overlay_text: str | None = None
+    pause_after: float = 0.3
 
 
 @dataclass
@@ -51,12 +37,7 @@ class VideoConfig:
     slug: str
     voice: str
     segments: list[VideoSegment]
-    outro_url: str  # calculator URL shown at end
-
-
-# ---------------------------------------------------------------------------
-# Video definitions
-# ---------------------------------------------------------------------------
+    outro_url: str
 
 UK_TAX_TRAP = VideoConfig(
     title="UK £100k Tax Trap Explained",
@@ -168,12 +149,7 @@ GRADUATION = VideoConfig(
 VIDEOS = [UK_TAX_TRAP, MORTGAGE, GRADUATION]
 
 
-# ---------------------------------------------------------------------------
-# TTS generation
-# ---------------------------------------------------------------------------
-
 async def generate_tts(text: str, voice: str, output_path: Path) -> None:
-    """Generate TTS audio file using edge-tts."""
     import edge_tts
 
     communicate = edge_tts.Communicate(text, voice, rate="-5%", pitch="+0Hz")
@@ -182,7 +158,6 @@ async def generate_tts(text: str, voice: str, output_path: Path) -> None:
 
 
 async def generate_all_audio(video: VideoConfig) -> list[Path]:
-    """Generate audio for all segments, return list of audio file paths."""
     audio_dir = VIDEOS_DIR / video.slug / "audio"
     audio_dir.mkdir(parents=True, exist_ok=True)
 
@@ -198,12 +173,7 @@ async def generate_all_audio(video: VideoConfig) -> list[Path]:
     return paths
 
 
-# ---------------------------------------------------------------------------
-# Screenshot capture
-# ---------------------------------------------------------------------------
-
 async def capture_screenshots(video: VideoConfig) -> list[Path | None]:
-    """Capture calculator screenshots using Playwright async API."""
     from playwright.async_api import async_playwright
 
     shot_dir = VIDEOS_DIR / video.slug / "shots"
@@ -238,7 +208,6 @@ async def capture_screenshots(video: VideoConfig) -> list[Path | None]:
             await page.goto(url, wait_until="networkidle", timeout=30000)
             await page.wait_for_timeout(2000)
 
-            # Dismiss cookie consent if present
             for selector in [
                 "button:has-text('Consent')",
                 "button:has-text('Accept')",
@@ -268,18 +237,12 @@ async def capture_screenshots(video: VideoConfig) -> list[Path | None]:
     return paths
 
 
-# ---------------------------------------------------------------------------
-# Image generation (text slides + compositing)
-# ---------------------------------------------------------------------------
-
 def create_text_slide(text: str, output_path: Path, font_size: int = 72) -> None:
-    """Create a dark background slide with large text."""
     from PIL import Image, ImageDraw, ImageFont
 
     img = Image.new("RGB", (WIDTH, HEIGHT), color=(7, 7, 10))
     draw = ImageDraw.Draw(img)
 
-    # Try to load a good font
     try:
         font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", font_size)
         small_font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 36)
@@ -287,7 +250,6 @@ def create_text_slide(text: str, output_path: Path, font_size: int = 72) -> None
         font = ImageFont.load_default()
         small_font = font
 
-    # Draw the text centered
     lines = text.split("\n")
     total_height = len(lines) * (font_size + 20)
     y_start = (HEIGHT - total_height) // 2
@@ -298,15 +260,13 @@ def create_text_slide(text: str, output_path: Path, font_size: int = 72) -> None
         x = (WIDTH - text_width) // 2
         y = y_start + i * (font_size + 20)
 
-        # Accent color for numbers/symbols, cream for text
         if any(c.isdigit() or c in "£$%€→≠/" for c in line):
-            color = (196, 255, 0)  # accent green
+            color = (196, 255, 0)
         else:
-            color = (243, 240, 235)  # cream
+            color = (243, 240, 235)
 
         draw.text((x, y), line, fill=color, font=font)
 
-    # Watermark
     wm = "boring-math.com"
     bbox = draw.textbbox((0, 0), wm, font=small_font)
     wm_x = (WIDTH - (bbox[2] - bbox[0])) // 2
@@ -317,19 +277,16 @@ def create_text_slide(text: str, output_path: Path, font_size: int = 72) -> None
 
 
 def create_screenshot_slide(screenshot_path: Path, output_path: Path) -> None:
-    """Composite a calculator screenshot onto a dark 9:16 background."""
     from PIL import Image
 
     bg = Image.new("RGB", (WIDTH, HEIGHT), color=(7, 7, 10))
     screenshot = Image.open(screenshot_path)
 
-    # Scale screenshot to fit width with padding
-    target_w = WIDTH - 80  # 40px padding each side
+    target_w = WIDTH - 80
     scale = target_w / screenshot.width
     new_h = int(screenshot.height * scale)
     screenshot = screenshot.resize((target_w, new_h), Image.LANCZOS)
 
-    # Center vertically
     y_offset = (HEIGHT - new_h) // 2
     bg.paste(screenshot, (40, y_offset))
 
@@ -337,12 +294,7 @@ def create_screenshot_slide(screenshot_path: Path, output_path: Path) -> None:
     print(f"  Composite: {output_path.name}")
 
 
-# ---------------------------------------------------------------------------
-# Audio duration detection
-# ---------------------------------------------------------------------------
-
 def get_audio_duration(path: Path) -> float:
-    """Get duration of audio file in seconds using ffprobe."""
     result = subprocess.run(
         ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
          "-of", "json", str(path)],
@@ -352,18 +304,12 @@ def get_audio_duration(path: Path) -> float:
     return float(data["format"]["duration"])
 
 
-# ---------------------------------------------------------------------------
-# Final video assembly
-# ---------------------------------------------------------------------------
-
 def assemble_video(video: VideoConfig, audio_paths: list[Path],
                    screenshot_paths: list[Path | None]) -> Path:
-    """Assemble final video from slides + audio using ffmpeg."""
     work_dir = VIDEOS_DIR / video.slug
     frames_dir = work_dir / "frames"
     frames_dir.mkdir(parents=True, exist_ok=True)
 
-    # 1. Create visual frames for each segment
     frame_paths: list[Path] = []
     for i, seg in enumerate(video.segments):
         frame_path = frames_dir / f"frame_{i:02d}.png"
@@ -375,12 +321,9 @@ def assemble_video(video: VideoConfig, audio_paths: list[Path],
             create_text_slide(seg.narration, frame_path, font_size=48)
         frame_paths.append(frame_path)
 
-    # 2. Get audio durations
     durations = [get_audio_duration(p) + seg.pause_after
                  for p, seg in zip(audio_paths, video.segments)]
 
-    # 3. Build ffmpeg concat file
-    # Create individual segment videos first, then concat
     segment_videos: list[Path] = []
     for i, (frame, audio, dur) in enumerate(zip(frame_paths, audio_paths, durations)):
         seg_video = work_dir / f"seg_{i:02d}.mp4"
@@ -399,7 +342,6 @@ def assemble_video(video: VideoConfig, audio_paths: list[Path],
         segment_videos.append(seg_video)
         print(f"  Segment video: seg_{i:02d}.mp4")
 
-    # 4. Concat all segments
     concat_file = work_dir / "concat.txt"
     with open(concat_file, "w") as f:
         for sv in segment_videos:
@@ -416,7 +358,6 @@ def assemble_video(video: VideoConfig, audio_paths: list[Path],
         str(output)
     ], capture_output=True, check=True, cwd=str(work_dir))
 
-    # 5. Clean up segment videos
     for sv in segment_videos:
         sv.unlink(missing_ok=True)
     concat_file.unlink(missing_ok=True)
@@ -425,12 +366,7 @@ def assemble_video(video: VideoConfig, audio_paths: list[Path],
     return output
 
 
-# ---------------------------------------------------------------------------
-# Video metadata
-# ---------------------------------------------------------------------------
-
 def write_metadata(video: VideoConfig, output_dir: Path) -> None:
-    """Write title, description, tags for upload."""
     meta = {
         "title": video.title,
         "description": (
@@ -448,7 +384,6 @@ def write_metadata(video: VideoConfig, output_dir: Path) -> None:
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2, ensure_ascii=False)
 
-    # Also write a human-readable version
     txt_path = output_dir / "upload-info.txt"
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"TITLE: {meta['title']}\n\n")
@@ -459,17 +394,11 @@ def write_metadata(video: VideoConfig, output_dir: Path) -> None:
     print(f"  Metadata: {meta_path.name}")
 
 
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 async def create_video(video: VideoConfig) -> Path:
-    """Create a complete video for one calculator."""
     print(f"\n{'='*60}")
     print(f"Creating: {video.title}")
     print(f"{'='*60}")
 
-    # Check for Pillow
     try:
         from PIL import Image
     except ImportError:
@@ -477,7 +406,6 @@ async def create_video(video: VideoConfig) -> Path:
         subprocess.run([sys.executable, "-m", "pip", "install", "Pillow"],
                       capture_output=True, check=True)
 
-    # Check for playwright
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -503,8 +431,6 @@ async def create_video(video: VideoConfig) -> Path:
 
 
 async def main():
-    """Create all videos."""
-    # Check dependencies
     for cmd in ["ffmpeg", "ffprobe"]:
         if not subprocess.run(["which", cmd], capture_output=True).returncode == 0:
             print(f"ERROR: {cmd} not found")

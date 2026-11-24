@@ -1,7 +1,3 @@
-/**
- * Recipe Scaler Calculator - Type Definitions
- */
-
 export interface Ingredient {
   readonly name: string;
   readonly amount: number;

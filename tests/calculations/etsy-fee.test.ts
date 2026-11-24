@@ -1,7 +1,3 @@
-/**
- * EtsyFeeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMarketplaceFees } from '../../src/components/calculators/EtsyFeeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EtsyFeeCalculator/types';

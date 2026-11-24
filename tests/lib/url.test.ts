@@ -1,7 +1,3 @@
-/**
- * withTrailingSlash - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { withTrailingSlash } from '../../src/lib/url';
 

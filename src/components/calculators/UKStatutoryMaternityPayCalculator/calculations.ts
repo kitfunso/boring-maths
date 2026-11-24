@@ -1,19 +1,3 @@
-/**
- * UK Statutory Maternity Pay (SMP) Calculations
- *
- * Current SMP rules (GOV.UK, checked 2026-08-08):
- *   - SMP is paid for up to 39 weeks in total.
- *   - The first 6 weeks are paid at 90% of average weekly earnings (AWE)
- *     before tax, with no cap.
- *   - The remaining 33 weeks are paid at the LOWER of GBP 194.32 per week
- *     and 90% of AWE.
- *   - Eligibility requires average earnings of at least GBP 129/week, and
- *     continuous employment of at least 26 weeks continuing into the
- *     "qualifying week" (the 15th week before the expected week of
- *     childbirth).
- */
-
-// Current statutory figures (GOV.UK, checked 2026-08-08).
 export const HIGHER_RATE_WEEKS = 6;
 export const STANDARD_RATE_WEEKS = 33;
 export const TOTAL_WEEKS = HIGHER_RATE_WEEKS + STANDARD_RATE_WEEKS;
@@ -22,34 +6,22 @@ export const SMP_STANDARD_WEEKLY_RATE = 194.32;
 export const MIN_AVERAGE_WEEKLY_EARNINGS = 129;
 export const MIN_CONTINUOUS_EMPLOYMENT_WEEKS = 26;
 
-/** AWE below this crossover gets 90%-of-earnings for weeks 7-39 instead of the capped rate. */
 export const STANDARD_RATE_THRESHOLD = SMP_STANDARD_WEEKLY_RATE / HIGHER_RATE_FRACTION;
 
 export interface UKStatutoryMaternityPayInputs {
-  /** Average gross weekly earnings before tax, in GBP. */
   averageWeeklyEarnings: number;
-  /** Weeks of SMP leave taken (defaults to the full 39-week entitlement). */
   weeksOfLeaveTaken: number;
 }
 
 export interface UKStatutoryMaternityPayResult {
-  /** Weekly SMP for the first 6 weeks: 90% of AWE, uncapped. */
   higherRateWeeklyAmount: number;
-  /** Weekly SMP for weeks 7-39: the lower of GBP 194.32 and 90% of AWE. */
   standardRateWeeklyAmount: number;
-  /** Weeks paid at the higher (90%) rate, limited by leave taken. */
   higherRateWeeksPaid: number;
-  /** Weeks paid at the standard rate, limited by leave taken. */
   standardRateWeeksPaid: number;
-  /** Total weeks paid (higher-rate weeks plus standard-rate weeks). */
   totalWeeksPaid: number;
-  /** Total SMP due over the weeks of leave taken. */
   totalSMP: number;
-  /** True when the GBP 194.32 cap (not 90% of earnings) sets the standard rate. */
   isCapApplied: boolean;
-  /** True when weeksOfLeaveTaken exceeds the 39-week maximum. */
   cappedAtMaxWeeks: boolean;
-  /** True when average weekly earnings meet the GBP 129 eligibility threshold. */
   meetsEarningsThreshold: boolean;
 }
 
@@ -67,9 +39,6 @@ export function calculateStatutoryMaternityPay(
     ? Math.max(0, Math.floor(inputs.weeksOfLeaveTaken))
     : 0;
 
-  // Below the earnings threshold there is no SMP entitlement at all (GOV.UK eligibility:
-  // average weekly earnings must be at least the lower earnings limit), so every payment
-  // output is zero rather than a hypothetical amount.
   const meetsEarningsThreshold = awe >= MIN_AVERAGE_WEEKLY_EARNINGS;
 
   const earningsBasedRate = meetsEarningsThreshold ? HIGHER_RATE_FRACTION * awe : 0;

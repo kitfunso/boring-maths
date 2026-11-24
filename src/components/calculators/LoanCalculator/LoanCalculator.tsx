@@ -1,7 +1,3 @@
-/**
- * Loan Payment Calculator - React Component
- */
-
 import { useState } from 'preact/hooks';
 import { calculateLoan, formatCurrency, formatTermDisplay } from './calculations';
 import { getDefaultInputs, LOAN_TYPES, type LoanInputs, type LoanType } from './types';
@@ -53,7 +49,6 @@ export default function LoanCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Loan Type */}
             <div>
               <Label>Loan Type</Label>
               <ButtonGroup
@@ -64,7 +59,6 @@ export default function LoanCalculator() {
               />
             </div>
 
-            {/* Loan Amount */}
             <div>
               <Label htmlFor="loanAmount" required>
                 Loan Amount
@@ -82,7 +76,6 @@ export default function LoanCalculator() {
               />
             </div>
 
-            {/* Interest Rate */}
             <div>
               <Label htmlFor="interestRate" required>
                 Annual Interest Rate (APR)
@@ -103,7 +96,6 @@ export default function LoanCalculator() {
               </p>
             </div>
 
-            {/* Loan Term */}
             <div>
               <Label>Loan Term: {formatTermDisplay(inputs.loanTerm)}</Label>
               <Slider
@@ -123,11 +115,9 @@ export default function LoanCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {result.monthlyPayment > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Monthly Payment"
                   value={formatCurrency(result.monthlyPayment, inputs.currency)}
@@ -142,7 +132,6 @@ export default function LoanCalculator() {
                   }
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Loan Amount"
@@ -167,7 +156,6 @@ export default function LoanCalculator() {
                   />
                 </Grid>
 
-                {/* Payment Breakdown Visual */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Payment Breakdown
@@ -198,7 +186,6 @@ export default function LoanCalculator() {
                   </div>
                 </div>
 
-                {/* Amortization Toggle */}
                 <button
                   onClick={() => setShowAmortization(!showAmortization)}
                   className="w-full text-center py-3 text-[var(--color-accent)] hover:underline"
@@ -206,7 +193,6 @@ export default function LoanCalculator() {
                   {showAmortization ? 'Hide' : 'Show'} Amortization Schedule
                 </button>
 
-                {/* Amortization Table */}
                 {showAmortization && (
                   <div className="bg-[var(--color-night)] rounded-xl border border-white/10 overflow-hidden">
                     <div className="max-h-96 overflow-y-auto overflow-x-auto">
@@ -259,7 +245,6 @@ export default function LoanCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {result.monthlyPayment > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

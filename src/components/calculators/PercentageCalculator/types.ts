@@ -1,61 +1,37 @@
-/**
- * Percentage Calculator - Type Definitions
- *
- * Handles multiple percentage calculation modes.
- */
-
-/**
- * Calculation modes
- */
 export type CalculationMode =
-  | 'percentOf' // What is X% of Y?
-  | 'whatPercent' // X is what % of Y?
-  | 'percentChange' // % change from X to Y
-  | 'increaseDecrease'; // X +/- Y%
-
-/**
- * Input values for the Percentage Calculator
- */
+  | 'percentOf'
+  | 'whatPercent'
+  | 'percentChange'
+  | 'increaseDecrease';
 export interface PercentageCalculatorInputs {
   mode: CalculationMode;
 
-  // For percentOf: "What is [percentage]% of [value]?"
   percentOf_percentage: number;
   percentOf_value: number;
 
-  // For whatPercent: "[partValue] is what % of [wholeValue]?"
   whatPercent_partValue: number;
   whatPercent_wholeValue: number;
 
-  // For percentChange: "% change from [fromValue] to [toValue]"
   percentChange_fromValue: number;
   percentChange_toValue: number;
 
-  // For increaseDecrease: "[value] +/- [percentage]%"
   increaseDecrease_value: number;
   increaseDecrease_percentage: number;
   increaseDecrease_isIncrease: boolean;
 }
 
-/**
- * Calculated results
- */
 export interface PercentageCalculatorResult {
   mode: CalculationMode;
 
-  // Main result (depends on mode)
   primaryResult: number;
   primaryLabel: string;
 
-  // Additional context
   secondaryResult?: number;
   secondaryLabel?: string;
 
-  // Formatted strings
   formattedPrimary: string;
   formattedSecondary?: string;
 
-  // For percentOf mode - common percentages
   commonPercentages?: {
     percentage: number;
     result: number;
@@ -63,9 +39,6 @@ export interface PercentageCalculatorResult {
   }[];
 }
 
-/**
- * Mode configuration for UI
- */
 export interface ModeConfig {
   value: CalculationMode;
   label: string;
@@ -100,9 +73,6 @@ export const MODE_OPTIONS: ModeConfig[] = [
   },
 ];
 
-/**
- * Get default input values
- */
 export function getDefaultInputs(): PercentageCalculatorInputs {
   return {
     mode: 'percentOf',

@@ -1,21 +1,9 @@
-/**
- * LBTTCalculator (Scotland Land and Buildings Transaction Tax) - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateLBTT } from '../../src/components/calculators/LBTTCalculator/calculations';
 
 describe('LBTTCalculator', () => {
   describe('calculateLBTT', () => {
     it('should calculate standard bands on a value crossing multiple bands', () => {
-      // £400,000, home-mover (standard bands: 0-145k@0%, 145,001-250k@2%,
-      // 250,001-325k@5%, 325,001-750k@10%, >750k@12%). Band tax uses
-      // (min(price,to) - from + 1) * rate, rounded per band:
-      // band1: (145000-0+1)*0 = 0
-      // band2: (250000-145001+1)*0.02 = 105000*0.02 = 2100
-      // band3: (325000-250001+1)*0.05 = 75000*0.05 = 3750
-      // band4: (400000-325001+1)*0.10 = 75000*0.10 = 7500
-      // total = 0+2100+3750+7500 = 13350
       const result = calculateLBTT({
         propertyPrice: 400000,
         buyerType: 'home-mover',
@@ -34,13 +22,6 @@ describe('LBTTCalculator', () => {
     });
 
     it('should apply the 8% ADS surcharge for an additional property', () => {
-      // £300,000, buyerType 'additional' uses standard bands:
-      // band1: (145000-0+1)*0 = 0
-      // band2: (250000-145001+1)*0.02 = 105000*0.02 = 2100
-      // band3: (300000-250001+1)*0.05 = 50000*0.05 = 2500
-      // base tax = 0+2100+2500 = 4600
-      // ADS = round(300000 * 0.08) = 24000
-      // total = 4600 + 24000 = 28600
       const result = calculateLBTT({
         propertyPrice: 300000,
         buyerType: 'additional',
@@ -53,9 +34,6 @@ describe('LBTTCalculator', () => {
     });
 
     it('should not apply ADS below the £40,000 threshold', () => {
-      // revenue.scot: ADS does not apply when the consideration for the
-      // property being purchased is less than £40,000.
-      // £39,999 additional: bands give 0 (below the £145k nil band), ADS 0.
       const result = calculateLBTT({
         propertyPrice: 39999,
         buyerType: 'additional',
@@ -66,7 +44,6 @@ describe('LBTTCalculator', () => {
     });
 
     it('should apply ADS at exactly £40,000', () => {
-      // ADS = round(40000 * 0.08) = 3200; LBTT bands give 0 below £145k.
       const result = calculateLBTT({
         propertyPrice: 40000,
         buyerType: 'additional',
@@ -77,10 +54,6 @@ describe('LBTTCalculator', () => {
     });
 
     it('should give a first-time buyer the higher nil-rate band', () => {
-      // £150,000 falls entirely in the first-time-buyer nil band (0-175,000@0%),
-      // so base tax = 0. Under standard bands (0-145,000@0%, then 2% above),
-      // taxable-in-band2 = (150000-145001+1)*0.02 = 5000*0.02 = 100, so the
-      // FTB saving is 100.
       const result = calculateLBTT({
         propertyPrice: 150000,
         buyerType: 'first-time',

@@ -1,7 +1,3 @@
-/**
- * Materials Markup Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateMaterialsMarkup,
@@ -32,9 +28,6 @@ import {
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
 
-/**
- * Common markup/margin pairs for the visual comparison table.
- */
 const MARKUP_MARGIN_PAIRS = [10, 20, 25, 30, 40, 50, 75, 100];
 
 export default function MaterialsMarkupCalculator() {
@@ -80,7 +73,6 @@ export default function MaterialsMarkupCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Calculation Mode */}
             <div>
               <Label>What do you want to calculate?</Label>
               <div className="space-y-2">
@@ -101,7 +93,6 @@ export default function MaterialsMarkupCalculator() {
               </div>
             </div>
 
-            {/* Cost Price - always shown */}
             <div>
               <Label htmlFor="costPrice" required>
                 Cost Price (per unit)
@@ -118,7 +109,6 @@ export default function MaterialsMarkupCalculator() {
               />
             </div>
 
-            {/* Mode-specific inputs */}
             {inputs.mode === 'markupToSell' && (
               <div>
                 <Label htmlFor="markupPercent" required>
@@ -133,7 +123,6 @@ export default function MaterialsMarkupCalculator() {
                   value={inputs.markupPercent}
                   onChange={(e) => updateInput('markupPercent', Number(e.currentTarget.value))}
                 />
-                {/* Quick markup buttons */}
                 <div className="flex flex-wrap gap-2 mt-3">
                   {[10, 20, 25, 30, 40, 50].map((percent) => (
                     <button
@@ -188,7 +177,6 @@ export default function MaterialsMarkupCalculator() {
               </div>
             )}
 
-            {/* Quantity */}
             <div>
               <Label htmlFor="quantity">Quantity</Label>
               <Input
@@ -204,11 +192,9 @@ export default function MaterialsMarkupCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.costPrice > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label={inputs.mode === 'sellToMarkup' ? 'Markup' : 'Selling Price'}
                   value={
@@ -229,7 +215,6 @@ export default function MaterialsMarkupCalculator() {
                   }
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Selling Price"
@@ -271,7 +256,6 @@ export default function MaterialsMarkupCalculator() {
                   </div>
                 )}
 
-                {/* Markup vs Margin Visual Explanation */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Markup vs Margin: The Key Difference
@@ -281,7 +265,6 @@ export default function MaterialsMarkupCalculator() {
                       Markup and margin both measure profit, but from different bases. Confusing
                       them is the most common pricing mistake in the trades.
                     </p>
-                    {/* Visual bar comparison */}
                     <div className="space-y-3">
                       <div>
                         <div className="flex justify-between text-xs text-[var(--color-subtle)] mb-1">
@@ -353,7 +336,6 @@ export default function MaterialsMarkupCalculator() {
                   </div>
                 </div>
 
-                {/* Markup to Margin Reference Table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Markup to Margin Quick Reference
@@ -380,7 +362,6 @@ export default function MaterialsMarkupCalculator() {
                   </div>
                 </div>
 
-                {/* Trade-Typical Markups */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Typical Markups by Trade
@@ -421,7 +402,6 @@ export default function MaterialsMarkupCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.costPrice > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

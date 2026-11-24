@@ -1,7 +1,5 @@
 import type { Page } from '@playwright/test';
 
-/** Shared by avios-finder-overflow.spec.ts and card-rewards.spec.ts; each supplies its own anchor. */
-
 export interface OverflowReport {
   islandRight: number;
   offenders: { tag: string; id: string; label: string; right: number; left: number }[];
@@ -33,8 +31,8 @@ export async function collectOverflow(page: Page, anchorSelector: string): Promi
     const offenders: OverflowReport['offenders'] = [];
     for (const el of controls) {
       const r = el.getBoundingClientRect();
-      if (r.width === 0 && r.height === 0) continue; // hidden
-      if (inScrollContainer(el)) continue; // intentionally scrollable region
+      if (r.width === 0 && r.height === 0) continue;
+      if (inScrollContainer(el)) continue;
       if (r.right > islandRect.right + 1 || r.left < islandRect.left - 1) {
         offenders.push({
           tag: el.tagName.toLowerCase(),

@@ -1,7 +1,3 @@
-/**
- * SolarCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSolar } from '../../src/components/calculators/SolarCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SolarCalculator/types';

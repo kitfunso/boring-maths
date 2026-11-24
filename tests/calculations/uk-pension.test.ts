@@ -1,7 +1,3 @@
-/**
- * UkPensionCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePension } from '../../src/components/calculators/UKPensionCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKPensionCalculator/types';

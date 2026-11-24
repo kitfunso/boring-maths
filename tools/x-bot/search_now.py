@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Search for reply targets using tweepy v2 API."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -15,7 +14,6 @@ client = tweepy.Client(
     wait_on_rate_limit=False
 )
 
-# Read dedup list
 dedup_path = r'C:\Users\skf_s\clawd\tasks\state\x-replied-posts.txt'
 with open(dedup_path, 'r') as f:
     already_replied = set(line.strip() for line in f if line.strip())

@@ -1,7 +1,3 @@
-/**
- * Time Zone Converter - Type Definitions
- */
-
 export interface TimeZoneConverterInputs {
   hours: number;
   minutes: number;
@@ -10,11 +6,11 @@ export interface TimeZoneConverterInputs {
 }
 
 export interface TimeZoneResult {
-  convertedTime: string; // "HH:MM"
+  convertedTime: string;
   convertedHours: number;
   convertedMinutes: number;
-  offsetDiff: number; // hours difference
-  dayShift: number; // -1, 0, or 1
+  offsetDiff: number;
+  dayShift: number;
   fromAbbrev: string;
   toAbbrev: string;
 }
@@ -22,7 +18,7 @@ export interface TimeZoneResult {
 export interface TimeZoneInfo {
   id: string;
   label: string;
-  offset: number; // hours from UTC
+  offset: number;
   abbrev: string;
 }
 

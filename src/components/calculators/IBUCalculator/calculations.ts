@@ -1,9 +1,6 @@
-/** IBU calculations using the Tinseth, Rager, and Garetz hop-utilization formulas. */
-
 import type { IBUInputs, IBUResults, HopAddition } from './types';
 import { BEER_STYLES } from './types';
 
-/** Tinseth formula: utilization = Bigness Factor (1.65 × 0.000125^(OG-1)) × Boil Time Factor ((1 - e^(-0.04×time)) / 4.15). */
 function tinsethUtilization(og: number, boilTime: number): number {
   const bignessFactor = 1.65 * Math.pow(0.000125, og - 1);
   const boilTimeFactor = (1 - Math.exp(-0.04 * boilTime)) / 4.15;
@@ -11,7 +8,6 @@ function tinsethUtilization(og: number, boilTime: number): number {
 }
 
 function ragerUtilization(og: number, boilTime: number): number {
-  // Utilization lookup table (simplified)
   const utilizationTable: { [key: number]: number } = {
     0: 0,
     5: 0.055,
@@ -42,7 +38,6 @@ function ragerUtilization(og: number, boilTime: number): number {
 
   let util = utilizationTable[closestTime] || 0;
 
-  // Gravity adjustment for OG > 1.050
   if (og > 1.05) {
     const adjustment = (og - 1.05) / 0.2;
     util = util / (1 + adjustment);
@@ -52,12 +47,10 @@ function ragerUtilization(og: number, boilTime: number): number {
 }
 
 function garetzUtilization(og: number, boilTime: number): number {
-  // Approximated as 0.9x Rager; real Garetz also adjusts for elevation and hopping rate.
   const baseUtil = ragerUtilization(og, boilTime);
   return baseUtil * 0.9;
 }
 
-/** IBU = (weight × utilization × alpha acid × 1000) / (volume × (1 + GA)), where GA = (boil gravity - 1.050) / 0.2. */
 function calculateAdditionIBU(
   addition: HopAddition,
   volumeGallons: number,
@@ -78,14 +71,12 @@ function calculateAdditionIBU(
       utilization = tinsethUtilization(og, addition.boilTime);
   }
 
-  // Adjust for hop form (pellets have ~10% better utilization)
   if (addition.form === 'pellet') {
     utilization *= 1.1;
   } else if (addition.form === 'plug') {
     utilization *= 1.02;
   }
 
-  // Formula: (alpha acid% × weight oz × utilization × 7490) / volume gallons
   const ibu = ((addition.alphaAcid / 100) * weightOz * utilization * 7490) / volumeGallons;
 
   return { ibu: Math.round(ibu * 10) / 10, utilization: Math.round(utilization * 1000) / 10 };
@@ -93,7 +84,7 @@ function calculateAdditionIBU(
 
 function determineBeerStyle(ibu: number, og: number): string {
   const gu = (og - 1) * 1000;
-  void (gu > 0 ? ibu / gu : 0); // BU:GU ratio - reserved for future use
+  void (gu > 0 ? ibu / gu : 0);
 
   const matchingStyles = BEER_STYLES.filter((style) => ibu >= style.ibuMin && ibu <= style.ibuMax);
 
@@ -125,7 +116,6 @@ export function calculateIBU(inputs: IBUInputs): IBUResults {
 
   const totalIBU = ibuByAddition.reduce((sum, a) => sum + a.ibu, 0);
 
-  // Calculate BU:GU ratio (bitterness balance)
   const gravityUnits = (originalGravity - 1) * 1000;
   const bitteringRatio = gravityUnits > 0 ? totalIBU / gravityUnits : 0;
 

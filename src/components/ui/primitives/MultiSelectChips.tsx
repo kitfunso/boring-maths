@@ -1,4 +1,3 @@
-/** MultiSelectChips - toggleable chip group; empty selection means "all". */
 import { useTheme } from '../theme/ThemeContext';
 import type { ColorTokens } from '../theme/colors';
 
@@ -12,7 +11,6 @@ interface MultiSelectChipsProps<T extends string> {
   readonly selected: readonly T[];
   readonly onChange: (next: T[]) => void;
   readonly ariaLabel: string;
-  /** When set, renders a leading "select all" chip with this label. */
   readonly allLabel?: string;
 }
 

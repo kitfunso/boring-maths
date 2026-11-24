@@ -1,6 +1,3 @@
-/**
- * Net Worth Calculator - React Component
- */
 import { calculateNetWorth, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -108,7 +105,6 @@ export default function NetWorthCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Assets Section */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold text-green-400">Assets (What You Own)</h3>
@@ -183,7 +179,6 @@ export default function NetWorthCalculator() {
             </div>
           </div>
 
-          {/* Liabilities Section */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold text-red-400">Liabilities (What You Owe)</h3>
@@ -268,7 +263,6 @@ export default function NetWorthCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             <ResultCard
               label="Your Net Worth"
@@ -278,7 +272,6 @@ export default function NetWorthCalculator() {
               }
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Assets"
@@ -306,7 +299,6 @@ export default function NetWorthCalculator() {
               />
             </Grid>
 
-            {/* Asset Breakdown */}
             {result.totalAssets > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -339,7 +331,6 @@ export default function NetWorthCalculator() {
               </div>
             )}
 
-            {/* Liability Breakdown */}
             {result.totalLiabilities > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -372,14 +363,12 @@ export default function NetWorthCalculator() {
               </div>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Building Net Worth:">
               Focus on increasing assets (saving, investing) while decreasing liabilities (paying
               off debt). The average American household has a net worth around $120,000, but median
               is much lower due to wealth inequality. Track your net worth monthly to see progress.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Net Worth: ${formatCurrency(result.netWorth)} (${formatCurrency(result.totalAssets)} assets - ${formatCurrency(result.totalLiabilities)} liabilities)`}

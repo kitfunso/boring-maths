@@ -2,7 +2,6 @@ import { CURRENCY_OPTIONS } from '../../../lib/regions';
 import { useCurrency } from './CurrencyContext';
 
 export interface GlobalCurrencySelectorProps {
-  /** Additional class names */
   className?: string;
 }
 

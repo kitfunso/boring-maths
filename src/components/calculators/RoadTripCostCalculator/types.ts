@@ -1,7 +1,3 @@
-/**
- * Road Trip Cost Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type DistanceUnit = 'miles' | 'km';
@@ -37,21 +33,18 @@ export interface RoadTripResult {
   totalHotelCost: number;
 }
 
-/** Default fuel prices by currency */
 const DEFAULT_FUEL_PRICES: Record<Currency, number> = {
   USD: 3.5,
   GBP: 1.5,
   EUR: 1.8,
 };
 
-/** Default food budgets by currency */
 const DEFAULT_FOOD_BUDGETS: Record<Currency, number> = {
   USD: 50,
   GBP: 35,
   EUR: 40,
 };
 
-/** Default hotel costs by currency */
 const DEFAULT_HOTEL_COSTS: Record<Currency, number> = {
   USD: 100,
   GBP: 80,

@@ -1,9 +1,3 @@
-/**
- * Mortgage Calculator - React Component
- *
- * Calculate monthly mortgage payments with principal, interest, taxes, and insurance.
- */
-
 import { useMemo, useEffect } from 'preact/hooks';
 import { useLocalStorage } from '../../../hooks/useLocalStorage';
 import { calculateMortgage, formatCurrency } from './calculations';
@@ -31,7 +25,6 @@ export default function MortgageCalculator() {
     getDefaultInputs(getInitialCurrency())
   );
 
-  // Load inputs from URL parameters on mount (for shared links)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
@@ -54,7 +47,6 @@ export default function MortgageCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Validation: ensure down payment doesn't exceed home price
   const validationError = useMemo(() => {
     if (inputs.downPayment > inputs.homePrice) {
       return 'Down payment cannot exceed home price';
@@ -66,7 +58,6 @@ export default function MortgageCalculator() {
   }, [inputs.downPayment, inputs.homePrice]);
 
   const result: MortgageResult = useMemo(() => {
-    // Return safe defaults if validation fails
     if (validationError) {
       return {
         currency: inputs.currency,
@@ -93,7 +84,6 @@ export default function MortgageCalculator() {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Auto-calculate down payment when home price changes
   const handleHomePriceChange = (newPrice: number) => {
     const currentPercent = inputs.downPayment / inputs.homePrice;
     setInputs((prev) => ({
@@ -114,7 +104,6 @@ export default function MortgageCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Home Price & Down Payment */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="homePrice" required>
@@ -147,7 +136,6 @@ export default function MortgageCalculator() {
               </div>
             </Grid>
 
-            {/* Interest Rate Slider */}
             <Slider
               label="Interest Rate"
               value={Math.round(inputs.interestRate * 1000) / 10}
@@ -164,7 +152,6 @@ export default function MortgageCalculator() {
               }}
             />
 
-            {/* Loan Term Slider */}
             <Slider
               label="Loan Term"
               value={inputs.loanTermYears}
@@ -181,7 +168,6 @@ export default function MortgageCalculator() {
               }}
             />
 
-            {/* Optional Costs */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Additional Costs (Optional)
@@ -231,19 +217,15 @@ export default function MortgageCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Validation Error */}
             {validationError && (
               <Alert variant="error" title="Invalid Input">
                 {validationError}
               </Alert>
             )}
 
-            {/* Results - only show when inputs are valid */}
             {!validationError && (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Your Monthly Payment"
                   value={formatCurrency(result.monthlyTotal, result.currency)}
@@ -258,7 +240,6 @@ export default function MortgageCalculator() {
                   }
                 />
 
-                {/* Payment Breakdown */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Principal & Interest"
@@ -282,7 +263,6 @@ export default function MortgageCalculator() {
                   />
                 </Grid>
 
-                {/* Loan Summary */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Loan Summary
@@ -315,7 +295,6 @@ export default function MortgageCalculator() {
                   </Grid>
                 </div>
 
-                {/* PMI Warning */}
                 {result.downPaymentPercent < 20 && (
                   <Alert variant="warning" title="PMI Required">
                     With less than 20% down, you'll likely need Private Mortgage Insurance (PMI),
@@ -328,7 +307,6 @@ export default function MortgageCalculator() {
                   save tens of thousands in interest.
                 </Alert>
 
-                {/* Share & Print Results */}
                 <div className="flex justify-center gap-3 pt-4">
                   <ShareResults
                     result={`Monthly mortgage payment: ${formatCurrency(result.monthlyTotal, result.currency)} for a ${formatCurrency(inputs.homePrice, inputs.currency)} home (${inputs.loanTermYears} years at ${(inputs.interestRate * 100).toFixed(2)}%)`}

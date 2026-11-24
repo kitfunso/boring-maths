@@ -1,8 +1,3 @@
-/**
- * HSA Calculator - React Component
- *
- * Health Savings Account calculator showing triple tax advantage.
- */
 import { calculateHSA, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -55,7 +50,6 @@ export default function HSACalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Coverage Type */}
           <div className="space-y-6 mb-8">
             <div>
               <Label>HDHP Coverage Type</Label>
@@ -70,7 +64,6 @@ export default function HSACalculator() {
               </p>
             </div>
 
-            {/* Contributions */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="annualContribution" required>
@@ -106,7 +99,6 @@ export default function HSACalculator() {
               </div>
             </Grid>
 
-            {/* Age and Tax Info */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="age" required>
@@ -138,7 +130,6 @@ export default function HSACalculator() {
               </div>
             </Grid>
 
-            {/* State Tax */}
             <div>
               <Slider
                 label="State Income Tax Rate"
@@ -159,7 +150,6 @@ export default function HSACalculator() {
               </p>
             </div>
 
-            {/* Long-term Projection Inputs */}
             <div className="bg-[var(--color-night)] rounded-xl p-4">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Long-Term Projection
@@ -225,9 +215,7 @@ export default function HSACalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Contribution Status */}
             {result.overContribution > 0 && (
               <Alert variant="error" title="Over Contribution Limit">
                 You're ${result.overContribution.toLocaleString()} over the {inputs.coverageType}{' '}
@@ -236,7 +224,6 @@ export default function HSACalculator() {
               </Alert>
             )}
 
-            {/* Primary Result - Tax Savings */}
             <ResultCard
               label="Annual Tax Savings"
               value={formatCurrency(result.totalAnnualTaxSavings)}
@@ -249,7 +236,6 @@ export default function HSACalculator() {
               }
             />
 
-            {/* Triple Tax Advantage Breakdown */}
             <div className="bg-green-900/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-4">
                 Triple Tax Advantage
@@ -303,7 +289,6 @@ export default function HSACalculator() {
               </div>
             </div>
 
-            {/* Contribution Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="2026 Limit"
@@ -329,7 +314,6 @@ export default function HSACalculator() {
               />
             </Grid>
 
-            {/* Long-term Projection */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Projected Balance at Age 65
@@ -361,7 +345,6 @@ export default function HSACalculator() {
                 </div>
               </div>
 
-              {/* Projection Table */}
               {result.projections.length > 0 && (
                 <div className="overflow-x-auto mt-4">
                   <table className="w-full text-sm">
@@ -394,7 +377,6 @@ export default function HSACalculator() {
               )}
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="HSA Tips:">
               HSAs offer the only "triple tax advantage" in the US tax code: tax-free contributions,
               tax-free growth, and tax-free withdrawals for medical expenses. After age 65, you can
@@ -402,7 +384,6 @@ export default function HSACalculator() {
               your HSA and paying medical expenses out-of-pocket to maximize tax-free growth.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`HSA Tax Savings: ${formatCurrency(result.totalAnnualTaxSavings)}/year (${formatPercent(result.effectiveDiscount)} effective discount). Projected balance at 65: ${formatCurrency(result.projectedBalance)}`}

@@ -1,9 +1,3 @@
-/**
- * Remote Work Savings Calculator - React Component
- *
- * Interactive calculator showing how much you save by working remotely.
- * Includes transportation, food, clothing, time value, and CO2 reduction.
- */
 import { calculateRemoteWorkSavings, formatCurrency, formatCurrencyDecimal } from './calculations';
 import { getDefaultInputs, type RemoteWorkSavingsInputs, type CommuteType } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -35,7 +29,6 @@ export default function RemoteWorkSavingsCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -49,7 +42,6 @@ export default function RemoteWorkSavingsCalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Remote Work Savings Calculator"
           subtitle="See how much you save by skipping the commute"
@@ -57,9 +49,7 @@ export default function RemoteWorkSavingsCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Commute Details */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Your Commute
@@ -146,7 +136,6 @@ export default function RemoteWorkSavingsCalculator() {
               </Grid>
             </div>
 
-            {/* Car Costs - Show only if driving */}
             {(inputs.commuteType === 'car' || inputs.commuteType === 'mixed') && (
               <div>
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
@@ -220,7 +209,6 @@ export default function RemoteWorkSavingsCalculator() {
               </div>
             )}
 
-            {/* Transit Costs */}
             {(inputs.commuteType === 'public-transit' || inputs.commuteType === 'mixed') && (
               <div>
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
@@ -241,7 +229,6 @@ export default function RemoteWorkSavingsCalculator() {
               </div>
             )}
 
-            {/* Lifestyle Costs */}
             <details className="group">
               <summary className="cursor-pointer text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <span>Lifestyle Costs</span>
@@ -331,9 +318,7 @@ export default function RemoteWorkSavingsCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Annual Savings from Remote Work"
               value={formatCurrency(result.annualSavings, result.currency)}
@@ -348,7 +333,6 @@ export default function RemoteWorkSavingsCalculator() {
               }
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Hours Reclaimed"
@@ -372,7 +356,6 @@ export default function RemoteWorkSavingsCalculator() {
               />
             </Grid>
 
-            {/* Time Analysis */}
             <div className="bg-cyan-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-4">
                 Time You Get Back
@@ -405,13 +388,11 @@ export default function RemoteWorkSavingsCalculator() {
               </Grid>
             </div>
 
-            {/* Savings Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Savings Breakdown
               </h3>
               <div className="space-y-3">
-                {/* Transportation */}
                 <div className="text-xs uppercase tracking-wider text-[var(--color-muted)] mb-2">
                   Transportation
                 </div>
@@ -458,7 +439,6 @@ export default function RemoteWorkSavingsCalculator() {
 
                 <div className="border-t border-[var(--color-charcoal)] my-3"></div>
 
-                {/* Lifestyle */}
                 <div className="text-xs uppercase tracking-wider text-[var(--color-muted)] mb-2">
                   Lifestyle
                 </div>
@@ -493,7 +473,6 @@ export default function RemoteWorkSavingsCalculator() {
 
                 <div className="border-t border-[var(--color-charcoal)] my-3"></div>
 
-                {/* Total */}
                 <div className="flex justify-between items-center text-lg font-bold">
                   <span className="text-[var(--color-cream)]">Total Annual Savings</span>
                   <span className="text-cyan-400">
@@ -503,7 +482,6 @@ export default function RemoteWorkSavingsCalculator() {
               </div>
             </div>
 
-            {/* Environmental Impact */}
             {inputs.commuteType !== 'public-transit' && (
               <div className="bg-emerald-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4">
@@ -538,7 +516,6 @@ export default function RemoteWorkSavingsCalculator() {
               </div>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Maximize Your Savings">
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>
@@ -554,7 +531,6 @@ export default function RemoteWorkSavingsCalculator() {
               </ul>
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`I save ${formatCurrency(result.annualSavings, result.currency)}/year working remotely! That's ${Math.round(result.hoursReclaimed)} hours reclaimed (${result.time.annualCommuteDays.toFixed(0)} full days) and ${result.environmental.co2TonsSavedAnnual.toFixed(1)} tons of CO2 avoided.`}

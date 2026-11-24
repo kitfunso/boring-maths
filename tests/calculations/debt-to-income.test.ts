@@ -6,7 +6,6 @@ import {
 
 describe('calculateDebtToIncome', () => {
   it('computes front and back ratios for the default inputs', () => {
-    // 1500 / 6000 = 25.0 ; (1500 + 500) / 6000 = 33.333 -> 33.3
     const result = calculateDebtToIncome(getDefaultInputs());
     expect(result.frontDTI).toBe(25);
     expect(result.backDTI).toBe(33.3);
@@ -17,7 +16,6 @@ describe('calculateDebtToIncome', () => {
   });
 
   it('flags a back-end ratio above the 43% QM limit as high', () => {
-    // front 1500/5000 = 30.0 ; back 2500/5000 = 50.0
     const result = calculateDebtToIncome({
       grossMonthlyIncome: 5000,
       housingPayment: 1500,
@@ -31,7 +29,6 @@ describe('calculateDebtToIncome', () => {
   });
 
   it('treats the conventional 36% back-end boundary as ideal', () => {
-    // front 2800/10000 = 28.0 ; back 3600/10000 = 36.0 (exactly on the line)
     const result = calculateDebtToIncome({
       grossMonthlyIncome: 10000,
       housingPayment: 2800,
@@ -44,7 +41,6 @@ describe('calculateDebtToIncome', () => {
   });
 
   it('rates a ratio between 36% and 43% as acceptable', () => {
-    // back 3200/8000 = 40.0 -> above 36 but within the 43 QM limit
     const result = calculateDebtToIncome({
       grossMonthlyIncome: 8000,
       housingPayment: 2000,
@@ -80,8 +76,6 @@ describe('calculateDebtToIncome', () => {
   });
 
   it('returns finite zero ratios when income is NaN (cleared field)', () => {
-    // An emptied number field passes NaN. The ratios must stay finite 0,
-    // never NaN, so the displayed percentages remain sensible.
     const result = calculateDebtToIncome({
       grossMonthlyIncome: NaN,
       housingPayment: 1500,

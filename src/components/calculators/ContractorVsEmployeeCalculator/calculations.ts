@@ -1,5 +1,3 @@
-/** Contractor vs employee: net pay plus benefits on each side; tax comes from taxModels.ts. */
-
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
 import {
   type ContractorVsEmployeeInputs,
@@ -11,13 +9,9 @@ import {
 } from './types';
 import { type TaxContext, contractorTax, employeeTax } from './taxModels';
 
-/**
- * Standard work hours for comparison
- */
 const STANDARD_WORK_HOURS_PER_WEEK = 40;
 const STANDARD_WORK_WEEKS_PER_YEAR = 52;
 
-// The suggested rate sits this far above break-even to cover unbilled weeks and late payers
 const RATE_BUFFER = 0.1;
 
 function taxContext(inputs: ContractorVsEmployeeInputs): TaxContext {
@@ -30,9 +24,6 @@ function taxContext(inputs: ContractorVsEmployeeInputs): TaxContext {
   };
 }
 
-/**
- * Calculate contractor compensation breakdown
- */
 function calculateContractorCompensation(
   inputs: ContractorVsEmployeeInputs
 ): CompensationBreakdown {
@@ -55,7 +46,6 @@ function calculateContractorCompensation(
   const professionalServices = contractorAccountingAnnual + contractorInsuranceAnnual;
   const retirementContribution = grossIncome * (contractorRetirementContribPercent / 100);
 
-  // Accounting and liability insurance are business expenses, so tax falls on profit
   const profit = grossIncome - businessExpenses - professionalServices;
   const { socialTax, incomeTax } = contractorTax(
     profit,
@@ -94,9 +84,6 @@ function calculateContractorCompensation(
   };
 }
 
-/**
- * Calculate employee compensation breakdown
- */
 function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): CompensationBreakdown {
   const {
     employeeSalary,
@@ -118,15 +105,13 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
   const dentalVisionValue = employerDentalVisionMonthly * 12;
   const lifeDisabilityValue = employerLifeDisabilityMonthly * 12;
 
-  // 401k match value (assumes employee contributes enough to get full match)
   const maxMatchableContribution = employeeSalary * (employer401kMatchLimit / 100);
   const retirementMatchValue =
     employer401kMatchLimit > 0
       ? maxMatchableContribution * (employer401kMatch / employer401kMatchLimit)
       : 0;
 
-  // PTO value (daily rate × days)
-  const dailyRate = employeeSalary / 260; // ~260 working days per year
+  const dailyRate = employeeSalary / 260;
   const ptoValue = dailyRate * (paidTimeOffDays + paidHolidaysDays);
 
   const totalBenefitsValue =
@@ -143,7 +128,6 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
   const totalCosts = socialTax + incomeTax;
   const netIncome = grossIncome + bonus - totalCosts;
 
-  // Subtract PTO since it's paid but not worked
   const standardAnnualHours = STANDARD_WORK_HOURS_PER_WEEK * STANDARD_WORK_WEEKS_PER_YEAR;
   const actualWorkHours = standardAnnualHours - (paidTimeOffDays + paidHolidaysDays) * 8;
 
@@ -170,7 +154,6 @@ function calculateEmployeeCompensation(inputs: ContractorVsEmployeeInputs): Comp
 
 const employeeValue = (e: CompensationBreakdown) => e.totalCompensation - e.totalCosts;
 
-/** Smallest x >= 0 with f(x) >= target, for f increasing; 0 if f never gets there. */
 function solveIncreasing(f: (x: number) => number, target: number, start: number): number {
   if (f(0) >= target) return 0;
   let hi = Math.max(1, start);
@@ -187,9 +170,6 @@ function solveIncreasing(f: (x: number) => number, target: number, start: number
   return hi;
 }
 
-/**
- * Calculate comparison metrics
- */
 function calculateComparison(
   contractor: CompensationBreakdown,
   employee: CompensationBreakdown,
@@ -197,7 +177,6 @@ function calculateComparison(
 ): ComparisonMetrics {
   const { contractorHourlyRate, employeeSalary } = inputs;
 
-  // A contractor has no benefits, so their value is net income
   const contractorValue = contractor.netIncome;
   const empValue = employeeValue(employee);
 
@@ -205,7 +184,6 @@ function calculateComparison(
   const annualDifference = Math.abs(contractorValue - empValue);
   const smaller = Math.min(contractorValue, empValue);
 
-  // Re-run the same tax models instead of guessing a cost ratio
   const breakEvenContractRate = solveIncreasing(
     (rate) => calculateContractorCompensation({ ...inputs, contractorHourlyRate: rate }).netIncome,
     empValue,
@@ -235,9 +213,6 @@ const SOCIAL_TAX_LABEL: Record<Currency, string> = {
   EUR: 'Social Contributions',
 };
 
-/**
- * Generate line items for detailed comparison
- */
 function generateLineItems(
   contractor: CompensationBreakdown,
   employee: CompensationBreakdown,
@@ -302,12 +277,8 @@ function generateLineItems(
   ];
 }
 
-/** A cleared or partial entry ("-", "1e") parses to NaN; treat it as 0. */
 const safe = (v: number): number => (Number.isFinite(v) ? v : 0);
 
-/**
- * Coerce every numeric input to a finite value, leaving non-numeric fields intact.
- */
 function sanitizeInputs(inputs: ContractorVsEmployeeInputs): ContractorVsEmployeeInputs {
   return {
     ...inputs,
@@ -334,9 +305,6 @@ function sanitizeInputs(inputs: ContractorVsEmployeeInputs): ContractorVsEmploye
   };
 }
 
-/**
- * Main calculation function
- */
 export function calculateComparison_main(
   rawInputs: ContractorVsEmployeeInputs
 ): ContractorVsEmployeeResult {
@@ -365,9 +333,6 @@ export function calculateComparison_main(
   };
 }
 
-/**
- * Format currency for display
- */
 export function formatCurrency(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
   const absAmount = Math.abs(amount);
@@ -378,24 +343,15 @@ export function formatCurrency(amount: number, currency: Currency): string {
   return amount < 0 ? `-${symbol}${formatted}` : `${symbol}${formatted}`;
 }
 
-/**
- * Format hourly rate
- */
 export function formatHourlyRate(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
   return `${symbol}${amount.toFixed(2)}/hr`;
 }
 
-/**
- * Format percentage
- */
 export function formatPercent(value: number): string {
   return `${value.toFixed(1)}%`;
 }
 
-/**
- * Get color class based on value comparison
- */
 export function getComparisonColor(
   contractorValue: number,
   employeeValue: number
@@ -411,9 +367,6 @@ export function getComparisonColor(
   return { contractor: 'text-[var(--color-cream)]', employee: 'text-[var(--color-cream)]' };
 }
 
-/**
- * What the social tax line means on each side, by currency
- */
 export const SOCIAL_TAX_INFO: Record<Currency, { label: string; note: string }> = {
   USD: {
     label: '15.3% on 92.35% of profit',

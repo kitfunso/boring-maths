@@ -1,9 +1,3 @@
-/**
- * Raise Calculator - React Component
- *
- * Interactive calculator for showing the long-term value of a raise.
- * Uses the design system components.
- */
 import { calculateRaise, formatCurrency } from './calculations';
 import { getDefaultInputs, type RaiseCalculatorInputs, type RaiseCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -34,18 +28,15 @@ export default function RaiseCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Quick raise percentage buttons
   const raisePresets = [3, 5, 10, 15, 20];
 
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Raise Value"
           subtitle="See the long-term impact of a salary increase"
@@ -53,9 +44,7 @@ export default function RaiseCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Current Salary */}
             <div>
               <Label htmlFor="currentSalary" required>
                 Current Annual Salary
@@ -71,7 +60,6 @@ export default function RaiseCalculator() {
               />
             </div>
 
-            {/* Raise Percentage */}
             <div>
               <Slider
                 label="Raise Percentage"
@@ -104,7 +92,6 @@ export default function RaiseCalculator() {
               </div>
             </div>
 
-            {/* Years to Retirement */}
             <Slider
               label="Years Until Retirement"
               value={inputs.yearsToRetirement}
@@ -120,7 +107,6 @@ export default function RaiseCalculator() {
               }}
             />
 
-            {/* Advanced Settings */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="investmentReturn">Investment Return Rate</Label>
@@ -162,9 +148,7 @@ export default function RaiseCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Lifetime Value of This Raise"
               value={formatCurrency(result.lifetimeValue, result.currency)}
@@ -179,7 +163,6 @@ export default function RaiseCalculator() {
               }
             />
 
-            {/* Immediate Impact */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="New Salary"
@@ -204,7 +187,6 @@ export default function RaiseCalculator() {
               />
             </Grid>
 
-            {/* Growth Over Time */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Value Over Time
@@ -234,7 +216,6 @@ export default function RaiseCalculator() {
               </div>
             </div>
 
-            {/* Perspective */}
             <div className="bg-green-50 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-700 uppercase tracking-wider mb-3">
                 Put It In Perspective
@@ -263,14 +244,12 @@ export default function RaiseCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Negotiation tip:">
               A seemingly small 3% raise on a $60,000 salary is worth over $45,000 over 20 years
               (more if invested). Always negotiate - the worst they can say is no, but the upside is
               life-changing.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My ${Math.round(inputs.raisePercentage * 100)}% raise: ${formatCurrency(result.raiseAmount, result.currency)}/year (${formatCurrency(result.monthlyRaise, result.currency)}/month) - Lifetime value: ${formatCurrency(result.lifetimeValue, result.currency)}`}

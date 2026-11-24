@@ -1,9 +1,3 @@
-/**
- * US Tax Bracket Calculator Types
- *
- * Calculate federal income tax, show tax brackets, and effective rates.
- */
-
 export type FilingStatus =
   | 'single'
   | 'married_jointly'
@@ -61,7 +55,6 @@ function sharedBrackets(): Record<FilingStatus, TaxBracket[]> {
   return out;
 }
 
-// 2025: IRS rates and brackets page; 2026: Rev. Proc. 2025-32 section 4.01
 export const TAX_BRACKETS: Record<TaxYear, Record<FilingStatus, TaxBracket[]>> = {
   2025: {
     single: [
@@ -104,7 +97,6 @@ export const TAX_BRACKETS: Record<TaxYear, Record<FilingStatus, TaxBracket[]>> =
   2026: sharedBrackets(),
 };
 
-// Standard deductions: Rev. Proc. 2025-32 section 3.01 (2025, post-OBBBA), 4.14 (2026)
 export const STANDARD_DEDUCTIONS: Record<TaxYear, Record<FilingStatus, number>> = {
   2025: {
     single: 15750,

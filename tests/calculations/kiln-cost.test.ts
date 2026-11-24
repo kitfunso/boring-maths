@@ -1,7 +1,3 @@
-/**
- * KilnCost Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateKilnCost } from '../../src/components/calculators/KilnCostCalculator/calculations';
 import type { KilnCostInputs } from '../../src/components/calculators/KilnCostCalculator/types';

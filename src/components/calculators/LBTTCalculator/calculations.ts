@@ -1,8 +1,3 @@
-/**
- * Scotland LBTT Calculations
- * Land and Buildings Transaction Tax rates 2026/27
- */
-
 import type { LBTTInputs, LBTTResult, LBTTBand, ScotlandBuyerType } from './types';
 
 const LBTT_STANDARD = [
@@ -21,11 +16,7 @@ const LBTT_FIRST_TIME = [
   { from: 750001, to: Infinity, rate: 0.12 },
 ];
 
-const ADS_RATE = 0.08; // 8% Additional Dwelling Supplement (from 5 December 2024)
-// ADS does not apply when the consideration is less than £40,000 (revenue.scot).
-// Keep in sync with ADSCalculator/types.ts and UKStampDutyCalculator/calculations.ts.
-// Note: LBTT has NO non-resident surcharge - the 2% surcharge is SDLT-only
-// (England & NI; gov.uk non-resident SDLT guidance).
+const ADS_RATE = 0.08;
 const ADS_MIN_PRICE = 40000;
 
 function getBands(buyerType: ScotlandBuyerType) {

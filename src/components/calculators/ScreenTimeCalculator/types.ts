@@ -1,7 +1,3 @@
-/**
- * Screen Time Calculator - Type Definitions
- */
-
 export type CategoryName = 'Social Media' | 'Video' | 'Games' | 'Productive' | 'Other';
 
 export type AgeGroup = 'child' | 'teen' | 'adult';

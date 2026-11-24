@@ -1,7 +1,3 @@
-/**
- * AbvCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateABV } from '../../src/components/calculators/ABVCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/ABVCalculator/types';

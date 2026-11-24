@@ -1,4 +1,3 @@
-// Submits the live sitemap to IndexNow (Bing, Yandex, Seznam, Naver): npm run seo:indexnow [-- --dry-run]
 // Run after a deploy that adds or changes pages, not on every build: repeat posts read as spam.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

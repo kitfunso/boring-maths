@@ -1,40 +1,22 @@
-/**
- * Debt Payoff Calculator - Type Definitions
- *
- * Supports snowball and avalanche debt repayment strategies.
- */
-
 import type { Currency } from '../../../lib/regions';
 
-/**
- * Individual debt entry
- */
 export interface Debt {
   id: string;
   name: string;
   balance: number;
-  interestRate: number; // Annual rate as percentage (e.g., 18 for 18%)
+  interestRate: number;
   minimumPayment: number;
 }
 
-/**
- * Payoff strategy
- */
 export type PayoffStrategy = 'avalanche' | 'snowball';
 
-/**
- * Input values for the Debt Payoff Calculator
- */
 export interface DebtPayoffInputs {
   currency: Currency;
   debts: Debt[];
-  extraPayment: number; // Additional monthly payment beyond minimums
+  extraPayment: number;
   strategy: PayoffStrategy;
 }
 
-/**
- * Monthly payment detail for a specific debt
- */
 export interface MonthlyDebtPayment {
   debtId: string;
   debtName: string;
@@ -44,9 +26,6 @@ export interface MonthlyDebtPayment {
   remainingBalance: number;
 }
 
-/**
- * Monthly snapshot of all debts
- */
 export interface MonthlySnapshot {
   month: number;
   totalPayment: number;
@@ -54,12 +33,9 @@ export interface MonthlySnapshot {
   totalInterest: number;
   totalRemainingBalance: number;
   payments: MonthlyDebtPayment[];
-  debtsPaidOff: string[]; // Names of debts paid off this month
+  debtsPaidOff: string[];
 }
 
-/**
- * Results for a single strategy
- */
 export interface StrategyResult {
   strategy: PayoffStrategy;
   months: number;
@@ -69,35 +45,23 @@ export interface StrategyResult {
   timeline: MonthlySnapshot[];
 }
 
-/**
- * Calculated results
- */
 export interface DebtPayoffResult {
   currency: Currency;
   totalDebt: number;
   totalMinimumPayments: number;
-  monthlyPayment: number; // minimums + extra
-
-  // Results for each strategy
+  monthlyPayment: number;
   avalanche: StrategyResult;
   snowball: StrategyResult;
 
-  // Comparison
-  interestSaved: number; // Avalanche saves this much vs snowball
-  timeDifference: number; // Months difference
+  interestSaved: number;
+  timeDifference: number;
   selectedStrategy: PayoffStrategy;
 }
 
-/**
- * Generate a unique ID
- */
 export function generateId(): string {
   return Math.random().toString(36).substring(2, 9);
 }
 
-/**
- * Create a new empty debt
- */
 export function createEmptyDebt(): Debt {
   return {
     id: generateId(),
@@ -108,9 +72,6 @@ export function createEmptyDebt(): Debt {
   };
 }
 
-/**
- * Sample debts for demonstration
- */
 export function getSampleDebts(currency: Currency): Debt[] {
   const amounts = {
     USD: { cc1: 5000, cc2: 3000, car: 12000 },
@@ -145,9 +106,6 @@ export function getSampleDebts(currency: Currency): Debt[] {
   ];
 }
 
-/**
- * Get default input values
- */
 export function getDefaultInputs(currency: Currency = 'USD'): DebtPayoffInputs {
   return {
     currency,

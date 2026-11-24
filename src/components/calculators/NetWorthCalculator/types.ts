@@ -1,7 +1,3 @@
-/**
- * Net Worth Calculator Types
- */
-
 export interface Asset {
   id: string;
   name: string;

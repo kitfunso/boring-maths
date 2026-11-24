@@ -1,7 +1,3 @@
-/**
- * TapDrill Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateTapDrill } from '../../src/components/calculators/TapDrillCalculator/calculations';
 import type {
@@ -26,7 +22,6 @@ describe('TapDrillCalculator', () => {
 
       const result = tapDrill(inputs);
 
-      // Handbook: 0.250 - 0.75 x 1.299/20 = 0.2013" -> #7 drill (0.201")
       expect(result.tapDrillSize).toBeCloseTo(0.2013, 3);
       expect(result.closestDrill).toBe('#7');
       expect(result.majorDiameter).toBeCloseTo(0.25, 2);
@@ -41,7 +36,6 @@ describe('TapDrillCalculator', () => {
 
       const result = tapDrill(inputs);
 
-      // Handbook: 6 - 0.75 x 1.299 x 1.0 = 5.03mm -> standard 5.0mm drill
       expect(result.tapDrillSize).toBeCloseTo(5.03, 2);
       expect(result.closestDrill).toBe('5.0mm');
       expect(result.majorDiameter).toBe(6);
@@ -63,7 +57,6 @@ describe('TapDrillCalculator', () => {
       const lowResult = tapDrill(low);
       const highResult = tapDrill(high);
 
-      // Higher thread % needs a smaller hole (smaller drill)
       expect(highResult.tapDrillSize).toBeLessThan(lowResult.tapDrillSize);
     });
 

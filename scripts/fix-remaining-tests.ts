@@ -1,7 +1,3 @@
-/**
- * Fix the remaining failing tests
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

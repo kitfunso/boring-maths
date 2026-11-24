@@ -1,9 +1,3 @@
-/**
- * Pipe Flow Calculator - React Component
- *
- * Calculate pipe diameter, flow velocity, or volumetric flow rate.
- * Includes velocity recommendations for different fluid types.
- */
 import { calculatePipeFlow, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -101,7 +95,6 @@ export default function PipeFlowCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -112,7 +105,6 @@ export default function PipeFlowCalculator() {
               />
             </div>
 
-            {/* Solve For */}
             <div>
               <Label>Calculate</Label>
               <ButtonGroup
@@ -123,7 +115,6 @@ export default function PipeFlowCalculator() {
               />
             </div>
 
-            {/* Fluid Type */}
             <div>
               <Label>Fluid Type</Label>
               <ButtonGroup
@@ -134,9 +125,7 @@ export default function PipeFlowCalculator() {
               />
             </div>
 
-            {/* Input Fields */}
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
-              {/* Pipe Diameter */}
               <div>
                 <Label htmlFor="diameter" required={inputs.solveFor !== 'diameter'}>
                   Diameter ({diameterUnit}){inputs.solveFor === 'diameter' && ' [Calc]'}
@@ -152,7 +141,6 @@ export default function PipeFlowCalculator() {
                 />
               </div>
 
-              {/* Flow Velocity */}
               <div>
                 <Label htmlFor="velocity" required={inputs.solveFor !== 'velocity'}>
                   Velocity ({velocityUnit}){inputs.solveFor === 'velocity' && ' [Calc]'}
@@ -168,7 +156,6 @@ export default function PipeFlowCalculator() {
                 />
               </div>
 
-              {/* Flow Rate */}
               <div>
                 <Label htmlFor="flowRate" required={inputs.solveFor !== 'flowRate'}>
                   Flow Rate ({flowRateUnit}){inputs.solveFor === 'flowRate' && ' [Calc]'}
@@ -188,9 +175,7 @@ export default function PipeFlowCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div
               className={`rounded-2xl p-8 text-center border-2 ${getStatusColor(result.velocityStatus)}`}
             >
@@ -216,7 +201,6 @@ export default function PipeFlowCalculator() {
               )}
             </div>
 
-            {/* All Parameters */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Flow Parameters
@@ -259,7 +243,6 @@ export default function PipeFlowCalculator() {
               </Grid>
             </div>
 
-            {/* Velocity Recommendation */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Recommended Velocity for{' '}
@@ -295,7 +278,6 @@ export default function PipeFlowCalculator() {
               </p>
             </div>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Continuity Equation
@@ -308,7 +290,6 @@ export default function PipeFlowCalculator() {
               </p>
             </div>
 
-            {/* Velocity Warning */}
             <Alert
               variant={result.velocityStatus === 'optimal' ? 'tip' : 'warning'}
               title={result.velocityStatus === 'optimal' ? 'Good design:' : 'Design consideration:'}
@@ -316,7 +297,6 @@ export default function PipeFlowCalculator() {
               {result.velocityWarning}
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Pipe Flow: D=${formatNumber(result.diameter, 1)}${diameterUnit}, V=${formatNumber(result.velocity)}${velocityUnit}, Q=${formatNumber(result.flowRate, 1)}${flowRateUnit}`}

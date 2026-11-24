@@ -1,10 +1,3 @@
-/**
- * Electricity Cost Calculator - React Component
- *
- * Interactive calculator for determining appliance electricity costs.
- * Supports multi-select for calculating total household usage.
- */
-
 import { useState, useMemo } from 'preact/hooks';
 import { calculateHouseholdCost, formatCurrency } from './calculations';
 import {
@@ -38,7 +31,6 @@ export default function ElectricityCostCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Calculate results for all selected appliances
   const result = useMemo(() => {
     if (selectedAppliances.length === 0) {
       return null;
@@ -51,7 +43,6 @@ export default function ElectricityCostCalculator() {
     );
   }, [selectedAppliances, inputs.daysPerMonth, inputs.ratePerKwh, inputs.currency]);
 
-  // Update input
   const updateInput = <K extends keyof ElectricityCostInputs>(
     field: K,
     value: ElectricityCostInputs[K]
@@ -59,12 +50,10 @@ export default function ElectricityCostCalculator() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Toggle appliance selection
   const toggleAppliance = (preset: (typeof APPLIANCE_PRESETS)[0]) => {
     setSelectedAppliances((prev) => {
       const existing = prev.find((a) => a.name === preset.name);
@@ -83,27 +72,22 @@ export default function ElectricityCostCalculator() {
     });
   };
 
-  // Update hours for a specific appliance
   const updateApplianceHours = (name: string, hours: number) => {
     setSelectedAppliances((prev) =>
       prev.map((a) => (a.name === name ? { ...a, hoursPerDay: hours } : a))
     );
   };
 
-  // Remove appliance
   const removeAppliance = (name: string) => {
     setSelectedAppliances((prev) => prev.filter((a) => a.name !== name));
   };
 
-  // Clear all
   const clearAll = () => {
     setSelectedAppliances([]);
   };
 
-  // Check if appliance is selected
   const isSelected = (name: string) => selectedAppliances.some((a) => a.name === name);
 
-  // Group presets by category
   const presetsByCategory = APPLIANCE_PRESETS.reduce(
     (acc, preset) => {
       if (!acc[preset.category]) {
@@ -127,7 +111,6 @@ export default function ElectricityCostCalculator() {
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Electricity Costs"
           subtitle="Select multiple appliances to calculate total household usage"
@@ -135,9 +118,7 @@ export default function ElectricityCostCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Electricity Rate */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="ratePerKwh" required>
@@ -175,7 +156,6 @@ export default function ElectricityCostCalculator() {
               </div>
             </Grid>
 
-            {/* Appliance Selection */}
             <div>
               <div className="flex items-center justify-between mb-3">
                 <Label>Select Appliances</Label>
@@ -215,7 +195,6 @@ export default function ElectricityCostCalculator() {
               </div>
             </div>
 
-            {/* Selected Appliances List */}
             {selectedAppliances.length > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-4">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
@@ -275,10 +254,8 @@ export default function ElectricityCostCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           {result ? (
             <div className="space-y-6">
-              {/* Primary Result */}
               <ResultCard
                 label="Total Monthly Cost"
                 value={formatCurrency(result.totalCostPerMonth, inputs.currency)}
@@ -295,7 +272,6 @@ export default function ElectricityCostCalculator() {
                 }
               />
 
-              {/* Summary Metrics */}
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <MetricCard
                   label="Total Power"
@@ -319,7 +295,6 @@ export default function ElectricityCostCalculator() {
                 />
               </Grid>
 
-              {/* Breakdown Table */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cost Breakdown by Appliance
@@ -357,7 +332,6 @@ export default function ElectricityCostCalculator() {
                           </td>
                         </tr>
                       ))}
-                      {/* Total Row */}
                       <tr className="bg-yellow-900/30 font-semibold">
                         <td className="py-2 pr-4">Total</td>
                         <td className="text-right py-2 px-2 tabular-nums">{result.totalWatts}W</td>
@@ -377,7 +351,6 @@ export default function ElectricityCostCalculator() {
                 </div>
               </div>
 
-              {/* Energy Context */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Energy Usage Context
@@ -404,14 +377,12 @@ export default function ElectricityCostCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Energy saving tip:">
                 The biggest energy consumers in most homes are heating/cooling, water heaters, and
                 dryers. Consider energy-efficient alternatives and smart power strips to reduce
                 standby power.
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Household electricity: ${formatCurrency(result.totalCostPerMonth, inputs.currency)}/month (${formatCurrency(result.totalCostPerYear, inputs.currency, 0)}/year) for ${selectedAppliances.length} appliances - ${result.totalKwhPerMonth} kWh`}

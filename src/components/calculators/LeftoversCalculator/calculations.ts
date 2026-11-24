@@ -1,16 +1,6 @@
-/**
- * Leftovers Calculator - Calculation Logic
- *
- * Looks up USDA food safety data by food type and storage method,
- * calculates expiry from the prepared date, and determines safety.
- */
-
 import type { LeftoversInputs, LeftoversResult } from './types';
 import { FOOD_SAFETY_DATA } from './types';
 
-/**
- * Calculate leftover food safety results.
- */
 export function calculateLeftovers(inputs: LeftoversInputs): LeftoversResult {
   const { foodCategory, storageMethod, preparedDate } = inputs;
   const entry = FOOD_SAFETY_DATA[foodCategory];
@@ -18,11 +8,9 @@ export function calculateLeftovers(inputs: LeftoversInputs): LeftoversResult {
   const prepared = parseDate(preparedDate);
   const now = new Date();
 
-  // Calculate expiry based on storage method
   const expiryDate = calculateExpiryDate(prepared, storageMethod, entry);
   const expiryDateStr = formatISODate(expiryDate);
 
-  // Calculate days remaining (can be negative if expired)
   const nowMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const expiryMidnight = new Date(
     expiryDate.getFullYear(),
@@ -33,7 +21,6 @@ export function calculateLeftovers(inputs: LeftoversInputs): LeftoversResult {
     (expiryMidnight.getTime() - nowMidnight.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  // For counter storage, check hours-based safety
   let isSafe: boolean;
   if (storageMethod === 'counter') {
     const hoursElapsed = (now.getTime() - prepared.getTime()) / (1000 * 60 * 60);
@@ -55,9 +42,6 @@ export function calculateLeftovers(inputs: LeftoversInputs): LeftoversResult {
   };
 }
 
-/**
- * Calculate expiry date from prepared date and storage method.
- */
 function calculateExpiryDate(
   prepared: Date,
   method: string,
@@ -80,17 +64,11 @@ function calculateExpiryDate(
   return expiry;
 }
 
-/**
- * Parse an ISO date string (YYYY-MM-DD) into a Date at midnight local time.
- */
 function parseDate(dateStr: string): Date {
   const [year, month, day] = dateStr.split('-').map(Number);
   return new Date(year, month - 1, day);
 }
 
-/**
- * Format a Date to ISO date string (YYYY-MM-DD).
- */
 function formatISODate(date: Date): string {
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -98,9 +76,6 @@ function formatISODate(date: Date): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-/**
- * Format a date string for display (e.g. "Mon, Jan 6, 2025").
- */
 export function formatDisplayDate(dateStr: string): string {
   const date = parseDate(dateStr);
   return date.toLocaleDateString('en-US', {
@@ -111,9 +86,6 @@ export function formatDisplayDate(dateStr: string): string {
   });
 }
 
-/**
- * Get a human-readable duration string.
- */
 export function formatDaysRemaining(days: number): string {
   if (days < 0) {
     const absDays = Math.abs(days);

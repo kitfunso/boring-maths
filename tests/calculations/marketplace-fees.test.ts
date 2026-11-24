@@ -1,7 +1,3 @@
-/**
- * MarketplaceFeesCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMarketplaceFees } from '../../src/components/calculators/MarketplaceFees/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MarketplaceFees/types';

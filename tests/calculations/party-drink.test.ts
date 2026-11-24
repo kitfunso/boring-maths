@@ -1,7 +1,3 @@
-/**
- * PartyDrinkCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePartyDrinks } from '../../src/components/calculators/PartyDrinkCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PartyDrinkCalculator/types';

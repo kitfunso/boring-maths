@@ -1,17 +1,8 @@
-/**
- * Shared Data Storage Utilities
- *
- * Handles localStorage persistence with graceful fallbacks.
- */
-
 import type { StoredSharedData, SharedCalculatorData, SharedDataEntry } from './types';
 
 const STORAGE_KEY = 'boring-math-shared-data';
 const CURRENT_VERSION = 1;
 
-/**
- * Check if localStorage is available
- */
 export function isStorageAvailable(): boolean {
   if (typeof window === 'undefined') return false;
 
@@ -25,9 +16,6 @@ export function isStorageAvailable(): boolean {
   }
 }
 
-/**
- * Create empty storage structure
- */
 function createEmptyStorage(): StoredSharedData {
   return {
     version: CURRENT_VERSION,
@@ -36,9 +24,6 @@ function createEmptyStorage(): StoredSharedData {
   };
 }
 
-/**
- * Read stored data with validation
- */
 export function readStoredData(): StoredSharedData | null {
   if (!isStorageAvailable()) return null;
 
@@ -48,7 +33,6 @@ export function readStoredData(): StoredSharedData | null {
 
     const parsed = JSON.parse(raw) as StoredSharedData;
 
-    // Version check - reset if outdated
     if (parsed.version !== CURRENT_VERSION) {
       return null;
     }
@@ -59,9 +43,6 @@ export function readStoredData(): StoredSharedData | null {
   }
 }
 
-/**
- * Write data to storage
- */
 export function writeStoredData(data: StoredSharedData): boolean {
   if (!isStorageAvailable()) return false;
 
@@ -73,9 +54,6 @@ export function writeStoredData(data: StoredSharedData): boolean {
   }
 }
 
-/**
- * Save a single field with metadata
- */
 export function saveField<K extends keyof SharedCalculatorData>(
   key: K,
   value: SharedCalculatorData[K],
@@ -99,9 +77,6 @@ export function saveField<K extends keyof SharedCalculatorData>(
   return writeStoredData(existing);
 }
 
-/**
- * Save multiple fields at once
- */
 export function saveFields(
   fields: Partial<SharedCalculatorData>,
   source: string,
@@ -125,9 +100,6 @@ export function saveFields(
   return writeStoredData(existing);
 }
 
-/**
- * Get a single field entry with metadata
- */
 export function getField<K extends keyof SharedCalculatorData>(
   key: K
 ): SharedDataEntry<NonNullable<SharedCalculatorData[K]>> | undefined {
@@ -137,9 +109,6 @@ export function getField<K extends keyof SharedCalculatorData>(
   return stored.data[key] as SharedDataEntry<NonNullable<SharedCalculatorData[K]>> | undefined;
 }
 
-/**
- * Get multiple fields with metadata
- */
 export function getFields<K extends keyof SharedCalculatorData>(
   keys: readonly K[]
 ): Partial<{ [P in K]: SharedDataEntry<NonNullable<SharedCalculatorData[P]>> }> {
@@ -160,9 +129,6 @@ export function getFields<K extends keyof SharedCalculatorData>(
   return result;
 }
 
-/**
- * Get just the values (without metadata) for specified keys
- */
 export function getFieldValues<K extends keyof SharedCalculatorData>(
   keys: readonly K[]
 ): Partial<Pick<SharedCalculatorData, K>> {
@@ -178,9 +144,6 @@ export function getFieldValues<K extends keyof SharedCalculatorData>(
   return result;
 }
 
-/**
- * Clear all shared data
- */
 export function clearAllData(): boolean {
   if (!isStorageAvailable()) return false;
 
@@ -192,9 +155,6 @@ export function clearAllData(): boolean {
   }
 }
 
-/**
- * Clear specific fields
- */
 export function clearFields(keys: (keyof SharedCalculatorData)[]): boolean {
   const existing = readStoredData();
   if (!existing) return true;
@@ -207,9 +167,6 @@ export function clearFields(keys: (keyof SharedCalculatorData)[]): boolean {
   return writeStoredData(existing);
 }
 
-/**
- * Format relative time for display
- */
 export function formatTimeAgo(timestamp: number): string {
   const seconds = Math.floor((Date.now() - timestamp) / 1000);
 

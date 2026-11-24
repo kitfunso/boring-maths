@@ -1,19 +1,4 @@
 #!/usr/bin/env node
-/**
- * GSC URL Inspection - index coverage state for specific URLs.
- *
- * Uses the URL Inspection API (v1, a DIFFERENT base than the webmasters/v3
- * searchAnalytics API in gsc-pull.mjs); the webmasters.readonly scope and the
- * shared cached token (scripts/seo/.gsc-token.json) are sufficient.
- *
- * Usage:
- *   node scripts/seo/gsc-inspect.mjs <url> [<url> ...]
- *   node scripts/seo/gsc-inspect.mjs --reauth <url>
- *
- * URLs may be full (https://boring-math.com/calculators/x/) or slugs
- * (calculators/x). Always inspects the trailing-slash served form - the
- * slash-less form only describes the 308 redirect.
- */
 
 import { getAccessToken, fail } from './gsc-auth.mjs';
 

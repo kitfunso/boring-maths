@@ -1,7 +1,3 @@
-/**
- * UkSalarySacrificeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSalarySacrifice } from '../../src/components/calculators/UKSalarySacrificeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKSalarySacrificeCalculator/types';

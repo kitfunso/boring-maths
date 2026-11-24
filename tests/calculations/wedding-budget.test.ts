@@ -1,7 +1,3 @@
-/**
- * WeddingBudgetCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateWeddingBudget } from '../../src/components/calculators/WeddingBudget/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/WeddingBudget/types';

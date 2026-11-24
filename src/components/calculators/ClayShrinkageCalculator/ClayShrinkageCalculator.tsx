@@ -1,7 +1,3 @@
-/**
- * Clay Shrinkage Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateClayShrinkage,
@@ -65,7 +61,6 @@ export default function ClayShrinkageCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Calculation Mode */}
           <div className="mb-6">
             <Label>I want to calculate...</Label>
             <ButtonGroup
@@ -79,7 +74,6 @@ export default function ClayShrinkageCalculator() {
             />
           </div>
 
-          {/* Size Input */}
           <div className="mb-6">
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
@@ -111,7 +105,6 @@ export default function ClayShrinkageCalculator() {
             </Grid>
           </div>
 
-          {/* Clay Type */}
           <div className="mb-6">
             <Label htmlFor="clayType">Clay Body</Label>
             <select
@@ -157,7 +150,6 @@ export default function ClayShrinkageCalculator() {
             </select>
           </div>
 
-          {/* Custom Shrinkage */}
           {inputs.clayType === 'custom' && (
             <div className="mb-6">
               <Label htmlFor="shrinkage">Custom Shrinkage Percentage</Label>
@@ -176,9 +168,7 @@ export default function ClayShrinkageCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label={inputs.calculationMode === 'thrown-to-fired' ? 'Fired Size' : 'Throw At Size'}
               value={formatSize(result.resultSize, inputs.unit)}
@@ -189,7 +179,6 @@ export default function ClayShrinkageCalculator() {
               }
             />
 
-            {/* Shrinkage Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Shrinkage"
@@ -213,7 +202,6 @@ export default function ClayShrinkageCalculator() {
               />
             </Grid>
 
-            {/* Quick Reference Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Quick Reference Table ({result.totalShrinkage}% shrinkage)
@@ -244,7 +232,6 @@ export default function ClayShrinkageCalculator() {
               </div>
             </div>
 
-            {/* Cone Temperature Reference */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Cone Temperature Reference
@@ -264,7 +251,6 @@ export default function ClayShrinkageCalculator() {
               </div>
             </div>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Formulas
@@ -275,14 +261,12 @@ export default function ClayShrinkageCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Pottery Tips:">
               Always test your specific clay body - shrinkage varies between batches and brands.
               Make test tiles and measure before and after firing. For lids and matching pieces,
               throw from the same batch of clay on the same day.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${inputs.knownSize}${inputs.unit === 'in' ? '"' : 'cm'} ${inputs.calculationMode === 'thrown-to-fired' ? 'thrown' : 'fired'} → ${formatSize(result.resultSize, inputs.unit)} (${result.totalShrinkage}% shrinkage)`}

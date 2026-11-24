@@ -1,9 +1,3 @@
-"""
-X/Twitter Monitoring
-
-Watches for relevant tweets and suggests replies.
-"""
-
 import json
 import logging
 from datetime import datetime
@@ -20,7 +14,6 @@ STATE_FILE = Path(__file__).parent.parent / "data" / "monitor_state.json"
 
 @dataclass
 class Opportunity:
-    """A tweet that's an opportunity to reply."""
     tweet: Tweet
     matched_keyword: str
     suggested_calculator: str
@@ -28,7 +21,6 @@ class Opportunity:
     relevance_score: float
     
     def to_dict(self) -> dict:
-        """Convert to dictionary."""
         return {
             "tweet_id": self.tweet.id,
             "tweet_text": self.tweet.text,
@@ -45,9 +37,6 @@ class Opportunity:
 
 
 class Monitor:
-    """Monitors X for opportunities to engage."""
-    
-    # Map keywords to calculators
     KEYWORD_CALCULATOR_MAP = {
         "fire calculator": "fire-calculator",
         "retirement calculator": "fire-calculator",
@@ -81,19 +70,10 @@ class Monitor:
     }
     
     def __init__(self, config: dict, client: Optional[XClient] = None, generator: Optional[ContentGenerator] = None):
-        """
-        Initialize the monitor.
-        
-        Args:
-            config: Full config from config.yaml
-            client: Optional X client
-            generator: Optional content generator
-        """
         self.config = config
         self.client = client or get_client()
         self.generator = generator or get_generator(config)
         
-        # Load settings
         monitor_config = config.get("monitor", {})
         self.keywords = monitor_config.get("keywords", list(self.KEYWORD_CALCULATOR_MAP.keys()))
         self.min_likes = monitor_config.get("min_likes", 0)
@@ -104,13 +84,11 @@ class Monitor:
         rate_config = config.get("rate_limits", {})
         self.max_searches = rate_config.get("max_searches_per_15min", 15)
         
-        # Load state
         self.state = self._load_state()
         
         logger.info(f"Monitor initialized with {len(self.keywords)} keywords")
     
     def _load_state(self) -> dict:
-        """Load monitor state from file."""
         if STATE_FILE.exists():
             try:
                 with open(STATE_FILE) as f:
@@ -126,10 +104,8 @@ class Monitor:
         }
     
     def _save_state(self):
-        """Save monitor state to file."""
         STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
         
-        # Keep only recent entries
         self.state["seen_tweets"] = self.state["seen_tweets"][-500:]
         self.state["replied_tweets"] = self.state["replied_tweets"][-200:]
         self.state["opportunities"] = self.state["opportunities"][-50:]
@@ -138,12 +114,9 @@ class Monitor:
             json.dump(self.state, f, indent=2, default=str)
     
     def _get_calculator_for_keyword(self, keyword: str) -> Optional[str]:
-        """Get the best calculator for a keyword."""
-        # Exact match
         if keyword.lower() in self.KEYWORD_CALCULATOR_MAP:
             return self.KEYWORD_CALCULATOR_MAP[keyword.lower()]
         
-        # Partial match
         for kw, calc in self.KEYWORD_CALCULATOR_MAP.items():
             if kw in keyword.lower() or keyword.lower() in kw:
                 return calc
@@ -151,52 +124,37 @@ class Monitor:
         return None
     
     def _calculate_relevance(self, tweet: Tweet, keyword: str) -> float:
-        """
-        Calculate relevance score for a tweet (0-1).
-        
-        Higher scores = better opportunities.
-        """
-        score = 0.5  # Base score
-        
-        # Question marks indicate someone asking for help
+        score = 0.5
         if "?" in tweet.text:
             score += 0.2
         
-        # Engagement signals interest
         if tweet.like_count > 0:
             score += min(0.1, tweet.like_count * 0.01)
         if tweet.reply_count > 0:
             score += min(0.1, tweet.reply_count * 0.02)
         
-        # Author followers (reach)
         if tweet.author_followers > 1000:
             score += 0.1
         if tweet.author_followers > 10000:
             score += 0.1
         
-        # Keyword match quality
         if keyword.lower() in tweet.text.lower():
             score += 0.1
         
         return min(1.0, score)
     
     def _is_valid_opportunity(self, tweet: Tweet) -> tuple[bool, str]:
-        """Check if a tweet is a valid opportunity."""
-        # Already seen/replied
         if tweet.id in self.state["seen_tweets"]:
             return False, "Already seen"
         if tweet.id in self.state["replied_tweets"]:
             return False, "Already replied"
         
-        # Blacklisted author
         if tweet.author_username.lower() in {b.lower() for b in self.blacklist}:
             return False, "Blacklisted author"
         
-        # Minimum followers
         if tweet.author_followers < self.min_followers:
             return False, f"Too few followers ({tweet.author_followers})"
         
-        # Minimum engagement
         if tweet.like_count < self.min_likes:
             return False, f"Too few likes ({tweet.like_count})"
         if tweet.retweet_count < self.min_retweets:
@@ -205,16 +163,6 @@ class Monitor:
         return True, "OK"
     
     def search_opportunities(self, keywords: Optional[list[str]] = None, max_per_keyword: int = 5) -> list[Opportunity]:
-        """
-        Search for engagement opportunities.
-        
-        Args:
-            keywords: Specific keywords (uses config if None)
-            max_per_keyword: Max results per keyword
-            
-        Returns:
-            List of Opportunity objects
-        """
         keywords = keywords or self.keywords
         opportunities = []
         
@@ -227,7 +175,7 @@ class Monitor:
             try:
                 tweets = self.client.search_recent(
                     query=keyword,
-                    max_results=max_per_keyword * 2,  # Extra to account for filtering
+                    max_results=max_per_keyword * 2,
                     min_likes=self.min_likes,
                     min_retweets=self.min_retweets
                 )
@@ -238,7 +186,6 @@ class Monitor:
                         logger.debug(f"Skipping tweet {tweet.id}: {reason}")
                         continue
                     
-                    # Generate suggested reply
                     suggested_reply = self.generator.generate_reply(
                         original_tweet=tweet.text,
                         calculator_slug=calculator
@@ -256,20 +203,16 @@ class Monitor:
                     
                     opportunities.append(opportunity)
                     
-                    # Mark as seen
                     self.state["seen_tweets"].append(tweet.id)
                 
-                # Update last search time for this keyword
                 self.state["last_search"][keyword] = datetime.now().isoformat()
                 
             except Exception as e:
                 logger.error(f"Search failed for '{keyword}': {e}")
                 continue
         
-        # Sort by relevance
         opportunities.sort(key=lambda x: x.relevance_score, reverse=True)
         
-        # Store opportunities
         self.state["opportunities"] = [o.to_dict() for o in opportunities]
         self._save_state()
         
@@ -277,12 +220,10 @@ class Monitor:
         return opportunities
     
     def mark_replied(self, tweet_id: str):
-        """Mark a tweet as replied to."""
         self.state["replied_tweets"].append(tweet_id)
         self._save_state()
     
     def get_pending_opportunities(self) -> list[dict]:
-        """Get stored opportunities that haven't been replied to."""
         replied = set(self.state["replied_tweets"])
         return [
             o for o in self.state["opportunities"]
@@ -290,7 +231,6 @@ class Monitor:
         ]
     
     def get_stats(self) -> dict:
-        """Get monitoring statistics."""
         return {
             "keywords_monitored": len(self.keywords),
             "tweets_seen": len(self.state["seen_tweets"]),
@@ -301,5 +241,4 @@ class Monitor:
 
 
 def get_monitor(config: dict) -> Monitor:
-    """Factory function to get a monitor instance."""
     return Monitor(config)

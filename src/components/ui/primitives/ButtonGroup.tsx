@@ -7,19 +7,12 @@ export interface ButtonGroupOption<T = string> {
 }
 
 export interface ButtonGroupProps<T = string> {
-  /** Options to display */
   options: ButtonGroupOption<T>[];
-  /** Currently selected value */
   value: T;
-  /** Change handler */
   onChange: (value: T) => void;
-  /** Number of columns (default: auto based on options length) */
   columns?: 2 | 3 | 4;
-  /** Size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Accessible label for the group */
   'aria-label'?: string;
-  /** Additional class names */
   className?: string;
 }
 
@@ -35,22 +28,6 @@ const GRID_COLS = {
   4: 'grid-cols-2 sm:grid-cols-4',
 };
 
-/**
- * Toggle button group for selecting one option from a set.
- *
- * @example
- * ```tsx
- * <ButtonGroup
- *   options={[
- *     { value: 'monthly', label: 'Monthly' },
- *     { value: 'biweekly', label: 'Bi-Weekly' },
- *     { value: 'weekly', label: 'Weekly' },
- *   ]}
- *   value={frequency}
- *   onChange={setFrequency}
- * />
- * ```
- */
 export function ButtonGroup<T extends string | number>({
   options,
   value,
@@ -76,7 +53,6 @@ export function ButtonGroup<T extends string | number>({
     }
     if (newIndex !== index) {
       onChange(options[newIndex].value);
-      // Focus the new button
       const btn = document.getElementById(`${groupId}-${newIndex}`);
       btn?.focus();
     }

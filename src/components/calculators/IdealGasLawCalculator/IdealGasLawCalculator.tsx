@@ -1,9 +1,3 @@
-/**
- * Ideal Gas Law Calculator - React Component
- *
- * PV = nRT calculator for gas phase calculations.
- * Solves for any variable given the other three.
- */
 import { calculateIdealGas, formatNumber, getStandardConditions } from './calculations';
 import {
   getDefaultInputs,
@@ -37,7 +31,7 @@ export default function IdealGasLawCalculator() {
 
   const handleUnitChange = (system: UnitSystem) => {
     if (system === inputs.unitSystem) return;
-    void getStandardConditions(system); // Standard conditions available if needed
+    void getStandardConditions(system);
 
     if (system === 'imperial') {
       setInputs((prev) => ({
@@ -101,7 +95,6 @@ export default function IdealGasLawCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -112,7 +105,6 @@ export default function IdealGasLawCalculator() {
               />
             </div>
 
-            {/* Solve For */}
             <div>
               <Label>Solve For</Label>
               <ButtonGroup
@@ -123,7 +115,6 @@ export default function IdealGasLawCalculator() {
               />
             </div>
 
-            {/* Gas Selection */}
             <div>
               <Label htmlFor="gas">Common Gas (optional)</Label>
               <Select
@@ -134,9 +125,7 @@ export default function IdealGasLawCalculator() {
               />
             </div>
 
-            {/* Input Fields */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
-              {/* Pressure */}
               <div>
                 <Label htmlFor="pressure" required={inputs.solveFor !== 'pressure'}>
                   Pressure ({pressureUnit}){inputs.solveFor === 'pressure' && ' [Calculated]'}
@@ -152,7 +141,6 @@ export default function IdealGasLawCalculator() {
                 />
               </div>
 
-              {/* Volume */}
               <div>
                 <Label htmlFor="volume" required={inputs.solveFor !== 'volume'}>
                   Volume ({volumeUnit}){inputs.solveFor === 'volume' && ' [Calculated]'}
@@ -168,7 +156,6 @@ export default function IdealGasLawCalculator() {
                 />
               </div>
 
-              {/* Moles */}
               <div>
                 <Label htmlFor="moles" required={inputs.solveFor !== 'moles'}>
                   Amount (mol)
@@ -185,7 +172,6 @@ export default function IdealGasLawCalculator() {
                 />
               </div>
 
-              {/* Temperature */}
               <div>
                 <Label htmlFor="temperature" required={inputs.solveFor !== 'temperature'}>
                   Temperature ({tempUnit}){inputs.solveFor === 'temperature' && ' [Calculated]'}
@@ -203,7 +189,6 @@ export default function IdealGasLawCalculator() {
               </div>
             </Grid>
 
-            {/* Molar Mass for density */}
             <div>
               <Label htmlFor="molarMass">Molar Mass (g/mol)</Label>
               <Input
@@ -221,9 +206,7 @@ export default function IdealGasLawCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div className="rounded-2xl p-8 text-center border-2 bg-green-950/50 border-green-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 {inputs.solveFor === 'pressure' && 'Pressure'}
@@ -246,7 +229,6 @@ export default function IdealGasLawCalculator() {
               </p>
             </div>
 
-            {/* All Values Summary */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 State Variables
@@ -291,7 +273,6 @@ export default function IdealGasLawCalculator() {
               </Grid>
             </div>
 
-            {/* Additional Properties */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -311,7 +292,6 @@ export default function IdealGasLawCalculator() {
               </div>
             </Grid>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Ideal Gas Law
@@ -322,7 +302,6 @@ export default function IdealGasLawCalculator() {
               <p className="text-sm text-[var(--color-muted)] text-center">R = 8.314 J/(mol·K)</p>
             </div>
 
-            {/* Validity Note */}
             <Alert
               variant={result.compressibilityNote.includes('reasonable') ? 'tip' : 'warning'}
               title="Accuracy Note:"
@@ -332,7 +311,6 @@ export default function IdealGasLawCalculator() {
               other equations of state.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`PV=nRT: P=${formatNumber(result.pressure)}${pressureUnit}, V=${formatNumber(result.volume)}${volumeUnit}, n=${formatNumber(result.moles, 3)}mol, T=${formatNumber(result.temperatureK, 1)}K`}

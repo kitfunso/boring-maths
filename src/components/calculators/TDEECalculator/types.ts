@@ -1,9 +1,3 @@
-/**
- * TDEE Calculator - Type Definitions
- *
- * Total Daily Energy Expenditure using Mifflin-St Jeor equation.
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type Sex = 'male' | 'female';
 export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'veryActive';
@@ -22,7 +16,7 @@ export interface TDEEInputs {
 
 export interface MacroSplit {
   name: string;
-  protein: number; // grams
+  protein: number;
   carbs: number;
   fat: number;
   proteinPct: number;

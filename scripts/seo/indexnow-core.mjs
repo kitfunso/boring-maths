@@ -3,7 +3,6 @@ import path from 'node:path';
 
 const KEY_FILE = /^([a-f0-9]{32})\.txt$/;
 
-// The key file in public/ is the only copy of the key, so the script and the deployed site cannot drift.
 export function findKey(publicDir) {
   const keys = fs
     .readdirSync(publicDir)

@@ -1,7 +1,3 @@
-/**
- * CollegeRoiCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCollegeROI } from '../../src/components/calculators/CollegeROI/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CollegeROI/types';

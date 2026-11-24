@@ -4,8 +4,6 @@ export const meta = {
   phases: [{ title: 'Build' }],
 }
 
-// Each agent creates ONLY its own new files. It must NOT touch src/lib/calculators.ts
-// (shared file -> the orchestrator merges all registry entries centrally after this runs).
 const SPECS = [
   { name: 'UK Mortgage Affordability', Name: 'UKMortgageAffordabilityCalculator', slug: 'uk-mortgage-affordability-calculator', key: 'Mortgage Affordability' },
   { name: 'Mortgage Overpayment', Name: 'MortgageOverpaymentCalculator', slug: 'mortgage-overpayment-calculator', key: 'Mortgage Overpayment' },

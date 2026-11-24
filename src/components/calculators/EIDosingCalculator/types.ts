@@ -1,46 +1,34 @@
-/**
- * EI Dosing Calculator Types
- * Estimative Index method for planted aquarium fertilization
- */
-
 export interface EIDosingInputs {
   tankVolume: number;
   volumeUnit: 'gallons' | 'liters';
   dosingSched: 'ei-standard' | 'ei-low-light' | 'pps-pro' | 'custom';
-  // Custom dosing targets (ppm per week)
   nitrateTarget: number;
   phosphateTarget: number;
   potassiumTarget: number;
   ironTarget: number;
-  // Fertilizer concentrations
   fertilizerType: 'dry' | 'liquid';
   waterChangePercent: number;
   waterChangeFrequency: 'weekly' | 'biweekly';
 }
 
 export interface EIDosingResults {
-  // Per dose amounts (3x per week for macros, 3x for micros)
   kno3PerDose: number;
   kh2po4PerDose: number;
   k2so4PerDose: number;
   mgso4PerDose: number;
   csmBPerDose: number;
-  // Weekly totals
   kno3Weekly: number;
   kh2po4Weekly: number;
   k2so4Weekly: number;
   mgso4Weekly: number;
   csmBWeekly: number;
-  // Target ppms achieved
   nitrateAchieved: number;
   phosphateAchieved: number;
   potassiumAchieved: number;
   ironAchieved: number;
-  // Display unit
   doseUnit: string;
 }
 
-// Dosing schedule presets (ppm targets per week)
 export const DOSING_SCHEDULES = [
   {
     value: 'ei-standard',
@@ -80,7 +68,6 @@ export const DOSING_SCHEDULES = [
   },
 ];
 
-// Common fertilizer compounds and their nutrient content
 export const FERTILIZERS = {
   kno3: {
     name: 'Potassium Nitrate (KNO3)',
@@ -111,7 +98,6 @@ export const FERTILIZERS = {
   },
 };
 
-// Tank size presets
 export const TANK_PRESETS = [
   { label: '10 gallon', gallons: 10 },
   { label: '20 gallon', gallons: 20 },

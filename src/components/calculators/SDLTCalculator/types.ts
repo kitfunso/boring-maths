@@ -1,5 +1,3 @@
-/** SDLT Calculator types: Stamp Duty Land Tax for England and Northern Ireland, including first-time buyer relief, additional property surcharge, and non-resident surcharge. */
-
 export type PropertyLocation = 'england' | 'northern-ireland';
 export type BuyerType = 'first-time' | 'home-mover' | 'additional';
 
@@ -27,7 +25,6 @@ export interface SDLTCalculatorResult {
   baseTax: number;
 }
 
-/** SDLT standard bands (England/NI 2026/27, from 1 April 2025). */
 export const SDLT_STANDARD_BANDS: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 125000, rate: 0 },
   { from: 125001, to: 250000, rate: 0.02 },
@@ -36,22 +33,17 @@ export const SDLT_STANDARD_BANDS: Array<{ from: number; to: number; rate: number
   { from: 1500001, to: Infinity, rate: 0.12 },
 ];
 
-/** SDLT first-time buyer bands; relief only applies to properties up to 500,000. */
 export const SDLT_FIRST_TIME_BANDS: Array<{ from: number; to: number; rate: number }> = [
   { from: 0, to: 300000, rate: 0 },
   { from: 300001, to: 500000, rate: 0.05 },
 ];
 
-/** First-time buyer threshold; above this, standard rates apply. */
 export const FIRST_TIME_BUYER_THRESHOLD = 500000;
 
-/** Additional property surcharge rate (5% on entire price, from 31 October 2024). */
 export const ADDITIONAL_PROPERTY_SURCHARGE_RATE = 0.05;
 
-/** Non-resident surcharge rate (2% on entire price). */
 export const NON_RESIDENT_SURCHARGE_RATE = 0.02;
 
-/** Both surcharges apply only to purchases of £40,000+ (gov.uk floor). Keep in sync with UKStampDutyCalculator/calculations.ts. */
 export const SURCHARGE_MIN_PRICE = 40000;
 
 export const LOCATION_LABELS: Record<PropertyLocation, string> = {

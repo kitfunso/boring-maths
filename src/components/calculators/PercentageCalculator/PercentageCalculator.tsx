@@ -1,12 +1,3 @@
-/**
- * Percentage Calculator - React Component
- *
- * Handles multiple percentage calculations:
- * - What is X% of Y?
- * - X is what % of Y?
- * - Percentage change from X to Y
- * - X increased/decreased by Y%
- */
 import { calculate, formatNumber, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -54,7 +45,6 @@ export default function PercentageCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Mode Selection */}
           <div className="mb-8">
             <Label>Calculation Type</Label>
             <ButtonGroup
@@ -68,7 +58,6 @@ export default function PercentageCalculator() {
             </p>
           </div>
 
-          {/* Dynamic Input Fields Based on Mode */}
           <div className="space-y-6 mb-8">
             {inputs.mode === 'percentOf' && (
               <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
@@ -226,9 +215,7 @@ export default function PercentageCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label={result.primaryLabel}
               value={result.formattedPrimary}
@@ -241,7 +228,6 @@ export default function PercentageCalculator() {
               }
             />
 
-            {/* Secondary Metrics */}
             {result.secondaryResult !== undefined && (
               <Grid responsive={{ sm: 2, md: 2 }} gap="md">
                 <MetricCard
@@ -266,7 +252,6 @@ export default function PercentageCalculator() {
               </Grid>
             )}
 
-            {/* Common Percentages Table (for percentOf mode) */}
             {result.commonPercentages && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -293,7 +278,6 @@ export default function PercentageCalculator() {
               </div>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Quick tip:">
               {inputs.mode === 'percentOf' &&
                 'To find 10% of any number, just move the decimal point one place left.'}
@@ -305,7 +289,6 @@ export default function PercentageCalculator() {
                 "Tip: To reverse a percentage change, you need a different percentage. A 20% decrease followed by 20% increase doesn't return to the original."}
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${result.primaryLabel} = ${result.formattedPrimary}`}

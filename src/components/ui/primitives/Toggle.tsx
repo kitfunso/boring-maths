@@ -2,19 +2,12 @@ import { useId } from 'preact/hooks';
 import { useTheme } from '../theme/ThemeContext';
 
 export interface ToggleProps {
-  /** Controlled checked state */
   checked: boolean;
-  /** Change handler */
   onChange: (checked: boolean) => void;
-  /** Label text */
   label: string;
-  /** Size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Accessible description (shown to screen readers) */
   description?: string;
-  /** Additional class names for container */
   className?: string;
-  /** Disabled state */
   disabled?: boolean;
 }
 
@@ -36,18 +29,6 @@ const SIZE_CLASSES = {
   },
 };
 
-/**
- * Accessible toggle switch component.
- *
- * @example
- * ```tsx
- * <Toggle
- *   checked={includeInsurance}
- *   onChange={setIncludeInsurance}
- *   label="Include pet insurance"
- * />
- * ```
- */
 export function Toggle({
   checked,
   onChange,
@@ -110,9 +91,6 @@ export function Toggle({
             .replace(/\s+/g, ' ')}
         />
       </button>
-      {/* No onClick here: htmlFor already forwards label clicks to the button.
-          A duplicate handler made every label click fire twice, flipping the
-          toggle on and straight back off. */}
       <label
         htmlFor={toggleId}
         className={`text-[var(--color-cream)] ${disabled ? 'opacity-50' : 'cursor-pointer'}`}

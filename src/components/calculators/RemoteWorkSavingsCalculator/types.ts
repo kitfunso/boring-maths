@@ -1,5 +1,3 @@
-/** Remote Work Savings Calculator types: savings from working remotely vs commuting, covering gas, car wear, parking, food, clothing, and time value. */
-
 import { type Currency } from '../../../lib/regions';
 
 export type WorkArrangement = 'full-remote' | 'hybrid' | 'office';
@@ -8,26 +6,26 @@ export type CommuteType = 'car' | 'public-transit' | 'mixed';
 
 export interface RemoteWorkSavingsInputs {
   commuteType: CommuteType;
-  commuteDistanceMiles: number; // One-way distance
-  commuteTimeMinutes: number; // One-way time
-  officeDaysPerWeek: number; // Days commuting to office
-  weeksPerYear: number; // Typically 48-50
+  commuteDistanceMiles: number;
+  commuteTimeMinutes: number;
+  officeDaysPerWeek: number;
+  weeksPerYear: number;
 
   gasPricePerGallon: number;
   vehicleMpg: number;
-  maintenanceCostPerMile: number; // Typically $0.05-0.10
+  maintenanceCostPerMile: number;
   parkingCostDaily: number;
   tollsDaily: number;
 
   transitCostDaily: number;
 
-  workLunchCostDaily: number; // Eating out vs home
+  workLunchCostDaily: number;
   homeLunchCostDaily: number;
   workClothesBudgetMonthly: number;
   dryCleaningMonthly: number;
   coffeeAtWorkDaily: number;
 
-  hourlyRate: number; // To calculate value of time saved
+  hourlyRate: number;
 
   includeEnvironmentalImpact: boolean;
 
@@ -63,14 +61,14 @@ export interface EnvironmentalImpact {
   gallonsSavedAnnual: number;
   co2PoundsSavedAnnual: number;
   co2TonsSavedAnnual: number;
-  treesEquivalent: number; // Number of trees to offset the same CO2
+  treesEquivalent: number;
 }
 
 export interface TimeAnalysis {
-  dailyCommuteMinutes: number; // Round trip
+  dailyCommuteMinutes: number;
   weeklyCommuteHours: number;
   annualCommuteHours: number;
-  annualCommuteDays: number; // In 8-hour workday equivalents
+  annualCommuteDays: number;
   valueOfTimeSaved: number;
 }
 

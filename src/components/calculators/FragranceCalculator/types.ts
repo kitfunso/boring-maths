@@ -1,12 +1,7 @@
-/**
- * Fragrance Load Calculator Types
- * Calculate fragrance oil amounts for candle making
- */
-
 export interface FragranceInputs {
   waxWeight: number;
   weightUnit: 'ounces' | 'grams' | 'pounds';
-  fragranceLoad: number; // percentage
+  fragranceLoad: number;
   waxType: string;
   numberOfCandles: number;
 }
@@ -21,7 +16,6 @@ export interface FragranceResults {
   maxAllowed: number;
 }
 
-// Wax types with their properties
 export const WAX_TYPES: {
   value: string;
   label: string;
@@ -94,7 +88,6 @@ export const WAX_TYPES: {
   },
 ];
 
-// Common container sizes (in oz of wax they hold)
 export const CONTAINER_SIZES: { label: string; waxOz: number }[] = [
   { label: '4 oz Tin', waxOz: 3 },
   { label: '6 oz Tin', waxOz: 5 },
@@ -106,7 +99,6 @@ export const CONTAINER_SIZES: { label: string; waxOz: number }[] = [
   { label: '3-wick 14 oz', waxOz: 11 },
 ];
 
-// Fragrance notes for reference
 export const FRAGRANCE_NOTES: { category: string; examples: string[] }[] = [
   { category: 'Citrus', examples: ['Lemon', 'Orange', 'Grapefruit', 'Bergamot'] },
   { category: 'Floral', examples: ['Rose', 'Jasmine', 'Lavender', 'Gardenia'] },

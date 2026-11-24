@@ -1,7 +1,3 @@
-/**
- * House Flip Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface HouseFlipInputs {

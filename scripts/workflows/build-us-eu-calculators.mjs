@@ -4,7 +4,6 @@ export const meta = {
   phases: [{ title: 'Build' }],
 }
 
-// Each agent creates ONLY its own new files. It must NOT touch src/lib/calculators.ts.
 const SPECS = [
   { name: 'US Sales Tax Calculator', Name: 'USSalesTaxCalculator', slug: 'us-sales-tax-calculator', section: '1. US Sales Tax Calculator', region: 'US' },
   { name: 'US Auto Loan Calculator', Name: 'USAutoLoanCalculator', slug: 'us-auto-loan-calculator', section: '2. US Auto Loan Calculator', region: 'US' },

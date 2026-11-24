@@ -1,7 +1,3 @@
-/**
- * Inflation Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateInflation,
@@ -48,7 +44,6 @@ export default function InflationCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Amount Input */}
             <div>
               <Label htmlFor="amount" required>
                 Amount
@@ -65,7 +60,6 @@ export default function InflationCalculator() {
               />
             </div>
 
-            {/* Year Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="startYear" required>
@@ -95,7 +89,6 @@ export default function InflationCalculator() {
               </div>
             </Grid>
 
-            {/* Custom Rate Toggle */}
             <div className="bg-[var(--color-night)] rounded-xl p-4">
               <Checkbox
                 id="useCustomRate"
@@ -123,7 +116,6 @@ export default function InflationCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             <ResultCard
               label={
@@ -140,7 +132,6 @@ export default function InflationCalculator() {
               }
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Original Amount"
@@ -166,7 +157,6 @@ export default function InflationCalculator() {
               />
             </Grid>
 
-            {/* Purchasing Power Visual */}
             {isForward && result.purchasingPowerLost > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -196,7 +186,6 @@ export default function InflationCalculator() {
               </div>
             )}
 
-            {/* Historical Decade Averages */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 US Inflation by Decade
@@ -234,7 +223,6 @@ export default function InflationCalculator() {
               </p>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Understanding Inflation:">
               Inflation measures how much prices increase over time, reducing purchasing power. The
               Federal Reserve targets 2% annual inflation. Historical US average is about 3.3% since
@@ -242,7 +230,6 @@ export default function InflationCalculator() {
               economically challenging.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.amount)} in ${inputs.startYear} = ${formatCurrency(result.adjustedAmount)} in ${inputs.endYear} (${formatPercent(result.totalInflation)} inflation over ${result.yearsElapsed} years)`}

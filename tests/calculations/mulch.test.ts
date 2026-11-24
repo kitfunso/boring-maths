@@ -1,7 +1,3 @@
-/**
- * MulchCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMulch } from '../../src/components/calculators/MulchCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MulchCalculator/types';

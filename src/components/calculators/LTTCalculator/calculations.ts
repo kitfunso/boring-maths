@@ -1,8 +1,3 @@
-/**
- * Wales Land Transaction Tax (LTT) Calculations
- * 2026/27 rates (main rates from 10 Oct 2022, higher rates from 11 Dec 2024)
- */
-
 import type { LTTInputs, LTTResult, LTTBand } from './types';
 
 const LTT_STANDARD = [
@@ -22,10 +17,6 @@ const LTT_HIGHER = [
   { from: 1500001, to: Infinity, rate: 0.17 },
 ];
 
-// Higher rates apply when the property is worth £40,000 or more (gov.wales).
-// Keep in sync with UKStampDutyCalculator/calculations.ts.
-// Note: LTT has NO non-resident surcharge - the 2% surcharge is SDLT-only
-// (England & NI; gov.uk non-resident SDLT guidance).
 const HIGHER_RATES_MIN_PRICE = 40000;
 
 function calculateBandTax(
@@ -68,7 +59,6 @@ export function calculateLTT(inputs: LTTInputs): LTTResult {
   const taxBands = calculateBandTax(propertyPrice, bands);
   const baseTax = taxBands.reduce((sum, b) => sum + b.taxDue, 0);
 
-  // Calculate surcharge amounts for display
   let higherRatesSurcharge = 0;
   if (buyerType === 'additional') {
     const standardBands = calculateBandTax(propertyPrice, LTT_STANDARD);

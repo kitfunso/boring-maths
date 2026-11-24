@@ -1,8 +1,3 @@
-/**
- * EV Charging Cost Calculator - Preact Component
- *
- * Estimate the cost to charge an electric vehicle. UK-first: all money is GBP.
- */
 import { calculateEVChargingCostCalculator } from './calculations';
 import {
   getDefaultInputs,
@@ -48,7 +43,6 @@ export default function EVChargingCostCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                 Battery and Charge
@@ -159,7 +153,6 @@ export default function EVChargingCostCalculator() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {result.isValid ? (
                 <ResultCard

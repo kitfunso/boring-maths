@@ -1,7 +1,3 @@
-/**
- * Discount Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateDiscount,
@@ -70,7 +66,6 @@ export default function DiscountCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Calculation Mode */}
             <div>
               <Label>What do you want to calculate?</Label>
               <div className="space-y-2">
@@ -91,7 +86,6 @@ export default function DiscountCalculator() {
               </div>
             </div>
 
-            {/* Original Price - always shown */}
             <div>
               <Label htmlFor="originalPrice" required>
                 Original Price
@@ -108,7 +102,6 @@ export default function DiscountCalculator() {
               />
             </div>
 
-            {/* Mode-specific inputs */}
             {inputs.mode === 'percentOff' && (
               <div>
                 <Label htmlFor="discountPercent" required>
@@ -124,7 +117,6 @@ export default function DiscountCalculator() {
                   value={inputs.discountPercent}
                   onChange={(e) => updateInput('discountPercent', Number(e.currentTarget.value))}
                 />
-                {/* Quick discount buttons */}
                 <div className="flex flex-wrap gap-2 mt-3">
                   {[10, 20, 25, 30, 50, 75].map((percent) => (
                     <button
@@ -182,11 +174,9 @@ export default function DiscountCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.originalPrice > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label={inputs.mode === 'percentOff' ? 'Sale Price' : 'Discount'}
                   value={
@@ -213,7 +203,6 @@ export default function DiscountCalculator() {
                   }
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Original"
@@ -239,7 +228,6 @@ export default function DiscountCalculator() {
                   />
                 </Grid>
 
-                {/* Discount Comparison Table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Quick Reference for {formatCurrency(inputs.originalPrice, inputs.currency)}
@@ -280,7 +268,6 @@ export default function DiscountCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.originalPrice > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

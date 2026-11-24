@@ -1,8 +1,3 @@
-/**
- * ABV Calculator Types
- * For homebrewing beer, wine, mead, cider
- */
-
 export interface ABVInputs {
   originalGravity: number;
   finalGravity: number;
@@ -45,22 +40,18 @@ export const BEVERAGE_TYPES: {
 ];
 
 export const COMMON_STYLES: { name: string; type: BeverageType; og: number; fg: number }[] = [
-  // Beers
   { name: 'Light Lager', type: 'beer', og: 1.04, fg: 1.008 },
   { name: 'Pale Ale', type: 'beer', og: 1.05, fg: 1.012 },
   { name: 'IPA', type: 'beer', og: 1.065, fg: 1.012 },
   { name: 'Stout', type: 'beer', og: 1.055, fg: 1.015 },
   { name: 'Belgian Tripel', type: 'beer', og: 1.08, fg: 1.01 },
   { name: 'Imperial Stout', type: 'beer', og: 1.09, fg: 1.02 },
-  // Wines
   { name: 'Dry White Wine', type: 'wine', og: 1.085, fg: 0.992 },
   { name: 'Dry Red Wine', type: 'wine', og: 1.095, fg: 0.995 },
   { name: 'Sweet Wine', type: 'wine', og: 1.11, fg: 1.02 },
-  // Meads
   { name: 'Dry Mead', type: 'mead', og: 1.1, fg: 0.996 },
   { name: 'Semi-Sweet Mead', type: 'mead', og: 1.11, fg: 1.01 },
   { name: 'Sweet Mead', type: 'mead', og: 1.13, fg: 1.025 },
-  // Ciders
   { name: 'Dry Cider', type: 'cider', og: 1.055, fg: 1.0 },
   { name: 'Sweet Cider', type: 'cider', og: 1.06, fg: 1.015 },
 ];

@@ -1,25 +1,8 @@
-/**
- * DataExportIndicator Component
- *
- * Shows brief feedback when data is saved for other calculators.
- * Appears for ~2 seconds then fades out.
- */
-
 export interface DataExportIndicatorProps {
-  /** Whether the indicator should be visible */
   visible: boolean;
-  /** Additional class names */
   className?: string;
 }
 
-/**
- * Visual indicator that data was saved for use in other calculators.
- *
- * @example
- * ```tsx
- * <DataExportIndicator visible={sharedData.justExported} />
- * ```
- */
 export function DataExportIndicator({ visible, className = '' }: DataExportIndicatorProps) {
   if (!visible) return null;
 

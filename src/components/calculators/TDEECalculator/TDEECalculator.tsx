@@ -1,6 +1,3 @@
-/**
- * TDEE Calculator - Preact Component
- */
 import { calculateTDEE } from './calculations';
 import {
   getDefaultInputs,
@@ -74,7 +71,6 @@ export default function TDEECalculator() {
         />
 
         <div class="p-6 space-y-6">
-          {/* Unit system */}
           <ButtonGroup
             options={[
               { value: 'metric', label: 'Metric (kg/cm)' },
@@ -84,7 +80,6 @@ export default function TDEECalculator() {
             onChange={(v) => handleUnitChange(v as UnitSystem)}
           />
 
-          {/* Sex */}
           <div>
             <Label>Sex</Label>
             <ButtonGroup
@@ -98,7 +93,6 @@ export default function TDEECalculator() {
           </div>
 
           <Grid cols={2}>
-            {/* Age */}
             <div>
               <Label required>Age</Label>
               <Input
@@ -110,7 +104,6 @@ export default function TDEECalculator() {
               />
             </div>
 
-            {/* Weight */}
             <div>
               <Label required>
                 {inputs.unitSystem === 'metric' ? 'Weight (kg)' : 'Weight (lbs)'}
@@ -130,7 +123,6 @@ export default function TDEECalculator() {
             </div>
           </Grid>
 
-          {/* Height */}
           {inputs.unitSystem === 'metric' ? (
             <div>
               <Label required>Height (cm)</Label>
@@ -167,7 +159,6 @@ export default function TDEECalculator() {
             </Grid>
           )}
 
-          {/* Activity Level */}
           <div>
             <Label required>Activity Level</Label>
             <Select
@@ -182,7 +173,6 @@ export default function TDEECalculator() {
 
           <Divider />
 
-          {/* Results */}
           <ResultCard
             label="Your TDEE"
             value={`${result.tdee.toLocaleString()} cal/day`}
@@ -207,7 +197,6 @@ export default function TDEECalculator() {
             />
           </Grid>
 
-          {/* Macro Splits */}
           <div>
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Macro Splits (at maintenance)</h3>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">

@@ -1,7 +1,3 @@
-/**
- * EI Dosing Calculator Component
- * Estimative Index fertilization for planted aquariums
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { EIDosingInputs } from './types';
@@ -34,7 +30,6 @@ export function EIDosingCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Tank Setup</h2>
@@ -210,7 +205,6 @@ export function EIDosingCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 p-6 ring-1 ring-cyan-500/30">
           <h2 className="mb-4 text-lg font-semibold text-cyan-300">Per Dose (3x weekly)</h2>

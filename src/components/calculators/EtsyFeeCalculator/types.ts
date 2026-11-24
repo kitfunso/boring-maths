@@ -1,10 +1,7 @@
-/** Etsy/eBay Fee Calculator - type definitions. Calculates marketplace fees for Etsy and eBay sellers for a side-by-side profitability comparison. */
-
 import type { Currency } from '../../../lib/regions';
 
 export type Platform = 'etsy' | 'ebay' | 'both';
 
-/** eBay category IDs; final value fee % varies by category (2024 rates). */
 export type EbayCategory =
   | 'most_categories'
   | 'books_movies_music'
@@ -37,7 +34,6 @@ export interface EtsyFeeInputs {
 
   shippingCost: number;
 
-  /** Cost of goods sold (materials, supplies, etc.) */
   itemCost: number;
 
   platform: Platform;
@@ -46,51 +42,34 @@ export interface EtsyFeeInputs {
 
   etsyOffsiteAds: boolean;
 
-  /** Number of items in order (for Etsy listing fee) */
   quantity: number;
 }
 
-/**
- * Fee breakdown for a single platform
- */
 export interface PlatformFeeBreakdown {
-  /** Platform name */
   platform: 'Etsy' | 'eBay';
 
-  /** Total revenue (sale price + shipping) */
   totalRevenue: number;
 
-  /** Listing fee */
   listingFee: number;
 
-  /** Transaction/Final Value fee */
   transactionFee: number;
 
-  /** Payment processing fee */
   paymentProcessingFee: number;
 
-  /** Offsite ads fee (Etsy only) */
   offsiteAdsFee: number;
 
-  /** Per-order fee (eBay) */
   perOrderFee: number;
 
-  /** Total fees */
   totalFees: number;
 
-  /** Effective fee percentage */
   effectiveFeeRate: number;
 
-  /** Net revenue after fees */
   netRevenue: number;
 
-  /** Total costs (fees + shipping + item cost) */
   totalCosts: number;
 
-  /** Net profit after all costs */
   netProfit: number;
 
-  /** Profit margin percentage */
   profitMargin: number;
 }
 
@@ -110,7 +89,6 @@ export interface EtsyFeeResult {
   profitDifference: number;
 }
 
-/** Fee structure constants (2024). */
 export const FEE_STRUCTURES = {
   etsy: {
     listingFee: 0.2, // $0.20 per listing

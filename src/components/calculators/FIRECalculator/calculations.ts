@@ -1,19 +1,3 @@
-/**
- * FIRE Calculator - Calculation Logic
- *
- * Implements Financial Independence, Retire Early calculations including:
- * - Traditional FIRE (25x rule based on 4% safe withdrawal rate)
- * - Lean FIRE (minimal expenses)
- * - Fat FIRE (comfortable lifestyle)
- * - Coast FIRE (let compound interest do the work)
- *
- * Based on research from:
- * - Trinity Study (4% rule)
- * - Mr. Money Mustache
- * - JL Collins "Simple Path to Wealth"
- * - Early Retirement Now research
- */
-
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
 import {
   type FIRECalculatorInputs,
@@ -25,9 +9,6 @@ import {
   type FIREType,
 } from './types';
 
-/**
- * Calculate all FIRE metrics
- */
 export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResult {
   const {
     currentAge,
@@ -43,29 +24,23 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
     currency,
   } = inputs;
 
-  // Calculate real return (return minus inflation)
   const realReturn = (1 + expectedReturn) / (1 + inflationRate) - 1;
   const annualSavings = monthlySavings * 12;
 
-  // Calculate FIRE numbers for each variant
   const fireNumbers = calculateFIRENumbers(
     annualExpenses,
     desiredRetirementExpenses,
     safeWithdrawalRate
   );
 
-  // Primary FIRE target based on desired retirement expenses
   const totalNeeded = desiredRetirementExpenses / safeWithdrawalRate;
 
-  // Calculate years to FIRE
   const yearsToFIRE = calculateYearsToFIRE(currentSavings, annualSavings, totalNeeded, realReturn);
 
   const ageAtFIRE = currentAge + yearsToFIRE;
 
-  // Calculate current progress
   const currentProgress = Math.min((currentSavings / totalNeeded) * 100, 100);
 
-  // Generate projections
   const maxYears = Math.max(50, yearsToFIRE + 10);
   const projections = generateProjections(
     currentAge,
@@ -76,7 +51,6 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
     maxYears
   );
 
-  // Calculate milestones
   const milestones = calculateMilestones(
     currentAge,
     currentSavings,
@@ -85,17 +59,15 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
     fireNumbers
   );
 
-  // Calculate Coast FIRE
   const { coastFIREAge, coastFIREAmount } = calculateCoastFIRE(
     currentAge,
     currentSavings,
     annualSavings,
     fireNumbers.regular,
     realReturn,
-    65 // Traditional retirement age for coast calculation
+    65
   );
 
-  // Savings rate analysis
   const savingsRate = analyzeSavingsRate(
     annualIncome,
     annualSavings,
@@ -105,7 +77,6 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
     targetRetirementAge - currentAge
   );
 
-  // Calculate totals at FIRE
   const { totalContributions, totalGrowth } = calculateTotalsAtFIRE(
     currentSavings,
     annualSavings,
@@ -113,7 +84,6 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
     yearsToFIRE
   );
 
-  // Monthly figures
   const monthlyPassiveIncome = (totalNeeded * safeWithdrawalRate) / 12;
   const monthlyExpensesInRetirement = desiredRetirementExpenses / 12;
 
@@ -142,21 +112,15 @@ export function calculateFIRE(inputs: FIRECalculatorInputs): FIRECalculatorResul
   };
 }
 
-/**
- * Calculate FIRE numbers for each variant
- */
 function calculateFIRENumbers(
   currentExpenses: number,
   desiredExpenses: number,
   swr: number
 ): FIRENumbers {
-  // Lean FIRE: 70% of current expenses (bare minimum)
   const leanExpenses = currentExpenses * 0.7;
 
-  // Regular FIRE: Based on desired retirement expenses
   const regularExpenses = desiredExpenses;
 
-  // Fat FIRE: 150% of current expenses (comfortable/luxurious)
   const fatExpenses = currentExpenses * 1.5;
 
   return {
@@ -167,10 +131,6 @@ function calculateFIRENumbers(
   };
 }
 
-/**
- * Calculate years to reach FIRE target
- * Using the future value of annuity formula solved for time
- */
 function calculateYearsToFIRE(
   currentSavings: number,
   annualSavings: number,
@@ -183,7 +143,6 @@ function calculateYearsToFIRE(
     return (target - currentSavings) / annualSavings;
   }
 
-  // Binary search for years (more accurate than analytical solution for this case)
   let low = 0;
   let high = 100;
 
@@ -201,9 +160,6 @@ function calculateYearsToFIRE(
   return Math.round(high * 10) / 10;
 }
 
-/**
- * Calculate future value with compound interest and regular contributions
- */
 function calculateFutureValue(
   principal: number,
   annualContribution: number,
@@ -214,7 +170,6 @@ function calculateFutureValue(
     return principal + annualContribution * years;
   }
 
-  // FV = P(1+r)^n + PMT * (((1+r)^n - 1) / r)
   const compoundFactor = Math.pow(1 + rate, years);
   const principalGrowth = principal * compoundFactor;
   const contributionGrowth = annualContribution * ((compoundFactor - 1) / rate);
@@ -222,9 +177,6 @@ function calculateFutureValue(
   return principalGrowth + contributionGrowth;
 }
 
-/**
- * Generate year-by-year projections
- */
 function generateProjections(
   startAge: number,
   currentSavings: number,
@@ -259,9 +211,6 @@ function generateProjections(
   return projections;
 }
 
-/**
- * Calculate milestones for each FIRE variant
- */
 function calculateMilestones(
   currentAge: number,
   currentSavings: number,
@@ -290,10 +239,6 @@ function calculateMilestones(
   });
 }
 
-/**
- * Calculate Coast FIRE - the amount needed today to coast to retirement
- * without any additional savings
- */
 function calculateCoastFIRE(
   currentAge: number,
   currentSavings: number,
@@ -304,17 +249,12 @@ function calculateCoastFIRE(
 ): { coastFIREAge: number | null; coastFIREAmount: number } {
   const yearsToTraditional = traditionalRetirementAge - currentAge;
 
-  // Coast FIRE amount: what you need now to hit FIRE target at traditional retirement
-  // with no additional contributions
-  // FV = PV * (1 + r)^n, so PV = FV / (1 + r)^n
   const coastAmount = fireTarget / Math.pow(1 + returnRate, yearsToTraditional);
 
-  // Find age when current trajectory reaches coast amount
   if (currentSavings >= coastAmount) {
     return { coastFIREAge: currentAge, coastFIREAmount: coastAmount };
   }
 
-  // Calculate when we'll hit coast amount
   const yearsToCoast = calculateYearsToFIRE(currentSavings, annualSavings, coastAmount, returnRate);
 
   if (yearsToCoast === Infinity || yearsToCoast > yearsToTraditional) {
@@ -327,9 +267,6 @@ function calculateCoastFIRE(
   };
 }
 
-/**
- * Analyze savings rate and provide recommendations
- */
 function analyzeSavingsRate(
   annualIncome: number,
   annualSavings: number,
@@ -340,11 +277,8 @@ function analyzeSavingsRate(
 ): SavingsRateAnalysis {
   const currentRate = (annualSavings / annualIncome) * 100;
 
-  // Calculate required savings rate to hit target in desired years
-  // Using goal seek approach
   let requiredAnnualSavings = 0;
   if (targetYears > 0) {
-    // Binary search for required savings
     let low = 0;
     let high = annualIncome;
 
@@ -363,10 +297,8 @@ function analyzeSavingsRate(
 
   const requiredRate = Math.min((requiredAnnualSavings / annualIncome) * 100, 100);
 
-  // Optimal rate based on FIRE community recommendations (50%+ for aggressive FIRE)
   const optimalRate = 50;
 
-  // Monthly shortfall
   const monthlyShortfall = Math.max(0, (requiredAnnualSavings - annualSavings) / 12);
 
   return {
@@ -377,9 +309,6 @@ function analyzeSavingsRate(
   };
 }
 
-/**
- * Calculate total contributions and growth at FIRE
- */
 function calculateTotalsAtFIRE(
   currentSavings: number,
   annualSavings: number,
@@ -396,9 +325,6 @@ function calculateTotalsAtFIRE(
   };
 }
 
-/**
- * Format currency for display
- */
 export function formatCurrency(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
   const formatted = Math.abs(amount).toLocaleString('en-US', {
@@ -408,9 +334,6 @@ export function formatCurrency(amount: number, currency: Currency): string {
   return amount < 0 ? `-${symbol}${formatted}` : `${symbol}${formatted}`;
 }
 
-/**
- * Format large numbers in compact form (e.g., $1.2M)
- */
 export function formatCompact(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
 
@@ -423,16 +346,10 @@ export function formatCompact(amount: number, currency: Currency): string {
   return `${symbol}${amount.toFixed(0)}`;
 }
 
-/**
- * Format percentage for display
- */
 export function formatPercent(value: number): string {
   return `${value.toFixed(1)}%`;
 }
 
-/**
- * Format years for display
- */
 export function formatYears(years: number): string {
   if (years === Infinity) return 'Never';
   if (years <= 0) return 'Now!';
@@ -440,9 +357,6 @@ export function formatYears(years: number): string {
   return `${years.toFixed(1)} years`;
 }
 
-/**
- * Get savings rate color indicator
- */
 export function getSavingsRateColor(rate: number): string {
   if (rate >= 50) return 'text-green-400';
   if (rate >= 30) return 'text-amber-400';
@@ -450,9 +364,6 @@ export function getSavingsRateColor(rate: number): string {
   return 'text-red-400';
 }
 
-/**
- * Get progress color
- */
 export function getProgressColor(percent: number): string {
   if (percent >= 100) return 'bg-green-500';
   if (percent >= 75) return 'bg-emerald-500';
@@ -461,18 +372,12 @@ export function getProgressColor(percent: number): string {
   return 'bg-red-500';
 }
 
-/**
- * Risk profile return rates
- */
 export const RISK_PROFILE_RETURNS: Record<string, { return: number; label: string }> = {
   conservative: { return: 0.05, label: '5% (Conservative - bonds heavy)' },
   moderate: { return: 0.07, label: '7% (Moderate - balanced portfolio)' },
   aggressive: { return: 0.09, label: '9% (Aggressive - stocks heavy)' },
 };
 
-/**
- * FIRE type descriptions
- */
 export const FIRE_TYPE_INFO: Record<string, { label: string; description: string }> = {
   lean: {
     label: 'Lean FIRE',

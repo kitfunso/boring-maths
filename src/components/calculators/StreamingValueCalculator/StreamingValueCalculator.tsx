@@ -1,7 +1,3 @@
-/**
- * Streaming Value Calculator - React Component
- */
-
 import { useCallback } from 'preact/hooks';
 import { calculateStreamingValue, formatDollars, formatCostPerHour } from './calculations';
 import { getDefaultInputs, type StreamingValueInputs, type StreamingService } from './types';
@@ -77,7 +73,6 @@ export default function StreamingValueCalculator() {
 
   const enabledCount = inputs.subscriptions.filter((s) => s.enabled).length;
 
-  // Find max cost per hour for bar scaling (cap at 10 for visual clarity)
   const maxCostPerHour = Math.min(
     10,
     Math.max(...result.perServiceMetrics.map((m) => m.costPerHour), 1)
@@ -93,7 +88,6 @@ export default function StreamingValueCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Subscription Toggles */}
             <div>
               <Label>Select your subscriptions</Label>
               <div className="space-y-3 mt-2">
@@ -146,18 +140,15 @@ export default function StreamingValueCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {enabledCount > 0 ? (
               <>
-                {/* Big Total */}
                 <ResultCard
                   label="Total Monthly Cost"
                   value={formatDollars(result.totalMonthlyCost)}
                   subtitle={`${formatDollars(result.totalYearlyCost)} per year across ${enabledCount} service${enabledCount !== 1 ? 's' : ''}`}
                 />
 
-                {/* Summary Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Monthly"
@@ -184,7 +175,6 @@ export default function StreamingValueCalculator() {
                   />
                 </Grid>
 
-                {/* Value Ranking Bars */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Value Ranking (Cost Per Hour)
@@ -229,7 +219,6 @@ export default function StreamingValueCalculator() {
                   </div>
                 </div>
 
-                {/* Recommended Cut */}
                 {result.recommendedCut && (
                   <Alert variant="tip" title="Money-saving tip:">
                     Consider dropping <strong>{result.recommendedCut}</strong> -- it has the worst
@@ -257,7 +246,6 @@ export default function StreamingValueCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {enabledCount > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

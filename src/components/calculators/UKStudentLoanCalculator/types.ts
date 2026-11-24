@@ -1,8 +1,3 @@
-/**
- * UK Student Loan Calculator Types
- * Plan 1, 2, 4, 5 and Postgraduate Loans
- */
-
 export type LoanPlan = 'plan1' | 'plan2' | 'plan4' | 'plan5' | 'postgrad';
 
 export interface UKStudentLoanInputs {
@@ -41,8 +36,6 @@ export function getDefaultInputs(): UKStudentLoanInputs {
   };
 }
 
-// Current Student Loan thresholds and rates
-// Thresholds and rates aligned to current GOV.UK repayment guidance.
 export const LOAN_PLANS = {
   plan1: {
     name: 'Plan 1',

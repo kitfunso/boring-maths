@@ -1,10 +1,3 @@
-/**
- * W2 to 1099 Calculator - React Component
- *
- * Convert W2 employee hourly rate to equivalent 1099 contractor rate.
- * Shows detailed breakdown of costs including self-employment tax,
- * benefits, and business expenses.
- */
 import {
   calculateW2To1099,
   formatCurrency,
@@ -31,16 +24,13 @@ export default function W2To1099Calculator() {
     compute: calculateW2To1099,
   });
 
-  // Sync hourly and salary when input mode changes
   const handleInputModeChange = (mode: InputMode) => {
     if (mode === 'hourly' && inputs.inputMode === 'salary') {
-      // Convert salary to hourly
       updateInput(
         'w2HourlyRate',
         Math.round((inputs.w2AnnualSalary / STANDARD_ANNUAL_HOURS) * 100) / 100
       );
     } else if (mode === 'salary' && inputs.inputMode === 'hourly') {
-      // Convert hourly to salary
       updateInput('w2AnnualSalary', Math.round(inputs.w2HourlyRate * STANDARD_ANNUAL_HOURS));
     }
     updateInput('inputMode', mode);
@@ -55,9 +45,7 @@ export default function W2To1099Calculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Input Mode Toggle */}
             <div>
               <Label required>Input Type</Label>
               <div className="grid grid-cols-2 gap-2">
@@ -78,7 +66,6 @@ export default function W2To1099Calculator() {
               </div>
             </div>
 
-            {/* W2 Rate/Salary Input */}
             {inputs.inputMode === 'hourly' ? (
               <div>
                 <Label htmlFor="w2HourlyRate" required>
@@ -127,7 +114,6 @@ export default function W2To1099Calculator() {
               </div>
             )}
 
-            {/* Benefits Section */}
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] mb-4">
                 Current Benefits (as W2)
@@ -208,7 +194,6 @@ export default function W2To1099Calculator() {
               </Grid>
             </div>
 
-            {/* State Selection */}
             <div>
               <Label htmlFor="state">State</Label>
               <Select
@@ -220,9 +205,7 @@ export default function W2To1099Calculator() {
             </div>
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Main Result */}
             <div className="rounded-2xl p-6 border-2 bg-green-950/50 border-green-500/30">
               <div className="text-center">
                 <p className="text-sm text-[var(--color-muted)] mb-1">Equivalent 1099 Rate</p>
@@ -238,7 +221,6 @@ export default function W2To1099Calculator() {
               </div>
             </div>
 
-            {/* Rate Comparison */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <p className="text-xs text-[var(--color-muted)] mb-1">W2 Rate</p>
@@ -260,14 +242,12 @@ export default function W2To1099Calculator() {
               </div>
             </Grid>
 
-            {/* Multiplier Info */}
             <Alert variant="tip" title="The typical multiplier is 1.25x-1.5x">
               Your rate of {formatMultiplier(result.multiplier)} means you need to charge{' '}
               {formatHourlyRate(result.equivalent1099Hourly)} as a contractor to match your W2 total
               compensation of {formatCurrency(result.totalW2Value)}/year.
             </Alert>
 
-            {/* Cost Breakdown */}
             <div>
               <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">
                 Cost Breakdown
@@ -336,7 +316,6 @@ export default function W2To1099Calculator() {
               </div>
             </div>
 
-            {/* Key Insights */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">Key Insights</h4>
               <Grid responsive={{ sm: 2, md: 4 }} gap="sm">

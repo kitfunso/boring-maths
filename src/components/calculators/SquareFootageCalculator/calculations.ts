@@ -1,37 +1,18 @@
-/**
- * Square Footage Calculator - Calculation Logic
- *
- * Pure functions for calculating area across different room shapes
- * with unit conversions and cost estimation.
- */
-
 import type { SquareFootageCalculatorInputs, SquareFootageCalculatorResult } from './types';
 
-/** Conversion constants */
 const SQ_FT_TO_SQ_M = 0.092903;
 const SQ_FT_PER_SQ_YD = 9;
 const FT_PER_METRE = 1 / 0.3048;
 
-/**
- * Floor a numeric input so a cleared/invalid (non-finite) value becomes 0.
- * Valid non-negative values pass through unchanged.
- */
 function safe(value: number): number {
   return Number.isFinite(value) ? Math.max(0, value) : 0;
 }
 
-/**
- * Round to specified decimal places
- */
 function round(value: number, decimals: number = 2): number {
   const factor = Math.pow(10, decimals);
   return Math.round(value * factor) / factor;
 }
 
-/**
- * Convert a main + inches pair to total feet (imperial) or
- * convert metres to feet (metric)
- */
 function toFeet(main: number, inches: number, isMetric: boolean): number {
   const safeMain = safe(main);
   if (isMetric) {
@@ -40,10 +21,6 @@ function toFeet(main: number, inches: number, isMetric: boolean): number {
   return safeMain + safe(inches) / 12;
 }
 
-/**
- * Calculate area based on shape and inputs.
- * Returns area in square feet.
- */
 function calculateAreaSqFt(inputs: SquareFootageCalculatorInputs): number {
   const isMetric = inputs.unitSystem === 'metric';
 
@@ -84,9 +61,6 @@ function calculateAreaSqFt(inputs: SquareFootageCalculatorInputs): number {
   }
 }
 
-/**
- * Calculate square footage and all conversions
- */
 export function calculateSquareFootage(
   inputs: SquareFootageCalculatorInputs
 ): SquareFootageCalculatorResult {
@@ -94,7 +68,6 @@ export function calculateSquareFootage(
   const sqM = sqFt * SQ_FT_TO_SQ_M;
   const sqYd = sqFt / SQ_FT_PER_SQ_YD;
 
-  // Cost calculation: price is per sq ft (imperial) or per sq m (metric)
   const costArea = inputs.unitSystem === 'metric' ? sqM : sqFt;
   const totalCost = costArea * safe(inputs.pricePerUnit);
 
@@ -109,9 +82,6 @@ export function calculateSquareFootage(
   };
 }
 
-/**
- * Format area value with locale
- */
 export function formatArea(value: number, decimals: number = 2): string {
   return value.toLocaleString('en-GB', {
     minimumFractionDigits: decimals,

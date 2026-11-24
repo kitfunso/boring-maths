@@ -1,7 +1,3 @@
-/**
- * Graduation Party Planner - Calculation Logic
- */
-
 import type {
   GraduationPartyInputs,
   GraduationPartyResult,
@@ -34,11 +30,10 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   const baseOzPerPerson = FOOD_PER_PERSON[menuStyle];
   const wasteMultiplier = menuStyle === 'buffet' ? 1.15 : 1.1;
 
-  // Calculate food quantities
   let totalFoodServings = 0;
 
   if (includeMainDish) {
-    const proteinOz = baseOzPerPerson * 0.4; // 40% protein
+    const proteinOz = baseOzPerPerson * 0.4;
     const proteinPounds = Math.ceil((guestCount * proteinOz * wasteMultiplier) / 16);
 
     foodItems.push({
@@ -55,7 +50,7 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   }
 
   if (includeSides) {
-    const sidesOz = baseOzPerPerson * 0.35; // 35% sides
+    const sidesOz = baseOzPerPerson * 0.35;
     const sidesPounds = Math.ceil((guestCount * sidesOz * wasteMultiplier) / 16);
 
     foodItems.push({
@@ -66,7 +61,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
       notes: 'Potato salad, pasta salad, coleslaw, etc.',
     });
 
-    // Bread/rolls
     const rolls = Math.ceil(guestCount * 1.5 * wasteMultiplier);
     foodItems.push({
       item: 'Rolls/Bread',
@@ -79,7 +73,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   }
 
   if (includeAppetizers) {
-    // Appetizers: 6-8 pieces per person for cocktail hour
     const appsPerPerson = menuStyle === 'finger_food' ? 10 : 6;
     const appetizers = Math.ceil(guestCount * appsPerPerson * wasteMultiplier);
 
@@ -106,7 +99,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   }
 
   if (includeCake) {
-    // Graduation cake servings
     const cakeServings = Math.ceil(guestCount * 1.1);
     foodItems.push({
       item: 'Graduation Cake',
@@ -118,17 +110,14 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     totalFoodServings += guestCount;
   }
 
-  // Calculate drink quantities
   const totalDrinks = Math.ceil(guestCount * DRINKS_PER_HOUR * partyDuration);
   let totalDrinkServings = 0;
 
-  // Split drinks by type based on what's selected
   const drinkTypes = [includeSoftDrinks, includeWater, includePunch, includeCoffee].filter(
     Boolean
   ).length;
 
   if (drinkTypes === 0) {
-    // Default to water if nothing selected
     drinkItems.push({
       item: 'Water',
       quantity: Math.ceil(totalDrinks / 8), // gallons
@@ -162,7 +151,7 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     }
 
     if (includePunch) {
-      const punchGallons = Math.ceil(drinksPerType / 16); // 16 servings per gallon
+      const punchGallons = Math.ceil(drinksPerType / 16);
       drinkItems.push({
         item: 'Punch',
         quantity: Math.max(2, punchGallons),
@@ -173,9 +162,8 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     }
 
     if (includeCoffee) {
-      // About 50% of guests will want coffee
       const coffeeServings = Math.ceil(guestCount * 0.5);
-      const coffeeOz = coffeeServings * 6; // 6oz per serving
+      const coffeeOz = coffeeServings * 6;
       drinkItems.push({
         item: 'Coffee',
         quantity: Math.ceil(coffeeOz / 60), // 60oz per pot
@@ -186,7 +174,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     }
   }
 
-  // Ice
   const icePounds = Math.ceil(guestCount * 1.5 * (partyDuration / 4));
   drinkItems.push({
     item: 'Ice',
@@ -195,7 +182,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     servings: guestCount,
   });
 
-  // Calculate costs
   const baseCostPerPerson = COST_PER_PERSON[currency][menuStyle];
   const estimatedFoodCost = Math.round(guestCount * baseCostPerPerson * 0.7);
   const estimatedDrinkCost = Math.round(guestCount * baseCostPerPerson * 0.2);
@@ -203,7 +189,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   const totalEstimatedCost = estimatedFoodCost + estimatedDrinkCost + estimatedSuppliesCost;
   const costPerGuest = Math.round(totalEstimatedCost / guestCount);
 
-  // Supplies list
   const supplies = [
     { item: 'Plates', quantity: Math.ceil(guestCount * 1.5), unit: 'pieces' },
     { item: 'Napkins', quantity: Math.ceil(guestCount * 3), unit: 'pieces' },
@@ -213,7 +198,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
     { item: 'Serving Utensils', quantity: Math.ceil(foodItems.length * 2), unit: 'pieces' },
   ];
 
-  // Tips based on party type
   const tips: string[] = [];
 
   if (graduationType === 'high_school') {
@@ -234,7 +218,6 @@ export function calculateGraduationParty(inputs: GraduationPartyInputs): Graduat
   tips.push('Have a backup plan for outdoor parties');
   tips.push('Create a card box for graduation gifts');
 
-  // Timeline
   const timeline: string[] = [];
   timeline.push('2-3 weeks before: Send invitations and finalize menu');
   timeline.push('1 week before: Order cake and confirm catering if applicable');

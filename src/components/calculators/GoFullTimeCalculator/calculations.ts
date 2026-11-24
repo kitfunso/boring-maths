@@ -1,10 +1,3 @@
-/**
- * Go Full-Time Calculator - Calculation Logic
- *
- * Pure functions for calculating when you can go full-time
- * on your freelance/side hustle income.
- */
-
 import type {
   GoFullTimeInputs,
   GoFullTimeResult,
@@ -16,12 +9,6 @@ import { RISK_THRESHOLDS } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate months until income reaches a target with compound growth
- *
- * Formula: FV = PV * (1 + r)^n
- * Solving for n: n = ln(FV/PV) / ln(1 + r)
- */
 function monthsToReachIncome(
   currentIncome: number,
   targetIncome: number,
@@ -35,27 +22,17 @@ function monthsToReachIncome(
   return Math.ceil(months);
 }
 
-/**
- * Calculate runway considering monthly deficit/surplus
- *
- * If side income < expenses: runway = savings / (expenses - sideIncome)
- * If side income >= expenses: runway = Infinity (sustainable)
- */
 function calculateRunway(
   savings: number,
   monthlyExpenses: number,
   monthlySideIncome: number
 ): number {
   const monthlyDeficit = monthlyExpenses - monthlySideIncome;
-  if (monthlyDeficit <= 0) return Infinity; // Sustainable
+  if (monthlyDeficit <= 0) return Infinity;
   if (savings <= 0) return 0;
   return savings / monthlyDeficit;
 }
 
-/**
- * Calculate savings needed for a specific risk level
- * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
- */
 function calculateSavingsNeeded(
   monthlyExpenses: number,
   riskLevel: RiskTolerance,
@@ -66,18 +43,11 @@ function calculateSavingsNeeded(
   return monthlyExpenses * runwayMonths;
 }
 
-/**
- * Calculate income needed for a specific risk level
- */
 function calculateIncomeNeeded(monthlyExpenses: number, riskLevel: RiskTolerance): number {
   const threshold = RISK_THRESHOLDS[riskLevel];
   return monthlyExpenses * threshold.incomePercentOfExpenses;
 }
 
-/**
- * Check if ready to quit at a specific risk level
- * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
- */
 function isReadyAtRiskLevel(
   currentSavings: number,
   monthlySideIncome: number,
@@ -93,10 +63,6 @@ function isReadyAtRiskLevel(
   return currentSavings >= requiredSavings && monthlySideIncome >= requiredIncome;
 }
 
-/**
- * Calculate months until ready at a specific risk level
- * Uses custom buffer if provided, otherwise falls back to risk threshold defaults
- */
 function monthsUntilReady(
   currentSavings: number,
   monthlySideIncome: number,
@@ -111,11 +77,8 @@ function monthsUntilReady(
   const requiredSavings = monthlyExpenses * runwayMonths;
   const requiredIncome = monthlyExpenses * threshold.incomePercentOfExpenses;
 
-  // Calculate months to reach income threshold
   const monthsForIncome = monthsToReachIncome(monthlySideIncome, requiredIncome, monthlyGrowthRate);
 
-  // Calculate months to reach savings threshold
-  // Assume we save the surplus (side income - portion needed for expenses while employed)
   let monthsForSavings = 0;
   if (currentSavings < requiredSavings && monthlySavingsRate > 0) {
     monthsForSavings = Math.ceil((requiredSavings - currentSavings) / monthlySavingsRate);
@@ -123,13 +86,9 @@ function monthsUntilReady(
     monthsForSavings = Infinity;
   }
 
-  // You need BOTH conditions met
   return Math.max(monthsForIncome, monthsForSavings);
 }
 
-/**
- * Generate 24-month projection
- */
 function generateProjections(
   currentSavings: number,
   monthlySideIncome: number,
@@ -150,21 +109,16 @@ function generateProjections(
       runway: runway === Infinity ? 999 : Math.round(runway * 10) / 10,
     });
 
-    // Project next month
     income = income * (1 + monthlyGrowthRate);
-    // Savings grow by surplus (or deplete by deficit)
     const surplus = income - monthlyExpenses;
     if (surplus > 0) {
-      savings += surplus * 0.5; // Assume we save 50% of surplus for safety
+      savings += surplus * 0.5;
     }
   }
 
   return projections;
 }
 
-/**
- * Get motivational status message based on readiness
- */
 function getStatusMessage(
   isReady: boolean,
   monthsToReady: number,
@@ -198,9 +152,6 @@ function getStatusMessage(
   return 'Stay focused on growing your side income. Every new client gets you closer to freedom.';
 }
 
-/**
- * Calculate encouragement level (0-100) based on progress
- */
 function calculateEncouragementLevel(
   readinessPercent: number,
   monthsToReady: number,
@@ -215,18 +166,12 @@ function calculateEncouragementLevel(
   return 30;
 }
 
-/**
- * Add months to a date
- */
 function addMonths(date: Date, months: number): Date {
   const result = new Date(date);
   result.setMonth(result.getMonth() + months);
   return result;
 }
 
-/**
- * Main calculation function
- */
 export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult {
   const {
     currency,
@@ -242,37 +187,28 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
 
   const now = new Date();
 
-  // === Current State ===
   const monthlySalary = annualSalary / 12;
   const monthlyTotalCompensation = monthlySalary + monthlyBenefitsValue;
 
-  // Current runway calculation
   const currentRunwayMonths = calculateRunway(currentSavings, monthlyExpenses, monthlySideIncome);
 
-  // Break-even income (minimum to cover expenses)
   const breakEvenSideIncome = monthlyExpenses;
 
-  // === Gap Analysis ===
   const incomeGapToSalary = Math.max(0, monthlyTotalCompensation - monthlySideIncome);
   const incomeGapToExpenses = Math.max(0, monthlyExpenses - monthlySideIncome);
 
-  // === Projections ===
-
-  // Months to crossover (side income > expenses)
   const monthsToCrossover = monthsToReachIncome(
     monthlySideIncome,
     monthlyExpenses,
     monthlyGrowthRate
   );
 
-  // Months to full replacement (side income > total compensation)
   const monthsToFullReplacement = monthsToReachIncome(
     monthlySideIncome,
     monthlyTotalCompensation,
     monthlyGrowthRate
   );
 
-  // Projected dates
   const crossoverDate =
     monthsToCrossover !== Infinity && monthsToCrossover > 0
       ? addMonths(now, monthsToCrossover)
@@ -287,12 +223,7 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
         ? now
         : null;
 
-  // === Risk Level Analysis ===
-
-  // Estimate monthly savings capacity (assuming we can save side income while employed)
-  const monthlySavingsCapacity = Math.max(0, monthlySideIncome * 0.8); // 80% of side income can be saved
-
-  // Savings needed at selected risk level (uses user's desired buffer)
+  const monthlySavingsCapacity = Math.max(0, monthlySideIncome * 0.8);
   const savingsNeededForRisk = calculateSavingsNeeded(
     monthlyExpenses,
     riskTolerance,
@@ -300,7 +231,6 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   );
   const incomeNeededForRisk = calculateIncomeNeeded(monthlyExpenses, riskTolerance);
 
-  // Is ready to quit?
   const isReadyToQuit = isReadyAtRiskLevel(
     currentSavings,
     monthlySideIncome,
@@ -309,7 +239,6 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     desiredSafetyBuffer
   );
 
-  // Months until ready
   const monthsToRecommendedQuit = monthsUntilReady(
     currentSavings,
     monthlySideIncome,
@@ -320,19 +249,16 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     desiredSafetyBuffer
   );
 
-  // Recommended quit date
   const recommendedQuitDate = isReadyToQuit
     ? now
     : monthsToRecommendedQuit !== Infinity && monthsToRecommendedQuit > 0
       ? addMonths(now, monthsToRecommendedQuit)
       : null;
 
-  // Calculate readiness percentage
   const savingsProgress = Math.min(100, (currentSavings / savingsNeededForRisk) * 100);
   const incomeProgress = Math.min(100, (monthlySideIncome / incomeNeededForRisk) * 100);
   const readinessPercent = Math.round((savingsProgress + incomeProgress) / 2);
 
-  // === Scenario Comparison ===
   const riskLevels: RiskTolerance[] = ['aggressive', 'moderate', 'conservative'];
   const scenarios: ScenarioAnalysis[] = riskLevels.map((level) => ({
     riskLevel: level,
@@ -349,7 +275,6 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     isReady: isReadyAtRiskLevel(currentSavings, monthlySideIncome, monthlyExpenses, level),
   }));
 
-  // === Projections ===
   const projections = generateProjections(
     currentSavings,
     monthlySideIncome,
@@ -357,7 +282,6 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
     monthlyGrowthRate
   );
 
-  // === Motivational ===
   const incomeGapPercent =
     monthlyExpenses > 0 ? ((monthlyExpenses - monthlySideIncome) / monthlyExpenses) * 100 : 0;
 
@@ -399,9 +323,6 @@ export function calculateGoFullTime(inputs: GoFullTimeInputs): GoFullTimeResult 
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',
@@ -410,9 +331,6 @@ export function formatCurrency(
   return formatCurrencyByRegion(value, currency, decimals);
 }
 
-/**
- * Format a date as a readable string
- */
 export function formatDate(date: Date | null): string {
   if (!date) return 'N/A';
   return date.toLocaleDateString('en-US', {
@@ -421,9 +339,6 @@ export function formatDate(date: Date | null): string {
   });
 }
 
-/**
- * Format months as a human-readable duration
- */
 export function formatMonths(months: number): string {
   if (months < 0) return 'Not projected';
   if (months === 0) return 'Now';
@@ -439,9 +354,6 @@ export function formatMonths(months: number): string {
     : `${years} years, ${remainingMonths} months`;
 }
 
-/**
- * Format percentage
- */
 export function formatPercentage(value: number, decimals: number = 0): string {
   return `${value.toFixed(decimals)}%`;
 }

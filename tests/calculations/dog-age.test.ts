@@ -1,7 +1,3 @@
-/**
- * DogAgeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateDogAge } from '../../src/components/calculators/DogAgeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/DogAgeCalculator/types';

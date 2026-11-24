@@ -1,9 +1,3 @@
-/**
- * US Quarterly Estimated Tax Calculator Calculations
- *
- * Calculates quarterly payments with safe harbor rules.
- */
-
 import type { USQuarterlyTaxInputs, USQuarterlyTaxResult, QuarterPayment } from './types';
 import { HIGH_INCOME_THRESHOLDS } from './types';
 import {
@@ -38,29 +32,21 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
 
   const estimatedTotalTax = se.total + federalTax;
 
-  // Remaining tax after withholdings
   const remainingTaxDue = Math.max(0, estimatedTotalTax - withholdingsFromW2);
 
-  // Quarterly payment
   const quarterlyPayment = Math.ceil(remainingTaxDue / 4);
 
-  // Safe harbor calculations
-  // Rule 1: Pay 90% of current year tax
   const currentYearSafeHarbor = estimatedTotalTax * 0.9;
 
-  // Rule 2: Pay 100% of prior year tax (110% if AGI > $150k, $75k married filing separately)
   const highIncomeThreshold = HIGH_INCOME_THRESHOLDS[filingStatus];
   const priorYearSafeHarborPercent = priorYearAGI > highIncomeThreshold ? 1.1 : 1.0;
   const priorYearSafeHarbor = priorYearTax * priorYearSafeHarborPercent;
 
-  // Use the lower safe harbor amount
   const safeHarborAmount = Math.min(currentYearSafeHarbor, priorYearSafeHarbor);
 
-  // Judge withholding alone: counting the suggested payments would always pass
   const meetsCurrentYearSafeHarbor = withholdingsFromW2 >= currentYearSafeHarbor;
   const meetsPriorYearSafeHarbor = withholdingsFromW2 >= priorYearSafeHarbor;
 
-  // Penalty risk if no estimated payments are made
   let penaltyRisk: 'none' | 'low' | 'high' = 'none';
   if (remainingTaxDue < 1000) {
     penaltyRisk = 'none';
@@ -72,7 +58,6 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     penaltyRisk = 'high';
   }
 
-  // Generate quarterly payment schedule
   const quarterPayments: QuarterPayment[] = ESTIMATED_TAX_DUE_DATES_2026.map((q, index) => ({
     quarter: q.quarter,
     dueDate: q.date,
@@ -80,13 +65,11 @@ export function calculateQuarterlyTax(inputs: USQuarterlyTaxInputs): USQuarterly
     cumulativeAmount: quarterlyPayment * (index + 1),
   }));
 
-  // Safe harbor rule description
   const safeHarborRule =
     priorYearAGI > highIncomeThreshold
       ? '110% of prior year tax (high income)'
       : '100% of prior year tax';
 
-  // Annualized income advice
   let annualizedIncomeAdvice = '';
   if (selfEmploymentIncome > expectedAnnualIncome * 0.5) {
     annualizedIncomeAdvice =

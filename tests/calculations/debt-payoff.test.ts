@@ -1,7 +1,3 @@
-/**
- * DebtPayoffCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateDebtPayoff } from '../../src/components/calculators/DebtPayoff/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/DebtPayoff/types';

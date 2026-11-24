@@ -1,34 +1,20 @@
-/**
- * SaaS Metrics Calculator - Type Definitions
- *
- * Calculate key SaaS metrics like MRR, ARR, LTV, CAC payback,
- * and health scores based on industry benchmarks.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface SaaSMetricsInputs {
   currency: Currency;
 
-  /** Number of paying customers */
   customers: number;
 
-  /** Average Revenue Per User (monthly) */
   arpu: number;
 
-  /** Monthly churn rate (% of customers lost) */
   churnRate: number;
 
-  /** Monthly growth rate (% new customers) */
   growthRate: number;
 
-  /** Cost to Acquire Customer */
   cac: number;
 
-  /** Gross margin percentage */
   grossMargin: number;
 
-  /** Monthly operating expenses */
   monthlyOpex: number;
 }
 
@@ -51,53 +37,37 @@ export interface GrowthProjection {
 export interface SaaSMetricsResult {
   currency: Currency;
 
-  /** Monthly Recurring Revenue */
   mrr: number;
 
-  /** Annual Recurring Revenue */
   arr: number;
 
-  /** Lifetime Value (simple calculation) */
   ltv: number;
 
-  /** LTV to CAC ratio */
   ltvCacRatio: number;
 
-  /** CAC Payback in months */
   cacPaybackMonths: number;
 
-  /** Net Revenue Retention (simplified) */
   netRevenueRetention: number;
 
-  /** Quick Ratio */
   quickRatio: number;
 
-  /** Burn Rate */
   burnRate: number;
 
-  /** Runway in months */
   runwayMonths: number;
 
-  /** Magic Number */
   magicNumber: number;
 
-  /** Rule of 40 score */
   ruleOf40: number;
 
-  /** Health scores with benchmarks */
   healthScores: HealthScore[];
 
-  /** 12-month projection */
   projections: GrowthProjection[];
 
-  /** Overall health rating */
   overallHealth: 'excellent' | 'good' | 'warning' | 'poor';
 
-  /** Key insights */
   insights: string[];
 }
 
-/** Industry benchmarks for SaaS metrics */
 export const BENCHMARKS = {
   ltvCacRatio: {
     excellent: 5,

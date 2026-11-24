@@ -1,7 +1,3 @@
-/**
- * Fence Calculator - Calculation Logic
- */
-
 import type { FenceCalculatorInputs, FenceCalculatorResult } from './types';
 import { PANEL_WIDTHS, LABOR_PER_FOOT } from './types';
 
@@ -24,57 +20,45 @@ export function calculateFence(inputs: FenceCalculatorInputs): FenceCalculatorRe
     pricePerDriveGate,
   } = inputs;
 
-  // Calculate gate widths to subtract from fence length
-  const walkGateWidth = 4; // feet
-  const driveGateWidth = 12; // feet
+  const walkGateWidth = 4;
+  const driveGateWidth = 12;
   const totalGateWidth = walkGates * walkGateWidth + driveGates * driveGateWidth;
   const fenceLength = Math.max(0, totalLength - totalGateWidth);
 
-  // Calculate panels needed
   const panelWidth = PANEL_WIDTHS[material];
   const panelsNeeded = Math.ceil(fenceLength / panelWidth);
 
-  // Calculate posts needed
-  // Posts at each panel end, plus gate posts
   const fencePosts = Math.ceil(fenceLength / postSpacing) + 1;
-  const gatePostsNeeded = walkGates * 2 + driveGates * 2; // 2 posts per gate
+  const gatePostsNeeded = walkGates * 2 + driveGates * 2;
   const cornerExtraPosts = doublePostCorners ? cornerCount : 0;
   const postsNeeded = fencePosts + gatePostsNeeded + cornerExtraPosts;
 
-  // Concrete bags
   const concreteBags = postsNeeded * concretePerPost;
 
-  // Post caps (one per post)
   const postCaps = postsNeeded;
 
-  // Rails needed (for wood fences - typically 2-3 rails per section)
   const railsPerPanel = fenceHeight === '8' ? 3 : 2;
   const railsNeeded =
     material === 'wood' || material === 'composite' ? panelsNeeded * railsPerPanel : 0;
 
-  // Hardware kits (screws, brackets - 1 per 2 panels)
   const hardwareKits = Math.ceil(panelsNeeded / 2);
 
-  // Calculate costs
   const panelsCost = panelsNeeded * pricePerPanel;
   const postsCost = postsNeeded * pricePerPost;
   const concreteCost = concreteBags * pricePerConcreteBag;
   const gatesCost = walkGates * pricePerWalkGate + driveGates * pricePerDriveGate;
 
-  // Hardware cost (estimate based on material)
   const hardwarePrice = currency === 'USD' ? 25 : currency === 'GBP' ? 20 : 22;
   const hardwareCost = hardwareKits * hardwarePrice;
 
   const totalMaterialCost = panelsCost + postsCost + concreteCost + gatesCost + hardwareCost;
 
-  // Labor estimates
   const laborRates = LABOR_PER_FOOT[currency];
   const laborCostLow = totalLength * laborRates.low;
   const laborCostHigh = totalLength * laborRates.high;
   const avgLaborCost = (laborCostLow + laborCostHigh) / 2;
   const totalCostWithLabor = totalMaterialCost + avgLaborCost;
 
-  // Tips
   const tips: string[] = [];
 
   if (material === 'wood') {

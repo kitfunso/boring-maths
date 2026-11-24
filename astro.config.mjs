@@ -6,12 +6,10 @@ import preact from '@astrojs/preact';
 import sitemap, { ChangeFreqEnum } from '@astrojs/sitemap';
 import { calculators } from './src/lib/calculators.ts';
 
-// A noindexed URL in the sitemap shows up in GSC as "Excluded by 'noindex' tag".
 const NOINDEX_URLS = new Set(
   calculators.filter((c) => c.noindex).map((c) => `https://boring-math.com${c.href}`)
 );
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://boring-math.com/',
 
@@ -23,7 +21,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     build: {
-      // Improve chunk splitting for better caching
       rollupOptions: {
         output: {
           manualChunks: {
@@ -41,7 +38,6 @@ export default defineConfig({
         return !page.includes('/embed/') && !NOINDEX_URLS.has(page);
       },
       serialize(item) {
-        // Set priority based on page depth
         if (item.url === 'https://boring-math.com/') {
           item.priority = 1.0;
           item.changefreq = ChangeFreqEnum.WEEKLY;
@@ -64,20 +60,13 @@ export default defineConfig({
     }),
   ],
 
-  // Note: /privacy is redirected to /privacy-policy at the edge via
-  // public/_redirects (Cloudflare). Astro-level redirects emit a static
-  // HTML stub with <meta robots noindex>, which GSC flagged as
-  // "Excluded by 'noindex' tag" on a sitemap-discovered URL.
-
+  // /privacy redirects at the edge (public/_redirects): an Astro redirect stub carries robots noindex, which GSC flagged.
   build: {
-    // Cloudflare Pages needs directory-style output for nested extensionless
-    // routes like /calculators/401k-calculator to resolve reliably.
     format: 'directory',
   },
 
   output: 'static',
 
-  // Prefetch links for faster navigation
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover',

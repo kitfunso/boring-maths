@@ -1,7 +1,3 @@
-/**
- * Heart Rate Zone Calculator - React Component
- */
-
 import { calculateHeartRateZones } from './calculations';
 import { getDefaultInputs, METHOD_OPTIONS, type HeartRateZoneInputs } from './types';
 import {
@@ -61,7 +57,6 @@ export default function HeartRateZoneCalculator() {
     compute: calculateHeartRateZones,
   });
 
-  // Width of zone bar relative to max (zone 5 = 100%)
   const maxBPM = result.zones.length > 0 ? result.zones[result.zones.length - 1].maxBPM : 200;
 
   return (
@@ -74,7 +69,6 @@ export default function HeartRateZoneCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Age */}
             <div>
               <Label htmlFor="age" required>
                 Age
@@ -90,7 +84,6 @@ export default function HeartRateZoneCalculator() {
               />
             </div>
 
-            {/* Resting Heart Rate */}
             <div>
               <Label htmlFor="restingHeartRate">Resting Heart Rate (BPM)</Label>
               <Input
@@ -107,7 +100,6 @@ export default function HeartRateZoneCalculator() {
               </p>
             </div>
 
-            {/* Custom Max HR Toggle */}
             <div>
               <Checkbox
                 label="I know my max heart rate"
@@ -135,7 +127,6 @@ export default function HeartRateZoneCalculator() {
               )}
             </div>
 
-            {/* Method Toggle */}
             <div>
               <Label>Calculation Method</Label>
               <ButtonGroup
@@ -155,11 +146,9 @@ export default function HeartRateZoneCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.age > 0 ? (
               <>
-                {/* Max HR */}
                 <ResultCard
                   label="Estimated Max Heart Rate"
                   value={`${result.maxHR} BPM`}
@@ -170,7 +159,6 @@ export default function HeartRateZoneCalculator() {
                   }
                 />
 
-                {/* Summary Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard label="Max HR" value={`${result.maxHR}`} sublabel="BPM" />
                   <MetricCard
@@ -191,7 +179,6 @@ export default function HeartRateZoneCalculator() {
                   />
                 </Grid>
 
-                {/* Zone Bars */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-5">
                     Your Training Zones
@@ -224,7 +211,6 @@ export default function HeartRateZoneCalculator() {
                               {zone.minBPM}-{zone.maxBPM} BPM
                             </span>
                           </div>
-                          {/* Bar */}
                           <div className="h-3 bg-white/5 rounded-full overflow-hidden">
                             <div
                               className={`h-full rounded-full ${ZONE_COLORS[i]} opacity-60`}
@@ -240,7 +226,6 @@ export default function HeartRateZoneCalculator() {
                   </div>
                 </div>
 
-                {/* Goal Recommendations */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Zone by Fitness Goal
@@ -288,7 +273,6 @@ export default function HeartRateZoneCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.age > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

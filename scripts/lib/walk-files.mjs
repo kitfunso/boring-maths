@@ -1,7 +1,3 @@
-// Single recursive file walker shared by the SEO checkers, the codemods, and
-// the em-dash guard test so they all enumerate the same file set the same way.
-//
-// Importing this module has NO side effects (no walking, no I/O at load time).
 import fs from 'node:fs';
 import path from 'node:path';
 

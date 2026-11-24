@@ -1,34 +1,24 @@
-/**
- * Clay Shrinkage Calculator - Calculation Logic
- */
-
 import type { ClayShrinkageInputs, ClayShrinkageResult } from './types';
 import { CLAY_TYPES } from './types';
 
 export function calculateClayShrinkage(inputs: ClayShrinkageInputs): ClayShrinkageResult {
   const { calculationMode, knownSize, shrinkagePercent, clayType } = inputs;
 
-  // Get clay shrinkage data
   const clayData = CLAY_TYPES.find((c) => c.value === clayType);
   const totalShrinkage =
     clayType === 'custom' ? shrinkagePercent : clayData?.totalShrinkage || shrinkagePercent;
   const dryShrinkage = clayData?.dryShrinkage || totalShrinkage * 0.5;
   const firingShrinkage = totalShrinkage - dryShrinkage;
 
-  // Shrinkage factor (what remains after shrinking)
   const shrinkageFactor = 1 - totalShrinkage / 100;
 
   let resultSize: number;
   let sizeChange: number;
 
   if (calculationMode === 'thrown-to-fired') {
-    // Known size is thrown (wet), calculate fired size
-    // Fired Size = Thrown Size × (1 - Shrinkage%)
     resultSize = knownSize * shrinkageFactor;
     sizeChange = knownSize - resultSize;
   } else {
-    // Known size is fired, calculate thrown (wet) size
-    // Thrown Size = Fired Size / (1 - Shrinkage%)
     resultSize = knownSize / shrinkageFactor;
     sizeChange = resultSize - knownSize;
   }
@@ -47,7 +37,6 @@ export function formatSize(value: number, unit: string): string {
   if (unit === 'cm') {
     return `${value.toFixed(2)} cm`;
   }
-  // For inches, show fractions for common sizes
   const wholePart = Math.floor(value);
   const fractionPart = value - wholePart;
 
@@ -55,7 +44,6 @@ export function formatSize(value: number, unit: string): string {
     return `${wholePart}"`;
   }
 
-  // Common fractions
   const fractions = [
     { decimal: 0.125, display: '⅛' },
     { decimal: 0.25, display: '¼' },
@@ -83,7 +71,6 @@ export function getShrinkageCategory(percent: number): { label: string; color: s
   return { label: 'High Shrinkage', color: 'text-orange-400' };
 }
 
-// Generate shrinkage table for common sizes
 export function generateShrinkageTable(
   shrinkagePercent: number,
   unit: string

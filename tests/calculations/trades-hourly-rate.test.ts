@@ -1,7 +1,3 @@
-/**
- * Tradesperson Hourly Rate Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateTradesHourlyRate,
@@ -68,10 +64,6 @@ describe('TradesHourlyRateCalculator', () => {
     });
 
     it('should correctly derive rate from known values', () => {
-      // Manual calculation:
-      // Income: 50,000, Overheads: 0/month, Tax: 0%
-      // Weeks: 50, Hours/week: 25 => 1,250 hours/year
-      // Rate = 50,000 / 1,250 = 40.00/hr
       const inputs: TradesHourlyRateInputs = {
         currency: 'USD',
         desiredAnnualIncome: 50000,
@@ -99,9 +91,6 @@ describe('TradesHourlyRateCalculator', () => {
     });
 
     it('should account for overheads in the rate', () => {
-      // Income: 50,000, Overheads: 1,000/month = 12,000/year, Tax: 0%
-      // Total needed: 62,000. Hours: 50 * 25 = 1,250
-      // Rate = 62,000 / 1,250 = 49.60/hr
       const inputs: TradesHourlyRateInputs = {
         currency: 'USD',
         desiredAnnualIncome: 50000,
@@ -128,10 +117,6 @@ describe('TradesHourlyRateCalculator', () => {
     });
 
     it('should account for tax in the rate', () => {
-      // Income: 50,000, Overheads: 0, Tax: 20%
-      // Pre-tax needed: 50,000. Gross = 50,000 / (1 - 0.20) = 62,500
-      // Hours: 50 * 25 = 1,250
-      // Rate = 62,500 / 1,250 = 50.00/hr
       const inputs: TradesHourlyRateInputs = {
         currency: 'USD',
         desiredAnnualIncome: 50000,
@@ -175,13 +160,9 @@ describe('TradesHourlyRateCalculator', () => {
 
       const result = calculateTradesHourlyRate(inputs);
 
-      // Income per hour: 50,000 / 1,250 = 40
       expect(result.breakdownPerHour.incomePerHour).toBe(40);
-      // Tax: (62,500 - 50,000) / 1,250 = 10
       expect(result.breakdownPerHour.taxPerHour).toBe(10);
-      // Overheads per hour: 0
       expect(result.breakdownPerHour.overheadsPerHour).toBe(0);
-      // Sum should equal hourly rate
       const sumBreakdown =
         result.breakdownPerHour.incomePerHour +
         result.breakdownPerHour.overheadsPerHour +
@@ -191,8 +172,6 @@ describe('TradesHourlyRateCalculator', () => {
 
     it('should compute non-billable percentage based on 40-hour week', () => {
       const inputs = getDefaultInputs('USD');
-      // Default billableHoursPerWeek = 30
-      // Non-billable = (40 - 30) / 40 = 25%
       const result = calculateTradesHourlyRate(inputs);
       expect(result.nonBillablePercent).toBe(25);
     });
@@ -243,7 +222,6 @@ describe('TradesHourlyRateCalculator', () => {
 
       const result = calculateTradesHourlyRate(inputs);
 
-      // Should clamp to 99%, not divide by zero
       expect(result.requiredHourlyRate).toBeGreaterThan(0);
       expect(Number.isFinite(result.requiredHourlyRate)).toBe(true);
     });

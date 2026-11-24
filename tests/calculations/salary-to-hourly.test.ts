@@ -1,7 +1,3 @@
-/**
- * SalaryToHourlyCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSalaryToHourly } from '../../src/components/calculators/SalaryToHourly/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SalaryToHourly/types';

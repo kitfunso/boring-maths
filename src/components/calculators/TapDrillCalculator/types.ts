@@ -1,8 +1,3 @@
-/**
- * Tap Drill Size Calculator Types
- * Calculate drill sizes for tapping threads
- */
-
 export interface TapDrillInputs {
   threadType: 'imperial' | 'metric';
   threadSize: string;
@@ -22,7 +17,6 @@ export interface TapDrillResults {
   pitch?: number;
 }
 
-// Imperial thread sizes (UNC - Unified National Coarse)
 export const IMPERIAL_THREADS: { value: string; label: string; major: number; tpi: number }[] = [
   { value: '0-80', label: '#0-80 UNF', major: 0.06, tpi: 80 },
   { value: '1-64', label: '#1-64 UNC', major: 0.073, tpi: 64 },
@@ -65,7 +59,6 @@ export const IMPERIAL_THREADS: { value: string; label: string; major: number; tp
   { value: '1-12', label: '1"-12 UNF', major: 1.0, tpi: 12 },
 ];
 
-// Metric thread sizes (ISO Metric Coarse)
 export const METRIC_THREADS: { value: string; label: string; major: number; pitch: number }[] = [
   { value: 'M1.6', label: 'M1.6 × 0.35', major: 1.6, pitch: 0.35 },
   { value: 'M2', label: 'M2 × 0.4', major: 2.0, pitch: 0.4 },
@@ -89,7 +82,6 @@ export const METRIC_THREADS: { value: string; label: string; major: number; pitc
   { value: 'M30', label: 'M30 × 3.5', major: 30.0, pitch: 3.5 },
 ];
 
-// Standard drill sizes (inches)
 export const NUMBERED_DRILLS: { label: string; size: number }[] = [
   { label: '#80', size: 0.0135 },
   { label: '#79', size: 0.0145 },
@@ -202,7 +194,6 @@ export const LETTER_DRILLS: { label: string; size: number }[] = [
   { label: 'Z', size: 0.413 },
 ];
 
-// Fractional drill sizes
 export const FRACTIONAL_DRILLS: { label: string; size: number }[] = [
   { label: '1/64"', size: 0.0156 },
   { label: '1/32"', size: 0.0313 },

@@ -1,8 +1,3 @@
-/**
- * Pet Ownership Cost Calculator - React Component
- *
- * Estimate the annual and lifetime costs of pet ownership.
- */
 import { calculatePetCost } from './calculations';
 import {
   getDefaultInputs,
@@ -88,13 +83,11 @@ export default function PetCost() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 Pet Details
               </div>
 
-              {/* Pet Type Selection */}
               <div>
                 <Label>Pet Type</Label>
                 <ButtonGroup
@@ -104,7 +97,6 @@ export default function PetCost() {
                 />
               </div>
 
-              {/* Dog Size (only for dogs) */}
               {inputs.petType === 'dog' && (
                 <div>
                   <Label>Dog Size</Label>
@@ -119,7 +111,6 @@ export default function PetCost() {
                 </div>
               )}
 
-              {/* Age */}
               <Slider
                 label="Pet Age"
                 value={inputs.age}
@@ -134,7 +125,6 @@ export default function PetCost() {
                 }}
               />
 
-              {/* Health Status */}
               <div>
                 <Label>Health Status</Label>
                 <ButtonGroup
@@ -144,14 +134,12 @@ export default function PetCost() {
                 />
               </div>
 
-              {/* Premium Food */}
               <Toggle
                 checked={inputs.premiumFood}
                 onChange={(checked) => updateInput('premiumFood', checked)}
                 label="Premium Food (+50%)"
               />
 
-              {/* Pet Insurance */}
               <Toggle
                 checked={inputs.hasPetInsurance}
                 onChange={(checked) => updateInput('hasPetInsurance', checked)}
@@ -164,7 +152,6 @@ export default function PetCost() {
                 Lifestyle
               </div>
 
-              {/* Grooming */}
               {inputs.petType !== 'fish' && inputs.petType !== 'reptile' && (
                 <Slider
                   label="Professional Grooming"
@@ -182,7 +169,6 @@ export default function PetCost() {
                 />
               )}
 
-              {/* Daycare (dogs only) */}
               {inputs.petType === 'dog' && (
                 <>
                   <Toggle
@@ -208,7 +194,6 @@ export default function PetCost() {
                 </>
               )}
 
-              {/* Boarding */}
               {inputs.petType !== 'fish' && (
                 <>
                   <Toggle
@@ -235,7 +220,6 @@ export default function PetCost() {
               )}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Annual Cost"
@@ -261,7 +245,6 @@ export default function PetCost() {
                 />
               </Grid>
 
-              {/* Cost Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Annual Cost Breakdown
@@ -288,7 +271,6 @@ export default function PetCost() {
                 </div>
               </div>
 
-              {/* Comparison Alert */}
               <Alert
                 variant={
                   result.comparisonToAverage === 'below'
@@ -311,7 +293,6 @@ export default function PetCost() {
                   ' Consider if daycare/boarding costs can be reduced with alternative arrangements.'}
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Pet Cost: ${fmt(result.annualCost)}/year for my ${inputs.petType}. Lifetime cost: ${fmt(result.lifetimeCost)}`}

@@ -1,9 +1,3 @@
-/**
- * Tile Calculator - Type Definitions
- *
- * Calculator to determine how much tile, grout, and adhesive you need.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type TileSize = '4x4' | '6x6' | '12x12' | '12x24' | '18x18' | '24x24' | 'custom';
@@ -13,62 +7,49 @@ export type SurfaceType = 'floor' | 'wall' | 'backsplash' | 'shower';
 export interface TileCalculatorInputs {
   currency: Currency;
 
-  // Area dimensions
-  areaLength: number; // feet
-  areaWidth: number; // feet
+  areaLength: number;
+  areaWidth: number;
   surfaceType: SurfaceType;
 
-  // Tile specifications
   tileSize: TileSize;
-  customTileWidth: number; // inches (when custom)
-  customTileHeight: number; // inches (when custom)
+  customTileWidth: number;
+  customTileHeight: number;
   tilePattern: TilePattern;
 
-  // Grout
-  groutWidth: number; // inches (1/16 to 1/2 typical)
-
-  // Cost inputs
-  tilePrice: number; // per sq ft
+  groutWidth: number;
+  tilePrice: number;
   tilesPerBox: number;
 
-  // Options
   includeAdhesive: boolean;
   includeGrout: boolean;
-  includeBacker: boolean; // cement backer board
+  includeBacker: boolean;
 }
 
 export interface TileCalculatorResult {
   currency: Currency;
 
-  // Area
   totalAreaSqFt: number;
   areaWithWaste: number;
   wastePercentage: number;
 
-  // Tiles needed
   tilesNeeded: number;
   boxesNeeded: number;
   tilesPerSqFt: number;
 
-  // Materials
   groutLbs: number;
-  groutBags: number; // 10lb bags
+  groutBags: number;
   adhesiveSqFt: number;
-  adhesiveBuckets: number; // 50 sq ft coverage per bucket
-  backerBoardSheets: number; // 3x5 sheets
-
-  // Costs
+  adhesiveBuckets: number;
+  backerBoardSheets: number;
   tileCost: number;
   groutCost: number;
   adhesiveCost: number;
   backerCost: number;
   totalCost: number;
 
-  // Tips
   tips: string[];
 }
 
-// Standard tile sizes in inches [width, height]
 export const TILE_SIZES: Record<TileSize, [number, number]> = {
   '4x4': [4, 4],
   '6x6': [6, 6],
@@ -79,7 +60,6 @@ export const TILE_SIZES: Record<TileSize, [number, number]> = {
   custom: [12, 12],
 };
 
-// Waste percentage by pattern
 export const PATTERN_WASTE: Record<TilePattern, number> = {
   straight: 0.1, // 10%
   diagonal: 0.15, // 15%
@@ -87,11 +67,7 @@ export const PATTERN_WASTE: Record<TilePattern, number> = {
   brick: 0.12, // 12%
 };
 
-// Grout coverage (linear feet of joint per lb)
-// Depends on grout width and tile thickness
-export const GROUT_COVERAGE_FACTOR = 25; // approximate linear ft of 1/8" joint per lb
-
-// Material prices by currency
+export const GROUT_COVERAGE_FACTOR = 25;
 export const MATERIAL_PRICES: Record<
   Currency,
   { groutPerBag: number; adhesivePerBucket: number; backerPerSheet: number }

@@ -1,7 +1,3 @@
-/**
- * MashWater Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMashWater } from '../../src/components/calculators/MashWaterCalculator/calculations';
 import type { MashWaterInputs } from '../../src/components/calculators/MashWaterCalculator/types';

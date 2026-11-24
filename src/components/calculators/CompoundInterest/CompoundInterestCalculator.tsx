@@ -1,8 +1,3 @@
-/**
- * Compound Interest Calculator - React Component
- *
- * Calculate investment growth with compound interest over time.
- */
 import { calculateCompoundInterest, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -53,7 +48,6 @@ export default function CompoundInterestCalculator() {
     { value: 'annually', label: 'Annually (1x/year)' },
   ];
 
-  // Growth multiplier
   const growthMultiplier =
     result.totalContributions > 0
       ? (result.finalBalance / result.totalContributions).toFixed(2)
@@ -70,7 +64,6 @@ export default function CompoundInterestCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Initial Investment & Monthly Contribution */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="principal" required>
@@ -103,7 +96,6 @@ export default function CompoundInterestCalculator() {
               </div>
             </Grid>
 
-            {/* Interest Rate & Compound Frequency */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="interestRate" required>
@@ -134,7 +126,6 @@ export default function CompoundInterestCalculator() {
               </div>
             </Grid>
 
-            {/* Investment Period */}
             <Slider
               label="Investment Period"
               value={inputs.years}
@@ -153,9 +144,7 @@ export default function CompoundInterestCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Future Value"
               value={formatCurrency(result.finalBalance, result.currency)}
@@ -170,7 +159,6 @@ export default function CompoundInterestCalculator() {
               }
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Contributions"
@@ -195,7 +183,6 @@ export default function CompoundInterestCalculator() {
               />
             </Grid>
 
-            {/* Year-by-Year Growth Chart */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Growth Timeline
@@ -255,7 +242,6 @@ export default function CompoundInterestCalculator() {
               {Math.round(72 / (inputs.interestRate * 100))} years.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.principal, inputs.currency)} invested at ${(inputs.interestRate * 100).toFixed(1)}% for ${inputs.years} years = ${formatCurrency(result.finalBalance, result.currency)} (+${formatCurrency(result.totalInterest, result.currency)} in interest!)`}

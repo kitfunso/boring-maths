@@ -57,7 +57,6 @@ describe('useLocalStorage', () => {
 
   describe('merging persisted state over defaults', () => {
     it('merges a payload missing a newer field in with the current default for that field', () => {
-      // Simulates a schema evolution: 'regions' was added after this payload was saved.
       vi.mocked(localStorage.getItem).mockReturnValue(JSON.stringify({ a: 2, b: 'saved' }));
 
       render(h(ObjectHarness, {}));
@@ -84,8 +83,6 @@ describe('useLocalStorage', () => {
 
       render(h(LocalStorageHarness, {}));
 
-      // 'initial-value' is a string default; a stored number is not a plain
-      // object, so no merge is attempted and the raw parsed value is used.
       expect(screen.getByText('42')).toBeInTheDocument();
     });
 

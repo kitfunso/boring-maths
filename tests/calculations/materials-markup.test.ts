@@ -1,7 +1,3 @@
-/**
- * Materials Markup Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateMaterialsMarkup,
@@ -176,7 +172,6 @@ describe('MaterialsMarkupCalculator', () => {
       const inputs = { ...getDefaultInputs(), quantity: 0 };
       const result = calculateMaterialsMarkup(inputs);
 
-      // totalProfit should equal profitPerUnit when qty is floored to 1
       expect(result.totalProfit).toBe(result.profitPerUnit);
     });
   });

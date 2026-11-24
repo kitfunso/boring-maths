@@ -1,9 +1,3 @@
-/**
- * Subscription Audit Calculator - Calculation Logic
- *
- * Pure functions for analyzing subscription spending.
- */
-
 import type {
   SubscriptionAuditInputs,
   SubscriptionAuditResult,
@@ -18,13 +12,10 @@ import { CATEGORY_LABELS } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Convert any frequency to monthly cost
- */
 function toMonthlyCost(cost: number, frequency: BillingFrequency): number {
   switch (frequency) {
     case 'weekly':
-      return cost * 4.33; // Average weeks per month
+      return cost * 4.33;
     case 'monthly':
       return cost;
     case 'quarterly':
@@ -36,9 +27,6 @@ function toMonthlyCost(cost: number, frequency: BillingFrequency): number {
   }
 }
 
-/**
- * Estimate uses per month based on usage rating
- */
 function getUsesPerMonth(usage: UsageRating): number {
   switch (usage) {
     case 'daily':
@@ -48,7 +36,7 @@ function getUsesPerMonth(usage: UsageRating): number {
     case 'monthly':
       return 1;
     case 'rarely':
-      return 0.25; // Once every 4 months
+      return 0.25;
     case 'never':
       return 0;
     default:
@@ -56,15 +44,11 @@ function getUsesPerMonth(usage: UsageRating): number {
   }
 }
 
-/**
- * Generate recommendation for a subscription
- */
 function getRecommendation(
   subscription: Subscription,
   monthlyCost: number,
   costPerUse: number
 ): { recommendation: AnalyzedSubscription['recommendation']; reason: string } {
-  // Never used = cancel
   if (subscription.usage === 'never') {
     return {
       recommendation: 'cancel',
@@ -72,7 +56,6 @@ function getRecommendation(
     };
   }
 
-  // Essential subscriptions get more leeway
   if (subscription.essential) {
     if (subscription.usage === 'rarely') {
       return {
@@ -86,7 +69,6 @@ function getRecommendation(
     };
   }
 
-  // Rarely used non-essential = cancel
   if (subscription.usage === 'rarely') {
     return {
       recommendation: 'cancel',
@@ -94,7 +76,6 @@ function getRecommendation(
     };
   }
 
-  // High cost per use = review
   if (costPerUse > 10) {
     return {
       recommendation: 'review',
@@ -102,7 +83,6 @@ function getRecommendation(
     };
   }
 
-  // Monthly subscriptions used only monthly = review
   if (subscription.usage === 'monthly' && monthlyCost > 15) {
     return {
       recommendation: 'review',
@@ -116,13 +96,9 @@ function getRecommendation(
   };
 }
 
-/**
- * Analyze subscriptions and generate recommendations
- */
 export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): SubscriptionAuditResult {
   const { currency, subscriptions, estimatedMonthlySpend } = inputs;
 
-  // Analyze each subscription
   const analyzedSubscriptions: AnalyzedSubscription[] = subscriptions.map((sub) => {
     const monthlyCost = toMonthlyCost(sub.cost, sub.frequency);
     const yearlyCost = monthlyCost * 12;
@@ -141,11 +117,9 @@ export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): Subscript
     };
   });
 
-  // Calculate totals
   const totalMonthly = analyzedSubscriptions.reduce((sum, s) => sum + s.monthlyCost, 0);
   const totalYearly = totalMonthly * 12;
 
-  // Estimate comparison
   const estimateComparison = {
     estimated: estimatedMonthlySpend,
     actual: totalMonthly,
@@ -156,7 +130,6 @@ export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): Subscript
         : 0,
   };
 
-  // Category breakdown
   const categoryMap = new Map<SubscriptionCategory, { count: number; total: number }>();
 
   analyzedSubscriptions.forEach((sub) => {
@@ -178,12 +151,10 @@ export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): Subscript
     }))
     .sort((a, b) => b.monthlyTotal - a.monthlyTotal);
 
-  // Potential savings
   const cancelSubs = analyzedSubscriptions.filter((s) => s.recommendation === 'cancel');
   const reviewSubs = analyzedSubscriptions.filter((s) => s.recommendation === 'review');
 
   const cancelSavings = cancelSubs.reduce((sum, s) => sum + s.monthlyCost, 0);
-  // Estimate 50% savings on review items
   const reviewSavings = reviewSubs.reduce((sum, s) => sum + s.monthlyCost * 0.5, 0);
 
   const potentialSavings = {
@@ -193,7 +164,6 @@ export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): Subscript
     subscriptionsToReview: reviewSubs.length,
   };
 
-  // Summary stats
   const essentialCount = subscriptions.filter((s) => s.essential).length;
   const summary = {
     totalSubscriptions: subscriptions.length,
@@ -228,9 +198,6 @@ export function analyzeSubscriptions(inputs: SubscriptionAuditInputs): Subscript
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',

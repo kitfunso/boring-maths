@@ -1,7 +1,3 @@
-/**
- * Scotland LBTT Calculator Types
- */
-
 export type ScotlandBuyerType = 'first-time' | 'home-mover' | 'additional';
 
 export interface LBTTInputs {

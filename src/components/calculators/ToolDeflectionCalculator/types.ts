@@ -1,8 +1,3 @@
-/**
- * Tool Deflection Calculator Types
- * Calculate end mill deflection to prevent tool breakage
- */
-
 export interface ToolDeflectionInputs {
   toolDiameter: number;
   stickout: number;
@@ -12,7 +7,6 @@ export interface ToolDeflectionInputs {
   cuttingForce: number;
   forceUnit: 'lbs' | 'N';
   calculationMode: 'force' | 'parameters';
-  // For parameter-based calculation
   depthOfCut: number;
   widthOfCut: number;
   feedRate: number;
@@ -30,14 +24,12 @@ export interface ToolDeflectionResults {
   recommendations: string[];
 }
 
-// Tool material properties (modulus of elasticity in psi)
 export const TOOL_MATERIALS = [
   { value: 'carbide', label: 'Carbide', modulus: 87000000, modulusGPa: 600 },
   { value: 'hss', label: 'High Speed Steel (HSS)', modulus: 30000000, modulusGPa: 207 },
   { value: 'cobalt', label: 'Cobalt HSS', modulus: 32000000, modulusGPa: 220 },
 ];
 
-// Common flute configurations
 export const FLUTE_OPTIONS = [
   { value: 2, label: '2 Flute', factor: 0.85 },
   { value: 3, label: '3 Flute', factor: 0.9 },
@@ -45,7 +37,6 @@ export const FLUTE_OPTIONS = [
   { value: 6, label: '6 Flute', factor: 1.05 },
 ];
 
-// Material cutting force factors
 export const MATERIAL_FACTORS = [
   { label: 'Aluminum', factor: 0.3, kc: 800 },
   { label: 'Brass', factor: 0.4, kc: 1100 },
@@ -58,7 +49,6 @@ export const MATERIAL_FACTORS = [
   { label: 'Wood', factor: 0.1, kc: 300 },
 ];
 
-// Common tool sizes
 export const TOOL_PRESETS = [
   { label: '1/8"', diameter: 0.125, maxStickout: 0.5 },
   { label: '3/16"', diameter: 0.1875, maxStickout: 0.75 },

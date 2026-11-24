@@ -28,28 +28,23 @@ export default [
       '@typescript-eslint': tseslint,
     },
     rules: {
-      // TypeScript rules
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
 
-      // Common bug prevention
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'eqeqeq': ['error', 'always'],
       'no-var': 'error',
       'prefer-const': 'warn',
 
-      // Calculation safety
       'no-loss-of-precision': 'error',
       'no-floating-decimal': 'off',
 
-      // Prevent common mistakes
       'no-unused-vars': 'off', // Use TypeScript version instead
       'no-undef': 'off', // TypeScript handles this
       'no-redeclare': 'off', // TypeScript handles this
     },
   },
   {
-    // Test files configuration
     files: ['tests/**/*.ts', 'tests/**/*.tsx'],
     languageOptions: {
       parser: tsparser,

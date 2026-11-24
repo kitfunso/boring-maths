@@ -1,7 +1,3 @@
-/**
- * College ROI Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type EducationPath =
@@ -15,25 +11,20 @@ export interface CollegeROIInputs {
   currency: Currency;
   educationPath: EducationPath;
 
-  // College costs
   annualTuition: number;
   yearsOfStudy: number;
   scholarshipAmount: number;
   livingExpenses: number;
 
-  // Career
   expectedStartingSalary: number;
   salaryGrowthRate: number;
 
-  // Comparison baseline
-  alternativeSalary: number; // what you'd earn without this education
+  alternativeSalary: number;
   alternativeGrowthRate: number;
 
-  // Financing
   loanInterestRate: number;
   loanRepaymentYears: number;
 
-  // Analysis period
   careerYears: number;
 }
 
@@ -55,27 +46,22 @@ export interface YearlyProjection {
 export interface CollegeROIResult {
   currency: Currency;
 
-  // Total costs
   totalCost: number;
   totalLoanAmount: number;
   totalInterestPaid: number;
   monthlyLoanPayment: number;
 
-  // ROI metrics
   paybackPeriod: number | null;
   lifetimeEarningsPremium: number;
-  roi: number; // percentage return on investment
+  roi: number;
   netPresentValue: number;
 
-  // Comparisons
   yearlyProjections: YearlyProjection[];
 
-  // Summary
   breakEvenAge: number | null;
   opportunityCost: number;
   debtToIncomeRatio: number;
 
-  // Insights
   worthIt: boolean;
   factors: string[];
 }

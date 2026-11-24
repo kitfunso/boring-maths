@@ -1,5 +1,3 @@
-/** Ireland take-home pay tests. Expected values are hand-computed from Budget 2026 (tax year 2026): standard rate band 44000 (20%/40%), credits 4000, USC bands 0.5%/2%/3%/8% (exempt below 13000), PRSI 4.2375% above 352/week, less a weekly credit of 12 that falls by one sixth of pay above 352.01 (nil from 424/week). */
-
 import { describe, it, expect } from 'vitest';
 import { calculateIrelandSalary } from '../../src/components/calculators/IrelandSalaryCalculator/calculations';
 
@@ -15,7 +13,6 @@ describe('IrelandSalaryCalculator', () => {
     });
 
     it('charges zero tax, USC and PRSI on a low 12,000 salary (edge case)', () => {
-      // Below the USC exemption (13000) and the PRSI weekly threshold (352), so both are zero.
       const result = calculateIrelandSalary({ grossAnnualSalary: 12000 });
       expect(result.incomeTax).toBe(0);
       expect(result.usc).toBe(0);
@@ -41,7 +38,6 @@ describe('IrelandSalaryCalculator', () => {
     });
 
     it('applies the tapering PRSI credit at 19,500 (weekly 375)', () => {
-      // credit 12 - 22.99 / 6 = 8.168333 a week = 424.7533 a year; 19500 x 0.042375 - 424.7533
       const result = calculateIrelandSalary({ grossAnnualSalary: 19500 });
       expect(result.prsi).toBeCloseTo(401.56, 1);
     });

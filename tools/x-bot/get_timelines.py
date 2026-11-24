@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Get recent tweets from known UK finance accounts."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 import tweepy
@@ -14,7 +13,6 @@ client = tweepy.Client(
     wait_on_rate_limit=False
 )
 
-# Load dedup file
 dedup_path = r'C:\Users\skf_s\clawd\tasks\state\x-replied-posts.txt'
 already_replied = set()
 try:
@@ -22,7 +20,6 @@ try:
         for line in f:
             line = line.strip()
             if line:
-                # Extract status ID from URL
                 already_replied.add(line)
                 if '/status/' in line:
                     sid = line.split('/status/')[-1].strip()
@@ -30,7 +27,6 @@ try:
 except:
     pass
 
-# Known UK finance accounts with usernames
 accounts = [
     'MartinSLewis',
     'GuyTalksFinance', 
@@ -53,13 +49,11 @@ found = []
 
 for username in accounts:
     try:
-        # Get user ID first
         user = client.get_user(username=username)
         if not user.data:
             continue
         uid = user.data.id
         
-        # Get recent tweets
         resp = client.get_users_tweets(
             id=uid,
             max_results=5,

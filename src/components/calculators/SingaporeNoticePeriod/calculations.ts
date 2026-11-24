@@ -1,13 +1,9 @@
-/** Singapore Notice Period and Final Pay Calculator. MOM's statutory table applies only when the contract is silent, hence the override input. */
-
-// Statutory notice thresholds (weeks of service), MOM "termination with notice"
 export const NOTICE_THRESHOLD_26_WEEKS = 26;
 export const NOTICE_THRESHOLD_2_YEARS_WEEKS = 104;
 export const NOTICE_THRESHOLD_5_YEARS_WEEKS = 260;
 
-// Annual leave entitlement (Employment Act minimum)
-export const LEAVE_BASE_DAYS = 7; // year 1
-export const LEAVE_MAX_DAYS = 14; // cap from year 8
+export const LEAVE_BASE_DAYS = 7;
+export const LEAVE_MAX_DAYS = 14;
 
 export const WEEKS_PER_YEAR = 52;
 export const MONTHS_PER_YEAR = 12;
@@ -18,7 +14,7 @@ export interface SingaporeNoticePeriodInputs {
   serviceMonths: number;
   workingDaysPerWeek: number;
   unusedLeaveDays: number;
-  contractualNoticeWeeks: number; // 0 = no contractual override, statute applies
+  contractualNoticeWeeks: number;
 }
 
 export interface SingaporeNoticePeriodResult {
@@ -52,7 +48,6 @@ interface NoticeUnit {
   amount: number;
 }
 
-/** MOM's default notice table; a written contract term overrides it entirely. */
 function statutoryNotice(serviceWeeks: number): NoticeUnit {
   if (serviceWeeks < NOTICE_THRESHOLD_26_WEEKS) return { unit: 'day', amount: 1 };
   if (serviceWeeks < NOTICE_THRESHOLD_2_YEARS_WEEKS) return { unit: 'week', amount: 1 };
@@ -68,7 +63,6 @@ function noticeToDays(notice: NoticeUnit, workingDaysPerWeek: number): number {
   return notice.unit === 'day' ? notice.amount : notice.amount * workingDaysPerWeek;
 }
 
-/** Leave rises 1 day per completed year from a 7-day base, capped at 14 from year 8. */
 function leaveEntitlement(completedYears: number): number {
   return Math.min(LEAVE_MAX_DAYS, LEAVE_BASE_DAYS + Math.max(0, completedYears));
 }
@@ -93,7 +87,6 @@ export function calculateSingaporeNoticePeriod(
     ? { unit: 'week', amount: overrideWeeks }
     : statutory;
 
-  // MOM's gross rate of pay per day, not a hardcoded 26-day month.
   const dailyRate = (MONTHS_PER_YEAR * monthlyGrossSalary) / (WEEKS_PER_YEAR * workingDaysPerWeek);
 
   const statutoryNoticeDays = noticeToDays(statutory, workingDaysPerWeek);

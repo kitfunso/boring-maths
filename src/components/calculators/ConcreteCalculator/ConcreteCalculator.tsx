@@ -1,8 +1,3 @@
-/**
- * Concrete Calculator - React Component
- *
- * Estimates bags of concrete and total volume for a slab, footing, or column.
- */
 import { calculateConcreteCalculator } from './calculations';
 import {
   getDefaultInputs,
@@ -66,7 +61,6 @@ export default function ConcreteCalculator() {
   const isColumn = inputs.shape === 'column';
   const unitLabel = inputs.unit === 'ft' ? 'ft' : 'm';
 
-  // Labels switch for column: diameter + height instead of width + depth.
   const firstDimLabel = isColumn ? 'Diameter' : 'Width';
   const secondDimLabel = isColumn ? 'Height' : 'Depth';
 
@@ -81,13 +75,11 @@ export default function ConcreteCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider">
                 Pour Details
               </div>
 
-              {/* Shape */}
               <div>
                 <Label>Shape</Label>
                 <Select
@@ -97,7 +89,6 @@ export default function ConcreteCalculator() {
                 />
               </div>
 
-              {/* Units */}
               <div>
                 <Label>Units</Label>
                 <ButtonGroup
@@ -108,7 +99,6 @@ export default function ConcreteCalculator() {
                 />
               </div>
 
-              {/* Dimensions */}
               <div>
                 <div className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                   Dimensions ({unitLabel})
@@ -212,7 +202,6 @@ export default function ConcreteCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {result.isInvalid ? (
                 <Alert variant="warning" title="Add your dimensions">

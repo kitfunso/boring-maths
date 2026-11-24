@@ -1,5 +1,3 @@
-/** Go Full-Time Calculator - Type Definitions: when you can quit your job to pursue freelancing or a side hustle full-time. */
-
 import type { Currency } from '../../../lib/regions';
 
 export type RiskTolerance = 'conservative' | 'moderate' | 'aggressive';
@@ -35,23 +33,18 @@ export const RISK_THRESHOLDS: Record<RiskTolerance, RiskThreshold> = {
 export interface GoFullTimeInputs {
   currency: Currency;
 
-  /** After-tax take-home. */
   annualSalary: number;
 
-  /** Monthly value (health insurance, 401k match, etc.) */
   monthlyBenefitsValue: number;
 
-  /** Essential monthly costs. */
   monthlyExpenses: number;
 
   currentSavings: number;
 
   monthlySideIncome: number;
 
-  /** Expected monthly growth rate of side income (as decimal, e.g., 0.10 = 10%) */
   monthlyGrowthRate: number;
 
-  /** Months of expenses. */
   desiredSafetyBuffer: number;
 
   riskTolerance: RiskTolerance;
@@ -75,22 +68,16 @@ export interface ScenarioAnalysis {
 export interface GoFullTimeResult {
   currency: Currency;
 
-  /** After-tax. */
   monthlySalary: number;
 
-  /** Salary + benefits. */
   monthlyTotalCompensation: number;
 
-  /** If you quit today. */
   currentRunwayMonths: number;
 
-  /** Minimum to sustain without savings. */
   breakEvenSideIncome: number;
 
-  /** Per month, to match total compensation. */
   incomeGapToSalary: number;
 
-  /** Per month, to cover expenses. */
   incomeGapToExpenses: number;
 
   monthsToCrossover: number;
@@ -101,7 +88,6 @@ export interface GoFullTimeResult {
 
   fullReplacementDate: Date | null;
 
-  /** Based on risk tolerance + safety buffer. */
   recommendedQuitDate: Date | null;
 
   monthsToRecommendedQuit: number;
@@ -114,12 +100,10 @@ export interface GoFullTimeResult {
 
   scenarios: ScenarioAnalysis[];
 
-  /** 24-month projection. */
   projections: ProjectionPoint[];
 
   statusMessage: string;
 
-  /** 0-100. */
   encouragementLevel: number;
 }
 

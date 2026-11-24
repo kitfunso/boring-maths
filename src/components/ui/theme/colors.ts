@@ -1,37 +1,21 @@
-/**
- * Design System Color Tokens - Dark Theme
- *
- * Maps theme colors to Tailwind CSS classes for consistent styling across components.
- */
-
 export type ThemeColor = 'blue' | 'green' | 'yellow' | 'red' | 'purple';
 
 export interface ColorTokens {
-  // Background colors (dark theme)
   bg50: string;
   bg100: string;
   bg600: string;
   bg700: string;
-  // Border colors
   border200: string;
   border500: string;
-  // Text colors
   text100: string;
   text600: string;
   text700: string;
-  // Focus ring
   ring100: string;
-  // Gradient classes (dark theme)
   gradientHeader: string;
   gradientResult: string;
-  // Accent (slider, checkbox)
   accent: string;
 }
 
-/**
- * Complete color token mappings for each theme color.
- * Updated for dark theme.
- */
 export const COLOR_TOKENS: Record<ThemeColor, ColorTokens> = {
   blue: {
     bg50: 'bg-blue-950/30',
@@ -110,9 +94,6 @@ export const COLOR_TOKENS: Record<ThemeColor, ColorTokens> = {
   },
 };
 
-/**
- * Semantic color mappings (dark theme)
- */
 export const SEMANTIC_COLORS = {
   success: {
     bg: 'bg-emerald-950/30',
@@ -140,9 +121,6 @@ export const SEMANTIC_COLORS = {
   },
 };
 
-/**
- * Get color tokens for a specific theme color.
- */
 export function getColorTokens(color: ThemeColor): ColorTokens {
   return COLOR_TOKENS[color];
 }

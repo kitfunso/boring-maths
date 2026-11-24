@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-// Fails the build if any internal <a href> in dist/ emits the slash-less
-// URL form (Cloudflare 308s it; canonical is trailingSlash:'always') or
-// points at a page the build did not produce (a live 404).
 import fs from 'node:fs';
 import path from 'node:path';
 import { walkFiles } from '../lib/walk-files.mjs';
@@ -19,10 +16,10 @@ function checkFile(file) {
   const html = fs.readFileSync(file, 'utf8');
   for (const match of html.matchAll(/(?<![\w-])href="((?:https:\/\/boring-math\.com)?\/[^"]*)"/g)) {
     const raw = match[1];
-    if (raw.startsWith('//')) continue; // protocol-relative external
-    const href = raw.replace(ORIGIN, '').replace(/[#?].*$/, ''); // absolute self-links count too
+    if (raw.startsWith('//')) continue;
+    const href = raw.replace(ORIGIN, '').replace(/[#?].*$/, '');
     if (href === '/' || href === '') continue;
-    if (/\.[a-z0-9]+$/i.test(href)) continue; // asset files (.xml, .webp, .txt, ...)
+    if (/\.[a-z0-9]+$/i.test(href)) continue;
     if (!href.endsWith('/')) offenders.push(`${path.relative(DIST, file)}: ${raw}`);
     else if (!fs.existsSync(path.join(DIST, href, 'index.html'))) {
       if (!dead.has(href)) dead.set(href, []);
@@ -31,7 +28,6 @@ function checkFile(file) {
   }
 }
 
-// 404.html is served for every missing path, so its self-canonical never resolves.
 for (const file of walkFiles(DIST, /\.html$/)) {
   if (path.relative(DIST, file) !== '404.html') checkFile(file);
 }

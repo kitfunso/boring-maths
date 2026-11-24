@@ -1,7 +1,3 @@
-/**
- * Road Trip Cost Calculator - Preact Component
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateRoadTripCost, formatCurrency, formatNumber } from './calculations';
 import { getDefaultInputs, type RoadTripInputs, type DistanceUnit, type FuelUnit } from './types';
@@ -58,15 +54,12 @@ export default function RoadTripCostCalculator() {
 
   const handleDistanceUnitChange = (newUnit: DistanceUnit) => {
     setInputs((prev) => {
-      // Convert distance when switching units
       const converted =
         newUnit === 'km'
           ? Math.round(prev.totalDistance * 1.60934)
           : Math.round(prev.totalDistance / 1.60934);
 
-      // Switch fuel unit to match
       const newFuelUnit: FuelUnit = newUnit === 'miles' ? 'mpg' : 'l100km';
-      // Convert fuel economy
       let newFuelEconomy = prev.fuelEconomy;
       if (prev.fuelUnit === 'mpg' && newFuelUnit === 'l100km') {
         newFuelEconomy =
@@ -81,7 +74,6 @@ export default function RoadTripCostCalculator() {
             : 25;
       }
 
-      // Convert fuel price
       const newFuelPrice =
         prev.fuelUnit === 'mpg' && newFuelUnit !== 'mpg'
           ? Math.round((prev.fuelPrice / 3.78541) * 100) / 100
@@ -114,7 +106,6 @@ export default function RoadTripCostCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Distance Unit Toggle */}
             <div>
               <Label>Distance Unit</Label>
               <ButtonGroup
@@ -127,7 +118,6 @@ export default function RoadTripCostCalculator() {
               />
             </div>
 
-            {/* Total Distance */}
             <div>
               <Label htmlFor="totalDistance" required>
                 Total Distance ({inputs.unit === 'miles' ? 'mi' : 'km'})
@@ -142,7 +132,6 @@ export default function RoadTripCostCalculator() {
               />
             </div>
 
-            {/* Fuel Economy */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="fuelEconomy" required>
@@ -186,7 +175,6 @@ export default function RoadTripCostCalculator() {
               </div>
             </Grid>
 
-            {/* Trip Duration & Passengers */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="tripDays" required>
@@ -223,7 +211,6 @@ export default function RoadTripCostCalculator() {
               </div>
             </Grid>
 
-            {/* Expenses */}
             <Grid responsive={{ sm: 3 }} gap="md">
               <div>
                 <Label htmlFor="tolls">Tolls (total)</Label>
@@ -269,11 +256,9 @@ export default function RoadTripCostCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.totalDistance > 0 ? (
               <>
-                {/* Primary Result - Cost Per Person */}
                 <ResultCard
                   label="Cost Per Person"
                   value={formatCurrency(result.costPerPerson, inputs.currency)}
@@ -288,7 +273,6 @@ export default function RoadTripCostCalculator() {
                   }
                 />
 
-                {/* Cost Breakdown */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Fuel"
@@ -313,7 +297,6 @@ export default function RoadTripCostCalculator() {
                   />
                 </Grid>
 
-                {/* Trip Stats */}
                 <Grid responsive={{ sm: 2, md: 3 }} gap="md">
                   <MetricCard
                     label={`Cost ${result.costPerMileLabel}`}
@@ -333,7 +316,6 @@ export default function RoadTripCostCalculator() {
                   />
                 </Grid>
 
-                {/* CO2 Emissions */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Environmental Impact
@@ -356,7 +338,6 @@ export default function RoadTripCostCalculator() {
                   </Grid>
                 </div>
 
-                {/* vs Flying Comparison */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Driving vs Flying
@@ -409,7 +390,6 @@ export default function RoadTripCostCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.totalDistance > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

@@ -1,53 +1,7 @@
-/**
- * Boring Math Calculators - Design System
- *
- * A collection of reusable React components for building calculator interfaces.
- * All components support theming via ThemeProvider.
- *
- * @example
- * ```tsx
- * import {
- *   ThemeProvider,
- *   Card,
- *   CalculatorHeader,
- *   CurrencySelector,
- *   Input,
- *   Label,
- *   Grid,
- *   Divider,
- *   ResultCard,
- *   MetricCard,
- *   Alert,
- * } from '../../ui';
- *
- * function MyCalculator() {
- *   return (
- *     <ThemeProvider defaultColor="blue">
- *       <Card variant="elevated">
- *         <CalculatorHeader title="My Calculator" />
- *         <div className="p-6">
- *           <Grid cols={2}>
- *             <div>
- *               <Label required>Amount</Label>
- *               <Input variant="currency" />
- *             </div>
- *           </Grid>
- *           <Divider />
- *           <ResultCard label="Result" value="$1,000" />
- *         </div>
- *       </Card>
- *     </ThemeProvider>
- *   );
- * }
- * ```
- */
-
-// Theme
 export { ThemeProvider, useTheme, useThemeTokens } from './theme/ThemeContext';
 export type { ThemeColor, ColorTokens } from './theme/ThemeContext';
 export { COLOR_TOKENS, SEMANTIC_COLORS, getColorTokens } from './theme/colors';
 
-// Primitives
 export { Label } from './primitives/Label';
 export type { LabelProps } from './primitives/Label';
 
@@ -74,7 +28,6 @@ export type { ToggleProps } from './primitives/Toggle';
 
 export { default as MultiSelectChips } from './primitives/MultiSelectChips';
 
-// Layout
 export { Card } from './layout/Card';
 export type { CardProps } from './layout/Card';
 
@@ -84,7 +37,6 @@ export type { GridProps } from './layout/Grid';
 export { Divider } from './layout/Divider';
 export type { DividerProps } from './layout/Divider';
 
-// Calculator-specific
 export { CalculatorHeader } from './calculator/CalculatorHeader';
 export type { CalculatorHeaderProps } from './calculator/CalculatorHeader';
 
@@ -106,7 +58,6 @@ export type { DataImportBannerProps } from './calculator/DataImportBanner';
 export { DataExportIndicator } from './calculator/DataExportIndicator';
 export type { DataExportIndicatorProps } from './calculator/DataExportIndicator';
 
-// Actions
 export { default as ShareResults } from './ShareResults';
 export { default as PrintResults } from './PrintResults';
 export { default as KeyboardShortcutOverlay } from './KeyboardShortcutOverlay';

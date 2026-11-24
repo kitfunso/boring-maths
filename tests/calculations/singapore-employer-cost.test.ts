@@ -1,5 +1,3 @@
-/** Expected values hand-computed from employer CPF rates and SDL (0.25% of wages to 4,500, min 2, max 11.25) effective 1 Jan 2026. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeEmployerCost } from '../../src/components/calculators/SingaporeEmployerCost/calculations';
 

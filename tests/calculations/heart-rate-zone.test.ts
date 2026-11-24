@@ -1,7 +1,3 @@
-/**
- * HeartRateZoneCalculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateHeartRateZones } from '../../src/components/calculators/HeartRateZoneCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HeartRateZoneCalculator/types';
@@ -13,7 +9,6 @@ describe('HeartRateZoneCalculator', () => {
 
       const result = calculateHeartRateZones(inputs);
 
-      // Default: age 30, maxHR = 220-30 = 190
       expect(result.maxHR).toBe(190);
       expect(result.zones).toHaveLength(5);
       expect(result.zones[0].name).toBe('Recovery');
@@ -29,11 +24,9 @@ describe('HeartRateZoneCalculator', () => {
 
       const result = calculateHeartRateZones(inputs);
 
-      // maxHR = 190, Zone 1 = 50-60% = 95-114
       expect(result.zones[0].minBPM).toBe(95);
       expect(result.zones[0].maxBPM).toBe(114);
 
-      // Zone 5 = 90-100% = 171-190
       expect(result.zones[4].minBPM).toBe(171);
       expect(result.zones[4].maxBPM).toBe(190);
     });
@@ -48,12 +41,9 @@ describe('HeartRateZoneCalculator', () => {
 
       const result = calculateHeartRateZones(inputs);
 
-      // maxHR = 190, HRR = 190-60 = 130
-      // Zone 1: 50% x 130 + 60 = 125, 60% x 130 + 60 = 138
       expect(result.zones[0].minBPM).toBe(125);
       expect(result.zones[0].maxBPM).toBe(138);
 
-      // Zone 5: 90% x 130 + 60 = 177, 100% x 130 + 60 = 190
       expect(result.zones[4].minBPM).toBe(177);
       expect(result.zones[4].maxBPM).toBe(190);
     });
@@ -69,7 +59,6 @@ describe('HeartRateZoneCalculator', () => {
       const result = calculateHeartRateZones(inputs);
 
       expect(result.maxHR).toBe(200);
-      // Zone 1: 50% x 200 = 100
       expect(result.zones[0].minBPM).toBe(100);
     });
 
@@ -83,7 +72,7 @@ describe('HeartRateZoneCalculator', () => {
 
       const result = calculateHeartRateZones(inputs);
 
-      expect(result.maxHR).toBe(190); // 220 - 30
+      expect(result.maxHR).toBe(190);
     });
 
     it('should return goal-based zone recommendations', () => {
@@ -118,7 +107,7 @@ describe('HeartRateZoneCalculator', () => {
       const result = calculateHeartRateZones(inputs);
 
       expect(result.maxHR).toBe(120);
-      expect(result.zones[0].minBPM).toBe(60); // 50% x 120
+      expect(result.zones[0].minBPM).toBe(60);
     });
 
     it('should handle edge case: age exceeding 220', () => {
@@ -158,9 +147,6 @@ describe('HeartRateZoneCalculator', () => {
         method: 'karvonen' as const,
       });
 
-      // Zone 1 min: Karvonen should be higher because it adds resting HR
-      // Percentage: 50% x 190 = 95
-      // Karvonen: 50% x (190-50) + 50 = 50% x 140 + 50 = 120
       expect(karvonenResult.zones[0].minBPM).toBeGreaterThan(percentResult.zones[0].minBPM);
     });
 

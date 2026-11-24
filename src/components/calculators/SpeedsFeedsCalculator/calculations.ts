@@ -1,7 +1,3 @@
-/**
- * Speeds & Feeds Calculator - Calculation Logic
- */
-
 import type { SpeedsFeedsInputs, SpeedsFeedsResult } from './types';
 import { MATERIALS, OPERATION_TYPES, TOOL_MATERIALS } from './types';
 
@@ -17,28 +13,21 @@ export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResu
     depthOfCutUnit,
   } = inputs;
 
-  // Convert to inches if needed
   const diameterInches = toolDiameterUnit === 'mm' ? toolDiameter / 25.4 : toolDiameter;
   const docInches = depthOfCutUnit === 'mm' ? depthOfCut / 25.4 : depthOfCut;
 
-  // Get material properties
   const materialData = MATERIALS.find((m) => m.value === material) || MATERIALS[0];
   const operationData =
     OPERATION_TYPES.find((o) => o.value === operationType) || OPERATION_TYPES[0];
   const toolMaterialData =
     TOOL_MATERIALS.find((t) => t.value === toolMaterial) || TOOL_MATERIALS[0];
 
-  // Apply multipliers (MATERIALS.sfm is the HSS baseline; toolMaterialData scales it up for
-  // cobalt/carbide/coated tooling - see the sourced comment on TOOL_MATERIALS in types.ts)
   const effectiveSFM =
     materialData.sfm * operationData.sfmMultiplier * toolMaterialData.sfmMultiplier;
   const effectiveChipLoad = materialData.chipLoad * operationData.chipLoadMultiplier;
 
-  // RPM = (SFM × 12) / (π × Diameter)
   const rpm = Math.round((effectiveSFM * 12) / (Math.PI * diameterInches));
 
-  // Chip load adjustment based on tool diameter
-  // Smaller tools need lower chip loads
   let adjustedChipLoad = effectiveChipLoad;
   if (diameterInches < 0.25) {
     adjustedChipLoad *= 0.5;
@@ -46,16 +35,12 @@ export function calculateSpeedsFeeds(inputs: SpeedsFeedsInputs): SpeedsFeedsResu
     adjustedChipLoad *= 0.75;
   }
 
-  // Feed Rate = RPM × Chip Load × Number of Flutes (in IPM)
   const feedRate = Math.round(rpm * adjustedChipLoad * numberOfFlutes * 10) / 10;
 
-  // Surface Speed (already calculated as effectiveSFM)
   const surfaceSpeed = Math.round(effectiveSFM);
 
-  // Material Removal Rate = Feed Rate × DOC × Tool Diameter (in³/min)
   const materialRemovalRate = Math.round(feedRate * docInches * diameterInches * 100) / 100;
 
-  // Cutting time for 1 inch of travel (seconds)
   const cuttingTime = feedRate > 0 ? Math.round((60 / feedRate) * 100) / 100 : 0;
 
   return {

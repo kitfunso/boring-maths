@@ -1,16 +1,11 @@
-/**
- * Candle Wax Calculator Types
- * Calculate wax weight from container volume for candle making
- */
-
 export interface CandleWaxInputs {
   calculationMode: 'dimensions' | 'volume';
   containerDiameter: number;
   containerHeight: number;
   containerShape: 'cylinder' | 'square' | 'oval';
-  ovalWidth: number; // For oval containers
+  ovalWidth: number;
   fillPercentage: number;
-  directVolume: number; // oz or mL
+  directVolume: number;
   volumeUnit: 'ounces' | 'ml';
   waxType: string;
   numberOfContainers: number;
@@ -18,18 +13,17 @@ export interface CandleWaxInputs {
 }
 
 export interface CandleWaxResults {
-  containerVolume: number; // in selected unit
+  containerVolume: number;
   usableVolume: number;
   waxWeight: number;
   waxWeightPerContainer: number;
-  wickedWeight: number; // Account for wick displacement
+  wickedWeight: number;
   suggestedWickSize: string;
-  burnTime: number; // Estimated hours
+  burnTime: number;
   waxNeededWithOverpour: number;
   weightUnit: string;
 }
 
-// Wax types with densities (oz wax per oz volume)
 export const WAX_TYPES = [
   {
     value: 'soy-464',
@@ -89,7 +83,6 @@ export const WAX_TYPES = [
   },
 ];
 
-// Common container sizes
 export const CONTAINER_PRESETS = [
   { label: '4oz Tin', diameter: 2.6, height: 1.5, shape: 'cylinder' as const },
   { label: '8oz Tin', diameter: 3.0, height: 2.25, shape: 'cylinder' as const },
@@ -100,7 +93,6 @@ export const CONTAINER_PRESETS = [
   { label: '3-Wick 14oz', diameter: 4.5, height: 3.0, shape: 'cylinder' as const },
 ];
 
-// Wick sizing guide (approximate)
 export const WICK_GUIDE = [
   { maxDiameter: 2.0, wickSize: 'Small (CD 6, ECO 2)' },
   { maxDiameter: 2.5, wickSize: 'Small-Medium (CD 8, ECO 4)' },
@@ -110,7 +102,6 @@ export const WICK_GUIDE = [
   { maxDiameter: 5.0, wickSize: 'X-Large or Multi-Wick' },
 ];
 
-// Fill percentages
 export const FILL_OPTIONS = [
   { value: 80, label: '80% - Room for top-off' },
   { value: 85, label: '85% - Standard' },

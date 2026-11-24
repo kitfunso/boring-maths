@@ -5,15 +5,10 @@ export interface CheckboxProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type' | 'onChange' | 'checked' | 'size'
 > {
-  /** Controlled checked state */
   checked: boolean;
-  /** Change handler */
   onChange: (checked: boolean) => void;
-  /** Label text or element */
   label?: ReactNode;
-  /** Size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Additional class names for container */
   className?: string;
 }
 
@@ -29,18 +24,6 @@ const LABEL_SIZE_CLASSES = {
   lg: 'text-base',
 };
 
-/**
- * Themed checkbox component with optional label.
- *
- * @example
- * ```tsx
- * <Checkbox
- *   checked={includeOvertime}
- *   onChange={setIncludeOvertime}
- *   label="Include overtime pay"
- * />
- * ```
- */
 export function Checkbox({
   checked,
   onChange,

@@ -1,9 +1,3 @@
-/**
- * Reynolds Number Calculator - React Component
- *
- * Calculate Reynolds number to determine flow regime (laminar/turbulent).
- * Essential for chemical engineers working with fluid flow systems.
- */
 import { calculateReynolds, formatNumber, formatScientific } from './calculations';
 import {
   getDefaultInputs,
@@ -38,7 +32,6 @@ export default function ReynoldsNumberCalculator() {
     if (system === inputs.unitSystem) return;
 
     if (system === 'imperial') {
-      // Convert from metric to imperial
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'imperial',
@@ -47,7 +40,6 @@ export default function ReynoldsNumberCalculator() {
         temperature: Math.round((prev.temperature * 9) / 5 + 32), // °C to °F
       }));
     } else {
-      // Convert from imperial to metric
       setInputs((prev) => ({
         ...prev,
         unitSystem: 'metric',
@@ -105,7 +97,6 @@ export default function ReynoldsNumberCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -116,7 +107,6 @@ export default function ReynoldsNumberCalculator() {
               />
             </div>
 
-            {/* Fluid Type */}
             <div>
               <Label>Fluid Type</Label>
               <ButtonGroup
@@ -127,7 +117,6 @@ export default function ReynoldsNumberCalculator() {
               />
             </div>
 
-            {/* Pipe Diameter & Velocity */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="diameter" required>
@@ -157,7 +146,6 @@ export default function ReynoldsNumberCalculator() {
               </div>
             </Grid>
 
-            {/* Temperature */}
             <div>
               <Label htmlFor="temperature">Fluid Temperature ({tempUnit})</Label>
               <Input
@@ -173,7 +161,6 @@ export default function ReynoldsNumberCalculator() {
               </p>
             </div>
 
-            {/* Custom Viscosity */}
             {inputs.fluidType === 'custom' && (
               <div>
                 <Label htmlFor="viscosity" required>
@@ -196,9 +183,7 @@ export default function ReynoldsNumberCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Reynolds Number */}
             <div
               className={`rounded-2xl p-8 text-center border-2 ${getRegimeStyles(result.flowRegime.color)}`}
             >
@@ -212,7 +197,6 @@ export default function ReynoldsNumberCalculator() {
               <p className="text-sm opacity-75 max-w-md mx-auto">{result.flowRegime.description}</p>
             </div>
 
-            {/* Flow Regime Reference */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Flow Regime Classification
@@ -251,7 +235,6 @@ export default function ReynoldsNumberCalculator() {
               </div>
             </div>
 
-            {/* Additional Info */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -271,7 +254,6 @@ export default function ReynoldsNumberCalculator() {
               </div>
             </Grid>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Formula Used
@@ -290,7 +272,6 @@ export default function ReynoldsNumberCalculator() {
               flow when in doubt.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Reynolds Number: ${formatNumber(result.reynoldsNumber)} (${result.flowRegime.name} Flow) - D=${inputs.diameter}${diameterUnit}, V=${inputs.velocity}${velocityUnit}`}

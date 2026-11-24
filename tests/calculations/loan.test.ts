@@ -1,7 +1,3 @@
-/**
- * LoanCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateLoan } from '../../src/components/calculators/LoanCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/LoanCalculator/types';
@@ -17,7 +13,6 @@ describe('LoanCalculator', () => {
       expect(result.totalPayment).toBeCloseTo(30056.92, 2);
       expect(result.totalInterest).toBeCloseTo(5056.92, 2);
       expect(result.effectiveRate).toBeCloseTo(20.2, 1);
-      // payoffDate is computed from today + loan term, so assert its format, not a fixed month.
       expect(result.payoffDate).toMatch(
         /^(January|February|March|April|May|June|July|August|September|October|November|December) \d{4}$/
       );

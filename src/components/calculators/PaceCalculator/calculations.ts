@@ -1,17 +1,7 @@
-/**
- * Pace Calculator - Calculation Logic
- *
- * Pure functions for pace, time, and distance calculations.
- * Conversion: 1 mile = 1.60934 km
- */
-
 import { RACE_DISTANCES, type PaceCalculatorInputs, type PaceCalculatorResult } from './types';
 
 const KM_PER_MILE = 1.60934;
 
-/**
- * Format total seconds into HH:MM:SS or MM:SS string
- */
 function formatTime(totalSeconds: number): string {
   if (!isFinite(totalSeconds) || totalSeconds < 0) return '--:--';
   const h = Math.floor(totalSeconds / 3600);
@@ -23,9 +13,6 @@ function formatTime(totalSeconds: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-/**
- * Format pace as MM:SS per unit
- */
 function formatPace(secondsPerUnit: number): string {
   if (!isFinite(secondsPerUnit) || secondsPerUnit <= 0) return '--:--';
   const m = Math.floor(secondsPerUnit / 60);
@@ -33,9 +20,6 @@ function formatPace(secondsPerUnit: number): string {
   return `${m}:${String(s).padStart(2, '0')}`;
 }
 
-/**
- * Calculate pace, time, or distance based on mode
- */
 export function calculatePace(inputs: PaceCalculatorInputs): PaceCalculatorResult {
   const { mode, distanceUnit, distance, hours, minutes, seconds, paceMinutes, paceSeconds } =
     inputs;
@@ -57,7 +41,6 @@ export function calculatePace(inputs: PaceCalculatorInputs): PaceCalculatorResul
   let paceSecondsPerKm: number;
 
   if (mode === 'pace') {
-    // Calculate pace from distance + time
     if (distance <= 0) return invalid;
     totalSeconds = hours * 3600 + minutes * 60 + seconds;
     if (totalSeconds <= 0) return invalid;
@@ -65,23 +48,19 @@ export function calculatePace(inputs: PaceCalculatorInputs): PaceCalculatorResul
     distanceKm = distanceUnit === 'miles' ? distance * KM_PER_MILE : distance;
     paceSecondsPerKm = totalSeconds / distanceKm;
   } else if (mode === 'time') {
-    // Calculate time from distance + pace
     if (distance <= 0) return invalid;
     const paceTotal = paceMinutes * 60 + paceSeconds;
     if (paceTotal <= 0) return invalid;
 
     distanceKm = distanceUnit === 'miles' ? distance * KM_PER_MILE : distance;
-    // Pace input is per km or per mile depending on unit
     paceSecondsPerKm = distanceUnit === 'miles' ? paceTotal / KM_PER_MILE : paceTotal;
     totalSeconds = paceSecondsPerKm * distanceKm;
   } else {
-    // Calculate distance from pace + time
     totalSeconds = hours * 3600 + minutes * 60 + seconds;
     if (totalSeconds <= 0) return invalid;
     const paceTotal = paceMinutes * 60 + paceSeconds;
     if (paceTotal <= 0) return invalid;
 
-    // Pace input is per km or per mile depending on unit
     paceSecondsPerKm = distanceUnit === 'miles' ? paceTotal / KM_PER_MILE : paceTotal;
     distanceKm = totalSeconds / paceSecondsPerKm;
   }
@@ -92,7 +71,6 @@ export function calculatePace(inputs: PaceCalculatorInputs): PaceCalculatorResul
 
   const distanceInUnit = distanceUnit === 'miles' ? distanceKm / KM_PER_MILE : distanceKm;
 
-  // Generate splits for common race distances
   const splits = RACE_DISTANCES.map((race) => ({
     label: race.label,
     km: race.km,

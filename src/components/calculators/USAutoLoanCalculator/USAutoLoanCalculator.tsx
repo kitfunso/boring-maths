@@ -1,10 +1,3 @@
-/**
- * US Auto Loan Calculator - Preact component.
- *
- * Live updating: results recompute on every input change, no submit button.
- * The maths lives in calculations.ts so it can be unit tested in isolation.
- */
-
 import { useState } from 'preact/hooks';
 import { calculateAutoLoan, getDefaultInputs, type USAutoLoanInputs } from './calculations';
 
@@ -30,7 +23,6 @@ export default function USAutoLoanCalculator() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -182,9 +174,7 @@ export default function USAutoLoanCalculator() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
-          {/* Primary result: monthly payment */}
           <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">
             <p class="text-sm text-[var(--color-muted)] mb-1">Monthly payment</p>
             <p class="text-4xl md:text-5xl font-display font-bold text-emerald-400 tabular-nums">
@@ -197,7 +187,6 @@ export default function USAutoLoanCalculator() {
             </p>
           </div>
 
-          {/* Metric grid */}
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-white/5 rounded-xl p-4">
               <p class="text-xs text-[var(--color-muted)]">Amount financed</p>
@@ -219,7 +208,6 @@ export default function USAutoLoanCalculator() {
             </div>
           </div>
 
-          {/* Cost breakdown */}
           <div class="bg-white/5 rounded-xl p-4">
             <h3 class="text-sm font-medium text-[var(--color-muted)] mb-3">Cost breakdown</h3>
             <div class="space-y-2 text-sm">

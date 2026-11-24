@@ -1,9 +1,3 @@
-/**
- * Body Fat Calculator - Type Definitions
- *
- * Uses U.S. Navy method for body fat percentage estimation.
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type Sex = 'male' | 'female';
 
@@ -17,13 +11,13 @@ export interface BodyFatInputs {
   waistInches: number;
   neckCm: number;
   neckInches: number;
-  hipCm: number; // required for female
+  hipCm: number;
   hipInches: number;
 }
 
 export interface BodyFatResult {
   bodyFatPct: number;
-  fatMass: number; // kg or lbs
+  fatMass: number;
   leanMass: number;
   category: string;
   categoryColor: 'blue' | 'green' | 'yellow' | 'red';

@@ -1,29 +1,21 @@
-/**
- * Event Seating Calculator - Type Definitions
- *
- * Calculate table and room requirements for events.
- */
-
 export type TableShape = 'round' | 'rectangular' | 'square' | 'cocktail';
 export type EventType = 'wedding' | 'corporate' | 'banquet' | 'conference' | 'party';
 
 export interface EventSeatingInputs {
   guestCount: number;
   tableShape: TableShape;
-  tableSize: number; // diameter for round, length for rectangular (feet)
+  tableSize: number;
   eventType: EventType;
 
-  // Space requirements
   danceFloorPercent: number;
   includeDJSpace: boolean;
   includeBuffetArea: boolean;
   includeHeadTable: boolean;
   headTableGuests: number;
 
-  // Spacing
-  chairSpacing: number; // inches between chairs
-  tableSpacing: number; // feet between tables
-  aisleWidth: number; // feet
+  chairSpacing: number;
+  tableSpacing: number;
+  aisleWidth: number;
 }
 
 export interface TableConfig {
@@ -31,7 +23,7 @@ export interface TableConfig {
   seatsPerTable: number;
   tablesNeeded: number;
   totalSeats: number;
-  tableFootprint: number; // sq ft per table including chairs
+  tableFootprint: number;
 }
 
 export interface SpaceRequirement {
@@ -42,36 +34,29 @@ export interface SpaceRequirement {
 }
 
 export interface EventSeatingResult {
-  // Table counts
   tablesNeeded: number;
   seatsPerTable: number;
   totalSeats: number;
   extraSeats: number;
 
-  // Room requirements
   totalRoomSqFt: number;
   minimumRoomLength: number;
   minimumRoomWidth: number;
 
-  // Space breakdown
   seatingAreaSqFt: number;
   danceFloorSqFt: number;
   djAreaSqFt: number;
   buffetAreaSqFt: number;
   aislesSqFt: number;
 
-  // Detailed breakdown
   spaceRequirements: SpaceRequirement[];
   tableConfig: TableConfig;
 
-  // Layout suggestions
   layoutSuggestions: string[];
 
-  // Tips
   tips: string[];
 }
 
-// Seats per table by shape and size
 export const SEATS_BY_TABLE: Record<TableShape, Record<number, number>> = {
   round: {
     4: 4, // 4ft round = 4 seats
@@ -96,7 +81,6 @@ export const SEATS_BY_TABLE: Record<TableShape, Record<number, number>> = {
   },
 };
 
-// Square feet per person by event type (including circulation)
 export const SQFT_PER_PERSON: Record<EventType, number> = {
   wedding: 15,
   corporate: 12,

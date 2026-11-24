@@ -1,25 +1,17 @@
-/** Mortgage Overpayment Calculator - pure logic: compares normal vs overpaid amortisation schedules (regular monthly extra + optional lump sum). All inputs are user-supplied; no statutory constants. */
-
 export const MONTHS_PER_YEAR = 12;
-// Simulation cap: needed if a pathological input (payment too small to ever clear interest) would otherwise loop forever.
-const MAX_MONTHS = 1200; // 100 years.
-// Floating-point tolerance: absorbs rounding residue from a repeating monthly payment so it does not add a spurious extra month.
-const BALANCE_EPSILON = 0.005; // Half a penny.
+const MAX_MONTHS = 1200;
+const BALANCE_EPSILON = 0.005;
 
 export interface MortgageOverpaymentInputs {
   balance: number;
-  // Annual interest rate as a percentage (4.5 = 4.5%).
   interestRate: number;
   termYears: number;
   monthlyOverpayment: number;
-  // Lump sum paid at the very start (month one).
   lumpSum: number;
 }
 
 export interface MortgageOverpaymentResult {
-  // Contractual monthly payment (principal and interest).
   monthlyPayment: number;
-  // Baseline schedule, no overpayments.
   originalTotalInterest: number;
   originalMonths: number;
   newTotalInterest: number;
@@ -28,11 +20,9 @@ export interface MortgageOverpaymentResult {
   monthsSaved: number;
   yearsSaved: number;
   remainingMonthsSaved: number;
-  // ISO date string (yyyy-mm-dd), counted from today.
   newPayoffDate: string;
 }
 
-/** Standard repayment formula: P = L*r/(1-(1+r)^-n); when r=0, payment = loan/months. */
 export function calculateMonthlyPayment(
   loan: number,
   annualRatePercent: number,
@@ -54,7 +44,6 @@ interface AmortisationOutcome {
   months: number;
 }
 
-/** Amortises month by month; applies the lump sum in month one, then trims the final payment so the balance lands exactly on zero. */
 function amortise(
   startingBalance: number,
   monthlyRate: number,
@@ -82,17 +71,14 @@ function amortise(
     const interest = balance * monthlyRate;
     totalInterest += interest;
 
-    // Principal this month is everything beyond the interest, including the overpayment.
     const principal = monthlyPayment + monthlyExtra - interest;
 
-    // If the payment doesn't cover the interest, balance never clears; stop and report the cap.
     if (principal <= 0) {
       months = MAX_MONTHS;
       break;
     }
 
     if (principal >= balance - BALANCE_EPSILON) {
-      // Final month: balance clears in full (epsilon absorbs rounding residue).
       balance = 0;
       months = month;
       break;
@@ -114,12 +100,10 @@ function addMonthsToToday(months: number, from: Date = new Date()): string {
   return `${year}-${month}-${day}`;
 }
 
-/** Inputs are floored at zero; the optional today param makes the payoff date deterministic in tests. */
 export function calculateMortgageOverpayment(
   inputs: MortgageOverpaymentInputs,
   today: Date = new Date()
 ): MortgageOverpaymentResult {
-  // Floor at zero; treat non-finite (NaN/Infinity from a blank field) as zero so the result stays finite.
   const balance = Number.isFinite(inputs.balance) ? Math.max(0, inputs.balance) : 0;
   const interestRate = Number.isFinite(inputs.interestRate) ? Math.max(0, inputs.interestRate) : 0;
   const termYears = Number.isFinite(inputs.termYears) ? Math.max(0, inputs.termYears) : 0;
@@ -128,7 +112,6 @@ export function calculateMortgageOverpayment(
     : 0;
   const lumpSum = Number.isFinite(inputs.lumpSum) ? Math.max(0, inputs.lumpSum) : 0;
 
-  // No term = nothing to amortise; return zeroed rather than let the simulation hit MAX_MONTHS (a payoff date ~100 years out).
   if (termYears <= 0) {
     return {
       monthlyPayment: 0,

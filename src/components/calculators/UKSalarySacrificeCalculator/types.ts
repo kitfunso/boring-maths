@@ -1,8 +1,3 @@
-/**
- * UK Salary Sacrifice Calculator Types
- * For pension, cycle-to-work, childcare, and EV schemes
- */
-
 export type SacrificeType = 'pension' | 'cycle' | 'childcare' | 'ev';
 export type TaxRegion = 'england' | 'scotland';
 
@@ -58,7 +53,6 @@ export const SACRIFICE_TYPES = {
   },
 };
 
-// 2026/27 England/NI Income Tax bands
 export const ENGLAND_TAX_BANDS = {
   personalAllowance: 12570,
   basicRate: { threshold: 50270, rate: 0.2 },
@@ -66,7 +60,6 @@ export const ENGLAND_TAX_BANDS = {
   additionalRate: { rate: 0.45 },
 };
 
-// 2026/27 Scotland Income Tax bands
 export const SCOTLAND_TAX_BANDS = {
   personalAllowance: 12570,
   starterRate: { threshold: 16537, rate: 0.19 },
@@ -77,7 +70,6 @@ export const SCOTLAND_TAX_BANDS = {
   topRate: { rate: 0.48 },
 };
 
-// 2026/27 National Insurance rates
 export const NI_RATES = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,

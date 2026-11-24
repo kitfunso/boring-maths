@@ -4,7 +4,6 @@ import { calculators } from '../../lib/calculators';
 import { embeddableSlugs, getEmbedSnippet, embedUrl } from '../../lib/embeds';
 
 function getEmbedSlug(href: string): string {
-  // /calculators/mortgage-calculator/ -> mortgage-calculator
   return href.replace('/calculators/', '').replace(/\/$/, '');
 }
 
@@ -52,7 +51,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for older browsers
       const textarea = document.createElement('textarea');
       textarea.value = snippet;
       textarea.style.position = 'fixed';
@@ -74,9 +72,7 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
 
   return (
     <div class="space-y-8">
-      {/* Controls */}
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Calculator picker */}
         <div class="md:col-span-3">
           <label class="block text-sm font-medium text-[var(--color-subtle)] mb-2">
             Select a calculator
@@ -144,7 +140,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
           </div>
         </div>
 
-        {/* Width input */}
         <div>
           <label
             htmlFor="embed-width"
@@ -163,7 +158,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
           <p class="mt-1 text-xs text-[var(--color-muted)]">e.g. 100%, 600px, 40rem</p>
         </div>
 
-        {/* Height input */}
         <div>
           <label
             htmlFor="embed-height"
@@ -183,7 +177,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
           />
         </div>
 
-        {/* Preview of selected calc info */}
         <div class="flex items-end">
           <div class="px-4 py-3 rounded-xl bg-white/5 border border-white/5 w-full">
             <p class="text-xs text-[var(--color-muted)] mb-1">Embed URL</p>
@@ -192,7 +185,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
         </div>
       </div>
 
-      {/* Code snippet */}
       <div>
         <div class="flex items-center justify-between mb-3">
           <p class="text-sm font-medium text-[var(--color-subtle)]">Embed code</p>
@@ -239,11 +231,9 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
         </div>
       </div>
 
-      {/* Live preview */}
       <div>
         <p class="text-sm font-medium text-[var(--color-subtle)] mb-3">Live preview</p>
         <div class="rounded-xl border border-white/10 overflow-hidden bg-[var(--color-night)]">
-          {/* Browser chrome mockup */}
           <div class="flex items-center gap-2 px-4 py-3 bg-[var(--color-charcoal)] border-b border-white/5">
             <div class="flex gap-1.5">
               <div class="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -256,7 +246,6 @@ export default function SnippetGenerator({ initialSlug }: SnippetGeneratorProps)
               </div>
             </div>
           </div>
-          {/* Iframe */}
           <div class="p-4 bg-white/[0.02]">
             <iframe
               src={embedUrl(slug)}

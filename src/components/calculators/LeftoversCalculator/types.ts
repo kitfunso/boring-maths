@@ -1,10 +1,3 @@
-/**
- * Leftovers Calculator - Type Definitions
- *
- * USDA-based food safety data for storage durations.
- * Sources: USDA FoodKeeper App, FDA food safety guidelines.
- */
-
 export type FoodCategory =
   | 'cooked-meat'
   | 'cooked-poultry'
@@ -27,14 +20,14 @@ export type StorageMethod = 'fridge' | 'freezer' | 'counter';
 export interface LeftoversInputs {
   readonly foodCategory: FoodCategory;
   readonly storageMethod: StorageMethod;
-  readonly preparedDate: string; // ISO date string
+  readonly preparedDate: string;
 }
 
 export interface LeftoversResult {
   readonly fridgeDays: number;
   readonly freezerMonths: number;
   readonly counterHours: number;
-  readonly expiryDate: string; // ISO date string
+  readonly expiryDate: string;
   readonly daysRemaining: number;
   readonly isSafe: boolean;
   readonly spoilageSigns: readonly string[];
@@ -53,17 +46,6 @@ export interface FoodSafetyEntry {
   readonly reheatingTemp: string;
 }
 
-/**
- * USDA-based food safety data.
- *
- * Fridge: 40 F / 4 C or below.
- * Freezer: 0 F / -18 C or below.
- * Counter: room temperature (~68-72 F / 20-22 C).
- *
- * Sources:
- * - USDA FoodKeeper App (https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety)
- * - FDA refrigerator & freezer storage chart
- */
 export const FOOD_SAFETY_DATA: Readonly<Record<FoodCategory, FoodSafetyEntry>> = {
   'cooked-meat': {
     label: 'Cooked Meat (beef, pork, lamb)',

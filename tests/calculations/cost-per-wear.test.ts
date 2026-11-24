@@ -1,7 +1,3 @@
-/**
- * Cost Per Wear Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCostPerWear } from '../../src/components/calculators/CostPerWearCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CostPerWearCalculator/types';
@@ -13,9 +9,6 @@ describe('CostPerWearCalculator', () => {
 
       const result = calculateCostPerWear(inputs);
 
-      // $200 purchase + ($10 care * 36 months) = $560 total
-      // 8 wears/month * 36 months = 288 total wears
-      // $560 / 288 = $1.94/wear
       expect(result.totalWears).toBe(288);
       expect(result.totalLifetimeCost).toBe(560);
       expect(result.costPerWear).toBeCloseTo(1.94, 2);
@@ -27,9 +20,7 @@ describe('CostPerWearCalculator', () => {
 
       const result = calculateCostPerWear(inputs);
 
-      // Alternative: $50 / (8 * 12) = $0.52/wear
       expect(result.alternativeCostPerWear).toBeCloseTo(0.52, 2);
-      // Over 36 months, need ceil(36/12) = 3 replacements = $150
       expect(result.alternativeTotalCost).toBe(150);
     });
 
@@ -38,7 +29,6 @@ describe('CostPerWearCalculator', () => {
 
       const result = calculateCostPerWear(inputs);
 
-      // Alternative CPW ($0.52) < Main CPW ($1.94), so main is NOT better value
       expect(result.isBetterValue).toBe(false);
     });
 
@@ -47,27 +37,21 @@ describe('CostPerWearCalculator', () => {
 
       const result = calculateCostPerWear(inputs);
 
-      // Alternative total ($150) - Main total ($560) = -$410
-      // savingsVsAlternative = altTotal - mainTotal = 150 - 560 = -410
       expect(result.savingsVsAlternative).toBe(-410);
     });
 
     it('should identify investment piece as better value when it is', () => {
       const inputs = getDefaultInputs();
-      // Make main item very cheap per wear: $100, 20 wears/month, 60 months, $0 care
       inputs.purchasePrice = 100;
       inputs.wearsPerMonth = 20;
       inputs.expectedLifespanMonths = 60;
       inputs.careCostPerMonth = 0;
-      // Alternative: $50, 5 wears/month, 6 months
       inputs.alternativePrice = 50;
       inputs.alternativeWearsPerMonth = 5;
       inputs.alternativeLifespanMonths = 6;
 
       const result = calculateCostPerWear(inputs);
 
-      // Main: $100 / (20*60) = $0.08/wear
-      // Alt: $50 / (5*6) = $1.67/wear
       expect(result.costPerWear).toBeCloseTo(0.08, 2);
       expect(result.alternativeCostPerWear).toBeCloseTo(1.67, 2);
       expect(result.isBetterValue).toBe(true);
@@ -121,7 +105,6 @@ describe('CostPerWearCalculator', () => {
 
       const result = calculateCostPerWear(inputs);
 
-      // ceil(37/12) = 4 replacements
       expect(result.alternativeTotalCost).toBe(inputs.alternativePrice * 4);
     });
 

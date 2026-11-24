@@ -1,8 +1,3 @@
-/**
- * Baby Cost Calculator - React Component
- *
- * Estimate the costs of having a baby in the first year.
- */
 import { calculateBabyCost } from './calculations';
 import {
   getDefaultInputs,
@@ -87,13 +82,11 @@ export default function BabyCost() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-rose-400 uppercase tracking-wider">
                 Care & Basics
               </div>
 
-              {/* Childcare Type */}
               <div>
                 <Label>Childcare Type</Label>
                 <ButtonGroup
@@ -120,7 +113,6 @@ export default function BabyCost() {
                 />
               )}
 
-              {/* Feeding Method */}
               <div>
                 <Label>Feeding Method</Label>
                 <ButtonGroup
@@ -130,7 +122,6 @@ export default function BabyCost() {
                 />
               </div>
 
-              {/* Diaper Preference */}
               <div>
                 <Label>Diaper Preference</Label>
                 <ButtonGroup
@@ -140,7 +131,6 @@ export default function BabyCost() {
                 />
               </div>
 
-              {/* Baby Gear */}
               <div>
                 <Label>Baby Gear</Label>
                 <ButtonGroup
@@ -171,7 +161,6 @@ export default function BabyCost() {
                 Healthcare & Income
               </div>
 
-              {/* Health Insurance */}
               <Toggle
                 checked={inputs.hasHealthInsurance}
                 onChange={(checked) => updateInput('hasHealthInsurance', checked)}
@@ -211,7 +200,6 @@ export default function BabyCost() {
                 </Grid>
               )}
 
-              {/* Parental Leave */}
               <Grid responsive={{ sm: 2 }} gap="md">
                 <Slider
                   label="Maternity Leave"
@@ -294,7 +282,6 @@ export default function BabyCost() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="First Year Total"
@@ -310,7 +297,6 @@ export default function BabyCost() {
                 />
               </Grid>
 
-              {/* Cost Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cost Breakdown
@@ -345,7 +331,6 @@ export default function BabyCost() {
                 </div>
               </div>
 
-              {/* Savings Opportunities */}
               {result.savingsOpportunities.length > 0 && (
                 <Alert variant="tip" title="Savings Opportunities">
                   <ul className="space-y-1 text-sm mt-2">
@@ -364,7 +349,6 @@ export default function BabyCost() {
                 national averages. Consider creating a detailed budget closer to your due date.
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Baby First Year Cost: ${fmt(result.totalFirstYearCost)} total, ${fmt(result.monthlyAverage)}/month. Biggest expense: ${result.biggestExpense}`}

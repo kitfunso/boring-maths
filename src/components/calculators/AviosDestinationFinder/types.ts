@@ -1,14 +1,3 @@
-/**
- * Avios Destination Finder - Type Definitions
- *
- * Data model for BA reward-flight guide pricing. All pricing figures are
- * the lowest-cash Reward Flight Saver combination, one-way, to/from London,
- * post 15-Dec-2025 devaluation.
- * Source: headforpoints.com/2025/12/16/how-many-avios-do-i-need-to-fly-to-4/
- * (verified 2026-07-19). Guide prices only - reward seats are limited and
- * availability must be checked with the airline.
- */
-
 export const REGIONS = [
   'Europe',
   'North America',
@@ -56,7 +45,6 @@ export type TripType = (typeof TRIP_TYPES)[number];
 export const SORT_KEYS = ['avios', 'value', 'cash', 'peakSaving', 'distance', 'name'] as const;
 export type SortKey = (typeof SORT_KEYS)[number];
 
-/** BA Amex companion vouchers: the free card's is economy only, Premium Plus covers every cabin. */
 export const VOUCHER_TYPES = ['none', 'free', 'premiumPlus'] as const;
 export type VoucherType = (typeof VOUCHER_TYPES)[number];
 
@@ -79,11 +67,9 @@ export interface PartyPricing {
   readonly cash: number;
 }
 
-/** One-way Avios prices for a cabin plus the fixed GBP cash element. */
 export interface SeasonalAvios {
   readonly offPeak: number;
   readonly peak: number;
-  /** GBP per person per one-way leg (lowest-cash RFS combo). */
   readonly cash: number;
 }
 
@@ -92,7 +78,6 @@ export type CabinPricing = SeasonalAvios | typeof NOT_OFFERED;
 
 export interface Destination {
   readonly city: string;
-  /** Primary IATA airport code - stable row key. */
   readonly iata: string;
   readonly country: string;
   readonly region: Region;
@@ -104,12 +89,9 @@ export interface Destination {
 
 export interface AviosFinderInputs {
   readonly aviosBudget: number;
-  /** ISO yyyy-mm-dd or '' for unset. */
   readonly dateFrom: string;
   readonly dateTo: string;
-  /** Empty array = all regions. */
   readonly regions: readonly Region[];
-  /** Empty array = all types. */
   readonly holidayTypes: readonly HolidayType[];
   readonly cabin: Cabin;
   readonly travellers: 1 | 2;
@@ -122,43 +104,30 @@ export interface AviosFinderInputs {
 export interface SeasonWindow {
   readonly hasOffPeak: boolean;
   readonly hasPeak: boolean;
-  /** Date range extends past the published calendar (2027+). */
   readonly beyondCalendar: boolean;
 }
 
 export interface DestinationResult {
   readonly destination: Destination;
-  /** Total Avios for the whole party and trip; null if that season is outside the chosen dates. */
   readonly aviosOffPeak: number | null;
   readonly aviosPeak: number | null;
-  /** Total GBP cash element for the whole party and trip. */
   readonly cashTotal: number;
-  /** Ranking basis: cheapest applicable season total. */
   readonly rankAvios: number;
   readonly withinBudget: boolean;
-  /** rankAvios as % of budget (0 budget -> 0). */
   readonly budgetPercent: number;
   readonly distanceMiles: number;
-  /** Party miles flown per 1,000 Avios spent (rankAvios basis), 1dp. */
   readonly valuePer1k: number;
-  /** (peak - offPeak) / peak * 100, whole %; null unless both seasons are priced. */
   readonly peakSavingPct: number | null;
 }
 
 export interface AviosFinderResult {
-  /** All priced rows in global sort order (per inputs.sortKey), affordable and over-budget interleaved. */
   readonly ranked: readonly DestinationResult[];
-  /** Filtered view of `ranked` (withinBudget only); order is preserved from `ranked`. */
   readonly affordable: readonly DestinationResult[];
-  /** Filtered view of `ranked` (over budget only); order is preserved from `ranked`. */
   readonly overBudget: readonly DestinationResult[];
-  /** Destinations hidden because the chosen cabin is not offered. */
   readonly notOfferedCount: number;
   readonly seasons: SeasonWindow;
   readonly totalDestinations: number;
-  /** True when the chosen voucher gives the 2-for-1 in this cabin for two travellers. */
   readonly voucherApplied: boolean;
-  /** Avios the voucher saves on the cheapest affordable row; 0 when it does not apply or nothing is affordable. */
   readonly voucherSavingAvios: number;
 }
 

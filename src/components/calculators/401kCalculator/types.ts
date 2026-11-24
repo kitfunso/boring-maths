@@ -1,9 +1,3 @@
-/**
- * 401k Calculator Types
- *
- * Calculate retirement savings with employer matching and compound growth.
- */
-
 export interface Calculator401kInputs {
   currentAge: number;
   retirementAge: number;

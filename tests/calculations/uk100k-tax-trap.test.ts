@@ -1,7 +1,3 @@
-/**
- * UK100kTaxTrap Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateUK100kTax } from '../../src/components/calculators/UK100kTaxTrapCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UK100kTaxTrapCalculator/types';
@@ -18,7 +14,6 @@ describe('UK100kTaxTrapCalculator', () => {
       expect(result.nationalInsurance).toBeGreaterThan(0);
       expect(result.takeHomePay).toBeGreaterThan(0);
       expect(result.takeHomePay).toBeLessThan(110000);
-      // At 110k, should be in the tax trap zone
       expect(result.personalAllowanceLost).toBeGreaterThan(0);
       expect(result.effectiveTaxRate).toBeGreaterThan(0);
     });

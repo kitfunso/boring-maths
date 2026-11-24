@@ -1,7 +1,3 @@
-/**
- * BuyVsRentCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBuyVsRent } from '../../src/components/calculators/BuyVsRent/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BuyVsRent/types';

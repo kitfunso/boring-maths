@@ -1,6 +1,3 @@
-/**
- * EU VAT Calculator - React Component
- */
 import {
   calculateVAT,
   formatCurrency,
@@ -64,7 +61,6 @@ export default function EUVATCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Calculation Mode */}
           <div className="space-y-6 mb-8">
             <div>
               <Label>Calculation Mode</Label>
@@ -75,7 +71,6 @@ export default function EUVATCalculator() {
               />
             </div>
 
-            {/* Country Selection */}
             <div>
               <Label htmlFor="country">EU Country</Label>
               <select
@@ -94,7 +89,6 @@ export default function EUVATCalculator() {
               </select>
             </div>
 
-            {/* Amount Input */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="amount" required>
@@ -129,7 +123,6 @@ export default function EUVATCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             <ResultCard
               label={inputs.mode === 'add' ? 'Total with VAT' : 'Net Amount'}
@@ -137,7 +130,6 @@ export default function EUVATCalculator() {
               subtitle={`${selectedCountry.name} @ ${formatPercent(inputs.vatRate)}`}
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 3 }} gap="md">
               <MetricCard
                 label="Net Amount"
@@ -157,7 +149,6 @@ export default function EUVATCalculator() {
               />
             </Grid>
 
-            {/* Country VAT Rates */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 {selectedCountry.name} VAT Rates
@@ -194,7 +185,6 @@ export default function EUVATCalculator() {
               </div>
             </div>
 
-            {/* EU VAT Comparison Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 EU Standard VAT Rates Comparison
@@ -238,7 +228,6 @@ export default function EUVATCalculator() {
               </p>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="EU VAT Info:">
               VAT (Value Added Tax) applies to most goods and services in the EU. Reduced rates
               typically apply to essentials like food, books, and medicine. Businesses can reclaim
@@ -246,7 +235,6 @@ export default function EUVATCalculator() {
               B2B services are often reverse-charged.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${selectedCountry.name} VAT: ${formatCurrency(result.netAmount)} + ${formatCurrency(result.vatAmount)} (${formatPercent(inputs.vatRate)}) = ${formatCurrency(result.grossAmount)}`}

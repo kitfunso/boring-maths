@@ -1,9 +1,3 @@
-/**
- * Pressure Drop Calculator - React Component
- *
- * Calculate pressure drop in pipes using Darcy-Weisbach equation.
- * Includes automatic friction factor calculation.
- */
 import { calculatePressureDrop, getRoughness, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -65,7 +59,7 @@ export default function PressureDropCalculator() {
 
   const handleMaterialChange = (material: PipeMaterial) => {
     const roughness = getRoughness(material);
-    const displayRoughness = inputs.unitSystem === 'metric' ? roughness : roughness / 0.0254; // mm to mils
+    const displayRoughness = inputs.unitSystem === 'metric' ? roughness : roughness / 0.0254;
 
     setInputs((prev) => ({
       ...prev,
@@ -140,7 +134,6 @@ export default function PressureDropCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -151,7 +144,6 @@ export default function PressureDropCalculator() {
               />
             </div>
 
-            {/* Pipe Properties */}
             <div>
               <Label>Pipe Material</Label>
               <ButtonGroup
@@ -170,7 +162,6 @@ export default function PressureDropCalculator() {
               </div>
             </div>
 
-            {/* Pipe Dimensions */}
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
               <div>
                 <Label htmlFor="diameter" required>
@@ -212,7 +203,6 @@ export default function PressureDropCalculator() {
               </div>
             </Grid>
 
-            {/* Fluid Properties */}
             <div>
               <Label htmlFor="fluidPreset">Fluid Preset</Label>
               <Select
@@ -274,9 +264,7 @@ export default function PressureDropCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div className="rounded-2xl p-8 text-center border-2 bg-yellow-950/50 border-yellow-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Pressure Drop
@@ -290,7 +278,6 @@ export default function PressureDropCalculator() {
               </p>
             </div>
 
-            {/* Flow Parameters */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Flow Parameters
@@ -325,7 +312,6 @@ export default function PressureDropCalculator() {
               </Grid>
             </div>
 
-            {/* Relative Roughness */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -345,7 +331,6 @@ export default function PressureDropCalculator() {
               </div>
             </Grid>
 
-            {/* Formula */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Darcy-Weisbach Equation
@@ -363,7 +348,6 @@ export default function PressureDropCalculator() {
               64/Re for laminar flow (Re &lt; 2300). Transitional region uses turbulent correlation.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Pressure Drop: ${formatNumber(result.pressureDrop, 3)}${pressureUnit} (Head: ${formatNumber(result.headLoss, 2)}${headUnit}) - Re=${result.reynoldsNumber.toLocaleString()}, f=${result.frictionFactor.toFixed(4)}`}

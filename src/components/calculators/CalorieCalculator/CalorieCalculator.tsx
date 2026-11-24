@@ -1,6 +1,3 @@
-/**
- * Calorie/TDEE Calculator - React Component
- */
 import { calculateCalories, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -83,7 +80,6 @@ export default function CalorieCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -97,7 +93,6 @@ export default function CalorieCalculator() {
               />
             </div>
 
-            {/* Gender */}
             <div>
               <Label>Biological Sex</Label>
               <ButtonGroup
@@ -111,7 +106,6 @@ export default function CalorieCalculator() {
               />
             </div>
 
-            {/* Age */}
             <div>
               <Label htmlFor="age" required>
                 Age
@@ -126,7 +120,6 @@ export default function CalorieCalculator() {
               />
             </div>
 
-            {/* Height */}
             {inputs.unitSystem === 'metric' ? (
               <div>
                 <Label htmlFor="heightCm" required>
@@ -172,7 +165,6 @@ export default function CalorieCalculator() {
               </Grid>
             )}
 
-            {/* Weight */}
             <div>
               <Label htmlFor="weight" required>
                 Weight ({weightUnit})
@@ -193,7 +185,6 @@ export default function CalorieCalculator() {
               />
             </div>
 
-            {/* Activity Level */}
             <div>
               <Label>Activity Level</Label>
               <div className="space-y-2">
@@ -214,7 +205,6 @@ export default function CalorieCalculator() {
               </div>
             </div>
 
-            {/* Goal */}
             <div>
               <Label>Goal</Label>
               <ButtonGroup
@@ -228,9 +218,7 @@ export default function CalorieCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Daily Calories"
               value={formatNumber(result.goalCalories)}
@@ -245,7 +233,6 @@ export default function CalorieCalculator() {
               }
             />
 
-            {/* Metrics */}
             <Grid responsive={{ sm: 2, md: 3 }} gap="md">
               <MetricCard label="BMR" value={formatNumber(result.bmr)} sublabel="base metabolism" />
               <MetricCard
@@ -267,7 +254,6 @@ export default function CalorieCalculator() {
               />
             </Grid>
 
-            {/* Macros */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Suggested Daily Macros
@@ -301,7 +287,6 @@ export default function CalorieCalculator() {
               genetics.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My daily calorie needs: ${formatNumber(result.goalCalories)} calories (TDEE: ${formatNumber(result.tdee)})`}

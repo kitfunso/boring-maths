@@ -1,18 +1,13 @@
-/**
- * Time Zone Converter - Calculation Logic
- */
-
 import { TIME_ZONES, type TimeZoneConverterInputs, type TimeZoneResult } from './types';
 
 export function convertTimeZone(inputs: TimeZoneConverterInputs): TimeZoneResult {
   const { hours, minutes, fromZone, toZone } = inputs;
 
-  const from = TIME_ZONES.find((tz) => tz.id === fromZone) || TIME_ZONES[12]; // default GMT
+  const from = TIME_ZONES.find((tz) => tz.id === fromZone) || TIME_ZONES[12];
   const to = TIME_ZONES.find((tz) => tz.id === toZone) || TIME_ZONES[12];
 
   const offsetDiff = to.offset - from.offset;
 
-  // Convert to total minutes, apply offset
   let totalMinutes = hours * 60 + minutes + offsetDiff * 60;
   let dayShift = 0;
 

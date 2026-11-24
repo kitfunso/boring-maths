@@ -1,7 +1,3 @@
-/**
- * Currency Converter - Type Definitions
- */
-
 export interface CurrencyConverterInputs {
   amount: number;
   fromCurrency: string;
@@ -45,8 +41,6 @@ export const CURRENCIES: CurrencyInfo[] = [
   { code: 'PLN', name: 'Polish Zloty', symbol: 'zł' },
 ];
 
-// Static rates relative to USD (approximate as of early 2026)
-// Good enough for an educational calculator; updated periodically
 export const USD_RATES: Record<string, number> = {
   USD: 1,
   EUR: 0.92,

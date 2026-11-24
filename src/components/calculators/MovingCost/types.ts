@@ -1,7 +1,3 @@
-/**
- * Moving Cost Estimator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type MoveType = 'local' | 'long_distance' | 'cross_country' | 'international';
@@ -12,14 +8,13 @@ export type Season = 'peak' | 'off_peak';
 export interface MovingCostInputs {
   currency: Currency;
   moveType: MoveType;
-  distance: number; // miles
+  distance: number;
   homeSize: HomeSize;
   moveMethod: MoveMethod;
   season: Season;
 
-  // Additional options
   needsPacking: boolean;
-  hasSpecialItems: boolean; // piano, antiques, etc.
+  hasSpecialItems: boolean;
   needsStorage: boolean;
   storageMonths: number;
   needsCleaning: boolean;
@@ -37,15 +32,12 @@ export interface CostItem {
 export interface MovingCostResult {
   currency: Currency;
 
-  // Summary
   totalCost: number;
   lowEstimate: number;
   highEstimate: number;
 
-  // Breakdown
   costItems: CostItem[];
 
-  // Key costs
   movingServiceCost: number;
   packingCost: number;
   suppliesCost: number;
@@ -53,14 +45,12 @@ export interface MovingCostResult {
   insuranceCost: number;
   hiddenCosts: number;
 
-  // Insights
   costPerMile: number;
   savingsVsFullService: number;
   peakSeasonPremium: number;
   tips: string[];
 }
 
-// Base costs by home size (full service, local)
 export const BASE_MOVING_COSTS: Record<Currency, Record<HomeSize, number>> = {
   USD: {
     studio: 400,
@@ -85,14 +75,12 @@ export const BASE_MOVING_COSTS: Record<Currency, Record<HomeSize, number>> = {
   },
 };
 
-// Cost per mile for long distance
 export const COST_PER_MILE: Record<Currency, number> = {
   USD: 0.5,
   GBP: 0.6,
   EUR: 0.55,
 };
 
-// Weight estimates by home size (in lbs)
 export const WEIGHT_BY_SIZE: Record<HomeSize, number> = {
   studio: 1500,
   one_bed: 3000,

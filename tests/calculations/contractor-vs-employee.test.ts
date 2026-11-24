@@ -1,5 +1,3 @@
-/** Contractor vs employee. Goldens are hand-computed from the 2026 US, 2026/27 UK and EU country rules. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateComparison_main } from '../../src/components/calculators/ContractorVsEmployeeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/ContractorVsEmployeeCalculator/types';
@@ -9,9 +7,6 @@ import { calculateSalary } from '../../src/components/calculators/EUSalaryCalcul
 describe('ContractorVsEmployeeCalculator', () => {
   describe('USD', () => {
     it('taxes the contractor on profit with SE tax, the standard and QBI deductions and state tax', () => {
-      // Revenue 144,000; profit 139,100 after 2,400 expenses and 2,500 services
-      // SE 19,654.20; AGI 139,100 - 9,827.10 - 21,600 - 7,200 = 100,472.90
-      // Taxable 84,372.90 less QBI 16,874.58 = 67,498.32 -> federal 9,561.63; state 5% of AGI 5,023.64
       const { contractor } = calculateComparison_main(getDefaultInputs('USD'));
       expect(contractor.grossIncome).toBe(144000);
       expect(contractor.socialTax).toBeCloseTo(19654.20405, 4);
@@ -20,12 +15,10 @@ describe('ContractorVsEmployeeCalculator', () => {
     });
 
     it('taxes the employee on brackets after the standard deduction plus FICA', () => {
-      // Pay 110,000: federal on 93,900 = 15,370; state 5,500; FICA 6,820 + 1,595
       const { employee, comparison } = calculateComparison_main(getDefaultInputs('USD'));
       expect(employee.incomeTax).toBeCloseTo(20870, 6);
       expect(employee.socialTax).toBeCloseTo(8415, 6);
       expect(employee.netIncome).toBeCloseTo(80715, 6);
-      // Benefits 22,575.38, so employee value 103,290.38 beats contractor 76,060.52
       expect(comparison.winner).toBe('employee');
       expect(comparison.annualDifference).toBeCloseTo(27229.863609, 3);
     });
@@ -36,7 +29,6 @@ describe('ContractorVsEmployeeCalculator', () => {
         employeeSalary: 250000,
         employeeBonusPercent: 0,
       };
-      // 184,500 x 6.2% + 250,000 x 1.45% + 50,000 x 0.9%
       expect(calculateComparison_main(inputs).employee.socialTax).toBeCloseTo(15514, 6);
       const joint = calculateComparison_main({ ...inputs, filingStatus: 'married_jointly' });
       expect(joint.employee.socialTax).toBeCloseTo(15064, 6);
@@ -48,7 +40,6 @@ describe('ContractorVsEmployeeCalculator', () => {
         contractorHourlyRate: 125,
         contractorWeeksPerYear: 50,
       };
-      // Profit 245,100 x 92.35% = 226,349.85; 184,500 x 12.4% + 226,349.85 x 2.9% + 26,349.85 x 0.9%
       const { contractor } = calculateComparison_main(inputs);
       expect(contractor.socialTax).toBeCloseTo(29679.29, 2);
     });
@@ -75,8 +66,6 @@ describe('ContractorVsEmployeeCalculator', () => {
 
   describe('GBP', () => {
     it('charges the contractor Class 4 NI on profit and income tax after pension relief', () => {
-      // Profit 105,600 - 2,400 - 2,000 = 101,200; Class 4: 37,700 x 6% + 50,930 x 2% = 3,280.60
-      // Income tax on 101,200 - 15,840 pension = 85,360: 37,700 x 20% + 35,090 x 40% = 21,576
       const { contractor } = calculateComparison_main(getDefaultInputs('GBP'));
       expect(contractor.socialTax).toBeCloseTo(3280.6, 6);
       expect(contractor.incomeTax).toBeCloseTo(21576, 6);
@@ -84,7 +73,6 @@ describe('ContractorVsEmployeeCalculator', () => {
     });
 
     it('charges the employee income tax and Class 1 NI, not US FICA', () => {
-      // Pay 77,000: tax 37,700 x 20% + 26,730 x 40% = 18,232; NI 37,700 x 8% + 26,730 x 2% = 3,550.60
       const { employee } = calculateComparison_main(getDefaultInputs('GBP'));
       expect(employee.incomeTax).toBeCloseTo(18232, 6);
       expect(employee.socialTax).toBeCloseTo(3550.6, 6);
@@ -102,7 +90,6 @@ describe('ContractorVsEmployeeCalculator', () => {
     });
 
     it('charges the contractor the entered social rate on profit', () => {
-      // Profit 115,200 - 2,400 - 2,200 = 110,600 at 15%
       const { contractor } = calculateComparison_main(getDefaultInputs('EUR'));
       expect(contractor.socialTax).toBeCloseTo(16590, 6);
       const germany = calculateSalary({ countryCode: 'DE', grossSalary: 110600 - 17280 });

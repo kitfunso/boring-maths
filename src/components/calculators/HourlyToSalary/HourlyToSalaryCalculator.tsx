@@ -1,9 +1,3 @@
-/**
- * Hourly to Salary Calculator - React Component
- *
- * Interactive calculator for converting hourly rates to annual salary.
- * Migrated to use the design system components.
- */
 import { calculateHourlyToSalary, formatCurrency } from './calculations';
 import { getDefaultInputs, type HourlyToSalaryInputs, type HourlyToSalaryResult } from './types';
 import {
@@ -41,7 +35,6 @@ export default function HourlyToSalaryCalculator() {
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -55,7 +48,6 @@ export default function HourlyToSalaryCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Convert Hourly Rate to Salary"
           subtitle="See your annual, monthly, and bi-weekly earnings"
@@ -63,9 +55,7 @@ export default function HourlyToSalaryCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Hourly Rate */}
             <div>
               <Label htmlFor="hourlyRate" required>
                 Hourly Rate
@@ -81,7 +71,6 @@ export default function HourlyToSalaryCalculator() {
               />
             </div>
 
-            {/* Hours & Weeks */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="hoursPerWeek">Hours Per Week</Label>
@@ -111,7 +100,6 @@ export default function HourlyToSalaryCalculator() {
               </div>
             </Grid>
 
-            {/* Tax Rate */}
             <div>
               <Label htmlFor="taxRate">Estimated Tax Rate</Label>
               <Input
@@ -130,14 +118,12 @@ export default function HourlyToSalaryCalculator() {
               </p>
             </div>
 
-            {/* Overtime Toggle */}
             <Checkbox
               checked={inputs.includeOvertime}
               onChange={(checked) => updateInput('includeOvertime', checked)}
               label="Include overtime pay"
             />
 
-            {/* Overtime Fields */}
             {inputs.includeOvertime && (
               <Grid
                 responsive={{ sm: 1, md: 2 }}
@@ -171,9 +157,7 @@ export default function HourlyToSalaryCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result - Annual Salary */}
             <ResultCard
               label="Your Annual Salary"
               value={formatCurrency(result.netAnnual, result.currency)}
@@ -188,7 +172,6 @@ export default function HourlyToSalaryCalculator() {
               }
             />
 
-            {/* Pay Period Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Monthly"
@@ -212,7 +195,6 @@ export default function HourlyToSalaryCalculator() {
               />
             </Grid>
 
-            {/* Overtime Info */}
             {inputs.includeOvertime && result.overtimeEarnings > 0 && (
               <Alert variant="info" title="Overtime earnings:">
                 {formatCurrency(result.overtimeEarnings, result.currency)} per year (
@@ -220,7 +202,6 @@ export default function HourlyToSalaryCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${formatCurrency(inputs.hourlyRate, inputs.currency)}/hr = ${formatCurrency(result.netAnnual, result.currency)}/year (${formatCurrency(result.netMonthly, result.currency)}/month) after ${Math.round(inputs.taxRate * 100)}% tax`}

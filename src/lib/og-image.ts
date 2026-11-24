@@ -11,7 +11,6 @@ export type OgCard = {
   readonly color: string;
 };
 
-// The 500 stop of each ICON_COLORS gradient, so a share card matches the calculator's grid icon.
 export const OG_COLORS: Readonly<Record<ColorName, string>> = {
   blue: '#3b82f6',
   green: '#10b981',

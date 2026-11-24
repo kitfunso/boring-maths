@@ -1,7 +1,3 @@
-/**
- * PressureDropCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePressureDrop } from '../../src/components/calculators/PressureDropCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PressureDropCalculator/types';

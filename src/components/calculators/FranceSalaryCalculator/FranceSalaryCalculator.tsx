@@ -1,11 +1,3 @@
-/**
- * France Net Salary Calculator - Preact component.
- *
- * Live updating: results recompute on every input change, no submit button.
- * The maths lives in calculations.ts so it can be unit tested in isolation.
- * Net shown is net AVANT impot sur le revenu (before income tax at source).
- */
-
 import { useState } from 'preact/hooks';
 import {
   calculateFranceSalary,
@@ -44,7 +36,6 @@ export default function FranceSalaryCalculator() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -88,9 +79,7 @@ export default function FranceSalaryCalculator() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
-          {/* Primary result: net annual */}
           <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">
             <p class="text-sm text-[var(--color-muted)] mb-1">
               Net annual salary (before income tax)
@@ -103,7 +92,6 @@ export default function FranceSalaryCalculator() {
             </p>
           </div>
 
-          {/* Metric grid */}
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-white/5 rounded-xl p-4">
               <p class="text-xs text-[var(--color-muted)]">Gross salary</p>
@@ -125,7 +113,6 @@ export default function FranceSalaryCalculator() {
             </div>
           </div>
 
-          {/* Breakdown */}
           <div class="bg-white/5 rounded-xl p-4">
             <h3 class="text-sm font-medium text-[var(--color-muted)] mb-3">Breakdown</h3>
             <div class="space-y-2 text-sm">

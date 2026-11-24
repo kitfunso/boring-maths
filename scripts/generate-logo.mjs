@@ -1,7 +1,3 @@
-/**
- * Generate logo.png from SVG for Google Search
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,7 +5,6 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, '..', 'public');
 
-// SVG logo at 512x512 - calculator design matching favicon
 const logoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <!-- Solid background for Google (no transparency) -->
   <rect width="512" height="512" fill="#07070a"/>
@@ -38,11 +33,9 @@ const logoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" w
   <rect x="312" y="368" width="48" height="32" rx="8" fill="#c4ff00"/>
 </svg>`;
 
-// Save SVG version
 fs.writeFileSync(path.join(publicDir, 'logo.svg'), logoSvg);
 console.log('✓ Created logo.svg');
 
-// Try to convert to PNG using sharp if available
 async function convertToPng() {
   try {
     const sharp = (await import('sharp')).default;

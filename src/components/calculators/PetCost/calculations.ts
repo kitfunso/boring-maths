@@ -1,7 +1,3 @@
-/**
- * Pet Ownership Cost Calculator - Calculation Logic
- */
-
 import type { PetCostInputs, PetCostResult, CostBreakdown } from './types';
 import { BASE_COSTS, DOG_SIZE_MULTIPLIERS, PET_LIFESPANS } from './types';
 
@@ -26,7 +22,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
 
   const breakdown: CostBreakdown[] = [];
 
-  // Health status multiplier for vet costs
   const healthMultiplier =
     healthStatus === 'excellent'
       ? 0.8
@@ -36,10 +31,8 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
           ? 1.5
           : 2.0;
 
-  // Age multiplier (older pets cost more)
   const ageMultiplier = age > 10 ? 1.5 : age > 7 ? 1.2 : 1.0;
 
-  // 1. Food costs
   let foodCost = baseCosts.food * sizeMultiplier;
   if (premiumFood) {
     foodCost *= 1.5;
@@ -51,7 +44,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     notes: premiumFood ? 'Premium food selected' : 'Standard food',
   });
 
-  // 2. Veterinary costs
   const vetCost = baseCosts.vet * sizeMultiplier * healthMultiplier * ageMultiplier;
   breakdown.push({
     category: 'Veterinary Care',
@@ -60,7 +52,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     notes: `Annual checkups, vaccines, preventatives (${healthStatus} health)`,
   });
 
-  // 3. Insurance
   let insuranceCost = 0;
   if (hasPetInsurance && baseCosts.insurance > 0) {
     insuranceCost = baseCosts.insurance * sizeMultiplier * ageMultiplier;
@@ -72,7 +63,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     });
   }
 
-  // 4. Grooming
   let groomingCost = 0;
   if (groomingFrequency > 0 && baseCosts.grooming > 0) {
     groomingCost = baseCosts.grooming * groomingFrequency * sizeMultiplier;
@@ -84,7 +74,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     });
   }
 
-  // 5. Daycare
   let daycareCost = 0;
   if (useDaycare && daycareFrequency > 0 && baseCosts.daycare > 0) {
     daycareCost = baseCosts.daycare * daycareFrequency * 12;
@@ -96,7 +85,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     });
   }
 
-  // 6. Boarding
   let boardingCost = 0;
   if (useBoarding && boardingWeeksPerYear > 0 && baseCosts.boarding > 0) {
     boardingCost = baseCosts.boarding * 7 * boardingWeeksPerYear;
@@ -108,7 +96,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     });
   }
 
-  // 7. Supplies & Maintenance
   const suppliesCost = baseCosts.supplies * sizeMultiplier;
   breakdown.push({
     category: 'Supplies & Equipment',
@@ -117,7 +104,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     notes: 'Beds, leashes, litter, cages, etc.',
   });
 
-  // 8. Toys & Enrichment
   const toysCost = baseCosts.toys * sizeMultiplier;
   breakdown.push({
     category: 'Toys & Enrichment',
@@ -126,7 +112,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     notes: 'Toys, puzzles, scratching posts',
   });
 
-  // 9. Treats & Training
   const treatsCost = baseCosts.treats * sizeMultiplier;
   breakdown.push({
     category: 'Treats & Training',
@@ -135,7 +120,6 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
     notes: 'Treats, training aids',
   });
 
-  // Calculate totals
   const annualCost =
     foodCost +
     vetCost +
@@ -149,19 +133,15 @@ export function calculatePetCost(inputs: PetCostInputs): PetCostResult {
 
   const monthlyCost = annualCost / 12;
 
-  // Lifespan and lifetime cost
   const expectedLifespan = PET_LIFESPANS[petType];
   const remainingYears = Math.max(0, expectedLifespan - age);
   const lifetimeCost = annualCost * remainingYears;
 
-  // Emergency fund recommendation
   const recommendedEmergencyFund =
     petType === 'dog' ? sizeMultiplier * 3000 : petType === 'cat' ? 2000 : 500;
 
-  // Cost per day
   const costPerDay = annualCost / 365;
 
-  // Compare to average
   const averageCosts: Record<string, number> = {
     dog: currency === 'USD' ? 1500 : currency === 'GBP' ? 1200 : 1350,
     cat: currency === 'USD' ? 1000 : currency === 'GBP' ? 800 : 900,

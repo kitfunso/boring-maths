@@ -1,7 +1,3 @@
-/**
- * Moving Cost Estimator - Calculation Logic
- */
-
 import type { MovingCostInputs, MovingCostResult, CostItem } from './types';
 import { BASE_MOVING_COSTS, COST_PER_MILE, WEIGHT_BY_SIZE } from './types';
 
@@ -27,30 +23,22 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
   const perMile = COST_PER_MILE[currency];
   const weight = WEIGHT_BY_SIZE[homeSize];
 
-  // Method multiplier
   const methodMultiplier = moveMethod === 'diy' ? 0.3 : moveMethod === 'hybrid' ? 0.6 : 1.0;
 
-  // Season multiplier (peak = summer months)
   const seasonMultiplier = season === 'peak' ? 1.25 : 1.0;
 
-  // Calculate base moving service cost
   let movingServiceCost = baseCost * methodMultiplier;
 
-  // Add distance-based costs
   if (moveType === 'long_distance' || moveType === 'cross_country') {
-    // Long distance is typically charged by weight and distance
     const weightCost = (weight / 100) * perMile * distance;
     movingServiceCost += weightCost;
   } else if (moveType === 'international') {
-    // International moves are significantly more expensive
     movingServiceCost *= 5;
     movingServiceCost += distance * perMile * 0.5;
   } else {
-    // Local moves - add hourly-based distance cost
     movingServiceCost += Math.min(distance, 50) * perMile * 10;
   }
 
-  // Apply season premium
   movingServiceCost *= seasonMultiplier;
 
   costItems.push({
@@ -65,7 +53,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     isOptional: false,
   });
 
-  // Packing costs
   let packingCost = 0;
   if (needsPacking) {
     packingCost = baseCost * 0.4;
@@ -77,7 +64,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     });
   }
 
-  // Supplies cost
   const suppliesCost =
     moveMethod === 'diy' ? baseCost * 0.15 : needsPacking ? baseCost * 0.05 : baseCost * 0.1;
   costItems.push({
@@ -87,7 +73,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     isOptional: false,
   });
 
-  // Special items
   let specialItemsCost = 0;
   if (hasSpecialItems) {
     specialItemsCost = currency === 'USD' ? 500 : currency === 'GBP' ? 400 : 450;
@@ -99,7 +84,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     });
   }
 
-  // Storage costs
   let storageCost = 0;
   if (needsStorage && storageMonths > 0) {
     const monthlyStorage = currency === 'USD' ? 150 : currency === 'GBP' ? 120 : 135;
@@ -122,7 +106,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     });
   }
 
-  // Cleaning costs
   let cleaningCost = 0;
   if (needsCleaning) {
     cleaningCost = currency === 'USD' ? 200 : currency === 'GBP' ? 150 : 175;
@@ -143,7 +126,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     });
   }
 
-  // Access fees
   let accessFees = 0;
   if (hasStairs) {
     accessFees += currency === 'USD' ? 75 : currency === 'GBP' ? 60 : 70;
@@ -165,7 +147,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     });
   }
 
-  // Insurance
   const insuranceCost = Math.round(movingServiceCost * 0.03);
   costItems.push({
     category: 'Moving Insurance',
@@ -174,7 +155,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     isOptional: false,
   });
 
-  // Hidden costs estimate
   const hiddenCosts = Math.round(
     (currency === 'USD' ? 300 : currency === 'GBP' ? 250 : 275) *
       (moveType === 'cross_country' || moveType === 'international' ? 2 : 1)
@@ -186,7 +166,6 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     isOptional: false,
   });
 
-  // Calculate totals
   const totalCost =
     movingServiceCost +
     packingCost +
@@ -198,22 +177,17 @@ export function calculateMovingCost(inputs: MovingCostInputs): MovingCostResult 
     insuranceCost +
     hiddenCosts;
 
-  // Estimate ranges (±20%)
   const lowEstimate = Math.round(totalCost * 0.8);
   const highEstimate = Math.round(totalCost * 1.2);
 
-  // Calculate savings vs full service
   const fullServiceCost = baseCost * 1.0 * seasonMultiplier;
   const savingsVsFullService =
     moveMethod !== 'full_service' ? Math.round(fullServiceCost - movingServiceCost) : 0;
 
-  // Cost per mile
   const costPerMile = distance > 0 ? totalCost / distance : 0;
 
-  // Peak season premium
   const peakSeasonPremium = season === 'peak' ? Math.round(movingServiceCost * 0.25) : 0;
 
-  // Tips
   const tips: string[] = [];
   if (season === 'peak') {
     tips.push('Moving in off-peak months (Oct-Apr) could save 20-25%');

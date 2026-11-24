@@ -1,10 +1,3 @@
-/**
- * Dog Age Calculator - Type Definitions
- *
- * Uses modern scientific approach that accounts for breed size,
- * not the outdated "7 human years" myth.
- */
-
 export type DogSize = 'small' | 'medium' | 'large' | 'giant';
 
 export interface DogAgeInputs {

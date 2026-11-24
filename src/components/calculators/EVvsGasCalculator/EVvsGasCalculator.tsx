@@ -1,9 +1,3 @@
-/**
- * EV vs Gas Calculator - Preact Component
- *
- * Compare the true costs of owning an electric vehicle versus a gas vehicle.
- */
-
 import { useState } from 'preact/hooks';
 import { calculateEVvsGas } from './calculations';
 import { getDefaultInputs, type EVvsGasInputs } from './types';
@@ -39,7 +33,6 @@ export default function EVvsGasCalculator() {
     compute: calculateEVvsGas,
   });
 
-  // Collapsible sections state
   const [expandedSections, setExpandedSections] = useState({
     vehicleCosts: true,
     drivingHabits: true,
@@ -59,10 +52,8 @@ export default function EVvsGasCalculator() {
 
   const fmt = (value: number) => formatCurrency(value, inputs.currency, 0);
 
-  // Get the maximum cost for bar chart scaling
   const maxCost = Math.max(result.evCosts.total, result.gasCosts.total);
 
-  // Unit labels based on metric preference
   const distanceUnit = inputs.useMetric ? 'km' : 'miles';
   const efficiencyLabel = inputs.useMetric ? 'km/kWh' : 'mi/kWh';
   const fuelEfficiencyLabel = inputs.useMetric ? 'km/L' : 'MPG';
@@ -80,9 +71,7 @@ export default function EVvsGasCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
-              {/* Vehicle Costs Section */}
               <div className="rounded-xl bg-[var(--color-surface)] ring-1 ring-white/10 overflow-hidden">
                 <button
                   type="button"
@@ -151,7 +140,6 @@ export default function EVvsGasCalculator() {
                 )}
               </div>
 
-              {/* Driving Habits Section */}
               <div className="rounded-xl bg-[var(--color-surface)] ring-1 ring-white/10 overflow-hidden">
                 <button
                   type="button"
@@ -210,7 +198,6 @@ export default function EVvsGasCalculator() {
                 )}
               </div>
 
-              {/* EV Details Section */}
               <div className="rounded-xl bg-[var(--color-surface)] ring-1 ring-white/10 overflow-hidden">
                 <button
                   type="button"
@@ -331,7 +318,6 @@ export default function EVvsGasCalculator() {
                 )}
               </div>
 
-              {/* Gas Vehicle Details Section */}
               <div className="rounded-xl bg-[var(--color-surface)] ring-1 ring-white/10 overflow-hidden">
                 <button
                   type="button"
@@ -420,9 +406,7 @@ export default function EVvsGasCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
-              {/* Winner Badge */}
               <ResultCard
                 label="Better Choice"
                 value={
@@ -441,7 +425,6 @@ export default function EVvsGasCalculator() {
                 }
               />
 
-              {/* Side by side comparison */}
               <Grid responsive={{ sm: 2 }} gap="md">
                 <div className="bg-emerald-900/20 rounded-xl p-4 border border-emerald-500/30">
                   <h3 className="text-sm font-medium text-emerald-400 mb-3">ELECTRIC VEHICLE</h3>
@@ -520,7 +503,6 @@ export default function EVvsGasCalculator() {
                 </div>
               </Grid>
 
-              {/* Savings breakdown */}
               <Grid responsive={{ sm: 3 }} gap="md">
                 <MetricCard
                   label="Monthly Savings"
@@ -542,7 +524,6 @@ export default function EVvsGasCalculator() {
                 />
               </Grid>
 
-              {/* Cost comparison bar */}
               <div className="rounded-xl bg-[var(--color-surface)] p-4 ring-1 ring-white/10">
                 <h3 className="text-sm font-medium text-[var(--color-muted)] mb-4">
                   Total Cost Comparison
@@ -577,7 +558,6 @@ export default function EVvsGasCalculator() {
                 </div>
               </div>
 
-              {/* CO2 Savings */}
               <Alert variant="tip" title="Environmental Impact">
                 <p className="text-sm">
                   Over {inputs.yearsOwnership} years, the EV saves approximately{' '}
@@ -588,7 +568,6 @@ export default function EVvsGasCalculator() {
                 </p>
               </Alert>
 
-              {/* Year by year breakdown */}
               <div className="rounded-xl bg-[var(--color-surface)] p-4 ring-1 ring-white/10">
                 <h3 className="text-sm font-medium text-[var(--color-muted)] mb-4">
                   Cumulative Cost by Year
@@ -622,7 +601,6 @@ export default function EVvsGasCalculator() {
                 </div>
               </div>
 
-              {/* Considerations */}
               <Alert variant="info" title="Things to Consider">
                 <ul className="text-sm space-y-1 mt-1">
                   <li>Residual/resale value not included in this comparison</li>
@@ -632,7 +610,6 @@ export default function EVvsGasCalculator() {
                 </ul>
               </Alert>
 
-              {/* Share and Print */}
               <div className="flex justify-center gap-4 pt-4">
                 <ShareResults
                   result={`EV vs Gas: ${result.betterChoice === 'ev' ? 'EV' : 'Gas'} wins! EV total: ${fmt(result.evCosts.total)}, Gas total: ${fmt(result.gasCosts.total)}. Savings: ${fmt(Math.abs(result.totalSavings))} over ${inputs.yearsOwnership} years.`}

@@ -11,8 +11,6 @@ describe('astro config', () => {
   it('keeps nested pages on extensionless directory output', () => {
     const astroConfig = readFileSync(astroConfigPath, 'utf-8');
 
-    // Cloudflare serves directory output at the trailing-slash URL, so the
-    // config is 'always' to keep canonical + sitemap aligned with what is served.
     expect(astroConfig).toContain("trailingSlash: 'always'");
     expect(astroConfig).toContain("format: 'directory'");
     expect(astroConfig).not.toContain("format: 'file'");

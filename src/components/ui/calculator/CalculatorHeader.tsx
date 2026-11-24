@@ -2,28 +2,12 @@ import type { ReactNode } from 'react';
 import { useTheme } from '../theme/ThemeContext';
 
 export interface CalculatorHeaderProps {
-  /** Main title */
   title: string;
-  /** Subtitle/description */
   subtitle?: string;
-  /** Right-side content (e.g., currency selector) */
   actions?: ReactNode;
-  /** Additional class names */
   className?: string;
 }
 
-/**
- * Calculator header with gradient background and optional actions.
- *
- * @example
- * ```tsx
- * <CalculatorHeader
- *   title="Calculate Your Day Rate"
- *   subtitle="Enter your target salary to find your equivalent freelance rate"
- *   actions={<CurrencySelector value={currency} onChange={setCurrency} />}
- * />
- * ```
- */
 export function CalculatorHeader({
   title,
   subtitle,
@@ -32,7 +16,6 @@ export function CalculatorHeader({
 }: CalculatorHeaderProps) {
   const { tokens } = useTheme();
 
-  // Fallback classes for SSR if tokens are somehow undefined
   const gradientClass = tokens?.gradientHeader ?? 'bg-gradient-to-r from-blue-600 to-blue-500';
   const textClass = tokens?.text100 ?? 'text-white/80';
 

@@ -1,7 +1,3 @@
-/**
- * EU VAT Calculator - Calculation Logic
- */
-
 import { EU_COUNTRIES, type VATInputs, type VATResult, type EUCountry } from './types';
 
 export function getCountryByCode(code: string): EUCountry | undefined {
@@ -18,21 +14,18 @@ export function calculateVAT(inputs: VATInputs): VATResult {
 
   switch (mode) {
     case 'add':
-      // Amount is net, add VAT
       netAmount = amount;
       vatAmount = amount * (vatRate / 100);
       grossAmount = netAmount + vatAmount;
       break;
 
     case 'remove':
-      // Amount is gross, remove VAT
       grossAmount = amount;
       netAmount = amount / (1 + vatRate / 100);
       vatAmount = grossAmount - netAmount;
       break;
 
     case 'reverse':
-      // Amount is VAT, calculate net and gross
       vatAmount = amount;
       netAmount = amount / (vatRate / 100);
       grossAmount = netAmount + vatAmount;

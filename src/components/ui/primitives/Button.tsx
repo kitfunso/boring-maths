@@ -3,17 +3,11 @@ import { useTheme } from '../theme/ThemeContext';
 import { Spinner } from './Spinner';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Button style variant */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  /** Size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Full width button */
   fullWidth?: boolean;
-  /** Loading state */
   loading?: boolean;
-  /** Button content */
   children: ReactNode;
-  /** Additional class names */
   className?: string;
 }
 
@@ -23,15 +17,6 @@ const SIZE_CLASSES = {
   lg: 'py-4 px-6 text-lg',
 };
 
-/**
- * Themed button component with multiple variants.
- *
- * @example
- * ```tsx
- * <Button variant="primary" size="lg">Calculate</Button>
- * <Button variant="outline">Reset</Button>
- * ```
- */
 export function Button({
   variant = 'primary',
   size = 'md',

@@ -1,7 +1,3 @@
-/**
- * TileCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateTile } from '../../src/components/calculators/TileCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/TileCalculator/types';

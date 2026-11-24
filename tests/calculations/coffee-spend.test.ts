@@ -9,15 +9,10 @@ describe('CoffeeSpendCalculator', () => {
       const inputs = getDefaultInputs('USD');
       const result = calculateCoffeeSpend(inputs);
 
-      // 2 coffees * $5 = $10/day
       expect(result.dailySpend).toBe(10);
-      // $10 * 5 days = $50/week
       expect(result.weeklySpend).toBe(50);
-      // $10 * 260 days = $2600/year
       expect(result.yearlySpend).toBe(2600);
-      // 2 * $0.50 * 260 = $260/year home brew
       expect(result.homeBrewYearlyCost).toBe(260);
-      // $2600 - $260 = $2340 savings
       expect(result.yearlySavings).toBe(2340);
     });
 
@@ -58,7 +53,6 @@ describe('CoffeeSpendCalculator', () => {
 
       const result = calculateCoffeeSpend(inputs);
 
-      // 1 * $5 * 7 * 52 = $1820
       expect(result.yearlySpend).toBe(1820);
     });
 
@@ -74,10 +68,8 @@ describe('CoffeeSpendCalculator', () => {
 
       const result = calculateCoffeeSpend(inputs);
 
-      // yearly savings = $2600 (no home brew cost)
       expect(result.yearlySavings).toBe(2600);
 
-      // FV annuity: 2600 * ((1.07^10 - 1) / 0.07) ≈ 35,922.76
       expect(result.savingsOver10Years).toBeCloseTo(35922.76, 0);
       expect(result.savingsOver20Years).toBeGreaterThan(result.savingsOver10Years);
       expect(result.savingsOver30Years).toBeGreaterThan(result.savingsOver20Years);
@@ -95,7 +87,6 @@ describe('CoffeeSpendCalculator', () => {
 
       const result = calculateCoffeeSpend(inputs);
 
-      // With 0% return, savings over N years = yearlySavings * N
       expect(result.savingsOver10Years).toBeCloseTo(result.yearlySavings * 10, 2);
       expect(result.savingsOver30Years).toBeCloseTo(result.yearlySavings * 30, 2);
     });
@@ -123,7 +114,7 @@ describe('CoffeeSpendCalculator', () => {
       const inputs = getDefaultInputs('GBP');
       const result = calculateCoffeeSpend(inputs);
 
-      expect(result.dailySpend).toBe(8); // 2 * £4
+      expect(result.dailySpend).toBe(8);
       expect(result.yearlySpend).toBeGreaterThan(0);
       expect(result.funEquivalents.length).toBeGreaterThan(0);
     });
@@ -132,7 +123,7 @@ describe('CoffeeSpendCalculator', () => {
       const inputs = getDefaultInputs('EUR');
       const result = calculateCoffeeSpend(inputs);
 
-      expect(result.dailySpend).toBe(9); // 2 * €4.50
+      expect(result.dailySpend).toBe(9);
       expect(result.yearlySpend).toBeGreaterThan(0);
     });
   });

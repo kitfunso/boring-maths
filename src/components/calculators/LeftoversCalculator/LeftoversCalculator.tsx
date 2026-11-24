@@ -1,10 +1,3 @@
-/**
- * Leftovers Calculator - React Component
- *
- * Determines how long leftover food is safe to eat based on
- * food type, storage method, and preparation date.
- */
-
 import { calculateLeftovers, formatDisplayDate, formatDaysRemaining } from './calculations';
 import {
   getDefaultInputs,
@@ -61,7 +54,6 @@ export default function LeftoversCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Food Category */}
             <div>
               <Label htmlFor="foodCategory" required>
                 What food do you have?
@@ -74,7 +66,6 @@ export default function LeftoversCalculator() {
               />
             </div>
 
-            {/* Storage Method */}
             <div>
               <Label>Where is it stored?</Label>
               <ButtonGroup<StorageMethod>
@@ -86,7 +77,6 @@ export default function LeftoversCalculator() {
               />
             </div>
 
-            {/* Prepared Date */}
             <div>
               <Label htmlFor="preparedDate" required>
                 When was it prepared?
@@ -112,9 +102,7 @@ export default function LeftoversCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Safety Status */}
             <ResultCard
               label={result.isSafe ? 'Safe to Eat' : 'Discard - Not Safe'}
               value={
@@ -129,7 +117,6 @@ export default function LeftoversCalculator() {
               }
             />
 
-            {/* Safety Warning */}
             {!result.isSafe && (
               <Alert variant="warning" title="Food Safety Warning">
                 According to USDA guidelines, this food has been stored longer than recommended.
@@ -138,7 +125,6 @@ export default function LeftoversCalculator() {
               </Alert>
             )}
 
-            {/* Storage Duration Metrics */}
             <Grid responsive={{ sm: 2, md: 3 }} gap="md">
               <MetricCard
                 label="Fridge"
@@ -166,7 +152,6 @@ export default function LeftoversCalculator() {
               />
             </Grid>
 
-            {/* Reheating Temperature */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Reheating Temperature
@@ -179,7 +164,6 @@ export default function LeftoversCalculator() {
               </p>
             </div>
 
-            {/* Spoilage Signs */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Signs of Spoilage
@@ -194,7 +178,6 @@ export default function LeftoversCalculator() {
               </ul>
             </div>
 
-            {/* Freezing Tips */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Freezing Tips
@@ -209,7 +192,6 @@ export default function LeftoversCalculator() {
               </ul>
             </div>
 
-            {/* General Safety Tip */}
             <Alert variant="tip" title="USDA 2-Hour Rule">
               Perishable food left at room temperature for more than 2 hours should be discarded. In
               hot weather (above 90\u00B0F / 32\u00B0C), this window shrinks to 1 hour. Always

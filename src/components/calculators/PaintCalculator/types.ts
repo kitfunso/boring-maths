@@ -1,7 +1,3 @@
-/**
- * Paint Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type RoomType = 'bedroom' | 'living_room' | 'bathroom' | 'kitchen' | 'hallway' | 'custom';
@@ -11,17 +7,13 @@ export type SurfaceType = 'smooth' | 'textured' | 'rough';
 export interface PaintCalculatorInputs {
   currency: Currency;
 
-  // Room dimensions
   roomType: RoomType;
-  roomLength: number; // feet
-  roomWidth: number; // feet
-  ceilingHeight: number; // feet
-
-  // Openings to subtract
+  roomLength: number;
+  roomWidth: number;
+  ceilingHeight: number;
   doorCount: number;
   windowCount: number;
 
-  // Paint options
   coats: number;
   paintQuality: PaintQuality;
   surfaceType: SurfaceType;
@@ -40,44 +32,35 @@ export interface PaintItem {
 export interface PaintCalculatorResult {
   currency: Currency;
 
-  // Area calculations
-  wallArea: number; // sq ft
-  ceilingArea: number; // sq ft
-  trimLength: number; // linear ft
-  totalPaintableArea: number; // sq ft
-
-  // Paint needed
+  wallArea: number;
+  ceilingArea: number;
+  trimLength: number;
+  totalPaintableArea: number;
   wallPaintGallons: number;
   ceilingPaintGallons: number;
   trimPaintQuarts: number;
   primerGallons: number;
 
-  // Costs
   paintCost: number;
   primerCost: number;
   suppliesCost: number;
   totalCost: number;
 
-  // Breakdown
   items: PaintItem[];
 
-  // Time estimate
   prepTimeHours: number;
   paintTimeHours: number;
   totalTimeHours: number;
 
-  // Tips
   tips: string[];
 }
 
-// Paint coverage (sq ft per gallon)
 export const PAINT_COVERAGE: Record<SurfaceType, number> = {
   smooth: 400,
   textured: 350,
   rough: 300,
 };
 
-// Paint prices per gallon by quality
 export const PAINT_PRICES: Record<Currency, Record<PaintQuality, number>> = {
   USD: {
     economy: 25,
@@ -96,32 +79,26 @@ export const PAINT_PRICES: Record<Currency, Record<PaintQuality, number>> = {
   },
 };
 
-// Primer price per gallon
 export const PRIMER_PRICES: Record<Currency, number> = {
   USD: 20,
   GBP: 16,
   EUR: 18,
 };
 
-// Trim paint price per quart
 export const TRIM_PAINT_PRICES: Record<Currency, number> = {
   USD: 18,
   GBP: 14,
   EUR: 16,
 };
 
-// Supplies cost estimate
 export const SUPPLIES_COST: Record<Currency, number> = {
   USD: 50,
   GBP: 40,
   EUR: 45,
 };
 
-// Standard opening sizes (sq ft)
-export const DOOR_AREA = 21; // 3ft x 7ft
-export const WINDOW_AREA = 12; // 3ft x 4ft average
-
-// Room presets
+export const DOOR_AREA = 21;
+export const WINDOW_AREA = 12;
 export const ROOM_PRESETS: Record<RoomType, { length: number; width: number; height: number }> = {
   bedroom: { length: 12, width: 12, height: 9 },
   living_room: { length: 18, width: 14, height: 9 },

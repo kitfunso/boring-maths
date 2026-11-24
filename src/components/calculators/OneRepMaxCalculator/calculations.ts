@@ -1,10 +1,3 @@
-/**
- * One Rep Max Calculator - Calculation Logic
- *
- * Implements five established 1RM estimation formulas used in
- * strength training and exercise science.
- */
-
 import type {
   OneRepMaxInputs,
   OneRepMaxResult,
@@ -19,10 +12,6 @@ function round(value: number, decimals: number = 1): number {
   return Math.round(value * factor) / factor;
 }
 
-// ---------------------------------------------------------------------------
-// Formula implementations
-// ---------------------------------------------------------------------------
-
 function epley(weight: number, reps: number): number {
   if (reps === 1) return weight;
   return weight * (1 + reps / 30);
@@ -30,14 +19,14 @@ function epley(weight: number, reps: number): number {
 
 function brzycki(weight: number, reps: number): number {
   if (reps === 1) return weight;
-  if (reps >= 37) return weight * 36; // avoid division by zero
+  if (reps >= 37) return weight * 36;
   return weight * (36 / (37 - reps));
 }
 
 function lander(weight: number, reps: number): number {
   if (reps === 1) return weight;
   const denominator = 101.3 - 2.67123 * reps;
-  if (denominator <= 0) return weight * 10; // cap for extreme reps
+  if (denominator <= 0) return weight * 10;
   return (100 * weight) / denominator;
 }
 
@@ -67,10 +56,6 @@ const FORMULA_LABELS: Readonly<Record<FormulaName, string>> = {
   oconner: "O'Conner",
 };
 
-// ---------------------------------------------------------------------------
-// Percentage table (50% to 95% in 5% steps)
-// ---------------------------------------------------------------------------
-
 function buildPercentageTable(oneRM: number): readonly PercentageRow[] {
   const rows: PercentageRow[] = [];
   for (let pct = 100; pct >= 50; pct -= 5) {
@@ -82,10 +67,6 @@ function buildPercentageTable(oneRM: number): readonly PercentageRow[] {
   return rows;
 }
 
-// ---------------------------------------------------------------------------
-// Formula comparison
-// ---------------------------------------------------------------------------
-
 function buildFormulaComparison(weight: number, reps: number): readonly FormulaEstimate[] {
   const formulas: FormulaName[] = ['epley', 'brzycki', 'lander', 'lombardi', 'oconner'];
   return formulas.map((f) => ({
@@ -94,10 +75,6 @@ function buildFormulaComparison(weight: number, reps: number): readonly FormulaE
     estimated1RM: round(FORMULA_MAP[f](weight, reps), 1),
   }));
 }
-
-// ---------------------------------------------------------------------------
-// Training zones
-// ---------------------------------------------------------------------------
 
 function buildTrainingZones(oneRM: number): readonly TrainingZone[] {
   return [
@@ -133,10 +110,6 @@ function buildTrainingZones(oneRM: number): readonly TrainingZone[] {
     },
   ];
 }
-
-// ---------------------------------------------------------------------------
-// Main calculation
-// ---------------------------------------------------------------------------
 
 export function calculateOneRepMax(inputs: OneRepMaxInputs): OneRepMaxResult {
   const { weight, reps, formula } = inputs;

@@ -1,9 +1,3 @@
-/**
- * Paint Calculator - React Component
- *
- * Interactive calculator for determining paint quantities.
- * Uses the design system components.
- */
 import { calculatePaint } from './calculations';
 import {
   getDefaultInputs,
@@ -41,12 +35,10 @@ export default function PaintCalculator() {
     compute: calculatePaint,
   });
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Handle room type change
   const handleRoomTypeChange = (roomType: RoomType) => {
     const preset = ROOM_PRESETS[roomType];
     setInputs((prev) => ({
@@ -90,7 +82,6 @@ export default function PaintCalculator() {
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Paint Needs"
           subtitle="Find out how much paint to buy for your room"
@@ -99,13 +90,11 @@ export default function PaintCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 Room Details
               </div>
 
-              {/* Room Type Preset */}
               <div>
                 <Label>Room Type</Label>
                 <ButtonGroup
@@ -115,7 +104,6 @@ export default function PaintCalculator() {
                 />
               </div>
 
-              {/* Room Dimensions */}
               <div>
                 <h4 className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-3">
                   Room Dimensions (feet)
@@ -164,7 +152,6 @@ export default function PaintCalculator() {
                 </Grid>
               </div>
 
-              {/* Doors & Windows */}
               <Grid responsive={{ sm: 2 }} gap="md">
                 <div>
                   <Label htmlFor="doorCount">Doors</Label>
@@ -202,7 +189,6 @@ export default function PaintCalculator() {
                 Paint Options
               </div>
 
-              {/* Number of Coats */}
               <div>
                 <Label>Number of Coats</Label>
                 <ButtonGroup
@@ -212,7 +198,6 @@ export default function PaintCalculator() {
                 />
               </div>
 
-              {/* Paint Quality */}
               <div>
                 <Label>Paint Quality</Label>
                 <ButtonGroup
@@ -222,7 +207,6 @@ export default function PaintCalculator() {
                 />
               </div>
 
-              {/* Surface Type */}
               <div>
                 <Label>Surface Type</Label>
                 <ButtonGroup
@@ -237,7 +221,6 @@ export default function PaintCalculator() {
                 </p>
               </div>
 
-              {/* Options */}
               <div className="space-y-3">
                 <Toggle
                   checked={inputs.needsPrimer}
@@ -260,7 +243,6 @@ export default function PaintCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Paint Needed"
@@ -273,7 +255,6 @@ export default function PaintCalculator() {
                 <MetricCard label="Total Cost" value={fmt(result.totalCost)} />
               </Grid>
 
-              {/* Paint Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   What You Need
@@ -297,7 +278,6 @@ export default function PaintCalculator() {
                     </div>
                   ))}
 
-                  {/* Supplies */}
                   <div className="flex justify-between items-start py-2 border-t border-white/5">
                     <div>
                       <span className="text-[var(--color-cream)] font-medium">
@@ -324,7 +304,6 @@ export default function PaintCalculator() {
                 </div>
               </div>
 
-              {/* Time Estimate */}
               <div className="bg-amber-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
                   Time Estimate
@@ -349,7 +328,6 @@ export default function PaintCalculator() {
                 </div>
               </div>
 
-              {/* Don't Forget List */}
               <div className="bg-amber-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
                   Don't Forget
@@ -366,7 +344,6 @@ export default function PaintCalculator() {
                 </ul>
               </div>
 
-              {/* Tips */}
               {result.tips.length > 0 && (
                 <Alert variant="tip" title="Pro Tips">
                   <ul className="space-y-1 mt-2">
@@ -380,7 +357,6 @@ export default function PaintCalculator() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Paint needed: ${result.wallPaintGallons} gallon${result.wallPaintGallons !== 1 ? 's' : ''} for ${result.wallArea} sq ft walls (${inputs.coats} coats) - Est. cost: ${fmt(result.totalCost)}`}

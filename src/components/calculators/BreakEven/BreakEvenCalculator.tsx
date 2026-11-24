@@ -1,9 +1,3 @@
-/**
- * Break-Even Calculator - React Component
- *
- * Interactive calculator for determining break-even point.
- * Uses the design system components.
- */
 import { calculateBreakEven, formatCurrency } from './calculations';
 import { getDefaultInputs, type BreakEvenInputs, type BreakEvenResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -33,18 +27,15 @@ export default function BreakEvenCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Check if inputs are valid
   const isValid = inputs.pricePerUnit > inputs.variableCostPerUnit;
 
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Break-Even Point"
           subtitle="Find out how many units you need to sell to cover costs"
@@ -52,9 +43,7 @@ export default function BreakEvenCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Fixed Costs */}
             <div>
               <Label htmlFor="fixedCosts" required>
                 Monthly Fixed Costs
@@ -73,7 +62,6 @@ export default function BreakEvenCalculator() {
               </p>
             </div>
 
-            {/* Price and Variable Cost */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="pricePerUnit" required>
@@ -111,7 +99,6 @@ export default function BreakEvenCalculator() {
               </div>
             </Grid>
 
-            {/* Target Profit */}
             <div>
               <Label htmlFor="targetProfit" badge="Optional">
                 Target Monthly Profit
@@ -130,7 +117,6 @@ export default function BreakEvenCalculator() {
               </p>
             </div>
 
-            {/* Warning if invalid */}
             {!isValid && (
               <Alert variant="error" title="Invalid pricing">
                 Selling price must be higher than variable cost per unit to break even.
@@ -140,10 +126,8 @@ export default function BreakEvenCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           {isValid && (
             <div className="space-y-6">
-              {/* Primary Result */}
               <ResultCard
                 label="Break-Even Point"
                 value={`${result.breakEvenUnits.toLocaleString()} units`}
@@ -160,7 +144,6 @@ export default function BreakEvenCalculator() {
                 }
               />
 
-              {/* Key Metrics */}
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <MetricCard
                   label="Contribution Margin"
@@ -184,7 +167,6 @@ export default function BreakEvenCalculator() {
                 />
               </Grid>
 
-              {/* Profit Analysis Table */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Profit at Different Sales Levels
@@ -242,7 +224,6 @@ export default function BreakEvenCalculator() {
                 </div>
               </div>
 
-              {/* Formula Explanation */}
               <div className="bg-blue-900/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-3">
                   How It Works
@@ -263,14 +244,12 @@ export default function BreakEvenCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Pro tip:">
                 To lower your break-even point: increase prices, reduce variable costs per unit, or
                 cut fixed costs. Even small improvements in each area can significantly reduce the
                 units needed to break even.
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Break-even point: ${result.breakEvenUnits.toLocaleString()} units (${formatCurrency(result.breakEvenRevenue, result.currency)} revenue) - Contribution margin: ${formatCurrency(result.contributionMargin, result.currency, 2)}/unit`}

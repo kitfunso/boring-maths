@@ -1,8 +1,3 @@
-/**
- * Catering Calculator - React Component
- *
- * Calculate food quantities for catered events.
- */
 import { calculateCatering } from './calculations';
 import {
   getDefaultInputs,
@@ -74,7 +69,6 @@ export default function CateringCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-red-400 uppercase tracking-wider">
                 Event Details
@@ -109,7 +103,6 @@ export default function CateringCalculator() {
                 }}
               />
 
-              {/* Meal Type */}
               <div>
                 <Label>Meal Type</Label>
                 <ButtonGroup
@@ -119,7 +112,6 @@ export default function CateringCalculator() {
                 />
               </div>
 
-              {/* Service Style */}
               <div>
                 <Label>Service Style</Label>
                 <ButtonGroup
@@ -129,7 +121,6 @@ export default function CateringCalculator() {
                 />
               </div>
 
-              {/* Event Time */}
               <div>
                 <Label>Event Time</Label>
                 <ButtonGroup
@@ -211,7 +202,6 @@ export default function CateringCalculator() {
               ))}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Food Per Person"
@@ -226,7 +216,6 @@ export default function CateringCalculator() {
                 <MetricCard label="Salad" value={`${result.saladPounds} lbs`} />
               </Grid>
 
-              {/* Food Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Food Breakdown
@@ -256,7 +245,6 @@ export default function CateringCalculator() {
                 </div>
               </div>
 
-              {/* Dietary Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Dietary Counts
@@ -289,7 +277,6 @@ export default function CateringCalculator() {
                 </Grid>
               </div>
 
-              {/* Order Guide */}
               <div className="bg-red-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-red-700 uppercase tracking-wider mb-4">
                   Caterer Order Guide
@@ -310,7 +297,6 @@ export default function CateringCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Catering Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.map((tip, i) => (
@@ -322,7 +308,6 @@ export default function CateringCalculator() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Catering for ${inputs.guestCount} guests: ${result.proteinPounds} lbs protein, ${result.starchPounds} lbs starch, ${result.vegetablePounds} lbs vegetables`}

@@ -1,7 +1,3 @@
-/**
- * Tool Deflection Calculator Component
- * Calculate end mill deflection to prevent tool breakage
- */
 import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { ToolDeflectionInputs } from './types';
@@ -46,7 +42,6 @@ export function ToolDeflectionCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Tool Setup</h2>
@@ -290,7 +285,6 @@ export function ToolDeflectionCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className={`rounded-2xl p-6 ring-1 ${statusColors[results.status]}`}>
           <h2 className="mb-4 text-lg font-semibold">Tool Deflection</h2>

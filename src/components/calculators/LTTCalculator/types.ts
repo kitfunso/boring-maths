@@ -1,7 +1,3 @@
-/**
- * Wales LTT Calculator Types
- */
-
 export type WalesBuyerType = 'standard' | 'additional';
 
 export interface LTTInputs {

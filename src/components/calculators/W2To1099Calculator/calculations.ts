@@ -1,16 +1,3 @@
-/**
- * W2 to 1099 Calculator - Calculation Logic
- *
- * Converts W2 employee compensation to equivalent 1099 contractor rate.
- * Accounts for:
- * - Self-employment tax (15.3% on 92.35% of income)
- * - Loss of employer FICA (7.65%)
- * - Health insurance costs
- * - Retirement match loss
- * - PTO value
- * - Business expenses
- */
-
 import type { Currency } from '../../../lib/regions';
 import type { W2To1099CalculatorInputs, W2To1099CalculatorResult, CostBreakdown } from './types';
 import {
@@ -29,9 +16,6 @@ import {
   SOCIAL_SECURITY_WAGE_BASE_2026,
 } from '../../../lib/us-tax-2026';
 
-/**
- * Calculate the equivalent 1099 rate from W2 compensation
- */
 export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099CalculatorResult {
   const {
     inputMode,
@@ -43,7 +27,6 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
     otherBenefitsAnnual,
   } = inputs;
 
-  // Calculate base salary from input mode
   const baseSalary = inputMode === 'hourly' ? w2HourlyRate * STANDARD_ANNUAL_HOURS : w2AnnualSalary;
 
   const baseHourly = inputMode === 'salary' ? w2AnnualSalary / STANDARD_ANNUAL_HOURS : w2HourlyRate;
@@ -52,38 +35,28 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
     return getEmptyResult();
   }
 
-  // Calculate employer FICA (what employer pays for W2 employee)
-  // 7.65% up to SS wage base, then 1.45% Medicare only above
   const employerFicaLoss =
     baseSalary <= SOCIAL_SECURITY_WAGE_BASE_2026
       ? baseSalary * EMPLOYER_FICA_RATE
       : SOCIAL_SECURITY_WAGE_BASE_2026 * EMPLOYEE_SOCIAL_SECURITY_RATE +
         baseSalary * EMPLOYEE_MEDICARE_RATE;
 
-  // Calculate self-employment tax (what contractor pays)
-  // Social Security stops at the wage base; Medicare applies to all 92.35% of net income
   const seIncome = baseSalary * SE_TAX_BASE_MULTIPLIER;
   const selfEmploymentTax =
     Math.min(seIncome, SOCIAL_SECURITY_WAGE_BASE_2026) * SOCIAL_SECURITY_SE_RATE +
     seIncome * MEDICARE_SE_RATE;
 
-  // Health insurance cost (annual)
   const healthInsuranceCost = healthInsuranceMonthly * 12;
 
-  // Retirement match loss (employer contribution)
   const retirementMatchLoss = baseSalary * (retirement401kMatch / 100);
 
-  // PTO value (paid time off as compensation)
   const dailyRate = baseSalary / WORKING_DAYS_PER_YEAR;
   const ptoValue = dailyRate * ptoDays;
 
-  // Other benefits loss
   const otherBenefitsLoss = otherBenefitsAnnual;
 
-  // Business expenses (annual)
   const businessExpenses = MONTHLY_BUSINESS_EXPENSES * 12;
 
-  // Total W2 value (salary + benefits)
   const totalW2Value =
     baseSalary +
     employerFicaLoss +
@@ -92,7 +65,6 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
     ptoValue +
     otherBenefitsLoss;
 
-  // Total additional costs as contractor
   const totalAdditionalCosts =
     selfEmploymentTax +
     healthInsuranceCost +
@@ -101,19 +73,13 @@ export function calculateW2To1099(inputs: W2To1099CalculatorInputs): W2To1099Cal
     otherBenefitsLoss +
     businessExpenses;
 
-  // Billable hours (accounting for non-billable time)
   const annualBillableHours = STANDARD_ANNUAL_HOURS * BILLABLE_HOURS_RATIO;
 
-  // Calculate equivalent 1099 rate
-  // Contractor needs to cover: base salary + all additional costs
-  // Divided by billable hours ratio to account for non-billable time
   const equivalent1099Annual = (baseSalary + totalAdditionalCosts) / BILLABLE_HOURS_RATIO;
   const equivalent1099Hourly = equivalent1099Annual / STANDARD_ANNUAL_HOURS;
 
-  // Calculate multiplier
   const multiplier = equivalent1099Hourly / baseHourly;
 
-  // Build breakdown for display
   const breakdown: CostBreakdown[] = [
     {
       label: 'Base Salary',
@@ -208,9 +174,6 @@ function getEmptyResult(): W2To1099CalculatorResult {
   };
 }
 
-/**
- * Format currency in USD
- */
 export function formatCurrency(value: number, currency: Currency = 'USD'): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -220,9 +183,6 @@ export function formatCurrency(value: number, currency: Currency = 'USD'): strin
   }).format(value);
 }
 
-/**
- * Format hourly rate
- */
 export function formatHourlyRate(value: number, currency: Currency = 'USD'): string {
   const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -233,16 +193,10 @@ export function formatHourlyRate(value: number, currency: Currency = 'USD'): str
   return `${formatted}/hr`;
 }
 
-/**
- * Format percentage
- */
 export function formatPercent(value: number, decimals: number = 0): string {
   return `${(value * 100).toFixed(decimals)}%`;
 }
 
-/**
- * Format multiplier
- */
 export function formatMultiplier(value: number): string {
   return `${value.toFixed(2)}x`;
 }

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Search for reply targets using bearer token (app-only auth)."""
 import sys, os, json, base64
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -8,7 +7,6 @@ import urllib.request
 from dotenv import load_dotenv
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
-# Get bearer token via OAuth2
 credentials = os.getenv('X_API_KEY') + ':' + os.getenv('X_API_SECRET')
 b64 = base64.b64encode(credentials.encode()).decode()
 req = urllib.request.Request(
@@ -24,7 +22,6 @@ with urllib.request.urlopen(req) as r:
 
 client = tweepy.Client(bearer_token=bearer, wait_on_rate_limit=False)
 
-# Read dedup list
 dedup_path = r'C:\Users\skf_s\clawd\tasks\state\x-replied-posts.txt'
 with open(dedup_path, 'r') as f:
     already_replied = set(line.strip() for line in f if line.strip())

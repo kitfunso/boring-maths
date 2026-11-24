@@ -1,7 +1,3 @@
-/**
- * UsPaycheckCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePaycheck } from '../../src/components/calculators/USPaycheckCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/USPaycheckCalculator/types';
@@ -32,10 +28,8 @@ describe('UsPaycheckCalculator', () => {
 
       const result = calculatePaycheck(inputs);
 
-      // Taxable 250,000 - 32,200 = 217,800; 35,932 + 24% x (217,800 - 211,400)
       expect(result.federalTax).toBeCloseTo(37468, 2);
-      expect(result.socialSecurity).toBeCloseTo(11439, 2); // 184,500 x 6.2%
-      // 250,000 x 1.45% + 0.9% x 50,000: withholding starts at 200,000 for every filing status
+      expect(result.socialSecurity).toBeCloseTo(11439, 2);
       expect(result.medicare).toBeCloseTo(4075, 2);
     });
 
@@ -46,7 +40,6 @@ describe('UsPaycheckCalculator', () => {
       inputs.filingStatus = 'head';
       inputs.state = 'TX';
 
-      // Taxable 100,000 - 24,150 = 75,850: 1,770 + 5,970 + 22% x 8,400 = 9,588
       expect(calculatePaycheck(inputs).federalTax).toBeCloseTo(9588, 2);
     });
 

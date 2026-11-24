@@ -1,14 +1,3 @@
-/**
- * UKEmployerCostCalculator - Figure Pinning Tests
- *
- * These tests pin the numeric behavior of calculateEmployerCost() as
- * of the 2026/27 tax-year constants in
- * src/components/calculators/UKEmployerCostCalculator/types.ts. During the
- * 2026/27 tax-year refresh (Task D1-D5) the employer NIC rate/threshold,
- * Employment Allowance, auto-enrolment band and Apprenticeship Levy were all
- * confirmed unchanged against GOV.UK, so these pins carried over unchanged.
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateEmployerCost } from '../../src/components/calculators/UKEmployerCostCalculator/calculations';
 
@@ -43,8 +32,6 @@ describe('UKEmployerCostCalculator', () => {
 
       expect(result.employerNIC).toBe(8250);
       expect(result.employerNICRate).toBe(13.8);
-      // qualifying earnings capped at upperLimit (50270) even though gross
-      // salary (60000) exceeds it: (50270 - 6240) * 0.03 = 1320.9
       expect(result.pensionContribution).toBeCloseTo(1320.9, 2);
       expect(result.totalEmployerCost).toBeCloseTo(69570.9, 2);
       expect(result.hiddenCostPercentage).toBe(16);
@@ -59,7 +46,6 @@ describe('UKEmployerCostCalculator', () => {
         includeEmploymentAllowance: true,
       });
 
-      // (60000 - 5000) * 0.15 = 8250, minus 10500 allowance, floored at 0
       expect(result.employerNIC).toBe(0);
       expect(result.employerNICRate).toBe(0);
       expect(result.pensionContribution).toBeCloseTo(1320.9, 2);
@@ -76,7 +62,6 @@ describe('UKEmployerCostCalculator', () => {
         includeEmploymentAllowance: false,
       });
 
-      // 3,000,000 * 0.005 = 15,000 exactly, minus the 15,000 allowance = 0
       expect(result.apprenticeshipLevy).toBe(0);
       expect(result.employerNIC).toBe(449250);
       expect(result.totalEmployerCost).toBeCloseTo(3450570.9, 2);
@@ -92,7 +77,6 @@ describe('UKEmployerCostCalculator', () => {
         includeEmploymentAllowance: false,
       });
 
-      // 4,000,000 * 0.005 = 20,000, minus the 15,000 allowance = 5,000
       expect(result.apprenticeshipLevy).toBe(5000);
       expect(result.employerNIC).toBe(599250);
       expect(result.totalEmployerCost).toBeCloseTo(4605570.9, 2);
@@ -108,7 +92,6 @@ describe('UKEmployerCostCalculator', () => {
         includeEmploymentAllowance: true,
       });
 
-      // (75000 - 5000) * 0.15 = 10500, exactly equal to EMPLOYMENT_ALLOWANCE
       expect(result.employerNIC).toBe(0);
       expect(result.employerNICRate).toBe(0);
       expect(result.pensionContribution).toBeCloseTo(1320.9, 2);

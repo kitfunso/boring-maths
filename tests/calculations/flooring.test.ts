@@ -1,7 +1,3 @@
-/**
- * FlooringCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateFlooring } from '../../src/components/calculators/FlooringCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/FlooringCalculator/types';

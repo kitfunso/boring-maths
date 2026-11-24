@@ -29,7 +29,6 @@ const FIXTURE_ASSUMPTIONS: DefaultAssumptions = {
   voucherValue: 400,
 };
 
-/** Flat-earn credit card with a lounge and a companion voucher. */
 const FLAT_CREDIT_CARD: CardProduct = {
   id: 'flat-credit-fixture',
   name: 'Flat Rewards Credit',
@@ -62,7 +61,6 @@ const FLAT_CREDIT_CARD: CardProduct = {
   lastVerified: '2026-09-01',
 };
 
-/** Capped cashback debit card with a tier2 step-up rate. */
 const CAPPED_CASHBACK_DEBIT: CardProduct = {
   id: 'capped-cashback-debit-fixture',
   name: 'Capped Cashback Debit',
@@ -89,7 +87,6 @@ const CAPPED_CASHBACK_DEBIT: CardProduct = {
   lastVerified: '2026-08-15',
 };
 
-/** Fee-free plan card with a pricePerVisit lounge and no rewards currency. */
 const FEE_FREE_PLAN: CardProduct = {
   id: 'fee-free-plan-fixture',
   name: 'Fixture Free Plan',

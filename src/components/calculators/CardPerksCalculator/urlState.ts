@@ -1,4 +1,3 @@
-/** Shareable comparison state: inputs <-> query string. Defaults are passed in, never imported. */
 import {
   CARD_TYPES,
   SORT_KEYS,

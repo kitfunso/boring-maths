@@ -1,15 +1,7 @@
-/**
- * Loan Payment Calculator - Calculation Logic
- */
-
 import type { LoanInputs, LoanResult, AmortizationRow } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate monthly payment using standard amortization formula
- * M = P * [r(1+r)^n] / [(1+r)^n - 1]
- */
 function calculateMonthlyPayment(principal: number, annualRate: number, months: number): number {
   if (annualRate === 0) {
     return principal / months;
@@ -20,9 +12,6 @@ function calculateMonthlyPayment(principal: number, annualRate: number, months: 
   return (principal * monthlyRate * factor) / (factor - 1);
 }
 
-/**
- * Generate full amortization schedule
- */
 function generateAmortization(
   principal: number,
   annualRate: number,
@@ -38,7 +27,6 @@ function generateAmortization(
     const principalPaid = monthlyPayment - interest;
     balance = Math.max(0, balance - principalPaid);
 
-    // Handle last payment rounding
     if (month === months && balance > 0) {
       balance = 0;
     }
@@ -55,18 +43,12 @@ function generateAmortization(
   return schedule;
 }
 
-/**
- * Calculate payoff date
- */
 function calculatePayoffDate(months: number): string {
   const date = new Date();
   date.setMonth(date.getMonth() + months);
   return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 }
 
-/**
- * Main calculation function
- */
 export function calculateLoan(inputs: LoanInputs): LoanResult {
   const { loanAmount, interestRate, loanTerm } = inputs;
 

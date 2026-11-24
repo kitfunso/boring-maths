@@ -1,13 +1,3 @@
-/**
- * Toggle primitive - regression tests
- *
- * Locks two production bugs fixed on 2026-07-19:
- * 1. Label clicks fired the change handler twice (label onClick + native
- *    htmlFor forwarding), flipping the toggle on and straight back off.
- * 2. The checked track referenced nonexistent theme tokens (bg500/ring500),
- *    rendering literal "undefined" classes and a colourless ON state.
- */
-
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/preact';
 import { Toggle } from '../../src/components/ui/primitives/Toggle';

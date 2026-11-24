@@ -3,7 +3,6 @@ import { calculateOvulation } from '@/components/calculators/OvulationCalculator
 
 describe('calculateOvulation', () => {
   const originalTz = process.env.TZ;
-  // UK clocks go forward on 29 March 2026; local-time arithmetic used to land a day early after it.
   beforeAll(() => {
     process.env.TZ = 'Europe/London';
   });

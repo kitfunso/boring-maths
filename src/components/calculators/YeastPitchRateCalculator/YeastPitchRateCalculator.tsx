@@ -1,7 +1,3 @@
-/**
- * Yeast Pitch Rate Calculator Component
- * Calculate proper yeast cell counts for fermentation
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { YeastPitchRateInputs } from './types';
@@ -42,7 +38,6 @@ export function YeastPitchRateCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Details</h2>
@@ -311,7 +306,6 @@ export function YeastPitchRateCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div
           className={`rounded-2xl p-6 ring-1 ${

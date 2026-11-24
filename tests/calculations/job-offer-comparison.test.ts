@@ -1,7 +1,3 @@
-/**
- * JobOfferComparisonCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateComparison } from '../../src/components/calculators/JobOfferComparison/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/JobOfferComparison/types';

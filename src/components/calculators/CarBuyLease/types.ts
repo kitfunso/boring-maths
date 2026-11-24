@@ -1,35 +1,26 @@
-/**
- * Car Buy vs Lease Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface CarBuyLeaseInputs {
   currency: Currency;
 
-  // Vehicle
   vehiclePrice: number;
   downPayment: number;
 
-  // Buy scenario
   loanInterestRate: number;
   loanTermMonths: number;
   annualDepreciation: number;
 
-  // Lease scenario
   leaseMonthlyPayment: number;
   leaseTermMonths: number;
   leaseDownPayment: number;
   mileageAllowance: number;
   excessMileageCost: number;
 
-  // Usage
   expectedAnnualMiles: number;
   yearsToOwn: number;
 
-  // Costs
-  insuranceDifference: number; // extra insurance cost for leased vehicle per month
-  maintenanceSavings: number; // monthly savings on maintenance for leased (under warranty)
+  insuranceDifference: number;
+  maintenanceSavings: number;
 }
 
 export interface YearComparison {
@@ -46,24 +37,19 @@ export interface YearComparison {
 export interface CarBuyLeaseResult {
   currency: Currency;
 
-  // Buy summary
   buyMonthlyPayment: number;
   buyTotalCost: number;
   buyResidualValue: number;
-  buyNetCost: number; // total cost - residual value
-
-  // Lease summary
+  buyNetCost: number;
   leaseMonthlyPayment: number;
   leaseTotalCost: number;
   leaseExcessMileageFees: number;
 
-  // Comparison
   yearByYear: YearComparison[];
   breakEvenYear: number | null;
-  totalSavings: number; // positive = buy is better
+  totalSavings: number;
   winner: 'buy' | 'lease' | 'tie';
 
-  // Insights
   costPerMileBuy: number;
   costPerMileLease: number;
   factors: string[];

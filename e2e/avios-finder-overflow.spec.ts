@@ -1,28 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { collectOverflow } from './helpers/overflow';
 
-/**
- * Layout overflow regression tests for the Avios Destination Finder.
- *
- * Locks the 2026-07-19 production bug where the second travel-date input
- * overflowed the card and was clipped at tablet widths: date inputs sat in
- * a flex row, and flex items (min-width: auto) cannot shrink below a date
- * input's intrinsic width. Grid tracks (minmax(0, 1fr)) can. The two native
- * date inputs are now a single #dateRange trigger button (the calendar popover),
- * so the sweep anchors on #dateRange.
- *
- * The sweep asserts, at every breakpoint, that each form control in the
- * island sits fully inside the card, and that the page never scrolls
- * horizontally. Controls inside an intentional overflow-x container
- * (scrollable results table) are exempt.
- *
- * A second per-viewport check opens the date-range popover and asserts it is
- * not clipped: the Card sets overflow-hidden, so the popover is position:fixed
- * against the viewport. Because a card-clipped dialog shrinks rather than
- * escapes, viewport containment alone is blind to the failure, so the check
- * also asserts a sane dialog width and that the last weekday header is on-screen.
- */
-
 const PAGE = '/calculators/avios-destination-finder/';
 
 const VIEWPORTS = [
@@ -42,7 +20,6 @@ test.describe('Avios finder layout overflow sweep', () => {
       await page.setViewportSize(viewport);
       await page.goto(PAGE);
 
-      // Wait for hydration: the island's date-range trigger must be interactive
       await expect(page.locator('#dateRange')).toBeVisible();
 
       const report = await collectOverflow(page, '#dateRange');
@@ -57,9 +34,6 @@ test.describe('Avios finder layout overflow sweep', () => {
         `Page scrolls horizontally at ${viewport.width}px`
       ).toBeLessThanOrEqual(report.clientWidth);
 
-      // Popover sweep (amendment 2): the fixed date-range dialog must not be
-      // clipped by the card's overflow-hidden. Run this AFTER collectOverflow so
-      // the popover's own buttons are not measured by the overflow sweep.
       const dialog = page.locator('[role="dialog"]');
       // Retry the click until the dialog opens: the trigger's handler attaches
       // only once the client:load island hydrates (a bare click can land on the

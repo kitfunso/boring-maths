@@ -1,8 +1,3 @@
-/**
- * Moving Cost Estimator - React Component
- *
- * Estimate the cost of moving to a new home.
- */
 import { calculateMovingCost } from './calculations';
 import {
   getDefaultInputs,
@@ -86,13 +81,11 @@ export default function MovingCost() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                 Move Details
               </div>
 
-              {/* Move Type */}
               <div>
                 <Label>Move Type</Label>
                 <ButtonGroup
@@ -117,7 +110,6 @@ export default function MovingCost() {
                 }}
               />
 
-              {/* Home Size */}
               <div>
                 <Label>Home Size</Label>
                 <ButtonGroup
@@ -127,7 +119,6 @@ export default function MovingCost() {
                 />
               </div>
 
-              {/* Move Method */}
               <div>
                 <Label>Moving Method</Label>
                 <ButtonGroup
@@ -137,7 +128,6 @@ export default function MovingCost() {
                 />
               </div>
 
-              {/* Season */}
               <div>
                 <Label>Season</Label>
                 <ButtonGroup
@@ -169,7 +159,6 @@ export default function MovingCost() {
                 />
               ))}
 
-              {/* Storage */}
               <div className="pt-2 border-t border-white/10">
                 <div className="mb-3">
                   <Toggle
@@ -197,7 +186,6 @@ export default function MovingCost() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Estimated Total"
@@ -217,7 +205,6 @@ export default function MovingCost() {
                 </Alert>
               )}
 
-              {/* Cost Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cost Breakdown
@@ -251,7 +238,6 @@ export default function MovingCost() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Money-Saving Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.map((tip, i) => (
@@ -263,7 +249,6 @@ export default function MovingCost() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Moving Cost Estimate: ${fmt(result.totalCost)} (Range: ${fmt(result.lowEstimate)} - ${fmt(result.highEstimate)})`}

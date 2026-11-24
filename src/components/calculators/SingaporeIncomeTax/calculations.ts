@@ -1,12 +1,8 @@
-/** Singapore resident income tax (YA2026), progressive bracket walk. Rates confirmed
- * via PwC Tax Summaries and Statrys (IRAS's own rate page is a JS app, unreadable by fetch). */
-
 export interface TaxBracket {
-  upTo: number; // upper bound of this band; Infinity for the top band
+  upTo: number;
   rate: number;
 }
 
-// YA2026 resident rates: first $20,000 at 0%, top band above $1,000,000 at 24%.
 export const TAX_BRACKETS: readonly TaxBracket[] = [
   { upTo: 20000, rate: 0 },
   { upTo: 30000, rate: 0.02 },
@@ -25,7 +21,7 @@ export const TAX_BRACKETS: readonly TaxBracket[] = [
 
 export interface BracketBreakdown {
   from: number;
-  to: number; // Infinity for the top band
+  to: number;
   rate: number;
   taxable: number;
   tax: number;
@@ -41,9 +37,9 @@ export interface SingaporeIncomeTaxResult {
   totalReliefs: number;
   chargeableIncome: number;
   totalTax: number;
-  effectiveRate: number; // percent of chargeable income
-  marginalRate: number; // percent, the rate on the last dollar earned
-  brackets: BracketBreakdown[]; // only bands the income actually reaches
+  effectiveRate: number;
+  marginalRate: number;
+  brackets: BracketBreakdown[];
 }
 
 export function getDefaultInputs(): SingaporeIncomeTaxInputs {
@@ -53,7 +49,6 @@ export function getDefaultInputs(): SingaporeIncomeTaxInputs {
   };
 }
 
-// Band walk: each slice of income is taxed at its own bracket's rate.
 function computeBrackets(chargeableIncome: number): BracketBreakdown[] {
   const breakdown: BracketBreakdown[] = [];
   let previousCeiling = 0;

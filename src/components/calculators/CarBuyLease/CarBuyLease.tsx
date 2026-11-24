@@ -1,8 +1,3 @@
-/**
- * Car Buy vs Lease Calculator - React Component
- *
- * Compare the true costs of buying versus leasing a vehicle.
- */
 import { calculateCarBuyLease } from './calculations';
 import { getDefaultInputs, type CarBuyLeaseInputs } from './types';
 import {
@@ -55,7 +50,6 @@ export default function CarBuyLease() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Vehicle & Usage
@@ -244,7 +238,6 @@ export default function CarBuyLease() {
               />
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Recommendation"
@@ -262,7 +255,6 @@ export default function CarBuyLease() {
                 }
               />
 
-              {/* Side by side comparison */}
               <Grid responsive={{ sm: 2 }} gap="md">
                 <div className="bg-blue-900/20 rounded-xl p-4 border border-blue-500/30">
                   <h3 className="text-sm font-medium text-blue-400 mb-3">🚗 BUY</h3>
@@ -317,7 +309,6 @@ export default function CarBuyLease() {
                 </div>
               </Grid>
 
-              {/* Cost per mile */}
               <Grid responsive={{ sm: 2 }} gap="md">
                 <MetricCard
                   label="Cost per Mile (Buy)"
@@ -329,7 +320,6 @@ export default function CarBuyLease() {
                 />
               </Grid>
 
-              {/* Mileage warning */}
               {inputs.expectedAnnualMiles > inputs.mileageAllowance && (
                 <Alert variant="warning">
                   Your expected mileage ({inputs.expectedAnnualMiles.toLocaleString()}/yr) exceeds
@@ -339,7 +329,6 @@ export default function CarBuyLease() {
                 </Alert>
               )}
 
-              {/* Analysis */}
               <Alert variant="tip" title="Key Factors">
                 <ul className="space-y-2 mt-2">
                   {result.factors.map((factor, i) => (
@@ -351,7 +340,6 @@ export default function CarBuyLease() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Car Analysis: ${result.winner === 'buy' ? 'Buying' : 'Leasing'} wins! Buy net cost: ${fmt(result.buyNetCost)}, Lease total: ${fmt(result.leaseTotalCost)}`}

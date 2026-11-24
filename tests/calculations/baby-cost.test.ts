@@ -1,7 +1,3 @@
-/**
- * BabyCostCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBabyCost } from '../../src/components/calculators/BabyCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BabyCost/types';

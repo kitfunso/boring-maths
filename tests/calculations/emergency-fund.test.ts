@@ -1,7 +1,3 @@
-/**
- * EmergencyFundCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateEmergencyFund } from '../../src/components/calculators/EmergencyFund/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EmergencyFund/types';

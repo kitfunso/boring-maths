@@ -1,41 +1,4 @@
 #!/usr/bin/env node
-/**
- * GSC Pull - fetch the latest Search Console data via the official API.
- *
- * Zero runtime dependencies (Node 18+ global fetch + built-in http).
- * OAuth 2.0 installed-app (loopback) flow: authorise once in a browser,
- * the refresh token is cached, every later run is non-interactive.
- *
- * Output matches the existing manual-export schema so scripts/gsc_analysis.py
- * and seo:gsc-refresh keep working unchanged:
- *   gsc-export/<YYYY-MM-DD>/gsc-pages-28d.json         ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-queries-28d.json        ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-query-page-28d.json     (bare rows array)
- *   gsc-export/<YYYY-MM-DD>/gsc-countries-28d.json      ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-country-page-28d.json   ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-country-query-28d.json  ({rows, responseAggregationType})
- *   gsc-export/<YYYY-MM-DD>/gsc-daily-90d.json          ({rows, responseAggregationType}, one row per date)
- *   gsc-export/<YYYY-MM-DD>/_pull-meta.json             (provenance)
- *
- * Setup (one time):
- *   1. Google Cloud Console > APIs & Services > Library > enable "Google Search Console API".
- *   2. Credentials > Create credentials > OAuth client ID > Application type "Desktop app".
- *   3. Download the JSON, save it as scripts/seo/.gsc-client.json (gitignored).
- *      (On the OAuth consent screen, add your Google account as a Test user.)
- *   4. npm run seo:gsc-pull -- --list-sites      # browser consent on first run
- *   5. npm run seo:gsc-pull                       # pulls 28d into gsc-export/<today>/
- *
- * Flags:
- *   --list-sites          list the GSC properties the account can access, then exit
- *   --site <property>     e.g. "sc-domain:boring-math.com" or "https://boring-math.com/"
- *   --days <n>            lookback window (default 28)
- *   --start <YYYY-MM-DD>  explicit start (overrides --days)
- *   --end <YYYY-MM-DD>    explicit end (default: today)
- *   --fresh               include not-yet-finalised data (dataState=all; default final)
- *   --client <path>       OAuth client secret JSON (default scripts/seo/.gsc-client.json)
- *   --label <name>        output folder name under gsc-export/ (default: end date)
- *   --reauth              force a fresh browser consent
- */
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -49,8 +12,6 @@ const REPO_ROOT = path.resolve(__dirname, '..', '..');
 
 const API_BASE = 'https://searchconsole.googleapis.com/webmasters/v3';
 const ROW_LIMIT = 25000; // API max per page
-
-// ---------------------------------------------------------------- args
 
 function parseArgs(argv) {
   const args = {};
@@ -68,8 +29,6 @@ function parseArgs(argv) {
   }
   return args;
 }
-
-// ---------------------------------------------------------------- dates
 
 function fmtDate(d) {
   const y = d.getFullYear();
@@ -90,8 +49,6 @@ function resolveRange(args) {
   }
   return { startDate: fmtDate(start), endDate: fmtDate(end) };
 }
-
-// ---------------------------------------------------------------- api
 
 async function apiGet(urlPath, accessToken) {
   const res = await fetch(`${API_BASE}${urlPath}`, {
@@ -128,7 +85,6 @@ async function resolveSite(args, accessToken) {
   );
 }
 
-/** searchAnalytics.query with row pagination. */
 async function queryAll(site, accessToken, body) {
   const rows = [];
   let startRow = 0;
@@ -156,13 +112,10 @@ async function queryAll(site, accessToken, body) {
   return { rows, responseAggregationType: aggType };
 }
 
-// ---------------------------------------------------------------- daily
-
 const DAILY_DAYS = 90;
-const GSC_LAG_DAYS = 3; // newest date GSC can have is today (UTC) minus this
+const GSC_LAG_DAYS = 3;
 
 function reportDaily(rows, endDate) {
-  // An explicit --end in the past must not be zero-filled out to today.
   const cap = addDays(new Date().toISOString().slice(0, 10), -GSC_LAG_DAYS);
   const series = fillDailySeries(rows, endDate < cap ? endDate : cap);
   const recent = series.slice(-CLIFF_WINDOW);
@@ -182,13 +135,9 @@ function reportDaily(rows, endDate) {
   }
 }
 
-// ---------------------------------------------------------------- io
-
 function writeJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
-
-// ---------------------------------------------------------------- main
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
@@ -226,7 +175,6 @@ async function main() {
     dimensions: ['country', 'query'],
   });
   console.log(`  country+query: ${countryQuery.rows.length} rows`);
-  // Always 90 days ending at endDate: a 28d total hides a short cliff.
   const dailyStart = new Date(`${endDate}T00:00:00`);
   dailyStart.setDate(dailyStart.getDate() - (DAILY_DAYS - 1));
   const daily = await queryAll(site, accessToken, {
@@ -240,7 +188,6 @@ async function main() {
   const outDir = path.join(REPO_ROOT, 'gsc-export', label);
   fs.mkdirSync(outDir, { recursive: true });
 
-  // Match the existing manual-export shapes exactly.
   writeJson(path.join(outDir, 'gsc-pages-28d.json'), pages);
   writeJson(path.join(outDir, 'gsc-queries-28d.json'), queries);
   writeJson(path.join(outDir, 'gsc-query-page-28d.json'), queryPage.rows);

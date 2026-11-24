@@ -1,7 +1,3 @@
-/**
- * Tip Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateTip } from '../../src/components/calculators/TipCalculator/calculations';
 import type { TipCalculatorInputs } from '../../src/components/calculators/TipCalculator/types';
@@ -68,7 +64,6 @@ describe('TipCalculator', () => {
 
       const result = calculateTip(inputs);
 
-      // 33.33 * 0.18 = 5.9994, should round to 6.00
       expect(result.tipAmount).toBe(6);
     });
 
@@ -102,7 +97,6 @@ describe('TipCalculator', () => {
 
       const result = calculateTip(inputs);
 
-      // Should not divide by zero
       expect(result.perPersonTotal).toBe(120);
     });
 

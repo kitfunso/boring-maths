@@ -1,6 +1,3 @@
-/** UK card-rewards dataset, sourced per-row from sourceUrl and fetched 2026-09-02.
- *  Unverifiable candidates (Sainsbury's Nectar, Santander Edge, M&S) were dropped; see the report. */
-
 import type { CardProduct } from '../types';
 
 export const CARDS: readonly CardProduct[] = [

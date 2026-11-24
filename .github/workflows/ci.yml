@@ -5,7 +5,6 @@ on:
     branches: [master, main]
   pull_request:
     branches: [master, main]
-  # Weekly run so the date gates (stale sources, expired validUntil) fail without waiting for a deploy
   schedule:
     - cron: '0 6 * * 1'
 
@@ -79,13 +78,3 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-  # Optional: Add deployment step for main branch
-  # deploy:
-  #   name: Deploy
-  #   needs: qa
-  #   if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy to hosting
-  #       run: echo "Add your deployment commands here"

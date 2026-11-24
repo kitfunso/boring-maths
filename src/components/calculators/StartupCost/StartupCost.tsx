@@ -1,8 +1,3 @@
-/**
- * Startup Cost Calculator - React Component
- *
- * Estimate total startup costs based on business type.
- */
 import { calculateStartupCost } from './calculations';
 import {
   getDefaultInputs,
@@ -73,13 +68,11 @@ export default function StartupCost() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                 Business Details
               </div>
 
-              {/* Business Type */}
               <div>
                 <Label>Business Type</Label>
                 <ButtonGroup
@@ -92,7 +85,6 @@ export default function StartupCost() {
                 </p>
               </div>
 
-              {/* Employees */}
               <Slider
                 label="Number of Employees"
                 value={inputs.employees}
@@ -108,7 +100,6 @@ export default function StartupCost() {
                 }}
               />
 
-              {/* Runway */}
               <Slider
                 label="Runway (Months)"
                 value={inputs.runwayMonths}
@@ -124,7 +115,6 @@ export default function StartupCost() {
                 }}
               />
 
-              {/* Founder Salary */}
               <div>
                 <Label htmlFor="founderSalary">Monthly Founder Salary</Label>
                 <Input
@@ -147,7 +137,6 @@ export default function StartupCost() {
                 Options
               </div>
 
-              {/* Needs Office */}
               <Toggle
                 checked={inputs.needsOffice}
                 onChange={(checked) => updateInput('needsOffice', checked)}
@@ -155,7 +144,6 @@ export default function StartupCost() {
                 size="sm"
               />
 
-              {/* Contingency */}
               <Toggle
                 checked={inputs.includeContingency}
                 onChange={(checked) => updateInput('includeContingency', checked)}
@@ -218,7 +206,6 @@ export default function StartupCost() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Capital Needed"
@@ -235,7 +222,6 @@ export default function StartupCost() {
                 )}
               </Grid>
 
-              {/* One-Time Costs Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   One-Time Costs
@@ -266,7 +252,6 @@ export default function StartupCost() {
                 </div>
               </div>
 
-              {/* Monthly Costs Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Monthly Recurring Costs
@@ -299,7 +284,6 @@ export default function StartupCost() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Tips for Your Business Type">
                 <ul className="space-y-2 mt-2">
                   {result.tips.slice(0, 3).map((tip, i) => (
@@ -311,7 +295,6 @@ export default function StartupCost() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Startup Cost Estimate: ${fmt(result.totalCapitalNeeded)} total (${fmt(result.oneTimeCosts)} one-time + ${fmt(result.monthlyBurnRate)}/month for ${inputs.runwayMonths} months)`}

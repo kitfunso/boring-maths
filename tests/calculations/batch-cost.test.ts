@@ -1,7 +1,3 @@
-/**
- * BatchCost Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBatchCost } from '../../src/components/calculators/BatchCostCalculator/calculations';
 import { MATERIAL_PRESETS } from '../../src/components/calculators/BatchCostCalculator/types';

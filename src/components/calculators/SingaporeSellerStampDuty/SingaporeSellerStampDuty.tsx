@@ -1,5 +1,3 @@
-/** Singapore Seller Stamp Duty Calculator - Preact. Live updating, no submit; maths in calculations.ts. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateSingaporeSellerStampDuty,
@@ -40,7 +38,6 @@ export default function SingaporeSellerStampDuty() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label for="salePrice" class="block text-sm font-medium text-[var(--color-cream)] mb-2">
@@ -98,7 +95,6 @@ export default function SingaporeSellerStampDuty() {
           </div>
         </div>
 
-        {/* Out-of-scope purchase date */}
         {result.table === 'out-of-scope' && (
           <div class="rounded-2xl p-6 border-2 border-amber-500/30 bg-amber-950/30 text-center">
             <p class="text-[var(--color-cream)]">
@@ -108,7 +104,6 @@ export default function SingaporeSellerStampDuty() {
           </div>
         )}
 
-        {/* Invalid date range */}
         {result.invalidDateRange && (
           <div class="rounded-2xl p-6 border-2 border-amber-500/30 bg-amber-950/30 text-center">
             <p class="text-[var(--color-cream)]">
@@ -118,10 +113,8 @@ export default function SingaporeSellerStampDuty() {
           </div>
         )}
 
-        {/* Results */}
         {result.table !== 'out-of-scope' && !result.invalidDateRange && (
           <div class="space-y-6">
-            {/* Primary result: SSD payable */}
             <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">
               <p class="text-sm text-[var(--color-muted)] mb-1">Seller Stamp Duty payable</p>
               <p class="text-4xl md:text-5xl font-display font-bold text-emerald-400 tabular-nums">
@@ -132,7 +125,6 @@ export default function SingaporeSellerStampDuty() {
               </p>
             </div>
 
-            {/* Metric grid */}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div class="bg-white/5 rounded-xl p-4">
                 <p class="text-xs text-[var(--color-muted)]">Holding period</p>

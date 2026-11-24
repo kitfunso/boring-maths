@@ -1,9 +1,3 @@
-/**
- * Overtime Calculator - React Component
- *
- * Calculate if overtime is worth it after taxes with
- * diminishing returns visualization.
- */
 import { calculateOvertime, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -40,25 +34,21 @@ export default function OvertimeCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Overtime multiplier presets
   const multiplierPresets = [
     { value: 1.5, label: '1.5x' },
     { value: 2.0, label: '2x' },
     { value: 2.5, label: '2.5x' },
   ];
 
-  // Calculate what percentage you actually keep
   const keepPercentage = 100 - result.effectiveTaxRate;
 
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Is Overtime Worth It?"
           subtitle="See your real take-home pay after taxes"
@@ -66,9 +56,7 @@ export default function OvertimeCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Hourly Rate */}
             <div>
               <Label htmlFor="hourlyRate" required>
                 Your Regular Hourly Rate
@@ -84,7 +72,6 @@ export default function OvertimeCalculator() {
               />
             </div>
 
-            {/* Current Annual Income */}
             <div>
               <Label htmlFor="currentIncome" required>
                 Current Annual Income (before overtime)
@@ -103,7 +90,6 @@ export default function OvertimeCalculator() {
               </p>
             </div>
 
-            {/* Overtime Hours */}
             <Slider
               label="Overtime Hours per Week"
               value={inputs.overtimeHours}
@@ -119,7 +105,6 @@ export default function OvertimeCalculator() {
               }}
             />
 
-            {/* Overtime Multiplier */}
             <div>
               <Label>Overtime Rate</Label>
               <div className="flex flex-wrap gap-2 mt-2">
@@ -143,7 +128,6 @@ export default function OvertimeCalculator() {
               </p>
             </div>
 
-            {/* Tax Settings */}
             {inputs.currency === 'USD' && (
               <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
                 <div>
@@ -190,9 +174,7 @@ export default function OvertimeCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Your Overtime Actually Pays"
               value={`${formatCurrency(result.effectiveHourlyRate, result.currency, 2)}/hr`}
@@ -213,7 +195,6 @@ export default function OvertimeCalculator() {
               }
             />
 
-            {/* Weekly/Annual breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Weekly Gross OT"
@@ -239,7 +220,6 @@ export default function OvertimeCalculator() {
               />
             </Grid>
 
-            {/* Tax breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Tax Impact
@@ -277,7 +257,6 @@ export default function OvertimeCalculator() {
               </div>
             </div>
 
-            {/* Visual comparison */}
             <div className="bg-amber-900/20 rounded-xl p-6 border border-amber-500/30">
               <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-4">
                 What You Actually Keep
@@ -315,7 +294,6 @@ export default function OvertimeCalculator() {
               </div>
             </div>
 
-            {/* Break-even analysis */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Hours Needed for Extra Cash
@@ -348,7 +326,6 @@ export default function OvertimeCalculator() {
               </div>
             </div>
 
-            {/* Bracket warning */}
             {result.pushesIntoBracket && (
               <Alert variant="warning" title="Bracket Bump Warning">
                 Your overtime income pushes you into the {result.bracketAfterOT.label} bracket. This
@@ -359,7 +336,6 @@ export default function OvertimeCalculator() {
               </Alert>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Is it worth it?">
               {result.effectiveHourlyRate >= inputs.hourlyRate ? (
                 <>
@@ -382,7 +358,6 @@ export default function OvertimeCalculator() {
               )}
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My overtime: ${formatCurrency(inputs.hourlyRate * inputs.overtimeMultiplier, result.currency, 2)}/hr gross → ${formatCurrency(result.effectiveHourlyRate, result.currency, 2)}/hr after taxes (keep ${keepPercentage.toFixed(0)}%) - ${inputs.overtimeHours} hrs/week = ${formatCurrency(result.annualNetOT, result.currency)}/year`}

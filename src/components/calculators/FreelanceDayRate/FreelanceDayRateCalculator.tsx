@@ -1,13 +1,3 @@
-/**
- * Freelance Day Rate Calculator - React Component
- *
- * Interactive calculator that helps freelancers determine their ideal day rate
- * by comparing to equivalent salaried positions with tax adjustments.
- *
- * Supports multiple currencies (USD, GBP, EUR) with region-specific defaults.
- * Migrated to use the design system components.
- */
-
 import { useState, useMemo } from 'preact/hooks';
 import { calculateFreelanceDayRate, formatCurrency } from './calculations';
 import {
@@ -37,20 +27,15 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 
-/**
- * Main calculator component
- */
 export default function FreelanceDayRateCalculator() {
   const [inputs, setInputs] = useState<FreelanceDayRateInputs>(() =>
     getDefaultInputs(getInitialCurrency())
   );
   const [error, setError] = useState<string | null>(null);
 
-  // Get current currency symbol
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
 
-  // Calculate results whenever inputs change
   const result: FreelanceDayRateResult | null = useMemo(() => {
     try {
       setError(null);
@@ -61,17 +46,14 @@ export default function FreelanceDayRateCalculator() {
     }
   }, [inputs]);
 
-  // Update a single input field
   const updateInput = (field: keyof FreelanceDayRateInputs, value: number | Currency) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Handle currency change - reset to region-appropriate defaults
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Get region-specific help text
   const getHelpText = (fieldId: string): string => {
     const field = INPUT_FIELD_CONFIG.find((f) => f.id === fieldId);
     if (!field) return '';
@@ -84,7 +66,6 @@ export default function FreelanceDayRateCalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Day Rate"
           subtitle="Enter your target salary to find your equivalent freelance rate"
@@ -92,9 +73,7 @@ export default function FreelanceDayRateCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Annual Salary */}
             <div>
               <Label htmlFor="annualSalary" required>
                 Target Annual Salary
@@ -115,7 +94,6 @@ export default function FreelanceDayRateCalculator() {
               </p>
             </div>
 
-            {/* Tax Rate */}
             <div>
               <Label htmlFor="taxRate" required>
                 Estimated Tax Rate
@@ -135,9 +113,7 @@ export default function FreelanceDayRateCalculator() {
               </p>
             </div>
 
-            {/* Two Column Layout for Days */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
-              {/* Vacation Days */}
               <div>
                 <Label htmlFor="vacationDays" required>
                   Vacation Days
@@ -155,7 +131,6 @@ export default function FreelanceDayRateCalculator() {
                 </p>
               </div>
 
-              {/* Holidays */}
               <div>
                 <Label htmlFor="holidays">Public Holidays</Label>
                 <Input
@@ -172,7 +147,6 @@ export default function FreelanceDayRateCalculator() {
               </div>
             </Grid>
 
-            {/* Benefits Value */}
             <div>
               <Label htmlFor="benefitsValue" badge="Optional">
                 Benefits Value
@@ -196,7 +170,6 @@ export default function FreelanceDayRateCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           {error ? (
             <div className="bg-red-950/30 border-2 border-red-500/30 rounded-xl p-6 text-center">
               <svg
@@ -216,7 +189,6 @@ export default function FreelanceDayRateCalculator() {
             </div>
           ) : result ? (
             <div className="space-y-6">
-              {/* Primary Result - Day Rate */}
               <ResultCard
                 label="Your Recommended Day Rate"
                 value={formatCurrency(result.netDayRate, result.currency)}
@@ -231,7 +203,6 @@ export default function FreelanceDayRateCalculator() {
                 }
               />
 
-              {/* Secondary Results Grid */}
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <MetricCard
                   label="Hourly Rate"
@@ -255,7 +226,6 @@ export default function FreelanceDayRateCalculator() {
                 />
               </Grid>
 
-              {/* Annual Comparison */}
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Annual Income Comparison
@@ -324,13 +294,11 @@ export default function FreelanceDayRateCalculator() {
                 )}
               </div>
 
-              {/* Info Note */}
               <Alert variant="tip" title="Pro tip:">
                 Most freelancers only bill 70-80% of working days due to admin, marketing, and gaps
                 between projects. Consider adding a 20-30% buffer to your rate.
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`My freelance day rate: ${formatCurrency(result.netDayRate, result.currency)} (${formatCurrency(result.hourlyRate, result.currency)}/hr) - after ${Math.round(inputs.taxRate * 100)}% tax`}

@@ -1,9 +1,7 @@
-/** Darcy-Weisbach: dP = f*(L/D)*(rho*v^2/2), Pa. Head loss: h_f = f*(L/D)*(v^2/2g), m. f=friction factor, L=length, D=diameter, rho=density, v=velocity, g=9.81 m/s^2. */
-
 import type { PressureDropInputs, PressureDropResult, PipeMaterial } from './types';
 import { PIPE_ROUGHNESS } from './types';
 
-const g = 9.81; // m/s²
+const g = 9.81;
 
 function toSI(inputs: PressureDropInputs): {
   D: number;
@@ -49,7 +47,6 @@ function colebrookWhite(Re: number, epsilon: number, D: number, maxIter: number 
 
   const relRoughness = epsilon / D;
 
-  // Initial guess using Swamee-Jain
   let f = 0.25 / Math.pow(Math.log10(relRoughness / 3.7 + 5.74 / Math.pow(Re, 0.9)), 2);
 
   for (let i = 0; i < maxIter; i++) {
@@ -69,7 +66,6 @@ export function calculatePressureDrop(inputs: PressureDropInputs): PressureDropR
   const Re = calculateReynolds(rho, V, D, mu);
   const flowRegime = getFlowRegime(Re);
 
-  // Friction factor (use iterative Colebrook for accuracy)
   const f = colebrookWhite(Re, epsilon, D);
 
   const relativeRoughness = epsilon / D;
@@ -83,13 +79,13 @@ export function calculatePressureDrop(inputs: PressureDropInputs): PressureDropR
   let pressureDropPer100: number;
 
   if (inputs.unitSystem === 'metric') {
-    pressureDrop = deltaP / 1000; // Pa to kPa
-    headLoss = h_f; // m
-    pressureDropPer100 = (deltaP / 1000) * (100 / inputs.length); // kPa per 100m
+    pressureDrop = deltaP / 1000;
+    headLoss = h_f;
+    pressureDropPer100 = (deltaP / 1000) * (100 / inputs.length);
   } else {
-    pressureDrop = deltaP / 6894.76; // Pa to psi
-    headLoss = h_f / 0.3048; // m to ft
-    pressureDropPer100 = (deltaP / 6894.76) * (100 / inputs.length); // psi per 100ft
+    pressureDrop = deltaP / 6894.76;
+    headLoss = h_f / 0.3048;
+    pressureDropPer100 = (deltaP / 6894.76) * (100 / inputs.length);
   }
 
   return {

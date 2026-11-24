@@ -1,9 +1,3 @@
-/**
- * Contractor vs Employee Calculator - React Component
- *
- * Interactive calculator comparing contractor/freelance rates against
- * full-time employment, accounting for hidden costs and benefits.
- */
 import {
   calculateComparison_main,
   formatCurrency,
@@ -55,7 +49,6 @@ export default function ContractorVsEmployeeCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -67,7 +60,6 @@ export default function ContractorVsEmployeeCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Contractor vs Employee Calculator"
           subtitle="Compare true total compensation to make informed career decisions"
@@ -75,11 +67,8 @@ export default function ContractorVsEmployeeCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Two column layout for contractor vs employee inputs */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Contractor Column */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-400 rounded-full"></span>
@@ -230,7 +219,6 @@ export default function ContractorVsEmployeeCalculator() {
                 </Grid>
               </div>
 
-              {/* Employee Column */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider flex items-center gap-2">
                   <span className="w-2 h-2 bg-blue-400 rounded-full"></span>
@@ -400,7 +388,6 @@ export default function ContractorVsEmployeeCalculator() {
               </div>
             </div>
 
-            {/* Tax Settings */}
             <details className="group">
               <summary className="cursor-pointer text-sm font-semibold text-green-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <span>Tax Settings</span>
@@ -497,9 +484,7 @@ export default function ContractorVsEmployeeCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label={isContractorBetter ? 'Contractor Wins!' : 'Employee Wins!'}
               value={formatCurrency(result.comparison.annualDifference, result.currency)}
@@ -516,7 +501,6 @@ export default function ContractorVsEmployeeCalculator() {
               }
             />
 
-            {/* Side by Side Comparison */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div
                 className={`bg-[var(--color-night)] rounded-xl p-6 border-2 ${isContractorBetter ? 'border-green-500' : 'border-transparent'}`}
@@ -561,7 +545,6 @@ export default function ContractorVsEmployeeCalculator() {
               </div>
             </div>
 
-            {/* Break-Even Analysis */}
             <div className="bg-green-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-4">
                 Break-Even Analysis
@@ -594,7 +577,6 @@ export default function ContractorVsEmployeeCalculator() {
               </Grid>
             </div>
 
-            {/* Detailed Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 overflow-x-auto">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Detailed Comparison
@@ -645,7 +627,6 @@ export default function ContractorVsEmployeeCalculator() {
               </table>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Hours Worked"
@@ -678,7 +659,6 @@ export default function ContractorVsEmployeeCalculator() {
               />
             </Grid>
 
-            {/* Tips */}
             <Alert variant="tip" title="Negotiation Tips">
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>
@@ -700,7 +680,6 @@ export default function ContractorVsEmployeeCalculator() {
               </ul>
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${isContractorBetter ? 'Contracting' : 'Employment'} wins by ${formatCurrency(result.comparison.annualDifference, result.currency)}/year! Contractor: ${formatHourlyRate(inputs.contractorHourlyRate, result.currency)} (${formatCurrency(result.contractor.netIncome, result.currency)} net) vs Employee: ${formatCurrency(inputs.employeeSalary, result.currency)} salary (${formatCurrency(result.employee.netIncome, result.currency)} net)`}

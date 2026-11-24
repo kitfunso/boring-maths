@@ -1,9 +1,3 @@
-"""
-X/Twitter API Client Wrapper
-
-Handles authentication and provides a clean interface for X API operations.
-"""
-
 import os
 import logging
 from typing import Optional
@@ -18,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Tweet:
-    """Represents a tweet."""
     id: str
     text: str
     author_id: str
@@ -32,10 +25,7 @@ class Tweet:
 
 
 class XClient:
-    """Wrapper around Tweepy for X API operations."""
-    
     def __init__(self):
-        """Initialize the X client with credentials from environment."""
         self.api_key = os.getenv("X_API_KEY")
         self.api_secret = os.getenv("X_API_SECRET")
         self.access_token = os.getenv("X_ACCESS_TOKEN")
@@ -48,12 +38,10 @@ class XClient:
                 "Set X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET in .env"
             )
         
-        # OAuth 1.0a client for posting
         self.auth = tweepy.OAuthHandler(self.api_key, self.api_secret)
         self.auth.set_access_token(self.access_token, self.access_secret)
         self.api = tweepy.API(self.auth)
         
-        # OAuth 2.0 client for v2 API (search, etc.)
         self.client = tweepy.Client(
             bearer_token=self.bearer_token,
             consumer_key=self.api_key,
@@ -66,7 +54,6 @@ class XClient:
         logger.info("X client initialized successfully")
     
     def verify_credentials(self) -> dict:
-        """Verify API credentials and return account info."""
         try:
             me = self.client.get_me(user_fields=["public_metrics", "description"])
             return {
@@ -80,16 +67,6 @@ class XClient:
             raise
     
     def post_tweet(self, text: str, reply_to: Optional[str] = None) -> dict:
-        """
-        Post a tweet.
-        
-        Args:
-            text: Tweet text (max 280 chars)
-            reply_to: Optional tweet ID to reply to
-            
-        Returns:
-            Dict with tweet id and text
-        """
         if len(text) > 280:
             raise ValueError(f"Tweet too long: {len(text)} chars (max 280)")
         
@@ -118,20 +95,7 @@ class XClient:
         min_likes: int = 0,
         min_retweets: int = 0
     ) -> list[Tweet]:
-        """
-        Search recent tweets (last 7 days).
-        
-        Args:
-            query: Search query
-            max_results: Maximum results (10-100)
-            min_likes: Minimum likes filter
-            min_retweets: Minimum retweets filter
-            
-        Returns:
-            List of Tweet objects
-        """
         try:
-            # Add filters to exclude replies and retweets
             full_query = f"{query} -is:retweet -is:reply lang:en"
             
             response = self.client.search_recent_tweets(
@@ -145,7 +109,6 @@ class XClient:
             if not response.data:
                 return []
             
-            # Build user lookup
             users = {u.id: u for u in (response.includes.get("users", []))}
             
             tweets = []
@@ -154,7 +117,6 @@ class XClient:
                 author = users.get(tweet.author_id)
                 author_metrics = author.public_metrics if author else {}
                 
-                # Apply filters
                 if metrics.get("like_count", 0) < min_likes:
                     continue
                 if metrics.get("retweet_count", 0) < min_retweets:
@@ -181,7 +143,6 @@ class XClient:
             raise
     
     def get_my_recent_tweets(self, max_results: int = 10) -> list[Tweet]:
-        """Get our own recent tweets to avoid duplicates."""
         try:
             me = self.client.get_me()
             response = self.client.get_users_tweets(
@@ -213,5 +174,4 @@ class XClient:
 
 
 def get_client() -> XClient:
-    """Factory function to get an X client instance."""
     return XClient()

@@ -1,8 +1,3 @@
-/**
- * UK Employer Cost Calculator - Calculation Logic
- * 2026/27 tax year
- */
-
 import type { UKEmployerCostInputs, UKEmployerCostResult, SalaryComparisonRow } from './types';
 import {
   EMPLOYER_NIC_2025,
@@ -11,10 +6,6 @@ import {
   APPRENTICESHIP_LEVY,
 } from './types';
 
-/**
- * Calculate employer National Insurance contributions
- * 2026/27: 15% on earnings above £5,000
- */
 function calculateEmployerNIC(grossSalary: number, useEmploymentAllowance: boolean): number {
   const { rate, threshold } = EMPLOYER_NIC_2025;
 
@@ -29,10 +20,6 @@ function calculateEmployerNIC(grossSalary: number, useEmploymentAllowance: boole
   return nic;
 }
 
-/**
- * Calculate employer auto-enrolment pension contribution
- * Based on qualifying earnings between lower and upper limits
- */
 function calculatePensionContribution(grossSalary: number, pensionRate: number): number {
   if (pensionRate <= 0) return 0;
 
@@ -44,18 +31,11 @@ function calculatePensionContribution(grossSalary: number, pensionRate: number):
   return Math.max(0, qualifyingEarnings) * (pensionRate / 100);
 }
 
-/**
- * Calculate apprenticeship levy
- * 0.5% of total pay bill, minus £15,000 allowance
- */
 function calculateApprenticeshipLevy(grossSalary: number): number {
   const levy = grossSalary * APPRENTICESHIP_LEVY.rate - APPRENTICESHIP_LEVY.allowance;
   return Math.max(0, levy);
 }
 
-/**
- * Main calculation function for a single salary
- */
 export function calculateEmployerCost(inputs: UKEmployerCostInputs): UKEmployerCostResult {
   const { grossSalary, pensionRate, includeApprenticeshipLevy, includeEmploymentAllowance } =
     inputs;
@@ -89,9 +69,6 @@ export function calculateEmployerCost(inputs: UKEmployerCostInputs): UKEmployerC
   };
 }
 
-/**
- * Generate comparison table for multiple salary levels
- */
 export function calculateComparisonTable(
   salaries: number[],
   inputs: UKEmployerCostInputs
@@ -109,17 +86,11 @@ export function calculateComparisonTable(
   });
 }
 
-/**
- * Round to specified decimal places
- */
 function round(value: number, decimals: number = 2): number {
   const factor = Math.pow(10, decimals);
   return Math.round(value * factor) / factor;
 }
 
-/**
- * Format a number as GBP currency
- */
 export function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',

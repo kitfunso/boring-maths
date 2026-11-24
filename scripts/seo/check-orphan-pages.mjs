@@ -1,18 +1,4 @@
 #!/usr/bin/env node
-/**
- * Orphan guard - every registry calculator must have editorial inbound links.
- *
- * The registry grid (homepage, /calculators, category hubs) links every
- * calculator by construction, so those pages prove nothing. This check counts
- * inbound links from EDITORIAL pages only: other calculators' related-links
- * sections and guides. A calculator with zero editorial inbound links is an
- * orphan - Google has been observed refusing to crawl exactly those pages
- * (uk-redundancy-pay / uk-holiday-entitlement, "URL is unknown to Google",
- * GSC review 2026-07-28) even when they are in the sitemap.
- *
- * Runs postbuild against dist/. `--report` prints the full distribution
- * without failing (used to set the threshold from measurement).
- */
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -23,7 +9,7 @@ const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const DIST = path.join(REPO_ROOT, 'dist');
 const REGISTRY = path.join(REPO_ROOT, 'src', 'lib', 'calculators.ts');
 
-const MIN_INBOUND = 1; // orphan = zero editorial inbound links
+const MIN_INBOUND = 1;
 
 const report = process.argv.includes('--report');
 
@@ -39,12 +25,10 @@ if (hrefs.length === 0) {
   process.exit(1);
 }
 
-/** dist html file for a calculator href, if it exists. */
 function distFileFor(href) {
   return path.join(DIST, ...href.split('/').filter(Boolean), 'index.html');
 }
 
-// Editorial referrer set: calculator pages themselves + guides.
 const referrers = [];
 for (const href of hrefs) {
   const file = distFileFor(href);
@@ -69,7 +53,7 @@ for (const href of hrefs) {
   const needle = `href="${href}"`;
   let count = 0;
   for (const ref of referrers) {
-    if (ref.href === href) continue; // self-links do not count
+    if (ref.href === href) continue;
     if (ref.html.includes(needle)) count += 1;
   }
   counts.set(href, count);
@@ -88,7 +72,6 @@ if (report) {
   console.log('Histogram (inbound -> pages):', JSON.stringify(buckets));
 }
 
-// Ratchet baseline: pre-existing orphans are tracked debt, new orphans fail.
 const baselinePath = path.join(__dirname, 'known-orphans.json');
 const baseline = new Set(
   fs.existsSync(baselinePath)

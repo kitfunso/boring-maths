@@ -1,11 +1,3 @@
-/**
- * MultiSelectChips - "All" chip regression tests (Task 2, 2026-07-19 plan)
- *
- * Locks the optional `allLabel` prop contract: a leading chip that is active
- * exactly when `selected` is empty, clicking it calls onChange([]), and it
- * stays a no-op-safe idempotent action when already active.
- */
-
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/preact';
 import MultiSelectChips from '../../src/components/ui/primitives/MultiSelectChips';

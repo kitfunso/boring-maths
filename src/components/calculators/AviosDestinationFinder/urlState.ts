@@ -1,4 +1,3 @@
-/** Shareable search state: finder inputs <-> query string. Only non-default values are written. */
 import {
   CABIN_LABELS,
   HOLIDAY_TYPES,
@@ -17,7 +16,6 @@ import {
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-// `voucher=1` predates the voucher types; it priced 2-for-1 in every cabin, which is Premium Plus.
 function voucherFromParam(value: string | null): VoucherType | null {
   if (value === '1' || value === 'premiumPlus') return 'premiumPlus';
   if (value === 'free') return 'free';

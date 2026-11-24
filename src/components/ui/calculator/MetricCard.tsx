@@ -1,15 +1,10 @@
 import { useTheme } from '../theme/ThemeContext';
 
 export interface MetricCardProps {
-  /** Label text */
   label: string;
-  /** Main value */
   value: string;
-  /** Sublabel text */
   sublabel?: string;
-  /** Value color variant */
   valueColor?: 'default' | 'success' | 'error' | 'warning' | 'themed';
-  /** Additional class names */
   className?: string;
 }
 
@@ -20,10 +15,6 @@ const VALUE_COLOR_CLASSES = {
   warning: 'text-amber-400',
 };
 
-/**
- * Secondary metric card for displaying individual values in grids.
- * Updated for dark theme.
- */
 export function MetricCard({
   label,
   value,

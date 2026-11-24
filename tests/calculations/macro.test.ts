@@ -1,7 +1,3 @@
-/**
- * MacroCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMacros } from '../../src/components/calculators/MacroCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MacroCalculator/types';

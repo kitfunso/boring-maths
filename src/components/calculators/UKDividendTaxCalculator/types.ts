@@ -1,8 +1,3 @@
-/**
- * UK Dividend Tax Calculator Types
- * For salary vs dividend optimization
- */
-
 export type TaxRegion = 'england' | 'scotland';
 
 export interface UKDividendTaxInputs {
@@ -39,7 +34,6 @@ export function getDefaultInputs(): UKDividendTaxInputs {
   };
 }
 
-// 2026/27 Dividend tax rates
 export const DIVIDEND_RATES = {
   allowance: 500,
   basicRate: 0.1075,
@@ -47,7 +41,6 @@ export const DIVIDEND_RATES = {
   additionalRate: 0.3935,
 };
 
-// 2026/27 Income tax thresholds
 export const TAX_THRESHOLDS = {
   personalAllowance: 12570,
   basicRateLimit: 50270,

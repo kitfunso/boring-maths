@@ -1,9 +1,3 @@
-/**
- * Business Mileage Calculator - React Component
- *
- * Calculates tax-deductible mileage for UK (HMRC AMAP) and US (IRS standard rate).
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateBusinessMileage,
@@ -58,7 +52,6 @@ export default function BusinessMileageCalculator() {
   const regionLabel = inputs.region === 'UK' ? 'HMRC' : 'IRS';
   const currencyCode = inputs.currency;
 
-  // Compare rates between UK and US for the info panel
   const comparisonResult = useMemo(() => {
     if (inputs.region === 'UK') {
       return calculateBusinessMileage({ ...inputs, region: 'US', currency: 'USD' });
@@ -77,7 +70,6 @@ export default function BusinessMileageCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Vehicle Type */}
             <div>
               <Label>Vehicle Type</Label>
               <ButtonGroup
@@ -88,7 +80,6 @@ export default function BusinessMileageCalculator() {
               />
             </div>
 
-            {/* Electric Vehicle Toggle */}
             {inputs.vehicleType === 'car' && (
               <Toggle
                 checked={inputs.isElectric}
@@ -98,7 +89,6 @@ export default function BusinessMileageCalculator() {
               />
             )}
 
-            {/* Miles Per Week */}
             <div>
               <Label htmlFor="milesPerWeek" required>
                 Business Miles Per Week
@@ -117,7 +107,6 @@ export default function BusinessMileageCalculator() {
               </p>
             </div>
 
-            {/* Weeks Per Year */}
             <div>
               <Label htmlFor="weeksPerYear">Working Weeks Per Year</Label>
               <Input
@@ -137,11 +126,9 @@ export default function BusinessMileageCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.milesPerWeek > 0 ? (
               <>
-                {/* Primary Result: Tax Deduction */}
                 <ResultCard
                   label="Annual Mileage Deduction"
                   value={formatCurrency(result.taxDeduction, currencyCode)}
@@ -157,7 +144,6 @@ export default function BusinessMileageCalculator() {
                   }
                 />
 
-                {/* Key Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Annual Miles"
@@ -183,7 +169,6 @@ export default function BusinessMileageCalculator() {
                   />
                 </Grid>
 
-                {/* Rate Breakdown Table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     {inputs.region === 'UK' ? 'HMRC AMAP' : 'IRS'} Rate Breakdown
@@ -217,7 +202,6 @@ export default function BusinessMileageCalculator() {
                   </div>
                 </div>
 
-                {/* UK vs US Comparison */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     {inputs.region === 'UK' ? 'UK vs US' : 'US vs UK'} Rate Comparison
@@ -252,14 +236,12 @@ export default function BusinessMileageCalculator() {
                   </Grid>
                 </div>
 
-                {/* Electric Vehicle Note */}
                 {result.electricVehicleNote && (
                   <Alert variant="info" title="Electric Vehicle Note">
                     {result.electricVehicleNote}
                   </Alert>
                 )}
 
-                {/* Tip */}
                 <Alert variant="tip" title="Record keeping">
                   {inputs.region === 'UK'
                     ? 'HMRC requires you to keep a mileage log with dates, destinations, purpose of each trip, and miles driven. Keep records for at least 5 years.'
@@ -272,7 +254,6 @@ export default function BusinessMileageCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.milesPerWeek > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

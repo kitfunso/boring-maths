@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-// Noindex guard: a calculator page must be in the sitemap exactly when it is indexable, hreflang may only
-// point at sitemap pages, and both must match the registry flag, which is read from source because the
-// built robots meta and sitemap share one code path and could agree on the wrong state.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -14,7 +11,6 @@ const DIST = path.join(ROOT, 'dist');
 const REGISTRY = path.join(ROOT, 'src', 'lib', 'calculators.ts');
 const SITE = 'https://boring-math.com';
 
-// CI runs plain Node and cannot import the .ts registry, so this parses the text and throws on drift.
 export function parseRegistry(src) {
   const body = src
     .replaceAll('\r\n', '\n')
@@ -54,7 +50,6 @@ function robotsNoindex(html) {
   return robots.includes('noindex');
 }
 
-/** Built-page checks over { url, html }; zero hreflang links anywhere means the markup changed, not that all is well. */
 export function auditPages(pageList, inSitemap) {
   const errors = [];
   let noindexed = 0;

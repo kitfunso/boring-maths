@@ -1,10 +1,3 @@
-/**
- * Wedding Alcohol Calculator - React Component
- *
- * Interactive calculator for estimating alcohol quantities for weddings.
- * Migrated to use the design system components.
- */
-
 import { useRef } from 'preact/hooks';
 import { calculateWeddingAlcohol, formatNumber } from './calculations';
 import {
@@ -36,9 +29,6 @@ export default function WeddingAlcoholCalculator() {
     compute: calculateWeddingAlcohol,
   });
 
-  // Calculate results whenever inputs change
-
-  // Track the two most recently touched sliders. The third always auto-adjusts.
   const touched = useRef<Array<'winePercent' | 'beerPercent' | 'liquorPercent'>>([]);
 
   const updateDrinkPercent = (
@@ -48,23 +38,19 @@ export default function WeddingAlcoholCalculator() {
     const clamped = Math.min(100, Math.max(0, newValue));
     const allKeys = ['winePercent', 'beerPercent', 'liquorPercent'] as const;
 
-    // Update touch history: most recent first, max 2 unique
     const hist = touched.current.filter((k) => k !== changed);
     touched.current = [changed, ...hist].slice(0, 2);
 
     const next = { ...inputs, [changed]: clamped };
 
     if (touched.current.length >= 2) {
-      // Two sliders have been set manually. Auto-adjust the third.
       const autoKey = allKeys.find((k) => !touched.current.includes(k))!;
       next[autoKey] = Math.max(0, 100 - touched.current.reduce((s, k) => s + next[k], 0));
     }
-    // If only one slider touched, just move it. Don't touch the others.
 
     setInputs(next as WeddingAlcoholInputs);
   };
 
-  // Check if drink percentages are valid
   const percentageTotal = inputs.winePercent + inputs.beerPercent + inputs.liquorPercent;
   const isPercentageValid = percentageTotal >= 99 && percentageTotal <= 101;
 
@@ -77,16 +63,13 @@ export default function WeddingAlcoholCalculator() {
   return (
     <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Estimate Your Wedding Alcohol"
           subtitle="Calculate how much beer, wine, and liquor you'll need"
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Guest Count & Event Duration */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="guestCount" required>
@@ -117,7 +100,6 @@ export default function WeddingAlcoholCalculator() {
               </div>
             </Grid>
 
-            {/* Drinkers Percentage */}
             <div>
               <Slider
                 label="Percentage Who Drink Alcohol"
@@ -137,7 +119,6 @@ export default function WeddingAlcoholCalculator() {
               </p>
             </div>
 
-            {/* Drinking Level */}
             <div>
               <Label>Drinking Level</Label>
               <ButtonGroup
@@ -153,7 +134,6 @@ export default function WeddingAlcoholCalculator() {
               </p>
             </div>
 
-            {/* Drink Type Preferences - Custom sliders with drink-specific colors */}
             <div>
               <Label className="mb-3">Drink Preferences (must total 100%)</Label>
               <div className="space-y-4">
@@ -225,9 +205,7 @@ export default function WeddingAlcoholCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Results - Bottles Needed (custom drink-specific colors) */}
             <Grid cols={3} gap="md">
               <div className="bg-gradient-to-br from-red-950/50 to-red-900/30 border-2 border-red-500/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl mb-2">🍷</div>
@@ -263,7 +241,6 @@ export default function WeddingAlcoholCalculator() {
               </div>
             </Grid>
 
-            {/* Summary Stats */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Summary
@@ -290,13 +267,11 @@ export default function WeddingAlcoholCalculator() {
               </Grid>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
               Buy 10-15% extra to account for spillage, heavy drinkers, and unexpected guests. Most
               stores allow returns of unopened bottles.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Wedding drinks for ${inputs.guestCount} guests: ${result.wineBottles} wine bottles, ${result.beerBottles} beers, ${result.liquorBottles} liquor bottles (${result.totalDrinks} total drinks)`}

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Get recent tweets from BoringMath1276."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 

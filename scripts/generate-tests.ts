@@ -1,7 +1,3 @@
-/**
- * Generate test files for all calculators
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -12,7 +8,6 @@ const __dirname = path.dirname(__filename);
 const CALCULATORS_DIR = path.join(__dirname, '../src/components/calculators');
 const TESTS_DIR = path.join(__dirname, '../tests/calculations');
 
-// Calculators to skip
 const SKIP_DIRS = ['shared'];
 const EXISTING_TESTS = ['compound-interest', 'loan-calculator', 'tip-calculator'];
 
@@ -36,7 +31,6 @@ function toPascalCase(str: string): string {
 }
 
 function toKebabCase(str: string): string {
-  // Handle cases like 401kCalculator, ABVCalculator, etc.
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
@@ -56,14 +50,11 @@ function analyzeCalculator(dirName: string): CalculatorInfo | null {
 
   const hasTypes = fs.existsSync(typesPath);
 
-  // Read calculations.ts to find the main calculation function
   const calculationsContent = fs.readFileSync(calculationsPath, 'utf-8');
 
-  // Try to find the main calculate function
   const functionMatch = calculationsContent.match(/export function (calculate\w+)/);
   const calculateFunctionName = functionMatch ? functionMatch[1] : 'calculate';
 
-  // Read types.ts if it exists to find type names
   let inputTypeName = 'Inputs';
   let resultTypeName = 'Result';
   let hasDefaultInputs = false;
@@ -71,19 +62,16 @@ function analyzeCalculator(dirName: string): CalculatorInfo | null {
   if (hasTypes) {
     const typesContent = fs.readFileSync(typesPath, 'utf-8');
 
-    // Find input type
     const inputTypeMatch = typesContent.match(/export interface (\w+Inputs)/);
     if (inputTypeMatch) {
       inputTypeName = inputTypeMatch[1];
     }
 
-    // Find result type
     const resultTypeMatch = typesContent.match(/export interface (\w+Result)/);
     if (resultTypeMatch) {
       resultTypeName = resultTypeMatch[1];
     }
 
-    // Check for getDefaultInputs
     hasDefaultInputs = typesContent.includes('getDefaultInputs');
   }
 
@@ -163,12 +151,10 @@ describe('${pascalName}Calculator', () => {
 }
 
 function main() {
-  // Ensure tests directory exists
   if (!fs.existsSync(TESTS_DIR)) {
     fs.mkdirSync(TESTS_DIR, { recursive: true });
   }
 
-  // Get all calculator directories
   const dirs = fs.readdirSync(CALCULATORS_DIR, { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
@@ -186,7 +172,6 @@ function main() {
       const testFileName = `${kebabName}.test.ts`;
       const testFilePath = path.join(TESTS_DIR, testFileName);
 
-      // Skip if test already exists
       if (EXISTING_TESTS.includes(kebabName) || fs.existsSync(testFilePath)) {
         console.log(`⏭️  Skipping ${kebabName} (test already exists)`);
         skipped++;

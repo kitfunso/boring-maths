@@ -1,5 +1,3 @@
-/** Freelance Day Rate Calculator types: compares a freelance day rate to an equivalent salaried position, with tax adjustments and region-specific defaults for USD, GBP, and EUR. */
-
 import type { Currency } from '../../../lib/regions';
 import { getRegionDefaults, getDefaultSalary } from '../../../lib/regions';
 
@@ -8,30 +6,24 @@ export interface FreelanceDayRateInputs {
 
   annualSalary: number;
 
-  /** Estimated tax rate as decimal (0.25 = 25%) */
   taxRate: number;
 
   vacationDays: number;
 
   holidays: number;
 
-  /** Annual value of benefits to self-fund (health insurance, retirement, etc.) */
   benefitsValue: number;
 }
 
 export interface FreelanceDayRateResult {
   currency: Currency;
 
-  /** Day rate before taxes. */
   grossDayRate: number;
 
-  /** Day rate after taxes. */
   netDayRate: number;
 
-  /** Hourly rate based on an 8-hour workday. */
   hourlyRate: number;
 
-  /** Monthly income at full utilization (21.7 working days). */
   monthlyIncome: number;
 
   workingDays: number;
@@ -58,7 +50,6 @@ export function getDefaultInputs(currency: Currency = 'USD'): FreelanceDayRateIn
   };
 }
 
-/** @deprecated Use getDefaultInputs(currency) instead for region-specific defaults. */
 export const DEFAULT_INPUTS: FreelanceDayRateInputs = getDefaultInputs('USD');
 
 export interface InputFieldConfig {

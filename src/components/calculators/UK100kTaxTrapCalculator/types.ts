@@ -3,14 +3,10 @@ export type TaxRegion = 'england' | 'scotland';
 export type StudentLoanPlan = 'none' | 'plan1' | 'plan2' | 'plan4' | 'plan5' | 'postgrad';
 
 export interface UK100kInputs {
-  /** Annual gross salary before any deductions */
   grossSalary: number;
-  /** Tax region - England/Wales/NI or Scotland */
   taxRegion: TaxRegion;
   studentLoanPlan: StudentLoanPlan;
-  /** Current pension contribution as percentage of salary */
   currentPensionPercent: number;
-  /** Additional income (bonus, dividends, etc.) */
   bonusIncome: number;
 }
 
@@ -21,7 +17,6 @@ export interface TaxBandBreakdown {
   taxPaid: number;
 }
 
-/** Comparison of current vs optimized position */
 export interface TaxComparison {
   label: string;
   current: number;
@@ -30,16 +25,12 @@ export interface TaxComparison {
 }
 
 export interface UK100kResult {
-  /** Total income before pension sacrifice */
   totalIncome: number;
 
-  /** Taxable income after pension contribution */
   taxableIncome: number;
 
-  /** Personal Allowance after tapering */
   personalAllowance: number;
 
-  /** Amount of Personal Allowance lost due to income over £100k */
   personalAllowanceLost: number;
 
   incomeTax: number;
@@ -52,34 +43,26 @@ export interface UK100kResult {
 
   takeHomePay: number;
 
-  /** Effective tax rate (total deductions / gross income) */
   effectiveTaxRate: number;
 
   marginalTaxRate: number;
 
-  /** Whether income falls in the £100k-£125k tax trap zone */
   isInTaxTrap: boolean;
 
-  /** Extra tax paid due to Personal Allowance loss */
   taxTrapCost: number;
 
-  /** Amount of income in the 60%+ marginal rate zone */
   incomeInTrapZone: number;
 
-  /** Pension contribution needed to restore full Personal Allowance */
   optimalPensionContribution: number;
 
-  /** Optimal pension as percentage of salary */
   optimalPensionPercent: number;
 
   optimizedTakeHomePay: number;
 
   annualTaxSaved: number;
 
-  /** Total value gained (tax saved + employer NI saved if salary sacrifice) */
   totalBenefit: number;
 
-  /** Extra amount going into pension vs take-home reduction */
   pensionGainRatio: number;
 
   taxBreakdown: TaxBandBreakdown[];

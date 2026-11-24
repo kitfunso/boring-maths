@@ -1,8 +1,3 @@
-/**
- * Employee Cost Calculator - React Component
- *
- * Calculate the true cost of an employee.
- */
 import { calculateEmployeeCost } from './calculations';
 import { getDefaultInputs, type EmployeeCostInputs } from './types';
 import {
@@ -45,7 +40,6 @@ export default function EmployeeCost() {
   const fmt = (value: number) => formatCurrency(value, inputs.currency, 0);
   const fmtHr = (value: number) => formatCurrency(value, inputs.currency, 2);
 
-  // Calculate nominal hourly for comparison
   const nominalHourly = inputs.annualSalary / (52 * inputs.hoursPerWeek);
 
   return (
@@ -59,7 +53,6 @@ export default function EmployeeCost() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Compensation
@@ -227,7 +220,6 @@ export default function EmployeeCost() {
               />
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="True Hourly Cost"
@@ -246,7 +238,6 @@ export default function EmployeeCost() {
                 />
               </Grid>
 
-              {/* Salary vs Total Visualization */}
               <div className="bg-blue-900/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-4">
                   The {result.burdenMultiplier}x Multiplier Explained
@@ -315,7 +306,6 @@ export default function EmployeeCost() {
                 </div>
               </div>
 
-              {/* Cost Breakdown Table */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Detailed Breakdown
@@ -358,7 +348,6 @@ export default function EmployeeCost() {
                 </div>
               </div>
 
-              {/* Key Insight */}
               <Alert variant="tip" title="Why $50/hr Employee != $50/hr Cost">
                 <p className="text-sm mt-2">
                   A {fmt(inputs.annualSalary)} salary ({fmtHr(nominalHourly)}/hr nominal) actually
@@ -369,7 +358,6 @@ export default function EmployeeCost() {
                 </p>
               </Alert>
 
-              {/* Insights */}
               {result.insights.length > 0 && (
                 <Alert variant="info" title="Additional Insights">
                   <ul className="space-y-2 mt-2">
@@ -383,7 +371,6 @@ export default function EmployeeCost() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Employee Cost: ${fmt(result.totalAnnualCost)}/year (${fmtHr(result.trueHourlyCost)}/hr true cost) - ${result.burdenMultiplier}x burden multiplier`}

@@ -1,5 +1,3 @@
-/** Singapore CPF rates effective 1 Jan 2026, Ordinary Wages up to the $8,000 ceiling; Additional Wages (bonuses) use a separate annual ceiling and are not modelled. */
-
 export const CPF_OW_CEILING = 8000;
 export const CPF_GRADUATED_LOWER = 500;
 export const CPF_GRADUATED_UPPER = 750;
@@ -74,7 +72,6 @@ export function calculateEmployeeCpfContribution(wage: number, band: CpfAgeBandR
   const cappedWage = Math.min(wage, CPF_OW_CEILING);
   if (cappedWage <= CPF_GRADUATED_LOWER) return 0;
   if (cappedWage <= CPF_GRADUATED_UPPER) {
-    // Graduated band scales each rate against the 55-and-below 20% base, per CPF's own shape.
     const graduatedFactor = (band.employeeRate / CPF_AGE_BANDS.upTo55.employeeRate) * 0.6;
     return graduatedFactor * (cappedWage - CPF_GRADUATED_LOWER);
   }

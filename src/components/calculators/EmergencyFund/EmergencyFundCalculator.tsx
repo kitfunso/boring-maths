@@ -1,9 +1,3 @@
-/**
- * Emergency Fund Calculator - React Component
- *
- * Interactive calculator for determining emergency fund needs.
- * Uses the design system components.
- */
 import { calculateEmergencyFund, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -40,7 +34,6 @@ export default function EmergencyFundCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -57,7 +50,6 @@ export default function EmergencyFundCalculator() {
     { value: 'conservative' as const, label: 'Conservative' },
   ];
 
-  // Determine progress color
   const getProgressColor = () => {
     if (result.percentComplete >= 100) return 'bg-green-500';
     if (result.percentComplete >= 75) return 'bg-green-400';
@@ -69,7 +61,6 @@ export default function EmergencyFundCalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Build Your Emergency Fund"
           subtitle="Calculate how much you need and track your progress"
@@ -77,9 +68,7 @@ export default function EmergencyFundCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Monthly Expenses & Current Savings */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="monthlyExpenses" required>
@@ -113,7 +102,6 @@ export default function EmergencyFundCalculator() {
               </div>
             </Grid>
 
-            {/* Job Stability */}
             <div>
               <Label>Job Stability</Label>
               <ButtonGroup
@@ -132,7 +120,6 @@ export default function EmergencyFundCalculator() {
               </p>
             </div>
 
-            {/* Dependents & Risk */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="dependents">Number of Dependents</Label>
@@ -165,7 +152,6 @@ export default function EmergencyFundCalculator() {
               </div>
             </Grid>
 
-            {/* Risk Tolerance */}
             <div>
               <Label>Risk Tolerance</Label>
               <ButtonGroup
@@ -179,16 +165,13 @@ export default function EmergencyFundCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Your Emergency Fund Target"
               value={formatCurrency(result.targetAmount, result.currency)}
               subtitle={`${result.recommendedMonths} months of expenses`}
             />
 
-            {/* Progress Bar */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-[var(--color-cream)]">Your Progress</span>
@@ -208,7 +191,6 @@ export default function EmergencyFundCalculator() {
               </div>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Amount Needed"
@@ -238,7 +220,6 @@ export default function EmergencyFundCalculator() {
               />
             </Grid>
 
-            {/* Fund Tiers */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Emergency Fund Tiers
@@ -280,14 +261,12 @@ export default function EmergencyFundCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
               Keep your emergency fund in a high-yield savings account for easy access while earning
               interest. Don't invest it in stocks - you need this money accessible without risk of
               loss.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Emergency fund target: ${formatCurrency(result.targetAmount, result.currency)} (${result.recommendedMonths} months) - ${result.percentComplete}% complete`}

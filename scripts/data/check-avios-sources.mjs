@@ -1,43 +1,4 @@
 #!/usr/bin/env node
-/**
- * Monitors the two guide-price sources behind the Avios Destination Finder
- * for drift, without hashing whole pages (ads/comments/related-post widgets
- * churn on every load and would cause monthly false alarms).
- *
- * Sources (already cited in the finder's data file headers):
- *   - HfP pricing article: header of
- *     src/components/calculators/AviosDestinationFinder/data/destinations.ts
- *   - AwardWallet peak calendar: header of
- *     src/components/calculators/AviosDestinationFinder/data/peakCalendar.ts
- *
- * Fingerprint method (plan-review amendment 4, binding over the earlier
- * whole-article-hash draft):
- *   - HfP page: sorted unique numeric tokens (digits, commas stripped)
- *     extracted from <table> elements only. If the fetched HTML has no
- *     <table> at all, the page shape has changed - treat as "skipped",
- *     not drift.
- *   - AwardWallet page: sorted unique date-like and price-like tokens from
- *     the article body. VERIFIED GOTCHA (2026-07-19): the page has zero
- *     <table> elements and its calendar is plain text ("January: 1-6,
- *     14-17..."), not "12 Jan"-style dates - a generic day+month regex
- *     matches nothing real and instead only catches rotating ad copy (a
- *     "$600"-style token that changed between two fetches seconds apart,
- *     i.e. exactly the false-alarm amendment 4 warns about). The
- *     "date-like and price-like" tokens actually used here are
- *     "<month>:<day-range-list>" pairs (e.g. "january:1-4"), one per
- *     month per calendar (BA/Iberia/Aer Lingus), which is the real
- *     peak-calendar content and is stable across repeated fetches.
- * Each source's tokens are joined and SHA-256 hashed. The hash is compared
- * to the last captured value in avios-source-hashes.json.
- *
- * A blocked or failed fetch is not evidence of a changed source, so it never
- * fails the run - it prints "skipped" and exits 0. Only a confirmed hash
- * mismatch against a previously captured baseline exits 1.
- *
- * Usage:
- *   node scripts/data/check-avios-sources.mjs            # compare to baseline
- *   node scripts/data/check-avios-sources.mjs --update   # rewrite baseline
- */
 
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { createHash } from 'node:crypto';
@@ -75,11 +36,6 @@ function stripTags(html) {
     .trim();
 }
 
-/**
- * HfP fingerprint: numeric tokens (digits, commas stripped) from <table>
- * elements only. Returns null when no <table> is found at all, which the
- * caller treats as "page shape changed" rather than drift.
- */
 function fingerprintTableNumbers(html) {
   const tables = [...html.matchAll(/<table[\s\S]*?<\/table>/gi)].map((m) => m[0]);
   if (tables.length === 0) {
@@ -94,16 +50,6 @@ function fingerprintTableNumbers(html) {
 const MONTH_NAMES =
   'January|February|March|April|May|June|July|August|September|October|November|December';
 
-/**
- * AwardWallet fingerprint: "<month>:<day-range-list>" tokens (date-like,
- * price-free) pulled straight from the calendar text, e.g. "january:1-4"
- * for a "January: 1-4" line. One token per month per calendar section (the
- * page lists BA, Iberia and Aer Lingus calendars back to back), so a
- * changed day range, an added/removed month, or a whole new calendar
- * section all show up as a token-set change. Returns null when nothing
- * matches, treated the same as "page shape changed" - an empty token set
- * is more likely a broken selector than an empty calendar.
- */
 function fingerprintDatesAndPrices(html) {
   const scoped = html.match(/<main[\s\S]*?<\/main>/i) ?? html.match(/<article[\s\S]*?<\/article>/i);
   const text = stripTags(scoped ? scoped[0] : html);
@@ -245,8 +191,6 @@ async function main() {
     console.log('');
   }
 
-  // Only --update rewrites the baseline: a read-only check must never
-  // dirty the working tree (or overwrite the baseline with drift entries)
   if (forceUpdate) {
     const sorted = results.slice().sort((a, b) => a.url.localeCompare(b.url));
     writeFileSync(HASHES_FILE, JSON.stringify(sorted, null, 2) + '\n', 'utf-8');

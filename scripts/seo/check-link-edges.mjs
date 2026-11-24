@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 const edges = JSON.parse(fs.readFileSync('scripts/seo/expected-link-edges.json', 'utf8'));
 
-// Group edges by `from` so each dist file is read at most once.
 const byFrom = new Map();
 for (const { from, to } of edges) {
   if (!byFrom.has(from)) byFrom.set(from, []);

@@ -1,9 +1,3 @@
-/**
- * BBQ Calculator - React Component
- *
- * Interactive calculator for planning BBQ quantities.
- * Uses the design system components.
- */
 import { calculateBBQ, formatPounds } from './calculations';
 import {
   getDefaultInputs,
@@ -54,16 +48,13 @@ export default function BBQCalculator() {
   return (
     <ThemeProvider defaultColor="red">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Plan Your BBQ"
           subtitle="Calculate how much meat and supplies you need"
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Guest Count */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="guestCount" required>
@@ -95,7 +86,6 @@ export default function BBQCalculator() {
               </div>
             </Grid>
 
-            {/* Appetite Level */}
             <div>
               <Label>Appetite Level</Label>
               <ButtonGroup
@@ -111,7 +101,6 @@ export default function BBQCalculator() {
               </p>
             </div>
 
-            {/* Meat Preference */}
             <div>
               <Label>Main Meat Type</Label>
               <ButtonGroup
@@ -122,7 +111,6 @@ export default function BBQCalculator() {
               />
             </div>
 
-            {/* Sides and Duration */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Slider
@@ -157,7 +145,6 @@ export default function BBQCalculator() {
               </div>
             </Grid>
 
-            {/* Vegetarian Option */}
             <Checkbox
               checked={inputs.includeVegetarian}
               onChange={(checked) => updateInput('includeVegetarian', checked)}
@@ -167,9 +154,7 @@ export default function BBQCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Total Meat Needed"
               value={formatPounds(result.totalMeatPounds)}
@@ -181,7 +166,6 @@ export default function BBQCalculator() {
               }
             />
 
-            {/* Meat Breakdown */}
             <div className="bg-red-50 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-red-700 uppercase tracking-wider mb-4">
                 Meat Shopping List
@@ -202,7 +186,6 @@ export default function BBQCalculator() {
               </div>
             </div>
 
-            {/* Side Dishes */}
             <div className="bg-amber-50 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-amber-700 uppercase tracking-wider mb-4">
                 Side Dishes
@@ -217,7 +200,6 @@ export default function BBQCalculator() {
               </div>
             </div>
 
-            {/* Supplies */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Supplies Checklist
@@ -235,7 +217,6 @@ export default function BBQCalculator() {
               </div>
             </div>
 
-            {/* Grilling Info */}
             <Grid cols={3} gap="md">
               <MetricCard
                 label="Charcoal"
@@ -254,14 +235,12 @@ export default function BBQCalculator() {
               />
             </Grid>
 
-            {/* Tips */}
             <Alert variant="tip" title="Grill master tip:">
               Buy 10% extra meat to account for trimming and hungry guests coming back for seconds.
               Start grilling larger cuts (ribs, whole chickens) first, as they take longer. Keep
               cooked meat warm in a 200°F oven or covered on the cool side of the grill.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`BBQ for ${inputs.guestCount} guests: ${formatPounds(result.totalMeatPounds)} of meat needed (${result.meatBreakdown.map((m) => `${m.type}: ${formatPounds(m.pounds)}`).join(', ')})`}

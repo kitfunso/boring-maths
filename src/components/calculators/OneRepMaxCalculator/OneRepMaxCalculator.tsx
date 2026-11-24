@@ -1,9 +1,3 @@
-/**
- * One Rep Max Calculator - Preact Component
- *
- * Estimates 1RM using five formulas with percentage table and training zones.
- */
-
 import { calculateOneRepMax } from './calculations';
 import {
   getDefaultInputs,
@@ -83,7 +77,6 @@ export default function OneRepMaxCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit Toggle */}
             <div>
               <Label>Unit</Label>
               <ButtonGroup
@@ -94,7 +87,6 @@ export default function OneRepMaxCalculator() {
               />
             </div>
 
-            {/* Weight Lifted */}
             <div>
               <Label htmlFor="weight" required>
                 Weight Lifted ({inputs.unit})
@@ -110,7 +102,6 @@ export default function OneRepMaxCalculator() {
               />
             </div>
 
-            {/* Reps Performed */}
             <div>
               <Label htmlFor="reps" required>
                 Reps Performed
@@ -131,7 +122,6 @@ export default function OneRepMaxCalculator() {
               </p>
             </div>
 
-            {/* Formula Selector */}
             <div>
               <Label htmlFor="formula">Formula</Label>
               <Select
@@ -148,11 +138,9 @@ export default function OneRepMaxCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {hasResult ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Estimated 1RM"
                   value={`${result.estimated1RM} ${inputs.unit}`}
@@ -165,7 +153,6 @@ export default function OneRepMaxCalculator() {
                   }
                 />
 
-                {/* Training Zones */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Training Zones
@@ -194,7 +181,6 @@ export default function OneRepMaxCalculator() {
                   </div>
                 </div>
 
-                {/* Percentage Table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Percentage of 1RM
@@ -226,7 +212,6 @@ export default function OneRepMaxCalculator() {
                   </div>
                 </div>
 
-                {/* Formula Comparison */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Formula Comparison
@@ -272,7 +257,6 @@ export default function OneRepMaxCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {hasResult && (
               <div className="flex justify-center pt-4">
                 <ShareResults

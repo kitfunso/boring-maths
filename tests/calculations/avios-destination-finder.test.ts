@@ -1,7 +1,3 @@
-/**
- * Avios Destination Finder - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   resolveSeasonsForRange,
@@ -82,7 +78,6 @@ describe('AviosDestinationFinder', () => {
   });
 
   describe('calculatePartyTotals', () => {
-    // Amsterdam economy off-peak anchor: 10,000 Avios + £1 one-way per person.
     it('doubles Avios and cash for 2 travellers without a voucher, return', () => {
       const t = calculatePartyTotals({
         oneWayAvios: 10000,
@@ -91,8 +86,8 @@ describe('AviosDestinationFinder', () => {
         companionVoucher: false,
         tripType: 'return',
       });
-      expect(t.avios).toBe(40000); // 10,000 x 2 pax x 2 legs
-      expect(t.cash).toBe(4); // £1 x 2 pax x 2 legs
+      expect(t.avios).toBe(40000);
+      expect(t.cash).toBe(4);
     });
 
     it('halves the Avios (not the cash) with a companion voucher for 2', () => {
@@ -103,8 +98,8 @@ describe('AviosDestinationFinder', () => {
         companionVoucher: true,
         tripType: 'return',
       });
-      expect(t.avios).toBe(20000); // second seat costs no Avios
-      expect(t.cash).toBe(4); // taxes/fees still due for both passengers
+      expect(t.avios).toBe(20000);
+      expect(t.cash).toBe(4);
     });
 
     it('ignores the voucher for a single traveller (solo variant is out of scope v1)', () => {
@@ -176,8 +171,6 @@ describe('AviosDestinationFinder', () => {
       }
     });
 
-    // Anchor rows: verbatim from headforpoints.com table (fetched 2026-07-19).
-    // These lock the captured dataset to the verified source.
     interface CabinAmount {
       readonly offPeak: number;
       readonly peak: number;
@@ -192,7 +185,6 @@ describe('AviosDestinationFinder', () => {
     }
 
     const ANCHORS: readonly Anchor[] = [
-      // Short-haul: premium economy is not offered on these routes.
       {
         city: 'Amsterdam',
         economy: { offPeak: 10000, peak: 10750, cash: 1 },
@@ -211,7 +203,6 @@ describe('AviosDestinationFinder', () => {
         premiumEconomy: 'not_offered',
         business: { offPeak: 26750, peak: 30000, cash: 15 },
       },
-      // Long-haul: premium economy is offered on these routes.
       {
         city: 'Dubai',
         economy: { offPeak: 27500, peak: 33000, cash: 60 },
@@ -264,10 +255,6 @@ describe('AviosDestinationFinder', () => {
       expect(d!.business).toEqual(anchor.business);
     });
 
-    // Pinned tier list: hand-transcribed from the verified capture, independent
-    // of data/destinations.ts. A destination whose price does not match any
-    // tuple here means either this pin list or the data file has drifted from
-    // the verified source - it is not something to "fix" by editing the pin.
     type Tier = readonly [number, number, number];
 
     const ECONOMY_TIERS: readonly Tier[] = [
@@ -356,7 +343,6 @@ describe('AviosDestinationFinder', () => {
     });
 
     it('budget boundary: exactly-equal totals count as affordable', () => {
-      // Amsterdam economy off-peak, 1 pax one-way = 10,000 (anchor row)
       const r = computeResults({
         ...base,
         aviosBudget: 10000,
@@ -369,7 +355,6 @@ describe('AviosDestinationFinder', () => {
     });
 
     it('companion voucher brings a return within reach at half the Avios', () => {
-      // New York economy off-peak return for 2: no voucher = 110,000; voucher = 55,000
       const withVoucher = computeResults({
         ...base,
         aviosBudget: 55000,
@@ -380,7 +365,7 @@ describe('AviosDestinationFinder', () => {
       const ny = withVoucher.affordable.find((x) => x.destination.city === 'New York');
       expect(ny).toBeDefined();
       expect(ny!.rankAvios).toBe(55000);
-      expect(ny!.cashTotal).toBe(240); // £60 x 2 pax x 2 legs - cash is never halved
+      expect(ny!.cashTotal).toBe(240);
     });
 
     it('filters by region and holiday type', () => {
@@ -402,13 +387,13 @@ describe('AviosDestinationFinder', () => {
         (x) => x.destination.city === 'Amsterdam'
       );
       expect(ams!.aviosOffPeak).toBeNull();
-      expect(ams!.aviosPeak).toBe(43000); // 10,750 x 2 pax x 2 legs
+      expect(ams!.aviosPeak).toBe(43000);
       expect(ams!.rankAvios).toBe(43000);
     });
 
     it('counts not-offered cabins instead of rendering them', () => {
       const r = computeResults({ ...base, cabin: 'premiumEconomy' });
-      expect(r.notOfferedCount).toBeGreaterThan(0); // short-haul has no PE cabin
+      expect(r.notOfferedCount).toBeGreaterThan(0);
     });
 
     it('sorts by name when requested', () => {
@@ -418,11 +403,6 @@ describe('AviosDestinationFinder', () => {
     });
 
     describe('ranked: global sort order across the budget split', () => {
-      // Real data, computed via: npx vitest run tests/calculations/avios-destination-finder.test.ts
-      // budget=45000, travellers=1, oneWay, sortKey='name', cabin='economy' (default), no dates
-      // -> rankAvios is economy.offPeak (both seasons apply, off-peak used). Exactly 2 of the
-      // 199 filtered destinations exceed 45000: Melbourne and Sydney (both 55,000), everything
-      // else is <= 44,000. This is a real split in the shipped dataset, not a hand-picked one.
       const r = computeResults({
         ...base,
         aviosBudget: 45000,
@@ -452,10 +432,6 @@ describe('AviosDestinationFinder', () => {
       });
 
       it('would NOT match the naive affordable-then-overBudget concatenation the component used to build', () => {
-        // This is the bug the fix closes: the old component built `shown` as
-        // [...affordable, ...overBudget], which pushes every over-budget row to
-        // the end regardless of sortKey. `ranked` must differ from that shape
-        // whenever a global sort (like 'name') disagrees with the budget split.
         const naiveConcat = [...r.affordable, ...r.overBudget].map((x) => x.destination.city);
         expect(rankedNames).not.toEqual(naiveConcat);
       });
@@ -467,8 +443,6 @@ describe('AviosDestinationFinder', () => {
       });
     });
   });
-
-  // --- Task 1: real distances, value metrics, new sort keys -----------------
 
   describe('DISTANCE_MILES_FROM_LONDON and assertDistanceCoverage', () => {
     it('has a positive distance entry for every destination (closes the regex-extraction loophole)', () => {
@@ -486,15 +460,6 @@ describe('AviosDestinationFinder', () => {
       expect(() => assertDistanceCoverage(withGap)).toThrow(/Nowhere \(ZZZ\)/);
     });
 
-    // Distance sanity anchor: verbatim OurAirports CSV rows (fetched 2026-07-19,
-    // https://davidmegginson.github.io/ourairports-data/airports.csv), columns
-    // "id","ident","type","name","latitude_deg","longitude_deg",...,"iata_code",...
-    //   2434,"EGLL","large_airport","London Heathrow Airport",51.470748,-0.459909,83,"EU","GB","GB-ENG","London","yes","EGLL","LHR","EGLL",,"http://www.heathrow.com/",...
-    //   3622,"KJFK","large_airport","John F. Kennedy International Airport",40.639447,-73.779317,13,"NA","US","US-NY","New York","yes","KJFK","JFK","KJFK","JFK",...
-    //   27145,"YSSY","large_airport","Sydney Kingsford Smith International Airport",-33.946098,151.177002,21,"OC","AU","AU-NSW","Sydney (Mascot)","yes","YSSY","SYD","YSSY",,...
-    // Haversine below is computed independently of the generator script, from
-    // these hardcoded coordinates, to sanity-check the generated table without
-    // trusting any distance figure from memory.
     it('LHR -> JFK and LHR -> SYD are within 1% of an independently computed haversine', () => {
       const EARTH_RADIUS_MILES = 3958.7613;
       const toRadians = (deg: number) => (deg * Math.PI) / 180;
@@ -527,9 +492,6 @@ describe('AviosDestinationFinder', () => {
     const base = getDefaultInputs();
 
     it('doubles for 2 travellers when the companion voucher is applied to the same row', () => {
-      // New York anchor (both seasons apply with no dates set, so rankAvios
-      // uses the off-peak column for both calls): voucher only changes
-      // aviosSeats, so partyMiles is identical and valuePer1k should double.
       const noVoucher = computeResults({ ...base, voucher: 'none' });
       const withVoucher = computeResults({ ...base, voucher: 'premiumPlus' });
       const nyNoVoucher = noVoucher.ranked.find((x) => x.destination.city === 'New York')!;
@@ -598,9 +560,6 @@ describe('AviosDestinationFinder', () => {
     });
 
     it('falls back to rankAvios ascending when peakSavingPct is null for every row (nulls-last total order)', () => {
-      // Off-peak-only range (see peakSavingPct describe above): peakSavingPct
-      // is null for every row, so the null-safe comparator's both-null branch
-      // applies uniformly, collapsing the sort to rankAvios ascending.
       const r = computeResults({
         ...base,
         aviosBudget: 1000000,

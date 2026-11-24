@@ -1,10 +1,3 @@
-/**
- * Margin Calculator - Preact Component
- *
- * Calculate profit margin, markup, and gross profit from cost and revenue.
- * Supports three input modes: Cost + Revenue, Cost + Margin%, Revenue + Margin%.
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateMargin, formatCurrency, getMarginMarkupTable } from './calculations';
 import { getDefaultInputs, type MarginCalculatorInputs, type MarginInputMode } from './types';
@@ -44,9 +37,6 @@ export default function MarginCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Calculate results in real time
-
-  // Margin vs markup reference table
   const referenceTable = useMemo(() => getMarginMarkupTable(), []);
 
   const handleCurrencyChange = (newCurrency: Currency) => {
@@ -66,7 +56,6 @@ export default function MarginCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Margin Calculator"
           subtitle="Calculate profit margin, markup, and gross profit"
@@ -74,7 +63,6 @@ export default function MarginCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Mode Selector */}
           <div className="mb-6">
             <Label>Calculation Mode</Label>
             <ButtonGroup
@@ -86,7 +74,6 @@ export default function MarginCalculator() {
             />
           </div>
 
-          {/* Input Fields */}
           <div className="space-y-6 mb-8">
             {showCostInput && (
               <div>
@@ -142,9 +129,7 @@ export default function MarginCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Profit Margin"
               value={`${result.marginPercent.toLocaleString('en-GB')}%`}
@@ -159,7 +144,6 @@ export default function MarginCalculator() {
               }
             />
 
-            {/* Breakdown Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Cost"
@@ -184,7 +168,6 @@ export default function MarginCalculator() {
               />
             </Grid>
 
-            {/* Margin vs Markup Reference Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Margin vs Markup Reference
@@ -227,14 +210,12 @@ export default function MarginCalculator() {
               </div>
             </div>
 
-            {/* Info Alert */}
             <Alert variant="tip" title="Margin vs markup:">
               Margin is the percentage of revenue that is profit (profit / revenue). Markup is the
               percentage added to cost to get the selling price (profit / cost). A 50% markup
               results in a 33.3% margin - they are not the same thing.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults result={shareText} calculatorName="Margin Calculator" />
               <PrintResults

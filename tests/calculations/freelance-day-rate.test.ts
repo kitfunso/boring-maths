@@ -1,7 +1,3 @@
-/**
- * FreelanceDayRateCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateFreelanceDayRate } from '../../src/components/calculators/FreelanceDayRate/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/FreelanceDayRate/types';

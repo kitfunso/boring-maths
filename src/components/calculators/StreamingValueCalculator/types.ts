@@ -1,7 +1,3 @@
-/**
- * Streaming Value Calculator - Type Definitions
- */
-
 export type ValueRating = 'great' | 'good' | 'fair' | 'poor';
 
 export interface StreamingService {

@@ -1,7 +1,3 @@
-/**
- * DueDateCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateDueDate } from '../../src/components/calculators/DueDateCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/DueDateCalculator/types';

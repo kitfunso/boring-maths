@@ -1,13 +1,3 @@
-"""
-GSC Region Analysis — where users come from, per country.
-
-Reads the country-dimension exports produced by `npm run seo:gsc-pull`
-(gsc-countries-28d.json, gsc-country-page-28d.json, gsc-country-query-28d.json)
-and writes a per-region review: country totals, clicks by country, top
-pages/queries per major market, region-intent mismatch, and striking-distance
-sets per market.
-"""
-
 import json
 import re
 from pathlib import Path
@@ -43,9 +33,6 @@ COUNTRY_NAMES = {
     "vnm": "Vietnam", "tha": "Thailand", "egy": "Egypt", "mex": "Mexico",
 }
 
-# Region-intent classification by URL slug tokens/phrases. Deliberately
-# conservative: only unambiguous markers. Matched page lists are printed in the
-# report so misclassification is visible rather than silent.
 UK_PHRASES = (
     "stamp-duty", "national-insurance", "council-tax", "child-benefit",
     "universal-credit", "salary-sacrifice", "dividend-tax", "student-loan",
@@ -118,7 +105,6 @@ def main() -> None:
     )
     out("")
 
-    # --- 1. Country totals ---
     out("## 1. Top countries by impressions")
     out("")
     out(fmt_row(["Country", "Clicks", "Impressions", "Impr %", "CTR", "Avg pos"]))
@@ -134,7 +120,6 @@ def main() -> None:
         ]))
     out("")
 
-    # --- 2. Every country that clicked ---
     clicked = sorted((r for r in countries if r["clicks"] > 0), key=lambda r: -r["clicks"])
     out("## 2. Countries with clicks")
     out("")
@@ -147,7 +132,6 @@ def main() -> None:
         ]))
     out("")
 
-    # --- 3. Top pages per major market ---
     top_codes = [r["keys"][0] for r in countries[:6]]
     by_country_pages: dict[str, list[dict]] = defaultdict(list)
     for r in country_page:
@@ -166,7 +150,6 @@ def main() -> None:
             out(fmt_row([page, str(r["clicks"]), f"{r['impressions']:,}", f"{r['position']:.1f}"]))
     out("")
 
-    # --- 4. Top queries per major market ---
     by_country_queries: dict[str, list[dict]] = defaultdict(list)
     for r in country_query:
         by_country_queries[r["keys"][0]].append(r)
@@ -183,7 +166,6 @@ def main() -> None:
             out(fmt_row([r["keys"][1], str(r["clicks"]), f"{r['impressions']:,}", f"{r['position']:.1f}"]))
     out("")
 
-    # --- 5. Region-intent vs actual audience ---
     intent_pages: dict[str, set[str]] = defaultdict(set)
     intent_country: dict[str, dict[str, dict[str, float]]] = defaultdict(
         lambda: defaultdict(lambda: {"clicks": 0, "impressions": 0})
@@ -219,7 +201,6 @@ def main() -> None:
             ]))
     out("")
 
-    # --- 6. Striking distance per market (pos 5-25, by impressions) ---
     out("## 6. Striking distance per market (pos 5-25)")
     for code in ("gbr", "usa"):
         rows = [

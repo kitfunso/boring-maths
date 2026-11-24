@@ -1,9 +1,3 @@
-/**
- * Pace Calculator - Preact Component
- *
- * Interactive calculator for running/walking pace, time, and distance.
- * Three modes: Calculate Pace, Calculate Time, Calculate Distance.
- */
 import { calculatePace } from './calculations';
 import {
   getDefaultInputs,
@@ -50,7 +44,6 @@ export default function PaceCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Mode Selection */}
           <div className="mb-8">
             <Label>Calculation Mode</Label>
             <ButtonGroup
@@ -62,9 +55,7 @@ export default function PaceCalculator() {
             />
           </div>
 
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Distance Unit Toggle */}
             <div>
               <Label>Distance Unit</Label>
               <ButtonGroup
@@ -80,7 +71,6 @@ export default function PaceCalculator() {
               />
             </div>
 
-            {/* Distance Input - shown for pace and time modes */}
             {inputs.mode !== 'distance' && (
               <div>
                 <Label htmlFor="distance" required>
@@ -97,7 +87,6 @@ export default function PaceCalculator() {
               </div>
             )}
 
-            {/* Time Input - shown for pace and distance modes */}
             {inputs.mode !== 'time' && (
               <div>
                 <Label required>Time</Label>
@@ -166,7 +155,6 @@ export default function PaceCalculator() {
               </div>
             )}
 
-            {/* Pace Input - shown for time and distance modes */}
             {inputs.mode !== 'pace' && (
               <div>
                 <Label required>Pace (per {unitLabel})</Label>
@@ -222,10 +210,8 @@ export default function PaceCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           {result.valid && (
             <div className="space-y-6">
-              {/* Primary Result */}
               {inputs.mode === 'pace' && (
                 <ResultCard
                   label="Your Pace"
@@ -248,7 +234,6 @@ export default function PaceCalculator() {
                 />
               )}
 
-              {/* Speed & Pace Metrics */}
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <MetricCard label="Pace" value={`${result.pacePerKm}`} sublabel="per km" />
                 <MetricCard label="Pace" value={`${result.pacePerMile}`} sublabel="per mile" />
@@ -256,7 +241,6 @@ export default function PaceCalculator() {
                 <MetricCard label="Speed" value={`${result.speedMph}`} sublabel="mph" />
               </Grid>
 
-              {/* Split Times Table */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Split Times
@@ -290,14 +274,12 @@ export default function PaceCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Training tip:">
                 A general guideline is that most easy runs should be 60-90 seconds per km slower
                 than your race pace. Long runs build endurance, while interval training improves
                 speed.
               </Alert>
 
-              {/* Share & Print */}
               <div className="flex justify-center gap-3 pt-4">
                 <ShareResults
                   result={`Pace: ${result.pacePerKm}/km (${result.pacePerMile}/mile) - Speed: ${result.speedKmh} km/h`}
@@ -325,7 +307,6 @@ export default function PaceCalculator() {
             </div>
           )}
 
-          {/* Empty State */}
           {!result.valid && (
             <div className="text-center py-12 text-[var(--color-muted)]">
               <p className="text-lg">Enter values above to calculate your pace</p>

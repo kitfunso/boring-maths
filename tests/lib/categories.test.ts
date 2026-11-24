@@ -5,7 +5,6 @@ describe('calculator categories', () => {
   const used = [...new Set(calculators.map((c) => c.category))];
 
   it('has a badge colour for every category in use', () => {
-    // The homepage badge class list renders "undefined" for a missing key.
     const missing = used.filter((c) => !(c in CATEGORY_COLORS));
     expect(missing).toEqual([]);
   });
@@ -32,7 +31,6 @@ describe('region filter', () => {
   const used = [...new Set(calculators.map((c) => c.country).filter(Boolean))];
 
   it('offers a region button for every country in the registry', () => {
-    // SG shipped 10 calculators with no tab because the buttons were hand-written.
     expect([...getCountries()].sort()).toEqual([...used].sort());
   });
 

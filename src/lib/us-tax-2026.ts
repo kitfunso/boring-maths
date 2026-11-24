@@ -1,6 +1,3 @@
-// 2026 US federal brackets, standard deductions and wage base, shared by the US calculators and their pages.
-// Sources: Rev. Proc. 2025-32 (sections 4.01, 4.14) and the SSA contribution and benefit base page.
-
 export type FederalFilingStatus =
   | 'single'
   | 'married_jointly'
@@ -10,7 +7,7 @@ export type FederalFilingStatus =
 export interface FederalBracket {
   readonly min: number;
   readonly max: number;
-  readonly rate: number; // percent, 22 means 22%
+  readonly rate: number;
 }
 
 export const FEDERAL_TAX_YEAR = 2026;
@@ -65,7 +62,6 @@ export const STANDARD_DEDUCTION_2026: Readonly<Record<FederalFilingStatus, numbe
 
 export const SOCIAL_SECURITY_WAGE_BASE_2026 = 184500;
 
-// Fixed in law, not indexed (Form 8959); the 0.9% applies to wages and SE earnings above these.
 export const ADDITIONAL_MEDICARE_RATE = 0.009;
 export const ADDITIONAL_MEDICARE_THRESHOLDS: Readonly<Record<FederalFilingStatus, number>> = {
   single: 200000,
@@ -74,7 +70,6 @@ export const ADDITIONAL_MEDICARE_THRESHOLDS: Readonly<Record<FederalFilingStatus
   head_of_household: 200000,
 };
 
-// Pub. 505 (2026): estimated tax due dates and the income period each one covers
 export const ESTIMATED_TAX_DUE_DATES_2026 = [
   { quarter: 1, date: 'April 15, 2026', period: 'Jan 1 - Mar 31' },
   { quarter: 2, date: 'June 15, 2026', period: 'Apr 1 - May 31' },
@@ -91,7 +86,6 @@ export function federalIncomeTax(taxableIncome: number, status: FederalFilingSta
   return tax;
 }
 
-// Schedule SE: 12.4% Social Security (capped) and 2.9% Medicare on 92.35% of net profit
 export const SE_EARNINGS_FACTOR = 0.9235;
 export const SE_SOCIAL_SECURITY_RATE = 0.124;
 export const SE_MEDICARE_RATE = 0.029;
@@ -102,10 +96,9 @@ export interface SelfEmploymentTax {
   readonly medicare: number;
   readonly additionalMedicare: number;
   readonly total: number;
-  readonly deductibleHalf: number; // Additional Medicare is not deductible
+  readonly deductibleHalf: number;
 }
 
-/** W-2 wages use up the Social Security base first (Schedule SE lines 8-10) and cut the 0.9% threshold (Form 8959 Part II). */
 export function selfEmploymentTax(
   netProfit: number,
   wages: number,
@@ -129,7 +122,6 @@ export function selfEmploymentTax(
   };
 }
 
-// Rev. Proc. 2025-32 section 4.26: the 199A threshold and the top of its phase-in range for 2026
 export const QBI_RATE = 0.2;
 export const QBI_THRESHOLD_2026: Readonly<Record<FederalFilingStatus, number>> = {
   single: 201750,
@@ -143,15 +135,10 @@ export const QBI_PHASE_IN_END_2026: Readonly<Record<FederalFilingStatus, number>
   married_separately: 276775,
   head_of_household: 276750,
 };
-// Publication 505 (2026): at least $400 once active QBI reaches $1,000
 export const QBI_MINIMUM_DEDUCTION = 400;
 export const QBI_MINIMUM_INCOME = 1000;
 
 // SHORTCUT: non-SSTB phase-out; a specified service business (consulting, law, health) loses it faster
-/**
- * Section 199A for a sole proprietor with no employees or business property: the W-2 wage limit
- * is 0, so above the threshold the 20% falls linearly to 0 across the phase-in range.
- */
 export function qbiDeduction(
   qbi: number,
   taxableIncomeBeforeQbi: number,
@@ -170,7 +157,6 @@ export function qbiDeduction(
   return qbi >= QBI_MINIMUM_INCOME ? Math.max(deduction, QBI_MINIMUM_DEDUCTION) : deduction;
 }
 
-// Employee FICA liability; employers withhold the 0.9% from $200,000 whatever the filing status
 export const EMPLOYEE_SOCIAL_SECURITY_RATE = 0.062;
 export const EMPLOYEE_MEDICARE_RATE = 0.0145;
 

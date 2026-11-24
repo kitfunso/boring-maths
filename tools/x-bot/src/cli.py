@@ -1,18 +1,4 @@
 #!/usr/bin/env python3
-"""
-X Bot CLI
-
-Command-line interface for the X/Twitter bot.
-
-Usage:
-    python -m src.cli status          # Check API connection and status
-    python -m src.cli generate        # Generate tweets (preview)
-    python -m src.cli post            # Post a tweet
-    python -m src.cli monitor         # Search for opportunities
-    python -m src.cli reply           # Interactive reply mode
-    python -m src.cli schedule        # Run scheduled posting
-"""
-
 import sys
 import logging
 from pathlib import Path
@@ -24,7 +10,6 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
 
-# Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.client import get_client
@@ -37,7 +22,6 @@ CONFIG_FILE = Path(__file__).parent.parent / "config.yaml"
 
 
 def load_config() -> dict:
-    """Load configuration from YAML file."""
     if not CONFIG_FILE.exists():
         console.print("[red]Config file not found![/red]")
         console.print(f"Create {CONFIG_FILE} from config.example.yaml")
@@ -48,7 +32,6 @@ def load_config() -> dict:
 
 
 def setup_logging(level: str = "INFO"):
-    """Set up logging."""
     logging.basicConfig(
         level=getattr(logging, level.upper()),
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -81,7 +64,6 @@ def status():
             title="API Status"
         ))
         
-        # Posting status
         poster = get_poster(config)
         post_status = poster.get_status()
         
@@ -95,7 +77,6 @@ def status():
         
         console.print(table)
         
-        # Monitor status
         monitor = get_monitor(config)
         mon_stats = monitor.get_stats()
         
@@ -154,7 +135,6 @@ def post(text: str, calculator: str, force: bool, yes: bool):
     config = load_config()
     poster = get_poster(config)
     
-    # Check if we can post
     if not force:
         status = poster.get_status()
         if not status["can_post"]:
@@ -162,7 +142,6 @@ def post(text: str, calculator: str, force: bool, yes: bool):
             console.print("Use --force to bypass")
             return
     
-    # Generate or use provided text
     if text:
         tweet_text = text
         console.print(Panel(tweet_text, title="Tweet to post"))
@@ -175,13 +154,11 @@ def post(text: str, calculator: str, force: bool, yes: bool):
             title="Generated Tweet"
         ))
     
-    # Confirm
     if not yes:
         if not Confirm.ask("\nPost this tweet?"):
             console.print("[yellow]Cancelled[/yellow]")
             return
     
-    # Post
     result = poster.post_tweet(text=tweet_text, force=force)
     
     if result["success"]:
@@ -244,7 +221,6 @@ def reply(auto: bool):
     console.print(f"\n[bold]📬 {len(opportunities)} pending opportunities[/bold]\n")
     
     for opp in opportunities:
-        # Check rate limits
         status = poster.get_status()
         if not status["can_post"]:
             console.print(f"[yellow]Rate limit: {status['reason']}[/yellow]")
@@ -336,13 +312,11 @@ def run(dry_run: bool):
         if opportunities:
             console.print(f"[cyan]Found {len(opportunities)} opportunities[/cyan]")
     
-    # Schedule posts
     post_schedule = config.get("poster", {}).get("schedule", ["09:00", "14:00", "19:00"])
     for time_str in post_schedule:
         schedule.every().day.at(time_str).do(post_job)
         console.print(f"Scheduled post at {time_str}")
     
-    # Schedule monitoring
     check_interval = config.get("monitor", {}).get("check_interval", 15)
     schedule.every(check_interval).minutes.do(monitor_job)
     console.print(f"Scheduled monitoring every {check_interval} minutes")

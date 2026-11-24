@@ -1,7 +1,3 @@
-/**
- * Tradesperson Hourly Rate Calculator - React Component
- */
-
 import { calculateTradesHourlyRate, formatCurrency, formatCurrencyWhole } from './calculations';
 import {
   getDefaultInputs,
@@ -49,7 +45,6 @@ export default function TradesHourlyRateCalculator() {
     }));
   };
 
-  // Breakdown bar widths
   const breakdownTotal =
     result.breakdownPerHour.incomePerHour +
     result.breakdownPerHour.overheadsPerHour +
@@ -73,7 +68,6 @@ export default function TradesHourlyRateCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Desired Annual Income */}
             <div>
               <Label htmlFor="desiredAnnualIncome" required>
                 Desired Annual Take-Home Income
@@ -90,7 +84,6 @@ export default function TradesHourlyRateCalculator() {
               />
             </div>
 
-            {/* Hours Section */}
             <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Working Hours
@@ -127,7 +120,6 @@ export default function TradesHourlyRateCalculator() {
               </Grid>
             </div>
 
-            {/* Tax Rate */}
             <div>
               <Label htmlFor="taxRate">Estimated Tax Rate (%)</Label>
               <Slider
@@ -143,7 +135,6 @@ export default function TradesHourlyRateCalculator() {
               </div>
             </div>
 
-            {/* Overheads Section */}
             <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Monthly Overheads
@@ -178,11 +169,9 @@ export default function TradesHourlyRateCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.desiredAnnualIncome > 0 ? (
               <>
-                {/* Primary Result: Hourly Rate + Day Rate */}
                 <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                   <ResultCard
                     label="Required Hourly Rate"
@@ -196,7 +185,6 @@ export default function TradesHourlyRateCalculator() {
                   />
                 </Grid>
 
-                {/* Summary Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Take-Home"
@@ -222,13 +210,11 @@ export default function TradesHourlyRateCalculator() {
                   />
                 </Grid>
 
-                {/* Per-Hour Breakdown Bar */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     What Each Billable Hour Pays For
                   </h3>
 
-                  {/* Stacked bar */}
                   <div className="w-full h-10 rounded-lg overflow-hidden flex mb-4">
                     {incomeWidth > 0 && (
                       <div
@@ -256,7 +242,6 @@ export default function TradesHourlyRateCalculator() {
                     )}
                   </div>
 
-                  {/* Legend */}
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
                       <div className="flex items-center justify-center gap-2 mb-1">
@@ -300,7 +285,6 @@ export default function TradesHourlyRateCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.desiredAnnualIncome > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

@@ -1,34 +1,28 @@
-/**
- * Kiln Cost Calculator Types
- * Electricity cost calculations for pottery kiln firings
- */
-
 export interface KilnCostInputs {
   kilnType: 'electric' | 'gas';
-  kilnSize: number; // cubic feet
-  kilnWattage: number; // kW for electric
+  kilnSize: number;
+  kilnWattage: number;
   targetCone: string;
   firingType: 'bisque' | 'glaze' | 'luster' | 'custom';
-  firingTime: number; // hours (for custom)
-  electricityRate: number; // $/kWh
-  gasRate: number; // $/therm or $/gallon
+  firingTime: number;
+  electricityRate: number;
+  gasRate: number;
   gasUnit: 'therm' | 'gallon';
   firingSchedule: 'slow' | 'medium' | 'fast';
   loadDensity: 'light' | 'medium' | 'heavy';
 }
 
 export interface KilnCostResults {
-  estimatedTime: number; // hours
-  peakTemperature: number; // °F
-  peakTempC: number; // °C
-  energyUsed: number; // kWh or therms
+  estimatedTime: number;
+  peakTemperature: number;
+  peakTempC: number;
+  energyUsed: number;
   totalCost: number;
   costPerCubicFoot: number;
-  co2Emissions: number; // lbs
+  co2Emissions: number;
   tipOfTheDay: string;
 }
 
-// Cone temperature reference
 export const CONE_TEMPS = [
   { cone: '022', tempF: 1112, tempC: 600, description: 'Overglaze, lusters' },
   { cone: '021', tempF: 1137, tempC: 614, description: 'Overglaze' },
@@ -67,7 +61,6 @@ export const CONE_TEMPS = [
   { cone: '13', tempF: 2428, tempC: 1331, description: 'High-fire' },
 ];
 
-// Common kiln sizes and their wattages
 export const KILN_PRESETS = [
   { label: 'Test Kiln (0.5 cu ft)', cubicFeet: 0.5, kw: 1.8 },
   { label: 'Small (2.4 cu ft)', cubicFeet: 2.4, kw: 4.8 },
@@ -77,7 +70,6 @@ export const KILN_PRESETS = [
   { label: 'Production (15 cu ft)', cubicFeet: 15.0, kw: 22.5 },
 ];
 
-// Firing types with typical cone ranges
 export const FIRING_TYPES = [
   { value: 'bisque', label: 'Bisque Fire', defaultCone: '06' },
   { value: 'glaze', label: 'Glaze Fire', defaultCone: '6' },
@@ -85,7 +77,6 @@ export const FIRING_TYPES = [
   { value: 'custom', label: 'Custom Program', defaultCone: '6' },
 ];
 
-// Tips for efficient firing
 export const FIRING_TIPS = [
   'Stack pieces efficiently to maximize each firing',
   'Fire full loads whenever possible to reduce cost per piece',

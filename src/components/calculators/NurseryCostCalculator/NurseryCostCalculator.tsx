@@ -1,9 +1,3 @@
-/**
- * UK Nursery Cost Calculator - React Component
- *
- * Calculate childcare costs in the UK including free hours eligibility,
- * Tax-Free Childcare, and Universal Credit support.
- */
 import {
   calculateNurseryCost,
   formatCurrency,
@@ -82,9 +76,7 @@ export default function NurseryCostCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Region Selection */}
             <div>
               <Label htmlFor="region" required>
                 Region
@@ -103,7 +95,6 @@ export default function NurseryCostCalculator() {
               </p>
             </div>
 
-            {/* Children Section */}
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)]">
@@ -184,7 +175,6 @@ export default function NurseryCostCalculator() {
               </div>
             </div>
 
-            {/* Employment & Income */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="employmentStatus" required>
@@ -221,7 +211,6 @@ export default function NurseryCostCalculator() {
               </div>
             </Grid>
 
-            {/* Benefits & Options */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="benefitStatus">Benefits Received</Label>
@@ -250,7 +239,6 @@ export default function NurseryCostCalculator() {
               </div>
             </Grid>
 
-            {/* Tax-Free Childcare Toggle */}
             {inputs.benefitStatus === 'none' && (
               <label className="flex items-center gap-3 cursor-pointer p-4 bg-white/5 rounded-xl border border-white/10">
                 <input
@@ -271,9 +259,7 @@ export default function NurseryCostCalculator() {
             )}
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Main Result */}
             <div className="rounded-2xl p-6 border-2 bg-violet-950/50 border-violet-500/30">
               <div className="text-center">
                 <p className="text-sm text-[var(--color-muted)] mb-1">Your Annual Childcare Cost</p>
@@ -292,7 +278,6 @@ export default function NurseryCostCalculator() {
               </div>
             </div>
 
-            {/* Cost Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <p className="text-xs text-[var(--color-muted)] mb-1">Gross Cost</p>
@@ -335,7 +320,6 @@ export default function NurseryCostCalculator() {
               </div>
             </Grid>
 
-            {/* Eligibility Summary */}
             <div className="bg-white/5 rounded-xl p-4 border border-white/10">
               <h4 className="text-sm font-medium text-[var(--color-cream)] mb-3">
                 Your Eligibility
@@ -369,7 +353,6 @@ export default function NurseryCostCalculator() {
               </div>
             </div>
 
-            {/* Per Child Breakdown */}
             {result.childBreakdowns.length > 0 && (
               <div>
                 <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">
@@ -433,14 +416,12 @@ export default function NurseryCostCalculator() {
               </div>
             )}
 
-            {/* Info Alert */}
             <Alert variant="tip" title="Free Hours in 2025">
               From September 2025, working parents are entitled to 30 free hours for children aged 9
               months to school age. Free hours apply for 38 term-time weeks only. You can spread
               hours over more weeks but will receive fewer hours per week.
             </Alert>
 
-            {/* Comparison */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
                 Cost Comparison
@@ -480,7 +461,6 @@ export default function NurseryCostCalculator() {
   );
 }
 
-// Helper component for eligibility badges
 function EligibilityBadge({
   label,
   eligible,

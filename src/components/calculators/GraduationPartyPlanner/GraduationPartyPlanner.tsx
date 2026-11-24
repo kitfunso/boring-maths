@@ -1,8 +1,3 @@
-/**
- * Graduation Party Planner - React Component
- *
- * Plan food and drink quantities for graduation parties.
- */
 import { calculateGraduationParty } from './calculations';
 import {
   getDefaultInputs,
@@ -73,7 +68,6 @@ export default function GraduationPartyPlanner() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                 Party Details
@@ -108,7 +102,6 @@ export default function GraduationPartyPlanner() {
                 }}
               />
 
-              {/* Graduation Type */}
               <div>
                 <Label>Graduation Type</Label>
                 <ButtonGroup
@@ -118,7 +111,6 @@ export default function GraduationPartyPlanner() {
                 />
               </div>
 
-              {/* Party Style */}
               <div>
                 <Label>Party Style</Label>
                 <ButtonGroup
@@ -128,7 +120,6 @@ export default function GraduationPartyPlanner() {
                 />
               </div>
 
-              {/* Menu Style */}
               <div>
                 <Label>Menu Style</Label>
                 <ButtonGroup
@@ -182,7 +173,6 @@ export default function GraduationPartyPlanner() {
               ))}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Estimated Total Cost"
@@ -196,7 +186,6 @@ export default function GraduationPartyPlanner() {
                 <MetricCard label="Drink Cost" value={fmt(result.estimatedDrinkCost)} />
               </Grid>
 
-              {/* Food Shopping List */}
               <div className="bg-cyan-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-4">
                   Food Shopping List
@@ -219,7 +208,6 @@ export default function GraduationPartyPlanner() {
                 </div>
               </div>
 
-              {/* Drink Shopping List */}
               <div className="bg-blue-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider mb-4">
                   Beverage List
@@ -239,7 +227,6 @@ export default function GraduationPartyPlanner() {
                 </div>
               </div>
 
-              {/* Supplies Checklist */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Supplies Checklist
@@ -259,7 +246,6 @@ export default function GraduationPartyPlanner() {
                 </div>
               </div>
 
-              {/* Planning Timeline */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Planning Timeline
@@ -277,7 +263,6 @@ export default function GraduationPartyPlanner() {
                 </ul>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Graduation Party Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.slice(0, 4).map((tip, i) => (
@@ -289,7 +274,6 @@ export default function GraduationPartyPlanner() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Graduation Party: ${inputs.guestCount} guests, ${inputs.partyDuration} hours. Food: ${result.foodItems.length} items. Estimated cost: ${fmt(result.totalEstimatedCost)} (${fmt(result.costPerGuest)}/guest)`}

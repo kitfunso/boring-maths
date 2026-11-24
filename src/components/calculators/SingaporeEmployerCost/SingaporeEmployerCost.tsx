@@ -1,5 +1,3 @@
-/** Live updating, no submit button. Maths lives in calculations.ts so it can be unit tested. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateSingaporeEmployerCost,
@@ -34,7 +32,6 @@ export default function SingaporeEmployerCost() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -83,9 +80,7 @@ export default function SingaporeEmployerCost() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
-          {/* Primary result: total monthly cost */}
           <div class="rounded-2xl p-6 border-2 border-blue-500/30 bg-blue-950/30 text-center">
             <p class="text-sm text-[var(--color-muted)] mb-1">Total monthly employer cost</p>
             <p class="text-4xl md:text-5xl font-display font-bold text-blue-400 tabular-nums">
@@ -96,7 +91,6 @@ export default function SingaporeEmployerCost() {
             </p>
           </div>
 
-          {/* Metric grid */}
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-white/5 rounded-xl p-4">
               <p class="text-xs text-[var(--color-muted)]">Employer CPF</p>
@@ -118,7 +112,6 @@ export default function SingaporeEmployerCost() {
             </div>
           </div>
 
-          {/* Cost breakdown */}
           <div class="bg-white/5 rounded-xl p-4">
             <h3 class="text-sm font-medium text-[var(--color-muted)] mb-3">Monthly breakdown</h3>
             <div class="space-y-2 text-sm">

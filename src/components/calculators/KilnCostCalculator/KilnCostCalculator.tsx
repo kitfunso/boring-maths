@@ -1,8 +1,3 @@
-/**
- * Kiln Cost Calculator Component
- * Calculate electricity and gas costs for pottery kiln firings
- */
-
 import { useMemo } from 'preact/hooks';
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
@@ -37,7 +32,6 @@ export function KilnCostCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Kiln Settings</h2>
@@ -251,7 +245,6 @@ export function KilnCostCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-600/10 p-6 ring-1 ring-orange-500/30">
           <h2 className="mb-4 text-lg font-semibold text-orange-300">Firing Cost</h2>

@@ -1,9 +1,3 @@
-/**
- * Flooring Calculator - React Component
- *
- * Interactive calculator for determining flooring quantities.
- * Features pattern-based waste calculations and shopping list generation.
- */
 import {
   calculateFlooring,
   formatCurrency,
@@ -47,7 +41,6 @@ export default function FlooringCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs((prev) => ({
       ...prev,
@@ -70,7 +63,6 @@ export default function FlooringCalculator() {
     { value: 'chevron' as const, label: 'Chevron' },
   ];
 
-  // Pattern waste descriptions
   const patternDescriptions: Record<InstallPattern, string> = {
     straight: '10% waste - Standard parallel installation, most efficient',
     diagonal: '15% waste - 45° angle, more cuts at walls',
@@ -81,7 +73,6 @@ export default function FlooringCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Flooring Needs"
           subtitle="Find out how much flooring to buy for your room"
@@ -89,9 +80,7 @@ export default function FlooringCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Room Dimensions */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Room Dimensions (feet)
@@ -122,7 +111,6 @@ export default function FlooringCalculator() {
               </Grid>
             </div>
 
-            {/* Flooring Type */}
             <div>
               <Label>Flooring Type</Label>
               <ButtonGroup
@@ -133,7 +121,6 @@ export default function FlooringCalculator() {
               />
             </div>
 
-            {/* Installation Pattern */}
             <div>
               <Label>Installation Pattern</Label>
               <ButtonGroup
@@ -147,7 +134,6 @@ export default function FlooringCalculator() {
               </p>
             </div>
 
-            {/* Box Size & Price */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="sqftPerBox">Sq Ft Per Box</Label>
@@ -178,7 +164,6 @@ export default function FlooringCalculator() {
               </div>
             </Grid>
 
-            {/* Additional Areas */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Additional Areas
@@ -221,7 +206,6 @@ export default function FlooringCalculator() {
               </Grid>
             </div>
 
-            {/* Options */}
             <div className="space-y-3">
               <Checkbox
                 checked={inputs.includeUnderlayment}
@@ -256,9 +240,7 @@ export default function FlooringCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Flooring Needed"
               value={`${result.boxesNeeded} box${result.boxesNeeded !== 1 ? 'es' : ''}`}
@@ -273,7 +255,6 @@ export default function FlooringCalculator() {
               }
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Room Area"
@@ -301,7 +282,6 @@ export default function FlooringCalculator() {
               />
             </Grid>
 
-            {/* Shopping List */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Shopping List
@@ -334,7 +314,6 @@ export default function FlooringCalculator() {
               </div>
             </div>
 
-            {/* Pattern Waste Comparison */}
             <div className="bg-emerald-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">
                 Waste By Pattern
@@ -371,7 +350,6 @@ export default function FlooringCalculator() {
               </div>
             </div>
 
-            {/* Don't Forget List */}
             <div className="bg-emerald-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">
                 Don't Forget
@@ -388,14 +366,12 @@ export default function FlooringCalculator() {
               </ul>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
               Let your flooring acclimate in the room for 48-72 hours before installation. Buy 1-2
               extra boxes for future repairs - matching dye lots later can be difficult. Start from
               the longest wall and work toward the door.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Flooring needed: ${result.boxesNeeded} box${result.boxesNeeded !== 1 ? 'es' : ''} (${formatArea(result.actualCoverage)}) for ${formatArea(result.totalArea)} room with ${PATTERN_NAMES[inputs.pattern].toLowerCase()} pattern - Est. cost: ${formatCurrency(result.totalCost, result.currency)}`}

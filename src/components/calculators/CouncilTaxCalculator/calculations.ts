@@ -1,8 +1,3 @@
-/**
- * UK Council Tax Calculations
- * Based on 2026/27 average Band D rates by region
- */
-
 import { nationOf } from './types';
 import type {
   CouncilTaxInputs,
@@ -23,7 +18,6 @@ const ENGLAND_WALES_RATIOS = {
   H: 18 / 9,
 };
 
-// Scotland raised the E-H ratios in April 2017; only Wales has a Band I.
 const BAND_MULTIPLIERS: Record<Nation, Partial<Record<PropertyBand, number>>> = {
   england: ENGLAND_WALES_RATIOS,
   wales: { ...ENGLAND_WALES_RATIOS, I: 21 / 9 },
@@ -39,8 +33,6 @@ const BAND_MULTIPLIERS: Record<Nation, Partial<Record<PropertyBand, number>>> = 
   },
 };
 
-// 2026/27. England, London, Scotland and Wales are the official averages; other English regions
-// are the simple mean of each council's area Band D (MHCLG live table 5). Scotland excludes water.
 const BAND_D_RATES: Record<CouncilRegion, number> = {
   england_average: 2392,
   london: 2068,
@@ -61,7 +53,6 @@ export function calculateCouncilTax(inputs: CouncilTaxInputs): CouncilTaxResult 
 
   const bandDRate = BAND_D_RATES[region];
   const bands = BAND_MULTIPLIERS[nationOf(region)];
-  // A saved Band I carried over from a Welsh region falls back to the nation's top band.
   const bandMultiplier = bands[propertyBand] ?? (bands.H as number);
   let annualTax = Math.round(bandDRate * bandMultiplier);
 
@@ -75,7 +66,6 @@ export function calculateCouncilTax(inputs: CouncilTaxInputs): CouncilTaxResult 
   }
 
   if (isSecondHome) {
-    // 100% is the England and Scotland maximum; Welsh councils may go to 300%, so Wales says so
     const premium = Math.round(annualTax * 1.0);
     annualTax += premium;
     discount = -premium;

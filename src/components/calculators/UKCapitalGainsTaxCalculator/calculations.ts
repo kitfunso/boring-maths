@@ -1,20 +1,12 @@
-/**
- * UK Capital Gains Tax Calculations
- * 2026/27 rates
- */
-
 import type { UKCGTInputs, UKCGTResult } from './types';
 
-// CGT rates: unified at 18%/24% for all chargeable assets for disposals
-// on or after 30 October 2024 (shares/other rose from 10%/20%).
-// Verified against gov.uk/capital-gains-tax/rates 2026-07-03.
 const CGT_RATES = {
   property: { basic: 0.18, higher: 0.24 },
   other: { basic: 0.18, higher: 0.24 },
 };
 
-const ANNUAL_EXEMPTION = 3000; // 2026/27 (reduced from £6,000)
-const BASIC_RATE_THRESHOLD = 37700; // Basic rate band width
+const ANNUAL_EXEMPTION = 3000;
+const BASIC_RATE_THRESHOLD = 37700;
 
 export function calculateUKCGT(inputs: UKCGTInputs): UKCGTResult {
   const { salePrice, purchasePrice, costs, assetType, taxBand, annualIncome, useAnnualExemption } =
@@ -26,8 +18,7 @@ export function calculateUKCGT(inputs: UKCGTInputs): UKCGTResult {
 
   const rates = CGT_RATES[assetType];
 
-  // Calculate how much of the basic rate band is remaining
-  const personalAllowance = 12570; // keep in sync with UKTaxCalculator/types.ts PERSONAL_ALLOWANCE
+  const personalAllowance = 12570;
   const taxableIncome = Math.max(0, annualIncome - personalAllowance);
   const basicRateBandRemaining =
     taxBand === 'basic' ? Math.max(0, BASIC_RATE_THRESHOLD - taxableIncome) : 0;

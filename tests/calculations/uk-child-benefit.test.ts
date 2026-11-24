@@ -1,7 +1,3 @@
-/**
- * UkChildBenefitCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateChildBenefit } from '../../src/components/calculators/UKChildBenefitCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKChildBenefitCalculator/types';

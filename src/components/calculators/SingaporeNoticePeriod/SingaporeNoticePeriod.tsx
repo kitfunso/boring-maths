@@ -1,5 +1,3 @@
-/** Singapore Notice Period calculator, live updating like every other calc in this repo. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateSingaporeNoticePeriod,
@@ -29,7 +27,6 @@ export default function SingaporeNoticePeriod() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -165,7 +162,6 @@ export default function SingaporeNoticePeriod() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
           <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">
             <p class="text-sm text-[var(--color-muted)] mb-1">Total final pay</p>

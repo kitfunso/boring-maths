@@ -1,7 +1,3 @@
-/**
- * Vacation Budget Planner - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type TravelStyle = 'budget' | 'moderate' | 'luxury';
@@ -18,20 +14,16 @@ export interface VacationBudgetInputs {
   destinationType: DestinationType;
   travelStyle: TravelStyle;
 
-  // Transportation
   flightCost: number;
   needsCarRental: boolean;
   carRentalPerDay: number;
 
-  // Accommodation
   accommodationPerNight: number;
 
-  // Daily expenses
   mealsPerDay: number;
   activitiesPerDay: number;
   localTransportPerDay: number;
 
-  // Other
   travelInsurance: boolean;
   souvenirBudget: number;
 }
@@ -47,27 +39,22 @@ export interface BudgetCategory {
 export interface VacationBudgetResult {
   currency: Currency;
 
-  // Summary
   totalBudget: number;
   perPerson: number;
   perDay: number;
   perPersonPerDay: number;
 
-  // Breakdown
   categories: BudgetCategory[];
 
-  // Key totals
   transportationTotal: number;
   accommodationTotal: number;
   foodTotal: number;
   activitiesTotal: number;
   otherTotal: number;
 
-  // Savings target
-  weeksToSave: number; // at 10% of median income
+  weeksToSave: number;
   monthlyTarget: number;
 
-  // Tips
   savingsTips: string[];
 }
 

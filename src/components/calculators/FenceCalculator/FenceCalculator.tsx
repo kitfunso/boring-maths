@@ -1,8 +1,3 @@
-/**
- * Fence Calculator - React Component
- *
- * Calculate posts, panels, concrete, and hardware for fence projects.
- */
 import { calculateFence } from './calculations';
 import {
   getDefaultInputs,
@@ -89,13 +84,11 @@ export default function FenceCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                 Fence Details
               </div>
 
-              {/* Total Length */}
               <div>
                 <Label htmlFor="totalLength">Total Perimeter Length (feet)</Label>
                 <Input
@@ -113,7 +106,6 @@ export default function FenceCalculator() {
                 </p>
               </div>
 
-              {/* Material */}
               <div>
                 <Label>Fence Material</Label>
                 <ButtonGroup
@@ -123,7 +115,6 @@ export default function FenceCalculator() {
                 />
               </div>
 
-              {/* Height */}
               <div>
                 <Label>Fence Height</Label>
                 <ButtonGroup
@@ -274,7 +265,6 @@ export default function FenceCalculator() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Materials Cost"
@@ -289,7 +279,6 @@ export default function FenceCalculator() {
                 <MetricCard label="Hardware Kits" value={`${result.hardwareKits}`} />
               </Grid>
 
-              {/* Materials List */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Materials List
@@ -366,7 +355,6 @@ export default function FenceCalculator() {
                 </div>
               </div>
 
-              {/* Labor Estimate */}
               <div className="bg-emerald-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4">
                   Professional Installation Estimate
@@ -390,7 +378,6 @@ export default function FenceCalculator() {
                 </p>
               </div>
 
-              {/* DIY vs Pro Comparison */}
               <div className="bg-emerald-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4">
                   DIY vs Professional
@@ -415,7 +402,6 @@ export default function FenceCalculator() {
                 </p>
               </div>
 
-              {/* Don't Forget */}
               <div className="bg-emerald-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-3">
                   Don't Forget
@@ -432,7 +418,6 @@ export default function FenceCalculator() {
                 </ul>
               </div>
 
-              {/* Tips */}
               {result.tips.length > 0 && (
                 <Alert variant="tip" title="Fence Building Tips">
                   <ul className="space-y-1 mt-2">
@@ -446,7 +431,6 @@ export default function FenceCalculator() {
                 </Alert>
               )}
 
-              {/* Share */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Fence: ${inputs.totalLength}ft of ${inputs.fenceHeight}ft ${inputs.material.replace('_', ' ')}, ${result.panelsNeeded} panels, ${result.postsNeeded} posts - Materials: ${fmt(result.totalMaterialCost)}, With labor: ${fmt(result.totalCostWithLabor)}`}

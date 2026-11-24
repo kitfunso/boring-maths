@@ -1,9 +1,3 @@
-/**
- * Macro Calculator Types
- *
- * Calculate daily macronutrient needs based on body metrics and goals.
- */
-
 export type Gender = 'male' | 'female';
 export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active';
 export type Goal = 'lose' | 'maintain' | 'gain';
@@ -13,21 +7,21 @@ export interface MacroCalculatorInputs {
   unitSystem: UnitSystem;
   gender: Gender;
   age: number;
-  weight: number; // lbs or kg
-  heightFeet: number; // feet (imperial) or cm (metric)
-  heightInches: number; // inches (imperial only)
+  weight: number;
+  heightFeet: number;
+  heightInches: number;
   activityLevel: ActivityLevel;
   goal: Goal;
-  proteinRatio: number; // grams per lb/kg of body weight
+  proteinRatio: number;
 }
 
 export interface MacroCalculatorResult {
   bmr: number;
   tdee: number;
   targetCalories: number;
-  protein: number; // grams
-  carbs: number; // grams
-  fat: number; // grams
+  protein: number;
+  carbs: number;
+  fat: number;
   proteinCalories: number;
   carbsCalories: number;
   fatCalories: number;

@@ -1,7 +1,3 @@
-/**
- * Unit Converter - Calculation Logic
- */
-
 import type { UnitConverterInputs, UnitConverterResult, UnitCategory } from './types';
 import { UNITS } from './types';
 
@@ -10,9 +6,6 @@ function round(value: number, decimals: number = 6): number {
   return Math.round(value * factor) / factor;
 }
 
-/**
- * Get appropriate decimal places based on magnitude
- */
 function getDecimals(value: number): number {
   if (value === 0) return 0;
   const absVal = Math.abs(value);
@@ -22,14 +15,10 @@ function getDecimals(value: number): number {
   return 8;
 }
 
-/**
- * Format number with appropriate precision
- */
 function formatValue(value: number): string {
   const decimals = getDecimals(value);
   const rounded = round(value, decimals);
 
-  // Use scientific notation for very large or very small numbers
   if (Math.abs(rounded) >= 1e9 || (Math.abs(rounded) < 0.0001 && rounded !== 0)) {
     return rounded.toExponential(4);
   }
@@ -40,9 +29,6 @@ function formatValue(value: number): string {
   });
 }
 
-/**
- * Convert between units
- */
 export function convert(inputs: UnitConverterInputs): UnitConverterResult {
   const { category, fromUnit, toUnit, value } = inputs;
 
@@ -59,7 +45,6 @@ export function convert(inputs: UnitConverterInputs): UnitConverterResult {
     };
   }
 
-  // Convert to base unit, then to target unit
   const baseValue = from.toBase(value);
   const result = to.fromBase(baseValue);
 
@@ -71,9 +56,6 @@ export function convert(inputs: UnitConverterInputs): UnitConverterResult {
   };
 }
 
-/**
- * Get all conversions for a value
- */
 export function getAllConversions(
   value: number,
   fromUnit: string,

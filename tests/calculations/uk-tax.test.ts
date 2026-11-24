@@ -1,14 +1,3 @@
-/**
- * UKTaxCalculator - Figure Pinning Tests
- *
- * These tests pin the numeric behavior of calculateUKTax() as of the
- * 2026/27 tax-year constants in src/components/calculators/UKTaxCalculator/types.ts.
- * They were recomputed against GOV.UK 2026/27 figures during the tax-year
- * refresh (Task D1-D5). If the constants change again, these pins will fail
- * and must be recomputed against the new GOV.UK figures, not blindly updated
- * to whatever the code returns.
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateUKTax } from '../../src/components/calculators/UKTaxCalculator/calculations';
 
@@ -101,18 +90,12 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // calculatePersonalAllowance uses a strict `>` comparison against
-      // PA_TAPER_THRESHOLD, so at exactly £100,000 no taper is applied.
       expect(result.personalAllowance).toBe(12570);
       expect(result.taxableIncome).toBe(87430);
       expect(result.incomeTax).toBe(27432);
       expect(result.nationalInsurance).toBeCloseTo(4010.6, 2);
       expect(result.takeHomePay).toBeCloseTo(68557.4, 2);
       expect(result.effectiveTaxRate).toBe(31.4);
-      // calculateMarginalRate treats >= PA_TAPER_THRESHOLD as "in the taper
-      // zone" (types.ts:66 reused with a >= check), so the marginal rate
-      // already jumps to the 60%-equivalent band here even though the PA
-      // itself has not started tapering yet.
       expect(result.marginalRate).toBe(62);
     });
 
@@ -181,7 +164,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // reduction = floor((110000 - 100000) * 0.5) = 5000; pa = 12570 - 5000 = 7570
       expect(result.personalAllowance).toBe(7570);
       expect(result.taxableIncome).toBe(102430);
       expect(result.incomeTax).toBe(32432);
@@ -234,7 +216,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // 12570 + 3250 = 15820
       expect(result.personalAllowance).toBe(15820);
       expect(result.taxableIncome).toBe(19180);
       expect(result.incomeTax).toBe(3836);
@@ -255,7 +236,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 26900) * 0.09 = 1179
       expect(result.studentLoanRepayment).toBeCloseTo(1179, 2);
       expect(result.postgraduateLoanRepayment).toBe(0);
       expect(result.marginalRate).toBe(37);
@@ -273,7 +253,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 29385) * 0.09 = 955.35
       expect(result.studentLoanRepayment).toBeCloseTo(955.35, 2);
       expect(result.marginalRate).toBe(37);
     });
@@ -290,7 +269,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 33795) * 0.09 = 558.45
       expect(result.studentLoanRepayment).toBeCloseTo(558.45, 2);
       expect(result.marginalRate).toBe(37);
     });
@@ -307,7 +285,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // (40000 - 25000) * 0.09 = 1350
       expect(result.studentLoanRepayment).toBe(1350);
       expect(result.marginalRate).toBe(37);
     });
@@ -324,9 +301,6 @@ describe('UKTaxCalculator', () => {
         taxCodeOverride: '1257L',
       });
 
-      // studentLoanRepayment short-circuits to 0 for the postgraduate plan
-      // (calculateStudentLoan), the actual repayment comes via
-      // calculatePostgraduateLoan: (40000 - 21000) * 0.06 = 1140
       expect(result.studentLoanRepayment).toBe(0);
       expect(result.postgraduateLoanRepayment).toBe(1140);
       expect(result.marginalRate).toBe(34);

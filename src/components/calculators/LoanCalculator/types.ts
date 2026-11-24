@@ -1,7 +1,3 @@
-/**
- * Loan Payment Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type LoanType = 'auto' | 'personal' | 'student' | 'other';
@@ -9,8 +5,8 @@ export type LoanType = 'auto' | 'personal' | 'student' | 'other';
 export interface LoanInputs {
   currency: Currency;
   loanAmount: number;
-  interestRate: number; // Annual rate as percentage
-  loanTerm: number; // In months
+  interestRate: number;
+  loanTerm: number;
   loanType: LoanType;
 }
 

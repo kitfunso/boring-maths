@@ -1,9 +1,3 @@
-/**
- * Solar Panel Calculator - React Component
- *
- * Calculate solar panel system costs, payback period, and long-term savings.
- */
-
 import { useState } from 'preact/hooks';
 import { calculateSolar } from './calculations';
 import {
@@ -87,13 +81,11 @@ export default function SolarCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 System Details
               </div>
 
-              {/* System Size */}
               <div>
                 <Label>System Size</Label>
                 <ButtonGroup
@@ -292,7 +284,6 @@ export default function SolarCalculator() {
                 />
               </div>
 
-              {/* Financing Toggle */}
               <Toggle
                 checked={inputs.financed}
                 onChange={(checked) => updateInput('financed', checked)}
@@ -336,7 +327,6 @@ export default function SolarCalculator() {
               )}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Payback Period"
@@ -354,7 +344,6 @@ export default function SolarCalculator() {
                 <MetricCard label="25-Year Savings" value={fmt(result.lifetimeSavings)} />
               </Grid>
 
-              {/* Cost Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cost Breakdown
@@ -404,7 +393,6 @@ export default function SolarCalculator() {
                 )}
               </div>
 
-              {/* Savings Over Time */}
               <div className="bg-amber-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-4">
                   Cumulative Savings
@@ -437,7 +425,6 @@ export default function SolarCalculator() {
                 </div>
               </div>
 
-              {/* Environmental Impact */}
               <div className="bg-green-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-4">
                   Annual Environmental Impact
@@ -458,7 +445,6 @@ export default function SolarCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               {result.tips.length > 0 && (
                 <Alert variant="tip" title="Solar Tips">
                   <ul className="space-y-1 mt-2">
@@ -472,7 +458,6 @@ export default function SolarCalculator() {
                 </Alert>
               )}
 
-              {/* Share */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Solar: ${inputs.systemSizeKw}kW system, ${result.paybackYears} year payback, ${fmt(result.lifetimeSavings)} 25-year savings, ${result.roi25Year}% ROI`}

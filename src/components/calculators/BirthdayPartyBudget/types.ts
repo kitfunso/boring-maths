@@ -1,9 +1,3 @@
-/**
- * Birthday Party Budget Calculator - Type Definitions
- *
- * Calculate and plan budget for children's birthday parties.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type VenueType = 'home' | 'park' | 'rented_venue' | 'activity_center';
@@ -16,16 +10,14 @@ export interface BirthdayPartyInputs {
   venueType: VenueType;
   partyStyle: PartyStyle;
 
-  // Budget categories
   venueCost: number;
   foodPerKid: number;
-  cakeSize: number; // servings
+  cakeSize: number;
   decorationsBudget: number;
   entertainmentBudget: number;
   goodyBagPerKid: number;
   invitationsBudget: number;
 
-  // Options
   includePhotographer: boolean;
   includeCharacter: boolean;
   includeBouncyHouse: boolean;
@@ -43,14 +35,11 @@ export interface BudgetItem {
 export interface BirthdayPartyResult {
   currency: Currency;
 
-  // Totals
   totalBudget: number;
   costPerChild: number;
 
-  // Category breakdown
   budgetItems: BudgetItem[];
 
-  // Category totals
   venueTotal: number;
   foodTotal: number;
   decorationsTotal: number;
@@ -58,19 +47,16 @@ export interface BirthdayPartyResult {
   goodyBagsTotal: number;
   otherTotal: number;
 
-  // Percentage breakdown
   percentages: {
     category: string;
     percent: number;
     amount: number;
   }[];
 
-  // Recommendations
   savingsTips: string[];
   suggestions: string[];
 }
 
-// Venue base costs by type
 export const VENUE_COSTS: Record<Currency, Record<VenueType, number>> = {
   USD: {
     home: 0,
@@ -92,7 +78,6 @@ export const VENUE_COSTS: Record<Currency, Record<VenueType, number>> = {
   },
 };
 
-// Food cost per kid by style
 export const FOOD_PER_KID: Record<Currency, Record<PartyStyle, number>> = {
   USD: {
     simple: 8,
@@ -111,7 +96,6 @@ export const FOOD_PER_KID: Record<Currency, Record<PartyStyle, number>> = {
   },
 };
 
-// Goody bag cost per kid by style
 export const GOODY_BAG_COSTS: Record<Currency, Record<PartyStyle, number>> = {
   USD: {
     simple: 5,

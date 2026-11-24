@@ -1,7 +1,3 @@
-/**
- * ToolDeflection Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateToolDeflection } from '../../src/components/calculators/ToolDeflectionCalculator/calculations';
 import type { ToolDeflectionInputs } from '../../src/components/calculators/ToolDeflectionCalculator/types';
@@ -27,7 +23,7 @@ describe('ToolDeflectionCalculator', () => {
       const result = calculateToolDeflection(inputs);
 
       expect(result.deflection).toBeGreaterThan(0);
-      expect(result.deflection).toBeLessThan(0.01); // sub-0.01" for typical setup
+      expect(result.deflection).toBeLessThan(0.01);
       expect(result.momentOfInertia).toBeGreaterThan(0);
     });
 
@@ -52,7 +48,6 @@ describe('ToolDeflectionCalculator', () => {
       const shortResult = calculateToolDeflection(short);
       const longResult = calculateToolDeflection(long);
 
-      // Deflection scales with L^3
       expect(longResult.deflection).toBeGreaterThan(shortResult.deflection);
     });
 

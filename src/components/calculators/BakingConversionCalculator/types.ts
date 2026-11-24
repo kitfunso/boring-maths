@@ -1,7 +1,3 @@
-/**
- * Baking Conversion Calculator - Type Definitions
- */
-
 export type BakingUnit =
   | 'cups'
   | 'tablespoons'
@@ -47,10 +43,6 @@ export interface BakingConversionResult {
   precisionNote: string;
 }
 
-/**
- * Grams per 1 US cup for each ingredient.
- * Sources: USDA, King Arthur Flour, and standard baking references.
- */
 export const INGREDIENT_DENSITIES: Readonly<Record<Ingredient, number>> = {
   'all-purpose-flour': 120,
   'bread-flour': 130,
@@ -95,7 +87,6 @@ export const UNIT_LABELS: Readonly<Record<BakingUnit, string>> = {
   liters: 'Liters',
 };
 
-/** Whether a unit measures volume (true) or weight (false). */
 export const IS_VOLUME_UNIT: Readonly<Record<BakingUnit, boolean>> = {
   cups: true,
   tablespoons: true,

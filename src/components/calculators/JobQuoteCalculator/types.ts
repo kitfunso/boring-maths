@@ -1,10 +1,3 @@
-/**
- * Job Quote Calculator - Type Definitions
- *
- * Generate professional quotes for tradespeople including
- * materials, labour, markup, VAT, and travel/callout fees.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type TradeType = 'plumber' | 'electrician' | 'builder' | 'painter' | 'general';
@@ -37,7 +30,6 @@ export interface JobQuoteResult {
   readonly profitMarginPercent: number;
 }
 
-/** Suggested hourly rates by trade (GBP baseline) */
 export const TRADE_RATE_PRESETS: Readonly<Record<TradeType, number>> = {
   plumber: 50,
   electrician: 55,

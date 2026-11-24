@@ -1,26 +1,14 @@
-/**
- * LMTD Calculator - Type Definitions
- *
- * Log Mean Temperature Difference for heat exchanger design.
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type FlowArrangement = 'counterflow' | 'parallelflow' | 'crossflow' | 'shellAndTube';
 
 export interface LMTDInputs {
   unitSystem: UnitSystem;
   flowArrangement: FlowArrangement;
-  /** Hot fluid inlet temperature */
   hotInlet: number;
-  /** Hot fluid outlet temperature */
   hotOutlet: number;
-  /** Cold fluid inlet temperature */
   coldInlet: number;
-  /** Cold fluid outlet temperature */
   coldOutlet: number;
-  /** Number of shell passes (for shell & tube) */
   shellPasses: number;
-  /** Number of tube passes (for shell & tube) */
   tubePasses: number;
 }
 
@@ -28,8 +16,8 @@ export interface LMTDResult {
   lmtd: number;
   correctedLMTD: number;
   correctionFactor: number;
-  deltaT1: number; // Temperature difference at one end
-  deltaT2: number; // Temperature difference at other end
+  deltaT1: number;
+  deltaT2: number;
   effectiveness: number;
   heatCapacityRatio: number;
   ntu: number;
@@ -37,7 +25,6 @@ export interface LMTDResult {
   validationMessage: string;
 }
 
-// Typical F-factors for different configurations
 export const FLOW_ARRANGEMENT_INFO: Record<
   FlowArrangement,
   { name: string; description: string; typicalF: string }

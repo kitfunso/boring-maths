@@ -1,5 +1,3 @@
-/** Number inputs must keep what the user types. These handlers once parsed the event object, so every keystroke reset the field to 0. */
-
 import { describe, it, expect } from 'vitest';
 import { render, fireEvent } from '@testing-library/preact';
 import type { ComponentType } from 'preact';

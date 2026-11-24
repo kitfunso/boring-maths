@@ -1,23 +1,10 @@
-/**
- * ADS Calculator - Calculation Logic
- *
- * Calculates Additional Dwelling Supplement (ADS) for Scotland
- * ADS is 8% of the FULL purchase price for additional properties
- */
-
 import type { ADSCalculatorInputs, ADSCalculatorResult, TaxBand, BuyerType } from './types';
 import { LBTT_STANDARD_BANDS, LBTT_FIRST_TIME_BANDS, ADS_RATE, ADS_MIN_PRICE } from './types';
 
-/**
- * Get appropriate LBTT bands based on buyer type
- */
 function getLBTTBands(buyerType: BuyerType): Array<{ from: number; to: number; rate: number }> {
   return buyerType === 'first-time' ? LBTT_FIRST_TIME_BANDS : LBTT_STANDARD_BANDS;
 }
 
-/**
- * Calculate tax for each band
- */
 function calculateBandTax(
   propertyPrice: number,
   bands: Array<{ from: number; to: number; rate: number }>
@@ -43,9 +30,6 @@ function calculateBandTax(
   return result;
 }
 
-/**
- * Calculate ADS and LBTT
- */
 export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
   const { propertyPrice, isAdditionalProperty, buyerType } = inputs;
 
@@ -60,20 +44,15 @@ export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
     };
   }
 
-  // ADS applies to additional properties bought for £40,000 or more
-  // (revenue.scot: no ADS when the consideration is under £40,000)
   const adsApplies =
     (isAdditionalProperty || buyerType === 'additional') && propertyPrice >= ADS_MIN_PRICE;
 
-  // Calculate ADS (8% on full purchase price)
   const adsAmount = adsApplies ? Math.round(propertyPrice * ADS_RATE) : 0;
 
-  // Get LBTT bands based on buyer type
   const bands = getLBTTBands(buyerType);
   const lbttBands = calculateBandTax(propertyPrice, bands);
   const lbttAmount = lbttBands.reduce((sum, band) => sum + band.taxDue, 0);
 
-  // Calculate first-time buyer saving
   let firstTimeBuyerSaving = 0;
   if (buyerType === 'first-time') {
     const standardBands = calculateBandTax(propertyPrice, LBTT_STANDARD_BANDS);
@@ -81,10 +60,8 @@ export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
     firstTimeBuyerSaving = Math.max(0, standardLBTT - lbttAmount);
   }
 
-  // Total tax
   const totalTax = lbttAmount + adsAmount;
 
-  // Effective rate
   const effectiveRate = propertyPrice > 0 ? (totalTax / propertyPrice) * 100 : 0;
 
   return {
@@ -97,9 +74,6 @@ export function calculateADS(inputs: ADSCalculatorInputs): ADSCalculatorResult {
   };
 }
 
-/**
- * Format currency in GBP
- */
 export function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -109,9 +83,6 @@ export function formatCurrency(value: number): string {
   }).format(value);
 }
 
-/**
- * Format percentage
- */
 export function formatPercent(value: number, decimals: number = 2): string {
   return `${value.toFixed(decimals)}%`;
 }

@@ -1,7 +1,3 @@
-/**
- * Pricing Calculator - Calculation Logic
- */
-
 import type { PricingInputs, PricingResult, PricingAnalysis } from './types';
 
 export function calculatePricing(inputs: PricingInputs): PricingResult {
@@ -19,7 +15,6 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
 
   const totalUnitCost = productCost + overheadPerUnit;
 
-  // Cost-Plus Pricing: Cost / (1 - margin)
   const costPlusPrice = totalUnitCost / (1 - desiredMargin);
   const costPlusMargin = costPlusPrice - totalUnitCost;
   const costPlusProfit = costPlusMargin * expectedUnitSales - monthlyFixedCosts;
@@ -42,8 +37,7 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
     ],
   };
 
-  // Value-Based Pricing: Based on perceived value
-  const valueBasedPrice = perceivedValue * 0.7; // Typically 60-80% of perceived value
+  const valueBasedPrice = perceivedValue * 0.7;
   const valueBasedMargin = valueBasedPrice - totalUnitCost;
   const valueBasedMarginPercent = valueBasedPrice > 0 ? valueBasedMargin / valueBasedPrice : 0;
   const valueBasedProfit = valueBasedMargin * expectedUnitSales - monthlyFixedCosts;
@@ -66,8 +60,7 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
     ],
   };
 
-  // Competitive Pricing: Match or undercut competition
-  const competitivePrice = competitorPrice * 0.95; // 5% below competition
+  const competitivePrice = competitorPrice * 0.95;
   const competitiveMargin = competitivePrice - totalUnitCost;
   const competitiveMarginPercent = competitivePrice > 0 ? competitiveMargin / competitivePrice : 0;
   const competitiveProfit = competitiveMargin * expectedUnitSales - monthlyFixedCosts;
@@ -90,7 +83,6 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
     ],
   };
 
-  // Select recommended price based on strategy
   let recommendedPrice: number;
 
   switch (strategy) {
@@ -104,8 +96,7 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
       recommendedPrice = costPlusAnalysis.price;
   }
 
-  // Ensure price covers costs
-  const floorPrice = totalUnitCost * 1.1; // 10% minimum margin
+  const floorPrice = totalUnitCost * 1.1;
   if (recommendedPrice < floorPrice) {
     recommendedPrice = floorPrice;
   }
@@ -114,30 +105,25 @@ export function calculatePricing(inputs: PricingInputs): PricingResult {
   const recommendedMarginPercent =
     recommendedPrice > 0 ? (recommendedMargin / recommendedPrice) * 100 : 0;
 
-  // Break-even analysis
   const contributionMargin = recommendedMargin;
   const breakEvenUnits =
     contributionMargin > 0 ? Math.ceil(monthlyFixedCosts / contributionMargin) : 0;
   const breakEvenRevenue = breakEvenUnits * recommendedPrice;
 
-  // Profitability projections
   const monthlyRevenue = recommendedPrice * expectedUnitSales;
   const monthlyProfit = recommendedMargin * expectedUnitSales - monthlyFixedCosts;
   const annualProfit = monthlyProfit * 12;
 
-  // Units needed for target profit (assume target = fixed costs)
-  const targetProfit = monthlyFixedCosts; // Double the fixed costs as target
+  const targetProfit = monthlyFixedCosts;
   const unitsForTargetProfit =
     contributionMargin > 0 ? Math.ceil((monthlyFixedCosts + targetProfit) / contributionMargin) : 0;
 
-  // Price range
   const priceRange = {
     floor: Math.round(totalUnitCost * 1.1 * 100) / 100,
     target: Math.round(recommendedPrice * 100) / 100,
     ceiling: Math.round(perceivedValue * 0.85 * 100) / 100,
   };
 
-  // Generate insights
   const insights: string[] = [];
 
   if (recommendedPrice > competitorPrice * 1.2) {

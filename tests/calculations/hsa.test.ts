@@ -1,7 +1,3 @@
-/**
- * HsaCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateHSA } from '../../src/components/calculators/HSACalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HSACalculator/types';

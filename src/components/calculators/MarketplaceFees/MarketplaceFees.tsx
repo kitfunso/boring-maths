@@ -1,8 +1,3 @@
-/**
- * Marketplace Fees Calculator - React Component
- *
- * Compare fees across Etsy, eBay, and Amazon.
- */
 import { calculateMarketplaceFees } from './calculations';
 import { getDefaultInputs, type MarketplaceFeesInputs, PLATFORM_FEES } from './types';
 import {
@@ -64,7 +59,6 @@ export default function MarketplaceFees() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 Sale Details
@@ -134,7 +128,6 @@ export default function MarketplaceFees() {
                 Platform Options
               </div>
 
-              {/* Etsy Offsite Ads Toggle */}
               <Toggle
                 checked={inputs.etsyOffsiteAds}
                 onChange={(checked) => updateInput('etsyOffsiteAds', checked)}
@@ -142,7 +135,6 @@ export default function MarketplaceFees() {
                 size="sm"
               />
 
-              {/* Amazon FBA Toggle */}
               <div className="space-y-3">
                 <Toggle
                   checked={inputs.amazonFBA}
@@ -188,7 +180,6 @@ export default function MarketplaceFees() {
               />
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {bestPlatform && (
                 <ResultCard
@@ -198,7 +189,6 @@ export default function MarketplaceFees() {
                 />
               )}
 
-              {/* Platform Comparison Cards */}
               <div className="space-y-4">
                 {result.platforms.map((platform) => (
                   <div
@@ -224,7 +214,6 @@ export default function MarketplaceFees() {
                       </div>
                     </div>
 
-                    {/* Fee breakdown */}
                     <div className="space-y-1 text-sm">
                       <div className="flex justify-between text-[var(--color-muted)]">
                         <span>Gross Revenue</span>
@@ -254,7 +243,6 @@ export default function MarketplaceFees() {
                       </div>
                     </div>
 
-                    {/* Price for target margin */}
                     <div className="mt-3 pt-3 border-t border-white/10 text-sm">
                       <span className="text-[var(--color-muted)]">
                         Price for {inputs.targetMargin}% margin:
@@ -269,7 +257,6 @@ export default function MarketplaceFees() {
                 ))}
               </div>
 
-              {/* Comparison Summary */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Quick Comparison
@@ -309,7 +296,6 @@ export default function MarketplaceFees() {
                 </div>
               </div>
 
-              {/* Insights */}
               {result.insights.length > 0 && (
                 <Alert variant="tip" title="Platform Insights">
                   <ul className="space-y-2 mt-2">
@@ -323,7 +309,6 @@ export default function MarketplaceFees() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Marketplace Fee Comparison for ${fmtInt(inputs.itemPrice)} item: Etsy ${fmt(result.platforms[0].totalFees)} | eBay ${fmt(result.platforms[1].totalFees)} | Amazon ${fmt(result.platforms[2].totalFees)}`}

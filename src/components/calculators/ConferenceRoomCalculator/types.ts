@@ -1,9 +1,3 @@
-/**
- * Conference Room Calculator - Type Definitions
- *
- * Calculate room capacity and setup requirements for meetings and events.
- */
-
 export type SeatingStyle =
   | 'theater'
   | 'classroom'
@@ -16,25 +10,21 @@ export type SeatingStyle =
 export type RoomShape = 'rectangular' | 'square' | 'l_shaped';
 
 export interface ConferenceRoomInputs {
-  roomLength: number; // feet
-  roomWidth: number; // feet
+  roomLength: number;
+  roomWidth: number;
   roomShape: RoomShape;
   seatingStyle: SeatingStyle;
 
-  // Spacing requirements
-  aisleWidth: number; // feet
-  wallClearance: number; // feet
+  aisleWidth: number;
+  wallClearance: number;
   stageOrPresenterArea: boolean;
-  stageDepth: number; // feet
-
-  // Equipment
+  stageDepth: number;
   includeProjectorScreen: boolean;
   includeWhiteboard: boolean;
   includePodium: boolean;
   includeBreakoutTables: boolean;
   breakoutTableCount: number;
 
-  // ADA Compliance
   adaAccessible: boolean;
 }
 
@@ -53,25 +43,19 @@ export interface SetupRequirement {
 }
 
 export interface ConferenceRoomResult {
-  // Room info
   totalSqFt: number;
   usableSqFt: number;
 
-  // Capacity by selected style
   primaryCapacity: number;
   primaryStyle: string;
 
-  // All style capacities for comparison
   capacitiesByStyle: CapacityResult[];
 
-  // Recommended setup
   recommendedSetup: string;
   setupNotes: string[];
 
-  // Materials needed
   materials: SetupRequirement[];
 
-  // Layout dimensions
   layoutInfo: {
     rows: number;
     seatsPerRow: number;
@@ -79,11 +63,9 @@ export interface ConferenceRoomResult {
     tableCount?: number;
   };
 
-  // Tips
   tips: string[];
 }
 
-// Square feet per person by seating style
 export const SQFT_PER_PERSON: Record<SeatingStyle, number> = {
   theater: 6, // chairs only, tightly packed
   classroom: 18, // 6ft tables with chairs
@@ -94,7 +76,6 @@ export const SQFT_PER_PERSON: Record<SeatingStyle, number> = {
   cocktail: 8, // standing, mingling
 };
 
-// Style descriptions
 export const STYLE_DESCRIPTIONS: Record<SeatingStyle, string> = {
   theater: 'Rows of chairs facing front, no tables',
   classroom: '6ft tables with chairs, all facing front',

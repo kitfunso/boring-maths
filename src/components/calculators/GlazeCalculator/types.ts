@@ -1,8 +1,3 @@
-/**
- * Glaze Recipe Calculator Types
- * Scale and calculate pottery glaze recipes
- */
-
 export interface GlazeIngredient {
   id: string;
   name: string;
@@ -13,7 +8,7 @@ export interface GlazeInputs {
   ingredients: GlazeIngredient[];
   targetWeight: number;
   weightUnit: 'grams' | 'ounces' | 'pounds';
-  waterRatio: number; // water to dry materials ratio
+  waterRatio: number;
 }
 
 export interface GlazeResults {
@@ -25,9 +20,7 @@ export interface GlazeResults {
   isValid: boolean;
 }
 
-// Common glaze materials
 export const GLAZE_MATERIALS: { name: string; category: string }[] = [
-  // Feldspars
   { name: 'Custer Feldspar', category: 'Feldspar' },
   { name: 'Potash Feldspar', category: 'Feldspar' },
   { name: 'Soda Feldspar', category: 'Feldspar' },
@@ -35,14 +28,12 @@ export const GLAZE_MATERIALS: { name: string; category: string }[] = [
   { name: 'Cornwall Stone', category: 'Feldspar' },
   { name: 'G-200 Feldspar', category: 'Feldspar' },
 
-  // Silica sources
   { name: 'Silica (Flint)', category: 'Silica' },
   { name: 'EPK Kaolin', category: 'Silica' },
   { name: 'Grolleg Kaolin', category: 'Silica' },
   { name: 'Ball Clay', category: 'Silica' },
   { name: 'OM4 Ball Clay', category: 'Silica' },
 
-  // Fluxes
   { name: 'Whiting (Calcium Carbonate)', category: 'Flux' },
   { name: 'Dolomite', category: 'Flux' },
   { name: 'Talc', category: 'Flux' },
@@ -57,7 +48,6 @@ export const GLAZE_MATERIALS: { name: string; category: string }[] = [
   { name: 'Frit 3124', category: 'Flux' },
   { name: 'Frit 3195', category: 'Flux' },
 
-  // Colorants
   { name: 'Iron Oxide (Red)', category: 'Colorant' },
   { name: 'Iron Oxide (Black)', category: 'Colorant' },
   { name: 'Cobalt Oxide', category: 'Colorant' },
@@ -72,13 +62,11 @@ export const GLAZE_MATERIALS: { name: string; category: string }[] = [
   { name: 'Tin Oxide', category: 'Colorant' },
   { name: 'Zircopax', category: 'Colorant' },
 
-  // Other
   { name: 'Bentonite', category: 'Additive' },
   { name: 'CMC Gum', category: 'Additive' },
   { name: 'Epsom Salts', category: 'Additive' },
 ];
 
-// Common glaze recipes for reference
 export const GLAZE_RECIPES: {
   name: string;
   cone: string;

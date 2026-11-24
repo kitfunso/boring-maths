@@ -1,8 +1,3 @@
-/**
- * Conference Room Calculator - React Component
- *
- * Calculate room capacity and setup requirements.
- */
 import { calculateConferenceRoom } from './calculations';
 import {
   getDefaultInputs,
@@ -59,7 +54,6 @@ export default function ConferenceRoomCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                 Room Dimensions
@@ -96,7 +90,6 @@ export default function ConferenceRoomCalculator() {
                 />
               </Grid>
 
-              {/* Room Shape */}
               <div>
                 <Label>Room Shape</Label>
                 <ButtonGroup
@@ -106,7 +99,6 @@ export default function ConferenceRoomCalculator() {
                 />
               </div>
 
-              {/* Seating Style */}
               <div>
                 <Label>Seating Style</Label>
                 <ButtonGroup
@@ -151,7 +143,6 @@ export default function ConferenceRoomCalculator() {
                 />
               </Grid>
 
-              {/* Stage/Presenter Area */}
               <Toggle
                 checked={inputs.stageOrPresenterArea}
                 onChange={(checked) => updateInput('stageOrPresenterArea', checked)}
@@ -197,7 +188,6 @@ export default function ConferenceRoomCalculator() {
               ))}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Maximum Capacity"
@@ -230,7 +220,6 @@ export default function ConferenceRoomCalculator() {
                 )}
               </Grid>
 
-              {/* Capacity by Style Comparison */}
               <div className="bg-cyan-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-cyan-700 uppercase tracking-wider mb-4">
                   Capacity by Seating Style
@@ -254,7 +243,6 @@ export default function ConferenceRoomCalculator() {
                 </div>
               </div>
 
-              {/* Materials Needed */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Materials Needed
@@ -277,7 +265,6 @@ export default function ConferenceRoomCalculator() {
                 </div>
               </div>
 
-              {/* Recommended Setup */}
               <div className="bg-blue-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-blue-700 uppercase tracking-wider mb-4">
                   Recommended Setup: {result.recommendedSetup}
@@ -292,7 +279,6 @@ export default function ConferenceRoomCalculator() {
                 </ul>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Setup Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.slice(0, 4).map((tip, i) => (
@@ -304,7 +290,6 @@ export default function ConferenceRoomCalculator() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Conference Room: ${inputs.roomLength}' x ${inputs.roomWidth}' = ${result.totalSqFt} sq ft. ${result.primaryStyle} capacity: ${result.primaryCapacity} people. Recommended: ${result.recommendedSetup}`}

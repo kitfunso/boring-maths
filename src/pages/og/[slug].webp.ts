@@ -2,7 +2,6 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { calculators, slugOf } from '../../lib/calculators';
 import { DEFAULT_OG_CARD, OG_COLORS, renderOgImage, type OgCard } from '../../lib/og-image';
 
-// One card per registry entry: CalculatorLayout points every calculator at /og/<slug>.webp.
 export const getStaticPaths = (() => [
   ...calculators.map((calc) => ({
     params: { slug: slugOf(calc) },

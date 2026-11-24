@@ -1,7 +1,3 @@
-/**
- * Pet Ownership Cost Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type PetType = 'dog' | 'cat' | 'bird' | 'fish' | 'rabbit' | 'reptile';
@@ -11,15 +7,14 @@ export type HealthStatus = 'excellent' | 'good' | 'fair' | 'poor';
 export interface PetCostInputs {
   currency: Currency;
   petType: PetType;
-  dogSize: DogSize; // only for dogs
-  age: number; // years
+  dogSize: DogSize;
+  age: number;
   healthStatus: HealthStatus;
 
-  // Lifestyle choices
   premiumFood: boolean;
-  groomingFrequency: number; // times per year (0 = DIY)
+  groomingFrequency: number;
   useDaycare: boolean;
-  daycareFrequency: number; // days per month
+  daycareFrequency: number;
   useBoarding: boolean;
   boardingWeeksPerYear: number;
   hasPetInsurance: boolean;
@@ -36,16 +31,13 @@ export interface PetCostResult {
   currency: Currency;
   petType: PetType;
 
-  // Summary
   annualCost: number;
   monthlyCost: number;
   lifetimeCost: number;
   expectedLifespan: number;
 
-  // Breakdown
   breakdown: CostBreakdown[];
 
-  // Key costs
   foodCost: number;
   vetCost: number;
   insuranceCost: number;
@@ -54,10 +46,8 @@ export interface PetCostResult {
   boardingCost: number;
   suppliesCost: number;
 
-  // Emergency fund
   recommendedEmergencyFund: number;
 
-  // Insights
   costPerDay: number;
   comparisonToAverage: 'below' | 'average' | 'above';
 }

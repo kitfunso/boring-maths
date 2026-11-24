@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Post a tweet using v1.1 API."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 

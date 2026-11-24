@@ -1,5 +1,3 @@
-/** Singapore CPF Retirement Sum tests. 2026 figures per CPF Board: BRS 110200, FRS 220400 (2x BRS), ERS 440800 (4x BRS since 1 Jan 2025, was 3x before). Projection compounds annually at 4%, contribution added at year end. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCPFRetirementSum } from '../../src/components/calculators/SingaporeCPFRetirementSum/calculations';
 
@@ -41,9 +39,6 @@ describe('SingaporeCPFRetirementSum', () => {
     });
 
     it('projects age 45, balance 100000, contribution 10000/yr over 10 years at 4% to ~268085.50', () => {
-      // balance_n = balance_(n-1) * 1.04 + 10000, run 10 times from 100000:
-      // 114000, 128560, 143702.4, 159450.496, 175828.51584, 192861.6564736,
-      // 210576.1227325, 228999.1676415, 248159.1343475, 268085.4997215.
       const result = calculateCPFRetirementSum({
         currentBalance: 100000,
         currentAge: 45,

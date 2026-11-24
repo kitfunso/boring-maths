@@ -1,7 +1,3 @@
-/**
- * Heart Rate Zone Calculator - Type Definitions
- */
-
 export type CalculationMethod = 'percentage' | 'karvonen';
 
 export interface HeartRateZoneInputs {

@@ -1,7 +1,3 @@
-/**
- * Tap Drill Size Calculator Component
- * Calculate drill sizes for tapping threads
- */
 import { ResultCard, Select, Slider, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { TapDrillInputs } from './types';
@@ -28,7 +24,6 @@ export function TapDrillCalculator() {
       ? IMPERIAL_THREADS.map((t) => ({ value: t.value, label: t.label }))
       : METRIC_THREADS.map((t) => ({ value: t.value, label: t.label }));
 
-  // Reset to appropriate default when switching thread types
   const handleTypeChange = (type: 'imperial' | 'metric') => {
     setInputs({
       ...inputs,
@@ -39,7 +34,6 @@ export function TapDrillCalculator() {
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Thread Selection</h2>
@@ -101,7 +95,6 @@ export function TapDrillCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         {results && (
           <>

@@ -1,7 +1,3 @@
-/**
- * Cooking Time Calculator - Type Definitions
- */
-
 export type MeatType =
   | 'beef-roast'
   | 'chicken-whole'
@@ -74,7 +70,6 @@ export const DONENESS_LABELS: Readonly<Record<Doneness, string>> = {
   'well-done': 'Well Done',
 };
 
-/** Meats that support doneness selection (beef and lamb). */
 export const DONENESS_MEATS: readonly MeatType[] = [
   'beef-roast',
   'lamb-leg',
@@ -83,7 +78,6 @@ export const DONENESS_MEATS: readonly MeatType[] = [
   'lamb-rack',
 ];
 
-/** Methods available per meat type (some meats don't suit all methods). */
 export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod[]>> = {
   'beef-roast': ['oven', 'slow-cooker', 'grill'],
   'chicken-whole': ['oven', 'slow-cooker', 'grill'],
@@ -100,12 +94,6 @@ export const AVAILABLE_METHODS: Readonly<Record<MeatType, readonly CookingMethod
   ham: ['oven', 'slow-cooker'],
 };
 
-/**
- * Cooking data: minutes per pound, oven temp (F), and internal temp (F).
- *
- * Structure: COOKING_DATA[meatType][method] = { minutesPerPound, ovenTempF, internalTempF, restingMinutes, notes }
- * For doneness meats, internalTempF is per-doneness (see DONENESS_INTERNAL_TEMPS).
- */
 export interface CookingDataEntry {
   readonly minutesPerPound: number;
   readonly ovenTempF: number;
@@ -114,10 +102,6 @@ export interface CookingDataEntry {
   readonly notes: readonly string[];
 }
 
-/**
- * Internal temperatures (F) by doneness for beef and lamb.
- * Based on USDA guidelines and common culinary standards.
- */
 export const DONENESS_INTERNAL_TEMPS: Readonly<Record<Doneness, number>> = {
   rare: 125,
   'medium-rare': 135,
@@ -404,10 +388,6 @@ export const COOKING_DATA: Readonly<
       ],
     },
   },
-  // Oven and slow-cooker times: American Lamb Board, "Lamb Time and Temperature Guide"
-  // (americanlamb.com/wp-content/uploads/2023/10/Lamb-Time-and-Temperature-Guide.pdf) - shoulder
-  // medium range 25-30 min/lb at the board's standard 325F roast temperature. Grill and air-fryer
-  // figures follow the same bone-in-roast approach already used for lamb-leg on this page.
   'lamb-shoulder': {
     oven: {
       minutesPerPound: 28,
@@ -447,11 +427,6 @@ export const COOKING_DATA: Readonly<
       ],
     },
   },
-  // American Lamb Board (see source above) lists rack of lamb roast/grill at 9-12 min/lb to
-  // 145F med-rare. minutesPerPound here is the MEDIUM baseline (doneness multiplier 1.0), so 12
-  // gives round(12 * 0.85) = 10 min/lb med-rare, inside the board's 9-12 range.
-  // Oven/grill are the board's stated methods; slow-cooker and air-fryer are not surfaced in the
-  // UI (see AVAILABLE_METHODS) but are filled in here to satisfy the shared data shape.
   'lamb-rack': {
     oven: {
       minutesPerPound: 12,

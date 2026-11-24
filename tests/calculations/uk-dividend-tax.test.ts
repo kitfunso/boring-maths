@@ -1,7 +1,3 @@
-/**
- * UkDividendTaxCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateDividendTaxResult } from '../../src/components/calculators/UKDividendTaxCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/UKDividendTaxCalculator/types';

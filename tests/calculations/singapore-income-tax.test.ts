@@ -1,5 +1,3 @@
-/** Singapore income tax (YA2026) tests. Brackets confirmed against PwC Tax Summaries and Statrys (IRAS's own rate page is a JS app WebFetch cannot read): 0-20k@0%, 20-30k@2%, 30-40k@3.5%, 40-80k@7%, 80-120k@11.5%, 120-160k@15%, 160-200k@18%, 200-240k@19%, 240-280k@19.5%, 280-320k@20%, 320-500k@22%, 500k-1M@23%, above 1M@24%. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeIncomeTax } from '../../src/components/calculators/SingaporeIncomeTax/calculations';
 

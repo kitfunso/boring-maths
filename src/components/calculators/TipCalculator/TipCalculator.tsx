@@ -1,9 +1,3 @@
-/**
- * Tip Calculator - React Component
- *
- * Interactive calculator for tips with bill splitting.
- * Uses the design system components.
- */
 import { calculateTip, formatCurrency } from './calculations';
 import { getDefaultInputs, type TipCalculatorInputs, type TipCalculatorResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -36,12 +30,10 @@ export default function TipCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Quick tip selection
   const selectTipPercentage = (percentage: number) => {
     updateInput('tipPercentage', percentage);
   };
@@ -49,7 +41,6 @@ export default function TipCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Tip"
           subtitle="Quick tip calculation with bill splitting"
@@ -57,9 +48,7 @@ export default function TipCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Bill Amount */}
             <div>
               <Label htmlFor="billAmount" required>
                 Bill Amount
@@ -75,7 +64,6 @@ export default function TipCalculator() {
               />
             </div>
 
-            {/* Tip Percentage Slider */}
             <div>
               <Slider
                 label="Tip Percentage"
@@ -93,7 +81,6 @@ export default function TipCalculator() {
               />
             </div>
 
-            {/* Quick Tip Buttons */}
             <div role="group" aria-label="Quick tip percentage selection">
               <p id="quick-select-label" className="text-sm text-[var(--color-subtle)] mb-2">
                 Quick select:
@@ -121,7 +108,6 @@ export default function TipCalculator() {
               </div>
             </div>
 
-            {/* Split Count */}
             <div>
               <Label htmlFor="splitCount">Split Between</Label>
               <div
@@ -159,9 +145,7 @@ export default function TipCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label={inputs.splitCount > 1 ? 'Each Person Pays' : 'Total With Tip'}
               value={formatCurrency(
@@ -181,7 +165,6 @@ export default function TipCalculator() {
               }
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Bill Amount"
@@ -216,7 +199,6 @@ export default function TipCalculator() {
               />
             </Grid>
 
-            {/* Tip Suggestions Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Quick Reference
@@ -280,13 +262,11 @@ export default function TipCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Tipping etiquette:">
               15-18% for adequate service, 20% for good service, 25%+ for exceptional service. In
               the US, servers rely on tips as a major part of their income.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={

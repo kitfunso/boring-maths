@@ -1,7 +1,3 @@
-/**
- * HolidayDinnerCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateHolidayDinner } from '../../src/components/calculators/HolidayDinnerCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/HolidayDinnerCalculator/types';

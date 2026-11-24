@@ -1,10 +1,3 @@
-/**
- * Party Drink Calculator (Non-Alcoholic) - React Component
- *
- * Interactive calculator for estimating non-alcoholic drink quantities.
- * Accounts for weather, event type, and kid-friendly options.
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculatePartyDrinks, formatCurrency, formatNumber } from './calculations';
 import {
@@ -44,7 +37,6 @@ export default function PartyDrinkCalculator() {
     compute: calculatePartyDrinks,
   });
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs((prev) => ({ ...prev, currency: newCurrency }));
   };
@@ -63,7 +55,6 @@ export default function PartyDrinkCalculator() {
     { value: 'formal' as const, label: 'Formal' },
   ];
 
-  // Group drinks by category
   const drinksByCategory = useMemo(() => {
     const grouped: Record<string, typeof result.drinks> = {};
     for (const drink of result.drinks) {
@@ -94,7 +85,6 @@ export default function PartyDrinkCalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Plan Your Party Drinks"
           subtitle="Calculate non-alcoholic drinks, ice, and supplies needed"
@@ -102,9 +92,7 @@ export default function PartyDrinkCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Guest Count */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="guestCount" required>
@@ -136,7 +124,6 @@ export default function PartyDrinkCalculator() {
               </div>
             </Grid>
 
-            {/* Event Duration */}
             <div>
               <Slider
                 label="Event Duration"
@@ -153,7 +140,6 @@ export default function PartyDrinkCalculator() {
               />
             </div>
 
-            {/* Weather Condition */}
             <div>
               <Label>Weather / Temperature</Label>
               <ButtonGroup
@@ -167,7 +153,6 @@ export default function PartyDrinkCalculator() {
               </p>
             </div>
 
-            {/* Event Type */}
             <div>
               <Label>Event Type</Label>
               <ButtonGroup
@@ -181,7 +166,6 @@ export default function PartyDrinkCalculator() {
               </p>
             </div>
 
-            {/* Drink Type Selection */}
             <div>
               <Label className="mb-3">Include These Drink Types</Label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -216,9 +200,7 @@ export default function PartyDrinkCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Estimated Total Cost"
               value={formatCurrency(result.totalCost, result.currency)}
@@ -234,7 +216,6 @@ export default function PartyDrinkCalculator() {
               }
             />
 
-            {/* Summary Stats */}
             <Grid cols={4} gap="md">
               <MetricCard
                 label="Total Servings"
@@ -258,7 +239,6 @@ export default function PartyDrinkCalculator() {
               />
             </Grid>
 
-            {/* Drink Shopping List by Category */}
             {Object.entries(drinksByCategory).map(([category, drinks]) => (
               <div key={category} className={`bg-${categoryColors[category]}-50 rounded-xl p-6`}>
                 <h3
@@ -294,7 +274,6 @@ export default function PartyDrinkCalculator() {
               </div>
             ))}
 
-            {/* Ice Section */}
             <div className="bg-blue-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-4">
                 Ice Requirements
@@ -321,7 +300,6 @@ export default function PartyDrinkCalculator() {
               </div>
             </div>
 
-            {/* Supplies Checklist */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Supplies Checklist
@@ -342,7 +320,6 @@ export default function PartyDrinkCalculator() {
               </div>
             </div>
 
-            {/* Cost Breakdown */}
             <div className="bg-red-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-red-400 uppercase tracking-wider mb-4">
                 Cost Breakdown
@@ -379,7 +356,6 @@ export default function PartyDrinkCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Party planning tip:">
               Buy 15-20% extra drinks for unexpected guests and refills. In hot weather, have backup
               ice ready in coolers. Keep drinks cold by pre-chilling before the event. Consider
@@ -394,7 +370,6 @@ export default function PartyDrinkCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Party drinks for ${inputs.guestCount} guests: ${result.totalServings} servings needed. Ice: ${result.ice.bagsNeeded} bags. Estimated cost: ${formatCurrency(result.totalCost, result.currency)} (${formatCurrency(result.costPerPerson, result.currency)}/person)`}

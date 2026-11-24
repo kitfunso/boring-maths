@@ -1,9 +1,3 @@
-/**
- * Job Quote Calculator - Preact Component
- *
- * Generate professional quotes for tradespeople with
- * materials, labour, markup, VAT, and travel fees.
- */
 import { calculateJobQuote, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -94,7 +88,6 @@ export default function JobQuoteCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Job Details
@@ -148,7 +141,6 @@ export default function JobQuoteCalculator() {
 
               <Divider />
 
-              {/* Materials Section */}
               <div className="flex items-center justify-between">
                 <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                   Materials
@@ -270,7 +262,6 @@ export default function JobQuoteCalculator() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Quote"
@@ -299,7 +290,6 @@ export default function JobQuoteCalculator() {
                 />
               </Grid>
 
-              {/* Quote Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Quote Breakdown
@@ -358,7 +348,6 @@ export default function JobQuoteCalculator() {
                 </div>
               </div>
 
-              {/* Trade Rate Guidance */}
               <Alert variant="tip" title="Typical Hourly Rates">
                 <div className="grid grid-cols-2 gap-x-4 gap-y-1 mt-2 text-sm">
                   {TRADE_OPTIONS.map((trade) => {
@@ -384,7 +373,6 @@ export default function JobQuoteCalculator() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Job Quote: ${fmt(result.totalQuote)} total (Materials: ${fmt(result.materialsSubtotal)}, Labour: ${fmt(result.labourSubtotal)}, Markup: ${inputs.markupPercent}%)`}

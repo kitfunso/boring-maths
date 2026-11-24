@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Check what API endpoints work."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 import tweepy
@@ -14,11 +13,8 @@ client = tweepy.Client(
     wait_on_rate_limit=False
 )
 
-# Test create_tweet (write access)
 print("Testing create_tweet with very short test...")
 try:
-    # Don't actually post - just check what error we get
-    # by using an invalid ID
     resp = client.get_tweet(id='1234567890')
     print(f'get_tweet: {resp}')
 except tweepy.errors.NotFound:
@@ -28,7 +24,6 @@ except tweepy.errors.Unauthorized as e:
 except Exception as e:
     print(f'get_tweet: Error {type(e).__name__}: {e}')
 
-# Check get_home_timeline
 try:
     resp = client.get_home_timeline(max_results=5)
     print(f'home_timeline: {len(resp.data) if resp.data else 0} tweets')
@@ -39,7 +34,6 @@ except tweepy.errors.Forbidden as e:
 except Exception as e:
     print(f'home_timeline: {type(e).__name__}: {e}')
 
-# Test v1.1 - get user timeline (different endpoint)
 auth = tweepy.OAuth1UserHandler(
     os.getenv('X_API_KEY'),
     os.getenv('X_API_SECRET'),

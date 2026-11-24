@@ -1,14 +1,4 @@
 #!/usr/bin/env node
-/**
- * Lead answer guard - every registry calculator needs a citable opening passage.
- *
- * HeroSection derives it from the page's own first FAQ answer, so a page whose
- * first FAQ happens to be a disclaimer ("Is this an official BA tool? No.")
- * silently leads on boilerplate instead of an answer. That is what `quickAnswer`
- * is for; this check makes the case fail the build rather than ship quietly.
- *
- * Runs postbuild against dist/. `--report` lists every lead without failing.
- */
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -34,7 +24,6 @@ if (hrefs.length === 0) {
 }
 
 const LEAD = /border-l-2[^>]*>\s*([\s\S]*?)\s*<\/p>/;
-// a lead that answers a question about the tool instead of about the subject
 const META =
   /^(is|are|does|do|can|will|should)\b[^?]*\b(this|these|our|the)\b[^?]*\b(tool|calculator|site|website|finder|app|guide|page)\b[^?]*\?/i;
 

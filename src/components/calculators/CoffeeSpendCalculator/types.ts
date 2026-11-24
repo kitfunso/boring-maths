@@ -1,7 +1,3 @@
-/**
- * Coffee Spend Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface CoffeeSpendInputs {

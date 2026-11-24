@@ -1,9 +1,3 @@
-/**
- * Buy vs Rent Calculator - React Component
- *
- * Compare the true cost of buying a home vs renting,
- * factoring in all hidden costs and opportunity costs.
- */
 import { calculateBuyVsRent, formatCurrency } from './calculations';
 import { getDefaultInputs, type BuyVsRentInputs, type BuyVsRentResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -35,7 +29,6 @@ export default function BuyVsRent() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -43,7 +36,6 @@ export default function BuyVsRent() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Buy vs Rent Calculator"
           subtitle="Find out which option builds more wealth"
@@ -51,9 +43,7 @@ export default function BuyVsRent() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Two Column Layout */}
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Buying Inputs */}
             <div className="space-y-4">
               <div className="text-sm font-semibold text-emerald-500 uppercase tracking-wider">
                 Buying Costs
@@ -194,7 +184,6 @@ export default function BuyVsRent() {
               />
             </div>
 
-            {/* Renting Inputs */}
             <div className="space-y-4">
               <div className="text-sm font-semibold text-blue-500 uppercase tracking-wider">
                 Renting Costs
@@ -290,9 +279,7 @@ export default function BuyVsRent() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Winner */}
             <ResultCard
               label={
                 result.finalComparison.winner === 'tie'
@@ -319,7 +306,6 @@ export default function BuyVsRent() {
               }
             />
 
-            {/* Side-by-side Net Worth */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div className="bg-emerald-900/20 rounded-xl p-6 border border-emerald-500/30">
                 <div className="text-sm text-emerald-300 uppercase tracking-wider mb-2">
@@ -345,7 +331,6 @@ export default function BuyVsRent() {
               </div>
             </Grid>
 
-            {/* Monthly Cost Comparison */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Monthly Mortgage"
@@ -369,7 +354,6 @@ export default function BuyVsRent() {
               />
             </Grid>
 
-            {/* Milestones */}
             {(result.milestones.year5 || result.milestones.year10 || result.milestones.year15) && (
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -410,7 +394,6 @@ export default function BuyVsRent() {
               </div>
             )}
 
-            {/* Total Cost Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Total Out-of-Pocket Over {inputs.stayDuration} Years
@@ -495,7 +478,6 @@ export default function BuyVsRent() {
               </Grid>
             </div>
 
-            {/* Considerations */}
             {result.recommendation.considerations.length > 0 && (
               <Alert variant="info" title="Things to Consider">
                 <ul className="list-disc list-inside space-y-1">
@@ -506,14 +488,12 @@ export default function BuyVsRent() {
               </Alert>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Remember:">
               This calculator focuses on financial outcomes. Don't forget non-financial factors:
               stability, freedom to modify your home, flexibility to move, maintenance
               responsibilities, and personal preferences.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Buy vs Rent: After ${inputs.stayDuration} years, ${result.finalComparison.winner === 'buy' ? 'buying' : 'renting'} builds ${formatCurrency(Math.abs(result.finalComparison.difference), result.currency)} more wealth. Buy: ${formatCurrency(result.finalComparison.buyingNetWorth, result.currency)} vs Rent: ${formatCurrency(result.finalComparison.rentingNetWorth, result.currency)}`}

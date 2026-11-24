@@ -1,7 +1,3 @@
-/**
- * PetCostCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePetCost } from '../../src/components/calculators/PetCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PetCost/types';

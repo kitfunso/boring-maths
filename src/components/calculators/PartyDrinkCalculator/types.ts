@@ -1,11 +1,7 @@
-/** Party Drink Calculator (Non-Alcoholic) - Type Definitions: estimates non-alcoholic drink quantities for parties, accounting for weather, duration, and kid-friendly options. */
-
 import type { Currency } from '../../../lib/regions';
 
-/** Weather/temperature conditions affecting drink consumption */
 export type WeatherCondition = 'cold' | 'mild' | 'warm' | 'hot';
 
-/** Event type affecting drink preferences */
 export type EventType = 'kids_party' | 'family_gathering' | 'adult_casual' | 'formal';
 
 export interface PartyDrinkInputs {
@@ -13,10 +9,8 @@ export interface PartyDrinkInputs {
 
   guestCount: number;
 
-  /** Number of children (under 12) */
   childrenCount: number;
 
-  /** Event duration in hours */
   eventDuration: number;
 
   weather: WeatherCondition;
@@ -41,7 +35,6 @@ export interface DrinkQuantity {
 
   quantity: number;
 
-  /** Unit (bottles, liters, cans, etc.) */
   unit: string;
 
   servings: number;
@@ -52,7 +45,6 @@ export interface DrinkQuantity {
 export interface IceRequirements {
   poundsNeeded: number;
 
-  /** Bags of ice (10lb bags) */
   bagsNeeded: number;
 
   estimatedCost: number;
@@ -87,7 +79,6 @@ export interface PartyDrinkResult {
   };
 }
 
-/** Drinks per hour by weather condition (base rate per person) */
 export const DRINKS_PER_HOUR: Record<WeatherCondition, number> = {
   cold: 0.5,
   mild: 0.75,
@@ -109,7 +100,6 @@ export const EVENT_TYPE_DESCRIPTIONS: Record<EventType, string> = {
   formal: 'Graduation, wedding - sparkling water and punch',
 };
 
-/** Child drink multiplier (kids drink less but more frequently) */
 export const CHILD_DRINK_MULTIPLIER = 0.7;
 
 export function getDefaultInputs(currency: Currency = 'USD'): PartyDrinkInputs {

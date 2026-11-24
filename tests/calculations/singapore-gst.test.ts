@@ -1,5 +1,3 @@
-/** Singapore GST tests. GST rate 9% from 1 Jan 2024. Expected values hand-computed below each case. */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateDomesticGST,

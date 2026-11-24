@@ -1,7 +1,3 @@
-/**
- * EU Salary Calculator - Calculation Logic
- */
-
 import {
   EU_TAX_DATA,
   type BandCountryTax,
@@ -49,7 +45,6 @@ function bandTax(amount: number, brackets: BandCountryTax['taxBrackets']): numbe
 }
 
 export function calculateIncomeTax(gross: number, country: BandCountryTax): number {
-  // Taxable income after social security (a health levy is not deductible) and allowances
   const social = socialContributions(gross, country);
   const deductible = country.socialSecurityDeductible === false ? 0 : social;
 

@@ -1,14 +1,10 @@
-/**
- * UK Capital Gains Tax Calculator Types
- */
-
 export type AssetType = 'property' | 'other';
 export type TaxBand = 'basic' | 'higher';
 
 export interface UKCGTInputs {
   salePrice: number;
   purchasePrice: number;
-  costs: number; // improvement costs, legal fees etc
+  costs: number;
   assetType: AssetType;
   taxBand: TaxBand;
   annualIncome: number;

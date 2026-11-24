@@ -1,8 +1,3 @@
-/**
- * UK Tax Calculator Types & Constants
- * 2026/27 tax year rates for income tax, NIC, student loans, and pensions
- */
-
 export type TaxRegion = 'england' | 'scotland';
 export type PayFrequency = 'annual' | 'monthly' | 'weekly' | 'daily';
 export type StudentLoanPlan = 'none' | 'plan1' | 'plan2' | 'plan4' | 'plan5' | 'postgraduate';
@@ -13,15 +8,15 @@ export interface UKTaxInputs {
   taxRegion: TaxRegion;
   payFrequency: PayFrequency;
   studentLoanPlan: StudentLoanPlan;
-  pensionRate: number; // percentage 0-40
+  pensionRate: number;
   pensionType: PensionType;
   blindPersonsAllowance: boolean;
-  taxCodeOverride: string; // e.g. '1257L'
+  taxCodeOverride: string;
 }
 
 export interface TaxBandBreakdown {
   band: string;
-  rate: number; // as percentage e.g. 20
+  rate: number;
   from: number;
   to: number;
   taxableAmount: number;
@@ -39,10 +34,9 @@ export interface UKTaxResult {
   pensionContribution: number;
   totalDeductions: number;
   takeHomePay: number;
-  effectiveTaxRate: number; // total deductions / gross as percentage
-  marginalRate: number; // tax rate on your next pound
+  effectiveTaxRate: number;
+  marginalRate: number;
   taxBands: TaxBandBreakdown[];
-  // Frequency breakdowns
   monthly: number;
   weekly: number;
   daily: number;
@@ -61,16 +55,12 @@ export function getDefaultInputs(): UKTaxInputs {
   };
 }
 
-// 2026/27 Personal Allowance
 export const PERSONAL_ALLOWANCE = 12570;
-export const PA_TAPER_THRESHOLD = 100000; // Starts tapering above £100k
-export const PA_TAPER_RATE = 0.5; // £1 lost per £2 over threshold
-export const PA_FULLY_LOST = 125140; // Fully lost at this income
-
-// Blind Person's Allowance (2026/27)
+export const PA_TAPER_THRESHOLD = 100000;
+export const PA_TAPER_RATE = 0.5;
+export const PA_FULLY_LOST = 125140;
 export const BLIND_PERSONS_ALLOWANCE = 3250;
 
-// 2026/27 England/NI/Wales Income Tax Bands
 export const ENGLAND_TAX_BANDS = [
   { name: 'Personal Allowance', rate: 0, from: 1, to: 12570 },
   { name: 'Basic Rate', rate: 0.2, from: 12571, to: 50270 },
@@ -78,7 +68,6 @@ export const ENGLAND_TAX_BANDS = [
   { name: 'Additional Rate', rate: 0.45, from: 125141, to: Infinity },
 ];
 
-// 2026/27 Scotland Income Tax Bands
 export const SCOTLAND_TAX_BANDS = [
   { name: 'Personal Allowance', rate: 0, from: 1, to: 12570 },
   { name: 'Starter Rate', rate: 0.19, from: 12571, to: 16537 },
@@ -89,7 +78,6 @@ export const SCOTLAND_TAX_BANDS = [
   { name: 'Top Rate', rate: 0.48, from: 125141, to: Infinity },
 ];
 
-// 2026/27 Employee National Insurance
 export const EMPLOYEE_NIC = {
   primaryThreshold: 12570,
   upperEarningsLimit: 50270,
@@ -97,7 +85,6 @@ export const EMPLOYEE_NIC = {
   upperRate: 0.02, // 2% above UEL
 };
 
-// 2026/27 Student Loan Thresholds
 export const STUDENT_LOAN_THRESHOLDS = {
   plan1: { threshold: 26900, rate: 0.09 },
   plan2: { threshold: 29385, rate: 0.09 },
@@ -106,7 +93,6 @@ export const STUDENT_LOAN_THRESHOLDS = {
   postgraduate: { threshold: 21000, rate: 0.06 },
 };
 
-// Pay frequency divisors
 export const PAY_DIVISORS = {
   annual: 1,
   monthly: 12,

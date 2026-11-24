@@ -1,10 +1,3 @@
-/**
- * UK £100k Tax Trap Calculator - React Component
- *
- * Helps UK earners understand the 60% tax trap and calculate optimal
- * pension contributions to restore their Personal Allowance.
- */
-
 import { useEffect } from 'preact/hooks';
 import { calculateUK100kTax, formatCurrency, formatPercent } from './calculations';
 import {
@@ -38,7 +31,6 @@ export default function UK100kTaxTrapCalculator() {
     compute: calculateUK100kTax,
   });
 
-  // Load inputs from URL parameters on mount (for shared links)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
@@ -54,12 +46,10 @@ export default function UK100kTaxTrapCalculator() {
 
     if (Object.keys(urlInputs).length > 0) {
       setInputs((prev) => ({ ...prev, ...urlInputs }));
-      // Clean URL without reload
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, []);
 
-  // Color coding for results
   const getTrapStatusColor = () => {
     if (result.isInTaxTrap) return 'text-red-400';
     if (result.personalAllowanceLost > 0) return 'text-amber-400';
@@ -82,7 +72,6 @@ export default function UK100kTaxTrapCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Gross Salary */}
             <div>
               <Label htmlFor="grossSalary" required>
                 Annual Gross Salary
@@ -101,7 +90,6 @@ export default function UK100kTaxTrapCalculator() {
               </p>
             </div>
 
-            {/* Bonus Income */}
             <div>
               <Label htmlFor="bonusIncome">Bonus / Other Income</Label>
               <Input
@@ -118,7 +106,6 @@ export default function UK100kTaxTrapCalculator() {
               </p>
             </div>
 
-            {/* Tax Region */}
             <div>
               <Label required>Tax Region</Label>
               <div className="flex gap-2">
@@ -139,7 +126,6 @@ export default function UK100kTaxTrapCalculator() {
               </div>
             </div>
 
-            {/* Student Loan */}
             <div>
               <Label htmlFor="studentLoan">Student Loan Plan</Label>
               <select
@@ -158,7 +144,6 @@ export default function UK100kTaxTrapCalculator() {
               </select>
             </div>
 
-            {/* Current Pension */}
             <div>
               <Label htmlFor="currentPension">Current Pension Contribution (%)</Label>
               <Input
@@ -180,9 +165,7 @@ export default function UK100kTaxTrapCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Tax Trap Status */}
             <div
               className={`rounded-2xl p-6 text-center border-2 ${
                 result.isInTaxTrap
@@ -209,7 +192,6 @@ export default function UK100kTaxTrapCalculator() {
               )}
             </div>
 
-            {/* Current Position */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Your Current Tax Position
@@ -286,7 +268,6 @@ export default function UK100kTaxTrapCalculator() {
               </div>
             </div>
 
-            {/* Optimization Recommendation */}
             {result.optimalPensionContribution > result.currentPensionContribution && (
               <div className="bg-emerald-950/30 rounded-xl p-6 border border-emerald-500/30">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
@@ -340,7 +321,6 @@ export default function UK100kTaxTrapCalculator() {
               </div>
             )}
 
-            {/* Comparison Table */}
             {result.optimalPensionContribution > result.currentPensionContribution && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10 overflow-x-auto">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -384,7 +364,6 @@ export default function UK100kTaxTrapCalculator() {
               </div>
             )}
 
-            {/* Tax Band Breakdown */}
             {result.taxBreakdown.length > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -414,7 +393,6 @@ export default function UK100kTaxTrapCalculator() {
               </div>
             )}
 
-            {/* Info Alert */}
             <Alert variant="info" title="Understanding the £100k Tax Trap">
               When your income exceeds £100,000, you lose £1 of Personal Allowance for every £2
               earned above this threshold. This creates an effective marginal tax rate of up to 62%
@@ -423,7 +401,6 @@ export default function UK100kTaxTrapCalculator() {
               your Personal Allowance.
             </Alert>
 
-            {/* Share & Print */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`UK Tax: ${formatCurrency(result.incomeTax + result.nationalInsurance)} on ${formatCurrency(result.totalIncome)} income | Take-home: ${formatCurrency(result.takeHomePay)} | ${result.isInTaxTrap ? 'In 60% tax trap - could save ' + formatCurrency(result.annualTaxSaved) + ' with pension optimization' : 'Below tax trap threshold'}`}

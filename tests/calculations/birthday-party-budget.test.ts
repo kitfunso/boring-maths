@@ -1,7 +1,3 @@
-/**
- * BirthdayPartyBudgetCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBirthdayPartyBudget } from '../../src/components/calculators/BirthdayPartyBudget/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BirthdayPartyBudget/types';

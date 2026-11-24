@@ -1,7 +1,3 @@
-/**
- * EI Dosing Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateEIDosing } from '../../src/components/calculators/EIDosingCalculator/calculations';
 import type { EIDosingInputs } from '../../src/components/calculators/EIDosingCalculator/types';

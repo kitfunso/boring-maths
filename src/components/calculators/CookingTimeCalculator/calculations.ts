@@ -1,7 +1,3 @@
-/**
- * Cooking Time Calculator - Calculation Logic
- */
-
 import type { CookingTimeInputs, CookingTimeResult } from './types';
 import { COOKING_DATA, DONENESS_MEATS, DONENESS_INTERNAL_TEMPS } from './types';
 
@@ -11,24 +7,18 @@ function fToC(f: number): number {
   return Math.round(((f - 32) * 5) / 9);
 }
 
-/**
- * Calculate cooking time and temperatures from inputs.
- */
 export function calculateCookingTime(inputs: CookingTimeInputs): CookingTimeResult {
   const { meatType, weight, weightUnit, cookingMethod, doneness } = inputs;
 
-  // Convert to pounds for calculation
   const weightLbs = weightUnit === 'kg' ? weight * LBS_PER_KG : weight;
 
   const data = COOKING_DATA[meatType][cookingMethod];
 
-  // Determine internal temperature
   let internalTempF = data.internalTempF;
   if (DONENESS_MEATS.includes(meatType)) {
     internalTempF = DONENESS_INTERNAL_TEMPS[doneness];
   }
 
-  // Adjust minutes per pound based on doneness for beef/lamb
   let minutesPerPound = data.minutesPerPound;
   if (DONENESS_MEATS.includes(meatType)) {
     const donenessMultiplier: Record<string, number> = {
@@ -47,7 +37,6 @@ export function calculateCookingTime(inputs: CookingTimeInputs): CookingTimeResu
   const ovenTempF = data.ovenTempF;
   const ovenTempC = ovenTempF > 0 ? fToC(ovenTempF) : 0;
 
-  // Build method-specific notes
   const notes: string[] = [...data.notes];
 
   if (cookingMethod === 'slow-cooker') {
@@ -78,9 +67,6 @@ export function calculateCookingTime(inputs: CookingTimeInputs): CookingTimeResu
   };
 }
 
-/**
- * Format total minutes as a human-readable time string.
- */
 export function formatTime(totalMinutes: number): string {
   if (totalMinutes < 60) {
     return `${totalMinutes} min`;

@@ -1,14 +1,7 @@
-/**
- * Discount Calculator - Calculation Logic
- */
-
 import type { DiscountInputs, DiscountResult } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate discount based on mode
- */
 export function calculateDiscount(inputs: DiscountInputs): DiscountResult {
   const { mode, originalPrice, discountPercent, finalPrice, savedAmount } = inputs;
 
@@ -16,8 +9,6 @@ export function calculateDiscount(inputs: DiscountInputs): DiscountResult {
 
   switch (mode) {
     case 'percentOff': {
-      // Given: original price and discount %
-      // Find: final price and savings
       const discount = (originalPrice * discountPercent) / 100;
       const final = originalPrice - discount;
       result = {
@@ -30,8 +21,6 @@ export function calculateDiscount(inputs: DiscountInputs): DiscountResult {
     }
 
     case 'finalPrice': {
-      // Given: original price and final price
-      // Find: discount % and savings
       const discount = originalPrice - finalPrice;
       const percent = originalPrice > 0 ? (discount / originalPrice) * 100 : 0;
       result = {
@@ -44,8 +33,6 @@ export function calculateDiscount(inputs: DiscountInputs): DiscountResult {
     }
 
     case 'savedAmount': {
-      // Given: original price and amount saved
-      // Find: discount % and final price
       const percent = originalPrice > 0 ? (savedAmount / originalPrice) * 100 : 0;
       const final = originalPrice - savedAmount;
       result = {
@@ -69,9 +56,6 @@ export function calculateDiscount(inputs: DiscountInputs): DiscountResult {
   return result;
 }
 
-/**
- * Calculate multiple discount scenarios for comparison
- */
 export function calculateDiscountScenarios(
   originalPrice: number,
   discounts: number[]

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Try different auth methods for posting."""
 import sys, os, json, base64
 sys.stdout.reconfigure(encoding='utf-8')
 import tweepy, urllib.request, urllib.error
@@ -14,7 +13,6 @@ TSECRET = os.getenv('X_ACCESS_SECRET')
 print(f"API Key: {KEY[:10]}...")
 print(f"Access Token: {TOKEN[:20]}...")
 
-# Method 1: v2 with user auth (OAuth1.0a)
 print("\n--- Method 1: v2 OAuth1.0a ---")
 client = tweepy.Client(
     consumer_key=KEY,
@@ -24,7 +22,6 @@ client = tweepy.Client(
     wait_on_rate_limit=False
 )
 try:
-    # Try a minimal tweet
     resp = client.create_tweet(text="Test from boring-math automation")
     print(f"SUCCESS: {resp.data['id']}")
 except tweepy.errors.PaymentRequired as e:
@@ -36,7 +33,6 @@ except tweepy.errors.Forbidden as e:
 except Exception as e:
     print(f"Error: {type(e).__name__}: {e}")
 
-# Method 2: v1.1 statuses/update
 print("\n--- Method 2: v1.1 update_status ---")
 auth = tweepy.OAuth1UserHandler(KEY, SECRET, TOKEN, TSECRET)
 api = tweepy.API(auth)
@@ -48,7 +44,6 @@ except tweepy.errors.Forbidden as e:
 except Exception as e:
     print(f"v1.1 Error: {type(e).__name__}: {e}")
 
-# Method 3: Direct API call
 print("\n--- Method 3: Direct API call ---")
 import requests
 from requests_oauthlib import OAuth1

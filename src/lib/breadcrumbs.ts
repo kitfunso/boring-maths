@@ -2,11 +2,9 @@ const SITE_URL = 'https://boring-math.com';
 
 export interface Crumb {
   readonly name: string;
-  /** Site-relative path in the served trailing-slash form. */
   readonly path: string;
 }
 
-/** BreadcrumbList JSON-LD. Every trail starts at Home, so this prepends it. */
 export function breadcrumbSchema(trail: readonly Crumb[]) {
   return {
     '@context': 'https://schema.org',

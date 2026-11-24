@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Try different auth methods for posting."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 import tweepy
@@ -11,7 +10,6 @@ SECRET = os.getenv('X_API_SECRET')
 TOKEN = os.getenv('X_ACCESS_TOKEN')
 TSECRET = os.getenv('X_ACCESS_SECRET')
 
-# Method 1: v2 with user auth (OAuth1.0a)
 print("Method 1: v2 OAuth1.0a create_tweet")
 client = tweepy.Client(
     consumer_key=KEY,
@@ -28,7 +26,6 @@ except tweepy.errors.HTTPException as e:
 except Exception as e:
     print(f"Error {type(e).__name__}: {e}")
 
-# Method 2: Direct requests call
 print("\nMethod 2: Direct requests with OAuth1")
 try:
     import requests
@@ -44,7 +41,6 @@ try:
 except Exception as e:
     print(f"Error: {e}")
 
-# Method 3: Check what X app tier we have
 print("\nMethod 3: App tier check")
 try:
     import urllib.request, json, base64

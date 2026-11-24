@@ -1,7 +1,3 @@
-/**
- * SideHustleCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSideHustle } from '../../src/components/calculators/SideHustle/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SideHustle/types';

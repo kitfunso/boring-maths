@@ -1,9 +1,3 @@
-/**
- * 401k Calculator Calculations
- *
- * Projects retirement savings with employer matching and compound growth.
- */
-
 import type { Calculator401kInputs, Calculator401kResult, YearlyData } from './types';
 
 export function calculate401k(inputs: Calculator401kInputs): Calculator401kResult {
@@ -32,22 +26,18 @@ export function calculate401k(inputs: Calculator401kInputs): Calculator401kResul
   for (let year = 0; year < yearsToRetirement; year++) {
     const age = currentAge + year + 1;
 
-    // Calculate annual contributions
     const yourAnnualContribution = currentSalary * (contributionPercent / 100);
 
-    // Employer matches up to the limit
     const matchablePercent = Math.min(contributionPercent, employerMatchLimit);
     const employerAnnualContribution =
       currentSalary * (matchablePercent / 100) * (employerMatchPercent / 100);
 
-    // Apply 401k annual limit (2026: $24,500, catch-up $8,000 for 50+)
     const annualLimit = age >= 50 ? 32500 : 24500;
     const cappedYourContribution = Math.min(yourAnnualContribution, annualLimit);
 
     totalYourContributions += cappedYourContribution;
     totalEmployerContributions += employerAnnualContribution;
 
-    // Monthly compounding
     const monthlyContribution = (cappedYourContribution + employerAnnualContribution) / 12;
 
     for (let month = 0; month < 12; month++) {
@@ -62,14 +52,12 @@ export function calculate401k(inputs: Calculator401kInputs): Calculator401kResul
       yearEndBalance: Math.round(balance),
     });
 
-    // Apply salary growth for next year
     currentSalary *= 1 + salaryGrowth / 100;
   }
 
   const investmentGrowth =
     balance - currentBalance - totalYourContributions - totalEmployerContributions;
 
-  // 4% safe withdrawal rate
   const monthlyIncomeAt4Percent = (balance * 0.04) / 12;
 
   return {

@@ -1,8 +1,3 @@
-/**
- * Batch Cost Calculator Types
- * Calculate material costs, labor, and pricing for crafts
- */
-
 export interface MaterialItem {
   id: string;
   name: string;
@@ -42,7 +37,6 @@ export interface BatchCostResults {
   costBreakdown: { category: string; amount: number; percent: number }[];
 }
 
-// Common material presets by craft type
 export const MATERIAL_PRESETS: Record<string, MaterialItem[]> = {
   soap: [
     { id: '1', name: 'Olive Oil', quantity: 16, unit: 'oz', costPerUnit: 0.35 },
@@ -71,7 +65,6 @@ export const MATERIAL_PRESETS: Record<string, MaterialItem[]> = {
   ],
 };
 
-// Default units produced by craft type
 export const DEFAULT_UNITS: Record<string, number> = {
   soap: 10, // bars per batch
   candle: 6, // candles per batch
@@ -79,7 +72,6 @@ export const DEFAULT_UNITS: Record<string, number> = {
   custom: 10,
 };
 
-// Craft type labels
 export const CRAFT_TYPES = [
   { value: 'soap', label: 'Soap Making' },
   { value: 'candle', label: 'Candle Making' },
@@ -87,10 +79,8 @@ export const CRAFT_TYPES = [
   { value: 'custom', label: 'Custom/Other' },
 ];
 
-// Common units for materials
 export const MATERIAL_UNITS = ['oz', 'lb', 'g', 'kg', 'ml', 'L', 'tsp', 'tbsp', 'cup', 'ea'];
 
-// Profit margin presets
 export const MARGIN_PRESETS = [
   { label: 'Low (30%)', value: 30 },
   { label: 'Standard (50%)', value: 50 },
@@ -98,7 +88,6 @@ export const MARGIN_PRESETS = [
   { label: 'Luxury (100%)', value: 100 },
 ];
 
-// Overhead presets
 export const OVERHEAD_PRESETS = [
   { label: 'Home Studio (10%)', value: 10 },
   { label: 'Small Shop (20%)', value: 20 },

@@ -1,7 +1,3 @@
-/**
- * Recipe Scaler Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateRecipeScaler,
@@ -75,7 +71,6 @@ describe('RecipeScalerCalculator', () => {
 
       const result = calculateRecipeScaler(inputs);
 
-      // Should default to scaleFactor 1 instead of Infinity
       expect(result.scaleFactor).toBe(1);
       expect(result.scaledIngredients[0].scaledAmount).toBe(2);
     });
@@ -155,7 +150,6 @@ describe('RecipeScalerCalculator', () => {
 
     it('formats cups with fraction characters in baking mode', () => {
       const half = formatAmount(0.5, 'cups', true);
-      // Should contain the unicode half fraction
       expect(half).toContain('\u00BD');
 
       const quarter = formatAmount(0.25, 'cups', true);
@@ -239,7 +233,6 @@ describe('RecipeScalerCalculator', () => {
 
       const result = calculateRecipeScaler(inputs);
 
-      // 2 * 1.5 = 3, should be exactly 3
       expect(result.scaledIngredients[0].scaledAmount).toBe(3);
       expect(Number.isInteger(result.scaledIngredients[0].scaledAmount)).toBe(true);
     });
@@ -254,7 +247,6 @@ describe('RecipeScalerCalculator', () => {
 
       const result = calculateRecipeScaler(inputs);
 
-      // 3 * (4/12) = 1, rounds to 1
       expect(result.scaledIngredients[0].scaledAmount).toBe(1);
     });
   });

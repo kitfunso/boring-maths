@@ -1,7 +1,3 @@
-/**
- * SaaS Metrics Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type { SaaSMetricsInputs, SaaSMetricsResult, HealthScore, GrowthProjection } from './types';
 import { BENCHMARKS } from './types';
@@ -10,55 +6,41 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
   const { currency, customers, arpu, churnRate, growthRate, cac, grossMargin, monthlyOpex } =
     inputs;
 
-  // Core metrics
   const mrr = customers * arpu;
   const arr = mrr * 12;
 
-  // LTV = ARPU * Gross Margin / Churn Rate (monthly)
   const monthlyChurnDecimal = churnRate / 100;
   const avgCustomerLifetimeMonths = monthlyChurnDecimal > 0 ? 1 / monthlyChurnDecimal : 120;
   const ltv = arpu * (grossMargin / 100) * avgCustomerLifetimeMonths;
 
-  // LTV:CAC Ratio
   const ltvCacRatio = cac > 0 ? ltv / cac : 0;
 
-  // CAC Payback (months)
   const monthlyGrossProfit = arpu * (grossMargin / 100);
   const cacPaybackMonths = monthlyGrossProfit > 0 ? cac / monthlyGrossProfit : 999;
 
-  // Net Revenue Retention (simplified - assumes no expansion revenue)
-  // NRR = (1 - churn) * 100
   const netRevenueRetention = (1 - monthlyChurnDecimal) * 100;
 
-  // Quick Ratio = New MRR / Churned MRR
   const newMrr = mrr * (growthRate / 100);
   const churnedMrr = mrr * monthlyChurnDecimal;
   const quickRatio = churnedMrr > 0 ? newMrr / churnedMrr : growthRate > 0 ? 10 : 0;
 
-  // Burn Rate and Runway
   const grossProfit = mrr * (grossMargin / 100);
   const netIncome = grossProfit - monthlyOpex;
   const burnRate = netIncome < 0 ? Math.abs(netIncome) : 0;
 
-  // Assume 6 months cash on hand for runway calculation
   const cashOnHand = monthlyOpex * 6;
   const runwayMonths = burnRate > 0 ? Math.round(cashOnHand / burnRate) : 999;
 
-  // Magic Number = Net New ARR / Sales & Marketing Spend
-  // Simplified: (growthRate% of MRR * 12) / (customers * cac / 12)
   const newArrAdded = newMrr * 12;
   const quarterSalesSpend = customers * (growthRate / 100) * cac;
   const magicNumber = quarterSalesSpend > 0 ? newArrAdded / (quarterSalesSpend * 4) : 0;
 
-  // Rule of 40 = Growth Rate + Profit Margin
   const profitMargin = mrr > 0 ? (netIncome / mrr) * 100 : 0;
-  const annualGrowthRate = growthRate * 12; // Simplified annual growth
+  const annualGrowthRate = growthRate * 12;
   const ruleOf40 = annualGrowthRate + profitMargin;
 
-  // Health Scores
   const healthScores: HealthScore[] = [];
 
-  // LTV:CAC Score
   healthScores.push({
     metric: 'LTV:CAC Ratio',
     value: `${ltvCacRatio.toFixed(1)}x`,
@@ -72,7 +54,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'Acquisition costs too high relative to customer value',
   });
 
-  // CAC Payback Score
   healthScores.push({
     metric: 'CAC Payback',
     value: `${Math.round(cacPaybackMonths)} months`,
@@ -86,7 +67,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'Consider reducing CAC or increasing ARPU',
   });
 
-  // Churn Score
   healthScores.push({
     metric: 'Monthly Churn',
     value: `${churnRate}%`,
@@ -100,7 +80,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'High churn - focus on customer success',
   });
 
-  // Gross Margin Score
   healthScores.push({
     metric: 'Gross Margin',
     value: `${grossMargin}%`,
@@ -114,7 +93,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'Margins below typical SaaS - review costs',
   });
 
-  // Quick Ratio Score
   healthScores.push({
     metric: 'Quick Ratio',
     value: `${quickRatio.toFixed(1)}`,
@@ -128,7 +106,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'Growth not outpacing churn enough',
   });
 
-  // Rule of 40 Score
   healthScores.push({
     metric: 'Rule of 40',
     value: `${Math.round(ruleOf40)}%`,
@@ -142,13 +119,11 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
           : 'Below healthy SaaS metrics',
   });
 
-  // Calculate projections
   const projections: GrowthProjection[] = [];
   let projCustomers = customers;
   let cumulativeRevenue = 0;
 
   for (let month = 1; month <= 12; month++) {
-    // Apply growth and churn
     const newCustomers = Math.floor(projCustomers * (growthRate / 100));
     const churnedCustomers = Math.floor(projCustomers * monthlyChurnDecimal);
     projCustomers = projCustomers + newCustomers - churnedCustomers;
@@ -165,7 +140,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
     });
   }
 
-  // Overall health rating
   const scores = healthScores.map((h) => h.score);
   const excellentCount = scores.filter((s) => s === 'excellent').length;
   const warningCount = scores.filter((s) => s === 'warning').length;
@@ -182,7 +156,6 @@ export function calculateSaaSMetrics(inputs: SaaSMetricsInputs): SaaSMetricsResu
     overallHealth = 'good';
   }
 
-  // Generate insights
   const insights: string[] = [];
 
   if (ltvCacRatio < 3) {

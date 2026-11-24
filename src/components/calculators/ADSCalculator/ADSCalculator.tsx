@@ -1,9 +1,3 @@
-/**
- * ADS Calculator - React Component
- *
- * Calculate Additional Dwelling Supplement (ADS) for Scotland
- * ADS is 8% on top of LBTT for additional properties.
- */
 import { calculateADS, formatCurrency, formatPercent } from './calculations';
 import {
   getDefaultInputs,
@@ -25,7 +19,6 @@ export default function ADSCalculator() {
     compute: calculateADS,
   });
 
-  // Sync isAdditionalProperty with buyerType
   const handleBuyerTypeChange = (type: BuyerType) => {
     updateInput('buyerType', type);
     if (type === 'additional') {
@@ -44,9 +37,7 @@ export default function ADSCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Property Price */}
             <div>
               <Label htmlFor="propertyPrice" required>
                 Property Price
@@ -67,7 +58,6 @@ export default function ADSCalculator() {
               </div>
             </div>
 
-            {/* Buyer Type */}
             <div>
               <Label required>Buyer Type</Label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -88,7 +78,6 @@ export default function ADSCalculator() {
               </div>
             </div>
 
-            {/* Additional Property Toggle */}
             {inputs.buyerType !== 'additional' && (
               <Toggle
                 checked={inputs.isAdditionalProperty}
@@ -98,9 +87,7 @@ export default function ADSCalculator() {
             )}
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Main Result */}
             <div
               className={`rounded-2xl p-6 border-2 ${
                 result.totalTax === 0
@@ -123,7 +110,6 @@ export default function ADSCalculator() {
               </div>
             </div>
 
-            {/* Tax Breakdown */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                 <p className="text-xs text-[var(--color-muted)] mb-1">LBTT Amount</p>
@@ -151,7 +137,6 @@ export default function ADSCalculator() {
               </div>
             </Grid>
 
-            {/* ADS Warning */}
             {adsApplies && (
               <div className="bg-purple-950/30 rounded-xl p-4 border border-purple-500/30">
                 <div className="flex items-start gap-3">
@@ -181,7 +166,6 @@ export default function ADSCalculator() {
               </div>
             )}
 
-            {/* First-time Buyer Saving */}
             {result.firstTimeBuyerSaving > 0 && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-center gap-2">
@@ -205,7 +189,6 @@ export default function ADSCalculator() {
               </div>
             )}
 
-            {/* LBTT Band Breakdown */}
             <div>
               <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">
                 LBTT Band Breakdown
@@ -287,7 +270,6 @@ export default function ADSCalculator() {
               </div>
             </div>
 
-            {/* Quick Reference */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
                 Quick Reference

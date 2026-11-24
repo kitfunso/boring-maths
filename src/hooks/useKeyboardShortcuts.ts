@@ -1,23 +1,8 @@
-/**
- * useKeyboardShortcuts Hook
- *
- * Pure logic hook for keyboard shortcut registration and handling.
- * No DOM manipulation -- UI rendering is handled by KeyboardShortcutOverlay.
- *
- * Shortcuts:
- * - Ctrl/Cmd + C: Copy results to clipboard (when no text selected)
- * - Ctrl/Cmd + R: Reset calculator (prevented default refresh)
- * - ?: Show keyboard shortcuts help
- */
-
 import { useState, useEffect, useCallback, useRef } from 'preact/hooks';
 
 interface KeyboardShortcutsOptions {
-  /** Function to get the result text to copy */
   onCopy?: () => string | null;
-  /** Function to reset the calculator */
   onReset?: () => void;
-  /** Calculator name for the help tooltip */
   calculatorName?: string;
 }
 
@@ -27,22 +12,13 @@ interface ToastState {
 }
 
 interface KeyboardShortcutsState {
-  /** Whether the help overlay is currently visible */
   readonly isHelpOpen: boolean;
-  /** Current toast notification, or null if none */
   readonly toast: ToastState | null;
-  /** Calculator name passed through for the overlay */
   readonly calculatorName: string;
-  /** Dismiss the help overlay */
   readonly dismissHelp: () => void;
-  /** Dismiss the toast notification */
   readonly dismissToast: () => void;
 }
 
-/**
- * Register keyboard shortcuts for a calculator.
- * Returns state for the UI layer to render overlay and toast components.
- */
 export function useKeyboardShortcuts({
   onCopy,
   onReset,
@@ -73,14 +49,12 @@ export function useKeyboardShortcuts({
   const showHelp = useCallback(() => {
     setIsHelpOpen((prev) => {
       if (prev) {
-        // Closing: clear any pending auto-dismiss
         if (helpTimerRef.current !== null) {
           clearTimeout(helpTimerRef.current);
           helpTimerRef.current = null;
         }
         return false;
       }
-      // Opening: auto-dismiss after 8s
       helpTimerRef.current = setTimeout(() => {
         setIsHelpOpen(false);
         helpTimerRef.current = null;
@@ -90,7 +64,6 @@ export function useKeyboardShortcuts({
   }, []);
 
   const showToast = useCallback((message: string, color: 'green' | 'blue') => {
-    // Clear any existing toast timer
     if (toastTimerRef.current !== null) {
       clearTimeout(toastTimerRef.current);
     }
@@ -122,7 +95,6 @@ export function useKeyboardShortcuts({
     showToast('Calculator reset!', 'blue');
   }, [onReset, showToast]);
 
-  // Register keydown listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
@@ -158,7 +130,6 @@ export function useKeyboardShortcuts({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [showHelp, copyToClipboard, resetCalculator, onReset]);
 
-  // Cleanup timers on unmount
   useEffect(() => {
     return () => {
       if (helpTimerRef.current !== null) clearTimeout(helpTimerRef.current);

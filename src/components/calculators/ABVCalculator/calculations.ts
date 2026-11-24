@@ -1,45 +1,31 @@
-/**
- * ABV Calculator - Calculation Logic
- */
-
 import type { ABVInputs, ABVResult } from './types';
 
 export function calculateABV(inputs: ABVInputs): ABVResult {
   const { temperatureCorrection, measurementTemp, calibrationTemp } = inputs;
   let { originalGravity, finalGravity } = inputs;
 
-  // Temperature correction if enabled
   if (temperatureCorrection) {
     originalGravity = correctGravity(originalGravity, measurementTemp, calibrationTemp);
     finalGravity = correctGravity(finalGravity, measurementTemp, calibrationTemp);
   }
 
-  // Standard ABV formula: (OG - FG) × 131.25
   const abv = (originalGravity - finalGravity) * 131.25;
 
-  // ABW (Alcohol by Weight) = ABV × 0.79336
   const abw = abv * 0.79336;
 
-  // Convert to Plato
   const originalPlato = sgToPlato(originalGravity);
   const finalPlato = sgToPlato(finalGravity);
 
-  // Apparent Attenuation = (OG - FG) / (OG - 1) × 100
   const apparentAttenuation = ((originalGravity - finalGravity) / (originalGravity - 1)) * 100;
 
-  // Real Attenuation (accounts for alcohol being lighter than water)
-  // RE = 0.1808 × OE + 0.8192 × AE (where OE = original extract, AE = apparent extract)
   const realExtract = 0.1808 * originalPlato + 0.8192 * finalPlato;
   const realAttenuation = ((originalPlato - realExtract) / originalPlato) * 100;
 
-  // Residual sugar (approximate g/L from final gravity)
   const residualSugar = Math.max(0, (finalGravity - 1) * 1000);
 
-  // Calories per 12oz serving (approximate)
-  // Formula: calories = (6.9 × ABW + 4 × (RE - 0.1)) × FG × 3.55
   const caloriesPerOz = (6.9 * abw + 4 * (realExtract - 0.1)) * finalGravity;
   const caloriesPerServing = Math.round(caloriesPerOz * 12);
-  const calories = Math.round(caloriesPerOz * 100) / 100; // per oz
+  const calories = Math.round(caloriesPerOz * 100) / 100;
 
   return {
     abv: Math.round(abv * 100) / 100,
@@ -54,9 +40,7 @@ export function calculateABV(inputs: ABVInputs): ABVResult {
   };
 }
 
-// Temperature correction for hydrometer readings
 function correctGravity(sg: number, measuredTemp: number, calibrationTemp: number): number {
-  // Formula for temperature correction
   const correction =
     0.00130346 -
     0.000134722124 * measuredTemp +
@@ -72,9 +56,7 @@ function correctGravity(sg: number, measuredTemp: number, calibrationTemp: numbe
   return sg + (correction - calibrationCorrection);
 }
 
-// Convert Specific Gravity to Plato
 function sgToPlato(sg: number): number {
-  // More accurate conversion formula
   return -1 * 616.868 + 1111.14 * sg - 630.272 * Math.pow(sg, 2) + 135.997 * Math.pow(sg, 3);
 }
 

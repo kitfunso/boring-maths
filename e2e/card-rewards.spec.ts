@@ -2,19 +2,15 @@ import { test, expect, type Page } from '@playwright/test';
 import { collectOverflow } from './helpers/overflow';
 import { CARDS } from '../src/components/calculators/CardPerksCalculator/data/cards';
 
-/** Must not depend on any card name/id except the anchors fixed at wave-1: amex-platinum, barclaycard-avios-plus, chase-debit. */
-
 const PAGE = '/calculators/card-rewards-calculator/';
 const TABLE_NAME = 'Cards ranked by estimated net value';
 const SHORTLIST_NAME = 'Top ranked cards for your spend';
 
-// The island stamps the attribute on mount, so its presence doubles as the hydration signal.
 const waitForIsland = (page: Page) =>
   expect(page.locator('html')).toHaveAttribute('data-card-perks-ready', 'true', {
     timeout: 15_000,
   });
 
-// The page opens at the shortlist, so every deeper layer needs a click first.
 const openNumbers = async (page: Page) => {
   await waitForIsland(page);
   await page.locator('summary', { hasText: 'Edit your numbers' }).click();

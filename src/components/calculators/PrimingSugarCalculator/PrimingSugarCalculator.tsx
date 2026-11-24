@@ -1,7 +1,3 @@
-/**
- * Priming Sugar Calculator Component
- * Calculate carbonation sugar for bottle conditioning
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { PrimingSugarInputs } from './types';
@@ -29,7 +25,6 @@ export function PrimingSugarCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Size</h2>
@@ -204,7 +199,6 @@ export function PrimingSugarCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 p-6 ring-1 ring-amber-500/30">
           <h2 className="mb-4 text-lg font-semibold text-amber-300">Priming Sugar</h2>

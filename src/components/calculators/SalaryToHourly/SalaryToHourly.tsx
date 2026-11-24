@@ -1,9 +1,3 @@
-/**
- * Salary to Hourly Calculator - React Component
- *
- * Convert annual salary to true hourly rate, factoring in
- * actual hours worked, benefits, and PTO.
- */
 import { calculateSalaryToHourly, formatCurrency } from './calculations';
 import { getDefaultInputs, type SalaryToHourlyInputs, type SalaryToHourlyResult } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -35,12 +29,10 @@ export default function SalaryToHourly() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Calculate overtime indicator
   const isWorkingOvertime = inputs.hoursPerWeek > 40;
   const overtimePercentage = isWorkingOvertime
     ? Math.round(((inputs.hoursPerWeek - 40) / 40) * 100)
@@ -49,7 +41,6 @@ export default function SalaryToHourly() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Salary to Hourly Calculator"
           subtitle="Find your true hourly rate based on actual hours worked"
@@ -57,9 +48,7 @@ export default function SalaryToHourly() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Annual Salary */}
             <div>
               <Label htmlFor="annualSalary" required>
                 Annual Salary
@@ -75,7 +64,6 @@ export default function SalaryToHourly() {
               />
             </div>
 
-            {/* Hours per Week */}
             <div>
               <Slider
                 label="Actual Hours Worked Per Week"
@@ -99,7 +87,6 @@ export default function SalaryToHourly() {
               )}
             </div>
 
-            {/* PTO and Holidays */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="ptoDays">PTO Days per Year</Label>
@@ -125,7 +112,6 @@ export default function SalaryToHourly() {
               </div>
             </Grid>
 
-            {/* Benefits Value */}
             <div>
               <Label htmlFor="benefitsValue">Annual Benefits Value</Label>
               <Input
@@ -149,7 +135,6 @@ export default function SalaryToHourly() {
               label="Include benefits in total compensation"
             />
 
-            {/* Unpaid Time Off */}
             <div>
               <Label htmlFor="unpaidTimeOff">Unpaid Time Off (weeks)</Label>
               <Input
@@ -168,9 +153,7 @@ export default function SalaryToHourly() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Your True Hourly Rate"
               value={`${formatCurrency(result.actualHourlyRate, result.currency, 2)}/hr`}
@@ -194,7 +177,6 @@ export default function SalaryToHourly() {
               }
             />
 
-            {/* Rate Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Daily Rate"
@@ -218,7 +200,6 @@ export default function SalaryToHourly() {
               />
             </Grid>
 
-            {/* Total Comp with Benefits */}
             {inputs.includeBenefits && inputs.benefitsValue > 0 && (
               <div className="bg-green-900/20 rounded-xl p-6 border border-green-500/30">
                 <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-4">
@@ -247,7 +228,6 @@ export default function SalaryToHourly() {
               </div>
             )}
 
-            {/* Hours Comparison */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Hourly Rate by Hours Worked
@@ -288,7 +268,6 @@ export default function SalaryToHourly() {
               </p>
             </div>
 
-            {/* Overtime Value */}
             {result.extraHoursPerYear > 0 && (
               <div className="bg-amber-900/20 rounded-xl p-6 border border-amber-500/30">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
@@ -317,7 +296,6 @@ export default function SalaryToHourly() {
               </div>
             )}
 
-            {/* PTO Value */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <MetricCard
                 label="PTO Day Value"
@@ -332,7 +310,6 @@ export default function SalaryToHourly() {
               />
             </Grid>
 
-            {/* Tips */}
             {inputs.hoursPerWeek > 45 && (
               <Alert variant="warning" title="Working long hours?">
                 At {inputs.hoursPerWeek} hours/week, your effective rate is{' '}
@@ -349,7 +326,6 @@ export default function SalaryToHourly() {
               hours/week is really $25/hour - the same as a $52,000 salary at 40 hours/week.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My ${formatCurrency(inputs.annualSalary, result.currency)} salary = ${formatCurrency(result.actualHourlyRate, result.currency, 2)}/hr at ${inputs.hoursPerWeek} hrs/week (${formatCurrency(result.comparison.hourlyAt40, result.currency, 2)}/hr at 40 hrs)`}

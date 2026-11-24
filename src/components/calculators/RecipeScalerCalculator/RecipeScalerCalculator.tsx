@@ -1,7 +1,3 @@
-/**
- * Recipe Scaler Calculator - React Component
- */
-
 import { useCallback } from 'preact/hooks';
 import { calculateRecipeScaler } from './calculations';
 import { getDefaultInputs, COMMON_UNITS, type RecipeScalerInputs, type Ingredient } from './types';
@@ -89,7 +85,6 @@ export default function RecipeScalerCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Servings */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="originalServings" required>
@@ -123,7 +118,6 @@ export default function RecipeScalerCalculator() {
               </div>
             </Grid>
 
-            {/* Quick scale buttons */}
             <div>
               <Label>Quick Scale</Label>
               <div className="flex flex-wrap gap-2">
@@ -147,7 +141,6 @@ export default function RecipeScalerCalculator() {
               </div>
             </div>
 
-            {/* Baking mode toggle */}
             <div>
               <Toggle
                 label="Baking Mode"
@@ -159,7 +152,6 @@ export default function RecipeScalerCalculator() {
               </p>
             </div>
 
-            {/* Ingredients list */}
             <div>
               <div className="flex items-center justify-between mb-3">
                 <Label>Ingredients</Label>
@@ -253,18 +245,15 @@ export default function RecipeScalerCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {showResults ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Scale Factor"
                   value={`${result.scaleFactor.toFixed(2)}x`}
                   subtitle={`${inputs.originalServings} servings \u2192 ${inputs.desiredServings} servings`}
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 3 }} gap="md">
                   <MetricCard
                     label="Scale Factor"
@@ -290,13 +279,11 @@ export default function RecipeScalerCalculator() {
                   />
                 </Grid>
 
-                {/* Scaled Ingredients Table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Original vs Scaled
                   </h3>
                   <div className="space-y-2">
-                    {/* Table header */}
                     <div className="grid grid-cols-[1fr_auto_auto_auto] gap-4 text-xs text-[var(--color-muted)] uppercase tracking-wider pb-2 border-b border-white/5">
                       <span>Ingredient</span>
                       <span className="text-right w-20">Original</span>
@@ -323,7 +310,6 @@ export default function RecipeScalerCalculator() {
                   </div>
                 </div>
 
-                {/* Pan & Time Adjustments */}
                 <Grid responsive={{ sm: 2 }} gap="md">
                   <div className="bg-[var(--color-night)] rounded-xl p-4 border border-white/10">
                     <div className="text-xs text-[var(--color-muted)] uppercase tracking-wider mb-1">
@@ -355,7 +341,6 @@ export default function RecipeScalerCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {showResults && (
               <div className="flex justify-center pt-4">
                 <ShareResults

@@ -1,9 +1,3 @@
-/**
- * Etsy/eBay Fee Calculator - React Component
- *
- * Interactive calculator for comparing marketplace fees between Etsy and eBay.
- * Uses the design system components with green theme.
- */
 import { calculateMarketplaceFees, formatCurrency, formatPercentage } from './calculations';
 import {
   getDefaultInputs,
@@ -32,9 +26,6 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
-/**
- * Fee breakdown row component
- */
 function FeeRow({
   label,
   etsyValue,
@@ -71,9 +62,6 @@ function FeeRow({
   );
 }
 
-/**
- * Platform comparison card
- */
 function PlatformCard({
   platform,
   totalFees,
@@ -146,19 +134,16 @@ export default function EtsyFeeCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Platform options for button group
   const platformOptions = [
     { value: 'both' as Platform, label: 'Compare Both' },
     { value: 'etsy' as Platform, label: 'Etsy Only' },
     { value: 'ebay' as Platform, label: 'eBay Only' },
   ];
 
-  // eBay category options for select
   const ebayCategoryOptions = EBAY_CATEGORIES.map((cat) => ({
     value: cat.id,
     label: cat.label,
@@ -170,7 +155,6 @@ export default function EtsyFeeCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Marketplace Fees"
           subtitle="Compare Etsy vs eBay fees side-by-side"
@@ -178,9 +162,7 @@ export default function EtsyFeeCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Platform Selection */}
             <div>
               <Label>Platform Comparison</Label>
               <ButtonGroup
@@ -190,7 +172,6 @@ export default function EtsyFeeCalculator() {
               />
             </div>
 
-            {/* Sale Details */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="salePrice" required>
@@ -225,7 +206,6 @@ export default function EtsyFeeCalculator() {
               </div>
             </Grid>
 
-            {/* Costs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="shippingCost">Actual Shipping Cost</Label>
@@ -258,7 +238,6 @@ export default function EtsyFeeCalculator() {
               </div>
             </Grid>
 
-            {/* Platform-specific options */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               {showEbay && (
                 <div>
@@ -295,7 +274,6 @@ export default function EtsyFeeCalculator() {
               )}
             </Grid>
 
-            {/* Etsy Offsite Ads */}
             {showEtsy && (
               <div>
                 <Checkbox
@@ -313,9 +291,7 @@ export default function EtsyFeeCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Comparison Header */}
             {inputs.platform === 'both' && (
               <ResultCard
                 label={`${result.higherProfitPlatform === 'Same' ? 'Same' : result.higherProfitPlatform} ${result.higherProfitPlatform === 'Same' ? 'Profit' : 'Wins'}`}
@@ -332,7 +308,6 @@ export default function EtsyFeeCalculator() {
               />
             )}
 
-            {/* Platform Cards */}
             <Grid responsive={{ sm: 1, md: inputs.platform === 'both' ? 2 : 1 }} gap="md">
               {showEtsy && (
                 <PlatformCard
@@ -358,13 +333,11 @@ export default function EtsyFeeCalculator() {
               )}
             </Grid>
 
-            {/* Detailed Fee Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Fee Breakdown
               </h3>
 
-              {/* Header Row */}
               <div className="flex justify-between items-center py-2 border-b border-white/20 mb-2">
                 <span className="text-xs text-[var(--color-muted)] uppercase tracking-wide">
                   Fee Type
@@ -427,7 +400,6 @@ export default function EtsyFeeCalculator() {
               </div>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Revenue"
@@ -455,7 +427,6 @@ export default function EtsyFeeCalculator() {
               )}
             </Grid>
 
-            {/* Fee Structure Info */}
             <div className="bg-green-950/30 rounded-xl p-6 border border-green-500/20">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-3">
                 2024 Fee Structures
@@ -486,7 +457,6 @@ export default function EtsyFeeCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Seller Tips">
               {inputs.platform === 'both' ? (
                 <>
@@ -510,7 +480,6 @@ export default function EtsyFeeCalculator() {
               )}
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={

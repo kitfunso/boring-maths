@@ -1,6 +1,3 @@
-/**
- * Ovulation Calculator - Preact Component
- */
 import { calculateOvulation } from './calculations';
 import { getDefaultInputs, type OvulationInputs } from './types';
 import {
@@ -73,7 +70,6 @@ export default function OvulationCalculator() {
 
           <Divider />
 
-          {/* Current cycle results */}
           <ResultCard
             label="Estimated Ovulation Date"
             value={formatDate(result.ovulationDate)}
@@ -93,7 +89,6 @@ export default function OvulationCalculator() {
             />
           </Grid>
 
-          {/* Upcoming cycles */}
           <div>
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Upcoming Cycles</h3>
             <div class="space-y-3">

@@ -6,57 +6,23 @@ export interface SliderProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'type' | 'onChange' | 'value'
 > {
-  /** Current value */
   value: number;
-  /** Change handler */
   onChange: (value: number) => void;
-  /** Minimum value */
   min: number;
-  /** Maximum value */
   max: number;
-  /** Step increment */
   step?: number;
-  /** Labels for the slider */
   labels?: {
-    /** Label for minimum value */
     min?: string;
-    /** Label for middle value (optional) */
     mid?: string;
-    /** Label for maximum value */
     max?: string;
-    /** Current value formatter (displays above slider) */
     current?: string | ((value: number) => string);
   };
-  /** Show value inline with label */
   showValue?: boolean;
-  /** Label text */
   label?: string;
-  /** Accessible name for screen readers (required if no label) */
   'aria-label'?: string;
-  /** Additional class names */
   className?: string;
 }
 
-/**
- * Range slider input with optional labels.
- *
- * @example
- * ```tsx
- * <Slider
- *   value={years}
- *   onChange={setYears}
- *   min={1}
- *   max={30}
- *   label="Time to Reach Goal"
- *   labels={{
- *     min: '1 year',
- *     mid: '15 years',
- *     max: '30 years',
- *   }}
- *   showValue
- * />
- * ```
- */
 export function Slider({
   value,
   onChange,

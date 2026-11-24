@@ -1,6 +1,3 @@
-/**
- * Body Fat Calculator - Preact Component
- */
 import { calculateBodyFat } from './calculations';
 import {
   getDefaultInputs,
@@ -79,7 +76,6 @@ export default function BodyFatCalculator() {
             />
           </div>
 
-          {/* Height */}
           {inputs.unitSystem === 'metric' ? (
             <div>
               <Label required>Height (cm)</Label>
@@ -116,7 +112,6 @@ export default function BodyFatCalculator() {
             </Grid>
           )}
 
-          {/* Measurements */}
           <Grid cols={2}>
             <div>
               <Label required>Waist ({inputs.unitSystem === 'metric' ? 'cm' : 'inches'})</Label>
@@ -173,14 +168,12 @@ export default function BodyFatCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <ResultCard
             label="Estimated Body Fat"
             value={`${result.bodyFatPct}%`}
             subtitle={result.category}
           />
 
-          {/* Category reference */}
           <div>
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Body Fat Categories</h3>
             <div class="space-y-2">

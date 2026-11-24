@@ -1,7 +1,3 @@
-/**
- * FenceCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateFence } from '../../src/components/calculators/FenceCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/FenceCalculator/types';

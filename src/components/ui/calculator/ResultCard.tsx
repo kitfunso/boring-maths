@@ -2,17 +2,11 @@ import type { ReactNode } from 'react';
 import { useTheme } from '../theme/ThemeContext';
 
 export interface ResultCardProps {
-  /** Label above the value */
   label: string;
-  /** Main displayed value */
   value: string;
-  /** Subtitle below value */
   subtitle?: string;
-  /** Additional info section (e.g., gross rate) */
   footer?: ReactNode;
-  /** Size variant */
   size?: 'md' | 'lg';
-  /** Additional class names */
   className?: string;
 }
 
@@ -27,21 +21,6 @@ const SIZE_CLASSES = {
   },
 };
 
-/**
- * Primary result display card with gradient background.
- *
- * @example
- * ```tsx
- * <ResultCard
- *   label="Your Recommended Day Rate"
- *   value="$450"
- *   subtitle="After 30% tax"
- *   footer={
- *     <p>Gross rate (before tax): <strong>$643</strong></p>
- *   }
- * />
- * ```
- */
 export function ResultCard({
   label,
   value,

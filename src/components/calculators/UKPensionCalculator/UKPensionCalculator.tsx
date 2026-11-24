@@ -22,9 +22,7 @@ export default function UKPensionCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Age Inputs */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="currentAge" required>
@@ -54,7 +52,6 @@ export default function UKPensionCalculator() {
               </div>
             </Grid>
 
-            {/* Current Pot */}
             <div>
               <Label htmlFor="currentPot" required>
                 Current Pension Pot
@@ -75,7 +72,6 @@ export default function UKPensionCalculator() {
               </div>
             </div>
 
-            {/* Contributions */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="monthlyContribution" required>
@@ -119,7 +115,6 @@ export default function UKPensionCalculator() {
               </div>
             </Grid>
 
-            {/* Growth Rates */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="expectedGrowth">Expected Annual Growth</Label>
@@ -160,9 +155,7 @@ export default function UKPensionCalculator() {
             </Grid>
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Main Result - Projected Pot */}
             <div className="rounded-2xl p-6 bg-emerald-950/50 border-2 border-emerald-500/30">
               <div className="text-center">
                 <p className="text-sm text-[var(--color-muted)] mb-1">
@@ -177,7 +170,6 @@ export default function UKPensionCalculator() {
               </div>
             </div>
 
-            {/* Income Projection */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
                 Retirement Income (4% Rule)
@@ -204,7 +196,6 @@ export default function UKPensionCalculator() {
               </Grid>
             </div>
 
-            {/* State Pension Note */}
             <div className="bg-blue-950/30 rounded-xl p-4 border border-blue-500/30">
               <div className="flex items-start gap-3">
                 <svg
@@ -232,7 +223,6 @@ export default function UKPensionCalculator() {
               </div>
             </div>
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 3 }} gap="md">
               <div className="bg-white/5 rounded-xl p-4">
                 <p className="text-xs text-[var(--color-muted)]">Total Contributions</p>
@@ -254,7 +244,6 @@ export default function UKPensionCalculator() {
               </div>
             </Grid>
 
-            {/* Projection Table */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
                 Growth Projection
@@ -299,7 +288,6 @@ export default function UKPensionCalculator() {
               </p>
             </div>
 
-            {/* Assumptions */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">Assumptions</h4>
               <ul className="space-y-1 text-sm text-[var(--color-subtle)]">

@@ -1,8 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-/** Mirrors the Avios pill coverage in smoke.spec.ts; kept separate so Task 3's
- *  calculator-page work can land without touching this file. */
-
 test.describe('Cards pill', () => {
   test('filters to the card calculator and carries the rainbow', async ({ page }) => {
     await page.goto('/');

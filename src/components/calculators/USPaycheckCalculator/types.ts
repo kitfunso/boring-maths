@@ -1,7 +1,3 @@
-/**
- * US Paycheck Calculator Types
- */
-
 import type { FederalFilingStatus } from '../../../lib/us-tax-2026';
 
 export interface PaycheckInputs {
@@ -46,14 +42,12 @@ export const FILING_STATUSES: { value: FilingStatus; label: string }[] = [
   { value: 'head', label: 'Head of Household' },
 ];
 
-// The shared module keys statuses as married_jointly and head_of_household.
 export const FEDERAL_STATUS: Record<FilingStatus, FederalFilingStatus> = {
   single: 'single',
   married: 'married_jointly',
   head: 'head_of_household',
 };
 
-// State tax rates (simplified - using flat/effective rates for most states)
 export const STATE_TAX_DATA: Record<string, { name: string; rate: number; hasLocalTax?: boolean }> =
   {
     AL: { name: 'Alabama', rate: 5.0 },
@@ -110,7 +104,6 @@ export const STATE_TAX_DATA: Record<string, { name: string; rate: number; hasLoc
   };
 
 export const MEDICARE_ADDITIONAL_RATE = 0.009;
-// Employers withhold above $200,000 whatever the filing status (IRS Topic 560)
 export const MEDICARE_ADDITIONAL_WITHHOLDING_THRESHOLD = 200000;
 
 export function getDefaultInputs(): PaycheckInputs {

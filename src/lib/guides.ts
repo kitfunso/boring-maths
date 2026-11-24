@@ -1,9 +1,7 @@
-// Drives the /guides/ hub and guide breadcrumb schema, so no guide ships without an inbound link.
 import { breadcrumbSchema } from './breadcrumbs';
 
 export interface Guide {
   readonly slug: string;
-  /** Same text as the visible breadcrumb label on the guide page. */
   readonly name: string;
   readonly blurb: string;
 }
@@ -131,7 +129,6 @@ export const GUIDES: readonly Guide[] = [
 
 export const guideHref = (slug: string): string => `/guides/${slug}/`;
 
-/** Breadcrumb schema for a guide page, or null when the path is not a guide. */
 export function guideBreadcrumbSchema(pathname: string) {
   const slug = pathname.match(/^\/guides\/([^/]+)\/?$/)?.[1];
   const guide = GUIDES.find((g) => g.slug === slug);

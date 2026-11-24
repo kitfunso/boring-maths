@@ -1,7 +1,3 @@
-/**
- * BreakEvenCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBreakEven } from '../../src/components/calculators/BreakEven/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BreakEven/types';

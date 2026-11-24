@@ -1,7 +1,3 @@
-/**
- * UsTaxBracketCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateUSTaxBracket } from '../../src/components/calculators/USTaxBracketCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/USTaxBracketCalculator/types';
@@ -33,7 +29,6 @@ describe('UsTaxBracketCalculator', () => {
 
       const result = calculateUSTaxBracket(inputs);
 
-      // Taxable 75,000 - 15,750 = 59,250: 1,192.50 + 4,386 + 22% x 10,775 = 7,949
       expect(result.standardDeduction).toBe(15750);
       expect(result.taxableIncome).toBe(59250);
       expect(result.federalTax).toBe(7949);
@@ -58,16 +53,13 @@ describe('UsTaxBracketCalculator', () => {
 
       const result = calculateUSTaxBracket(inputs);
 
-      // Taxable 383,900: 58,448 + 35% x (383,900 - 256,225) = 103,134.25
       expect(result.taxableIncome).toBe(383900);
       expect(result.federalTax).toBe(103134.25);
       expect(result.marginalRate).toBe(35);
     });
 
     it.each([
-      // Taxable 300,000: 1,240 + 4,560 + 12,166 + 23,058 + 17,424 + 35% x 43,775 = 73,769.25
       [316100, 300000, 73769.25, 35],
-      // Taxable 700,000: 192,979.25 to 640,600, then 37% x 59,400 = 214,957.25
       [716100, 700000, 214957.25, 37],
     ])('should use the 2026 single top bands at gross %i', (gross, taxable, tax, rate) => {
       const inputs = getDefaultInputs();
@@ -87,7 +79,6 @@ describe('UsTaxBracketCalculator', () => {
 
       const result = calculateUSTaxBracket(inputs);
 
-      // Taxable 100,000 - 24,150 = 75,850: 7,740 + 22% x (75,850 - 67,450) = 9,588
       expect(result.federalTax).toBe(9588);
     });
 
@@ -98,7 +89,6 @@ describe('UsTaxBracketCalculator', () => {
 
       const result = calculateUSTaxBracket(inputs);
 
-      // Taxable 250,000 - 32,200 = 217,800: 35,932 + 24% x (217,800 - 211,400) = 37,468
       expect(result.federalTax).toBe(37468);
       expect(result.marginalRate).toBe(24);
     });

@@ -1,20 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-/**
- * Smoke tests for boring-math.com
- *
- * Covers: homepage grid, category filtering, search, mobile menu,
- * calculator rendering, input/result flow, navigation, share URL params,
- * and mobile viewport behavior.
- *
- * Note: Astro's dev toolbar injects extra <h1> elements, so all heading
- * assertions scope to `main` or use `getByRole` with a name filter.
- */
-
-// ---------------------------------------------------------------------------
-// 1. Homepage loads with calculator grid
-// ---------------------------------------------------------------------------
-
 test.describe('Homepage', () => {
   test('renders calculator grid with cards', async ({ page }) => {
     await page.goto('/');
@@ -40,10 +25,6 @@ test.describe('Homepage', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 2. Category filtering on homepage
-// ---------------------------------------------------------------------------
-
 test.describe('Category filtering', () => {
   test('filters cards when a category button is clicked', async ({ page }) => {
     await page.goto('/');
@@ -52,7 +33,6 @@ test.describe('Category filtering', () => {
     const allCards = grid.locator('.calculator-card');
     const totalBefore = await allCards.count();
 
-    // Click the "Health" category button
     const healthBtn = page.locator('.category-btn[data-category="Health"]');
     await healthBtn.click();
     await page.waitForTimeout(400);
@@ -108,10 +88,6 @@ test.describe('Category filtering', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 3. Mobile menu opens and closes
-// ---------------------------------------------------------------------------
-
 test.describe('Mobile menu', () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
@@ -121,23 +97,16 @@ test.describe('Mobile menu', () => {
     const menuBtn = page.locator('#mobile-menu-btn');
     const menu = page.locator('#mobile-menu');
 
-    // Menu links should not be visible initially
     await expect(menu.locator('a[href="/about/"]')).not.toBeVisible();
 
-    // Open the menu
     await menuBtn.click();
     await expect(menu.locator('a[href="/"]')).toBeVisible();
     await expect(menu.locator('a[href="/about/"]')).toBeVisible();
 
-    // Close the menu
     await menuBtn.click();
     await expect(menu.locator('a[href="/about/"]')).not.toBeVisible();
   });
 });
-
-// ---------------------------------------------------------------------------
-// 4. Mobile filter toggle
-// ---------------------------------------------------------------------------
 
 test.describe('Mobile filter toggle', () => {
   test.use({ viewport: { width: 375, height: 812 } });
@@ -167,10 +136,6 @@ test.describe('Mobile filter toggle', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 5. Calculator page renders
-// ---------------------------------------------------------------------------
-
 test.describe('Calculator page', () => {
   test('tip calculator loads with inputs and results', async ({ page }) => {
     await page.goto('/calculators/tip-calculator/');
@@ -199,10 +164,6 @@ test.describe('Calculator page', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 6. Calculator computes and updates results
-// ---------------------------------------------------------------------------
-
 test.describe('Calculator computation', () => {
   test('tip calculator updates result when bill amount changes', async ({ page }) => {
     await page.goto('/calculators/tip-calculator/');
@@ -221,33 +182,24 @@ test.describe('Calculator computation', () => {
   test('tip calculator quick select buttons change tip percentage', async ({ page }) => {
     await page.goto('/calculators/tip-calculator/');
 
-    // Wait for Preact hydration
     const billInput = page.locator('#billAmount');
     await expect(billInput).toBeVisible();
 
-    // Click 15% first to ensure a known state
     const btn15 = page.locator('button[role="radio"]:has-text("15%")');
     await btn15.click();
     await expect(btn15).toHaveAttribute('aria-checked', 'true', { timeout: 5_000 });
 
-    // Now click 25% (guaranteed different from 15%)
     const btn25 = page.locator('button[role="radio"]:has-text("25%")');
     await btn25.click();
     await expect(btn25).toHaveAttribute('aria-checked', 'true', { timeout: 5_000 });
 
-    // 15% should now be unchecked
     await expect(btn15).toHaveAttribute('aria-checked', 'false');
 
-    // Result should contain numeric values
     const resultCard = page.locator('[role="status"][aria-live="polite"]').first();
     const text = await resultCard.textContent();
     expect(text).toMatch(/\d/);
   });
 });
-
-// ---------------------------------------------------------------------------
-// 7. Navigation between calculators
-// ---------------------------------------------------------------------------
 
 test.describe('Navigation', () => {
   test('clicking a calculator card navigates to the calculator page', async ({ page }) => {
@@ -283,10 +235,6 @@ test.describe('Navigation', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 8. Share URL params
-// ---------------------------------------------------------------------------
-
 test.describe('Share URL params', () => {
   test('share button is present on calculator page', async ({ page }) => {
     await page.goto('/calculators/tip-calculator/');
@@ -302,7 +250,6 @@ test.describe('Share URL params', () => {
     await expect(shareBtn).toBeVisible({ timeout: 15_000 });
     await shareBtn.click();
 
-    // The share menu renders via Preact; give it a moment
     const menu = page.locator('[role="menu"][aria-label="Share options"]');
     await expect(menu).toBeVisible({ timeout: 5_000 });
 
@@ -311,10 +258,6 @@ test.describe('Share URL params', () => {
     await expect(menu.locator('button:has-text("Copy Result")')).toBeVisible();
   });
 });
-
-// ---------------------------------------------------------------------------
-// 9. Responsive layout
-// ---------------------------------------------------------------------------
 
 test.describe('Responsive layout', () => {
   test('desktop shows multi-column grid', async ({ page }) => {
@@ -333,20 +276,12 @@ test.describe('Responsive layout', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 10. 404 page
-// ---------------------------------------------------------------------------
-
 test.describe('404 page', () => {
   test('returns a page for non-existent routes', async ({ page }) => {
     const response = await page.goto('/this-page-does-not-exist-xyz');
     expect(response?.status()).toBe(404);
   });
 });
-
-// ---------------------------------------------------------------------------
-// 11. Calculator page has proper meta tags
-// ---------------------------------------------------------------------------
 
 test.describe('SEO meta', () => {
   test('calculator page has title and meta description', async ({ page }) => {
@@ -366,10 +301,6 @@ test.describe('SEO meta', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// 12. Calculator split functionality
-// ---------------------------------------------------------------------------
-
 test.describe('Tip calculator split', () => {
   test('increasing split count updates the result label', async ({ page }) => {
     await page.goto('/calculators/tip-calculator/');
@@ -385,10 +316,6 @@ test.describe('Tip calculator split', () => {
     await expect(resultCard).toContainText('Each Person Pays');
   });
 });
-
-// ---------------------------------------------------------------------------
-// 13. Footer
-// ---------------------------------------------------------------------------
 
 test.describe('Footer', () => {
   test('footer is visible on homepage', async ({ page }) => {

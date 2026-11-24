@@ -1,8 +1,3 @@
-/**
- * Debt Payoff Calculator - React Component
- *
- * Compare snowball vs avalanche debt repayment strategies.
- */
 import { calculateDebtPayoff, formatCurrency, formatDuration } from './calculations';
 import {
   getDefaultInputs,
@@ -76,7 +71,6 @@ export default function DebtPayoffCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Strategy Selection */}
           <div className="mb-8">
             <Label>Payoff Strategy</Label>
             <ButtonGroup
@@ -94,7 +88,6 @@ export default function DebtPayoffCalculator() {
             </p>
           </div>
 
-          {/* Debts List */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <Label>Your Debts</Label>
@@ -184,7 +177,6 @@ export default function DebtPayoffCalculator() {
             </div>
           </div>
 
-          {/* Extra Payment */}
           <div className="mb-8">
             <Label htmlFor="extraPayment">Extra Monthly Payment (beyond minimums)</Label>
             <Input
@@ -204,11 +196,9 @@ export default function DebtPayoffCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {result.totalDebt > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Debt-Free In"
                   value={formatDuration(selectedResult.months)}
@@ -223,7 +213,6 @@ export default function DebtPayoffCalculator() {
                   }
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Total Debt"
@@ -247,14 +236,12 @@ export default function DebtPayoffCalculator() {
                   />
                 </Grid>
 
-                {/* Strategy Comparison */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Strategy Comparison
                   </h3>
 
                   <div className="grid grid-cols-2 gap-4">
-                    {/* Avalanche */}
                     <div
                       className={`p-4 rounded-lg border ${
                         inputs.strategy === 'avalanche'
@@ -271,7 +258,6 @@ export default function DebtPayoffCalculator() {
                       </p>
                     </div>
 
-                    {/* Snowball */}
                     <div
                       className={`p-4 rounded-lg border ${
                         inputs.strategy === 'snowball'
@@ -299,7 +285,6 @@ export default function DebtPayoffCalculator() {
                   )}
                 </div>
 
-                {/* Payoff Order */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Payoff Order ({inputs.strategy === 'avalanche' ? 'Avalanche' : 'Snowball'})
@@ -316,7 +301,6 @@ export default function DebtPayoffCalculator() {
                   </ol>
                 </div>
 
-                {/* Tips */}
                 <Alert
                   variant={inputs.strategy === 'avalanche' ? 'info' : 'tip'}
                   title={inputs.strategy === 'avalanche' ? 'About Avalanche:' : 'About Snowball:'}
@@ -332,7 +316,6 @@ export default function DebtPayoffCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {result.totalDebt > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

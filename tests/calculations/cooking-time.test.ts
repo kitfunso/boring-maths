@@ -1,7 +1,3 @@
-/**
- * Cooking Time Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateCookingTime,
@@ -26,7 +22,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 5 lbs * 20 min/lb = 100 min
       expect(result.totalMinutes).toBe(100);
       expect(result.temperatureF).toBe(375);
       expect(result.internalTempF).toBe(165);
@@ -45,10 +40,9 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 4 lbs * 60 min/lb = 240 min = 4 hours
       expect(result.totalMinutes).toBe(240);
       expect(result.hours).toBe(4);
-      expect(result.temperatureF).toBe(0); // slow cooker has no oven temp
+      expect(result.temperatureF).toBe(0);
       expect(result.internalTempF).toBe(145);
     });
 
@@ -66,12 +60,9 @@ describe('CookingTimeCalculator', () => {
       const rareResult = calculateCookingTime({ ...base, doneness: 'rare' });
       const wellDoneResult = calculateCookingTime({ ...base, doneness: 'well-done' });
 
-      // Rare should take less time than medium
       expect(rareResult.totalMinutes).toBeLessThan(mediumResult.totalMinutes);
-      // Well-done should take more time than medium
       expect(wellDoneResult.totalMinutes).toBeGreaterThan(mediumResult.totalMinutes);
 
-      // Check internal temperatures
       expect(rareResult.internalTempF).toBe(125);
       expect(mediumResult.internalTempF).toBe(145);
       expect(wellDoneResult.internalTempF).toBe(160);
@@ -97,7 +88,6 @@ describe('CookingTimeCalculator', () => {
       const lbsResult = calculateCookingTime(lbsInput);
       const kgResult = calculateCookingTime(kgInput);
 
-      // 1 kg = 2.20462 lbs, so results should be very close
       expect(Math.abs(lbsResult.totalMinutes - kgResult.totalMinutes)).toBeLessThanOrEqual(1);
     });
 
@@ -112,7 +102,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 1.5 lbs * 18 min/lb = 27 min
       expect(result.totalMinutes).toBe(27);
       expect(result.temperatureF).toBe(380);
       expect(result.internalTempF).toBe(165);
@@ -130,7 +119,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 14 min/lb base * 0.85 (medium-rare) = ~12, 2 lbs * 12 = 24
       expect(result.internalTempF).toBe(135);
       expect(result.totalMinutes).toBeGreaterThan(0);
       expect(result.restingMinutes).toBe(5);
@@ -147,9 +135,8 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 10 lbs * 15 min/lb = 150 min
       expect(result.totalMinutes).toBe(150);
-      expect(result.internalTempF).toBe(140); // pre-cooked ham
+      expect(result.internalTempF).toBe(140);
       expect(result.temperatureF).toBe(325);
     });
 
@@ -164,7 +151,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 15 lbs * 15 min/lb = 225 min = 3.75 hours
       expect(result.totalMinutes).toBe(225);
       expect(result.hours).toBe(3.75);
       expect(result.internalTempF).toBe(165);
@@ -196,9 +182,7 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 375F = ~191C
       expect(result.temperatureC).toBe(191);
-      // 165F = ~74C
       expect(result.internalTempC).toBe(74);
     });
 
@@ -213,7 +197,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 0.25 * 14 = 3.5 -> rounds to 4
       expect(result.totalMinutes).toBeGreaterThanOrEqual(1);
     });
 
@@ -228,7 +211,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 4 lbs * 28 min/lb = 112 min
       expect(result.totalMinutes).toBe(112);
       expect(result.temperatureF).toBe(325);
       expect(result.internalTempF).toBe(145);
@@ -246,7 +228,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 4 lbs * 70 min/lb = 280 min
       expect(result.totalMinutes).toBe(280);
       expect(result.temperatureF).toBe(0);
       expect(result.internalTempF).toBe(145);
@@ -282,8 +263,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 12 min/lb medium base * 0.85 (medium-rare) = 10.2 -> 10 min/lb, inside the
-      // American Lamb Board's 9-12 min/lb med-rare range. 1.5 lbs * 10 = 15 min.
       expect(result.internalTempF).toBe(135);
       expect(result.totalMinutes).toBe(15);
       expect(result.restingMinutes).toBe(5);
@@ -300,7 +279,6 @@ describe('CookingTimeCalculator', () => {
 
       const result = calculateCookingTime(inputs);
 
-      // 12 min/lb (medium) * 2 lbs = 24 min
       expect(result.totalMinutes).toBe(24);
       expect(result.temperatureF).toBe(450);
       expect(result.internalTempF).toBe(145);

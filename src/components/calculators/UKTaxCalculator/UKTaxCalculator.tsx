@@ -69,7 +69,6 @@ export default function UKTaxCalculator() {
           ? 'week'
           : 'day';
 
-  // Calculate breakdown bar widths
   const barSegments = useMemo(() => {
     const gross = result.grossSalary;
     if (gross <= 0) return [];
@@ -134,9 +133,7 @@ export default function UKTaxCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Gross Salary */}
             <div>
               <Label htmlFor="grossSalary" required>
                 Annual Gross Salary
@@ -157,7 +154,6 @@ export default function UKTaxCalculator() {
               </div>
             </div>
 
-            {/* Tax Region */}
             <div>
               <Label htmlFor="taxRegion" required>
                 Tax Region
@@ -169,7 +165,6 @@ export default function UKTaxCalculator() {
               />
             </div>
 
-            {/* Pay Frequency */}
             <div>
               <Label htmlFor="payFrequency">Display Frequency</Label>
               <ButtonGroup
@@ -179,7 +174,6 @@ export default function UKTaxCalculator() {
               />
             </div>
 
-            {/* Student Loan */}
             <div>
               <Label htmlFor="studentLoan">Student Loan Plan</Label>
               <Select
@@ -190,7 +184,6 @@ export default function UKTaxCalculator() {
               />
             </div>
 
-            {/* Pension Rate */}
             <div>
               <Slider
                 value={inputs.pensionRate}
@@ -212,7 +205,6 @@ export default function UKTaxCalculator() {
               </p>
             </div>
 
-            {/* Pension Type */}
             {inputs.pensionRate > 0 && (
               <div>
                 <Label htmlFor="pensionType">Pension Type</Label>
@@ -229,7 +221,6 @@ export default function UKTaxCalculator() {
               </div>
             )}
 
-            {/* Advanced Options */}
             <div className="space-y-4">
               <Toggle
                 checked={inputs.blindPersonsAllowance}
@@ -239,7 +230,6 @@ export default function UKTaxCalculator() {
               />
             </div>
 
-            {/* Tax Code Override */}
             <div>
               <Label htmlFor="taxCode">Tax Code (advanced)</Label>
               <Input
@@ -254,9 +244,7 @@ export default function UKTaxCalculator() {
             </div>
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Hero: Take Home Pay */}
             <div className="rounded-2xl p-6 bg-blue-950/50 border-2 border-blue-500/30">
               <div className="text-center">
                 <p className="text-sm text-[var(--color-muted)] mb-1">Your Take-Home Pay</p>
@@ -272,7 +260,6 @@ export default function UKTaxCalculator() {
               </div>
             </div>
 
-            {/* Effective Tax Rate + Marginal Rate */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div className="bg-white/5 rounded-xl p-4 text-center">
                 <p className="text-xs text-[var(--color-muted)]">Effective Deduction Rate</p>
@@ -292,7 +279,6 @@ export default function UKTaxCalculator() {
               </div>
             </Grid>
 
-            {/* Salary Breakdown Bar */}
             {result.grossSalary > 0 && (
               <div className="bg-white/5 rounded-xl p-4">
                 <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
@@ -323,7 +309,6 @@ export default function UKTaxCalculator() {
               </div>
             )}
 
-            {/* Full Breakdown */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
                 Full Breakdown (
@@ -381,7 +366,6 @@ export default function UKTaxCalculator() {
               </div>
             </div>
 
-            {/* Period Equivalents */}
             <Grid responsive={{ sm: 2, lg: 4 }} gap="md">
               <div
                 className={`bg-white/5 rounded-xl p-4 text-center ${inputs.payFrequency === 'annual' ? 'ring-1 ring-blue-500/30' : ''}`}
@@ -417,7 +401,6 @@ export default function UKTaxCalculator() {
               </div>
             </Grid>
 
-            {/* Tax Band Breakdown Table */}
             {result.taxBands.length > 0 && (
               <div className="bg-white/5 rounded-xl p-4 overflow-x-auto">
                 <h4 className="text-sm font-medium text-[var(--color-muted)] mb-4">
@@ -457,7 +440,6 @@ export default function UKTaxCalculator() {
               </div>
             )}
 
-            {/* NIC Breakdown */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
                 National Insurance Breakdown
@@ -512,7 +494,6 @@ export default function UKTaxCalculator() {
               </div>
             </div>
 
-            {/* Marginal Rate Alert */}
             {result.marginalRate >= 50 && (
               <div className="bg-red-950/30 rounded-xl p-4 border border-red-500/30">
                 <div className="flex items-start gap-3">
@@ -543,7 +524,6 @@ export default function UKTaxCalculator() {
               </div>
             )}
 
-            {/* Info about the tax year */}
             <div className="bg-blue-950/30 rounded-xl p-4 border border-blue-500/20">
               <div className="flex items-start gap-3">
                 <svg

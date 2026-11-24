@@ -1,8 +1,3 @@
-/**
- * 401k Calculator - React Component
- *
- * Calculate retirement savings with employer matching and compound growth.
- */
 import { calculate401k, formatCurrency } from './calculations';
 import { getDefaultInputs, type Calculator401kInputs } from './types';
 import {
@@ -38,7 +33,6 @@ export default function Calculator401k() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Age Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="currentAge" required>
@@ -68,7 +62,6 @@ export default function Calculator401k() {
               </div>
             </Grid>
 
-            {/* Financial Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="currentBalance">Current 401k Balance ($)</Label>
@@ -96,7 +89,6 @@ export default function Calculator401k() {
               </div>
             </Grid>
 
-            {/* Contribution Inputs */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="contributionPercent" required>
@@ -128,7 +120,6 @@ export default function Calculator401k() {
               </div>
             </Grid>
 
-            {/* Employer Match */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="employerMatchPercent">Employer Match (%)</Label>
@@ -164,7 +155,6 @@ export default function Calculator401k() {
               </div>
             </Grid>
 
-            {/* Return */}
             <div>
               <Label htmlFor="annualReturn">Expected Annual Return (%)</Label>
               <Input
@@ -184,9 +174,7 @@ export default function Calculator401k() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div className="rounded-2xl p-8 text-center border-2 bg-green-950/50 border-green-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Total at Retirement (Age {inputs.retirementAge})
@@ -199,7 +187,6 @@ export default function Calculator401k() {
               </p>
             </div>
 
-            {/* Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Contribution Breakdown
@@ -232,7 +219,6 @@ export default function Calculator401k() {
               </Grid>
             </div>
 
-            {/* Year-by-Year Table */}
             {result.yearlyBreakdown.length <= 40 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10 overflow-x-auto">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -280,7 +266,6 @@ export default function Calculator401k() {
               The 2026 contribution limit is $24,500 ($32,500 if you're 50+).
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`401k at age ${inputs.retirementAge}: ${formatCurrency(result.totalAtRetirement)} (${formatCurrency(result.monthlyIncomeAt4Percent)}/mo at 4% withdrawal)`}

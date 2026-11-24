@@ -1,4 +1,3 @@
-/** UK Card Rewards & Perks Calculator - Preact island; estimates only, not financial advice. */
 import { computeResults, perksValue, rewardsValue } from './calculations';
 import { inputsFromParams, paramsFromInputs } from './urlState';
 import {
@@ -65,12 +64,9 @@ function costsText(b: ValueBreakdown): string {
   return costsTotal(b) > 0 ? `-${gbp(costsTotal(b))}` : gbp(0);
 }
 
-/** Deepest layer: one card's full value breakdown, shared by the shortlist and the table. */
 function CardBreakdown({ result }: { result: CardResult }) {
   const { card, breakdown } = result;
   return (
-    // Container query, not a viewport one: the same breakdown sits in a narrow
-    // tile and a full-width table row on the same screen.
     <div className="@container">
       <dl className="grid grid-cols-2 @lg:grid-cols-4 gap-3">
         <div>
@@ -131,7 +127,6 @@ function CardBreakdown({ result }: { result: CardResult }) {
   );
 }
 
-/** Middle layer: one shortlist tile with the headline numbers and a breakdown on request. */
 function ShortlistCard({
   result,
   expanded,
@@ -151,7 +146,6 @@ function ShortlistCard({
         <span>Rank {result.rank}</span>
         <span className="normal-case tracking-normal">{CARD_TYPE_LABELS[card.type]}</span>
       </p>
-      {/* Two-line floor keeps the net figures on one line across the three tiles. */}
       <p className="font-semibold text-[var(--color-cream)] mt-2 md:min-h-12">{card.name}</p>
 
       <p
@@ -279,20 +273,17 @@ export default function CardPerksCalculator() {
   const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
 
-  // Shared-link params win over locally stored state, once, on mount.
   useEffect(() => {
     if (!window.location.search) return;
     setInputs(inputsFromParams(window.location.search, DEFAULTS));
   }, [setInputs]);
 
-  // Keep the address bar in sync so the current comparison is always shareable.
   useEffect(() => {
     const qs = paramsFromInputs(inputs, DEFAULTS);
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
   }, [inputs]);
 
-  // Stamped on mount so the e2e specs can wait for hydration instead of a fixed sleep.
   useEffect(() => {
     document.documentElement.dataset.cardPerksReady = 'true';
     return () => {

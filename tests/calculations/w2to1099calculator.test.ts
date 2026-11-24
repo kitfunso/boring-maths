@@ -1,7 +1,3 @@
-/**
- * W2to1099calculatorCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateW2To1099 } from '../../src/components/calculators/W2To1099Calculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/W2To1099Calculator/types';
@@ -30,9 +26,7 @@ describe('W2to1099calculatorCalculator', () => {
 
       const result = calculateW2To1099(inputs);
 
-      // 250,000 x 92.35% = 230,875: 12.4% x 184,500 + 2.9% x 230,875 = 29,573.375
       expect(result.selfEmploymentTax).toBe(29573);
-      // Employer pays 6.2% x 184,500 + 1.45% x 250,000
       expect(result.employerFicaLoss).toBe(15064);
     });
 

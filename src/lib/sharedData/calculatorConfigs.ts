@@ -1,19 +1,6 @@
-/**
- * Calculator Data Configurations
- *
- * Defines what data each calculator can import and export.
- * This creates the connection graph between calculators.
- */
-
 import type { CalculatorDataConfig } from './types';
 
-/**
- * Registry of all calculator configurations.
- * Keys are kebab-case calculator IDs matching URL slugs.
- */
 export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
-  // === Income Calculators ===
-
   'freelance-day-rate': {
     id: 'freelance-day-rate',
     name: 'Freelance Day Rate Calculator',
@@ -34,8 +21,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     imports: ['annualIncome', 'currency'],
     exports: ['annualIncome', 'currency'],
   },
-
-  // === Finance Calculators ===
 
   'emergency-fund': {
     id: 'emergency-fund',
@@ -85,8 +70,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     exports: ['monthlyDebt', 'currency'],
   },
 
-  // === Health Calculators ===
-
   'bmi-calculator': {
     id: 'bmi-calculator',
     name: 'BMI Calculator',
@@ -108,8 +91,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     exports: ['age'],
   },
 
-  // === Event Calculators ===
-
   'wedding-alcohol': {
     id: 'wedding-alcohol',
     name: 'Wedding Alcohol Calculator',
@@ -123,8 +104,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     imports: ['guestCount'],
     exports: ['guestCount'],
   },
-
-  // === Business Calculators ===
 
   'break-even': {
     id: 'break-even',
@@ -140,8 +119,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     exports: ['monthlyIncome', 'hourlyRate', 'currency'],
   },
 
-  // === Everyday Calculators ===
-
   'tip-calculator': {
     id: 'tip-calculator',
     name: 'Tip Calculator',
@@ -155,8 +132,6 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
     imports: ['currency'],
     exports: ['currency'],
   },
-
-  // === Home Calculators ===
 
   'electricity-cost': {
     id: 'electricity-cost',
@@ -173,17 +148,10 @@ export const CALCULATOR_CONFIGS: Record<string, CalculatorDataConfig> = {
   },
 };
 
-/**
- * Get configuration for a specific calculator by ID.
- */
 export function getCalculatorConfig(id: string): CalculatorDataConfig | undefined {
   return CALCULATOR_CONFIGS[id];
 }
 
-/**
- * Get all calculators that could receive data from a given calculator.
- * Useful for showing "data will be available in..." messaging.
- */
 export function getConnectedCalculators(sourceId: string): CalculatorDataConfig[] {
   const source = CALCULATOR_CONFIGS[sourceId];
   if (!source) return [];
@@ -193,7 +161,6 @@ export function getConnectedCalculators(sourceId: string): CalculatorDataConfig[
   for (const config of Object.values(CALCULATOR_CONFIGS)) {
     if (config.id === sourceId) continue;
 
-    // Check if any exports from source match imports in this calculator
     const hasConnection = source.exports.some((exp) => config.imports.includes(exp));
 
     if (hasConnection) {

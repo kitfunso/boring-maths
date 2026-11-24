@@ -1,8 +1,3 @@
-/**
- * College ROI Calculator - React Component
- *
- * Evaluate the return on investment for different education paths.
- */
 import { calculateCollegeROI } from './calculations';
 import {
   getDefaultInputs,
@@ -81,7 +76,6 @@ export default function CollegeROI() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Education Path
@@ -259,7 +253,6 @@ export default function CollegeROI() {
               )}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Return on Investment"
@@ -286,7 +279,6 @@ export default function CollegeROI() {
                 />
               </Grid>
 
-              {/* Cost Summary */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cost Summary
@@ -339,7 +331,6 @@ export default function CollegeROI() {
                 </div>
               </div>
 
-              {/* Analysis */}
               <Alert variant={result.worthIt ? 'success' : 'warning'} title="Analysis">
                 <ul className="space-y-1 mt-2">
                   {result.factors.map((factor, i) => (
@@ -351,7 +342,6 @@ export default function CollegeROI() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`College ROI: ${result.roi}%. Payback period: ${result.paybackPeriod ? `${result.paybackPeriod} years` : 'N/A'}. Lifetime earnings premium: ${fmt(result.lifetimeEarningsPremium)}`}

@@ -1,5 +1,3 @@
-/** Singapore Stamp Duty Calculator - Preact. Live updating, no submit; maths in calculations.ts. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateSingaporeStampDuty,
@@ -47,7 +45,6 @@ export default function SingaporeStampDuty() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -127,9 +124,7 @@ export default function SingaporeStampDuty() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
-          {/* Primary result: total stamp duty */}
           <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">
             <p class="text-sm text-[var(--color-muted)] mb-1">Total stamp duty payable</p>
             <p class="text-4xl md:text-5xl font-display font-bold text-emerald-400 tabular-nums">
@@ -140,7 +135,6 @@ export default function SingaporeStampDuty() {
             </p>
           </div>
 
-          {/* Metric grid */}
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="bg-white/5 rounded-xl p-4">
               <p class="text-xs text-[var(--color-muted)]">Buyer Stamp Duty (BSD)</p>
@@ -158,7 +152,6 @@ export default function SingaporeStampDuty() {
             </div>
           </div>
 
-          {/* BSD band breakdown */}
           <div class="bg-white/5 rounded-xl p-4">
             <h3 class="text-sm font-medium text-[var(--color-muted)] mb-3">BSD band breakdown</h3>
             <div class="space-y-2 text-sm">

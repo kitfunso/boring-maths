@@ -1,5 +1,3 @@
-/** Singapore Seller Stamp Duty. Table A (purchased on/after 4 Jul 2025) vs Table B (11 Mar 2017-3 Jul 2025). */
-
 export type SsdTable = 'A' | 'B' | 'out-of-scope';
 
 const TABLE_A_STARTS = '2025-07-04';
@@ -11,7 +9,6 @@ export interface SsdBand {
   label: string;
 }
 
-// Holding period, purchased on or after 4 Jul 2025.
 export const SSD_TABLE_A: SsdBand[] = [
   { maxMonths: 12, rate: 0.16, label: 'Held up to 1 year' },
   { maxMonths: 24, rate: 0.12, label: 'Held more than 1, up to 2 years' },
@@ -20,7 +17,6 @@ export const SSD_TABLE_A: SsdBand[] = [
   { maxMonths: Infinity, rate: 0, label: 'Held more than 4 years' },
 ];
 
-// Holding period, purchased 11 Mar 2017 to 3 Jul 2025 inclusive.
 export const SSD_TABLE_B: SsdBand[] = [
   { maxMonths: 12, rate: 0.12, label: 'Held up to 1 year' },
   { maxMonths: 24, rate: 0.08, label: 'Held more than 1, up to 2 years' },
@@ -60,7 +56,6 @@ function selectTable(purchaseDate: string): SsdTable {
   return 'out-of-scope';
 }
 
-// Calendar month diff, same anniversary-day method as an age calculator.
 function monthsBetween(start: Date, end: Date): number {
   let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
   if (end.getDate() < start.getDate()) months -= 1;

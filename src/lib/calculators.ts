@@ -1,14 +1,3 @@
-/**
- * Calculator Catalog - Single Source of Truth
- *
- * All calculator metadata, icon mappings, and color definitions.
- * Import from here instead of duplicating across pages/layouts.
- */
-
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
 export type IconName =
   | 'dollar'
   | 'percent'
@@ -73,13 +62,8 @@ export interface CalculatorEntry {
   readonly category: CategoryName;
   readonly country?: CountryCode;
   readonly mostUsed: boolean;
-  /** Kept for users but hidden from search: no clicks and under 1,000 impressions Apr-Oct 2026 (docs/gsc-review-2026-10-24.html). */
   readonly noindex?: true;
 }
-
-// ---------------------------------------------------------------------------
-// Icon gradient classes (for dark-theme icon backgrounds)
-// ---------------------------------------------------------------------------
 
 export const ICON_COLORS: Readonly<Record<ColorName, string>> = {
   blue: 'from-blue-500 to-blue-600',
@@ -91,10 +75,6 @@ export const ICON_COLORS: Readonly<Record<ColorName, string>> = {
   amber: 'from-amber-500 to-orange-500',
   pink: 'from-pink-500 to-rose-500',
 };
-
-// ---------------------------------------------------------------------------
-// Icon SVG path data (stroke paths for 24x24 viewBox)
-// ---------------------------------------------------------------------------
 
 export const ICON_PATHS: Readonly<Record<IconName, string>> = {
   dollar:
@@ -129,10 +109,6 @@ export const ICON_PATHS: Readonly<Record<IconName, string>> = {
     'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
 };
 
-// ---------------------------------------------------------------------------
-// Category badge colors (for homepage category pills)
-// ---------------------------------------------------------------------------
-
 export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
   Income: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
   Finance: 'text-violet-400 bg-violet-500/10 border-violet-500/20',
@@ -154,10 +130,6 @@ export const CATEGORY_COLORS: Readonly<Record<CategoryName, string>> = {
   'UK Tax': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
   'US Tax': 'text-red-400 bg-red-500/10 border-red-500/20',
 };
-
-// ---------------------------------------------------------------------------
-// Calculator Catalog
-// ---------------------------------------------------------------------------
 
 export const calculators: readonly CalculatorEntry[] = [
   {
@@ -504,7 +476,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Everyday',
     mostUsed: false,
   },
-  // Chemical Engineering Calculators
   {
     title: 'Reynolds Number',
     description:
@@ -552,7 +523,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Engineering',
     mostUsed: false,
   },
-  // New Calculators
   {
     title: '401k Calculator',
     description: 'Project retirement savings with employer matching and compound growth.',
@@ -716,7 +686,6 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'US',
     mostUsed: false,
   },
-  // EU Calculators
   {
     title: 'EU VAT Calculator',
     description: 'Calculate VAT for all 27 EU countries. Add, remove, or reverse calculate VAT.',
@@ -738,7 +707,6 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'EU',
     mostUsed: false,
   },
-  // New Calculators
   {
     title: 'Inflation Calculator',
     description:
@@ -772,7 +740,6 @@ export const calculators: readonly CalculatorEntry[] = [
     country: 'US',
     mostUsed: false,
   },
-  // Niche Calculators - Phase 1
   {
     title: 'Speeds & Feeds Calculator',
     description:
@@ -824,7 +791,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Crafts',
     mostUsed: false,
   },
-  // Niche Calculators - Phase 2
   {
     title: 'Tap Drill Calculator',
     description: 'Find the correct drill size for any thread with adjustable thread percentage.',
@@ -872,7 +838,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Crafts',
     mostUsed: false,
   },
-  // Niche Calculators - Phase 3
   {
     title: 'Cutting Time Calculator',
     description:
@@ -921,7 +886,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Crafts',
     mostUsed: false,
   },
-  // Niche Calculators - Phase 4
   {
     title: 'Tool Deflection Calculator',
     description:
@@ -972,7 +936,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Crafts',
     mostUsed: false,
   },
-  // Additional calculators
   {
     title: 'Scotland ADS Calculator',
     description:
@@ -1275,7 +1238,6 @@ export const calculators: readonly CalculatorEntry[] = [
     mostUsed: false,
     noindex: true,
   },
-  // Added January 2025
   {
     title: 'Due Date Calculator',
     description:
@@ -1314,7 +1276,6 @@ export const calculators: readonly CalculatorEntry[] = [
     category: 'Automotive',
     mostUsed: false,
   },
-  // New Calculators - February 2025
   {
     title: 'TDEE Calculator',
     description:
@@ -2009,16 +1970,10 @@ export const calculators: readonly CalculatorEntry[] = [
   },
 ];
 
-// ---------------------------------------------------------------------------
-// Helper Functions
-// ---------------------------------------------------------------------------
-
-/** Get all unique category names in catalog order. */
 export function getCategories(): readonly string[] {
   return ['All', ...new Set(calculators.map((c) => c.category))];
 }
 
-/** Region-filter codes, busiest first. Derived so a new country never needs a nav edit. */
 export function getCountries(): readonly CountryCode[] {
   const counts = new Map<CountryCode, number>();
   for (const c of calculators) {
@@ -2029,27 +1984,22 @@ export function getCountries(): readonly CountryCode[] {
     .map(([c]) => c);
 }
 
-/** Find a calculator by its href slug (e.g. '/calculators/bmi-calculator'). */
 export function getBySlug(href: string): CalculatorEntry | undefined {
   return calculators.find((c) => c.href === href);
 }
 
-/** The last path segment of a calculator's href ('/calculators/bmi-calculator/' gives 'bmi-calculator'). */
 export function slugOf(calc: CalculatorEntry): string {
   return calc.href.split('/')[2];
 }
 
-/** Get all calculators in a given category. */
 export function getByCategory(category: CategoryName): readonly CalculatorEntry[] {
   return calculators.filter((c) => c.category === category);
 }
 
-/** Get all calculators flagged as most-used. */
 export function getMostUsed(): readonly CalculatorEntry[] {
   return calculators.filter((c) => c.mostUsed);
 }
 
-/** Get all calculators for a specific country. */
 export function getByCountry(country: CountryCode): readonly CalculatorEntry[] {
   return calculators.filter((c) => c.country === country);
 }

@@ -1,7 +1,3 @@
-/**
- * EventSeatingCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateEventSeating } from '../../src/components/calculators/EventSeatingCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EventSeatingCalculator/types';

@@ -1,7 +1,3 @@
-/**
- * LyeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateLye } from '../../src/components/calculators/LyeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/LyeCalculator/types';

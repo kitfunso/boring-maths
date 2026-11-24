@@ -7,7 +7,7 @@ import { auditPages, parseRegistry } from '../../scripts/seo/check-noindex.mjs';
 import { fillDailySeries, findCliff } from '../../scripts/seo/gsc-daily-core.mjs';
 
 describe('check-sources-fresh dateProblem', () => {
-  const now = Date.UTC(2026, 9, 25, 12); // 2026-10-25 midday UTC
+  const now = Date.UTC(2026, 9, 25, 12);
 
   it('accepts today and recent dates', () => {
     expect(dateProblem('2026-10-25', now)).toBeNull();
@@ -26,7 +26,7 @@ describe('check-sources-fresh dateProblem', () => {
   });
 
   it('flags dates older than 400 days and keeps the limit itself', () => {
-    expect(dateProblem('2025-09-20', now)).toBeNull(); // exactly 400 days
+    expect(dateProblem('2025-09-20', now)).toBeNull();
     expect(dateProblem('2025-09-19', now)).toMatch(/401 days ago/);
   });
 });
@@ -53,7 +53,6 @@ describe('check-sources-fresh page scan', () => {
     expect(checkPage(renamed, now).problems).toEqual([
       'imports SourcesSection but has no <SourcesSection ... /> block this gate can read',
     ]);
-    // Not self-closing: the block regex needs "/>", so the check would otherwise read zero.
     expect(
       checkPage(`${imp}<SourcesSection checked="2026-10-01"></SourcesSection>`, now).blocks
     ).toBe(0);
@@ -166,7 +165,6 @@ describe('check-noindex parseRegistry', () => {
     expect(() => parseRegistry('export const nothing = [];')).toThrow(/not found/);
     expect(() => parseRegistry(file('  // none\n'))).toThrow(/zero registry entries/);
     expect(() => parseRegistry(file(entry('/calculators/a/')))).toThrow(/zero noindex/);
-    // A flag spelled any other way would silently read as unflagged.
     const odd = file(
       entry('/calculators/a/', '    noindex: true,\n') +
         entry('/calculators/b/', '    noindex: false,\n')

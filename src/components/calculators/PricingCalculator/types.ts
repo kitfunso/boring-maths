@@ -1,10 +1,3 @@
-/**
- * Pricing Calculator - Type Definitions
- *
- * Calculate optimal product pricing using cost-plus
- * and value-based pricing strategies.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type PricingStrategy = 'cost_plus' | 'value_based' | 'competitive';
@@ -12,28 +5,20 @@ export type PricingStrategy = 'cost_plus' | 'value_based' | 'competitive';
 export interface PricingInputs {
   currency: Currency;
 
-  /** Direct product cost (materials, manufacturing) */
   productCost: number;
 
-  /** Overhead allocation per unit (rent, utilities, salaries divided by units) */
   overheadPerUnit: number;
 
-  /** Desired profit margin (as decimal, e.g., 0.30 = 30%) */
   desiredMargin: number;
 
-  /** Average competitor price for similar product */
   competitorPrice: number;
 
-  /** Perceived value to customer (what they'd pay) */
   perceivedValue: number;
 
-  /** Expected monthly unit sales at calculated price */
   expectedUnitSales: number;
 
-  /** Monthly fixed costs (for break-even analysis) */
   monthlyFixedCosts: number;
 
-  /** Pricing strategy to emphasize */
   strategy: PricingStrategy;
 }
 
@@ -50,40 +35,32 @@ export interface PricingAnalysis {
 export interface PricingResult {
   currency: Currency;
 
-  /** Recommended price based on selected strategy */
   recommendedPrice: number;
 
-  /** Margin at recommended price */
   recommendedMargin: number;
   recommendedMarginPercent: number;
 
-  /** All pricing strategies analyzed */
   strategies: {
     costPlus: PricingAnalysis;
     valueBased: PricingAnalysis;
     competitive: PricingAnalysis;
   };
 
-  /** Break-even analysis */
   breakEvenUnits: number;
   breakEvenRevenue: number;
 
-  /** Profitability projections */
   monthlyRevenue: number;
   monthlyProfit: number;
   annualProfit: number;
 
-  /** Volume needed for profitability */
   unitsForTargetProfit: number;
 
-  /** Price elasticity suggestions */
   priceRange: {
-    floor: number; // Minimum viable price (covers costs)
-    target: number; // Optimal price
-    ceiling: number; // Maximum before demand drops
+    floor: number;
+    target: number;
+    ceiling: number;
   };
 
-  /** Insights */
   insights: string[];
 }
 

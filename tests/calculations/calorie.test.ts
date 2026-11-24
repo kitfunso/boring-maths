@@ -1,7 +1,3 @@
-/**
- * CalorieCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCalories } from '../../src/components/calculators/CalorieCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CalorieCalculator/types';

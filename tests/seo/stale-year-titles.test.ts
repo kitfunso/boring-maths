@@ -2,16 +2,6 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 
-/**
- * Stale-year guard: no page <title> may contain a year older than the current
- * year. Year-in-title wins SERPs only while the year is current; a stale year
- * is worse than none (found live: nursery-cost shipped "2025" into July 2026,
- * GSC review 2026-07-28). This test starts failing every January by design -
- * that is the refresh reminder.
- *
- * Tax-year spans like "2026/27" pass on the leading year.
- */
-
 const PAGES_DIR = path.resolve(__dirname, '..', '..', 'src', 'pages');
 
 function walk(dir: string): string[] {
@@ -34,8 +24,6 @@ describe('page titles carry no stale years', () => {
     if (!match) continue;
     const title = match[1];
     const years = (title.match(/\b20\d{2}\b/g) ?? []).map(Number);
-    // Multi-year and span titles ("2022, ..., 2026", "2025/2026") stay valid
-    // while at least one listed year is current; only all-stale titles fail.
     if (years.length > 0 && years.every((y) => y < currentYear)) {
       offenders.push(`${path.relative(PAGES_DIR, file)}: "${title}"`);
     }

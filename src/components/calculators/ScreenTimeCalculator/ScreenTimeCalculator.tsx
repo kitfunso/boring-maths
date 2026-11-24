@@ -1,7 +1,3 @@
-/**
- * Screen Time Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateScreenTime, formatNumber, getAgeGroupAverage } from './calculations';
 import { getDefaultInputs, AGE_GROUPS, type ScreenTimeInputs, type CategoryName } from './types';
@@ -113,7 +109,6 @@ export default function ScreenTimeCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Age Group */}
             <div>
               <Label>Age Group</Label>
               <ButtonGroup
@@ -123,7 +118,6 @@ export default function ScreenTimeCalculator() {
               />
             </div>
 
-            {/* Category Sliders */}
             <div>
               <Label>Daily Screen Time by Category</Label>
               <div className="space-y-4 mt-3">
@@ -169,11 +163,9 @@ export default function ScreenTimeCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.dailyHours > 0 ? (
               <>
-                {/* Big Yearly Reveal */}
                 <ResultCard
                   label="Your Yearly Screen Time"
                   value={`${formatNumber(result.yearlyDays)} days`}
@@ -189,7 +181,6 @@ export default function ScreenTimeCalculator() {
                   }
                 />
 
-                {/* Time Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Weekly"
@@ -215,7 +206,6 @@ export default function ScreenTimeCalculator() {
                   />
                 </Grid>
 
-                {/* Age Group Comparison */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Compared to Average ({average}h/day for {inputs.ageGroup}s)
@@ -244,12 +234,10 @@ export default function ScreenTimeCalculator() {
                   </div>
                 </div>
 
-                {/* Category Breakdown (pie-like) */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Category Breakdown
                   </h3>
-                  {/* Horizontal stacked bar */}
                   <div className="h-8 rounded-full overflow-hidden flex mb-4">
                     {result.categoryBreakdown
                       .filter((c) => c.percent > 0)
@@ -262,7 +250,6 @@ export default function ScreenTimeCalculator() {
                         />
                       ))}
                   </div>
-                  {/* Legend */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {result.categoryBreakdown.map((c) => (
                       <div key={c.name} className="flex items-center gap-2">
@@ -276,7 +263,6 @@ export default function ScreenTimeCalculator() {
                       </div>
                     ))}
                   </div>
-                  {/* Productive vs Leisure */}
                   <div className="mt-4 pt-4 border-t border-white/10 flex justify-between items-center">
                     <span className="text-sm text-[var(--color-subtle)]">Productive time</span>
                     <span
@@ -287,7 +273,6 @@ export default function ScreenTimeCalculator() {
                   </div>
                 </div>
 
-                {/* Opportunity Cost Cards */}
                 <div>
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     What You Could Do Instead (per year)
@@ -324,7 +309,6 @@ export default function ScreenTimeCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.dailyHours > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

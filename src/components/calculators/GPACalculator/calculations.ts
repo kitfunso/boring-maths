@@ -1,9 +1,3 @@
-/**
- * GPA Calculator Calculations
- *
- * Calculate semester and cumulative GPA based on courses and grades.
- */
-
 import type { GPACalculatorInputs, GPACalculatorResult } from './types';
 import { gradePoints4_0, gradePoints4_3 } from './types';
 
@@ -12,7 +6,6 @@ export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
 
   const gradePoints = gradeScale === '4.3' ? gradePoints4_3 : gradePoints4_0;
 
-  // Calculate semester GPA
   let semesterGradePoints = 0;
   let semesterCredits = 0;
 
@@ -26,7 +19,6 @@ export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
 
   const semesterGPA = semesterCredits > 0 ? semesterGradePoints / semesterCredits : 0;
 
-  // Calculate cumulative GPA if including current
   let cumulativeGPA = semesterGPA;
   let cumulativeCredits = semesterCredits;
 
@@ -37,7 +29,6 @@ export function calculateGPA(inputs: GPACalculatorInputs): GPACalculatorResult {
     cumulativeGPA = cumulativeCredits > 0 ? totalGradePoints / cumulativeCredits : 0;
   }
 
-  // Determine letter grade equivalent
   const letterGrade = getLetterGrade(semesterGPA, gradeScale);
 
   return {

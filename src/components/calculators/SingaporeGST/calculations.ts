@@ -1,10 +1,8 @@
-/** Singapore GST calculator. Rate is 9% from 1 Jan 2024; older rates kept as constants for page copy only. */
-
 export const GST_RATE = 0.09;
-export const GST_RATE_2023 = 0.08; // 1 Jan - 31 Dec 2023
-export const GST_RATE_PRE_2023 = 0.07; // before 1 Jan 2023
+export const GST_RATE_2023 = 0.08;
+export const GST_RATE_PRE_2023 = 0.07;
 export const GST_EFFECTIVE_DATE = '1 January 2024';
-export const LOW_VALUE_GOODS_THRESHOLD = 400; // SGD; GST still applies below this via the OVR regime, since 2023
+export const LOW_VALUE_GOODS_THRESHOLD = 400;
 
 export type GSTMode = 'add' | 'remove';
 
@@ -44,7 +42,6 @@ export function getDefaultImportInputs(): ImportGSTInputs {
 
 const round2 = (v: number) => Math.round(v * 100) / 100;
 
-// Removing GST divides by (1 + rate); subtracting the rate is the common mistake.
 export function calculateDomesticGST(inputs: DomesticGSTInputs): DomesticGSTResult {
   const amount = Math.max(0, inputs.amount || 0);
 
@@ -61,7 +58,6 @@ export function calculateDomesticGST(inputs: DomesticGSTInputs): DomesticGSTResu
   return { net: round2(net), gst: round2(gst), gross: round2(gross) };
 }
 
-// Import GST applies to CIF value plus duty, not to item cost alone.
 export function calculateImportGST(inputs: ImportGSTInputs): ImportGSTResult {
   const itemCost = Math.max(0, inputs.itemCost || 0);
   const shipping = Math.max(0, inputs.shipping || 0);

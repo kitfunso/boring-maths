@@ -1,8 +1,3 @@
-/**
- * Wedding Budget Calculator - React Component
- *
- * Plan and allocate your wedding budget across categories.
- */
 import { calculateWeddingBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -91,7 +86,6 @@ export default function WeddingBudget() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-rose-400 uppercase tracking-wider">
                 Budget & Guests
@@ -176,7 +170,6 @@ export default function WeddingBudget() {
               ))}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Budget Tier"
@@ -197,7 +190,6 @@ export default function WeddingBudget() {
                 />
               </Grid>
 
-              {/* Warnings */}
               {result.warnings.length > 0 && (
                 <Alert variant="warning">
                   <ul className="space-y-1">
@@ -211,7 +203,6 @@ export default function WeddingBudget() {
                 </Alert>
               )}
 
-              {/* Budget Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Recommended Allocations
@@ -248,7 +239,6 @@ export default function WeddingBudget() {
                   ))}
                 </div>
 
-                {/* Remaining categories summary */}
                 <div className="mt-4 pt-4 border-t border-white/10">
                   <div className="flex justify-between text-sm">
                     <span className="text-[var(--color-muted)]">
@@ -261,7 +251,6 @@ export default function WeddingBudget() {
                 </div>
               </div>
 
-              {/* Savings Tips */}
               <Alert variant="tip" title="Money-Saving Tips">
                 <ul className="space-y-2 mt-2">
                   {result.savingsTips.map((tip, i) => (
@@ -273,7 +262,6 @@ export default function WeddingBudget() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Wedding Budget: ${fmt(result.totalBudget)} for ${result.guestCount} guests (${fmt(result.costPerGuest)}/guest). Budget tier: ${result.budgetTier}`}

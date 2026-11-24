@@ -1,7 +1,3 @@
-/**
- * InflationCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateInflation } from '../../src/components/calculators/InflationCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/InflationCalculator/types';

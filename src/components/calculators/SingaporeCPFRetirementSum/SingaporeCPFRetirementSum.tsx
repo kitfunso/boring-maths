@@ -1,5 +1,3 @@
-/** Singapore CPF Retirement Sum Calculator - Preact component, live updating, no submit button. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateCPFRetirementSum,
@@ -40,7 +38,6 @@ export default function SingaporeCPFRetirementSum() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -117,7 +114,6 @@ export default function SingaporeCPFRetirementSum() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
           <div class="bg-white/5 rounded-xl p-4">
             <h3 class="text-sm font-medium text-[var(--color-muted)] mb-3">2026 retirement sums</h3>

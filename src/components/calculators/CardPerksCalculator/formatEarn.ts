@@ -1,4 +1,3 @@
-/** Crawlable earn-rate summary for CardFactsTable.astro; groups by rate, high to low. */
 import { POINT_CURRENCY_LABELS, SPEND_CATEGORIES, SPEND_CATEGORY_LABELS } from './types';
 import type { CardProduct, SpendCategory } from './types';
 
@@ -65,7 +64,6 @@ function tier2Clause(card: CardProduct): string {
   return `, rising to ${label} after £${nf.format(card.tier2.fromSpend)} spend a year`;
 }
 
-/** e.g. "2 Avios per £1 supermarkets, 1 elsewhere" or "1% cashback"; "No rewards" when currency is none. */
 export function formatEarn(card: CardProduct): string {
   if (card.currency === 'none') return 'No rewards';
   return `${baseEarnClause(card)}${tier2Clause(card)}`;

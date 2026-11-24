@@ -1,7 +1,3 @@
-/**
- * GraduationPartyPlannerCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateGraduationParty } from '../../src/components/calculators/GraduationPartyPlanner/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/GraduationPartyPlanner/types';

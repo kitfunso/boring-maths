@@ -1,22 +1,6 @@
-/**
- * Pipe Flow Calculator - Calculation Logic
- *
- * Q = A × V
- * A = π × D² / 4
- *
- * Where:
- * Q = Volumetric flow rate
- * A = Cross-sectional area
- * V = Flow velocity
- * D = Pipe diameter
- */
-
 import type { PipeFlowInputs, PipeFlowResult, FluidCategory } from './types';
 import { VELOCITY_RECOMMENDATIONS, STANDARD_PIPE_SIZES_MM, STANDARD_PIPE_SIZES_IN } from './types';
 
-/**
- * Convert inputs to SI units (m, m/s, m³/s)
- */
 function toSI(inputs: PipeFlowInputs): { D: number; V: number; Q: number } {
   if (inputs.unitSystem === 'metric') {
     return {
@@ -33,9 +17,6 @@ function toSI(inputs: PipeFlowInputs): { D: number; V: number; Q: number } {
   }
 }
 
-/**
- * Convert result back to user's unit system
- */
 function fromSI(
   D: number,
   V: number,
@@ -61,9 +42,6 @@ function fromSI(
   }
 }
 
-/**
- * Find nearest standard pipe size
- */
 function findNearestStandardSize(diameter: number, unitSystem: 'metric' | 'imperial'): string {
   const sizes = unitSystem === 'metric' ? STANDARD_PIPE_SIZES_MM : STANDARD_PIPE_SIZES_IN;
   const unit = unitSystem === 'metric' ? 'mm' : '"';
@@ -79,15 +57,11 @@ function findNearestStandardSize(diameter: number, unitSystem: 'metric' | 'imper
     }
   }
 
-  // For next size up (common practice)
   const nextSizeUp = sizes.find((s) => s >= diameter) || sizes[sizes.length - 1];
 
   return `${nearest}${unit} (or ${nextSizeUp}${unit} next size up)`;
 }
 
-/**
- * Get recommended velocity range based on fluid type
- */
 function getRecommendedVelocity(
   category: FluidCategory,
   unitSystem: 'metric' | 'imperial'
@@ -117,9 +91,6 @@ function getRecommendedVelocity(
   return rec;
 }
 
-/**
- * Evaluate velocity against recommendations
- */
 function evaluateVelocity(
   velocity: number,
   category: FluidCategory,
@@ -152,26 +123,18 @@ function evaluateVelocity(
   }
 }
 
-/**
- * Calculate pipe flow parameters
- */
 export function calculatePipeFlow(inputs: PipeFlowInputs): PipeFlowResult {
   const { solveFor, unitSystem, fluidCategory } = inputs;
   let { D, V, Q } = toSI(inputs);
 
-  // Calculate based on what we're solving for
-  // Q = A × V = (π × D² / 4) × V
   switch (solveFor) {
     case 'diameter':
-      // D = sqrt(4Q / (πV))
       D = Math.sqrt((4 * Q) / (Math.PI * V));
       break;
     case 'velocity':
-      // V = Q / A = 4Q / (πD²)
       V = (4 * Q) / (Math.PI * Math.pow(D, 2));
       break;
     case 'flowRate':
-      // Q = A × V = (πD²/4) × V
       Q = ((Math.PI * Math.pow(D, 2)) / 4) * V;
       break;
   }
@@ -193,9 +156,6 @@ export function calculatePipeFlow(inputs: PipeFlowInputs): PipeFlowResult {
   };
 }
 
-/**
- * Format numbers for display
- */
 export function formatNumber(value: number, decimals: number = 2): string {
   return value.toLocaleString(undefined, {
     minimumFractionDigits: decimals,

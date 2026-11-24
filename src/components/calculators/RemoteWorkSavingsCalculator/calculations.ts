@@ -1,10 +1,3 @@
-/**
- * Remote Work Savings Calculator - Calculation Logic
- *
- * Calculates total savings from working remotely vs commuting to office.
- * Includes transportation, food, clothing, time value, and environmental impact.
- */
-
 import { type Currency, getCurrencySymbol } from '../../../lib/regions';
 import {
   type RemoteWorkSavingsInputs,
@@ -15,24 +8,12 @@ import {
   type ArrangementComparison,
 } from './types';
 
-/**
- * CO2 emissions constants
- * Average car emits ~19.6 lbs CO2 per gallon of gas
- * A mature tree absorbs ~48 lbs CO2 per year
- */
 const CO2_LBS_PER_GALLON = 19.6;
 const CO2_LBS_PER_TREE_YEAR = 48;
 const LBS_PER_TON = 2000;
 
-/**
- * Floor a numeric input to 0 when it is non-finite (NaN/Infinity from a
- * cleared or partial field). Valid finite values pass through unchanged.
- */
 const safe = (value: number): number => (Number.isFinite(value) ? value : 0);
 
-/**
- * Calculate transportation savings
- */
 function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
   gas: number;
   maintenance: number;
@@ -80,7 +61,6 @@ function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
     transit = transitCostDaily * commuteDaysPerYear;
   }
 
-  // For mixed, assume 50% car / 50% transit
   if (commuteType === 'mixed') {
     gas *= 0.5;
     maintenance *= 0.5;
@@ -96,9 +76,6 @@ function calculateTransportSavings(inputs: RemoteWorkSavingsInputs): {
   return { gas, maintenance, parking, tolls, transit, total, milesAvoided, gallonsSaved };
 }
 
-/**
- * Calculate lifestyle savings (food, clothes, coffee)
- */
 function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
   food: number;
   clothing: number;
@@ -116,16 +93,12 @@ function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
 
   const commuteDaysPerYear = officeDaysPerWeek * weeksPerYear;
 
-  // Food savings (difference between eating out and cooking at home)
   const food = (workLunchCostDaily - homeLunchCostDaily) * commuteDaysPerYear;
 
-  // Work clothes - assume remote work reduces need by 80%
   const clothing = workClothesBudgetMonthly * 12 * 0.8;
 
-  // Dry cleaning - assume remote work reduces by 90%
   const dryCleaning = dryCleaningMonthly * 12 * 0.9;
 
-  // Coffee at work
   const coffee = coffeeAtWorkDaily * commuteDaysPerYear;
 
   const total = food + clothing + dryCleaning + coffee;
@@ -133,19 +106,16 @@ function calculateLifestyleSavings(inputs: RemoteWorkSavingsInputs): {
   return { food, clothing, dryCleaning, coffee, total };
 }
 
-/**
- * Calculate time analysis
- */
 function calculateTimeAnalysis(inputs: RemoteWorkSavingsInputs): TimeAnalysis {
   const commuteTimeMinutes = safe(inputs.commuteTimeMinutes);
   const officeDaysPerWeek = safe(inputs.officeDaysPerWeek);
   const weeksPerYear = safe(inputs.weeksPerYear);
   const hourlyRate = safe(inputs.hourlyRate);
 
-  const dailyCommuteMinutes = commuteTimeMinutes * 2; // Round trip
+  const dailyCommuteMinutes = commuteTimeMinutes * 2;
   const weeklyCommuteHours = (dailyCommuteMinutes * officeDaysPerWeek) / 60;
   const annualCommuteHours = weeklyCommuteHours * weeksPerYear;
-  const annualCommuteDays = annualCommuteHours / 8; // 8-hour workday equivalents
+  const annualCommuteDays = annualCommuteHours / 8;
   const valueOfTimeSaved = annualCommuteHours * hourlyRate;
 
   return {
@@ -157,9 +127,6 @@ function calculateTimeAnalysis(inputs: RemoteWorkSavingsInputs): TimeAnalysis {
   };
 }
 
-/**
- * Calculate environmental impact
- */
 function calculateEnvironmentalImpact(
   milesAvoided: number,
   gallonsSaved: number
@@ -177,13 +144,9 @@ function calculateEnvironmentalImpact(
   };
 }
 
-/**
- * Main calculation function
- */
 export function calculateRemoteWorkSavings(
   inputs: RemoteWorkSavingsInputs
 ): RemoteWorkSavingsResult {
-  // Calculate each category
   const transport = calculateTransportSavings(inputs);
   const lifestyle = calculateLifestyleSavings(inputs);
   const time = calculateTimeAnalysis(inputs);
@@ -192,13 +155,11 @@ export function calculateRemoteWorkSavings(
     transport.gallonsSaved
   );
 
-  // Build savings breakdown
   const totalAnnualSavings = transport.total + lifestyle.total;
   const totalMonthlySavings = totalAnnualSavings / 12;
   const commuteDaysPerYear = safe(inputs.officeDaysPerWeek) * safe(inputs.weeksPerYear);
   const totalDailySavings = safe(totalAnnualSavings / commuteDaysPerYear);
 
-  // Effective hourly raise (savings spread across work hours)
   const annualWorkHours = 40 * safe(inputs.weeksPerYear);
   const effectiveHourlyRaise = safe(totalAnnualSavings / annualWorkHours);
 
@@ -225,10 +186,9 @@ export function calculateRemoteWorkSavings(
     effectiveHourlyRaise,
   };
 
-  // Comparison (office costs vs remote costs)
-  const officeCosts = totalAnnualSavings; // What you spend going to office
-  const remoteCosts = safe(inputs.homeLunchCostDaily) * commuteDaysPerYear; // Minimal remote costs
-  const netSavings = officeCosts - remoteCosts + remoteCosts; // Net is just office costs for simplicity
+  const officeCosts = totalAnnualSavings;
+  const remoteCosts = safe(inputs.homeLunchCostDaily) * commuteDaysPerYear;
+  const netSavings = officeCosts - remoteCosts + remoteCosts;
   const savingsPercentage = safe((netSavings / (officeCosts + remoteCosts)) * 100);
 
   const comparison: ArrangementComparison = {
@@ -251,9 +211,6 @@ export function calculateRemoteWorkSavings(
   };
 }
 
-/**
- * Format currency for display
- */
 export function formatCurrency(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
   const absAmount = Math.abs(amount);
@@ -264,9 +221,6 @@ export function formatCurrency(amount: number, currency: Currency): string {
   return amount < 0 ? `-${symbol}${formatted}` : `${symbol}${formatted}`;
 }
 
-/**
- * Format currency with decimals
- */
 export function formatCurrencyDecimal(amount: number, currency: Currency): string {
   const symbol = getCurrencySymbol(currency);
   const formatted = amount.toLocaleString('en-US', {
@@ -276,9 +230,6 @@ export function formatCurrencyDecimal(amount: number, currency: Currency): strin
   return `${symbol}${formatted}`;
 }
 
-/**
- * Format hours
- */
 export function formatHours(hours: number): string {
   if (hours < 1) {
     return `${Math.round(hours * 60)} min`;
@@ -291,9 +242,6 @@ export function formatHours(hours: number): string {
   return `${wholeHours} hr ${minutes} min`;
 }
 
-/**
- * Format large numbers compactly
- */
 export function formatCompact(value: number): string {
   if (value >= 1000) {
     return `${(value / 1000).toFixed(1)}k`;
@@ -301,9 +249,6 @@ export function formatCompact(value: number): string {
   return value.toFixed(0);
 }
 
-/**
- * Get color for savings amount
- */
 export function getSavingsColor(amount: number): string {
   if (amount > 5000) return 'text-green-400';
   if (amount > 2000) return 'text-emerald-400';

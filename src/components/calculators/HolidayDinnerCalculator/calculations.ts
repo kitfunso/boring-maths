@@ -1,7 +1,3 @@
-/**
- * Holiday Dinner Calculator - Calculation Logic
- */
-
 import type { HolidayDinnerInputs, HolidayDinnerResult, TurkeyInfo, SideQuantity } from './types';
 import {
   TURKEY_LBS_PER_ADULT,
@@ -31,7 +27,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
     includePie,
   } = inputs;
 
-  // Calculate turkey size
   const meatEaters = adultCount + childCount - vegetarianCount;
   const baseTurkeyWeight =
     (adultCount - vegetarianCount) * TURKEY_LBS_PER_ADULT +
@@ -39,18 +34,15 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
   const leftoverMultiplier = LEFTOVER_MULTIPLIER[leftoverPreference];
   const turkeyWeight = Math.ceil(baseTurkeyWeight * leftoverMultiplier);
 
-  // Round to common turkey sizes (10, 12, 14, 16, 18, 20, 22, 24 lbs)
   const roundedWeight = Math.ceil(turkeyWeight / 2) * 2;
   const finalWeight = Math.max(10, Math.min(24, roundedWeight));
 
-  // Calculate cooking time
   const cookTimePerLb = COOK_TIME_PER_LB[cookingMethod];
   const totalCookTime = Math.round(finalWeight * cookTimePerLb);
   const hours = Math.floor(totalCookTime / 60);
   const minutes = totalCookTime % 60;
   const cookTimeFormatted = hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
 
-  // Calculate thaw time (only for frozen)
   const thawDays = turkeyType === 'frozen' ? Math.ceil((finalWeight * THAW_HOURS_PER_LB) / 24) : 0;
 
   const turkey: TurkeyInfo = {
@@ -69,7 +61,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
           : 'Maintain smoker at 225-250°F. Use a meat thermometer.',
   };
 
-  // Calculate side dishes
   const sides: SideQuantity[] = [];
   const servingMultiplier = leftoverMultiplier;
 
@@ -172,7 +163,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
 
   const totalSideServings = sides.reduce((sum, s) => sum + s.servings, 0);
 
-  // Dietary accommodations
   const vegetarianMains = vegetarianCount > 0 ? Math.ceil(vegetarianCount * 0.75) : 0;
 
   const glutenFreeAccommodations: string[] = [];
@@ -187,7 +177,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
     glutenFreeAccommodations.push('Check all packaged items for hidden gluten');
   }
 
-  // Build timeline (working backwards from dinner time)
   const timeline: { time: string; task: string; notes: string }[] = [];
 
   if (turkeyType === 'frozen' && thawDays > 0) {
@@ -210,7 +199,7 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
     notes: 'Refrigerate unbaked',
   });
 
-  const turkeyStartHours = Math.ceil(totalCookTime / 60) + 1; // +1 for rest and prep
+  const turkeyStartHours = Math.ceil(totalCookTime / 60) + 1;
   timeline.push({
     time: `${turkeyStartHours + 1} hours before dinner`,
     task: 'Remove turkey from fridge, prep for cooking',
@@ -241,7 +230,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
     notes: 'Have carving board and sharp knife ready',
   });
 
-  // Tips
   const tips: string[] = [];
   tips.push('Use a meat thermometer - internal temp should reach 165°F in the thickest part');
   tips.push('Let the turkey rest 20-30 minutes before carving for juicier meat');
@@ -258,7 +246,6 @@ export function calculateHolidayDinner(inputs: HolidayDinnerInputs): HolidayDinn
   tips.push('Prep and measure ingredients the day before to reduce stress');
   tips.push('Accept help! Assign dishes to guests when they offer');
 
-  // Shopping list
   const shoppingList: { category: string; items: string[] }[] = [
     {
       category: 'Meat',

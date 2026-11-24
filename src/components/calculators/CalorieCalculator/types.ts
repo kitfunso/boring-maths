@@ -1,7 +1,3 @@
-/**
- * Calorie/TDEE Calculator - Type Definitions
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type Gender = 'male' | 'female';
 export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'veryActive';
@@ -21,8 +17,8 @@ export interface CalorieInputs {
 }
 
 export interface CalorieResult {
-  bmr: number; // Basal Metabolic Rate
-  tdee: number; // Total Daily Energy Expenditure
+  bmr: number;
+  tdee: number;
   goalCalories: number;
   protein: { min: number; max: number };
   carbs: { min: number; max: number };

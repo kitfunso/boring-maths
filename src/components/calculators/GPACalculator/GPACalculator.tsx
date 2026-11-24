@@ -1,9 +1,3 @@
-/**
- * GPA Calculator - React Component
- *
- * Calculate semester and cumulative GPA with support for multiple grade scales.
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateGPA, getGPADescription } from './calculations';
 import {
@@ -85,7 +79,6 @@ export default function GPACalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Grade Scale Selection */}
             <div>
               <Label required>Grade Scale</Label>
               <div className="flex gap-2">
@@ -114,7 +107,6 @@ export default function GPACalculator() {
               </div>
             </div>
 
-            {/* Current GPA (Optional) */}
             <div className="bg-[var(--color-night)] rounded-xl p-4 border border-white/10">
               <div className="flex items-center gap-3 mb-4">
                 <input
@@ -157,7 +149,6 @@ export default function GPACalculator() {
               )}
             </div>
 
-            {/* Courses */}
             <div>
               <div className="flex justify-between items-center mb-4">
                 <Label className="mb-0">This Semester's Courses</Label>
@@ -245,9 +236,7 @@ export default function GPACalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result - Semester GPA */}
             <div className="rounded-2xl p-8 text-center border-2 bg-violet-950/50 border-violet-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Semester GPA
@@ -262,7 +251,6 @@ export default function GPACalculator() {
               </p>
             </div>
 
-            {/* Cumulative GPA (if enabled) */}
             {inputs.includeCurrentGPA && inputs.currentCredits > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
@@ -279,7 +267,6 @@ export default function GPACalculator() {
               </div>
             )}
 
-            {/* Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Semester Summary
@@ -306,7 +293,6 @@ export default function GPACalculator() {
               </Grid>
             </div>
 
-            {/* Grade Point Reference */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Grade Point Values ({inputs.gradeScale} Scale)
@@ -377,7 +363,6 @@ export default function GPACalculator() {
               courses have more impact on your overall GPA.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Semester GPA: ${result.semesterGPA.toFixed(2)} (${result.letterGrade}) | ${result.semesterCredits} credits`}

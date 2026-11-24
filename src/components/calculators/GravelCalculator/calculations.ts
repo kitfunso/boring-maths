@@ -1,16 +1,8 @@
-/**
- * Gravel Calculator - Calculation Logic
- *
- * Pure functions only. No JSX, no side effects.
- */
-
 import type { GravelCalculatorInputs, GravelCalculatorResult } from './types';
 import { BULK_BAG_TONNES } from './types';
 
-/** Metres per foot, for unit conversion. */
 const FT_TO_M = 0.3048;
 
-/** Clamp any numeric input to a finite, non-negative value (NaN-safe). */
 const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
 
 export function calculateGravelCalculator(inputs: GravelCalculatorInputs): GravelCalculatorResult {
@@ -23,7 +15,6 @@ export function calculateGravelCalculator(inputs: GravelCalculatorInputs): Grave
   const wastePct = safe(inputs.wastePct);
   const pricePerTonne = safe(inputs.pricePerTonne);
 
-  // Convert every dimension to metres when entered in feet.
   const factor = inputs.unit === 'ft' ? FT_TO_M : 1;
   const lengthM = length * factor;
   const widthM = width * factor;
@@ -42,16 +33,12 @@ export function calculateGravelCalculator(inputs: GravelCalculatorInputs): Grave
     };
   }
 
-  // Coverage volume in cubic metres (before waste allowance).
   const volumeM3 = lengthM * widthM * depthM;
 
-  // Tonnes needed, including the waste allowance.
   const tonnes = volumeM3 * density * (1 + wastePct / 100);
 
-  // Bulk bags are 0.85 tonne each; round up to whole bags.
   const bulkBags = volumeM3 > 0 ? Math.ceil(tonnes / BULK_BAG_TONNES) : 0;
 
-  // Optional cost estimate.
   const cost = tonnes * pricePerTonne;
 
   return {

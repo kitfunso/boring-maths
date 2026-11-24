@@ -1,7 +1,3 @@
-/**
- * Loan Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateLoan,
@@ -22,8 +18,6 @@ describe('LoanCalculator', () => {
 
       const result = calculateLoan(inputs);
 
-      // $10,000 at 5% for 12 months
-      // Monthly payment should be around $856
       expect(result.monthlyPayment).toBeGreaterThan(850);
       expect(result.monthlyPayment).toBeLessThan(860);
     });
@@ -39,10 +33,8 @@ describe('LoanCalculator', () => {
 
       const result = calculateLoan(inputs);
 
-      // Total payment = monthly * term
       expect(result.totalPayment).toBeCloseTo(result.monthlyPayment * 60, 0);
 
-      // Total interest = total payment - principal
       expect(result.totalInterest).toBeCloseTo(result.totalPayment - 20000, 0);
     });
 
@@ -59,13 +51,10 @@ describe('LoanCalculator', () => {
 
       expect(result.amortization).toHaveLength(12);
 
-      // First payment should have more interest than last
       expect(result.amortization[0].interest).toBeGreaterThan(result.amortization[11].interest);
 
-      // Last payment should have balance of 0
       expect(result.amortization[11].balance).toBe(0);
 
-      // Each row should have principal + interest = payment
       result.amortization.forEach((row) => {
         expect(row.principal + row.interest).toBeCloseTo(row.payment, 1);
       });
@@ -82,7 +71,6 @@ describe('LoanCalculator', () => {
 
       const result = calculateLoan(inputs);
 
-      // With 0% interest, monthly payment = principal / months
       expect(result.monthlyPayment).toBe(1000);
       expect(result.totalInterest).toBe(0);
       expect(result.totalPayment).toBe(12000);
@@ -115,7 +103,6 @@ describe('LoanCalculator', () => {
 
       const result = calculateLoan(inputs);
 
-      // Effective rate = (total interest / principal) * 100
       const expectedEffectiveRate = (result.totalInterest / 10000) * 100;
       expect(result.effectiveRate).toBeCloseTo(expectedEffectiveRate, 0);
     });

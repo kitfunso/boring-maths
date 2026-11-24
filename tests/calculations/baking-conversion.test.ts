@@ -67,7 +67,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // 1 cup = 16 tablespoons (exact)
       expect(result.convertedAmount).toBe(16);
     });
 
@@ -81,7 +80,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // 1 cup = 48 teaspoons
       expect(result.convertedAmount).toBe(48);
     });
 
@@ -95,7 +93,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // 1 oz = 28.3495 g, smartRound gives 28.3 for values 10-100
       expect(result.convertedAmount).toBeCloseTo(28.3, 1);
     });
 
@@ -109,7 +106,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // 1 cup = ~236.6 ml (exact, volume-to-volume)
       expect(result.convertedAmount).toBeCloseTo(236.6, 0);
     });
 
@@ -150,7 +146,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // Should have equivalents for all units except the target (grams)
       expect(result.equivalents.length).toBeGreaterThan(0);
       expect(result.equivalents.find((e) => e.unit === 'grams')).toBeUndefined();
     });
@@ -214,7 +209,6 @@ describe('BakingConversionCalculator', () => {
 
       const result = calculateBakingConversion(inputs);
 
-      // 1 liter ~ 4.227 cups
       expect(result.convertedAmount).toBeCloseTo(4.23, 1);
     });
   });

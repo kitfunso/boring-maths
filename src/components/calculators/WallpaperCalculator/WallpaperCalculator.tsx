@@ -1,9 +1,3 @@
-/**
- * Wallpaper Calculator - React Component
- *
- * Calculate how many rolls of wallpaper a room needs, accounting for
- * drops, roll dimensions, and pattern repeat. Uses the shared UI kit.
- */
 import { calculateWallpaperCalculator } from './calculations';
 import {
   getDefaultInputs,
@@ -48,10 +42,6 @@ export default function WallpaperCalculator() {
   const unitLabel = inputs.unit === 'ft' ? 'feet' : 'metres';
   const usingPerimeter = inputs.roomPerimeter > 0;
 
-  // Switching the unit converts every length field so the displayed numbers
-  // describe the same physical sizes (a 10.05 m roll becomes ~32.97 ft, not a
-  // shrunken 10.05 ft roll). Without this, the metric roll defaults are silently
-  // misread as feet and the roll count is overestimated.
   const handleUnitChange = (value: string) => {
     const newUnit = value as WallpaperUnit;
     if (newUnit === inputs.unit) return;
@@ -80,13 +70,11 @@ export default function WallpaperCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-violet-400 uppercase tracking-wider">
                 Room Dimensions
               </div>
 
-              {/* Unit */}
               <div>
                 <Label>Measurement Unit</Label>
                 <ButtonGroup
@@ -97,7 +85,6 @@ export default function WallpaperCalculator() {
                 />
               </div>
 
-              {/* Length + Width */}
               <Grid cols={2} gap="md">
                 <div>
                   <Label htmlFor="roomLength">Room Length ({unitLabel})</Label>
@@ -131,7 +118,6 @@ export default function WallpaperCalculator() {
                 </div>
               </Grid>
 
-              {/* Perimeter override */}
               <div>
                 <Label htmlFor="roomPerimeter">
                   Wall Perimeter ({unitLabel}, optional override)
@@ -152,7 +138,6 @@ export default function WallpaperCalculator() {
                 </p>
               </div>
 
-              {/* Wall Height */}
               <div>
                 <Label htmlFor="wallHeight">Wall Height ({unitLabel})</Label>
                 <Input
@@ -229,7 +214,6 @@ export default function WallpaperCalculator() {
               </p>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {result.isInvalid ? (
                 <Alert variant="warning" title="Add your room measurements.">

@@ -1,5 +1,3 @@
-/** Singapore AWS proration calculator, showing both methods side by side rather than picking one. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateSingaporeAWSBonus,
@@ -29,7 +27,6 @@ export default function SingaporeAWSBonus() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Inputs */}
         <div class="space-y-6 mb-8">
           <div>
             <label
@@ -123,7 +120,6 @@ export default function SingaporeAWSBonus() {
           </div>
         </div>
 
-        {/* Results */}
         <div class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="rounded-2xl p-6 border-2 border-emerald-500/30 bg-emerald-950/30 text-center">

@@ -1,16 +1,7 @@
-/**
- * Buy vs Rent Calculator - Calculation Logic
- *
- * Pure functions for comparing buying vs renting.
- */
-
 import type { BuyVsRentInputs, BuyVsRentResult, YearlyBreakdown } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate monthly mortgage payment
- */
 function calculateMonthlyMortgage(
   principal: number,
   annualRate: number,
@@ -29,9 +20,6 @@ function calculateMonthlyMortgage(
   );
 }
 
-/**
- * Calculate mortgage amortization for a year
- */
 function calculateYearAmortization(
   balance: number,
   annualRate: number,
@@ -60,9 +48,6 @@ function calculateYearAmortization(
   };
 }
 
-/**
- * Calculate buy vs rent comparison
- */
 export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
   const {
     currency,
@@ -85,13 +70,11 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
     includeTaxBenefits,
   } = inputs;
 
-  // Initial calculations
   const downPayment = homePrice * downPaymentPercent;
   const loanAmount = homePrice - downPayment;
   const closingCosts = homePrice * closingCostsPercent;
   const monthlyMortgage = calculateMonthlyMortgage(loanAmount, mortgageRate, mortgageTerm);
 
-  // Initial monthly costs
   const monthlyPropertyTax = (homePrice * propertyTaxRate) / 12;
   const monthlyInsurance = homeInsurance / 12;
   const monthlyHoa = hoaFees / 12;
@@ -102,20 +85,16 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
   const initialRent = monthlyRent;
   const monthlyRentCost = monthlyRent + renterInsurance / 12;
 
-  // Year-by-year calculation
   const yearlyBreakdown: YearlyBreakdown[] = [];
   let mortgageBalance = loanAmount;
   let currentRent = monthlyRent;
   let currentHomeValue = homePrice;
 
-  // Track cumulative costs
   let cumulativeBuyCost = downPayment + closingCosts;
   let cumulativeRentCost = 0;
 
-  // Investment tracking for renter (invest the down payment + closing costs)
   let investmentValue = downPayment + closingCosts;
 
-  // Track total costs for summary
   let totalMortgageInterest = 0;
   let totalPropertyTax = 0;
   let totalInsurance = 0;
@@ -127,21 +106,17 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
   let breakEvenYear: number | null = null;
 
   for (let year = 1; year <= stayDuration; year++) {
-    // Home appreciation
     currentHomeValue *= 1 + homeAppreciation;
 
-    // Mortgage amortization
     const amort = calculateYearAmortization(mortgageBalance, mortgageRate, monthlyMortgage);
     mortgageBalance = amort.endBalance;
 
-    // Annual buying costs (adjusted for current home value for some costs)
     const yearPropertyTax = currentHomeValue * propertyTaxRate;
-    const yearInsurance = homeInsurance * Math.pow(1.02, year - 1); // 2% insurance increase
-    const yearHoa = hoaFees * Math.pow(1.03, year - 1); // 3% HOA increase
+    const yearInsurance = homeInsurance * Math.pow(1.02, year - 1);
+    const yearHoa = hoaFees * Math.pow(1.03, year - 1);
     const yearMaintenance = currentHomeValue * maintenancePercent;
     const yearMortgagePayment = monthlyMortgage * 12;
 
-    // Tax savings from mortgage interest deduction
     const taxSavings = includeTaxBenefits ? amort.interestPaid * marginalTaxRate : 0;
 
     const totalBuyingCost =
@@ -152,46 +127,36 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
       yearMaintenance -
       taxSavings;
 
-    // Annual renting costs
     const yearRent = currentRent * 12;
     const yearRenterInsurance = renterInsurance * Math.pow(1.02, year - 1);
     const totalRentingCost = yearRent + yearRenterInsurance;
 
-    // Update cumulative totals
     cumulativeBuyCost += totalBuyingCost;
     cumulativeRentCost += totalRentingCost;
 
-    // Update investment (monthly contributions of the difference + growth)
     const monthlyBuyCost = totalBuyingCost / 12;
     const monthlyRentCostNow = totalRentingCost / 12;
 
-    // Renter invests the difference if renting is cheaper
     const monthlySavings = monthlyBuyCost - monthlyRentCostNow;
     if (monthlySavings > 0) {
-      // Renter has extra to invest
       for (let m = 0; m < 12; m++) {
         investmentValue *= 1 + investmentReturn / 12;
         investmentValue += monthlySavings;
       }
     } else {
-      // Just grow existing investment
       investmentValue *= 1 + investmentReturn;
     }
 
-    // Calculate home equity
     const homeEquity = currentHomeValue - mortgageBalance;
 
-    // Net worth comparison
-    const buyingNetWorth = homeEquity - (year < mortgageTerm ? 0 : 0); // Just equity
+    const buyingNetWorth = homeEquity - (year < mortgageTerm ? 0 : 0);
     const rentingNetWorth = investmentValue;
     const buyAdvantage = buyingNetWorth - rentingNetWorth;
 
-    // Track break-even
     if (breakEvenYear === null && buyAdvantage >= 0) {
       breakEvenYear = year;
     }
 
-    // Track totals
     totalMortgageInterest += amort.interestPaid;
     totalPropertyTax += yearPropertyTax;
     totalInsurance += yearInsurance;
@@ -225,11 +190,9 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
       buyAdvantage: Math.round(buyAdvantage),
     });
 
-    // Increase rent for next year
     currentRent *= 1 + rentIncrease;
   }
 
-  // Final comparison
   const finalYear = yearlyBreakdown[yearlyBreakdown.length - 1];
   const difference = finalYear.buyingNetWorth - finalYear.rentingNetWorth;
   const percentageDiff =
@@ -248,7 +211,6 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
     percentageDiff: Math.round(percentageDiff),
   };
 
-  // Milestones
   const getMilestone = (year: number) => {
     const data = yearlyBreakdown[year - 1];
     if (!data) return null;
@@ -265,7 +227,6 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
     year15: getMilestone(15),
   };
 
-  // Total costs breakdown
   const totalCosts = {
     buying: {
       downPayment: Math.round(downPayment),
@@ -284,7 +245,6 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
     },
   };
 
-  // Generate recommendation
   const considerations: string[] = [];
 
   if (stayDuration < 5) {
@@ -335,9 +295,6 @@ export function calculateBuyVsRent(inputs: BuyVsRentInputs): BuyVsRentResult {
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',

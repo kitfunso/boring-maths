@@ -1,10 +1,3 @@
-/**
- * Subscription Audit Calculator - React Component
- *
- * Track and analyze subscription spending with usage ratings
- * to identify savings opportunities.
- */
-
 import { useState } from 'preact/hooks';
 import { analyzeSubscriptions, formatCurrency } from './calculations';
 import {
@@ -37,9 +30,6 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
-/**
- * Single subscription row
- */
 function SubscriptionRow({
   subscription,
   currencySymbol,
@@ -144,9 +134,6 @@ function SubscriptionRow({
   );
 }
 
-/**
- * Recommendation badge
- */
 function RecommendationBadge({ recommendation }: { recommendation: 'keep' | 'review' | 'cancel' }) {
   const styles = {
     keep: 'bg-green-500/20 text-green-400 border-green-500/30',
@@ -180,7 +167,6 @@ export default function SubscriptionAudit() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Update subscription
   const updateSubscription = (id: string, updates: Partial<Subscription>) => {
     setInputs((prev) => ({
       ...prev,
@@ -188,7 +174,6 @@ export default function SubscriptionAudit() {
     }));
   };
 
-  // Add subscription
   const addSubscription = (template?: Partial<Subscription>) => {
     const multiplier = inputs.currency === 'GBP' ? 0.8 : inputs.currency === 'EUR' ? 0.92 : 1;
     const newSub = createSubscription({
@@ -202,7 +187,6 @@ export default function SubscriptionAudit() {
     setShowQuickAdd(false);
   };
 
-  // Remove subscription
   const removeSubscription = (id: string) => {
     setInputs((prev) => ({
       ...prev,
@@ -210,7 +194,6 @@ export default function SubscriptionAudit() {
     }));
   };
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -218,7 +201,6 @@ export default function SubscriptionAudit() {
   return (
     <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Subscription Audit"
           subtitle="Find out how much you're really spending"
@@ -226,7 +208,6 @@ export default function SubscriptionAudit() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Estimate Section */}
           <div className="mb-6">
             <Label htmlFor="estimate">
               How much do you THINK you spend monthly on subscriptions?
@@ -250,7 +231,6 @@ export default function SubscriptionAudit() {
             </p>
           </div>
 
-          {/* Subscriptions List */}
           <div className="space-y-4 mb-6">
             <div className="flex items-center justify-between">
               <Label>Your Subscriptions</Label>
@@ -270,7 +250,6 @@ export default function SubscriptionAudit() {
               </div>
             </div>
 
-            {/* Quick Add Panel */}
             {showQuickAdd && (
               <div className="bg-purple-900/20 rounded-xl p-4 border border-purple-500/30">
                 <p className="text-sm text-[var(--color-muted)] mb-3">
@@ -290,7 +269,6 @@ export default function SubscriptionAudit() {
               </div>
             )}
 
-            {/* Subscription Rows */}
             {inputs.subscriptions.length === 0 ? (
               <div className="text-center py-8 text-[var(--color-muted)]">
                 No subscriptions added yet. Click "Add Custom" or "Quick Add" to get started.
@@ -312,10 +290,8 @@ export default function SubscriptionAudit() {
 
           <Divider />
 
-          {/* Results Section */}
           {inputs.subscriptions.length > 0 && (
             <div className="space-y-6">
-              {/* Reality Check */}
               {inputs.estimatedMonthlySpend > 0 && (
                 <div
                   className={`rounded-xl p-6 border ${
@@ -363,7 +339,6 @@ export default function SubscriptionAudit() {
                 </div>
               )}
 
-              {/* Primary Result */}
               <ResultCard
                 label="Total Monthly Spending"
                 value={formatCurrency(result.totalMonthly, result.currency, 2)}
@@ -379,7 +354,6 @@ export default function SubscriptionAudit() {
                 }
               />
 
-              {/* Summary Stats */}
               <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                 <MetricCard
                   label="Subscriptions"
@@ -405,7 +379,6 @@ export default function SubscriptionAudit() {
                 />
               </Grid>
 
-              {/* Category Breakdown */}
               {result.categoryBreakdown.length > 0 && (
                 <div className="bg-[var(--color-night)] rounded-xl p-6">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -435,7 +408,6 @@ export default function SubscriptionAudit() {
                 </div>
               )}
 
-              {/* Recommendations */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Recommendations
@@ -468,7 +440,6 @@ export default function SubscriptionAudit() {
                 </div>
               </div>
 
-              {/* Savings Alert */}
               {result.potentialSavings.subscriptionsToCancel > 0 && (
                 <Alert variant="warning" title="Savings Opportunity">
                   You have {result.potentialSavings.subscriptionsToCancel} subscription
@@ -479,13 +450,11 @@ export default function SubscriptionAudit() {
                 </Alert>
               )}
 
-              {/* Tips */}
               <Alert variant="tip" title="Subscription audit tips:">
                 Cancel unused services, downgrade plans you don't fully use, look for annual
                 discounts (often 15-20% off), and consider family/group plans to split costs.
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`My subscription audit: ${result.summary.totalSubscriptions} subscriptions = ${formatCurrency(result.totalMonthly, result.currency, 2)}/month (${formatCurrency(result.totalYearly, result.currency)}/year). Potential savings: ${formatCurrency(result.potentialSavings.yearly, result.currency)}/year`}

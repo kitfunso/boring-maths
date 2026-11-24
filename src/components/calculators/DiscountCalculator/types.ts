@@ -1,7 +1,3 @@
-/**
- * Discount Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type CalculationMode = 'percentOff' | 'finalPrice' | 'savedAmount';

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Search using v1.1 API and post via v2."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -11,7 +10,6 @@ auth = tweepy.OAuthHandler(os.getenv('X_API_KEY'), os.getenv('X_API_SECRET'))
 auth.set_access_token(os.getenv('X_ACCESS_TOKEN'), os.getenv('X_ACCESS_SECRET'))
 api = tweepy.API(auth, wait_on_rate_limit=False)
 
-# Read dedup list
 dedup_path = r'C:\Users\skf_s\clawd\tasks\state\x-replied-posts.txt'
 with open(dedup_path, 'r') as f:
     already_replied = set(line.strip() for line in f if line.strip())

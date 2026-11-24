@@ -1,7 +1,3 @@
-/**
- * Road Trip Cost Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateRoadTripCost } from '../../src/components/calculators/RoadTripCostCalculator/calculations';
 import type { RoadTripInputs } from '../../src/components/calculators/RoadTripCostCalculator/types';
@@ -29,7 +25,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs({ tolls: 0, foodBudgetPerDay: 0, hotelPerNight: 0 });
       const result = calculateRoadTripCost(inputs);
 
-      // 500 miles / 25 mpg = 20 gallons * $3.50 = $70
       expect(result.totalFuelCost).toBe(70);
       expect(result.fuelVolume).toBe(20);
       expect(result.fuelVolumeLabel).toBe('gal');
@@ -47,7 +42,6 @@ describe('RoadTripCostCalculator', () => {
       });
       const result = calculateRoadTripCost(inputs);
 
-      // 800 km / 100 * 8 L/100km = 64 liters * 1.80 = $115.20
       expect(result.totalFuelCost).toBe(115.2);
       expect(result.fuelVolume).toBe(64);
       expect(result.fuelVolumeLabel).toBe('L');
@@ -65,7 +59,6 @@ describe('RoadTripCostCalculator', () => {
       });
       const result = calculateRoadTripCost(inputs);
 
-      // 800 km / 12.5 km/L = 64 liters * 1.80 = $115.20
       expect(result.totalFuelCost).toBe(115.2);
       expect(result.fuelVolume).toBe(64);
     });
@@ -74,11 +67,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs();
       const result = calculateRoadTripCost(inputs);
 
-      // Fuel: 500/25 * 3.50 = $70
-      // Food: $50/day * 3 days * 2 passengers = $300
-      // Hotel: $100/night * 2 nights = $200
-      // Tolls: $0
-      // Total: $570
       expect(result.totalFuelCost).toBe(70);
       expect(result.totalFoodCost).toBe(300);
       expect(result.totalHotelCost).toBe(200);
@@ -89,7 +77,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs();
       const result = calculateRoadTripCost(inputs);
 
-      // Total: $570 / 2 passengers = $285
       expect(result.costPerPerson).toBe(285);
     });
 
@@ -97,8 +84,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs({ passengers: 1 });
       const result = calculateRoadTripCost(inputs);
 
-      // Food for 1: $50 * 3 = $150
-      // Total: 70 + 150 + 200 + 0 = $420
       expect(result.totalFoodCost).toBe(150);
       expect(result.totalTripCost).toBe(420);
       expect(result.costPerPerson).toBe(420);
@@ -108,7 +93,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs({ tolls: 35 });
       const result = calculateRoadTripCost(inputs);
 
-      // 70 + 300 + 200 + 35 = $605
       expect(result.totalTripCost).toBe(605);
     });
 
@@ -116,7 +100,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs();
       const result = calculateRoadTripCost(inputs);
 
-      // $570 / 3 days = $190
       expect(result.dailyCost).toBe(190);
     });
 
@@ -124,7 +107,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs();
       const result = calculateRoadTripCost(inputs);
 
-      // $570 / 500 miles = $1.14/mi
       expect(result.costPerMile).toBe(1.14);
       expect(result.costPerMileLabel).toBe('/mi');
     });
@@ -149,7 +131,6 @@ describe('RoadTripCostCalculator', () => {
       });
       const result = calculateRoadTripCost(inputs);
 
-      // 20 gallons * 8.887 kg/gal = 177.74 kg
       expect(result.co2Emissions).toBeGreaterThan(177);
       expect(result.co2Emissions).toBeLessThan(178);
     });
@@ -161,7 +142,6 @@ describe('RoadTripCostCalculator', () => {
       });
       const result = calculateRoadTripCost(inputs);
 
-      // ~177.74 kg / 22 kg/tree = ~8.08, ceil to 9
       expect(result.treesNeeded).toBe(9);
     });
 
@@ -169,7 +149,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs();
       const result = calculateRoadTripCost(inputs);
 
-      // Flight: ($80 base + 500 * $0.12) * 2 = ($80 + $60) * 2 = $280
       expect(result.comparisonToFlying).toBe(280);
     });
 
@@ -199,7 +178,6 @@ describe('RoadTripCostCalculator', () => {
       });
       const result = calculateRoadTripCost(inputs);
 
-      // 4 nights * $100 = $400
       expect(result.totalHotelCost).toBe(400);
     });
 
@@ -207,7 +185,6 @@ describe('RoadTripCostCalculator', () => {
       const inputs = makeInputs({ currency: 'GBP' });
       const result = calculateRoadTripCost(inputs);
 
-      // Should still calculate correctly with GBP
       expect(result.totalTripCost).toBeGreaterThan(0);
       expect(result.comparisonToFlying).toBeGreaterThan(0);
     });
@@ -216,7 +193,6 @@ describe('RoadTripCostCalculator', () => {
       const twoPassengers = calculateRoadTripCost(makeInputs({ passengers: 2 }));
       const fourPassengers = calculateRoadTripCost(makeInputs({ passengers: 4 }));
 
-      // Food doubles with double passengers
       expect(fourPassengers.totalFoodCost).toBe(twoPassengers.totalFoodCost * 2);
     });
   });

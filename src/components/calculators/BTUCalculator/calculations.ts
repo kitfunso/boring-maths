@@ -1,9 +1,3 @@
-/**
- * BTU Calculator - Calculation Logic
- *
- * Pure, NaN-safe sizing of cooling/heating capacity from room dimensions.
- */
-
 import type { BTUCalculatorInputs, BTUCalculatorResult } from './types';
 import {
   BTU_PER_SQFT_COOLING,
@@ -19,10 +13,8 @@ import {
   FEET_PER_METER,
 } from './types';
 
-/** Clamp any numeric input to a finite, non-negative value. */
 const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
 
-/** Round BTU to the nearest 100 for a clean, buyable capacity figure. */
 const roundBtu = (v: number): number => Math.round(v / 100) * 100;
 
 export function calculateBTUCalculator(inputs: BTUCalculatorInputs): BTUCalculatorResult {
@@ -34,19 +26,13 @@ export function calculateBTUCalculator(inputs: BTUCalculatorInputs): BTUCalculat
   const ceilingHeight = safe(inputs.ceilingHeight);
   const occupants = safe(inputs.occupants);
 
-  // The per-square-foot base rates require imperial inputs, so convert metric
-  // dimensions to feet before computing area. A 4 m x 4 m room is ~172 sq ft,
-  // not 16 - feeding raw metres in would undersize the unit by ~10x.
   const isMetric = inputs.unit === 'm';
   const lengthFt = isMetric ? roomLength * FEET_PER_METER : roomLength;
   const widthFt = isMetric ? roomWidth * FEET_PER_METER : roomWidth;
   const ceilingHeightFt = isMetric ? ceilingHeight * FEET_PER_METER : ceilingHeight;
 
-  // Area in square feet: multiply the two foot dimensions directly, or convert
-  // a metric area in one step (length_m * width_m * 10.7639) for clarity.
   const areaSqFt = isMetric ? roomLength * roomWidth * SQFT_PER_SQM : lengthFt * widthFt;
 
-  // Degenerate inputs: render a warning instead of NaN / zero capacity.
   if (areaSqFt <= 0) {
     return {
       currency,
@@ -60,20 +46,16 @@ export function calculateBTUCalculator(inputs: BTUCalculatorInputs): BTUCalculat
     };
   }
 
-  // Base load: area x pinned rate (20 cooling / 25 heating BTU per sq ft).
   const baseRate = mode === 'cooling' ? BTU_PER_SQFT_COOLING : BTU_PER_SQFT_HEATING;
   const baseBtu = areaSqFt * baseRate;
 
-  // Ceiling height scales the load linearly above the 8 ft standard.
   const heightFactor = ceilingHeightFt > 0 ? ceilingHeightFt / STANDARD_CEILING_HEIGHT : 1;
 
-  // Mode-specific environmental factor.
   const environmentFactor =
     mode === 'cooling'
       ? (SUN_EXPOSURE_FACTOR[inputs.sunExposure] ?? 1)
       : (INSULATION_FACTOR[inputs.insulation] ?? 1);
 
-  // Additive loads: kitchen appliance heat + extra occupants beyond two.
   const kitchenBtu = inputs.roomUse === 'kitchen' ? KITCHEN_EXTRA_BTU : 0;
   const extraOccupants = Math.max(0, occupants - 2);
   const occupantBtu = extraOccupants * BTU_PER_EXTRA_OCCUPANT;
@@ -81,7 +63,6 @@ export function calculateBTUCalculator(inputs: BTUCalculatorInputs): BTUCalculat
   const adjustedBtu = baseBtu * heightFactor * environmentFactor + kitchenBtu + occupantBtu;
   const recommendedBtu = roundBtu(adjustedBtu);
 
-  // Capacity conversions.
   const recommendedKw = recommendedBtu * BTU_PER_HR_TO_KW;
   const tons = mode === 'cooling' ? recommendedBtu / BTU_PER_TON : 0;
 

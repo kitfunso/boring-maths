@@ -1,8 +1,3 @@
-/**
- * Event Seating Calculator - React Component
- *
- * Calculate table and room requirements for events.
- */
 import { calculateEventSeating } from './calculations';
 import {
   getDefaultInputs,
@@ -94,7 +89,6 @@ export default function EventSeatingCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-purple-400 uppercase tracking-wider">
                 Event Details
@@ -115,7 +109,6 @@ export default function EventSeatingCalculator() {
                 }}
               />
 
-              {/* Event Type */}
               <div>
                 <Label>Event Type</Label>
                 <ButtonGroup
@@ -125,7 +118,6 @@ export default function EventSeatingCalculator() {
                 />
               </div>
 
-              {/* Table Shape */}
               <div>
                 <Label>Table Shape</Label>
                 <ButtonGroup
@@ -135,7 +127,6 @@ export default function EventSeatingCalculator() {
                 />
               </div>
 
-              {/* Table Size */}
               <div>
                 <Label>Table Size</Label>
                 <ButtonGroup
@@ -231,7 +222,6 @@ export default function EventSeatingCalculator() {
               />
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Minimum Room Size"
@@ -246,7 +236,6 @@ export default function EventSeatingCalculator() {
                 <MetricCard label="Extra Seats" value={`+${result.extraSeats}`} />
               </Grid>
 
-              {/* Space Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Space Breakdown
@@ -278,7 +267,6 @@ export default function EventSeatingCalculator() {
                 </div>
               </div>
 
-              {/* Table Configuration */}
               <div className="bg-purple-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-purple-700 uppercase tracking-wider mb-4">
                   Table Configuration
@@ -297,7 +285,6 @@ export default function EventSeatingCalculator() {
                 </div>
               </div>
 
-              {/* Layout Suggestions */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Layout Suggestions
@@ -315,7 +302,6 @@ export default function EventSeatingCalculator() {
                 </ul>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Venue Planning Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.map((tip, i) => (
@@ -327,7 +313,6 @@ export default function EventSeatingCalculator() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Event Seating: ${inputs.guestCount} guests need ${result.tablesNeeded} ${inputs.tableShape} tables in ${result.totalRoomSqFt.toLocaleString()} sq ft (${result.minimumRoomLength}' x ${result.minimumRoomWidth}')`}

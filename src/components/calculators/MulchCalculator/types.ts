@@ -1,22 +1,16 @@
-/** Mulch Calculator - Type Definitions: how much mulch a garden bed needs. */
-
 import type { Currency } from '../../../lib/regions';
 
 export type MulchType = 'wood-chips' | 'bark' | 'rubber' | 'stone' | 'straw';
 
-/** Bag size, cubic feet. */
 export type BagSize = 2 | 3;
 
 export interface MulchCalculatorInputs {
   currency: Currency;
 
-  /** Length, feet. */
   length: number;
 
-  /** Width, feet. */
   width: number;
 
-  /** Depth, inches (2-4 typical). */
   depth: number;
 
   mulchType: MulchType;
@@ -45,7 +39,6 @@ export interface MulchCalculatorResult {
 
   bags3CuFt: number;
 
-  /** Weight estimate, pounds (varies by mulch type). */
   estimatedWeight: number;
 
   bulkCost: number;

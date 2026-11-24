@@ -1,6 +1,3 @@
-/**
- * Dog Age Calculator - React Component
- */
 import { calculateDogAge, formatAge } from './calculations';
 import { getDefaultInputs, DOG_SIZES, type DogAgeInputs } from './types';
 import {
@@ -67,7 +64,6 @@ export default function DogAgeCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Dog Size */}
             <div>
               <Label>Dog Size</Label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -91,7 +87,6 @@ export default function DogAgeCalculator() {
               </p>
             </div>
 
-            {/* Dog Age */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="dogYears" required>
@@ -122,9 +117,7 @@ export default function DogAgeCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div className="text-center">
               <div className="text-6xl mb-4">{getStageEmoji()}</div>
               <ResultCard
@@ -142,7 +135,6 @@ export default function DogAgeCalculator() {
               />
             </div>
 
-            {/* Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Dog Age"
@@ -172,7 +164,6 @@ export default function DogAgeCalculator() {
               />
             </Grid>
 
-            {/* Life Stage Visualization */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Life Stage Progress
@@ -197,7 +188,6 @@ export default function DogAgeCalculator() {
               </div>
             </div>
 
-            {/* Health Tips */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Health Tips for {result.lifeStage} Dogs
@@ -221,7 +211,6 @@ export default function DogAgeCalculator() {
               health, and care.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My ${formatAge(inputs.dogYears, inputs.dogMonths)} old ${inputs.size} dog is ${result.humanYears} in human years! Life stage: ${result.lifeStage}`}

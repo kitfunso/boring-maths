@@ -1,19 +1,4 @@
 #!/usr/bin/env node
-/**
- * Generates `data/distances.ts` for the Avios Destination Finder: great-circle
- * distance (statute miles) from London Heathrow to every destination airport
- * in `data/destinations.ts`.
- *
- * Source: https://davidmegginson.github.io/ourairports-data/airports.csv
- * (OurAirports open dataset, public domain).
- *
- * Usage:
- *   node scripts/data/build-avios-distances.mjs            # downloads the CSV
- *   node scripts/data/build-avios-distances.mjs path.csv    # offline, local copy
- *
- * Distances are great-circle (haversine), not flown routes, so they are
- * rounded to the nearest 10 miles - false precision would be dishonest.
- */
 
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
@@ -124,11 +109,6 @@ function roundToNearest10(miles) {
   return Math.round(miles / 10) * 10;
 }
 
-/**
- * Resolve one CSV row per IATA code from the filtered candidate set.
- * Prefers large_airport over medium_airport when both are present; exits
- * with a listing if a code is still ambiguous after that tie-break.
- */
 function resolveByIata(candidates) {
   const byIata = new Map();
   for (const row of candidates) {
@@ -165,13 +145,6 @@ function resolveByIata(candidates) {
   return resolved;
 }
 
-/**
- * Parse { city, iata } pairs from destinations.ts in file order.
- * The IATA-only regex is authoritative for coverage: a coupled city+iata
- * regex would silently drop a row if field order changed or a city name
- * contained an apostrophe. City names are a best-effort second pass used
- * only for display, falling back to the IATA code.
- */
 function parseDestinationEntries(source) {
   const iatas = [...source.matchAll(/iata:\s*'([A-Z]{3})'/g)].map((m) => m[1]);
   const cityByIata = new Map();

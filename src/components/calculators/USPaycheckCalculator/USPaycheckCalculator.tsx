@@ -1,6 +1,3 @@
-/**
- * US Paycheck Calculator - React Component
- */
 import { calculatePaycheck, formatCurrency, formatPercent, getStateName } from './calculations';
 import {
   getDefaultInputs,
@@ -35,12 +32,10 @@ export default function USPaycheckCalculator() {
     compute: calculatePaycheck,
   });
 
-  // Group states by region for easier selection
   const states = Object.entries(STATE_TAX_DATA)
     .map(([code, data]) => ({ code, ...data }))
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  // Calculate percentages for breakdown
   const deductionBreakdown = [
     { label: 'Federal Tax', value: result.federalTax, color: 'bg-blue-500' },
     { label: 'State Tax', value: result.stateTax, color: 'bg-purple-500' },
@@ -58,7 +53,6 @@ export default function USPaycheckCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Income Section */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Income Details
@@ -88,7 +82,6 @@ export default function USPaycheckCalculator() {
             </Grid>
           </div>
 
-          {/* Tax Status Section */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Tax Status
@@ -121,7 +114,6 @@ export default function USPaycheckCalculator() {
             </Grid>
           </div>
 
-          {/* Pre-tax Deductions */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Pre-tax Deductions (per paycheck)
@@ -167,7 +159,6 @@ export default function USPaycheckCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             <ResultCard
               label="Your Take-Home Pay"
@@ -175,7 +166,6 @@ export default function USPaycheckCalculator() {
               subtitle={`per ${inputs.payFrequency === 'biweekly' ? 'paycheck' : inputs.payFrequency === 'semimonthly' ? 'pay period' : inputs.payFrequency}`}
             />
 
-            {/* Per-Paycheck Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Gross Pay"
@@ -201,7 +191,6 @@ export default function USPaycheckCalculator() {
               />
             </Grid>
 
-            {/* Annual Summary */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Annual Summary
@@ -222,7 +211,6 @@ export default function USPaycheckCalculator() {
               </Grid>
             </div>
 
-            {/* Deduction Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Deduction Breakdown (per paycheck)
@@ -257,7 +245,6 @@ export default function USPaycheckCalculator() {
               </div>
             </div>
 
-            {/* Tax Details */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div className="bg-blue-900/20 rounded-xl p-4">
                 <h4 className="font-semibold text-blue-400 mb-3">Federal Taxes</h4>
@@ -296,7 +283,6 @@ export default function USPaycheckCalculator() {
               </div>
             </Grid>
 
-            {/* Tips */}
             {inputs.preTax401k === 0 && inputs.preTaxHSA === 0 && (
               <Alert variant="tip" title="Maximize Your Paycheck:">
                 Consider contributing to a 401(k) or HSA. These pre-tax deductions reduce your
@@ -313,7 +299,6 @@ export default function USPaycheckCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Take-home: ${formatCurrency(result.netPay)}/${inputs.payFrequency === 'biweekly' ? 'paycheck' : inputs.payFrequency} (${formatCurrency(result.annualNet)}/year) from ${formatCurrency(inputs.grossSalary)} salary`}

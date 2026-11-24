@@ -1,10 +1,3 @@
-/**
- * PrintResults Component
- *
- * Allows users to print or save their calculator results as PDF.
- * Opens a print-friendly window with formatted results.
- */
-
 import { buildPrintDocument } from './printTemplate';
 
 interface PrintResultsProps {

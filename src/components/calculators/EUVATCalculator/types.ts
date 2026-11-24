@@ -1,7 +1,3 @@
-/**
- * EU VAT Calculator Types
- */
-
 export interface EUCountry {
   code: string;
   name: string;

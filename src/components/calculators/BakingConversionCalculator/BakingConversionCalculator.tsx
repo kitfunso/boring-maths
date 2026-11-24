@@ -1,7 +1,3 @@
-/**
- * Baking Conversion Calculator - Preact Component
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateBakingConversion, formatAmount } from './calculations';
 import {
@@ -54,7 +50,6 @@ export default function BakingConversionCalculator() {
     }));
   };
 
-  // Build quick-reference rows for the selected ingredient
   const quickReference = useMemo(() => {
     const amounts = [0.25, 0.5, 1, 2, 3];
     return amounts.map((cups) => {
@@ -74,7 +69,6 @@ export default function BakingConversionCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Ingredient selector */}
             <div>
               <Label htmlFor="ingredient" required>
                 Ingredient
@@ -87,7 +81,6 @@ export default function BakingConversionCalculator() {
               />
             </div>
 
-            {/* Amount input */}
             <div>
               <Label htmlFor="amount" required>
                 Amount
@@ -102,7 +95,6 @@ export default function BakingConversionCalculator() {
               />
             </div>
 
-            {/* From / Swap / To row */}
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
               <div>
                 <Label htmlFor="fromUnit" required>
@@ -157,11 +149,9 @@ export default function BakingConversionCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.amount > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label="Converted Amount"
                   value={formatAmount(result.convertedAmount, inputs.toUnit)}
@@ -169,7 +159,6 @@ export default function BakingConversionCalculator() {
                   footer={<>Density: {result.ingredientDensity} g per cup</>}
                 />
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 3 }} gap="md">
                   <MetricCard
                     label="Input"
@@ -189,7 +178,6 @@ export default function BakingConversionCalculator() {
                   />
                 </Grid>
 
-                {/* Equivalents table */}
                 {result.equivalents.length > 0 && (
                   <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                     <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -212,7 +200,6 @@ export default function BakingConversionCalculator() {
                   </div>
                 )}
 
-                {/* Quick reference table */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Quick Reference: {INGREDIENT_LABELS[inputs.ingredient]}
@@ -250,7 +237,6 @@ export default function BakingConversionCalculator() {
                   </div>
                 </div>
 
-                {/* Precision note */}
                 <Alert variant="tip" title="Baking precision">
                   {result.precisionNote} Professional bakers weigh ingredients because measuring
                   cups can vary by 10-20% depending on technique. A $15 kitchen scale is the single
@@ -263,7 +249,6 @@ export default function BakingConversionCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.amount > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

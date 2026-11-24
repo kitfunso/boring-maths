@@ -1,9 +1,7 @@
-// Pure daily-series logic split out of gsc-pull.mjs so tests can import it without the OAuth and CLI code.
 export const CLIFF_WINDOW = 14;
 export const CLIFF_BASELINE = 7;
 const CLIFF_RATIO = 0.25;
 
-// UTC math so DST never shifts a calendar day.
 export function addDays(isoDate, n) {
   const d = new Date(`${isoDate}T00:00:00Z`);
   d.setUTCDate(d.getUTCDate() + n);
@@ -37,7 +35,6 @@ export function fillDailySeries(rows, lastDate) {
   return series;
 }
 
-/** First day in the last CLIFF_WINDOW below CLIFF_RATIO of the prior CLIFF_BASELINE-day median. */
 export function findCliff(series) {
   for (let i = series.length - CLIFF_WINDOW; i < series.length; i += 1) {
     if (i < CLIFF_BASELINE) continue;

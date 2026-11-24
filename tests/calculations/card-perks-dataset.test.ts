@@ -1,5 +1,3 @@
-/** Card Perks dataset tests: verifies CARDS/pointValues satisfy the shared contract, not the UI or math. */
-
 import { describe, it, expect } from 'vitest';
 import { CARDS } from '../../src/components/calculators/CardPerksCalculator/data/cards';
 import {
@@ -13,7 +11,6 @@ import {
 import { NOT_OFFERED } from '../../src/components/calculators/AviosDestinationFinder/types';
 import type { Destination } from '../../src/components/calculators/AviosDestinationFinder/types';
 
-// Hardcoded so this test does not need a runtime import from types.ts (owned by Task 1).
 const VALID_TYPES = ['credit', 'charge', 'debit', 'bnpl', 'plan'] as const;
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;

@@ -1,11 +1,7 @@
 export interface SpinnerProps {
-  /** Spinner size */
   size?: 'sm' | 'md' | 'lg';
-  /** Spinner variant */
   variant?: 'ring' | 'dots' | 'pulse' | 'bars';
-  /** Custom color (defaults to current text color) */
   color?: string;
-  /** Additional class names */
   className?: string;
 }
 
@@ -15,23 +11,6 @@ const SIZES = {
   lg: { ring: 28, dot: 10, bar: 20 },
 };
 
-/**
- * Modern spinner component with multiple variants.
- * Uses global CSS animations from global.css for better performance.
- *
- * Variants:
- * - ring: Clean spinning arc (default)
- * - dots: Three bouncing dots
- * - bars: Four animated bars
- * - pulse: Expanding pulse rings
- *
- * @example
- * ```tsx
- * <Spinner /> // Default ring spinner
- * <Spinner variant="dots" size="lg" />
- * <Spinner variant="bars" />
- * ```
- */
 export function Spinner({ size = 'md', variant = 'ring', color, className = '' }: SpinnerProps) {
   const sizeConfig = SIZES[size];
   const colorStyle = color ? { color } : undefined;
@@ -91,7 +70,6 @@ export function Spinner({ size = 'md', variant = 'ring', color, className = '' }
     );
   }
 
-  // Default: Modern ring spinner
   const ringSize = sizeConfig.ring;
   const strokeWidth = size === 'sm' ? 2 : size === 'md' ? 2.5 : 3;
 
@@ -104,7 +82,6 @@ export function Spinner({ size = 'md', variant = 'ring', color, className = '' }
       fill="none"
       style={colorStyle}
     >
-      {/* Background track */}
       <circle
         cx="12"
         cy="12"
@@ -113,7 +90,6 @@ export function Spinner({ size = 'md', variant = 'ring', color, className = '' }
         strokeWidth={strokeWidth}
         opacity="0.15"
       />
-      {/* Animated arc */}
       <circle
         cx="12"
         cy="12"

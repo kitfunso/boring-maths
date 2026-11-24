@@ -1,8 +1,3 @@
-/**
- * Speeds & Feeds Calculator Types
- * For CNC machining and metalworking
- */
-
 export interface SpeedsFeedsInputs {
   material: string;
   toolDiameter: number;
@@ -28,7 +23,6 @@ export interface SpeedsFeedsResult {
   cuttingTime: number;
 }
 
-// Material cutting speeds in SFM (Surface Feet per Minute)
 export const MATERIALS: { value: string; label: string; sfm: number; chipLoad: number }[] = [
   { value: 'aluminum', label: 'Aluminum (6061)', sfm: 800, chipLoad: 0.004 },
   { value: 'aluminum-cast', label: 'Aluminum (Cast)', sfm: 600, chipLoad: 0.003 },
@@ -66,16 +60,6 @@ export const OPERATION_TYPES: {
 
 export const FLUTE_OPTIONS = [1, 2, 3, 4, 6, 8];
 
-// Tool material SFM multipliers, applied on top of the HSS-baseline SFM values in
-// MATERIALS above. Sources checked 2026-08-08:
-// - LittleMachineShop.com "Cutting Speeds" reference (https://littlemachineshop.com/pages/cutting-speeds):
-//   uncoated carbide runs ~1.9-5.5x HSS SFM depending on material (cast iron lowest, aluminum/steel highest).
-// - Griggs Steel "High Speed Cobalt" (https://www.griggssteel.com/high-speed-cobalt/) and Amony/HMN Tool
-//   M42-vs-M35 comparison (https://www.hmntool.com/1172.html): cobalt (M42) HSS runs ~25-50% faster than
-//   standard HSS; coated carbide (TiN/TiAlN) commonly runs ~20-50% faster than uncoated carbide.
-// Sources disagree on the exact carbide ratio (1.9x-5.5x) - values below use conservative mid-range picks
-// rather than the high end, consistent with the low end of the carbide range and the low end of the
-// cobalt/coating ranges.
 export const TOOL_MATERIALS: { value: ToolMaterial; label: string; sfmMultiplier: number }[] = [
   { value: 'hss', label: 'HSS', sfmMultiplier: 1.0 },
   { value: 'cobalt', label: 'Cobalt (M42)', sfmMultiplier: 1.25 },

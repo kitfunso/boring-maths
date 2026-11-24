@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CARDS } from '../../src/components/calculators/CardPerksCalculator/data/cards';
 
-// Readers see these notes in the expanded row, so a field name like fxFeePct is a content bug.
 const FIELD_NAME = /\b[a-z]+[A-Z][A-Za-z]+\b/;
 
 describe('card notes', () => {

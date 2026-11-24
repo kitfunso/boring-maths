@@ -1,8 +1,3 @@
-/**
- * CO2 Injection Calculator Types
- * Calculate CO2 levels from pH and KH readings
- */
-
 export interface CO2Inputs {
   ph: number;
   kh: number;
@@ -18,7 +13,6 @@ export interface CO2Results {
   adjustmentNeeded: string;
 }
 
-// CO2 level thresholds
 export const CO2_LEVELS = {
   low: { min: 0, max: 15, color: 'blue', label: 'Low - Increase CO2' },
   optimal: { min: 15, max: 35, color: 'green', label: 'Optimal Range' },
@@ -26,7 +20,6 @@ export const CO2_LEVELS = {
   dangerous: { min: 50, max: Infinity, color: 'red', label: 'Dangerous - Reduce immediately' },
 };
 
-// Common tank sizes with suggested bubble rates (bubbles per second)
 export const TANK_PRESETS = [
   { label: '10 gallon / 38L', gallons: 10, suggestedBPS: 1 },
   { label: '20 gallon / 75L', gallons: 20, suggestedBPS: 1.5 },

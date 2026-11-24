@@ -1,7 +1,3 @@
-/**
- * ElectricityCost Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateElectricityCost } from '../../src/components/calculators/ElectricityCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/ElectricityCost/types';
@@ -13,9 +9,7 @@ describe('ElectricityCostCalculator', () => {
 
       const result = calculateElectricityCost(inputs);
 
-      // 1000W * 4h/day = 4 kWh/day
       expect(result.kwhPerDay).toBe(4);
-      // 4 kWh/day * 30 days = 120 kWh/month
       expect(result.kwhPerMonth).toBe(120);
       expect(result.kwhPerYear).toBe(1440);
       expect(result.costPerMonth).toBeGreaterThan(0);

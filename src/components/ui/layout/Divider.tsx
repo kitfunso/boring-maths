@@ -1,9 +1,7 @@
 import type { HTMLAttributes } from 'react';
 
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
-  /** Spacing around divider */
   spacing?: 'sm' | 'md' | 'lg';
-  /** Additional class names */
   className?: string;
 }
 
@@ -13,10 +11,6 @@ const SPACING_CLASSES = {
   lg: 'my-8',
 };
 
-/**
- * Horizontal divider for separating content sections.
- * Updated for dark theme.
- */
 export function Divider({ spacing = 'lg', className = '', ...props }: DividerProps) {
   return (
     <div

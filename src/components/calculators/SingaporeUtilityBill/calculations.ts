@@ -1,14 +1,10 @@
-/** SP Group electricity + PUB water estimate. Both rate sets are published quarterly/periodically; hardcode the period so the page can flag it as due for a check. */
-
 export const GST_RATE = 0.09;
 
-// SP Group regulated tariff, residential, per kWh. Q4 2026, effective 1 Oct to 31 Dec 2026.
 export const ELECTRICITY_RATE_BEFORE_GST = 0.2859;
 export const ELECTRICITY_RATE_WITH_GST = 0.3116;
 export const TARIFF_PERIOD = 'October to December 2026';
 
-// PUB water tariff, per cubic metre, effective 1 April 2025.
-export const WATER_TIER_1_LIMIT = 40; // cubic metres/month
+export const WATER_TIER_1_LIMIT = 40;
 export const WATER_TIER_1_TARIFF = 1.43;
 export const WATER_TIER_1_WCT = 0.72;
 export const WATER_TIER_1_WATERBORNE_FEE = 1.09;
@@ -49,7 +45,6 @@ export function getDefaultInputs(): SingaporeUtilityBillInputs {
 
 const round2 = (v: number) => Math.round(v * 100) / 100;
 
-// Only the first 40 cubic metres get the tier 1 rate; the rest is tier 2, like a tax band.
 function calculateWater(m3: number) {
   const tier1Usage = Math.min(m3, WATER_TIER_1_LIMIT);
   const tier2Usage = Math.max(0, m3 - WATER_TIER_1_LIMIT);

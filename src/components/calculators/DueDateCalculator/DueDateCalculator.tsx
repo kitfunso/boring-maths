@@ -1,8 +1,3 @@
-/**
- * Due Date Calculator - Preact Component
- *
- * Calculate pregnancy due date using multiple methods.
- */
 import { calculateDueDate } from './calculations';
 import { getDefaultInputs, type DueDateInputs, type CalculationMethod } from './types';
 import {
@@ -62,7 +57,6 @@ export default function DueDateCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Calculation Method */}
             <div>
               <Label>Calculation Method</Label>
               <ButtonGroup
@@ -73,7 +67,6 @@ export default function DueDateCalculator() {
               />
             </div>
 
-            {/* LMP Method */}
             {inputs.method === 'lmp' && (
               <>
                 <div>
@@ -106,7 +99,6 @@ export default function DueDateCalculator() {
               </>
             )}
 
-            {/* Conception Date Method */}
             {inputs.method === 'conception' && (
               <div>
                 <Label htmlFor="conceptionDate" required>
@@ -126,7 +118,6 @@ export default function DueDateCalculator() {
               </div>
             )}
 
-            {/* IVF Method */}
             {inputs.method === 'ivf' && (
               <>
                 <div>
@@ -152,7 +143,6 @@ export default function DueDateCalculator() {
               </>
             )}
 
-            {/* Ultrasound Method */}
             {inputs.method === 'ultrasound' && (
               <>
                 <div>
@@ -207,9 +197,7 @@ export default function DueDateCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Due Date Display */}
             <div className="rounded-2xl p-8 text-center border-2 bg-coral-950/50 border-coral-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Estimated Due Date
@@ -226,7 +214,6 @@ export default function DueDateCalculator() {
               </p>
             </div>
 
-            {/* Current Progress */}
             <div className={`rounded-xl p-6 border-2 ${getTrimesterColor(result.trimester)}`}>
               <div className="flex justify-between items-center mb-4">
                 <div>
@@ -241,7 +228,6 @@ export default function DueDateCalculator() {
                 </div>
               </div>
 
-              {/* Progress Bar */}
               <div className="w-full bg-[var(--color-night)] rounded-full h-4 overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-pink-500 via-coral-500 to-orange-500 rounded-full transition-all duration-500"
@@ -256,7 +242,6 @@ export default function DueDateCalculator() {
               </div>
             </div>
 
-            {/* Key Dates */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -276,7 +261,6 @@ export default function DueDateCalculator() {
               </div>
             </Grid>
 
-            {/* Milestones Timeline */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Pregnancy Milestones
@@ -319,7 +303,6 @@ export default function DueDateCalculator() {
               provider for personalized guidance.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`My due date: ${result.dueDateFormatted} - Currently ${result.currentWeeks} weeks, ${result.currentDays} days (${result.trimesterName})`}

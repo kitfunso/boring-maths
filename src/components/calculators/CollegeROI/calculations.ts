@@ -1,7 +1,3 @@
-/**
- * College ROI Calculator - Calculation Logic
- */
-
 import type { CollegeROIInputs, CollegeROIResult, YearlyProjection } from './types';
 
 export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult {
@@ -20,13 +16,11 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
     careerYears,
   } = inputs;
 
-  // Calculate total education cost
   const tuitionCost = annualTuition * yearsOfStudy;
   const totalLivingExpenses = livingExpenses * yearsOfStudy;
   const totalScholarship = scholarshipAmount * yearsOfStudy;
   const totalCost = tuitionCost + totalLivingExpenses - totalScholarship;
 
-  // Opportunity cost (earnings forgone during education)
   let opportunityCost = 0;
   let altSalary = alternativeSalary;
   for (let y = 0; y < yearsOfStudy; y++) {
@@ -34,7 +28,6 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
     altSalary *= 1 + alternativeGrowthRate;
   }
 
-  // Loan calculations
   const totalLoanAmount = Math.max(0, totalCost);
   const monthlyRate = loanInterestRate / 12;
   const numPayments = loanRepaymentYears * 12;
@@ -53,19 +46,17 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
 
   const annualLoanPayment = monthlyLoanPayment * 12;
 
-  // Year-by-year projections
   const yearlyProjections: YearlyProjection[] = [];
   let withEdSalary = expectedStartingSalary;
   let withoutEdSalary = alternativeSalary;
 
-  // Start from year of education
   let altCumulative = 0;
   for (let y = 0; y < yearsOfStudy; y++) {
     altCumulative += withoutEdSalary;
     withoutEdSalary *= 1 + alternativeGrowthRate;
   }
 
-  let edCumulative = -totalCost; // Start negative due to education costs
+  let edCumulative = -totalCost;
   let loanYearsRemaining = loanRepaymentYears;
   let paybackPeriod: number | null = null;
 
@@ -93,7 +84,6 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
       advantage: Math.round(advantage),
     });
 
-    // Track payback period
     if (paybackPeriod === null && advantage >= 0) {
       paybackPeriod = year + Math.ceil(yearsOfStudy);
     }
@@ -103,17 +93,14 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
     if (loanYearsRemaining > 0) loanYearsRemaining--;
   }
 
-  // Final calculations
   const finalProjection = yearlyProjections[yearlyProjections.length - 1];
   const lifetimeEarningsPremium = finalProjection
     ? finalProjection.withEducation.cumulativeNet - finalProjection.withoutEducation.cumulativeNet
     : 0;
 
-  // ROI = (gain - cost) / cost * 100
   const totalInvestment = totalCost + totalInterestPaid + opportunityCost;
   const roi = totalInvestment > 0 ? (lifetimeEarningsPremium / totalInvestment) * 100 : 0;
 
-  // Net Present Value (5% discount rate)
   const discountRate = 0.05;
   let npv = -totalCost;
   let edSalaryNPV = expectedStartingSalary;
@@ -129,14 +116,11 @@ export function calculateCollegeROI(inputs: CollegeROIInputs): CollegeROIResult 
     if (loanYearsNPV > 0) loanYearsNPV--;
   }
 
-  // Debt to income ratio (first year)
   const debtToIncomeRatio =
     expectedStartingSalary > 0 ? totalLoanAmount / expectedStartingSalary : 0;
 
-  // Break even age (assuming starting college at 18)
   const breakEvenAge = paybackPeriod ? 18 + paybackPeriod : null;
 
-  // Determine if it's worth it and generate factors
   const worthIt = roi > 50 && paybackPeriod !== null && paybackPeriod <= 15;
 
   const factors: string[] = [];

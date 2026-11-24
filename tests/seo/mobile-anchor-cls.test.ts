@@ -2,9 +2,6 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 
-/* Anchor ad must reserve no height: a bar that paints tall then collapses on an
-   unfilled slot shifts the viewport on every mobile load. */
-
 const read = (...p: string[]) => fs.readFileSync(path.resolve(__dirname, '..', '..', ...p), 'utf8');
 
 describe('mobile anchor ad reserves no height', () => {

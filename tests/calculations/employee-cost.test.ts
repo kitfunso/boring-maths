@@ -1,7 +1,3 @@
-/**
- * EmployeeCostCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateEmployeeCost } from '../../src/components/calculators/EmployeeCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/EmployeeCost/types';

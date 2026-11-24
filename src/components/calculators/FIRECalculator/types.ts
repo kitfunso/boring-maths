@@ -1,5 +1,3 @@
-/** FIRE Calculator types: Financial Independence Retire Early, covering Lean, Regular, Fat, and Coast FIRE variants. */
-
 import { type Currency } from '../../../lib/regions';
 
 export type RiskProfile = 'conservative' | 'moderate' | 'aggressive';
@@ -14,21 +12,21 @@ export interface FIRECalculatorInputs {
   monthlySavings: number;
 
   targetRetirementAge: number;
-  desiredRetirementExpenses: number; // Annual expenses in retirement
+  desiredRetirementExpenses: number;
 
-  expectedReturn: number; // Pre-retirement return (as decimal, e.g., 0.07)
-  inflationRate: number; // As decimal, e.g., 0.03
-  safeWithdrawalRate: number; // As decimal, e.g., 0.04 for 4% rule
+  expectedReturn: number;
+  inflationRate: number;
+  safeWithdrawalRate: number;
   riskProfile: RiskProfile;
 
   currency: Currency;
 }
 
 export interface FIRENumbers {
-  lean: number; // 25x essential expenses only
-  regular: number; // 25x current expenses
-  fat: number; // 25x comfortable lifestyle (1.5x current)
-  coast: number; // Amount needed now to coast to regular retirement
+  lean: number;
+  regular: number;
+  fat: number;
+  coast: number;
 }
 
 export interface ProjectionDataPoint {
@@ -51,10 +49,10 @@ export interface FIREMilestone {
 }
 
 export interface SavingsRateAnalysis {
-  currentRate: number; // As percentage
-  requiredRateForTarget: number; // Rate needed to hit target age
-  optimalRate: number; // Recommended rate based on income
-  monthlyShortfall: number; // Additional monthly savings needed
+  currentRate: number;
+  requiredRateForTarget: number;
+  optimalRate: number;
+  monthlyShortfall: number;
 }
 
 export interface FIRECalculatorResult {
@@ -62,21 +60,21 @@ export interface FIRECalculatorResult {
 
   yearsToFIRE: number;
   ageAtFIRE: number;
-  totalNeeded: number; // Based on desired retirement expenses
-  currentProgress: number; // Percentage toward goal
+  totalNeeded: number;
+  currentProgress: number;
 
   savingsRate: SavingsRateAnalysis;
-  totalContributions: number; // Sum of all contributions until FIRE
-  totalGrowth: number; // Investment growth until FIRE
+  totalContributions: number;
+  totalGrowth: number;
 
   milestones: FIREMilestone[];
 
-  coastFIREAge: number | null; // Age when you can stop saving
-  coastFIREAmount: number; // Amount needed to coast
+  coastFIREAge: number | null;
+  coastFIREAmount: number;
 
   projections: ProjectionDataPoint[];
 
-  monthlyPassiveIncome: number; // At FIRE
+  monthlyPassiveIncome: number;
   monthlyExpensesInRetirement: number;
 
   currency: Currency;
@@ -84,7 +82,7 @@ export interface FIRECalculatorResult {
     returnRate: number;
     inflationRate: number;
     safeWithdrawalRate: number;
-    realReturn: number; // Return minus inflation
+    realReturn: number;
   };
 }
 

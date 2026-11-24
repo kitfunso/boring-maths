@@ -1,17 +1,3 @@
-/**
- * UKCapitalGainsTaxCalculator - Figure Pinning Tests
- *
- * These tests pin the CURRENT numeric behavior of calculateUKCGT() as of the
- * 2025/26 rates in src/components/calculators/UKCapitalGainsTaxCalculator/calculations.ts.
- * They exist as a safety net before the 2026/27 tax-year refresh (Task D1-D5):
- * when the constants are updated, these pins will fail and must be recomputed
- * against the new GOV.UK figures. Until then, they lock in what the code
- * actually returns today.
- *
- * Note: this file covers the UK CGT calculator only. The separate US CGT
- * calculator has its own tests/calculations/us-capital-gains-tax.test.ts.
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateUKCGT } from '../../src/components/calculators/UKCapitalGainsTaxCalculator/calculations';
 
@@ -50,8 +36,6 @@ describe('UKCapitalGainsTaxCalculator', () => {
       expect(result.gain).toBe(95000);
       expect(result.annualExemption).toBe(3000);
       expect(result.taxableGain).toBe(92000);
-      // taxableIncome = 40000 - 12570 = 27430
-      // basicRateBandRemaining = 37700 - 27430 = 10270
       expect(result.basicRateAmount).toBe(10270);
       expect(result.higherRateAmount).toBe(81730);
       expect(result.basicRateTax).toBe(1849);
@@ -112,8 +96,6 @@ describe('UKCapitalGainsTaxCalculator', () => {
         useAnnualExemption: true,
       });
 
-      // taxableIncome = 50270 - 12570 = 37700 = BASIC_RATE_THRESHOLD exactly,
-      // so basicRateBandRemaining = max(0, 37700 - 37700) = 0
       expect(result.gain).toBe(50000);
       expect(result.taxableGain).toBe(47000);
       expect(result.basicRateAmount).toBe(0);
@@ -134,8 +116,6 @@ describe('UKCapitalGainsTaxCalculator', () => {
         useAnnualExemption: true,
       });
 
-      // gain = 50000; taxableGain = 47000
-      // taxableIncome = 30000 - 12570 = 17430; basicRateBandRemaining = 37700 - 17430 = 20270
       expect(result.gain).toBe(50000);
       expect(result.taxableGain).toBe(47000);
       expect(result.basicRateAmount).toBe(20270);

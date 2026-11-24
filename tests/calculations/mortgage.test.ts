@@ -1,7 +1,3 @@
-/**
- * MortgageCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMortgage } from '../../src/components/calculators/MortgageCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MortgageCalculator/types';

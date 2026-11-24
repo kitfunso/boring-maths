@@ -1,18 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * Playwright configuration for boring-math E2E smoke tests.
- *
- * - Runs against the Astro dev server on port 4321
- * - Tests Chromium and Firefox (WebKit skipped on Windows)
- * - Retries once in CI to reduce flakiness
- */
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 1,
-  /* Cap workers to avoid overwhelming the Astro dev server */
   workers: process.env.CI ? 1 : 4,
   reporter: 'html',
   timeout: 60_000,

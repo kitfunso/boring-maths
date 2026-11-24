@@ -1,9 +1,3 @@
-/**
- * One Rep Max Calculator - Type Definitions
- *
- * Estimates maximum weight for a single repetition using multiple proven formulas.
- */
-
 export type WeightUnit = 'kg' | 'lbs';
 
 export type FormulaName = 'epley' | 'brzycki' | 'lander' | 'lombardi' | 'oconner';

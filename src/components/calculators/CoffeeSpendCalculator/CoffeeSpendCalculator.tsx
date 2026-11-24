@@ -1,7 +1,3 @@
-/**
- * Coffee Spend Calculator - Preact Component
- */
-
 import { calculateCoffeeSpend, formatCurrency, formatCurrencyWhole } from './calculations';
 import { getDefaultInputs, type CoffeeSpendInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -48,7 +44,6 @@ export default function CoffeeSpendCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Coffees per day */}
             <Slider
               value={inputs.coffeesPerDay}
               onChange={(v) => updateInput('coffeesPerDay', v)}
@@ -64,7 +59,6 @@ export default function CoffeeSpendCalculator() {
               }}
             />
 
-            {/* Price per coffee */}
             <div>
               <Label htmlFor="pricePerCoffee" required>
                 Price per coffee
@@ -81,7 +75,6 @@ export default function CoffeeSpendCalculator() {
               />
             </div>
 
-            {/* Home brew cost */}
             <div>
               <Label htmlFor="homeBrewCost">Home brew cost per cup</Label>
               <Input
@@ -96,7 +89,6 @@ export default function CoffeeSpendCalculator() {
               />
             </div>
 
-            {/* Work days per week */}
             <Slider
               value={inputs.workDaysPerWeek}
               onChange={(v) => updateInput('workDaysPerWeek', v)}
@@ -112,7 +104,6 @@ export default function CoffeeSpendCalculator() {
               }}
             />
 
-            {/* Investment return rate */}
             <Slider
               value={inputs.investmentReturnRate}
               onChange={(v) => updateInput('investmentReturnRate', v)}
@@ -132,18 +123,15 @@ export default function CoffeeSpendCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.pricePerCoffee > 0 ? (
               <>
-                {/* Big yearly reveal */}
                 <ResultCard
                   label="You spend on coffee each year"
                   value={formatCurrencyWhole(result.yearlySpend, inputs.currency)}
                   subtitle={`${formatCurrency(result.dailySpend, inputs.currency)}/day across ${inputs.workDaysPerWeek * 52} buying days`}
                 />
 
-                {/* Spending breakdown */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Daily"
@@ -168,7 +156,6 @@ export default function CoffeeSpendCalculator() {
                   />
                 </Grid>
 
-                {/* Savings vs home brew */}
                 {result.yearlySavings > 0 && (
                   <>
                     <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
@@ -190,7 +177,6 @@ export default function CoffeeSpendCalculator() {
                       </Grid>
                     </div>
 
-                    {/* Investment growth */}
                     <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                       <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                         If You Invested the Savings ({inputs.investmentReturnRate}% annual return)
@@ -216,7 +202,6 @@ export default function CoffeeSpendCalculator() {
                       </Grid>
                     </div>
 
-                    {/* Fun equivalents */}
                     {result.funEquivalents.length > 0 && (
                       <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                         <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -254,7 +239,6 @@ export default function CoffeeSpendCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.pricePerCoffee > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

@@ -1,8 +1,3 @@
-/**
- * Tile Calculator - React Component
- *
- * Calculate tiles, grout, and adhesive needed for tiling projects.
- */
 import { calculateTile } from './calculations';
 import {
   getDefaultInputs,
@@ -101,13 +96,11 @@ export default function TileCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                 Area Dimensions
               </div>
 
-              {/* Surface Type */}
               <div>
                 <Label>Surface Type</Label>
                 <ButtonGroup
@@ -117,7 +110,6 @@ export default function TileCalculator() {
                 />
               </div>
 
-              {/* Dimensions */}
               <Grid cols={2} gap="md">
                 <div>
                   <Label htmlFor="areaLength">Length (feet)</Label>
@@ -155,7 +147,6 @@ export default function TileCalculator() {
                 Tile Specifications
               </div>
 
-              {/* Tile Size */}
               <div>
                 <Label>Tile Size</Label>
                 <ButtonGroup
@@ -165,7 +156,6 @@ export default function TileCalculator() {
                 />
               </div>
 
-              {/* Custom Size */}
               {inputs.tileSize === 'custom' && (
                 <Grid cols={2} gap="md">
                   <div>
@@ -200,7 +190,6 @@ export default function TileCalculator() {
                 </Grid>
               )}
 
-              {/* Pattern */}
               <div>
                 <Label>Installation Pattern</Label>
                 <ButtonGroup
@@ -213,7 +202,6 @@ export default function TileCalculator() {
                 </p>
               </div>
 
-              {/* Grout Width */}
               <div>
                 <Label>Grout Width</Label>
                 <ButtonGroup
@@ -259,7 +247,6 @@ export default function TileCalculator() {
                 </div>
               </Grid>
 
-              {/* Options */}
               <div className="space-y-3">
                 <Toggle
                   checked={inputs.includeGrout}
@@ -282,7 +269,6 @@ export default function TileCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Tiles Needed"
@@ -301,7 +287,6 @@ export default function TileCalculator() {
                 <MetricCard label="Total Cost" value={fmt(result.totalCost)} />
               </Grid>
 
-              {/* Materials List */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Materials List
@@ -366,7 +351,6 @@ export default function TileCalculator() {
                 </div>
               </div>
 
-              {/* Pattern Waste Comparison */}
               <div className="bg-cyan-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-3">
                   Waste by Pattern
@@ -397,7 +381,6 @@ export default function TileCalculator() {
                 </div>
               </div>
 
-              {/* Don't Forget */}
               <div className="bg-cyan-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-cyan-400 uppercase tracking-wider mb-3">
                   Don't Forget
@@ -414,7 +397,6 @@ export default function TileCalculator() {
                 </ul>
               </div>
 
-              {/* Tips */}
               {result.tips.length > 0 && (
                 <Alert variant="tip" title="Pro Tips">
                   <ul className="space-y-1 mt-2">
@@ -428,7 +410,6 @@ export default function TileCalculator() {
                 </Alert>
               )}
 
-              {/* Share */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Tile needed: ${result.tilesNeeded} tiles (${result.boxesNeeded} boxes) for ${result.totalAreaSqFt} sq ft - Est. cost: ${fmt(result.totalCost)}`}

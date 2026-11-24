@@ -7,9 +7,6 @@ import {
   EIGHTY_PERCENT_THRESHOLD,
 } from '../../src/components/calculators/UKStatutorySickPayCalculator/calculations';
 
-// Statutory figures pinned against GOV.UK "Statutory Sick Pay" (checked
-// 2026-07-28): weekly SSP is the lower of £123.25 and 80% of normal weekly
-// earnings, paid for the working days off sick, for up to 28 weeks.
 describe('SSP statutory constants (GOV.UK pins)', () => {
   it('pins the flat weekly rate at £123.25', () => {
     expect(SSP_WEEKLY_RATE).toBe(123.25);

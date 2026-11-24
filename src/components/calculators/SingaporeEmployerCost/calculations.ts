@@ -1,5 +1,3 @@
-/** Employer side of Singapore CPF plus the Skills Development Levy (SDL), rates effective 1 Jan 2026. */
-
 import {
   CPF_AGE_BANDS,
   calculateEmployerCpfContribution,
@@ -33,7 +31,6 @@ export function getDefaultInputs(): SingaporeEmployerCostInputs {
   return { monthlyGrossWage: 5000, ageBand: 'upTo55' };
 }
 
-// SDL is payable on every employee: 0.25% of wages up to $4,500, floored at $2, capped at $11.25.
 export function calculateSDL(wage: number): number {
   if (wage <= 0) return 0;
   const raw = Math.min(wage, SDL_WAGE_CEILING) * SDL_RATE;

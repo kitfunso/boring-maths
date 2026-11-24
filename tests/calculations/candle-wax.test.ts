@@ -1,7 +1,3 @@
-/**
- * CandleWax Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCandleWax } from '../../src/components/calculators/CandleWaxCalculator/calculations';
 import type { CandleWaxInputs } from '../../src/components/calculators/CandleWaxCalculator/types';
@@ -50,7 +46,6 @@ describe('CandleWaxCalculator', () => {
       const result = calculateCandleWax(inputs);
 
       expect(result.waxWeight).toBeGreaterThan(0);
-      // Soy 464 density is 0.86, so 8oz volume = ~6.88oz wax
       expect(result.waxWeightPerContainer).toBeCloseTo(6.88, 0);
     });
 

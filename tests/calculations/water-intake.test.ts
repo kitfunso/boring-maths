@@ -1,7 +1,3 @@
-/**
- * Water Intake Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateWaterIntake } from '../../src/components/calculators/WaterIntakeCalculator/calculations';
 import type { WaterIntakeInputs } from '../../src/components/calculators/WaterIntakeCalculator/types';
@@ -20,7 +16,6 @@ describe('WaterIntakeCalculator', () => {
     it('calculates base intake for 70kg moderate activity', () => {
       const result = calculateWaterIntake(baseInputs);
 
-      // 70kg * 35ml = 2450ml base, * 1.2 (moderate) = 2940ml
       expect(result.dailyIntakeMl).toBe(2940);
       expect(result.dailyIntakeOz).toBeGreaterThan(0);
       expect(result.dailyIntakeCups).toBeGreaterThan(0);
@@ -36,7 +31,6 @@ describe('WaterIntakeCalculator', () => {
     it('applies sedentary multiplier of 1.0 (no change from base)', () => {
       const result = calculateWaterIntake({ ...baseInputs, activityLevel: 'sedentary' });
 
-      // 70 * 35 * 1.0 = 2450
       expect(result.dailyIntakeMl).toBe(2450);
       expect(result.exerciseAdditionMl).toBe(0);
     });
@@ -44,7 +38,6 @@ describe('WaterIntakeCalculator', () => {
     it('applies veryActive multiplier of 1.6', () => {
       const result = calculateWaterIntake({ ...baseInputs, activityLevel: 'veryActive' });
 
-      // 70 * 35 * 1.6 = 3920
       expect(result.dailyIntakeMl).toBe(3920);
     });
 
@@ -105,7 +98,6 @@ describe('WaterIntakeCalculator', () => {
         unit: 'lbs',
       });
 
-      // 154 lbs ≈ 69.85kg, results should be very close
       expect(Math.abs(inKg.dailyIntakeMl - inLbs.dailyIntakeMl)).toBeLessThan(20);
     });
 
@@ -121,7 +113,6 @@ describe('WaterIntakeCalculator', () => {
         activityLevel: 'sedentary',
       });
 
-      // 2450ml vs ~1893ml (8 cups) = ~129%
       expect(result.comparedToEightGlasses).toBeGreaterThan(100);
     });
 

@@ -1,22 +1,12 @@
-/**
- * Reynolds Number Calculator - Type Definitions
- *
- * Calculates Reynolds number to determine flow regime (laminar/turbulent).
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type FluidType = 'water' | 'air' | 'oil' | 'custom';
 
 export interface ReynoldsInputs {
   unitSystem: UnitSystem;
   fluidType: FluidType;
-  /** Pipe diameter in mm (metric) or inches (imperial) */
   diameter: number;
-  /** Flow velocity in m/s (metric) or ft/s (imperial) */
   velocity: number;
-  /** Kinematic viscosity in m²/s (for custom fluid) */
   kinematicViscosity: number;
-  /** Fluid temperature in °C (metric) or °F (imperial) */
   temperature: number;
 }
 
@@ -51,7 +41,6 @@ export const FLOW_REGIMES: FlowRegime[] = [
   },
 ];
 
-// Kinematic viscosity values at 20°C in m²/s
 export const FLUID_VISCOSITIES: Record<FluidType, number> = {
   water: 1.004e-6, // m²/s at 20°C
   air: 1.516e-5, // m²/s at 20°C

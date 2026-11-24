@@ -1,10 +1,3 @@
-/**
- * Startup Cost Calculator - Type Definitions
- *
- * Estimate total startup costs based on business type,
- * location, employees, and runway requirements.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type BusinessType =
@@ -19,7 +12,6 @@ export interface BusinessTypeConfig {
   id: BusinessType;
   label: string;
   description: string;
-  /** Base one-time costs */
   baseCosts: {
     equipment: number;
     legalFees: number;
@@ -29,7 +21,6 @@ export interface BusinessTypeConfig {
     deposit: number;
     renovation: number;
   };
-  /** Base monthly costs */
   monthlyCosts: {
     rent: number;
     utilities: number;
@@ -468,32 +459,23 @@ export interface CostBreakdownItem {
 export interface StartupCostResult {
   currency: Currency;
 
-  /** Total one-time costs */
   oneTimeCosts: number;
-  /** Monthly burn rate */
   monthlyBurnRate: number;
-  /** Total capital needed for runway */
   totalCapitalNeeded: number;
-  /** Contingency buffer */
   contingencyBuffer: number;
 
-  /** Detailed breakdown */
   oneTimeBreakdown: CostBreakdownItem[];
   monthlyBreakdown: CostBreakdownItem[];
 
-  /** Key metrics */
   costPerEmployee: number;
   dailyBurnRate: number;
   weeklyBurnRate: number;
 
-  /** Runway analysis */
   breakdownByMonth: { month: number; remaining: number; spent: number }[];
 
-  /** Tips based on business type */
   tips: string[];
 }
 
-/** Average salary by currency for employee cost estimates */
 export const AVG_EMPLOYEE_SALARY: Record<Currency, number> = {
   USD: 50000,
   GBP: 35000,

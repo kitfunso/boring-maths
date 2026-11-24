@@ -1,7 +1,3 @@
-/**
- * CO2 Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCO2 } from '../../src/components/calculators/CO2Calculator/calculations';
 import type { CO2Inputs } from '../../src/components/calculators/CO2Calculator/types';
@@ -18,7 +14,6 @@ describe('CO2Calculator', () => {
 
       const result = calculateCO2(inputs);
 
-      // CO2 ppm from pH/KH chart: at pH 6.8 and KH 4, CO2 should be ~15-20 ppm
       expect(result.co2ppm).toBeGreaterThan(10);
       expect(result.co2ppm).toBeLessThan(30);
       expect(result.co2Level).toBeDefined();

@@ -1,5 +1,3 @@
-/** UK Nursery Cost Calculator - type definitions for childcare cost inputs and results. */
-
 export type UKRegion = 'inner-london' | 'outer-london' | 'south-east' | 'rest-of-uk';
 
 export type ChildAge = 'under-2' | '2-years' | '3-4-years';
@@ -22,7 +20,6 @@ export interface NurseryCostInputs {
   householdIncome: number;
   benefitStatus: BenefitStatus;
   useTaxFreeChildcare: boolean;
-  /** Number of weeks childcare is used per year (38 term time, 52 full year) */
   weeksPerYear: number;
 }
 
@@ -42,7 +39,6 @@ export interface ChildCostBreakdown {
 }
 
 export interface NurseryCostResult {
-  /** Total gross annual cost before any support */
   totalGrossAnnualCost: number;
 
   totalFreeHoursValue: number;
@@ -51,28 +47,22 @@ export interface NurseryCostResult {
 
   ucChildcareElement: number;
 
-  /** Total annual cost after all support */
   totalNetAnnualCost: number;
 
   monthlyNetCost: number;
 
   weeklyNetCost: number;
 
-  /** Total savings from government support */
   totalSavings: number;
 
   savingsPercentage: number;
 
-  /** Eligible for 15 hours universal (3-4 year olds) */
   eligibleFor15HoursUniversal: boolean;
 
-  /** Eligible for 15 hours working parents (9 months+) */
   eligibleFor15HoursWorking: boolean;
 
-  /** Eligible for 30 hours working parents */
   eligibleFor30Hours: boolean;
 
-  /** Eligible for 15 hours 2-year-old (low income) */
   eligibleFor15Hours2YearOld: boolean;
 
   eligibleForTaxFreeChildcare: boolean;

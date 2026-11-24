@@ -1,20 +1,3 @@
-/**
- * Great-circle distances (statute miles) from London Heathrow (LHR) to every
- * Avios Destination Finder destination airport.
- *
- * Source: https://davidmegginson.github.io/ourairports-data/airports.csv
- * (OurAirports open dataset, public domain). Generated 2026-07-19 by:
- *   node scripts/data/build-avios-distances.mjs
- *
- * Distance = haversine great-circle from the CSV's own LHR row, rounded to
- * the nearest 10 miles. This is the "as the crow flies" distance, not the
- * flown route (which is typically longer) - the rounding is deliberate so
- * the figures do not imply more precision than the method supports.
- *
- * DO NOT hand-edit. Regenerate with the script above whenever
- * destinations.ts changes or the source dataset updates.
- */
-
 export const DISTANCE_MILES_FROM_LONDON: Readonly<Record<string, number>> = {
   ABV: 2970,
   ABZ: 400,
@@ -217,12 +200,6 @@ export const DISTANCE_MILES_FROM_LONDON: Readonly<Record<string, number>> = {
   ZTH: 1400,
 };
 
-/**
- * Throws listing any destination missing a distance entry. Call this from
- * build-time code paths (e.g. astro page frontmatter) so a data-generation
- * gap fails `astro build`, not just the test suite. `calculations.ts`
- * keeps its own runtime throw as a backstop for the calculation layer.
- */
 export function assertDistanceCoverage(
   destinations: readonly { iata: string; city: string }[]
 ): void {

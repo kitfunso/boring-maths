@@ -1,5 +1,3 @@
-/** SP Group electricity (Oct-Dec 2026) + PUB water (eff. 1 Apr 2025) tests. Expected values hand-computed below each case. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeUtilityBill } from '../../src/components/calculators/SingaporeUtilityBill/calculations';
 

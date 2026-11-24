@@ -1,7 +1,3 @@
-/**
- * Inflation Calculator Types
- */
-
 export interface InflationInputs {
   amount: number;
   startYear: number;
@@ -19,7 +15,6 @@ export interface InflationResult {
   yearsElapsed: number;
 }
 
-// Historical US CPI data (average annual inflation rates by decade)
 export const HISTORICAL_INFLATION: Record<number, number> = {
   1920: 15.6,
   1921: -10.5,

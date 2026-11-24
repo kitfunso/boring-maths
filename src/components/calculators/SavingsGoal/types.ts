@@ -1,5 +1,3 @@
-/** Savings Goal Calculator: monthly contribution needed to reach a target, with compound interest and inflation adjustment, for USD/GBP/EUR. */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface SavingsGoalInputs {
@@ -11,10 +9,8 @@ export interface SavingsGoalInputs {
 
   timelineYears: number;
 
-  /** Expected annual return rate as decimal (0.07 = 7%) */
   annualReturn: number;
 
-  /** Expected annual inflation rate as decimal (0.03 = 3%) */
   inflationRate: number;
 
   contributionFrequency: ContributionFrequency;
@@ -35,10 +31,8 @@ export interface SavingsGoalResult {
 
   finalBalance: number;
 
-  /** Inflation-adjusted goal (real value) */
   inflationAdjustedGoal: number;
 
-  /** Real return rate (after inflation) */
   realReturnRate: number;
 
   projectionData: Array<{

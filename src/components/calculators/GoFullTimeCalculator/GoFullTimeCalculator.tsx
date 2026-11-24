@@ -1,9 +1,3 @@
-/**
- * Go Full-Time Calculator - React Component
- *
- * Helps people figure out when they can quit their job to pursue
- * freelancing or a side hustle (like vibe coding on Claude Code) full-time.
- */
 import {
   calculateGoFullTime,
   formatCurrency,
@@ -45,27 +39,18 @@ export default function GoFullTimeCalculator() {
     compute: calculateGoFullTime,
   });
 
-  // State
-
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Memoized calculation
-
-  // Generic input updater
-
-  // Currency change handler (resets to defaults)
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Risk tolerance options
   const riskOptions = [
     { value: 'aggressive' as const, label: 'Aggressive' },
     { value: 'moderate' as const, label: 'Moderate' },
     { value: 'conservative' as const, label: 'Conservative' },
   ];
 
-  // Get progress bar color based on readiness
   const getProgressColor = (percent: number) => {
     if (percent >= 100) return 'bg-green-500';
     if (percent >= 75) return 'bg-green-400';
@@ -74,7 +59,6 @@ export default function GoFullTimeCalculator() {
     return 'bg-red-500';
   };
 
-  // Get alert variant based on readiness
   const getReadinessVariant = () => {
     if (result.isReadyToQuit) return 'success' as const;
     if (result.readinessPercent >= 75) return 'info' as const;
@@ -82,14 +66,12 @@ export default function GoFullTimeCalculator() {
     return 'warning' as const;
   };
 
-  // Format income ratio for display
   const incomeRatio =
     inputs.monthlyExpenses > 0 ? (inputs.monthlySideIncome / inputs.monthlyExpenses) * 100 : 0;
 
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Go Full-Time Calculator"
           subtitle="Calculate when you can quit your job to freelance or pursue your side hustle full-time"
@@ -97,9 +79,7 @@ export default function GoFullTimeCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Current Job Income */}
             <div className="bg-[var(--color-night)] rounded-xl p-5">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Current Employment
@@ -145,7 +125,6 @@ export default function GoFullTimeCalculator() {
               </Grid>
             </div>
 
-            {/* Living Expenses & Savings */}
             <div className="bg-[var(--color-night)] rounded-xl p-5">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Financial Position
@@ -189,7 +168,6 @@ export default function GoFullTimeCalculator() {
               </Grid>
             </div>
 
-            {/* Side Hustle Income */}
             <div className="bg-[var(--color-night)] rounded-xl p-5">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Side Hustle / Freelance Income
@@ -235,7 +213,6 @@ export default function GoFullTimeCalculator() {
               </Grid>
             </div>
 
-            {/* Risk Tolerance */}
             <div>
               <Label>Risk Tolerance</Label>
               <ButtonGroup
@@ -249,7 +226,6 @@ export default function GoFullTimeCalculator() {
               </p>
             </div>
 
-            {/* Safety Buffer Slider */}
             <Slider
               label="Desired Safety Buffer"
               value={inputs.desiredSafetyBuffer}
@@ -268,9 +244,7 @@ export default function GoFullTimeCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Status Message */}
             <Alert
               variant={getReadinessVariant()}
               title={result.isReadyToQuit ? 'Ready to Go Full-Time!' : 'Keep Building'}
@@ -278,7 +252,6 @@ export default function GoFullTimeCalculator() {
               {result.statusMessage}
             </Alert>
 
-            {/* Primary Result - Recommended Quit Date */}
             <ResultCard
               label="Recommended Transition Date"
               value={formatDate(result.recommendedQuitDate)}
@@ -300,7 +273,6 @@ export default function GoFullTimeCalculator() {
               }
             />
 
-            {/* Readiness Progress */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-[var(--color-cream)]">
@@ -325,7 +297,6 @@ export default function GoFullTimeCalculator() {
               </div>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Current Runway"
@@ -362,7 +333,6 @@ export default function GoFullTimeCalculator() {
               />
             </Grid>
 
-            {/* Scenario Comparison */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Scenario Comparison
@@ -427,7 +397,6 @@ export default function GoFullTimeCalculator() {
               </div>
             </div>
 
-            {/* Income Timeline */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Projected Timeline
@@ -553,7 +522,6 @@ export default function GoFullTimeCalculator() {
               </div>
             </div>
 
-            {/* Gap Analysis */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Gap Analysis
@@ -585,7 +553,6 @@ export default function GoFullTimeCalculator() {
               </Grid>
             </div>
 
-            {/* Savings Tiers */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Savings Milestones
@@ -631,7 +598,6 @@ export default function GoFullTimeCalculator() {
               </div>
             </div>
 
-            {/* Pro Tips */}
             <Alert variant="tip" title="Tips for your transition:">
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>Build 3-6 months of consistent income before quitting</li>
@@ -642,7 +608,6 @@ export default function GoFullTimeCalculator() {
               </ul>
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Go Full-Time Analysis: ${result.isReadyToQuit ? 'Ready to quit!' : `${result.readinessPercent}% ready`} - Crossover in ${formatMonths(result.monthsToCrossover)} - Runway: ${result.currentRunwayMonths >= 999 ? 'Sustainable' : `${result.currentRunwayMonths} months`}`}

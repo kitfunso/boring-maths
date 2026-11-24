@@ -1,35 +1,24 @@
-/** UK Mortgage Affordability: max borrow = income x lender multiple (no statutory constant; lenders set their own, commonly ~4.5x), max property price = max borrow + deposit, plus monthly repayment and LTV. */
-
 export const DEFAULT_INCOME_MULTIPLE = 4.5;
 export const DEFAULT_TERM_YEARS = 25;
 export const MONTHS_PER_YEAR = 12;
 
 export interface MortgageAffordabilityInputs {
-  // Primary applicant gross annual income.
   annualIncome: number;
-  // Optional second applicant gross annual income (joint application).
   jointIncome: number;
-  // Cash deposit available.
   deposit: number;
-  // Income multiple the lender applies (default 4.5).
   incomeMultiple: number;
-  // Annual interest rate as a percentage, for example 4.5 means 4.5 percent.
   interestRate: number;
   termYears: number;
 }
 
 export interface MortgageAffordabilityResult {
   totalIncome: number;
-  // Maximum amount borrowable: totalIncome * incomeMultiple.
   maxBorrow: number;
-  // Maximum property price: maxBorrow + deposit.
   maxPropertyPrice: number;
   monthlyPayment: number;
-  // Loan to value as a percentage of the property price.
   ltv: number;
 }
 
-/** Standard repayment formula: P = L * r / (1 - (1+r)^-n), r = monthly rate, n = months. r=0 falls back to loan/months. */
 export function calculateMonthlyPayment(
   loan: number,
   annualRatePercent: number,
@@ -46,7 +35,6 @@ export function calculateMonthlyPayment(
   return (loan * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
 }
 
-/** Main pure calculation. Negative inputs are floored at zero so a cleared field doesn't produce a nonsense result. */
 export function calculateMortgageAffordability(
   inputs: MortgageAffordabilityInputs
 ): MortgageAffordabilityResult {

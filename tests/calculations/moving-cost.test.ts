@@ -1,7 +1,3 @@
-/**
- * MovingCostCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateMovingCost } from '../../src/components/calculators/MovingCost/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/MovingCost/types';

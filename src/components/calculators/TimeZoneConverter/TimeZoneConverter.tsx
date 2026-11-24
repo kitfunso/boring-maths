@@ -1,6 +1,3 @@
-/**
- * Time Zone Converter - Preact Component
- */
 import { convertTimeZone } from './calculations';
 import { getDefaultInputs, TIME_ZONES, type TimeZoneConverterInputs } from './types';
 import {
@@ -49,7 +46,6 @@ export default function TimeZoneConverter() {
   const diffSign = result.offsetDiff >= 0 ? '+' : '';
   const diffHours = result.offsetDiff % 1 === 0 ? result.offsetDiff : result.offsetDiff.toFixed(1);
 
-  // Common conversions table
   const commonTimes = [0, 3, 6, 9, 12, 15, 18, 21];
 
   const shareText = `${inputTime} ${result.fromAbbrev} = ${result.convertedTime} ${result.toAbbrev}${dayLabel}`;
@@ -134,7 +130,6 @@ export default function TimeZoneConverter() {
             </Alert>
           )}
 
-          {/* Reference table */}
           <div>
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Quick Reference</h3>
             <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">

@@ -20,8 +20,6 @@ export default function UKStampDutyCalculator() {
     compute: calculateStampDuty,
   });
 
-  // Region-aware label for the additional-property line: England/NI charge a
-  // 5% SDLT surcharge, Scotland an 8% ADS, Wales higher LTT rates instead.
   const additionalSurchargeLabel =
     inputs.location === 'scotland'
       ? 'Additional Dwelling Supplement (8%)'
@@ -38,9 +36,7 @@ export default function UKStampDutyCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Property Price */}
             <div>
               <Label htmlFor="propertyPrice" required>
                 Property Price
@@ -61,7 +57,6 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* Property Location */}
             <div>
               <Label required>Property Location</Label>
               <div className="grid grid-cols-3 gap-2">
@@ -82,7 +77,6 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* Buyer Type */}
             <div>
               <Label required>Buyer Type</Label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -103,8 +97,6 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* Non-Resident Toggle: the 2% surcharge is SDLT-only, so only
-                offered for England & NI (no LBTT/LTT equivalent) */}
             {inputs.location === 'england' && (
               <Toggle
                 checked={inputs.isNonResident}
@@ -114,9 +106,7 @@ export default function UKStampDutyCalculator() {
             )}
           </div>
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Main Result */}
             <div
               className={`rounded-2xl p-6 border-2 ${
                 result.totalTax === 0
@@ -139,7 +129,6 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* First-time Buyer Saving */}
             {result.firstTimeBuyerSaving > 0 && (
               <div className="bg-emerald-950/30 rounded-xl p-4 border border-emerald-500/30">
                 <div className="flex items-center gap-2">
@@ -163,7 +152,6 @@ export default function UKStampDutyCalculator() {
               </div>
             )}
 
-            {/* Surcharge Breakdown */}
             {(result.additionalPropertySurcharge > 0 || result.nonResidentSurcharge > 0) && (
               <div className="bg-amber-950/30 rounded-xl p-4 border border-amber-500/30">
                 <p className="text-amber-400 font-medium mb-2">Surcharges Applied:</p>
@@ -188,7 +176,6 @@ export default function UKStampDutyCalculator() {
               </div>
             )}
 
-            {/* Band Breakdown */}
             <div>
               <h3 className="text-lg font-semibold text-[var(--color-cream)] mb-4">
                 Tax Band Breakdown
@@ -250,7 +237,6 @@ export default function UKStampDutyCalculator() {
               </div>
             </div>
 
-            {/* Quick Reference */}
             <div className="bg-white/5 rounded-xl p-4">
               <h4 className="text-sm font-medium text-[var(--color-muted)] mb-3">
                 Quick Reference

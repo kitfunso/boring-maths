@@ -1,7 +1,3 @@
-/**
- * Pizza Dough Calculator - Preact Component
- */
-
 import { calculatePizzaDough, formatWeight } from './calculations';
 import {
   getDefaultInputs,
@@ -70,7 +66,6 @@ export default function PizzaDoughCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Dough Style Selector */}
             <div>
               <Label>Dough Style</Label>
               <div className="space-y-2">
@@ -91,7 +86,6 @@ export default function PizzaDoughCalculator() {
               </div>
             </div>
 
-            {/* Number of Pizzas & Size */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
                 <Label htmlFor="numberOfPizzas" required>
@@ -125,7 +119,6 @@ export default function PizzaDoughCalculator() {
               </div>
             </Grid>
 
-            {/* Hydration Slider */}
             <Slider
               value={inputs.hydration}
               onChange={(val) => updateInput('hydration', val)}
@@ -142,7 +135,6 @@ export default function PizzaDoughCalculator() {
               }}
             />
 
-            {/* Yeast Type */}
             <div>
               <Label htmlFor="yeastType" required>
                 Yeast Type
@@ -158,9 +150,7 @@ export default function PizzaDoughCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Total Dough"
               value={formatWeight(result.totalDoughWeight)}
@@ -172,7 +162,6 @@ export default function PizzaDoughCalculator() {
               }
             />
 
-            {/* Ingredient Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Ingredients
@@ -200,7 +189,6 @@ export default function PizzaDoughCalculator() {
               </div>
             </div>
 
-            {/* Quick Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Per Ball"
@@ -230,7 +218,6 @@ export default function PizzaDoughCalculator() {
               />
             </Grid>
 
-            {/* Tips */}
             <Alert variant="tip" title="Rise time tips">
               Room temperature (~22 C / 72 F) rise times are shown above. For a cold ferment in the
               fridge (4 C / 40 F), multiply the rise time by 3-4x. Cold fermentation develops more
@@ -254,7 +241,6 @@ export default function PizzaDoughCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults result={shareText} calculatorName="Pizza Dough Calculator" />
             </div>
@@ -265,7 +251,6 @@ export default function PizzaDoughCalculator() {
   );
 }
 
-/** Single ingredient row in the breakdown table. */
 function IngredientRow({
   label,
   grams,

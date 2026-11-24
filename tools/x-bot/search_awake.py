@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Search for reply targets in AWAKE_MODE."""
 import sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 import tweepy
@@ -14,14 +13,12 @@ client = tweepy.Client(
     wait_on_rate_limit=False
 )
 
-# AWAKE_MODE queries
 queries = [
     '(pension OR HMRC OR "national insurance" OR "take home" OR "stamp duty" OR "personal allowance" OR PAYE) -is:reply -is:quote lang:en',
     '("compound interest" OR compounding OR savings OR mortgage OR freelance OR "day rate" OR IR35) -is:reply -is:quote lang:en',
     '("inheritance tax" OR "capital gains" OR dividend OR ISA OR "salary sacrifice") -is:reply -is:quote lang:en',
 ]
 
-# Load dedup file
 dedup_path = r'C:\Users\skf_s\clawd\tasks\state\x-replied-posts.txt'
 already_replied = set()
 try:
@@ -58,7 +55,6 @@ for q in queries:
     except Exception as e:
         print(f'Error on query: {e}')
 
-# Sort by likes desc
 found.sort(key=lambda x: x[0], reverse=True)
 print(f'Found {len(found)} new targets:')
 for likes, url, text, tid in found[:10]:

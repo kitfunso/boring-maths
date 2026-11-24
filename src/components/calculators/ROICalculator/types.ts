@@ -1,11 +1,7 @@
-/** ROI Calculator: return on investment with annualised ROI, entering either a final value or a gain amount over years or months. */
-
 import type { Currency } from '../../../lib/regions';
 
-/** Whether the user enters a final value or a gain amount */
 export type InputMode = 'finalValue' | 'gainAmount';
 
-/** Whether the time period is in years or months */
 export type TimePeriodUnit = 'years' | 'months';
 
 export interface ROICalculatorInputs {
@@ -15,10 +11,8 @@ export interface ROICalculatorInputs {
 
   inputMode: InputMode;
 
-  /** Final value of the investment (used when inputMode is 'finalValue') */
   finalValue: number;
 
-  /** Gain or loss amount (used when inputMode is 'gainAmount') */
   gainAmount: number;
 
   timePeriod: number;
@@ -33,17 +27,14 @@ export interface ROICalculatorResult {
 
   finalValue: number;
 
-  /** ROI as a percentage (e.g. 25 means 25%) */
   roiPercentage: number;
 
-  /** Annualised ROI as a percentage */
   annualisedROI: number;
 
   timeInYears: number;
 
   isGain: boolean;
 
-  /** Whether the result is valid (non-zero initial investment, positive time) */
   isValid: boolean;
 }
 

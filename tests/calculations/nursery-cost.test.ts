@@ -1,15 +1,3 @@
-/**
- * NurseryCostCalculator - Figure Pinning Tests
- *
- * These tests pin the numeric behavior of calculateNurseryCost() as
- * of the 2026/27 rates in
- * src/components/calculators/NurseryCostCalculator/calculations.ts. The
- * statutory figures (free-hours minimum earnings, Universal Credit childcare
- * caps) were recomputed against GOV.UK 2026/27 figures during the tax-year
- * refresh (Task D1-D5). The average hourly nursery rates are market survey
- * data (Coram Family and Childcare Survey) and are unchanged.
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateNurseryCost } from '../../src/components/calculators/NurseryCostCalculator/calculations';
 
@@ -96,12 +84,10 @@ describe('NurseryCostCalculator', () => {
 
       expect(result.eligibleFor15Hours2YearOld).toBe(true);
       expect(result.eligibleForUCChildcare).toBe(true);
-      expect(result.childBreakdowns[0].freeHoursPerWeek).toBe(15); // 2yo: UC 15-hour branch
-      expect(result.childBreakdowns[1].freeHoursPerWeek).toBe(0); // under-2: not working-eligible
+      expect(result.childBreakdowns[0].freeHoursPerWeek).toBe(15);
+      expect(result.childBreakdowns[1].freeHoursPerWeek).toBe(0);
       expect(result.totalGrossAnnualCost).toBe(23560);
       expect(result.totalFreeHoursValue).toBe(4275);
-      // monthly cost after free hours (19285/12) * 0.85 coverage, under the
-      // MAX_TWO_PLUS cap of 1836.16/month, annualised (*12)
       expect(result.ucChildcareElement).toBeCloseTo(16392.25, 2);
       expect(result.totalNetAnnualCost).toBeCloseTo(2892.75, 2);
     });
@@ -143,9 +129,6 @@ describe('NurseryCostCalculator', () => {
 
       expect(result.childBreakdowns[0].hourlyRate).toBe(9);
       expect(result.childBreakdowns[1].hourlyRate).toBe(8.5);
-      // 3-4-year-old still gets the universal 15 hours even when not-working,
-      // but hoursPerWeek (10) is below that, so freeHoursPerWeek is capped
-      // at hoursPerWeek via effectiveFreeHours = min(maxFreeHours, hoursPerWeek)
       expect(result.childBreakdowns[1].freeHoursPerWeek).toBe(10);
       expect(result.totalGrossAnnualCost).toBe(6650);
       expect(result.totalNetAnnualCost).toBe(3420);
@@ -184,7 +167,6 @@ describe('NurseryCostCalculator', () => {
 
       expect(result.childBreakdowns[0].hourlyRate).toBe(7.5);
       expect(result.childBreakdowns[1].hourlyRate).toBe(7);
-      // not-working: neither under-2 nor 2-years gets any free hours
       expect(result.totalFreeHoursValue).toBe(0);
       expect(result.totalGrossAnnualCost).toBe(5510);
       expect(result.totalNetAnnualCost).toBe(5510);
@@ -217,15 +199,7 @@ describe('NurseryCostCalculator', () => {
         weeksPerYear: 52,
       });
 
-      // termWeeksRatio = min(52, 38) / 52 = 38/52; effectiveFreeHours = min(30, 20) = 20.
-      // NOTE: the ChildCostBreakdown.freeHoursPerWeek field returns
-      // effectiveFreeHours itself (pre-proration) -- the local prorated
-      // `freeHoursPerWeek` variable inside calculateChildCost is used only
-      // to derive freeHoursValue/annualFreeHoursValue and is never returned
-      // under that name. The TERM_WEEKS proration is only visible in
-      // freeHoursValue and the paid-hours/net-cost fields below.
       expect(result.childBreakdowns[0].freeHoursPerWeek).toBe(20);
-      // freeHoursValue = (20 * 38/52) * 5.5 = 80.3846...
       expect(result.childBreakdowns[0].freeHoursValue).toBeCloseTo(80.3846, 3);
       expect(result.childBreakdowns[0].paidHoursPerWeek).toBeCloseTo(5.3846, 3);
       expect(result.totalGrossAnnualCost).toBe(5720);
@@ -296,9 +270,6 @@ describe('NurseryCostCalculator', () => {
 
       expect(result.eligibleFor15Hours2YearOld).toBe(false);
       expect(result.childBreakdowns[0].freeHoursPerWeek).toBe(0);
-      // still eligibleForUCChildcare (benefitStatus alone drives that flag,
-      // it does not re-check the 2-year-old income threshold), so a UC
-      // element still applies to the full, un-discounted cost
       expect(result.eligibleForUCChildcare).toBe(true);
       expect(result.ucChildcareElement).toBe(3876);
     });
@@ -314,8 +285,6 @@ describe('NurseryCostCalculator', () => {
         weeksPerYear: 52,
       });
 
-      // costAfterFreeHours = 12410; potential = 12410 * 0.2 = 2482, which
-      // exceeds MAX_CONTRIBUTION (2000), so the contribution is capped
       expect(result.eligibleForTaxFreeChildcare).toBe(true);
       expect(result.taxFreeChildcareContribution).toBe(2000);
       expect(result.totalNetAnnualCost).toBe(10410);
@@ -332,9 +301,6 @@ describe('NurseryCostCalculator', () => {
         weeksPerYear: 52,
       });
 
-      // costAfterFreeHours = 25670; potential = 25670 * 0.2 = 5134, which
-      // exceeds MAX_CONTRIBUTION_DISABLED (4000), so the contribution is
-      // capped at the higher disabled-child limit
       expect(result.eligibleForTaxFreeChildcare).toBe(true);
       expect(result.taxFreeChildcareContribution).toBe(4000);
       expect(result.totalNetAnnualCost).toBe(21670);
@@ -351,9 +317,6 @@ describe('NurseryCostCalculator', () => {
         weeksPerYear: 52,
       });
 
-      // monthlyAfterFreeHours = 24700/12 = 2058.33; * 0.85 = 1749.58, which
-      // exceeds MAX_ONE_CHILD (1071.09), so the element is capped there
-      // and annualised: 1071.09 * 12 = 12853.08
       expect(result.eligibleForUCChildcare).toBe(true);
       expect(result.ucChildcareElement).toBeCloseTo(12853.08, 2);
       expect(result.totalNetAnnualCost).toBeCloseTo(11846.92, 2);
@@ -373,9 +336,6 @@ describe('NurseryCostCalculator', () => {
         weeksPerYear: 52,
       });
 
-      // monthlyAfterFreeHours = 49400/12 = 4116.67; * 0.85 = 3499.17, which
-      // exceeds MAX_TWO_PLUS (1836.16), so the element is capped there
-      // and annualised: 1836.16 * 12 = 22033.92
       expect(result.eligibleForUCChildcare).toBe(true);
       expect(result.ucChildcareElement).toBeCloseTo(22033.92, 2);
       expect(result.totalNetAnnualCost).toBeCloseTo(27366.08, 2);

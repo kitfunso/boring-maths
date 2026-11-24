@@ -1,10 +1,3 @@
-/**
- * Marketplace Fees Calculator - Type Definitions
- *
- * Compare fees across Etsy, eBay, and Amazon marketplaces
- * to help sellers understand their true costs.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type Platform = 'etsy' | 'ebay' | 'amazon';
@@ -19,7 +12,6 @@ export interface PlatformConfig {
     paymentProcessingRate: number;
     paymentProcessingFixed: number;
     perOrderFee: number;
-    /** Additional fees specific to platform */
     additionalFees?: {
       name: string;
       rate: number;
@@ -163,28 +155,20 @@ export const PLATFORM_FEES: Record<Currency, Record<Platform, PlatformConfig>> =
 export interface MarketplaceFeesInputs {
   currency: Currency;
 
-  /** Item sale price */
   itemPrice: number;
 
-  /** Shipping charged to customer */
   shippingCharged: number;
 
-  /** Actual shipping cost */
   shippingCost: number;
 
-  /** Cost of goods (materials, supplies) */
   productCost: number;
 
-  /** Whether sale came from Etsy offsite ads */
   etsyOffsiteAds: boolean;
 
-  /** Use Amazon FBA */
   amazonFBA: boolean;
 
-  /** FBA fee (estimated) */
   fbaFee: number;
 
-  /** Target profit margin (to calculate required price) */
   targetMargin: number;
 }
 
@@ -192,53 +176,39 @@ export interface PlatformFeeBreakdown {
   platform: Platform;
   platformLabel: string;
 
-  /** Total revenue from sale */
   grossRevenue: number;
 
-  /** Individual fee items */
   feeItems: {
     name: string;
     amount: number;
   }[];
 
-  /** Total fees */
   totalFees: number;
 
-  /** Effective fee rate */
   effectiveFeeRate: number;
 
-  /** Net after fees */
   netAfterFees: number;
 
-  /** Net profit (after all costs) */
   netProfit: number;
 
-  /** Profit margin */
   profitMargin: number;
 
-  /** Price needed to achieve target margin */
   priceForTargetMargin: number;
 }
 
 export interface MarketplaceFeesResult {
   currency: Currency;
 
-  /** Breakdown for each platform */
   platforms: PlatformFeeBreakdown[];
 
-  /** Which platform has lowest fees */
   lowestFeePlatform: Platform;
 
-  /** Which platform has highest profit */
   highestProfitPlatform: Platform;
 
-  /** Fee difference between best and worst */
   feeDifferenceRange: number;
 
-  /** Profit difference range */
   profitDifferenceRange: number;
 
-  /** Comparison insights */
   insights: string[];
 }
 

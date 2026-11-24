@@ -1,13 +1,9 @@
 import type { ReactNode } from 'react';
 
 export interface AlertProps {
-  /** Alert variant determines icon and colors */
   variant?: 'info' | 'warning' | 'error' | 'success' | 'tip';
-  /** Alert title (optional) */
   title?: string;
-  /** Alert content */
   children: ReactNode;
-  /** Additional class names */
   className?: string;
 }
 
@@ -122,10 +118,6 @@ const VARIANT_ICONS = {
   ),
 };
 
-/**
- * Alert component for displaying tips, warnings, and errors.
- * Updated for dark theme.
- */
 export function Alert({ variant = 'info', title, children, className = '' }: AlertProps) {
   const styles = VARIANT_STYLES[variant];
 

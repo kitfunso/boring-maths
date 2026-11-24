@@ -11,17 +11,11 @@ export interface SelectProps<T = string> extends Omit<
   SelectHTMLAttributes<HTMLSelectElement>,
   'onChange' | 'value' | 'size'
 > {
-  /** Options to display */
   options: SelectOption<T>[];
-  /** Controlled value */
   value: T;
-  /** Change handler with typed value */
   onChange: (value: T) => void;
-  /** Size variant */
   size?: 'sm' | 'md' | 'lg';
-  /** Variant for different contexts */
   variant?: 'default' | 'header';
-  /** Additional class names */
   className?: string;
 }
 
@@ -31,21 +25,6 @@ const SIZE_CLASSES = {
   lg: 'py-4 text-xl',
 };
 
-/**
- * Themed select dropdown component.
- *
- * @example
- * ```tsx
- * <Select
- *   options={[
- *     { value: 'USD', label: 'USD', icon: '🇺🇸' },
- *     { value: 'GBP', label: 'GBP', icon: '🇬🇧' },
- *   ]}
- *   value={currency}
- *   onChange={setCurrency}
- * />
- * ```
- */
 export function Select<T extends string>({
   options,
   value,
@@ -89,7 +68,6 @@ export function Select<T extends string>({
     );
   }
 
-  // Default variant
   return (
     <select
       value={value as string}

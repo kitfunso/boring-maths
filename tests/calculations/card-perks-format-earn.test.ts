@@ -1,5 +1,3 @@
-/** formatEarn - crawlable earn-rate summary used by CardFactsTable.astro. */
-
 import { describe, it, expect } from 'vitest';
 import { formatEarn } from '../../src/components/calculators/CardPerksCalculator/formatEarn';
 import type { CardProduct } from '../../src/components/calculators/CardPerksCalculator/types';

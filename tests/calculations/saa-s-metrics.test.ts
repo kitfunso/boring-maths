@@ -1,7 +1,3 @@
-/**
- * SaaSMetricsCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSaaSMetrics } from '../../src/components/calculators/SaaSMetrics/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SaaSMetrics/types';

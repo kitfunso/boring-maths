@@ -1,9 +1,3 @@
-"""
-AI-Powered Content Generator for X/Twitter
-
-Generates engaging tweets about calculators using LLMs.
-"""
-
 import os
 import json
 import random
@@ -22,7 +16,6 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 
 @dataclass
 class GeneratedTweet:
-    """A generated tweet with metadata."""
     text: str
     calculator_slug: str
     calculator_name: str
@@ -31,27 +24,16 @@ class GeneratedTweet:
 
 
 class ContentGenerator:
-    """Generates tweet content using templates and LLMs."""
-    
     def __init__(self, config: dict):
-        """
-        Initialize the content generator.
-        
-        Args:
-            config: Generator config from config.yaml
-        """
         self.config = config
         self.site_url = config.get("site", {}).get("url", "https://boring-math.com")
         self.style = config.get("generator", {}).get("style", {})
         
-        # Load calculator and template data
         self.calculators = self._load_json("calculators.json")["calculators"]
         self.templates = self._load_json("templates.json")
         
-        # Load pre-generated tweets (no API needed)
         self.pre_generated = self._load_pre_generated()
         
-        # Initialize LLM client (optional - for dynamic generation)
         self.provider = config.get("generator", {}).get("provider", "none")
         self.model = config.get("generator", {}).get("model", "")
         self.llm = None
@@ -72,13 +54,11 @@ class ContentGenerator:
         logger.info(f"Content generator initialized with {len(self.calculators)} calculators")
     
     def _load_json(self, filename: str) -> dict:
-        """Load a JSON file from the data directory."""
         path = DATA_DIR / filename
         with open(path, encoding="utf-8") as f:
             return json.load(f)
     
     def _load_pre_generated(self) -> list[dict]:
-        """Load pre-generated tweets."""
         path = DATA_DIR / "pre_generated_tweets.json"
         if path.exists():
             with open(path, encoding="utf-8") as f:
@@ -87,7 +67,6 @@ class ContentGenerator:
         return []
     
     def _get_calculator_url(self, slug: str) -> str:
-        """Get the full URL for a calculator."""
         return f"{self.site_url}/calculators/{slug}"
     
     def generate_tweet(
@@ -96,19 +75,6 @@ class ContentGenerator:
         template_type: Optional[str] = None,
         use_llm: bool = True
     ) -> GeneratedTweet:
-        """
-        Generate a tweet for a calculator.
-        
-        Args:
-            calculator_slug: Specific calculator (random if None)
-            template_type: Specific template type (random if None)
-            use_llm: Whether to use LLM for enhancement
-            
-        Returns:
-            GeneratedTweet object
-        """
-        # Use pre-generated tweets only when the caller wants the "smart" path
-        # but no live LLM is available. Explicit template mode should stay template-based.
         if use_llm and not self.llm and self.pre_generated:
             if calculator_slug:
                 matching = [t for t in self.pre_generated if t["calculator"] == calculator_slug]
@@ -126,8 +92,6 @@ class ContentGenerator:
                     hashtags=[]
                 )
         
-        # Fallback to dynamic generation
-        # Select calculator
         if calculator_slug:
             calc = next((c for c in self.calculators if c["slug"] == calculator_slug), None)
             if not calc:
@@ -135,7 +99,6 @@ class ContentGenerator:
         else:
             calc = random.choice(self.calculators)
         
-        # Select template type
         template_types = list(self.templates["tweet_templates"].keys())
         if template_type and template_type in template_types:
             ttype = template_type
@@ -149,10 +112,8 @@ class ContentGenerator:
         else:
             tweet_text = self._generate_from_template(calc, ttype, url)
         
-        # Add hashtags
         hashtags = self._select_hashtags(calc["category"])
         
-        # Ensure tweet fits in 280 chars
         tweet_text = self._fit_to_limit(tweet_text, hashtags)
         
         return GeneratedTweet(
@@ -164,14 +125,11 @@ class ContentGenerator:
         )
     
     def _generate_from_template(self, calc: dict, template_type: str, url: str) -> str:
-        """Generate tweet using a template (no LLM)."""
         templates = self.templates["tweet_templates"][template_type]
         template = random.choice(templates)
         
-        # Get a random hook
         hook = random.choice(calc.get("hooks", [calc["name"]]))
         
-        # Fill in template
         tweet = template.format(
             name=calc["name"],
             url=url,
@@ -185,7 +143,6 @@ class ContentGenerator:
         return tweet
     
     def _generate_with_llm(self, calc: dict, template_type: str, url: str) -> str:
-        """Generate tweet using LLM for better quality."""
         tone = self.style.get("tone", "helpful and slightly witty")
         include_emoji = self.style.get("include_emoji", True)
         
@@ -228,10 +185,8 @@ Generate ONLY the tweet text, nothing else."""
                 )
                 tweet = response.choices[0].message.content.strip()
             
-            # Remove any quotes the LLM might have added
             tweet = tweet.strip('"\'')
             
-            # Ensure URL is present
             if url not in tweet:
                 tweet = f"{tweet}\n\n{url}"
             
@@ -242,14 +197,11 @@ Generate ONLY the tweet text, nothing else."""
             return self._generate_from_template(calc, template_type, url)
     
     def _select_hashtags(self, category: str) -> list[str]:
-        """Select appropriate hashtags for the category."""
         max_hashtags = self.style.get("max_hashtags", 2)
         pools = self.templates.get("hashtag_pools", {})
         
-        # Get category-specific hashtags
         category_tags = pools.get(category, [])
         
-        # Mix with general tags
         general_tags = pools.get("everyday", [])
         
         available = list(set(category_tags + general_tags))
@@ -260,20 +212,17 @@ Generate ONLY the tweet text, nothing else."""
         return random.sample(available, min(max_hashtags, len(available)))
     
     def _fit_to_limit(self, text: str, hashtags: list[str]) -> str:
-        """Ensure tweet fits within 280 character limit."""
         hashtag_str = " " + " ".join(hashtags) if hashtags else ""
         
         max_text_len = 280 - len(hashtag_str)
         
         if len(text) > max_text_len:
-            # Truncate text, keeping URL intact
             lines = text.split("\n")
             url_line = next((l for l in lines if "http" in l), "")
             other_lines = [l for l in lines if "http" not in l]
             
-            # Shorten other content
             other_text = "\n".join(other_lines)
-            available = max_text_len - len(url_line) - 2  # -2 for newlines
+            available = max_text_len - len(url_line) - 2
             
             if len(other_text) > available:
                 other_text = other_text[:available-3] + "..."
@@ -283,22 +232,11 @@ Generate ONLY the tweet text, nothing else."""
         return f"{text}{hashtag_str}"
 
     def _generate_reply_from_template(self, calc: dict, url: str) -> str:
-        """Generate a reply from the local template set."""
         templates = self.templates.get("reply_templates", {}).get("helpful", [])
         template = random.choice(templates) if templates else "Check this out: {url}"
         return template.format(name=calc["name"], url=url)
     
     def generate_reply(self, original_tweet: str, calculator_slug: str) -> str:
-        """
-        Generate a helpful reply to a tweet.
-        
-        Args:
-            original_tweet: The tweet we're replying to
-            calculator_slug: Calculator that's relevant
-            
-        Returns:
-            Reply text
-        """
         calc = next((c for c in self.calculators if c["slug"] == calculator_slug), None)
         if not calc:
             raise ValueError(f"Calculator not found: {calculator_slug}")
@@ -342,7 +280,6 @@ Generate ONLY the reply text, nothing else."""
                 )
                 reply = response.choices[0].message.content.strip().strip('"\'')
             
-            # Ensure URL is present
             if url not in reply:
                 reply = f"{reply} {url}"
             
@@ -353,16 +290,6 @@ Generate ONLY the reply text, nothing else."""
             return self._generate_reply_from_template(calc, url)
     
     def generate_batch(self, count: int = 5, unique_calculators: bool = True) -> list[GeneratedTweet]:
-        """
-        Generate multiple tweets.
-        
-        Args:
-            count: Number of tweets to generate
-            unique_calculators: Whether to use different calculators for each
-            
-        Returns:
-            List of GeneratedTweet objects
-        """
         tweets = []
         used_slugs = set()
         
@@ -370,7 +297,7 @@ Generate ONLY the reply text, nothing else."""
             if unique_calculators:
                 available = [c for c in self.calculators if c["slug"] not in used_slugs]
                 if not available:
-                    available = self.calculators  # Reset if exhausted
+                    available = self.calculators
                 calc = random.choice(available)
                 used_slugs.add(calc["slug"])
                 tweet = self.generate_tweet(calculator_slug=calc["slug"])
@@ -383,5 +310,4 @@ Generate ONLY the reply text, nothing else."""
 
 
 def get_generator(config: dict) -> ContentGenerator:
-    """Factory function to get a content generator instance."""
     return ContentGenerator(config)

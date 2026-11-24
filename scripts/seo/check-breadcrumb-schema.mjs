@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-// Fails the build if a calculator, category hub or guide page ships without
-// BreadcrumbList JSON-LD (a dropped named slot once removed it from every hub).
 import fs from 'node:fs';
 import path from 'node:path';
 import { walkFiles } from '../lib/walk-files.mjs';

@@ -1,17 +1,6 @@
-/**
- * useLocalStorage Hook
- *
- * Persists state to localStorage and syncs across tabs.
- * Perfect for saving calculator inputs so users don't lose their work.
- *
- * When loading saved state that has a 'currency' field, it will automatically
- * sync with the global currency preference from 'boring-math-currency'.
- */
-
 import { useState, useEffect, useCallback, useRef } from 'preact/hooks';
 import { type Currency, getInitialCurrency } from '../lib/regions';
 
-/** True for plain `{}` object literals; false for arrays, null, and class instances. */
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return Object.prototype.toString.call(value) === '[object Object]';
 }
@@ -20,7 +9,6 @@ export function useLocalStorage<T>(
   key: string,
   initialValue: T | (() => T)
 ): [T, (value: T | ((prev: T) => T)) => void, () => void] {
-  // Get initial value from localStorage or use provided initial value
   const getInitialValue = (): T => {
     if (typeof window === 'undefined') {
       return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
@@ -33,24 +21,15 @@ export function useLocalStorage<T>(
         const defaultsValue =
           typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
 
-        // Merge persisted state over the current defaults so a payload saved
-        // before a newer field was added (e.g. an input schema gaining a new
-        // array field) doesn't crash the consumer with a missing property.
-        // This is a shallow, one-level merge only: nested objects/arrays on
-        // the parsed value fully replace the matching default, they are not
-        // merged recursively.
         const merged =
           isPlainObject(defaultsValue) && isPlainObject(parsed)
             ? { ...defaultsValue, ...parsed }
             : parsed;
 
-        // If the saved state has a currency field, sync it with the global preference
         if (merged && typeof merged === 'object' && 'currency' in merged) {
           const globalCurrency = getInitialCurrency();
           const savedCurrency = (merged as { currency: Currency }).currency;
 
-          // If global currency differs from saved, update the currency field
-          // but keep all other saved values
           if (globalCurrency !== savedCurrency) {
             return { ...merged, currency: globalCurrency };
           }
@@ -67,19 +46,16 @@ export function useLocalStorage<T>(
 
   const [state, setState] = useState<T>(getInitialValue);
 
-  // Keep a ref to current state for use in event handlers
   const stateRef = useRef(state);
   useEffect(() => {
     stateRef.current = state;
   }, [state]);
 
-  // Re-sync currency on page navigation (for Astro View Transitions)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const syncCurrency = () => {
       const currentState = stateRef.current;
-      // Only sync if state has a currency field
       if (currentState && typeof currentState === 'object' && 'currency' in currentState) {
         const globalCurrency = getInitialCurrency();
         const currentCurrency = (currentState as { currency: Currency }).currency;
@@ -90,18 +66,14 @@ export function useLocalStorage<T>(
       }
     };
 
-    // Sync on Astro page load (View Transitions)
     document.addEventListener('astro:page-load', syncCurrency);
 
-    // Also sync immediately in case we just navigated
     syncCurrency();
 
     return () => {
       document.removeEventListener('astro:page-load', syncCurrency);
     };
-  }, [key]); // Only re-run if key changes
-
-  // Persist to localStorage whenever state changes
+  }, [key]);
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -112,7 +84,6 @@ export function useLocalStorage<T>(
     }
   }, [key, state]);
 
-  // Listen for changes from other tabs
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -130,9 +101,6 @@ export function useLocalStorage<T>(
           const defaultsValue =
             typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
 
-          // Same shallow merge as the initial-load path: a payload saved in
-          // another tab before a newer field was added shouldn't crash this
-          // tab with a missing property.
           const merged =
             isPlainObject(defaultsValue) && isPlainObject(parsed)
               ? { ...defaultsValue, ...parsed }
@@ -149,7 +117,6 @@ export function useLocalStorage<T>(
     return () => window.removeEventListener('storage', handleStorageChange);
   }, [key, initialValue]);
 
-  // Clear function to reset to initial value
   const clear = useCallback(() => {
     const initial = typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
     setState(initial);

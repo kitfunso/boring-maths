@@ -1,9 +1,3 @@
-/**
- * US Self-Employment Tax Calculator Types
- *
- * Calculate SE tax (15.3%), federal income tax, and quarterly payments for freelancers.
- */
-
 export type FilingStatus =
   | 'single'
   | 'married_jointly'

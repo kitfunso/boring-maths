@@ -1,7 +1,3 @@
-/**
- * AgeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { calculateAge } from '../../src/components/calculators/AgeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/AgeCalculator/types';
@@ -10,7 +6,7 @@ describe('AgeCalculator', () => {
   describe('calculateAge', () => {
     beforeEach(() => {
       vi.useFakeTimers();
-      vi.setSystemTime(new Date(2026, 3, 6)); // Apr 6, 2026
+      vi.setSystemTime(new Date(2026, 3, 6));
     });
 
     afterEach(() => {

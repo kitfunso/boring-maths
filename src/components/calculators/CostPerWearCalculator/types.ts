@@ -1,7 +1,3 @@
-/**
- * Cost Per Wear Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface CostPerWearInputs {

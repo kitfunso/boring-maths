@@ -1,7 +1,3 @@
-/**
- * Materials Markup Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type CalculationMode = 'markupToSell' | 'sellToMarkup' | 'marginToSell';
@@ -31,10 +27,6 @@ export interface TradeMarkup {
   readonly range: readonly [number, number];
 }
 
-/**
- * Typical markups by trade for reference.
- * Source: industry norms for materials resale.
- */
 export const TRADE_MARKUPS: readonly TradeMarkup[] = [
   { trade: 'Plumbing', typicalMarkup: 30, range: [20, 50] },
   { trade: 'Electrical', typicalMarkup: 25, range: [15, 40] },

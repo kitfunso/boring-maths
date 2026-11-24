@@ -1,5 +1,3 @@
-/** Table A: purchased on/after 4 Jul 2025 (16/12/8/4/0%). Table B: 11 Mar 2017-3 Jul 2025 (12/8/4/0%). */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeSellerStampDuty } from '../../src/components/calculators/SingaporeSellerStampDuty/calculations';
 

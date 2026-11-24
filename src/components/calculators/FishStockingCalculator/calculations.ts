@@ -1,44 +1,30 @@
-/**
- * Fish Stocking Calculator - Calculation Logic
- */
-
 import type { FishStockingInputs, FishStockingResult } from './types';
 import { FILTER_TYPES, PLANT_LEVELS } from './types';
 
 export function calculateFishStocking(inputs: FishStockingInputs): FishStockingResult {
   const { tankLength, tankWidth, tankHeight, tankUnit, filterType, plantLevel, fish } = inputs;
 
-  // Convert to inches if needed
   const lengthIn = tankUnit === 'cm' ? tankLength / 2.54 : tankLength;
   const widthIn = tankUnit === 'cm' ? tankWidth / 2.54 : tankWidth;
   const heightIn = tankUnit === 'cm' ? tankHeight / 2.54 : tankHeight;
 
-  // Calculate volume in gallons (231 cubic inches per gallon)
   const tankVolume = Math.round(((lengthIn * widthIn * heightIn) / 231) * 10) / 10;
 
-  // Get multipliers
   const filterMultiplier = FILTER_TYPES.find((f) => f.value === filterType)?.multiplier || 1;
   const plantMultiplier = PLANT_LEVELS.find((p) => p.value === plantLevel)?.multiplier || 1;
 
-  // Effective volume considers filtration and plants
   const effectiveVolume = Math.round(tankVolume * filterMultiplier * plantMultiplier * 10) / 10;
 
-  // Calculate total fish inches
   const totalFishInches = fish.reduce((sum, f) => sum + f.size * f.quantity, 0);
 
-  // Better stocking rule: 1" of fish per 2 gallons of effective volume
-  // This is more conservative than the old "1 inch per gallon" rule
   const recommendedMaxInches = Math.round((effectiveVolume / 2) * 10) / 10;
 
-  // Stocking level as percentage
   const stockingLevel =
     recommendedMaxInches > 0 ? Math.round((totalFishInches / recommendedMaxInches) * 100) : 0;
 
-  // Bioload percentage (similar to stocking but accounts for effective filtering)
   const bioloadPercentage =
     tankVolume > 0 ? Math.round((totalFishInches / (tankVolume / 2)) * 100) : 0;
 
-  // Determine status
   let stockingStatus: FishStockingResult['stockingStatus'];
   if (stockingLevel < 50) {
     stockingStatus = 'understocked';
@@ -52,7 +38,6 @@ export function calculateFishStocking(inputs: FishStockingInputs): FishStockingR
     stockingStatus = 'critical';
   }
 
-  // Generate warnings
   const warnings: string[] = [];
 
   if (filterType === 'none' && fish.length > 0) {
@@ -67,13 +52,11 @@ export function calculateFishStocking(inputs: FishStockingInputs): FishStockingR
     warnings.push('Critical overstocking. Fish health and water quality will suffer.');
   }
 
-  // Check for large fish in small tanks
   const largeFish = fish.filter((f) => f.size >= 6);
   if (largeFish.length > 0 && tankVolume < 40) {
     warnings.push(`Large fish (${largeFish.map((f) => f.species).join(', ')}) need bigger tanks.`);
   }
 
-  // Check for schooling fish in small numbers
   const schoolingFish = fish.filter(
     (f) =>
       f.species.includes('Tetra') ||

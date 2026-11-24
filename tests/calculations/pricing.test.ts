@@ -1,7 +1,3 @@
-/**
- * PricingCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePricing } from '../../src/components/calculators/PricingCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PricingCalculator/types';

@@ -38,7 +38,6 @@ describe('useDebounce', () => {
       button.click();
     });
 
-    // Current should be 1, debounced should still be 0
     expect(container.querySelector('[data-testid="current"]')?.textContent).toBe('1');
     expect(container.querySelector('[data-testid="debounced"]')?.textContent).toBe('0');
   });
@@ -62,7 +61,6 @@ describe('useDebounce', () => {
     const { container } = render(h(DebounceHarness, { delay: 200 }));
     const button = container.querySelector('button')!;
 
-    // Click three times rapidly
     act(() => {
       button.click();
     });
@@ -79,15 +77,12 @@ describe('useDebounce', () => {
       button.click();
     });
 
-    // Still should be 0 since we haven't waited long enough after last change
     expect(container.querySelector('[data-testid="debounced"]')?.textContent).toBe('0');
 
-    // Wait for the full delay after last change
     act(() => {
       vi.advanceTimersByTime(200);
     });
 
-    // Should now show 3 (all three clicks)
     expect(container.querySelector('[data-testid="debounced"]')?.textContent).toBe('3');
   });
 });

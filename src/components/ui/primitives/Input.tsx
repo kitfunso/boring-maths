@@ -7,17 +7,11 @@ export interface InputProps extends Omit<
   'size' | 'disabled'
 > {
   disabled?: boolean;
-  /** Input variant determines prefix/suffix styling */
   variant?: 'default' | 'currency' | 'percentage';
-  /** Currency symbol for currency variant (e.g., "$", "£", "€") */
   currencySymbol?: string;
-  /** Size of the input */
   size?: 'sm' | 'md' | 'lg';
-  /** Error state */
   error?: boolean;
-  /** Show spin controls for number inputs (default: true) */
   showControls?: boolean;
-  /** Additional class names */
   className?: string;
 }
 
@@ -27,10 +21,6 @@ const SIZE_CLASSES = {
   lg: 'py-5 md:py-4 text-xl',
 };
 
-/**
- * Custom spin controls component for number inputs.
- * Supports disabled state on individual buttons when at min/max bounds.
- */
 function SpinControls({
   inputRef,
   disabled,
@@ -104,25 +94,6 @@ function SpinControls({
   );
 }
 
-/**
- * Themed input component with support for currency, percentage, and number variants.
- * Includes custom spin controls with keyboard support for number inputs.
- *
- * @example
- * ```tsx
- * // Currency input
- * <Input variant="currency" currencySymbol="$" min={0} step={100} />
- *
- * // Percentage input
- * <Input variant="percentage" min={0} max={100} step={0.5} />
- *
- * // Number input without spin controls
- * <Input type="number" showControls={false} />
- *
- * // Text input
- * <Input type="text" placeholder="Enter name" />
- * ```
- */
 export function Input({
   variant = 'default',
   currencySymbol = '$',
@@ -137,7 +108,7 @@ export function Input({
   step,
   ...props
 }: InputProps) {
-  useTheme(); // Theme context for potential future use
+  useTheme();
   const inputRef = useRef<HTMLInputElement>(null);
   const isNumber = type === 'number';
   const shouldShowControls = isNumber && showControls;
@@ -248,7 +219,6 @@ export function Input({
     );
   }
 
-  // Default variant
   if (shouldShowControls) {
     return (
       <div className="spin-input-wrapper w-full">
@@ -275,7 +245,6 @@ export function Input({
     );
   }
 
-  // Default variant without spin controls (or text input)
   return (
     <input
       ref={inputRef}

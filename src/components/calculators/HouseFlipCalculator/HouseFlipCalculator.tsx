@@ -1,7 +1,3 @@
-/**
- * House Flip Calculator - React Component
- */
-
 import { calculateHouseFlip, formatCurrency, formatPercent } from './calculations';
 import { getDefaultInputs, type HouseFlipInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -50,7 +46,6 @@ export default function HouseFlipCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-8 mb-8">
-            {/* Purchase Section */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Purchase
@@ -91,7 +86,6 @@ export default function HouseFlipCalculator() {
               </Grid>
             </div>
 
-            {/* Renovation Section */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Renovation
@@ -113,7 +107,6 @@ export default function HouseFlipCalculator() {
               </div>
             </div>
 
-            {/* Financing Section */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Financing
@@ -154,7 +147,6 @@ export default function HouseFlipCalculator() {
               </Grid>
             </div>
 
-            {/* Holding Costs Section */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Holding Costs
@@ -194,7 +186,6 @@ export default function HouseFlipCalculator() {
               </Grid>
             </div>
 
-            {/* Exit Section */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Exit
@@ -238,11 +229,9 @@ export default function HouseFlipCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.purchasePrice > 0 && inputs.afterRepairValue > 0 ? (
               <>
-                {/* Primary Result - Profit/Loss */}
                 <ResultCard
                   label={isProfitable ? 'Estimated Profit' : 'Estimated Loss'}
                   value={formatCurrency(Math.abs(result.estimatedProfit), inputs.currency)}
@@ -256,7 +245,6 @@ export default function HouseFlipCalculator() {
                   }
                 />
 
-                {/* 70% Rule Check */}
                 <div
                   className={`rounded-xl p-6 border ${
                     meetsSeventyRule
@@ -297,7 +285,6 @@ export default function HouseFlipCalculator() {
                   </div>
                 </div>
 
-                {/* Key Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Total Investment"
@@ -321,7 +308,6 @@ export default function HouseFlipCalculator() {
                   />
                 </Grid>
 
-                {/* Profit/Loss Metrics */}
                 <Grid responsive={{ sm: 2, md: 3 }} gap="md">
                   <MetricCard
                     label="Estimated Profit"
@@ -362,7 +348,6 @@ export default function HouseFlipCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {inputs.purchasePrice > 0 && inputs.afterRepairValue > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

@@ -1,5 +1,3 @@
-/** Select hands onChange the option value, not an event; handlers that read e.target threw on every change. */
-
 import { describe, it, expect } from 'vitest';
 import { render, fireEvent, act } from '@testing-library/preact';
 import CouncilTaxCalculator from '../../src/components/calculators/CouncilTaxCalculator/CouncilTaxCalculator';

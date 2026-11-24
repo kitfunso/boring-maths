@@ -1,26 +1,13 @@
-/**
- * Coffee Spend Calculator - Calculation Logic
- */
-
 import type { CoffeeSpendInputs, CoffeeSpendResult, FunEquivalent } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate future value of annual contributions with compound growth.
- *
- * FV = contribution * ((1 + rate)^years - 1) / rate
- */
 function futureValueOfAnnuity(annualContribution: number, rate: number, years: number): number {
   if (rate === 0) return annualContribution * years;
   return annualContribution * ((Math.pow(1 + rate, years) - 1) / rate);
 }
 
-/**
- * Build fun-equivalent comparisons based on yearly savings.
- */
 function buildFunEquivalents(yearlySavings: number, currency: Currency): readonly FunEquivalent[] {
-  // Approximate prices by currency
   const prices: Record<Currency, { netflix: number; flight: number; dinner: number }> = {
     USD: { netflix: 15.49, flight: 500, dinner: 100 },
     GBP: { netflix: 10.99, flight: 400, dinner: 80 },
@@ -39,9 +26,6 @@ function buildFunEquivalents(yearlySavings: number, currency: Currency): readonl
   return equivalents.filter((e) => e.count > 0);
 }
 
-/**
- * Calculate all coffee spending metrics from inputs.
- */
 export function calculateCoffeeSpend(inputs: CoffeeSpendInputs): CoffeeSpendResult {
   const {
     currency,

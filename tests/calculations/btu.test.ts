@@ -11,7 +11,7 @@ describe('calculateBTUCalculator', () => {
     expect(r.areaSqFt).toBe(180);
     expect(r.baseBtu).toBe(3600);
     expect(r.recommendedBtu).toBe(3600);
-    expect(r.tons).toBe(0.3); // 3600 / 12000
+    expect(r.tons).toBe(0.3);
     expect(r.isValid).toBe(true);
   });
 
@@ -19,7 +19,7 @@ describe('calculateBTUCalculator', () => {
     const r = calculateBTUCalculator({ ...base, mode: 'heating' });
     expect(r.baseBtu).toBe(4500);
     expect(r.recommendedBtu).toBe(4500);
-    expect(r.tons).toBe(0); // tons only reported for cooling
+    expect(r.tons).toBe(0);
   });
 
   it('converts metric dimensions to square feet (4m x 4m = ~172.2 sqft, not 16)', () => {
@@ -30,10 +30,9 @@ describe('calculateBTUCalculator', () => {
       roomWidth: 4,
       ceilingHeight: 2.4384, // 8 ft equivalent -> height factor ~1, no scaling
     });
-    // 4 * 4 * 10.7639 = 172.22 sq ft; * 20 BTU/sqft cooling = 3444.4 -> 3444 BTU
     expect(r.areaSqFt).toBeCloseTo(172.2, 1);
     expect(r.baseBtu).toBeCloseTo(3444, 0);
-    expect(r.recommendedBtu).toBeCloseTo(3400, -2); // rounded to nearest 100
+    expect(r.recommendedBtu).toBeCloseTo(3400, -2);
     expect(r.isValid).toBe(true);
   });
 
@@ -52,7 +51,6 @@ describe('calculateBTUCalculator', () => {
       roomUse: 'kitchen',
       occupants: 4,
     });
-    // 200 * 20 = 4000 base; * 1.1 sun = 4400; + 4000 kitchen + 2*600 occupants = 9600
     expect(r.recommendedBtu).toBe(9600);
   });
 

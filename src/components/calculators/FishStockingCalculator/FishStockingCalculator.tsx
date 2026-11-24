@@ -1,6 +1,3 @@
-/**
- * Fish Stocking Calculator - React Component
- */
 import {
   calculateFishStocking,
   formatGallons,
@@ -65,7 +62,6 @@ export default function FishStockingCalculator() {
     }));
   };
 
-  // Group fish by category
   const fishByCategory = COMMON_FISH.reduce(
     (acc, fish) => {
       if (!acc[fish.category]) acc[fish.category] = [];
@@ -86,7 +82,6 @@ export default function FishStockingCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Tank Dimensions */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Tank Dimensions
@@ -137,7 +132,6 @@ export default function FishStockingCalculator() {
             </Grid>
           </div>
 
-          {/* Tank Setup */}
           <div className="mb-6">
             <Grid responsive={{ sm: 2 }} gap="md">
               <div>
@@ -161,7 +155,6 @@ export default function FishStockingCalculator() {
             </Grid>
           </div>
 
-          {/* Fish List */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider">
@@ -169,7 +162,6 @@ export default function FishStockingCalculator() {
               </h3>
             </div>
 
-            {/* Current Fish */}
             <div className="space-y-2 mb-4">
               {inputs.fish.map((fish) => (
                 <div
@@ -219,7 +211,6 @@ export default function FishStockingCalculator() {
               )}
             </div>
 
-            {/* Add Fish Dropdown */}
             <div className="bg-[var(--color-night)] rounded-lg p-4">
               <Label>Add Fish</Label>
               <select
@@ -249,9 +240,7 @@ export default function FishStockingCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Stocking Level Bar */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-semibold text-[var(--color-cream)]">
@@ -282,7 +271,6 @@ export default function FishStockingCalculator() {
               </div>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Tank Volume"
@@ -306,21 +294,18 @@ export default function FishStockingCalculator() {
               />
             </Grid>
 
-            {/* Warnings */}
             {result.warnings.map((warning, i) => (
               <Alert key={i} variant="warning" title="Warning">
                 {warning}
               </Alert>
             ))}
 
-            {/* Tips */}
             <Alert variant="tip" title="Stocking Guidelines:">
               The "1 inch per gallon" rule is outdated. We use 1" per 2 gallons for better fish
               health. Consider fish behavior, territory needs, and adult size - not current size.
               Schooling fish should be kept in groups of 6+.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${result.tankVolume} gallon tank at ${result.stockingLevel}% capacity (${result.totalFishInches}" of fish)`}

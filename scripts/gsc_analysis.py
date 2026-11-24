@@ -1,10 +1,3 @@
-"""
-GSC Analysis Script — Find content optimization opportunities.
-
-Reads GSC export JSON files and cross-references with .astro page titles
-to produce a prioritized report of SEO opportunities.
-"""
-
 import json
 import re
 import os
@@ -12,13 +5,11 @@ from pathlib import Path
 from collections import defaultdict
 from typing import NamedTuple
 
-# Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 PAGES_DIR = BASE_DIR / "src" / "pages" / "calculators"
 
 
 def _latest_export_dir() -> Path:
-    """Newest dated subfolder under gsc-export/ (so analysis always reads the freshest pull)."""
     export_root = BASE_DIR / "gsc-export"
     dated = sorted(
         (d for d in export_root.iterdir() if d.is_dir() and (d / "gsc-pages-28d.json").exists()),
@@ -32,8 +23,6 @@ def _latest_export_dir() -> Path:
 GSC_DIR = _latest_export_dir()
 OUTPUT_PATH = BASE_DIR / "docs" / f"gsc-analysis-{GSC_DIR.name}.md"
 
-# --- Data Loading ---
-
 def load_json(path: Path) -> list[dict]:
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -43,7 +32,6 @@ def load_json(path: Path) -> list[dict]:
 
 
 def extract_page_titles() -> dict[str, str]:
-    """Extract title from const title = '...' in .astro files."""
     titles: dict[str, str] = {}
     for astro_file in PAGES_DIR.rglob("*.astro"):
         try:
@@ -52,9 +40,7 @@ def extract_page_titles() -> dict[str, str]:
             continue
         match = re.search(r"const title\s*=\s*['\"](.+?)['\"];?", content)
         if match:
-            # Build URL path from file path
             rel = astro_file.relative_to(BASE_DIR / "src" / "pages")
-            # e.g. calculators/abv-calculator.astro -> /calculators/abv-calculator
             url_path = "/" + str(rel).replace("\\", "/").replace(".astro", "")
             if url_path.endswith("/index"):
                 url_path = url_path[:-6] or "/"
@@ -62,8 +48,6 @@ def extract_page_titles() -> dict[str, str]:
             titles[full_url] = match.group(1)
     return titles
 
-
-# --- Analysis Functions ---
 
 class PageData(NamedTuple):
     url: str
@@ -110,7 +94,6 @@ def parse_query_page(rows: list[dict]) -> list[QueryPageData]:
 
 
 def calc_opportunity_score(impressions: int, position: float) -> float:
-    """Higher score = more leverage. Weight impressions by inverse position."""
     if position <= 0:
         return 0.0
     return impressions / position
@@ -119,7 +102,6 @@ def calc_opportunity_score(impressions: int, position: float) -> float:
 def find_high_impression_zero_click_pages(
     pages: list[PageData],
 ) -> list[PageData]:
-    """Pages with impressions but zero clicks, position 10-100."""
     return sorted(
         [p for p in pages if p.clicks == 0 and p.impressions >= 5 and 10 <= p.position <= 100],
         key=lambda p: calc_opportunity_score(p.impressions, p.position),
@@ -130,12 +112,10 @@ def find_high_impression_zero_click_pages(
 def find_cannibalization(
     qp_data: list[QueryPageData],
 ) -> dict[str, list[QueryPageData]]:
-    """Queries that rank for multiple pages."""
     query_pages: dict[str, list[QueryPageData]] = defaultdict(list)
     for qp in qp_data:
         query_pages[qp.query].append(qp)
 
-    # Keep only queries with 2+ pages
     return {
         q: sorted(pages, key=lambda p: p.position)
         for q, pages in query_pages.items()
@@ -147,7 +127,6 @@ def find_content_gaps(
     qp_data: list[QueryPageData],
     page_titles: dict[str, str],
 ) -> list[tuple[QueryPageData, str, list[str]]]:
-    """Queries ranking for a page where key query terms are absent from the title."""
     gaps = []
     for qp in qp_data:
         if qp.impressions < 3:
@@ -156,7 +135,6 @@ def find_content_gaps(
         if not title:
             continue
         title_lower = title.lower()
-        # Tokenize query, skip very short/common words
         query_words = [w for w in qp.query.lower().split() if len(w) > 2]
         stop_words = {
             "the", "for", "and", "how", "much", "what", "with", "from",
@@ -168,7 +146,6 @@ def find_content_gaps(
         if missing and len(missing) <= len(meaningful_words):
             gaps.append((qp, title, missing))
 
-    # Sort by opportunity score
     return sorted(
         gaps,
         key=lambda x: calc_opportunity_score(x[0].impressions, x[0].position),
@@ -179,7 +156,6 @@ def find_content_gaps(
 def build_page_opportunity_scores(
     qp_data: list[QueryPageData],
 ) -> dict[str, dict]:
-    """Aggregate opportunity scores per page with top queries."""
     page_scores: dict[str, dict] = defaultdict(
         lambda: {"total_score": 0.0, "total_impressions": 0, "total_clicks": 0, "queries": []}
     )
@@ -199,14 +175,11 @@ def build_page_opportunity_scores(
             }
         )
 
-    # Sort queries within each page by score
     for url, data in page_scores.items():
         data["queries"] = sorted(data["queries"], key=lambda q: q["score"], reverse=True)
 
     return dict(page_scores)
 
-
-# --- Report Generation ---
 
 def generate_report(
     page_scores: dict[str, dict],
@@ -231,7 +204,6 @@ def generate_report(
     lines.append(f"- **Content gap signals**: {len(content_gaps)}")
     lines.append("")
 
-    # --- Section 1: Top 15 pages by opportunity score ---
     lines.append("## Top 15 Pages by Opportunity Score")
     lines.append("")
     lines.append("Opportunity score = sum of (impressions / position) across all queries for that page.")
@@ -252,7 +224,6 @@ def generate_report(
             lines.append(f"  - `{q['query']}` — {q['impressions']} imp, {q['clicks']} clicks, pos {q['position']}, score {q['score']}")
         lines.append("")
 
-    # --- Section 2: High-impression zero-click pages ---
     lines.append("## High-Impression Zero-Click Pages")
     lines.append("")
     lines.append("These pages appear in search results but get no clicks. Titles/descriptions may need improvement,")
@@ -267,13 +238,11 @@ def generate_report(
         lines.append(f"  - Title: {title}")
     lines.append("")
 
-    # --- Section 3: Cannibalization ---
     lines.append("## Query Cannibalization")
     lines.append("")
     lines.append("Same query ranking for multiple pages. Google may split ranking signals.")
     lines.append("")
 
-    # Sort by total impressions
     cannibal_sorted = sorted(
         cannibalization.items(),
         key=lambda x: sum(qp.impressions for qp in x[1]),
@@ -288,7 +257,6 @@ def generate_report(
             lines.append(f"- {slug} — {qp.impressions} imp, {qp.clicks} clicks, pos {qp.position:.1f}")
         lines.append("")
 
-    # --- Section 4: Content Gaps ---
     lines.append("## Content Gaps (Query Terms Missing from Title)")
     lines.append("")
     lines.append("Queries ranking for a page where important search terms are absent from the page title.")
@@ -313,7 +281,6 @@ def generate_report(
         if count >= 25:
             break
 
-    # --- Section 5: Title/Meta Recommendations for Top 5 ---
     lines.append("## Title/Meta Recommendations — Top 5 Opportunities")
     lines.append("")
     lines.append("Concrete title rewrites for the highest-opportunity pages.")
@@ -324,7 +291,6 @@ def generate_report(
         current_title = page_titles.get(url, "(no title found)")
         top_queries = [q["query"] for q in data["queries"][:10]]
 
-        # Extract the most common meaningful terms from top queries
         term_freq: dict[str, int] = defaultdict(int)
         stop = {
             "the", "for", "and", "how", "much", "what", "with", "from",
@@ -353,14 +319,11 @@ def generate_report(
             lines.append(f"  - `{q['query']}` ({q['impressions']} imp, pos {q['position']})")
         lines.append(f"- **Recommendation**: See suggested title below")
 
-        # Generate a suggested title
-        # Pull the page's core topic from the slug
         page_name = slug.split("/")[-1].replace("-", " ").title()
         if missing_terms:
             lines.append(f"- **Suggested title**: Include terms: {', '.join(missing_terms[:3])}")
         lines.append("")
 
-    # --- Section 6: Quick Wins ---
     lines.append("## Quick Wins — Striking Distance (Position 5-20, Zero Clicks)")
     lines.append("")
     lines.append("Pages close to page 1 that need a small push (title tweak, internal links, content update).")
@@ -380,8 +343,6 @@ def generate_report(
 
     return "\n".join(lines)
 
-
-# --- Main ---
 
 def main() -> None:
     print("Loading GSC data...")

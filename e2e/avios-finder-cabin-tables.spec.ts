@@ -1,13 +1,11 @@
 import { test, expect, type Page } from '@playwright/test';
 
-// All three cabins are in the HTML; CSS keyed on html[data-avios-cabin] shows the finder's cabin.
 const PAGE = '/calculators/avios-destination-finder/';
 const STORAGE_KEY = 'calc-avios-finder-inputs';
 
 const header = (page: Page, cabin: string) =>
   page.locator(`#avios-price-tables th[data-cabin="${cabin}"]`).first();
 
-// The island stamps the attribute on mount, so its presence doubles as the hydration signal.
 const waitForFinder = (page: Page, cabin: string) =>
   expect(page.locator('html')).toHaveAttribute('data-avios-cabin', cabin, { timeout: 15_000 });
 

@@ -1,9 +1,3 @@
-/**
- * Macro Calculator Calculations
- *
- * Calculate BMR, TDEE, and macronutrient targets based on user inputs.
- */
-
 import type { MacroCalculatorInputs, MacroCalculatorResult } from './types';
 import { activityMultipliers, goalCalorieAdjustment } from './types';
 
@@ -20,7 +14,6 @@ export function calculateMacros(inputs: MacroCalculatorInputs): MacroCalculatorR
     proteinRatio,
   } = inputs;
 
-  // Convert to metric for calculations
   let weightKg: number;
   let heightCm: number;
 
@@ -29,10 +22,9 @@ export function calculateMacros(inputs: MacroCalculatorInputs): MacroCalculatorR
     heightCm = (heightFeet * 12 + heightInches) * 2.54;
   } else {
     weightKg = weight;
-    heightCm = heightFeet; // In metric mode, heightFeet stores cm
+    heightCm = heightFeet;
   }
 
-  // Calculate BMR using Mifflin-St Jeor Equation (most accurate for modern populations)
   let bmr: number;
   if (gender === 'male') {
     bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
@@ -40,14 +32,10 @@ export function calculateMacros(inputs: MacroCalculatorInputs): MacroCalculatorR
     bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
   }
 
-  // Calculate TDEE (Total Daily Energy Expenditure)
   const tdee = bmr * activityMultipliers[activityLevel];
 
-  // Adjust calories based on goal
   const targetCalories = Math.max(1200, tdee + goalCalorieAdjustment[goal]);
 
-  // Calculate protein based on body weight
-  // proteinRatio is grams per lb (imperial) or grams per kg (metric)
   let protein: number;
   if (unitSystem === 'imperial') {
     protein = weight * proteinRatio;
@@ -55,28 +43,21 @@ export function calculateMacros(inputs: MacroCalculatorInputs): MacroCalculatorR
     protein = weight * proteinRatio;
   }
 
-  // Protein provides 4 calories per gram
   const proteinCalories = protein * 4;
 
-  // Fat should be 25-35% of calories, we'll use 30% for balanced approach
-  // Adjusted based on goal
   let fatPercent: number;
   if (goal === 'lose') {
-    fatPercent = 0.25; // Lower fat when cutting
+    fatPercent = 0.25;
   } else if (goal === 'gain') {
-    fatPercent = 0.3; // Moderate fat when bulking
+    fatPercent = 0.3;
   } else {
-    fatPercent = 0.28; // Balanced for maintenance
+    fatPercent = 0.28;
   }
 
   const fatCalories = targetCalories * fatPercent;
-  const fat = fatCalories / 9; // Fat provides 9 calories per gram
-
-  // Remaining calories go to carbs
+  const fat = fatCalories / 9;
   const carbsCalories = targetCalories - proteinCalories - fatCalories;
-  const carbs = carbsCalories / 4; // Carbs provide 4 calories per gram
-
-  // Calculate actual percentages
+  const carbs = carbsCalories / 4;
   const actualProteinPercent = (proteinCalories / targetCalories) * 100;
   const actualCarbsPercent = (carbsCalories / targetCalories) * 100;
   const actualFatPercent = (fatCalories / targetCalories) * 100;

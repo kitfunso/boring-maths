@@ -1,6 +1,3 @@
-/**
- * Lye Calculator - React Component
- */
 import {
   calculateLye,
   formatWeight,
@@ -71,7 +68,6 @@ export default function LyeCalculator() {
   const lyeWarning = getLyeConcentrationWarning(result.lyeConcentration);
   const recipeWarnings = getRecipeWarnings(result.oilBreakdown);
 
-  // Group oils by category
   const oilsByCategory = OILS.reduce(
     (acc, oil) => {
       if (!acc[oil.category]) acc[oil.category] = [];
@@ -90,7 +86,6 @@ export default function LyeCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Lye Type */}
           <div className="mb-6">
             <Label>Lye Type</Label>
             <ButtonGroup
@@ -101,7 +96,6 @@ export default function LyeCalculator() {
             />
           </div>
 
-          {/* Settings Row */}
           <div className="mb-6">
             <Grid responsive={{ sm: 3 }} gap="md">
               <div>
@@ -144,7 +138,6 @@ export default function LyeCalculator() {
             </Grid>
           </div>
 
-          {/* Oils List */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider">
@@ -199,7 +192,6 @@ export default function LyeCalculator() {
               })}
             </div>
 
-            {/* Add Oil */}
             <div className="bg-[var(--color-night)] rounded-lg p-4">
               <Label>Add Oil</Label>
               <select
@@ -228,9 +220,7 @@ export default function LyeCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Results */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <ResultCard
                 label={
@@ -248,7 +238,6 @@ export default function LyeCalculator() {
               />
             </Grid>
 
-            {/* Warnings */}
             {lyeWarning && (
               <Alert variant="warning" title="Lye Concentration">
                 {lyeWarning}
@@ -260,7 +249,6 @@ export default function LyeCalculator() {
               </Alert>
             ))}
 
-            {/* Batch Summary */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Oils"
@@ -284,7 +272,6 @@ export default function LyeCalculator() {
               />
             </Grid>
 
-            {/* Oil Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Oil Breakdown
@@ -309,20 +296,17 @@ export default function LyeCalculator() {
               </div>
             </div>
 
-            {/* Safety */}
             <Alert variant="warning" title="Safety First!">
               Always add lye to water, NEVER water to lye. Work in a well-ventilated area. Wear
               safety goggles and gloves. Keep vinegar nearby (for skin contact only - not for
               neutralizing lye solution).
             </Alert>
 
-            {/* Tips */}
             <Alert variant="tip" title="Soap Making Tips:">
               5% superfat is standard for most soaps. Increase to 7-10% for facial bars or shampoo
               bars. Cold process soap needs 4-6 weeks cure time. Use distilled water only.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Soap Recipe: ${formatWeight(result.totalOilWeight, inputs.unit)} oils, ${formatWeight(result.lyeAmount, inputs.unit)} ${inputs.lyeType.toUpperCase()}, ${formatWeight(result.waterAmount, inputs.unit)} water (${inputs.superfatPercent}% SF)`}

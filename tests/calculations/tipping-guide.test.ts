@@ -1,7 +1,3 @@
-/**
- * Tipping Guide Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateTippingGuide } from '../../src/components/calculators/TippingGuideCalculator/calculations';
 import type { TippingGuideInputs } from '../../src/components/calculators/TippingGuideCalculator/types';
@@ -98,7 +94,6 @@ describe('TippingGuideCalculator', () => {
 
       const result = calculateTippingGuide(inputs);
 
-      // 33.33 * 0.10 = 3.333, should round to 3.33
       expect(result.tipAmount).toBe(3.33);
       expect(result.totalWithTip).toBe(36.66);
     });
@@ -113,7 +108,6 @@ describe('TippingGuideCalculator', () => {
 
       const result = calculateTippingGuide(inputs);
 
-      // 47.5 * 0.20 = 9.50, total = 57.00
       expect(result.totalWithTip).toBe(57);
       expect(result.roundedTotal).toBe(57);
     });
@@ -128,7 +122,6 @@ describe('TippingGuideCalculator', () => {
 
       const result = calculateTippingGuide(inputs);
 
-      // 23 * 0.15 = 3.45, total = 26.45
       expect(result.tipAmount).toBe(3.45);
       expect(result.totalWithTip).toBe(26.45);
       expect(result.roundedTotal).toBe(27);

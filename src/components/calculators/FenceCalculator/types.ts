@@ -1,9 +1,3 @@
-/**
- * Fence Calculator - Type Definitions
- *
- * Calculate posts, panels, concrete, and hardware needed for fence projects.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type FenceMaterial = 'wood' | 'vinyl' | 'chain_link' | 'aluminum' | 'composite';
@@ -12,22 +6,16 @@ export type FenceHeight = '4' | '6' | '8';
 export interface FenceCalculatorInputs {
   currency: Currency;
 
-  // Fence dimensions
-  totalLength: number; // feet
+  totalLength: number;
   fenceHeight: FenceHeight;
   material: FenceMaterial;
 
-  // Gates
-  walkGates: number; // 3-4 ft wide
-  driveGates: number; // 10-12 ft wide
-
-  // Options
-  postSpacing: number; // feet between posts (typically 6-8)
-  concretePerPost: number; // bags per post (typically 2)
-  doublePostCorners: boolean; // use 2 posts at corners
-  cornerCount: number; // number of corners
-
-  // Pricing
+  walkGates: number;
+  driveGates: number;
+  postSpacing: number;
+  concretePerPost: number;
+  doublePostCorners: boolean;
+  cornerCount: number;
   pricePerPanel: number;
   pricePerPost: number;
   pricePerConcreteBag: number;
@@ -38,19 +26,15 @@ export interface FenceCalculatorInputs {
 export interface FenceCalculatorResult {
   currency: Currency;
 
-  // Materials needed
   panelsNeeded: number;
   postsNeeded: number;
   concreteBags: number;
   postCaps: number;
-  railsNeeded: number; // for wood fences
-  hardwareKits: number; // screws, brackets, etc.
-
-  // Gate materials
+  railsNeeded: number;
+  hardwareKits: number;
   walkGateCount: number;
   driveGateCount: number;
 
-  // Costs
   panelsCost: number;
   postsCost: number;
   concreteCost: number;
@@ -58,16 +42,13 @@ export interface FenceCalculatorResult {
   hardwareCost: number;
   totalMaterialCost: number;
 
-  // Labor estimate (if hired)
   laborCostLow: number;
   laborCostHigh: number;
   totalCostWithLabor: number;
 
-  // Tips
   tips: string[];
 }
 
-// Panel width by material (feet)
 export const PANEL_WIDTHS: Record<FenceMaterial, number> = {
   wood: 8, // typically 8 ft sections
   vinyl: 8,
@@ -76,7 +57,6 @@ export const PANEL_WIDTHS: Record<FenceMaterial, number> = {
   composite: 6,
 };
 
-// Default prices by currency and material
 export const MATERIAL_PRICES: Record<
   Currency,
   Record<FenceMaterial, { panel: number; post: number; walkGate: number; driveGate: number }>
@@ -104,14 +84,12 @@ export const MATERIAL_PRICES: Record<
   },
 };
 
-// Concrete prices
 export const CONCRETE_PRICES: Record<Currency, number> = {
   USD: 5,
   GBP: 4,
   EUR: 4.5,
 };
 
-// Labor cost per linear foot by currency
 export const LABOR_PER_FOOT: Record<Currency, { low: number; high: number }> = {
   USD: { low: 15, high: 30 },
   GBP: { low: 12, high: 25 },

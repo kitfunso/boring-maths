@@ -1,8 +1,3 @@
-/**
- * Rental Property ROI Calculator - React Component
- *
- * Calculate rental property investment returns.
- */
 import { calculateRentalPropertyROI } from './calculations';
 import { getDefaultInputs, type RentalPropertyInputs } from './types';
 import {
@@ -55,7 +50,6 @@ export default function RentalPropertyROI() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                 Property & Financing
@@ -262,7 +256,6 @@ export default function RentalPropertyROI() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Monthly Cash Flow"
@@ -277,7 +270,6 @@ export default function RentalPropertyROI() {
                 <MetricCard label="Annual Cash Flow" value={fmt(result.annualCashFlow)} />
               </Grid>
 
-              {/* Monthly Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Monthly Cash Flow Breakdown
@@ -330,7 +322,6 @@ export default function RentalPropertyROI() {
                 </div>
               </div>
 
-              {/* Key Metrics */}
               <div className="bg-emerald-900/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4">
                   Investment Analysis
@@ -365,7 +356,6 @@ export default function RentalPropertyROI() {
                 </div>
               </div>
 
-              {/* 5-Year Projection */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   5-Year Projection
@@ -400,7 +390,6 @@ export default function RentalPropertyROI() {
                 </div>
               </div>
 
-              {/* Insights */}
               {result.insights.length > 0 && (
                 <Alert
                   variant={result.annualCashFlow < 0 ? 'warning' : 'tip'}
@@ -417,7 +406,6 @@ export default function RentalPropertyROI() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Rental Property Analysis: ${fmt(result.monthlyCashFlow)}/mo cash flow | ${result.cashOnCashReturn}% CoC | ${result.capRate}% cap rate`}

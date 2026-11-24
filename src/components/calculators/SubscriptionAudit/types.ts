@@ -1,10 +1,7 @@
-/** Subscription Audit: tracks subscriptions with usage ratings to flag keep/review/cancel candidates and estimate savings, for USD/GBP/EUR. */
-
 import type { Currency } from '../../../lib/regions';
 
 export type BillingFrequency = 'weekly' | 'monthly' | 'quarterly' | 'yearly';
 
-/** Usage rating: how often you actually use the subscription. */
 export type UsageRating = 'daily' | 'weekly' | 'monthly' | 'rarely' | 'never';
 
 export type SubscriptionCategory =
@@ -34,17 +31,14 @@ export interface SubscriptionAuditInputs {
 
   subscriptions: Subscription[];
 
-  /** User's estimated monthly spend (for comparison) */
   estimatedMonthlySpend: number;
 }
 
 export interface AnalyzedSubscription extends Subscription {
-  /** Monthly cost (normalized) */
   monthlyCost: number;
 
   yearlyCost: number;
 
-  /** Cost per use (based on usage rating) */
   costPerUse: number;
 
   recommendation: 'keep' | 'review' | 'cancel';

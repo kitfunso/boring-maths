@@ -1,7 +1,3 @@
-/**
- * RentalPropertyRoiCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateRentalPropertyROI } from '../../src/components/calculators/RentalPropertyROI/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/RentalPropertyROI/types';

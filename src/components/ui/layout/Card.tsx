@@ -1,13 +1,9 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  /** Card variant */
   variant?: 'default' | 'elevated' | 'bordered';
-  /** Padding size */
   padding?: 'none' | 'sm' | 'md' | 'lg';
-  /** Card content */
   children: ReactNode;
-  /** Additional class names */
   className?: string;
 }
 
@@ -25,17 +21,6 @@ const PADDING_CLASSES = {
   lg: 'p-8',
 };
 
-/**
- * Card container component for grouping content.
- *
- * @example
- * ```tsx
- * <Card variant="elevated">
- *   <CalculatorHeader title="Calculator" />
- *   <div className="p-6">Content</div>
- * </Card>
- * ```
- */
 export function Card({
   variant = 'elevated',
   padding = 'none',

@@ -1,10 +1,3 @@
-/**
- * Shared Data Context
- *
- * Provides a context for calculators to share data via localStorage.
- * Follows the same pattern as ThemeContext for consistency.
- */
-
 import {
   createContext,
   useContext,
@@ -20,24 +13,18 @@ import type { SharedCalculatorData, SharedDataEntry, CalculatorDataConfig } from
 import { readStoredData, saveFields, getFields, isStorageAvailable } from './storage';
 
 interface SharedDataContextValue {
-  /** Whether localStorage is available */
   isAvailable: boolean;
 
-  /** Get available data entries for a calculator's imports */
   getAvailableImports: (config: CalculatorDataConfig) => Partial<{
     [K in keyof SharedCalculatorData]: SharedDataEntry<NonNullable<SharedCalculatorData[K]>>;
   }>;
 
-  /** Check if any importable data exists for a calculator */
   hasImportableData: (config: CalculatorDataConfig) => boolean;
 
-  /** Export data from a calculator */
   exportData: (config: CalculatorDataConfig, data: Partial<SharedCalculatorData>) => boolean;
 
-  /** Timestamp of last data update (for reactivity) */
   lastUpdated: number;
 
-  /** Force refresh from storage */
   refresh: () => void;
 }
 
@@ -47,19 +34,6 @@ export interface SharedDataProviderProps {
   children: ReactNode;
 }
 
-/**
- * SharedDataProvider wraps the app to enable cross-calculator data sharing.
- *
- * @example
- * ```tsx
- * // In your layout or app root
- * <SharedDataProvider>
- *   <CalculatorLayout>
- *     <FreelanceDayRateCalculator />
- *   </CalculatorLayout>
- * </SharedDataProvider>
- * ```
- */
 export function SharedDataProvider({ children }: SharedDataProviderProps) {
   const [lastUpdated, setLastUpdated] = useState<number>(() => {
     const stored = readStoredData();
@@ -68,7 +42,6 @@ export function SharedDataProvider({ children }: SharedDataProviderProps) {
 
   const isAvailable = useMemo(() => isStorageAvailable(), []);
 
-  // Listen for storage changes from other tabs
   useEffect(() => {
     if (!isAvailable || typeof window === 'undefined') return;
 
@@ -104,7 +77,6 @@ export function SharedDataProvider({ children }: SharedDataProviderProps) {
     (config: CalculatorDataConfig, data: Partial<SharedCalculatorData>) => {
       if (!isAvailable) return false;
 
-      // Only save fields that are in the exports list
       const filteredData: Partial<SharedCalculatorData> = {};
       for (const key of config.exports) {
         if (data[key] !== undefined && data[key] !== null) {
@@ -143,10 +115,6 @@ export function SharedDataProvider({ children }: SharedDataProviderProps) {
   return <SharedDataContext.Provider value={value}>{children}</SharedDataContext.Provider>;
 }
 
-/**
- * Hook to access the shared data context.
- * Must be used within a SharedDataProvider.
- */
 export function useSharedDataContext(): SharedDataContextValue {
   const context = useContext(SharedDataContext);
   if (!context) {
@@ -155,10 +123,6 @@ export function useSharedDataContext(): SharedDataContextValue {
   return context;
 }
 
-/**
- * Hook to check if shared data context is available (safe for optional use).
- * Returns null if not within a provider instead of throwing.
- */
 export function useSharedDataContextSafe(): SharedDataContextValue | null {
   return useContext(SharedDataContext);
 }

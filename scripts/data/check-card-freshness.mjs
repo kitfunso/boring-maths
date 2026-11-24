@@ -1,6 +1,3 @@
-/** Flags CardPerksCalculator rows past the staleness window; parses cards.ts
- *  as text so CI never needs the Astro/TS toolchain. Usage: --days N. */
-
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
@@ -21,8 +18,6 @@ const CARDS_FILE = join(
 const ID_RE = /id:\s*'([a-z0-9-]+)'/g;
 const DATE_RE = /lastVerified:\s*'(\d{4}-\d{2}-\d{2})'/g;
 
-/** Pairs each id with the lastVerified date that follows it in the source
- *  text (one per row); returns rows older than `days` relative to `today`. */
 export function staleRows(source, today, days) {
   const ids = [...source.matchAll(ID_RE)].map((m) => ({ id: m[1], index: m.index }));
   const dates = [...source.matchAll(DATE_RE)].map((m) => ({ date: m[1], index: m.index }));
@@ -57,7 +52,6 @@ function main() {
   process.exit(1);
 }
 
-// Guards against running main() when vitest imports staleRows for a unit test.
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
   main();
 }

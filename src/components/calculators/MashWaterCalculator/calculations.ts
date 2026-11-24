@@ -1,31 +1,14 @@
-/**
- * Mash Water Calculator Calculations
- * Strike water temperature and sparge volume calculations
- */
-
 import type { MashWaterInputs, MashWaterResults } from './types';
 
-/**
- * Calculate strike water temperature
- * Formula: Strike Temp = ((R × (T2 - T1)) / R) + T2
- * Where R = ratio of water to grain (qt/lb), T1 = grain temp, T2 = target mash temp
- * Simplified: Strike = (0.2 / R) × (T2 - T1) + T2
- * The 0.2 is the thermal mass ratio of grain to water
- */
 function calculateStrikeTemp(
   targetMashTemp: number,
   grainTemp: number,
   mashThickness: number
 ): number {
-  // Strike water temp formula
-  // The constant 0.2 represents grain's thermal mass relative to water
   const strikeTemp = (0.2 / mashThickness) * (targetMashTemp - grainTemp) + targetMashTemp;
   return strikeTemp;
 }
 
-/**
- * Convert temperature between F and C
- */
 function convertTemp(
   temp: number,
   from: 'fahrenheit' | 'celsius',
@@ -36,11 +19,7 @@ function convertTemp(
   return (temp * 9) / 5 + 32;
 }
 
-/**
- * Main mash water calculation
- */
 export function calculateMashWater(inputs: MashWaterInputs): MashWaterResults {
-  // Work in imperial units internally (qt/lb, gallons, Fahrenheit)
   let grainWeight = inputs.grainWeight;
   let grainTemp = inputs.grainTemp;
   let targetMashTemp = inputs.targetMashTemp;
@@ -50,54 +29,41 @@ export function calculateMashWater(inputs: MashWaterInputs): MashWaterResults {
   let evaporationRate = inputs.evaporationRate;
   let preboilVolume = inputs.preboilVolume;
 
-  // Convert to imperial if needed
   if (inputs.weightUnit === 'kg') {
-    grainWeight = grainWeight * 2.20462; // kg to lbs
+    grainWeight = grainWeight * 2.20462;
   }
   if (inputs.tempUnit === 'celsius') {
     grainTemp = convertTemp(grainTemp, 'celsius', 'fahrenheit');
     targetMashTemp = convertTemp(targetMashTemp, 'celsius', 'fahrenheit');
   }
   if (inputs.volumeUnit === 'liters') {
-    equipmentLoss = equipmentLoss * 0.264172; // L to gal
+    equipmentLoss = equipmentLoss * 0.264172;
     evaporationRate = evaporationRate * 0.264172;
     preboilVolume = preboilVolume * 0.264172;
-    // Convert L/kg to qt/lb
     mashThickness = mashThickness * 0.479306;
     grainAbsorption = grainAbsorption * 0.479306;
   }
 
-  // Calculate strike water temperature
   const strikeWaterTemp = calculateStrikeTemp(targetMashTemp, grainTemp, mashThickness);
 
-  // Calculate strike water volume (quarts, then convert to gallons)
   const strikeWaterQuarts = grainWeight * mashThickness;
-  const strikeWaterVolume = strikeWaterQuarts / 4; // convert to gallons
-
-  // Total mash volume (approximate - grain displacement)
-  // Grain displaces about 0.08 gal/lb
+  const strikeWaterVolume = strikeWaterQuarts / 4;
   const grainDisplacement = grainWeight * 0.08;
   const totalMashVolume = strikeWaterVolume + grainDisplacement;
 
-  // Water absorbed by grain
   const waterAbsorbedQuarts = grainWeight * grainAbsorption;
   const waterAbsorbedByGrain = waterAbsorbedQuarts / 4;
 
-  // First runnings (after draining mash)
   const firstRunningsVolume = strikeWaterVolume - waterAbsorbedByGrain - equipmentLoss;
 
-  // Calculate boil-off
   const boilOff = evaporationRate * (inputs.boilTime / 60);
 
-  // Post-boil volume target
   const postBoilVolume = preboilVolume - boilOff;
 
-  // Sparge water needed
   let spargeWaterVolume = 0;
   let spargeWaterPerBatch = 0;
 
   if (inputs.spargeType !== 'no-sparge') {
-    // Need enough to hit pre-boil target
     spargeWaterVolume = preboilVolume - firstRunningsVolume;
     spargeWaterVolume = Math.max(0, spargeWaterVolume);
 
@@ -106,10 +72,8 @@ export function calculateMashWater(inputs: MashWaterInputs): MashWaterResults {
     }
   }
 
-  // Total water needed
   const totalWaterNeeded = strikeWaterVolume + spargeWaterVolume;
 
-  // Convert results back to user's units
   let resultStrikeTemp = strikeWaterTemp;
   let resultStrikeVolume = strikeWaterVolume;
   let resultMashVolume = totalMashVolume;
@@ -150,16 +114,10 @@ export function calculateMashWater(inputs: MashWaterInputs): MashWaterResults {
   };
 }
 
-/**
- * Format temperature with unit
- */
 export function formatTemp(temp: number, unit: string): string {
   return `${temp}${unit}`;
 }
 
-/**
- * Format volume with unit
- */
 export function formatVolume(volume: number, unit: string): string {
   return `${volume} ${unit}`;
 }

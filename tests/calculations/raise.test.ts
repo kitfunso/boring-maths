@@ -1,7 +1,3 @@
-/**
- * RaiseCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateRaise } from '../../src/components/calculators/RaiseCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/RaiseCalculator/types';

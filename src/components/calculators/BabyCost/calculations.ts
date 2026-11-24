@@ -1,7 +1,3 @@
-/**
- * Baby Cost Calculator - Calculation Logic
- */
-
 import type { BabyCostInputs, BabyCostResult, CostCategory } from './types';
 import { REGIONAL_COSTS } from './types';
 
@@ -27,11 +23,10 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
   const costs = REGIONAL_COSTS[currency];
   const categories: CostCategory[] = [];
 
-  // 1. Childcare costs
   let childcareCost = 0;
   if (childcareType !== 'none' && childcareMonths > 0) {
     const annualChildcare =
-      childcareType === 'daycare' ? costs.daycare : childcareType === 'nanny' ? costs.nanny : 0; // family = free
+      childcareType === 'daycare' ? costs.daycare : childcareType === 'nanny' ? costs.nanny : 0;
     childcareCost = (annualChildcare / 12) * childcareMonths;
   }
 
@@ -49,7 +44,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     });
   }
 
-  // 2. Feeding costs
   let feedingCost = 0;
   const feedingBreakdown: { item: string; cost: number }[] = [];
 
@@ -65,7 +59,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     feedingBreakdown.push({ item: 'Breast pump & supplies', cost: pumpSupplies });
   }
 
-  // Baby food for months 6-12
   feedingCost += costs.babyFood;
   feedingBreakdown.push({ item: 'Baby food (months 6-12)', cost: costs.babyFood });
 
@@ -81,7 +74,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     breakdown: feedingBreakdown,
   });
 
-  // 3. Diaper costs
   let diaperCost = 0;
   const diaperBreakdown: { item: string; cost: number }[] = [];
 
@@ -93,7 +85,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     diaperBreakdown.push({ item: 'Cloth diapers + accessories', cost: costs.clothDiapers * 0.7 });
     diaperBreakdown.push({ item: 'Extra laundry costs', cost: costs.clothDiapers * 0.3 });
   } else {
-    // Hybrid
     diaperCost = costs.clothDiapers + costs.disposableDiapers * 0.3;
     diaperBreakdown.push({ item: 'Cloth diapers', cost: costs.clothDiapers });
     diaperBreakdown.push({
@@ -102,7 +93,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     });
   }
 
-  // Add wipes
   const wipesCost = currency === 'USD' ? 150 : currency === 'GBP' ? 100 : 120;
   diaperCost += wipesCost;
   diaperBreakdown.push({ item: 'Wipes', cost: wipesCost });
@@ -114,13 +104,11 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     breakdown: diaperBreakdown,
   });
 
-  // 4. Healthcare costs
   let healthcareCost = 0;
   const healthcareBreakdown: { item: string; cost: number }[] = [];
 
   if (hasHealthInsurance) {
     if (currency === 'USD') {
-      // US healthcare costs
       const deliveryCost = Math.min(deductible + costs.delivery * copayPercent, costs.delivery);
       healthcareCost += deliveryCost;
       healthcareBreakdown.push({ item: 'Delivery (out-of-pocket)', cost: deliveryCost });
@@ -128,19 +116,16 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
       healthcareCost += costs.pediatricVisits;
       healthcareBreakdown.push({ item: 'Well-baby visits copays', cost: costs.pediatricVisits });
 
-      // Insurance premium increase estimate
-      const premiumIncrease = 2400; // $200/month average
+      const premiumIncrease = 2400;
       healthcareCost += premiumIncrease;
       healthcareBreakdown.push({ item: 'Insurance premium increase', cost: premiumIncrease });
     } else {
-      // UK/EU - mostly covered
       healthcareCost = costs.delivery + costs.pediatricVisits;
       if (healthcareCost > 0) {
         healthcareBreakdown.push({ item: 'Healthcare costs', cost: healthcareCost });
       }
     }
   } else {
-    // Uninsured - full cost
     const uninsuredDelivery = currency === 'USD' ? 15000 : costs.delivery * 3;
     healthcareCost = uninsuredDelivery;
     healthcareBreakdown.push({ item: 'Delivery (uninsured)', cost: uninsuredDelivery });
@@ -155,7 +140,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     });
   }
 
-  // 5. Gear & Setup costs
   let gearCost = buyNewGear ? costs.newGear : costs.usedGear;
   const gearBreakdown: { item: string; cost: number }[] = [];
 
@@ -171,15 +155,12 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     gearBreakdown.push({ item: 'New essentials only', cost: costs.usedGear * 0.3 });
   }
 
-  // Nursery
   gearCost += nurseryBudget;
   gearBreakdown.push({ item: 'Nursery setup', cost: nurseryBudget });
 
-  // Clothing
   gearCost += costs.clothing;
   gearBreakdown.push({ item: 'Clothing (first year)', cost: costs.clothing });
 
-  // Toys
   gearCost += costs.toys;
   gearBreakdown.push({ item: 'Toys & books', cost: costs.toys });
 
@@ -190,7 +171,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     breakdown: gearBreakdown,
   });
 
-  // 6. Lost Income (opportunity cost)
   let lostIncomeCost = 0;
   const lostIncomeBreakdown: { item: string; cost: number }[] = [];
 
@@ -228,7 +208,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     });
   }
 
-  // 7. Miscellaneous
   const miscCost = currency === 'USD' ? 1200 : currency === 'GBP' ? 800 : 900;
   categories.push({
     name: 'Miscellaneous',
@@ -241,7 +220,6 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
     ],
   });
 
-  // Calculate totals
   const totalFirstYearCost =
     childcareCost +
     feedingCost +
@@ -253,11 +231,9 @@ export function calculateBabyCost(inputs: BabyCostInputs): BabyCostResult {
 
   const monthlyAverage = totalFirstYearCost / 12;
 
-  // Find biggest expense
   const sortedCategories = [...categories].sort((a, b) => b.amount - a.amount);
   const biggestExpense = sortedCategories[0]?.name || 'Childcare';
 
-  // Generate savings opportunities
   const savingsOpportunities: string[] = [];
 
   if (childcareType === 'nanny') {

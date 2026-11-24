@@ -1,7 +1,3 @@
-/**
- * Currency Converter - Calculation Logic
- */
-
 import { USD_RATES, type CurrencyConverterInputs, type CurrencyConverterResult } from './types';
 
 function round(value: number, decimals: number = 4): number {
@@ -15,7 +11,6 @@ export function convertCurrency(inputs: CurrencyConverterInputs): CurrencyConver
   const fromRate = USD_RATES[fromCurrency] || 1;
   const toRate = USD_RATES[toCurrency] || 1;
 
-  // Convert: from -> USD -> to
   const rate = toRate / fromRate;
   const convertedAmount = amount * rate;
 

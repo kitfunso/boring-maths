@@ -1,10 +1,3 @@
-/**
- * FIRE Calculator - React Component
- *
- * Interactive calculator for Financial Independence, Retire Early planning.
- * Features multiple FIRE variants, projections, and milestone tracking.
- */
-
 import { useCallback } from 'preact/hooks';
 import {
   calculateFIRE,
@@ -47,12 +40,10 @@ export default function FIRECalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle number input changes - only update if valid number or keep previous value
   const handleNumberChange = useCallback((field: keyof FIRECalculatorInputs, e: Event) => {
     const target = e.target as HTMLInputElement;
     const rawValue = target.value;
 
-    // Allow empty string during typing - don't snap to 0
     if (rawValue === '' || rawValue === '-') {
       return;
     }
@@ -63,7 +54,6 @@ export default function FIRECalculator() {
     }
   }, []);
 
-  // Handle percentage inputs (stored as decimals)
   const handlePercentChange = useCallback((field: keyof FIRECalculatorInputs, e: Event) => {
     const target = e.target as HTMLInputElement;
     const rawValue = target.value;
@@ -78,12 +68,10 @@ export default function FIRECalculator() {
     }
   }, []);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
 
-  // Handle risk profile change
   const handleRiskChange = (profile: RiskProfile) => {
     const returnRate = RISK_PROFILE_RETURNS[profile].return;
     setInputs((prev) => ({
@@ -99,13 +87,11 @@ export default function FIRECalculator() {
     { value: 'aggressive' as const, label: 'Aggressive' },
   ];
 
-  // Progress bar width
   const progressWidth = Math.min(result.currentProgress, 100);
 
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="FIRE Calculator"
           subtitle="Financial Independence, Retire Early - Calculate your path to freedom"
@@ -113,9 +99,7 @@ export default function FIRECalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Current Situation */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Current Situation
@@ -175,7 +159,6 @@ export default function FIRECalculator() {
               </Grid>
             </div>
 
-            {/* Savings */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Monthly Savings
@@ -218,7 +201,6 @@ export default function FIRECalculator() {
               </Grid>
             </div>
 
-            {/* Target & Assumptions */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Goals & Assumptions
@@ -257,7 +239,6 @@ export default function FIRECalculator() {
               </Grid>
             </div>
 
-            {/* Advanced Settings */}
             <details className="group">
               <summary className="cursor-pointer text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                 <span>Advanced Settings</span>
@@ -324,9 +305,7 @@ export default function FIRECalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Your FIRE Number"
               value={formatCompact(result.totalNeeded, result.currency)}
@@ -345,7 +324,6 @@ export default function FIRECalculator() {
               }
             />
 
-            {/* Target vs Projected Age Comparison */}
             {result.yearsToFIRE !== Infinity &&
               Math.round(result.ageAtFIRE) !== inputs.targetRetirementAge && (
                 <Alert
@@ -393,7 +371,6 @@ export default function FIRECalculator() {
                 </Alert>
               )}
 
-            {/* Progress Bar */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm font-medium text-[var(--color-cream)]">
@@ -415,7 +392,6 @@ export default function FIRECalculator() {
               </div>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Years to FIRE"
@@ -443,7 +419,6 @@ export default function FIRECalculator() {
               />
             </Grid>
 
-            {/* FIRE Variants */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 FIRE Variants
@@ -481,7 +456,6 @@ export default function FIRECalculator() {
               </div>
             </div>
 
-            {/* Coast FIRE */}
             {result.coastFIREAge && (
               <div className="bg-amber-950/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-2">
@@ -496,7 +470,6 @@ export default function FIRECalculator() {
               </div>
             )}
 
-            {/* Savings Analysis */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Savings Analysis
@@ -538,7 +511,6 @@ export default function FIRECalculator() {
               </Grid>
             </div>
 
-            {/* Projections Preview */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Portfolio Growth Preview
@@ -578,7 +550,6 @@ export default function FIRECalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="FIRE Tips">
               <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>
@@ -592,7 +563,6 @@ export default function FIRECalculator() {
               </ul>
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`My FIRE Number: ${formatCurrency(result.totalNeeded, result.currency)} - ${formatYears(result.yearsToFIRE)} to financial independence (age ${Math.round(result.ageAtFIRE)}) with ${formatPercent(result.savingsRate.currentRate)} savings rate`}

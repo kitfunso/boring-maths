@@ -1,9 +1,3 @@
-/**
- * Unit Converter - React Component
- *
- * Convert between various units of measurement.
- */
-
 import { useMemo } from 'preact/hooks';
 import { convert, getAllConversions } from './calculations';
 import {
@@ -84,7 +78,6 @@ export default function UnitConverter() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Category Selection */}
             <div>
               <Label>Category</Label>
               <ButtonGroup
@@ -95,7 +88,6 @@ export default function UnitConverter() {
               />
             </div>
 
-            {/* Value Input */}
             <div>
               <Label htmlFor="value" required>
                 Value
@@ -109,7 +101,6 @@ export default function UnitConverter() {
               />
             </div>
 
-            {/* From/To Units */}
             <div className="flex items-end gap-4">
               <div className="flex-1">
                 <Label htmlFor="fromUnit">From</Label>
@@ -156,9 +147,7 @@ export default function UnitConverter() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <div
               className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/10
                           rounded-2xl p-8 text-center border border-[var(--color-accent)]/30"
@@ -172,7 +161,6 @@ export default function UnitConverter() {
               <div className="text-lg text-[var(--color-accent)]">{toLabel}</div>
             </div>
 
-            {/* All Conversions */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 All Conversions from {inputs.value} {fromLabel}
@@ -198,7 +186,6 @@ export default function UnitConverter() {
               </Grid>
             </div>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${inputs.value} ${fromLabel} = ${result.formatted} ${toLabel}`}

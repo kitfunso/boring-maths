@@ -1,7 +1,3 @@
-/**
- * Rent Affordability Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import { calculateRentAffordability, formatCurrency, formatPercent } from './calculations';
 import {
@@ -114,7 +110,6 @@ export default function RentAffordabilityCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Income Type Toggle */}
             <div>
               <Label>Income Type</Label>
               <ButtonGroup
@@ -126,7 +121,6 @@ export default function RentAffordabilityCalculator() {
               />
             </div>
 
-            {/* Monthly Income */}
             <div>
               <Label htmlFor="monthlyIncome" required>
                 Monthly Income ({inputs.incomeType === 'gross' ? 'before tax' : 'after tax'})
@@ -143,7 +137,6 @@ export default function RentAffordabilityCalculator() {
               />
             </div>
 
-            {/* Existing Monthly Debts */}
             <div>
               <Label htmlFor="existingDebts">Existing Monthly Debts</Label>
               <Input
@@ -161,7 +154,6 @@ export default function RentAffordabilityCalculator() {
               </p>
             </div>
 
-            {/* Savings Goal */}
             <div>
               <Label htmlFor="savingsGoalPercent">Savings Goal (% of net income)</Label>
               <Input
@@ -176,7 +168,6 @@ export default function RentAffordabilityCalculator() {
               />
             </div>
 
-            {/* Include Utilities */}
             <Toggle
               checked={inputs.includeUtilities}
               onChange={(val) => updateInput('includeUtilities', val)}
@@ -205,11 +196,9 @@ export default function RentAffordabilityCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {hasIncome ? (
               <>
-                {/* Recommended Max */}
                 <ResultCard
                   label="Recommended Maximum Rent"
                   value={`${formatCurrency(result.recommendedMax, inputs.currency)}/mo`}
@@ -225,14 +214,12 @@ export default function RentAffordabilityCalculator() {
                   }
                 />
 
-                {/* Three Rules Side by Side */}
                 <Grid responsive={{ sm: 1, md: 3 }} gap="md">
                   <RuleCard rule={result.maxRent30Percent} currency={inputs.currency} />
                   <RuleCard rule={result.maxRent50_30_20} currency={inputs.currency} />
                   <RuleCard rule={result.maxRent28_36} currency={inputs.currency} />
                 </Grid>
 
-                {/* How Much is Left */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="After Rent"
@@ -262,7 +249,6 @@ export default function RentAffordabilityCalculator() {
                   />
                 </Grid>
 
-                {/* Budget Breakdown */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     50/30/20 Budget Breakdown (Net:{' '}
@@ -312,7 +298,6 @@ export default function RentAffordabilityCalculator() {
               </Alert>
             )}
 
-            {/* Share Results */}
             {hasIncome && (
               <div className="flex justify-center pt-4">
                 <ShareResults result={shareText} calculatorName="Rent Affordability Calculator" />

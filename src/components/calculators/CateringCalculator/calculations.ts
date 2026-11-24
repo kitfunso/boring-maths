@@ -1,7 +1,3 @@
-/**
- * Catering Calculator - Calculation Logic
- */
-
 import type { CateringInputs, CateringResult, FoodItem } from './types';
 import {
   PROTEIN_PER_PERSON,
@@ -29,22 +25,18 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
   const wasteMultiplier = SERVICE_WASTE[serviceStyle];
   const foodItems: FoodItem[] = [];
 
-  // Calculate dietary counts
   const vegetarianCount = Math.ceil((guestCount * vegetarianPercent) / 100);
   const veganCount = Math.ceil((guestCount * veganPercent) / 100);
   const glutenFreeCount = Math.ceil((guestCount * glutenFreePercent) / 100);
   const regularCount = guestCount - vegetarianCount - veganCount;
 
-  // Base protein and total food per person (in oz)
   const proteinOzPerPerson = PROTEIN_PER_PERSON[mealType];
   const totalFoodOzPerPerson = TOTAL_FOOD_PER_PERSON[mealType];
   const sidesOzPerPerson = totalFoodOzPerPerson - proteinOzPerPerson;
 
-  // Calculate total protein needed (accounting for waste)
   const totalProteinOz = regularCount * proteinOzPerPerson * wasteMultiplier;
   const proteinPounds = totalProteinOz / 16;
 
-  // Sides breakdown (starch, vegetables, salad)
   const starchPercent = 0.35;
   const vegetablePercent = 0.4;
   const saladPercent = 0.25;
@@ -54,7 +46,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
   const vegetablePounds = (totalSidesOz * vegetablePercent) / 16;
   const saladPounds = (totalSidesOz * saladPercent) / 16;
 
-  // Add main protein items
   if (mealType !== 'appetizers_only') {
     foodItems.push({
       category: 'Protein',
@@ -65,7 +56,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
       notes: `${proteinOzPerPerson} oz per person cooked weight`,
     });
 
-    // Vegetarian protein
     if (vegetarianCount > 0) {
       const vegProteinPounds = (vegetarianCount * proteinOzPerPerson * wasteMultiplier) / 16;
       foodItems.push({
@@ -78,7 +68,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
       });
     }
 
-    // Starch
     foodItems.push({
       category: 'Starch',
       item: eventTime === 'breakfast' ? 'Potatoes/Hash Browns' : 'Rice/Pasta/Potatoes',
@@ -88,7 +77,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
       notes: 'Cooked weight',
     });
 
-    // Vegetables
     foodItems.push({
       category: 'Vegetables',
       item: 'Cooked Vegetables',
@@ -99,7 +87,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Salad (always included for full meals)
   if (mealType === 'full_meal' || mealType === 'heavy_meal') {
     foodItems.push({
       category: 'Salad',
@@ -111,7 +98,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Appetizers
   let appetizerServings = 0;
   if (includeAppetizers || mealType === 'appetizers_only') {
     const appHours = mealType === 'appetizers_only' ? eventDuration : Math.min(eventDuration, 1);
@@ -127,7 +113,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Breads
   let breadUnits = 0;
   if (includeBreads && mealType !== 'appetizers_only') {
     breadUnits = Math.ceil(guestCount * 1.5 * wasteMultiplier);
@@ -141,7 +126,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Dessert
   let dessertServings = 0;
   if (includeDessert) {
     dessertServings = Math.ceil(guestCount * wasteMultiplier);
@@ -155,7 +139,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Build order guide
   const orderGuide: { item: string; quantity: string; note: string }[] = [];
 
   if (mealType !== 'appetizers_only') {
@@ -200,7 +183,6 @@ export function calculateCatering(inputs: CateringInputs): CateringResult {
     });
   }
 
-  // Tips
   const tips: string[] = [];
 
   if (serviceStyle === 'buffet') {

@@ -1,9 +1,3 @@
-/**
- * EU Salary Calculator Types
- * Simplified tax calculations for EU countries. Income tax bands are 2026 (Belgium: income year
- * 2026; France: the 2026 scale on 2025 income); sources are listed on the calculator page.
- */
-
 import { calculateIrelandSalary } from '../IrelandSalaryCalculator/calculations';
 import { calculateGermanySalary } from '../GermanySalaryCalculator/calculations';
 
@@ -14,27 +8,18 @@ interface EUCountryBase {
 }
 
 export interface BandCountryTax extends EUCountryBase {
-  // Simplified progressive tax brackets
   taxBrackets: { threshold: number; rate: number }[];
-  // Social security (employee portion, simplified)
   socialSecurityRate: number;
   socialSecurityCap?: number;
-  // false when the brackets apply to gross pay (NL box 1 rates already include the premiums)
   socialSecurityDeductible?: boolean;
-  // Deducted before the brackets; 0 where the first bracket is already a 0% band
   taxFreeAllowance: number;
-  // 'credit': the allowance is taxed at taxFreeCreditRate and that comes off the tax (Belgium)
   taxFreeAllowanceMode?: 'deduction' | 'credit';
   taxFreeCreditRate?: number;
-  // Non-deductible levy on pay after social security, e.g. Poland's 9% health contribution
   healthContributionRate?: number;
-  // Flat-rate work expenses off pay after social security, before the brackets (rate in percent, capped)
   employeeExpenseDeduction?: { rate: number; cap: number };
-  // Municipal surcharge, percent of the income tax
   localSurchargeRate?: number;
 }
 
-// Countries with a full calculator on the site reuse it, so both pages give the same answer
 export interface DetailedCountryTax extends EUCountryBase {
   detailedModel: (gross: number) => { socialSecurity: number; incomeTax: number };
 }
@@ -46,7 +31,6 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     code: 'DE',
     name: 'Germany',
     currency: 'EUR',
-    // Tax class I, no church tax, childless: the Germany calculator's defaults
     detailedModel: (gross) => {
       const r = calculateGermanySalary({
         grossAnnualSalary: gross,
@@ -74,7 +58,6 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     code: 'NL',
     name: 'Netherlands',
     currency: 'EUR',
-    // Box 1: 35.75% to 38,883 is 8.10% tax plus 27.65% premiums, so premiums are not charged twice
     taxBrackets: [
       { threshold: 38883, rate: 8.1 },
       { threshold: 78426, rate: 37.56 },
@@ -151,13 +134,10 @@ export const EU_TAX_DATA: EUCountryTax[] = [
       { threshold: Infinity, rate: 50 },
     ],
     socialSecurityRate: 13.07,
-    // Income year 2026 tax-free sum, valued at 25% (BDO key figures, AY 2027)
     taxFreeAllowance: 11550,
     taxFreeAllowanceMode: 'credit',
     taxFreeCreditRate: 25,
-    // 30% of pay after contributions, max 6,070 (fin.belgium.be, income year 2026)
     employeeExpenseDeduction: { rate: 30, cap: 6070 },
-    // Communal rates run 0% to 9%, average 7% (PwC Worldwide Tax Summaries)
     localSurchargeRate: 7,
   },
   {
@@ -188,7 +168,6 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     ],
     socialSecurityRate: 13.71,
     healthContributionRate: 9,
-    // Standard employee costs: 250 zl a month, at most 3,000 a year for one job (podatki.gov.pl)
     employeeExpenseDeduction: { rate: 100, cap: 3000 },
     taxFreeAllowance: 0,
   },
@@ -207,7 +186,6 @@ export const EU_TAX_DATA: EUCountryTax[] = [
     code: 'DK',
     name: 'Denmark',
     currency: 'DKK',
-    // Bands apply to income after AM-bidrag; 37.01 = bundskat 12.01 + average municipal 25.0
     taxBrackets: [
       { threshold: 54100, rate: 0 }, // Personfradrag
       { threshold: 641200, rate: 37.01 },

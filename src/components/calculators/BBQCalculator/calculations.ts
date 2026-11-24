@@ -1,15 +1,6 @@
-/**
- * BBQ Calculator - Calculation Logic
- *
- * Pure functions for calculating BBQ quantities.
- */
-
 import type { BBQCalculatorInputs, BBQCalculatorResult, MeatPreference } from './types';
 import { MEAT_PER_PERSON, CHILD_MULTIPLIER } from './types';
 
-/**
- * Meat type distributions by preference
- */
 const MEAT_DISTRIBUTIONS: Record<MeatPreference, { type: string; ratio: number }[]> = {
   beef: [
     { type: 'Burgers (1/4 lb patties)', ratio: 0.5 },
@@ -35,9 +26,6 @@ const MEAT_DISTRIBUTIONS: Record<MeatPreference, { type: string; ratio: number }
   ],
 };
 
-/**
- * Standard side dishes with amounts per person
- */
 const SIDE_DISHES = [
   { item: 'Coleslaw', perPerson: '1/3 cup', gramsPerPerson: 80 },
   { item: 'Baked Beans', perPerson: '1/2 cup', gramsPerPerson: 120 },
@@ -47,9 +35,6 @@ const SIDE_DISHES = [
   { item: 'Green Salad', perPerson: '1 cup', gramsPerPerson: 60 },
 ];
 
-/**
- * Calculate BBQ quantities
- */
 export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
   const {
     guestCount,
@@ -61,22 +46,17 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
     includeVegetarian,
   } = inputs;
 
-  // Calculate effective guest count (adults + half for children)
   const adultCount = guestCount - childrenCount;
   const effectiveGuests = adultCount + childrenCount * CHILD_MULTIPLIER;
 
-  // Calculate total meat needed
   const meatPerPerson = MEAT_PER_PERSON[appetiteLevel];
   let totalMeatPounds = effectiveGuests * meatPerPerson;
 
-  // Add 10% buffer
   totalMeatPounds *= 1.1;
 
-  // Calculate meat breakdown
   const distribution = MEAT_DISTRIBUTIONS[meatPreference];
   const meatBreakdown = distribution.map((item) => {
     const pounds = Math.ceil(totalMeatPounds * item.ratio * 10) / 10;
-    // Estimate servings (roughly 2 servings per pound for most meats)
     const servings = Math.round(pounds * 2);
     return {
       type: item.type,
@@ -85,11 +65,9 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
     };
   });
 
-  // Select side dishes
   const selectedSides = SIDE_DISHES.slice(0, Math.min(sideCount, SIDE_DISHES.length));
   const sideQuantities = selectedSides.map((side) => {
-    // Calculate total amount needed
-    const totalGrams = side.gramsPerPerson * effectiveGuests * 1.1; // 10% buffer
+    const totalGrams = side.gramsPerPerson * effectiveGuests * 1.1;
     const totalPounds = totalGrams / 453.6;
 
     let amount: string;
@@ -108,7 +86,6 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
     };
   });
 
-  // Calculate supplies
   const supplies: BBQCalculatorResult['supplies'] = [
     { item: 'Hamburger Buns', quantity: `${Math.ceil((guestCount * 1.5) / 8)} packs (8ct)` },
     { item: 'Hot Dog Buns', quantity: `${Math.ceil((guestCount * 0.5) / 8)} packs (8ct)` },
@@ -119,17 +96,13 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
   ];
 
   if (includeVegetarian) {
-    const veggieBurgers = Math.ceil(guestCount * 0.15); // 15% vegetarian
+    const veggieBurgers = Math.ceil(guestCount * 0.15);
     supplies.unshift({ item: 'Veggie Burgers', quantity: `${veggieBurgers} patties` });
   }
 
-  // Calculate grilling info
-  // Charcoal: ~1 lb per pound of meat + base amount
   const charcoalPounds = Math.ceil(totalMeatPounds + 5);
-  // Propane: one 20lb tank does about 18-20 hours of grilling
   const propaneTanks = Math.ceil(eventDuration / 10);
 
-  // Estimate grill time
   let grillTime: string;
   if (meatPreference === 'pork' && meatBreakdown.some((m) => m.type.includes('Ribs'))) {
     grillTime = '3-4 hours (low and slow for ribs)';
@@ -156,9 +129,6 @@ export function calculateBBQ(inputs: BBQCalculatorInputs): BBQCalculatorResult {
   };
 }
 
-/**
- * Format pounds for display
- */
 export function formatPounds(pounds: number): string {
   if (pounds < 1) {
     const oz = Math.round(pounds * 16);

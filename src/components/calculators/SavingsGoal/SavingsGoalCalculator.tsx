@@ -1,9 +1,3 @@
-/**
- * Savings Goal Calculator - React Component
- *
- * Interactive calculator for planning savings with compound interest.
- * Migrated to use the design system components.
- */
 import { calculateSavingsGoal, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -40,7 +34,6 @@ export default function SavingsGoalCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -54,7 +47,6 @@ export default function SavingsGoalCalculator() {
   return (
     <ThemeProvider defaultColor="yellow">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Plan Your Savings Goal"
           subtitle="Calculate contributions needed to reach your target"
@@ -62,9 +54,7 @@ export default function SavingsGoalCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Goal Amount & Current Savings */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="goalAmount" required>
@@ -95,7 +85,6 @@ export default function SavingsGoalCalculator() {
               </div>
             </Grid>
 
-            {/* Timeline */}
             <Slider
               label="Time to Reach Goal"
               value={inputs.timelineYears}
@@ -111,7 +100,6 @@ export default function SavingsGoalCalculator() {
               }}
             />
 
-            {/* Return Rate & Inflation */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="annualReturn">Expected Annual Return</Label>
@@ -146,7 +134,6 @@ export default function SavingsGoalCalculator() {
               </div>
             </Grid>
 
-            {/* Contribution Frequency */}
             <div>
               <Label>Contribution Frequency</Label>
               <ButtonGroup
@@ -162,16 +149,13 @@ export default function SavingsGoalCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label={`Save This Amount Every ${result.contributionFrequency}`}
               value={formatCurrency(result.contributionAmount, result.currency)}
               subtitle={`to reach ${formatCurrency(inputs.goalAmount, inputs.currency)} in ${inputs.timelineYears} years`}
             />
 
-            {/* Breakdown Cards */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Total Contributions"
@@ -193,7 +177,6 @@ export default function SavingsGoalCalculator() {
               />
             </Grid>
 
-            {/* Inflation Note */}
             <Alert variant="warning" title="Inflation note:">
               Your {formatCurrency(inputs.goalAmount, inputs.currency)} goal will have the
               purchasing power of {formatCurrency(result.inflationAdjustedGoal, result.currency)} in
@@ -201,7 +184,6 @@ export default function SavingsGoalCalculator() {
               {(inputs.inflationRate * 100).toFixed(1)}% inflation.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Savings goal: ${formatCurrency(inputs.goalAmount, inputs.currency)} in ${inputs.timelineYears} years - Save ${formatCurrency(result.contributionAmount, result.currency)}/${result.contributionFrequency} to earn ${formatCurrency(result.totalInterest, result.currency)} in interest!`}

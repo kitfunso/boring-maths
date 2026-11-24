@@ -1,8 +1,3 @@
-/**
- * UK Pension Calculator Types
- * Retirement projection and tax relief calculations
- */
-
 export interface UKPensionInputs {
   currentAge: number;
   retirementAge: number;
@@ -47,7 +42,6 @@ export function getDefaultInputs(): UKPensionInputs {
   };
 }
 
-// UK Pension constants
 export const PENSION_CONSTANTS = {
   statePensionFull: 12548, // 2026/27 full new State Pension per year (£241.30/week)
   statePensionAge: 67, // Current state pension age

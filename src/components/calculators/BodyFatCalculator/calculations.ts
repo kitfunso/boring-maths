@@ -1,11 +1,3 @@
-/**
- * Body Fat Calculator - Calculation Logic
- *
- * U.S. Navy Method:
- * Male: 86.010 × log10(waist - neck) - 70.041 × log10(height) + 36.76
- * Female: 163.205 × log10(waist + hip - neck) - 97.684 × log10(height) - 78.387
- */
-
 import { BODY_FAT_CATEGORIES, type BodyFatInputs, type BodyFatResult } from './types';
 
 function safe(value: number): number {
@@ -24,7 +16,6 @@ function round(value: number, decimals: number = 1): number {
 export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
   const { unitSystem, sex } = inputs;
 
-  // Convert everything to cm (safe() floors non-finite inputs to 0 so a cleared/partial field never yields NaN)
   const height = safe(
     unitSystem === 'metric' ? inputs.heightCm : toCm(inputs.heightFeet * 12 + inputs.heightInches)
   );
@@ -40,11 +31,8 @@ export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
     bodyFatPct = 163.205 * Math.log10(waist + hip - neck) - 97.684 * Math.log10(height) - 78.387;
   }
 
-  // safe() guards the case where a non-positive log argument (e.g. neck > waist on a cleared field)
-  // yields a non-finite value that the min/max clamp alone would pass through as NaN.
   bodyFatPct = Math.max(2, Math.min(safe(bodyFatPct), 60));
 
-  // Determine category
   let category = 'Average';
   let categoryColor: BodyFatResult['categoryColor'] = 'yellow';
 
@@ -57,10 +45,6 @@ export function calculateBodyFat(inputs: BodyFatInputs): BodyFatResult {
     }
   }
 
-  // Fat/lean mass: need weight, but we don't have it. Use generic estimate based on height.
-  // Actually, let's just return percentages; we don't ask for weight.
-  // We can approximate weight from height for display, or just skip mass.
-  // Better: return 0 and only show percentage.
   return {
     bodyFatPct: round(bodyFatPct),
     fatMass: 0,

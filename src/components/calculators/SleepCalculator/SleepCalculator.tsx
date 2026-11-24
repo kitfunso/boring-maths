@@ -1,9 +1,3 @@
-/**
- * Sleep Calculator - React Component
- *
- * Calculate optimal sleep and wake times based on 90-minute sleep cycles.
- */
-
 import type { ChangeEvent } from 'react';
 import { useMemo } from 'preact/hooks';
 import { calculateSleepTimes, calculateNapTimes } from './calculations';
@@ -35,7 +29,6 @@ export default function SleepCalculator() {
 
   const napResults = useMemo(() => {
     if (inputs.mode === 'napTime') {
-      // Use current time for nap calculation
       const now = new Date();
       const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
       return calculateNapTimes(currentTime);
@@ -88,7 +81,6 @@ export default function SleepCalculator() {
     }
   };
 
-  // Generate share text based on mode
   const getShareText = () => {
     if (inputs.mode === 'napTime') {
       return 'Check out this Sleep Calculator with nap recommendations!';
@@ -101,7 +93,6 @@ export default function SleepCalculator() {
     return `Going to bed at ${inputs.bedTime}, I should wake at ${firstRec.wakeTime} for ${firstRec.sleepDuration} of sleep (${firstRec.cycles} cycles)`;
   };
 
-  // Generate print results
   const getPrintResults = () => {
     if (inputs.mode === 'napTime') {
       return napResults.map((nap) => ({
@@ -125,7 +116,6 @@ export default function SleepCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Mode Selection */}
             <div>
               <Label>What would you like to calculate?</Label>
               <ButtonGroup
@@ -136,7 +126,6 @@ export default function SleepCalculator() {
               />
             </div>
 
-            {/* Time Input - Wake Time Mode */}
             {inputs.mode === 'wakeTime' && (
               <div>
                 <Label htmlFor="wakeTime" required>
@@ -153,7 +142,6 @@ export default function SleepCalculator() {
               </div>
             )}
 
-            {/* Time Input - Bed Time Mode */}
             {inputs.mode === 'bedTime' && (
               <div>
                 <Label htmlFor="bedTime" required>
@@ -170,7 +158,6 @@ export default function SleepCalculator() {
               </div>
             )}
 
-            {/* Age Group - Not shown for nap mode */}
             {inputs.mode !== 'napTime' && (
               <div>
                 <Label>Age Group</Label>
@@ -183,7 +170,6 @@ export default function SleepCalculator() {
               </div>
             )}
 
-            {/* Fall Asleep Time - Not shown for nap mode */}
             {inputs.mode !== 'napTime' && (
               <Slider
                 value={inputs.fallAsleepMinutes}
@@ -204,9 +190,7 @@ export default function SleepCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Sleep Cycle Results */}
             {inputs.mode !== 'napTime' && (
               <>
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
@@ -247,7 +231,6 @@ export default function SleepCalculator() {
                   </div>
                 </div>
 
-                {/* Age-based recommendation */}
                 <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                   <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                     <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -278,7 +261,6 @@ export default function SleepCalculator() {
               </>
             )}
 
-            {/* Nap Results */}
             {inputs.mode === 'napTime' && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -306,12 +288,10 @@ export default function SleepCalculator() {
               </div>
             )}
 
-            {/* Tip of the Day */}
             <Alert variant="info" title="Sleep Tip">
               {result.tipOfTheDay}
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults result={getShareText()} calculatorName="Sleep Calculator" />
               <PrintResults title="Sleep Calculator Results" results={getPrintResults()} />

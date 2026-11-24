@@ -1,7 +1,3 @@
-/**
- * Fix failing tests by reading calculator signatures and generating proper test inputs
- */
-
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -11,7 +7,6 @@ const __dirname = path.dirname(__filename);
 
 const TESTS_DIR = path.join(__dirname, '../tests/calculations');
 
-// Tests that need fixing
 const FAILING_TESTS = [
   {
     testFile: '401k.test.ts',
@@ -111,7 +106,6 @@ import type { ComparisonInputs } from '../../src/components/calculators/Contract
   },
 ];
 
-// Specific test fixes
 const TEST_FIXES: Record<string, string> = {
   'remote-work-savings.test.ts': `import { describe, it, expect } from 'vitest';
 import { calculateRemoteWorkSavings } from '../../src/components/calculators/RemoteWorkSavingsCalculator/calculations';
@@ -521,7 +515,6 @@ async function main() {
     }
   }
 
-  // Fix 401k test
   const test401kPath = path.join(TESTS_DIR, '401k.test.ts');
   let content401k = fs.readFileSync(test401kPath, 'utf-8');
   content401k = content401k.replace('expect(result.totalContributions).toBe(53500);', 'expect(result.totalContributions).toBe(61000);');

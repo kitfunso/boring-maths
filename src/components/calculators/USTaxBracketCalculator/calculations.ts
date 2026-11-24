@@ -1,9 +1,3 @@
-/**
- * US Tax Bracket Calculator Calculations
- *
- * Calculates federal income tax using 2025 or 2026 tax brackets.
- */
-
 import type {
   USTaxBracketInputs,
   USTaxBracketResult,
@@ -88,7 +82,6 @@ export function formatPercent(value: number): string {
   return `${value.toFixed(2)}%`;
 }
 
-// Get tax bracket color for visualization
 export function getBracketColor(rate: number): string {
   const colors: Record<number, string> = {
     10: 'emerald',

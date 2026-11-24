@@ -1,9 +1,3 @@
-/**
- * Unit Converter - Type Definitions
- *
- * Convert between various units of measurement.
- */
-
 export type UnitCategory = 'length' | 'weight' | 'temperature' | 'volume' | 'area' | 'speed';
 
 export interface UnitOption {
@@ -27,7 +21,6 @@ export interface UnitConverterResult {
   formatted: string;
 }
 
-// Unit definitions by category
 export const UNITS: Record<UnitCategory, UnitOption[]> = {
   length: [
     { value: 'mm', label: 'Millimeters', toBase: (v) => v / 1000, fromBase: (v) => v * 1000 },

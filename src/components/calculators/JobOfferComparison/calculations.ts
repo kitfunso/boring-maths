@@ -1,9 +1,3 @@
-/**
- * Job Offer Comparison Calculator - Calculation Logic
- *
- * Pure functions for comparing two job offers by total compensation.
- */
-
 import type {
   JobOfferComparisonInputs,
   JobOfferComparisonResult,
@@ -13,39 +7,25 @@ import type {
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/** Working days per year (52 weeks * 5 days) */
 const WORKING_DAYS_PER_YEAR = 260;
 
-/** Average commute speed in mph for time calculations */
 const AVERAGE_COMMUTE_SPEED = 30;
 
-/** Standard work hours per day */
 const WORK_HOURS_PER_DAY = 8;
 
-/**
- * Floor a numeric input so a non-finite value (NaN/Infinity from a cleared or
- * partial field, e.g. Number('-')) becomes 0 instead of propagating to the UI.
- */
 const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
 
-/**
- * Calculate values for a single job offer
- */
 function calculateOffer(offer: JobOffer, inputs: JobOfferComparisonInputs): OfferCalculation {
   const hourlyTimeValue = safe(inputs.hourlyTimeValue);
   const costPerMile = safe(inputs.costPerMile);
   const contribution401k = safe(inputs.contribution401k);
   const { includeCommuteTime } = inputs;
 
-  // Base and bonus
   const baseSalary = safe(offer.baseSalary);
   const bonusAmount = baseSalary * safe(offer.bonusPercentage);
 
-  // Equity
   const equityValue = safe(offer.annualEquity);
 
-  // 401k match calculation
-  // Match is the lesser of: (contribution * match %) or (salary * match limit)
   const match401kLimit = safe(offer.match401kLimit);
   const contributionAmount = baseSalary * contribution401k;
   const maxMatchableAmount = baseSalary * match401kLimit;
@@ -55,40 +35,31 @@ function calculateOffer(offer: JobOffer, inputs: JobOfferComparisonInputs): Offe
       ? actualContribution * (safe(offer.match401kPercentage) / match401kLimit)
       : 0;
 
-  // Health benefits (employer value - employee cost)
   const annualHealthCost = safe(offer.healthInsuranceCost) * 12;
   const healthBenefitNet = safe(offer.healthBenefitValue) - annualHealthCost;
 
-  // PTO value (daily rate * days)
   const dailyRate = baseSalary / WORKING_DAYS_PER_YEAR;
   const ptoValue = dailyRate * safe(offer.ptoDays);
 
-  // Commute calculations
   const commuteDaysPerYear = WORKING_DAYS_PER_YEAR * (safe(offer.officeDaysPerWeek) / 5);
   const commuteDistance = safe(offer.commuteDistance);
-  const annualCommuteMiles = commuteDistance * 2 * commuteDaysPerYear; // round trip
+  const annualCommuteMiles = commuteDistance * 2 * commuteDaysPerYear;
   const commuteCost = annualCommuteMiles * costPerMile;
 
-  // Commute time value (opportunity cost)
   const dailyCommuteHours = (commuteDistance * 2) / AVERAGE_COMMUTE_SPEED;
   const annualCommuteHours = dailyCommuteHours * commuteDaysPerYear;
   const commuteTimeValue = includeCommuteTime ? annualCommuteHours * hourlyTimeValue : 0;
 
-  // Other benefits
   const otherBenefitsValue = safe(offer.otherBenefits);
 
-  // Signing bonus (counted at full value for first year comparison)
   const signingBonusValue = safe(offer.signingBonus);
 
-  // Totals
   const totalCashComp = baseSalary + bonusAmount + signingBonusValue;
   const totalComp =
     totalCashComp + equityValue + match401kValue + healthBenefitNet + otherBenefitsValue;
 
-  // Net after commute costs and time
   const netComp = totalComp - commuteCost - commuteTimeValue;
 
-  // Effective hourly rate
   const totalWorkHours = WORKING_DAYS_PER_YEAR * WORK_HOURS_PER_DAY;
   const totalHoursIncludingCommute = totalWorkHours + annualCommuteHours;
   const effectiveHourlyRate = netComp / totalHoursIncludingCommute;
@@ -111,9 +82,6 @@ function calculateOffer(offer: JobOffer, inputs: JobOfferComparisonInputs): Offe
   };
 }
 
-/**
- * Generate recommendation based on comparison
- */
 function generateRecommendation(
   offer1: OfferCalculation,
   offer2: OfferCalculation,
@@ -121,11 +89,9 @@ function generateRecommendation(
 ): JobOfferComparisonResult['recommendation'] {
   const considerations: string[] = [];
 
-  // Compare net compensation
   const netDiff = offer2.netComp - offer1.netComp;
   const netDiffPercent = (netDiff / offer1.netComp) * 100;
 
-  // Determine winner
   let winner: 1 | 2 | 'tie';
   let reason: string;
 
@@ -140,7 +106,6 @@ function generateRecommendation(
     reason = `${inputs.offer1.name} offers ${Math.abs(netDiffPercent).toFixed(1)}% higher net compensation.`;
   }
 
-  // Add considerations
   if (offer2.commuteCost > offer1.commuteCost * 1.5) {
     considerations.push(`${inputs.offer2.name} has significantly higher commute costs.`);
   } else if (offer1.commuteCost > offer2.commuteCost * 1.5) {
@@ -184,9 +149,6 @@ function generateRecommendation(
   return { winner, reason, considerations };
 }
 
-/**
- * Calculate job offer comparison
- */
 export function calculateComparison(inputs: JobOfferComparisonInputs): JobOfferComparisonResult {
   const { currency } = inputs;
 
@@ -215,9 +177,6 @@ export function calculateComparison(inputs: JobOfferComparisonInputs): JobOfferC
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',
@@ -226,9 +185,6 @@ export function formatCurrency(
   return formatCurrencyByRegion(value, currency, decimals);
 }
 
-/**
- * Format a number with sign (+ or -)
- */
 export function formatDifference(value: number, currency: Currency = 'USD'): string {
   const sign = value >= 0 ? '+' : '';
   return `${sign}${formatCurrency(value, currency)}`;

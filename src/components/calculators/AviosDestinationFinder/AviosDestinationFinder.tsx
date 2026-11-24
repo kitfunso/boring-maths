@@ -1,10 +1,3 @@
-/**
- * Avios Destination Finder - Preact Component
- *
- * Searches every BA destination at once by Avios budget, dates, region and
- * holiday type. Guide prices from BA's published reward table - NOT live
- * seat availability.
- */
 import { computeResults } from './calculations';
 import { inputsFromParams, paramsFromInputs } from './urlState';
 import {
@@ -73,9 +66,6 @@ function formatAvios(v: number | null): string {
 
 function ResultRow({ row }: { row: DestinationResult }) {
   const d = row.destination;
-  // Over-budget rows dim via muted text colour, not opacity: opacity-50 halved
-  // the contrast of already-muted subtext below WCAG AA and dimmed the
-  // "Over budget" cue that is supposed to stand out.
   return (
     <tr className={row.withinBudget ? '' : 'text-[var(--color-muted)]'}>
       <td className="py-2">
@@ -128,7 +118,6 @@ export default function AviosDestinationFinder() {
     compute: computeResults,
   });
 
-  // State saved before voucher types carries a boolean that priced 2-for-1 in every cabin.
   useEffect(() => {
     setInputs((prev) => {
       if (!('companionVoucher' in prev)) return prev;
@@ -139,20 +128,17 @@ export default function AviosDestinationFinder() {
     });
   }, [setInputs]);
 
-  // Shared-link params win over locally stored state, once, on mount.
   useEffect(() => {
     const patch = inputsFromParams(window.location.search);
     if (patch) setInputs((prev) => ({ ...prev, ...patch }));
   }, [setInputs]);
 
-  // Keep the address bar in sync so the current search is always shareable.
   useEffect(() => {
     const qs = paramsFromInputs(inputs);
     const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
     window.history.replaceState(null, '', url);
   }, [inputs]);
 
-  // The static price tables below the island follow the cabin via CSS keyed on this attribute.
   useEffect(() => {
     document.documentElement.dataset.aviosCabin = inputs.cabin;
     return () => {
@@ -289,7 +275,6 @@ export default function AviosDestinationFinder() {
                   onChange={(v) => {
                     const travellers = Number(v) as 1 | 2;
                     updateInput('travellers', travellers);
-                    // The voucher is a 2-for-1: solo trips drop it so nothing claims voucher pricing
                     if (travellers === 1) updateInput('voucher', 'none');
                   }}
                   options={[
@@ -398,10 +383,6 @@ export default function AviosDestinationFinder() {
               </Grid>
             )}
 
-            {/* Stacks below sm: a single-line justify-between squeezed the toggle
-                into wrapped text. sm:w-auto lets the select shrink-wrap its widest
-                option, so no fixed width can ever clip a sort label again (w-56
-                clipped "Best bang for your buck") */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="w-full sm:w-auto sm:flex-none">
                 <Label htmlFor="sortKey">Sort by</Label>
@@ -412,7 +393,6 @@ export default function AviosDestinationFinder() {
                   options={SORT_OPTIONS}
                 />
               </div>
-              {/* pb-3 optically centres the 24px track against the ~50px select */}
               <Toggle
                 checked={inputs.showOverBudget}
                 onChange={(v) => updateInput('showOverBudget', v)}
@@ -432,9 +412,6 @@ export default function AviosDestinationFinder() {
                       <th scope="col" className="text-left py-2">
                         Destination
                       </th>
-                      {/* Two-line headers keep the 8-column table inside the card at
-                          desktop widths; "Off-peak Avios" one-liners forced a 49px
-                          horizontal scroll that hid the Seats column */}
                       <th scope="col" className="text-right py-2 pl-3 whitespace-nowrap">
                         Off-peak
                         <div className="normal-case tracking-normal text-[10px] text-[var(--color-muted)]">

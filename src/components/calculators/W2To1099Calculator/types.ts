@@ -1,10 +1,3 @@
-/**
- * W2 to 1099 Calculator Types
- *
- * Convert W2 employee compensation to equivalent 1099 contractor rate.
- * Accounts for self-employment tax, benefits, and business expenses.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type InputMode = 'hourly' | 'salary';
@@ -29,18 +22,14 @@ export interface CostBreakdown {
 }
 
 export interface W2To1099CalculatorResult {
-  // Input values
   w2HourlyRate: number;
   w2AnnualSalary: number;
 
-  // Equivalent rates
   equivalent1099Hourly: number;
   equivalent1099Annual: number;
 
-  // Multiplier
   multiplier: number;
 
-  // Breakdown
   selfEmploymentTax: number;
   employerFicaLoss: number;
   healthInsuranceCost: number;
@@ -49,54 +38,29 @@ export interface W2To1099CalculatorResult {
   otherBenefitsLoss: number;
   businessExpenses: number;
 
-  // Totals
   totalW2Value: number;
   totalAdditionalCosts: number;
 
-  // Billable hours
   billableHoursRatio: number;
   annualBillableHours: number;
 
-  // Breakdown for display
   breakdown: CostBreakdown[];
 }
 
-/**
- * Self-employment tax rates on 92.35% of net self-employment income
- * 12.4% Social Security (up to the wage base) + 2.9% Medicare (all income) = 15.3%
- */
 export const SOCIAL_SECURITY_SE_RATE = 0.124;
 export const MEDICARE_SE_RATE = 0.029;
 export const SE_TAX_BASE_MULTIPLIER = 0.9235;
 
-/**
- * Employer FICA rate (what employer pays for W2)
- * 7.65% (6.2% Social Security + 1.45% Medicare)
- */
 export const EMPLOYER_FICA_RATE = 0.0765;
 
-/**
- * Standard work assumptions
- */
 export const HOURS_PER_WEEK = 40;
 export const WEEKS_PER_YEAR = 52;
 export const WORKING_DAYS_PER_YEAR = 260;
-export const STANDARD_ANNUAL_HOURS = HOURS_PER_WEEK * WEEKS_PER_YEAR; // 2080
-
-/**
- * Typical billable hours ratio for contractors
- * Accounts for admin, marketing, unbillable time
- */
+export const STANDARD_ANNUAL_HOURS = HOURS_PER_WEEK * WEEKS_PER_YEAR;
 export const BILLABLE_HOURS_RATIO = 0.85;
 
-/**
- * Estimated monthly business expenses for contractors
- */
 export const MONTHLY_BUSINESS_EXPENSES = 300;
 
-/**
- * US States for dropdown
- */
 export const US_STATES = [
   { value: 'none', label: 'No State Tax' },
   { value: 'AL', label: 'Alabama' },

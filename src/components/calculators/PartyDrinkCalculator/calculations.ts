@@ -1,10 +1,3 @@
-/**
- * Party Drink Calculator (Non-Alcoholic) - Calculation Logic
- *
- * Pure functions for calculating non-alcoholic drink quantities for parties.
- * Accounts for weather, event type, and guest demographics.
- */
-
 import type { Currency } from '../../../lib/regions';
 import type {
   PartyDrinkInputs,
@@ -16,9 +9,6 @@ import type {
 } from './types';
 import { DRINKS_PER_HOUR, CHILD_DRINK_MULTIPLIER } from './types';
 
-/**
- * Base drink prices by currency (approximate retail)
- */
 const DRINK_PRICES: Record<Currency, Record<string, number>> = {
   USD: {
     soda_2liter: 2.5,
@@ -67,9 +57,6 @@ const DRINK_PRICES: Record<Currency, Record<string, number>> = {
   },
 };
 
-/**
- * Drink preference ratios by event type
- */
 const EVENT_DRINK_RATIOS: Record<EventType, Record<string, number>> = {
   kids_party: {
     soft_drinks: 0.25,
@@ -101,9 +88,6 @@ const EVENT_DRINK_RATIOS: Record<EventType, Record<string, number>> = {
   },
 };
 
-/**
- * Weather adjustments to drink ratios
- */
 const WEATHER_RATIO_ADJUSTMENTS: Record<WeatherCondition, Record<string, number>> = {
   cold: {
     soft_drinks: -0.1,
@@ -135,28 +119,20 @@ const WEATHER_RATIO_ADJUSTMENTS: Record<WeatherCondition, Record<string, number>
   },
 };
 
-/**
- * Calculate total drinks needed
- */
 function calculateTotalDrinks(inputs: PartyDrinkInputs): number {
   const { guestCount, childrenCount, eventDuration, weather } = inputs;
 
   const adultCount = guestCount - childrenCount;
   const drinksPerHour = DRINKS_PER_HOUR[weather];
 
-  // Adults drink at full rate, children at reduced rate
   const adultDrinks = adultCount * drinksPerHour * eventDuration;
   const childDrinks = childrenCount * drinksPerHour * CHILD_DRINK_MULTIPLIER * eventDuration;
 
-  // Add 15% buffer
   const totalDrinks = (adultDrinks + childDrinks) * 1.15;
 
   return Math.ceil(totalDrinks);
 }
 
-/**
- * Get adjusted drink ratios based on event type and weather
- */
 function getAdjustedRatios(
   eventType: EventType,
   weather: WeatherCondition,
@@ -165,19 +141,16 @@ function getAdjustedRatios(
   const baseRatios = { ...EVENT_DRINK_RATIOS[eventType] };
   const adjustments = WEATHER_RATIO_ADJUSTMENTS[weather];
 
-  // Apply weather adjustments
   for (const category in baseRatios) {
     baseRatios[category] = Math.max(0, baseRatios[category] + (adjustments[category] || 0));
   }
 
-  // Zero out excluded categories
   for (const category in baseRatios) {
     if (!includedCategories.includes(category)) {
       baseRatios[category] = 0;
     }
   }
 
-  // Normalize to 100%
   const total = Object.values(baseRatios).reduce((sum, val) => sum + val, 0);
   if (total > 0) {
     for (const category in baseRatios) {
@@ -188,9 +161,6 @@ function getAdjustedRatios(
   return baseRatios;
 }
 
-/**
- * Calculate soft drink quantities
- */
 function calculateSoftDrinks(
   servingsNeeded: number,
   currency: Currency,
@@ -199,13 +169,10 @@ function calculateSoftDrinks(
   const prices = DRINK_PRICES[currency];
   const drinks: DrinkQuantity[] = [];
 
-  // 2-liter bottles provide about 8 servings
   const twoLiterServings = 8;
-  // 12-pack cans provide 12 servings
   const canServings = 12;
 
   if (hasKids) {
-    // Mix of bottles and cans for variety
     const canPortionServings = Math.ceil(servingsNeeded * 0.4);
     const bottlePortionServings = servingsNeeded - canPortionServings;
 
@@ -232,7 +199,6 @@ function calculateSoftDrinks(
       });
     }
   } else {
-    // Primarily 2-liter bottles for adults
     const bottlesNeeded = Math.ceil(servingsNeeded / twoLiterServings);
     drinks.push({
       name: 'Soda (2-liter bottles)',
@@ -247,9 +213,6 @@ function calculateSoftDrinks(
   return drinks;
 }
 
-/**
- * Calculate juice quantities
- */
 function calculateJuice(
   servingsNeeded: number,
   currency: Currency,
@@ -258,12 +221,9 @@ function calculateJuice(
   const prices = DRINK_PRICES[currency];
   const drinks: DrinkQuantity[] = [];
 
-  // Gallon provides about 16 servings (8oz each)
   const gallonServings = 16;
-  // Juice box pack (10 count)
   const juiceBoxServings = 10;
 
-  // If many kids, include juice boxes
   if (childrenCount > 3) {
     const juiceBoxPortionServings = Math.min(childrenCount * 2, Math.ceil(servingsNeeded * 0.4));
     const gallonPortionServings = servingsNeeded - juiceBoxPortionServings;
@@ -307,9 +267,6 @@ function calculateJuice(
   return drinks;
 }
 
-/**
- * Calculate water quantities
- */
 function calculateWater(
   servingsNeeded: number,
   currency: Currency,
@@ -318,12 +275,9 @@ function calculateWater(
   const prices = DRINK_PRICES[currency];
   const drinks: DrinkQuantity[] = [];
 
-  // Case of 24 bottles
   const caseServings = 24;
-  // 12-pack sparkling
   const sparklingServings = 12;
 
-  // Formal events get more sparkling water
   if (eventType === 'formal') {
     const sparklingPortion = Math.ceil(servingsNeeded * 0.4);
     const stillPortion = servingsNeeded - sparklingPortion;
@@ -365,19 +319,13 @@ function calculateWater(
   return drinks;
 }
 
-/**
- * Calculate hot beverage quantities
- */
 function calculateHotBeverages(servingsNeeded: number, currency: Currency): DrinkQuantity[] {
   const prices = DRINK_PRICES[currency];
   const drinks: DrinkQuantity[] = [];
 
-  // 1 lb coffee makes about 48 cups
   const coffeeServingsPerLb = 48;
-  // Tea box (20 bags)
   const teaServingsPerBox = 20;
 
-  // Split 60/40 between coffee and tea
   const coffeeServings = Math.ceil(servingsNeeded * 0.6);
   const teaServings = servingsNeeded - coffeeServings;
 
@@ -407,13 +355,9 @@ function calculateHotBeverages(servingsNeeded: number, currency: Currency): Drin
   return drinks;
 }
 
-/**
- * Calculate punch/lemonade quantities
- */
 function calculatePunch(servingsNeeded: number, currency: Currency): DrinkQuantity[] {
   const prices = DRINK_PRICES[currency];
 
-  // One punch mix makes about 32 servings (2 gallons)
   const servingsPerMix = 32;
   const mixesNeeded = Math.ceil(servingsNeeded / servingsPerMix);
 
@@ -429,9 +373,6 @@ function calculatePunch(servingsNeeded: number, currency: Currency): DrinkQuanti
   ];
 }
 
-/**
- * Calculate ice requirements
- */
 function calculateIce(
   totalServings: number,
   weather: WeatherCondition,
@@ -440,10 +381,8 @@ function calculateIce(
 ): IceRequirements {
   const prices = DRINK_PRICES[currency];
 
-  // Base: 1 lb ice per 2 servings
   let poundsPerServing = 0.5;
 
-  // Adjust for weather
   const weatherMultipliers: Record<WeatherCondition, number> = {
     cold: 0.5,
     mild: 1.0,
@@ -453,11 +392,10 @@ function calculateIce(
 
   poundsPerServing *= weatherMultipliers[weather];
 
-  // Longer events need more ice (melting)
   const durationMultiplier = 1 + (eventDuration - 2) * 0.1;
 
   const poundsNeeded = Math.ceil(totalServings * poundsPerServing * durationMultiplier);
-  const bagsNeeded = Math.ceil(poundsNeeded / 10); // 10 lb bags
+  const bagsNeeded = Math.ceil(poundsNeeded / 10);
 
   return {
     poundsNeeded,
@@ -466,9 +404,6 @@ function calculateIce(
   };
 }
 
-/**
- * Calculate party drink quantities
- */
 export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult {
   const {
     currency,
@@ -486,7 +421,6 @@ export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult
 
   const prices = DRINK_PRICES[currency];
 
-  // Determine which categories are included
   const includedCategories: string[] = [];
   if (includeSoftDrinks) includedCategories.push('soft_drinks');
   if (includeJuice) includedCategories.push('juice');
@@ -494,19 +428,15 @@ export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult
   if (includeHotBeverages) includedCategories.push('hot');
   if (includePunch) includedCategories.push('punch');
 
-  // Calculate total drinks needed
   const totalDrinks = calculateTotalDrinks(inputs);
 
-  // Get adjusted ratios
   const ratios = getAdjustedRatios(eventType, weather, includedCategories);
 
-  // Calculate servings needed per category
   const categoryServings: Record<string, number> = {};
   for (const category in ratios) {
     categoryServings[category] = Math.ceil(totalDrinks * ratios[category]);
   }
 
-  // Build drinks list
   const drinks: DrinkQuantity[] = [];
 
   if (includeSoftDrinks && categoryServings.soft_drinks > 0) {
@@ -529,15 +459,12 @@ export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult
     drinks.push(...calculatePunch(categoryServings.punch, currency));
   }
 
-  // Calculate totals
   const totalServings = drinks.reduce((sum, d) => sum + d.servings, 0);
   const drinksCost = drinks.reduce((sum, d) => sum + d.estimatedCost, 0);
 
-  // Calculate ice
   const ice = calculateIce(totalServings, weather, eventDuration, currency);
 
-  // Calculate supplies
-  const cupsNeeded = Math.ceil(guestCount * 2.5); // 2.5 cups per person
+  const cupsNeeded = Math.ceil(guestCount * 2.5);
   const cupPacks = Math.ceil(cupsNeeded / 50);
 
   const napkinsNeeded = Math.ceil(guestCount * 3);
@@ -587,9 +514,6 @@ export function calculatePartyDrinks(inputs: PartyDrinkInputs): PartyDrinkResult
   };
 }
 
-/**
- * Format currency value for display
- */
 export function formatCurrency(value: number, currency: Currency): string {
   const symbols: Record<Currency, string> = {
     USD: '$',
@@ -601,9 +525,6 @@ export function formatCurrency(value: number, currency: Currency): string {
   return `${symbol}${value.toFixed(2)}`;
 }
 
-/**
- * Format number with commas
- */
 export function formatNumber(value: number): string {
   return new Intl.NumberFormat('en-US').format(Math.round(value));
 }

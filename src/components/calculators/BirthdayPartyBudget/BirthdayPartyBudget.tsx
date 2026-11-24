@@ -1,8 +1,3 @@
-/**
- * Birthday Party Budget Calculator - React Component
- *
- * Plan and estimate birthday party expenses for kids.
- */
 import { calculateBirthdayPartyBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -95,7 +90,6 @@ export default function BirthdayPartyBudget() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 Party Details
@@ -130,7 +124,6 @@ export default function BirthdayPartyBudget() {
                 />
               </Grid>
 
-              {/* Venue Type */}
               <div>
                 <Label>Venue</Label>
                 <ButtonGroup
@@ -140,7 +133,6 @@ export default function BirthdayPartyBudget() {
                 />
               </div>
 
-              {/* Party Style */}
               <div>
                 <Label>Party Style</Label>
                 <ButtonGroup
@@ -276,7 +268,6 @@ export default function BirthdayPartyBudget() {
               ))}
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Party Budget"
@@ -293,7 +284,6 @@ export default function BirthdayPartyBudget() {
                 />
               </Grid>
 
-              {/* Budget Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Budget Breakdown
@@ -319,7 +309,6 @@ export default function BirthdayPartyBudget() {
                 </div>
               </div>
 
-              {/* Itemized Costs */}
               <div className="bg-amber-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-700 uppercase tracking-wider mb-4">
                   Itemized Costs
@@ -340,7 +329,6 @@ export default function BirthdayPartyBudget() {
                 </div>
               </div>
 
-              {/* Age-Specific Suggestions */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Tips for {inputs.childAge}-Year-Olds
@@ -358,7 +346,6 @@ export default function BirthdayPartyBudget() {
                 </ul>
               </div>
 
-              {/* Savings Tips */}
               <Alert variant="tip" title="Money-Saving Tips">
                 <ul className="space-y-2 mt-2">
                   {result.savingsTips.slice(0, 4).map((tip, i) => (
@@ -370,7 +357,6 @@ export default function BirthdayPartyBudget() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Birthday Party Budget: ${fmt(result.totalBudget)} for ${inputs.numberOfKids} kids (${fmt(result.costPerChild)}/child). Style: ${inputs.partyStyle}, Venue: ${inputs.venueType}`}

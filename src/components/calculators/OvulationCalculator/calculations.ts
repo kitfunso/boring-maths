@@ -1,10 +1,3 @@
-/**
- * Ovulation Calculator - Calculation Logic
- *
- * Ovulation typically occurs 14 days before the next period.
- * Fertile window: 5 days before ovulation through the day after, since the egg lives up to 24 hours.
- */
-
 import type { OvulationInputs, OvulationResult, FertileWindow } from './types';
 import { getDefaultInputs } from './types';
 
@@ -37,7 +30,6 @@ function calculateCycle(periodDate: string, cycleLength: number): FertileWindow 
 }
 
 export function calculateOvulation(inputs: OvulationInputs): OvulationResult {
-  // A cleared date field or a stored bad value must not throw on every render
   const lastPeriodDate = isIsoDate(inputs.lastPeriodDate)
     ? inputs.lastPeriodDate
     : getDefaultInputs().lastPeriodDate;

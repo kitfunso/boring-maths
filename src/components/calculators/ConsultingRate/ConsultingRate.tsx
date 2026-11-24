@@ -1,8 +1,3 @@
-/**
- * Consulting Rate Calculator - React Component
- *
- * Calculate consulting rates based on desired income.
- */
 import { calculateConsultingRate } from './calculations';
 import { getDefaultInputs, type ConsultingRateInputs } from './types';
 import {
@@ -56,7 +51,6 @@ export default function ConsultingRate() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Income Goals
@@ -235,7 +229,6 @@ export default function ConsultingRate() {
               />
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Your Hourly Rate"
@@ -254,7 +247,6 @@ export default function ConsultingRate() {
                 />
               </Grid>
 
-              {/* The Key Insight Box */}
               <div className="bg-blue-900/40 rounded-xl p-6 border border-blue-500/30">
                 <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider mb-4">
                   Why $50/hr Employee != $50/hr Consultant
@@ -293,7 +285,6 @@ export default function ConsultingRate() {
                 </div>
               </div>
 
-              {/* Cost Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   What Your Rate Covers
@@ -329,7 +320,6 @@ export default function ConsultingRate() {
                 </div>
               </div>
 
-              {/* Project Rate Guide */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Project Rate Guide
@@ -364,7 +354,6 @@ export default function ConsultingRate() {
                 </div>
               </div>
 
-              {/* Insights */}
               <Alert variant="tip" title="Key Insights">
                 <ul className="space-y-2 mt-2">
                   {result.insights.slice(0, 4).map((insight, i) => (
@@ -376,7 +365,6 @@ export default function ConsultingRate() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Consulting Rate: ${fmtHr(result.hourlyRate)}/hr | ${fmt(result.dayRate)}/day | ${fmt(result.monthlyRetainer)}/month retainer`}

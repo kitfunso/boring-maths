@@ -1,12 +1,6 @@
-/**
- * UK Student Loan Calculations
- * Repayment projections for Plan 1, 2, 4, 5 and Postgrad
- */
-
 import type { UKStudentLoanInputs, UKStudentLoanResult, YearlyBreakdown } from './types';
 import { LOAN_PLANS } from './types';
 
-// Plan 2 from 1 Sept 2026 (gov.uk): RPI 4.1% plus up to 3 points scaled by income, then the 6% cap.
 const PLAN2_RPI = 0.041;
 const PLAN2_RATE_CAP = 0.06;
 const PLAN2_UPPER_THRESHOLD = 52885;
@@ -25,9 +19,6 @@ function getAnnualInterestRate(annualSalary: number, plan: keyof typeof LOAN_PLA
   return LOAN_PLANS[plan].interestRate;
 }
 
-/**
- * Calculate monthly repayment based on salary and loan plan
- */
 function calculateMonthlyRepayment(annualSalary: number, plan: keyof typeof LOAN_PLANS): number {
   const { threshold, rate } = LOAN_PLANS[plan];
 
@@ -37,9 +28,6 @@ function calculateMonthlyRepayment(annualSalary: number, plan: keyof typeof LOAN
   return annualRepayment / 12;
 }
 
-/**
- * Calculate annual repayment
- */
 function calculateAnnualRepayment(annualSalary: number, plan: keyof typeof LOAN_PLANS): number {
   const { threshold, rate } = LOAN_PLANS[plan];
 
@@ -48,9 +36,6 @@ function calculateAnnualRepayment(annualSalary: number, plan: keyof typeof LOAN_
   return (annualSalary - threshold) * rate;
 }
 
-/**
- * Project loan repayment over time
- */
 export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoanResult {
   const { loanBalance, annualSalary, salaryGrowth, loanPlan } = inputs;
   const plan = LOAN_PLANS[loanPlan];
@@ -65,14 +50,11 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
   let yearsToRepay = 0;
   const yearlyBreakdown: YearlyBreakdown[] = [];
 
-  // Project year by year until write-off or paid off
   for (let year = 1; year <= plan.writeOffYears && balance > 0; year++) {
-    // Calculate interest for the year (simplified - applied at year end)
     const interestCharged = balance * getAnnualInterestRate(currentSalary, loanPlan);
     balance += interestCharged;
     totalInterest += interestCharged;
 
-    // Calculate repayment for this year
     const annualRepayment = calculateAnnualRepayment(currentSalary, loanPlan);
     const actualRepayment = Math.min(annualRepayment, balance);
 
@@ -92,7 +74,6 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
       break;
     }
 
-    // Increase salary for next year
     currentSalary *= 1 + salaryGrowth / 100;
   }
 
@@ -103,7 +84,6 @@ export function calculateStudentLoan(inputs: UKStudentLoanInputs): UKStudentLoan
     yearsToRepay = plan.writeOffYears;
   }
 
-  // Calculate current monthly repayment
   const monthlyRepayment = calculateMonthlyRepayment(annualSalary, loanPlan);
   const firstYearRepayment = calculateAnnualRepayment(annualSalary, loanPlan);
 

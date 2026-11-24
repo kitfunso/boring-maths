@@ -1,7 +1,3 @@
-/**
- * Pizza Dough Calculator - Type Definitions
- */
-
 export type PizzaSize = '10' | '12' | '14' | '16';
 
 export type DoughStyle = 'neapolitan' | 'nyStyle' | 'detroit' | 'pan';
@@ -88,7 +84,6 @@ export const DOUGH_STYLES: readonly DoughStyleInfo[] = [
   },
 ];
 
-/** Base dough ball weight in grams for NY style by pizza size. */
 export const BASE_BALL_WEIGHTS: Readonly<Record<PizzaSize, number>> = {
   '10': 200,
   '12': 280,
@@ -96,7 +91,6 @@ export const BASE_BALL_WEIGHTS: Readonly<Record<PizzaSize, number>> = {
   '16': 480,
 };
 
-/** Multiplier applied to base ball weight per style. */
 export const STYLE_WEIGHT_MULTIPLIERS: Readonly<Record<DoughStyle, number>> = {
   neapolitan: 0.85,
   nyStyle: 1.0,
@@ -104,7 +98,6 @@ export const STYLE_WEIGHT_MULTIPLIERS: Readonly<Record<DoughStyle, number>> = {
   pan: 1.2,
 };
 
-/** Yeast conversion factors relative to instant yeast. */
 export const YEAST_MULTIPLIERS: Readonly<Record<YeastType, number>> = {
   instant: 1,
   'active-dry': 1.5,

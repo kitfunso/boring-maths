@@ -1,7 +1,3 @@
-/**
- * WeddingAlcohol Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateWeddingAlcohol } from '../../src/components/calculators/WeddingAlcohol/calculations';
 import type { WeddingAlcoholInputs } from '../../src/components/calculators/WeddingAlcohol/types';

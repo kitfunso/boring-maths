@@ -1,9 +1,3 @@
-/**
- * ROI Calculator - Preact Component
- *
- * Interactive calculator for return on investment with
- * real-time calculation and annualised ROI.
- */
 import { calculateROI, formatCurrency, formatPercentage } from './calculations';
 import {
   getDefaultInputs,
@@ -42,9 +36,6 @@ export default function ROICalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Calculate results reactively
-
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -52,7 +43,6 @@ export default function ROICalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your ROI"
           subtitle="Measure the return on your investment"
@@ -60,9 +50,7 @@ export default function ROICalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Initial Investment */}
             <div>
               <Label htmlFor="initialInvestment" required>
                 Initial Investment
@@ -78,7 +66,6 @@ export default function ROICalculator() {
               />
             </div>
 
-            {/* Input Mode Toggle */}
             <div>
               <Label>I know the</Label>
               <ButtonGroup
@@ -92,7 +79,6 @@ export default function ROICalculator() {
               />
             </div>
 
-            {/* Final Value or Gain Amount */}
             {inputs.inputMode === 'finalValue' ? (
               <div>
                 <Label htmlFor="finalValue" required>
@@ -124,7 +110,6 @@ export default function ROICalculator() {
               </div>
             )}
 
-            {/* Time Period */}
             <div>
               <Label htmlFor="timePeriod" required>
                 Time Period
@@ -158,16 +143,13 @@ export default function ROICalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Validity Warning */}
             {!result.isValid && (
               <Alert variant="warning" title="Invalid inputs">
                 Please enter a positive initial investment and a time period greater than zero.
               </Alert>
             )}
 
-            {/* Primary Result - ROI Percentage */}
             {result.isValid && (
               <>
                 <ResultCard
@@ -188,7 +170,6 @@ export default function ROICalculator() {
                   }
                 />
 
-                {/* Breakdown Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Total Gain / Loss"
@@ -214,14 +195,12 @@ export default function ROICalculator() {
                   />
                 </Grid>
 
-                {/* Contextual Tip */}
                 <Alert variant="tip" title="Understanding annualised ROI:">
                   Annualised ROI (CAGR) shows the equivalent yearly return, making it easier to
                   compare investments of different durations. A 50% ROI over 5 years is roughly
                   8.45% annualised.
                 </Alert>
 
-                {/* Share & Print Results */}
                 <div className="flex justify-center gap-3 pt-4">
                   <ShareResults
                     result={`ROI: ${formatPercentage(result.roiPercentage)} | Annualised: ${formatPercentage(result.annualisedROI)} | Gain: ${formatCurrency(result.totalGainLoss, result.currency)} over ${result.timeInYears} year${result.timeInYears === 1 ? '' : 's'}`}

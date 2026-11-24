@@ -1,8 +1,3 @@
-/**
- * UK Stamp Duty Calculator Types
- * Supports SDLT (England/NI), LBTT (Scotland), and LTT (Wales)
- */
-
 export type PropertyLocation = 'england' | 'scotland' | 'wales';
 export type BuyerType = 'first-time' | 'home-mover' | 'additional';
 

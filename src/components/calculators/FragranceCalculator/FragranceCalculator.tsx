@@ -1,7 +1,3 @@
-/**
- * Fragrance Load Calculator Component
- * Calculate fragrance oil amounts for candle making
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { FragranceInputs } from './types';
@@ -29,7 +25,6 @@ export function FragranceCalculator() {
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Wax Settings</h2>
@@ -166,7 +161,6 @@ export function FragranceCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 p-6 ring-1 ring-purple-500/30">
           <h2 className="mb-4 text-lg font-semibold text-purple-300">Fragrance Amount</h2>

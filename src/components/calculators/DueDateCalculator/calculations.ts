@@ -1,10 +1,6 @@
-/**
- * Due Date Calculator - Calculations
- */
-
 import type { DueDateInputs, DueDateResult, Milestone } from './types';
 
-const PREGNANCY_DAYS = 280; // 40 weeks
+const PREGNANCY_DAYS = 280;
 const MILESTONES_DATA = [
   { week: 4, name: 'Implantation', description: 'Embryo implants in uterus' },
   { week: 6, name: 'Heartbeat', description: 'Heart begins beating' },
@@ -22,7 +18,6 @@ const MILESTONES_DATA = [
   { week: 40, name: 'Due Date', description: 'Estimated due date' },
 ];
 
-// Floor a numeric input so a cleared/partial/invalid value (NaN) becomes 0.
 const safe = (v: number): number => (Number.isFinite(v) ? Math.max(0, v) : 0);
 
 export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
@@ -35,18 +30,15 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
   switch (inputs.method) {
     case 'lmp': {
       const lmp = new Date(inputs.lmpDate);
-      // Naegele's rule: LMP + 280 days (adjusted for cycle length)
       const adjustment = safe(inputs.cycleLength) - 28;
       dueDate = new Date(lmp);
       dueDate.setDate(dueDate.getDate() + PREGNANCY_DAYS + adjustment);
-      // Conception typically occurs around day 14 of cycle
       conceptionDate = new Date(lmp);
       conceptionDate.setDate(conceptionDate.getDate() + 14 + adjustment);
       break;
     }
     case 'conception': {
       conceptionDate = new Date(inputs.conceptionDate);
-      // Due date is 266 days after conception
       dueDate = new Date(conceptionDate);
       dueDate.setDate(dueDate.getDate() + 266);
       break;
@@ -54,8 +46,7 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     case 'ivf': {
       const ivfDate = new Date(inputs.ivfDate);
       conceptionDate = new Date(ivfDate);
-      // Adjust based on embryo day
-      const daysToAdd = inputs.ivfDayType === '3day' ? 263 : 261; // 266 - 3 or 266 - 5
+      const daysToAdd = inputs.ivfDayType === '3day' ? 263 : 261;
       dueDate = new Date(ivfDate);
       dueDate.setDate(dueDate.getDate() + daysToAdd);
       break;
@@ -63,7 +54,6 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     case 'ultrasound': {
       const usDate = new Date(inputs.ultrasoundDate);
       const gestationalDays = safe(inputs.ultrasoundWeeks) * 7 + safe(inputs.ultrasoundDays);
-      // Calculate LMP equivalent
       const lmpEquiv = new Date(usDate);
       lmpEquiv.setDate(lmpEquiv.getDate() - gestationalDays);
       dueDate = new Date(lmpEquiv);
@@ -74,12 +64,10 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     }
   }
 
-  // Calculate current gestational age
   let lmpEquivalent: Date;
   if (inputs.method === 'lmp') {
     lmpEquivalent = new Date(inputs.lmpDate);
   } else {
-    // Work backwards from due date
     lmpEquivalent = new Date(dueDate);
     lmpEquivalent.setDate(lmpEquivalent.getDate() - PREGNANCY_DAYS);
   }
@@ -91,7 +79,6 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
   const currentDays = daysSinceLMP % 7;
   const daysUntilDue = Math.ceil((dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-  // Determine trimester
   let trimester: 1 | 2 | 3;
   let trimesterName: string;
   if (currentWeeks < 13) {
@@ -105,7 +92,6 @@ export function calculateDueDate(inputs: DueDateInputs): DueDateResult {
     trimesterName = 'Third Trimester';
   }
 
-  // Calculate milestones
   const milestones: Milestone[] = MILESTONES_DATA.map((m) => {
     const milestoneDate = new Date(lmpEquivalent);
     milestoneDate.setDate(milestoneDate.getDate() + m.week * 7);

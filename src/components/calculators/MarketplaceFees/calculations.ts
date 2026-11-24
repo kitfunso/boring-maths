@@ -1,7 +1,3 @@
-/**
- * Marketplace Fees Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type {
   MarketplaceFeesInputs,
@@ -29,12 +25,10 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
 
   const platforms: PlatformFeeBreakdown[] = [];
 
-  // Calculate for each platform
   (['etsy', 'ebay', 'amazon'] as Platform[]).forEach((platformId) => {
     const config = PLATFORM_FEES[currency][platformId];
     const feeItems: { name: string; amount: number }[] = [];
 
-    // Listing fee
     if (config.fees.listingFee > 0) {
       feeItems.push({
         name: 'Listing Fee',
@@ -42,7 +36,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Transaction fee (on item + shipping for Etsy, varies by platform)
     const transactionBase = platformId === 'etsy' ? grossRevenue : itemPrice + shippingCharged;
     const transactionFee = transactionBase * config.fees.transactionFeeRate;
     if (transactionFee > 0) {
@@ -57,7 +50,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Payment processing
     if (config.fees.paymentProcessingRate > 0 || config.fees.paymentProcessingFixed > 0) {
       const processingFee =
         grossRevenue * config.fees.paymentProcessingRate + config.fees.paymentProcessingFixed;
@@ -67,7 +59,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Per-order fee
     if (config.fees.perOrderFee > 0) {
       feeItems.push({
         name: 'Per-Order Fee',
@@ -75,7 +66,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Etsy-specific: Offsite Ads
     if (platformId === 'etsy' && etsyOffsiteAds) {
       const adsRate =
         config.fees.additionalFees?.find((f) => f.name === 'Offsite Ads')?.rate || 0.15;
@@ -86,7 +76,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Etsy regulatory fee
     if (platformId === 'etsy') {
       const regRate =
         config.fees.additionalFees?.find((f) => f.name === 'Regulatory Fee')?.rate || 0.0035;
@@ -97,7 +86,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Amazon FBA fee
     if (platformId === 'amazon' && amazonFBA) {
       feeItems.push({
         name: 'FBA Fee',
@@ -105,26 +93,16 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
       });
     }
 
-    // Calculate totals
     const totalFees = feeItems.reduce((sum, item) => sum + item.amount, 0);
     const effectiveFeeRate = grossRevenue > 0 ? (totalFees / grossRevenue) * 100 : 0;
     const netAfterFees = grossRevenue - totalFees;
     const netProfit = netAfterFees - totalCostOfGoods;
     const profitMargin = grossRevenue > 0 ? (netProfit / grossRevenue) * 100 : 0;
 
-    // Calculate price needed for target margin
-    // targetMargin = (price - fees - costs) / price
-    // targetMargin * price = price - fees - costs
-    // fees = price * feeRate + fixedFees
-    // So: targetMargin * price = price - price*feeRate - fixedFees - costs
-    // targetMargin * price = price * (1 - feeRate) - fixedFees - costs
-    // price * (targetMargin - 1 + feeRate) = -fixedFees - costs
-    // price = (fixedFees + costs) / (1 - targetMargin/100 - feeRate)
-
     const variableFeeRate =
       config.fees.transactionFeeRate +
       config.fees.paymentProcessingRate +
-      (platformId === 'etsy' ? 0.0035 : 0) + // Regulatory
+      (platformId === 'etsy' ? 0.0035 : 0) +
       (platformId === 'etsy' && etsyOffsiteAds ? 0.15 : 0);
 
     const fixedFees =
@@ -154,7 +132,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
     });
   });
 
-  // Find best platforms
   const sortedByFees = [...platforms].sort((a, b) => a.totalFees - b.totalFees);
   const sortedByProfit = [...platforms].sort((a, b) => b.netProfit - a.netProfit);
 
@@ -164,7 +141,6 @@ export function calculateMarketplaceFees(inputs: MarketplaceFeesInputs): Marketp
   const feeDifferenceRange = sortedByFees[2].totalFees - sortedByFees[0].totalFees;
   const profitDifferenceRange = sortedByProfit[0].netProfit - sortedByProfit[2].netProfit;
 
-  // Generate insights
   const insights: string[] = [];
 
   if (lowestFeePlatform !== highestProfitPlatform) {

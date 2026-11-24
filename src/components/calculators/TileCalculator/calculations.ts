@@ -1,7 +1,3 @@
-/**
- * Tile Calculator - Calculation Logic
- */
-
 import type { TileCalculatorInputs, TileCalculatorResult } from './types';
 import { TILE_SIZES, PATTERN_WASTE, MATERIAL_PRICES } from './types';
 
@@ -23,53 +19,38 @@ export function calculateTile(inputs: TileCalculatorInputs): TileCalculatorResul
     includeBacker,
   } = inputs;
 
-  // Get tile dimensions in inches
   const [tileWidthIn, tileHeightIn] =
     tileSize === 'custom' ? [customTileWidth, customTileHeight] : TILE_SIZES[tileSize];
 
-  // Convert tile dimensions to feet
   const tileWidthFt = tileWidthIn / 12;
   const tileHeightFt = tileHeightIn / 12;
 
-  // Calculate area
   const totalAreaSqFt = areaLength * areaWidth;
 
-  // Get waste percentage
   const wastePercentage = PATTERN_WASTE[tilePattern];
   const areaWithWaste = totalAreaSqFt * (1 + wastePercentage);
 
-  // Calculate tile area including grout
   const groutWidthFt = groutWidth / 12;
   const tilePlusGroutWidth = tileWidthFt + groutWidthFt;
   const tilePlusGroutHeight = tileHeightFt + groutWidthFt;
   const tilePlusGroutArea = tilePlusGroutWidth * tilePlusGroutHeight;
 
-  // Tiles per square foot (accounting for grout)
   const tilesPerSqFt = 1 / tilePlusGroutArea;
 
-  // Total tiles needed
   const tilesNeeded = Math.ceil(areaWithWaste * tilesPerSqFt);
   const boxesNeeded = Math.ceil(tilesNeeded / tilesPerBox);
 
-  // Calculate grout needed
-  // Grout usage depends on tile size, grout width, and tile thickness
-  // Rough formula: (L+W) * D * T / 144 * Area where L,W=tile dims, D=grout depth (1/2"), T=grout thickness
-  const tilePerimeter = 2 * (tileWidthIn + tileHeightIn); // inches
-  const groutDepth = 0.5; // typical 1/2 inch depth
-  const groutVolumePerTile = (tilePerimeter * groutWidth * groutDepth) / 1728; // cubic feet
+  const tilePerimeter = 2 * (tileWidthIn + tileHeightIn);
+  const groutDepth = 0.5;
+  const groutVolumePerTile = (tilePerimeter * groutWidth * groutDepth) / 1728;
   const totalGroutCuFt = groutVolumePerTile * tilesNeeded;
-  // Grout weighs about 100 lbs per cubic foot
-  const groutLbs = Math.ceil(totalGroutCuFt * 100 * 1.1); // 10% extra
-  const groutBags = Math.ceil(groutLbs / 10); // 10 lb bags
-
-  // Adhesive calculation (thinset coverage: ~50 sq ft per bucket)
+  const groutLbs = Math.ceil(totalGroutCuFt * 100 * 1.1);
+  const groutBags = Math.ceil(groutLbs / 10);
   const adhesiveSqFt = areaWithWaste;
   const adhesiveBuckets = Math.ceil(adhesiveSqFt / 50);
 
-  // Backer board (3x5 ft sheets = 15 sq ft)
   const backerBoardSheets = Math.ceil(areaWithWaste / 15);
 
-  // Calculate costs
   const prices = MATERIAL_PRICES[currency];
   const tileCost = boxesNeeded * tilesPerBox * ((tileWidthIn * tileHeightIn) / 144) * tilePrice;
   const groutCost = includeGrout ? groutBags * prices.groutPerBag : 0;
@@ -77,7 +58,6 @@ export function calculateTile(inputs: TileCalculatorInputs): TileCalculatorResul
   const backerCost = includeBacker ? backerBoardSheets * prices.backerPerSheet : 0;
   const totalCost = tileCost + groutCost + adhesiveCost + backerCost;
 
-  // Tips
   const tips: string[] = [];
 
   if (surfaceType === 'shower' && !includeBacker) {

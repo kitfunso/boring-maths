@@ -1,7 +1,3 @@
-/**
- * Streaming Value Calculator - Calculation Logic
- */
-
 import type {
   StreamingValueInputs,
   StreamingValueResult,
@@ -9,10 +5,6 @@ import type {
   ValueRating,
 } from './types';
 
-/**
- * Determine value rating based on cost per hour.
- * Under $1/hr = great, $1-2 = good, $2-4 = fair, above $4 = poor.
- */
 function rateValue(costPerHour: number): ValueRating {
   if (costPerHour <= 1) return 'great';
   if (costPerHour <= 2) return 'good';
@@ -20,9 +12,6 @@ function rateValue(costPerHour: number): ValueRating {
   return 'poor';
 }
 
-/**
- * Calculate streaming value metrics for all enabled subscriptions.
- */
 export function calculateStreamingValue(inputs: StreamingValueInputs): StreamingValueResult {
   const enabled = inputs.subscriptions.filter((s) => s.enabled);
 
@@ -62,7 +51,6 @@ export function calculateStreamingValue(inputs: StreamingValueInputs): Streaming
   const bestValue = sorted[0]?.name ?? '';
   const worstValue = sorted[sorted.length - 1]?.name ?? '';
 
-  // Recommend cutting the service with the worst cost-per-hour ratio
   const recommendedCut =
     sorted.length > 1 && sorted[sorted.length - 1].valueRating === 'poor'
       ? sorted[sorted.length - 1].name
@@ -78,16 +66,10 @@ export function calculateStreamingValue(inputs: StreamingValueInputs): Streaming
   };
 }
 
-/**
- * Format a dollar amount with 2 decimal places.
- */
 export function formatDollars(value: number): string {
   return `$${value.toFixed(2)}`;
 }
 
-/**
- * Format cost per hour for display.
- */
 export function formatCostPerHour(value: number): string {
   if (value >= 999) return '$--';
   return `$${value.toFixed(2)}/hr`;

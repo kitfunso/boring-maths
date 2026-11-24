@@ -1,7 +1,3 @@
-/**
- * Fragrance Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateFragrance } from '../../src/components/calculators/FragranceCalculator/calculations';
 import type { FragranceInputs } from '../../src/components/calculators/FragranceCalculator/types';
@@ -19,7 +15,6 @@ describe('FragranceCalculator', () => {
 
       const result = calculateFragrance(inputs);
 
-      // 10% of 8oz = 0.8oz fragrance
       expect(result.fragranceAmount).toBeCloseTo(0.8, 1);
       expect(result.totalWeight).toBeCloseTo(8.8, 1);
       expect(result.isWithinLimit).toBe(true);
@@ -36,7 +31,6 @@ describe('FragranceCalculator', () => {
 
       const result = calculateFragrance(inputs);
 
-      // Soy 464 max is 10%, so 15% should exceed
       expect(result.isWithinLimit).toBe(false);
     });
 

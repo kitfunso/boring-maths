@@ -1,8 +1,3 @@
-/**
- * BMI Calculator - React Component
- *
- * Calculate Body Mass Index with health category classification.
- */
 import { calculateBMI } from './calculations';
 import {
   getDefaultInputs,
@@ -33,7 +28,6 @@ export default function BMICalculator() {
   });
 
   const handleUnitChange = (system: UnitSystem) => {
-    // Convert values when switching units
     if (system === 'imperial' && inputs.unitSystem === 'metric') {
       const totalInches = inputs.heightCm / 2.54;
       const feet = Math.floor(totalInches / 12);
@@ -87,7 +81,6 @@ export default function BMICalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System */}
             <div>
               <Label>Unit System</Label>
               <ButtonGroup
@@ -98,7 +91,6 @@ export default function BMICalculator() {
               />
             </div>
 
-            {/* Height */}
             {inputs.unitSystem === 'metric' ? (
               <div>
                 <Label htmlFor="heightCm" required>
@@ -144,7 +136,6 @@ export default function BMICalculator() {
               </Grid>
             )}
 
-            {/* Weight */}
             <div>
               <Label htmlFor="weight" required>
                 Weight ({weightUnit})
@@ -168,9 +159,7 @@ export default function BMICalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* BMI Score */}
             <div
               className={`rounded-2xl p-8 text-center border-2 ${getCategoryStyles(result.categoryColor)}`}
             >
@@ -179,7 +168,6 @@ export default function BMICalculator() {
               <p className="text-sm opacity-75">BMI Category</p>
             </div>
 
-            {/* BMI Scale */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 BMI Categories
@@ -201,7 +189,6 @@ export default function BMICalculator() {
               </div>
             </div>
 
-            {/* Health Info */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -233,7 +220,6 @@ export default function BMICalculator() {
               provider for a complete assessment.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`My BMI: ${result.bmi} (${result.category}) - Healthy range: ${result.healthyWeightRange.min}-${result.healthyWeightRange.max} ${weightUnit}`}

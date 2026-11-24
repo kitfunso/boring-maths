@@ -3,44 +3,20 @@ import { CURRENCY_OPTIONS, type Currency } from '../../../lib/regions';
 
 const STORAGE_KEY = 'boring-math-currency';
 
-// Use useLayoutEffect on client, useEffect on server
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 export interface CurrencySelectorProps {
-  /** Currently selected currency */
   value: Currency;
-  /** Change handler */
   onChange: (currency: Currency) => void;
-  /** Additional class names */
   className?: string;
 }
 
-/**
- * Currency dropdown for calculator headers.
- * Syncs with global currency preference stored in localStorage.
- *
- * @example
- * ```tsx
- * <CalculatorHeader
- *   title="My Calculator"
- *   actions={
- *     <CurrencySelector
- *       value={inputs.currency}
- *       onChange={handleCurrencyChange}
- *     />
- *   }
- * />
- * ```
- */
 export function CurrencySelector({ value, onChange, className = '' }: CurrencySelectorProps) {
-  // Ref to the select element for direct DOM manipulation
   const selectRef = useRef<HTMLSelectElement>(null);
 
-  // Keep refs to avoid stale closures in event handlers
   const valueRef = useRef(value);
   const onChangeRef = useRef(onChange);
 
-  // Update refs when props change
   useEffect(() => {
     valueRef.current = value;
     onChangeRef.current = onChange;
@@ -53,7 +29,6 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
     }
   }, [value]);
 
-  // Sync with global currency preference
   const syncWithGlobal = () => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && ['USD', 'GBP', 'EUR'].includes(stored) && stored !== valueRef.current) {
@@ -61,15 +36,12 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
     }
   };
 
-  // Sync on mount (synchronously before paint)
   useIsomorphicLayoutEffect(() => {
     syncWithGlobal();
   }, []);
 
-  // Re-sync on Astro View Transitions navigation
   useEffect(() => {
     const handlePageLoad = () => {
-      // Small delay to ensure localStorage is updated
       setTimeout(syncWithGlobal, 0);
     };
 
@@ -77,7 +49,6 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
     return () => document.removeEventListener('astro:page-load', handlePageLoad);
   }, []);
 
-  // Listen for changes from other calculators/homepage
   useEffect(() => {
     const handler = (e: CustomEvent<{ currency: Currency }>) => {
       const newCurrency = e.detail.currency;
@@ -88,20 +59,17 @@ export function CurrencySelector({ value, onChange, className = '' }: CurrencySe
 
     window.addEventListener('currencyChange', handler as EventListener);
     return () => window.removeEventListener('currencyChange', handler as EventListener);
-  }, []); // Stable handler using refs
+  }, []);
 
   const handleChange = (newCurrency: Currency) => {
-    // Save to localStorage
     localStorage.setItem(STORAGE_KEY, newCurrency);
 
-    // Notify other calculators
     window.dispatchEvent(
       new CustomEvent('currencyChange', {
         detail: { currency: newCurrency },
       })
     );
 
-    // Update local state
     onChange(newCurrency);
   };
 

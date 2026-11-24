@@ -2,19 +2,14 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    // Use jsdom for DOM testing
     environment: 'jsdom',
 
-    // Enable globals like describe, it, expect
     globals: true,
 
-    // Setup files run before each test file
     setupFiles: ['./tests/setup.ts'],
 
-    // Include test files
     include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
 
-    // Coverage configuration
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -28,9 +23,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      // Match the project's import aliases if any
       '@': '/src',
-      // Preact compat aliases (mirrors Astro's @astrojs/preact compat mode)
       react: 'preact/compat',
       'react-dom': 'preact/compat',
       'react/jsx-runtime': 'preact/jsx-runtime',

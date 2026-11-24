@@ -1,9 +1,3 @@
-/**
- * US Capital Gains Tax Calculator Types
- *
- * Calculate short-term and long-term capital gains tax with NIIT.
- */
-
 export type FilingStatus =
   | 'single'
   | 'married_jointly'
@@ -38,7 +32,6 @@ export interface USCapitalGainsResult {
   } | null;
 }
 
-// 2026 Long-Term Capital Gains Brackets (Rev. Proc. 2025-32, section 4.03)
 export const LTCG_BRACKETS_2026 = {
   single: [
     { max: 49450, rate: 0 },
@@ -62,7 +55,6 @@ export const LTCG_BRACKETS_2026 = {
   ],
 };
 
-// NIIT (Net Investment Income Tax) Thresholds
 export const NIIT_THRESHOLDS: Record<FilingStatus, number> = {
   single: 200000,
   married_jointly: 250000,
@@ -70,7 +62,7 @@ export const NIIT_THRESHOLDS: Record<FilingStatus, number> = {
   head_of_household: 200000,
 };
 
-export const NIIT_RATE = 0.038; // 3.8%
+export const NIIT_RATE = 0.038;
 
 export const ASSET_TYPE_LABELS: Record<AssetType, string> = {
   stocks: 'Stocks/ETFs',

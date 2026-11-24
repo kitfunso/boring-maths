@@ -1,8 +1,3 @@
-/**
- * Pricing Calculator - React Component
- *
- * Calculate optimal product pricing using multiple strategies.
- */
 import { calculatePricing } from './calculations';
 import {
   getDefaultInputs,
@@ -62,7 +57,6 @@ export default function PricingCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
                 Your Costs
@@ -196,7 +190,6 @@ export default function PricingCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Recommended Price"
@@ -215,7 +208,6 @@ export default function PricingCalculator() {
                 <MetricCard label="Annual Profit" value={fmtInt(result.annualProfit)} />
               </Grid>
 
-              {/* Strategy Comparison */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Strategy Comparison
@@ -270,7 +262,6 @@ export default function PricingCalculator() {
                 </div>
               </div>
 
-              {/* Price Range */}
               <div className="bg-amber-900/30 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider mb-3">
                   Your Price Range
@@ -306,7 +297,6 @@ export default function PricingCalculator() {
                 </p>
               </div>
 
-              {/* Insights */}
               {result.insights.length > 0 && (
                 <Alert variant="tip" title="Pricing Insights">
                   <ul className="space-y-2 mt-2">
@@ -328,7 +318,6 @@ export default function PricingCalculator() {
                 </Alert>
               )}
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Pricing Analysis: ${fmt(result.recommendedPrice)} recommended (${result.recommendedMarginPercent}% margin) - Monthly profit: ${fmtInt(result.monthlyProfit)}`}

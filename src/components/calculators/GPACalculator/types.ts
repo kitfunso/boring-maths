@@ -1,9 +1,3 @@
-/**
- * GPA Calculator Types
- *
- * Calculate cumulative and semester GPA based on course grades and credit hours.
- */
-
 export type GradeScale = '4.0' | '4.3';
 
 export interface Course {
@@ -30,7 +24,6 @@ export interface GPACalculatorResult {
   letterGrade: string;
 }
 
-// Standard 4.0 scale
 export const gradePoints4_0: Record<string, number> = {
   A: 4.0,
   'A-': 3.7,
@@ -46,7 +39,6 @@ export const gradePoints4_0: Record<string, number> = {
   F: 0.0,
 };
 
-// 4.3 scale (A+ = 4.3)
 export const gradePoints4_3: Record<string, number> = {
   'A+': 4.3,
   A: 4.0,

@@ -1,7 +1,3 @@
-/**
- * 401kCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculate401k } from '../../src/components/calculators/401kCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/401kCalculator/types';

@@ -1,5 +1,3 @@
-/** Contractor vs Employee Calculator types: compares contractor/freelance rates against full-time employment, accounting for hidden costs like self-employment tax, benefits, and retirement. */
-
 import { type Currency } from '../../../lib/regions';
 import type { FederalFilingStatus } from '../../../lib/us-tax-2026';
 
@@ -10,30 +8,30 @@ export type HealthInsuranceType = 'employer' | 'marketplace' | 'spouse' | 'none'
 export interface ContractorVsEmployeeInputs {
   contractorHourlyRate: number;
   contractorBillableHoursPerWeek: number;
-  contractorWeeksPerYear: number; // Account for unpaid time off
+  contractorWeeksPerYear: number;
 
   employeeSalary: number;
-  employeeBonusPercent: number; // Annual bonus as percentage
+  employeeBonusPercent: number;
 
-  employer401kMatch: number; // Percentage match (e.g., 6%)
-  employer401kMatchLimit: number; // Max percentage they match up to
-  employerHealthInsuranceMonthly: number; // What employer pays monthly
+  employer401kMatch: number;
+  employer401kMatchLimit: number;
+  employerHealthInsuranceMonthly: number;
   employerDentalVisionMonthly: number;
   employerLifeDisabilityMonthly: number;
   paidTimeOffDays: number;
   paidHolidaysDays: number;
-  otherBenefitsAnnual: number; // Stock, perks, etc.
+  otherBenefitsAnnual: number;
 
   contractorHealthInsuranceMonthly: number;
-  contractorRetirementContribPercent: number; // SEP-IRA, Solo 401k contribution
-  contractorBusinessExpensesMonthly: number; // Software, equipment, coworking
+  contractorRetirementContribPercent: number;
+  contractorBusinessExpensesMonthly: number;
   contractorAccountingAnnual: number;
-  contractorInsuranceAnnual: number; // Liability, E&O insurance
+  contractorInsuranceAnnual: number;
 
-  filingStatus: FederalFilingStatus; // USD only
-  stateTaxRate: number; // USD only: flat state rate on AGI, as a decimal
-  euCountry: string; // EUR only: a euro country code from EU_TAX_DATA
-  selfEmployedSocialRate: number; // EUR only, as a decimal; US and UK contractors use the law
+  filingStatus: FederalFilingStatus;
+  stateTaxRate: number;
+  euCountry: string;
+  selfEmployedSocialRate: number;
 
   currency: Currency;
 }
@@ -52,7 +50,7 @@ export interface CompensationBreakdown {
   retirementContribution: number;
   businessExpenses: number;
   professionalServices: number;
-  socialTax: number; // contractor: SE tax, Class 4 NI or social contributions; employee: their share
+  socialTax: number;
   incomeTax: number;
 
   totalCompensation: number;
@@ -67,11 +65,11 @@ export interface ComparisonMetrics {
   monthlyDifference: number;
   percentageDifference: number;
 
-  breakEvenContractRate: number; // Rate contractor needs to match employee
-  breakEvenSalary: number; // Salary employee needs to match contractor
+  breakEvenContractRate: number;
+  breakEvenSalary: number;
 
-  rateToSalaryMultiplier: number; // How many times salary the hourly rate represents
-  recommendedContractRate: number; // Rate to match employee total comp
+  rateToSalaryMultiplier: number;
+  recommendedContractRate: number;
 }
 
 export interface LineItem {

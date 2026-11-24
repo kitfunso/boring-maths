@@ -1,24 +1,17 @@
-/**
- * Screen Time Calculator - Calculation Logic
- */
-
 import type { ScreenTimeInputs, ScreenTimeResult, OpportunityCost, AgeGroup } from './types';
 
-/** Average daily screen time by age group (hours) */
 const AGE_GROUP_AVERAGES: Readonly<Record<AgeGroup, number>> = {
   child: 4.5,
   teen: 7.0,
   adult: 6.5,
 };
 
-/** Remaining life expectancy by age group (years) */
 const LIFE_EXPECTANCY_REMAINING: Readonly<Record<AgeGroup, number>> = {
   child: 70,
   teen: 63,
   adult: 50,
 };
 
-/** Hours required to complete each opportunity cost activity */
 const OPPORTUNITY_HOURS = {
   book: 6,
   language: 600,

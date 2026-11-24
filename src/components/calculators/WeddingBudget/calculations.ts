@@ -1,7 +1,3 @@
-/**
- * Wedding Budget Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type {
   WeddingBudgetInputs,
@@ -113,7 +109,6 @@ const TYPICAL_RANGES: Record<string, Record<WeddingStyle, { min: number; max: nu
 export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudgetResult {
   const { currency, totalBudget, guestCount, priorities } = inputs;
 
-  // Determine budget tier
   const perGuestBudget = totalBudget / guestCount;
   const avgPerGuest = AVERAGE_PER_GUEST[currency];
   let budgetTier: WeddingStyle;
@@ -128,11 +123,9 @@ export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudg
     budgetTier = 'luxury';
   }
 
-  // Calculate adjusted percentages based on priorities
   const adjustedPercentages: Record<string, number> = {};
   let totalAdjusted = 0;
 
-  // Apply priority multipliers to adjustable categories
   const priorityCategories = [
     'venue',
     'catering',
@@ -150,20 +143,17 @@ export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudg
     totalAdjusted += adjustedPercentages[category];
   }
 
-  // Add fixed categories
   const fixedCategories = ['stationery', 'transportation', 'favors', 'officiant'];
   for (const category of fixedCategories) {
     adjustedPercentages[category] = BASE_PERCENTAGES[category];
     totalAdjusted += adjustedPercentages[category];
   }
 
-  // Normalize to 95% (leave 5% contingency)
   const normalizationFactor = 95 / totalAdjusted;
   for (const category in adjustedPercentages) {
     adjustedPercentages[category] *= normalizationFactor;
   }
 
-  // Build allocations
   const allocations: CategoryAllocation[] = [];
   const categoryNames: Record<string, string> = {
     venue: 'Venue',
@@ -204,10 +194,8 @@ export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudg
     });
   }
 
-  // Sort by amount descending
   allocations.sort((a, b) => b.amount - a.amount);
 
-  // Calculate summary totals
   const venueAndCatering =
     ((adjustedPercentages.venue + adjustedPercentages.catering) * totalBudget) / 100;
   const vendorServices =
@@ -225,7 +213,6 @@ export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudg
     100;
   const contingency = totalBudget * 0.05;
 
-  // Generate warnings
   const warnings: string[] = [];
   const costPerGuest = totalBudget / guestCount;
 
@@ -243,7 +230,6 @@ export function calculateWeddingBudget(inputs: WeddingBudgetInputs): WeddingBudg
     );
   }
 
-  // Generate savings tips
   const savingsTips: string[] = [];
 
   if (guestCount > 100) {

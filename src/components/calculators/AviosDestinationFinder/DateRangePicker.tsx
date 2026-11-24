@@ -1,56 +1,26 @@
-/**
- * DateRangePicker - peak-aware travel date-range calendar for the Avios finder.
- *
- * Replaces the two native <input type="date"> controls with one trigger button
- * and a hand-rolled month calendar popover. Peak-pricing days are tinted amber
- * using the shared isPeakIsoDate definition so the calendar and the calculation
- * layer agree on what "peak" means. No new dependencies; all date maths runs in
- * UTC (the Date.parse(iso + 'T00:00:00Z') idiom shared with calculations.ts) so
- * DST never shifts a day. The one exception is the "before today" disable
- * cutoff, which uses the LOCAL calendar date (amendment 8): a user in London at
- * 23:00 should not see tomorrow's UTC date already greyed out.
- *
- * Positioning (amendment 2): the popover is position:fixed at ALL widths. The
- * finder Card sets overflow-hidden, which clips an absolutely-positioned popover
- * at md+ widths; a fixed popover is laid out against the viewport instead. On
- * open it reads the trigger's getBoundingClientRect and places itself below,
- * horizontally clamped on-screen. A fixed element does not track the trigger
- * once the page moves, so it closes on scroll or resize.
- */
 import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
 import { useTheme } from '../../ui/theme/ThemeContext';
 import type { ColorTokens } from '../../ui/theme/colors';
 import { isPeakIsoDate } from './data/peakCalendar';
 
 export interface DateRangePickerProps {
-  /** Trigger element id; the sibling <Label htmlFor> must match this. */
   readonly id: string;
-  /** Selected start date, ISO yyyy-mm-dd, or '' when unset. */
   readonly valueFrom: string;
-  /** Selected end date, ISO yyyy-mm-dd, or '' when unset. */
   readonly valueTo: string;
-  /** Emits both ISO strings ('' when cleared) on every change. */
   readonly onChange: (from: string, to: string) => void;
 }
 
 interface YearMonth {
   readonly year: number;
-  /** 0-indexed month (0 = January). */
   readonly month: number;
 }
 
-/** Weeks start Monday on the UK BA site. */
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as const;
-/** Navigation upper bound: December 2027 (0-indexed month 11). */
 const NAV_UPPER: YearMonth = { year: 2027, month: 11 };
 const UPPER_ISO = '2027-12-31';
-/** Desired popover width; shrinks to fit narrow viewports. */
 const POPOVER_WIDTH = 320;
 const VIEWPORT_MARGIN = 8;
 
-// Formatters are pinned to UTC so an ISO date renders as itself regardless of
-// the viewer's timezone (a Date at 00:00Z would otherwise slip a day in the
-// Americas). en-GB gives "12 Aug 2026" / "12 August 2026".
 const SHORT_FMT = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'short',
@@ -73,7 +43,6 @@ function pad2(n: number): string {
   return n < 10 ? `0${n}` : String(n);
 }
 
-/** ISO yyyy-mm-dd for a year, 0-indexed month and day. */
 function isoOf(year: number, month: number, day: number): string {
   return `${year}-${pad2(month + 1)}-${pad2(day)}`;
 }
@@ -83,8 +52,6 @@ function utcOf(iso: string): number {
 }
 
 function fmtShort(iso: string): string {
-  // Corrupt localStorage can hand us a non-ISO string; a label fallback
-  // beats crashing the island with a RangeError from Intl.format(NaN)
   const t = utcOf(iso);
   return Number.isNaN(t) ? 'Any dates' : SHORT_FMT.format(t);
 }
@@ -97,20 +64,17 @@ function monthTitle(m: YearMonth): string {
   return TITLE_FMT.format(Date.UTC(m.year, m.month, 1));
 }
 
-/** Local calendar 'today' as ISO. The disable cutoff is local, not UTC. */
 function localTodayIso(): string {
   const now = new Date();
   return isoOf(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
-/** Days in a 0-indexed month (day 0 of the next month is the last day). */
 function daysInMonth(m: YearMonth): number {
   return new Date(Date.UTC(m.year, m.month + 1, 0)).getUTCDate();
 }
 
-/** Monday-indexed weekday (0 = Mon .. 6 = Sun) of the 1st of the month. */
 function mondayIndexOfFirst(m: YearMonth): number {
-  const jsDay = new Date(Date.UTC(m.year, m.month, 1)).getUTCDay(); // 0 = Sun
+  const jsDay = new Date(Date.UTC(m.year, m.month, 1)).getUTCDay();
   return (jsDay + 6) % 7;
 }
 
@@ -118,7 +82,6 @@ function monthOfIso(iso: string): YearMonth {
   return { year: Number(iso.slice(0, 4)), month: Number(iso.slice(5, 7)) - 1 };
 }
 
-/** Comparable ordinal for a year/month, for bound checks. */
 function monthOrdinal(m: YearMonth): number {
   return m.year * 12 + m.month;
 }
@@ -128,7 +91,6 @@ function addMonths(m: YearMonth, delta: number): YearMonth {
   return { year: Math.floor(v / 12), month: ((v % 12) + 12) % 12 };
 }
 
-/** iso shifted by whole days, staying on the UTC day grid. */
 function shiftIso(iso: string, days: number): string {
   return new Date(utcOf(iso) + days * 86_400_000).toISOString().slice(0, 10);
 }
@@ -168,7 +130,6 @@ export default function DateRangePicker({
   const { tokens } = useTheme();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-  /** Set just before a focusIso change that should also move DOM focus. */
   const shouldFocusDay = useRef(false);
 
   const todayIso = localTodayIso();
@@ -176,13 +137,9 @@ export default function DateRangePicker({
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0, width: POPOVER_WIDTH });
   const [view, setView] = useState<YearMonth>(() => monthOfIso(valueFrom || todayIso));
-  // Draft selection while the popover is open; seeded from props on open so the
-  // component works standalone (first click sets start, second sets end) even
-  // before the parent round-trips the value back through props.
   const [sel, setSel] = useState({ from: valueFrom, to: valueTo });
   const [focusIso, setFocusIso] = useState(valueFrom || todayIso);
 
-  /** Focus never lands on a disabled past day, so clamp it into range. */
   function clampFocusable(iso: string): string {
     if (iso < todayIso) return todayIso;
     if (iso > UPPER_ISO) return UPPER_ISO;
@@ -217,7 +174,7 @@ export default function DateRangePicker({
   }
 
   function selectDay(iso: string): void {
-    if (iso < todayIso) return; // defensive: past days are also disabled
+    if (iso < todayIso) return;
     const { from, to } = sel;
     let next: { from: string; to: string };
     if (!from || (from && to)) next = { from: iso, to: '' };
@@ -232,8 +189,6 @@ export default function DateRangePicker({
   function goMonth(delta: number): void {
     const nv = addMonths(view, delta);
     setView(nv);
-    // Keep the roving-tabindex target inside the visible month, but do not steal
-    // focus from the prev/next button the user is clicking.
     setFocusIso(clampFocusable(isoOf(nv.year, nv.month, 1)));
   }
 
@@ -253,8 +208,6 @@ export default function DateRangePicker({
     shouldFocusDay.current = true;
   }
 
-  // Move DOM focus to the roving day only when a keyboard move or selection
-  // asked for it (preventScroll so focusing never triggers the scroll-close).
   useEffect(() => {
     if (!open || !shouldFocusDay.current) return;
     shouldFocusDay.current = false;
@@ -264,7 +217,6 @@ export default function DateRangePicker({
     btn?.focus({ preventScroll: true });
   }, [open, focusIso, view]);
 
-  // Clamp the popover up if its measured height would run off the bottom edge.
   useLayoutEffect(() => {
     if (!open || !popoverRef.current) return;
     const height = popoverRef.current.offsetHeight;
@@ -280,7 +232,6 @@ export default function DateRangePicker({
     // popover after open, re-tripping the bottom-edge clamp
   }, [open, view]);
 
-  // Close on scroll / resize / outside-click / Escape while open.
   useEffect(() => {
     if (!open) return;
     const onScrollOrResize = (): void => setOpen(false);
@@ -314,8 +265,6 @@ export default function DateRangePicker({
   else if (valueFrom && valueTo) triggerLabel = `${fmtShort(valueFrom)} - ${fmtShort(valueTo)}`;
   else triggerLabel = fmtShort(valueFrom || valueTo);
 
-  // Navigation lower bound (amendment 6): a persisted past start stays reachable
-  // so it can be re-edited, so the bound is the earlier of this month and it.
   const currentMonth = monthOfIso(todayIso);
   const fromMonth = valueFrom ? monthOfIso(valueFrom) : null;
   const lowerBound =
@@ -323,7 +272,6 @@ export default function DateRangePicker({
   const canPrev = monthOrdinal(view) > monthOrdinal(lowerBound);
   const canNext = monthOrdinal(view) < monthOrdinal(NAV_UPPER);
 
-  // Build the Monday-first calendar matrix for the visible month.
   const lead = mondayIndexOfFirst(view);
   const total = daysInMonth(view);
   const cells: (number | null)[] = [];

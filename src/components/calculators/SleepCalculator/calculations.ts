@@ -1,9 +1,3 @@
-/**
- * Sleep Calculator - Calculations
- *
- * Based on 90-minute sleep cycles for optimal wake times.
- */
-
 import type { SleepInputs, SleepResult, SleepCycle, NapResult, AgeGroup } from './types';
 import { AGE_SLEEP_NEEDS } from './types';
 
@@ -57,10 +51,8 @@ export function calculateSleepTimes(inputs: SleepInputs): SleepResult {
   const recommendations: SleepCycle[] = [];
 
   if (inputs.mode === 'wakeTime') {
-    // Calculate optimal bed times for a given wake time
     const wakeDate = parseTime(inputs.wakeTime);
 
-    // Generate options for 4, 5, 6, 7 cycles (6h, 7.5h, 9h, 10.5h)
     for (let cycles = 6; cycles >= 4; cycles--) {
       const sleepMinutes = cycles * SLEEP_CYCLE_MINUTES;
       const totalMinutes = sleepMinutes + inputs.fallAsleepMinutes;
@@ -77,12 +69,10 @@ export function calculateSleepTimes(inputs: SleepInputs): SleepResult {
       });
     }
   } else if (inputs.mode === 'bedTime') {
-    // Calculate optimal wake times for a given bed time
     const bedDate = parseTime(inputs.bedTime);
     const fallAsleepDate = new Date(bedDate);
     fallAsleepDate.setMinutes(fallAsleepDate.getMinutes() + inputs.fallAsleepMinutes);
 
-    // Generate options for 4, 5, 6, 7 cycles
     for (let cycles = 4; cycles <= 6; cycles++) {
       const sleepMinutes = cycles * SLEEP_CYCLE_MINUTES;
 

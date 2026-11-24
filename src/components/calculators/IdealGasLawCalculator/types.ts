@@ -1,41 +1,28 @@
-/**
- * Ideal Gas Law Calculator - Type Definitions
- *
- * PV = nRT calculator for gas phase calculations.
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 export type SolveFor = 'pressure' | 'volume' | 'moles' | 'temperature';
 
 export interface IdealGasInputs {
   unitSystem: UnitSystem;
   solveFor: SolveFor;
-  /** Pressure in kPa (metric) or psi (imperial) */
   pressure: number;
-  /** Volume in liters (metric) or cubic feet (imperial) */
   volume: number;
-  /** Amount in moles */
   moles: number;
-  /** Temperature in °C (metric) or °F (imperial) */
   temperature: number;
-  /** Optional: mass in grams for density calculation */
   mass: number;
-  /** Optional: molar mass in g/mol */
   molarMass: number;
 }
 
 export interface IdealGasResult {
-  pressure: number; // kPa or psi
-  volume: number; // L or ft³
+  pressure: number;
+  volume: number;
   moles: number;
-  temperature: number; // °C or °F
-  temperatureK: number; // Always Kelvin
-  density: number; // kg/m³
-  molarVolume: number; // L/mol at given conditions
+  temperature: number;
+  temperatureK: number;
+  density: number;
+  molarVolume: number;
   compressibilityNote: string;
 }
 
-// Common gases and their molar masses
 export const COMMON_GASES: Record<string, number> = {
   Air: 28.97,
   'Nitrogen (N₂)': 28.01,

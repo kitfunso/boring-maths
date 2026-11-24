@@ -1,7 +1,3 @@
-/**
- * Water Change Calculator Component
- * Calculate dilution and parameter adjustment for aquariums
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { WaterChangeInputs } from './types';
@@ -32,7 +28,6 @@ export function WaterChangeCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Tank Setup</h2>
@@ -254,7 +249,6 @@ export function WaterChangeCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 p-6 ring-1 ring-cyan-500/30">
           <h2 className="mb-4 text-lg font-semibold text-cyan-300">Water to Change</h2>

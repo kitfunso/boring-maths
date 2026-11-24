@@ -1,5 +1,3 @@
-/** Side Hustle Calculator: net profit, effective hourly rate, and opportunity cost vs a main job, for USD/GBP/EUR. */
-
 import type { Currency } from '../../../lib/regions';
 import { getRegionDefaults } from '../../../lib/regions';
 
@@ -8,15 +6,12 @@ export interface SideHustleInputs {
 
   monthlyRevenue: number;
 
-  /** Monthly expenses (materials, tools, subscriptions, etc.) */
   monthlyExpenses: number;
 
   hoursPerWeek: number;
 
-  /** Current hourly rate at main job (opportunity cost) */
   mainJobHourlyRate: number;
 
-  /** Estimated tax rate for side hustle income as decimal */
   taxRate: number;
 
   marketingSpend: number;
@@ -29,20 +24,16 @@ export interface SideHustleInputs {
 export interface SideHustleResult {
   currency: Currency;
 
-  /** Monthly gross profit (revenue - expenses) */
   monthlyGrossProfit: number;
 
-  /** Monthly net profit (after taxes) */
   monthlyNetProfit: number;
 
   annualNetProfit: number;
 
   hoursPerMonth: number;
 
-  /** Effective hourly rate (net profit / hours) */
   effectiveHourlyRate: number;
 
-  /** Opportunity cost (what you could earn at main job) */
   opportunityCost: number;
 
   netVsMainJob: number;

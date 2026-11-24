@@ -1,7 +1,3 @@
-/**
- * TDEECalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateTDEE } from '../../src/components/calculators/TDEECalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/TDEECalculator/types';

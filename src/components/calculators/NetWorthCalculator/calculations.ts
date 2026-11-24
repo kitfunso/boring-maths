@@ -1,18 +1,12 @@
-/**
- * Net Worth Calculator - Calculation Logic
- */
-
 import type { NetWorthInputs, NetWorthResult, AssetCategory, LiabilityCategory } from './types';
 
 export function calculateNetWorth(inputs: NetWorthInputs): NetWorthResult {
   const { assets, liabilities } = inputs;
 
-  // Calculate totals
   const totalAssets = assets.reduce((sum, a) => sum + a.value, 0);
   const totalLiabilities = liabilities.reduce((sum, l) => sum + l.value, 0);
   const netWorth = totalAssets - totalLiabilities;
 
-  // Asset breakdown by category
   const assetBreakdown: Record<AssetCategory, number> = {
     cash: 0,
     investments: 0,
@@ -26,7 +20,6 @@ export function calculateNetWorth(inputs: NetWorthInputs): NetWorthResult {
     assetBreakdown[asset.category] += asset.value;
   });
 
-  // Liability breakdown by category
   const liabilityBreakdown: Record<LiabilityCategory, number> = {
     mortgage: 0,
     auto: 0,
@@ -39,7 +32,6 @@ export function calculateNetWorth(inputs: NetWorthInputs): NetWorthResult {
     liabilityBreakdown[liability.category] += liability.value;
   });
 
-  // Debt to asset ratio
   const debtToAssetRatio = totalAssets > 0 ? (totalLiabilities / totalAssets) * 100 : 0;
 
   return {
@@ -69,7 +61,6 @@ export function formatPercent(value: number): string {
 }
 
 export function getNetWorthPercentile(netWorth: number, age: number): string {
-  // Simplified net worth percentiles by age (US data approximation)
   const percentiles: Record<string, number[]> = {
     '20-29': [0, 10000, 30000, 75000, 200000],
     '30-39': [0, 50000, 120000, 300000, 750000],

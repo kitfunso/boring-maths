@@ -1,9 +1,3 @@
-/**
- * Tipping Guide Calculator - Preact Component
- *
- * Interactive calculator showing country-specific tipping customs
- * for various service types. Uses the design system components.
- */
 import { calculateTippingGuide, formatCurrency } from './calculations';
 import {
   getDefaultInputs,
@@ -34,10 +28,6 @@ import ShareResults from '../../ui/ShareResults';
 import PrintResults from '../../ui/PrintResults';
 import { useCalculatorBase } from '../../../hooks/useCalculatorBase';
 
-// ---------------------------------------------------------------------------
-// Country options for the select dropdown
-// ---------------------------------------------------------------------------
-
 const COUNTRY_OPTIONS = (Object.keys(TIPPING_DATA) as TippingCountry[]).map((code) => ({
   value: code,
   label: `${TIPPING_DATA[code].flag} ${COUNTRY_LABELS[code]}`,
@@ -47,10 +37,6 @@ const SERVICE_OPTIONS = (Object.keys(SERVICE_LABELS) as ServiceType[]).map((key)
   value: key,
   label: SERVICE_LABELS[key],
 }));
-
-// ---------------------------------------------------------------------------
-// Component
-// ---------------------------------------------------------------------------
 
 export default function TippingGuideCalculator() {
   const { inputs, result, updateInput, setInputs } = useCalculatorBase<
@@ -82,7 +68,6 @@ export default function TippingGuideCalculator() {
   return (
     <ThemeProvider defaultColor="blue">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Tipping Guide by Country"
           subtitle="Know the customs before you travel"
@@ -90,9 +75,7 @@ export default function TippingGuideCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Country Selector */}
             <div>
               <Label htmlFor="country" required>
                 Country
@@ -105,7 +88,6 @@ export default function TippingGuideCalculator() {
               />
             </div>
 
-            {/* Service Type Selector */}
             <div>
               <Label htmlFor="serviceType" required>
                 Service Type
@@ -118,7 +100,6 @@ export default function TippingGuideCalculator() {
               />
             </div>
 
-            {/* Bill Amount */}
             <div>
               <Label htmlFor="billAmount" required>
                 Bill Amount
@@ -137,9 +118,7 @@ export default function TippingGuideCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Cultural Note (prominent) */}
             {result.culturalNote && (
               <Alert
                 variant={result.suggestedTipPercent === 0 ? 'warning' : 'tip'}
@@ -149,7 +128,6 @@ export default function TippingGuideCalculator() {
               </Alert>
             )}
 
-            {/* Service Included Warning */}
             {result.isServiceIncluded && (
               <Alert variant="info" title="Service charge included">
                 This country typically includes a service charge in the bill. Any additional tip is
@@ -157,7 +135,6 @@ export default function TippingGuideCalculator() {
               </Alert>
             )}
 
-            {/* Primary Result */}
             <ResultCard
               label="Suggested Total"
               value={formatCurrency(result.totalWithTip, result.currency)}
@@ -176,7 +153,6 @@ export default function TippingGuideCalculator() {
               }
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Bill Amount"
@@ -201,7 +177,6 @@ export default function TippingGuideCalculator() {
               />
             </Grid>
 
-            {/* Quick Country Comparison Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 {SERVICE_LABELS[inputs.serviceType]} Tips Around the World
@@ -266,7 +241,6 @@ export default function TippingGuideCalculator() {
               </div>
             </div>
 
-            {/* Share & Print */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`${COUNTRY_LABELS[inputs.country]} ${SERVICE_LABELS[inputs.serviceType]}: ${tipPercentDisplay}% tip - Total: ${formatCurrency(result.totalWithTip, result.currency)}`}

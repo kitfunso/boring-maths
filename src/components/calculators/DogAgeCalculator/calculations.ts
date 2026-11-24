@@ -1,20 +1,7 @@
-/**
- * Dog Age Calculator - Calculation Logic
- *
- * Uses research-based formulas that account for breed size differences.
- * Small dogs age slower than large dogs after the first few years.
- */
-
 import type { DogAgeInputs, DogAgeResult, DogSize } from './types';
 import { LIFE_STAGES } from './types';
 
-/**
- * Age multipliers by size and dog age
- * Research shows dogs age quickly in year 1-2, then slow down
- * Larger dogs age faster after maturity
- */
 const AGE_TABLES: Record<DogSize, number[]> = {
-  // Index = dog year, value = cumulative human years
   small: [0, 15, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96],
   medium: [0, 15, 24, 28, 32, 36, 42, 47, 51, 56, 60, 65, 69, 74, 78, 83, 87, 92, 96, 101, 105],
   large: [0, 15, 24, 28, 32, 36, 45, 50, 55, 61, 66, 72, 77, 82, 88, 93, 99, 104, 109, 115, 120],
@@ -23,9 +10,6 @@ const AGE_TABLES: Record<DogSize, number[]> = {
   ],
 };
 
-/**
- * Average lifespans by size (in dog years)
- */
 const LIFESPANS: Record<DogSize, { min: number; max: number }> = {
   small: { min: 12, max: 16 },
   medium: { min: 10, max: 14 },
@@ -33,22 +17,17 @@ const LIFESPANS: Record<DogSize, { min: number; max: number }> = {
   giant: { min: 6, max: 10 },
 };
 
-/**
- * Calculate human age equivalent
- */
 function calculateHumanAge(dogYears: number, dogMonths: number, size: DogSize): number {
   const table = AGE_TABLES[size];
   const totalDogYears = dogYears + dogMonths / 12;
 
   if (totalDogYears <= 0) return 0;
   if (totalDogYears >= table.length - 1) {
-    // Extrapolate for very old dogs
     const lastIndex = table.length - 1;
     const yearlyRate = table[lastIndex] - table[lastIndex - 1];
     return Math.round(table[lastIndex] + yearlyRate * (totalDogYears - lastIndex));
   }
 
-  // Interpolate between years
   const lowerYear = Math.floor(totalDogYears);
   const upperYear = Math.ceil(totalDogYears);
   const fraction = totalDogYears - lowerYear;
@@ -62,9 +41,6 @@ function calculateHumanAge(dogYears: number, dogMonths: number, size: DogSize): 
   return Math.round(lowerAge + (upperAge - lowerAge) * fraction);
 }
 
-/**
- * Determine life stage
- */
 function getLifeStage(humanYears: number): { name: string; description: string } {
   for (const stage of LIFE_STAGES) {
     if (humanYears <= stage.maxHumanAge) {
@@ -74,9 +50,6 @@ function getLifeStage(humanYears: number): { name: string; description: string }
   return { name: 'Senior', description: 'Elderly, needs extra care' };
 }
 
-/**
- * Get health tips based on life stage
- */
 function getHealthTips(lifeStage: string, size: DogSize): string[] {
   const tips: Record<string, string[]> = {
     Puppy: [
@@ -113,7 +86,6 @@ function getHealthTips(lifeStage: string, size: DogSize): string[] {
 
   const baseTips = tips[lifeStage] || tips.Adult;
 
-  // Add size-specific tips
   if (size === 'giant' && (lifeStage === 'Adult' || lifeStage === 'Mature')) {
     baseTips.push('Giant breeds may benefit from joint supplements early');
   }
@@ -124,9 +96,6 @@ function getHealthTips(lifeStage: string, size: DogSize): string[] {
   return baseTips;
 }
 
-/**
- * Main calculation function
- */
 export function calculateDogAge(inputs: DogAgeInputs): DogAgeResult {
   const { dogYears, dogMonths, size } = inputs;
 

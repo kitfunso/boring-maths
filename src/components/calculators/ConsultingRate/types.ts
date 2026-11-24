@@ -1,44 +1,26 @@
-/**
- * Consulting Rate Calculator - Type Definitions
- *
- * Calculate consulting hourly rate, day rate, and project
- * rates based on desired income and business costs.
- * Explains why $50/hr employee !== $50/hr consultant.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface ConsultingRateInputs {
   currency: Currency;
 
-  /** Desired annual income (take-home) */
   desiredAnnualIncome: number;
 
-  /** Target billable hours per week */
   billableHoursPerWeek: number;
 
-  /** Weeks worked per year */
   weeksPerYear: number;
 
-  /** Annual business expenses */
   businessExpenses: number;
 
-  /** Health insurance (annual) */
   healthInsurance: number;
 
-  /** Retirement contributions (annual) */
   retirementContributions: number;
 
-  /** Self-employment tax rate */
   selfEmploymentTaxRate: number;
 
-  /** Income tax rate (effective) */
   incomeTaxRate: number;
 
-  /** Desired profit margin on top of costs */
   profitMargin: number;
 
-  /** Non-billable time percentage (admin, marketing, etc.) */
   nonBillablePercent: number;
 }
 
@@ -52,35 +34,27 @@ export interface RateBreakdown {
 export interface ConsultingRateResult {
   currency: Currency;
 
-  /** Calculated rates */
   hourlyRate: number;
   dayRate: number;
   weekRate: number;
   monthlyRetainer: number;
 
-  /** Minimum viable rate (just covers costs) */
   minimumHourlyRate: number;
 
-  /** Total annual revenue needed */
   annualRevenueNeeded: number;
 
-  /** Billable hours per year */
   billableHoursPerYear: number;
 
-  /** Total annual costs */
   totalAnnualCosts: number;
 
-  /** Cost breakdown */
   breakdown: RateBreakdown[];
 
-  /** Employee equivalent comparison */
   employeeEquivalent: {
     salaryEquivalent: number;
     hourlyEquivalent: number;
     multiplierVsEmployee: number;
   };
 
-  /** Project rate guidance */
   projectRates: {
     halfDay: number;
     fullDay: number;
@@ -88,7 +62,6 @@ export interface ConsultingRateResult {
     monthProject: number;
   };
 
-  /** Insights */
   insights: string[];
 }
 
@@ -112,7 +85,6 @@ export function getDefaultInputs(currency: Currency = 'USD'): ConsultingRateInpu
 
 export const DEFAULT_INPUTS: ConsultingRateInputs = getDefaultInputs('USD');
 
-/** Common business expenses for consultants */
 export const COMMON_EXPENSES: Record<Currency, { name: string; low: number; high: number }[]> = {
   USD: [
     { name: 'Software & tools', low: 1200, high: 3000 },

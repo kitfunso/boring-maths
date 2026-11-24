@@ -1,7 +1,3 @@
-/**
- * UK Inheritance Tax Calculator Types
- */
-
 export interface IHTInputs {
   estateValue: number;
   mainResidenceValue: number;

@@ -1,8 +1,3 @@
-/**
- * Holiday Dinner Calculator - React Component
- *
- * Calculate turkey size, cooking time, and side quantities.
- */
 import { calculateHolidayDinner } from './calculations';
 import {
   getDefaultInputs,
@@ -81,7 +76,6 @@ export default function HolidayDinnerCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-red-400 uppercase tracking-wider">
                 Guest Count
@@ -116,7 +110,6 @@ export default function HolidayDinnerCalculator() {
                 />
               </Grid>
 
-              {/* Leftover Preference */}
               <div>
                 <Label>Leftover Preference</Label>
                 <ButtonGroup
@@ -134,7 +127,6 @@ export default function HolidayDinnerCalculator() {
                 Turkey Options
               </div>
 
-              {/* Turkey Type */}
               <div>
                 <Label>Turkey Type</Label>
                 <ButtonGroup
@@ -144,7 +136,6 @@ export default function HolidayDinnerCalculator() {
                 />
               </div>
 
-              {/* Cooking Method */}
               <div>
                 <Label>Cooking Method</Label>
                 <ButtonGroup
@@ -217,7 +208,6 @@ export default function HolidayDinnerCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Turkey Size"
@@ -242,12 +232,10 @@ export default function HolidayDinnerCalculator() {
                 )}
               </Grid>
 
-              {/* Turkey Cooking Notes */}
               <Alert variant="info" title="Cooking Notes">
                 {result.turkey.notes}
               </Alert>
 
-              {/* Side Dishes */}
               <div className="bg-red-50 rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-red-700 uppercase tracking-wider mb-4">
                   Side Dish Quantities
@@ -270,7 +258,6 @@ export default function HolidayDinnerCalculator() {
                 </div>
               </div>
 
-              {/* Dietary Accommodations */}
               {(inputs.vegetarianCount > 0 || inputs.glutenFreeCount > 0) && (
                 <div className="bg-amber-50 rounded-xl p-6">
                   <h3 className="text-sm font-semibold text-amber-700 uppercase tracking-wider mb-4">
@@ -289,7 +276,6 @@ export default function HolidayDinnerCalculator() {
                 </div>
               )}
 
-              {/* Timeline */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Cooking Timeline
@@ -309,7 +295,6 @@ export default function HolidayDinnerCalculator() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Holiday Cooking Tips">
                 <ul className="space-y-2 mt-2">
                   {result.tips.slice(0, 4).map((tip, i) => (
@@ -321,7 +306,6 @@ export default function HolidayDinnerCalculator() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Holiday Dinner: ${result.turkey.weightPounds} lb turkey for ${inputs.guestCount} guests. Cook time: ${result.turkey.cookTimeFormatted} (${inputs.cookingMethod}). ${result.sides.length} side dishes.`}

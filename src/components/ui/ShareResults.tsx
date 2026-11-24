@@ -1,17 +1,9 @@
-/**
- * ShareResults Component
- *
- * Allows users to share their calculator results on social media.
- * Supports Twitter/X, Facebook, WhatsApp, LinkedIn, and copy to clipboard.
- */
-
 import { useState, useEffect, useRef } from 'preact/hooks';
 
 interface ShareResultsProps {
   result: string;
   calculatorName: string;
   className?: string;
-  /** Optional inputs to encode in the shareable URL */
   inputs?: Record<string, string | number | boolean>;
 }
 
@@ -27,7 +19,6 @@ export default function ShareResults({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Handle Escape key and click outside to close
   useEffect(() => {
     if (!isOpen) return;
 
@@ -58,7 +49,6 @@ export default function ShareResults({
     };
   }, [isOpen]);
 
-  // Build URL with input parameters for sharing
   const buildShareUrl = () => {
     if (typeof window === 'undefined') return '';
     const url = new URL(window.location.href.split('?')[0]);
@@ -135,7 +125,6 @@ export default function ShareResults({
         >
           <div className="text-xs text-[var(--color-muted)] mb-2 px-1">Share on:</div>
           <div className="flex flex-col gap-1">
-            {/* Twitter/X */}
             <button
               role="menuitem"
               onClick={() => openShareWindow(shareLinks.twitter)}
@@ -147,7 +136,6 @@ export default function ShareResults({
               <span>Twitter / X</span>
             </button>
 
-            {/* Facebook */}
             <button
               role="menuitem"
               onClick={() => openShareWindow(shareLinks.facebook)}
@@ -159,7 +147,6 @@ export default function ShareResults({
               <span>Facebook</span>
             </button>
 
-            {/* WhatsApp */}
             <button
               role="menuitem"
               onClick={() => openShareWindow(shareLinks.whatsapp)}
@@ -171,7 +158,6 @@ export default function ShareResults({
               <span>WhatsApp</span>
             </button>
 
-            {/* LinkedIn */}
             <button
               role="menuitem"
               onClick={() => openShareWindow(shareLinks.linkedin)}
@@ -185,7 +171,6 @@ export default function ShareResults({
 
             <div className="border-t border-white/10 my-1"></div>
 
-            {/* Copy Link with inputs */}
             <button
               role="menuitem"
               onClick={copyLinkToClipboard}
@@ -217,7 +202,6 @@ export default function ShareResults({
               <span>{linkCopied ? 'Link Copied!' : 'Copy Link'}</span>
             </button>
 
-            {/* Copy Result text */}
             <button
               role="menuitem"
               onClick={copyToClipboard}
@@ -250,7 +234,6 @@ export default function ShareResults({
             </button>
           </div>
 
-          {/* Close button */}
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Close share menu"

@@ -1,12 +1,9 @@
-/** Singapore notice period tests. Daily rate = (12 x monthly) / (52 x working days/week); MOM table by service weeks; leave 7+1/year capped at 14. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeNoticePeriod } from '../../src/components/calculators/SingaporeNoticePeriod/calculations';
 
 describe('SingaporeNoticePeriod', () => {
   describe('calculateSingaporeNoticePeriod', () => {
     it('gives 2 weeks statutory notice for 3 years service, 5-day week', () => {
-      // daily rate = (12*5000)/(52*5) = 60000/260 = 230.769231; 2 weeks = 10 days; 230.769231*10 = 2307.69
       const result = calculateSingaporeNoticePeriod({
         monthlyGrossSalary: 5000,
         serviceYears: 3,
@@ -87,7 +84,6 @@ describe('SingaporeNoticePeriod', () => {
     });
 
     it('encashes 6 unused leave days at the daily rate', () => {
-      // daily rate = 230.769231; 6 * 230.769231 = 1384.615385 -> 1384.62
       const result = calculateSingaporeNoticePeriod({
         monthlyGrossSalary: 5000,
         serviceYears: 3,
@@ -109,16 +105,16 @@ describe('SingaporeNoticePeriod', () => {
       };
       expect(
         calculateSingaporeNoticePeriod({ ...base, serviceYears: 0 }).leaveEntitlementDays
-      ).toBe(7); // year 1
+      ).toBe(7);
       expect(
         calculateSingaporeNoticePeriod({ ...base, serviceYears: 4 }).leaveEntitlementDays
-      ).toBe(11); // year 5
+      ).toBe(11);
       expect(
         calculateSingaporeNoticePeriod({ ...base, serviceYears: 7 }).leaveEntitlementDays
-      ).toBe(14); // year 8
+      ).toBe(14);
       expect(
         calculateSingaporeNoticePeriod({ ...base, serviceYears: 19 }).leaveEntitlementDays
-      ).toBe(14); // year 20, capped
+      ).toBe(14);
     });
   });
 });

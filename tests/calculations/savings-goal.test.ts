@@ -1,7 +1,3 @@
-/**
- * SavingsGoalCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSavingsGoal } from '../../src/components/calculators/SavingsGoal/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/SavingsGoal/types';

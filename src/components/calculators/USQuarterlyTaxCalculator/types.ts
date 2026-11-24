@@ -1,9 +1,3 @@
-/**
- * US Quarterly Estimated Tax Calculator Types
- *
- * Calculate quarterly estimated tax payments with safe harbor rules.
- */
-
 export type FilingStatus =
   | 'single'
   | 'married_jointly'
@@ -15,7 +9,7 @@ export interface USQuarterlyTaxInputs {
   filingStatus: FilingStatus;
   expectedAnnualIncome: number;
   selfEmploymentIncome: number;
-  w2Wages: number; // part of expectedAnnualIncome
+  w2Wages: number;
   withholdingsFromW2: number;
   priorYearTax: number;
   priorYearAGI: number;
@@ -47,7 +41,6 @@ export interface USQuarterlyTaxResult {
   annualizedIncomeAdvice: string;
 }
 
-// Prior-year AGI above this raises the prior-year safe harbor from 100% to 110% (Pub. 505)
 export const HIGH_INCOME_THRESHOLDS: Record<FilingStatus, number> = {
   single: 150000,
   married_jointly: 150000,

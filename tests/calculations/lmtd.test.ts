@@ -1,7 +1,3 @@
-/**
- * LmtdCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateLMTD } from '../../src/components/calculators/LMTDCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/LMTDCalculator/types';

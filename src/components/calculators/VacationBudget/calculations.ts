@@ -1,7 +1,3 @@
-/**
- * Vacation Budget Planner - Calculation Logic
- */
-
 import type { VacationBudgetInputs, VacationBudgetResult, BudgetCategory } from './types';
 import { STYLE_MULTIPLIERS } from './types';
 
@@ -24,9 +20,7 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
 
   const styleMultiplier = STYLE_MULTIPLIERS[travelStyle];
   const categories: BudgetCategory[] = [];
-  const days = nights + 1; // travel days
-
-  // 1. Flights/Transportation to destination
+  const days = nights + 1;
   const flightsTotal = flightCost * travelers;
   categories.push({
     category: 'Flights/Transportation',
@@ -36,7 +30,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `Round-trip for ${travelers} traveler(s)`,
   });
 
-  // 2. Car Rental
   let carRentalTotal = 0;
   if (needsCarRental) {
     carRentalTotal = carRentalPerDay * days * styleMultiplier;
@@ -49,7 +42,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     });
   }
 
-  // 3. Accommodation
   const accommodationTotal = accommodationPerNight * nights * styleMultiplier;
   categories.push({
     category: 'Accommodation',
@@ -59,7 +51,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `${nights} nights, ${travelStyle} level`,
   });
 
-  // 4. Food & Dining
   const foodTotal = mealsPerDay * travelers * days * styleMultiplier;
   categories.push({
     category: 'Food & Dining',
@@ -69,7 +60,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `Breakfast, lunch, dinner + snacks`,
   });
 
-  // 5. Activities & Entertainment
   const activitiesTotal = activitiesPerDay * travelers * days * styleMultiplier;
   categories.push({
     category: 'Activities & Entertainment',
@@ -79,7 +69,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `Tours, attractions, excursions`,
   });
 
-  // 6. Local Transportation
   let localTransportTotal = 0;
   if (!needsCarRental) {
     localTransportTotal = localTransportPerDay * travelers * days * styleMultiplier;
@@ -92,7 +81,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     });
   }
 
-  // 7. Travel Insurance
   let insuranceTotal = 0;
   if (travelInsurance) {
     const baseInsurance = currency === 'USD' ? 75 : currency === 'GBP' ? 50 : 60;
@@ -106,7 +94,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     });
   }
 
-  // 8. Souvenirs & Shopping
   categories.push({
     category: 'Souvenirs & Shopping',
     amount: Math.round(souvenirBudget),
@@ -115,7 +102,6 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `Gifts, mementos, shopping`,
   });
 
-  // 9. Contingency (10%)
   const subtotal =
     flightsTotal +
     carRentalTotal +
@@ -134,23 +120,19 @@ export function calculateVacationBudget(inputs: VacationBudgetInputs): VacationB
     notes: `10% buffer for unexpected expenses`,
   });
 
-  // Calculate totals
   const totalBudget = subtotal + contingency;
   const perPerson = totalBudget / travelers;
   const perDay = totalBudget / days;
   const perPersonPerDay = perPerson / days;
 
-  // Category totals
   const transportationTotal = flightsTotal + carRentalTotal + localTransportTotal;
   const otherTotal = insuranceTotal + souvenirBudget + contingency;
 
-  // Savings calculation (assuming 10% of median income)
   const medianMonthlyIncome = currency === 'USD' ? 4500 : currency === 'GBP' ? 2800 : 3200;
   const monthlySavingsRate = medianMonthlyIncome * 0.1;
   const monthsToSave = totalBudget / monthlySavingsRate;
   const weeksToSave = Math.ceil(monthsToSave * 4.33);
 
-  // Generate tips
   const savingsTips: string[] = [];
 
   if (travelStyle === 'luxury') {

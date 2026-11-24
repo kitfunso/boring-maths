@@ -1,9 +1,3 @@
-/**
- * Job Offer Comparison Calculator - React Component
- *
- * Compare two job offers by total compensation including salary,
- * benefits, equity, and quality of life factors.
- */
 import { calculateComparison, formatCurrency, formatDifference } from './calculations';
 import {
   getDefaultInputs,
@@ -28,9 +22,6 @@ import {
 } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import { useCalculatorState } from '../../../hooks/useCalculatorBase';
-/**
- * Single offer input panel
- */
 function OfferPanel({
   offer,
   onChange,
@@ -52,7 +43,6 @@ function OfferPanel({
         {label}
       </div>
 
-      {/* Name */}
       <div>
         <Label htmlFor={`${label}-name`}>Label</Label>
         <Input
@@ -63,7 +53,6 @@ function OfferPanel({
         />
       </div>
 
-      {/* Base Salary */}
       <div>
         <Label htmlFor={`${label}-salary`} required>
           Base Salary
@@ -79,7 +68,6 @@ function OfferPanel({
         />
       </div>
 
-      {/* Bonus */}
       <div>
         <Label htmlFor={`${label}-bonus`}>Annual Bonus</Label>
         <Input
@@ -93,7 +81,6 @@ function OfferPanel({
         />
       </div>
 
-      {/* Equity */}
       <div>
         <Label htmlFor={`${label}-equity`}>Annual Equity/RSU Value</Label>
         <Input
@@ -108,7 +95,6 @@ function OfferPanel({
         <p className="text-xs text-[var(--color-muted)] mt-1">Vested value per year</p>
       </div>
 
-      {/* 401k Match */}
       <Grid responsive={{ sm: 2 }} gap="md">
         <div>
           <Label htmlFor={`${label}-401k-match`}>401k Match</Label>
@@ -136,7 +122,6 @@ function OfferPanel({
         </div>
       </Grid>
 
-      {/* Health Insurance */}
       <Grid responsive={{ sm: 2 }} gap="md">
         <div>
           <Label htmlFor={`${label}-health-cost`}>Monthly Health Cost</Label>
@@ -166,7 +151,6 @@ function OfferPanel({
         </div>
       </Grid>
 
-      {/* PTO */}
       <div>
         <Label htmlFor={`${label}-pto`}>PTO Days</Label>
         <Input
@@ -179,7 +163,6 @@ function OfferPanel({
         />
       </div>
 
-      {/* Commute */}
       <Grid responsive={{ sm: 2 }} gap="md">
         <div>
           <Label htmlFor={`${label}-commute`}>Commute (one-way)</Label>
@@ -206,7 +189,6 @@ function OfferPanel({
         </div>
       </Grid>
 
-      {/* Signing Bonus */}
       <div>
         <Label htmlFor={`${label}-signing`}>Signing Bonus</Label>
         <Input
@@ -220,7 +202,6 @@ function OfferPanel({
         />
       </div>
 
-      {/* Other Benefits */}
       <div>
         <Label htmlFor={`${label}-other`}>Other Annual Benefits</Label>
         <Input
@@ -238,9 +219,6 @@ function OfferPanel({
   );
 }
 
-/**
- * Comparison bar visualization
- */
 function ComparisonBar({
   label,
   value1,
@@ -309,7 +287,6 @@ export default function JobOfferComparison() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Update offer
   const updateOffer1 = (updates: Partial<JobOffer>) => {
     setInputs((prev) => ({ ...prev, offer1: { ...prev.offer1, ...updates } }));
   };
@@ -318,7 +295,6 @@ export default function JobOfferComparison() {
     setInputs((prev) => ({ ...prev, offer2: { ...prev.offer2, ...updates } }));
   };
 
-  // Update settings
   const updateSettings = <K extends keyof JobOfferComparisonInputs>(
     field: K,
     value: JobOfferComparisonInputs[K]
@@ -326,7 +302,6 @@ export default function JobOfferComparison() {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -334,7 +309,6 @@ export default function JobOfferComparison() {
   return (
     <ThemeProvider defaultColor="purple">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Compare Job Offers"
           subtitle="See the true total compensation of each offer"
@@ -342,7 +316,6 @@ export default function JobOfferComparison() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Two-column offer inputs */}
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
             <OfferPanel
               offer={inputs.offer1}
@@ -360,7 +333,6 @@ export default function JobOfferComparison() {
             />
           </Grid>
 
-          {/* Settings */}
           <div className="mt-8 p-4 bg-[var(--color-night)]/50 rounded-xl">
             <div className="text-sm font-semibold text-[var(--color-subtle)] uppercase tracking-wider mb-4">
               Calculation Settings
@@ -417,9 +389,7 @@ export default function JobOfferComparison() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Winner announcement */}
             <ResultCard
               label={
                 result.recommendation.winner === 'tie'
@@ -447,7 +417,6 @@ export default function JobOfferComparison() {
               }
             />
 
-            {/* Side by side totals */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <div className="bg-indigo-900/30 rounded-xl p-6 border border-indigo-500/30">
                 <div className="text-sm text-indigo-300 uppercase tracking-wider mb-2">
@@ -469,7 +438,6 @@ export default function JobOfferComparison() {
               </div>
             </Grid>
 
-            {/* Comparison breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-6">
                 Component Breakdown
@@ -526,7 +494,6 @@ export default function JobOfferComparison() {
               </div>
             </div>
 
-            {/* Effective hourly rate */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label={`${inputs.offer1.name} Hourly`}
@@ -550,7 +517,6 @@ export default function JobOfferComparison() {
               />
             </Grid>
 
-            {/* Considerations */}
             {result.recommendation.considerations.length > 0 && (
               <Alert variant="info" title="Things to Consider">
                 <ul className="list-disc list-inside space-y-1">
@@ -561,13 +527,11 @@ export default function JobOfferComparison() {
               </Alert>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Negotiation tip:">
               Use this comparison to negotiate. If Offer 2 has better benefits but lower salary,
               show Offer 1's total compensation and ask if they can match it.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Comparing job offers: ${inputs.offer1.name} (${formatCurrency(result.offer1.netComp, result.currency)}) vs ${inputs.offer2.name} (${formatCurrency(result.offer2.netComp, result.currency)}) - Difference: ${formatDifference(result.difference.netComp, result.currency)}`}

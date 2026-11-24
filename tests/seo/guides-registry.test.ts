@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { GUIDES, guideBreadcrumbSchema } from '@/lib/guides';
 
-// A guide page missing from the registry gets no hub link and no breadcrumb schema.
 const GUIDES_DIR = path.resolve(__dirname, '..', '..', 'src', 'pages', 'guides');
 
 describe('guides registry matches the guide pages', () => {

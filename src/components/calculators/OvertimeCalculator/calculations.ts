@@ -1,9 +1,3 @@
-/**
- * Overtime Calculator - Calculation Logic
- *
- * Pure functions for calculating overtime value after taxes.
- */
-
 import type { OvertimeCalculatorInputs, OvertimeCalculatorResult, TaxBracket } from './types';
 import { US_TAX_BRACKETS, UK_TAX_BRACKETS, OVERTIME_STATUS_MAP } from './types';
 import {
@@ -16,17 +10,12 @@ import { getDefaultInputs as getUKTaxDefaults } from '../UKTaxCalculator/types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/** Weeks per year */
 const WEEKS_PER_YEAR = 52;
 
-// 26 USC 225 (2025 to 2028): only the FLSA half-time premium is deductible, capped and phased out by income
 const OT_PREMIUM_DEDUCTIBLE = 0.5;
 const OT_DEDUCTION_CAP = { single: 12500, joint: 25000 };
 const OT_PHASE_OUT_START = { single: 150000, joint: 300000 };
 
-/**
- * Get the tax bracket for a given income
- */
 function getTaxBracket(income: number, brackets: TaxBracket[]): TaxBracket {
   for (const bracket of brackets) {
     if (income >= bracket.min && income < bracket.max) {
@@ -43,7 +32,6 @@ function bracketTax(income: number, brackets: TaxBracket[]): number {
   );
 }
 
-/** Federal deduction for qualified overtime pay; it shrinks $100 per full $1,000 of income over the start. */
 export function overtimeDeduction(qualifiedPay: number, income: number, joint: boolean): number {
   const cap = joint ? OT_DEDUCTION_CAP.joint : OT_DEDUCTION_CAP.single;
   const start = joint ? OT_PHASE_OUT_START.joint : OT_PHASE_OUT_START.single;
@@ -53,9 +41,7 @@ export function overtimeDeduction(qualifiedPay: number, income: number, joint: b
 
 interface IncomeTaxModel {
   brackets: TaxBracket[];
-  /** Income the brackets apply to, after this region's deductions */
   taxableIncome: (income: number, qualifiedOvertime: number) => number;
-  /** Income tax (plus National Insurance in the UK) on a year's pay */
   tax: (income: number, qualifiedOvertime: number) => number;
 }
 
@@ -64,7 +50,6 @@ function incomeTaxModel(
   filingStatus: OvertimeCalculatorInputs['filingStatus']
 ): IncomeTaxModel {
   if (currency === 'GBP') {
-    // The UK calculator adds National Insurance and the allowance taper above 100,000
     return {
       brackets: UK_TAX_BRACKETS,
       taxableIncome: (income) => income,
@@ -75,7 +60,6 @@ function incomeTaxModel(
     };
   }
   if (currency === 'EUR') {
-    // UK bands stand in for a generic European scale
     return {
       brackets: UK_TAX_BRACKETS,
       taxableIncome: (income) => income,
@@ -95,24 +79,19 @@ function incomeTaxModel(
   };
 }
 
-/**
- * Calculate marginal tax rate on additional income
- */
 function calculateMarginalTax(
   baseIncome: number,
   additionalIncome: number,
   qualifiedOvertime: number,
   model: IncomeTaxModel,
   stateTaxRate: number,
-  ficaStatus: FederalFilingStatus | null // null when FICA does not apply
+  ficaStatus: FederalFilingStatus | null
 ): { tax: number; effectiveRate: number } {
   let totalTax = 0;
 
-  // Add state tax
   const stateTax = additionalIncome * stateTaxRate;
   totalTax += stateTax;
 
-  // Social Security stops at the wage base; the 0.9% Additional Medicare starts at the threshold
   if (ficaStatus) {
     totalTax +=
       employeeFica(baseIncome + additionalIncome, ficaStatus) -
@@ -127,9 +106,6 @@ function calculateMarginalTax(
   return { tax: totalTax, effectiveRate };
 }
 
-/**
- * Calculate overtime earnings and taxes
- */
 export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCalculatorResult {
   const {
     currency,
@@ -145,7 +121,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
   const model = incomeTaxModel(currency, filingStatus);
   const ficaStatus = includeFICA && currency === 'USD' ? OVERTIME_STATUS_MAP[filingStatus] : null;
 
-  // Calculate gross overtime
   const overtimeRate = hourlyRate * overtimeMultiplier;
   const weeklyGrossOT = overtimeRate * overtimeHours;
   const annualGrossOT = weeklyGrossOT * WEEKS_PER_YEAR;
@@ -157,7 +132,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
         WEEKS_PER_YEAR
       : 0;
 
-  // Calculate tax on overtime income
   const { tax: totalOTTax, effectiveRate: effectiveTaxRate } = calculateMarginalTax(
     currentAnnualIncome,
     annualGrossOT,
@@ -167,12 +141,10 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
     ficaStatus
   );
 
-  // Net calculations
   const annualNetOT = annualGrossOT - totalOTTax;
   const weeklyNetOT = annualNetOT / WEEKS_PER_YEAR;
   const effectiveHourlyRate = overtimeHours > 0 ? weeklyNetOT / overtimeHours : 0;
 
-  // Get brackets
   const currentBracket = getTaxBracket(model.taxableIncome(currentAnnualIncome, 0), model.brackets);
   const bracketAfterOT = getTaxBracket(
     model.taxableIncome(currentAnnualIncome + annualGrossOT, qualifiedOvertime),
@@ -180,7 +152,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
   );
   const pushesIntoBracket = bracketAfterOT.rate > currentBracket.rate;
 
-  // Break-even analysis
   const effectiveRate = effectiveHourlyRate > 0 ? effectiveHourlyRate : 1;
   const breakEven = {
     hours100: Math.ceil(100 / effectiveRate),
@@ -204,9 +175,6 @@ export function calculateOvertime(inputs: OvertimeCalculatorInputs): OvertimeCal
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',

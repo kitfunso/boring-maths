@@ -1,7 +1,3 @@
-/**
- * EU Salary Calculator - React Component
- */
-
 import { useMemo } from 'preact/hooks';
 import {
   calculateSalary,
@@ -51,7 +47,6 @@ export default function EUSalaryCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Country Selection */}
             <div>
               <Label htmlFor="country">Select Country</Label>
               <select
@@ -70,7 +65,6 @@ export default function EUSalaryCalculator() {
               </select>
             </div>
 
-            {/* Gross Salary Input */}
             <div>
               <Label htmlFor="grossSalary" required>
                 Annual Gross Salary ({selectedCountry.currency})
@@ -100,7 +94,6 @@ export default function EUSalaryCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             <ResultCard
               label="Annual Net Salary"
@@ -109,7 +102,6 @@ export default function EUSalaryCalculator() {
               footer={<>Monthly: {formatCurrency(result.monthlyNet, result.country.currency)}</>}
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Gross Salary"
@@ -136,7 +128,6 @@ export default function EUSalaryCalculator() {
               />
             </Grid>
 
-            {/* Tax Breakdown Visual */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 {result.country.name} Tax Breakdown
@@ -187,7 +178,6 @@ export default function EUSalaryCalculator() {
               </div>
             </div>
 
-            {/* Country Comparison Table */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Compare Across EU Countries
@@ -235,7 +225,6 @@ export default function EUSalaryCalculator() {
               </p>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Important Notes:">
               These calculations are simplified estimates for comparison purposes. Actual take-home
               pay depends on many factors including marital status, children, local taxes, specific
@@ -243,7 +232,6 @@ export default function EUSalaryCalculator() {
               calculations.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${result.country.name}: ${formatCurrency(result.grossSalary, result.country.currency)} gross → ${formatCurrency(result.netSalary, result.country.currency)} net (${formatPercent(result.effectiveTaxRate)} tax rate)`}

@@ -1,5 +1,3 @@
-/** Pure value-formula functions. No data/ import: cards are always passed in by the caller. */
-
 import type {
   CardPerksInputs,
   CardPerksResult,
@@ -45,7 +43,6 @@ function welcomeFor(
   const { units, minSpend, windowDays, introRatePct } = card.welcomeBonus;
   const windowSpend = totalSpend * (windowDays / 365);
   if (windowSpend <= 0 || windowSpend < minSpend) return { welcome: 0, bonusMissed: true };
-  // GBP spend x percent = pence, so a rate-capped intro offer only fits cashback (1 unit = 1p).
   const bonusUnits = introRatePct === null ? units : Math.min(units, windowSpend * introRatePct);
   return {
     welcome: (bonusUnits * inputs.pointValuePence[card.currency]) / 100,
@@ -69,7 +66,6 @@ function voucherFor(
   return { voucher: voucherValue, voucherMissed: false };
 }
 
-/** Per-card value breakdown for the given inputs; pure, no rounding side effects outside the returned object. */
 export function valueFor(
   card: CardProduct,
   inputs: CardPerksInputs
@@ -121,7 +117,6 @@ export function valueFor(
   };
 }
 
-/** Rewards as the column shows them: base rewards plus the welcome bonus, so the sort matches. */
 export function rewardsValue(breakdown: ValueBreakdown): number {
   return breakdown.rewards + breakdown.welcome;
 }
@@ -130,7 +125,6 @@ export function perksValue(breakdown: ValueBreakdown): number {
   return breakdown.lounge + breakdown.insurance + breakdown.voucher;
 }
 
-/** Every comparator ties-break on net desc then name asc, so a sort change never reshuffles equal-net rows at random. */
 function tieBreak(a: CardResult, b: CardResult): number {
   return b.breakdown.net - a.breakdown.net || a.card.name.localeCompare(b.card.name);
 }

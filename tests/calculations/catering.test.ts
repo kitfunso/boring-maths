@@ -1,7 +1,3 @@
-/**
- * CateringCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCatering } from '../../src/components/calculators/CateringCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CateringCalculator/types';

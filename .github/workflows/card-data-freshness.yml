@@ -28,8 +28,6 @@ jobs:
         run: node scripts/data/check-card-freshness.mjs
 
       - name: Open or update tracking issue on stale rows
-        # Gate on the check step specifically: a checkout/setup-node flake
-        # must not file a misleading "data is stale" issue.
         if: failure() && steps.check.outcome == 'failure'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

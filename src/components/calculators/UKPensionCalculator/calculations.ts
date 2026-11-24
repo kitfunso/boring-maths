@@ -1,14 +1,6 @@
-/**
- * UK Pension Calculations
- * Retirement projections with compound growth
- */
-
 import type { UKPensionInputs, UKPensionResult, YearlyProjection } from './types';
 import { PENSION_CONSTANTS } from './types';
 
-/**
- * Calculate pension projection
- */
 export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
   const {
     currentAge,
@@ -30,11 +22,9 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
   let totalGrowth = 0;
   const yearlyProjection: YearlyProjection[] = [];
 
-  // Project year by year
   for (let year = 0; year <= yearsToRetirement; year++) {
     const age = currentAge + year;
 
-    // Calculate inflation-adjusted (real) value
     const inflationFactor = Math.pow(1 + inflation, year);
     const potValueReal = potValue / inflationFactor;
 
@@ -47,31 +37,26 @@ export function calculatePension(inputs: UKPensionInputs): UKPensionResult {
     });
 
     if (year < yearsToRetirement) {
-      // Add growth for the year
       const yearGrowth = potValue * growthRate;
       totalGrowth += yearGrowth;
       potValue += yearGrowth;
 
-      // Add contributions (at end of year for simplicity)
       potValue += annualContribution;
       totalContributions += annualContribution;
     }
   }
 
-  // Final values
   const projectedPot = potValue;
   const inflationFactorFinal = Math.pow(1 + inflation, yearsToRetirement);
   const projectedPotReal = projectedPot / inflationFactorFinal;
 
-  // Income calculations using 4% withdrawal rate
   const annualIncome4Percent = projectedPot * PENSION_CONSTANTS.withdrawalRate;
   const annualIncomeReal = projectedPotReal * PENSION_CONSTANTS.withdrawalRate;
   const monthlyIncome = annualIncome4Percent / 12;
   const monthlyIncomeReal = annualIncomeReal / 12;
 
-  // Estimate tax relief gained (basic rate 20% on employee contributions)
   const employeeContributionsTotal = monthlyContribution * 12 * yearsToRetirement;
-  const taxReliefGained = employeeContributionsTotal * 0.2; // Basic rate relief
+  const taxReliefGained = employeeContributionsTotal * 0.2;
 
   return {
     projectedPot: Math.round(projectedPot),

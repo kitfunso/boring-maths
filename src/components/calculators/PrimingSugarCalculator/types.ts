@@ -1,8 +1,3 @@
-/**
- * Priming Sugar Calculator Types
- * Calculate carbonation sugar for bottle conditioning beer
- */
-
 export interface PrimingSugarInputs {
   batchVolume: number;
   volumeUnit: 'gallons' | 'liters';
@@ -25,8 +20,6 @@ export interface PrimingSugarResults {
   warnings: string[];
 }
 
-// Sugar types with CO2 potential
-// Grams of sugar needed to produce 1 volume of CO2 in 1 gallon
 export const SUGAR_TYPES = [
   { value: 'corn', label: 'Corn Sugar (Dextrose)', factor: 1.0, gramsPerGalVol: 4.0 },
   { value: 'table', label: 'Table Sugar (Sucrose)', factor: 0.91, gramsPerGalVol: 3.64 },
@@ -37,7 +30,6 @@ export const SUGAR_TYPES = [
   { value: 'belgian', label: 'Belgian Candi Sugar', factor: 0.91, gramsPerGalVol: 3.64 },
 ];
 
-// CO2 volumes by beer style
 export const STYLE_PRESETS = [
   { label: 'British Ales', co2: 1.5, range: '1.5-2.0' },
   { label: 'American Ales', co2: 2.2, range: '2.0-2.5' },
@@ -49,8 +41,6 @@ export const STYLE_PRESETS = [
   { label: 'Saisons', co2: 3.5, range: '3.0-4.0' },
 ];
 
-// Residual CO2 lookup table (volumes CO2 by temp in F)
-// Beer retains dissolved CO2 from fermentation
 export const RESIDUAL_CO2_TABLE: Record<number, number> = {
   32: 1.7,
   34: 1.63,
@@ -79,7 +69,6 @@ export const RESIDUAL_CO2_TABLE: Record<number, number> = {
   80: 0.65,
 };
 
-// Common batch sizes
 export const BATCH_PRESETS = [
   { label: '1 gal', gallons: 1 },
   { label: '2.5 gal', gallons: 2.5 },

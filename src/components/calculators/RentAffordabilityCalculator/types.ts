@@ -1,7 +1,3 @@
-/**
- * Rent Affordability Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type IncomeType = 'gross' | 'net';

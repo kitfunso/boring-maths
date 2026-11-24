@@ -1,9 +1,3 @@
-/**
- * Mulch Calculator - React Component
- *
- * Interactive calculator for determining mulch quantities.
- * Features different mulch types with density differences and cost comparisons.
- */
 import {
   calculateMulch,
   formatCurrency,
@@ -49,7 +43,6 @@ export default function MulchCalculator() {
 
   const currencySymbol = getCurrencySymbol(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     const config = MULCH_TYPE_CONFIGS[inputs.mulchType];
     setInputs((prev) => ({
@@ -62,7 +55,6 @@ export default function MulchCalculator() {
     }));
   };
 
-  // Handle mulch type change
   const handleMulchTypeChange = (type: MulchType) => {
     const config = MULCH_TYPE_CONFIGS[type];
     setInputs((prev) => ({
@@ -88,7 +80,6 @@ export default function MulchCalculator() {
     { value: 4, label: '4 inches' },
   ];
 
-  // Best value label
   const bestValueLabel =
     result.bestValue === 'bulk'
       ? 'Bulk (cubic yards)'
@@ -99,7 +90,6 @@ export default function MulchCalculator() {
   return (
     <ThemeProvider defaultColor="green">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Calculate Your Mulch Needs"
           subtitle="Find out how much mulch to buy for your garden beds"
@@ -107,9 +97,7 @@ export default function MulchCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Garden Bed Dimensions */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Garden Bed Dimensions (feet)
@@ -142,7 +130,6 @@ export default function MulchCalculator() {
               </Grid>
             </div>
 
-            {/* Mulch Depth */}
             <div>
               <Label>Mulch Depth</Label>
               <ButtonGroup
@@ -156,7 +143,6 @@ export default function MulchCalculator() {
               </p>
             </div>
 
-            {/* Mulch Type */}
             <div>
               <Label>Mulch Type</Label>
               <ButtonGroup
@@ -169,7 +155,6 @@ export default function MulchCalculator() {
               </p>
             </div>
 
-            {/* Pricing */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Pricing ({currencySymbol})
@@ -216,7 +201,6 @@ export default function MulchCalculator() {
               </Grid>
             </div>
 
-            {/* Delivery Option */}
             <div className="space-y-3">
               <div className="flex items-start gap-4">
                 <Checkbox
@@ -244,9 +228,7 @@ export default function MulchCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Mulch Needed"
               value={formatVolume(result.volumeCuYards)}
@@ -270,7 +252,6 @@ export default function MulchCalculator() {
               }
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Volume"
@@ -294,13 +275,11 @@ export default function MulchCalculator() {
               />
             </Grid>
 
-            {/* Cost Comparison */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Cost Comparison
               </h3>
               <div className="space-y-3">
-                {/* Bulk option */}
                 <div
                   className={`flex items-center justify-between py-3 px-4 rounded-lg ${
                     result.bestValue === 'bulk'
@@ -333,7 +312,6 @@ export default function MulchCalculator() {
                   </div>
                 </div>
 
-                {/* 2 cu ft bags option */}
                 <div
                   className={`flex items-center justify-between py-3 px-4 rounded-lg ${
                     result.bestValue === '2cuft'
@@ -366,7 +344,6 @@ export default function MulchCalculator() {
                   </div>
                 </div>
 
-                {/* 3 cu ft bags option */}
                 <div
                   className={`flex items-center justify-between py-3 px-4 rounded-lg ${
                     result.bestValue === '3cuft'
@@ -401,7 +378,6 @@ export default function MulchCalculator() {
               </div>
             </div>
 
-            {/* Mulch Type Comparison */}
             <div className="bg-green-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-3">
                 Mulch Type Comparison
@@ -446,7 +422,6 @@ export default function MulchCalculator() {
               </div>
             </div>
 
-            {/* Refresh Schedule */}
             <div className="bg-green-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-3">
                 Maintenance Schedule
@@ -474,7 +449,6 @@ export default function MulchCalculator() {
               )}
             </div>
 
-            {/* Don't Forget List */}
             <div className="bg-green-950/30 rounded-xl p-6">
               <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-3">
                 Don't Forget
@@ -491,7 +465,6 @@ export default function MulchCalculator() {
               </ul>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Pro tip:">
               {inputs.mulchType === 'stone'
                 ? 'Install landscape fabric under stone mulch to prevent weeds and stop stones from sinking into soil. Consider edging to keep stones contained.'
@@ -500,7 +473,6 @@ export default function MulchCalculator() {
                   : 'Apply mulch in spring after soil warms up. Keep mulch 2-3 inches away from plant stems and tree trunks to prevent rot. Water the bed before mulching to lock in moisture.'}
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Mulch needed: ${formatVolume(result.volumeCuYards)} (${result.bags3CuFt} bags of 3 cu ft) for ${formatArea(result.areaSqFt)} at ${inputs.depth}" depth - Best value: ${bestValueLabel} at ${formatCurrency(

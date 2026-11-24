@@ -1,8 +1,3 @@
-/**
- * Water Change Calculator Types
- * Calculate dilution and parameter adjustment for aquariums
- */
-
 export interface WaterChangeInputs {
   tankVolume: number;
   volumeUnit: 'gallons' | 'liters';
@@ -26,7 +21,6 @@ export interface WaterChangeResults {
   recommendations: string[];
 }
 
-// Common parameter presets with target ranges
 export const PARAMETER_PRESETS = [
   {
     value: 'nitrate',
@@ -75,7 +69,6 @@ export const PARAMETER_PRESETS = [
   },
 ];
 
-// Common water change percentages
 export const CHANGE_PRESETS = [
   { label: '10%', value: 10, description: 'Light maintenance' },
   { label: '15%', value: 15, description: 'Regular maintenance' },
@@ -85,7 +78,6 @@ export const CHANGE_PRESETS = [
   { label: '50%', value: 50, description: 'Major change' },
 ];
 
-// Tank size presets
 export const TANK_PRESETS = [
   { label: '5 gal', gallons: 5 },
   { label: '10 gal', gallons: 10 },
@@ -98,7 +90,6 @@ export const TANK_PRESETS = [
   { label: '125 gal', gallons: 125 },
 ];
 
-// Frequency options
 export const FREQUENCY_OPTIONS = [
   { value: 'daily', label: 'Daily', multiplier: 7 },
   { value: 'weekly', label: 'Weekly', multiplier: 1 },

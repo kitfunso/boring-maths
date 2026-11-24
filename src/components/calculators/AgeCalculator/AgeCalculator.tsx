@@ -1,8 +1,3 @@
-/**
- * Age Calculator - React Component
- *
- * Calculate age from birthdate with detailed breakdown.
- */
 import { calculateAge } from './calculations';
 import { getDefaultInputs, type AgeCalculatorInputs, type AgeResult } from './types';
 import {
@@ -23,7 +18,6 @@ export default function AgeCalculator() {
     compute: calculateAge,
   });
 
-  // Format numbers with commas
   const formatNumber = (num: number): string => num.toLocaleString();
 
   return (
@@ -36,7 +30,6 @@ export default function AgeCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Birth Date */}
             <div>
               <Label htmlFor="birthDate" required>
                 Date of Birth
@@ -52,7 +45,6 @@ export default function AgeCalculator() {
               />
             </div>
 
-            {/* Target Date (for calculating age at a specific date) */}
             <div>
               <Label htmlFor="targetDate">Calculate Age On (defaults to today)</Label>
               <input
@@ -69,9 +61,7 @@ export default function AgeCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Age Display */}
             <div
               className="bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-accent)]/5
                           rounded-2xl p-8 text-center border border-[var(--color-accent)]/30"
@@ -101,7 +91,6 @@ export default function AgeCalculator() {
               </div>
             </div>
 
-            {/* Birthday Info */}
             {result.daysUntilBirthday > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
@@ -114,7 +103,6 @@ export default function AgeCalculator() {
               </div>
             )}
 
-            {/* Life Statistics */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Life Statistics
@@ -143,7 +131,6 @@ export default function AgeCalculator() {
               </Grid>
             </div>
 
-            {/* Birth Info */}
             <Grid responsive={{ sm: 1, md: 3 }} gap="md">
               <div className="bg-[var(--color-night)] rounded-xl p-5 border border-white/10 text-center">
                 <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-1">
@@ -181,7 +168,6 @@ export default function AgeCalculator() {
               old nursery rhyme.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`I'm ${result.years} years, ${result.months} months, and ${result.days} days old! Born on a ${result.dayOfWeekBorn}, ${result.zodiacSign} ♈`}

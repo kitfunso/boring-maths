@@ -1,11 +1,3 @@
-/**
- * Shared Search Console OAuth for the seo scripts (gsc-pull, gsc-inspect).
- *
- * Loopback consent flow with a cached refresh token. Extracted from
- * gsc-pull.mjs so every GSC script shares one token path
- * (scripts/seo/.gsc-token.json) instead of duplicating the flow.
- */
-
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -73,7 +65,6 @@ function openBrowser(url) {
   }
 }
 
-/** Run the loopback consent flow, return tokens (incl. refresh_token). */
 async function authorize(clientId, clientSecret) {
   const state = crypto.randomBytes(16).toString('hex');
   let redirectUri = '';
@@ -160,10 +151,6 @@ async function refreshAccessToken(refreshToken, clientId, clientSecret) {
   return json.access_token;
 }
 
-/**
- * Return a usable access token, running consent only if needed.
- * args: { reauth?: boolean, client?: string }
- */
 export async function getAccessToken(args = {}) {
   const { clientId, clientSecret } = loadClientSecret(
     args.client ? path.resolve(args.client) : CLIENT_PATH_DEFAULT,

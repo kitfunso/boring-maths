@@ -1,6 +1,3 @@
-/**
- * Speeds & Feeds Calculator - React Component
- */
 import {
   calculateSpeedsFeeds,
   formatNumber,
@@ -44,7 +41,6 @@ export default function SpeedsFeedsCalculator() {
   const rpmWarning = getRPMWarning(result.rpm);
   const feedWarning = getFeedRateWarning(result.feedRate, inputs.material);
 
-  // Group materials by type
   const metalMaterials = MATERIALS.filter(
     (m) => !m.value.includes('plastic') && !m.value.includes('wood')
   );
@@ -60,7 +56,6 @@ export default function SpeedsFeedsCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Material Selection */}
           <div className="mb-6">
             <Label htmlFor="material">Material</Label>
             <select
@@ -93,7 +88,6 @@ export default function SpeedsFeedsCalculator() {
             </select>
           </div>
 
-          {/* Tool Parameters */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Tool Parameters
@@ -142,7 +136,6 @@ export default function SpeedsFeedsCalculator() {
             </Grid>
           </div>
 
-          {/* Tool Material */}
           <div className="mb-6">
             <Label>Tool Material</Label>
             <ButtonGroup
@@ -153,7 +146,6 @@ export default function SpeedsFeedsCalculator() {
             />
           </div>
 
-          {/* Depth of Cut */}
           <div className="mb-6">
             <Label htmlFor="depthOfCut">Depth of Cut</Label>
             <div className="flex gap-2 max-w-xs">
@@ -179,9 +171,7 @@ export default function SpeedsFeedsCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Results */}
             <Grid responsive={{ sm: 2 }} gap="md">
               <ResultCard
                 label="Spindle Speed"
@@ -195,7 +185,6 @@ export default function SpeedsFeedsCalculator() {
               />
             </Grid>
 
-            {/* Warnings */}
             {rpmWarning && (
               <Alert variant="warning" title="RPM Warning">
                 {rpmWarning}
@@ -207,7 +196,6 @@ export default function SpeedsFeedsCalculator() {
               </Alert>
             )}
 
-            {/* Additional Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Chip Load"
@@ -231,7 +219,6 @@ export default function SpeedsFeedsCalculator() {
               />
             </Grid>
 
-            {/* G-Code Preview */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 G-Code Reference
@@ -252,7 +239,6 @@ export default function SpeedsFeedsCalculator() {
               </div>
             </div>
 
-            {/* Formula Reference */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Formulas Used
@@ -270,14 +256,12 @@ export default function SpeedsFeedsCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Machining Tips:">
               Start conservative and increase speeds/feeds as you gain confidence with your setup.
               Listen for chatter (vibration) and watch chip formation. Ideal chips are small,
               consistent, and not discolored from heat.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`${formatNumber(result.rpm)} RPM, ${formatNumber(result.feedRate, 1)} IPM for ${MATERIALS.find((m) => m.value === inputs.material)?.label}`}

@@ -1,8 +1,3 @@
-/**
- * UK Inheritance Tax Calculations
- * 2026/27 rates - nil-rate band frozen until April 2031 (extended at Budget 2025)
- */
-
 import type { IHTInputs, IHTResult } from './types';
 
 const NIL_RATE_BAND = 325000;
@@ -22,7 +17,6 @@ export function calculateIHT(inputs: IHTInputs): IHTResult {
     charitableDonation,
   } = inputs;
 
-  // If spouse inherits everything, no IHT due (spouse exemption)
   if (spouseInheritingEstate) {
     return {
       taxableEstate: 0,
@@ -39,24 +33,20 @@ export function calculateIHT(inputs: IHTInputs): IHTResult {
     };
   }
 
-  // Basic nil-rate band
   let nilRateBand = NIL_RATE_BAND;
 
-  // Transferred nil-rate band from deceased spouse
   let transferredNilRateBand = 0;
   if (marriedOrCivilPartner) {
-    transferredNilRateBand = NIL_RATE_BAND; // Assume full transfer
+    transferredNilRateBand = NIL_RATE_BAND;
     nilRateBand += transferredNilRateBand;
   }
 
-  // Residence nil-rate band
   let residenceNilRateBand = 0;
   let transferredResidenceNilRateBand = 0;
 
   if (leavingToDirectDescendants && mainResidenceValue > 0) {
     residenceNilRateBand = Math.min(RESIDENCE_NIL_RATE_BAND, mainResidenceValue);
 
-    // Taper: RNRB reduced by £1 for every £2 over £2m
     if (estateValue > RNRB_TAPER_THRESHOLD) {
       const taper = Math.floor((estateValue - RNRB_TAPER_THRESHOLD) / 2);
       residenceNilRateBand = Math.max(0, residenceNilRateBand - taper);
@@ -73,11 +63,9 @@ export function calculateIHT(inputs: IHTInputs): IHTResult {
 
   const totalNilRateBand = nilRateBand + residenceNilRateBand + transferredResidenceNilRateBand;
 
-  // Taxable estate
   const estateWithGifts = estateValue + giftsInLast7Years;
   const taxableEstate = Math.max(0, estateWithGifts - totalNilRateBand);
 
-  // Determine rate (36% if 10%+ of net estate goes to charity)
   const netEstateForCharity = estateValue - totalNilRateBand;
   const charitableDeduction = Math.min(charitableDonation, estateValue);
   const qualifiesForReducedRate =

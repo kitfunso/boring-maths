@@ -1,7 +1,3 @@
-/**
- * Birthday Party Budget Calculator - Calculation Logic
- */
-
 import type { BirthdayPartyInputs, BirthdayPartyResult, BudgetItem } from './types';
 
 export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): BirthdayPartyResult {
@@ -26,7 +22,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
 
   const budgetItems: BudgetItem[] = [];
 
-  // Venue cost
   const venueTotal = venueCost;
   if (venueTotal > 0) {
     budgetItems.push({
@@ -38,7 +33,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Food costs
   const foodTotal = foodPerKid * numberOfKids;
   budgetItems.push({
     category: 'Food',
@@ -48,7 +42,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     notes: `${partyStyle} party menu`,
   });
 
-  // Cake cost (estimate based on servings)
   const cakeCostPerServing = currency === 'USD' ? 4 : currency === 'GBP' ? 3 : 3.5;
   const cakeCost = Math.round(cakeSize * cakeCostPerServing);
   budgetItems.push({
@@ -59,7 +52,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     notes: `${cakeSize} servings`,
   });
 
-  // Decorations
   let decorationsTotal = decorationsBudget;
   budgetItems.push({
     category: 'Decorations',
@@ -69,7 +61,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     notes: partyStyle === 'themed' ? 'Themed decorations' : 'Basic party decor',
   });
 
-  // Pinata
   if (includePinata) {
     const pinataCost = currency === 'USD' ? 35 : currency === 'GBP' ? 28 : 30;
     decorationsTotal += pinataCost;
@@ -82,7 +73,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Entertainment
   let entertainmentTotal = entertainmentBudget;
   if (entertainmentBudget > 0) {
     budgetItems.push({
@@ -94,7 +84,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Bouncy house
   if (includeBouncyHouse) {
     const bouncyCost = currency === 'USD' ? 250 : currency === 'GBP' ? 200 : 220;
     entertainmentTotal += bouncyCost;
@@ -107,7 +96,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Character appearance
   if (includeCharacter) {
     const characterCost = currency === 'USD' ? 200 : currency === 'GBP' ? 160 : 175;
     entertainmentTotal += characterCost;
@@ -120,7 +108,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Goody bags
   const goodyBagsTotal = goodyBagPerKid * numberOfKids;
   budgetItems.push({
     category: 'Goody Bags',
@@ -130,7 +117,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     notes: `${partyStyle} style favors`,
   });
 
-  // Invitations
   let otherTotal = invitationsBudget;
   budgetItems.push({
     category: 'Other',
@@ -140,7 +126,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     notes: 'Paper or digital invites',
   });
 
-  // Photographer
   if (includePhotographer) {
     const photographerCost = currency === 'USD' ? 200 : currency === 'GBP' ? 160 : 175;
     otherTotal += photographerCost;
@@ -153,7 +138,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     });
   }
 
-  // Calculate totals
   const totalBudget =
     venueTotal +
     foodTotal +
@@ -165,7 +149,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
 
   const costPerChild = Math.round(totalBudget / numberOfKids);
 
-  // Build percentage breakdown
   const percentages = [
     {
       category: 'Venue',
@@ -199,7 +182,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
     },
   ].filter((p) => p.amount > 0);
 
-  // Generate savings tips
   const savingsTips: string[] = [];
 
   if (venueType === 'rented_venue' || venueType === 'activity_center') {
@@ -226,7 +208,6 @@ export function calculateBirthdayPartyBudget(inputs: BirthdayPartyInputs): Birth
   savingsTips.push('DIY decorations can cut costs by 50% and be more personal');
   savingsTips.push('Buy goody bag items in bulk from dollar stores');
 
-  // Generate suggestions based on age
   const suggestions: string[] = [];
 
   if (childAge <= 4) {

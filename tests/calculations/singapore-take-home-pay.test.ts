@@ -1,5 +1,3 @@
-/** Expected values hand-computed from CPF rates effective 1 Jan 2026, $8,000 OW ceiling, graduated band 500-750. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeTakeHome } from '../../src/components/calculators/SingaporeTakeHomePay/calculations';
 

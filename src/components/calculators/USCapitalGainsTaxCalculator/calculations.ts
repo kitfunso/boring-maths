@@ -1,9 +1,3 @@
-/**
- * US Capital Gains Tax Calculator Calculations
- *
- * Calculates short-term and long-term capital gains tax with NIIT.
- */
-
 import type { USCapitalGainsInputs, USCapitalGainsResult, FilingStatus } from './types';
 import { LTCG_BRACKETS_2026, NIIT_THRESHOLDS, NIIT_RATE } from './types';
 import { FEDERAL_BRACKETS_2026, STANDARD_DEDUCTION_2026 } from '../../../lib/us-tax-2026';
@@ -11,13 +5,10 @@ import { FEDERAL_BRACKETS_2026, STANDARD_DEDUCTION_2026 } from '../../../lib/us-
 export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapitalGainsResult {
   const { filingStatus, purchasePrice, salePrice, holdingPeriodMonths, otherIncome } = inputs;
 
-  // Calculate gain/loss
   const capitalGain = Math.max(0, salePrice - purchasePrice);
 
-  // Determine if long-term (held > 12 months)
   const isLongTerm = holdingPeriodMonths > 12;
 
-  // Holding period label
   let holdingPeriodLabel: string;
   if (holdingPeriodMonths < 12) {
     holdingPeriodLabel = `${holdingPeriodMonths} month${holdingPeriodMonths !== 1 ? 's' : ''} (Short-term)`;
@@ -32,37 +23,30 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
         : `${years} year${years !== 1 ? 's' : ''} (Long-term)`;
   }
 
-  // Standard deduction
   const standardDeduction = STANDARD_DEDUCTION_2026[filingStatus];
 
-  // Calculate taxable income (simplified); deduction left over after other income shelters the gain
   const taxableOtherIncome = Math.max(0, otherIncome - standardDeduction);
   const taxableGain = Math.max(0, capitalGain - Math.max(0, standardDeduction - otherIncome));
 
-  // Calculate capital gains tax
   let capitalGainsTax: number;
   let taxRate: number;
 
   if (isLongTerm) {
-    // Long-term capital gains rates
     const ltcgResult = calculateLongTermTax(taxableGain, taxableOtherIncome, filingStatus);
     capitalGainsTax = ltcgResult.tax;
     taxRate = capitalGain > 0 ? (ltcgResult.tax / capitalGain) * 100 : 0;
   } else {
-    // Short-term = ordinary income rates
     const stcgResult = calculateShortTermTax(taxableGain, taxableOtherIncome, filingStatus);
     capitalGainsTax = stcgResult.tax;
     taxRate = taxableGain > 0 ? stcgResult.marginalRate : 0;
   }
 
-  // Calculate NIIT (Net Investment Income Tax)
   const niitThreshold = NIIT_THRESHOLDS[filingStatus];
   const totalIncomeForNIIT = otherIncome + capitalGain;
   const niitApplies = totalIncomeForNIIT > niitThreshold;
   let niitAmount = 0;
 
   if (niitApplies) {
-    // NIIT is 3.8% on the lesser of: net investment income or amount over threshold
     const amountOverThreshold = totalIncomeForNIIT - niitThreshold;
     niitAmount = Math.min(capitalGain, amountOverThreshold) * NIIT_RATE;
   }
@@ -71,7 +55,6 @@ export function calculateCapitalGainsTax(inputs: USCapitalGainsInputs): USCapita
   const effectiveRate = capitalGain > 0 ? (totalTax / capitalGain) * 100 : 0;
   const netProceeds = salePrice - totalTax;
 
-  // Calculate what taxes would be if held long-term (for comparison)
   let longTermComparison = null;
   if (!isLongTerm && capitalGain > 0) {
     const ltcgResult = calculateLongTermTax(taxableGain, taxableOtherIncome, filingStatus);
@@ -121,7 +104,6 @@ function calculateLongTermTax(
   for (const bracket of brackets) {
     if (remainingGain <= 0) break;
 
-    // Other income already above this band: keep incomeUsed so the gain stacks on top of it
     const bracketRoom = bracket.max - incomeUsed;
     if (bracketRoom <= 0) continue;
 
@@ -145,7 +127,6 @@ function calculateShortTermTax(
   let remainingGain = gain;
   let marginalRate = 10;
 
-  // Find starting bracket based on other income
   let bracketIndex = 0;
   let incomeUsed = 0;
 
@@ -159,7 +140,6 @@ function calculateShortTermTax(
     bracketIndex = i + 1;
   }
 
-  // Calculate tax on capital gains
   for (let i = bracketIndex; i < brackets.length && remainingGain > 0; i++) {
     const bracket = brackets[i];
     const bracketRoom = bracket.max - incomeUsed;

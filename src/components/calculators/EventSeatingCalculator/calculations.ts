@@ -1,7 +1,3 @@
-/**
- * Event Seating Calculator - Calculation Logic
- */
-
 import type {
   EventSeatingInputs,
   EventSeatingResult,
@@ -27,7 +23,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
 
   const spaceRequirements: SpaceRequirement[] = [];
 
-  // Get seats per table
   const seatOptions = SEATS_BY_TABLE[tableShape];
   const availableSizes = Object.keys(seatOptions).map(Number);
   const actualSize = availableSizes.includes(tableSize)
@@ -35,35 +30,27 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     : availableSizes[Math.floor(availableSizes.length / 2)];
   const seatsPerTable = seatOptions[actualSize];
 
-  // Calculate guests for regular tables (minus head table if applicable)
   const regularGuests = includeHeadTable ? guestCount - headTableGuests : guestCount;
 
-  // Calculate tables needed
   const tablesNeeded = Math.ceil(regularGuests / seatsPerTable);
   const totalSeats = tablesNeeded * seatsPerTable + (includeHeadTable ? headTableGuests : 0);
   const extraSeats = totalSeats - guestCount;
 
-  // Calculate table footprint (table + chairs + spacing)
   let tableFootprint: number;
   if (tableShape === 'round') {
-    // Round table: diameter + 2 feet on each side for chairs + spacing
-    const totalDiameter = actualSize + 4; // chairs extend ~2ft
+    const totalDiameter = actualSize + 4;
     tableFootprint = Math.PI * Math.pow(totalDiameter / 2, 2);
   } else if (tableShape === 'rectangular') {
-    // Rectangular: length x (width + chairs both sides)
-    const width = 2.5; // standard width
+    const width = 2.5;
     tableFootprint = (actualSize + 4) * (width + 4);
   } else if (tableShape === 'square') {
     tableFootprint = Math.pow(actualSize + 4, 2);
   } else {
-    // Cocktail - standing
     tableFootprint = Math.PI * Math.pow((actualSize + 2) / 2, 2);
   }
 
-  // Add table spacing buffer
   const tableWithSpacing = tableFootprint + tableSpacing * tableSpacing;
 
-  // Seating area
   const seatingAreaSqFt = Math.ceil(tablesNeeded * tableWithSpacing);
   spaceRequirements.push({
     area: 'Guest Seating',
@@ -72,10 +59,9 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     notes: `${tablesNeeded} ${tableShape} tables, ${seatsPerTable} seats each`,
   });
 
-  // Head table
   let headTableSqFt = 0;
   if (includeHeadTable) {
-    headTableSqFt = headTableGuests * 8; // 8 sqft per person at head table
+    headTableSqFt = headTableGuests * 8;
     spaceRequirements.push({
       area: 'Head Table',
       sqFt: headTableSqFt,
@@ -84,7 +70,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     });
   }
 
-  // Dance floor
   const baseSqFt = SQFT_PER_PERSON[eventType] * guestCount;
   const danceFloorSqFt = Math.ceil((baseSqFt * danceFloorPercent) / 100);
   if (danceFloorPercent > 0) {
@@ -97,7 +82,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     });
   }
 
-  // DJ/Band area
   let djAreaSqFt = 0;
   if (includeDJSpace) {
     djAreaSqFt = guestCount < 100 ? 100 : guestCount < 200 ? 150 : 200;
@@ -109,12 +93,10 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     });
   }
 
-  // Buffet area
   let buffetAreaSqFt = 0;
   if (includeBuffetArea) {
-    // 1 linear foot of buffet per 10 guests, 3ft depth, double-sided
     const buffetLength = Math.ceil(guestCount / 10);
-    buffetAreaSqFt = buffetLength * 6 + 100; // Add queue space
+    buffetAreaSqFt = buffetLength * 6 + 100;
     spaceRequirements.push({
       area: 'Buffet Area',
       sqFt: buffetAreaSqFt,
@@ -123,7 +105,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     });
   }
 
-  // Aisles and circulation
   const aislesSqFt = Math.ceil((seatingAreaSqFt + headTableSqFt) * 0.2);
   spaceRequirements.push({
     area: 'Aisles & Circulation',
@@ -132,16 +113,13 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     notes: '20% of seating area for movement',
   });
 
-  // Total room size
   const totalRoomSqFt =
     seatingAreaSqFt + headTableSqFt + danceFloorSqFt + djAreaSqFt + buffetAreaSqFt + aislesSqFt;
 
-  // Calculate room dimensions (assume roughly rectangular)
-  const aspectRatio = 1.3; // slightly rectangular
+  const aspectRatio = 1.3;
   const minimumRoomWidth = Math.ceil(Math.sqrt(totalRoomSqFt / aspectRatio));
   const minimumRoomLength = Math.ceil(minimumRoomWidth * aspectRatio);
 
-  // Table configuration
   const tableConfig: TableConfig = {
     type: `${actualSize}ft ${tableShape}`,
     seatsPerTable,
@@ -150,7 +128,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
     tableFootprint: Math.round(tableWithSpacing),
   };
 
-  // Layout suggestions
   const layoutSuggestions: string[] = [];
 
   if (tablesNeeded <= 10) {
@@ -179,7 +156,6 @@ export function calculateEventSeating(inputs: EventSeatingInputs): EventSeatingR
   const cols = Math.ceil(tablesNeeded / rows);
   layoutSuggestions.push(`Suggested grid: ${rows} rows x ${cols} tables per row`);
 
-  // Tips
   const tips: string[] = [];
 
   if (tableShape === 'round') {

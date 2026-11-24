@@ -1,9 +1,3 @@
-/**
- * HSA Calculator - Calculation Logic
- *
- * Calculates tax savings, contribution limits, and long-term projections.
- */
-
 import type { HSAInputs, HSAResult } from './types';
 import { HSA_LIMITS_2026, FICA_RATE } from './types';
 
@@ -21,18 +15,14 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
     annualMedicalExpenses,
   } = inputs;
 
-  // Calculate contribution limits
   const baseLimit = HSA_LIMITS_2026[coverageType];
   const catchUpAmount = age >= HSA_LIMITS_2026.catchUpAge ? HSA_LIMITS_2026.catchUp : 0;
   const totalLimit = baseLimit + catchUpAmount;
 
-  // Total contribution (employee + employer)
   const totalContribution = annualContribution + employerContribution;
   const overContribution = Math.max(0, totalContribution - totalLimit);
   const remainingRoom = Math.max(0, totalLimit - totalContribution);
 
-  // Tax savings calculations (only on employee contribution, not employer)
-  // Floored at 0: an employer contribution above the limit leaves no room, not negative savings
   const taxableContribution = Math.max(
     0,
     Math.min(annualContribution, totalLimit - employerContribution)
@@ -42,13 +32,11 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
   const ficaTaxSavings = taxableContribution * FICA_RATE;
   const totalAnnualTaxSavings = federalTaxSavings + stateTaxSavings + ficaTaxSavings;
 
-  // Effective discount on contributions
   const effectiveDiscount =
     taxableContribution > 0 ? (totalAnnualTaxSavings / taxableContribution) * 100 : 0;
 
-  // Project balance over time
   const annualReturn = expectedReturn / 100;
-  void (totalContribution - annualMedicalExpenses); // Net contribution for reference
+  void (totalContribution - annualMedicalExpenses);
 
   const projections: HSAResult['projections'] = [];
   let runningBalance = currentBalance;
@@ -61,10 +49,8 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
     const yearLimit = baseLimit + yearCatchUp;
     const yearContribution = Math.min(totalContribution, yearLimit);
 
-    // Growth on existing balance
     runningBalance = runningBalance * (1 + annualReturn);
 
-    // Add contribution minus expenses
     runningBalance += yearContribution - annualMedicalExpenses;
 
     totalContributions += yearContribution;
@@ -81,7 +67,7 @@ export function calculateHSA(inputs: HSAInputs): HSAResult {
 
   const projectedBalance = Math.round(runningBalance);
   const totalGrowth = projectedBalance - totalContributions;
-  const taxFreeGrowth = totalGrowth; // All HSA growth is tax-free
+  const taxFreeGrowth = totalGrowth;
 
   return {
     maxContribution: baseLimit,

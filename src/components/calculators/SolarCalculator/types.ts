@@ -1,9 +1,3 @@
-/**
- * Solar Panel Calculator - Type Definitions
- *
- * Calculate solar panel system costs, payback period, and long-term savings.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type SystemSize = 'small' | 'medium' | 'large' | 'custom';
@@ -12,27 +6,19 @@ export type InstallationType = 'roof' | 'ground';
 export interface SolarCalculatorInputs {
   currency: Currency;
 
-  // System specifications
   systemSizeKw: number;
-  systemCost: number; // total before incentives
+  systemCost: number;
   installationType: InstallationType;
 
-  // Energy usage
   monthlyElectricBill: number;
-  electricityRate: number; // per kWh
-  annualRateIncrease: number; // percentage
-
-  // Location factors
-  peakSunHours: number; // average daily peak sun hours
-  systemEfficiency: number; // percentage (typically 80-85%)
-
-  // Incentives
-  federalTaxCredit: number; // percentage (currently 30% in US)
+  electricityRate: number;
+  annualRateIncrease: number;
+  peakSunHours: number;
+  systemEfficiency: number;
+  federalTaxCredit: number;
   stateTaxCredit: number;
-  localRebate: number; // flat amount
-  srecValue: number; // solar renewable energy credit per kWh
-
-  // Financing
+  localRebate: number;
+  srecValue: number;
   financed: boolean;
   loanInterestRate: number;
   loanTermYears: number;
@@ -41,42 +27,30 @@ export interface SolarCalculatorInputs {
 export interface SolarCalculatorResult {
   currency: Currency;
 
-  // System output
   annualProductionKwh: number;
   monthlyProductionKwh: number;
-  coveragePercent: number; // of monthly bill
-
-  // Costs
+  coveragePercent: number;
   grossCost: number;
   federalCredit: number;
   stateCredit: number;
   totalIncentives: number;
   netCost: number;
 
-  // Financing
   monthlyPayment: number;
   totalFinancingCost: number;
 
-  // Savings
   firstYearSavings: number;
   year5Savings: number;
   year10Savings: number;
   year25Savings: number;
-  lifetimeSavings: number; // 25 years
-
-  // ROI
+  lifetimeSavings: number;
   paybackYears: number;
-  roi25Year: number; // percentage
-
-  // Environmental
-  co2OffsetTons: number; // annual
-  treesEquivalent: number; // annual
-
-  // Tips
+  roi25Year: number;
+  co2OffsetTons: number;
+  treesEquivalent: number;
   tips: string[];
 }
 
-// System size presets (kW)
 export const SYSTEM_SIZES: Record<SystemSize, number> = {
   small: 4,
   medium: 7,
@@ -84,21 +58,18 @@ export const SYSTEM_SIZES: Record<SystemSize, number> = {
   custom: 6,
 };
 
-// Average cost per watt by currency
 export const COST_PER_WATT: Record<Currency, number> = {
   USD: 2.75,
   GBP: 2.5,
   EUR: 2.6,
 };
 
-// Average peak sun hours by region (simplified)
 export const AVG_SUN_HOURS: Record<Currency, number> = {
   USD: 5, // US average
   GBP: 3.5, // UK average
   EUR: 4, // EU average
 };
 
-// CO2 offset per kWh (lbs)
 export const CO2_PER_KWH = 0.92;
 
 export function getDefaultInputs(currency: Currency = 'USD'): SolarCalculatorInputs {

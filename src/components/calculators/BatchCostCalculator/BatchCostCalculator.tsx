@@ -1,7 +1,3 @@
-/**
- * Batch Cost Calculator Component
- * Calculate material costs, labor, and pricing for crafts
- */
 import { ResultCard, Input, Select, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { BatchCostInputs, MaterialItem } from './types';
@@ -74,7 +70,6 @@ export function BatchCostCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Batch Details</h2>
@@ -364,7 +359,6 @@ export function BatchCostCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/10 p-6 ring-1 ring-green-500/30">
           <h2 className="mb-4 text-lg font-semibold text-green-300">Suggested Retail Price</h2>

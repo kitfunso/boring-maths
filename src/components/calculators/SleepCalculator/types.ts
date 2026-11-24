@@ -1,16 +1,12 @@
-/**
- * Sleep Calculator - Type Definitions
- */
-
 export type CalculationMode = 'wakeTime' | 'bedTime' | 'napTime';
 export type AgeGroup = 'teen' | 'adult' | 'senior';
 
 export interface SleepInputs {
   mode: CalculationMode;
-  wakeTime: string; // HH:MM format for when you need to wake
-  bedTime: string; // HH:MM format for when you're going to bed
+  wakeTime: string;
+  bedTime: string;
   ageGroup: AgeGroup;
-  fallAsleepMinutes: number; // Time to fall asleep (default 15)
+  fallAsleepMinutes: number;
 }
 
 export interface SleepCycle {
@@ -24,7 +20,7 @@ export interface SleepCycle {
 export interface SleepResult {
   recommendations: SleepCycle[];
   optimalSleep: string;
-  cycleLength: number; // 90 minutes
+  cycleLength: number;
   tipOfTheDay: string;
 }
 

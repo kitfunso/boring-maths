@@ -1,6 +1,3 @@
-/** Germany Net Salary (Brutto-Netto) Calculator - pure logic. Tax class I estimate, 2026; methodology in docs/ARCHITECTURE.md. No financial advice. */
-
-// Social insurance ceilings and employee rates, 2026 (derivation: docs/ARCHITECTURE.md).
 export const RV_ALV_CEILING = 101400;
 export const KV_PV_CEILING = 69750;
 export const RV_EMPLOYEE_RATE = 0.093;
@@ -9,60 +6,38 @@ export const KV_EMPLOYEE_RATE = 0.0875;
 export const PV_EMPLOYEE_RATE = 0.018;
 export const PV_CHILDLESS_SURCHARGE = 0.006;
 
-// Employee lump-sum allowance (Arbeitnehmer-Pauschbetrag / Werbungskostenpauschale).
 export const ARBEITNEHMER_PAUSCHBETRAG = 1230;
 
-// Einkommensteuer 2026 income tax bands, section 32a EStG.
 export const GRUNDFREIBETRAG_2026 = 12348;
 export const ZONE2_LIMIT = 17799;
 export const ZONE3_LIMIT = 69878;
 export const ZONE4_LIMIT = 277825;
 
-// Solidaritaetszuschlag (single), 2026.
 export const SOLI_RATE = 0.055;
-export const SOLI_FREIGRENZE_SINGLE = 20350; // No soli if income tax at or below this.
-export const SOLI_MILDERUNG_RATE = 0.119; // Phase-in (Milderungszone) on the excess.
-
-// Kirchensteuer: 9% of income tax in most states (8% in Bavaria and Baden-Wuerttemberg).
+export const SOLI_FREIGRENZE_SINGLE = 20350;
+export const SOLI_MILDERUNG_RATE = 0.119;
 export const CHURCH_TAX_RATE = 0.09;
 
 export interface GermanySalaryInputs {
-  /** Gross annual salary (Bruttojahresgehalt) in EUR. */
   readonly grossAnnualSalary: number;
-  /** Whether church tax (Kirchensteuer) applies. */
   readonly churchTax: boolean;
-  /** Whether the employee is childless and aged 23+; adds the 0.6% long-term care surcharge. Defaults true (most conservative net). */
   readonly childless: boolean;
 }
 
 export interface GermanySalaryResult {
-  /** Gross annual salary echoed back. */
   readonly grossAnnual: number;
-  /** Net annual salary after all deductions. */
   readonly netAnnual: number;
-  /** Net monthly salary (netAnnual / 12). */
   readonly netMonthly: number;
-  /** Income tax (Lohnsteuer/Einkommensteuer) for the year. */
   readonly incomeTax: number;
-  /** Solidarity surcharge (Solidaritaetszuschlag). */
   readonly soli: number;
-  /** Church tax (Kirchensteuer), 0 if not applicable. */
   readonly churchTax: number;
-  /** Pension insurance employee share (Rentenversicherung). */
   readonly pension: number;
-  /** Health insurance employee share (Krankenversicherung). */
   readonly health: number;
-  /** Unemployment insurance employee share (Arbeitslosenversicherung). */
   readonly unemployment: number;
-  /** Long-term care insurance employee share (Pflegeversicherung). */
   readonly care: number;
-  /** Total employee social insurance contributions. */
   readonly socialTotal: number;
-  /** Total of all deductions (tax + soli + church + social). */
   readonly totalDeductions: number;
-  /** Taxable income used for the section 32a calculation (zvE). */
   readonly taxableIncome: number;
-  /** Effective deduction rate as a percentage of gross. */
   readonly effectiveRate: number;
 }
 
@@ -71,7 +46,6 @@ function roundTo(value: number, decimals: number): number {
   return Math.round(value * factor) / factor;
 }
 
-/** Income tax under EStG section 32a (2026 Veranlagungszeitraum); input and result are floored to whole euros. */
 export function calculateEinkommensteuer(taxableIncome: number): number {
   const x = Math.floor(Math.max(0, taxableIncome));
   let tax: number;
@@ -93,7 +67,6 @@ export function calculateEinkommensteuer(taxableIncome: number): number {
   return Math.floor(tax);
 }
 
-/** Total employee social insurance for the year; each branch capped at its own contribution ceiling. */
 function calculateSocial(
   gross: number,
   childless: boolean
@@ -115,7 +88,6 @@ function calculateSocial(
   return { pension, unemployment, health, care };
 }
 
-/** Solidarity surcharge for a single taxpayer: none below the Freigrenze, gentler phase-in (Milderungszone) above it. */
 export function calculateSoli(incomeTax: number): number {
   if (incomeTax <= SOLI_FREIGRENZE_SINGLE) return 0;
   const full = SOLI_RATE * incomeTax;
@@ -123,7 +95,6 @@ export function calculateSoli(incomeTax: number): number {
   return Math.min(full, milderung);
 }
 
-/** Estimate German net salary for tax class I. */
 export function calculateGermanySalary(inputs: GermanySalaryInputs): GermanySalaryResult {
   const gross = Math.max(0, inputs.grossAnnualSalary || 0);
   const childless = inputs.childless;
@@ -131,7 +102,6 @@ export function calculateGermanySalary(inputs: GermanySalaryInputs): GermanySala
   const { pension, unemployment, health, care } = calculateSocial(gross, childless);
   const socialTotal = pension + unemployment + health + care;
 
-  // ALV (unemployment insurance) is not tax-deductible in Germany; only pension, health and care reduce the taxable base.
   const deductibleVorsorge = pension + health + care;
   const taxableIncome = Math.max(0, gross - deductibleVorsorge - ARBEITNEHMER_PAUSCHBETRAG);
 

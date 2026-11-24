@@ -1,7 +1,3 @@
-/**
- * Business Mileage Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateBusinessMileage } from '../../src/components/calculators/BusinessMileageCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/BusinessMileageCalculator/types';
@@ -12,9 +8,7 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('USD');
       const result = calculateBusinessMileage(inputs);
 
-      // 100 miles/week * 48 weeks = 4,800 miles
       expect(result.annualMiles).toBe(4800);
-      // US: 2,400 * $0.725 = $1,740 to June, 2,400 * $0.76 = $1,824 from July; $3,564
       expect(result.taxDeduction).toBe(3564);
       expect(result.rateBreakdown).toHaveLength(2);
       expect(result.rateBreakdown[0].rate).toBe(0.725);
@@ -27,9 +21,7 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('GBP');
       const result = calculateBusinessMileage(inputs);
 
-      // 100 miles/week * 48 weeks = 4,800 miles
       expect(result.annualMiles).toBe(4800);
-      // UK car: 4,800 * £0.55 = £2,640 (all under 10k threshold)
       expect(result.taxDeduction).toBe(2640);
       expect(result.rateBreakdown).toHaveLength(1);
       expect(result.rateBreakdown[0].rate).toBe(0.55);
@@ -43,11 +35,7 @@ describe('BusinessMileageCalculator', () => {
       };
       const result = calculateBusinessMileage(inputs);
 
-      // 300 * 48 = 14,400 miles
       expect(result.annualMiles).toBe(14400);
-      // First 10,000 at 55p = £5,500
-      // Remaining 4,400 at 25p = £1,100
-      // Total = £6,600
       expect(result.taxDeduction).toBe(6600);
       expect(result.rateBreakdown).toHaveLength(2);
       expect(result.rateBreakdown[0].miles).toBe(10000);
@@ -65,7 +53,6 @@ describe('BusinessMileageCalculator', () => {
       };
       const result = calculateBusinessMileage(inputs);
 
-      // 200 * 48 = 9,600 miles at 24p = £2,304
       expect(result.annualMiles).toBe(9600);
       expect(result.taxDeduction).toBe(2304);
       expect(result.rateBreakdown).toHaveLength(1);
@@ -81,7 +68,6 @@ describe('BusinessMileageCalculator', () => {
       };
       const result = calculateBusinessMileage(inputs);
 
-      // 50 * 48 = 2,400 miles at 20p = £480
       expect(result.annualMiles).toBe(2400);
       expect(result.taxDeduction).toBe(480);
       expect(result.rateBreakdown).toHaveLength(1);
@@ -92,8 +78,6 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('GBP');
       const result = calculateBusinessMileage(inputs);
 
-      // UK basic rate: 20%
-      // Deduction £2,640 * 0.20 = £528
       expect(result.annualTaxSaving).toBe(528);
       expect(result.estimatedTaxRate).toBe(0.2);
     });
@@ -102,8 +86,6 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('USD');
       const result = calculateBusinessMileage(inputs);
 
-      // US rate: 22%
-      // Deduction $3,564 * 0.22 = $784.08
       expect(result.annualTaxSaving).toBe(784.08);
       expect(result.estimatedTaxRate).toBe(0.22);
     });
@@ -112,7 +94,6 @@ describe('BusinessMileageCalculator', () => {
       const inputs = getDefaultInputs('USD');
       const result = calculateBusinessMileage(inputs);
 
-      // $3,564 / 12 = $297
       expect(result.monthlyEquivalent).toBe(297);
     });
 
@@ -189,7 +170,6 @@ describe('BusinessMileageCalculator', () => {
 
     it('should use EUR currency with US region', () => {
       const inputs = getDefaultInputs('EUR');
-      // EUR defaults to US region
       expect(inputs.region).toBe('US');
       const result = calculateBusinessMileage(inputs);
       expect(result.rateBreakdown[1].rate).toBe(0.76);

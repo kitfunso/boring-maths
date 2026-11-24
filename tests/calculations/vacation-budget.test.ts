@@ -1,7 +1,3 @@
-/**
- * VacationBudgetCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateVacationBudget } from '../../src/components/calculators/VacationBudget/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/VacationBudget/types';

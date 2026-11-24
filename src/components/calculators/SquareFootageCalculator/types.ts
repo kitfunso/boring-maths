@@ -1,5 +1,3 @@
-/** Square Footage Calculator - Type Definitions: area for different room shapes, with unit conversion and cost estimation. */
-
 import type { Currency } from '../../../lib/regions';
 
 export type RoomShape = 'rectangle' | 'circle' | 'triangle' | 'l-shape';
@@ -17,40 +15,25 @@ export interface SquareFootageCalculatorInputs {
 
   circleMode: CircleMode;
 
-  /** Feet (imperial) or metres (metric). */
   rectLengthMain: number;
-  /** Inches portion, imperial only. */
   rectLengthInches: number;
-  /** Feet (imperial) or metres (metric). */
   rectWidthMain: number;
-  /** Inches portion, imperial only. */
   rectWidthInches: number;
 
-  /** Feet (imperial) or metres (metric); radius or diameter per circleMode. */
   circleMain: number;
-  /** Inches portion, imperial only. */
   circleInches: number;
 
-  /** Feet (imperial) or metres (metric). */
   triBaseMain: number;
-  /** Inches portion, imperial only. */
   triBaseInches: number;
-  /** Feet (imperial) or metres (metric). */
   triHeightMain: number;
-  /** Inches portion, imperial only. */
   triHeightInches: number;
 
-  // L-Shape dimensions (two rectangles)
-  /** L-Shape section 1 length */
   lLength1Main: number;
   lLength1Inches: number;
-  /** L-Shape section 1 width */
   lWidth1Main: number;
   lWidth1Inches: number;
-  /** L-Shape section 2 length */
   lLength2Main: number;
   lLength2Inches: number;
-  /** L-Shape section 2 width */
   lWidth2Main: number;
   lWidth2Inches: number;
 

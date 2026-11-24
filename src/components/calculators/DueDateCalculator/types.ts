@@ -1,19 +1,15 @@
-/**
- * Due Date Calculator - Type Definitions
- */
-
 export type CalculationMethod = 'lmp' | 'conception' | 'ivf' | 'ultrasound';
 
 export interface DueDateInputs {
   method: CalculationMethod;
-  lmpDate: string; // Last menstrual period (YYYY-MM-DD format)
+  lmpDate: string;
   conceptionDate: string;
   ivfDate: string;
   ivfDayType: '3day' | '5day';
   ultrasoundDate: string;
   ultrasoundWeeks: number;
   ultrasoundDays: number;
-  cycleLength: number; // Default 28 days
+  cycleLength: number;
 }
 
 export interface DueDateResult {
@@ -40,7 +36,6 @@ export interface Milestone {
 
 export function getDefaultInputs(): DueDateInputs {
   const today = new Date();
-  // Default LMP to 8 weeks ago for demo
   const lmp = new Date(today);
   lmp.setDate(lmp.getDate() - 56);
 

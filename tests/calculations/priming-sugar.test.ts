@@ -1,7 +1,3 @@
-/**
- * PrimingSugar Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePrimingSugar } from '../../src/components/calculators/PrimingSugarCalculator/calculations';
 import type { PrimingSugarInputs } from '../../src/components/calculators/PrimingSugarCalculator/types';
@@ -21,7 +17,6 @@ describe('PrimingSugarCalculator', () => {
 
       const result = calculatePrimingSugar(inputs);
 
-      // Typical priming sugar for a 5-gallon batch is ~4-5oz corn sugar
       expect(result.sugarAmount).toBeGreaterThan(0);
       expect(result.sugarPerBottle).toBeGreaterThan(0);
     });
@@ -42,7 +37,6 @@ describe('PrimingSugarCalculator', () => {
       const coldResult = calculatePrimingSugar(cold);
       const warmResult = calculatePrimingSugar(warm);
 
-      // Warmer beer has less dissolved CO2, needs more sugar
       expect(warmResult.sugarAmount).toBeGreaterThan(coldResult.sugarAmount);
     });
 

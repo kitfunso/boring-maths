@@ -1,33 +1,17 @@
-/**
- * Etsy/eBay Fee Calculator - Calculation Logic
- *
- * Pure functions for calculating marketplace fees.
- */
-
 import type { EtsyFeeInputs, EtsyFeeResult, PlatformFeeBreakdown, EbayCategory } from './types';
 import { FEE_STRUCTURES, EBAY_CATEGORIES } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Floor a numeric input to a non-negative finite value.
- * Cleared or invalid fields (NaN, Infinity) become 0 so the math never renders "NaN".
- */
 function safe(value: number): number {
   return Number.isFinite(value) ? Math.max(0, value) : 0;
 }
 
-/**
- * Get eBay fee rate for a category
- */
 function getEbayFeeRate(category: EbayCategory): number {
   const categoryConfig = EBAY_CATEGORIES.find((c) => c.id === category);
   return categoryConfig?.feeRate ?? FEE_STRUCTURES.ebay.finalValueFeeDefault;
 }
 
-/**
- * Calculate Etsy fees for a single platform
- */
 function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
   const { etsyOffsiteAds } = inputs;
   const salePrice = safe(inputs.salePrice);
@@ -38,18 +22,14 @@ function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
 
   const totalRevenue = salePrice + shippingCharged;
 
-  // Listing fee: $0.20 per item
   const listingFee = FEE_STRUCTURES.etsy.listingFee * quantity;
 
-  // Transaction fee: 6.5% of (sale price + shipping)
   const transactionFee = totalRevenue * FEE_STRUCTURES.etsy.transactionFeeRate;
 
-  // Payment processing: 3% + $0.25
   const paymentProcessingFee =
     totalRevenue * FEE_STRUCTURES.etsy.paymentProcessingRate +
     FEE_STRUCTURES.etsy.paymentProcessingFixed;
 
-  // Offsite ads fee: 15% of sale price if applicable
   const offsiteAdsFee = etsyOffsiteAds ? salePrice * FEE_STRUCTURES.etsy.offsiteAdsRate : 0;
 
   const totalFees = listingFee + transactionFee + paymentProcessingFee + offsiteAdsFee;
@@ -76,9 +56,6 @@ function computeEtsyPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
   };
 }
 
-/**
- * Calculate eBay fees for a single platform
- */
 function computeEbayPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
   const { ebayCategory } = inputs;
   const salePrice = safe(inputs.salePrice);
@@ -89,16 +66,12 @@ function computeEbayPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
   const totalRevenue = salePrice + shippingCharged;
   const feeRate = getEbayFeeRate(ebayCategory);
 
-  // No listing fee for basic listings (first 250 free per month)
   const listingFee = 0;
 
-  // Final value fee: X% of (sale price + shipping) - includes payment processing
   const transactionFee = totalRevenue * feeRate;
 
-  // Payment processing is included in final value fee on eBay
   const paymentProcessingFee = 0;
 
-  // Per-order fee: $0.30
   const perOrderFee = FEE_STRUCTURES.ebay.perOrderFee;
 
   const totalFees = listingFee + transactionFee + perOrderFee;
@@ -125,14 +98,10 @@ function computeEbayPlatformFees(inputs: EtsyFeeInputs): PlatformFeeBreakdown {
   };
 }
 
-/**
- * Calculate fees for both platforms and compare
- */
 export function calculateMarketplaceFees(inputs: EtsyFeeInputs): EtsyFeeResult {
   const etsy = computeEtsyPlatformFees(inputs);
   const ebay = computeEbayPlatformFees(inputs);
 
-  // Determine which platform has lower fees
   let lowerFeePlatform: 'Etsy' | 'eBay' | 'Same';
   if (Math.abs(etsy.totalFees - ebay.totalFees) < 0.01) {
     lowerFeePlatform = 'Same';
@@ -144,7 +113,6 @@ export function calculateMarketplaceFees(inputs: EtsyFeeInputs): EtsyFeeResult {
 
   const feeSavings = Math.abs(etsy.totalFees - ebay.totalFees);
 
-  // Determine which platform has higher profit
   let higherProfitPlatform: 'Etsy' | 'eBay' | 'Same';
   if (Math.abs(etsy.netProfit - ebay.netProfit) < 0.01) {
     higherProfitPlatform = 'Same';
@@ -167,9 +135,6 @@ export function calculateMarketplaceFees(inputs: EtsyFeeInputs): EtsyFeeResult {
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',
@@ -178,9 +143,6 @@ export function formatCurrency(
   return formatCurrencyByRegion(value, currency, decimals);
 }
 
-/**
- * Format percentage
- */
 export function formatPercentage(value: number, decimals: number = 1): string {
   return `${value.toFixed(decimals)}%`;
 }

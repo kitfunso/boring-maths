@@ -1,10 +1,3 @@
-/**
- * Fuel Cost Calculator - Preact Component
- *
- * Interactive calculator for estimating journey fuel costs.
- * Supports miles/km, mpg/L per 100km, and multiple fuel price units.
- * UK-centric defaults with currency selector support.
- */
 import { calculateFuelCost, formatCurrency, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -80,9 +73,7 @@ export default function FuelCostCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Distance */}
             <div>
               <Label htmlFor="distance" required>
                 Distance ({inputs.distanceUnit})
@@ -97,7 +88,6 @@ export default function FuelCostCalculator() {
               />
             </div>
 
-            {/* Distance Unit Toggle */}
             <div>
               <Label>Distance Unit</Label>
               <ButtonGroup
@@ -113,14 +103,12 @@ export default function FuelCostCalculator() {
               />
             </div>
 
-            {/* Round Trip Toggle */}
             <Toggle
               checked={inputs.roundTrip}
               onChange={(checked) => updateInput('roundTrip', checked)}
               label="Round trip (doubles the distance)"
             />
 
-            {/* Fuel Efficiency */}
             <div>
               <Label htmlFor="efficiency" required>
                 Fuel Efficiency ({inputs.efficiencyUnit === 'mpg' ? 'mpg' : 'L/100km'})
@@ -140,7 +128,6 @@ export default function FuelCostCalculator() {
               </p>
             </div>
 
-            {/* Fuel Price Unit */}
             <div>
               <Label>Fuel Price Unit</Label>
               <ButtonGroup
@@ -173,7 +160,6 @@ export default function FuelCostCalculator() {
               />
             </div>
 
-            {/* Fuel Price */}
             <div>
               <Label htmlFor="fuelPrice" required>
                 {fuelPriceLabel}
@@ -191,9 +177,7 @@ export default function FuelCostCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Total Fuel Cost"
               value={formatCurrency(result.totalCost, result.currency)}
@@ -204,7 +188,6 @@ export default function FuelCostCalculator() {
               }
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Fuel Needed"
@@ -229,14 +212,12 @@ export default function FuelCostCalculator() {
               />
             </Grid>
 
-            {/* Tip */}
             <Alert variant="tip" title="Saving on fuel:">
               Driving at a steady speed, keeping tyres properly inflated, and removing excess weight
               from your vehicle can improve fuel efficiency by up to 15%. Avoid harsh braking and
               acceleration where possible.
             </Alert>
 
-            {/* Share and Print */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Fuel cost: ${formatCurrency(result.totalCost, result.currency)} for ${formatNumber(result.effectiveDistance, 0)} ${result.distanceUnit} (${formatNumber(result.fuelNeededLitres)} litres needed)`}

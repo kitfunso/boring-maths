@@ -1,28 +1,13 @@
-/**
- * Recipe Scaler Calculator - Calculation Logic
- */
-
 import type { RecipeScalerInputs, RecipeScalerResult, ScaledIngredient } from './types';
 
-/** Units where fractional amounts look wrong (you can't have 2.33 eggs). */
 const WHOLE_UNITS = new Set(['whole', 'pieces', 'cloves', 'slices', 'cans']);
 
-/** Units measured in volume fractions (round to nearest 1/4). */
 const FRACTIONAL_UNITS = new Set(['cups', 'tbsp', 'tsp']);
 
-/**
- * Round a value to the nearest fraction (1/4 step).
- * For baking mode, this avoids ugly decimals like 1.666 cups.
- */
 function roundToQuarter(value: number): number {
   return Math.round(value * 4) / 4;
 }
 
-/**
- * Format a number as a clean display string.
- * Whole numbers show no decimals. Quarters show fractions.
- * Other values show up to 2 decimal places.
- */
 export function formatAmount(value: number, unit: string, isBakingMode: boolean): string {
   if (value === 0) return '0';
 
@@ -36,22 +21,17 @@ export function formatAmount(value: number, unit: string, isBakingMode: boolean)
     return formatFraction(rounded);
   }
 
-  // Cooking mode or weight units: round to 2 decimal places, strip trailing zeros.
   const rounded = Math.round(value * 100) / 100;
   if (Number.isInteger(rounded)) return String(rounded);
   return rounded.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
 }
 
-/**
- * Convert a decimal to a mixed-number fraction string for common kitchen fractions.
- */
 function formatFraction(value: number): string {
   if (value <= 0) return '0';
 
   const whole = Math.floor(value);
   const frac = value - whole;
 
-  // Map common fractions
   let fracStr = '';
   if (Math.abs(frac - 0.25) < 0.001) fracStr = '\u00BC';
   else if (Math.abs(frac - 0.5) < 0.001) fracStr = '\u00BD';
@@ -63,7 +43,6 @@ function formatFraction(value: number): string {
     return whole > 0 ? `${whole} ${fracStr}` : fracStr;
   }
 
-  // No nice fraction: show decimal
   if (whole > 0 && frac > 0.001) {
     return `${whole}.${Math.round(frac * 100)
       .toString()
@@ -75,9 +54,6 @@ function formatFraction(value: number): string {
   );
 }
 
-/**
- * Apply smart rounding based on unit type and baking/cooking mode.
- */
 export function smartRound(value: number, unit: string, isBakingMode: boolean): number {
   if (WHOLE_UNITS.has(unit)) {
     return Math.round(value);
@@ -90,9 +66,6 @@ export function smartRound(value: number, unit: string, isBakingMode: boolean): 
   return Math.round(value * 100) / 100;
 }
 
-/**
- * Scale all ingredients by the ratio of desired to original servings.
- */
 export function calculateRecipeScaler(inputs: RecipeScalerInputs): RecipeScalerResult {
   const { originalServings, desiredServings, ingredients, isBakingMode } = inputs;
 
@@ -122,9 +95,6 @@ export function calculateRecipeScaler(inputs: RecipeScalerInputs): RecipeScalerR
   };
 }
 
-/**
- * Suggest pan size changes based on scale factor.
- */
 function getPanSizeAdjustment(scaleFactor: number): string {
   if (scaleFactor <= 0.5) return 'Use a smaller pan (reduce by one size).';
   if (scaleFactor <= 0.75) return 'Use the same pan or slightly smaller.';
@@ -134,9 +104,6 @@ function getPanSizeAdjustment(scaleFactor: number): string {
   return `Use ${Math.ceil(scaleFactor)} pans or a sheet pan.`;
 }
 
-/**
- * Suggest cooking time changes based on scale factor.
- */
 function getCookingTimeAdjustment(scaleFactor: number): string {
   if (scaleFactor <= 0.5) return 'Reduce cooking time by 25-30%. Check early.';
   if (scaleFactor <= 0.75) return 'Reduce cooking time by 10-15%.';

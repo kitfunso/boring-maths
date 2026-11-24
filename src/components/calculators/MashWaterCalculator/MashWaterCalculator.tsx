@@ -1,7 +1,3 @@
-/**
- * Mash Water Calculator Component
- * Strike water and sparge calculations for all-grain brewing
- */
 import { ResultCard, Input, Select, ButtonGroup, Slider, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { MashWaterInputs } from './types';
@@ -36,7 +32,6 @@ export function MashWaterCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Grain Bill</h2>
@@ -314,7 +309,6 @@ export function MashWaterCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-600/10 p-6 ring-1 ring-amber-500/30">
           <h2 className="mb-4 text-lg font-semibold text-amber-300">Strike Water</h2>

@@ -1,7 +1,3 @@
-/**
- * WaterChange Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateWaterChange } from '../../src/components/calculators/WaterChangeCalculator/calculations';
 import type { WaterChangeInputs } from '../../src/components/calculators/WaterChangeCalculator/types';
@@ -22,7 +18,7 @@ describe('WaterChangeCalculator', () => {
 
       const result = calculateWaterChange(inputs);
 
-      expect(result.waterToRemove).toBe(5); // 25% of 20 gallons
+      expect(result.waterToRemove).toBe(5);
       expect(result.parameterAfterChange).toBeLessThan(40);
       expect(result.changesNeeded).toBeGreaterThan(0);
     });
@@ -41,7 +37,6 @@ describe('WaterChangeCalculator', () => {
 
       const result = calculateWaterChange(inputs);
 
-      // 50% water change with 0 ppm new water should halve the parameter
       expect(result.parameterAfterChange).toBeCloseTo(50, 0);
     });
 

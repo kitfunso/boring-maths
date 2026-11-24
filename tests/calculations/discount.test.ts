@@ -1,7 +1,3 @@
-/**
- * DiscountCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateDiscount } from '../../src/components/calculators/DiscountCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/DiscountCalculator/types';

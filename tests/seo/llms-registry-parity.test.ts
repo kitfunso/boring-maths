@@ -3,13 +3,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { calculators } from '@/lib/calculators';
 
-/**
- * llms.txt validity: every calculator URL listed in public/llms.txt must
- * resolve to a registry entry. Catches dead entries after renames and typos
- * in hand-edited llms files. (llms.txt lists a curated subset, so the
- * reverse direction - registry pages missing from llms.txt - is NOT checked.)
- */
-
 const LLMS_PATH = path.resolve(__dirname, '..', '..', 'public', 'llms.txt');
 
 describe('llms.txt calculator entries resolve to registry pages', () => {

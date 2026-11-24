@@ -1,9 +1,3 @@
-/**
- * Party Drink Calculator (Non-Alcoholic)
- *
- * Exports all calculator components and utilities.
- */
-
 export { default as PartyDrinkCalculator } from './PartyDrinkCalculator';
 export { calculatePartyDrinks, formatCurrency, formatNumber } from './calculations';
 export type {

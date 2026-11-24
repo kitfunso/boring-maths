@@ -1,7 +1,3 @@
-/**
- * Employee Cost Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type { EmployeeCostInputs, EmployeeCostResult, CostBreakdown } from './types';
 
@@ -21,43 +17,32 @@ export function calculateEmployeeCost(inputs: EmployeeCostInputs): EmployeeCostR
     profitMarginPercent,
   } = inputs;
 
-  // Calculate individual cost components
   const retirementMatch = annualSalary * (retirementMatchPercent / 100);
   const payrollTaxes = annualSalary * (payrollTaxPercent / 100);
 
-  // Calculate working hours
   const weeksPerYear = 52;
   const holidays = currency === 'USD' ? 10 : currency === 'GBP' ? 8 : 10;
   const totalPtoDays = ptoDays + holidays;
   const workingDaysPerYear = weeksPerYear * 5 - totalPtoDays;
   const actualWorkingHours = workingDaysPerYear * (hoursPerWeek / 5);
 
-  // Total benefits cost
   const totalBenefits = healthInsurance + retirementMatch + otherBenefits;
 
-  // Total overhead
   const totalOverhead = trainingBudget + equipmentCost + officeCost;
 
-  // Total annual cost
   const totalAnnualCost = annualSalary + totalBenefits + payrollTaxes + totalOverhead;
 
-  // Calculate the burden multiplier
   const burdenMultiplier = totalAnnualCost / annualSalary;
 
-  // Calculate hourly costs
   const trueHourlyCost = totalAnnualCost / actualWorkingHours;
   const effectiveHourlyRate = annualSalary / actualWorkingHours;
 
-  // Monthly cost
   const monthlyBurdenCost = totalAnnualCost / 12;
 
-  // Cost per working day
   const costPerWorkingDay = totalAnnualCost / workingDaysPerYear;
 
-  // Billable rate with profit margin
   const billableRate = trueHourlyCost / (1 - profitMarginPercent / 100);
 
-  // Build breakdown
   const breakdown: CostBreakdown[] = [];
 
   const addBreakdown = (category: string, annual: number) => {
@@ -79,7 +64,6 @@ export function calculateEmployeeCost(inputs: EmployeeCostInputs): EmployeeCostR
   if (equipmentCost > 0) addBreakdown('Equipment & Supplies', equipmentCost);
   if (officeCost > 0) addBreakdown('Office Space', officeCost);
 
-  // Salary vs total breakdown
   const salaryVsTotalCost = {
     salary: Math.round(annualSalary),
     benefits: Math.round(totalBenefits),
@@ -87,7 +71,6 @@ export function calculateEmployeeCost(inputs: EmployeeCostInputs): EmployeeCostR
     overhead: Math.round(totalOverhead),
   };
 
-  // Generate insights
   const insights: string[] = [];
 
   if (burdenMultiplier < 1.2) {

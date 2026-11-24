@@ -1,18 +1,10 @@
-/**
- * BMI Calculator - Type Definitions
- *
- * Calculates Body Mass Index with health category classifications.
- */
-
 export type UnitSystem = 'metric' | 'imperial';
 
 export interface BMIInputs {
   unitSystem: UnitSystem;
-  /** Height in cm (metric) or feet & inches (imperial) */
   heightCm: number;
   heightFeet: number;
   heightInches: number;
-  /** Weight in kg (metric) or lbs (imperial) */
   weightKg: number;
   weightLbs: number;
 }
@@ -30,7 +22,7 @@ export interface BMIResult {
   category: string;
   categoryColor: 'blue' | 'green' | 'yellow' | 'red';
   healthyWeightRange: { min: number; max: number };
-  weightToHealthy: number; // positive = lose, negative = gain
+  weightToHealthy: number;
   isHealthy: boolean;
 }
 

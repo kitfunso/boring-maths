@@ -1,10 +1,3 @@
-/**
- * Mulch Calculator - Calculation Logic
- *
- * Pure functions for calculating mulch quantities.
- * Unique angle: Different mulch types (wood chips, bark, rubber, stone) with density differences.
- */
-
 import type {
   MulchCalculatorInputs,
   MulchCalculatorResult,
@@ -14,21 +7,8 @@ import type {
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Cubic feet per cubic yard
- */
 const CUBIC_FEET_PER_YARD = 27;
 
-/**
- * Mulch type configurations with density and pricing
- *
- * Density values (lbs per cubic foot):
- * - Wood chips: 15-20 lbs (fresh), using 18 as average
- * - Bark mulch: 15-25 lbs, using 20 as average
- * - Rubber mulch: 35-40 lbs, using 38 as average
- * - Stone/gravel: 80-100 lbs, using 90 as average
- * - Straw: 4-8 lbs, using 6 as average
- */
 export const MULCH_TYPE_CONFIGS: Record<MulchType, MulchTypeConfig> = {
   'wood-chips': {
     name: 'Wood Chips',
@@ -77,9 +57,6 @@ export const MULCH_TYPE_CONFIGS: Record<MulchType, MulchTypeConfig> = {
   },
 };
 
-/**
- * Mulch type display names
- */
 export const MULCH_TYPE_NAMES: Record<MulchType, string> = {
   'wood-chips': 'Wood Chips',
   bark: 'Bark Mulch',
@@ -88,9 +65,6 @@ export const MULCH_TYPE_NAMES: Record<MulchType, string> = {
   straw: 'Straw',
 };
 
-/**
- * Calculate mulch requirements
- */
 export function calculateMulch(inputs: MulchCalculatorInputs): MulchCalculatorResult {
   const {
     currency,
@@ -105,36 +79,27 @@ export function calculateMulch(inputs: MulchCalculatorInputs): MulchCalculatorRe
     deliveryFee,
   } = inputs;
 
-  // Get mulch type config
   const config = MULCH_TYPE_CONFIGS[mulchType];
 
-  // Calculate area in square feet
   const areaSqFt = length * width;
 
-  // Convert depth from inches to feet
   const depthFt = depth / 12;
 
-  // Calculate volume in cubic feet
   const volumeCuFt = areaSqFt * depthFt;
 
-  // Convert to cubic yards
   const volumeCuYards = volumeCuFt / CUBIC_FEET_PER_YARD;
 
-  // Calculate bags needed (round up)
   const bags2CuFt = Math.ceil(volumeCuFt / 2);
   const bags3CuFt = Math.ceil(volumeCuFt / 3);
 
-  // Calculate weight estimate
   const estimatedWeight = Math.round(volumeCuFt * config.densityLbsPerCuFt);
 
-  // Calculate costs
   const bulkCostBase = volumeCuYards * pricePerCubicYard;
   const bulkCost =
     Math.round((includeDelivery ? bulkCostBase + deliveryFee : bulkCostBase) * 100) / 100;
   const bags2CuFtCost = Math.round(bags2CuFt * pricePer2CuFtBag * 100) / 100;
   const bags3CuFtCost = Math.round(bags3CuFt * pricePer3CuFtBag * 100) / 100;
 
-  // Determine best value
   let bestValue: 'bulk' | '2cuft' | '3cuft' = '3cuft';
   const minCost = Math.min(bulkCost, bags2CuFtCost, bags3CuFtCost);
   if (minCost === bulkCost) {
@@ -160,9 +125,6 @@ export function calculateMulch(inputs: MulchCalculatorInputs): MulchCalculatorRe
   };
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',
@@ -171,9 +133,6 @@ export function formatCurrency(
   return formatCurrencyByRegion(value, currency, decimals);
 }
 
-/**
- * Format volume for display
- */
 export function formatVolume(cuYards: number): string {
   if (cuYards < 1) {
     return `${Math.round(cuYards * CUBIC_FEET_PER_YARD)} cu ft`;
@@ -181,16 +140,10 @@ export function formatVolume(cuYards: number): string {
   return `${cuYards.toFixed(2)} cu yds`;
 }
 
-/**
- * Format area for display
- */
 export function formatArea(sqft: number): string {
   return `${sqft.toLocaleString()} sq ft`;
 }
 
-/**
- * Format weight for display
- */
 export function formatWeight(lbs: number): string {
   if (lbs >= 2000) {
     return `${(lbs / 2000).toFixed(1)} tons`;
@@ -198,9 +151,6 @@ export function formatWeight(lbs: number): string {
   return `${lbs.toLocaleString()} lbs`;
 }
 
-/**
- * Get refresh interval description
- */
 export function getRefreshDescription(months: number): string {
   if (months === 0) {
     return 'Permanent - no replacement needed';

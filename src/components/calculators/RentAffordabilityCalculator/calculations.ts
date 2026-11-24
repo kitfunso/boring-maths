@@ -1,19 +1,7 @@
-/**
- * Rent Affordability Calculator - Calculation Logic
- *
- * Three budgeting frameworks:
- * 1. 30% Rule: Spend no more than 30% of gross income on rent.
- * 2. 50/30/20 Rule: 50% needs, 30% wants, 20% savings. Rent fits in "needs" alongside debts/utilities.
- * 3. 28/36 DTI Rule: Housing costs <= 28% of gross income; total debt <= 36% of gross income.
- *
- * Recommendation uses the most conservative (lowest) max rent across all three rules.
- */
-
 import type { RentAffordabilityInputs, RentAffordabilityResult, RuleResult } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/** Rough tax multiplier to convert gross to net. */
 const GROSS_TO_NET: Record<Currency, number> = {
   USD: 0.72,
   GBP: 0.75,
@@ -48,9 +36,6 @@ export function calculateRentAffordability(
 
   const utilityCost = includeUtilities ? estimatedUtilities : 0;
 
-  // -------------------------------------------------------------------------
-  // Rule 1: 30% Rule (based on gross income)
-  // -------------------------------------------------------------------------
   const thirtyPercentMax = round2(grossIncome * 0.3 - utilityCost);
   const maxRent30: RuleResult = {
     maxRent: Math.max(0, thirtyPercentMax),
@@ -59,14 +44,10 @@ export function calculateRentAffordability(
     description: 'Spend no more than 30% of gross income on rent.',
   };
 
-  // -------------------------------------------------------------------------
-  // Rule 2: 50/30/20 Rule (based on net income)
-  // -------------------------------------------------------------------------
   const needsBudget = round2(netIncome * 0.5);
   const wantsBudget = round2(netIncome * 0.3);
   const savingsBudget = round2(netIncome * 0.2);
 
-  // Rent comes out of needs, alongside debts and utilities.
   const fiftyThirtyTwentyMax = round2(needsBudget - existingDebts - utilityCost);
   const maxRent5030: RuleResult = {
     maxRent: Math.max(0, fiftyThirtyTwentyMax),
@@ -75,9 +56,6 @@ export function calculateRentAffordability(
     description: '50% needs, 30% wants, 20% savings. Rent + debts + utilities fit in needs.',
   };
 
-  // -------------------------------------------------------------------------
-  // Rule 3: 28/36 DTI Rule (based on gross income)
-  // -------------------------------------------------------------------------
   const housingMax28 = round2(grossIncome * 0.28 - utilityCost);
   const totalDebtMax36 = round2(grossIncome * 0.36 - existingDebts - utilityCost);
   const dtiMax = round2(Math.min(housingMax28, totalDebtMax36));
@@ -88,17 +66,11 @@ export function calculateRentAffordability(
     description: 'Housing <= 28% gross income; total debt (housing + other) <= 36% gross income.',
   };
 
-  // -------------------------------------------------------------------------
-  // Recommendation: most conservative
-  // -------------------------------------------------------------------------
   const recommendedMax = Math.max(
     0,
     Math.min(maxRent30.maxRent, maxRent5030.maxRent, maxRent2836.maxRent)
   );
 
-  // -------------------------------------------------------------------------
-  // Post-rent breakdown (using net income and recommended max)
-  // -------------------------------------------------------------------------
   const totalHousing = recommendedMax + utilityCost;
   const remainingAfterRent = round2(netIncome - totalHousing - existingDebts);
   const savingsTarget = round2(netIncome * (savingsGoalPercent / 100));

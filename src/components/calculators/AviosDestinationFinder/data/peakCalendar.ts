@@ -1,10 +1,6 @@
-/** BA peak / off-peak calendar. Dates not listed in a published year are off-peak; dates after
- *  CALENDAR_PUBLISHED_THROUGH could be either season. Sources, and the annual update steps,
- *  are in docs/avios-calendar.md. */
-
 export interface DateRange {
-  readonly from: string; // ISO yyyy-mm-dd inclusive
-  readonly to: string; // ISO yyyy-mm-dd inclusive
+  readonly from: string;
+  readonly to: string;
 }
 
 export const PEAK_RANGES_2026: readonly DateRange[] = [
@@ -41,20 +37,17 @@ export const PEAK_RANGES_2026: readonly DateRange[] = [
 
 export const CALENDAR_PUBLISHED_THROUGH = '2026-12-31';
 
-/** Shown in the UI so users know how fresh the guide data is. */
 export const DATA_LAST_VERIFIED = '2026-07-19';
 
 function toUtc(iso: string): number {
   return Date.parse(`${iso}T00:00:00Z`);
 }
 
-/** Built once at module load so isPeakIsoDate stays a cheap per-call lookup. */
 const PEAK_INTERVALS: readonly { start: number; end: number }[] = PEAK_RANGES_2026.map((r) => ({
   start: toUtc(r.from),
   end: toUtc(r.to),
 }));
 
-/** Shared by the calculation layer and the date-range calendar UI, so there is one definition of "peak" across the finder. */
 export function isPeakIsoDate(iso: string): boolean {
   const t = toUtc(iso);
   return PEAK_INTERVALS.some((p) => t >= p.start && t <= p.end);

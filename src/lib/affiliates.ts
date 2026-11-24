@@ -1,18 +1,9 @@
-/**
- * Affiliate Partner Configuration
- *
- * Central registry mapping calculator slugs to contextual affiliate recommendations.
- * Used by AffiliateBox component on financial calculator pages.
- */
-
 export interface AffiliatePartner {
   readonly name: string;
   readonly description: string;
   readonly url: string;
   readonly cta: string;
-  /** Emoji icon for display */
   readonly icon: string;
-  /** Tracking identifier for this partner */
   readonly partner: string;
 }
 
@@ -21,7 +12,6 @@ export interface AffiliateConfig {
   readonly partners: readonly AffiliatePartner[];
 }
 
-/** Affiliate recommendations keyed by calculator slug */
 const affiliateRegistry: Readonly<Record<string, AffiliateConfig>> = {
   'mortgage-calculator': {
     title: 'Compare Mortgage Deals',
@@ -237,15 +227,10 @@ const affiliateRegistry: Readonly<Record<string, AffiliateConfig>> = {
   },
 };
 
-/**
- * Get affiliate recommendations for a calculator page.
- * Returns null if no affiliates are configured for this calculator.
- */
 export function getAffiliatesForCalculator(slug: string): AffiliateConfig | null {
   return affiliateRegistry[slug] ?? null;
 }
 
-/** Get all calculator slugs that have affiliate config */
 export function getAffiliatedCalculatorSlugs(): readonly string[] {
   return Object.keys(affiliateRegistry);
 }

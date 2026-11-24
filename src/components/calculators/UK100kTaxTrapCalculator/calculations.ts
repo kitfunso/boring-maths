@@ -1,5 +1,3 @@
-/** UK £100k Tax Trap: income tax + NI + student loan, with optimal-pension calculation to restore Personal Allowance lost in the £100k-£125,140 taper band. */
-
 import type {
   UK100kInputs,
   UK100kResult,
@@ -34,7 +32,6 @@ export function calculateIncomeTax(
   let totalTax = 0;
   let remainingIncome = taxableIncome;
 
-  // Adjust the first band (Personal Allowance) based on actual PA
   const adjustedBands = bands.map((band, index) => {
     if (index === 0) {
       return { ...band, to: personalAllowance };
@@ -69,7 +66,6 @@ export function calculateIncomeTax(
   return { total: Math.round(totalTax), breakdown };
 }
 
-/** Employee NI only (not employer NI). */
 export function calculateNationalInsurance(grossIncome: number): number {
   if (grossIncome <= NI_PRIMARY_THRESHOLD) {
     return 0;
@@ -77,13 +73,11 @@ export function calculateNationalInsurance(grossIncome: number): number {
 
   let ni = 0;
 
-  // 8% on earnings between Primary Threshold and Upper Limit
   const mainBandIncome = Math.min(grossIncome, NI_UPPER_LIMIT) - NI_PRIMARY_THRESHOLD;
   if (mainBandIncome > 0) {
     ni += mainBandIncome * NI_MAIN_RATE;
   }
 
-  // 2% on earnings above Upper Limit
   if (grossIncome > NI_UPPER_LIMIT) {
     ni += (grossIncome - NI_UPPER_LIMIT) * NI_UPPER_RATE;
   }
@@ -126,10 +120,9 @@ export function calculateMarginalRate(
 
   const slRate = hasStudentLoan ? 0.09 : 0;
 
-  // Tax trap zone adds effective 20% (PA lost at 50%, taxed at 40%)
   let trapRate = 0;
   if (income > TAX_TRAP_START && income <= TAX_TRAP_END) {
-    trapRate = 0.2; // Effective rate from PA tapering
+    trapRate = 0.2;
   }
 
   return taxRate + niRate + slRate + trapRate;
@@ -142,8 +135,7 @@ export function calculateTaxTrapCost(totalIncome: number, region: TaxRegion): nu
 
   const paLost = calculatePALost(totalIncome);
 
-  // The lost PA would have been tax-free; it's now taxed at 40% (42% Scotland): the "hidden" tax from the trap.
-  void getTaxBands(region); // Tax bands available if needed
+  void getTaxBands(region);
   const higherRate = region === 'scotland' ? 0.42 : 0.4;
 
   return Math.round(paLost * higherRate);
@@ -154,7 +146,6 @@ export function calculateOptimalPension(totalIncome: number, currentPension: num
     return currentPension;
   }
 
-  // Optimal: reduce taxable income to exactly £100,000, restoring full PA while keeping as much high income as possible.
   const optimalTaxableIncome = PA_TAPER_THRESHOLD;
   const requiredContribution = totalIncome - optimalTaxableIncome;
 
@@ -168,7 +159,6 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
 
   const currentPensionContribution = Math.round(grossSalary * (currentPensionPercent / 100));
 
-  // Taxable income (after pension sacrifice)
   const taxableIncome = totalIncome - currentPensionContribution;
 
   const personalAllowance = calculatePersonalAllowance(taxableIncome);
@@ -180,7 +170,6 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
     personalAllowance
   );
 
-  // NI is calculated on (gross - pension), assuming salary-sacrifice; a personal pension wouldn't reduce NI this way, so real NI could be higher than shown.
   const nationalInsurance = calculateNationalInsurance(grossSalary - currentPensionContribution);
 
   const studentLoanRepayment = calculateStudentLoan(taxableIncome, studentLoanPlan);
@@ -225,11 +214,9 @@ export function calculateUK100kTax(inputs: UK100kInputs): UK100kResult {
   const optimizedTotalTax = optimizedIncomeTax + optimizedNI;
   const annualTaxSaved = currentTotalTax - optimizedTotalTax;
 
-  // Total benefit includes tax saved + extra pension value
   const extraPensionContribution = optimalPensionContribution - currentPensionContribution;
   const totalBenefit = annualTaxSaved + extraPensionContribution;
 
-  // Pension gain ratio: how much goes to pension vs take-home reduction
   const takeHomeReduction = takeHomePay - optimizedTakeHomePay;
   const pensionGainRatio = takeHomeReduction > 0 ? extraPensionContribution / takeHomeReduction : 0;
 

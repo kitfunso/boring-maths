@@ -1,8 +1,3 @@
-/**
- * IBU (International Bitterness Units) Calculator Types
- * Calculate hop bitterness for homebrewing
- */
-
 export interface HopAddition {
   id: string;
   hopName: string;
@@ -28,7 +23,6 @@ export interface IBUResults {
   beerStyle: string;
 }
 
-// Common hop varieties with typical alpha acid ranges
 export const HOP_VARIETIES: {
   name: string;
   alphaMin: number;
@@ -57,7 +51,6 @@ export const HOP_VARIETIES: {
   { name: 'Sabro', alphaMin: 14, alphaMax: 17, profile: 'Coconut, tropical, cedar' },
 ];
 
-// Beer style IBU ranges
 export const BEER_STYLES: { style: string; ibuMin: number; ibuMax: number }[] = [
   { style: 'American Light Lager', ibuMin: 8, ibuMax: 12 },
   { style: 'Pilsner', ibuMin: 25, ibuMax: 45 },

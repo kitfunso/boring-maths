@@ -1,7 +1,3 @@
-/**
- * LeftoversCalculator - Unit Tests
- */
-
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   calculateLeftovers,
@@ -17,9 +13,8 @@ import type { LeftoversInputs } from '../../src/components/calculators/Leftovers
 describe('LeftoversCalculator', () => {
   describe('calculateLeftovers', () => {
     beforeEach(() => {
-      // Fix "now" to 2025-01-10 for deterministic tests
       vi.useFakeTimers();
-      vi.setSystemTime(new Date(2025, 0, 10)); // Jan 10, 2025
+      vi.setSystemTime(new Date(2025, 0, 10));
     });
 
     afterEach(() => {
@@ -68,16 +63,13 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // cooked-meat freezer = 3 months, so expiry = April 10, 2025
       expect(result.expiryDate).toBe('2025-04-10');
       expect(result.isSafe).toBe(true);
-      // Jan 10 to Apr 10 = 89 or 90 days depending on DST/timezone
       expect(result.daysRemaining).toBeGreaterThanOrEqual(89);
       expect(result.daysRemaining).toBeLessThanOrEqual(90);
     });
 
     it('should handle counter storage with short time window', () => {
-      // Set time to 1 hour after midnight
       vi.setSystemTime(new Date(2025, 0, 10, 1, 0, 0));
 
       const inputs: LeftoversInputs = {
@@ -88,13 +80,11 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // Rice counter = 1 hour, 1 hour elapsed, so still safe
       expect(result.counterHours).toBe(1);
       expect(result.isSafe).toBe(true);
     });
 
     it('should mark counter food as unsafe after time window', () => {
-      // Set time to 3 hours after midnight
       vi.setSystemTime(new Date(2025, 0, 10, 3, 0, 0));
 
       const inputs: LeftoversInputs = {
@@ -105,7 +95,6 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // Poultry counter = 2 hours, 3 hours elapsed
       expect(result.isSafe).toBe(false);
     });
 
@@ -118,7 +107,6 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // Salad freezerMonths = 0, so expiry = same date
       expect(result.freezerMonths).toBe(0);
       expect(result.expiryDate).toBe('2025-01-10');
       expect(result.daysRemaining).toBe(0);
@@ -133,7 +121,6 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // Bread counter = 48 hours
       expect(result.counterHours).toBe(48);
       expect(result.isSafe).toBe(true);
     });
@@ -147,7 +134,6 @@ describe('LeftoversCalculator', () => {
 
       const result = calculateLeftovers(inputs);
 
-      // 7 days fridge, prepared 5 days ago -> 2 days remaining
       expect(result.fridgeDays).toBe(7);
       expect(result.expiryDate).toBe('2025-01-12');
       expect(result.daysRemaining).toBe(2);

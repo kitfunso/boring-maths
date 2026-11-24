@@ -1,18 +1,9 @@
-/**
- * TDEE Calculator - Calculation Logic
- *
- * Uses Mifflin-St Jeor equation (most accurate for most people):
- * Male: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 5 + 5
- * Female: BMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 161
- */
-
 import { ACTIVITY_LEVELS, type TDEEInputs, type TDEEResult, type MacroSplit } from './types';
 
 function round(value: number): number {
   return Math.round(value);
 }
 
-/** Floor a numeric input so a non-finite (NaN/Infinity) value becomes 0. */
 function safe(value: number): number {
   return Number.isFinite(value) ? Math.max(0, value) : 0;
 }
@@ -56,7 +47,6 @@ export function calculateTDEE(inputs: TDEEInputs): TDEEResult {
   const { sex, activityLevel } = inputs;
   const age = safe(inputs.age);
 
-  // Mifflin-St Jeor
   const bmr =
     sex === 'male'
       ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5

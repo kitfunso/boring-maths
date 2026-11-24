@@ -1,63 +1,46 @@
-/** Job Offer Comparison Calculator - Type Definitions: compares two offers by total compensation including salary, benefits, equity, and quality of life factors. */
-
 import type { Currency } from '../../../lib/regions';
 
 export interface JobOffer {
-  /** Job title or company name, for display. */
   name: string;
 
   baseSalary: number;
 
-  /** Expected annual bonus (as decimal, e.g., 0.10 = 10%) */
   bonusPercentage: number;
 
-  /** Equity/RSU value vested per year. */
   annualEquity: number;
 
-  /** Employer 401k match percentage (as decimal, e.g., 0.06 = 6%) */
   match401kPercentage: number;
 
-  /** Maximum salary matched for 401k (as decimal, e.g., 0.06 = 6% of salary) */
   match401kLimit: number;
 
-  /** Monthly cost, employee contribution. */
   healthInsuranceCost: number;
 
-  /** Employer contribution, annual (healthInsuranceCost above is monthly). */
   healthBenefitValue: number;
 
   ptoDays: number;
 
-  /** One-way, miles. */
   commuteDistance: number;
 
   officeDaysPerWeek: number;
 
-  /** Other annual benefits (gym, transit, etc.) */
   otherBenefits: number;
 
-  /** Signing bonus (one-time) */
   signingBonus: number;
 }
 
 export interface JobOfferComparisonInputs {
   currency: Currency;
 
-  /** First offer (typically current/primary). */
   offer1: JobOffer;
 
-  /** Second offer (comparison). */
   offer2: JobOffer;
 
-  /** Hourly rate, for time-value calculations. */
   hourlyTimeValue: number;
 
-  /** Cost per mile (gas, wear, etc.) */
   costPerMile: number;
 
   includeCommuteTime: boolean;
 
-  /** User's contribution to 401k (as decimal) */
   contribution401k: number;
 }
 
@@ -70,30 +53,24 @@ export interface OfferCalculation {
 
   match401kValue: number;
 
-  /** Net value (employer contribution minus employee cost). */
   healthBenefitNet: number;
 
   ptoValue: number;
 
   commuteCost: number;
 
-  /** Value of commute time (opportunity cost) */
   commuteTimeValue: number;
 
   otherBenefitsValue: number;
 
-  /** Prorated over first year. */
   signingBonusValue: number;
 
   totalCashComp: number;
 
-  /** All-in (vs cash-only above). */
   totalComp: number;
 
-  /** After commute costs. */
   netComp: number;
 
-  /** Based on work + commute time. */
   effectiveHourlyRate: number;
 }
 
@@ -104,7 +81,6 @@ export interface JobOfferComparisonResult {
 
   offer2: OfferCalculation;
 
-  /** offer2 minus offer1. */
   difference: {
     totalComp: number;
     netComp: number;
@@ -140,7 +116,6 @@ export function getDefaultOffer(name: string, currency: Currency): JobOffer {
 
 export function getDefaultInputs(currency: Currency = 'USD'): JobOfferComparisonInputs {
   const hourlyTimeValue = currency === 'GBP' ? 25 : currency === 'EUR' ? 28 : 35;
-  // HMRC 2026/27 car rate and the IRS rate from 1 July 2026 as true-cost benchmarks
   const costPerMile = currency === 'GBP' ? 0.55 : currency === 'EUR' ? 0.3 : 0.76;
 
   return {

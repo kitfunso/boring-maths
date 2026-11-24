@@ -1,5 +1,3 @@
-/** Checkbox hands onChange a boolean, not an event; handlers that read e.target threw on every click. */
-
 import { describe, it, expect } from 'vitest';
 import { render, fireEvent, act } from '@testing-library/preact';
 import type { ComponentType } from 'preact';

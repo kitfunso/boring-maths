@@ -1,6 +1,3 @@
-/**
- * Currency Converter - Preact Component
- */
 import { convertCurrency } from './calculations';
 import { getDefaultInputs, CURRENCIES, type CurrencyConverterInputs } from './types';
 import {
@@ -117,7 +114,6 @@ export default function CurrencyConverter() {
             />
           </Grid>
 
-          {/* Quick conversion table */}
           <div>
             <h3 class="text-lg font-semibold text-gray-800 mb-3">Quick Reference</h3>
             <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">

@@ -1,9 +1,3 @@
-/**
- * Baby Cost Calculator - Type Definitions
- *
- * Estimate first-year costs of having a baby.
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type ChildcareType = 'none' | 'daycare' | 'nanny' | 'family';
@@ -13,29 +7,22 @@ export type DiaperPreference = 'disposable' | 'cloth' | 'hybrid';
 export interface BabyCostInputs {
   currency: Currency;
 
-  // Childcare
   childcareType: ChildcareType;
-  childcareMonths: number; // months of childcare in first year (0-12)
-
-  // Feeding
+  childcareMonths: number;
   feedingMethod: FeedingMethod;
 
-  // Diapers
   diaperPreference: DiaperPreference;
 
-  // Health
   hasHealthInsurance: boolean;
   deductible: number;
   copayPercent: number;
 
-  // Gear & Setup
-  buyNewGear: boolean; // new vs used/hand-me-downs
+  buyNewGear: boolean;
   nurseryBudget: number;
 
-  // Lost Income
   maternityLeaveWeeks: number;
   paternityLeaveWeeks: number;
-  paidLeavePercent: number; // percent of salary paid during leave
+  paidLeavePercent: number;
   primaryEarnerSalary: number;
   secondaryEarnerSalary: number;
 }
@@ -50,14 +37,11 @@ export interface CostCategory {
 export interface BabyCostResult {
   currency: Currency;
 
-  // Summary
   totalFirstYearCost: number;
   monthlyAverage: number;
 
-  // Categories
   categories: CostCategory[];
 
-  // Key costs
   childcareCost: number;
   feedingCost: number;
   diaperCost: number;
@@ -66,15 +50,11 @@ export interface BabyCostResult {
   lostIncomeCost: number;
   miscCost: number;
 
-  // Insights
   biggestExpense: string;
   savingsOpportunities: string[];
   monthlyBudgetNeeded: number;
 }
 
-/**
- * Default costs by region (approximate annual amounts)
- */
 export const REGIONAL_COSTS = {
   USD: {
     daycare: 15000, // $15k/year average US daycare

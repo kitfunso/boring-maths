@@ -1,12 +1,9 @@
-/** Singapore AWS proration tests. Method A: fullAws*days/365. Method B: fullAws*months/12. Neither is "correct"; both are shown. */
-
 import { describe, it, expect } from 'vitest';
 import { calculateSingaporeAWSBonus } from '../../src/components/calculators/SingaporeAWSBonus/calculations';
 
 describe('SingaporeAWSBonus', () => {
   describe('calculateSingaporeAWSBonus', () => {
     it('prorates Method A for 182 days worked', () => {
-      // 5000 * 182/365 = 910000/365 = 2493.150685 -> 2493.15
       const result = calculateSingaporeAWSBonus({
         monthlyBasicSalary: 5000,
         awsMultiplier: 1,
@@ -17,7 +14,6 @@ describe('SingaporeAWSBonus', () => {
     });
 
     it('prorates Method B for 6 completed months', () => {
-      // 5000 * 6/12 = 2500.00
       const result = calculateSingaporeAWSBonus({
         monthlyBasicSalary: 5000,
         awsMultiplier: 1,
@@ -64,7 +60,6 @@ describe('SingaporeAWSBonus', () => {
     });
 
     it('reports a visible difference when the two periods disagree', () => {
-      // Method A: 5000*200/365 = 2739.726027 -> 2739.73; Method B: 5000*6/12 = 2500; diff = 239.73
       const result = calculateSingaporeAWSBonus({
         monthlyBasicSalary: 5000,
         awsMultiplier: 1,

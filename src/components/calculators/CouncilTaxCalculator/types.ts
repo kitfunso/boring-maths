@@ -1,7 +1,3 @@
-/**
- * UK Council Tax Calculator Types
- */
-
 export type PropertyBand = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I';
 export type Nation = 'england' | 'scotland' | 'wales';
 export type CouncilRegion =
@@ -49,7 +45,6 @@ export function nationOf(region: CouncilRegion): Nation {
   return 'england';
 }
 
-// England and Scotland band on 1991 values, Wales on 2003 values, so each nation has its own ranges.
 export const PROPERTY_BAND_LABELS: Record<Nation, Partial<Record<PropertyBand, string>>> = {
   england: {
     A: 'Band A (up to £40k)',

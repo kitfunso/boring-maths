@@ -1,28 +1,16 @@
-/**
- * Electricity Cost Calculator - Calculation Logic
- *
- * Pure functions for calculating electricity costs.
- */
-
 import type { ElectricityCostInputs, ElectricityCostResult, SelectedAppliance } from './types';
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate electricity costs
- */
 export function calculateElectricityCost(inputs: ElectricityCostInputs): ElectricityCostResult {
   const { currency, watts, hoursPerDay, daysPerMonth, ratePerKwh } = inputs;
 
-  // Convert watts to kilowatts
   const kilowatts = watts / 1000;
 
-  // Calculate kWh usage
   const kwhPerDay = kilowatts * hoursPerDay;
   const kwhPerMonth = kwhPerDay * daysPerMonth;
   const kwhPerYear = kwhPerMonth * 12;
 
-  // Calculate costs
   const costPerHour = kilowatts * ratePerKwh;
   const costPerDay = kwhPerDay * ratePerKwh;
   const costPerMonth = kwhPerMonth * ratePerKwh;
@@ -40,17 +28,11 @@ export function calculateElectricityCost(inputs: ElectricityCostInputs): Electri
   };
 }
 
-/**
- * Round to specified decimal places
- */
 function round(value: number, decimals: number): number {
   const factor = Math.pow(10, decimals);
   return Math.round(value * factor) / factor;
 }
 
-/**
- * Format a number as currency
- */
 export function formatCurrency(
   value: number,
   currency: Currency = 'USD',
@@ -59,9 +41,6 @@ export function formatCurrency(
   return formatCurrencyByRegion(value, currency, decimals);
 }
 
-/**
- * Calculate costs for a single appliance
- */
 export function calculateApplianceCost(
   appliance: SelectedAppliance,
   daysPerMonth: number,
@@ -91,9 +70,6 @@ export function calculateApplianceCost(
   };
 }
 
-/**
- * Calculate total household electricity costs
- */
 export function calculateHouseholdCost(
   appliances: SelectedAppliance[],
   daysPerMonth: number,

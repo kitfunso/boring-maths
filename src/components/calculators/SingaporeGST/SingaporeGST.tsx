@@ -1,5 +1,3 @@
-/** Singapore GST calculator - Preact component. Live updating, two panels: domestic add/remove and imported goods landed cost. */
-
 import { useState } from 'preact/hooks';
 import {
   calculateDomesticGST,
@@ -39,7 +37,6 @@ export default function SingaporeGST() {
   return (
     <div class="calc-card">
       <div class="bg-[var(--color-night)] rounded-2xl border border-white/10 p-6 md:p-8">
-        {/* Tabs */}
         <div class="flex gap-2 mb-6 bg-white/5 rounded-xl p-1">
           <button
             type="button"

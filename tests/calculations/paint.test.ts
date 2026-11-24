@@ -1,7 +1,3 @@
-/**
- * PaintCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculatePaint } from '../../src/components/calculators/PaintCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/PaintCalculator/types';

@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-"""Quick test of X API connection."""
-
 import os
 import sys
 
-# Ensure UTF-8 output
 sys.stdout.reconfigure(encoding='utf-8')
 
 from dotenv import load_dotenv

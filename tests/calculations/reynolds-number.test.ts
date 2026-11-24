@@ -1,7 +1,3 @@
-/**
- * ReynoldsNumberCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateReynolds } from '../../src/components/calculators/ReynoldsNumberCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/ReynoldsNumberCalculator/types';

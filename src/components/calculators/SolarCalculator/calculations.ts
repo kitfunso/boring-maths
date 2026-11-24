@@ -1,7 +1,3 @@
-/**
- * Solar Panel Calculator - Calculation Logic
- */
-
 import type { SolarCalculatorInputs, SolarCalculatorResult } from './types';
 import { CO2_PER_KWH } from './types';
 
@@ -24,25 +20,20 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
     loanTermYears,
   } = inputs;
 
-  // Calculate annual production
-  // kWh = kW * peak sun hours * 365 days * efficiency
   const annualProductionKwh = Math.round(
     systemSizeKw * peakSunHours * 365 * (systemEfficiency / 100)
   );
   const monthlyProductionKwh = Math.round(annualProductionKwh / 12);
 
-  // Calculate monthly usage (from bill)
   const monthlyUsageKwh = monthlyElectricBill / electricityRate;
   const coveragePercent = Math.min(100, Math.round((monthlyProductionKwh / monthlyUsageKwh) * 100));
 
-  // Calculate incentives
   const grossCost = systemCost;
   const federalCredit = Math.round(grossCost * (federalTaxCredit / 100));
   const stateCredit = Math.round(grossCost * (stateTaxCredit / 100));
   const totalIncentives = federalCredit + stateCredit + localRebate;
   const netCost = grossCost - totalIncentives;
 
-  // Calculate financing
   let monthlyPayment = 0;
   let totalFinancingCost = 0;
   if (financed && loanTermYears > 0) {
@@ -58,7 +49,6 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
     totalFinancingCost = monthlyPayment * numPayments;
   }
 
-  // Calculate savings over time
   const rateIncreaseFactor = 1 + annualRateIncrease / 100;
 
   let cumulativeSavings = 0;
@@ -68,19 +58,15 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
   const yearSavings: number[] = [];
 
   for (let year = 1; year <= 25; year++) {
-    // Rate increases each year
     const currentRate = electricityRate * Math.pow(rateIncreaseFactor, year - 1);
 
-    // Annual savings = production * current rate + SREC value
     const annualSaving =
       annualProductionKwh * currentRate + (srecValue * annualProductionKwh) / 1000;
 
     cumulativeSavings += annualSaving;
     yearSavings.push(cumulativeSavings);
 
-    // Check payback
     if (!paybackReached && cumulativeSavings >= netCost) {
-      // Linear interpolation for more accurate payback
       const prevSavings = yearSavings[year - 2] || 0;
       paybackYears = year - 1 + (netCost - prevSavings) / (cumulativeSavings - prevSavings);
       paybackReached = true;
@@ -88,7 +74,7 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
   }
 
   if (!paybackReached) {
-    paybackYears = 25; // Cap at 25 if not reached
+    paybackYears = 25;
   }
 
   const firstYearSavings = Math.round(annualProductionKwh * electricityRate);
@@ -97,16 +83,12 @@ export function calculateSolar(inputs: SolarCalculatorInputs): SolarCalculatorRe
   const year25Savings = Math.round(yearSavings[24] || 0);
   const lifetimeSavings = year25Savings;
 
-  // ROI calculation
   const roi25Year = Math.round(((lifetimeSavings - netCost) / netCost) * 100);
 
-  // Environmental impact
   const co2OffsetLbs = annualProductionKwh * CO2_PER_KWH;
   const co2OffsetTons = Math.round((co2OffsetLbs / 2000) * 10) / 10;
-  // Average tree absorbs 48 lbs CO2 per year
   const treesEquivalent = Math.round(co2OffsetLbs / 48);
 
-  // Tips
   const tips: string[] = [];
 
   if (coveragePercent < 80) {

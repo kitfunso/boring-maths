@@ -1,7 +1,3 @@
-/**
- * Consulting Rate Calculator - Calculation Logic
- */
-
 import type { Currency } from '../../../lib/regions';
 import type { ConsultingRateInputs, ConsultingRateResult, RateBreakdown } from './types';
 
@@ -22,12 +18,9 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
 
   const breakdown: RateBreakdown[] = [];
 
-  // Calculate billable hours
   const grossBillableHours = billableHoursPerWeek * weeksPerYear;
-  // Adjust for non-billable time (some "billable" hours will be eaten by admin, etc.)
   const effectiveBillableHours = grossBillableHours * (1 - nonBillablePercent / 100);
 
-  // Start with desired take-home income
   breakdown.push({
     category: 'Desired Take-Home Income',
     annual: desiredAnnualIncome,
@@ -35,8 +28,6 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     description: 'What you want in your pocket after everything',
   });
 
-  // Add income taxes (gross up from net)
-  // If net = gross * (1 - taxRate), then gross = net / (1 - taxRate)
   const grossIncomeBeforeTax = desiredAnnualIncome / (1 - incomeTaxRate / 100);
   const incomeTaxAmount = grossIncomeBeforeTax - desiredAnnualIncome;
   breakdown.push({
@@ -46,7 +37,6 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     description: `${incomeTaxRate}% effective income tax rate`,
   });
 
-  // Add self-employment tax (calculated on gross income)
   const selfEmploymentTax = grossIncomeBeforeTax * (selfEmploymentTaxRate / 100);
   breakdown.push({
     category: 'Self-Employment Tax',
@@ -55,7 +45,6 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     description: `${selfEmploymentTaxRate}% (Social Security, Medicare, etc.)`,
   });
 
-  // Add health insurance
   if (healthInsurance > 0) {
     breakdown.push({
       category: 'Health Insurance',
@@ -65,7 +54,6 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     });
   }
 
-  // Add retirement
   if (retirementContributions > 0) {
     breakdown.push({
       category: 'Retirement Savings',
@@ -75,7 +63,6 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     });
   }
 
-  // Add business expenses
   breakdown.push({
     category: 'Business Expenses',
     annual: businessExpenses,
@@ -83,11 +70,9 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     description: 'Software, insurance, marketing, etc.',
   });
 
-  // Calculate subtotal (minimum to survive)
   const subtotalBeforeProfit = breakdown.reduce((sum, item) => sum + item.annual, 0);
   const minimumHourlyRate = subtotalBeforeProfit / effectiveBillableHours;
 
-  // Add profit margin
   const profitAmount = subtotalBeforeProfit * (profitMargin / 100);
   breakdown.push({
     category: 'Profit Margin',
@@ -96,14 +81,12 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     description: `${profitMargin}% margin for growth, savings, and risk`,
   });
 
-  // Calculate final rates
   const annualRevenueNeeded = subtotalBeforeProfit + profitAmount;
   const hourlyRate = annualRevenueNeeded / effectiveBillableHours;
   const dayRate = hourlyRate * 8;
   const weekRate = dayRate * 5;
   const monthlyRetainer = hourlyRate * billableHoursPerWeek * 4.33;
 
-  // Project rates (with small discount for commitment)
   const projectRates = {
     halfDay: Math.round(dayRate * 0.55), // Slight premium for half days
     fullDay: Math.round(dayRate),
@@ -111,17 +94,12 @@ export function calculateConsultingRate(inputs: ConsultingRateInputs): Consultin
     monthProject: Math.round(monthlyRetainer * 0.85), // 15% discount for month commitment
   };
 
-  // Employee equivalent comparison
-  // An employee at $X/hour costs employer ~1.3x that
-  // So a consultant at $Y/hour is equivalent to an employee earning $Y/1.3
   const employeeHourlyEquivalent = hourlyRate / 1.3;
-  const employeeSalaryEquivalent = employeeHourlyEquivalent * 2080; // 40hrs * 52 weeks
+  const employeeSalaryEquivalent = employeeHourlyEquivalent * 2080;
   const multiplierVsEmployee = hourlyRate / employeeHourlyEquivalent;
 
-  // Generate insights
   const insights: string[] = [];
 
-  // The key insight - why consultants charge more
   const employeeAtSameRate = desiredAnnualIncome / 2080;
   const multiplierExplanation = hourlyRate / employeeAtSameRate;
   insights.push(

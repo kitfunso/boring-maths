@@ -1,15 +1,4 @@
-/**
- * Tipping Guide Calculator - Type Definitions
- *
- * Country-specific tipping customs and cultural norms for
- * restaurants, taxis, hotels, delivery, hairdressers, and bars.
- */
-
 import type { Currency } from '../../../lib/regions';
-
-// ---------------------------------------------------------------------------
-// Country & Service Type Enums
-// ---------------------------------------------------------------------------
 
 export type TippingCountry =
   | 'US'
@@ -27,16 +16,9 @@ export type TippingCountry =
 
 export type ServiceType = 'restaurant' | 'taxi' | 'hotel' | 'delivery' | 'hairdresser' | 'bar';
 
-// ---------------------------------------------------------------------------
-// Tipping Data Structure
-// ---------------------------------------------------------------------------
-
 export interface CountryTippingNorm {
-  /** Suggested tip as a decimal (0.18 = 18%) */
   readonly suggestedPercent: number;
-  /** Whether service charge is typically included in the bill */
   readonly serviceIncluded: boolean;
-  /** Cultural note for this country + service combination */
   readonly culturalNote: string;
 }
 
@@ -45,10 +27,6 @@ export interface CountryTippingProfile {
   readonly currency: Currency;
   readonly services: Readonly<Record<ServiceType, CountryTippingNorm>>;
 }
-
-// ---------------------------------------------------------------------------
-// Tipping Data Constant
-// ---------------------------------------------------------------------------
 
 export const TIPPING_DATA: Readonly<Record<TippingCountry, CountryTippingProfile>> = {
   US: {
@@ -502,10 +480,6 @@ export const TIPPING_DATA: Readonly<Record<TippingCountry, CountryTippingProfile
   },
 };
 
-// ---------------------------------------------------------------------------
-// Country display labels
-// ---------------------------------------------------------------------------
-
 export const COUNTRY_LABELS: Readonly<Record<TippingCountry, string>> = {
   US: 'United States',
   UK: 'United Kingdom',
@@ -530,10 +504,6 @@ export const SERVICE_LABELS: Readonly<Record<ServiceType, string>> = {
   bar: 'Bar / Pub',
 };
 
-// ---------------------------------------------------------------------------
-// Input / Result Types
-// ---------------------------------------------------------------------------
-
 export interface TippingGuideInputs {
   readonly country: TippingCountry;
   readonly serviceType: ServiceType;
@@ -551,14 +521,6 @@ export interface TippingGuideResult {
   readonly currency: Currency;
 }
 
-// ---------------------------------------------------------------------------
-// Default Inputs
-// ---------------------------------------------------------------------------
-
-/**
- * Detect sensible defaults based on the browser locale.
- * Falls back to US / USD.
- */
 export function getDefaultInputs(currency: Currency = 'USD'): TippingGuideInputs {
   const countryByCurrency: Record<Currency, TippingCountry> = {
     USD: 'US',

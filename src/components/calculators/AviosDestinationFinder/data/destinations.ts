@@ -1,13 +1,3 @@
-/**
- * BA Avios reward-flight guide pricing by destination.
- *
- * Source: https://www.headforpoints.com/2025/12/16/how-many-avios-do-i-need-to-fly-to-4/
- * (fetched 2026-07-19). Every price below is the lowest-cash Reward Flight
- * Saver combination, one-way, to/from London, post 15-Dec-2025 devaluation.
- * These are guide prices only - reward seats are limited and availability
- * must be checked with the airline; actual bookable prices can differ.
- */
-
 import type { Destination } from '../types';
 import { NOT_OFFERED } from '../types';
 

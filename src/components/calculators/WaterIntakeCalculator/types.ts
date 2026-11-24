@@ -1,7 +1,3 @@
-/**
- * Water Intake Calculator - Type Definitions
- */
-
 export type WeightUnit = 'kg' | 'lbs';
 
 export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'veryActive';

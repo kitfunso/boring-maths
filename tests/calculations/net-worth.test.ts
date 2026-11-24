@@ -1,7 +1,3 @@
-/**
- * NetWorthCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateNetWorth } from '../../src/components/calculators/NetWorthCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/NetWorthCalculator/types';

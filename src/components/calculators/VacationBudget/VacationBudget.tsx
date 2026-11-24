@@ -1,8 +1,3 @@
-/**
- * Vacation Budget Planner - React Component
- *
- * Plan and estimate vacation expenses.
- */
 import { calculateVacationBudget } from './calculations';
 import {
   getDefaultInputs,
@@ -88,7 +83,6 @@ export default function VacationBudget() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                 Trip Details
@@ -123,7 +117,6 @@ export default function VacationBudget() {
                 />
               </Grid>
 
-              {/* Destination Type */}
               <div>
                 <Label>Destination</Label>
                 <ButtonGroup
@@ -133,7 +126,6 @@ export default function VacationBudget() {
                 />
               </div>
 
-              {/* Travel Style */}
               <div>
                 <Label>Travel Style</Label>
                 <ButtonGroup
@@ -143,7 +135,6 @@ export default function VacationBudget() {
                 />
               </div>
 
-              {/* Flights */}
               <div>
                 <Label htmlFor="flightCost">Flight Cost (per person, round-trip)</Label>
                 <Input
@@ -213,7 +204,6 @@ export default function VacationBudget() {
                 />
               </div>
 
-              {/* Car Rental */}
               <Toggle
                 checked={inputs.needsCarRental}
                 onChange={(checked) => updateInput('needsCarRental', checked)}
@@ -237,7 +227,6 @@ export default function VacationBudget() {
                 </div>
               )}
 
-              {/* Travel Insurance */}
               <Toggle
                 checked={inputs.travelInsurance}
                 onChange={(checked) => updateInput('travelInsurance', checked)}
@@ -261,7 +250,6 @@ export default function VacationBudget() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               <ResultCard
                 label="Total Trip Budget"
@@ -275,7 +263,6 @@ export default function VacationBudget() {
                 <MetricCard label="Per Person/Day" value={fmt(result.perPersonPerDay)} />
               </Grid>
 
-              {/* Budget Breakdown */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Budget Breakdown
@@ -302,7 +289,6 @@ export default function VacationBudget() {
                 </div>
               </div>
 
-              {/* Savings Plan */}
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                   Savings Plan
@@ -323,7 +309,6 @@ export default function VacationBudget() {
                 </div>
               </div>
 
-              {/* Tips */}
               <Alert variant="tip" title="Money-Saving Tips">
                 <ul className="space-y-2 mt-2">
                   {result.savingsTips.map((tip, i) => (
@@ -335,7 +320,6 @@ export default function VacationBudget() {
                 </ul>
               </Alert>
 
-              {/* Share Results */}
               <div className="flex justify-center pt-4">
                 <ShareResults
                   result={`Vacation Budget: ${fmt(result.totalBudget)} total for ${inputs.travelers} travelers, ${inputs.nights} nights. Per person per day: ${fmt(result.perPersonPerDay)}`}

@@ -1,9 +1,3 @@
-/**
- * Gravel Calculator - React Component
- *
- * Calculate tonnes of gravel, volume, bulk bags, and optional cost
- * for driveways, paths, and beds. Uses the shared design-system UI kit.
- */
 import { calculateGravelCalculator } from './calculations';
 import {
   getDefaultInputs,
@@ -65,8 +59,6 @@ export default function GravelCalculator() {
     updateInput('currency', newCurrency);
   };
 
-  // Selecting a named gravel type sets its typical density. 'custom' keeps
-  // whatever density is currently entered so the user can type their own.
   const handleGravelTypeChange = (type: GravelType) => {
     setInputs((prev) => ({
       ...prev,
@@ -86,13 +78,11 @@ export default function GravelCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-blue-400 uppercase tracking-wider">
                 Coverage Area
               </div>
 
-              {/* Unit toggle */}
               <div>
                 <Label>Units</Label>
                 <ButtonGroup
@@ -103,7 +93,6 @@ export default function GravelCalculator() {
                 />
               </div>
 
-              {/* Dimensions */}
               <Grid cols={2} gap="md">
                 <div>
                   <Label htmlFor="gravelLength">Length ({dimUnitLabel})</Label>
@@ -156,7 +145,6 @@ export default function GravelCalculator() {
                 Gravel Type and Density
               </div>
 
-              {/* Gravel type select (maps to density) */}
               <div>
                 <Label htmlFor="gravelType">Gravel Type</Label>
                 <Select
@@ -166,7 +154,6 @@ export default function GravelCalculator() {
                 />
               </div>
 
-              {/* Density (editable, especially for custom) */}
               <div>
                 <Label htmlFor="gravelDensity">Density (tonnes per cubic metre)</Label>
                 <Input
@@ -185,7 +172,6 @@ export default function GravelCalculator() {
                 </p>
               </div>
 
-              {/* Waste */}
               <div>
                 <Label htmlFor="gravelWaste">Extra Allowance</Label>
                 <Input
@@ -226,7 +212,6 @@ export default function GravelCalculator() {
               </div>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {result.isInvalid ? (
                 <Alert variant="warning" title="Enter your dimensions:">

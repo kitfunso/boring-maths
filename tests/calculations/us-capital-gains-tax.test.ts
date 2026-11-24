@@ -1,7 +1,3 @@
-/**
- * UsCapitalGainsTaxCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCapitalGainsTax } from '../../src/components/calculators/USCapitalGainsTaxCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/USCapitalGainsTaxCalculator/types';
@@ -29,11 +25,10 @@ describe('UsCapitalGainsTaxCalculator', () => {
       inputs.holdingPeriodMonths = 24;
       inputs.purchasePrice = 100000;
       inputs.salePrice = 130000;
-      inputs.otherIncome = 16100 + 39450; // taxable 39,450 after the 16,100 deduction
+      inputs.otherIncome = 16100 + 39450;
 
       const result = calculateCapitalGainsTax(inputs);
 
-      // 10,000 left in the 0% band (top 49,450); 20,000 taxed at 15%
       expect(result.capitalGainsTax).toBe(3000);
       expect(result.niitApplies).toBe(false);
     });
@@ -44,13 +39,12 @@ describe('UsCapitalGainsTaxCalculator', () => {
       inputs.holdingPeriodMonths = 24;
       inputs.purchasePrice = 100000;
       inputs.salePrice = 130000;
-      inputs.otherIncome = 16100 + 296850; // taxable 296,850
+      inputs.otherIncome = 16100 + 296850;
 
       const result = calculateCapitalGainsTax(inputs);
 
-      // 10,000 at 15% to reach 306,850, then 20,000 at 20% = 5,500
       expect(result.capitalGainsTax).toBe(5500);
-      expect(result.niitAmount).toBe(1140); // 3.8% x 30,000
+      expect(result.niitAmount).toBe(1140);
       expect(result.totalTax).toBe(6640);
     });
 
@@ -64,7 +58,6 @@ describe('UsCapitalGainsTaxCalculator', () => {
 
       const result = calculateCapitalGainsTax(inputs);
 
-      // MAGI 140,000 is 15,000 over 125,000 (a 200,000 threshold would give 0); 30,000 at 15%
       expect(result.niitAmount).toBe(570);
       expect(result.totalTax).toBe(5070);
     });
@@ -81,7 +74,6 @@ describe('UsCapitalGainsTaxCalculator', () => {
       inputs.salePrice = 130000;
       inputs.otherIncome = otherIncome;
 
-      // 10,000 at 0%, 20,000 at 15%
       expect(calculateCapitalGainsTax(inputs).capitalGainsTax).toBe(3000);
     });
 
@@ -92,11 +84,9 @@ describe('UsCapitalGainsTaxCalculator', () => {
       inputs.salePrice = 60000;
       inputs.otherIncome = 0;
 
-      // Taxable gain 60,000 - 16,100 = 43,900, all inside the 49,450 0% band
       inputs.holdingPeriodMonths = 24;
       expect(calculateCapitalGainsTax(inputs).capitalGainsTax).toBe(0);
 
-      // Short-term: 10% x 12,400 + 12% x 31,500 = 5,020
       inputs.holdingPeriodMonths = 6;
       expect(calculateCapitalGainsTax(inputs).capitalGainsTax).toBe(5020);
     });

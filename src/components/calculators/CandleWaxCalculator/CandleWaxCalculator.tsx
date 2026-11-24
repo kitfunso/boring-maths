@@ -1,7 +1,3 @@
-/**
- * Candle Wax Calculator Component
- * Calculate wax weight from container volume
- */
 import { ResultCard, Input, Select, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
 import type { CandleWaxInputs } from './types';
@@ -35,7 +31,6 @@ export function CandleWaxCalculator() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Container Size</h2>
@@ -261,7 +256,6 @@ export function CandleWaxCalculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 p-6 ring-1 ring-purple-500/30">
           <h2 className="mb-4 text-lg font-semibold text-purple-300">Wax Needed</h2>

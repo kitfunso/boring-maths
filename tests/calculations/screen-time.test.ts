@@ -1,7 +1,3 @@
-/**
- * Screen Time Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateScreenTime } from '../../src/components/calculators/ScreenTimeCalculator/calculations';
 import type { ScreenTimeInputs } from '../../src/components/calculators/ScreenTimeCalculator/types';
@@ -20,7 +16,6 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // 5 * 30.44 = 152.2
       expect(result.monthlyHours).toBe(152.2);
     });
 
@@ -28,7 +23,6 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // 5 * 365.25 = 1826.25 -> rounded to 1826.3
       expect(result.yearlyHours).toBe(1826.3);
     });
 
@@ -36,7 +30,6 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // 1826.25 / 24 = 76.09... -> rounded to 76.1
       expect(result.yearlyDays).toBe(76.1);
     });
 
@@ -44,7 +37,6 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // 1826.25 * 50 / (365.25 * 24) = 10.42... -> 10.4
       expect(result.lifetimeYears).toBe(10.4);
     });
 
@@ -55,7 +47,6 @@ describe('ScreenTimeCalculator', () => {
       };
       const result = calculateScreenTime(inputs);
 
-      // 5 * 365.25 * 63 / (365.25 * 24) = 5 * 63 / 24 = 13.125 -> 13.1
       expect(result.lifetimeYears).toBe(13.1);
     });
 
@@ -66,7 +57,6 @@ describe('ScreenTimeCalculator', () => {
       };
       const result = calculateScreenTime(inputs);
 
-      // 5 * 365.25 * 70 / (365.25 * 24) = 5 * 70 / 24 = 14.583 -> 14.6
       expect(result.lifetimeYears).toBe(14.6);
     });
 
@@ -74,19 +64,16 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // Books: 1826.25 / 6 = 304.375 -> floor = 304
       const books = result.opportunityCosts.find((oc) => oc.activity === 'books you could read');
       expect(books).toBeDefined();
       expect(books!.count).toBe(304);
 
-      // Languages: 1826.25 / 600 = 3.04... -> rounded to 3
       const languages = result.opportunityCosts.find(
         (oc) => oc.activity === 'languages you could learn'
       );
       expect(languages).toBeDefined();
       expect(languages!.count).toBe(3);
 
-      // Marathons: 1826.25 / 500 = 3.6525 -> rounded to 3.7
       const marathons = result.opportunityCosts.find(
         (oc) => oc.activity === 'marathons you could train for'
       );
@@ -95,10 +82,9 @@ describe('ScreenTimeCalculator', () => {
     });
 
     it('calculates compared to average for adult', () => {
-      const inputs = getDefaultInputs(); // 5h, adult (avg 6.5)
+      const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // (5 - 6.5) / 6.5 * 100 = -23.076... -> -23.1
       expect(result.comparedToAverage).toBe(-23.1);
     });
 
@@ -109,7 +95,6 @@ describe('ScreenTimeCalculator', () => {
       };
       const result = calculateScreenTime(inputs);
 
-      // (8 - 6.5) / 6.5 * 100 = 23.076... -> 23.1
       expect(result.comparedToAverage).toBe(23.1);
     });
 
@@ -117,7 +102,6 @@ describe('ScreenTimeCalculator', () => {
       const inputs = getDefaultInputs();
       const result = calculateScreenTime(inputs);
 
-      // Productive = 0.5 out of total 5 = 10%
       expect(result.productivePercent).toBe(10);
     });
 
@@ -129,11 +113,11 @@ describe('ScreenTimeCalculator', () => {
 
       const socialMedia = result.categoryBreakdown.find((c) => c.name === 'Social Media');
       expect(socialMedia).toBeDefined();
-      expect(socialMedia!.percent).toBe(40); // 2/5 = 40%
+      expect(socialMedia!.percent).toBe(40);
 
       const video = result.categoryBreakdown.find((c) => c.name === 'Video');
       expect(video).toBeDefined();
-      expect(video!.percent).toBe(30); // 1.5/5 = 30%
+      expect(video!.percent).toBe(30);
     });
 
     it('handles zero daily hours', () => {

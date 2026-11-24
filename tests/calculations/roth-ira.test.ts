@@ -9,7 +9,6 @@ import {
 
 describe('calculateRothIRA', () => {
   it('handles a zero return: balance grows by flat contributions only', () => {
-    // years = 65 - 30 = 35; FV = 10000 + 7500 * 35 = 272500; growth = 0.
     const result = calculateRothIRA({
       currentAge: 30,
       retirementAge: 65,
@@ -24,7 +23,6 @@ describe('calculateRothIRA', () => {
   });
 
   it('treats contributions as an end-of-year annuity (first year earns no growth)', () => {
-    // years = 1, r = 0.10. FV = 0 * 1.1 + 1000 * (1.1 - 1) / 0.1 = 1000. growth = 0.
     const result = calculateRothIRA({
       currentAge: 30,
       retirementAge: 31,
@@ -38,9 +36,6 @@ describe('calculateRothIRA', () => {
   });
 
   it('compounds the starting balance and the annuity over multiple years', () => {
-    // years = 2, r = 0.10, (1.1)^2 = 1.21.
-    // FV = 1000 * 1.21 + 1000 * (1.21 - 1) / 0.1 = 1210 + 2100 = 3310.
-    // growth = 3310 - 2000 - 1000 = 310.
     const result = calculateRothIRA({
       currentAge: 40,
       retirementAge: 42,
@@ -94,8 +89,6 @@ describe('calculateRothIRA', () => {
   });
 
   it('floors a negative starting balance to zero so the breakdown reconciles', () => {
-    // A typed negative balance is floored to 0 in the maths; the breakdown rows
-    // (starting balance + contributions + growth) must still reconcile to futureValue.
     const result = calculateRothIRA({
       currentAge: 30,
       retirementAge: 31,
@@ -107,7 +100,6 @@ describe('calculateRothIRA', () => {
     expect(result.futureValue).toBe(1000);
     expect(result.totalContributed).toBe(1000);
     expect(result.totalGrowth).toBe(0);
-    // flooredStartingBalance + totalContributed + totalGrowth === futureValue.
     expect(0 + result.totalContributed + result.totalGrowth).toBe(result.futureValue);
   });
 

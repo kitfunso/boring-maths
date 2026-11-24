@@ -1,7 +1,3 @@
-/**
- * EuvatCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import {
   calculateVAT,
@@ -56,7 +52,6 @@ describe('EuvatCalculator', () => {
     });
   });
 
-  // Pinned to the European Commission TEDB rates in force on 2026-11-03.
   describe('rates', () => {
     const STANDARD: Record<string, number> = {
       AT: 20,

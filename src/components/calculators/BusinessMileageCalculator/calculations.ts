@@ -1,15 +1,3 @@
-/**
- * Business Mileage Calculator - Calculation Logic
- *
- * UK: HMRC Approved Mileage Allowance Payments (AMAP)
- *   - Car/Van: 55p first 10,000 miles, 25p thereafter (2026/27)
- *   - Motorcycle: 24p flat
- *   - Bicycle: 20p flat
- *
- * US: IRS Standard Mileage Rate
- *   - 72.5 cents per mile to 30 June 2026, 76 cents from 1 July
- */
-
 import type { BusinessMileageInputs, BusinessMileageResult, RateBreakdownLine } from './types';
 import {
   UK_CAR_RATE_FIRST_10K,
@@ -23,9 +11,6 @@ import {
 import type { Currency } from '../../../lib/regions';
 import { formatCurrency as formatCurrencyByRegion } from '../../../lib/regions';
 
-/**
- * Calculate UK HMRC mileage deduction
- */
 function calculateUKDeduction(
   annualMiles: number,
   vehicleType: BusinessMileageInputs['vehicleType']
@@ -54,7 +39,6 @@ function calculateUKDeduction(
     return { deduction: amount, breakdown };
   }
 
-  // Car / Van: tiered rates
   const milesAtHighRate = Math.min(annualMiles, 10_000);
   const milesAtLowRate = Math.max(annualMiles - 10_000, 0);
 
@@ -80,9 +64,6 @@ function calculateUKDeduction(
   return { deduction: round2(highAmount + lowAmount), breakdown };
 }
 
-/**
- * Calculate US IRS standard mileage deduction
- */
 function calculateUSDeduction(annualMiles: number): {
   deduction: number;
   breakdown: RateBreakdownLine[];
@@ -124,9 +105,6 @@ function getElectricNote(
   return 'The 2026 IRS standard mileage rate (72.5c to 30 June, 76c from 1 July) applies to all vehicles including EVs. You cannot also deduct electricity charging costs if using the standard rate.';
 }
 
-/**
- * Main calculation function
- */
 export function calculateBusinessMileage(inputs: BusinessMileageInputs): BusinessMileageResult {
   const { region, milesPerWeek, weeksPerYear, vehicleType, isElectric } = inputs;
 
@@ -154,10 +132,6 @@ export function calculateBusinessMileage(inputs: BusinessMileageInputs): Busines
     estimatedTaxRate,
   };
 }
-
-// ---------------------------------------------------------------------------
-// Formatting helpers
-// ---------------------------------------------------------------------------
 
 function round2(n: number): number {
   return Math.round(n * 100) / 100;

@@ -1,7 +1,3 @@
-/**
- * GoFullTimeCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { calculateGoFullTime } from '../../src/components/calculators/GoFullTimeCalculator/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/GoFullTimeCalculator/types';
@@ -10,7 +6,7 @@ describe('GoFullTimeCalculator', () => {
   describe('calculateGoFullTime', () => {
     beforeEach(() => {
       vi.useFakeTimers();
-      vi.setSystemTime(new Date(2026, 3, 6)); // Apr 6, 2026
+      vi.setSystemTime(new Date(2026, 3, 6));
     });
 
     afterEach(() => {

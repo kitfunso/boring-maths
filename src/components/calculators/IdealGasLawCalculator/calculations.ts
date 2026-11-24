@@ -1,43 +1,22 @@
-/**
- * Ideal Gas Law Calculator - Calculation Logic
- *
- * PV = nRT
- *
- * Where:
- * P = Pressure (Pa)
- * V = Volume (m³)
- * n = Amount of substance (mol)
- * R = Gas constant = 8.314 J/(mol·K)
- * T = Temperature (K)
- */
-
 import type { IdealGasInputs, IdealGasResult } from './types';
 
-// Gas constant
-const R = 8.314; // J/(mol·K) = Pa·m³/(mol·K)
-
-/**
- * Convert inputs to SI units for calculation
- */
+const R = 8.314;
 function toSI(inputs: IdealGasInputs): { P: number; V: number; n: number; T: number } {
   let P: number, V: number, T: number;
 
   if (inputs.unitSystem === 'metric') {
-    P = inputs.pressure * 1000; // kPa to Pa
-    V = inputs.volume / 1000; // L to m³
-    T = inputs.temperature + 273.15; // °C to K
+    P = inputs.pressure * 1000;
+    V = inputs.volume / 1000;
+    T = inputs.temperature + 273.15;
   } else {
-    P = inputs.pressure * 6894.76; // psi to Pa
-    V = inputs.volume * 0.0283168; // ft³ to m³
-    T = ((inputs.temperature + 459.67) * 5) / 9; // °F to K
+    P = inputs.pressure * 6894.76;
+    V = inputs.volume * 0.0283168;
+    T = ((inputs.temperature + 459.67) * 5) / 9;
   }
 
   return { P, V, n: inputs.moles, T };
 }
 
-/**
- * Convert result back to user's unit system
- */
 function fromSI(
   P: number,
   V: number,
@@ -64,14 +43,10 @@ function fromSI(
   }
 }
 
-/**
- * Solve ideal gas law for the specified variable
- */
 export function calculateIdealGas(inputs: IdealGasInputs): IdealGasResult {
   const { solveFor, unitSystem, molarMass } = inputs;
   let { P, V, n, T } = toSI(inputs);
 
-  // Solve for the requested variable
   switch (solveFor) {
     case 'pressure':
       P = (n * R * T) / V;
@@ -87,17 +62,11 @@ export function calculateIdealGas(inputs: IdealGasInputs): IdealGasResult {
       break;
   }
 
-  // Convert back to display units
   const result = fromSI(P, V, n, T, unitSystem);
 
-  // Calculate density (kg/m³)
-  // ρ = PM/(RT) where M is molar mass in kg/mol
   const density = (P * molarMass) / 1000 / (R * T);
 
-  // Molar volume at given conditions
-  const molarVolume = (V / n) * 1000; // L/mol
-
-  // Check if ideal gas assumption is reasonable
+  const molarVolume = (V / n) * 1000;
   let compressibilityNote: string;
   const pressureAtm = P / 101325;
 
@@ -119,9 +88,6 @@ export function calculateIdealGas(inputs: IdealGasInputs): IdealGasResult {
   };
 }
 
-/**
- * Format numbers for display
- */
 export function formatNumber(value: number, decimals: number = 2): string {
   if (Math.abs(value) >= 10000 || (Math.abs(value) < 0.01 && value !== 0)) {
     return value.toExponential(decimals);
@@ -132,9 +98,6 @@ export function formatNumber(value: number, decimals: number = 2): string {
   });
 }
 
-/**
- * Get standard conditions for comparison
- */
 export function getStandardConditions(unitSystem: 'metric' | 'imperial') {
   if (unitSystem === 'metric') {
     return {

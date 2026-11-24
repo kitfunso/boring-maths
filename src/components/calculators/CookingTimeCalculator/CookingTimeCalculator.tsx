@@ -1,7 +1,3 @@
-/**
- * Cooking Time Calculator - React Component
- */
-
 import { calculateCookingTime, formatTime } from './calculations';
 import {
   getDefaultInputs,
@@ -87,7 +83,6 @@ export default function CookingTimeCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Meat Type */}
             <div>
               <Label htmlFor="meatType" required>
                 Meat Type
@@ -100,7 +95,6 @@ export default function CookingTimeCalculator() {
               />
             </div>
 
-            {/* Weight + Unit */}
             <div>
               <Label htmlFor="weight" required>
                 Weight
@@ -122,7 +116,6 @@ export default function CookingTimeCalculator() {
               </Grid>
             </div>
 
-            {/* Cooking Method */}
             <div>
               <Label>Cooking Method</Label>
               <ButtonGroup
@@ -132,7 +125,6 @@ export default function CookingTimeCalculator() {
               />
             </div>
 
-            {/* Doneness (beef & lamb only) */}
             {showDoneness && (
               <div>
                 <Label>Doneness</Label>
@@ -157,11 +149,9 @@ export default function CookingTimeCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.weight > 0 ? (
               <>
-                {/* Primary: Cooking Time */}
                 <ResultCard
                   label="Total Cooking Time"
                   value={formatTime(result.totalMinutes)}
@@ -175,7 +165,6 @@ export default function CookingTimeCalculator() {
                   }
                 />
 
-                {/* Key Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Internal Temp"
@@ -201,14 +190,12 @@ export default function CookingTimeCalculator() {
                   />
                 </Grid>
 
-                {/* Resting Reminder */}
                 <Alert variant="tip" title="Resting is essential">
                   After cooking, rest the meat for {result.restingMinutes} minutes loosely tented
                   with foil. Internal temperature will rise 5-10°F during rest, and juices
                   redistribute for a more tender result.
                 </Alert>
 
-                {/* Method-specific Notes */}
                 {result.notes.length > 0 && (
                   <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                     <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -225,7 +212,6 @@ export default function CookingTimeCalculator() {
                   </div>
                 )}
 
-                {/* Food Safety Reminder */}
                 <Alert variant="info" title="USDA food safety">
                   Always verify internal temperature with a meat thermometer inserted into the
                   thickest part, away from bone. Poultry must reach 165°F (74°C). Whole cuts of
@@ -238,7 +224,6 @@ export default function CookingTimeCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.weight > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults result={shareText} calculatorName="Cooking Time Calculator" />

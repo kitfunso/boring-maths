@@ -1,10 +1,3 @@
-/**
- * KeyboardShortcutOverlay Component
- *
- * Renders the keyboard shortcuts help panel and toast notifications.
- * Consumes state from useKeyboardShortcuts hook -- no shortcut logic lives here.
- */
-
 import type { KeyboardShortcutsState } from '../../hooks/useKeyboardShortcuts';
 
 interface ShortcutRowProps {
@@ -104,7 +97,6 @@ function HelpPanel({ calculatorName, onClose }: HelpPanelProps) {
           backdropFilter: 'blur(10px)',
         }}
       >
-        {/* Header */}
         <div
           style={{
             display: 'flex',
@@ -134,14 +126,12 @@ function HelpPanel({ calculatorName, onClose }: HelpPanelProps) {
           </button>
         </div>
 
-        {/* Shortcut list */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           <ShortcutRow label="Copy results" shortcut="Ctrl+C" />
           <ShortcutRow label="Reset calculator" shortcut="Ctrl+R" />
           <ShortcutRow label="Toggle this help" shortcut="?" />
         </div>
 
-        {/* Footer */}
         <div
           style={{
             marginTop: '16px',
@@ -158,20 +148,6 @@ function HelpPanel({ calculatorName, onClose }: HelpPanelProps) {
   );
 }
 
-/**
- * Renders the keyboard shortcuts help overlay and toast notifications.
- *
- * @example
- * ```tsx
- * const shortcutState = useKeyboardShortcuts({ onCopy, onReset, calculatorName: 'BMI' });
- * return (
- *   <div>
- *     {/* calculator UI *\/}
- *     <KeyboardShortcutOverlay {...shortcutState} />
- *   </div>
- * );
- * ```
- */
 export default function KeyboardShortcutOverlay({
   isHelpOpen,
   toast,

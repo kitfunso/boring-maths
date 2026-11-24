@@ -1,28 +1,23 @@
-/**
- * Yeast Pitch Rate Calculator Types
- * Calculate proper yeast cell counts for fermentation
- */
-
 export interface YeastPitchRateInputs {
   batchVolume: number;
   volumeUnit: 'gallons' | 'liters';
   originalGravity: number;
   beerType: 'ale' | 'lager' | 'hybrid';
   yeastFormat: 'liquid' | 'dry' | 'slurry';
-  yeastAge: number; // days since manufacture
+  yeastAge: number;
   packagesAvailable: number;
-  cellsPerPackage: number; // billions
-  starterVolume: number; // liters
+  cellsPerPackage: number;
+  starterVolume: number;
   useStarter: boolean;
   starterType: 'simple' | 'stir-plate' | 'shaken';
 }
 
 export interface YeastPitchRateResults {
-  cellsNeeded: number; // billions
-  cellsAvailable: number; // billions
-  viability: number; // percentage
+  cellsNeeded: number;
+  cellsAvailable: number;
+  viability: number;
   packagesNeeded: number;
-  pitchRate: number; // million cells per mL per °P
+  pitchRate: number;
   targetPitchRate: number;
   starterCellsProduced: number;
   totalCellsWithStarter: number;
@@ -32,7 +27,6 @@ export interface YeastPitchRateResults {
   warnings: string[];
 }
 
-// Pitch rate recommendations (million cells / mL / °P)
 export const PITCH_RATES = {
   ale: {
     standard: 0.75,
@@ -54,7 +48,6 @@ export const PITCH_RATES = {
   },
 };
 
-// Yeast format specifications
 export const YEAST_FORMATS = [
   {
     value: 'liquid',
@@ -79,7 +72,6 @@ export const YEAST_FORMATS = [
   },
 ];
 
-// Starter growth rates
 export const STARTER_GROWTH = {
   simple: {
     label: 'Simple (No Agitation)',
@@ -98,7 +90,6 @@ export const STARTER_GROWTH = {
   },
 };
 
-// Starter size recommendations (liters per billion cells needed)
 export const STARTER_SIZES = [
   { liters: 0.5, label: '500mL' },
   { liters: 1.0, label: '1 Liter' },
@@ -108,7 +99,6 @@ export const STARTER_SIZES = [
   { liters: 4.0, label: '4 Liters' },
 ];
 
-// Common gravity presets
 export const GRAVITY_PRESETS = [
   { label: 'Session (1.035)', og: 1.035 },
   { label: 'Standard (1.050)', og: 1.05 },
@@ -118,7 +108,6 @@ export const GRAVITY_PRESETS = [
   { label: 'Imperial (1.110)', og: 1.11 },
 ];
 
-// Batch size presets
 export const BATCH_PRESETS = [
   { label: '1 gal', gallons: 1 },
   { label: '2.5 gal', gallons: 2.5 },

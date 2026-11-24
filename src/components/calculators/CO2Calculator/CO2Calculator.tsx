@@ -1,8 +1,3 @@
-/**
- * CO2 Injection Calculator Component
- * Calculate CO2 levels from pH and KH readings
- */
-
 import { useMemo } from 'preact/hooks';
 import { ResultCard, Input, ButtonGroup, Label } from '../../ui';
 import ShareResults from '../../ui/ShareResults';
@@ -43,7 +38,6 @@ export function CO2Calculator() {
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
-      {/* Inputs */}
       <div className="space-y-6">
         <div className="rounded-2xl bg-[var(--color-surface)] p-6 ring-1 ring-white/10">
           <h2 className="mb-6 text-lg font-semibold text-[var(--color-text)]">Water Parameters</h2>
@@ -119,7 +113,6 @@ export function CO2Calculator() {
         </div>
       </div>
 
-      {/* Results */}
       <div className="space-y-6">
         <div
           className={`rounded-2xl bg-gradient-to-br ${levelBgColors[results.co2Level]} p-6 ring-1`}

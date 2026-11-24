@@ -1,7 +1,3 @@
-/**
- * Wedding Budget Calculator - Type Definitions
- */
-
 import type { Currency } from '../../../lib/regions';
 
 export type WeddingStyle = 'budget' | 'moderate' | 'upscale' | 'luxury';
@@ -40,26 +36,21 @@ export interface WeddingBudgetResult {
   totalBudget: number;
   guestCount: number;
 
-  // Per guest metrics
   costPerGuest: number;
   industryAveragePerGuest: number;
 
-  // Allocations
   allocations: CategoryAllocation[];
 
-  // Summary
   venueAndCatering: number;
   vendorServices: number;
   personalTouches: number;
   contingency: number;
 
-  // Insights
   budgetTier: WeddingStyle;
   warnings: string[];
   savingsTips: string[];
 }
 
-// Base percentages for each category (adds to 95%, leaving 5% contingency)
 export const BASE_PERCENTAGES: Record<string, number> = {
   venue: 15,
   catering: 30,
@@ -74,7 +65,6 @@ export const BASE_PERCENTAGES: Record<string, number> = {
   officiant: 1,
 };
 
-// Priority multipliers
 export const PRIORITY_MULTIPLIERS: Record<Priority, number> = {
   low: 0.6,
   medium: 1.0,
@@ -82,7 +72,6 @@ export const PRIORITY_MULTIPLIERS: Record<Priority, number> = {
   splurge: 2.0,
 };
 
-// Average cost per guest by region
 export const AVERAGE_PER_GUEST: Record<Currency, number> = {
   USD: 250,
   GBP: 180,

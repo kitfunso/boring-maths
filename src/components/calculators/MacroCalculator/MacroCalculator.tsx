@@ -1,8 +1,3 @@
-/**
- * Macro Calculator - React Component
- *
- * Calculate daily macronutrient needs based on body metrics and fitness goals.
- */
 import { calculateMacros, formatNumber } from './calculations';
 import {
   getDefaultInputs,
@@ -41,7 +36,6 @@ export default function MacroCalculator() {
     if (newUnit === inputs.unitSystem) return;
 
     if (newUnit === 'metric') {
-      // Convert imperial to metric
       const weightKg = Math.round(inputs.weight * 0.453592);
       const heightCm = Math.round((inputs.heightFeet * 12 + inputs.heightInches) * 2.54);
       setInputs((prev) => ({
@@ -53,7 +47,6 @@ export default function MacroCalculator() {
         proteinRatio: Math.round(prev.proteinRatio * 2.2 * 10) / 10, // Convert g/lb to g/kg
       }));
     } else {
-      // Convert metric to imperial
       const weightLbs = Math.round(inputs.weight * 2.20462);
       const totalInches = Math.round(inputs.heightFeet / 2.54);
       const feet = Math.floor(totalInches / 12);
@@ -79,7 +72,6 @@ export default function MacroCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System Toggle */}
             <div className="flex gap-2">
               <button
                 type="button"
@@ -105,7 +97,6 @@ export default function MacroCalculator() {
               </button>
             </div>
 
-            {/* Gender and Age */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="gender" required>
@@ -136,7 +127,6 @@ export default function MacroCalculator() {
               </div>
             </Grid>
 
-            {/* Weight and Height */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="md">
               <div>
                 <Label htmlFor="weight" required>
@@ -196,7 +186,6 @@ export default function MacroCalculator() {
               )}
             </Grid>
 
-            {/* Activity Level */}
             <div>
               <Label htmlFor="activityLevel" required>
                 Activity Level
@@ -217,7 +206,6 @@ export default function MacroCalculator() {
               </select>
             </div>
 
-            {/* Goal */}
             <div>
               <Label htmlFor="goal" required>
                 Goal
@@ -236,7 +224,6 @@ export default function MacroCalculator() {
               </select>
             </div>
 
-            {/* Protein Ratio */}
             <div>
               <Label htmlFor="proteinRatio">
                 Protein Target (g per {inputs.unitSystem === 'imperial' ? 'lb' : 'kg'} of
@@ -261,9 +248,7 @@ export default function MacroCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* Primary Result - Daily Calories */}
             <div className="rounded-2xl p-8 text-center border-2 bg-orange-950/50 border-orange-500/30">
               <p className="text-sm text-[var(--color-muted)] uppercase tracking-wide mb-2">
                 Daily Calorie Target
@@ -274,7 +259,6 @@ export default function MacroCalculator() {
               <p className="text-lg text-[var(--color-cream)]">calories per day</p>
             </div>
 
-            {/* Macro Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Daily Macronutrient Targets
@@ -304,7 +288,6 @@ export default function MacroCalculator() {
               </Grid>
             </div>
 
-            {/* Calorie Breakdown */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Calorie Calculation
@@ -345,7 +328,6 @@ export default function MacroCalculator() {
               calories by 100-200 if you're not seeing expected results.
             </Alert>
 
-            {/* Share & Print Results */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Daily targets: ${formatNumber(result.targetCalories)} cal | ${result.protein}g protein | ${result.carbs}g carbs | ${result.fat}g fat`}

@@ -1,7 +1,3 @@
-/**
- * CarBuyLeaseCalculator Calculator - Unit Tests
- */
-
 import { describe, it, expect } from 'vitest';
 import { calculateCarBuyLease } from '../../src/components/calculators/CarBuyLease/calculations';
 import { getDefaultInputs } from '../../src/components/calculators/CarBuyLease/types';

@@ -1,7 +1,3 @@
-/**
- * Conference Room Calculator - Calculation Logic
- */
-
 import type {
   ConferenceRoomInputs,
   ConferenceRoomResult,
@@ -11,7 +7,6 @@ import type {
 } from './types';
 import { SQFT_PER_PERSON, STYLE_DESCRIPTIONS } from './types';
 
-// n items of size s with gap g between them need n*s + (n-1)*g of span
 function fitCount(span: number, size: number, gap: number): number {
   return Math.max(0, Math.floor((span + gap) / (size + gap)));
 }
@@ -19,7 +14,6 @@ function fitCount(span: number, size: number, gap: number): number {
 const CLASSROOM_TABLE = { length: 6, gap: 1, seats: 2, rowDepth: 5 };
 const BANQUET_TABLE = { diameter: 6, gap: 4, seats: 8 };
 
-/** Seats the table grid physically holds, so a table count never exceeds what fits; Infinity where area alone sizes the room. */
 function gridSeats(
   style: SeatingStyle,
   effectiveWidth: number,
@@ -60,49 +54,39 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     adaAccessible,
   } = inputs;
 
-  // Calculate total and usable square footage
   const totalSqFt = roomLength * roomWidth;
 
-  // Subtract clearances
   const effectiveLength = roomLength - 2 * wallClearance;
   const effectiveWidth = Math.max(0, roomWidth - 2 * wallClearance);
 
-  // Subtract stage/presenter area if applicable
   const presentationDepth = stageOrPresenterArea ? stageDepth : 0;
   const seatingLength = Math.max(0, effectiveLength - presentationDepth);
 
-  // Calculate usable area for seating
   let usableSqFt = seatingLength * effectiveWidth;
 
-  // Subtract center aisle for theater/classroom
   if (seatingStyle === 'theater' || seatingStyle === 'classroom') {
     usableSqFt -= aisleWidth * seatingLength;
   }
 
-  // Subtract breakout table area
   if (includeBreakoutTables) {
-    usableSqFt -= breakoutTableCount * 36; // ~36 sqft per breakout table
+    usableSqFt -= breakoutTableCount * 36;
   }
 
-  // ADA requires additional space (5%)
   usableSqFt = Math.max(0, usableSqFt);
   if (adaAccessible) {
     usableSqFt *= 0.95;
   }
 
-  // Calculate capacity for primary style
   const sqFtPerPerson = SQFT_PER_PERSON[seatingStyle];
   const primaryCapacity = Math.min(
     Math.floor(usableSqFt / sqFtPerPerson),
     gridSeats(seatingStyle, effectiveWidth, seatingLength, aisleWidth)
   );
 
-  // Calculate capacities for all styles
   const capacitiesByStyle: CapacityResult[] = (Object.keys(SQFT_PER_PERSON) as SeatingStyle[]).map(
     (style) => {
       let styleUsableSqFt = seatingLength * effectiveWidth;
 
-      // Adjust for style-specific requirements
       if (style === 'theater' || style === 'classroom') {
         styleUsableSqFt -= aisleWidth * seatingLength;
       }
@@ -126,15 +110,13 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     }
   );
 
-  // Sort by capacity descending
   capacitiesByStyle.sort((a, b) => b.capacity - a.capacity);
 
-  // Calculate layout dimensions for primary style
   let layoutInfo: ConferenceRoomResult['layoutInfo'];
 
   if (seatingStyle === 'theater') {
-    const seatsPerRow = Math.floor((effectiveWidth - aisleWidth) / 2); // chairs ~2ft wide
-    const rows = Math.floor(seatingLength / 3); // 3ft row spacing
+    const seatsPerRow = Math.floor((effectiveWidth - aisleWidth) / 2);
+    const rows = Math.floor(seatingLength / 3);
     layoutInfo = {
       rows,
       seatsPerRow: seatsPerRow * 2, // both sides of aisle
@@ -161,7 +143,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       tableCount: Math.ceil(primaryCapacity / seats),
     };
   } else if (seatingStyle === 'u_shape') {
-    // U-shape: tables along 3 walls
     const tableLength = 6;
     const bottomTables = Math.floor(effectiveWidth / tableLength);
     const sideTables = Math.floor(seatingLength / tableLength) * 2;
@@ -182,10 +163,9 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       tableCount: longSideTables + shortSideTables,
     };
   } else if (seatingStyle === 'boardroom') {
-    // Single large table
     const tableLength2 = Math.min(seatingLength - 4, 20);
-    const seatsLong = Math.floor(tableLength2 / 2.5) * 2; // both long sides
-    const seatsShort = 2; // ends
+    const seatsLong = Math.floor(tableLength2 / 2.5) * 2;
+    const seatsShort = 2;
     layoutInfo = {
       rows: 1,
       seatsPerRow: seatsLong + seatsShort,
@@ -193,8 +173,7 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       tableCount: 1,
     };
   } else {
-    // Cocktail
-    const highTopTables = Math.floor(usableSqFt / 36); // one high-top per 36 sqft
+    const highTopTables = Math.floor(usableSqFt / 36);
     layoutInfo = {
       rows: 0,
       seatsPerRow: 0,
@@ -203,7 +182,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     };
   }
 
-  // Build materials list
   const materials: SetupRequirement[] = [];
 
   if (seatingStyle === 'theater') {
@@ -266,7 +244,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
       notes: 'High-back rolling chairs',
     });
   } else {
-    // Cocktail
     materials.push({
       item: 'High-Top Tables',
       quantity: layoutInfo.tableCount || Math.floor(primaryCapacity / 4),
@@ -275,7 +252,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     });
   }
 
-  // Add equipment
   if (includeProjectorScreen) {
     materials.push({
       item: 'Projector Screen',
@@ -318,7 +294,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     });
   }
 
-  // Determine recommended setup
   let recommendedSetup = '';
   const setupNotes: string[] = [];
 
@@ -340,7 +315,6 @@ export function calculateConferenceRoom(inputs: ConferenceRoomInputs): Conferenc
     setupNotes.push('Best for one-way communication');
   }
 
-  // Tips
   const tips: string[] = [];
 
   tips.push('Allow 18-24" of table space per person for comfortable seating');

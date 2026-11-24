@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-// OG image guard: every built page's og:image must be a file in dist/. Link previews and AI answer
-// cards fetch it, and a hand-kept generator list once left 110 of 181 calculators pointing at a 404.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -1,9 +1,3 @@
-/**
- * Square Footage Calculator - Component
- *
- * Interactive calculator for room area with multiple shapes,
- * unit conversion, and cost estimation.
- */
 import { calculateSquareFootage, formatArea } from './calculations';
 import {
   getDefaultInputs,
@@ -49,9 +43,6 @@ function formatCost(value: number, currency: Currency): string {
   return formatCurrencyByRegion(value, currency, 2);
 }
 
-/**
- * Dimension input pair: main value + inches (imperial only)
- */
 function DimensionInput({
   label: fieldLabel,
   id,
@@ -148,7 +139,6 @@ export default function SquareFootageCalculator() {
 
         <div className="p-6 md:p-8">
           <div className="space-y-6 mb-8">
-            {/* Unit System Toggle */}
             <div className="flex items-center justify-between">
               <ButtonGroup
                 options={[
@@ -163,7 +153,6 @@ export default function SquareFootageCalculator() {
               />
             </div>
 
-            {/* Room Shape Selection */}
             <div>
               <Label>Room Shape</Label>
               <ButtonGroup
@@ -175,7 +164,6 @@ export default function SquareFootageCalculator() {
               />
             </div>
 
-            {/* Shape-specific Inputs */}
             {inputs.shape === 'rectangle' && (
               <Grid responsive={{ sm: 1, md: 2 }} gap="md">
                 <DimensionInput
@@ -298,14 +286,12 @@ export default function SquareFootageCalculator() {
               </div>
             )}
 
-            {/* Cost Estimator Toggle */}
             <Toggle
               checked={inputs.showCostEstimate}
               onChange={(v) => updateInput('showCostEstimate', v)}
               label="Show cost estimate"
             />
 
-            {/* Cost Estimator Inputs */}
             {inputs.showCostEstimate && (
               <div>
                 <Label htmlFor="pricePerUnit">Price per {isMetric ? 'sq metre' : 'sq foot'}</Label>
@@ -326,9 +312,7 @@ export default function SquareFootageCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Primary Result */}
             <ResultCard
               label="Total Area"
               value={`${formatArea(result.sqFt)} sq ft`}
@@ -346,7 +330,6 @@ export default function SquareFootageCalculator() {
               }
             />
 
-            {/* Breakdown */}
             <Grid responsive={{ sm: 2, md: 3 }} gap="md">
               <MetricCard label="Square Feet" value={formatArea(result.sqFt)} sublabel="sq ft" />
               <MetricCard
@@ -358,7 +341,6 @@ export default function SquareFootageCalculator() {
               <MetricCard label="Square Yards" value={formatArea(result.sqYd)} sublabel="sq yd" />
             </Grid>
 
-            {/* Cost Breakdown */}
             {inputs.showCostEstimate && result.totalCost > 0 && (
               <div className="bg-[var(--color-night)] rounded-xl p-6">
                 <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
@@ -391,14 +373,12 @@ export default function SquareFootageCalculator() {
               </div>
             )}
 
-            {/* Tips */}
             <Alert variant="tip" title="Measurement tips:">
               For the most accurate results, measure each wall at floor level. For irregular rooms,
               break the space into simpler shapes and add the areas together. Always add 5-10% extra
               when ordering materials to account for waste and cuts.
             </Alert>
 
-            {/* Share & Print */}
             <div className="flex justify-center gap-3 pt-4">
               <ShareResults
                 result={`Area: ${formatArea(result.sqFt)} sq ft (${formatArea(result.sqM)} sq m)${inputs.showCostEstimate ? ` - Estimated cost: ${formatCost(result.totalCost, result.currency)}` : ''}`}

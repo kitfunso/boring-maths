@@ -1,8 +1,5 @@
-/** Singapore BSD + ABSD, residential property. BSD bands eff. 15 Feb 2023, ABSD rates eff. 27 Apr 2023 (MOF). */
-
 export type BuyerProfile = 'citizen' | 'pr' | 'foreigner' | 'entity';
 
-// 0 or 1 = that many properties already owned; 2 stands for "2 or more".
 export type PropertiesOwned = 0 | 1 | 2;
 
 export interface BsdBand {
@@ -11,7 +8,6 @@ export interface BsdBand {
   label: string;
 }
 
-// Marginal bands, residential property, effective 15 Feb 2023.
 export const BSD_BANDS: BsdBand[] = [
   { limit: 180_000, rate: 0.01, label: 'First $180,000' },
   { limit: 360_000, rate: 0.02, label: 'Next $180,000 ($180,001–$360,000)' },
@@ -21,8 +17,6 @@ export const BSD_BANDS: BsdBand[] = [
   { limit: Infinity, rate: 0.06, label: 'Above $3,000,000' },
 ];
 
-// ABSD: flat rate on the whole price, by profile and existing property count.
-// [1st, 2nd, 3rd+] for citizen/PR; a single flat rate for foreigner/entity.
 const ABSD_RATE_TABLE: Record<BuyerProfile, readonly [number, number, number] | number> = {
   citizen: [0, 0.2, 0.3],
   pr: [0.05, 0.3, 0.35],
@@ -67,7 +61,6 @@ function getAbsdRate(profile: BuyerProfile, propertiesOwned: PropertiesOwned): n
   return entry[propertiesOwned];
 }
 
-// Walk the bands in order, taxing only the slice of price that falls in each.
 function calculateBsdBreakdown(price: number): BsdBandResult[] {
   const breakdown: BsdBandResult[] = [];
   let previousLimit = 0;

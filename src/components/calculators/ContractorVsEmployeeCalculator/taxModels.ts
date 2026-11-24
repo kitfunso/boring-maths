@@ -1,5 +1,3 @@
-/** Tax on each side of the comparison, delegated to the site's US, UK and EU models so every page agrees. */
-
 import type { Currency } from '../../../lib/regions';
 import {
   type FederalFilingStatus,
@@ -16,17 +14,16 @@ import { calculateSalary } from '../EUSalaryCalculator/calculations';
 export interface TaxContext {
   readonly currency: Currency;
   readonly filingStatus: FederalFilingStatus;
-  readonly stateTaxRate: number; // decimal, US only, charged on AGI
+  readonly stateTaxRate: number;
   readonly euCountry: string;
-  readonly selfEmployedSocialRate: number; // decimal, EUR only
+  readonly selfEmployedSocialRate: number;
 }
 
 export interface TaxSplit {
-  readonly socialTax: number; // FICA, National Insurance or social contributions
+  readonly socialTax: number;
   readonly incomeTax: number;
 }
 
-// GOV.UK self-employed NI 2026/27: Class 4 on profit; Class 2 is treated as paid from 7,105 of profit
 export const UK_CLASS_4 = {
   lowerProfitsLimit: 12570,
   upperProfitsLimit: 50270,
@@ -60,7 +57,6 @@ export function employeeTax(pay: number, ctx: TaxContext): TaxSplit {
   };
 }
 
-/** Profit is revenue less business expenses; pension and health cover are paid out of it. */
 export function contractorTax(
   profit: number,
   retirement: number,
@@ -69,7 +65,6 @@ export function contractorTax(
 ): TaxSplit {
   const p = Math.max(0, profit);
   if (ctx.currency === 'GBP') {
-    // Pension contributions get relief at the marginal rate; private health cover gets none
     return { socialTax: ukClass4(p), incomeTax: ukTax(p - retirement).incomeTax };
   }
   if (ctx.currency === 'EUR') {
@@ -83,7 +78,6 @@ export function contractorTax(
   const status = ctx.filingStatus;
   const se = selfEmploymentTax(p, 0, status);
   const beforeHealth = p - se.deductibleHalf - retirement;
-  // The self-employed health insurance deduction cannot exceed the business's net earnings
   const agi = Math.max(0, beforeHealth - Math.min(healthInsurance, Math.max(0, beforeHealth)));
   const taxableBeforeQbi = Math.max(0, agi - STANDARD_DEDUCTION_2026[status]);
   const taxable = Math.max(0, taxableBeforeQbi - qbiDeduction(agi, taxableBeforeQbi, status));

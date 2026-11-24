@@ -1,9 +1,3 @@
-/**
- * Side Hustle Profitability Calculator - React Component
- *
- * Interactive calculator for analyzing side hustle profitability.
- * Migrated to use the design system components.
- */
 import { calculateSideHustle, formatCurrency } from './calculations';
 import { getDefaultInputs, type SideHustleInputs, type SideHustleResult } from './types';
 import {
@@ -38,7 +32,6 @@ export default function SideHustleCalculator() {
   const currencySymbol = getCurrencySymbol(inputs.currency);
   const region = getRegionFromCurrency(inputs.currency);
 
-  // Handle currency change
   const handleCurrencyChange = (newCurrency: Currency) => {
     setInputs(getDefaultInputs(newCurrency));
   };
@@ -46,7 +39,6 @@ export default function SideHustleCalculator() {
   return (
     <ThemeProvider defaultColor="red">
       <Card variant="elevated">
-        {/* Header */}
         <CalculatorHeader
           title="Analyze Your Side Hustle"
           subtitle="Calculate if your side project is truly profitable"
@@ -54,9 +46,7 @@ export default function SideHustleCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Input Section */}
           <div className="space-y-6 mb-8">
-            {/* Revenue & Hours */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="monthlyRevenue" required>
@@ -88,7 +78,6 @@ export default function SideHustleCalculator() {
               </div>
             </Grid>
 
-            {/* Expenses Section - Compact inputs */}
             <div>
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-3">
                 Monthly Expenses
@@ -197,7 +186,6 @@ export default function SideHustleCalculator() {
               </p>
             </div>
 
-            {/* Comparison & Tax */}
             <Grid responsive={{ sm: 1, md: 2 }} gap="lg">
               <div>
                 <Label htmlFor="mainJobHourlyRate">Main Job Hourly Rate</Label>
@@ -237,9 +225,7 @@ export default function SideHustleCalculator() {
 
           <Divider />
 
-          {/* Results Section */}
           <div className="space-y-6">
-            {/* Verdict Banner */}
             <div
               className={`rounded-2xl p-6 text-center ${
                 result.beatsMainJob
@@ -269,7 +255,6 @@ export default function SideHustleCalculator() {
               </p>
             </div>
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard
                 label="Effective Hourly Rate"
@@ -305,7 +290,6 @@ export default function SideHustleCalculator() {
               />
             </Grid>
 
-            {/* Opportunity Cost Analysis */}
             <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Opportunity Cost Analysis
@@ -345,14 +329,12 @@ export default function SideHustleCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="warning" title="Remember:">
               Don't forget hidden costs like shipping supplies, transaction fees (2-3%), returns,
               and your time spent on admin tasks. Consider if this side hustle could scale or is
               trading time for money.
             </Alert>
 
-            {/* Share Results */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`Side hustle: ${formatCurrency(result.effectiveHourlyRate, result.currency)}/hr effective rate (${formatCurrency(result.monthlyNetProfit, result.currency)}/month net profit) - ${result.beatsMainJob ? 'Beats my main job!' : 'Working on it!'}`}

@@ -1,6 +1,3 @@
-/**
- * ABV Calculator - React Component
- */
 import {
   calculateABV,
   formatABV,
@@ -62,7 +59,6 @@ export default function ABVCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Beverage Type */}
           <div className="mb-6">
             <Label>Beverage Type</Label>
             <ButtonGroup
@@ -73,7 +69,6 @@ export default function ABVCalculator() {
             />
           </div>
 
-          {/* Quick Styles */}
           {stylesByType.length > 0 && (
             <div className="mb-6">
               <Label>Quick Styles</Label>
@@ -91,7 +86,6 @@ export default function ABVCalculator() {
             </div>
           )}
 
-          {/* Gravity Inputs */}
           <div className="mb-6">
             <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
               Gravity Readings
@@ -130,7 +124,6 @@ export default function ABVCalculator() {
             </Grid>
           </div>
 
-          {/* Temperature Correction */}
           <div className="mb-6">
             <div className="flex items-center gap-3 mb-3">
               <input
@@ -177,16 +170,13 @@ export default function ABVCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
-            {/* ABV Result */}
             <ResultCard
               label="Alcohol By Volume"
               value={formatABV(result.abv)}
               subtitle={abvCategory.label}
             />
 
-            {/* Key Metrics */}
             <Grid responsive={{ sm: 2, md: 4 }} gap="md">
               <MetricCard label="ABW" value={formatPercent(result.abw)} sublabel="by weight" />
               <MetricCard
@@ -206,7 +196,6 @@ export default function ABVCalculator() {
               />
             </Grid>
 
-            {/* Plato Conversion */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Plato/Brix Conversion
@@ -227,7 +216,6 @@ export default function ABVCalculator() {
               </Grid>
             </div>
 
-            {/* Attenuation Details */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Attenuation
@@ -262,7 +250,6 @@ export default function ABVCalculator() {
               </div>
             </div>
 
-            {/* Formula Reference */}
             <div className="bg-[var(--color-night)] rounded-xl p-6">
               <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                 Formula
@@ -276,14 +263,12 @@ export default function ABVCalculator() {
               </div>
             </div>
 
-            {/* Tips */}
             <Alert variant="tip" title="Brewing Tips:">
               Take OG reading after cooling wort to below 80°F. Wait until fermentation is complete
               (stable FG for 2-3 days) before taking final reading. Most hydrometers are calibrated
               at 60°F or 68°F - check yours.
             </Alert>
 
-            {/* Share */}
             <div className="flex justify-center pt-4">
               <ShareResults
                 result={`ABV: ${formatABV(result.abv)} (OG ${inputs.originalGravity} → FG ${inputs.finalGravity})`}

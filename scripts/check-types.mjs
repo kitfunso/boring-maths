@@ -1,5 +1,3 @@
-// CI had no type check, so 16 Select handlers that read e.target off a string shipped broken.
-// Ratchet: fail when any file|code error count grows past scripts/type-baseline.json.
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';

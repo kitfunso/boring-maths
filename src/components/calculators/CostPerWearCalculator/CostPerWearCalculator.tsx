@@ -1,7 +1,3 @@
-/**
- * Cost Per Wear Calculator - Preact Component
- */
-
 import { calculateCostPerWear, formatCurrency } from './calculations';
 import { getDefaultInputs, type CostPerWearInputs } from './types';
 import { type Currency, getCurrencySymbol, getInitialCurrency } from '../../../lib/regions';
@@ -63,9 +59,7 @@ export default function CostPerWearCalculator() {
         />
 
         <div className="p-6 md:p-8">
-          {/* Two-column: Your Item vs Alternative */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            {/* Your Item */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-[var(--color-accent)] uppercase tracking-wider">
                 Your Item
@@ -143,7 +137,6 @@ export default function CostPerWearCalculator() {
               </div>
             </div>
 
-            {/* Alternative */}
             <div className="space-y-4">
               <h3 className="text-sm font-semibold text-[var(--color-subtle)] uppercase tracking-wider">
                 Cheaper Alternative
@@ -214,11 +207,9 @@ export default function CostPerWearCalculator() {
 
           <Divider />
 
-          {/* Results */}
           <div className="space-y-6">
             {inputs.purchasePrice > 0 && inputs.wearsPerMonth > 0 ? (
               <>
-                {/* Primary Result */}
                 <ResultCard
                   label={`Cost Per Wear: ${inputs.itemName || 'Your Item'}`}
                   value={formatCurrency(result.costPerWear, inputs.currency)}
@@ -236,7 +227,6 @@ export default function CostPerWearCalculator() {
                   }
                 />
 
-                {/* Comparison Bar */}
                 <div className="bg-[var(--color-night)] rounded-xl p-6 border border-white/10">
                   <h3 className="text-sm font-semibold text-[var(--color-cream)] uppercase tracking-wider mb-4">
                     Cost Per Wear Comparison
@@ -279,7 +269,6 @@ export default function CostPerWearCalculator() {
                   </div>
                 </div>
 
-                {/* Metrics */}
                 <Grid responsive={{ sm: 2, md: 4 }} gap="md">
                   <MetricCard
                     label="Total Lifetime Cost"
@@ -305,7 +294,6 @@ export default function CostPerWearCalculator() {
                   />
                 </Grid>
 
-                {/* Verdict */}
                 <Alert
                   variant={result.isBetterValue ? 'tip' : 'info'}
                   title={result.isBetterValue ? 'Worth the investment' : 'Think twice'}
@@ -319,7 +307,6 @@ export default function CostPerWearCalculator() {
               </Alert>
             )}
 
-            {/* Share */}
             {inputs.purchasePrice > 0 && inputs.wearsPerMonth > 0 && (
               <div className="flex justify-center pt-4">
                 <ShareResults

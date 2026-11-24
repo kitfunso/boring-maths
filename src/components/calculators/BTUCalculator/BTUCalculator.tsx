@@ -1,8 +1,3 @@
-/**
- * BTU Calculator - React Component
- *
- * Estimate the cooling or heating BTU/hr capacity needed for a room.
- */
 import { calculateBTUCalculator } from './calculations';
 import {
   getDefaultInputs,
@@ -75,10 +70,6 @@ export default function BTUCalculator() {
     setInputs((prev) => ({ ...prev, currency: newCurrency }));
   };
 
-  // Switching the unit converts every length field so the displayed numbers
-  // describe the same physical sizes (a 4.57 m room becomes ~15 ft, not a
-  // shrunken 4.57 ft room). Without this, metric dimensions would be silently
-  // misread against the per-square-foot base rates and the unit undersized.
   const handleUnitChange = (value: string) => {
     const newUnit = value as BTUUnit;
     if (newUnit === inputs.unit) return;
@@ -107,7 +98,6 @@ export default function BTUCalculator() {
 
         <div className="p-6 md:p-8">
           <Grid responsive={{ sm: 1, lg: 2 }} gap="lg">
-            {/* Left Column - Inputs */}
             <div className="space-y-6">
               <div className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
                 What Are You Sizing
@@ -244,7 +234,6 @@ export default function BTUCalculator() {
               </Grid>
             </div>
 
-            {/* Right Column - Results */}
             <div className="space-y-6">
               {!result.isValid ? (
                 <Alert variant="warning" title="Check your inputs:">
