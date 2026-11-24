@@ -1,7 +1,7 @@
 site:
   name: "Boring Math Calculators"
   url: "https://boring-math.com"
-  handle: "@boringmath"  # Your X handle
+  handle: "@boringmath"
 
 generator:
   provider: "none"
@@ -21,7 +21,7 @@ poster:
     - "14:00"
     - "19:00"
   
-  days: [0, 1, 2, 3, 4]  # Weekdays only
+  days: [0, 1, 2, 3, 4]
 
 monitor:
   keywords:

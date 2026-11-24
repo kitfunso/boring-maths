@@ -21,9 +21,9 @@ describe('calculateCouncilTax', () => {
   });
 
   it.each([
-    ['E', 2172], // 1653 x 473/360 = 2171.8
-    ['F', 2686], // 1653 x 585/360 = 2686.1
-    ['G', 3237], // 1653 x 705/360 = 3237.1
+    ['E', 2172],
+    ['F', 2686],
+    ['G', 3237],
   ] as const)('applies the raised Scottish Band %s ratio', (band, expected) => {
     const r = calculateCouncilTax({
       ...getDefaultInputs(),
